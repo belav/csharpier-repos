@@ -9,60 +9,64 @@ namespace System.ServiceModel.Discovery
     using System.Globalization;
     using System.Runtime;
     using System.Xml;
-    using SR2 = System.ServiceModel.Discovery.SR;    
+    using SR2 = System.ServiceModel.Discovery.SR;
 
     [Fx.Tag.XamlVisible(false)]
     [SuppressMessage("Microsoft.Design", "CA1036:OverrideMethodsOnComparableTypes")]
-    public class DiscoveryMessageSequence : 
-        IComparable<DiscoveryMessageSequence>, 
-        IEquatable<DiscoveryMessageSequence>
+    public class DiscoveryMessageSequence
+        : IComparable<DiscoveryMessageSequence>,
+            IEquatable<DiscoveryMessageSequence>
     {
-        internal DiscoveryMessageSequence()
-        {            
-        }
+        internal DiscoveryMessageSequence() { }
 
         internal DiscoveryMessageSequence(long instanceId, Uri sequenceId, long messageNumber)
         {
-            Fx.Assert((instanceId >= 0) && (instanceId <= UInt32.MaxValue), "The instanceId must be within UInt32 range");
-            Fx.Assert((messageNumber >= 0) && (messageNumber <= UInt32.MaxValue), "The messageNumber must be within UInt32 range");
+            Fx.Assert(
+                (instanceId >= 0) && (instanceId <= UInt32.MaxValue),
+                "The instanceId must be within UInt32 range"
+            );
+            Fx.Assert(
+                (messageNumber >= 0) && (messageNumber <= UInt32.MaxValue),
+                "The messageNumber must be within UInt32 range"
+            );
 
             this.InstanceId = instanceId;
             this.SequenceId = sequenceId;
             this.MessageNumber = messageNumber;
         }
 
-        public long InstanceId
-        {
-            get;
-            private set;
-        }
+        public long InstanceId { get; private set; }
 
-        public Uri SequenceId
-        {
-            get;
-            private set;
-        }
+        public Uri SequenceId { get; private set; }
 
-        public long MessageNumber
-        {
-            get;
-            private set;
-        }
+        public long MessageNumber { get; private set; }
 
-        public static bool operator ==(DiscoveryMessageSequence messageSequence1, DiscoveryMessageSequence messageSequence2)
+        public static bool operator ==(
+            DiscoveryMessageSequence messageSequence1,
+            DiscoveryMessageSequence messageSequence2
+        )
         {
-            if (object.ReferenceEquals(messageSequence1, null) && object.ReferenceEquals(messageSequence2, null))
+            if (
+                object.ReferenceEquals(messageSequence1, null)
+                && object.ReferenceEquals(messageSequence2, null)
+            )
             {
                 return true;
             }
-            if (object.ReferenceEquals(messageSequence1, null) || object.ReferenceEquals(messageSequence2, null))
+            if (
+                object.ReferenceEquals(messageSequence1, null)
+                || object.ReferenceEquals(messageSequence2, null)
+            )
             {
                 return false;
             }
             return messageSequence1.Equals(messageSequence2);
         }
 
-        public static bool operator !=(DiscoveryMessageSequence messageSequence1, DiscoveryMessageSequence messageSequence2)
+        public static bool operator !=(
+            DiscoveryMessageSequence messageSequence1,
+            DiscoveryMessageSequence messageSequence2
+        )
         {
             return !(messageSequence1 == messageSequence2);
         }
@@ -84,14 +88,20 @@ namespace System.ServiceModel.Discovery
                 return true;
             }
 
-            return (long.Equals(this.InstanceId, other.InstanceId) &&
-                Uri.Equals(this.SequenceId, other.SequenceId) &&
-                long.Equals(this.MessageNumber, other.MessageNumber));
+            return (
+                long.Equals(this.InstanceId, other.InstanceId)
+                && Uri.Equals(this.SequenceId, other.SequenceId)
+                && long.Equals(this.MessageNumber, other.MessageNumber)
+            );
         }
 
         public override string ToString()
         {
-            return SR.DiscoveryMessageSequenceToString(this.InstanceId, this.SequenceId, this.MessageNumber);
+            return SR.DiscoveryMessageSequenceToString(
+                this.InstanceId,
+                this.SequenceId,
+                this.MessageNumber
+            );
         }
 
         public bool CanCompareTo(DiscoveryMessageSequence other)
@@ -102,18 +112,23 @@ namespace System.ServiceModel.Discovery
             }
             else
             {
-                return ((this.InstanceId != other.InstanceId) ||
-                    (Uri.Equals(this.SequenceId, other.SequenceId)));
+                return (
+                    (this.InstanceId != other.InstanceId)
+                    || (Uri.Equals(this.SequenceId, other.SequenceId))
+                );
             }
         }
 
         public override int GetHashCode()
         {
             return string.Format(
-                CultureInfo.InvariantCulture, "{0}:{1}:{2}", 
-                this.InstanceId, 
-                this.SequenceId, 
-                this.MessageNumber).GetHashCode();
+                    CultureInfo.InvariantCulture,
+                    "{0}:{1}:{2}",
+                    this.InstanceId,
+                    this.SequenceId,
+                    this.MessageNumber
+                )
+                .GetHashCode();
         }
 
         public int CompareTo(DiscoveryMessageSequence other)
@@ -128,7 +143,10 @@ namespace System.ServiceModel.Discovery
             {
                 if (!Uri.Equals(this.SequenceId, other.SequenceId))
                 {
-                    throw FxTrace.Exception.Argument("other", SR2.DiscoveryIncompatibleMessageSequence);
+                    throw FxTrace.Exception.Argument(
+                        "other",
+                        SR2.DiscoveryIncompatibleMessageSequence
+                    );
                 }
 
                 result = this.MessageNumber.CompareTo(other.MessageNumber);
@@ -145,14 +163,19 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("reader");
             }
 
-            string instanceIdString = reader.GetAttribute(ProtocolStrings.SchemaNames.AppSequenceInstanceId);
+            string instanceIdString = reader.GetAttribute(
+                ProtocolStrings.SchemaNames.AppSequenceInstanceId
+            );
 
             this.InstanceId = SerializationUtility.ReadUInt(
-                instanceIdString, 
-                SR2.DiscoveryXmlMissingAppSequenceInstanceId, 
-                SR2.DiscoveryXmlInvalidAppSequenceInstanceId);
+                instanceIdString,
+                SR2.DiscoveryXmlMissingAppSequenceInstanceId,
+                SR2.DiscoveryXmlInvalidAppSequenceInstanceId
+            );
 
-            string sequenceIdString = reader.GetAttribute(ProtocolStrings.SchemaNames.AppSequenceSequenceId);
+            string sequenceIdString = reader.GetAttribute(
+                ProtocolStrings.SchemaNames.AppSequenceSequenceId
+            );
 
             if (sequenceIdString != null)
             {
@@ -162,16 +185,21 @@ namespace System.ServiceModel.Discovery
                 }
                 catch (FormatException fe)
                 {
-                    throw FxTrace.Exception.AsError(new XmlException(SR2.DiscoveryXmlUriFormatError(sequenceIdString), fe));
+                    throw FxTrace.Exception.AsError(
+                        new XmlException(SR2.DiscoveryXmlUriFormatError(sequenceIdString), fe)
+                    );
                 }
             }
 
-            string messageNumberString = reader.GetAttribute(ProtocolStrings.SchemaNames.AppSequenceMessageNumber);
+            string messageNumberString = reader.GetAttribute(
+                ProtocolStrings.SchemaNames.AppSequenceMessageNumber
+            );
 
             this.MessageNumber = SerializationUtility.ReadUInt(
-                messageNumberString, 
-                SR2.DiscoveryXmlMissingAppSequenceMessageNumber, 
-                SR2.DiscoveryXmlInvalidAppSequenceMessageNumber);           
+                messageNumberString,
+                SR2.DiscoveryXmlMissingAppSequenceMessageNumber,
+                SR2.DiscoveryXmlInvalidAppSequenceMessageNumber
+            );
         }
 
         internal void WriteTo(XmlWriter writer)
@@ -182,19 +210,25 @@ namespace System.ServiceModel.Discovery
             }
 
             writer.WriteAttributeString(
-                ProtocolStrings.SchemaNames.AppSequenceInstanceId, 
-                this.InstanceId.ToString(CultureInfo.InvariantCulture));
+                ProtocolStrings.SchemaNames.AppSequenceInstanceId,
+                this.InstanceId.ToString(CultureInfo.InvariantCulture)
+            );
 
             if (this.SequenceId != null)
             {
                 writer.WriteAttributeString(
-                    ProtocolStrings.SchemaNames.AppSequenceSequenceId, 
-                    this.SequenceId.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped));
+                    ProtocolStrings.SchemaNames.AppSequenceSequenceId,
+                    this.SequenceId.GetComponents(
+                        UriComponents.SerializationInfoString,
+                        UriFormat.UriEscaped
+                    )
+                );
             }
 
             writer.WriteAttributeString(
-                ProtocolStrings.SchemaNames.AppSequenceMessageNumber, 
-                this.MessageNumber.ToString(CultureInfo.InvariantCulture));
+                ProtocolStrings.SchemaNames.AppSequenceMessageNumber,
+                this.MessageNumber.ToString(CultureInfo.InvariantCulture)
+            );
         }
     }
 }

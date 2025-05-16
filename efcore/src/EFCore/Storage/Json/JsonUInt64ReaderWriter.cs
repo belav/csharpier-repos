@@ -15,15 +15,15 @@ public sealed class JsonUInt64ReaderWriter : JsonValueReaderWriter<ulong>
     /// </summary>
     public static JsonUInt64ReaderWriter Instance { get; } = new();
 
-    private JsonUInt64ReaderWriter()
-    {
-    }
+    private JsonUInt64ReaderWriter() { }
 
     /// <inheritdoc />
-    public override ulong FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetUInt64();
+    public override ulong FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetUInt64();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, ulong value)
-        => writer.WriteNumberValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, ulong value) =>
+        writer.WriteNumberValue(value);
 }

@@ -7,5 +7,5 @@ internal enum HttpStreamState
 {
     Open,
     Closed,
-    Aborted
+    Aborted,
 }

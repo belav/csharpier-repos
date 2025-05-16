@@ -14,7 +14,14 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Web.Services.Protocols.SoapHeaderMapping" /> class represents a SOAP header mapping.</para>
+      <para
+        >The <see
+         cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
+
+        
+
+         class represents a SOAP header mapping.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,7 +37,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether the SOAP header mapping is custom-defined.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+            
+
+             value that indicates whether the SOAP header mapping is custom-defined.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -38,7 +52,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Direction">
-      <MemberSignature Language="C#" Value="public System.Web.Services.Protocols.SoapHeaderDirection Direction { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Web.Services.Protocols.SoapHeaderDirection Direction { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.Services.Protocols.SoapHeaderDirection</ReturnType>
@@ -49,7 +66,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Web.Services.Protocols.SoapHeaderDirection" /> value that indicates the direction of the SOAP header mapping.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
+
+            
+
+             value that indicates the direction of the SOAP header mapping.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -68,7 +92,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Type" /> that represents the type of the SOAP header mapping.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Type" />
+
+            
+
+             that represents the type of the SOAP header mapping.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -76,7 +107,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MemberInfo">
-      <MemberSignature Language="C#" Value="public System.Reflection.MemberInfo MemberInfo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.MemberInfo MemberInfo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Reflection.MemberInfo</ReturnType>
@@ -87,7 +121,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets the <see cref="T:System.Reflection.MemberInfo" /> associated with the SOAP header mapping.</para>
+          <para
+            >Gets the <see
+             cref="T:System.Reflection.MemberInfo" />
+
+            
+
+             associated with the SOAP header mapping.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -106,7 +147,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Gets a <see cref="T:System.Boolean" /> value that indicates whether the SOAP header mapping repeats.</para>
+          <para
+            >Gets a <see
+             cref="T:System.Boolean" />
+
+            
+
+             value that indicates whether the SOAP header mapping repeats.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

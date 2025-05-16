@@ -44,9 +44,7 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
             return null;
         }
 
-        var handlerModel = new PageHandlerModel(
-            method,
-            method.GetCustomAttributes(inherit: true))
+        var handlerModel = new PageHandlerModel(method, method.GetCustomAttributes(inherit: true))
         {
             Name = method.Name,
             HandlerName = handlerName,
@@ -109,7 +107,10 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
 
         // BindingInfo for properties can be either specified by decorating the property with binding-specific attributes.
         // ModelMetadata also adds information from the property's type and any configured IBindingMetadataProvider.
-        var propertyMetadata = _modelMetadataProvider.GetMetadataForProperty(property.DeclaringType!, property.Name);
+        var propertyMetadata = _modelMetadataProvider.GetMetadataForProperty(
+            property.DeclaringType!,
+            property.Name
+        );
         var bindingInfo = BindingInfo.GetBindingInfo(propertyAttributes, propertyMetadata);
 
         if (bindingInfo == null)
@@ -117,14 +118,15 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
             // Look for BindPropertiesAttribute on the handler type if no BindingInfo was inferred for the property.
             // This allows a user to enable model binding on properties by decorating the controller type with BindPropertiesAttribute.
             var declaringType = property.DeclaringType!;
-            var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(inherit: true);
+            var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(
+                inherit: true
+            );
             if (bindPropertiesAttribute != null)
             {
-                var requestPredicate = bindPropertiesAttribute.SupportsGet ? _supportsAllRequests : _supportsNonGetRequests;
-                bindingInfo = new BindingInfo
-                {
-                    RequestPredicate = requestPredicate,
-                };
+                var requestPredicate = bindPropertiesAttribute.SupportsGet
+                    ? _supportsAllRequests
+                    : _supportsNonGetRequests;
+                bindingInfo = new BindingInfo { RequestPredicate = requestPredicate };
             }
         }
 
@@ -192,9 +194,11 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
 
         // Exclude the whole hierarchy of Page.
         var declaringType = methodInfo.DeclaringType;
-        if (declaringType == typeof(Page) ||
-            declaringType == typeof(PageBase) ||
-            declaringType == typeof(RazorPageBase))
+        if (
+            declaringType == typeof(Page)
+            || declaringType == typeof(PageBase)
+            || declaringType == typeof(RazorPageBase)
+        )
         {
             return false;
         }
@@ -208,13 +212,20 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
         return true;
     }
 
-    internal static bool TryParseHandlerMethod(string methodName, [NotNullWhen(true)] out string? httpMethod, out string? handler)
+    internal static bool TryParseHandlerMethod(
+        string methodName,
+        [NotNullWhen(true)] out string? httpMethod,
+        out string? handler
+    )
     {
         httpMethod = null;
         handler = null;
 
         // Handler method names always start with "On"
-        if (!methodName.StartsWith("On", StringComparison.Ordinal) || methodName.Length <= "On".Length)
+        if (
+            !methodName.StartsWith("On", StringComparison.Ordinal)
+            || methodName.Length <= "On".Length
+        )
         {
             return false;
         }
@@ -257,7 +268,10 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
 
         // The handler name follows the http method and is optional. It includes everything up to the end
         // excluding the "Async" suffix (if present).
-        handler = handlerNameStart == length ? null : methodName.Substring(handlerNameStart, length - handlerNameStart);
+        handler =
+            handlerNameStart == length
+                ? null
+                : methodName.Substring(handlerNameStart, length - handlerNameStart);
         return true;
     }
 }

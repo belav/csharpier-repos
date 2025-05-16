@@ -5,12 +5,13 @@ namespace System.Web.Mvc
 {
     public static class ModelValidatorProviders
     {
-        private static readonly ModelValidatorProviderCollection _providers = new ModelValidatorProviderCollection()
-        {
-            new DataAnnotationsModelValidatorProvider(),
-            new DataErrorInfoModelValidatorProvider(),
-            new ClientDataTypeModelValidatorProvider()
-        };
+        private static readonly ModelValidatorProviderCollection _providers =
+            new ModelValidatorProviderCollection()
+            {
+                new DataAnnotationsModelValidatorProvider(),
+                new DataErrorInfoModelValidatorProvider(),
+                new ClientDataTypeModelValidatorProvider(),
+            };
 
         public static ModelValidatorProviderCollection Providers
         {

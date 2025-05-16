@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for managing roles in a persistence store.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public class AspNetRoleManager<TRole> : RoleManager<TRole>, IDisposable where TRole : class
+public class AspNetRoleManager<TRole> : RoleManager<TRole>, IDisposable
+    where TRole : class
 {
     private readonly CancellationToken _cancel;
 
@@ -23,12 +24,14 @@ public class AspNetRoleManager<TRole> : RoleManager<TRole>, IDisposable where TR
     /// <param name="errors">The <see cref="IdentityErrorDescriber"/> used to provider error messages.</param>
     /// <param name="logger">The logger used to log messages, warnings and errors.</param>
     /// <param name="contextAccessor">The accessor used to access the <see cref="HttpContext"/>.</param>
-    public AspNetRoleManager(IRoleStore<TRole> store,
+    public AspNetRoleManager(
+        IRoleStore<TRole> store,
         IEnumerable<IRoleValidator<TRole>> roleValidators,
         ILookupNormalizer keyNormalizer,
         IdentityErrorDescriber errors,
         ILogger<RoleManager<TRole>> logger,
-        IHttpContextAccessor contextAccessor)
+        IHttpContextAccessor contextAccessor
+    )
         : base(store, roleValidators, keyNormalizer, errors, logger)
     {
         _cancel = contextAccessor?.HttpContext?.RequestAborted ?? CancellationToken.None;

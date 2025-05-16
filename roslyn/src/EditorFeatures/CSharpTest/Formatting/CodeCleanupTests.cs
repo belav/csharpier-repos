@@ -186,7 +186,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                     public class Goo { }
                 }
                 """;
-            return AssertCodeCleanupResult(expected, code, systemUsingsFirst: false, separateUsingGroups: true);
+            return AssertCodeCleanupResult(
+                expected,
+                code,
+                systemUsingsFirst: false,
+                separateUsingGroups: true
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36984")]
@@ -232,7 +237,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                     public class Goo { }
                 }
                 """;
-            return AssertCodeCleanupResult(expected, code, systemUsingsFirst: true, separateUsingGroups: true);
+            return AssertCodeCleanupResult(
+                expected,
+                code,
+                systemUsingsFirst: true,
+                separateUsingGroups: true
+            );
         }
 
         [Fact]
@@ -578,7 +588,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         public Task FixAllWarningsAndErrorsWithCustomFixIdsExplicitlyEnabled(
             bool applyAllAnalyzerFixersId,
             bool explicitlyIncludeCompilerId,
-            [CombinatorialValues(DiagnosticSeverity.Warning, DiagnosticSeverity.Info)] DiagnosticSeverity severity)
+            [CombinatorialValues(DiagnosticSeverity.Warning, DiagnosticSeverity.Info)]
+                DiagnosticSeverity severity
+        )
         {
             var code = """
                 namespace A
@@ -607,16 +619,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             if (expectedCleanup)
             {
                 expected = """
-                namespace A
-                {
-                    internal class Program
+                    namespace A
                     {
-                        private void Method()
+                        internal class Program
                         {
+                            private void Method()
+                            {
+                            }
                         }
                     }
-                }
-                """;
+                    """;
             }
 
             Func<string, bool> enabledFixIdsFilter = id =>
@@ -624,12 +636,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                 {
                     "CS0219" => explicitlyIncludeCompilerId,
                     "ApplyAllAnalyzerFixersId" => applyAllAnalyzerFixersId,
-                    _ => false
+                    _ => false,
                 };
 
             var diagnosticIdsWithSeverity = new[] { ("CS0219", severity) };
 
-            return AssertCodeCleanupResult(expected, code, enabledFixIdsFilter: enabledFixIdsFilter, diagnosticIdsWithSeverity: diagnosticIdsWithSeverity);
+            return AssertCodeCleanupResult(
+                expected,
+                code,
+                enabledFixIdsFilter: enabledFixIdsFilter,
+                diagnosticIdsWithSeverity: diagnosticIdsWithSeverity
+            );
         }
 
         [Theory]
@@ -643,16 +660,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             Assert.Equal(supportedDiagnostics, supportedDiagnostics.Distinct());
 
             // Exact Number of Unsupported Diagnostic Ids
-            var ideDiagnosticIds = typeof(IDEDiagnosticIds).GetFields().Select(f => f.GetValue(f) as string).ToArray();
+            var ideDiagnosticIds = typeof(IDEDiagnosticIds)
+                .GetFields()
+                .Select(f => f.GetValue(f) as string)
+                .ToArray();
             var unsupportedDiagnosticIds = ideDiagnosticIds.Except(supportedDiagnostics).ToArray();
 
-            var expectedNumberOfUnsupportedDiagnosticIds =
-                language switch
-                {
-                    LanguageNames.CSharp => 48,
-                    LanguageNames.VisualBasic => 85,
-                    _ => throw ExceptionUtilities.UnexpectedValue(language),
-                };
+            var expectedNumberOfUnsupportedDiagnosticIds = language switch
+            {
+                LanguageNames.CSharp => 48,
+                LanguageNames.VisualBasic => 85,
+                _ => throw ExceptionUtilities.UnexpectedValue(language),
+            };
 
             Assert.Equal(expectedNumberOfUnsupportedDiagnosticIds, unsupportedDiagnosticIds.Length);
         }
@@ -751,63 +770,99 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         [Fact]
         public async Task RunThirdPartyFixer()
         {
-            await TestThirdPartyCodeFixerApplied<TestThirdPartyCodeFixWithFixAll, CaseTestAnalyzer>(_code, _fixed);
+            await TestThirdPartyCodeFixerApplied<TestThirdPartyCodeFixWithFixAll, CaseTestAnalyzer>(
+                _code,
+                _fixed
+            );
         }
 
         [Fact]
         public async Task DoNotRunThirdPartyFixerWithNoFixAll()
         {
-            await TestThirdPartyCodeFixerNoChanges<TestThirdPartyCodeFixWithOutFixAll, CaseTestAnalyzer>(_code);
+            await TestThirdPartyCodeFixerNoChanges<
+                TestThirdPartyCodeFixWithOutFixAll,
+                CaseTestAnalyzer
+            >(_code);
         }
 
         [Theory]
         [InlineData(DiagnosticSeverity.Warning)]
         [InlineData(DiagnosticSeverity.Error)]
-        public async Task RunThirdPartyFixerWithSeverityOfWarningOrHigher(DiagnosticSeverity severity)
+        public async Task RunThirdPartyFixerWithSeverityOfWarningOrHigher(
+            DiagnosticSeverity severity
+        )
         {
-            await TestThirdPartyCodeFixerApplied<TestThirdPartyCodeFixWithFixAll, CaseTestAnalyzer>(_code, _fixed, severity);
+            await TestThirdPartyCodeFixerApplied<TestThirdPartyCodeFixWithFixAll, CaseTestAnalyzer>(
+                _code,
+                _fixed,
+                severity
+            );
         }
 
         [Theory]
         [InlineData(DiagnosticSeverity.Hidden)]
         [InlineData(DiagnosticSeverity.Info)]
-        public async Task DoNotRunThirdPartyFixerWithSeverityLessThanWarning(DiagnosticSeverity severity)
+        public async Task DoNotRunThirdPartyFixerWithSeverityLessThanWarning(
+            DiagnosticSeverity severity
+        )
         {
-            await TestThirdPartyCodeFixerNoChanges<TestThirdPartyCodeFixWithOutFixAll, CaseTestAnalyzer>(_code, severity);
+            await TestThirdPartyCodeFixerNoChanges<
+                TestThirdPartyCodeFixWithOutFixAll,
+                CaseTestAnalyzer
+            >(_code, severity);
         }
 
         [Fact]
         public async Task DoNotRunThirdPartyFixerIfItDoesNotSupportDocumentScope()
         {
-            await TestThirdPartyCodeFixerNoChanges<TestThirdPartyCodeFixDoesNotSupportDocumentScope, CaseTestAnalyzer>(_code);
+            await TestThirdPartyCodeFixerNoChanges<
+                TestThirdPartyCodeFixDoesNotSupportDocumentScope,
+                CaseTestAnalyzer
+            >(_code);
         }
 
         [Fact]
         public async Task DoNotApplyFixerIfChangesAreMadeOutsideDocument()
         {
-            await TestThirdPartyCodeFixerNoChanges<TestThirdPartyCodeFixModifiesSolution, CaseTestAnalyzer>(_code);
+            await TestThirdPartyCodeFixerNoChanges<
+                TestThirdPartyCodeFixModifiesSolution,
+                CaseTestAnalyzer
+            >(_code);
         }
 
-        private static Task TestThirdPartyCodeFixerNoChanges<TCodefix, TAnalyzer>(string code, DiagnosticSeverity severity = DiagnosticSeverity.Warning)
+        private static Task TestThirdPartyCodeFixerNoChanges<TCodefix, TAnalyzer>(
+            string code,
+            DiagnosticSeverity severity = DiagnosticSeverity.Warning
+        )
             where TAnalyzer : DiagnosticAnalyzer, new()
             where TCodefix : CodeFixProvider, new()
         {
             return TestThirdPartyCodeFixer<TCodefix, TAnalyzer>(code, code, severity);
         }
 
-        private static Task TestThirdPartyCodeFixerApplied<TCodefix, TAnalyzer>(string code, string expected, DiagnosticSeverity severity = DiagnosticSeverity.Warning)
+        private static Task TestThirdPartyCodeFixerApplied<TCodefix, TAnalyzer>(
+            string code,
+            string expected,
+            DiagnosticSeverity severity = DiagnosticSeverity.Warning
+        )
             where TAnalyzer : DiagnosticAnalyzer, new()
             where TCodefix : CodeFixProvider, new()
         {
             return TestThirdPartyCodeFixer<TCodefix, TAnalyzer>(code, expected, severity);
         }
 
-        private static async Task TestThirdPartyCodeFixer<TCodefix, TAnalyzer>(string code = null, string expected = null, DiagnosticSeverity severity = DiagnosticSeverity.Warning)
+        private static async Task TestThirdPartyCodeFixer<TCodefix, TAnalyzer>(
+            string code = null,
+            string expected = null,
+            DiagnosticSeverity severity = DiagnosticSeverity.Warning
+        )
             where TAnalyzer : DiagnosticAnalyzer, new()
             where TCodefix : CodeFixProvider, new()
         {
-
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf.AddParts(typeof(TCodefix)));
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf.AddParts(typeof(TCodefix))
+            );
 
             var options = CodeActionOptions.DefaultProvider;
 
@@ -818,20 +873,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             var editorconfigText = "is_global = true";
             foreach (var diagnosticId in diagnosticIds)
             {
-                editorconfigText += $"\ndotnet_diagnostic.{diagnosticId}.severity = {severity.ToEditorConfigString()}";
+                editorconfigText +=
+                    $"\ndotnet_diagnostic.{diagnosticId}.severity = {severity.ToEditorConfigString()}";
             }
 
-            var map = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>{
-                { LanguageNames.CSharp, ImmutableArray.Create(analyzer) }
+            var map = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
+            {
+                { LanguageNames.CSharp, ImmutableArray.Create(analyzer) },
             };
 
             project = project.AddAnalyzerReference(new TestAnalyzerReferenceByLanguage(map));
-            project = project.Solution.WithProjectFilePath(project.Id, @$"z:\\{project.FilePath}").GetProject(project.Id);
-            project = project.AddAnalyzerConfigDocument(".editorconfig", SourceText.From(editorconfigText), filePath: @"z:\\.editorconfig").Project;
+            project = project
+                .Solution.WithProjectFilePath(project.Id, @$"z:\\{project.FilePath}")
+                .GetProject(project.Id);
+            project = project
+                .AddAnalyzerConfigDocument(
+                    ".editorconfig",
+                    SourceText.From(editorconfigText),
+                    filePath: @"z:\\.editorconfig"
+                )
+                .Project;
             workspace.TryApplyChanges(project.Solution);
 
             // register this workspace to solution crawler so that analyzer service associate itself with given workspace
-            var incrementalAnalyzerProvider = workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>() as IIncrementalAnalyzerProvider;
+            var incrementalAnalyzerProvider =
+                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
+                as IIncrementalAnalyzerProvider;
             incrementalAnalyzerProvider.CreateIncrementalAnalyzer(workspace);
 
             var hostdoc = workspace.Documents.Single();
@@ -842,7 +909,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
 
             var newDoc = await codeCleanupService.CleanupAsync(
-                document, enabledDiagnostics, CodeAnalysisProgress.None, options, CancellationToken.None);
+                document,
+                enabledDiagnostics,
+                CodeAnalysisProgress.None,
+                options,
+                CancellationToken.None
+            );
 
             var actual = await newDoc.GetTextAsync();
             Assert.Equal(expected, actual.ToString());
@@ -857,19 +929,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             var codeCleanupService = document.GetLanguageService<ICodeCleanupService>();
 
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
-            var supportedDiagnostics = enabledDiagnostics.Diagnostics.SelectMany(x => x.DiagnosticIds).ToArray();
+            var supportedDiagnostics = enabledDiagnostics
+                .Diagnostics.SelectMany(x => x.DiagnosticIds)
+                .ToArray();
             return supportedDiagnostics;
 
             TestWorkspace GetTestWorkspaceForLanguage(string language)
             {
                 if (language == LanguageNames.CSharp)
                 {
-                    return TestWorkspace.CreateCSharp(string.Empty, composition: EditorTestCompositions.EditorFeaturesWpf);
+                    return TestWorkspace.CreateCSharp(
+                        string.Empty,
+                        composition: EditorTestCompositions.EditorFeaturesWpf
+                    );
                 }
 
                 if (language == LanguageNames.VisualBasic)
                 {
-                    return TestWorkspace.CreateVisualBasic(string.Empty, composition: EditorTestCompositions.EditorFeaturesWpf);
+                    return TestWorkspace.CreateVisualBasic(
+                        string.Empty,
+                        composition: EditorTestCompositions.EditorFeaturesWpf
+                    );
                 }
 
                 return null;
@@ -886,8 +966,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         /// <param name="enabledFixIdsFilter">Optional filter to determine if a specific fix ID is explicitly enabled for cleanup.</param>
         /// <param name="diagnosticIdsWithSeverity">Optional list of diagnostic IDs with effective severities to be configured in editorconfig.</param>
         /// <returns>The <see cref="Task"/> to test code cleanup.</returns>
-        private protected static Task AssertCodeCleanupResult(string expected, string code, bool systemUsingsFirst = true, bool separateUsingGroups = false, Func<string, bool> enabledFixIdsFilter = null, (string, DiagnosticSeverity)[] diagnosticIdsWithSeverity = null)
-            => AssertCodeCleanupResult(expected, code, new(AddImportPlacement.OutsideNamespace, NotificationOption2.Silent), systemUsingsFirst, separateUsingGroups, enabledFixIdsFilter, diagnosticIdsWithSeverity);
+        private protected static Task AssertCodeCleanupResult(
+            string expected,
+            string code,
+            bool systemUsingsFirst = true,
+            bool separateUsingGroups = false,
+            Func<string, bool> enabledFixIdsFilter = null,
+            (string, DiagnosticSeverity)[] diagnosticIdsWithSeverity = null
+        ) =>
+            AssertCodeCleanupResult(
+                expected,
+                code,
+                new(AddImportPlacement.OutsideNamespace, NotificationOption2.Silent),
+                systemUsingsFirst,
+                separateUsingGroups,
+                enabledFixIdsFilter,
+                diagnosticIdsWithSeverity
+            );
 
         /// <summary>
         /// Assert the expected code value equals the actual processed input <paramref name="code"/>.
@@ -900,39 +995,78 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         /// <param name="enabledFixIdsFilter">Optional filter to determine if a specific fix ID is explicitly enabled for cleanup.</param>
         /// <param name="diagnosticIdsWithSeverity">Optional list of diagnostic IDs with effective severities to be configured in editorconfig.</param>
         /// <returns>The <see cref="Task"/> to test code cleanup.</returns>
-        private protected static async Task AssertCodeCleanupResult(string expected, string code, CodeStyleOption2<AddImportPlacement> preferredImportPlacement, bool systemUsingsFirst = true, bool separateUsingGroups = false, Func<string, bool> enabledFixIdsFilter = null, (string, DiagnosticSeverity)[] diagnosticIdsWithSeverity = null)
+        private protected static async Task AssertCodeCleanupResult(
+            string expected,
+            string code,
+            CodeStyleOption2<AddImportPlacement> preferredImportPlacement,
+            bool systemUsingsFirst = true,
+            bool separateUsingGroups = false,
+            Func<string, bool> enabledFixIdsFilter = null,
+            (string, DiagnosticSeverity)[] diagnosticIdsWithSeverity = null
+        )
         {
-            using var workspace = TestWorkspace.CreateCSharp(code, composition: EditorTestCompositions.EditorFeaturesWpf);
+            using var workspace = TestWorkspace.CreateCSharp(
+                code,
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
 
             // must set global options since incremental analyzer infra reads from global options
             var globalOptions = workspace.GlobalOptions;
-            globalOptions.SetGlobalOption(GenerationOptions.SeparateImportDirectiveGroups, LanguageNames.CSharp, separateUsingGroups);
-            globalOptions.SetGlobalOption(GenerationOptions.PlaceSystemNamespaceFirst, LanguageNames.CSharp, systemUsingsFirst);
-            globalOptions.SetGlobalOption(CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, preferredImportPlacement);
+            globalOptions.SetGlobalOption(
+                GenerationOptions.SeparateImportDirectiveGroups,
+                LanguageNames.CSharp,
+                separateUsingGroups
+            );
+            globalOptions.SetGlobalOption(
+                GenerationOptions.PlaceSystemNamespaceFirst,
+                LanguageNames.CSharp,
+                systemUsingsFirst
+            );
+            globalOptions.SetGlobalOption(
+                CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                preferredImportPlacement
+            );
 
-            var solution = workspace.CurrentSolution.WithAnalyzerReferences(new[]
-            {
-                new AnalyzerFileReference(typeof(CSharpCompilerDiagnosticAnalyzer).Assembly.Location, TestAnalyzerAssemblyLoader.LoadFromFile),
-                new AnalyzerFileReference(typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location, TestAnalyzerAssemblyLoader.LoadFromFile)
-            });
+            var solution = workspace.CurrentSolution.WithAnalyzerReferences(
+                new[]
+                {
+                    new AnalyzerFileReference(
+                        typeof(CSharpCompilerDiagnosticAnalyzer).Assembly.Location,
+                        TestAnalyzerAssemblyLoader.LoadFromFile
+                    ),
+                    new AnalyzerFileReference(
+                        typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location,
+                        TestAnalyzerAssemblyLoader.LoadFromFile
+                    ),
+                }
+            );
 
             if (diagnosticIdsWithSeverity != null)
             {
                 var editorconfigText = "is_global = true";
                 foreach (var (diagnosticId, severity) in diagnosticIdsWithSeverity)
                 {
-                    editorconfigText += $"\ndotnet_diagnostic.{diagnosticId}.severity = {severity.ToEditorConfigString()}";
+                    editorconfigText +=
+                        $"\ndotnet_diagnostic.{diagnosticId}.severity = {severity.ToEditorConfigString()}";
                 }
 
                 var project = solution.Projects.Single();
-                project = project.AddAnalyzerConfigDocument(".editorconfig", SourceText.From(editorconfigText), filePath: @"z:\\.editorconfig").Project;
+                project = project
+                    .AddAnalyzerConfigDocument(
+                        ".editorconfig",
+                        SourceText.From(editorconfigText),
+                        filePath: @"z:\\.editorconfig"
+                    )
+                    .Project;
                 solution = project.Solution;
             }
 
             workspace.TryApplyChanges(solution);
 
             // register this workspace to solution crawler so that analyzer service associate itself with given workspace
-            var incrementalAnalyzerProvider = workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>() as IIncrementalAnalyzerProvider;
+            var incrementalAnalyzerProvider =
+                workspace.ExportProvider.GetExportedValue<IDiagnosticAnalyzerService>()
+                as IIncrementalAnalyzerProvider;
             incrementalAnalyzerProvider.CreateIncrementalAnalyzer(workspace);
 
             var hostdoc = workspace.Documents.Single();
@@ -943,10 +1077,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             var enabledDiagnostics = codeCleanupService.GetAllDiagnostics();
 
             if (enabledFixIdsFilter != null)
-                enabledDiagnostics = VisualStudio.LanguageServices.Implementation.CodeCleanup.AbstractCodeCleanUpFixer.AdjustDiagnosticOptions(enabledDiagnostics, enabledFixIdsFilter);
+                enabledDiagnostics =
+                    VisualStudio.LanguageServices.Implementation.CodeCleanup.AbstractCodeCleanUpFixer.AdjustDiagnosticOptions(
+                        enabledDiagnostics,
+                        enabledFixIdsFilter
+                    );
 
             var newDoc = await codeCleanupService.CleanupAsync(
-                document, enabledDiagnostics, CodeAnalysisProgress.None, globalOptions.CreateProvider(), CancellationToken.None);
+                document,
+                enabledDiagnostics,
+                CodeAnalysisProgress.None,
+                globalOptions.CreateProvider(),
+                CancellationToken.None
+            );
 
             var actual = await newDoc.GetTextAsync();
 
@@ -954,15 +1097,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         }
 
         private static readonly CodeStyleOption2<AddImportPlacement> InsideNamespaceOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.InsideNamespace, NotificationOption2.Error);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.InsideNamespace,
+                NotificationOption2.Error
+            );
 
         private static readonly CodeStyleOption2<AddImportPlacement> OutsideNamespaceOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.OutsideNamespace, NotificationOption2.Error);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.OutsideNamespace,
+                NotificationOption2.Error
+            );
 
         private static readonly CodeStyleOption2<AddImportPlacement> InsidePreferPreservationOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.InsideNamespace, NotificationOption2.None);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.InsideNamespace,
+                NotificationOption2.None
+            );
 
         private static readonly CodeStyleOption2<AddImportPlacement> OutsidePreferPreservationOption =
-            new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.OutsideNamespace, NotificationOption2.None);
+            new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.OutsideNamespace,
+                NotificationOption2.None
+            );
     }
 }

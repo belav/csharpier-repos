@@ -29,10 +29,14 @@ public partial class TestServer : IDisposable
     private const string AspNetCoreModuleDll = "aspnetcorev2.dll";
     private const string HWebCoreDll = "hwebcore.dll";
 
-    internal static string HostableWebCoreLocation => Environment.ExpandEnvironmentVariables($@"%windir%\system32\inetsrv\{HWebCoreDll}");
-    internal static string BasePath => Path.Combine(Path.GetDirectoryName(typeof(TestServer).Assembly.Location),
-                                                    "ANCM",
-                                                    Environment.Is64BitProcess ? "x64" : "x86");
+    internal static string HostableWebCoreLocation =>
+        Environment.ExpandEnvironmentVariables($@"%windir%\system32\inetsrv\{HWebCoreDll}");
+    internal static string BasePath =>
+        Path.Combine(
+            Path.GetDirectoryName(typeof(TestServer).Assembly.Location),
+            "ANCM",
+            Environment.Is64BitProcess ? "x64" : "x86"
+        );
 
     internal static string AspNetCoreModuleLocation => Path.Combine(BasePath, AspNetCoreModuleDll);
 
@@ -40,7 +44,9 @@ public partial class TestServer : IDisposable
 
     private static readonly int PortRetryCount = 10;
 
-    private readonly TaskCompletionSource _startedTaskCompletionSource = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _startedTaskCompletionSource = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     private readonly Action<IApplicationBuilder> _appBuilder;
     private readonly ILoggerFactory _loggerFactory;
@@ -50,6 +56,7 @@ public partial class TestServer : IDisposable
 
     private Uri BaseUri => new Uri(_protocol + "://localhost:" + _currentPort);
     public HttpClient HttpClient { get; private set; }
+
     public TestConnection CreateConnection() => new TestConnection(_currentPort);
 
     private static IISServerOptions _options;
@@ -58,7 +65,11 @@ public partial class TestServer : IDisposable
     private string _appHostConfigPath;
     private int _currentPort;
 
-    private TestServer(Action<IApplicationBuilder> appBuilder, ILoggerFactory loggerFactory, bool isHttps)
+    private TestServer(
+        Action<IApplicationBuilder> appBuilder,
+        ILoggerFactory loggerFactory,
+        bool isHttps
+    )
     {
         _hostfxrMainFn = Main;
         _appBuilder = appBuilder;
@@ -67,7 +78,12 @@ public partial class TestServer : IDisposable
         _protocol = isHttps ? "https" : "http";
     }
 
-    public static async Task<TestServer> Create(Action<IApplicationBuilder> appBuilder, ILoggerFactory loggerFactory, IISServerOptions options, bool isHttps = false)
+    public static async Task<TestServer> Create(
+        Action<IApplicationBuilder> appBuilder,
+        ILoggerFactory loggerFactory,
+        IISServerOptions options,
+        bool isHttps = false
+    )
     {
         await WebCoreLock.WaitAsync();
         _options = options;
@@ -83,14 +99,23 @@ public partial class TestServer : IDisposable
         return Create(builder => builder.Run(app), loggerFactory, new IISServerOptions());
     }
 
-    public static Task<TestServer> Create(RequestDelegate app, ILoggerFactory loggerFactory, IISServerOptions options)
+    public static Task<TestServer> Create(
+        RequestDelegate app,
+        ILoggerFactory loggerFactory,
+        IISServerOptions options
+    )
     {
         return Create(builder => builder.Run(app), loggerFactory, options);
     }
 
     public static Task<TestServer> CreateHttps(RequestDelegate app, ILoggerFactory loggerFactory)
     {
-        return Create(builder => builder.Run(app), loggerFactory, new IISServerOptions(), isHttps: true);
+        return Create(
+            builder => builder.Run(app),
+            loggerFactory,
+            new IISServerOptions(),
+            isHttps: true
+        );
     }
 
     private void Start()
@@ -100,20 +125,29 @@ public partial class TestServer : IDisposable
 
         set_main_handler(_hostfxrMainFn);
 
-        Retry(() =>
-        {
-            _currentPort = _isHttps ? TestPortHelper.GetNextSSLPort() : TestPortHelper.GetNextPort();
-
-            InitializeConfig(_currentPort);
-
-            var startResult = WebCoreActivate(_appHostConfigPath, null, "Instance");
-            if (startResult != 0)
+        Retry(
+            () =>
             {
-                throw new InvalidOperationException($"Error while running WebCoreActivate: {startResult} on port {_currentPort}");
-            }
-        }, PortRetryCount);
+                _currentPort = _isHttps
+                    ? TestPortHelper.GetNextSSLPort()
+                    : TestPortHelper.GetNextPort();
 
-        HttpClient = new HttpClient(new LoggingHandler(new SocketsHttpHandler(), _loggerFactory.CreateLogger<TestServer>()))
+                InitializeConfig(_currentPort);
+
+                var startResult = WebCoreActivate(_appHostConfigPath, null, "Instance");
+                if (startResult != 0)
+                {
+                    throw new InvalidOperationException(
+                        $"Error while running WebCoreActivate: {startResult} on port {_currentPort}"
+                    );
+                }
+            },
+            PortRetryCount
+        );
+
+        HttpClient = new HttpClient(
+            new LoggingHandler(new SocketsHttpHandler(), _loggerFactory.CreateLogger<TestServer>())
+        )
         {
             BaseAddress = BaseUri,
             Timeout = TimeSpan.FromSeconds(200),
@@ -123,17 +157,18 @@ public partial class TestServer : IDisposable
     private void InitializeConfig(int port)
     {
         var webHostConfig = XDocument.Load(Path.GetFullPath("HostableWebCore.config"));
-        webHostConfig.XPathSelectElement("/configuration/system.webServer/globalModules/add[@name='AspNetCoreModuleV2']")
+        webHostConfig
+            .XPathSelectElement(
+                "/configuration/system.webServer/globalModules/add[@name='AspNetCoreModuleV2']"
+            )
             .SetAttributeValue("image", AspNetCoreModuleLocation);
 
-        var siteElement = webHostConfig.Root
-            .RequiredElement("system.applicationHost")
+        var siteElement = webHostConfig
+            .Root.RequiredElement("system.applicationHost")
             .RequiredElement("sites")
             .RequiredElement("site");
 
-        var binding = siteElement
-            .RequiredElement("bindings")
-            .RequiredElement("binding");
+        var binding = siteElement.RequiredElement("bindings").RequiredElement("binding");
 
         binding.SetAttributeValue("protocol", _protocol);
         binding.SetAttributeValue("bindingInformation", $":{port}:localhost");
@@ -148,15 +183,23 @@ public partial class TestServer : IDisposable
             {
                 webHostBuilder
                     .UseIIS()
-                    .UseSetting(WebHostDefaults.ApplicationKey, typeof(TestServer).GetTypeInfo().Assembly.FullName)
+                    .UseSetting(
+                        WebHostDefaults.ApplicationKey,
+                        typeof(TestServer).GetTypeInfo().Assembly.FullName
+                    )
                     .Configure(app =>
                     {
-                        app.Map("/start", builder => builder.Run(context => context.Response.WriteAsync("Done")));
+                        app.Map(
+                            "/start",
+                            builder => builder.Run(context => context.Response.WriteAsync("Done"))
+                        );
                         _appBuilder(app);
                     })
                     .ConfigureServices(services =>
                     {
-                        services.Configure<IISServerOptions>(options => options.MaxRequestBodySize = _options.MaxRequestBodySize);
+                        services.Configure<IISServerOptions>(options =>
+                            options.MaxRequestBodySize = _options.MaxRequestBodySize
+                        );
                         services.AddSingleton(_loggerFactory);
                     });
             })
@@ -191,12 +234,10 @@ public partial class TestServer : IDisposable
 
     [LibraryImport(HWebCoreDll)]
     private static partial int WebCoreActivate(
-        [MarshalAs(UnmanagedType.LPWStr)]
-            string appHostConfigPath,
-        [MarshalAs(UnmanagedType.LPWStr)]
-            string rootWebConfigPath,
-        [MarshalAs(UnmanagedType.LPWStr)]
-            string instanceName);
+        [MarshalAs(UnmanagedType.LPWStr)] string appHostConfigPath,
+        [MarshalAs(UnmanagedType.LPWStr)] string rootWebConfigPath,
+        [MarshalAs(UnmanagedType.LPWStr)] string instanceName
+    );
 
     [LibraryImport(HWebCoreDll)]
     private static partial int WebCoreShutdown([MarshalAs(UnmanagedType.Bool)] bool immediate);

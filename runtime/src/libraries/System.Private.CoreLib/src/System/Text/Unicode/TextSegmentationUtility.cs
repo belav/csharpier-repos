@@ -16,11 +16,18 @@ namespace System.Text.Unicode
     /// </remarks>
     internal static class TextSegmentationUtility
     {
-        private delegate OperationStatus DecodeFirstRune<T>(ReadOnlySpan<T> input, out Rune rune, out int elementsConsumed);
+        private delegate OperationStatus DecodeFirstRune<T>(
+            ReadOnlySpan<T> input,
+            out Rune rune,
+            out int elementsConsumed
+        );
 
         private static readonly DecodeFirstRune<char> _utf16Decoder = Rune.DecodeFromUtf16;
 
-        private static int GetLengthOfFirstExtendedGraphemeCluster<T>(ReadOnlySpan<T> input, DecodeFirstRune<T> decoder)
+        private static int GetLengthOfFirstExtendedGraphemeCluster<T>(
+            ReadOnlySpan<T> input,
+            DecodeFirstRune<T> decoder
+        )
         {
             // Algorithm given at https://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundary_Rules.
 
@@ -39,9 +46,11 @@ namespace System.Text.Unicode
 
             if (processor.CurrentCodeUnitOffset > 0)
             {
-                if (processor.CurrentType == GraphemeClusterBreakType.Control
+                if (
+                    processor.CurrentType == GraphemeClusterBreakType.Control
                     || processor.CurrentType == GraphemeClusterBreakType.CR
-                    || processor.CurrentType == GraphemeClusterBreakType.LF)
+                    || processor.CurrentType == GraphemeClusterBreakType.LF
+                )
                 {
                     goto Return;
                 }
@@ -164,14 +173,16 @@ namespace System.Text.Unicode
             }
 
             // rules GB9, GB9a
-            while (processor.CurrentType == GraphemeClusterBreakType.Extend
+            while (
+                processor.CurrentType == GraphemeClusterBreakType.Extend
                 || processor.CurrentType == GraphemeClusterBreakType.ZWJ
-                || processor.CurrentType == GraphemeClusterBreakType.SpacingMark)
+                || processor.CurrentType == GraphemeClusterBreakType.SpacingMark
+            )
             {
                 processor.MoveNext();
             }
 
-        Return:
+            Return:
 
             return processor.CurrentCodeUnitOffset; // rules GB2, GB999
         }
@@ -226,7 +237,11 @@ namespace System.Text.Unicode
                 // that here.
 
                 CurrentCodeUnitOffset += _codeUnitLengthOfCurrentScalar;
-                _decoder(_buffer.Slice(CurrentCodeUnitOffset), out Rune thisRune, out _codeUnitLengthOfCurrentScalar);
+                _decoder(
+                    _buffer.Slice(CurrentCodeUnitOffset),
+                    out Rune thisRune,
+                    out _codeUnitLengthOfCurrentScalar
+                );
                 CurrentType = CharUnicodeInfo.GetGraphemeClusterBreakType(thisRune);
             }
         }

@@ -11,16 +11,15 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Text;
-using System.Web.SessionState;
 using System.Web.Mobile;
 using System.Web.Security;
+using System.Web.SessionState;
 using System.Web.Util;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile page class.
      * The page will use device id to create the appropriate DeviceAdapter,
@@ -35,26 +34,43 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage"]/*' />
     [
-        Designer("Microsoft.VisualStudio.Web.WebForms.MobileWebFormDesigner, " + AssemblyRef.MicrosoftVisualStudioWeb, typeof(IRootDesigner)),
+        Designer(
+            "Microsoft.VisualStudio.Web.WebForms.MobileWebFormDesigner, "
+                + AssemblyRef.MicrosoftVisualStudioWeb,
+            typeof(IRootDesigner)
+        ),
         ToolboxItem(false)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class MobilePage : Page
     {
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.HiddenPostEventSourceId"]/*' />
         public static readonly String HiddenPostEventSourceId = postEventSourceID;
+
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.HiddenPostEventArgumentId"]/*' />
         public static readonly String HiddenPostEventArgumentId = postEventArgumentID;
+
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.ViewStateID"]/*' />
         public static readonly String ViewStateID = "__VIEWSTATE";
+
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.HiddenVariablePrefix"]/*' />
         public static readonly String HiddenVariablePrefix = "__V_";
+
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.PageClientViewStateKey"]/*' />
         public static readonly String PageClientViewStateKey = "__P";
 
-        private const String DesignerAdapter = "System.Web.UI.MobileControls.Adapters.HtmlPageAdapter";
+        private const String DesignerAdapter =
+            "System.Web.UI.MobileControls.Adapters.HtmlPageAdapter";
         private IPageAdapter _pageAdapter;
         private bool _debugMode = false;
         private StyleSheet _styleSheet = null;
@@ -75,8 +91,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (_styleSheet != null)
                 {
-                    throw new
-                        Exception(SR.GetString(SR.StyleSheet_DuplicateWarningMessage));
+                    throw new Exception(SR.GetString(SR.StyleSheet_DuplicateWarningMessage));
                 }
                 else
                 {
@@ -99,8 +114,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (DesignMode)
                 {
-                    return new
-                        System.Web.UI.Design.MobileControls.DesignerCapabilities();
+                    return new System.Web.UI.Design.MobileControls.DesignerCapabilities();
                 }
                 return (MobileCapabilities)Request.Browser;
             }
@@ -112,25 +126,31 @@ namespace System.Web.UI.MobileControls
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             EditorBrowsable(EditorBrowsableState.Advanced)
         ]
-        public override sealed string MasterPageFile {
-            get {
-                return null;
-            }
-            set {
-                if (_afterPreInit) {
-                    throw new NotSupportedException(SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "MasterPage"));
+        public sealed override string MasterPageFile
+        {
+            get { return null; }
+            set
+            {
+                if (_afterPreInit)
+                {
+                    throw new NotSupportedException(
+                        SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "MasterPage")
+                    );
                 }
             }
         }
 
         // EventValidation is not supported on a mobile page.
-        public override bool EnableEventValidation {
-            get {
-                return false;
-            }
-            set {
-                if (_afterPreInit && value) {
-                    throw new NotSupportedException(SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "EventValidation"));
+        public override bool EnableEventValidation
+        {
+            get { return false; }
+            set
+            {
+                if (_afterPreInit && value)
+                {
+                    throw new NotSupportedException(
+                        SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "EventValidation")
+                    );
                 }
             }
         }
@@ -143,65 +163,61 @@ namespace System.Web.UI.MobileControls
         ]
         public StyleSheet StyleSheet
         {
-            get
-            {
-                return (_styleSheet != null) ? _styleSheet : StyleSheet.Default;
-            }
+            get { return (_styleSheet != null) ? _styleSheet : StyleSheet.Default; }
+            set { _styleSheet = value; }
+        }
 
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public override String Theme
+        {
+            get { return base.Theme; }
             set
             {
-                _styleSheet = value;
-            }
-        }
-
-        [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public override String Theme {
-            get {
-                return base.Theme;
-            }
-            set {
-                if (_afterPreInit) {
-                    throw new NotSupportedException(SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "Theme"));
+                if (_afterPreInit)
+                {
+                    throw new NotSupportedException(
+                        SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "Theme")
+                    );
                 }
             }
         }
 
-        [
-            Bindable(false),
-            Localizable(false),
-            EditorBrowsable(EditorBrowsableState.Never),
-        ]
-        public new String Title {
-            get {
-                return String.Empty;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "Title"));
+        [Bindable(false), Localizable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        public new String Title
+        {
+            get { return String.Empty; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "Title")
+                );
             }
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public override String StyleSheetTheme {
-            get {
-                return base.StyleSheetTheme;
-            }
-            set {
-                if (_afterPreInit) {
-                    throw new NotSupportedException(SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "StyleSheetTheme"));
+        public override String StyleSheetTheme
+        {
+            get { return base.StyleSheetTheme; }
+            set
+            {
+                if (_afterPreInit)
+                {
+                    throw new NotSupportedException(
+                        SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "StyleSheetTheme")
+                    );
                 }
             }
         }
 
-        [
-        Browsable(false),
-        EditorBrowsable(EditorBrowsableState.Advanced)
-        ]
-        public override bool EnableTheming {
-            get {
-                return base.EnableTheming;
-            }
-            set {
-                throw new NotSupportedException(SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "Theme"));
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Advanced)]
+        public override bool EnableTheming
+        {
+            get { return base.EnableTheming; }
+            set
+            {
+                throw new NotSupportedException(
+                    SR.GetString(SR.Feature_Not_Supported_On_MobilePage, "Theme")
+                );
             }
         }
 
@@ -248,6 +264,7 @@ namespace System.Web.UI.MobileControls
             Design,
             Runtime,
         };
+
         private RunMode _runMode = RunMode.Unknown;
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.DesignMode"]/*' />
@@ -292,12 +309,15 @@ namespace System.Web.UI.MobileControls
                     IPageAdapter pageAdapter = RequestingDeviceConfig.NewPageAdapter();
                     pageAdapter.Page = this;
                     _pageAdapter = pageAdapter;
-                    if(!DesignMode)
+                    if (!DesignMode)
                     {
-                        Type t = ControlsConfig.GetFromContext(HttpContext.Current).CookielessDataDictionaryType;
-                        if(t != null && typeof(IDictionary).IsAssignableFrom(t))
+                        Type t = ControlsConfig
+                            .GetFromContext(HttpContext.Current)
+                            .CookielessDataDictionaryType;
+                        if (t != null && typeof(IDictionary).IsAssignableFrom(t))
                         {
-                            pageAdapter.CookielessDataDictionary = Activator.CreateInstance(t) as IDictionary;
+                            pageAdapter.CookielessDataDictionary =
+                                Activator.CreateInstance(t) as IDictionary;
                             pageAdapter.PersistCookielessData = true;
                         }
                     }
@@ -306,12 +326,14 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-
         private bool _haveIdSeparator;
         private char _idSeparator;
-        public override char IdSeparator {
-            get {
-                if (_haveIdSeparator) {
+        public override char IdSeparator
+        {
+            get
+            {
+                if (_haveIdSeparator)
+                {
                     return _idSeparator;
                 }
 
@@ -320,11 +342,16 @@ namespace System.Web.UI.MobileControls
                 Debug.Assert(pageAdapter != null);
 
                 // VSWhidbey 280485
-                if (pageAdapter is System.Web.UI.MobileControls.Adapters.WmlPageAdapter ||
-                    pageAdapter is System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlPageAdapter) {
+                if (
+                    pageAdapter is System.Web.UI.MobileControls.Adapters.WmlPageAdapter
+                    || pageAdapter
+                        is System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlPageAdapter
+                )
+                {
                     _idSeparator = ':';
                 }
-                else {
+                else
+                {
                     _idSeparator = base.IdSeparator;
                 }
                 return _idSeparator;
@@ -378,17 +405,15 @@ namespace System.Web.UI.MobileControls
 
                 if (_allowCustomAttributes == BooleanOption.NotSet)
                 {
-                    _allowCustomAttributes =
-                        ControlsConfig.GetFromContext(Context).AllowCustomAttributes ?
-                                    BooleanOption.True : BooleanOption.False;
+                    _allowCustomAttributes = ControlsConfig
+                        .GetFromContext(Context)
+                        .AllowCustomAttributes
+                        ? BooleanOption.True
+                        : BooleanOption.False;
                 }
                 return _allowCustomAttributes == BooleanOption.True;
             }
-
-            set
-            {
-                _allowCustomAttributes = value ? BooleanOption.True : BooleanOption.False;
-            }
+            set { _allowCustomAttributes = value ? BooleanOption.True : BooleanOption.False; }
         }
 
         private void AddClientViewState(String id, Object viewState)
@@ -409,7 +434,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.GetControlAdapter"]/*' />
         public virtual IControlAdapter GetControlAdapter(MobileControl control)
         {
-            IControlAdapter adapter = RequestingDeviceConfig.NewControlAdapter(control.GetType ());
+            IControlAdapter adapter = RequestingDeviceConfig.NewControlAdapter(control.GetType());
             adapter.Control = control;
             return adapter;
         }
@@ -427,8 +452,9 @@ namespace System.Web.UI.MobileControls
                     }
                     else
                     {
-                        _deviceConfig =
-                            ControlsConfig.GetFromContext(Context).GetDeviceConfig(Context);
+                        _deviceConfig = ControlsConfig
+                            .GetFromContext(Context)
+                            .GetDeviceConfig(Context);
                     }
                 }
                 return _deviceConfig;
@@ -477,9 +503,7 @@ namespace System.Web.UI.MobileControls
         private String _relativeFilePath;
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.RelativeFilePath"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public String RelativeFilePath
         {
             get
@@ -496,12 +520,12 @@ namespace System.Web.UI.MobileControls
                 {
                     String s = Context.Request.CurrentExecutionFilePath;
                     String filePath = Context.Request.FilePath;
-                    if(filePath.Equals(s))
+                    if (filePath.Equals(s))
                     {
                         int slash = s.LastIndexOf('/');
                         if (slash >= 0)
                         {
-                            s = s.Substring(slash+1);
+                            s = s.Substring(slash + 1);
                         }
                         _relativeFilePath = s;
                     }
@@ -517,9 +541,7 @@ namespace System.Web.UI.MobileControls
         private String _absoluteFilePath;
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.AbsoluteFilePath"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public String AbsoluteFilePath
         {
             get
@@ -529,7 +551,9 @@ namespace System.Web.UI.MobileControls
                 // order to prevent the exception from vs7 at design time.
                 if (_absoluteFilePath == null && Context != null)
                 {
-                    _absoluteFilePath = Response.ApplyAppPathModifier(Context.Request.CurrentExecutionFilePath);
+                    _absoluteFilePath = Response.ApplyAppPathModifier(
+                        Context.Request.CurrentExecutionFilePath
+                    );
                 }
                 return _absoluteFilePath;
             }
@@ -538,9 +562,7 @@ namespace System.Web.UI.MobileControls
         private String _uniqueFilePathSuffix;
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.UniqueFilePathSuffix"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public new String UniqueFilePathSuffix
         {
             // Required for browsers that don't properly handle
@@ -555,7 +577,8 @@ namespace System.Web.UI.MobileControls
                     long ticks = DateTime.Now.Ticks % 999983;
                     _uniqueFilePathSuffix = String.Concat(
                         Constants.UniqueFilePathSuffixVariable,
-                        ticks.ToString("D6", CultureInfo.InvariantCulture));
+                        ticks.ToString("D6", CultureInfo.InvariantCulture)
+                    );
                 }
                 return _uniqueFilePathSuffix;
             }
@@ -565,18 +588,18 @@ namespace System.Web.UI.MobileControls
         {
             int n = elementName.Length;
             int i = 0;
-            for (i = 0; i < queryStringText.Length;)
+            for (i = 0; i < queryStringText.Length; )
             {
                 i = queryStringText.IndexOf(elementName, i, StringComparison.Ordinal);
                 if (i < 0)
                 {
                     break;
                 }
-                if (i == 0 || queryStringText[i-1] == '&')
+                if (i == 0 || queryStringText[i - 1] == '&')
                 {
-                    if (i+n < queryStringText.Length && queryStringText[i+n] == '=')
+                    if (i + n < queryStringText.Length && queryStringText[i + n] == '=')
                     {
-                        int j = queryStringText.IndexOf('&', i+n);
+                        int j = queryStringText.IndexOf('&', i + n);
                         if (j < 0)
                         {
                             if (i == 0)
@@ -585,13 +608,13 @@ namespace System.Web.UI.MobileControls
                             }
                             else
                             {
-                                queryStringText = queryStringText.Substring(0, i-1);
+                                queryStringText = queryStringText.Substring(0, i - 1);
                             }
                             break;
                         }
                         else
                         {
-                            queryStringText = queryStringText.Remove(i, j-i+1);
+                            queryStringText = queryStringText.Remove(i, j - i + 1);
                             continue;
                         }
                     }
@@ -602,9 +625,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.QueryStringText"]/*' />
-        [
-            Browsable(false),
-        ]
+        [Browsable(false)]
         public String QueryStringText
         {
             // Returns the query string text, stripping off a unique file path
@@ -616,7 +637,7 @@ namespace System.Web.UI.MobileControls
                 // Vs7 Property sig will always try to access public properties with get methods no
                 // matter Brosable attribute is off or not. We need to check if Context is null in
                 // order to prevent the exception from vs7 at design time.
-                if(DesignMode)
+                if (DesignMode)
                 {
                     return String.Empty;
                 }
@@ -636,13 +657,22 @@ namespace System.Web.UI.MobileControls
                     fullQueryString = CreateQueryStringTextFromCollection(_requestValueCollection);
                 }
 
-                if(fullQueryString != null && fullQueryString.Length > 0)
+                if (fullQueryString != null && fullQueryString.Length > 0)
                 {
-                    fullQueryString = RemoveQueryStringElement(fullQueryString, Constants.UniqueFilePathSuffixVariableWithoutEqual);
-                    fullQueryString = RemoveQueryStringElement(fullQueryString, MobileRedirect.QueryStringVariable);
+                    fullQueryString = RemoveQueryStringElement(
+                        fullQueryString,
+                        Constants.UniqueFilePathSuffixVariableWithoutEqual
+                    );
+                    fullQueryString = RemoveQueryStringElement(
+                        fullQueryString,
+                        MobileRedirect.QueryStringVariable
+                    );
                     if (!Adapter.PersistCookielessData)
                     {
-                        fullQueryString = RemoveQueryStringElement(fullQueryString, FormsAuthentication.FormsCookieName);
+                        fullQueryString = RemoveQueryStringElement(
+                            fullQueryString,
+                            FormsAuthentication.FormsCookieName
+                        );
                     }
                 }
                 return fullQueryString;
@@ -680,7 +710,8 @@ namespace System.Web.UI.MobileControls
                 if (_activeForm == null && Forms.Count > 0)
                 {
                     _activeForm = (Form)Forms[0];
-                    if(IsPostBack) {
+                    if (IsPostBack)
+                    {
                         _activeForm.Activated = true;
                     }
                     return _activeForm;
@@ -692,8 +723,7 @@ namespace System.Web.UI.MobileControls
                 }
                 else
                 {
-                    throw new Exception(
-                        SR.GetString(SR.MobilePage_AtLeastOneFormInPage));
+                    throw new Exception(SR.GetString(SR.MobilePage_AtLeastOneFormInPage));
                 }
             }
             set
@@ -725,12 +755,10 @@ namespace System.Web.UI.MobileControls
             Form form = FindControl(id) as Form;
             if (form == null)
             {
-                throw new ArgumentException(SR.GetString(
-                                        SR.MobilePage_FormNotFound, id));
+                throw new ArgumentException(SR.GetString(SR.MobilePage_FormNotFound, id));
             }
             return form;
         }
-
 
         // Perform a "safe" redirect on postback.
         // Abstracts away differences between clients in redirect behavior after a
@@ -748,15 +776,16 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.RedirectToMobilePage1"]/*' />
         public void RedirectToMobilePage(String url, bool endResponse)
         {
-            bool queryStringWritten = url.IndexOf("?", StringComparison.Ordinal) != -1 ? true : false;
-            if(Adapter.PersistCookielessData)
+            bool queryStringWritten =
+                url.IndexOf("?", StringComparison.Ordinal) != -1 ? true : false;
+            if (Adapter.PersistCookielessData)
             {
                 IDictionary dictionary = Adapter.CookielessDataDictionary;
-                if(dictionary != null)
+                if (dictionary != null)
                 {
-                    foreach(String name in dictionary.Keys)
+                    foreach (String name in dictionary.Keys)
                     {
-                        if(queryStringWritten)
+                        if (queryStringWritten)
                         {
                             url = String.Concat(url, "&");
                         }
@@ -770,7 +799,7 @@ namespace System.Web.UI.MobileControls
                 }
             }
             Response.Redirect(url, endResponse);
-//            MobileRedirect.RedirectToUrl(Context, url, endResponse);
+            //            MobileRedirect.RedirectToUrl(Context, url, endResponse);
         }
 
         // Override Page.Validate to do the validation only for mobile
@@ -785,8 +814,7 @@ namespace System.Web.UI.MobileControls
             for (int i = Validators.Count - 1; i >= 0; i--)
             {
                 IValidator validator = Validators[i];
-                if (!(validator is BaseValidator) ||
-                    ((BaseValidator) validator).Form != ActiveForm)
+                if (!(validator is BaseValidator) || ((BaseValidator)validator).Form != ActiveForm)
                 {
                     Validators.Remove(validator);
                 }
@@ -796,16 +824,18 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.VerifyRenderingInServerForm"]/*' />
-        [
-            EditorBrowsable(EditorBrowsableState.Never),
-        ]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override void VerifyRenderingInServerForm(Control control)
         {
             if (!_isRenderingInForm && !DesignMode)
             {
-                throw new Exception(SR.GetString(SR.MobileControl_MustBeInForm,
-                                                 control.UniqueID,
-                                                 control.GetType().Name));
+                throw new Exception(
+                    SR.GetString(
+                        SR.MobileControl_MustBeInForm,
+                        control.UniqueID,
+                        control.GetType().Name
+                    )
+                );
             }
         }
 
@@ -830,24 +860,34 @@ namespace System.Web.UI.MobileControls
         private const String UserAgentHeader = "User-Agent";
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.InitOutputCache"]/*' />
-        protected override void InitOutputCache(int duration,
-                                                String varyByHeader,
-                                                String varyByCustom,
-                                                OutputCacheLocation location,
-                                                String varyByParam)
+        protected override void InitOutputCache(
+            int duration,
+            String varyByHeader,
+            String varyByCustom,
+            OutputCacheLocation location,
+            String varyByParam
+        )
         {
             InitOutputCache(duration, null, varyByHeader, varyByCustom, location, varyByParam);
         }
 
-        protected override void InitOutputCache(int duration,
-                                                String varyByContentEncoding,
-                                                String varyByHeader,
-                                                String varyByCustom,
-                                                OutputCacheLocation location,
-                                                String varyByParam)
+        protected override void InitOutputCache(
+            int duration,
+            String varyByContentEncoding,
+            String varyByHeader,
+            String varyByCustom,
+            OutputCacheLocation location,
+            String varyByParam
+        )
         {
-            base.InitOutputCache(duration, varyByContentEncoding, varyByHeader, varyByCustom,
-                                 location, varyByParam);
+            base.InitOutputCache(
+                duration,
+                varyByContentEncoding,
+                varyByHeader,
+                varyByCustom,
+                location,
+                varyByParam
+            );
             Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
             Response.Cache.VaryByHeaders[UserAgentHeader] = true;
 
@@ -889,7 +929,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        protected override void OnPreInit(EventArgs e) {
+        protected override void OnPreInit(EventArgs e)
+        {
             _afterPreInit = true;
             base.OnPreInit(e);
         }
@@ -915,11 +956,12 @@ namespace System.Web.UI.MobileControls
 
             // Let the specific adapter to manipulate the base collection if
             // necessary.
-            NameValueCollection collection =
-                Adapter.DeterminePostBackMode(Context.Request,
-                                              postEventSourceID,
-                                              postEventArgumentID,
-                                              base.DeterminePostBackMode());
+            NameValueCollection collection = Adapter.DeterminePostBackMode(
+                Context.Request,
+                postEventSourceID,
+                postEventArgumentID,
+                base.DeterminePostBackMode()
+            );
 
             // Get hidden variables out of the collection.
             if (collection != null)
@@ -928,7 +970,10 @@ namespace System.Web.UI.MobileControls
                 // RedirectToMobilePage, then ignore the postback. For details,
                 // see RedirectToMobilePage method elsewhere in this class.
 
-                if (Page.Request.QueryString[MobileRedirect.QueryStringVariable] == MobileRedirect.QueryStringValue)
+                if (
+                    Page.Request.QueryString[MobileRedirect.QueryStringVariable]
+                    == MobileRedirect.QueryStringValue
+                )
                 {
                     collection = null;
                 }
@@ -940,7 +985,8 @@ namespace System.Web.UI.MobileControls
                         String key = collection.GetKey(i);
                         if (key.StartsWith(HiddenVariablePrefix, StringComparison.Ordinal))
                         {
-                            HiddenVariables[key.Substring(HiddenVariablePrefix.Length)] = collection[i];
+                            HiddenVariables[key.Substring(HiddenVariablePrefix.Length)] =
+                                collection[i];
                         }
                     }
 
@@ -956,14 +1002,14 @@ namespace System.Web.UI.MobileControls
 
             _requestValueCollection = collection;
 
-/* Obsolete.
-            // If doing a postback, don't allow redirections.
-
-            if (collection != null)
-            {
-                MobileRedirect.DisallowRedirection(Context);
-            }
-*/
+            /* Obsolete.
+                        // If doing a postback, don't allow redirections.
+            
+                        if (collection != null)
+                        {
+                            MobileRedirect.DisallowRedirection(Context);
+                        }
+            */
 
             return collection;
         }
@@ -975,7 +1021,10 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.RaisePostBackEvent"]/*' />
-        protected override void RaisePostBackEvent(IPostBackEventHandler sourceControl, String eventArgument)
+        protected override void RaisePostBackEvent(
+            IPostBackEventHandler sourceControl,
+            String eventArgument
+        )
         {
             if (eventArgument == null && sourceControl is Form)
             {
@@ -1008,13 +1057,13 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.OnInit"]/*' />
         protected override void OnInit(EventArgs e)
         {
-            #if ICECAP
+#if ICECAP
             IceCapAPI.StartProfile(IceCapAPI.PROFILE_THREADLEVEL, IceCapAPI.PROFILE_CURRENTID);
-            #endif
+#endif
             OnDeviceCustomize(new EventArgs());
 
             // Accessing Request throws exception at designtime
-            if(!DesignMode && Request.Headers["__vs_debug"] != null)
+            if (!DesignMode && Request.Headers["__vs_debug"] != null)
             {
                 _debugMode = true;
             }
@@ -1034,7 +1083,7 @@ namespace System.Web.UI.MobileControls
 
             if (_eventSource != null && _eventSource.Length > 0)
             {
-                MobileControl control = FindControl (_eventSource) as MobileControl;
+                MobileControl control = FindControl(_eventSource) as MobileControl;
                 if (control != null && (control is IPostBackEventHandler))
                 {
                     _activeForm = control.Form;
@@ -1061,14 +1110,14 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.Render"]/*' />
         protected override void Render(HtmlTextWriter writer)
         {
-            #if TRACE
+#if TRACE
             DumpSessionViewState();
-            #endif
+#endif
 
             Adapter.Render(writer);
         }
 
-        #if TRACE
+#if TRACE
         void DumpSessionViewState()
         {
             ArrayList arr;
@@ -1081,37 +1130,30 @@ namespace System.Web.UI.MobileControls
             }
             Trace.Write("SessionViewState", sb.ToString());
         }
-        #endif
+#endif
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.OnUnload"]/*' />
         protected override void OnUnload(EventArgs e)
         {
             base.OnUnload(e);
             Adapter.OnUnload(e);
-            #if ICECAP
+#if ICECAP
             IceCapAPI.StopProfile(IceCapAPI.PROFILE_THREADLEVEL, IceCapAPI.PROFILE_CURRENTID);
-            #endif
+#endif
         }
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.OnDeviceCustomize"]/*' />
-        protected virtual void OnDeviceCustomize(EventArgs e)
-        {
-        }
+        protected virtual void OnDeviceCustomize(EventArgs e) { }
 
         internal bool PrivateViewStateLoaded
         {
-            get
-            {
-                return _privateViewStateLoaded;
-            }
+            get { return _privateViewStateLoaded; }
         }
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.GetPrivateViewState"]/*' />
         public Object GetPrivateViewState(MobileControl ctl)
         {
-            return _privateViewState == null ?
-                null :
-                _privateViewState[ctl.UniqueID];
+            return _privateViewState == null ? null : _privateViewState[ctl.UniqueID];
         }
 
         private SessionViewState _sessionViewState = new SessionViewState();
@@ -1125,20 +1167,26 @@ namespace System.Web.UI.MobileControls
             String clientViewStateString = _requestValueCollection[ViewStateID];
             if (clientViewStateString != null)
             {
-                try {
-                    _privateViewState = StateFormatter.Deserialize(clientViewStateString) as Hashtable;
+                try
+                {
+                    _privateViewState =
+                        StateFormatter.Deserialize(clientViewStateString) as Hashtable;
                 }
-                catch (Exception e) {
-                    if (IsViewStateException(e)) {
+                catch (Exception e)
+                {
+                    if (IsViewStateException(e))
+                    {
                         _privateViewState = null;
 
                         // DevDiv #461378: Suppress validation errors for cross-page postbacks.
                         // This is a much simplified form of the check in Page.LoadPageStateFromPersistenceMedium.
-                        if (Context != null && TraceEnabled) {
+                        if (Context != null && TraceEnabled)
+                        {
                             Trace.Write("aspx.page", "Ignoring page state", e);
                         }
                     }
-                    else {
+                    else
+                    {
                         // we shouldn't ---- this exception; let the app error handler take care of it
                         throw;
                     }
@@ -1149,14 +1197,14 @@ namespace System.Web.UI.MobileControls
                     Pair pair = _privateViewState[PageClientViewStateKey] as Pair;
                     if (pair != null)
                     {
-                        _activeFormID = (String) pair.First;
+                        _activeFormID = (String)pair.First;
 
-                        Pair id = (Pair) pair.Second;
+                        Pair id = (Pair)pair.Second;
                         if (id != null)
                         {
                             _sessionViewState.Load(this, id);
                             state = _sessionViewState.ViewState;
-                            if(state == null)
+                            if (state == null)
                             {
                                 OnViewStateExpire(EventArgs.Empty);
                             }
@@ -1165,7 +1213,7 @@ namespace System.Web.UI.MobileControls
                                 Object[] arrState = state as Object[];
                                 if (arrState != null)
                                 {
-                                    _privateViewState = (Hashtable) arrState[1];
+                                    _privateViewState = (Hashtable)arrState[1];
                                     state = arrState[0];
                                 }
                             }
@@ -1176,14 +1224,19 @@ namespace System.Web.UI.MobileControls
                     // If the page had no view state, but had controls requiring postback,
                     // this information was saved in client view state.
 
-                    Object controlsRequiringPostBack =
-                            _privateViewState[_controlsRequiringPostBackKey];
+                    Object controlsRequiringPostBack = _privateViewState[
+                        _controlsRequiringPostBackKey
+                    ];
                     if (controlsRequiringPostBack != null)
                     {
-                        state = new Pair(null,
-                                         new Triplet(GetTypeHashCode().ToString(CultureInfo.InvariantCulture),
-                                                     null,
-                                                     controlsRequiringPostBack));
+                        state = new Pair(
+                            null,
+                            new Triplet(
+                                GetTypeHashCode().ToString(CultureInfo.InvariantCulture),
+                                null,
+                                controlsRequiringPostBack
+                            )
+                        );
                         _privateViewState.Remove(_controlsRequiringPostBackKey);
                     }
 
@@ -1208,7 +1261,14 @@ namespace System.Web.UI.MobileControls
             if (state == null)
             {
                 // Give framework back an empty page view state
-                state = new Pair(null, new Triplet(GetTypeHashCode().ToString(CultureInfo.InvariantCulture), null, null));
+                state = new Pair(
+                    null,
+                    new Triplet(
+                        GetTypeHashCode().ToString(CultureInfo.InvariantCulture),
+                        null,
+                        null
+                    )
+                );
             }
             return state;
         }
@@ -1233,10 +1293,12 @@ namespace System.Web.UI.MobileControls
                 viewState = view;
             }
 
-            if (Device.RequiresOutputOptimization &&
-                _clientViewState != null &&
-                _clientViewState.Count > 0 &&
-                EnableViewState)
+            if (
+                Device.RequiresOutputOptimization
+                && _clientViewState != null
+                && _clientViewState.Count > 0
+                && EnableViewState
+            )
             {
                 // Here we take over the content in _clientViewState.  It
                 // should be reset to null.  Then subsequently any info added
@@ -1262,13 +1324,24 @@ namespace System.Web.UI.MobileControls
                     throw new Exception(SR.GetString(SR.MobilePage_RequiresSessionState));
                 }
 
-                _sessionViewState.ViewState = (privateViewState == null) ?
-                    viewState : new Object[2] { viewState, privateViewState };
+                _sessionViewState.ViewState =
+                    (privateViewState == null)
+                        ? viewState
+                        : new Object[2] { viewState, privateViewState };
 
                 serverViewStateID = _sessionViewState.Save(this);
-                if (Device.PreferredRenderingMime != "text/vnd.wap.wml" && Device["cachesAllResponsesWithExpires"] != "true")
+                if (
+                    Device.PreferredRenderingMime != "text/vnd.wap.wml"
+                    && Device["cachesAllResponsesWithExpires"] != "true"
+                )
                 {
-                    if (String.Compare(Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        String.Compare(
+                            Request.HttpMethod,
+                            "GET",
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                     {
                         Response.Expires = 0;
                     }
@@ -1285,17 +1358,22 @@ namespace System.Web.UI.MobileControls
 
             if (activeFormID != null || serverViewStateID != null)
             {
-                AddClientViewState(PageClientViewStateKey,
-                    new Pair(activeFormID, serverViewStateID));
+                AddClientViewState(
+                    PageClientViewStateKey,
+                    new Pair(activeFormID, serverViewStateID)
+                );
             }
         }
 
         // NOTE: Make sure this stays in sync with Page.PageRegisteredControlsThatRequirePostBackKey
-        private const string PageRegisteredControlsThatRequirePostBackKey = "__ControlsRequirePostBackKey__";
+        private const string PageRegisteredControlsThatRequirePostBackKey =
+            "__ControlsRequirePostBackKey__";
+
         private bool CheckEmptyViewState(Object viewState)
         {
             Pair pair = viewState as Pair;
-            if (pair == null) {
+            if (pair == null)
+            {
                 return false;
             }
 
@@ -1311,9 +1389,15 @@ namespace System.Web.UI.MobileControls
                 // If the only thing in control is the set of controls
                 // requiring postback, then save the information in client-side
                 // state instead.
-                if (controlStates.Count == 1 &&
-                    controlStates[PageRegisteredControlsThatRequirePostBackKey] != null) {
-                    AddClientViewState(_controlsRequiringPostBackKey, controlStates[PageRegisteredControlsThatRequirePostBackKey]);
+                if (
+                    controlStates.Count == 1
+                    && controlStates[PageRegisteredControlsThatRequirePostBackKey] != null
+                )
+                {
+                    AddClientViewState(
+                        _controlsRequiringPostBackKey,
+                        controlStates[PageRegisteredControlsThatRequirePostBackKey]
+                    );
                 }
                 else
                 {
@@ -1393,10 +1477,15 @@ namespace System.Web.UI.MobileControls
 
             if (!_debugMode)
             {
-                if(!HttpContext.Current.IsCustomErrorEnabled)
+                if (!HttpContext.Current.IsCustomErrorEnabled)
                 {
                     Response.Clear();
-                    if (Adapter.HandleError(error, (HtmlTextWriter)CreateHtmlTextWriter(Response.Output)))
+                    if (
+                        Adapter.HandleError(
+                            error,
+                            (HtmlTextWriter)CreateHtmlTextWriter(Response.Output)
+                        )
+                    )
                     {
                         Server.ClearError();
                     }
@@ -1448,26 +1537,34 @@ namespace System.Web.UI.MobileControls
             // is, and strange view state errors could otherwise happen (ASURT 128657)
 
             int pageHashCode = StringComparer.InvariantCultureIgnoreCase.GetHashCode(
-                TemplateSourceDirectory);
+                TemplateSourceDirectory
+            );
             pageHashCode += StringComparer.InvariantCultureIgnoreCase.GetHashCode(GetType().Name);
-
 
             byte[] macKeyModifier;
 
-            if (ViewStateUserKey != null) {
+            if (ViewStateUserKey != null)
+            {
                 // Modify the key with the ViewStateUserKey, if any (ASURT 126375)
                 int count = Encoding.Unicode.GetByteCount(ViewStateUserKey);
                 macKeyModifier = new byte[count + 4];
-                Encoding.Unicode.GetBytes(ViewStateUserKey,0, ViewStateUserKey.Length, macKeyModifier, 4);
+                Encoding.Unicode.GetBytes(
+                    ViewStateUserKey,
+                    0,
+                    ViewStateUserKey.Length,
+                    macKeyModifier,
+                    4
+                );
             }
-            else {
+            else
+            {
                 macKeyModifier = new byte[4];
             }
 
-            macKeyModifier[0] = (byte) pageHashCode;
-            macKeyModifier[1] = (byte) (pageHashCode >> 8);
-            macKeyModifier[2] = (byte) (pageHashCode >> 16);
-            macKeyModifier[3] = (byte) (pageHashCode >> 24);
+            macKeyModifier[0] = (byte)pageHashCode;
+            macKeyModifier[1] = (byte)(pageHashCode >> 8);
+            macKeyModifier[2] = (byte)(pageHashCode >> 16);
+            macKeyModifier[3] = (byte)(pageHashCode >> 24);
 
             return macKeyModifier;
         }
@@ -1479,7 +1576,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (_stateFormatter == null)
                 {
-                    if(!EnableViewStateMac)
+                    if (!EnableViewStateMac)
                     {
                         _stateFormatter = new LosFormatter();
                     }
@@ -1492,8 +1589,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        private String CreateQueryStringTextFromCollection(
-            NameValueCollection collection)
+        private String CreateQueryStringTextFromCollection(NameValueCollection collection)
         {
             const String systemPostFieldPrefix = "__";
             StringBuilder stringBuilder = new StringBuilder();
@@ -1512,12 +1608,14 @@ namespace System.Web.UI.MobileControls
                     if (name.StartsWith(systemPostFieldPrefix, StringComparison.Ordinal))
                     {
                         // Remove well-known postback elements
-                        if (name == ViewStateID ||
-                            name == postEventSourceID ||
-                            name == postEventArgumentID ||
-                            name == Constants.EventSourceID ||
-                            name == Constants.EventArgumentID ||
-                            name.StartsWith(HiddenVariablePrefix, StringComparison.Ordinal))
+                        if (
+                            name == ViewStateID
+                            || name == postEventSourceID
+                            || name == postEventArgumentID
+                            || name == Constants.EventSourceID
+                            || name == Constants.EventArgumentID
+                            || name.StartsWith(HiddenVariablePrefix, StringComparison.Ordinal)
+                        )
                         {
                             continue;
                         }
@@ -1525,8 +1623,10 @@ namespace System.Web.UI.MobileControls
                     else
                     {
                         String controlId = name;
-                        if (controlId.EndsWith(".x", StringComparison.Ordinal) ||
-                            controlId.EndsWith(".y", StringComparison.Ordinal))
+                        if (
+                            controlId.EndsWith(".x", StringComparison.Ordinal)
+                            || controlId.EndsWith(".y", StringComparison.Ordinal)
+                        )
                         {
                             // Remove the .x and .y coordinates if the control is
                             // an image button
@@ -1547,11 +1647,13 @@ namespace System.Web.UI.MobileControls
             return stringBuilder.ToString();
         }
 
-        private void AppendParameters(NameValueCollection sourceCollection,
-                                      String sourceKey,
-                                      StringBuilder stringBuilder)
+        private void AppendParameters(
+            NameValueCollection sourceCollection,
+            String sourceKey,
+            StringBuilder stringBuilder
+        )
         {
-            String [] values = sourceCollection.GetValues(sourceKey);
+            String[] values = sourceCollection.GetValues(sourceKey);
             foreach (String value in values)
             {
                 if (stringBuilder.Length != 0)
@@ -1575,15 +1677,21 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobilePage.uex' path='docs/doc[@for="MobilePage.RenderControl"]/*' />
-        public override void RenderControl(HtmlTextWriter writer) {
+        public override void RenderControl(HtmlTextWriter writer)
+        {
             RenderControl(writer, null); // Use legacy adapter, not V2 adapter.
         }
 
         // Similar to the logic in ViewStateException.cs, but we can only check for
         // ViewState exceptions in general, not MAC-specific exceptions.
-        private static bool IsViewStateException(Exception e) {
-            for (; e != null; e = e.InnerException) {
-                if (e is ViewStateException) { return true; }
+        private static bool IsViewStateException(Exception e)
+        {
+            for (; e != null; e = e.InnerException)
+            {
+                if (e is ViewStateException)
+                {
+                    return true;
+                }
             }
             return false;
         }

@@ -16,7 +16,12 @@ public readonly struct WebcilSectionHeader
     public readonly int SizeOfRawData;
     public readonly int PointerToRawData;
 
-    public WebcilSectionHeader(int virtualSize, int virtualAddress, int sizeOfRawData, int pointerToRawData)
+    public WebcilSectionHeader(
+        int virtualSize,
+        int virtualAddress,
+        int sizeOfRawData,
+        int pointerToRawData
+    )
     {
         VirtualSize = virtualSize;
         VirtualAddress = virtualAddress;

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         public const string NS = "http://schemas.microsoft.com/developer/msbuild/2003";
 
         private const string CSharpProjectTemplate =
-@"<?xml version=""1.0"" encoding=""utf-8""?>
+            @"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project ToolsVersion=""12.0"" DefaultTargets=""Build"" xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <Import Project=""$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"" Condition=""Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"" />
   <PropertyGroup>
@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 </Project>";
 
         private const string SolutionTemplate =
-@"
+            @"
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
@@ -55,11 +55,14 @@ MinimumVisualStudioVersion = 10.0.40219.1
 EndGlobal
 ";
 
-        public const string PublicKey = "00240000048000009400000006020000002400005253413100040000010001003bb5de1b79bee9bf5ba44bdb42974c6f40fdc4b329c8e1b833fa798cf0859529485b2bfc359a08e16f025fe57efd293c4dc3541cb2e0929b1c4a92db87eed7a9454dbd08beb7c7308941384b3bfb088de781b51caef23677f8f6defb671e97e1fc5e0979858e52828c86aca1d4ea1797f1f1254bf64073a28e5be520d5397fb0";
+        public const string PublicKey =
+            "00240000048000009400000006020000002400005253413100040000010001003bb5de1b79bee9bf5ba44bdb42974c6f40fdc4b329c8e1b833fa798cf0859529485b2bfc359a08e16f025fe57efd293c4dc3541cb2e0929b1c4a92db87eed7a9454dbd08beb7c7308941384b3bfb088de781b51caef23677f8f6defb671e97e1fc5e0979858e52828c86aca1d4ea1797f1f1254bf64073a28e5be520d5397fb0";
         public const string PublicKeyToken = "39d7e8ec38707fde";
         public static readonly byte[] KeySnk = Resources.Key_snk;
 
-        public static IEnumerable<(string fileName, object fileContent)> GetSolutionFiles(params IBuilder[] inputs)
+        public static IEnumerable<(string fileName, object fileContent)> GetSolutionFiles(
+            params IBuilder[] inputs
+        )
         {
             var list = new List<(string, object)>();
             var projectBuilders = inputs.OfType<ProjectBuilder>();
@@ -83,7 +86,10 @@ EndGlobal
                 {
                     if (document.FilePath == null)
                     {
-                        document.FilePath = "Document" + fileIndex + (project.Language == LanguageNames.VisualBasic ? ".vb" : ".cs");
+                        document.FilePath =
+                            "Document"
+                            + fileIndex
+                            + (project.Language == LanguageNames.VisualBasic ? ".vb" : ".cs");
                         fileIndex++;
                     }
                 }
@@ -92,9 +98,12 @@ EndGlobal
                 {
                     if (projectReference.Guid == Guid.Empty)
                     {
-                        var referencedProject = projectBuilders.First(p => p.Name == projectReference.ProjectName);
+                        var referencedProject = projectBuilders.First(p =>
+                            p.Name == projectReference.ProjectName
+                        );
                         projectReference.Guid = referencedProject.Guid;
-                        projectReference.ProjectFileName = referencedProject.Name + referencedProject.Extension;
+                        projectReference.ProjectFileName =
+                            referencedProject.Name + referencedProject.Extension;
                     }
                 }
 
@@ -131,53 +140,41 @@ EndGlobal
                 Name = projectName?.Name,
                 Documents = documents,
                 ProjectReferences = projectReferences,
-                Properties = properties
+                Properties = properties,
             };
         }
 
         public static IBuilder ProjectReference(string projectName)
         {
-            return new ProjectReferenceBuilder
-            {
-                ProjectName = projectName
-            };
+            return new ProjectReferenceBuilder { ProjectName = projectName };
         }
 
         public static IBuilder ProjectName(string projectName)
         {
-            return new ProjectNameBuilder
-            {
-                Name = projectName
-            };
+            return new ProjectNameBuilder { Name = projectName };
         }
 
         public static IBuilder Property(string propertyName, string propertyValue)
         {
-            return new PropertyBuilder
-            {
-                Name = propertyName,
-                Value = propertyValue
-            };
+            return new PropertyBuilder { Name = propertyName, Value = propertyValue };
         }
 
         public static IBuilder Sign
         {
-            get
-            {
-                return new SignBuilder();
-            }
+            get { return new SignBuilder(); }
         }
 
         public static IBuilder Document(
             object content = null,
             string filePath = null,
-            string itemType = "Compile")
+            string itemType = "Compile"
+        )
         {
             return new DocumentBuilder
             {
                 FilePath = filePath,
                 Content = content,
-                ItemType = itemType
+                ItemType = itemType,
             };
         }
 
@@ -187,25 +184,26 @@ EndGlobal
             foreach (var project in projects)
             {
                 var fileName = project.Name + project.Extension;
-                var languageGuid = project.Language == LanguageNames.VisualBasic
-                    ? "{F184B08F-C81C-45F6-A57F-5ABD9991F28F}"
-                    : "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
+                var languageGuid =
+                    project.Language == LanguageNames.VisualBasic
+                        ? "{F184B08F-C81C-45F6-A57F-5ABD9991F28F}"
+                        : "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}";
                 sb.AppendLine(
                     string.Format(
                         @"Project(""{0}"") = ""{1}"", ""{2}"", ""{3}""",
                         languageGuid,
                         project.Name,
                         fileName,
-                        project.Guid.ToString("B")));
+                        project.Guid.ToString("B")
+                    )
+                );
                 sb.AppendLine("EndProject");
             }
 
             return string.Format(SolutionTemplate, sb.ToString());
         }
 
-        public interface IBuilder
-        {
-        }
+        public interface IBuilder { }
 
         private class ProjectBuilder : IBuilder
         {
@@ -220,10 +218,7 @@ EndGlobal
 
             public string Extension
             {
-                get
-                {
-                    return Language == LanguageNames.VisualBasic ? ".vbproj" : ".csproj";
-                }
+                get { return Language == LanguageNames.VisualBasic ? ".vbproj" : ".csproj"; }
             }
 
             public IEnumerable<(string fileName, object fileContent)> Files
@@ -262,7 +257,9 @@ EndGlobal
                 }
 
                 var document = XDocument.Parse(CSharpProjectTemplate);
-                var propertyGroup = document.Root.Descendants(XName.Get("PropertyGroup", NS)).First();
+                var propertyGroup = document
+                    .Root.Descendants(XName.Get("PropertyGroup", NS))
+                    .First();
                 AddXElement(propertyGroup, "ProjectGuid", Guid.ToString("B"));
                 AddXElement(propertyGroup, "OutputType", OutputType);
                 AddXElement(propertyGroup, "OutputPath", OutputPath);
@@ -289,20 +286,25 @@ EndGlobal
                         {
                             if (projectReference.Guid != Guid.Empty)
                             {
-                                AddXElement(xmlElement, "Project", projectReference.Guid.ToString("B"));
+                                AddXElement(
+                                    xmlElement,
+                                    "Project",
+                                    projectReference.Guid.ToString("B")
+                                );
                             }
 
-                            AddXElement(xmlElement, "Name", Path.GetFileNameWithoutExtension(projectReference.ProjectName));
-                        });
+                            AddXElement(
+                                xmlElement,
+                                "Name",
+                                Path.GetFileNameWithoutExtension(projectReference.ProjectName)
+                            );
+                        }
+                    );
                 }
 
                 if (Documents != null)
                 {
-                    AddItemGroup(
-                        importTargets,
-                        i => i.ItemType,
-                        Documents,
-                        i => i.FilePath);
+                    AddItemGroup(importTargets, i => i.ItemType, Documents, i => i.FilePath);
                 }
 
                 return document.ToString();
@@ -313,7 +315,8 @@ EndGlobal
                 Func<T, string> itemTypeSelector,
                 IEnumerable<T> items,
                 Func<T, string> attributeValueGetter,
-                Action<T, XElement> elementModifier = null)
+                Action<T, XElement> elementModifier = null
+            )
             {
                 var itemGroup = CreateXElement("ItemGroup");
                 addBefore.AddBeforeSelf(itemGroup);
@@ -333,7 +336,11 @@ EndGlobal
                 return new XElement(XName.Get(name, NS));
             }
 
-            private static void AddXElement(XElement element, string elementName, string elementValue)
+            private static void AddXElement(
+                XElement element,
+                string elementName,
+                string elementValue
+            )
             {
                 element.Add(new XElement(XName.Get(elementName, NS), elementValue));
             }

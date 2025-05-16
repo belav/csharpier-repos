@@ -9,9 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
@@ -20,7 +20,9 @@ public class ResponseHeadersWritingBenchmark
 {
     private const int Iterations = 1000;
 
-    private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes("\r\nServer: " + Constants.ServerName);
+    private static readonly byte[] _bytesServer = Encoding.ASCII.GetBytes(
+        "\r\nServer: " + Constants.ServerName
+    );
     private static readonly byte[] _helloWorldPayload = Encoding.ASCII.GetBytes("Hello, World!");
 
     private HttpResponseHeaders _responseHeaders;
@@ -28,7 +30,8 @@ public class ResponseHeadersWritingBenchmark
     private DateHeaderValueManager _dateHeaderValueManager;
     private Writer _writer;
 
-    private DateHeaderValueManager.DateHeaderValues DateHeaderValues => _dateHeaderValueManager.GetDateHeaderValues();
+    private DateHeaderValueManager.DateHeaderValues DateHeaderValues =>
+        _dateHeaderValueManager.GetDateHeaderValues();
 
     [Params(
         BenchmarkTypes.TechEmpowerPlaintext,
@@ -122,7 +125,8 @@ public class ResponseHeadersWritingBenchmark
         responseHeaders.ContentEncoding = "gzip";
         responseHeaders.Expires = "Fri, 12 Jan 2018 22:01:55 GMT";
         responseHeaders.LastModified = "Wed, 22 Jun 2016 20:08:29 GMT";
-        responseHeaders.SetCookie = "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
+        responseHeaders.SetCookie =
+            "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
         responseHeaders.ETag = "\"54ef7954-1078\"";
         responseHeaders.TransferEncoding = "chunked";
         responseHeaders.ContentLanguage = "en-gb";
@@ -130,7 +134,8 @@ public class ResponseHeadersWritingBenchmark
         responseHeaders.Via = "1.1 varnish";
         responseHeaders.AccessControlAllowOrigin = "*";
         responseHeaders.AccessControlAllowCredentials = "true";
-        responseHeaders.AccessControlExposeHeaders = "Client-Protocol, Content-Length, Content-Type, X-Bandwidth-Est, X-Bandwidth-Est2, X-Bandwidth-Est-Comp, X-Bandwidth-Avg, X-Walltime-Ms, X-Sequence-Num";
+        responseHeaders.AccessControlExposeHeaders =
+            "Client-Protocol, Content-Length, Content-Type, X-Bandwidth-Est, X-Bandwidth-Est2, X-Bandwidth-Est-Comp, X-Bandwidth-Avg, X-Walltime-Ms, X-Sequence-Num";
 
         var dateHeaderValues = _dateHeaderValueManager.GetDateHeaderValues();
         _responseHeaders.SetRawDate(dateHeaderValues.String, dateHeaderValues.Bytes);
@@ -148,7 +153,8 @@ public class ResponseHeadersWritingBenchmark
     {
         var responseHeaders = _responseHeadersDict;
         responseHeaders.ContentType = "text/plain";
-        responseHeaders.SetCookie = "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
+        responseHeaders.SetCookie =
+            "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
         responseHeaders.ContentLength = _helloWorldPayload.Length;
 
         var writer = new BufferWriter<PipeWriter>(_writer);
@@ -163,7 +169,8 @@ public class ResponseHeadersWritingBenchmark
     {
         var responseHeaders = _responseHeadersDict;
         responseHeaders.ContentType = "text/plain";
-        responseHeaders.SetCookie = "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
+        responseHeaders.SetCookie =
+            "prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric";
         responseHeaders.TransferEncoding = "chunked";
 
         var writer = new BufferWriter<PipeWriter>(_writer);
@@ -201,9 +208,14 @@ public class ResponseHeadersWritingBenchmark
         public override Span<byte> GetSpan(int sizeHint = 0) => _memory.Span;
 
         public override void Advance(int bytes) { }
+
         public override void CancelPendingFlush() { }
+
         public override void Complete(Exception exception = null) { }
-        public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default) => default;
+
+        public override ValueTask<FlushResult> FlushAsync(
+            CancellationToken cancellationToken = default
+        ) => default;
     }
 
     public enum BenchmarkTypes
@@ -213,6 +225,6 @@ public class ResponseHeadersWritingBenchmark
         PlaintextWithCookie,
         PlaintextChunkedWithCookie,
         LiveAspNet,
-        Common
+        Common,
     }
 }

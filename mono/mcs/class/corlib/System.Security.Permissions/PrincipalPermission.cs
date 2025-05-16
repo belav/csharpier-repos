@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,348 +32,400 @@ using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Threading;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [ComVisible(true)]
+    [Serializable]
+    public sealed class PrincipalPermission
+        : IPermission,
+            IUnrestrictedPermission,
+            IBuiltInPermission
+    {
+        private const int version = 1;
 
-	[ComVisible (true)]
-	[Serializable]
-	public sealed class PrincipalPermission : IPermission, IUnrestrictedPermission, IBuiltInPermission {
+        internal class PrincipalInfo
+        {
+            private string _name;
+            private string _role;
+            private bool _isAuthenticated;
 
-		private const int version = 1;
+            public PrincipalInfo(string name, string role, bool isAuthenticated)
+            {
+                _name = name;
+                _role = role;
+                _isAuthenticated = isAuthenticated;
+            }
 
-		internal class PrincipalInfo {
+            public string Name
+            {
+                get { return _name; }
+            }
 
-			private string _name;
-			private string _role;
-			private bool _isAuthenticated;
-			
-			public PrincipalInfo (string name, string role, bool isAuthenticated)
-			{
-				_name = name;
-				_role = role;
-				_isAuthenticated = isAuthenticated;
-			}
+            public string Role
+            {
+                get { return _role; }
+            }
 
-			public string Name {
-				get { return _name; }
-			}
+            public bool IsAuthenticated
+            {
+                get { return _isAuthenticated; }
+            }
+        }
 
-			public string Role {
-				get { return _role; }
-			}
+        private ArrayList principals;
 
-			public bool IsAuthenticated {
-				get { return _isAuthenticated; }
-			}
-		}
+        // Constructors
 
-		private ArrayList principals;
+        public PrincipalPermission(PermissionState state)
+        {
+            principals = new ArrayList();
+            if (
+                CodeAccessPermission.CheckPermissionState(state, true)
+                == PermissionState.Unrestricted
+            )
+            {
+                PrincipalInfo pi = new PrincipalInfo(null, null, true);
+                principals.Add(pi);
+            }
+        }
 
-		// Constructors
+        public PrincipalPermission(string name, string role)
+            : this(name, role, true) { }
 
-		public PrincipalPermission (PermissionState state)
-		{
-			principals = new ArrayList ();
-			if (CodeAccessPermission.CheckPermissionState (state, true) == PermissionState.Unrestricted) {
-				PrincipalInfo pi = new PrincipalInfo (null, null, true);
-				principals.Add (pi);
-			}
-		}
+        public PrincipalPermission(string name, string role, bool isAuthenticated)
+        {
+            principals = new ArrayList();
+            PrincipalInfo pi = new PrincipalInfo(name, role, isAuthenticated);
+            principals.Add(pi);
+        }
 
-		public PrincipalPermission (string name, string role) : this (name, role, true)
-		{
-		}
+        internal PrincipalPermission(ArrayList principals)
+        {
+            this.principals = (ArrayList)principals.Clone();
+        }
 
-		public PrincipalPermission (string name, string role, bool isAuthenticated)
-		{
-			principals = new ArrayList ();
-			PrincipalInfo pi = new PrincipalInfo (name, role, isAuthenticated);
-			principals.Add (pi);
-		}
+        // Properties
 
-		internal PrincipalPermission (ArrayList principals) 
-		{
-			this.principals = (ArrayList) principals.Clone ();
-		}
+        // Methods
 
-		// Properties
+        public IPermission Copy()
+        {
+            return new PrincipalPermission(principals);
+        }
 
-		// Methods
+        public void Demand()
+        {
+            IPrincipal p = Thread.CurrentPrincipal;
+            if (p == null)
+                throw new SecurityException("no Principal");
 
-		public IPermission Copy () 
-		{
-			return new PrincipalPermission (principals);
-		}
+            if (principals.Count > 0)
+            {
+                // check restrictions
+                bool demand = false;
+                foreach (PrincipalInfo pi in principals)
+                {
+                    // if a name is present then it must be equal
+                    // if a role is present then the identity must be a member of this role
+                    // if authentication is required then the identity must be authenticated
+                    if (
+                        ((pi.Name == null) || (pi.Name == p.Identity.Name))
+                        && ((pi.Role == null) || (p.IsInRole(pi.Role)))
+                        && (
+                            (pi.IsAuthenticated && p.Identity.IsAuthenticated)
+                            || (!pi.IsAuthenticated)
+                        )
+                    )
+                    {
+                        demand = true;
+                        break;
+                    }
+                }
 
-		public void Demand ()
-		{
-			IPrincipal p = Thread.CurrentPrincipal;
-			if (p == null)
-				throw new SecurityException ("no Principal");
+                if (!demand)
+                    throw new SecurityException("Demand for principal refused.");
+            }
+        }
 
-			if (principals.Count > 0) {
-				// check restrictions
-				bool demand = false;
-				foreach (PrincipalInfo pi in principals) {
-					// if a name is present then it must be equal
-					// if a role is present then the identity must be a member of this role
-					// if authentication is required then the identity must be authenticated
-					if (((pi.Name == null) || (pi.Name == p.Identity.Name)) &&
-						((pi.Role == null) || (p.IsInRole (pi.Role))) &&
-						((pi.IsAuthenticated && p.Identity.IsAuthenticated) || (!pi.IsAuthenticated))) {
-						demand = true;
-						break;
-					}
-				}
+        public void FromXml(SecurityElement elem)
+        {
+            // General validation in CodeAccessPermission
+            CheckSecurityElement(elem, "elem", version, version);
+            // Note: we do not (yet) care about the return value
+            // as we only accept version 1 (min/max values)
 
-				if (!demand)
-					throw new SecurityException ("Demand for principal refused.");
-			}
-		}
+            principals.Clear();
+            // Children is null, not empty, when no child is present
+            if (elem.Children != null)
+            {
+                foreach (SecurityElement se in elem.Children)
+                {
+                    if (se.Tag != "Identity")
+                        throw new ArgumentException("not IPermission/Identity");
+                    string name = se.Attribute("ID");
+                    string role = se.Attribute("Role");
+                    string auth = se.Attribute("Authenticated");
+                    bool isAuthenticated = false;
+                    if (auth != null)
+                    {
+                        try
+                        {
+                            isAuthenticated = Boolean.Parse(auth);
+                        }
+                        catch { }
+                    }
+                    PrincipalInfo pi = new PrincipalInfo(name, role, isAuthenticated);
+                    principals.Add(pi);
+                }
+            }
+        }
 
-		public void FromXml (SecurityElement elem) 
-		{
-			// General validation in CodeAccessPermission
-			CheckSecurityElement (elem, "elem", version, version);
-			// Note: we do not (yet) care about the return value 
-			// as we only accept version 1 (min/max values)
+        public IPermission Intersect(IPermission target)
+        {
+            PrincipalPermission pp = Cast(target);
+            if (pp == null)
+                return null;
 
-			principals.Clear ();
-			// Children is null, not empty, when no child is present
-			if (elem.Children != null) {
-				foreach (SecurityElement se in elem.Children) {
-					if (se.Tag != "Identity")
-						throw new ArgumentException ("not IPermission/Identity");
-					string name = se.Attribute ("ID");
-					string role = se.Attribute ("Role");
-					string auth = se.Attribute ("Authenticated");
-					bool isAuthenticated = false;
-					if (auth != null) {
-						try {
-							isAuthenticated = Boolean.Parse (auth);
-						}
-						catch {}
-					}
-					PrincipalInfo pi = new PrincipalInfo (name, role, isAuthenticated);
-					principals.Add (pi);
-				}
-			}
-		}
+            if (IsUnrestricted())
+                return pp.Copy();
+            if (pp.IsUnrestricted())
+                return Copy();
 
-		public IPermission Intersect (IPermission target) 
-		{
-			PrincipalPermission pp = Cast (target);
-			if (pp == null)
-				return null;
+            PrincipalPermission intersect = new PrincipalPermission(PermissionState.None);
+            foreach (PrincipalInfo pi in principals)
+            {
+                foreach (PrincipalInfo opi in pp.principals)
+                {
+                    if (pi.IsAuthenticated == opi.IsAuthenticated)
+                    {
+                        string name = null;
+                        if ((pi.Name == opi.Name) || (opi.Name == null))
+                            name = pi.Name;
+                        else if (pi.Name == null)
+                            name = opi.Name;
+                        string role = null;
+                        if ((pi.Role == opi.Role) || (opi.Role == null))
+                            role = pi.Role;
+                        else if (pi.Role == null)
+                            role = opi.Role;
+                        if ((name != null) || (role != null))
+                        {
+                            PrincipalInfo ipi = new PrincipalInfo(name, role, pi.IsAuthenticated);
+                            intersect.principals.Add(ipi);
+                        }
+                    }
+                }
+            }
 
-			if (IsUnrestricted ())
-				return pp.Copy ();
-			if (pp.IsUnrestricted ())
-				return Copy ();
+            return ((intersect.principals.Count > 0) ? intersect : null);
+        }
 
-			PrincipalPermission intersect = new PrincipalPermission (PermissionState.None);
-			foreach (PrincipalInfo pi in principals) {
-				foreach (PrincipalInfo opi in pp.principals) {
-					if (pi.IsAuthenticated == opi.IsAuthenticated) {
-						string name = null;
-						if ((pi.Name == opi.Name) || (opi.Name == null))
-							name = pi.Name;
-						else if (pi.Name == null)
-							name = opi.Name;
-						string role = null;
-						if ((pi.Role == opi.Role) || (opi.Role == null))
-							role = pi.Role;
-						else if (pi.Role == null)
-							role = opi.Role;
-						if ((name != null) || (role != null)) {
-							PrincipalInfo ipi = new PrincipalInfo (name, role, pi.IsAuthenticated);
-							intersect.principals.Add (ipi);
-						}
-					}
-				}
-			}
+        public bool IsSubsetOf(IPermission target)
+        {
+            PrincipalPermission pp = Cast(target);
+            if (pp == null)
+                return IsEmpty();
 
-			return ((intersect.principals.Count > 0) ? intersect : null);
-		}
+            if (IsUnrestricted())
+                return pp.IsUnrestricted();
+            else if (pp.IsUnrestricted())
+                return true;
 
-		public bool IsSubsetOf (IPermission target) 
-		{
-			PrincipalPermission pp = Cast (target);
-			if (pp == null)
-				return IsEmpty ();
+            // each must be a subset of the target
+            foreach (PrincipalInfo pi in principals)
+            {
+                bool thisItem = false;
+                foreach (PrincipalInfo opi in pp.principals)
+                {
+                    if (
+                        ((pi.Name == opi.Name) || (opi.Name == null))
+                        && ((pi.Role == opi.Role) || (opi.Role == null))
+                        && (pi.IsAuthenticated == opi.IsAuthenticated)
+                    )
+                        thisItem = true;
+                }
+                if (!thisItem)
+                    return false;
+            }
 
-			if (IsUnrestricted ())
-				return pp.IsUnrestricted ();
-			else if (pp.IsUnrestricted ())
-				return true;
+            return true;
+        }
 
-			// each must be a subset of the target
-			foreach (PrincipalInfo pi in principals) {
-				bool thisItem = false;
-				foreach (PrincipalInfo opi in pp.principals) {
-					if (((pi.Name == opi.Name) || (opi.Name == null)) && 
-						((pi.Role == opi.Role) || (opi.Role == null)) && 
-						(pi.IsAuthenticated == opi.IsAuthenticated))
-						thisItem = true;
-				}
-				if (!thisItem)
-					return false;
-			}
+        public bool IsUnrestricted()
+        {
+            foreach (PrincipalInfo pi in principals)
+            {
+                if ((pi.Name == null) && (pi.Role == null) && (pi.IsAuthenticated))
+                    return true;
+            }
+            return false;
+        }
 
-			return true;
-		}
+        public override string ToString()
+        {
+            return ToXml().ToString();
+        }
 
-		public bool IsUnrestricted () 
-		{
-			foreach (PrincipalInfo pi in principals) {
-				if ((pi.Name == null) && (pi.Role == null) && (pi.IsAuthenticated))
-					return true;
-			}
-			return false;
-		}
+        public SecurityElement ToXml()
+        {
+            SecurityElement se = new SecurityElement("Permission");
+            Type type = this.GetType();
+            se.AddAttribute(
+                "class",
+                type.FullName + ", " + type.Assembly.ToString().Replace('\"', '\'')
+            );
+            se.AddAttribute("version", version.ToString());
 
-		public override string ToString () 
-		{
-			return ToXml ().ToString ();
-		}
+            foreach (PrincipalInfo pi in principals)
+            {
+                SecurityElement sec = new SecurityElement("Identity");
+                if (pi.Name != null)
+                    sec.AddAttribute("ID", pi.Name);
+                if (pi.Role != null)
+                    sec.AddAttribute("Role", pi.Role);
+                if (pi.IsAuthenticated)
+                    sec.AddAttribute("Authenticated", "true");
+                se.AddChild(sec);
+            }
+            return se;
+        }
 
-		public SecurityElement ToXml () 
-		{
-			SecurityElement se = new SecurityElement ("Permission");
-			Type type = this.GetType ();
-			se.AddAttribute ("class", type.FullName + ", " + type.Assembly.ToString ().Replace ('\"', '\''));
-			se.AddAttribute ("version", version.ToString ());
+        public IPermission Union(IPermission other)
+        {
+            PrincipalPermission pp = Cast(other);
+            if (pp == null)
+                return Copy();
 
-			foreach (PrincipalInfo pi in principals) {
-				SecurityElement sec = new SecurityElement ("Identity");
-				if (pi.Name != null)
-					sec.AddAttribute ("ID", pi.Name);
-				if (pi.Role != null)
-					sec.AddAttribute ("Role", pi.Role);
-				if (pi.IsAuthenticated)
-					sec.AddAttribute ("Authenticated", "true");
-				se.AddChild (sec);
-			}
-			return se;
-		}
+            if (IsUnrestricted() || pp.IsUnrestricted())
+                return new PrincipalPermission(PermissionState.Unrestricted);
 
-		public IPermission Union (IPermission other)
-		{
-			PrincipalPermission pp = Cast (other);
-			if (pp == null)
-				return Copy ();
+            PrincipalPermission union = new PrincipalPermission(principals);
+            foreach (PrincipalInfo pi in pp.principals)
+                union.principals.Add(pi);
 
-			if (IsUnrestricted () || pp.IsUnrestricted ())
-				return new PrincipalPermission (PermissionState.Unrestricted);
+            return union;
+        }
 
-			PrincipalPermission union = new PrincipalPermission (principals);
-			foreach (PrincipalInfo pi in pp.principals)
-				union.principals.Add (pi);
+        [ComVisible(false)]
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
 
-			return union;
-		}
+            PrincipalPermission pp = (obj as PrincipalPermission);
+            if (pp == null)
+                return false;
 
-		[ComVisible (false)]
-		public override bool Equals (object obj)
-		{
-			if (obj == null)
-				return false;
+            // same number of principals ?
+            if (principals.Count != pp.principals.Count)
+                return false;
 
-			PrincipalPermission pp = (obj as PrincipalPermission);
-			if (pp == null)
-				return false;
+            // then all principals in "this" should be in "pp"
+            foreach (PrincipalInfo pi in principals)
+            {
+                bool thisItem = false;
+                foreach (PrincipalInfo opi in pp.principals)
+                {
+                    if (
+                        ((pi.Name == opi.Name) || (opi.Name == null))
+                        && ((pi.Role == opi.Role) || (opi.Role == null))
+                        && (pi.IsAuthenticated == opi.IsAuthenticated)
+                    )
+                    {
+                        thisItem = true;
+                        break;
+                    }
+                }
+                if (!thisItem)
+                    return false;
+            }
+            return true;
+        }
 
-			// same number of principals ?
-			if (principals.Count != pp.principals.Count)
-				return false;
+        // according to documentation (fx 2.0 beta 1) we can have
+        // different hash code even if both a Equals
+        [ComVisible(false)]
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
-			// then all principals in "this" should be in "pp"
-			foreach (PrincipalInfo pi in principals) {
-				bool thisItem = false;
-				foreach (PrincipalInfo opi in pp.principals) {
-					if (((pi.Name == opi.Name) || (opi.Name == null)) && 
-						((pi.Role == opi.Role) || (opi.Role == null)) && 
-						(pi.IsAuthenticated == opi.IsAuthenticated)) {
-						thisItem = true;
-						break;
-					}
-				}
-				if (!thisItem)
-					return false;
-			}
-			return true;
-		}
+        // IBuiltInPermission
+        int IBuiltInPermission.GetTokenIndex()
+        {
+            return (int)BuiltInToken.Principal;
+        }
 
-		// according to documentation (fx 2.0 beta 1) we can have 
-		// different hash code even if both a Equals
-		[ComVisible (false)]
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
+        // helpers
 
-		// IBuiltInPermission
-		int IBuiltInPermission.GetTokenIndex ()
-		{
-			return (int) BuiltInToken.Principal;
-		}
+        private PrincipalPermission Cast(IPermission target)
+        {
+            if (target == null)
+                return null;
 
-		// helpers
+            PrincipalPermission pp = (target as PrincipalPermission);
+            if (pp == null)
+            {
+                CodeAccessPermission.ThrowInvalidPermission(target, typeof(PrincipalPermission));
+            }
 
-		private PrincipalPermission Cast (IPermission target)
-		{
-			if (target == null)
-				return null;
+            return pp;
+        }
 
-			PrincipalPermission pp = (target as PrincipalPermission);
-			if (pp == null) {
-				CodeAccessPermission.ThrowInvalidPermission (target, typeof (PrincipalPermission));
-			}
+        private bool IsEmpty()
+        {
+            return (principals.Count == 0);
+        }
 
-			return pp;
-		}
+        // Normally permissions tags are "IPermission" but this (non-CAS) permission use "Permission"
+        internal int CheckSecurityElement(
+            SecurityElement se,
+            string parameterName,
+            int minimumVersion,
+            int maximumVersion
+        )
+        {
+            if (se == null)
+                throw new ArgumentNullException(parameterName);
 
-		private bool IsEmpty ()
-		{
-			return (principals.Count == 0);
-		}
+            // Tag is case-sensitive
+            if (se.Tag != "Permission")
+            {
+                string msg = String.Format(Locale.GetText("Invalid tag {0}"), se.Tag);
+                throw new ArgumentException(msg, parameterName);
+            }
 
-		// Normally permissions tags are "IPermission" but this (non-CAS) permission use "Permission"
-		internal int CheckSecurityElement (SecurityElement se, string parameterName, int minimumVersion, int maximumVersion) 
-		{
-			if (se == null)
-				throw new ArgumentNullException (parameterName);
+            // Note: we do not care about the class attribute at
+            // this stage (in fact we don't even if the class
+            // attribute is present or not). Anyway the object has
+            // already be created, with success, if we're loading it
 
-			// Tag is case-sensitive
-			if (se.Tag != "Permission") {
-				string msg = String.Format (Locale.GetText ("Invalid tag {0}"), se.Tag);
-				throw new ArgumentException (msg, parameterName);
-			}
+            // we assume minimum version if no version number is supplied
+            int version = minimumVersion;
+            string v = se.Attribute("version");
+            if (v != null)
+            {
+                try
+                {
+                    version = Int32.Parse(v);
+                }
+                catch (Exception e)
+                {
+                    string msg = Locale.GetText("Couldn't parse version from '{0}'.");
+                    msg = String.Format(msg, v);
+                    throw new ArgumentException(msg, parameterName, e);
+                }
+            }
 
-			// Note: we do not care about the class attribute at 
-			// this stage (in fact we don't even if the class 
-			// attribute is present or not). Anyway the object has
-			// already be created, with success, if we're loading it
-
-			// we assume minimum version if no version number is supplied
-			int version = minimumVersion;
-			string v = se.Attribute ("version");
-			if (v != null) {
-				try {
-					version = Int32.Parse (v);
-				}
-				catch (Exception e) {
-					string msg = Locale.GetText ("Couldn't parse version from '{0}'.");
-					msg = String.Format (msg, v);
-					throw new ArgumentException (msg, parameterName, e);
-				}
-			}
-
-			if ((version < minimumVersion) || (version > maximumVersion)) {
-				string msg = Locale.GetText ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
-				msg = String.Format (msg, version, minimumVersion, maximumVersion);
-				throw new ArgumentException (msg, parameterName);
-			}
-			return version;
-		}
-	}
+            if ((version < minimumVersion) || (version > maximumVersion))
+            {
+                string msg = Locale.GetText(
+                    "Unknown version '{0}', expected versions between ['{1}','{2}']."
+                );
+                msg = String.Format(msg, version, minimumVersion, maximumVersion);
+                throw new ArgumentException(msg, parameterName);
+            }
+            return version;
+        }
+    }
 }

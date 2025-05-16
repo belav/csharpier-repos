@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 public class JsonUpdateSqliteFixture : JsonUpdateFixtureBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

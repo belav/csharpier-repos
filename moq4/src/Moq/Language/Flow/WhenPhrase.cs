@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 
 namespace Moq.Language.Flow
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
@@ -29,33 +28,32 @@ namespace Moq.Language.Flow
     */
     sealed class WhenPhrase<T> : ISetupConditionResult<T>
         where T : class
+    /* Unmerged change from project 'Moq(netstandard2.0)'
+    Before:
+            private Mock<T> mock;
+            private Condition condition;
+    After:
+            Mock<T> mock;
+            Condition condition;
+    */
 
-        /* Unmerged change from project 'Moq(netstandard2.0)'
-        Before:
-                private Mock<T> mock;
-                private Condition condition;
-        After:
-                Mock<T> mock;
-                Condition condition;
-        */
+    /* Unmerged change from project 'Moq(netstandard2.1)'
+    Before:
+            private Mock<T> mock;
+            private Condition condition;
+    After:
+            Mock<T> mock;
+            Condition condition;
+    */
 
-        /* Unmerged change from project 'Moq(netstandard2.1)'
-        Before:
-                private Mock<T> mock;
-                private Condition condition;
-        After:
-                Mock<T> mock;
-                Condition condition;
-        */
-
-        /* Unmerged change from project 'Moq(net6.0)'
-        Before:
-                private Mock<T> mock;
-                private Condition condition;
-        After:
-                Mock<T> mock;
-                Condition condition;
-        */
+    /* Unmerged change from project 'Moq(net6.0)'
+    Before:
+            private Mock<T> mock;
+            private Condition condition;
+    After:
+            Mock<T> mock;
+            Condition condition;
+    */
     {
         Mock<T> mock;
         Condition condition;
@@ -78,7 +76,9 @@ namespace Moq.Language.Flow
             return new NonVoidSetupPhrase<T, TResult>(setup);
         }
 
-        public ISetupGetter<T, TProperty> SetupGet<TProperty>(Expression<Func<T, TProperty>> expression)
+        public ISetupGetter<T, TProperty> SetupGet<TProperty>(
+            Expression<Func<T, TProperty>> expression
+        )
         {
             var setup = Mock.SetupGet(mock, expression, this.condition);
             return new NonVoidSetupPhrase<T, TProperty>(setup);
@@ -87,7 +87,10 @@ namespace Moq.Language.Flow
         public ISetupSetter<T, TProperty> SetupSet<TProperty>(Action<T> setterExpression)
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.mock.ConstructorArguments
+            );
 
             var setup = Mock.SetupSet(mock, expression, this.condition);
             return new SetterSetupPhrase<T, TProperty>(setup);
@@ -96,7 +99,10 @@ namespace Moq.Language.Flow
         public ISetup<T> SetupSet(Action<T> setterExpression)
         {
             Guard.NotNull(setterExpression, nameof(setterExpression));
-            var expression = ExpressionReconstructor.Instance.ReconstructExpression(setterExpression, this.mock.ConstructorArguments);
+            var expression = ExpressionReconstructor.Instance.ReconstructExpression(
+                setterExpression,
+                this.mock.ConstructorArguments
+            );
 
             var setup = Mock.SetupSet(mock, expression, this.condition);
             return new VoidSetupPhrase<T>(setup);

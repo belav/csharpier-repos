@@ -29,109 +29,108 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil {
+namespace Mono.Cecil
+{
+    using System;
+    using System.Collections;
+    using Mono.Cecil.Cil;
 
-	using System;
-	using System.Collections;
+    internal sealed class FieldDefinitionCollection : CollectionBase, IReflectionVisitable
+    {
+        TypeDefinition m_container;
 
-	using Mono.Cecil.Cil;
+        public FieldDefinition this[int index]
+        {
+            get { return List[index] as FieldDefinition; }
+            set { List[index] = value; }
+        }
 
-	internal sealed class FieldDefinitionCollection : CollectionBase, IReflectionVisitable {
+        public TypeDefinition Container
+        {
+            get { return m_container; }
+        }
 
-		TypeDefinition m_container;
+        public FieldDefinitionCollection(TypeDefinition container)
+        {
+            m_container = container;
+        }
 
-		public FieldDefinition this [int index] {
-			get { return List [index] as FieldDefinition; }
-			set { List [index] = value; }
-		}
+        public void Add(FieldDefinition value)
+        {
+            Attach(value);
 
-		public TypeDefinition Container {
-			get { return m_container; }
-		}
+            List.Add(value);
+        }
 
-		public FieldDefinitionCollection (TypeDefinition container)
-		{
-			m_container = container;
-		}
+        public new void Clear()
+        {
+            foreach (FieldDefinition item in this)
+                Detach(item);
 
-		public void Add (FieldDefinition value)
-		{
-			Attach (value);
+            base.Clear();
+        }
 
-			List.Add (value);
-		}
+        public bool Contains(FieldDefinition value)
+        {
+            return List.Contains(value);
+        }
 
+        public int IndexOf(FieldDefinition value)
+        {
+            return List.IndexOf(value);
+        }
 
-		public new void Clear ()
-		{
-			foreach (FieldDefinition item in this)
-				Detach (item);
+        public void Insert(int index, FieldDefinition value)
+        {
+            Attach(value);
 
-			base.Clear ();
-		}
+            List.Insert(index, value);
+        }
 
-		public bool Contains (FieldDefinition value)
-		{
-			return List.Contains (value);
-		}
+        public void Remove(FieldDefinition value)
+        {
+            List.Remove(value);
 
-		public int IndexOf (FieldDefinition value)
-		{
-			return List.IndexOf (value);
-		}
+            Detach(value);
+        }
 
-		public void Insert (int index, FieldDefinition value)
-		{
-			Attach (value);
+        public new void RemoveAt(int index)
+        {
+            FieldDefinition item = this[index];
+            Remove(item);
+        }
 
-			List.Insert (index, value);
-		}
+        protected override void OnValidate(object o)
+        {
+            if (!(o is FieldDefinition))
+                throw new ArgumentException("Must be of type " + typeof(FieldDefinition).FullName);
+        }
 
-		public void Remove (FieldDefinition value)
-		{
-			List.Remove (value);
+        public FieldDefinition GetField(string name)
+        {
+            foreach (FieldDefinition field in this)
+                if (field.Name == name)
+                    return field;
 
-			Detach (value);
-		}
+            return null;
+        }
 
+        void Attach(MemberReference member)
+        {
+            if (member.DeclaringType != null)
+                throw new ReflectionException("Member already attached, clone it instead");
 
-		public new void RemoveAt (int index)
-		{
-			FieldDefinition item = this [index];
-			Remove (item);
-		}
+            member.DeclaringType = m_container;
+        }
 
-		protected override void OnValidate (object o)
-		{
-			if (! (o is FieldDefinition))
-				throw new ArgumentException ("Must be of type " + typeof (FieldDefinition).FullName);
-		}
+        void Detach(MemberReference member)
+        {
+            member.DeclaringType = null;
+        }
 
-		public FieldDefinition GetField (string name)
-		{
-			foreach (FieldDefinition field in this)
-				if (field.Name == name)
-					return field;
-
-			return null;
-		}
-
-		void Attach (MemberReference member)
-		{
-			if (member.DeclaringType != null)
-				throw new ReflectionException ("Member already attached, clone it instead");
-
-			member.DeclaringType = m_container;
-		}
-
-		void Detach (MemberReference member)
-		{
-			member.DeclaringType = null;
-		}
-
-		public void Accept (IReflectionVisitor visitor)
-		{
-			visitor.VisitFieldDefinitionCollection (this);
-		}
-	}
+        public void Accept(IReflectionVisitor visitor)
+        {
+            visitor.VisitFieldDefinitionCollection(this);
+        }
+    }
 }

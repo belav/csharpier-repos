@@ -14,7 +14,11 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal static class SDSUtils
     {
-        internal static Principal SearchResultToPrincipal(SearchResult sr, PrincipalContext owningContext, Type principalType)
+        internal static Principal SearchResultToPrincipal(
+            SearchResult sr,
+            PrincipalContext owningContext,
+            Type principalType
+        )
         {
             Principal p;
 
@@ -40,9 +44,11 @@ namespace System.DirectoryServices.AccountManagement
             {
                 p = GroupPrincipal.MakeGroup(owningContext);
             }
-            else if (null == principalType ||
-                         typeof(AuthenticablePrincipal) == principalType ||
-                         typeof(Principal) == principalType)
+            else if (
+                null == principalType
+                || typeof(AuthenticablePrincipal) == principalType
+                || typeof(Principal) == principalType
+            )
             {
                 if (SDSUtils.IsOfObjectClass(sr, "computer"))
                 {
@@ -74,8 +80,13 @@ namespace System.DirectoryServices.AccountManagement
             // Caller must also populate the underlyingObject field if the P is to be used R/W
             return p;
         }
+
         // Used to implement StoreCtx.GetAsPrincipal for AD and SAM
-        internal static Principal DirectoryEntryToPrincipal(DirectoryEntry de, PrincipalContext owningContext, Type principalType)
+        internal static Principal DirectoryEntryToPrincipal(
+            DirectoryEntry de,
+            PrincipalContext owningContext,
+            Type principalType
+        )
         {
             Principal p;
 
@@ -98,9 +109,11 @@ namespace System.DirectoryServices.AccountManagement
             {
                 p = GroupPrincipal.MakeGroup(owningContext);
             }
-            else if (null == principalType ||
-                         typeof(AuthenticablePrincipal) == principalType ||
-                         typeof(Principal) == principalType)
+            else if (
+                null == principalType
+                || typeof(AuthenticablePrincipal) == principalType
+                || typeof(Principal) == principalType
+            )
             {
                 if (SDSUtils.IsOfObjectClass(de, "computer"))
                 {
@@ -134,7 +147,10 @@ namespace System.DirectoryServices.AccountManagement
 
         private static bool IsOfObjectClass(SearchResult sr, string className)
         {
-            Debug.Assert(sr.Path.StartsWith("LDAP:", StringComparison.Ordinal) || sr.Path.StartsWith("GC:", StringComparison.Ordinal));
+            Debug.Assert(
+                sr.Path.StartsWith("LDAP:", StringComparison.Ordinal)
+                    || sr.Path.StartsWith("GC:", StringComparison.Ordinal)
+            );
             return ADUtils.IsOfObjectClass(sr, className);
         }
 
@@ -150,6 +166,7 @@ namespace System.DirectoryServices.AccountManagement
                 return ADUtils.IsOfObjectClass(de, className);
             }
         }
+
         internal static AuthenticationTypes MapOptionsToAuthTypes(ContextOptions options)
         {
             AuthenticationTypes authTypes = AuthenticationTypes.Secure;
@@ -172,7 +189,11 @@ namespace System.DirectoryServices.AccountManagement
             return authTypes;
         }
 
-        internal static void MoveDirectoryEntry(DirectoryEntry deToMove, DirectoryEntry newParent, string newName)
+        internal static void MoveDirectoryEntry(
+            DirectoryEntry deToMove,
+            DirectoryEntry newParent,
+            string newName
+        )
         {
             if (newName != null)
                 deToMove.MoveTo(newParent, newName);
@@ -195,12 +216,13 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         internal static void InsertPrincipal(
-                                    Principal p,
-                                    StoreCtx storeCtx,
-                                    GroupMembershipUpdater updateGroupMembership,
-                                    NetCred credentials,
-                                    AuthenticationTypes authTypes,
-                                    bool needToSetPassword)
+            Principal p,
+            StoreCtx storeCtx,
+            GroupMembershipUpdater updateGroupMembership,
+            NetCred credentials,
+            AuthenticationTypes authTypes,
+            bool needToSetPassword
+        )
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "Entering InsertPrincipal");
 
@@ -208,25 +230,33 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(storeCtx is ADStoreCtx || storeCtx is SAMStoreCtx);
             Debug.Assert(p != null);
 
-            if ((!(p is UserPrincipal)) &&
-                 (!(p is GroupPrincipal)) &&
-                 (!(p is AuthenticablePrincipal)) &&
-                 (!(p is ComputerPrincipal)))
+            if (
+                (!(p is UserPrincipal))
+                && (!(p is GroupPrincipal))
+                && (!(p is AuthenticablePrincipal))
+                && (!(p is ComputerPrincipal))
+            )
             {
                 // It's not a type of Principal that we support
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "SDSUtils", "InsertPrincipal: Bad principal type:" + p.GetType().ToString());
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "SDSUtils",
+                    "InsertPrincipal: Bad principal type:" + p.GetType().ToString()
+                );
 
-                throw new InvalidOperationException(SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForSave, p.GetType()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForSave, p.GetType())
+                );
             }
 
             // Commit the properties
             SDSUtils.ApplyChangesToDirectory(
-                                        p,
-                                        storeCtx,
-                                        updateGroupMembership,
-                                        credentials,
-                                        authTypes
-                                        );
+                p,
+                storeCtx,
+                updateGroupMembership,
+                credentials,
+                authTypes
+            );
 
             // Handle any saved-off operations
 
@@ -234,7 +264,11 @@ namespace System.DirectoryServices.AccountManagement
             // For AD, we have to set the password after creating the principal, so needToSetPassword == true
             if (needToSetPassword && p.GetChangeStatusForProperty(PropertyNames.PwdInfoPassword))
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "InsertPrincipal: Setting password");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SDSUtils",
+                    "InsertPrincipal: Setting password"
+                );
 
                 // Only AuthenticablePrincipals can have PasswordInfo
                 Debug.Assert(p is AuthenticablePrincipal);
@@ -250,29 +284,46 @@ namespace System.DirectoryServices.AccountManagement
                 // Only AuthenticablePrincipals can have PasswordInfo
                 Debug.Assert(p is AuthenticablePrincipal);
 
-                bool expireImmediately = (bool)p.GetValueForProperty(PropertyNames.PwdInfoExpireImmediately);
+                bool expireImmediately = (bool)
+                    p.GetValueForProperty(PropertyNames.PwdInfoExpireImmediately);
 
                 if (expireImmediately)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "InsertPrincipal: Setting pwd expired");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SDSUtils",
+                        "InsertPrincipal: Setting pwd expired"
+                    );
 
                     storeCtx.ExpirePassword((AuthenticablePrincipal)p);
                 }
             }
         }
 
-        internal delegate void GroupMembershipUpdater(Principal p, DirectoryEntry de, NetCred credentials, AuthenticationTypes authTypes);
+        internal delegate void GroupMembershipUpdater(
+            Principal p,
+            DirectoryEntry de,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        );
 
         internal static void ApplyChangesToDirectory(
-                                                Principal p,
-                                                StoreCtx storeCtx,
-                                                GroupMembershipUpdater updateGroupMembership,
-                                                NetCred credentials,
-                                                AuthenticationTypes authTypes)
+            Principal p,
+            StoreCtx storeCtx,
+            GroupMembershipUpdater updateGroupMembership,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "Entering ApplyChangesToDirectory");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SDSUtils",
+                "Entering ApplyChangesToDirectory"
+            );
             Debug.Assert(storeCtx != null);
-            Debug.Assert(storeCtx is ADStoreCtx || storeCtx is SAMStoreCtx || storeCtx is ADAMStoreCtx);
+            Debug.Assert(
+                storeCtx is ADStoreCtx || storeCtx is SAMStoreCtx || storeCtx is ADAMStoreCtx
+            );
             Debug.Assert(p != null);
             Debug.Assert(updateGroupMembership != null);
 
@@ -288,14 +339,22 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "SDSUtils", "ApplyChangesToDirectory: caught COMException with message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SDSUtils",
+                    "ApplyChangesToDirectory: caught COMException with message " + e.Message
+                );
 
                 throw (ExceptionHelper.GetExceptionFromCOMException(e));
             }
 
             if ((p is GroupPrincipal) && (p.GetChangeStatusForProperty(PropertyNames.GroupMembers)))
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "ApplyChangesToDirectory: Updating group membership");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SDSUtils",
+                    "ApplyChangesToDirectory: Updating group membership"
+                );
 
                 // It's a group, and it's membership has changed.  Commit those membership changes.
                 // Note that this is an immediate operation, because it goes through IADsGroup,
@@ -306,7 +365,7 @@ namespace System.DirectoryServices.AccountManagement
 
         internal static void SetPassword(DirectoryEntry de, string newPassword)
         {
-            Debug.Assert(newPassword != null);  // but it could be an empty string
+            Debug.Assert(newPassword != null); // but it could be an empty string
             Debug.Assert(de != null);
 
             try
@@ -315,19 +374,37 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (System.Reflection.TargetInvocationException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "SDSUtils", "SetPassword: caught TargetInvocationException with message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SDSUtils",
+                    "SetPassword: caught TargetInvocationException with message " + e.Message
+                );
 
                 if (e.InnerException is System.Runtime.InteropServices.COMException)
                 {
-                    if (((System.Runtime.InteropServices.COMException)e.InnerException).ErrorCode == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION))
+                    if (
+                        ((System.Runtime.InteropServices.COMException)e.InnerException).ErrorCode
+                        == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION)
+                    )
                     {
                         // We have a special case of constraint violation here.  We know this is a password failure to convert to this
                         // specialized type instead of the generic InvalidOperationException
-                        throw (new PasswordException(((System.Runtime.InteropServices.COMException)e.InnerException).Message, (System.Runtime.InteropServices.COMException)e.InnerException));
+                        throw (
+                            new PasswordException(
+                                (
+                                    (System.Runtime.InteropServices.COMException)e.InnerException
+                                ).Message,
+                                (System.Runtime.InteropServices.COMException)e.InnerException
+                            )
+                        );
                     }
                     else
                     {
-                        throw (ExceptionHelper.GetExceptionFromCOMException((System.Runtime.InteropServices.COMException)e.InnerException));
+                        throw (
+                            ExceptionHelper.GetExceptionFromCOMException(
+                                (System.Runtime.InteropServices.COMException)e.InnerException
+                            )
+                        );
                     }
                 }
 
@@ -336,10 +413,14 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        internal static void ChangePassword(DirectoryEntry de, string oldPassword, string newPassword)
+        internal static void ChangePassword(
+            DirectoryEntry de,
+            string oldPassword,
+            string newPassword
+        )
         {
-            Debug.Assert(newPassword != null);  // but it could be an empty string
-            Debug.Assert(oldPassword != null);  // but it could be an empty string
+            Debug.Assert(newPassword != null); // but it could be an empty string
+            Debug.Assert(oldPassword != null); // but it could be an empty string
 
             Debug.Assert(de != null);
 
@@ -349,19 +430,37 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (System.Reflection.TargetInvocationException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "SDSUtils", "ChangePassword: caught TargetInvocationException with message " + e.Message);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SDSUtils",
+                    "ChangePassword: caught TargetInvocationException with message " + e.Message
+                );
 
                 if (e.InnerException is System.Runtime.InteropServices.COMException)
                 {
-                    if (((System.Runtime.InteropServices.COMException)e.InnerException).ErrorCode == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION))
+                    if (
+                        ((System.Runtime.InteropServices.COMException)e.InnerException).ErrorCode
+                        == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION)
+                    )
                     {
                         // We have a special case of constraint violation here.  We know this is a password failure to convert to this
                         // specialized type instead of the generic InvalidOperationException
-                        throw (new PasswordException(((System.Runtime.InteropServices.COMException)e.InnerException).Message, (System.Runtime.InteropServices.COMException)e.InnerException));
+                        throw (
+                            new PasswordException(
+                                (
+                                    (System.Runtime.InteropServices.COMException)e.InnerException
+                                ).Message,
+                                (System.Runtime.InteropServices.COMException)e.InnerException
+                            )
+                        );
                     }
                     else
                     {
-                        throw (ExceptionHelper.GetExceptionFromCOMException((System.Runtime.InteropServices.COMException)e.InnerException));
+                        throw (
+                            ExceptionHelper.GetExceptionFromCOMException(
+                                (System.Runtime.InteropServices.COMException)e.InnerException
+                            )
+                        );
                     }
                 }
 
@@ -370,19 +469,32 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        internal static DirectoryEntry BuildDirectoryEntry(string path, NetCred credentials, AuthenticationTypes authTypes)
+        internal static DirectoryEntry BuildDirectoryEntry(
+            string path,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
-            DirectoryEntry de = new DirectoryEntry(path,
-                                                   credentials?.UserName,
-                                                   credentials?.Password,
-                                                   authTypes);
+            DirectoryEntry de = new DirectoryEntry(
+                path,
+                credentials?.UserName,
+                credentials?.Password,
+                authTypes
+            );
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "BuildDirectoryEntry (1): built DE for  " + de.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SDSUtils",
+                "BuildDirectoryEntry (1): built DE for  " + de.Path
+            );
 
             return de;
         }
 
-        internal static DirectoryEntry BuildDirectoryEntry(NetCred credentials, AuthenticationTypes authTypes)
+        internal static DirectoryEntry BuildDirectoryEntry(
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
             DirectoryEntry de = new DirectoryEntry();
 
@@ -390,12 +502,22 @@ namespace System.DirectoryServices.AccountManagement
             de.Password = credentials?.Password;
             de.AuthenticationType = authTypes;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SDSUtils", "BuildDirectoryEntry (2): built DE");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SDSUtils",
+                "BuildDirectoryEntry (2): built DE"
+            );
 
             return de;
         }
 
-        internal static void WriteAttribute<T>(string dePath, string attribute, T value, NetCred credentials, AuthenticationTypes authTypes)
+        internal static void WriteAttribute<T>(
+            string dePath,
+            string attribute,
+            T value,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
             Debug.Assert(attribute != null && attribute.Length > 0);
 
@@ -429,15 +551,22 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        internal static void WriteAttribute(string dePath, string attribute, int value, NetCred credentials, AuthenticationTypes authTypes)
+        internal static void WriteAttribute(
+            string dePath,
+            string attribute,
+            int value,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
             GlobalDebug.WriteLineIf(
-                        GlobalDebug.Info,
-                        "SDSUtils",
-                        "WriteAttribute: writing {0} to {1} on {2}",
-                        value.ToString(CultureInfo.InvariantCulture),
-                        attribute,
-                        dePath);
+                GlobalDebug.Info,
+                "SDSUtils",
+                "WriteAttribute: writing {0} to {1} on {2}",
+                value.ToString(CultureInfo.InvariantCulture),
+                attribute,
+                dePath
+            );
 
             Debug.Assert(attribute != null && attribute.Length > 0);
 
@@ -463,13 +592,14 @@ namespace System.DirectoryServices.AccountManagement
             catch (System.Runtime.InteropServices.COMException e)
             {
                 GlobalDebug.WriteLineIf(
-                            GlobalDebug.Error,
-                            "SDSUtils",
-                            "WriteAttribute: caught exception with message '{0}' writing {1} to {2} on {3}",
-                            e.Message,
-                            value.ToString(CultureInfo.InvariantCulture),
-                            attribute,
-                            dePath);
+                    GlobalDebug.Error,
+                    "SDSUtils",
+                    "WriteAttribute: caught exception with message '{0}' writing {1} to {2} on {3}",
+                    e.Message,
+                    value.ToString(CultureInfo.InvariantCulture),
+                    attribute,
+                    dePath
+                );
 
                 // ADSI threw an exception trying to write the change
                 throw ExceptionHelper.GetExceptionFromCOMException(e);
@@ -483,9 +613,17 @@ namespace System.DirectoryServices.AccountManagement
         //
         // S.DS (LDAP or WinNT) --> PAPI conversion routines
         //
-        internal static void SingleScalarFromDirectoryEntry<T>(dSPropertyCollection properties, string suggestedProperty, Principal p, string propertyName)
+        internal static void SingleScalarFromDirectoryEntry<T>(
+            dSPropertyCollection properties,
+            string suggestedProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            if (properties[suggestedProperty].Count != 0 && properties[suggestedProperty][0] != null)
+            if (
+                properties[suggestedProperty].Count != 0
+                && properties[suggestedProperty][0] != null
+            )
             {
                 // We're intended to handle single-valued scalar properties
                 Debug.Assert(properties[suggestedProperty].Count == 1);
@@ -495,7 +633,12 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        internal static void MultiScalarFromDirectoryEntry<T>(dSPropertyCollection properties, string suggestedProperty, Principal p, string propertyName)
+        internal static void MultiScalarFromDirectoryEntry<T>(
+            dSPropertyCollection properties,
+            string suggestedProperty,
+            Principal p,
+            string propertyName
+        )
         {
             dSPropertyValueCollection values = properties[suggestedProperty];
 
@@ -558,21 +701,55 @@ namespace System.DirectoryServices.AccountManagement
                     break;
 
                 default:
-                    Debug.Fail("SDSUtils.AccountControlFromDirectoryEntry: Fell off end looking for " + propertyName);
+                    Debug.Fail(
+                        "SDSUtils.AccountControlFromDirectoryEntry: Fell off end looking for "
+                            + propertyName
+                    );
                     flag = false;
                     break;
             }
 
             return flag;
         }
-        internal static void AccountControlFromDirectoryEntry(dSPropertyCollection properties, string suggestedProperty, Principal p, string propertyName, bool testCantChangePassword)
+
+        internal static void AccountControlFromDirectoryEntry(
+            dSPropertyCollection properties,
+            string suggestedProperty,
+            Principal p,
+            string propertyName,
+            bool testCantChangePassword
+        )
         {
             Debug.Assert(
-                (!testCantChangePassword && (string.Equals(suggestedProperty, "userAccountControl", StringComparison.OrdinalIgnoreCase))) ||
-                (testCantChangePassword && (string.Equals(suggestedProperty, "UserFlags", StringComparison.OrdinalIgnoreCase)))
-                );
+                (
+                    !testCantChangePassword
+                    && (
+                        string.Equals(
+                            suggestedProperty,
+                            "userAccountControl",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                    || (
+                        testCantChangePassword
+                        && (
+                            string.Equals(
+                                suggestedProperty,
+                                "UserFlags",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
+            );
 
-            Debug.Assert(!string.Equals(propertyName, PropertyNames.PwdInfoCannotChangePassword, StringComparison.OrdinalIgnoreCase) || testCantChangePassword);
+            Debug.Assert(
+                !string.Equals(
+                    propertyName,
+                    PropertyNames.PwdInfoCannotChangePassword,
+                    StringComparison.OrdinalIgnoreCase
+                ) || testCantChangePassword
+            );
 
             dSPropertyValueCollection values = properties[suggestedProperty];
 
@@ -594,9 +771,15 @@ namespace System.DirectoryServices.AccountManagement
         // PAPI --> S.DS (LDAP or WinNT) conversion routines
         //
 
-        internal static void MultiStringToDirectoryEntryConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedProperty)
+        internal static void MultiStringToDirectoryEntryConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedProperty
+        )
         {
-            PrincipalValueCollection<string> trackingList = (PrincipalValueCollection<string>)p.GetValueForProperty(propertyName);
+            PrincipalValueCollection<string> trackingList =
+                (PrincipalValueCollection<string>)p.GetValueForProperty(propertyName);
 
             if (p.unpersisted && trackingList == null)
                 return;
@@ -619,7 +802,7 @@ namespace System.DirectoryServices.AccountManagement
             foreach (Pair<string, string> changedValue in changedValues)
             {
                 // Remove the original value and add in the new value
-                Debug.Assert(changedValue.Left != null);    // since it came from the system
+                Debug.Assert(changedValue.Left != null); // since it came from the system
                 properties.Remove(changedValue.Left);
 
                 if (changedValue.Right != null && !properties.Contains(changedValue.Right))
@@ -633,22 +816,41 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        internal const int AD_DefaultUAC = (int)(0x200 | 0X20 | 0x2);  // UF_NORMAL_ACCOUNT  | UF_PASSWD_NOTREQD | UF_ACCOUNTDISABLE
-        internal const int AD_DefaultUAC_Machine = (int)(0x1000 | 0X20 | 0x2);  // UF_WORKSTATION_TRUST_ACCOUNT | UF_PASSWD_NOTREQD | UF_ACCOUNTDISABLE
-        internal const int SAM_DefaultUAC = (int)(0x200 | 0x1);        // UF_NORMAL_ACCOUNT | UF_SCRIPT
+        internal const int AD_DefaultUAC = (int)(0x200 | 0X20 | 0x2); // UF_NORMAL_ACCOUNT  | UF_PASSWD_NOTREQD | UF_ACCOUNTDISABLE
+        internal const int AD_DefaultUAC_Machine = (int)(0x1000 | 0X20 | 0x2); // UF_WORKSTATION_TRUST_ACCOUNT | UF_PASSWD_NOTREQD | UF_ACCOUNTDISABLE
+        internal const int SAM_DefaultUAC = (int)(0x200 | 0x1); // UF_NORMAL_ACCOUNT | UF_SCRIPT
 
         internal static void AccountControlToDirectoryEntry(
-                                        Principal p,
-                                        string propertyName,
-                                        DirectoryEntry de,
-                                        string suggestedProperty,
-                                        bool isSAM,
-                                        bool isUnpersisted)
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedProperty,
+            bool isSAM,
+            bool isUnpersisted
+        )
         {
             Debug.Assert(
-                (!isSAM && (string.Equals(suggestedProperty, "userAccountControl", StringComparison.OrdinalIgnoreCase))) ||
-                (isSAM && (string.Equals(suggestedProperty, "UserFlags", StringComparison.OrdinalIgnoreCase)))
-                );
+                (
+                    !isSAM
+                    && (
+                        string.Equals(
+                            suggestedProperty,
+                            "userAccountControl",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+                    || (
+                        isSAM
+                        && (
+                            string.Equals(
+                                suggestedProperty,
+                                "UserFlags",
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
+            );
 
             bool flag = (bool)p.GetValueForProperty(propertyName);
 
@@ -676,7 +878,8 @@ namespace System.DirectoryServices.AccountManagement
                 // to it.  In that case, we don't want to blindly overwrite whatever other bits might be there.
                 Debug.Assert(p.unpersisted == false);
                 throw new PrincipalOperationException(
-                                SR.ADStoreCtxUnableToReadExistingAccountControlFlagsForUpdate);
+                    SR.ADStoreCtxUnableToReadExistingAccountControlFlagsForUpdate
+                );
             }
 
             uint bitmask;
@@ -743,14 +946,18 @@ namespace System.DirectoryServices.AccountManagement
                     else
                     {
                         Debug.Fail(
-                            "SDSUtils.AccountControlToDirectoryEntry: At PwdInfoCannotChangePassword but isSAM==false, path=" + de.Path
-                            );
+                            "SDSUtils.AccountControlToDirectoryEntry: At PwdInfoCannotChangePassword but isSAM==false, path="
+                                + de.Path
+                        );
 
                         goto default;
                     }
 
                 default:
-                    Debug.Fail("SDSUtils.AccountControlToDirectoryEntry: Fell off end looking for " + propertyName);
+                    Debug.Fail(
+                        "SDSUtils.AccountControlToDirectoryEntry: Fell off end looking for "
+                            + propertyName
+                    );
                     bitmask = 0;
                     break;
             }
@@ -787,8 +994,14 @@ namespace System.DirectoryServices.AccountManagement
             // Reassemble the RDNs (minus the tag) into the DNS domain name
             foreach (string component in ncComponents)
             {
-                if ((component.Length > 3) &&
-                    string.Equals(component.Substring(0, 3), "DC=", StringComparison.OrdinalIgnoreCase))
+                if (
+                    (component.Length > 3)
+                    && string.Equals(
+                        component.Substring(0, 3),
+                        "DC=",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     sb.Append(component, 3, component.Length - 3);
                     sb.Append('.');

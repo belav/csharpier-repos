@@ -25,7 +25,10 @@ namespace System.ServiceModel.Administration
             this.service = service;
             this.behaviors = service.Description.Behaviors;
             this.serviceName = service.Description.Name;
-            this.endpoints = new EndpointInfoCollection(service.Description.Endpoints, this.ServiceName);
+            this.endpoints = new EndpointInfoCollection(
+                service.Description.Endpoints,
+                this.ServiceName
+            );
         }
 
         public string ConfigurationName
@@ -78,34 +81,22 @@ namespace System.ServiceModel.Administration
 
         public ServiceHostBase Service
         {
-            get
-            {
-                return this.service;
-            }
+            get { return this.service; }
         }
 
         public KeyedByTypeCollection<IServiceBehavior> Behaviors
         {
-            get
-            {
-                return this.behaviors;
-            }
+            get { return this.behaviors; }
         }
 
         public CommunicationState State
         {
-            get
-            {
-                return this.Service.State;
-            }
+            get { return this.Service.State; }
         }
 
         public EndpointInfoCollection Endpoints
         {
-            get
-            {
-                return this.endpoints;
-            }
+            get { return this.endpoints; }
         }
 
         public string[] Metadata
@@ -113,26 +104,38 @@ namespace System.ServiceModel.Administration
             get
             {
                 string[] result = null;
-                ServiceMetadataExtension metadataExtension = service.Extensions.Find<ServiceMetadataExtension>();
+                ServiceMetadataExtension metadataExtension =
+                    service.Extensions.Find<ServiceMetadataExtension>();
                 if (null != metadataExtension)
                 {
                     Collection<string> metadataStrings = new Collection<string>();
                     try
                     {
-                        foreach (MetadataSection section in metadataExtension.Metadata.MetadataSections)
+                        foreach (
+                            MetadataSection section in metadataExtension.Metadata.MetadataSections
+                        )
                         {
                             using (StringWriter sw = new StringWriter(CultureInfo.InvariantCulture))
                             {
-                                if (section.Metadata is System.Web.Services.Description.ServiceDescription)
+                                if (
+                                    section.Metadata
+                                    is System.Web.Services.Description.ServiceDescription
+                                )
                                 {
-                                    System.Web.Services.Description.ServiceDescription metadata = (System.Web.Services.Description.ServiceDescription)section.Metadata;
+                                    System.Web.Services.Description.ServiceDescription metadata =
+                                        (System.Web.Services.Description.ServiceDescription)
+                                            section.Metadata;
                                     metadata.Write(sw);
                                     metadataStrings.Add(sw.ToString());
                                 }
                                 else if (section.Metadata is System.Xml.XmlElement)
                                 {
-                                    System.Xml.XmlElement metadata = (System.Xml.XmlElement)section.Metadata;
-                                    using (System.Xml.XmlWriter xmlWriter = System.Xml.XmlWriter.Create(sw))
+                                    System.Xml.XmlElement metadata = (System.Xml.XmlElement)
+                                        section.Metadata;
+                                    using (
+                                        System.Xml.XmlWriter xmlWriter =
+                                            System.Xml.XmlWriter.Create(sw)
+                                    )
                                     {
                                         metadata.WriteTo(xmlWriter);
                                         metadataStrings.Add(sw.ToString());
@@ -140,7 +143,8 @@ namespace System.ServiceModel.Administration
                                 }
                                 else if (section.Metadata is System.Xml.Schema.XmlSchema)
                                 {
-                                    System.Xml.Schema.XmlSchema metadata = (System.Xml.Schema.XmlSchema)section.Metadata;
+                                    System.Xml.Schema.XmlSchema metadata =
+                                        (System.Xml.Schema.XmlSchema)section.Metadata;
                                     metadata.Write(sw);
                                     metadataStrings.Add(sw.ToString());
                                 }
@@ -148,7 +152,6 @@ namespace System.ServiceModel.Administration
                                 {
                                     metadataStrings.Add(section.Metadata.ToString());
                                 }
-
                             }
                         }
                     }

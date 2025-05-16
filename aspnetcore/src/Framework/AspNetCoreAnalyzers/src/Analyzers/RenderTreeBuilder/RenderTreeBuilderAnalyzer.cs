@@ -16,7 +16,8 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
 {
     private const int SequenceParameterOrdinal = 0;
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        ImmutableArray.Create(DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -27,37 +28,55 @@ public partial class RenderTreeBuilderAnalyzer : DiagnosticAnalyzer
             var compilation = context.Compilation;
             var wellKnownTypes = WellKnownTypes.GetOrCreate(compilation);
 
-            context.RegisterOperationAction(context =>
-            {
-                var invocation = (IInvocationOperation)context.Operation;
-
-                if (!IsRenderTreeBuilderMethodWithSequenceParameter(wellKnownTypes, invocation.TargetMethod))
+            context.RegisterOperationAction(
+                context =>
                 {
-                    return;
-                }
+                    var invocation = (IInvocationOperation)context.Operation;
 
-                foreach (var argument in invocation.Arguments)
-                {
-                    if (argument.Parameter?.Ordinal == SequenceParameterOrdinal)
+                    if (
+                        !IsRenderTreeBuilderMethodWithSequenceParameter(
+                            wellKnownTypes,
+                            invocation.TargetMethod
+                        )
+                    )
                     {
-                        if (!argument.Value.Syntax.IsKind(SyntaxKind.NumericLiteralExpression))
-                        {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers,
-                                argument.Syntax.GetLocation(),
-                                argument.Syntax.ToString()));
-                        }
-
-                        break;
+                        return;
                     }
-                }
 
-            }, OperationKind.Invocation);
+                    foreach (var argument in invocation.Arguments)
+                    {
+                        if (argument.Parameter?.Ordinal == SequenceParameterOrdinal)
+                        {
+                            if (!argument.Value.Syntax.IsKind(SyntaxKind.NumericLiteralExpression))
+                            {
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        DiagnosticDescriptors.DoNotUseNonLiteralSequenceNumbers,
+                                        argument.Syntax.GetLocation(),
+                                        argument.Syntax.ToString()
+                                    )
+                                );
+                            }
+
+                            break;
+                        }
+                    }
+                },
+                OperationKind.Invocation
+            );
         });
     }
 
-    private static bool IsRenderTreeBuilderMethodWithSequenceParameter(WellKnownTypes wellKnownTypes, IMethodSymbol targetMethod)
-        => SymbolEqualityComparer.Default.Equals(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder), targetMethod.ContainingType)
+    private static bool IsRenderTreeBuilderMethodWithSequenceParameter(
+        WellKnownTypes wellKnownTypes,
+        IMethodSymbol targetMethod
+    ) =>
+        SymbolEqualityComparer.Default.Equals(
+            wellKnownTypes.Get(
+                WellKnownType.Microsoft_AspNetCore_Components_Rendering_RenderTreeBuilder
+            ),
+            targetMethod.ContainingType
+        )
         && targetMethod.Parameters.Length > SequenceParameterOrdinal
         && targetMethod.Parameters[SequenceParameterOrdinal].Name == "sequence";
 }

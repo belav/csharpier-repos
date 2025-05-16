@@ -6,14 +6,14 @@ using System.Runtime.CompilerServices;
 
 public class HelperClass
 {
-    // This method is used to test whether or not a method from a separate module 
+    // This method is used to test whether or not a method from a separate module
     // referenced via Delegate is handled correctly. Do not call this method directly.
     public static void DelegateReferencedMethod()
     {
         Console.WriteLine("In helper method");
     }
 
-    // This method is used to test whether or not a method from a separate module 
+    // This method is used to test whether or not a method from a separate module
     // referenced as a function pointer is handled correctly. Do not call this method directly
     public static void FunctionPointerReferencedMethod()
     {
@@ -27,21 +27,18 @@ public class HelperClass
 public interface IGenericWithSealedDefaultMethodAcrossModule<T>
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    sealed
-    string Method()
+    sealed string Method()
     {
         Type t = typeof(T);
         return t.FullName;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    sealed
-    string GenericMethod<V>()
+    sealed string GenericMethod<V>()
     {
         Type t = typeof(V);
         return t.FullName;
     }
-
 }
 
 public struct GenericStructForLdtoken<T>
@@ -58,7 +55,12 @@ public struct GenericStructForLdtoken<T>
         return inputIntValue;
     }
 
-    public int GenericFunction<V>(T genericValue, V genericMethodValue, string toStringResult, int inputIntValue)
+    public int GenericFunction<V>(
+        T genericValue,
+        V genericMethodValue,
+        string toStringResult,
+        int inputIntValue
+    )
     {
         if (!((object)genericValue).Equals(_value))
             return 0;

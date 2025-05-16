@@ -16,19 +16,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class CodeGenAsyncSpillTests : EmitMetadataTestBase
     {
-        public CodeGenAsyncSpillTests()
-        {
-        }
+        public CodeGenAsyncSpillTests() { }
 
-        private CompilationVerifier CompileAndVerify(string source, string expectedOutput = null, IEnumerable<MetadataReference> references = null, CSharpCompilationOptions options = null)
+        private CompilationVerifier CompileAndVerify(
+            string source,
+            string expectedOutput = null,
+            IEnumerable<MetadataReference> references = null,
+            CSharpCompilationOptions options = null
+        )
         {
-            return base.CompileAndVerify(source, expectedOutput: expectedOutput, references: references, options: options);
+            return base.CompileAndVerify(
+                source,
+                expectedOutput: expectedOutput,
+                references: references,
+                options: options
+            );
         }
 
         [Fact]
         public void AsyncWithTernary()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -63,7 +72,8 @@ class Test
         Console.WriteLine(H(true, true));
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 F(2)
 F(10)
 10
@@ -83,7 +93,8 @@ F(5)
         [Fact]
         public void AsyncWithAnd()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -121,7 +132,8 @@ class Test
         Console.WriteLine(H(false, true));
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 F(True)
 F(False)
 F(4)
@@ -133,7 +145,8 @@ F(4)
         [Fact]
         public void AsyncWithOr()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -171,7 +184,8 @@ class Test
         Console.WriteLine(H(false, true));
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 F(True)
 F(False)
 F(13)
@@ -183,7 +197,8 @@ F(13)
         [Fact]
         public void AsyncWithCoalesce()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -217,7 +232,8 @@ class Test
         H(""c"", ""d"");
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 F(null)
 F(null)
  null
@@ -235,7 +251,8 @@ F(c)
         [Fact]
         public void AwaitInExpr()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -260,7 +277,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -269,7 +287,8 @@ class Test
         [Fact]
         public void SpillNestedUnary()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -308,7 +327,8 @@ class Test
         WaitAndPrint(G3());
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 -1
 1
 -1
@@ -319,7 +339,8 @@ class Test
         [Fact]
         public void AsyncWithParamsAndLocals_DoubleAwait_Spilling()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -345,7 +366,8 @@ class Test
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             // When the local 'c' gets hoisted, the statement:
@@ -375,7 +397,8 @@ class Test
         [Fact]
         public void SpillCall()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -412,7 +435,8 @@ class Test
         t.Wait();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 > 111
 > 222
 > 333
@@ -430,7 +454,8 @@ class Test
         [Fact]
         public void SpillCall2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -467,7 +492,8 @@ class Test
         t.Wait();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 > 111
 > 222
 > 333
@@ -485,7 +511,8 @@ class Test
         [Fact]
         public void SpillCall3()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -516,7 +543,8 @@ class Test
         t.Wait();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 1
 2
 3
@@ -530,7 +558,8 @@ class Test
         [Fact]
         public void SpillCall4()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -561,7 +590,8 @@ class Test
         t.Wait();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 1
 2
 ";
@@ -571,7 +601,8 @@ class Test
         [Fact]
         public void SpillSequences1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 public class Test
@@ -595,8 +626,9 @@ public class Test
 ";
             var v = CompileAndVerify(source, options: TestOptions.DebugDll);
 
-            v.VerifyIL("Test.<F>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
-@"{
+            v.VerifyIL(
+                "Test.<F>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"{
   // Code size      273 (0x111)
   .maxstack  5
   .locals init (int V_0,
@@ -728,13 +760,16 @@ public class Test
   IL_010a:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_010f:  nop
   IL_0110:  ret
-}", sequencePoints: "Test+<F>d__2.MoveNext");
+}",
+                sequencePoints: "Test+<F>d__2.MoveNext"
+            );
         }
 
         [Fact]
         public void SpillSequencesRelease()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 public class Test
@@ -758,7 +793,9 @@ public class Test
 ";
             var v = CompileAndVerify(source, options: TestOptions.ReleaseDll);
 
-            v.VerifyIL("Test.<F>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            v.VerifyIL(
+                "Test.<F>d__2.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      251 (0xfb)
   .maxstack  5
@@ -881,13 +918,16 @@ public class Test
   IL_00f4:  ldloc.1
   IL_00f5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00fa:  ret
-}", sequencePoints: "Test+<F>d__2.MoveNext");
+}",
+                sequencePoints: "Test+<F>d__2.MoveNext"
+            );
         }
 
         [Fact]
         public void SpillSequencesInConditionalExpression1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 public class Test
@@ -915,7 +955,8 @@ public class Test
         [Fact]
         public void SpillSequencesInNullCoalescingOperator1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -942,46 +983,64 @@ public class C
     }
 }
 ";
-            CompileAndVerify(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-            {
-                AssertEx.Equal(new[]
+            CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                symbolValidator: module =>
                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "array",
-                    "<>7__wrap1",
-                    "<>7__wrap2",
-                    "<>u__1",
-                    "<>7__wrap3",
-                    "<>7__wrap4",
-                }, module.GetFieldNames("C.<F>d__3"));
-            });
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>t__builder",
+                            "array",
+                            "<>7__wrap1",
+                            "<>7__wrap2",
+                            "<>u__1",
+                            "<>7__wrap3",
+                            "<>7__wrap4",
+                        },
+                        module.GetFieldNames("C.<F>d__3")
+                    );
+                }
+            );
 
-            CompileAndVerify(source, verify: Verification.Passes, options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All), symbolValidator: module =>
-             {
-                 AssertEx.Equal(new[]
-                 {
-                    "<>1__state",
-                    "<>t__builder",
-                    "array",
-                    "<>s__1",
-                    "<>s__2",
-                    "<>s__3",
-                    "<>s__4",
-                    "<>s__5",
-                    "<>s__6",
-                    "<>s__7",
-                    "<>u__1",
-                    "<>s__8"
-                 }, module.GetFieldNames("C.<F>d__3"));
-             });
+            CompileAndVerify(
+                source,
+                verify: Verification.Passes,
+                options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                symbolValidator: module =>
+                {
+                    AssertEx.Equal(
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>t__builder",
+                            "array",
+                            "<>s__1",
+                            "<>s__2",
+                            "<>s__3",
+                            "<>s__4",
+                            "<>s__5",
+                            "<>s__6",
+                            "<>s__7",
+                            "<>u__1",
+                            "<>s__8",
+                        },
+                        module.GetFieldNames("C.<F>d__3")
+                    );
+                }
+            );
         }
 
         [WorkItem(4628, "https://github.com/dotnet/roslyn/issues/4628")]
         [Fact]
         public void AsyncWithShortCircuiting001()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -999,7 +1058,8 @@ namespace AsyncConditionalBug {
     }
   }
 }";
-            var expected = @"
+            var expected =
+                @"
 False
 True
 ";
@@ -1010,7 +1070,8 @@ True
         [Fact]
         public void AsyncWithShortCircuiting002()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1028,7 +1089,8 @@ namespace AsyncConditionalBug {
     }
   }
 }";
-            var expected = @"
+            var expected =
+                @"
 False
 True
 ";
@@ -1039,7 +1101,8 @@ True
         [Fact]
         public void AsyncWithShortCircuiting003()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1061,7 +1124,8 @@ namespace AsyncConditionalBug
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 hello
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -1071,7 +1135,8 @@ hello
         [Fact]
         public void AsyncWithShortCircuiting004()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1105,7 +1170,8 @@ namespace AsyncConditionalBug
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 Not Valid!
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -1114,7 +1180,8 @@ Not Valid!
         [Fact]
         public void SpillSequencesInLogicalBinaryOperator1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 public class Test
@@ -1147,7 +1214,8 @@ public class Test
         [Fact]
         public void SpillArray01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1218,7 +1286,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1227,7 +1296,8 @@ class Driver
         [Fact]
         public void SpillArray02_1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1276,7 +1346,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1285,7 +1356,8 @@ class Driver
         [Fact]
         public void SpillArray02_2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1336,7 +1408,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1345,7 +1418,8 @@ class Driver
         [Fact]
         public void SpillArray02_3()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1397,7 +1471,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1406,7 +1481,8 @@ class Driver
         [Fact]
         public void SpillArray02_4()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1457,7 +1533,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1466,7 +1543,8 @@ class Driver
         [Fact]
         public void SpillArray02_5()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1522,7 +1600,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1531,7 +1610,8 @@ class Driver
         [Fact]
         public void SpillArray02_6()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1582,7 +1662,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1591,7 +1672,8 @@ class Driver
         [Fact]
         public void SpillArray03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1662,7 +1744,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1671,7 +1754,8 @@ class Driver
         [Fact]
         public void SpillArray04()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading;
 using System.Threading.Tasks;
 using System;
@@ -1729,7 +1813,8 @@ class Driver
         [Fact]
         public void SpillArrayAssign()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1749,7 +1834,8 @@ class TestCase
         Console.WriteLine(arr[0]);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -1759,7 +1845,8 @@ class TestCase
         [Fact]
         public void SpillArrayAssign2()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -1815,7 +1902,8 @@ class Program
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 test not awaited
 hello
 exception thrown
@@ -1830,7 +1918,8 @@ exception thrown
         [Fact]
         public void SpillArrayLocal()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1881,7 +1970,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -1890,7 +1980,8 @@ class Driver
         [Fact]
         public void SpillArrayCompoundAssignmentLValue()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1911,7 +2002,8 @@ class Driver
         Console.WriteLine(arr[0]);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -1920,7 +2012,8 @@ class Driver
         [Fact]
         public void SpillArrayCompoundAssignmentLValueAwait()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1941,7 +2034,8 @@ class Driver
         Console.WriteLine(arr[0]);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -1950,7 +2044,8 @@ class Driver
         [Fact]
         public void SpillArrayCompoundAssignmentLValueAwait2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -1981,7 +2076,8 @@ class Driver
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -1990,7 +2086,8 @@ class Driver
         [Fact]
         public void DoubleSpillArrayCompoundAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2021,7 +2118,8 @@ class Driver
         Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -2030,7 +2128,8 @@ class Driver
         [Fact]
         public void SpillArrayInitializers1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2099,7 +2198,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -2108,7 +2208,8 @@ class Driver
         [Fact]
         public void SpillArrayInitializers2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2168,7 +2269,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected);
@@ -2177,7 +2279,8 @@ class Driver
         [Fact]
         public void SpillArrayInitializers3()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2246,7 +2349,8 @@ class Driver
         Console.WriteLine(Driver.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expected, references: new[] { CSharpRef });
@@ -2255,7 +2359,8 @@ class Driver
         [Fact]
         public void SpillNestedExpressionInArrayInitializer()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2278,7 +2383,8 @@ class Test
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 1
 2
 42
@@ -2289,7 +2395,8 @@ class Test
         [Fact]
         public void SpillConditionalAccess()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -2328,7 +2435,8 @@ class Test
         System.Console.WriteLine(t.Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 > 42
 42";
             CompileAndVerify(source, expected);
@@ -2337,7 +2445,8 @@ class Test
         [Fact]
         public void AssignToAwait()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2370,7 +2479,8 @@ class Driver
         Test.Run().Wait();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -2379,7 +2489,8 @@ class Driver
         [Fact]
         public void AssignAwaitToAwait()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2411,7 +2522,8 @@ class Driver
         Test.Run().Wait();
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 42
 ";
             CompileAndVerify(source, expected);
@@ -2420,7 +2532,8 @@ class Driver
         [ConditionalFact(typeof(DesktopOnly))]
         public void SpillArglist()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -2474,7 +2587,8 @@ class Driver
         Console.WriteLine(Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 1
 2
 0
@@ -2485,7 +2599,8 @@ class Driver
         [Fact]
         public void SpillObjectInitializer1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Threading;
@@ -2536,7 +2651,8 @@ class Driver
         Console.WriteLine(Result);
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 0
 ";
             CompileAndVerify(source, expectedOutput: expected);
@@ -2545,7 +2661,8 @@ class Driver
         [Fact]
         public void SpillWithByRefArguments01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2611,7 +2728,8 @@ class Driver
         [Fact]
         public void SpillOperator_Compound1()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2667,7 +2785,8 @@ class Driver
         [Fact]
         public void SpillOperator_Compound2()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2723,7 +2842,8 @@ class Driver
         [Fact]
         public void Async_StackSpill_Argument_Generic04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 public class mc<T>
@@ -2753,7 +2873,8 @@ class Test
         [Fact]
         public void AsyncStackSpill_assign01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -2811,7 +2932,8 @@ class Driver
         [Fact]
         public void SpillCollectionInitializer()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -2890,7 +3012,8 @@ class Driver
         [Fact]
         public void SpillRefExpr()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -2929,7 +3052,8 @@ static class Driver
         [Fact]
         public void SpillManagedPointerAssign03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -3013,7 +3137,8 @@ class Driver
         [Fact, WorkItem(36443, "https://github.com/dotnet/roslyn/issues/36443")]
         public void SpillCompoundAssignmentToNullableMemberOfLocal_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 struct S
@@ -3035,7 +3160,8 @@ struct S
         [Fact, WorkItem(36443, "https://github.com/dotnet/roslyn/issues/36443")]
         public void SpillCompoundAssignmentToNullableMemberOfLocal_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task Main()
@@ -3064,7 +3190,8 @@ class C
         [Fact, WorkItem(36443, "https://github.com/dotnet/roslyn/issues/36443")]
         public void SpillCompoundAssignmentToNullableMemberOfLocal_03()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static async System.Threading.Tasks.Task Main()
@@ -3093,7 +3220,8 @@ class C
         [Fact, WorkItem(36443, "https://github.com/dotnet/roslyn/issues/36443")]
         public void SpillCompoundAssignmentToNullableMemberOfLocal_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 struct S
@@ -3120,7 +3248,8 @@ struct S
         [Fact]
         public void SpillSacrificialRead()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3167,7 +3296,8 @@ class C
         [Fact]
         public void SpillRefThisStruct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3244,7 +3374,8 @@ class C
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 -1
 42
 42
@@ -3257,7 +3388,8 @@ class C
         [WorkItem(13734, "https://github.com/dotnet/roslyn/issues/13734")]
         public void MethodGroupConversionNoSpill()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 using System;
 
@@ -3281,7 +3413,8 @@ public class AsyncBug {
         [WorkItem(13734, "https://github.com/dotnet/roslyn/issues/13734")]
         public void MethodGroupConversionWithSpill()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 using System;
 using System.Linq;
@@ -3318,7 +3451,10 @@ namespace AsyncBug
     }
 }
 ";
-            var expected = new bool[] { false, true, false, true, false }.Aggregate("", (str, next) => str += $"{next}{Environment.NewLine}");
+            var expected = new bool[] { false, true, false, true, false }.Aggregate(
+                "",
+                (str, next) => str += $"{next}{Environment.NewLine}"
+            );
             var v = CompileAndVerify(source, expected);
         }
 
@@ -3326,7 +3462,8 @@ namespace AsyncBug
         [WorkItem(17706, "https://github.com/dotnet/roslyn/issues/17706")]
         public void SpillAwaitBeforeRefReordered()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -3362,7 +3499,8 @@ public class C
         [WorkItem(17706, "https://github.com/dotnet/roslyn/issues/17706")]
         public void SpillRefBeforeAwaitReordered()
         {
-            string source = @"
+            string source =
+                @"
 using System.Threading.Tasks;
 
 public class C
@@ -3395,15 +3533,18 @@ public class C
             comp.VerifyEmitDiagnostics(
                 // (18,28): error CS8178: A reference returned by a call to 'C.P.get' cannot be preserved across 'await' or 'yield' boundary.
                 //         Assign(second: ref P, first: await t);
-                Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "P").WithArguments("C.P.get").WithLocation(18, 28)
-                );
+                Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "P")
+                    .WithArguments("C.P.get")
+                    .WithLocation(18, 28)
+            );
         }
 
         [Fact]
         [WorkItem(27831, "https://github.com/dotnet/roslyn/issues/27831")]
         public void AwaitWithInParameter_ArgModifier()
         {
-            CreateCompilation(@"
+            CreateCompilation(
+                    @"
 using System.Threading.Tasks;
 class Foo
 {
@@ -3413,17 +3554,23 @@ class Foo
     }
 
     void C(in object obj, int length) {}
-}").VerifyDiagnostics(
-                // (7,14): error CS1503: Argument 1: cannot convert from 'in string' to 'in object'
-                //         C(in s, await task);
-                Diagnostic(ErrorCode.ERR_BadArgType, "s").WithArguments("1", "in string", "in object").WithLocation(7, 14));
+}"
+                )
+                .VerifyDiagnostics(
+                    // (7,14): error CS1503: Argument 1: cannot convert from 'in string' to 'in object'
+                    //         C(in s, await task);
+                    Diagnostic(ErrorCode.ERR_BadArgType, "s")
+                        .WithArguments("1", "in string", "in object")
+                        .WithLocation(7, 14)
+                );
         }
 
         [Fact]
         [WorkItem(27831, "https://github.com/dotnet/roslyn/issues/27831")]
         public void AwaitWithInParameter_NoArgModifier()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 using System;
 using System.Threading.Tasks;
 class Foo
@@ -3443,16 +3590,19 @@ class Foo
         Console.WriteLine(obj);
         Console.WriteLine(v);
     }
-}", expectedOutput: @"
+}",
+                expectedOutput: @"
 test
 4
-");
+"
+            );
         }
 
         [Fact, WorkItem(36856, "https://github.com/dotnet/roslyn/issues/36856")]
         public void Crash36856()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 
 class Program
@@ -3498,7 +3648,9 @@ namespace System.Text.Json.Serialization
 ";
             var v = CompileAndVerify(source, options: TestOptions.DebugExe);
 
-            v.VerifyMethodBody("Program.<Serialize>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()", @"
+            v.VerifyMethodBody(
+                "Program.<Serialize>d__1.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext()",
+                @"
 {
   // Code size      184 (0xb8)
   .maxstack  3
@@ -3597,13 +3749,15 @@ namespace System.Text.Json.Serialization
   IL_00b6:  nop
   IL_00b7:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(37461, "https://github.com/dotnet/roslyn/issues/37461")]
         public void ShouldNotSpillStackallocToField_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3632,20 +3786,21 @@ public class P
                 compilation: comp,
                 expectedOutput: expectedOutput,
                 verify: Verification.Fails // localloc is not verifiable.
-                );
+            );
             comp = CreateCompilationWithMscorlibAndSpan(source, options: TestOptions.ReleaseExe);
             comp.VerifyDiagnostics();
             v = CompileAndVerify(
                 compilation: comp,
                 expectedOutput: expectedOutput,
                 verify: Verification.Fails // localloc is not verifiable.
-                );
+            );
         }
 
         [Fact, WorkItem(37461, "https://github.com/dotnet/roslyn/issues/37461")]
         public void ShouldNotSpillStackallocToField_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3674,20 +3829,21 @@ public class P
                 compilation: comp,
                 expectedOutput: expectedOutput,
                 verify: Verification.Fails // localloc is not verifiable.
-                );
+            );
             comp = CreateCompilationWithMscorlibAndSpan(source, options: TestOptions.ReleaseExe);
             comp.VerifyDiagnostics();
             v = CompileAndVerify(
                 compilation: comp,
                 expectedOutput: expectedOutput,
                 verify: Verification.Fails // localloc is not verifiable.
-                );
+            );
         }
 
         [Fact, WorkItem(37461, "https://github.com/dotnet/roslyn/issues/37461")]
         public void ShouldNotSpillStackallocToField_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3712,15 +3868,18 @@ public class P
                 comp.VerifyEmitDiagnostics(
                     // (9,66): error CS4007: 'await' cannot be used in an expression containing the type 'System.Span<int>'
                     //         await Async1(F1(), G(F2(), stackalloc int[] { 1, 2, 3 }, await F3()));
-                    Diagnostic(ErrorCode.ERR_ByRefTypeAndAwait, "await F3()").WithArguments("System.Span<int>").WithLocation(9, 66)
-                    );
+                    Diagnostic(ErrorCode.ERR_ByRefTypeAndAwait, "await F3()")
+                        .WithArguments("System.Span<int>")
+                        .WithLocation(9, 66)
+                );
             }
         }
 
         [Fact]
         public void SpillStateMachineTemps()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 using System.Threading.Tasks;
 
 public class C {
@@ -3768,7 +3927,8 @@ struct F
         [WorkItem(37713, "https://github.com/dotnet/roslyn/issues/37713")]
         public void RefStructInAsyncStateMachineWithWhenClause()
         {
-            var source = @"
+            var source =
+                @"
 using System.Threading.Tasks;
 class Program
 {
@@ -3818,15 +3978,23 @@ public ref struct S
     public bool P2 => true;
 }
 ";
-            CreateCompilation(source, options: TestOptions.DebugDll).VerifyDiagnostics().VerifyEmitDiagnostics(
-                // (9,17): error CS4013: Instance of type 'S' cannot be used inside a nested function, query expression, iterator block or async method
-                //             Q { F: { P1: true } } when await c => r, // error: cached Q.F is alive
-                Diagnostic(ErrorCode.ERR_SpecialByRefInLambda, "F").WithArguments("S").WithLocation(9, 17)
+            CreateCompilation(source, options: TestOptions.DebugDll)
+                .VerifyDiagnostics()
+                .VerifyEmitDiagnostics(
+                    // (9,17): error CS4013: Instance of type 'S' cannot be used inside a nested function, query expression, iterator block or async method
+                    //             Q { F: { P1: true } } when await c => r, // error: cached Q.F is alive
+                    Diagnostic(ErrorCode.ERR_SpecialByRefInLambda, "F")
+                        .WithArguments("S")
+                        .WithLocation(9, 17)
                 );
-            CreateCompilation(source, options: TestOptions.ReleaseDll).VerifyDiagnostics().VerifyEmitDiagnostics(
-                // (9,17): error CS4013: Instance of type 'S' cannot be used inside a nested function, query expression, iterator block or async method
-                //             Q { F: { P1: true } } when await c => r, // error: cached Q.F is alive
-                Diagnostic(ErrorCode.ERR_SpecialByRefInLambda, "F").WithArguments("S").WithLocation(9, 17)
+            CreateCompilation(source, options: TestOptions.ReleaseDll)
+                .VerifyDiagnostics()
+                .VerifyEmitDiagnostics(
+                    // (9,17): error CS4013: Instance of type 'S' cannot be used inside a nested function, query expression, iterator block or async method
+                    //             Q { F: { P1: true } } when await c => r, // error: cached Q.F is alive
+                    Diagnostic(ErrorCode.ERR_SpecialByRefInLambda, "F")
+                        .WithArguments("S")
+                        .WithLocation(9, 17)
                 );
         }
 
@@ -3835,7 +4003,7 @@ public ref struct S
         public void ExpressionLambdaWithObjectInitializer()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -3867,7 +4035,7 @@ class Box<T>
         public void ExpressionLambdaWithUserDefinedControlFlow()
         {
             var source =
-@"using System;
+                @"using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -3904,7 +4072,8 @@ namespace RoslynFailFastReproduction
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_ClassFieldAccessOnProperty()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3982,7 +4151,9 @@ class B
     public int x;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestPropertyAccessThrows
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestPropertyAccessThrows
 Before Assignment
 Caught NullReferenceException
 TestFieldAccessThrows
@@ -3992,8 +4163,11 @@ Caught NullReferenceException
 TestPropertyAccessSucceeds
 Before Assignment a.B.x is: 0
 RHS
-After Assignment a.B.x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment a.B.x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      184 (0xb8)
   .maxstack  3
@@ -4076,14 +4250,16 @@ After Assignment a.B.x is: 42")
   IL_00ad:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00b2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b7:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_ClassFieldAccessOnArray()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4206,7 +4382,9 @@ class A
     public bool y;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestIndexerThrows
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestIndexerThrows
 Before Assignment
 Caught IndexOutOfRangeException
 TestAssignmentThrows
@@ -4230,8 +4408,11 @@ Before Assignment a.x is: 0
 RHS
 After Assignment arr[0].x is: 0
 After Assignment arr[0].y is: True
-After Assignment a.x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment a.x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      181 (0xb5)
   .maxstack  3
@@ -4315,14 +4496,16 @@ After Assignment a.x is: 42")
   IL_00aa:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00af:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b4:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_StructFieldAccessOnArray()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4425,7 +4608,9 @@ struct A
     public bool y;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestIndexerThrows
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestIndexerThrows
 Before Assignment
 Caught IndexOutOfRangeException
 TestIndexerSucceeds
@@ -4443,8 +4628,11 @@ Before Assignment arr[0].x is: 0
 Before Assignment arr[0].y is: False
 RHS
 After Assignment arr[0].x is: 42
-Before Assignment arr[0].y is: True")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+Before Assignment arr[0].y is: True"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      198 (0xc6)
   .maxstack  3
@@ -4533,14 +4721,16 @@ Before Assignment arr[0].y is: True")
   IL_00bb:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00c0:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c5:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_AssignmentToArray()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4615,7 +4805,9 @@ class Program
     }
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestIndexerThrows
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestIndexerThrows
 Before Assignment
 RHS
 Caught IndexOutOfRangeException
@@ -4628,8 +4820,11 @@ Before Assignment arr.Length is: 1
 Before Assignment arrCopy[0] is: 0
 RHS
 After Assignment arr.Length is: 0
-After Assignment arrCopy[0] is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment arrCopy[0] is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      176 (0xb0)
   .maxstack  3
@@ -4712,14 +4907,16 @@ After Assignment arrCopy[0] is: 42")
   IL_00a5:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00aa:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00af:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_StructFieldAccessOnStructFieldAccessOnClassField()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4807,7 +5004,9 @@ struct C
     public int x;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -4819,8 +5018,11 @@ Before Assignment a is null == False
 Before Assignment aCopy.b.c.x is: 0
 RHS
 After Assignment a is null == True
-After Assignment aCopy.b.c.x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment aCopy.b.c.x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      201 (0xc9)
   .maxstack  3
@@ -4908,14 +5110,16 @@ After Assignment aCopy.b.c.x is: 42")
   IL_00be:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00c3:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c8:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_ClassPropertyAssignmentOnClassProperty()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5000,7 +5204,9 @@ class B
     public int x { get { Console.WriteLine(""GetX""); return _x; } set { Console.WriteLine(""SetX""); _x = value; } }
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5016,8 +5222,11 @@ GetB
 RHS
 SetX
 After Assignment a is null == True
-After Assignment aCopy._b._x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment aCopy._b._x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      184 (0xb8)
   .maxstack  3
@@ -5100,14 +5309,16 @@ After Assignment aCopy._b._x is: 42")
   IL_00ad:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00b2:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b7:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(19609, "https://github.com/dotnet/roslyn/issues/19609")]
         [Fact]
         public void KeepLtrSemantics_FieldAccessOnClass()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5185,7 +5396,9 @@ class A
     public int x;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNull
 Before Assignment
 RHS
 Caught NullReferenceException
@@ -5198,8 +5411,11 @@ Before Assignment a is null == False
 Before Assignment aCopy.x is: 0
 RHS
 After Assignment a is null == True
-After Assignment aCopy.x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment aCopy.x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      179 (0xb3)
   .maxstack  3
@@ -5281,14 +5497,16 @@ After Assignment aCopy.x is: 42")
   IL_00a8:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00ad:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00b2:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_CompoundAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5385,7 +5603,9 @@ class A
     public int x;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5401,8 +5621,11 @@ After Assignment aCopy.x is: 43
 ReassignXDuringAssignment
 Before Assignment a.x is: 1
 RHS
-After Assignment a.x is: 43")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment a.x is: 43"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      202 (0xca)
   .maxstack  3
@@ -5494,14 +5717,16 @@ After Assignment a.x is: 43")
   IL_00bf:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00c4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c9:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void KeepLtrSemantics_CompoundAssignmentProperties()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5599,7 +5824,9 @@ class A
     public int x { get { Console.WriteLine(""GetX""); return _x; } set { Console.WriteLine(""SetX""); _x = value; } }
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNotNull
@@ -5621,8 +5848,11 @@ Before Assignment a._x is: 1
 GetX
 RHS
 SetX
-After Assignment a._x is: 43")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment a._x is: 43"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      202 (0xca)
   .maxstack  3
@@ -5714,14 +5944,16 @@ After Assignment a._x is: 43")
   IL_00bf:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00c4:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00c9:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(19609, "https://github.com/dotnet/roslyn/issues/19609")]
         [Fact]
         public void KeepLtrSemantics_AssignmentToAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -5840,7 +6072,9 @@ class B
     public int x;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNullBIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNullBIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNullBIsNotNull
@@ -5859,8 +6093,11 @@ Before Assignment a.b.x is: 0
 Before Assignment b.x is: 0
 RHS
 After Assignment a.b.x is: 42
-After Assignment b.x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment b.x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      219 (0xdb)
   .maxstack  4
@@ -5957,14 +6194,16 @@ After Assignment b.x is: 42")
   IL_00d0:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00d5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00da:  ret
-}");
+}"
+                );
         }
 
         [WorkItem(19609, "https://github.com/dotnet/roslyn/issues/19609")]
         [Fact]
         public void KeepLtrSemantics_AssignmentToAssignmentProperties()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -6085,7 +6324,9 @@ class B
     public int x {  get { Console.WriteLine(""GetX""); return _x; } set { Console.WriteLine(""SetX""); _x = value; } }
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"TestAIsNullBIsNull
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"TestAIsNullBIsNull
 Before Assignment
 Caught NullReferenceException
 TestAIsNullBIsNotNull
@@ -6110,8 +6351,11 @@ RHS
 SetX
 SetX
 After Assignment a._b._x is: 42
-After Assignment b._x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment b._x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      219 (0xdb)
   .maxstack  3
@@ -6208,14 +6452,16 @@ After Assignment b._x is: 42")
   IL_00d0:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_00d5:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_00da:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         [WorkItem(42755, "https://github.com/dotnet/roslyn/issues/42755")]
         public void AssignmentToFieldOfStaticFieldOfStruct()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -6251,10 +6497,15 @@ struct B
     public int x;
 }";
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
-            CompileAndVerify(comp, expectedOutput: @"Before Assignment A.b.x is: 0
+            CompileAndVerify(
+                    comp,
+                    expectedOutput: @"Before Assignment A.b.x is: 0
 RHS
-After Assignment A.b.x is: 42")
-                .VerifyIL("Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+After Assignment A.b.x is: 42"
+                )
+                .VerifyIL(
+                    "Program.<Assign>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                    @"
 {
   // Code size      159 (0x9f)
   .maxstack  3
@@ -6328,13 +6579,15 @@ After Assignment A.b.x is: 42")
   IL_0094:  ldflda     ""System.Runtime.CompilerServices.AsyncTaskMethodBuilder Program.<Assign>d__0.<>t__builder""
   IL_0099:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_009e:  ret
-}");
+}"
+                );
         }
 
         [Fact, WorkItem(47191, "https://github.com/dotnet/roslyn/issues/47191")]
         public void AssignStaticStructField()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -6364,7 +6617,8 @@ public class C
         [Fact, WorkItem(47191, "https://github.com/dotnet/roslyn/issues/47191")]
         public void AssignStaticStructField_ViaUsingStatic()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 using static C;
@@ -6400,7 +6654,8 @@ public class Program
         [Fact, WorkItem(47191, "https://github.com/dotnet/roslyn/issues/47191")]
         public void AssignInstanceStructField()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 

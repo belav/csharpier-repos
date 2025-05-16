@@ -15,7 +15,8 @@ namespace System.IdentityModel.Selectors
         // public constructors
         //
 
-        public InfoCardRSAPKCS1KeyExchangeFormatter() : base() { }
+        public InfoCardRSAPKCS1KeyExchangeFormatter()
+            : base() { }
 
         public InfoCardRSAPKCS1KeyExchangeFormatter(AsymmetricAlgorithm key)
             : base(key)
@@ -35,7 +36,6 @@ namespace System.IdentityModel.Selectors
 
         public override byte[] CreateKeyExchange(byte[] rgbData)
         {
-
             if (null != m_rsaKey && m_rsaKey is InfoCardRSACryptoProvider)
             {
                 return ((InfoCardRSACryptoProvider)m_rsaKey).Encrypt(rgbData, false);

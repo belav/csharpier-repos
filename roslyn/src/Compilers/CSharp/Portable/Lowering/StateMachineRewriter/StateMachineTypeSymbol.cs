@@ -13,22 +13,41 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal abstract class StateMachineTypeSymbol : SynthesizedContainer, ISynthesizedMethodBodyImplementationSymbol
+    internal abstract class StateMachineTypeSymbol
+        : SynthesizedContainer,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private ImmutableArray<CSharpAttributeData> _attributes;
         public readonly MethodSymbol KickoffMethod;
 
-        public StateMachineTypeSymbol(VariableSlotAllocator slotAllocatorOpt, TypeCompilationState compilationState, MethodSymbol kickoffMethod, int kickoffMethodOrdinal)
-            : base(MakeName(slotAllocatorOpt, compilationState, kickoffMethod, kickoffMethodOrdinal), kickoffMethod)
+        public StateMachineTypeSymbol(
+            VariableSlotAllocator slotAllocatorOpt,
+            TypeCompilationState compilationState,
+            MethodSymbol kickoffMethod,
+            int kickoffMethodOrdinal
+        )
+            : base(
+                MakeName(slotAllocatorOpt, compilationState, kickoffMethod, kickoffMethodOrdinal),
+                kickoffMethod
+            )
         {
             Debug.Assert(kickoffMethod != null);
             this.KickoffMethod = kickoffMethod;
         }
 
-        private static string MakeName(VariableSlotAllocator slotAllocatorOpt, TypeCompilationState compilationState, MethodSymbol kickoffMethod, int kickoffMethodOrdinal)
+        private static string MakeName(
+            VariableSlotAllocator slotAllocatorOpt,
+            TypeCompilationState compilationState,
+            MethodSymbol kickoffMethod,
+            int kickoffMethodOrdinal
+        )
         {
-            return slotAllocatorOpt?.PreviousStateMachineTypeName ??
-                   GeneratedNames.MakeStateMachineTypeName(kickoffMethod.Name, kickoffMethodOrdinal, compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal);
+            return slotAllocatorOpt?.PreviousStateMachineTypeName
+                ?? GeneratedNames.MakeStateMachineTypeName(
+                    kickoffMethod.Name,
+                    kickoffMethodOrdinal,
+                    compilationState.ModuleBuilderOpt.CurrentGenerationOrdinal
+                );
         }
 
         public override Symbol ContainingSymbol
@@ -62,8 +81,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var kickoffType = KickoffMethod.ContainingType;
                 foreach (var attribute in kickoffType.GetAttributes())
                 {
-                    if (attribute.IsTargetAttribute(AttributeDescription.DebuggerNonUserCodeAttribute) ||
-                        attribute.IsTargetAttribute(AttributeDescription.DebuggerStepThroughAttribute))
+                    if (
+                        attribute.IsTargetAttribute(
+                            AttributeDescription.DebuggerNonUserCodeAttribute
+                        )
+                        || attribute.IsTargetAttribute(
+                            AttributeDescription.DebuggerStepThroughAttribute
+                        )
+                    )
                     {
                         if (builder == null)
                         {
@@ -74,9 +99,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                ImmutableInterlocked.InterlockedCompareExchange(ref _attributes,
-                                                                builder == null ? ImmutableArray<CSharpAttributeData>.Empty : builder.ToImmutableAndFree(),
-                                                                default(ImmutableArray<CSharpAttributeData>));
+                ImmutableInterlocked.InterlockedCompareExchange(
+                    ref _attributes,
+                    builder == null
+                        ? ImmutableArray<CSharpAttributeData>.Empty
+                        : builder.ToImmutableAndFree(),
+                    default(ImmutableArray<CSharpAttributeData>)
+                );
             }
 
             return _attributes;

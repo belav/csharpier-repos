@@ -31,7 +31,8 @@ public class UrlHelperTest : UrlHelperTestBase
         string host,
         string protocol,
         string routeName,
-        string template)
+        string template
+    )
     {
         var services = CreateServices();
         var httpContext = CreateHttpContext(services, appRoot, host, protocol);
@@ -46,7 +47,11 @@ public class UrlHelperTest : UrlHelperTestBase
         return new UrlHelper(actionContext);
     }
 
-    protected override IUrlHelper CreateUrlHelperWithDefaultRoutes(string appRoot, string host, string protocol)
+    protected override IUrlHelper CreateUrlHelperWithDefaultRoutes(
+        string appRoot,
+        string host,
+        string protocol
+    )
     {
         var services = CreateServices();
         var context = CreateHttpContext(services, appRoot, host, protocol);
@@ -65,14 +70,12 @@ public class UrlHelperTest : UrlHelperTestBase
         string routeName,
         string template,
         object defaults,
-        object requiredValues)
+        object requiredValues
+    )
     {
         var services = CreateServices();
         var routeBuilder = CreateRouteBuilder(services);
-        routeBuilder.MapRoute(
-            routeName,
-            template,
-            defaults);
+        routeBuilder.MapRoute(routeName, template, defaults);
         var router = routeBuilder.Build();
         var httpContext = CreateHttpContext(services, appRoot, host, protocol);
         var actionContext = CreateActionContext(httpContext);
@@ -88,7 +91,8 @@ public class UrlHelperTest : UrlHelperTestBase
     private static IRouter GetDefaultRoutes(
         IServiceProvider services,
         string mockRouteName,
-        string mockTemplateValue)
+        string mockTemplateValue
+    )
     {
         var routeBuilder = CreateRouteBuilder(services);
 
@@ -101,21 +105,28 @@ public class UrlHelperTest : UrlHelperTestBase
         routeBuilder.MapRoute(
             "OrdersApi",
             "api/orders/{id}",
-            new RouteValueDictionary(new { controller = "Orders", action = "GetById" }));
+            new RouteValueDictionary(new { controller = "Orders", action = "GetById" })
+        );
 
         routeBuilder.MapRoute(
             string.Empty,
             "{controller}/{action}/{id}",
-            new RouteValueDictionary(new { id = "defaultid" }));
+            new RouteValueDictionary(new { id = "defaultid" })
+        );
 
         routeBuilder.MapRoute(
             "namedroute",
             "named/{controller}/{action}/{id}",
-            new RouteValueDictionary(new { id = "defaultid" }));
+            new RouteValueDictionary(new { id = "defaultid" })
+        );
 
         var mockHttpRoute = new Mock<IRouter>();
         mockHttpRoute
-            .Setup(mock => mock.GetVirtualPath(It.Is<VirtualPathContext>(c => string.Equals(c.RouteName, mockRouteName))))
+            .Setup(mock =>
+                mock.GetVirtualPath(
+                    It.Is<VirtualPathContext>(c => string.Equals(c.RouteName, mockRouteName))
+                )
+            )
             .Returns(new VirtualPathData(mockHttpRoute.Object, mockTemplateValue));
 
         routeBuilder.Routes.Add(mockHttpRoute.Object);
@@ -125,14 +136,9 @@ public class UrlHelperTest : UrlHelperTestBase
     private static IRouteBuilder CreateRouteBuilder(IServiceProvider services)
     {
         var app = new Mock<IApplicationBuilder>();
-        app
-            .SetupGet(a => a.ApplicationServices)
-            .Returns(services);
+        app.SetupGet(a => a.ApplicationServices).Returns(services);
 
-        return new RouteBuilder(app.Object)
-        {
-            DefaultHandler = new PassThroughRouter(),
-        };
+        return new RouteBuilder(app.Object) { DefaultHandler = new PassThroughRouter() };
     }
 
     private class PassThroughRouter : IRouter

@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Avx2
@@ -20,7 +20,12 @@ namespace IntelHardwareIntrinsicTest._Avx2
 
             if (Avx2.IsSupported)
             {
-                using (TestTable_Broadcast<int> intTable = new TestTable_Broadcast<int>(new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new int[8]))
+                using (
+                    TestTable_Broadcast<int> intTable = new TestTable_Broadcast<int>(
+                        new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new int[8]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -37,7 +42,12 @@ namespace IntelHardwareIntrinsicTest._Avx2
                     }
                 }
 
-                using (TestTable_Broadcast<uint> uintTable = new TestTable_Broadcast<uint>(new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new uint[8]))
+                using (
+                    TestTable_Broadcast<uint> uintTable = new TestTable_Broadcast<uint>(
+                        new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new uint[8]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((uint*)(uintTable.inArrayPtr));
                     Unsafe.Write(uintTable.outArrayPtr, vf);
@@ -54,7 +64,12 @@ namespace IntelHardwareIntrinsicTest._Avx2
                     }
                 }
 
-                using (TestTable_Broadcast<long> longTable = new TestTable_Broadcast<long>(new long[4] { 1, -5, 100, 0}, new long[4]))
+                using (
+                    TestTable_Broadcast<long> longTable = new TestTable_Broadcast<long>(
+                        new long[4] { 1, -5, 100, 0 },
+                        new long[4]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((long*)(longTable.inArrayPtr));
                     Unsafe.Write(longTable.outArrayPtr, vf);
@@ -71,7 +86,12 @@ namespace IntelHardwareIntrinsicTest._Avx2
                     }
                 }
 
-                using (TestTable_Broadcast<ulong> ulongTable = new TestTable_Broadcast<ulong>(new ulong[4] { 1, 5, 100, 0}, new ulong[4]))
+                using (
+                    TestTable_Broadcast<ulong> ulongTable = new TestTable_Broadcast<ulong>(
+                        new ulong[4] { 1, 5, 100, 0 },
+                        new ulong[4]
+                    )
+                )
                 {
                     var vf = Avx2.BroadcastVector128ToVector256((ulong*)(ulongTable.inArrayPtr));
                     Unsafe.Write(ulongTable.outArrayPtr, vf);
@@ -91,7 +111,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
             Assert.Equal(Pass, testResult);
         }
 
-        public unsafe struct TestTable_Broadcast<T> : IDisposable where T : struct
+        public unsafe struct TestTable_Broadcast<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;
@@ -101,6 +122,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable_Broadcast(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -109,18 +131,19 @@ namespace IntelHardwareIntrinsicTest._Avx2
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
-                for (int i = 0; i < outArray.Length/2; i++)
+                for (int i = 0; i < outArray.Length / 2; i++)
                 {
                     if (!check(inArray[i], outArray[i]))
                     {
                         return false;
                     }
                 }
-                for (int i = outArray.Length/2; i < outArray.Length; i++)
+                for (int i = outArray.Length / 2; i < outArray.Length; i++)
                 {
-                    if (!check(inArray[i - outArray.Length/2], outArray[i]))
+                    if (!check(inArray[i - outArray.Length / 2], outArray[i]))
                     {
                         return false;
                     }
@@ -134,6 +157,5 @@ namespace IntelHardwareIntrinsicTest._Avx2
                 outHandle.Free();
             }
         }
-
     }
 }

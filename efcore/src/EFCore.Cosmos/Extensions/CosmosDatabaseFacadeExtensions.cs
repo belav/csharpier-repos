@@ -22,8 +22,8 @@ public static class CosmosDatabaseFacadeExtensions
     /// </remarks>
     /// <param name="databaseFacade">The <see cref="DatabaseFacade" /> for the context.</param>
     /// <returns>The <see cref="CosmosClient" /></returns>
-    public static CosmosClient GetCosmosClient(this DatabaseFacade databaseFacade)
-        => GetService<ISingletonCosmosClientWrapper>(databaseFacade).Client;
+    public static CosmosClient GetCosmosClient(this DatabaseFacade databaseFacade) =>
+        GetService<ISingletonCosmosClientWrapper>(databaseFacade).Client;
 
     private static TService GetService<TService>(IInfrastructure<IServiceProvider> databaseFacade)
         where TService : class
@@ -47,7 +47,9 @@ public static class CosmosDatabaseFacadeExtensions
     /// <returns>The database name.</returns>
     public static string GetCosmosDatabaseId(this DatabaseFacade databaseFacade)
     {
-        var cosmosOptions = databaseFacade.GetService<IDbContextOptions>().FindExtension<CosmosOptionsExtension>();
+        var cosmosOptions = databaseFacade
+            .GetService<IDbContextOptions>()
+            .FindExtension<CosmosOptionsExtension>();
         if (cosmosOptions == null)
         {
             throw new InvalidOperationException(CosmosStrings.CosmosNotInUse);
@@ -72,6 +74,6 @@ public static class CosmosDatabaseFacadeExtensions
     /// </remarks>
     /// <param name="database">The facade from <see cref="DbContext.Database" />.</param>
     /// <returns><see langword="true" /> if the Cosmos provider is being used.</returns>
-    public static bool IsCosmos(this DatabaseFacade database)
-        => database.ProviderName == typeof(CosmosOptionsExtension).Assembly.GetName().Name;
+    public static bool IsCosmos(this DatabaseFacade database) =>
+        database.ProviderName == typeof(CosmosOptionsExtension).Assembly.GetName().Name;
 }

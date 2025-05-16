@@ -8,7 +8,7 @@ namespace System.IdentityModel.Tokens
 {
     using System;
     using System.Collections.Generic;
-    
+
     /// <summary>
     /// This class wraps a Saml2AssertionKeyIdentifierClause and delegates to the wrapped clause.
     /// It derives off the SamlAssertionKeyIdentifierClause to get around a specific bug in WCF
@@ -34,10 +34,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanCreateKey
         {
-            get
-            {
-                return this.clause.CanCreateKey;
-            }
+            get { return this.clause.CanCreateKey; }
         }
 
         /// <summary>
@@ -49,7 +46,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Creates a key from this clause type. 
+        /// Creates a key from this clause type.
         /// </summary>
         /// <returns>A <see cref="SecurityKey"/></returns>
         public override SecurityKey CreateKey()

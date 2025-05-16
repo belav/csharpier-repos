@@ -339,13 +339,15 @@ namespace System.SpanTests
                 for (int targetIndex = 0; targetIndex < length - 3; targetIndex++)
                 {
                     int index = rnd.Next(0, 4) == 0 ? 0 : 1;
-                    var values = new ReadOnlySpan<int>(new int[]
+                    var values = new ReadOnlySpan<int>(
+                        new int[]
                         {
                             a[targetIndex + index],
                             a[targetIndex + (index + 1) % 2],
                             a[targetIndex + (index + 1) % 3],
-                            a[targetIndex + (index + 1) % 4]
-                        });
+                            a[targetIndex + (index + 1) % 4],
+                        }
+                    );
                     int idx = IndexOfAny(span, values);
                     Assert.Equal(targetIndex, idx);
                 }
@@ -452,7 +454,9 @@ namespace System.SpanTests
                 a[length - 5] = 200;
 
                 var span = new Span<int>(a);
-                var values = new ReadOnlySpan<int>(new int[] { 200, 200, 200, 200, 200, 200, 200, 200, 200 });
+                var values = new ReadOnlySpan<int>(
+                    new int[] { 200, 200, 200, 200, 200, 200, 200, 200, 200 }
+                );
                 int idx = IndexOfAny(span, values);
                 Assert.Equal(length - 5, idx);
             }
@@ -811,7 +815,9 @@ namespace System.SpanTests
 
                 for (int targetIndex = 0; targetIndex < length; targetIndex++)
                 {
-                    var values = new ReadOnlySpan<string>(new string[] { a[targetIndex], "0", "0", "0" });
+                    var values = new ReadOnlySpan<string>(
+                        new string[] { a[targetIndex], "0", "0", "0" }
+                    );
                     int idx = IndexOfAny(span, values);
                     Assert.Equal(targetIndex, idx);
                 }
@@ -819,20 +825,24 @@ namespace System.SpanTests
                 for (int targetIndex = 0; targetIndex < length - 3; targetIndex++)
                 {
                     int index = rnd.Next(0, 4) == 0 ? 0 : 1;
-                    var values = new ReadOnlySpan<string>(new string[]
-                    {
-                        a[targetIndex + index],
-                        a[targetIndex + (index + 1) % 2],
-                        a[targetIndex + (index + 1) % 3],
-                        a[targetIndex + (index + 1) % 4]
-                    });
+                    var values = new ReadOnlySpan<string>(
+                        new string[]
+                        {
+                            a[targetIndex + index],
+                            a[targetIndex + (index + 1) % 2],
+                            a[targetIndex + (index + 1) % 3],
+                            a[targetIndex + (index + 1) % 4],
+                        }
+                    );
                     int idx = IndexOfAny(span, values);
                     Assert.Equal(targetIndex, idx);
                 }
 
                 for (int targetIndex = 0; targetIndex < length; targetIndex++)
                 {
-                    var values = new ReadOnlySpan<string>(new string[] { "0", "0", "0", a[targetIndex] });
+                    var values = new ReadOnlySpan<string>(
+                        new string[] { "0", "0", "0", a[targetIndex] }
+                    );
                     int idx = IndexOfAny(span, values);
                     Assert.Equal(targetIndex, idx);
                 }
@@ -934,7 +944,9 @@ namespace System.SpanTests
                 a[length - 5] = "200";
 
                 var span = new Span<string>(a);
-                var values = new ReadOnlySpan<string>(new string[] { "200", "200", "200", "200", "200", "200", "200", "200", "200" });
+                var values = new ReadOnlySpan<string>(
+                    new string[] { "200", "200", "200", "200", "200", "200", "200", "200", "200" }
+                );
                 int idx = IndexOfAny(span, values);
                 Assert.Equal(length - 5, idx);
             }
@@ -949,7 +961,9 @@ namespace System.SpanTests
                 a[0] = "99";
                 a[length + 1] = "98";
                 var span = new Span<string>(a, 1, length - 1);
-                var values = new ReadOnlySpan<string>(new string[] { "99", "98", "99", "98", "99", "98" });
+                var values = new ReadOnlySpan<string>(
+                    new string[] { "99", "98", "99", "98", "99", "98" }
+                );
                 int index = IndexOfAny(span, values);
                 Assert.Equal(-1, index);
             }
@@ -960,7 +974,9 @@ namespace System.SpanTests
                 a[0] = "99";
                 a[length + 1] = "99";
                 var span = new Span<string>(a, 1, length - 1);
-                var values = new ReadOnlySpan<string>(new string[] { "99", "99", "99", "99", "99", "99" });
+                var values = new ReadOnlySpan<string>(
+                    new string[] { "99", "99", "99", "99", "99", "99" }
+                );
                 int index = IndexOfAny(span, values);
                 Assert.Equal(-1, index);
             }
@@ -977,8 +993,15 @@ namespace System.SpanTests
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.IndexOfAnyNullSequenceData), MemberType = typeof(TestHelpers))]
-        public static void IndexOfAnyNullSequence_String(string[] spanInput, string[] searchInput, int expected)
+        [MemberData(
+            nameof(TestHelpers.IndexOfAnyNullSequenceData),
+            MemberType = typeof(TestHelpers)
+        )]
+        public static void IndexOfAnyNullSequence_String(
+            string[] spanInput,
+            string[] searchInput,
+            int expected
+        )
         {
             Span<string> theStrings = spanInput;
             Assert.Equal(expected, IndexOfAny(theStrings, searchInput));
@@ -987,7 +1010,10 @@ namespace System.SpanTests
             {
                 if (searchInput.Length >= 3)
                 {
-                    Assert.Equal(expected, IndexOfAny(theStrings, searchInput[0], searchInput[1], searchInput[2]));
+                    Assert.Equal(
+                        expected,
+                        IndexOfAny(theStrings, searchInput[0], searchInput[1], searchInput[2])
+                    );
                 }
 
                 if (searchInput.Length >= 2)
@@ -997,7 +1023,8 @@ namespace System.SpanTests
             }
         }
 
-        private static int IndexOf<T>(Span<T> span, T value) where T : IEquatable<T>?
+        private static int IndexOf<T>(Span<T> span, T value)
+            where T : IEquatable<T>?
         {
             int index = span.IndexOf(value);
             Assert.Equal(index, ((ReadOnlySpan<T>)span).IndexOf(value));
@@ -1009,7 +1036,8 @@ namespace System.SpanTests
             return index;
         }
 
-        private static int IndexOfAny<T>(Span<T> span, T value0, T value1) where T : IEquatable<T>?
+        private static int IndexOfAny<T>(Span<T> span, T value0, T value1)
+            where T : IEquatable<T>?
         {
             int index = span.IndexOfAny(value0, value1);
             Assert.Equal(index, ((ReadOnlySpan<T>)span).IndexOfAny(value0, value1));
@@ -1021,7 +1049,8 @@ namespace System.SpanTests
             return index;
         }
 
-        private static int IndexOfAny<T>(Span<T> span, T value0, T value1, T value2) where T : IEquatable<T>?
+        private static int IndexOfAny<T>(Span<T> span, T value0, T value1, T value2)
+            where T : IEquatable<T>?
         {
             int index = span.IndexOfAny(value0, value1, value2);
             Assert.Equal(index, ((ReadOnlySpan<T>)span).IndexOfAny(value0, value1, value2));
@@ -1033,7 +1062,8 @@ namespace System.SpanTests
             return index;
         }
 
-        private static int IndexOfAny<T>(Span<T> span, ReadOnlySpan<T> values) where T : IEquatable<T>?
+        private static int IndexOfAny<T>(Span<T> span, ReadOnlySpan<T> values)
+            where T : IEquatable<T>?
         {
             int index = span.IndexOfAny(values);
             Assert.Equal(index, ((ReadOnlySpan<T>)span).IndexOfAny(values));
@@ -1045,19 +1075,48 @@ namespace System.SpanTests
             return index;
         }
 
-        private static void AssertSearchValues<T>(Span<T> span, ReadOnlySpan<T> values, int expectedIndex) where T : IEquatable<T>?
+        private static void AssertSearchValues<T>(
+            Span<T> span,
+            ReadOnlySpan<T> values,
+            int expectedIndex
+        )
+            where T : IEquatable<T>?
         {
             if (typeof(T) == typeof(byte) || typeof(T) == typeof(char))
             {
-                SearchValues<T> searchValuesInstance = (SearchValues<T>)(object)(typeof(T) == typeof(byte)
-                    ? SearchValues.Create(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values)), values.Length))
-                    : SearchValues.Create(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.As<T, char>(ref MemoryMarshal.GetReference(values)), values.Length)));
+                SearchValues<T> searchValuesInstance =
+                    (SearchValues<T>)
+                        (object)(
+                            typeof(T) == typeof(byte)
+                                ? SearchValues.Create(
+                                    MemoryMarshal.CreateReadOnlySpan(
+                                        ref Unsafe.As<T, byte>(
+                                            ref MemoryMarshal.GetReference(values)
+                                        ),
+                                        values.Length
+                                    )
+                                )
+                                : SearchValues.Create(
+                                    MemoryMarshal.CreateReadOnlySpan(
+                                        ref Unsafe.As<T, char>(
+                                            ref MemoryMarshal.GetReference(values)
+                                        ),
+                                        values.Length
+                                    )
+                                )
+                        );
 
                 Assert.Equal(expectedIndex, span.IndexOfAny(searchValuesInstance));
-                Assert.Equal(expectedIndex, ((ReadOnlySpan<T>)span).IndexOfAny(searchValuesInstance));
+                Assert.Equal(
+                    expectedIndex,
+                    ((ReadOnlySpan<T>)span).IndexOfAny(searchValuesInstance)
+                );
 
                 Assert.Equal(expectedIndex >= 0, span.ContainsAny(searchValuesInstance));
-                Assert.Equal(expectedIndex >= 0, ((ReadOnlySpan<T>)span).ContainsAny(searchValuesInstance));
+                Assert.Equal(
+                    expectedIndex >= 0,
+                    ((ReadOnlySpan<T>)span).ContainsAny(searchValuesInstance)
+                );
             }
         }
     }

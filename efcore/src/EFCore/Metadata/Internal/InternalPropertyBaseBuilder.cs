@@ -21,9 +21,7 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public InternalPropertyBaseBuilder(TPropertyBase metadata, InternalModelBuilder modelBuilder)
-        : base(metadata, modelBuilder)
-    {
-    }
+        : base(metadata, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,9 +37,7 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TBuilder? HasField(
-        string? fieldName,
-        ConfigurationSource configurationSource)
+    public virtual TBuilder? HasField(string? fieldName, ConfigurationSource configurationSource)
     {
         if (CanSetField(fieldName, configurationSource))
         {
@@ -69,13 +65,20 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
             }
 
             var fieldInfo = PropertyBase.GetFieldInfo(
-                fieldName, Metadata.DeclaringType, Metadata.Name,
-                shouldThrow: configurationSource == ConfigurationSource.Explicit);
+                fieldName,
+                Metadata.DeclaringType,
+                Metadata.Name,
+                shouldThrow: configurationSource == ConfigurationSource.Explicit
+            );
 
             return fieldInfo != null
                 && PropertyBase.IsCompatible(
-                    fieldInfo, Metadata.ClrType, Metadata.DeclaringType.ClrType, Metadata.Name,
-                    shouldThrow: configurationSource == ConfigurationSource.Explicit);
+                    fieldInfo,
+                    Metadata.ClrType,
+                    Metadata.DeclaringType.ClrType,
+                    Metadata.Name,
+                    shouldThrow: configurationSource == ConfigurationSource.Explicit
+                );
         }
 
         return Metadata.FieldInfo?.GetSimpleMemberName() == fieldName;
@@ -87,9 +90,7 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TBuilder? HasField(
-        FieldInfo? fieldInfo,
-        ConfigurationSource configurationSource)
+    public virtual TBuilder? HasField(FieldInfo? fieldInfo, ConfigurationSource configurationSource)
     {
         if (CanSetField(fieldInfo, configurationSource))
         {
@@ -107,13 +108,23 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetField(FieldInfo? fieldInfo, ConfigurationSource? configurationSource)
-        => (configurationSource.Overrides(Metadata.GetFieldInfoConfigurationSource())
-                && (fieldInfo == null
-                    || PropertyBase.IsCompatible(
-                        fieldInfo, Metadata.ClrType, Metadata.DeclaringType.ClrType, Metadata.Name,
-                        shouldThrow: configurationSource == ConfigurationSource.Explicit)))
-            || Equals(Metadata.FieldInfo, fieldInfo);
+    public virtual bool CanSetField(
+        FieldInfo? fieldInfo,
+        ConfigurationSource? configurationSource
+    ) =>
+        (
+            configurationSource.Overrides(Metadata.GetFieldInfoConfigurationSource())
+            && (
+                fieldInfo == null
+                || PropertyBase.IsCompatible(
+                    fieldInfo,
+                    Metadata.ClrType,
+                    Metadata.DeclaringType.ClrType,
+                    Metadata.Name,
+                    shouldThrow: configurationSource == ConfigurationSource.Explicit
+                )
+            )
+        ) || Equals(Metadata.FieldInfo, fieldInfo);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -123,7 +134,8 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
     /// </summary>
     public virtual TBuilder? UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (CanSetPropertyAccessMode(propertyAccessMode, configurationSource))
         {
@@ -143,7 +155,8 @@ public abstract class InternalPropertyBaseBuilder<TBuilder, TPropertyBase>
     /// </summary>
     public virtual bool CanSetPropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        ConfigurationSource? configurationSource)
-        => configurationSource.Overrides(Metadata.GetPropertyAccessModeConfigurationSource())
-            || ((IReadOnlyPropertyBase)Metadata).GetPropertyAccessMode() == propertyAccessMode;
+        ConfigurationSource? configurationSource
+    ) =>
+        configurationSource.Overrides(Metadata.GetPropertyAccessModeConfigurationSource())
+        || ((IReadOnlyPropertyBase)Metadata).GetPropertyAccessMode() == propertyAccessMode;
 }

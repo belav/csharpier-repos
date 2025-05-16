@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE staff SYSTEM "employee.dtd" [
+<!DOCTYPE staff SYSTEM "employee.dtd"[
    <!ENTITY ent1 "es">
    <!ENTITY ent2 "1900 Dallas Road">
    <!ENTITY ent3 "Texas">
@@ -8,12 +8,12 @@
 ]>
 <!-- This is comment number 1.-->
 <staff>
- <employee>
-  <employeeId>EMP0001</employeeId>
-  <name>Margaret Martin</name>
-  <position>Accountant</position>           
-  <salary>56,000</salary>
-  <gender>Female</gender>
-  <address domestic="Yes">1230 North Ave. Dallas, Texas 98551</address>
- </employee>
- </staff>
+  <employee>
+    <employeeId>EMP0001</employeeId>
+    <name>Margaret Martin</name>
+    <position>Accountant</position>
+    <salary>56,000</salary>
+    <gender>Female</gender>
+    <address domestic="Yes">1230 North Ave. Dallas, Texas 98551</address>
+  </employee>
+</staff>

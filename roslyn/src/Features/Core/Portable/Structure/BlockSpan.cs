@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Structure
         (TextSpan textSpan, TextSpan hintSpan)? primarySpans = null,
         string bannerText = BlockSpan.Ellipses,
         bool autoCollapse = false,
-        bool isDefaultCollapsed = false)
+        bool isDefaultCollapsed = false
+    )
     {
         private const string Ellipses = "...";
 
@@ -73,10 +74,23 @@ namespace Microsoft.CodeAnalysis.Structure
         public string Type { get; } = type;
 
         public BlockSpan(
-            string type, bool isCollapsible, TextSpan textSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
-            : this(type, isCollapsible, textSpan, textSpan, primarySpans: null, bannerText, autoCollapse, isDefaultCollapsed)
-        {
-        }
+            string type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
+            : this(
+                type,
+                isCollapsible,
+                textSpan,
+                textSpan,
+                primarySpans: null,
+                bannerText,
+                autoCollapse,
+                isDefaultCollapsed
+            ) { }
 
         public override string ToString()
         {
@@ -85,11 +99,10 @@ namespace Microsoft.CodeAnalysis.Structure
                 : $"{{Span={TextSpan}, BannerText=\"{BannerText}\", AutoCollapse={AutoCollapse}, IsDefaultCollapsed={IsDefaultCollapsed}}}";
         }
 
-        internal BlockSpan WithType(string type)
-            => With(type: type);
+        internal BlockSpan WithType(string type) => With(type: type);
 
-        internal BlockSpan WithIsCollapsible(bool isCollapsible)
-            => With(isCollapsible: isCollapsible);
+        internal BlockSpan WithIsCollapsible(bool isCollapsible) =>
+            With(isCollapsible: isCollapsible);
 
         internal BlockSpan With(
             Optional<bool> isCollapsible = default,
@@ -99,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Structure
             Optional<string> type = default,
             Optional<string> bannerText = default,
             Optional<bool> autoCollapse = default,
-            Optional<bool> isDefaultCollapsed = default)
+            Optional<bool> isDefaultCollapsed = default
+        )
         {
             var newIsCollapsible = isCollapsible.HasValue ? isCollapsible.Value : IsCollapsible;
             var newTextSpan = textSpan.HasValue ? textSpan.Value : TextSpan;
@@ -108,10 +122,20 @@ namespace Microsoft.CodeAnalysis.Structure
             var newType = type.HasValue ? type.Value : Type;
             var newBannerText = bannerText.HasValue ? bannerText.Value : BannerText;
             var newAutoCollapse = autoCollapse.HasValue ? autoCollapse.Value : AutoCollapse;
-            var newIsDefaultCollapsed = isDefaultCollapsed.HasValue ? isDefaultCollapsed.Value : IsDefaultCollapsed;
+            var newIsDefaultCollapsed = isDefaultCollapsed.HasValue
+                ? isDefaultCollapsed.Value
+                : IsDefaultCollapsed;
 
             return new BlockSpan(
-                newType, newIsCollapsible, newTextSpan, newHintSpan, newPrimarySpans, newBannerText, newAutoCollapse, newIsDefaultCollapsed);
+                newType,
+                newIsCollapsible,
+                newTextSpan,
+                newHintSpan,
+                newPrimarySpans,
+                newBannerText,
+                newAutoCollapse,
+                newIsDefaultCollapsed
+            );
         }
     }
 }

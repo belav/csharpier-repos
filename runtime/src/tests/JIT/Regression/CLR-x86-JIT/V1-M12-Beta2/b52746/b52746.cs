@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -29,6 +30,7 @@ namespace Test
             }
             return 0;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

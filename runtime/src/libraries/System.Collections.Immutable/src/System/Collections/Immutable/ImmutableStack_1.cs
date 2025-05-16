@@ -40,9 +40,7 @@ namespace System.Collections.Immutable
         /// Initializes a new instance of the <see cref="ImmutableStack{T}"/> class
         /// that acts as the empty stack.
         /// </summary>
-        private ImmutableStack()
-        {
-        }
+        private ImmutableStack() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ImmutableStack{T}"/> class.
@@ -209,9 +207,9 @@ namespace System.Collections.Immutable
         /// </returns>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return this.IsEmpty ?
-                Enumerable.Empty<T>().GetEnumerator() :
-                new EnumeratorObject(this);
+            return this.IsEmpty
+                ? Enumerable.Empty<T>().GetEnumerator()
+                : new EnumeratorObject(this);
         }
 
         /// <summary>

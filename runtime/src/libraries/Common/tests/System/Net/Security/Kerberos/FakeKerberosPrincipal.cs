@@ -14,7 +14,12 @@ class FakeKerberosPrincipal : IKerberosPrincipal
 {
     private readonly byte[] _password;
 
-    public FakeKerberosPrincipal(PrincipalType type, string principalName, string realm, byte[] password)
+    public FakeKerberosPrincipal(
+        PrincipalType type,
+        string principalName,
+        string realm,
+        byte[] password
+    )
     {
         this.Type = type;
         this.PrincipalName = principalName;
@@ -23,20 +28,17 @@ class FakeKerberosPrincipal : IKerberosPrincipal
         this._password = password;
     }
 
-    public SupportedEncryptionTypes SupportedEncryptionTypes { get; set; }
-            = SupportedEncryptionTypes.Aes128CtsHmacSha196 |
-            SupportedEncryptionTypes.Aes256CtsHmacSha196 |
-            SupportedEncryptionTypes.Aes128CtsHmacSha256 |
-            SupportedEncryptionTypes.Aes256CtsHmacSha384 |
-            SupportedEncryptionTypes.Rc4Hmac |
-            SupportedEncryptionTypes.DesCbcCrc |
-            SupportedEncryptionTypes.DesCbcMd5;
+    public SupportedEncryptionTypes SupportedEncryptionTypes { get; set; } =
+        SupportedEncryptionTypes.Aes128CtsHmacSha196
+        | SupportedEncryptionTypes.Aes256CtsHmacSha196
+        | SupportedEncryptionTypes.Aes128CtsHmacSha256
+        | SupportedEncryptionTypes.Aes256CtsHmacSha384
+        | SupportedEncryptionTypes.Rc4Hmac
+        | SupportedEncryptionTypes.DesCbcCrc
+        | SupportedEncryptionTypes.DesCbcMd5;
 
-    public IEnumerable<PaDataType> SupportedPreAuthenticationTypes { get; set; } = new[]
-    {
-        PaDataType.PA_ENC_TIMESTAMP,
-        PaDataType.PA_PK_AS_REQ
-    };
+    public IEnumerable<PaDataType> SupportedPreAuthenticationTypes { get; set; } =
+        new[] { PaDataType.PA_ENC_TIMESTAMP, PaDataType.PA_PK_AS_REQ };
 
     public PrincipalType Type { get; private set; }
 
@@ -57,17 +59,23 @@ class FakeKerberosPrincipal : IKerberosPrincipal
 
     public KerberosKey RetrieveLongTermCredential(EncryptionType etype)
     {
-        return KeyCache.GetOrAdd(etype + this.PrincipalName, pn =>
-        {
-            return new KerberosKey(
-                password: this._password,
-                principal: new PrincipalName(PrincipalNameType.NT_PRINCIPAL, Realm, new[] { this.PrincipalName }),
-                etype: etype,
-                saltType: SaltType.ActiveDirectoryUser);
-        });
+        return KeyCache.GetOrAdd(
+            etype + this.PrincipalName,
+            pn =>
+            {
+                return new KerberosKey(
+                    password: this._password,
+                    principal: new PrincipalName(
+                        PrincipalNameType.NT_PRINCIPAL,
+                        Realm,
+                        new[] { this.PrincipalName }
+                    ),
+                    etype: etype,
+                    saltType: SaltType.ActiveDirectoryUser
+                );
+            }
+        );
     }
 
-    public void Validate(X509Certificate2Collection certificates)
-    {
-    }
+    public void Validate(X509Certificate2Collection certificates) { }
 }

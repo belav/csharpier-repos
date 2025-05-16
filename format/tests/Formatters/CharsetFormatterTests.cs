@@ -47,13 +47,13 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
             // Use unicode to ensure that "latin1" and "utf8" don't look equivalent.
             var testCode = "class 🤵 { }";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
+            var editorConfig = new Dictionary<string, string>() { ["charset"] = expectedValue };
 
-                ["charset"] = expectedValue,
-            };
-
-            var formattedText = await AssertCodeUnchangedAsync(testCode, editorConfig, codeEncoding);
+            var formattedText = await AssertCodeUnchangedAsync(
+                testCode,
+                editorConfig,
+                codeEncoding
+            );
 
             Assert.Equal(expectedEncoding, formattedText.Encoding);
         }
@@ -66,11 +66,13 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Formatters
 
             var testCode = "class 🤵 { }";
 
-            var editorConfig = new Dictionary<string, string>()
-            {
-            };
+            var editorConfig = new Dictionary<string, string>() { };
 
-            var formattedText = await AssertCodeUnchangedAsync(testCode, editorConfig, codeEncoding);
+            var formattedText = await AssertCodeUnchangedAsync(
+                testCode,
+                editorConfig,
+                codeEncoding
+            );
 
             Assert.Equal(codeEncoding, formattedText.Encoding);
         }

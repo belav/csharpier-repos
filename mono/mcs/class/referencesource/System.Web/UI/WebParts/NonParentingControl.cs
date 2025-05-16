@@ -4,16 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System.Security.Permissions;
     using System.Web.UI;
 
-    internal sealed class NonParentingControl : Control {
-        protected internal override void AddedControl(Control control, int index) {
-        }
+    internal sealed class NonParentingControl : Control
+    {
+        protected internal override void AddedControl(Control control, int index) { }
 
-        protected internal override void RemovedControl(Control control) {
-        }
+        protected internal override void RemovedControl(Control control) { }
     }
 }

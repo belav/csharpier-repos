@@ -72,16 +72,22 @@ namespace System.Numerics.Tests
                     //invalid number style
                     // ******InvalidNumberStyles
                     NumberStyles invalid = (NumberStyles)0x7c00;
-                    AssertExtensions.Throws<ArgumentException>("style", () =>
-                    {
-                        BigInteger.Parse("1", invalid).ToString("d");
-                    });
-                    AssertExtensions.Throws<ArgumentException>("style", () =>
-                    {
-                        BigInteger junk;
-                        BigInteger.TryParse("1", invalid, null, out junk);
-                        Assert.Equal("1", junk.ToString("d"));
-                    });
+                    AssertExtensions.Throws<ArgumentException>(
+                        "style",
+                        () =>
+                        {
+                            BigInteger.Parse("1", invalid).ToString("d");
+                        }
+                    );
+                    AssertExtensions.Throws<ArgumentException>(
+                        "style",
+                        () =>
+                        {
+                            BigInteger junk;
+                            BigInteger.TryParse("1", invalid, null, out junk);
+                            Assert.Equal("1", junk.ToString("d"));
+                        }
+                    );
 
                     //FormatProvider tests
                     RunFormatProviderParseStrings();
@@ -144,10 +150,16 @@ namespace System.Numerics.Tests
                 BigInteger.Parse("zzz", NumberStyles.HexNumber);
             });
 
-            AssertExtensions.Throws<ArgumentException>("style", () =>
-            {
-                BigInteger.Parse("1", NumberStyles.AllowHexSpecifier | NumberStyles.AllowCurrencySymbol);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () =>
+                {
+                    BigInteger.Parse(
+                        "1",
+                        NumberStyles.AllowHexSpecifier | NumberStyles.AllowCurrencySymbol
+                    );
+                }
+            );
         }
 
         private static void RunFormatProviderParseStrings()
@@ -172,7 +184,8 @@ namespace System.Numerics.Tests
             VerifyFormatParse("123&4567^ <", NumberStyles.Any, nfi, new BigInteger(-1234567));
         }
 
-        private static bool NoGrouping(int[] sizes) => sizes.Length == 0 || (sizes.Length == 1 && sizes[0] == 0);
+        private static bool NoGrouping(int[] sizes) =>
+            sizes.Length == 0 || (sizes.Length == 1 && sizes[0] == 0);
 
         private static void VerifyDefaultParse(Random random)
         {
@@ -221,39 +234,70 @@ namespace System.Numerics.Tests
             // Leading Sign
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.NegativeSign + GetDigitSequence(1, 100, random));
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.PositiveSign + GetDigitSequence(1, 100, random));
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.NegativeSign
+                        + GetDigitSequence(1, 100, random)
+                );
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.PositiveSign
+                        + GetDigitSequence(1, 100, random)
+                );
             }
 
             // Trailing Sign
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NegativeSign, typeof(FormatException));
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.PositiveSign, typeof(FormatException));
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NegativeSign,
+                    typeof(FormatException)
+                );
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.PositiveSign,
+                    typeof(FormatException)
+                );
             }
 
             // Parentheses
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString("(" + GetDigitSequence(1, 100, random) + ")", typeof(FormatException));
+                VerifyFailParseToString(
+                    "(" + GetDigitSequence(1, 100, random) + ")",
+                    typeof(FormatException)
+                );
             }
 
             // Decimal Point - end
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, typeof(FormatException));
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                    typeof(FormatException)
+                );
             }
 
             // Decimal Point - middle
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + "000", typeof(FormatException));
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+                        + "000",
+                    typeof(FormatException)
+                );
             }
 
             // Decimal Point - non-zero decimal
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + GetDigitSequence(20, 25, random), typeof(FormatException));
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+                        + GetDigitSequence(20, 25, random),
+                    typeof(FormatException)
+                );
             }
 
             // Thousands
@@ -279,26 +323,50 @@ namespace System.Numerics.Tests
             // Exponent
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + "e" + CultureInfo.CurrentCulture.NumberFormat.PositiveSign + GetDigitSequence(1, 3, random), typeof(FormatException));
-                VerifyFailParseToString(GetDigitSequence(1, 100, random) + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + GetDigitSequence(1, 3, random), typeof(FormatException));
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + "e"
+                        + CultureInfo.CurrentCulture.NumberFormat.PositiveSign
+                        + GetDigitSequence(1, 3, random),
+                    typeof(FormatException)
+                );
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + "e"
+                        + CultureInfo.CurrentCulture.NumberFormat.NegativeSign
+                        + GetDigitSequence(1, 3, random),
+                    typeof(FormatException)
+                );
             }
 
             // Currency Symbol
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol + GetDigitSequence(1, 100, random), typeof(FormatException));
+                VerifyFailParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol
+                        + GetDigitSequence(1, 100, random),
+                    typeof(FormatException)
+                );
             }
 
             // Hex Specifier
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetHexDigitSequence(1, 100, random), typeof(FormatException));
+                VerifyFailParseToString(
+                    GetHexDigitSequence(1, 100, random),
+                    typeof(FormatException)
+                );
             }
 
             // Invalid Chars
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyFailParseToString(GetDigitSequence(1, 50, random) + GetRandomInvalidChar(random) + GetDigitSequence(1, 50, random), typeof(FormatException));
+                VerifyFailParseToString(
+                    GetDigitSequence(1, 50, random)
+                        + GetRandomInvalidChar(random)
+                        + GetDigitSequence(1, 50, random),
+                    typeof(FormatException)
+                );
             }
         }
 
@@ -326,63 +394,152 @@ namespace System.Numerics.Tests
             // Leading White
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString("\u0009\u0009\u0009" + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000A\u000A\u000A" + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000B\u000B\u000B" + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000C\u000C\u000C" + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000D\u000D\u000D" + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u0020\u0020\u0020" + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
+                VerifyParseToString(
+                    "\u0009\u0009\u0009" + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000A\u000A\u000A" + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000B\u000B\u000B" + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000C\u000C\u000C" + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000D\u000D\u000D" + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u0020\u0020\u0020" + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
             }
 
             // Trailing White
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + "\u0009\u0009\u0009", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + "\u000A\u000A\u000A", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + "\u000B\u000B\u000B", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + "\u000C\u000C\u000C", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + "\u000D\u000D\u000D", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + "\u0020\u0020\u0020", ns, FailureNotExpectedForTrailingWhite(ns, true));
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random) + "\u0009\u0009\u0009",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random) + "\u000A\u000A\u000A",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random) + "\u000B\u000B\u000B",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random) + "\u000C\u000C\u000C",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random) + "\u000D\u000D\u000D",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random) + "\u0020\u0020\u0020",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, true)
+                );
             }
 
             // Leading Sign
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.NegativeSign + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingSign) != 0));
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.PositiveSign + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingSign) != 0));
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.NegativeSign
+                        + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingSign) != 0)
+                );
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.PositiveSign
+                        + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingSign) != 0)
+                );
             }
 
             // Trailing Sign
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NegativeSign, ns, ((ns & NumberStyles.AllowTrailingSign) != 0));
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.PositiveSign, ns, ((ns & NumberStyles.AllowTrailingSign) != 0));
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NegativeSign,
+                    ns,
+                    ((ns & NumberStyles.AllowTrailingSign) != 0)
+                );
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.PositiveSign,
+                    ns,
+                    ((ns & NumberStyles.AllowTrailingSign) != 0)
+                );
             }
 
             // Parentheses
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString("(" + GetBinaryDigitSequence(1, 100, random) + ")", ns, ((ns & NumberStyles.AllowParentheses) != 0));
+                VerifyParseToString(
+                    "(" + GetBinaryDigitSequence(1, 100, random) + ")",
+                    ns,
+                    ((ns & NumberStyles.AllowParentheses) != 0)
+                );
             }
 
             // Decimal Point - end
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, ns, ((ns & NumberStyles.AllowDecimalPoint) != 0));
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                    ns,
+                    ((ns & NumberStyles.AllowDecimalPoint) != 0)
+                );
             }
 
             // Decimal Point - middle
             for (int i = 0; i < s_samples; i++)
             {
                 string digits = GetBinaryDigitSequence(1, 100, random);
-                VerifyParseToString(digits + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + "000", ns, ((ns & NumberStyles.AllowDecimalPoint) != 0), digits);
+                VerifyParseToString(
+                    digits + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + "000",
+                    ns,
+                    ((ns & NumberStyles.AllowDecimalPoint) != 0),
+                    digits
+                );
             }
 
             // Decimal Point - non-zero decimal
             for (int i = 0; i < s_samples; i++)
             {
                 string digits = GetBinaryDigitSequence(1, 100, random);
-                VerifyParseToString(digits + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + GetBinaryDigitSequence(20, 25, random), ns, false, digits);
+                VerifyParseToString(
+                    digits
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+                        + GetBinaryDigitSequence(20, 25, random),
+                    ns,
+                    false,
+                    digits
+                );
             }
 
             // Exponent
@@ -393,10 +550,19 @@ namespace System.Numerics.Tests
                 int expValue = int.Parse(exp);
                 string zeros = new string('0', expValue);
                 //Positive Exponents
-                VerifyParseToString(digits + "e" + CultureInfo.CurrentCulture.NumberFormat.PositiveSign + exp, ns, ((ns & NumberStyles.AllowExponent) != 0), digits + zeros);
+                VerifyParseToString(
+                    digits + "e" + CultureInfo.CurrentCulture.NumberFormat.PositiveSign + exp,
+                    ns,
+                    ((ns & NumberStyles.AllowExponent) != 0),
+                    digits + zeros
+                );
                 //Negative Exponents
                 bool valid = ((ns & NumberStyles.AllowExponent) != 0);
-                for (int j = digits.Length; (valid && (j > 0) && (j > digits.Length - expValue)); j--)
+                for (
+                    int j = digits.Length;
+                    (valid && (j > 0) && (j > digits.Length - expValue));
+                    j--
+                )
                 {
                     if (digits[j - 1] != '0')
                     {
@@ -405,30 +571,55 @@ namespace System.Numerics.Tests
                 }
                 if (digits.Length - int.Parse(exp) > 0)
                 {
-                    VerifyParseToString(digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp, ns, valid, digits.Substring(0, digits.Length - int.Parse(exp)));
+                    VerifyParseToString(
+                        digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp,
+                        ns,
+                        valid,
+                        digits.Substring(0, digits.Length - int.Parse(exp))
+                    );
                 }
                 else
                 {
-                    VerifyParseToString(digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp, ns, valid, "0");
+                    VerifyParseToString(
+                        digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp,
+                        ns,
+                        valid,
+                        "0"
+                    );
                 }
             }
 
             // Currency Symbol
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol + GetBinaryDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowCurrencySymbol) != 0));
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol
+                        + GetBinaryDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowCurrencySymbol) != 0)
+                );
             }
 
             // Bin Specifier
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetBinaryDigitSequence(1, 15, random), ns, ((ns & NumberStyles.AllowBinarySpecifier) != 0));
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 15, random),
+                    ns,
+                    ((ns & NumberStyles.AllowBinarySpecifier) != 0)
+                );
             }
 
             // Invalid Chars
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetBinaryDigitSequence(1, 100, random) + GetRandomInvalidChar(random) + GetBinaryDigitSequence(1, 10, random), ns, false);
+                VerifyParseToString(
+                    GetBinaryDigitSequence(1, 100, random)
+                        + GetRandomInvalidChar(random)
+                        + GetBinaryDigitSequence(1, 10, random),
+                    ns,
+                    false
+                );
             }
         }
 
@@ -456,63 +647,152 @@ namespace System.Numerics.Tests
             // Leading White
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString("\u0009\u0009\u0009" + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000A\u000A\u000A" + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000B\u000B\u000B" + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000C\u000C\u000C" + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u000D\u000D\u000D" + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
-                VerifyParseToString("\u0020\u0020\u0020" + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingWhite) != 0));
+                VerifyParseToString(
+                    "\u0009\u0009\u0009" + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000A\u000A\u000A" + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000B\u000B\u000B" + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000C\u000C\u000C" + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u000D\u000D\u000D" + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
+                VerifyParseToString(
+                    "\u0020\u0020\u0020" + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingWhite) != 0)
+                );
             }
 
             // Trailing White
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetDigitSequence(1, 100, random) + "\u0009\u0009\u0009", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetDigitSequence(1, 100, random) + "\u000A\u000A\u000A", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetDigitSequence(1, 100, random) + "\u000B\u000B\u000B", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetDigitSequence(1, 100, random) + "\u000C\u000C\u000C", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetDigitSequence(1, 100, random) + "\u000D\u000D\u000D", ns, FailureNotExpectedForTrailingWhite(ns, false));
-                VerifyParseToString(GetDigitSequence(1, 100, random) + "\u0020\u0020\u0020", ns, FailureNotExpectedForTrailingWhite(ns, true));
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random) + "\u0009\u0009\u0009",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random) + "\u000A\u000A\u000A",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random) + "\u000B\u000B\u000B",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random) + "\u000C\u000C\u000C",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random) + "\u000D\u000D\u000D",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, false)
+                );
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random) + "\u0020\u0020\u0020",
+                    ns,
+                    FailureNotExpectedForTrailingWhite(ns, true)
+                );
             }
 
             // Leading Sign
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.NegativeSign + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingSign) != 0));
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.PositiveSign + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowLeadingSign) != 0));
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.NegativeSign
+                        + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingSign) != 0)
+                );
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.PositiveSign
+                        + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowLeadingSign) != 0)
+                );
             }
 
             // Trailing Sign
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NegativeSign, ns, ((ns & NumberStyles.AllowTrailingSign) != 0));
-                VerifyParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.PositiveSign, ns, ((ns & NumberStyles.AllowTrailingSign) != 0));
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NegativeSign,
+                    ns,
+                    ((ns & NumberStyles.AllowTrailingSign) != 0)
+                );
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.PositiveSign,
+                    ns,
+                    ((ns & NumberStyles.AllowTrailingSign) != 0)
+                );
             }
 
             // Parentheses
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString("(" + GetDigitSequence(1, 100, random) + ")", ns, ((ns & NumberStyles.AllowParentheses) != 0));
+                VerifyParseToString(
+                    "(" + GetDigitSequence(1, 100, random) + ")",
+                    ns,
+                    ((ns & NumberStyles.AllowParentheses) != 0)
+                );
             }
 
             // Decimal Point - end
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetDigitSequence(1, 100, random) + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator, ns, ((ns & NumberStyles.AllowDecimalPoint) != 0));
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator,
+                    ns,
+                    ((ns & NumberStyles.AllowDecimalPoint) != 0)
+                );
             }
 
             // Decimal Point - middle
             for (int i = 0; i < s_samples; i++)
             {
                 string digits = GetDigitSequence(1, 100, random);
-                VerifyParseToString(digits + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + "000", ns, ((ns & NumberStyles.AllowDecimalPoint) != 0), digits);
+                VerifyParseToString(
+                    digits + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + "000",
+                    ns,
+                    ((ns & NumberStyles.AllowDecimalPoint) != 0),
+                    digits
+                );
             }
 
             // Decimal Point - non-zero decimal
             for (int i = 0; i < s_samples; i++)
             {
                 string digits = GetDigitSequence(1, 100, random);
-                VerifyParseToString(digits + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + GetDigitSequence(20, 25, random), ns, false, digits);
+                VerifyParseToString(
+                    digits
+                        + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+                        + GetDigitSequence(20, 25, random),
+                    ns,
+                    false,
+                    digits
+                );
             }
 
             // Thousands
@@ -525,7 +805,11 @@ namespace System.Numerics.Tests
                 sizes = CultureInfo.CurrentCulture.NumberFormat.NumberGroupSizes;
                 separator = CultureInfo.CurrentCulture.NumberFormat.NumberGroupSeparator;
                 digits = GenerateGroups(sizes, separator, random);
-                VerifyParseToString(digits, ns, NoGrouping(sizes) || ((ns & NumberStyles.AllowThousands) != 0));
+                VerifyParseToString(
+                    digits,
+                    ns,
+                    NoGrouping(sizes) || ((ns & NumberStyles.AllowThousands) != 0)
+                );
             }
 
             // Exponent
@@ -536,10 +820,19 @@ namespace System.Numerics.Tests
                 int expValue = int.Parse(exp);
                 string zeros = new string('0', expValue);
                 //Positive Exponents
-                VerifyParseToString(digits + "e" + CultureInfo.CurrentCulture.NumberFormat.PositiveSign + exp, ns, ((ns & NumberStyles.AllowExponent) != 0), digits + zeros);
+                VerifyParseToString(
+                    digits + "e" + CultureInfo.CurrentCulture.NumberFormat.PositiveSign + exp,
+                    ns,
+                    ((ns & NumberStyles.AllowExponent) != 0),
+                    digits + zeros
+                );
                 //Negative Exponents
                 bool valid = ((ns & NumberStyles.AllowExponent) != 0);
-                for (int j = digits.Length; (valid && (j > 0) && (j > digits.Length - expValue)); j--)
+                for (
+                    int j = digits.Length;
+                    (valid && (j > 0) && (j > digits.Length - expValue));
+                    j--
+                )
                 {
                     if (digits[j - 1] != '0')
                     {
@@ -548,30 +841,55 @@ namespace System.Numerics.Tests
                 }
                 if (digits.Length - int.Parse(exp) > 0)
                 {
-                    VerifyParseToString(digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp, ns, valid, digits.Substring(0, digits.Length - int.Parse(exp)));
+                    VerifyParseToString(
+                        digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp,
+                        ns,
+                        valid,
+                        digits.Substring(0, digits.Length - int.Parse(exp))
+                    );
                 }
                 else
                 {
-                    VerifyParseToString(digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp, ns, valid, "0");
+                    VerifyParseToString(
+                        digits + "e" + CultureInfo.CurrentCulture.NumberFormat.NegativeSign + exp,
+                        ns,
+                        valid,
+                        "0"
+                    );
                 }
             }
 
             // Currency Symbol
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol + GetDigitSequence(1, 100, random), ns, ((ns & NumberStyles.AllowCurrencySymbol) != 0));
+                VerifyParseToString(
+                    CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol
+                        + GetDigitSequence(1, 100, random),
+                    ns,
+                    ((ns & NumberStyles.AllowCurrencySymbol) != 0)
+                );
             }
 
             // Hex Specifier
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetHexDigitSequence(1, 15, random) + "A", ns, ((ns & NumberStyles.AllowHexSpecifier) != 0));
+                VerifyParseToString(
+                    GetHexDigitSequence(1, 15, random) + "A",
+                    ns,
+                    ((ns & NumberStyles.AllowHexSpecifier) != 0)
+                );
             }
 
             // Invalid Chars
             for (int i = 0; i < s_samples; i++)
             {
-                VerifyParseToString(GetDigitSequence(1, 100, random) + GetRandomInvalidChar(random) + GetDigitSequence(1, 10, random), ns, false);
+                VerifyParseToString(
+                    GetDigitSequence(1, 100, random)
+                        + GetRandomInvalidChar(random)
+                        + GetDigitSequence(1, 10, random),
+                    ns,
+                    false
+                );
             }
         }
 
@@ -587,29 +905,59 @@ namespace System.Numerics.Tests
         private static void VerifyFailParseToString(string num1, Type expectedExceptionType)
         {
             BigInteger test;
-            Assert.False(BigInteger.TryParse(num1, out test), string.Format("Expected TryParse to fail on {0}", num1));
+            Assert.False(
+                BigInteger.TryParse(num1, out test),
+                string.Format("Expected TryParse to fail on {0}", num1)
+            );
             if (num1 == null)
             {
-                Assert.Throws<ArgumentNullException>(() => { BigInteger.Parse(num1).ToString("d"); });
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    BigInteger.Parse(num1).ToString("d");
+                });
             }
             else
             {
-                Assert.Throws<FormatException>(() => { BigInteger.Parse(num1).ToString("d"); });
+                Assert.Throws<FormatException>(() =>
+                {
+                    BigInteger.Parse(num1).ToString("d");
+                });
             }
         }
 
-        private static void VerifyParseToString(string num1, NumberStyles ns, bool failureNotExpected)
+        private static void VerifyParseToString(
+            string num1,
+            NumberStyles ns,
+            bool failureNotExpected
+        )
         {
-            VerifyParseToString(num1, ns, failureNotExpected, Fix(num1.Trim(), ((ns & NumberStyles.AllowHexSpecifier) != 0), (ns & NumberStyles.AllowBinarySpecifier) != 0, failureNotExpected));
+            VerifyParseToString(
+                num1,
+                ns,
+                failureNotExpected,
+                Fix(
+                    num1.Trim(),
+                    ((ns & NumberStyles.AllowHexSpecifier) != 0),
+                    (ns & NumberStyles.AllowBinarySpecifier) != 0,
+                    failureNotExpected
+                )
+            );
         }
 
-        static void VerifyParseSpanToString(string num1, NumberStyles ns, bool failureNotExpected, string expected)
+        static void VerifyParseSpanToString(
+            string num1,
+            NumberStyles ns,
+            bool failureNotExpected,
+            string expected
+        )
         {
             if (failureNotExpected)
             {
                 Eval(BigInteger.Parse(num1.AsSpan(), ns), expected);
 
-                Assert.True(BigInteger.TryParse(num1.AsSpan(), ns, provider: null, out BigInteger test));
+                Assert.True(
+                    BigInteger.TryParse(num1.AsSpan(), ns, provider: null, out BigInteger test)
+                );
                 Eval(test, expected);
 
                 if (ns == NumberStyles.Integer)
@@ -620,9 +968,14 @@ namespace System.Numerics.Tests
             }
             else
             {
-                Assert.Throws<FormatException>(() => { BigInteger.Parse(num1.AsSpan(), ns); });
+                Assert.Throws<FormatException>(() =>
+                {
+                    BigInteger.Parse(num1.AsSpan(), ns);
+                });
 
-                Assert.False(BigInteger.TryParse(num1.AsSpan(), ns, provider: null, out BigInteger test));
+                Assert.False(
+                    BigInteger.TryParse(num1.AsSpan(), ns, provider: null, out BigInteger test)
+                );
 
                 if (ns == NumberStyles.Integer)
                 {
@@ -631,7 +984,12 @@ namespace System.Numerics.Tests
             }
         }
 
-        private static void VerifyParseToString(string num1, NumberStyles ns, bool failureNotExpected, string expected)
+        private static void VerifyParseToString(
+            string num1,
+            NumberStyles ns,
+            bool failureNotExpected,
+            string expected
+        )
         {
             BigInteger test;
 
@@ -645,13 +1003,22 @@ namespace System.Numerics.Tests
             {
                 if (num1 == null)
                 {
-                    Assert.Throws<ArgumentNullException>(() => { BigInteger.Parse(num1, ns); });
+                    Assert.Throws<ArgumentNullException>(() =>
+                    {
+                        BigInteger.Parse(num1, ns);
+                    });
                 }
                 else
                 {
-                    Assert.Throws<FormatException>(() => { BigInteger.Parse(num1, ns); });
+                    Assert.Throws<FormatException>(() =>
+                    {
+                        BigInteger.Parse(num1, ns);
+                    });
                 }
-                Assert.False(BigInteger.TryParse(num1, ns, null, out test), string.Format("Expected TryParse to fail on {0}", num1));
+                Assert.False(
+                    BigInteger.TryParse(num1, ns, null, out test),
+                    string.Format("Expected TryParse to fail on {0}", num1)
+                );
             }
 
             if (num1 != null)
@@ -660,22 +1027,40 @@ namespace System.Numerics.Tests
             }
         }
 
-        static void VerifySimpleFormatParseSpan(string num1, NumberFormatInfo nfi, BigInteger expected, bool failureExpected)
+        static void VerifySimpleFormatParseSpan(
+            string num1,
+            NumberFormatInfo nfi,
+            BigInteger expected,
+            bool failureExpected
+        )
         {
             if (!failureExpected)
             {
                 Assert.Equal(expected, BigInteger.Parse(num1.AsSpan(), provider: nfi));
-                Assert.True(BigInteger.TryParse(num1.AsSpan(), NumberStyles.Any, nfi, out BigInteger test));
+                Assert.True(
+                    BigInteger.TryParse(num1.AsSpan(), NumberStyles.Any, nfi, out BigInteger test)
+                );
                 Assert.Equal(expected, test);
             }
             else
             {
-                Assert.Throws<FormatException>(() => { BigInteger.Parse(num1.AsSpan(), provider: nfi); });
-                Assert.False(BigInteger.TryParse(num1.AsSpan(), NumberStyles.Any, nfi, out BigInteger test), string.Format("Expected TryParse to fail on {0}", num1));
+                Assert.Throws<FormatException>(() =>
+                {
+                    BigInteger.Parse(num1.AsSpan(), provider: nfi);
+                });
+                Assert.False(
+                    BigInteger.TryParse(num1.AsSpan(), NumberStyles.Any, nfi, out BigInteger test),
+                    string.Format("Expected TryParse to fail on {0}", num1)
+                );
             }
         }
 
-        private static void VerifySimpleFormatParse(string num1, NumberFormatInfo nfi, BigInteger expected, bool failureExpected = false)
+        private static void VerifySimpleFormatParse(
+            string num1,
+            NumberFormatInfo nfi,
+            BigInteger expected,
+            bool failureExpected = false
+        )
         {
             BigInteger test;
 
@@ -687,8 +1072,14 @@ namespace System.Numerics.Tests
             }
             else
             {
-                Assert.Throws<FormatException>(() => { BigInteger.Parse(num1, nfi); });
-                Assert.False(BigInteger.TryParse(num1, NumberStyles.Any, nfi, out test), string.Format("Expected TryParse to fail on {0}", num1));
+                Assert.Throws<FormatException>(() =>
+                {
+                    BigInteger.Parse(num1, nfi);
+                });
+                Assert.False(
+                    BigInteger.TryParse(num1, NumberStyles.Any, nfi, out test),
+                    string.Format("Expected TryParse to fail on {0}", num1)
+                );
             }
 
             if (num1 != null)
@@ -697,22 +1088,42 @@ namespace System.Numerics.Tests
             }
         }
 
-        static void VerifyFormatParseSpan(string num1, NumberStyles ns, NumberFormatInfo nfi, BigInteger expected, bool failureExpected)
+        static void VerifyFormatParseSpan(
+            string num1,
+            NumberStyles ns,
+            NumberFormatInfo nfi,
+            BigInteger expected,
+            bool failureExpected
+        )
         {
             if (!failureExpected)
             {
                 Assert.Equal(expected, BigInteger.Parse(num1.AsSpan(), ns, nfi));
-                Assert.True(BigInteger.TryParse(num1.AsSpan(), NumberStyles.Any, nfi, out BigInteger test));
+                Assert.True(
+                    BigInteger.TryParse(num1.AsSpan(), NumberStyles.Any, nfi, out BigInteger test)
+                );
                 Assert.Equal(expected, test);
             }
             else
             {
-                Assert.Throws<FormatException>(() => { BigInteger.Parse(num1.AsSpan(), ns, nfi); });
-                Assert.False(BigInteger.TryParse(num1.AsSpan(), ns, nfi, out BigInteger test), string.Format("Expected TryParse to fail on {0}", num1));
+                Assert.Throws<FormatException>(() =>
+                {
+                    BigInteger.Parse(num1.AsSpan(), ns, nfi);
+                });
+                Assert.False(
+                    BigInteger.TryParse(num1.AsSpan(), ns, nfi, out BigInteger test),
+                    string.Format("Expected TryParse to fail on {0}", num1)
+                );
             }
         }
 
-        private static void VerifyFormatParse(string num1, NumberStyles ns, NumberFormatInfo nfi, BigInteger expected, bool failureExpected = false)
+        private static void VerifyFormatParse(
+            string num1,
+            NumberStyles ns,
+            NumberFormatInfo nfi,
+            BigInteger expected,
+            bool failureExpected = false
+        )
         {
             BigInteger test;
 
@@ -724,8 +1135,14 @@ namespace System.Numerics.Tests
             }
             else
             {
-                Assert.Throws<FormatException>(() => { BigInteger.Parse(num1, ns, nfi); });
-                Assert.False(BigInteger.TryParse(num1, ns, nfi, out test), string.Format("Expected TryParse to fail on {0}", num1));
+                Assert.Throws<FormatException>(() =>
+                {
+                    BigInteger.Parse(num1, ns, nfi);
+                });
+                Assert.False(
+                    BigInteger.TryParse(num1, ns, nfi, out test),
+                    string.Format("Expected TryParse to fail on {0}", num1)
+                );
             }
 
             if (num1 != null)
@@ -758,7 +1175,25 @@ namespace System.Numerics.Tests
         private static string GetHexDigitSequence(int min, int max, Random random)
         {
             string result = string.Empty;
-            string[] digits = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+            string[] digits = new string[]
+            {
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "a",
+                "b",
+                "c",
+                "d",
+                "e",
+                "f",
+            };
             int size = random.Next(min, max);
             bool hasHexCharacter = false;
 
@@ -782,7 +1217,7 @@ namespace System.Numerics.Tests
         {
             string result = string.Empty;
             int size = random.Next(min, max);
-            
+
             for (int i = 0; i < size; i++)
             {
                 result += random.Next(0, 2);
@@ -793,7 +1228,31 @@ namespace System.Numerics.Tests
 
         private static string GetRandomInvalidChar(Random random)
         {
-            char[] digits = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F' };
+            char[] digits = new char[]
+            {
+                '0',
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+                '6',
+                '7',
+                '8',
+                '9',
+                'a',
+                'b',
+                'c',
+                'd',
+                'e',
+                'f',
+                'A',
+                'B',
+                'C',
+                'D',
+                'E',
+                'F',
+            };
             char result = '5';
             while (result == '5')
             {
@@ -863,7 +1322,10 @@ namespace System.Numerics.Tests
         {
             const int HexBlockSize = 4;
 
-            string compensatedInput = input.Length % HexBlockSize == 0 ? input : new string(input[0], HexBlockSize - input.Length % HexBlockSize) + input;
+            string compensatedInput =
+                input.Length % HexBlockSize == 0
+                    ? input
+                    : new string(input[0], HexBlockSize - input.Length % HexBlockSize) + input;
 
             var hexBuffer = new List<char>(compensatedInput.Length / HexBlockSize);
 
@@ -874,7 +1336,8 @@ namespace System.Numerics.Tests
 
                 for (int posInHex = HexBlockSize - 1; posInHex >= 0; posInHex--)
                 {
-                    currentHexValue += int.Parse(compensatedInput[pos].ToString()) * (1 << posInHex);
+                    currentHexValue +=
+                        int.Parse(compensatedInput[pos].ToString()) * (1 << posInHex);
                     pos++;
                 }
                 hexBuffer.Add(currentHexValue.ToString("X")[0]);
@@ -908,7 +1371,12 @@ namespace System.Numerics.Tests
             {
                 try
                 {
-                    BigInteger x2 = (int.Parse(new string(new char[] { inArr[i] }), NumberStyles.AllowHexSpecifier) * baseNum);
+                    BigInteger x2 = (
+                        int.Parse(
+                            new string(new char[] { inArr[i] }),
+                            NumberStyles.AllowHexSpecifier
+                        ) * baseNum
+                    );
                     x = x + x2;
                 }
                 catch (FormatException)

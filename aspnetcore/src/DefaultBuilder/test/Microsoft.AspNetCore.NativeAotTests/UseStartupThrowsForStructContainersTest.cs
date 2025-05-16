@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 int classTestResult = RunClassTest();
 if (classTestResult != 100)
@@ -56,7 +56,12 @@ static int RunStructTest()
     }
     catch (InvalidOperationException e)
     {
-        if (!e.Message.StartsWith("A ValueType TContainerBuilder isn't supported with AOT", StringComparison.Ordinal))
+        if (
+            !e.Message.StartsWith(
+                "A ValueType TContainerBuilder isn't supported with AOT",
+                StringComparison.Ordinal
+            )
+        )
         {
             return -4;
         }
@@ -82,13 +87,16 @@ public class MyStartupWithClass
     public static bool ConfigureContainerCalled;
 
     public void ConfigureServices(IServiceCollection _) => ConfigureServicesCalled = true;
+
     public void ConfigureContainer(MyContainerClass _) => ConfigureContainerCalled = true;
+
     public void Configure(IApplicationBuilder _) { }
 }
 
 public class MyContainerClassFactory : IServiceProviderFactory<MyContainerClass>
 {
-    public MyContainerClass CreateBuilder(IServiceCollection services) => new MyContainerClass(services);
+    public MyContainerClass CreateBuilder(IServiceCollection services) =>
+        new MyContainerClass(services);
 
     public IServiceProvider CreateServiceProvider(MyContainerClass containerBuilder)
     {
@@ -103,7 +111,9 @@ public class MyContainerClass : IServiceProvider
     private IServiceCollection _services;
 
     public MyContainerClass(IServiceCollection services) => _services = services;
+
     public void Build() => _inner = _services.BuildServiceProvider();
+
     public object GetService(Type serviceType) => _inner.GetService(serviceType);
 }
 
@@ -113,13 +123,16 @@ public class MyStartupWithStruct
     public static bool ConfigureContainerCalled;
 
     public void ConfigureServices(IServiceCollection _) => ConfigureServicesCalled = true;
+
     public void ConfigureContainer(MyContainerStruct _) => ConfigureContainerCalled = true;
+
     public void Configure(IApplicationBuilder _) { }
 }
 
 public class MyContainerStructFactory : IServiceProviderFactory<MyContainerStruct>
 {
-    public MyContainerStruct CreateBuilder(IServiceCollection services) => new MyContainerStruct(services);
+    public MyContainerStruct CreateBuilder(IServiceCollection services) =>
+        new MyContainerStruct(services);
 
     public IServiceProvider CreateServiceProvider(MyContainerStruct containerBuilder)
     {
@@ -134,6 +147,8 @@ public struct MyContainerStruct : IServiceProvider
     private IServiceCollection _services;
 
     public MyContainerStruct(IServiceCollection services) => _services = services;
+
     public void Build() => _inner = _services.BuildServiceProvider();
+
     public object GetService(Type serviceType) => _inner.GetService(serviceType);
 }

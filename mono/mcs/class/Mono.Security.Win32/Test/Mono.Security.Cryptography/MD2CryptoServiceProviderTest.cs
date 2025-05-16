@@ -8,21 +8,20 @@
 //
 
 using System;
-using NUnit.Framework;
 using Mono.Security.Cryptography;
+using NUnit.Framework;
 
-namespace MonoTests.Security.Cryptography {
+namespace MonoTests.Security.Cryptography
+{
+    [TestFixture]
+    public class MD2CryptoServiceProviderTest : MD2Test
+    {
+        [SetUp]
+        public void Setup()
+        {
+            hash = new MD2CryptoServiceProvider();
+        }
 
-[TestFixture]
-public class MD2CryptoServiceProviderTest : MD2Test {
-
-	[SetUp]
-	public void Setup () 
-	{
-		hash = new MD2CryptoServiceProvider ();
-	}
-
-	// this will run ALL tests defined in MD2Test.cs with the MD2CryptoServiceProvider implementation
-}
-
+        // this will run ALL tests defined in MD2Test.cs with the MD2CryptoServiceProvider implementation
+    }
 }

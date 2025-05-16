@@ -7,21 +7,22 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public static class HubProtocolHelpers
 {
-    private static readonly IHubProtocol NewtonsoftJsonHubProtocol = new NewtonsoftJsonHubProtocol();
+    private static readonly IHubProtocol NewtonsoftJsonHubProtocol =
+        new NewtonsoftJsonHubProtocol();
 
     private static readonly IHubProtocol MessagePackHubProtocol = new MessagePackHubProtocol();
 
     public static readonly List<string> AllProtocolNames = new List<string>
-        {
-            NewtonsoftJsonHubProtocol.Name,
-            MessagePackHubProtocol.Name
-        };
+    {
+        NewtonsoftJsonHubProtocol.Name,
+        MessagePackHubProtocol.Name,
+    };
 
     public static readonly IList<IHubProtocol> AllProtocols = new List<IHubProtocol>()
-        {
-            NewtonsoftJsonHubProtocol,
-            MessagePackHubProtocol
-        };
+    {
+        NewtonsoftJsonHubProtocol,
+        MessagePackHubProtocol,
+    };
 
     public static IHubProtocol GetHubProtocol(string name)
     {

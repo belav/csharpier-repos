@@ -8,9 +8,9 @@ namespace System.Activities
     using System.Activities.Hosting;
     using System.Activities.Runtime;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Globalization;
 
     [DataContract]
     [Fx.Tag.XamlVisible(false)]
@@ -44,10 +44,7 @@ namespace System.Activities
 
         internal static Bookmark AsyncOperationCompletionBookmark
         {
-            get
-            {
-                return asyncOperationCompletionBookmark;
-            }
+            get { return asyncOperationCompletionBookmark; }
         }
 
         internal static IEqualityComparer<Bookmark> Comparer
@@ -63,7 +60,11 @@ namespace System.Activities
             }
         }
 
-        [DataMember(EmitDefaultValue = false, Name = "exclusiveHandlesThatReferenceThis", Order = 2)]
+        [DataMember(
+            EmitDefaultValue = false,
+            Name = "exclusiveHandlesThatReferenceThis",
+            Order = 2
+        )]
         internal ExclusiveHandleList SerializedExclusiveHandlesThatReferenceThis
         {
             get { return this.exclusiveHandlesThatReferenceThis; }
@@ -85,18 +86,11 @@ namespace System.Activities
         }
 
         [DataMember(EmitDefaultValue = false)]
-        internal BookmarkScope Scope
-        {
-            get;
-            set;
-        }
+        internal BookmarkScope Scope { get; set; }
 
         internal bool IsNamed
         {
-            get
-            {
-                return this.id == 0;
-            }
+            get { return this.id == 0; }
         }
 
         public string Name
@@ -126,16 +120,9 @@ namespace System.Activities
 
         internal ExclusiveHandleList ExclusiveHandles
         {
-            get
-            {
-                return this.exclusiveHandlesThatReferenceThis;
-            }
-            set
-            {
-                this.exclusiveHandlesThatReferenceThis = value;
-            }
+            get { return this.exclusiveHandlesThatReferenceThis; }
+            set { this.exclusiveHandlesThatReferenceThis = value; }
         }
-
 
         internal static Bookmark Create(long id)
         {
@@ -153,7 +140,11 @@ namespace System.Activities
                 scopeInfo = this.Scope.GenerateScopeInfo();
             }
 
-            return new BookmarkInfo(this.externalName, bookmarkCallback.ActivityInstance.Activity.DisplayName, scopeInfo);
+            return new BookmarkInfo(
+                this.externalName,
+                bookmarkCallback.ActivityInstance.Activity.DisplayName,
+                scopeInfo
+            );
         }
 
         public bool Equals(Bookmark other)
@@ -205,9 +196,7 @@ namespace System.Activities
         [DataContract]
         internal class BookmarkComparer : IEqualityComparer<Bookmark>
         {
-            public BookmarkComparer()
-            {
-            }
+            public BookmarkComparer() { }
 
             public bool Equals(Bookmark x, Bookmark y)
             {

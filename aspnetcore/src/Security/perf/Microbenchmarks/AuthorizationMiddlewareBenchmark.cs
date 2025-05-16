@@ -18,14 +18,23 @@ public class AuthorizationMiddlewareBenchmark
     [GlobalSetup]
     public void Setup()
     {
-        var policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(new AuthorizationOptions()));
-        _authorizationMiddleware = new AuthorizationMiddleware((context) => Task.CompletedTask, policyProvider);
+        var policyProvider = new DefaultAuthorizationPolicyProvider(
+            Options.Create(new AuthorizationOptions())
+        );
+        _authorizationMiddleware = new AuthorizationMiddleware(
+            (context) => Task.CompletedTask,
+            policyProvider
+        );
 
         _httpContextNoEndpoint = new DefaultHttpContext();
 
         var feature = new EndpointFeature
         {
-            Endpoint = new Endpoint((context) => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test endpoint")
+            Endpoint = new Endpoint(
+                (context) => Task.CompletedTask,
+                EndpointMetadataCollection.Empty,
+                "Test endpoint"
+            ),
         };
         _httpContextHasEndpoint = new DefaultHttpContext();
         _httpContextHasEndpoint.Features.Set<IEndpointFeature>(feature);

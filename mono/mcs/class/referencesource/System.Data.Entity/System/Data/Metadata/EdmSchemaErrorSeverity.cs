@@ -13,13 +13,18 @@ namespace System.Data.Metadata.Edm
     // also, they must stay in sync
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     public enum EdmSchemaErrorSeverity
     {
         /// <summary></summary>
         Warning = 0,
+
         /// <summary></summary>
         Error = 1,
     }

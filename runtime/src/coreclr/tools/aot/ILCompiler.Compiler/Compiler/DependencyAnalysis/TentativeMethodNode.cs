@@ -2,13 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.IL;
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -32,7 +29,10 @@ namespace ILCompiler.DependencyAnalysis
         protected virtual ISymbolNode GetTarget(NodeFactory factory)
         {
             // If the class library doesn't provide this helper, the optimization is disabled.
-            MethodDesc helper = factory.TypeSystemContext.GetOptionalHelperEntryPoint("ThrowHelpers", "ThrowBodyRemoved");
+            MethodDesc helper = factory.TypeSystemContext.GetOptionalHelperEntryPoint(
+                "ThrowHelpers",
+                "ThrowBodyRemoved"
+            );
             return helper == null ? RealBody : factory.MethodEntrypoint(helper);
         }
 
@@ -49,8 +49,16 @@ namespace ILCompiler.DependencyAnalysis
             return _methodNode.Marked;
         }
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
+
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;

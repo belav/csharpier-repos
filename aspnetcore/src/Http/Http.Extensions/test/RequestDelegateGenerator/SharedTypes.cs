@@ -1,19 +1,19 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Metadata;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using System.Diagnostics.CodeAnalysis;
 using Microsoft.Diagnostics.Runtime.Interop;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
@@ -33,18 +33,12 @@ public class CustomMetadataEmitter : IEndpointMetadataProvider, IEndpointParamet
 {
     public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
     {
-        builder.Metadata.Add(new CustomMetadata()
-        {
-            Value = 42
-        });
+        builder.Metadata.Add(new CustomMetadata() { Value = 42 });
     }
 
     public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
     {
-        builder.Metadata.Add(new CustomMetadata()
-        {
-            Value = 24
-        });
+        builder.Metadata.Add(new CustomMetadata() { Value = 24 });
     }
 }
 
@@ -72,7 +66,7 @@ public class TryParseTodo : Todo
             {
                 Id = 1,
                 Name = "Knit kitten mittens.",
-                IsComplete = false
+                IsComplete = false,
             };
             return true;
         }
@@ -104,8 +98,7 @@ public class JsonTodoChild : JsonTodo
 
 [JsonSerializable(typeof(Todo))]
 [JsonSerializable(typeof(IAsyncEnumerable<JsonTodo>))]
-public partial class SharedTestJsonContext : JsonSerializerContext
-{ }
+public partial class SharedTestJsonContext : JsonSerializerContext { }
 
 public class CustomFromBodyAttribute : Attribute, IFromBodyMetadata
 {
@@ -117,7 +110,7 @@ public enum TodoStatus
     Trap, // A trap for Enum.TryParse<T>!
     Done,
     InProgress,
-    NotDone
+    NotDone,
 }
 
 public class PrecedenceCheckTodo
@@ -126,12 +119,19 @@ public class PrecedenceCheckTodo
     {
         MagicValue = magicValue;
     }
+
     public int MagicValue { get; }
-    public static bool TryParse(string? input, IFormatProvider? provider, out PrecedenceCheckTodo result)
+
+    public static bool TryParse(
+        string? input,
+        IFormatProvider? provider,
+        out PrecedenceCheckTodo result
+    )
     {
         result = new PrecedenceCheckTodo(42);
         return true;
     }
+
     public static bool TryParse(string? input, out PrecedenceCheckTodo result)
     {
         result = new PrecedenceCheckTodo(24);
@@ -139,7 +139,11 @@ public class PrecedenceCheckTodo
     }
 }
 
-public enum MyEnum { ValueA, ValueB, }
+public enum MyEnum
+{
+    ValueA,
+    ValueB,
+}
 
 public record MyTryParseRecord(Uri Uri)
 {
@@ -162,7 +166,9 @@ public class PrecedenceCheckTodoWithoutFormat
     {
         MagicValue = magicValue;
     }
+
     public int MagicValue { get; }
+
     public static bool TryParse(string? input, out PrecedenceCheckTodoWithoutFormat result)
     {
         result = new PrecedenceCheckTodoWithoutFormat(24);
@@ -175,10 +181,12 @@ public class ParsableTodo : IParsable<ParsableTodo>
     public int Id { get; set; }
     public string? Name { get; set; } = "Todo";
     public bool IsComplete { get; set; }
+
     public static ParsableTodo Parse(string s, IFormatProvider? provider)
     {
         return new ParsableTodo();
     }
+
     public static bool TryParse(string? input, IFormatProvider? provider, out ParsableTodo result)
     {
         if (input == "1")
@@ -187,7 +195,7 @@ public class ParsableTodo : IParsable<ParsableTodo>
             {
                 Id = 1,
                 Name = "Knit kitten mittens.",
-                IsComplete = false
+                IsComplete = false,
             };
             return true;
         }
@@ -201,7 +209,10 @@ public class ParsableTodo : IParsable<ParsableTodo>
 
 public class CustomTodo : Todo
 {
-    public static async ValueTask<CustomTodo?> BindAsync(HttpContext context, ParameterInfo parameter)
+    public static async ValueTask<CustomTodo?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
         Assert.Equal(typeof(CustomTodo), parameter.ParameterType);
         Assert.Equal("customTodo", parameter.Name);
@@ -214,13 +225,19 @@ public class CustomTodo : Todo
 
 public record MyBindAsyncRecord(Uri Uri)
 {
-    public static ValueTask<MyBindAsyncRecord?> BindAsync(HttpContext context, ParameterInfo parameter)
+    public static ValueTask<MyBindAsyncRecord?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
         if (parameter.ParameterType != typeof(MyBindAsyncRecord))
         {
             throw new UnreachableException($"Unexpected parameter type: {parameter.ParameterType}");
         }
-        if (parameter.Name?.StartsWith("myBindAsyncParam", StringComparison.OrdinalIgnoreCase) == false)
+        if (
+            parameter.Name?.StartsWith("myBindAsyncParam", StringComparison.OrdinalIgnoreCase)
+            == false
+        )
         {
             throw new UnreachableException("Unexpected parameter name");
         }
@@ -241,9 +258,15 @@ public record MyBindAsyncRecord(Uri Uri)
 
 public record struct MyNullableBindAsyncStruct(Uri Uri)
 {
-    public static ValueTask<MyNullableBindAsyncStruct?> BindAsync(HttpContext context, ParameterInfo parameter)
+    public static ValueTask<MyNullableBindAsyncStruct?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
-        if (parameter.ParameterType != typeof(MyNullableBindAsyncStruct) && parameter.ParameterType != typeof(MyNullableBindAsyncStruct?))
+        if (
+            parameter.ParameterType != typeof(MyNullableBindAsyncStruct)
+            && parameter.ParameterType != typeof(MyNullableBindAsyncStruct?)
+        )
         {
             throw new UnreachableException("Unexpected parameter type");
         }
@@ -266,9 +289,15 @@ public record struct MyNullableBindAsyncStruct(Uri Uri)
 
 public record struct MyBindAsyncStruct(Uri Uri)
 {
-    public static ValueTask<MyBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter)
+    public static ValueTask<MyBindAsyncStruct> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
-        if (parameter.ParameterType != typeof(MyBindAsyncStruct) && parameter.ParameterType != typeof(MyBindAsyncStruct?))
+        if (
+            parameter.ParameterType != typeof(MyBindAsyncStruct)
+            && parameter.ParameterType != typeof(MyBindAsyncStruct?)
+        )
         {
             throw new UnreachableException("Unexpected parameter type");
         }
@@ -279,7 +308,9 @@ public record struct MyBindAsyncStruct(Uri Uri)
 
         if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
         {
-            throw new BadHttpRequestException("The request is missing the required Referer header.");
+            throw new BadHttpRequestException(
+                "The request is missing the required Referer header."
+            );
         }
 
         return new(result: new(uri));
@@ -293,9 +324,15 @@ public record struct MyBindAsyncStruct(Uri Uri)
 
 public record struct MyBothBindAsyncStruct(Uri Uri)
 {
-    public static ValueTask<MyBothBindAsyncStruct> BindAsync(HttpContext context, ParameterInfo parameter)
+    public static ValueTask<MyBothBindAsyncStruct> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
-        if (parameter.ParameterType != typeof(MyBothBindAsyncStruct) && parameter.ParameterType != typeof(MyBothBindAsyncStruct?))
+        if (
+            parameter.ParameterType != typeof(MyBothBindAsyncStruct)
+            && parameter.ParameterType != typeof(MyBothBindAsyncStruct?)
+        )
         {
             throw new UnreachableException("Unexpected parameter type");
         }
@@ -306,7 +343,9 @@ public record struct MyBothBindAsyncStruct(Uri Uri)
 
         if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
         {
-            throw new BadHttpRequestException("The request is missing the required Referer header.");
+            throw new BadHttpRequestException(
+                "The request is missing the required Referer header."
+            );
         }
 
         return new(result: new(uri));
@@ -323,7 +362,9 @@ public record struct MySimpleBindAsyncStruct(Uri Uri)
     {
         if (!Uri.TryCreate(context.Request.Headers.Referer, UriKind.Absolute, out var uri))
         {
-            throw new BadHttpRequestException("The request is missing the required Referer header.");
+            throw new BadHttpRequestException(
+                "The request is missing the required Referer header."
+            );
         }
 
         return new(result: new(uri));
@@ -369,20 +410,22 @@ public interface IBindAsync<T>
 
 public class BindAsyncWrongType
 {
-    public static ValueTask<MyBindAsyncRecord?> BindAsync(HttpContext context, ParameterInfo parameter) =>
-        throw new UnreachableException("We shouldn't bind from the wrong type!");
+    public static ValueTask<MyBindAsyncRecord?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    ) => throw new UnreachableException("We shouldn't bind from the wrong type!");
 }
 
-public record MyBindAsyncFromInterfaceRecord(Uri Uri) : IBindAsync<MyBindAsyncFromInterfaceRecord>
-{
-}
+public record MyBindAsyncFromInterfaceRecord(Uri Uri)
+    : IBindAsync<MyBindAsyncFromInterfaceRecord> { }
 
 public interface IHaveUri
 {
     Uri? Uri { get; set; }
 }
 
-public class BaseBindAsync<T> where T : IHaveUri, new()
+public class BaseBindAsync<T>
+    where T : IHaveUri, new()
 {
     public static ValueTask<T?> BindAsync(HttpContext context)
     {
@@ -406,15 +449,17 @@ public class InheritBindAsync : BaseBindAsync<InheritBindAsync>, IHaveUri
 }
 
 // Using wrong T on purpose
-public class InheritBindAsyncWrongType : BaseBindAsync<InheritBindAsync>
-{
-}
+public class InheritBindAsyncWrongType : BaseBindAsync<InheritBindAsync> { }
 
-public class BindAsyncFromImplicitStaticAbstractInterface : IBindableFromHttpContext<BindAsyncFromImplicitStaticAbstractInterface>
+public class BindAsyncFromImplicitStaticAbstractInterface
+    : IBindableFromHttpContext<BindAsyncFromImplicitStaticAbstractInterface>
 {
     public Uri? Uri { get; init; }
 
-    public static ValueTask<BindAsyncFromImplicitStaticAbstractInterface?> BindAsync(HttpContext context, ParameterInfo parameter)
+    public static ValueTask<BindAsyncFromImplicitStaticAbstractInterface?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
         if (parameter.ParameterType != typeof(BindAsyncFromImplicitStaticAbstractInterface))
         {
@@ -434,11 +479,15 @@ public class BindAsyncFromImplicitStaticAbstractInterface : IBindableFromHttpCon
     }
 }
 
-public class BindAsyncFromExplicitStaticAbstractInterface : IBindableFromHttpContext<BindAsyncFromExplicitStaticAbstractInterface>
+public class BindAsyncFromExplicitStaticAbstractInterface
+    : IBindableFromHttpContext<BindAsyncFromExplicitStaticAbstractInterface>
 {
     public Uri? Uri { get; init; }
 
-    static ValueTask<BindAsyncFromExplicitStaticAbstractInterface?> IBindableFromHttpContext<BindAsyncFromExplicitStaticAbstractInterface>.BindAsync(HttpContext context, ParameterInfo parameter)
+    static ValueTask<BindAsyncFromExplicitStaticAbstractInterface?> IBindableFromHttpContext<BindAsyncFromExplicitStaticAbstractInterface>.BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    )
     {
         if (parameter.ParameterType != typeof(BindAsyncFromExplicitStaticAbstractInterface))
         {
@@ -458,16 +507,21 @@ public class BindAsyncFromExplicitStaticAbstractInterface : IBindableFromHttpCon
     }
 }
 
-public class BindAsyncFromStaticAbstractInterfaceWrongType : IBindableFromHttpContext<BindAsyncFromImplicitStaticAbstractInterface>
+public class BindAsyncFromStaticAbstractInterfaceWrongType
+    : IBindableFromHttpContext<BindAsyncFromImplicitStaticAbstractInterface>
 {
-    public static ValueTask<BindAsyncFromImplicitStaticAbstractInterface?> BindAsync(HttpContext context, ParameterInfo parameter) =>
-        throw new UnreachableException("We shouldn't bind from the wrong interface type!");
+    public static ValueTask<BindAsyncFromImplicitStaticAbstractInterface?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    ) => throw new UnreachableException("We shouldn't bind from the wrong interface type!");
 }
 
 public class MyBindAsyncTypeThatThrows
 {
-    public static ValueTask<MyBindAsyncTypeThatThrows?> BindAsync(HttpContext context, ParameterInfo parameter) =>
-        throw new InvalidOperationException("BindAsync failed");
+    public static ValueTask<MyBindAsyncTypeThatThrows?> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    ) => throw new InvalidOperationException("BindAsync failed");
 }
 
 public struct BodyStruct
@@ -494,7 +548,11 @@ public class ExceptionThrowingRequestBodyStream : Stream
 
     public override long Length => throw new NotImplementedException();
 
-    public override long Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public override long Position
+    {
+        get => throw new NotImplementedException();
+        set => throw new NotImplementedException();
+    }
 
     public override void Flush()
     {
@@ -554,9 +612,14 @@ public class TlsConnectionFeature : ITlsConnectionFeature
     }
 }
 
-public class AddsCustomParameterMetadataBindable : IEndpointParameterMetadataProvider, IEndpointMetadataProvider
+public class AddsCustomParameterMetadataBindable
+    : IEndpointParameterMetadataProvider,
+        IEndpointMetadataProvider
 {
-    public static ValueTask<AddsCustomParameterMetadataBindable> BindAsync(HttpContext context, ParameterInfo parameter) => default;
+    public static ValueTask<AddsCustomParameterMetadataBindable> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    ) => default;
 
     public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
     {
@@ -581,7 +644,7 @@ public enum MetadataSource
     Caller,
     Parameter,
     ReturnType,
-    Property
+    Property,
 }
 
 public class ParameterNameMetadata
@@ -589,7 +652,9 @@ public class ParameterNameMetadata
     public string Name { get; init; }
 }
 
-public class AddsCustomParameterMetadata : IEndpointParameterMetadataProvider, IEndpointMetadataProvider
+public class AddsCustomParameterMetadata
+    : IEndpointParameterMetadataProvider,
+        IEndpointMetadataProvider
 {
     public AddsCustomParameterMetadataAsProperty Data { get; set; }
 
@@ -604,7 +669,9 @@ public class AddsCustomParameterMetadata : IEndpointParameterMetadataProvider, I
     }
 }
 
-public class AddsCustomParameterMetadataAsProperty : IEndpointParameterMetadataProvider, IEndpointMetadataProvider
+public class AddsCustomParameterMetadataAsProperty
+    : IEndpointParameterMetadataProvider,
+        IEndpointMetadataProvider
 {
     public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
     {
@@ -616,6 +683,7 @@ public class AddsCustomParameterMetadataAsProperty : IEndpointParameterMetadataP
         builder.Metadata.Add(new CustomEndpointMetadata { Source = MetadataSource.Property });
     }
 }
+
 public class AddsCustomEndpointMetadataResult : IEndpointMetadataProvider, IResult
 {
     public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
@@ -630,7 +698,9 @@ public class AccessesServicesMetadataResult : IResult, IEndpointMetadataProvider
 {
     public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
     {
-        if (builder.ApplicationServices.GetRequiredService<MetadataService>() is { } metadataService)
+        if (
+            builder.ApplicationServices.GetRequiredService<MetadataService>() is { } metadataService
+        )
         {
             builder.Metadata.Add(metadataService);
         }
@@ -679,12 +749,16 @@ public class RemovesAcceptsMetadataResult : IEndpointMetadataProvider, IResult
 
 public class AccessesServicesMetadataBinder : IEndpointMetadataProvider
 {
-    public static ValueTask<AccessesServicesMetadataBinder> BindAsync(HttpContext context, ParameterInfo parameter) =>
-        new(new AccessesServicesMetadataBinder());
+    public static ValueTask<AccessesServicesMetadataBinder> BindAsync(
+        HttpContext context,
+        ParameterInfo parameter
+    ) => new(new AccessesServicesMetadataBinder());
 
     public static void PopulateMetadata(MethodInfo method, EndpointBuilder builder)
     {
-        if (builder.ApplicationServices.GetRequiredService<MetadataService>() is { } metadataService)
+        if (
+            builder.ApplicationServices.GetRequiredService<MetadataService>() is { } metadataService
+        )
         {
             builder.Metadata.Add(metadataService);
         }
@@ -692,33 +766,50 @@ public class AccessesServicesMetadataBinder : IEndpointMetadataProvider
 }
 
 public record MetadataService;
-public record ParameterListFromQuery(HttpContext HttpContext,
+
+public record ParameterListFromQuery(
+    HttpContext HttpContext,
     [FromQuery] int Value,
     [FromQuery(Name = "customQuery")] int CustomValue,
-    [property: FromQuery(Name = "anotherCustomQuery")] int? AnotherCustomValue = null);
+    [property: FromQuery(Name = "anotherCustomQuery")] int? AnotherCustomValue = null
+);
+
 public record ParameterListFromRoute(HttpContext HttpContext, int Value);
-public record ParameterListFromHeader(HttpContext HttpContext, [FromHeader(Name = "X-Custom-Header")] int Value);
+
+public record ParameterListFromHeader(
+    HttpContext HttpContext,
+    [FromHeader(Name = "X-Custom-Header")] int Value
+);
 
 public record ParameterListFromHeaderWithProperties
 {
     public HttpContext HttpContext { get; set; }
+
     [FromHeader(Name = "X-Custom-Header")]
     public int Value { get; set; }
 }
 
 public record ParametersListWithImplicitFromBody(HttpContext HttpContext, TodoStruct Todo);
+
 public record struct TodoStruct(int Id, string Name, bool IsComplete, TodoStatus Status) : ITodo;
+
 public record ParametersListWithExplicitFromBody(HttpContext HttpContext, [FromBody] Todo Todo);
+
 public record ParametersListWithHttpContext(
     HttpContext HttpContext,
     ClaimsPrincipal User,
     HttpRequest Request,
-    HttpResponse Response);
+    HttpResponse Response
+);
 
 public record struct ParameterListRecordStruct(HttpContext HttpContext, [FromRoute] int Value);
 
 public record ParameterListRecordClass(HttpContext HttpContext, [FromRoute] int Value);
-public record struct ParameterRecordStructWithJsonBodyOrService(TodoStruct Todo, TestService Service);
+
+public record struct ParameterRecordStructWithJsonBodyOrService(
+    TodoStruct Todo,
+    TestService Service
+);
 
 #nullable enable
 public record ParameterListRecordWithoutPositionalParameters
@@ -728,6 +819,7 @@ public record ParameterListRecordWithoutPositionalParameters
     [FromRoute]
     public required int Value { get; set; }
 }
+
 #nullable restore
 
 public struct ParameterListStruct
@@ -773,7 +865,10 @@ public struct ParameterListStructWithMultipleParameterizedContructor
         Value = 10;
     }
 
-    public ParameterListStructWithMultipleParameterizedContructor(HttpContext httpContext, [FromHeader(Name = "Value")] int value)
+    public ParameterListStructWithMultipleParameterizedContructor(
+        HttpContext httpContext,
+        [FromHeader(Name = "Value")] int value
+    )
     {
         HttpContext = httpContext;
         Value = value;
@@ -793,6 +888,7 @@ public class ParameterListClass
     [FromRoute]
     public int Value { get; set; }
 }
+
 #nullable restore
 
 public class ParameterListClassWithParameterizedContructor
@@ -834,20 +930,23 @@ public class ParameterListWithReadOnlyProperties
 
     public int ReadOnlyValue { get; }
 
-    public int PrivateSetValue { get; private set;  }
+    public int PrivateSetValue { get; private set; }
 }
 
 public record struct SampleParameterList(int Foo);
+
 public record struct AdditionalSampleParameterList(int Bar);
 
 public record ParametersListWithBindAsyncType(
     HttpContext HttpContext,
     InheritBindAsync Value,
-    MyBindAsyncRecord MyBindAsyncParam);
+    MyBindAsyncRecord MyBindAsyncParam
+);
 
 public record ParametersListWithMetadataType(
     HttpContext HttpContext,
-    AddsCustomParameterMetadataAsProperty Value);
+    AddsCustomParameterMetadataAsProperty Value
+);
 
 public class ParameterListRequiredStringFromDifferentSources
 {
@@ -866,17 +965,14 @@ public class ParameterListRequiredStringFromDifferentSources
 public record BadArgumentListRecord(int Foo)
 {
     public BadArgumentListRecord(int foo, int bar)
-        : this(foo)
-    {
-    }
+        : this(foo) { }
 
     public int Bar { get; set; }
 }
 
 public class BadNoPublicConstructorArgumentListClass
 {
-    private BadNoPublicConstructorArgumentListClass()
-    { }
+    private BadNoPublicConstructorArgumentListClass() { }
 
     public int Foo { get; set; }
 }
@@ -888,9 +984,7 @@ public abstract class BadAbstractArgumentListClass
 
 public class BadArgumentListClass
 {
-    public BadArgumentListClass(int foo, string name)
-    {
-    }
+    public BadArgumentListClass(int foo, string name) { }
 
     public int Foo { get; set; }
     public int Bar { get; set; }
@@ -898,13 +992,9 @@ public class BadArgumentListClass
 
 public class BadArgumentListClassMultipleCtors
 {
-    public BadArgumentListClassMultipleCtors(int foo)
-    {
-    }
+    public BadArgumentListClassMultipleCtors(int foo) { }
 
-    public BadArgumentListClassMultipleCtors(int foo, int bar)
-    {
-    }
+    public BadArgumentListClassMultipleCtors(int foo, int bar) { }
 
     public int Foo { get; set; }
     public int Bar { get; set; }
@@ -937,6 +1027,7 @@ public class MetadataCountMetadata
 {
     public int Count { get; init; }
 }
+
 public class RoutePatternMetadata
 {
     public string RoutePattern { get; init; } = String.Empty;
@@ -951,7 +1042,9 @@ public class AddsRoutePatternMetadata : IEndpointMetadataProvider
             return;
         }
 
-        builder.Metadata.Add(new RoutePatternMetadata { RoutePattern = reb.RoutePattern?.RawText ?? string.Empty });
+        builder.Metadata.Add(
+            new RoutePatternMetadata { RoutePattern = reb.RoutePattern?.RawText ?? string.Empty }
+        );
     }
 }
 
@@ -964,13 +1057,9 @@ public class CountsDefaultEndpointMetadataPoco : IEndpointMetadataProvider
     }
 }
 
-public class Attribute1 : Attribute
-{
-}
+public class Attribute1 : Attribute { }
 
-public class Attribute2 : Attribute
-{
-}
+public class Attribute2 : Attribute { }
 
 public class Status410Result : IResult
 {
@@ -984,7 +1073,11 @@ public class Status410Result : IResult
 
 public class TodoJsonConverter : JsonConverter<ITodo>
 {
-    public override ITodo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override ITodo Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var todo = new Todo();
         while (reader.Read())
@@ -1027,16 +1120,24 @@ public class TodoChild : Todo
 {
     public string? Child { get; set; }
 }
+
 #nullable restore
 
 public class TodoWithExplicitIParsable : IParsable<TodoWithExplicitIParsable>
 {
-    static TodoWithExplicitIParsable IParsable<TodoWithExplicitIParsable>.Parse(string s, IFormatProvider provider)
+    static TodoWithExplicitIParsable IParsable<TodoWithExplicitIParsable>.Parse(
+        string s,
+        IFormatProvider provider
+    )
     {
         return new TodoWithExplicitIParsable();
     }
 
-    static bool IParsable<TodoWithExplicitIParsable>.TryParse(string s, IFormatProvider provider, out TodoWithExplicitIParsable result)
+    static bool IParsable<TodoWithExplicitIParsable>.TryParse(
+        string s,
+        IFormatProvider provider,
+        out TodoWithExplicitIParsable result
+    )
     {
         result = new TodoWithExplicitIParsable();
         return true;
@@ -1053,7 +1154,10 @@ public class BindableWithMismatchedNullability<T>
 
     public T? Value { get; }
 
-    public static async ValueTask<BindableWithMismatchedNullability<T?>> BindAsync(HttpContext httpContext, ParameterInfo parameter)
+    public static async ValueTask<BindableWithMismatchedNullability<T?>> BindAsync(
+        HttpContext httpContext,
+        ParameterInfo parameter
+    )
     {
         await Task.CompletedTask;
         return new BindableWithMismatchedNullability<T?>(default);
@@ -1069,7 +1173,10 @@ public struct BindableStructWithMismatchedNullability<T>
 
     public T? Value { get; }
 
-    public static async ValueTask<BindableStructWithMismatchedNullability<T?>> BindAsync(HttpContext httpContext, ParameterInfo parameter)
+    public static async ValueTask<BindableStructWithMismatchedNullability<T?>> BindAsync(
+        HttpContext httpContext,
+        ParameterInfo parameter
+    )
     {
         await Task.CompletedTask;
         return new BindableStructWithMismatchedNullability<T?>(default);
@@ -1078,7 +1185,10 @@ public struct BindableStructWithMismatchedNullability<T>
 
 public class BindableClassWithNullReturn
 {
-    public static async ValueTask<BindableClassWithNullReturn?> BindAsync(HttpContext httpContext, ParameterInfo parameter)
+    public static async ValueTask<BindableClassWithNullReturn?> BindAsync(
+        HttpContext httpContext,
+        ParameterInfo parameter
+    )
     {
         await Task.CompletedTask;
         return null;
@@ -1087,7 +1197,10 @@ public class BindableClassWithNullReturn
 
 public struct BindableStructWithNullReturn
 {
-    public static async ValueTask<BindableStructWithNullReturn?> BindAsync(HttpContext httpContext, ParameterInfo parameter)
+    public static async ValueTask<BindableStructWithNullReturn?> BindAsync(
+        HttpContext httpContext,
+        ParameterInfo parameter
+    )
     {
         await Task.CompletedTask;
         return null;
@@ -1103,7 +1216,10 @@ public struct BindableStruct
 
     public string Value { get; }
 
-    public static async ValueTask<BindableStruct> BindAsync(HttpContext httpContext, ParameterInfo parameter)
+    public static async ValueTask<BindableStruct> BindAsync(
+        HttpContext httpContext,
+        ParameterInfo parameter
+    )
     {
         await Task.CompletedTask;
         return new BindableStruct(httpContext.Request.Query["value"].ToString());

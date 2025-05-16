@@ -17,9 +17,13 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
     /// This is used instead of <see cref="ApplyChangesOperation"/> as we need to show a confirmation
     /// dialog to the user before applying the change.
     /// </summary>
-    internal sealed class ChangeSignatureCodeActionOperation(Solution changedSolution, string? confirmationMessage) : CodeActionOperation
+    internal sealed class ChangeSignatureCodeActionOperation(
+        Solution changedSolution,
+        string? confirmationMessage
+    ) : CodeActionOperation
     {
-        public Solution ChangedSolution { get; } = changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
+        public Solution ChangedSolution { get; } =
+            changedSolution ?? throw new ArgumentNullException(nameof(changedSolution));
 
         public string? ConfirmationMessage { get; } = confirmationMessage;
 
@@ -29,23 +33,46 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// Show the confirmation message, if available, before attempting to apply the changes.
         /// </summary>
         internal sealed override Task<bool> TryApplyAsync(
-            Workspace workspace, Solution originalSolution, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+            Workspace workspace,
+            Solution originalSolution,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        )
         {
-            return ApplyWorker(workspace, originalSolution, progressTracker, cancellationToken) ? SpecializedTasks.True : SpecializedTasks.False;
+            return ApplyWorker(workspace, originalSolution, progressTracker, cancellationToken)
+                ? SpecializedTasks.True
+                : SpecializedTasks.False;
         }
 
-        private bool ApplyWorker(Workspace workspace, Solution originalSolution, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+        private bool ApplyWorker(
+            Workspace workspace,
+            Solution originalSolution,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             if (ConfirmationMessage != null)
             {
-                var notificationService = workspace.Services.GetRequiredService<INotificationService>();
-                if (!notificationService.ConfirmMessageBox(ConfirmationMessage, severity: NotificationSeverity.Warning))
+                var notificationService =
+                    workspace.Services.GetRequiredService<INotificationService>();
+                if (
+                    !notificationService.ConfirmMessageBox(
+                        ConfirmationMessage,
+                        severity: NotificationSeverity.Warning
+                    )
+                )
                 {
                     return false;
                 }
             }
 
-            return ApplyChangesOperation.ApplyOrMergeChanges(workspace, originalSolution, ChangedSolution, progressTracker, cancellationToken);
+            return ApplyChangesOperation.ApplyOrMergeChanges(
+                workspace,
+                originalSolution,
+                ChangedSolution,
+                progressTracker,
+                cancellationToken
+            );
         }
     }
 }

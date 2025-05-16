@@ -14,7 +14,8 @@ namespace System.Xml.XmlReaderTests
     {
         private static string _invalidCharMessageStart = "Data at the root level is invalid";
         private static string _badStartNameChar = "Name cannot begin with the";
-        private static string _invalidCharInThisEncoding = "Invalid character in the given encoding";
+        private static string _invalidCharInThisEncoding =
+            "Invalid character in the given encoding";
 
         [Fact]
         public static void ReadWithSurrogateCharAndInvalidChar()
@@ -43,7 +44,45 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadWithSurrogateCharAndInvalidChar_ValidXmlStructure()
         {
-            var bytes = new byte[] { 60, 0, 0, 0, 97, 0, 0, 0, 62, 0, 0, 0, 0, 34, 1, 0, 62, 100, 60, 47, 60, 0, 0, 0, 47, 0, 0, 0, 97, 0, 0, 0, 62, 0, 0, 0 };
+            var bytes = new byte[]
+            {
+                60,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                0,
+                0,
+                0,
+                0,
+                34,
+                1,
+                0,
+                62,
+                100,
+                60,
+                47,
+                60,
+                0,
+                0,
+                0,
+                47,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                0,
+                0,
+                0,
+            };
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             XmlException ex = Assert.Throws<XmlException>(() => reader.Read());
@@ -75,7 +114,37 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void BytesEndingWithSurrogateChar()
         {
-            var bytes = new byte[] { 60, 0, 0, 0, 65, 0, 0, 0, 97, 0, 0, 0, 62, 0, 0, 0, 98, 0, 0, 0, 97, 0, 0, 0, 0, 34, 1, 0 };
+            var bytes = new byte[]
+            {
+                60,
+                0,
+                0,
+                0,
+                65,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                0,
+                0,
+                0,
+                98,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                0,
+                34,
+                1,
+                0,
+            };
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             Assert.True(reader.Read());
@@ -86,7 +155,29 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void BytesStartingWithInvalidChar()
         {
-            var bytes = new byte[] { 62, 100, 60, 47, 60, 0, 0, 0, 0, 34, 1, 0, 65, 0, 0, 0, 97, 0, 0, 0 };
+            var bytes = new byte[]
+            {
+                62,
+                100,
+                60,
+                47,
+                60,
+                0,
+                0,
+                0,
+                0,
+                34,
+                1,
+                0,
+                65,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+            };
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             XmlException ex = Assert.Throws<XmlException>(() => reader.Read());
@@ -96,18 +187,87 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void BytesEndingWithInvalidChar()
         {
-            var bytes = new byte[] { 60, 0, 0, 0, 97, 0, 0, 0, 62, 0, 0, 0, 65, 0, 0, 0, 65, 0, 0, 0, 97, 0, 0, 0, 62, 100, 60, 47};
+            var bytes = new byte[]
+            {
+                60,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                0,
+                0,
+                0,
+                65,
+                0,
+                0,
+                0,
+                65,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                100,
+                60,
+                47,
+            };
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             Assert.True(reader.Read());
-            XmlException ex = Assert.Throws<XmlException>(() => reader.ReadElementContentAsString());
+            XmlException ex = Assert.Throws<XmlException>(() => reader.ReadElementContentAsString()
+            );
             Assert.Contains(_invalidCharInThisEncoding, ex.Message);
         }
 
         [Fact]
         public static void ReadWithSurrogateChar_ValidXmlStructure()
         {
-            var bytes = new byte[] { 60, 0, 0, 0, 97, 0, 0, 0, 62, 0, 0, 0, 0, 34, 1, 0, 0, 35, 1, 0, 60, 0, 0, 0, 47, 0, 0, 0, 97, 0, 0, 0, 62, 0, 0, 0 };
+            var bytes = new byte[]
+            {
+                60,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                0,
+                0,
+                0,
+                0,
+                34,
+                1,
+                0,
+                0,
+                35,
+                1,
+                0,
+                60,
+                0,
+                0,
+                0,
+                47,
+                0,
+                0,
+                0,
+                97,
+                0,
+                0,
+                0,
+                62,
+                0,
+                0,
+                0,
+            };
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             Assert.True(reader.Read());
@@ -116,7 +276,7 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadWithIncompleteBytes()
         {
-            var bytes = new byte[] { 60, 0, 0, 0, 97, 0, 0, 0, 65, 0, 0, 0, 97, 62, 10};
+            var bytes = new byte[] { 60, 0, 0, 0, 97, 0, 0, 0, 65, 0, 0, 0, 97, 62, 10 };
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             XmlException ex = Assert.Throws<XmlException>(() => reader.Read());

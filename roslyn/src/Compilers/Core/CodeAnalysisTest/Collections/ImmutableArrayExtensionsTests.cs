@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(1, a.Length);
             Assert.Equal(2, a[0]);
 
-            Assert.Throws<ArgumentNullException>(() => ImmutableArray.CreateRange<int>((IEnumerable<int>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                ImmutableArray.CreateRange<int>((IEnumerable<int>)null)
+            );
 
             a = ImmutableArray.CreateRange<int>(Enumerable.Range(1, 2));
             Assert.Equal(2, a.Length);
@@ -85,10 +87,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var nul = default(ImmutableArray<int>);
             var empty = ImmutableArray.Create<int>();
 
-            var original = new int[] { 1, 2, 3, }.AsImmutableOrNull();
-            var notEqualSubset = new int[] { 1, 2, }.AsImmutableOrNull();
-            var notEqualSuperset = new int[] { 1, 2, 3, 4, }.AsImmutableOrNull();
-            var equalOrder = new int[] { 2, 1, 3, }.AsImmutableOrNull();
+            var original = new int[] { 1, 2, 3 }.AsImmutableOrNull();
+            var notEqualSubset = new int[] { 1, 2 }.AsImmutableOrNull();
+            var notEqualSuperset = new int[] { 1, 2, 3, 4 }.AsImmutableOrNull();
+            var equalOrder = new int[] { 2, 1, 3 }.AsImmutableOrNull();
             var equalElements = new int[] { -1, -2, -3 }.AsImmutableOrNull();
             var equalDuplicate = new int[] { 1, 2, 3, 3, -3 }.AsImmutableOrNull();
 
@@ -143,15 +145,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<NullReferenceException>(() => default(ImmutableArray<int>).Single());
             Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>().Single());
             Assert.Equal(1, ImmutableArray.Create<int>(1).Single());
-            Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>(1, 2).Single());
+            Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>(1, 2).Single()
+            );
 
             Func<int, bool> isOdd = x => x % 2 == 1;
 
             // BUG:753260 Should this be ArgumentNullException for consistency?
             Assert.Throws<NullReferenceException>(() => default(ImmutableArray<int>).Single(isOdd));
-            Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>().Single(isOdd));
+            Assert.Throws<InvalidOperationException>(() =>
+                ImmutableArray.Create<int>().Single(isOdd)
+            );
             Assert.Equal(1, ImmutableArray.Create<int>(1, 2).Single(isOdd));
-            Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>(1, 2, 3).Single(isOdd));
+            Assert.Throws<InvalidOperationException>(() =>
+                ImmutableArray.Create<int>(1, 2, 3).Single(isOdd)
+            );
         }
 
         [Fact]
@@ -272,7 +279,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(empty, empty.AddRange((IEnumerable<int>)empty));
             Assert.Equal(a, a.AddRange((IEnumerable<int>)empty));
             Assert.True(a.SequenceEqual(empty.AddRange((IEnumerable<int>)a)));
-            Assert.True(a.AddRange((IEnumerable<int>)a).SequenceEqual(ImmutableArray.Create<int>(0, 2, 4, 0, 2, 4)));
+            Assert.True(
+                a.AddRange((IEnumerable<int>)a)
+                    .SequenceEqual(ImmutableArray.Create<int>(0, 2, 4, 0, 2, 4))
+            );
         }
 
         [Fact]
@@ -285,7 +295,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(a, a.InsertRange(0, empty));
             Assert.Equal(a, a.InsertRange(2, empty));
             Assert.True(a.SequenceEqual(empty.InsertRange(0, a)));
-            Assert.True(a.InsertRange(2, a).SequenceEqual(ImmutableArray.Create<int>(0, 2, 0, 2, 4, 4)));
+            Assert.True(
+                a.InsertRange(2, a).SequenceEqual(ImmutableArray.Create<int>(0, 2, 0, 2, 4, 4))
+            );
         }
 
         [Fact]
@@ -294,25 +306,41 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var roa = new string[] { "one:1", "two:2", "three:3" }.AsImmutableOrNull();
 
             // Call extension method directly to resolve the ambiguity with EnumerableExtensions.ToDictionary
-            var dict = System.Linq.ImmutableArrayExtensions.ToDictionary(roa, s => s.Split(':').First());
+            var dict = System.Linq.ImmutableArrayExtensions.ToDictionary(
+                roa,
+                s => s.Split(':').First()
+            );
             Assert.Equal("one:1", dict["one"]);
             Assert.Equal("two:2", dict["two"]);
             Assert.Equal("three:3", dict["three"]);
             Assert.Throws<KeyNotFoundException>(() => dict["One"]);
 
-            dict = System.Linq.ImmutableArrayExtensions.ToDictionary(roa, s => s.Split(':').First(), StringComparer.OrdinalIgnoreCase);
+            dict = System.Linq.ImmutableArrayExtensions.ToDictionary(
+                roa,
+                s => s.Split(':').First(),
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal("one:1", dict["one"]);
             Assert.Equal("two:2", dict["Two"]);
             Assert.Equal("three:3", dict["THREE"]);
             Assert.Throws<KeyNotFoundException>(() => dict[""]);
 
-            dict = System.Linq.ImmutableArrayExtensions.ToDictionary(roa, s => s.Split(':').First(), s => s.Split(':').Last());
+            dict = System.Linq.ImmutableArrayExtensions.ToDictionary(
+                roa,
+                s => s.Split(':').First(),
+                s => s.Split(':').Last()
+            );
             Assert.Equal("1", dict["one"]);
             Assert.Equal("2", dict["two"]);
             Assert.Equal("3", dict["three"]);
             Assert.Throws<KeyNotFoundException>(() => dict["THREE"]);
 
-            dict = System.Linq.ImmutableArrayExtensions.ToDictionary(roa, s => s.Split(':').First(), s => s.Split(':').Last(), StringComparer.OrdinalIgnoreCase);
+            dict = System.Linq.ImmutableArrayExtensions.ToDictionary(
+                roa,
+                s => s.Split(':').First(),
+                s => s.Split(':').Last(),
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal("1", dict["onE"]);
             Assert.Equal("2", dict["Two"]);
             Assert.Equal("3", dict["three"]);
@@ -363,20 +391,43 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.True(b.SequenceEqual(a.SelectAsArray((item, index, arg) => index, 3)));
 
             AssertEx.Equal(new[] { 10 }, ImmutableArray.Create(1).SelectAsArray(i => 10 * i));
-            AssertEx.Equal(new[] { 10, 20 }, ImmutableArray.Create(1, 2).SelectAsArray(i => 10 * i));
-            AssertEx.Equal(new[] { 10, 20, 30 }, ImmutableArray.Create(1, 2, 3).SelectAsArray(i => 10 * i));
-            AssertEx.Equal(new[] { 10, 20, 30, 40 }, ImmutableArray.Create(1, 2, 3, 4).SelectAsArray(i => 10 * i));
-            AssertEx.Equal(new[] { 10, 20, 30, 40, 50 }, ImmutableArray.Create(1, 2, 3, 4, 5).SelectAsArray(i => 10 * i));
+            AssertEx.Equal(
+                new[] { 10, 20 },
+                ImmutableArray.Create(1, 2).SelectAsArray(i => 10 * i)
+            );
+            AssertEx.Equal(
+                new[] { 10, 20, 30 },
+                ImmutableArray.Create(1, 2, 3).SelectAsArray(i => 10 * i)
+            );
+            AssertEx.Equal(
+                new[] { 10, 20, 30, 40 },
+                ImmutableArray.Create(1, 2, 3, 4).SelectAsArray(i => 10 * i)
+            );
+            AssertEx.Equal(
+                new[] { 10, 20, 30, 40, 50 },
+                ImmutableArray.Create(1, 2, 3, 4, 5).SelectAsArray(i => 10 * i)
+            );
         }
 
         [Fact]
         public void SelectAsArrayWithPredicate()
         {
-            Assert.Empty(ImmutableArray<object>.Empty.SelectAsArray<object, int>(item => throw null, item => throw null));
+            Assert.Empty(
+                ImmutableArray<object>.Empty.SelectAsArray<object, int>(
+                    item => throw null,
+                    item => throw null
+                )
+            );
 
             var array = ImmutableArray.Create(1, 2, 3, 4, 5);
-            AssertEx.Equal(new[] { 2, 3, 4, 5, 6 }, array.SelectAsArray(item => true, item => item + 1));
-            AssertEx.Equal(new[] { 3, 5 }, array.SelectAsArray(item => item % 2 == 0, item => item + 1));
+            AssertEx.Equal(
+                new[] { 2, 3, 4, 5, 6 },
+                array.SelectAsArray(item => true, item => item + 1)
+            );
+            AssertEx.Equal(
+                new[] { 3, 5 },
+                array.SelectAsArray(item => item % 2 == 0, item => item + 1)
+            );
             Assert.Empty(array.SelectAsArray<int, int>(item => item < 0, item => throw null));
         }
 
@@ -389,27 +440,37 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var single1 = ImmutableArray.Create(1);
             var single2 = ImmutableArray.Create(10);
             var single3 = ImmutableArray.Create(11);
-            Assert.True(single3.SequenceEqual(single1.ZipAsArray(single2, (item1, item2) => item1 + item2)));
+            Assert.True(
+                single3.SequenceEqual(single1.ZipAsArray(single2, (item1, item2) => item1 + item2))
+            );
 
             var pair1 = ImmutableArray.Create(1, 2);
             var pair2 = ImmutableArray.Create(10, 11);
             var pair3 = ImmutableArray.Create(11, 13);
-            Assert.True(pair3.SequenceEqual(pair1.ZipAsArray(pair2, (item1, item2) => item1 + item2)));
+            Assert.True(
+                pair3.SequenceEqual(pair1.ZipAsArray(pair2, (item1, item2) => item1 + item2))
+            );
 
             var triple1 = ImmutableArray.Create(1, 2, 3);
             var triple2 = ImmutableArray.Create(10, 11, 12);
             var triple3 = ImmutableArray.Create(11, 13, 15);
-            Assert.True(triple3.SequenceEqual(triple1.ZipAsArray(triple2, (item1, item2) => item1 + item2)));
+            Assert.True(
+                triple3.SequenceEqual(triple1.ZipAsArray(triple2, (item1, item2) => item1 + item2))
+            );
 
             var quad1 = ImmutableArray.Create(1, 2, 3, 4);
             var quad2 = ImmutableArray.Create(10, 11, 12, 13);
             var quad3 = ImmutableArray.Create(11, 13, 15, 17);
-            Assert.True(quad3.SequenceEqual(quad1.ZipAsArray(quad2, (item1, item2) => item1 + item2)));
+            Assert.True(
+                quad3.SequenceEqual(quad1.ZipAsArray(quad2, (item1, item2) => item1 + item2))
+            );
 
             var quin1 = ImmutableArray.Create(1, 2, 3, 4, 5);
             var quin2 = ImmutableArray.Create(10, 11, 12, 13, 14);
             var quin3 = ImmutableArray.Create(11, 13, 15, 17, 19);
-            Assert.True(quin3.SequenceEqual(quin1.ZipAsArray(quin2, (item1, item2) => item1 + item2)));
+            Assert.True(
+                quin3.SequenceEqual(quin1.ZipAsArray(quin2, (item1, item2) => item1 + item2))
+            );
         }
 
         [Fact]
@@ -421,27 +482,55 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var single1 = ImmutableArray.Create(1);
             var single2 = ImmutableArray.Create(10);
             var single3 = ImmutableArray.Create(13);
-            Assert.True(single3.SequenceEqual(single1.ZipAsArray(single2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)));
+            Assert.True(
+                single3.SequenceEqual(
+                    single1.ZipAsArray(
+                        single2,
+                        2,
+                        (item1, item2, i, arg) => item1 + item2 + i + arg
+                    )
+                )
+            );
 
             var pair1 = ImmutableArray.Create(1, 2);
             var pair2 = ImmutableArray.Create(10, 11);
             var pair3 = ImmutableArray.Create(13, 16);
-            Assert.True(pair3.SequenceEqual(pair1.ZipAsArray(pair2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)));
+            Assert.True(
+                pair3.SequenceEqual(
+                    pair1.ZipAsArray(pair2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)
+                )
+            );
 
             var triple1 = ImmutableArray.Create(1, 2, 3);
             var triple2 = ImmutableArray.Create(10, 11, 12);
             var triple3 = ImmutableArray.Create(13, 16, 19);
-            Assert.True(triple3.SequenceEqual(triple1.ZipAsArray(triple2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)));
+            Assert.True(
+                triple3.SequenceEqual(
+                    triple1.ZipAsArray(
+                        triple2,
+                        2,
+                        (item1, item2, i, arg) => item1 + item2 + i + arg
+                    )
+                )
+            );
 
             var quad1 = ImmutableArray.Create(1, 2, 3, 4);
             var quad2 = ImmutableArray.Create(10, 11, 12, 13);
             var quad3 = ImmutableArray.Create(13, 16, 19, 22);
-            Assert.True(quad3.SequenceEqual(quad1.ZipAsArray(quad2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)));
+            Assert.True(
+                quad3.SequenceEqual(
+                    quad1.ZipAsArray(quad2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)
+                )
+            );
 
             var quin1 = ImmutableArray.Create(1, 2, 3, 4, 5);
             var quin2 = ImmutableArray.Create(10, 11, 12, 13, 14);
             var quin3 = ImmutableArray.Create(13, 16, 19, 22, 25);
-            Assert.True(quin3.SequenceEqual(quin1.ZipAsArray(quin2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)));
+            Assert.True(
+                quin3.SequenceEqual(
+                    quin1.ZipAsArray(quin2, 2, (item1, item2, i, arg) => item1 + item2 + i + arg)
+                )
+            );
         }
 
         [Fact]
@@ -459,40 +548,51 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // None.
             Assert.True(a.WhereAsArray(i => false).SequenceEqual(ImmutableArray.Create<int>()));
             // All but the first.
-            Assert.True(a.WhereAsArray(i => i > 0).SequenceEqual(ImmutableArray.Create<int>(1, 2, 3, 4, 5)));
+            Assert.True(
+                a.WhereAsArray(i => i > 0).SequenceEqual(ImmutableArray.Create<int>(1, 2, 3, 4, 5))
+            );
             // All but the last.
-            Assert.True(a.WhereAsArray(i => i < 5).SequenceEqual(ImmutableArray.Create<int>(0, 1, 2, 3, 4)));
+            Assert.True(
+                a.WhereAsArray(i => i < 5).SequenceEqual(ImmutableArray.Create<int>(0, 1, 2, 3, 4))
+            );
             // First only.
             Assert.True(a.WhereAsArray(i => i == 0).SequenceEqual(ImmutableArray.Create<int>(0)));
             // Last only.
             Assert.True(a.WhereAsArray(i => i == 5).SequenceEqual(ImmutableArray.Create<int>(5)));
             // First half.
-            Assert.True(a.WhereAsArray(i => i < 3).SequenceEqual(ImmutableArray.Create<int>(0, 1, 2)));
+            Assert.True(
+                a.WhereAsArray(i => i < 3).SequenceEqual(ImmutableArray.Create<int>(0, 1, 2))
+            );
             // Second half.
-            Assert.True(a.WhereAsArray(i => i > 2).SequenceEqual(ImmutableArray.Create<int>(3, 4, 5)));
+            Assert.True(
+                a.WhereAsArray(i => i > 2).SequenceEqual(ImmutableArray.Create<int>(3, 4, 5))
+            );
             // Even.
-            Assert.True(a.WhereAsArray(i => i % 2 == 0).SequenceEqual(ImmutableArray.Create<int>(0, 2, 4)));
+            Assert.True(
+                a.WhereAsArray(i => i % 2 == 0).SequenceEqual(ImmutableArray.Create<int>(0, 2, 4))
+            );
             // Odd.
-            Assert.True(a.WhereAsArray(i => i % 2 == 1).SequenceEqual(ImmutableArray.Create<int>(1, 3, 5)));
+            Assert.True(
+                a.WhereAsArray(i => i % 2 == 1).SequenceEqual(ImmutableArray.Create<int>(1, 3, 5))
+            );
         }
 
         [Fact]
         public void WhereAsArray_WithArg()
         {
             var x = new C();
-            Assert.Same(x, ImmutableArray.Create<object>(x).WhereAsArray((o, arg) => o == arg, x)[0]);
+            Assert.Same(
+                x,
+                ImmutableArray.Create<object>(x).WhereAsArray((o, arg) => o == arg, x)[0]
+            );
 
             var a = ImmutableArray.Create(0, 1, 2, 3, 4, 5);
             AssertEx.Equal(new[] { 3, 4, 5 }, a.WhereAsArray((i, j) => i > j, 2));
         }
 
-        private class C
-        {
-        }
+        private class C { }
 
-        private class D : C
-        {
-        }
+        private class D : C { }
 
         [Fact]
         public void Casting()
@@ -506,7 +606,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.True(arrayOfD2.Equals(arrayOfD));
 
             // Trying to cast from base to derived. "As" should return null (default)
-            Assert.True(new C[] { new C() }.AsImmutableOrNull().As<D>().IsDefault);
+            Assert.True(
+                new C[] { new C() }
+                    .AsImmutableOrNull()
+                    .As<D>()
+                    .IsDefault
+            );
         }
     }
 }

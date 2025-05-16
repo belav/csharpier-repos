@@ -18,7 +18,9 @@ internal static partial class ArgumentNullThrowHelper
 #if INTERNAL_NULLABLE_ATTRIBUTES || NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
         [NotNull]
 #endif
-        object? argument, [CallerArgumentExpression("argument")] string? paramName = null)
+        object? argument,
+        [CallerArgumentExpression("argument")] string? paramName = null
+    )
     {
 #if !NET7_0_OR_GREATER || NETSTANDARD || NETFRAMEWORK
         if (argument is null)
@@ -34,7 +36,6 @@ internal static partial class ArgumentNullThrowHelper
 #if INTERNAL_NULLABLE_ATTRIBUTES || NETSTANDARD2_1_OR_GREATER || NET5_0_OR_GREATER
     [DoesNotReturn]
 #endif
-    internal static void Throw(string? paramName) =>
-        throw new ArgumentNullException(paramName);
+    internal static void Throw(string? paramName) => throw new ArgumentNullException(paramName);
 #endif
 }

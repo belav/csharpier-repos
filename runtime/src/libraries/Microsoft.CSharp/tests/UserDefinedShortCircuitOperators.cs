@@ -11,22 +11,30 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public int Value;
 
-            public static NumTypeBitwiseOpsOnly operator &(NumTypeBitwiseOpsOnly x, NumTypeBitwiseOpsOnly y)
-                => new NumTypeBitwiseOpsOnly{ Value = x.Value & y.Value };
+            public static NumTypeBitwiseOpsOnly operator &(
+                NumTypeBitwiseOpsOnly x,
+                NumTypeBitwiseOpsOnly y
+            ) => new NumTypeBitwiseOpsOnly { Value = x.Value & y.Value };
 
-            public static NumTypeBitwiseOpsOnly operator |(NumTypeBitwiseOpsOnly x, NumTypeBitwiseOpsOnly y)
-                => new NumTypeBitwiseOpsOnly{ Value = x.Value | y.Value };
+            public static NumTypeBitwiseOpsOnly operator |(
+                NumTypeBitwiseOpsOnly x,
+                NumTypeBitwiseOpsOnly y
+            ) => new NumTypeBitwiseOpsOnly { Value = x.Value | y.Value };
         }
 
         private class NumTypeBitwiseAndBoolCast
         {
             public int Value;
 
-            public static NumTypeBitwiseAndBoolCast operator &(NumTypeBitwiseAndBoolCast x, NumTypeBitwiseAndBoolCast y)
-                => new NumTypeBitwiseAndBoolCast { Value = x.Value & y.Value };
+            public static NumTypeBitwiseAndBoolCast operator &(
+                NumTypeBitwiseAndBoolCast x,
+                NumTypeBitwiseAndBoolCast y
+            ) => new NumTypeBitwiseAndBoolCast { Value = x.Value & y.Value };
 
-            public static NumTypeBitwiseAndBoolCast operator |(NumTypeBitwiseAndBoolCast x, NumTypeBitwiseAndBoolCast y)
-                => new NumTypeBitwiseAndBoolCast { Value = x.Value | y.Value };
+            public static NumTypeBitwiseAndBoolCast operator |(
+                NumTypeBitwiseAndBoolCast x,
+                NumTypeBitwiseAndBoolCast y
+            ) => new NumTypeBitwiseAndBoolCast { Value = x.Value | y.Value };
 
             public static implicit operator bool(NumTypeBitwiseAndBoolCast val) => val.Value != 0;
         }
@@ -35,11 +43,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public int Value;
 
-            public static NumTypeBitwiseAndTruthiness operator &(NumTypeBitwiseAndTruthiness x, NumTypeBitwiseAndTruthiness y)
-                => new NumTypeBitwiseAndTruthiness { Value = x.Value & y.Value };
+            public static NumTypeBitwiseAndTruthiness operator &(
+                NumTypeBitwiseAndTruthiness x,
+                NumTypeBitwiseAndTruthiness y
+            ) => new NumTypeBitwiseAndTruthiness { Value = x.Value & y.Value };
 
-            public static NumTypeBitwiseAndTruthiness operator |(NumTypeBitwiseAndTruthiness x, NumTypeBitwiseAndTruthiness y)
-                => new NumTypeBitwiseAndTruthiness { Value = x.Value | y.Value };
+            public static NumTypeBitwiseAndTruthiness operator |(
+                NumTypeBitwiseAndTruthiness x,
+                NumTypeBitwiseAndTruthiness y
+            ) => new NumTypeBitwiseAndTruthiness { Value = x.Value | y.Value };
 
             public static bool operator true(NumTypeBitwiseAndTruthiness val) => val.Value != 0;
 
@@ -50,17 +62,24 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             public int Value;
 
-            public static NumTypeBitwiseTruthinessAndBoolCast operator &(NumTypeBitwiseTruthinessAndBoolCast x, NumTypeBitwiseTruthinessAndBoolCast y)
-                => new NumTypeBitwiseTruthinessAndBoolCast { Value = x.Value & y.Value };
+            public static NumTypeBitwiseTruthinessAndBoolCast operator &(
+                NumTypeBitwiseTruthinessAndBoolCast x,
+                NumTypeBitwiseTruthinessAndBoolCast y
+            ) => new NumTypeBitwiseTruthinessAndBoolCast { Value = x.Value & y.Value };
 
-            public static NumTypeBitwiseTruthinessAndBoolCast operator |(NumTypeBitwiseTruthinessAndBoolCast x, NumTypeBitwiseTruthinessAndBoolCast y)
-                => new NumTypeBitwiseTruthinessAndBoolCast { Value = x.Value | y.Value };
+            public static NumTypeBitwiseTruthinessAndBoolCast operator |(
+                NumTypeBitwiseTruthinessAndBoolCast x,
+                NumTypeBitwiseTruthinessAndBoolCast y
+            ) => new NumTypeBitwiseTruthinessAndBoolCast { Value = x.Value | y.Value };
 
-            public static implicit operator bool(NumTypeBitwiseTruthinessAndBoolCast val) => val.Value != 0;
+            public static implicit operator bool(NumTypeBitwiseTruthinessAndBoolCast val) =>
+                val.Value != 0;
 
-            public static bool operator true(NumTypeBitwiseTruthinessAndBoolCast val) => val.Value != 0;
+            public static bool operator true(NumTypeBitwiseTruthinessAndBoolCast val) =>
+                val.Value != 0;
 
-            public static bool operator false(NumTypeBitwiseTruthinessAndBoolCast val) => val.Value == 0;
+            public static bool operator false(NumTypeBitwiseTruthinessAndBoolCast val) =>
+                val.Value == 0;
         }
 
         [Fact]

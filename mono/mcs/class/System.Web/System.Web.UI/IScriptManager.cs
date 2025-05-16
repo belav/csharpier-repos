@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,17 +35,49 @@ using System.Text;
 namespace System.Web.UI
 {
 #if (TARGET_DOTNET)
-	public
+    public
 #endif
-	interface IScriptManager
-	{
-		void RegisterOnSubmitStatementExternal (Control control, Type type, string key, string script);
-		void RegisterExpandoAttributeExternal (Control control, string controlId, string attributeName, string attributeValue, bool encode);
-		void RegisterHiddenFieldExternal (Control control, string hiddenFieldName, string hiddenFieldInitialValue);
-		void RegisterStartupScriptExternal (Control control, Type type, string key, string script, bool addScriptTags);
-		void RegisterArrayDeclarationExternal (Control control, string arrayName, string arrayValue);
-		void RegisterClientScriptBlockExternal (Control control, Type type, string key, string script, bool addScriptTags);
-		void RegisterClientScriptIncludeExternal (Control control, Type type, string key, string url);
-		void RegisterClientScriptResourceExternal (Control control, Type type, string resourceName);
-	}
+    interface IScriptManager
+    {
+        void RegisterOnSubmitStatementExternal(
+            Control control,
+            Type type,
+            string key,
+            string script
+        );
+        void RegisterExpandoAttributeExternal(
+            Control control,
+            string controlId,
+            string attributeName,
+            string attributeValue,
+            bool encode
+        );
+        void RegisterHiddenFieldExternal(
+            Control control,
+            string hiddenFieldName,
+            string hiddenFieldInitialValue
+        );
+        void RegisterStartupScriptExternal(
+            Control control,
+            Type type,
+            string key,
+            string script,
+            bool addScriptTags
+        );
+        void RegisterArrayDeclarationExternal(Control control, string arrayName, string arrayValue);
+        void RegisterClientScriptBlockExternal(
+            Control control,
+            Type type,
+            string key,
+            string script,
+            bool addScriptTags
+        );
+        void RegisterClientScriptIncludeExternal(
+            Control control,
+            Type type,
+            string key,
+            string url
+        );
+        void RegisterClientScriptResourceExternal(Control control, Type type, string resourceName);
+    }
 }

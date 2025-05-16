@@ -35,22 +35,20 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="key">The key to lookup.</param>
         /// <param name="value">The value found at key if one is found.</param>
         /// <returns>True if key has a value, false otherwise.</returns>
-        public virtual bool TryGet(string key, out string? value)
-            => Data.TryGetValue(key, out value);
+        public virtual bool TryGet(string key, out string? value) =>
+            Data.TryGetValue(key, out value);
 
         /// <summary>
         /// Sets a value for a given key.
         /// </summary>
         /// <param name="key">The configuration key to set.</param>
         /// <param name="value">The value to set.</param>
-        public virtual void Set(string key, string? value)
-            => Data[key] = value;
+        public virtual void Set(string key, string? value) => Data[key] = value;
 
         /// <summary>
         /// Loads (or reloads) the data for this provider.
         /// </summary>
-        public virtual void Load()
-        { }
+        public virtual void Load() { }
 
         /// <summary>
         /// Returns the list of keys that this provider has.
@@ -60,7 +58,8 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The list of keys for this provider.</returns>
         public virtual IEnumerable<string> GetChildKeys(
             IEnumerable<string> earlierKeys,
-            string? parentPath)
+            string? parentPath
+        )
         {
             var results = new List<string>();
 
@@ -77,9 +76,11 @@ namespace Microsoft.Extensions.Configuration
 
                 foreach (KeyValuePair<string, string?> kv in Data)
                 {
-                    if (kv.Key.Length > parentPath.Length &&
-                        kv.Key.StartsWith(parentPath, StringComparison.OrdinalIgnoreCase) &&
-                        kv.Key[parentPath.Length] == ':')
+                    if (
+                        kv.Key.Length > parentPath.Length
+                        && kv.Key.StartsWith(parentPath, StringComparison.OrdinalIgnoreCase)
+                        && kv.Key[parentPath.Length] == ':'
+                    )
                     {
                         results.Add(Segment(kv.Key, parentPath.Length + 1));
                     }
@@ -97,7 +98,9 @@ namespace Microsoft.Extensions.Configuration
         {
             Debug.Assert(ConfigurationPath.KeyDelimiter == ":");
             int indexOf = key.IndexOf(':', prefixLength);
-            return indexOf < 0 ? key.Substring(prefixLength) : key.Substring(prefixLength, indexOf - prefixLength);
+            return indexOf < 0
+                ? key.Substring(prefixLength)
+                : key.Substring(prefixLength, indexOf - prefixLength);
         }
 
         /// <summary>
@@ -114,7 +117,10 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         protected void OnReload()
         {
-            ConfigurationReloadToken previousToken = Interlocked.Exchange(ref _reloadToken, new ConfigurationReloadToken());
+            ConfigurationReloadToken previousToken = Interlocked.Exchange(
+                ref _reloadToken,
+                new ConfigurationReloadToken()
+            );
             previousToken.OnReload();
         }
 

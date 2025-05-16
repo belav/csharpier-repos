@@ -11,9 +11,7 @@ namespace System.ServiceModel.Syndication
     {
         private CategoriesDocument _document;
 
-        protected CategoriesDocumentFormatter()
-        {
-        }
+        protected CategoriesDocumentFormatter() { }
 
         protected CategoriesDocumentFormatter(CategoriesDocument documentToWrite)
         {

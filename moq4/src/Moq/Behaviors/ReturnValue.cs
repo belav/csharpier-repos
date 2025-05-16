@@ -3,7 +3,6 @@
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ReturnValue : Behavior
@@ -25,7 +24,6 @@ namespace Moq.Behaviors
         sealed class ReturnValue : Behavior
     */
     sealed class ReturnValue : Behavior
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly object value;

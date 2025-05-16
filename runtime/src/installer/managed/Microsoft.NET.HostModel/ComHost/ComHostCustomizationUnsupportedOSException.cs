@@ -9,7 +9,5 @@ namespace Microsoft.NET.HostModel.ComHost
     /// The application host executable cannot be customized because adding resources requires
     /// that the build be performed on Windows (excluding Nano Server).
     /// </summary>
-    public class ComHostCustomizationUnsupportedOSException : Exception
-    {
-    }
+    public class ComHostCustomizationUnsupportedOSException : Exception { }
 }

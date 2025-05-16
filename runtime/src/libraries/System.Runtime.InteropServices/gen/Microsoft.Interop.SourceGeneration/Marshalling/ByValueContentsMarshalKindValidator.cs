@@ -22,10 +22,16 @@ namespace Microsoft.Interop
         public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context)
         {
             ResolvedGenerator generator = _inner.Create(info, context);
-            return generator.ResolvedSuccessfully ? ValidateByValueMarshalKind(info, context, generator) : generator;
+            return generator.ResolvedSuccessfully
+                ? ValidateByValueMarshalKind(info, context, generator)
+                : generator;
         }
 
-        private static ResolvedGenerator ValidateByValueMarshalKind(TypePositionInfo info, StubCodeContext context, ResolvedGenerator generator)
+        private static ResolvedGenerator ValidateByValueMarshalKind(
+            TypePositionInfo info,
+            StubCodeContext context,
+            ResolvedGenerator generator
+        )
         {
             if (generator.Generator is Forwarder)
             {
@@ -34,15 +40,29 @@ namespace Microsoft.Interop
                 return generator;
             }
 
-            var support = generator.Generator.SupportsByValueMarshalKind(info.ByValueContentsMarshalKind, info, context, out GeneratorDiagnostic? diagnostic);
+            var support = generator.Generator.SupportsByValueMarshalKind(
+                info.ByValueContentsMarshalKind,
+                info,
+                context,
+                out GeneratorDiagnostic? diagnostic
+            );
             Debug.Assert(support == ByValueMarshalKindSupport.Supported || diagnostic is not null);
             return support switch
             {
                 ByValueMarshalKindSupport.Supported => generator,
-                ByValueMarshalKindSupport.NotSupported => ResolvedGenerator.ResolvedWithDiagnostics(s_forwarder, generator.Diagnostics.Add(diagnostic!)),
-                ByValueMarshalKindSupport.Unnecessary => generator with { Diagnostics = generator.Diagnostics.Add(diagnostic!) },
-                ByValueMarshalKindSupport.NotRecommended => generator with { Diagnostics = generator.Diagnostics.Add(diagnostic!) },
-                _ => throw new UnreachableException()
+                ByValueMarshalKindSupport.NotSupported => ResolvedGenerator.ResolvedWithDiagnostics(
+                    s_forwarder,
+                    generator.Diagnostics.Add(diagnostic!)
+                ),
+                ByValueMarshalKindSupport.Unnecessary => generator with
+                {
+                    Diagnostics = generator.Diagnostics.Add(diagnostic!),
+                },
+                ByValueMarshalKindSupport.NotRecommended => generator with
+                {
+                    Diagnostics = generator.Diagnostics.Add(diagnostic!),
+                },
+                _ => throw new UnreachableException(),
             };
         }
     }

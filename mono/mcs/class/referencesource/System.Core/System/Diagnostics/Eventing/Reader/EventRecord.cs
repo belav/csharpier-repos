@@ -1,36 +1,42 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventRecord
 **
-** Purpose: 
+** Purpose:
 ** This public abstract class defines the methods / properties
-** that all events should support. 
-** 
+** that all events should support.
+**
 ============================================================*/
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Principal;
 using System.Diagnostics.CodeAnalysis;
+using System.Security.Principal;
 
-namespace System.Diagnostics.Eventing.Reader {
-
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
-    /// Represents an event obtained from an EventReader.    
+    /// Represents an event obtained from an EventReader.
     /// </summary>
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public abstract class EventRecord : IDisposable {
+    public abstract class EventRecord : IDisposable
+    {
         public abstract int Id { get; }
         public abstract byte? Version { get; }
         public abstract byte? Level { get; }
         public abstract int? Task { get; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Opcode", Justification = "Microsoft: Shipped public in 3.5, breaking change to fix now.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "Opcode",
+            Justification = "Microsoft: Shipped public in 3.5, breaking change to fix now."
+        )]
         public abstract short? Opcode { get; }
         public abstract long? Keywords { get; }
 
@@ -55,7 +61,12 @@ namespace System.Diagnostics.Eventing.Reader {
 
         public abstract string LevelDisplayName { get; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "Opcode", Justification = "Microsoft: Shipped public in 3.5, breaking change to fix now.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1702:CompoundWordsShouldBeCasedCorrectly",
+            MessageId = "Opcode",
+            Justification = "Microsoft: Shipped public in 3.5, breaking change to fix now."
+        )]
         public abstract string OpcodeDisplayName { get; }
         public abstract string TaskDisplayName { get; }
         public abstract IEnumerable<string> KeywordsDisplayNames { get; }
@@ -65,11 +76,13 @@ namespace System.Diagnostics.Eventing.Reader {
         public abstract IList<EventProperty> Properties { get; }
 
         public abstract string ToXml();
-         
-        public void Dispose() {
+
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         protected virtual void Dispose(bool disposing) { }
     }
 }

@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// Skips a test if the OS is the given type (Windows) and the OS version is greater than specified.
 /// E.g. Specifying Window 8 skips on Win 10, but not on Linux. Combine with OSSkipConditionAttribute as needed.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
+    AllowMultiple = true
+)]
 public class MaximumOSVersionAttribute : Attribute, ITestCondition
 {
     private readonly OperatingSystems _targetOS;
@@ -19,26 +22,37 @@ public class MaximumOSVersionAttribute : Attribute, ITestCondition
     private readonly Version _currentVersion;
     private readonly bool _skip;
 
-    public MaximumOSVersionAttribute(OperatingSystems operatingSystem, string maxVersion) :
-        this(operatingSystem, Version.Parse(maxVersion), GetCurrentOS(), GetCurrentOSVersion())
-    {
-    }
+    public MaximumOSVersionAttribute(OperatingSystems operatingSystem, string maxVersion)
+        : this(operatingSystem, Version.Parse(maxVersion), GetCurrentOS(), GetCurrentOSVersion())
+    { }
 
     // to enable unit testing
-    internal MaximumOSVersionAttribute(OperatingSystems targetOS, Version maxVersion, OperatingSystems currentOS, Version currentVersion)
+    internal MaximumOSVersionAttribute(
+        OperatingSystems targetOS,
+        Version maxVersion,
+        OperatingSystems currentOS,
+        Version currentVersion
+    )
     {
         if (targetOS != OperatingSystems.Windows)
         {
-            throw new NotImplementedException("Max version support is only implemented for Windows.");
+            throw new NotImplementedException(
+                "Max version support is only implemented for Windows."
+            );
         }
         _targetOS = targetOS;
         _maxVersion = maxVersion;
         _currentOS = currentOS;
         // We drop the 4th field because it is not significant and it messes up the comparisons.
-        _currentVersion = new Version(currentVersion.Major, currentVersion.Minor,
+        _currentVersion = new Version(
+            currentVersion.Major,
+            currentVersion.Minor,
             // Major and Minor are required by the parser, but if Build isn't specified then it returns -1
             // which the constructor rejects.
-            currentVersion.Build == -1 ? 0 : currentVersion.Build);
+            currentVersion.Build == -1
+                ? 0
+                : currentVersion.Build
+        );
 
         // Do not skip other OS's, Use OSSkipConditionAttribute or a separate MaximumOsVersionAttribute for that.
         _skip = _targetOS == _currentOS && _maxVersion < _currentVersion;

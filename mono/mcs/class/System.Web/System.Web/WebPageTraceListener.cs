@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,54 +37,81 @@ using System.Web.Util;
 
 namespace System.Web
 {
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal),
-	AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal),
-	HostProtection (SecurityAction.LinkDemand, Synchronization = true)]
-	public class WebPageTraceListener : TraceListener
-	{
-		public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string message)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+    [
+        AspNetHostingPermission(
+            SecurityAction.LinkDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        ),
+        AspNetHostingPermission(
+            SecurityAction.InheritanceDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        ),
+        HostProtection(SecurityAction.LinkDemand, Synchronization = true)
+    ]
+    public class WebPageTraceListener : TraceListener
+    {
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            string message
+        )
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (source, message);
-		}
+            HttpContext.Current.Trace.Write(source, message);
+        }
 
-		public override void TraceEvent (TraceEventCache eventCache, string source, TraceEventType severity, int id, string format, params object[] args)
-		{
-			TraceEvent (eventCache, source, severity, id, string.Format (Helpers.InvariantCulture, format, args));
-		}
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            string format,
+            params object[] args
+        )
+        {
+            TraceEvent(
+                eventCache,
+                source,
+                severity,
+                id,
+                string.Format(Helpers.InvariantCulture, format, args)
+            );
+        }
 
-		public override void Write (string message)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void Write(string message)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (message);
-		}
+            HttpContext.Current.Trace.Write(message);
+        }
 
-		public override void Write (string message, string category)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void Write(string message, string category)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (category, message);
-		}
+            HttpContext.Current.Trace.Write(category, message);
+        }
 
-		public override void WriteLine (string message)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void WriteLine(string message)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (message);
-		}
+            HttpContext.Current.Trace.Write(message);
+        }
 
-		public override void WriteLine (string message, string category)
-		{
-			if (HttpContext.Current == null || HttpContext.Current.Trace == null)
-				return;
+        public override void WriteLine(string message, string category)
+        {
+            if (HttpContext.Current == null || HttpContext.Current.Trace == null)
+                return;
 
-			HttpContext.Current.Trace.Write (category, message);
-		}
-	}
+            HttpContext.Current.Trace.Write(category, message);
+        }
+    }
 }

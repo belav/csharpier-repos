@@ -17,89 +17,141 @@ namespace System.Transactions
         private static object? s_classSyncObject;
 
         internal static EnlistmentStatePromoted EnlistmentStatePromoted =>
-            LazyInitializer.EnsureInitialized(ref _enlistmentStatePromoted, ref s_classSyncObject, () => new EnlistmentStatePromoted());
+            LazyInitializer.EnsureInitialized(
+                ref _enlistmentStatePromoted,
+                ref s_classSyncObject,
+                () => new EnlistmentStatePromoted()
+            );
 
         internal virtual void EnlistmentDone(InternalEnlistment enlistment)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void Prepared(InternalEnlistment enlistment)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void ForceRollback(InternalEnlistment enlistment, Exception? e)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void Committed(InternalEnlistment enlistment)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void Aborted(InternalEnlistment enlistment, Exception? e)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void InDoubt(InternalEnlistment enlistment, Exception? e)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual byte[] RecoveryInformation(InternalEnlistment enlistment)
         {
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void InternalAborted(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void InternalCommitted(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void InternalIndoubt(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void ChangeStateCommitting(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
-        internal virtual void ChangeStatePromoted(InternalEnlistment enlistment, IPromotedEnlistment promotedEnlistment)
+        internal virtual void ChangeStatePromoted(
+            InternalEnlistment enlistment,
+            IPromotedEnlistment promotedEnlistment
+        )
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void ChangeStateDelegated(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void ChangeStatePreparing(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
 
         internal virtual void ChangeStateSinglePhaseCommit(InternalEnlistment enlistment)
         {
             Debug.Fail($"Invalid Event for InternalEnlistment State; Current State: {GetType()}");
-            throw TransactionException.CreateEnlistmentStateException(null, enlistment == null ? Guid.Empty : enlistment.DistributedTxId);
+            throw TransactionException.CreateEnlistmentStateException(
+                null,
+                enlistment == null ? Guid.Empty : enlistment.DistributedTxId
+            );
         }
     }
 

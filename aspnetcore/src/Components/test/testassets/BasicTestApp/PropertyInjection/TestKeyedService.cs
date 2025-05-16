@@ -9,9 +9,6 @@ public sealed class TestKeyedService
 
     public static TestKeyedService Create(object value)
     {
-        return new()
-        {
-            Value = value,
-        };
+        return new() { Value = value };
     }
 }

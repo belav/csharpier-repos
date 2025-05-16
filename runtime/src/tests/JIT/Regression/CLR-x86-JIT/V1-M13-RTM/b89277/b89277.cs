@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 public class A
 {
     [Fact]
@@ -11,6 +12,7 @@ public class A
     {
         Main1();
     }
+
     internal static void Main1()
     {
         bool b = false;

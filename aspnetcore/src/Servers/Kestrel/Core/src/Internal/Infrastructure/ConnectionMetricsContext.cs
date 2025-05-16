@@ -15,9 +15,15 @@ internal readonly struct ConnectionMetricsContext
     public bool CurrentUpgradedRequestsCounterEnabled { get; }
     public bool CurrentTlsHandshakesCounterEnabled { get; }
 
-    public ConnectionMetricsContext(BaseConnectionContext connectionContext, bool currentConnectionsCounterEnabled,
-        bool connectionDurationEnabled, bool queuedConnectionsCounterEnabled, bool queuedRequestsCounterEnabled,
-        bool currentUpgradedRequestsCounterEnabled, bool currentTlsHandshakesCounterEnabled)
+    public ConnectionMetricsContext(
+        BaseConnectionContext connectionContext,
+        bool currentConnectionsCounterEnabled,
+        bool connectionDurationEnabled,
+        bool queuedConnectionsCounterEnabled,
+        bool queuedRequestsCounterEnabled,
+        bool currentUpgradedRequestsCounterEnabled,
+        bool currentTlsHandshakesCounterEnabled
+    )
     {
         ConnectionContext = connectionContext;
         CurrentConnectionsCounterEnabled = currentConnectionsCounterEnabled;

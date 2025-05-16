@@ -30,26 +30,45 @@ namespace System.Runtime.Serialization.Tests
         [InlineData(StreamingContextStates.All, null)]
         [InlineData((StreamingContextStates)0, "")]
         [InlineData((StreamingContextStates)(-1), "context")]
-        public void Ctor_StreamingContextStates_Object(StreamingContextStates state, object additional)
+        public void Ctor_StreamingContextStates_Object(
+            StreamingContextStates state,
+            object additional
+        )
         {
             var context = new StreamingContext(state, additional);
             Assert.Equal(state, context.State);
             Assert.Equal(additional, context.Context);
         }
 
-        public static TheoryData<StreamingContext, object, bool> Equals_TestData => new TheoryData<StreamingContext, object, bool>
-        {
-            { new StreamingContext(StreamingContextStates.All, null), new StreamingContext(StreamingContextStates.All, null), true },
-            { new StreamingContext(StreamingContextStates.All, null), new StreamingContext(StreamingContextStates.Clone, null), false },
-            { new StreamingContext(StreamingContextStates.All, null), new StreamingContext(StreamingContextStates.All, "additional"), false },
-
-            { new StreamingContext(StreamingContextStates.All, null), new object(), false },
-            { new StreamingContext(StreamingContextStates.All, null), null, false }
-        };
+        public static TheoryData<StreamingContext, object, bool> Equals_TestData =>
+            new TheoryData<StreamingContext, object, bool>
+            {
+                {
+                    new StreamingContext(StreamingContextStates.All, null),
+                    new StreamingContext(StreamingContextStates.All, null),
+                    true
+                },
+                {
+                    new StreamingContext(StreamingContextStates.All, null),
+                    new StreamingContext(StreamingContextStates.Clone, null),
+                    false
+                },
+                {
+                    new StreamingContext(StreamingContextStates.All, null),
+                    new StreamingContext(StreamingContextStates.All, "additional"),
+                    false
+                },
+                { new StreamingContext(StreamingContextStates.All, null), new object(), false },
+                { new StreamingContext(StreamingContextStates.All, null), null, false },
+            };
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Invoke_ReturnsExpected(StreamingContext context, object other, bool expected)
+        public void Equals_Invoke_ReturnsExpected(
+            StreamingContext context,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, context.Equals(other));
         }

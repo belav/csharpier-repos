@@ -11,19 +11,28 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullTypeList()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeArgs", () => Expression.GetDelegateType(default(Type[])));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArgs",
+                () => Expression.GetDelegateType(default(Type[]))
+            );
         }
 
         [Fact]
         public void NullInTypeList()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeArgs[1]", () => Expression.GetDelegateType(typeof(int), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArgs[1]",
+                () => Expression.GetDelegateType(typeof(int), null)
+            );
         }
 
         [Fact]
         public void EmptyArgs()
         {
-            AssertExtensions.Throws<ArgumentException>("typeArgs", () => Expression.GetDelegateType());
+            AssertExtensions.Throws<ArgumentException>(
+                "typeArgs",
+                () => Expression.GetDelegateType()
+            );
         }
 
         [Theory, MemberData(nameof(ValidTypeArgs), true)]
@@ -59,7 +68,9 @@ namespace System.Linq.Expressions.Tests
         {
             if (!RuntimeFeature.IsDynamicCodeSupported)
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Expression.GetDelegateType(typeArgs));
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Expression.GetDelegateType(typeArgs)
+                );
             }
             else
             {
@@ -69,7 +80,10 @@ namespace System.Linq.Expressions.Tests
                 Assert.DoesNotContain("System.Func", delType.FullName);
                 Reflection.MethodInfo method = delType.GetMethod("Invoke");
                 Assert.Equal(typeArgs.Last(), method.ReturnType);
-                Assert.Equal(typeArgs.Take(typeArgs.Length - 1), method.GetParameters().Select(p => p.ParameterType));
+                Assert.Equal(
+                    typeArgs.Take(typeArgs.Length - 1),
+                    method.GetParameters().Select(p => p.ParameterType)
+                );
             }
         }
 
@@ -85,7 +99,9 @@ namespace System.Linq.Expressions.Tests
             Type[] delegateArgs = typeArgs.Append(typeof(void)).ToArray();
             if (!RuntimeFeature.IsDynamicCodeSupported)
             {
-                Assert.Throws<PlatformNotSupportedException>(() => Expression.GetDelegateType(delegateArgs));
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    Expression.GetDelegateType(delegateArgs)
+                );
             }
             else
             {
@@ -121,13 +137,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, MemberData(nameof(VoidTypeArgs), false)]
         public void VoidArgToFuncTypeDelegate(Type[] typeArgs)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.GetDelegateType(typeArgs));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.GetDelegateType(typeArgs)
+            );
         }
 
         [Theory, MemberData(nameof(VoidTypeArgs), false)]
         public void VoidArgToActionTypeDelegate(Type[] typeArgs)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.GetDelegateType(typeArgs.Append(typeof(void)).ToArray()));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.GetDelegateType(typeArgs.Append(typeof(void)).ToArray())
+            );
         }
     }
 }

@@ -54,7 +54,7 @@ public class DefaultViewComponentDescriptorProvider : IViewComponentDescriptorPr
             ShortName = ViewComponentConventions.GetComponentName(typeInfo),
             TypeInfo = typeInfo,
             MethodInfo = methodInfo,
-            Parameters = methodInfo.GetParameters()
+            Parameters = methodInfo.GetParameters(),
         };
 
         return candidate;
@@ -63,33 +63,50 @@ public class DefaultViewComponentDescriptorProvider : IViewComponentDescriptorPr
     private static MethodInfo FindMethod(Type componentType)
     {
         var componentName = componentType.FullName;
-        var methods = componentType.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+        var methods = componentType
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance)
             .Where(method =>
-                string.Equals(method.Name, AsyncMethodName, StringComparison.Ordinal) ||
-                string.Equals(method.Name, SyncMethodName, StringComparison.Ordinal))
+                string.Equals(method.Name, AsyncMethodName, StringComparison.Ordinal)
+                || string.Equals(method.Name, SyncMethodName, StringComparison.Ordinal)
+            )
             .ToArray();
 
         if (methods.Length == 0)
         {
             throw new InvalidOperationException(
-                Resources.FormatViewComponent_CannotFindMethod(SyncMethodName, AsyncMethodName, componentName));
+                Resources.FormatViewComponent_CannotFindMethod(
+                    SyncMethodName,
+                    AsyncMethodName,
+                    componentName
+                )
+            );
         }
         else if (methods.Length > 1)
         {
             throw new InvalidOperationException(
-                Resources.FormatViewComponent_AmbiguousMethods(componentName, AsyncMethodName, SyncMethodName));
+                Resources.FormatViewComponent_AmbiguousMethods(
+                    componentName,
+                    AsyncMethodName,
+                    SyncMethodName
+                )
+            );
         }
 
         var selectedMethod = methods[0];
         if (string.Equals(selectedMethod.Name, AsyncMethodName, StringComparison.Ordinal))
         {
-            if (!selectedMethod.ReturnType.IsGenericType ||
-                selectedMethod.ReturnType.GetGenericTypeDefinition() != typeof(Task<>))
+            if (
+                !selectedMethod.ReturnType.IsGenericType
+                || selectedMethod.ReturnType.GetGenericTypeDefinition() != typeof(Task<>)
+            )
             {
-                throw new InvalidOperationException(Resources.FormatViewComponent_AsyncMethod_ShouldReturnTask(
-                    AsyncMethodName,
-                    componentName,
-                    nameof(Task)));
+                throw new InvalidOperationException(
+                    Resources.FormatViewComponent_AsyncMethod_ShouldReturnTask(
+                        AsyncMethodName,
+                        componentName,
+                        nameof(Task)
+                    )
+                );
             }
         }
         else
@@ -97,16 +114,22 @@ public class DefaultViewComponentDescriptorProvider : IViewComponentDescriptorPr
             // Will invoke synchronously. Method must not return void, Task or Task<T>.
             if (selectedMethod.ReturnType == typeof(void))
             {
-                throw new InvalidOperationException(Resources.FormatViewComponent_SyncMethod_ShouldReturnValue(
-                    SyncMethodName,
-                    componentName));
+                throw new InvalidOperationException(
+                    Resources.FormatViewComponent_SyncMethod_ShouldReturnValue(
+                        SyncMethodName,
+                        componentName
+                    )
+                );
             }
             else if (typeof(Task).IsAssignableFrom(selectedMethod.ReturnType))
             {
-                throw new InvalidOperationException(Resources.FormatViewComponent_SyncMethod_CannotReturnTask(
-                    SyncMethodName,
-                    componentName,
-                    nameof(Task)));
+                throw new InvalidOperationException(
+                    Resources.FormatViewComponent_SyncMethod_CannotReturnTask(
+                        SyncMethodName,
+                        componentName,
+                        nameof(Task)
+                    )
+                );
             }
         }
 

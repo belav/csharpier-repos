@@ -8,7 +8,8 @@ namespace System.ServiceModel.Configuration
     using System.ComponentModel;
     using System.Configuration;
 
-    internal class StandardRuntimeFlagEnumValidator<TEnum> : ConfigurationValidatorBase where TEnum : struct
+    internal class StandardRuntimeFlagEnumValidator<TEnum> : ConfigurationValidatorBase
+        where TEnum : struct
     {
         public StandardRuntimeFlagEnumValidator()
         {
@@ -27,14 +28,24 @@ namespace System.ServiceModel.Configuration
                 TEnum dummy;
                 if (!Enum.TryParse<TEnum>(value.ToString(), true, out dummy))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value, typeof(TEnum)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
+                    );
                 }
 
                 int combinedValue = (int)((object)dummy);
                 int[] values = (int[])Enum.GetValues(typeof(TEnum));
-                if (!StandardRuntimeFlagEnumValidatorAttribute.IsCombinedValue(combinedValue, values, values.Length - 1))
+                if (
+                    !StandardRuntimeFlagEnumValidatorAttribute.IsCombinedValue(
+                        combinedValue,
+                        values,
+                        values.Length - 1
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value, typeof(TEnum)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException("value", (int)value, typeof(TEnum))
+                    );
                 }
             }
         }

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 
@@ -20,8 +20,15 @@ public class BindHandle1
     }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    public static extern IntPtr CreateFile(String FileName, uint Access, uint Share, int Atts, uint Dispo, uint Flags, int Template);
-
+    public static extern IntPtr CreateFile(
+        String FileName,
+        uint Access,
+        uint Share,
+        int Atts,
+        uint Dispo,
+        uint Flags,
+        int Template
+    );
 
     int RunTest()
     {
@@ -29,7 +36,12 @@ public class BindHandle1
         {
             try
             {
-                using (SafeFileHandle sfh = new SafeFileHandle(CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x40000000, 0), true))
+                using (
+                    SafeFileHandle sfh = new SafeFileHandle(
+                        CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x40000000, 0),
+                        true
+                    )
+                )
                 {
                     if (ThreadPool.BindHandle(sfh))
                     {
@@ -47,7 +59,9 @@ public class BindHandle1
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Unexpected exception - HResult: 0x{ex.HResult:x}, Exception: {ex}");
+                Console.WriteLine(
+                    $"Unexpected exception - HResult: 0x{ex.HResult:x}, Exception: {ex}"
+                );
                 return (98);
             }
         }
@@ -59,6 +73,4 @@ public class BindHandle1
             }
         }
     }
-
-
 }

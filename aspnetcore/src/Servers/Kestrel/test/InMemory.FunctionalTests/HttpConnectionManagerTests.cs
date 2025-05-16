@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Moq;
@@ -35,25 +35,33 @@ public class HttpConnectionManagerTests : LoggedTest
 
         // Use a custom logger for callback instead of TestSink because TestSink keeps references
         // to types when logging, prevents garbage collection, and makes the test fail.
-        factory.AddProvider(new CallbackLoggerProvider(eventId =>
-        {
-            if (eventId.Name == "ApplicationNeverCompleted")
+        factory.AddProvider(
+            new CallbackLoggerProvider(eventId =>
             {
-                Logger.LogInformation("Releasing ApplicationNeverCompleted log wait handle.");
-                logWh.Release();
-            }
-        }));
+                if (eventId.Name == "ApplicationNeverCompleted")
+                {
+                    Logger.LogInformation("Releasing ApplicationNeverCompleted log wait handle.");
+                    logWh.Release();
+                }
+            })
+        );
 
         var testContext = new TestServiceContext(factory);
         testContext.InitializeHeartbeat();
 
-        await using (var server = new TestServer(context =>
-        {
-            appStartedWh.Release();
-            var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            return tcs.Task;
-        },
-        testContext))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    appStartedWh.Release();
+                    var tcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
+                    return tcs.Task;
+                },
+                testContext
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -66,7 +74,11 @@ public class HttpConnectionManagerTests : LoggedTest
 
             var logWaitAttempts = 0;
 
-            for (; !await logWh.WaitAsync(TimeSpan.FromSeconds(1)) && logWaitAttempts < 30; logWaitAttempts++)
+            for (
+                ;
+                !await logWh.WaitAsync(TimeSpan.FromSeconds(1)) && logWaitAttempts < 30;
+                logWaitAttempts++
+            )
             {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
@@ -87,9 +99,7 @@ public class HttpConnectionManagerTests : LoggedTest
 
         public ILogger CreateLogger(string categoryName) => new CallbackLogger(_logAction);
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         private class CallbackLogger : ILogger
         {
@@ -101,9 +111,16 @@ public class HttpConnectionManagerTests : LoggedTest
             }
 
             public IDisposable BeginScope<TState>(TState state) => null;
+
             public bool IsEnabled(LogLevel logLevel) => true;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
                 _logAction(eventId);
             }

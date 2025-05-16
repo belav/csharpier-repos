@@ -16,7 +16,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_CanSetOperationInMetadata()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -39,7 +42,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_CanSetOperationInMetadataWithOverride()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -48,7 +54,9 @@ public class OpenApiRouteHandlerBuilderExtensionTests
 
         var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(serviceProvider));
         string GetString() => "Foo";
-        _ = builder.MapDelete("/", GetString).WithOpenApi(generatedOperation => new OpenApiOperation());
+        _ = builder
+            .MapDelete("/", GetString)
+            .WithOpenApi(generatedOperation => new OpenApiOperation());
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -62,7 +70,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_CanSetSchemaInOperationWithOverride()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -71,11 +82,17 @@ public class OpenApiRouteHandlerBuilderExtensionTests
 
         var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(serviceProvider));
         string GetString(string id) => "Foo";
-        _ = builder.MapDelete("/{id}", GetString)
-            .WithOpenApi(operation => new(operation)
-            {
-                Parameters = new List<OpenApiParameter>() { new() { Schema = new() { Type = "number" } } }
-            });
+        _ = builder
+            .MapDelete("/{id}", GetString)
+            .WithOpenApi(operation =>
+                new(operation)
+                {
+                    Parameters = new List<OpenApiParameter>()
+                    {
+                        new() { Schema = new() { Type = "number" } },
+                    },
+                }
+            );
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -90,7 +107,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_WorksWithMapGroup()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -111,15 +131,20 @@ public class OpenApiRouteHandlerBuilderExtensionTests
         // The RotueGroupBuilder adds a single EndpointDataSource.
         var groupDataSource = Assert.Single(builder.DataSources);
 
-        Assert.Collection(groupDataSource.Endpoints,
+        Assert.Collection(
+            groupDataSource.Endpoints,
             e => Assert.NotNull(e.Metadata.GetMetadata<OpenApiOperation>()),
-            e => Assert.NotNull(e.Metadata.GetMetadata<OpenApiOperation>()));
+            e => Assert.NotNull(e.Metadata.GetMetadata<OpenApiOperation>())
+        );
     }
 
     [Fact]
     public void WithOpenApi_WorksWithMapGroupAndEndpointAnnotations()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -151,7 +176,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_WorksWithGroupAndSpecificEndpoint()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -161,14 +189,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
         var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(serviceProvider));
         string GetString() => "Foo";
         var myGroup = builder.MapGroup("/group");
-        myGroup.WithOpenApi(o => new(o)
-        {
-            Summary = "Set from outer group"
-        });
-        myGroup.MapDelete("/a", GetString).WithOpenApi(o => new(o)
-        {
-            Summary = "Set from endpoint"
-        });
+        myGroup.WithOpenApi(o => new(o) { Summary = "Set from outer group" });
+        myGroup
+            .MapDelete("/a", GetString)
+            .WithOpenApi(o => new(o) { Summary = "Set from endpoint" });
 
         // The RotueGroupBuilder adds a single EndpointDataSource.
         var groupDataSource = Assert.Single(builder.DataSources);
@@ -181,7 +205,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_GroupMetadataCanExamineAndExtendMoreLocalMetadata()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -193,10 +220,13 @@ public class OpenApiRouteHandlerBuilderExtensionTests
 
         static void WithLocalSummary(RouteHandlerBuilder builder)
         {
-            builder.WithOpenApi(operation => new(operation)
-            {
-                Summary = $"| Local Summary | 200 Status Response Content-Type: {operation.Responses["200"].Content.Keys.Single()}"
-            });
+            builder.WithOpenApi(operation =>
+                new(operation)
+                {
+                    Summary =
+                        $"| Local Summary | 200 Status Response Content-Type: {operation.Responses["200"].Content.Keys.Single()}",
+                }
+            );
         }
 
         WithLocalSummary(builder.MapDelete("/root", GetString));
@@ -207,45 +237,58 @@ public class OpenApiRouteHandlerBuilderExtensionTests
         WithLocalSummary(outerGroup.MapDelete("/outer-a", GetString));
 
         // The order WithOpenApi() is relative to the MapDelete() methods does not matter.
-        outerGroup.WithOpenApi(operation => new(operation)
-        {
-            Summary = $"Outer Group Summary {operation.Summary}"
-        });
+        outerGroup.WithOpenApi(operation =>
+            new(operation) { Summary = $"Outer Group Summary {operation.Summary}" }
+        );
 
         WithLocalSummary(outerGroup.MapDelete("/outer-b", GetString));
         WithLocalSummary(innerGroup.MapDelete("/inner-a", GetString));
 
-        innerGroup.WithOpenApi(operation => new(operation)
-        {
-            Summary = $"| Inner Group Summary {operation.Summary}"
-        });
+        innerGroup.WithOpenApi(operation =>
+            new(operation) { Summary = $"| Inner Group Summary {operation.Summary}" }
+        );
 
         WithLocalSummary(innerGroup.MapDelete("/inner-b", GetString));
 
-        var summaries = builder.DataSources
-            .SelectMany(ds => ds.Endpoints)
+        var summaries = builder
+            .DataSources.SelectMany(ds => ds.Endpoints)
             .ToDictionary(
                 e => ((RouteEndpoint)e).RoutePattern.RawText,
-                e => e.Metadata.GetMetadata<OpenApiOperation>().Summary);
+                e => e.Metadata.GetMetadata<OpenApiOperation>().Summary
+            );
 
         Assert.Equal(5, summaries.Count);
 
-        Assert.Equal("| Local Summary | 200 Status Response Content-Type: text/plain",
-            summaries["/root"]);
+        Assert.Equal(
+            "| Local Summary | 200 Status Response Content-Type: text/plain",
+            summaries["/root"]
+        );
 
-        Assert.Equal("Outer Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
-            summaries["/outer/outer-a"]);
-        Assert.Equal("Outer Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
-            summaries["/outer/outer-b"]);
+        Assert.Equal(
+            "Outer Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
+            summaries["/outer/outer-a"]
+        );
+        Assert.Equal(
+            "Outer Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
+            summaries["/outer/outer-b"]
+        );
 
-        Assert.Equal("Outer Group Summary | Inner Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
-            summaries["/outer/inner/inner-a"]);
-        Assert.Equal("Outer Group Summary | Inner Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
-            summaries["/outer/inner/inner-b"]);
+        Assert.Equal(
+            "Outer Group Summary | Inner Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
+            summaries["/outer/inner/inner-a"]
+        );
+        Assert.Equal(
+            "Outer Group Summary | Inner Group Summary | Local Summary | 200 Status Response Content-Type: text/plain",
+            summaries["/outer/inner/inner-b"]
+        );
     }
 
-    private RouteEndpointDataSource GetBuilderEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)
+    private RouteEndpointDataSource GetBuilderEndpointDataSource(
+        IEndpointRouteBuilder endpointRouteBuilder
+    )
     {
-        return Assert.IsType<RouteEndpointDataSource>(Assert.Single(endpointRouteBuilder.DataSources));
+        return Assert.IsType<RouteEndpointDataSource>(
+            Assert.Single(endpointRouteBuilder.DataSources)
+        );
     }
 }

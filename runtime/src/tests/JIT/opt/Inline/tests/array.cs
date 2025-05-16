@@ -24,8 +24,8 @@ namespace JitInliningTest
             myArray.SetValue("lazy", 1, 3);
 
             for (int i = myArray.GetLowerBound(0); i <= myArray.GetUpperBound(0); i++)
-                for (int j = myArray.GetLowerBound(1); j <= myArray.GetUpperBound(1); j++)
-                    s += myArray.GetValue(i, j);
+            for (int j = myArray.GetLowerBound(1); j <= myArray.GetUpperBound(1); j++)
+                s += myArray.GetValue(i, j);
 
             if (s == "Thequickbrownfoxjumpedoverthelazy")
                 return 100;
@@ -34,4 +34,3 @@ namespace JitInliningTest
         }
     }
 }
-

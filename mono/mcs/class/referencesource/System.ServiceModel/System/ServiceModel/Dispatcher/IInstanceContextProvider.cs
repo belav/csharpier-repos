@@ -11,7 +11,11 @@ namespace System.ServiceModel.Dispatcher
     public interface IInstanceContextProvider
     {
         InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel);
-        void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel);
+        void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        );
         bool IsIdle(InstanceContext instanceContext);
         void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext);
     }
@@ -22,10 +26,7 @@ namespace System.ServiceModel.Dispatcher
 
         public DispatchRuntime DispatchRuntime
         {
-            get
-            {
-                return this.dispatchRuntime;
-            }
+            get { return this.dispatchRuntime; }
         }
 
         internal InstanceContextProviderBase(DispatchRuntime dispatchRuntime)
@@ -43,7 +44,10 @@ namespace System.ServiceModel.Dispatcher
             return (provider is PerSessionInstanceContextProvider);
         }
 
-        internal static IInstanceContextProvider GetProviderForMode(InstanceContextMode instanceMode, DispatchRuntime runtime)
+        internal static IInstanceContextProvider GetProviderForMode(
+            InstanceContextMode instanceMode,
+            DispatchRuntime runtime
+        )
         {
             switch (instanceMode)
             {
@@ -54,7 +58,9 @@ namespace System.ServiceModel.Dispatcher
                 case InstanceContextMode.Single:
                     return new SingletonInstanceContextProvider(runtime);
                 default:
-                    DiagnosticUtility.FailFast("InstanceContextProviderBase.GetProviderForMode: default");
+                    DiagnosticUtility.FailFast(
+                        "InstanceContextProviderBase.GetProviderForMode: default"
+                    );
                     return null;
             }
         }
@@ -76,24 +82,42 @@ namespace System.ServiceModel.Dispatcher
 
         #region IInstanceContextProvider Members
 
-        public virtual InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
+        public virtual InstanceContext GetExistingInstanceContext(
+            Message message,
+            IContextChannel channel
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public virtual void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
+        public virtual void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public virtual bool IsIdle(InstanceContext instanceContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public virtual void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
+        public virtual void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         #endregion

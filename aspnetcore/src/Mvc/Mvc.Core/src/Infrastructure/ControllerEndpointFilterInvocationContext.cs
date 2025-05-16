@@ -17,7 +17,8 @@ internal class ControllerEndpointFilterInvocationContext : EndpointFilterInvocat
         ObjectMethodExecutor executor,
         IActionResultTypeMapper mapper,
         object controller,
-        object?[]? arguments)
+        object?[]? arguments
+    )
     {
         ActionDescriptor = actionDescriptor;
         ActionContext = actionContext;

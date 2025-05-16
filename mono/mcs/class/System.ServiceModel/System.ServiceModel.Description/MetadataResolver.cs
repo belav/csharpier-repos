@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,168 +29,241 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Text;
 using System.Web.Services.Description;
 using System.Web.Services.Discovery;
 using System.Web.Services.Protocols;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Net;
-using System.IO;
-using System.Text;
-
 using QName = System.Xml.XmlQualifiedName;
 
 namespace System.ServiceModel.Description
 {
-	[MonoTODO]
-	public static class MetadataResolver
-	{
-		static IEnumerable<ContractDescription> ToContracts (Type contract)
-		{
-			if (contract == null)
-				throw new ArgumentNullException ("contract");
-			yield return ContractDescription.GetContract (contract);
-		}
+    [MonoTODO]
+    public static class MetadataResolver
+    {
+        static IEnumerable<ContractDescription> ToContracts(Type contract)
+        {
+            if (contract == null)
+                throw new ArgumentNullException("contract");
+            yield return ContractDescription.GetContract(contract);
+        }
 
-		// 1
-		public static IAsyncResult BeginResolve (IEnumerable<ContractDescription> contracts, EndpointAddress address, AsyncCallback callback, object asyncState)
-		{
-			// -> 3.
-			return BeginResolve (contracts, address, new MetadataExchangeClient (), callback, asyncState);
-		}
+        // 1
+        public static IAsyncResult BeginResolve(
+            IEnumerable<ContractDescription> contracts,
+            EndpointAddress address,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            // -> 3.
+            return BeginResolve(
+                contracts,
+                address,
+                new MetadataExchangeClient(),
+                callback,
+                asyncState
+            );
+        }
 
-		// 2
-		public static IAsyncResult BeginResolve (Type contract, EndpointAddress address, AsyncCallback callback, object asyncState)
-		{
-			// -> 1
-			return BeginResolve (ToContracts (contract), address, callback, asyncState);
-		}
+        // 2
+        public static IAsyncResult BeginResolve(
+            Type contract,
+            EndpointAddress address,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            // -> 1
+            return BeginResolve(ToContracts(contract), address, callback, asyncState);
+        }
 
-		// 3
-		public static IAsyncResult BeginResolve (IEnumerable<ContractDescription> contracts, EndpointAddress address, MetadataExchangeClient client, AsyncCallback callback, object asyncState)
-		{
-			return resolver.BeginInvoke (contracts, () => client.GetMetadata (address), callback, asyncState);
-		}
+        // 3
+        public static IAsyncResult BeginResolve(
+            IEnumerable<ContractDescription> contracts,
+            EndpointAddress address,
+            MetadataExchangeClient client,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            return resolver.BeginInvoke(
+                contracts,
+                () => client.GetMetadata(address),
+                callback,
+                asyncState
+            );
+        }
 
-		// 4
-		public static IAsyncResult BeginResolve (IEnumerable<ContractDescription> contracts, Uri address, MetadataExchangeClientMode mode, AsyncCallback callback, object asyncState)
-		{
-			// -> 6
-			return BeginResolve (contracts, address, mode, new MetadataExchangeClient (), callback, asyncState);
-		}
+        // 4
+        public static IAsyncResult BeginResolve(
+            IEnumerable<ContractDescription> contracts,
+            Uri address,
+            MetadataExchangeClientMode mode,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            // -> 6
+            return BeginResolve(
+                contracts,
+                address,
+                mode,
+                new MetadataExchangeClient(),
+                callback,
+                asyncState
+            );
+        }
 
-		// 5
-		public static IAsyncResult BeginResolve (Type contract, Uri address, MetadataExchangeClientMode mode, AsyncCallback callback, object asyncState)
-		{
-			// -> 4
-			return BeginResolve (ToContracts (contract), address, mode, callback, asyncState);
-		}
+        // 5
+        public static IAsyncResult BeginResolve(
+            Type contract,
+            Uri address,
+            MetadataExchangeClientMode mode,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            // -> 4
+            return BeginResolve(ToContracts(contract), address, mode, callback, asyncState);
+        }
 
-		// 6
-		public static IAsyncResult BeginResolve (IEnumerable<ContractDescription> contracts, Uri address, MetadataExchangeClientMode mode, MetadataExchangeClient client, AsyncCallback callback, object asyncState)
-		{
-			return resolver.BeginInvoke (contracts, () => client.GetMetadata (address, mode), callback, asyncState);
-		}
+        // 6
+        public static IAsyncResult BeginResolve(
+            IEnumerable<ContractDescription> contracts,
+            Uri address,
+            MetadataExchangeClientMode mode,
+            MetadataExchangeClient client,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
+            return resolver.BeginInvoke(
+                contracts,
+                () => client.GetMetadata(address, mode),
+                callback,
+                asyncState
+            );
+        }
 
-		delegate ServiceEndpointCollection Resolver (IEnumerable<ContractDescription> contracts, Func<MetadataSet> metadataGetter);
+        delegate ServiceEndpointCollection Resolver(
+            IEnumerable<ContractDescription> contracts,
+            Func<MetadataSet> metadataGetter
+        );
 
-		static readonly Resolver resolver = new Resolver (ResolveContracts);
+        static readonly Resolver resolver = new Resolver(ResolveContracts);
 
-		public static ServiceEndpointCollection EndResolve (IAsyncResult result)
-		{
-			return resolver.EndInvoke (result);
-		}
+        public static ServiceEndpointCollection EndResolve(IAsyncResult result)
+        {
+            return resolver.EndInvoke(result);
+        }
 
-		// 1.
-		public static ServiceEndpointCollection Resolve (
-				Type contract,
-				EndpointAddress address)
-		{
-			// -> 3.
-			return Resolve (ToContracts (contract), address);
-		}
+        // 1.
+        public static ServiceEndpointCollection Resolve(Type contract, EndpointAddress address)
+        {
+            // -> 3.
+            return Resolve(ToContracts(contract), address);
+        }
 
-		// 2.
-		public static ServiceEndpointCollection Resolve (
-				Type contract,
-				Uri address,
-				MetadataExchangeClientMode mode)
-		{
-			// -> 4
-			return Resolve (ToContracts (contract), address, mode);
-		}
+        // 2.
+        public static ServiceEndpointCollection Resolve(
+            Type contract,
+            Uri address,
+            MetadataExchangeClientMode mode
+        )
+        {
+            // -> 4
+            return Resolve(ToContracts(contract), address, mode);
+        }
 
-		// 3.
-		public static ServiceEndpointCollection Resolve (
-				IEnumerable<ContractDescription> contracts,
-				EndpointAddress address)
-		{
-			// -> 5
-			return Resolve (contracts, address, new MetadataExchangeClient ());
-		}
+        // 3.
+        public static ServiceEndpointCollection Resolve(
+            IEnumerable<ContractDescription> contracts,
+            EndpointAddress address
+        )
+        {
+            // -> 5
+            return Resolve(contracts, address, new MetadataExchangeClient());
+        }
 
-		// 4.
-		public static ServiceEndpointCollection Resolve (
-				IEnumerable<ContractDescription> contracts,
-				Uri address,
-				MetadataExchangeClientMode mode)
-		{
-			return Resolve (contracts, new EndpointAddress (address), new MetadataExchangeClient (address, mode));
-		}
+        // 4.
+        public static ServiceEndpointCollection Resolve(
+            IEnumerable<ContractDescription> contracts,
+            Uri address,
+            MetadataExchangeClientMode mode
+        )
+        {
+            return Resolve(
+                contracts,
+                new EndpointAddress(address),
+                new MetadataExchangeClient(address, mode)
+            );
+        }
 
-		// 5.
-		public static ServiceEndpointCollection Resolve (
-				IEnumerable<ContractDescription> contracts,
-				EndpointAddress address,
-				MetadataExchangeClient client)
-		{
-			if (client == null)
-				throw new ArgumentNullException ("client");
+        // 5.
+        public static ServiceEndpointCollection Resolve(
+            IEnumerable<ContractDescription> contracts,
+            EndpointAddress address,
+            MetadataExchangeClient client
+        )
+        {
+            if (client == null)
+                throw new ArgumentNullException("client");
 
-			return ResolveContracts (contracts, () => client.GetMetadata (address));
-		}
+            return ResolveContracts(contracts, () => client.GetMetadata(address));
+        }
 
-		// 6.
-		public static ServiceEndpointCollection Resolve (
-				IEnumerable<ContractDescription> contracts,
-				Uri address,
-				MetadataExchangeClientMode mode,
-				MetadataExchangeClient client)
-		{
-			if (client == null)
-				throw new ArgumentNullException ("client");
+        // 6.
+        public static ServiceEndpointCollection Resolve(
+            IEnumerable<ContractDescription> contracts,
+            Uri address,
+            MetadataExchangeClientMode mode,
+            MetadataExchangeClient client
+        )
+        {
+            if (client == null)
+                throw new ArgumentNullException("client");
 
-			return ResolveContracts (contracts, () => client.GetMetadata (address, mode));
-		}
+            return ResolveContracts(contracts, () => client.GetMetadata(address, mode));
+        }
 
-		private static ServiceEndpointCollection ResolveContracts (
-				IEnumerable<ContractDescription> contracts,
-				Func<MetadataSet> metadataGetter)
-		{
-			if (contracts == null)
-				throw new ArgumentNullException ("contracts");
+        private static ServiceEndpointCollection ResolveContracts(
+            IEnumerable<ContractDescription> contracts,
+            Func<MetadataSet> metadataGetter
+        )
+        {
+            if (contracts == null)
+                throw new ArgumentNullException("contracts");
 
-			List<ContractDescription> list = new List<ContractDescription> (contracts);
-			if (list.Count == 0)
-				throw new ArgumentException ("There must be atleast one ContractDescription", "contracts");
+            List<ContractDescription> list = new List<ContractDescription>(contracts);
+            if (list.Count == 0)
+                throw new ArgumentException(
+                    "There must be atleast one ContractDescription",
+                    "contracts"
+                );
 
-			MetadataSet metadata = metadataGetter ();
-			WsdlImporter importer = new WsdlImporter (metadata);
-			ServiceEndpointCollection endpoints = importer.ImportAllEndpoints ();
-			
-			ServiceEndpointCollection ret = new ServiceEndpointCollection ();
+            MetadataSet metadata = metadataGetter();
+            WsdlImporter importer = new WsdlImporter(metadata);
+            ServiceEndpointCollection endpoints = importer.ImportAllEndpoints();
 
-			foreach (ContractDescription contract in list) {
-				Collection<ServiceEndpoint> colln = 
-					endpoints.FindAll (new QName (contract.Name, contract.Namespace));
+            ServiceEndpointCollection ret = new ServiceEndpointCollection();
 
-				for (int i = 0; i < colln.Count; i ++)
-					ret.Add (colln [i]);
-			}
+            foreach (ContractDescription contract in list)
+            {
+                Collection<ServiceEndpoint> colln = endpoints.FindAll(
+                    new QName(contract.Name, contract.Namespace)
+                );
 
-			return ret;
-		}
-	}
+                for (int i = 0; i < colln.Count; i++)
+                    ret.Add(colln[i]);
+            }
+
+            return ret;
+        }
+    }
 }

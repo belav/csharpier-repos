@@ -24,6 +24,6 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The enter is key only passed through to the editor if the completion item has been fully typed out.
         /// </summary>
-        AfterFullyTypedWord
+        AfterFullyTypedWord,
     }
 }

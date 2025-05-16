@@ -3,7 +3,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
   </PropertyGroup>
-
   <Import Project="Versions.props" />
   <Import Project="NetCoreAppLibrary.props" />
 </Project>

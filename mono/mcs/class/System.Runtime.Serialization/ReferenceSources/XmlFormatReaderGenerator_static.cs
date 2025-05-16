@@ -6,613 +6,911 @@ using System.Xml;
 
 namespace System.Runtime.Serialization
 {
-	internal partial class XmlFormatReaderGenerator
-	{
-		partial class CriticalHelper
-		{
-			internal XmlFormatClassReaderDelegate GenerateClassReader(ClassDataContract classContract)
-			{
-				return (XmlReaderDelegator xr, XmlObjectSerializerReadContext ctx, XmlDictionaryString [] memberNames, XmlDictionaryString [] memberNamespaces) => new XmlFormatReaderInterpreter (classContract).ReadFromXml (xr, ctx, memberNames, memberNamespaces);
-			}
+    internal partial class XmlFormatReaderGenerator
+    {
+        partial class CriticalHelper
+        {
+            internal XmlFormatClassReaderDelegate GenerateClassReader(
+                ClassDataContract classContract
+            )
+            {
+                return (
+                    XmlReaderDelegator xr,
+                    XmlObjectSerializerReadContext ctx,
+                    XmlDictionaryString[] memberNames,
+                    XmlDictionaryString[] memberNamespaces
+                ) =>
+                    new XmlFormatReaderInterpreter(classContract).ReadFromXml(
+                        xr,
+                        ctx,
+                        memberNames,
+                        memberNamespaces
+                    );
+            }
 
-			internal XmlFormatCollectionReaderDelegate GenerateCollectionReader(CollectionDataContract collectionContract)
-			{
-				return (XmlReaderDelegator xr, XmlObjectSerializerReadContext ctx, XmlDictionaryString inm, XmlDictionaryString ins, CollectionDataContract cc) => new XmlFormatReaderInterpreter (collectionContract, false).ReadCollectionFromXml (xr, ctx, inm, ins, cc);
-			}
-			
-			internal XmlFormatGetOnlyCollectionReaderDelegate GenerateGetOnlyCollectionReader(CollectionDataContract collectionContract)
-			{
-				return (XmlReaderDelegator xr, XmlObjectSerializerReadContext ctx, XmlDictionaryString inm, XmlDictionaryString ins, CollectionDataContract cc) => new XmlFormatReaderInterpreter (collectionContract, true).ReadGetOnlyCollectionFromXml (xr, ctx, inm, ins, cc);
-			}
-		}
-	}
+            internal XmlFormatCollectionReaderDelegate GenerateCollectionReader(
+                CollectionDataContract collectionContract
+            )
+            {
+                return (
+                    XmlReaderDelegator xr,
+                    XmlObjectSerializerReadContext ctx,
+                    XmlDictionaryString inm,
+                    XmlDictionaryString ins,
+                    CollectionDataContract cc
+                ) =>
+                    new XmlFormatReaderInterpreter(collectionContract, false).ReadCollectionFromXml(
+                        xr,
+                        ctx,
+                        inm,
+                        ins,
+                        cc
+                    );
+            }
 
-	class XmlFormatReaderInterpreter
-	{
-		public XmlFormatReaderInterpreter (ClassDataContract classContract)
-		{
-			this.classContract = classContract;
-		}
+            internal XmlFormatGetOnlyCollectionReaderDelegate GenerateGetOnlyCollectionReader(
+                CollectionDataContract collectionContract
+            )
+            {
+                return (
+                    XmlReaderDelegator xr,
+                    XmlObjectSerializerReadContext ctx,
+                    XmlDictionaryString inm,
+                    XmlDictionaryString ins,
+                    CollectionDataContract cc
+                ) =>
+                    new XmlFormatReaderInterpreter(
+                        collectionContract,
+                        true
+                    ).ReadGetOnlyCollectionFromXml(xr, ctx, inm, ins, cc);
+            }
+        }
+    }
 
-		public XmlFormatReaderInterpreter (CollectionDataContract collectionContract, bool isGetOnly)
-		{
-			this.collectionContract = collectionContract;
-			this.is_get_only_collection = isGetOnly;
-		}
+    class XmlFormatReaderInterpreter
+    {
+        public XmlFormatReaderInterpreter(ClassDataContract classContract)
+        {
+            this.classContract = classContract;
+        }
 
-		bool is_get_only_collection;
+        public XmlFormatReaderInterpreter(CollectionDataContract collectionContract, bool isGetOnly)
+        {
+            this.collectionContract = collectionContract;
+            this.is_get_only_collection = isGetOnly;
+        }
 
-		ClassDataContract classContract;
+        bool is_get_only_collection;
 
-		CollectionDataContract collectionContract;
+        ClassDataContract classContract;
 
-		object objectLocal;
-		Type objectType;
-		XmlReaderDelegator xmlReader;
-		XmlObjectSerializerReadContext context;
+        CollectionDataContract collectionContract;
 
-		XmlDictionaryString [] memberNames = null;
-		XmlDictionaryString [] memberNamespaces = null;
-		XmlDictionaryString itemName = null;
-		XmlDictionaryString itemNamespace = null;
+        object objectLocal;
+        Type objectType;
+        XmlReaderDelegator xmlReader;
+        XmlObjectSerializerReadContext context;
 
-		public object ReadFromXml (XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString[] memberNames, XmlDictionaryString[] memberNamespaces)
-		{
-			// InitArgs()
-			this.xmlReader = xmlReader;
-			this.context = context;
-			this.memberNames = memberNames;
-			this.memberNamespaces = memberNamespaces;
-			
-			//DemandSerializationFormatterPermission(classContract);
-			//DemandMemberAccessPermission(memberAccessFlag);
-			CreateObject (classContract);
-			
-			context.AddNewObject (objectLocal);
-			InvokeOnDeserializing (classContract);
-            
+        XmlDictionaryString[] memberNames = null;
+        XmlDictionaryString[] memberNamespaces = null;
+        XmlDictionaryString itemName = null;
+        XmlDictionaryString itemNamespace = null;
+
+        public object ReadFromXml(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString[] memberNames,
+            XmlDictionaryString[] memberNamespaces
+        )
+        {
+            // InitArgs()
+            this.xmlReader = xmlReader;
+            this.context = context;
+            this.memberNames = memberNames;
+            this.memberNamespaces = memberNamespaces;
+
+            //DemandSerializationFormatterPermission(classContract);
+            //DemandMemberAccessPermission(memberAccessFlag);
+            CreateObject(classContract);
+
+            context.AddNewObject(objectLocal);
+            InvokeOnDeserializing(classContract);
+
             string objectId = null;
-            
-			if (HasFactoryMethod (classContract))
-				objectId = context.GetObjectId ();
-			if (classContract.IsISerializable)
-				ReadISerializable (classContract);
-			else
-				ReadClass (classContract);
-			bool isFactoryType = InvokeFactoryMethod (classContract, objectId);
-			if (Globals.TypeOfIDeserializationCallback.IsAssignableFrom (classContract.UnderlyingType))
-				((IDeserializationCallback) objectLocal).OnDeserialization (null);
-			InvokeOnDeserialized(classContract);
-			if (objectId == null || !isFactoryType) {
 
-				// Do a conversion back from DateTimeOffsetAdapter to DateTimeOffset after deserialization.
-				// DateTimeOffsetAdapter is used here for deserialization purposes to bypass the ISerializable implementation
-				// on DateTimeOffset; which does not work in partial trust.
+            if (HasFactoryMethod(classContract))
+                objectId = context.GetObjectId();
+            if (classContract.IsISerializable)
+                ReadISerializable(classContract);
+            else
+                ReadClass(classContract);
+            bool isFactoryType = InvokeFactoryMethod(classContract, objectId);
+            if (
+                Globals.TypeOfIDeserializationCallback.IsAssignableFrom(
+                    classContract.UnderlyingType
+                )
+            )
+                ((IDeserializationCallback)objectLocal).OnDeserialization(null);
+            InvokeOnDeserialized(classContract);
+            if (objectId == null || !isFactoryType)
+            {
+                // Do a conversion back from DateTimeOffsetAdapter to DateTimeOffset after deserialization.
+                // DateTimeOffsetAdapter is used here for deserialization purposes to bypass the ISerializable implementation
+                // on DateTimeOffset; which does not work in partial trust.
 
-				if (classContract.UnderlyingType == Globals.TypeOfDateTimeOffsetAdapter)
-					objectLocal = DateTimeOffsetAdapter.GetDateTimeOffset ((DateTimeOffsetAdapter) objectLocal);
-				// else - do we have to call CodeInterpreter.ConvertValue()? I guess not...
-			}
-			return objectLocal;
-		}
-		
-		public object ReadCollectionFromXml (XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString itemName, XmlDictionaryString itemNamespace, CollectionDataContract collectionContract)
-		{
-			#region GenerateCollectionReaderHelper
-			// InitArgs()
-			this.xmlReader = xmlReader;
-			this.context = context;
-			this.itemName = itemName;
-			this.itemNamespace = itemNamespace;
+                if (classContract.UnderlyingType == Globals.TypeOfDateTimeOffsetAdapter)
+                    objectLocal = DateTimeOffsetAdapter.GetDateTimeOffset(
+                        (DateTimeOffsetAdapter)objectLocal
+                    );
+                // else - do we have to call CodeInterpreter.ConvertValue()? I guess not...
+            }
+            return objectLocal;
+        }
 
-			this.collectionContract = collectionContract;
+        public object ReadCollectionFromXml(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            CollectionDataContract collectionContract
+        )
+        {
+            #region GenerateCollectionReaderHelper
+            // InitArgs()
+            this.xmlReader = xmlReader;
+            this.context = context;
+            this.itemName = itemName;
+            this.itemNamespace = itemNamespace;
 
-			#endregion
+            this.collectionContract = collectionContract;
 
-			ReadCollection (collectionContract);
+            #endregion
 
-			return objectLocal;
-		}
-		
-		public void ReadGetOnlyCollectionFromXml (XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context, XmlDictionaryString itemName, XmlDictionaryString itemNamespace, CollectionDataContract collectionContract)
-		{
-			#region GenerateCollectionReaderHelper
-			// InitArgs()
-			this.xmlReader = xmlReader;
-			this.context = context;
-			this.itemName = itemName;
-			this.itemNamespace = itemNamespace;
+            ReadCollection(collectionContract);
 
-			this.collectionContract = collectionContract;
+            return objectLocal;
+        }
 
-			#endregion
+        public void ReadGetOnlyCollectionFromXml(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context,
+            XmlDictionaryString itemName,
+            XmlDictionaryString itemNamespace,
+            CollectionDataContract collectionContract
+        )
+        {
+            #region GenerateCollectionReaderHelper
+            // InitArgs()
+            this.xmlReader = xmlReader;
+            this.context = context;
+            this.itemName = itemName;
+            this.itemNamespace = itemNamespace;
 
-			ReadGetOnlyCollection (collectionContract);
-		}
+            this.collectionContract = collectionContract;
 
-		void CreateObject (ClassDataContract classContract)
-		{
-			Type type = objectType = classContract.UnderlyingType;
-			if (type.IsValueType && !classContract.IsNonAttributedType)
-				type = Globals.TypeOfValueType;
+            #endregion
 
-			if (classContract.UnderlyingType == Globals.TypeOfDBNull)
-				objectLocal = DBNull.Value;
-			else if (classContract.IsNonAttributedType) {
-				if (type.IsValueType)
-					objectLocal = FormatterServices.GetUninitializedObject (type);
-				else
-					objectLocal = classContract.GetNonAttributedTypeConstructor ().Invoke (new object [0]);
-			}
-			else
-				objectLocal = CodeInterpreter.ConvertValue (XmlFormatReaderGenerator.UnsafeGetUninitializedObject (DataContract.GetIdForInitialization (classContract)), Globals.TypeOfObject, type);
-		}
+            ReadGetOnlyCollection(collectionContract);
+        }
 
-		void InvokeOnDeserializing (ClassDataContract classContract)
-		{
-			if (classContract.BaseContract != null)
-				InvokeOnDeserializing (classContract.BaseContract);
-			if (classContract.OnDeserializing != null)
-				classContract.OnDeserializing.Invoke (objectLocal, new object [] {context.GetStreamingContext ()});
-		}
+        void CreateObject(ClassDataContract classContract)
+        {
+            Type type = objectType = classContract.UnderlyingType;
+            if (type.IsValueType && !classContract.IsNonAttributedType)
+                type = Globals.TypeOfValueType;
 
-		void InvokeOnDeserialized (ClassDataContract classContract)
-		{
-			if (classContract.BaseContract != null)
-				InvokeOnDeserialized (classContract.BaseContract);
-			if (classContract.OnDeserialized != null)
-				classContract.OnDeserialized.Invoke (objectLocal, new object [] {context.GetStreamingContext ()});
-		}
+            if (classContract.UnderlyingType == Globals.TypeOfDBNull)
+                objectLocal = DBNull.Value;
+            else if (classContract.IsNonAttributedType)
+            {
+                if (type.IsValueType)
+                    objectLocal = FormatterServices.GetUninitializedObject(type);
+                else
+                    objectLocal = classContract
+                        .GetNonAttributedTypeConstructor()
+                        .Invoke(new object[0]);
+            }
+            else
+                objectLocal = CodeInterpreter.ConvertValue(
+                    XmlFormatReaderGenerator.UnsafeGetUninitializedObject(
+                        DataContract.GetIdForInitialization(classContract)
+                    ),
+                    Globals.TypeOfObject,
+                    type
+                );
+        }
 
-		bool HasFactoryMethod (ClassDataContract classContract)
-		{
-			return Globals.TypeOfIObjectReference.IsAssignableFrom (classContract.UnderlyingType);
-		}
+        void InvokeOnDeserializing(ClassDataContract classContract)
+        {
+            if (classContract.BaseContract != null)
+                InvokeOnDeserializing(classContract.BaseContract);
+            if (classContract.OnDeserializing != null)
+                classContract.OnDeserializing.Invoke(
+                    objectLocal,
+                    new object[] { context.GetStreamingContext() }
+                );
+        }
 
-		bool InvokeFactoryMethod (ClassDataContract classContract, string objectId)
-		{
-			if (HasFactoryMethod (classContract)) {
-				objectLocal = CodeInterpreter.ConvertValue (context.GetRealObject ((IObjectReference) objectLocal, objectId), Globals.TypeOfObject, classContract.UnderlyingType);
-				return true;
-			}
-			return false;
-		}
+        void InvokeOnDeserialized(ClassDataContract classContract)
+        {
+            if (classContract.BaseContract != null)
+                InvokeOnDeserialized(classContract.BaseContract);
+            if (classContract.OnDeserialized != null)
+                classContract.OnDeserialized.Invoke(
+                    objectLocal,
+                    new object[] { context.GetStreamingContext() }
+                );
+        }
 
-		void ReadISerializable (ClassDataContract classContract)
-		{
-			ConstructorInfo ctor = classContract.GetISerializableConstructor ();
-			var info = context.ReadSerializationInfo (xmlReader, classContract.UnderlyingType);
-			ctor.Invoke (objectLocal, new object [] {info, context.GetStreamingContext ()});
-		}
+        bool HasFactoryMethod(ClassDataContract classContract)
+        {
+            return Globals.TypeOfIObjectReference.IsAssignableFrom(classContract.UnderlyingType);
+        }
 
-		void ReadClass (ClassDataContract classContract)
-		{
-			if (classContract.HasExtensionData) {
-				ExtensionDataObject extensionData = new ExtensionDataObject ();
-				ReadMembers (classContract, extensionData);
-				ClassDataContract currentContract = classContract;
-				while (currentContract != null) {
-					MethodInfo extensionDataSetMethod = currentContract.ExtensionDataSetMethod;
-					if (extensionDataSetMethod != null)
-						extensionDataSetMethod.Invoke (objectLocal, new object [] {extensionData});
-					currentContract = currentContract.BaseContract;
-				}
-			}
-			else
-				ReadMembers (classContract, null);
-		}
+        bool InvokeFactoryMethod(ClassDataContract classContract, string objectId)
+        {
+            if (HasFactoryMethod(classContract))
+            {
+                objectLocal = CodeInterpreter.ConvertValue(
+                    context.GetRealObject((IObjectReference)objectLocal, objectId),
+                    Globals.TypeOfObject,
+                    classContract.UnderlyingType
+                );
+                return true;
+            }
+            return false;
+        }
 
-		void ReadMembers (ClassDataContract classContract, ExtensionDataObject  extensionData)
-		{
-			int memberCount = classContract.MemberNames.Length;
-			context.IncrementItemCount (memberCount);
+        void ReadISerializable(ClassDataContract classContract)
+        {
+            ConstructorInfo ctor = classContract.GetISerializableConstructor();
+            var info = context.ReadSerializationInfo(xmlReader, classContract.UnderlyingType);
+            ctor.Invoke(objectLocal, new object[] { info, context.GetStreamingContext() });
+        }
 
-			int memberIndex = -1;
-			
-			int firstRequiredMember;
-			bool[] requiredMembers = GetRequiredMembers (classContract, out firstRequiredMember);
-			bool hasRequiredMembers = (firstRequiredMember < memberCount);
-			int requiredIndex = hasRequiredMembers ? firstRequiredMember : memberCount;
+        void ReadClass(ClassDataContract classContract)
+        {
+            if (classContract.HasExtensionData)
+            {
+                ExtensionDataObject extensionData = new ExtensionDataObject();
+                ReadMembers(classContract, extensionData);
+                ClassDataContract currentContract = classContract;
+                while (currentContract != null)
+                {
+                    MethodInfo extensionDataSetMethod = currentContract.ExtensionDataSetMethod;
+                    if (extensionDataSetMethod != null)
+                        extensionDataSetMethod.Invoke(objectLocal, new object[] { extensionData });
+                    currentContract = currentContract.BaseContract;
+                }
+            }
+            else
+                ReadMembers(classContract, null);
+        }
 
-			while (XmlObjectSerializerReadContext.MoveToNextElement (xmlReader)) {
-				int idx; // used as in "switch (idx)" in the original source.
-				if (hasRequiredMembers)
-					idx = context.GetMemberIndexWithRequiredMembers (xmlReader, memberNames, memberNamespaces, memberIndex, (int) requiredIndex, extensionData);
-				else
-					idx = context.GetMemberIndex (xmlReader, memberNames, memberNamespaces, memberIndex, extensionData);
+        void ReadMembers(ClassDataContract classContract, ExtensionDataObject extensionData)
+        {
+            int memberCount = classContract.MemberNames.Length;
+            context.IncrementItemCount(memberCount);
 
-				if (memberCount > 0)
-					ReadMembers (idx, classContract, requiredMembers, ref memberIndex, ref requiredIndex);
-			}
+            int memberIndex = -1;
 
-			if (hasRequiredMembers)
-			{
-				if (requiredIndex < memberCount)
-					XmlObjectSerializerReadContext.ThrowRequiredMemberMissingException (xmlReader, memberIndex, requiredIndex, memberNames);
-			}
-		}
+            int firstRequiredMember;
+            bool[] requiredMembers = GetRequiredMembers(classContract, out firstRequiredMember);
+            bool hasRequiredMembers = (firstRequiredMember < memberCount);
+            int requiredIndex = hasRequiredMembers ? firstRequiredMember : memberCount;
 
-		int ReadMembers (int index, ClassDataContract classContract, bool [] requiredMembers, ref int memberIndex, ref int requiredIndex)
-		{
-			int memberCount = (classContract.BaseContract == null) ? 0 : ReadMembers (index, classContract.BaseContract, requiredMembers,
-			ref memberIndex, ref requiredIndex);
-			
-			if (memberCount <= index && index < memberCount + classContract.Members.Count) {
-				DataMember dataMember = classContract.Members [index - memberCount];
-				Type memberType = dataMember.MemberType;
-				if (dataMember.IsRequired) {
-					int nextRequiredIndex = index + 1;
-					for (; nextRequiredIndex < requiredMembers.Length; nextRequiredIndex++)
-						if (requiredMembers [nextRequiredIndex])
-							break;
-					requiredIndex = nextRequiredIndex;
-				}
+            while (XmlObjectSerializerReadContext.MoveToNextElement(xmlReader))
+            {
+                int idx; // used as in "switch (idx)" in the original source.
+                if (hasRequiredMembers)
+                    idx = context.GetMemberIndexWithRequiredMembers(
+                        xmlReader,
+                        memberNames,
+                        memberNamespaces,
+                        memberIndex,
+                        (int)requiredIndex,
+                        extensionData
+                    );
+                else
+                    idx = context.GetMemberIndex(
+                        xmlReader,
+                        memberNames,
+                        memberNamespaces,
+                        memberIndex,
+                        extensionData
+                    );
 
-				if (dataMember.IsGetOnlyCollection) {
-					var value = CodeInterpreter.GetMember (dataMember.MemberInfo, objectLocal);
-					context.StoreCollectionMemberInfo (value);
-					ReadValue (memberType, dataMember.Name, classContract.StableName.Namespace);
-				} else {
-					var value = ReadValue (memberType, dataMember.Name, classContract.StableName.Namespace);
-					CodeInterpreter.SetMember (dataMember.MemberInfo, objectLocal, value);
-				}
-				memberIndex = index;
-			}
-			return memberCount + classContract.Members.Count;
-		}
+                if (memberCount > 0)
+                    ReadMembers(
+                        idx,
+                        classContract,
+                        requiredMembers,
+                        ref memberIndex,
+                        ref requiredIndex
+                    );
+            }
 
-		bool[] GetRequiredMembers (ClassDataContract contract, out int firstRequiredMember)
-		{
-			int memberCount = contract.MemberNames.Length;
-			bool [] requiredMembers = new bool [memberCount];
-			GetRequiredMembers (contract, requiredMembers);
-			for (firstRequiredMember = 0; firstRequiredMember < memberCount; firstRequiredMember++)
-				if (requiredMembers [firstRequiredMember])
-					break;
-			return requiredMembers;
-		}
+            if (hasRequiredMembers)
+            {
+                if (requiredIndex < memberCount)
+                    XmlObjectSerializerReadContext.ThrowRequiredMemberMissingException(
+                        xmlReader,
+                        memberIndex,
+                        requiredIndex,
+                        memberNames
+                    );
+            }
+        }
 
-		int GetRequiredMembers (ClassDataContract contract, bool[] requiredMembers)
-		{
-			int memberCount = (contract.BaseContract == null) ? 0 : GetRequiredMembers (contract.BaseContract, requiredMembers);
-			List<DataMember> members = contract.Members;
-			for (int i = 0; i < members.Count; i++, memberCount++)
-				requiredMembers [memberCount] = members [i].IsRequired;
-			return memberCount;
-		}
+        int ReadMembers(
+            int index,
+            ClassDataContract classContract,
+            bool[] requiredMembers,
+            ref int memberIndex,
+            ref int requiredIndex
+        )
+        {
+            int memberCount =
+                (classContract.BaseContract == null)
+                    ? 0
+                    : ReadMembers(
+                        index,
+                        classContract.BaseContract,
+                        requiredMembers,
+                        ref memberIndex,
+                        ref requiredIndex
+                    );
 
-		object ReadValue (Type type, string name, string ns)
-		{
-			var valueType = type;
-			object value = null;
-			bool shouldAssignNullableValue = false;
-			int nullables = 0;
-			while (type.IsGenericType && type.GetGenericTypeDefinition () == Globals.TypeOfNullable) {
-				nullables++;
-				type = type.GetGenericArguments () [0];
-			}
-			
-			PrimitiveDataContract primitiveContract = PrimitiveDataContract.GetPrimitiveDataContract (type);
-			if ((primitiveContract != null && primitiveContract.UnderlyingType != Globals.TypeOfObject) || nullables != 0 || type.IsValueType) {
-				context.ReadAttributes (xmlReader);
-				string objectId = context.ReadIfNullOrRef (xmlReader, type, DataContract.IsTypeSerializable (type));
-				// Deserialize null
-                if (objectId == Globals.NullObjectId) {
-					
-					if (nullables != 0)
-						value = Activator.CreateInstance (valueType);
-					else if (type.IsValueType)
-						throw new SerializationException (SR.GetString (SR.ValueTypeCannotBeNull, DataContract.GetClrTypeFullName (type)));
-					else
-						value = null;
-				} else if (objectId == string.Empty) {
-					// Deserialize value
+            if (memberCount <= index && index < memberCount + classContract.Members.Count)
+            {
+                DataMember dataMember = classContract.Members[index - memberCount];
+                Type memberType = dataMember.MemberType;
+                if (dataMember.IsRequired)
+                {
+                    int nextRequiredIndex = index + 1;
+                    for (; nextRequiredIndex < requiredMembers.Length; nextRequiredIndex++)
+                        if (requiredMembers[nextRequiredIndex])
+                            break;
+                    requiredIndex = nextRequiredIndex;
+                }
 
-					// Compare against Globals.NewObjectId, which is set to string.Empty
-					
-					objectId = context.GetObjectId ();
-					
-					if (type.IsValueType) {
-						if (!string.IsNullOrEmpty (objectId))
-							throw new SerializationException (SR.GetString (SR.ValueTypeCannotHaveId, DataContract.GetClrTypeFullName(type)));
-					}
-					object innerValueRead = null;
-					if (nullables != 0)
-						shouldAssignNullableValue = true;
+                if (dataMember.IsGetOnlyCollection)
+                {
+                    var value = CodeInterpreter.GetMember(dataMember.MemberInfo, objectLocal);
+                    context.StoreCollectionMemberInfo(value);
+                    ReadValue(memberType, dataMember.Name, classContract.StableName.Namespace);
+                }
+                else
+                {
+                    var value = ReadValue(
+                        memberType,
+                        dataMember.Name,
+                        classContract.StableName.Namespace
+                    );
+                    CodeInterpreter.SetMember(dataMember.MemberInfo, objectLocal, value);
+                }
+                memberIndex = index;
+            }
+            return memberCount + classContract.Members.Count;
+        }
 
-					if (primitiveContract != null && primitiveContract.UnderlyingType != Globals.TypeOfObject) {
-						value = primitiveContract.XmlFormatReaderMethod.Invoke (xmlReader, new object [0]);
-						if (!type.IsValueType)
-							context.AddNewObject (value);
-					}
-					else
-							value = InternalDeserialize (type, name, ns);
-				} else {
-					// Deserialize ref
-					if (type.IsValueType)
-						throw new SerializationException (SR.GetString (SR.ValueTypeCannotHaveRef, DataContract.GetClrTypeFullName (type)));
-					else
-						value = CodeInterpreter.ConvertValue (context.GetExistingObject (objectId, type, name, ns), Globals.TypeOfObject, type);
-				}
+        bool[] GetRequiredMembers(ClassDataContract contract, out int firstRequiredMember)
+        {
+            int memberCount = contract.MemberNames.Length;
+            bool[] requiredMembers = new bool[memberCount];
+            GetRequiredMembers(contract, requiredMembers);
+            for (firstRequiredMember = 0; firstRequiredMember < memberCount; firstRequiredMember++)
+                if (requiredMembers[firstRequiredMember])
+                    break;
+            return requiredMembers;
+        }
 
-				if (shouldAssignNullableValue) {
-					if (objectId != Globals.NullObjectId)
-						value = WrapNullableObject (type, value, valueType, nullables);
-				}
-			}
-			else
-				value = InternalDeserialize (type, name, ns);
+        int GetRequiredMembers(ClassDataContract contract, bool[] requiredMembers)
+        {
+            int memberCount =
+                (contract.BaseContract == null)
+                    ? 0
+                    : GetRequiredMembers(contract.BaseContract, requiredMembers);
+            List<DataMember> members = contract.Members;
+            for (int i = 0; i < members.Count; i++, memberCount++)
+                requiredMembers[memberCount] = members[i].IsRequired;
+            return memberCount;
+        }
 
-			return value;
-		}
+        object ReadValue(Type type, string name, string ns)
+        {
+            var valueType = type;
+            object value = null;
+            bool shouldAssignNullableValue = false;
+            int nullables = 0;
+            while (type.IsGenericType && type.GetGenericTypeDefinition() == Globals.TypeOfNullable)
+            {
+                nullables++;
+                type = type.GetGenericArguments()[0];
+            }
 
-		object InternalDeserialize (Type type, string name, string ns)
-		{
-			Type declaredType = type.IsPointer ? Globals.TypeOfReflectionPointer : type;
-			var obj = context.InternalDeserialize (xmlReader, DataContract.GetId (declaredType.TypeHandle), declaredType.TypeHandle, name, ns);
+            PrimitiveDataContract primitiveContract =
+                PrimitiveDataContract.GetPrimitiveDataContract(type);
+            if (
+                (
+                    primitiveContract != null
+                    && primitiveContract.UnderlyingType != Globals.TypeOfObject
+                )
+                || nullables != 0
+                || type.IsValueType
+            )
+            {
+                context.ReadAttributes(xmlReader);
+                string objectId = context.ReadIfNullOrRef(
+                    xmlReader,
+                    type,
+                    DataContract.IsTypeSerializable(type)
+                );
+                // Deserialize null
+                if (objectId == Globals.NullObjectId)
+                {
+                    if (nullables != 0)
+                        value = Activator.CreateInstance(valueType);
+                    else if (type.IsValueType)
+                        throw new SerializationException(
+                            SR.GetString(
+                                SR.ValueTypeCannotBeNull,
+                                DataContract.GetClrTypeFullName(type)
+                            )
+                        );
+                    else
+                        value = null;
+                }
+                else if (objectId == string.Empty)
+                {
+                    // Deserialize value
 
-			if (type.IsPointer)
-				// wow, there is no way to convert void* to object in strongly typed way...
-				return XmlFormatGeneratorStatics.UnboxPointer.Invoke (null, new object [] {obj});
-			else
-				return CodeInterpreter.ConvertValue (obj, Globals.TypeOfObject, type);
-		}
+                    // Compare against Globals.NewObjectId, which is set to string.Empty
 
-		object WrapNullableObject (Type innerType, object innerValue, Type outerType, int nullables)
-		{
-			var outerValue = innerValue;
-			for (int i = 1; i < nullables; i++) {
-				Type type = Globals.TypeOfNullable.MakeGenericType (innerType);
-				outerValue = Activator.CreateInstance (type, new object[] { outerValue });
-				innerType = type;
-			}
-			return Activator.CreateInstance (outerType, new object[] { outerValue });
-		}
+                    objectId = context.GetObjectId();
 
+                    if (type.IsValueType)
+                    {
+                        if (!string.IsNullOrEmpty(objectId))
+                            throw new SerializationException(
+                                SR.GetString(
+                                    SR.ValueTypeCannotHaveId,
+                                    DataContract.GetClrTypeFullName(type)
+                                )
+                            );
+                    }
+                    object innerValueRead = null;
+                    if (nullables != 0)
+                        shouldAssignNullableValue = true;
 
-		void ReadCollection (CollectionDataContract collectionContract)
-		{
-			Type type = collectionContract.UnderlyingType;
-			Type itemType = collectionContract.ItemType;
-			bool isArray = (collectionContract.Kind == CollectionKind.Array);
+                    if (
+                        primitiveContract != null
+                        && primitiveContract.UnderlyingType != Globals.TypeOfObject
+                    )
+                    {
+                        value = primitiveContract.XmlFormatReaderMethod.Invoke(
+                            xmlReader,
+                            new object[0]
+                        );
+                        if (!type.IsValueType)
+                            context.AddNewObject(value);
+                    }
+                    else
+                        value = InternalDeserialize(type, name, ns);
+                }
+                else
+                {
+                    // Deserialize ref
+                    if (type.IsValueType)
+                        throw new SerializationException(
+                            SR.GetString(
+                                SR.ValueTypeCannotHaveRef,
+                                DataContract.GetClrTypeFullName(type)
+                            )
+                        );
+                    else
+                        value = CodeInterpreter.ConvertValue(
+                            context.GetExistingObject(objectId, type, name, ns),
+                            Globals.TypeOfObject,
+                            type
+                        );
+                }
 
-			ConstructorInfo constructor = collectionContract.Constructor;
+                if (shouldAssignNullableValue)
+                {
+                    if (objectId != Globals.NullObjectId)
+                        value = WrapNullableObject(type, value, valueType, nullables);
+                }
+            }
+            else
+                value = InternalDeserialize(type, name, ns);
 
-			if (type.IsInterface) {
-				switch (collectionContract.Kind) {
-				case CollectionKind.GenericDictionary:
-					type = Globals.TypeOfDictionaryGeneric.MakeGenericType (itemType.GetGenericArguments ());
-					constructor = type.GetConstructor (BindingFlags.Instance | BindingFlags.Public, null, Globals.EmptyTypeArray, null);
-					break;
-				case CollectionKind.Dictionary:
-					type = Globals.TypeOfHashtable;
-					constructor = XmlFormatGeneratorStatics.HashtableCtor;
-					break;
-				case CollectionKind.Collection:
-				case CollectionKind.GenericCollection:
-				case CollectionKind.Enumerable:
-				case CollectionKind.GenericEnumerable:
-				case CollectionKind.List:
-				case CollectionKind.GenericList:
-					type = itemType.MakeArrayType ();
-					isArray = true;
-					break;
-				}
-			}
-			string itemName = collectionContract.ItemName;
-			string itemNs = collectionContract.StableName.Namespace;
+            return value;
+        }
 
-			if (!isArray) {
-				if (type.IsValueType)
-					// FIXME: this is not what the original code does.
-					objectLocal = FormatterServices.GetUninitializedObject (type);
-				else {
-					objectLocal = constructor.Invoke (new object [0]);
-					context.AddNewObject (objectLocal);
-				}
-			}
+        object InternalDeserialize(Type type, string name, string ns)
+        {
+            Type declaredType = type.IsPointer ? Globals.TypeOfReflectionPointer : type;
+            var obj = context.InternalDeserialize(
+                xmlReader,
+                DataContract.GetId(declaredType.TypeHandle),
+                declaredType.TypeHandle,
+                name,
+                ns
+            );
 
-			int size = context.GetArraySize ();
+            if (type.IsPointer)
+                // wow, there is no way to convert void* to object in strongly typed way...
+                return XmlFormatGeneratorStatics.UnboxPointer.Invoke(null, new object[] { obj });
+            else
+                return CodeInterpreter.ConvertValue(obj, Globals.TypeOfObject, type);
+        }
 
-			string objectId = context.GetObjectId ();
+        object WrapNullableObject(Type innerType, object innerValue, Type outerType, int nullables)
+        {
+            var outerValue = innerValue;
+            for (int i = 1; i < nullables; i++)
+            {
+                Type type = Globals.TypeOfNullable.MakeGenericType(innerType);
+                outerValue = Activator.CreateInstance(type, new object[] { outerValue });
+                innerType = type;
+            }
+            return Activator.CreateInstance(outerType, new object[] { outerValue });
+        }
 
-			bool canReadPrimitiveArray = false, readResult = false;
-			if (isArray && TryReadPrimitiveArray (type, itemType, size, out readResult))
-				canReadPrimitiveArray = true;
+        void ReadCollection(CollectionDataContract collectionContract)
+        {
+            Type type = collectionContract.UnderlyingType;
+            Type itemType = collectionContract.ItemType;
+            bool isArray = (collectionContract.Kind == CollectionKind.Array);
 
-			if (!readResult) {
-				if (size == -1) {
+            ConstructorInfo constructor = collectionContract.Constructor;
 
-					object growingCollection = null;
-					if (isArray)
-						growingCollection = Array.CreateInstance (itemType, 32);
+            if (type.IsInterface)
+            {
+                switch (collectionContract.Kind)
+                {
+                    case CollectionKind.GenericDictionary:
+                        type = Globals.TypeOfDictionaryGeneric.MakeGenericType(
+                            itemType.GetGenericArguments()
+                        );
+                        constructor = type.GetConstructor(
+                            BindingFlags.Instance | BindingFlags.Public,
+                            null,
+                            Globals.EmptyTypeArray,
+                            null
+                        );
+                        break;
+                    case CollectionKind.Dictionary:
+                        type = Globals.TypeOfHashtable;
+                        constructor = XmlFormatGeneratorStatics.HashtableCtor;
+                        break;
+                    case CollectionKind.Collection:
+                    case CollectionKind.GenericCollection:
+                    case CollectionKind.Enumerable:
+                    case CollectionKind.GenericEnumerable:
+                    case CollectionKind.List:
+                    case CollectionKind.GenericList:
+                        type = itemType.MakeArrayType();
+                        isArray = true;
+                        break;
+                }
+            }
+            string itemName = collectionContract.ItemName;
+            string itemNs = collectionContract.StableName.Namespace;
 
-					int i = 0;
-					// FIXME: I cannot find i++ part, but without that it won't work as expected.
-					for (; i < int.MaxValue; i++) {
-						if (IsStartElement (this.itemName, this.itemNamespace)) {
-							context.IncrementItemCount (1);
-							object value = ReadCollectionItem (collectionContract, itemType, itemName, itemNs);
-							if (isArray) {
-								MethodInfo ensureArraySizeMethod = XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod (itemType);
-								growingCollection = ensureArraySizeMethod.Invoke (null, new object [] {growingCollection, i});
-								((Array) growingCollection).SetValue (value, i);
-							} else {
-								StoreCollectionValue (objectLocal, itemType, value, collectionContract);
-							}
-						}
-						else if (IsEndElement ())
-							break;
-						else
-							HandleUnexpectedItemInCollection (ref i);
-					}
+            if (!isArray)
+            {
+                if (type.IsValueType)
+                    // FIXME: this is not what the original code does.
+                    objectLocal = FormatterServices.GetUninitializedObject(type);
+                else
+                {
+                    objectLocal = constructor.Invoke(new object[0]);
+                    context.AddNewObject(objectLocal);
+                }
+            }
 
-					if (isArray) {
-						MethodInfo trimArraySizeMethod = XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod (itemType);
-						objectLocal = trimArraySizeMethod.Invoke (null, new object [] {growingCollection, i});
-						context.AddNewObjectWithId (objectId, objectLocal);
-					}
-				} else {
-					context.IncrementItemCount (size);
-					if (isArray) {
-						objectLocal = Array.CreateInstance (itemType, size);
-						context.AddNewObject (objectLocal);
-					}
-					// FIXME: I cannot find j++ part, but without that it won't work as expected.
-					for (int j = 0; j < size; j++) {
-						if (IsStartElement (this.itemName, this.itemNamespace)) {
-							var itemValue = ReadCollectionItem (collectionContract, itemType, itemName, itemNs);
-							if (isArray)
-								((Array) objectLocal).SetValue (itemValue, j);
-							else
-								StoreCollectionValue (objectLocal, itemType, itemValue, collectionContract);
-						}
-						else
-							HandleUnexpectedItemInCollection (ref j);
-					}
-					context.CheckEndOfArray (xmlReader, size, this.itemName, this.itemNamespace);
-				}
-			}
-			if (canReadPrimitiveArray)
-				context.AddNewObjectWithId (objectId, objectLocal);
-		}
+            int size = context.GetArraySize();
 
-		void ReadGetOnlyCollection (CollectionDataContract collectionContract)
-		{
-			Type type = collectionContract.UnderlyingType;
-			Type itemType = collectionContract.ItemType;
-			bool isArray = (collectionContract.Kind == CollectionKind.Array);
-			string itemName = collectionContract.ItemName;
-			string itemNs = collectionContract.StableName.Namespace;
+            string objectId = context.GetObjectId();
 
-			objectLocal = context.GetCollectionMember ();
+            bool canReadPrimitiveArray = false,
+                readResult = false;
+            if (isArray && TryReadPrimitiveArray(type, itemType, size, out readResult))
+                canReadPrimitiveArray = true;
 
-			//check that items are actually going to be deserialized into the collection
-			if (IsStartElement (this.itemName, this.itemNamespace)) {
-				if (objectLocal == null)
-					XmlObjectSerializerReadContext.ThrowNullValueReturnedForGetOnlyCollectionException (type);
-				else {
-					int size = 0;
-					if (isArray)
-						size = ((Array) objectLocal).Length;
-					context.AddNewObject (objectLocal);
-					for (int i = 0; i < int.MaxValue;) {
-						if (IsStartElement (this.itemName, this.itemNamespace)) {
-							context.IncrementItemCount (1);
-							var value = ReadCollectionItem (collectionContract, itemType, itemName, itemNs);
-							if (isArray) {
-								if (size == i)
-									XmlObjectSerializerReadContext.ThrowArrayExceededSizeException (size, type);
-								else
-									((Array) objectLocal).SetValue (value, i);
-							} else {
-								StoreCollectionValue (objectLocal, itemType, value, collectionContract);
-							}
-						}
-						else if (IsEndElement())
-							break;
-						else
-							HandleUnexpectedItemInCollection (ref i);
-					}
-					context.CheckEndOfArray (xmlReader, size, this.itemName, this.itemNamespace);
-				}
-			}
-		}
+            if (!readResult)
+            {
+                if (size == -1)
+                {
+                    object growingCollection = null;
+                    if (isArray)
+                        growingCollection = Array.CreateInstance(itemType, 32);
 
-		bool TryReadPrimitiveArray (Type type, Type itemType, int size, out bool readResult)
-		{
-			readResult = false;
-			PrimitiveDataContract primitiveContract = PrimitiveDataContract.GetPrimitiveDataContract (itemType);
-			if (primitiveContract == null)
-				return false;
+                    int i = 0;
+                    // FIXME: I cannot find i++ part, but without that it won't work as expected.
+                    for (; i < int.MaxValue; i++)
+                    {
+                        if (IsStartElement(this.itemName, this.itemNamespace))
+                        {
+                            context.IncrementItemCount(1);
+                            object value = ReadCollectionItem(
+                                collectionContract,
+                                itemType,
+                                itemName,
+                                itemNs
+                            );
+                            if (isArray)
+                            {
+                                MethodInfo ensureArraySizeMethod =
+                                    XmlFormatGeneratorStatics.EnsureArraySizeMethod.MakeGenericMethod(
+                                        itemType
+                                    );
+                                growingCollection = ensureArraySizeMethod.Invoke(
+                                    null,
+                                    new object[] { growingCollection, i }
+                                );
+                                ((Array)growingCollection).SetValue(value, i);
+                            }
+                            else
+                            {
+                                StoreCollectionValue(
+                                    objectLocal,
+                                    itemType,
+                                    value,
+                                    collectionContract
+                                );
+                            }
+                        }
+                        else if (IsEndElement())
+                            break;
+                        else
+                            HandleUnexpectedItemInCollection(ref i);
+                    }
 
-			string readArrayMethod = null;
-			switch (Type.GetTypeCode (itemType))
-			{
-			case TypeCode.Boolean:
-				readArrayMethod = "TryReadBooleanArray";
-			break;
-			case TypeCode.DateTime:
-				readArrayMethod = "TryReadDateTimeArray";
-			break;
-			case TypeCode.Decimal:
-				readArrayMethod = "TryReadDecimalArray";
-			break;
-			case TypeCode.Int32:
-				readArrayMethod = "TryReadInt32Array";
-			break;
-			case TypeCode.Int64:
-				readArrayMethod = "TryReadInt64Array";
-			break;
-			case TypeCode.Single:
-				readArrayMethod = "TryReadSingleArray";
-			break;
-			case TypeCode.Double:
-				readArrayMethod = "TryReadDoubleArray";
-				break;
-			default:
-				break;
-			}
-			if (readArrayMethod != null) {
-				var mi = typeof (XmlReaderDelegator).GetMethod (readArrayMethod, Globals.ScanAllMembers);
-				var args = new object [] {context, itemName, itemNamespace, size, objectLocal};
-				readResult = (bool) mi.Invoke (xmlReader, args);
-				objectLocal = args.Last ();
-				return true;
-			}
-			return false;
-		}
+                    if (isArray)
+                    {
+                        MethodInfo trimArraySizeMethod =
+                            XmlFormatGeneratorStatics.TrimArraySizeMethod.MakeGenericMethod(
+                                itemType
+                            );
+                        objectLocal = trimArraySizeMethod.Invoke(
+                            null,
+                            new object[] { growingCollection, i }
+                        );
+                        context.AddNewObjectWithId(objectId, objectLocal);
+                    }
+                }
+                else
+                {
+                    context.IncrementItemCount(size);
+                    if (isArray)
+                    {
+                        objectLocal = Array.CreateInstance(itemType, size);
+                        context.AddNewObject(objectLocal);
+                    }
+                    // FIXME: I cannot find j++ part, but without that it won't work as expected.
+                    for (int j = 0; j < size; j++)
+                    {
+                        if (IsStartElement(this.itemName, this.itemNamespace))
+                        {
+                            var itemValue = ReadCollectionItem(
+                                collectionContract,
+                                itemType,
+                                itemName,
+                                itemNs
+                            );
+                            if (isArray)
+                                ((Array)objectLocal).SetValue(itemValue, j);
+                            else
+                                StoreCollectionValue(
+                                    objectLocal,
+                                    itemType,
+                                    itemValue,
+                                    collectionContract
+                                );
+                        }
+                        else
+                            HandleUnexpectedItemInCollection(ref j);
+                    }
+                    context.CheckEndOfArray(xmlReader, size, this.itemName, this.itemNamespace);
+                }
+            }
+            if (canReadPrimitiveArray)
+                context.AddNewObjectWithId(objectId, objectLocal);
+        }
 
-		object ReadCollectionItem (CollectionDataContract collectionContract, Type itemType, string itemName, string itemNs)
-		{
-			if (collectionContract.Kind == CollectionKind.Dictionary || collectionContract.Kind == CollectionKind.GenericDictionary) {
-				context.ResetAttributes ();
-				return CodeInterpreter.ConvertValue (collectionContract.ItemContract.ReadXmlValue (xmlReader, context), Globals.TypeOfObject, itemType);
-			}
-			else
-				return ReadValue (itemType, itemName, itemNs);
-		}
+        void ReadGetOnlyCollection(CollectionDataContract collectionContract)
+        {
+            Type type = collectionContract.UnderlyingType;
+            Type itemType = collectionContract.ItemType;
+            bool isArray = (collectionContract.Kind == CollectionKind.Array);
+            string itemName = collectionContract.ItemName;
+            string itemNs = collectionContract.StableName.Namespace;
 
-		void StoreCollectionValue (object collection, Type valueType, object value, CollectionDataContract collectionContract)
-		{
-			if (collectionContract.Kind == CollectionKind.GenericDictionary || collectionContract.Kind == CollectionKind.Dictionary) {
-				ClassDataContract keyValuePairContract = DataContract.GetDataContract (valueType) as ClassDataContract;
-				if (keyValuePairContract == null)
-					Fx.Assert ("Failed to create contract for KeyValuePair type");
-				DataMember keyMember = keyValuePairContract.Members [0];
-				DataMember valueMember = keyValuePairContract.Members [1];
-				object pkey = CodeInterpreter.GetMember (keyMember.MemberInfo, value);
-				object pvalue = CodeInterpreter.GetMember (valueMember.MemberInfo, value);
-				
-				collectionContract.AddMethod.Invoke (collection, new object [] {pkey, pvalue});
-			}
-			else
-				collectionContract.AddMethod.Invoke (collection, new object [] {value});
-		}
+            objectLocal = context.GetCollectionMember();
 
-		void HandleUnexpectedItemInCollection (ref int iterator)
-		{
-			if (IsStartElement ()) {
-				context.SkipUnknownElement (xmlReader);
-				iterator--;
-			}
-			else 
-				throw XmlObjectSerializerReadContext.CreateUnexpectedStateException (XmlNodeType.Element, xmlReader);
-		}
+            //check that items are actually going to be deserialized into the collection
+            if (IsStartElement(this.itemName, this.itemNamespace))
+            {
+                if (objectLocal == null)
+                    XmlObjectSerializerReadContext.ThrowNullValueReturnedForGetOnlyCollectionException(
+                        type
+                    );
+                else
+                {
+                    int size = 0;
+                    if (isArray)
+                        size = ((Array)objectLocal).Length;
+                    context.AddNewObject(objectLocal);
+                    for (int i = 0; i < int.MaxValue; )
+                    {
+                        if (IsStartElement(this.itemName, this.itemNamespace))
+                        {
+                            context.IncrementItemCount(1);
+                            var value = ReadCollectionItem(
+                                collectionContract,
+                                itemType,
+                                itemName,
+                                itemNs
+                            );
+                            if (isArray)
+                            {
+                                if (size == i)
+                                    XmlObjectSerializerReadContext.ThrowArrayExceededSizeException(
+                                        size,
+                                        type
+                                    );
+                                else
+                                    ((Array)objectLocal).SetValue(value, i);
+                            }
+                            else
+                            {
+                                StoreCollectionValue(
+                                    objectLocal,
+                                    itemType,
+                                    value,
+                                    collectionContract
+                                );
+                            }
+                        }
+                        else if (IsEndElement())
+                            break;
+                        else
+                            HandleUnexpectedItemInCollection(ref i);
+                    }
+                    context.CheckEndOfArray(xmlReader, size, this.itemName, this.itemNamespace);
+                }
+            }
+        }
 
-		bool IsStartElement(XmlDictionaryString name, XmlDictionaryString ns)
-		{
-			return xmlReader.IsStartElement (name, ns);
-		}
+        bool TryReadPrimitiveArray(Type type, Type itemType, int size, out bool readResult)
+        {
+            readResult = false;
+            PrimitiveDataContract primitiveContract =
+                PrimitiveDataContract.GetPrimitiveDataContract(itemType);
+            if (primitiveContract == null)
+                return false;
 
-		bool IsStartElement()
-		{
-			return xmlReader.IsStartElement ();
-		}
+            string readArrayMethod = null;
+            switch (Type.GetTypeCode(itemType))
+            {
+                case TypeCode.Boolean:
+                    readArrayMethod = "TryReadBooleanArray";
+                    break;
+                case TypeCode.DateTime:
+                    readArrayMethod = "TryReadDateTimeArray";
+                    break;
+                case TypeCode.Decimal:
+                    readArrayMethod = "TryReadDecimalArray";
+                    break;
+                case TypeCode.Int32:
+                    readArrayMethod = "TryReadInt32Array";
+                    break;
+                case TypeCode.Int64:
+                    readArrayMethod = "TryReadInt64Array";
+                    break;
+                case TypeCode.Single:
+                    readArrayMethod = "TryReadSingleArray";
+                    break;
+                case TypeCode.Double:
+                    readArrayMethod = "TryReadDoubleArray";
+                    break;
+                default:
+                    break;
+            }
+            if (readArrayMethod != null)
+            {
+                var mi = typeof(XmlReaderDelegator).GetMethod(
+                    readArrayMethod,
+                    Globals.ScanAllMembers
+                );
+                var args = new object[] { context, itemName, itemNamespace, size, objectLocal };
+                readResult = (bool)mi.Invoke(xmlReader, args);
+                objectLocal = args.Last();
+                return true;
+            }
+            return false;
+        }
 
-		bool IsEndElement ()
-		{
-			return xmlReader.NodeType == XmlNodeType.EndElement;
-		}
-	}
+        object ReadCollectionItem(
+            CollectionDataContract collectionContract,
+            Type itemType,
+            string itemName,
+            string itemNs
+        )
+        {
+            if (
+                collectionContract.Kind == CollectionKind.Dictionary
+                || collectionContract.Kind == CollectionKind.GenericDictionary
+            )
+            {
+                context.ResetAttributes();
+                return CodeInterpreter.ConvertValue(
+                    collectionContract.ItemContract.ReadXmlValue(xmlReader, context),
+                    Globals.TypeOfObject,
+                    itemType
+                );
+            }
+            else
+                return ReadValue(itemType, itemName, itemNs);
+        }
+
+        void StoreCollectionValue(
+            object collection,
+            Type valueType,
+            object value,
+            CollectionDataContract collectionContract
+        )
+        {
+            if (
+                collectionContract.Kind == CollectionKind.GenericDictionary
+                || collectionContract.Kind == CollectionKind.Dictionary
+            )
+            {
+                ClassDataContract keyValuePairContract =
+                    DataContract.GetDataContract(valueType) as ClassDataContract;
+                if (keyValuePairContract == null)
+                    Fx.Assert("Failed to create contract for KeyValuePair type");
+                DataMember keyMember = keyValuePairContract.Members[0];
+                DataMember valueMember = keyValuePairContract.Members[1];
+                object pkey = CodeInterpreter.GetMember(keyMember.MemberInfo, value);
+                object pvalue = CodeInterpreter.GetMember(valueMember.MemberInfo, value);
+
+                collectionContract.AddMethod.Invoke(collection, new object[] { pkey, pvalue });
+            }
+            else
+                collectionContract.AddMethod.Invoke(collection, new object[] { value });
+        }
+
+        void HandleUnexpectedItemInCollection(ref int iterator)
+        {
+            if (IsStartElement())
+            {
+                context.SkipUnknownElement(xmlReader);
+                iterator--;
+            }
+            else
+                throw XmlObjectSerializerReadContext.CreateUnexpectedStateException(
+                    XmlNodeType.Element,
+                    xmlReader
+                );
+        }
+
+        bool IsStartElement(XmlDictionaryString name, XmlDictionaryString ns)
+        {
+            return xmlReader.IsStartElement(name, ns);
+        }
+
+        bool IsStartElement()
+        {
+            return xmlReader.IsStartElement();
+        }
+
+        bool IsEndElement()
+        {
+            return xmlReader.NodeType == XmlNodeType.EndElement;
+        }
+    }
 }

@@ -15,13 +15,19 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 public class SqlServerTimeOnlyMethodTranslator : IMethodCallTranslator
 {
     private static readonly MethodInfo AddHoursMethod = typeof(TimeOnly).GetRuntimeMethod(
-        nameof(TimeOnly.AddHours), new[] { typeof(double) })!;
+        nameof(TimeOnly.AddHours),
+        new[] { typeof(double) }
+    )!;
 
     private static readonly MethodInfo AddMinutesMethod = typeof(TimeOnly).GetRuntimeMethod(
-        nameof(TimeOnly.AddMinutes), new[] { typeof(double) })!;
+        nameof(TimeOnly.AddMinutes),
+        new[] { typeof(double) }
+    )!;
 
     private static readonly MethodInfo IsBetweenMethod = typeof(TimeOnly).GetRuntimeMethod(
-        nameof(TimeOnly.IsBetween), new[] { typeof(TimeOnly), typeof(TimeOnly) })!;
+        nameof(TimeOnly.IsBetween),
+        new[] { typeof(TimeOnly), typeof(TimeOnly) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -46,7 +52,8 @@ public class SqlServerTimeOnlyMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (method.DeclaringType != typeof(TimeOnly) || instance is null)
         {
@@ -58,7 +65,12 @@ public class SqlServerTimeOnlyMethodTranslator : IMethodCallTranslator
             var datePart = method == AddHoursMethod ? "hour" : "minute";
 
             // Some Add methods accept a double, and SQL Server DateAdd does not accept number argument outside of int range
-            if (arguments[0] is SqlConstantExpression { Value: double and (<= int.MinValue or >= int.MaxValue) })
+            if (
+                arguments[0] is SqlConstantExpression
+                {
+                    Value: double and (<= int.MinValue or >= int.MaxValue)
+                }
+            )
             {
                 return null;
             }
@@ -67,28 +79,43 @@ public class SqlServerTimeOnlyMethodTranslator : IMethodCallTranslator
 
             return _sqlExpressionFactory.Function(
                 "DATEADD",
-                new[] { _sqlExpressionFactory.Fragment(datePart), _sqlExpressionFactory.Convert(arguments[0], typeof(int)), instance },
+                new[]
+                {
+                    _sqlExpressionFactory.Fragment(datePart),
+                    _sqlExpressionFactory.Convert(arguments[0], typeof(int)),
+                    instance,
+                },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true, true },
                 instance.Type,
-                instance.TypeMapping);
+                instance.TypeMapping
+            );
         }
 
         // Translate TimeOnly.IsBetween to a >= b AND a < c.
         // Since a is evaluated multiple times, only translate for simple constructs (i.e. avoid duplicating complex subqueries).
-        if (method == IsBetweenMethod
-            && instance is ColumnExpression or SqlConstantExpression or SqlParameterExpression)
+        if (
+            method == IsBetweenMethod
+            && instance is ColumnExpression or SqlConstantExpression or SqlParameterExpression
+        )
         {
-            var typeMapping = ExpressionExtensions.InferTypeMapping(instance, arguments[0], arguments[1]);
+            var typeMapping = ExpressionExtensions.InferTypeMapping(
+                instance,
+                arguments[0],
+                arguments[1]
+            );
             instance = _sqlExpressionFactory.ApplyTypeMapping(instance, typeMapping);
 
             return _sqlExpressionFactory.And(
                 _sqlExpressionFactory.GreaterThanOrEqual(
                     instance,
-                    _sqlExpressionFactory.ApplyTypeMapping(arguments[0], typeMapping)),
+                    _sqlExpressionFactory.ApplyTypeMapping(arguments[0], typeMapping)
+                ),
                 _sqlExpressionFactory.LessThan(
                     instance,
-                    _sqlExpressionFactory.ApplyTypeMapping(arguments[1], typeMapping)));
+                    _sqlExpressionFactory.ApplyTypeMapping(arguments[1], typeMapping)
+                )
+            );
         }
 
         return null;

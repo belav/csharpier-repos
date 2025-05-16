@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <asn:Sequence
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="EdiPartyNameAsn"
-  namespace="System.Security.Cryptography.Asn1">
-
+  namespace="System.Security.Cryptography.Asn1"
+>
   <!--
     https://tools.ietf.org/html/rfc5280#section-4.2.1.6
 
@@ -12,6 +12,15 @@
         partyName               [1]     DirectoryString
     }
   -->
-  <asn:AsnType name="NameAssigner" explicitTag="0" typeName="System.Security.Cryptography.Asn1.DirectoryStringAsn" optional="true" />
-  <asn:AsnType name="PartyName" explicitTag="1" typeName="System.Security.Cryptography.Asn1.DirectoryStringAsn" />
+  <asn:AsnType
+    name="NameAssigner"
+    explicitTag="0"
+    typeName="System.Security.Cryptography.Asn1.DirectoryStringAsn"
+    optional="true"
+  />
+  <asn:AsnType
+    name="PartyName"
+    explicitTag="1"
+    typeName="System.Security.Cryptography.Asn1.DirectoryStringAsn"
+  />
 </asn:Sequence>

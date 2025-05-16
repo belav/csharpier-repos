@@ -5,11 +5,15 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal sealed class ConcurrentQueueBufferAdapter<TElement> : ICollectionBufferAdapter<ConcurrentQueue<TElement>, ConcurrentQueue<TElement>, TElement>
+internal sealed class ConcurrentQueueBufferAdapter<TElement>
+    : ICollectionBufferAdapter<ConcurrentQueue<TElement>, ConcurrentQueue<TElement>, TElement>
 {
     public static ConcurrentQueue<TElement> CreateBuffer() => new();
 
-    public static ConcurrentQueue<TElement> Add(ref ConcurrentQueue<TElement> buffer, TElement element)
+    public static ConcurrentQueue<TElement> Add(
+        ref ConcurrentQueue<TElement> buffer,
+        TElement element
+    )
     {
         buffer.Enqueue(element);
         return buffer;

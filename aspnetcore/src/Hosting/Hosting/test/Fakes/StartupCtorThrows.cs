@@ -12,7 +12,5 @@ public class StartupCtorThrows
         throw new Exception("Exception from constructor");
     }
 
-    public void Configure(IApplicationBuilder app)
-    {
-    }
+    public void Configure(IApplicationBuilder app) { }
 }

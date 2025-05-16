@@ -29,10 +29,9 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
         string type,
         Table table,
         RelationalTypeMapping? storeTypeMapping = null,
-        ValueComparer? providerValueComparer = null)
-        : base(name, type, table, storeTypeMapping, providerValueComparer)
-    {
-    }
+        ValueComparer? providerValueComparer = null
+    )
+        : base(name, type, table, storeTypeMapping, providerValueComparer) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +39,7 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public new virtual Table Table
-        => (Table)base.Table;
+    public new virtual Table Table => (Table)base.Table;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,11 +49,15 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     /// </summary>
     public virtual ColumnAccessors Accessors
     {
-        get => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _accessors, this, static column =>
-                RuntimeFeature.IsDynamicCodeSupported
-                    ? ColumnAccessorsFactory.Create(column)
-                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel));
+        get =>
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _accessors,
+                this,
+                static column =>
+                    RuntimeFeature.IsDynamicCodeSupported
+                        ? ColumnAccessorsFactory.Create(column)
+                        : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+            );
         set => _accessors = value;
     }
 
@@ -65,8 +67,8 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
     ITable IColumn.Table

@@ -20,7 +20,11 @@ public static class MapWhenExtensions
     /// <param name="predicate">Invoked with the request environment to determine if the branch should be taken</param>
     /// <param name="configuration">Configures a branch to take</param>
     /// <returns></returns>
-    public static IApplicationBuilder MapWhen(this IApplicationBuilder app, Predicate predicate, Action<IApplicationBuilder> configuration)
+    public static IApplicationBuilder MapWhen(
+        this IApplicationBuilder app,
+        Predicate predicate,
+        Action<IApplicationBuilder> configuration
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(predicate);
@@ -32,11 +36,7 @@ public static class MapWhenExtensions
         var branch = branchBuilder.Build();
 
         // put middleware in pipeline
-        var options = new MapWhenOptions
-        {
-            Predicate = predicate,
-            Branch = branch,
-        };
+        var options = new MapWhenOptions { Predicate = predicate, Branch = branch };
         return app.Use(next => new MapWhenMiddleware(next, options).Invoke);
     }
 }

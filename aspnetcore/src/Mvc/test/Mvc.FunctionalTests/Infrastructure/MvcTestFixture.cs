@@ -20,14 +20,13 @@ public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup>
         builder
             .UseRequestCulture<TStartup>("en-GB", "en-US")
             .UseEnvironment("Production")
-            .ConfigureServices(
-                services =>
-                {
-                    var testSink = new TestSink();
-                    var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
-                    services.AddSingleton<ILoggerFactory>(loggerFactory);
-                    services.AddSingleton<TestSink>(testSink);
-                });
+            .ConfigureServices(services =>
+            {
+                var testSink = new TestSink();
+                var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
+                services.AddSingleton<ILoggerFactory>(loggerFactory);
+                services.AddSingleton<TestSink>(testSink);
+            });
     }
 
     protected override TestServer CreateServer(IWebHostBuilder builder)

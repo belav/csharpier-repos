@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <asn:Sequence
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="AttributeAsn"
-  namespace="System.Security.Cryptography.Asn1">
-
+  namespace="System.Security.Cryptography.Asn1"
+>
   <!--
     https://tools.ietf.org/html/rfc5652#section-5.3
 
@@ -16,6 +16,6 @@
   -->
   <asn:ObjectIdentifier name="AttrType" />
   <asn:SetOf name="AttrValues">
-	  <asn:AnyValue />
+    <asn:AnyValue />
   </asn:SetOf>
 </asn:Sequence>

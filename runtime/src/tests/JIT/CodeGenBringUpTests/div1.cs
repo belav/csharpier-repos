@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -24,9 +23,6 @@ public class child
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int div1(int a, int b)
     {
-
         return a / b;
     }
-
 }
-

@@ -14,18 +14,23 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
     public class FileConfigurationProviderTest
     {
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void ProviderDisposesChangeTokenRegistration()
         {
             var changeToken = new ConfigurationRootTest.ChangeToken();
             var fileProviderMock = new Mock<IFileProvider>();
             fileProviderMock.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(changeToken);
 
-            var provider = new FileConfigurationProviderImpl(new FileConfigurationSourceImpl
-            {
-                FileProvider = fileProviderMock.Object,
-                ReloadOnChange = true,
-            });
+            var provider = new FileConfigurationProviderImpl(
+                new FileConfigurationSourceImpl
+                {
+                    FileProvider = fileProviderMock.Object,
+                    ReloadOnChange = true,
+                }
+            );
 
             Assert.NotEmpty(changeToken.Callbacks);
 
@@ -36,12 +41,21 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
 
         public static readonly IEnumerable<object[]> ProviderThrowsInvalidDataExceptionInput = new[]
         {
-            new object[] { @$"C:{Path.DirectorySeparatorChar}{Guid.NewGuid()}{Path.DirectorySeparatorChar}configuration.txt" },
-            new object[] { @$"{Path.DirectorySeparatorChar}{Guid.NewGuid()}{Path.DirectorySeparatorChar}configuration.txt" }
+            new object[]
+            {
+                @$"C:{Path.DirectorySeparatorChar}{Guid.NewGuid()}{Path.DirectorySeparatorChar}configuration.txt",
+            },
+            new object[]
+            {
+                @$"{Path.DirectorySeparatorChar}{Guid.NewGuid()}{Path.DirectorySeparatorChar}configuration.txt",
+            },
         };
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/52319", TestPlatforms.Android)]
         public void ProviderThrowsInvalidDataExceptionWhenLoadFails()
         {
@@ -52,8 +66,12 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
                 File.WriteAllText(tempFile, "Test::FileData");
 
                 var fileProviderMock = new Mock<IFileProvider>();
-                fileProviderMock.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(new ConfigurationRootTest.ChangeToken());
-                fileProviderMock.Setup(fp => fp.GetFileInfo(It.IsAny<string>())).Returns(new FileInfoImpl(tempFile));
+                fileProviderMock
+                    .Setup(fp => fp.Watch(It.IsAny<string>()))
+                    .Returns(new ConfigurationRootTest.ChangeToken());
+                fileProviderMock
+                    .Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
+                    .Returns(new FileInfoImpl(tempFile));
 
                 var source = new FileConfigurationSourceImpl
                 {
@@ -63,7 +81,10 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
                 var provider = new ThrowOnLoadFileConfigurationProviderImpl(source);
 
                 var exception = Assert.Throws<InvalidDataException>(() => provider.Load());
-                Assert.Contains($"Failed to load configuration from file '{tempFile}'", exception.Message);
+                Assert.Contains(
+                    $"Failed to load configuration from file '{tempFile}'",
+                    exception.Message
+                );
             }
             finally
             {
@@ -74,13 +95,20 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(ProviderThrowsInvalidDataExceptionInput))]
         public void ProviderThrowsFileNotFoundExceptionWhenNotFound(string physicalPath)
         {
             var fileProviderMock = new Mock<IFileProvider>();
-            fileProviderMock.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(new ConfigurationRootTest.ChangeToken());
-            fileProviderMock.Setup(fp => fp.GetFileInfo(It.IsAny<string>())).Returns(new FileInfoImpl(physicalPath, false));
+            fileProviderMock
+                .Setup(fp => fp.Watch(It.IsAny<string>()))
+                .Returns(new ConfigurationRootTest.ChangeToken());
+            fileProviderMock
+                .Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
+                .Returns(new FileInfoImpl(physicalPath, false));
 
             var source = new FileConfigurationSourceImpl
             {
@@ -93,13 +121,20 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
             Assert.Contains(physicalPath, exception.Message);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(ProviderThrowsInvalidDataExceptionInput))]
         public void ProviderThrowsDirectoryNotFoundExceptionWhenNotFound(string physicalPath)
         {
             var fileProviderMock = new Mock<IFileProvider>();
-            fileProviderMock.Setup(fp => fp.Watch(It.IsAny<string>())).Returns(new ConfigurationRootTest.ChangeToken());
-            fileProviderMock.Setup(fp => fp.GetFileInfo(It.IsAny<string>())).Returns(new FileInfoImpl(physicalPath));
+            fileProviderMock
+                .Setup(fp => fp.Watch(It.IsAny<string>()))
+                .Returns(new ConfigurationRootTest.ChangeToken());
+            fileProviderMock
+                .Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
+                .Returns(new FileInfoImpl(physicalPath));
 
             var source = new FileConfigurationSourceImpl
             {
@@ -118,6 +153,7 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
                 (PhysicalPath, Exists) = (physicalPath, exists);
 
             public Stream CreateReadStream() => new MemoryStream();
+
             public bool Exists { get; set; }
             public bool IsDirectory => false;
             public DateTimeOffset LastModified => default;
@@ -129,20 +165,18 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
         public class FileConfigurationProviderImpl : FileConfigurationProvider
         {
             public FileConfigurationProviderImpl(FileConfigurationSource source)
-                : base(source)
-            { }
+                : base(source) { }
 
-            public override void Load(Stream stream)
-            { }
+            public override void Load(Stream stream) { }
         }
 
         public class ThrowOnLoadFileConfigurationProviderImpl : FileConfigurationProvider
         {
             public ThrowOnLoadFileConfigurationProviderImpl(FileConfigurationSource source)
-                : base(source)
-            { }
+                : base(source) { }
 
-            public override void Load(Stream stream) => throw new Exception("This is a test exception.");
+            public override void Load(Stream stream) =>
+                throw new Exception("This is a test exception.");
         }
 
         public class FileConfigurationSourceImpl : FileConfigurationSource

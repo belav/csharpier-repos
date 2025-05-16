@@ -16,27 +16,27 @@ using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-internal partial class RequestContext :
-    IHttpRequestFeature,
-    IHttpRequestBodyDetectionFeature,
-    IHttpConnectionFeature,
-    IHttpResponseFeature,
-    IHttpResponseBodyFeature,
-    ITlsConnectionFeature,
-    ITlsHandshakeFeature,
-    // ITlsTokenBindingFeature, TODO: https://github.com/aspnet/HttpSysServer/issues/231
-    IHttpRequestLifetimeFeature,
-    IHttpAuthenticationFeature,
-    IHttpUpgradeFeature,
-    IHttpRequestIdentifierFeature,
-    IHttpMaxRequestBodySizeFeature,
-    IHttpBodyControlFeature,
-    IHttpSysRequestInfoFeature,
-    IHttpSysRequestTimingFeature,
-    IHttpResponseTrailersFeature,
-    IHttpResetFeature,
-    IHttpSysRequestDelegationFeature,
-    IConnectionLifetimeNotificationFeature
+internal partial class RequestContext
+    : IHttpRequestFeature,
+        IHttpRequestBodyDetectionFeature,
+        IHttpConnectionFeature,
+        IHttpResponseFeature,
+        IHttpResponseBodyFeature,
+        ITlsConnectionFeature,
+        ITlsHandshakeFeature,
+        // ITlsTokenBindingFeature, TODO: https://github.com/aspnet/HttpSysServer/issues/231
+        IHttpRequestLifetimeFeature,
+        IHttpAuthenticationFeature,
+        IHttpUpgradeFeature,
+        IHttpRequestIdentifierFeature,
+        IHttpMaxRequestBodySizeFeature,
+        IHttpBodyControlFeature,
+        IHttpSysRequestInfoFeature,
+        IHttpSysRequestTimingFeature,
+        IHttpResponseTrailersFeature,
+        IHttpResetFeature,
+        IHttpSysRequestDelegationFeature,
+        IConnectionLifetimeNotificationFeature
 {
     private IFeatureCollection? _features;
     private bool _enableResponseCaching;
@@ -67,8 +67,10 @@ internal partial class RequestContext :
 
     private Fields _initializedFields;
 
-    private List<Tuple<Func<object, Task>, object>>? _onStartingActions = new List<Tuple<Func<object, Task>, object>>();
-    private List<Tuple<Func<object, Task>, object>>? _onCompletedActions = new List<Tuple<Func<object, Task>, object>>();
+    private List<Tuple<Func<object, Task>, object>>? _onStartingActions =
+        new List<Tuple<Func<object, Task>, object>>();
+    private List<Tuple<Func<object, Task>, object>>? _onCompletedActions =
+        new List<Tuple<Func<object, Task>, object>>();
     private bool _responseStarted;
     private bool _completed;
 
@@ -330,7 +332,9 @@ internal partial class RequestContext :
         }
     }
 
-    Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(CancellationToken cancellationToken)
+    Task<X509Certificate2?> ITlsConnectionFeature.GetClientCertificateAsync(
+        CancellationToken cancellationToken
+    )
     {
         if (_clientCertTask != null)
         {
@@ -339,10 +343,12 @@ internal partial class RequestContext :
 
         var tlsFeature = (ITlsConnectionFeature)this;
         var clientCert = tlsFeature.ClientCertificate; // Lazy initialized
-        if (clientCert != null
+        if (
+            clientCert != null
             || Server.Options.ClientCertificateMethod != ClientCertificateMethod.AllowRenegotation
             // Delayed client cert negotiation is not allowed on HTTP/2.
-            || Request.ProtocolVersion >= HttpVersion.Version20)
+            || Request.ProtocolVersion >= HttpVersion.Version20
+        )
         {
             return _clientCertTask = Task.FromResult(clientCert);
         }
@@ -418,7 +424,10 @@ internal partial class RequestContext :
         {
             if (_pipeWriter == null)
             {
-                _pipeWriter = PipeWriter.Create(_responseStream, new StreamPipeWriterOptions(leaveOpen: true));
+                _pipeWriter = PipeWriter.Create(
+                    _responseStream,
+                    new StreamPipeWriterOptions(leaveOpen: true)
+                );
             }
 
             return _pipeWriter;
@@ -438,7 +447,9 @@ internal partial class RequestContext :
         ArgumentNullException.ThrowIfNull(callback);
         if (_onStartingActions == null)
         {
-            throw new InvalidOperationException("Cannot register new callbacks, the response has already started.");
+            throw new InvalidOperationException(
+                "Cannot register new callbacks, the response has already started."
+            );
         }
 
         _onStartingActions.Add(new Tuple<Func<object, Task>, object>(callback, state));
@@ -449,7 +460,9 @@ internal partial class RequestContext :
         ArgumentNullException.ThrowIfNull(callback);
         if (_onCompletedActions == null)
         {
-            throw new InvalidOperationException("Cannot register new callbacks, the response has already completed.");
+            throw new InvalidOperationException(
+                "Cannot register new callbacks, the response has already completed."
+            );
         }
 
         _onCompletedActions.Add(new Tuple<Func<object, Task>, object>(callback, state));
@@ -467,7 +480,12 @@ internal partial class RequestContext :
         set { Response.StatusCode = value; }
     }
 
-    async Task IHttpResponseBodyFeature.SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+    async Task IHttpResponseBodyFeature.SendFileAsync(
+        string path,
+        long offset,
+        long? length,
+        CancellationToken cancellation
+    )
     {
         await OnResponseStart();
         await Response.SendFileAsync(path, offset, length, cancellation);
@@ -659,16 +677,21 @@ internal partial class RequestContext :
 
         // Before we check the header value, check for the existence of other headers which would
         // make us *not* want to cache the response.
-        if (response.Headers.ContainsKey(HeaderNames.SetCookie)
+        if (
+            response.Headers.ContainsKey(HeaderNames.SetCookie)
             || response.Headers.ContainsKey(HeaderNames.Vary)
-            || response.Headers.ContainsKey(HeaderNames.Pragma))
+            || response.Headers.ContainsKey(HeaderNames.Pragma)
+        )
         {
             return null;
         }
 
         // We require 'public' and 's-max-age' or 'max-age' or the Expires header.
         CacheControlHeaderValue? cacheControl;
-        if (CacheControlHeaderValue.TryParse(cacheControlHeader.ToString(), out cacheControl) && cacheControl.Public)
+        if (
+            CacheControlHeaderValue.TryParse(cacheControlHeader.ToString(), out cacheControl)
+            && cacheControl.Public
+        )
         {
             if (cacheControl.SharedMaxAge.HasValue)
             {
@@ -680,7 +703,12 @@ internal partial class RequestContext :
             }
 
             DateTimeOffset expirationDate;
-            if (HeaderUtilities.TryParseDate(response.Headers[HeaderNames.Expires].ToString(), out expirationDate))
+            if (
+                HeaderUtilities.TryParseDate(
+                    response.Headers[HeaderNames.Expires].ToString(),
+                    out expirationDate
+                )
+            )
             {
                 var expiresOffset = expirationDate - DateTimeOffset.UtcNow;
                 if (expiresOffset > TimeSpan.Zero)

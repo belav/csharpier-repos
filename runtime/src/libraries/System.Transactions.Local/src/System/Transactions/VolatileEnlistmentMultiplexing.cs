@@ -31,8 +31,9 @@ namespace System.Transactions
             // Broadcast preprepare to the volatile subordinates
             for (int i = 0; i < volatiles._volatileEnlistmentCount; i++)
             {
-                volatiles._volatileEnlistments[i]._twoPhaseState!.InternalCommitted(
-                    volatiles._volatileEnlistments[i]);
+                volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!.InternalCommitted(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -42,8 +43,9 @@ namespace System.Transactions
             // Broadcast preprepare to the volatile subordinates
             for (int i = 0; i < volatiles._volatileEnlistmentCount; i++)
             {
-                volatiles._volatileEnlistments[i]._twoPhaseState!.InternalAborted(
-                    volatiles._volatileEnlistments[i]);
+                volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!.InternalAborted(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -52,8 +54,9 @@ namespace System.Transactions
             // Broadcast preprepare to the volatile subordinates
             for (int i = 0; i < volatiles._volatileEnlistmentCount; i++)
             {
-                volatiles._volatileEnlistments[i]._twoPhaseState!.InternalIndoubt(
-                    volatiles._volatileEnlistments[i]);
+                volatiles
+                    ._volatileEnlistments[i]
+                    ._twoPhaseState!.InternalIndoubt(volatiles._volatileEnlistments[i]);
             }
         }
 
@@ -73,7 +76,12 @@ namespace System.Transactions
         }
 
         private static WaitCallback? s_prepareCallback;
-        private static WaitCallback PrepareCallback => LazyInitializer.EnsureInitialized(ref s_prepareCallback, ref s_classSyncObject, () => new WaitCallback(PoolablePrepare!));
+        private static WaitCallback PrepareCallback =>
+            LazyInitializer.EnsureInitialized(
+                ref s_prepareCallback,
+                ref s_classSyncObject,
+                () => new WaitCallback(PoolablePrepare!)
+            );
 
         protected static void PoolablePrepare(object state)
         {
@@ -98,7 +106,7 @@ namespace System.Transactions
                             TraceSourceType.TraceSourceLtm,
                             SR.UnexpectedFailureOfThreadPool,
                             null
-                            );
+                        );
                     }
                 }
             }
@@ -112,7 +120,12 @@ namespace System.Transactions
         }
 
         private static WaitCallback? s_commitCallback;
-        private static WaitCallback CommitCallback => LazyInitializer.EnsureInitialized(ref s_commitCallback, ref s_classSyncObject, () => new WaitCallback(PoolableCommit!));
+        private static WaitCallback CommitCallback =>
+            LazyInitializer.EnsureInitialized(
+                ref s_commitCallback,
+                ref s_classSyncObject,
+                () => new WaitCallback(PoolableCommit!)
+            );
 
         protected static void PoolableCommit(object state)
         {
@@ -137,7 +150,7 @@ namespace System.Transactions
                             TraceSourceType.TraceSourceLtm,
                             SR.UnexpectedFailureOfThreadPool,
                             null
-                            );
+                        );
                     }
                 }
             }
@@ -151,7 +164,12 @@ namespace System.Transactions
         }
 
         private static WaitCallback? s_rollbackCallback;
-        private static WaitCallback RollbackCallback => LazyInitializer.EnsureInitialized(ref s_rollbackCallback, ref s_classSyncObject, () => new WaitCallback(PoolableRollback!));
+        private static WaitCallback RollbackCallback =>
+            LazyInitializer.EnsureInitialized(
+                ref s_rollbackCallback,
+                ref s_classSyncObject,
+                () => new WaitCallback(PoolableRollback!)
+            );
 
         protected static void PoolableRollback(object state)
         {
@@ -176,7 +194,7 @@ namespace System.Transactions
                             TraceSourceType.TraceSourceLtm,
                             SR.UnexpectedFailureOfThreadPool,
                             null
-                            );
+                        );
                     }
                 }
             }
@@ -190,7 +208,12 @@ namespace System.Transactions
         }
 
         private static WaitCallback? s_inDoubtCallback;
-        private static WaitCallback InDoubtCallback => LazyInitializer.EnsureInitialized(ref s_inDoubtCallback, ref s_classSyncObject, () => new WaitCallback(PoolableInDoubt!));
+        private static WaitCallback InDoubtCallback =>
+            LazyInitializer.EnsureInitialized(
+                ref s_inDoubtCallback,
+                ref s_classSyncObject,
+                () => new WaitCallback(PoolableInDoubt!)
+            );
 
         protected static void PoolableInDoubt(object state)
         {
@@ -215,7 +238,7 @@ namespace System.Transactions
                             TraceSourceType.TraceSourceLtm,
                             SR.UnexpectedFailureOfThreadPool,
                             null
-                            );
+                        );
                     }
                 }
             }
@@ -247,11 +270,11 @@ namespace System.Transactions
         #endregion
     }
 
-
     // This class implements the phase 0 version of a volatile demux.
     internal sealed class Phase0VolatileDemultiplexer : VolatileDemultiplexer
     {
-        public Phase0VolatileDemultiplexer(InternalTransaction transaction) : base(transaction) { }
+        public Phase0VolatileDemultiplexer(InternalTransaction transaction)
+            : base(transaction) { }
 
         protected override void InternalPrepare()
         {
@@ -315,20 +338,17 @@ namespace System.Transactions
             PoolablePrepare(this);
         }
 
-
         public override void Commit(IPromotedEnlistment en)
         {
             _promotedEnlistment = en;
             PoolableCommit(this);
         }
 
-
         public override void Rollback(IPromotedEnlistment en)
         {
             _promotedEnlistment = en;
             PoolableRollback(this);
         }
-
 
         public override void InDoubt(IPromotedEnlistment en)
         {
@@ -342,7 +362,8 @@ namespace System.Transactions
     // This class implements the phase 1 version of a volatile demux.
     internal sealed class Phase1VolatileDemultiplexer : VolatileDemultiplexer
     {
-        public Phase1VolatileDemultiplexer(InternalTransaction transaction) : base(transaction) { }
+        public Phase1VolatileDemultiplexer(InternalTransaction transaction)
+            : base(transaction) { }
 
         protected override void InternalPrepare()
         {
@@ -371,7 +392,6 @@ namespace System.Transactions
             }
         }
 
-
         protected override void InternalCommit()
         {
             Debug.Assert(_promotedEnlistment != null && _transaction.State != null);
@@ -381,7 +401,6 @@ namespace System.Transactions
 
             _transaction.State.ChangeStatePromotedCommitted(_transaction);
         }
-
 
         protected override void InternalRollback()
         {
@@ -393,13 +412,11 @@ namespace System.Transactions
             _transaction.State.ChangeStatePromotedAborted(_transaction);
         }
 
-
         protected override void InternalInDoubt()
         {
             Debug.Assert(_transaction.State != null);
             _transaction.State.InDoubtFromDtc(_transaction);
         }
-
 
         // Fanout Preprepare notifications
         public override void Prepare(IPromotedEnlistment en)
@@ -408,13 +425,11 @@ namespace System.Transactions
             PoolablePrepare(this);
         }
 
-
         public override void Commit(IPromotedEnlistment en)
         {
             _promotedEnlistment = en;
             PoolableCommit(this);
         }
-
 
         public override void Rollback(IPromotedEnlistment en)
         {
@@ -422,15 +437,12 @@ namespace System.Transactions
             PoolableRollback(this);
         }
 
-
         public override void InDoubt(IPromotedEnlistment en)
         {
             _promotedEnlistment = en;
             PoolableInDoubt(this);
         }
     }
-
-
 
     internal struct VolatileEnlistmentSet
     {

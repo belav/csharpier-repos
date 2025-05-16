@@ -34,7 +34,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.BeginContainer" /> methods.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.BeginContainer" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -53,7 +60,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.BeginContainer" /> methods.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.BeginContainer" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -72,7 +86,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.Clear(System.Drawing.Color)" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.Clear(System.Drawing.Color)" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -91,7 +112,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -110,7 +138,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawArc" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawArc" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -129,7 +164,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawBeziers" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawBeziers" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -148,7 +190,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawClosedCurve" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawClosedCurve" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -167,7 +216,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawCurve" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawCurve" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -205,7 +261,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawEllipse" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawEllipse" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -224,7 +287,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawImage" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawImage" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -243,7 +313,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawImage" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawImage" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -262,7 +339,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawLines" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawLines" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -281,7 +365,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -300,7 +391,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawPie" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawPie" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -319,7 +417,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawRectangles" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawRectangles" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -338,7 +443,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.DrawString" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.DrawString" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2732,7 +2844,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2770,7 +2889,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.FillClosedCurve" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.FillClosedCurve" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2789,7 +2915,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.FillEllipse" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.FillEllipse" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2808,7 +2941,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2827,7 +2967,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.FillPie" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.FillPie" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2846,7 +2993,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.FillPolygon" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.FillPolygon" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2865,7 +3019,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.FillRectangles" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.FillRectangles" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2884,7 +3045,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2903,7 +3071,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.GetHdc" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.GetHdc" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3055,7 +3230,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.MultiplyTransform" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.MultiplyTransform" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3093,7 +3275,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.TranslateClip" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.TranslateClip" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3112,7 +3301,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.ResetClip" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.ResetClip" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3131,7 +3327,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.ResetTransform" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.ResetTransform" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3150,7 +3353,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3169,7 +3379,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.RotateTransform" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.RotateTransform" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3188,7 +3405,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.Save" />.</para>
+          <para
+            >See <see
+             cref="M:System.Drawing.Graphics.Save" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3207,7 +3431,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.ScaleTransform" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.ScaleTransform" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3226,7 +3457,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.SmoothingMode" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.SmoothingMode" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3245,7 +3483,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.SetClip" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.SetClip" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3264,7 +3509,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.SetClip" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.SetClip" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3283,7 +3535,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.SetClip" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.SetClip" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3302,7 +3561,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.CompositingMode" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.CompositingMode" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3321,7 +3587,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.CompositingQuality" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.CompositingQuality" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3340,7 +3613,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.InterpolationMode" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.InterpolationMode" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3359,7 +3639,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.TransformPoints" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.TransformPoints" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3378,7 +3665,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.PixelOffsetMode" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.PixelOffsetMode" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3397,7 +3691,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.RenderingOrigin" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.RenderingOrigin" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3416,7 +3717,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.TextContrast" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.TextContrast" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3435,7 +3743,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="P:System.Drawing.Graphics.TextRenderingHint" />.</para>
+          <para
+            >See <see
+             cref="P:System.Drawing.Graphics.TextRenderingHint" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3454,7 +3769,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.TransformPoints" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.TransformPoints" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3492,7 +3814,14 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.TransformPoints" /> methods.</para>
+          <para
+            >See <see
+             cref="Overload:System.Drawing.Graphics.TransformPoints" />
+
+            
+
+             methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

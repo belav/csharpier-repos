@@ -55,10 +55,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PopulateArray()
         {
-            IList<Person> people = new List<Person>
-            {
-                new Person { Name = "Initial" }
-            };
+            IList<Person> people = new List<Person> { new Person { Name = "Initial" } };
 
             JsonConvert.PopulateObject(@"[{""Name"":""James""}, null]", people);
 
@@ -79,13 +76,14 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ExpiryDate = new DateTime(2000, 12, 3, 0, 0, 0, DateTimeKind.Utc),
                     Name = "ProductName!",
-                    Price = 9.9m
-                }
+                    Price = 9.9m,
+                },
             };
             s.Width = 99.99d;
             s.Mottos = new List<string> { "Can do!", "We deliver!" };
 
-            string json = @"{
+            string json =
+                @"{
   ""Color"": 2,
   ""Establised"": ""\/Date(1264122061000+0000)\/"",
   ""Width"": 99.99,
@@ -118,10 +116,14 @@ namespace Newtonsoft.Json.Tests.Serialization
   ]
 }";
 
-            JsonConvert.PopulateObject(json, s, new JsonSerializerSettings
-            {
-                ObjectCreationHandling = ObjectCreationHandling.Replace
-            });
+            JsonConvert.PopulateObject(
+                json,
+                s,
+                new JsonSerializerSettings
+                {
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
+                }
+            );
 
             Assert.AreEqual(1, s.Mottos.Count);
             Assert.AreEqual("Fail whale", s.Mottos[0]);
@@ -158,7 +160,13 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void PopulateWithBadJson()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => { JsonConvert.PopulateObject("1", new Person()); }, "Unexpected initial token 'Integer' when populating object. Expected JSON object or array. Path '', line 1, position 1.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                {
+                    JsonConvert.PopulateObject("1", new Person());
+                },
+                "Unexpected initial token 'Integer' when populating object. Expected JSON object or array. Path '', line 1, position 1."
+            );
         }
     }
 }

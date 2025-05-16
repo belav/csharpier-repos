@@ -13,6 +13,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         Unknown,
         CommentStart,
         CommentStar,
-        CommentBody
+        CommentBody,
     }
 }

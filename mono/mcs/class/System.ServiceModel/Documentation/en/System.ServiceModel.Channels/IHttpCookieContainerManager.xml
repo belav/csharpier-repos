@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Type Name="IHttpCookieContainerManager" FullName="System.ServiceModel.Channels.IHttpCookieContainerManager">
+<Type
+  Name="IHttpCookieContainerManager"
+  FullName="System.ServiceModel.Channels.IHttpCookieContainerManager"
+>
   <TypeSignature Language="C#" Value="public interface IHttpCookieContainerManager" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IHttpCookieContainerManager" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IHttpCookieContainerManager"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,8 +22,14 @@
   </Docs>
   <Members>
     <Member MemberName="CookieContainer">
-      <MemberSignature Language="C#" Value="public System.Net.CookieContainer CookieContainer { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.CookieContainer CookieContainer" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Net.CookieContainer CookieContainer { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Net.CookieContainer CookieContainer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

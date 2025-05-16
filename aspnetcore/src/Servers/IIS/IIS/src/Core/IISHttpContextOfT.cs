@@ -11,11 +11,20 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
-internal sealed class IISHttpContextOfT<TContext> : IISHttpContext where TContext : notnull
+internal sealed class IISHttpContextOfT<TContext> : IISHttpContext
+    where TContext : notnull
 {
     private readonly IHttpApplication<TContext> _application;
 
-    public IISHttpContextOfT(MemoryPool<byte> memoryPool, IHttpApplication<TContext> application, NativeSafeHandle pInProcessHandler, IISServerOptions options, IISHttpServer server, ILogger logger, bool useLatin1)
+    public IISHttpContextOfT(
+        MemoryPool<byte> memoryPool,
+        IHttpApplication<TContext> application,
+        NativeSafeHandle pInProcessHandler,
+        IISServerOptions options,
+        IISHttpServer server,
+        ILogger logger,
+        bool useLatin1
+    )
         : base(memoryPool, pInProcessHandler, options, server, logger, useLatin1)
     {
         _application = application;
@@ -91,7 +100,7 @@ internal sealed class IISHttpContextOfT<TContext> : IISHttpContext where TContex
             }
             else if (!HasResponseStarted && _requestRejectedException == null)
             {
-                // If the request was aborted and no response was sent, we use status code 499 for logging               
+                // If the request was aborted and no response was sent, we use status code 499 for logging
                 StatusCode = ClientDisconnected ? StatusCodes.Status499ClientClosedRequest : 0;
                 success = false;
             }

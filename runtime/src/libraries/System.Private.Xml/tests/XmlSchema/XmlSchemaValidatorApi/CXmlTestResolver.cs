@@ -110,7 +110,10 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         public override object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
         {
             // Fire the CalledGetEntity event
-            CalledGetEntity(this, new CalledGetEntityEventArgs(absoluteUri, role, ofObjectToReturn));
+            CalledGetEntity(
+                this,
+                new CalledGetEntityEventArgs(absoluteUri, role, ofObjectToReturn)
+            );
 
             return _resolver.GetEntity(absoluteUri, role, ofObjectToReturn);
         }

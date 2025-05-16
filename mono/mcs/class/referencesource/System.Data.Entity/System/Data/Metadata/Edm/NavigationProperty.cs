@@ -9,8 +9,8 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Diagnostics;
-using System.Threading;
 using System.Linq;
+using System.Threading;
 
 namespace System.Data.Metadata.Edm
 {
@@ -41,16 +41,22 @@ namespace System.Data.Metadata.Edm
         /// <param name="name">name of the property</param>
         /// <param name="typeUsage">TypeUsage object containing the property type and its facets</param>
         /// <param name="propertyInfo">for the property</param>
-        internal NavigationProperty(string name, TypeUsage typeUsage, System.Reflection.PropertyInfo propertyInfo)
+        internal NavigationProperty(
+            string name,
+            TypeUsage typeUsage,
+            System.Reflection.PropertyInfo propertyInfo
+        )
             : this(name, typeUsage)
         {
             System.Diagnostics.Debug.Assert(name == propertyInfo.Name, "different PropertyName?");
             if (null != propertyInfo)
             {
                 System.Reflection.MethodInfo method;
-                
+
                 method = propertyInfo.GetGetMethod();
-                PropertyGetterHandle = ((null != method) ? method.MethodHandle : default(System.RuntimeMethodHandle));
+                PropertyGetterHandle = (
+                    (null != method) ? method.MethodHandle : default(System.RuntimeMethodHandle)
+                );
             }
         }
         #endregion
@@ -58,7 +64,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.NavigationProperty; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.NavigationProperty; }
+        }
 
         #region Fields
         internal const string RelationshipTypeNamePropertyName = "RelationshipType";
@@ -70,7 +79,7 @@ namespace System.Data.Metadata.Edm
         /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be GC'd</summary>
         internal readonly System.RuntimeMethodHandle PropertyGetterHandle;
 
-        /// <summary>cached dynamic methods to access the property values from a CLR instance</summary> 
+        /// <summary>cached dynamic methods to access the property values from a CLR instance</summary>
         private readonly NavigationPropertyAccessor _accessor;
         #endregion
 
@@ -81,14 +90,8 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.RelationshipType, false)]
         public RelationshipType RelationshipType
         {
-            get
-            {
-                return _relationshipType;
-            }
-            internal set
-            {
-                _relationshipType = value;
-            }
+            get { return _relationshipType; }
+            internal set { _relationshipType = value; }
         }
 
         /// <summary>
@@ -98,14 +101,8 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.RelationshipEndMember, false)]
         public RelationshipEndMember ToEndMember
         {
-            get
-            {
-                return _toEndMember;
-            }
-            internal set
-            {
-                _toEndMember = value;
-            }
+            get { return _toEndMember; }
+            internal set { _toEndMember = value; }
         }
 
         /// <summary>
@@ -115,14 +112,8 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.RelationshipEndMember, false)]
         public RelationshipEndMember FromEndMember
         {
-            get
-            {
-                return _fromEndMember;
-            }
-            internal set
-            {
-                _fromEndMember = value;
-            }
+            get { return _fromEndMember; }
+            internal set { _fromEndMember = value; }
         }
 
         internal NavigationPropertyAccessor Accessor
@@ -141,8 +132,9 @@ namespace System.Data.Metadata.Edm
             // Get the declared type
             AssociationType associationType = (AssociationType)this.RelationshipType;
             Debug.Assert(
-                         associationType.ReferentialConstraints != null,
-                         "ReferenceConstraints cannot be null");
+                associationType.ReferentialConstraints != null,
+                "ReferenceConstraints cannot be null"
+            );
 
             if (associationType.ReferentialConstraints.Count > 0)
             {
@@ -156,12 +148,14 @@ namespace System.Data.Metadata.Edm
                     var dependantProperties = new List<EdmProperty>(keyMembers.Count);
                     for (int i = 0; i < keyMembers.Count; i++)
                     {
-                        dependantProperties.Add(rc.ToProperties[rc.FromProperties.IndexOf(((EdmProperty)keyMembers[i]))]);
+                        dependantProperties.Add(
+                            rc.ToProperties[rc.FromProperties.IndexOf(((EdmProperty)keyMembers[i]))]
+                        );
                     }
                     return dependantProperties.AsReadOnly();
                 }
             }
-            
+
             return Enumerable.Empty<EdmProperty>();
         }
     }

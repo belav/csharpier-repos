@@ -34,7 +34,12 @@ public abstract class HubMethodInvocationMessage : HubInvocationMessage
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
     /// <param name="streamIds">The target methods stream IDs.</param>
-    protected HubMethodInvocationMessage(string? invocationId, string target, object?[] arguments, string[]? streamIds)
+    protected HubMethodInvocationMessage(
+        string? invocationId,
+        string target,
+        object?[] arguments,
+        string[]? streamIds
+    )
         : this(invocationId, target, arguments)
     {
         StreamIds = streamIds;
@@ -67,9 +72,7 @@ public class InvocationMessage : HubMethodInvocationMessage
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
     public InvocationMessage(string target, object?[] arguments)
-        : this(null, target, arguments)
-    {
-    }
+        : this(null, target, arguments) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="InvocationMessage"/> class.
@@ -78,9 +81,7 @@ public class InvocationMessage : HubMethodInvocationMessage
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
     public InvocationMessage(string? invocationId, string target, object?[] arguments)
-        : base(invocationId, target, arguments)
-    {
-    }
+        : base(invocationId, target, arguments) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="InvocationMessage"/> class.
@@ -89,10 +90,13 @@ public class InvocationMessage : HubMethodInvocationMessage
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
     /// <param name="streamIds">The target methods stream IDs.</param>
-    public InvocationMessage(string? invocationId, string target, object?[] arguments, string[]? streamIds)
-        : base(invocationId, target, arguments, streamIds)
-    {
-    }
+    public InvocationMessage(
+        string? invocationId,
+        string target,
+        object?[] arguments,
+        string[]? streamIds
+    )
+        : base(invocationId, target, arguments, streamIds) { }
 
     /// <inheritdoc />
     public override string ToString()
@@ -101,7 +105,10 @@ public class InvocationMessage : HubMethodInvocationMessage
         string streamIds;
         try
         {
-            args = Arguments == null ? string.Empty : string.Join(", ", Arguments.Select(a => a?.ToString()));
+            args =
+                Arguments == null
+                    ? string.Empty
+                    : string.Join(", ", Arguments.Select(a => a?.ToString()));
         }
         catch (Exception ex)
         {
@@ -110,7 +117,10 @@ public class InvocationMessage : HubMethodInvocationMessage
 
         try
         {
-            streamIds = string.Join(", ", StreamIds != null ? StreamIds.Select(id => id?.ToString()) : Array.Empty<string>());
+            streamIds = string.Join(
+                ", ",
+                StreamIds != null ? StreamIds.Select(id => id?.ToString()) : Array.Empty<string>()
+            );
         }
         catch (Exception ex)
         {
@@ -133,9 +143,7 @@ public class StreamInvocationMessage : HubMethodInvocationMessage
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
     public StreamInvocationMessage(string invocationId, string target, object?[] arguments)
-        : base(invocationId, target, arguments)
-    {
-    }
+        : base(invocationId, target, arguments) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="StreamInvocationMessage"/> class.
@@ -144,10 +152,13 @@ public class StreamInvocationMessage : HubMethodInvocationMessage
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
     /// <param name="streamIds">The target methods stream IDs.</param>
-    public StreamInvocationMessage(string invocationId, string target, object?[] arguments, string[]? streamIds)
-        : base(invocationId, target, arguments, streamIds)
-    {
-    }
+    public StreamInvocationMessage(
+        string invocationId,
+        string target,
+        object?[] arguments,
+        string[]? streamIds
+    )
+        : base(invocationId, target, arguments, streamIds) { }
 
     /// <inheritdoc />
     public override string ToString()
@@ -156,7 +167,10 @@ public class StreamInvocationMessage : HubMethodInvocationMessage
         string streamIds;
         try
         {
-            args = Arguments == null ? string.Empty : string.Join(", ", Arguments.Select(a => a?.ToString()));
+            args =
+                Arguments == null
+                    ? string.Empty
+                    : string.Join(", ", Arguments.Select(a => a?.ToString()));
         }
         catch (Exception ex)
         {
@@ -165,7 +179,10 @@ public class StreamInvocationMessage : HubMethodInvocationMessage
 
         try
         {
-            streamIds = string.Join(", ", StreamIds != null ? StreamIds.Select(id => id?.ToString()) : Array.Empty<string>());
+            streamIds = string.Join(
+                ", ",
+                StreamIds != null ? StreamIds.Select(id => id?.ToString()) : Array.Empty<string>()
+            );
         }
         catch (Exception ex)
         {

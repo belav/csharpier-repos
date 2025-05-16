@@ -5,7 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ProfileCastClassAndIsInst.cs" />
-
     <CLRTestEnvironmentVariable Include="DOTNET_TieredCompilation" Value="1" />
     <CLRTestEnvironmentVariable Include="DOTNET_TieredPGO" Value="1" />
     <CLRTestEnvironmentVariable Include="DOTNET_JitProfileCasts" Value="1" />

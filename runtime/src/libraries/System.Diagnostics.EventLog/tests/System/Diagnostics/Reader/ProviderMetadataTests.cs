@@ -16,7 +16,9 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.SupportsEventLogs))]
         public void SourceDoesNotExist_Throws()
         {
-            Assert.Throws<EventLogNotFoundException>(() => new ProviderMetadata("Source_Does_Not_Exist"));
+            Assert.Throws<EventLogNotFoundException>(() =>
+                new ProviderMetadata("Source_Does_Not_Exist")
+            );
         }
 
         [ConditionalTheory(typeof(Helpers), nameof(Helpers.IsElevatedAndSupportsEventLogs))]
@@ -54,23 +56,44 @@ namespace System.Diagnostics.Tests
                                 Assert.True(logLink.IsImported);
                                 Assert.Equal(log, logLink.LogName);
                                 Assert.NotEmpty(logLink.DisplayName);
-                                if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "en" )
+                                if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "en")
                                 {
                                     Assert.Equal("Application", logLink.DisplayName);
                                 }
-                                else if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "es" )
+                                else if (CultureInfo.CurrentCulture.Name.Split('-')[0] == "es")
                                 {
                                     Assert.Equal("Aplicaci\u00F3n", logLink.DisplayName);
                                 }
                             }
 
-                            string[] expectedMessageFileNames = new[] { "EventLogMessages.dll", "System.Diagnostics.EventLog.Messages.dll" };
-                            string messageFileName = Path.GetFileName(providerMetadata.MessageFilePath);
-                            Assert.Contains(expectedMessageFileNames, expected => expected.Equals(messageFileName, StringComparison.OrdinalIgnoreCase));
+                            string[] expectedMessageFileNames = new[]
+                            {
+                                "EventLogMessages.dll",
+                                "System.Diagnostics.EventLog.Messages.dll",
+                            };
+                            string messageFileName = Path.GetFileName(
+                                providerMetadata.MessageFilePath
+                            );
+                            Assert.Contains(
+                                expectedMessageFileNames,
+                                expected =>
+                                    expected.Equals(
+                                        messageFileName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                            );
                             if (providerMetadata.HelpLink != null)
                             {
                                 string helpLink = providerMetadata.HelpLink.ToString();
-                                Assert.Contains(expectedMessageFileNames, expected => -1 != helpLink.IndexOf(expected, StringComparison.OrdinalIgnoreCase));
+                                Assert.Contains(
+                                    expectedMessageFileNames,
+                                    expected =>
+                                        -1
+                                        != helpLink.IndexOf(
+                                            expected,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                );
                             }
                         }
                         else
@@ -95,7 +118,9 @@ namespace System.Diagnostics.Tests
         public void GetProviderNames_AssertProperties()
         {
             const string Prefix = "win:";
-            var standardOpcodeNames = new List<string>(Enum.GetNames(typeof(StandardEventOpcode))).Select(x => Prefix + x).ToList();
+            var standardOpcodeNames = new List<string>(Enum.GetNames(typeof(StandardEventOpcode)))
+                .Select(x => Prefix + x)
+                .ToList();
             using (var session = new EventLogSession())
             {
                 Assert.NotEmpty(session.GetProviderNames());
@@ -117,7 +142,10 @@ namespace System.Diagnostics.Tests
                             {
                                 if (opcode != null && standardOpcodeNames.Contains(opcode.Name))
                                 {
-                                    Assert.Contains((((StandardEventOpcode)(opcode.Value)).ToString()), opcode.Name);
+                                    Assert.Contains(
+                                        (((StandardEventOpcode)(opcode.Value)).ToString()),
+                                        opcode.Name
+                                    );
                                 }
                             }
                             foreach (var eventMetadata in providerMetadata.Events)
@@ -125,7 +153,10 @@ namespace System.Diagnostics.Tests
                                 EventLogLink logLink = eventMetadata.LogLink;
                                 if (logLink != null)
                                 {
-                                    if (logLink.DisplayName != null && logLink.DisplayName.Equals("System"))
+                                    if (
+                                        logLink.DisplayName != null
+                                        && logLink.DisplayName.Equals("System")
+                                    )
                                     {
                                         Assert.Equal("System", logLink.LogName);
                                         Assert.True(logLink.IsImported);
@@ -137,19 +168,37 @@ namespace System.Diagnostics.Tests
                                     if (eventLevel.Name != null)
                                     {
                                         // https://github.com/Microsoft/perfview/blob/d4b044abdfb4c8e40a344ca05383e04b5b6dc13a/src/related/EventRegister/winmeta.xml#L39
-                                        if (eventLevel.Name.StartsWith(Prefix) && !eventLevel.Name.Contains("ReservedLevel"))
+                                        if (
+                                            eventLevel.Name.StartsWith(Prefix)
+                                            && !eventLevel.Name.Contains("ReservedLevel")
+                                        )
                                         {
-                                            Assert.True(System.Enum.IsDefined(typeof(StandardEventLevel), eventLevel.Value));
-                                            Assert.Contains(eventLevel.Name.Substring(4), Enum.GetNames(typeof(StandardEventLevel)));
+                                            Assert.True(
+                                                System.Enum.IsDefined(
+                                                    typeof(StandardEventLevel),
+                                                    eventLevel.Value
+                                                )
+                                            );
+                                            Assert.Contains(
+                                                eventLevel.Name.Substring(4),
+                                                Enum.GetNames(typeof(StandardEventLevel))
+                                            );
                                         }
                                     }
                                 }
                                 EventOpcode opcode = eventMetadata.Opcode;
                                 if (opcode != null)
                                 {
-                                    if (opcode.Name != null && opcode.DisplayName != null && opcode.DisplayName.ToLower().Equals("apprun"))
+                                    if (
+                                        opcode.Name != null
+                                        && opcode.DisplayName != null
+                                        && opcode.DisplayName.ToLower().Equals("apprun")
+                                    )
                                     {
-                                        Assert.Contains(opcode.DisplayName.ToLower(), opcode.Name.ToLower());
+                                        Assert.Contains(
+                                            opcode.DisplayName.ToLower(),
+                                            opcode.Name.ToLower()
+                                        );
                                     }
                                 }
                                 EventTask task = eventMetadata.Task;
@@ -167,7 +216,12 @@ namespace System.Diagnostics.Tests
                                     {
                                         if (keyword.Name != null && keyword.Name.StartsWith(Prefix))
                                         {
-                                            Assert.True(System.Enum.IsDefined(typeof(StandardEventKeywords), keyword.Value));
+                                            Assert.True(
+                                                System.Enum.IsDefined(
+                                                    typeof(StandardEventKeywords),
+                                                    keyword.Value
+                                                )
+                                            );
                                         }
                                     }
                                 }

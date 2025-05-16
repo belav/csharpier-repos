@@ -1,5 +1,5 @@
 //
-// CodeTypeMemberCas.cs 
+// CodeTypeMemberCas.cs
 //	- CAS unit tests for System.CodeDom.CodeTypeMember
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,52 +27,55 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeTypeMemberCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeTypeMemberCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeTypeMember ctm = new CodeTypeMember();
+            Assert.AreEqual(
+                MemberAttributes.Private | MemberAttributes.Final,
+                ctm.Attributes,
+                "Attributes"
+            );
+            ctm.Attributes = MemberAttributes.Public;
+            Assert.AreEqual(0, ctm.Comments.Count, "Comments");
+            Assert.AreEqual(0, ctm.CustomAttributes.Count, "CustomAttributes");
+            ctm.CustomAttributes = new CodeAttributeDeclarationCollection();
+            Assert.IsNull(ctm.LinePragma, "LinePragma");
+            ctm.LinePragma = new CodeLinePragma(String.Empty, Int32.MaxValue);
+            Assert.AreEqual(String.Empty, ctm.Name, "Name");
+            ctm.Name = "mono";
+            Assert.AreEqual(0, ctm.StartDirectives.Count, "StartDirectives");
+            Assert.AreEqual(0, ctm.EndDirectives.Count, "EndDirectives");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeTypeMember ctm = new CodeTypeMember ();
-			Assert.AreEqual (MemberAttributes.Private | MemberAttributes.Final, ctm.Attributes, "Attributes");
-			ctm.Attributes = MemberAttributes.Public;
-			Assert.AreEqual (0, ctm.Comments.Count, "Comments");
-			Assert.AreEqual (0, ctm.CustomAttributes.Count, "CustomAttributes");
-			ctm.CustomAttributes = new CodeAttributeDeclarationCollection ();
-			Assert.IsNull (ctm.LinePragma, "LinePragma");
-			ctm.LinePragma = new CodeLinePragma (String.Empty, Int32.MaxValue);
-			Assert.AreEqual (String.Empty, ctm.Name, "Name");
-			ctm.Name = "mono";
-			Assert.AreEqual (0, ctm.StartDirectives.Count, "StartDirectives");
-			Assert.AreEqual (0, ctm.EndDirectives.Count, "EndDirectives");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeTypeMember).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeTypeMember).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

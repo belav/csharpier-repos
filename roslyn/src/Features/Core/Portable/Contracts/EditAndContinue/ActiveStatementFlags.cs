@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// An active statement is partially executed if the thread is stopped in between two sequence points.
         /// This may happen when the users steps through the code in disassembly window (stepping over machine instructions),
         /// when the compiler emits a call to Debugger.Break (VB Stop statement), etc.
-        /// 
+        ///
         /// Partially executed active statement can't be edited.
         /// </remarks>
         PartiallyExecuted = 2,
@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 
         /// <summary>
         /// Indicates that the active statement instruction belongs to the latest version of the containing method.
-        /// If not set, the containing method was updated but the active statement was not remapped yet because the thread 
+        /// If not set, the containing method was updated but the active statement was not remapped yet because the thread
         /// has not returned to that instruction yet and was not remapped to the new version.
         /// </summary>
         /// <remarks>
@@ -54,9 +54,9 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 
         /// <summary>
         /// When applying updates while the code is executing, we will not attempt any remap for methods which are on the
-        /// executing stack. This is done so we can avoid blocking an edit due an executing active statement. 
+        /// executing stack. This is done so we can avoid blocking an edit due an executing active statement.
         /// Language services needs to acknowledge such active statements when emitting further remap information.
         /// </summary>
-        Stale = 32
+        Stale = 32,
     }
 }

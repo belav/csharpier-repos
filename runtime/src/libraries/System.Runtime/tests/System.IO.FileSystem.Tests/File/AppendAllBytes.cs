@@ -10,7 +10,6 @@ namespace System.IO.Tests
 {
     public class File_AppendAllBytes : FileSystemTest
     {
-
         [Fact]
         public void NullParameters()
         {
@@ -23,7 +22,12 @@ namespace System.IO.Tests
         [Fact]
         public void NonExistentPath()
         {
-            Assert.Throws<DirectoryNotFoundException>(() => File.AppendAllBytes(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), new byte[0]));
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                File.AppendAllBytes(
+                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                    new byte[0]
+                )
+            );
         }
 
         [Fact]
@@ -31,7 +35,6 @@ namespace System.IO.Tests
         {
             Assert.Throws<ArgumentException>(() => File.AppendAllBytes(string.Empty, new byte[0]));
         }
-
 
         [Fact]
         public void AppendAllBytes_WithValidInput_AppendsBytes()
@@ -50,7 +53,6 @@ namespace System.IO.Tests
 
             Assert.True(result.SequenceEqual(expectedBytes));
         }
-
 
         [Fact]
         public void EmptyContentCreatesFile()
@@ -96,7 +98,9 @@ namespace System.IO.Tests
                 }
                 else
                 {
-                    Assert.Throws<UnauthorizedAccessException>(() => File.AppendAllBytes(path, dataToAppend));
+                    Assert.Throws<UnauthorizedAccessException>(() =>
+                        File.AppendAllBytes(path, dataToAppend)
+                    );
                 }
             }
             finally

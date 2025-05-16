@@ -12,7 +12,10 @@ public class ParameterDefaultValuesTest
     [InlineData("DefaultValues", new object[] { "hello", true, 20 })]
     [InlineData("DefaultValuesAndAttributes", new object[] { "hello", 20 })]
     [InlineData("NoDefaultAttributesAndValues", new object[] { null, 0, false, null })]
-    public void GetParameterDefaultValues_ReturnsExpectedValues(string methodName, object[] expectedValues)
+    public void GetParameterDefaultValues_ReturnsExpectedValues(
+        string methodName,
+        object[] expectedValues
+    )
     {
         // Arrange
         var methodInfo = typeof(TestObject).GetMethod(methodName);
@@ -35,8 +38,15 @@ public class ParameterDefaultValuesTest
 
         // Assert
         Assert.Equal(
-            new object[] { default(Guid), default(TimeSpan), default(DateTime), default(DateTimeOffset) },
-            actualValues);
+            new object[]
+            {
+                default(Guid),
+                default(TimeSpan),
+                default(DateTime),
+                default(DateTimeOffset),
+            },
+            actualValues
+        );
     }
 
     private class TestObject
@@ -44,30 +54,22 @@ public class ParameterDefaultValuesTest
         public void DefaultAttributes(
             [DefaultValue("hello")] string input1,
             [DefaultValue(true)] bool input2,
-            [DefaultValue(10)] int input3)
-        {
-        }
+            [DefaultValue(10)] int input3
+        ) { }
 
-        public void DefaultValues(
-            string input1 = "hello",
-            bool input2 = true,
-            int input3 = 20)
-        {
-        }
+        public void DefaultValues(string input1 = "hello", bool input2 = true, int input3 = 20) { }
 
         public void DefaultValuesAndAttributes(
             [DefaultValue("Hi")] string input1 = "hello",
-            [DefaultValue(10)] int input3 = 20)
-        {
-        }
+            [DefaultValue(10)] int input3 = 20
+        ) { }
 
         public void NoDefaultAttributesAndValues(
             string input1,
             int input2,
             bool input3,
-            TestObject input4)
-        {
-        }
+            TestObject input4
+        ) { }
 
         // Note that default value for DateTime currently throws a FormatException
         // https://github.com/dotnet/corefx/issues/12338
@@ -75,8 +77,7 @@ public class ParameterDefaultValuesTest
             Guid guid = default(Guid),
             TimeSpan timeSpan = default(TimeSpan),
             DateTime dateTime = default(DateTime),
-            DateTimeOffset dateTimeOffset = default(DateTimeOffset))
-        {
-        }
+            DateTimeOffset dateTimeOffset = default(DateTimeOffset)
+        ) { }
     }
 }

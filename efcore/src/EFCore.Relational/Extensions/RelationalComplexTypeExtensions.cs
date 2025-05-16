@@ -18,8 +18,9 @@ public static class RelationalComplexTypeExtensions
     /// </summary>
     /// <param name="complexType">The complex type to get the container column name for.</param>
     /// <returns>The container column name to which the complex type is mapped.</returns>
-    public static string? GetContainerColumnName(this IReadOnlyComplexType complexType)
-        => complexType.FindAnnotation(RelationalAnnotationNames.ContainerColumnName)?.Value is string columnName
+    public static string? GetContainerColumnName(this IReadOnlyComplexType complexType) =>
+        complexType.FindAnnotation(RelationalAnnotationNames.ContainerColumnName)?.Value
+            is string columnName
             ? columnName
             : complexType.ComplexProperty.DeclaringType.GetContainerColumnName();
 }

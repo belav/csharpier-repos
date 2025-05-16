@@ -47,5 +47,5 @@ public enum ModelValidationState
     /// The aggregate validity of an entry is never <see cref="Skipped"/>.
     /// </para>
     /// </summary>
-    Skipped
+    Skipped,
 }

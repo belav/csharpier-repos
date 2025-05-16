@@ -2,9 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Globalization;
 using System.Collections;
+using System.Globalization;
 using Xunit;
+
 //create for delegate combine(delegate a,delegate b) testing
 namespace DelegateTest
 {
@@ -15,17 +16,19 @@ namespace DelegateTest
     {
         const string c_StartWork = "Start";
         const string c_Working = "Working";
+
         enum identify_null
         {
             c_Start_null_true,
             c_Start_null_false,
             c_Working_null_true,
             c_Working_null_false,
-            c_Start_null_false_duplicate
-
+            c_Start_null_false_duplicate,
         }
+
         booldelegate starkWork;
         booldelegate working;
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -33,14 +36,11 @@ namespace DelegateTest
 
             TestLibrary.TestFramework.BeginTestCase("DelegateCombineImpl");
 
-
-
             if (delegateCombineImpl.RunTests())
             {
                 TestLibrary.TestFramework.EndTestCase();
                 TestLibrary.TestFramework.LogInformation("PASS");
                 return 100;
-
             }
             else
             {
@@ -69,17 +69,21 @@ namespace DelegateTest
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario("PosTest1: combine two  delegates which are not null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest1: combine two  delegates which are not null"
+            );
 
             try
             {
                 booldelegate delegate1 = new booldelegate(new TestClass().Working_Bool);
-                if (!CombineImpl(delegate1,identify_null.c_Start_null_false))
+                if (!CombineImpl(delegate1, identify_null.c_Start_null_false))
                 {
-                    TestLibrary.TestFramework.LogError("001", "delegate combineimpl is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "001",
+                        "delegate combineimpl is not successful "
+                    );
                     retVal = false;
                 }
-
             }
             catch (Exception e)
             {
@@ -89,25 +93,28 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest2()
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario("PosTest2: combine two delegate ,first is null,second is not null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest2: combine two delegate ,first is null,second is not null"
+            );
 
             try
             {
-
                 booldelegate delegate1 = null;
                 if (!CombineImpl(delegate1, identify_null.c_Working_null_false))
                 {
-                    TestLibrary.TestFramework.LogError("003", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "003",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
-
-
             }
             catch (Exception e)
             {
@@ -117,25 +124,28 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest3()
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario("PosTest3: combine two delegate ,first is not null,second is  null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest3: combine two delegate ,first is not null,second is  null"
+            );
 
             try
             {
-
                 booldelegate delegate1 = new booldelegate(new TestClass().StartWork_Bool);
-                if (!CombineImpl(delegate1, identify_null.c_Working_null_true   ))
+                if (!CombineImpl(delegate1, identify_null.c_Working_null_true))
                 {
-                    TestLibrary.TestFramework.LogError("005", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "005",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
-
-
             }
             catch (Exception e)
             {
@@ -145,24 +155,28 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest4()
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario("PosTest4: combine two delegate ,first is  null and second is  null");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest4: combine two delegate ,first is  null and second is  null"
+            );
 
             try
             {
                 booldelegate delegate1 = null;
                 if (!CombineImpl(delegate1, identify_null.c_Working_null_true))
                 {
-                    TestLibrary.TestFramework.LogError("007", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "007",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
-
-
             }
             catch (Exception e)
             {
@@ -172,23 +186,28 @@ namespace DelegateTest
 
             return retVal;
         }
+
         // Returns true if the expected result is right
         // Returns false if the expected result is wrong
         public bool PosTest5()
         {
             bool retVal = true;
 
-            TestLibrary.TestFramework.BeginScenario("PosTest5: combine three delegate ,first is  not null and the two others  entry that refer to the same method on the same object");
+            TestLibrary.TestFramework.BeginScenario(
+                "PosTest5: combine three delegate ,first is  not null and the two others  entry that refer to the same method on the same object"
+            );
 
             try
             {
                 booldelegate delegate1 = new booldelegate(new TestClass().Working_Bool);
-                if (!CombineImpl(delegate1, identify_null.c_Start_null_false_duplicate ))
+                if (!CombineImpl(delegate1, identify_null.c_Start_null_false_duplicate))
                 {
-                    TestLibrary.TestFramework.LogError("009", "delegate combine is not successful ");
+                    TestLibrary.TestFramework.LogError(
+                        "009",
+                        "delegate combine is not successful "
+                    );
                     retVal = false;
                 }
-
             }
             catch (Exception e)
             {
@@ -198,22 +217,22 @@ namespace DelegateTest
 
             return retVal;
         }
-        private bool CombineImpl(booldelegate delegatesrc,identify_null start)
+
+        private bool CombineImpl(booldelegate delegatesrc, identify_null start)
         {
             DelegateCombineImpl delctor = new DelegateCombineImpl();
             TestClass testinstance = new TestClass();
 
             string sFlag = string.Empty;
-            string sFlagAdd=string.Empty ;
+            string sFlagAdd = string.Empty;
             booldelegate combineImpl = delegatesrc;
             if (start == identify_null.c_Start_null_false)
             {
                 delctor.starkWork = new booldelegate(testinstance.StartWork_Bool);
                 combineImpl += (booldelegate)delctor.starkWork;
                 sFlagAdd = c_StartWork;
-
             }
-            else if (start == identify_null.c_Start_null_false_duplicate )
+            else if (start == identify_null.c_Start_null_false_duplicate)
             {
                 delctor.starkWork = new booldelegate(testinstance.StartWork_Bool);
                 combineImpl += (booldelegate)delctor.starkWork;
@@ -222,16 +241,16 @@ namespace DelegateTest
                 combineImpl += (booldelegate)delctor.starkWork;
                 sFlagAdd += sFlagAdd;
             }
-            else if(start==identify_null.c_Start_null_true )
+            else if (start == identify_null.c_Start_null_true)
             {
                 delctor.starkWork = null;
                 combineImpl += (booldelegate)delctor.starkWork;
             }
             else if (start == identify_null.c_Working_null_false)
             {
-                delctor.working  = new booldelegate(testinstance.Working_Bool );
+                delctor.working = new booldelegate(testinstance.Working_Bool);
                 combineImpl += (booldelegate)delctor.working;
-                 sFlagAdd=c_Working  ;
+                sFlagAdd = c_Working;
             }
             else
             {
@@ -244,7 +263,11 @@ namespace DelegateTest
                 return true;
             }
 
-            for (IEnumerator itr = combineImpl.GetInvocationList().GetEnumerator(); itr.MoveNext(); )
+            for (
+                IEnumerator itr = combineImpl.GetInvocationList().GetEnumerator();
+                itr.MoveNext();
+
+            )
             {
                 booldelegate bd = (booldelegate)itr.Current;
                 //the filter is to get the delegate which is appended through equals method.
@@ -274,11 +297,13 @@ namespace DelegateTest
             TestLibrary.TestFramework.LogInformation("StartWork_Bool method  is running .");
             return true;
         }
+
         public bool Working_Bool()
         {
             TestLibrary.TestFramework.LogInformation("Working_Bool method  is running .");
             return true;
         }
+
         public void CompleteWork_Void()
         {
             TestLibrary.TestFramework.LogInformation("CompleteWork_Void method  is running .");

@@ -1,10 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Mvc.Core;
 
@@ -25,7 +25,8 @@ public class HtmlHelperRadioButtonExtensionsTest
         // Assert
         Assert.Equal(
             "<input id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonResult));
+            HtmlContentUtilities.HtmlContentToString(radioButtonResult)
+        );
     }
 
     [Fact]
@@ -40,7 +41,8 @@ public class HtmlHelperRadioButtonExtensionsTest
         // Assert
         Assert.Equal(
             "<input id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonForResult));
+            HtmlContentUtilities.HtmlContentToString(radioButtonForResult)
+        );
     }
 
     [Theory]
@@ -50,7 +52,9 @@ public class HtmlHelperRadioButtonExtensionsTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+            new ViewDataDictionary<TestModel>(metadataProvider)
+        );
         helper.ViewContext.ClientValidationEnabled = false;
         helper.ViewData.Model = new TestModel { Property1 = value };
 
@@ -60,7 +64,8 @@ public class HtmlHelperRadioButtonExtensionsTest
         // Assert
         Assert.Equal(
             "<input checked=\"HtmlEncode[[checked]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonResult));
+            HtmlContentUtilities.HtmlContentToString(radioButtonResult)
+        );
     }
 
     [Theory]
@@ -70,7 +75,9 @@ public class HtmlHelperRadioButtonExtensionsTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+            new ViewDataDictionary<TestModel>(metadataProvider)
+        );
         helper.ViewContext.ClientValidationEnabled = false;
         helper.ViewData.Model = new TestModel { Property1 = value };
 
@@ -80,7 +87,8 @@ public class HtmlHelperRadioButtonExtensionsTest
         // Assert
         Assert.Equal(
             "<input checked=\"HtmlEncode[[checked]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonForResult));
+            HtmlContentUtilities.HtmlContentToString(radioButtonForResult)
+        );
     }
 
     [Fact]
@@ -95,7 +103,8 @@ public class HtmlHelperRadioButtonExtensionsTest
         // Assert
         Assert.Equal(
             "<input checked=\"HtmlEncode[[checked]]\" id=\"HtmlEncode[[Property1]]\" name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonResult));
+            HtmlContentUtilities.HtmlContentToString(radioButtonResult)
+        );
     }
 
     [Fact]
@@ -103,7 +112,9 @@ public class HtmlHelperRadioButtonExtensionsTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper(new ViewDataDictionary<TestModel>(metadataProvider));
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper(
+            new ViewDataDictionary<TestModel>(metadataProvider)
+        );
         helper.ViewContext.ClientValidationEnabled = false;
         helper.ViewData.Model = new TestModel { Property2 = true };
 
@@ -113,7 +124,8 @@ public class HtmlHelperRadioButtonExtensionsTest
         // Assert
         Assert.Equal(
             "<input id=\"HtmlEncode[[Property2]]\" name=\"HtmlEncode[[Property2]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonResult));
+            HtmlContentUtilities.HtmlContentToString(radioButtonResult)
+        );
     }
 
     [Fact]
@@ -132,9 +144,10 @@ public class HtmlHelperRadioButtonExtensionsTest
 
         // Assert
         Assert.Equal(
-            "<input attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" " +
-            "name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonResult));
+            "<input attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" "
+                + "name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
+            HtmlContentUtilities.HtmlContentToString(radioButtonResult)
+        );
     }
 
     [Fact]
@@ -149,34 +162,38 @@ public class HtmlHelperRadioButtonExtensionsTest
         };
 
         // Act
-        var radioButtonForResult = helper.RadioButtonFor(m => m.Property1, "myvalue", htmlAttributes);
+        var radioButtonForResult = helper.RadioButtonFor(
+            m => m.Property1,
+            "myvalue",
+            htmlAttributes
+        );
 
         // Assert
         Assert.Equal(
-            "<input attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" " +
-            "name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonForResult));
+            "<input attr=\"HtmlEncode[[value]]\" id=\"HtmlEncode[[Property1]]\" "
+                + "name=\"HtmlEncode[[Property1]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
+            HtmlContentUtilities.HtmlContentToString(radioButtonForResult)
+        );
     }
 
     [Fact]
     public void RadioButtonFor_Throws_IfFullNameEmpty()
     {
         // Arrange
-        var expectedMessage = "The name of an HTML field cannot be null or empty. Instead use methods " +
-            "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering." +
-            "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
+        var expectedMessage =
+            "The name of an HTML field cannot be null or empty. Instead use methods "
+            + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
+            + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper("anotherValue");
-        var htmlAttributes = new
-        {
-            attr = "value",
-        };
+        var htmlAttributes = new { attr = "value" };
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => helper.RadioButtonFor(m => m, "myvalue", htmlAttributes),
             paramName: "expression",
-            exceptionMessage: expectedMessage);
+            exceptionMessage: expectedMessage
+        );
     }
 
     [Fact]
@@ -184,20 +201,17 @@ public class HtmlHelperRadioButtonExtensionsTest
     {
         // Arrange
         var helper = DefaultTemplatesUtilities.GetHtmlHelper("anotherValue");
-        var htmlAttributes = new
-        {
-            attr = "value",
-            name = "-expression-",
-        };
+        var htmlAttributes = new { attr = "value", name = "-expression-" };
 
         // Act
         var radioButtonForResult = helper.RadioButtonFor(m => m, "myvalue", htmlAttributes);
 
         // Assert
         Assert.Equal(
-            "<input attr=\"HtmlEncode[[value]]\" " +
-            "name=\"HtmlEncode[[-expression-]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
-            HtmlContentUtilities.HtmlContentToString(radioButtonForResult));
+            "<input attr=\"HtmlEncode[[value]]\" "
+                + "name=\"HtmlEncode[[-expression-]]\" type=\"HtmlEncode[[radio]]\" value=\"HtmlEncode[[myvalue]]\" />",
+            HtmlContentUtilities.HtmlContentToString(radioButtonForResult)
+        );
     }
 
     private class TestModel

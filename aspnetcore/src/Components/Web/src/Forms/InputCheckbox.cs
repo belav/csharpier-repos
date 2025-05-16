@@ -26,7 +26,8 @@ public class InputCheckbox : InputBase<bool>
     /// May be <see langword="null"/> if accessed before the component is rendered.
     /// </para>
     /// </summary>
-    [DisallowNull] public ElementReference? Element { get; protected set; }
+    [DisallowNull]
+    public ElementReference? Element { get; protected set; }
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -42,13 +43,27 @@ public class InputCheckbox : InputBase<bool>
         // It sends the "on" value when the checkbox is checked, and nothing otherwise.
         builder.AddAttribute(6, "value", bool.TrueString);
 
-        builder.AddAttribute(7, "onchange", EventCallback.Factory.CreateBinder<bool>(this, __value => CurrentValue = __value, CurrentValue));
+        builder.AddAttribute(
+            7,
+            "onchange",
+            EventCallback.Factory.CreateBinder<bool>(
+                this,
+                __value => CurrentValue = __value,
+                CurrentValue
+            )
+        );
         builder.SetUpdatesAttributeName("checked");
         builder.AddElementReferenceCapture(8, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 
     /// <inheritdoc />
-    protected override bool TryParseValueFromString(string? value, out bool result, [NotNullWhen(false)] out string? validationErrorMessage)
-        => throw new NotSupportedException($"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'.");
+    protected override bool TryParseValueFromString(
+        string? value,
+        out bool result,
+        [NotNullWhen(false)] out string? validationErrorMessage
+    ) =>
+        throw new NotSupportedException(
+            $"This component does not parse string inputs. Bind to the '{nameof(CurrentValue)}' property, not '{nameof(CurrentValueAsString)}'."
+        );
 }

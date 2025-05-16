@@ -16,15 +16,24 @@ public class Helpers
         var directoryInfo = new DirectoryInfo(applicationBasePath);
         do
         {
-            var solutionFileInfo = new FileInfo(Path.Combine(directoryInfo.FullName, "FunctionalTests.slnf"));
+            var solutionFileInfo = new FileInfo(
+                Path.Combine(directoryInfo.FullName, "FunctionalTests.slnf")
+            );
             if (solutionFileInfo.Exists)
             {
-                return Path.GetFullPath(Path.Combine(directoryInfo.FullName, "..", "..", "testassets", "ServerComparison.TestSites"));
+                return Path.GetFullPath(
+                    Path.Combine(
+                        directoryInfo.FullName,
+                        "..",
+                        "..",
+                        "testassets",
+                        "ServerComparison.TestSites"
+                    )
+                );
             }
 
             directoryInfo = directoryInfo.Parent;
-        }
-        while (directoryInfo.Parent != null);
+        } while (directoryInfo.Parent != null);
 
         throw new Exception($"Solution root could not be found using {applicationBasePath}");
     }

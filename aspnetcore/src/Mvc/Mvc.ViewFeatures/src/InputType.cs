@@ -31,5 +31,5 @@ public enum InputType
     /// <summary>
     /// A text input.
     /// </summary>
-    Text
+    Text,
 }

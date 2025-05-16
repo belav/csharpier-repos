@@ -27,7 +27,6 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using Newtonsoft.Json.Serialization;
-
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #endif
@@ -43,7 +42,12 @@ namespace Newtonsoft.Json.Utilities
                 // https://github.com/dotnet/corefx/issues/26053
                 if (propertyInfo.PropertyType.IsByRef)
                 {
-                    throw new InvalidOperationException("Could not create getter for {0}. ByRef return values are not supported.".FormatWith(CultureInfo.InvariantCulture, propertyInfo));
+                    throw new InvalidOperationException(
+                        "Could not create getter for {0}. ByRef return values are not supported.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            propertyInfo
+                        )
+                    );
                 }
 
                 return CreateGet<T>(propertyInfo);
@@ -54,7 +58,12 @@ namespace Newtonsoft.Json.Utilities
                 return CreateGet<T>(fieldInfo);
             }
 
-            throw new Exception("Could not create getter for {0}.".FormatWith(CultureInfo.InvariantCulture, memberInfo));
+            throw new Exception(
+                "Could not create getter for {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    memberInfo
+                )
+            );
         }
 
         public Action<T, object?> CreateSet<T>(MemberInfo memberInfo)
@@ -69,7 +78,12 @@ namespace Newtonsoft.Json.Utilities
                 return CreateSet<T>(fieldInfo);
             }
 
-            throw new Exception("Could not create setter for {0}.".FormatWith(CultureInfo.InvariantCulture, memberInfo));
+            throw new Exception(
+                "Could not create setter for {0}.".FormatWith(
+                    CultureInfo.InvariantCulture,
+                    memberInfo
+                )
+            );
         }
 
         public abstract MethodCall<T, object?> CreateMethodCall<T>(MethodBase method);

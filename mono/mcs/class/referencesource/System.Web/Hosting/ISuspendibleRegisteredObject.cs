@@ -1,18 +1,19 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="ISuspendibleRegisteredObject.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
     using System.Security.Permissions;
 
     // If the application passes HostingEnvironment.RegisterObject
     // an object which also implements this interface, that object
     // will be subscribed to listening for suspend / resume notifications.
-    public interface ISuspendibleRegisteredObject : IRegisteredObject {
-
+    public interface ISuspendibleRegisteredObject : IRegisteredObject
+    {
         // Called when ASP.NET needs to notify the application that the process is
         // being suspended. This method *must not* throw, otherwise the behavior is
         // undefined (we will probably terminate the process). This method *should
@@ -36,6 +37,5 @@ namespace System.Web.Hosting {
         // there exists a window in which the Suspend method might be called even
         // after a call to HostingEnvironment.UnregisterObject has completed.
         Action Suspend();
-
     }
 }

@@ -13,7 +13,12 @@ namespace System.IO.MemoryMappedFiles
         private readonly long _size;
         private readonly MemoryMappedFileAccess _access;
 
-        private MemoryMappedView(SafeMemoryMappedViewHandle viewHandle, long pointerOffset, long size, MemoryMappedFileAccess access)
+        private MemoryMappedView(
+            SafeMemoryMappedViewHandle viewHandle,
+            long pointerOffset,
+            long size,
+            MemoryMappedFileAccess access
+        )
         {
             Debug.Assert(viewHandle != null);
 
@@ -69,8 +74,13 @@ namespace System.IO.MemoryMappedFiles
         /// <param name="extraMemNeeded">The amount <paramref name="newSize"/> and <paramref name="newOffset"/> were shifted.</param>
         /// <param name="newOffset">The shifted offset based on the <paramref name="allocationGranularity"/>.</param>
         private static void ValidateSizeAndOffset(
-            long size, long offset, long allocationGranularity,
-            out ulong newSize, out long extraMemNeeded, out long newOffset)
+            long size,
+            long offset,
+            long allocationGranularity,
+            out ulong newSize,
+            out long extraMemNeeded,
+            out long newOffset
+        )
         {
             Debug.Assert(size >= 0);
             Debug.Assert(offset >= 0);
@@ -81,11 +91,15 @@ namespace System.IO.MemoryMappedFiles
 
             extraMemNeeded = offset % allocationGranularity;
             newOffset = offset - extraMemNeeded;
-            newSize = (size != MemoryMappedFile.DefaultSize) ? (ulong)size + (ulong)extraMemNeeded : 0;
+            newSize =
+                (size != MemoryMappedFile.DefaultSize) ? (ulong)size + (ulong)extraMemNeeded : 0;
 
             if (IntPtr.Size == 4 && newSize > uint.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(size), SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed);
+                throw new ArgumentOutOfRangeException(
+                    nameof(size),
+                    SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed
+                );
             }
         }
     }

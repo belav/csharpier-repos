@@ -12,6 +12,7 @@ public class MultiModuleLibrary
     // We're testing that statics in library code are rooted for use by consuming application code.
     public static int ReturnValue;
     public static string StaticString;
+
     [ThreadStatic]
     public static int ThreadStaticInt;
 
@@ -36,8 +37,10 @@ public class MultiModuleLibrary
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool IsT(object o) => o is T;
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool IsArrayOfT(object o) => o is T[];
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool IsMdArrayOfT(object o) => o is T[,];
     }
@@ -61,6 +64,7 @@ public class MultiModuleLibrary
 
     public enum MyEnum
     {
-        One, Two
+        One,
+        Two,
     }
 }

@@ -18,12 +18,14 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         Document document,
         int position,
         SymbolDescriptionOptions options,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         /// <summary>
         /// The document that quick info was requested within.
         /// </summary>
-        public Document Document { get; } = document ?? throw new ArgumentNullException(nameof(document));
+        public Document Document { get; } =
+            document ?? throw new ArgumentNullException(nameof(document));
 
         /// <summary>
         /// The caret position where quick info was requested from.

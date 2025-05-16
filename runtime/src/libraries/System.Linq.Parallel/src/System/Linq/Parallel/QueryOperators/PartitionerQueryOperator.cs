@@ -74,7 +74,8 @@ namespace System.Linq.Parallel
         /// </summary>
         internal static OrdinalIndexState GetOrdinalIndexState(Partitioner<TElement> partitioner)
         {
-            OrderablePartitioner<TElement>? orderablePartitioner = partitioner as OrderablePartitioner<TElement>;
+            OrderablePartitioner<TElement>? orderablePartitioner =
+                partitioner as OrderablePartitioner<TElement>;
 
             if (orderablePartitioner == null)
             {
@@ -98,7 +99,6 @@ namespace System.Linq.Parallel
             }
         }
 
-
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
         // a similar sequential operation (i.e., in LINQ to Objects).
@@ -109,7 +109,6 @@ namespace System.Linq.Parallel
             get { return false; }
         }
 
-
         /// <summary>
         /// QueryResults for a PartitionerQueryOperator
         /// </summary>
@@ -119,29 +118,37 @@ namespace System.Linq.Parallel
 
             private QuerySettings _settings; // Settings collected from the query
 
-            internal PartitionerQueryOperatorResults(Partitioner<TElement> partitioner, QuerySettings settings)
+            internal PartitionerQueryOperatorResults(
+                Partitioner<TElement> partitioner,
+                QuerySettings settings
+            )
             {
                 _partitioner = partitioner;
                 _settings = settings;
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TElement> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TElement> recipient
+            )
             {
                 Debug.Assert(_settings.DegreeOfParallelism.HasValue);
                 int partitionCount = _settings.DegreeOfParallelism.Value;
 
-                OrderablePartitioner<TElement>? orderablePartitioner = _partitioner as OrderablePartitioner<TElement>;
+                OrderablePartitioner<TElement>? orderablePartitioner =
+                    _partitioner as OrderablePartitioner<TElement>;
 
                 // If the partitioner is not orderable, it will yield zeros as order keys. The order index state
                 // is irrelevant.
-                OrdinalIndexState indexState = (orderablePartitioner != null)
-                    ? GetOrdinalIndexState(orderablePartitioner)
-                    : OrdinalIndexState.Shuffled;
+                OrdinalIndexState indexState =
+                    (orderablePartitioner != null)
+                        ? GetOrdinalIndexState(orderablePartitioner)
+                        : OrdinalIndexState.Shuffled;
 
                 PartitionedStream<TElement, int> partitions = new PartitionedStream<TElement, int>(
                     partitionCount,
                     Util.GetDefaultComparer<int>(),
-                    indexState);
+                    indexState
+                );
 
                 if (orderablePartitioner != null)
                 {
@@ -150,20 +157,28 @@ namespace System.Linq.Parallel
 
                     if (partitionerPartitions == null)
                     {
-                        throw new InvalidOperationException(SR.PartitionerQueryOperator_NullPartitionList);
+                        throw new InvalidOperationException(
+                            SR.PartitionerQueryOperator_NullPartitionList
+                        );
                     }
 
                     if (partitionerPartitions.Count != partitionCount)
                     {
-                        throw new InvalidOperationException(SR.PartitionerQueryOperator_WrongNumberOfPartitions);
+                        throw new InvalidOperationException(
+                            SR.PartitionerQueryOperator_WrongNumberOfPartitions
+                        );
                     }
 
                     for (int i = 0; i < partitionCount; i++)
                     {
-                        IEnumerator<KeyValuePair<long, TElement>> partition = partitionerPartitions[i];
+                        IEnumerator<KeyValuePair<long, TElement>> partition = partitionerPartitions[
+                            i
+                        ];
                         if (partition == null)
                         {
-                            throw new InvalidOperationException(SR.PartitionerQueryOperator_NullPartition);
+                            throw new InvalidOperationException(
+                                SR.PartitionerQueryOperator_NullPartition
+                            );
                         }
 
                         partitions[i] = new OrderablePartitionerEnumerator(partition);
@@ -171,17 +186,22 @@ namespace System.Linq.Parallel
                 }
                 else
                 {
-                    IList<IEnumerator<TElement>> partitionerPartitions =
-                        _partitioner.GetPartitions(partitionCount);
+                    IList<IEnumerator<TElement>> partitionerPartitions = _partitioner.GetPartitions(
+                        partitionCount
+                    );
 
                     if (partitionerPartitions == null)
                     {
-                        throw new InvalidOperationException(SR.PartitionerQueryOperator_NullPartitionList);
+                        throw new InvalidOperationException(
+                            SR.PartitionerQueryOperator_NullPartitionList
+                        );
                     }
 
                     if (partitionerPartitions.Count != partitionCount)
                     {
-                        throw new InvalidOperationException(SR.PartitionerQueryOperator_WrongNumberOfPartitions);
+                        throw new InvalidOperationException(
+                            SR.PartitionerQueryOperator_WrongNumberOfPartitions
+                        );
                     }
 
                     for (int i = 0; i < partitionCount; i++)
@@ -189,7 +209,9 @@ namespace System.Linq.Parallel
                         IEnumerator<TElement> partition = partitionerPartitions[i];
                         if (partition == null)
                         {
-                            throw new InvalidOperationException(SR.PartitionerQueryOperator_NullPartition);
+                            throw new InvalidOperationException(
+                                SR.PartitionerQueryOperator_NullPartition
+                            );
                         }
 
                         partitions[i] = new PartitionerEnumerator(partition);
@@ -208,18 +230,23 @@ namespace System.Linq.Parallel
         {
             private readonly IEnumerator<KeyValuePair<long, TElement>> _sourceEnumerator;
 
-            internal OrderablePartitionerEnumerator(IEnumerator<KeyValuePair<long, TElement>> sourceEnumerator)
+            internal OrderablePartitionerEnumerator(
+                IEnumerator<KeyValuePair<long, TElement>> sourceEnumerator
+            )
             {
                 _sourceEnumerator = sourceEnumerator;
             }
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TElement currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TElement currentElement,
+                ref int currentKey
+            )
             {
-                if (!_sourceEnumerator.MoveNext()) return false;
+                if (!_sourceEnumerator.MoveNext())
+                    return false;
 
                 KeyValuePair<long, TElement> current = _sourceEnumerator.Current;
                 currentElement = current.Value;
-
                 checked
                 {
                     currentKey = (int)current.Key;
@@ -248,9 +275,13 @@ namespace System.Linq.Parallel
                 _sourceEnumerator = sourceEnumerator;
             }
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TElement currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TElement currentElement,
+                ref int currentKey
+            )
             {
-                if (!_sourceEnumerator.MoveNext()) return false;
+                if (!_sourceEnumerator.MoveNext())
+                    return false;
 
                 currentElement = _sourceEnumerator.Current;
                 currentKey = 0;

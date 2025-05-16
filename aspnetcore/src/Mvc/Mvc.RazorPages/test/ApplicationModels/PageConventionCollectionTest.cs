@@ -17,7 +17,8 @@ public class PageConventionCollectionTest
         var ex = ExceptionAssert.ThrowsArgument(
             () => PageConventionCollection.EnsureValidPageName(pageName),
             "pageName",
-            "Value cannot be null or empty.");
+            "Value cannot be null or empty."
+        );
     }
 
     [Theory]
@@ -26,12 +27,14 @@ public class PageConventionCollectionTest
     public void EnsureValidPageName_ThrowsIfPageNameDoesNotStartWithLeadingSlash(string pageName)
     {
         // Arrange
-        var expected = $"'{pageName}' is not a valid page name. A page name is path relative to the Razor Pages root directory that starts with a leading forward slash ('/') and does not contain the file extension e.g \"/Users/Edit\".";
+        var expected =
+            $"'{pageName}' is not a valid page name. A page name is path relative to the Razor Pages root directory that starts with a leading forward slash ('/') and does not contain the file extension e.g \"/Users/Edit\".";
         // Act & Assert
         var ex = ExceptionAssert.ThrowsArgument(
             () => PageConventionCollection.EnsureValidPageName(pageName),
             "pageName",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -39,12 +42,14 @@ public class PageConventionCollectionTest
     {
         // Arrange
         var pageName = "/Page.cshtml";
-        var expected = $"'{pageName}' is not a valid page name. A page name is path relative to the Razor Pages root directory that starts with a leading forward slash ('/') and does not contain the file extension e.g \"/Users/Edit\".";
+        var expected =
+            $"'{pageName}' is not a valid page name. A page name is path relative to the Razor Pages root directory that starts with a leading forward slash ('/') and does not contain the file extension e.g \"/Users/Edit\".";
         // Act & Assert
         var ex = ExceptionAssert.ThrowsArgument(
             () => PageConventionCollection.EnsureValidPageName(pageName),
             "pageName",
-            expected);
+            expected
+        );
     }
 
     [Theory]
@@ -57,20 +62,24 @@ public class PageConventionCollectionTest
         var ex = ExceptionAssert.ThrowsArgument(
             () => PageConventionCollection.EnsureValidFolderPath(folderPath),
             "folderPath",
-           "Value cannot be null or empty.");
+            "Value cannot be null or empty."
+        );
     }
 
     [Theory]
     [InlineData("path-without-slash")]
     [InlineData(@"c:\myapp\path-without-slash")]
-    public void EnsureValidFolderPath_ThrowsIfPageNameDoesNotStartWithLeadingSlash(string folderPath)
+    public void EnsureValidFolderPath_ThrowsIfPageNameDoesNotStartWithLeadingSlash(
+        string folderPath
+    )
     {
         // Arrange
         // Act & Assert
         var ex = ExceptionAssert.ThrowsArgument(
             () => PageConventionCollection.EnsureValidFolderPath(folderPath),
             "folderPath",
-            "Path must be a root relative path that starts with a forward slash '/'.");
+            "Path must be a root relative path that starts with a forward slash '/'."
+        );
     }
 
     [Fact]
@@ -78,19 +87,17 @@ public class PageConventionCollectionTest
     {
         // Arrange
         var collection = new PageConventionCollection(Mock.Of<IServiceProvider>())
-            {
-                new FooPageConvention(),
-                new BarPageConvention(),
-                new FooPageConvention()
-            };
+        {
+            new FooPageConvention(),
+            new BarPageConvention(),
+            new FooPageConvention(),
+        };
 
         // Act
         collection.RemoveType(typeof(FooPageConvention));
 
         // Assert
-        Assert.Collection(
-            collection,
-            convention => Assert.IsType<BarPageConvention>(convention));
+        Assert.Collection(collection, convention => Assert.IsType<BarPageConvention>(convention));
     }
 
     [Fact]
@@ -98,19 +105,17 @@ public class PageConventionCollectionTest
     {
         // Arrange
         var collection = new PageConventionCollection(Mock.Of<IServiceProvider>())
-            {
-                new FooPageConvention(),
-                new BarPageConvention(),
-                new FooPageConvention()
-            };
+        {
+            new FooPageConvention(),
+            new BarPageConvention(),
+            new FooPageConvention(),
+        };
 
         // Act
         collection.RemoveType<FooPageConvention>();
 
         // Assert
-        Assert.Collection(
-           collection,
-           convention => Assert.IsType<BarPageConvention>(convention));
+        Assert.Collection(collection, convention => Assert.IsType<BarPageConvention>(convention));
     }
 
     private class FooPageConvention : IPageConvention { }

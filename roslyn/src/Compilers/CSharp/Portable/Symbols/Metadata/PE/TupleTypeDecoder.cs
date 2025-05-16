@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.PooledObjects;
-using Roslyn.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection.Metadata;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 {
@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     /// to a single underlying tuple type, System.ValueTuple. Since the
     /// names aren't part of the underlying tuple type they have to be
     /// recorded somewhere else.
-    /// 
+    ///
     /// Roslyn records tuple names in an attribute: the
     /// TupleElementNamesAttribute. The attribute contains a single string
     /// array which records the names of the tuple elements in a pre-order
@@ -26,32 +26,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     /// <see cref="DecodeTupleTypesIfApplicable(TypeSymbol, EntityHandle, PEModuleSymbol)"/>
     /// can be used to extract tuple names and types from metadata and create
     /// a <see cref="NamedTypeSymbol"/> with attached names.
-    /// 
+    ///
     /// <example>
     /// For instance, a method returning a tuple
-    /// 
+    ///
     /// <code>
     ///     (int x, int y) M() { ... }
     /// </code>
     ///
     /// will be encoded using an attribute on the return type as follows
-    /// 
+    ///
     /// <code>
     ///     [return: TupleElementNamesAttribute(new[] { "x", "y" })]
     ///     System.ValueTuple&lt;int, int&gt; M() { ... }
     /// </code>
     /// </example>
-    /// 
+    ///
     /// <example>
     /// For nested type parameters, we expand the tuple names in a pre-order
     /// traversal:
-    /// 
+    ///
     /// <code>
     ///     class C : BaseType&lt;((int e1, int e2) e3, int e4)&lt; { ... }
     /// </code>
     ///
     /// becomes
-    /// 
+    ///
     /// <code>
     ///     [TupleElementNamesAttribute(new[] { "e3", "e4", "e1", "e2" });
     ///     class C : BaseType&lt;System.ValueTuple&lt;
@@ -63,6 +63,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     internal struct TupleTypeDecoder
     {
         private readonly ImmutableArray<string?> _elementNames;
+
         // Keep track of how many names we've "used" during decoding. Starts at
         // the back of the array and moves forward.
         private int _namesIndex;
@@ -80,12 +81,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         public static TypeSymbol DecodeTupleTypesIfApplicable(
             TypeSymbol metadataType,
             EntityHandle targetHandle,
-            PEModuleSymbol containingModule)
+            PEModuleSymbol containingModule
+        )
         {
             ImmutableArray<string?> elementNames;
-            var hasTupleElementNamesAttribute = containingModule
-                .Module
-                .HasTupleElementNamesAttribute(targetHandle, out elementNames);
+            var hasTupleElementNamesAttribute =
+                containingModule.Module.HasTupleElementNamesAttribute(
+                    targetHandle,
+                    out elementNames
+                );
 
             // If we have the TupleElementNamesAttribute, but no names, that's
             // bad metadata
@@ -94,18 +98,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 return new UnsupportedMetadataTypeSymbol();
             }
 
-            return DecodeTupleTypesInternal(metadataType, elementNames, hasTupleElementNamesAttribute);
+            return DecodeTupleTypesInternal(
+                metadataType,
+                elementNames,
+                hasTupleElementNamesAttribute
+            );
         }
 
         public static TypeWithAnnotations DecodeTupleTypesIfApplicable(
             TypeWithAnnotations metadataType,
             EntityHandle targetHandle,
-            PEModuleSymbol containingModule)
+            PEModuleSymbol containingModule
+        )
         {
             ImmutableArray<string?> elementNames;
-            var hasTupleElementNamesAttribute = containingModule
-                .Module
-                .HasTupleElementNamesAttribute(targetHandle, out elementNames);
+            var hasTupleElementNamesAttribute =
+                containingModule.Module.HasTupleElementNamesAttribute(
+                    targetHandle,
+                    out elementNames
+                );
 
             // If we have the TupleElementNamesAttribute, but no names, that's
             // bad metadata
@@ -115,20 +126,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             }
 
             TypeSymbol type = metadataType.Type;
-            TypeSymbol decoded = DecodeTupleTypesInternal(type, elementNames, hasTupleElementNamesAttribute);
-            return (object)decoded == (object)type ?
-                metadataType :
-                TypeWithAnnotations.Create(decoded, metadataType.NullableAnnotation, metadataType.CustomModifiers);
+            TypeSymbol decoded = DecodeTupleTypesInternal(
+                type,
+                elementNames,
+                hasTupleElementNamesAttribute
+            );
+            return (object)decoded == (object)type
+                ? metadataType
+                : TypeWithAnnotations.Create(
+                    decoded,
+                    metadataType.NullableAnnotation,
+                    metadataType.CustomModifiers
+                );
         }
 
         public static TypeSymbol DecodeTupleTypesIfApplicable(
             TypeSymbol metadataType,
-            ImmutableArray<string?> elementNames)
+            ImmutableArray<string?> elementNames
+        )
         {
-            return DecodeTupleTypesInternal(metadataType, elementNames, hasTupleElementNamesAttribute: !elementNames.IsDefaultOrEmpty);
+            return DecodeTupleTypesInternal(
+                metadataType,
+                elementNames,
+                hasTupleElementNamesAttribute: !elementNames.IsDefaultOrEmpty
+            );
         }
 
-        private static TypeSymbol DecodeTupleTypesInternal(TypeSymbol metadataType, ImmutableArray<string?> elementNames, bool hasTupleElementNamesAttribute)
+        private static TypeSymbol DecodeTupleTypesInternal(
+            TypeSymbol metadataType,
+            ImmutableArray<string?> elementNames,
+            bool hasTupleElementNamesAttribute
+        )
         {
             RoslynDebug.AssertNotNull(metadataType);
 
@@ -186,7 +214,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     // types to TupleTypeSymbols. Thus, by the time we get to the Decoder
                     // all metadata instances of System.ValueTuple will have been
                     //  replaced with TupleTypeSymbols without names.
-                    // 
+                    //
                     // Rather than fixing up after-the-fact it's possible that we could
                     // flow up a SubstituteWith/Without tuple unification to the top level
                     // of the type map and change DecodeOrThrow to call into the substitution
@@ -213,13 +241,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             if (type.Signature.ParameterCount > 0)
             {
-                var paramsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(type.Signature.ParameterCount);
+                var paramsBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                    type.Signature.ParameterCount
+                );
 
                 for (int i = type.Signature.ParameterCount - 1; i >= 0; i--)
                 {
                     var param = type.Signature.Parameters[i];
                     var decodedParam = DecodeTypeInternal(param.TypeWithAnnotations);
-                    paramsModified = paramsModified || !decodedParam.IsSameAs(param.TypeWithAnnotations);
+                    paramsModified =
+                        paramsModified || !decodedParam.IsSameAs(param.TypeWithAnnotations);
                     paramsBuilder.Add(decodedParam);
                 }
 
@@ -237,9 +268,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             var decodedReturnType = DecodeTypeInternal(type.Signature.ReturnTypeWithAnnotations);
 
-            if (paramsModified || !decodedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations))
+            if (
+                paramsModified
+                || !decodedReturnType.IsSameAs(type.Signature.ReturnTypeWithAnnotations)
+            )
             {
-                return type.SubstituteTypeSymbol(decodedReturnType, parameterTypes, refCustomModifiers: default, paramRefCustomModifiers: default);
+                return type.SubstituteTypeSymbol(
+                    decodedReturnType,
+                    parameterTypes,
+                    refCustomModifiers: default,
+                    paramRefCustomModifiers: default
+                );
             }
             else
             {
@@ -303,7 +342,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return decodedType;
         }
 
-        private ImmutableArray<TypeWithAnnotations> DecodeTypeArguments(ImmutableArray<TypeWithAnnotations> typeArgs)
+        private ImmutableArray<TypeWithAnnotations> DecodeTypeArguments(
+            ImmutableArray<TypeWithAnnotations> typeArgs
+        )
         {
             if (typeArgs.IsEmpty)
             {
@@ -333,7 +374,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         private ArrayTypeSymbol DecodeArrayType(ArrayTypeSymbol type)
         {
-            TypeWithAnnotations decodedElementType = DecodeTypeInternal(type.ElementTypeWithAnnotations);
+            TypeWithAnnotations decodedElementType = DecodeTypeInternal(
+                type.ElementTypeWithAnnotations
+            );
             return type.WithElementType(decodedElementType);
         }
 
@@ -341,9 +384,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             TypeSymbol type = typeWithAnnotations.Type;
             TypeSymbol decoded = DecodeType(type);
-            return ReferenceEquals(decoded, type) ?
-                typeWithAnnotations :
-                TypeWithAnnotations.Create(decoded, typeWithAnnotations.NullableAnnotation, typeWithAnnotations.CustomModifiers);
+            return ReferenceEquals(decoded, type)
+                ? typeWithAnnotations
+                : TypeWithAnnotations.Create(
+                    decoded,
+                    typeWithAnnotations.NullableAnnotation,
+                    typeWithAnnotations.CustomModifiers
+                );
         }
 
         private ImmutableArray<string?> EatElementNamesIfAvailable(int numberOfElements)

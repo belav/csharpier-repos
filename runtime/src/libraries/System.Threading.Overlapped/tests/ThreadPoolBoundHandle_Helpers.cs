@@ -23,16 +23,25 @@ public partial class ThreadPoolBoundHandleTests : FileCleanupTestBase
         public string s;
     }
 
-    private ThreadPoolBoundHandle CreateThreadPoolBoundHandle([CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+    private ThreadPoolBoundHandle CreateThreadPoolBoundHandle(
+        [CallerMemberName] string memberName = null,
+        [CallerLineNumber] int lineNumber = 0
+    )
     {
         return CreateThreadPoolBoundHandle((SafeHandle)null, memberName, lineNumber);
     }
 
-    private ThreadPoolBoundHandle CreateThreadPoolBoundHandle(SafeHandle handle, [CallerMemberName] string memberName = null, [CallerLineNumber] int lineNumber = 0)
+    private ThreadPoolBoundHandle CreateThreadPoolBoundHandle(
+        SafeHandle handle,
+        [CallerMemberName] string memberName = null,
+        [CallerLineNumber] int lineNumber = 0
+    )
     {
         if (handle == null)
         {
-            handle = HandleFactory.CreateAsyncFileHandleForWrite(GetTestFilePath(null, memberName, lineNumber));
+            handle = HandleFactory.CreateAsyncFileHandleForWrite(
+                GetTestFilePath(null, memberName, lineNumber)
+            );
 
             // ThreadPoolBoundHandle does not take ownership of the handle;
             // we must close it
@@ -48,7 +57,7 @@ public partial class ThreadPoolBoundHandleTests : FileCleanupTestBase
         {
             if (disposing)
             {
-                foreach(SafeHandle handle in _handlesToDispose)
+                foreach (SafeHandle handle in _handlesToDispose)
                 {
                     handle.Dispose();
                 }

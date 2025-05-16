@@ -155,7 +155,20 @@ public enum W3CLoggingFields : long
     /// <see cref="Host"/>, <see cref="UserAgent"/>, <see cref="Referer"/>,
     /// <see cref="UserName"/>, and <see cref="Cookie"/>.
     /// </summary>
-    All = Date | Time | ServerName | Method | UriStem | UriQuery | ProtocolStatus |
-        TimeTaken | ProtocolVersion | Host | UserAgent | Referer | ConnectionInfoFields |
-        UserName | Cookie
+    All =
+        Date
+        | Time
+        | ServerName
+        | Method
+        | UriStem
+        | UriQuery
+        | ProtocolStatus
+        | TimeTaken
+        | ProtocolVersion
+        | Host
+        | UserAgent
+        | Referer
+        | ConnectionInfoFields
+        | UserName
+        | Cookie,
 }

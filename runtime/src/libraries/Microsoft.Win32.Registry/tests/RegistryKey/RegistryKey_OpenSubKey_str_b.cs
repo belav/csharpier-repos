@@ -12,16 +12,24 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed subkey name is null
-            Assert.Throws<ArgumentNullException>(() => TestRegistryKey.OpenSubKey(name: null, writable: false));
+            Assert.Throws<ArgumentNullException>(() =>
+                TestRegistryKey.OpenSubKey(name: null, writable: false)
+            );
 
             // Should throw if subkey name greater than 255 chars
-            AssertExtensions.Throws<ArgumentException>("name", null, () => TestRegistryKey.OpenSubKey(new string('a', 256), true));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => TestRegistryKey.OpenSubKey(new string('a', 256), true)
+            );
 
             // OpenSubKey should be read only
             const string name = "FooBar";
             TestRegistryKey.SetValue(name, 42);
             TestRegistryKey.CreateSubKey(name).Dispose();
-            using (var rk = Registry.CurrentUser.OpenSubKey(name: TestRegistryKeyName, writable: false))
+            using (
+                var rk = Registry.CurrentUser.OpenSubKey(name: TestRegistryKeyName, writable: false)
+            )
             {
                 Assert.Throws<UnauthorizedAccessException>(() => rk.CreateSubKey(name));
                 Assert.Throws<UnauthorizedAccessException>(() => rk.SetValue(name, "String"));
@@ -56,22 +64,46 @@ namespace Microsoft.Win32.RegistryTests
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_Writable_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, writable: true));
+        public void OpenSubKey_Writable_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, writable: true)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_NonWritable_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName, writable: false));
+        public void OpenSubKey_NonWritable_KeyExists_OpensWithFixedUpName(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, writable: false)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_Writable_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, writable: true));
+        public void OpenSubKey_Writable_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, writable: true)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
-        public void OpenSubKey_NonWritable_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName, writable: false));
+        public void OpenSubKey_NonWritable_KeyDoesNotExist_ReturnsNull(
+            string expected,
+            string subKeyName
+        ) =>
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName, writable: false)
+            );
     }
 }

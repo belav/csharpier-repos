@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 public class ModelSourceTest
 {
     private readonly IServiceProvider _serviceProvider = new ServiceCollection()
-        .AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true);
+        .AddEntityFrameworkInMemoryDatabase()
+        .BuildServiceProvider(validateScopes: true);
 
     [ConditionalFact]
     public void OnModelCreating_is_only_called_once()
@@ -21,12 +22,14 @@ public class ModelSourceTest
         var models = new IModel[threadCount];
 
         Parallel.For(
-            0, threadCount,
+            0,
+            threadCount,
             i =>
             {
                 using var context = new SlowContext(_serviceProvider);
                 models[i] = context.Model;
-            });
+            }
+        );
 
         Assert.NotNull(models[0]);
 
@@ -55,8 +58,8 @@ public class ModelSourceTest
             Thread.Sleep(200);
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(nameof(SlowContext));
     }
@@ -65,28 +68,31 @@ public class ModelSourceTest
     public void Adds_all_entities_based_on_all_distinct_entity_types_found()
     {
         var context = InMemoryTestHelpers.Instance.CreateContext(
-            new ServiceCollection().AddSingleton<IDbSetFinder, FakeSetFinder>());
+            new ServiceCollection().AddSingleton<IDbSetFinder, FakeSetFinder>()
+        );
 
         Assert.Equal(
             new[] { typeof(SetA).DisplayName(), typeof(SetB).DisplayName() },
-            context.Model.GetEntityTypes().Select(e => e.Name).ToArray());
+            context.Model.GetEntityTypes().Select(e => e.Name).ToArray()
+        );
     }
 
     private class FakeModelValidator : IModelValidator
     {
-        public void Validate(IModel model, IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
-        {
-        }
+        public void Validate(
+            IModel model,
+            IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger
+        ) { }
     }
 
     private class FakeSetFinder : IDbSetFinder
     {
-        public IReadOnlyList<DbSetProperty> FindSets(Type contextType)
-            => new[]
+        public IReadOnlyList<DbSetProperty> FindSets(Type contextType) =>
+            new[]
             {
                 new DbSetProperty("One", typeof(SetA), setter: null),
                 new DbSetProperty("Two", typeof(SetB), setter: null),
-                new DbSetProperty("Three", typeof(SetA), setter: null)
+                new DbSetProperty("Three", typeof(SetA), setter: null),
             };
     }
 
@@ -117,19 +123,47 @@ public class ModelSourceTest
         var modelSource = serviceProvider.GetRequiredService<IModelSource>();
         var testModelDependencies = serviceProvider.GetRequiredService<ModelCreationDependencies>();
 
-        var model1 = modelSource.GetModel(new Context1(options), testModelDependencies, designTime: false);
-        var model2 = modelSource.GetModel(new Context2(options), testModelDependencies, designTime: false);
+        var model1 = modelSource.GetModel(
+            new Context1(options),
+            testModelDependencies,
+            designTime: false
+        );
+        var model2 = modelSource.GetModel(
+            new Context2(options),
+            testModelDependencies,
+            designTime: false
+        );
 
-        var designModel1 = modelSource.GetModel(new Context1(options), testModelDependencies, designTime: true);
-        var designModel2 = modelSource.GetModel(new Context2(options), testModelDependencies, designTime: true);
+        var designModel1 = modelSource.GetModel(
+            new Context1(options),
+            testModelDependencies,
+            designTime: true
+        );
+        var designModel2 = modelSource.GetModel(
+            new Context2(options),
+            testModelDependencies,
+            designTime: true
+        );
 
         Assert.NotSame(model1, model2);
-        Assert.Same(model1, modelSource.GetModel(new Context1(options), testModelDependencies, designTime: false));
-        Assert.Same(model2, modelSource.GetModel(new Context2(options), testModelDependencies, designTime: false));
+        Assert.Same(
+            model1,
+            modelSource.GetModel(new Context1(options), testModelDependencies, designTime: false)
+        );
+        Assert.Same(
+            model2,
+            modelSource.GetModel(new Context2(options), testModelDependencies, designTime: false)
+        );
 
         Assert.NotSame(designModel1, designModel2);
-        Assert.Same(designModel1, modelSource.GetModel(new Context1(options), testModelDependencies, designTime: true));
-        Assert.Same(designModel2, modelSource.GetModel(new Context2(options), testModelDependencies, designTime: true));
+        Assert.Same(
+            designModel1,
+            modelSource.GetModel(new Context1(options), testModelDependencies, designTime: true)
+        );
+        Assert.Same(
+            designModel2,
+            modelSource.GetModel(new Context2(options), testModelDependencies, designTime: true)
+        );
 
         Assert.NotSame(model1, designModel1);
         Assert.NotSame(model2, designModel2);
@@ -146,7 +180,11 @@ public class ModelSourceTest
         var testModelDependencies = serviceProvider.GetRequiredService<ModelCreationDependencies>();
 
         var model = modelSource.GetModel(context, testModelDependencies, designTime: false);
-        var designTimeModel = modelSource.GetModel(new Context1(options), testModelDependencies, designTime: true);
+        var designTimeModel = modelSource.GetModel(
+            new Context1(options),
+            testModelDependencies,
+            designTime: true
+        );
 
         Assert.NotSame(model, designTimeModel);
 
@@ -172,13 +210,16 @@ public class ModelSourceTest
         var context = new ModelContext(model, _serviceProvider);
         var warning = CoreStrings.WarningAsErrorTemplate(
             CoreEventId.OldModelVersionWarning,
-            CoreResources.LogOldModelVersion(
-                new TestLogger<TestLoggingDefinitions>()).GenerateMessage("1.0.0", ProductInfo.GetVersion()),
-            "CoreEventId.OldModelVersionWarning");
+            CoreResources
+                .LogOldModelVersion(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage("1.0.0", ProductInfo.GetVersion()),
+            "CoreEventId.OldModelVersionWarning"
+        );
 
         Assert.Equal(
             warning,
-            Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -230,8 +271,10 @@ public class ModelSourceTest
         var testModelDependencies = serviceProvider.GetRequiredService<ModelCreationDependencies>();
 
         var model = modelSource.GetModel(context, testModelDependencies, designTime: false);
-        var packageVersion = typeof(Context1).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-            .Single(m => m.Key == "PackageVersion").Value;
+        var packageVersion = typeof(Context1)
+            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            .Single(m => m.Key == "PackageVersion")
+            .Value;
 
         var prereleaseIndex = packageVersion.IndexOf("-", StringComparison.Ordinal);
         if (prereleaseIndex != -1)
@@ -239,22 +282,22 @@ public class ModelSourceTest
             packageVersion = packageVersion.Substring(0, prereleaseIndex);
         }
 
-        Assert.StartsWith(packageVersion, model.GetProductVersion(), StringComparison.OrdinalIgnoreCase);
+        Assert.StartsWith(
+            packageVersion,
+            model.GetProductVersion(),
+            StringComparison.OrdinalIgnoreCase
+        );
     }
 
     private class Context1 : DbContext
     {
         public Context1(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 
     private class Context2 : DbContext
     {
         public Context2(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 }

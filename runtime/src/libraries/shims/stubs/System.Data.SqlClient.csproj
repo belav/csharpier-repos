@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="Microsoft.SqlServer.Server.DataAccessKind" />
     <ForwardedType Include="Microsoft.SqlServer.Server.Format" />
@@ -46,8 +44,10 @@
     <ForwardedType Include="System.Data.SqlClient.SqlNotificationInfo" />
     <ForwardedType Include="System.Data.SqlClient.SqlNotificationSource" />
     <ForwardedType Include="System.Data.SqlClient.SqlNotificationType" />
-    <ForwardedType Include="System.Data.SqlClient.SqlParameter"
-                   InnerClass="SqlParameterConverter" />
+    <ForwardedType
+      Include="System.Data.SqlClient.SqlParameter"
+      InnerClass="SqlParameterConverter"
+    />
     <ForwardedType Include="System.Data.SqlClient.SqlParameterCollection" />
     <ForwardedType Include="System.Data.SqlClient.SqlRowUpdatedEventArgs" />
     <ForwardedType Include="System.Data.SqlClient.SqlRowUpdatedEventHandler" />
@@ -58,5 +58,4 @@
     <ForwardedType Include="System.Data.SqlClient.SqlTransaction" />
     <ForwardedType Include="System.Data.SqlTypes.SqlFileStream" />
   </ItemGroup>
-
 </Project>

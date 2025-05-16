@@ -29,7 +29,8 @@ public abstract class RenderModeEndpointProvider
     /// <returns>The list of endpoints this provider is registering.</returns>
     public abstract IEnumerable<RouteEndpointBuilder> GetEndpointBuilders(
         IComponentRenderMode renderMode,
-        IApplicationBuilder applicationBuilder);
+        IApplicationBuilder applicationBuilder
+    );
 
     internal static void AddEndpoints(
         List<Endpoint> endpoints,
@@ -37,7 +38,8 @@ public abstract class RenderModeEndpointProvider
         IEnumerable<RouteEndpointBuilder> renderModeEndpoints,
         IComponentRenderMode renderMode,
         List<Action<EndpointBuilder>> conventions,
-        List<Action<EndpointBuilder>> finallyConventions)
+        List<Action<EndpointBuilder>> finallyConventions
+    )
     {
         foreach (var builder in renderModeEndpoints)
         {

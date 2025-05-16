@@ -30,62 +30,71 @@ using System.IO;
 
 namespace System.Net
 {
-	public class FtpWebResponse : WebResponse
-	{
-		const string EXCEPTION_MESSAGE = "System.Net.FtpWebResponse is not supported on the current platform.";
+    public class FtpWebResponse : WebResponse
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.FtpWebResponse is not supported on the current platform.";
 
-		FtpWebResponse ()
-		{
-		}
+        FtpWebResponse() { }
 
-		public override long ContentLength {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override long ContentLength
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override WebHeaderCollection Headers {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override WebHeaderCollection Headers
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override Uri ResponseUri {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override Uri ResponseUri
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public DateTime LastModified {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public DateTime LastModified
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string BannerMessage {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string BannerMessage
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string WelcomeMessage {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string WelcomeMessage
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string ExitMessage {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string ExitMessage
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public FtpStatusCode StatusCode {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public FtpStatusCode StatusCode
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override bool SupportsHeaders {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override bool SupportsHeaders
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string StatusDescription {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string StatusDescription
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override void Close ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public override void Close()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public override Stream GetResponseStream ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+        public override Stream GetResponseStream()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+    }
 }

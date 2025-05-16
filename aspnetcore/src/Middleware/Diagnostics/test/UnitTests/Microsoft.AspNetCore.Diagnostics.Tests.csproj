@@ -1,22 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <!-- EXTEXP0003: MetricCollector is experimental -->
     <NoWarn>$(NoWarn);EXTEXP0003</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Resources\**" Exclude="$(DefaultItemExcludes)" />
     <Content Include="TestFiles\**\*" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\testassets\ClassLibraryWithPortablePdbs\ClassLibraryWithPortablePdbs.csproj" />
-
     <Compile Include="$(SharedSourceRoot)Metrics\TestMeterFactory.cs" LinkBase="shared" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Diagnostics" />
     <Reference Include="Microsoft.AspNetCore.TestHost" />
@@ -27,5 +22,4 @@
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" />
   </ItemGroup>
-
 </Project>

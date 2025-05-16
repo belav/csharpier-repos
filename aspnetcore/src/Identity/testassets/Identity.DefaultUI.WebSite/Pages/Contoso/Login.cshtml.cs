@@ -52,17 +52,16 @@ public class LoginModel : PageModel
         else
         {
             var state = JsonConvert.DeserializeObject<IDictionary<string, string>>(State);
-            var identity = new ClaimsIdentity(new Claim[]
-            {
-                    new Claim(ClaimTypes.NameIdentifier, Input.Login)
-            },
-            state["LoginProvider"],
-            ClaimTypes.NameIdentifier,
-            ClaimTypes.Role);
+            var identity = new ClaimsIdentity(
+                new Claim[] { new Claim(ClaimTypes.NameIdentifier, Input.Login) },
+                state["LoginProvider"],
+                ClaimTypes.NameIdentifier,
+                ClaimTypes.Role
+            );
             var principal = new ClaimsPrincipal(identity);
             var properties = new AuthenticationProperties(state)
             {
-                IsPersistent = Input.RememberMe
+                IsPersistent = Input.RememberMe,
             };
             await HttpContext.SignInAsync(Options.SignInScheme, principal, properties);
             return Redirect(ReturnUrl ?? "~/");

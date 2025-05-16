@@ -11,8 +11,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see> for more information and examples.
 /// </remarks>
-public class GeometryValueComparer<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TGeometry>
-    : ValueComparer<TGeometry>
+public class GeometryValueComparer<
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] TGeometry
+> : ValueComparer<TGeometry>
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="GeometryValueComparer{TGeometry}" /> class.
@@ -21,9 +22,8 @@ public class GeometryValueComparer<[DynamicallyAccessedMembers(DynamicallyAccess
         : base(
             GetEqualsExpression(),
             CreateDefaultHashCodeExpression(favorStructuralComparisons: false),
-            GetSnapshotExpression())
-    {
-    }
+            GetSnapshotExpression()
+        ) { }
 
     private static Expression<Func<TGeometry?, TGeometry?, bool>> GetEqualsExpression()
     {
@@ -52,10 +52,19 @@ public class GeometryValueComparer<[DynamicallyAccessedMembers(DynamicallyAccess
                             Expression.IsFalse(yNull),
                             Expression.Call(
                                 x,
-                                typeof(TGeometry).GetRuntimeMethod("EqualsExact", new[] { typeof(TGeometry) })!,
-                                y))))),
+                                typeof(TGeometry).GetRuntimeMethod(
+                                    "EqualsExact",
+                                    new[] { typeof(TGeometry) }
+                                )!,
+                                y
+                            )
+                        )
+                    )
+                )
+            ),
             left,
-            right);
+            right
+        );
     }
 
     private static Expression<Func<TGeometry, TGeometry>> GetSnapshotExpression()
@@ -64,7 +73,8 @@ public class GeometryValueComparer<[DynamicallyAccessedMembers(DynamicallyAccess
 
         Expression body = Expression.Call(
             instance,
-            typeof(TGeometry).GetRuntimeMethod("Copy", Type.EmptyTypes)!);
+            typeof(TGeometry).GetRuntimeMethod("Copy", Type.EmptyTypes)!
+        );
 
         if (typeof(TGeometry).FullName != "NetTopologySuite.Geometries.Geometry")
         {

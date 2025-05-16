@@ -20,7 +20,10 @@ namespace System.Activities.Core.Presentation
         {
             Type type = typeof(WriteLine);
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(WriteLineDesigner)));
-            builder.AddCustomAttributes(type, new ActivityDesignerOptionsAttribute { AllowDrillIn = false });
+            builder.AddCustomAttributes(
+                type,
+                new ActivityDesignerOptionsAttribute { AllowDrillIn = false }
+            );
         }
     }
 }

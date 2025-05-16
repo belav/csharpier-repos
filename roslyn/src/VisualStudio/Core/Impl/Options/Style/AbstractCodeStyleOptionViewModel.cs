@@ -17,10 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     /// This class acts as a base for any view model that  binds to the codestyle options UI.
     /// </summary>
     /// <remarks>
-    /// This supports databinding of: 
+    /// This supports databinding of:
     /// Description
     /// list of CodeStyle preferences
-    /// list of Notification preferences 
+    /// list of Notification preferences
     /// selected code style preference
     /// selected notification preference
     /// plus, styling for visual elements.
@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             string groupName,
             List<CodeStylePreference> preferences = null,
-            List<NotificationOptionViewModel> notificationPreferences = null)
+            List<NotificationOptionViewModel> notificationPreferences = null
+        )
         {
             Info = info;
             Option = option;
@@ -68,9 +69,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return new List<NotificationOptionViewModel>
             {
                 new NotificationOptionViewModel(NotificationOption2.Silent, KnownMonikers.None),
-                new NotificationOptionViewModel(NotificationOption2.Suggestion, KnownMonikers.StatusInformation),
-                new NotificationOptionViewModel(NotificationOption2.Warning, KnownMonikers.StatusWarning),
-                new NotificationOptionViewModel(NotificationOption2.Error, KnownMonikers.StatusError)
+                new NotificationOptionViewModel(
+                    NotificationOption2.Suggestion,
+                    KnownMonikers.StatusInformation
+                ),
+                new NotificationOptionViewModel(
+                    NotificationOption2.Warning,
+                    KnownMonikers.StatusWarning
+                ),
+                new NotificationOptionViewModel(
+                    NotificationOption2.Error,
+                    KnownMonikers.StatusError
+                ),
             };
         }
 

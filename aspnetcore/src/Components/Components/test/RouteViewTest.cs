@@ -24,7 +24,8 @@ public class RouteViewTest
         _renderer = new TestRenderer(services);
 
         var componentFactory = new ComponentFactory(new DefaultComponentActivator(), _renderer);
-        _routeViewComponent = (RouteView)componentFactory.InstantiateComponent(services, typeof(RouteView), null, null);
+        _routeViewComponent = (RouteView)
+            componentFactory.InstantiateComponent(services, typeof(RouteView), null, null);
 
         _routeViewComponentId = _renderer.AssignRootComponentId(_routeViewComponent);
     }
@@ -38,7 +39,10 @@ public class RouteViewTest
             _ = _routeViewComponent.SetParametersAsync(ParameterView.Empty);
         });
 
-        Assert.Equal($"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteView.RouteData)}.", ex.Message);
+        Assert.Equal(
+            $"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteView.RouteData)}.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -46,47 +50,82 @@ public class RouteViewTest
     {
         // Arrange
         var routeParams = new Dictionary<string, object>
-            {
-                { nameof(ComponentWithLayout.Message), "Test message" }
-            };
+        {
+            { nameof(ComponentWithLayout.Message), "Test message" },
+        };
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(() => _routeViewComponent.SetParametersAsync(ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(RouteView.RouteData), routeData },
-            })));
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object> { { nameof(RouteView.RouteData), routeData } }
+                )
+            )
+        );
 
         // Assert: RouteView renders LayoutView
         var batch = _renderer.Batches.Single();
-        var routeViewFrames = _renderer.GetCurrentRenderTreeFrames(_routeViewComponentId).AsEnumerable();
-        Assert.Collection(routeViewFrames,
+        var routeViewFrames = _renderer
+            .GetCurrentRenderTreeFrames(_routeViewComponentId)
+            .AsEnumerable();
+        Assert.Collection(
+            routeViewFrames,
             frame => AssertFrame.Component<LayoutView>(frame, subtreeLength: 3, sequence: 0),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.Layout), (object)typeof(TestLayout), sequence: 1),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    nameof(LayoutView.Layout),
+                    (object)typeof(TestLayout),
+                    sequence: 1
+                ),
+            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2)
+        );
 
         // Assert: LayoutView renders TestLayout
         var layoutViewComponentId = batch.GetComponentFrames<LayoutView>().Single().ComponentId;
-        var layoutViewFrames = _renderer.GetCurrentRenderTreeFrames(layoutViewComponentId).AsEnumerable();
-        Assert.Collection(layoutViewFrames,
+        var layoutViewFrames = _renderer
+            .GetCurrentRenderTreeFrames(layoutViewComponentId)
+            .AsEnumerable();
+        Assert.Collection(
+            layoutViewFrames,
             frame => AssertFrame.Component<TestLayout>(frame, subtreeLength: 2, sequence: 0),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutComponentBase.Body), sequence: 1));
+            frame => AssertFrame.Attribute(frame, nameof(LayoutComponentBase.Body), sequence: 1)
+        );
 
         // Assert: TestLayout renders page
         var testLayoutComponentId = batch.GetComponentFrames<TestLayout>().Single().ComponentId;
-        var testLayoutFrames = _renderer.GetCurrentRenderTreeFrames(testLayoutComponentId).AsEnumerable();
-        Assert.Collection(testLayoutFrames,
+        var testLayoutFrames = _renderer
+            .GetCurrentRenderTreeFrames(testLayoutComponentId)
+            .AsEnumerable();
+        Assert.Collection(
+            testLayoutFrames,
             frame => AssertFrame.Text(frame, "Layout starts here", sequence: 0),
             frame => AssertFrame.Region(frame, subtreeLength: 3),
-            frame => AssertFrame.Component<ComponentWithLayout>(frame, sequence: 0, subtreeLength: 2),
-            frame => AssertFrame.Attribute(frame, nameof(ComponentWithLayout.Message), "Test message", sequence: 1),
-            frame => AssertFrame.Text(frame, "Layout ends here", sequence: 2));
+            frame =>
+                AssertFrame.Component<ComponentWithLayout>(frame, sequence: 0, subtreeLength: 2),
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    nameof(ComponentWithLayout.Message),
+                    "Test message",
+                    sequence: 1
+                ),
+            frame => AssertFrame.Text(frame, "Layout ends here", sequence: 2)
+        );
 
         // Assert: page itself is rendered, having received parameters from the original route data
         var pageComponentId = batch.GetComponentFrames<ComponentWithLayout>().Single().ComponentId;
         var pageFrames = _renderer.GetCurrentRenderTreeFrames(pageComponentId).AsEnumerable();
-        Assert.Collection(pageFrames,
-            frame => AssertFrame.Text(frame, "Hello from the page with message 'Test message'", sequence: 0));
+        Assert.Collection(
+            pageFrames,
+            frame =>
+                AssertFrame.Text(
+                    frame,
+                    "Hello from the page with message 'Test message'",
+                    sequence: 0
+                )
+        );
 
         // Assert: nothing else was rendered
         Assert.Equal(4, batch.DiffsInOrder.Count);
@@ -100,20 +139,36 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithoutLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(() => _routeViewComponent.SetParametersAsync(ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(RouteView.RouteData), routeData },
-                { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
-            })));
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        { nameof(RouteView.RouteData), routeData },
+                        { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
+                    }
+                )
+            )
+        );
 
         // Assert: uses default layout
         // Not asserting about what else gets rendered as that's covered by other tests
         var batch = _renderer.Batches.Single();
-        var routeViewFrames = _renderer.GetCurrentRenderTreeFrames(_routeViewComponentId).AsEnumerable();
-        Assert.Collection(routeViewFrames,
+        var routeViewFrames = _renderer
+            .GetCurrentRenderTreeFrames(_routeViewComponentId)
+            .AsEnumerable();
+        Assert.Collection(
+            routeViewFrames,
             frame => AssertFrame.Component<LayoutView>(frame, subtreeLength: 3, sequence: 0),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.Layout), (object)typeof(OtherLayout), sequence: 1),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    nameof(LayoutView.Layout),
+                    (object)typeof(OtherLayout),
+                    sequence: 1
+                ),
+            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2)
+        );
     }
 
     [Fact]
@@ -124,19 +179,27 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithoutLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(() => _routeViewComponent.SetParametersAsync(ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(RouteView.RouteData), routeData },
-            })));
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object> { { nameof(RouteView.RouteData), routeData } }
+                )
+            )
+        );
 
         // Assert: uses no layout
         // Not asserting about what else gets rendered as that's covered by other tests
         var batch = _renderer.Batches.Single();
-        var routeViewFrames = _renderer.GetCurrentRenderTreeFrames(_routeViewComponentId).AsEnumerable();
-        Assert.Collection(routeViewFrames,
+        var routeViewFrames = _renderer
+            .GetCurrentRenderTreeFrames(_routeViewComponentId)
+            .AsEnumerable();
+        Assert.Collection(
+            routeViewFrames,
             frame => AssertFrame.Component<LayoutView>(frame, subtreeLength: 3, sequence: 0),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.Layout), (object)null, sequence: 1),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2));
+            frame =>
+                AssertFrame.Attribute(frame, nameof(LayoutView.Layout), (object)null, sequence: 1),
+            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2)
+        );
     }
 
     [Fact]
@@ -147,20 +210,36 @@ public class RouteViewTest
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 
         // Act
-        _renderer.Dispatcher.InvokeAsync(() => _routeViewComponent.SetParametersAsync(ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(RouteView.RouteData), routeData },
-                { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
-            })));
+        _renderer.Dispatcher.InvokeAsync(() =>
+            _routeViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        { nameof(RouteView.RouteData), routeData },
+                        { nameof(RouteView.DefaultLayout), typeof(OtherLayout) },
+                    }
+                )
+            )
+        );
 
         // Assert: uses layout specified by page
         // Not asserting about what else gets rendered as that's covered by other tests
         var batch = _renderer.Batches.Single();
-        var routeViewFrames = _renderer.GetCurrentRenderTreeFrames(_routeViewComponentId).AsEnumerable();
-        Assert.Collection(routeViewFrames,
+        var routeViewFrames = _renderer
+            .GetCurrentRenderTreeFrames(_routeViewComponentId)
+            .AsEnumerable();
+        Assert.Collection(
+            routeViewFrames,
             frame => AssertFrame.Component<LayoutView>(frame, subtreeLength: 3, sequence: 0),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.Layout), (object)typeof(TestLayout), sequence: 1),
-            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    nameof(LayoutView.Layout),
+                    (object)typeof(TestLayout),
+                    sequence: 1
+                ),
+            frame => AssertFrame.Attribute(frame, nameof(LayoutView.ChildContent), sequence: 2)
+        );
     }
 
     private class RouteViewTestNavigationManager : NavigationManager
@@ -177,7 +256,8 @@ public class RouteViewTest
 
     private class ComponentWithoutLayout : AutoRenderComponent
     {
-        [Parameter] public string Message { get; set; }
+        [Parameter]
+        public string Message { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -188,7 +268,8 @@ public class RouteViewTest
     [Layout(typeof(TestLayout))]
     private class ComponentWithLayout : AutoRenderComponent
     {
-        [Parameter] public string Message { get; set; }
+        [Parameter]
+        public string Message { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,54 +32,53 @@ using System.Configuration.Provider;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.RegisterBuildProvider
 {
-	[TestCase ("RegisterBuildProvider 01", "Tests for BuildProvider.RegisterBuildProvider")]
-	public sealed class RegisterBuildProvider_01 : ITestCase
-	{
-		static string[] expectedMessages = {
-			"RegisterFooBuildProvider called",
-			"Registering typeof (string) failed (ArgumentException)",
-			"Registering typeof (BuildProvider) succeeded.",
-			"Registering typeof (FooBuildProvider) succeeded.",
-			"RegisterBuildProvider.Test.FooBuildProvider.GenerateCode called"
-		};
-		
-		public string PhysicalPath {
-			get {
-				return Path.Combine (Consts.BasePhysicalDir, "RegisterBuildProvider");
-			}
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase("RegisterBuildProvider 01", "Tests for BuildProvider.RegisterBuildProvider")]
+    public sealed class RegisterBuildProvider_01 : ITestCase
+    {
+        static string[] expectedMessages =
+        {
+            "RegisterFooBuildProvider called",
+            "Registering typeof (string) failed (ArgumentException)",
+            "Registering typeof (BuildProvider) succeeded.",
+            "Registering typeof (FooBuildProvider) succeeded.",
+            "RegisterBuildProvider.Test.FooBuildProvider.GenerateCode called",
+        };
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/default.aspx", Default_Aspx));
-			
-			return true;
-		}
+        public string PhysicalPath
+        {
+            get { return Path.Combine(Consts.BasePhysicalDir, "RegisterBuildProvider"); }
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			var messages = runItem.TestRunData as List <string>;
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
 
-			Assert.IsNotNull (messages, "#A1");
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("/default.aspx", Default_Aspx));
 
-			int len = messages.Count;
-			if (expectedMessages.Length != len)
-				Assert.Fail ("Expected {0} messages, found {1}", expectedMessages.Length, len);
-			
-			for (int i = 0; i < len; i++)
-				Assert.AreEqual (expectedMessages [i], messages [i], "#A2-" + i.ToString ());
-		}
-	}
+            return true;
+        }
+
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            var messages = runItem.TestRunData as List<string>;
+
+            Assert.IsNotNull(messages, "#A1");
+
+            int len = messages.Count;
+            if (expectedMessages.Length != len)
+                Assert.Fail("Expected {0} messages, found {1}", expectedMessages.Length, len);
+
+            for (int i = 0; i < len; i++)
+                Assert.AreEqual(expectedMessages[i], messages[i], "#A2-" + i.ToString());
+        }
+    }
 }

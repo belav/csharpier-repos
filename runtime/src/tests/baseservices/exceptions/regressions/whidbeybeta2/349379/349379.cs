@@ -10,42 +10,44 @@ namespace TestCS
         static int returnCode = 99;
         static string expectedExceptionString;
         static string expectedOuterExceptionString = "Foobar";
-                
+
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             Object foo = null;
-             try
-             {
+            try
+            {
                 foo.GetType();
-             }
-             catch(Exception e)
-             {
+            }
+            catch (Exception e)
+            {
                 expectedExceptionString = e.Message;
-             }
-                 
+            }
+
             try
             {
                 DoIt();
             }
-            catch(Exception e)
-            {                          
-                  if (e.Message != expectedOuterExceptionString)
-                        returnCode = 98;
-          
-                Console.WriteLine("Outer Exception Message Found: " + e.Message);
-                Console.WriteLine("Outer Exception Message Expected: " + expectedOuterExceptionString);
-            }
-                        
-             if (returnCode == 100)
-                        Console.WriteLine("Test PASSED");
-             else
-                        Console.WriteLine("Test FAILED");
+            catch (Exception e)
+            {
+                if (e.Message != expectedOuterExceptionString)
+                    returnCode = 98;
 
-             return returnCode;
+                Console.WriteLine("Outer Exception Message Found: " + e.Message);
+                Console.WriteLine(
+                    "Outer Exception Message Expected: " + expectedOuterExceptionString
+                );
+            }
+
+            if (returnCode == 100)
+                Console.WriteLine("Test PASSED");
+            else
+                Console.WriteLine("Test FAILED");
+
+            return returnCode;
         }
 
-        static public void DoIt()
+        public static void DoIt()
         {
             try
             {
@@ -56,20 +58,20 @@ namespace TestCS
                 Foobar();
             }
         }
- 
-        static private void ThrowException()
+
+        private static void ThrowException()
         {
             try
             {
                 throw new Exception(expectedOuterExceptionString);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }
         }
 
-        static public void Foobar()
+        public static void Foobar()
         {
             Object foo = null;
 
@@ -77,17 +79,16 @@ namespace TestCS
             {
                 foo.GetType();
             }
-
-            catch(Exception e)
+            catch (Exception e)
             {
                 // The message here should be "Object reference not set to an instance of an object."
                 // But it displays "Foobar" instead
                 //
-                  if (e.Message != expectedExceptionString)
-                        returnCode = 98;
-                  else
-                        returnCode = 100;
-                  
+                if (e.Message != expectedExceptionString)
+                    returnCode = 98;
+                else
+                    returnCode = 100;
+
                 Console.WriteLine("Message Found: " + e.Message);
                 Console.WriteLine("Message Expected: " + expectedExceptionString);
             }

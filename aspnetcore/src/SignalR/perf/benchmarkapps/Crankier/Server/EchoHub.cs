@@ -24,7 +24,9 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
             {
                 var t = new CancellationTokenSource();
                 t.CancelAfter(TimeSpan.FromSeconds(duration));
-                while (!t.IsCancellationRequested && !Context.ConnectionAborted.IsCancellationRequested)
+                while (
+                    !t.IsCancellationRequested && !Context.ConnectionAborted.IsCancellationRequested
+                )
                 {
                     await Clients.All.SendAsync("send", DateTime.UtcNow);
                     sent++;

@@ -21,9 +21,7 @@ public readonly struct MethodInstrumentation
     /// </summary>
     public ImmutableArray<InstrumentationKind> Kinds { get; init; }
 
-    internal bool IsDefault
-        => Kinds.IsDefault;
+    internal bool IsDefault => Kinds.IsDefault;
 
-    internal bool IsEmpty
-        => Kinds.IsEmpty;
+    internal bool IsEmpty => Kinds.IsEmpty;
 }

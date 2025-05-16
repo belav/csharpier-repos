@@ -10,6 +10,7 @@ namespace Mvc.RoutingWebSite.Infrastructure;
 internal class ManualControllerFeatureProvider : IApplicationFeatureProvider<ControllerFeature>
 {
     private readonly Action<ControllerFeature> _action;
+
     public ManualControllerFeatureProvider(Action<ControllerFeature> action)
     {
         _action = action;
@@ -20,4 +21,3 @@ internal class ManualControllerFeatureProvider : IApplicationFeatureProvider<Con
         _action(feature);
     }
 }
-

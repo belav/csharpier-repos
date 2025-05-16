@@ -21,7 +21,8 @@ namespace System.Net.Sockets
         internal bool LastConnectFailed { get; set; }
         internal bool DualMode { get; set; }
         internal bool ExposedHandleOrUntrackedConfiguration { get; private set; }
-        internal bool PreferInlineCompletions { get; set; } = SocketAsyncEngine.InlineSocketCompletionsEnabled;
+        internal bool PreferInlineCompletions { get; set; } =
+            SocketAsyncEngine.InlineSocketCompletionsEnabled;
         internal bool IsSocket { get; set; } = true; // (ab)use Socket class for performing async I/O on non-socket fds.
 
         internal void RegisterConnectResult(SocketError error)
@@ -48,7 +49,8 @@ namespace System.Net.Sockets
 
         internal void SetExposed() => ExposedHandleOrUntrackedConfiguration = true;
 
-        internal bool IsTrackedOption(TrackedSocketOptions option) => (_trackedOptions & option) != 0;
+        internal bool IsTrackedOption(TrackedSocketOptions option) =>
+            (_trackedOptions & option) != 0;
 
         internal void TrackOption(SocketOptionLevel level, SocketOptionName name)
         {
@@ -58,35 +60,57 @@ namespace System.Net.Sockets
                 case SocketOptionLevel.Tcp:
                     switch (name)
                     {
-                        case SocketOptionName.NoDelay: _trackedOptions |= TrackedSocketOptions.NoDelay; return;
+                        case SocketOptionName.NoDelay:
+                            _trackedOptions |= TrackedSocketOptions.NoDelay;
+                            return;
                     }
                     break;
 
                 case SocketOptionLevel.IP:
                     switch (name)
                     {
-                        case SocketOptionName.DontFragment: _trackedOptions |= TrackedSocketOptions.DontFragment; return;
-                        case SocketOptionName.IpTimeToLive: _trackedOptions |= TrackedSocketOptions.Ttl; return;
+                        case SocketOptionName.DontFragment:
+                            _trackedOptions |= TrackedSocketOptions.DontFragment;
+                            return;
+                        case SocketOptionName.IpTimeToLive:
+                            _trackedOptions |= TrackedSocketOptions.Ttl;
+                            return;
                     }
                     break;
 
                 case SocketOptionLevel.IPv6:
                     switch (name)
                     {
-                        case SocketOptionName.IPv6Only: _trackedOptions |= TrackedSocketOptions.DualMode; return;
-                        case SocketOptionName.IpTimeToLive: _trackedOptions |= TrackedSocketOptions.Ttl; return;
+                        case SocketOptionName.IPv6Only:
+                            _trackedOptions |= TrackedSocketOptions.DualMode;
+                            return;
+                        case SocketOptionName.IpTimeToLive:
+                            _trackedOptions |= TrackedSocketOptions.Ttl;
+                            return;
                     }
                     break;
 
                 case SocketOptionLevel.Socket:
                     switch (name)
                     {
-                        case SocketOptionName.Broadcast: _trackedOptions |= TrackedSocketOptions.EnableBroadcast; return;
-                        case SocketOptionName.Linger: _trackedOptions |= TrackedSocketOptions.LingerState; return;
-                        case SocketOptionName.ReceiveBuffer: _trackedOptions |= TrackedSocketOptions.ReceiveBufferSize; return;
-                        case SocketOptionName.ReceiveTimeout: _trackedOptions |= TrackedSocketOptions.ReceiveTimeout; return;
-                        case SocketOptionName.SendBuffer: _trackedOptions |= TrackedSocketOptions.SendBufferSize; return;
-                        case SocketOptionName.SendTimeout: _trackedOptions |= TrackedSocketOptions.SendTimeout; return;
+                        case SocketOptionName.Broadcast:
+                            _trackedOptions |= TrackedSocketOptions.EnableBroadcast;
+                            return;
+                        case SocketOptionName.Linger:
+                            _trackedOptions |= TrackedSocketOptions.LingerState;
+                            return;
+                        case SocketOptionName.ReceiveBuffer:
+                            _trackedOptions |= TrackedSocketOptions.ReceiveBufferSize;
+                            return;
+                        case SocketOptionName.ReceiveTimeout:
+                            _trackedOptions |= TrackedSocketOptions.ReceiveTimeout;
+                            return;
+                        case SocketOptionName.SendBuffer:
+                            _trackedOptions |= TrackedSocketOptions.SendBufferSize;
+                            return;
+                        case SocketOptionName.SendTimeout:
+                            _trackedOptions |= TrackedSocketOptions.SendTimeout;
+                            return;
                     }
                     break;
             }
@@ -102,7 +126,11 @@ namespace System.Net.Sockets
             {
                 if (Volatile.Read(ref _asyncContext) == null)
                 {
-                    Interlocked.CompareExchange(ref _asyncContext, new SocketAsyncContext(this), null);
+                    Interlocked.CompareExchange(
+                        ref _asyncContext,
+                        new SocketAsyncContext(this),
+                        null
+                    );
                 }
 
                 return _asyncContext!;
@@ -117,10 +145,7 @@ namespace System.Net.Sockets
         /// </summary>
         internal bool IsNonBlocking
         {
-            get
-            {
-                return _nonBlocking;
-            }
+            get { return _nonBlocking; }
             set
             {
                 _nonBlocking = value;
@@ -140,10 +165,7 @@ namespace System.Net.Sockets
 
         internal int ReceiveTimeout
         {
-            get
-            {
-                return _receiveTimeout;
-            }
+            get { return _receiveTimeout; }
             set
             {
                 Debug.Assert(value == -1 || value > 0, $"Unexpected value: {value}");
@@ -153,10 +175,7 @@ namespace System.Net.Sockets
 
         internal int SendTimeout
         {
-            get
-            {
-                return _sendTimeout;
-            }
+            get { return _sendTimeout; }
             set
             {
                 Debug.Assert(value == -1 || value > 0, $"Unexpected value: {value}");
@@ -208,7 +227,13 @@ namespace System.Net.Sockets
 
             int type = 0;
             int optLen = sizeof(int);
-            Interop.Error err = Interop.Sys.GetSockOpt(handle, SocketOptionLevel.Socket, SocketOptionName.Type, (byte*)&type, &optLen);
+            Interop.Error err = Interop.Sys.GetSockOpt(
+                handle,
+                SocketOptionLevel.Socket,
+                SocketOptionName.Type,
+                (byte*)&type,
+                &optLen
+            );
             if (err == Interop.Error.SUCCESS)
             {
                 // For TCP (SocketType.Stream), perform an abortive close.
@@ -240,7 +265,8 @@ namespace System.Net.Sockets
             // EWOULDBLOCK, in which case we need to do some recovery.
             if (!abortive)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle} Following 'non-abortive' branch.");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"handle:{handle} Following 'non-abortive' branch.");
 
                 // Close, and if its errno is other than EWOULDBLOCK, there's nothing more to do - we either succeeded or failed.
                 errorCode = CloseHandle(handle);
@@ -261,17 +287,14 @@ namespace System.Net.Sockets
             }
 
             // By default or if the non-abortive path failed, set linger timeout to zero to get an abortive close (RST).
-            var linger = new Interop.Sys.LingerOption
-            {
-                OnOff = 1,
-                Seconds = 0
-            };
+            var linger = new Interop.Sys.LingerOption { OnOff = 1, Seconds = 0 };
 
             errorCode = Interop.Sys.SetLingerOption(handle, &linger);
 #if DEBUG
             _closeSocketLinger = SocketPal.GetSocketErrorForErrorCode(errorCode);
 #endif
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, setsockopt():{errorCode}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"handle:{handle}, setsockopt():{errorCode}");
 
             switch (errorCode)
             {
@@ -309,9 +332,12 @@ namespace System.Net.Sockets
 
             if (NetEventSource.Log.IsEnabled())
             {
-                NetEventSource.Info(this, remappedError ?
-                    $"handle:{handle}, close():ECONNRESET, but treating it as SUCCESS" :
-                    $"handle:{handle}, close():{errorCode}");
+                NetEventSource.Info(
+                    this,
+                    remappedError
+                        ? $"handle:{handle}, close():ECONNRESET, but treating it as SUCCESS"
+                        : $"handle:{handle}, close():{errorCode}"
+                );
             }
 
 #if DEBUG

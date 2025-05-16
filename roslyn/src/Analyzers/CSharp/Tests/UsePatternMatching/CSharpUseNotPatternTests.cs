@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseNotPatternDiagnosticAnalyzer,
-        CSharpUseNotPatternCodeFixProvider>;
+        CSharpUseNotPatternCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseNotPattern)]
     public partial class CSharpUseNotPatternTests

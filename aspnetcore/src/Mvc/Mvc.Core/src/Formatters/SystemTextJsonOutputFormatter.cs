@@ -58,7 +58,10 @@ public class SystemTextJsonOutputFormatter : TextOutputFormatter
     public JsonSerializerOptions SerializerOptions { get; }
 
     /// <inheritdoc />
-    public sealed override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+    public sealed override async Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(selectedEncoding);
@@ -90,33 +93,57 @@ public class SystemTextJsonOutputFormatter : TextOutputFormatter
             {
                 if (jsonTypeInfo is not null)
                 {
-                    await JsonSerializer.SerializeAsync(responseStream, context.Object, jsonTypeInfo, httpContext.RequestAborted);
+                    await JsonSerializer.SerializeAsync(
+                        responseStream,
+                        context.Object,
+                        jsonTypeInfo,
+                        httpContext.RequestAborted
+                    );
                 }
                 else
                 {
-                    await JsonSerializer.SerializeAsync(responseStream, context.Object, SerializerOptions, httpContext.RequestAborted);
+                    await JsonSerializer.SerializeAsync(
+                        responseStream,
+                        context.Object,
+                        SerializerOptions,
+                        httpContext.RequestAborted
+                    );
                 }
 
                 await responseStream.FlushAsync(httpContext.RequestAborted);
             }
-            catch (OperationCanceledException) when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+            catch (OperationCanceledException)
+                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
         }
         else
         {
             // JsonSerializer only emits UTF8 encoded output, but we need to write the response in the encoding specified by
             // selectedEncoding
-            var transcodingStream = Encoding.CreateTranscodingStream(httpContext.Response.Body, selectedEncoding, Encoding.UTF8, leaveOpen: true);
+            var transcodingStream = Encoding.CreateTranscodingStream(
+                httpContext.Response.Body,
+                selectedEncoding,
+                Encoding.UTF8,
+                leaveOpen: true
+            );
 
             ExceptionDispatchInfo? exceptionDispatchInfo = null;
             try
             {
                 if (jsonTypeInfo is not null)
                 {
-                    await JsonSerializer.SerializeAsync(transcodingStream, context.Object, jsonTypeInfo);
+                    await JsonSerializer.SerializeAsync(
+                        transcodingStream,
+                        context.Object,
+                        jsonTypeInfo
+                    );
                 }
                 else
                 {
-                    await JsonSerializer.SerializeAsync(transcodingStream, context.Object, SerializerOptions);
+                    await JsonSerializer.SerializeAsync(
+                        transcodingStream,
+                        context.Object,
+                        SerializerOptions
+                    );
                 }
 
                 await transcodingStream.FlushAsync();
@@ -134,9 +161,7 @@ public class SystemTextJsonOutputFormatter : TextOutputFormatter
                 {
                     await transcodingStream.DisposeAsync();
                 }
-                catch when (exceptionDispatchInfo != null)
-                {
-                }
+                catch when (exceptionDispatchInfo != null) { }
 
                 exceptionDispatchInfo?.Throw();
             }

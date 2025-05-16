@@ -22,12 +22,8 @@ public class RouteValueProvider : BindingSourceValueProvider
     /// <param name="bindingSource">The <see cref="BindingSource"/> of the data.</param>
     /// <param name="values">The values.</param>
     /// <remarks>Sets <see cref="Culture"/> to <see cref="CultureInfo.InvariantCulture" />.</remarks>
-    public RouteValueProvider(
-        BindingSource bindingSource,
-        RouteValueDictionary values)
-        : this(bindingSource, values, CultureInfo.InvariantCulture)
-    {
-    }
+    public RouteValueProvider(BindingSource bindingSource, RouteValueDictionary values)
+        : this(bindingSource, values, CultureInfo.InvariantCulture) { }
 
     /// <summary>
     /// Creates a new <see cref="RouteValueProvider"/>.
@@ -35,7 +31,11 @@ public class RouteValueProvider : BindingSourceValueProvider
     /// <param name="bindingSource">The <see cref="BindingSource"/> of the data.</param>
     /// <param name="values">The values.</param>
     /// <param name="culture">The culture for route value.</param>
-    public RouteValueProvider(BindingSource bindingSource, RouteValueDictionary values, CultureInfo culture)
+    public RouteValueProvider(
+        BindingSource bindingSource,
+        RouteValueDictionary values,
+        CultureInfo culture
+    )
         : base(bindingSource)
     {
         ArgumentNullException.ThrowIfNull(bindingSource);

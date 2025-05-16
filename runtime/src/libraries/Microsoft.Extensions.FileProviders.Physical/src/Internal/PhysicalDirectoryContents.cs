@@ -21,8 +21,7 @@ namespace Microsoft.Extensions.FileProviders.Internal
         /// </summary>
         /// <param name="directory">The directory</param>
         public PhysicalDirectoryContents(string directory)
-            : this(directory, ExclusionFilters.Sensitive)
-        { }
+            : this(directory, ExclusionFilters.Sensitive) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="PhysicalDirectoryContents"/>
@@ -41,6 +40,7 @@ namespace Microsoft.Extensions.FileProviders.Internal
 
         /// <inheritdoc/>
         public IEnumerator<IFileInfo> GetEnumerator() => _info.GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => _info.GetEnumerator();
     }
 }

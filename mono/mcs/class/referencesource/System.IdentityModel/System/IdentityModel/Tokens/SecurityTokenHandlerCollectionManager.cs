@@ -1,4 +1,4 @@
-    //-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 // <copyright file="SecurityTokenHandlerCollectionManager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -18,7 +18,8 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     public class SecurityTokenHandlerCollectionManager
     {
-        private Dictionary<string, SecurityTokenHandlerCollection> collections = new Dictionary<string, SecurityTokenHandlerCollection>();
+        private Dictionary<string, SecurityTokenHandlerCollection> collections =
+            new Dictionary<string, SecurityTokenHandlerCollection>();
         private string serviceName = ConfigurationStrings.DefaultServiceName;
 
         /// <summary>
@@ -39,12 +40,10 @@ namespace System.IdentityModel.Tokens
         /// Initialized with default service configuration.
         /// </summary>
         private SecurityTokenHandlerCollectionManager()
-            : this(ConfigurationStrings.DefaultServiceName)
-        {
-        }
+            : this(ConfigurationStrings.DefaultServiceName) { }
 
         /// <summary>
-        /// Gets a count of the number of SecurityTokenHandlerCollections in this 
+        /// Gets a count of the number of SecurityTokenHandlerCollections in this
         /// SecurityTokenHandlerCollectionManager.
         /// </summary>
         public int Count
@@ -65,10 +64,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public IEnumerable<SecurityTokenHandlerCollection> SecurityTokenHandlerCollections
         {
-            get
-            {
-                return this.collections.Values;
-            }
+            get { return this.collections.Values; }
         }
 
         /// <summary>
@@ -92,7 +88,6 @@ namespace System.IdentityModel.Tokens
 
                 return this.collections[usage];
             }
-
             set
             {
                 // Empty String is valid (Usage.Default)
@@ -111,7 +106,9 @@ namespace System.IdentityModel.Tokens
         /// <returns>An empty token handler collection manager.</returns>
         public static SecurityTokenHandlerCollectionManager CreateEmptySecurityTokenHandlerCollectionManager()
         {
-            return new SecurityTokenHandlerCollectionManager(ConfigurationStrings.DefaultConfigurationElementName);
+            return new SecurityTokenHandlerCollectionManager(
+                ConfigurationStrings.DefaultConfigurationElementName
+            );
         }
 
         /// <summary>
@@ -120,11 +117,16 @@ namespace System.IdentityModel.Tokens
         /// <returns>A SecurityTokenHandlerCollectionManager with a default collection of token handlers.</returns>
         public static SecurityTokenHandlerCollectionManager CreateDefaultSecurityTokenHandlerCollectionManager()
         {
-            SecurityTokenHandlerCollection defaultHandlers = SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
-            SecurityTokenHandlerCollectionManager defaultManager = new SecurityTokenHandlerCollectionManager(ConfigurationStrings.DefaultServiceName);
+            SecurityTokenHandlerCollection defaultHandlers =
+                SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+            SecurityTokenHandlerCollectionManager defaultManager =
+                new SecurityTokenHandlerCollectionManager(ConfigurationStrings.DefaultServiceName);
 
             defaultManager.collections.Clear();
-            defaultManager.collections.Add(SecurityTokenHandlerCollectionManager.Usage.Default, defaultHandlers);
+            defaultManager.collections.Add(
+                SecurityTokenHandlerCollectionManager.Usage.Default,
+                defaultHandlers
+            );
 
             return defaultManager;
         }

@@ -11,8 +11,12 @@ namespace System.ComponentModel.DataAnnotations
     ///     or <see cref="System.ComponentModel.DataAnnotations.DataType.Url" />)
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class DataTypeAttribute : ValidationAttribute
     {
         private static readonly string[] _dataTypeStrings = Enum.GetNames<DataType>();

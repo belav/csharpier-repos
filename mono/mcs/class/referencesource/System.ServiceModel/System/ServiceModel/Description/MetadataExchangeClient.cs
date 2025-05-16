@@ -48,6 +48,7 @@ namespace System.ServiceModel.Description
             this.factory = new ChannelFactory<IMetadataExchange>("*");
             this.maxMessageSize = GetMaxMessageSize(this.factory.Endpoint.Binding);
         }
+
         public MetadataExchangeClient(Uri address, MetadataExchangeClientMode mode)
         {
             Validate(address, mode);
@@ -63,6 +64,7 @@ namespace System.ServiceModel.Description
 
             CreateChannelFactory(address.Scheme);
         }
+
         public MetadataExchangeClient(EndpointAddress address)
         {
             if (address == null)
@@ -74,15 +76,19 @@ namespace System.ServiceModel.Description
 
             CreateChannelFactory(address.Uri.Scheme);
         }
+
         public MetadataExchangeClient(string endpointConfigurationName)
         {
             if (endpointConfigurationName == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointConfigurationName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointConfigurationName"
+                );
             }
             this.factory = new ChannelFactory<IMetadataExchange>(endpointConfigurationName);
             this.maxMessageSize = GetMaxMessageSize(this.factory.Endpoint.Binding);
         }
+
         public MetadataExchangeClient(Binding mexBinding)
         {
             if (mexBinding == null)
@@ -111,7 +117,6 @@ namespace System.ServiceModel.Description
         {
             get { return this.webRequestCredentials; }
             set { this.webRequestCredentials = value; }
-
         }
 
         // Configuration options for the entire MetadataResolver
@@ -122,14 +127,24 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.resolveTimeout = value;
@@ -142,11 +157,15 @@ namespace System.ServiceModel.Description
             {
                 if (value < 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.SFxMaximumResolvedReferencesOutOfRange, value)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxMaximumResolvedReferencesOutOfRange, value)
+                        )
+                    );
                 }
                 this.maximumResolvedReferences = value;
             }
-
         }
         public bool ResolveMetadataReferences
         {
@@ -173,13 +192,16 @@ namespace System.ServiceModel.Description
                 {
                     if (this.factory != null)
                     {
-                        BindingElementCollection bindingElementCollection = this.factory.Endpoint.Binding.CreateBindingElements();
+                        BindingElementCollection bindingElementCollection =
+                            this.factory.Endpoint.Binding.CreateBindingElements();
                         if (bindingElementCollection != null)
                         {
-                            MessageEncodingBindingElement bindingElement = bindingElementCollection.Find<MessageEncodingBindingElement>();
+                            MessageEncodingBindingElement bindingElement =
+                                bindingElementCollection.Find<MessageEncodingBindingElement>();
                             if (bindingElement != null)
                             {
-                                this.readerQuotas = bindingElement.GetIndividualProperty<XmlDictionaryReaderQuotas>();
+                                this.readerQuotas =
+                                    bindingElement.GetIndividualProperty<XmlDictionaryReaderQuotas>();
                             }
                         }
                     }
@@ -189,8 +211,10 @@ namespace System.ServiceModel.Description
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses ClientSection.UnsafeGetSection to get config in PT.",
-            Safe = "Does not leak config object, just calculates a bool.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses ClientSection.UnsafeGetSection to get config in PT.",
+            Safe = "Does not leak config object, just calculates a bool."
+        )]
         [SecuritySafeCritical]
         bool ClientEndpointExists(string name)
         {
@@ -201,16 +225,21 @@ namespace System.ServiceModel.Description
 
             foreach (ChannelEndpointElement endpoint in clientSection.Endpoints)
             {
-                if (endpoint.Name == name && endpoint.Contract == ServiceMetadataBehavior.MexContractName)
+                if (
+                    endpoint.Name == name
+                    && endpoint.Contract == ServiceMetadataBehavior.MexContractName
+                )
                     return true;
             }
 
             return false;
         }
+
         bool IsHttpOrHttps(Uri address)
         {
             return address.Scheme == Uri.UriSchemeHttp || address.Scheme == Uri.UriSchemeHttps;
         }
+
         void CreateChannelFactory(string scheme)
         {
             if (ClientEndpointExists(scheme))
@@ -226,11 +255,18 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("scheme", SR.GetString(SR.SFxMetadataExchangeClientCouldNotCreateChannelFactoryBadScheme, scheme));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "scheme",
+                        SR.GetString(
+                            SR.SFxMetadataExchangeClientCouldNotCreateChannelFactoryBadScheme,
+                            scheme
+                        )
+                    );
                 }
             }
             this.maxMessageSize = GetMaxMessageSize(this.factory.Endpoint.Binding);
         }
+
         void Validate(Uri address, MetadataExchangeClientMode mode)
         {
             if (address == null)
@@ -240,12 +276,18 @@ namespace System.ServiceModel.Description
 
             if (!address.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("address", SR.GetString(SR.SFxCannotGetMetadataFromRelativeAddress, address));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "address",
+                    SR.GetString(SR.SFxCannotGetMetadataFromRelativeAddress, address)
+                );
             }
 
             if (mode == MetadataExchangeClientMode.HttpGet && !IsHttpOrHttps(address))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("address", SR.GetString(SR.SFxCannotHttpGetMetadataFromAddress, address));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "address",
+                    SR.GetString(SR.SFxCannotHttpGetMetadataFromAddress, address)
+                );
             }
 
             MetadataExchangeClientModeHelper.Validate(mode);
@@ -254,36 +296,78 @@ namespace System.ServiceModel.Description
         public IAsyncResult BeginGetMetadata(AsyncCallback callback, object asyncState)
         {
             if (ctorUri != null)
-                return BeginGetMetadata(ctorUri, MetadataExchangeClientMode.HttpGet, callback, asyncState);
+                return BeginGetMetadata(
+                    ctorUri,
+                    MetadataExchangeClientMode.HttpGet,
+                    callback,
+                    asyncState
+                );
             if (ctorEndpointAddress != null)
                 return BeginGetMetadata(ctorEndpointAddress, callback, asyncState);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
+                    )
+                );
         }
-        public IAsyncResult BeginGetMetadata(Uri address, MetadataExchangeClientMode mode, AsyncCallback callback, object asyncState)
+
+        public IAsyncResult BeginGetMetadata(
+            Uri address,
+            MetadataExchangeClientMode mode,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             Validate(address, mode);
 
             if (mode == MetadataExchangeClientMode.HttpGet)
             {
-                return this.BeginGetMetadata(new MetadataLocationRetriever(address, this), callback, asyncState);
+                return this.BeginGetMetadata(
+                    new MetadataLocationRetriever(address, this),
+                    callback,
+                    asyncState
+                );
             }
             else
             {
-                return this.BeginGetMetadata(new MetadataReferenceRetriever(new EndpointAddress(address), this), callback, asyncState);
+                return this.BeginGetMetadata(
+                    new MetadataReferenceRetriever(new EndpointAddress(address), this),
+                    callback,
+                    asyncState
+                );
             }
         }
-        public IAsyncResult BeginGetMetadata(EndpointAddress address, AsyncCallback callback, object asyncState)
+
+        public IAsyncResult BeginGetMetadata(
+            EndpointAddress address,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             if (address == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("address");
             }
-            return this.BeginGetMetadata(new MetadataReferenceRetriever(address, this), callback, asyncState);
+            return this.BeginGetMetadata(
+                new MetadataReferenceRetriever(address, this),
+                callback,
+                asyncState
+            );
         }
-        IAsyncResult BeginGetMetadata(MetadataRetriever retriever, AsyncCallback callback, object asyncState)
+
+        IAsyncResult BeginGetMetadata(
+            MetadataRetriever retriever,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
-            ResolveCallState state = new ResolveCallState(this.maximumResolvedReferences, this.resolveMetadataReferences, new TimeoutHelper(this.OperationTimeout), this);
+            ResolveCallState state = new ResolveCallState(
+                this.maximumResolvedReferences,
+                this.resolveMetadataReferences,
+                new TimeoutHelper(this.OperationTimeout),
+                this
+            );
             state.StackedRetrievers.Push(retriever);
             return new AsyncMetadataResolver(state, callback, asyncState);
         }
@@ -300,18 +384,29 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return GetMetadataAsync(ctorEndpointAddress);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
+                    )
+                );
         }
 
         public Task<MetadataSet> GetMetadataAsync(Uri address, MetadataExchangeClientMode mode)
         {
             Validate(address, mode);
 
-            MetadataRetriever retriever = (mode == MetadataExchangeClientMode.HttpGet)
-                                                ? (MetadataRetriever) new MetadataLocationRetriever(address, this)
-                                                : (MetadataRetriever) new MetadataReferenceRetriever(new EndpointAddress(address), this);
+            MetadataRetriever retriever =
+                (mode == MetadataExchangeClientMode.HttpGet)
+                    ? (MetadataRetriever)new MetadataLocationRetriever(address, this)
+                    : (MetadataRetriever)
+                        new MetadataReferenceRetriever(new EndpointAddress(address), this);
 
-            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(this.BeginGetMetadata, this.EndGetMetadata, retriever, /* state */ null);
+            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(
+                this.BeginGetMetadata,
+                this.EndGetMetadata,
+                retriever, /* state */
+                null
+            );
         }
 
         public Task<MetadataSet> GetMetadataAsync(EndpointAddress address)
@@ -321,7 +416,12 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("address");
             }
 
-            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(this.BeginGetMetadata, this.EndGetMetadata, new MetadataReferenceRetriever(address, this), /* state */ null);
+            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(
+                this.BeginGetMetadata,
+                this.EndGetMetadata,
+                new MetadataReferenceRetriever(address, this), /* state */
+                null
+            );
         }
 
         public Task<MetadataSet> GetMetadataAsync(EndpointAddress address, Uri via)
@@ -335,8 +435,13 @@ namespace System.ServiceModel.Description
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("via");
             }
-                
-            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(this.BeginGetMetadata, this.EndGetMetadata, new MetadataReferenceRetriever(address, via, this), /* state */ null);
+
+            return Task.Factory.FromAsync<MetadataRetriever, MetadataSet>(
+                this.BeginGetMetadata,
+                this.EndGetMetadata,
+                new MetadataReferenceRetriever(address, via, this), /* state */
+                null
+            );
         }
 
         public MetadataSet GetMetadata()
@@ -346,8 +451,13 @@ namespace System.ServiceModel.Description
             if (ctorEndpointAddress != null)
                 return GetMetadata(ctorEndpointAddress);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxMetadataExchangeClientNoMetadataAddress)
+                    )
+                );
         }
+
         public MetadataSet GetMetadata(Uri address, MetadataExchangeClientMode mode)
         {
             Validate(address, mode);
@@ -387,13 +497,22 @@ namespace System.ServiceModel.Description
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("via");
             }
 
-            MetadataReferenceRetriever retriever = new MetadataReferenceRetriever(address, via, this);
+            MetadataReferenceRetriever retriever = new MetadataReferenceRetriever(
+                address,
+                via,
+                this
+            );
             return GetMetadata(retriever);
         }
 
         MetadataSet GetMetadata(MetadataRetriever retriever)
         {
-            ResolveCallState resolveCallState = new ResolveCallState(this.maximumResolvedReferences, this.resolveMetadataReferences, new TimeoutHelper(this.OperationTimeout), this);
+            ResolveCallState resolveCallState = new ResolveCallState(
+                this.maximumResolvedReferences,
+                this.resolveMetadataReferences,
+                new TimeoutHelper(this.OperationTimeout),
+                this
+            );
             resolveCallState.StackedRetrievers.Push(retriever);
             this.ResolveNext(resolveCallState);
 
@@ -414,17 +533,27 @@ namespace System.ServiceModel.Description
                 {
                     if (resolveCallState.ResolvedMaxResolvedReferences)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxResolvedMaxResolvedReferences)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxResolvedMaxResolvedReferences)
+                            )
+                        );
                     }
 
                     resolveCallState.LogUse(retriever);
-                    resolveCallState.HandleSection(retriever.Retrieve(resolveCallState.TimeoutHelper));
+                    resolveCallState.HandleSection(
+                        retriever.Retrieve(resolveCallState.TimeoutHelper)
+                    );
                     this.ResolveNext(resolveCallState);
                 }
             }
         }
 
-        protected internal virtual ChannelFactory<IMetadataExchange> GetChannelFactory(EndpointAddress metadataAddress, string dialect, string identifier)
+        protected internal virtual ChannelFactory<IMetadataExchange> GetChannelFactory(
+            EndpointAddress metadataAddress,
+            string dialect,
+            string identifier
+        )
         {
             return this.factory;
         }
@@ -432,15 +561,24 @@ namespace System.ServiceModel.Description
         static long GetMaxMessageSize(Binding mexBinding)
         {
             BindingElementCollection bindingElementCollection = mexBinding.CreateBindingElements();
-            TransportBindingElement bindingElement = bindingElementCollection.Find<TransportBindingElement>();
+            TransportBindingElement bindingElement =
+                bindingElementCollection.Find<TransportBindingElement>();
             if (bindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxBindingDoesNotHaveATransportBindingElement)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxBindingDoesNotHaveATransportBindingElement)
+                    )
+                );
             }
             return bindingElement.MaxReceivedMessageSize;
         }
 
-        protected internal virtual HttpWebRequest GetWebRequest(Uri location, string dialect, string identifier)
+        protected internal virtual HttpWebRequest GetWebRequest(
+            Uri location,
+            string dialect,
+            string identifier
+        )
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(location);
             request.Method = "GET";
@@ -451,26 +589,45 @@ namespace System.ServiceModel.Description
 
         internal static void TraceSendRequest(Uri address)
         {
-            TraceSendRequest(TraceCode.MetadataExchangeClientSendRequest, SR.GetString(SR.TraceCodeMetadataExchangeClientSendRequest),
-                address.ToString(), MetadataExchangeClientMode.HttpGet.ToString());
+            TraceSendRequest(
+                TraceCode.MetadataExchangeClientSendRequest,
+                SR.GetString(SR.TraceCodeMetadataExchangeClientSendRequest),
+                address.ToString(),
+                MetadataExchangeClientMode.HttpGet.ToString()
+            );
         }
+
         internal static void TraceSendRequest(EndpointAddress address)
         {
-            TraceSendRequest(TraceCode.MetadataExchangeClientSendRequest, SR.GetString(SR.TraceCodeMetadataExchangeClientSendRequest),
-                address.ToString(), MetadataExchangeClientMode.MetadataExchange.ToString());
+            TraceSendRequest(
+                TraceCode.MetadataExchangeClientSendRequest,
+                SR.GetString(SR.TraceCodeMetadataExchangeClientSendRequest),
+                address.ToString(),
+                MetadataExchangeClientMode.MetadataExchange.ToString()
+            );
         }
-        static void TraceSendRequest(int traceCode, string traceDescription, string address, string mode)
+
+        static void TraceSendRequest(
+            int traceCode,
+            string traceDescription,
+            string address,
+            string mode
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                Hashtable h = new Hashtable(2)
-                {
-                    { "Address", address },
-                    { "Mode", mode }
-                };
-                TraceUtility.TraceEvent(TraceEventType.Information, traceCode, traceDescription, new DictionaryTraceRecord(h), null, null);
+                Hashtable h = new Hashtable(2) { { "Address", address }, { "Mode", mode } };
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    traceCode,
+                    traceDescription,
+                    new DictionaryTraceRecord(h),
+                    null,
+                    null
+                );
             }
         }
+
         internal static void TraceReceiveReply(string sourceUrl, Type metadataType)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
@@ -478,14 +635,20 @@ namespace System.ServiceModel.Description
                 Hashtable h = new Hashtable(2);
                 h.Add("SourceUrl", sourceUrl);
                 h.Add("MetadataType", metadataType.ToString());
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MetadataExchangeClientReceiveReply, SR.GetString(SR.TraceCodeMetadataExchangeClientReceiveReply),
-                    new DictionaryTraceRecord(h), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.MetadataExchangeClientReceiveReply,
+                    SR.GetString(SR.TraceCodeMetadataExchangeClientReceiveReply),
+                    new DictionaryTraceRecord(h),
+                    null,
+                    null
+                );
             }
         }
 
         class ResolveCallState
         {
-            Dictionary<MetadataRetriever, MetadataRetriever> usedRetrievers;   // to prevent looping when chasing MetadataReferences
+            Dictionary<MetadataRetriever, MetadataRetriever> usedRetrievers; // to prevent looping when chasing MetadataReferences
             MetadataSet metadataSet;
             int maxResolvedReferences;
             bool resolveMetadataReferences;
@@ -493,8 +656,12 @@ namespace System.ServiceModel.Description
             MetadataExchangeClient resolver;
             TimeoutHelper timeoutHelper;
 
-            internal ResolveCallState(int maxResolvedReferences, bool resolveMetadataReferences,
-                TimeoutHelper timeoutHelper, MetadataExchangeClient resolver)
+            internal ResolveCallState(
+                int maxResolvedReferences,
+                bool resolveMetadataReferences,
+                TimeoutHelper timeoutHelper,
+                MetadataExchangeClient resolver
+            )
             {
                 this.maxResolvedReferences = maxResolvedReferences;
                 this.resolveMetadataReferences = resolveMetadataReferences;
@@ -529,7 +696,11 @@ namespace System.ServiceModel.Description
             {
                 if (section.Metadata is MetadataSet)
                 {
-                    foreach (MetadataSection innerSection in ((MetadataSet)section.Metadata).MetadataSections)
+                    foreach (
+                        MetadataSection innerSection in (
+                            (MetadataSet)section.Metadata
+                        ).MetadataSections
+                    )
                     {
                         innerSection.SourceUrl = section.SourceUrl;
                         this.HandleSection(innerSection);
@@ -539,9 +710,13 @@ namespace System.ServiceModel.Description
                 {
                     if (this.resolveMetadataReferences)
                     {
-
                         EndpointAddress address = ((MetadataReference)section.Metadata).Address;
-                        MetadataRetriever retriever = new MetadataReferenceRetriever(address, this.resolver, section.Dialect, section.Identifier);
+                        MetadataRetriever retriever = new MetadataReferenceRetriever(
+                            address,
+                            this.resolver,
+                            section.Dialect,
+                            section.Identifier
+                        );
                         this.stackedRetrievers.Push(retriever);
                     }
                     else
@@ -554,7 +729,12 @@ namespace System.ServiceModel.Description
                     if (this.resolveMetadataReferences)
                     {
                         string location = ((MetadataLocation)section.Metadata).Location;
-                        MetadataRetriever retriever = new MetadataLocationRetriever(this.CreateUri(section.SourceUrl, location), this.resolver, section.Dialect, section.Identifier);
+                        MetadataRetriever retriever = new MetadataLocationRetriever(
+                            this.CreateUri(section.SourceUrl, location),
+                            this.resolver,
+                            section.Dialect,
+                            section.Identifier
+                        );
                         this.stackedRetrievers.Push(retriever);
                     }
                     else
@@ -594,7 +774,9 @@ namespace System.ServiceModel.Description
                         EnqueueRetrieverIfShouldResolve(
                             new MetadataLocationRetriever(
                                 this.CreateUri(section.SourceUrl, external.SchemaLocation),
-                                this.resolver));
+                                this.resolver
+                            )
+                        );
                     }
                 }
             }
@@ -606,7 +788,12 @@ namespace System.ServiceModel.Description
                 {
                     if (!String.IsNullOrEmpty(import.Location))
                     {
-                        EnqueueRetrieverIfShouldResolve(new MetadataLocationRetriever(this.CreateUri(section.SourceUrl, import.Location), this.resolver));
+                        EnqueueRetrieverIfShouldResolve(
+                            new MetadataLocationRetriever(
+                                this.CreateUri(section.SourceUrl, import.Location),
+                                this.resolver
+                            )
+                        );
                     }
                 }
 
@@ -648,7 +835,11 @@ namespace System.ServiceModel.Description
             protected string dialect;
             protected string identifier;
 
-            public MetadataRetriever(MetadataExchangeClient resolver, string dialect, string identifier)
+            public MetadataRetriever(
+                MetadataExchangeClient resolver,
+                string dialect,
+                string identifier
+            )
             {
                 this.resolver = resolver;
                 this.dialect = dialect;
@@ -669,15 +860,26 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
-            internal abstract IAsyncResult BeginRetrieve(TimeoutHelper timeoutHelper, AsyncCallback callback, object state);
+            internal abstract IAsyncResult BeginRetrieve(
+                TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            );
             internal abstract MetadataSection EndRetrieve(IAsyncResult result);
 
-            static internal MetadataSection CreateMetadataSection(XmlReader reader, string sourceUrl)
+            internal static MetadataSection CreateMetadataSection(
+                XmlReader reader,
+                string sourceUrl
+            )
             {
                 MetadataSection section = null;
                 Type metadataType = null;
@@ -685,7 +887,11 @@ namespace System.ServiceModel.Description
                 if (CanReadMetadataSet(reader))
                 {
                     MetadataSet newSet = MetadataSet.ReadFrom(reader);
-                    section = new MetadataSection(MetadataSection.MetadataExchangeDialect, null, newSet);
+                    section = new MetadataSection(
+                        MetadataSection.MetadataExchangeDialect,
+                        null,
+                        newSet
+                    );
                     metadataType = typeof(MetadataSet);
                 }
                 else if (WsdlNS.ServiceDescription.CanRead(reader))
@@ -738,12 +944,14 @@ namespace System.ServiceModel.Description
             Uri responseLocation;
 
             internal MetadataLocationRetriever(Uri location, MetadataExchangeClient resolver)
-                : this(location, resolver, null, null)
-            {
+                : this(location, resolver, null, null) { }
 
-            }
-
-            internal MetadataLocationRetriever(Uri location, MetadataExchangeClient resolver, string dialect, string identifier)
+            internal MetadataLocationRetriever(
+                Uri location,
+                MetadataExchangeClient resolver,
+                string dialect,
+                string identifier
+            )
                 : base(resolver, dialect, identifier)
             {
                 ValidateLocation(location);
@@ -760,13 +968,17 @@ namespace System.ServiceModel.Description
 
                 if (location.Scheme != Uri.UriSchemeHttp && location.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("location", SR.GetString(SR.SFxCannotGetMetadataFromLocation, location.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "location",
+                        SR.GetString(SR.SFxCannotGetMetadataFromLocation, location.ToString())
+                    );
                 }
             }
 
             public override bool Equals(object obj)
             {
-                return obj is MetadataLocationRetriever && ((MetadataLocationRetriever)obj).location == this.location;
+                return obj is MetadataLocationRetriever
+                    && ((MetadataLocationRetriever)obj).location == this.location;
             }
 
             public override int GetHashCode()
@@ -780,7 +992,11 @@ namespace System.ServiceModel.Description
                 HttpWebRequest request;
                 try
                 {
-                    request = this.resolver.GetWebRequest(this.location, this.dialect, this.identifier);
+                    request = this.resolver.GetWebRequest(
+                        this.location,
+                        this.dialect,
+                        this.identifier
+                    );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
@@ -788,8 +1004,17 @@ namespace System.ServiceModel.Description
                     if (Fx.IsFatal(e))
                         throw;
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxMetadataExchangeClientCouldNotCreateWebRequest, this.location, this.dialect, this.identifier), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxMetadataExchangeClientCouldNotCreateWebRequest,
+                                this.location,
+                                this.dialect,
+                                this.identifier
+                            ),
+                            e
+                        )
+                    );
                 }
 
                 TraceSendRequest(this.location);
@@ -797,17 +1022,26 @@ namespace System.ServiceModel.Description
                 response = (HttpWebResponse)request.GetResponse();
                 responseLocation = request.Address;
 
-                return MetadataLocationRetriever.GetXmlReader(response, this.resolver.MaxMessageSize, this.resolver.ReaderQuotas);
+                return MetadataLocationRetriever.GetXmlReader(
+                    response,
+                    this.resolver.MaxMessageSize,
+                    this.resolver.ReaderQuotas
+                );
             }
 
-            internal static XmlReader GetXmlReader(HttpWebResponse response, long maxMessageSize, XmlDictionaryReaderQuotas readerQuotas)
+            internal static XmlReader GetXmlReader(
+                HttpWebResponse response,
+                long maxMessageSize,
+                XmlDictionaryReaderQuotas readerQuotas
+            )
             {
                 readerQuotas = readerQuotas ?? EncoderDefaults.ReaderQuotas;
                 XmlReader reader = XmlDictionaryReader.CreateTextReader(
                     new MaxMessageSizeStream(response.GetResponseStream(), maxMessageSize),
                     EncodingHelper.GetDictionaryReaderEncoding(response.ContentType),
                     readerQuotas,
-                    null);
+                    null
+                );
 
                 reader.Read();
                 reader.MoveToContent();
@@ -815,36 +1049,63 @@ namespace System.ServiceModel.Description
                 return reader;
             }
 
-            internal override IAsyncResult BeginRetrieve(TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+            internal override IAsyncResult BeginRetrieve(
+                TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
-
                 AsyncMetadataLocationRetriever result;
                 try
                 {
                     HttpWebRequest request;
                     try
                     {
-                        request = this.resolver.GetWebRequest(this.location, this.dialect, this.identifier);
+                        request = this.resolver.GetWebRequest(
+                            this.location,
+                            this.dialect,
+                            this.identifier
+                        );
                     }
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR.GetString(SR.SFxMetadataExchangeClientCouldNotCreateWebRequest, this.location, this.dialect, this.identifier), e));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxMetadataExchangeClientCouldNotCreateWebRequest,
+                                    this.location,
+                                    this.dialect,
+                                    this.identifier
+                                ),
+                                e
+                            )
+                        );
                     }
 
                     TraceSendRequest(this.location);
-                    result = new AsyncMetadataLocationRetriever(request, this.resolver.MaxMessageSize, this.resolver.ReaderQuotas, timeoutHelper, callback, state);
+                    result = new AsyncMetadataLocationRetriever(
+                        request,
+                        this.resolver.MaxMessageSize,
+                        this.resolver.ReaderQuotas,
+                        timeoutHelper,
+                        callback,
+                        state
+                    );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
                 return result;
             }
@@ -860,8 +1121,12 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -876,17 +1141,31 @@ namespace System.ServiceModel.Description
                 long maxMessageSize;
                 XmlDictionaryReaderQuotas readerQuotas;
 
-                internal AsyncMetadataLocationRetriever(WebRequest request, long maxMessageSize, XmlDictionaryReaderQuotas readerQuotas, TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+                internal AsyncMetadataLocationRetriever(
+                    WebRequest request,
+                    long maxMessageSize,
+                    XmlDictionaryReaderQuotas readerQuotas,
+                    TimeoutHelper timeoutHelper,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.maxMessageSize = maxMessageSize;
                     this.readerQuotas = readerQuotas;
-                    IAsyncResult result = request.BeginGetResponse(Fx.ThunkCallback(new AsyncCallback(this.GetResponseCallback)), request);
+                    IAsyncResult result = request.BeginGetResponse(
+                        Fx.ThunkCallback(new AsyncCallback(this.GetResponseCallback)),
+                        request
+                    );
 
                     //Register a callback to abort the request if we hit the timeout.
-                    ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle,
-                        Fx.ThunkCallback(new WaitOrTimerCallback(RetrieveTimeout)), request,
-                        TimeoutHelper.ToMilliseconds(timeoutHelper.RemainingTime()), /* executeOnlyOnce */ true);
+                    ThreadPool.RegisterWaitForSingleObject(
+                        result.AsyncWaitHandle,
+                        Fx.ThunkCallback(new WaitOrTimerCallback(RetrieveTimeout)),
+                        request,
+                        TimeoutHelper.ToMilliseconds(timeoutHelper.RemainingTime()), /* executeOnlyOnce */
+                        true
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -909,7 +1188,8 @@ namespace System.ServiceModel.Description
 
                 internal static MetadataSection End(IAsyncResult result)
                 {
-                    AsyncMetadataLocationRetriever retrieverResult = AsyncResult.End<AsyncMetadataLocationRetriever>(result);
+                    AsyncMetadataLocationRetriever retrieverResult =
+                        AsyncResult.End<AsyncMetadataLocationRetriever>(result);
                     return retrieverResult.section;
                 }
 
@@ -937,15 +1217,21 @@ namespace System.ServiceModel.Description
                 {
                     HttpWebRequest request = (HttpWebRequest)result.AsyncState;
 
-                    using (XmlReader reader =
-                        MetadataLocationRetriever.GetXmlReader((HttpWebResponse)request.EndGetResponse(result), this.maxMessageSize, this.readerQuotas))
+                    using (
+                        XmlReader reader = MetadataLocationRetriever.GetXmlReader(
+                            (HttpWebResponse)request.EndGetResponse(result),
+                            this.maxMessageSize,
+                            this.readerQuotas
+                        )
+                    )
                     {
-                        section = MetadataRetriever.CreateMetadataSection(reader, request.Address.ToString());
+                        section = MetadataRetriever.CreateMetadataSection(
+                            reader,
+                            request.Address.ToString()
+                        );
                     }
                 }
             }
-
-
         }
 
         class MetadataReferenceRetriever : MetadataRetriever
@@ -953,22 +1239,34 @@ namespace System.ServiceModel.Description
             EndpointAddress address;
             Uri via;
 
-            public MetadataReferenceRetriever(EndpointAddress address, MetadataExchangeClient resolver)
-                : this(address, null, resolver, null, null)
-            {
-            }
+            public MetadataReferenceRetriever(
+                EndpointAddress address,
+                MetadataExchangeClient resolver
+            )
+                : this(address, null, resolver, null, null) { }
 
-            public MetadataReferenceRetriever(EndpointAddress address, Uri via, MetadataExchangeClient resolver)
-                : this(address, via, resolver, null, null)
-            {
-            }
+            public MetadataReferenceRetriever(
+                EndpointAddress address,
+                Uri via,
+                MetadataExchangeClient resolver
+            )
+                : this(address, via, resolver, null, null) { }
 
-            public MetadataReferenceRetriever(EndpointAddress address, MetadataExchangeClient resolver, string dialect, string identifier)
-                : this(address, null, resolver, dialect, identifier)
-            {
-            }
+            public MetadataReferenceRetriever(
+                EndpointAddress address,
+                MetadataExchangeClient resolver,
+                string dialect,
+                string identifier
+            )
+                : this(address, null, resolver, dialect, identifier) { }
 
-            MetadataReferenceRetriever(EndpointAddress address, Uri via, MetadataExchangeClient resolver, string dialect, string identifier)
+            MetadataReferenceRetriever(
+                EndpointAddress address,
+                Uri via,
+                MetadataExchangeClient resolver,
+                string dialect,
+                string identifier
+            )
                 : base(resolver, dialect, identifier)
             {
                 if (address == null)
@@ -985,7 +1283,11 @@ namespace System.ServiceModel.Description
                 get { return this.address.Uri.ToString(); }
             }
 
-            internal override IAsyncResult BeginRetrieve(TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+            internal override IAsyncResult BeginRetrieve(
+                TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
                 try
                 {
@@ -996,29 +1298,52 @@ namespace System.ServiceModel.Description
                         ChannelFactory<IMetadataExchange> channelFactory;
                         try
                         {
-                            channelFactory = this.resolver.GetChannelFactory(this.address, this.dialect, this.identifier);
+                            channelFactory = this.resolver.GetChannelFactory(
+                                this.address,
+                                this.dialect,
+                                this.identifier
+                            );
                         }
 #pragma warning suppress 56500 // covered by FxCOP
                         catch (Exception e)
                         {
                             if (Fx.IsFatal(e))
                                 throw;
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                SR.GetString(SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory, this.address, this.dialect, this.identifier), e));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory,
+                                        this.address,
+                                        this.dialect,
+                                        this.identifier
+                                    ),
+                                    e
+                                )
+                            );
                         }
                         metadataClient = CreateChannel(channelFactory);
                         messageVersion = channelFactory.Endpoint.Binding.MessageVersion;
                     }
                     TraceSendRequest(this.address);
-                    return new AsyncMetadataReferenceRetriever(metadataClient, messageVersion, timeoutHelper, callback, state);
+                    return new AsyncMetadataReferenceRetriever(
+                        metadataClient,
+                        messageVersion,
+                        timeoutHelper,
+                        callback,
+                        state
+                    );
                 }
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
@@ -1049,15 +1374,28 @@ namespace System.ServiceModel.Description
                     ChannelFactory<IMetadataExchange> channelFactory;
                     try
                     {
-                        channelFactory = this.resolver.GetChannelFactory(this.address, this.dialect, this.identifier);
+                        channelFactory = this.resolver.GetChannelFactory(
+                            this.address,
+                            this.dialect,
+                            this.identifier
+                        );
                     }
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
                         if (Fx.IsFatal(e))
                             throw;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR.GetString(SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory, this.address, this.dialect, this.identifier), e));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxMetadataExchangeClientCouldNotCreateChannelFactory,
+                                    this.address,
+                                    this.dialect,
+                                    this.identifier
+                                ),
+                                e
+                            )
+                        );
                     }
 
                     metadataClient = CreateChannel(channelFactory);
@@ -1071,7 +1409,8 @@ namespace System.ServiceModel.Description
                 {
                     using (Message getMessage = CreateGetMessage(messageVersion))
                     {
-                        ((IClientChannel)metadataClient).OperationTimeout = timeoutHelper.RemainingTime();
+                        ((IClientChannel)metadataClient).OperationTimeout =
+                            timeoutHelper.RemainingTime();
                         response = metadataClient.Get(getMessage);
                     }
 
@@ -1089,7 +1428,9 @@ namespace System.ServiceModel.Description
                     XmlWriter xmlWriter = XmlWriter.Create(stringWriter);
                     fault.WriteTo(xmlWriter, response.Version.Envelope);
                     xmlWriter.Flush();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(stringWriter.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(stringWriter.ToString())
+                    );
                 }
 
                 return response.GetReaderAtBodyContents();
@@ -1106,14 +1447,19 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl), e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxBadMetadataReference, this.SourceUrl),
+                            e
+                        )
+                    );
                 }
             }
 
             public override bool Equals(object obj)
             {
-                return obj is MetadataReferenceRetriever && ((MetadataReferenceRetriever)obj).address == this.address;
+                return obj is MetadataReferenceRetriever
+                    && ((MetadataReferenceRetriever)obj).address == this.address;
             }
 
             public override int GetHashCode()
@@ -1125,13 +1471,24 @@ namespace System.ServiceModel.Description
             {
                 MetadataSection section;
                 Message message;
-                internal AsyncMetadataReferenceRetriever(IMetadataExchange metadataClient, MessageVersion messageVersion, TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+
+                internal AsyncMetadataReferenceRetriever(
+                    IMetadataExchange metadataClient,
+                    MessageVersion messageVersion,
+                    TimeoutHelper timeoutHelper,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
-
                     message = MetadataReferenceRetriever.CreateGetMessage(messageVersion);
-                    ((IClientChannel)metadataClient).OperationTimeout = timeoutHelper.RemainingTime();
-                    IAsyncResult result = metadataClient.BeginGet(message, Fx.ThunkCallback(new AsyncCallback(this.RequestCallback)), metadataClient);
+                    ((IClientChannel)metadataClient).OperationTimeout =
+                        timeoutHelper.RemainingTime();
+                    IAsyncResult result = metadataClient.BeginGet(
+                        message,
+                        Fx.ThunkCallback(new AsyncCallback(this.RequestCallback)),
+                        metadataClient
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -1143,7 +1500,8 @@ namespace System.ServiceModel.Description
 
                 internal static MetadataSection End(IAsyncResult result)
                 {
-                    AsyncMetadataReferenceRetriever retrieverResult = AsyncResult.End<AsyncMetadataReferenceRetriever>(result);
+                    AsyncMetadataReferenceRetriever retrieverResult =
+                        AsyncResult.End<AsyncMetadataReferenceRetriever>(result);
                     return retrieverResult.section;
                 }
 
@@ -1176,37 +1534,51 @@ namespace System.ServiceModel.Description
                     {
                         if (response.IsFault)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxBadMetadataReference,
-                                ((IClientChannel)metadataClient).RemoteAddress.Uri.ToString())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.SFxBadMetadataReference,
+                                        (
+                                            (IClientChannel)metadataClient
+                                        ).RemoteAddress.Uri.ToString()
+                                    )
+                                )
+                            );
                         }
                         else
                         {
                             using (XmlReader reader = response.GetReaderAtBodyContents())
                             {
-                                section = MetadataRetriever.CreateMetadataSection(reader, ((IClientChannel)metadataClient).RemoteAddress.Uri.ToString());
+                                section = MetadataRetriever.CreateMetadataSection(
+                                    reader,
+                                    ((IClientChannel)metadataClient).RemoteAddress.Uri.ToString()
+                                );
                             }
                         }
                     }
                 }
             }
-
-
         }
 
         class AsyncMetadataResolver : AsyncResult
         {
             ResolveCallState resolveCallState;
 
-            internal AsyncMetadataResolver(ResolveCallState resolveCallState, AsyncCallback callerCallback, object callerAsyncState)
+            internal AsyncMetadataResolver(
+                ResolveCallState resolveCallState,
+                AsyncCallback callerCallback,
+                object callerAsyncState
+            )
                 : base(callerCallback, callerAsyncState)
             {
                 if (resolveCallState == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("resolveCallState");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "resolveCallState"
+                    );
                 }
 
                 this.resolveCallState = resolveCallState;
-
 
                 Exception exception = null;
                 bool doneResolving = false;
@@ -1244,12 +1616,20 @@ namespace System.ServiceModel.Description
                     {
                         if (resolveCallState.ResolvedMaxResolvedReferences)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxResolvedMaxResolvedReferences)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.SFxResolvedMaxResolvedReferences)
+                                )
+                            );
                         }
                         else
                         {
                             resolveCallState.LogUse(retriever);
-                            IAsyncResult result = retriever.BeginRetrieve(this.resolveCallState.TimeoutHelper, Fx.ThunkCallback(new AsyncCallback(this.RetrieveCallback)), retriever);
+                            IAsyncResult result = retriever.BeginRetrieve(
+                                this.resolveCallState.TimeoutHelper,
+                                Fx.ThunkCallback(new AsyncCallback(this.RetrieveCallback)),
+                                retriever
+                            );
 
                             if (result.CompletedSynchronously)
                             {
@@ -1268,7 +1648,9 @@ namespace System.ServiceModel.Description
 
             internal static MetadataSet End(IAsyncResult result)
             {
-                AsyncMetadataResolver resolverResult = AsyncResult.End<AsyncMetadataResolver>(result);
+                AsyncMetadataResolver resolverResult = AsyncResult.End<AsyncMetadataResolver>(
+                    result
+                );
                 return resolverResult.resolveCallState.MetadataSet;
             }
 
@@ -1307,7 +1689,6 @@ namespace System.ServiceModel.Description
             }
         }
 
-
         internal class EncodingHelper
         {
             internal const string ApplicationBase = "application";
@@ -1340,8 +1721,11 @@ namespace System.ServiceModel.Description
 
             internal static bool IsApplication(ContentType contentType)
             {
-                return string.Compare(contentType == null ? string.Empty : contentType.MediaType,
-                    ApplicationBase, StringComparison.OrdinalIgnoreCase) == 0;
+                return string.Compare(
+                        contentType == null ? string.Empty : contentType.MediaType,
+                        ApplicationBase,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
             }
 
             internal static Encoding GetDictionaryReaderEncoding(string contentTypeStr)
@@ -1375,24 +1759,25 @@ namespace System.ServiceModel.Description
 
     static class MetadataExchangeClientModeHelper
     {
-        static public bool IsDefined(MetadataExchangeClientMode x)
+        public static bool IsDefined(MetadataExchangeClientMode x)
         {
-            return
-                x == MetadataExchangeClientMode.MetadataExchange ||
-                x == MetadataExchangeClientMode.HttpGet ||
-                false;
+            return x == MetadataExchangeClientMode.MetadataExchange
+                || x == MetadataExchangeClientMode.HttpGet
+                || false;
         }
 
         public static void Validate(MetadataExchangeClientMode value)
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(MetadataExchangeClientMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(MetadataExchangeClientMode)
+                    )
+                );
             }
         }
     }
-
-
 }
-

@@ -31,7 +31,7 @@ internal static partial class Interop
             DELETEERROR = (18),
             VALNOTFOUND = (19),
             NODRIVERCB = (20),
-            LASTERROR = (20)
+            LASTERROR = (20),
         }
     }
 }
