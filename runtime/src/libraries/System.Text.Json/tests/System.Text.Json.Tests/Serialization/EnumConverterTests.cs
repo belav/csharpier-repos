@@ -160,7 +160,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Quoted numbers should throw
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DayOfWeek>("1", options));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DayOfWeek>("-1", options)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DayOfWeek>("-1", options)
             );
             Assert.Throws<JsonException>(() =>
                 JsonSerializer.Deserialize<DayOfWeek>(@"""1""", options)

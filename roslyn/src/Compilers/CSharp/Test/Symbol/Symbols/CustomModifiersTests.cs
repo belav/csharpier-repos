@@ -97,7 +97,8 @@ class Module1
 
             var i = (INamedTypeSymbol)type.TypeArguments.First();
             Assert.Equal("System.Int32", i.ToTestDisplayString());
-            Assert.Throws<System.IndexOutOfRangeException>(() => i.GetTypeArgumentCustomModifiers(0)
+            Assert.Throws<System.IndexOutOfRangeException>(() =>
+                i.GetTypeArgumentCustomModifiers(0)
             );
 
             nullable = nullable.Construct(i);

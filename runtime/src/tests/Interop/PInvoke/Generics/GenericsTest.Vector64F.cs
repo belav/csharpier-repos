@@ -60,7 +60,8 @@ unsafe partial class GenericsTest
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector64FRef(1.0f, 2.0f));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64F(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector64F(default, default)
         );
 
         Vector64<float>[] values = new Vector64<float>[]

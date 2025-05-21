@@ -446,7 +446,8 @@ namespace System.Collections.Specialized.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 ((IList)collection)[data.Length] = ElementNotPresent
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => ((IList)collection)[data.Length] = null
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                ((IList)collection)[data.Length] = null
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => ((IList)collection)[-1]);

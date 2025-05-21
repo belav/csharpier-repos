@@ -241,7 +241,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = CreateWorkspace();
             var solution = workspace.CurrentSolution;
-            Assert.Throws<ArgumentNullException>(() => solution.RemoveAnalyzerConfigDocument(null!)
+            Assert.Throws<ArgumentNullException>(() =>
+                solution.RemoveAnalyzerConfigDocument(null!)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.RemoveAnalyzerConfigDocument(s_unrelatedDocumentId)
@@ -319,7 +320,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution.WithDocumentFolders(documentId, folders: new string[] { null! })
             );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentFolders(null!, folders)
+            Assert.Throws<ArgumentNullException>(() =>
+                solution.WithDocumentFolders(null!, folders)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithDocumentFolders(s_unrelatedDocumentId, folders)
@@ -438,7 +440,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 solution.WithDocumentSyntaxRoot(documentId, root, (PreservationMode)(-1))
             );
 
-            Assert.Throws<ArgumentNullException>(() => solution.WithDocumentSyntaxRoot(null!, root)
+            Assert.Throws<ArgumentNullException>(() =>
+                solution.WithDocumentSyntaxRoot(null!, root)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 solution.WithDocumentSyntaxRoot(s_unrelatedDocumentId, root)

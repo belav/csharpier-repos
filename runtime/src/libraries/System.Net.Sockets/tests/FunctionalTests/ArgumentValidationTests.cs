@@ -257,7 +257,8 @@ namespace System.Net.Sockets.Tests
         public void Connect_Host_InvalidPort_Throws_ArgumentOutOfRange()
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => GetSocket().Connect("localhost", -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GetSocket().Connect("localhost", 65536)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetSocket().Connect("localhost", 65536)
             );
         }
 
@@ -552,12 +553,15 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<ArgumentNullException>(() => Socket.Select(null, null, null, -1));
             Assert.Throws<ArgumentNullException>(() => Socket.Select(emptyList, null, null, -1));
             Assert.Throws<ArgumentNullException>(() => Socket.Select(null, emptyList, null, -1));
-            Assert.Throws<ArgumentNullException>(() => Socket.Select(emptyList, emptyList, null, -1)
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, emptyList, null, -1)
             );
             Assert.Throws<ArgumentNullException>(() => Socket.Select(null, null, emptyList, -1));
-            Assert.Throws<ArgumentNullException>(() => Socket.Select(emptyList, null, emptyList, -1)
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(emptyList, null, emptyList, -1)
             );
-            Assert.Throws<ArgumentNullException>(() => Socket.Select(null, emptyList, emptyList, -1)
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, emptyList, emptyList, -1)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 Socket.Select(emptyList, emptyList, emptyList, -1)
@@ -570,7 +574,8 @@ namespace System.Net.Sockets.Tests
             TimeSpan nonInfinity = TimeSpan.FromMilliseconds(1);
             var emptyList = new List<Socket>();
 
-            Assert.Throws<ArgumentNullException>(() => Socket.Select(null, null, null, nonInfinity)
+            Assert.Throws<ArgumentNullException>(() =>
+                Socket.Select(null, null, null, nonInfinity)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 Socket.Select(emptyList, null, null, nonInfinity)

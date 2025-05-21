@@ -96,7 +96,8 @@ namespace System.Diagnostics.TraceSourceTests
         public void AddRangeCollectionTest()
         {
             var list = Create();
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((TraceListenerCollection)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((TraceListenerCollection)null)
             );
             var items = Create();
             var item0 = CreateListener();

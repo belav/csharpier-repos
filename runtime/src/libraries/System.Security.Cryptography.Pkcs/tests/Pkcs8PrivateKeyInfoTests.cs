@@ -459,7 +459,8 @@ D9fVWpuVzYpEDfZm"
             Assert.ThrowsAny<CryptographicException>(() =>
                 info.Encrypt((ReadOnlySpan<char>)"hi", pbeParameters)
             );
-            Assert.ThrowsAny<CryptographicException>(() => info.Encrypt(new byte[3], pbeParameters)
+            Assert.ThrowsAny<CryptographicException>(() =>
+                info.Encrypt(new byte[3], pbeParameters)
             );
 
             Assert.ThrowsAny<CryptographicException>(() =>

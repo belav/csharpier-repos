@@ -969,7 +969,8 @@ struct C
 
             IFlowAnonymousFunctionOperation lambdaD1 = getLambda(graphM);
 
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraph(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(null)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol)
@@ -1053,7 +1054,8 @@ struct C
             IFlowAnonymousFunctionOperation lambdaD2 = getLambda(graphM, index: 1);
             Assert.NotNull(lambdaD2);
 
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraph(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(null)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 graphM.GetLocalFunctionControlFlowGraph(lambdaD1.Symbol)

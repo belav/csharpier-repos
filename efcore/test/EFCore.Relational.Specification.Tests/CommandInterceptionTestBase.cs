@@ -1316,7 +1316,8 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
         using (context)
         {
             var exception = async
-                ? await Assert.ThrowsAsync<Exception>(() => context.Set<Singularity>().ToListAsync()
+                ? await Assert.ThrowsAsync<Exception>(() =>
+                    context.Set<Singularity>().ToListAsync()
                 )
                 : Assert.Throws<Exception>(() => context.Set<Singularity>().ToList());
 

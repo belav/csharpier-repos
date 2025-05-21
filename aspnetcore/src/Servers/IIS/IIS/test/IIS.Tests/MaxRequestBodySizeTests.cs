@@ -368,10 +368,12 @@ public class MaxRequestBodySizeTests : LoggedTest
                 {
                     var buffer = new byte[1];
                     requestRejectedEx1 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
-                        async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1)
+                        async () =>
+                            await ctx.Request.Body.ReadAsync(buffer, 0, 1)
                     );
                     requestRejectedEx2 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
-                        async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1)
+                        async () =>
+                            await ctx.Request.Body.ReadAsync(buffer, 0, 1)
                     );
                     throw requestRejectedEx2;
                 },

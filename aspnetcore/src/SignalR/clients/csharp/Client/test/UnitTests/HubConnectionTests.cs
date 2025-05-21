@@ -946,7 +946,8 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         {
             HttpConnectionOptions originalOptions = null,
                 resolvedOptions = null;
-            var accessTokenFactory = new Func<Task<string>>(() => Task.FromResult("fakeAccessToken")
+            var accessTokenFactory = new Func<Task<string>>(() =>
+                Task.FromResult("fakeAccessToken")
             );
             var fakeHeader = "fakeHeader";
 

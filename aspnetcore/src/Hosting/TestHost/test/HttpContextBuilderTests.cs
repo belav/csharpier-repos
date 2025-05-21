@@ -296,7 +296,8 @@ public class HttpContextBuilderTests
         Assert.Equal("TestValue", context.Response.Headers["TestHeader"]);
         Assert.Equal(11, context.Response.Body.Read(new byte[100], 0, 100));
         block.SetResult();
-        var ex = Assert.Throws<IOException>(() => context.Response.Body.Read(new byte[100], 0, 100)
+        var ex = Assert.Throws<IOException>(() =>
+            context.Response.Body.Read(new byte[100], 0, 100)
         );
         Assert.IsAssignableFrom<InvalidOperationException>(ex.InnerException);
     }

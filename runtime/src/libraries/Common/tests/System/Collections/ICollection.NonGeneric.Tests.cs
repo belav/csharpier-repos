@@ -276,7 +276,8 @@ namespace System.Collections.Tests
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(array, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(array, int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                collection.CopyTo(array, int.MinValue)
             );
         }
 

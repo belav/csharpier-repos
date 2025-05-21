@@ -51,7 +51,8 @@ namespace System.Security.Cryptography.Rsa.Tests
                 subjectPublicKeyInfo = rsa.ExportSubjectPublicKeyInfo();
             }
 
-            Assert.Throws<ObjectDisposedException>(() => rsa.ImportRSAPublicKey(pkcs1Public, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                rsa.ImportRSAPublicKey(pkcs1Public, out _)
             );
             Assert.Throws<ObjectDisposedException>(() =>
                 rsa.ImportRSAPrivateKey(pkcs1Private, out _)

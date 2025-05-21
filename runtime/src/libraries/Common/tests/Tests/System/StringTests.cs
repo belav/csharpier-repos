@@ -2154,7 +2154,8 @@ namespace System.Tests
             Assert.Throws<ArgumentException>(() =>
                 string.Compare(value, value, StringComparison.OrdinalIgnoreCase + 1)
             );
-            Assert.Throws<ArgumentException>(() => string.Compare(value, value, (StringComparison)6)
+            Assert.Throws<ArgumentException>(() =>
+                string.Compare(value, value, (StringComparison)6)
             );
 
             Assert.Throws<ArgumentException>(() =>
@@ -4632,7 +4633,8 @@ namespace System.Tests
                         Assert.Throws<FormatException>(() => string.Format(format, args[0]));
                         break;
                     case 2:
-                        Assert.Throws<FormatException>(() => string.Format(format, args[0], args[1])
+                        Assert.Throws<FormatException>(() =>
+                            string.Format(format, args[0], args[1])
                         );
                         break;
                     case 3:

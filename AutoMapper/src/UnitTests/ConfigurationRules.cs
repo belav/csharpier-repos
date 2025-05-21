@@ -59,7 +59,8 @@ public class ConfigurationRules : NonValidatingSpecBase
             cfg.AddProfile<Profile1>();
         });
 
-        new Action(() => config.AssertConfigurationIsValid()
+        new Action(() =>
+            config.AssertConfigurationIsValid()
         ).ShouldThrowException<DuplicateTypeMapConfigurationException>(c =>
         {
             c.Errors.SelectMany(t => t.ProfileNames).ShouldNotContain(string.Empty);

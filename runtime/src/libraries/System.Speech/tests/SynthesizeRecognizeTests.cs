@@ -193,7 +193,8 @@ namespace SampleSynthesisTests
                 rec.MaxAlternates = 1;
 
                 Assert.Throws<KeyNotFoundException>(() => rec.QueryRecognizerSetting("foo"));
-                Assert.Throws<KeyNotFoundException>(() => rec.UpdateRecognizerSetting("foo", "bar")
+                Assert.Throws<KeyNotFoundException>(() =>
+                    rec.UpdateRecognizerSetting("foo", "bar")
                 );
                 Assert.Throws<KeyNotFoundException>(() => rec.UpdateRecognizerSetting("foo", 1));
             }

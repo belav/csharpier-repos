@@ -408,13 +408,15 @@ public class JsonTypesCosmosTest : JsonTypesTestBase
     public override void Can_read_write_point_with_Z_as_GeoJson()
         // No built-in JSON support for spatial types in the Cosmos provider
         =>
-        Assert.Throws<InvalidOperationException>(() => base.Can_read_write_point_with_Z_as_GeoJson()
+        Assert.Throws<InvalidOperationException>(() =>
+            base.Can_read_write_point_with_Z_as_GeoJson()
         );
 
     public override void Can_read_write_point_with_M_as_GeoJson()
         // No built-in JSON support for spatial types in the Cosmos provider
         =>
-        Assert.Throws<InvalidOperationException>(() => base.Can_read_write_point_with_M_as_GeoJson()
+        Assert.Throws<InvalidOperationException>(() =>
+            base.Can_read_write_point_with_M_as_GeoJson()
         );
 
     public override void Can_read_write_point_with_Z_and_M_as_GeoJson()
@@ -427,7 +429,8 @@ public class JsonTypesCosmosTest : JsonTypesTestBase
     public override void Can_read_write_line_string_as_GeoJson()
         // No built-in JSON support for spatial types in the Cosmos provider
         =>
-        Assert.Throws<InvalidOperationException>(() => base.Can_read_write_line_string_as_GeoJson()
+        Assert.Throws<InvalidOperationException>(() =>
+            base.Can_read_write_line_string_as_GeoJson()
         );
 
     public override void Can_read_write_multi_line_string_as_GeoJson()
@@ -477,7 +480,8 @@ public class JsonTypesCosmosTest : JsonTypesTestBase
     public override void Can_read_write_nullable_line_string_as_GeoJson()
         // No built-in JSON support for spatial types in the Cosmos provider
         =>
-        Assert.Throws<InvalidOperationException>(() => base.Can_read_write_line_string_as_GeoJson()
+        Assert.Throws<InvalidOperationException>(() =>
+            base.Can_read_write_line_string_as_GeoJson()
         );
 
     public override void Can_read_write_nullable_multi_line_string_as_GeoJson()

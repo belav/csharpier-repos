@@ -1962,9 +1962,11 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> y = CreateAndFillTensor(tensorLength - 1);
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
-            Assert.Throws<ArgumentException>(() => TensorPrimitives.MaxMagnitude(x, y, destination)
+            Assert.Throws<ArgumentException>(() =>
+                TensorPrimitives.MaxMagnitude(x, y, destination)
             );
-            Assert.Throws<ArgumentException>(() => TensorPrimitives.MaxMagnitude(y, x, destination)
+            Assert.Throws<ArgumentException>(() =>
+                TensorPrimitives.MaxMagnitude(y, x, destination)
             );
         }
 
@@ -2371,9 +2373,11 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> y = CreateAndFillTensor(tensorLength - 1);
             using BoundedMemory<float> destination = CreateTensor(tensorLength);
 
-            Assert.Throws<ArgumentException>(() => TensorPrimitives.MinMagnitude(x, y, destination)
+            Assert.Throws<ArgumentException>(() =>
+                TensorPrimitives.MinMagnitude(x, y, destination)
             );
-            Assert.Throws<ArgumentException>(() => TensorPrimitives.MinMagnitude(y, x, destination)
+            Assert.Throws<ArgumentException>(() =>
+                TensorPrimitives.MinMagnitude(y, x, destination)
             );
         }
 

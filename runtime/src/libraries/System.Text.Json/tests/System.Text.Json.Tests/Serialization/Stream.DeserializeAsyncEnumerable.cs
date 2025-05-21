@@ -243,7 +243,8 @@ namespace System.Text.Json.Serialization.Tests
                 IAsyncEnumerable<int> asyncEnumerable =
                     JsonSerializer.DeserializeAsyncEnumerable<int>(utf8Json);
                 await using IAsyncEnumerator<int> enumerator = asyncEnumerable.GetAsyncEnumerator();
-                await Assert.ThrowsAsync<JsonException>(async () => await enumerator.MoveNextAsync()
+                await Assert.ThrowsAsync<JsonException>(async () =>
+                    await enumerator.MoveNextAsync()
                 );
             }
 
@@ -253,7 +254,8 @@ namespace System.Text.Json.Serialization.Tests
                     ResolveJsonTypeInfo<int>()
                 );
                 await using IAsyncEnumerator<int> enumerator = asyncEnumerable.GetAsyncEnumerator();
-                await Assert.ThrowsAsync<JsonException>(async () => await enumerator.MoveNextAsync()
+                await Assert.ThrowsAsync<JsonException>(async () =>
+                    await enumerator.MoveNextAsync()
                 );
             }
         }

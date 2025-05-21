@@ -526,7 +526,8 @@ FROM "Orders" AS "o"
         );
 
     public override Task Max_on_empty_sequence_throws(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(() => base.Max_on_empty_sequence_throws(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Max_on_empty_sequence_throws(async)
         );
 
     [ConditionalFact]

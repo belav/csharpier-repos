@@ -172,7 +172,8 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(-1077.441066m, SqlDecimal.Divide(_test1, _test4));
             Assert.Equal(1.54687501546m, SqlDecimal.Divide(_test2, _test1).Value, 9);
 
-            Assert.Throws<DivideByZeroException>(() => SqlDecimal.Divide(_test1, new SqlDecimal(0))
+            Assert.Throws<DivideByZeroException>(() =>
+                SqlDecimal.Divide(_test1, new SqlDecimal(0))
             );
 
             Assert.Equal(6464m, SqlDecimal.Floor(_test1));
@@ -185,7 +186,8 @@ namespace System.Data.Tests.SqlTypes
             Test = SqlDecimal.Multiply(_test5, test1);
             Assert.Equal("158456325028528675187087900670", Test.ToString());
 
-            Assert.Throws<OverflowException>(() => SqlDecimal.Multiply(SqlDecimal.MaxValue, _test1)
+            Assert.Throws<OverflowException>(() =>
+                SqlDecimal.Multiply(SqlDecimal.MaxValue, _test1)
             );
 
             // Power

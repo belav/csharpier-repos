@@ -945,7 +945,8 @@ namespace System.Net.Http.Tests
             Assert.Equal(0, headers.NonValidated.Count);
 
             headers.Clear();
-            Assert.Throws<FormatException>(() => headers.Add("foo", new[] { "valid", headerValue })
+            Assert.Throws<FormatException>(() =>
+                headers.Add("foo", new[] { "valid", headerValue })
             );
             Assert.Equal(1, headers.Count());
             Assert.Equal(1, headers.First().Value.Count());

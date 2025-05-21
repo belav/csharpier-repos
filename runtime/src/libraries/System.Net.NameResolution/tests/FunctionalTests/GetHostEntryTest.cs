@@ -282,7 +282,8 @@ namespace System.Net.NameResolution.Tests
             string hostNameOrAddress
         )
         {
-            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => Dns.GetHostEntry(hostNameOrAddress)
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() =>
+                Dns.GetHostEntry(hostNameOrAddress)
             );
             await Assert.ThrowsAnyAsync<ArgumentOutOfRangeException>(() =>
                 Dns.GetHostEntryAsync(hostNameOrAddress)

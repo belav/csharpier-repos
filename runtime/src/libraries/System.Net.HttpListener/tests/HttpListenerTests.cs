@@ -100,7 +100,8 @@ namespace System.Net.Tests
             using (var listener = new HttpListener())
             {
                 Assert.Throws<InvalidOperationException>(() => listener.GetContext());
-                Assert.Throws<InvalidOperationException>(() => listener.BeginGetContext(null, null)
+                Assert.Throws<InvalidOperationException>(() =>
+                    listener.BeginGetContext(null, null)
                 );
             }
         }

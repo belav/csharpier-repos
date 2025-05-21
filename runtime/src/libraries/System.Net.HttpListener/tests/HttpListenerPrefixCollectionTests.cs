@@ -329,12 +329,14 @@ namespace System.Net.Tests
 
                 // Conflicts with existing registration: listener2 has registered to listen to http://127.0.0.1:{freePort1}/...
                 Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add(prefix1));
-                Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add($"{prefix1}hola/")
+                Assert.Throws<HttpListenerException>(() =>
+                    listener1.Prefixes.Add($"{prefix1}hola/")
                 );
 
                 // Conflicts with existing registration: listener1 has registered to listen to http://127.0.0.1:{freePort2}/...
                 Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add(prefix2));
-                Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add($"{prefix2}hola/")
+                Assert.Throws<HttpListenerException>(() =>
+                    listener2.Prefixes.Add($"{prefix2}hola/")
                 );
             }
         }
@@ -358,15 +360,19 @@ namespace System.Net.Tests
                 Assert.Equal(2, listener2.Prefixes.Count);
 
                 // Conflict: listenerX is already listening to $"http://127.0.0.1:{freePortX}/hola/".
-                Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add($"{prefix1}hola/")
+                Assert.Throws<HttpListenerException>(() =>
+                    listener1.Prefixes.Add($"{prefix1}hola/")
                 );
-                Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add($"{prefix2}hola/")
+                Assert.Throws<HttpListenerException>(() =>
+                    listener2.Prefixes.Add($"{prefix2}hola/")
                 );
 
                 // Conflict: listenerX is already listening to $"http://127.0.0.1:{freePortY}/hola/".
-                Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add($"{prefix2}hola/")
+                Assert.Throws<HttpListenerException>(() =>
+                    listener1.Prefixes.Add($"{prefix2}hola/")
                 );
-                Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add($"{prefix2}hola/")
+                Assert.Throws<HttpListenerException>(() =>
+                    listener2.Prefixes.Add($"{prefix2}hola/")
                 );
             }
         }

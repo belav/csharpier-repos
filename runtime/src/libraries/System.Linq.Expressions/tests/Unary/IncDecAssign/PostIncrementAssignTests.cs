@@ -161,7 +161,8 @@ namespace System.Linq.Expressions.Tests
         public void InvalidOperandType(Type type)
         {
             ParameterExpression variable = Expression.Variable(type);
-            Assert.Throws<InvalidOperationException>(() => Expression.PostIncrementAssign(variable)
+            Assert.Throws<InvalidOperationException>(() =>
+                Expression.PostIncrementAssign(variable)
             );
         }
 

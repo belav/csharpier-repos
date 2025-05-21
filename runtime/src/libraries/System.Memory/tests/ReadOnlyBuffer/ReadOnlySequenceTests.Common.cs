@@ -632,9 +632,11 @@ namespace System.Memory.Tests
         [Fact]
         public void Ctor_Array_ValidatesArguments()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlySequence<T>(new T[5], 6, 0)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ReadOnlySequence<T>(new T[5], 6, 0)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlySequence<T>(new T[5], 4, 2)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ReadOnlySequence<T>(new T[5], 4, 2)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new ReadOnlySequence<T>(new T[5], -4, 0)
@@ -650,9 +652,11 @@ namespace System.Memory.Tests
         {
             var segment = new BufferSegment<T>(new T[5]);
 
-            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(null, 2, segment, 3)
+            Assert.Throws<ArgumentNullException>(() =>
+                new ReadOnlySequence<T>(null, 2, segment, 3)
             );
-            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(segment, 2, null, 3)
+            Assert.Throws<ArgumentNullException>(() =>
+                new ReadOnlySequence<T>(segment, 2, null, 3)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new ReadOnlySequence<T>(segment, 6, segment, 3)
@@ -677,9 +681,11 @@ namespace System.Memory.Tests
             var segment1 = new BufferSegment<T>(new T[5]);
             BufferSegment<T> segment2 = segment1.Append(new T[5]);
 
-            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(null, 5, segment2, 3)
+            Assert.Throws<ArgumentNullException>(() =>
+                new ReadOnlySequence<T>(null, 5, segment2, 3)
             );
-            Assert.Throws<ArgumentNullException>(() => new ReadOnlySequence<T>(segment1, 2, null, 3)
+            Assert.Throws<ArgumentNullException>(() =>
+                new ReadOnlySequence<T>(segment1, 2, null, 3)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new ReadOnlySequence<T>(segment1, 6, segment2, 3)

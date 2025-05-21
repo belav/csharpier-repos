@@ -80,7 +80,8 @@ namespace System.Text.Json.Tests
             };
 
             Assert.Throws<ArgumentNullException>(() => new Utf8JsonWriter((Stream)null));
-            Assert.Throws<ArgumentNullException>(() => new Utf8JsonWriter((IBufferWriter<byte>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new Utf8JsonWriter((IBufferWriter<byte>)null)
             );
             Assert.Throws<ArgumentNullException>(() => new Utf8JsonWriter((Stream)null, options));
             Assert.Throws<ArgumentNullException>(() =>
@@ -1897,7 +1898,8 @@ namespace System.Text.Json.Tests
                     jsonUtf8.WriteStartArray();
                     jsonUtf8.WriteStringValue(utf8String);
                     jsonUtf8.Flush();
-                    Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteNumberValue(value)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        jsonUtf8.WriteNumberValue(value)
                     );
                 }
 
@@ -2412,7 +2414,8 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteStringValue("key")
+                    Assert.Throws<InvalidOperationException>(() =>
+                        jsonUtf8.WriteStringValue("key")
                     );
                 }
             }
@@ -2846,7 +2849,8 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteNumberValue(12345)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        jsonUtf8.WriteNumberValue(12345)
                     );
                 }
             }
@@ -4571,7 +4575,8 @@ namespace System.Text.Json.Tests
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => jsonUtf8.WriteStartObject("name")
+                    Assert.Throws<InvalidOperationException>(() =>
+                        jsonUtf8.WriteStartObject("name")
                     );
                 }
             }

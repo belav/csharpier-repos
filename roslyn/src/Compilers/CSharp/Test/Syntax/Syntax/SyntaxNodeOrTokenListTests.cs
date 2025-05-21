@@ -177,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Assert.Equal(-1, list.IndexOf(tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, tokenD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { tokenD })
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(-1, new[] { tokenD })
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 list.InsertRange(list.Count + 1, new[] { tokenD })
@@ -241,7 +242,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(1, tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(1, new[] { tokenD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { tokenD })
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(-1, new[] { tokenD })
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Add(default(SyntaxNodeOrToken)));
             Assert.Throws<ArgumentOutOfRangeException>(() =>

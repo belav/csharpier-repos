@@ -334,7 +334,8 @@ public class HttpsRedirectionMiddlewareTests
 
         var request = new HttpRequestMessage(HttpMethod.Get, "");
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            client.SendAsync(request)
         );
         Assert.Equal(
             "Cannot determine the https port from IServerAddressesFeature, multiple values were found. "

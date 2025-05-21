@@ -456,7 +456,8 @@ WHERE (((c["Discriminator"] = "OrderDetail") AND (c["Quantity"] < 5)) AND (ROUND
         AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection(async));
 
     public override Task Sum_over_truncate_works_correctly_in_projection_2(bool async) =>
-        AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection_2(async)
+        AssertTranslationFailed(() =>
+            base.Sum_over_truncate_works_correctly_in_projection_2(async)
         );
 
     public override async Task Select_math_round_int(bool async)

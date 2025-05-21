@@ -21,7 +21,8 @@ namespace System.Diagnostics.Tests
         public static void PerformanceCounterCategory_CreatePerformanceCounterCategory_NullTests()
         {
             Assert.Throws<ArgumentNullException>(() => new PerformanceCounterCategory(null, "."));
-            Assert.Throws<ArgumentException>(() => new PerformanceCounterCategory(string.Empty, ".")
+            Assert.Throws<ArgumentException>(() =>
+                new PerformanceCounterCategory(string.Empty, ".")
             );
             Assert.Throws<ArgumentException>(() =>
                 new PerformanceCounterCategory("category", string.Empty)
@@ -314,7 +315,8 @@ namespace System.Diagnostics.Tests
         [Fact]
         public static void PerformanceCounterCategory_Exists_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(() => PerformanceCounterCategory.Exists(null, ".")
+            Assert.Throws<ArgumentNullException>(() =>
+                PerformanceCounterCategory.Exists(null, ".")
             );
             Assert.Throws<ArgumentException>(() =>
                 PerformanceCounterCategory.Exists(string.Empty, ".")

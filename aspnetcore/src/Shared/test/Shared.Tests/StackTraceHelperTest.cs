@@ -88,7 +88,8 @@ public class StackTraceHelperTest
     public void StackTraceHelper_PrettyPrintsStackTraceForMethodsWithGenericOutParameters()
     {
         // Arrange
-        var exception = Record.Exception(() => MethodWithGenericOutParameter("Test", out int value)
+        var exception = Record.Exception(() =>
+            MethodWithGenericOutParameter("Test", out int value)
         );
 
         // Act

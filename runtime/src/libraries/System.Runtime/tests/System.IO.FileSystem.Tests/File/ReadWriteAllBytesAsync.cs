@@ -107,7 +107,8 @@ namespace System.IO.Tests
                 await Assert.ThrowsAsync<IOException>(async () =>
                     await File.WriteAllBytesAsync(path, bytes)
                 );
-                await Assert.ThrowsAsync<IOException>(async () => await File.ReadAllBytesAsync(path)
+                await Assert.ThrowsAsync<IOException>(async () =>
+                    await File.ReadAllBytesAsync(path)
                 );
             }
         }

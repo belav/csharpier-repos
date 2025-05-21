@@ -267,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore
                     loggerFactory.CreateLogger("MyLogger");
                 }
 
-                Assert.Throws<ObjectDisposedException>(() => loggerFactory.CreateLogger("MyLogger")
+                Assert.Throws<ObjectDisposedException>(() =>
+                    loggerFactory.CreateLogger("MyLogger")
                 );
             }
         }

@@ -147,7 +147,8 @@ namespace System.Net.Quic.Tests
 
                     // Pending ops should fail
                     await Assert.ThrowsAsync<ObjectDisposedException>(async () => await acceptTask);
-                    await Assert.ThrowsAsync<ObjectDisposedException>(async () => await connectTask
+                    await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                        await connectTask
                     );
 
                     // Subsequent attempts should fail

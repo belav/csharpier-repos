@@ -671,7 +671,8 @@ namespace BinderTracingTests
             using (var handlers = new Handlers(HandlerReturn.Exception, alc))
             {
                 AssertExtensions.ThrowsWithInnerException<FileLoadException, BinderTestException>(
-                    () => alc.LoadFromAssemblyName(assemblyName)
+                    () =>
+                        alc.LoadFromAssemblyName(assemblyName)
                 );
 
                 return new BindOperation()
@@ -737,7 +738,8 @@ namespace BinderTracingTests
             )
             {
                 AssertExtensions.ThrowsWithInnerException<FileLoadException, BinderTestException>(
-                    () => AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
+                    () =>
+                        AssemblyLoadContext.Default.LoadFromAssemblyName(assemblyName)
                 );
 
                 return new BindOperation()
@@ -918,7 +920,8 @@ namespace BinderTracingTests
             using (var handlers = new Handlers(HandlerReturn.Exception))
             {
                 AssertExtensions.ThrowsWithInnerException<FileLoadException, BinderTestException>(
-                    () => alc.LoadFromAssemblyName(assemblyName)
+                    () =>
+                        alc.LoadFromAssemblyName(assemblyName)
                 );
 
                 return new BindOperation()

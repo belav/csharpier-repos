@@ -739,7 +739,8 @@ namespace System.Linq.Tests
 
             Assert.Throws<ArgumentOutOfRangeException>("index", () => source.ElementAt(0));
             Assert.Throws<ArgumentOutOfRangeException>("index", () => source.ElementAt(^0));
-            Assert.Throws<IndexOutOfRangeException>(() => ImmutableArray.Create(source).ElementAt(0)
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                ImmutableArray.Create(source).ElementAt(0)
             );
             Assert.Throws<IndexOutOfRangeException>(() =>
                 ImmutableArray.Create(source).ElementAt(^0)
@@ -750,7 +751,8 @@ namespace System.Linq.Tests
                 "index",
                 () => source.ElementAt(new Index(1))
             );
-            Assert.Throws<IndexOutOfRangeException>(() => ImmutableArray.Create(source).ElementAt(1)
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                ImmutableArray.Create(source).ElementAt(1)
             );
             Assert.Throws<IndexOutOfRangeException>(() =>
                 ImmutableArray.Create(source).ElementAt(new Index(1))

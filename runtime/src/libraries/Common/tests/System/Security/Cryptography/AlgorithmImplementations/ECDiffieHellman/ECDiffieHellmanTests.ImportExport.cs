@@ -364,7 +364,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
                     temp = p;
                     temp.Curve = ECCurve.CreateFromOid(new Oid("Invalid", "Invalid"));
-                    Assert.ThrowsAny<PlatformNotSupportedException>(() => ec.ImportParameters(temp)
+                    Assert.ThrowsAny<PlatformNotSupportedException>(() =>
+                        ec.ImportParameters(temp)
                     );
                 }
             }

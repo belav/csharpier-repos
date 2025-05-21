@@ -392,7 +392,8 @@ namespace System.Threading.Tests
         public void OpenExisting_NotSupported_Unix()
         {
             Assert.Throws<PlatformNotSupportedException>(() => Semaphore.OpenExisting(null));
-            Assert.Throws<PlatformNotSupportedException>(() => Semaphore.OpenExisting(string.Empty)
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Semaphore.OpenExisting(string.Empty)
             );
             Assert.Throws<PlatformNotSupportedException>(() => Semaphore.OpenExisting("anything"));
             Semaphore semaphore;
@@ -439,7 +440,8 @@ namespace System.Threading.Tests
             string name = Guid.NewGuid().ToString("N");
             using (Mutex mtx = new Mutex(true, name))
             {
-                Assert.Throws<WaitHandleCannotBeOpenedException>(() => Semaphore.OpenExisting(name)
+                Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+                    Semaphore.OpenExisting(name)
                 );
                 Semaphore ignored;
                 Assert.False(Semaphore.TryOpenExisting(name, out ignored));

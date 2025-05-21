@@ -5337,7 +5337,8 @@ namespace System.Text.RegularExpressions.Tests
             Match match = Regex.Match("foo", "foo");
             AssertExtensions.Throws<ArgumentNullException>("replacement", () => match.Result(null));
 
-            Assert.Throws<NotSupportedException>(() => RegularExpressions.Match.Empty.Result("any")
+            Assert.Throws<NotSupportedException>(() =>
+                RegularExpressions.Match.Empty.Result("any")
             );
         }
 

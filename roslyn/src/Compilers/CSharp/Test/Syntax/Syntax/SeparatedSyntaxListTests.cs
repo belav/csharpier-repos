@@ -270,7 +270,8 @@ c,b",
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 list.ReplaceRange(nodeD, new[] { nodeE })
             );
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((IEnumerable<SyntaxNode>)null)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
@@ -320,7 +321,8 @@ c,b",
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(1, new[] { nodeD }));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((IEnumerable<SyntaxNode>)null)
             );
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
             Assert.Throws<ArgumentNullException>(() =>

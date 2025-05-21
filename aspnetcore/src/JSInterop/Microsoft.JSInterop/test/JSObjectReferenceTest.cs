@@ -66,7 +66,8 @@ public class JSObjectReferenceTest
         _ = jsObject.DisposeAsync();
 
         // Assert
-        Assert.Throws<ObjectDisposedException>(() => jsObject.Invoke<object>("test", "arg1", "arg2")
+        Assert.Throws<ObjectDisposedException>(() =>
+            jsObject.Invoke<object>("test", "arg1", "arg2")
         );
     }
 

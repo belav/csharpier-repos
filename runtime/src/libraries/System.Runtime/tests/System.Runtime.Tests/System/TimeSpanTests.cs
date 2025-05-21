@@ -624,7 +624,8 @@ namespace System.Tests
         public static void Duration_Invalid()
         {
             Assert.Throws<OverflowException>(() => TimeSpan.MinValue.Duration()); // TimeSpan.Ticks == TimeSpan.MinValue.Ticks
-            Assert.Throws<OverflowException>(() => new TimeSpan(TimeSpan.MinValue.Ticks).Duration()
+            Assert.Throws<OverflowException>(() =>
+                new TimeSpan(TimeSpan.MinValue.Ticks).Duration()
             ); // TimeSpan.Ticks == TimeSpan.MinValue.Ticks
         }
 

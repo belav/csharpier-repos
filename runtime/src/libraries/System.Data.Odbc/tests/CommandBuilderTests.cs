@@ -40,7 +40,8 @@ namespace System.Data.Odbc.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 commandBuilder.UnquoteIdentifier("Test", null)
             );
-            Assert.Throws<InvalidOperationException>(() => commandBuilder.UnquoteIdentifier("Test")
+            Assert.Throws<InvalidOperationException>(() =>
+                commandBuilder.UnquoteIdentifier("Test")
             );
         }
 

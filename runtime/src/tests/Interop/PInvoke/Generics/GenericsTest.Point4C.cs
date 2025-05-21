@@ -44,7 +44,8 @@ unsafe partial class GenericsTest
 {
     private static void TestPoint4C()
     {
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint4C('1', '2', '3', '4')
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetPoint4C('1', '2', '3', '4')
         );
 
         Assert.Throws<MarshalDirectiveException>(() =>

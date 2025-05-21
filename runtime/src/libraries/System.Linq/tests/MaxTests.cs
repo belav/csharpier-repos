@@ -1026,7 +1026,8 @@ namespace System.Linq.Tests
         public void Max_DateTime_EmptySource_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Max());
-            Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Max(i => i)
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<DateTime>().Max(i => i)
             );
         }
 

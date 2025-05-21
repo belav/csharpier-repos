@@ -591,7 +591,8 @@ namespace System.Net.Tests
                             request.AutomaticDecompression = DecompressionMethods.Deflate
                         );
                         Assert.Throws<InvalidOperationException>(() => request.ContentLength = 255);
-                        Assert.Throws<InvalidOperationException>(() => request.ContinueTimeout = 255
+                        Assert.Throws<InvalidOperationException>(() =>
+                            request.ContinueTimeout = 255
                         );
                         Assert.Throws<InvalidOperationException>(() => request.Host = "localhost");
                         Assert.Throws<InvalidOperationException>(() =>
@@ -756,7 +757,8 @@ namespace System.Net.Tests
                     request.Timeout = 30; // ms.
 
                     var sw = Stopwatch.StartNew();
-                    WebException exception = Assert.Throws<WebException>(() => request.GetResponse()
+                    WebException exception = Assert.Throws<WebException>(() =>
+                        request.GetResponse()
                     );
                     sw.Stop();
 
@@ -1647,7 +1649,8 @@ namespace System.Net.Tests
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
-            WebException ex = Assert.Throws<WebException>(() => request.BeginGetResponse(null, null)
+            WebException ex = Assert.Throws<WebException>(() =>
+                request.BeginGetResponse(null, null)
             );
             Assert.Equal(WebExceptionStatus.RequestCanceled, ex.Status);
         }
@@ -1899,7 +1902,8 @@ namespace System.Net.Tests
         {
             string serverUrl = string.Format("http://www.{0}.com/", Guid.NewGuid().ToString());
             HttpWebRequest request = WebRequest.CreateHttp(serverUrl);
-            WebException ex = await Assert.ThrowsAsync<WebException>(() => GetResponseAsync(request)
+            WebException ex = await Assert.ThrowsAsync<WebException>(() =>
+                GetResponseAsync(request)
             );
             Assert.Equal(WebExceptionStatus.NameResolutionFailure, ex.Status);
         }

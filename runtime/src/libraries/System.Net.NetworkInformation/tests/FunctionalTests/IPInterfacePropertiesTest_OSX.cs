@@ -73,7 +73,8 @@ namespace System.Net.NetworkInformation.Tests
                             _log.WriteLine("-- " + gateway.Address.ToString());
                         }
 
-                        Assert.Throws<PlatformNotSupportedException>(() => ipProperties.IsDnsEnabled
+                        Assert.Throws<PlatformNotSupportedException>(() =>
+                            ipProperties.IsDnsEnabled
                         );
 
                         Assert.Throws<PlatformNotSupportedException>(() =>
@@ -104,7 +105,8 @@ namespace System.Net.NetworkInformation.Tests
                             Assert.Throws<PlatformNotSupportedException>(() =>
                                 uni.AddressValidLifetime
                             );
-                            Assert.Throws<PlatformNotSupportedException>(() => uni.DhcpLeaseLifetime
+                            Assert.Throws<PlatformNotSupportedException>(() =>
+                                uni.DhcpLeaseLifetime
                             );
                             Assert.Throws<PlatformNotSupportedException>(() =>
                                 uni.DuplicateAddressDetectionState

@@ -29,7 +29,8 @@ public class NorthwindInMemoryContext : NorthwindContext
 
         modelBuilder
             .Entity<OrderQuery>()
-            .ToInMemoryQuery(() => Orders.Select(o => new OrderQuery { CustomerID = o.CustomerID })
+            .ToInMemoryQuery(() =>
+                Orders.Select(o => new OrderQuery { CustomerID = o.CustomerID })
             );
 
         modelBuilder

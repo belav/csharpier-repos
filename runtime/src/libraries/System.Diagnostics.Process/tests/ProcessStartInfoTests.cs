@@ -1201,7 +1201,8 @@ namespace System.Diagnostics.Tests
         public void UseCredentialsForNetworkingOnly_GetSetUnix_ThrowsPlatformNotSupportedException()
         {
             var info = new ProcessStartInfo();
-            Assert.Throws<PlatformNotSupportedException>(() => info.UseCredentialsForNetworkingOnly
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                info.UseCredentialsForNetworkingOnly
             );
             Assert.Throws<PlatformNotSupportedException>(() =>
                 info.UseCredentialsForNetworkingOnly = false

@@ -50,7 +50,8 @@ namespace MonoTests.System.Drawing.Text
         [Test]
         public void AddFontFile_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new PrivateFontCollection().AddFontFile(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new PrivateFontCollection().AddFontFile(null)
             );
         }
 
@@ -70,7 +71,8 @@ namespace MonoTests.System.Drawing.Text
             string file = Path.GetTempFileName();
             Assert.IsTrue(File.Exists(file), "Exists");
             // even if the file exists....
-            Assert.Throws<FileNotFoundException>(() => new PrivateFontCollection().AddFontFile(file)
+            Assert.Throws<FileNotFoundException>(() =>
+                new PrivateFontCollection().AddFontFile(file)
             );
         }
 

@@ -153,7 +153,8 @@ namespace System.Tests
             MethodInfo mi = typeof(TypeTests).GetMethod(
                 nameof(FilterName_Invoke_DelegateFiltersExpectedMembers)
             );
-            Assert.Throws<InvalidFilterCriteriaException>(() => Type.FilterNameIgnoreCase(mi, null)
+            Assert.Throws<InvalidFilterCriteriaException>(() =>
+                Type.FilterNameIgnoreCase(mi, null)
             );
             Assert.Throws<InvalidFilterCriteriaException>(() =>
                 Type.FilterNameIgnoreCase(mi, new object())

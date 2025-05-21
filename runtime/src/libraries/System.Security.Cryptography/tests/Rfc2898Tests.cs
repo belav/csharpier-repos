@@ -319,7 +319,8 @@ namespace System.Security.Cryptography
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(int.MinValue));
-            Assert.Throws<ArgumentOutOfRangeException>(() => deriveBytes.GetBytes(int.MinValue / 2)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                deriveBytes.GetBytes(int.MinValue / 2)
             );
         }
 

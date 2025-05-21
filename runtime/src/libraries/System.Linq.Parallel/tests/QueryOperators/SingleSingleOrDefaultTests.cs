@@ -54,7 +54,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Single_Empty()
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Single()
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Single()
             );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable.Empty<int>().Single(x => true)

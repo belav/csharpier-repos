@@ -57,7 +57,8 @@ namespace Roslyn.Test.Utilities
         /// <param name="uiCulture">The name of the UI culture.</param>
         public UseCultureAttribute(string culture, string uiCulture)
         {
-            _culture = new Lazy<CultureInfo>(() => new CultureInfo(culture, useUserOverride: false)
+            _culture = new Lazy<CultureInfo>(() =>
+                new CultureInfo(culture, useUserOverride: false)
             );
             _uiCulture = new Lazy<CultureInfo>(() =>
                 new CultureInfo(uiCulture, useUserOverride: false)

@@ -319,7 +319,8 @@ namespace System.Security.Cryptography.Tests
             hash.Dispose();
             Assert.Throws<ObjectDisposedException>(() => hash.Hash);
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(Array.Empty<byte>()));
-            Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash(Array.Empty<byte>(), 0, 0)
+            Assert.Throws<ObjectDisposedException>(() =>
+                hash.ComputeHash(Array.Empty<byte>(), 0, 0)
             );
             Assert.Throws<ObjectDisposedException>(() => hash.ComputeHash((Stream)null));
             Assert.Throws<ObjectDisposedException>(() =>

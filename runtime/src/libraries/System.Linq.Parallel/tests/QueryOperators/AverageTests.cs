@@ -288,7 +288,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_InvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Average()
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<int>().Average()
             );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable.Empty<int>().Average(x => x)

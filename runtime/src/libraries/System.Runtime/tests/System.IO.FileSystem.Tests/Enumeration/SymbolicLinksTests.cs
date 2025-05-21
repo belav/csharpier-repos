@@ -103,10 +103,12 @@ namespace System.IO.Tests.Enumeration
                 Assert.Throws<IOException>(() =>
                     testDirectory.EnumerateDirectories("*", options).Count()
                 );
-                Assert.Throws<IOException>(() => testDirectory.GetDirectories("*", options).Count()
+                Assert.Throws<IOException>(() =>
+                    testDirectory.GetDirectories("*", options).Count()
                 );
 
-                Assert.Throws<IOException>(() => testDirectory.EnumerateFiles("*", options).Count()
+                Assert.Throws<IOException>(() =>
+                    testDirectory.EnumerateFiles("*", options).Count()
                 );
                 Assert.Throws<IOException>(() => testDirectory.GetFiles("*", options).Count());
             }

@@ -16,7 +16,8 @@ namespace System.Formats.Tar.Tests
             TarWriter writer = new TarWriter(archiveStream);
             writer.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => writer.WriteEntry("fileName", "entryName")
+            Assert.Throws<ObjectDisposedException>(() =>
+                writer.WriteEntry("fileName", "entryName")
             );
         }
 

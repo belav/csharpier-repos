@@ -136,9 +136,11 @@ namespace System.Data.Tests.Common
             object mapping = new DataTableMapping("source", "dataSet");
             var collection = new DataTableMappingCollection { mapping };
             Assert.Throws<ArgumentNullException>(() => collection.Remove(default(object)));
-            Assert.Throws<ArgumentNullException>(() => collection.Remove(default(DataTableMapping))
+            Assert.Throws<ArgumentNullException>(() =>
+                collection.Remove(default(DataTableMapping))
             );
-            Assert.Throws<ArgumentException>(() => collection.Remove(new DataTableMapping("a", "b"))
+            Assert.Throws<ArgumentException>(() =>
+                collection.Remove(new DataTableMapping("a", "b"))
             );
             collection.Remove(mapping);
             Assert.Empty(collection);

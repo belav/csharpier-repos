@@ -26,14 +26,16 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_EmptySourceArrayWithRange_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[0], 0, 1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ByteArrayContent(new byte[0], 0, 1)
             );
         }
 
         [Fact]
         public void Ctor_StartIndexTooBig_ThrowsArgumentOufOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 5, 1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ByteArrayContent(new byte[5], 5, 1)
             );
         }
 
@@ -48,7 +50,8 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_LengthTooBig_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ByteArrayContent(new byte[5], 1, 5)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ByteArrayContent(new byte[5], 1, 5)
             );
         }
 

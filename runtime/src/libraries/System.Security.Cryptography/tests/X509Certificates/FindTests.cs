@@ -41,7 +41,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             RunTest(
                 (msCer, pfxCer, col1) =>
                 {
-                    Assert.Throws<TException>(() => col1.Find(findType, findValue, validOnly: false)
+                    Assert.Throws<TException>(() =>
+                        col1.Find(findType, findValue, validOnly: false)
                     );
                 }
             );

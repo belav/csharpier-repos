@@ -23,7 +23,8 @@ namespace System.Reflection.PortableExecutable.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new PEHeaderBuilder(sectionAlignment: int.MinValue)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => new PEHeaderBuilder(fileAlignment: 513)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new PEHeaderBuilder(fileAlignment: 513)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new PEHeaderBuilder(fileAlignment: 64 * 1024 * 2)

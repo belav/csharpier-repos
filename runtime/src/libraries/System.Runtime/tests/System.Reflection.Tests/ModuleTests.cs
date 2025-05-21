@@ -88,7 +88,8 @@ namespace System.Reflection.Tests
             Assert.Equal(expectedType, module.GetType(className.ToLower(), false, true));
 
             Assert.Null(module.GetType(className.ToLower(), false, false));
-            Assert.Throws<TypeLoadException>(() => module.GetType(className.ToLower(), true, false)
+            Assert.Throws<TypeLoadException>(() =>
+                module.GetType(className.ToLower(), true, false)
             );
         }
 

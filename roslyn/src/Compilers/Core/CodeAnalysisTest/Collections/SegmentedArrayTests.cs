@@ -76,11 +76,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<NullReferenceException>(() => enumerator1.MoveNext());
 
             Assert.Throws<NotSupportedException>(() => ((IList)data).Add(IntPtr.Zero));
-            Assert.Throws<NotSupportedException>(() => ((ICollection<IntPtr>)data).Add(IntPtr.Zero)
+            Assert.Throws<NotSupportedException>(() =>
+                ((ICollection<IntPtr>)data).Add(IntPtr.Zero)
             );
             Assert.Throws<NotSupportedException>(() => ((ICollection<IntPtr>)data).Clear());
             Assert.Throws<NotSupportedException>(() => ((IList)data).Insert(0, IntPtr.Zero));
-            Assert.Throws<NotSupportedException>(() => ((IList<IntPtr>)data).Insert(0, IntPtr.Zero)
+            Assert.Throws<NotSupportedException>(() =>
+                ((IList<IntPtr>)data).Insert(0, IntPtr.Zero)
             );
             Assert.Throws<NotSupportedException>(() => ((IList)data).Remove(IntPtr.Zero));
             Assert.Throws<NotSupportedException>(() =>

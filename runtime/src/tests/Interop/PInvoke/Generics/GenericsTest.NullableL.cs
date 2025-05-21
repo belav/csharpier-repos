@@ -39,7 +39,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetNullableLOut(true, 1L, out long? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableL(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableL(default, default)
         );
 
         long?[] values = new long?[] { default, default, default, default, default };

@@ -711,7 +711,8 @@ public class TestServerTests
         HttpResponseMessage result = await server.CreateClient().GetAsync("/");
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         server.Dispose();
-        await Assert.ThrowsAsync<ObjectDisposedException>(() => server.CreateClient().GetAsync("/")
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            server.CreateClient().GetAsync("/")
         );
     }
 

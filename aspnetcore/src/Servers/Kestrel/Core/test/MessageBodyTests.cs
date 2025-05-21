@@ -138,7 +138,8 @@ public class MessageBodyTests : LoggedTest
             input.Add("Hello");
             var readResult = await reader.ReadAsync();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync()
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await reader.ReadAsync()
             );
 
             await body.StopAsync();

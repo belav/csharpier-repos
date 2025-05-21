@@ -482,7 +482,8 @@ namespace System.Text.Json.SourceGeneration.Tests
             Assert.Empty(typeInfo.Properties);
 
             var value = new ClassWithCustomConverterProperty();
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(value, typeInfo)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(value, typeInfo)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 JsonSerializer.Deserialize("""{"Property":42}""", typeInfo)

@@ -119,7 +119,8 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketsDiscarded);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.OutputPacketsWithNoRoute);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketFragmentFailures);
-            Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassembliesRequired
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                statistics.PacketReassembliesRequired
             );
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassemblyFailures);
             Assert.Throws<PlatformNotSupportedException>(() => statistics.PacketReassemblyTimeout);

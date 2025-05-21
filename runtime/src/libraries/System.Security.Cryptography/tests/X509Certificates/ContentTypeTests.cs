@@ -39,7 +39,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void TestThrowsWhenGivenInvalidContent()
         {
             byte[] blob = new byte[] { 0x00, 0xFF, 0x00, 0xFF };
-            Assert.ThrowsAny<CryptographicException>(() => X509Certificate2.GetCertContentType(blob)
+            Assert.ThrowsAny<CryptographicException>(() =>
+                X509Certificate2.GetCertContentType(blob)
             );
             Assert.ThrowsAny<CryptographicException>(() =>
                 X509Certificate2.GetCertContentType(blob.AsSpan())

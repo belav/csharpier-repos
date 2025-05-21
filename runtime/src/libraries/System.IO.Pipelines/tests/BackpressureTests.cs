@@ -252,7 +252,8 @@ namespace System.IO.Pipelines.Tests
                 );
             Assert.Equal("Reader failed", invalidOperationException.Message);
             invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await writableBuffer.FlushAsync()
+                async () =>
+                    await writableBuffer.FlushAsync()
             );
             Assert.Equal("Reader failed", invalidOperationException.Message);
         }

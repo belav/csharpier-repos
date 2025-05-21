@@ -4867,7 +4867,8 @@ static class Program
             Assert.Throws<InvalidOperationException>(() =>
                 method1.ReducedFrom.GetTypeInferredDuringReduction(null)
             );
-            Assert.Throws<ArgumentNullException>(() => method1.GetTypeInferredDuringReduction(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                method1.GetTypeInferredDuringReduction(null)
             );
             Assert.Throws<ArgumentException>(() =>
                 method1.GetTypeInferredDuringReduction(

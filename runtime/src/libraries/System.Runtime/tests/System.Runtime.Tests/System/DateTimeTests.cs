@@ -2415,7 +2415,8 @@ namespace System.Tests
                 DateTime.Parse("", new MyFormatter(), DateTimeStyles.NoCurrentDateDefault)
             );
 
-            Assert.Throws<FormatException>(() => DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c")
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c")
             );
             Assert.Throws<FormatException>(() =>
                 DateTime.Parse("2020-5-7T09:37:00.0000000-07:00c", new MyFormatter())
@@ -2428,7 +2429,8 @@ namespace System.Tests
                 )
             );
 
-            Assert.Throws<FormatException>(() => DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#")
+            Assert.Throws<FormatException>(() =>
+                DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#")
             );
             Assert.Throws<FormatException>(() =>
                 DateTime.Parse("2020-5-7T09:37:00.0000000+00:00#", new MyFormatter())
@@ -4858,7 +4860,8 @@ namespace System.Tests
             DateTimeStyles style
         )
         {
-            Assert.Throws<FormatException>(() => DateTime.ParseExact(input, format, culture, style)
+            Assert.Throws<FormatException>(() =>
+                DateTime.ParseExact(input, format, culture, style)
             );
             Assert.Throws<FormatException>(() =>
                 DateTime.ParseExact(input, new[] { format }, culture, style)
@@ -6819,7 +6822,8 @@ namespace System.Tests
                 case DateTimeUnits.Day:
                     if (throws)
                     {
-                        Assert.Throws<ArgumentOutOfRangeException>(() => initialValue.AddDays(value)
+                        Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            initialValue.AddDays(value)
                         );
                         return;
                     }

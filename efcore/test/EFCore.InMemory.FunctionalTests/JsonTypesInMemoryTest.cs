@@ -45,7 +45,8 @@ public class JsonTypesInMemoryTest : JsonTypesTestBase
     public override void Can_read_write_polygon_typed_as_geometry()
         // No built-in JSON support for spatial types in the in-memory provider
         =>
-        Assert.Throws<NullReferenceException>(() => base.Can_read_write_polygon_typed_as_geometry()
+        Assert.Throws<NullReferenceException>(() =>
+            base.Can_read_write_polygon_typed_as_geometry()
         );
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>

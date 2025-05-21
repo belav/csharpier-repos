@@ -338,7 +338,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     list.LastIndexOf(element, -1, count)
                 ); //"Expected ArgumentOutOfRangeException."
                 Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, -1, 1)); //"Expected ArgumentOutOfRangeException."                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count, 0)); //"Expected ArgumentOutOfRangeException."
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.LastIndexOf(element, count, 1)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.LastIndexOf(element, count, 1)
                 ); //"Expected ArgumentOutOfRangeException."
             }
             else // IndexOf with a 0 count List is special cased to return -1.

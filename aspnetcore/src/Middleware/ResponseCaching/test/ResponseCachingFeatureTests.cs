@@ -49,7 +49,8 @@ public class ResponseCachingFeatureTests
     public void VaryByQueryKeys_Set_InValidEmptyValues_Throws(string[] value)
     {
         // Throws
-        Assert.Throws<ArgumentException>(() => new ResponseCachingFeature().VaryByQueryKeys = value
+        Assert.Throws<ArgumentException>(() =>
+            new ResponseCachingFeature().VaryByQueryKeys = value
         );
     }
 }

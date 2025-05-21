@@ -1110,7 +1110,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 ((IReceivableSourceBlock<int>)null).TryReceive(out item)
             );
-            Assert.Throws<ArgumentNullException>(() => ((IReceivableSourceBlock<int>)null).Receive()
+            Assert.Throws<ArgumentNullException>(() =>
+                ((IReceivableSourceBlock<int>)null).Receive()
             );
             Assert.Throws<ArgumentNullException>(() =>
                 ((IReceivableSourceBlock<int>)null).Receive(new CancellationToken(true))

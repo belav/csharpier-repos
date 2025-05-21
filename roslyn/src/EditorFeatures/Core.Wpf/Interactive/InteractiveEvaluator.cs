@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 _lazyInteractiveWindow = value ?? throw new ArgumentNullException(nameof(value));
                 _workspace.Window = value;
 
-                Task.Run(() => _session.Host.SetOutputs(value.OutputWriter, value.ErrorOutputWriter)
+                Task.Run(() =>
+                    _session.Host.SetOutputs(value.OutputWriter, value.ErrorOutputWriter)
                 );
 
                 value.SubmissionBufferAdded += SubmissionBufferAdded;

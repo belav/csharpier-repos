@@ -150,7 +150,8 @@ unsafe partial class GenericsTest
 
     private static void TestVectorU128()
     {
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVectorU128(1u, 2u, 3u, 4u)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVectorU128(1u, 2u, 3u, 4u)
         );
 
         Vector<uint> value2;

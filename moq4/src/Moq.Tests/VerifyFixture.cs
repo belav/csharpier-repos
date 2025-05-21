@@ -534,7 +534,8 @@ namespace Moq.Tests
 
             mock.Object.Submit();
 
-            mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Once())
+            mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Once())
             );
             Assert.True(mex.IsVerificationError);
             Assert.Contains(

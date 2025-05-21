@@ -1380,7 +1380,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             foreach (var (diagnosticId, lazyFixers) in configurationProvidersPerLanguageMap)
             {
                 var lazyConfigurationFixers = new Lazy<ImmutableArray<IConfigurationFixProvider>>(
-                    () => GetConfigurationFixProviders(lazyFixers)
+                    () =>
+                        GetConfigurationFixProviders(lazyFixers)
                 );
                 configurationFixerMap.Add(diagnosticId, lazyConfigurationFixers);
             }

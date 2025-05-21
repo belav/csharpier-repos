@@ -34,7 +34,8 @@ public class RateLimitingOptionsTests
     public void AddPolicy_ThrowsOnNullPolicy()
     {
         var options = new RateLimiterOptions();
-        Assert.Throws<ArgumentNullException>(() => options.AddPolicy<string>("myKey", policy: null)
+        Assert.Throws<ArgumentNullException>(() =>
+            options.AddPolicy<string>("myKey", policy: null)
         );
     }
 

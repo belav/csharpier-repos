@@ -84,7 +84,8 @@ namespace System.Text.Json.Serialization.Tests
             if (TypeHelper<TElement>.NotSupportedForDeserialization.Contains(typeof(TCollection)))
             {
                 NotSupportedException exception = await Assert.ThrowsAsync<NotSupportedException>(
-                    () => Serializer.DeserializeWrapper<TCollection>(json, options)
+                    () =>
+                        Serializer.DeserializeWrapper<TCollection>(json, options)
                 );
                 Assert.Contains(typeof(TCollection).ToString(), exception.ToString());
                 return;

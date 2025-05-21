@@ -467,7 +467,8 @@ namespace System.Threading.Tests
             else
             {
                 Assert.True(toSignal is Semaphore);
-                Assert.Throws<InvalidOperationException>(() => callSignalAndWait(toSignal, toWaitOn)
+                Assert.Throws<InvalidOperationException>(() =>
+                    callSignalAndWait(toSignal, toWaitOn)
                 );
                 Assert.True(toWaitOn.WaitOne(0));
             }

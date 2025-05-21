@@ -758,7 +758,8 @@ namespace System.Data.Tests
         {
             DataColumn col = new DataColumn("col", typeof(int));
             Assert.Equal(DataSetDateTime.UnspecifiedLocal, col.DateTimeMode);
-            Assert.Throws<InvalidOperationException>(() => col.DateTimeMode = DataSetDateTime.Local
+            Assert.Throws<InvalidOperationException>(() =>
+                col.DateTimeMode = DataSetDateTime.Local
             );
 
             col = new DataColumn("col", typeof(DateTime));
@@ -776,7 +777,8 @@ namespace System.Data.Tests
                 col.DateTimeMode = (DataSetDateTime)(-1)
             );
 
-            Assert.Throws<InvalidEnumArgumentException>(() => col.DateTimeMode = (DataSetDateTime)5
+            Assert.Throws<InvalidEnumArgumentException>(() =>
+                col.DateTimeMode = (DataSetDateTime)5
             );
         }
 

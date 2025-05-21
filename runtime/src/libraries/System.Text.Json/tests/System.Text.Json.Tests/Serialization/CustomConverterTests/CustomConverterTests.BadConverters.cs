@@ -72,13 +72,15 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<SuccessException>(() =>
                 JsonSerializer.Deserialize<Customer>("{}", options)
             );
-            Assert.Throws<SuccessException>(() => JsonSerializer.Serialize(new Customer(), options)
+            Assert.Throws<SuccessException>(() =>
+                JsonSerializer.Serialize(new Customer(), options)
             );
             Assert.Throws<SuccessException>(() =>
                 JsonSerializer.Serialize<Customer>(new DerivedCustomer(), options)
             );
 
-            Assert.Throws<SuccessException>(() => JsonSerializer.Deserialize<Person>("{}", options)
+            Assert.Throws<SuccessException>(() =>
+                JsonSerializer.Deserialize<Person>("{}", options)
             );
             Assert.Throws<SuccessException>(() =>
                 JsonSerializer.Serialize<Person>(new Customer(), options)

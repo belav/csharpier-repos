@@ -2195,7 +2195,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Converter throws this exception regardless of input.
             NotImplementedException ex = await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await Serializer.SerializeWrapper(obj)
+                async () =>
+                    await Serializer.SerializeWrapper(obj)
             );
             Assert.Equal("Converter was called", ex.Message);
         }
@@ -2270,7 +2271,8 @@ namespace System.Text.Json.Serialization.Tests
 
             // Converter throws this exception regardless of input.
             NotImplementedException ex = await Assert.ThrowsAsync<NotImplementedException>(
-                async () => await Serializer.SerializeWrapper(4, options)
+                async () =>
+                    await Serializer.SerializeWrapper(4, options)
             );
             Assert.Equal("Converter was called", ex.Message);
 

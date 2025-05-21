@@ -612,7 +612,8 @@ public partial class HubConnectionTests
                     hubConnection.HandshakeTimeout = TimeSpan.FromMilliseconds(1);
 
                     await Assert
-                        .ThrowsAnyAsync<OperationCanceledException>(() => hubConnection.StartAsync()
+                        .ThrowsAnyAsync<OperationCanceledException>(() =>
+                            hubConnection.StartAsync()
                         )
                         .DefaultTimeout();
                     Assert.Equal(HubConnectionState.Disconnected, hubConnection.State);

@@ -396,7 +396,8 @@ namespace System.Reflection.PortableExecutable.Tests
             {
                 Assert.Throws<ArgumentNullException>(() => reader.GetSectionData(null));
                 Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetSectionData(-1));
-                Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetSectionData(int.MinValue)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    reader.GetSectionData(int.MinValue)
                 );
             }
         }

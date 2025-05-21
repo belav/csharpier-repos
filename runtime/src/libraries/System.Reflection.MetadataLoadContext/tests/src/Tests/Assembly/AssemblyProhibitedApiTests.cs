@@ -31,7 +31,8 @@ namespace System.Reflection.Tests
             Assembly coreAssembly = typeof(object).Project().Assembly;
             if (coreAssembly.ReflectionOnly)
             {
-                Assert.Throws<ArgumentException>(() => coreAssembly.CreateInstance("System.Object")
+                Assert.Throws<ArgumentException>(() =>
+                    coreAssembly.CreateInstance("System.Object")
                 ); // Compat quirk: Why ArgumentException instead of InvalidOperationException?
             }
         }

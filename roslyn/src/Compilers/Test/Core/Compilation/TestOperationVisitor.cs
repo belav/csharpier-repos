@@ -95,9 +95,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
                 else
                 {
-                    Assert.Throws<InvalidOperationException>(() => operation.ChildOperations.First()
+                    Assert.Throws<InvalidOperationException>(() =>
+                        operation.ChildOperations.First()
                     );
-                    Assert.Throws<InvalidOperationException>(() => operation.ChildOperations.Last()
+                    Assert.Throws<InvalidOperationException>(() =>
+                        operation.ChildOperations.Last()
                     );
                 }
 

@@ -55,7 +55,8 @@ namespace System.Tests.Types
                 Assert.Throws<InvalidOperationException>(() =>
                     t.GetFunctionPointerCallingConventions()
                 );
-                Assert.Throws<InvalidOperationException>(() => t.GetFunctionPointerParameterTypes()
+                Assert.Throws<InvalidOperationException>(() =>
+                    t.GetFunctionPointerParameterTypes()
                 );
                 Assert.Throws<InvalidOperationException>(() => t.GetFunctionPointerReturnType());
                 Assert.False(t.HasElementType);

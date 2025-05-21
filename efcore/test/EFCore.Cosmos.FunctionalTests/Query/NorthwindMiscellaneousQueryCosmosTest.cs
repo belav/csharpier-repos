@@ -74,7 +74,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task Lifting_when_subquery_nested_order_by_simple(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Lifting_when_subquery_nested_order_by_simple(async)
+        await AssertTranslationFailed(() =>
+            base.Lifting_when_subquery_nested_order_by_simple(async)
         );
 
         AssertSql();
@@ -1619,7 +1620,8 @@ OFFSET 0 LIMIT 1
     public override async Task Where_subquery_expression_same_parametername(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Where_subquery_expression_same_parametername(async)
+        await AssertTranslationFailed(() =>
+            base.Where_subquery_expression_same_parametername(async)
         );
 
         AssertSql(
@@ -2145,7 +2147,8 @@ ORDER BY c["CustomerID"]
     public override async Task Select_bitwise_and_or(bool async)
     {
         // Bitwise operators on booleans. Issue #13168.
-        await Assert.ThrowsAsync<InvalidOperationException>(() => base.Select_bitwise_and_or(async)
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Select_bitwise_and_or(async)
         );
 
         AssertSql(
@@ -2161,7 +2164,8 @@ ORDER BY c["CustomerID"]
     public override async Task Where_bitwise_or_with_logical_or(bool async)
     {
         // Bitwise operators on booleans. Issue #13168.
-        await Assert.ThrowsAsync<EqualException>(() => base.Where_bitwise_or_with_logical_or(async)
+        await Assert.ThrowsAsync<EqualException>(() =>
+            base.Where_bitwise_or_with_logical_or(async)
         );
 
         AssertSql(
@@ -2189,7 +2193,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (((c["CustomerID"] = "ALFKI") & (c[
     public override async Task Where_bitwise_or_with_logical_and(bool async)
     {
         // Bitwise operators on booleans. Issue #13168.
-        await Assert.ThrowsAsync<EqualException>(() => base.Where_bitwise_or_with_logical_and(async)
+        await Assert.ThrowsAsync<EqualException>(() =>
+            base.Where_bitwise_or_with_logical_and(async)
         );
 
         AssertSql(
@@ -2342,7 +2347,8 @@ ORDER BY c["CustomerID"]
     public override async Task Query_expression_with_to_string_and_contains(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Query_expression_with_to_string_and_contains(async)
+        await AssertTranslationFailed(() =>
+            base.Query_expression_with_to_string_and_contains(async)
         );
 
         AssertSql();
@@ -2978,7 +2984,8 @@ WHERE ((c["Discriminator"] = "Customer") AND ((c["CustomerID"] || c["City"]) = "
     public override async Task DTO_complex_orderby(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await Assert.ThrowsAsync<CosmosException>(async () => await base.DTO_complex_orderby(async)
+        await Assert.ThrowsAsync<CosmosException>(async () =>
+            await base.DTO_complex_orderby(async)
         );
 
         AssertSql(
@@ -3287,7 +3294,8 @@ ORDER BY c["CustomerID"]
     public override async Task Comparing_non_matching_entities_using_Equals(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Comparing_non_matching_entities_using_Equals(async)
+        await AssertTranslationFailed(() =>
+            base.Comparing_non_matching_entities_using_Equals(async)
         );
 
         AssertSql();
@@ -4164,7 +4172,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] IN ("ALFKI") OR (c
     public override async Task Select_distinct_Select_with_client_bindings(bool async)
     {
         // No Select after Distinct. Issue #17246.
-        await AssertTranslationFailed(() => base.Select_distinct_Select_with_client_bindings(async)
+        await AssertTranslationFailed(() =>
+            base.Select_distinct_Select_with_client_bindings(async)
         );
 
         AssertSql();
@@ -4215,7 +4224,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] IN ("ALFKI") OR (c
     public override async Task Entity_equality_on_subquery_with_null_check(bool async)
     {
         // Non embedded collection subquery. Issue #17246.
-        await AssertTranslationFailed(() => base.Entity_equality_on_subquery_with_null_check(async)
+        await AssertTranslationFailed(() =>
+            base.Entity_equality_on_subquery_with_null_check(async)
         );
 
         AssertSql();

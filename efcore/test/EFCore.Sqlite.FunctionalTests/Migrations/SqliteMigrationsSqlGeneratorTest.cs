@@ -305,7 +305,8 @@ SELECT AddGeometryColumn('Geometries', 'Geometry', 4326, 'GEOMETRYZM', -1, 0);
     [ConditionalFact]
     public void RestartSequenceOperation_not_supported()
     {
-        var ex = Assert.Throws<NotSupportedException>(() => Generate(new RestartSequenceOperation())
+        var ex = Assert.Throws<NotSupportedException>(() =>
+            Generate(new RestartSequenceOperation())
         );
         Assert.Equal(SqliteStrings.SequencesNotSupported, ex.Message);
     }

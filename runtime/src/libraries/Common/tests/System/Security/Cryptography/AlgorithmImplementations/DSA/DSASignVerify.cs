@@ -278,7 +278,8 @@ namespace System.Security.Cryptography.Dsa.Tests
 
         protected virtual void UseAfterDispose(DSA dsa, byte[] data, byte[] sig)
         {
-            Assert.Throws<ObjectDisposedException>(() => SignData(dsa, data, HashAlgorithmName.SHA1)
+            Assert.Throws<ObjectDisposedException>(() =>
+                SignData(dsa, data, HashAlgorithmName.SHA1)
             );
 
             Assert.Throws<ObjectDisposedException>(() =>

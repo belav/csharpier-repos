@@ -49,13 +49,15 @@ namespace System.Net.NetworkInformation.Tests
                         Assert.Throws<PlatformNotSupportedException>(() =>
                             ipProperties.DhcpServerAddresses
                         );
-                        Assert.Throws<PlatformNotSupportedException>(() => ipProperties.DnsAddresses
+                        Assert.Throws<PlatformNotSupportedException>(() =>
+                            ipProperties.DnsAddresses
                         );
                         Assert.Throws<PlatformNotSupportedException>(() => ipProperties.DnsSuffix);
                         Assert.Throws<PlatformNotSupportedException>(() =>
                             ipProperties.GatewayAddresses
                         );
-                        Assert.Throws<PlatformNotSupportedException>(() => ipProperties.IsDnsEnabled
+                        Assert.Throws<PlatformNotSupportedException>(() =>
+                            ipProperties.IsDnsEnabled
                         );
                         Assert.Throws<PlatformNotSupportedException>(() =>
                             ipProperties.IsDynamicDnsEnabled
@@ -85,7 +87,8 @@ namespace System.Net.NetworkInformation.Tests
                             Assert.Throws<PlatformNotSupportedException>(() =>
                                 uni.AddressValidLifetime
                             );
-                            Assert.Throws<PlatformNotSupportedException>(() => uni.DhcpLeaseLifetime
+                            Assert.Throws<PlatformNotSupportedException>(() =>
+                                uni.DhcpLeaseLifetime
                             );
                             Assert.Throws<PlatformNotSupportedException>(() =>
                                 uni.DuplicateAddressDetectionState

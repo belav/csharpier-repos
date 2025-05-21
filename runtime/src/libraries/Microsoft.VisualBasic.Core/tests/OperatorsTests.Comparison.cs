@@ -1547,9 +1547,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             object right
         )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(left, right, true)
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectLess(left, right, true)
             );
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(right, left, true)
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectLess(right, left, true)
             );
         }
 

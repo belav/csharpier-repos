@@ -302,7 +302,8 @@ namespace System.Web.Http.ModelBinding
             FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>();
 
             // Act/Assert
-            Assert.Throws<ArgumentNullException>(() => formData.ReadAs<int>((HttpActionContext)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                formData.ReadAs<int>((HttpActionContext)null)
             );
         }
 

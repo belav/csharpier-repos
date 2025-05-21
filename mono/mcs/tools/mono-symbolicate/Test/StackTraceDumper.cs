@@ -47,7 +47,8 @@ class StackTraceDumper
 
         Catch(() => InnerClass.ThrowException("Stack trace with inner class"));
 
-        Catch(() => InnerGenericClass<string>.ThrowException("Stack trace with inner generic class")
+        Catch(() =>
+            InnerGenericClass<string>.ThrowException("Stack trace with inner generic class")
         );
 
         Catch(() =>

@@ -712,7 +712,8 @@ WHERE ((c["Discriminator"] = "Product") AND (c["ProductID"] < 40))
     public override async Task Average_over_nested_subquery_is_client_eval(bool async)
     {
         // Aggregates. Issue #16146.
-        await AssertTranslationFailed(() => base.Average_over_nested_subquery_is_client_eval(async)
+        await AssertTranslationFailed(() =>
+            base.Average_over_nested_subquery_is_client_eval(async)
         );
 
         AssertSql();
@@ -1067,7 +1068,8 @@ WHERE (((c["Discriminator"] = "Order") AND (c["OrderID"] > 10)) AND (c["Customer
 
     public override async Task OrderBy_client_Take(bool async)
     {
-        await Assert.ThrowsAsync<CosmosException>(async () => await base.OrderBy_client_Take(async)
+        await Assert.ThrowsAsync<CosmosException>(async () =>
+            await base.OrderBy_client_Take(async)
         );
 
         AssertSql(
@@ -1206,7 +1208,8 @@ OFFSET 0 LIMIT 2
     public override async Task First_inside_subquery_gets_client_evaluated(bool async)
     {
         // Contains over subquery. Issue #17246.
-        await AssertTranslationFailed(() => base.First_inside_subquery_gets_client_evaluated(async)
+        await AssertTranslationFailed(() =>
+            base.First_inside_subquery_gets_client_evaluated(async)
         );
 
         AssertSql();
@@ -2266,7 +2269,8 @@ WHERE (c["Discriminator"] = "Customer")
     public override async Task DefaultIfEmpty_selects_only_required_columns(bool async)
     {
         // Contains over subquery. Issue #17246.
-        await AssertTranslationFailed(() => base.DefaultIfEmpty_selects_only_required_columns(async)
+        await AssertTranslationFailed(() =>
+            base.DefaultIfEmpty_selects_only_required_columns(async)
         );
 
         AssertSql();

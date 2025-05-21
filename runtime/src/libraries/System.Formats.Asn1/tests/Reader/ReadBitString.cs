@@ -633,7 +633,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(() => reader.TryReadPrimitiveBitString(out _, out _)
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadPrimitiveBitString(out _, out _)
             );
             Assert.Throws<AsnContentException>(() => reader.TryReadBitString(output, out _, out _));
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out _));

@@ -66,7 +66,8 @@ public class NorthwindMiscellaneousQueryInMemoryTest
         );
 
     public override Task Max_on_empty_sequence_throws(bool async) =>
-        Assert.ThrowsAsync<InvalidOperationException>(() => base.Max_on_empty_sequence_throws(async)
+        Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Max_on_empty_sequence_throws(async)
         );
 
     public override async Task Entity_equality_through_subquery_composite_key(bool async) =>

@@ -60,7 +60,8 @@ unsafe partial class GenericsTest
 {
     private static void TestVector256L()
     {
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector256L(1L, 2L, 3L, 4L)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector256L(1L, 2L, 3L, 4L)
         );
 
         Vector256<long> value2;

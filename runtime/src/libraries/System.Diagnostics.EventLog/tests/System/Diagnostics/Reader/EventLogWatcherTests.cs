@@ -93,7 +93,8 @@ namespace System.Diagnostics.Tests
                         signal.Set();
                     };
                     Helpers.Retry(() => eventLogWatcher.Enabled = waitOnEvent);
-                    Helpers.Retry(() => eventLog.WriteEntry(message, EventLogEntryType.Information)
+                    Helpers.Retry(() =>
+                        eventLog.WriteEntry(message, EventLogEntryType.Information)
                     );
                     if (waitOnEvent)
                     {

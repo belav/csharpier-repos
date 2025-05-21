@@ -1171,7 +1171,8 @@ namespace System.Collections.Concurrent.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(() => BlockingCollection<int>.TryAddToAny(null, 0)
+            Assert.Throws<ArgumentNullException>(() =>
+                BlockingCollection<int>.TryAddToAny(null, 0)
             );
 
             // test if the underlyingcollection.TryAdd returned false

@@ -272,7 +272,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     TestServer.FakeServerEndpoint
                 );
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    client.SendAsync(request)
                 );
             }
         }
@@ -450,7 +451,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     TestServer.FakeServerEndpoint
                 );
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    client.SendAsync(request)
                 );
             }
         }
@@ -470,7 +472,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                     TestServer.FakeServerEndpoint
                 );
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() => client.SendAsync(request)
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    client.SendAsync(request)
                 );
             }
         }

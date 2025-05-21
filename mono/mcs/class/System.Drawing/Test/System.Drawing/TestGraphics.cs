@@ -1328,7 +1328,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void BeginContainer_GraphicsUnit_Display()
         {
-            Assert.Throws<ArgumentException>(() => BeginContainer_GraphicsUnit(GraphicsUnit.Display)
+            Assert.Throws<ArgumentException>(() =>
+                BeginContainer_GraphicsUnit(GraphicsUnit.Display)
             );
         }
 
@@ -2453,7 +2454,8 @@ namespace MonoTests.System.Drawing
         public void MeasureCharacterRanges_LengthTooLong()
         {
             string text = "this\nis a test";
-            Assert.Throws<ArgumentException>(() => MeasureCharacterRanges(text, 0, text.Length + 1)
+            Assert.Throws<ArgumentException>(() =>
+                MeasureCharacterRanges(text, 0, text.Length + 1)
             );
         }
 

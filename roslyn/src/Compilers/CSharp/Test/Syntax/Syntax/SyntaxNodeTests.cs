@@ -896,7 +896,8 @@ a + b";
                 classDecl2.FindNode(nodeEndPositionSpan, findInsideTrivia: true)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => classDecl.FindNode(nodeEndPositionSpan)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                classDecl.FindNode(nodeEndPositionSpan)
             );
 
             // Invalid spans.

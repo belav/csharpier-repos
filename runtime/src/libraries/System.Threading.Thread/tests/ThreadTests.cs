@@ -83,7 +83,8 @@ namespace System.Threading.Threads.Tests
             Assert.Throws<ArgumentNullException>(() => new Thread((ThreadStart)null));
             Assert.Throws<ArgumentNullException>(() => new Thread((ThreadStart)null, 0));
             Assert.Throws<ArgumentNullException>(() => new Thread((ParameterizedThreadStart)null));
-            Assert.Throws<ArgumentNullException>(() => new Thread((ParameterizedThreadStart)null, 0)
+            Assert.Throws<ArgumentNullException>(() =>
+                new Thread((ParameterizedThreadStart)null, 0)
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new Thread(() => { }, -1));
@@ -1107,7 +1108,8 @@ namespace System.Threading.Threads.Tests
                     try { }
                     finally
                     {
-                        Assert.Throws<ThreadInterruptedException>(() => continueThread.CheckedWait()
+                        Assert.Throws<ThreadInterruptedException>(() =>
+                            continueThread.CheckedWait()
                         );
                     }
                 }
@@ -1310,7 +1312,8 @@ namespace System.Threading.Threads.Tests
             Thread.EndThreadAffinity();
 
 #pragma warning disable SYSLIB0003 // obsolete members
-            Assert.Throws<InvalidOperationException>(() => Thread.CurrentThread.GetCompressedStack()
+            Assert.Throws<InvalidOperationException>(() =>
+                Thread.CurrentThread.GetCompressedStack()
             );
             Assert.Throws<InvalidOperationException>(() =>
                 Thread.CurrentThread.SetCompressedStack(CompressedStack.Capture())

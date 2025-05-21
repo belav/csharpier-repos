@@ -408,7 +408,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             // once pinned snapshot scope is released, there is no way to get back to asset.
             // catch Exception because it will throw 2 different exception based on release or debug (ExceptionUtilities.UnexpectedValue)
-            Assert.ThrowsAny<Exception>(() => validator.SolutionStateEqual(solutionId1, solutionId2)
+            Assert.ThrowsAny<Exception>(() =>
+                validator.SolutionStateEqual(solutionId1, solutionId2)
             );
         }
 

@@ -166,7 +166,8 @@ namespace System.MemoryTests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new ReadOnlyMemory<int>(a).Slice(a.Length + 1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => new ReadOnlyMemory<int>(a).Slice(-1, 0)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new ReadOnlyMemory<int>(a).Slice(-1, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new ReadOnlyMemory<int>(a).Slice(0, a.Length + 1)

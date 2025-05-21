@@ -403,7 +403,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
 
                     await innerContext.SaveChangesAsync();
 
-                    await Assert.ThrowsAnyAsync<DbUpdateException>(() => context.SaveChangesAsync()
+                    await Assert.ThrowsAnyAsync<DbUpdateException>(() =>
+                        context.SaveChangesAsync()
                     );
                 }
             );

@@ -583,7 +583,8 @@ MII
 MII
 -----END CERTIFICATE-----
 ";
-            Assert.Throws<CryptographicException>(() => X509Certificate2.CreateFromPem(CertContents)
+            Assert.Throws<CryptographicException>(() =>
+                X509Certificate2.CreateFromPem(CertContents)
             );
         }
 
@@ -597,7 +598,8 @@ MII
 {content}
 -----END CERTIFICATE-----
 ";
-            Assert.Throws<CryptographicException>(() => X509Certificate2.CreateFromPem(certContents)
+            Assert.Throws<CryptographicException>(() =>
+                X509Certificate2.CreateFromPem(certContents)
             );
         }
 

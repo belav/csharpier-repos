@@ -72,7 +72,8 @@ namespace System.SpanTests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new Span<int>(a).Slice(a.Length + 1).DontBox()
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Span<int>(a).Slice(-1, 0).DontBox()
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new Span<int>(a).Slice(-1, 0).DontBox()
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 new Span<int>(a).Slice(0, a.Length + 1).DontBox()

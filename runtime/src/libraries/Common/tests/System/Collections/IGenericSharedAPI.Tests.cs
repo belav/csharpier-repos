@@ -470,7 +470,8 @@ namespace System.Collections.Tests
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => CopyTo(collection, array, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => CopyTo(collection, array, int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                CopyTo(collection, array, int.MinValue)
             );
         }
 

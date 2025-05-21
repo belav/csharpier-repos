@@ -44,7 +44,8 @@ namespace System.IO.Tests
             FakeSafeBuffer fakeBuffer = new FakeSafeBuffer(99);
             FakeSafeBuffer nullBuffer = null;
 
-            Assert.Throws<ArgumentNullException>(() => new UnmanagedMemoryAccessor(nullBuffer, 0, 0)
+            Assert.Throws<ArgumentNullException>(() =>
+                new UnmanagedMemoryAccessor(nullBuffer, 0, 0)
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>

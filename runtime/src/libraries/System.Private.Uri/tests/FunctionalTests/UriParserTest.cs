@@ -723,7 +723,8 @@ namespace System.PrivateUri.Tests
             TestUriParser parser = new TestUriParser();
             UriParser.Register(parser, scheme, 2005);
             Assert.True(UriParser.IsKnownScheme(scheme), "IsKnownScheme-true");
-            Assert.Throws<InvalidOperationException>(() => UriParser.Register(parser, scheme, 2006)
+            Assert.Throws<InvalidOperationException>(() =>
+                UriParser.Register(parser, scheme, 2006)
             );
         }
 

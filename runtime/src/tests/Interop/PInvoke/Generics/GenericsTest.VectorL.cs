@@ -145,7 +145,8 @@ unsafe partial class GenericsTest
 
     private static void TestVectorL256()
     {
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVectorL256(1L, 2L, 3L, 4L)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVectorL256(1L, 2L, 3L, 4L)
         );
 
         Vector<long> value2;

@@ -30,7 +30,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         [Fact]
         public void CombinePathTest_BadBaseDirectory_RelativePath()
         {
-            Assert.Throws<ArgumentNullException>(() => FileIO.FileSystem.CombinePath(null, "Test2")
+            Assert.Throws<ArgumentNullException>(() =>
+                FileIO.FileSystem.CombinePath(null, "Test2")
             );
             Assert.Throws<ArgumentNullException>(() => FileIO.FileSystem.CombinePath("", "Test2"));
         }

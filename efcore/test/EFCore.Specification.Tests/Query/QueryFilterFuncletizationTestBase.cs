@@ -103,7 +103,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() => context.Set<PropertyMethodCallFilter>().ToList()
+        Assert.Throws<NullReferenceException>(() =>
+            context.Set<PropertyMethodCallFilter>().ToList()
         );
 
         context.IndirectionFlag = new Indirection();
@@ -235,7 +236,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() => context.Set<RemoteMethodParamsFilter>().ToList()
+        Assert.Throws<NullReferenceException>(() =>
+            context.Set<RemoteMethodParamsFilter>().ToList()
         );
 
         context.IndirectionFlag = new Indirection();

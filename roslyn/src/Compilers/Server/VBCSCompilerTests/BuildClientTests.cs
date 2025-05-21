@@ -187,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 var connection = tryConnectToNamedPipe(Timeout.Infinite, cts.Token);
                 Assert.False(connection.IsCompleted);
                 cts.Cancel();
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await connection
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await connection
                 );
 
                 // Create server and try again

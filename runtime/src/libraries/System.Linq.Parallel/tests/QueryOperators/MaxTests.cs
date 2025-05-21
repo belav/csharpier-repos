@@ -462,9 +462,11 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Max());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Max());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Max()
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<double>().Max()
             );
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Max()
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<decimal>().Max()
             );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable.Empty<NotComparable>().Max()

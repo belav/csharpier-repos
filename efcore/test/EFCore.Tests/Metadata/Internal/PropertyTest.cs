@@ -614,7 +614,8 @@ public class PropertyTest
         Assert.Equal(
             CoreStrings.BadJsonValueReaderWriterType(type.ShortDisplayName()),
             Assert
-                .Throws<InvalidOperationException>(() => property.SetJsonValueReaderWriterType(type)
+                .Throws<InvalidOperationException>(() =>
+                    property.SetJsonValueReaderWriterType(type)
                 )
                 .Message
         );

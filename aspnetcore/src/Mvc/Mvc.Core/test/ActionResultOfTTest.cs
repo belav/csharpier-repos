@@ -47,7 +47,8 @@ public class ActionResultOfTTest
         var result = new TestResult();
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentException>(() => new ActionResult<TestResult>(value: result)
+        var ex = Assert.Throws<ArgumentException>(() =>
+            new ActionResult<TestResult>(value: result)
         );
         Assert.Equal(
             $"Invalid type parameter '{typeof(TestResult)}' specified for 'ActionResult<T>'.",

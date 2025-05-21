@@ -2154,7 +2154,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => builder.AssertTreeIsValid(component)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            builder.AssertTreeIsValid(component)
         );
         Assert.StartsWith(
             $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Element' was left unclosed.",
@@ -2173,7 +2174,8 @@ public class RenderTreeBuilderTest
         builder.CloseComponent();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => builder.AssertTreeIsValid(component)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            builder.AssertTreeIsValid(component)
         );
         Assert.StartsWith(
             $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Component' was left unclosed.",
@@ -2192,7 +2194,8 @@ public class RenderTreeBuilderTest
         builder.CloseRegion();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => builder.AssertTreeIsValid(component)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            builder.AssertTreeIsValid(component)
         );
         Assert.StartsWith(
             $"Render output is invalid for component of type '{typeof(TestComponent).FullName}'. A frame of type 'Region' was left unclosed.",

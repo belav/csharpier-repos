@@ -523,14 +523,16 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void LinearColors_Empty()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => default_brush.LinearColors = new Color[0]
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                default_brush.LinearColors = new Color[0]
             );
         }
 
         [Test]
         public void LinearColors_One()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => default_brush.LinearColors = new Color[1]
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                default_brush.LinearColors = new Color[1]
             );
         }
 

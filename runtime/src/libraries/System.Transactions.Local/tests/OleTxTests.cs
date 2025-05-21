@@ -127,7 +127,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             tx.Commit();
 
-            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+            Retry(() =>
+                Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
             );
         });
 
@@ -599,7 +600,8 @@ public class OleTxTests : IClassFixture<OleTxTests.OleTxFixture>
 
             Assert.True(outcomeReceived.WaitOne(Timeout));
             Assert.Equal(EnlistmentOutcome.Committed, enlistment.Outcome);
-            Retry(() => Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
+            Retry(() =>
+                Assert.Equal(TransactionStatus.Committed, tx.TransactionInformation.Status)
             );
         });
 

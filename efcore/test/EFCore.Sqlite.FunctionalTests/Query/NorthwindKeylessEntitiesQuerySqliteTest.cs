@@ -23,6 +23,7 @@ public class NorthwindKeylessEntitiesQuerySqliteTest
     public override Task KeylessEntity_with_nav_defining_query(bool async)
         // FromSql mapping. Issue #21627.
         =>
-        Assert.ThrowsAsync<SqliteException>(() => base.KeylessEntity_with_nav_defining_query(async)
+        Assert.ThrowsAsync<SqliteException>(() =>
+            base.KeylessEntity_with_nav_defining_query(async)
         );
 }

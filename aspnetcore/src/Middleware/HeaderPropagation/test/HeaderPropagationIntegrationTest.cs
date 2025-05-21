@@ -169,7 +169,8 @@ public class HeaderPropagationIntegrationTest
             })
             .Build();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync()
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            host.StartAsync()
         );
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddHeaderPropagation' inside the call to 'ConfigureServices(...)' in the application startup code.",

@@ -244,7 +244,8 @@ namespace System.IO.Pipelines.Tests
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
             invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await _pipe.Reader.ReadAsync()
+                async () =>
+                    await _pipe.Reader.ReadAsync()
             );
             Assert.Equal("Writer exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
@@ -273,7 +274,8 @@ namespace System.IO.Pipelines.Tests
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);
 
             invalidOperationException = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await _pipe.Writer.WriteAsync(new byte[1])
+                async () =>
+                    await _pipe.Writer.WriteAsync(new byte[1])
             );
             Assert.Equal("Reader exception", invalidOperationException.Message);
             Assert.Contains(nameof(ThrowTestException), invalidOperationException.StackTrace);

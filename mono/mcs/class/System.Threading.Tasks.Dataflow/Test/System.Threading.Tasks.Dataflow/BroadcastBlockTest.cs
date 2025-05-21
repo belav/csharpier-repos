@@ -209,7 +209,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             Assert.IsTrue(broadcast.Post(1));
             Assert.IsTrue(broadcast.Post(2));
 
-            AssertEx.Throws<TimeoutException>(() => target.Receive(TimeSpan.FromMilliseconds(1000))
+            AssertEx.Throws<TimeoutException>(() =>
+                target.Receive(TimeSpan.FromMilliseconds(1000))
             );
 
             scheduler.ExecuteAll();

@@ -2653,7 +2653,8 @@ public class FindEntryTest
         Assert.Equal(
             CoreStrings.FindWrongCount(2, 1),
             Assert
-                .Throws<ArgumentException>(() => set.Local.FindEntry(new[] { property1 }, twoValues)
+                .Throws<ArgumentException>(() =>
+                    set.Local.FindEntry(new[] { property1 }, twoValues)
                 )
                 .Message
         );

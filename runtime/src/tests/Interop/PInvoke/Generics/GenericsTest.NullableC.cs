@@ -39,7 +39,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetNullableCOut(true, '1', out char? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableC(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableC(default, default)
         );
 
         char?[] values = new char?[] { default, default, default, default, default };

@@ -889,7 +889,8 @@ namespace System.Numerics.Tests
             Assert.Throws<NotSupportedException>(() =>
                 new Vector<T>(new ReadOnlySpan<byte>(new byte[4]))
             );
-            Assert.Throws<NotSupportedException>(() => new Vector<T>(new ReadOnlySpan<T>(new T[4]))
+            Assert.Throws<NotSupportedException>(() =>
+                new Vector<T>(new ReadOnlySpan<T>(new T[4]))
             );
             Assert.Throws<NotSupportedException>(() => new Vector<T>(new Span<T>(new T[4])));
         }

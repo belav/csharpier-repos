@@ -591,7 +591,8 @@ namespace System.Security.Cryptography.Xml.Tests
             EncryptedXml ex = new EncryptedXml();
             EncryptedData encryptedData = new EncryptedData();
             encryptedData.CipherData = new CipherData(new byte[16]);
-            Assert.Throws<CryptographicException>(() => ex.GetDecryptionIV(encryptedData, "invalid")
+            Assert.Throws<CryptographicException>(() =>
+                ex.GetDecryptionIV(encryptedData, "invalid")
             );
         }
 
@@ -650,7 +651,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<ArgumentNullException>(() => EncryptedXml.EncryptKey(null, rsa, false)
+                Assert.Throws<ArgumentNullException>(() =>
+                    EncryptedXml.EncryptKey(null, rsa, false)
                 );
             }
         }
@@ -967,7 +969,8 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 byte[] key = "123"u8.ToArray();
 
-                Assert.Throws<CryptographicException>(() => EncryptedXml.DecryptKey(key, tripleDES)
+                Assert.Throws<CryptographicException>(() =>
+                    EncryptedXml.DecryptKey(key, tripleDES)
                 );
             }
         }
@@ -1044,7 +1047,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<ArgumentNullException>(() => EncryptedXml.DecryptKey(null, rsa, false)
+                Assert.Throws<ArgumentNullException>(() =>
+                    EncryptedXml.DecryptKey(null, rsa, false)
                 );
             }
         }

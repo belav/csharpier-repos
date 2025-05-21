@@ -26,7 +26,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType1_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute((Type)null)
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute((Type)null)
             );
             Assert.Throws<NullReferenceException>(() =>
                 new ComSourceInterfacesAttribute(null, typeof(int))

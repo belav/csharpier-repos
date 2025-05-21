@@ -228,7 +228,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             // Opting-out with AppContext data value -1 will still give us error because cert is beyond Windows limit.
                             // But we will get the CryptoThrowHelper+WindowsCryptographicException.
                             PfxIterationCountTests.VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(
-                                () => Import(pfxInfo.Blob)
+                                () =>
+                                    Import(pfxInfo.Blob)
                             );
                         }
                         else

@@ -1040,7 +1040,8 @@ public class WindowAndCursorProps
     [PlatformSpecific(TestPlatforms.AnyUnix)]
     public void MoveBufferArea_Unix_ThrowsPlatformNotSupportedException()
     {
-        Assert.Throws<PlatformNotSupportedException>(() => Console.MoveBufferArea(0, 0, 0, 0, 0, 0)
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            Console.MoveBufferArea(0, 0, 0, 0, 0, 0)
         );
         Assert.Throws<PlatformNotSupportedException>(() =>
             Console.MoveBufferArea(0, 0, 0, 0, 0, 0, 'c', ConsoleColor.White, ConsoleColor.Black)

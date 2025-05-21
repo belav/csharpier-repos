@@ -600,7 +600,8 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
                 "{VehicleName: Fuel transport}"
             ),
             (
-                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SaveChangesAsync()
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    context.SaveChangesAsync()
                 )
             ).Message
         );

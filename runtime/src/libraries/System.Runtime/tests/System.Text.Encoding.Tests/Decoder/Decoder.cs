@@ -391,7 +391,8 @@ namespace System.Text.Encodings.Tests
                 Assert.Throws<DecoderFallbackException>(() =>
                     decoder.GetChars(pBytes, 2, pChars, 2, true)
                 );
-                Assert.Throws<DecoderFallbackException>(() => decoder.GetCharCount(pBytes, 2, true)
+                Assert.Throws<DecoderFallbackException>(() =>
+                    decoder.GetCharCount(pBytes, 2, true)
                 );
             }
         }

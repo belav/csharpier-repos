@@ -70,7 +70,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object> target = callsite.Target;
             string message = Assert
-                .Throws<RuntimeBinderException>(() => target(callsite, new TypeWithMethods(), 9, 14)
+                .Throws<RuntimeBinderException>(() =>
+                    target(callsite, new TypeWithMethods(), 9, 14)
                 )
                 .Message;
 
@@ -127,7 +128,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object> target = callsite.Target;
             string message = Assert
-                .Throws<RuntimeBinderException>(() => target(callsite, new TypeWithMethods(), 9, 14)
+                .Throws<RuntimeBinderException>(() =>
+                    target(callsite, new TypeWithMethods(), 9, 14)
                 )
                 .Message;
 
@@ -157,7 +159,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             );
             Func<CallSite, object, object, object, object> target = callsite.Target;
             string message = Assert
-                .Throws<RuntimeBinderException>(() => target(callsite, new TypeWithMethods(), 9, 14)
+                .Throws<RuntimeBinderException>(() =>
+                    target(callsite, new TypeWithMethods(), 9, 14)
                 )
                 .Message;
 
@@ -352,7 +355,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             string message = Assert
-                .Throws<RuntimeBinderException>(() => callSite.Target(callSite, new Derived(), 4, 5)
+                .Throws<RuntimeBinderException>(() =>
+                    callSite.Target(callSite, new Derived(), 4, 5)
                 )
                 .Message;
 

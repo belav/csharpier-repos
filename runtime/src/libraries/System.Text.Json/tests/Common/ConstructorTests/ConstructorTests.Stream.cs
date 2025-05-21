@@ -57,7 +57,8 @@ namespace System.Text.Json.Serialization.Tests
             );
             // JSON that doesn't bind to ctor args are matched with properties or ignored (as appropriate).
             tasks[3] = Task.Run(async () => await RunTestAsync<Person_Class>(Person_Class.s_data));
-            tasks[4] = Task.Run(async () => await RunTestAsync<Person_Struct>(Person_Struct.s_data)
+            tasks[4] = Task.Run(async () =>
+                await RunTestAsync<Person_Struct>(Person_Struct.s_data)
             );
             // JSON that doesn't bind to ctor args or properties are sent to ext data if avaiable.
             tasks[5] = Task.Run(async () =>
@@ -159,7 +160,8 @@ namespace System.Text.Json.Serialization.Tests
             );
             // JSON that doesn't bind to ctor args are matched with properties or ignored (as appropriate).
             tasks[3] = Task.Run(async () => await RunTestAsync<Person_Class>(Person_Class.s_json));
-            tasks[4] = Task.Run(async () => await RunTestAsync<Person_Struct>(Person_Struct.s_json)
+            tasks[4] = Task.Run(async () =>
+                await RunTestAsync<Person_Struct>(Person_Struct.s_json)
             );
             // JSON that doesn't bind to ctor args or properties are sent to ext data if avaiable.
             tasks[5] = Task.Run(async () =>

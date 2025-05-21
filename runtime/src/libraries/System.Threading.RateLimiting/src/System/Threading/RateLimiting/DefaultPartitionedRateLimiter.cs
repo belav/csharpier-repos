@@ -105,7 +105,8 @@ namespace System.Threading.RateLimiting
                 if (!_limiters.TryGetValue(partition.PartitionKey, out limiter))
                 {
                     // Using Lazy avoids calling user code (partition.Factory) inside the lock
-                    limiter = new Lazy<RateLimiter>(() => partition.Factory(partition.PartitionKey)
+                    limiter = new Lazy<RateLimiter>(() =>
+                        partition.Factory(partition.PartitionKey)
                     );
                     _limiters.Add(partition.PartitionKey, limiter);
                     // Cache is invalid now

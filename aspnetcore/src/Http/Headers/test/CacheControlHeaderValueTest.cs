@@ -44,7 +44,8 @@ public class CacheControlHeaderValueTest
         // String collection properties
         Assert.NotNull(cacheControl.NoCacheHeaders);
         Assert.Throws<ArgumentException>(() => cacheControl.NoCacheHeaders.Add(null));
-        Assert.Throws<FormatException>(() => cacheControl.NoCacheHeaders.Add("invalid PLACEHOLDER")
+        Assert.Throws<FormatException>(() =>
+            cacheControl.NoCacheHeaders.Add("invalid PLACEHOLDER")
         );
         cacheControl.NoCacheHeaders.Add("PLACEHOLDER");
         Assert.Equal(1, cacheControl.NoCacheHeaders.Count);
@@ -52,7 +53,8 @@ public class CacheControlHeaderValueTest
 
         Assert.NotNull(cacheControl.PrivateHeaders);
         Assert.Throws<ArgumentException>(() => cacheControl.PrivateHeaders.Add(null));
-        Assert.Throws<FormatException>(() => cacheControl.PrivateHeaders.Add("invalid PLACEHOLDER")
+        Assert.Throws<FormatException>(() =>
+            cacheControl.PrivateHeaders.Add("invalid PLACEHOLDER")
         );
         cacheControl.PrivateHeaders.Add("PLACEHOLDER");
         Assert.Equal(1, cacheControl.PrivateHeaders.Count);

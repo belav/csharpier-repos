@@ -39,7 +39,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetNullableDOut(true, 1.0, out double? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableD(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableD(default, default)
         );
 
         double?[] values = new double?[] { default, default, default, default, default };

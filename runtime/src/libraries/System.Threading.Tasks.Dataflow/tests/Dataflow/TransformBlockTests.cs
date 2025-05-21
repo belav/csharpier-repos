@@ -148,7 +148,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public Task TestCompletionTask()
         {
-            return DataflowTestHelpers.TestCompletionTask(() => new TransformBlock<int, int>(i => i)
+            return DataflowTestHelpers.TestCompletionTask(() =>
+                new TransformBlock<int, int>(i => i)
             );
         }
 

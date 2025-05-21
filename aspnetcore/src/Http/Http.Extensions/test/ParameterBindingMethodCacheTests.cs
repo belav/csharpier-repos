@@ -746,7 +746,8 @@ public class ParameterBindingMethodCacheTests
     {
         var cache = new ParameterBindingMethodCache();
         var parameter = new MockParameterInfo(type, "anything");
-        var ex = Assert.Throws<InvalidOperationException>(() => cache.FindBindAsyncMethod(parameter)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            cache.FindBindAsyncMethod(parameter)
         );
         Assert.StartsWith(
             $"BindAsync method found on {TypeNameHelper.GetTypeDisplayName(type, fullName: false)} with incorrect format. Must be a static method with format",
@@ -787,7 +788,8 @@ public class ParameterBindingMethodCacheTests
     {
         var cache = new ParameterBindingMethodCache();
         var parameter = new MockParameterInfo(typeof(BindAsyncFromMultipleInterfaces), "anything");
-        var ex = Assert.Throws<InvalidOperationException>(() => cache.FindBindAsyncMethod(parameter)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            cache.FindBindAsyncMethod(parameter)
         );
         Assert.Equal(
             "BindAsyncFromMultipleInterfaces implements multiple interfaces defining a static System.Threading.Tasks.ValueTask`1[Microsoft.AspNetCore.Http.Extensions.Tests.ParameterBindingMethodCacheTests+BindAsyncFromMultipleInterfaces] BindAsync(Microsoft.AspNetCore.Http.HttpContext) method causing ambiguity.",

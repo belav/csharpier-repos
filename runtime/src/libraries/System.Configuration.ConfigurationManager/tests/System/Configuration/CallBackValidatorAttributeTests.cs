@@ -23,7 +23,8 @@ namespace System.Configuration
             {
                 Type = typeof(double),
             };
-            Assert.Throws<ArgumentException>(() => testCallBackValidatorAttribute.ValidatorInstance
+            Assert.Throws<ArgumentException>(() =>
+                testCallBackValidatorAttribute.ValidatorInstance
             );
         }
 
@@ -35,7 +36,8 @@ namespace System.Configuration
                 Type = typeof(double),
                 CallbackMethodName = "Test",
             };
-            Assert.Throws<ArgumentException>(() => testCallBackValidatorAttribute.ValidatorInstance
+            Assert.Throws<ArgumentException>(() =>
+                testCallBackValidatorAttribute.ValidatorInstance
             );
         }
 
@@ -72,7 +74,8 @@ namespace System.Configuration
                 Type = typeof(CallBackValidatorAttributeTests),
                 CallbackMethodName = "CallBackValidatorTestMethodNumberTwo",
             };
-            Assert.Throws<ArgumentException>(() => testCallBackValidatorAttribute.ValidatorInstance
+            Assert.Throws<ArgumentException>(() =>
+                testCallBackValidatorAttribute.ValidatorInstance
             );
         }
 

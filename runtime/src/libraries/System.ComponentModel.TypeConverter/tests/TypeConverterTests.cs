@@ -53,7 +53,8 @@ namespace System.ComponentModel.Tests
         {
             Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom("1"));
             Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom(null));
-            Assert.Throws<NotSupportedException>(() => s_converter.ConvertFrom(s_context, null, "1")
+            Assert.Throws<NotSupportedException>(() =>
+                s_converter.ConvertFrom(s_context, null, "1")
             );
         }
 
@@ -296,9 +297,11 @@ namespace System.ComponentModel.Tests
 
                 Assert.Throws<NotSupportedException>(() => GetConvertFromException(null));
                 Assert.Throws<NotSupportedException>(() => GetConvertFromException("1"));
-                Assert.Throws<NotSupportedException>(() => GetConvertFromException(new BaseClass())
+                Assert.Throws<NotSupportedException>(() =>
+                    GetConvertFromException(new BaseClass())
                 );
-                Assert.Throws<NotSupportedException>(() => GetConvertToException(null, typeof(int))
+                Assert.Throws<NotSupportedException>(() =>
+                    GetConvertToException(null, typeof(int))
                 );
                 Assert.Throws<NotSupportedException>(() => GetConvertToException("1", typeof(int)));
                 Assert.Throws<NotSupportedException>(() =>

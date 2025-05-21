@@ -1442,7 +1442,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             Assert.Equal(
                 expectedExceptionMessage,
                 Assert
-                    .Throws<InvalidOperationException>(() => generator.GenerateModel(model, options)
+                    .Throws<InvalidOperationException>(() =>
+                        generator.GenerateModel(model, options)
                     )
                     .Message
             );

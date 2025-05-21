@@ -62,7 +62,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateCategory_ItemReturnsNull_ThrowsInvalidOperationException()
         {
             var item = new NullSyndicationItem();
-            Assert.Throws<InvalidOperationException>(() => Formatter.CreateCategoryEntryPoint(item)
+            Assert.Throws<InvalidOperationException>(() =>
+                Formatter.CreateCategoryEntryPoint(item)
             );
         }
 

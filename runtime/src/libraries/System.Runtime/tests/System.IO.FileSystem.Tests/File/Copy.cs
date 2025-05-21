@@ -416,7 +416,8 @@ namespace System.IO.Tests
                 )
             )
             {
-                Assert.Throws<IOException>(() => Copy(testFileSource, testFileDest, overwrite: true)
+                Assert.Throws<IOException>(() =>
+                    Copy(testFileSource, testFileDest, overwrite: true)
                 );
             }
         }

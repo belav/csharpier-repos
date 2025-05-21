@@ -312,7 +312,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void DocumentNamenNullValue()
         {
             object ignore;
-            Assert.Throws<ArgumentNullException>(() => ignore = new Pkcs9DocumentName((string)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ignore = new Pkcs9DocumentName((string)null)
             );
         }
 

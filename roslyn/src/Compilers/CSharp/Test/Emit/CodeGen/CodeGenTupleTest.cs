@@ -13985,7 +13985,8 @@ CS0151ERR_IntegralTypeValueExpected}
             Assert.Equal("7.0", Compilation.GetRequiredLanguageVersion(comp.GetDiagnostics()[1]));
             Assert.Equal("7.0", Compilation.GetRequiredLanguageVersion(comp.GetDiagnostics()[2]));
             Assert.Null(Compilation.GetRequiredLanguageVersion(comp.GetDiagnostics()[3]));
-            Assert.Throws<ArgumentNullException>(() => Compilation.GetRequiredLanguageVersion(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                Compilation.GetRequiredLanguageVersion(null)
             );
         }
 

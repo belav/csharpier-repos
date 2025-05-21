@@ -97,7 +97,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetVector64CRef('0', '1', '2', '3')
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64C(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector64C(default, default)
         );
 
         Vector64<char>[] values = new Vector64<char>[]

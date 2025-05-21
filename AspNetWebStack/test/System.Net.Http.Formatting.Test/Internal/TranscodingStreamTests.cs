@@ -54,9 +54,11 @@ namespace System.Text.Tests
 
             // Act & assert
 
-            RunTest(() => transcodingStream.ReadAsync(new byte[0], 0, 0, expectedCancellationToken)
+            RunTest(() =>
+                transcodingStream.ReadAsync(new byte[0], 0, 0, expectedCancellationToken)
             );
-            RunTest(() => transcodingStream.WriteAsync(new byte[0], 0, 0, expectedCancellationToken)
+            RunTest(() =>
+                transcodingStream.WriteAsync(new byte[0], 0, 0, expectedCancellationToken)
             );
 #if NETCOREAPP || NETSTANDARD2_1
             RunTest(() =>
@@ -210,7 +212,8 @@ namespace System.Text.Tests
                 (object)transcodingStream.ReadAsync(new byte[0], 0, 0)
             );
             Assert.Throws<ObjectDisposedException>(() => transcodingStream.ReadByte());
-            Assert.Throws<ObjectDisposedException>(() => transcodingStream.Write(new byte[0], 0, 0)
+            Assert.Throws<ObjectDisposedException>(() =>
+                transcodingStream.Write(new byte[0], 0, 0)
             );
             Assert.Throws<ObjectDisposedException>(() =>
                 (object)transcodingStream.WriteAsync(new byte[0], 0, 0)
@@ -232,7 +235,8 @@ namespace System.Text.Tests
             );
             transcodingStream.Dispose();
             transcodingStream.Dispose(); // calling it a second time should no-op
-            Assert.Throws<ObjectDisposedException>(() => innerStream.Read(Array.Empty<byte>(), 0, 0)
+            Assert.Throws<ObjectDisposedException>(() =>
+                innerStream.Read(Array.Empty<byte>(), 0, 0)
             );
 
             // Async
@@ -946,7 +950,8 @@ namespace System.Text.Tests
             Assert.Throws<NotSupportedException>(() => transcodingStream.Length);
             Assert.Throws<NotSupportedException>(() => transcodingStream.Position);
             Assert.Throws<NotSupportedException>(() => transcodingStream.Position = 0);
-            Assert.Throws<NotSupportedException>(() => transcodingStream.Seek(0, SeekOrigin.Current)
+            Assert.Throws<NotSupportedException>(() =>
+                transcodingStream.Seek(0, SeekOrigin.Current)
             );
             Assert.Throws<NotSupportedException>(() => transcodingStream.SetLength(0));
         }

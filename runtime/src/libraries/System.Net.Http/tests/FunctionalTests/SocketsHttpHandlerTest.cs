@@ -2166,7 +2166,8 @@ namespace System.Net.Http.Functional.Tests
 
                                     // Not supported operations
                                     Assert.Throws<NotSupportedException>(() => clientStream.Length);
-                                    Assert.Throws<NotSupportedException>(() => clientStream.Position
+                                    Assert.Throws<NotSupportedException>(() =>
+                                        clientStream.Position
                                     );
                                     Assert.Throws<NotSupportedException>(() =>
                                         clientStream.Position = 0
@@ -5096,7 +5097,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = CreateHttpClient(handler);
 
                     HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                        async () => await client.SendAsync(requestMessage)
+                        async () =>
+                            await client.SendAsync(requestMessage)
                     );
                     Assert.Equal(e, hre.InnerException);
                 },
@@ -5142,7 +5144,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient client = CreateHttpClient(handler);
 
                     HttpRequestException hre = await Assert.ThrowsAnyAsync<HttpRequestException>(
-                        async () => await client.SendAsync(requestMessage)
+                        async () =>
+                            await client.SendAsync(requestMessage)
                     );
                 },
                 async server =>
@@ -5542,7 +5545,8 @@ namespace System.Net.Http.Functional.Tests
             }
             else
             {
-                return Assert.Throws<TException>(() => invoker.Send(request, CancellationToken.None)
+                return Assert.Throws<TException>(() =>
+                    invoker.Send(request, CancellationToken.None)
                 );
             }
         }

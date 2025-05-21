@@ -179,7 +179,8 @@ namespace System.Net.Tests
                             HttpWebResponse hwr = (HttpWebResponse)response;
 
                             // HttpWebResponse is not serializable on .NET Core.
-                            Assert.Throws<SerializationException>(() => formatter.Serialize(fs, hwr)
+                            Assert.Throws<SerializationException>(() =>
+                                formatter.Serialize(fs, hwr)
                             );
                         }
                     }

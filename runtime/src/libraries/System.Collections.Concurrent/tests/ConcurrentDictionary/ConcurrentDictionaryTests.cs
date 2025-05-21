@@ -969,7 +969,8 @@ namespace System.Collections.Concurrent.Tests
                 dictionary.AddOrUpdate("1", null, (k, v) => 0)
             );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null updateFactory is passed");
-            Assert.Throws<ArgumentNullException>(() => dictionary.AddOrUpdate(null, (k) => 0, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                dictionary.AddOrUpdate(null, (k) => 0, null)
             );
             // "TestExceptions:  FAILED.  AddOrUpdate didn't throw ANE when null addFactory is passed");
 
@@ -1140,7 +1141,8 @@ namespace System.Collections.Concurrent.Tests
             // "TestICollection:  FAILED.  SyncRoot property didn't throw");
             Assert.Throws<ArgumentNullException>(() => dictionary.CopyTo(null, 0));
             // "TestICollection:  FAILED.  CopyTo didn't throw ANE when null Array is passed");
-            Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.CopyTo(new object[] { }, -1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                dictionary.CopyTo(new object[] { }, -1)
             );
             // "TestICollection:  FAILED.  CopyTo didn't throw AORE when negative index passed");
 

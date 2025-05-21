@@ -116,7 +116,8 @@ namespace System.Tests
         public void CopyTo_Default_ThrowsInvalidOperationException()
         {
             // Source is default
-            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).CopyTo(new T[0])
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).CopyTo(new T[0])
             );
             Assert.Throws<InvalidOperationException>(() =>
                 default(ArraySegment<T>).CopyTo(new T[0], 0)
@@ -176,7 +177,8 @@ namespace System.Tests
         [Fact]
         public void GetEnumerator_Default_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).GetEnumerator()
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).GetEnumerator()
             );
         }
 
@@ -764,7 +766,8 @@ namespace System.Tests
             int[] array = arraySegment.Array;
 
             // Before array start
-            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-arraySegment.Offset - 1]
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset - 1]
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 arraySegment[-arraySegment.Offset - 1] = default(int)

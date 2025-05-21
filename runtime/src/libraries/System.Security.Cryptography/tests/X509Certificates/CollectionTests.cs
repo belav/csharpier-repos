@@ -304,9 +304,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentNullException>(() =>
                     collection.Insert(0, (X509Certificate2)null)
                 );
-                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate)null)
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.Remove((X509Certificate)null)
                 );
-                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate2)null)
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.Remove((X509Certificate2)null)
                 );
                 Assert.Throws<ArgumentNullException>(() =>
                     collection.RemoveRange((X509Certificate2[])null)
@@ -343,7 +345,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                     collection[collection.Count] = certificate
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection.Insert(-1, certificate)
                 );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                     collection.Insert(collection.Count + 1, certificate)
@@ -385,7 +388,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                     collection[collection.Count] = certificate
                 );
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate)
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection.Insert(-1, certificate)
                 );
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                     collection.Insert(collection.Count + 1, certificate)

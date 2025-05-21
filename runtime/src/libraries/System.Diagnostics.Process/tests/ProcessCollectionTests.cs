@@ -131,7 +131,8 @@ namespace System.Diagnostics.Tests
             Assert.Equal(index, threadCollection.IndexOf(null));
             Assert.Equal(initialCount + 1, threadCollection.Count);
             // Insert at invalid index
-            Assert.Throws<ArgumentOutOfRangeException>(() => threadCollection.Insert(-1, tArray[0])
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                threadCollection.Insert(-1, tArray[0])
             );
 
             // Explicit interface implementations

@@ -216,7 +216,8 @@ namespace System.Collections.Tests
         {
             Stack<T> stack = GenericStackFactory(size);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => stack.TrimExcess(newCapacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                stack.TrimExcess(newCapacity)
             );
         }
 

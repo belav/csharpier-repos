@@ -325,7 +325,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Connect_Host_Port_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(() => GetDisposedSocket().Connect("localhost", 1)
+            Assert.Throws<ObjectDisposedException>(() =>
+                GetDisposedSocket().Connect("localhost", 1)
             );
         }
 
@@ -737,7 +738,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SendAsync_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(() => GetDisposedSocket().SendAsync(s_eventArgs)
+            Assert.Throws<ObjectDisposedException>(() =>
+                GetDisposedSocket().SendAsync(s_eventArgs)
             );
         }
 

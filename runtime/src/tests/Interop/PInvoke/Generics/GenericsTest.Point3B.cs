@@ -33,7 +33,8 @@ unsafe partial class GenericsTest
 {
     private static void TestPoint3B()
     {
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetPoint3B(true, false, true)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetPoint3B(true, false, true)
         );
 
         Assert.Throws<MarshalDirectiveException>(() =>

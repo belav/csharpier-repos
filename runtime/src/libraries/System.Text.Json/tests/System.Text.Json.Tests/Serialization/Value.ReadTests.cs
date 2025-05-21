@@ -88,7 +88,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(@""""""));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DateTime>("\"abc\""));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DateTimeOffset>("\"abc\"")
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<DateTimeOffset>("\"abc\"")
             );
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<TimeSpan>("\"abc\""));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Guid>("\"abc\""));
@@ -514,20 +515,25 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<byte?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<sbyte>(unexpectedString));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<sbyte?>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<sbyte?>(unexpectedString)
             );
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<short>(unexpectedString));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<short?>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<short?>(unexpectedString)
             );
 
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ushort>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort>(unexpectedString)
             );
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ushort?>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ushort?>(unexpectedString)
             );
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<float>(unexpectedString));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<float?>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<float?>(unexpectedString)
             );
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<int>(unexpectedString));
@@ -540,18 +546,22 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<long?>(unexpectedString));
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ulong>(unexpectedString));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<ulong?>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<ulong?>(unexpectedString)
             );
 
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<decimal>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<decimal>(unexpectedString)
             );
             Assert.Throws<JsonException>(() =>
                 JsonSerializer.Deserialize<decimal?>(unexpectedString)
             );
 
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<double>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<double>(unexpectedString)
             );
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<double?>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<double?>(unexpectedString)
             );
 
             Assert.Throws<JsonException>(() =>
@@ -575,7 +585,8 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializer.Deserialize<TimeSpan?>(unexpectedString)
             );
 
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Version>(unexpectedString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Version>(unexpectedString)
             );
 
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<string>("1"));
@@ -807,7 +818,8 @@ namespace System.Text.Json.Serialization.Tests
             string value = "24:00:00";
 
             // 24:00:00 should be invalid because hours can only be up to 23.
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<TimeSpan>($"\"{value}\"")
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<TimeSpan>($"\"{value}\"")
             );
 
             TimeSpan expectedValue = TimeSpan.Parse("24.00:00:00");

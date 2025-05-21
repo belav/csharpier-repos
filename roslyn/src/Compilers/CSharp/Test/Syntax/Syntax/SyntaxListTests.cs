@@ -191,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count));
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((IEnumerable<SyntaxNode>)null)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
@@ -243,7 +244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                list.AddRange((IEnumerable<SyntaxNode>)null)
             );
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
             Assert.Throws<ArgumentNullException>(() =>

@@ -148,7 +148,8 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                     new ExecutionDataflowBlockOptions()
                 )
             );
-            AssertEx.Throws<ArgumentNullException>(() => new TransformBlock<int, int>(i => i, null)
+            AssertEx.Throws<ArgumentNullException>(() =>
+                new TransformBlock<int, int>(i => i, null)
             );
         }
 
@@ -426,9 +427,11 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
             IPropagatorBlock<int, int> nullBlock = null;
             var realBlock = new BufferBlock<int>();
 
-            AssertEx.Throws<ArgumentNullException>(() => DataflowBlock.LinkTo(nullBlock, realBlock)
+            AssertEx.Throws<ArgumentNullException>(() =>
+                DataflowBlock.LinkTo(nullBlock, realBlock)
             );
-            AssertEx.Throws<ArgumentNullException>(() => DataflowBlock.LinkTo(realBlock, nullBlock)
+            AssertEx.Throws<ArgumentNullException>(() =>
+                DataflowBlock.LinkTo(realBlock, nullBlock)
             );
 
             AssertEx.Throws<ArgumentNullException>(() =>

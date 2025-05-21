@@ -95,7 +95,8 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SecureSocketLayer
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.SecureSocketLayer
             );
             Assert.Throws<ObjectDisposedException>(() =>
                 connection.SessionOptions.SecureSocketLayer = true
@@ -134,7 +135,8 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.ReferralHopLimit
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.ReferralHopLimit
             );
             Assert.Throws<ObjectDisposedException>(() =>
                 connection.SessionOptions.ReferralHopLimit = 10
@@ -232,7 +234,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.DomainName);
-            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.DomainName = null
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.DomainName = null
             );
         }
 
@@ -571,7 +574,8 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SaslMethod);
-            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.SaslMethod = null
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.SaslMethod = null
             );
         }
 
@@ -711,7 +715,8 @@ namespace System.DirectoryServices.Protocols.Tests
             var connection = new LdapConnection("server");
             connection.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => connection.SessionOptions.ReferralCallback
+            Assert.Throws<ObjectDisposedException>(() =>
+                connection.SessionOptions.ReferralCallback
             );
             Assert.Throws<ObjectDisposedException>(() =>
                 connection.SessionOptions.ReferralCallback = null

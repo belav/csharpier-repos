@@ -626,7 +626,8 @@ namespace System.Data.Objects.ELinq
                 }
                 else if (null != getValue)
                 {
-                    _recompileRequiredDelegates.Add(() => !object.ReferenceEquals(value, getValue())
+                    _recompileRequiredDelegates.Add(() =>
+                        !object.ReferenceEquals(value, getValue())
                     );
                 }
             }

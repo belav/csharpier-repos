@@ -258,7 +258,8 @@ class Tester : Base
         var s = new Base();
         s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] += 9;
         s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory.StartNew(
-            () => 9
+            () =>
+                9
         );
 
         var res = s.CreateArray<int>(await Task.Factory.StartNew(() => 5))[2] +=
@@ -267,7 +268,8 @@ class Tester : Base
             return 1;
 
         s.CreateArray<S>(await Task.Factory.StartNew(() => 5))[2] += await Task.Factory.StartNew(
-            () => new S() { Value = 4 }
+            () =>
+                new S() { Value = 4 }
         );
         return 0;
     }
@@ -571,7 +573,8 @@ class Tester : Base
     {
         int value = 3;
         PropertyThis[await Task.Factory.StartNew(() => value++)] += await Task.Factory.StartNew(
-            () => -5
+            () =>
+                -5
         );
         return PropertyThis[3] + value + 11;
     }

@@ -578,7 +578,8 @@ public partial class HubConnectionTests
                     .WithUrl("http://example.com");
                 var testConnectionFactory = default(ReconnectingConnectionFactory);
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() => new TestConnection()
+                testConnectionFactory = new ReconnectingConnectionFactory(() =>
+                    new TestConnection()
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
@@ -679,7 +680,8 @@ public partial class HubConnectionTests
                     .WithUrl("http://example.com");
                 var testConnectionFactory = default(ReconnectingConnectionFactory);
 
-                testConnectionFactory = new ReconnectingConnectionFactory(() => new TestConnection()
+                testConnectionFactory = new ReconnectingConnectionFactory(() =>
+                    new TestConnection()
                 );
                 builder.Services.AddSingleton<IConnectionFactory>(testConnectionFactory);
 
