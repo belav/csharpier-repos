@@ -15,5 +15,6 @@ public class ModelMetadataTypeAttribute<T> : ModelMetadataTypeAttribute
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelMetadataTypeAttribute" /> class.
     /// </summary>
-    public ModelMetadataTypeAttribute() : base(typeof(T)) { }
+    public ModelMetadataTypeAttribute()
+        : base(typeof(T)) { }
 }

@@ -24,7 +24,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static void ExportRetransmissionEnabledAssertion(UdpTransportBindingElement bindingElement, PolicyAssertionCollection assertions)
+        internal static void ExportRetransmissionEnabledAssertion(
+            UdpTransportBindingElement bindingElement,
+            PolicyAssertionCollection assertions
+        )
         {
             if (bindingElement == null)
             {
@@ -38,7 +41,11 @@ namespace System.ServiceModel.Channels
 
             if (bindingElement.RetransmissionSettings.Enabled)
             {
-                XmlElement assertion = Document.CreateElement(UdpConstants.WsdlSoapUdpTransportPrefix, UdpConstants.RetransmissionEnabled, UdpConstants.WsdlSoapUdpTransportNamespace);
+                XmlElement assertion = Document.CreateElement(
+                    UdpConstants.WsdlSoapUdpTransportPrefix,
+                    UdpConstants.RetransmissionEnabled,
+                    UdpConstants.WsdlSoapUdpTransportNamespace
+                );
                 assertions.Add(assertion);
             }
         }

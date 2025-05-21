@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using BasicTestApp;
-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
-using Microsoft.AspNetCore.E2ETesting;
-using Xunit.Abstractions;
 using Microsoft.AspNetCore.Components.E2ETest;
-using OpenQA.Selenium;
+using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
+using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 using Microsoft.AspNetCore.Components.Sections;
+using Microsoft.AspNetCore.E2ETesting;
+using OpenQA.Selenium;
+using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.Tests;
 
@@ -16,18 +16,18 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 {
     private IWebElement _appElement;
 
-    public SectionsTest
-        (BrowserFixture browserFixture,
+    public SectionsTest(
+        BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
         Navigate(ServerPathBase, noReload: _serverFixture.ExecutionMode == ExecutionMode.Client);
-        _appElement = Browser.MountTestComponent<BasicTestApp.SectionsTest.ParentComponentWithTwoChildren>();
+        _appElement =
+            Browser.MountTestComponent<BasicTestApp.SectionsTest.ParentComponentWithTwoChildren>();
     }
 
     [Fact]
@@ -39,7 +39,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains("There is already a subscriber to the content with the given section ID 'System.Object'", logs[0].Message);
+        Assert.Contains(
+            "There is already a subscriber to the content with the given section ID 'System.Object'",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -51,7 +54,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains("There is already a subscriber to the content with the given section ID 'test1'", logs[0].Message);
+        Assert.Contains(
+            "There is already a subscriber to the content with the given section ID 'test1'",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -63,7 +69,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains("There is already a subscriber to the content with the given section ID 'test2'", logs[0].Message);
+        Assert.Contains(
+            "There is already a subscriber to the content with the given section ID 'test2'",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -75,7 +84,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains($"{nameof(SectionOutlet)} requires that '{nameof(SectionOutlet.SectionName)}' and '{nameof(SectionOutlet.SectionId)}' cannot both have non-null values.", logs[0].Message);
+        Assert.Contains(
+            $"{nameof(SectionOutlet)} requires that '{nameof(SectionOutlet.SectionName)}' and '{nameof(SectionOutlet.SectionId)}' cannot both have non-null values.",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -87,7 +99,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains($"{nameof(SectionOutlet)} requires a non-null value either for '{nameof(SectionOutlet.SectionName)}' or '{nameof(SectionOutlet.SectionId)}'.", logs[0].Message);
+        Assert.Contains(
+            $"{nameof(SectionOutlet)} requires a non-null value either for '{nameof(SectionOutlet.SectionName)}' or '{nameof(SectionOutlet.SectionId)}'.",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -99,7 +114,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains($"{nameof(SectionContent)} requires that '{nameof(SectionContent.SectionName)}' and '{nameof(SectionContent.SectionId)}' cannot both have non-null values.", logs[0].Message);
+        Assert.Contains(
+            $"{nameof(SectionContent)} requires that '{nameof(SectionContent.SectionName)}' and '{nameof(SectionContent.SectionId)}' cannot both have non-null values.",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -111,7 +129,10 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
 
         Assert.True(logs.Count > 0);
 
-        Assert.Contains($"{nameof(SectionContent)} requires a non-null value either for '{nameof(SectionContent.SectionName)}' or '{nameof(SectionContent.SectionId)}'.", logs[0].Message);
+        Assert.Contains(
+            $"{nameof(SectionContent)} requires a non-null value either for '{nameof(SectionContent.SectionName)}' or '{nameof(SectionContent.SectionId)}'.",
+            logs[0].Message
+        );
     }
 
     [Fact]
@@ -256,7 +277,7 @@ public class SectionsTest : ServerTestBase<ToggleExecutionModeServerFixture<Prog
     [Fact]
     public void SectionOutletGetsDisposed_NoContentsRendered()
     {
-        // Render Counter and TextComponent SectionContents with same Name      
+        // Render Counter and TextComponent SectionContents with same Name
         _appElement.FindElement(By.Id("counter-render-section-content")).Click();
         _appElement.FindElement(By.Id("text-render-section-content")).Click();
 

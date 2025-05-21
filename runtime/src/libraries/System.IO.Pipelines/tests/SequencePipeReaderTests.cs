@@ -90,7 +90,6 @@ namespace System.IO.Pipelines.Tests
             var sequence = new ReadOnlySequence<byte>(helloBytes);
             PipeReader reader = PipeReader.Create(sequence);
 
-
             ReadResult readResult = await reader.ReadAsync();
             ReadOnlySequence<byte> buffer = readResult.Buffer;
             reader.AdvanceTo(buffer.Start, buffer.End);
@@ -109,7 +108,9 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public async Task NextReadAfterPartiallyExaminedReturnsImmediately()
         {
-            var sequence = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(new string('a', 10000)));
+            var sequence = new ReadOnlySequence<byte>(
+                Encoding.ASCII.GetBytes(new string('a', 10000))
+            );
             PipeReader reader = PipeReader.Create(sequence);
 
             ReadResult readResult = await reader.ReadAsync();
@@ -150,7 +151,8 @@ namespace System.IO.Pipelines.Tests
             PipeReader reader = PipeReader.Create(ReadOnlySequence<byte>.Empty);
 
             reader.Complete();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync()
+            );
         }
 
         [Fact]
@@ -215,7 +217,13 @@ namespace System.IO.Pipelines.Tests
             bool fired = false;
             PipeReader reader = PipeReader.Create(ReadOnlySequence<byte>.Empty);
 #pragma warning disable CS0618 // Type or member is obsolete
-            reader.OnWriterCompleted((_, __) => { fired = true; }, null);
+            reader.OnWriterCompleted(
+                (_, __) =>
+                {
+                    fired = true;
+                },
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             reader.Complete();
             Assert.False(fired);

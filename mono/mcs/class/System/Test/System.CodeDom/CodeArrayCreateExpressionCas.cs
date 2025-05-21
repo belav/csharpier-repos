@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,162 +27,171 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeArrayCreateExpressionCas
+    {
+        private CodeTypeReference ctr;
+        private CodeExpression ce;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeArrayCreateExpressionCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // at fulltrust
+            ctr = new CodeTypeReference("System.Void");
+            ce = new CodeExpression();
+        }
 
-		private CodeTypeReference ctr;
-		private CodeExpression ce;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// at fulltrust
-			ctr = new CodeTypeReference ("System.Void");
-			ce = new CodeExpression ();
-		}
+        private void CheckProperties(CodeArrayCreateExpression cace) { }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression();
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		private void CheckProperties (CodeArrayCreateExpression cace)
-		{
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(ctr, ce);
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.AreSame(ce, cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression ();
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            CodeExpression[] parameters = new CodeExpression[1] { ce };
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(ctr, parameters);
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(1, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression (ctr, ce);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.AreSame (ce, cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor3_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(ctr, Int32.MinValue);
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(Int32.MinValue, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeExpression[] parameters = new CodeExpression[1] { ce };
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression (ctr, parameters);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (1, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor4_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression("System.Void", ce);
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.AreSame(ce, cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor3_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression (ctr, Int32.MinValue);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (Int32.MinValue, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor5_Deny_Unrestricted()
+        {
+            CodeExpression[] parameters = new CodeExpression[1] { ce };
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(
+                "System.Void",
+                parameters
+            );
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(1, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor4_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression ("System.Void", ce);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.AreSame (ce, cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor6_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(
+                "System.Void",
+                Int32.MinValue
+            );
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(Int32.MinValue, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor5_Deny_Unrestricted ()
-		{
-			CodeExpression[] parameters = new CodeExpression[1] { ce };
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression ("System.Void", parameters);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (1, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor7_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(typeof(void), ce);
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.AreSame(ce, cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor6_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression ("System.Void", Int32.MinValue);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (Int32.MinValue, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor8_Deny_Unrestricted()
+        {
+            CodeExpression[] parameters = new CodeExpression[1] { ce };
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(
+                typeof(void),
+                parameters
+            );
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(1, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(0, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor7_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression (typeof(void), ce);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.AreSame (ce, cace.SizeExpression, "SizeExpression");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor9_Deny_Unrestricted()
+        {
+            CodeArrayCreateExpression cace = new CodeArrayCreateExpression(
+                typeof(void),
+                Int32.MinValue
+            );
+            Assert.AreEqual("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
+            Assert.AreEqual(0, cace.Initializers.Count, "Initializers");
+            Assert.AreEqual(Int32.MinValue, cace.Size, "Size");
+            Assert.IsNull(cace.SizeExpression, "SizeExpression");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor8_Deny_Unrestricted ()
-		{
-			CodeExpression[] parameters = new CodeExpression[1] { ce };
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression (typeof (void), parameters);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (1, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (0, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor9_Deny_Unrestricted ()
-		{
-			CodeArrayCreateExpression cace = new CodeArrayCreateExpression (typeof (void), Int32.MinValue);
-			Assert.AreEqual ("System.Void", cace.CreateType.BaseType, "CreateType.BaseType");
-			Assert.AreEqual (0, cace.Initializers.Count, "Initializers");
-			Assert.AreEqual (Int32.MinValue, cace.Size, "Size");
-			Assert.IsNull (cace.SizeExpression, "SizeExpression");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeArrayCreateExpression).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeArrayCreateExpression).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

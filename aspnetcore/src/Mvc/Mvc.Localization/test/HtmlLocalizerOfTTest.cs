@@ -17,8 +17,7 @@ public class HtmlLocalizerOfTTest
         htmlLocalizer.Setup(h => h["Hello"]).Returns(localizedString);
 
         var htmlLocalizerFactory = new Mock<IHtmlLocalizerFactory>();
-        htmlLocalizerFactory.Setup(h => h.Create(typeof(TestClass)))
-            .Returns(htmlLocalizer.Object);
+        htmlLocalizerFactory.Setup(h => h.Create(typeof(TestClass))).Returns(htmlLocalizer.Object);
 
         var htmlLocalizerOfT = new HtmlLocalizer<TestClass>(htmlLocalizerFactory.Object);
 
@@ -39,8 +38,7 @@ public class HtmlLocalizerOfTTest
         htmlLocalizer.Setup(h => h["Hello", "test"]).Returns(localizedString);
 
         var htmlLocalizerFactory = new Mock<IHtmlLocalizerFactory>();
-        htmlLocalizerFactory.Setup(h => h.Create(typeof(TestClass)))
-            .Returns(htmlLocalizer.Object);
+        htmlLocalizerFactory.Setup(h => h.Create(typeof(TestClass))).Returns(htmlLocalizer.Object);
 
         var htmlLocalizerOfT = new HtmlLocalizer<TestClass>(htmlLocalizerFactory.Object);
 

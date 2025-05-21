@@ -19,54 +19,62 @@ internal sealed class TemplateRenderer
     private const string EditorTemplateViewPath = "EditorTemplates";
     public const string IEnumerableOfIFormFileName = "IEnumerable`" + nameof(IFormFile);
 
-    private static readonly Dictionary<string, Func<IHtmlHelper, IHtmlContent>> _defaultDisplayActions =
-        new Dictionary<string, Func<IHtmlHelper, IHtmlContent>>(StringComparer.OrdinalIgnoreCase)
-        {
-                { "Collection", DefaultDisplayTemplates.CollectionTemplate },
-                { "EmailAddress", DefaultDisplayTemplates.EmailAddressTemplate },
-                { "HiddenInput", DefaultDisplayTemplates.HiddenInputTemplate },
-                { "Html", DefaultDisplayTemplates.HtmlTemplate },
-                { "Text", DefaultDisplayTemplates.StringTemplate },
-                { "Url", DefaultDisplayTemplates.UrlTemplate },
-                { typeof(bool).Name, DefaultDisplayTemplates.BooleanTemplate },
-                { typeof(decimal).Name, DefaultDisplayTemplates.DecimalTemplate },
-                { typeof(string).Name, DefaultDisplayTemplates.StringTemplate },
-                { typeof(object).Name, DefaultDisplayTemplates.ObjectTemplate },
-        };
+    private static readonly Dictionary<
+        string,
+        Func<IHtmlHelper, IHtmlContent>
+    > _defaultDisplayActions = new Dictionary<string, Func<IHtmlHelper, IHtmlContent>>(
+        StringComparer.OrdinalIgnoreCase
+    )
+    {
+        { "Collection", DefaultDisplayTemplates.CollectionTemplate },
+        { "EmailAddress", DefaultDisplayTemplates.EmailAddressTemplate },
+        { "HiddenInput", DefaultDisplayTemplates.HiddenInputTemplate },
+        { "Html", DefaultDisplayTemplates.HtmlTemplate },
+        { "Text", DefaultDisplayTemplates.StringTemplate },
+        { "Url", DefaultDisplayTemplates.UrlTemplate },
+        { typeof(bool).Name, DefaultDisplayTemplates.BooleanTemplate },
+        { typeof(decimal).Name, DefaultDisplayTemplates.DecimalTemplate },
+        { typeof(string).Name, DefaultDisplayTemplates.StringTemplate },
+        { typeof(object).Name, DefaultDisplayTemplates.ObjectTemplate },
+    };
 
-    private static readonly Dictionary<string, Func<IHtmlHelper, IHtmlContent>> _defaultEditorActions =
-        new Dictionary<string, Func<IHtmlHelper, IHtmlContent>>(StringComparer.OrdinalIgnoreCase)
-        {
-                { "Collection", DefaultEditorTemplates.CollectionTemplate },
-                { "EmailAddress", DefaultEditorTemplates.EmailAddressInputTemplate },
-                { "HiddenInput", DefaultEditorTemplates.HiddenInputTemplate },
-                { "MultilineText", DefaultEditorTemplates.MultilineTemplate },
-                { "Password", DefaultEditorTemplates.PasswordTemplate },
-                { "PhoneNumber", DefaultEditorTemplates.PhoneNumberInputTemplate },
-                { "Text", DefaultEditorTemplates.StringTemplate },
-                { "Url", DefaultEditorTemplates.UrlInputTemplate },
-                { "Date", DefaultEditorTemplates.DateInputTemplate },
-                { "DateTime", DefaultEditorTemplates.DateTimeLocalInputTemplate },
-                { "DateTime-local", DefaultEditorTemplates.DateTimeLocalInputTemplate },
-                { nameof(DateTimeOffset), DefaultEditorTemplates.DateTimeOffsetTemplate },
-                { "Time", DefaultEditorTemplates.TimeInputTemplate },
-                { "Month", DefaultEditorTemplates.MonthInputTemplate },
-                { "Week", DefaultEditorTemplates.WeekInputTemplate },
-                { typeof(byte).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(sbyte).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(short).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(ushort).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(int).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(uint).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(long).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(ulong).Name, DefaultEditorTemplates.NumberInputTemplate },
-                { typeof(bool).Name, DefaultEditorTemplates.BooleanTemplate },
-                { typeof(decimal).Name, DefaultEditorTemplates.DecimalTemplate },
-                { typeof(string).Name, DefaultEditorTemplates.StringTemplate },
-                { typeof(object).Name, DefaultEditorTemplates.ObjectTemplate },
-                { typeof(IFormFile).Name, DefaultEditorTemplates.FileInputTemplate },
-                { IEnumerableOfIFormFileName, DefaultEditorTemplates.FileCollectionInputTemplate },
-        };
+    private static readonly Dictionary<
+        string,
+        Func<IHtmlHelper, IHtmlContent>
+    > _defaultEditorActions = new Dictionary<string, Func<IHtmlHelper, IHtmlContent>>(
+        StringComparer.OrdinalIgnoreCase
+    )
+    {
+        { "Collection", DefaultEditorTemplates.CollectionTemplate },
+        { "EmailAddress", DefaultEditorTemplates.EmailAddressInputTemplate },
+        { "HiddenInput", DefaultEditorTemplates.HiddenInputTemplate },
+        { "MultilineText", DefaultEditorTemplates.MultilineTemplate },
+        { "Password", DefaultEditorTemplates.PasswordTemplate },
+        { "PhoneNumber", DefaultEditorTemplates.PhoneNumberInputTemplate },
+        { "Text", DefaultEditorTemplates.StringTemplate },
+        { "Url", DefaultEditorTemplates.UrlInputTemplate },
+        { "Date", DefaultEditorTemplates.DateInputTemplate },
+        { "DateTime", DefaultEditorTemplates.DateTimeLocalInputTemplate },
+        { "DateTime-local", DefaultEditorTemplates.DateTimeLocalInputTemplate },
+        { nameof(DateTimeOffset), DefaultEditorTemplates.DateTimeOffsetTemplate },
+        { "Time", DefaultEditorTemplates.TimeInputTemplate },
+        { "Month", DefaultEditorTemplates.MonthInputTemplate },
+        { "Week", DefaultEditorTemplates.WeekInputTemplate },
+        { typeof(byte).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(sbyte).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(short).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(ushort).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(int).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(uint).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(long).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(ulong).Name, DefaultEditorTemplates.NumberInputTemplate },
+        { typeof(bool).Name, DefaultEditorTemplates.BooleanTemplate },
+        { typeof(decimal).Name, DefaultEditorTemplates.DecimalTemplate },
+        { typeof(string).Name, DefaultEditorTemplates.StringTemplate },
+        { typeof(object).Name, DefaultEditorTemplates.ObjectTemplate },
+        { typeof(IFormFile).Name, DefaultEditorTemplates.FileInputTemplate },
+        { IEnumerableOfIFormFileName, DefaultEditorTemplates.FileCollectionInputTemplate },
+    };
 
     private readonly IViewEngine _viewEngine;
     private readonly IViewBufferScope _bufferScope;
@@ -81,7 +89,8 @@ internal sealed class TemplateRenderer
         ViewContext viewContext,
         ViewDataDictionary viewData,
         string templateName,
-        bool readOnly)
+        bool readOnly
+    )
     {
         ArgumentNullException.ThrowIfNull(viewEngine);
         ArgumentNullException.ThrowIfNull(bufferScope);
@@ -103,23 +112,42 @@ internal sealed class TemplateRenderer
 
         foreach (var viewName in GetViewNames())
         {
-            var viewEngineResult = _viewEngine.GetView(_viewContext.ExecutingFilePath, viewName, isMainPage: false);
+            var viewEngineResult = _viewEngine.GetView(
+                _viewContext.ExecutingFilePath,
+                viewName,
+                isMainPage: false
+            );
             if (!viewEngineResult.Success)
             {
                 var fullViewName = modeViewPath + "/" + viewName;
-                viewEngineResult = _viewEngine.FindView(_viewContext, fullViewName, isMainPage: false);
+                viewEngineResult = _viewEngine.FindView(
+                    _viewContext,
+                    fullViewName,
+                    isMainPage: false
+                );
             }
 
             if (viewEngineResult.Success)
             {
-                var viewBuffer = new ViewBuffer(_bufferScope, viewName, ViewBuffer.PartialViewPageSize);
-                using (var writer = new ViewBufferTextWriter(viewBuffer, _viewContext.Writer.Encoding))
+                var viewBuffer = new ViewBuffer(
+                    _bufferScope,
+                    viewName,
+                    ViewBuffer.PartialViewPageSize
+                );
+                using (
+                    var writer = new ViewBufferTextWriter(viewBuffer, _viewContext.Writer.Encoding)
+                )
                 {
                     // Forcing synchronous behavior so users don't have to await templates.
                     var view = viewEngineResult.View;
                     using (view as IDisposable)
                     {
-                        var viewContext = new ViewContext(_viewContext, viewEngineResult.View, _viewData, writer);
+                        var viewContext = new ViewContext(
+                            _viewContext,
+                            viewEngineResult.View,
+                            _viewData,
+                            writer
+                        );
                         var renderTask = viewEngineResult.View.RenderAsync(viewContext);
                         renderTask.GetAwaiter().GetResult();
                         return viewBuffer;
@@ -134,7 +162,8 @@ internal sealed class TemplateRenderer
         }
 
         throw new InvalidOperationException(
-            Resources.FormatTemplateHelpers_NoTemplate(_viewData.ModelExplorer.ModelType.FullName));
+            Resources.FormatTemplateHelpers_NoTemplate(_viewData.ModelExplorer.ModelType.FullName)
+        );
     }
 
     private Dictionary<string, Func<IHtmlHelper, IHtmlContent>> GetDefaultActions()
@@ -145,12 +174,7 @@ internal sealed class TemplateRenderer
     private IEnumerable<string> GetViewNames()
     {
         var metadata = _viewData.ModelMetadata;
-        var templateHints = new[]
-        {
-                _templateName,
-                metadata.TemplateHint,
-                metadata.DataTypeName
-            };
+        var templateHints = new[] { _templateName, metadata.TemplateHint, metadata.DataTypeName };
 
         foreach (var templateHint in templateHints.Where(s => !string.IsNullOrEmpty(s)))
         {
@@ -241,7 +265,12 @@ internal sealed class TemplateRenderer
 
         if (newHelper is IViewContextAware contextable)
         {
-            var newViewContext = new ViewContext(viewContext, viewContext.View, viewData, viewContext.Writer);
+            var newViewContext = new ViewContext(
+                viewContext,
+                viewContext.View,
+                viewData,
+                viewContext.Writer
+            );
             contextable.Contextualize(newViewContext);
         }
 

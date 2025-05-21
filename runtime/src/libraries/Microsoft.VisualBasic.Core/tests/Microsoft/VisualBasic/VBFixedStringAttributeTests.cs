@@ -23,7 +23,10 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData(32768)]
         public void Ctor_InvalidLength_ThrowsArgumentException(int length)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new VBFixedStringAttribute(length));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new VBFixedStringAttribute(length)
+            );
         }
     }
 }

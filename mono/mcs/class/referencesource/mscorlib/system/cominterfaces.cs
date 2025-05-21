@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
@@ -19,7 +19,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Activator))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _Activator
     {
 #if !FEATURE_CORECLR
@@ -27,9 +27,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -37,7 +52,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Attribute))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _Attribute
     {
 #if !FEATURE_CORECLR
@@ -45,9 +60,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 
@@ -55,7 +85,7 @@ namespace System.Runtime.InteropServices
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [CLSCompliant(false)]
     [TypeLibImportClassAttribute(typeof(System.Threading.Thread))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface _Thread
     {
 #if !FEATURE_CORECLR
@@ -63,9 +93,24 @@ namespace System.Runtime.InteropServices
 
         void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-        void GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-        void Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 #endif
     }
 }

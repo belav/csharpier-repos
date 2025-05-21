@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [Fact, WorkItem(48493, "https://github.com/dotnet/roslyn/issues/48493")]
         public void Repro_48493()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 
@@ -57,7 +58,8 @@ namespace Sample
         [Fact, WorkItem(48493, "https://github.com/dotnet/roslyn/issues/48493")]
         public void Repro_48493_Simple()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 internal class Widget
@@ -85,7 +87,8 @@ internal class Program
         [Fact, WorkItem(18811, "https://github.com/dotnet/roslyn/issues/18811")]
         public void MissingNullable_01()
         {
-            var source = @"namespace System {
+            var source =
+                @"namespace System {
     public class Object { }
     public abstract class ValueType { }
     public struct Void { }
@@ -96,18 +99,25 @@ static class C {
     public static bool M() => ((object)123) is int i;
 }
 ";
-            var compilation = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.ReleaseDll);
+            var compilation = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.ReleaseDll
+            );
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics().Verify(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+            compilation
+                .GetEmitDiagnostics()
+                .Verify(
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
                 );
         }
 
         [Fact, WorkItem(18811, "https://github.com/dotnet/roslyn/issues/18811")]
         public void MissingNullable_02()
         {
-            var source = @"namespace System {
+            var source =
+                @"namespace System {
     public class Object { }
     public abstract class ValueType { }
     public struct Void { }
@@ -119,18 +129,25 @@ static class C {
     public static bool M() => ((object)123) is int i;
 }
 ";
-            var compilation = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.UnsafeReleaseDll);
+            var compilation = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.UnsafeReleaseDll
+            );
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics().Verify(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion)
+            compilation
+                .GetEmitDiagnostics()
+                .Verify(
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion)
                 );
         }
 
         [Fact]
         public void MissingNullable_03()
         {
-            var source = @"namespace System {
+            var source =
+                @"namespace System {
     public class Object { }
     public abstract class ValueType { }
     public struct Void { }
@@ -149,36 +166,55 @@ static class C {
     static bool M2(int? x) => x is int i;
 }
 ";
-            var compilation = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.UnsafeReleaseDll);
+            var compilation = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.UnsafeReleaseDll
+            );
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics().Verify(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                //             case int i: break;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "get_HasValue").WithLocation(14, 18),
-                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
-                //             case int i: break;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "GetValueOrDefault").WithLocation(14, 18),
-                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
-                //             case int i: break;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "get_Value").WithLocation(14, 18),
-                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                //     static bool M2(int? x) => x is int i;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "get_HasValue").WithLocation(17, 36),
-                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
-                //     static bool M2(int? x) => x is int i;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "GetValueOrDefault").WithLocation(17, 36),
-                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
-                //     static bool M2(int? x) => x is int i;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "get_Value").WithLocation(17, 36)
+            compilation
+                .GetEmitDiagnostics()
+                .Verify(
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                    //             case int i: break;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "get_HasValue")
+                        .WithLocation(14, 18),
+                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
+                    //             case int i: break;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "GetValueOrDefault")
+                        .WithLocation(14, 18),
+                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
+                    //             case int i: break;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "get_Value")
+                        .WithLocation(14, 18),
+                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                    //     static bool M2(int? x) => x is int i;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "get_HasValue")
+                        .WithLocation(17, 36),
+                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.GetValueOrDefault'
+                    //     static bool M2(int? x) => x is int i;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "GetValueOrDefault")
+                        .WithLocation(17, 36),
+                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_Value'
+                    //     static bool M2(int? x) => x is int i;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "get_Value")
+                        .WithLocation(17, 36)
                 );
         }
 
         [Fact]
         public void MissingNullable_04()
         {
-            var source = @"namespace System {
+            var source =
+                @"namespace System {
     public class Object { }
     public abstract class ValueType { }
     public struct Void { }
@@ -197,17 +233,27 @@ static class C {
     static bool M2(int? x) => x is int i;
 }
 ";
-            var compilation = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.UnsafeReleaseDll);
+            var compilation = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.UnsafeReleaseDll
+            );
             compilation.GetDiagnostics().Verify();
-            compilation.GetEmitDiagnostics().Verify(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                //             case int i: break;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "get_HasValue").WithLocation(14, 18),
-                // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
-                //     static bool M2(int? x) => x is int i;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i").WithArguments("System.Nullable`1", "get_HasValue").WithLocation(17, 36)
+            compilation
+                .GetEmitDiagnostics()
+                .Verify(
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                    // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                    //             case int i: break;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "get_HasValue")
+                        .WithLocation(14, 18),
+                    // (17,36): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
+                    //     static bool M2(int? x) => x is int i;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "int i")
+                        .WithArguments("System.Nullable`1", "get_HasValue")
+                        .WithLocation(17, 36)
                 );
         }
 
@@ -215,7 +261,7 @@ static class C {
         public void DoubleEvaluation01()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void Main()
@@ -236,8 +282,9 @@ public class C
             compilation.VerifyDiagnostics();
             var expectedOutput = @"eval";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.Main",
-@"{
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"{
   // Code size       42 (0x2a)
   .maxstack  1
   .locals init (int V_0, //index
@@ -264,13 +311,15 @@ public class C
   IL_0027:  nop
   IL_0028:  nop
   IL_0029:  ret
-}");
+}"
+            );
 
             compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.Main",
-@"{
+            compVerifier.VerifyIL(
+                "C.Main",
+                @"{
   // Code size       30 (0x1e)
   .maxstack  1
   .locals init (int V_0, //index
@@ -286,13 +335,15 @@ public class C
   IL_0017:  ldloc.0
   IL_0018:  call       ""void System.Console.WriteLine(int)""
   IL_001d:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(19122, "https://github.com/dotnet/roslyn/issues/19122")]
         public void PatternCrash_01()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -333,8 +384,9 @@ class IdentityAccessor<T>
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("X<T>.Y<U>",
-@"{
+            compVerifier.VerifyIL(
+                "X<T>.Y<U>",
+                @"{
   // Code size       61 (0x3d)
   .maxstack  3
   .locals init (U V_0, //u
@@ -365,14 +417,15 @@ class IdentityAccessor<T>
   IL_003a:  nop
   IL_003b:  nop
   IL_003c:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(24522, "https://github.com/dotnet/roslyn/issues/24522")]
         public void IgnoreDeclaredConversion_01()
         {
             var source =
-@"class Base<T>
+                @"class Base<T>
 {
     public static implicit operator Derived(Base<T> obj)
     {
@@ -401,13 +454,14 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"True
+                @"True
 True
 True
 True";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Program.Main",
-@"{
+            compVerifier.VerifyIL(
+                "Program.Main",
+                @"{
   // Code size       84 (0x54)
   .maxstack  2
   .locals init (Base<object> V_0, //x
@@ -454,14 +508,15 @@ True";
   IL_004d:  call       ""void System.Console.WriteLine(bool)""
   IL_0052:  nop
   IL_0053:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void DoublePattern01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static bool P1(double d) => d is double.NaN;
@@ -501,44 +556,54 @@ class Program
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"TrueFalseTrueFalseTrueFalseTrueFalseTrueFalseTrueFalseTrueFalseTrueFalse";
+            var expectedOutput =
+                @"TrueFalseTrueFalseTrueFalseTrueFalseTrueFalseTrueFalseTrueFalseTrueFalse";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Program.P1",
-@"{
+            compVerifier.VerifyIL(
+                "Program.P1",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""bool double.IsNaN(double)""
   IL_0006:  ret
-}");
-            compVerifier.VerifyIL("Program.P2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.P2",
+                @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""bool float.IsNaN(float)""
   IL_0006:  ret
-}");
-            compVerifier.VerifyIL("Program.P3",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.P3",
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldc.r8     3.14
   IL_000a:  ceq
   IL_000c:  ret
-}");
-            compVerifier.VerifyIL("Program.P4",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.P4",
+                @"{
   // Code size        9 (0x9)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldc.r4     3.14
   IL_0006:  ceq
   IL_0008:  ret
-}");
-            compVerifier.VerifyIL("Program.P5",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.P5",
+                @"{
   // Code size      103 (0x67)
   .maxstack  2
   .locals init (object V_0,
@@ -594,7 +659,8 @@ class Program
   IL_0062:  br.s       IL_0064
   IL_0064:  ldloc.s    V_4
   IL_0066:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -603,7 +669,7 @@ class Program
             // demonstrate that pattern-matching against a decimal constant is
             // at least as efficient as simply using ==
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void Main()
@@ -635,8 +701,9 @@ public class C
             compilation.VerifyDiagnostics();
             var expectedOutput = @"1100";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       37 (0x25)
   .maxstack  6
   .locals init (bool V_0,
@@ -662,9 +729,11 @@ public class C
   IL_0021:  br.s       IL_0023
   IL_0023:  ldloc.1
   IL_0024:  ret
-}");
-            compVerifier.VerifyIL("C.M2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"{
   // Code size       37 (0x25)
   .maxstack  6
   .locals init (bool V_0,
@@ -690,13 +759,15 @@ public class C
   IL_0021:  br.s       IL_0023
   IL_0023:  ldloc.1
   IL_0024:  ret
-}");
+}"
+            );
 
             compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  6
   IL_0000:  ldarg.0
@@ -713,9 +784,11 @@ public class C
   IL_0019:  ret
   IL_001a:  ldc.i4.0
   IL_001b:  ret
-}");
-            compVerifier.VerifyIL("C.M2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"{
   // Code size       28 (0x1c)
   .maxstack  6
   IL_0000:  ldarg.0
@@ -732,14 +805,15 @@ public class C
   IL_0019:  ret
   IL_001a:  ldc.i4.0
   IL_001b:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(16878, "https://github.com/dotnet/roslyn/issues/16878")]
         public void RedundantNullCheck()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static int M1(bool? b1, bool b2)
     {
@@ -771,8 +845,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       35 (0x23)
   .maxstack  1
   .locals init (bool? V_0)
@@ -796,9 +871,11 @@ public class C
   IL_0020:  ret
   IL_0021:  ldc.i4.4
   IL_0022:  ret
-}");
-            compVerifier.VerifyIL("C.M2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"{
   // Code size       19 (0x13)
   .maxstack  1
   .locals init (string V_0) //a
@@ -815,14 +892,15 @@ public class C
   IL_0010:  ret
   IL_0011:  ldc.i4.3
   IL_0012:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(12813, "https://github.com/dotnet/roslyn/issues/12813")]
         public void NoBoxingOnIntegerConstantPattern()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static bool M1(int x)
     {
@@ -832,22 +910,24 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size        6 (0x6)
   .maxstack  2
   IL_0000:  ldarg.0
   IL_0001:  ldc.i4.s   42
   IL_0003:  ceq
   IL_0005:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40403, "https://github.com/dotnet/roslyn/issues/40403")]
         public void RefParameter_StoreToTemp()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static bool M1(ref object x)
     {
@@ -857,8 +937,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       24 (0x18)
   .maxstack  2
   .locals init (object V_0)
@@ -875,14 +956,15 @@ public class C
   IL_0015:  ret
   IL_0016:  ldc.i4.0
   IL_0017:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40403, "https://github.com/dotnet/roslyn/issues/40403")]
         public void RefLocal_StoreToTemp()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static bool M1(bool b, ref object x, ref object y)
     {
@@ -893,8 +975,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       30 (0x1e)
   .maxstack  2
   .locals init (object V_0)
@@ -915,14 +998,15 @@ public class C
   IL_001b:  ret
   IL_001c:  ldc.i4.0
   IL_001d:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40403, "https://github.com/dotnet/roslyn/issues/40403")]
         public void InParameter_StoreToTemp()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static bool M1(in object x)
     {
@@ -932,8 +1016,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       24 (0x18)
   .maxstack  2
   .locals init (object V_0)
@@ -950,14 +1035,15 @@ public class C
   IL_0015:  ret
   IL_0016:  ldc.i4.0
   IL_0017:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40403, "https://github.com/dotnet/roslyn/issues/40403")]
         public void RefReadonlyLocal_StoreToTemp()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static bool M1(bool b, in object x, in object y)
     {
@@ -968,8 +1054,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       30 (0x1e)
   .maxstack  2
   .locals init (object V_0)
@@ -990,14 +1077,15 @@ public class C
   IL_001b:  ret
   IL_001c:  ldc.i4.0
   IL_001d:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(40403, "https://github.com/dotnet/roslyn/issues/40403")]
         public void OutParameter_StoreToTemp()
         {
             var source =
-@"public class C
+                @"public class C
 {
     static bool M1(out object x)
     {
@@ -1008,8 +1096,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1",
-@"{
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"{
   // Code size       27 (0x1b)
   .maxstack  2
   .locals init (object V_0)
@@ -1029,14 +1118,15 @@ public class C
   IL_0018:  ret
   IL_0019:  ldc.i4.0
   IL_001a:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(22654, "https://github.com/dotnet/roslyn/issues/22654")]
         public void NoRedundantTypeCheck()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public void SwitchBasedPatternMatching(object o)
@@ -1055,8 +1145,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.SwitchBasedPatternMatching",
-@"{
+            compVerifier.VerifyIL(
+                "C.SwitchBasedPatternMatching",
+                @"{
   // Code size       69 (0x45)
   .maxstack  2
   .locals init (int V_0, //n
@@ -1089,14 +1180,15 @@ public class C
   IL_003a:  ldstr      ""2""
   IL_003f:  call       ""void System.Console.WriteLine(string)""
   IL_0044:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(15437, "https://github.com/dotnet/roslyn/issues/15437")]
         public void IsTypeDiscard()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public bool IsString(object o)
     {
@@ -1106,8 +1198,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.IsString",
-@"{
+            compVerifier.VerifyIL(
+                "C.IsString",
+                @"{
   // Code size       10 (0xa)
   .maxstack  2
   IL_0000:  ldarg.1
@@ -1115,14 +1208,15 @@ public class C
   IL_0006:  ldnull
   IL_0007:  cgt.un
   IL_0009:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(19150, "https://github.com/dotnet/roslyn/issues/19150")]
         public void RedundantHasValue()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void M(int? x)
@@ -1141,8 +1235,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       33 (0x21)
   .maxstack  1
   IL_0000:  ldarga.s   V_0
@@ -1155,13 +1250,15 @@ public class C
   IL_0016:  ldstr      ""null""
   IL_001b:  call       ""void System.Console.Write(string)""
   IL_0020:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(19153, "https://github.com/dotnet/roslyn/issues/19153")]
         public void RedundantBox()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 public class C
 {
     public static void M<T, U>(U x) where T : U
@@ -1179,8 +1276,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M<T, U>(U)",
-@"{
+            compVerifier.VerifyIL(
+                "C.M<T, U>(U)",
+                @"{
   // Code size       35 (0x23)
   .maxstack  1
   IL_0000:  ldarg.0
@@ -1193,13 +1291,15 @@ public class C
   IL_0018:  box        ""T""
   IL_001d:  call       ""void System.Console.Write(object)""
   IL_0022:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead01()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -1223,8 +1323,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       82 (0x52)
   .maxstack  3
   .locals init (string V_0) //name
@@ -1254,13 +1355,15 @@ public class C {
   IL_0047:  call       ""string string.Concat(string, string, string)""
   IL_004c:  call       ""void System.Console.WriteLine(string)""
   IL_0051:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead02()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -1282,8 +1385,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       64 (0x40)
   .maxstack  3
   .locals init (string V_0, //name
@@ -1310,13 +1414,15 @@ public class C {
   IL_0035:  call       ""string string.Concat(string, string, string)""
   IL_003a:  call       ""void System.Console.WriteLine(string)""
   IL_003f:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead03()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -1339,8 +1445,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       65 (0x41)
   .maxstack  3
   .locals init (string V_0) //name
@@ -1366,17 +1473,19 @@ public class C {
   IL_0036:  call       ""string string.Concat(string, string, string)""
   IL_003b:  call       ""void System.Console.WriteLine(string)""
   IL_0040:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead04()
         {
             // Cannot combine the evaluations of name here, since we first check if p is Teacher,
-            // and only if that fails check if p is null. 
+            // and only if that fails check if p is null.
             // Combining the evaluations would mean first checking if p is null, then evaluating name, then checking if p is Teacher.
             // This would not necessarily be more performant.
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -1399,8 +1508,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       75 (0x4b)
   .maxstack  3
   .locals init (string V_0, //name
@@ -1433,20 +1543,22 @@ public class C {
   IL_0045:  call       ""void System.Console.WriteLine(string)""
   IL_004a:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead05()
         {
             // Cannot combine the evaluations of name here, since we first check if p is Teacher,
-            // and only if that fails check if p is Student. 
-            // Combining the evaluations would mean first checking if p is null, 
-            // then evaluating name, 
-            // then checking if p is Teacher, 
+            // and only if that fails check if p is Student.
+            // Combining the evaluations would mean first checking if p is null,
+            // then evaluating name,
+            // then checking if p is Teacher,
             // then checking if p is Student.
             // This would not necessarily be more performant.
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -1471,8 +1583,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       80 (0x50)
   .maxstack  3
   .locals init (string V_0, //name
@@ -1506,13 +1619,15 @@ public class C {
   IL_004a:  call       ""void System.Console.WriteLine(string)""
   IL_004f:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead06()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -1535,8 +1650,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       58 (0x3a)
   .maxstack  2
   .locals init (string V_0,
@@ -1566,17 +1682,19 @@ public class C {
   IL_002f:  ldstr      ""Hello student!""
   IL_0034:  call       ""void System.Console.WriteLine(string)""
   IL_0039:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead07()
         {
             // Cannot combine the evaluations of name here, since we first check if name is MemoryStream,
-            // and only if that fails check if name is null. 
+            // and only if that fails check if name is null.
             // Combining the evaluations would mean first checking if name is null, then evaluating name, then checking if p is Teacher.
             // This would not necessarily be more performant.
-            var source = @"using System;
+            var source =
+                @"using System;
 using System.IO;
 
 public class Person {
@@ -1598,8 +1716,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       66 (0x42)
   .maxstack  2
   .locals init (System.IO.Stream V_0,
@@ -1632,13 +1751,15 @@ public class C {
   IL_0037:  ldstr      ""Your Names A Stream!""
   IL_003c:  call       ""void System.Console.WriteLine(string)""
   IL_0041:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead08()
         {
-            var source = @"
+            var source =
+                @"
 public class Person {
     public string Name { get; set; }
 }
@@ -1657,8 +1778,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       51 (0x33)
   .maxstack  2
   .locals init (string V_0)
@@ -1683,13 +1805,15 @@ public class C {
   IL_0030:  stloc.0
   IL_0031:  ldloc.0
   IL_0032:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void NoRedundantPropertyRead09()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public virtual string Name { get; set; }
@@ -1712,8 +1836,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       65 (0x41)
   .maxstack  3
   .locals init (string V_0) //name
@@ -1739,7 +1864,8 @@ public class C {
   IL_0036:  call       ""string string.Concat(string, string, string)""
   IL_003b:  call       ""void System.Console.WriteLine(string)""
   IL_0040:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
@@ -1748,7 +1874,8 @@ public class C {
             // Currently we don't combine these redundant property reads.
             // However we could do so in the future.
 
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public abstract class Person {
     public abstract string Name { get; set; }
@@ -1773,8 +1900,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       73 (0x49)
   .maxstack  3
   .locals init (string V_0, //name
@@ -1804,7 +1932,8 @@ public class C {
   IL_003e:  call       ""string string.Concat(string, string, string)""
   IL_0043:  call       ""void System.Console.WriteLine(string)""
   IL_0048:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
@@ -1813,7 +1942,8 @@ public class C {
             // Currently we don't combine the redundant property reads at all.
             // However this could be improved in the future so this test is important
 
-            var source = @"using System;
+            var source =
+                @"using System;
 
 #nullable enable
 
@@ -1840,8 +1970,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       78 (0x4e)
   .maxstack  2
   .locals init (string V_0, //name
@@ -1872,13 +2003,15 @@ public class C {
   IL_0043:  call       ""string string.Format(string, object)""
   IL_0048:  call       ""void System.Console.WriteLine(string)""
   IL_004d:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void CombiningRedundantPropertyReadsDoesNotChangeNullabilityAnalysis02()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 #nullable enable
 
@@ -1904,8 +2037,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       75 (0x4b)
   .maxstack  2
   .locals init (string V_0, //name
@@ -1941,13 +2075,15 @@ public class C {
   IL_0040:  call       ""string string.Format(string, object)""
   IL_0045:  call       ""void System.Console.WriteLine(string)""
   IL_004a:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void CombiningRedundantPropertyReadsDoesNotChangeNullabilityAnalysis03()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 #nullable enable
 
@@ -1974,10 +2110,12 @@ public class C {
             compilation.VerifyDiagnostics(
                 // (19,66): warning CS8602: Dereference of a possibly null reference.
                 //                 Console.WriteLine($"Student has name of length { name.Length }!");
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "name").WithLocation(19, 66));
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "name").WithLocation(19, 66)
+            );
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       68 (0x44)
   .maxstack  2
   .locals init (string V_0, //name
@@ -2007,13 +2145,15 @@ public class C {
   IL_0039:  call       ""string string.Format(string, object)""
   IL_003e:  call       ""void System.Console.WriteLine(string)""
   IL_0043:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(34933, "https://github.com/dotnet/roslyn/issues/34933")]
         public void DoNotCombineDifferentPropertyReadsWithSameName()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Person {
     public string Name { get; set; }
@@ -2038,8 +2178,9 @@ public class C {
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M",
-@"{
+            compVerifier.VerifyIL(
+                "C.M",
+                @"{
   // Code size       73 (0x49)
   .maxstack  3
   .locals init (string V_0, //name
@@ -2069,13 +2210,15 @@ public class C {
   IL_003e:  call       ""string string.Concat(string, string, string)""
   IL_0043:  call       ""void System.Console.WriteLine(string)""
   IL_0048:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(51801, "https://github.com/dotnet/roslyn/issues/51801")]
         public void PropertyOverrideLacksAccessor()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 
 class Base
@@ -2101,7 +2244,9 @@ class C : Base
 }
 ";
             var verifier = CompileAndVerify(source);
-            verifier.VerifyIL("C.M", @"
+            verifier.VerifyIL(
+                "C.M",
+                @"
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -2119,13 +2264,15 @@ class C : Base
   IL_0013:  ldarg.0
   IL_0014:  call       ""string C.Value.get""
   IL_0019:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20641, "https://github.com/dotnet/roslyn/issues/20641")]
         public void PatternsVsAs01()
         {
-            var source = @"using System.Collections;
+            var source =
+                @"using System.Collections;
 using System.Collections.Generic;
 
 class Program
@@ -2173,8 +2320,9 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("Program.TryGetCount1<T>",
-@"{
+            compVerifier.VerifyIL(
+                "Program.TryGetCount1<T>",
+                @"{
   // Code size       45 (0x2d)
   .maxstack  2
   .locals init (System.Collections.ICollection V_0, //nonGeneric
@@ -2206,9 +2354,11 @@ class Program
   IL_002a:  stind.i4
   IL_002b:  ldc.i4.0
   IL_002c:  ret
-}");
-            compVerifier.VerifyIL("Program.TryGetCount2<T>",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.TryGetCount2<T>",
+                @"{
   // Code size       47 (0x2f)
   .maxstack  2
   .locals init (System.Collections.ICollection V_0, //nonGeneric
@@ -2241,13 +2391,15 @@ class Program
   IL_002c:  stind.i4
   IL_002d:  ldc.i4.0
   IL_002e:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(20641, "https://github.com/dotnet/roslyn/issues/20641")]
         public void PatternsVsAs02()
         {
-            var source = @"using System.Collections;
+            var source =
+                @"using System.Collections;
 class Program
 {
     static void Main() { }
@@ -2267,8 +2419,9 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("Program.IsEmpty1",
-@"{
+            compVerifier.VerifyIL(
+                "Program.IsEmpty1",
+                @"{
   // Code size       22 (0x16)
   .maxstack  2
   .locals init (System.Collections.ICollection V_0) //c
@@ -2284,9 +2437,11 @@ class Program
   IL_0013:  ret
   IL_0014:  ldc.i4.0
   IL_0015:  ret
-}");
-            compVerifier.VerifyIL("Program.IsEmpty2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.IsEmpty2",
+                @"{
   // Code size       22 (0x16)
   .maxstack  2
   .locals init (System.Collections.ICollection V_0) //c
@@ -2302,7 +2457,8 @@ class Program
   IL_0013:  ret
   IL_0014:  ldc.i4.0
   IL_0015:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -2310,7 +2466,8 @@ class Program
         [WorkItem(1395, "https://github.com/dotnet/csharplang/issues/1395")]
         public void TupleSwitch01()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class Door
 {
@@ -2385,7 +2542,7 @@ class Program
     }
 }";
             var expectedOutput =
-@"Opened Close -> Closed
+                @"Opened Close -> Closed
 Closed Lock -> Closed
 Closed Lock withKey -> Locked
 Locked Open -> Locked
@@ -2401,11 +2558,16 @@ Locked Unlock -> Locked
 Locked Unlock withKey -> Closed
 Closed Open -> Opened
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithRecursivePatterns);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithRecursivePatterns
+            );
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Door.ChangeState0",
-@"{
+            compVerifier.VerifyIL(
+                "Door.ChangeState0",
+                @"{
   // Code size       61 (0x3d)
   .maxstack  2
   .locals init (Door.DoorState V_0, //oldState
@@ -2448,9 +2610,11 @@ Closed Open -> Opened
   IL_003a:  ret
   IL_003b:  ldloc.0
   IL_003c:  ret
-}");
-            compVerifier.VerifyIL("Door.ChangeState1",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Door.ChangeState1",
+                @"{
   // Code size       71 (0x47)
   .maxstack  2
   .locals init (Door.DoorState V_0,
@@ -2500,7 +2664,8 @@ Closed Open -> Opened
   IL_0044:  stloc.0
   IL_0045:  ldloc.0
   IL_0046:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -2509,7 +2674,7 @@ Closed Open -> Opened
         public void SharingTemps01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main(string[] args) { }
     void M1(string x)
@@ -2535,11 +2700,16 @@ Closed Open -> Opened
     static bool Mutate(ref string x) { x = null; return false; }
     static bool Pure(string x) { return false; }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithoutRecursivePatterns);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithoutRecursivePatterns
+            );
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("Program.M1",
-@"{
+            compVerifier.VerifyIL(
+                "Program.M1",
+                @"{
   // Code size       50 (0x32)
   .maxstack  2
   .locals init (string V_0)
@@ -2562,9 +2732,11 @@ Closed Open -> Opened
   IL_002b:  call       ""bool Program.Mutate(ref string)""
   IL_0030:  pop
   IL_0031:  ret
-}");
-            compVerifier.VerifyIL("Program.M2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.M2",
+                @"{
   // Code size       49 (0x31)
   .maxstack  2
   .locals init (string V_0)
@@ -2587,14 +2759,15 @@ Closed Open -> Opened
   IL_002a:  call       ""bool Program.Pure(string)""
   IL_002f:  pop
   IL_0030:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(17266, "https://github.com/dotnet/roslyn/issues/17266")]
         public void IrrefutablePatternInIs01()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void Main()
@@ -2611,7 +2784,8 @@ public class C
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"eval
+            var expectedOutput =
+                @"eval
 1";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -2620,7 +2794,7 @@ public class C
         public void IrrefutablePatternInIs02()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void Main()
@@ -2643,9 +2817,14 @@ public struct Assignment
     public void Deconstruct(out int left, out int right) => (left, right) = (Left, Right);
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithRecursivePatterns);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithRecursivePatterns
+            );
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"eval
+            var expectedOutput =
+                @"eval
 1
 2";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -2655,7 +2834,7 @@ public struct Assignment
         public void MissingNullCheck01()
         {
             var source =
-@"class Program
+                @"class Program
 {
     public static void Main()
     {
@@ -2664,7 +2843,11 @@ public struct Assignment
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithRecursivePatterns);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithRecursivePatterns
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"False";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -2676,7 +2859,7 @@ public struct Assignment
         public void ConstantPatternVsUnconstrainedTypeParameter01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -2713,7 +2896,7 @@ class Program
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"True
+                @"True
 False
 True
 False
@@ -2727,8 +2910,9 @@ True
 False
 ";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Program.Test1<T>(T)",
-@"{
+            compVerifier.VerifyIL(
+                "Program.Test1<T>(T)",
+                @"{
   // Code size       10 (0xa)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -2736,9 +2920,11 @@ False
   IL_0006:  ldnull
   IL_0007:  ceq
   IL_0009:  ret
-}");
-            compVerifier.VerifyIL("Program.Test2<T>(T)",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.Test2<T>(T)",
+                @"{
   // Code size       35 (0x23)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -2755,9 +2941,11 @@ False
   IL_0021:  ldc.i4.0
   IL_0022:  ret
 }
-");
-            compVerifier.VerifyIL("Program.Test3<T>(T)",
-@"{
+"
+            );
+            compVerifier.VerifyIL(
+                "Program.Test3<T>(T)",
+                @"{
   // Code size       29 (0x1d)
   .maxstack  2
   .locals init (string V_0)
@@ -2773,7 +2961,8 @@ False
   IL_001a:  ret
   IL_001b:  ldc.i4.0
   IL_001c:  ret
-}");
+}"
+            );
         }
 
         [Fact]
@@ -2782,7 +2971,7 @@ False
         public void ConstantPatternVsUnconstrainedTypeParameter02()
         {
             var source =
-@"class C<T>
+                @"class C<T>
 {
     internal struct S { }
     static bool Test(S s)
@@ -2793,8 +2982,9 @@ False
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C<T>.Test(C<T>.S)",
-@"{
+            compVerifier.VerifyIL(
+                "C<T>.Test(C<T>.S)",
+                @"{
   // Code size       35 (0x23)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -2811,7 +3001,8 @@ False
   IL_0021:  ldc.i4.0
   IL_0022:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -2819,7 +3010,7 @@ False
         public void VariablesInSwitchExpressionArms()
         {
             var source =
-@"class C
+                @"class C
 {
     public override bool Equals(object obj) =>
         obj switch
@@ -2839,8 +3030,9 @@ False
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "TrueFalse");
-            compVerifier.VerifyIL("C.Equals(object)",
-@"{
+            compVerifier.VerifyIL(
+                "C.Equals(object)",
+                @"{
   // Code size       25 (0x19)
   .maxstack  2
   .locals init (C V_0, //x1
@@ -2865,14 +3057,15 @@ False
   IL_0016:  stloc.3
   IL_0017:  ldloc.3
   IL_0018:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(26387, "https://github.com/dotnet/roslyn/issues/26387")]
         public void ValueTypeArgument01()
         {
             var source =
-@"using System;
+                @"using System;
 
 class TestHelper
 {
@@ -2902,12 +3095,13 @@ struct S { }
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"True
+                @"True
 True
 True";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("TestHelper.IsValueTypeT0<T>(T)",
-@"{
+            compVerifier.VerifyIL(
+                "TestHelper.IsValueTypeT0<T>(T)",
+                @"{
   // Code size       15 (0xf)
   .maxstack  2
   .locals init (bool V_0)
@@ -2920,9 +3114,11 @@ True";
   IL_000b:  br.s       IL_000d
   IL_000d:  ldloc.0
   IL_000e:  ret
-}");
-            compVerifier.VerifyIL("TestHelper.IsValueTypeT1<T>(T)",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "TestHelper.IsValueTypeT1<T>(T)",
+                @"{
   // Code size       20 (0x14)
   .maxstack  1
   .locals init (T V_0, //v
@@ -2940,9 +3136,11 @@ True";
   IL_0010:  br.s       IL_0012
   IL_0012:  ldloc.1
   IL_0013:  ret
-}");
-            compVerifier.VerifyIL("TestHelper.IsValueTypeT2<T>(T)",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "TestHelper.IsValueTypeT2<T>(T)",
+                @"{
   // Code size       15 (0xf)
   .maxstack  2
   .locals init (bool V_0)
@@ -2955,14 +3153,15 @@ True";
   IL_000b:  br.s       IL_000d
   IL_000d:  ldloc.0
   IL_000e:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(26387, "https://github.com/dotnet/roslyn/issues/26387")]
         public void ValueTypeArgument02()
         {
             var source =
-@"namespace ConsoleApp1
+                @"namespace ConsoleApp1
 {
     public class TestHelper
     {
@@ -2998,11 +3197,11 @@ True";
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var expectedOutput =
-@"done";
+            var expectedOutput = @"done";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("ConsoleApp1.TestHelper.IsValueTypeT<T>(ConsoleApp1.Result<T>)",
-@"{
+            compVerifier.VerifyIL(
+                "ConsoleApp1.TestHelper.IsValueTypeT<T>(ConsoleApp1.Result<T>)",
+                @"{
   // Code size       31 (0x1f)
   .maxstack  2
   .locals init (T V_0, //v
@@ -3023,14 +3222,15 @@ True";
   IL_0018:  newobj     ""ConsoleApp1.NotPossibleException..ctor()""
   IL_001d:  throw
   IL_001e:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void DeconstructNullableTuple_01()
         {
             var source =
-@"
+                @"
 class C {
     static int i = 3;
     static (int,int)? GetNullableTuple() => (i++, i++);
@@ -3054,7 +3254,8 @@ class C {
 }";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"x = 3, y = 4
+            var expectedOutput =
+                @"x = 3, y = 4
 x = 5, y = 6
 x = 7, y = 8";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -3064,7 +3265,7 @@ x = 7, y = 8";
         public void DeconstructNullable_01()
         {
             var source =
-@"
+                @"
 class C {
     static int i = 3;
     static S? GetNullableTuple() => new S(i++, i++);
@@ -3095,7 +3296,8 @@ struct S
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
-            var expectedOutput = @"x = 3, y = 4
+            var expectedOutput =
+                @"x = 3, y = 4
 x = 5, y = 6
 x = 7, y = 8";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -3105,7 +3307,7 @@ x = 7, y = 8";
         public void UnboxNullableInRecursivePattern01()
         {
             var source =
-@"
+                @"
 static class Program
 {
     public static int M1(int? x)
@@ -3128,13 +3330,14 @@ static class Program
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"1
+                @"1
 2
 3
 4";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Program.M1",
-@"{
+            compVerifier.VerifyIL(
+                "Program.M1",
+                @"{
   // Code size       23 (0x17)
   .maxstack  1
   .locals init (int V_0) //y
@@ -3149,9 +3352,11 @@ static class Program
   IL_0014:  ret
   IL_0015:  ldloc.0
   IL_0016:  ret
-}");
-            compVerifier.VerifyIL("Program.M2",
-@"{
+}"
+            );
+            compVerifier.VerifyIL(
+                "Program.M2",
+                @"{
   // Code size       23 (0x17)
   .maxstack  1
   .locals init (int V_0) //y
@@ -3166,14 +3371,15 @@ static class Program
   IL_0014:  ret
   IL_0015:  ldloc.0
   IL_0016:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void DoNotShareInputForMutatingWhenClause()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -3234,7 +3440,11 @@ class Program
     bool P => false;
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, references: new[] { CSharpRef });
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                references: new[] { CSharpRef }
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"222222222";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
@@ -3244,7 +3454,7 @@ class Program
         public void GenerateStringHashOnlyOnce()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -3272,7 +3482,7 @@ class Program
         public void BindVariablesInWhenClause()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -3301,7 +3511,8 @@ class Program
         [Fact]
         public void MissingExceptions_01()
         {
-            var source = @"namespace System {
+            var source =
+                @"namespace System {
     public class Object { }
     public abstract class ValueType { }
     public struct Void { }
@@ -3312,46 +3523,91 @@ static class C {
     public static bool M(int i) => i switch { 1 => true };
 }
 ";
-            var compilation = CreateEmptyCompilation(source, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.ReleaseDll);
-            compilation.GetDiagnostics().Verify(
-                // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("0").WithLocation(9, 38)
+            var compilation = CreateEmptyCompilation(
+                source,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.ReleaseDll
+            );
+            compilation
+                .GetDiagnostics()
+                .Verify(
+                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                        .WithArguments("0")
+                        .WithLocation(9, 38)
                 );
-            compilation.GetEmitDiagnostics().Verify(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
-                // (9,5): error CS0518: Predefined type 'System.Byte' is not defined or imported
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "public static bool M(int i) => i switch { 1 => true };").WithArguments("System.Byte").WithLocation(9, 5),
-                // (9,5): error CS0518: Predefined type 'System.Byte' is not defined or imported
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "public static bool M(int i) => i switch { 1 => true };").WithArguments("System.Byte").WithLocation(9, 5),
-                // (9,5): error CS0518: Predefined type 'System.Int16' is not defined or imported
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "public static bool M(int i) => i switch { 1 => true };").WithArguments("System.Int16").WithLocation(9, 5),
-                // (9,5): error CS0518: Predefined type 'System.Int16' is not defined or imported
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "public static bool M(int i) => i switch { 1 => true };").WithArguments("System.Int16").WithLocation(9, 5),
-                // (9,5): error CS0518: Predefined type 'System.Int64' is not defined or imported
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "public static bool M(int i) => i switch { 1 => true };").WithArguments("System.Int64").WithLocation(9, 5),
-                // (9,5): error CS0518: Predefined type 'System.Int64' is not defined or imported
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "public static bool M(int i) => i switch { 1 => true };").WithArguments("System.Int64").WithLocation(9, 5),
-                // (9,36): error CS0656: Missing compiler required member 'System.InvalidOperationException..ctor'
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "i switch { 1 => true }").WithArguments("System.InvalidOperationException", ".ctor").WithLocation(9, 36),
-                // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
-                //     public static bool M(int i) => i switch { 1 => true };
-                Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch").WithArguments("0").WithLocation(9, 38)
+            compilation
+                .GetEmitDiagnostics()
+                .Verify(
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
+                    // (9,5): error CS0518: Predefined type 'System.Byte' is not defined or imported
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(
+                            ErrorCode.ERR_PredefinedTypeNotFound,
+                            "public static bool M(int i) => i switch { 1 => true };"
+                        )
+                        .WithArguments("System.Byte")
+                        .WithLocation(9, 5),
+                    // (9,5): error CS0518: Predefined type 'System.Byte' is not defined or imported
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(
+                            ErrorCode.ERR_PredefinedTypeNotFound,
+                            "public static bool M(int i) => i switch { 1 => true };"
+                        )
+                        .WithArguments("System.Byte")
+                        .WithLocation(9, 5),
+                    // (9,5): error CS0518: Predefined type 'System.Int16' is not defined or imported
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(
+                            ErrorCode.ERR_PredefinedTypeNotFound,
+                            "public static bool M(int i) => i switch { 1 => true };"
+                        )
+                        .WithArguments("System.Int16")
+                        .WithLocation(9, 5),
+                    // (9,5): error CS0518: Predefined type 'System.Int16' is not defined or imported
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(
+                            ErrorCode.ERR_PredefinedTypeNotFound,
+                            "public static bool M(int i) => i switch { 1 => true };"
+                        )
+                        .WithArguments("System.Int16")
+                        .WithLocation(9, 5),
+                    // (9,5): error CS0518: Predefined type 'System.Int64' is not defined or imported
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(
+                            ErrorCode.ERR_PredefinedTypeNotFound,
+                            "public static bool M(int i) => i switch { 1 => true };"
+                        )
+                        .WithArguments("System.Int64")
+                        .WithLocation(9, 5),
+                    // (9,5): error CS0518: Predefined type 'System.Int64' is not defined or imported
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(
+                            ErrorCode.ERR_PredefinedTypeNotFound,
+                            "public static bool M(int i) => i switch { 1 => true };"
+                        )
+                        .WithArguments("System.Int64")
+                        .WithLocation(9, 5),
+                    // (9,36): error CS0656: Missing compiler required member 'System.InvalidOperationException..ctor'
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "i switch { 1 => true }")
+                        .WithArguments("System.InvalidOperationException", ".ctor")
+                        .WithLocation(9, 36),
+                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                    //     public static bool M(int i) => i switch { 1 => true };
+                    Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
+                        .WithArguments("0")
+                        .WithLocation(9, 38)
                 );
         }
 
         [Fact, WorkItem(32774, "https://github.com/dotnet/roslyn/issues/32774")]
         public void BadCode_32774()
         {
-            var source = @"
+            var source =
+                @"
 public class Class1
 {
     static void Main()
@@ -3385,8 +3641,9 @@ public class Class1
             compilation.VerifyDiagnostics();
             var expectedOutput = @"True";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("Class1.SwitchCaseThatFails",
-@"{
+            compVerifier.VerifyIL(
+                "Class1.SwitchCaseThatFails",
+                @"{
   // Code size       97 (0x61)
   .maxstack  1
   .locals init (Class1.IObject V_0, //x
@@ -3445,14 +3702,16 @@ public class Class1
   IL_005c:  br.s       IL_005e
   IL_005e:  ldloc.s    V_5
   IL_0060:  ret
-}");
+}"
+            );
         }
 
         // Possible test helper bug on Linux; see https://github.com/dotnet/roslyn/issues/33356
         [ConditionalFact(typeof(WindowsOnly))]
         public void SwitchExpressionSequencePoints()
         {
-            string source = @"
+            string source =
+                @"
 public class Program
 {
     public static void Main()
@@ -3471,7 +3730,9 @@ public class Program
 }
 ";
             var v = CompileAndVerify(source, options: TestOptions.DebugExe);
-            v.VerifyIL(qualifiedMethodName: "Program.Main", @"
+            v.VerifyIL(
+                qualifiedMethodName: "Program.Main",
+                @"
     {
       // Code size       61 (0x3d)
       .maxstack  2
@@ -3524,13 +3785,17 @@ public class Program
       // sequence point: }
       IL_003c:  ret
     }
-", sequencePoints: "Program.Main", source: source);
+",
+                sequencePoints: "Program.Main",
+                source: source
+            );
         }
 
         [Fact, WorkItem(33675, "https://github.com/dotnet/roslyn/issues/33675")]
         public void ParsingParenthesizedExpressionAsPatternOfExpressionSwitch()
         {
-            var source = @"
+            var source =
+                @"
 public class Class1
 {
     static void Main()
@@ -3553,7 +3818,9 @@ public class Class1
                 var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
                 if (options.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    compVerifier.VerifyIL("Class1.M", @"
+                    compVerifier.VerifyIL(
+                        "Class1.M",
+                        @"
     {
       // Code size       45 (0x2d)
       .maxstack  2
@@ -3589,12 +3856,14 @@ public class Class1
       IL_002b:  ldloc.2
       IL_002c:  ret
     }
-");
+"
+                    );
                 }
                 else
                 {
-                    compVerifier.VerifyIL("Class1.M",
-@"{
+                    compVerifier.VerifyIL(
+                        "Class1.M",
+                        @"{
   // Code size       26 (0x1a)
   .maxstack  2
   .locals init (bool V_0)
@@ -3612,7 +3881,8 @@ public class Class1
   IL_0017:  stloc.0
   IL_0018:  ldloc.0
   IL_0019:  ret
-}");
+}"
+                    );
                 }
             }
         }
@@ -3620,7 +3890,8 @@ public class Class1
         [Fact, WorkItem(35584, "https://github.com/dotnet/roslyn/issues/35584")]
         public void MatchToTypeParameterUnbox_01()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static void Main() => System.Console.WriteLine(P<int>(0));
@@ -3635,8 +3906,9 @@ class Program
                 var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
                 if (options.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    compVerifier.VerifyIL("Program.P<T>",
-@"{
+                    compVerifier.VerifyIL(
+                        "Program.P<T>",
+                        @"{
   // Code size       24 (0x18)
   .maxstack  1
   .locals init (object V_0) //o
@@ -3651,12 +3923,14 @@ class Program
   IL_0012:  callvirt   ""string object.ToString()""
   IL_0017:  ret
 }
-");
+"
+                    );
                 }
                 else
                 {
-                    compVerifier.VerifyIL("Program.P<T>",
-@"{
+                    compVerifier.VerifyIL(
+                        "Program.P<T>",
+                        @"{
   // Code size       23 (0x17)
   .maxstack  1
   .locals init (object V_0) //o
@@ -3671,7 +3945,8 @@ class Program
   IL_0011:  callvirt   ""string object.ToString()""
   IL_0016:  ret
 }
-");
+"
+                    );
                 }
             }
         }
@@ -3680,7 +3955,7 @@ class Program
         public void MatchToTypeParameterUnbox_02()
         {
             var source =
-@"using System;
+                @"using System;
  class Program
 {
     public static void Main()
@@ -3707,8 +3982,9 @@ public class Generic<T>
                 var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
                 if (options.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    compVerifier.VerifyIL("Generic<T>..ctor(T)",
-@"{
+                    compVerifier.VerifyIL(
+                        "Generic<T>..ctor(T)",
+                        @"{
   // Code size       42 (0x2a)
   .maxstack  2
   .locals init (object V_0, //obj
@@ -3736,12 +4012,14 @@ public class Generic<T>
   IL_0028:  throw
   IL_0029:  ret
 }
-");
+"
+                    );
                 }
                 else
                 {
-                    compVerifier.VerifyIL("Generic<T>..ctor(T)",
-@"{
+                    compVerifier.VerifyIL(
+                        "Generic<T>..ctor(T)",
+                        @"{
   // Code size       31 (0x1f)
   .maxstack  1
   .locals init (object V_0) //obj
@@ -3759,7 +4037,8 @@ public class Generic<T>
   IL_001d:  throw
   IL_001e:  ret
 }
-");
+"
+                    );
                 }
             }
         }
@@ -3768,7 +4047,7 @@ public class Generic<T>
         public void MatchToTypeParameterUnbox_03()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     public static void Main() => System.Console.WriteLine(P<Enum>(null));
@@ -3783,8 +4062,9 @@ class Program
                 var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
                 if (options.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    compVerifier.VerifyIL("Program.P<T>",
-@"{
+                    compVerifier.VerifyIL(
+                        "Program.P<T>",
+                        @"{
   // Code size       24 (0x18)
   .maxstack  1
   .locals init (System.ValueType V_0) //o
@@ -3799,12 +4079,14 @@ class Program
   IL_0012:  callvirt   ""string object.ToString()""
   IL_0017:  ret
 }
-");
+"
+                    );
                 }
                 else
                 {
-                    compVerifier.VerifyIL("Program.P<T>",
-@"{
+                    compVerifier.VerifyIL(
+                        "Program.P<T>",
+                        @"{
   // Code size       23 (0x17)
   .maxstack  1
   .locals init (System.ValueType V_0) //o
@@ -3819,7 +4101,8 @@ class Program
   IL_0011:  callvirt   ""string object.ToString()""
   IL_0016:  ret
 }
-");
+"
+                    );
                 }
             }
         }
@@ -3828,7 +4111,7 @@ class Program
         public void CompileTimeRuntimeInstanceofMismatch_01()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -3964,7 +4247,7 @@ enum Elong : long {}
 enum Eulong : ulong {}
 ";
             var expectedOutput =
-@"byte[]
+                @"byte[]
 sbyte[]
 Ebyte[]
 Esbyte[]
@@ -4001,7 +4284,7 @@ UIntPtr[][]
         public void CompileTimeRuntimeInstanceofMismatch_02()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -4024,7 +4307,7 @@ class Program
 }
 ";
             var expectedOutput =
-@"byte[]
+                @"byte[]
 byte[]
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
@@ -4040,7 +4323,7 @@ byte[]
         public void EmptyVarPatternVsDeconstruct()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void Main()
@@ -4058,8 +4341,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "TrueFalse");
-            compVerifier.VerifyIL("C.M(C)",
-@"
+            compVerifier.VerifyIL(
+                "C.M(C)",
+                @"
 {
     // Code size        5 (0x5)
     .maxstack  2
@@ -4068,7 +4352,8 @@ public class C
     IL_0002:  cgt.un
     IL_0004:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -4076,7 +4361,7 @@ public class C
         public void EmptyPositionalPatternVsDeconstruct()
         {
             var source =
-@"using System;
+                @"using System;
 public class C
 {
     public static void Main()
@@ -4094,8 +4379,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation, expectedOutput: "TrueFalse");
-            compVerifier.VerifyIL("C.M(C)",
-@"
+            compVerifier.VerifyIL(
+                "C.M(C)",
+                @"
 {
     // Code size        5 (0x5)
     .maxstack  2
@@ -4104,14 +4390,15 @@ public class C
     IL_0002:  cgt.un
     IL_0004:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(31494, "https://github.com/dotnet/roslyn/issues/31494")]
         public void NoRedundantNullCheckForStringConstantPattern_01()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public static bool M1(string s) => s is ""Frog"";
     public static bool M2(string s) => s == ""Frog"";
@@ -4121,7 +4408,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1(string)", @"
+            compVerifier.VerifyIL(
+                "C.M1(string)",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -4130,8 +4419,11 @@ public class C
   IL_0006:  call       ""bool string.op_Equality(string, string)""
   IL_000b:  ret
 }
-");
-            compVerifier.VerifyIL("C.M2(string)", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2(string)",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  2
@@ -4140,8 +4432,11 @@ public class C
   IL_0006:  call       ""bool string.op_Equality(string, string)""
   IL_000b:  ret
 }
-");
-            compVerifier.VerifyIL("C.M3(string)", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M3(string)",
+                @"
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -4158,14 +4453,15 @@ public class C
   IL_0013:  ldloc.0
   IL_0014:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(31494, "https://github.com/dotnet/roslyn/issues/31494")]
         public void NoRedundantNullCheckForStringConstantPattern_02()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public static bool M1(string s) => s switch { ""Frog"" => true, ""Newt"" => true, _ => false };
 }
@@ -4173,7 +4469,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1(string)", @"
+            compVerifier.VerifyIL(
+                "C.M1(string)",
+                @"
 {
   // Code size       40 (0x28)
   .maxstack  2
@@ -4198,14 +4496,15 @@ public class C
   IL_0026:  ldloc.0
   IL_0027:  ret
 }
-");
+"
+            );
         }
 
         [Fact, WorkItem(31494, "https://github.com/dotnet/roslyn/issues/31494")]
         public void NoRedundantNullCheckForStringConstantPattern_03()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public static bool M1(System.Type x) => x is { Name: ""Program"" };
 }
@@ -4213,7 +4512,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1(System.Type)", @"
+            compVerifier.VerifyIL(
+                "C.M1(System.Type)",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -4227,7 +4528,8 @@ public class C
   IL_0014:  ldc.i4.0
   IL_0015:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
@@ -4239,7 +4541,7 @@ public class C
             // The latter has been optimized to avoid branches.
 
             var source =
-@"public class C
+                @"public class C
 {
     public static bool M1(int? x) => x is 1;
     public static bool M2(int? x) => x == 1;
@@ -4248,7 +4550,9 @@ public class C
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics();
             var compVerifier = CompileAndVerify(compilation);
-            compVerifier.VerifyIL("C.M1(int?)", @"
+            compVerifier.VerifyIL(
+                "C.M1(int?)",
+                @"
 {
   // Code size       22 (0x16)
   .maxstack  2
@@ -4263,8 +4567,11 @@ public class C
   IL_0014:  ldc.i4.0
   IL_0015:  ret
 }
-");
-            compVerifier.VerifyIL("C.M2(int?)", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2(int?)",
+                @"
 {
   // Code size       23 (0x17)
   .maxstack  2
@@ -4283,13 +4590,15 @@ public class C
   IL_0015:  and
   IL_0016:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void SwitchExpressionAsExceptionFilter_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -4331,16 +4640,20 @@ class C
 }
 ";
             var expectedOutput =
-@"frog
+                @"frog
 toad";
-            foreach (var compilationOptions in new[] { TestOptions.ReleaseExe, TestOptions.DebugExe })
+            foreach (
+                var compilationOptions in new[] { TestOptions.ReleaseExe, TestOptions.DebugExe }
+            )
             {
                 var compilation = CreateCompilation(source, options: compilationOptions);
                 compilation.VerifyDiagnostics();
                 var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
                 if (compilationOptions.OptimizationLevel == OptimizationLevel.Debug)
                 {
-                    compVerifier.VerifyIL("C.M(string)", @"
+                    compVerifier.VerifyIL(
+                        "C.M(string)",
+                        @"
 {
   // Code size      108 (0x6c)
   .maxstack  2
@@ -4418,11 +4731,14 @@ toad";
   }
   IL_006b:  ret
 }
-");
+"
+                    );
                 }
                 else
                 {
-                    compVerifier.VerifyIL("C.M(string)", @"
+                    compVerifier.VerifyIL(
+                        "C.M(string)",
+                        @"
 {
   // Code size       89 (0x59)
   .maxstack  2
@@ -4483,7 +4799,8 @@ toad";
   }
   IL_0058:  ret
 }
-");
+"
+                    );
                 }
             }
         }
@@ -4491,7 +4808,8 @@ toad";
         [Fact]
         public void SwitchExpressionAsExceptionFilter_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -4523,7 +4841,8 @@ class C
         [WorkItem(48259, "https://github.com/dotnet/roslyn/issues/48259")]
         public void SwitchExpressionAsExceptionFilter_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4552,7 +4871,8 @@ public static class Program
             compilation.VerifyDiagnostics(
                 // (7,23): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     static async Task Main()
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(7, 23));
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(7, 23)
+            );
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
@@ -4560,7 +4880,8 @@ public static class Program
         [WorkItem(48259, "https://github.com/dotnet/roslyn/issues/48259")]
         public void SwitchExpressionAsExceptionFilter_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -4586,7 +4907,8 @@ public static class Program
             compilation.VerifyDiagnostics(
                 // (7,23): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     static async Task Main()
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(7, 23));
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(7, 23)
+            );
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
@@ -4598,7 +4920,7 @@ public static class Program
         public void IsNull_01(string pointerType)
         {
             var source =
-$@"using static System.Console;
+                $@"using static System.Console;
 unsafe class Program
 {{
     static void Main()
@@ -4619,17 +4941,21 @@ unsafe class Program
     static bool IsNull({pointerType} p) => p is null;
     static bool IsNotNull({pointerType} p) => p is not null;
 }}";
-            var verifier = CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, verify: Verification.Skipped, expectedOutput:
-@"True
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: @"True
 True
 False
 False
 False
 False
 True
-True");
+True"
+            );
             string expectedEqualNull =
-@"{
+                @"{
   // Code size        6 (0x6)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -4639,7 +4965,7 @@ True");
   IL_0005:  ret
 }";
             string expectedNotEqualNull =
-@"{
+                @"{
   // Code size        9 (0x9)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -4661,7 +4987,7 @@ True");
         public void IsNull_02()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 unsafe class Program
 {
     static void Main()
@@ -4676,11 +5002,16 @@ unsafe class Program
     }
     static bool EqualNull(char* p) => p switch { null => true, _ => false };
 }";
-            var verifier = CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, verify: Verification.Skipped, expectedOutput:
-@"True
-False");
-            verifier.VerifyIL("Program.EqualNull",
-@"{
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: @"True
+False"
+            );
+            verifier.VerifyIL(
+                "Program.EqualNull",
+                @"{
   // Code size       13 (0xd)
   .maxstack  2
   .locals init (bool V_0)
@@ -4695,7 +5026,8 @@ False");
   IL_000a:  stloc.0
   IL_000b:  ldloc.0
   IL_000c:  ret
-}");
+}"
+            );
         }
 
         [WorkItem(48563, "https://github.com/dotnet/roslyn/issues/48563")]
@@ -4703,7 +5035,7 @@ False");
         public void IsNull_03()
         {
             var source =
-@"using static System.Console;
+                @"using static System.Console;
 unsafe class C
 {
     public char* P;
@@ -4722,11 +5054,16 @@ unsafe class Program
     }
     static bool EqualNull(C c) => c switch { { P: null } => true, _ => false };
 }";
-            var verifier = CompileAndVerify(source, options: TestOptions.UnsafeReleaseExe, verify: Verification.Skipped, expectedOutput:
-@"True
-False");
-            verifier.VerifyIL("Program.EqualNull",
-@"{
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.UnsafeReleaseExe,
+                verify: Verification.Skipped,
+                expectedOutput: @"True
+False"
+            );
+            verifier.VerifyIL(
+                "Program.EqualNull",
+                @"{
   // Code size       21 (0x15)
   .maxstack  2
   .locals init (bool V_0)
@@ -4744,7 +5081,8 @@ False");
   IL_0012:  stloc.0
   IL_0013:  ldloc.0
   IL_0014:  ret
-}");
+}"
+            );
         }
 
         #endregion Miscellaneous
@@ -4754,7 +5092,8 @@ False");
         [Fact]
         public void TargetTypedSwitch_Assignment()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4788,7 +5127,8 @@ class B
         [Fact]
         public void TargetTypedSwitch_Return()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4821,7 +5161,8 @@ class B
         [Fact]
         public void TargetTypedSwitch_Argument_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4850,16 +5191,19 @@ class B : Exception
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics(
-                    // (12,16): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M2(Exception)' and 'Program.M2(int)'
-                    //         return M2(b switch { false => new A(), true => new B() });
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M2").WithArguments("Program.M2(System.Exception)", "Program.M2(int)").WithLocation(12, 16)
-                );
+                // (12,16): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M2(Exception)' and 'Program.M2(int)'
+                //         return M2(b switch { false => new A(), true => new B() });
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M2")
+                    .WithArguments("Program.M2(System.Exception)", "Program.M2(int)")
+                    .WithLocation(12, 16)
+            );
         }
 
         [Fact]
         public void TargetTypedSwitch_Argument_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4892,10 +5236,14 @@ class B : Exception
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.RestrictedTypesNeedDesktop
+        )]
         public void TargetTypedSwitch_Arglist()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4923,7 +5271,7 @@ class B
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"new A; A->new B; 1
+                @"new A; A->new B; 1
 new B; 1";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -4931,7 +5279,8 @@ new B; 1";
         [Fact]
         public void TargetTypedSwitch_StackallocSize()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4957,18 +5306,26 @@ class B
     public static implicit operator int(B b) { Console.Write(""B->int; ""); return 2; }
 }
 ";
-            var compilation = CreateCompilationWithMscorlibAndSpan(source, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlibAndSpan(
+                source,
+                options: TestOptions.ReleaseExe
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"new A; A->int; 4
+                @"new A; A->int; 4
 new B; B->int; 2";
-            var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput, verify: Verification.Skipped);
+            var compVerifier = CompileAndVerify(
+                compilation,
+                expectedOutput: expectedOutput,
+                verify: Verification.Skipped
+            );
         }
 
         [Fact]
         public void TargetTypedSwitch_Attribute()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -4996,23 +5353,37 @@ public class B
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                    // (5,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    //     [My(1 switch { 1 => 1, _ => 2 })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => 1, _ => 2 }").WithLocation(5, 9),
-                    // (8,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
-                    //     [My(1 switch { 1 => new A(), _ => new B() })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => new A(), _ => new B() }").WithLocation(8, 9),
-                    // (11,9): error CS1503: Argument 1: cannot convert from '<switch expression>' to 'int'
-                    //     [My(1 switch { 1 => 1, _ => string.Empty })]
-                    Diagnostic(ErrorCode.ERR_BadArgType, "1 switch { 1 => 1, _ => string.Empty }").WithArguments("1", "<switch expression>", "int").WithLocation(11, 9)
-                );
+                // (5,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                //     [My(1 switch { 1 => 1, _ => 2 })]
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => 1, _ => 2 }")
+                    .WithLocation(5, 9),
+                // (8,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                //     [My(1 switch { 1 => new A(), _ => new B() })]
+                Diagnostic(
+                        ErrorCode.ERR_BadAttributeArgument,
+                        "1 switch { 1 => new A(), _ => new B() }"
+                    )
+                    .WithLocation(8, 9),
+                // (11,9): error CS1503: Argument 1: cannot convert from '<switch expression>' to 'int'
+                //     [My(1 switch { 1 => 1, _ => string.Empty })]
+                Diagnostic(ErrorCode.ERR_BadArgType, "1 switch { 1 => 1, _ => string.Empty }")
+                    .WithArguments("1", "<switch expression>", "int")
+                    .WithLocation(11, 9)
+            );
 
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var switchExpressions = tree.GetRoot().DescendantNodes().OfType<SwitchExpressionSyntax>().ToArray();
+            var switchExpressions = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SwitchExpressionSyntax>()
+                .ToArray();
 
-            VerifyOperationTreeForNode(compilation, model, switchExpressions[0], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                switchExpressions[0],
+                @"
 ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32, IsInvalid) (Syntax: '1 switch {  ... 1, _ => 2 }')
   Value: 
     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1, IsInvalid) (Syntax: '1')
@@ -5029,9 +5400,14 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExp
           IDiscardPatternOperation (OperationKind.DiscardPattern, Type: null, IsInvalid) (Syntax: '_') (InputType: System.Int32, NarrowedType: System.Int32)
         Value: 
           ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2, IsInvalid) (Syntax: '2')
-");
+"
+            );
 
-            VerifyOperationTreeForNode(compilation, model, switchExpressions[1], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                switchExpressions[1],
+                @"
 ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: System.Int32, IsInvalid) (Syntax: '1 switch {  ... > new B() }')
   Value: 
     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1, IsInvalid) (Syntax: '1')
@@ -5060,9 +5436,14 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExp
                 Arguments(0)
                 Initializer: 
                   null
-");
+"
+            );
 
-            VerifyOperationTreeForNode(compilation, model, switchExpressions[2], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                switchExpressions[2],
+                @"
 ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExpression, Type: ?, IsInvalid) (Syntax: '1 switch {  ... ing.Empty }')
   Value: 
     ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1, IsInvalid) (Syntax: '1')
@@ -5087,13 +5468,15 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExp
               IFieldReferenceOperation: System.String System.String.Empty (Static) (OperationKind.FieldReference, Type: System.String, IsInvalid) (Syntax: 'string.Empty')
                 Instance Receiver: 
                   null
-");
+"
+            );
         }
 
         [Fact]
         public void TargetTypedSwitch_Attribute_NamedArgument()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -5124,21 +5507,35 @@ public class B
             compilation.VerifyDiagnostics(
                 // (5,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [My(Value = 1 switch { 1 => 1, _ => 2 })]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => 1, _ => 2 }").WithLocation(5, 17),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => 1, _ => 2 }")
+                    .WithLocation(5, 17),
                 // (8,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [My(Value = 1 switch { 1 => new A(), _ => new B() })]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => new A(), _ => new B() }").WithLocation(8, 17),
+                Diagnostic(
+                        ErrorCode.ERR_BadAttributeArgument,
+                        "1 switch { 1 => new A(), _ => new B() }"
+                    )
+                    .WithLocation(8, 17),
                 // (11,41): error CS0029: Cannot implicitly convert type 'string' to 'int'
                 //     [My(Value = 1 switch { 1 => 1, _ => string.Empty })]
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty").WithArguments("string", "int").WithLocation(11, 41)
-                );
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty")
+                    .WithArguments("string", "int")
+                    .WithLocation(11, 41)
+            );
 
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var attributeArguments = tree.GetRoot().DescendantNodes().OfType<AttributeArgumentSyntax>().ToArray();
+            var attributeArguments = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AttributeArgumentSyntax>()
+                .ToArray();
 
-            VerifyOperationTreeForNode(compilation, model, attributeArguments[0], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                attributeArguments[0],
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32, IsInvalid) (Syntax: 'Value = 1 s ... 1, _ => 2 }')
   Left: 
     IPropertyReferenceOperation: System.Int32 MyAttribute.Value { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'Value')
@@ -5161,9 +5558,14 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32, 
               IDiscardPatternOperation (OperationKind.DiscardPattern, Type: null, IsInvalid) (Syntax: '_') (InputType: System.Int32, NarrowedType: System.Int32)
             Value: 
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2, IsInvalid) (Syntax: '2')
-");
+"
+            );
 
-            VerifyOperationTreeForNode(compilation, model, attributeArguments[1], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                attributeArguments[1],
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32, IsInvalid) (Syntax: 'Value = 1 s ... > new B() }')
   Left: 
     IPropertyReferenceOperation: System.Int32 MyAttribute.Value { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'Value')
@@ -5201,9 +5603,14 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32, 
                         Arguments(0)
                         Initializer: 
                           null
-");
+"
+            );
 
-            VerifyOperationTreeForNode(compilation, model, attributeArguments[2], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                attributeArguments[2],
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32, IsInvalid) (Syntax: 'Value = 1 s ... ing.Empty }')
   Left: 
     IPropertyReferenceOperation: System.Int32 MyAttribute.Value { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'Value')
@@ -5237,13 +5644,15 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32, 
                       IFieldReferenceOperation: System.String System.String.Empty (Static) (OperationKind.FieldReference, Type: System.String, IsInvalid) (Syntax: 'string.Empty')
                         Instance Receiver: 
                           null
-");
+"
+            );
         }
 
         [Fact]
         public void TargetTypedSwitch_Attribute_MissingNamedArgument()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -5273,21 +5682,34 @@ public class B
             compilation.VerifyDiagnostics(
                 // (5,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a using directive or an assembly reference?)
                 //     [My(Value = 1 switch { 1 => 1, _ => 2 })]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value").WithArguments("Value").WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value")
+                    .WithArguments("Value")
+                    .WithLocation(5, 9),
                 // (8,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a using directive or an assembly reference?)
                 //     [My(Value = 1 switch { 1 => new A(), _ => new B() })]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value").WithArguments("Value").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value")
+                    .WithArguments("Value")
+                    .WithLocation(8, 9),
                 // (11,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a using directive or an assembly reference?)
                 //     [My(Value = 1 switch { 1 => 1, _ => string.Empty })]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value").WithArguments("Value").WithLocation(11, 9)
-                );
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value")
+                    .WithArguments("Value")
+                    .WithLocation(11, 9)
+            );
 
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
 
-            var attributeArguments = tree.GetRoot().DescendantNodes().OfType<AttributeArgumentSyntax>().ToArray();
+            var attributeArguments = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<AttributeArgumentSyntax>()
+                .ToArray();
 
-            VerifyOperationTreeForNode(compilation, model, attributeArguments[0], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                attributeArguments[0],
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) (Syntax: 'Value = 1 s ... 1, _ => 2 }')
   Left: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'Value')
@@ -5312,9 +5734,14 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) 
                   IDiscardPatternOperation (OperationKind.DiscardPattern, Type: null) (Syntax: '_') (InputType: System.Int32, NarrowedType: System.Int32)
                 Value: 
                   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
-");
+"
+            );
 
-            VerifyOperationTreeForNode(compilation, model, attributeArguments[1], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                attributeArguments[1],
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) (Syntax: 'Value = 1 s ... > new B() }')
   Left: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'Value')
@@ -5351,9 +5778,14 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) 
                         Arguments(0)
                         Initializer: 
                           null
-");
+"
+            );
 
-            VerifyOperationTreeForNode(compilation, model, attributeArguments[2], @"
+            VerifyOperationTreeForNode(
+                compilation,
+                model,
+                attributeArguments[2],
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) (Syntax: 'Value = 1 s ... ing.Empty }')
   Left: 
     IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'Value')
@@ -5386,13 +5818,15 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) 
                       IFieldReferenceOperation: System.String System.String.Empty (Static) (OperationKind.FieldReference, Type: System.String) (Syntax: 'string.Empty')
                         Instance Receiver: 
                           null
-");
+"
+            );
         }
 
         [Fact]
         public void TargetTypedSwitch_As()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static void M(int i, string s)
@@ -5407,13 +5841,14 @@ class Program
                 // (7,15): error CS8506: No best type was found for the switch expression.
                 //         _ = i switch { 1 => i, _ => s } as object;
                 Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(7, 15)
-                );
+            );
         }
 
         [Fact]
         public void TargetTypedSwitch_DoubleConversion()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 class Program
 {
     public static void Main(string[] args)
@@ -5462,7 +5897,7 @@ class C
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics();
             var expectedOutput =
-@"new A; A->new B; B->new C; .
+                @"new A; A->new B; B->new C; .
 new B; B->new C; .";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -5470,7 +5905,8 @@ new B; B->new C; .";
         [Fact]
         public void TargetTypedSwitch_StringInsert()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -5499,7 +5935,8 @@ class B
         [Fact]
         public void IsPatternDisjunct_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -5513,11 +5950,17 @@ class C
         Console.Write(M1(1UL));
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"TrueFalseTrueFalse";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", """
+            compVerifier.VerifyIL(
+                "C.M1",
+                """
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -5537,8 +5980,11 @@ class C
   IL_0018:  ldloc.0
   IL_0019:  ret
 }
-""");
-            compVerifier.VerifyIL("C.M2", """
+"""
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                """
 {
   // Code size       21 (0x15)
   .maxstack  2
@@ -5553,12 +5999,19 @@ class C
   IL_0013:  ldc.i4.1
   IL_0014:  ret
 }
-""");
+"""
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", """
+            compVerifier.VerifyIL(
+                "C.M1",
+                """
 {
   // Code size       24 (0x18)
   .maxstack  1
@@ -5577,8 +6030,11 @@ class C
   IL_0016:  ldloc.0
   IL_0017:  ret
 }
-""");
-            compVerifier.VerifyIL("C.M2", @"
+"""
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  2
@@ -5593,13 +6049,15 @@ class C
   IL_0012:  ldc.i4.1
   IL_0013:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void IsPatternDisjunct_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -5613,11 +6071,17 @@ class C
         Console.Write(M1(1UL));
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"TrueFalseTrueFalse";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", """
+            compVerifier.VerifyIL(
+                "C.M1",
+                """
 {
   // Code size       40 (0x28)
   .maxstack  1
@@ -5641,8 +6105,11 @@ class C
   IL_0022:  ldstr      "True"
   IL_0027:  ret
 }
-""");
-            compVerifier.VerifyIL("C.M2", """
+"""
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                """
 {
   // Code size       29 (0x1d)
   .maxstack  1
@@ -5657,12 +6124,19 @@ class C
   IL_0017:  ldstr      "True"
   IL_001c:  ret
 }
-""");
+"""
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", """
+            compVerifier.VerifyIL(
+                "C.M1",
+                """
 {
   // Code size       37 (0x25)
   .maxstack  1
@@ -5685,8 +6159,11 @@ class C
   IL_001f:  ldstr      "True"
   IL_0024:  ret
 }
-""");
-            compVerifier.VerifyIL("C.M2", @"
+"""
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  1
@@ -5701,13 +6178,15 @@ class C
   IL_0016:  ldstr      ""True""
   IL_001b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void IsPatternDisjunct_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -5721,11 +6200,17 @@ class C
         Console.Write(M1(2));
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"TrueFalseTrueFalse";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", @"
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"
     {
       // Code size       47 (0x2f)
       .maxstack  2
@@ -5759,8 +6244,11 @@ class C
       IL_002d:  ldloc.1
       IL_002e:  ret
     }
-");
-            compVerifier.VerifyIL("C.M2", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
     {
       // Code size       48 (0x30)
       .maxstack  2
@@ -5793,12 +6281,19 @@ class C
       IL_002e:  ldc.i4.0
       IL_002f:  ret
     }
-");
+"
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", @"
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"
     {
       // Code size       45 (0x2d)
       .maxstack  2
@@ -5831,8 +6326,11 @@ class C
       IL_002b:  ldloc.1
       IL_002c:  ret
     }
-");
-            compVerifier.VerifyIL("C.M2", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
     {
       // Code size       45 (0x2d)
       .maxstack  2
@@ -5865,13 +6363,15 @@ class C
       IL_002b:  ldc.i4.0
       IL_002c:  ret
     }
-");
+"
+            );
         }
 
         [Fact]
         public void IsPatternDisjunct_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -5885,11 +6385,17 @@ class C
         Console.Write(M1(' '));
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"1010";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", @"
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"
     {
       // Code size       38 (0x26)
       .maxstack  2
@@ -5920,8 +6426,11 @@ class C
       IL_0024:  ldc.i4.1
       IL_0025:  ret
     }
-");
-            compVerifier.VerifyIL("C.M2", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
     {
       // Code size       25 (0x19)
       .maxstack  2
@@ -5942,12 +6451,19 @@ class C
       IL_0017:  ldc.i4.1
       IL_0018:  ret
     }
-");
+"
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", @"
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"
     {
       // Code size       33 (0x21)
       .maxstack  2
@@ -5975,8 +6491,11 @@ class C
       IL_001e:  cgt.un
       IL_0020:  ret
     }
-");
-            compVerifier.VerifyIL("C.M2", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
     {
       // Code size       24 (0x18)
       .maxstack  2
@@ -5997,13 +6516,15 @@ class C
       IL_0016:  ldc.i4.1
       IL_0017:  ret
     }
-");
+"
+            );
         }
 
         [Fact]
         public void IsPatternDisjunct_05()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class C
 {
@@ -6029,11 +6550,17 @@ class C
         Console.Write(M1(' '));
     }
 }";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             var expectedOutput = @"1010";
             var compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", @"
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"
     {
       // Code size       46 (0x2e)
       .maxstack  2
@@ -6073,8 +6600,11 @@ class C
       IL_002c:  ldloc.2
       IL_002d:  ret
     }
-");
-            compVerifier.VerifyIL("C.M2", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
     {
       // Code size       44 (0x2c)
       .maxstack  2
@@ -6111,12 +6641,19 @@ class C
       IL_002a:  ldloc.1
       IL_002b:  ret
     }
-");
+"
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.ReleaseExe, parseOptions: TestOptions.RegularWithPatternCombinators);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.RegularWithPatternCombinators
+            );
             compilation.VerifyDiagnostics();
             compVerifier = CompileAndVerify(compilation, expectedOutput: expectedOutput);
-            compVerifier.VerifyIL("C.M1", @"
+            compVerifier.VerifyIL(
+                "C.M1",
+                @"
     {
       // Code size       35 (0x23)
       .maxstack  2
@@ -6146,8 +6683,11 @@ class C
       IL_0021:  ldc.i4.0
       IL_0022:  ret
     }
-");
-            compVerifier.VerifyIL("C.M2", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "C.M2",
+                @"
     {
       // Code size       24 (0x18)
       .maxstack  2
@@ -6168,13 +6708,15 @@ class C
       IL_0016:  ldc.i4.0
       IL_0017:  ret
     }
-");
+"
+            );
         }
 
         [Fact, WorkItem(46536, "https://github.com/dotnet/roslyn/issues/46536")]
         public void MultiplePathsToNode_SwitchDispatch_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -6201,10 +6743,16 @@ class Program
     }
 }
 ";
-            var verifier = CompileAndVerify(source, expectedOutput: "012323", options: TestOptions.DebugExe);
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: "012323",
+                options: TestOptions.DebugExe
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.M", @"{
+            verifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       70 (0x46)
   .maxstack  2
   .locals init (int V_0,
@@ -6247,13 +6795,15 @@ class Program
   IL_0042:  br.s       IL_0044
   IL_0044:  ldloc.1
   IL_0045:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46536, "https://github.com/dotnet/roslyn/issues/46536")]
         public void MultiplePathsToNode_SwitchDispatch_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -6286,10 +6836,16 @@ class Program
     }
 }
 ";
-            var verifier = CompileAndVerify(source, expectedOutput: " 0 1 2 3 2 3", options: TestOptions.DebugExe);
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: " 0 1 2 3 2 3",
+                options: TestOptions.DebugExe
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.M0", @"{
+            verifier.VerifyIL(
+                "Program.M0",
+                @"{
   // Code size       90 (0x5a)
   .maxstack  2
   .locals init (int V_0,
@@ -6336,13 +6892,15 @@ class Program
   IL_0056:  br.s       IL_0058
   IL_0058:  ldloc.1
   IL_0059:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46536, "https://github.com/dotnet/roslyn/issues/46536")]
         public void MultiplePathsToNode_SwitchDispatch_03()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -6375,10 +6933,16 @@ class Program
     }
 }
 ";
-            var verifier = CompileAndVerify(source, expectedOutput: "0123452345", options: TestOptions.DebugExe);
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: "0123452345",
+                options: TestOptions.DebugExe
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.M", @"{
+            verifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size       98 (0x62)
   .maxstack  2
   .locals init (int V_0,
@@ -6437,13 +7001,15 @@ class Program
   IL_005e:  br.s       IL_0060
   IL_0060:  ldloc.1
   IL_0061:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46536, "https://github.com/dotnet/roslyn/issues/46536")]
         public void MultiplePathsToNode_SwitchDispatch_04()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Program
@@ -6471,10 +7037,17 @@ class Program
     }
 }
 ";
-            var verifier = CompileAndVerify(source, expectedOutput: "0123233", options: TestOptions.DebugExe, parseOptions: TestOptions.RegularPreview);
+            var verifier = CompileAndVerify(
+                source,
+                expectedOutput: "0123233",
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.RegularPreview
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.M", @"{
+            verifier.VerifyIL(
+                "Program.M",
+                @"{
   // Code size      115 (0x73)
   .maxstack  2
   .locals init (int V_0,
@@ -6530,13 +7103,15 @@ class Program
   IL_006f:  br.s       IL_0071
   IL_0071:  ldloc.1
   IL_0072:  ret
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(46536, "https://github.com/dotnet/roslyn/issues/46536")]
         public void MultiplePathsToNode_SwitchDispatch_05()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public enum EnumA { A, B, C }
@@ -6559,7 +7134,9 @@ public class Class1
             var verifier = CompileAndVerify(source, options: TestOptions.DebugDll);
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Class1.Repro", @"{
+            verifier.VerifyIL(
+                "Class1.Repro",
+                @"{
   // Code size       90 (0x5a)
   .maxstack  2
   .locals init (string V_0)
@@ -6606,7 +7183,8 @@ public class Class1
   IL_0057:  nop
   IL_0058:  ldloc.0
   IL_0059:  ret
-}");
+}"
+            );
         }
 
         #endregion Pattern Combinators
@@ -6614,7 +7192,8 @@ public class Class1
         [Fact, WorkItem(62563, "https://github.com/dotnet/roslyn/issues/62563")]
         public void AssignToStructFieldOnClassTypeThroughCall_01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 struct Inner
@@ -6656,62 +7235,72 @@ class Program
     }
 }
 ";
-            var verifier = CompileAndVerify(source, options: TestOptions.DebugExe, expectedOutput: "012");
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.DebugExe,
+                expectedOutput: "012"
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Program.M1", """
-            {
-              // Code size       37 (0x25)
-              .maxstack  2
-              IL_0000:  nop
-              IL_0001:  ldarg.0
-              IL_0002:  call       "Outer Program.Id<Outer>(Outer)"
-              IL_0007:  ldflda     "Inner Outer.Inner"
-              IL_000c:  ldc.i4.1
-              IL_000d:  call       "void Inner.Value.set"
-              IL_0012:  nop
-              IL_0013:  ldarg.0
-              IL_0014:  ldflda     "Inner Outer.Inner"
-              IL_0019:  call       "readonly int Inner.Value.get"
-              IL_001e:  call       "void System.Console.Write(int)"
-              IL_0023:  nop
-              IL_0024:  ret
-            }
-            """);
+            verifier.VerifyIL(
+                "Program.M1",
+                """
+                {
+                  // Code size       37 (0x25)
+                  .maxstack  2
+                  IL_0000:  nop
+                  IL_0001:  ldarg.0
+                  IL_0002:  call       "Outer Program.Id<Outer>(Outer)"
+                  IL_0007:  ldflda     "Inner Outer.Inner"
+                  IL_000c:  ldc.i4.1
+                  IL_000d:  call       "void Inner.Value.set"
+                  IL_0012:  nop
+                  IL_0013:  ldarg.0
+                  IL_0014:  ldflda     "Inner Outer.Inner"
+                  IL_0019:  call       "readonly int Inner.Value.get"
+                  IL_001e:  call       "void System.Console.Write(int)"
+                  IL_0023:  nop
+                  IL_0024:  ret
+                }
+                """
+            );
 
-            verifier.VerifyIL("Program.M2", """
-            {
-              // Code size       53 (0x35)
-              .maxstack  2
-              .locals init (Outer V_0,
-                            int V_1)
-              IL_0000:  nop
-              IL_0001:  ldarg.0
-              IL_0002:  call       "Outer Program.Id<Outer>(Outer)"
-              IL_0007:  stloc.0
-              IL_0008:  ldc.i4.1
-              IL_0009:  brtrue.s   IL_000c
-              IL_000b:  nop
-              IL_000c:  br.s       IL_000e
-              IL_000e:  ldc.i4.2
-              IL_000f:  stloc.1
-              IL_0010:  br.s       IL_0012
-              IL_0012:  ldc.i4.1
-              IL_0013:  brtrue.s   IL_0016
-              IL_0015:  nop
-              IL_0016:  ldloc.0
-              IL_0017:  ldflda     "Inner Outer.Inner"
-              IL_001c:  ldloc.1
-              IL_001d:  call       "void Inner.Value.set"
-              IL_0022:  nop
-              IL_0023:  ldarg.0
-              IL_0024:  ldflda     "Inner Outer.Inner"
-              IL_0029:  call       "readonly int Inner.Value.get"
-              IL_002e:  call       "void System.Console.Write(int)"
-              IL_0033:  nop
-              IL_0034:  ret
-            }
-            """);
+            verifier.VerifyIL(
+                "Program.M2",
+                """
+                {
+                  // Code size       53 (0x35)
+                  .maxstack  2
+                  .locals init (Outer V_0,
+                                int V_1)
+                  IL_0000:  nop
+                  IL_0001:  ldarg.0
+                  IL_0002:  call       "Outer Program.Id<Outer>(Outer)"
+                  IL_0007:  stloc.0
+                  IL_0008:  ldc.i4.1
+                  IL_0009:  brtrue.s   IL_000c
+                  IL_000b:  nop
+                  IL_000c:  br.s       IL_000e
+                  IL_000e:  ldc.i4.2
+                  IL_000f:  stloc.1
+                  IL_0010:  br.s       IL_0012
+                  IL_0012:  ldc.i4.1
+                  IL_0013:  brtrue.s   IL_0016
+                  IL_0015:  nop
+                  IL_0016:  ldloc.0
+                  IL_0017:  ldflda     "Inner Outer.Inner"
+                  IL_001c:  ldloc.1
+                  IL_001d:  call       "void Inner.Value.set"
+                  IL_0022:  nop
+                  IL_0023:  ldarg.0
+                  IL_0024:  ldflda     "Inner Outer.Inner"
+                  IL_0029:  call       "readonly int Inner.Value.get"
+                  IL_002e:  call       "void System.Console.Write(int)"
+                  IL_0033:  nop
+                  IL_0034:  ret
+                }
+                """
+            );
         }
 
         [Fact, WorkItem(62563, "https://github.com/dotnet/roslyn/issues/62563")]
@@ -6751,14 +7340,20 @@ class Obj
 	public Wrapper<string> Color;
 }
 """;
-            var verifier = CompileAndVerify(source, options: TestOptions.ReleaseExe, expectedOutput: """
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.ReleaseExe,
+                expectedOutput: """
                 red should not be null
                 yikes
                 red
-                """);
+                """
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("<top-level-statements-entry-point>", """
+            verifier.VerifyIL(
+                "<top-level-statements-entry-point>",
+                """
                 {
                   // Code size      186 (0xba)
                   .maxstack  4
@@ -6814,13 +7409,15 @@ class Obj
                   IL_00b4:  call       "void System.Console.WriteLine(string)"
                   IL_00b9:  ret
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(62563, "https://github.com/dotnet/roslyn/issues/62563")]
         public void AssignToEventFieldOnClassTypeThroughCall()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Outer
@@ -6858,56 +7455,66 @@ class Outer
     }
 }
 ";
-            var verifier = CompileAndVerify(source, options: TestOptions.DebugExe, expectedOutput: "System.ActionSystem.Action");
+            var verifier = CompileAndVerify(
+                source,
+                options: TestOptions.DebugExe,
+                expectedOutput: "System.ActionSystem.Action"
+            );
             verifier.VerifyDiagnostics();
 
-            verifier.VerifyIL("Outer.M1", """
-            {
-              // Code size       30 (0x1e)
-              .maxstack  2
-              IL_0000:  nop
-              IL_0001:  ldarg.0
-              IL_0002:  call       "Outer Outer.Id<Outer>(Outer)"
-              IL_0007:  ldsfld     "System.Action Outer.A"
-              IL_000c:  stfld      "System.Action Outer.Inner"
-              IL_0011:  ldarg.0
-              IL_0012:  ldfld      "System.Action Outer.Inner"
-              IL_0017:  call       "void System.Console.Write(object)"
-              IL_001c:  nop
-              IL_001d:  ret
-            }
-            """);
+            verifier.VerifyIL(
+                "Outer.M1",
+                """
+                {
+                  // Code size       30 (0x1e)
+                  .maxstack  2
+                  IL_0000:  nop
+                  IL_0001:  ldarg.0
+                  IL_0002:  call       "Outer Outer.Id<Outer>(Outer)"
+                  IL_0007:  ldsfld     "System.Action Outer.A"
+                  IL_000c:  stfld      "System.Action Outer.Inner"
+                  IL_0011:  ldarg.0
+                  IL_0012:  ldfld      "System.Action Outer.Inner"
+                  IL_0017:  call       "void System.Console.Write(object)"
+                  IL_001c:  nop
+                  IL_001d:  ret
+                }
+                """
+            );
 
-            verifier.VerifyIL("Outer.M2", """
-            {
-              // Code size       46 (0x2e)
-              .maxstack  2
-              .locals init (Outer V_0,
-                            System.Action V_1)
-              IL_0000:  nop
-              IL_0001:  ldarg.0
-              IL_0002:  call       "Outer Outer.Id<Outer>(Outer)"
-              IL_0007:  stloc.0
-              IL_0008:  ldc.i4.1
-              IL_0009:  brtrue.s   IL_000c
-              IL_000b:  nop
-              IL_000c:  br.s       IL_000e
-              IL_000e:  ldsfld     "System.Action Outer.A"
-              IL_0013:  stloc.1
-              IL_0014:  br.s       IL_0016
-              IL_0016:  ldc.i4.1
-              IL_0017:  brtrue.s   IL_001a
-              IL_0019:  nop
-              IL_001a:  ldloc.0
-              IL_001b:  ldloc.1
-              IL_001c:  stfld      "System.Action Outer.Inner"
-              IL_0021:  ldarg.0
-              IL_0022:  ldfld      "System.Action Outer.Inner"
-              IL_0027:  call       "void System.Console.Write(object)"
-              IL_002c:  nop
-              IL_002d:  ret
-            }
-            """);
+            verifier.VerifyIL(
+                "Outer.M2",
+                """
+                {
+                  // Code size       46 (0x2e)
+                  .maxstack  2
+                  .locals init (Outer V_0,
+                                System.Action V_1)
+                  IL_0000:  nop
+                  IL_0001:  ldarg.0
+                  IL_0002:  call       "Outer Outer.Id<Outer>(Outer)"
+                  IL_0007:  stloc.0
+                  IL_0008:  ldc.i4.1
+                  IL_0009:  brtrue.s   IL_000c
+                  IL_000b:  nop
+                  IL_000c:  br.s       IL_000e
+                  IL_000e:  ldsfld     "System.Action Outer.A"
+                  IL_0013:  stloc.1
+                  IL_0014:  br.s       IL_0016
+                  IL_0016:  ldc.i4.1
+                  IL_0017:  brtrue.s   IL_001a
+                  IL_0019:  nop
+                  IL_001a:  ldloc.0
+                  IL_001b:  ldloc.1
+                  IL_001c:  stfld      "System.Action Outer.Inner"
+                  IL_0021:  ldarg.0
+                  IL_0022:  ldfld      "System.Action Outer.Inner"
+                  IL_0027:  call       "void System.Console.Write(object)"
+                  IL_002c:  nop
+                  IL_002d:  ret
+                }
+                """
+            );
         }
     }
 }

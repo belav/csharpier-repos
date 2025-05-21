@@ -6,5 +6,5 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 internal enum UriMatchPart
 {
     Full,
-    Path
+    Path,
 }

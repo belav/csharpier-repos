@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Security.Cryptography;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -20,7 +19,8 @@ internal static partial class Interop
             void* pbOutput,
             int cbOutput,
             out int pcbResult,
-            CngPropertyOptions dwFlags);
+            CngPropertyOptions dwFlags
+        );
 
         [LibraryImport(Interop.Libraries.NCrypt, StringMarshalling = StringMarshalling.Utf16)]
         internal static unsafe partial ErrorCode NCryptSetProperty(
@@ -28,10 +28,16 @@ internal static partial class Interop
             string pszProperty,
             void* pbInput,
             int cbInput,
-            CngPropertyOptions dwFlags);
+            CngPropertyOptions dwFlags
+        );
 
         [SupportedOSPlatform("windows")]
-        internal static unsafe ErrorCode NCryptGetByteProperty(SafeNCryptHandle hObject, string pszProperty, ref byte result, CngPropertyOptions options = CngPropertyOptions.None)
+        internal static unsafe ErrorCode NCryptGetByteProperty(
+            SafeNCryptHandle hObject,
+            string pszProperty,
+            ref byte result,
+            CngPropertyOptions options = CngPropertyOptions.None
+        )
         {
             fixed (byte* pResult = &result)
             {
@@ -41,7 +47,8 @@ internal static partial class Interop
                     pResult,
                     sizeof(byte),
                     out int cbResult,
-                    options);
+                    options
+                );
 
                 if (errorCode == ErrorCode.ERROR_SUCCESS)
                 {
@@ -52,7 +59,11 @@ internal static partial class Interop
             }
         }
 
-        internal static unsafe ErrorCode NCryptGetIntProperty(SafeNCryptHandle hObject, string pszProperty, ref int result)
+        internal static unsafe ErrorCode NCryptGetIntProperty(
+            SafeNCryptHandle hObject,
+            string pszProperty,
+            ref int result
+        )
         {
             fixed (int* pResult = &result)
             {
@@ -66,7 +77,8 @@ internal static partial class Interop
                     pResult,
                     sizeof(int),
                     out int cbResult,
-                    CngPropertyOptions.None);
+                    CngPropertyOptions.None
+                );
 
                 if (errorCode == ErrorCode.ERROR_SUCCESS)
                 {

@@ -13,7 +13,10 @@ public class TestRequestContext
     {
         public static readonly Factory Instance = new();
 
-        public Task<TestRequestContext> CreateRequestContextAsync<TRequestParam>(IQueueItem<TestRequestContext> queueItem, TRequestParam requestParam, CancellationToken cancellationToken)
-            => Task.FromResult(new TestRequestContext());
+        public Task<TestRequestContext> CreateRequestContextAsync<TRequestParam>(
+            IQueueItem<TestRequestContext> queueItem,
+            TRequestParam requestParam,
+            CancellationToken cancellationToken
+        ) => Task.FromResult(new TestRequestContext());
     }
 }

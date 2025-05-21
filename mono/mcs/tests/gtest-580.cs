@@ -1,18 +1,19 @@
-// Parser tests for contextual where 
+// Parser tests for contextual where
 
 namespace WhereProblems
 {
-	class MyClass<where> { }
-	interface MyInterface<where> { }
-	struct MyStruct<where> { }
+    class MyClass<where> { }
 
-	class Classes
-	{
-		class where { }
-		class DER17 : where { }
+    interface MyInterface<where> { }
 
-		public static void Main ()
-		{
-		}
-	}
+    struct MyStruct<where> { }
+
+    class Classes
+    {
+        class where { }
+
+        class DER17 : where { }
+
+        public static void Main() { }
+    }
 }

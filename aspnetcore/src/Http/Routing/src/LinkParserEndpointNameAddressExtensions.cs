@@ -35,7 +35,8 @@ public static class LinkParserEndpointNameAddressExtensions
     public static RouteValueDictionary? ParsePathByEndpointName(
         this LinkParser parser,
         string endpointName,
-        PathString path)
+        PathString path
+    )
     {
         ArgumentNullException.ThrowIfNull(parser);
         ArgumentNullException.ThrowIfNull(endpointName);

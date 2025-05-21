@@ -9,9 +9,13 @@ namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 // This factory is registered last, which means, dictionaries and collections, have already
 // been processed by the time we get here.
-internal class ComplexTypeConverterFactory(FormDataMapperOptions options, ILoggerFactory loggerFactory) : IFormDataConverterFactory
+internal class ComplexTypeConverterFactory(
+    FormDataMapperOptions options,
+    ILoggerFactory loggerFactory
+) : IFormDataConverterFactory
 {
-    internal FormDataMetadataFactory MetadataFactory { get; } = new FormDataMetadataFactory(options.Factories, loggerFactory);
+    internal FormDataMetadataFactory MetadataFactory { get; } =
+        new FormDataMetadataFactory(options.Factories, loggerFactory);
 
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
@@ -98,10 +102,17 @@ internal class ComplexTypeConverterFactory(FormDataMapperOptions options, ILogge
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
     public FormDataConverter CreateConverter(Type type, FormDataMapperOptions options)
     {
-        if (Activator.CreateInstance(typeof(ComplexTypeExpressionConverterFactory<>).MakeGenericType(type), MetadataFactory)
-            is not ComplexTypeExpressionConverterFactory factory)
+        if (
+            Activator.CreateInstance(
+                typeof(ComplexTypeExpressionConverterFactory<>).MakeGenericType(type),
+                MetadataFactory
+            )
+            is not ComplexTypeExpressionConverterFactory factory
+        )
         {
-            throw new InvalidOperationException($"Could not create a converter factory for type {type}.");
+            throw new InvalidOperationException(
+                $"Could not create a converter factory for type {type}."
+            );
         }
 
         return factory.CreateConverter(type, options);

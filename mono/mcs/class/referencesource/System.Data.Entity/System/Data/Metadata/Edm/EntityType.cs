@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using System.Security.Cryptography;
-using System.Globalization;
 
 namespace System.Data.Metadata.Edm
 {
@@ -33,9 +33,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">dataspace in which the EntityType belongs to</param>
         /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version arguments are null</exception>
         internal EntityType(string name, string namespaceName, DataSpace dataSpace)
-            : base(name, namespaceName, dataSpace)
-        {
-        }
+            : base(name, namespaceName, dataSpace) { }
 
         /// <param name="name">name of the entity type</param>
         /// <param name="namespaceName">namespace of the entity type</param>
@@ -44,14 +42,16 @@ namespace System.Data.Metadata.Edm
         /// <param name="members">members of the entity type [property and navigational property]</param>
         /// <param name="keyMemberNames">key members for the type</param>
         /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version arguments are null</exception>
-        internal EntityType(string name,
-                          string namespaceName,
-                          DataSpace dataSpace,
-                          IEnumerable<string> keyMemberNames,
-                          IEnumerable<EdmMember> members)
+        internal EntityType(
+            string name,
+            string namespaceName,
+            DataSpace dataSpace,
+            IEnumerable<string> keyMemberNames,
+            IEnumerable<EdmMember> members
+        )
             : base(name, namespaceName, dataSpace)
         {
-            //--- first add the properties 
+            //--- first add the properties
             if (null != members)
             {
                 CheckAndAddMembers(members, this);
@@ -59,11 +59,10 @@ namespace System.Data.Metadata.Edm
             //--- second add the key members
             if (null != keyMemberNames)
             {
-                //Validation should make sure that base type of this type does not have keymembers when this type has keymembers. 
+                //Validation should make sure that base type of this type does not have keymembers when this type has keymembers.
                 CheckAndAddKeyMembers(keyMemberNames);
             }
         }
-
 
         #endregion
 
@@ -80,19 +79,24 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.EntityType; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.EntityType; }
+        }
 
         /// <summary>
-        /// Validates a EdmMember object to determine if it can be added to this type's 
+        /// Validates a EdmMember object to determine if it can be added to this type's
         /// Members collection. If this method returns without throwing, it is assumed
-        /// the member is valid. 
+        /// the member is valid.
         /// </summary>
         /// <param name="member">The member to validate</param>
         /// <exception cref="System.ArgumentException">Thrown if the member is not a EdmProperty</exception>
         internal override void ValidateMemberForAdd(EdmMember member)
         {
-            Debug.Assert(Helper.IsEdmProperty(member) || Helper.IsNavigationProperty(member),
-                "Only members of type Property may be added to Entity types.");
+            Debug.Assert(
+                Helper.IsEdmProperty(member) || Helper.IsNavigationProperty(member),
+                "Only members of type Property may be added to Entity types."
+            );
         }
 
         /// <summary>
@@ -142,7 +146,9 @@ namespace System.Data.Metadata.Edm
             get
             {
                 return new FilteredReadOnlyMetadataCollection<NavigationProperty, EdmMember>(
-                    ((ReadOnlyMetadataCollection<EdmMember>)this.Members), Helper.IsNavigationProperty);
+                    ((ReadOnlyMetadataCollection<EdmMember>)this.Members),
+                    Helper.IsNavigationProperty
+                );
             }
         }
 
@@ -154,12 +160,20 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                Debug.Assert(IsReadOnly, "this is a wrapper around this.Members, don't call it during metadata loading, only call it after the metadata is set to readonly");
+                Debug.Assert(
+                    IsReadOnly,
+                    "this is a wrapper around this.Members, don't call it during metadata loading, only call it after the metadata is set to readonly"
+                );
                 if (null == _properties)
                 {
-                    Interlocked.CompareExchange(ref _properties,
+                    Interlocked.CompareExchange(
+                        ref _properties,
                         new FilteredReadOnlyMetadataCollection<EdmProperty, EdmMember>(
-                            this.Members, Helper.IsEdmProperty), null);
+                            this.Members,
+                            Helper.IsEdmProperty
+                        ),
+                        null
+                    );
                 }
                 return _properties;
             }
@@ -187,7 +201,9 @@ namespace System.Data.Metadata.Edm
                 List<EdmProperty> keyProperties = new List<EdmProperty>(KeyMembers.Count);
                 foreach (EdmMember keyMember in KeyMembers)
                 {
-                    keyProperties.Add(new EdmProperty(keyMember.Name, Helper.GetModelTypeUsage(keyMember)));
+                    keyProperties.Add(
+                        new EdmProperty(keyMember.Name, Helper.GetModelTypeUsage(keyMember))
+                    );
                 }
                 Interlocked.CompareExchange<RowType>(ref _keyRow, new RowType(keyProperties), null);
             }
@@ -204,16 +220,23 @@ namespace System.Data.Metadata.Edm
         /// <param name="toName">the 'to' end of the association</param>
         /// <param name="navigationProperty">the property name, or null if none was found</param>
         /// <returns>true if a property was found, false otherwise</returns>
-        internal bool TryGetNavigationProperty(string relationshipType, string fromName, string toName, out NavigationProperty navigationProperty)
+        internal bool TryGetNavigationProperty(
+            string relationshipType,
+            string fromName,
+            string toName,
+            out NavigationProperty navigationProperty
+        )
         {
             // This is a linear search but it's probably okay because the number of entries
             // is generally small and this method is only called to generate code during lighweight
             // code gen.
             foreach (NavigationProperty navProperty in NavigationProperties)
             {
-                if (navProperty.RelationshipType.FullName == relationshipType &&
-                    navProperty.FromEndMember.Name == fromName &&
-                    navProperty.ToEndMember.Name == toName)
+                if (
+                    navProperty.RelationshipType.FullName == relationshipType
+                    && navProperty.FromEndMember.Name == fromName
+                    && navProperty.ToEndMember.Name == toName
+                )
                 {
                     navigationProperty = navProperty;
                     return true;
@@ -243,11 +266,16 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="type">The CLR type to construct from</param>
         internal ClrEntityType(Type type, string cspaceNamespaceName, string cspaceTypeName)
-            : base(EntityUtil.GenericCheckArgumentNull(type, "type").Name, type.Namespace ?? string.Empty,
-            DataSpace.OSpace)
+            : base(
+                EntityUtil.GenericCheckArgumentNull(type, "type").Name,
+                type.Namespace ?? string.Empty,
+                DataSpace.OSpace
+            )
         {
-            System.Diagnostics.Debug.Assert(!String.IsNullOrEmpty(cspaceNamespaceName) &&
-                !String.IsNullOrEmpty(cspaceTypeName), "Mapping information must never be null");
+            System.Diagnostics.Debug.Assert(
+                !String.IsNullOrEmpty(cspaceNamespaceName) && !String.IsNullOrEmpty(cspaceTypeName),
+                "Mapping information must never be null"
+            );
 
             _type = type.TypeHandle;
             _cspaceNamespaceName = cspaceNamespaceName;
@@ -256,7 +284,10 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>cached dynamic method to construct a CLR instance</summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
         internal Delegate Constructor
         {
             get { return _constructor; }
@@ -274,9 +305,15 @@ namespace System.Data.Metadata.Edm
             get { return Type.GetTypeFromHandle(_type); }
         }
 
-        internal string CSpaceTypeName { get { return _cspaceTypeName; } }
+        internal string CSpaceTypeName
+        {
+            get { return _cspaceTypeName; }
+        }
 
-        internal string CSpaceNamespaceName { get { return _cspaceNamespaceName; } }
+        internal string CSpaceNamespaceName
+        {
+            get { return _cspaceNamespaceName; }
+        }
 
         /// <summary>
         /// Gets a collision resistent (SHA256) hash of the information used to build
@@ -304,7 +341,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         private string BuildEntityTypeHash()
         {
-            var hash = System.Data.Common.Utils.MetadataHelper.CreateSHA256HashAlgorithm()
+            var hash = System
+                .Data.Common.Utils.MetadataHelper.CreateSHA256HashAlgorithm()
                 .ComputeHash(Encoding.ASCII.GetBytes(BuildEntityTypeDescription()));
 
             // convert num bytes to num hex digits
@@ -331,11 +369,18 @@ namespace System.Data.Metadata.Edm
             var navProps = new SortedSet<string>();
             foreach (var navProperty in NavigationProperties)
             {
-                navProps.Add(navProperty.Name + "*" +
-                             navProperty.FromEndMember.Name + "*" +
-                             navProperty.FromEndMember.RelationshipMultiplicity + "*" +
-                             navProperty.ToEndMember.Name + "*" +
-                             navProperty.ToEndMember.RelationshipMultiplicity + "*");
+                navProps.Add(
+                    navProperty.Name
+                        + "*"
+                        + navProperty.FromEndMember.Name
+                        + "*"
+                        + navProperty.FromEndMember.RelationshipMultiplicity
+                        + "*"
+                        + navProperty.ToEndMember.Name
+                        + "*"
+                        + navProperty.ToEndMember.RelationshipMultiplicity
+                        + "*"
+                );
             }
             builder.Append("NavProps:");
             foreach (var navProp in navProps)

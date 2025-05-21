@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,23 +21,21 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Collections.Generic;
 using System.Data;
 using DbLinq.Data.Linq.Database;
-
+using DbLinq.Data.Linq.Mapping;
+using DbLinq.Data.Linq.Sql;
+using DbLinq.Data.Linq.Sugar.Expressions;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using DbLinq.Data.Linq.Mapping;
-using DbLinq.Data.Linq.Sql;
-using DbLinq.Data.Linq.Sugar.Expressions;
 
 namespace DbLinq.Data.Linq.Sugar
 {
@@ -73,8 +71,13 @@ namespace DbLinq.Data.Linq.Sugar
         /// </summary>
         public string ExecuteMethodName { get; private set; }
 
-        public SelectQuery(DataContext dataContext, SqlStatement sql, IList<InputParameterExpression> parameters,
-                     Delegate rowObjectCreator, string executeMethodName)
+        public SelectQuery(
+            DataContext dataContext,
+            SqlStatement sql,
+            IList<InputParameterExpression> parameters,
+            Delegate rowObjectCreator,
+            string executeMethodName
+        )
             : base(dataContext, sql)
         {
             InputParameters = parameters;
@@ -94,7 +97,9 @@ namespace DbLinq.Data.Linq.Sugar
                     foreach (object p in (Array)parameter.GetValue())
                     {
                         dbParameter = dbCommand.Command.CreateParameter();
-                        dbParameter.ParameterName = DataContext.Vendor.SqlProvider.GetParameterName(parameter.Alias + i.ToString());
+                        dbParameter.ParameterName = DataContext.Vendor.SqlProvider.GetParameterName(
+                            parameter.Alias + i.ToString()
+                        );
                         dbParameter.Value = p;
                         dbCommand.Command.Parameters.Add(dbParameter);
                         ++i;
@@ -103,7 +108,9 @@ namespace DbLinq.Data.Linq.Sugar
                 else
                 {
                     dbParameter = dbCommand.Command.CreateParameter();
-                    dbParameter.ParameterName = DataContext.Vendor.SqlProvider.GetParameterName(parameter.Alias);
+                    dbParameter.ParameterName = DataContext.Vendor.SqlProvider.GetParameterName(
+                        parameter.Alias
+                    );
                     dbParameter.Value = parameter.GetValue();
                     dbCommand.Command.Parameters.Add(dbParameter);
                 }

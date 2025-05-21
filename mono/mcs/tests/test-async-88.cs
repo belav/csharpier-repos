@@ -3,26 +3,29 @@ using System.Threading.Tasks;
 
 public class Test
 {
-	static async Task<string> AsyncWithDeepTry ()
-	{
-		try {
-			await Task.Yield ();
+    static async Task<string> AsyncWithDeepTry()
+    {
+        try
+        {
+            await Task.Yield();
 
-			try {
-				await Task.Yield ();
-			} catch {
-			}
-		} catch {
-			await Task.Yield ();
-		} finally {
-		}
+            try
+            {
+                await Task.Yield();
+            }
+            catch { }
+        }
+        catch
+        {
+            await Task.Yield();
+        }
+        finally { }
 
-		return null;
-	}
+        return null;
+    }
 
-
-	static void Main ()
-	{
-		AsyncWithDeepTry ().Wait ();
-	}
+    static void Main()
+    {
+        AsyncWithDeepTry().Wait();
+    }
 }

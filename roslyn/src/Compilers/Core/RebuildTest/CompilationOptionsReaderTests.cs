@@ -10,17 +10,17 @@ using System.Reflection;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Threading;
+using Microsoft.Cci;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Rebuild;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.Extensions.Logging;
-using Xunit;
-using Microsoft.Cci;
 using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         private CompilationOptionsReader GetOptionsReader(Compilation compilation)
         {
             compilation.VerifyDiagnostics();
-            var peBytes = compilation.EmitToArray(new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded));
+            var peBytes = compilation.EmitToArray(
+                new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded)
+            );
             var originalReader = new PEReader(peBytes);
             var originalPdbReader = originalReader.GetEmbeddedPdbMetadataReader();
             AssertEx.NotNull(originalPdbReader);
@@ -45,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 options: TestOptions.DebugModule,
                 source: @"
 class C { }
-");
+"
+            );
 
             var reader = GetOptionsReader(compilation);
             Assert.Null(reader.GetPublicKey());
@@ -60,9 +63,15 @@ class C { }
                 source: @"
 class Program {
 public static void Main() { }
-}");
+}"
+            );
             var reader = GetOptionsReader(compilation);
-            Assert.Equal(kind, reader.GetMetadataCompilationOptions().OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind));
+            Assert.Equal(
+                kind,
+                reader
+                    .GetMetadataCompilationOptions()
+                    .OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind)
+            );
         }
     }
 }

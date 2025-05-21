@@ -23,7 +23,9 @@ public abstract class OutputCacheEntryFormatterTests
     public abstract ITestOutputCacheStore GetStore();
 
     // arbitrarily some time 17 May 2023 - so we can predict payloads
-    static readonly DateTimeOffset KnownTime = DateTimeOffset.FromUnixTimeMilliseconds(1684322693875);
+    static readonly DateTimeOffset KnownTime = DateTimeOffset.FromUnixTimeMilliseconds(
+        1684322693875
+    );
 
     [Fact]
     public async Task StoreAndGet_StoresEmptyValues()
@@ -32,7 +34,15 @@ public abstract class OutputCacheEntryFormatterTests
         var key = "abc";
         using var entry = new OutputCacheEntry(KnownTime, StatusCodes.Status200OK);
 
-        await OutputCacheEntryFormatter.StoreAsync(key, entry, null, TimeSpan.Zero, store, NullLogger.Instance, default);
+        await OutputCacheEntryFormatter.StoreAsync(
+            key,
+            entry,
+            null,
+            TimeSpan.Zero,
+            store,
+            NullLogger.Instance,
+            default
+        );
 
         var result = await OutputCacheEntryFormatter.GetAsync(key, store, default);
 
@@ -47,11 +57,27 @@ public abstract class OutputCacheEntryFormatterTests
 
         var store = GetStore();
         var key = "abc";
-        using (var entry = new OutputCacheEntry(KnownTime, StatusCodes.Status201Created)
-            .CopyHeadersFrom(new HeaderDictionary { [HeaderNames.Accept] = new[] { "text/plain", "text/html" }, [HeaderNames.AcceptCharset] = "utf8" })
-            .CreateBodyFrom(new[] { bodySegment1, bodySegment1 }))
+        using (
+            var entry = new OutputCacheEntry(KnownTime, StatusCodes.Status201Created)
+                .CopyHeadersFrom(
+                    new HeaderDictionary
+                    {
+                        [HeaderNames.Accept] = new[] { "text/plain", "text/html" },
+                        [HeaderNames.AcceptCharset] = "utf8",
+                    }
+                )
+                .CreateBodyFrom(new[] { bodySegment1, bodySegment1 })
+        )
         {
-            await OutputCacheEntryFormatter.StoreAsync(key, entry, new HashSet<string>() { "tag", "タグ" }, TimeSpan.Zero, store, NullLogger.Instance, default);
+            await OutputCacheEntryFormatter.StoreAsync(
+                key,
+                entry,
+                new HashSet<string>() { "tag", "タグ" },
+                TimeSpan.Zero,
+                store,
+                NullLogger.Instance,
+                default
+            );
             var result = await OutputCacheEntryFormatter.GetAsync(key, store, default);
 
             AssertEntriesAreSame(entry, result);
@@ -59,7 +85,6 @@ public abstract class OutputCacheEntryFormatterTests
     }
 
     [Fact]
-
     public async Task StoreAndGet_StoresNullHeaders()
     {
         var store = GetStore();
@@ -67,9 +92,24 @@ public abstract class OutputCacheEntryFormatterTests
 
         using (var entry = new OutputCacheEntry(KnownTime, StatusCodes.Status201Created))
         {
-            entry.CopyHeadersFrom(new HeaderDictionary { [""] = "", [HeaderNames.Accept] = new[] { null, null, "", "text/html" }, [HeaderNames.AcceptCharset] = new string[] { null } });
+            entry.CopyHeadersFrom(
+                new HeaderDictionary
+                {
+                    [""] = "",
+                    [HeaderNames.Accept] = new[] { null, null, "", "text/html" },
+                    [HeaderNames.AcceptCharset] = new string[] { null },
+                }
+            );
 
-            await OutputCacheEntryFormatter.StoreAsync(key, entry, null, TimeSpan.Zero, store, NullLogger.Instance, default);
+            await OutputCacheEntryFormatter.StoreAsync(
+                key,
+                entry,
+                null,
+                TimeSpan.Zero,
+                store,
+                NullLogger.Instance,
+                default
+            );
         }
         var payload = await store.GetAsync(key, CancellationToken.None);
         Assert.NotNull(payload);
@@ -87,7 +127,10 @@ public abstract class OutputCacheEntryFormatterTests
         Assert.Equal("", values[1]);
         Assert.Equal("", values[2]);
         Assert.Equal("text/html", values[3]);
-        Assert.True(result.TryFindHeader(HeaderNames.AcceptCharset, out values), "Find 'AcceptCharset'");
+        Assert.True(
+            result.TryFindHeader(HeaderNames.AcceptCharset, out values),
+            "Find 'AcceptCharset'"
+        );
         Assert.Equal("", values[0]);
     }
 
@@ -99,6 +142,7 @@ public abstract class OutputCacheEntryFormatterTests
             OutputCacheEntryFormatter.Deserialize(FromHex(KnownV2Payload))
         );
     }
+
     static byte[] FromHex(string hex)
     {
         // inefficient; for testing only
@@ -118,12 +162,17 @@ public abstract class OutputCacheEntryFormatterTests
                 >= '0' and <= '9' => value - '0',
                 >= 'a' and <= 'f' => value - 'a' + 10,
                 >= 'A' and <= 'F' => value - 'A' + 10,
-                _ => throw new ArgumentOutOfRangeException(nameof(value), "token is not hex: " + value.ToString())
+                _ => throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    "token is not hex: " + value.ToString()
+                ),
             };
         }
     }
 
-    const string KnownV1Payload = "01-B0-E8-8E-B2-95-D9-D5-ED-08-00-C9-01-03-00-01-00-06-41-63-63-65-70-74-04-00-00-00-09-74-65-78-74-2F-68-74-6D-6C-0E-41-63-63-65-70-74-2D-43-68-61-72-73-65-74-01-00-00-00";
+    const string KnownV1Payload =
+        "01-B0-E8-8E-B2-95-D9-D5-ED-08-00-C9-01-03-00-01-00-06-41-63-63-65-70-74-04-00-00-00-09-74-65-78-74-2F-68-74-6D-6C-0E-41-63-63-65-70-74-2D-43-68-61-72-73-65-74-01-00-00-00";
+
     // 01                                              version 1
     // B0-E8-8E-B2-95-D9-D5-ED-08                      ticks 1684322693875
     // 00                                              offset 0
@@ -142,7 +191,9 @@ public abstract class OutputCacheEntryFormatterTests
     // 00                                              segment count 0
     // 00                                              tag count 0
 
-    const string KnownV2Payload = "02-B0-E8-8E-B2-95-D9-D5-ED-08-00-C9-01-03-00-01-00-01-04-00-00-00-9B-01-03-01-00-00";
+    const string KnownV2Payload =
+        "02-B0-E8-8E-B2-95-D9-D5-ED-08-00-C9-01-03-00-01-00-01-04-00-00-00-9B-01-03-01-00-00";
+
     // 02                                              version 2
     // B0-E8-8E-B2-95-D9-D5-ED-08                      ticks 1684322693875
     // 00                                              offset 0
@@ -192,8 +243,14 @@ public abstract class OutputCacheEntryFormatterTests
         static ReadOnlyMemory<byte> Linearize(in ReadOnlySequence<byte> value, out byte[] lease)
         {
             lease = null;
-            if (value.IsEmpty) { return default; }
-            if (value.IsSingleSegment) { return value.First; }
+            if (value.IsEmpty)
+            {
+                return default;
+            }
+            if (value.IsSingleSegment)
+            {
+                return value.First;
+            }
 
             var len = checked((int)value.Length);
             lease = ArrayPool<byte>.Shared.Rent(len);

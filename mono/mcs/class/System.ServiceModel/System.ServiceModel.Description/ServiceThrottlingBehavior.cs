@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,67 +33,75 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public class ServiceThrottlingBehavior : IServiceBehavior
-	{
-		public ServiceThrottlingBehavior ()
-		{
-		}
+    public class ServiceThrottlingBehavior : IServiceBehavior
+    {
+        public ServiceThrottlingBehavior() { }
 
-		int max_calls = 16, max_conn = 10, max_instance = 26;
+        int max_calls = 16,
+            max_conn = 10,
+            max_instance = 26;
 
-		public int MaxConcurrentCalls {
-			get { return max_calls; }
-			set {
-				if (value <= 0)
-					throw new InvalidOperationException ("must be positive value");
-				max_calls = value;
-			}
-		}
+        public int MaxConcurrentCalls
+        {
+            get { return max_calls; }
+            set
+            {
+                if (value <= 0)
+                    throw new InvalidOperationException("must be positive value");
+                max_calls = value;
+            }
+        }
 
-		public int MaxConcurrentSessions {
-			get { return max_conn; }
-			set {
-				if (value <= 0)
-					throw new InvalidOperationException ("must be positive value");
-				max_conn = value;
-			}
-		}
+        public int MaxConcurrentSessions
+        {
+            get { return max_conn; }
+            set
+            {
+                if (value <= 0)
+                    throw new InvalidOperationException("must be positive value");
+                max_conn = value;
+            }
+        }
 
-		public int MaxConcurrentInstances {
-			get { return max_instance; }
-			set {
-				if (value <= 0)
-					throw new InvalidOperationException ("must be positive value");
-				max_instance = value;
-			}
-		}
+        public int MaxConcurrentInstances
+        {
+            get { return max_instance; }
+            set
+            {
+                if (value <= 0)
+                    throw new InvalidOperationException("must be positive value");
+                max_instance = value;
+            }
+        }
 
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-		}
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			foreach (var cdb in serviceHostBase.ChannelDispatchers) {
-				var cd = cdb as ChannelDispatcher;
-				if (cd != null)
-					cd.ServiceThrottle = new ServiceThrottle (cd) {
-						MaxConcurrentCalls = this.MaxConcurrentCalls,
-						MaxConcurrentSessions = this.MaxConcurrentSessions,
-						MaxConcurrentInstances = this.MaxConcurrentInstances };
-			}
-		}
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            foreach (var cdb in serviceHostBase.ChannelDispatchers)
+            {
+                var cd = cdb as ChannelDispatcher;
+                if (cd != null)
+                    cd.ServiceThrottle = new ServiceThrottle(cd)
+                    {
+                        MaxConcurrentCalls = this.MaxConcurrentCalls,
+                        MaxConcurrentSessions = this.MaxConcurrentSessions,
+                        MaxConcurrentInstances = this.MaxConcurrentInstances,
+                    };
+            }
+        }
 
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-		}
-	}
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
+    }
 }

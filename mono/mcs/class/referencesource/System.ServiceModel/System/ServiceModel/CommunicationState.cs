@@ -13,6 +13,6 @@ namespace System.ServiceModel
         Opened,
         Closing,
         Closed,
-        Faulted
+        Faulted,
     }
 }

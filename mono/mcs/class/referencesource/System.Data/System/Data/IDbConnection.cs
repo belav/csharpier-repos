@@ -6,31 +6,23 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
-    public interface IDbConnection : IDisposable {
+    public interface IDbConnection : IDisposable
+    {
+        string ConnectionString { get; set; }
 
-        string ConnectionString {
-            get;
-            set; 
-        }
+        int ConnectionTimeout { get; }
 
-        int ConnectionTimeout {
-            get;
-        }
+        string Database { get; }
 
-        string Database {
-            get;
-        }
-
-        ConnectionState State {
-            get;
-        }
+        ConnectionState State { get; }
 
         IDbTransaction BeginTransaction();
 
-        IDbTransaction BeginTransaction(IsolationLevel il); 
+        IDbTransaction BeginTransaction(IsolationLevel il);
 
         void Close();
 

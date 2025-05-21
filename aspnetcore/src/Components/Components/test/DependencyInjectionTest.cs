@@ -46,9 +46,12 @@ public class DependencyInjectionTest
             InstantiateComponent<HasGetOnlyPropertyWithInject>();
         });
 
-        Assert.Equal($"Cannot provide a value for property '{nameof(HasInjectableProperty.MyService)}' " +
-            $"on type '{typeof(HasGetOnlyPropertyWithInject).FullName}' because the property " +
-            $"has no setter.", ex.Message);
+        Assert.Equal(
+            $"Cannot provide a value for property '{nameof(HasInjectableProperty.MyService)}' "
+                + $"on type '{typeof(HasGetOnlyPropertyWithInject).FullName}' because the property "
+                + $"has no setter.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -59,9 +62,12 @@ public class DependencyInjectionTest
             InstantiateComponent<HasInjectableProperty>();
         });
 
-        Assert.Equal($"Cannot provide a value for property '{nameof(HasInjectableProperty.MyService)}' " +
-            $"on type '{typeof(HasInjectableProperty).FullName}'. There is no registered service " +
-            $"of type '{typeof(IMyService).FullName}'.", ex.Message);
+        Assert.Equal(
+            $"Cannot provide a value for property '{nameof(HasInjectableProperty.MyService)}' "
+                + $"on type '{typeof(HasInjectableProperty).FullName}'. There is no registered service "
+                + $"of type '{typeof(IMyService).FullName}'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -75,9 +81,12 @@ public class DependencyInjectionTest
             InstantiateComponent<HasKeyedInjectableProperty>();
         });
 
-        Assert.Equal($"Cannot provide a value for property '{nameof(HasKeyedInjectableProperty.MyService)}' " +
-            $"on type '{typeof(HasKeyedInjectableProperty).FullName}'. There is no registered keyed service " +
-            $"of type '{typeof(IMyService).FullName}' with key '{HasKeyedInjectableProperty.ServiceKey}'.", ex.Message);
+        Assert.Equal(
+            $"Cannot provide a value for property '{nameof(HasKeyedInjectableProperty.MyService)}' "
+                + $"on type '{typeof(HasKeyedInjectableProperty).FullName}'. There is no registered keyed service "
+                + $"of type '{typeof(IMyService).FullName}' with key '{HasKeyedInjectableProperty.ServiceKey}'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -99,7 +108,10 @@ public class DependencyInjectionTest
     {
         // Arrange
         var serviceInstance = new MyServiceImplementation();
-        _serviceProvider.AddKeyedService<IMyService>(serviceInstance, HasKeyedInjectableProperty.ServiceKey);
+        _serviceProvider.AddKeyedService<IMyService>(
+            serviceInstance,
+            HasKeyedInjectableProperty.ServiceKey
+        );
 
         // Act
         var instance = InstantiateComponent<HasKeyedInjectableProperty>();
@@ -118,7 +130,10 @@ public class DependencyInjectionTest
         _serviceProvider.AddService<IMyService>(serviceInstance);
         _serviceProvider.AddService<IMyOtherService>(otherServiceInstance);
         _serviceProvider.AddService(concreteServiceInstance);
-        _serviceProvider.AddKeyedService<IMyService>(serviceInstance, HasManyInjectableProperties.ServiceKey);
+        _serviceProvider.AddKeyedService<IMyService>(
+            serviceInstance,
+            HasManyInjectableProperties.ServiceKey
+        );
 
         // Act
         var instance = InstantiateComponent<HasManyInjectableProperties>();
@@ -160,8 +175,8 @@ public class DependencyInjectionTest
         Assert.Same(serviceInstance, instance.PrivateMyService);
     }
 
-    private T InstantiateComponent<T>() where T : IComponent
-        => (T)_renderer.InstantiateComponent<T>();
+    private T InstantiateComponent<T>()
+        where T : IComponent => (T)_renderer.InstantiateComponent<T>();
 
     class HasPropertiesWithoutInjectAttribute : TestComponent
     {
@@ -172,30 +187,35 @@ public class DependencyInjectionTest
 
     class HasStaticProperties : TestComponent
     {
-        [Inject] public static IMyService StaticPropertyWithInject { get; set; }
+        [Inject]
+        public static IMyService StaticPropertyWithInject { get; set; }
         public static IMyService StaticPropertyWithoutInject { get; set; }
     }
 
     class HasGetOnlyPropertyWithInject : TestComponent
     {
-        [Inject] public IMyService MyService { get; }
+        [Inject]
+        public IMyService MyService { get; }
     }
 
     class HasInjectableProperty : TestComponent
     {
-        [Inject] public IMyService MyService { get; set; }
+        [Inject]
+        public IMyService MyService { get; set; }
     }
 
     class HasKeyedInjectableProperty : TestComponent
     {
         public const string ServiceKey = "my-service";
 
-        [Inject(Key = ServiceKey)] public IMyService MyService { get; set; }
+        [Inject(Key = ServiceKey)]
+        public IMyService MyService { get; set; }
     }
 
     class HasPrivateInjectableProperty : TestComponent
     {
-        [Inject] private IMyService MyService { get; set; }
+        [Inject]
+        private IMyService MyService { get; set; }
 
         public IMyService PrivateMyService => MyService;
     }
@@ -206,12 +226,23 @@ public class DependencyInjectionTest
     {
         public const string ServiceKey = "my-service";
 
-        [Inject] public IMyService PublicReadWrite { get; set; }
-        [Inject] public IMyService PublicReadOnly { get; private set; }
-        [Inject] private IMyService Private { get; set; }
-        [Inject] public IMyOtherService DifferentServiceType { get; set; }
-        [Inject] public MyConcreteService ConcreteServiceType { get; set; }
-        [Inject(Key = ServiceKey)] public IMyService KeyedService { get; set; }
+        [Inject]
+        public IMyService PublicReadWrite { get; set; }
+
+        [Inject]
+        public IMyService PublicReadOnly { get; private set; }
+
+        [Inject]
+        private IMyService Private { get; set; }
+
+        [Inject]
+        public IMyOtherService DifferentServiceType { get; set; }
+
+        [Inject]
+        public MyConcreteService ConcreteServiceType { get; set; }
+
+        [Inject(Key = ServiceKey)]
+        public IMyService KeyedService { get; set; }
 
         public IMyService PrivateValue => Private;
     }
@@ -219,10 +250,13 @@ public class DependencyInjectionTest
     class HasInheritedInjectedProperty : HasInjectableProperty { }
 
     interface IMyService { }
+
     interface IMyOtherService { }
 
     class MyServiceImplementation : IMyService { }
+
     class MyOtherServiceImplementation : IMyOtherService { }
+
     class MyConcreteService { }
 
     class TestComponent : IComponent
@@ -232,10 +266,9 @@ public class DependencyInjectionTest
         // not throw, then be sure also to add a test to verify that injection
         // occurs before lifecycle methods.
 
-        public void Attach(RenderHandle renderHandle)
-            => throw new NotImplementedException();
+        public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();
 
-        public Task SetParametersAsync(ParameterView parameters)
-            => throw new NotImplementedException();
+        public Task SetParametersAsync(ParameterView parameters) =>
+            throw new NotImplementedException();
     }
 }

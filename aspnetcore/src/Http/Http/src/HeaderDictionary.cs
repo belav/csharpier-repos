@@ -19,16 +19,16 @@ public class HeaderDictionary : IHeaderDictionary
 {
     private static readonly string[] EmptyKeys = Array.Empty<string>();
     private static readonly StringValues[] EmptyValues = Array.Empty<StringValues>();
+
     // Pre-box
-    private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType = default(Enumerator);
+    private static readonly IEnumerator<KeyValuePair<string, StringValues>> EmptyIEnumeratorType =
+        default(Enumerator);
     private static readonly IEnumerator EmptyIEnumerator = default(Enumerator);
 
     /// <summary>
     /// Initializes a new instance of <see cref="HeaderDictionary"/>.
     /// </summary>
-    public HeaderDictionary()
-    {
-    }
+    public HeaderDictionary() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HeaderDictionary"/>.
@@ -55,7 +55,10 @@ public class HeaderDictionary : IHeaderDictionary
     {
         if (Store == null)
         {
-            Store = new Dictionary<string, StringValues>(capacity, StringComparer.OrdinalIgnoreCase);
+            Store = new Dictionary<string, StringValues>(
+                capacity,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 
@@ -122,9 +125,14 @@ public class HeaderDictionary : IHeaderDictionary
         {
             long value;
             var rawValue = this[HeaderNames.ContentLength];
-            if (rawValue.Count == 1 &&
-                !string.IsNullOrEmpty(rawValue[0]) &&
-                HeaderUtilities.TryParseNonNegativeInt64(new StringSegment(rawValue[0]).Trim(), out value))
+            if (
+                rawValue.Count == 1
+                && !string.IsNullOrEmpty(rawValue[0])
+                && HeaderUtilities.TryParseNonNegativeInt64(
+                    new StringSegment(rawValue[0]).Trim(),
+                    out value
+                )
+            )
             {
                 return value;
             }
@@ -136,7 +144,9 @@ public class HeaderDictionary : IHeaderDictionary
             ThrowIfReadOnly();
             if (value.HasValue)
             {
-                this[HeaderNames.ContentLength] = HeaderUtilities.FormatNonNegativeInt64(value.GetValueOrDefault());
+                this[HeaderNames.ContentLength] = HeaderUtilities.FormatNonNegativeInt64(
+                    value.GetValueOrDefault()
+                );
             }
             else
             {
@@ -231,9 +241,11 @@ public class HeaderDictionary : IHeaderDictionary
     /// <returns>true if the specified object occurs within this collection; otherwise, false.</returns>
     public bool Contains(KeyValuePair<string, StringValues> item)
     {
-        if (Store == null ||
-            !Store.TryGetValue(item.Key, out var value) ||
-            !StringValues.Equals(value, item.Value))
+        if (
+            Store == null
+            || !Store.TryGetValue(item.Key, out var value)
+            || !StringValues.Equals(value, item.Value)
+        )
         {
             return false;
         }
@@ -342,7 +354,9 @@ public class HeaderDictionary : IHeaderDictionary
     /// Returns an enumerator that iterates through a collection.
     /// </summary>
     /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
-    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<KeyValuePair<string, StringValues>>.GetEnumerator()
+    IEnumerator<KeyValuePair<string, StringValues>> IEnumerable<
+        KeyValuePair<string, StringValues>
+    >.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
         {
@@ -370,7 +384,9 @@ public class HeaderDictionary : IHeaderDictionary
     {
         if (IsReadOnly)
         {
-            throw new InvalidOperationException("The response headers cannot be modified because the response has already started.");
+            throw new InvalidOperationException(
+                "The response headers cannot be modified because the response has already started."
+            );
         }
     }
 
@@ -435,16 +451,11 @@ public class HeaderDictionary : IHeaderDictionary
         }
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         void IEnumerator.Reset()
@@ -461,6 +472,9 @@ public class HeaderDictionary : IHeaderDictionary
         private readonly HeaderDictionary _dictionary = dictionary;
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public KeyValuePair<string, string>[] Items => _dictionary.Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString())).ToArray();
+        public KeyValuePair<string, string>[] Items =>
+            _dictionary
+                .Select(pair => new KeyValuePair<string, string>(pair.Key, pair.Value.ToString()))
+                .ToArray();
     }
 }

@@ -12,13 +12,15 @@ namespace System.ComponentModel.Design
         /// Indicates the keyword is a word F1 was pressed to request help regarding.
         /// </summary>
         F1Keyword,
+
         /// <summary>
         /// Indicates the keyword is a general keyword.
         /// </summary>
         GeneralKeyword,
+
         /// <summary>
         /// Indicates the keyword is a filter keyword.
         /// </summary>
-        FilterKeyword
+        FilterKeyword,
     }
 }

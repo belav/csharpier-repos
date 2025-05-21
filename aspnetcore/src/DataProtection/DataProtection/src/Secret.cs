@@ -86,12 +86,18 @@ public sealed unsafe class Secret : IDisposable, ISecret
                 try
                 {
                     secret.WriteSecretIntoBuffer(new ArraySegment<byte>(tempPlaintextBuffer));
-                    _localAllocHandle = Protect(pbTempPlaintextBuffer, (uint)tempPlaintextBuffer.Length);
+                    _localAllocHandle = Protect(
+                        pbTempPlaintextBuffer,
+                        (uint)tempPlaintextBuffer.Length
+                    );
                     _plaintextLength = (uint)tempPlaintextBuffer.Length;
                 }
                 finally
                 {
-                    UnsafeBufferUtil.SecureZeroMemory(pbTempPlaintextBuffer, tempPlaintextBuffer.Length);
+                    UnsafeBufferUtil.SecureZeroMemory(
+                        pbTempPlaintextBuffer,
+                        tempPlaintextBuffer.Length
+                    );
                 }
             }
         }
@@ -138,22 +144,39 @@ public sealed unsafe class Secret : IDisposable, ISecret
 
         // We need to make sure we're a multiple of CRYPTPROTECTMEMORY_BLOCK_SIZE.
         var numTotalBytesToAllocate = cbPlaintext;
-        var numBytesPaddingRequired = CRYPTPROTECTMEMORY_BLOCK_SIZE - (numTotalBytesToAllocate % CRYPTPROTECTMEMORY_BLOCK_SIZE);
+        var numBytesPaddingRequired =
+            CRYPTPROTECTMEMORY_BLOCK_SIZE
+            - (numTotalBytesToAllocate % CRYPTPROTECTMEMORY_BLOCK_SIZE);
         if (numBytesPaddingRequired == CRYPTPROTECTMEMORY_BLOCK_SIZE)
         {
             numBytesPaddingRequired = 0; // we're already a proper multiple of the block size
         }
-        checked { numTotalBytesToAllocate += numBytesPaddingRequired; }
-        CryptoUtil.Assert(numTotalBytesToAllocate % CRYPTPROTECTMEMORY_BLOCK_SIZE == 0, "numTotalBytesToAllocate % CRYPTPROTECTMEMORY_BLOCK_SIZE == 0");
+        checked
+        {
+            numTotalBytesToAllocate += numBytesPaddingRequired;
+        }
+        CryptoUtil.Assert(
+            numTotalBytesToAllocate % CRYPTPROTECTMEMORY_BLOCK_SIZE == 0,
+            "numTotalBytesToAllocate % CRYPTPROTECTMEMORY_BLOCK_SIZE == 0"
+        );
 
         // Allocate and copy plaintext data; padding is uninitialized / undefined.
-        var encryptedMemoryHandle = SecureLocalAllocHandle.Allocate((IntPtr)numTotalBytesToAllocate);
-        UnsafeBufferUtil.BlockCopy(from: pbPlaintext, to: encryptedMemoryHandle, byteCount: cbPlaintext);
+        var encryptedMemoryHandle = SecureLocalAllocHandle.Allocate(
+            (IntPtr)numTotalBytesToAllocate
+        );
+        UnsafeBufferUtil.BlockCopy(
+            from: pbPlaintext,
+            to: encryptedMemoryHandle,
+            byteCount: cbPlaintext
+        );
 
         // Finally, CryptProtectMemory the whole mess.
         if (numTotalBytesToAllocate != 0)
         {
-            MemoryProtection.CryptProtectMemory(encryptedMemoryHandle, byteCount: numTotalBytesToAllocate);
+            MemoryProtection.CryptProtectMemory(
+                encryptedMemoryHandle,
+                byteCount: numTotalBytesToAllocate
+            );
         }
         return encryptedMemoryHandle;
     }
@@ -204,14 +227,22 @@ public sealed unsafe class Secret : IDisposable, ISecret
         // the handle contains plaintext bytes.
         if (!OSVersionUtil.IsWindows())
         {
-            UnsafeBufferUtil.BlockCopy(from: _localAllocHandle, to: pbBuffer, byteCount: _plaintextLength);
+            UnsafeBufferUtil.BlockCopy(
+                from: _localAllocHandle,
+                to: pbBuffer,
+                byteCount: _plaintextLength
+            );
             return;
         }
 
         if (_plaintextLength % CRYPTPROTECTMEMORY_BLOCK_SIZE == 0)
         {
             // Case 1: Secret length is an exact multiple of the block size. Copy directly to the buffer and decrypt there.
-            UnsafeBufferUtil.BlockCopy(from: _localAllocHandle, to: pbBuffer, byteCount: _plaintextLength);
+            UnsafeBufferUtil.BlockCopy(
+                from: _localAllocHandle,
+                to: pbBuffer,
+                byteCount: _plaintextLength
+            );
             MemoryProtection.CryptUnprotectMemory(pbBuffer, _plaintextLength);
         }
         else
@@ -220,8 +251,15 @@ public sealed unsafe class Secret : IDisposable, ISecret
             // perform the decryption in the duplicate buffer, then copy the plaintext data over.
             using (var duplicateHandle = _localAllocHandle.Duplicate())
             {
-                MemoryProtection.CryptUnprotectMemory(duplicateHandle, checked((uint)duplicateHandle.Length));
-                UnsafeBufferUtil.BlockCopy(from: duplicateHandle, to: pbBuffer, byteCount: _plaintextLength);
+                MemoryProtection.CryptUnprotectMemory(
+                    duplicateHandle,
+                    checked((uint)duplicateHandle.Length)
+                );
+                UnsafeBufferUtil.BlockCopy(
+                    from: duplicateHandle,
+                    to: pbBuffer,
+                    byteCount: _plaintextLength
+                );
             }
         }
     }
@@ -238,7 +276,11 @@ public sealed unsafe class Secret : IDisposable, ISecret
         buffer.Validate();
         if (buffer.Count != Length)
         {
-            throw Error.Common_BufferIncorrectlySized(nameof(buffer), actualSize: buffer.Count, expectedSize: Length);
+            throw Error.Common_BufferIncorrectlySized(
+                nameof(buffer),
+                actualSize: buffer.Count,
+                expectedSize: Length
+            );
         }
 
         // only unprotect if the secret is zero-length, as CLR doesn't like pinning zero-length buffers
@@ -267,7 +309,11 @@ public sealed unsafe class Secret : IDisposable, ISecret
         }
         if (bufferLength != Length)
         {
-            throw Error.Common_BufferIncorrectlySized(nameof(bufferLength), actualSize: bufferLength, expectedSize: Length);
+            throw Error.Common_BufferIncorrectlySized(
+                nameof(bufferLength),
+                actualSize: bufferLength,
+                expectedSize: Length
+            );
         }
 
         if (Length != 0)

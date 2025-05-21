@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -39,7 +39,12 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var listener = new TestDiagnosticListener();
 
-        var invoker = CreateInvoker(filters: null, actionDescriptor: actionDescriptor, listener: listener, routeData: routeData);
+        var invoker = CreateInvoker(
+            filters: null,
+            actionDescriptor: actionDescriptor,
+            listener: listener,
+            routeData: routeData
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -67,7 +72,12 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var listener = new TestDiagnosticListener();
 
-        var invoker = CreateInvoker(filters: null, actionDescriptor: actionDescriptor, listener: listener, routeData: routeData);
+        var invoker = CreateInvoker(
+            filters: null,
+            actionDescriptor: actionDescriptor,
+            listener: listener,
+            routeData: routeData
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -89,18 +99,19 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var resourceFilter = new Mock<IResourceFilter>();
         resourceFilter
             .Setup(f => f.OnResourceExecuting(It.IsAny<ResourceExecutingContext>()))
-            .Callback<ResourceExecutingContext>((resourceExecutingContext) =>
-            {
-                resourceExecutingContext.ValueProviderFactories.Add(valueProviderFactory2);
-            });
+            .Callback<ResourceExecutingContext>(
+                (resourceExecutingContext) =>
+                {
+                    resourceExecutingContext.ValueProviderFactories.Add(valueProviderFactory2);
+                }
+            );
         var valueProviderFactory1 = Mock.Of<IValueProviderFactory>();
-        var valueProviderFactories = new List<IValueProviderFactory>
-            {
-                valueProviderFactory1
-            };
+        var valueProviderFactories = new List<IValueProviderFactory> { valueProviderFactory1 };
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { resourceFilter.Object }, valueProviderFactories: valueProviderFactories);
+            new IFilterMetadata[] { resourceFilter.Object },
+            valueProviderFactories: valueProviderFactories
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -120,21 +131,25 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var resourceFilter = new Mock<IResourceFilter>();
         resourceFilter
             .Setup(f => f.OnResourceExecuting(It.IsAny<ResourceExecutingContext>()))
-            .Callback<ResourceExecutingContext>((resourceExecutingContext) =>
-            {
-                resourceExecutingContext.ValueProviderFactories.RemoveAt(0);
-            });
+            .Callback<ResourceExecutingContext>(
+                (resourceExecutingContext) =>
+                {
+                    resourceExecutingContext.ValueProviderFactories.RemoveAt(0);
+                }
+            );
 
         var valueProviderFactory1 = Mock.Of<IValueProviderFactory>();
         var valueProviderFactory2 = Mock.Of<IValueProviderFactory>();
         var valueProviderFactories = new List<IValueProviderFactory>
-            {
-                valueProviderFactory1,
-                valueProviderFactory2
-            };
+        {
+            valueProviderFactory1,
+            valueProviderFactory2,
+        };
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { resourceFilter.Object }, valueProviderFactories: valueProviderFactories);
+            new IFilterMetadata[] { resourceFilter.Object },
+            valueProviderFactories: valueProviderFactories
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -260,7 +275,6 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(page, pageResult.Page);
         Assert.Null(pageResult.Model);
         Assert.Same(page.ViewContext.ViewData, pageResult.ViewData);
-
     }
 
     [Fact]
@@ -306,7 +320,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var invoker = CreateInvoker(
             filters,
             CreateDescriptorForPageModelPage(),
-            modelFactory: context => new TestPageModel() { PageContext = context });
+            modelFactory: context => new TestPageModel() { PageContext = context }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -397,13 +412,31 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter1.Verify(f => f.OnPageHandlerSelected(It.IsAny<PageHandlerSelectedContext>()), Times.Once());
-        filter1.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        filter1.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        filter1.Verify(
+            f => f.OnPageHandlerSelected(It.IsAny<PageHandlerSelectedContext>()),
+            Times.Once()
+        );
+        filter1.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        filter1.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
-        filter2.Verify(f => f.OnPageHandlerSelected(It.IsAny<PageHandlerSelectedContext>()), Times.Once());
-        filter2.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        filter2.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        filter2.Verify(
+            f => f.OnPageHandlerSelected(It.IsAny<PageHandlerSelectedContext>()),
+            Times.Once()
+        );
+        filter2.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        filter2.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -422,12 +455,19 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Returns(Task.CompletedTask)
             .Verifiable();
         filter1
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (c, next) =>
-            {
-                Assert.Same(handler, c.HandlerMethod);
-                await next();
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (c, next) =>
+                {
+                    Assert.Same(handler, c.HandlerMethod);
+                    await next();
+                }
+            )
             .Verifiable();
 
         var filter2 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
@@ -437,12 +477,19 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Returns(Task.CompletedTask)
             .Verifiable();
         filter2
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (c, next) =>
-            {
-                Assert.Same(handler, c.HandlerMethod);
-                await next();
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (c, next) =>
+                {
+                    Assert.Same(handler, c.HandlerMethod);
+                    await next();
+                }
+            )
             .Verifiable();
 
         var filters = new IFilterMetadata[] { filter1.Object, filter2.Object };
@@ -453,11 +500,31 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter1.Verify(f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>()), Times.Once());
-        filter1.Verify(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()), Times.Once());
+        filter1.Verify(
+            f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>()),
+            Times.Once()
+        );
+        filter1.Verify(
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
-        filter2.Verify(f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>()), Times.Once());
-        filter2.Verify(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()), Times.Once());
+        filter2.Verify(
+            f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>()),
+            Times.Once()
+        );
+        filter2.Verify(
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     #endregion
@@ -482,7 +549,10 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
                 Assert.IsType<TestPage>(pageResult.Model);
                 Assert.Null(pageResult.Page);
             });
-        var invoker = CreateInvoker(new IFilterMetadata[] { pageFilter.Object }, result: new PageResult());
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { pageFilter.Object },
+            result: new PageResult()
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -499,7 +569,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var filter = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(filter);
-        filter.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        filter
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         filter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c => result = c.Result)
@@ -511,8 +583,14 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        filter.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        filter.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        filter.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.Same(Result, result);
     }
@@ -526,12 +604,19 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(filter);
         filter
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (context, next) =>
-            {
-                var resultContext = await next();
-                result = resultContext.Result;
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (context, next) =>
+                {
+                    var resultContext = await next();
+                    result = resultContext.Result;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object, result: Result);
@@ -541,8 +626,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter.Verify(
-            f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
         Assert.Same(Result, result);
     }
@@ -557,12 +647,14 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter = new Mock<IAsyncAuthorizationFilter>(MockBehavior.Strict);
         filter
             .Setup(f => f.OnAuthorizationAsync(It.IsAny<AuthorizationFilterContext>()))
-            .Returns<AuthorizationFilterContext>((context) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-                return Task.CompletedTask;
-            })
+            .Returns<AuthorizationFilterContext>(
+                (context) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                    return Task.CompletedTask;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -573,7 +665,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         // Assert
         filter.Verify(
             f => f.OnAuthorizationAsync(It.IsAny<AuthorizationFilterContext>()),
-            Times.Once());
+            Times.Once()
+        );
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -592,11 +685,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
         filter
             .Setup(f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>()))
-            .Callback<AuthorizationFilterContext>((context) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-            })
+            .Callback<AuthorizationFilterContext>(
+                (context) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -605,9 +700,7 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter.Verify(
-            f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>()),
-            Times.Once());
+        filter.Verify(f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>()), Times.Once());
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -625,13 +718,20 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         IActionResult result = null;
         var filter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         filter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>((context, next) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-                return Task.CompletedTask;
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                (context, next) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                    return Task.CompletedTask;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -641,8 +741,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -661,11 +766,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter = new Mock<IResourceFilter>(MockBehavior.Strict);
         filter
             .Setup(f => f.OnResourceExecuting(It.IsAny<ResourceExecutingContext>()))
-            .Callback<ResourceExecutingContext>((context) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-            })
+            .Callback<ResourceExecutingContext>(
+                (context) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -676,7 +783,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         // Assert
         filter.Verify(
             f => f.OnResourceExecuting(It.IsAny<ResourceExecutingContext>()),
-            Times.Once());
+            Times.Once()
+        );
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -694,13 +802,20 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         IActionResult result = null;
         var filter = new Mock<IAsyncResultFilter>(MockBehavior.Strict);
         filter
-            .Setup(f => f.OnResultExecutionAsync(It.IsAny<ResultExecutingContext>(), It.IsAny<ResultExecutionDelegate>()))
-            .Returns<ResultExecutingContext, ResultExecutionDelegate>((context, next) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-                return next();
-            })
+            .Setup(f =>
+                f.OnResultExecutionAsync(
+                    It.IsAny<ResultExecutingContext>(),
+                    It.IsAny<ResultExecutionDelegate>()
+                )
+            )
+            .Returns<ResultExecutingContext, ResultExecutionDelegate>(
+                (context, next) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                    return next();
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -710,8 +825,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter.Verify(
-            f => f.OnResultExecutionAsync(It.IsAny<ResultExecutingContext>(), It.IsAny<ResultExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResultExecutionAsync(
+                    It.IsAny<ResultExecutingContext>(),
+                    It.IsAny<ResultExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -730,11 +850,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter = new Mock<IResultFilter>();
         filter
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>((context) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-            })
+            .Callback<ResultExecutingContext>(
+                (context) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -743,9 +865,7 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter.Verify(
-            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
-            Times.Once());
+        filter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -764,13 +884,20 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(filter);
         filter
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>((context, next) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-                return Task.CompletedTask;
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                (context, next) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                    return Task.CompletedTask;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -780,8 +907,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter.Verify(
-            f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -801,11 +933,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(filter);
         filter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>((context) =>
-            {
-                context.Result = expectedResult;
-                result = context.Result;
-            })
+            .Callback<PageHandlerExecutingContext>(
+                (context) =>
+                {
+                    context.Result = expectedResult;
+                    result = context.Result;
+                }
+            )
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -816,7 +950,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         // Assert
         filter.Verify(
             f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
-            Times.Once());
+            Times.Once()
+        );
 
         var pageResult = Assert.IsType<PageResult>(result);
         Assert.Same(expectedResult, pageResult);
@@ -839,7 +974,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var pageFilter1 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter1);
-        pageFilter1.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        pageFilter1
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         pageFilter1
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c => context = c)
@@ -856,30 +993,52 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(pageFilter3);
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
+        resultFilter
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
         resultFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
 
-        var invoker = CreateInvoker(new IFilterMetadata[]
-        {
+        var invoker = CreateInvoker(
+            new IFilterMetadata[]
+            {
                 pageFilter1.Object,
                 pageFilter2.Object,
                 pageFilter3.Object,
                 resultFilter.Object,
-        });
+            }
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
         result.Verify(r => r.ExecuteResultAsync(It.IsAny<ActionContext>()), Times.Once());
-        pageFilter1.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        pageFilter1.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        pageFilter1.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        pageFilter1.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
-        pageFilter2.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        pageFilter2.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Never());
+        pageFilter2.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        pageFilter2.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Never()
+        );
 
-        resultFilter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.True(context.Canceled);
         Assert.Same(context.Result, result.Object);
@@ -899,7 +1058,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var pageFilter1 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter1);
-        pageFilter1.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        pageFilter1
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         pageFilter1
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c => context = c)
@@ -908,50 +1069,90 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var pageFilter2 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter2);
         pageFilter2
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>((c, next) =>
-            {
-                // Notice we're not calling next
-                c.Result = result.Object;
-                return Task.FromResult(true);
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                (c, next) =>
+                {
+                    // Notice we're not calling next
+                    c.Result = result.Object;
+                    return Task.FromResult(true);
+                }
+            )
             .Verifiable();
 
         var pageFilter3 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter3);
 
         var resultFilter1 = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter1.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
-        resultFilter1.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
+        resultFilter1
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
+        resultFilter1
+            .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
+            .Verifiable();
         var resultFilter2 = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter2.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
-        resultFilter2.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
+        resultFilter2
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
+        resultFilter2
+            .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
+            .Verifiable();
 
-        var invoker = CreateInvoker(new IFilterMetadata[]
-        {
+        var invoker = CreateInvoker(
+            new IFilterMetadata[]
+            {
                 pageFilter1.Object,
                 pageFilter2.Object,
                 pageFilter3.Object,
                 resultFilter1.Object,
                 resultFilter2.Object,
-        });
+            }
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
         result.Verify(r => r.ExecuteResultAsync(It.IsAny<ActionContext>()), Times.Once());
-        pageFilter1.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        pageFilter1.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        pageFilter1.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        pageFilter1.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
         pageFilter2.Verify(
-            f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
-        resultFilter1.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter1.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
-        resultFilter2.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter2.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter1.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter1.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
+        resultFilter2.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter2.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.True(context.Canceled);
         Assert.Same(context.Result, result.Object);
@@ -965,7 +1166,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var pageFilter1 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter1);
-        pageFilter1.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        pageFilter1
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         pageFilter1
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c => context = c)
@@ -974,42 +1177,70 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var pageFilter2 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter2);
         pageFilter2
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>((c, next) =>
-            {
-                // Notice we're not calling next
-                return Task.FromResult(true);
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                (c, next) =>
+                {
+                    // Notice we're not calling next
+                    return Task.FromResult(true);
+                }
+            )
             .Verifiable();
 
         var pageFilter3 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter3);
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
+        resultFilter
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
         resultFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
 
-        var invoker = CreateInvoker(new IFilterMetadata[]
-        {
+        var invoker = CreateInvoker(
+            new IFilterMetadata[]
+            {
                 pageFilter1.Object,
                 pageFilter2.Object,
                 pageFilter3.Object,
                 resultFilter.Object,
-        });
+            }
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
-        pageFilter1.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        pageFilter1.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        pageFilter1.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        pageFilter1.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
         pageFilter2.Verify(
-            f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
-        resultFilter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.True(context.Canceled);
         Assert.Null(context.Result);
@@ -1022,25 +1253,33 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var pageFilter = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter);
         pageFilter
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (c, next) =>
-            {
-                c.Result = new EmptyResult();
-                await next();
-            })
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (c, next) =>
+                {
+                    c.Result = new EmptyResult();
+                    await next();
+                }
+            )
             .Verifiable();
 
         var message =
-            "If an IAsyncPageFilter provides a result value by setting the Result property of " +
-            "PageHandlerExecutingContext to a non-null value, then it cannot call the next filter by invoking " +
-            "PageHandlerExecutionDelegate.";
+            "If an IAsyncPageFilter provides a result value by setting the Result property of "
+            + "PageHandlerExecutingContext to a non-null value, then it cannot call the next filter by invoking "
+            + "PageHandlerExecutionDelegate.";
 
         var invoker = CreateInvoker(pageFilter.Object);
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             () => invoker.InvokeAsync(),
-            message);
+            message
+        );
     }
 
     [Fact]
@@ -1051,7 +1290,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var filter = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(filter);
-        filter.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        filter
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         filter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c =>
@@ -1071,8 +1312,14 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        filter.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        filter.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        filter.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
         Assert.Same(Exception, context.Exception);
         Assert.Null(context.Result);
@@ -1087,7 +1334,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var filter1 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(filter1);
-        filter1.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        filter1
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         filter1
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c =>
@@ -1104,7 +1353,10 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         AllowSelector(filter2);
         filter2
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>(c => { throw exception; })
+            .Callback<PageHandlerExecutingContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object });
@@ -1113,11 +1365,23 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         await invoker.InvokeAsync();
 
         // Assert
-        filter1.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        filter1.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        filter1.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        filter1.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
-        filter2.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        filter2.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Never());
+        filter2.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        filter2.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Never()
+        );
 
         Assert.Same(exception, context.Exception);
         Assert.Null(context.Result);
@@ -1133,23 +1397,35 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         var filter1 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(filter1);
         filter1
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
 
-                // Handle the exception so the test doesn't throw.
-                Assert.False(context.ExceptionHandled);
-                context.ExceptionHandled = true;
-            })
+                    // Handle the exception so the test doesn't throw.
+                    Assert.False(context.ExceptionHandled);
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var filter2 = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(filter2);
-        filter2.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        filter2
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         filter2
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
-            .Callback<PageHandlerExecutedContext>(c => { throw exception; })
+            .Callback<PageHandlerExecutedContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new IFilterMetadata[] { filter1.Object, filter2.Object });
@@ -1159,10 +1435,18 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         filter1.Verify(
-            f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                ),
+            Times.Once()
+        );
 
-        filter2.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
+        filter2.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
 
         Assert.Same(exception, context.Exception);
         Assert.Null(context.Result);
@@ -1180,7 +1464,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         var pageFilter = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter);
-        pageFilter.Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>())).Verifiable();
+        pageFilter
+            .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
+            .Verifiable();
         pageFilter
             .Setup(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()))
             .Callback<PageHandlerExecutedContext>(c =>
@@ -1194,22 +1480,37 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
-        resultFilter.Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>())).Verifiable();
+        resultFilter
+            .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
+            .Verifiable();
         resultFilter.Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>())).Verifiable();
 
         var invoker = CreateInvoker(
             new IFilterMetadata[] { pageFilter.Object, resultFilter.Object },
-            exception: Exception);
+            exception: Exception
+        );
 
         // Act
         await invoker.InvokeAsync();
 
         // Assert
-        pageFilter.Verify(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()), Times.Once());
-        pageFilter.Verify(f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()), Times.Once());
+        pageFilter.Verify(
+            f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()),
+            Times.Once()
+        );
+        pageFilter.Verify(
+            f => f.OnPageHandlerExecuted(It.IsAny<PageHandlerExecutedContext>()),
+            Times.Once()
+        );
 
-        resultFilter.Verify(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()), Times.Once());
-        resultFilter.Verify(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()), Times.Once());
+        resultFilter.Verify(
+            f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()),
+            Times.Once()
+        );
+        resultFilter.Verify(
+            f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()),
+            Times.Once()
+        );
 
         result.Verify(r => r.ExecuteResultAsync(It.IsAny<ActionContext>()), Times.Once());
     }
@@ -1223,23 +1524,34 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         ResourceExecutedContext context = null;
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
+                }
+            )
             .Verifiable();
 
         var pageFilter = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>((c) =>
-            {
-                c.Result = expected;
-            });
+            .Callback<PageHandlerExecutingContext>(
+                (c) =>
+                {
+                    c.Result = expected;
+                }
+            );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, pageFilter.Object });
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { resourceFilter.Object, pageFilter.Object }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1248,8 +1560,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(expected, context.Result);
 
         resourceFilter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -1261,24 +1578,35 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         ResourceExecutedContext context = null;
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
-                context.ExceptionHandled = true;
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var pageFilter = new Mock<IPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter);
         pageFilter
             .Setup(f => f.OnPageHandlerExecuting(It.IsAny<PageHandlerExecutingContext>()))
-            .Callback<PageHandlerExecutingContext>((c) =>
-            {
-                throw expected;
-            });
+            .Callback<PageHandlerExecutingContext>(
+                (c) =>
+                {
+                    throw expected;
+                }
+            );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, pageFilter.Object });
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { resourceFilter.Object, pageFilter.Object }
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1288,8 +1616,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(expected, context.ExceptionDispatchInfo.SourceException);
 
         resourceFilter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -1301,23 +1634,35 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         ResourceExecutedContext context = null;
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                context = await next();
-                context.ExceptionHandled = true;
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    context = await next();
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var exceptionFilter = new Mock<IExceptionFilter>(MockBehavior.Strict);
         exceptionFilter
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>((c) =>
-            {
-                throw expected;
-            });
+            .Callback<ExceptionContext>(
+                (c) =>
+                {
+                    throw expected;
+                }
+            );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, exceptionFilter.Object }, exception: Exception);
+        var invoker = CreateInvoker(
+            new IFilterMetadata[] { resourceFilter.Object, exceptionFilter.Object },
+            exception: Exception
+        );
 
         // Act
         await invoker.InvokeAsync();
@@ -1327,8 +1672,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         Assert.Same(expected, context.ExceptionDispatchInfo.SourceException);
 
         resourceFilter.Verify(
-            f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()),
-            Times.Once());
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
@@ -1337,47 +1687,71 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         // Arrange
         var resourceFilter = new Mock<IAsyncResourceFilter>(MockBehavior.Strict);
         resourceFilter
-            .Setup(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()))
-            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(async (c, next) =>
-            {
-                var context = await next();
-                Assert.Same(Exception, context.Exception);
-                context.ExceptionHandled = true;
-            })
+            .Setup(f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                )
+            )
+            .Returns<ResourceExecutingContext, ResourceExecutionDelegate>(
+                async (c, next) =>
+                {
+                    var context = await next();
+                    Assert.Same(Exception, context.Exception);
+                    context.ExceptionHandled = true;
+                }
+            )
             .Verifiable();
 
         var pageFilter1 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter1);
         pageFilter1
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (c, next) =>
-            {
-                await next();
-            });
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (c, next) =>
+                {
+                    await next();
+                }
+            );
 
         var pageFilter2 = new Mock<IAsyncPageFilter>(MockBehavior.Strict);
         AllowSelector(pageFilter2);
         pageFilter2
-            .Setup(f => f.OnPageHandlerExecutionAsync(It.IsAny<PageHandlerExecutingContext>(), It.IsAny<PageHandlerExecutionDelegate>()))
-            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(async (c, next) =>
-            {
-                await next();
-            });
+            .Setup(f =>
+                f.OnPageHandlerExecutionAsync(
+                    It.IsAny<PageHandlerExecutingContext>(),
+                    It.IsAny<PageHandlerExecutionDelegate>()
+                )
+            )
+            .Returns<PageHandlerExecutingContext, PageHandlerExecutionDelegate>(
+                async (c, next) =>
+                {
+                    await next();
+                }
+            );
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[]
-            {
-                    resourceFilter.Object,
-                    pageFilter1.Object,
-                    pageFilter2.Object,
-            },
+            new IFilterMetadata[] { resourceFilter.Object, pageFilter1.Object, pageFilter2.Object },
             // The action won't run
-            exception: Exception);
+            exception: Exception
+        );
 
         // Act & Assert
         await invoker.InvokeAsync();
 
-        resourceFilter.Verify(f => f.OnResourceExecutionAsync(It.IsAny<ResourceExecutingContext>(), It.IsAny<ResourceExecutionDelegate>()), Times.Once());
+        resourceFilter.Verify(
+            f =>
+                f.OnResourceExecutionAsync(
+                    It.IsAny<ResourceExecutingContext>(),
+                    It.IsAny<ResourceExecutionDelegate>()
+                ),
+            Times.Once()
+        );
     }
 
     #endregion
@@ -1406,7 +1780,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         // Assert
         var messages = testSink.Writes.Select(write => write.State.ToString()).ToList();
-        var pageName = $"{typeof(PageActionInvokerTest).FullName}+{nameof(TestPage)} ({typeof(PageActionInvokerTest).Assembly.GetName().Name})";
+        var pageName =
+            $"{typeof(PageActionInvokerTest).FullName}+{nameof(TestPage)} ({typeof(PageActionInvokerTest).Assembly.GetName().Name})";
         var pagePath = actionDescriptor.ViewEnginePath;
         var methodFullName = hasPageModel
             ? $"{typeof(PageActionInvokerTest).FullName}+{nameof(TestPageModel)}.{nameof(TestPageModel.OnGetHandler1)}"
@@ -1417,19 +1792,41 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
         Assert.Collection(
             messages,
-            m => Assert.Equal($"Route matched with {{page = \"foo\"}}. Executing page {pagePath}", m),
-            m => Assert.Equal("Execution plan of authorization filters (in the following order): None", m),
-            m => Assert.Equal("Execution plan of resource filters (in the following order): None", m),
+            m =>
+                Assert.Equal(
+                    $"Route matched with {{page = \"foo\"}}. Executing page {pagePath}",
+                    m
+                ),
+            m =>
+                Assert.Equal(
+                    "Execution plan of authorization filters (in the following order): None",
+                    m
+                ),
+            m =>
+                Assert.Equal(
+                    "Execution plan of resource filters (in the following order): None",
+                    m
+                ),
             m => Assert.Equal("Execution plan of action filters (in the following order): None", m),
-            m => Assert.Equal("Execution plan of exception filters (in the following order): None", m),
+            m =>
+                Assert.Equal(
+                    "Execution plan of exception filters (in the following order): None",
+                    m
+                ),
             m => Assert.Equal("Execution plan of result filters (in the following order): None", m),
             m => Assert.Equal($"Executing {factoryType} factory for page {pageName}", m),
             m => Assert.Equal($"Executed {factoryType} factory for page {pageName}", m),
-            m => Assert.Equal($"Executing handler method {methodFullName} - ModelState is Valid", m),
-            m => Assert.Equal($"Executed handler method {methodName}, returned result {resultName}.", m),
+            m =>
+                Assert.Equal($"Executing handler method {methodFullName} - ModelState is Valid", m),
+            m =>
+                Assert.Equal(
+                    $"Executed handler method {methodName}, returned result {resultName}.",
+                    m
+                ),
             m => Assert.Equal($"Before executing action result {resultName}.", m),
             m => Assert.Equal($"After executing action result {resultName}.", m),
-            m => Assert.StartsWith($"Executed page {pagePath} in ", m));
+            m => Assert.StartsWith($"Executed page {pagePath} in ", m)
+        );
     }
 
     #endregion
@@ -1438,7 +1835,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         IFilterMetadata[] filters,
         Exception exception = null,
         IActionResult result = null,
-        IList<IValueProviderFactory> valueProviderFactories = null)
+        IList<IValueProviderFactory> valueProviderFactories = null
+    )
     {
         var actionDescriptor = new CompiledPageActionDescriptor
         {
@@ -1455,27 +1853,32 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         if (result != null)
         {
             handlers.Add((obj, args) => Task.FromResult(result));
-            actionDescriptor.HandlerMethods.Add(new HandlerMethodDescriptor()
-            {
-                HttpMethod = "GET",
-                Parameters = new List<HandlerParameterDescriptor>(),
-            });
+            actionDescriptor.HandlerMethods.Add(
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                }
+            );
         }
         else if (exception != null)
         {
             handlers.Add((obj, args) => Task.FromException<IActionResult>(exception));
-            actionDescriptor.HandlerMethods.Add(new HandlerMethodDescriptor()
-            {
-                HttpMethod = "GET",
-                Parameters = new List<HandlerParameterDescriptor>(),
-            });
+            actionDescriptor.HandlerMethods.Add(
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                }
+            );
         }
 
         return CreateInvoker(
             filters,
             actionDescriptor,
             handlers: handlers.ToArray(),
-            valueProviderFactories: valueProviderFactories);
+            valueProviderFactories: valueProviderFactories
+        );
     }
 
     private PageActionInvoker CreateInvoker(
@@ -1488,7 +1891,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         PageHandlerBinderDelegate[] handlerBinders = null,
         RouteData routeData = null,
         ILogger logger = null,
-        TestDiagnosticListener listener = null)
+        TestDiagnosticListener listener = null
+    )
     {
         var diagnosticListener = new DiagnosticListener("Microsoft.AspNetCore");
         if (listener != null)
@@ -1506,16 +1910,24 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             ActionDescriptor = actionDescriptor,
             HttpContext = httpContext,
             RouteData = routeData ?? new RouteData(),
-            ValueProviderFactories = valueProviderFactories?.ToList() ?? new List<IValueProviderFactory>(),
+            ValueProviderFactories =
+                valueProviderFactories?.ToList() ?? new List<IValueProviderFactory>(),
             ViewStartFactories = new List<Func<IRazorPage>>(),
         };
 
-        var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(actionDescriptor.ModelTypeInfo);
-        pageContext.ViewData = viewDataFactory(new EmptyModelMetadataProvider(), pageContext.ModelState);
+        var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(
+            actionDescriptor.ModelTypeInfo
+        );
+        pageContext.ViewData = viewDataFactory(
+            new EmptyModelMetadataProvider(),
+            pageContext.ModelState
+        );
 
         if (tempDataFactory == null)
         {
-            tempDataFactory = Mock.Of<ITempDataDictionaryFactory>(m => m.GetTempData(It.IsAny<HttpContext>()) == Mock.Of<ITempDataDictionary>());
+            tempDataFactory = Mock.Of<ITempDataDictionaryFactory>(m =>
+                m.GetTempData(It.IsAny<HttpContext>()) == Mock.Of<ITempDataDictionary>()
+            );
         }
 
         object pageFactory(PageContext context, ViewContext viewContext)
@@ -1546,14 +1958,23 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             actionDescriptor,
             viewDataFactory,
             pageFactory,
-            (c, viewContext, page) => { (page as IDisposable)?.Dispose(); return default; },
+            (c, viewContext, page) =>
+            {
+                (page as IDisposable)?.Dispose();
+                return default;
+            },
             modelFactory,
-            (c, model) => { (model as IDisposable)?.Dispose(); return default; },
+            (c, model) =>
+            {
+                (model as IDisposable)?.Dispose();
+                return default;
+            },
             null,
             handlers,
             handlerBinders,
             null,
-            new FilterItem[0]);
+            new FilterItem[0]
+        );
 
         // Always just select the first one.
         var selector = new Mock<IPageHandlerMethodSelector>();
@@ -1571,7 +1992,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
             filters ?? Array.Empty<IFilterMetadata>(),
             cacheEntry,
             tempDataFactory,
-            new HtmlHelperOptions());
+            new HtmlHelperOptions()
+        );
         return invoker;
     }
 
@@ -1587,18 +2009,22 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
             HandlerMethods = new HandlerMethodDescriptor[]
             {
-                    new HandlerMethodDescriptor()
-                    {
-                        HttpMethod = "GET",
-                        MethodInfo = typeof(TestPage).GetTypeInfo().GetMethod(nameof(TestPage.OnGetHandler1)),
-                        Parameters = new List<HandlerParameterDescriptor>(),
-                    },
-                    new HandlerMethodDescriptor()
-                    {
-                        HttpMethod = "GET",
-                        MethodInfo = typeof(TestPage).GetTypeInfo().GetMethod(nameof(TestPage.OnGetHandler2)),
-                        Parameters = new List<HandlerParameterDescriptor>(),
-                    },
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    MethodInfo = typeof(TestPage)
+                        .GetTypeInfo()
+                        .GetMethod(nameof(TestPage.OnGetHandler1)),
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                },
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    MethodInfo = typeof(TestPage)
+                        .GetTypeInfo()
+                        .GetMethod(nameof(TestPage.OnGetHandler2)),
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                },
             },
         };
     }
@@ -1615,18 +2041,22 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
             HandlerMethods = new HandlerMethodDescriptor[]
             {
-                    new HandlerMethodDescriptor()
-                    {
-                        HttpMethod = "GET",
-                        MethodInfo = typeof(TestPage).GetTypeInfo().GetMethod(nameof(TestPage.OnGetHandler1)),
-                        Parameters = new List<HandlerParameterDescriptor>(),
-                    },
-                    new HandlerMethodDescriptor()
-                    {
-                        HttpMethod = "GET",
-                        MethodInfo = typeof(TestPage).GetTypeInfo().GetMethod(nameof(TestPage.OnGetHandler2)),
-                        Parameters = new List<HandlerParameterDescriptor>(),
-                    },
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    MethodInfo = typeof(TestPage)
+                        .GetTypeInfo()
+                        .GetMethod(nameof(TestPage.OnGetHandler1)),
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                },
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    MethodInfo = typeof(TestPage)
+                        .GetTypeInfo()
+                        .GetMethod(nameof(TestPage.OnGetHandler2)),
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                },
             },
         };
     }
@@ -1643,18 +2073,22 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
             HandlerMethods = new HandlerMethodDescriptor[]
             {
-                    new HandlerMethodDescriptor()
-                    {
-                        HttpMethod = "GET",
-                        MethodInfo = typeof(TestPageModel).GetTypeInfo().GetMethod(nameof(TestPageModel.OnGetHandler1)),
-                        Parameters = new List<HandlerParameterDescriptor>(),
-                    },
-                    new HandlerMethodDescriptor()
-                    {
-                        HttpMethod = "GET",
-                        MethodInfo = typeof(TestPageModel).GetTypeInfo().GetMethod(nameof(TestPageModel.OnGetHandler2)),
-                        Parameters = new List<HandlerParameterDescriptor>(),
-                    },
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    MethodInfo = typeof(TestPageModel)
+                        .GetTypeInfo()
+                        .GetMethod(nameof(TestPageModel.OnGetHandler1)),
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                },
+                new HandlerMethodDescriptor()
+                {
+                    HttpMethod = "GET",
+                    MethodInfo = typeof(TestPageModel)
+                        .GetTypeInfo()
+                        .GetMethod(nameof(TestPageModel.OnGetHandler2)),
+                    Parameters = new List<HandlerParameterDescriptor>(),
+                },
             },
         };
     }
@@ -1666,7 +2100,9 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
     private void AllowSelector(Mock<IAsyncPageFilter> filter)
     {
-        filter.Setup(f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>())).Returns(Task.CompletedTask);
+        filter
+            .Setup(f => f.OnPageHandlerSelectionAsync(It.IsAny<PageHandlerSelectedContext>()))
+            .Returns(Task.CompletedTask);
     }
 
     private class TestPageResultExecutor : PageResultExecutor
@@ -1674,9 +2110,7 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         private readonly Func<PageContext, Task> _executeAction;
 
         public TestPageResultExecutor()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public TestPageResultExecutor(Func<PageContext, Task> executeAction)
             : base(
@@ -1685,7 +2119,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
                 Mock.Of<IRazorViewEngine>(),
                 Mock.Of<IRazorPageActivator>(),
                 new DiagnosticListener("Microsoft.AspNetCore"),
-                HtmlEncoder.Default)
+                HtmlEncoder.Default
+            )
         {
             _executeAction = executeAction;
         }
@@ -1696,19 +2131,13 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
         }
     }
 
-    private class PocoModel
-    {
-    }
+    private class PocoModel { }
 
     private class TestPage : Page
     {
-        public void OnGetHandler1()
-        {
-        }
+        public void OnGetHandler1() { }
 
-        public void OnGetHandler2()
-        {
-        }
+        public void OnGetHandler2() { }
 
         public override Task ExecuteAsync()
         {
@@ -1718,12 +2147,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
 
     private class TestPageModel : PageModel
     {
-        public void OnGetHandler1()
-        {
-        }
+        public void OnGetHandler1() { }
 
-        public void OnGetHandler2()
-        {
-        }
+        public void OnGetHandler2() { }
     }
 }

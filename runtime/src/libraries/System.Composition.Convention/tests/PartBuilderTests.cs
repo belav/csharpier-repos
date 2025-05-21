@@ -45,10 +45,15 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
-            public int OnImportsSatisfiedInvalidReturnValue() { return 1; }
+            public int OnImportsSatisfiedInvalidReturnValue()
+            {
+                return 1;
+            }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
             [OnImportsSatisfied]
@@ -65,10 +70,15 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
-            public int OnImportsSatisfiedInvalidReturnValue() { return 1; }
+            public int OnImportsSatisfiedInvalidReturnValue()
+            {
+                return 1;
+            }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
             public void OnImportsSatisfied1()
@@ -89,10 +99,15 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
-            public int OnImportsSatisfiedInvalidReturnValue() { return 1; }
+            public int OnImportsSatisfiedInvalidReturnValue()
+            {
+                return 1;
+            }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
             [OnImportsSatisfied]
@@ -103,10 +118,7 @@ namespace System.Composition.Convention.Tests
         }
 
         [Export]
-        public class OnImportsSatisfiedDerivedClass : OnImportsSatisfiedTestClass
-        {
-        }
-
+        public class OnImportsSatisfiedDerivedClass : OnImportsSatisfiedTestClass { }
 
         [Export]
         public class OnImportsSatisfiedTestClassPropertiesAndFields
@@ -115,13 +127,18 @@ namespace System.Composition.Convention.Tests
 
             [Import("P1", AllowDefault = true)]
             public string P1 { get; set; }
+
             [Import("P2", AllowDefault = true)]
             public string P2 { get; set; }
 
-            public int OnImportsSatisfiedInvalidReturnValue() { return 1; }
+            public int OnImportsSatisfiedInvalidReturnValue()
+            {
+                return 1;
+            }
+
             public void OnImportsSatisfiedInvalidArgs(int arg1) { }
 
-            public int OnImportsSatisfied3;              // Field
+            public int OnImportsSatisfied3; // Field
             public int OnImportsSatisfied4 { get; set; } // Property
         }
 
@@ -135,6 +152,7 @@ namespace System.Composition.Convention.Tests
 
             [Export("P1")]
             public string P1 { get; set; }
+
             [Export("P2")]
             public string P2 { get; set; }
         }
@@ -142,13 +160,18 @@ namespace System.Composition.Convention.Tests
         private class FooImplWithConstructors
         {
             public FooImplWithConstructors() { }
+
             public FooImplWithConstructors(int id) { }
+
             public FooImplWithConstructors(IEnumerable<IFoo> ids) { }
+
             public FooImplWithConstructors(int id, string name) { }
         }
+
         private class FooImplWithConstructorsAmbiguous
         {
             public FooImplWithConstructorsAmbiguous(string name, int id) { }
+
             public FooImplWithConstructorsAmbiguous(int id, string name) { }
         }
 
@@ -206,7 +229,6 @@ namespace System.Composition.Convention.Tests
             Assert.Equal(typeof(IFoo), exportAttribute.ContractType);
             Assert.Null(exportAttribute.ContractName);
 
-
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P1");
             Assert.Equal(0, attributes.Count());
 
@@ -226,11 +248,14 @@ namespace System.Composition.Convention.Tests
             Attribute[] attributes = GetAttributesFromMember(builder, typeof(FooImpl), null);
             Assert.Equal(2, attributes.Count());
 
-            var exportAttribute = attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
+            var exportAttribute =
+                attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
             Assert.Equal(typeof(IFoo), exportAttribute.ContractType);
             Assert.Null(exportAttribute.ContractName);
 
-            var mdAttribute = attributes.First((t) => t.GetType() == typeof(PartMetadataAttribute)) as PartMetadataAttribute;
+            var mdAttribute =
+                attributes.First((t) => t.GetType() == typeof(PartMetadataAttribute))
+                as PartMetadataAttribute;
             Assert.Equal("name", mdAttribute.Name);
             Assert.Equal("value", mdAttribute.Value);
 
@@ -253,11 +278,14 @@ namespace System.Composition.Convention.Tests
             Attribute[] attributes = GetAttributesFromMember(builder, typeof(FooImpl), null);
             Assert.Equal(2, attributes.Count());
 
-            var exportAttribute = attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
+            var exportAttribute =
+                attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
             Assert.Equal(typeof(IFoo), exportAttribute.ContractType);
             Assert.Null(exportAttribute.ContractName);
 
-            var mdAttribute = attributes.First((t) => t.GetType() == typeof(PartMetadataAttribute)) as PartMetadataAttribute;
+            var mdAttribute =
+                attributes.First((t) => t.GetType() == typeof(PartMetadataAttribute))
+                as PartMetadataAttribute;
             Assert.Equal("name", mdAttribute.Name);
             Assert.Equal(typeof(FooImpl).Name, mdAttribute.Value);
 
@@ -283,7 +311,8 @@ namespace System.Composition.Convention.Tests
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P1");
             Assert.Equal(1, attributes.Count());
 
-            var exportAttribute = attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
+            var exportAttribute =
+                attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
             Assert.Null(exportAttribute.ContractName);
             Assert.Null(exportAttribute.ContractType);
 
@@ -306,7 +335,8 @@ namespace System.Composition.Convention.Tests
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P1");
             Assert.Equal(1, attributes.Count());
 
-            var importAttribute = attributes.First((t) => t.GetType() == typeof(ImportAttribute)) as ImportAttribute;
+            var importAttribute =
+                attributes.First((t) => t.GetType() == typeof(ImportAttribute)) as ImportAttribute;
             Assert.Null(importAttribute.ContractName);
 
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P2");
@@ -334,7 +364,9 @@ namespace System.Composition.Convention.Tests
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P3");
             Assert.Equal(1, attributes.Count());
 
-            var importAttribute = attributes.First((t) => t.GetType() == typeof(ImportManyAttribute)) as ImportManyAttribute;
+            var importAttribute =
+                attributes.First((t) => t.GetType() == typeof(ImportManyAttribute))
+                as ImportManyAttribute;
             Assert.Null(importAttribute.ContractName);
         }
 
@@ -342,7 +374,12 @@ namespace System.Composition.Convention.Tests
         public void ExportPropertyWithConfiguration_ShouldGenerateExportForPropertySelected()
         {
             var builder = new ConventionBuilder();
-            builder.ForType(typeof(FooImpl)).ExportProperties(p => p.Name == "P1", (pi, c) => c.AsContractName("hey").AsContractType<IFoo>());
+            builder
+                .ForType(typeof(FooImpl))
+                .ExportProperties(
+                    p => p.Name == "P1",
+                    (pi, c) => c.AsContractName("hey").AsContractType<IFoo>()
+                );
 
             Attribute[] attributes = GetAttributesFromMember(builder, typeof(FooImpl), null);
             Assert.Equal(0, attributes.Count());
@@ -350,7 +387,8 @@ namespace System.Composition.Convention.Tests
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P1");
             Assert.Equal(1, attributes.Count());
 
-            var exportAttribute = attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
+            var exportAttribute =
+                attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
             Assert.Same("hey", exportAttribute.ContractName);
             Assert.Same(typeof(IFoo), exportAttribute.ContractType);
 
@@ -365,7 +403,9 @@ namespace System.Composition.Convention.Tests
         public void ExportPropertyOfT_ShouldGenerateExportForPropertySelectedWithTAsContractType()
         {
             var builder = new ConventionBuilder();
-            builder.ForType(typeof(FooImpl)).ExportProperties(p => p.Name == "P1", (p, c) => c.AsContractType<IFoo>());
+            builder
+                .ForType(typeof(FooImpl))
+                .ExportProperties(p => p.Name == "P1", (p, c) => c.AsContractType<IFoo>());
 
             Attribute[] attributes = GetAttributesFromMember(builder, typeof(FooImpl), null);
             Assert.Equal(0, attributes.Count());
@@ -373,7 +413,8 @@ namespace System.Composition.Convention.Tests
             attributes = GetAttributesFromMember(builder, typeof(FooImpl), "P1");
             Assert.Equal(1, attributes.Count());
 
-            var exportAttribute = attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
+            var exportAttribute =
+                attributes.First((t) => t.GetType() == typeof(ExportAttribute)) as ExportAttribute;
             Assert.Null(exportAttribute.ContractName);
             Assert.Same(typeof(IFoo), exportAttribute.ContractType);
 
@@ -390,9 +431,12 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType(typeof(FooImplWithConstructors));
 
-            ConstructorInfo selectedConstructor = GetSelectedConstructor(builder, typeof(FooImplWithConstructors));
+            ConstructorInfo selectedConstructor = GetSelectedConstructor(
+                builder,
+                typeof(FooImplWithConstructors)
+            );
             Assert.NotNull(selectedConstructor);
-            Assert.Equal(2, selectedConstructor.GetParameters().Length);         // Should select public FooImplWithConstructors(int id, string name) { }
+            Assert.Equal(2, selectedConstructor.GetParameters().Length); // Should select public FooImplWithConstructors(int id, string name) { }
 
             Attribute[] attributes = GetAttributesFromMember(builder, typeof(FooImpl), null);
             Assert.Equal(0, attributes.Count());
@@ -402,16 +446,24 @@ namespace System.Composition.Convention.Tests
         public void ManuallySelectingConstructor_SelectsTheExplicitOne()
         {
             var builder = new ConventionBuilder();
-            builder.ForType(typeof(FooImplWithConstructors)).SelectConstructor(cis => cis.ElementAt(1));
+            builder
+                .ForType(typeof(FooImplWithConstructors))
+                .SelectConstructor(cis => cis.ElementAt(1));
 
-            ConstructorInfo selectedConstructor = GetSelectedConstructor(builder, typeof(FooImplWithConstructors));
+            ConstructorInfo selectedConstructor = GetSelectedConstructor(
+                builder,
+                typeof(FooImplWithConstructors)
+            );
             Assert.NotNull(selectedConstructor);
-            Assert.Equal(1, selectedConstructor.GetParameters().Length);     // Should select public FooImplWithConstructors(int) { }
+            Assert.Equal(1, selectedConstructor.GetParameters().Length); // Should select public FooImplWithConstructors(int) { }
 
             ParameterInfo pi = selectedConstructor.GetParameters()[0];
             Assert.Equal(typeof(int), pi.ParameterType);
 
-            Attribute[] attributes = builder.GetDeclaredAttributes(typeof(FooImplWithConstructors), pi);
+            Attribute[] attributes = builder.GetDeclaredAttributes(
+                typeof(FooImplWithConstructors),
+                pi
+            );
             Assert.Equal(1, attributes.Count());
             Assert.NotNull(attributes[0] as ImportAttribute);
 
@@ -423,16 +475,24 @@ namespace System.Composition.Convention.Tests
         public void ManuallySelectingConstructor_SelectsTheExplicitOne_IEnumerableParameterBecomesImportMany()
         {
             var builder = new ConventionBuilder();
-            builder.ForType(typeof(FooImplWithConstructors)).SelectConstructor(cis => cis.ElementAt(2));
+            builder
+                .ForType(typeof(FooImplWithConstructors))
+                .SelectConstructor(cis => cis.ElementAt(2));
 
-            ConstructorInfo selectedConstructor = GetSelectedConstructor(builder, typeof(FooImplWithConstructors));
+            ConstructorInfo selectedConstructor = GetSelectedConstructor(
+                builder,
+                typeof(FooImplWithConstructors)
+            );
             Assert.NotNull(selectedConstructor);
-            Assert.Equal(1, selectedConstructor.GetParameters().Length);     // Should select public FooImplWithConstructors(IEnumerable<IFoo>) { }
+            Assert.Equal(1, selectedConstructor.GetParameters().Length); // Should select public FooImplWithConstructors(IEnumerable<IFoo>) { }
 
             ParameterInfo pi = selectedConstructor.GetParameters()[0];
             Assert.Equal(typeof(IEnumerable<IFoo>), pi.ParameterType);
 
-            Attribute[] attributes = builder.GetDeclaredAttributes(typeof(FooImplWithConstructors), pi);
+            Attribute[] attributes = builder.GetDeclaredAttributes(
+                typeof(FooImplWithConstructors),
+                pi
+            );
             Assert.Equal(1, attributes.Count());
             Assert.NotNull(attributes[0] as ImportManyAttribute);
 
@@ -444,35 +504,69 @@ namespace System.Composition.Convention.Tests
         public void ExportInterfaceSelectorNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("interfaceFilter", () => builder.ForTypesMatching((t) => true).ExportInterfaces(null));
-            AssertExtensions.Throws<ArgumentNullException>("interfaceFilter", () => builder.ForTypesMatching((t) => true).ExportInterfaces(null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "interfaceFilter",
+                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "interfaceFilter",
+                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null, null)
+            );
         }
 
         [Fact]
         public void ImportSelectorNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties(null));
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties(null, null));
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null));
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties(null, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null, null)
+            );
         }
 
         [Fact]
         public void ExportSelectorNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties(null));
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties(null, null));
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null));
-            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties(null, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyFilter",
+                () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null, null)
+            );
         }
 
         [Fact]
         public void InsideTheLambdaCallGetCustomAttributesShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching((t) => !t.GetTypeInfo().IsDefined(typeof(MyDoNotIncludeAttribute), false)).Export();
+            builder
+                .ForTypesMatching(
+                    (t) => !t.GetTypeInfo().IsDefined(typeof(MyDoNotIncludeAttribute), false)
+                )
+                .Export();
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<MyNotToBeIncludedClass>(builder)
                 .WithPart<MyToBeIncludedClass>(builder)
@@ -485,105 +579,149 @@ namespace System.Composition.Convention.Tests
             Assert.NotNull(importer.MyToBeIncludedClass);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void NotifyImportsSatisfiedAttributeAlreadyApplied_ShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching(t => true).NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied");
+            builder
+                .ForTypesMatching(t => true)
+                .NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied");
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<OnImportsSatisfiedConfiguredClass>(builder)
                 .WithPart<ExportValues>(builder)
                 .CreateContainer();
-            OnImportsSatisfiedConfiguredClass test = container.GetExport<OnImportsSatisfiedConfiguredClass>();
+            OnImportsSatisfiedConfiguredClass test =
+                container.GetExport<OnImportsSatisfiedConfiguredClass>();
 
             Assert.NotNull(test.P1);
             Assert.NotNull(test.P2);
             Assert.Equal(1, test.OnImportsSatisfiedInvoked);
         }
 
-
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void NotifyImportsSatisfiedAttributeAppliedToBaseClass_ShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching(t => true).NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied");
+            builder
+                .ForTypesMatching(t => true)
+                .NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied");
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<OnImportsSatisfiedDerivedClass>(builder)
                 .WithPart<ExportValues>(builder)
                 .CreateContainer();
-            OnImportsSatisfiedDerivedClass test = container.GetExport<OnImportsSatisfiedDerivedClass>();
+            OnImportsSatisfiedDerivedClass test =
+                container.GetExport<OnImportsSatisfiedDerivedClass>();
 
             Assert.NotNull(test.P1);
             Assert.NotNull(test.P2);
             Assert.Equal(1, test.OnImportsSatisfiedInvoked);
         }
 
-
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void NotifyImportsSatisfiedMultipleNotifications_ShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching(t => true).NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied1");
+            builder
+                .ForTypesMatching(t => true)
+                .NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied1");
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<OnImportsSatisfiedMultipleClass>(builder)
                 .WithPart<ExportValues>(builder)
                 .CreateContainer();
-            OnImportsSatisfiedMultipleClass test = container.GetExport<OnImportsSatisfiedMultipleClass>();
+            OnImportsSatisfiedMultipleClass test =
+                container.GetExport<OnImportsSatisfiedMultipleClass>();
 
             Assert.NotNull(test.P1);
             Assert.NotNull(test.P2);
             Assert.Equal(2, test.OnImportsSatisfiedInvoked);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void NotifyImportsSatisfiedTwice_ShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching(t => true).NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied1" || mi.Name == "OnImportsSatisfied2");
+            builder
+                .ForTypesMatching(t => true)
+                .NotifyImportsSatisfied(mi =>
+                    mi.Name == "OnImportsSatisfied1" || mi.Name == "OnImportsSatisfied2"
+                );
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<OnImportsSatisfiedMultipleClass>(builder)
                 .WithPart<ExportValues>(builder)
                 .CreateContainer();
-            OnImportsSatisfiedMultipleClass test = container.GetExport<OnImportsSatisfiedMultipleClass>();
+            OnImportsSatisfiedMultipleClass test =
+                container.GetExport<OnImportsSatisfiedMultipleClass>();
 
             Assert.NotNull(test.P1);
             Assert.NotNull(test.P2);
             Assert.Equal(6, test.OnImportsSatisfiedInvoked);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void NotifyImportsSatisfiedInvalidMethod_ShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching(t => true).NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied3" || mi.Name == "OnImportsSatisfied4");
+            builder
+                .ForTypesMatching(t => true)
+                .NotifyImportsSatisfied(mi =>
+                    mi.Name == "OnImportsSatisfied3" || mi.Name == "OnImportsSatisfied4"
+                );
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<OnImportsSatisfiedTestClassPropertiesAndFields>(builder)
                 .WithPart<ExportValues>(builder)
                 .CreateContainer();
-            OnImportsSatisfiedTestClassPropertiesAndFields test = container.GetExport<OnImportsSatisfiedTestClassPropertiesAndFields>();
+            OnImportsSatisfiedTestClassPropertiesAndFields test =
+                container.GetExport<OnImportsSatisfiedTestClassPropertiesAndFields>();
 
             Assert.NotNull(test.P1);
             Assert.NotNull(test.P2);
             Assert.Equal(0, test.OnImportsSatisfiedInvoked);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void NotifyImportsSatisfiedPropertiesAndFields_ShouldSucceed()
         {
             var builder = new ConventionBuilder();
-            builder.ForTypesMatching(t => true).NotifyImportsSatisfied(mi => mi.Name == "OnImportsSatisfied5" || mi.Name == "OnImportsSatisfied6");
+            builder
+                .ForTypesMatching(t => true)
+                .NotifyImportsSatisfied(mi =>
+                    mi.Name == "OnImportsSatisfied5" || mi.Name == "OnImportsSatisfied6"
+                );
             CompositionHost container = new ContainerConfiguration()
                 .WithPart<OnImportsSatisfiedTestClassPropertiesAndFields>(builder)
                 .WithPart<ExportValues>(builder)
                 .CreateContainer();
-            OnImportsSatisfiedTestClassPropertiesAndFields test = container.GetExport<OnImportsSatisfiedTestClassPropertiesAndFields>();
+            OnImportsSatisfiedTestClassPropertiesAndFields test =
+                container.GetExport<OnImportsSatisfiedTestClassPropertiesAndFields>();
 
             Assert.NotNull(test.P1);
             Assert.NotNull(test.P2);
             Assert.Equal(0, test.OnImportsSatisfiedInvoked);
         }
 
-        private static Attribute[] GetAttributesFromMember(ConventionBuilder builder, Type type, string member)
+        private static Attribute[] GetAttributesFromMember(
+            ConventionBuilder builder,
+            Type type,
+            string member
+        )
         {
             if (string.IsNullOrEmpty(member))
             {
@@ -606,7 +744,7 @@ namespace System.Composition.Convention.Tests
                 Attribute[] li = builder.GetDeclaredAttributes(type, ci);
                 if (li.Length > 0)
                 {
-                    Assert.True(reply == null);                   // Fail if we got more than one constructor
+                    Assert.True(reply == null); // Fail if we got more than one constructor
                     reply = ci;
                 }
             }

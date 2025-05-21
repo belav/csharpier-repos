@@ -25,7 +25,9 @@ app.MapGet("/{Value}", TestAction);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues["value"] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues["value"] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -57,12 +59,18 @@ app.MapGet("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        var query = new QueryCollection(new Dictionary<string, StringValues>()
-        {
-            [paramName] = originalQueryParam.ToString(NumberFormatInfo.InvariantInfo),
-            [customParamName] = originalCustomQueryParam.ToString(NumberFormatInfo.InvariantInfo),
-            [anotherCustomParamName] = originalAnotherCustomQueryParam.ToString(NumberFormatInfo.InvariantInfo)
-        });
+        var query = new QueryCollection(
+            new Dictionary<string, StringValues>()
+            {
+                [paramName] = originalQueryParam.ToString(NumberFormatInfo.InvariantInfo),
+                [customParamName] = originalCustomQueryParam.ToString(
+                    NumberFormatInfo.InvariantInfo
+                ),
+                [anotherCustomParamName] = originalAnotherCustomQueryParam.ToString(
+                    NumberFormatInfo.InvariantInfo
+                ),
+            }
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = query;
@@ -93,7 +101,9 @@ app.MapGet("/", TestAction);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Headers[customHeaderName] = originalHeaderParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.Headers[customHeaderName] = originalHeaderParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -197,7 +207,9 @@ app.MapGet("/{value}", TestAction);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[paramName] = originalRouteParam.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -228,7 +240,8 @@ app.MapGet("/{value}", TestAction);
     [Fact]
     public async Task VerifyAsParametersBaseline()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 void parameterListWithDefaultValue([AsParameters] ParameterListWitDefaultValue args)
 {
     args.HttpContext.Items.Add("input", args.Value);
@@ -254,7 +267,8 @@ app.MapPut("/parametersListWithHttpContext", parametersListWithHttpContext);
 app.MapPatch("/parametersListWithImplicitFromBody", ([AsParameters] ParametersListWithImplicitFromBody args) => args.Todo.Name ?? string.Empty);
 app.MapGet("/parametersListWithMetadataType", parametersListWithMetadataType);
 app.MapPost("/parameterRecordStructWithJsonBodyOrService", ([AsParameters] ParameterRecordStructWithJsonBodyOrService args) => args.Todo.Name ?? string.Empty);
-""");
+"""
+        );
 
         await VerifyAgainstBaselineUsingFile(compilation);
     }
@@ -277,10 +291,15 @@ app.MapGet("/{value}", TestAction);
 
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.Value)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ConstantValue)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ReadOnlyValue)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.PrivateSetValue)] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.Value)] =
+            routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ConstantValue)] =
+            routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(ParameterListWithReadOnlyProperties.ReadOnlyValue)] =
+            routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[
+            nameof(ParameterListWithReadOnlyProperties.PrivateSetValue)
+        ] = routeParamValue.ToString(NumberFormatInfo.InvariantInfo);
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -310,8 +329,12 @@ app.MapGet("/{foo}/{bar}", TestAction);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.RouteValues[nameof(SampleParameterList.Foo)] = foo.ToString(NumberFormatInfo.InvariantInfo);
-        httpContext.Request.RouteValues[nameof(AdditionalSampleParameterList.Bar)] = bar.ToString(NumberFormatInfo.InvariantInfo);
+        httpContext.Request.RouteValues[nameof(SampleParameterList.Foo)] = foo.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
+        httpContext.Request.RouteValues[nameof(AdditionalSampleParameterList.Bar)] = bar.ToString(
+            NumberFormatInfo.InvariantInfo
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -392,14 +415,23 @@ static void TestAction([AsParameters] ParameterListRequiredStringFromDifferentSo
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""string RequiredRouteParam"" was not provided from route.", logs[0].Message);
+        Assert.Equal(
+            @"Required parameter ""string RequiredRouteParam"" was not provided from route.",
+            logs[0].Message
+        );
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""string RequiredQueryParam"" was not provided from query string.", logs[1].Message);
+        Assert.Equal(
+            @"Required parameter ""string RequiredQueryParam"" was not provided from query string.",
+            logs[1].Message
+        );
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[2].EventId);
         Assert.Equal(LogLevel.Debug, logs[2].LogLevel);
-        Assert.Equal(@"Required parameter ""string RequiredHeaderParam"" was not provided from header.", logs[2].Message);
+        Assert.Equal(
+            @"Required parameter ""string RequiredHeaderParam"" was not provided from header.",
+            logs[2].Message
+        );
     }
 }

@@ -22,10 +22,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Prop
                 Status = 1;
                 return "Foo";
             }
-
-            set
-            {
-            }
+            set { }
         }
     }
 
@@ -38,10 +35,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Prop
                 Status = 2;
                 return 3;
             }
-
-            set
-            {
-            }
+            set { }
         }
     }
 

@@ -27,7 +27,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             var markerService = new SignalRCoreMarkerService();
             serviceCollection.AddSingleton(markerService);
             serviceCollection.AddSingleton<IUserIdProvider, CustomIdProvider>();
-            serviceCollection.AddSingleton(typeof(HubLifetimeManager<>), typeof(CustomHubLifetimeManager<>));
+            serviceCollection.AddSingleton(
+                typeof(HubLifetimeManager<>),
+                typeof(CustomHubLifetimeManager<>)
+            );
             serviceCollection.AddSingleton<IHubProtocolResolver, CustomHubProtocolResolver>();
             serviceCollection.AddScoped(typeof(IHubActivator<>), typeof(CustomHubActivator<>));
             serviceCollection.AddSingleton(typeof(IHubContext<>), typeof(CustomHubContext<>));
@@ -38,14 +41,32 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.IsType<CustomIdProvider>(serviceProvider.GetRequiredService<IUserIdProvider>());
-            Assert.IsType<CustomHubLifetimeManager<CustomHub>>(serviceProvider.GetRequiredService<HubLifetimeManager<CustomHub>>());
-            Assert.IsType<CustomHubProtocolResolver>(serviceProvider.GetRequiredService<IHubProtocolResolver>());
-            Assert.IsType<CustomHubActivator<CustomHub>>(serviceProvider.GetRequiredService<IHubActivator<CustomHub>>());
-            Assert.IsType<CustomHubContext<CustomHub>>(serviceProvider.GetRequiredService<IHubContext<CustomHub>>());
-            Assert.IsType<CustomHubContext<CustomTHub, string>>(serviceProvider.GetRequiredService<IHubContext<CustomTHub, string>>());
-            Assert.IsType<CustomHubContext<CustomDynamicHub>>(serviceProvider.GetRequiredService<IHubContext<CustomDynamicHub>>());
-            Assert.Equal(hubOptions, serviceProvider.GetRequiredService<IConfigureOptions<HubOptions>>());
-            Assert.Equal(markerService, serviceProvider.GetRequiredService<SignalRCoreMarkerService>());
+            Assert.IsType<CustomHubLifetimeManager<CustomHub>>(
+                serviceProvider.GetRequiredService<HubLifetimeManager<CustomHub>>()
+            );
+            Assert.IsType<CustomHubProtocolResolver>(
+                serviceProvider.GetRequiredService<IHubProtocolResolver>()
+            );
+            Assert.IsType<CustomHubActivator<CustomHub>>(
+                serviceProvider.GetRequiredService<IHubActivator<CustomHub>>()
+            );
+            Assert.IsType<CustomHubContext<CustomHub>>(
+                serviceProvider.GetRequiredService<IHubContext<CustomHub>>()
+            );
+            Assert.IsType<CustomHubContext<CustomTHub, string>>(
+                serviceProvider.GetRequiredService<IHubContext<CustomTHub, string>>()
+            );
+            Assert.IsType<CustomHubContext<CustomDynamicHub>>(
+                serviceProvider.GetRequiredService<IHubContext<CustomDynamicHub>>()
+            );
+            Assert.Equal(
+                hubOptions,
+                serviceProvider.GetRequiredService<IConfigureOptions<HubOptions>>()
+            );
+            Assert.Equal(
+                markerService,
+                serviceProvider.GetRequiredService<SignalRCoreMarkerService>()
+            );
         }
 
         [Fact]
@@ -55,7 +76,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             serviceCollection.AddSignalR();
             serviceCollection.AddSingleton<IUserIdProvider, CustomIdProvider>();
-            serviceCollection.AddSingleton(typeof(HubLifetimeManager<>), typeof(CustomHubLifetimeManager<>));
+            serviceCollection.AddSingleton(
+                typeof(HubLifetimeManager<>),
+                typeof(CustomHubLifetimeManager<>)
+            );
             serviceCollection.AddSingleton<IHubProtocolResolver, CustomHubProtocolResolver>();
             serviceCollection.AddScoped(typeof(IHubActivator<>), typeof(CustomHubActivator<>));
             serviceCollection.AddSingleton(typeof(IHubContext<>), typeof(CustomHubContext<>));
@@ -63,12 +87,24 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             Assert.IsType<CustomIdProvider>(serviceProvider.GetRequiredService<IUserIdProvider>());
-            Assert.IsType<CustomHubLifetimeManager<CustomHub>>(serviceProvider.GetRequiredService<HubLifetimeManager<CustomHub>>());
-            Assert.IsType<CustomHubProtocolResolver>(serviceProvider.GetRequiredService<IHubProtocolResolver>());
-            Assert.IsType<CustomHubActivator<CustomHub>>(serviceProvider.GetRequiredService<IHubActivator<CustomHub>>());
-            Assert.IsType<CustomHubContext<CustomHub>>(serviceProvider.GetRequiredService<IHubContext<CustomHub>>());
-            Assert.IsType<CustomHubContext<CustomTHub, string>>(serviceProvider.GetRequiredService<IHubContext<CustomTHub, string>>());
-            Assert.IsType<CustomHubContext<CustomDynamicHub>>(serviceProvider.GetRequiredService<IHubContext<CustomDynamicHub>>());
+            Assert.IsType<CustomHubLifetimeManager<CustomHub>>(
+                serviceProvider.GetRequiredService<HubLifetimeManager<CustomHub>>()
+            );
+            Assert.IsType<CustomHubProtocolResolver>(
+                serviceProvider.GetRequiredService<IHubProtocolResolver>()
+            );
+            Assert.IsType<CustomHubActivator<CustomHub>>(
+                serviceProvider.GetRequiredService<IHubActivator<CustomHub>>()
+            );
+            Assert.IsType<CustomHubContext<CustomHub>>(
+                serviceProvider.GetRequiredService<IHubContext<CustomHub>>()
+            );
+            Assert.IsType<CustomHubContext<CustomTHub, string>>(
+                serviceProvider.GetRequiredService<IHubContext<CustomTHub, string>>()
+            );
+            Assert.IsType<CustomHubContext<CustomDynamicHub>>(
+                serviceProvider.GetRequiredService<IHubContext<CustomDynamicHub>>()
+            );
         }
 
         [Fact]
@@ -76,18 +112,36 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options =>
-            {
-                options.SupportedProtocols.Clear();
-                options.AddFilter(new CustomHubFilter());
-            });
+            serviceCollection
+                .AddSignalR()
+                .AddHubOptions<CustomHub>(options =>
+                {
+                    options.SupportedProtocols.Clear();
+                    options.AddFilter(new CustomHubFilter());
+                });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            Assert.Equal(1, serviceProvider.GetRequiredService<IOptions<HubOptions>>().Value.SupportedProtocols.Count);
-            Assert.Equal(0, serviceProvider.GetRequiredService<IOptions<HubOptions<CustomHub>>>().Value.SupportedProtocols.Count);
+            Assert.Equal(
+                1,
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions>>()
+                    .Value.SupportedProtocols.Count
+            );
+            Assert.Equal(
+                0,
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value.SupportedProtocols.Count
+            );
 
-            Assert.Null(serviceProvider.GetRequiredService<IOptions<HubOptions>>().Value.HubFilters);
-            Assert.Single(serviceProvider.GetRequiredService<IOptions<HubOptions<CustomHub>>>().Value.HubFilters);
+            Assert.Null(
+                serviceProvider.GetRequiredService<IOptions<HubOptions>>().Value.HubFilters
+            );
+            Assert.Single(
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value.HubFilters
+            );
         }
 
         [Fact]
@@ -95,24 +149,36 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options =>
-            {
-            });
+            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options => { });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var hubOptions = serviceProvider.GetRequiredService<IOptions<HubOptions<CustomHub>>>().Value;
+            var hubOptions = serviceProvider
+                .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                .Value;
             var globalHubOptions = serviceProvider.GetRequiredService<IOptions<HubOptions>>().Value;
 
-            Assert.Equal(globalHubOptions.MaximumReceiveMessageSize, hubOptions.MaximumReceiveMessageSize);
+            Assert.Equal(
+                globalHubOptions.MaximumReceiveMessageSize,
+                hubOptions.MaximumReceiveMessageSize
+            );
             Assert.Equal(globalHubOptions.StreamBufferCapacity, hubOptions.StreamBufferCapacity);
             Assert.Equal(globalHubOptions.EnableDetailedErrors, hubOptions.EnableDetailedErrors);
             Assert.Equal(globalHubOptions.KeepAliveInterval, hubOptions.KeepAliveInterval);
             Assert.Equal(globalHubOptions.HandshakeTimeout, hubOptions.HandshakeTimeout);
             Assert.Equal(globalHubOptions.SupportedProtocols, hubOptions.SupportedProtocols);
             Assert.Equal(globalHubOptions.ClientTimeoutInterval, hubOptions.ClientTimeoutInterval);
-            Assert.Equal(globalHubOptions.MaximumParallelInvocationsPerClient, hubOptions.MaximumParallelInvocationsPerClient);
-            Assert.Equal(globalHubOptions.DisableImplicitFromServicesParameters, hubOptions.DisableImplicitFromServicesParameters);
-            Assert.Equal(globalHubOptions.StatefulReconnectBufferSize, hubOptions.StatefulReconnectBufferSize);
+            Assert.Equal(
+                globalHubOptions.MaximumParallelInvocationsPerClient,
+                hubOptions.MaximumParallelInvocationsPerClient
+            );
+            Assert.Equal(
+                globalHubOptions.DisableImplicitFromServicesParameters,
+                hubOptions.DisableImplicitFromServicesParameters
+            );
+            Assert.Equal(
+                globalHubOptions.StatefulReconnectBufferSize,
+                hubOptions.StatefulReconnectBufferSize
+            );
             Assert.True(hubOptions.UserHasSetValues);
         }
 
@@ -121,13 +187,20 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options =>
-            {
-                options.StreamBufferCapacity = 42;
-            });
+            serviceCollection
+                .AddSignalR()
+                .AddHubOptions<CustomHub>(options =>
+                {
+                    options.StreamBufferCapacity = 42;
+                });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            Assert.Equal(42, serviceProvider.GetRequiredService<IOptions<HubOptions<CustomHub>>>().Value.StreamBufferCapacity);
+            Assert.Equal(
+                42,
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value.StreamBufferCapacity
+            );
         }
 
         [Fact]
@@ -171,15 +244,20 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options =>
-            {
-            });
+            serviceCollection.AddSignalR().AddHubOptions<CustomHub>(options => { });
 
-            serviceCollection.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, CustomHubProtocol>());
-            serviceCollection.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, MessagePackHubProtocol>());
+            serviceCollection.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHubProtocol, CustomHubProtocol>()
+            );
+            serviceCollection.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHubProtocol, MessagePackHubProtocol>()
+            );
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            Assert.Collection(serviceProvider.GetRequiredService<IOptions<HubOptions<CustomHub>>>().Value.SupportedProtocols,
+            Assert.Collection(
+                serviceProvider
+                    .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
+                    .Value.SupportedProtocols,
                 p =>
                 {
                     Assert.Equal("json", p);
@@ -187,27 +265,24 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 p =>
                 {
                     Assert.Equal("messagepack", p);
-                });
+                }
+            );
         }
 
         [Fact]
         public void ThrowsIfSetInvalidValueForMaxInvokes()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new HubOptions() { MaximumParallelInvocationsPerClient = 0 });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new HubOptions() { MaximumParallelInvocationsPerClient = 0 }
+            );
         }
     }
 
-    public class CustomHub : Hub
-    {
-    }
+    public class CustomHub : Hub { }
 
-    public class CustomTHub : Hub<string>
-    {
-    }
+    public class CustomTHub : Hub<string> { }
 
-    public class CustomDynamicHub : DynamicHub
-    {
-    }
+    public class CustomDynamicHub : DynamicHub { }
 
     public class CustomIdProvider : IUserIdProvider
     {
@@ -219,15 +294,20 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
     public class CustomHubProtocolResolver : IHubProtocolResolver
     {
-        public IReadOnlyList<IHubProtocol> AllProtocols => throw new System.NotImplementedException();
+        public IReadOnlyList<IHubProtocol> AllProtocols =>
+            throw new System.NotImplementedException();
 
-        public IHubProtocol GetProtocol(string protocolName, IReadOnlyList<string> supportedProtocols)
+        public IHubProtocol GetProtocol(
+            string protocolName,
+            IReadOnlyList<string> supportedProtocols
+        )
         {
             throw new System.NotImplementedException();
         }
     }
 
-    public class CustomHubActivator<THub> : IHubActivator<THub> where THub : Hub
+    public class CustomHubActivator<THub> : IHubActivator<THub>
+        where THub : Hub
     {
         public THub Create()
         {
@@ -240,7 +320,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         }
     }
 
-    public class CustomHubContext<THub> : IHubContext<THub> where THub : Hub
+    public class CustomHubContext<THub> : IHubContext<THub>
+        where THub : Hub
     {
         public IHubClients Clients => throw new System.NotImplementedException();
 
@@ -256,9 +337,14 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public IGroupManager Groups => throw new System.NotImplementedException();
     }
 
-    public class CustomHubLifetimeManager<THub> : HubLifetimeManager<THub> where THub : Hub
+    public class CustomHubLifetimeManager<THub> : HubLifetimeManager<THub>
+        where THub : Hub
     {
-        public override Task AddToGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
+        public override Task AddToGroupAsync(
+            string connectionId,
+            string groupName,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
@@ -273,52 +359,101 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new System.NotImplementedException();
         }
 
-        public override Task RemoveFromGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
+        public override Task RemoveFromGroupAsync(
+            string connectionId,
+            string groupName,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendAllAsync(string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendAllAsync(
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendAllExceptAsync(string methodName, object[] args, IReadOnlyList<string> excludedConnectionIds, CancellationToken cancellationToken = default)
+        public override Task SendAllExceptAsync(
+            string methodName,
+            object[] args,
+            IReadOnlyList<string> excludedConnectionIds,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendConnectionAsync(string connectionId, string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendConnectionAsync(
+            string connectionId,
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendConnectionsAsync(IReadOnlyList<string> connectionIds, string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendConnectionsAsync(
+            IReadOnlyList<string> connectionIds,
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendGroupAsync(string groupName, string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendGroupAsync(
+            string groupName,
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendGroupExceptAsync(string groupName, string methodName, object[] args, IReadOnlyList<string> excludedConnectionIds, CancellationToken cancellationToken = default)
+        public override Task SendGroupExceptAsync(
+            string groupName,
+            string methodName,
+            object[] args,
+            IReadOnlyList<string> excludedConnectionIds,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendGroupsAsync(IReadOnlyList<string> groupNames, string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendGroupsAsync(
+            IReadOnlyList<string> groupNames,
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendUserAsync(string userId, string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendUserAsync(
+            string userId,
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
 
-        public override Task SendUsersAsync(IReadOnlyList<string> userIds, string methodName, object[] args, CancellationToken cancellationToken = default)
+        public override Task SendUsersAsync(
+            IReadOnlyList<string> userIds,
+            string methodName,
+            object[] args,
+            CancellationToken cancellationToken = default
+        )
         {
             throw new System.NotImplementedException();
         }
@@ -343,7 +478,11 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             throw new NotImplementedException();
         }
 
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            out HubMessage message
+        )
         {
             throw new NotImplementedException();
         }
@@ -356,7 +495,10 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
     internal class CustomHubFilter : IHubFilter
     {
-        public ValueTask<object> InvokeMethodAsync(HubInvocationContext invocationContext, Func<HubInvocationContext, ValueTask<object>> next)
+        public ValueTask<object> InvokeMethodAsync(
+            HubInvocationContext invocationContext,
+            Func<HubInvocationContext, ValueTask<object>> next
+        )
         {
             throw new NotImplementedException();
         }
@@ -366,7 +508,5 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 namespace Microsoft.AspNetCore.SignalR.Internal
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    internal class NonDefaultHubProtocolAttribute : Attribute
-    {
-    }
+    internal class NonDefaultHubProtocolAttribute : Attribute { }
 }

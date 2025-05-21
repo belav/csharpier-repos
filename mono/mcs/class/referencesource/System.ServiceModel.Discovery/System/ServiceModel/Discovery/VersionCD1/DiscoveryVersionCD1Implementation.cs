@@ -4,17 +4,21 @@
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
+    using System.Globalization;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
-    using System.Runtime;
     using System.ServiceModel.Description;
-    using System.Globalization;
 
     class DiscoveryVersionCD1Implementation : IDiscoveryVersionImplementation
     {
-        static readonly Uri ScopeMatchByExact = new Uri(ProtocolStrings.VersionCD1.ScopeMatchByExact);
+        static readonly Uri ScopeMatchByExact = new Uri(
+            ProtocolStrings.VersionCD1.ScopeMatchByExact
+        );
         static readonly Uri ScopeMatchByLdap = new Uri(ProtocolStrings.VersionCD1.ScopeMatchByLdap);
-        static readonly Uri ScopeMatchByPrefix = new Uri(ProtocolStrings.VersionCD1.ScopeMatchByPrefix);
+        static readonly Uri ScopeMatchByPrefix = new Uri(
+            ProtocolStrings.VersionCD1.ScopeMatchByPrefix
+        );
         static readonly Uri ScopeMatchByUuid = new Uri(ProtocolStrings.VersionCD1.ScopeMatchByUuid);
         static readonly Uri ScopeMatchByNone = new Uri(ProtocolStrings.VersionCD1.ScopeMatchByNone);
 
@@ -36,10 +40,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
 
         public string WsaNamespace
         {
-            get
-            {
-                return ProtocolStrings.WsaNamespaceAugust2004;
-            }
+            get { return ProtocolStrings.WsaNamespaceAugust2004; }
         }
 
         public Uri DiscoveryAddress
@@ -52,14 +53,11 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 }
                 return this.discoveryAddress;
             }
-        }                
+        }
 
         public MessageVersion MessageVersion
         {
-            get
-            {                    
-                return MessageVersion.Soap12WSAddressingAugust2004;
-            }
+            get { return MessageVersion.Soap12WSAddressingAugust2004; }
         }
 
         public DiscoveryVersion.SchemaQualifiedNames QualifiedNames
@@ -68,7 +66,10 @@ namespace System.ServiceModel.Discovery.VersionCD1
             {
                 if (this.qualifiedNames == null)
                 {
-                    this.qualifiedNames = new DiscoveryVersion.SchemaQualifiedNames(ProtocolStrings.VersionCD1.Namespace, this.WsaNamespace);
+                    this.qualifiedNames = new DiscoveryVersion.SchemaQualifiedNames(
+                        ProtocolStrings.VersionCD1.Namespace,
+                        this.WsaNamespace
+                    );
                 }
                 return this.qualifiedNames;
             }
@@ -80,7 +81,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             {
                 if (this.eprSerializer == null)
                 {
-                    this.eprSerializer = new DataContractSerializer(typeof(EndpointAddressAugust2004));
+                    this.eprSerializer = new DataContractSerializer(
+                        typeof(EndpointAddressAugust2004)
+                    );
                 }
                 return this.eprSerializer;
             }
@@ -96,7 +99,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
                     {
                         if (this.adhocDiscoveryContract == null)
                         {
-                            this.adhocDiscoveryContract = DiscoveryUtility.GetContract(typeof(IDiscoveryContractAdhocCD1));
+                            this.adhocDiscoveryContract = DiscoveryUtility.GetContract(
+                                typeof(IDiscoveryContractAdhocCD1)
+                            );
                         }
                     }
                 }
@@ -110,7 +115,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
                     {
                         if (this.managedDiscoveryContract == null)
                         {
-                            this.managedDiscoveryContract = DiscoveryUtility.GetContract(typeof(IDiscoveryContractManagedCD1));
+                            this.managedDiscoveryContract = DiscoveryUtility.GetContract(
+                                typeof(IDiscoveryContractManagedCD1)
+                            );
                         }
                     }
                 }
@@ -118,7 +125,9 @@ namespace System.ServiceModel.Discovery.VersionCD1
             }
             else
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(SR.DiscoveryIncorrectMode(discoveryMode))
+                );
             }
         }
 
@@ -130,14 +139,19 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 {
                     if (this.announcementContract == null)
                     {
-                        this.announcementContract = DiscoveryUtility.GetContract(typeof(IAnnouncementContractCD1));
+                        this.announcementContract = DiscoveryUtility.GetContract(
+                            typeof(IAnnouncementContractCD1)
+                        );
                     }
                 }
             }
             return this.announcementContract;
         }
 
-        public IDiscoveryInnerClient CreateDiscoveryInnerClient(DiscoveryEndpoint discoveryEndpoint, IDiscoveryInnerClientResponse responseReceiver)
+        public IDiscoveryInnerClient CreateDiscoveryInnerClient(
+            DiscoveryEndpoint discoveryEndpoint,
+            IDiscoveryInnerClientResponse responseReceiver
+        )
         {
             if (discoveryEndpoint.DiscoveryMode == ServiceDiscoveryMode.Adhoc)
             {
@@ -149,11 +163,17 @@ namespace System.ServiceModel.Discovery.VersionCD1
             }
             else
             {
-                throw FxTrace.Exception.AsError(new ArgumentException(SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)));
+                throw FxTrace.Exception.AsError(
+                    new ArgumentException(
+                        SR.DiscoveryIncorrectMode(discoveryEndpoint.DiscoveryMode)
+                    )
+                );
             }
         }
 
-        public IAnnouncementInnerClient CreateAnnouncementInnerClient(AnnouncementEndpoint announcementEndpoint)
+        public IAnnouncementInnerClient CreateAnnouncementInnerClient(
+            AnnouncementEndpoint announcementEndpoint
+        )
         {
             return new AnnouncementInnerClientCD1(announcementEndpoint);
         }
@@ -166,19 +186,27 @@ namespace System.ServiceModel.Discovery.VersionCD1
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByExact;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByPrefix)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByPrefix
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByPrefix;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByLdap)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByLdap
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByLdap;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByUuid)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByUuid
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByUuid;
             }
-            else if (versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByNone)
+            else if (
+                versionDependentScopeMatchBy == DiscoveryVersionCD1Implementation.ScopeMatchByNone
+            )
             {
                 scopeMatchBy = FindCriteria.ScopeMatchByNone;
             }

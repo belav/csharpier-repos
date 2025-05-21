@@ -3,7 +3,6 @@
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class NoOp : Behavior
@@ -28,7 +27,6 @@ namespace Moq.Behaviors
     {
         public static readonly NoOp Instance = new NoOp();
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private NoOp()
@@ -49,12 +47,8 @@ namespace Moq.Behaviors
         After:
                 NoOp()
         */
-        NoOp()
-        {
-        }
+        NoOp() { }
 
-        public override void Execute(Invocation invocation)
-        {
-        }
+        public override void Execute(Invocation invocation) { }
     }
 }

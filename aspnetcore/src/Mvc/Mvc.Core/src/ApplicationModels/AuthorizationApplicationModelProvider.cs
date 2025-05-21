@@ -15,7 +15,8 @@ internal sealed class AuthorizationApplicationModelProvider : IApplicationModelP
 
     public AuthorizationApplicationModelProvider(
         IAuthorizationPolicyProvider policyProvider,
-        IOptions<MvcOptions> mvcOptions)
+        IOptions<MvcOptions> mvcOptions
+    )
     {
         _policyProvider = policyProvider;
         _mvcOptions = mvcOptions.Value;
@@ -41,7 +42,9 @@ internal sealed class AuthorizationApplicationModelProvider : IApplicationModelP
 
         foreach (var controllerModel in context.Result.Controllers)
         {
-            var controllerModelAuthData = controllerModel.Attributes.OfType<IAuthorizeData>().ToArray();
+            var controllerModelAuthData = controllerModel
+                .Attributes.OfType<IAuthorizeData>()
+                .ToArray();
             if (controllerModelAuthData.Length > 0)
             {
                 controllerModel.Filters.Add(GetFilter(_policyProvider, controllerModelAuthData));
@@ -67,13 +70,19 @@ internal sealed class AuthorizationApplicationModelProvider : IApplicationModelP
         }
     }
 
-    public static AuthorizeFilter GetFilter(IAuthorizationPolicyProvider policyProvider, IEnumerable<IAuthorizeData> authData)
+    public static AuthorizeFilter GetFilter(
+        IAuthorizationPolicyProvider policyProvider,
+        IEnumerable<IAuthorizeData> authData
+    )
     {
         // The default policy provider will make the same policy for given input, so make it only once.
         // This will always execute synchronously.
         if (policyProvider.GetType() == typeof(DefaultAuthorizationPolicyProvider))
         {
-            var policy = AuthorizationPolicy.CombineAsync(policyProvider, authData).GetAwaiter().GetResult()!;
+            var policy = AuthorizationPolicy
+                .CombineAsync(policyProvider, authData)
+                .GetAwaiter()
+                .GetResult()!;
             return new AuthorizeFilter(policy);
         }
         else

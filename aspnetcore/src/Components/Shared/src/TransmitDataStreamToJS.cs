@@ -12,7 +12,12 @@ namespace Microsoft.AspNetCore.Components;
 /// </Summary>
 internal static class TransmitDataStreamToJS
 {
-    internal static async Task TransmitStreamAsync(IJSRuntime runtime, string methodIdentifier, long streamId, DotNetStreamReference dotNetStreamReference)
+    internal static async Task TransmitStreamAsync(
+        IJSRuntime runtime,
+        string methodIdentifier,
+        long streamId,
+        DotNetStreamReference dotNetStreamReference
+    )
     {
         var buffer = ArrayPool<byte>.Shared.Rent(32 * 1024);
 
@@ -32,7 +37,13 @@ internal static class TransmitDataStreamToJS
             try
             {
                 // Attempt to notify the client of the error.
-                await runtime.InvokeVoidAsync(methodIdentifier, streamId, Array.Empty<byte>(), 0, ex.Message);
+                await runtime.InvokeVoidAsync(
+                    methodIdentifier,
+                    streamId,
+                    Array.Empty<byte>(),
+                    0,
+                    ex.Message
+                );
             }
             catch
             {

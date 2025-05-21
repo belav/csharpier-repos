@@ -2,6 +2,5 @@
 
 public class Stack<S>
 {
-	public void Hello (S s)
-	{ }
+    public void Hello(S s) { }
 }

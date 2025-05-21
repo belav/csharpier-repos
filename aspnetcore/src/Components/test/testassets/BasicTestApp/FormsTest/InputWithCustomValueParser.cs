@@ -7,7 +7,11 @@ namespace BasicTestApp.FormsTest;
 
 public class InputWithCustomValueParser : InputText
 {
-    protected override bool TryParseValueFromString(string value, out string result, out string validationErrorMessage)
+    protected override bool TryParseValueFromString(
+        string value,
+        out string result,
+        out string validationErrorMessage
+    )
     {
         if (value == "INVALID")
         {

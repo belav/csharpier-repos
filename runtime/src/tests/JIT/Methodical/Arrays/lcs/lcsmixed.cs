@@ -13,7 +13,8 @@ namespace JitTest_lcsmixed_lcs_cs
         private static String buildLCS(int[,][,][,][,] b, char[] X, int[] ind)
         {
             for (int i = 0; i < RANK; i++)
-                if (ind[i] == 0) return "";
+                if (ind[i] == 0)
+                    return "";
 
             int L = b[ind[0], ind[1]][ind[2], ind[3]][ind[4], ind[5]][ind[6], ind[7]];
             if (L == RANK)
@@ -53,8 +54,12 @@ namespace JitTest_lcsmixed_lcs_cs
                 if (eqFlag)
                 {
                     c[ind[0], ind[1], ind[2], ind[3]][ind[4], ind[5], ind[6], ind[7]] =
-                        c[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1]
-                            [ind[4] - 1, ind[5] - 1, ind[6] - 1, ind[7] - 1] + 1;
+                        c[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1][
+                            ind[4] - 1,
+                            ind[5] - 1,
+                            ind[6] - 1,
+                            ind[7] - 1
+                        ] + 1;
                     b[ind[0], ind[1]][ind[2], ind[3]][ind[4], ind[5]][ind[6], ind[7]] = RANK;
                 }
                 else
@@ -82,7 +87,8 @@ namespace JitTest_lcsmixed_lcs_cs
                 while (R < RANK)
                 {
                     ind[R]++;
-                    if (ind[R] < len[R]) break;
+                    if (ind[R] < len[R])
+                        break;
                     ind[R++] = 1;
                 }
             }
@@ -92,16 +98,7 @@ namespace JitTest_lcsmixed_lcs_cs
         public static int TestEntryPoint()
         {
             Console.WriteLine("Test searches for longest common subsequence of 8 strings\n\n");
-            String[] str = {
-                "abdc",
-                "badc",
-                "bdacw",
-                "bdca",
-                "bcfdc",
-                "bddsc",
-                "bdccca",
-                "bbdc"
-            };
+            String[] str = { "abdc", "badc", "bdacw", "bdca", "bcfdc", "bddsc", "bdccca", "bbdc" };
 
             int[] len = new int[RANK];
             char[][] seq = new char[RANK][];
@@ -125,11 +122,19 @@ namespace JitTest_lcsmixed_lcs_cs
                         for (ind[3] = 0; ind[3] < len[3]; ind[3]++)
                         {
                             b[ind[0], ind[1]][ind[2], ind[3]] = new int[len[4], len[5]][,];
-                            c[ind[0], ind[1], ind[2], ind[3]] = new int[len[4], len[5], len[6], len[7]];
+                            c[ind[0], ind[1], ind[2], ind[3]] = new int[
+                                len[4],
+                                len[5],
+                                len[6],
+                                len[7]
+                            ];
                             for (ind[4] = 0; ind[4] < len[4]; ind[4]++)
                             {
                                 for (ind[5] = 0; ind[5] < len[5]; ind[5]++)
-                                    b[ind[0], ind[1]][ind[2], ind[3]][ind[4], ind[5]] = new int[len[6], len[7]];
+                                    b[ind[0], ind[1]][ind[2], ind[3]][ind[4], ind[5]] = new int[
+                                        len[6],
+                                        len[7]
+                                    ];
                             }
                         }
                     }

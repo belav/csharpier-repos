@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.Android.Build.Ndk;
-using Microsoft.Mobile.Build.Clang;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using Microsoft.Mobile.Build.Clang;
 
 namespace Microsoft.Android.Build
 {
@@ -26,14 +26,31 @@ namespace Microsoft.Android.Build
 
         public string Abi => abi;
 
-        public AndroidProject(string projectName, string runtimeIdentifier, TaskLoggingHelper logger) :
-            this(projectName, runtimeIdentifier, Environment.GetEnvironmentVariable("ANDROID_NDK_ROOT")!, logger)
-        {
-        }
+        public AndroidProject(
+            string projectName,
+            string runtimeIdentifier,
+            TaskLoggingHelper logger
+        )
+            : this(
+                projectName,
+                runtimeIdentifier,
+                Environment.GetEnvironmentVariable("ANDROID_NDK_ROOT")!,
+                logger
+            ) { }
 
-        public AndroidProject(string projectName, string runtimeIdentifier, string androidNdkPath, TaskLoggingHelper logger)
+        public AndroidProject(
+            string projectName,
+            string runtimeIdentifier,
+            string androidNdkPath,
+            TaskLoggingHelper logger
+        )
         {
-            androidToolchainPath = Path.Combine(androidNdkPath, "build", "cmake", "android.toolchain.cmake");
+            androidToolchainPath = Path.Combine(
+                androidNdkPath,
+                "build",
+                "cmake",
+                "android.toolchain.cmake"
+            );
             abi = DetermineAbi(runtimeIdentifier);
             targetArchitecture = GetTargetArchitecture(runtimeIdentifier);
 
@@ -42,7 +59,12 @@ namespace Microsoft.Android.Build
         }
 
         // builds using NDK toolchain
-        public void Build(string workingDir, ClangBuildOptions buildOptions, bool stripDebugSymbols = false, string apiLevel = DefaultMinApiLevel)
+        public void Build(
+            string workingDir,
+            ClangBuildOptions buildOptions,
+            bool stripDebugSymbols = false,
+            string apiLevel = DefaultMinApiLevel
+        )
         {
             NdkTools tools = new NdkTools(targetArchitecture, GetHostOS(), apiLevel);
 
@@ -55,15 +77,21 @@ namespace Microsoft.Android.Build
             GenerateCMake(workingDir, DefaultMinApiLevel, stripDebugSymbols);
         }
 
-        public void GenerateCMake(string workingDir, string apiLevel = DefaultMinApiLevel, bool stripDebugSymbols = false)
+        public void GenerateCMake(
+            string workingDir,
+            string apiLevel = DefaultMinApiLevel,
+            bool stripDebugSymbols = false
+        )
         {
-            string cmakeGenArgs = $"-DCMAKE_TOOLCHAIN_FILE={androidToolchainPath} -DANDROID_ABI=\"{Abi}\" -DANDROID_STL=none -DTARGETS_ANDROID=1 " +
-                $"-DANDROID_PLATFORM=android-{apiLevel} -B {projectName}";
+            string cmakeGenArgs =
+                $"-DCMAKE_TOOLCHAIN_FILE={androidToolchainPath} -DANDROID_ABI=\"{Abi}\" -DANDROID_STL=none -DTARGETS_ANDROID=1 "
+                + $"-DANDROID_PLATFORM=android-{apiLevel} -B {projectName}";
 
             if (stripDebugSymbols)
             {
                 // Use "-s" to strip debug symbols, it complains it's unused but it works
-                cmakeGenArgs += " -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_C_FLAGS=\"-s -Wno-unused-command-line-argument\"";
+                cmakeGenArgs +=
+                    " -DCMAKE_BUILD_TYPE=MinSizeRel -DCMAKE_C_FLAGS=\"-s -Wno-unused-command-line-argument\"";
             }
             else
             {
@@ -95,30 +123,30 @@ namespace Microsoft.Android.Build
         {
             StringBuilder ret = new StringBuilder();
 
-            foreach(string compilerArg in buildOptions.CompilerArguments)
+            foreach (string compilerArg in buildOptions.CompilerArguments)
             {
                 ret.Append(compilerArg);
                 ret.Append(' ');
             }
 
-            foreach(string includeDir in buildOptions.IncludePaths)
+            foreach (string includeDir in buildOptions.IncludePaths)
             {
                 ret.Append($"-I {includeDir} ");
             }
 
-            foreach(string linkerArg in buildOptions.LinkerArguments)
+            foreach (string linkerArg in buildOptions.LinkerArguments)
             {
                 ret.Append($"-Xlinker {linkerArg} ");
             }
 
-            foreach(string source in buildOptions.Sources)
+            foreach (string source in buildOptions.Sources)
             {
                 ret.Append(source);
                 ret.Append(' ');
             }
 
             HashSet<string> libDirs = new HashSet<string>();
-            foreach(string lib in buildOptions.NativeLibraryPaths)
+            foreach (string lib in buildOptions.NativeLibraryPaths)
             {
                 string rootPath = Path.GetDirectoryName(lib)!;
                 string libName = Path.GetFileName(lib);
@@ -156,7 +184,9 @@ namespace Microsoft.Android.Build
                 "android-x64" => "x86_64",
                 "android-arm" => "armeabi-v7a",
                 "android-arm64" => "arm64-v8a",
-                _ => throw new ArgumentException($"{runtimeIdentifier} is not supported for Android"),
+                _ => throw new ArgumentException(
+                    $"{runtimeIdentifier} is not supported for Android"
+                ),
             };
     }
 }

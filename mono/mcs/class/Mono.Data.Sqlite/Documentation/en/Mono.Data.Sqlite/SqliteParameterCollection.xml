@@ -1,6 +1,12 @@
 <Type Name="SqliteParameterCollection" FullName="Mono.Data.Sqlite.SqliteParameterCollection">
-  <TypeSignature Language="C#" Value="public sealed class SqliteParameterCollection : System.Data.Common.DbParameterCollection" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteParameterCollection extends System.Data.Common.DbParameterCollection" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteParameterCollection : System.Data.Common.DbParameterCollection"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteParameterCollection extends System.Data.Common.DbParameterCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -25,8 +31,14 @@
   </Docs>
   <Members>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public int Add (Mono.Data.Sqlite.SqliteParameter parameter);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance int32 Add(class Mono.Data.Sqlite.SqliteParameter parameter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Add (Mono.Data.Sqlite.SqliteParameter parameter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance int32 Add(class Mono.Data.Sqlite.SqliteParameter parameter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -48,7 +60,10 @@
     </Member>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public override int Add (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 Add(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 Add(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -74,8 +89,14 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter Add (string parameterName, System.Data.DbType parameterType);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter Add(string parameterName, valuetype System.Data.DbType parameterType) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter Add (string parameterName, System.Data.DbType parameterType);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter Add(string parameterName, valuetype System.Data.DbType parameterType) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -98,8 +119,14 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter Add (string parameterName, System.Data.DbType parameterType, int parameterSize);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter Add(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter Add (string parameterName, System.Data.DbType parameterType, int parameterSize);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter Add(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -124,8 +151,14 @@
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter Add (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter Add(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter Add (string parameterName, System.Data.DbType parameterType, int parameterSize, string sourceColumn);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter Add(string parameterName, valuetype System.Data.DbType parameterType, int32 parameterSize, string sourceColumn) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -152,8 +185,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (Mono.Data.Sqlite.SqliteParameter[] values);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddRange(class Mono.Data.Sqlite.SqliteParameter[] values) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (Mono.Data.Sqlite.SqliteParameter[] values);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void AddRange(class Mono.Data.Sqlite.SqliteParameter[] values) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -174,7 +213,10 @@
     </Member>
     <Member MemberName="AddRange">
       <MemberSignature Language="C#" Value="public override void AddRange (Array values);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void AddRange(class System.Array values) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void AddRange(class System.Array values) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -194,8 +236,14 @@
       </Docs>
     </Member>
     <Member MemberName="AddWithValue">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter AddWithValue (string parameterName, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter AddWithValue(string parameterName, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter AddWithValue (string parameterName, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter AddWithValue(string parameterName, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -208,7 +256,9 @@
         <Parameter Name="value" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="parameterName">Name of the parameter, or null to indicate an unnamed parameter</param>
+        <param name="parameterName"
+          >Name of the parameter, or null to indicate an unnamed parameter</param
+        >
         <param name="value">The initial value of the parameter</param>
         <summary>
             Adds a named/unnamed parameter and its value to the parameter collection.
@@ -219,7 +269,10 @@
     </Member>
     <Member MemberName="Clear">
       <MemberSignature Language="C#" Value="public override void Clear ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Clear() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Clear() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -237,7 +290,10 @@
     </Member>
     <Member MemberName="Contains">
       <MemberSignature Language="C#" Value="public override bool Contains (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Contains(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Contains(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -258,8 +314,14 @@
       </Docs>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public override bool Contains (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Contains(string parameterName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override bool Contains (string parameterName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Contains(string parameterName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -280,8 +342,14 @@
       </Docs>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public override void CopyTo (Array array, int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void CopyTo(class System.Array array, int32 index) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void CopyTo (Array array, int index);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void CopyTo(class System.Array array, int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -294,10 +362,8 @@
         <Parameter Name="index" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="array">
-        </param>
-        <param name="index">
-        </param>
+        <param name="array"></param>
+        <param name="index"></param>
         <summary>
             Not implemented
             </summary>
@@ -323,8 +389,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public override System.Collections.IEnumerator GetEnumerator ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Collections.IEnumerator GetEnumerator ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance class System.Collections.IEnumerator GetEnumerator() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -342,8 +414,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetParameter">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbParameter GetParameter (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Common.DbParameter GetParameter(int32 index) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbParameter GetParameter (int index);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Data.Common.DbParameter GetParameter(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -364,8 +442,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetParameter">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbParameter GetParameter (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Common.DbParameter GetParameter(string parameterName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbParameter GetParameter (string parameterName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Data.Common.DbParameter GetParameter(string parameterName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -387,7 +471,10 @@
     </Member>
     <Member MemberName="IndexOf">
       <MemberSignature Language="C#" Value="public override int IndexOf (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 IndexOf(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 IndexOf(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -409,7 +496,10 @@
     </Member>
     <Member MemberName="IndexOf">
       <MemberSignature Language="C#" Value="public override int IndexOf (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 IndexOf(string parameterName) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 IndexOf(string parameterName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -430,8 +520,14 @@
       </Docs>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public override void Insert (int index, object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Insert(int32 index, object value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Insert (int index, object value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Insert(int32 index, object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -507,8 +603,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter this[int index] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteParameter Item(int32)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter this[int index] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteParameter Item(int32)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -529,8 +631,14 @@
       </Docs>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter this[string parameterName] { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteParameter Item(string)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter this[string parameterName] { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteParameter Item(string)"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -552,7 +660,10 @@
     </Member>
     <Member MemberName="Remove">
       <MemberSignature Language="C#" Value="public override void Remove (object value);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Remove(object value) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Remove(object value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -573,7 +684,10 @@
     </Member>
     <Member MemberName="RemoveAt">
       <MemberSignature Language="C#" Value="public override void RemoveAt (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RemoveAt(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void RemoveAt(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -593,8 +707,14 @@
       </Docs>
     </Member>
     <Member MemberName="RemoveAt">
-      <MemberSignature Language="C#" Value="public override void RemoveAt (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RemoveAt(string parameterName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void RemoveAt (string parameterName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void RemoveAt(string parameterName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -614,8 +734,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetParameter">
-      <MemberSignature Language="C#" Value="protected override void SetParameter (int index, System.Data.Common.DbParameter value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetParameter(int32 index, class System.Data.Common.DbParameter value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetParameter (int index, System.Data.Common.DbParameter value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetParameter(int32 index, class System.Data.Common.DbParameter value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -637,8 +763,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetParameter">
-      <MemberSignature Language="C#" Value="protected override void SetParameter (string parameterName, System.Data.Common.DbParameter value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetParameter(string parameterName, class System.Data.Common.DbParameter value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetParameter (string parameterName, System.Data.Common.DbParameter value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetParameter(string parameterName, class System.Data.Common.DbParameter value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

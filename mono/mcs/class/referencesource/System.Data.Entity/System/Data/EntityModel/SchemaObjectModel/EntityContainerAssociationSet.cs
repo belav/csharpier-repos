@@ -22,32 +22,31 @@ namespace System.Data.EntityModel.SchemaObjectModel
     internal sealed class EntityContainerAssociationSet : EntityContainerRelationshipSet
     {
         // Note: If you add more fields, please make sure you handle that in the clone method
-        private Dictionary<string, EntityContainerAssociationSetEnd> _relationshipEnds = new Dictionary<string, EntityContainerAssociationSetEnd>();
-        private List<EntityContainerAssociationSetEnd> _rolelessEnds = new List<EntityContainerAssociationSetEnd>();
+        private Dictionary<string, EntityContainerAssociationSetEnd> _relationshipEnds =
+            new Dictionary<string, EntityContainerAssociationSetEnd>();
+        private List<EntityContainerAssociationSetEnd> _rolelessEnds =
+            new List<EntityContainerAssociationSetEnd>();
 
         /// <summary>
         /// Constructs an EntityContainerAssociationSet
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
-        public EntityContainerAssociationSet( EntityContainer parentElement )
-            : base( parentElement )
-        {
-        }
-
+        public EntityContainerAssociationSet(EntityContainer parentElement)
+            : base(parentElement) { }
 
         /// <summary>
         /// The ends defined and infered for this AssociationSet
         /// </summary>
         internal override IEnumerable<EntityContainerRelationshipSetEnd> Ends
         {
-            get 
+            get
             {
-                foreach ( EntityContainerAssociationSetEnd end in _relationshipEnds.Values )
+                foreach (EntityContainerAssociationSetEnd end in _relationshipEnds.Values)
                 {
                     yield return end;
                 }
 
-                foreach ( EntityContainerAssociationSetEnd end in _rolelessEnds )
+                foreach (EntityContainerAssociationSetEnd end in _rolelessEnds)
                 {
                     yield return end;
                 }
@@ -87,29 +86,33 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// The method that is called when an End element is encountered.
         /// </summary>
         /// <param name="reader">The XmlReader positioned at the EndElement.</param>
-        private void HandleEndElement( XmlReader reader )
+        private void HandleEndElement(XmlReader reader)
         {
-            Debug.Assert( reader != null );
+            Debug.Assert(reader != null);
 
-            EntityContainerAssociationSetEnd end = new EntityContainerAssociationSetEnd( this );
-            end.Parse( reader );
+            EntityContainerAssociationSetEnd end = new EntityContainerAssociationSetEnd(this);
+            end.Parse(reader);
 
-            if ( end.Role == null  )
+            if (end.Role == null)
             {
-                // we will resolve the role name later and put it in the 
+                // we will resolve the role name later and put it in the
                 // normal _relationshipEnds dictionary
-                _rolelessEnds.Add( end );
+                _rolelessEnds.Add(end);
                 return;
             }
 
-            if ( HasEnd( end.Role ) )
+            if (HasEnd(end.Role))
             {
-                end.AddError( ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error, reader,
-                    System.Data.Entity.Strings.DuplicateEndName(end.Name ) );
+                end.AddError(
+                    ErrorCode.InvalidName,
+                    EdmSchemaErrorSeverity.Error,
+                    reader,
+                    System.Data.Entity.Strings.DuplicateEndName(end.Name)
+                );
                 return;
             }
 
-            _relationshipEnds.Add( end.Role, end );
+            _relationshipEnds.Add(end.Role, end);
         }
 
         internal override void ResolveTopLevelNames()
@@ -118,8 +121,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             // this just got resolved
             Debug.Assert(
-                Relationship == null || Relationship.RelationshipKind == RelationshipKind.Association,
-                string.Format(CultureInfo.InvariantCulture, "The relationship referenced by the Association attribute of {0} is not an Association relationship.", FQName));
+                Relationship == null
+                    || Relationship.RelationshipKind == RelationshipKind.Association,
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "The relationship referenced by the Association attribute of {0} is not an Association relationship.",
+                    FQName
+                )
+            );
         }
 
         internal override void ResolveSecondLevelNames()
@@ -132,8 +141,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 {
                     if (HasEnd(end.Role))
                     {
-                        end.AddError(ErrorCode.InvalidName, EdmSchemaErrorSeverity.Error,
-                            System.Data.Entity.Strings.InferRelationshipEndGivesAlreadyDefinedEnd(end.EntitySet.FQName, Name));
+                        end.AddError(
+                            ErrorCode.InvalidName,
+                            EdmSchemaErrorSeverity.Error,
+                            System.Data.Entity.Strings.InferRelationshipEndGivesAlreadyDefinedEnd(
+                                end.EntitySet.FQName,
+                                Name
+                            )
+                        );
                     }
                     else
                     {
@@ -152,38 +167,44 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         /// <param name="relationshipEnd">The relationship end of the end to add.</param>
         /// <param name="entitySet">The entitySet to associate with the relationship end.</param>
-        protected override void AddEnd( IRelationshipEnd relationshipEnd, EntityContainerEntitySet entitySet )
+        protected override void AddEnd(
+            IRelationshipEnd relationshipEnd,
+            EntityContainerEntitySet entitySet
+        )
         {
-            Debug.Assert( relationshipEnd != null );
-            Debug.Assert( !_relationshipEnds.ContainsKey( relationshipEnd.Name ) );
+            Debug.Assert(relationshipEnd != null);
+            Debug.Assert(!_relationshipEnds.ContainsKey(relationshipEnd.Name));
             // we expect set to be null sometimes
 
-            EntityContainerAssociationSetEnd end = new EntityContainerAssociationSetEnd( this );
+            EntityContainerAssociationSetEnd end = new EntityContainerAssociationSetEnd(this);
             end.Role = relationshipEnd.Name;
             end.RelationshipEnd = relationshipEnd;
 
             end.EntitySet = entitySet;
-            if ( end.EntitySet != null )
+            if (end.EntitySet != null)
             {
-                _relationshipEnds.Add( end.Role, end );
+                _relationshipEnds.Add(end.Role, end);
             }
         }
 
-        protected override bool HasEnd( string role )
+        protected override bool HasEnd(string role)
         {
-            return _relationshipEnds.ContainsKey( role );
+            return _relationshipEnds.ContainsKey(role);
         }
 
         internal override SchemaElement Clone(SchemaElement parentElement)
         {
-            EntityContainerAssociationSet associationSet = new EntityContainerAssociationSet((EntityContainer)parentElement);
+            EntityContainerAssociationSet associationSet = new EntityContainerAssociationSet(
+                (EntityContainer)parentElement
+            );
 
             associationSet.Name = this.Name;
             associationSet.Relationship = this.Relationship;
 
             foreach (EntityContainerAssociationSetEnd end in this.Ends)
             {
-                EntityContainerAssociationSetEnd clonedEnd = (EntityContainerAssociationSetEnd)end.Clone(associationSet);
+                EntityContainerAssociationSetEnd clonedEnd = (EntityContainerAssociationSetEnd)
+                    end.Clone(associationSet);
                 associationSet._relationshipEnds.Add(clonedEnd.Role, clonedEnd);
             }
 

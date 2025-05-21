@@ -3,14 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-
+using NUnit.Framework;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using NUnit.Framework;
 
 namespace DbLinqTest
 {
@@ -47,25 +45,34 @@ namespace DbLinqTest
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
             people.Add(new Person { FirstName = "A", LastName = "B" });
             Assert.IsTrue(people.HasLoadedOrAssignedValues);
-            people.SetSource(new[]{
-                new Person { FirstName = "1", LastName = "2" }
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
         }
 
         [Test]
         public void Assign()
         {
             var people = new EntitySet<Person>();
-            people.SetSource(new[]{
-                new Person { FirstName = "A", LastName = "B" },
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "A", LastName = "B" },
+                }
+            );
             Assert.IsTrue(people.IsDeferred);
             people.Load();
             Assert.IsTrue(people.HasLoadedOrAssignedValues);
             Assert.IsFalse(people.IsDeferred);
-            people.Assign(new[]{
-                new Person { FirstName = "1", LastName = "2" },
-            });
+            people.Assign(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
             Assert.IsTrue(people.HasLoadedOrAssignedValues);
             Assert.AreEqual(1, people.Count);
             Assert.IsFalse(people.IsDeferred);
@@ -80,9 +87,12 @@ namespace DbLinqTest
             Assert.IsTrue(people.HasLoadedOrAssignedValues);
             people.Clear();
             Assert.IsTrue(people.HasLoadedOrAssignedValues);
-            people.SetSource(new[]{
-                new Person { FirstName = "1", LastName = "2" },
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
         }
 
         [Test]
@@ -90,9 +100,7 @@ namespace DbLinqTest
         {
             var people = new EntitySet<Person>();
             var p = new Person { FirstName = "A", LastName = "B" };
-            people.SetSource(new[]{
-                p
-            });
+            people.SetSource(new[] { p });
             Assert.IsTrue(people.IsDeferred);
             Assert.IsTrue(people.Contains(p));
             Assert.IsFalse(people.IsDeferred);
@@ -103,9 +111,12 @@ namespace DbLinqTest
         {
             var people = new EntitySet<Person>();
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
-            people.SetSource(new[]{
-                new Person { FirstName = "A", LastName = "B" },
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "A", LastName = "B" },
+                }
+            );
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
             Assert.IsTrue(people.IsDeferred);
             people.Load();
@@ -144,9 +155,7 @@ namespace DbLinqTest
         {
             var people = new EntitySet<Person>();
             var p = new Person { FirstName = "A", LastName = "B" };
-            people.SetSource(new[]{
-                p
-            });
+            people.SetSource(new[] { p });
             Assert.IsTrue(people.IsDeferred);
             Assert.AreEqual(0, people.IndexOf(p));
             Assert.IsFalse(people.IsDeferred);
@@ -165,9 +174,12 @@ namespace DbLinqTest
         public void Item_IsDeferredSourceLoaded()
         {
             var people = new EntitySet<Person>();
-            people.SetSource(new[]{
-                new Person { FirstName = "A", LastName = "B" },
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "A", LastName = "B" },
+                }
+            );
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
             Assert.IsTrue(people.IsDeferred);
             var p = people[0];
@@ -182,7 +194,7 @@ namespace DbLinqTest
             // It's not always when you think it would be.
             // It depends on whether there's a Source present.
             var people = new EntitySet<Person>();
-            var events = new List<ListChangedEventArgs> ();
+            var events = new List<ListChangedEventArgs>();
             people.ListChanged += (o, e) => events.Add(e);
 
             people.Add(new Person { FirstName = "A", LastName = "B" });
@@ -193,10 +205,13 @@ namespace DbLinqTest
             AssertEqual(events, new ListChangedEventArgs(ListChangedType.Reset, 0, -1));
 
             events.Clear();
-            people.AddRange(new[]{
-                new Person { FirstName = "1", LastName = "2" },
-                new Person { FirstName = "<", LastName = ">" },
-            });
+            people.AddRange(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                    new Person { FirstName = "<", LastName = ">" },
+                }
+            );
             AssertEqual(events);
 
             events.Clear();
@@ -214,19 +229,36 @@ namespace DbLinqTest
 
             events.Clear();
             people[0] = p;
-            AssertEqual(events,
+            AssertEqual(
+                events,
                 new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1),
-                new ListChangedEventArgs(ListChangedType.ItemAdded, 0, -1));
+                new ListChangedEventArgs(ListChangedType.ItemAdded, 0, -1)
+            );
         }
 
-        static void AssertEqual(List<ListChangedEventArgs> actual, params ListChangedEventArgs[] expected)
+        static void AssertEqual(
+            List<ListChangedEventArgs> actual,
+            params ListChangedEventArgs[] expected
+        )
         {
             Assert.AreEqual(expected.Length, actual.Count);
             for (int i = 0; i < expected.Length; ++i)
             {
-                Assert.AreEqual(expected[i].ListChangedType, actual[i].ListChangedType, "ListChangedEventArgs.ListChangedType");
-                Assert.AreEqual(expected[i].NewIndex, actual[i].NewIndex, "ListChangedEventArgs.NewIndex");
-                Assert.AreEqual(expected[i].OldIndex, actual[i].OldIndex, "ListChangedEventArgs.OldIndex");
+                Assert.AreEqual(
+                    expected[i].ListChangedType,
+                    actual[i].ListChangedType,
+                    "ListChangedEventArgs.ListChangedType"
+                );
+                Assert.AreEqual(
+                    expected[i].NewIndex,
+                    actual[i].NewIndex,
+                    "ListChangedEventArgs.NewIndex"
+                );
+                Assert.AreEqual(
+                    expected[i].OldIndex,
+                    actual[i].OldIndex,
+                    "ListChangedEventArgs.OldIndex"
+                );
             }
         }
 
@@ -240,43 +272,56 @@ namespace DbLinqTest
             people.ListChanged += (o, e) => events.Add(e);
 
             // This is also true if Enumerable.Empty<Person>() is used here.
-            people.SetSource(new[]{
-                new Person { FirstName = "(", LastName = ")" },
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "(", LastName = ")" },
+                }
+            );
             AssertEqual(events);
             Assert.IsTrue(people.IsDeferred);
 
             // *Initial* Add()/AddRange() is ignored.
             people.Add(new Person { FirstName = "A", LastName = "B" });
-            people.AddRange(new[]{
-                new Person { FirstName = "1", LastName = "2" },
-                new Person { FirstName = "<", LastName = ">" },
-            });
+            people.AddRange(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                    new Person { FirstName = "<", LastName = ">" },
+                }
+            );
             Assert.IsTrue(people.HasLoadedOrAssignedValues);
             Assert.IsTrue(people.IsDeferred);
             AssertEqual(events);
 
             events.Clear();
             people.Clear();
-            AssertEqual(events, 
+            AssertEqual(
+                events,
                 new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1),
                 new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1),
                 new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1),
                 new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1),
-                new ListChangedEventArgs(ListChangedType.Reset, 0, -1));
+                new ListChangedEventArgs(ListChangedType.Reset, 0, -1)
+            );
             Assert.IsFalse(people.IsDeferred);
 
             // Add()/AddRange() after a Clear has events.
             events.Clear();
             people.Add(new Person { FirstName = "A", LastName = "B" });
-            people.AddRange(new[]{
-                new Person { FirstName = "1", LastName = "2" },
-                new Person { FirstName = "<", LastName = ">" },
-            });
-            AssertEqual(events, 
+            people.AddRange(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                    new Person { FirstName = "<", LastName = ">" },
+                }
+            );
+            AssertEqual(
+                events,
                 new ListChangedEventArgs(ListChangedType.ItemAdded, 0, -1),
                 new ListChangedEventArgs(ListChangedType.ItemAdded, 1, -1),
-                new ListChangedEventArgs(ListChangedType.ItemAdded, 2, -1));
+                new ListChangedEventArgs(ListChangedType.ItemAdded, 2, -1)
+            );
 
             events.Clear();
             var p = new Person { FirstName = "{", LastName = "}" };
@@ -293,9 +338,11 @@ namespace DbLinqTest
 
             events.Clear();
             people[0] = p;
-            AssertEqual(events,
+            AssertEqual(
+                events,
                 new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1),
-                new ListChangedEventArgs(ListChangedType.ItemAdded, 0, -1));
+                new ListChangedEventArgs(ListChangedType.ItemAdded, 0, -1)
+            );
         }
 
         [Test]
@@ -305,9 +352,12 @@ namespace DbLinqTest
             var events = new List<ListChangedEventArgs>();
             people.ListChanged += (o, e) => events.Add(e);
 
-            people.SetSource(new[]{
-                new Person { FirstName = "(", LastName = ")" },
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "(", LastName = ")" },
+                }
+            );
             Assert.IsTrue(people.IsDeferred);
             Assert.IsFalse(people.Remove(null));
             AssertEqual(events);
@@ -318,8 +368,7 @@ namespace DbLinqTest
             Assert.IsTrue(people.Remove(p));
             Assert.IsFalse(people.IsDeferred);
             Assert.AreEqual(0, people.Count);
-            AssertEqual(events, 
-                new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1));
+            AssertEqual(events, new ListChangedEventArgs(ListChangedType.ItemDeleted, 0, -1));
         }
 
         [Test]
@@ -327,7 +376,8 @@ namespace DbLinqTest
         {
             var people = new EntitySet<Person>();
             bool changed = false;
-            people.ListChanged += (o, e) => {
+            people.ListChanged += (o, e) =>
+            {
                 changed = true;
             };
 
@@ -348,7 +398,6 @@ namespace DbLinqTest
             Assert.AreEqual(2, people.Count);
             // WTF?!
             Assert.IsFalse(changed);
-
 
             changed = false;
             people.RemoveAt(0);
@@ -372,9 +421,12 @@ namespace DbLinqTest
 
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
 
-            people.SetSource(new[]{
-                new Person { FirstName = "1", LastName = "2" }
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
 
             Assert.IsTrue(people.IsDeferred);
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
@@ -388,9 +440,12 @@ namespace DbLinqTest
         {
             var people = new EntitySet<Person>();
 
-            people.SetSource(new[]{
-                new Person { FirstName = "1", LastName = "2" }
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
 
             Assert.IsTrue(people.IsDeferred);
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
@@ -405,10 +460,13 @@ namespace DbLinqTest
             var people = new EntitySet<Person>();
 
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
-            
-            people.SetSource(new[]{
-                new Person { FirstName = "1", LastName = "2" }
-            });
+
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
             Assert.IsTrue(people.IsDeferred);
             Assert.IsFalse(people.HasLoadedOrAssignedValues);
             people.Add(new Person { FirstName = "A", LastName = "B" });
@@ -422,15 +480,21 @@ namespace DbLinqTest
         {
             var people = new EntitySet<Person>();
 
-            people.SetSource(new[]{
-                new Person { FirstName = "1", LastName = "2" }
-            });
-            
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "1", LastName = "2" },
+                }
+            );
+
             Assert.IsTrue(people.IsDeferred);
 
-            people.SetSource(new[]{
-                new Person { FirstName = "A", LastName = "B" } 
-            });
+            people.SetSource(
+                new[]
+                {
+                    new Person { FirstName = "A", LastName = "B" },
+                }
+            );
 
             Assert.IsTrue(people.IsDeferred);
         }

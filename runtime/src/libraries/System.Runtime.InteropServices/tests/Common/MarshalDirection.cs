@@ -11,6 +11,6 @@ namespace Microsoft.Interop
     {
         ManagedToUnmanaged = 0,
         UnmanagedToManaged = 1,
-        Bidirectional = 2
+        Bidirectional = 2,
     }
 }

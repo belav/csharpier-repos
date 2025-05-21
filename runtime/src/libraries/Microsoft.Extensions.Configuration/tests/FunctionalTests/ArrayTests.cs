@@ -15,19 +15,22 @@ namespace Microsoft.Extensions.Configuration.FunctionalTests
         private string _json1ConfigFilePath;
         private string _json2ConfigFilePath;
 
-        private static readonly string _iniConfigFileContent = @"
+        private static readonly string _iniConfigFileContent =
+            @"
 [address]
 2=ini_2.2.2.2
 i=ini_i.i.i.i
 ";
-        private static readonly string _xmlConfigFileContent = @"
+        private static readonly string _xmlConfigFileContent =
+            @"
 <settings>
     <address name=""4"">xml_4.4.4.4</address>
     <address name=""1"">xml_1.1.1.1</address>
     <address name=""x"">xml_x.x.x.x</address>
 </settings>
 ";
-        private static readonly string _json1ConfigFileContent = @"
+        private static readonly string _json1ConfigFileContent =
+            @"
 {
     ""address"": [
         ""json_0.0.0.0"",
@@ -37,7 +40,8 @@ i=ini_i.i.i.i
 }
 ";
 
-        private static readonly string _json2ConfigFileContent = @"
+        private static readonly string _json2ConfigFileContent =
+            @"
 {
     ""address"": {
         ""j"": ""json_j.j.j.j"",
@@ -47,7 +51,10 @@ i=ini_i.i.i.i
 ";
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60583", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60583",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void DifferentConfigSources_Merged_KeysAreSorted()
         {
             var config = BuildConfig();
@@ -76,7 +83,10 @@ i=ini_i.i.i.i
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60583", TestPlatforms.iOS | TestPlatforms.tvOS)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60583",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
         public void DifferentConfigSources_Merged_WithOverwrites()
         {
             var config = BuildConfig();
@@ -121,8 +131,14 @@ i=ini_i.i.i.i
 
             File.WriteAllText(Path.Combine(basePath, _iniConfigFilePath), _iniConfigFileContent);
             File.WriteAllText(Path.Combine(basePath, _xmlConfigFilePath), _xmlConfigFileContent);
-            File.WriteAllText(Path.Combine(basePath, _json1ConfigFilePath), _json1ConfigFileContent);
-            File.WriteAllText(Path.Combine(basePath, _json2ConfigFilePath), _json2ConfigFileContent);
+            File.WriteAllText(
+                Path.Combine(basePath, _json1ConfigFilePath),
+                _json1ConfigFileContent
+            );
+            File.WriteAllText(
+                Path.Combine(basePath, _json2ConfigFilePath),
+                _json2ConfigFileContent
+            );
         }
 
         public void Dispose()

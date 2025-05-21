@@ -22,26 +22,35 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
     {
         // We need to generate the namespace name in the same format that is used in metadata, which
         // is SymbolDisplayFormat.QualifiedNameOnlyFormat, which this is a copy of.
-        private static readonly SymbolDisplayFormat s_metadataSymbolDisplayFormat = new SymbolDisplayFormat(
-                        globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                        typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces);
+        private static readonly SymbolDisplayFormat s_metadataSymbolDisplayFormat =
+            new SymbolDisplayFormat(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            );
 
         private static readonly string PathSeparatorString = Path.DirectorySeparatorChar.ToString();
 
         // Cache for any type forwards. Key is the dll being inspected. Value is a dictionary
         // of namespace and type name, to the assembly name that the type is forwarded to
-        private readonly Dictionary<string, Dictionary<(string @namespace, string typeName), string>?> _typeForwardCache = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<
+            string,
+            Dictionary<(string @namespace, string typeName), string>?
+        > _typeForwardCache = new(StringComparer.OrdinalIgnoreCase);
         private readonly object _cacheLock = new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ImplementationAssemblyLookupService()
-        {
-        }
+        public ImplementationAssemblyLookupService() { }
 
-        public bool TryFindImplementationAssemblyPath(string referencedDllPath, [NotNullWhen(true)] out string? implementationDllPath)
+        public bool TryFindImplementationAssemblyPath(
+            string referencedDllPath,
+            [NotNullWhen(true)] out string? implementationDllPath
+        )
         {
-            var pathParts = referencedDllPath.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            var pathParts = referencedDllPath.Split(
+                Path.DirectorySeparatorChar,
+                Path.AltDirectorySeparatorChar
+            );
             if (TryNugetLibToRef(pathParts, out implementationDllPath))
                 return true;
 
@@ -52,7 +61,11 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             return false;
         }
 
-        public string? FollowTypeForwards(ISymbol symbol, string dllPath, IPdbSourceDocumentLogger? logger)
+        public string? FollowTypeForwards(
+            ISymbol symbol,
+            string dllPath,
+            IPdbSourceDocumentLogger? logger
+        )
         {
             // If we find any type forwards we'll assume they're in the same directory
             var basePath = Path.GetDirectoryName(dllPath);
@@ -62,7 +75,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // Only the top most containing type in the ExportedType table actually points to an assembly
             // so no point looking for nested types.
             var typeSymbol = MetadataAsSourceHelpers.GetTopLevelContainingNamedType(symbol);
-            var namespaceName = typeSymbol.ContainingNamespace.ToDisplayString(s_metadataSymbolDisplayFormat);
+            var namespaceName = typeSymbol.ContainingNamespace.ToDisplayString(
+                s_metadataSymbolDisplayFormat
+            );
 
             try
             {
@@ -73,7 +88,12 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     {
                         // If there are no type forwards in this DLL, or not one for this type, then it means
                         // we've found the right DLL
-                        if (typeForwards?.TryGetValue((namespaceName, typeSymbol.MetadataName), out var assemblyName) != true)
+                        if (
+                            typeForwards?.TryGetValue(
+                                (namespaceName, typeSymbol.MetadataName),
+                                out var assemblyName
+                            ) != true
+                        )
                         {
                             return dllPath;
                         }
@@ -96,13 +116,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     }
                 }
             }
-            catch (Exception ex) when (IOUtilities.IsNormalIOException(ex))
-            {
-            }
+            catch (Exception ex) when (IOUtilities.IsNormalIOException(ex)) { }
 
             return null;
 
-            bool TryGetCachedTypeForwards(string dllPath, [NotNullWhen(true)] out Dictionary<(string @namespace, string typeName), string>? typeForwards)
+            bool TryGetCachedTypeForwards(
+                string dllPath,
+                [NotNullWhen(true)]
+                    out Dictionary<(string @namespace, string typeName), string>? typeForwards
+            )
             {
                 lock (_cacheLock)
                 {
@@ -119,7 +141,10 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
         }
 
-        private static bool TryNugetLibToRef(string[] pathParts, [NotNullWhen(true)] out string? implementationDllPath)
+        private static bool TryNugetLibToRef(
+            string[] pathParts,
+            [NotNullWhen(true)] out string? implementationDllPath
+        )
         {
             implementationDllPath = null;
 
@@ -130,9 +155,15 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 return false;
 
             var pathToTry = Path.Combine(
-                                string.Join(PathSeparatorString, pathParts, 0, refIndex),
-                                "lib",
-                                string.Join(PathSeparatorString, pathParts, refIndex + 1, pathParts.Length - refIndex - 1));
+                string.Join(PathSeparatorString, pathParts, 0, refIndex),
+                "lib",
+                string.Join(
+                    PathSeparatorString,
+                    pathParts,
+                    refIndex + 1,
+                    pathParts.Length - refIndex - 1
+                )
+            );
 
             if (IOUtilities.PerformIO(() => File.Exists(pathToTry)))
             {
@@ -143,17 +174,30 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             return false;
         }
 
-        private static bool TryTargetingPackToSharedSdk(string[] pathParts, [NotNullWhen(true)] out string? implementationDllPath)
+        private static bool TryTargetingPackToSharedSdk(
+            string[] pathParts,
+            [NotNullWhen(true)] out string? implementationDllPath
+        )
         {
             implementationDllPath = null;
-            if (pathParts is not [.., "packs", var packName, var packVersion, "ref", _, var dllFileName])
+            if (
+                pathParts
+                is not [.., "packs", var packName, var packVersion, "ref", _, var dllFileName]
+            )
                 return false;
 
             var referencedDllPath = string.Join(PathSeparatorString, pathParts);
 
             // We try to get the shared sdk name from the FrameworkList.xml file, in the data dir
             // eg. C:\Program Files\dotnet\packs\Microsoft.NETCore.App.Ref\6.0.5\data\FrameworkList.xml
-            var frameworkXml = Path.Combine(referencedDllPath, "..", "..", "..", "data", "FrameworkList.xml");
+            var frameworkXml = Path.Combine(
+                referencedDllPath,
+                "..",
+                "..",
+                "..",
+                "data",
+                "FrameworkList.xml"
+            );
 
             string? sdkName;
             try
@@ -177,7 +221,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // eg. C:\Program Files\dotnet\shared\Microsoft.NETCore.App\6.0.5\Foo.dll
             // But first we go up six levels to get to the common root. The pattern match above
             // ensures this will be valid.
-            var basePath = Path.GetFullPath(Path.Combine(referencedDllPath, "..", "..", "..", "..", "..", ".."));
+            var basePath = Path.GetFullPath(
+                Path.Combine(referencedDllPath, "..", "..", "..", "..", "..", "..")
+            );
             var dllPath = Path.Combine(basePath, "shared", sdkName, packVersion, dllFileName);
 
             if (IOUtilities.PerformIO(() => File.Exists(dllPath)))
@@ -203,7 +249,9 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     if (!et.Implementation.Equals(lastAssemblyReferenceHandle))
                     {
                         lastAssemblyReferenceHandle = et.Implementation;
-                        var assemblyReference = md.GetAssemblyReference((AssemblyReferenceHandle)lastAssemblyReferenceHandle);
+                        var assemblyReference = md.GetAssemblyReference(
+                            (AssemblyReferenceHandle)lastAssemblyReferenceHandle
+                        );
                         assemblyName = md.GetString(assemblyReference.Name);
                     }
 

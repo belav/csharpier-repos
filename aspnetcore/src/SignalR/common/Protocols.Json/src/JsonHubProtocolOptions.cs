@@ -14,5 +14,6 @@ public class JsonHubProtocolOptions
     /// <summary>
     /// Gets or sets the settings used to serialize invocation arguments and return values.
     /// </summary>
-    public JsonSerializerOptions PayloadSerializerOptions { get; set; } = JsonHubProtocol.CreateDefaultSerializerSettings();
+    public JsonSerializerOptions PayloadSerializerOptions { get; set; } =
+        JsonHubProtocol.CreateDefaultSerializerSettings();
 }

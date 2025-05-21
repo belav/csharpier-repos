@@ -46,6 +46,6 @@ namespace System.Diagnostics
         /// <devdoc>
         ///     The thread state is unknown.
         /// </devdoc>
-        Unknown
+        Unknown,
     }
 }

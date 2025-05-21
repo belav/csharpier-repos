@@ -6,16 +6,14 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.Generic;
 
     public sealed class CreateBookmarkScope : NativeActivity<BookmarkScope>
     {
-        public CreateBookmarkScope()
-        {
-        }
+        public CreateBookmarkScope() { }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {

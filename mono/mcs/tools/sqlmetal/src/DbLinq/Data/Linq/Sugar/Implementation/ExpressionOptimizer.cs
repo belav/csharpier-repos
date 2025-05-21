@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,13 +21,12 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Linq;
 using System.Linq.Expressions;
-
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
 using DbLinq.Data.Linq.Sugar.Expressions;
@@ -58,15 +57,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return expression;
         }
 
-        private Expression AnalyzeBinaryBoolean(Expression expression, BuilderContext builderContext)
+        private Expression AnalyzeBinaryBoolean(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             if (expression.Type != typeof(bool))
                 return expression;
             var bin = expression as BinaryExpression;
             if (bin == null)
                 return expression;
-            bool canOptimizeLeft = bin.Left.NodeType == ExpressionType.Constant && bin.Left.Type == typeof(bool);
-            bool canOptimizeRight = bin.Right.NodeType == ExpressionType.Constant && bin.Right.Type == typeof(bool);
+            bool canOptimizeLeft =
+                bin.Left.NodeType == ExpressionType.Constant && bin.Left.Type == typeof(bool);
+            bool canOptimizeRight =
+                bin.Right.NodeType == ExpressionType.Constant && bin.Right.Type == typeof(bool);
             if (canOptimizeLeft && canOptimizeRight)
                 return Expression.Constant(expression.Evaluate());
             if (canOptimizeLeft || canOptimizeRight)
@@ -75,26 +79,26 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     case ExpressionType.AndAlso:
                         if (canOptimizeLeft)
                             if ((bool)bin.Left.Evaluate())
-                                return bin.Right;   // (TRUE and X) == X 
+                                return bin.Right; // (TRUE and X) == X
                             else
-                                return bin.Left;    // (FALSE and X) == FALSE 
+                                return bin.Left; // (FALSE and X) == FALSE
                         if (canOptimizeRight)
                             if ((bool)bin.Right.Evaluate())
-                                return bin.Left;    // (X and TRUE) == X 
+                                return bin.Left; // (X and TRUE) == X
                             else
-                                return bin.Right;   // (X and FALSE) == FALSE
+                                return bin.Right; // (X and FALSE) == FALSE
                         break;
                     case ExpressionType.OrElse:
                         if (canOptimizeLeft)
                             if ((bool)bin.Left.Evaluate())
-                                return bin.Left;    // (TRUE or X) == TRUE 
+                                return bin.Left; // (TRUE or X) == TRUE
                             else
-                                return bin.Right;   // (FALSE or X) == X 
+                                return bin.Right; // (FALSE or X) == X
                         if (canOptimizeRight)
                             if ((bool)bin.Right.Evaluate())
-                                return bin.Right;   // (X or TRUE) == TRUE 
+                                return bin.Right; // (X or TRUE) == TRUE
                             else
-                                return bin.Left;    // (X or FALSE) == X
+                                return bin.Left; // (X or FALSE) == X
                         break;
                     case ExpressionType.Equal:
                         // TODO: this optimization should work for Unary Expression Too
@@ -102,17 +106,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         canOptimizeLeft = canOptimizeLeft && bin.Right is BinaryExpression;
                         if (canOptimizeLeft)
                             if ((bool)bin.Left.Evaluate())
-                                return bin.Right;                   // (TRUE == X) == X 
+                                return bin.Right; // (TRUE == X) == X
                             else
-                                return Expression.Not(bin.Right);   // (FALSE == X) == not X 
+                                return Expression.Not(bin.Right); // (FALSE == X) == not X
                         canOptimizeRight = canOptimizeRight && bin.Left is BinaryExpression;
                         // TODO: this optimization should work for Unary Expression Too
                         // this actually produce errors becouse of string based Sql generation
                         if (canOptimizeRight)
                             if ((bool)bin.Right.Evaluate())
-                                return bin.Left;                    // (X == TRUE) == X 
+                                return bin.Left; // (X == TRUE) == X
                             else
-                                return Expression.Not(bin.Left);    // (X == FALSE) == not X
+                                return Expression.Not(bin.Left); // (X == FALSE) == not X
                         break;
                     case ExpressionType.NotEqual:
                         canOptimizeLeft = canOptimizeLeft && bin.Right is BinaryExpression;
@@ -120,23 +124,26 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         // this actually produce errors becouse of string based Sql generation
                         if (canOptimizeLeft)
                             if ((bool)bin.Left.Evaluate())
-                                return Expression.Not(bin.Right);   // (TRUE != X) == not X 
+                                return Expression.Not(bin.Right); // (TRUE != X) == not X
                             else
-                                return bin.Right;                   // (FALSE != X) == X 
+                                return bin.Right; // (FALSE != X) == X
                         canOptimizeRight = canOptimizeRight && bin.Left is BinaryExpression;
                         // TODO: this optimization should work for Unary Expression Too
                         // this actually produce errors becouse of string based Sql generation
                         if (canOptimizeRight)
                             if ((bool)bin.Right.Evaluate())
-                                return Expression.Not(bin.Left);    // (X != TRUE) == not X 
+                                return Expression.Not(bin.Left); // (X != TRUE) == not X
                             else
-                                return bin.Left;                    // (X != FALSE) == X
+                                return bin.Left; // (X != FALSE) == X
                         break;
                 }
             return expression;
         }
 
-        protected virtual Expression AnalyzeConstant(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeConstant(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             // we try to find a non-constant operand, and if we do, we won't change this expression
             foreach (var operand in expression.GetOperands())
@@ -160,15 +167,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 if (optimizedExpression.Type == expression.Type)
                     return optimizedExpression;
             }
-                // if we fail to evaluate the expression, then just return it
-            catch (ArgumentException) 
+            // if we fail to evaluate the expression, then just return it
+            catch (ArgumentException)
             {
                 return expression;
             }
             return expression;
         }
 
-        protected virtual Expression AnalyzeNot(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeNot(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             if (expression.NodeType == ExpressionType.Not)
             {
@@ -200,15 +210,29 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return expression;
         }
 
-        protected virtual Expression AnalyzeNull(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeNull(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             // this first test only to speed up things a little
-            if (expression.NodeType == ExpressionType.Equal || expression.NodeType == ExpressionType.NotEqual)
+            if (
+                expression.NodeType == ExpressionType.Equal
+                || expression.NodeType == ExpressionType.NotEqual
+            )
             {
                 var operands = expression.GetOperands().ToList();
-                var nullComparison = GetNullComparison(expression.NodeType, operands[0], operands[1]);
+                var nullComparison = GetNullComparison(
+                    expression.NodeType,
+                    operands[0],
+                    operands[1]
+                );
                 if (nullComparison == null)
-                    nullComparison = GetNullComparison(expression.NodeType, operands[1], operands[0]);
+                    nullComparison = GetNullComparison(
+                        expression.NodeType,
+                        operands[1],
+                        operands[0]
+                    );
                 if (nullComparison != null)
                     return nullComparison;
                 return expression;
@@ -216,18 +240,34 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return expression;
         }
 
-        protected virtual Expression GetNullComparison(ExpressionType nodeType, Expression columnExpression, Expression nullExpression)
+        protected virtual Expression GetNullComparison(
+            ExpressionType nodeType,
+            Expression columnExpression,
+            Expression nullExpression
+        )
         {
-            if (columnExpression is ColumnExpression || columnExpression is InputParameterExpression)
+            if (
+                columnExpression is ColumnExpression
+                || columnExpression is InputParameterExpression
+            )
             {
-                if (nullExpression is ConstantExpression && ((ConstantExpression)nullExpression).Value == null)
+                if (
+                    nullExpression is ConstantExpression
+                    && ((ConstantExpression)nullExpression).Value == null
+                )
                 {
                     switch (nodeType)
                     {
                         case ExpressionType.Equal:
-                            return new SpecialExpression(SpecialExpressionType.IsNull, columnExpression);
+                            return new SpecialExpression(
+                                SpecialExpressionType.IsNull,
+                                columnExpression
+                            );
                         case ExpressionType.NotEqual:
-                            return new SpecialExpression(SpecialExpressionType.IsNotNull, columnExpression);
+                            return new SpecialExpression(
+                                SpecialExpressionType.IsNotNull,
+                                columnExpression
+                            );
                     }
                 }
             }

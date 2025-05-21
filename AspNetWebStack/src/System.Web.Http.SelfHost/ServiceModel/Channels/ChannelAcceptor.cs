@@ -6,7 +6,9 @@ using System.ServiceModel.Channels;
 
 namespace System.Web.Http.SelfHost.ServiceModel.Channels
 {
-    internal abstract class ChannelAcceptor<TChannel> : CommunicationObject, IChannelAcceptor<TChannel>
+    internal abstract class ChannelAcceptor<TChannel>
+        : CommunicationObject,
+            IChannelAcceptor<TChannel>
         where TChannel : class, IChannel
     {
         private ChannelManagerBase _channelManager;
@@ -33,21 +35,31 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 
         public abstract TChannel AcceptChannel(TimeSpan timeout);
 
-        public abstract IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         public abstract TChannel EndAcceptChannel(IAsyncResult result);
 
         public abstract bool WaitForChannel(TimeSpan timeout);
 
-        public abstract IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         public abstract bool EndWaitForChannel(IAsyncResult result);
 
-        protected override void OnAbort()
-        {
-        }
+        protected override void OnAbort() { }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -57,11 +69,13 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -71,8 +85,6 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
     }
 }

@@ -7,22 +7,20 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {
-
     // This class simplifies an extent's view. Given a view, runs the TM/SP
     // rules to remove unnecessary self-joins or self-unions
     internal class CellTreeSimplifier : InternalBase
     {
-
         #region Fields
         private ViewgenContext m_viewgenContext;
         #endregion
@@ -48,21 +46,24 @@ namespace System.Data.Mapping.ViewGeneration
         // any particular extent unless the tree has nodes of the same extent
         // embedded two leaves below LASJ or LOJ, e.g., if we have a tree
         // (where Ni indicates a node for extent i - one Ni can be different
-        // from anohter Ni: 
+        // from anohter Ni:
         // [N0 IJ N1] LASJ N0 --> This will not be simplified
         // canBooleansOverlap indicates whether an original input cell
         // contributes to multiple nodes in this tree, e.g., V1 IJ V2 UNION V2 IJ V3
         private CellTreeNode SimplifyTreeByMergingNodes(CellTreeNode rootNode)
         {
-
             if (rootNode is LeafCellTreeNode)
             { // View already simple!
                 return rootNode;
             }
-            Debug.Assert(rootNode.OpType == CellTreeOpType.LOJ || rootNode.OpType == CellTreeOpType.IJ ||
-                         rootNode.OpType == CellTreeOpType.FOJ || rootNode.OpType == CellTreeOpType.Union ||
-                         rootNode.OpType == CellTreeOpType.LASJ,
-                         "Only handle these operations");
+            Debug.Assert(
+                rootNode.OpType == CellTreeOpType.LOJ
+                    || rootNode.OpType == CellTreeOpType.IJ
+                    || rootNode.OpType == CellTreeOpType.FOJ
+                    || rootNode.OpType == CellTreeOpType.Union
+                    || rootNode.OpType == CellTreeOpType.LASJ,
+                "Only handle these operations"
+            );
 
             // Before we apply any rule, check if we can improve the opportunity to
             // collapse the nodes
@@ -113,8 +114,11 @@ namespace System.Data.Mapping.ViewGeneration
 
                 bool mergedOk = false;
                 // try to merge lastChild and child
-                if (false == skipRest && lastChild.OpType == CellTreeOpType.Leaf &&
-                    child.OpType == CellTreeOpType.Leaf)
+                if (
+                    false == skipRest
+                    && lastChild.OpType == CellTreeOpType.Leaf
+                    && child.OpType == CellTreeOpType.Leaf
+                )
                 {
                     // Both are cell queries. Can try to merge them
                     // We do not add lastChild since it could merge
@@ -182,7 +186,9 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 // Remove all children in child that belong to commonGrandChildren
                 // All grandChildren must be leaf nodes at this point
-                List<LeafCellTreeNode> newGrandChildren = new List<LeafCellTreeNode>(child.Children.Count);
+                List<LeafCellTreeNode> newGrandChildren = new List<LeafCellTreeNode>(
+                    child.Children.Count
+                );
                 foreach (LeafCellTreeNode grandChild in child.Children)
                 {
                     if (commonGrandChildren.Contains(grandChild) == false)
@@ -192,23 +198,35 @@ namespace System.Data.Mapping.ViewGeneration
                 }
                 // In the above example, child.OpType is IJ
                 Debug.Assert(child.OpType == commonChildOpType);
-                OpCellTreeNode newChild = new OpCellTreeNode(m_viewgenContext, child.OpType,
-                                                             Helpers.AsSuperTypeList<LeafCellTreeNode, CellTreeNode>(newGrandChildren));
+                OpCellTreeNode newChild = new OpCellTreeNode(
+                    m_viewgenContext,
+                    child.OpType,
+                    Helpers.AsSuperTypeList<LeafCellTreeNode, CellTreeNode>(newGrandChildren)
+                );
                 newChildren.Add(newChild);
             }
             // Connect gc2 op1 gc3 op1 gc4 - op1 is UNION in this
             // ((X IJ Y) UNION (Y IJ Z) UNION (R IJ S))
             // rootNode.Type is UNION
-            CellTreeNode remainingNodes = new OpCellTreeNode(m_viewgenContext, rootNode.OpType,
-                                                             Helpers.AsSuperTypeList<OpCellTreeNode, CellTreeNode>(newChildren));
+            CellTreeNode remainingNodes = new OpCellTreeNode(
+                m_viewgenContext,
+                rootNode.OpType,
+                Helpers.AsSuperTypeList<OpCellTreeNode, CellTreeNode>(newChildren)
+            );
             // Take the common grandchildren and connect via commonChildType
             // i.e., A IJ B
-            CellTreeNode commonNodes = new OpCellTreeNode(m_viewgenContext, commonChildOpType,
-                                                            Helpers.AsSuperTypeList<LeafCellTreeNode, CellTreeNode>(commonGrandChildren));
+            CellTreeNode commonNodes = new OpCellTreeNode(
+                m_viewgenContext,
+                commonChildOpType,
+                Helpers.AsSuperTypeList<LeafCellTreeNode, CellTreeNode>(commonGrandChildren)
+            );
 
             // Connect both by commonChildType
-            CellTreeNode result = new OpCellTreeNode(m_viewgenContext, commonChildOpType,
-                                                     new CellTreeNode[] { commonNodes, remainingNodes });
+            CellTreeNode result = new OpCellTreeNode(
+                m_viewgenContext,
+                commonChildOpType,
+                new CellTreeNode[] { commonNodes, remainingNodes }
+            );
 
             result = result.AssociativeFlatten();
             return result;
@@ -241,13 +259,18 @@ namespace System.Data.Mapping.ViewGeneration
                 {
                     commonChildOpType = opNode.OpType;
                 }
-                else if (CellTreeNode.IsAssociativeOp(opNode.OpType) == false || commonChildOpType != opNode.OpType)
+                else if (
+                    CellTreeNode.IsAssociativeOp(opNode.OpType) == false
+                    || commonChildOpType != opNode.OpType
+                )
                 {
                     return null;
                 }
 
                 // Make sure all the children are leaf children
-                Set<LeafCellTreeNode> nodeChildrenSet = new Set<LeafCellTreeNode>(LeafCellTreeNode.EqualityComparer);
+                Set<LeafCellTreeNode> nodeChildrenSet = new Set<LeafCellTreeNode>(
+                    LeafCellTreeNode.EqualityComparer
+                );
                 foreach (CellTreeNode grandChild in opNode.Children)
                 {
                     LeafCellTreeNode leafGrandChild = grandChild as LeafCellTreeNode;
@@ -275,14 +298,17 @@ namespace System.Data.Mapping.ViewGeneration
             }
             return commonLeaves;
         }
+
         // effects: Given a list of node, produces a new list in which all
         // leaf nodes of the same extent are adjacent to each other. Non-leaf
         // nodes are also adjacent to each other. CHANGE_Microsoft_IMPROVE: Merge with GroupByRightExtent
         private static List<CellTreeNode> GroupLeafChildrenByExtent(List<CellTreeNode> nodes)
         {
             // Keep track of leaf cells for each extent
-            KeyToListMap<EntitySetBase, CellTreeNode> extentMap =
-                new KeyToListMap<EntitySetBase, CellTreeNode>(EqualityComparer<EntitySetBase>.Default);
+            KeyToListMap<EntitySetBase, CellTreeNode> extentMap = new KeyToListMap<
+                EntitySetBase,
+                CellTreeNode
+            >(EqualityComparer<EntitySetBase>.Default);
 
             List<CellTreeNode> newNodes = new List<CellTreeNode>();
             foreach (CellTreeNode node in nodes)
@@ -310,8 +336,10 @@ namespace System.Data.Mapping.ViewGeneration
         private static List<CellTreeNode> GroupNonAssociativeLeafChildren(List<CellTreeNode> nodes)
         {
             // Keep track of leaf cells for each extent ignoring the 0th child
-            KeyToListMap<EntitySetBase, CellTreeNode> extentMap =
-                new KeyToListMap<EntitySetBase, CellTreeNode>(EqualityComparer<EntitySetBase>.Default);
+            KeyToListMap<EntitySetBase, CellTreeNode> extentMap = new KeyToListMap<
+                EntitySetBase,
+                CellTreeNode
+            >(EqualityComparer<EntitySetBase>.Default);
 
             List<CellTreeNode> newNodes = new List<CellTreeNode>();
             List<CellTreeNode> nonLeafNodes = new List<CellTreeNode>();
@@ -356,10 +384,12 @@ namespace System.Data.Mapping.ViewGeneration
         // effects: Given two cell tree nodes, node1 and node2, runs the
         // TM/SP rule on them to merge them (if they belong to the same
         // extent). Returns true if the merge succeeds
-        private bool TryMergeCellQueries(CellTreeOpType opType, ref CellTreeNode node1,
-                                         CellTreeNode node2)
+        private bool TryMergeCellQueries(
+            CellTreeOpType opType,
+            ref CellTreeNode node1,
+            CellTreeNode node2
+        )
         {
-
             LeafCellTreeNode leaf1 = node1 as LeafCellTreeNode;
             LeafCellTreeNode leaf2 = node2 as LeafCellTreeNode;
 
@@ -368,12 +398,28 @@ namespace System.Data.Mapping.ViewGeneration
 
             CellQuery mergedLeftCellQuery;
             CellQuery mergedRightCellQuery;
-            if (!TryMergeTwoCellQueries(leaf1.LeftCellWrapper.RightCellQuery, leaf2.LeftCellWrapper.RightCellQuery, opType, m_viewgenContext.MemberMaps.RightDomainMap, out mergedRightCellQuery))
+            if (
+                !TryMergeTwoCellQueries(
+                    leaf1.LeftCellWrapper.RightCellQuery,
+                    leaf2.LeftCellWrapper.RightCellQuery,
+                    opType,
+                    m_viewgenContext.MemberMaps.RightDomainMap,
+                    out mergedRightCellQuery
+                )
+            )
             {
                 return false;
             }
 
-            if (!TryMergeTwoCellQueries(leaf1.LeftCellWrapper.LeftCellQuery, leaf2.LeftCellWrapper.LeftCellQuery, opType, m_viewgenContext.MemberMaps.LeftDomainMap, out mergedLeftCellQuery))
+            if (
+                !TryMergeTwoCellQueries(
+                    leaf1.LeftCellWrapper.LeftCellQuery,
+                    leaf2.LeftCellWrapper.LeftCellQuery,
+                    opType,
+                    m_viewgenContext.MemberMaps.LeftDomainMap,
+                    out mergedLeftCellQuery
+                )
+            )
             {
                 return false;
             }
@@ -396,24 +442,30 @@ namespace System.Data.Mapping.ViewGeneration
                 inputOpType = CellTreeOpType.IJ;
             }
 
-            LeftCellWrapper wrapper = new LeftCellWrapper(m_viewgenContext.ViewTarget, temp.Attributes,
-                                                          temp.LeftFragmentQuery,
-                                                          mergedLeftCellQuery,
-                                                          mergedRightCellQuery,
-                                                          m_viewgenContext.MemberMaps,
-                                                          leaf1.LeftCellWrapper.Cells.Concat(leaf2.LeftCellWrapper.Cells));
+            LeftCellWrapper wrapper = new LeftCellWrapper(
+                m_viewgenContext.ViewTarget,
+                temp.Attributes,
+                temp.LeftFragmentQuery,
+                mergedLeftCellQuery,
+                mergedRightCellQuery,
+                m_viewgenContext.MemberMaps,
+                leaf1.LeftCellWrapper.Cells.Concat(leaf2.LeftCellWrapper.Cells)
+            );
             node1 = new LeafCellTreeNode(m_viewgenContext, wrapper, temp.RightFragmentQuery);
             return true;
         }
 
-
         // effects: Merges query2 with this according to the TM/SP rules for opType and
         // returns the merged result. canBooleansOverlap indicates whether the bools in this and query2 can overlap, i.e.
         // the same cells may have contributed to query2 and this earlier in the merge process
-        internal bool TryMergeTwoCellQueries(CellQuery query1, CellQuery query2, CellTreeOpType opType,
-                               MemberDomainMap memberDomainMap, out CellQuery mergedQuery)
+        internal bool TryMergeTwoCellQueries(
+            CellQuery query1,
+            CellQuery query2,
+            CellTreeOpType opType,
+            MemberDomainMap memberDomainMap,
+            out CellQuery mergedQuery
+        )
         {
-
             mergedQuery = null;
             // Initialize g1 and g2 according to the TM/SP rules for IJ, LOJ, Union, FOJ cases
             BoolExpression g1 = null;
@@ -436,8 +488,9 @@ namespace System.Data.Mapping.ViewGeneration
                     break;
             }
 
-            Dictionary<MemberPath, MemberPath> remap =
-                new Dictionary<MemberPath, MemberPath>(MemberPath.EqualityComparer);
+            Dictionary<MemberPath, MemberPath> remap = new Dictionary<MemberPath, MemberPath>(
+                MemberPath.EqualityComparer
+            );
 
             //Continue merging only if both queries are over the same source
             MemberPath newRoot;
@@ -487,8 +540,10 @@ namespace System.Data.Mapping.ViewGeneration
                     conjunct2 = BoolExpression.CreateAnd(query2.WhereClause, g2);
 
                     // The new whereClause -- g1 AND query1.WhereCaluse OR g2 AND query2.WhereClause
-                    whereClause = BoolExpression.CreateOr(BoolExpression.CreateAnd(query1.WhereClause, g1),
-                                                          BoolExpression.CreateAnd(query2.WhereClause, g2));
+                    whereClause = BoolExpression.CreateOr(
+                        BoolExpression.CreateAnd(query1.WhereClause, g1),
+                        BoolExpression.CreateAnd(query2.WhereClause, g2)
+                    );
                     break;
 
                 case CellTreeOpType.LASJ:
@@ -498,7 +553,10 @@ namespace System.Data.Mapping.ViewGeneration
                     // for query2 ANDed with g2 AND NOT query2.WhereClause
                     Debug.Assert(g1 == null, "LASJ does not affect g1");
                     conjunct2 = BoolExpression.CreateAnd(query2.WhereClause, g2);
-                    whereClause = BoolExpression.CreateAnd(query1.WhereClause, BoolExpression.CreateNot(conjunct2));
+                    whereClause = BoolExpression.CreateAnd(
+                        query1.WhereClause,
+                        BoolExpression.CreateNot(conjunct2)
+                    );
                     break;
                 default:
                     Debug.Fail("Unsupported operator");
@@ -508,12 +566,24 @@ namespace System.Data.Mapping.ViewGeneration
             // Create the various remapped parts for the cell query --
             // boolean expressions, merged slots, whereclause, duplicate
             // elimination, join tree
-            List<BoolExpression> boolExprs =
-                MergeBoolExpressions(query1, query2, conjunct1, conjunct2, opType);
+            List<BoolExpression> boolExprs = MergeBoolExpressions(
+                query1,
+                query2,
+                conjunct1,
+                conjunct2,
+                opType
+            );
             //BoolExpression.RemapBools(boolExprs, remap);
 
             ProjectedSlot[] mergedSlots;
-            if (false == ProjectedSlot.TryMergeRemapSlots(query1.ProjectedSlots, query2.ProjectedSlots, out mergedSlots))
+            if (
+                false
+                == ProjectedSlot.TryMergeRemapSlots(
+                    query1.ProjectedSlots,
+                    query2.ProjectedSlots,
+                    out mergedSlots
+                )
+            )
             {
                 // merging failed because two different right slots go to same left slot
                 return false;
@@ -521,16 +591,21 @@ namespace System.Data.Mapping.ViewGeneration
 
             whereClause = whereClause.RemapBool(remap);
 
-            CellQuery.SelectDistinct elimDupl = MergeDupl(query1.SelectDistinctFlag, query2.SelectDistinctFlag);
+            CellQuery.SelectDistinct elimDupl = MergeDupl(
+                query1.SelectDistinctFlag,
+                query2.SelectDistinctFlag
+            );
 
             whereClause.ExpensiveSimplify();
-            mergedQuery = new CellQuery(mergedSlots, whereClause,
-                                                  boolExprs, elimDupl, newRoot);
+            mergedQuery = new CellQuery(mergedSlots, whereClause, boolExprs, elimDupl, newRoot);
             return true;
         }
 
         // effects: Given two duplicate eliination choices, returns an OR of them
-        static private CellQuery.SelectDistinct MergeDupl(CellQuery.SelectDistinct d1, CellQuery.SelectDistinct d2)
+        static private CellQuery.SelectDistinct MergeDupl(
+            CellQuery.SelectDistinct d1,
+            CellQuery.SelectDistinct d2
+        )
         {
             if (d1 == CellQuery.SelectDistinct.Yes || d2 == CellQuery.SelectDistinct.Yes)
             {
@@ -548,11 +623,14 @@ namespace System.Data.Mapping.ViewGeneration
         // effects: Given two cellqueries query1 and query2, merges their
         // boolean expressions while ANDING query1 bools with conjunct1 and
         // query2's bools with conjunct2 and returns the result
-        static private List<BoolExpression>
-        MergeBoolExpressions(CellQuery query1, CellQuery query2,
-                             BoolExpression conjunct1, BoolExpression conjunct2, CellTreeOpType opType)
+        static private List<BoolExpression> MergeBoolExpressions(
+            CellQuery query1,
+            CellQuery query2,
+            BoolExpression conjunct1,
+            BoolExpression conjunct2,
+            CellTreeOpType opType
+        )
         {
-
             List<BoolExpression> bools1 = query1.BoolVars;
             List<BoolExpression> bools2 = query2.BoolVars;
 
@@ -597,8 +675,10 @@ namespace System.Data.Mapping.ViewGeneration
                     }
                     else if (opType == CellTreeOpType.LASJ)
                     {
-                        merged = BoolExpression.CreateAnd(bools1[i],
-                                                          BoolExpression.CreateNot(bools2[i]));
+                        merged = BoolExpression.CreateAnd(
+                            bools1[i],
+                            BoolExpression.CreateNot(bools2[i])
+                        );
                     }
                     else
                     {
@@ -622,6 +702,5 @@ namespace System.Data.Mapping.ViewGeneration
             m_viewgenContext.MemberMaps.ProjectedSlotMap.ToCompactString(builder);
         }
         #endregion
-
     }
 }

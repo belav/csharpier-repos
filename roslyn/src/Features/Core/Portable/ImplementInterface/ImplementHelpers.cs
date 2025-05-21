@@ -18,25 +18,33 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             Document document,
             INamedTypeSymbol namedType,
             Func<ITypeSymbol, bool> includeMemberType,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var fields = namedType.GetMembers()
+            var fields = namedType
+                .GetMembers()
                 .OfType<IFieldSymbol>()
                 .Where(f => !f.IsImplicitlyDeclared)
                 .Where(f => includeMemberType(f.Type))
                 .ToImmutableArray();
 
-            var properties = namedType.GetMembers()
+            var properties = namedType
+                .GetMembers()
                 .OfType<IPropertySymbol>()
-                .Where(p => !p.IsImplicitlyDeclared && p.Parameters.Length == 0 && p.GetMethod != null)
+                .Where(p =>
+                    !p.IsImplicitlyDeclared && p.Parameters.Length == 0 && p.GetMethod != null
+                )
                 .Where(p => includeMemberType(p.Type))
                 .ToImmutableArray();
 
             var parameters = GetNonCapturedPrimaryConstructorParameters(fields, properties);
 
-            using var _1 = ArrayBuilder<ISymbol>.GetInstance(fields.Length + properties.Length + parameters.Length, out var result);
+            using var _1 = ArrayBuilder<ISymbol>.GetInstance(
+                fields.Length + properties.Length + parameters.Length,
+                out var result
+            );
             result.AddRange(fields);
             result.AddRange(properties);
             result.AddRange(parameters);
@@ -44,18 +52,23 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
             ImmutableArray<IParameterSymbol> GetNonCapturedPrimaryConstructorParameters(
                 ImmutableArray<IFieldSymbol> fields,
-                ImmutableArray<IPropertySymbol> properties)
+                ImmutableArray<IPropertySymbol> properties
+            )
             {
                 using var _2 = ArrayBuilder<IParameterSymbol>.GetInstance(out var result);
 
-                var primaryConstructor = namedType.InstanceConstructors
-                    .FirstOrDefault(c => c.Parameters.Length > 0 && c.Parameters[0].IsPrimaryConstructor(cancellationToken));
+                var primaryConstructor = namedType.InstanceConstructors.FirstOrDefault(c =>
+                    c.Parameters.Length > 0
+                    && c.Parameters[0].IsPrimaryConstructor(cancellationToken)
+                );
                 if (primaryConstructor != null)
                 {
                     foreach (var parameter in primaryConstructor.Parameters)
                     {
-                        if (includeMemberType(parameter.Type) &&
-                            !IsAssignedToFieldOrProperty(fields, properties, parameter))
+                        if (
+                            includeMemberType(parameter.Type)
+                            && !IsAssignedToFieldOrProperty(fields, properties, parameter)
+                        )
                         {
                             result.Add(parameter);
                         }
@@ -65,8 +78,13 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 return result.ToImmutable();
             }
 
-            bool IsAssignedToFieldOrProperty(ImmutableArray<IFieldSymbol> fields, ImmutableArray<IPropertySymbol> properties, IParameterSymbol parameter)
-                => fields.Any(f => IsAssignedToField(f, parameter)) || properties.Any(p => IsAssignedToProperty(p, parameter));
+            bool IsAssignedToFieldOrProperty(
+                ImmutableArray<IFieldSymbol> fields,
+                ImmutableArray<IPropertySymbol> properties,
+                IParameterSymbol parameter
+            ) =>
+                fields.Any(f => IsAssignedToField(f, parameter))
+                || properties.Any(p => IsAssignedToProperty(p, parameter));
 
             bool IsAssignedToField(IFieldSymbol field, IParameterSymbol parameter)
             {
@@ -75,7 +93,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     var declarator = syntaxRef.GetSyntax(cancellationToken);
                     if (syntaxFacts.IsVariableDeclarator(declarator))
                     {
-                        var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(declarator);
+                        var initializer = syntaxFacts.GetInitializerOfVariableDeclarator(
+                            declarator
+                        );
                         if (InitializerReferencesParameter(initializer, parameter))
                             return true;
                     }
@@ -91,7 +111,9 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     var declarator = syntaxRef.GetSyntax(cancellationToken);
                     if (syntaxFacts.IsPropertyDeclaration(declarator))
                     {
-                        var initializer = syntaxFacts.GetInitializerOfPropertyDeclaration(declarator);
+                        var initializer = syntaxFacts.GetInitializerOfPropertyDeclaration(
+                            declarator
+                        );
                         if (InitializerReferencesParameter(initializer, parameter))
                             return true;
                     }

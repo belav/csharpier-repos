@@ -12,7 +12,9 @@ namespace System.Runtime
     abstract class ActionItem
     {
 #if FEATURE_COMPRESSEDSTACK
-        [Fx.Tag.SecurityNote(Critical = "Stores the security context, used later in binding back into")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Stores the security context, used later in binding back into"
+        )]
         [SecurityCritical]
         SecurityContext context;
 #endif
@@ -20,36 +22,33 @@ namespace System.Runtime
 
         bool lowPriority;
 
-        protected ActionItem()
-        {
-        }
+        protected ActionItem() { }
 
         public bool LowPriority
         {
-            get
-            {
-                return this.lowPriority;
-            }
-            protected set
-            {
-                this.lowPriority = value;
-            }
+            get { return this.lowPriority; }
+            protected set { this.lowPriority = value; }
         }
 
         public static void Schedule(Action<object> callback, object state)
         {
             Schedule(callback, state, false);
         }
-        [Fx.Tag.SecurityNote(Critical = "Calls into critical method ScheduleCallback",
-            Safe = "Schedule invoke of the given delegate under the current context")]
+
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into critical method ScheduleCallback",
+            Safe = "Schedule invoke of the given delegate under the current context"
+        )]
         [SecuritySafeCritical]
         public static void Schedule(Action<object> callback, object state, bool lowPriority)
         {
             Fx.Assert(callback != null, "A null callback was passed for Schedule!");
 
-            if (PartialTrustHelpers.ShouldFlowSecurityContext ||
-                WaitCallbackActionItem.ShouldUseActivity ||
-                Fx.Trace.IsEnd2EndActivityTracingEnabled)
+            if (
+                PartialTrustHelpers.ShouldFlowSecurityContext
+                || WaitCallbackActionItem.ShouldUseActivity
+                || Fx.Trace.IsEnd2EndActivityTracingEnabled
+            )
             {
                 new DefaultActionItem(callback, state, lowPriority).Schedule();
             }
@@ -59,22 +58,28 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Called after applying the user context on the stack or (potentially) " +
-            "without any user context on the stack")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Called after applying the user context on the stack or (potentially) "
+                + "without any user context on the stack"
+        )]
         [SecurityCritical]
         protected abstract void Invoke();
 
-        [Fx.Tag.SecurityNote(Critical = "Access critical field context and critical property " +
-            "CallbackHelper.InvokeWithContextCallback, calls into critical method " +
-            "PartialTrustHelpers.CaptureSecurityContextNoIdentityFlow, calls into critical method ScheduleCallback; " +
-            "since the invoked method and the capturing of the security contex are de-coupled, can't " +
-            "be treated as safe")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access critical field context and critical property "
+                + "CallbackHelper.InvokeWithContextCallback, calls into critical method "
+                + "PartialTrustHelpers.CaptureSecurityContextNoIdentityFlow, calls into critical method ScheduleCallback; "
+                + "since the invoked method and the capturing of the security contex are de-coupled, can't "
+                + "be treated as safe"
+        )]
         [SecurityCritical]
         protected void Schedule()
         {
             if (isScheduled)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
+                );
             }
 
             this.isScheduled = true;
@@ -93,10 +98,13 @@ namespace System.Runtime
                 ScheduleCallback(CallbackHelper.InvokeWithoutContextCallback);
             }
         }
+
 #if FEATURE_COMPRESSEDSTACK
-        [Fx.Tag.SecurityNote(Critical = "Access critical field context and critical property " +
-            "CallbackHelper.InvokeWithContextCallback, calls into critical method ScheduleCallback; " +
-            "since nothing is known about the given context, can't be treated as safe")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access critical field context and critical property "
+                + "CallbackHelper.InvokeWithContextCallback, calls into critical method ScheduleCallback; "
+                + "since nothing is known about the given context, can't be treated as safe"
+        )]
         [SecurityCritical]
         protected void ScheduleWithContext(SecurityContext context)
         {
@@ -106,7 +114,9 @@ namespace System.Runtime
             }
             if (isScheduled)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
+                );
             }
 
             this.isScheduled = true;
@@ -115,22 +125,28 @@ namespace System.Runtime
         }
 #endif
 
-        [Fx.Tag.SecurityNote(Critical = "Access critical property CallbackHelper.InvokeWithoutContextCallback, " +
-            "Calls into critical method ScheduleCallback; not bound to a security context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access critical property CallbackHelper.InvokeWithoutContextCallback, "
+                + "Calls into critical method ScheduleCallback; not bound to a security context"
+        )]
         [SecurityCritical]
         protected void ScheduleWithoutContext()
         {
             if (isScheduled)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(InternalSR.ActionItemIsAlreadyScheduled)
+                );
             }
 
             this.isScheduled = true;
             ScheduleCallback(CallbackHelper.InvokeWithoutContextCallback);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into critical methods IOThreadScheduler.ScheduleCallbackNoFlow, " +
-            "IOThreadScheduler.ScheduleCallbackLowPriNoFlow")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into critical methods IOThreadScheduler.ScheduleCallbackNoFlow, "
+                + "IOThreadScheduler.ScheduleCallbackLowPriNoFlow"
+        )]
         [SecurityCritical]
         static void ScheduleCallback(Action<object> callback, object state, bool lowPriority)
         {
@@ -144,18 +160,25 @@ namespace System.Runtime
                 IOThreadScheduler.ScheduleCallbackNoFlow(callback, state);
             }
         }
+
 #if FEATURE_COMPRESSEDSTACK
-        [Fx.Tag.SecurityNote(Critical = "Extract the security context stored and reset the critical field")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Extract the security context stored and reset the critical field"
+        )]
         [SecurityCritical]
         SecurityContext ExtractContext()
         {
-            Fx.Assert(this.context != null, "Cannot bind to a null context; context should have been set by now");
+            Fx.Assert(
+                this.context != null,
+                "Cannot bind to a null context; context should have been set by now"
+            );
             Fx.Assert(this.isScheduled, "Context is extracted only while the object is scheduled");
             SecurityContext result = this.context;
             this.context = null;
             return result;
         }
 #endif
+
         [Fx.Tag.SecurityNote(Critical = "Calls into critical static method ScheduleCallback")]
         [SecurityCritical]
         void ScheduleCallback(Action<object> callback)
@@ -170,14 +193,18 @@ namespace System.Runtime
             [Fx.Tag.SecurityNote(Critical = "Stores a delegate to a critical method")]
             static Action<object> invokeWithContextCallback;
 #endif
+
             [Fx.Tag.SecurityNote(Critical = "Stores a delegate to a critical method")]
             static Action<object> invokeWithoutContextCallback;
+
             [Fx.Tag.SecurityNote(Critical = "Stores a delegate to a critical method")]
             static ContextCallback onContextAppliedCallback;
 
 #if FEATURE_COMPRESSEDSTACK
-            [Fx.Tag.SecurityNote(Critical = "Provides access to a critical field; Initialize it with " +
-                "a delegate to a critical method")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Provides access to a critical field; Initialize it with "
+                    + "a delegate to a critical method"
+            )]
             public static Action<object> InvokeWithContextCallback
             {
                 get
@@ -190,8 +217,11 @@ namespace System.Runtime
                 }
             }
 #endif
-            [Fx.Tag.SecurityNote(Critical = "Provides access to a critical field; Initialize it with " +
-                "a delegate to a critical method")]
+
+            [Fx.Tag.SecurityNote(
+                Critical = "Provides access to a critical field; Initialize it with "
+                    + "a delegate to a critical method"
+            )]
             public static Action<object> InvokeWithoutContextCallback
             {
                 get
@@ -203,8 +233,11 @@ namespace System.Runtime
                     return invokeWithoutContextCallback;
                 }
             }
-            [Fx.Tag.SecurityNote(Critical = "Provides access to a critical field; Initialize it with " +
-                "a delegate to a critical method")]
+
+            [Fx.Tag.SecurityNote(
+                Critical = "Provides access to a critical field; Initialize it with "
+                    + "a delegate to a critical method"
+            )]
             public static ContextCallback OnContextAppliedCallback
             {
                 get
@@ -216,20 +249,27 @@ namespace System.Runtime
                     return onContextAppliedCallback;
                 }
             }
+
 #if FEATURE_COMPRESSEDSTACK
-            [Fx.Tag.SecurityNote(Critical = "Called by the scheduler without any user context on the stack")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Called by the scheduler without any user context on the stack"
+            )]
             static void InvokeWithContext(object state)
             {
                 SecurityContext context = ((ActionItem)state).ExtractContext();
                 SecurityContext.Run(context, OnContextAppliedCallback, state);
             }
 #endif
-            [Fx.Tag.SecurityNote(Critical = "Called by the scheduler without any user context on the stack")]
+
+            [Fx.Tag.SecurityNote(
+                Critical = "Called by the scheduler without any user context on the stack"
+            )]
             static void InvokeWithoutContext(object state)
             {
                 ((ActionItem)state).Invoke();
                 ((ActionItem)state).isScheduled = false;
             }
+
             [Fx.Tag.SecurityNote(Critical = "Called after applying the user context on the stack")]
             static void OnContextApplied(object o)
             {
@@ -240,11 +280,16 @@ namespace System.Runtime
 
         class DefaultActionItem : ActionItem
         {
-            [Fx.Tag.SecurityNote(Critical = "Stores a delegate that will be called later, at a particular context")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Stores a delegate that will be called later, at a particular context"
+            )]
             [SecurityCritical]
             Action<object> callback;
-            [Fx.Tag.SecurityNote(Critical = "Stores an object that will be passed to the delegate that will be " +
-                "called later, at a particular context")]
+
+            [Fx.Tag.SecurityNote(
+                Critical = "Stores an object that will be passed to the delegate that will be "
+                    + "called later, at a particular context"
+            )]
             [SecurityCritical]
             object state;
 
@@ -252,12 +297,17 @@ namespace System.Runtime
             Guid activityId;
             EventTraceActivity eventTraceActivity;
 
-            [Fx.Tag.SecurityNote(Critical = "Access critical fields callback and state",
-                Safe = "Doesn't leak information or resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical fields callback and state",
+                Safe = "Doesn't leak information or resources"
+            )]
             [SecuritySafeCritical]
             public DefaultActionItem(Action<object> callback, object state, bool isLowPriority)
             {
-                Fx.Assert(callback != null, "Shouldn't instantiate an object to wrap a null callback");
+                Fx.Assert(
+                    callback != null,
+                    "Shouldn't instantiate an object to wrap a null callback"
+                );
                 base.LowPriority = isLowPriority;
                 this.callback = callback;
                 this.state = state;
@@ -274,11 +324,12 @@ namespace System.Runtime
                         TraceCore.ActionItemScheduled(Fx.Trace, this.eventTraceActivity);
                     }
                 }
-
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Implements a the critical abstract ActionItem.Invoke method, " +
-                "Access critical fields callback and state")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Implements a the critical abstract ActionItem.Invoke method, "
+                    + "Access critical fields callback and state"
+            )]
             [SecurityCritical]
             protected override void Invoke()
             {
@@ -292,8 +343,10 @@ namespace System.Runtime
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Implements a the critical abstract Trace method, " +
-                    "Access critical fields callback and state")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Implements a the critical abstract Trace method, "
+                    + "Access critical fields callback and state"
+            )]
             [SecurityCritical]
             void TraceAndInvoke()
             {
@@ -321,10 +374,14 @@ namespace System.Runtime
                         {
                             previous = Trace.CorrelationManager.ActivityId;
                             restoreActivityId = true;
-                            Trace.CorrelationManager.ActivityId = this.eventTraceActivity.ActivityId;
+                            Trace.CorrelationManager.ActivityId =
+                                this.eventTraceActivity.ActivityId;
                             if (TraceCore.ActionItemCallbackInvokedIsEnabled(Fx.Trace))
                             {
-                                TraceCore.ActionItemCallbackInvoked(Fx.Trace, this.eventTraceActivity);
+                                TraceCore.ActionItemCallbackInvoked(
+                                    Fx.Trace,
+                                    this.eventTraceActivity
+                                );
                             }
                         }
                         this.callback(this.state);

@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
+using Xunit;
 
 #pragma warning disable 0067
 
@@ -33,7 +33,6 @@ namespace System.Reflection.Tests
             VerifyEvent(typeof(TypeInfoEventBaseClass).Project(), "NoSuchEvent", false);
         }
 
-
         // Verify Declared events for a Derived class
         [Fact]
         public static void TestDerivedClassEvents1()
@@ -41,14 +40,12 @@ namespace System.Reflection.Tests
             VerifyEvent(typeof(TypeInfoEventSubClass).Project(), "EventPublicNew", true);
         }
 
-
         // Verify Declared events for a Derived class
         [Fact]
         public static void TestDerivedClassEvents2()
         {
             VerifyEvent(typeof(TypeInfoEventSubClass).Project(), "EventPublic", true);
         }
-
 
         // Verify Declared events for a Derived class
         [Fact]
@@ -72,22 +69,32 @@ namespace System.Reflection.Tests
             }
 
             if (expected)
-                Assert.True(found, string.Format("Failed!! to find event {0} in type {1}", eventName, t));
+                Assert.True(
+                    found,
+                    string.Format("Failed!! to find event {0} in type {1}", eventName, t)
+                );
             else
-                Assert.False(found, string.Format("Failed!! found an unexpected event {0} in type {1}", eventName, t));
+                Assert.False(
+                    found,
+                    string.Format(
+                        "Failed!! found an unexpected event {0} in type {1}",
+                        eventName,
+                        t
+                    )
+                );
         }
     }
 
     //Metadata for Reflection
     public class TypeInfoEventBaseClass
     {
-        public event EventHandler EventPublic;     // inherited
+        public event EventHandler EventPublic; // inherited
         public static event EventHandler EventPublicStatic;
     }
 
     public class TypeInfoEventSubClass : TypeInfoEventBaseClass
     {
         public new event EventHandler EventPublic; //overrides event
-        public event EventHandler EventPublicNew;  // new event
+        public event EventHandler EventPublicNew; // new event
     }
 }

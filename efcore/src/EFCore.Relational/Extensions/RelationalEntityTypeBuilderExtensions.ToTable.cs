@@ -22,9 +22,7 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static EntityTypeBuilder ToTable(
-        this EntityTypeBuilder entityTypeBuilder,
-        string? name)
+    public static EntityTypeBuilder ToTable(this EntityTypeBuilder entityTypeBuilder, string? name)
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -45,7 +43,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder ToTable(
         this EntityTypeBuilder entityTypeBuilder,
-        Action<TableBuilder> buildAction)
+        Action<TableBuilder> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -67,7 +66,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder ToTable(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        Action<TableBuilder> buildAction)
+        Action<TableBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(buildAction, nameof(buildAction));
@@ -91,9 +91,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        string? name)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name);
+        string? name
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -107,7 +108,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
-        Action<TableBuilder<TEntity>> buildAction)
+        Action<TableBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         Check.NotNull(buildAction, nameof(buildAction));
@@ -137,9 +139,9 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        Action<TableBuilder<TEntity>> buildAction)
-        where TEntity : class
-        => ToTable(entityTypeBuilder, name, null, buildAction);
+        Action<TableBuilder<TEntity>> buildAction
+    )
+        where TEntity : class => ToTable(entityTypeBuilder, name, null, buildAction);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -154,7 +156,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder ToTable(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        string? schema)
+        string? schema
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -179,7 +182,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder entityTypeBuilder,
         string name,
         string? schema,
-        Action<TableBuilder> buildAction)
+        Action<TableBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -187,7 +191,12 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         entityTypeBuilder.Metadata.SetTableName(name);
         entityTypeBuilder.Metadata.SetSchema(schema);
-        buildAction(new TableBuilder(StoreObjectIdentifier.Table(name, entityTypeBuilder.Metadata.GetSchema()), entityTypeBuilder));
+        buildAction(
+            new TableBuilder(
+                StoreObjectIdentifier.Table(name, entityTypeBuilder.Metadata.GetSchema()),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -206,9 +215,10 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        string? schema)
-        where TEntity : class
-        => (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name, schema);
+        string? schema
+    )
+        where TEntity : class =>
+        (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name, schema);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -226,7 +236,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string? schema,
-        Action<TableBuilder<TEntity>> buildAction)
+        Action<TableBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         Check.NotNull(name, nameof(name));
@@ -236,7 +247,11 @@ public static partial class RelationalEntityTypeBuilderExtensions
         entityTypeBuilder.Metadata.SetTableName(name);
         entityTypeBuilder.Metadata.SetSchema(schema);
         buildAction(
-            new TableBuilder<TEntity>(StoreObjectIdentifier.Table(name, entityTypeBuilder.Metadata.GetSchema()), entityTypeBuilder));
+            new TableBuilder<TEntity>(
+                StoreObjectIdentifier.Table(name, entityTypeBuilder.Metadata.GetSchema()),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -252,7 +267,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder ToTable(
         this OwnedNavigationBuilder ownedNavigationBuilder,
-        string? name)
+        string? name
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -273,7 +289,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static OwnedNavigationBuilder ToTable(
         this OwnedNavigationBuilder ownedNavigationBuilder,
-        Action<OwnedNavigationTableBuilder> buildAction)
+        Action<OwnedNavigationTableBuilder> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -293,15 +310,24 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="buildAction">An action that performs configuration of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
-        Action<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
-        buildAction(new OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>(null, ownedNavigationBuilder));
+        buildAction(
+            new OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>(
+                null,
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -317,12 +343,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
-        string? name)
+        string? name
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)((OwnedNavigationBuilder)ownedNavigationBuilder).ToTable(name);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ((OwnedNavigationBuilder)ownedNavigationBuilder).ToTable(name);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -337,14 +368,20 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder ToTable(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationTableBuilder> buildAction)
+        Action<OwnedNavigationTableBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(buildAction, nameof(buildAction));
 
         ownedNavigationBuilder.OwnedEntityType.SetTableName(name);
         ownedNavigationBuilder.OwnedEntityType.SetSchema(null);
-        buildAction(new OwnedNavigationTableBuilder(StoreObjectIdentifier.Table(name), ownedNavigationBuilder));
+        buildAction(
+            new OwnedNavigationTableBuilder(
+                StoreObjectIdentifier.Table(name),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -361,13 +398,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the table.</param>
     /// <param name="buildAction">An action that performs configuration of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => ToTable(ownedNavigationBuilder, name, null, buildAction);
+        where TDependentEntity : class => ToTable(ownedNavigationBuilder, name, null, buildAction);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -382,7 +422,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder ToTable(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        string? schema)
+        string? schema
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -408,7 +449,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationTableBuilder> buildAction)
+        Action<OwnedNavigationTableBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -418,7 +460,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
         ownedNavigationBuilder.OwnedEntityType.SetSchema(schema);
         buildAction(
             new OwnedNavigationTableBuilder(
-                StoreObjectIdentifier.Table(name, ownedNavigationBuilder.OwnedEntityType.GetSchema()), ownedNavigationBuilder));
+                StoreObjectIdentifier.Table(
+                    name,
+                    ownedNavigationBuilder.OwnedEntityType.GetSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -435,14 +483,18 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the table.</param>
     /// <param name="schema">The schema of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        string? schema)
+        string? schema
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)((OwnedNavigationBuilder)ownedNavigationBuilder).ToTable(
-            name, schema);
+        where TDependentEntity : class =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ((OwnedNavigationBuilder)ownedNavigationBuilder).ToTable(name, schema);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -457,11 +509,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="schema">The schema of the table.</param>
     /// <param name="buildAction">An action that performs configuration of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -473,7 +529,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
         ownedNavigationBuilder.OwnedEntityType.SetSchema(schema);
         buildAction(
             new OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>(
-                StoreObjectIdentifier.Table(name, ownedNavigationBuilder.OwnedEntityType.GetSchema()), ownedNavigationBuilder));
+                StoreObjectIdentifier.Table(
+                    name,
+                    ownedNavigationBuilder.OwnedEntityType.GetSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -492,8 +554,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder SplitToTable(
         this EntityTypeBuilder entityTypeBuilder,
         string name,
-        Action<SplitTableBuilder> buildAction)
-        => entityTypeBuilder.SplitToTable(name, null, buildAction);
+        Action<SplitTableBuilder> buildAction
+    ) => entityTypeBuilder.SplitToTable(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different table.
@@ -510,9 +572,9 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> SplitToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
-        Action<SplitTableBuilder<TEntity>> buildAction)
-        where TEntity : class
-        => entityTypeBuilder.SplitToTable(name, null, buildAction);
+        Action<SplitTableBuilder<TEntity>> buildAction
+    )
+        where TEntity : class => entityTypeBuilder.SplitToTable(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different table.
@@ -530,7 +592,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder entityTypeBuilder,
         string name,
         string? schema,
-        Action<SplitTableBuilder> buildAction)
+        Action<SplitTableBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -538,7 +601,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new SplitTableBuilder(
-                StoreObjectIdentifier.Table(name, schema ?? entityTypeBuilder.Metadata.GetDefaultSchema()), entityTypeBuilder));
+                StoreObjectIdentifier.Table(
+                    name,
+                    schema ?? entityTypeBuilder.Metadata.GetDefaultSchema()
+                ),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -560,7 +629,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string? schema,
-        Action<SplitTableBuilder<TEntity>> buildAction)
+        Action<SplitTableBuilder<TEntity>> buildAction
+    )
         where TEntity : class
     {
         Check.NotNull(name, nameof(name));
@@ -569,7 +639,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new SplitTableBuilder<TEntity>(
-                StoreObjectIdentifier.Table(name, schema ?? entityTypeBuilder.Metadata.GetDefaultSchema()), entityTypeBuilder));
+                StoreObjectIdentifier.Table(
+                    name,
+                    schema ?? entityTypeBuilder.Metadata.GetDefaultSchema()
+                ),
+                entityTypeBuilder
+            )
+        );
 
         return entityTypeBuilder;
     }
@@ -588,8 +664,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static OwnedNavigationBuilder SplitToTable(
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationSplitTableBuilder> buildAction)
-        => ownedNavigationBuilder.SplitToTable(name, null, buildAction);
+        Action<OwnedNavigationSplitTableBuilder> buildAction
+    ) => ownedNavigationBuilder.SplitToTable(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different table.
@@ -604,13 +680,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="name">The name of the table.</param>
     /// <param name="buildAction">An action that performs configuration of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
-        Action<OwnedNavigationSplitTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationSplitTableBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
-        where TDependentEntity : class
-        => ownedNavigationBuilder.SplitToTable(name, null, buildAction);
+        where TDependentEntity : class =>
+        ownedNavigationBuilder.SplitToTable(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different table.
@@ -628,7 +708,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this OwnedNavigationBuilder ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationSplitTableBuilder> buildAction)
+        Action<OwnedNavigationSplitTableBuilder> buildAction
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -636,8 +717,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new OwnedNavigationSplitTableBuilder(
-                StoreObjectIdentifier.Table(name, schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultSchema()),
-                ownedNavigationBuilder));
+                StoreObjectIdentifier.Table(
+                    name,
+                    schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -656,11 +742,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <param name="schema">The schema of the table.</param>
     /// <param name="buildAction">An action that performs configuration of the table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToTable<TOwnerEntity, TDependentEntity>(
+    public static OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> SplitToTable<
+        TOwnerEntity,
+        TDependentEntity
+    >(
         this OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder,
         string name,
         string? schema,
-        Action<OwnedNavigationSplitTableBuilder<TOwnerEntity, TDependentEntity>> buildAction)
+        Action<OwnedNavigationSplitTableBuilder<TOwnerEntity, TDependentEntity>> buildAction
+    )
         where TOwnerEntity : class
         where TDependentEntity : class
     {
@@ -670,8 +760,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
 
         buildAction(
             new OwnedNavigationSplitTableBuilder<TOwnerEntity, TDependentEntity>(
-                StoreObjectIdentifier.Table(name, schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultSchema()),
-                ownedNavigationBuilder));
+                StoreObjectIdentifier.Table(
+                    name,
+                    schema ?? ownedNavigationBuilder.OwnedEntityType.GetDefaultSchema()
+                ),
+                ownedNavigationBuilder
+            )
+        );
 
         return ownedNavigationBuilder;
     }
@@ -691,7 +786,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToTable(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetTable(name, fromDataAnnotation))
         {
@@ -719,10 +815,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        if (!entityTypeBuilder.CanSetTable(name, fromDataAnnotation)
-            || !entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation))
+        if (
+            !entityTypeBuilder.CanSetTable(name, fromDataAnnotation)
+            || !entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation)
+        )
         {
             return null;
         }
@@ -746,11 +845,16 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetTable(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
-        return entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.TableName, name, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.TableName,
+            name,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -768,7 +872,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static IConventionEntityTypeBuilder? ToSchema(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!entityTypeBuilder.CanSetSchema(schema, fromDataAnnotation))
         {
@@ -793,10 +898,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static bool CanSetSchema(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(schema, nameof(schema));
 
-        return entityTypeBuilder.CanSetAnnotation(RelationalAnnotationNames.Schema, schema, fromDataAnnotation);
+        return entityTypeBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.Schema,
+            schema,
+            fromDataAnnotation
+        );
     }
 }

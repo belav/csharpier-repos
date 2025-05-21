@@ -10,10 +10,10 @@ public class GitHub_10714
 {
     const int Passed = 100;
     const int Failed = 0;
-    
+
     static int intToExchange = -1;
     static short innerShort = 2;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Test() => Interlocked.Exchange(ref intToExchange, innerShort);
 

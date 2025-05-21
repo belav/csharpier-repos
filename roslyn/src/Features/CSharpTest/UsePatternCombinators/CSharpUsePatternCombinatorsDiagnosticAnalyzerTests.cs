@@ -20,36 +20,62 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
-    public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions CSharp9 = TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp9 =
+            TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
 
-        private static readonly OptionsCollection s_disabled = new OptionsCollection(LanguageNames.CSharp)
+        private static readonly OptionsCollection s_disabled = new OptionsCollection(
+            LanguageNames.CSharp
+        )
         {
-            { CSharpCodeStyleOptions.PreferPatternMatching, new CodeStyleOption2<bool>(false, NotificationOption2.None) }
+            {
+                CSharpCodeStyleOptions.PreferPatternMatching,
+                new CodeStyleOption2<bool>(false, NotificationOption2.None)
+            },
         };
 
         public CSharpUsePatternCombinatorsDiagnosticAnalyzerTests(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUsePatternCombinatorsDiagnosticAnalyzer(), new CSharpUsePatternCombinatorsCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUsePatternCombinatorsDiagnosticAnalyzer(),
+                new CSharpUsePatternCombinatorsCodeFixProvider()
+            );
 
-        private Task TestAllMissingOnExpressionAsync(string expression, ParseOptions? parseOptions = null, bool enabled = true)
-            => TestMissingAsync(FromExpression(expression), parseOptions, enabled);
+        private Task TestAllMissingOnExpressionAsync(
+            string expression,
+            ParseOptions? parseOptions = null,
+            bool enabled = true
+        ) => TestMissingAsync(FromExpression(expression), parseOptions, enabled);
 
-        private Task TestMissingAsync(string initialMarkup, ParseOptions? parseOptions = null, bool enabled = true)
-            => TestMissingAsync(initialMarkup, new TestParameters(
-                parseOptions: parseOptions ?? CSharp9, options: enabled ? null : s_disabled));
+        private Task TestMissingAsync(
+            string initialMarkup,
+            ParseOptions? parseOptions = null,
+            bool enabled = true
+        ) =>
+            TestMissingAsync(
+                initialMarkup,
+                new TestParameters(
+                    parseOptions: parseOptions ?? CSharp9,
+                    options: enabled ? null : s_disabled
+                )
+            );
 
-        private Task TestAllAsync(string initialMarkup, string expectedMarkup)
-            => TestInRegularAndScriptAsync(initialMarkup, expectedMarkup,
-                parseOptions: CSharp9, options: null);
+        private Task TestAllAsync(string initialMarkup, string expectedMarkup) =>
+            TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions: CSharp9,
+                options: null
+            );
 
-        private Task TestAllOnExpressionAsync(string expression, string expected)
-            => TestAllAsync(FromExpression(expression), FromExpression(expected));
+        private Task TestAllOnExpressionAsync(string expression, string expected) =>
+            TestAllAsync(FromExpression(expression), FromExpression(expected));
 
         private static string FromExpression(string expression)
         {
@@ -107,7 +133,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
         [InlineData("!(o is C c)", "o is not C c")]
         [InlineData("o is int ii && o is long jj", "o is int ii and long jj")]
         [InlineData("o is string || o is Exception", "o is string or Exception")]
-        [InlineData("o is System.String || o is System.Exception", "o is System.String or System.Exception")]
+        [InlineData(
+            "o is System.String || o is System.Exception",
+            "o is System.String or System.Exception"
+        )]
         [InlineData("!(o is C)", "o is not C")]
         [InlineData("!(o is C _)", "o is not C _")]
         [InlineData("i == (0x02 | 0x04) || i != 0", "i is (0x02 | 0x04) or not 0")]
@@ -143,7 +172,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
         [Fact]
         public async Task TestMissingOnCSharp8()
         {
-            await TestAllMissingOnExpressionAsync("o == 1 || o == 2", parseOptions: TestOptions.Regular8);
+            await TestAllMissingOnExpressionAsync(
+                "o == 1 || o == 2",
+                parseOptions: TestOptions.Regular8
+            );
         }
 
         [Fact]
@@ -183,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                                not 2; /*3*/
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -223,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                             and not 2; /*3*/
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -255,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                         return v is 0 or 1 or 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/66787")]
@@ -279,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                         return (l is > int.MaxValue or < int.MinValue);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -295,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                         q.Where(item => item == 1 [||]|| item == 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52397")]
@@ -318,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52397")]
@@ -341,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/51691")]
@@ -350,7 +389,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
         public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheck(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System.Diagnostics;
+                $@"using System.Diagnostics;
 
 public class C
 {{
@@ -361,16 +400,19 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/51691")]
         [InlineData("&&")]
         [InlineData("||")]
-        public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(string logicalOperator)
+        public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(
+            string logicalOperator
+        )
         {
             await TestMissingAsync(
-$@"using System.Diagnostics;
+                $@"using System.Diagnostics;
 
 public class C
 {{
@@ -381,7 +423,8 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/51693")]
@@ -390,7 +433,7 @@ public class C
         public async Task TestMissingInPropertyAccess_IsCheckAndNullCheck(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 
 public class C
 {{
@@ -401,7 +444,8 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/52573")]
@@ -410,7 +454,7 @@ public class C
         public async Task TestMissingIntegerAndStringIndex(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 
 public class C
 {{
@@ -418,7 +462,8 @@ public class C
     {{
         return count == 1 [|{logicalOperator}|] ch[0] == 'S';
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/66787")]
@@ -436,7 +481,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/66787")]
@@ -454,7 +500,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -482,7 +529,6 @@ public class C
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -503,7 +549,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -531,7 +578,6 @@ public class C
                     }
                 }
                 """,
-
                 """
                 class C
                 {
@@ -552,7 +598,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57199")]
@@ -572,7 +619,8 @@ public class C
                     public readonly T C;
                     bool P => [|C is C.S1 || C is C.S2|];
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57199")]
@@ -595,7 +643,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57199")]
@@ -616,7 +665,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57199")]
@@ -636,7 +686,6 @@ public class C
                     bool P => [|C is C.S1 || C is C.S2|];
                 }
                 """,
-
                 """
                 static class C
                 {
@@ -649,7 +698,8 @@ public class C
                 {
                     bool P => C is C.S1 or C.S2;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/57199")]
@@ -674,7 +724,8 @@ public class C
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 public class Goo
                 {
                     private class X { }
@@ -692,7 +743,8 @@ public class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

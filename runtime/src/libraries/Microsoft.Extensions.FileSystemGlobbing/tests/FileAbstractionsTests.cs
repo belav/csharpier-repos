@@ -27,10 +27,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         [Fact]
         public void FilesAreEnumerated()
         {
-            using (var scenario = new DisposableFileSystem()
-                .CreateFile("alpha.txt"))
+            using (var scenario = new DisposableFileSystem().CreateFile("alpha.txt"))
             {
-                var contents = new DirectoryInfoWrapper(scenario.DirectoryInfo).EnumerateFileSystemInfos();
+                var contents = new DirectoryInfoWrapper(
+                    scenario.DirectoryInfo
+                ).EnumerateFileSystemInfos();
                 var alphaTxt = contents.OfType<FileInfoBase>().Single();
 
                 Assert.Single(contents);
@@ -41,10 +42,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         [Fact]
         public void FoldersAreEnumerated()
         {
-            using (var scenario = new DisposableFileSystem()
-                .CreateFolder("beta"))
+            using (var scenario = new DisposableFileSystem().CreateFolder("beta"))
             {
-                var contents1 = new DirectoryInfoWrapper(scenario.DirectoryInfo).EnumerateFileSystemInfos();
+                var contents1 = new DirectoryInfoWrapper(
+                    scenario.DirectoryInfo
+                ).EnumerateFileSystemInfos();
                 var beta = contents1.OfType<DirectoryInfoBase>().Single();
                 var contents2 = beta.EnumerateFileSystemInfos();
 
@@ -57,11 +59,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         [Fact]
         public void SubFoldersAreEnumerated()
         {
-            using (var scenario = new DisposableFileSystem()
-                .CreateFolder("beta")
-                .CreateFile(Path.Combine("beta", "alpha.txt")))
+            using (
+                var scenario = new DisposableFileSystem()
+                    .CreateFolder("beta")
+                    .CreateFile(Path.Combine("beta", "alpha.txt"))
+            )
             {
-                var contents1 = new DirectoryInfoWrapper(scenario.DirectoryInfo).EnumerateFileSystemInfos();
+                var contents1 = new DirectoryInfoWrapper(
+                    scenario.DirectoryInfo
+                ).EnumerateFileSystemInfos();
                 var beta = contents1.OfType<DirectoryInfoBase>().Single();
                 var contents2 = beta.EnumerateFileSystemInfos();
                 var alphaTxt = contents2.OfType<FileInfoBase>().Single();
@@ -76,10 +82,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
         [Fact]
         public void GetDirectoryCanTakeDotDot()
         {
-            using (var scenario = new DisposableFileSystem()
-                .CreateFolder("gamma")
-                .CreateFolder("beta")
-                .CreateFile(Path.Combine("beta", "alpha.txt")))
+            using (
+                var scenario = new DisposableFileSystem()
+                    .CreateFolder("gamma")
+                    .CreateFolder("beta")
+                    .CreateFile(Path.Combine("beta", "alpha.txt"))
+            )
             {
                 var directoryInfoBase = new DirectoryInfoWrapper(scenario.DirectoryInfo);
                 var gamma = directoryInfoBase.GetDirectory("gamma");

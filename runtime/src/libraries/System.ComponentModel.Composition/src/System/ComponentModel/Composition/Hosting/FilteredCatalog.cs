@@ -11,7 +11,9 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged
+    public partial class FilteredCatalog
+        : ComposablePartCatalog,
+            INotifyComposablePartCatalogChanged
     {
         private readonly Func<ComposablePartDefinition, bool> _filter;
         private ComposablePartCatalog _innerCatalog;
@@ -24,12 +26,17 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         /// <param name="catalog">The catalog.</param>
         /// <param name="filter">The filter.</param>
-        public FilteredCatalog(ComposablePartCatalog catalog, Func<ComposablePartDefinition, bool> filter) :
-            this(catalog, filter, null)
-        {
-        }
+        public FilteredCatalog(
+            ComposablePartCatalog catalog,
+            Func<ComposablePartDefinition, bool> filter
+        )
+            : this(catalog, filter, null) { }
 
-        internal FilteredCatalog(ComposablePartCatalog catalog, Func<ComposablePartDefinition, bool> filter, FilteredCatalog? complement)
+        internal FilteredCatalog(
+            ComposablePartCatalog catalog,
+            Func<ComposablePartDefinition, bool> filter,
+            FilteredCatalog? complement
+        )
         {
             Requires.NotNull(catalog, nameof(catalog));
             Requires.NotNull(filter, nameof(filter));
@@ -65,7 +72,8 @@ namespace System.ComponentModel.Composition.Hosting
                                 if (!_isDisposed)
                                 {
                                     _isDisposed = true;
-                                    notifyCatalog = _innerCatalog as INotifyComposablePartCatalogChanged;
+                                    notifyCatalog =
+                                        _innerCatalog as INotifyComposablePartCatalogChanged;
                                     _innerCatalog = null!;
                                 }
                             }
@@ -104,7 +112,11 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (_complement == null)
                 {
-                    FilteredCatalog? complement = new FilteredCatalog(_innerCatalog, p => !_filter(p), this);
+                    FilteredCatalog? complement = new FilteredCatalog(
+                        _innerCatalog,
+                        p => !_filter(p),
+                        this
+                    );
                     lock (_lock)
                     {
                         if (_complement == null)
@@ -146,7 +158,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         /// </note>
         /// </remarks>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             ThrowIfDisposed();
             Requires.NotNull(definition, nameof(definition));
@@ -209,13 +223,16 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private ComposablePartCatalogChangeEventArgs? ProcessEventArgs(ComposablePartCatalogChangeEventArgs e)
+        private ComposablePartCatalogChangeEventArgs? ProcessEventArgs(
+            ComposablePartCatalogChangeEventArgs e
+        )
         {
             // the constructor for ComposablePartCatalogChangeEventArgs takes a snapshot of the arguments, so we don't have to
             var result = new ComposablePartCatalogChangeEventArgs(
                 e.AddedDefinitions.Where(_filter),
                 e.RemovedDefinitions.Where(_filter),
-                e.AtomicComposition);
+                e.AtomicComposition
+            );
 
             // Only fire if we need to
             if (result.AddedDefinitions.Any() || result.RemovedDefinitions.Any())

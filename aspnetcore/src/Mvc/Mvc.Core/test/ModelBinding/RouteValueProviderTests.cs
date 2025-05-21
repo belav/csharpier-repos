@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Globalization;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Routing;
 
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
@@ -13,10 +13,9 @@ public class RouteValueProviderTests
     public void GetValueProvider_ReturnsNull_WhenKeyIsNotFound()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", "value" }
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", "value" } }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -30,10 +29,9 @@ public class RouteValueProviderTests
     public void GetValueProvider_ReturnsValue_IfKeyIsPresent()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", "test-value" }
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", "test-value" } }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -48,10 +46,12 @@ public class RouteValueProviderTests
     public void GetValueProvider_ReturnsValue_UsesInvariantCulture()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object>
             {
                 { "test-key", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)) },
-            });
+            }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -65,11 +65,17 @@ public class RouteValueProviderTests
     public void GetValueProvider_ReturnsValue_UsesSpecifiedCulture()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object>
             {
                 { "test-key", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)) },
-            });
-        var provider = new RouteValueProvider(BindingSource.Query, values, new CultureInfo("de-CH"));
+            }
+        );
+        var provider = new RouteValueProvider(
+            BindingSource.Query,
+            values,
+            new CultureInfo("de-CH")
+        );
         // The formatting was changed in netcoreapp3.0 to be consistent across platforms.
         var expected = "31.10.2018 07:37:38 -07:00";
 
@@ -84,10 +90,9 @@ public class RouteValueProviderTests
     public void ContainsPrefix_ReturnsNullValue_IfKeyIsPresent()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", null }
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", null } }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -101,10 +106,9 @@ public class RouteValueProviderTests
     public void GetValue_ReturnsValue_WithDefaultCulture()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", "test-value"}
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", "test-value" } }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -118,10 +122,9 @@ public class RouteValueProviderTests
     public void GetValue_ReturnsValue_WithCulture()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", "test-value"}
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", "test-value" } }
+        );
         var culture = new CultureInfo("fr-FR");
         var provider = new RouteValueProvider(BindingSource.Query, values, culture);
 
@@ -139,11 +142,9 @@ public class RouteValueProviderTests
     public void ContainsPrefix_ReturnsTrue_ForKnownPrefixes(string prefix)
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "foo", 1 },
-                { "bar.baz", 1 },
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "foo", 1 }, { "bar.baz", 1 } }
+        );
 
         var valueProvider = new RouteValueProvider(BindingSource.Query, values);
 
@@ -160,11 +161,9 @@ public class RouteValueProviderTests
     public void GetValue_ReturnsCorrectValue_ForKnownKeys(string prefix, string expectedValue)
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "bar", 1 },
-                { "bar.baz", 2 },
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "bar", 1 }, { "bar.baz", 2 } }
+        );
 
         var valueProvider = new RouteValueProvider(BindingSource.Query, values);
 
@@ -179,10 +178,7 @@ public class RouteValueProviderTests
     public void GetValue_DoesNotReturnAValue_ForAKeyPrefix()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "bar.baz", 2 },
-            });
+        var values = new RouteValueDictionary(new Dictionary<string, object> { { "bar.baz", 2 } });
 
         var valueProvider = new RouteValueProvider(BindingSource.Query, values);
 
@@ -197,10 +193,9 @@ public class RouteValueProviderTests
     public void ContainsPrefix_ReturnsFalse_IfKeyIsNotPresent()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", "test-value" }
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", "test-value" } }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -214,10 +209,9 @@ public class RouteValueProviderTests
     public void ContainsPrefix_ReturnsTrue_IfKeyIsPresent()
     {
         // Arrange
-        var values = new RouteValueDictionary(new Dictionary<string, object>
-            {
-                { "test-key", "test-value" }
-            });
+        var values = new RouteValueDictionary(
+            new Dictionary<string, object> { { "test-key", "test-value" } }
+        );
         var provider = new RouteValueProvider(BindingSource.Query, values);
 
         // Act
@@ -238,7 +232,8 @@ public class RouteValueProviderTests
             BindingSource.Query.Id,
             displayName: null,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         // Act
         var result = provider.Filter(bindingSource);
@@ -259,7 +254,8 @@ public class RouteValueProviderTests
             "Test",
             displayName: null,
             isGreedy: true,
-            isFromRequest: true);
+            isFromRequest: true
+        );
 
         // Act
         var result = provider.Filter(bindingSource);

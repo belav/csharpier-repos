@@ -13,9 +13,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 public class ReadableJsonConfigurationProvider : JsonConfigurationProvider
 {
     public ReadableJsonConfigurationProvider()
-        : base(new JsonConfigurationSource())
-    {
-    }
+        : base(new JsonConfigurationSource()) { }
 
     public IDictionary<string, string> CurrentData => Data;
 }

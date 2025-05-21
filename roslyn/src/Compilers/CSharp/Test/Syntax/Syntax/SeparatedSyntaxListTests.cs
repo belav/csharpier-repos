@@ -22,26 +22,38 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var node1 = SyntaxFactory.Parameter(SyntaxFactory.Identifier("a"));
             var node2 = SyntaxFactory.Parameter(SyntaxFactory.Identifier("b"));
 
-            EqualityTesting.AssertEqual(default(SeparatedSyntaxList<CSharpSyntaxNode>), default(SeparatedSyntaxList<CSharpSyntaxNode>));
+            EqualityTesting.AssertEqual(
+                default(SeparatedSyntaxList<CSharpSyntaxNode>),
+                default(SeparatedSyntaxList<CSharpSyntaxNode>)
+            );
 
             EqualityTesting.AssertEqual(
                 new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 0)),
-                new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 0)));
+                new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 0))
+            );
 
             EqualityTesting.AssertEqual(
                 new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 0)),
-                new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 1)));
+                new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 1))
+            );
 
             EqualityTesting.AssertNotEqual(
                 new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node1, 0)),
-                new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node2, 0)));
+                new SeparatedSyntaxList<CSharpSyntaxNode>(new SyntaxNodeOrTokenList(node2, 0))
+            );
         }
 
         [Fact]
         public void EnumeratorEquality()
         {
-            Assert.Throws<NotSupportedException>(() => default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode());
-            Assert.Throws<NotSupportedException>(() => default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).Equals(default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator)));
+            Assert.Throws<NotSupportedException>(() =>
+                default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode()
+            );
+            Assert.Throws<NotSupportedException>(() =>
+                default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
+                    default(SeparatedSyntaxList<CSharpSyntaxNode>.Enumerator)
+                )
+            );
         }
 
         [WorkItem(308077, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/308077")]
@@ -58,28 +70,61 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var insertAfter = addList.Insert(1, SyntaxFactory.ParseExpression("y"));
             Assert.Equal("x,y", insertAfter.ToFullString());
 
-            var insertBetween = insertAfter.InsertRange(1, new[] { SyntaxFactory.ParseExpression("a"), SyntaxFactory.ParseExpression("b"), SyntaxFactory.ParseExpression("c") });
+            var insertBetween = insertAfter.InsertRange(
+                1,
+                new[]
+                {
+                    SyntaxFactory.ParseExpression("a"),
+                    SyntaxFactory.ParseExpression("b"),
+                    SyntaxFactory.ParseExpression("c"),
+                }
+            );
             Assert.Equal("x,a,b,c,y", insertBetween.ToFullString());
 
             // inserting after a single line comment keeps separator with previous item
-            var argsWithComment = SyntaxFactory.ParseArgumentList(@"(a, // a is good
+            var argsWithComment = SyntaxFactory
+                .ParseArgumentList(
+                    @"(a, // a is good
 b // b is better
-)").Arguments;
-            var insertAfterComment = argsWithComment.Insert(1, SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c")));
-            Assert.Equal(@"a, // a is good
+)"
+                )
+                .Arguments;
+            var insertAfterComment = argsWithComment.Insert(
+                1,
+                SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c"))
+            );
+            Assert.Equal(
+                @"a, // a is good
 c,b // b is better
-", insertAfterComment.ToFullString());
+",
+                insertAfterComment.ToFullString()
+            );
 
             // inserting after a end of line trivia keeps separator with previous item
-            var argsWithEOL = SyntaxFactory.ParseArgumentList(@"(a,
-b)").Arguments;
-            var insertAfterEOL = argsWithEOL.Insert(1, SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c")));
-            Assert.Equal(@"a,
-c,b", insertAfterEOL.ToFullString());
+            var argsWithEOL = SyntaxFactory
+                .ParseArgumentList(
+                    @"(a,
+b)"
+                )
+                .Arguments;
+            var insertAfterEOL = argsWithEOL.Insert(
+                1,
+                SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c"))
+            );
+            Assert.Equal(
+                @"a,
+c,b",
+                insertAfterEOL.ToFullString()
+            );
 
             // inserting after any other trivia keeps separator with following item
-            var argsWithMultiLineComment = SyntaxFactory.ParseArgumentList("(a, /* b is best */ b)").Arguments;
-            var insertBeforeMultiLineComment = argsWithMultiLineComment.Insert(1, SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c")));
+            var argsWithMultiLineComment = SyntaxFactory
+                .ParseArgumentList("(a, /* b is best */ b)")
+                .Arguments;
+            var insertBeforeMultiLineComment = argsWithMultiLineComment.Insert(
+                1,
+                SyntaxFactory.Argument(SyntaxFactory.ParseExpression("c"))
+            );
             Assert.Equal("a,c, /* b is best */ b", insertBeforeMultiLineComment.ToFullString());
         }
 
@@ -87,10 +132,13 @@ c,b", insertAfterEOL.ToFullString());
         public void TestAddInsertRemove()
         {
             var list = SyntaxFactory.SeparatedList<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.ParseExpression("A"),
                     SyntaxFactory.ParseExpression("B"),
-                    SyntaxFactory.ParseExpression("C") });
+                    SyntaxFactory.ParseExpression("C"),
+                }
+            );
 
             Assert.Equal(3, list.Count);
             Assert.Equal("A", list[0].ToString());
@@ -213,14 +261,23 @@ c,b", insertAfterEOL.ToFullString());
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(list.Count + 1, new[] { nodeD }));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(list.Count + 1, new[] { nodeD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count + 1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Replace(nodeD, nodeE));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() => list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.ReplaceRange(nodeD, new[] { nodeE })
+            );
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact]
@@ -263,19 +320,25 @@ c,b", insertAfterEOL.ToFullString());
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(1, new[] { nodeD }));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact]
         public void Extensions()
         {
             var list = SyntaxFactory.SeparatedList<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.ParseExpression("A+B"),
                     SyntaxFactory.IdentifierName("B"),
-                    SyntaxFactory.ParseExpression("1") });
+                    SyntaxFactory.ParseExpression("1"),
+                }
+            );
 
             Assert.Equal(0, list.IndexOf(SyntaxKind.AddExpression));
             Assert.True(list.Any(SyntaxKind.AddExpression));
@@ -295,19 +358,20 @@ c,b", insertAfterEOL.ToFullString());
         public void ReplaceSeparator()
         {
             var list = SyntaxFactory.SeparatedList<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.IdentifierName("A"),
                     SyntaxFactory.IdentifierName("B"),
                     SyntaxFactory.IdentifierName("C"),
-                });
+                }
+            );
 
             var newComma = SyntaxFactory.Token(
                 SyntaxFactory.TriviaList(SyntaxFactory.Space),
                 SyntaxKind.CommaToken,
-                SyntaxFactory.TriviaList());
-            var newList = list.ReplaceSeparator(
-                list.GetSeparator(1),
-                newComma);
+                SyntaxFactory.TriviaList()
+            );
+            var newList = list.ReplaceSeparator(list.GetSeparator(1), newComma);
             Assert.Equal(3, newList.Count);
             Assert.Equal(2, newList.SeparatorCount);
             Assert.Equal(1, newList.GetSeparator(1).GetLeadingTrivia().Count);

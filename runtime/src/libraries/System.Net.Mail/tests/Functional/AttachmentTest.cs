@@ -10,8 +10,8 @@
 //
 
 using System.IO;
-using System.Text;
 using System.Net.Mime;
+using System.Text;
 using Xunit;
 
 namespace System.Net.Mail.Tests
@@ -22,13 +22,18 @@ namespace System.Net.Mail.Tests
         public void TestNullStream()
         {
             Stream s = null;
-            Assert.Throws<ArgumentNullException>(() => new Attachment(s, "application/octet-stream"));
+            Assert.Throws<ArgumentNullException>(() => new Attachment(s, "application/octet-stream")
+            );
         }
 
         [Fact]
         public void ConstructorNullName()
         {
-            Attachment attach = new Attachment(new MemoryStream(), null, "application/octet-stream");
+            Attachment attach = new Attachment(
+                new MemoryStream(),
+                null,
+                "application/octet-stream"
+            );
             Assert.Null(attach.Name);
         }
 
@@ -66,7 +71,12 @@ namespace System.Net.Mail.Tests
             {
                 const string mediaType = "application/octet-stream";
                 string shortName = Path.GetFileName(tempFile.Path);
-                using (Attachment attach = new Attachment(tempFile.Path, new Mime.ContentType(mediaType)))
+                using (
+                    Attachment attach = new Attachment(
+                        tempFile.Path,
+                        new Mime.ContentType(mediaType)
+                    )
+                )
                 {
                     Assert.Equal(shortName, attach.Name);
                     Assert.Equal(mediaType, attach.ContentType.MediaType);
@@ -77,7 +87,12 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void CreateAttachmentFromStringNullName()
         {
-            Attachment attach = Attachment.CreateAttachmentFromString("", null, Encoding.ASCII, "application/octet-stream");
+            Attachment attach = Attachment.CreateAttachmentFromString(
+                "",
+                null,
+                Encoding.ASCII,
+                "application/octet-stream"
+            );
             Assert.Null(attach.Name);
         }
 
@@ -118,7 +133,6 @@ namespace System.Net.Mail.Tests
             Assert.NotNull(attach.ContentStream);
             Assert.Equal(4, attach.ContentStream.Length);
         }
-
 
         [Fact]
         public void Name()

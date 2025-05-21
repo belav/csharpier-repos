@@ -9,11 +9,12 @@ namespace System.Web.WebPages.Razor.Configuration
     {
         public static readonly string SectionName = RazorWebSectionGroup.GroupName + "/host";
 
-        private static readonly ConfigurationProperty _typeProperty =
-            new ConfigurationProperty("factoryType",
-                                      typeof(string),
-                                      null,
-                                      ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationProperty _typeProperty = new ConfigurationProperty(
+            "factoryType",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsRequired
+        );
 
         private bool _factoryTypeSet = false;
         private string _factoryType;

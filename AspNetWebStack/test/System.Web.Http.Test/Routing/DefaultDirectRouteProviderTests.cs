@@ -19,14 +19,17 @@ namespace System.Web.Http.Routing
             // Arrange
             var factories = new[] { CreateStubRouteFactory(null) };
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => provider.GetActionDirectRoutes(action, factories, constraintResolver),
-                "IDirectRouteFactory.CreateRoute must not return null.");
+                "IDirectRouteFactory.CreateRoute must not return null."
+            );
         }
 
         [Fact]
@@ -35,14 +38,23 @@ namespace System.Web.Http.Routing
             // Arrange
             var factories = new[] { CreateStubRouteFactory(null) };
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                () => provider.GetControllerDirectRoutes(action.ControllerDescriptor, new[] { action }, factories, constraintResolver),
-                "IDirectRouteFactory.CreateRoute must not return null.");
+                () =>
+                    provider.GetControllerDirectRoutes(
+                        action.ControllerDescriptor,
+                        new[] { action },
+                        factories,
+                        constraintResolver
+                    ),
+                "IDirectRouteFactory.CreateRoute must not return null."
+            );
         }
 
         [Fact]
@@ -54,16 +66,20 @@ namespace System.Web.Http.Routing
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
-            string expectedMessage = "The route does not have any associated action descriptors. Routing requires " +
-                "that each direct route map to a non-empty set of actions.";
+            string expectedMessage =
+                "The route does not have any associated action descriptors. Routing requires "
+                + "that each direct route map to a non-empty set of actions.";
             Assert.Throws<InvalidOperationException>(
                 () => provider.GetActionDirectRoutes(action, factories, constraintResolver),
-                expectedMessage);
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -75,16 +91,26 @@ namespace System.Web.Http.Routing
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
-            string expectedMessage = "The route does not have any associated action descriptors. Routing requires " +
-                "that each direct route map to a non-empty set of actions.";
+            string expectedMessage =
+                "The route does not have any associated action descriptors. Routing requires "
+                + "that each direct route map to a non-empty set of actions.";
             Assert.Throws<InvalidOperationException>(
-                () => provider.GetControllerDirectRoutes(action.ControllerDescriptor, new[] { action }, factories, constraintResolver),
-                expectedMessage);
+                () =>
+                    provider.GetControllerDirectRoutes(
+                        action.ControllerDescriptor,
+                        new[] { action },
+                        factories,
+                        constraintResolver
+                    ),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -93,23 +119,27 @@ namespace System.Web.Http.Routing
             // Arrange
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] },
             };
             HttpRoute route = new HttpRoute(null, null, null, dataTokens);
             RouteEntry entry = new RouteEntry(name: null, route: route);
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
-            string expectedMessage = "The route does not have any associated action descriptors. Routing requires " +
-                "that each direct route map to a non-empty set of actions.";
+            string expectedMessage =
+                "The route does not have any associated action descriptors. Routing requires "
+                + "that each direct route map to a non-empty set of actions.";
             Assert.Throws<InvalidOperationException>(
                 () => provider.GetActionDirectRoutes(action, factories, constraintResolver),
-                expectedMessage);
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -118,23 +148,33 @@ namespace System.Web.Http.Routing
             // Arrange
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] },
             };
             HttpRoute route = new HttpRoute(null, null, null, dataTokens);
             RouteEntry entry = new RouteEntry(name: null, route: route);
             var factories = new[] { CreateStubRouteFactory(entry) };
 
             var action = CreateStubActionDescriptor("IgnoreAction");
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
-            string expectedMessage = "The route does not have any associated action descriptors. Routing requires " +
-                "that each direct route map to a non-empty set of actions.";
+            string expectedMessage =
+                "The route does not have any associated action descriptors. Routing requires "
+                + "that each direct route map to a non-empty set of actions.";
             Assert.Throws<InvalidOperationException>(
-                () => provider.GetControllerDirectRoutes(action.ControllerDescriptor, new[] { action }, factories, constraintResolver),
-                expectedMessage);
+                () =>
+                    provider.GetControllerDirectRoutes(
+                        action.ControllerDescriptor,
+                        new[] { action },
+                        factories,
+                        constraintResolver
+                    ),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -145,22 +185,25 @@ namespace System.Web.Http.Routing
 
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } },
             };
             HttpMessageHandler handler = new Mock<HttpMessageHandler>(MockBehavior.Strict).Object;
             HttpRoute route = new HttpRoute(null, null, null, dataTokens, handler);
             RouteEntry entry = new RouteEntry(name: null, route: route);
             var factories = new[] { CreateStubRouteFactory(entry) };
 
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
             string expectedMessage = "Direct routing does not support per-route message handlers.";
             Assert.Throws<InvalidOperationException>(
-                () => provider.GetActionDirectRoutes(action, factories, constraintResolver), 
-                expectedMessage);
+                () => provider.GetActionDirectRoutes(action, factories, constraintResolver),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -171,22 +214,31 @@ namespace System.Web.Http.Routing
 
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } },
             };
             HttpMessageHandler handler = new Mock<HttpMessageHandler>(MockBehavior.Strict).Object;
             HttpRoute route = new HttpRoute(null, null, null, dataTokens, handler);
             RouteEntry entry = new RouteEntry(name: null, route: route);
             var factories = new[] { CreateStubRouteFactory(entry) };
 
-            var constraintResolver = new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object;
+            var constraintResolver = new Mock<IInlineConstraintResolver>(
+                MockBehavior.Strict
+            ).Object;
 
             var provider = new AccessibleDirectRouteProvider();
 
             // Act & Assert
             string expectedMessage = "Direct routing does not support per-route message handlers.";
             Assert.Throws<InvalidOperationException>(
-                () => provider.GetControllerDirectRoutes(action.ControllerDescriptor, new[] { action }, factories, constraintResolver),
-                expectedMessage);
+                () =>
+                    provider.GetControllerDirectRoutes(
+                        action.ControllerDescriptor,
+                        new[] { action },
+                        factories,
+                        constraintResolver
+                    ),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -203,7 +255,8 @@ namespace System.Web.Http.Routing
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => provider.GetRoutePrefix(httpControllerDescriptor),
-                "Only one route prefix attribute is supported. Remove extra attributes from the controller of type 'Namespace.TypeFullName'.");
+                "Only one route prefix attribute is supported. Remove extra attributes from the controller of type 'Namespace.TypeFullName'."
+            );
         }
 
         [Fact]
@@ -220,12 +273,16 @@ namespace System.Web.Http.Routing
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => provider.GetRoutePrefix(httpControllerDescriptor),
-                "The property 'prefix' from route prefix attribute on controller of type 'Namespace.TypeFullName' cannot be null.");
+                "The property 'prefix' from route prefix attribute on controller of type 'Namespace.TypeFullName' cannot be null."
+            );
         }
 
         private static HttpActionDescriptor CreateStubActionDescriptor(string actionName)
         {
-            Mock<HttpActionDescriptor> mock = new Mock<HttpActionDescriptor>(MockBehavior.Strict, new Mock<HttpControllerDescriptor>().Object);
+            Mock<HttpActionDescriptor> mock = new Mock<HttpActionDescriptor>(
+                MockBehavior.Strict,
+                new Mock<HttpControllerDescriptor>().Object
+            );
             mock.SetupGet(d => d.ActionName).Returns(actionName);
             return mock.Object;
         }
@@ -241,7 +298,11 @@ namespace System.Web.Http.Routing
         {
             public override Collection<T> GetCustomAttributes<T>(bool inherit)
             {
-                object[] attributes = new object[] { new ExtendedRoutePrefixAttribute(), new RoutePrefixAttribute("Prefix") };
+                object[] attributes = new object[]
+                {
+                    new ExtendedRoutePrefixAttribute(),
+                    new RoutePrefixAttribute("Prefix"),
+                };
                 return new Collection<T>(TypeHelper.OfType<T>(attributes));
             }
         }
@@ -255,13 +316,13 @@ namespace System.Web.Http.Routing
             }
         }
 
-        private class ExtendedRoutePrefixAttribute : RoutePrefixAttribute
-        {
-        }
+        private class ExtendedRoutePrefixAttribute : RoutePrefixAttribute { }
 
         private class AccessibleDirectRouteProvider : DefaultDirectRouteProvider
         {
-            public new IReadOnlyCollection<IDirectRouteFactory> GetActionRouteFactories(HttpActionDescriptor actionDescriptor)
+            public new IReadOnlyCollection<IDirectRouteFactory> GetActionRouteFactories(
+                HttpActionDescriptor actionDescriptor
+            )
             {
                 return base.GetActionRouteFactories(actionDescriptor);
             }
@@ -270,20 +331,29 @@ namespace System.Web.Http.Routing
                 HttpControllerDescriptor controllerDescriptor,
                 IReadOnlyList<HttpActionDescriptor> actionDescriptors,
                 IReadOnlyList<IDirectRouteFactory> factories,
-                IInlineConstraintResolver constraintResolver)
+                IInlineConstraintResolver constraintResolver
+            )
             {
-                return base.GetControllerDirectRoutes(controllerDescriptor, actionDescriptors, factories, constraintResolver);
+                return base.GetControllerDirectRoutes(
+                    controllerDescriptor,
+                    actionDescriptors,
+                    factories,
+                    constraintResolver
+                );
             }
 
             public new IReadOnlyList<RouteEntry> GetActionDirectRoutes(
                 HttpActionDescriptor actionDescriptor,
                 IReadOnlyList<IDirectRouteFactory> factories,
-                IInlineConstraintResolver constraintResolver)
+                IInlineConstraintResolver constraintResolver
+            )
             {
                 return base.GetActionDirectRoutes(actionDescriptor, factories, constraintResolver);
             }
 
-            public new IReadOnlyCollection<IDirectRouteFactory> GetControllerRouteFactories(HttpControllerDescriptor controllerDescriptor)
+            public new IReadOnlyCollection<IDirectRouteFactory> GetControllerRouteFactories(
+                HttpControllerDescriptor controllerDescriptor
+            )
             {
                 return base.GetControllerRouteFactories(controllerDescriptor);
             }

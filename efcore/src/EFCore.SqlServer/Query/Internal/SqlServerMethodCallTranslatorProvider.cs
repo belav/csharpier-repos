@@ -17,7 +17,9 @@ public class SqlServerMethodCallTranslatorProvider : RelationalMethodCallTransla
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerMethodCallTranslatorProvider(RelationalMethodCallTranslatorProviderDependencies dependencies)
+    public SqlServerMethodCallTranslatorProvider(
+        RelationalMethodCallTranslatorProviderDependencies dependencies
+    )
         : base(dependencies)
     {
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
@@ -39,7 +41,8 @@ public class SqlServerMethodCallTranslatorProvider : RelationalMethodCallTransla
                 new SqlServerNewGuidTranslator(sqlExpressionFactory),
                 new SqlServerObjectToStringTranslator(sqlExpressionFactory),
                 new SqlServerStringMethodTranslator(sqlExpressionFactory),
-                new SqlServerTimeOnlyMethodTranslator(sqlExpressionFactory)
-            });
+                new SqlServerTimeOnlyMethodTranslator(sqlExpressionFactory),
+            }
+        );
     }
 }

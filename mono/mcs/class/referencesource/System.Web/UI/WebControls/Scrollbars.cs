@@ -1,18 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="Panel.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-        
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
     ///    Enum used for getting and setting the scrolling behavior of a Panel control.
     /// </devdoc>
     [Flags]
-    public enum ScrollBars {
-
+    public enum ScrollBars
+    {
         /// <devdoc>
         ///    [To be supplied.]
         /// </devdoc>
@@ -36,6 +35,6 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         ///    [To be supplied.]
         /// </devdoc>
-        Auto = 4    
+        Auto = 4,
     }
 }

@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlLabelAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
+using System.Drawing;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
-using System.Drawing;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -25,18 +25,23 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlLabelAdapter.uex' path='docs/doc[@for="HtmlLabelAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlLabelAdapter : HtmlControlAdapter
     {
         /// <include file='doc\HtmlLabelAdapter.uex' path='docs/doc[@for="HtmlLabelAdapter.Control"]/*' />
         protected new TextControl Control
         {
-            get
-            {
-                return (TextControl)base.Control;
-            }
+            get { return (TextControl)base.Control; }
         }
 
         /// <include file='doc\HtmlLabelAdapter.uex' path='docs/doc[@for="HtmlLabelAdapter.WhiteSpace"]/*' />
@@ -47,10 +52,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 return true;
             }
             int length = s.Length;
-            for(int i = 0; i < length; i++)
+            for (int i = 0; i < length; i++)
             {
                 char c = s[i];
-                if(!Char.IsWhiteSpace(c))
+                if (!Char.IsWhiteSpace(c))
                 {
                     return false;
                 }
@@ -62,9 +67,11 @@ namespace System.Web.UI.MobileControls.Adapters
         public override void Render(HtmlMobileTextWriter writer)
         {
             writer.EnterStyle(Style);
-            if( (writer.BeforeFirstControlWritten) &&
-                (Device.RequiresLeadingPageBreak)  &&
-                (String.IsNullOrEmpty(Control.Text) || WhiteSpace(Control.Text) ) )
+            if (
+                (writer.BeforeFirstControlWritten)
+                && (Device.RequiresLeadingPageBreak)
+                && (String.IsNullOrEmpty(Control.Text) || WhiteSpace(Control.Text))
+            )
             {
                 writer.WriteBreak();
             }
@@ -76,4 +83,3 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 }
-

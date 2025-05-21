@@ -14,6 +14,6 @@ namespace System.IO.IsolatedStorage
         Assembly = 4,
         Roaming = 8,
         Machine = 16,
-        Application = 32
+        Application = 32,
     }
 }

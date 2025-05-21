@@ -21,18 +21,27 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(null, typeof(SimpleModel)),
-                PropertyFilter = (new BindAttribute { Include = "FirstName " }).IsPropertyAllowed
+                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(SimpleModel)
+                ),
+                PropertyFilter = (new BindAttribute { Include = "FirstName " }).IsPropertyAllowed,
             };
 
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection();
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(binderProviders);
+            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
+                binderProviders
+            );
 
             // Act & assert
 
             Assert.Throws<InvalidOperationException>(
-                delegate { shimBinder.BindModel(controllerContext, bindingContext); },
-                @"The new model binding system cannot be used when a property whitelist or blacklist has been specified in [Bind] or via the call to UpdateModel() / TryUpdateModel(). Use the [BindRequired] and [BindNever] attributes on the model type or its properties instead.");
+                delegate
+                {
+                    shimBinder.BindModel(controllerContext, bindingContext);
+                },
+                @"The new model binding system cannot be used when a property whitelist or blacklist has been specified in [Bind] or via the call to UpdateModel() / TryUpdateModel(). Use the [BindRequired] and [BindNever] attributes on the model type or its properties instead."
+            );
         }
 
         [Fact]
@@ -45,19 +54,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(null, typeof(int)),
+                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
                 ModelName = "someName",
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = _ => true,
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "someName", "dummyValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "someName", "dummyValue" } },
             };
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -66,13 +77,23 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         Assert.Same(bindingContext.ValueProvider, mbc.ValueProvider);
 
                         mbc.Model = 42;
-                        mbc.ValidationNode.Validating += delegate { validationCalled = true; };
+                        mbc.ValidationNode.Validating += delegate
+                        {
+                            validationCalled = true;
+                        };
                         return true;
-                    });
+                    }
+                );
 
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection();
-            binderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, false /* suppressPrefixCheck */);
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(binderProviders);
+            binderProviders.RegisterBinderForType(
+                typeof(int),
+                mockIntBinder.Object,
+                false /* suppressPrefixCheck */
+            );
+            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
+                binderProviders
+            );
 
             // Act
             object retVal = shimBinder.BindModel(controllerContext, bindingContext);
@@ -95,19 +116,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(null, typeof(List<int>)),
+                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(List<int>)
+                ),
                 ModelName = "someName",
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = _ => true,
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "someOtherName", "dummyValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "someOtherName", "dummyValue" } },
             };
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
             mockIntBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc)
                     {
@@ -116,13 +139,23 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                         Assert.Same(bindingContext.ValueProvider, mbc.ValueProvider);
 
                         mbc.Model = expectedModel;
-                        mbc.ValidationNode.Validating += delegate { validationCalled = true; };
+                        mbc.ValidationNode.Validating += delegate
+                        {
+                            validationCalled = true;
+                        };
                         return true;
-                    });
+                    }
+                );
 
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection();
-            binderProviders.RegisterBinderForType(typeof(List<int>), mockIntBinder.Object, false /* suppressPrefixCheck */);
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(binderProviders);
+            binderProviders.RegisterBinderForType(
+                typeof(List<int>),
+                mockIntBinder.Object,
+                false /* suppressPrefixCheck */
+            );
+            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
+                binderProviders
+            );
 
             // Act
             object retVal = shimBinder.BindModel(controllerContext, bindingContext);
@@ -139,17 +172,31 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = GetControllerContext();
             Mock<IExtensibleModelBinder> mockListBinder = new Mock<IExtensibleModelBinder>();
-            mockListBinder.Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())).Returns(false).Verifiable();
+            mockListBinder
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
+                .Returns(false)
+                .Verifiable();
 
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection();
-            binderProviders.RegisterBinderForType(typeof(List<int>), mockListBinder.Object, true /* suppressPrefixCheck */);
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(binderProviders);
+            binderProviders.RegisterBinderForType(
+                typeof(List<int>),
+                mockListBinder.Object,
+                true /* suppressPrefixCheck */
+            );
+            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
+                binderProviders
+            );
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = false,
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(List<int>)),
-                ModelState = controllerContext.Controller.ViewData.ModelState
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(List<int>)
+                ),
+                ModelState = controllerContext.Controller.ViewData.ModelState,
             };
 
             // Act
@@ -167,18 +214,28 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = GetControllerContext();
             Mock<ModelBinderProvider> mockBinderProvider = new Mock<ModelBinderProvider>();
-            mockBinderProvider.Setup(o => o.GetBinder(controllerContext, It.IsAny<ExtensibleModelBindingContext>())).Returns((IExtensibleModelBinder)null).Verifiable();
+            mockBinderProvider
+                .Setup(o =>
+                    o.GetBinder(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
+                .Returns((IExtensibleModelBinder)null)
+                .Verifiable();
             ModelBinderProviderCollection binderProviders = new ModelBinderProviderCollection
             {
-                mockBinderProvider.Object
+                mockBinderProvider.Object,
             };
-            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(binderProviders);
+            ExtensibleModelBinderAdapter shimBinder = new ExtensibleModelBinderAdapter(
+                binderProviders
+            );
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 FallbackToEmptyPrefix = true,
-                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(null, typeof(int)),
-                ModelState = controllerContext.Controller.ViewData.ModelState
+                ModelMetadata = new DataAnnotationsModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
+                ModelState = controllerContext.Controller.ViewData.ModelState,
             };
 
             // Act
@@ -188,20 +245,18 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             Assert.Null(retVal);
             Assert.True(bindingContext.ModelState.IsValid);
             mockBinderProvider.Verify();
-            mockBinderProvider.Verify(o => o.GetBinder(controllerContext, It.IsAny<ExtensibleModelBindingContext>()), Times.AtMostOnce());
+            mockBinderProvider.Verify(
+                o => o.GetBinder(controllerContext, It.IsAny<ExtensibleModelBindingContext>()),
+                Times.AtMostOnce()
+            );
         }
 
         private static ControllerContext GetControllerContext()
         {
-            return new ControllerContext
-            {
-                Controller = new SimpleController()
-            };
+            return new ControllerContext { Controller = new SimpleController() };
         }
 
-        private class SimpleController : Controller
-        {
-        }
+        private class SimpleController : Controller { }
 
         private class SimpleModel
         {

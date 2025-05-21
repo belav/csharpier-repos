@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>
       ASP.NET Core MVC view rendering features. Contains common types used in most MVC applications as well as view rendering features such as view engines, views, view components, and HTML helpers.
@@ -16,23 +15,19 @@
     <IsPackable>false</IsPackable>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc.Core" />
     <Reference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" />
     <Reference Include="Microsoft.AspNetCore.DataProtection.Extensions" />
-
     <Reference Include="Microsoft.AspNetCore.Antiforgery" />
     <Reference Include="Microsoft.AspNetCore.Diagnostics.Abstractions" />
     <Reference Include="Microsoft.AspNetCore.Html.Abstractions" />
     <Reference Include="Microsoft.Extensions.WebEncoders" />
     <Reference Include="Microsoft.AspNetCore.Components.Endpoints" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)\PooledArrayBufferWriter.cs" LinkBase="Infrastructure" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc.Razor" />

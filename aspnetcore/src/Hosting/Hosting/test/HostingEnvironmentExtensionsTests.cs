@@ -16,10 +16,11 @@ public class HostingEnvironmentExtensionsTests
 
         var webHostOptions = CreateWebHostOptions(
             new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>()
-                {
-                    [WebHostDefaults.WebRootKey] = "testroot"
-                }).Build());
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>() { [WebHostDefaults.WebRootKey] = "testroot" }
+                )
+                .Build()
+        );
 
         env.Initialize(Path.GetFullPath("."), webHostOptions);
 
@@ -47,7 +48,10 @@ public class HostingEnvironmentExtensionsTests
     {
         IWebHostEnvironment env = new HostingEnvironment();
 
-        env.Initialize(Path.GetFullPath(Path.Combine("testroot", "wwwroot")), CreateWebHostOptions());
+        env.Initialize(
+            Path.GetFullPath(Path.Combine("testroot", "wwwroot")),
+            CreateWebHostOptions()
+        );
 
         Assert.Equal(Path.GetFullPath(Path.Combine("testroot", "wwwroot")), env.ContentRootPath);
         Assert.Null(env.WebRootPath);
@@ -63,10 +67,14 @@ public class HostingEnvironmentExtensionsTests
 
         var webHostOptions = CreateWebHostOptions(
             new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string>()
-                {
-                    [WebHostDefaults.EnvironmentKey] = "NewName"
-                }).Build());
+                .AddInMemoryCollection(
+                    new Dictionary<string, string>()
+                    {
+                        [WebHostDefaults.EnvironmentKey] = "NewName",
+                    }
+                )
+                .Build()
+        );
 
         env.Initialize(Path.GetFullPath("."), webHostOptions);
 
@@ -75,7 +83,6 @@ public class HostingEnvironmentExtensionsTests
 
     private WebHostOptions CreateWebHostOptions(IConfiguration configuration = null)
     {
-        return new WebHostOptions(
-            configuration ?? Mock.Of<IConfiguration>());
+        return new WebHostOptions(configuration ?? Mock.Of<IConfiguration>());
     }
 }

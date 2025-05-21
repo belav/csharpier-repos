@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Xunit;
 using static System.TestHelpers;
 
 namespace System.SpanTests
@@ -237,14 +237,13 @@ namespace System.SpanTests
         [Fact]
         public static void ClearValueTypeWithReferences()
         {
-            TestValueTypeWithReference[] actual = {
+            TestValueTypeWithReference[] actual =
+            {
                 new TestValueTypeWithReference() { I = 1, S = "a" },
                 new TestValueTypeWithReference() { I = 2, S = "b" },
-                new TestValueTypeWithReference() { I = 3, S = "c" } };
-            TestValueTypeWithReference[] expected = {
-                default,
-                default,
-                default };
+                new TestValueTypeWithReference() { I = 3, S = "c" },
+            };
+            TestValueTypeWithReference[] expected = { default, default, default };
 
             var span = new Span<TestValueTypeWithReference>(actual);
             span.Clear();
@@ -268,7 +267,9 @@ namespace System.SpanTests
 
                 if (!AllocationHelper.TryAllocNative(bytes, out IntPtr memory))
                 {
-                    Console.WriteLine($"Span.Clear test {nameof(ClearLongerThanUintMaxValueBytes)} skipped (could not alloc memory).");
+                    Console.WriteLine(
+                        $"Span.Clear test {nameof(ClearLongerThanUintMaxValueBytes)} skipped (could not alloc memory)."
+                    );
                     return;
                 }
 

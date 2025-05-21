@@ -16,10 +16,7 @@ namespace System.Text.Json.Tests
                 ReadOnlyBufferSegment first = null;
                 foreach (Memory<byte> buffer in buffers)
                 {
-                    var newSegment = new ReadOnlyBufferSegment()
-                    {
-                        Memory = buffer,
-                    };
+                    var newSegment = new ReadOnlyBufferSegment() { Memory = buffer };
 
                     if (segment != null)
                     {

@@ -8,7 +8,11 @@ public class NegCollect
     public static int Main()
     {
         bool retVal = true;
-        GCCollectionMode[] invalidInputs = { (GCCollectionMode)(GCCollectionMode.Default - 1), (GCCollectionMode)(GCCollectionMode.Aggressive + 1) };
+        GCCollectionMode[] invalidInputs =
+        {
+            (GCCollectionMode)(GCCollectionMode.Default - 1),
+            (GCCollectionMode)(GCCollectionMode.Aggressive + 1),
+        };
 
         for (int i = 0; i < invalidInputs.Length; i++)
         {
@@ -18,9 +22,7 @@ public class NegCollect
                 retVal = false;
                 Console.WriteLine("Invalid value for GC.Collect: {0}", invalidInputs[i]);
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
         }
 
         if (retVal)

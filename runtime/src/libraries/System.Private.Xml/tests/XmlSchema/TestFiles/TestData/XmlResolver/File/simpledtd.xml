@@ -9,16 +9,16 @@
 <!ENTITY MyLast "Curry">
 ]>
 <HeadCount>
-  <Name First="Waldo" Last="Pepper">
-    <Name First="Salt" Middle="N." Last="Pepper" Relation="spouse"/>
-    <Name First="Red" Last="Pepper" Relation="child"/>
+  <Name First="Waldo" Last="Pepper" Relation="self">
+    <Name First="Salt" Middle="N." Last="Pepper" Relation="spouse" />
+    <Name First="Red" Last="Pepper" Relation="child" />
   </Name>
-  <Name First="&MyFirst;" Last="&MyLast;">
-    <Name First="Sharon" Last="&MyLast;" Relation="spouse"/>
-    <Name First="Morgan" Last="&MyLast;" Relation="child"/>
-    <Name First="Shelby" Last="&MyLast;" Relation="child"/>
+  <Name First="Ralph" Last="Curry" Relation="self">
+    <Name First="Sharon" Last="Curry" Relation="spouse" />
+    <Name First="Morgan" Last="Curry" Relation="child" />
+    <Name First="Shelby" Last="Curry" Relation="child" />
   </Name>
-  <Name First="Mac" Middle="N." Last="Cheese">
-    <Name First="Chedder" Last="Cheese" Relation="child"/>
+  <Name First="Mac" Middle="N." Last="Cheese" Relation="self">
+    <Name First="Chedder" Last="Cheese" Relation="child" />
   </Name>
 </HeadCount>

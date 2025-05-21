@@ -4,30 +4,29 @@
 namespace Microsoft.InfoCards.Diagnostics
 {
     using System;
-    using System.Xml;
     using System.Collections.Generic;
+    using System.ComponentModel; //win32exception
     using System.Diagnostics;
     using System.Globalization;
-    using System.ComponentModel;    //win32exception
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using Microsoft.Win32.SafeHandles;
-    using System.Security;
-    using System.Security.Principal;
-    using System.Runtime;
-    using System.ServiceModel.Diagnostics;
-    using System.Threading;
-
     //
     // For InfoCardBaseException
     //
     using System.IdentityModel.Selectors;
+    using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.Security.Principal;
+    using System.ServiceModel.Diagnostics;
+    using System.Threading;
+    using System.Xml;
+    using Microsoft.Win32.SafeHandles;
 
     // Summary
     // InfoCardTrace is the main driver class for the managed tracing infrastructure.
-    // Essentially it is a wrapper over the Indigo DiagnosticsAndTracing classes. 
-    // Externally a facade of simple TraceXXXX calls is provided which 
+    // Essentially it is a wrapper over the Indigo DiagnosticsAndTracing classes.
+    // Externally a facade of simple TraceXXXX calls is provided which
     // internally thunk across to the indigo classes to perform the work.
     //
     // The trace class also provides support for flowing of correlation ids allowing
@@ -37,12 +36,12 @@ namespace Microsoft.InfoCards.Diagnostics
     //
     // Remarks
     // All functions are thread safe
-    // 
+    //
     // Example usage looks like:
     // using IDT=Microsoft.InfoCards.Diagnostics.InfoCardTrace
     // IDT.TraceVerbose( InfoCardTraceCode.StoreInvalidKey, myKey );
     // IDT.TraceDebug( "Got an infocard {0} with name {1}", card, card.Name );
-    // 
+    //
     //
     static class InfoCardTrace
     {
@@ -80,25 +79,30 @@ namespace Microsoft.InfoCards.Diagnostics
 
         static string GetMsdnTraceCode(int traceCode)
         {
-            return LegacyDiagnosticTrace.GenerateMsdnTraceCode("System.IdentityModel.Selectors", GetTraceString(traceCode));
+            return LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                "System.IdentityModel.Selectors",
+                GetTraceString(traceCode)
+            );
         }
 
-        [DllImport("advapi32",
-                CharSet = CharSet.Unicode,
-                EntryPoint = "ReportEventW",
-                ExactSpelling = true,
-                SetLastError = true)]
-        private static extern bool ReportEvent([In] SafeHandle hEventLog,
-                                               [In] short type,
-                                               [In] ushort category,
-                                               [In] uint eventID,
-                                               [In] byte[] userSID,
-                                               [In] short numStrings,
-                                               [In] int dataLen,
-                                               [In] HandleRef strings,
-                                               [In] byte[] rawData);
-
-
+        [DllImport(
+            "advapi32",
+            CharSet = CharSet.Unicode,
+            EntryPoint = "ReportEventW",
+            ExactSpelling = true,
+            SetLastError = true
+        )]
+        private static extern bool ReportEvent(
+            [In] SafeHandle hEventLog,
+            [In] short type,
+            [In] ushort category,
+            [In] uint eventID,
+            [In] byte[] userSID,
+            [In] short numStrings,
+            [In] int dataLen,
+            [In] HandleRef strings,
+            [In] byte[] rawData
+        );
 
         //
         // Summary:
@@ -106,19 +110,25 @@ namespace Microsoft.InfoCards.Diagnostics
         //
         internal class SafeEventLogHandle : SafeHandle
         {
+            [DllImport(
+                "advapi32",
+                CharSet = CharSet.Unicode,
+                EntryPoint = "RegisterEventSourceW",
+                ExactSpelling = true,
+                SetLastError = true
+            )]
+            private static extern SafeEventLogHandle RegisterEventSource(
+                string uncServerName,
+                string sourceName
+            );
 
-            [DllImport("advapi32",
-                    CharSet = CharSet.Unicode,
-                    EntryPoint = "RegisterEventSourceW",
-                    ExactSpelling = true,
-                    SetLastError = true)]
-            private static extern SafeEventLogHandle RegisterEventSource(string uncServerName, string sourceName);
-
-            [DllImport("advapi32",
-                    CharSet = CharSet.Unicode,
-                    EntryPoint = "DeregisterEventSource",
-                    ExactSpelling = true,
-                    SetLastError = true)]
+            [DllImport(
+                "advapi32",
+                CharSet = CharSet.Unicode,
+                EntryPoint = "DeregisterEventSource",
+                ExactSpelling = true,
+                SetLastError = true
+            )]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             private static extern bool DeregisterEventSource(IntPtr eventLog);
 
@@ -130,10 +140,10 @@ namespace Microsoft.InfoCards.Diagnostics
                 {
                     int error = Marshal.GetLastWin32Error();
                     TraceDebug("failed to registereventsource with error {0}", error);
-
                 }
                 return h;
             }
+
             //
             // Summary:
             // Manages the lifetime of a native handle retrieved by register event source.
@@ -141,19 +151,11 @@ namespace Microsoft.InfoCards.Diagnostics
             // handle - the handle to wrap.
             //
             private SafeEventLogHandle()
-                : base(IntPtr.Zero, true)
-            {
-
-
-            }
-
+                : base(IntPtr.Zero, true) { }
 
             public override bool IsInvalid
             {
-                get
-                {
-                    return (IntPtr.Zero == base.handle);
-                }
+                get { return (IntPtr.Zero == base.handle); }
             }
 
             //
@@ -164,7 +166,6 @@ namespace Microsoft.InfoCards.Diagnostics
             {
 #pragma warning suppress 56523
                 return DeregisterEventSource(base.handle);
-
             }
         }
 
@@ -201,7 +202,6 @@ namespace Microsoft.InfoCards.Diagnostics
 
         const string InfoCardEventSource = "CardSpace 4.0.0.0";
 
-
         //
         // Summary:
         // Writes an audit message to the application's event log
@@ -215,9 +215,9 @@ namespace Microsoft.InfoCards.Diagnostics
         {
             LogEvent(code, message, EventLogEntryType.Information);
         }
+
         public static void Assert(bool condition, string format, params object[] parameters)
         {
-
             if (condition)
             {
                 return;
@@ -230,21 +230,19 @@ namespace Microsoft.InfoCards.Diagnostics
             }
             TraceDebug("An assertion fired: {0}", message);
 #if DEBUG
-            // 
+            //
             // Let DebugAssert handle this for us....
             // If not in debugger,  Assertion Failed: Abort=Quit, Retry=Debug, Ignore=Continue
             // If in debugger, will hit a DebugBreak()
             //
-            DiagnosticUtility.DebugAssert( false, message );
+            DiagnosticUtility.DebugAssert(false, message);
 #else
             //
             // Retail assert failfasts service
             //
             FailFast(message);
 #endif
-
         }
-
 
         [Conditional("DEBUG")]
         public static void DebugAssert(bool condition, string format, params object[] parameters)
@@ -258,73 +256,81 @@ namespace Microsoft.InfoCards.Diagnostics
             string message = format;
             if (null != parameters && 0 != parameters.Length)
             {
-                message = String.Format( CultureInfo.InvariantCulture, format, parameters );
+                message = String.Format(CultureInfo.InvariantCulture, format, parameters);
             }
-            TraceDebug( "An assertion fired: {0}", message );
+            TraceDebug("An assertion fired: {0}", message);
             if (Debugger.IsAttached)
             {
                 Debugger.Launch();
                 Debugger.Break();
             }
-            DiagnosticUtility.DebugAssert( false, message );
-            FailFast( message );
+            DiagnosticUtility.DebugAssert(false, message);
+            FailFast(message);
 #endif
         }
 
-
-        // 
+        //
         // Facade functions to allow simple call semantics.
         //
         public static void FailFast(string message)
         {
             DiagnosticUtility.FailFast(message);
         }
+
         [Conditional("DEBUG")]
         public static void TraceVerbose(int traceCode)
         {
             TraceInternal(TraceEventType.Verbose, traceCode, null);
-
         }
+
         [Conditional("DEBUG")]
         public static void TraceVerbose(int traceCode, params object[] parameters)
         {
             TraceInternal(TraceEventType.Verbose, traceCode, parameters);
         }
+
         [Conditional("DEBUG")]
         public static void TraceInfo(int traceCode)
         {
             TraceInternal(TraceEventType.Information, traceCode, null);
         }
+
         [Conditional("DEBUG")]
         public static void TraceInfo(int traceCode, params object[] parameters)
         {
             TraceInternal(TraceEventType.Information, traceCode, parameters);
         }
+
         [Conditional("DEBUG")]
         public static void TraceWarning(int traceCode)
         {
             TraceInternal(TraceEventType.Warning, traceCode, null);
         }
+
         [Conditional("DEBUG")]
         public static void TraceWarning(int traceCode, params object[] parameters)
         {
             TraceInternal(TraceEventType.Warning, traceCode, parameters);
         }
+
         [Conditional("DEBUG")]
         public static void TraceError(int traceCode)
         {
             TraceInternal(TraceEventType.Error, traceCode, null);
         }
+
         [Conditional("DEBUG")]
         public static void TraceError(int traceCode, params object[] parameters)
         {
             TraceInternal(TraceEventType.Error, traceCode, parameters);
         }
+
         [Conditional("DEBUG")]
         public static void TraceCritical(int traceCode)
         {
             TraceInternal(TraceEventType.Critical, traceCode, null);
         }
+
         [Conditional("DEBUG")]
         public static void TraceCritical(int traceCode, params object[] parameters)
         {
@@ -339,6 +345,7 @@ namespace Microsoft.InfoCards.Diagnostics
         {
             TraceInternal(level, traceCode, null);
         }
+
         [Conditional("DEBUG")]
         public static void Trace(TraceEventType level, int traceCode, params object[] parameters)
         {
@@ -347,9 +354,9 @@ namespace Microsoft.InfoCards.Diagnostics
 
         //
         // Summary
-        // DebugTrace is an additional level of tracing, intended for 
+        // DebugTrace is an additional level of tracing, intended for
         // use by the devleopment team during the product development cycle.
-        // The trace funcitons need no localization and can be fed arbitrary strings as 
+        // The trace funcitons need no localization and can be fed arbitrary strings as
         // the format specifier.
         //
         // Remarks
@@ -366,17 +373,14 @@ namespace Microsoft.InfoCards.Diagnostics
 #if DEBUG
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-
-
                 // Retrieve the string from resources and build the message.
                 //
                 string message = format;
 
                 if (null != parameters && 0 != parameters.Length)
                 {
-                    message = String.Format( CultureInfo.InvariantCulture, format, parameters );
+                    message = String.Format(CultureInfo.InvariantCulture, format, parameters);
                 }
-
 
                 //
                 // If we were passed a null message, at least flag it
@@ -386,19 +390,23 @@ namespace Microsoft.InfoCards.Diagnostics
                     message = "NULL DEBUG TRACE MESSAGE!";
                 }
                 //
-                // Build a trace message conforming to the ETL trace schema and 
+                // Build a trace message conforming to the ETL trace schema and
                 // call down through the diagnostic support classes to trace the call.
                 //
                 InfoCardTraceRecord tr = new InfoCardTraceRecord(
-                                            GetTraceString(TraceCode.GeneralInformation),
-                                            message );
+                    GetTraceString(TraceCode.GeneralInformation),
+                    message
+                );
 
                 DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                                    TraceEventType.Verbose,
-                                    TraceCode.GeneralInformation,
-                                    SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
-                                    GetMsdnTraceCode(TraceCode.GeneralInformation),
-                                    tr, null, message);
+                    TraceEventType.Verbose,
+                    TraceCode.GeneralInformation,
+                    SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
+                    GetMsdnTraceCode(TraceCode.GeneralInformation),
+                    tr,
+                    null,
+                    message
+                );
             }
 #endif
         }
@@ -409,9 +417,6 @@ namespace Microsoft.InfoCards.Diagnostics
 #if DEBUG
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-
-
-
                 //
                 // If we were passed a null message, at least flag it
                 //
@@ -420,39 +425,39 @@ namespace Microsoft.InfoCards.Diagnostics
                     message = "NULL DEBUG TRACE MESSAGE!";
                 }
                 //
-                // Build a trace message conforming to the ETL trace schema and 
+                // Build a trace message conforming to the ETL trace schema and
                 // call down through the diagnostic support classes to trace the call.
                 //
                 InfoCardTraceRecord tr = new InfoCardTraceRecord(
-                                            GetTraceString(TraceCode.GeneralInformation),
-                                            message );
+                    GetTraceString(TraceCode.GeneralInformation),
+                    message
+                );
 
                 DiagnosticUtility.DiagnosticTrace.TraceEvent(
-                                    TraceEventType.Verbose,
-                                    TraceCode.GeneralInformation,
-                                    SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
-                                    GetMsdnTraceCode(TraceCode.GeneralInformation),
-                                    tr, null, message);
+                    TraceEventType.Verbose,
+                    TraceCode.GeneralInformation,
+                    SR.GetString(GetTraceString(TraceCode.GeneralInformation)),
+                    GetMsdnTraceCode(TraceCode.GeneralInformation),
+                    tr,
+                    null,
+                    message
+                );
             }
 #endif
         }
 
         //
         // Summary:
-        // Logs the event for the appropriate infocard error code. This code should 
+        // Logs the event for the appropriate infocard error code. This code should
         // match the entries in messages,mc
         // Parameters:
         // code         - the event code to log
-        // Notes: 
+        // Notes:
         // This code may need to be extended to support an array of string parameters. We will do this if our event
         // log messages require it.
-        // 
+        //
         private static void LogEvent(EventCode code, string message, EventLogEntryType type)
         {
-
-
-
-
             using (SafeEventLogHandle handle = SafeEventLogHandle.Construct())
             {
                 string parameter = message;
@@ -463,15 +468,14 @@ namespace Microsoft.InfoCards.Diagnostics
                         parameter = SR.GetString(SR.GeneralExceptionMessage);
                     }
 
-
                     //
-                    // Report event expects a LPCTSTR* lpStrings. Use GCHandle, instead 
-                    // of writing code with unsafe because InfoCard client uses this 
+                    // Report event expects a LPCTSTR* lpStrings. Use GCHandle, instead
+                    // of writing code with unsafe because InfoCard client uses this
                     // and our client cannot contain any unsafe code.
                     //
 
                     //
-                    // This is the array of LPCTSTRs 
+                    // This is the array of LPCTSTRs
                     //
                     IntPtr[] stringRoots = new IntPtr[1];
 
@@ -503,27 +507,32 @@ namespace Microsoft.InfoCards.Diagnostics
                         stringRoots[0] = stringParamHandle.AddrOfPinnedObject();
 
                         //
-                        // From msdn: The interop marshaler passes only the handle [2nd arg to constructor in our case] 
+                        // From msdn: The interop marshaler passes only the handle [2nd arg to constructor in our case]
                         // to unmanaged code, and guarantees that the wrapper (passed as the first parameter
                         // to the constructor of the HandleRef) remains alive for the duration of the [PInvoke] call.
                         //
-                        HandleRef data = new HandleRef(handle, stringsRootHandle.AddrOfPinnedObject());
-
+                        HandleRef data = new HandleRef(
+                            handle,
+                            stringsRootHandle.AddrOfPinnedObject()
+                        );
 
                         SecurityIdentifier sid = WindowsIdentity.GetCurrent().User;
                         byte[] sidBA = new byte[sid.BinaryLength];
                         sid.GetBinaryForm(sidBA, 0);
 
-                        if (!ReportEvent(
-                                 handle,
-                                 (short)type,
-                                 (ushort)InfoCardEventCategory.General,
-                                 (uint)code,
-                                 sidBA,
-                                 1,
-                                 0,
-                                 data,
-                                 null))
+                        if (
+                            !ReportEvent(
+                                handle,
+                                (short)type,
+                                (ushort)InfoCardEventCategory.General,
+                                (uint)code,
+                                sidBA,
+                                1,
+                                0,
+                                data,
+                                null
+                            )
+                        )
                         {
                             //
                             // Errors in the eventlog API should be ignored by applications
@@ -546,7 +555,6 @@ namespace Microsoft.InfoCards.Diagnostics
                     }
                 }
             }
-
         }
 
         public static void TraceAndLogException(Exception e)
@@ -556,7 +564,7 @@ namespace Microsoft.InfoCards.Diagnostics
             InfoCardBaseException ie = e as InfoCardBaseException;
 
             //
-            // We only log if this is an infocard exception that hasnt been previous logged, 
+            // We only log if this is an infocard exception that hasnt been previous logged,
             // and isnt the user cancelled exception.
             //
             if (null != ie && !(ie is UserCancelledException) && !ie.Logged)
@@ -567,7 +575,7 @@ namespace Microsoft.InfoCards.Diagnostics
             {
                 //
                 // If this is the parent of a previously logged exception then log as
-                // informational. 
+                // informational.
                 // If one of the children is UserCancelled, don't log at all
                 //
                 Exception current = ie.InnerException;
@@ -590,21 +598,21 @@ namespace Microsoft.InfoCards.Diagnostics
             }
             if (shouldLog)
             {
-                EventLogEntryType logType = isInformational ? EventLogEntryType.Information : EventLogEntryType.Error;
+                EventLogEntryType logType = isInformational
+                    ? EventLogEntryType.Information
+                    : EventLogEntryType.Error;
                 string message = ie.Message;
                 if (!isInformational)
                 {
                     message = BuildMessage(ie);
                 }
                 LogEvent((EventCode)ie.NativeHResult, message, logType);
-
             }
             TraceException(e);
         }
 
         private static string BuildMessage(InfoCardBaseException ie)
         {
-
             Exception ex = ie;
             String errString = ex.Message + "\n";
 
@@ -612,29 +620,34 @@ namespace Microsoft.InfoCards.Diagnostics
             {
                 while (null != ex.InnerException)
                 {
-                    errString += String.Format(System.Globalization.CultureInfo.CurrentUICulture,
-                                         SR.GetString(SR.InnerExceptionTraceFormat),
-                                         ex.InnerException.Message);
+                    errString += String.Format(
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        SR.GetString(SR.InnerExceptionTraceFormat),
+                        ex.InnerException.Message
+                    );
                     ex = ex.InnerException;
                 }
-                errString += String.Format(System.Globalization.CultureInfo.CurrentUICulture,
-                                         SR.GetString(SR.CallStackTraceFormat),
-                                         ie.ToString());
-
+                errString += String.Format(
+                    System.Globalization.CultureInfo.CurrentUICulture,
+                    SR.GetString(SR.CallStackTraceFormat),
+                    ie.ToString()
+                );
             }
             else
             {
                 if (!String.IsNullOrEmpty(Environment.StackTrace))
                 {
-                    errString += String.Format(System.Globalization.CultureInfo.CurrentUICulture,
-                                            SR.GetString(SR.CallStackTraceFormat),
-                                            Environment.StackTrace);
+                    errString += String.Format(
+                        System.Globalization.CultureInfo.CurrentUICulture,
+                        SR.GetString(SR.CallStackTraceFormat),
+                        Environment.StackTrace
+                    );
                 }
             }
 
             return errString;
-
         }
+
         //
         // Summary:
         // Logs a general exception in the event log
@@ -648,14 +661,15 @@ namespace Microsoft.InfoCards.Diagnostics
             int indent = 0;
             while (null != current)
             {
-                TraceDebug("{0}Exception: message={1}\n stack trace={2}",
-                                new string(' ', indent * 2),
-                                e.Message,
-                                e.StackTrace);
+                TraceDebug(
+                    "{0}Exception: message={1}\n stack trace={2}",
+                    new string(' ', indent * 2),
+                    e.Message,
+                    e.StackTrace
+                );
                 current = current.InnerException;
                 indent++;
             }
-
         }
 
         //
@@ -668,7 +682,6 @@ namespace Microsoft.InfoCards.Diagnostics
             return DiagnosticUtility.ExceptionUtility.ThrowHelperError(e);
         }
 
-
         //
         // Summary
         // Throw an exception but don't log in the event log
@@ -677,7 +690,6 @@ namespace Microsoft.InfoCards.Diagnostics
         {
             return DiagnosticUtility.ExceptionUtility.ThrowHelperError(e);
         }
-
 
         //
         // Summary
@@ -708,14 +720,13 @@ namespace Microsoft.InfoCards.Diagnostics
             if (condition)
             {
                 string message = string.Format(
-                                    System.Globalization.CultureInfo.CurrentUICulture,
-                                    SR.GetString(SR.ServiceInvalidArgument),
-                                    argument);
+                    System.Globalization.CultureInfo.CurrentUICulture,
+                    SR.GetString(SR.ServiceInvalidArgument),
+                    argument
+                );
                 throw ThrowHelperError(new InfoCardArgumentException(message));
             }
         }
-
-
 
         //
         // Summary
@@ -723,7 +734,6 @@ namespace Microsoft.InfoCards.Diagnostics
         //
         public static Exception ThrowHelperArgumentNull(string err)
         {
-
             return DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(err);
         }
 
@@ -763,6 +773,7 @@ namespace Microsoft.InfoCards.Diagnostics
         {
             return DiagnosticUtility.ShouldTrace(type);
         }
+
         public static bool ShouldTraceCritical
         {
             get { return DiagnosticUtility.ShouldTraceCritical; }
@@ -784,14 +795,13 @@ namespace Microsoft.InfoCards.Diagnostics
             get { return DiagnosticUtility.ShouldTraceVerbose; }
         }
 
-
         //
         // Summary
         // Expose the activity ids associated with the current flow of activity.
         // ActivityIDs allow the correlation of events across process and managed / unmanaged bounda
-        // Normally they are managed implicitly. The .net runtime will ensure they flow across thread 
-        // intra-process ( appdomain ) boundaries, and the indigo runtime will ensure they 
-        // flow across indigo interactions ( cross process and cross machine ). 
+        // Normally they are managed implicitly. The .net runtime will ensure they flow across thread
+        // intra-process ( appdomain ) boundaries, and the indigo runtime will ensure they
+        // flow across indigo interactions ( cross process and cross machine ).
         // We have a couple of responsibilities:
         // When transitioning from mananged to unmanaged code:
         //      grab the activity id
@@ -806,10 +816,11 @@ namespace Microsoft.InfoCards.Diagnostics
         {
             return System.Runtime.Diagnostics.DiagnosticTraceBase.ActivityId;
         }
+
         public static void SetActivityId(Guid activityId)
         {
             //
-            // This will trace by default at level verbose. 
+            // This will trace by default at level verbose.
             //
             System.Runtime.Diagnostics.DiagnosticTraceBase.ActivityId = activityId;
         }
@@ -818,9 +829,9 @@ namespace Microsoft.InfoCards.Diagnostics
         // Summary
         // The main trace function. Responsible for extracting the appropriate string
         // from the application's resource file, formatting the string with the set of paramters
-        // if appropriate, 
+        // if appropriate,
         // and passing the request down to the IndigoDiagnostics classes.
-        // 
+        //
         // Parameters
         // level        - the level to trace at. verbose <= level <= critical
         // code         - the infocard trace code - a unique numeric / string identifier.
@@ -831,9 +842,10 @@ namespace Microsoft.InfoCards.Diagnostics
         //
         [Conditional("DEBUG")]
         private static void TraceInternal(
-                            TraceEventType level,
-                            int traceCode,
-                            params object[] parameters)
+            TraceEventType level,
+            int traceCode,
+            params object[] parameters
+        )
         {
 #if DEBUG
             if (DiagnosticUtility.ShouldTrace(level))
@@ -846,41 +858,41 @@ namespace Microsoft.InfoCards.Diagnostics
 #else
                 string message = SR.GetString(traceCode);
 #endif
-                Assert( !String.IsNullOrEmpty( message ), "resource string lookup failed!!!" );
+                Assert(!String.IsNullOrEmpty(message), "resource string lookup failed!!!");
 
-                if (!String.IsNullOrEmpty( message ) && null != parameters)
+                if (!String.IsNullOrEmpty(message) && null != parameters)
                 {
                     try
                     {
                         message = String.Format(
-                                    System.Globalization.CultureInfo.CurrentUICulture,
-                                    message,
-                                    parameters );
+                            System.Globalization.CultureInfo.CurrentUICulture,
+                            message,
+                            parameters
+                        );
                     }
                     catch (FormatException f)
                     {
-                        Assert( false, "Invalid format: " + traceCode );
-                        TraceException( f );
-                        message = SR.GetString( SR.GeneralTraceMessage, traceCode );
-
+                        Assert(false, "Invalid format: " + traceCode);
+                        TraceException(f);
+                        message = SR.GetString(SR.GeneralTraceMessage, traceCode);
                     }
-
                 }
 
                 //
-                // Build a trace message conforming to the ETL trace schema and 
+                // Build a trace message conforming to the ETL trace schema and
                 // call down through the diagnostic support classes to trace the call.
                 //
-                DiagnosticUtility.DiagnosticTrace.TraceEvent( level,
-                                            traceCode,
-                                    SR.GetString(GetTraceString(traceCode)),
-                                    GetMsdnTraceCode(TraceCode.GeneralInformation),
-                                    new InfoCardTraceRecord( GetTraceString(traceCode), message ), null, message);
-
+                DiagnosticUtility.DiagnosticTrace.TraceEvent(
+                    level,
+                    traceCode,
+                    SR.GetString(GetTraceString(traceCode)),
+                    GetMsdnTraceCode(TraceCode.GeneralInformation),
+                    new InfoCardTraceRecord(GetTraceString(traceCode), message),
+                    null,
+                    message
+                );
             }
 #endif
         }
-
-
     }
 }

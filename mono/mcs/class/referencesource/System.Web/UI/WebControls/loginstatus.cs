@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System.Collections;
     using System.ComponentModel;
     using System.Drawing.Design;
@@ -13,18 +13,19 @@ namespace System.Web.UI.WebControls {
     using System.Web.Security;
     using System.Web.UI;
 
-
     /// <devdoc>
     /// Displays a link or button that allows the user to login or logout of the site.
     /// Shows whether the user is currently logged in.
     /// </devdoc>
     [
-    Bindable(false),
-    DefaultEvent("LoggingOut"),
-    Designer("System.Web.UI.Design.WebControls.LoginStatusDesigner, " + AssemblyRef.SystemDesign),
+        Bindable(false),
+        DefaultEvent("LoggingOut"),
+        Designer(
+            "System.Web.UI.Design.WebControls.LoginStatusDesigner, " + AssemblyRef.SystemDesign
+        ),
     ]
-    public class LoginStatus : CompositeControl {
-
+    public class LoginStatus : CompositeControl
+    {
         private static readonly object EventLoggingOut = new object();
         private static readonly object EventLoggedOut = new object();
 
@@ -45,145 +46,152 @@ namespace System.Web.UI.WebControls {
         /// always set in OnPreRender, and is only used after that point in the lifecycle.
         /// (VSWhidbey 81266)
         /// </devdoc>
-        private bool LoggedIn {
-            get {
-                return _loggedIn;
-            }
-            set {
-                _loggedIn = value;
-            }
+        private bool LoggedIn
+        {
+            get { return _loggedIn; }
+            set { _loggedIn = value; }
         }
-
 
         /// <devdoc>
         /// The URL of the image to be shown for the login button.
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        WebSysDescription(SR.LoginStatus_LoginImageUrl),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            WebSysDescription(SR.LoginStatus_LoginImageUrl),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            UrlProperty()
         ]
-        public virtual string LoginImageUrl {
-            get {
+        public virtual string LoginImageUrl
+        {
+            get
+            {
                 object obj = ViewState["LoginImageUrl"];
-                return (obj == null) ? String.Empty : (string) obj;
+                return (obj == null) ? String.Empty : (string)obj;
             }
-            set {
-                ViewState["LoginImageUrl"] = value;
-            }
+            set { ViewState["LoginImageUrl"] = value; }
         }
-
 
         /// <devdoc>
         /// The text to be shown for the login button.
         /// </devdoc>
         [
-        Localizable(true),
-        WebCategory("Appearance"),
-        WebSysDefaultValue(SR.LoginStatus_DefaultLoginText),
-        WebSysDescription(SR.LoginStatus_LoginText)
+            Localizable(true),
+            WebCategory("Appearance"),
+            WebSysDefaultValue(SR.LoginStatus_DefaultLoginText),
+            WebSysDescription(SR.LoginStatus_LoginText)
         ]
-        public virtual string LoginText {
-            get {
+        public virtual string LoginText
+        {
+            get
+            {
                 object obj = ViewState["LoginText"];
-                return (obj == null) ? SR.GetString(SR.LoginStatus_DefaultLoginText) : (string) obj;
+                return (obj == null) ? SR.GetString(SR.LoginStatus_DefaultLoginText) : (string)obj;
             }
-            set {
-                ViewState["LoginText"] = value;
-            }
+            set { ViewState["LoginText"] = value; }
         }
-
 
         /// <devdoc>
         /// The action to perform after logging out.
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(LogoutAction.Refresh),
-        Themeable(false),
-        WebSysDescription(SR.LoginStatus_LogoutAction)
+            WebCategory("Behavior"),
+            DefaultValue(LogoutAction.Refresh),
+            Themeable(false),
+            WebSysDescription(SR.LoginStatus_LogoutAction)
         ]
-        public virtual LogoutAction LogoutAction {
-            get {
+        public virtual LogoutAction LogoutAction
+        {
+            get
+            {
                 object obj = ViewState["LogoutAction"];
-                return (obj == null) ? LogoutAction.Refresh : (LogoutAction) obj;
+                return (obj == null) ? LogoutAction.Refresh : (LogoutAction)obj;
             }
-            set {
-                if (value < LogoutAction.Refresh || value > LogoutAction.RedirectToLoginPage) {
+            set
+            {
+                if (value < LogoutAction.Refresh || value > LogoutAction.RedirectToLoginPage)
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["LogoutAction"] = value;
             }
         }
 
-
         /// <devdoc>
         /// The URL of the image to be shown for the logout button.
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        WebSysDescription(SR.LoginStatus_LogoutImageUrl),
-        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            WebSysDescription(SR.LoginStatus_LogoutImageUrl),
+            Editor(
+                "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            UrlProperty()
         ]
-        public virtual string LogoutImageUrl {
-            get {
+        public virtual string LogoutImageUrl
+        {
+            get
+            {
                 object obj = ViewState["LogoutImageUrl"];
-                return (obj == null) ? String.Empty : (string) obj;
+                return (obj == null) ? String.Empty : (string)obj;
             }
-            set {
-                ViewState["LogoutImageUrl"] = value;
-            }
+            set { ViewState["LogoutImageUrl"] = value; }
         }
-
 
         /// <devdoc>
         /// The URL redirected to after logging out.
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        WebSysDescription(SR.LoginStatus_LogoutPageUrl),
-        Editor("System.Web.UI.Design.UrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        Themeable(false),
-        UrlProperty()
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            WebSysDescription(SR.LoginStatus_LogoutPageUrl),
+            Editor(
+                "System.Web.UI.Design.UrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            Themeable(false),
+            UrlProperty()
         ]
-        public virtual string LogoutPageUrl {
-            get {
+        public virtual string LogoutPageUrl
+        {
+            get
+            {
                 object obj = ViewState["LogoutPageUrl"];
-                return (obj == null) ? String.Empty : (string) obj;
+                return (obj == null) ? String.Empty : (string)obj;
             }
-            set {
-                ViewState["LogoutPageUrl"] = value;
-            }
+            set { ViewState["LogoutPageUrl"] = value; }
         }
-
 
         /// <devdoc>
         /// The text to be shown for the logout button.
         /// </devdoc>
         [
-        Localizable(true),
-        WebCategory("Appearance"),
-        WebSysDefaultValue(SR.LoginStatus_DefaultLogoutText),
-        WebSysDescription(SR.LoginStatus_LogoutText)
+            Localizable(true),
+            WebCategory("Appearance"),
+            WebSysDefaultValue(SR.LoginStatus_DefaultLogoutText),
+            WebSysDescription(SR.LoginStatus_LogoutText)
         ]
-        public virtual string LogoutText {
-            get {
+        public virtual string LogoutText
+        {
+            get
+            {
                 object obj = ViewState["LogoutText"];
-                return (obj == null) ? SR.GetString(SR.LoginStatus_DefaultLogoutText) : (string) obj;
+                return (obj == null) ? SR.GetString(SR.LoginStatus_DefaultLogoutText) : (string)obj;
             }
-            set {
-                ViewState["LogoutText"] = value;
-            }
+            set { ViewState["LogoutText"] = value; }
         }
 
-        private string NavigateUrl {
-            get {
-                if (!DesignMode) {
+        private string NavigateUrl
+        {
+            get
+            {
+                if (!DesignMode)
+                {
                     return FormsAuthentication.GetLoginPage(null, true);
                 }
                 // For the designer to render a hyperlink
@@ -191,51 +199,36 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-        protected override HtmlTextWriterTag TagKey {
-            get {
-                return HtmlTextWriterTag.A;
-            }
+        protected override HtmlTextWriterTag TagKey
+        {
+            get { return HtmlTextWriterTag.A; }
         }
-
 
         /// <devdoc>
         /// Raised after the user is logged out.
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.LoginStatus_LoggedOut)
-        ]
-        public event EventHandler LoggedOut {
-            add {
-                Events.AddHandler(EventLoggedOut, value);
-            }
-            remove {
-                Events.RemoveHandler(EventLoggedOut, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.LoginStatus_LoggedOut)]
+        public event EventHandler LoggedOut
+        {
+            add { Events.AddHandler(EventLoggedOut, value); }
+            remove { Events.RemoveHandler(EventLoggedOut, value); }
         }
-
 
         /// <devdoc>
         /// Raised before the user is logged out.
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.LoginStatus_LoggingOut)
-        ]
-        public event LoginCancelEventHandler LoggingOut {
-            add {
-                Events.AddHandler(EventLoggingOut, value);
-            }
-            remove {
-                Events.RemoveHandler(EventLoggingOut, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.LoginStatus_LoggingOut)]
+        public event LoginCancelEventHandler LoggingOut
+        {
+            add { Events.AddHandler(EventLoggingOut, value); }
+            remove { Events.RemoveHandler(EventLoggingOut, value); }
         }
-
 
         /// <devdoc>
         /// Creates all the child controls that may be rendered.
         /// </devdoc>
-        protected internal override void CreateChildControls() {
+        protected internal override void CreateChildControls()
+        {
             Controls.Clear();
 
             _logInLinkButton = new LinkButton();
@@ -278,10 +271,12 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         /// Logs out and redirects the user when the logout button is clicked.
         /// </devdoc>
-        private void LogoutClicked(object Source, CommandEventArgs e) {
+        private void LogoutClicked(object Source, CommandEventArgs e)
+        {
             LoginCancelEventArgs cancelEventArgs = new LoginCancelEventArgs();
             OnLoggingOut(cancelEventArgs);
-            if (cancelEventArgs.Cancel) {
+            if (cancelEventArgs.Cancel)
+            {
                 return;
             }
 
@@ -293,7 +288,8 @@ namespace System.Web.UI.WebControls {
             OnLoggedOut(EventArgs.Empty);
 
             // Redirect the user as appropriate
-            switch (LogoutAction) {
+            switch (LogoutAction)
+            {
                 case LogoutAction.RedirectToLoginPage:
                     // We do not want the ReturnUrl in the query string, since this is an information
                     // disclosure.  So we must use this instead of FormsAuthentication.RedirectToLoginPage().
@@ -305,19 +301,33 @@ namespace System.Web.UI.WebControls {
                     // it will cause an infinite redirect loop.  If the form method is POST (or there
                     // is no form), then we must include the query string, since the developer could
                     // be using the query string to drive the logic of their page. (VSWhidbey 304531)
-                    if (Page.Form != null && String.Equals(Page.Form.Method, "get", StringComparison.OrdinalIgnoreCase)) {
-                        Page.Response.Redirect(Page.Request.ClientFilePath.VirtualPathString, false);
+                    if (
+                        Page.Form != null
+                        && String.Equals(
+                            Page.Form.Method,
+                            "get",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    {
+                        Page.Response.Redirect(
+                            Page.Request.ClientFilePath.VirtualPathString,
+                            false
+                        );
                     }
-                    else {
+                    else
+                    {
                         Page.Response.Redirect(Page.Request.RawUrl, false);
-                    }                    
+                    }
                     break;
                 case LogoutAction.Redirect:
                     string url = LogoutPageUrl;
-                    if (!String.IsNullOrEmpty(url)) {
+                    if (!String.IsNullOrEmpty(url))
+                    {
                         url = ResolveClientUrl(url);
                     }
-                    else {
+                    else
+                    {
                         // Use FormsAuthentication.LoginUrl as a fallback
                         url = FormsAuthentication.LoginUrl;
                     }
@@ -326,37 +336,40 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-        private void LoginClicked(object Source, CommandEventArgs e) {
+        private void LoginClicked(object Source, CommandEventArgs e)
+        {
             Page.Response.Redirect(ResolveClientUrl(NavigateUrl), false);
         }
-
 
         /// <devdoc>
         /// Raises the LoggedOut event.
         /// </devdoc>
-        protected virtual void OnLoggedOut(EventArgs e) {
+        protected virtual void OnLoggedOut(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventLoggedOut];
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, e);
             }
         }
-
 
         /// <devdoc>
         /// Raises the LoggingOut event.
         /// </devdoc>
-        protected virtual void OnLoggingOut(LoginCancelEventArgs e) {
+        protected virtual void OnLoggingOut(LoginCancelEventArgs e)
+        {
             LoginCancelEventHandler handler = (LoginCancelEventHandler)Events[EventLoggingOut];
-            if (handler != null) {
+            if (handler != null)
+            {
                 handler(this, e);
             }
         }
 
-
         /// <devdoc>
         /// Determines whether a user is logged in, and gets the URL of the login page.
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             // Must be set in PreRender instead of Render, because Page.Request.IsAuthenticated is not
@@ -364,18 +377,21 @@ namespace System.Web.UI.WebControls {
             LoggedIn = Page.Request.IsAuthenticated;
         }
 
-        protected internal override void Render(HtmlTextWriter writer) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
             RenderContents(writer);
         }
 
-
-        protected internal override void RenderContents(HtmlTextWriter writer) {
-            if (Page != null) {
+        protected internal override void RenderContents(HtmlTextWriter writer)
+        {
+            if (Page != null)
+            {
                 Page.VerifyRenderingInServerForm(this);
             }
 
             SetChildProperties();
-            if ((ID != null) && (ID.Length != 0)) {
+            if ((ID != null) && (ID.Length != 0))
+            {
                 // NOTE: Adding the attribute here is somewhat hacky... we're assuming
                 //       the next tag that gets rendered is the one that needs to
                 //       have the id on it.
@@ -388,7 +404,8 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         /// Sets the visiblity, style, and other properties of child controls.
         /// </devdoc>
-        private void SetChildProperties() {
+        private void SetChildProperties()
+        {
             EnsureChildControls();
 
             // Set all buttons to nonvisible, then later set the selected button to visible
@@ -399,26 +416,32 @@ namespace System.Web.UI.WebControls {
 
             WebControl visibleControl = null;
             bool loggedIn = LoggedIn;
-            if (loggedIn) {
+            if (loggedIn)
+            {
                 string logoutImageUrl = LogoutImageUrl;
-                if (logoutImageUrl.Length > 0) {
+                if (logoutImageUrl.Length > 0)
+                {
                     _logOutImageButton.AlternateText = LogoutText;
                     _logOutImageButton.ImageUrl = logoutImageUrl;
                     visibleControl = _logOutImageButton;
                 }
-                else {
+                else
+                {
                     _logOutLinkButton.Text = LogoutText;
                     visibleControl = _logOutLinkButton;
                 }
             }
-            else {
+            else
+            {
                 string loginImageUrl = LoginImageUrl;
-                if (loginImageUrl.Length > 0) {
+                if (loginImageUrl.Length > 0)
+                {
                     _logInImageButton.AlternateText = LoginText;
                     _logInImageButton.ImageUrl = loginImageUrl;
                     visibleControl = _logInImageButton;
                 }
-                else {
+                else
+                {
                     _logInLinkButton.Text = LoginText;
                     visibleControl = _logInLinkButton;
                 }
@@ -429,16 +452,18 @@ namespace System.Web.UI.WebControls {
             visibleControl.Visible = true;
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// Allows the designer to set the LoggedIn and NavigateUrl properties for proper rendering in the designer.
         /// </devdoc>
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        protected override void SetDesignModeState(IDictionary data) {
-            if (data != null) {
+        protected override void SetDesignModeState(IDictionary data)
+        {
+            if (data != null)
+            {
                 object o = data["LoggedIn"];
-                if (o != null) {
+                if (o != null)
+                {
                     LoggedIn = (bool)o;
                 }
             }

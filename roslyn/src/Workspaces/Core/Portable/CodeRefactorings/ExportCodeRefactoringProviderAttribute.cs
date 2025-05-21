@@ -16,13 +16,18 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public sealed class ExportCodeRefactoringProviderAttribute : ExportAttribute
     {
-        private static readonly string[] s_defaultDocumentKinds = [nameof(TextDocumentKind.Document)];
-        private static readonly string[] s_documentKindNames = Enum.GetNames(typeof(TextDocumentKind));
+        private static readonly string[] s_defaultDocumentKinds =
+        [
+            nameof(TextDocumentKind.Document),
+        ];
+        private static readonly string[] s_documentKindNames = Enum.GetNames(
+            typeof(TextDocumentKind)
+        );
 
         private string[] _documentKinds;
 
         /// <summary>
-        /// The name of the <see cref="CodeRefactoringProvider"/>.  
+        /// The name of the <see cref="CodeRefactoringProvider"/>.
         /// </summary>
         [DisallowNull]
         public string? Name { get; set; }
@@ -48,8 +53,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 {
                     if (kind == null || !s_documentKindNames.Contains(kind))
                     {
-                        var message = string.Format(WorkspacesResources.Unexpected_value_0_in_DocumentKinds_array,
-                            arg0: kind?.ToString() ?? "null");
+                        var message = string.Format(
+                            WorkspacesResources.Unexpected_value_0_in_DocumentKinds_array,
+                            arg0: kind?.ToString() ?? "null"
+                        );
                         throw new ArgumentException(message);
                     }
                 }
@@ -70,7 +77,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// </summary>
         /// <param name="firstLanguage">One language to which the code refactoring provider applies.</param>
         /// <param name="additionalLanguages">Additional languages to which the code refactoring provider applies. See <see cref="LanguageNames"/>.</param>
-        public ExportCodeRefactoringProviderAttribute(string firstLanguage, params string[] additionalLanguages)
+        public ExportCodeRefactoringProviderAttribute(
+            string firstLanguage,
+            params string[] additionalLanguages
+        )
             : base(typeof(CodeRefactoringProvider))
         {
             if (additionalLanguages == null)

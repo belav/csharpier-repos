@@ -5,6 +5,14 @@ namespace Microsoft.Extensions.Logging;
 
 internal static partial class LoggingExtensions
 {
-    [LoggerMessage(1, LogLevel.Information, "AuthenticationScheme: {AuthenticationScheme} signed in.", EventName = "AuthenticationSchemeSignedIn")]
-    public static partial void AuthenticationSchemeSignedIn(this ILogger logger, string authenticationScheme);
+    [LoggerMessage(
+        1,
+        LogLevel.Information,
+        "AuthenticationScheme: {AuthenticationScheme} signed in.",
+        EventName = "AuthenticationSchemeSignedIn"
+    )]
+    public static partial void AuthenticationSchemeSignedIn(
+        this ILogger logger,
+        string authenticationScheme
+    );
 }

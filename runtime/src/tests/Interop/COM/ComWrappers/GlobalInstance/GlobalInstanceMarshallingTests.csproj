@@ -7,7 +7,9 @@
     <IsManagedCOMClient>true</IsManagedCOMClient>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <!-- There is only a Windows version of this test -->
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GlobalInstance.cs" />

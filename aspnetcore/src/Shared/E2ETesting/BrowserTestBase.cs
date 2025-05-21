@@ -12,7 +12,8 @@ public class BrowserTestBase : IClassFixture<BrowserFixture>, IAsyncLifetime
 {
     private static readonly AsyncLocal<IWebDriver> _asyncBrowser = new AsyncLocal<IWebDriver>();
     private static readonly AsyncLocal<ILogs> _logs = new AsyncLocal<ILogs>();
-    private static readonly AsyncLocal<ITestOutputHelper> _output = new AsyncLocal<ITestOutputHelper>();
+    private static readonly AsyncLocal<ITestOutputHelper> _output =
+        new AsyncLocal<ITestOutputHelper>();
 
     private ExceptionDispatchInfo _exceptionDispatchInfo;
     private IWebDriver _browser;
@@ -35,10 +36,7 @@ public class BrowserTestBase : IClassFixture<BrowserFixture>, IAsyncLifetime
 
             return _browser;
         }
-        set
-        {
-            _browser = value;
-        }
+        set { _browser = value; }
     }
 
     public static IWebDriver BrowserAccessor => _asyncBrowser.Value;
@@ -66,9 +64,7 @@ public class BrowserTestBase : IClassFixture<BrowserFixture>, IAsyncLifetime
         return Task.CompletedTask;
     }
 
-    protected virtual void InitializeAsyncCore()
-    {
-    }
+    protected virtual void InitializeAsyncCore() { }
 
     protected void InitializeBrowser(string isolationContext)
     {

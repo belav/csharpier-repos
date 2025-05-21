@@ -25,8 +25,14 @@ namespace System.Linq.Expressions.Interpreter
         // list of (instruction index, cookie) sorted by instruction index:
         internal readonly List<KeyValuePair<int, object?>>? DebugCookies;
 
-        internal InstructionArray(int maxStackDepth, int maxContinuationDepth, Instruction[] instructions,
-            object[]? objects, RuntimeLabel[] labels, List<KeyValuePair<int, object?>>? debugCookies)
+        internal InstructionArray(
+            int maxStackDepth,
+            int maxContinuationDepth,
+            Instruction[] instructions,
+            object[]? objects,
+            RuntimeLabel[] labels,
+            List<KeyValuePair<int, object?>>? debugCookies
+        )
         {
             MaxStackDepth = maxStackDepth;
             MaxContinuationDepth = maxContinuationDepth;
@@ -49,9 +55,12 @@ namespace System.Linq.Expressions.Interpreter
             }
 
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-            public InstructionList.DebugView.InstructionView[]/*!*/ A0 => GetInstructionViews(includeDebugCookies: true);
+            public InstructionList.DebugView.InstructionView[] /*!*/
+            A0 => GetInstructionViews(includeDebugCookies: true);
 
-            public InstructionList.DebugView.InstructionView[] GetInstructionViews(bool includeDebugCookies = false)
+            public InstructionList.DebugView.InstructionView[] GetInstructionViews(
+                bool includeDebugCookies = false
+            )
             {
                 return InstructionList.DebugView.GetInstructionViews(
                     _array.Instructions,
@@ -94,30 +103,37 @@ namespace System.Linq.Expressions.Interpreter
             }
 
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-            public InstructionView[]/*!*/ A0 => GetInstructionViews(includeDebugCookies: true);
+            public InstructionView[] /*!*/
+            A0 => GetInstructionViews(includeDebugCookies: true);
 
             public InstructionView[] GetInstructionViews(bool includeDebugCookies = false)
             {
                 return GetInstructionViews(
-                        _list._instructions,
-                        _list._objects,
-                        (index) => _list._labels![index].TargetIndex,
+                    _list._instructions,
+                    _list._objects,
+                    (index) => _list._labels![index].TargetIndex,
 #if DEBUG
-                        includeDebugCookies ? _list._debugCookies :
+                    includeDebugCookies ? _list._debugCookies :
 #endif
-                            null
-                    );
+                    null
+                );
             }
 
-            internal static InstructionView[] GetInstructionViews(IReadOnlyList<Instruction> instructions, IReadOnlyList<object>? objects,
-                Func<int, int> labelIndexer, IReadOnlyList<KeyValuePair<int, object?>>? debugCookies)
+            internal static InstructionView[] GetInstructionViews(
+                IReadOnlyList<Instruction> instructions,
+                IReadOnlyList<object>? objects,
+                Func<int, int> labelIndexer,
+                IReadOnlyList<KeyValuePair<int, object?>>? debugCookies
+            )
             {
                 var result = new List<InstructionView>();
                 int index = 0;
                 int stackDepth = 0;
                 int continuationsDepth = 0;
 
-                IEnumerator<KeyValuePair<int, object?>> cookieEnumerator = (debugCookies ?? Array.Empty<KeyValuePair<int, object?>>()).GetEnumerator();
+                IEnumerator<KeyValuePair<int, object?>> cookieEnumerator = (
+                    debugCookies ?? Array.Empty<KeyValuePair<int, object?>>()
+                ).GetEnumerator();
                 bool hasCookie = cookieEnumerator.MoveNext();
 
                 for (int i = 0, n = instructions.Count; i < n; i++)
@@ -134,7 +150,9 @@ namespace System.Linq.Expressions.Interpreter
                     int stackDiff = instruction.StackBalance;
                     int contDiff = instruction.ContinuationsBalance;
                     string name = instruction.ToDebugString(i, cookie, labelIndexer, objects);
-                    result.Add(new InstructionView(instruction, name, i, stackDepth, continuationsDepth));
+                    result.Add(
+                        new InstructionView(instruction, name, i, stackDepth, continuationsDepth)
+                    );
 
                     index++;
                     stackDepth += stackDiff;
@@ -143,7 +161,11 @@ namespace System.Linq.Expressions.Interpreter
                 return result.ToArray();
             }
 
-            [DebuggerDisplay("{GetValue(),nq}", Name = "{GetName(),nq}", Type = "{GetDisplayType(), nq}")]
+            [DebuggerDisplay(
+                "{GetValue(),nq}",
+                Name = "{GetName(),nq}",
+                Type = "{GetDisplayType(), nq}"
+            )]
             internal readonly struct InstructionView
             {
                 private readonly int _index;
@@ -154,9 +176,9 @@ namespace System.Linq.Expressions.Interpreter
 
                 internal string GetName()
                 {
-                    return _index +
-                        (_continuationsDepth == 0 ? "" : " C(" + _continuationsDepth + ")") +
-                        (_stackDepth == 0 ? "" : " S(" + _stackDepth + ")");
+                    return _index
+                        + (_continuationsDepth == 0 ? "" : " C(" + _continuationsDepth + ")")
+                        + (_stackDepth == 0 ? "" : " S(" + _stackDepth + ")");
                 }
 
                 internal string GetValue()
@@ -169,7 +191,13 @@ namespace System.Linq.Expressions.Interpreter
                     return _instruction.ContinuationsBalance + "/" + _instruction.StackBalance;
                 }
 
-                public InstructionView(Instruction instruction, string name, int index, int stackDepth, int continuationsDepth)
+                public InstructionView(
+                    Instruction instruction,
+                    string name,
+                    int index,
+                    int stackDepth,
+                    int continuationsDepth
+                )
                 {
                     _instruction = instruction;
                     _name = name;
@@ -192,8 +220,13 @@ namespace System.Linq.Expressions.Interpreter
 
         private void UpdateStackDepth(Instruction instruction)
         {
-            Debug.Assert(instruction.ConsumedStack >= 0 && instruction.ProducedStack >= 0 &&
-                instruction.ConsumedContinuations >= 0 && instruction.ProducedContinuations >= 0, "bad instruction " + instruction.ToString());
+            Debug.Assert(
+                instruction.ConsumedStack >= 0
+                    && instruction.ProducedStack >= 0
+                    && instruction.ConsumedContinuations >= 0
+                    && instruction.ProducedContinuations >= 0,
+                "bad instruction " + instruction.ToString()
+            );
 
             _currentStackDepth -= instruction.ConsumedStack;
             Debug.Assert(_currentStackDepth >= 0, $"negative stack depth {instruction}");
@@ -251,50 +284,60 @@ namespace System.Linq.Expressions.Interpreter
         internal Instruction GetInstruction(int index) => _instructions[index];
 
 #if STATS
-        private static Dictionary<string, int> _executedInstructions = new Dictionary<string, int>();
-        private static Dictionary<string, Dictionary<object, bool>> _instances = new Dictionary<string, Dictionary<object, bool>>();
+        private static Dictionary<string, int> _executedInstructions =
+            new Dictionary<string, int>();
+        private static Dictionary<string, Dictionary<object, bool>> _instances =
+            new Dictionary<string, Dictionary<object, bool>>();
 
         static InstructionList()
         {
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler((_, __) =>
-            {
-                PerfTrack.DumpHistogram(_executedInstructions);
-                Console.WriteLine("-- Total executed: {0}", _executedInstructions.Values.Aggregate(0, (sum, value) => sum + value));
-                Console.WriteLine("-----");
-
-                var referenced = new Dictionary<string, int>();
-                int total = 0;
-                foreach (var entry in _instances)
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(
+                (_, __) =>
                 {
-                    referenced[entry.Key] = entry.Value.Count;
-                    total += entry.Value.Count;
-                }
+                    PerfTrack.DumpHistogram(_executedInstructions);
+                    Console.WriteLine(
+                        "-- Total executed: {0}",
+                        _executedInstructions.Values.Aggregate(0, (sum, value) => sum + value)
+                    );
+                    Console.WriteLine("-----");
 
-                PerfTrack.DumpHistogram(referenced);
-                Console.WriteLine("-- Total referenced: {0}", total);
-                Console.WriteLine("-----");
-            });
+                    var referenced = new Dictionary<string, int>();
+                    int total = 0;
+                    foreach (var entry in _instances)
+                    {
+                        referenced[entry.Key] = entry.Value.Count;
+                        total += entry.Value.Count;
+                    }
+
+                    PerfTrack.DumpHistogram(referenced);
+                    Console.WriteLine("-- Total referenced: {0}", total);
+                    Console.WriteLine("-----");
+                }
+            );
         }
 #endif
+
         public InstructionArray ToArray()
         {
 #if STATS
             lock (_executedInstructions)
             {
-                _instructions.ForEach((instr) =>
-                {
-                    int value = 0;
-                    var name = instr.GetType().Name;
-                    _executedInstructions.TryGetValue(name, out value);
-                    _executedInstructions[name] = value + 1;
-
-                    Dictionary<object, bool> dict;
-                    if (!_instances.TryGetValue(name, out dict))
+                _instructions.ForEach(
+                    (instr) =>
                     {
-                        _instances[name] = dict = new Dictionary<object, bool>();
+                        int value = 0;
+                        var name = instr.GetType().Name;
+                        _executedInstructions.TryGetValue(name, out value);
+                        _executedInstructions[name] = value + 1;
+
+                        Dictionary<object, bool> dict;
+                        if (!_instances.TryGetValue(name, out dict))
+                        {
+                            _instances[name] = dict = new Dictionary<object, bool>();
+                        }
+                        dict[instr] = true;
                     }
-                    dict[instr] = true;
-                });
+                );
             }
 #endif
             return new InstructionArray(
@@ -362,7 +405,9 @@ namespace System.Linq.Expressions.Interpreter
                 {
                     if (i >= PushIntMinCachedValue && i <= PushIntMaxCachedValue)
                     {
-                        s_Ints ??= new Instruction[PushIntMaxCachedValue - PushIntMinCachedValue + 1];
+                        s_Ints ??= new Instruction[
+                            PushIntMaxCachedValue - PushIntMinCachedValue + 1
+                        ];
                         i -= PushIntMinCachedValue;
                         Emit(s_Ints[i] ??= new LoadObjectInstruction(value));
                         return;
@@ -479,7 +524,11 @@ namespace System.Linq.Expressions.Interpreter
 
             if (index < s_loadLocalFromClosureBoxed.Length)
             {
-                Emit(s_loadLocalFromClosureBoxed[index] ??= new LoadLocalFromClosureBoxedInstruction(index));
+                Emit(
+                    s_loadLocalFromClosureBoxed[index] ??= new LoadLocalFromClosureBoxedInstruction(
+                        index
+                    )
+                );
             }
             else
             {
@@ -795,7 +844,11 @@ namespace System.Linq.Expressions.Interpreter
             Emit(new NewInstruction(constructorInfo, parameters.Length));
         }
 
-        public void EmitByRefNew(ConstructorInfo constructorInfo, ParameterInfo[] parameters, ByRefUpdater[] updaters)
+        public void EmitByRefNew(
+            ConstructorInfo constructorInfo,
+            ParameterInfo[] parameters,
+            ByRefUpdater[] updaters
+        )
         {
             Emit(new ByRefNewInstruction(constructorInfo, parameters.Length, updaters));
         }
@@ -849,7 +902,8 @@ namespace System.Linq.Expressions.Interpreter
 
         #region Fields and Methods
 
-        private static readonly Dictionary<FieldInfo, Instruction> s_loadFields = new Dictionary<FieldInfo, Instruction>();
+        private static readonly Dictionary<FieldInfo, Instruction> s_loadFields =
+            new Dictionary<FieldInfo, Instruction>();
 
         public void EmitLoadField(FieldInfo field)
         {
@@ -898,9 +952,19 @@ namespace System.Linq.Expressions.Interpreter
             Emit(CallInstruction.Create(method, parameters));
         }
 
-        public void EmitByRefCall(MethodInfo method, ParameterInfo[] parameters, ByRefUpdater[] byrefArgs)
+        public void EmitByRefCall(
+            MethodInfo method,
+            ParameterInfo[] parameters,
+            ByRefUpdater[] byrefArgs
+        )
         {
-            Emit(new ByRefMethodInfoCallInstruction(method, method.IsStatic ? parameters.Length : parameters.Length + 1, byrefArgs));
+            Emit(
+                new ByRefMethodInfoCallInstruction(
+                    method,
+                    method.IsStatic ? parameters.Length : parameters.Length + 1,
+                    byrefArgs
+                )
+            );
         }
 
         public void EmitNullableCall(MethodInfo method, ParameterInfo[] parameters)
@@ -912,7 +976,10 @@ namespace System.Linq.Expressions.Interpreter
 
         #region Control Flow
 
-        private static readonly RuntimeLabel[] s_emptyRuntimeLabels = new RuntimeLabel[] { new RuntimeLabel(Interpreter.RethrowOnReturn, 0, 0) };
+        private static readonly RuntimeLabel[] s_emptyRuntimeLabels = new RuntimeLabel[]
+        {
+            new RuntimeLabel(Interpreter.RethrowOnReturn, 0, 0),
+        };
 
         private RuntimeLabel[] BuildRuntimeLabels()
         {
@@ -945,7 +1012,9 @@ namespace System.Linq.Expressions.Interpreter
 
         internal void FixupBranch(int branchIndex, int offset)
         {
-            _instructions[branchIndex] = ((OffsetInstruction)_instructions[branchIndex]).Fixup(offset);
+            _instructions[branchIndex] = ((OffsetInstruction)_instructions[branchIndex]).Fixup(
+                offset
+            );
         }
 
         private int EnsureLabelIndex(BranchLabel label)
@@ -972,9 +1041,21 @@ namespace System.Linq.Expressions.Interpreter
             label.Mark(this);
         }
 
-        public void EmitGoto(BranchLabel label, bool hasResult, bool hasValue, bool labelTargetGetsValue)
+        public void EmitGoto(
+            BranchLabel label,
+            bool hasResult,
+            bool hasValue,
+            bool labelTargetGetsValue
+        )
         {
-            Emit(GotoInstruction.Create(EnsureLabelIndex(label), hasResult, hasValue, labelTargetGetsValue));
+            Emit(
+                GotoInstruction.Create(
+                    EnsureLabelIndex(label),
+                    hasResult,
+                    hasValue,
+                    labelTargetGetsValue
+                )
+            );
         }
 
         private void EmitBranch(OffsetInstruction instruction, BranchLabel label)
@@ -1030,7 +1111,11 @@ namespace System.Linq.Expressions.Interpreter
 
         public void EmitEnterTryFinally(BranchLabel finallyStartLabel)
         {
-            Emit(EnterTryCatchFinallyInstruction.CreateTryFinally(EnsureLabelIndex(finallyStartLabel)));
+            Emit(
+                EnterTryCatchFinallyInstruction.CreateTryFinally(
+                    EnsureLabelIndex(finallyStartLabel)
+                )
+            );
         }
 
         public void EmitEnterTryCatch()
@@ -1087,10 +1172,16 @@ namespace System.Linq.Expressions.Interpreter
 
         public void EmitLeaveExceptionHandler(bool hasValue, BranchLabel tryExpressionEndLabel)
         {
-            Emit(LeaveExceptionHandlerInstruction.Create(EnsureLabelIndex(tryExpressionEndLabel), hasValue));
+            Emit(
+                LeaveExceptionHandlerInstruction.Create(
+                    EnsureLabelIndex(tryExpressionEndLabel),
+                    hasValue
+                )
+            );
         }
 
-        public void EmitIntSwitch<T>(Dictionary<T, int> cases) where T : notnull
+        public void EmitIntSwitch<T>(Dictionary<T, int> cases)
+            where T : notnull
         {
             Emit(new IntSwitchInstruction<T>(cases));
         }

@@ -1,21 +1,27 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Threading;
 using System.Runtime;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace System.Runtime.CompilerServices
 {
     internal static class ClassConstructorRunner
     {
-        private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(ref StaticClassConstructionContext context, object gcStaticBase)
+        private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(
+            ref StaticClassConstructionContext context,
+            object gcStaticBase
+        )
         {
             CheckStaticClassConstruction(ref context);
             return gcStaticBase;
         }
 
-        private static unsafe IntPtr CheckStaticClassConstructionReturnNonGCStaticBase(ref StaticClassConstructionContext context, IntPtr nonGcStaticBase)
+        private static unsafe IntPtr CheckStaticClassConstructionReturnNonGCStaticBase(
+            ref StaticClassConstructionContext context,
+            IntPtr nonGcStaticBase
+        )
         {
             CheckStaticClassConstruction(ref context);
             return nonGcStaticBase;
@@ -32,7 +38,9 @@ namespace System.Runtime.CompilerServices
         // The context structure passed by reference lives in the image of one of the application's modules.
         // The contents are thus fixed (do not require pinning) and the address can be used as a unique
         // identifier for the context.
-        private static unsafe void CheckStaticClassConstruction(ref StaticClassConstructionContext context)
+        private static unsafe void CheckStaticClassConstruction(
+            ref StaticClassConstructionContext context
+        )
         {
             // This is a simplistic placeholder implementation. For instance it uses a busy wait spinlock and
             // does not handle recursion.
@@ -58,13 +66,19 @@ namespace System.Runtime.CompilerServices
 #pragma warning disable 420
 
                 // Try to transition this to 1 which will let other threads know we're going to run the cctor here.
-                if (Interlocked.CompareExchange(ref context.cctorMethodAddress, (IntPtr)1, oldInitializationState) == oldInitializationState)
+                if (
+                    Interlocked.CompareExchange(
+                        ref context.cctorMethodAddress,
+                        (IntPtr)1,
+                        oldInitializationState
+                    ) == oldInitializationState
+                )
                 {
                     // We won the race to transition the state to 1. So we can now run the cctor. Other
                     // threads trying to do the same thing will spin waiting for us to transition the state to
                     // 1.
 
-                    ((delegate*<void>)oldInitializationState)();
+                    ((delegate* <void>)oldInitializationState)();
 
                     // Insert a memory barrier here to order any writes executed as part of static class
                     // construction above with respect to the initialized flag update we're about to make

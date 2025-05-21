@@ -10,14 +10,19 @@ namespace System.Text.Json.Serialization.Metadata
         private readonly IJsonTypeInfoResolver _source;
         private readonly Action<JsonTypeInfo>[] _modifiers;
 
-        public JsonTypeInfoResolverWithAddedModifiers(IJsonTypeInfoResolver source, Action<JsonTypeInfo>[] modifiers)
+        public JsonTypeInfoResolverWithAddedModifiers(
+            IJsonTypeInfoResolver source,
+            Action<JsonTypeInfo>[] modifiers
+        )
         {
             Debug.Assert(modifiers.Length > 0);
             _source = source;
             _modifiers = modifiers;
         }
 
-        public JsonTypeInfoResolverWithAddedModifiers WithAddedModifier(Action<JsonTypeInfo> modifier)
+        public JsonTypeInfoResolverWithAddedModifiers WithAddedModifier(
+            Action<JsonTypeInfo> modifier
+        )
         {
             var newModifiers = new Action<JsonTypeInfo>[_modifiers.Length + 1];
             _modifiers.CopyTo(newModifiers, 0);

@@ -54,7 +54,11 @@ namespace ComWrappersTests
         [DllImport("ComWrappersNative", CallingConvention = CallingConvention.StdCall)]
         static extern int RetrieveCapturedComPointer(out IComInterface foo);
 
-        [DllImport("ComWrappersNative", EntryPoint="RetrieveCapturedComPointer", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "ComWrappersNative",
+            EntryPoint = "RetrieveCapturedComPointer",
+            CallingConvention = CallingConvention.StdCall
+        )]
         static extern int RetrieveCapturedComPointerRaw(out IntPtr foo);
 
         [DllImport("ComWrappersNative", CallingConvention = CallingConvention.StdCall)]
@@ -63,7 +67,12 @@ namespace ComWrappersTests
         [DllImport("ComWrappersNative", CallingConvention = CallingConvention.StdCall)]
         static extern int BuildComPointer(out IComInterface foo);
 
-        [DllImport("ComWrappersNative", CallingConvention = CallingConvention.StdCall, PreserveSig = false, EntryPoint="BuildComPointer")]
+        [DllImport(
+            "ComWrappersNative",
+            CallingConvention = CallingConvention.StdCall,
+            PreserveSig = false,
+            EntryPoint = "BuildComPointer"
+        )]
         static extern IComInterface BuildComPointerNoPreserveSig();
 
         public static void TestComInteropNullPointers()
@@ -71,7 +80,11 @@ namespace ComWrappersTests
             Console.WriteLine("Testing Marshal APIs for COM interfaces");
             IComInterface comPointer = null;
             var result = IsNULL(comPointer);
-            ThrowIfNotEquals(true, IsNULL(comPointer), "COM interface marshalling null check failed");
+            ThrowIfNotEquals(
+                true,
+                IsNULL(comPointer),
+                "COM interface marshalling null check failed"
+            );
         }
 
         public static void TestComInteropRegistrationRequired()
@@ -81,11 +94,11 @@ namespace ComWrappersTests
             try
             {
                 CaptureComPointer(target);
-                throw new Exception("Cannot work without ComWrappers.RegisterForMarshalling called");
+                throw new Exception(
+                    "Cannot work without ComWrappers.RegisterForMarshalling called"
+                );
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
         }
 
         public static void TestComInteropReleaseProcess()
@@ -99,7 +112,11 @@ namespace ComWrappersTests
             ReleaseComPointer();
 
             GC.Collect();
-            ThrowIfNotEquals(false, comPointerHolder.IsAlive, ".NET object should be disposed by then");
+            ThrowIfNotEquals(
+                false,
+                comPointerHolder.IsAlive,
+                ".NET object should be disposed by then"
+            );
         }
 
         public static void TestRCWRoundTripRequireUnwrap()
@@ -109,7 +126,10 @@ namespace ComWrappersTests
             int result = CaptureComPointer(target);
             ThrowIfNotEquals(0, result, "Seems to be COM marshalling behave strange.");
             result = RetrieveCapturedComPointerRaw(out var comPtr);
-            var roundTripObject = GlobalComWrappers.GetOrCreateObjectForComInstance(comPtr, CreateObjectFlags.Unwrap);
+            var roundTripObject = GlobalComWrappers.GetOrCreateObjectForComInstance(
+                comPtr,
+                CreateObjectFlags.Unwrap
+            );
             ThrowIfNotEquals(0, result, "Seems to be COM marshalling behave strange.");
             if (roundTripObject != target)
             {
@@ -135,8 +155,14 @@ namespace ComWrappersTests
             Console.WriteLine("Testing RCW cache process");
             ComWrappers wrapper = new SimpleComWrapper();
             var target = new ComObject();
-            var comPtr = wrapper.GetOrCreateComInterfaceForObject(target, CreateComInterfaceFlags.None);
-            var comPtr2 = wrapper.GetOrCreateComInterfaceForObject(target, CreateComInterfaceFlags.None);
+            var comPtr = wrapper.GetOrCreateComInterfaceForObject(
+                target,
+                CreateComInterfaceFlags.None
+            );
+            var comPtr2 = wrapper.GetOrCreateComInterfaceForObject(
+                target,
+                CreateComInterfaceFlags.None
+            );
             if (comPtr != comPtr2)
             {
                 throw new Exception("RCW should round-trip");
@@ -148,8 +174,14 @@ namespace ComWrappersTests
             Console.WriteLine("Testing CCW uniqueness process");
             ComWrappers wrapper = new SimpleComWrapper();
             var target = new ComObject();
-            var comPtr = wrapper.GetOrCreateComInterfaceForObject(target, CreateComInterfaceFlags.None);
-            var ifPtr = wrapper.GetOrCreateObjectForComInstance(comPtr, CreateObjectFlags.UniqueInstance);
+            var comPtr = wrapper.GetOrCreateComInterfaceForObject(
+                target,
+                CreateComInterfaceFlags.None
+            );
+            var ifPtr = wrapper.GetOrCreateObjectForComInstance(
+                comPtr,
+                CreateObjectFlags.UniqueInstance
+            );
             if (ifPtr == target)
             {
                 throw new Exception("RCW should not round-trip for unique instances");
@@ -193,6 +225,7 @@ namespace ComWrappersTests
     public class ComObject : IComInterface
     {
         public int TestResult;
+
         public int DoWork(int param)
         {
             this.TestResult += param;
@@ -200,11 +233,12 @@ namespace ComWrappersTests
         }
     }
 
-    class NativeComObjectWrapper: IComInterface
+    class NativeComObjectWrapper : IComInterface
     {
         private IntPtr externalComObject;
 
-        public NativeComObjectWrapper(IntPtr externalComObject) => this.externalComObject = externalComObject;
+        public NativeComObjectWrapper(IntPtr externalComObject) =>
+            this.externalComObject = externalComObject;
 
         public unsafe int DoWork(int param)
         {
@@ -220,17 +254,28 @@ namespace ComWrappersTests
 
         static SimpleComWrapper()
         {
-            IntPtr* vtbl = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IComInterface), 4 * sizeof(IntPtr));
+            IntPtr* vtbl = (IntPtr*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(IComInterface),
+                    4 * sizeof(IntPtr)
+                );
             GetIUnknownImpl(out vtbl[0], out vtbl[1], out vtbl[2]);
             vtbl[3] = (IntPtr)(delegate* unmanaged<IntPtr, int, int>)&IComInterfaceProxy.DoWork;
 
-            var comInterfaceEntryMemory = RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IComInterface), sizeof(ComInterfaceEntry));
+            var comInterfaceEntryMemory = RuntimeHelpers.AllocateTypeAssociatedMemory(
+                typeof(IComInterface),
+                sizeof(ComInterfaceEntry)
+            );
             wrapperEntry = (ComInterfaceEntry*)comInterfaceEntryMemory;
             wrapperEntry->IID = new Guid("111e91ef-1887-4afd-81e3-70cf08e715d8");
             wrapperEntry->Vtable = (IntPtr)vtbl;
         }
 
-        protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+        protected override unsafe ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        )
         {
             if (obj is not IComInterface)
                 throw new Exception();
@@ -243,9 +288,7 @@ namespace ComWrappersTests
             return new NativeComObjectWrapper(externalComObject);
         }
 
-        protected override void ReleaseObjects(System.Collections.IEnumerable objects)
-        {
-        }
+        protected override void ReleaseObjects(System.Collections.IEnumerable objects) { }
     }
 
     internal unsafe class IComInterfaceProxy
@@ -253,7 +296,9 @@ namespace ComWrappersTests
         [UnmanagedCallersOnly]
         public static int DoWork(IntPtr thisPtr, int param)
         {
-            var inst = ComWrappers.ComInterfaceDispatch.GetInstance<IComInterface>((ComWrappers.ComInterfaceDispatch*)thisPtr);
+            var inst = ComWrappers.ComInterfaceDispatch.GetInstance<IComInterface>(
+                (ComWrappers.ComInterfaceDispatch*)thisPtr
+            );
             return inst.DoWork(param);
         }
     }

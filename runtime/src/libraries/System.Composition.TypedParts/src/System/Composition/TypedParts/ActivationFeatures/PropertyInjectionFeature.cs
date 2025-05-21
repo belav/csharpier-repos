@@ -17,22 +17,34 @@ namespace System.Composition.TypedParts.ActivationFeatures
     internal sealed class PropertyInjectionFeature : ActivationFeature
     {
         private readonly AttributedModelProvider _attributeContext;
-        private static readonly MethodInfo s_activatorInvokeMethod = typeof(CompositeActivator).GetTypeInfo().GetDeclaredMethod("Invoke");
+        private static readonly MethodInfo s_activatorInvokeMethod = typeof(CompositeActivator)
+            .GetTypeInfo()
+            .GetDeclaredMethod("Invoke");
 
         public PropertyInjectionFeature(AttributedModelProvider attributeContext)
         {
             _attributeContext = attributeContext;
         }
 
-        public override IEnumerable<CompositionDependency> GetDependencies(TypeInfo partType, DependencyAccessor definitionAccessor)
+        public override IEnumerable<CompositionDependency> GetDependencies(
+            TypeInfo partType,
+            DependencyAccessor definitionAccessor
+        )
         {
             var partTypeAsType = partType.AsType();
-            var imports = (from pi in partTypeAsType.GetRuntimeProperties()
-                               .Where(pi => pi.CanWrite && pi.SetMethod.IsPublic && !(pi.SetMethod.IsStatic))
-                           let attrs = _attributeContext.GetDeclaredAttributes(pi.DeclaringType, pi).ToArray()
-                           let site = new PropertyImportSite(pi)
-                           where attrs.Any(a => a is ImportAttribute || a is ImportManyAttribute)
-                           select new { Site = site, ImportInfo = ContractHelpers.GetImportInfo(pi.PropertyType, attrs, site) }).ToArray();
+            var imports = (
+                from pi in partTypeAsType
+                    .GetRuntimeProperties()
+                    .Where(pi => pi.CanWrite && pi.SetMethod.IsPublic && !(pi.SetMethod.IsStatic))
+                let attrs = _attributeContext.GetDeclaredAttributes(pi.DeclaringType, pi).ToArray()
+                let site = new PropertyImportSite(pi)
+                where attrs.Any(a => a is ImportAttribute || a is ImportManyAttribute)
+                select new
+                {
+                    Site = site,
+                    ImportInfo = ContractHelpers.GetImportInfo(pi.PropertyType, attrs, site),
+                }
+            ).ToArray();
 
             if (imports.Length == 0)
                 return NoDependencies;
@@ -43,12 +55,25 @@ namespace System.Composition.TypedParts.ActivationFeatures
             {
                 if (!i.ImportInfo.AllowDefault)
                 {
-                    result.Add(definitionAccessor.ResolveRequiredDependency(i.Site, i.ImportInfo.Contract, false));
+                    result.Add(
+                        definitionAccessor.ResolveRequiredDependency(
+                            i.Site,
+                            i.ImportInfo.Contract,
+                            false
+                        )
+                    );
                 }
                 else
                 {
                     CompositionDependency optional;
-                    if (definitionAccessor.TryResolveOptionalDependency(i.Site, i.ImportInfo.Contract, false, out optional))
+                    if (
+                        definitionAccessor.TryResolveOptionalDependency(
+                            i.Site,
+                            i.ImportInfo.Contract,
+                            false,
+                            out optional
+                        )
+                    )
                         result.Add(optional);
                     // Variation from CompositionContainer behaviour: we don't have to support recomposition
                     // so we don't require that defaultable imports be set to null.
@@ -62,7 +87,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
             TypeInfo partType,
             CompositeActivator activator,
             IDictionary<string, object> partMetadata,
-            IEnumerable<CompositionDependency> dependencies)
+            IEnumerable<CompositionDependency> dependencies
+        )
         {
             var propertyDependencies = dependencies
                 .Where(dep => dep.Site is PropertyImportSite)
@@ -91,8 +117,11 @@ namespace System.Composition.TypedParts.ActivationFeatures
                             Expression.Constant(d.Value.Target.GetDescriptor().Activator),
                             s_activatorInvokeMethod,
                             lc,
-                            op),
-                        property.PropertyType));
+                            op
+                        ),
+                        property.PropertyType
+                    )
+                );
 
                 statements.Add(assignment);
             }
@@ -100,8 +129,14 @@ namespace System.Composition.TypedParts.ActivationFeatures
             statements.Add(inst);
 
             var setAll = Expression.Block(new[] { typed }, statements);
-            var setAction = Expression.Lambda<Func<object, LifetimeContext, CompositionOperation, object>>(
-                setAll, inst, lc, op).Compile();
+            var setAction = Expression
+                .Lambda<Func<object, LifetimeContext, CompositionOperation, object>>(
+                    setAll,
+                    inst,
+                    lc,
+                    op
+                )
+                .Compile();
 
             return (c, o) =>
             {

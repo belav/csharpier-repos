@@ -28,7 +28,8 @@ public class CSwitchRecognitionTest
     [InlineData('A', false)]
     [InlineData('Z', false)]
     [InlineData('?', false)]
-    public static void TestRecSwitchSortedChar(char arg1, bool expected) => Assert.Equal(expected, RecSwitchSortedChar(arg1));
+    public static void TestRecSwitchSortedChar(char arg1, bool expected) =>
+        Assert.Equal(expected, RecSwitchSortedChar(arg1));
 
     // Test unsorted char cases
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -48,7 +49,8 @@ public class CSwitchRecognitionTest
     [InlineData('A', false)]
     [InlineData('Z', false)]
     [InlineData('?', false)]
-    public static void TestRecSwitchUnsortedChar(char arg1, bool expected) => Assert.Equal(expected, RecSwitchUnsortedChar(arg1));
+    public static void TestRecSwitchUnsortedChar(char arg1, bool expected) =>
+        Assert.Equal(expected, RecSwitchUnsortedChar(arg1));
 
     // Test sorted int cases
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -67,7 +69,8 @@ public class CSwitchRecognitionTest
     [InlineData(40, true)]
     [InlineData(70, false)]
     [InlineData(100, false)]
-    public static void TestRecSwitchSortedInt(int arg1, bool expected) => Assert.Equal(expected, RecSwitchSortedInt(arg1));
+    public static void TestRecSwitchSortedInt(int arg1, bool expected) =>
+        Assert.Equal(expected, RecSwitchSortedInt(arg1));
 
     // Test unsorted int cases
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -86,7 +89,8 @@ public class CSwitchRecognitionTest
     [InlineData(40, true)]
     [InlineData(70, false)]
     [InlineData(100, false)]
-    public static void TestRecSwitchUnsortedInt(int arg1, bool expected) => Assert.Equal(expected, RecSwitchUnsortedInt(arg1));
+    public static void TestRecSwitchUnsortedInt(int arg1, bool expected) =>
+        Assert.Equal(expected, RecSwitchUnsortedInt(arg1));
 
     // Test <= 64 switch cases
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -100,7 +104,8 @@ public class CSwitchRecognitionTest
     [InlineData(60, false)]
     [InlineData(63, true)]
     [InlineData(64, false)]
-    public static void TestRecSwitch64JumpTables(int arg1, bool expected) => Assert.Equal(expected, RecSwitch64JumpTables(arg1));
+    public static void TestRecSwitch64JumpTables(int arg1, bool expected) =>
+        Assert.Equal(expected, RecSwitch64JumpTables(arg1));
 
     //
     // Skip optimization
@@ -118,7 +123,8 @@ public class CSwitchRecognitionTest
     [InlineData(6, true)]
     [InlineData(127, true)]
     [InlineData(128, false)]
-    public static void TestRecSwitch128JumpTables(int arg1, bool expected) => Assert.Equal(expected, RecSwitch128JumpTables(arg1));
+    public static void TestRecSwitch128JumpTables(int arg1, bool expected) =>
+        Assert.Equal(expected, RecSwitch128JumpTables(arg1));
 
     // Skips `bit test` conversion because Switch jump targets are > 2 (should skip Switch Recognition optimization)
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -138,5 +144,6 @@ public class CSwitchRecognitionTest
     [InlineData(2, 4)]
     [InlineData(6, 4)]
     [InlineData(10, 1)]
-    public static void TestRecSwitchSkipBitTest(int arg1, int expected) => Assert.Equal(expected, RecSwitchSkipBitTest(arg1));
+    public static void TestRecSwitchSkipBitTest(int arg1, int expected) =>
+        Assert.Equal(expected, RecSwitchSkipBitTest(arg1));
 }

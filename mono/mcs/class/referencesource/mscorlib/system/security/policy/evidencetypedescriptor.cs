@@ -1,9 +1,9 @@
 // ==--==
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 using System;
 using System.Diagnostics;
@@ -36,9 +36,7 @@ namespace System.Security.Policy
         private Type m_evidenceType;
 #endif // _DEBUG
 
-        public EvidenceTypeDescriptor()
-        {
-        }
+        public EvidenceTypeDescriptor() { }
 
         /// <summary>
         ///     Make a deep copy of a type descriptor
@@ -69,7 +67,6 @@ namespace System.Security.Policy
         public EvidenceBase AssemblyEvidence
         {
             get { return m_assemblyEvidence; }
-
             set
             {
                 Contract.Assert(value != null);
@@ -86,7 +83,6 @@ namespace System.Security.Policy
         public bool Generated
         {
             get { return m_generated; }
-
             set
             {
                 Contract.Assert(value, "Attempt to clear the Generated flag");
@@ -100,7 +96,6 @@ namespace System.Security.Policy
         public bool HostCanGenerate
         {
             get { return m_hostCanGenerate; }
-
             set
             {
                 Contract.Assert(value, "Attempt to clear HostCanGenerate flag");
@@ -114,7 +109,6 @@ namespace System.Security.Policy
         public EvidenceBase HostEvidence
         {
             get { return m_hostEvidence; }
-
             set
             {
                 Contract.Assert(value != null);
@@ -134,7 +128,8 @@ namespace System.Security.Policy
             Contract.Assert(evidence != null);
 
             ILegacyEvidenceAdapter legacyAdapter = evidence as ILegacyEvidenceAdapter;
-            Type storedType = legacyAdapter == null ? evidence.GetType() : legacyAdapter.EvidenceType;
+            Type storedType =
+                legacyAdapter == null ? evidence.GetType() : legacyAdapter.EvidenceType;
 
             return m_evidenceType == null || m_evidenceType.IsAssignableFrom(storedType);
         }

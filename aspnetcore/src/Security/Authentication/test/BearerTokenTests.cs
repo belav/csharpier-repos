@@ -15,11 +15,16 @@ public class BearerTokenTests : SharedAuthenticationTests<BearerTokenOptions>
         {
             var services = new ServiceCollection();
             services.AddAuthentication().AddBearerToken();
-            return services.Select(d => d.ServiceType).Single(typeof(AuthenticationHandler<BearerTokenOptions>).IsAssignableFrom);
+            return services
+                .Select(d => d.ServiceType)
+                .Single(typeof(AuthenticationHandler<BearerTokenOptions>).IsAssignableFrom);
         }
     }
 
-    protected override void RegisterAuth(AuthenticationBuilder services, Action<BearerTokenOptions> configure)
+    protected override void RegisterAuth(
+        AuthenticationBuilder services,
+        Action<BearerTokenOptions> configure
+    )
     {
         services.AddBearerToken(configure);
     }

@@ -17,8 +17,15 @@ public class TestRelationalTransactionFactory : IRelationalTransactionFactory
         DbTransaction transaction,
         Guid transactionId,
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
-        bool transactionOwned)
-        => new TestRelationalTransaction(connection, transaction, logger, transactionOwned, Dependencies.SqlGenerationHelper);
+        bool transactionOwned
+    ) =>
+        new TestRelationalTransaction(
+            connection,
+            transaction,
+            logger,
+            transactionOwned,
+            Dependencies.SqlGenerationHelper
+        );
 }
 
 public class TestRelationalTransaction : RelationalTransaction
@@ -30,7 +37,8 @@ public class TestRelationalTransaction : RelationalTransaction
         DbTransaction transaction,
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
         bool transactionOwned,
-        ISqlGenerationHelper sqlGenerationHelper)
+        ISqlGenerationHelper sqlGenerationHelper
+    )
         : base(connection, transaction, new Guid(), logger, transactionOwned, sqlGenerationHelper)
     {
         _testConnection = (TestSqlServerConnection)connection;
@@ -53,7 +61,10 @@ public class TestRelationalTransaction : RelationalTransaction
                 }
 
                 _testConnection.DbConnection.Close();
-                throw SqlExceptionFactory.CreateSqlException(_testConnection.ErrorNumber, _testConnection.ConnectionId);
+                throw SqlExceptionFactory.CreateSqlException(
+                    _testConnection.ErrorNumber,
+                    _testConnection.ConnectionId
+                );
             }
         }
 
@@ -77,20 +88,24 @@ public class TestRelationalTransaction : RelationalTransaction
                 }
 
                 await _testConnection.DbConnection.CloseAsync();
-                throw SqlExceptionFactory.CreateSqlException(_testConnection.ErrorNumber, _testConnection.ConnectionId);
+                throw SqlExceptionFactory.CreateSqlException(
+                    _testConnection.ErrorNumber,
+                    _testConnection.ConnectionId
+                );
             }
         }
 
         await base.CommitAsync(cancellationToken);
     }
 
-    public override bool SupportsSavepoints
-        => true;
+    public override bool SupportsSavepoints => true;
 
     /// <inheritdoc />
     public override void ReleaseSavepoint(string name) { }
 
     /// <inheritdoc />
-    public override Task ReleaseSavepointAsync(string name, CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+    public override Task ReleaseSavepointAsync(
+        string name,
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 }

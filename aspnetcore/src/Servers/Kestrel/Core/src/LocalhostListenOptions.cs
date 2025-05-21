@@ -26,20 +26,31 @@ internal sealed class LocalhostListenOptions : ListenOptions
         return $"{Scheme}://localhost:{IPEndPoint!.Port}";
     }
 
-    internal override async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+    internal override async Task BindAsync(
+        AddressBindContext context,
+        CancellationToken cancellationToken
+    )
     {
         var exceptions = new List<Exception>();
 
         try
         {
             var v4Options = Clone(IPAddress.Loopback);
-            await AddressBinder.BindEndpointAsync(v4Options, context, cancellationToken).ConfigureAwait(false);
+            await AddressBinder
+                .BindEndpointAsync(v4Options, context, cancellationToken)
+                .ConfigureAwait(false);
         }
         catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
         {
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context.Logger.LogInformation(0, CoreStrings.NetworkInterfaceBindingFailed, GetDisplayName(), "IPv4 loopback", ex.Message);
+                context.Logger.LogInformation(
+                    0,
+                    CoreStrings.NetworkInterfaceBindingFailed,
+                    GetDisplayName(),
+                    "IPv4 loopback",
+                    ex.Message
+                );
             }
             exceptions.Add(ex);
         }
@@ -47,20 +58,31 @@ internal sealed class LocalhostListenOptions : ListenOptions
         try
         {
             var v6Options = Clone(IPAddress.IPv6Loopback);
-            await AddressBinder.BindEndpointAsync(v6Options, context, cancellationToken).ConfigureAwait(false);
+            await AddressBinder
+                .BindEndpointAsync(v6Options, context, cancellationToken)
+                .ConfigureAwait(false);
         }
         catch (Exception ex) when (!(ex is IOException or OperationCanceledException))
         {
             if (context.Logger.IsEnabled(LogLevel.Information))
             {
-                context.Logger.LogInformation(0, CoreStrings.NetworkInterfaceBindingFailed, GetDisplayName(), "IPv6 loopback", ex.Message);
+                context.Logger.LogInformation(
+                    0,
+                    CoreStrings.NetworkInterfaceBindingFailed,
+                    GetDisplayName(),
+                    "IPv6 loopback",
+                    ex.Message
+                );
             }
             exceptions.Add(ex);
         }
 
         if (exceptions.Count == 2)
         {
-            throw new IOException(CoreStrings.FormatAddressBindingFailed(GetDisplayName()), new AggregateException(exceptions));
+            throw new IOException(
+                CoreStrings.FormatAddressBindingFailed(GetDisplayName()),
+                new AggregateException(exceptions)
+            );
         }
 
         // If StartLocalhost doesn't throw, there is at least one listener.

@@ -16,7 +16,8 @@ namespace System.Net.NetworkInformation
         private readonly bool _supportsMulticast;
         private readonly long _speed;
 
-        private unsafe BsdNetworkInterface(string name, int index) : base(name)
+        private unsafe BsdNetworkInterface(string name, int index)
+            : base(name)
         {
             _index = index;
             Interop.Sys.NativeIPInterfaceStatistics nativeStats;
@@ -31,10 +32,15 @@ namespace System.Net.NetworkInformation
             }
             else
             {
-                _operationalStatus = (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceHasLink) != 0 ?  OperationalStatus.Up : OperationalStatus.Down;
+                _operationalStatus =
+                    (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceHasLink) != 0
+                        ? OperationalStatus.Up
+                        : OperationalStatus.Down;
             }
 
-            _supportsMulticast = (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceSupportsMulticast) != 0;
+            _supportsMulticast =
+                (nativeStats.Flags & (ulong)Interop.Sys.InterfaceFlags.InterfaceSupportsMulticast)
+                != 0;
             _speed = (long)nativeStats.Speed;
             _ipProperties = new BsdIpInterfaceProperties(this, (int)nativeStats.Mtu);
         }
@@ -72,7 +78,11 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ProcessIpv4Address(void* pContext, byte* ifaceName, Interop.Sys.IpAddressInfo* ipAddr)
+        private static unsafe void ProcessIpv4Address(
+            void* pContext,
+            byte* ifaceName,
+            Interop.Sys.IpAddressInfo* ipAddr
+        )
         {
             Context* context = (Context*)pContext;
             try
@@ -86,12 +96,19 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ProcessIpv6Address(void* pContext, byte* ifaceName, Interop.Sys.IpAddressInfo* ipAddr, uint* scopeId)
+        private static unsafe void ProcessIpv6Address(
+            void* pContext,
+            byte* ifaceName,
+            Interop.Sys.IpAddressInfo* ipAddr,
+            uint* scopeId
+        )
         {
             Context* context = (Context*)pContext;
             try
             {
-                context->GetOrCreate(ifaceName, ipAddr->InterfaceIndex).ProcessIpv6Address(ipAddr, *scopeId);
+                context
+                    ->GetOrCreate(ifaceName, ipAddr->InterfaceIndex)
+                    .ProcessIpv6Address(ipAddr, *scopeId);
             }
             catch (Exception e)
             {
@@ -100,12 +117,18 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ProcessLinkLayerAddress(void* pContext, byte* ifaceName, Interop.Sys.LinkLayerAddressInfo* llAddr)
+        private static unsafe void ProcessLinkLayerAddress(
+            void* pContext,
+            byte* ifaceName,
+            Interop.Sys.LinkLayerAddressInfo* llAddr
+        )
         {
             Context* context = (Context*)pContext;
             try
             {
-                context->GetOrCreate(ifaceName, llAddr->InterfaceIndex).ProcessLinkLayerAddress(llAddr);
+                context
+                    ->GetOrCreate(ifaceName, llAddr->InterfaceIndex)
+                    .ProcessLinkLayerAddress(llAddr);
             }
             catch (Exception e)
             {
@@ -125,10 +148,18 @@ namespace System.Net.NetworkInformation
                 // Because these callbacks are executed in a reverse-PInvoke, we do not want any exceptions
                 // to propagate out, because they will not be catchable. Instead, we track all the exceptions
                 // that are thrown in these callbacks, and aggregate them at the end.
-                int result = Interop.Sys.EnumerateInterfaceAddresses(&context, &ProcessIpv4Address, &ProcessIpv6Address, &ProcessLinkLayerAddress);
+                int result = Interop.Sys.EnumerateInterfaceAddresses(
+                    &context,
+                    &ProcessIpv4Address,
+                    &ProcessIpv6Address,
+                    &ProcessLinkLayerAddress
+                );
                 if (context._exceptions != null)
                 {
-                    throw new NetworkInformationException(SR.net_PInvokeError, new AggregateException(context._exceptions));
+                    throw new NetworkInformationException(
+                        SR.net_PInvokeError,
+                        new AggregateException(context._exceptions)
+                    );
                 }
                 if (result == 0)
                 {
@@ -160,12 +191,24 @@ namespace System.Net.NetworkInformation
             return new BsdIPv4InterfaceStatistics(Name);
         }
 
-        public override OperationalStatus OperationalStatus { get { return _operationalStatus; } }
+        public override OperationalStatus OperationalStatus
+        {
+            get { return _operationalStatus; }
+        }
 
-        public override long Speed { get { return _speed; } }
+        public override long Speed
+        {
+            get { return _speed; }
+        }
 
-        public override bool SupportsMulticast { get { return _supportsMulticast; } }
+        public override bool SupportsMulticast
+        {
+            get { return _supportsMulticast; }
+        }
 
-        public override bool IsReceiveOnly { get { return false; } }
+        public override bool IsReceiveOnly
+        {
+            get { return false; }
+        }
     }
 }

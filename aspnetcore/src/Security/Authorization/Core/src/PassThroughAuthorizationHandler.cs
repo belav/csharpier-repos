@@ -18,15 +18,15 @@ public class PassThroughAuthorizationHandler : IAuthorizationHandler
     /// <summary>
     /// Creates a new instance of <see cref="PassThroughAuthorizationHandler"/>.
     /// </summary>
-    public PassThroughAuthorizationHandler() : this(Options.Create(new AuthorizationOptions()))
-    { }
+    public PassThroughAuthorizationHandler()
+        : this(Options.Create(new AuthorizationOptions())) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="PassThroughAuthorizationHandler"/>.
     /// </summary>
     /// <param name="options">The <see cref="AuthorizationOptions"/> used.</param>
-    public PassThroughAuthorizationHandler(IOptions<AuthorizationOptions> options)
-        => _options = options.Value;
+    public PassThroughAuthorizationHandler(IOptions<AuthorizationOptions> options) =>
+        _options = options.Value;
 
     /// <summary>
     /// Makes a decision if authorization is allowed.

@@ -165,7 +165,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (XmlException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -184,7 +188,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("x", "a", "bar", "b");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<~f x a~:Root ~a p1 a~:a=\"b\" xmlns:~a p1 A~=\"bar\" xmlns:~f x A~=\"foo\" />"));
+                Assert.True(
+                    utils.CompareString(
+                        "<~f x a~:Root ~a p1 a~:a=\"b\" xmlns:~a p1 A~=\"bar\" xmlns:~f x A~=\"foo\" />"
+                    )
+                );
             }
 
             // Nested elements have same prefix, but different namespace
@@ -201,7 +209,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<x:Root xmlns:x=\"foo\"><x:level1 xmlns:x=\"bar\"><x:level2 xmlns:x=\"blah\" /></x:level1></x:Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<x:Root xmlns:x=\"foo\"><x:level1 xmlns:x=\"bar\"><x:level2 xmlns:x=\"blah\" /></x:level1></x:Root>"
+                    )
+                );
             }
 
             // Mapping reserved prefix xml to invalid namespace
@@ -218,7 +230,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -254,7 +270,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root><xmlA:elem1 xmlns:xmlA=\"test\" /><xMlB:elem2 xmlns:xMlB=\"test\" /></Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root><xmlA:elem1 xmlns:xmlA=\"test\" /><xMlB:elem2 xmlns:xMlB=\"test\" /></Root>"
+                    )
+                );
             }
 
             // Reuse prefix that refers the same as default namespace
@@ -271,7 +291,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<x:foo xmlns:x=\"uri-1\"><bar xmlns=\"uri-1\"><x:bop /></bar></x:foo>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<x:foo xmlns:x=\"uri-1\"><bar xmlns=\"uri-1\"><x:bop /></bar></x:foo>"
+                    )
+                );
             }
 
             // Should throw error for prefix=xmlns
@@ -289,7 +313,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (Exception e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -324,7 +352,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("y", "attr", "foo", "b");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<x:Root y:attr=\"b\" xmlns:y=\"foo\" xmlns:x=\"foo\" />"));
+                Assert.True(
+                    utils.CompareReader("<x:Root y:attr=\"b\" xmlns:y=\"foo\" xmlns:x=\"foo\" />")
+                );
             }
 
             // Create same prefix for element and attribute that have same namespace
@@ -352,7 +382,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("x", "attr", "bar", "test");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<~f x a~:Root ~a p1 a~:attr=\"test\" xmlns:~a p1 A~=\"bar\" xmlns:~f x A~=\"foo\" />"));
+                Assert.True(
+                    utils.CompareString(
+                        "<~f x a~:Root ~a p1 a~:attr=\"test\" xmlns:~a p1 A~=\"bar\" xmlns:~f x A~=\"foo\" />"
+                    )
+                );
             }
 
             // Namespace string contains surrogates, reuse at different levels
@@ -369,7 +403,10 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteElementString("elt", uri, "text");
                     w.WriteEndElement();
                 }
-                string strExpected = string.Format("<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>", uri);
+                string strExpected = string.Format(
+                    "<root xmlns:pre=\"{0}\"><pre:elt>text</pre:elt></root>",
+                    uri
+                );
                 Assert.True(utils.CompareReader(strExpected));
             }
 
@@ -380,13 +417,18 @@ namespace System.Xml.XmlWriterApiTests
             {
                 using (XmlWriter w = utils.CreateWriter())
                 {
-                    string strxml = "<?xml version=\"1.0\" ?><root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>";
+                    string strxml =
+                        "<?xml version=\"1.0\" ?><root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>";
 
                     XmlReader xr = ReaderHelper.Create(new StringReader(strxml));
                     w.WriteNode(xr, false);
                     xr.Dispose();
                 }
-                Assert.True(utils.CompareReader("<root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<root xmlns:foo=\"urn:&lt;&gt;\"><foo:elt1 /><foo:elt2 /><foo:elt3 /></root>"
+                    )
+                );
             }
 
             // Verify it resets default namespace when redefined earlier in the stack
@@ -404,7 +446,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<x xmlns=\"foo\"><y xmlns=\"\"><z xmlns=\"foo\" /></y></x>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<x xmlns=\"foo\"><y xmlns=\"\"><z xmlns=\"foo\" /></y></x>"
+                    )
+                );
             }
 
             // The default namespace for an element can not be changed once it is written out
@@ -423,7 +469,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (XmlException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -441,7 +491,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteStartElement("foo", "bar", "http://www.w3.org/XML/1998/namaespace");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<foo:bar xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\" />"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<foo:bar xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\" />"
+                    )
+                );
             }
 
             // Pass NULL as NS to WriteStartElement
@@ -473,7 +527,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -494,7 +552,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -516,7 +578,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -587,7 +653,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteElementString(null, "child", "ns", "test");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>"
+                    )
+                );
             }
 
             // Pass String.Empty prefix to WriteStartElement() when namespace is in scope
@@ -601,7 +671,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteElementString(string.Empty, "child", "ns", "test");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<pre:Root xmlns:pre='ns'><child xmlns='ns'>test</child></pre:Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<pre:Root xmlns:pre='ns'><child xmlns='ns'>test</child></pre:Root>"
+                    )
+                );
             }
 
             // Pass null ns to WriteStartElement() when prefix is in scope
@@ -615,7 +689,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteElementString("pre", "child", null, "test");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<pre:Root xmlns:pre='ns'><pre:child>test</pre:child></pre:Root>"
+                    )
+                );
             }
 
             // Pass String.Empty ns to WriteStartElement() when prefix is in scope
@@ -698,7 +776,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -714,10 +796,18 @@ namespace System.Xml.XmlWriterApiTests
                 using (XmlWriter w = utils.CreateWriter())
                 {
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xmlns", "xml", null, "http://www.w3.org/XML/1998/namespace");
+                    w.WriteAttributeString(
+                        "xmlns",
+                        "xml",
+                        null,
+                        "http://www.w3.org/XML/1998/namespace"
+                    );
                     w.WriteEndElement();
                 }
-                string exp = (utils.WriterType == WriterType.UnicodeWriter) ? "<Root />" : "<Root xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" />";
+                string exp =
+                    (utils.WriterType == WriterType.UnicodeWriter)
+                        ? "<Root />"
+                        : "<Root xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" />";
                 Assert.True(utils.CompareReader(exp));
             }
 
@@ -743,7 +833,12 @@ namespace System.Xml.XmlWriterApiTests
                 using (XmlWriter w = utils.CreateWriter())
                 {
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xml", "space", "http://www.w3.org/XML/1998/namespace", "default");
+                    w.WriteAttributeString(
+                        "xml",
+                        "space",
+                        "http://www.w3.org/XML/1998/namespace",
+                        "default"
+                    );
                     w.WriteEndElement();
                 }
                 Assert.True(utils.CompareReader("<Root xml:space=\"default\" />"));
@@ -765,7 +860,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -789,14 +888,17 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
                 CError.WriteLine("Did not throw exception");
                 Assert.Fail();
             }
-
 
             // WriteAttribute, define namespace attribute before value attribute
             [Theory]
@@ -844,7 +946,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:x=\"bar\" x:c=\"d\" /></level1>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:x=\"bar\" x:c=\"d\" /></level1>"
+                    )
+                );
             }
 
             // WriteAttribute, redefine namespace at different scope and use both of them
@@ -863,7 +969,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:y=\"fo\" y:c=\"d\" /></level1>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<level1 xmlns:x=\"fo\" x:a=\"b\"><level2 xmlns:y=\"fo\" y:c=\"d\" /></level1>"
+                    )
+                );
             }
 
             // WriteAttribute with colliding prefix with element
@@ -877,7 +987,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("x", "a", "bar", "b");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<~f x a~:Root ~a p1 a~:a=\"b\" xmlns:~a p1 A~=\"bar\" xmlns:~f x A~=\"fo\" />"));
+                Assert.True(
+                    utils.CompareString(
+                        "<~f x a~:Root ~a p1 a~:a=\"b\" xmlns:~a p1 A~=\"bar\" xmlns:~f x A~=\"fo\" />"
+                    )
+                );
             }
 
             // WriteAttribute with colliding namespace with element
@@ -891,7 +1005,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("y", "a", "fo", "b");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<x:Root y:a=\"b\" xmlns:y=\"fo\" xmlns:x=\"fo\" />"));
+                Assert.True(
+                    utils.CompareReader("<x:Root y:a=\"b\" xmlns:y=\"fo\" xmlns:x=\"fo\" />")
+                );
             }
 
             // WriteAttribute with namespace but no prefix
@@ -920,7 +1036,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("x", "c", "bar", "d");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<Root ~f x a~:a=\"b\" ~a p2 a~:c=\"d\" xmlns:~a p2 A~=\"bar\" xmlns:~f x A~=\"fo\" />"));
+                Assert.True(
+                    utils.CompareString(
+                        "<Root ~f x a~:a=\"b\" ~a p2 a~:c=\"d\" xmlns:~a p2 A~=\"bar\" xmlns:~f x A~=\"fo\" />"
+                    )
+                );
             }
 
             // WriteAttribute with String.Empty and null as namespace and prefix values
@@ -984,7 +1104,6 @@ namespace System.Xml.XmlWriterApiTests
                 Assert.True(utils.CompareReader("<Root a=\"b\" />"));
             }
 
-
             // WriteAttribe in nested elements with same namespace but different prefix
             [Theory]
             [XmlWriterInlineData]
@@ -1005,7 +1124,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root a:x=\"y\" xmlns:a=\"fo\"><level1 b:x=\"y\" xmlns:b=\"fo\"><level2 c:x=\"y\" xmlns:c=\"fo\" /></level1></Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root a:x=\"y\" xmlns:a=\"fo\"><level1 b:x=\"y\" xmlns:b=\"fo\"><level2 c:x=\"y\" xmlns:c=\"fo\" /></level1></Root>"
+                    )
+                );
             }
 
             // WriteAttribute for x:a and xmlns:a diff namespace
@@ -1020,7 +1143,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("xmlns", "a", null, "foo");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root x:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"bar\" />"));
+                Assert.True(
+                    utils.CompareReader("<Root x:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"bar\" />")
+                );
             }
 
             // WriteAttribute for x:a and xmlns:a same namespace
@@ -1035,7 +1160,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("xmlns", "a", null, "foo");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root x:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"foo\" />"));
+                Assert.True(
+                    utils.CompareReader("<Root x:a=\"b\" xmlns:a=\"foo\" xmlns:x=\"foo\" />")
+                );
             }
 
             // WriteAttribute with colliding NS and prefix for 2 attributes
@@ -1065,7 +1192,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("a", "\"", "b");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<Root ~a p1 a~:a=\"b\" xmlns:~a p1 A~=\"&quot;\" />"));
+                Assert.True(
+                    utils.CompareString("<Root ~a p1 a~:a=\"b\" xmlns:~a p1 A~=\"&quot;\" />")
+                );
             }
 
             // Attach prefix with empty namespace
@@ -1084,7 +1213,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1100,10 +1233,19 @@ namespace System.Xml.XmlWriterApiTests
                 using (XmlWriter w = utils.CreateWriter())
                 {
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("xmlns", "foo", "", "http://www.w3.org/XML/1998/namaespace");
+                    w.WriteAttributeString(
+                        "xmlns",
+                        "foo",
+                        "",
+                        "http://www.w3.org/XML/1998/namaespace"
+                    );
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\" />"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\" />"
+                    )
+                );
             }
 
             // Map XML NS 'http://www.w3.org/XML/1998/namaespace' to another prefix
@@ -1114,10 +1256,19 @@ namespace System.Xml.XmlWriterApiTests
                 using (XmlWriter w = utils.CreateWriter())
                 {
                     w.WriteStartElement("Root");
-                    w.WriteAttributeString("foo", "bar", "http://www.w3.org/XML/1998/namaespace", "test");
+                    w.WriteAttributeString(
+                        "foo",
+                        "bar",
+                        "http://www.w3.org/XML/1998/namaespace",
+                        "test"
+                    );
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root foo:bar=\"test\" xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\" />"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root foo:bar=\"test\" xmlns:foo=\"http://www.w3.org/XML/1998/namaespace\" />"
+                    )
+                );
             }
 
             // Pass empty namespace to WriteAttributeString(prefix, name, ns, value)
@@ -1131,7 +1282,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString("pre", "attr", "", "test");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<pre:Root attr=\"test\" xmlns:pre=\"urn:pre\" />"));
+                Assert.True(
+                    utils.CompareReader("<pre:Root attr=\"test\" xmlns:pre=\"urn:pre\" />")
+                );
             }
 
             // Write attribute with prefix = xmlns
@@ -1149,7 +1302,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1167,12 +1324,21 @@ namespace System.Xml.XmlWriterApiTests
                     try
                     {
                         w.WriteStartElement("foo");
-                        w.WriteAttributeString("aaa", "bbb", "http://www.w3.org/XML/1998/namespace", "ccc");
+                        w.WriteAttributeString(
+                            "aaa",
+                            "bbb",
+                            "http://www.w3.org/XML/1998/namespace",
+                            "ccc"
+                        );
                     }
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1194,7 +1360,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1217,10 +1387,14 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<d:Data xmlns:d=\"http://example.org/data\">" +
-                                    "<g:GoodStuff hello=\"world\" xmlns:g=\"http://example.org/data/good\" />" +
-                                    "<BadStuff hello=\"world\" xmlns=\"http://example.org/data/bad\" />" +
-                                    "</d:Data>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<d:Data xmlns:d=\"http://example.org/data\">"
+                            + "<g:GoodStuff hello=\"world\" xmlns:g=\"http://example.org/data/good\" />"
+                            + "<BadStuff hello=\"world\" xmlns=\"http://example.org/data/bad\" />"
+                            + "</d:Data>"
+                    )
+                );
             }
 
             // Pass null prefix to WriteAttributeString()
@@ -1234,7 +1408,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString(null, "attr", "ns", "value");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<Root ~a p1 a~:attr=\"value\" xmlns:~a p1 A~=\"ns\" />"));
+                Assert.True(
+                    utils.CompareString("<Root ~a p1 a~:attr=\"value\" xmlns:~a p1 A~=\"ns\" />")
+                );
             }
 
             // Pass String.Empty prefix to WriteAttributeString()
@@ -1248,7 +1424,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteAttributeString(string.Empty, "attr", "ns", "value");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareString("<Root ~a p1 a~:attr=\"value\" xmlns:~a p1 A~=\"ns\" />"));
+                Assert.True(
+                    utils.CompareString("<Root ~a p1 a~:attr=\"value\" xmlns:~a p1 A~=\"ns\" />")
+                );
             }
 
             // Pass null ns to WriteAttributeString()
@@ -1419,7 +1597,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteCData("This text is in a CDATA section");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root><![CDATA[This text is in a CDATA section]]></Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root><![CDATA[This text is in a CDATA section]]></Root>")
+                );
             }
 
             // WriteCData with valid surrogate pair
@@ -1447,7 +1627,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteCData("test ]]> test");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root><![CDATA[test ]]]]><![CDATA[> test]]></Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root><![CDATA[test ]]]]><![CDATA[> test]]></Root>")
+                );
             }
 
             // WriteCData with & < > chars, they should not be escaped
@@ -1461,7 +1643,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteCData("<greeting>Hello World! & Hello XML</greeting>");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root><![CDATA[<greeting>Hello World! & Hello XML</greeting>]]></Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root><![CDATA[<greeting>Hello World! & Hello XML</greeting>]]></Root>"
+                    )
+                );
             }
 
             // WriteCData with <![CDATA[
@@ -1477,6 +1663,7 @@ namespace System.Xml.XmlWriterApiTests
                 }
                 Assert.True(utils.CompareReader("<Root><![CDATA[<![CDATA[]]></Root>"));
             }
+
             // CData state machine
             [Theory]
             [XmlWriterInlineData]
@@ -1488,7 +1675,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteCData("]x]>]]x> x]x]x> x]]x]]x>");
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root><![CDATA[]x]>]]x> x]x]x> x]]x]]x>]]></Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root><![CDATA[]x]>]]x> x]x]x> x]]x]]x>]]></Root>")
+                );
             }
 
             // WriteCData with invalid surrogate pair
@@ -1530,7 +1719,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (InvalidOperationException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1579,12 +1772,12 @@ namespace System.Xml.XmlWriterApiTests
             }
 
             [Theory]
-            [XmlWriterInlineData(0x0d, NewLineHandling.Replace, "<r><![CDATA[\r\n]]></r>" )]
-            [XmlWriterInlineData(0x0d, NewLineHandling.None, "<r><![CDATA[\r]]></r>" )]
-            [XmlWriterInlineData(0x0d, NewLineHandling.Entitize, "<r><![CDATA[\r]]></r>" )]
-            [XmlWriterInlineData(0x0a, NewLineHandling.Replace, "<r><![CDATA[\r\n]]></r>" )]
-            [XmlWriterInlineData(0x0a, NewLineHandling.None, "<r><![CDATA[\n]]></r>" )]
-            [XmlWriterInlineData(0x0a, NewLineHandling.Entitize, "<r><![CDATA[\n]]></r>" )]
+            [XmlWriterInlineData(0x0d, NewLineHandling.Replace, "<r><![CDATA[\r\n]]></r>")]
+            [XmlWriterInlineData(0x0d, NewLineHandling.None, "<r><![CDATA[\r]]></r>")]
+            [XmlWriterInlineData(0x0d, NewLineHandling.Entitize, "<r><![CDATA[\r]]></r>")]
+            [XmlWriterInlineData(0x0a, NewLineHandling.Replace, "<r><![CDATA[\r\n]]></r>")]
+            [XmlWriterInlineData(0x0a, NewLineHandling.None, "<r><![CDATA[\n]]></r>")]
+            [XmlWriterInlineData(0x0a, NewLineHandling.Entitize, "<r><![CDATA[\n]]></r>")]
             public void CData_13(XmlWriterUtils utils, char ch, NewLineHandling nlh, string expXml)
             {
                 XmlWriterSettings xws = new XmlWriterSettings();
@@ -1741,13 +1934,25 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     catch (NullReferenceException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1760,9 +1965,11 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void entityRef_2(XmlWriterUtils utils)
             {
-                string exp = utils.IsIndent() ?
-                    "<!DOCTYPE Root [<!ENTITY e \"test\">]>" + Environment.NewLine + "<Root>&e;</Root>" :
-                    "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&e;</Root>";
+                string exp = utils.IsIndent()
+                    ? "<!DOCTYPE Root [<!ENTITY e \"test\">]>"
+                        + Environment.NewLine
+                        + "<Root>&e;</Root>"
+                    : "<!DOCTYPE Root [<!ENTITY e \"test\">]><Root>&e;</Root>";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -1780,9 +1987,11 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void entityRef_3(XmlWriterUtils utils)
             {
-                string exp = utils.IsIndent() ?
-                    "<!DOCTYPE root [<!ENTITY e \"en-us\">]>" + Environment.NewLine + "<root xml:lang=\"&e;&lt;\" />" :
-                    "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;&lt;\" />";
+                string exp = utils.IsIndent()
+                    ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
+                        + Environment.NewLine
+                        + "<root xml:lang=\"&e;&lt;\" />"
+                    : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;&lt;\" />";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -1803,9 +2012,11 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void var_14(XmlWriterUtils utils)
             {
-                string exp = utils.IsIndent() ?
-                    "<!DOCTYPE root [<!ENTITY e \"en-us\">]>" + Environment.NewLine + "<root xml:lang=\"&e;\" />" :
-                    "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;\" />";
+                string exp = utils.IsIndent()
+                    ? "<!DOCTYPE root [<!ENTITY e \"en-us\">]>"
+                        + Environment.NewLine
+                        + "<root xml:lang=\"&e;\" />"
+                    : "<!DOCTYPE root [<!ENTITY e \"en-us\">]><root xml:lang=\"&e;\" />";
 
                 using (XmlWriter w = utils.CreateWriter())
                 {
@@ -1857,7 +2068,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteCharEntity('\u0048');
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root>&#xD001;<elem>&#xF345;</elem>&#x48;</Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root>&#xD001;<elem>&#xF345;</elem>&#x48;</Root>")
+                );
             }
 
             // Call WriteCharEntity after WriteStartAttribute/WriteEndAttribute
@@ -1892,7 +2105,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1915,7 +2132,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -1971,7 +2192,10 @@ namespace System.Xml.XmlWriterApiTests
                     xw.WriteStartElement("root");
                     for (int i = 0; i < 150; i++)
                     {
-                        xw.WriteElementString("e", "\u00e6\u00f8\u00e5\u00e9\u00ed\u00e8\u00f9\u00f6\u00f1\u00ea\u00fb\u00ee\u00c2\u00c5\u00d8\u00f5\u00cf");
+                        xw.WriteElementString(
+                            "e",
+                            "\u00e6\u00f8\u00e5\u00e9\u00ed\u00e8\u00f9\u00f6\u00f1\u00ea\u00fb\u00ee\u00c2\u00c5\u00d8\u00f5\u00cf"
+                        );
                     }
                     xw.WriteElementString("end", "end");
                     xw.WriteEndElement();
@@ -2004,7 +2228,9 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteSurrogateCharEntity('\uDC22', '\uD820');
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>"));
+                Assert.True(
+                    utils.CompareReader("<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>")
+                );
             }
 
             // SurrogateCharEntity after WriteStartAttribute/WriteEndAttribute
@@ -2040,7 +2266,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteSurrogateCharEntity('\uDFFF', '\uDBFF');
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root a=\"&#x10000;\">&#x103FF;&#x10FC00;&#x10FFFF;</Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root a=\"&#x10000;\">&#x103FF;&#x10FC00;&#x10FFFF;</Root>"
+                    )
+                );
             }
 
             // Middle surrogate character
@@ -2072,7 +2302,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2095,7 +2329,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2118,7 +2356,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2204,13 +2446,21 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     catch (NullReferenceException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Element, "WriteState should be Element ");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Element,
+                            "WriteState should be Element "
+                        );
                         return;
                     }
                 }
@@ -2233,7 +2483,13 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2272,7 +2528,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2295,7 +2555,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (InvalidOperationException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2318,7 +2582,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2341,7 +2609,11 @@ namespace System.Xml.XmlWriterApiTests
                     catch (InvalidOperationException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2426,7 +2698,7 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        utils.CheckElementState(w.WriteState);//by design 396962
+                        utils.CheckElementState(w.WriteState); //by design 396962
                         return;
                     }
                 }
@@ -2611,13 +2883,25 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                     catch (NullReferenceException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2672,11 +2956,19 @@ namespace System.Xml.XmlWriterApiTests
                         CError.WriteLineIgnore(e.ToString());
                         if (utils.WriterType == WriterType.CustomWriter)
                         {
-                            CError.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Element,
+                                "WriteState should be Element"
+                            );
                         }
                         else
                         {
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                         }
                         return;
                     }
@@ -2702,7 +2994,13 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore(e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2797,7 +3095,12 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, WriteState.Error, WriteState.Element, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            WriteState.Error,
+                            WriteState.Element,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -2810,7 +3113,14 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void writeChars_6(XmlWriterUtils utils)
             {
-                VerifyInvalidWrite(utils, "WriteChars", 5, 0, 6, typeof(ArgumentOutOfRangeException));
+                VerifyInvalidWrite(
+                    utils,
+                    "WriteChars",
+                    5,
+                    0,
+                    6,
+                    typeof(ArgumentOutOfRangeException)
+                );
             }
 
             // WriteChars with count < 0
@@ -2818,7 +3128,14 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void writeChars_7(XmlWriterUtils utils)
             {
-                VerifyInvalidWrite(utils, "WriteChars", 5, 2, -1, typeof(ArgumentOutOfRangeException));
+                VerifyInvalidWrite(
+                    utils,
+                    "WriteChars",
+                    5,
+                    2,
+                    -1,
+                    typeof(ArgumentOutOfRangeException)
+                );
             }
 
             // WriteChars with index > buffer size
@@ -2826,7 +3143,14 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void writeChars_8(XmlWriterUtils utils)
             {
-                VerifyInvalidWrite(utils, "WriteChars", 5, 6, 1, typeof(ArgumentOutOfRangeException));
+                VerifyInvalidWrite(
+                    utils,
+                    "WriteChars",
+                    5,
+                    6,
+                    1,
+                    typeof(ArgumentOutOfRangeException)
+                );
             }
 
             // WriteChars with index < 0
@@ -2834,7 +3158,14 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void writeChars_9(XmlWriterUtils utils)
             {
-                VerifyInvalidWrite(utils, "WriteChars", 5, -1, 1, typeof(ArgumentOutOfRangeException));
+                VerifyInvalidWrite(
+                    utils,
+                    "WriteChars",
+                    5,
+                    -1,
+                    1,
+                    typeof(ArgumentOutOfRangeException)
+                );
             }
 
             // WriteChars with index + count exceeds buffer
@@ -2842,7 +3173,14 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void writeChars_10(XmlWriterUtils utils)
             {
-                VerifyInvalidWrite(utils, "WriteChars", 5, 2, 5, typeof(ArgumentOutOfRangeException));
+                VerifyInvalidWrite(
+                    utils,
+                    "WriteChars",
+                    5,
+                    2,
+                    5,
+                    typeof(ArgumentOutOfRangeException)
+                );
             }
 
             // WriteChars for xml:lang attribute, index = count = 0
@@ -3040,7 +3378,17 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData]
             public void writeString_13(XmlWriterUtils utils)
             {
-                char[] invalidXML = { '\uD800', '\uDC00', '\uD800', '\uDFFF', '\uDBFF', '\uDC00', '\uDBFF', '\uDFFF' };
+                char[] invalidXML =
+                {
+                    '\uD800',
+                    '\uDC00',
+                    '\uD800',
+                    '\uDFFF',
+                    '\uDBFF',
+                    '\uDC00',
+                    '\uDBFF',
+                    '\uDFFF',
+                };
                 string invXML = new string(invalidXML);
 
                 using (XmlWriter w = utils.CreateWriter())
@@ -3049,7 +3397,11 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteString(invXML);
                     w.WriteEndElement();
                 }
-                Assert.True(utils.CompareReader("<Root>\uD800\uDC00\uD800\uDFFF\uDBFF\uDC00\uDBFF\uDFFF</Root>"));
+                Assert.True(
+                    utils.CompareReader(
+                        "<Root>\uD800\uDC00\uD800\uDFFF\uDBFF\uDC00\uDBFF\uDFFF</Root>"
+                    )
+                );
             }
 
             // High surrogate on last position
@@ -3227,7 +3579,13 @@ namespace System.Xml.XmlWriterApiTests
                     catch (ArgumentException e)
                     {
                         CError.WriteLineIgnore("Exception: " + e.ToString());
-                        CError.Compare(w.WriteState, (utils.WriterType == WriterType.CharCheckingWriter) ? WriteState.Element : WriteState.Error, "WriteState should be Error");
+                        CError.Compare(
+                            w.WriteState,
+                            (utils.WriterType == WriterType.CharCheckingWriter)
+                                ? WriteState.Element
+                                : WriteState.Error,
+                            "WriteState should be Error"
+                        );
                         return;
                     }
                 }
@@ -3372,7 +3730,13 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteEndElement();
                     w.WriteEndElement();
                 }
-                Assert.True((utils.CompareReader("<Root>9223372036854775807<child>-9223372036854775808</child></Root>")));
+                Assert.True(
+                    (
+                        utils.CompareReader(
+                            "<Root>9223372036854775807<child>-9223372036854775808</child></Root>"
+                        )
+                    )
+                );
             }
 
             [Theory]
@@ -3393,7 +3757,10 @@ namespace System.Xml.XmlWriterApiTests
                             {
                                 w.WriteValue((object)null);
                             }
-                            catch (ArgumentNullException) { return; }
+                            catch (ArgumentNullException)
+                            {
+                                return;
+                            }
                             break;
                     }
                     throw new CTestFailedException("Test failed.");
@@ -3498,26 +3865,60 @@ namespace System.Xml.XmlWriterApiTests
                     value.Add("object", 0);
                     value.Add("bool", false);
                     value.Add("DateTime", new DateTime(2002, 1, 3, 21, 59, 59, 59));
-                    value.Add("DateTimeOffset", new DateTimeOffset(2002, 1, 3, 21, 59, 59, 59, TimeSpan.FromHours(0)));
+                    value.Add(
+                        "DateTimeOffset",
+                        new DateTimeOffset(2002, 1, 3, 21, 59, 59, 59, TimeSpan.FromHours(0))
+                    );
                     value.Add("ByteArray", new byte[] { 0xd8, 0x7e });
                     value.Add("BoolArray", new bool[] { true, false });
                     value.Add("ObjectArray", new object[] { 0, 1 });
                     value.Add("DecimalArray", new decimal[] { 0, 1 });
                     value.Add("DoubleArray", new double[] { 0, 1 });
-                    value.Add("DateTimeArray", new DateTime[] { new DateTime(2002, 12, 30), new DateTime(2, 1, 3, 23, 59, 59, 59) });
-                    value.Add("DateTimeOffsetArray", new DateTimeOffset[] { new DateTimeOffset(2002, 12, 30, 0, 0, 0, TimeSpan.FromHours(-8.0)), new DateTimeOffset(2, 1, 3, 23, 59, 59, 59, TimeSpan.FromHours(0)) });
+                    value.Add(
+                        "DateTimeArray",
+                        new DateTime[]
+                        {
+                            new DateTime(2002, 12, 30),
+                            new DateTime(2, 1, 3, 23, 59, 59, 59),
+                        }
+                    );
+                    value.Add(
+                        "DateTimeOffsetArray",
+                        new DateTimeOffset[]
+                        {
+                            new DateTimeOffset(2002, 12, 30, 0, 0, 0, TimeSpan.FromHours(-8.0)),
+                            new DateTimeOffset(2, 1, 3, 23, 59, 59, 59, TimeSpan.FromHours(0)),
+                        }
+                    );
                     value.Add("Int16Array", new short[] { 0, 1 });
                     value.Add("Int32Array", new int[] { 0, 1 });
                     value.Add("Int64Array", new long[] { 0, 1 });
                     value.Add("SByteArray", new sbyte[] { 0, 1 });
                     value.Add("SingleArray", new float[] { 0, 1 });
                     value.Add("StringArray", new string[] { "0", "1" });
-                    value.Add("TimeSpanArray", new TimeSpan[] { TimeSpan.MinValue, TimeSpan.MaxValue });
+                    value.Add(
+                        "TimeSpanArray",
+                        new TimeSpan[] { TimeSpan.MinValue, TimeSpan.MaxValue }
+                    );
                     value.Add("UInt16Array", new ushort[] { 0, 1 });
                     value.Add("UInt32Array", new uint[] { 0, 1 });
                     value.Add("UInt64Array", new ulong[] { 0, 1 });
-                    value.Add("UriArray", new Uri[] { new Uri("http://wddata", UriKind.Absolute), new Uri("http://webxtest") });
-                    value.Add("XmlQualifiedNameArray", new XmlQualifiedName[] { new XmlQualifiedName("a"), new XmlQualifiedName("b", null) });
+                    value.Add(
+                        "UriArray",
+                        new Uri[]
+                        {
+                            new Uri("http://wddata", UriKind.Absolute),
+                            new Uri("http://webxtest"),
+                        }
+                    );
+                    value.Add(
+                        "XmlQualifiedNameArray",
+                        new XmlQualifiedName[]
+                        {
+                            new XmlQualifiedName("a"),
+                            new XmlQualifiedName("b", null),
+                        }
+                    );
                     value.Add("List", new List<Guid>[] { });
                     value.Add("TimeSpan", new TimeSpan());
                     value.Add("Double", double.MaxValue);
@@ -3527,702 +3928,683 @@ namespace System.Xml.XmlWriterApiTests
                     value.Add("string", "123");
                 }
             }
+
             private object[] _dates = new object[]
             {
-                new DateTimeOffset(2002,1,3,21,59,59,59, TimeZoneInfo.Local.GetUtcOffset(new DateTime(2002,1,3))),
+                new DateTimeOffset(
+                    2002,
+                    1,
+                    3,
+                    21,
+                    59,
+                    59,
+                    59,
+                    TimeZoneInfo.Local.GetUtcOffset(new DateTime(2002, 1, 3))
+                ),
                 "2002-01-03T21:59:59.059",
-                XmlConvert.ToString(new DateTimeOffset(2002,1,3,21,59,59,59, TimeSpan.FromHours(0)))
+                XmlConvert.ToString(
+                    new DateTimeOffset(2002, 1, 3, 21, 59, 59, 59, TimeSpan.FromHours(0))
+                ),
             };
 
             [Theory]
-            [XmlWriterInlineData(1, "UInt64", "string", true, null )]
-            [XmlWriterInlineData(1, "UInt32", "string", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "string", true, null )]
-            [XmlWriterInlineData(1, "Int64", "string", true, null )]
-            [XmlWriterInlineData(1, "Int32", "string", true, null )]
-            [XmlWriterInlineData(1, "Int16", "string", true, null )]
-            [XmlWriterInlineData(1, "Byte", "string", true, null )]
-            [XmlWriterInlineData(1, "SByte", "string", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "string", true, null )]
-            [XmlWriterInlineData(1, "float", "string", true, null )]
-            [XmlWriterInlineData(1, "object", "string", true, null )]
-            [XmlWriterInlineData(1, "bool", "string", true, "false" )]
-            [XmlWriterInlineData(1, "DateTime", "string", true, 1 )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "string", true, 2 )]
-            [XmlWriterInlineData(1, "ByteArray", "string", true, "2H4=" )]
-            [XmlWriterInlineData(1, "List", "string", true, "" )]
-            [XmlWriterInlineData(1, "TimeSpan", "string", true, "PT0S" )]
-            [XmlWriterInlineData(1, "Uri", "string", true, null )]
-            [XmlWriterInlineData(1, "Double", "string", true, "1.7976931348623157E+308" )]
-            [XmlWriterInlineData(1, "Single", "string", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "string", true, null )]
-            [XmlWriterInlineData(1, "string", "string", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "UInt32", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "Int64", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "Int32", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "Int16", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "Byte", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "SByte", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "float", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "object", "UInt64", true, null )]
-            [XmlWriterInlineData(1, "bool", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "List", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "Uri", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "Double", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "Single", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "UInt64", false, null )]
-            [XmlWriterInlineData(1, "string", "UInt64", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "Int64", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "Int64", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "Int64", true, null )]
-            [XmlWriterInlineData(1, "Int64", "Int64", true, null )]
-            [XmlWriterInlineData(1, "Int32", "Int64", true, null )]
-            [XmlWriterInlineData(1, "Int16", "Int64", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Int64", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Int64", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "Int64", false, null )]
-            [XmlWriterInlineData(1, "float", "Int64", false, null )]
-            [XmlWriterInlineData(1, "object", "Int64", true, null )]
-            [XmlWriterInlineData(1, "bool", "Int64", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Int64", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Int64", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Int64", false, null )]
-            [XmlWriterInlineData(1, "List", "Int64", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Int64", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Int64", false, null )]
-            [XmlWriterInlineData(1, "Double", "Int64", false, null )]
-            [XmlWriterInlineData(1, "Single", "Int64", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Int64", false, null )]
-            [XmlWriterInlineData(1, "string", "Int64", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "Int64", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "Int32", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "Int16", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "Byte", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "SByte", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "float", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "object", "UInt32", true, null )]
-            [XmlWriterInlineData(1, "bool", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "List", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "Uri", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "Double", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "Single", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "UInt32", false, null )]
-            [XmlWriterInlineData(1, "string", "UInt32", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "Int32", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "Int32", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "Int32", true, null )]
-            [XmlWriterInlineData(1, "Int64", "Int32", false, null )]
-            [XmlWriterInlineData(1, "Int32", "Int32", true, null )]
-            [XmlWriterInlineData(1, "Int16", "Int32", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Int32", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Int32", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "Int32", false, null )]
-            [XmlWriterInlineData(1, "float", "Int32", false, null )]
-            [XmlWriterInlineData(1, "object", "Int32", true, null )]
-            [XmlWriterInlineData(1, "bool", "Int32", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Int32", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Int32", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Int32", false, null )]
-            [XmlWriterInlineData(1, "List", "Int32", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Int32", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Int32", false, null )]
-            [XmlWriterInlineData(1, "Double", "Int32", false, null )]
-            [XmlWriterInlineData(1, "Single", "Int32", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Int32", false, null )]
-            [XmlWriterInlineData(1, "string", "Int32", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "UInt16", true, null )]
-            [XmlWriterInlineData(1, "Int64", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "Int32", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "Int16", "UInt16", true, null )]
-            [XmlWriterInlineData(1, "Byte", "UInt16", true, null )]
-            [XmlWriterInlineData(1, "SByte", "UInt16", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "float", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "object", "UInt16", true, null )]
-            [XmlWriterInlineData(1, "bool", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "List", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "Uri", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "Double", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "Single", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "UInt16", false, null )]
-            [XmlWriterInlineData(1, "string", "UInt16", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "Int16", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "Int16", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "Int16", false, null )]
-            [XmlWriterInlineData(1, "Int64", "Int16", false, null )]
-            [XmlWriterInlineData(1, "Int32", "Int16", false, null )]
-            [XmlWriterInlineData(1, "Int16", "Int16", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Int16", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Int16", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "Int16", false, null )]
-            [XmlWriterInlineData(1, "float", "Int16", false, null )]
-            [XmlWriterInlineData(1, "object", "Int16", true, null )]
-            [XmlWriterInlineData(1, "bool", "Int16", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Int16", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Int16", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Int16", false, null )]
-            [XmlWriterInlineData(1, "List", "Int16", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Int16", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Int16", false, null )]
-            [XmlWriterInlineData(1, "Double", "Int16", false, null )]
-            [XmlWriterInlineData(1, "Single", "Int16", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Int16", false, null )]
-            [XmlWriterInlineData(1, "string", "Int16", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "Byte", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "Byte", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Int64", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Int32", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Int16", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Byte", "Byte", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Byte", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "Byte", false, null )]
-            [XmlWriterInlineData(1, "float", "Byte", false, null )]
-            [XmlWriterInlineData(1, "object", "Byte", true, null )]
-            [XmlWriterInlineData(1, "bool", "Byte", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Byte", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Byte", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Byte", false, null )]
-            [XmlWriterInlineData(1, "List", "Byte", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Double", "Byte", false, null )]
-            [XmlWriterInlineData(1, "Single", "Byte", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Byte", false, null )]
-            [XmlWriterInlineData(1, "string", "Byte", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "SByte", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "SByte", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Int64", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Int32", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Int16", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Byte", "SByte", false, null )]
-            [XmlWriterInlineData(1, "SByte", "SByte", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "SByte", false, null )]
-            [XmlWriterInlineData(1, "float", "SByte", false, null )]
-            [XmlWriterInlineData(1, "object", "SByte", true, null )]
-            [XmlWriterInlineData(1, "bool", "SByte", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "SByte", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "SByte", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "SByte", false, null )]
-            [XmlWriterInlineData(1, "List", "SByte", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Uri", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Double", "SByte", false, null )]
-            [XmlWriterInlineData(1, "Single", "SByte", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "SByte", false, null )]
-            [XmlWriterInlineData(1, "string", "SByte", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "UInt32", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "Int64", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "Int32", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "Int16", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "float", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "object", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "bool", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "List", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "Double", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "Single", "Decimal", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Decimal", false, null )]
-            [XmlWriterInlineData(1, "string", "Decimal", true, null )]
-
-            [XmlWriterInlineData(1, "UInt16", "float", true, null )]
-            [XmlWriterInlineData(1, "Int64", "float", true, 9.223372E+18F )]
-            [XmlWriterInlineData(1, "Int16", "float", true, null )]
-            [XmlWriterInlineData(1, "Byte", "float", true, null )]
-            [XmlWriterInlineData(1, "SByte", "float", true, null )]
-            [XmlWriterInlineData(1, "float", "float", true, null )]
-            [XmlWriterInlineData(1, "object", "float", true, null )]
-            [XmlWriterInlineData(1, "bool", "float", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "float", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "float", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "float", false, null )]
-            [XmlWriterInlineData(1, "List", "float", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "float", false, null )]
-            [XmlWriterInlineData(1, "Uri", "float", false, null )]
-            [XmlWriterInlineData(1, "Single", "float", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "float", false, null )]
-            [XmlWriterInlineData(1, "string", "float", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "bool", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "bool", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "bool", false, null )]
-            [XmlWriterInlineData(1, "Int64", "bool", false, null )]
-            [XmlWriterInlineData(1, "Int32", "bool", false, null )]
-            [XmlWriterInlineData(1, "Int16", "bool", false, null )]
-            [XmlWriterInlineData(1, "Byte", "bool", false, null )]
-            [XmlWriterInlineData(1, "SByte", "bool", false, null )]
-            [XmlWriterInlineData(1, "Decimal", "bool", false, null )]
-            [XmlWriterInlineData(1, "float", "bool", false, null )]
-            [XmlWriterInlineData(1, "object", "bool", true, false )]
-            [XmlWriterInlineData(1, "bool", "bool", true, null )]
-            [XmlWriterInlineData(1, "DateTime", "bool", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "bool", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "bool", false, null )]
-            [XmlWriterInlineData(1, "List", "bool", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "bool", false, null )]
-            [XmlWriterInlineData(1, "Uri", "bool", false, null )]
-            [XmlWriterInlineData(1, "Double", "bool", false, null )]
-            [XmlWriterInlineData(1, "Single", "bool", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "bool", false, null )]
-            [XmlWriterInlineData(1, "string", "bool", false, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Int64", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Int32", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Int16", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Byte", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "SByte", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Decimal", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "float", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "object", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "bool", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "DateTime", true, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "DateTime", true, null )]
-            [XmlWriterInlineData(1, "ByteArray", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "List", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Uri", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Double", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "Single", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "DateTime", false, null )]
-            [XmlWriterInlineData(1, "string", "DateTime", false, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Int64", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Int32", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Int16", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Byte", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "SByte", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Decimal", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "float", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "object", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "bool", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "DateTimeOffset", true, 0 )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "DateTimeOffset", true, null )]
-            [XmlWriterInlineData(1, "ByteArray", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "List", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Uri", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Double", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "Single", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(1, "string", "DateTimeOffset", false, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "List", false, null )]
-            [XmlWriterInlineData(1, "UInt32", "List", false, null )]
-            [XmlWriterInlineData(1, "UInt16", "List", false, null )]
-            [XmlWriterInlineData(1, "Int64", "List", false, null )]
-            [XmlWriterInlineData(1, "Int32", "List", false, null )]
-            [XmlWriterInlineData(1, "Int16", "List", false, null )]
-            [XmlWriterInlineData(1, "Byte", "List", false, null )]
-            [XmlWriterInlineData(1, "SByte", "List", false, null )]
-            [XmlWriterInlineData(1, "Decimal", "List", false, null )]
-            [XmlWriterInlineData(1, "float", "List", false, null )]
-            [XmlWriterInlineData(1, "object", "List", false, null )]
-            [XmlWriterInlineData(1, "bool", "List", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "List", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "List", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "List", false, null )]
-            [XmlWriterInlineData(1, "List", "List", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "List", false, null )]
-            [XmlWriterInlineData(1, "Uri", "List", false, null )]
-            [XmlWriterInlineData(1, "Double", "List", false, null )]
-            [XmlWriterInlineData(1, "Single", "List", false, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "List", false, null )]
-            [XmlWriterInlineData(1, "string", "List", false, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "Uri", true, null )]
-            [XmlWriterInlineData(1, "UInt32", "Uri", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "Uri", true, null )]
-            [XmlWriterInlineData(1, "Int64", "Uri", true, null )]
-            [XmlWriterInlineData(1, "Int32", "Uri", true, null )]
-            [XmlWriterInlineData(1, "Int16", "Uri", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Uri", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Uri", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "Uri", true, null )]
-            [XmlWriterInlineData(1, "float", "Uri", true, null )]
-            [XmlWriterInlineData(1, "object", "Uri", true, null )]
-            [XmlWriterInlineData(1, "bool", "Uri", true, "false" )]
-            [XmlWriterInlineData(1, "DateTime", "Uri", true, 1 )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Uri", true, 2 )]
-            [XmlWriterInlineData(1, "ByteArray", "Uri", true, "2H4=" )]
-            [XmlWriterInlineData(1, "List", "Uri", true, "" )]
-            [XmlWriterInlineData(1, "TimeSpan", "Uri", true, "PT0S" )]
-            [XmlWriterInlineData(1, "Uri", "Uri", true, null )]
-            [XmlWriterInlineData(1, "Double", "Uri", true, "1.7976931348623157E+308" )]
-            [XmlWriterInlineData(1, "Single", "Uri", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Uri", true, null )]
-            [XmlWriterInlineData(1, "string", "Uri", true, null )]
-
-            [XmlWriterInlineData(1, "UInt32", "Double", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "Double", true, null )]
-            [XmlWriterInlineData(1, "Int32", "Double", true, null )]
-            [XmlWriterInlineData(1, "Int16", "Double", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Double", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Double", true, null )]
-            [XmlWriterInlineData(1, "float", "Double", true, null )]
-            [XmlWriterInlineData(1, "object", "Double", true, null )]
-            [XmlWriterInlineData(1, "bool", "Double", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Double", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Double", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Double", false, null )]
-            [XmlWriterInlineData(1, "List", "Double", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Double", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Double", false, null )]
-            [XmlWriterInlineData(1, "Double", "Double", true, null )]
-            [XmlWriterInlineData(1, "Single", "Double", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Double", false, null )]
-            [XmlWriterInlineData(1, "string", "Double", true, null )]
-
-            [XmlWriterInlineData(1, "UInt16", "Single", true, null )]
-            [XmlWriterInlineData(1, "Int64", "Single", true, 9.223372E+18F )]
-            [XmlWriterInlineData(1, "Int16", "Single", true, null )]
-            [XmlWriterInlineData(1, "Byte", "Single", true, null )]
-            [XmlWriterInlineData(1, "SByte", "Single", true, null )]
-            [XmlWriterInlineData(1, "float", "Single", true, null )]
-            [XmlWriterInlineData(1, "object", "Single", true, null )]
-            [XmlWriterInlineData(1, "bool", "Single", false, null )]
-            [XmlWriterInlineData(1, "DateTime", "Single", false, null )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "Single", false, null )]
-            [XmlWriterInlineData(1, "ByteArray", "Single", false, null )]
-            [XmlWriterInlineData(1, "List", "Single", false, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "Single", false, null )]
-            [XmlWriterInlineData(1, "Uri", "Single", false, null )]
-            [XmlWriterInlineData(1, "Single", "Single", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "Single", false, null )]
-            [XmlWriterInlineData(1, "string", "Single", true, null )]
-
-            [XmlWriterInlineData(1, "UInt64", "object", true, null )]
-            [XmlWriterInlineData(1, "UInt32", "object", true, null )]
-            [XmlWriterInlineData(1, "UInt16", "object", true, null )]
-            [XmlWriterInlineData(1, "Int64", "object", true, null )]
-            [XmlWriterInlineData(1, "Int32", "object", true, null )]
-            [XmlWriterInlineData(1, "Int16", "object", true, null )]
-            [XmlWriterInlineData(1, "Byte", "object", true, null )]
-            [XmlWriterInlineData(1, "SByte", "object", true, null )]
-            [XmlWriterInlineData(1, "Decimal", "object", true, null )]
-            [XmlWriterInlineData(1, "float", "object", true, null )]
-            [XmlWriterInlineData(1, "object", "object", true, null )]
-            [XmlWriterInlineData(1, "bool", "object", true, "false" )]
-            [XmlWriterInlineData(1, "DateTime", "object", true, 1 )]
-            [XmlWriterInlineData(1, "DateTimeOffset", "object", true, 2 )]
-            [XmlWriterInlineData(1, "ByteArray", "object", true, "2H4=" )]
-            [XmlWriterInlineData(1, "List", "object", true, "" )]
-            [XmlWriterInlineData(1, "TimeSpan", "object", true, "PT0S" )]
-            [XmlWriterInlineData(1, "Uri", "object", true, null )]
-            [XmlWriterInlineData(1, "Double", "object", true, "1.7976931348623157E+308" )]
-            [XmlWriterInlineData(1, "Single", "object", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "object", true, null )]
-            [XmlWriterInlineData(1, "string", "object", true, null )]
-
-            [XmlWriterInlineData(1, "ByteArray", "ByteArray", true, null )]
-            [XmlWriterInlineData(1, "BoolArray", "BoolArray", true, null )]
-            [XmlWriterInlineData(1, "ObjectArray", "ObjectArray", true, null )]
-            [XmlWriterInlineData(1, "DateTimeArray", "DateTimeArray", true, null )]
-            [XmlWriterInlineData(1, "DateTimeOffsetArray", "DateTimeOffsetArray", true, null )]
-            [XmlWriterInlineData(1, "DecimalArray", "DecimalArray", true, null )]
-            [XmlWriterInlineData(1, "DoubleArray", "DoubleArray", true, null )]
-            [XmlWriterInlineData(1, "Int16Array", "Int16Array", true, null )]
-            [XmlWriterInlineData(1, "Int32Array", "Int32Array", true, null )]
-            [XmlWriterInlineData(1, "Int64Array", "Int64Array", true, null )]
-            [XmlWriterInlineData(1, "SByteArray", "SByteArray", true, null )]
-            [XmlWriterInlineData(1, "SingleArray", "SingleArray", true, null )]
-            [XmlWriterInlineData(1, "StringArray", "StringArray", true, null )]
-            [XmlWriterInlineData(1, "TimeSpanArray", "TimeSpanArray", true, null )]
-            [XmlWriterInlineData(1, "UInt16Array", "UInt16Array", true, null )]
-            [XmlWriterInlineData(1, "UInt32Array", "UInt32Array", true, null )]
-            [XmlWriterInlineData(1, "UInt64Array", "UInt64Array", true, null )]
-            [XmlWriterInlineData(1, "UriArray", "UriArray", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedNameArray", "XmlQualifiedNameArray", true, null )]
-            [XmlWriterInlineData(1, "TimeSpan", "TimeSpan", true, null )]
-            [XmlWriterInlineData(1, "XmlQualifiedName", "XmlQualifiedName", true, null )]
-
+            [XmlWriterInlineData(1, "UInt64", "string", true, null)]
+            [XmlWriterInlineData(1, "UInt32", "string", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "string", true, null)]
+            [XmlWriterInlineData(1, "Int64", "string", true, null)]
+            [XmlWriterInlineData(1, "Int32", "string", true, null)]
+            [XmlWriterInlineData(1, "Int16", "string", true, null)]
+            [XmlWriterInlineData(1, "Byte", "string", true, null)]
+            [XmlWriterInlineData(1, "SByte", "string", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "string", true, null)]
+            [XmlWriterInlineData(1, "float", "string", true, null)]
+            [XmlWriterInlineData(1, "object", "string", true, null)]
+            [XmlWriterInlineData(1, "bool", "string", true, "false")]
+            [XmlWriterInlineData(1, "DateTime", "string", true, 1)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "string", true, 2)]
+            [XmlWriterInlineData(1, "ByteArray", "string", true, "2H4=")]
+            [XmlWriterInlineData(1, "List", "string", true, "")]
+            [XmlWriterInlineData(1, "TimeSpan", "string", true, "PT0S")]
+            [XmlWriterInlineData(1, "Uri", "string", true, null)]
+            [XmlWriterInlineData(1, "Double", "string", true, "1.7976931348623157E+308")]
+            [XmlWriterInlineData(1, "Single", "string", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "string", true, null)]
+            [XmlWriterInlineData(1, "string", "string", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "UInt32", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "Int64", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "Int32", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "Int16", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "Byte", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "SByte", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "float", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "object", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "bool", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "List", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "Uri", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "Double", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "Single", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "UInt64", false, null)]
+            [XmlWriterInlineData(1, "string", "UInt64", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "Int64", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "Int64", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "Int64", true, null)]
+            [XmlWriterInlineData(1, "Int64", "Int64", true, null)]
+            [XmlWriterInlineData(1, "Int32", "Int64", true, null)]
+            [XmlWriterInlineData(1, "Int16", "Int64", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Int64", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Int64", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "Int64", false, null)]
+            [XmlWriterInlineData(1, "float", "Int64", false, null)]
+            [XmlWriterInlineData(1, "object", "Int64", true, null)]
+            [XmlWriterInlineData(1, "bool", "Int64", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Int64", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Int64", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Int64", false, null)]
+            [XmlWriterInlineData(1, "List", "Int64", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Int64", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Int64", false, null)]
+            [XmlWriterInlineData(1, "Double", "Int64", false, null)]
+            [XmlWriterInlineData(1, "Single", "Int64", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Int64", false, null)]
+            [XmlWriterInlineData(1, "string", "Int64", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "Int64", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "Int32", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "Int16", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "Byte", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "SByte", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "float", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "object", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "bool", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "List", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "Uri", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "Double", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "Single", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "UInt32", false, null)]
+            [XmlWriterInlineData(1, "string", "UInt32", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "Int32", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "Int32", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "Int32", true, null)]
+            [XmlWriterInlineData(1, "Int64", "Int32", false, null)]
+            [XmlWriterInlineData(1, "Int32", "Int32", true, null)]
+            [XmlWriterInlineData(1, "Int16", "Int32", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Int32", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Int32", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "Int32", false, null)]
+            [XmlWriterInlineData(1, "float", "Int32", false, null)]
+            [XmlWriterInlineData(1, "object", "Int32", true, null)]
+            [XmlWriterInlineData(1, "bool", "Int32", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Int32", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Int32", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Int32", false, null)]
+            [XmlWriterInlineData(1, "List", "Int32", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Int32", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Int32", false, null)]
+            [XmlWriterInlineData(1, "Double", "Int32", false, null)]
+            [XmlWriterInlineData(1, "Single", "Int32", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Int32", false, null)]
+            [XmlWriterInlineData(1, "string", "Int32", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "UInt16", true, null)]
+            [XmlWriterInlineData(1, "Int64", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "Int32", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "Int16", "UInt16", true, null)]
+            [XmlWriterInlineData(1, "Byte", "UInt16", true, null)]
+            [XmlWriterInlineData(1, "SByte", "UInt16", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "float", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "object", "UInt16", true, null)]
+            [XmlWriterInlineData(1, "bool", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "List", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "Uri", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "Double", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "Single", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "UInt16", false, null)]
+            [XmlWriterInlineData(1, "string", "UInt16", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "Int16", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "Int16", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "Int16", false, null)]
+            [XmlWriterInlineData(1, "Int64", "Int16", false, null)]
+            [XmlWriterInlineData(1, "Int32", "Int16", false, null)]
+            [XmlWriterInlineData(1, "Int16", "Int16", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Int16", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Int16", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "Int16", false, null)]
+            [XmlWriterInlineData(1, "float", "Int16", false, null)]
+            [XmlWriterInlineData(1, "object", "Int16", true, null)]
+            [XmlWriterInlineData(1, "bool", "Int16", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Int16", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Int16", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Int16", false, null)]
+            [XmlWriterInlineData(1, "List", "Int16", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Int16", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Int16", false, null)]
+            [XmlWriterInlineData(1, "Double", "Int16", false, null)]
+            [XmlWriterInlineData(1, "Single", "Int16", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Int16", false, null)]
+            [XmlWriterInlineData(1, "string", "Int16", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "Byte", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "Byte", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Int64", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Int32", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Int16", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Byte", "Byte", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Byte", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "Byte", false, null)]
+            [XmlWriterInlineData(1, "float", "Byte", false, null)]
+            [XmlWriterInlineData(1, "object", "Byte", true, null)]
+            [XmlWriterInlineData(1, "bool", "Byte", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Byte", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Byte", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Byte", false, null)]
+            [XmlWriterInlineData(1, "List", "Byte", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Double", "Byte", false, null)]
+            [XmlWriterInlineData(1, "Single", "Byte", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Byte", false, null)]
+            [XmlWriterInlineData(1, "string", "Byte", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "SByte", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "SByte", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Int64", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Int32", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Int16", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Byte", "SByte", false, null)]
+            [XmlWriterInlineData(1, "SByte", "SByte", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "SByte", false, null)]
+            [XmlWriterInlineData(1, "float", "SByte", false, null)]
+            [XmlWriterInlineData(1, "object", "SByte", true, null)]
+            [XmlWriterInlineData(1, "bool", "SByte", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "SByte", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "SByte", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "SByte", false, null)]
+            [XmlWriterInlineData(1, "List", "SByte", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Uri", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Double", "SByte", false, null)]
+            [XmlWriterInlineData(1, "Single", "SByte", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "SByte", false, null)]
+            [XmlWriterInlineData(1, "string", "SByte", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "UInt32", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "Int64", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "Int32", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "Int16", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "float", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "object", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "bool", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "List", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "Double", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "Single", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Decimal", false, null)]
+            [XmlWriterInlineData(1, "string", "Decimal", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "float", true, null)]
+            [XmlWriterInlineData(1, "Int64", "float", true, 9.223372E+18F)]
+            [XmlWriterInlineData(1, "Int16", "float", true, null)]
+            [XmlWriterInlineData(1, "Byte", "float", true, null)]
+            [XmlWriterInlineData(1, "SByte", "float", true, null)]
+            [XmlWriterInlineData(1, "float", "float", true, null)]
+            [XmlWriterInlineData(1, "object", "float", true, null)]
+            [XmlWriterInlineData(1, "bool", "float", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "float", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "float", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "float", false, null)]
+            [XmlWriterInlineData(1, "List", "float", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "float", false, null)]
+            [XmlWriterInlineData(1, "Uri", "float", false, null)]
+            [XmlWriterInlineData(1, "Single", "float", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "float", false, null)]
+            [XmlWriterInlineData(1, "string", "float", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "bool", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "bool", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "bool", false, null)]
+            [XmlWriterInlineData(1, "Int64", "bool", false, null)]
+            [XmlWriterInlineData(1, "Int32", "bool", false, null)]
+            [XmlWriterInlineData(1, "Int16", "bool", false, null)]
+            [XmlWriterInlineData(1, "Byte", "bool", false, null)]
+            [XmlWriterInlineData(1, "SByte", "bool", false, null)]
+            [XmlWriterInlineData(1, "Decimal", "bool", false, null)]
+            [XmlWriterInlineData(1, "float", "bool", false, null)]
+            [XmlWriterInlineData(1, "object", "bool", true, false)]
+            [XmlWriterInlineData(1, "bool", "bool", true, null)]
+            [XmlWriterInlineData(1, "DateTime", "bool", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "bool", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "bool", false, null)]
+            [XmlWriterInlineData(1, "List", "bool", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "bool", false, null)]
+            [XmlWriterInlineData(1, "Uri", "bool", false, null)]
+            [XmlWriterInlineData(1, "Double", "bool", false, null)]
+            [XmlWriterInlineData(1, "Single", "bool", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "bool", false, null)]
+            [XmlWriterInlineData(1, "string", "bool", false, null)]
+            [XmlWriterInlineData(1, "UInt64", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Int64", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Int32", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Int16", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Byte", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "SByte", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Decimal", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "float", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "object", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "bool", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "DateTime", true, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "DateTime", true, null)]
+            [XmlWriterInlineData(1, "ByteArray", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "List", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Uri", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Double", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "Single", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "string", "DateTime", false, null)]
+            [XmlWriterInlineData(1, "UInt64", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Int64", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Int32", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Int16", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Byte", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "SByte", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Decimal", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "float", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "object", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "bool", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "DateTimeOffset", true, 0)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "DateTimeOffset", true, null)]
+            [XmlWriterInlineData(1, "ByteArray", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "List", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Uri", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Double", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "Single", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "string", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(1, "UInt64", "List", false, null)]
+            [XmlWriterInlineData(1, "UInt32", "List", false, null)]
+            [XmlWriterInlineData(1, "UInt16", "List", false, null)]
+            [XmlWriterInlineData(1, "Int64", "List", false, null)]
+            [XmlWriterInlineData(1, "Int32", "List", false, null)]
+            [XmlWriterInlineData(1, "Int16", "List", false, null)]
+            [XmlWriterInlineData(1, "Byte", "List", false, null)]
+            [XmlWriterInlineData(1, "SByte", "List", false, null)]
+            [XmlWriterInlineData(1, "Decimal", "List", false, null)]
+            [XmlWriterInlineData(1, "float", "List", false, null)]
+            [XmlWriterInlineData(1, "object", "List", false, null)]
+            [XmlWriterInlineData(1, "bool", "List", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "List", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "List", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "List", false, null)]
+            [XmlWriterInlineData(1, "List", "List", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "List", false, null)]
+            [XmlWriterInlineData(1, "Uri", "List", false, null)]
+            [XmlWriterInlineData(1, "Double", "List", false, null)]
+            [XmlWriterInlineData(1, "Single", "List", false, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "List", false, null)]
+            [XmlWriterInlineData(1, "string", "List", false, null)]
+            [XmlWriterInlineData(1, "UInt64", "Uri", true, null)]
+            [XmlWriterInlineData(1, "UInt32", "Uri", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "Uri", true, null)]
+            [XmlWriterInlineData(1, "Int64", "Uri", true, null)]
+            [XmlWriterInlineData(1, "Int32", "Uri", true, null)]
+            [XmlWriterInlineData(1, "Int16", "Uri", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Uri", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Uri", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "Uri", true, null)]
+            [XmlWriterInlineData(1, "float", "Uri", true, null)]
+            [XmlWriterInlineData(1, "object", "Uri", true, null)]
+            [XmlWriterInlineData(1, "bool", "Uri", true, "false")]
+            [XmlWriterInlineData(1, "DateTime", "Uri", true, 1)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Uri", true, 2)]
+            [XmlWriterInlineData(1, "ByteArray", "Uri", true, "2H4=")]
+            [XmlWriterInlineData(1, "List", "Uri", true, "")]
+            [XmlWriterInlineData(1, "TimeSpan", "Uri", true, "PT0S")]
+            [XmlWriterInlineData(1, "Uri", "Uri", true, null)]
+            [XmlWriterInlineData(1, "Double", "Uri", true, "1.7976931348623157E+308")]
+            [XmlWriterInlineData(1, "Single", "Uri", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Uri", true, null)]
+            [XmlWriterInlineData(1, "string", "Uri", true, null)]
+            [XmlWriterInlineData(1, "UInt32", "Double", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "Double", true, null)]
+            [XmlWriterInlineData(1, "Int32", "Double", true, null)]
+            [XmlWriterInlineData(1, "Int16", "Double", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Double", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Double", true, null)]
+            [XmlWriterInlineData(1, "float", "Double", true, null)]
+            [XmlWriterInlineData(1, "object", "Double", true, null)]
+            [XmlWriterInlineData(1, "bool", "Double", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Double", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Double", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Double", false, null)]
+            [XmlWriterInlineData(1, "List", "Double", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Double", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Double", false, null)]
+            [XmlWriterInlineData(1, "Double", "Double", true, null)]
+            [XmlWriterInlineData(1, "Single", "Double", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Double", false, null)]
+            [XmlWriterInlineData(1, "string", "Double", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "Single", true, null)]
+            [XmlWriterInlineData(1, "Int64", "Single", true, 9.223372E+18F)]
+            [XmlWriterInlineData(1, "Int16", "Single", true, null)]
+            [XmlWriterInlineData(1, "Byte", "Single", true, null)]
+            [XmlWriterInlineData(1, "SByte", "Single", true, null)]
+            [XmlWriterInlineData(1, "float", "Single", true, null)]
+            [XmlWriterInlineData(1, "object", "Single", true, null)]
+            [XmlWriterInlineData(1, "bool", "Single", false, null)]
+            [XmlWriterInlineData(1, "DateTime", "Single", false, null)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "Single", false, null)]
+            [XmlWriterInlineData(1, "ByteArray", "Single", false, null)]
+            [XmlWriterInlineData(1, "List", "Single", false, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "Single", false, null)]
+            [XmlWriterInlineData(1, "Uri", "Single", false, null)]
+            [XmlWriterInlineData(1, "Single", "Single", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "Single", false, null)]
+            [XmlWriterInlineData(1, "string", "Single", true, null)]
+            [XmlWriterInlineData(1, "UInt64", "object", true, null)]
+            [XmlWriterInlineData(1, "UInt32", "object", true, null)]
+            [XmlWriterInlineData(1, "UInt16", "object", true, null)]
+            [XmlWriterInlineData(1, "Int64", "object", true, null)]
+            [XmlWriterInlineData(1, "Int32", "object", true, null)]
+            [XmlWriterInlineData(1, "Int16", "object", true, null)]
+            [XmlWriterInlineData(1, "Byte", "object", true, null)]
+            [XmlWriterInlineData(1, "SByte", "object", true, null)]
+            [XmlWriterInlineData(1, "Decimal", "object", true, null)]
+            [XmlWriterInlineData(1, "float", "object", true, null)]
+            [XmlWriterInlineData(1, "object", "object", true, null)]
+            [XmlWriterInlineData(1, "bool", "object", true, "false")]
+            [XmlWriterInlineData(1, "DateTime", "object", true, 1)]
+            [XmlWriterInlineData(1, "DateTimeOffset", "object", true, 2)]
+            [XmlWriterInlineData(1, "ByteArray", "object", true, "2H4=")]
+            [XmlWriterInlineData(1, "List", "object", true, "")]
+            [XmlWriterInlineData(1, "TimeSpan", "object", true, "PT0S")]
+            [XmlWriterInlineData(1, "Uri", "object", true, null)]
+            [XmlWriterInlineData(1, "Double", "object", true, "1.7976931348623157E+308")]
+            [XmlWriterInlineData(1, "Single", "object", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "object", true, null)]
+            [XmlWriterInlineData(1, "string", "object", true, null)]
+            [XmlWriterInlineData(1, "ByteArray", "ByteArray", true, null)]
+            [XmlWriterInlineData(1, "BoolArray", "BoolArray", true, null)]
+            [XmlWriterInlineData(1, "ObjectArray", "ObjectArray", true, null)]
+            [XmlWriterInlineData(1, "DateTimeArray", "DateTimeArray", true, null)]
+            [XmlWriterInlineData(1, "DateTimeOffsetArray", "DateTimeOffsetArray", true, null)]
+            [XmlWriterInlineData(1, "DecimalArray", "DecimalArray", true, null)]
+            [XmlWriterInlineData(1, "DoubleArray", "DoubleArray", true, null)]
+            [XmlWriterInlineData(1, "Int16Array", "Int16Array", true, null)]
+            [XmlWriterInlineData(1, "Int32Array", "Int32Array", true, null)]
+            [XmlWriterInlineData(1, "Int64Array", "Int64Array", true, null)]
+            [XmlWriterInlineData(1, "SByteArray", "SByteArray", true, null)]
+            [XmlWriterInlineData(1, "SingleArray", "SingleArray", true, null)]
+            [XmlWriterInlineData(1, "StringArray", "StringArray", true, null)]
+            [XmlWriterInlineData(1, "TimeSpanArray", "TimeSpanArray", true, null)]
+            [XmlWriterInlineData(1, "UInt16Array", "UInt16Array", true, null)]
+            [XmlWriterInlineData(1, "UInt32Array", "UInt32Array", true, null)]
+            [XmlWriterInlineData(1, "UInt64Array", "UInt64Array", true, null)]
+            [XmlWriterInlineData(1, "UriArray", "UriArray", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedNameArray", "XmlQualifiedNameArray", true, null)]
+            [XmlWriterInlineData(1, "TimeSpan", "TimeSpan", true, null)]
+            [XmlWriterInlineData(1, "XmlQualifiedName", "XmlQualifiedName", true, null)]
             //////////attr
-            [XmlWriterInlineData(2, "Int16", "string", true, null )]
-            [XmlWriterInlineData(2, "Byte", "string", true, null )]
-            [XmlWriterInlineData(2, "SByte", "string", true, null )]
-            [XmlWriterInlineData(2, "Decimal", "string", true, null )]
-            [XmlWriterInlineData(2, "float", "string", true, null )]
-            [XmlWriterInlineData(2, "object", "string", true, null )]
-            [XmlWriterInlineData(2, "bool", "string", true, "False" )]
-            [XmlWriterInlineData(2, "Uri", "string", true, null )]
-            [XmlWriterInlineData(2, "Double", "string", true, null )]
-            [XmlWriterInlineData(2, "Single", "string", true, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "string", true, null )]
-            [XmlWriterInlineData(2, "string", "string", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "UInt64", true, null )]
-            [XmlWriterInlineData(2, "UInt32", "UInt64", true, null )]
-            [XmlWriterInlineData(2, "UInt16", "UInt64", true, null )]
-            [XmlWriterInlineData(2, "Int64", "UInt64", true, null )]
-            [XmlWriterInlineData(2, "Int32", "UInt64", true, null )]
-            [XmlWriterInlineData(2, "Int16", "UInt64", true, null )]
-            [XmlWriterInlineData(2, "List", "UInt64", false, null )]
-            [XmlWriterInlineData(2, "TimeSpan", "UInt64", false, null )]
-            [XmlWriterInlineData(2, "Uri", "UInt64", false, null )]
-            [XmlWriterInlineData(2, "Double", "UInt64", false, null )]
-            [XmlWriterInlineData(2, "Single", "UInt64", false, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "UInt64", false, null )]
-            [XmlWriterInlineData(2, "string", "UInt64", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "Int64", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "Int64", true, null )]
-            [XmlWriterInlineData(2, "UInt16", "Int64", true, null )]
-            [XmlWriterInlineData(2, "Int64", "Int64", true, null )]
-            [XmlWriterInlineData(2, "Int32", "Int64", true, null )]
-            [XmlWriterInlineData(2, "Int16", "Int64", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Int64", true, null )]
-            [XmlWriterInlineData(2, "TimeSpan", "Int64", false, null )]
-            [XmlWriterInlineData(2, "Uri", "Int64", false, null )]
-            [XmlWriterInlineData(2, "Double", "Int64", false, null )]
-            [XmlWriterInlineData(2, "Single", "Int64", false, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "Int64", false, null )]
-            [XmlWriterInlineData(2, "string", "Int64", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "UInt32", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "UInt32", true, null )]
-            [XmlWriterInlineData(2, "UInt16", "UInt32", true, null )]
-            [XmlWriterInlineData(2, "Int64", "UInt32", false, null )]
-            [XmlWriterInlineData(2, "Int32", "UInt32", true, null )]
-            [XmlWriterInlineData(2, "Int16", "UInt32", true, null )]
-            [XmlWriterInlineData(2, "Byte", "UInt32", true, null )]
-            [XmlWriterInlineData(2, "SByte", "UInt32", true, null )]
-            [XmlWriterInlineData(2, "string", "UInt32", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "Int32", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "Int32", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "Int32", true, null )]
-            [XmlWriterInlineData(2, "Int64", "Int32", false, null )]
-            [XmlWriterInlineData(2, "Int32", "Int32", true, null )]
-            [XmlWriterInlineData(2, "Int16", "Int32", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Int32", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Int32", true, null )]
-            [XmlWriterInlineData(2, "Single", "Int32", false, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "Int32", false, null )]
-            [XmlWriterInlineData(2, "string", "Int32", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "UInt16", true, null )]
-            [XmlWriterInlineData(2, "Int64", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "Int32", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "Int16", "UInt16", true, null )]
-            [XmlWriterInlineData(2, "Byte", "UInt16", true, null )]
-            [XmlWriterInlineData(2, "SByte", "UInt16", true, null )]
-            [XmlWriterInlineData(2, "Decimal", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "float", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "object", "UInt16", true, null )]
-            [XmlWriterInlineData(2, "bool", "UInt16", false, null )]
-            [XmlWriterInlineData(2, "string", "UInt16", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "Int16", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "Int16", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "Int16", false, null )]
-            [XmlWriterInlineData(2, "Int64", "Int16", false, null )]
-            [XmlWriterInlineData(2, "Int32", "Int16", false, null )]
-            [XmlWriterInlineData(2, "Int16", "Int16", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Int16", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Int16", true, null )]
-            [XmlWriterInlineData(2, "Decimal", "Int16", false, null )]
-            [XmlWriterInlineData(2, "float", "Int16", false, null )]
-            [XmlWriterInlineData(2, "object", "Int16", true, null )]
-            [XmlWriterInlineData(2, "bool", "Int16", false, null )]
-            [XmlWriterInlineData(2, "DateTime", "Int16", false, null )]
-            [XmlWriterInlineData(2, "string", "Int16", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "Byte", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "Byte", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "Byte", false, null )]
-            [XmlWriterInlineData(2, "Int64", "Byte", false, null )]
-            [XmlWriterInlineData(2, "Int32", "Byte", false, null )]
-            [XmlWriterInlineData(2, "Int16", "Byte", false, null )]
-            [XmlWriterInlineData(2, "Byte", "Byte", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Byte", true, null )]
-            [XmlWriterInlineData(2, "string", "Byte", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "SByte", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "SByte", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "SByte", false, null )]
-            [XmlWriterInlineData(2, "Int64", "SByte", false, null )]
-            [XmlWriterInlineData(2, "Int32", "SByte", false, null )]
-            [XmlWriterInlineData(2, "Uri", "SByte", false, null )]
-            [XmlWriterInlineData(2, "Double", "SByte", false, null )]
-            [XmlWriterInlineData(2, "Single", "SByte", false, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "SByte", false, null )]
-            [XmlWriterInlineData(2, "string", "SByte", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "UInt32", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "UInt16", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "Int64", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "Int32", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "Int16", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "Decimal", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "float", "Decimal", true, null )]
-            [XmlWriterInlineData(2, "object", "Decimal", true, null )]
-            [XmlWriterInlineData(21, "XmlQualifiedName", "Decimal", false, null )]
-            [XmlWriterInlineData(2, "string", "Decimal", true, null )]
-
-            [XmlWriterInlineData(2, "UInt16", "float", true, null )]
-            [XmlWriterInlineData(2, "Int64", "float", true, 9.223372E+18F )]
-            [XmlWriterInlineData(2, "Int16", "float", true, null )]
-            [XmlWriterInlineData(2, "Byte", "float", true, null )]
-            [XmlWriterInlineData(2, "SByte", "float", true, null )]
-            [XmlWriterInlineData(2, "float", "float", true, null )]
-            [XmlWriterInlineData(2, "object", "float", true, null )]
-            [XmlWriterInlineData(2, "bool", "float", false, null )]
-            [XmlWriterInlineData(2, "Single", "float", true, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "float", false, null )]
-            [XmlWriterInlineData(2, "string", "float", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "bool", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "bool", false, null )]
-            [XmlWriterInlineData(2, "object", "bool", true, false )]
-            [XmlWriterInlineData(2, "DateTime", "bool", false, null )]
-            [XmlWriterInlineData(2, "DateTimeOffset", "bool", false, null )]
-            [XmlWriterInlineData(2, "ByteArray", "bool", false, null )]
-            [XmlWriterInlineData(2, "List", "bool", false, null )]
-            [XmlWriterInlineData(2, "TimeSpan", "bool", false, null )]
-            [XmlWriterInlineData(2, "Uri", "bool", false, null )]
-            [XmlWriterInlineData(2, "Double", "bool", false, null )]
-            [XmlWriterInlineData(2, "Single", "bool", false, null )]
-
-            [XmlWriterInlineData(2, "float", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "object", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "bool", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "ByteArray", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "List", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "Uri", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "Double", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "Single", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "DateTime", false, null )]
-            [XmlWriterInlineData(2, "string", "DateTime", false, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "Int64", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "Int32", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "Int16", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "Byte", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "SByte", "DateTimeOffset", false, null )]
-            [XmlWriterInlineData(2, "Decimal", "DateTimeOffset", false, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "List", false, null )]
-            [XmlWriterInlineData(2, "UInt32", "List", false, null )]
-            [XmlWriterInlineData(2, "UInt16", "List", false, null )]
-            [XmlWriterInlineData(2, "Int64", "List", false, null )]
-            [XmlWriterInlineData(2, "Int32", "List", false, null )]
-            [XmlWriterInlineData(2, "Int16", "List", false, null )]
-            [XmlWriterInlineData(2, "Byte", "List", false, null )]
-            [XmlWriterInlineData(2, "SByte", "List", false, null )]
-            [XmlWriterInlineData(2, "Decimal", "List", false, null )]
-            [XmlWriterInlineData(2, "float", "List", false, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "Uri", true, null )]
-            [XmlWriterInlineData(2, "UInt32", "Uri", true, null )]
-            [XmlWriterInlineData(2, "UInt16", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Int64", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Int32", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Int16", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Uri", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Decimal", "Uri", true, null )]
-            [XmlWriterInlineData(2, "float", "Uri", true, null )]
-            [XmlWriterInlineData(2, "object", "Uri", true, null )]
-            [XmlWriterInlineData(2, "bool", "Uri", true, "False" )]
-            [XmlWriterInlineData(2, "Uri", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Double", "Uri", true, null )]
-            [XmlWriterInlineData(2, "Single", "Uri", true, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "Uri", true, null )]
-            [XmlWriterInlineData(2, "string", "Uri", true, null )]
-
-            [XmlWriterInlineData(2, "UInt32", "Double", true, null )]
-            [XmlWriterInlineData(2, "UInt16", "Double", true, null )]
-            [XmlWriterInlineData(2, "Int32", "Double", true, null )]
-            [XmlWriterInlineData(2, "Int16", "Double", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Double", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Double", true, null )]
-            [XmlWriterInlineData(2, "float", "Double", true, null )]
-            [XmlWriterInlineData(2, "object", "Double", true, null )]
-            [XmlWriterInlineData(2, "bool", "Double", false, null )]
-            [XmlWriterInlineData(2, "Single", "Double", true, null )]
-            [XmlWriterInlineData(2, "string", "Double", true, null )]
-
-            [XmlWriterInlineData(2, "UInt16", "Single", true, null )]
-            [XmlWriterInlineData(2, "Int64", "Single", true, 9.223372E+18F )]
-            [XmlWriterInlineData(2, "Int16", "Single", true, null )]
-            [XmlWriterInlineData(2, "Byte", "Single", true, null )]
-            [XmlWriterInlineData(2, "SByte", "Single", true, null )]
-            [XmlWriterInlineData(2, "float", "Single", true, null )]
-            [XmlWriterInlineData(2, "object", "Single", true, null )]
-            [XmlWriterInlineData(2, "bool", "Single", false, null )]
-            [XmlWriterInlineData(2, "DateTimeOffset", "Single", false, null )]
-            [XmlWriterInlineData(2, "Single", "Single", true, null )]
-            [XmlWriterInlineData(2, "string", "Single", true, null )]
-
-            [XmlWriterInlineData(2, "UInt64", "object", true, null )]
-            [XmlWriterInlineData(2, "Int32", "object", true, null )]
-            [XmlWriterInlineData(2, "Int16", "object", true, null )]
-            [XmlWriterInlineData(2, "Byte", "object", true, null )]
-            [XmlWriterInlineData(2, "SByte", "object", true, null )]
-            [XmlWriterInlineData(2, "Decimal", "object", true, null )]
-            [XmlWriterInlineData(2, "float", "object", true, null )]
-            [XmlWriterInlineData(2, "object", "object", true, null )]
-            [XmlWriterInlineData(2, "bool", "object", true, "False" )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "object", true, null )]
-            [XmlWriterInlineData(2, "string", "object", true, null )]
-            [XmlWriterInlineData(2, "ObjectArray", "ObjectArray", true, null )]
-            [XmlWriterInlineData(2, "StringArray", "StringArray", true, null )]
-            [XmlWriterInlineData(2, "UriArray", "UriArray", true, null )]
-            [XmlWriterInlineData(2, "XmlQualifiedName", "XmlQualifiedName", true, null )]
-            public void writeValue_27(XmlWriterUtils utils, int param, string sourceStr, string destStr, bool isValid, object expVal)
+            [XmlWriterInlineData(2, "Int16", "string", true, null)]
+            [XmlWriterInlineData(2, "Byte", "string", true, null)]
+            [XmlWriterInlineData(2, "SByte", "string", true, null)]
+            [XmlWriterInlineData(2, "Decimal", "string", true, null)]
+            [XmlWriterInlineData(2, "float", "string", true, null)]
+            [XmlWriterInlineData(2, "object", "string", true, null)]
+            [XmlWriterInlineData(2, "bool", "string", true, "False")]
+            [XmlWriterInlineData(2, "Uri", "string", true, null)]
+            [XmlWriterInlineData(2, "Double", "string", true, null)]
+            [XmlWriterInlineData(2, "Single", "string", true, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "string", true, null)]
+            [XmlWriterInlineData(2, "string", "string", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "UInt32", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "Int64", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "Int32", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "Int16", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "List", "UInt64", false, null)]
+            [XmlWriterInlineData(2, "TimeSpan", "UInt64", false, null)]
+            [XmlWriterInlineData(2, "Uri", "UInt64", false, null)]
+            [XmlWriterInlineData(2, "Double", "UInt64", false, null)]
+            [XmlWriterInlineData(2, "Single", "UInt64", false, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "UInt64", false, null)]
+            [XmlWriterInlineData(2, "string", "UInt64", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "Int64", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "Int64", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "Int64", true, null)]
+            [XmlWriterInlineData(2, "Int64", "Int64", true, null)]
+            [XmlWriterInlineData(2, "Int32", "Int64", true, null)]
+            [XmlWriterInlineData(2, "Int16", "Int64", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Int64", true, null)]
+            [XmlWriterInlineData(2, "TimeSpan", "Int64", false, null)]
+            [XmlWriterInlineData(2, "Uri", "Int64", false, null)]
+            [XmlWriterInlineData(2, "Double", "Int64", false, null)]
+            [XmlWriterInlineData(2, "Single", "Int64", false, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "Int64", false, null)]
+            [XmlWriterInlineData(2, "string", "Int64", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "UInt32", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "Int64", "UInt32", false, null)]
+            [XmlWriterInlineData(2, "Int32", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "Int16", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "Byte", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "SByte", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "string", "UInt32", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "Int32", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "Int32", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "Int32", true, null)]
+            [XmlWriterInlineData(2, "Int64", "Int32", false, null)]
+            [XmlWriterInlineData(2, "Int32", "Int32", true, null)]
+            [XmlWriterInlineData(2, "Int16", "Int32", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Int32", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Int32", true, null)]
+            [XmlWriterInlineData(2, "Single", "Int32", false, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "Int32", false, null)]
+            [XmlWriterInlineData(2, "string", "Int32", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "UInt16", true, null)]
+            [XmlWriterInlineData(2, "Int64", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "Int32", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "Int16", "UInt16", true, null)]
+            [XmlWriterInlineData(2, "Byte", "UInt16", true, null)]
+            [XmlWriterInlineData(2, "SByte", "UInt16", true, null)]
+            [XmlWriterInlineData(2, "Decimal", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "float", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "object", "UInt16", true, null)]
+            [XmlWriterInlineData(2, "bool", "UInt16", false, null)]
+            [XmlWriterInlineData(2, "string", "UInt16", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "Int16", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "Int16", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "Int16", false, null)]
+            [XmlWriterInlineData(2, "Int64", "Int16", false, null)]
+            [XmlWriterInlineData(2, "Int32", "Int16", false, null)]
+            [XmlWriterInlineData(2, "Int16", "Int16", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Int16", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Int16", true, null)]
+            [XmlWriterInlineData(2, "Decimal", "Int16", false, null)]
+            [XmlWriterInlineData(2, "float", "Int16", false, null)]
+            [XmlWriterInlineData(2, "object", "Int16", true, null)]
+            [XmlWriterInlineData(2, "bool", "Int16", false, null)]
+            [XmlWriterInlineData(2, "DateTime", "Int16", false, null)]
+            [XmlWriterInlineData(2, "string", "Int16", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "Byte", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "Byte", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "Byte", false, null)]
+            [XmlWriterInlineData(2, "Int64", "Byte", false, null)]
+            [XmlWriterInlineData(2, "Int32", "Byte", false, null)]
+            [XmlWriterInlineData(2, "Int16", "Byte", false, null)]
+            [XmlWriterInlineData(2, "Byte", "Byte", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Byte", true, null)]
+            [XmlWriterInlineData(2, "string", "Byte", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "SByte", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "SByte", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "SByte", false, null)]
+            [XmlWriterInlineData(2, "Int64", "SByte", false, null)]
+            [XmlWriterInlineData(2, "Int32", "SByte", false, null)]
+            [XmlWriterInlineData(2, "Uri", "SByte", false, null)]
+            [XmlWriterInlineData(2, "Double", "SByte", false, null)]
+            [XmlWriterInlineData(2, "Single", "SByte", false, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "SByte", false, null)]
+            [XmlWriterInlineData(2, "string", "SByte", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "UInt32", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "Int64", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "Int32", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "Int16", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "Decimal", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "float", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "object", "Decimal", true, null)]
+            [XmlWriterInlineData(21, "XmlQualifiedName", "Decimal", false, null)]
+            [XmlWriterInlineData(2, "string", "Decimal", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "float", true, null)]
+            [XmlWriterInlineData(2, "Int64", "float", true, 9.223372E+18F)]
+            [XmlWriterInlineData(2, "Int16", "float", true, null)]
+            [XmlWriterInlineData(2, "Byte", "float", true, null)]
+            [XmlWriterInlineData(2, "SByte", "float", true, null)]
+            [XmlWriterInlineData(2, "float", "float", true, null)]
+            [XmlWriterInlineData(2, "object", "float", true, null)]
+            [XmlWriterInlineData(2, "bool", "float", false, null)]
+            [XmlWriterInlineData(2, "Single", "float", true, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "float", false, null)]
+            [XmlWriterInlineData(2, "string", "float", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "bool", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "bool", false, null)]
+            [XmlWriterInlineData(2, "object", "bool", true, false)]
+            [XmlWriterInlineData(2, "DateTime", "bool", false, null)]
+            [XmlWriterInlineData(2, "DateTimeOffset", "bool", false, null)]
+            [XmlWriterInlineData(2, "ByteArray", "bool", false, null)]
+            [XmlWriterInlineData(2, "List", "bool", false, null)]
+            [XmlWriterInlineData(2, "TimeSpan", "bool", false, null)]
+            [XmlWriterInlineData(2, "Uri", "bool", false, null)]
+            [XmlWriterInlineData(2, "Double", "bool", false, null)]
+            [XmlWriterInlineData(2, "Single", "bool", false, null)]
+            [XmlWriterInlineData(2, "float", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "object", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "bool", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "ByteArray", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "List", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "Uri", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "Double", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "Single", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "string", "DateTime", false, null)]
+            [XmlWriterInlineData(2, "UInt64", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "Int64", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "Int32", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "Int16", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "Byte", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "SByte", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "Decimal", "DateTimeOffset", false, null)]
+            [XmlWriterInlineData(2, "UInt64", "List", false, null)]
+            [XmlWriterInlineData(2, "UInt32", "List", false, null)]
+            [XmlWriterInlineData(2, "UInt16", "List", false, null)]
+            [XmlWriterInlineData(2, "Int64", "List", false, null)]
+            [XmlWriterInlineData(2, "Int32", "List", false, null)]
+            [XmlWriterInlineData(2, "Int16", "List", false, null)]
+            [XmlWriterInlineData(2, "Byte", "List", false, null)]
+            [XmlWriterInlineData(2, "SByte", "List", false, null)]
+            [XmlWriterInlineData(2, "Decimal", "List", false, null)]
+            [XmlWriterInlineData(2, "float", "List", false, null)]
+            [XmlWriterInlineData(2, "UInt64", "Uri", true, null)]
+            [XmlWriterInlineData(2, "UInt32", "Uri", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Int64", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Int32", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Int16", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Uri", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Decimal", "Uri", true, null)]
+            [XmlWriterInlineData(2, "float", "Uri", true, null)]
+            [XmlWriterInlineData(2, "object", "Uri", true, null)]
+            [XmlWriterInlineData(2, "bool", "Uri", true, "False")]
+            [XmlWriterInlineData(2, "Uri", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Double", "Uri", true, null)]
+            [XmlWriterInlineData(2, "Single", "Uri", true, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "Uri", true, null)]
+            [XmlWriterInlineData(2, "string", "Uri", true, null)]
+            [XmlWriterInlineData(2, "UInt32", "Double", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "Double", true, null)]
+            [XmlWriterInlineData(2, "Int32", "Double", true, null)]
+            [XmlWriterInlineData(2, "Int16", "Double", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Double", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Double", true, null)]
+            [XmlWriterInlineData(2, "float", "Double", true, null)]
+            [XmlWriterInlineData(2, "object", "Double", true, null)]
+            [XmlWriterInlineData(2, "bool", "Double", false, null)]
+            [XmlWriterInlineData(2, "Single", "Double", true, null)]
+            [XmlWriterInlineData(2, "string", "Double", true, null)]
+            [XmlWriterInlineData(2, "UInt16", "Single", true, null)]
+            [XmlWriterInlineData(2, "Int64", "Single", true, 9.223372E+18F)]
+            [XmlWriterInlineData(2, "Int16", "Single", true, null)]
+            [XmlWriterInlineData(2, "Byte", "Single", true, null)]
+            [XmlWriterInlineData(2, "SByte", "Single", true, null)]
+            [XmlWriterInlineData(2, "float", "Single", true, null)]
+            [XmlWriterInlineData(2, "object", "Single", true, null)]
+            [XmlWriterInlineData(2, "bool", "Single", false, null)]
+            [XmlWriterInlineData(2, "DateTimeOffset", "Single", false, null)]
+            [XmlWriterInlineData(2, "Single", "Single", true, null)]
+            [XmlWriterInlineData(2, "string", "Single", true, null)]
+            [XmlWriterInlineData(2, "UInt64", "object", true, null)]
+            [XmlWriterInlineData(2, "Int32", "object", true, null)]
+            [XmlWriterInlineData(2, "Int16", "object", true, null)]
+            [XmlWriterInlineData(2, "Byte", "object", true, null)]
+            [XmlWriterInlineData(2, "SByte", "object", true, null)]
+            [XmlWriterInlineData(2, "Decimal", "object", true, null)]
+            [XmlWriterInlineData(2, "float", "object", true, null)]
+            [XmlWriterInlineData(2, "object", "object", true, null)]
+            [XmlWriterInlineData(2, "bool", "object", true, "False")]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "object", true, null)]
+            [XmlWriterInlineData(2, "string", "object", true, null)]
+            [XmlWriterInlineData(2, "ObjectArray", "ObjectArray", true, null)]
+            [XmlWriterInlineData(2, "StringArray", "StringArray", true, null)]
+            [XmlWriterInlineData(2, "UriArray", "UriArray", true, null)]
+            [XmlWriterInlineData(2, "XmlQualifiedName", "XmlQualifiedName", true, null)]
+            public void writeValue_27(
+                XmlWriterUtils utils,
+                int param,
+                string sourceStr,
+                string destStr,
+                bool isValid,
+                object expVal
+            )
             {
                 Type dest = typeMapper[destStr];
                 CultureInfo origCulture = null;
@@ -4231,7 +4613,11 @@ namespace System.Xml.XmlWriterApiTests
                     expVal = value[destStr];
                 else if (expVal != null && sourceStr.Contains("DateTime"))
                     expVal = _dates[(int)expVal];
-                else if (sourceStr.Equals("XmlQualifiedName") && (utils.WriterType == WriterType.CustomWriter) && param == 1)
+                else if (
+                    sourceStr.Equals("XmlQualifiedName")
+                    && (utils.WriterType == WriterType.CustomWriter)
+                    && param == 1
+                )
                     expVal = "{}a";
                 else if (expVal == null)
                     expVal = value[sourceStr];
@@ -4242,19 +4628,25 @@ namespace System.Xml.XmlWriterApiTests
                     if (param == 1)
                         w.WriteValue(value[sourceStr]);
                     else
-                        w.WriteAttributeString("a",
-                            string.Format(CultureInfo.InvariantCulture, "{0}", value[sourceStr]));
+                        w.WriteAttributeString(
+                            "a",
+                            string.Format(CultureInfo.InvariantCulture, "{0}", value[sourceStr])
+                        );
                     w.WriteEndElement();
                 }
                 try
                 {
                     origCulture = CultureInfo.CurrentCulture;
-                    CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;  // So that the number format doesn't depend on the current culture
+                    CultureInfo.CurrentCulture = CultureInfo.InvariantCulture; // So that the number format doesn't depend on the current culture
                     VerifyValue(dest, expVal, param);
                 }
                 catch (XmlException)
                 {
-                    if (!isValid || (utils.WriterType == WriterType.CustomWriter) && sourceStr.Contains("XmlQualifiedName"))
+                    if (
+                        !isValid
+                        || (utils.WriterType == WriterType.CustomWriter)
+                            && sourceStr.Contains("XmlQualifiedName")
+                    )
                         return;
                     CError.Compare(false, "XmlException");
                 }
@@ -4293,26 +4685,21 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData(1, "Double", "float", true, float.PositiveInfinity)]
             [XmlWriterInlineData(1, "Double", "Single", true, float.PositiveInfinity)]
             [XmlWriterInlineData(2, "Double", "Double", true, 1.7976931348623157E+308)]
-
             [XmlWriterInlineData(1, "UInt64", "float", true, 1.8446744E+19F)]
             [XmlWriterInlineData(1, "UInt32", "float", true, 4.2949673E+09F)]
             [XmlWriterInlineData(1, "Int32", "float", true, 2.1474836E+09F)]
             [XmlWriterInlineData(1, "Decimal", "float", true, 7.9228163E+28F)]
-
             [XmlWriterInlineData(1, "UInt64", "Double", true, 1.8446744073709552E+19D)]
             [XmlWriterInlineData(1, "Int64", "Double", true, 9.223372036854776E+18D)]
             [XmlWriterInlineData(1, "Decimal", "Double", true, 7.922816251426434E+28D)]
-
             [XmlWriterInlineData(1, "UInt64", "Single", true, 1.8446744E+19F)]
             [XmlWriterInlineData(1, "UInt32", "Single", true, 4.2949673E+09F)]
             [XmlWriterInlineData(1, "Int32", "Single", true, 2.1474836E+09F)]
             [XmlWriterInlineData(1, "Decimal", "Single", true, 7.9228163E+28F)]
-
             [XmlWriterInlineData(2, "UInt64", "float", true, 1.8446744E+19F)]
             [XmlWriterInlineData(2, "UInt32", "float", true, 4.2949673E+09F)]
             [XmlWriterInlineData(2, "Int32", "float", true, 2.1474836E+09F)]
             [XmlWriterInlineData(2, "Decimal", "float", true, 7.9228163E+28F)]
-
             [XmlWriterInlineData(2, "UInt64", "Double", true, 1.8446744073709552E+19D)]
             [XmlWriterInlineData(2, "Int64", "Double", true, 9.223372036854776E+18D)]
             [XmlWriterInlineData(2, "Decimal", "Double", true, 7.922816251426434E+28D)]
@@ -4320,7 +4707,14 @@ namespace System.Xml.XmlWriterApiTests
             [XmlWriterInlineData(2, "UInt32", "Single", true, 4.2949673E+09F)]
             [XmlWriterInlineData(2, "Int32", "Single", true, 2.1474836E+09F)]
             [XmlWriterInlineData(2, "Decimal", "Single", true, 7.9228163E+28F)]
-            public void writeValue_27_NotNetFramework(XmlWriterUtils utils, int param, string sourceStr, string destStr, bool isValid, object expVal)
+            public void writeValue_27_NotNetFramework(
+                XmlWriterUtils utils,
+                int param,
+                string sourceStr,
+                string destStr,
+                bool isValid,
+                object expVal
+            )
             {
                 writeValue_27(utils, param, sourceStr, destStr, isValid, expVal);
             }
@@ -4400,8 +4794,14 @@ namespace System.Xml.XmlWriterApiTests
                                     break;
                             }
                         }
-                        catch (InvalidOperationException) { return; }
-                        catch (InvalidCastException) { return; }
+                        catch (InvalidOperationException)
+                        {
+                            return;
+                        }
+                        catch (InvalidCastException)
+                        {
+                            return;
+                        }
                     }
                 }
                 Assert.True(param == 3 && (utils.WriterType == WriterType.CustomWriter));
@@ -4425,19 +4825,53 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     VerifyValue(typeof(XmlQualifiedName), "p:foo", param);
                 }
-                catch (XmlException) { return; }
-                catch (InvalidOperationException) { return; }
+                catch (XmlException)
+                {
+                    return;
+                }
+                catch (InvalidOperationException)
+                {
+                    return;
+                }
                 Assert.Fail();
             }
 
             [Theory]
-            [XmlWriterInlineData(WriterType.AllButCustom, "2002-12-30T00:00:00-08:00", "<Root>2002-12-30T00:00:00-08:00</Root>" )]
-            [XmlWriterInlineData(WriterType.AllButCustom, "2000-02-29T23:59:59.999999999999-13:60", "<Root>2000-03-01T00:00:00-14:00</Root>" )]
-            [XmlWriterInlineData(WriterType.AllButCustom, "0001-01-01T00:00:00+00:00", "<Root>0001-01-01T00:00:00Z</Root>" )]
-            [XmlWriterInlineData(WriterType.AllButCustom, "0001-01-01T00:00:00.9999999-14:00", "<Root>0001-01-01T00:00:00.9999999-14:00</Root>" )]
-            [XmlWriterInlineData(WriterType.AllButCustom, "9999-12-31T12:59:59.9999999+14:00", "<Root>9999-12-31T12:59:59.9999999+14:00</Root>" )]
-            [XmlWriterInlineData(WriterType.AllButCustom, "9999-12-31T12:59:59-11:00", "<Root>9999-12-31T12:59:59-11:00</Root>" )]
-            [XmlWriterInlineData(WriterType.AllButCustom, "2000-02-29T23:59:59.999999999999+13:60", "<Root>2000-03-01T00:00:00+14:00</Root>" )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "2002-12-30T00:00:00-08:00",
+                "<Root>2002-12-30T00:00:00-08:00</Root>"
+            )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "2000-02-29T23:59:59.999999999999-13:60",
+                "<Root>2000-03-01T00:00:00-14:00</Root>"
+            )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "0001-01-01T00:00:00+00:00",
+                "<Root>0001-01-01T00:00:00Z</Root>"
+            )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "0001-01-01T00:00:00.9999999-14:00",
+                "<Root>0001-01-01T00:00:00.9999999-14:00</Root>"
+            )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "9999-12-31T12:59:59.9999999+14:00",
+                "<Root>9999-12-31T12:59:59.9999999+14:00</Root>"
+            )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "9999-12-31T12:59:59-11:00",
+                "<Root>9999-12-31T12:59:59-11:00</Root>"
+            )]
+            [XmlWriterInlineData(
+                WriterType.AllButCustom,
+                "2000-02-29T23:59:59.999999999999+13:60",
+                "<Root>2000-03-01T00:00:00+14:00</Root>"
+            )]
             public void writeValue_31(XmlWriterUtils utils, string value, string expectedValue)
             {
                 DateTimeOffset a = XmlConvert.ToDateTimeOffset(value);
@@ -4460,22 +4894,38 @@ namespace System.Xml.XmlWriterApiTests
                 bool isPassed = true;
                 object[] actualArray =
                 {
-                    new DateTimeOffset(2002,2,1,0,0,0,TimeSpan.FromHours(-8.0)),
-                    new DateTimeOffset(9999,1,1,0,0,0,TimeSpan.FromHours(-8.0)),
-                    new DateTimeOffset(9999,1,1,0,0,0,TimeSpan.FromHours(0)),
-                    new DateTimeOffset(9999,12,31,12,59,59,TimeSpan.FromHours(-11.0)),
-                    new DateTimeOffset(9999,12,31,12,59,59,TimeSpan.FromHours(-10) + TimeSpan.FromMinutes(-59)),
-                    new DateTimeOffset(9999,12,31,12,59,59,new TimeSpan(13,59,0)),
-                    new DateTimeOffset(9999,12,31,23,59,59,TimeSpan.FromHours(0)),
-                    new DateTimeOffset(9999,12,31,23,59,59, new TimeSpan(14,0,0)),
-                    new DateTimeOffset(9999,12,31,23,59,59, new TimeSpan(13,60,0)),
-                    new DateTimeOffset(9999,12,31,23,59,59, new TimeSpan(13,59,60)),
-                    new DateTimeOffset(9998,12,31,12,59,59, new TimeSpan(13,60,0)),
-                    new DateTimeOffset(9998,12,31,12,59,59,TimeSpan.FromHours(-14.0)),
-                    new DateTimeOffset(1,1,1,0,0,0,TimeSpan.FromHours(-8.0)),
-                    new DateTimeOffset(1,1,1,0,0,0,TimeSpan.FromHours(-14.0)),
-                    new DateTimeOffset(1,1,1,0,0,0,TimeSpan.FromHours(-13) + TimeSpan.FromMinutes(-59)),
-                    new DateTimeOffset(1,1,1,0,0,0,TimeSpan.Zero),
+                    new DateTimeOffset(2002, 2, 1, 0, 0, 0, TimeSpan.FromHours(-8.0)),
+                    new DateTimeOffset(9999, 1, 1, 0, 0, 0, TimeSpan.FromHours(-8.0)),
+                    new DateTimeOffset(9999, 1, 1, 0, 0, 0, TimeSpan.FromHours(0)),
+                    new DateTimeOffset(9999, 12, 31, 12, 59, 59, TimeSpan.FromHours(-11.0)),
+                    new DateTimeOffset(
+                        9999,
+                        12,
+                        31,
+                        12,
+                        59,
+                        59,
+                        TimeSpan.FromHours(-10) + TimeSpan.FromMinutes(-59)
+                    ),
+                    new DateTimeOffset(9999, 12, 31, 12, 59, 59, new TimeSpan(13, 59, 0)),
+                    new DateTimeOffset(9999, 12, 31, 23, 59, 59, TimeSpan.FromHours(0)),
+                    new DateTimeOffset(9999, 12, 31, 23, 59, 59, new TimeSpan(14, 0, 0)),
+                    new DateTimeOffset(9999, 12, 31, 23, 59, 59, new TimeSpan(13, 60, 0)),
+                    new DateTimeOffset(9999, 12, 31, 23, 59, 59, new TimeSpan(13, 59, 60)),
+                    new DateTimeOffset(9998, 12, 31, 12, 59, 59, new TimeSpan(13, 60, 0)),
+                    new DateTimeOffset(9998, 12, 31, 12, 59, 59, TimeSpan.FromHours(-14.0)),
+                    new DateTimeOffset(1, 1, 1, 0, 0, 0, TimeSpan.FromHours(-8.0)),
+                    new DateTimeOffset(1, 1, 1, 0, 0, 0, TimeSpan.FromHours(-14.0)),
+                    new DateTimeOffset(
+                        1,
+                        1,
+                        1,
+                        0,
+                        0,
+                        0,
+                        TimeSpan.FromHours(-13) + TimeSpan.FromMinutes(-59)
+                    ),
+                    new DateTimeOffset(1, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 };
                 object[] expectArray =
                 {
@@ -4494,7 +4944,7 @@ namespace System.Xml.XmlWriterApiTests
                     "<Root>0001-01-01T00:00:00-08:00</Root>",
                     "<Root>0001-01-01T00:00:00-14:00</Root>",
                     "<Root>0001-01-01T00:00:00-13:59</Root>",
-                    "<Root>0001-01-01T00:00:00Z</Root>"
+                    "<Root>0001-01-01T00:00:00Z</Root>",
                 };
 
                 for (int i = 0; i < actualArray.Length; i++)
@@ -4833,7 +5283,11 @@ namespace System.Xml.XmlWriterApiTests
                         catch (ArgumentException e)
                         {
                             CError.WriteLineIgnore(e.ToString());
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4857,7 +5311,11 @@ namespace System.Xml.XmlWriterApiTests
                         catch (XmlException e)
                         {
                             CError.WriteLineIgnore(e.ToString());
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4917,7 +5375,9 @@ namespace System.Xml.XmlWriterApiTests
                         if (w.XmlLang != null)
                         {
                             w.Dispose();
-                            CError.WriteLine("Default value if no xml:lang attributes are currently on the stack should be null");
+                            CError.WriteLine(
+                                "Default value if no xml:lang attributes are currently on the stack should be null"
+                            );
                             CError.WriteLine("Actual value: {0}", w.XmlLang.ToString());
                             Assert.Fail();
                         }
@@ -4977,7 +5437,11 @@ namespace System.Xml.XmlWriterApiTests
                         catch (XmlException e)
                         {
                             CError.WriteLineIgnore(e.ToString());
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -4992,7 +5456,10 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     XmlReaderSettings xrs = new XmlReaderSettings();
                     xrs.IgnoreWhitespace = true;
-                    XmlReader tr = XmlReader.Create(FilePathUtil.getStream(XmlWriterUtils.FullPath("XmlReader.xml")), xrs);
+                    XmlReader tr = XmlReader.Create(
+                        FilePathUtil.getStream(XmlWriterUtils.FullPath("XmlReader.xml")),
+                        xrs
+                    );
 
                     while (tr.Read())
                     {
@@ -5165,7 +5632,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void writeRaw_6(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteRaw", 5, 0, 6, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteRaw",
+                        5,
+                        0,
+                        6,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteRaw with count < 0
@@ -5173,7 +5648,14 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void writeRaw_7(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteRaw", 5, 2, -1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteRaw",
+                        5,
+                        2,
+                        -1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 // WriteRaw with index > buffer size
@@ -5181,7 +5663,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void writeRaw_8(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteRaw", 5, 6, 1, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteRaw",
+                        5,
+                        6,
+                        1,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteRaw with index < 0
@@ -5189,7 +5679,14 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void writeRaw_9(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteRaw", 5, -1, 1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteRaw",
+                        5,
+                        -1,
+                        1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 // WriteRaw with index + count exceeds buffer
@@ -5197,7 +5694,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void writeRaw_10(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteRaw", 5, 2, 5, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteRaw",
+                        5,
+                        2,
+                        5,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteRaw with buffer = null
@@ -5214,7 +5719,11 @@ namespace System.Xml.XmlWriterApiTests
                         }
                         catch (ArgumentNullException)
                         {
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5257,7 +5766,11 @@ namespace System.Xml.XmlWriterApiTests
                         catch (ArgumentException e)
                         {
                             CError.WriteLineIgnore(e.ToString());
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5307,7 +5820,11 @@ namespace System.Xml.XmlWriterApiTests
 
                     for (int i = 0; i < strBase64.Length; i++)
                     {
-                        WriteToBuffer(ref Wbase64, ref Wbase64len, System.BitConverter.GetBytes(strBase64[i]));
+                        WriteToBuffer(
+                            ref Wbase64,
+                            ref Wbase64len,
+                            System.BitConverter.GetBytes(strBase64[i])
+                        );
                     }
 
                     using (XmlWriter w = utils.CreateWriter())
@@ -5340,7 +5857,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void Base64_2(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBase64", 5, 0, 6, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBase64",
+                        5,
+                        0,
+                        6,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteBase64 with count < 0
@@ -5348,7 +5873,14 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void Base64_3(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBase64", 5, 2, -1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBase64",
+                        5,
+                        2,
+                        -1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 // WriteBase64 with index > buffer size
@@ -5356,7 +5888,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void Base64_4(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBase64", 5, 5, 1, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBase64",
+                        5,
+                        5,
+                        1,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteBase64 with index < 0
@@ -5364,7 +5904,14 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void Base64_5(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBase64", 5, -1, 1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBase64",
+                        5,
+                        -1,
+                        1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 // WriteBase64 with index + count exceeds buffer
@@ -5372,7 +5919,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void Base64_6(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBase64", 5, 2, 5, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBase64",
+                        5,
+                        2,
+                        5,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteBase64 with buffer = null
@@ -5389,7 +5944,11 @@ namespace System.Xml.XmlWriterApiTests
                         }
                         catch (ArgumentNullException)
                         {
-                            CError.Compare(w.WriteState, WriteState.Error, "WriteState should be Error");
+                            CError.Compare(
+                                w.WriteState,
+                                WriteState.Error,
+                                "WriteState should be Error"
+                            );
                             return;
                         }
                     }
@@ -5480,119 +6039,146 @@ namespace System.Xml.XmlWriterApiTests
                 public void Base64_12(XmlWriterUtils utils)
                 {
                     byte[][] byteArrays = new byte[][]
-                {
-                    new byte[] {0xd8,0x7e,0x8d,0xf9,0x84,0x06,0x4a,0x67,0x93,0xba,0xc1,0x0d,0x16,0x53,0xb2,0xcc,0xbb,0x03,0xe3,0xf9},
-                    new byte[] {
-                        0xaa,
-                        0x48,
-                        0x60,
-                        0x49,
-                        0xa1,
-                        0xb4,
-                        0xa2,
-                        0xe4,
-                        0x65,
-                        0x74,
-                        0x5e,
-                        0xc8,
-                        0x84,
-                        0x33,
-                        0xae,
-                        0x6a,
-                        0xe3,
-                        0xb5,
-                        0x2f,
-                        0x8c,
-                    },
-                    new byte[] {
-                        0x46,
-                        0xe4,
-                        0xf9,
-                        0xb9,
-                        0x3e,
-                        0xb6,
-                        0x6b,
-                        0x3f,
-                        0xf9,
-                        0x01,
-                        0x67,
-                        0x5b,
-                        0xf5,
-                        0x2c,
-                        0xfd,
-                        0xe6,
-                        0x8e,
-                        0x52,
-                        0xc4,
-                        0x1b,
-                    },
-                    new byte[] {
-                        0x55,
-                        0xca,
-                        0x97,
-                        0xfb,
-                        0xaa,
-                        0xc6,
-                        0x9a,
-                        0x69,
-                        0xa0,
-                        0x2e,
-                        0x1f,
-                        0xa7,
-                        0xa9,
-                        0x3c,
-                        0x62,
-                        0xe9,
-                        0xa1,
-                        0xf3,
-                        0x0a,
-                        0x07,
-                    },
-                    new byte[] {
-                        0x28,
-                        0x82,
-                        0xb7,
-                        0xbe,
-                        0x49,
-                        0x45,
-                        0x37,
-                        0x54,
-                        0x26,
-                        0x31,
-                        0xd4,
-                        0x24,
-                        0xa6,
-                        0x5a,
-                        0xb6,
-                        0x6b,
-                        0x37,
-                        0xf3,
-                        0xaf,
-                        0x38,
-                    },
-                    new byte[] {
-                        0xdd,
-                        0xbd,
-                        0x3f,
-                        0x8f,
-                        0xd5,
-                        0xeb,
-                        0x5b,
-                        0xcc,
-                        0x9d,
-                        0xdd,
-                        0x00,
-                        0xba,
-                        0x90,
-                        0x76,
-                        0x4c,
-                        0xcb,
-                        0xd3,
-                        0xd5,
-                        0xfa,
-                        0xd2,
-                    }
-             };
+                    {
+                        new byte[]
+                        {
+                            0xd8,
+                            0x7e,
+                            0x8d,
+                            0xf9,
+                            0x84,
+                            0x06,
+                            0x4a,
+                            0x67,
+                            0x93,
+                            0xba,
+                            0xc1,
+                            0x0d,
+                            0x16,
+                            0x53,
+                            0xb2,
+                            0xcc,
+                            0xbb,
+                            0x03,
+                            0xe3,
+                            0xf9,
+                        },
+                        new byte[]
+                        {
+                            0xaa,
+                            0x48,
+                            0x60,
+                            0x49,
+                            0xa1,
+                            0xb4,
+                            0xa2,
+                            0xe4,
+                            0x65,
+                            0x74,
+                            0x5e,
+                            0xc8,
+                            0x84,
+                            0x33,
+                            0xae,
+                            0x6a,
+                            0xe3,
+                            0xb5,
+                            0x2f,
+                            0x8c,
+                        },
+                        new byte[]
+                        {
+                            0x46,
+                            0xe4,
+                            0xf9,
+                            0xb9,
+                            0x3e,
+                            0xb6,
+                            0x6b,
+                            0x3f,
+                            0xf9,
+                            0x01,
+                            0x67,
+                            0x5b,
+                            0xf5,
+                            0x2c,
+                            0xfd,
+                            0xe6,
+                            0x8e,
+                            0x52,
+                            0xc4,
+                            0x1b,
+                        },
+                        new byte[]
+                        {
+                            0x55,
+                            0xca,
+                            0x97,
+                            0xfb,
+                            0xaa,
+                            0xc6,
+                            0x9a,
+                            0x69,
+                            0xa0,
+                            0x2e,
+                            0x1f,
+                            0xa7,
+                            0xa9,
+                            0x3c,
+                            0x62,
+                            0xe9,
+                            0xa1,
+                            0xf3,
+                            0x0a,
+                            0x07,
+                        },
+                        new byte[]
+                        {
+                            0x28,
+                            0x82,
+                            0xb7,
+                            0xbe,
+                            0x49,
+                            0x45,
+                            0x37,
+                            0x54,
+                            0x26,
+                            0x31,
+                            0xd4,
+                            0x24,
+                            0xa6,
+                            0x5a,
+                            0xb6,
+                            0x6b,
+                            0x37,
+                            0xf3,
+                            0xaf,
+                            0x38,
+                        },
+                        new byte[]
+                        {
+                            0xdd,
+                            0xbd,
+                            0x3f,
+                            0x8f,
+                            0xd5,
+                            0xeb,
+                            0x5b,
+                            0xcc,
+                            0x9d,
+                            0xdd,
+                            0x00,
+                            0xba,
+                            0x90,
+                            0x76,
+                            0x4c,
+                            0xcb,
+                            0xd3,
+                            0xd5,
+                            0xfa,
+                            0xd2,
+                        },
+                    };
 
                     XmlWriter writer = utils.CreateWriter();
                     writer.WriteStartElement("Root");
@@ -5620,7 +6206,14 @@ namespace System.Xml.XmlWriterApiTests
                     ws.ConformanceLevel = ConformanceLevel.Fragment;
 
                     StringBuilder sb = new StringBuilder();
-                    using (XmlWriter w = WriterHelper.Create(sb, ws, overrideAsync: true, async: utils.Async))
+                    using (
+                        XmlWriter w = WriterHelper.Create(
+                            sb,
+                            ws,
+                            overrideAsync: true,
+                            async: utils.Async
+                        )
+                    )
                     {
                         w.WriteBase64(data, 0, data.Length);
                     }
@@ -5654,7 +6247,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void BinHex_2(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBinHex", 5, 0, 6, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBinHex",
+                        5,
+                        0,
+                        6,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteBinHex with count < 0
@@ -5662,7 +6263,14 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void BinHex_3(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBinHex", 5, 2, -1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBinHex",
+                        5,
+                        2,
+                        -1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 // WriteBinHex with index > buffer size
@@ -5670,7 +6278,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void BinHex_4(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBinHex", 5, 5, 1, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBinHex",
+                        5,
+                        5,
+                        1,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteBinHex with index < 0
@@ -5678,7 +6294,14 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void BinHex_5(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBinHex", 5, -1, 1, typeof(ArgumentOutOfRangeException));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBinHex",
+                        5,
+                        -1,
+                        1,
+                        typeof(ArgumentOutOfRangeException)
+                    );
                 }
 
                 // WriteBinHex with index + count exceeds buffer
@@ -5686,7 +6309,15 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData]
                 public void BinHex_6(XmlWriterUtils utils)
                 {
-                    VerifyInvalidWrite(utils, "WriteBinHex", 5, 2, 5, typeof(ArgumentOutOfRangeException/*ArgumentException*/));
+                    VerifyInvalidWrite(
+                        utils,
+                        "WriteBinHex",
+                        5,
+                        2,
+                        5,
+                        typeof(ArgumentOutOfRangeException /*ArgumentException*/
+                        )
+                    );
                 }
 
                 // WriteBinHex with buffer = null
@@ -5705,7 +6336,11 @@ namespace System.Xml.XmlWriterApiTests
                         {
                             if (utils.WriterType == WriterType.CustomWriter)
                             {
-                                CError.Compare(w.WriteState, WriteState.Element, "WriteState should be Element");
+                                CError.Compare(
+                                    w.WriteState,
+                                    WriteState.Element,
+                                    "WriteState should be Element"
+                                );
                             }
                             else
                             {
@@ -5742,7 +6377,8 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     string strBinHex = "abc";
                     byte[] Wbase64 = new byte[2000];
-                    int/*uint*/ Wbase64len = 0;
+                    int /*uint*/
+                    Wbase64len = 0;
 
                     using (XmlWriter w = utils.CreateWriter())
                     {
@@ -5750,7 +6386,11 @@ namespace System.Xml.XmlWriterApiTests
                         w.WriteStartAttribute("a", null);
                         for (int i = 0; i < strBinHex.Length; i++)
                         {
-                            WriteToBuffer(ref Wbase64, ref Wbase64len, System.BitConverter.GetBytes(strBinHex[i]));
+                            WriteToBuffer(
+                                ref Wbase64,
+                                ref Wbase64len,
+                                System.BitConverter.GetBytes(strBinHex[i])
+                            );
                         }
                         w.WriteBinHex(Wbase64, 0, (int)Wbase64len);
                         w.WriteEndElement();
@@ -5772,14 +6412,19 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     string strBinHex = "abc";
                     byte[] Wbase64 = new byte[2000];
-                    int/*uint*/ Wbase64len = 0;
+                    int /*uint*/
+                    Wbase64len = 0;
 
                     using (XmlWriter w = utils.CreateWriter())
                     {
                         w.WriteStartElement("root");
                         for (int i = 0; i < strBinHex.Length; i++)
                         {
-                            WriteToBuffer(ref Wbase64, ref Wbase64len, System.BitConverter.GetBytes(strBinHex[i]));
+                            WriteToBuffer(
+                                ref Wbase64,
+                                ref Wbase64len,
+                                System.BitConverter.GetBytes(strBinHex[i])
+                            );
                         }
                         w.WriteBinHex(Wbase64, 0, (int)Wbase64len);
                         w.WriteEndElement();
@@ -6145,7 +6790,9 @@ namespace System.Xml.XmlWriterApiTests
                             w.WriteValue(int.MaxValue);
                             break;
                         case "WriteAttributes":
-                            XmlReader xr1 = ReaderHelper.Create(new StringReader("<root attr='test'/>"));
+                            XmlReader xr1 = ReaderHelper.Create(
+                                new StringReader("<root attr='test'/>")
+                            );
                             xr1.Read();
                             w.WriteAttributes(xr1, false);
                             break;
@@ -6186,7 +6833,12 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     using (XmlWriter w = utils.CreateWriter())
                     {
-                        w.WriteElementString("xml", "elem", "http://www.w3.org/XML/1998/namespace", "test");
+                        w.WriteElementString(
+                            "xml",
+                            "elem",
+                            "http://www.w3.org/XML/1998/namespace",
+                            "test"
+                        );
                     }
                     Assert.True(utils.CompareReader("<xml:elem>test</xml:elem>"));
                 }
@@ -6233,7 +6885,13 @@ namespace System.Xml.XmlWriterApiTests
                 {
                     using (XmlWriter wf = utils.CreateWriter())
                     {
-                        using (XmlWriter w = WriterHelper.Create(wf, overrideAsync: true, async: utils.Async))
+                        using (
+                            XmlWriter w = WriterHelper.Create(
+                                wf,
+                                overrideAsync: true,
+                                async: utils.Async
+                            )
+                        )
                         {
                             w.WriteStartElement("B");
                             w.WriteStartAttribute("aaa");
@@ -6262,12 +6920,32 @@ namespace System.Xml.XmlWriterApiTests
                     w.WriteStartElement("a");
 
                     w.Dispose();
-                    string enc = (utils.WriterType == WriterType.UnicodeWriter || utils.WriterType == WriterType.UnicodeWriterIndent) ? "16" : "8";
+                    string enc =
+                        (
+                            utils.WriterType == WriterType.UnicodeWriter
+                            || utils.WriterType == WriterType.UnicodeWriterIndent
+                        )
+                            ? "16"
+                            : "8";
                     string param = (standalone) ? "yes" : "no";
 
-                    string exp = (utils.WriterType == WriterType.UTF8WriterIndent || utils.WriterType == WriterType.UnicodeWriterIndent) ?
-                        string.Format("<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?>" + Environment.NewLine + "<a />", enc, param) :
-                        string.Format("<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?><a />", enc, param);
+                    string exp =
+                        (
+                            utils.WriterType == WriterType.UTF8WriterIndent
+                            || utils.WriterType == WriterType.UnicodeWriterIndent
+                        )
+                            ? string.Format(
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?>"
+                                    + Environment.NewLine
+                                    + "<a />",
+                                enc,
+                                param
+                            )
+                            : string.Format(
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\" standalone=\"{1}\"?><a />",
+                                enc,
+                                param
+                            );
 
                     Assert.True((utils.CompareString(exp)));
                 }
@@ -6287,12 +6965,33 @@ namespace System.Xml.XmlWriterApiTests
 
                     w.Dispose();
 
-                    string enc = (utils.WriterType == WriterType.UnicodeWriter || utils.WriterType == WriterType.UnicodeWriterIndent) ? "16" : "8";
-                    string exp = (utils.WriterType == WriterType.UTF8WriterIndent || utils.WriterType == WriterType.UnicodeWriterIndent) ?
-                        string.Format("<?xml version=\"1.0\" encoding=\"utf-{0}\"?>" + Environment.NewLine + "<a />", enc) :
-                        string.Format("<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a />", enc);
+                    string enc =
+                        (
+                            utils.WriterType == WriterType.UnicodeWriter
+                            || utils.WriterType == WriterType.UnicodeWriterIndent
+                        )
+                            ? "16"
+                            : "8";
+                    string exp =
+                        (
+                            utils.WriterType == WriterType.UTF8WriterIndent
+                            || utils.WriterType == WriterType.UnicodeWriterIndent
+                        )
+                            ? string.Format(
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\"?>"
+                                    + Environment.NewLine
+                                    + "<a />",
+                                enc
+                            )
+                            : string.Format(
+                                "<?xml version=\"1.0\" encoding=\"utf-{0}\"?><a />",
+                                enc
+                            );
 
-                    exp = (utils.WriterType == WriterType.CustomWriter) ? "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><a />" : exp;
+                    exp =
+                        (utils.WriterType == WriterType.CustomWriter)
+                            ? "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><a />"
+                            : exp;
 
                     Assert.True((utils.CompareString(exp)));
                 }
@@ -6339,7 +7038,10 @@ namespace System.Xml.XmlWriterApiTests
                         StreamReader sr = new StreamReader(ms);
                         string str = sr.ReadToEnd();
                         CError.WriteLine(str);
-                        Assert.Equal("<?xml version=\"1.0\" encoding=\"utf-16BE\"?><A>value</A>", str);
+                        Assert.Equal(
+                            "<?xml version=\"1.0\" encoding=\"utf-16BE\"?><A>value</A>",
+                            str
+                        );
                     }
                 }
             }
@@ -6358,7 +7060,9 @@ namespace System.Xml.XmlWriterApiTests
                     writer.WriteStartElement("SomeDeep");
                     writer.Close();
 
-                    Assert.True(utils.CompareReader("<Root><Nesting><SomeDeep /></Nesting></Root>"));
+                    Assert.True(
+                        utils.CompareReader("<Root><Nesting><SomeDeep /></Nesting></Root>")
+                    );
                 }
 
                 // Disposing an XmlWriter should close all opened elements
@@ -6372,7 +7076,9 @@ namespace System.Xml.XmlWriterApiTests
                         writer.WriteStartElement("Nesting");
                         writer.WriteStartElement("SomeDeep");
                     }
-                    Assert.True(utils.CompareReader("<Root><Nesting><SomeDeep /></Nesting></Root>"));
+                    Assert.True(
+                        utils.CompareReader("<Root><Nesting><SomeDeep /></Nesting></Root>")
+                    );
                 }
 
                 // Dispose() shouldn't throw when a tag is not closed and inner stream is closed
@@ -6383,7 +7089,6 @@ namespace System.Xml.XmlWriterApiTests
                     XmlWriter w;
                     StringWriter sw = new StringWriter(CultureInfo.InvariantCulture);
                     XmlWriterSettings s = new XmlWriterSettings();
-
 
                     switch (utils.WriterType)
                     {
@@ -6396,15 +7101,30 @@ namespace System.Xml.XmlWriterApiTests
                             w = WriterHelper.Create(sw, s, overrideAsync: true, async: utils.Async);
                             break;
                         case WriterType.WrappedWriter:
-                            XmlWriter ww = WriterHelper.Create(sw, s, overrideAsync: true, async: utils.Async);
+                            XmlWriter ww = WriterHelper.Create(
+                                sw,
+                                s,
+                                overrideAsync: true,
+                                async: utils.Async
+                            );
                             w = WriterHelper.Create(ww, s, overrideAsync: true, async: utils.Async);
                             break;
                         case WriterType.CharCheckingWriter:
                             s.CheckCharacters = false;
-                            XmlWriter w1 = WriterHelper.Create(sw, s, overrideAsync: true, async: utils.Async);
+                            XmlWriter w1 = WriterHelper.Create(
+                                sw,
+                                s,
+                                overrideAsync: true,
+                                async: utils.Async
+                            );
                             XmlWriterSettings ws2 = new XmlWriterSettings();
                             ws2.CheckCharacters = true;
-                            w = WriterHelper.Create(w1, ws2, overrideAsync: true, async: utils.Async);
+                            w = WriterHelper.Create(
+                                w1,
+                                ws2,
+                                overrideAsync: true,
+                                async: utils.Async
+                            );
                             break;
                         case WriterType.UnicodeWriterIndent:
                             s.Encoding = Encoding.Unicode;
@@ -6428,7 +7148,11 @@ namespace System.Xml.XmlWriterApiTests
                     {
                         ((IDisposable)w).Dispose();
                     }
-                    catch (ObjectDisposedException e) { CError.WriteLine(e.Message); return; }
+                    catch (ObjectDisposedException e)
+                    {
+                        CError.WriteLine(e.Message);
+                        return;
+                    }
                     Assert.Fail();
                 }
 
@@ -6460,7 +7184,8 @@ namespace System.Xml.XmlWriterApiTests
                 [XmlWriterInlineData(WriterType.UnicodeWriterIndent | WriterType.UTF8WriterIndent)]
                 public void SettingIndetingAllowsIndentingWhileWritingBase64(XmlWriterUtils utils)
                 {
-                    string base64test = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+                    string base64test =
+                        "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
                     byte[] bytesToWrite = Encoding.Unicode.GetBytes(base64test.ToCharArray());
 
                     using (XmlWriter writer = utils.CreateWriter())
@@ -6480,10 +7205,7 @@ namespace System.Xml.XmlWriterApiTests
 
                     string xml = utils.GetString();
 
-                    var readerSettings = new XmlReaderSettings()
-                    {
-                        IgnoreWhitespace = false
-                    };
+                    var readerSettings = new XmlReaderSettings() { IgnoreWhitespace = false };
 
                     using (StringReader sr = new StringReader(xml))
                     using (XmlReader reader = XmlReader.Create(sr, readerSettings))

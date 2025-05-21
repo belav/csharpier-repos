@@ -18,7 +18,6 @@ using System.Runtime.Versioning;
 
 namespace System.Threading
 {
-
     public static partial class ThreadPool
     {
         internal static bool EnsureConfigInitialized()
@@ -33,12 +32,12 @@ namespace System.Threading
             int configVariableIndex = 1;
             while (true)
             {
-                int nextConfigVariableIndex =
-                    GetNextConfigUInt32Value(
-                        configVariableIndex,
-                        out uint configValue,
-                        out bool isBoolean,
-                        out char* appContextConfigNameUnsafe);
+                int nextConfigVariableIndex = GetNextConfigUInt32Value(
+                    configVariableIndex,
+                    out uint configValue,
+                    out bool isBoolean,
+                    out char* appContextConfigNameUnsafe
+                );
                 if (nextConfigVariableIndex < 0)
                 {
                     break;
@@ -68,7 +67,7 @@ namespace System.Threading
             int configVariableIndex,
             out uint configValue,
             out bool isBoolean,
-            out char* appContextConfigName);
-
+            out char* appContextConfigName
+        );
     }
 }

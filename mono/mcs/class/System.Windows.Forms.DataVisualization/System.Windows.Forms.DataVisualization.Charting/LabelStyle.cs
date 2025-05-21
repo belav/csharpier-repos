@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,19 +26,19 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class LabelStyle : ChartElement
-	{
-		public int Angle { get; set; }
-		public bool Enabled { get; set; }
-		public Font Font { get; set; }
-		public Color ForeColor { get; set; }
-		public string Format { get; set; }
-		public double Interval { get; set; }
-		public DateTimeIntervalType IntervalType { get; set; }
-		public double IntervalOffset { get; set; }
-		public DateTimeIntervalType IntervalOffsetType { get; set; }
-		public bool IsEndLabelVisible { get; set; }
-		public bool IsStaggered { get; set; }
-		public bool TruncatedLabels { get; set; }
-	}
+    public class LabelStyle : ChartElement
+    {
+        public int Angle { get; set; }
+        public bool Enabled { get; set; }
+        public Font Font { get; set; }
+        public Color ForeColor { get; set; }
+        public string Format { get; set; }
+        public double Interval { get; set; }
+        public DateTimeIntervalType IntervalType { get; set; }
+        public double IntervalOffset { get; set; }
+        public DateTimeIntervalType IntervalOffsetType { get; set; }
+        public bool IsEndLabelVisible { get; set; }
+        public bool IsStaggered { get; set; }
+        public bool TruncatedLabels { get; set; }
+    }
 }

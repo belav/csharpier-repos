@@ -17,9 +17,9 @@ namespace Microsoft.CodeAnalysis.AddImport
     {
         /// <summary>
         /// SearchScope is used to control where the <see cref="AbstractAddImportFeatureService{TSimpleNameSyntax}"/>
-        /// searches.  We search different scopes in different ways.  For example we use 
+        /// searches.  We search different scopes in different ways.  For example we use
         /// SymbolTreeInfos to search unreferenced projects and metadata dlls.  However,
-        /// for the current project we're editing we defer to the compiler to do the 
+        /// for the current project we're editing we defer to the compiler to do the
         /// search.
         /// </summary>
         private abstract class SearchScope
@@ -27,18 +27,30 @@ namespace Microsoft.CodeAnalysis.AddImport
             public readonly bool Exact;
             protected readonly AbstractAddImportFeatureService<TSimpleNameSyntax> provider;
 
-            protected SearchScope(AbstractAddImportFeatureService<TSimpleNameSyntax> provider, bool exact)
+            protected SearchScope(
+                AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
+                bool exact
+            )
             {
                 this.provider = provider;
                 Exact = exact;
             }
 
-            protected abstract Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(SymbolFilter filter, SearchQuery query, CancellationToken cancellationToken);
+            protected abstract Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
+                SymbolFilter filter,
+                SearchQuery query,
+                CancellationToken cancellationToken
+            );
 
-            public abstract SymbolReference CreateReference<T>(SymbolResult<T> symbol) where T : INamespaceOrTypeSymbol;
+            public abstract SymbolReference CreateReference<T>(SymbolResult<T> symbol)
+                where T : INamespaceOrTypeSymbol;
 
             public async Task<ImmutableArray<SymbolResult<ISymbol>>> FindDeclarationsAsync(
-                string name, TSimpleNameSyntax nameNode, SymbolFilter filter, CancellationToken cancellationToken)
+                string name,
+                TSimpleNameSyntax nameNode,
+                SymbolFilter filter,
+                CancellationToken cancellationToken
+            )
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 if (name != null && string.IsNullOrWhiteSpace(name))
@@ -46,21 +58,28 @@ namespace Microsoft.CodeAnalysis.AddImport
                     return ImmutableArray<SymbolResult<ISymbol>>.Empty;
                 }
 
-                using var query = Exact ? SearchQuery.Create(name, ignoreCase: true) : SearchQuery.CreateFuzzy(name);
-                var symbols = await FindDeclarationsAsync(filter, query, cancellationToken).ConfigureAwait(false);
+                using var query = Exact
+                    ? SearchQuery.Create(name, ignoreCase: true)
+                    : SearchQuery.CreateFuzzy(name);
+                var symbols = await FindDeclarationsAsync(filter, query, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (Exact)
                 {
                     // We did an exact, case insensitive, search.  Case sensitive matches should
                     // be preferred though over insensitive ones.
                     return symbols.SelectAsArray(s =>
-                        SymbolResult.Create(s.Name, nameNode, s, weight: s.Name == name ? 0 : 1));
+                        SymbolResult.Create(s.Name, nameNode, s, weight: s.Name == name ? 0 : 1)
+                    );
                 }
 
                 // TODO(cyrusn): It's a shame we have to compute this twice.  However, there's no
-                // great way to store the original value we compute because it happens deep in the 
+                // great way to store the original value we compute because it happens deep in the
                 // compiler bowels when we call FindDeclarations.
-                using var similarityChecker = new WordSimilarityChecker(name, substringsAreSimilar: false);
+                using var similarityChecker = new WordSimilarityChecker(
+                    name,
+                    substringsAreSimilar: false
+                );
 
                 var result = symbols.SelectAsArray(s =>
                 {

@@ -7,12 +7,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-
 using Moq.Async;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class Setup : ISetup
@@ -34,7 +32,6 @@ namespace Moq
         abstract class Setup : ISetup
     */
     abstract class Setup : ISetup
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Expectation expectation;
@@ -161,7 +158,8 @@ namespace Moq
 
         public bool Matches(Invocation invocation)
         {
-            return this.expectation.IsMatch(invocation) && (this.Condition == null || this.Condition.IsTrue);
+            return this.expectation.IsMatch(invocation)
+                && (this.Condition == null || this.Condition.IsTrue);
         }
 
         public bool Matches(MethodExpectation expectation)
@@ -169,9 +167,7 @@ namespace Moq
             return this.expectation.Equals(expectation);
         }
 
-        public virtual void SetOutParameters(Invocation invocation)
-        {
-        }
+        public virtual void SetOutParameters(Invocation invocation) { }
 
         public override string ToString()
         {
@@ -179,9 +175,10 @@ namespace Moq
             var mockedType = expression.Parameters[0].Type;
 
             var builder = new StringBuilder();
-            builder.AppendNameOf(mockedType)
-                   .Append(' ')
-                   .Append(expression.PartialMatcherAwareEval().ToStringFixed());
+            builder
+                .AppendNameOf(mockedType)
+                .Append(' ')
+                .Append(expression.PartialMatcherAwareEval().ToStringFixed());
 
             return builder.ToString();
         }
@@ -201,7 +198,11 @@ namespace Moq
         /// <exception cref="MockException">
         ///   This setup or any of its inner mock (if present and known) failed verification.
         /// </exception>
-        internal void Verify(bool recursive, Func<ISetup, bool> predicate, HashSet<Mock> verifiedMocks)
+        internal void Verify(
+            bool recursive,
+            Func<ISetup, bool> predicate,
+            HashSet<Mock> verifiedMocks
+        )
         {
             // verify this setup:
             this.VerifySelf();
@@ -238,9 +239,7 @@ namespace Moq
             this.ResetCore();
         }
 
-        protected virtual void ResetCore()
-        {
-        }
+        protected virtual void ResetCore() { }
 
         public void Verify(bool recursive = true)
         {

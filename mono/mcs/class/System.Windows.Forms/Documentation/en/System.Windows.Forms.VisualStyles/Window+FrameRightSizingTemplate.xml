@@ -1,4 +1,7 @@
-<Type Name="Window+FrameRightSizingTemplate" FullName="System.Windows.Forms.VisualStyles.Window+FrameRightSizingTemplate">
+<Type
+  Name="Window+FrameRightSizingTemplate"
+  FullName="System.Windows.Forms.VisualStyles.Window+FrameRightSizingTemplate"
+>
   <TypeSignature Language="C#" Value="public static class Window.FrameRightSizingTemplate" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>

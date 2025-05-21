@@ -9,16 +9,27 @@ namespace System.Runtime.InteropServices
     {
         private const int LoadWithAlteredSearchPathFlag = 0x8; /* LOAD_WITH_ALTERED_SEARCH_PATH */
 
-        private static IntPtr LoadLibraryHelper(string libraryName, int flags, ref LoadLibErrorTracker errorTracker)
+        private static IntPtr LoadLibraryHelper(
+            string libraryName,
+            int flags,
+            ref LoadLibErrorTracker errorTracker
+        )
         {
             IntPtr hmod;
 
             // Disable the OS dialogs when failing to load. This matches CoreCLR.
             uint prev;
-            bool set = Interop.Kernel32.SetThreadErrorMode(Interop.Kernel32.SEM_FAILCRITICALERRORS | Interop.Kernel32.SEM_NOOPENFILEERRORBOX, out prev);
+            bool set = Interop.Kernel32.SetThreadErrorMode(
+                Interop.Kernel32.SEM_FAILCRITICALERRORS | Interop.Kernel32.SEM_NOOPENFILEERRORBOX,
+                out prev
+            );
             if (((uint)flags & 0xFFFFFF00) != 0)
             {
-                hmod = Interop.Kernel32.LoadLibraryEx(libraryName, IntPtr.Zero, (int)((uint)flags & 0xFFFFFF00));
+                hmod = Interop.Kernel32.LoadLibraryEx(
+                    libraryName,
+                    IntPtr.Zero,
+                    (int)((uint)flags & 0xFFFFFF00)
+                );
                 if (hmod != IntPtr.Zero)
                 {
                     goto exit;
@@ -38,7 +49,7 @@ namespace System.Runtime.InteropServices
                 errorTracker.TrackErrorCode(Marshal.GetLastPInvokeError());
             }
 
-        exit:
+            exit:
             if (set)
             {
                 Interop.Kernel32.SetThreadErrorMode(prev, out _);
@@ -88,17 +99,19 @@ namespace System.Runtime.InteropServices
                 }
 
                 string message = Interop.Kernel32.GetMessage(_errorCode);
-                throw new DllNotFoundException(SR.Format(SR.DllNotFound_Windows, libraryName, message));
+                throw new DllNotFoundException(
+                    SR.Format(SR.DllNotFound_Windows, libraryName, message)
+                );
             }
 
             public void TrackErrorCode(int errorCode)
             {
                 int priority = errorCode switch
                 {
-                    Interop.Errors.ERROR_FILE_NOT_FOUND or
-                    Interop.Errors.ERROR_PATH_NOT_FOUND or
-                    Interop.Errors.ERROR_MOD_NOT_FOUND or
-                    Interop.Errors.ERROR_DLL_NOT_FOUND => PriorityNotFound,
+                    Interop.Errors.ERROR_FILE_NOT_FOUND
+                    or Interop.Errors.ERROR_PATH_NOT_FOUND
+                    or Interop.Errors.ERROR_MOD_NOT_FOUND
+                    or Interop.Errors.ERROR_DLL_NOT_FOUND => PriorityNotFound,
 
                     // If we can't access a location, we can't know if the dll's there or if it's good.
                     // Still, this is probably more unusual (and thus of more interest) than a dll-not-found

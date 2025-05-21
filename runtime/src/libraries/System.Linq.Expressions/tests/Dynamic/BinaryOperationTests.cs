@@ -14,118 +14,141 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideBinaryOperationBinder : BinaryOperationBinder
         {
-            public MinimumOverrideBinaryOperationBinder(ExpressionType operation) : base(operation)
-            {
-            }
+            public MinimumOverrideBinaryOperationBinder(ExpressionType operation)
+                : base(operation) { }
 
             public override DynamicMetaObject FallbackBinaryOperation(
-                DynamicMetaObject target, DynamicMetaObject arg, DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject arg,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
         }
 
-        private static readonly int[] SomeInt32 = {0, 1, 2, -1, int.MinValue, int.MaxValue, int.MaxValue - 1};
+        private static readonly int[] SomeInt32 =
+        {
+            0,
+            1,
+            2,
+            -1,
+            int.MinValue,
+            int.MaxValue,
+            int.MaxValue - 1,
+        };
 
-        public static IEnumerable<object[]> CrossJoinInt32()
-            => from i in SomeInt32 from j in SomeInt32 select new object[] {i, j};
+        public static IEnumerable<object[]> CrossJoinInt32() =>
+            from i in SomeInt32
+            from j in SomeInt32
+            select new object[] { i, j };
 
-        private static readonly double[] SomeDouble = {0.0, 1.0, 2.0, -1.0, double.PositiveInfinity, double.NaN};
+        private static readonly double[] SomeDouble =
+        {
+            0.0,
+            1.0,
+            2.0,
+            -1.0,
+            double.PositiveInfinity,
+            double.NaN,
+        };
 
-        public static IEnumerable<object[]> CrossJoinDouble()
-            => from i in SomeDouble from j in SomeDouble select new object[] {i, j};
+        public static IEnumerable<object[]> CrossJoinDouble() =>
+            from i in SomeDouble
+            from j in SomeDouble
+            select new object[] { i, j };
 
         public static IEnumerable<object[]> BinaryExpressionTypes()
         {
-            yield return new object[] {ExpressionType.Add};
-            yield return new object[] {ExpressionType.And};
-            yield return new object[] {ExpressionType.Divide};
-            yield return new object[] {ExpressionType.Equal};
-            yield return new object[] {ExpressionType.ExclusiveOr};
-            yield return new object[] {ExpressionType.GreaterThan};
-            yield return new object[] {ExpressionType.GreaterThanOrEqual};
-            yield return new object[] {ExpressionType.LeftShift};
-            yield return new object[] {ExpressionType.LessThan};
-            yield return new object[] {ExpressionType.LessThanOrEqual};
-            yield return new object[] {ExpressionType.Modulo};
-            yield return new object[] {ExpressionType.Multiply};
-            yield return new object[] {ExpressionType.NotEqual};
-            yield return new object[] {ExpressionType.Or};
-            yield return new object[] {ExpressionType.Power};
-            yield return new object[] {ExpressionType.RightShift};
-            yield return new object[] {ExpressionType.Subtract};
-            yield return new object[] {ExpressionType.Extension};
-            yield return new object[] {ExpressionType.AddAssign};
-            yield return new object[] {ExpressionType.AndAssign};
-            yield return new object[] {ExpressionType.DivideAssign};
-            yield return new object[] {ExpressionType.ExclusiveOrAssign};
-            yield return new object[] {ExpressionType.LeftShiftAssign};
-            yield return new object[] {ExpressionType.ModuloAssign};
-            yield return new object[] {ExpressionType.MultiplyAssign};
-            yield return new object[] {ExpressionType.OrAssign};
-            yield return new object[] {ExpressionType.PowerAssign};
-            yield return new object[] {ExpressionType.RightShiftAssign};
-            yield return new object[] {ExpressionType.SubtractAssign};
+            yield return new object[] { ExpressionType.Add };
+            yield return new object[] { ExpressionType.And };
+            yield return new object[] { ExpressionType.Divide };
+            yield return new object[] { ExpressionType.Equal };
+            yield return new object[] { ExpressionType.ExclusiveOr };
+            yield return new object[] { ExpressionType.GreaterThan };
+            yield return new object[] { ExpressionType.GreaterThanOrEqual };
+            yield return new object[] { ExpressionType.LeftShift };
+            yield return new object[] { ExpressionType.LessThan };
+            yield return new object[] { ExpressionType.LessThanOrEqual };
+            yield return new object[] { ExpressionType.Modulo };
+            yield return new object[] { ExpressionType.Multiply };
+            yield return new object[] { ExpressionType.NotEqual };
+            yield return new object[] { ExpressionType.Or };
+            yield return new object[] { ExpressionType.Power };
+            yield return new object[] { ExpressionType.RightShift };
+            yield return new object[] { ExpressionType.Subtract };
+            yield return new object[] { ExpressionType.Extension };
+            yield return new object[] { ExpressionType.AddAssign };
+            yield return new object[] { ExpressionType.AndAssign };
+            yield return new object[] { ExpressionType.DivideAssign };
+            yield return new object[] { ExpressionType.ExclusiveOrAssign };
+            yield return new object[] { ExpressionType.LeftShiftAssign };
+            yield return new object[] { ExpressionType.ModuloAssign };
+            yield return new object[] { ExpressionType.MultiplyAssign };
+            yield return new object[] { ExpressionType.OrAssign };
+            yield return new object[] { ExpressionType.PowerAssign };
+            yield return new object[] { ExpressionType.RightShiftAssign };
+            yield return new object[] { ExpressionType.SubtractAssign };
         }
 
         public static IEnumerable<object[]> NonBinaryExpressionTypes()
         {
-            yield return new object[] {ExpressionType.AddChecked};
-            yield return new object[] {ExpressionType.AndAlso};
-            yield return new object[] {ExpressionType.ArrayLength};
-            yield return new object[] {ExpressionType.ArrayIndex};
-            yield return new object[] {ExpressionType.Call};
-            yield return new object[] {ExpressionType.Coalesce};
-            yield return new object[] {ExpressionType.Conditional};
-            yield return new object[] {ExpressionType.Constant};
-            yield return new object[] {ExpressionType.Convert};
-            yield return new object[] {ExpressionType.ConvertChecked};
-            yield return new object[] {ExpressionType.Invoke};
-            yield return new object[] {ExpressionType.Lambda};
-            yield return new object[] {ExpressionType.ListInit};
-            yield return new object[] {ExpressionType.MemberAccess};
-            yield return new object[] {ExpressionType.MemberInit};
-            yield return new object[] {ExpressionType.MultiplyChecked};
-            yield return new object[] {ExpressionType.Negate};
-            yield return new object[] {ExpressionType.UnaryPlus};
-            yield return new object[] {ExpressionType.NegateChecked};
-            yield return new object[] {ExpressionType.New};
-            yield return new object[] {ExpressionType.NewArrayInit};
-            yield return new object[] {ExpressionType.NewArrayBounds};
-            yield return new object[] {ExpressionType.Not};
-            yield return new object[] {ExpressionType.OrElse};
-            yield return new object[] {ExpressionType.Parameter};
-            yield return new object[] {ExpressionType.Quote};
-            yield return new object[] {ExpressionType.SubtractChecked};
-            yield return new object[] {ExpressionType.TypeAs};
-            yield return new object[] {ExpressionType.TypeIs};
-            yield return new object[] {ExpressionType.Assign};
-            yield return new object[] {ExpressionType.Block};
-            yield return new object[] {ExpressionType.DebugInfo};
-            yield return new object[] {ExpressionType.Decrement};
-            yield return new object[] {ExpressionType.Dynamic};
-            yield return new object[] {ExpressionType.Default};
-            yield return new object[] {ExpressionType.Goto};
-            yield return new object[] {ExpressionType.Increment};
-            yield return new object[] {ExpressionType.Index};
-            yield return new object[] {ExpressionType.Label};
-            yield return new object[] {ExpressionType.RuntimeVariables};
-            yield return new object[] {ExpressionType.Loop};
-            yield return new object[] {ExpressionType.Switch};
-            yield return new object[] {ExpressionType.Throw};
-            yield return new object[] {ExpressionType.Try};
-            yield return new object[] {ExpressionType.Unbox};
-            yield return new object[] {ExpressionType.AddAssignChecked};
-            yield return new object[] {ExpressionType.MultiplyAssignChecked};
-            yield return new object[] {ExpressionType.SubtractAssignChecked};
-            yield return new object[] {ExpressionType.PreIncrementAssign};
-            yield return new object[] {ExpressionType.PreDecrementAssign};
-            yield return new object[] {ExpressionType.PostIncrementAssign};
-            yield return new object[] {ExpressionType.PostDecrementAssign};
-            yield return new object[] {ExpressionType.TypeEqual};
-            yield return new object[] {ExpressionType.OnesComplement};
-            yield return new object[] {ExpressionType.IsTrue};
-            yield return new object[] {ExpressionType.IsFalse};
+            yield return new object[] { ExpressionType.AddChecked };
+            yield return new object[] { ExpressionType.AndAlso };
+            yield return new object[] { ExpressionType.ArrayLength };
+            yield return new object[] { ExpressionType.ArrayIndex };
+            yield return new object[] { ExpressionType.Call };
+            yield return new object[] { ExpressionType.Coalesce };
+            yield return new object[] { ExpressionType.Conditional };
+            yield return new object[] { ExpressionType.Constant };
+            yield return new object[] { ExpressionType.Convert };
+            yield return new object[] { ExpressionType.ConvertChecked };
+            yield return new object[] { ExpressionType.Invoke };
+            yield return new object[] { ExpressionType.Lambda };
+            yield return new object[] { ExpressionType.ListInit };
+            yield return new object[] { ExpressionType.MemberAccess };
+            yield return new object[] { ExpressionType.MemberInit };
+            yield return new object[] { ExpressionType.MultiplyChecked };
+            yield return new object[] { ExpressionType.Negate };
+            yield return new object[] { ExpressionType.UnaryPlus };
+            yield return new object[] { ExpressionType.NegateChecked };
+            yield return new object[] { ExpressionType.New };
+            yield return new object[] { ExpressionType.NewArrayInit };
+            yield return new object[] { ExpressionType.NewArrayBounds };
+            yield return new object[] { ExpressionType.Not };
+            yield return new object[] { ExpressionType.OrElse };
+            yield return new object[] { ExpressionType.Parameter };
+            yield return new object[] { ExpressionType.Quote };
+            yield return new object[] { ExpressionType.SubtractChecked };
+            yield return new object[] { ExpressionType.TypeAs };
+            yield return new object[] { ExpressionType.TypeIs };
+            yield return new object[] { ExpressionType.Assign };
+            yield return new object[] { ExpressionType.Block };
+            yield return new object[] { ExpressionType.DebugInfo };
+            yield return new object[] { ExpressionType.Decrement };
+            yield return new object[] { ExpressionType.Dynamic };
+            yield return new object[] { ExpressionType.Default };
+            yield return new object[] { ExpressionType.Goto };
+            yield return new object[] { ExpressionType.Increment };
+            yield return new object[] { ExpressionType.Index };
+            yield return new object[] { ExpressionType.Label };
+            yield return new object[] { ExpressionType.RuntimeVariables };
+            yield return new object[] { ExpressionType.Loop };
+            yield return new object[] { ExpressionType.Switch };
+            yield return new object[] { ExpressionType.Throw };
+            yield return new object[] { ExpressionType.Try };
+            yield return new object[] { ExpressionType.Unbox };
+            yield return new object[] { ExpressionType.AddAssignChecked };
+            yield return new object[] { ExpressionType.MultiplyAssignChecked };
+            yield return new object[] { ExpressionType.SubtractAssignChecked };
+            yield return new object[] { ExpressionType.PreIncrementAssign };
+            yield return new object[] { ExpressionType.PreDecrementAssign };
+            yield return new object[] { ExpressionType.PostIncrementAssign };
+            yield return new object[] { ExpressionType.PostDecrementAssign };
+            yield return new object[] { ExpressionType.TypeEqual };
+            yield return new object[] { ExpressionType.OnesComplement };
+            yield return new object[] { ExpressionType.IsTrue };
+            yield return new object[] { ExpressionType.IsFalse };
         }
 
         [Theory, MemberData(nameof(CrossJoinInt32))]
@@ -328,7 +351,6 @@ namespace System.Dynamic.Tests
         {
             dynamic dX = x;
             dynamic dY = y;
-
             unchecked
             {
                 dX += dY;
@@ -351,7 +373,6 @@ namespace System.Dynamic.Tests
                 Assert.Throws<OverflowException>(() => checked(dX += dY));
                 return;
             }
-
             checked
             {
                 dX += dY;
@@ -423,7 +444,6 @@ namespace System.Dynamic.Tests
         {
             dynamic dX = x;
             dynamic dY = y;
-
             unchecked
             {
                 dX *= dY;
@@ -451,7 +471,6 @@ namespace System.Dynamic.Tests
             Assert.Equal(result, dX);
         }
 
-
         [Theory, MemberData(nameof(CrossJoinInt32))]
         public void OrInt32Assign(int x, int y)
         {
@@ -475,7 +494,6 @@ namespace System.Dynamic.Tests
         {
             dynamic dX = x;
             dynamic dY = y;
-
             unchecked
             {
                 dX -= dY;
@@ -498,7 +516,6 @@ namespace System.Dynamic.Tests
                 Assert.Throws<OverflowException>(() => checked(dX -= dY));
                 return;
             }
-
             checked
             {
                 dX -= dY;
@@ -578,7 +595,6 @@ namespace System.Dynamic.Tests
             Assert.Equal(x * y, dX * dY);
         }
 
-
         [Theory, MemberData(nameof(CrossJoinDouble))]
         public void NotEqualDouble(double x, double y)
         {
@@ -643,7 +659,10 @@ namespace System.Dynamic.Tests
         [Theory, MemberData(nameof(NonBinaryExpressionTypes))]
         public void NonBinaryOperations(ExpressionType type)
         {
-            AssertExtensions.Throws<ArgumentException>("operation", () => new MinimumOverrideBinaryOperationBinder(type));
+            AssertExtensions.Throws<ArgumentException>(
+                "operation",
+                () => new MinimumOverrideBinaryOperationBinder(type)
+            );
         }
 
         [Theory, MemberData(nameof(BinaryExpressionTypes))]
@@ -662,14 +681,23 @@ namespace System.Dynamic.Tests
         public void NullTarget()
         {
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("target", () => binder.Bind(null, new[] {arg}));
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => binder.Bind(null, new[] { arg })
+            );
         }
 
         [Fact]
         public void NullArgumentArrayPassed()
         {
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
             AssertExtensions.Throws<ArgumentNullException>("args", () => binder.Bind(target, null));
         }
@@ -677,27 +705,51 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NoArgumentsPassed()
         {
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
-            AssertExtensions.Throws<ArgumentException>("args", () => binder.Bind(target, Array.Empty<DynamicMetaObject>()));
+            AssertExtensions.Throws<ArgumentException>(
+                "args",
+                () => binder.Bind(target, Array.Empty<DynamicMetaObject>())
+            );
         }
 
         [Fact]
         public void TooManyArgumentArrayPassed()
         {
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
-            var arg0 = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            var arg1 = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentException>("args", () => binder.Bind(target, new[] {arg0, arg1}));
+            var arg0 = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            var arg1 = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "args",
+                () => binder.Bind(target, new[] { arg0, arg1 })
+            );
         }
 
         [Fact]
         public void SingleNullArgumentPassed()
         {
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             var binder = new MinimumOverrideBinaryOperationBinder(ExpressionType.Add);
-            AssertExtensions.Throws<ArgumentNullException>("args", () => binder.Bind(target, new DynamicMetaObject[1]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "args",
+                () => binder.Bind(target, new DynamicMetaObject[1])
+            );
         }
 
         [Fact]
@@ -739,27 +791,35 @@ namespace System.Dynamic.Tests
                 new BinaryCallSiteBinder(),
                 typeof(object),
                 Expression.Constant(40, typeof(object)),
-                Expression.Constant(2, typeof(object)));
+                Expression.Constant(2, typeof(object))
+            );
             Func<object> func = Expression.Lambda<Func<object>>(expression).Compile(useInterpreter);
             Assert.Equal("42", func().ToString());
         }
 
         private class BinaryCallSiteBinder : BinaryOperationBinder
         {
-            public BinaryCallSiteBinder() : base(ExpressionType.Add) {}
+            public BinaryCallSiteBinder()
+                : base(ExpressionType.Add) { }
 
-            public override DynamicMetaObject FallbackBinaryOperation(DynamicMetaObject target, DynamicMetaObject arg, DynamicMetaObject errorSuggestion)
+            public override DynamicMetaObject FallbackBinaryOperation(
+                DynamicMetaObject target,
+                DynamicMetaObject arg,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 return new DynamicMetaObject(
                     Expression.Convert(
-                    Expression.Add(
-                        Expression.Convert(target.Expression, typeof(int)),
-                        Expression.Convert(arg.Expression, typeof(int))
-                    ), typeof(object)),
-
-                    BindingRestrictions.GetTypeRestriction(target.Expression, typeof(int)).Merge(
-                        BindingRestrictions.GetTypeRestriction(arg.Expression, typeof(int))
-                    ));
+                        Expression.Add(
+                            Expression.Convert(target.Expression, typeof(int)),
+                            Expression.Convert(arg.Expression, typeof(int))
+                        ),
+                        typeof(object)
+                    ),
+                    BindingRestrictions
+                        .GetTypeRestriction(target.Expression, typeof(int))
+                        .Merge(BindingRestrictions.GetTypeRestriction(arg.Expression, typeof(int)))
+                );
             }
         }
     }

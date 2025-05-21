@@ -10,16 +10,11 @@ namespace System.ServiceModel.Dispatcher
         Diverger diverger;
         Opcode lastOpcode;
 
-        internal QueryTreeBuilder()
-        {
-        }
+        internal QueryTreeBuilder() { }
 
         internal Opcode LastOpcode
         {
-            get
-            {
-                return this.lastOpcode;
-            }
+            get { return this.lastOpcode; }
         }
 
         internal Opcode Build(Opcode tree, OpcodeBlock newBlock)
@@ -49,7 +44,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 // We reached a leaf in the query tree
                 // Simply add the remainder of the inserted code to the end of the tree path..
-                this.diverger.TreePath[this.diverger.TreePath.Count - 1].Attach(this.diverger.InsertOpcode);
+                this.diverger.TreePath[this.diverger.TreePath.Count - 1]
+                    .Attach(this.diverger.InsertOpcode);
             }
             else
             {
@@ -57,16 +53,16 @@ namespace System.ServiceModel.Dispatcher
                 // The first diverging opcodes follow the last entry in each path
                 this.diverger.TreeOpcode.Add(this.diverger.InsertOpcode);
             }
-            
+
             this.lastOpcode = newBlock.Last;
             if (this.diverger.InsertOpcode.IsMultipleResult())
             {
                 // The complete new block was merged in, except for the the actual result opcode, which never
-                // automatically merges. This means that the new block found all of its opcodes in common with 
+                // automatically merges. This means that the new block found all of its opcodes in common with
                 // the tree
                 if (OpcodeID.Branch == this.diverger.TreeOpcode.ID)
                 {
-                    OpcodeList branches = (((BranchOpcode) this.diverger.TreeOpcode).Branches); 
+                    OpcodeList branches = (((BranchOpcode)this.diverger.TreeOpcode).Branches);
                     for (int i = 0, count = branches.Count; i < count; ++i)
                     {
                         if (branches[i].IsMultipleResult())
@@ -99,7 +95,7 @@ namespace System.ServiceModel.Dispatcher
                 if (insertPath[i].TestFlag(OpcodeFlags.Jump))
                 {
                     Fx.Assert(treePath[i].ID == insertPath[i].ID, "");
-                    JumpOpcode insertJump = (JumpOpcode) insertPath[i];
+                    JumpOpcode insertJump = (JumpOpcode)insertPath[i];
                     // Opcodes in 'insertPath' have equivalent opcodes in the query tree: i.e. the query tree contains an
                     // an equivalent execution path (upto the point of divergence naturally) that will produce in an identical
                     // result. The remainder of the query tree (anything that lies beyond the point of divergence) represents
@@ -113,12 +109,12 @@ namespace System.ServiceModel.Dispatcher
                     {
                         Fx.Assert(insertJump.Jump.ID == OpcodeID.BlockEnd, "");
 
-                        BlockEndOpcode jumpTo = (BlockEndOpcode) insertJump.Jump;
+                        BlockEndOpcode jumpTo = (BlockEndOpcode)insertJump.Jump;
                         // no longer jumping from insertJump to jumpTo
                         insertJump.RemoveJump(jumpTo);
 
                         // Instead, jumping from treePath[i] to jumpTo
-                        JumpOpcode treeJump = (JumpOpcode) treePath[i];
+                        JumpOpcode treeJump = (JumpOpcode)treePath[i];
                         treeJump.AddJump(jumpTo);
                     }
                 }
@@ -144,34 +140,22 @@ namespace System.ServiceModel.Dispatcher
 
             internal Opcode InsertOpcode
             {
-                get
-                {
-                    return this.insertOpcode;
-                }
+                get { return this.insertOpcode; }
             }
 
             internal QueryBuffer<Opcode> InsertPath
             {
-                get
-                {
-                    return this.insertPath;
-                }
+                get { return this.insertPath; }
             }
 
             internal Opcode TreeOpcode
             {
-                get
-                {
-                    return this.treeOpcode;
-                }
+                get { return this.treeOpcode; }
             }
 
             internal QueryBuffer<Opcode> TreePath
             {
-                get
-                {
-                    return this.treePath;
-                }
+                get { return this.treePath; }
             }
 
             // Stops at the last common node on each

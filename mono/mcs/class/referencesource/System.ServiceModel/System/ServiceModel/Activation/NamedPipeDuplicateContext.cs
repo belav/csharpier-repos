@@ -22,10 +22,7 @@ namespace System.ServiceModel.Activation
 
         public IntPtr Handle
         {
-            get
-            {
-                return this.handle;
-            }
+            get { return this.handle; }
         }
     }
 }

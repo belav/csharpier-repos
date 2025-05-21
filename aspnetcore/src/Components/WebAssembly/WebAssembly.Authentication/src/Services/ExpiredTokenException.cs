@@ -21,9 +21,14 @@ public class AccessTokenNotAvailableException : Exception
     public AccessTokenNotAvailableException(
         NavigationManager navigation,
         AccessTokenResult tokenResult,
-        IEnumerable<string>? scopes)
-        : base(message: "Unable to provision an access token for the requested scopes: " +
-              scopes != null ? $"'{string.Join(", ", scopes ?? Array.Empty<string>())}'" : "(default scopes)")
+        IEnumerable<string>? scopes
+    )
+        : base(
+            message: "Unable to provision an access token for the requested scopes: " + scopes
+            != null
+                ? $"'{string.Join(", ", scopes ?? Array.Empty<string>())}'"
+                : "(default scopes)"
+        )
     {
         _tokenResult = tokenResult;
         _navigation = navigation;
@@ -37,7 +42,10 @@ public class AccessTokenNotAvailableException : Exception
     {
         if (_tokenResult.InteractionOptions != null && _tokenResult.InteractiveRequestUrl != null)
         {
-            _navigation.NavigateToLogin(_tokenResult.InteractiveRequestUrl, _tokenResult.InteractionOptions);
+            _navigation.NavigateToLogin(
+                _tokenResult.InteractiveRequestUrl,
+                _tokenResult.InteractionOptions
+            );
         }
         else
         {
@@ -56,6 +64,9 @@ public class AccessTokenNotAvailableException : Exception
     {
         ArgumentNullException.ThrowIfNull(configureInteractionOptions);
         configureInteractionOptions(_tokenResult.InteractionOptions!);
-        _navigation.NavigateToLogin(_tokenResult.InteractiveRequestUrl!, _tokenResult.InteractionOptions!);
+        _navigation.NavigateToLogin(
+            _tokenResult.InteractiveRequestUrl!,
+            _tokenResult.InteractionOptions!
+        );
     }
 }

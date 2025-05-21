@@ -19,10 +19,19 @@ namespace System.Web.WebPages.Test
             var model = new { Hello = "World" };
             Action<TextWriter> bodyAction = writer => { };
             var sectionWritersStack = new Stack<Dictionary<string, SectionWriter>>();
-            var basePageContext = new WebPageContext(httpContext.Object, null, null) { BodyAction = bodyAction, SectionWritersStack = sectionWritersStack };
+            var basePageContext = new WebPageContext(httpContext.Object, null, null)
+            {
+                BodyAction = bodyAction,
+                SectionWritersStack = sectionWritersStack,
+            };
 
             // Act
-            var subPageContext = WebPageContext.CreateNestedPageContext(basePageContext, pageDataDictionary, model, isLayoutPage: false);
+            var subPageContext = WebPageContext.CreateNestedPageContext(
+                basePageContext,
+                pageDataDictionary,
+                model,
+                isLayoutPage: false
+            );
 
             // Assert
             Assert.Equal(basePageContext.HttpContext, subPageContext.HttpContext);
@@ -43,10 +52,19 @@ namespace System.Web.WebPages.Test
             var model = new { Hello = "World" };
             Action<TextWriter> bodyAction = writer => { };
             var sectionWritersStack = new Stack<Dictionary<string, SectionWriter>>();
-            var basePageContext = new WebPageContext(httpContext.Object, null, null) { BodyAction = bodyAction, SectionWritersStack = sectionWritersStack };
+            var basePageContext = new WebPageContext(httpContext.Object, null, null)
+            {
+                BodyAction = bodyAction,
+                SectionWritersStack = sectionWritersStack,
+            };
 
             // Act
-            var subPageContext = WebPageContext.CreateNestedPageContext(basePageContext, pageDataDictionary, model, isLayoutPage: true);
+            var subPageContext = WebPageContext.CreateNestedPageContext(
+                basePageContext,
+                pageDataDictionary,
+                model,
+                isLayoutPage: true
+            );
 
             // Assert
             Assert.Equal(basePageContext.HttpContext, subPageContext.HttpContext);

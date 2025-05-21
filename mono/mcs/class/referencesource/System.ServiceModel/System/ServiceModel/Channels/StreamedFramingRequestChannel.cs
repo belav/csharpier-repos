@@ -20,8 +20,14 @@ namespace System.ServiceModel.Channels
         StreamUpgradeProvider upgrade;
         ChannelBinding channelBindingToken;
 
-        public StreamedFramingRequestChannel(ChannelManagerBase factory, IConnectionOrientedTransportChannelFactorySettings settings,
-            EndpointAddress remoteAddresss, Uri via, IConnectionInitiator connectionInitiator, ConnectionPool connectionPool)
+        public StreamedFramingRequestChannel(
+            ChannelManagerBase factory,
+            IConnectionOrientedTransportChannelFactorySettings settings,
+            EndpointAddress remoteAddresss,
+            Uri via,
+            IConnectionInitiator connectionInitiator,
+            ConnectionPool connectionPool
+        )
             : base(factory, remoteAddresss, via, settings.ManualAddressing)
         {
             this.settings = settings;
@@ -37,7 +43,11 @@ namespace System.ServiceModel.Channels
             get { return this.startBytes; }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -47,16 +57,18 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
         protected override void OnOpened()
         {
             // setup our preamble which we'll use for all connections we establish
             EncodedVia encodedVia = new EncodedVia(this.Via.AbsoluteUri);
-            EncodedContentType encodedContentType = EncodedContentType.Create(settings.MessageEncoderFactory.Encoder.ContentType);
-            int startSize = ClientSingletonEncoder.ModeBytes.Length + ClientSingletonEncoder.CalcStartSize(encodedVia, encodedContentType);
+            EncodedContentType encodedContentType = EncodedContentType.Create(
+                settings.MessageEncoderFactory.Encoder.ContentType
+            );
+            int startSize =
+                ClientSingletonEncoder.ModeBytes.Length
+                + ClientSingletonEncoder.CalcStartSize(encodedVia, encodedContentType);
             int preambleEndOffset = 0;
             if (this.upgrade == null)
             {
@@ -64,18 +76,39 @@ namespace System.ServiceModel.Channels
                 startSize += ClientDuplexEncoder.PreambleEndBytes.Length;
             }
             this.startBytes = DiagnosticUtility.Utility.AllocateByteArray(startSize);
-            Buffer.BlockCopy(ClientSingletonEncoder.ModeBytes, 0, startBytes, 0, ClientSingletonEncoder.ModeBytes.Length);
-            ClientSingletonEncoder.EncodeStart(this.startBytes, ClientSingletonEncoder.ModeBytes.Length, encodedVia, encodedContentType);
+            Buffer.BlockCopy(
+                ClientSingletonEncoder.ModeBytes,
+                0,
+                startBytes,
+                0,
+                ClientSingletonEncoder.ModeBytes.Length
+            );
+            ClientSingletonEncoder.EncodeStart(
+                this.startBytes,
+                ClientSingletonEncoder.ModeBytes.Length,
+                encodedVia,
+                encodedContentType
+            );
             if (preambleEndOffset > 0)
             {
-                Buffer.BlockCopy(ClientSingletonEncoder.PreambleEndBytes, 0, startBytes, preambleEndOffset, ClientSingletonEncoder.PreambleEndBytes.Length);
+                Buffer.BlockCopy(
+                    ClientSingletonEncoder.PreambleEndBytes,
+                    0,
+                    startBytes,
+                    preambleEndOffset,
+                    ClientSingletonEncoder.PreambleEndBytes.Length
+                );
             }
 
             // and then transition to the Opened state
             base.OnOpened();
         }
 
-        protected override IAsyncRequest CreateAsyncRequest(Message message, AsyncCallback callback, object state)
+        protected override IAsyncRequest CreateAsyncRequest(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new StreamedFramingAsyncRequest(this, callback, state);
         }
@@ -85,32 +118,64 @@ namespace System.ServiceModel.Channels
             return new StreamedFramingRequest(this);
         }
 
-        IConnection SendPreamble(IConnection connection, ref TimeoutHelper timeoutHelper,
-            ClientFramingDecoder decoder, out SecurityMessageProperty remoteSecurity)
+        IConnection SendPreamble(
+            IConnection connection,
+            ref TimeoutHelper timeoutHelper,
+            ClientFramingDecoder decoder,
+            out SecurityMessageProperty remoteSecurity
+        )
         {
             connection.Write(Preamble, 0, Preamble.Length, true, timeoutHelper.RemainingTime());
 
             if (upgrade != null)
             {
-                IStreamUpgradeChannelBindingProvider channelBindingProvider = upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
+                IStreamUpgradeChannelBindingProvider channelBindingProvider =
+                    upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
 
-                StreamUpgradeInitiator upgradeInitiator = upgrade.CreateUpgradeInitiator(this.RemoteAddress, this.Via);
+                StreamUpgradeInitiator upgradeInitiator = upgrade.CreateUpgradeInitiator(
+                    this.RemoteAddress,
+                    this.Via
+                );
 
-                if (!ConnectionUpgradeHelper.InitiateUpgrade(upgradeInitiator, ref connection, decoder,
-                    this, ref timeoutHelper))
+                if (
+                    !ConnectionUpgradeHelper.InitiateUpgrade(
+                        upgradeInitiator,
+                        ref connection,
+                        decoder,
+                        this,
+                        ref timeoutHelper
+                    )
+                )
                 {
-                    ConnectionUpgradeHelper.DecodeFramingFault(decoder, connection, Via, messageEncoder.ContentType, ref timeoutHelper);
+                    ConnectionUpgradeHelper.DecodeFramingFault(
+                        decoder,
+                        connection,
+                        Via,
+                        messageEncoder.ContentType,
+                        ref timeoutHelper
+                    );
                 }
 
-                if (channelBindingProvider != null && channelBindingProvider.IsChannelBindingSupportEnabled)
+                if (
+                    channelBindingProvider != null
+                    && channelBindingProvider.IsChannelBindingSupportEnabled
+                )
                 {
-                    this.channelBindingToken = channelBindingProvider.GetChannelBinding(upgradeInitiator, ChannelBindingKind.Endpoint);
+                    this.channelBindingToken = channelBindingProvider.GetChannelBinding(
+                        upgradeInitiator,
+                        ChannelBindingKind.Endpoint
+                    );
                 }
 
                 remoteSecurity = StreamSecurityUpgradeInitiator.GetRemoteSecurity(upgradeInitiator);
 
-                connection.Write(ClientSingletonEncoder.PreambleEndBytes, 0,
-                    ClientSingletonEncoder.PreambleEndBytes.Length, true, timeoutHelper.RemainingTime());
+                connection.Write(
+                    ClientSingletonEncoder.PreambleEndBytes,
+                    0,
+                    ClientSingletonEncoder.PreambleEndBytes.Length,
+                    true,
+                    timeoutHelper.RemainingTime()
+                );
             }
             else
             {
@@ -119,10 +184,28 @@ namespace System.ServiceModel.Channels
 
             // read ACK
             byte[] ackBuffer = new byte[1];
-            int ackBytesRead = connection.Read(ackBuffer, 0, ackBuffer.Length, timeoutHelper.RemainingTime());
-            if (!ConnectionUpgradeHelper.ValidatePreambleResponse(ackBuffer, ackBytesRead, decoder, this.Via))
+            int ackBytesRead = connection.Read(
+                ackBuffer,
+                0,
+                ackBuffer.Length,
+                timeoutHelper.RemainingTime()
+            );
+            if (
+                !ConnectionUpgradeHelper.ValidatePreambleResponse(
+                    ackBuffer,
+                    ackBytesRead,
+                    decoder,
+                    this.Via
+                )
+            )
             {
-                ConnectionUpgradeHelper.DecodeFramingFault(decoder, connection, Via, messageEncoder.ContentType, ref timeoutHelper);
+                ConnectionUpgradeHelper.DecodeFramingFault(
+                    decoder,
+                    connection,
+                    Via,
+                    messageEncoder.ContentType,
+                    ref timeoutHelper
+                );
             }
 
             return connection;
@@ -141,7 +224,11 @@ namespace System.ServiceModel.Channels
             ChannelBindingUtility.Dispose(ref this.channelBindingToken);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return base.BeginWaitForPendingRequests(timeout, callback, state);
         }
@@ -173,22 +260,51 @@ namespace System.ServiceModel.Channels
                 get { return this.remoteSecurity; }
             }
 
-            protected override TimeoutException CreateNewConnectionTimeoutException(TimeSpan timeout, TimeoutException innerException)
+            protected override TimeoutException CreateNewConnectionTimeoutException(
+                TimeSpan timeout,
+                TimeoutException innerException
+            )
             {
-                return new TimeoutException(SR.GetString(SR.RequestTimedOutEstablishingTransportSession,
-                        timeout, channel.Via.AbsoluteUri), innerException);
+                return new TimeoutException(
+                    SR.GetString(
+                        SR.RequestTimedOutEstablishingTransportSession,
+                        timeout,
+                        channel.Via.AbsoluteUri
+                    ),
+                    innerException
+                );
             }
 
-            protected override IConnection AcceptPooledConnection(IConnection connection, ref TimeoutHelper timeoutHelper)
+            protected override IConnection AcceptPooledConnection(
+                IConnection connection,
+                ref TimeoutHelper timeoutHelper
+            )
             {
                 this.decoder = new ClientSingletonDecoder(0);
-                return channel.SendPreamble(connection, ref timeoutHelper, this.decoder, out this.remoteSecurity);
+                return channel.SendPreamble(
+                    connection,
+                    ref timeoutHelper,
+                    this.decoder,
+                    out this.remoteSecurity
+                );
             }
 
-            protected override IAsyncResult BeginAcceptPooledConnection(IConnection connection, ref TimeoutHelper timeoutHelper, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginAcceptPooledConnection(
+                IConnection connection,
+                ref TimeoutHelper timeoutHelper,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.decoder = new ClientSingletonDecoder(0);
-                return new SendPreambleAsyncResult(channel, connection, ref timeoutHelper, decoder, callback, state);
+                return new SendPreambleAsyncResult(
+                    channel,
+                    connection,
+                    ref timeoutHelper,
+                    decoder,
+                    callback,
+                    state
+                );
             }
 
             protected override IConnection EndAcceptPooledConnection(IAsyncResult result)
@@ -204,15 +320,23 @@ namespace System.ServiceModel.Channels
                 StreamUpgradeInitiator upgradeInitiator;
                 SecurityMessageProperty remoteSecurity;
                 TimeoutHelper timeoutHelper;
-                static WaitCallback onWritePreamble = Fx.ThunkCallback(new WaitCallback(OnWritePreamble));
+                static WaitCallback onWritePreamble = Fx.ThunkCallback(
+                    new WaitCallback(OnWritePreamble)
+                );
                 static WaitCallback onWritePreambleEnd;
                 static WaitCallback onReadPreambleAck = new WaitCallback(OnReadPreambleAck);
                 static AsyncCallback onUpgrade;
                 static AsyncCallback onFailedUpgrade;
                 IStreamUpgradeChannelBindingProvider channelBindingProvider;
 
-                public SendPreambleAsyncResult(StreamedFramingRequestChannel channel, IConnection connection,
-                    ref TimeoutHelper timeoutHelper, ClientFramingDecoder decoder, AsyncCallback callback, object state)
+                public SendPreambleAsyncResult(
+                    StreamedFramingRequestChannel channel,
+                    IConnection connection,
+                    ref TimeoutHelper timeoutHelper,
+                    ClientFramingDecoder decoder,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.channel = channel;
@@ -220,8 +344,15 @@ namespace System.ServiceModel.Channels
                     this.timeoutHelper = timeoutHelper;
                     this.decoder = decoder;
 
-                    AsyncCompletionResult writePreambleResult = connection.BeginWrite(channel.Preamble, 0, channel.Preamble.Length,
-                        true, timeoutHelper.RemainingTime(), onWritePreamble, this);
+                    AsyncCompletionResult writePreambleResult = connection.BeginWrite(
+                        channel.Preamble,
+                        0,
+                        channel.Preamble.Length,
+                        true,
+                        timeoutHelper.RemainingTime(),
+                        onWritePreamble,
+                        this
+                    );
 
                     if (writePreambleResult == AsyncCompletionResult.Queued)
                     {
@@ -234,9 +365,14 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                public static IConnection End(IAsyncResult result, out SecurityMessageProperty remoteSecurity)
+                public static IConnection End(
+                    IAsyncResult result,
+                    out SecurityMessageProperty remoteSecurity
+                )
                 {
-                    SendPreambleAsyncResult thisPtr = AsyncResult.End<SendPreambleAsyncResult>(result);
+                    SendPreambleAsyncResult thisPtr = AsyncResult.End<SendPreambleAsyncResult>(
+                        result
+                    );
                     remoteSecurity = thisPtr.remoteSecurity;
                     return thisPtr.connection;
                 }
@@ -251,16 +387,30 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        this.channelBindingProvider = channel.upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
-                        this.upgradeInitiator = channel.upgrade.CreateUpgradeInitiator(channel.RemoteAddress, channel.Via);
+                        this.channelBindingProvider =
+                            channel.upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
+                        this.upgradeInitiator = channel.upgrade.CreateUpgradeInitiator(
+                            channel.RemoteAddress,
+                            channel.Via
+                        );
                         if (onUpgrade == null)
                         {
                             onUpgrade = Fx.ThunkCallback(new AsyncCallback(OnUpgrade));
                         }
 
-                        IAsyncResult initiateUpgradeResult = ConnectionUpgradeHelper.BeginInitiateUpgrade(channel.settings, channel.RemoteAddress,
-                            connection, decoder, this.upgradeInitiator, channel.messageEncoder.ContentType, null,
-                            this.timeoutHelper, onUpgrade, this);
+                        IAsyncResult initiateUpgradeResult =
+                            ConnectionUpgradeHelper.BeginInitiateUpgrade(
+                                channel.settings,
+                                channel.RemoteAddress,
+                                connection,
+                                decoder,
+                                this.upgradeInitiator,
+                                channel.messageEncoder.ContentType,
+                                null,
+                                this.timeoutHelper,
+                                onUpgrade,
+                                this
+                            );
 
                         if (!initiateUpgradeResult.CompletedSynchronously)
                         {
@@ -274,12 +424,21 @@ namespace System.ServiceModel.Channels
                 {
                     connection = ConnectionUpgradeHelper.EndInitiateUpgrade(result);
 
-                    if (this.channelBindingProvider != null && this.channelBindingProvider.IsChannelBindingSupportEnabled)
+                    if (
+                        this.channelBindingProvider != null
+                        && this.channelBindingProvider.IsChannelBindingSupportEnabled
+                    )
                     {
-                        this.channel.channelBindingToken = this.channelBindingProvider.GetChannelBinding(this.upgradeInitiator, ChannelBindingKind.Endpoint);
+                        this.channel.channelBindingToken =
+                            this.channelBindingProvider.GetChannelBinding(
+                                this.upgradeInitiator,
+                                ChannelBindingKind.Endpoint
+                            );
                     }
 
-                    this.remoteSecurity = StreamSecurityUpgradeInitiator.GetRemoteSecurity(this.upgradeInitiator);
+                    this.remoteSecurity = StreamSecurityUpgradeInitiator.GetRemoteSecurity(
+                        this.upgradeInitiator
+                    );
                     this.upgradeInitiator = null; // we're done with the initiator
                     if (onWritePreambleEnd == null)
                     {
@@ -287,8 +446,14 @@ namespace System.ServiceModel.Channels
                     }
 
                     AsyncCompletionResult writePreambleResult = connection.BeginWrite(
-                        ClientSingletonEncoder.PreambleEndBytes, 0, ClientSingletonEncoder.PreambleEndBytes.Length, true,
-                        timeoutHelper.RemainingTime(), onWritePreambleEnd, this);
+                        ClientSingletonEncoder.PreambleEndBytes,
+                        0,
+                        ClientSingletonEncoder.PreambleEndBytes.Length,
+                        true,
+                        timeoutHelper.RemainingTime(),
+                        onWritePreambleEnd,
+                        this
+                    );
 
                     if (writePreambleResult == AsyncCompletionResult.Queued)
                     {
@@ -301,8 +466,13 @@ namespace System.ServiceModel.Channels
 
                 bool ReadPreambleAck()
                 {
-                    AsyncCompletionResult readAckResult = connection.BeginRead(0, 1,
-                        timeoutHelper.RemainingTime(), onReadPreambleAck, this);
+                    AsyncCompletionResult readAckResult = connection.BeginRead(
+                        0,
+                        1,
+                        timeoutHelper.RemainingTime(),
+                        onReadPreambleAck,
+                        this
+                    );
 
                     if (readAckResult == AsyncCompletionResult.Queued)
                     {
@@ -315,16 +485,29 @@ namespace System.ServiceModel.Channels
                 bool HandlePreambleAck()
                 {
                     int ackBytesRead = connection.EndRead();
-                    if (!ConnectionUpgradeHelper.ValidatePreambleResponse(
-                        connection.AsyncReadBuffer, ackBytesRead, decoder, channel.Via))
+                    if (
+                        !ConnectionUpgradeHelper.ValidatePreambleResponse(
+                            connection.AsyncReadBuffer,
+                            ackBytesRead,
+                            decoder,
+                            channel.Via
+                        )
+                    )
                     {
                         if (onFailedUpgrade == null)
                         {
                             onFailedUpgrade = Fx.ThunkCallback(new AsyncCallback(OnFailedUpgrade));
                         }
-                        IAsyncResult decodeFaultResult = ConnectionUpgradeHelper.BeginDecodeFramingFault(decoder,
-                            connection, channel.Via, channel.messageEncoder.ContentType, ref timeoutHelper,
-                            onFailedUpgrade, this);
+                        IAsyncResult decodeFaultResult =
+                            ConnectionUpgradeHelper.BeginDecodeFramingFault(
+                                decoder,
+                                connection,
+                                channel.Via,
+                                channel.messageEncoder.ContentType,
+                                ref timeoutHelper,
+                                onFailedUpgrade,
+                                this
+                            );
 
                         if (!decodeFaultResult.CompletedSynchronously)
                         {
@@ -490,8 +673,11 @@ namespace System.ServiceModel.Channels
         {
             StreamedConnectionPoolHelper connectionPoolHelper;
 
-            public ClientSingletonConnectionReader(IConnection connection, StreamedConnectionPoolHelper connectionPoolHelper,
-                IConnectionOrientedTransportFactorySettings settings)
+            public ClientSingletonConnectionReader(
+                IConnection connection,
+                StreamedConnectionPoolHelper connectionPoolHelper,
+                IConnectionOrientedTransportFactorySettings settings
+            )
                 : base(connection, 0, 0, connectionPoolHelper.RemoteSecurity, settings, null)
             {
                 this.connectionPoolHelper = connectionPoolHelper;
@@ -502,7 +688,12 @@ namespace System.ServiceModel.Channels
                 get { return connectionPoolHelper.Decoder.StreamPosition; }
             }
 
-            protected override bool DecodeBytes(byte[] buffer, ref int offset, ref int size, ref bool isAtEof)
+            protected override bool DecodeBytes(
+                byte[] buffer,
+                ref int offset,
+                ref int size,
+                ref bool isAtEof
+            )
             {
                 while (size > 0)
                 {
@@ -552,14 +743,26 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    this.connection = connectionPoolHelper.EstablishConnection(timeoutHelper.RemainingTime());
+                    this.connection = connectionPoolHelper.EstablishConnection(
+                        timeoutHelper.RemainingTime()
+                    );
 
-                    ChannelBindingUtility.TryAddToMessage(this.channel.channelBindingToken, message, false);
+                    ChannelBindingUtility.TryAddToMessage(
+                        this.channel.channelBindingToken,
+                        message,
+                        false
+                    );
 
                     bool success = false;
                     try
                     {
-                        StreamingConnectionHelper.WriteMessage(message, this.connection, true, channel.settings, ref timeoutHelper);
+                        StreamingConnectionHelper.WriteMessage(
+                            message,
+                            this.connection,
+                            true,
+                            channel.settings,
+                            ref timeoutHelper
+                        );
                         success = true;
                     }
                     finally
@@ -573,21 +776,30 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException exception)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout), exception));
+                        new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout), exception)
+                    );
                 }
             }
 
             public Message WaitForReply(TimeSpan timeout)
             {
-                ClientSingletonConnectionReader connectionReader = new ClientSingletonConnectionReader(
-                    connection, connectionPoolHelper, channel.settings);
+                ClientSingletonConnectionReader connectionReader =
+                    new ClientSingletonConnectionReader(
+                        connection,
+                        connectionPoolHelper,
+                        channel.settings
+                    );
 
                 connectionReader.DoneSending(TimeSpan.Zero); // we still need to receive
                 Message message = connectionReader.Receive(timeout);
 
                 if (message != null)
                 {
-                    ChannelBindingUtility.TryAddToMessage(this.channel.channelBindingToken, message, false);
+                    ChannelBindingUtility.TryAddToMessage(
+                        this.channel.channelBindingToken,
+                        message,
+                        false
+                    );
                 }
 
                 return message;
@@ -608,9 +820,7 @@ namespace System.ServiceModel.Channels
                 Cleanup();
             }
 
-            public void OnReleaseRequest()
-            {                
-            }
+            public void OnReleaseRequest() { }
         }
 
         class StreamedFramingAsyncRequest : AsyncResult, IAsyncRequest
@@ -621,12 +831,22 @@ namespace System.ServiceModel.Channels
             Message message;
             Message replyMessage;
             TimeoutHelper timeoutHelper;
-            static AsyncCallback onEstablishConnection = Fx.ThunkCallback(new AsyncCallback(OnEstablishConnection));
-            static AsyncCallback onWriteMessage = Fx.ThunkCallback(new AsyncCallback(OnWriteMessage));
-            static AsyncCallback onReceiveReply = Fx.ThunkCallback(new AsyncCallback(OnReceiveReply));
+            static AsyncCallback onEstablishConnection = Fx.ThunkCallback(
+                new AsyncCallback(OnEstablishConnection)
+            );
+            static AsyncCallback onWriteMessage = Fx.ThunkCallback(
+                new AsyncCallback(OnWriteMessage)
+            );
+            static AsyncCallback onReceiveReply = Fx.ThunkCallback(
+                new AsyncCallback(OnReceiveReply)
+            );
             ClientSingletonConnectionReader connectionReader;
 
-            public StreamedFramingAsyncRequest(StreamedFramingRequestChannel channel, AsyncCallback callback, object state)
+            public StreamedFramingAsyncRequest(
+                StreamedFramingRequestChannel channel,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
@@ -644,7 +864,11 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        IAsyncResult result = connectionPoolHelper.BeginEstablishConnection(timeoutHelper.RemainingTime(), onEstablishConnection, this);
+                        IAsyncResult result = connectionPoolHelper.BeginEstablishConnection(
+                            timeoutHelper.RemainingTime(),
+                            onEstablishConnection,
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             completeSelf = HandleEstablishConnection(result);
@@ -653,7 +877,11 @@ namespace System.ServiceModel.Channels
                     catch (TimeoutException exception)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout), exception));
+                            new TimeoutException(
+                                SR.GetString(SR.TimeoutOnRequest, timeout),
+                                exception
+                            )
+                        );
                     }
 
                     success = true;
@@ -676,9 +904,21 @@ namespace System.ServiceModel.Channels
             {
                 this.connection = connectionPoolHelper.EndEstablishConnection(result);
 
-                ChannelBindingUtility.TryAddToMessage(this.channel.channelBindingToken, this.message, false);
+                ChannelBindingUtility.TryAddToMessage(
+                    this.channel.channelBindingToken,
+                    this.message,
+                    false
+                );
 
-                IAsyncResult writeResult = StreamingConnectionHelper.BeginWriteMessage(this.message, this.connection, true, this.channel.settings, ref timeoutHelper, onWriteMessage, this);
+                IAsyncResult writeResult = StreamingConnectionHelper.BeginWriteMessage(
+                    this.message,
+                    this.connection,
+                    true,
+                    this.channel.settings,
+                    ref timeoutHelper,
+                    onWriteMessage,
+                    this
+                );
                 if (!writeResult.CompletedSynchronously)
                 {
                     return false;
@@ -696,7 +936,11 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException exception)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(SR.GetString(SR.TimeoutOnRequest, this.timeoutHelper.OriginalTimeout), exception));
+                        new TimeoutException(
+                            SR.GetString(SR.TimeoutOnRequest, this.timeoutHelper.OriginalTimeout),
+                            exception
+                        )
+                    );
                 }
                 return replyMessage;
             }
@@ -721,10 +965,18 @@ namespace System.ServiceModel.Channels
                 // write out the streamed message
                 StreamingConnectionHelper.EndWriteMessage(result);
 
-                connectionReader = new ClientSingletonConnectionReader(connection, connectionPoolHelper, channel.settings);
+                connectionReader = new ClientSingletonConnectionReader(
+                    connection,
+                    connectionPoolHelper,
+                    channel.settings
+                );
                 connectionReader.DoneSending(TimeSpan.Zero); // we still need to receive
 
-                IAsyncResult receiveResult = connectionReader.BeginReceive(timeoutHelper.RemainingTime(), onReceiveReply, this);
+                IAsyncResult receiveResult = connectionReader.BeginReceive(
+                    timeoutHelper.RemainingTime(),
+                    onReceiveReply,
+                    this
+                );
 
                 if (!receiveResult.CompletedSynchronously)
                 {
@@ -740,7 +992,11 @@ namespace System.ServiceModel.Channels
 
                 if (this.replyMessage != null)
                 {
-                    ChannelBindingUtility.TryAddToMessage(this.channel.channelBindingToken, this.replyMessage, false);
+                    ChannelBindingUtility.TryAddToMessage(
+                        this.channel.channelBindingToken,
+                        this.replyMessage,
+                        false
+                    );
                 }
 
                 return true;
@@ -753,7 +1009,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                StreamedFramingAsyncRequest thisPtr = (StreamedFramingAsyncRequest)result.AsyncState;
+                StreamedFramingAsyncRequest thisPtr = (StreamedFramingAsyncRequest)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 bool completeSelf;
@@ -795,7 +1052,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                StreamedFramingAsyncRequest thisPtr = (StreamedFramingAsyncRequest)result.AsyncState;
+                StreamedFramingAsyncRequest thisPtr = (StreamedFramingAsyncRequest)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 bool completeSelf;
@@ -832,7 +1090,8 @@ namespace System.ServiceModel.Channels
 
             static void OnReceiveReply(IAsyncResult result)
             {
-                StreamedFramingAsyncRequest thisPtr = (StreamedFramingAsyncRequest)result.AsyncState;
+                StreamedFramingAsyncRequest thisPtr = (StreamedFramingAsyncRequest)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 bool completeSelf;
@@ -867,9 +1126,7 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public void OnReleaseRequest()
-            {                
-            }
+            public void OnReleaseRequest() { }
         }
     }
 }

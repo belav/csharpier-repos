@@ -10,12 +10,36 @@ namespace System.Globalization.Tests
     {
         private static readonly int[] s_daysPerMonthLeapYear = new int[13]
         {
-            0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+            0,
+            31,
+            29,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
         };
 
         private static readonly int[] s_daysPerMonthCommonYear = new int[13]
         {
-            0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+            0,
+            31,
+            28,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
         };
 
         public static IEnumerable<object[]> GetDaysInMonth_TestData()
@@ -23,7 +47,11 @@ namespace System.Globalization.Tests
             yield return new object[] { 1912, 1 };
             yield return new object[] { 8088, 12 };
             yield return new object[] { 2000, 12 };
-            yield return new object[] { TaiwanCalendarUtilities.RandomYear(), TaiwanCalendarUtilities.RandomMonth() };
+            yield return new object[]
+            {
+                TaiwanCalendarUtilities.RandomYear(),
+                TaiwanCalendarUtilities.RandomMonth(),
+            };
         }
 
         [Theory]

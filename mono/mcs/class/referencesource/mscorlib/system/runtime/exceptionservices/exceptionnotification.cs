@@ -1,8 +1,8 @@
 ﻿#if FEATURE_EXCEPTION_NOTIFICATIONS
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -12,15 +12,16 @@
 ** Purpose: Contains definitions for supporting Exception Notifications.
 **
 ** Created: 10/07/2008
-** 
+**
 ** <owner>Microsoft</owner>
-** 
+**
 =============================================================================*/
 
-namespace System.Runtime.ExceptionServices {
+namespace System.Runtime.ExceptionServices
+{
     using System;
     using System.Runtime.ConstrainedExecution;
-    
+
     // Definition of the argument-type passed to the FirstChanceException event handler
     public class FirstChanceExceptionEventArgs : EventArgs
     {

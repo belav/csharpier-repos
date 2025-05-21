@@ -11,13 +11,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
 {
-    using VerifyCS = CSharpCodeRefactoringVerifier<
-        ConvertStringToRawStringCodeRefactoringProvider>;
+    using VerifyCS = CSharpCodeRefactoringVerifier<ConvertStringToRawStringCodeRefactoringProvider>;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertToRawString)]
     public class ConvertRegularStringToRawStringTests
     {
-        private static async Task VerifyRefactoringAsync(string testCode, string fixedCode, int index = 0, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary)
+        private static async Task VerifyRefactoringAsync(
+            string testCode,
+            string fixedCode,
+            int index = 0,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary
+        )
         {
             await new VerifyCS.Test
             {
@@ -25,10 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 FixedCode = fixedCode,
                 LanguageVersion = LanguageVersion.CSharp11,
                 CodeActionIndex = index,
-                TestState =
-                {
-                    OutputKind = outputKind,
-                },
+                TestState = { OutputKind = outputKind },
             }.RunAsync();
         }
 
@@ -127,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = """👩""";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
         [Fact]
         public async Task TestSimpleString()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -173,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"a";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -181,13 +185,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = """a""";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimSimpleString()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -195,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]@"a";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -203,23 +210,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = """a""";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestSimpleStringTopLevel()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 var v = [||]"a";
-                """, """"
+                """,
+                """"
                 var v = """a""";
-                """", outputKind: OutputKind.ConsoleApplication);
+                """",
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact]
         public async Task TestStringWithQuoteInMiddle()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -227,7 +240,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"goo\"bar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -235,13 +249,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = """goo"bar""";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithQuoteInMiddle()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -249,7 +265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]@"goo""bar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -257,13 +274,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = """goo"bar""";
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestStringWithQuoteAtStart()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -271,7 +290,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"\"goobar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -281,13 +301,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithQuoteAtStart()
         {
-            await VerifyRefactoringAsync(""""
+            await VerifyRefactoringAsync(
+                """"
                 public class C
                 {
                     void M()
@@ -295,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]@"""goobar";
                     }
                 }
-                """", """"
+                """",
+                """"
                 public class C
                 {
                     void M()
@@ -305,13 +328,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestStringWithQuoteAtEnd()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -319,7 +344,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"goobar\"";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -329,13 +355,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithQuoteAtEnd()
         {
-            await VerifyRefactoringAsync(""""
+            await VerifyRefactoringAsync(
+                """"
                 public class C
                 {
                     void M()
@@ -343,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]@"goobar""";
                     }
                 }
-                """", """"
+                """",
+                """"
                 public class C
                 {
                     void M()
@@ -353,13 +382,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestStringWithNewLine()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -367,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"goo\r\nbar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -378,13 +410,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithNewLine()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -393,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 bar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -404,13 +439,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestStringWithNewLineAtStartAndEnd()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -418,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"\r\ngoobar\r\n";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -430,13 +468,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimStringWithNewLineAtStartAndEnd()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -446,7 +486,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 ";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -458,13 +499,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestNoIndentVerbatimStringWithNewLineAtStartAndEnd()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -474,7 +517,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 ";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -484,13 +528,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestIndentedString()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -498,7 +545,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                         var v = [||]"goo\r\nbar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -509,13 +557,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace1()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -526,7 +576,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 select x";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -538,43 +589,55 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestIndentedStringTopLevel()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 var v = [||]"goo\r\nbar";
-                """, """"
+                """,
+                """"
                 var v = """
                     goo
                     bar
                     """;
-                """", outputKind: OutputKind.ConsoleApplication);
+                """",
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespaceTopLevel()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 var v = [||]@"
                 from x in y
                 where x > 0
                 select x";
-                """, """"
+                """,
+                """"
                 var v = """
                     from x in y
                     where x > 0
                     select x
                     """;
-                """", index: 1, outputKind: OutputKind.ConsoleApplication);
+                """",
+                index: 1,
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact]
         public async Task TestVerbatimIndentedString()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -583,7 +646,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 bar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -594,13 +658,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestIndentedStringOnOwnLine()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -609,7 +675,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                                 [||]"goo\r\nbar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -621,13 +688,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                                 """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestVerbatimIndentedStringOnOwnLine()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -637,7 +706,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                 bar";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -649,13 +719,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                                 """;
                     }
                 }
-                """");
+                """"
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace2()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -666,7 +738,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             select x";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -678,13 +751,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace3()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -696,7 +772,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             ";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -708,13 +785,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace4()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -726,7 +806,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             ";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -738,13 +819,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace5()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -756,7 +840,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             ";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -768,13 +853,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestWithoutLeadingWhitespace6()
         {
-            await VerifyRefactoringAsync("""
+            await VerifyRefactoringAsync(
+                """
                 public class C
                 {
                     void M()
@@ -788,7 +876,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             ";
                     }
                 }
-                """, """"
+                """,
+                """"
                 public class C
                 {
                     void M()
@@ -802,7 +891,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRawString
                             """;
                     }
                 }
-                """", index: 1);
+                """",
+                index: 1
+            );
         }
     }
 }

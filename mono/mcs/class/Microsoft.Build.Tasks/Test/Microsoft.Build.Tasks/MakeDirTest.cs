@@ -34,43 +34,44 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class MakeDirTest
+    {
+        [SetUp]
+        public void CreateDir()
+        {
+            string path = Path.Combine(Path.Combine("Test", "resources"), "MakeDir");
+            Directory.CreateDirectory(path);
+        }
 
-	[TestFixture]
-	public class MakeDirTest {
+        [TearDown]
+        public void RemoveDirectories()
+        {
+            string path = Path.Combine(Path.Combine("Test", "resources"), "MakeDir");
+            Directory.Delete(path, true);
+        }
 
-		[SetUp]
-		public void CreateDir ()
-		{
-			string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
-			Directory.CreateDirectory (path);
-		}
+        [Test]
+        public void TestAssignment()
+        {
+            MakeDir md = new MakeDir();
 
-		[TearDown]
-		public void RemoveDirectories ()
-		{
-			string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
-			Directory.Delete (path, true);
-		}
+            md.Directories = new ITaskItem[2] { new TaskItem("A"), new TaskItem("B") };
 
-		[Test]
-		public void TestAssignment ()
-		{
-			MakeDir md = new MakeDir ();
+            Assert.AreEqual(2, md.Directories.Length, "A1");
+        }
 
-			md.Directories = new ITaskItem [2] { new TaskItem ("A"), new TaskItem ("B") };
+        [Test]
+        public void TestExecution1()
+        {
+            Engine engine;
+            Project project;
+            string path = Path.Combine(Path.Combine("Test", "resources"), "MakeDir");
 
-			Assert.AreEqual (2, md.Directories.Length, "A1");
-		}
-
-		[Test]
-		public void TestExecution1 ()
-		{
-			Engine engine;
-			Project project;
-			string path = Path.Combine (Path.Combine ("Test", "resources"), "MakeDir");
-
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Dir Include='Test\resources\MakeDir\A' />
@@ -88,17 +89,17 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			project.Build ("1");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+            project.Build("1");
 
-			Assert.AreEqual (3, Directory.GetDirectories (path).Length, "A1");
+            Assert.AreEqual(3, Directory.GetDirectories(path).Length, "A1");
 
-			BuildItemGroup output = project.GetEvaluatedItemsByName ("Out");
-			Assert.AreEqual (Path.Combine (path, "A"), output [0].FinalItemSpec, "A5");
-			Assert.AreEqual (Path.Combine (path, "B"), output [1].FinalItemSpec, "A6");
-			Assert.AreEqual (Path.Combine (path, "C"), output [2].FinalItemSpec, "A7");
-		}
-	}
+            BuildItemGroup output = project.GetEvaluatedItemsByName("Out");
+            Assert.AreEqual(Path.Combine(path, "A"), output[0].FinalItemSpec, "A5");
+            Assert.AreEqual(Path.Combine(path, "B"), output[1].FinalItemSpec, "A6");
+            Assert.AreEqual(Path.Combine(path, "C"), output[2].FinalItemSpec, "A7");
+        }
+    }
 }

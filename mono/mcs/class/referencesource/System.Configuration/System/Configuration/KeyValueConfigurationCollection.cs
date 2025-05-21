@@ -4,58 +4,62 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
     using System.Text;
+    using System.Xml;
 
     [ConfigurationCollection(typeof(KeyValueConfigurationElement))]
-    public class KeyValueConfigurationCollection : ConfigurationElementCollection {
+    public class KeyValueConfigurationCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static KeyValueConfigurationCollection() {
+        static KeyValueConfigurationCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
-
 
         //
         // Constructor
         //
-        public KeyValueConfigurationCollection() :
-            base(StringComparer.OrdinalIgnoreCase) {
+        public KeyValueConfigurationCollection()
+            : base(StringComparer.OrdinalIgnoreCase)
+        {
             internalAddToEnd = true;
         }
 
         //
         // Accessors
         //
-        protected override bool ThrowOnDuplicate {
-            get { 
-                return false; 
-            }
+        protected override bool ThrowOnDuplicate
+        {
+            get { return false; }
         }
 
-        public new KeyValueConfigurationElement this[string key] {
-            get {
-                return (KeyValueConfigurationElement)BaseGet(key);
-            }
+        public new KeyValueConfigurationElement this[string key]
+        {
+            get { return (KeyValueConfigurationElement)BaseGet(key); }
 #if DONT_COMPILE
             // if we ever expose this element this will be handy
-            set {
+            set
+            {
                 int index = -1; // append by default
-                KeyValueConfigurationElement tempElement = (KeyValueConfigurationElement)BaseGet(key);
-                if (tempElement != null) {
+                KeyValueConfigurationElement tempElement = (KeyValueConfigurationElement)BaseGet(
+                    key
+                );
+                if (tempElement != null)
+                {
                     index = BaseIndexOf(tempElement);
                     BaseRemoveAt(index);
                 }
@@ -64,37 +68,40 @@ namespace System.Configuration {
 #endif
         }
 
-        public String[] AllKeys {
-            get {
-                return StringUtil.ObjectArrayToStringArray(BaseGetAllKeys());
-            }
+        public String[] AllKeys
+        {
+            get { return StringUtil.ObjectArrayToStringArray(BaseGetAllKeys()); }
         }
 
         //
         // Methods
         //
 
-        public void Add(KeyValueConfigurationElement keyValue) {
+        public void Add(KeyValueConfigurationElement keyValue)
+        {
             // Need to initialize in order to get the key
             keyValue.Init();
 
             // the appsettings add works more like a namevalue collection add in that it appends values
             // when add is called and teh key already exists.
-            KeyValueConfigurationElement oldValue = (KeyValueConfigurationElement)BaseGet(keyValue.Key);
-            if (oldValue == null) {
+            KeyValueConfigurationElement oldValue = (KeyValueConfigurationElement)BaseGet(
+                keyValue.Key
+            );
+            if (oldValue == null)
+            {
                 BaseAdd(keyValue);
             }
-            else {
+            else
+            {
                 oldValue.Value += "," + keyValue.Value;
                 int index = BaseIndexOf(oldValue);
                 BaseRemoveAt(index);
                 BaseAdd(index, oldValue);
             }
-
-
         }
 
-        public void Add(String key, String value) {
+        public void Add(String key, String value)
+        {
             KeyValueConfigurationElement element = new KeyValueConfigurationElement(key, value);
             Add(element);
         }
@@ -106,20 +113,24 @@ namespace System.Configuration {
                 BaseRemove(keyValue.Key);
         }
 #endif
-        
-        public void Remove(string key) {
+
+        public void Remove(string key)
+        {
             BaseRemove(key);
         }
-        
-        public void Clear() {
+
+        public void Clear()
+        {
             BaseClear();
         }
-        
-        protected override ConfigurationElement CreateNewElement() {
+
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new KeyValueConfigurationElement();
         }
-        
-        protected override object GetElementKey(ConfigurationElement element) {
+
+        protected override object GetElementKey(ConfigurationElement element)
+        {
             return ((KeyValueConfigurationElement)element).Key;
         }
     }

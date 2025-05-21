@@ -28,7 +28,10 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(n, f());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void EmitConstantsToIL_NonNullableValueTypes()
         {
             VerifyEmitConstantsToIL((bool)true);
@@ -49,7 +52,10 @@ namespace System.Linq.Expressions.Tests
             VerifyEmitConstantsToIL((decimal)49.95m);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void EmitConstantsToIL_NullableValueTypes()
         {
             VerifyEmitConstantsToIL((bool?)null);
@@ -85,14 +91,20 @@ namespace System.Linq.Expressions.Tests
             VerifyEmitConstantsToIL((DateTime?)null);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void EmitConstantsToIL_ReferenceTypes()
         {
             VerifyEmitConstantsToIL((string)null);
             VerifyEmitConstantsToIL((string)"bar");
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void EmitConstantsToIL_Enums()
         {
             VerifyEmitConstantsToIL(ConstantsEnum.A);
@@ -100,21 +112,34 @@ namespace System.Linq.Expressions.Tests
             VerifyEmitConstantsToIL((ConstantsEnum?)ConstantsEnum.A);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void EmitConstantsToIL_ShareReferences()
         {
             var o = new object();
-            VerifyEmitConstantsToIL(Expression.Equal(Expression.Constant(o), Expression.Constant(o)), 1, true);
+            VerifyEmitConstantsToIL(
+                Expression.Equal(Expression.Constant(o), Expression.Constant(o)),
+                1,
+                true
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void EmitConstantsToIL_LiftedToClosure()
         {
             VerifyEmitConstantsToIL(DateTime.Now, 1);
             VerifyEmitConstantsToIL((DateTime?)DateTime.Now, 1);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void VariableBinder_CatchBlock_Filter1()
         {
             // See https://github.com/dotnet/runtime/issues/18676 for reported issue
@@ -128,7 +153,10 @@ namespace System.Linq.Expressions.Tests
             );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         public static void VariableBinder_CatchBlock_Filter2()
         {
             // See https://github.com/dotnet/runtime/issues/18676 for reported issue
@@ -142,7 +170,10 @@ namespace System.Linq.Expressions.Tests
             );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14919", TestRuntimes.Mono)]
         public static void VerifyIL_Simple()
         {
@@ -156,32 +187,29 @@ namespace System.Linq.Expressions.Tests
                     IL_0000: ldc.i4.s   42
                     IL_0002: call       int32 class [System.Private.CoreLib]System.Math::Abs(int32)
                     IL_0007: ret
-                  }");
+                  }"
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14919", TestRuntimes.Mono)]
         public static void VerifyIL_Exceptions()
         {
             ParameterExpression x = Expression.Parameter(typeof(int), "x");
-            Expression<Func<int, int>> f =
-                Expression.Lambda<Func<int, int>>(
-                    Expression.TryCatchFinally(
-                        Expression.Call(
-                            typeof(Math).GetMethod(nameof(Math.Abs), new[] { typeof(int) }),
-                            Expression.Divide(
-                                Expression.Constant(42),
-                                x
-                            )
-                        ),
-                        Expression.Empty(),
-                        Expression.Catch(
-                            typeof(DivideByZeroException),
-                            Expression.Constant(-1)
-                        )
+            Expression<Func<int, int>> f = Expression.Lambda<Func<int, int>>(
+                Expression.TryCatchFinally(
+                    Expression.Call(
+                        typeof(Math).GetMethod(nameof(Math.Abs), new[] { typeof(int) }),
+                        Expression.Divide(Expression.Constant(42), x)
                     ),
-                    x
-                );
+                    Expression.Empty(),
+                    Expression.Catch(typeof(DivideByZeroException), Expression.Constant(-1))
+                ),
+                x
+            );
 
             f.VerifyIL(
                 @".method int32 ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure,int32)
@@ -217,10 +245,14 @@ namespace System.Linq.Expressions.Tests
                     }
                     IL_001d: ldloc.0
                     IL_001e: ret
-                  }");
+                  }"
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14919", TestRuntimes.Mono)]
         public static void VerifyIL_Closure1()
         {
@@ -252,10 +284,14 @@ namespace System.Linq.Expressions.Tests
                     IL_0000: ldc.i4.s   42
                     IL_0002: ret
                   }",
-                appendInnerLambdas: true);
+                appendInnerLambdas: true
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14919", TestRuntimes.Mono)]
         public static void VerifyIL_Closure2()
         {
@@ -310,10 +346,14 @@ namespace System.Linq.Expressions.Tests
                     IL_000f: ldfld      class [System.Private.CoreLib]System.Runtime.CompilerServices.StrongBox`1<int32>::Value
                     IL_0014: ret
                   }",
-                appendInnerLambdas: true);
+                appendInnerLambdas: true
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotLinqExpressionsBuiltWithIsInterpretingOnly)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/14919", TestRuntimes.Mono)]
         public static void VerifyIL_Closure3()
         {
@@ -371,10 +411,15 @@ namespace System.Linq.Expressions.Tests
                     IL_0015: add
                     IL_0016: ret
                   }",
-                appendInnerLambdas: true);
+                appendInnerLambdas: true
+            );
         }
 
-        internal static void VerifyIL(this LambdaExpression expression, string expected, bool appendInnerLambdas = false)
+        internal static void VerifyIL(
+            this LambdaExpression expression,
+            string expected,
+            bool appendInnerLambdas = false
+        )
         {
             string actual = expression.GetIL(appendInnerLambdas);
 
@@ -388,11 +433,14 @@ namespace System.Linq.Expressions.Tests
         {
             var normalizeRegex = new Regex(@"lambda_method[0-9]*");
 
-            Collections.Generic.IEnumerable<string> lines =
-                s
-                .Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            Collections.Generic.IEnumerable<string> lines = s.Split(
+                    new[] { "\r\n", "\n" },
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+                )
                 .Where(line => !line.StartsWith("//"))
-                .Select(beforeLambdaUniquifierRemoval => normalizeRegex.Replace(beforeLambdaUniquifierRemoval, "lambda_method"));
+                .Select(beforeLambdaUniquifierRemoval =>
+                    normalizeRegex.Replace(beforeLambdaUniquifierRemoval, "lambda_method")
+                );
 
             return string.Join("\n", lines);
         }
@@ -407,7 +455,11 @@ namespace System.Linq.Expressions.Tests
             VerifyEmitConstantsToIL(Expression.Constant(value, typeof(T)), expectedCount, value);
         }
 
-        private static void VerifyEmitConstantsToIL(Expression e, int expectedCount, object expectedValue)
+        private static void VerifyEmitConstantsToIL(
+            Expression e,
+            int expectedCount,
+            object expectedValue
+        )
         {
             Delegate f = Expression.Lambda(e).Compile();
 
@@ -421,13 +473,9 @@ namespace System.Linq.Expressions.Tests
 
         private static void Verify_VariableBinder_CatchBlock_Filter(CatchBlock @catch)
         {
-            Expression<Action> e =
-                Expression.Lambda<Action>(
-                    Expression.TryCatch(
-                        Expression.Empty(),
-                        @catch
-                    )
-                );
+            Expression<Action> e = Expression.Lambda<Action>(
+                Expression.TryCatch(Expression.Empty(), @catch)
+            );
 
             Assert.Throws<InvalidOperationException>(() => e.Compile());
         }
@@ -439,12 +487,18 @@ namespace System.Linq.Expressions.Tests
         public static void CompileWorksWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", false.ToString());
+            options.RuntimeConfigurationOptions.Add(
+                "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+                false.ToString()
+            );
 
-            using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(static () =>
-            {
-                CompileWorksWhenDynamicCodeNotSupportedInner();
-            }, options);
+            using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
+                static () =>
+                {
+                    CompileWorksWhenDynamicCodeNotSupportedInner();
+                },
+                options
+            );
         }
 
         // run the same test code as the above CompileWorksWhenDynamicCodeNotSupported test
@@ -454,17 +508,26 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression param = Expression.Parameter(typeof(int));
 
-            Func<int, int> typedDel =
-                Expression.Lambda<Func<int, int>>(Expression.Add(param, Expression.Constant(4)), param).Compile();
+            Func<int, int> typedDel = Expression
+                .Lambda<Func<int, int>>(Expression.Add(param, Expression.Constant(4)), param)
+                .Compile();
             Assert.Equal(304, typedDel(300));
 
-            Delegate del =
-                Expression.Lambda(Expression.Add(param, Expression.Constant(5)), param).Compile();
+            Delegate del = Expression
+                .Lambda(Expression.Add(param, Expression.Constant(5)), param)
+                .Compile();
             Assert.Equal(305, del.DynamicInvoke(300));
 
             // testing more than 2 parameters is important because because it follows a different code path in Compile.
-            Expression<Func<int, int, int, int, int, int>> fiveParameterExpression = (a, b, c, d, e) => a + b + c + d + e;
-            Func<int, int, int, int, int, int> fiveParameterFunc = fiveParameterExpression.Compile();
+            Expression<Func<int, int, int, int, int, int>> fiveParameterExpression = (
+                a,
+                b,
+                c,
+                d,
+                e
+            ) => a + b + c + d + e;
+            Func<int, int, int, int, int, int> fiveParameterFunc =
+                fiveParameterExpression.Compile();
             Assert.Equal(6, fiveParameterFunc(2, 2, 1, 1, 0));
 
             Expression<Func<int, int, int>> callExpression = (a, b) => Add(a, b);
@@ -473,10 +536,19 @@ namespace System.Linq.Expressions.Tests
 
             MethodCallExpression methodCallExpression = Expression.Call(
                 instance: null,
-                typeof(CompilerTests).GetMethod("Add4", BindingFlags.NonPublic | BindingFlags.Static),
-                Expression.Constant(5), Expression.Constant(6), Expression.Constant(7), Expression.Constant(8));
+                typeof(CompilerTests).GetMethod(
+                    "Add4",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                ),
+                Expression.Constant(5),
+                Expression.Constant(6),
+                Expression.Constant(7),
+                Expression.Constant(8)
+            );
 
-            Func<int> methodCallDelegate = Expression.Lambda<Func<int>>(methodCallExpression).Compile();
+            Func<int> methodCallDelegate = Expression
+                .Lambda<Func<int>>(methodCallExpression)
+                .Compile();
             Assert.Equal(26, methodCallDelegate());
         }
 
@@ -493,6 +565,6 @@ namespace System.Linq.Expressions.Tests
 
     public enum ConstantsEnum
     {
-        A
+        A,
     }
 }

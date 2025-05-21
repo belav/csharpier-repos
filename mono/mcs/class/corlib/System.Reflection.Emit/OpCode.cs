@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,124 +28,129 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
+namespace System.Reflection.Emit
+{
+    [ComVisible(true)]
+    public readonly struct OpCode : IEquatable<OpCode>
+    {
+        internal readonly byte op1,
+            op2;
+        readonly byte push,
+            pop,
+            size,
+            type,
+            args,
+            flow;
 
-	[ComVisible (true)]
-	public readonly struct OpCode : IEquatable<OpCode> {
+        //
+        // The order is:
+        //	 Op1, Op2, StackBehaviourPush, StackBehaviourPop
+        //	 Size, OpCodeType, OperandType, FlowControl
+        //
+        internal OpCode(int p, int q)
+        {
+            op1 = (byte)((p >> 0) & 0xFF);
+            op2 = (byte)((p >> 8) & 0xFF);
+            push = (byte)((p >> 16) & 0xFF);
+            pop = (byte)((p >> 24) & 0xFF);
 
-		internal readonly byte op1, op2;
-		readonly byte push, pop, size, type, args, flow;
+            size = (byte)((q >> 0) & 0xFF);
+            type = (byte)((q >> 8) & 0xFF);
+            args = (byte)((q >> 16) & 0xFF);
+            flow = (byte)((q >> 24) & 0xFF);
+        }
 
-		//
-		// The order is:
-		//	 Op1, Op2, StackBehaviourPush, StackBehaviourPop
-		//	 Size, OpCodeType, OperandType, FlowControl
-		//
-		internal OpCode (int p, int q)
-		{
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
 
-			op1  = (byte) ((p >> 0)  & 0xFF);
-			op2  = (byte) ((p >> 8)  & 0xFF);
-			push = (byte) ((p >> 16) & 0xFF);
-			pop  = (byte) ((p >> 24) & 0xFF);
+        public override bool Equals(Object obj)
+        {
+            if (obj == null || !(obj is OpCode))
+                return false;
 
-			size = (byte) ((q >> 0)  & 0xFF);
-			type = (byte) ((q >> 8)  & 0xFF);
-			args = (byte) ((q >> 16) & 0xFF);
-			flow = (byte) ((q >> 24) & 0xFF);
-		}
+            OpCode v = (OpCode)obj;
 
+            return v.op1 == op1 && v.op2 == op2;
+        }
 
-		public override int GetHashCode ()
-		{
-			return Name.GetHashCode ();
-		}
+        public bool Equals(OpCode obj)
+        {
+            return obj.op1 == op1 && obj.op2 == op2;
+        }
 
-		public override bool Equals (Object obj)
-		{
-			if (obj == null || !(obj is OpCode))
-				return false;
+        public override string ToString()
+        {
+            return Name;
+        }
 
-			OpCode v = (OpCode) obj;
+        public string Name
+        {
+            get
+            {
+                if (op1 == 0xFF)
+                    return OpCodeNames.names[op2];
 
-			return v.op1 == op1 && v.op2 == op2;
-		}
+                return OpCodeNames.names[256 + op2];
+            }
+        }
 
-		public bool Equals (OpCode obj)
-		{
-			return obj.op1 == op1 && obj.op2 == op2;
-		}
+        public int Size
+        {
+            get { return (int)size; }
+        }
 
-		public override string ToString ()
-		{
-			return Name;
-		}
+        public OpCodeType OpCodeType
+        {
+            get { return (OpCodeType)type; }
+        }
 
-		public string Name {
-			get {
-				if (op1 == 0xFF)
-					return OpCodeNames.names [op2];
+        public OperandType OperandType
+        {
+            get { return (OperandType)args; }
+        }
 
-				return OpCodeNames.names [256 + op2];
-			}
-		}
+        public FlowControl FlowControl
+        {
+            get { return (FlowControl)flow; }
+        }
 
-		public int Size {
-			get {
-				return (int) size;
-			}
-		}
+        public StackBehaviour StackBehaviourPop
+        {
+            get { return (StackBehaviour)pop; }
+        }
 
-		public OpCodeType OpCodeType {
-			get {
-				return (OpCodeType) type;
-			}
-		}
+        public StackBehaviour StackBehaviourPush
+        {
+            get { return (StackBehaviour)push; }
+        }
 
-		public OperandType OperandType {
-			get {
-				return (OperandType) args;
-			}
-		}
+        public short Value
+        {
+            get
+            {
+                if (size == 1)
+                {
+                    return op2;
+                }
+                else
+                {
+                    // two byte instruction - combine
+                    // Some old MS betas returned (op1 << 2) | op2 here...
+                    return (short)((op1 << 8) | op2);
+                }
+            }
+        }
 
-		public FlowControl FlowControl {
-			get {
-				return (FlowControl) flow;
-			}
-		}
+        public static bool operator ==(OpCode a, OpCode b)
+        {
+            return a.op1 == b.op1 && a.op2 == b.op2;
+        }
 
-		public StackBehaviour StackBehaviourPop {
-			get {
-				return (StackBehaviour) pop;
-			}
-		}
-
-		public StackBehaviour StackBehaviourPush {
-			get {
-				return (StackBehaviour) push;
-			}
-		}
-
-		public short Value {
-			get {
-				if (size == 1) {
-					return op2;
-				} else {
-					// two byte instruction - combine
-					// Some old MS betas returned (op1 << 2) | op2 here...
-					return (short) ((op1 << 8) | op2);
-				}
-			}
-		}
-
-		public static bool operator == (OpCode a, OpCode b)
-		{
-			return a.op1 == b.op1 && a.op2 == b.op2;
-		}
-
-		public static bool operator != (OpCode a, OpCode b)
-		{
-			return a.op1 != b.op1 || a.op2 != b.op2;
-		}
-	}
-} 
+        public static bool operator !=(OpCode a, OpCode b)
+        {
+            return a.op1 != b.op1 || a.op2 != b.op2;
+        }
+    }
+}

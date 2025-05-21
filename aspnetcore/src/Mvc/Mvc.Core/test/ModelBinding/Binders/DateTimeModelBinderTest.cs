@@ -13,10 +13,7 @@ public class DateTimeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext();
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "some-value" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "some-value" } };
         var binder = GetBinder();
 
         // Act
@@ -32,10 +29,7 @@ public class DateTimeModelBinderTest
         // Arrange
         var message = "The value 'not a date' is not valid.";
         var bindingContext = GetBindingContext();
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "not a date" },
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "not a date" } };
         var binder = GetBinder();
 
         // Act
@@ -56,9 +50,9 @@ public class DateTimeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext();
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "2020-08-not-a-date" }
-            };
+        {
+            { "theModelName", "2020-08-not-a-date" },
+        };
         var binder = GetBinder();
 
         // Act
@@ -69,7 +63,11 @@ public class DateTimeModelBinderTest
         Assert.Null(bindingContext.Result.Model);
 
         var error = Assert.Single(bindingContext.ModelState["theModelName"].Errors);
-        Assert.Equal("The value '2020-08-not-a-date' is not valid.", error.ErrorMessage, StringComparer.Ordinal);
+        Assert.Equal(
+            "The value '2020-08-not-a-date' is not valid.",
+            error.ErrorMessage,
+            StringComparer.Ordinal
+        );
         Assert.Null(error.Exception);
     }
 
@@ -106,15 +104,14 @@ public class DateTimeModelBinderTest
     [Theory]
     [InlineData("")]
     [InlineData(" \t \r\n ")]
-    public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(string value)
+    public async Task BindModel_CreatesError_IfTrimmedAttemptedValueIsEmpty_NonNullableDestination(
+        string value
+    )
     {
         // Arrange
         var message = $"The value '{value}' is invalid.";
         var bindingContext = GetBindingContext();
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value },
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
         var binder = GetBinder();
 
         // Act
@@ -132,14 +129,13 @@ public class DateTimeModelBinderTest
     [Theory]
     [InlineData("")]
     [InlineData(" \t \r\n ")]
-    public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(string value)
+    public async Task BindModel_ReturnsNull_IfTrimmedAttemptedValueIsEmpty_NullableDestination(
+        string value
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(DateTime?));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
         var binder = GetBinder();
 
         // Act
@@ -160,9 +156,9 @@ public class DateTimeModelBinderTest
         var expected = new DateTime(2019, 06, 14, 2, 30, 4, 0, DateTimeKind.Utc);
         var bindingContext = GetBindingContext(type);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
-            {
-                { "theModelName", "2019-06-14T02:30:04.0000000Z" }
-            };
+        {
+            { "theModelName", "2019-06-14T02:30:04.0000000Z" },
+        };
         var binder = GetBinder();
 
         // Act
@@ -183,9 +179,9 @@ public class DateTimeModelBinderTest
         var bindingContext = GetBindingContext();
         var expected = DateTime.Parse("2019-06-14T02:30:04.0000000Z", CultureInfo.InvariantCulture);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
-            {
-                { "theModelName", "2019-06-14T02:30:04.0000000Z" }
-            };
+        {
+            { "theModelName", "2019-06-14T02:30:04.0000000Z" },
+        };
         var binder = GetBinder(DateTimeStyles.AssumeLocal);
 
         // Act
@@ -201,7 +197,10 @@ public class DateTimeModelBinderTest
 
     private IModelBinder GetBinder(DateTimeStyles? dateTimeStyles = null)
     {
-        return new DateTimeModelBinder(dateTimeStyles ?? DateTimeModelBinderProvider.SupportedStyles, NullLoggerFactory.Instance);
+        return new DateTimeModelBinder(
+            dateTimeStyles ?? DateTimeModelBinderProvider.SupportedStyles,
+            NullLoggerFactory.Instance
+        );
     }
 
     private static DefaultModelBindingContext GetBindingContext(Type modelType = null)
@@ -212,7 +211,7 @@ public class DateTimeModelBinderTest
             ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType),
             ModelName = "theModelName",
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider() // empty
+            ValueProvider = new SimpleValueProvider(), // empty
         };
     }
 }

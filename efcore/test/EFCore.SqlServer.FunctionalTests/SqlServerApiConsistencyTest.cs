@@ -5,54 +5,57 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiConsistencyTest.SqlServerApiConsistencyFixture>
+public class SqlServerApiConsistencyTest
+    : ApiConsistencyTestBase<SqlServerApiConsistencyTest.SqlServerApiConsistencyFixture>
 {
     public SqlServerApiConsistencyTest(SqlServerApiConsistencyFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void AddServices(ServiceCollection serviceCollection)
-        => serviceCollection.AddEntityFrameworkSqlServer();
+    protected override void AddServices(ServiceCollection serviceCollection) =>
+        serviceCollection.AddEntityFrameworkSqlServer();
 
-    protected override Assembly TargetAssembly
-        => typeof(SqlServerConnection).Assembly;
+    protected override Assembly TargetAssembly => typeof(SqlServerConnection).Assembly;
 
     public class SqlServerApiConsistencyFixture : ApiConsistencyFixtureBase
     {
-        public override HashSet<Type> FluentApiTypes { get; } = new()
-        {
-            typeof(SqlServerDbContextOptionsBuilder),
-            typeof(SqlServerDbContextOptionsExtensions),
-            typeof(SqlServerMigrationBuilderExtensions),
-            typeof(SqlServerIndexBuilderExtensions),
-            typeof(SqlServerKeyBuilderExtensions),
-            typeof(SqlServerModelBuilderExtensions),
-            typeof(SqlServerPropertyBuilderExtensions),
-            typeof(SqlServerPrimitiveCollectionBuilderExtensions),
-            typeof(SqlServerComplexTypePrimitiveCollectionBuilderExtensions),
-            typeof(SqlServerEntityTypeBuilderExtensions),
-            typeof(SqlServerServiceCollectionExtensions),
-            typeof(SqlServerDbFunctionsExtensions),
-            typeof(OwnedNavigationTemporalPeriodPropertyBuilder),
-            typeof(OwnedNavigationTemporalTableBuilder),
-            typeof(OwnedNavigationTemporalTableBuilder<,>),
-            typeof(TemporalPeriodPropertyBuilder),
-            typeof(TemporalTableBuilder),
-            typeof(TemporalTableBuilder<>)
-        };
+        public override HashSet<Type> FluentApiTypes { get; } =
+            new()
+            {
+                typeof(SqlServerDbContextOptionsBuilder),
+                typeof(SqlServerDbContextOptionsExtensions),
+                typeof(SqlServerMigrationBuilderExtensions),
+                typeof(SqlServerIndexBuilderExtensions),
+                typeof(SqlServerKeyBuilderExtensions),
+                typeof(SqlServerModelBuilderExtensions),
+                typeof(SqlServerPropertyBuilderExtensions),
+                typeof(SqlServerPrimitiveCollectionBuilderExtensions),
+                typeof(SqlServerComplexTypePrimitiveCollectionBuilderExtensions),
+                typeof(SqlServerEntityTypeBuilderExtensions),
+                typeof(SqlServerServiceCollectionExtensions),
+                typeof(SqlServerDbFunctionsExtensions),
+                typeof(OwnedNavigationTemporalPeriodPropertyBuilder),
+                typeof(OwnedNavigationTemporalTableBuilder),
+                typeof(OwnedNavigationTemporalTableBuilder<,>),
+                typeof(TemporalPeriodPropertyBuilder),
+                typeof(TemporalTableBuilder),
+                typeof(TemporalTableBuilder<>),
+            };
 
-        public override
-            Dictionary<Type,
-                (Type ReadonlyExtensions,
+        public override Dictionary<
+            Type,
+            (
+                Type ReadonlyExtensions,
                 Type MutableExtensions,
                 Type ConventionExtensions,
                 Type ConventionBuilderExtensions,
-                Type RuntimeExtensions)> MetadataExtensionTypes { get; }
-            = new()
+                Type RuntimeExtensions
+            )
+        > MetadataExtensionTypes { get; } =
+            new()
             {
                 {
-                    typeof(IReadOnlyModel), (
+                    typeof(IReadOnlyModel),
+                    (
                         typeof(SqlServerModelExtensions),
                         typeof(SqlServerModelExtensions),
                         typeof(SqlServerModelExtensions),
@@ -61,7 +64,8 @@ public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiCo
                     )
                 },
                 {
-                    typeof(IReadOnlyEntityType), (
+                    typeof(IReadOnlyEntityType),
+                    (
                         typeof(SqlServerEntityTypeExtensions),
                         typeof(SqlServerEntityTypeExtensions),
                         typeof(SqlServerEntityTypeExtensions),
@@ -70,7 +74,8 @@ public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiCo
                     )
                 },
                 {
-                    typeof(IReadOnlyKey), (
+                    typeof(IReadOnlyKey),
+                    (
                         typeof(SqlServerKeyExtensions),
                         typeof(SqlServerKeyExtensions),
                         typeof(SqlServerKeyExtensions),
@@ -79,7 +84,8 @@ public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiCo
                     )
                 },
                 {
-                    typeof(IReadOnlyProperty), (
+                    typeof(IReadOnlyProperty),
+                    (
                         typeof(SqlServerPropertyExtensions),
                         typeof(SqlServerPropertyExtensions),
                         typeof(SqlServerPropertyExtensions),
@@ -88,7 +94,8 @@ public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiCo
                     )
                 },
                 {
-                    typeof(IReadOnlyIndex), (
+                    typeof(IReadOnlyIndex),
+                    (
                         typeof(SqlServerIndexExtensions),
                         typeof(SqlServerIndexExtensions),
                         typeof(SqlServerIndexExtensions),
@@ -97,28 +104,43 @@ public class SqlServerApiConsistencyTest : ApiConsistencyTestBase<SqlServerApiCo
                     )
                 },
                 {
-                    typeof(IReadOnlyElementType), (
-                        null,
-                        null,
-                        null,
-                        typeof(SqlServerEntityTypeBuilderExtensions),
-                        null
-                    )
-                }
+                    typeof(IReadOnlyElementType),
+                    (null, null, null, typeof(SqlServerEntityTypeBuilderExtensions), null)
+                },
             };
 
         protected override void Initialize()
         {
             GenericFluentApiTypes.Add(typeof(TemporalTableBuilder), typeof(TemporalTableBuilder<>));
-            GenericFluentApiTypes.Add(typeof(OwnedNavigationTemporalTableBuilder), typeof(OwnedNavigationTemporalTableBuilder<,>));
+            GenericFluentApiTypes.Add(
+                typeof(OwnedNavigationTemporalTableBuilder),
+                typeof(OwnedNavigationTemporalTableBuilder<,>)
+            );
 
-            MirrorTypes.Add(typeof(TemporalTableBuilder), typeof(OwnedNavigationTemporalTableBuilder));
-            MirrorTypes.Add(typeof(TemporalTableBuilder<>), typeof(OwnedNavigationTemporalTableBuilder<,>));
-            MirrorTypes.Add(typeof(TemporalPeriodPropertyBuilder), typeof(OwnedNavigationTemporalPeriodPropertyBuilder));
-            MirrorTypes.Add(typeof(SqlServerPropertyBuilderExtensions), typeof(SqlServerComplexTypePropertyBuilderExtensions));
-            MirrorTypes.Add(typeof(SqlServerPrimitiveCollectionBuilderExtensions), typeof(SqlServerPropertyBuilderExtensions));
             MirrorTypes.Add(
-                typeof(SqlServerComplexTypePrimitiveCollectionBuilderExtensions), typeof(SqlServerComplexTypePropertyBuilderExtensions));
+                typeof(TemporalTableBuilder),
+                typeof(OwnedNavigationTemporalTableBuilder)
+            );
+            MirrorTypes.Add(
+                typeof(TemporalTableBuilder<>),
+                typeof(OwnedNavigationTemporalTableBuilder<,>)
+            );
+            MirrorTypes.Add(
+                typeof(TemporalPeriodPropertyBuilder),
+                typeof(OwnedNavigationTemporalPeriodPropertyBuilder)
+            );
+            MirrorTypes.Add(
+                typeof(SqlServerPropertyBuilderExtensions),
+                typeof(SqlServerComplexTypePropertyBuilderExtensions)
+            );
+            MirrorTypes.Add(
+                typeof(SqlServerPrimitiveCollectionBuilderExtensions),
+                typeof(SqlServerPropertyBuilderExtensions)
+            );
+            MirrorTypes.Add(
+                typeof(SqlServerComplexTypePrimitiveCollectionBuilderExtensions),
+                typeof(SqlServerComplexTypePropertyBuilderExtensions)
+            );
 
             base.Initialize();
         }

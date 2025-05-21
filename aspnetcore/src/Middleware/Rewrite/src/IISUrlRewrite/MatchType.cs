@@ -7,5 +7,5 @@ internal enum MatchType
 {
     Pattern,
     IsFile,
-    IsDirectory
+    IsDirectory,
 }

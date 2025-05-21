@@ -10,9 +10,7 @@ public partial class CriticalHandleTests
     private class MyCriticalHandle : CriticalHandle
     {
         public MyCriticalHandle()
-            : base(IntPtr.Zero)
-        {
-        }
+            : base(IntPtr.Zero) { }
 
         public MyCriticalHandle(IntPtr handle)
             : this()

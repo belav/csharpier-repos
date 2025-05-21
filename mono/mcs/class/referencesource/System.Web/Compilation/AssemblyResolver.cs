@@ -8,46 +8,32 @@ using System.Web.Configuration;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
+using FrameworkName = System.Runtime.Versioning.FrameworkName;
 
-using FrameworkName=System.Runtime.Versioning.FrameworkName;
+namespace System.Web.Compilation
+{
+    internal class AssemblyResolutionResult
+    {
+        internal ICollection<string> ResolvedFiles { get; set; }
 
-namespace System.Web.Compilation {
+        internal ICollection<string> ResolvedFilesWithWarnings { get; set; }
 
-    internal class AssemblyResolutionResult {
-        internal ICollection<string> ResolvedFiles {
-            get;
-            set;
-        }
+        internal ICollection<Assembly> UnresolvedAssemblies { get; set; }
 
-        internal ICollection<string> ResolvedFilesWithWarnings {
-            get;
-            set;
-        }
+        internal ICollection<BuildErrorEventArgs> Errors { get; set; }
 
-        internal ICollection<Assembly> UnresolvedAssemblies {
-            get;
-            set;
-        }
-
-        internal ICollection<BuildErrorEventArgs> Errors {
-            get;
-            set;
-        }
-
-        internal ICollection<BuildWarningEventArgs> Warnings {
-            get;
-            set;
-        }
+        internal ICollection<BuildWarningEventArgs> Warnings { get; set; }
     }
 
-    internal enum ReferenceAssemblyType {
+    internal enum ReferenceAssemblyType
+    {
         FrameworkAssembly = 0,
         FrameworkAssemblyOnlyPresentInHigherVersion = 1,
         NonFrameworkAssembly = 2,
     }
 
-    internal class AssemblyResolver {
-
+    internal class AssemblyResolver
+    {
         /// <summary>
         /// Keeps track of resolved assemblies and their locations. Value is null if the assembly was found only
         /// in a higher version framework.
@@ -67,37 +53,63 @@ namespace System.Web.Compilation {
 
         // Maps physical paths of reference assemblies to their versions as returned by AssemblyName.GetAssemblyName
         private static readonly Lazy<ConcurrentDictionary<string, Version>> s_assemblyVersions =
-            new Lazy<ConcurrentDictionary<string, Version>>(
-                () => new ConcurrentDictionary<string, Version>(StringComparer.OrdinalIgnoreCase));
+            new Lazy<ConcurrentDictionary<string, Version>>(() =>
+                new ConcurrentDictionary<string, Version>(StringComparer.OrdinalIgnoreCase)
+            );
 
-        private static IList<string> TargetFrameworkReferenceAssemblyPaths {
-            get {
-                if (s_targetFrameworkReferenceAssemblyPaths == null) {
-                    IList<string> paths = GetPathToReferenceAssemblies(MultiTargetingUtil.TargetFrameworkName);
+        private static IList<string> TargetFrameworkReferenceAssemblyPaths
+        {
+            get
+            {
+                if (s_targetFrameworkReferenceAssemblyPaths == null)
+                {
+                    IList<string> paths = GetPathToReferenceAssemblies(
+                        MultiTargetingUtil.TargetFrameworkName
+                    );
                     int count = paths.Count;
 
-                    if (MultiTargetingUtil.IsTargetFramework20 || MultiTargetingUtil.IsTargetFramework35) {
+                    if (
+                        MultiTargetingUtil.IsTargetFramework20
+                        || MultiTargetingUtil.IsTargetFramework35
+                    )
+                    {
                         // Require 3.5 to be installed to be able to target pre-4.0
-                        var fxPath35 = ToolLocationHelper.GetPathToDotNetFramework(TargetDotNetFrameworkVersion.Version35);
-                        if (string.IsNullOrEmpty(fxPath35)) {
+                        var fxPath35 = ToolLocationHelper.GetPathToDotNetFramework(
+                            TargetDotNetFrameworkVersion.Version35
+                        );
+                        if (string.IsNullOrEmpty(fxPath35))
+                        {
                             throw new HttpException(SR.GetString(SR.Downlevel_requires_35));
                         }
 
                         // For 2.0 and 3.5, verify that the reference assemblies are actually present.
                         // For 3.5, make sure the reference assemblies path do not consist of just 2.0 and 3.0 assemblies.
-                        IList<string> assemblyPaths30 = GetPathToReferenceAssemblies(MultiTargetingUtil.FrameworkNameV30);
-                        IList<string> assemblyPaths20 = GetPathToReferenceAssemblies(MultiTargetingUtil.FrameworkNameV20);
-                        bool missing35assemblies = MultiTargetingUtil.IsTargetFramework35 && (assemblyPaths30.Count == count || assemblyPaths20.Count == count);
+                        IList<string> assemblyPaths30 = GetPathToReferenceAssemblies(
+                            MultiTargetingUtil.FrameworkNameV30
+                        );
+                        IList<string> assemblyPaths20 = GetPathToReferenceAssemblies(
+                            MultiTargetingUtil.FrameworkNameV20
+                        );
+                        bool missing35assemblies =
+                            MultiTargetingUtil.IsTargetFramework35
+                            && (assemblyPaths30.Count == count || assemblyPaths20.Count == count);
 
-                        if (count == 0 || missing35assemblies) {
-                            throw new HttpException(SR.GetString(SR.Reference_assemblies_not_found));
+                        if (count == 0 || missing35assemblies)
+                        {
+                            throw new HttpException(
+                                SR.GetString(SR.Reference_assemblies_not_found)
+                            );
                         }
                     }
-                    else {
+                    else
+                    {
                         // When we are performing a build through VS, we require the reference assemblies
                         // to be present.
-                        if (BuildManagerHost.SupportsMultiTargeting && count == 0) {
-                            throw new HttpException(SR.GetString(SR.Reference_assemblies_not_found));
+                        if (BuildManagerHost.SupportsMultiTargeting && count == 0)
+                        {
+                            throw new HttpException(
+                                SR.GetString(SR.Reference_assemblies_not_found)
+                            );
                         }
                     }
 
@@ -110,19 +122,35 @@ namespace System.Web.Compilation {
         /// <summary>
         /// Returns a list of assembly paths containing assemblies from higher version frameworks.
         /// </summary>
-        private static IList<string> HigherFrameworkReferenceAssemblyPaths {
-            get {
-                if (s_higherFrameworkReferenceAssemblyPaths == null) {
+        private static IList<string> HigherFrameworkReferenceAssemblyPaths
+        {
+            get
+            {
+                if (s_higherFrameworkReferenceAssemblyPaths == null)
+                {
                     List<string> paths = new List<string>();
                     FrameworkName targetName = MultiTargetingUtil.TargetFrameworkName;
                     // Loop through each framework name, and find those that is equal in Identifier and Profile, but
                     // higher than the target version.
-                    foreach (FrameworkName name in MultiTargetingUtil.KnownFrameworkNames) {
-                        if (string.Equals(name.Identifier, targetName.Identifier, StringComparison.OrdinalIgnoreCase) &&
-                            string.Equals(name.Profile, targetName.Profile, StringComparison.OrdinalIgnoreCase)) {
+                    foreach (FrameworkName name in MultiTargetingUtil.KnownFrameworkNames)
+                    {
+                        if (
+                            string.Equals(
+                                name.Identifier,
+                                targetName.Identifier,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                            && string.Equals(
+                                name.Profile,
+                                targetName.Profile,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                        {
                             Version version = name.Version;
                             Version targetVersion = targetName.Version;
-                            if (targetVersion < version) {
+                            if (targetVersion < version)
+                            {
                                 paths.AddRange(GetPathToReferenceAssemblies(name));
                             }
                         }
@@ -132,17 +160,23 @@ namespace System.Web.Compilation {
                 return s_higherFrameworkReferenceAssemblyPaths;
             }
         }
-             
+
         /// <summary>
         /// Returns a list of assembly paths containing assemblies from full profile framework.
         /// </summary>
-        private static IList<string> FullProfileReferenceAssemblyPaths {
-            get {
-                if (s_fullProfileReferenceAssemblyPaths == null) {
+        private static IList<string> FullProfileReferenceAssemblyPaths
+        {
+            get
+            {
+                if (s_fullProfileReferenceAssemblyPaths == null)
+                {
                     List<string> paths = new List<string>();
                     FrameworkName targetName = MultiTargetingUtil.TargetFrameworkName;
                     // Create a copy without the profile to get the full profile.
-                    FrameworkName fullName = new FrameworkName(targetName.Identifier, targetName.Version);
+                    FrameworkName fullName = new FrameworkName(
+                        targetName.Identifier,
+                        targetName.Version
+                    );
                     paths.AddRange(GetPathToReferenceAssemblies(fullName));
                     s_fullProfileReferenceAssemblyPaths = paths;
                 }
@@ -154,19 +188,26 @@ namespace System.Web.Compilation {
         /// Checks whether we need to perform a check against the full profile to determine whether a reference
         /// assembly can be used or not.
         /// </summary>
-        private static bool NeedToCheckFullProfile {
-            get {
-                if (s_needToCheckFullProfile == null) {
+        private static bool NeedToCheckFullProfile
+        {
+            get
+            {
+                if (s_needToCheckFullProfile == null)
+                {
                     // Find differences between the two sets of reference assembly paths.
-                    var except = FullProfileReferenceAssemblyPaths.Except(TargetFrameworkReferenceAssemblyPaths,
-                        StringComparer.OrdinalIgnoreCase);
-                    
-                    if (except.Count() == 0) {
+                    var except = FullProfileReferenceAssemblyPaths.Except(
+                        TargetFrameworkReferenceAssemblyPaths,
+                        StringComparer.OrdinalIgnoreCase
+                    );
+
+                    if (except.Count() == 0)
+                    {
                         // If everything is the same, then there is no need for an extra check against the
                         // full profile.
                         s_needToCheckFullProfile = false;
                     }
-                    else {
+                    else
+                    {
                         // If something is different, we will need an additional check against the full
                         // profile.
                         s_needToCheckFullProfile = true;
@@ -176,51 +217,64 @@ namespace System.Web.Compilation {
             }
         }
 
-        private static Dictionary<Assembly, string> AssemblyLocations {
-            get {
-                if (s_assemblyLocations == null) {
+        private static Dictionary<Assembly, string> AssemblyLocations
+        {
+            get
+            {
+                if (s_assemblyLocations == null)
+                {
                     s_assemblyLocations = new Dictionary<Assembly, string>();
                 }
                 return s_assemblyLocations;
             }
         }
 
-        private static Dictionary<Assembly, AssemblyResolutionResult> AssemblyResolutionResults {
-            get {
-                if (s_assemblyResults == null) {
+        private static Dictionary<Assembly, AssemblyResolutionResult> AssemblyResolutionResults
+        {
+            get
+            {
+                if (s_assemblyResults == null)
+                {
                     s_assemblyResults = new Dictionary<Assembly, AssemblyResolutionResult>();
                 }
                 return s_assemblyResults;
             }
         }
 
-        private static Dictionary<Assembly, ReferenceAssemblyType> ReferenceAssemblyTypes {
-            get {
-                if (s_assemblyTypes == null) {
+        private static Dictionary<Assembly, ReferenceAssemblyType> ReferenceAssemblyTypes
+        {
+            get
+            {
+                if (s_assemblyTypes == null)
+                {
                     s_assemblyTypes = new Dictionary<Assembly, ReferenceAssemblyType>();
                 }
                 return s_assemblyTypes;
             }
         }
 
-        private static ConcurrentDictionary<string, Version> AssemblyVersions {
-            get {
-                return s_assemblyVersions.Value;
-            }
+        private static ConcurrentDictionary<string, Version> AssemblyVersions
+        {
+            get { return s_assemblyVersions.Value; }
         }
 
         /// <summary>
         /// Returns the assembly version of the assembly found at the specified path using AssemblyName.GetAssemblyName.
         /// Returns and stores null if GetAssemblyName throws.
         /// </summary>
-        private static Version GetAssemblyVersion(string path) {
+        private static Version GetAssemblyVersion(string path)
+        {
             Version version = null;
             var assemblyVersions = AssemblyVersions;
-            if (!assemblyVersions.TryGetValue(path, out version)) {
-                try {
+            if (!assemblyVersions.TryGetValue(path, out version))
+            {
+                try
+                {
                     AssemblyName resolvedAssemblyName = AssemblyName.GetAssemblyName(path);
                     version = resolvedAssemblyName.Version;
-                } catch {
+                }
+                catch
+                {
                     // Ignore any exceptions thrown
                 }
                 assemblyVersions.TryAdd(path, version);
@@ -231,29 +285,37 @@ namespace System.Web.Compilation {
         /// <summary>
         /// Resolve a single assembly using the provided search paths and setting the targetframework directories.
         /// </summary>
-        private static AssemblyResolutionResult ResolveAssembly(string assemblyName, IList<string> searchPaths, IList<string> targetFrameworkDirectories, bool checkDependencies) {
+        private static AssemblyResolutionResult ResolveAssembly(
+            string assemblyName,
+            IList<string> searchPaths,
+            IList<string> targetFrameworkDirectories,
+            bool checkDependencies
+        )
+        {
             ResolveAssemblyReference rar = new ResolveAssemblyReference();
             MockEngine engine = new MockEngine();
             rar.BuildEngine = engine;
-            if (searchPaths != null) {
+            if (searchPaths != null)
+            {
                 rar.SearchPaths = searchPaths.ToArray();
             }
-            if (targetFrameworkDirectories != null) {
+            if (targetFrameworkDirectories != null)
+            {
                 rar.TargetFrameworkDirectories = targetFrameworkDirectories.ToArray();
             }
-            rar.Assemblies = new ITaskItem[] {
-                new TaskItem(assemblyName),
-            };
+            rar.Assemblies = new ITaskItem[] { new TaskItem(assemblyName) };
             rar.Silent = true;
             rar.Execute();
 
             AssemblyResolutionResult result = new AssemblyResolutionResult();
 
             List<string> resolvedFiles = new List<string>();
-            foreach (ITaskItem item in rar.ResolvedFiles) {
+            foreach (ITaskItem item in rar.ResolvedFiles)
+            {
                 resolvedFiles.Add(item.ItemSpec);
             }
-            if (checkDependencies) {
+            if (checkDependencies)
+            {
                 CheckOutOfRangeDependencies(assemblyName);
             }
             result.ResolvedFiles = resolvedFiles.ToArray();
@@ -266,8 +328,8 @@ namespace System.Web.Compilation {
         /// Check whether an assembly has dependencies to a framework assembly of a higher version,
         /// report the issue as a warning or error.
         /// </summary>
-        private static void CheckOutOfRangeDependencies(string assemblyName) {
-
+        private static void CheckOutOfRangeDependencies(string assemblyName)
+        {
             string dependencies = null;
             Assembly assembly = Assembly.Load(assemblyName);
             AssemblyName aName = new AssemblyName(assemblyName);
@@ -276,73 +338,108 @@ namespace System.Web.Compilation {
             // then it is likely that there was unification or binding redirect in place.
             // If that is the case, then GetReferenceAssemblies won't be accurate for
             // finding the references of the actual assembly, so we skip checking its references.
-            if (assembly.GetName().Version != aName.Version) {
+            if (assembly.GetName().Version != aName.Version)
+            {
                 return;
             }
 
-            foreach (AssemblyName name in assembly.GetReferencedAssemblies()) {
-                try {
+            foreach (AssemblyName name in assembly.GetReferencedAssemblies())
+            {
+                try
+                {
                     Assembly referenceAssembly = CompilationSection.LoadAndRecordAssembly(name);
                     string path;
-                    ReferenceAssemblyType referenceAssemblyType =
-                        GetPathToReferenceAssembly(referenceAssembly, out path, null, null, false /*checkDependencies*/);
+                    ReferenceAssemblyType referenceAssemblyType = GetPathToReferenceAssembly(
+                        referenceAssembly,
+                        out path,
+                        null,
+                        null,
+                        false /*checkDependencies*/
+                    );
 
                     // We need to check the following 2 conditions:
-                    // 1. If the assembly is available in the target framework, we also need to 
+                    // 1. If the assembly is available in the target framework, we also need to
                     // verify that the version being referenced is no higher than what we have
                     // in the target framework.
                     // 2. If the assembly is only available in a higher version framework.
                     Version resolvedAssemblyVersion = GetAssemblyVersion(path);
-                    if (resolvedAssemblyVersion == null) {
+                    if (resolvedAssemblyVersion == null)
+                    {
                         continue;
                     }
 
-                    if ((referenceAssemblyType == ReferenceAssemblyType.FrameworkAssembly && resolvedAssemblyVersion < name.Version)
-                        || referenceAssemblyType == ReferenceAssemblyType.FrameworkAssemblyOnlyPresentInHigherVersion) {
-                        if (dependencies == null) {
+                    if (
+                        (
+                            referenceAssemblyType == ReferenceAssemblyType.FrameworkAssembly
+                            && resolvedAssemblyVersion < name.Version
+                        )
+                        || referenceAssemblyType
+                            == ReferenceAssemblyType.FrameworkAssemblyOnlyPresentInHigherVersion
+                    )
+                    {
+                        if (dependencies == null)
+                        {
                             dependencies = name.FullName;
                         }
-                        else {
+                        else
+                        {
                             dependencies += "; " + name.FullName;
                         }
                     }
                 }
-                catch {
+                catch
+                {
                     // Ignore dependencies that are not found, as we are primarily concerned
                     // with framework assemblies that are on the machine.
                 }
             }
 
-            if (dependencies != null) {
+            if (dependencies != null)
+            {
                 string message = SR.GetString(SR.Higher_dependencies, assemblyName, dependencies);
                 ReportWarningOrError(message);
             }
         }
 
-        private static void ReportWarningOrError(string message) {
-            if (WarnAsError) {
+        private static void ReportWarningOrError(string message)
+        {
+            if (WarnAsError)
+            {
                 // Report the issue as an error.
                 throw new HttpCompileException(message);
             }
-            else {
+            else
+            {
                 // Report the issue as a compiler warning.
                 CompilerError error = new CompilerError();
                 error.ErrorText = message;
                 error.IsWarning = true;
-                if (BuildManager.CBMCallback != null) {
+                if (BuildManager.CBMCallback != null)
+                {
                     BuildManager.CBMCallback.ReportCompilerError(error);
                 }
             }
         }
 
-
-        internal static ReferenceAssemblyType GetPathToReferenceAssembly(Assembly a, out string path) {
+        internal static ReferenceAssemblyType GetPathToReferenceAssembly(
+            Assembly a,
+            out string path
+        )
+        {
             return GetPathToReferenceAssembly(a, out path, null, null);
         }
 
-        private static void StoreResults(Assembly a, string path, AssemblyResolutionResult result, ReferenceAssemblyType assemblyType) {
-            lock (s_lock) {
-                if (!AssemblyLocations.ContainsKey(a)) {
+        private static void StoreResults(
+            Assembly a,
+            string path,
+            AssemblyResolutionResult result,
+            ReferenceAssemblyType assemblyType
+        )
+        {
+            lock (s_lock)
+            {
+                if (!AssemblyLocations.ContainsKey(a))
+                {
                     AssemblyLocations.Add(a, path);
                     AssemblyResolutionResults.Add(a, result);
                     ReferenceAssemblyTypes.Add(a, assemblyType);
@@ -350,47 +447,86 @@ namespace System.Web.Compilation {
             }
         }
 
-        internal static ReferenceAssemblyType GetPathToReferenceAssembly(Assembly a, out string path,
-            ICollection<BuildErrorEventArgs> errors, ICollection<BuildWarningEventArgs> warnings) {
-            return GetPathToReferenceAssembly(a, out path, errors, warnings, true /*checkDependencies*/);
+        internal static ReferenceAssemblyType GetPathToReferenceAssembly(
+            Assembly a,
+            out string path,
+            ICollection<BuildErrorEventArgs> errors,
+            ICollection<BuildWarningEventArgs> warnings
+        )
+        {
+            return GetPathToReferenceAssembly(
+                a,
+                out path,
+                errors,
+                warnings,
+                true /*checkDependencies*/
+            );
         }
 
-        internal static ReferenceAssemblyType GetPathToReferenceAssembly(Assembly a, out string path,
-            ICollection<BuildErrorEventArgs> errors, ICollection<BuildWarningEventArgs> warnings,
-            bool checkDependencies) {
-
-            lock (s_lock) {
-                if (AssemblyLocations.TryGetValue(a, out path)) {
+        internal static ReferenceAssemblyType GetPathToReferenceAssembly(
+            Assembly a,
+            out string path,
+            ICollection<BuildErrorEventArgs> errors,
+            ICollection<BuildWarningEventArgs> warnings,
+            bool checkDependencies
+        )
+        {
+            lock (s_lock)
+            {
+                if (AssemblyLocations.TryGetValue(a, out path))
+                {
                     return ReferenceAssemblyTypes[a];
                 }
             }
 
             // If there are no reference assemblies available, just use the path to the loaded assembly.
-            if (TargetFrameworkReferenceAssemblyPaths == null || TargetFrameworkReferenceAssemblyPaths.Count == 0) {
+            if (
+                TargetFrameworkReferenceAssemblyPaths == null
+                || TargetFrameworkReferenceAssemblyPaths.Count == 0
+            )
+            {
                 path = System.Web.UI.Util.GetAssemblyCodeBase(a);
                 return ReferenceAssemblyType.FrameworkAssembly;
             }
 
             AssemblyResolutionResult result = null;
-            ReferenceAssemblyType referenceAssemblyType = ReferenceAssemblyType.NonFrameworkAssembly;
+            ReferenceAssemblyType referenceAssemblyType =
+                ReferenceAssemblyType.NonFrameworkAssembly;
 
             // If the assembly is generated by us, it is a non framework assembly and does not need to be resolved.
-            if (BuildResultCompiledAssemblyBase.AssemblyIsInCodegenDir(a)) {
+            if (BuildResultCompiledAssemblyBase.AssemblyIsInCodegenDir(a))
+            {
                 path = System.Web.UI.Util.GetAssemblyCodeBase(a);
             }
-            else {
+            else
+            {
                 // Try using the assembly full name.
-                referenceAssemblyType = GetPathToReferenceAssembly(a, out path, errors, warnings,
-                    checkDependencies, true /*useFullName*/, out result);
+                referenceAssemblyType = GetPathToReferenceAssembly(
+                    a,
+                    out path,
+                    errors,
+                    warnings,
+                    checkDependencies,
+                    true /*useFullName*/
+                    ,
+                    out result
+                );
             }
 
             StoreResults(a, path, result, referenceAssemblyType);
             return referenceAssemblyType;
         }
 
-        private static ReferenceAssemblyType GetPathToReferenceAssembly(Assembly a, out string path,
-            ICollection<BuildErrorEventArgs> errors, ICollection<BuildWarningEventArgs> warnings,
-            bool checkDependencies, bool useFullName, out AssemblyResolutionResult result) {
+        private static ReferenceAssemblyType GetPathToReferenceAssembly(
+            Assembly a,
+            out string path,
+            ICollection<BuildErrorEventArgs> errors,
+            ICollection<BuildWarningEventArgs> warnings,
+            bool checkDependencies,
+            bool useFullName,
+            out AssemblyResolutionResult result
+        )
+        {
             // 1. Find the assembly using RAR in the target framework.
             //    - If found, assembly is a framework assembly. Done
             // 2. Find the assembly using RAR in higher frameworks.
@@ -400,7 +536,7 @@ namespace System.Web.Compilation {
             // 4. Is useFullName true?
             //    - Yes: Use GAC and directory of loaded assembly as search paths.
             //    - No: Use directory of loaded assembly as search path.
-            //    - Use RAR to find assembly in search paths. 
+            //    - Use RAR to find assembly in search paths.
             //    - Check for out of range dependencies.
             // 5. If useFullName
             //    - Check if the short name exists in a higher framework, if so, it is a framework assembly.
@@ -408,45 +544,66 @@ namespace System.Web.Compilation {
             // Find the assembly in the target framework.
             string assemblyName;
             string partialName = a.GetName().Name;
-            if (useFullName) {
+            if (useFullName)
+            {
                 // Use the actual assembly name as specified in the config.
                 assemblyName = CompilationSection.GetOriginalAssemblyName(a);
             }
-            else {
+            else
+            {
                 assemblyName = partialName;
             }
-            result = ResolveAssembly(assemblyName, TargetFrameworkReferenceAssemblyPaths, 
-                TargetFrameworkReferenceAssemblyPaths, false /*checkDependencies*/);
-            if (result.ResolvedFiles != null && result.ResolvedFiles.Count > 0) {
+            result = ResolveAssembly(
+                assemblyName,
+                TargetFrameworkReferenceAssemblyPaths,
+                TargetFrameworkReferenceAssemblyPaths,
+                false /*checkDependencies*/
+            );
+            if (result.ResolvedFiles != null && result.ResolvedFiles.Count > 0)
+            {
                 path = result.ResolvedFiles.FirstOrDefault();
                 return ReferenceAssemblyType.FrameworkAssembly;
             }
 
             // At this point, the assembly was not found in the target framework.
             // Try finding it in the latest framework.
-            result = ResolveAssembly(assemblyName, HigherFrameworkReferenceAssemblyPaths, HigherFrameworkReferenceAssemblyPaths, 
-                false /*checkDependencies*/);
-            if (result.ResolvedFiles != null && result.ResolvedFiles.Count > 0) {
+            result = ResolveAssembly(
+                assemblyName,
+                HigherFrameworkReferenceAssemblyPaths,
+                HigherFrameworkReferenceAssemblyPaths,
+                false /*checkDependencies*/
+            );
+            if (result.ResolvedFiles != null && result.ResolvedFiles.Count > 0)
+            {
                 path = result.ResolvedFiles.FirstOrDefault();
                 // Assembly was found in a target framework of a later version.
                 return ReferenceAssemblyType.FrameworkAssemblyOnlyPresentInHigherVersion;
             }
 
-            // Try to find the assembly in the full profile, in case the user 
-            // is using an assembly that is not in the target profile framework. 
+            // Try to find the assembly in the full profile, in case the user
+            // is using an assembly that is not in the target profile framework.
             // For example, System.Web is not present in the Client profile, but is present in the full profile.
-            if (NeedToCheckFullProfile) {
-                result = ResolveAssembly(assemblyName, FullProfileReferenceAssemblyPaths, FullProfileReferenceAssemblyPaths,
-                    false /*checkDependencies*/);
-                if (result.ResolvedFiles != null && result.ResolvedFiles.Count > 0) {
+            if (NeedToCheckFullProfile)
+            {
+                result = ResolveAssembly(
+                    assemblyName,
+                    FullProfileReferenceAssemblyPaths,
+                    FullProfileReferenceAssemblyPaths,
+                    false /*checkDependencies*/
+                );
+                if (result.ResolvedFiles != null && result.ResolvedFiles.Count > 0)
+                {
                     // Assembly was found in the full profile, but not in the target profile.
                     path = result.ResolvedFiles.FirstOrDefault();
                     // Report warning/error message.
                     string profile = "";
-                    if (!string.IsNullOrEmpty(MultiTargetingUtil.TargetFrameworkName.Profile)) {
+                    if (!string.IsNullOrEmpty(MultiTargetingUtil.TargetFrameworkName.Profile))
+                    {
                         profile = " '" + MultiTargetingUtil.TargetFrameworkName.Profile + "'";
                     }
-                    ReportWarningOrError(SR.GetString(SR.Assembly_not_found_in_profile, assemblyName, profile));
+                    ReportWarningOrError(
+                        SR.GetString(SR.Assembly_not_found_in_profile, assemblyName, profile)
+                    );
                     // Return as OnlyPresentInHigherVersion so that it will not be used as a reference assembly.
                     return ReferenceAssemblyType.FrameworkAssemblyOnlyPresentInHigherVersion;
                 }
@@ -461,36 +618,50 @@ namespace System.Web.Compilation {
             // specified version of an OOB assembly even if it is unified/redirected to a later version.
             // For example, System.Web.Extensions 1.0.61025 is available from the GAC, but the actual
             // loaded assembly is 4.0 due to unification.
-            if (useFullName) {
+            if (useFullName)
+            {
                 searchPaths.Add("{GAC}");
             }
 
             // When checking dependencies of a custom assembly, use the full
             // name of the assembly as it might have a strong name or
             // be in the GAC.
-            if (!useFullName) {
+            if (!useFullName)
+            {
                 assemblyName = a.GetName().FullName;
             }
-            result = ResolveAssembly(assemblyName, searchPaths, TargetFrameworkReferenceAssemblyPaths, checkDependencies);
-            // Use the actual resolved path, in case the loaded assembly is different from the specified assembly 
+            result = ResolveAssembly(
+                assemblyName,
+                searchPaths,
+                TargetFrameworkReferenceAssemblyPaths,
+                checkDependencies
+            );
+            // Use the actual resolved path, in case the loaded assembly is different from the specified assembly
             // due to unification or binding redirect.
             path = result.ResolvedFiles.FirstOrDefault();
 
-            if (string.IsNullOrEmpty(path)) {
+            if (string.IsNullOrEmpty(path))
+            {
                 // In some cases, we might not be able to resolve the path to the assembly successfully, for example when
                 // the config specifies the full name as System.Web 4.0.10101.0. Assembly.Load returns the 4.0.0.0 version,
                 // but we can't find any actual assembly with such a full name.
                 path = System.Web.UI.Util.GetAssemblyCodeBase(a);
             }
 
-            // If we are using full names, do another check using the partial name to see if the assembly is part of 
+            // If we are using full names, do another check using the partial name to see if the assembly is part of
             // a higher framework.
             // If so, then this is an OOB assembly that later got rolled into the framework, so we consider the assembly
             // as a framework assembly.
-            if (useFullName) {
-                AssemblyResolutionResult r = ResolveAssembly(partialName, HigherFrameworkReferenceAssemblyPaths, HigherFrameworkReferenceAssemblyPaths,
-                    false /*checkDependencies*/);
-                if (r.ResolvedFiles != null && r.ResolvedFiles.Count > 0) {
+            if (useFullName)
+            {
+                AssemblyResolutionResult r = ResolveAssembly(
+                    partialName,
+                    HigherFrameworkReferenceAssemblyPaths,
+                    HigherFrameworkReferenceAssemblyPaths,
+                    false /*checkDependencies*/
+                );
+                if (r.ResolvedFiles != null && r.ResolvedFiles.Count > 0)
+                {
                     return ReferenceAssemblyType.FrameworkAssembly;
                 }
             }
@@ -498,30 +669,38 @@ namespace System.Web.Compilation {
             return ReferenceAssemblyType.NonFrameworkAssembly;
         }
 
-        private static IList<string> GetPathToReferenceAssemblies(FrameworkName frameworkName){
+        private static IList<string> GetPathToReferenceAssemblies(FrameworkName frameworkName)
+        {
             return ToolLocationHelper.GetPathToReferenceAssemblies(frameworkName);
         }
 
         /// <summary>
         /// Returns true if any of the codedom providers has warnAsError set to true.
         /// </summary>
-        private static bool WarnAsError {
-            get {
-                if (s_warnAsError == null) {
-                    lock (s_warnAsErrorLock) {
+        private static bool WarnAsError
+        {
+            get
+            {
+                if (s_warnAsError == null)
+                {
+                    lock (s_warnAsErrorLock)
+                    {
                         // Check again, in case it was already set by another thread while the current thread
                         // was waiting to acquire the lock
-                        if (s_warnAsError == null) {
-
+                        if (s_warnAsError == null)
+                        {
                             // Set default value to false
                             s_warnAsError = false;
                             CompilerInfo[] compilerInfoArray = CodeDomProvider.GetAllCompilerInfo();
-                            foreach (CompilerInfo info in compilerInfoArray) {
-                                if (info == null || !info.IsCodeDomProviderTypeValid) {
+                            foreach (CompilerInfo info in compilerInfoArray)
+                            {
+                                if (info == null || !info.IsCodeDomProviderTypeValid)
+                                {
                                     continue;
                                 }
 
-                                if (CompilationUtil.WarnAsError(info.CodeDomProviderType)) {
+                                if (CompilationUtil.WarnAsError(info.CodeDomProviderType))
+                                {
                                     s_warnAsError = true;
                                     break;
                                 }
@@ -536,75 +715,83 @@ namespace System.Web.Compilation {
     }
 
     /// Adapted the following code from \\ddindex2\sources2\OrcasSP\vsproject\xmake\Shared\UnitTests
-
-    internal class MockEngine : IBuildEngine {
+    internal class MockEngine : IBuildEngine
+    {
         private List<BuildMessageEventArgs> messages = new List<BuildMessageEventArgs>();
         private List<BuildWarningEventArgs> warnings = new List<BuildWarningEventArgs>();
         private List<BuildErrorEventArgs> errors = new List<BuildErrorEventArgs>();
         private List<CustomBuildEventArgs> customEvents = new List<CustomBuildEventArgs>();
 
-        internal MockEngine() {
-        }
+        internal MockEngine() { }
 
-        internal ICollection<BuildMessageEventArgs> Messages {
+        internal ICollection<BuildMessageEventArgs> Messages
+        {
             get { return messages; }
         }
 
-        internal ICollection<BuildWarningEventArgs> Warnings {
+        internal ICollection<BuildWarningEventArgs> Warnings
+        {
             get { return warnings; }
         }
 
-        internal ICollection<BuildErrorEventArgs> Errors {
+        internal ICollection<BuildErrorEventArgs> Errors
+        {
             get { return errors; }
         }
 
-        internal ICollection<CustomBuildEventArgs> CustomEvents {
+        internal ICollection<CustomBuildEventArgs> CustomEvents
+        {
             get { return customEvents; }
         }
 
-        public virtual void LogErrorEvent(BuildErrorEventArgs eventArgs) {
+        public virtual void LogErrorEvent(BuildErrorEventArgs eventArgs)
+        {
             errors.Add(eventArgs);
         }
 
-        public virtual void LogWarningEvent(BuildWarningEventArgs eventArgs) {
+        public virtual void LogWarningEvent(BuildWarningEventArgs eventArgs)
+        {
             warnings.Add(eventArgs);
         }
 
-        public virtual void LogCustomEvent(CustomBuildEventArgs eventArgs) {
+        public virtual void LogCustomEvent(CustomBuildEventArgs eventArgs)
+        {
             customEvents.Add(eventArgs);
         }
 
-        public virtual void LogMessageEvent(BuildMessageEventArgs eventArgs) {
+        public virtual void LogMessageEvent(BuildMessageEventArgs eventArgs)
+        {
             messages.Add(eventArgs);
         }
 
-        public bool ContinueOnError {
-            get {
-                return false;
-            }
+        public bool ContinueOnError
+        {
+            get { return false; }
         }
 
-        public string ProjectFileOfTaskNode {
-            get {
-                return String.Empty;
-            }
+        public string ProjectFileOfTaskNode
+        {
+            get { return String.Empty; }
         }
 
-        public int LineNumberOfTaskNode {
-            get {
-                return 0;
-            }
+        public int LineNumberOfTaskNode
+        {
+            get { return 0; }
         }
 
-        public int ColumnNumberOfTaskNode {
-            get {
-                return 0;
-            }
+        public int ColumnNumberOfTaskNode
+        {
+            get { return 0; }
         }
 
-        public bool BuildProjectFile(string projectFileName, string[] targetNames, System.Collections.IDictionary globalProperties, System.Collections.IDictionary targetOutputs) {
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            System.Collections.IDictionary globalProperties,
+            System.Collections.IDictionary targetOutputs
+        )
+        {
             throw new NotImplementedException();
         }
     }
-
 }

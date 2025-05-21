@@ -42,19 +42,26 @@ public class FormValueProviderFactory : IValueProviderFactory
         {
             // ReadFormAsync can throw InvalidDataException if the form content is malformed.
             // Wrap it in a ValueProviderException that the CompositeValueProvider special cases.
-            throw new ValueProviderException(Resources.FormatFailedToReadRequestForm(ex.Message), ex);
+            throw new ValueProviderException(
+                Resources.FormatFailedToReadRequestForm(ex.Message),
+                ex
+            );
         }
         catch (IOException ex)
         {
             // ReadFormAsync can throw IOException if the client disconnects.
             // Wrap it in a ValueProviderException that the CompositeValueProvider special cases.
-            throw new ValueProviderException(Resources.FormatFailedToReadRequestForm(ex.Message), ex);
+            throw new ValueProviderException(
+                Resources.FormatFailedToReadRequestForm(ex.Message),
+                ex
+            );
         }
 
         var valueProvider = new FormValueProvider(
             BindingSource.Form,
             form,
-            CultureInfo.CurrentCulture);
+            CultureInfo.CurrentCulture
+        );
 
         context.ValueProviders.Add(valueProvider);
     }

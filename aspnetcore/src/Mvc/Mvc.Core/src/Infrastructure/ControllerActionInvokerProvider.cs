@@ -30,10 +30,16 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
         IOptions<MvcOptions> optionsAccessor,
         ILoggerFactory loggerFactory,
         DiagnosticListener diagnosticListener,
-        IActionResultTypeMapper mapper)
-        : this(controllerActionInvokerCache, optionsAccessor, loggerFactory, diagnosticListener, mapper, null)
-    {
-    }
+        IActionResultTypeMapper mapper
+    )
+        : this(
+            controllerActionInvokerCache,
+            optionsAccessor,
+            loggerFactory,
+            diagnosticListener,
+            mapper,
+            null
+        ) { }
 
     public ControllerActionInvokerProvider(
         ControllerActionInvokerCache controllerActionInvokerCache,
@@ -41,7 +47,8 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
         ILoggerFactory loggerFactory,
         DiagnosticListener diagnosticListener,
         IActionResultTypeMapper mapper,
-        IActionContextAccessor? actionContextAccessor)
+        IActionContextAccessor? actionContextAccessor
+    )
     {
         _controllerActionInvokerCache = controllerActionInvokerCache;
         _valueProviderFactories = optionsAccessor.Value.ValueProviderFactories.ToArray();
@@ -66,13 +73,17 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
             var controllerContext = new ControllerContext(context.ActionContext)
             {
                 // PERF: These are rarely going to be changed, so let's go copy-on-write.
-                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(_valueProviderFactories)
+                ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
+                    _valueProviderFactories
+                ),
             };
             controllerContext.ModelState.MaxAllowedErrors = _maxModelValidationErrors;
             controllerContext.ModelState.MaxValidationDepth = _maxValidationDepth;
             controllerContext.ModelState.MaxStateDepth = _maxModelBindingRecursionDepth;
 
-            var (cacheEntry, filters) = _controllerActionInvokerCache.GetCachedResult(controllerContext);
+            var (cacheEntry, filters) = _controllerActionInvokerCache.GetCachedResult(
+                controllerContext
+            );
 
             var invoker = new ControllerActionInvoker(
                 _logger,
@@ -81,14 +92,13 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
                 _mapper,
                 controllerContext,
                 cacheEntry,
-                filters);
+                filters
+            );
 
             context.Result = invoker;
         }
     }
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ActionInvokerProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ActionInvokerProviderContext context) { }
 }

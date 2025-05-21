@@ -4,78 +4,77 @@ using System;
 using System.Threading;
 using Xunit;
 
-class Gen 
+class Gen
 {
-	public virtual void Target<U>(object p)
-	{		
-			//dummy line to avoid warnings
-			Test_thread04.Eval(typeof(U)!=p.GetType());
-			ManualResetEvent evt = (ManualResetEvent) p;
-			Interlocked.Increment(ref Test_thread04.Xcounter);
-			evt.Set();
-	}
-	public static void ThreadPoolTest<U>()
-	{
-		ManualResetEvent[] evts = new ManualResetEvent[Test_thread04.nThreads];
-		WaitHandle[] hdls = new WaitHandle[Test_thread04.nThreads];
+    public virtual void Target<U>(object p)
+    {
+        //dummy line to avoid warnings
+        Test_thread04.Eval(typeof(U) != p.GetType());
+        ManualResetEvent evt = (ManualResetEvent)p;
+        Interlocked.Increment(ref Test_thread04.Xcounter);
+        evt.Set();
+    }
 
-		for (int i=0; i<Test_thread04.nThreads; i++)
-		{
-			evts[i] = new ManualResetEvent(false);
-			hdls[i] = (WaitHandle) evts[i];
-		}
+    public static void ThreadPoolTest<U>()
+    {
+        ManualResetEvent[] evts = new ManualResetEvent[Test_thread04.nThreads];
+        WaitHandle[] hdls = new WaitHandle[Test_thread04.nThreads];
 
-		Gen obj = new Gen();
+        for (int i = 0; i < Test_thread04.nThreads; i++)
+        {
+            evts[i] = new ManualResetEvent(false);
+            hdls[i] = (WaitHandle)evts[i];
+        }
 
-		for (int i = 0; i < Test_thread04.nThreads; i++)
-		{	
-			WaitCallback cb = new WaitCallback(obj.Target<U>);
-			ThreadPool.QueueUserWorkItem(cb,evts[i]);
-		}
+        Gen obj = new Gen();
 
-		WaitHandle.WaitAll(hdls);
-		Test_thread04.Eval(Test_thread04.Xcounter==Test_thread04.nThreads);
-		Test_thread04.Xcounter = 0;
-	}
+        for (int i = 0; i < Test_thread04.nThreads; i++)
+        {
+            WaitCallback cb = new WaitCallback(obj.Target<U>);
+            ThreadPool.QueueUserWorkItem(cb, evts[i]);
+        }
+
+        WaitHandle.WaitAll(hdls);
+        Test_thread04.Eval(Test_thread04.Xcounter == Test_thread04.nThreads);
+        Test_thread04.Xcounter = 0;
+    }
 }
 
 public class Test_thread04
 {
-	public static int nThreads =50;
-	public static int counter = 0;
-	public static int Xcounter = 0;
-	public static bool result = true;
-	public static void Eval(bool exp)
-	{
-		counter++;
-		if (!exp)
-		{
-			result = exp;
-			Console.WriteLine("Test Failed at location: " + counter);
-		}
-	
-	}
-	
-	[Fact]
-	public static int TestEntryPoint()
-	{
-		Gen.ThreadPoolTest<object>();
-		Gen.ThreadPoolTest<string>();
-		Gen.ThreadPoolTest<Guid>();
-		Gen.ThreadPoolTest<int>(); 
-		Gen.ThreadPoolTest<double>(); 
+    public static int nThreads = 50;
+    public static int counter = 0;
+    public static int Xcounter = 0;
+    public static bool result = true;
 
-		if (result)
-		{
-			Console.WriteLine("Test Passed");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("Test Failed");
-			return 1;
-		}
-	}
-}		
+    public static void Eval(bool exp)
+    {
+        counter++;
+        if (!exp)
+        {
+            result = exp;
+            Console.WriteLine("Test Failed at location: " + counter);
+        }
+    }
 
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        Gen.ThreadPoolTest<object>();
+        Gen.ThreadPoolTest<string>();
+        Gen.ThreadPoolTest<Guid>();
+        Gen.ThreadPoolTest<int>();
+        Gen.ThreadPoolTest<double>();
 
+        if (result)
+        {
+            Console.WriteLine("Test Passed");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("Test Failed");
+            return 1;
+        }
+    }
+}

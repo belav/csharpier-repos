@@ -5,7 +5,7 @@ public class CannotProjectStringToNullableEnum
     public enum DummyTypes : int
     {
         Foo = 1,
-        Bar = 2
+        Bar = 2,
     }
 
     public class DummySource
@@ -23,7 +23,8 @@ public class CannotProjectStringToNullableEnum
     {
         var config = new MapperConfiguration(cfg =>
         {
-            cfg.CreateProjection<string, DummyTypes?>().ConvertUsing(s => (DummyTypes)System.Enum.Parse(typeof(DummyTypes),s));
+            cfg.CreateProjection<string, DummyTypes?>()
+                .ConvertUsing(s => (DummyTypes)System.Enum.Parse(typeof(DummyTypes), s));
             cfg.CreateProjection<DummySource, DummyDestination>();
         });
 

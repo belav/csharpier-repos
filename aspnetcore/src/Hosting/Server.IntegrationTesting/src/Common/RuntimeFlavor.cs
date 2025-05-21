@@ -7,5 +7,5 @@ public enum RuntimeFlavor
 {
     None,
     CoreClr,
-    Clr
+    Clr,
 }

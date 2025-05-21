@@ -7,36 +7,55 @@ namespace System.ServiceModel.Routing
     using System;
     using System.Collections.Generic;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Transactions;
-    using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
+    using System.Transactions;
 
     static class ClientFactory
     {
-        public static IRoutingClient Create(RoutingEndpointTrait endpointTrait, RoutingService service, bool impersonating)
+        public static IRoutingClient Create(
+            RoutingEndpointTrait endpointTrait,
+            RoutingService service,
+            bool impersonating
+        )
         {
             Type contractType = endpointTrait.RouterContract;
             IRoutingClient client;
             if (contractType == typeof(ISimplexDatagramRouter))
             {
-                client = new SimplexDatagramClient(endpointTrait, service.RoutingConfig, impersonating);
+                client = new SimplexDatagramClient(
+                    endpointTrait,
+                    service.RoutingConfig,
+                    impersonating
+                );
             }
             else if (contractType == typeof(IRequestReplyRouter))
             {
-                client = new RequestReplyClient(endpointTrait, service.RoutingConfig, impersonating);
+                client = new RequestReplyClient(
+                    endpointTrait,
+                    service.RoutingConfig,
+                    impersonating
+                );
             }
             else if (contractType == typeof(ISimplexSessionRouter))
             {
-                client = new SimplexSessionClient(endpointTrait, service.RoutingConfig, impersonating);
+                client = new SimplexSessionClient(
+                    endpointTrait,
+                    service.RoutingConfig,
+                    impersonating
+                );
             }
             else //if (contractType == typeof(IDuplexSessionRouter))
             {
-                Fx.Assert(contractType == typeof(IDuplexSessionRouter), "Only one contract type remaining.");
+                Fx.Assert(
+                    contractType == typeof(IDuplexSessionRouter),
+                    "Only one contract type remaining."
+                );
                 client = new DuplexSessionClient(service, endpointTrait, impersonating);
-            }            
+            }
 
             return client;
         }
@@ -48,23 +67,32 @@ namespace System.ServiceModel.Routing
             object thisLock;
             Queue<OperationAsyncResult> waiters;
 
-            protected RoutingClientBase(RoutingEndpointTrait endpointTrait, RoutingConfiguration routingConfig, bool impersonating)
+            protected RoutingClientBase(
+                RoutingEndpointTrait endpointTrait,
+                RoutingConfiguration routingConfig,
+                bool impersonating
+            )
                 : base(endpointTrait.Endpoint.Binding, endpointTrait.Endpoint.Address)
             {
                 Initialize(endpointTrait, routingConfig, impersonating);
             }
 
-            protected RoutingClientBase(RoutingEndpointTrait endpointTrait, RoutingConfiguration routingConfig, object callbackInstance, bool impersonating)
-                : base(new InstanceContext(callbackInstance), endpointTrait.Endpoint.Binding, endpointTrait.Endpoint.Address)
+            protected RoutingClientBase(
+                RoutingEndpointTrait endpointTrait,
+                RoutingConfiguration routingConfig,
+                object callbackInstance,
+                bool impersonating
+            )
+                : base(
+                    new InstanceContext(callbackInstance),
+                    endpointTrait.Endpoint.Binding,
+                    endpointTrait.Endpoint.Address
+                )
             {
                 Initialize(endpointTrait, routingConfig, impersonating);
             }
 
-            public RoutingEndpointTrait Key
-            {
-                get;
-                private set;
-            }
+            public RoutingEndpointTrait Key { get; private set; }
 
             public event EventHandler Faulted;
 
@@ -80,7 +108,8 @@ namespace System.ServiceModel.Routing
                         binding = new CustomBinding(endpoint.Binding);
                     }
 
-                    SynchronousSendBindingElement syncSend = binding.Elements.Find<SynchronousSendBindingElement>();
+                    SynchronousSendBindingElement syncSend =
+                        binding.Elements.Find<SynchronousSendBindingElement>();
                     if (syncSend == null)
                     {
                         binding.Elements.Insert(0, new SynchronousSendBindingElement());
@@ -96,7 +125,8 @@ namespace System.ServiceModel.Routing
                 {
                     binding = new CustomBinding(endpoint.Binding);
                 }
-                TransactionFlowBindingElement transactionFlow = binding.Elements.Find<TransactionFlowBindingElement>();
+                TransactionFlowBindingElement transactionFlow =
+                    binding.Elements.Find<TransactionFlowBindingElement>();
                 if (transactionFlow != null)
                 {
                     transactionFlow.AllowWildcardAction = true;
@@ -104,7 +134,11 @@ namespace System.ServiceModel.Routing
                 }
             }
 
-            void Initialize(RoutingEndpointTrait endpointTrait, RoutingConfiguration routingConfig, bool impersonating)
+            void Initialize(
+                RoutingEndpointTrait endpointTrait,
+                RoutingConfiguration routingConfig,
+                bool impersonating
+            )
             {
                 this.thisLock = new object();
                 this.Key = endpointTrait;
@@ -133,7 +167,10 @@ namespace System.ServiceModel.Routing
                 }
 
                 // If the configuration doesn't explicitly turn off marshaling we add it here.
-                if (routingConfig.SoapProcessingEnabled && behaviors.Find<SoapProcessingBehavior>() == null)
+                if (
+                    routingConfig.SoapProcessingEnabled
+                    && behaviors.Find<SoapProcessingBehavior>() == null
+                )
                 {
                     behaviors.Add(new SoapProcessingBehavior());
                 }
@@ -149,7 +186,12 @@ namespace System.ServiceModel.Routing
                 return channel;
             }
 
-            public IAsyncResult BeginOperation(Message message, Transaction transaction, AsyncCallback callback, object state)
+            public IAsyncResult BeginOperation(
+                Message message,
+                Transaction transaction,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new OperationAsyncResult(this, message, transaction, callback, state);
             }
@@ -159,7 +201,11 @@ namespace System.ServiceModel.Routing
                 return OperationAsyncResult.End(result);
             }
 
-            protected abstract IAsyncResult OnBeginOperation(Message message, AsyncCallback callback, object state);
+            protected abstract IAsyncResult OnBeginOperation(
+                Message message,
+                AsyncCallback callback,
+                object state
+            );
             protected abstract Message OnEndOperation(IAsyncResult asyncResult);
 
             void InnerChannelFaulted(object sender, EventArgs args)
@@ -182,7 +228,13 @@ namespace System.ServiceModel.Routing
                 Message requestMessage;
                 Transaction transaction;
 
-                public OperationAsyncResult(RoutingClientBase<TChannel> parent, Message requestMessage, Transaction transaction, AsyncCallback callback, object state)
+                public OperationAsyncResult(
+                    RoutingClientBase<TChannel> parent,
+                    Message requestMessage,
+                    Transaction transaction,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.parent = parent;
@@ -221,7 +273,10 @@ namespace System.ServiceModel.Routing
                         using (this.PrepareTransactionalCall(this.transaction))
                         {
                             //This will use the binding's OpenTimeout.
-                            asyncResult = ((ICommunicationObject)this.parent).BeginOpen(this.PrepareAsyncCompletion(openComplete), this);
+                            asyncResult = ((ICommunicationObject)this.parent).BeginOpen(
+                                this.PrepareAsyncCompletion(openComplete),
+                                this
+                            );
                         }
                         if (this.SyncContinue(asyncResult))
                         {
@@ -283,7 +338,11 @@ namespace System.ServiceModel.Routing
                     IAsyncResult asyncResult;
                     using (this.PrepareTransactionalCall(this.transaction))
                     {
-                        asyncResult = this.parent.OnBeginOperation(this.requestMessage, this.PrepareAsyncCompletion(operationComplete), this);
+                        asyncResult = this.parent.OnBeginOperation(
+                            this.requestMessage,
+                            this.PrepareAsyncCompletion(operationComplete),
+                            this
+                        );
                     }
                     return this.SyncContinue(asyncResult);
                 }
@@ -319,12 +378,18 @@ namespace System.ServiceModel.Routing
 
         class SimplexDatagramClient : RoutingClientBase<ISimplexDatagramRouter>
         {
-            public SimplexDatagramClient(RoutingEndpointTrait endpointTrait, RoutingConfiguration routingConfig, bool impersonating)
-                : base(endpointTrait, routingConfig, impersonating)
-            {
-            }
+            public SimplexDatagramClient(
+                RoutingEndpointTrait endpointTrait,
+                RoutingConfiguration routingConfig,
+                bool impersonating
+            )
+                : base(endpointTrait, routingConfig, impersonating) { }
 
-            protected override IAsyncResult OnBeginOperation(Message message, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOperation(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.Channel.BeginProcessMessage(message, callback, state);
             }
@@ -338,12 +403,18 @@ namespace System.ServiceModel.Routing
 
         class SimplexSessionClient : RoutingClientBase<ISimplexSessionRouter>
         {
-            public SimplexSessionClient(RoutingEndpointTrait endointTrait, RoutingConfiguration routingConfig, bool impersonating)
-                : base(endointTrait, routingConfig, impersonating)
-            {
-            }
+            public SimplexSessionClient(
+                RoutingEndpointTrait endointTrait,
+                RoutingConfiguration routingConfig,
+                bool impersonating
+            )
+                : base(endointTrait, routingConfig, impersonating) { }
 
-            protected override IAsyncResult OnBeginOperation(Message message, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOperation(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.Channel.BeginProcessMessage(message, callback, state);
             }
@@ -357,12 +428,26 @@ namespace System.ServiceModel.Routing
 
         class DuplexSessionClient : RoutingClientBase<IDuplexSessionRouter>
         {
-            public DuplexSessionClient(RoutingService service, RoutingEndpointTrait endpointTrait, bool impersonating)
-                : base(endpointTrait, service.RoutingConfig, new DuplexCallbackProxy(service.ChannelExtension.ActivityID, endpointTrait.CallbackInstance), impersonating)
-            {
-            }
+            public DuplexSessionClient(
+                RoutingService service,
+                RoutingEndpointTrait endpointTrait,
+                bool impersonating
+            )
+                : base(
+                    endpointTrait,
+                    service.RoutingConfig,
+                    new DuplexCallbackProxy(
+                        service.ChannelExtension.ActivityID,
+                        endpointTrait.CallbackInstance
+                    ),
+                    impersonating
+                ) { }
 
-            protected override IAsyncResult OnBeginOperation(Message message, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOperation(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.Channel.BeginProcessMessage(message, callback, state);
             }
@@ -389,18 +474,31 @@ namespace System.ServiceModel.Routing
                     }
                 }
 
-                IAsyncResult IDuplexRouterCallback.BeginProcessMessage(Message message, AsyncCallback callback, object state)
+                IAsyncResult IDuplexRouterCallback.BeginProcessMessage(
+                    Message message,
+                    AsyncCallback callback,
+                    object state
+                )
                 {
                     FxTrace.Trace.SetAndTraceTransfer(this.activityID, true);
                     try
                     {
-                        return new CallbackAsyncResult(this.callbackInstance, message, callback, state);
+                        return new CallbackAsyncResult(
+                            this.callbackInstance,
+                            message,
+                            callback,
+                            state
+                        );
                     }
                     catch (Exception e)
                     {
                         if (TD.RoutingServiceDuplexCallbackExceptionIsEnabled())
                         {
-                            TD.RoutingServiceDuplexCallbackException(this.eventTraceActivity, "DuplexCallbackProxy.BeginProcessMessage", e);
+                            TD.RoutingServiceDuplexCallbackException(
+                                this.eventTraceActivity,
+                                "DuplexCallbackProxy.BeginProcessMessage",
+                                e
+                            );
                         }
                         throw;
                     }
@@ -417,29 +515,45 @@ namespace System.ServiceModel.Routing
                     {
                         if (TD.RoutingServiceDuplexCallbackExceptionIsEnabled())
                         {
-                            TD.RoutingServiceDuplexCallbackException(this.eventTraceActivity, "DuplexCallbackProxy.EndProcessMessage", e);
+                            TD.RoutingServiceDuplexCallbackException(
+                                this.eventTraceActivity,
+                                "DuplexCallbackProxy.EndProcessMessage",
+                                e
+                            );
                         }
                         throw;
                     }
                 }
 
-                // We have to have an AsyncResult implementation here in order to handle the 
+                // We have to have an AsyncResult implementation here in order to handle the
                 // TransactionScope appropriately (use PrepareTransactionalCall, SyncContinue, etc...)
                 class CallbackAsyncResult : TransactedAsyncResult
                 {
                     static AsyncCompletion processCallback = ProcessCallback;
                     IDuplexRouterCallback callbackInstance;
 
-                    public CallbackAsyncResult(IDuplexRouterCallback callbackInstance, Message message, AsyncCallback callback, object state)
+                    public CallbackAsyncResult(
+                        IDuplexRouterCallback callbackInstance,
+                        Message message,
+                        AsyncCallback callback,
+                        object state
+                    )
                         : base(callback, state)
                     {
                         this.callbackInstance = callbackInstance;
 
                         IAsyncResult result;
-                        using (this.PrepareTransactionalCall(TransactionMessageProperty.TryGetTransaction(message)))
+                        using (
+                            this.PrepareTransactionalCall(
+                                TransactionMessageProperty.TryGetTransaction(message)
+                            )
+                        )
                         {
-                            result = this.callbackInstance.BeginProcessMessage(message,
-                                this.PrepareAsyncCompletion(processCallback), this);
+                            result = this.callbackInstance.BeginProcessMessage(
+                                message,
+                                this.PrepareAsyncCompletion(processCallback),
+                                this
+                            );
                         }
 
                         if (this.SyncContinue(result))
@@ -465,12 +579,18 @@ namespace System.ServiceModel.Routing
 
         class RequestReplyClient : RoutingClientBase<IRequestReplyRouter>
         {
-            public RequestReplyClient(RoutingEndpointTrait endpointTrait, RoutingConfiguration routingConfig, bool impersonating)
-                : base(endpointTrait, routingConfig, impersonating)
-            {
-            }
+            public RequestReplyClient(
+                RoutingEndpointTrait endpointTrait,
+                RoutingConfiguration routingConfig,
+                bool impersonating
+            )
+                : base(endpointTrait, routingConfig, impersonating) { }
 
-            protected override IAsyncResult OnBeginOperation(Message message, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOperation(
+                Message message,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.Channel.BeginProcessRequest(message, callback, state);
             }

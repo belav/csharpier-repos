@@ -30,12 +30,13 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             Mock<HttpParameterDescriptor> descriptorMock = new Mock<HttpParameterDescriptor>();
             HttpParameterBinding bindingMock = new HttpValueProviderParameterBindingTestDouble(
-                                                    descriptorMock.Object,
-                                                    new List<ValueProviderFactory>() 
-                                                    {
-                                                        new QueryStringValueProviderFactory(), 
-                                                        new RouteDataValueProviderFactory()
-                                                    });
+                descriptorMock.Object,
+                new List<ValueProviderFactory>()
+                {
+                    new QueryStringValueProviderFactory(),
+                    new RouteDataValueProviderFactory(),
+                }
+            );
 
             // Act
             bool result = bindingMock.WillReadUri();
@@ -51,13 +52,14 @@ namespace System.Web.Http.ModelBinding
             Mock<HttpParameterDescriptor> descriptorMock = new Mock<HttpParameterDescriptor>();
             Mock<ValueProviderFactory> valueProviderMock = new Mock<ValueProviderFactory>();
             HttpParameterBinding bindingMock = new HttpValueProviderParameterBindingTestDouble(
-                                                    descriptorMock.Object,
-                                                    new List<ValueProviderFactory>() 
-                                                    {
-                                                        new QueryStringValueProviderFactory(), 
-                                                        new RouteDataValueProviderFactory(),
-                                                        valueProviderMock.Object,
-                                                    });
+                descriptorMock.Object,
+                new List<ValueProviderFactory>()
+                {
+                    new QueryStringValueProviderFactory(),
+                    new RouteDataValueProviderFactory(),
+                    valueProviderMock.Object,
+                }
+            );
 
             // Act
             bool result = bindingMock.WillReadUri();
@@ -72,8 +74,9 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             Mock<HttpParameterDescriptor> descriptorMock = new Mock<HttpParameterDescriptor>();
             HttpParameterBinding bindingMock = new HttpValueProviderParameterBindingTestDouble(
-                                                    descriptorMock.Object,
-                                                    new List<ValueProviderFactory>());
+                descriptorMock.Object,
+                new List<ValueProviderFactory>()
+            );
 
             // Act
             bool result = bindingMock.WillReadUri();
@@ -87,7 +90,9 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             Mock<HttpParameterDescriptor> descriptorMock = new Mock<HttpParameterDescriptor>();
-            Mock<HttpParameterBinding> bindingMock = new Mock<HttpParameterBinding>(descriptorMock.Object);
+            Mock<HttpParameterBinding> bindingMock = new Mock<HttpParameterBinding>(
+                descriptorMock.Object
+            );
 
             // Act
             bool result = bindingMock.Object.WillReadUri();
@@ -96,16 +101,26 @@ namespace System.Web.Http.ModelBinding
             Assert.False(result);
         }
 
-        class HttpValueProviderParameterBindingTestDouble : HttpParameterBinding, IValueProviderParameterBinding
+        class HttpValueProviderParameterBindingTestDouble
+            : HttpParameterBinding,
+                IValueProviderParameterBinding
         {
             public IEnumerable<ValueProviderFactory> Factories { get; set; }
 
-            public HttpValueProviderParameterBindingTestDouble(HttpParameterDescriptor descriptor, IEnumerable<ValueProviderFactory> factories) : base(descriptor)
+            public HttpValueProviderParameterBindingTestDouble(
+                HttpParameterDescriptor descriptor,
+                IEnumerable<ValueProviderFactory> factories
+            )
+                : base(descriptor)
             {
                 Factories = factories;
             }
 
-            public override Task ExecuteBindingAsync(Metadata.ModelMetadataProvider metadataProvider, HttpActionContext actionContext, Threading.CancellationToken cancellationToken)
+            public override Task ExecuteBindingAsync(
+                Metadata.ModelMetadataProvider metadataProvider,
+                HttpActionContext actionContext,
+                Threading.CancellationToken cancellationToken
+            )
             {
                 throw new NotImplementedException();
             }

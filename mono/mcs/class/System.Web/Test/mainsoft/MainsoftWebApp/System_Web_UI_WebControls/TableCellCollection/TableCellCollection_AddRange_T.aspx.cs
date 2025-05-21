@@ -30,56 +30,54 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableCellCollection_AddRange_T
-		: GHTBaseWeb 
-	{
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class TableCellCollection_AddRange_T : GHTBaseWeb
+    {
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, EventArgs e)
-		{
-			base.GHTTestBegin((HtmlForm) (HtmlForm)this.FindControl("Form1"));
-			Table table1 = new Table();
-			int num3 = 3;
-			TableCell[] cellArray1 = new TableCell[num3 + 1];
-			table1.Rows.Add(new TableRow());
-			int num4 = num3;
-			for (int num2 = 0; num2 <= num4; num2++)
-			{
-				TableCell cell1 = new TableCell();
-				cell1.Text = "[Cell " + num2.ToString() + "]";
-				cellArray1[num2] = cell1;
-			}
-			base.GHTSubTestBegin("AddRange cells");
-			base.GHTActiveSubTest.Controls.Add(table1);
-			table1.Rows[0].Cells.AddRange(cellArray1);
-			base.GHTSubTestEnd();
-			base.GHTTestEnd();
-		}
- 
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        private void Page_Load(object sender, EventArgs e)
+        {
+            base.GHTTestBegin((HtmlForm)(HtmlForm)this.FindControl("Form1"));
+            Table table1 = new Table();
+            int num3 = 3;
+            TableCell[] cellArray1 = new TableCell[num3 + 1];
+            table1.Rows.Add(new TableRow());
+            int num4 = num3;
+            for (int num2 = 0; num2 <= num4; num2++)
+            {
+                TableCell cell1 = new TableCell();
+                cell1.Text = "[Cell " + num2.ToString() + "]";
+                cellArray1[num2] = cell1;
+            }
+            base.GHTSubTestBegin("AddRange cells");
+            base.GHTActiveSubTest.Controls.Add(table1);
+            table1.Rows[0].Cells.AddRange(cellArray1);
+            base.GHTSubTestEnd();
+            base.GHTTestEnd();
+        }
+    }
 }

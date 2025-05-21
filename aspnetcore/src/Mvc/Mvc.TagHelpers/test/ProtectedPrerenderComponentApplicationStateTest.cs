@@ -11,8 +11,11 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 public class ProtectedPrerenderComponentApplicationStateTest
 {
-    private static readonly IDataProtectionProvider _provider = new EphemeralDataProtectionProvider();
-    private static readonly IDataProtector _protector = _provider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+    private static readonly IDataProtectionProvider _provider =
+        new EphemeralDataProtectionProvider();
+    private static readonly IDataProtector _protector = _provider.CreateProtector(
+        "Microsoft.AspNetCore.Components.Server.State"
+    );
 
     [Fact]
     public async Task PersistStateAsync_ProtectsPersistedState()
@@ -21,10 +24,7 @@ public class ProtectedPrerenderComponentApplicationStateTest
         var expected = @"{""MyValue"":""AQIDBA==""}";
         var store = new ProtectedPrerenderComponentApplicationStore(_provider);
 
-        var state = new Dictionary<string, byte[]>()
-        {
-            ["MyValue"] = new byte[] { 1, 2, 3, 4 }
-        };
+        var state = new Dictionary<string, byte[]>() { ["MyValue"] = new byte[] { 1, 2, 3, 4 } };
 
         // Act
         await store.PersistStateAsync(state);
@@ -39,10 +39,12 @@ public class ProtectedPrerenderComponentApplicationStateTest
         // Arrange
         var expectedState = new Dictionary<string, byte[]>()
         {
-            ["MyValue"] = new byte[] { 1, 2, 3, 4 }
+            ["MyValue"] = new byte[] { 1, 2, 3, 4 },
         };
 
-        var persistedState = Convert.ToBase64String(_protector.Protect(JsonSerializer.SerializeToUtf8Bytes(expectedState)));
+        var persistedState = Convert.ToBase64String(
+            _protector.Protect(JsonSerializer.SerializeToUtf8Bytes(expectedState))
+        );
         var store = new ProtectedPrerenderComponentApplicationStore(persistedState, _provider);
 
         // Act
@@ -51,7 +53,8 @@ public class ProtectedPrerenderComponentApplicationStateTest
         // Assert
         Assert.Equal(
             expectedState.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()),
-            restored.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray()));
+            restored.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToArray())
+        );
     }
 
     [Fact]
@@ -60,13 +63,16 @@ public class ProtectedPrerenderComponentApplicationStateTest
         // Arrange
         var expectedState = new Dictionary<string, byte[]>()
         {
-            ["MyValue"] = new byte[] { 1, 2, 3, 4 }
+            ["MyValue"] = new byte[] { 1, 2, 3, 4 },
         };
 
-        var persistedState = Convert.ToBase64String(JsonSerializer.SerializeToUtf8Bytes(expectedState));
+        var persistedState = Convert.ToBase64String(
+            JsonSerializer.SerializeToUtf8Bytes(expectedState)
+        );
 
         // Act & Assert
         Assert.Throws<CryptographicException>(() =>
-            new ProtectedPrerenderComponentApplicationStore(persistedState, _provider));
+            new ProtectedPrerenderComponentApplicationStore(persistedState, _provider)
+        );
     }
 }

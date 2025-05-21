@@ -20,12 +20,28 @@ namespace R2RTest
 
         public static int New(string workingDirectory, string projectType, StreamWriter logWriter)
         {
-            return RunProcess("dotnet", $"new {projectType}", workingDirectory, DotnetCliTimeout, logWriter);
+            return RunProcess(
+                "dotnet",
+                $"new {projectType}",
+                workingDirectory,
+                DotnetCliTimeout,
+                logWriter
+            );
         }
 
-        public static int AddPackage(string workingDirectory, string packageName, StreamWriter logWriter)
+        public static int AddPackage(
+            string workingDirectory,
+            string packageName,
+            StreamWriter logWriter
+        )
         {
-            return RunProcess("dotnet", $"add package {packageName}", workingDirectory, DotnetCliTimeout, logWriter);
+            return RunProcess(
+                "dotnet",
+                $"add package {packageName}",
+                workingDirectory,
+                DotnetCliTimeout,
+                logWriter
+            );
         }
 
         public static int Publish(string workingDirectory, StreamWriter logWriter)
@@ -33,7 +49,13 @@ namespace R2RTest
             return RunProcess("dotnet", "publish", workingDirectory, DotnetCliTimeout, logWriter);
         }
 
-        private static int RunProcess(string processPath, string arguments, string workingDirectory, int timeout, StreamWriter logWriter)
+        private static int RunProcess(
+            string processPath,
+            string arguments,
+            string workingDirectory,
+            int timeout,
+            StreamWriter logWriter
+        )
         {
             ProcessStartInfo psi = new ProcessStartInfo()
             {
@@ -42,26 +64,30 @@ namespace R2RTest
                 WorkingDirectory = workingDirectory,
                 Arguments = arguments,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
             };
 
             Process p = new Process();
             p.StartInfo = psi;
-            p.OutputDataReceived += new DataReceivedEventHandler((sender, eventArgs) =>
-            {
-                if (!string.IsNullOrEmpty(eventArgs.Data))
+            p.OutputDataReceived += new DataReceivedEventHandler(
+                (sender, eventArgs) =>
                 {
-                    logWriter.WriteLine(eventArgs.Data);
+                    if (!string.IsNullOrEmpty(eventArgs.Data))
+                    {
+                        logWriter.WriteLine(eventArgs.Data);
+                    }
                 }
-            });
+            );
 
-            p.ErrorDataReceived += new DataReceivedEventHandler((sender, eventArgs) =>
-            {
-                if (!string.IsNullOrEmpty(eventArgs.Data))
+            p.ErrorDataReceived += new DataReceivedEventHandler(
+                (sender, eventArgs) =>
                 {
-                    logWriter.WriteLine(eventArgs.Data);
+                    if (!string.IsNullOrEmpty(eventArgs.Data))
+                    {
+                        logWriter.WriteLine(eventArgs.Data);
+                    }
                 }
-            });
+            );
 
             p.Start();
             p.BeginErrorReadLine();

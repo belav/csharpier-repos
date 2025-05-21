@@ -20,7 +20,9 @@ namespace System.Activities.Debugger
     // * can also span multiple lines.
     // When column info is provided, the debugger will highlight the characters starting at the start line and start column,
     // and going up to but not including the character specified by the end line and end column.
-    [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Our partial trust mechanisms require that this class remain Immutable. Do not add code that allows an instance of this class to change after creation without strict review.")]
+    [Fx.Tag.SecurityNote(
+        Miscellaneous = "RequiresReview - Our partial trust mechanisms require that this class remain Immutable. Do not add code that allows an instance of this class to change after creation without strict review."
+    )]
     [DebuggerNonUserCode]
     [Serializable]
     [Fx.Tag.XamlVisible(false)]
@@ -37,19 +39,16 @@ namespace System.Activities.Debugger
         // This is a convenience constructor to specify the entire line.
         // This does not load the source file to determine column ranges.
         public SourceLocation(string fileName, int line)
-            : this(fileName, line, 1, line, int.MaxValue)
-        {
-        }
+            : this(fileName, line, 1, line, int.MaxValue) { }
 
         public SourceLocation(
-           string fileName,
-           int startLine,
-           int startColumn,
-           int endLine,
-           int endColumn)
-            : this(fileName, null, startLine, startColumn, endLine, endColumn)
-        {
-        }
+            string fileName,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
+            : this(fileName, null, startLine, startColumn, endLine, endColumn) { }
 
         // Define a source location in a file.
         // Line/Column are 1-based.
@@ -59,36 +58,57 @@ namespace System.Activities.Debugger
             int startLine,
             int startColumn,
             int endLine,
-            int endColumn)
+            int endColumn
+        )
         {
             if (startLine <= 0)
             {
-                throw FxTrace.Exception.Argument("startLine", SR.InvalidSourceLocationLineNumber("startLine", startLine));
+                throw FxTrace.Exception.Argument(
+                    "startLine",
+                    SR.InvalidSourceLocationLineNumber("startLine", startLine)
+                );
             }
 
             if (startColumn <= 0)
             {
-                throw FxTrace.Exception.Argument("startColumn", SR.InvalidSourceLocationColumn("startColumn", startColumn));
+                throw FxTrace.Exception.Argument(
+                    "startColumn",
+                    SR.InvalidSourceLocationColumn("startColumn", startColumn)
+                );
             }
 
             if (endLine <= 0)
             {
-                throw FxTrace.Exception.Argument("endLine", SR.InvalidSourceLocationLineNumber("endLine", endLine));
+                throw FxTrace.Exception.Argument(
+                    "endLine",
+                    SR.InvalidSourceLocationLineNumber("endLine", endLine)
+                );
             }
 
             if (endColumn <= 0)
             {
-                throw FxTrace.Exception.Argument("endColumn", SR.InvalidSourceLocationColumn("endColumn", endColumn));
+                throw FxTrace.Exception.Argument(
+                    "endColumn",
+                    SR.InvalidSourceLocationColumn("endColumn", endColumn)
+                );
             }
 
             if (startLine > endLine)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("endLine", endLine, SR.OutOfRangeSourceLocationEndLine(startLine));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "endLine",
+                    endLine,
+                    SR.OutOfRangeSourceLocationEndLine(startLine)
+                );
             }
 
             if ((startLine == endLine) && (startColumn > endColumn))
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("endColumn", endColumn, SR.OutOfRangeSourceLocationEndColumn(startColumn));
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "endColumn",
+                    endColumn,
+                    SR.OutOfRangeSourceLocationEndColumn(startColumn)
+                );
             }
 
             this.fileName = (fileName != null) ? fileName.ToUpperInvariant() : null;
@@ -138,7 +158,9 @@ namespace System.Activities.Debugger
         {
             get
             {
-                return this.endColumn == int.MaxValue && this.startLine == this.endLine && this.startColumn == 1;
+                return this.endColumn == int.MaxValue
+                    && this.startLine == this.endLine
+                    && this.startColumn == 1;
             }
         }
 
@@ -155,12 +177,14 @@ namespace System.Activities.Debugger
             if (this.FileName != rsl.FileName)
             {
                 return false;
-            }            
+            }
 
-            if (this.StartLine != rsl.StartLine ||
-                this.StartColumn != rsl.StartColumn ||
-                this.EndLine != rsl.EndLine ||
-                this.EndColumn != rsl.EndColumn)
+            if (
+                this.StartLine != rsl.StartLine
+                || this.StartColumn != rsl.StartColumn
+                || this.EndLine != rsl.EndLine
+                || this.EndColumn != rsl.EndColumn
+            )
             {
                 return false;
             }
@@ -169,7 +193,10 @@ namespace System.Activities.Debugger
             {
                 return false;
             }
-            else if ((this.Checksum != null && rsl.Checksum != null) && !this.Checksum.SequenceEqual(rsl.Checksum))
+            else if (
+                (this.Checksum != null && rsl.Checksum != null)
+                && !this.Checksum.SequenceEqual(rsl.Checksum)
+            )
             {
                 return false;
             }
@@ -181,18 +208,28 @@ namespace System.Activities.Debugger
         // Get a hash code.
         public override int GetHashCode()
         {
-            return (string.IsNullOrEmpty(this.FileName) ? 0 : this.FileName.GetHashCode()) ^
-                    this.StartLine.GetHashCode() ^
-                    this.StartColumn.GetHashCode() ^
-                    ((this.Checksum == null) ? 0 : SymbolHelper.GetHexStringFromChecksum(this.Checksum).GetHashCode());
+            return (string.IsNullOrEmpty(this.FileName) ? 0 : this.FileName.GetHashCode())
+                ^ this.StartLine.GetHashCode()
+                ^ this.StartColumn.GetHashCode()
+                ^ (
+                    (this.Checksum == null)
+                        ? 0
+                        : SymbolHelper.GetHexStringFromChecksum(this.Checksum).GetHashCode()
+                );
         }
 
-        internal static bool IsValidRange(int startLine, int startColumn, int endLine, int endColumn)
+        internal static bool IsValidRange(
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
-            return
-                (startLine > 0) && (startColumn > 0) && (endLine > 0) && (endColumn > 0) &&
-                ((startLine < endLine) || (startLine == endLine) && (startColumn < endColumn));
-
+            return (startLine > 0)
+                && (startColumn > 0)
+                && (endLine > 0)
+                && (endColumn > 0)
+                && ((startLine < endLine) || (startLine == endLine) && (startColumn < endColumn));
         }
     }
 }

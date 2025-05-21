@@ -31,7 +31,8 @@ public sealed record ModelCreationDependencies
         IConventionSetBuilder conventionSetBuilder,
         ModelDependencies modelDependencies,
         IModelRuntimeInitializer modelRuntimeInitializer,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger
+    )
     {
         ModelSource = modelSource;
         ConventionSetBuilder = conventionSetBuilder;

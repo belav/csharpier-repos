@@ -6,7 +6,6 @@
 
 namespace System.Net.Configuration
 {
-
     using System;
     using System.Configuration;
     using System.Security.Permissions;
@@ -14,32 +13,24 @@ namespace System.Net.Configuration
     [ConfigurationCollection(typeof(WebRequestModuleElement))]
     public sealed class WebRequestModuleElementCollection : ConfigurationElementCollection
     {
-        public WebRequestModuleElementCollection() 
-        {
-        }
-        
+        public WebRequestModuleElementCollection() { }
+
         public WebRequestModuleElement this[int index]
         {
-            get
-            {
-                return (WebRequestModuleElement)BaseGet(index);
-            }
+            get { return (WebRequestModuleElement)BaseGet(index); }
             set
             {
                 if (BaseGet(index) != null)
                 {
                     BaseRemoveAt(index);
                 }
-                BaseAdd(index,value);
+                BaseAdd(index, value);
             }
         }
-         
+
         public new WebRequestModuleElement this[string name]
         {
-            get
-            {
-                return (WebRequestModuleElement)BaseGet(name);
-            }
+            get { return (WebRequestModuleElement)BaseGet(name); }
             set
             {
                 if (BaseGet(name) != null)
@@ -49,7 +40,7 @@ namespace System.Net.Configuration
                 BaseAdd(value);
             }
         }
-         
+
         public void Add(WebRequestModuleElement element)
         {
             BaseAdd(element);
@@ -60,12 +51,12 @@ namespace System.Net.Configuration
             BaseClear();
         }
 
-        protected override ConfigurationElement CreateNewElement() 
+        protected override ConfigurationElement CreateNewElement()
         {
             return new WebRequestModuleElement();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) 
+        protected override Object GetElementKey(ConfigurationElement element)
         {
             if (element == null)
                 throw new ArgumentNullException("element");
@@ -76,15 +67,15 @@ namespace System.Net.Configuration
         {
             return BaseIndexOf(element);
         }
-         
-        public void Remove(WebRequestModuleElement element) 
+
+        public void Remove(WebRequestModuleElement element)
         {
             if (element == null)
                 throw new ArgumentNullException("element");
             BaseRemove(element.Key);
         }
 
-        public void Remove(string name) 
+        public void Remove(string name)
         {
             BaseRemove(name);
         }
@@ -93,9 +84,5 @@ namespace System.Net.Configuration
         {
             BaseRemoveAt(index);
         }
-
-    } 
-
+    }
 }
-
-

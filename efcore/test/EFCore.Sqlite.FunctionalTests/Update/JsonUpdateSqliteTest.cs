@@ -29,7 +29,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Add_element_to_json_collection_leaf()
@@ -50,7 +51,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Add_element_to_json_collection_on_derived()
@@ -72,7 +74,8 @@ SELECT "j"."Id", "j"."Discriminator", "j"."Name", "j"."Fraction", "j"."Collectio
 FROM "JsonEntitiesInheritance" AS "j"
 WHERE "j"."Discriminator" = 'JsonEntityInheritanceDerived'
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Add_element_to_json_collection_root()
@@ -93,7 +96,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Add_element_to_json_collection_root_null_navigations()
@@ -114,7 +118,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Add_entity_with_json()
@@ -122,7 +127,7 @@ LIMIT 2
         await base.Add_entity_with_json();
 
         AssertSql(
-"""
+            """
 @p0='{"Name":"RootName","Names":null,"Number":42,"Numbers":null,"OwnedCollectionBranch":[],"OwnedReferenceBranch":{"Date":"2010-10-10 00:00:00","Enum":2,"Enums":null,"Fraction":"42.42","NullableEnum":null,"NullableEnums":null,"OwnedCollectionLeaf":[{"SomethingSomething":"ss1"},{"SomethingSomething":"ss2"}],"OwnedReferenceLeaf":{"SomethingSomething":"ss3"}}}' (Nullable = false) (Size = 354)
 @p1='[]' (Nullable = false) (Size = 2)
 @p2='2'
@@ -133,10 +138,11 @@ INSERT INTO "JsonEntitiesBasic" ("OwnedReferenceRoot", "OwnedCollectionRoot", "I
 VALUES (@p0, @p1, @p2, @p3, @p4);
 """,
             //
-"""
+            """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
-""");
+"""
+        );
     }
 
     public override async Task Add_entity_with_json_null_navigations()
@@ -157,7 +163,8 @@ VALUES (@p0, @p1, @p2, @p3);
             """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
-""");
+"""
+        );
     }
 
     public override async Task Add_json_reference_leaf()
@@ -178,7 +185,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Add_json_reference_root()
@@ -199,7 +207,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Delete_entity_with_json()
@@ -218,7 +227,8 @@ RETURNING 1;
             """
 SELECT COUNT(*)
 FROM "JsonEntitiesBasic" AS "j"
-""");
+"""
+        );
     }
 
     public override async Task Delete_json_collection_branch()
@@ -239,7 +249,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Delete_json_collection_root()
@@ -260,7 +271,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Delete_json_reference_leaf()
@@ -281,7 +293,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Delete_json_reference_root()
@@ -302,7 +315,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_element_in_json_collection_branch()
@@ -323,7 +337,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_element_in_json_collection_root1()
@@ -344,7 +359,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_element_in_json_collection_root2()
@@ -365,7 +381,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_element_in_json_multiple_levels_partial_update()
@@ -387,7 +404,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_element_in_json_branch_collection_and_add_element_to_the_same_collection()
@@ -408,7 +426,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_two_elements_in_the_same_json_collection()
@@ -429,7 +448,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_two_elements_in_the_same_json_collection_at_the_root()
@@ -450,7 +470,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_collection_element_and_reference_at_once()
@@ -471,7 +492,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_enum_property()
@@ -493,7 +515,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_numeric_property()
@@ -515,7 +538,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_bool()
@@ -538,7 +562,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_byte()
@@ -561,7 +586,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_char()
@@ -583,7 +609,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_datetime()
@@ -606,7 +633,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_datetimeoffset()
@@ -629,7 +657,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_decimal()
@@ -652,7 +681,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_double()
@@ -675,7 +705,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_guid()
@@ -698,7 +729,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_int16()
@@ -721,7 +753,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_int32()
@@ -744,7 +777,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_int64()
@@ -767,7 +801,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_signed_byte()
@@ -790,7 +825,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_single()
@@ -813,7 +849,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_timespan()
@@ -836,7 +873,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_uint16()
@@ -859,7 +897,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_uint32()
@@ -882,7 +921,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_uint64()
@@ -905,7 +945,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_int32()
@@ -928,7 +969,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_int32_set_to_null()
@@ -951,7 +993,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_enum()
@@ -974,7 +1017,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_enum_with_int_converter()
@@ -997,7 +1041,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_enum()
@@ -1020,7 +1065,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_enum_set_to_null()
@@ -1043,7 +1089,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_enum_with_int_converter()
@@ -1066,7 +1113,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_enum_with_int_converter_set_to_null()
@@ -1089,7 +1137,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_enum_with_converter_that_handles_nulls()
@@ -1112,7 +1161,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_nullable_enum_with_converter_that_handles_nulls_set_to_null()
@@ -1135,7 +1185,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_two_properties_on_same_entity_updates_the_entire_entity()
@@ -1158,7 +1209,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_a_scalar_property_and_reference_navigation_on_the_same_entity()
@@ -1179,7 +1231,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_a_scalar_property_and_collection_navigation_on_the_same_entity()
@@ -1200,7 +1253,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_a_scalar_property_and_another_property_behind_reference_navigation_on_the_same_entity()
@@ -1221,7 +1275,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_with_converter_bool_to_int_zero_one()
@@ -1243,7 +1298,8 @@ SELECT "j"."Id", "j"."Reference"
 FROM "JsonEntitiesConverters" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_with_converter_bool_to_string_True_False()
@@ -1265,7 +1321,8 @@ SELECT "j"."Id", "j"."Reference"
 FROM "JsonEntitiesConverters" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_with_converter_bool_to_string_Y_N()
@@ -1287,7 +1344,8 @@ SELECT "j"."Id", "j"."Reference"
 FROM "JsonEntitiesConverters" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_with_converter_int_zero_one_to_bool()
@@ -1309,7 +1367,8 @@ SELECT "j"."Id", "j"."Reference"
 FROM "JsonEntitiesConverters" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_with_converter_string_True_False_to_bool()
@@ -1331,7 +1390,8 @@ SELECT "j"."Id", "j"."Reference"
 FROM "JsonEntitiesConverters" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_with_converter_string_Y_N_to_bool()
@@ -1353,7 +1413,8 @@ SELECT "j"."Id", "j"."Reference"
 FROM "JsonEntitiesConverters" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_numeric()
@@ -1375,7 +1436,8 @@ RETURNING 1;
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_bool()
@@ -1398,7 +1460,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_byte()
@@ -1421,7 +1484,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_char()
@@ -1444,7 +1508,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_datetime()
@@ -1467,7 +1532,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_datetimeoffset()
@@ -1490,7 +1556,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_decimal()
@@ -1512,7 +1579,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_double()
@@ -1535,7 +1603,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_guid()
@@ -1557,7 +1626,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_int16()
@@ -1579,7 +1649,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_int32()
@@ -1601,7 +1672,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_int64()
@@ -1624,7 +1696,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_signed_byte()
@@ -1647,7 +1720,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_single()
@@ -1670,7 +1744,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_timespan()
@@ -1692,7 +1767,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_dateonly()
@@ -1715,7 +1791,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_timeonly()
@@ -1738,7 +1815,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_uint16()
@@ -1761,7 +1839,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_uint32()
@@ -1784,7 +1863,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_uint64()
@@ -1807,7 +1887,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_int32()
@@ -1830,7 +1911,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_int32_set_to_null()
@@ -1853,7 +1935,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_enum()
@@ -1876,7 +1959,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_enum_with_int_converter()
@@ -1899,7 +1983,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_enum()
@@ -1922,7 +2007,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_enum_set_to_null()
@@ -1945,7 +2031,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_enum_with_int_converter()
@@ -1968,7 +2055,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_enum_with_int_converter_set_to_null()
@@ -1991,7 +2079,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_enum_with_converter_that_handles_nulls()
@@ -2014,7 +2103,8 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
     public override async Task Edit_single_property_collection_of_nullable_enum_with_converter_that_handles_nulls_set_to_null()
@@ -2036,10 +2126,13 @@ SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."Tes
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 1
 LIMIT 2
-""");
+"""
+        );
     }
 
-    public override async Task Add_and_update_top_level_optional_owned_collection_to_JSON(bool? value)
+    public override async Task Add_and_update_top_level_optional_owned_collection_to_JSON(
+        bool? value
+    )
     {
         await base.Add_and_update_top_level_optional_owned_collection_to_JSON(value);
 
@@ -2047,7 +2140,7 @@ LIMIT 2
         {
             case true:
                 AssertSql(
-        """
+                    """
 @p0='[{"Name":null,"Names":null,"Number":0,"Numbers":null,"OwnedCollectionBranch":null,"OwnedReferenceBranch":null}]' (Nullable = false) (Size = 111)
 @p1='2'
 @p2=NULL (DbType = Int32)
@@ -2056,15 +2149,15 @@ LIMIT 2
 INSERT INTO "JsonEntitiesBasic" ("OwnedCollectionRoot", "Id", "EntityBasicId", "Name")
 VALUES (@p0, @p1, @p2, @p3);
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
 """,
-                        //
-                        """
+                    //
+                    """
 @p0=NULL (Nullable = false)
 @p1='2'
 
@@ -2072,21 +2165,22 @@ UPDATE "JsonEntitiesBasic" SET "OwnedCollectionRoot" = @p0
 WHERE "Id" = @p1
 RETURNING 1;
 """,
-                        //
-                        """
+                    //
+                    """
 select OwnedCollectionRoot from JsonEntitiesBasic where Id = 2
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
-""");
+"""
+                );
                 break;
             case false:
                 AssertSql(
-        """
+                    """
 @p0='[]' (Nullable = false) (Size = 2)
 @p1='2'
 @p2=NULL (DbType = Int32)
@@ -2095,15 +2189,15 @@ LIMIT 2
 INSERT INTO "JsonEntitiesBasic" ("OwnedCollectionRoot", "Id", "EntityBasicId", "Name")
 VALUES (@p0, @p1, @p2, @p3);
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
 """,
-                        //
-                        """
+                    //
+                    """
 @p0='[{"Name":null,"Names":null,"Number":0,"Numbers":null,"OwnedCollectionBranch":null,"OwnedReferenceBranch":null}]' (Nullable = false) (Size = 111)
 @p1='2'
 
@@ -2111,21 +2205,22 @@ UPDATE "JsonEntitiesBasic" SET "OwnedCollectionRoot" = @p0
 WHERE "Id" = @p1
 RETURNING 1;
 """,
-                        //
-                        """
+                    //
+                    """
 select OwnedCollectionRoot from JsonEntitiesBasic where Id = 2
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
-""");
+"""
+                );
                 break;
             default:
                 AssertSql(
-        """
+                    """
 @p0='2'
 @p1=NULL (DbType = Int32)
 @p2='NewEntity' (Size = 9)
@@ -2133,15 +2228,15 @@ LIMIT 2
 INSERT INTO "JsonEntitiesBasic" ("Id", "EntityBasicId", "Name")
 VALUES (@p0, @p1, @p2);
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
 """,
-                        //
-                        """
+                    //
+                    """
 @p0='[]' (Nullable = false) (Size = 2)
 @p3='2'
 @p1=NULL (DbType = Int32)
@@ -2151,17 +2246,18 @@ UPDATE "JsonEntitiesBasic" SET "OwnedCollectionRoot" = @p0, "EntityBasicId" = @p
 WHERE "Id" = @p3
 RETURNING 1;
 """,
-                        //
-                        """
+                    //
+                    """
 select OwnedCollectionRoot from JsonEntitiesBasic where Id = 2
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
-""");
+"""
+                );
                 break;
         }
     }
@@ -2174,7 +2270,7 @@ LIMIT 2
         {
             case true:
                 AssertSql(
-        """
+                    """
 @p0='{"Name":null,"Names":null,"Number":0,"Numbers":null,"OwnedCollectionBranch":[{"Date":"0001-01-01 00:00:00","Enum":0,"Enums":null,"Fraction":"0.0","NullableEnum":null,"NullableEnums":null,"OwnedCollectionLeaf":null,"OwnedReferenceLeaf":null}],"OwnedReferenceBranch":null}' (Nullable = false) (Size = 270)
 @p1='2'
 @p2=NULL (DbType = Int32)
@@ -2183,15 +2279,15 @@ LIMIT 2
 INSERT INTO "JsonEntitiesBasic" ("OwnedReferenceRoot", "Id", "EntityBasicId", "Name")
 VALUES (@p0, @p1, @p2, @p3);
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
 """,
-                        //
-                        """
+                    //
+                    """
 @p0=NULL (Nullable = false)
 @p1='2'
 
@@ -2199,17 +2295,18 @@ UPDATE "JsonEntitiesBasic" SET "OwnedReferenceRoot" = json_set("OwnedReferenceRo
 WHERE "Id" = @p1
 RETURNING 1;
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
-""");
+"""
+                );
                 break;
             case false:
                 AssertSql(
-        """
+                    """
 @p0='{"Name":null,"Names":null,"Number":0,"Numbers":null,"OwnedCollectionBranch":[],"OwnedReferenceBranch":null}' (Nullable = false) (Size = 107)
 @p1='2'
 @p2=NULL (DbType = Int32)
@@ -2218,15 +2315,15 @@ LIMIT 2
 INSERT INTO "JsonEntitiesBasic" ("OwnedReferenceRoot", "Id", "EntityBasicId", "Name")
 VALUES (@p0, @p1, @p2, @p3);
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
 """,
-                        //
-                        """
+                    //
+                    """
 @p0='[{"Date":"0001-01-01 00:00:00","Enum":0,"Enums":null,"Fraction":"0.0","NullableEnum":null,"NullableEnums":null,"OwnedCollectionLeaf":null,"OwnedReferenceLeaf":null}]' (Nullable = false) (Size = 165)
 @p1='2'
 
@@ -2234,17 +2331,18 @@ UPDATE "JsonEntitiesBasic" SET "OwnedReferenceRoot" = json_set("OwnedReferenceRo
 WHERE "Id" = @p1
 RETURNING 1;
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
-""");
+"""
+                );
                 break;
             default:
                 AssertSql(
-        """
+                    """
 @p0='{"Name":null,"Names":null,"Number":0,"Numbers":null,"OwnedCollectionBranch":null,"OwnedReferenceBranch":null}' (Nullable = false) (Size = 109)
 @p1='2'
 @p2=NULL (DbType = Int32)
@@ -2253,15 +2351,15 @@ LIMIT 2
 INSERT INTO "JsonEntitiesBasic" ("OwnedReferenceRoot", "Id", "EntityBasicId", "Name")
 VALUES (@p0, @p1, @p2, @p3);
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
 """,
-                        //
-                        """
+                    //
+                    """
 @p0='{"Name":null,"Names":null,"Number":0,"Numbers":null,"OwnedCollectionBranch":[],"OwnedReferenceBranch":null}' (Nullable = false) (Size = 107)
 @p1='2'
 
@@ -2269,13 +2367,14 @@ UPDATE "JsonEntitiesBasic" SET "OwnedReferenceRoot" = @p0
 WHERE "Id" = @p1
 RETURNING 1;
 """,
-                        //
-                        """
+                    //
+                    """
 SELECT "j"."Id", "j"."EntityBasicId", "j"."Name", "j"."OwnedCollectionRoot", "j"."OwnedReferenceRoot"
 FROM "JsonEntitiesBasic" AS "j"
 WHERE "j"."Id" = 2
 LIMIT 2
-""");
+"""
+                );
                 break;
         }
     }
@@ -2288,25 +2387,29 @@ LIMIT 2
         {
             true => "[\"A\"]",
             false => "[]",
-            _ => "null"
+            _ => "null",
         };
 
         string parameterSize = value switch
         {
             true => "1541",
             false => "1538",
-            _ => "1540"
+            _ => "1540",
         };
 
         string updateParameter = value switch
         {
             true => "NULL (Nullable = false)",
             false => "'[\"Z\"]' (Nullable = false) (Size = 5)",
-            _ => "'[]' (Nullable = false) (Size = 2)"
+            _ => "'[]' (Nullable = false) (Size = 2)",
         };
 
         AssertSql(
-            @"@p0='[{""TestBoolean"":false,""TestBooleanCollection"":[],""TestByte"":0,""TestByteCollection"":null,""TestCharacter"":""\u0000"",""TestCharacterCollection"":" + characterCollection + @",""TestDateOnly"":""0001-01-01"",""TestDateOnlyCollection"":[],""TestDateTime"":""0001-01-01 00:00:00"",""TestDateTimeCollection"":[],""TestDateTimeOffset"":""0001-01-01 00:00:00+00:00"",""TestDateTimeOffsetCollection"":[],""TestDecimal"":""0.0"",""TestDecimalCollection"":[],""TestDefaultString"":null,""TestDefaultStringCollection"":[],""TestDouble"":0,""TestDoubleCollection"":[],""TestEnum"":0,""TestEnumCollection"":[],""TestEnumWithIntConverter"":0,""TestEnumWithIntConverterCollection"":[],""TestGuid"":""00000000-0000-0000-0000-000000000000"",""TestGuidCollection"":[],""TestInt16"":0,""TestInt16Collection"":[],""TestInt32"":0,""TestInt32Collection"":[],""TestInt64"":0,""TestInt64Collection"":[],""TestMaxLengthString"":null,""TestMaxLengthStringCollection"":[],""TestNullableEnum"":null,""TestNullableEnumCollection"":[],""TestNullableEnumWithConverterThatHandlesNulls"":null,""TestNullableEnumWithConverterThatHandlesNullsCollection"":[],""TestNullableEnumWithIntConverter"":null,""TestNullableEnumWithIntConverterCollection"":[],""TestNullableInt32"":null,""TestNullableInt32Collection"":[],""TestSignedByte"":0,""TestSignedByteCollection"":[],""TestSingle"":0,""TestSingleCollection"":[],""TestTimeOnly"":""00:00:00.0000000"",""TestTimeOnlyCollection"":[],""TestTimeSpan"":""0:00:00"",""TestTimeSpanCollection"":[],""TestUnsignedInt16"":0,""TestUnsignedInt16Collection"":[],""TestUnsignedInt32"":0,""TestUnsignedInt32Collection"":[],""TestUnsignedInt64"":0,""TestUnsignedInt64Collection"":[]}]' (Nullable = false) (Size = " + parameterSize + @")
+            @"@p0='[{""TestBoolean"":false,""TestBooleanCollection"":[],""TestByte"":0,""TestByteCollection"":null,""TestCharacter"":""\u0000"",""TestCharacterCollection"":"
+                + characterCollection
+                + @",""TestDateOnly"":""0001-01-01"",""TestDateOnlyCollection"":[],""TestDateTime"":""0001-01-01 00:00:00"",""TestDateTimeCollection"":[],""TestDateTimeOffset"":""0001-01-01 00:00:00+00:00"",""TestDateTimeOffsetCollection"":[],""TestDecimal"":""0.0"",""TestDecimalCollection"":[],""TestDefaultString"":null,""TestDefaultStringCollection"":[],""TestDouble"":0,""TestDoubleCollection"":[],""TestEnum"":0,""TestEnumCollection"":[],""TestEnumWithIntConverter"":0,""TestEnumWithIntConverterCollection"":[],""TestGuid"":""00000000-0000-0000-0000-000000000000"",""TestGuidCollection"":[],""TestInt16"":0,""TestInt16Collection"":[],""TestInt32"":0,""TestInt32Collection"":[],""TestInt64"":0,""TestInt64Collection"":[],""TestMaxLengthString"":null,""TestMaxLengthStringCollection"":[],""TestNullableEnum"":null,""TestNullableEnumCollection"":[],""TestNullableEnumWithConverterThatHandlesNulls"":null,""TestNullableEnumWithConverterThatHandlesNullsCollection"":[],""TestNullableEnumWithIntConverter"":null,""TestNullableEnumWithIntConverterCollection"":[],""TestNullableInt32"":null,""TestNullableInt32Collection"":[],""TestSignedByte"":0,""TestSignedByteCollection"":[],""TestSingle"":0,""TestSingleCollection"":[],""TestTimeOnly"":""00:00:00.0000000"",""TestTimeOnlyCollection"":[],""TestTimeSpan"":""0:00:00"",""TestTimeSpanCollection"":[],""TestUnsignedInt16"":0,""TestUnsignedInt16Collection"":[],""TestUnsignedInt32"":0,""TestUnsignedInt32Collection"":[],""TestUnsignedInt64"":0,""TestUnsignedInt64Collection"":[]}]' (Nullable = false) (Size = "
+                + parameterSize
+                + @")
 @p1='7624'
 @p2='[]' (Size = 2)
 @p3=NULL (DbType = Binary)
@@ -2336,33 +2439,35 @@ LIMIT 2
 
 INSERT INTO ""JsonEntitiesAllTypes"" (""Collection"", ""Id"", ""TestBooleanCollection"", ""TestByteCollection"", ""TestCharacterCollection"", ""TestDateTimeCollection"", ""TestDateTimeOffsetCollection"", ""TestDecimalCollection"", ""TestDefaultStringCollection"", ""TestDoubleCollection"", ""TestEnumCollection"", ""TestEnumWithIntConverterCollection"", ""TestGuidCollection"", ""TestInt16Collection"", ""TestInt32Collection"", ""TestInt64Collection"", ""TestMaxLengthStringCollection"", ""TestNullableEnumCollection"", ""TestNullableEnumWithConverterThatHandlesNullsCollection"", ""TestNullableEnumWithIntConverterCollection"", ""TestNullableInt32Collection"", ""TestSignedByteCollection"", ""TestSingleCollection"", ""TestTimeSpanCollection"", ""TestUnsignedInt16Collection"", ""TestUnsignedInt32Collection"", ""TestUnsignedInt64Collection"")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, @p22, @p23, @p24, @p25, @p26);",
-                //
-                """
+            //
+            """
 SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."TestCharacterCollection", "j"."TestDateTimeCollection", "j"."TestDateTimeOffsetCollection", "j"."TestDecimalCollection", "j"."TestDefaultStringCollection", "j"."TestDoubleCollection", "j"."TestEnumCollection", "j"."TestEnumWithIntConverterCollection", "j"."TestGuidCollection", "j"."TestInt16Collection", "j"."TestInt32Collection", "j"."TestInt64Collection", "j"."TestMaxLengthStringCollection", "j"."TestNullableEnumCollection", "j"."TestNullableEnumWithConverterThatHandlesNullsCollection", "j"."TestNullableEnumWithIntConverterCollection", "j"."TestNullableInt32Collection", "j"."TestSignedByteCollection", "j"."TestSingleCollection", "j"."TestTimeSpanCollection", "j"."TestUnsignedInt16Collection", "j"."TestUnsignedInt32Collection", "j"."TestUnsignedInt64Collection", "j"."Collection", "j"."Reference"
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 7624
 LIMIT 2
 """,
-//
+            //
 
-"@p0=" + updateParameter + @"
+            "@p0="
+                + updateParameter
+                + @"
 @p1='7624'
 
 UPDATE ""JsonEntitiesAllTypes"" SET ""Collection"" = json_set(""Collection"", '$[0].TestCharacterCollection', json(@p0))
 WHERE ""Id"" = @p1
 RETURNING 1;",
-                //
-                """
+            //
+            """
 SELECT "j"."Id", "j"."TestBooleanCollection", "j"."TestByteCollection", "j"."TestCharacterCollection", "j"."TestDateTimeCollection", "j"."TestDateTimeOffsetCollection", "j"."TestDecimalCollection", "j"."TestDefaultStringCollection", "j"."TestDoubleCollection", "j"."TestEnumCollection", "j"."TestEnumWithIntConverterCollection", "j"."TestGuidCollection", "j"."TestInt16Collection", "j"."TestInt32Collection", "j"."TestInt64Collection", "j"."TestMaxLengthStringCollection", "j"."TestNullableEnumCollection", "j"."TestNullableEnumWithConverterThatHandlesNullsCollection", "j"."TestNullableEnumWithIntConverterCollection", "j"."TestNullableInt32Collection", "j"."TestSignedByteCollection", "j"."TestSingleCollection", "j"."TestTimeSpanCollection", "j"."TestUnsignedInt16Collection", "j"."TestUnsignedInt32Collection", "j"."TestUnsignedInt64Collection", "j"."Collection", "j"."Reference"
 FROM "JsonEntitiesAllTypes" AS "j"
 WHERE "j"."Id" = 7624
 LIMIT 2
-""");
+"""
+        );
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

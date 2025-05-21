@@ -32,47 +32,81 @@ namespace System.Linq.Expressions.Interpreter
                 Array.Resize(ref types, types.Length - 1);
                 switch (types.Length)
                 {
-                    case 0: return typeof(Action);
+                    case 0:
+                        return typeof(Action);
 
-                    case 1: return typeof(Action<>).MakeGenericType(types);
-                    case 2: return typeof(Action<,>).MakeGenericType(types);
-                    case 3: return typeof(Action<,,>).MakeGenericType(types);
-                    case 4: return typeof(Action<,,,>).MakeGenericType(types);
-                    case 5: return typeof(Action<,,,,>).MakeGenericType(types);
-                    case 6: return typeof(Action<,,,,,>).MakeGenericType(types);
-                    case 7: return typeof(Action<,,,,,,>).MakeGenericType(types);
-                    case 8: return typeof(Action<,,,,,,,>).MakeGenericType(types);
-                    case 9: return typeof(Action<,,,,,,,,>).MakeGenericType(types);
-                    case 10: return typeof(Action<,,,,,,,,,>).MakeGenericType(types);
-                    case 11: return typeof(Action<,,,,,,,,,,>).MakeGenericType(types);
-                    case 12: return typeof(Action<,,,,,,,,,,,>).MakeGenericType(types);
-                    case 13: return typeof(Action<,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 14: return typeof(Action<,,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 15: return typeof(Action<,,,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 16: return typeof(Action<,,,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 1:
+                        return typeof(Action<>).MakeGenericType(types);
+                    case 2:
+                        return typeof(Action<,>).MakeGenericType(types);
+                    case 3:
+                        return typeof(Action<,,>).MakeGenericType(types);
+                    case 4:
+                        return typeof(Action<,,,>).MakeGenericType(types);
+                    case 5:
+                        return typeof(Action<,,,,>).MakeGenericType(types);
+                    case 6:
+                        return typeof(Action<,,,,,>).MakeGenericType(types);
+                    case 7:
+                        return typeof(Action<,,,,,,>).MakeGenericType(types);
+                    case 8:
+                        return typeof(Action<,,,,,,,>).MakeGenericType(types);
+                    case 9:
+                        return typeof(Action<,,,,,,,,>).MakeGenericType(types);
+                    case 10:
+                        return typeof(Action<,,,,,,,,,>).MakeGenericType(types);
+                    case 11:
+                        return typeof(Action<,,,,,,,,,,>).MakeGenericType(types);
+                    case 12:
+                        return typeof(Action<,,,,,,,,,,,>).MakeGenericType(types);
+                    case 13:
+                        return typeof(Action<,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 14:
+                        return typeof(Action<,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 15:
+                        return typeof(Action<,,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 16:
+                        return typeof(Action<,,,,,,,,,,,,,,,>).MakeGenericType(types);
                 }
             }
             else
             {
                 switch (types.Length)
                 {
-                    case 1: return typeof(Func<>).MakeGenericType(types);
-                    case 2: return typeof(Func<,>).MakeGenericType(types);
-                    case 3: return typeof(Func<,,>).MakeGenericType(types);
-                    case 4: return typeof(Func<,,,>).MakeGenericType(types);
-                    case 5: return typeof(Func<,,,,>).MakeGenericType(types);
-                    case 6: return typeof(Func<,,,,,>).MakeGenericType(types);
-                    case 7: return typeof(Func<,,,,,,>).MakeGenericType(types);
-                    case 8: return typeof(Func<,,,,,,,>).MakeGenericType(types);
-                    case 9: return typeof(Func<,,,,,,,,>).MakeGenericType(types);
-                    case 10: return typeof(Func<,,,,,,,,,>).MakeGenericType(types);
-                    case 11: return typeof(Func<,,,,,,,,,,>).MakeGenericType(types);
-                    case 12: return typeof(Func<,,,,,,,,,,,>).MakeGenericType(types);
-                    case 13: return typeof(Func<,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 14: return typeof(Func<,,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 15: return typeof(Func<,,,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 16: return typeof(Func<,,,,,,,,,,,,,,,>).MakeGenericType(types);
-                    case 17: return typeof(Func<,,,,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 1:
+                        return typeof(Func<>).MakeGenericType(types);
+                    case 2:
+                        return typeof(Func<,>).MakeGenericType(types);
+                    case 3:
+                        return typeof(Func<,,>).MakeGenericType(types);
+                    case 4:
+                        return typeof(Func<,,,>).MakeGenericType(types);
+                    case 5:
+                        return typeof(Func<,,,,>).MakeGenericType(types);
+                    case 6:
+                        return typeof(Func<,,,,,>).MakeGenericType(types);
+                    case 7:
+                        return typeof(Func<,,,,,,>).MakeGenericType(types);
+                    case 8:
+                        return typeof(Func<,,,,,,,>).MakeGenericType(types);
+                    case 9:
+                        return typeof(Func<,,,,,,,,>).MakeGenericType(types);
+                    case 10:
+                        return typeof(Func<,,,,,,,,,>).MakeGenericType(types);
+                    case 11:
+                        return typeof(Func<,,,,,,,,,,>).MakeGenericType(types);
+                    case 12:
+                        return typeof(Func<,,,,,,,,,,,>).MakeGenericType(types);
+                    case 13:
+                        return typeof(Func<,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 14:
+                        return typeof(Func<,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 15:
+                        return typeof(Func<,,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 16:
+                        return typeof(Func<,,,,,,,,,,,,,,,>).MakeGenericType(types);
+                    case 17:
+                        return typeof(Func<,,,,,,,,,,,,,,,,>).MakeGenericType(types);
                 }
             }
             throw ContractUtils.Unreachable;
@@ -167,7 +201,8 @@ namespace System.Linq.Expressions.Interpreter
     /// <summary>
     /// A hybrid dictionary which compares based upon object identity.
     /// </summary>
-    internal sealed class HybridReferenceDictionary<TKey, TValue> where TKey : class
+    internal sealed class HybridReferenceDictionary<TKey, TValue>
+        where TKey : class
     {
         private KeyValuePair<TKey, TValue>[]? _keysAndValues;
         private Dictionary<TKey, TValue>? _dict;
@@ -277,7 +312,9 @@ namespace System.Linq.Expressions.Interpreter
                     return res;
                 }
 
-                throw new KeyNotFoundException(SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString()));
+                throw new KeyNotFoundException(
+                    SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString())
+                );
             }
             set
             {

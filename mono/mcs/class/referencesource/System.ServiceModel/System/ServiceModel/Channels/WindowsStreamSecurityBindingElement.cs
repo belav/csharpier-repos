@@ -5,17 +5,17 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
+    using System.ComponentModel;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
-
     using System.Xml;
 
-    public class WindowsStreamSecurityBindingElement : StreamUpgradeBindingElement,
-        ITransportTokenAssertionProvider,
-        IPolicyExportExtension
+    public class WindowsStreamSecurityBindingElement
+        : StreamUpgradeBindingElement,
+            ITransportTokenAssertionProvider,
+            IPolicyExportExtension
     {
         ProtectionLevel protectionLevel;
 
@@ -25,7 +25,9 @@ namespace System.ServiceModel.Channels
             this.protectionLevel = ConnectionOrientedTransportDefaults.ProtectionLevel;
         }
 
-        protected WindowsStreamSecurityBindingElement(WindowsStreamSecurityBindingElement elementToBeCloned)
+        protected WindowsStreamSecurityBindingElement(
+            WindowsStreamSecurityBindingElement elementToBeCloned
+        )
             : base(elementToBeCloned)
         {
             this.protectionLevel = elementToBeCloned.protectionLevel;
@@ -34,10 +36,7 @@ namespace System.ServiceModel.Channels
         [DefaultValue(ConnectionOrientedTransportDefaults.ProtectionLevel)]
         public ProtectionLevel ProtectionLevel
         {
-            get
-            {
-                return this.protectionLevel;
-            }
+            get { return this.protectionLevel; }
             set
             {
                 ProtectionLevelHelper.Validate(value);
@@ -50,7 +49,9 @@ namespace System.ServiceModel.Channels
             return new WindowsStreamSecurityBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -74,7 +75,9 @@ namespace System.ServiceModel.Channels
             return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -98,12 +101,16 @@ namespace System.ServiceModel.Channels
             return context.CanBuildInnerChannelListener<TChannel>();
         }
 
-        public override StreamUpgradeProvider BuildClientStreamUpgradeProvider(BindingContext context)
+        public override StreamUpgradeProvider BuildClientStreamUpgradeProvider(
+            BindingContext context
+        )
         {
             return new WindowsStreamSecurityUpgradeProvider(this, context, true);
         }
 
-        public override StreamUpgradeProvider BuildServerStreamUpgradeProvider(BindingContext context)
+        public override StreamUpgradeProvider BuildServerStreamUpgradeProvider(
+            BindingContext context
+        )
         {
             return new WindowsStreamSecurityUpgradeProvider(this, context, false);
         }
@@ -117,7 +124,15 @@ namespace System.ServiceModel.Channels
 
             if (typeof(T) == typeof(ISecurityCapabilities))
             {
-                return (T)(object)new SecurityCapabilities(true, true, true, protectionLevel, protectionLevel);
+                return (T)
+                    (object)
+                        new SecurityCapabilities(
+                            true,
+                            true,
+                            true,
+                            protectionLevel,
+                            protectionLevel
+                        );
             }
             else if (typeof(T) == typeof(IdentityVerifier))
             {
@@ -129,31 +144,49 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static void ImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        internal static void ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
-            XmlElement assertion = PolicyConversionContext.FindAssertion(policyContext.GetBindingAssertions(),
-                TransportPolicyConstants.WindowsTransportSecurityName, TransportPolicyConstants.DotNetFramingNamespace, true);
+            XmlElement assertion = PolicyConversionContext.FindAssertion(
+                policyContext.GetBindingAssertions(),
+                TransportPolicyConstants.WindowsTransportSecurityName,
+                TransportPolicyConstants.DotNetFramingNamespace,
+                true
+            );
 
             if (assertion != null)
             {
-                WindowsStreamSecurityBindingElement windowsBindingElement
-                    = new WindowsStreamSecurityBindingElement();
+                WindowsStreamSecurityBindingElement windowsBindingElement =
+                    new WindowsStreamSecurityBindingElement();
 
                 XmlReader reader = new XmlNodeReader(assertion);
                 reader.ReadStartElement();
                 string protectionLevelString = null;
-                if (reader.IsStartElement(
-                    TransportPolicyConstants.ProtectionLevelName,
-                    TransportPolicyConstants.DotNetFramingNamespace) && !reader.IsEmptyElement)
+                if (
+                    reader.IsStartElement(
+                        TransportPolicyConstants.ProtectionLevelName,
+                        TransportPolicyConstants.DotNetFramingNamespace
+                    ) && !reader.IsEmptyElement
+                )
                 {
                     protectionLevelString = reader.ReadElementContentAsString();
                 }
                 if (string.IsNullOrEmpty(protectionLevelString))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(
-                        SR.GetString(SR.ExpectedElementMissing, TransportPolicyConstants.ProtectionLevelName, TransportPolicyConstants.DotNetFramingNamespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ExpectedElementMissing,
+                                TransportPolicyConstants.ProtectionLevelName,
+                                TransportPolicyConstants.DotNetFramingNamespace
+                            )
+                        )
+                    );
                 }
-                windowsBindingElement.ProtectionLevel = (ProtectionLevel)Enum.Parse(typeof(ProtectionLevel), protectionLevelString);
+                windowsBindingElement.ProtectionLevel = (ProtectionLevel)
+                    Enum.Parse(typeof(ProtectionLevel), protectionLevelString);
                 policyContext.BindingElements.Add(windowsBindingElement);
             }
         }
@@ -163,20 +196,29 @@ namespace System.ServiceModel.Channels
         public XmlElement GetTransportTokenAssertion()
         {
             XmlDocument document = new XmlDocument();
-            XmlElement assertion =
-                document.CreateElement(TransportPolicyConstants.DotNetFramingPrefix,
+            XmlElement assertion = document.CreateElement(
+                TransportPolicyConstants.DotNetFramingPrefix,
                 TransportPolicyConstants.WindowsTransportSecurityName,
-                TransportPolicyConstants.DotNetFramingNamespace);
-            XmlElement protectionLevelElement = document.CreateElement(TransportPolicyConstants.DotNetFramingPrefix,
-                TransportPolicyConstants.ProtectionLevelName, TransportPolicyConstants.DotNetFramingNamespace);
-            protectionLevelElement.AppendChild(document.CreateTextNode(this.ProtectionLevel.ToString()));
+                TransportPolicyConstants.DotNetFramingNamespace
+            );
+            XmlElement protectionLevelElement = document.CreateElement(
+                TransportPolicyConstants.DotNetFramingPrefix,
+                TransportPolicyConstants.ProtectionLevelName,
+                TransportPolicyConstants.DotNetFramingNamespace
+            );
+            protectionLevelElement.AppendChild(
+                document.CreateTextNode(this.ProtectionLevel.ToString())
+            );
             assertion.AppendChild(protectionLevelElement);
             return assertion;
         }
 
         #endregion
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -187,7 +229,10 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            SecurityBindingElement.ExportPolicyForTransportTokenAssertionProviders(exporter, context);
+            SecurityBindingElement.ExportPolicyForTransportTokenAssertionProviders(
+                exporter,
+                context
+            );
         }
 
         internal override bool IsMatch(BindingElement b)

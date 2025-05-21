@@ -12,7 +12,10 @@ namespace System.Threading
             get
             {
                 _threadAdjustmentLock.VerifyIsLocked();
-                return Math.Min(_separated.counts.NumThreadsGoal, TargetThreadsGoalForBlockingAdjustment);
+                return Math.Min(
+                    _separated.counts.NumThreadsGoal,
+                    TargetThreadsGoalForBlockingAdjustment
+                );
             }
         }
 
@@ -22,16 +25,19 @@ namespace System.Threading
             {
                 _threadAdjustmentLock.VerifyIsLocked();
 
-                return
-                    _numBlockedThreads <= 0
-                        ? _minThreads
-                        : (short)Math.Min((ushort)(_minThreads + _numBlockedThreads), (ushort)_maxThreads);
+                return _numBlockedThreads <= 0
+                    ? _minThreads
+                    : (short)
+                        Math.Min((ushort)(_minThreads + _numBlockedThreads), (ushort)_maxThreads);
             }
         }
 
         public bool NotifyThreadBlocked()
         {
-            if (!BlockingConfig.IsCooperativeBlockingEnabled || !Thread.CurrentThread.IsThreadPoolThread)
+            if (
+                !BlockingConfig.IsCooperativeBlockingEnabled
+                || !Thread.CurrentThread.IsThreadPoolThread
+            )
             {
                 return false;
             }
@@ -43,8 +49,10 @@ namespace System.Threading
                 _numBlockedThreads++;
                 Debug.Assert(_numBlockedThreads > 0);
 
-                if (_pendingBlockingAdjustment != PendingBlockingAdjustment.WithDelayIfNecessary &&
-                    _separated.counts.NumThreadsGoal < TargetThreadsGoalForBlockingAdjustment)
+                if (
+                    _pendingBlockingAdjustment != PendingBlockingAdjustment.WithDelayIfNecessary
+                    && _separated.counts.NumThreadsGoal < TargetThreadsGoalForBlockingAdjustment
+                )
                 {
                     if (_pendingBlockingAdjustment == PendingBlockingAdjustment.None)
                     {
@@ -77,9 +85,11 @@ namespace System.Threading
                 Debug.Assert(_numBlockedThreads > 0);
                 _numBlockedThreads--;
 
-                if (_pendingBlockingAdjustment != PendingBlockingAdjustment.Immediately &&
-                    _numThreadsAddedDueToBlocking > 0 &&
-                    _separated.counts.NumThreadsGoal > TargetThreadsGoalForBlockingAdjustment)
+                if (
+                    _pendingBlockingAdjustment != PendingBlockingAdjustment.Immediately
+                    && _numThreadsAddedDueToBlocking > 0
+                    && _separated.counts.NumThreadsGoal > TargetThreadsGoalForBlockingAdjustment
+                )
                 {
                     wakeGateThread = true;
                     _pendingBlockingAdjustment = PendingBlockingAdjustment.Immediately;
@@ -143,26 +153,38 @@ namespace System.Threading
                     return 0;
                 }
 
-                short toSubtract = Math.Min((short)(numThreadsGoal - targetThreadsGoal), _numThreadsAddedDueToBlocking);
+                short toSubtract = Math.Min(
+                    (short)(numThreadsGoal - targetThreadsGoal),
+                    _numThreadsAddedDueToBlocking
+                );
                 _numThreadsAddedDueToBlocking -= toSubtract;
                 numThreadsGoal -= toSubtract;
                 _separated.counts.InterlockedSetNumThreadsGoal(numThreadsGoal);
                 HillClimbing.ThreadPoolHillClimber.ForceChange(
                     numThreadsGoal,
-                    HillClimbing.StateOrTransition.CooperativeBlocking);
+                    HillClimbing.StateOrTransition.CooperativeBlocking
+                );
                 return 0;
             }
 
-            short configuredMaxThreadsWithoutDelay =
-                (short)Math.Min((ushort)(_minThreads + BlockingConfig.ThreadsToAddWithoutDelay), (ushort)_maxThreads);
+            short configuredMaxThreadsWithoutDelay = (short)
+                Math.Min(
+                    (ushort)(_minThreads + BlockingConfig.ThreadsToAddWithoutDelay),
+                    (ushort)_maxThreads
+                );
 
             do
             {
                 // Calculate how many threads can be added without a delay. Threads that were already created but may be just
                 // waiting for work can be released for work without a delay, but creating a new thread may need a delay.
-                short maxThreadsGoalWithoutDelay =
-                    Math.Max(configuredMaxThreadsWithoutDelay, Math.Min(counts.NumExistingThreads, _maxThreads));
-                short targetThreadsGoalWithoutDelay = Math.Min(targetThreadsGoal, maxThreadsGoalWithoutDelay);
+                short maxThreadsGoalWithoutDelay = Math.Max(
+                    configuredMaxThreadsWithoutDelay,
+                    Math.Min(counts.NumExistingThreads, _maxThreads)
+                );
+                short targetThreadsGoalWithoutDelay = Math.Min(
+                    targetThreadsGoal,
+                    maxThreadsGoalWithoutDelay
+                );
                 short newNumThreadsGoal;
                 if (numThreadsGoal < targetThreadsGoalWithoutDelay)
                 {
@@ -180,7 +202,10 @@ namespace System.Threading
 
                 do
                 {
-                    if (newNumThreadsGoal <= counts.NumExistingThreads || BlockingConfig.IgnoreMemoryUsage)
+                    if (
+                        newNumThreadsGoal <= counts.NumExistingThreads
+                        || BlockingConfig.IgnoreMemoryUsage
+                    )
                     {
                         break;
                     }
@@ -200,8 +225,9 @@ namespace System.Threading
                     // amount of stack space, and gen 2 GCs may not be happening to update the memory usage. Account for a bit
                     // of extra stack space usage in the future for each thread.
                     long memoryUsageBytes =
-                        _memoryUsageBytes +
-                        counts.NumExistingThreads * (long)WorkerThread.EstimatedAdditionalStackUsagePerThreadBytes;
+                        _memoryUsageBytes
+                        + counts.NumExistingThreads
+                            * (long)WorkerThread.EstimatedAdditionalStackUsagePerThreadBytes;
 
                     // The memory limit may already be less than the total amount of physical memory. We are only accounting for
                     // thread pool worker threads above, and after fallback starvation may have to continue creating threads
@@ -215,10 +241,11 @@ namespace System.Threading
 
                     // Determine how many threads can be added without exceeding the memory threshold
                     long achievableNumThreadsGoal =
-                        counts.NumExistingThreads +
-                        (memoryThresholdForFallbackBytes - memoryUsageBytes) /
-                            WorkerThread.EstimatedAdditionalStackUsagePerThreadBytes;
-                    newNumThreadsGoal = (short)Math.Min(newNumThreadsGoal, achievableNumThreadsGoal);
+                        counts.NumExistingThreads
+                        + (memoryThresholdForFallbackBytes - memoryUsageBytes)
+                            / WorkerThread.EstimatedAdditionalStackUsagePerThreadBytes;
+                    newNumThreadsGoal = (short)
+                        Math.Min(newNumThreadsGoal, achievableNumThreadsGoal);
                     if (newNumThreadsGoal <= numThreadsGoal)
                     {
                         return 0;
@@ -229,8 +256,12 @@ namespace System.Threading
                 counts = _separated.counts.InterlockedSetNumThreadsGoal(newNumThreadsGoal);
                 HillClimbing.ThreadPoolHillClimber.ForceChange(
                     newNumThreadsGoal,
-                    HillClimbing.StateOrTransition.CooperativeBlocking);
-                if (counts.NumProcessingWork >= numThreadsGoal && _separated.numRequestedWorkers > 0)
+                    HillClimbing.StateOrTransition.CooperativeBlocking
+                );
+                if (
+                    counts.NumProcessingWork >= numThreadsGoal
+                    && _separated.numRequestedWorkers > 0
+                )
                 {
                     addWorker = true;
                 }
@@ -245,23 +276,34 @@ namespace System.Threading
             // Calculate how much delay to induce before another thread is created. These operations don't overflow because of
             // limits on max thread count and max delays.
             _pendingBlockingAdjustment = PendingBlockingAdjustment.WithDelayIfNecessary;
-            int delayStepCount = 1 + (numThreadsGoal - configuredMaxThreadsWithoutDelay) / BlockingConfig.ThreadsPerDelayStep;
-            return Math.Min((uint)delayStepCount * BlockingConfig.DelayStepMs, BlockingConfig.MaxDelayMs);
+            int delayStepCount =
+                1
+                + (numThreadsGoal - configuredMaxThreadsWithoutDelay)
+                    / BlockingConfig.ThreadsPerDelayStep;
+            return Math.Min(
+                (uint)delayStepCount * BlockingConfig.DelayStepMs,
+                BlockingConfig.MaxDelayMs
+            );
         }
 
         private enum PendingBlockingAdjustment : byte
         {
             None,
             Immediately,
-            WithDelayIfNecessary
+            WithDelayIfNecessary,
         }
 
         private static class BlockingConfig
         {
             public static readonly bool IsCooperativeBlockingEnabled =
-                AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.Blocking.CooperativeBlocking", true);
-            public static readonly bool IgnoreMemoryUsage =
-                AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.Blocking.IgnoreMemoryUsage", false);
+                AppContextConfigHelper.GetBooleanConfig(
+                    "System.Threading.ThreadPool.Blocking.CooperativeBlocking",
+                    true
+                );
+            public static readonly bool IgnoreMemoryUsage = AppContextConfigHelper.GetBooleanConfig(
+                "System.Threading.ThreadPool.Blocking.IgnoreMemoryUsage",
+                false
+            );
 
             public static readonly short ThreadsToAddWithoutDelay;
             public static readonly short ThreadsPerDelayStep;
@@ -289,7 +331,8 @@ namespace System.Threading
                     AppContextConfigHelper.GetInt32Config(
                         "System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor",
                         1,
-                        false);
+                        false
+                    );
 
                 // After the thread count based on ThreadsToAddWithoutDelay is reached, this value (after it is multiplied by
                 // the processor count) specifies after how many threads an additional DelayStepMs would be added to the delay
@@ -298,38 +341,55 @@ namespace System.Threading
                     AppContextConfigHelper.GetInt32Config(
                         "System.Threading.ThreadPool.Blocking.ThreadsPerDelayStep_ProcCountFactor",
                         1,
-                        false);
+                        false
+                    );
 
                 // After the thread count based on ThreadsToAddWithoutDelay is reached, this value specifies how much additional
                 // delay to add per ThreadsPerDelayStep threads, which would be applied before each new thread is created
-                DelayStepMs =
-                    (uint)AppContextConfigHelper.GetInt32Config(
+                DelayStepMs = (uint)
+                    AppContextConfigHelper.GetInt32Config(
                         "System.Threading.ThreadPool.Blocking.DelayStepMs",
                         25,
-                        false);
+                        false
+                    );
 
                 // After the thread count based on ThreadsToAddWithoutDelay is reached, this value specifies the max delay to
                 // use before each new thread is created
-                MaxDelayMs =
-                    (uint)AppContextConfigHelper.GetInt32Config(
+                MaxDelayMs = (uint)
+                    AppContextConfigHelper.GetInt32Config(
                         "System.Threading.ThreadPool.Blocking.MaxDelayMs",
                         250,
-                        false);
+                        false
+                    );
 
                 int processorCount = Environment.ProcessorCount;
-                ThreadsToAddWithoutDelay = (short)(processorCount * blocking_threadsToAddWithoutDelay_procCountFactor);
-                if (ThreadsToAddWithoutDelay > MaxPossibleThreadCount ||
-                    ThreadsToAddWithoutDelay / processorCount != blocking_threadsToAddWithoutDelay_procCountFactor)
+                ThreadsToAddWithoutDelay = (short)(
+                    processorCount * blocking_threadsToAddWithoutDelay_procCountFactor
+                );
+                if (
+                    ThreadsToAddWithoutDelay > MaxPossibleThreadCount
+                    || ThreadsToAddWithoutDelay / processorCount
+                        != blocking_threadsToAddWithoutDelay_procCountFactor
+                )
                 {
                     ThreadsToAddWithoutDelay = MaxPossibleThreadCount;
                 }
 
-                blocking_threadsPerDelayStep_procCountFactor = Math.Max(1, blocking_threadsPerDelayStep_procCountFactor);
-                short maxThreadsPerDelayStep = (short)(MaxPossibleThreadCount - ThreadsToAddWithoutDelay);
-                ThreadsPerDelayStep =
-                    (short)(processorCount * blocking_threadsPerDelayStep_procCountFactor);
-                if (ThreadsPerDelayStep > maxThreadsPerDelayStep ||
-                    ThreadsPerDelayStep / processorCount != blocking_threadsPerDelayStep_procCountFactor)
+                blocking_threadsPerDelayStep_procCountFactor = Math.Max(
+                    1,
+                    blocking_threadsPerDelayStep_procCountFactor
+                );
+                short maxThreadsPerDelayStep = (short)(
+                    MaxPossibleThreadCount - ThreadsToAddWithoutDelay
+                );
+                ThreadsPerDelayStep = (short)(
+                    processorCount * blocking_threadsPerDelayStep_procCountFactor
+                );
+                if (
+                    ThreadsPerDelayStep > maxThreadsPerDelayStep
+                    || ThreadsPerDelayStep / processorCount
+                        != blocking_threadsPerDelayStep_procCountFactor
+                )
                 {
                     ThreadsPerDelayStep = maxThreadsPerDelayStep;
                 }

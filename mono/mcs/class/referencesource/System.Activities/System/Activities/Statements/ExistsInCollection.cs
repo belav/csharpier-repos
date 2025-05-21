@@ -8,45 +8,48 @@ namespace System.Activities.Statements
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Windows.Markup;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.Windows.Markup;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotHaveIncorrectSuffix, Justification = "Optimizing for XAML naming.")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotHaveIncorrectSuffix,
+        Justification = "Optimizing for XAML naming."
+    )]
     [ContentProperty("Collection")]
     public sealed class ExistsInCollection<T> : CodeActivity<bool>
     {
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<ICollection<T>> Collection
-        {
-            get;
-            set;
-        }
+        public InArgument<ICollection<T>> Collection { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<T> Item
-        {
-            get;
-            set;
-        }
+        public InArgument<T> Item { get; set; }
 
         //override to no-op because of performance
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument collectionArgument = new RuntimeArgument("Collection", typeof(ICollection<T>), ArgumentDirection.In, true);
+            RuntimeArgument collectionArgument = new RuntimeArgument(
+                "Collection",
+                typeof(ICollection<T>),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Collection, collectionArgument);
 
-            RuntimeArgument itemArgument = new RuntimeArgument("Item", typeof(T), ArgumentDirection.In, true);
+            RuntimeArgument itemArgument = new RuntimeArgument(
+                "Item",
+                typeof(T),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Item, itemArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    collectionArgument,
-                    itemArgument,
-                });
+                new Collection<RuntimeArgument> { collectionArgument, itemArgument }
+            );
         }
 
         protected override bool Execute(CodeActivityContext context)
@@ -54,10 +57,14 @@ namespace System.Activities.Statements
             ICollection<T> collection = this.Collection.Get(context);
             if (collection == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CollectionActivityRequiresCollection(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.CollectionActivityRequiresCollection(this.DisplayName)
+                    )
+                );
             }
             T item = this.Item.Get(context);
-            
+
             return collection.Contains(item);
         }
     }

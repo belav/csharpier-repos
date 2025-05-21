@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Infrastructure;
 
 public class DefaultTempDataSerializerTest : TempDataSerializerTestBase
 {
-    protected override TempDataSerializer GetTempDataSerializer() => new DefaultTempDataSerializer();
+    protected override TempDataSerializer GetTempDataSerializer() =>
+        new DefaultTempDataSerializer();
 
     [Fact]
     public void RoundTripTest_NonStandardDateTimeStringFormat_RoundTripsAsString()
@@ -17,10 +18,7 @@ public class DefaultTempDataSerializerTest : TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = new DateTime(2009, 1, 1, 12, 37, 43);
-        var input = new Dictionary<string, object>
-            {
-                { key, value.ToString("r") }
-            };
+        var input = new Dictionary<string, object> { { key, value.ToString("r") } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -37,18 +35,14 @@ public class DefaultTempDataSerializerTest : TempDataSerializerTestBase
         // Arrange
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
-        var value = new Dictionary<string, int>
-            {
-                { "Key1", 7 },
-                { "Key2", 24 },
-            };
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var value = new Dictionary<string, int> { { "Key1", 7 }, { "Key2", 24 } };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => testProvider.Serialize(input));
-        Assert.Equal($"The '{testProvider.GetType()}' cannot serialize an object of type '{value.GetType()}'.", ex.Message);
+        Assert.Equal(
+            $"The '{testProvider.GetType()}' cannot serialize an object of type '{value.GetType()}'.",
+            ex.Message
+        );
     }
 }

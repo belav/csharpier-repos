@@ -21,9 +21,8 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class MvcAnalyzer : DiagnosticAnalyzer
 {
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(
-        DiagnosticDescriptors.AmbiguousActionRoute
-    );
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+        ImmutableArray.Create(DiagnosticDescriptors.AmbiguousActionRoute);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -38,68 +37,116 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
 
             var concurrentQueue = new ConcurrentQueue<List<ActionRoute>>();
 
-            context.RegisterSymbolAction(context =>
-            {
-                var namedTypeSymbol = (INamedTypeSymbol)context.Symbol;
-                if (MvcDetector.IsController(namedTypeSymbol, wellKnownTypes))
+            context.RegisterSymbolAction(
+                context =>
                 {
-                    // Pool and reuse lists for each block.
-                    if (!concurrentQueue.TryDequeue(out var actionRoutes))
+                    var namedTypeSymbol = (INamedTypeSymbol)context.Symbol;
+                    if (MvcDetector.IsController(namedTypeSymbol, wellKnownTypes))
                     {
-                        actionRoutes = new List<ActionRoute>();
-                    }
-
-                    RoutePatternTree? controllerRoutePattern = null;
-                    var controllerRouteAttribute = namedTypeSymbol.GetAttributes(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_RouteAttribute), inherit: true).FirstOrDefault();
-                    if (controllerRouteAttribute != null)
-                    {
-                        var routeUsage = GetRouteUsageModel(controllerRouteAttribute, routeUsageCache, context.CancellationToken);
-                        if (routeUsage != null)
+                        // Pool and reuse lists for each block.
+                        if (!concurrentQueue.TryDequeue(out var actionRoutes))
                         {
-                            controllerRoutePattern = routeUsage.RoutePattern;
+                            actionRoutes = new List<ActionRoute>();
                         }
+
+                        RoutePatternTree? controllerRoutePattern = null;
+                        var controllerRouteAttribute = namedTypeSymbol
+                            .GetAttributes(
+                                wellKnownTypes.Get(
+                                    WellKnownType.Microsoft_AspNetCore_Mvc_RouteAttribute
+                                ),
+                                inherit: true
+                            )
+                            .FirstOrDefault();
+                        if (controllerRouteAttribute != null)
+                        {
+                            var routeUsage = GetRouteUsageModel(
+                                controllerRouteAttribute,
+                                routeUsageCache,
+                                context.CancellationToken
+                            );
+                            if (routeUsage != null)
+                            {
+                                controllerRoutePattern = routeUsage.RoutePattern;
+                            }
+                        }
+
+                        PopulateActionRoutes(
+                            context,
+                            wellKnownTypes,
+                            routeUsageCache,
+                            namedTypeSymbol,
+                            actionRoutes
+                        );
+
+                        DetectAmbiguousActionRoutes(
+                            context,
+                            wellKnownTypes,
+                            controllerRoutePattern,
+                            actionRoutes
+                        );
+
+                        // Return to the pool.
+                        actionRoutes.Clear();
+                        concurrentQueue.Enqueue(actionRoutes);
                     }
-
-                    PopulateActionRoutes(context, wellKnownTypes, routeUsageCache, namedTypeSymbol, actionRoutes);
-
-                    DetectAmbiguousActionRoutes(context, wellKnownTypes, controllerRoutePattern, actionRoutes);
-
-                    // Return to the pool.
-                    actionRoutes.Clear();
-                    concurrentQueue.Enqueue(actionRoutes);
-                }
-            }, SymbolKind.NamedType);
+                },
+                SymbolKind.NamedType
+            );
         });
     }
 
-    private static void PopulateActionRoutes(SymbolAnalysisContext context, WellKnownTypes wellKnownTypes, RouteUsageCache routeUsageCache, INamedTypeSymbol namedTypeSymbol, List<ActionRoute> actionRoutes)
+    private static void PopulateActionRoutes(
+        SymbolAnalysisContext context,
+        WellKnownTypes wellKnownTypes,
+        RouteUsageCache routeUsageCache,
+        INamedTypeSymbol namedTypeSymbol,
+        List<ActionRoute> actionRoutes
+    )
     {
         foreach (var member in namedTypeSymbol.GetMembers())
         {
-            if (member is IMethodSymbol methodSymbol &&
-                MvcDetector.IsAction(methodSymbol, wellKnownTypes))
+            if (
+                member is IMethodSymbol methodSymbol
+                && MvcDetector.IsAction(methodSymbol, wellKnownTypes)
+            )
             {
                 // [Route("xxx")] attributes don't have a HTTP method and instead use the HTTP methods of other attributes.
                 // For example, [HttpGet] + [HttpPost] + [Route("xxx")] means the route "xxx" is combined with the HTTP methods.
-                var unroutedHttpMethods = GetUnroutedMethodHttpMethods(wellKnownTypes, methodSymbol);
+                var unroutedHttpMethods = GetUnroutedMethodHttpMethods(
+                    wellKnownTypes,
+                    methodSymbol
+                );
 
                 foreach (var attribute in methodSymbol.GetAttributes())
                 {
-                    if (attribute.AttributeClass is null || !wellKnownTypes.IsType(attribute.AttributeClass, RouteAttributeTypes, out var match))
+                    if (
+                        attribute.AttributeClass is null
+                        || !wellKnownTypes.IsType(
+                            attribute.AttributeClass,
+                            RouteAttributeTypes,
+                            out var match
+                        )
+                    )
                     {
                         continue;
                     }
 
-                    var routeUsage = GetRouteUsageModel(attribute, routeUsageCache, context.CancellationToken);
+                    var routeUsage = GetRouteUsageModel(
+                        attribute,
+                        routeUsageCache,
+                        context.CancellationToken
+                    );
                     if (routeUsage is null)
                     {
                         continue;
                     }
 
                     // [Route] uses unrouted HTTP verb attributes for its HTTP methods.
-                    var methods = match.Value is WellKnownType.Microsoft_AspNetCore_Mvc_RouteAttribute
-                        ? unroutedHttpMethods
-                        : ImmutableArray.Create(GetHttpMethod(match.Value)!);
+                    var methods =
+                        match.Value is WellKnownType.Microsoft_AspNetCore_Mvc_RouteAttribute
+                            ? unroutedHttpMethods
+                            : ImmutableArray.Create(GetHttpMethod(match.Value)!);
 
                     actionRoutes.Add(new ActionRoute(methodSymbol, routeUsage, methods));
                 }
@@ -107,12 +154,22 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
         }
     }
 
-    private static ImmutableArray<string> GetUnroutedMethodHttpMethods(WellKnownTypes wellKnownTypes, IMethodSymbol methodSymbol)
+    private static ImmutableArray<string> GetUnroutedMethodHttpMethods(
+        WellKnownTypes wellKnownTypes,
+        IMethodSymbol methodSymbol
+    )
     {
         var httpMethodsBuilder = ImmutableArray.CreateBuilder<string>();
         foreach (var attribute in methodSymbol.GetAttributes())
         {
-            if (attribute.AttributeClass is null || !wellKnownTypes.IsType(attribute.AttributeClass, RouteAttributeTypes, out var match))
+            if (
+                attribute.AttributeClass is null
+                || !wellKnownTypes.IsType(
+                    attribute.AttributeClass,
+                    RouteAttributeTypes,
+                    out var match
+                )
+            )
             {
                 continue;
             }
@@ -134,7 +191,7 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
     {
         return match switch
         {
-            WellKnownType.Microsoft_AspNetCore_Mvc_RouteAttribute => null,// No HTTP method.
+            WellKnownType.Microsoft_AspNetCore_Mvc_RouteAttribute => null, // No HTTP method.
             WellKnownType.Microsoft_AspNetCore_Mvc_HttpDeleteAttribute => "DELETE",
             WellKnownType.Microsoft_AspNetCore_Mvc_HttpGetAttribute => "GET",
             WellKnownType.Microsoft_AspNetCore_Mvc_HttpHeadAttribute => "HEAD",
@@ -155,18 +212,25 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
         WellKnownType.Microsoft_AspNetCore_Mvc_HttpOptionsAttribute,
         WellKnownType.Microsoft_AspNetCore_Mvc_HttpPatchAttribute,
         WellKnownType.Microsoft_AspNetCore_Mvc_HttpPostAttribute,
-        WellKnownType.Microsoft_AspNetCore_Mvc_HttpPutAttribute
+        WellKnownType.Microsoft_AspNetCore_Mvc_HttpPutAttribute,
     };
 
-    private static RouteUsageModel? GetRouteUsageModel(AttributeData attribute, RouteUsageCache routeUsageCache, CancellationToken cancellationToken)
+    private static RouteUsageModel? GetRouteUsageModel(
+        AttributeData attribute,
+        RouteUsageCache routeUsageCache,
+        CancellationToken cancellationToken
+    )
     {
         if (attribute.ConstructorArguments.IsEmpty || attribute.ApplicationSyntaxReference is null)
         {
             return null;
         }
 
-        if (attribute.ApplicationSyntaxReference.GetSyntax(cancellationToken) is AttributeSyntax attributeSyntax &&
-            attributeSyntax.ArgumentList is { } argumentList)
+        if (
+            attribute.ApplicationSyntaxReference.GetSyntax(cancellationToken)
+                is AttributeSyntax attributeSyntax
+            && attributeSyntax.ArgumentList is { } argumentList
+        )
         {
             var attributeArgument = argumentList.Arguments[0];
             if (attributeArgument.Expression is LiteralExpressionSyntax literalExpression)
@@ -178,5 +242,9 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
         return null;
     }
 
-    private record struct ActionRoute(IMethodSymbol ActionSymbol, RouteUsageModel RouteUsageModel, ImmutableArray<string> HttpMethods);
+    private record struct ActionRoute(
+        IMethodSymbol ActionSymbol,
+        RouteUsageModel RouteUsageModel,
+        ImmutableArray<string> HttpMethods
+    );
 }

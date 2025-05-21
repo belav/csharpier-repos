@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,50 +30,71 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Web.Hosting;
-
+using NUnit.Framework;
 using StandAloneRunnerSupport;
 using StandAloneTests;
 
-using NUnit.Framework;
-
 namespace StandAloneTests.SiteMapDuplicateEntries_Bug570194
 {
-	[TestCase ("SiteMapDuplicateEntries_Bug570194", "Tests for duplicate entries returned by a custom site map provider.")]
-	public sealed class SiteMapDuplicateEntries_Bug570194 : ITestCase
-	{
-		public string PhysicalPath {
-			get { return Path.Combine (Consts.BasePhysicalDir, "SiteMapDuplicateEntries_Bug570194"); }
-		}
-		
-		public string VirtualPath  {
-			get { return "/"; }
-		}
+    [TestCase(
+        "SiteMapDuplicateEntries_Bug570194",
+        "Tests for duplicate entries returned by a custom site map provider."
+    )]
+    public sealed class SiteMapDuplicateEntries_Bug570194 : ITestCase
+    {
+        public string PhysicalPath
+        {
+            get
+            {
+                return Path.Combine(Consts.BasePhysicalDir, "SiteMapDuplicateEntries_Bug570194");
+            }
+        }
 
-		public bool SetUp (List <TestRunItem> runItems)
-		{
-			runItems.Add (new TestRunItem ("/Default.aspx", Default_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?mode=foo", Default_Foo_Aspx));
-			runItems.Add (new TestRunItem ("/Default.aspx?mode=bar", Default_Bar_Aspx));
-			
-			return true;
-		}
+        public string VirtualPath
+        {
+            get { return "/"; }
+        }
 
-		void Default_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<span><a href=\"#ctl03_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><a id=\"ctl03_SkipLink\"></a></span>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
+        public bool SetUp(List<TestRunItem> runItems)
+        {
+            runItems.Add(new TestRunItem("/Default.aspx", Default_Aspx));
+            runItems.Add(new TestRunItem("/Default.aspx?mode=foo", Default_Foo_Aspx));
+            runItems.Add(new TestRunItem("/Default.aspx?mode=bar", Default_Bar_Aspx));
 
-		void Default_Foo_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<span><a href=\"#ctl03_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=foo\">Foo</a></span><a id=\"ctl03_SkipLink\"></a></span>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
+            return true;
+        }
 
-		void Default_Bar_Aspx (string result, TestRunItem runItem)
-		{
-			string originalHtml = "<span><a href=\"#ctl03_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=bar\">Bar</a></span><a id=\"ctl03_SkipLink\"></a></span>";
-			Helpers.ExtractAndCompareCodeFromHtml (Helpers.StripWebResourceAxdQuery (result), originalHtml, "#A1");
-		}
-	}
+        void Default_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                "<span><a href=\"#ctl03_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><a id=\"ctl03_SkipLink\"></a></span>";
+            Helpers.ExtractAndCompareCodeFromHtml(
+                Helpers.StripWebResourceAxdQuery(result),
+                originalHtml,
+                "#A1"
+            );
+        }
+
+        void Default_Foo_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                "<span><a href=\"#ctl03_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=foo\">Foo</a></span><a id=\"ctl03_SkipLink\"></a></span>";
+            Helpers.ExtractAndCompareCodeFromHtml(
+                Helpers.StripWebResourceAxdQuery(result),
+                originalHtml,
+                "#A1"
+            );
+        }
+
+        void Default_Bar_Aspx(string result, TestRunItem runItem)
+        {
+            string originalHtml =
+                "<span><a href=\"#ctl03_SkipLink\"><img alt=\"Skip Navigation Links\" height=\"0\" width=\"0\" src=\"/WebResource.axd\" style=\"border-width:0px;\" /></a><span><a href=\"/Default.aspx\">Main</a></span><span> &gt; </span><span><a href=\"/Default.aspx?mode=bar\">Bar</a></span><a id=\"ctl03_SkipLink\"></a></span>";
+            Helpers.ExtractAndCompareCodeFromHtml(
+                Helpers.StripWebResourceAxdQuery(result),
+                originalHtml,
+                "#A1"
+            );
+        }
+    }
 }

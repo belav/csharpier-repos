@@ -149,10 +149,26 @@
       <Type Name="UriTemplateTable" Kind="Class" />
     </Namespace>
     <Namespace Name="System.Collections.Generic">
-      <Type Name="KeyedByTypeCollection`1" DisplayName="KeyedByTypeCollection&lt;TItem&gt;" Kind="Class" />
-      <Type Name="SynchronizedCollection`1" DisplayName="SynchronizedCollection&lt;T&gt;" Kind="Class" />
-      <Type Name="SynchronizedKeyedCollection`2" DisplayName="SynchronizedKeyedCollection&lt;K,T&gt;" Kind="Class" />
-      <Type Name="SynchronizedReadOnlyCollection`1" DisplayName="SynchronizedReadOnlyCollection&lt;T&gt;" Kind="Class" />
+      <Type
+        Name="KeyedByTypeCollection`1"
+        DisplayName="KeyedByTypeCollection&lt;TItem&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="SynchronizedCollection`1"
+        DisplayName="SynchronizedCollection&lt;T&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="SynchronizedKeyedCollection`2"
+        DisplayName="SynchronizedKeyedCollection&lt;K,T&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="SynchronizedReadOnlyCollection`1"
+        DisplayName="SynchronizedReadOnlyCollection&lt;T&gt;"
+        Kind="Class"
+      />
     </Namespace>
     <Namespace Name="System.IO">
       <Type Name="PipeException" Kind="Class" />
@@ -177,10 +193,26 @@
       <Type Name="ChannelFactory`1" DisplayName="ChannelFactory&lt;TChannel&gt;" Kind="Class" />
       <Type Name="ChannelTerminatedException" Kind="Class" />
       <Type Name="ClientBase`1" DisplayName="ClientBase&lt;TChannel&gt;" Kind="Class" />
-      <Type Name="ClientBase`1+BeginOperationDelegate" DisplayName="ClientBase&lt;TChannel&gt;+BeginOperationDelegate" Kind="Delegate" />
-      <Type Name="ClientBase`1+ChannelBase`1" DisplayName="ClientBase&lt;TChannel&gt;+ChannelBase&lt;T&gt;" Kind="Class" />
-      <Type Name="ClientBase`1+EndOperationDelegate" DisplayName="ClientBase&lt;TChannel&gt;+EndOperationDelegate" Kind="Delegate" />
-      <Type Name="ClientBase`1+InvokeAsyncCompletedEventArgs" DisplayName="ClientBase&lt;TChannel&gt;+InvokeAsyncCompletedEventArgs" Kind="Class" />
+      <Type
+        Name="ClientBase`1+BeginOperationDelegate"
+        DisplayName="ClientBase&lt;TChannel&gt;+BeginOperationDelegate"
+        Kind="Delegate"
+      />
+      <Type
+        Name="ClientBase`1+ChannelBase`1"
+        DisplayName="ClientBase&lt;TChannel&gt;+ChannelBase&lt;T&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="ClientBase`1+EndOperationDelegate"
+        DisplayName="ClientBase&lt;TChannel&gt;+EndOperationDelegate"
+        Kind="Delegate"
+      />
+      <Type
+        Name="ClientBase`1+InvokeAsyncCompletedEventArgs"
+        DisplayName="ClientBase&lt;TChannel&gt;+InvokeAsyncCompletedEventArgs"
+        Kind="Class"
+      />
       <Type Name="ClientCredentialsSecurityTokenManager" Kind="Class" />
       <Type Name="CommunicationException" Kind="Class" />
       <Type Name="CommunicationObjectAbortedException" Kind="Class" />
@@ -191,7 +223,11 @@
       <Type Name="DeadLetterQueue" Kind="Enumeration" />
       <Type Name="DeliveryRequirementsAttribute" Kind="Class" />
       <Type Name="DnsEndpointIdentity" Kind="Class" />
-      <Type Name="DuplexChannelFactory`1" DisplayName="DuplexChannelFactory&lt;TChannel&gt;" Kind="Class" />
+      <Type
+        Name="DuplexChannelFactory`1"
+        DisplayName="DuplexChannelFactory&lt;TChannel&gt;"
+        Kind="Class"
+      />
       <Type Name="DuplexClientBase`1" DisplayName="DuplexClientBase&lt;TChannel&gt;" Kind="Class" />
       <Type Name="EndpointAddress" Kind="Class" />
       <Type Name="EndpointAddress10" Kind="Class" />
@@ -221,7 +257,11 @@
       <Type Name="IDuplexContextChannel" Kind="Interface" />
       <Type Name="IExtensibleObject`1" DisplayName="IExtensibleObject&lt;T&gt;" Kind="Interface" />
       <Type Name="IExtension`1" DisplayName="IExtension&lt;T&gt;" Kind="Interface" />
-      <Type Name="IExtensionCollection`1" DisplayName="IExtensionCollection&lt;T&gt;" Kind="Interface" />
+      <Type
+        Name="IExtensionCollection`1"
+        DisplayName="IExtensionCollection&lt;T&gt;"
+        Kind="Interface"
+      />
       <Type Name="ImpersonationOption" Kind="Enumeration" />
       <Type Name="InstanceContext" Kind="Class" />
       <Type Name="InstanceContextMode" Kind="Enumeration" />
@@ -350,9 +390,17 @@
       <Type Name="BufferManager" Kind="Class" />
       <Type Name="ChannelBase" Kind="Class" />
       <Type Name="ChannelFactoryBase" Kind="Class" />
-      <Type Name="ChannelFactoryBase`1" DisplayName="ChannelFactoryBase&lt;TChannel&gt;" Kind="Class" />
+      <Type
+        Name="ChannelFactoryBase`1"
+        DisplayName="ChannelFactoryBase&lt;TChannel&gt;"
+        Kind="Class"
+      />
       <Type Name="ChannelListenerBase" Kind="Class" />
-      <Type Name="ChannelListenerBase`1" DisplayName="ChannelListenerBase&lt;TChannel&gt;" Kind="Class" />
+      <Type
+        Name="ChannelListenerBase`1"
+        DisplayName="ChannelListenerBase&lt;TChannel&gt;"
+        Kind="Class"
+      />
       <Type Name="ChannelManagerBase" Kind="Class" />
       <Type Name="ChannelParameterCollection" Kind="Class" />
       <Type Name="ChannelPoolSettings" Kind="Class" />
@@ -375,9 +423,17 @@
       <Type Name="IBindingRuntimePreferences" Kind="Interface" />
       <Type Name="IChannel" Kind="Interface" />
       <Type Name="IChannelFactory" Kind="Interface" />
-      <Type Name="IChannelFactory`1" DisplayName="IChannelFactory&lt;TChannel&gt;" Kind="Interface" />
+      <Type
+        Name="IChannelFactory`1"
+        DisplayName="IChannelFactory&lt;TChannel&gt;"
+        Kind="Interface"
+      />
       <Type Name="IChannelListener" Kind="Interface" />
-      <Type Name="IChannelListener`1" DisplayName="IChannelListener&lt;TChannel&gt;" Kind="Interface" />
+      <Type
+        Name="IChannelListener`1"
+        DisplayName="IChannelListener&lt;TChannel&gt;"
+        Kind="Interface"
+      />
       <Type Name="IDuplexChannel" Kind="Interface" />
       <Type Name="IDuplexSession" Kind="Interface" />
       <Type Name="IDuplexSessionChannel" Kind="Interface" />
@@ -396,7 +452,11 @@
       <Type Name="IRequestSessionChannel" Kind="Interface" />
       <Type Name="ISecurityCapabilities" Kind="Interface" />
       <Type Name="ISession" Kind="Interface" />
-      <Type Name="ISessionChannel`1" DisplayName="ISessionChannel&lt;TSession&gt;" Kind="Interface" />
+      <Type
+        Name="ISessionChannel`1"
+        DisplayName="ISessionChannel&lt;TSession&gt;"
+        Kind="Interface"
+      />
       <Type Name="ITransactedBindingElement" Kind="Interface" />
       <Type Name="ITransportTokenAssertionProvider" Kind="Interface" />
       <Type Name="LocalClientSecuritySettings" Kind="Class" />
@@ -558,8 +618,16 @@
       <Type Name="MessageSecurityOverMsmqElement" Kind="Class" />
       <Type Name="MessageSecurityOverTcpElement" Kind="Class" />
       <Type Name="MetadataElement" Kind="Class" />
-      <Type Name="MexBindingBindingCollectionElement`2" DisplayName="MexBindingBindingCollectionElement&lt;TStandardBinding,TBindingConfiguration&gt;" Kind="Class" />
-      <Type Name="MexBindingElement`1" DisplayName="MexBindingElement&lt;TStandardBinding&gt;" Kind="Class" />
+      <Type
+        Name="MexBindingBindingCollectionElement`2"
+        DisplayName="MexBindingBindingCollectionElement&lt;TStandardBinding,TBindingConfiguration&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="MexBindingElement`1"
+        DisplayName="MexBindingElement&lt;TStandardBinding&gt;"
+        Kind="Class"
+      />
       <Type Name="MexHttpBindingCollectionElement" Kind="Class" />
       <Type Name="MexHttpBindingElement" Kind="Class" />
       <Type Name="MexHttpsBindingCollectionElement" Kind="Class" />
@@ -580,7 +648,11 @@
       <Type Name="NamedPipeConnectionPoolSettingsElement" Kind="Class" />
       <Type Name="NamedPipeTransportElement" Kind="Class" />
       <Type Name="NamedPipeTransportSecurityElement" Kind="Class" />
-      <Type Name="NamedServiceModelExtensionCollectionElement`1" DisplayName="NamedServiceModelExtensionCollectionElement&lt;TServiceModelExtensionElement&gt;" Kind="Class" />
+      <Type
+        Name="NamedServiceModelExtensionCollectionElement`1"
+        DisplayName="NamedServiceModelExtensionCollectionElement&lt;TServiceModelExtensionElement&gt;"
+        Kind="Class"
+      />
       <Type Name="NetMsmqBindingCollectionElement" Kind="Class" />
       <Type Name="NetMsmqBindingElement" Kind="Class" />
       <Type Name="NetMsmqSecurityElement" Kind="Class" />
@@ -625,9 +697,21 @@
       <Type Name="ServiceMetadataEndpointCollectionElement" Kind="Class" />
       <Type Name="ServiceMetadataEndpointElement" Kind="Class" />
       <Type Name="ServiceMetadataPublishingElement" Kind="Class" />
-      <Type Name="ServiceModelConfigurationElementCollection`1" DisplayName="ServiceModelConfigurationElementCollection&lt;ConfigurationElementType&gt;" Kind="Class" />
-      <Type Name="ServiceModelEnhancedConfigurationElementCollection`1" DisplayName="ServiceModelEnhancedConfigurationElementCollection&lt;TConfigurationElement&gt;" Kind="Class" />
-      <Type Name="ServiceModelExtensionCollectionElement`1" DisplayName="ServiceModelExtensionCollectionElement&lt;TServiceModelExtensionElement&gt;" Kind="Class" />
+      <Type
+        Name="ServiceModelConfigurationElementCollection`1"
+        DisplayName="ServiceModelConfigurationElementCollection&lt;ConfigurationElementType&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="ServiceModelEnhancedConfigurationElementCollection`1"
+        DisplayName="ServiceModelEnhancedConfigurationElementCollection&lt;TConfigurationElement&gt;"
+        Kind="Class"
+      />
+      <Type
+        Name="ServiceModelExtensionCollectionElement`1"
+        DisplayName="ServiceModelExtensionCollectionElement&lt;TServiceModelExtensionElement&gt;"
+        Kind="Class"
+      />
       <Type Name="ServiceModelExtensionElement" Kind="Class" />
       <Type Name="ServiceModelSectionGroup" Kind="Class" />
       <Type Name="ServicePrincipalNameElement" Kind="Class" />
@@ -636,14 +720,30 @@
       <Type Name="ServiceThrottlingElement" Kind="Class" />
       <Type Name="ServiceTimeoutsElement" Kind="Class" />
       <Type Name="SslStreamSecurityElement" Kind="Class" />
-      <Type Name="StandardBindingCollectionElement`2" DisplayName="StandardBindingCollectionElement&lt;TStandardBinding,TBindingConfiguration&gt;" Kind="Class" />
+      <Type
+        Name="StandardBindingCollectionElement`2"
+        DisplayName="StandardBindingCollectionElement&lt;TStandardBinding,TBindingConfiguration&gt;"
+        Kind="Class"
+      />
       <Type Name="StandardBindingElement" Kind="Class" />
-      <Type Name="StandardBindingElementCollection`1" DisplayName="StandardBindingElementCollection&lt;TBindingConfiguration&gt;" Kind="Class" />
+      <Type
+        Name="StandardBindingElementCollection`1"
+        DisplayName="StandardBindingElementCollection&lt;TBindingConfiguration&gt;"
+        Kind="Class"
+      />
       <Type Name="StandardBindingOptionalReliableSessionElement" Kind="Class" />
       <Type Name="StandardBindingReliableSessionElement" Kind="Class" />
-      <Type Name="StandardEndpointCollectionElement`2" DisplayName="StandardEndpointCollectionElement&lt;TStandardEndpoint,TEndpointConfiguration&gt;" Kind="Class" />
+      <Type
+        Name="StandardEndpointCollectionElement`2"
+        DisplayName="StandardEndpointCollectionElement&lt;TStandardEndpoint,TEndpointConfiguration&gt;"
+        Kind="Class"
+      />
       <Type Name="StandardEndpointElement" Kind="Class" />
-      <Type Name="StandardEndpointElementCollection`1" DisplayName="StandardEndpointElementCollection&lt;TEndpointConfiguration&gt;" Kind="Class" />
+      <Type
+        Name="StandardEndpointElementCollection`1"
+        DisplayName="StandardEndpointElementCollection&lt;TEndpointConfiguration&gt;"
+        Kind="Class"
+      />
       <Type Name="StandardEndpointsSection" Kind="Class" />
       <Type Name="SynchronousReceiveElement" Kind="Class" />
       <Type Name="TcpConnectionPoolSettingsElement" Kind="Class" />
@@ -804,7 +904,11 @@
       <Type Name="IInstanceContextProvider" Kind="Interface" />
       <Type Name="IInstanceProvider" Kind="Interface" />
       <Type Name="IInteractiveChannelInitializer" Kind="Interface" />
-      <Type Name="IMessageFilterTable`1" DisplayName="IMessageFilterTable&lt;TFilterData&gt;" Kind="Interface" />
+      <Type
+        Name="IMessageFilterTable`1"
+        DisplayName="IMessageFilterTable&lt;TFilterData&gt;"
+        Kind="Interface"
+      />
       <Type Name="InstanceContextIdleCallback" Kind="Delegate" />
       <Type Name="InvalidBodyAccessException" Kind="Class" />
       <Type Name="IOperationInvoker" Kind="Interface" />
@@ -813,7 +917,11 @@
       <Type Name="MatchNoneMessageFilter" Kind="Class" />
       <Type Name="MessageFilter" Kind="Class" />
       <Type Name="MessageFilterException" Kind="Class" />
-      <Type Name="MessageFilterTable`1" DisplayName="MessageFilterTable&lt;TFilterData&gt;" Kind="Class" />
+      <Type
+        Name="MessageFilterTable`1"
+        DisplayName="MessageFilterTable&lt;TFilterData&gt;"
+        Kind="Class"
+      />
       <Type Name="MultipleFilterMatchesException" Kind="Class" />
       <Type Name="NavigatorInvalidBodyAccessException" Kind="Class" />
       <Type Name="PrefixEndpointAddressMessageFilter" Kind="Class" />
@@ -821,7 +929,11 @@
       <Type Name="ServiceThrottle" Kind="Class" />
       <Type Name="XPathMessageContext" Kind="Class" />
       <Type Name="XPathMessageFilter" Kind="Class" />
-      <Type Name="XPathMessageFilterTable`1" DisplayName="XPathMessageFilterTable&lt;TFilterData&gt;" Kind="Class" />
+      <Type
+        Name="XPathMessageFilterTable`1"
+        DisplayName="XPathMessageFilterTable&lt;TFilterData&gt;"
+        Kind="Class"
+      />
       <Type Name="XPathNavigatorException" Kind="Class" />
     </Namespace>
     <Namespace Name="System.ServiceModel.MsmqIntegration">
@@ -937,21 +1049,41 @@
     </Namespace>
     <Namespace Name="System.ServiceModel.Syndication">
       <Type Name="Atom10FeedFormatter" Kind="Class" />
-      <Type Name="Atom10FeedFormatter`1" DisplayName="Atom10FeedFormatter&lt;TSyndicationFeed&gt;" Kind="Class" />
+      <Type
+        Name="Atom10FeedFormatter`1"
+        DisplayName="Atom10FeedFormatter&lt;TSyndicationFeed&gt;"
+        Kind="Class"
+      />
       <Type Name="Atom10ItemFormatter" Kind="Class" />
-      <Type Name="Atom10ItemFormatter`1" DisplayName="Atom10ItemFormatter&lt;TSyndicationItem&gt;" Kind="Class" />
+      <Type
+        Name="Atom10ItemFormatter`1"
+        DisplayName="Atom10ItemFormatter&lt;TSyndicationItem&gt;"
+        Kind="Class"
+      />
       <Type Name="AtomPub10CategoriesDocumentFormatter" Kind="Class" />
       <Type Name="AtomPub10ServiceDocumentFormatter" Kind="Class" />
-      <Type Name="AtomPub10ServiceDocumentFormatter`1" DisplayName="AtomPub10ServiceDocumentFormatter&lt;TServiceDocument&gt;" Kind="Class" />
+      <Type
+        Name="AtomPub10ServiceDocumentFormatter`1"
+        DisplayName="AtomPub10ServiceDocumentFormatter&lt;TServiceDocument&gt;"
+        Kind="Class"
+      />
       <Type Name="CategoriesDocument" Kind="Class" />
       <Type Name="CategoriesDocumentFormatter" Kind="Class" />
       <Type Name="InlineCategoriesDocument" Kind="Class" />
       <Type Name="ReferencedCategoriesDocument" Kind="Class" />
       <Type Name="ResourceCollectionInfo" Kind="Class" />
       <Type Name="Rss20FeedFormatter" Kind="Class" />
-      <Type Name="Rss20FeedFormatter`1" DisplayName="Rss20FeedFormatter&lt;TSyndicationFeed&gt;" Kind="Class" />
+      <Type
+        Name="Rss20FeedFormatter`1"
+        DisplayName="Rss20FeedFormatter&lt;TSyndicationFeed&gt;"
+        Kind="Class"
+      />
       <Type Name="Rss20ItemFormatter" Kind="Class" />
-      <Type Name="Rss20ItemFormatter`1" DisplayName="Rss20ItemFormatter&lt;TSyndicationItem&gt;" Kind="Class" />
+      <Type
+        Name="Rss20ItemFormatter`1"
+        DisplayName="Rss20ItemFormatter&lt;TSyndicationItem&gt;"
+        Kind="Class"
+      />
       <Type Name="ServiceDocument" Kind="Class" />
       <Type Name="ServiceDocumentFormatter" Kind="Class" />
       <Type Name="SyndicationCategory" Kind="Class" />

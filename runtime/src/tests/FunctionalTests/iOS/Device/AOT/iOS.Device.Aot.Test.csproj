@@ -11,18 +11,15 @@
     <UseConsoleUITemplate>true</UseConsoleUITemplate>
     <Optimized Condition="'$(Configuration)' == 'Release'">true</Optimized>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(RunAOTCompilation)' == 'true'">
     <MonoEnableLLVM>true</MonoEnableLLVM>
     <MainLibraryFileName>iOS.Device.Aot.Test.dll</MainLibraryFileName>
     <MonoForceInterpreter>false</MonoForceInterpreter>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Preserves the UnmanagedCallersOnly method -->
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

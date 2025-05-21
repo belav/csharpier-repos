@@ -23,16 +23,22 @@ namespace System.Linq.Expressions.Tests
         }
 
         private static readonly PropertyInfo DebugViewProperty = typeof(Expression).GetProperty(
-            "DebugView", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            "DebugView",
+            BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+        );
 
         // Available via Arguments and Expressions properties
-        private static readonly string[] ExcludedPropertyNames = {"ArgumentCount", "ExpressionCount"};
+        private static readonly string[] ExcludedPropertyNames =
+        {
+            "ArgumentCount",
+            "ExpressionCount",
+        };
 
         private Type GetDebugViewType(Type type)
         {
-            var att =
-                (DebuggerTypeProxyAttribute)
-                    type.GetCustomAttributes().SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
+            var att = (DebuggerTypeProxyAttribute)
+                type.GetCustomAttributes()
+                    .SingleOrDefault(at => at.TypeId.Equals(typeof(DebuggerTypeProxyAttribute)));
             if (att == null)
             {
                 return null;
@@ -85,10 +91,11 @@ namespace System.Linq.Expressions.Tests
             {
                 throw new SkipTestException($"Didn't find DebuggerTypeProxyAttribute on {type}.");
             }
-            object view = viewType.GetConstructors().Single().Invoke(new[] {obj});
-            IEnumerable<PropertyInfo> properties =
-                type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
-                    .Where(pr => !ExcludedPropertyNames.Contains(pr.Name) && pr.CanRead);
+            object view = viewType.GetConstructors().Single().Invoke(new[] { obj });
+            IEnumerable<PropertyInfo> properties = type.GetProperties(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy
+                )
+                .Where(pr => !ExcludedPropertyNames.Contains(pr.Name) && pr.CanRead);
             if (obj is Expression)
             {
                 properties = properties.Append(DebugViewProperty);
@@ -96,8 +103,14 @@ namespace System.Linq.Expressions.Tests
             foreach (var property in properties)
             {
                 string name = property.Name;
-                PropertyInfo proxyProperty = viewType.GetProperty(name, BindingFlags.Public | BindingFlags.Instance);
-                Assert.True(proxyProperty != null, $"Could not find property {name} in proxy for {type}");
+                PropertyInfo proxyProperty = viewType.GetProperty(
+                    name,
+                    BindingFlags.Public | BindingFlags.Instance
+                );
+                Assert.True(
+                    proxyProperty != null,
+                    $"Could not find property {name} in proxy for {type}"
+                );
                 Assert.True(proxyProperty.CanRead);
                 Assert.False(proxyProperty.CanWrite);
                 object value;
@@ -107,7 +120,9 @@ namespace System.Linq.Expressions.Tests
                 }
                 catch (Exception ex)
                 {
-                    Exception proxyEx = Assert.ThrowsAny<Exception>(() => proxyProperty.GetValue(view));
+                    Exception proxyEx = Assert.ThrowsAny<Exception>(() =>
+                        proxyProperty.GetValue(view)
+                    );
                     Assert.IsType(ex.GetType(), proxyEx);
                     continue;
                 }
@@ -173,7 +188,9 @@ namespace System.Linq.Expressions.Tests
                 throw new SkipTestException($"Didn't find DebuggerTypeProxyAttribute on {type}.");
             }
             ConstructorInfo ctor = viewType.GetConstructors().Single();
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => ctor.Invoke(new object[] { null }));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                ctor.Invoke(new object[] { null })
+            );
             ArgumentNullException ane = (ArgumentNullException)tie.InnerException;
             Assert.Equal(ctor.GetParameters()[0].Name, ane.ParamName);
         }
@@ -181,8 +198,8 @@ namespace System.Linq.Expressions.Tests
         public static IEnumerable<object[]> OnePerType()
         {
             HashSet<Type> seenTypes = new HashSet<Type>();
-            foreach (var candidate in
-                BinaryExpressionProxy()
+            foreach (
+                var candidate in BinaryExpressionProxy()
                     .Concat(BlockExpressionProxy())
                     .Concat(CatchBlockProxy())
                     .Concat(ConditionalExpressionProxy())
@@ -207,7 +224,8 @@ namespace System.Linq.Expressions.Tests
                     .Concat(SwitchExpressionProxy())
                     .Concat(TryExpressionProxy())
                     .Concat(TypeBinaryExpressionProxy())
-                    .Concat(UnaryExpressionProxy()))
+                    .Concat(UnaryExpressionProxy())
+            )
             {
                 if (seenTypes.Add(candidate[0].GetType()))
                     yield return candidate;
@@ -216,254 +234,393 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> BinaryExpressionProxy()
         {
-            yield return new object[] {Expression.Assign(Expression.Variable(typeof(int)), Expression.Constant(-1))};
-            yield return new object[] {Expression.Equal(Expression.Constant(false), Expression.Constant(true))};
-            yield return new object[] {Expression.AddAssign(Expression.Parameter(typeof(int)), Expression.Constant(2))};
-            yield return new object[] {Expression.Assign(Expression.Parameter(typeof(int)), Expression.Constant(2))};
+            yield return new object[]
+            {
+                Expression.Assign(Expression.Variable(typeof(int)), Expression.Constant(-1)),
+            };
+            yield return new object[]
+            {
+                Expression.Equal(Expression.Constant(false), Expression.Constant(true)),
+            };
+            yield return new object[]
+            {
+                Expression.AddAssign(Expression.Parameter(typeof(int)), Expression.Constant(2)),
+            };
+            yield return new object[]
+            {
+                Expression.Assign(Expression.Parameter(typeof(int)), Expression.Constant(2)),
+            };
         }
 
         public static IEnumerable<object[]> BlockExpressionProxy()
         {
             for (int paramCount = 0; paramCount != 4; ++paramCount)
             {
-                List<ParameterExpression> parameters = Enumerable.Range(0, paramCount).Select(x => Expression.Parameter(typeof(int))).ToList();
+                List<ParameterExpression> parameters = Enumerable
+                    .Range(0, paramCount)
+                    .Select(x => Expression.Parameter(typeof(int)))
+                    .ToList();
                 for (int count = 0; count != 7; ++count)
                 {
-                    yield return
-                        new object[]
-                        {Expression.Block(parameters, Enumerable.Range(0, count).Select(x => Expression.Constant(x)))};
+                    yield return new object[]
+                    {
+                        Expression.Block(
+                            parameters,
+                            Enumerable.Range(0, count).Select(x => Expression.Constant(x))
+                        ),
+                    };
                 }
             }
         }
 
         public static IEnumerable<object[]> CatchBlockProxy()
         {
-            yield return new object[] {Expression.Catch(typeof(InvalidFilterCriteriaException), Expression.Empty())};
-            yield return
-                new object[]
-                {Expression.Catch(typeof(InvalidCastException), Expression.Constant(3), Expression.Constant(false))};
-            yield return
-                new object[]
-                {Expression.Catch(Expression.Variable(typeof(InvalidFilterCriteriaException)), Expression.Empty())};
-            yield return
-                new object[]
-                {
-                    Expression.Catch(
-                        Expression.Variable(typeof(InvalidCastException)), Expression.Constant(3),
-                        Expression.Constant(false))
-                };
+            yield return new object[]
+            {
+                Expression.Catch(typeof(InvalidFilterCriteriaException), Expression.Empty()),
+            };
+            yield return new object[]
+            {
+                Expression.Catch(
+                    typeof(InvalidCastException),
+                    Expression.Constant(3),
+                    Expression.Constant(false)
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.Catch(
+                    Expression.Variable(typeof(InvalidFilterCriteriaException)),
+                    Expression.Empty()
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.Catch(
+                    Expression.Variable(typeof(InvalidCastException)),
+                    Expression.Constant(3),
+                    Expression.Constant(false)
+                ),
+            };
         }
 
         public static IEnumerable<object[]> ConditionalExpressionProxy()
         {
-            yield return new object[] {Expression.IfThen(Expression.Constant(false), Expression.Constant(1))};
-            yield return
-                new object[]
-                {Expression.IfThenElse(Expression.Constant(false), Expression.Constant(2), Expression.Constant(3))};
-            yield return
-                new object[]
-                {Expression.Condition(Expression.Constant(true), Expression.Constant(4), Expression.Constant(5))};
-            yield return
-                new object[]
-                {
-                    Expression.Condition(
-                        Expression.Constant(true), Expression.Constant(""), Expression.Constant(""), typeof(object))
-                };
+            yield return new object[]
+            {
+                Expression.IfThen(Expression.Constant(false), Expression.Constant(1)),
+            };
+            yield return new object[]
+            {
+                Expression.IfThenElse(
+                    Expression.Constant(false),
+                    Expression.Constant(2),
+                    Expression.Constant(3)
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(4),
+                    Expression.Constant(5)
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(""),
+                    Expression.Constant(""),
+                    typeof(object)
+                ),
+            };
         }
 
         public static IEnumerable<object[]> ConstantExpressionProxy()
         {
-            yield return new object[] {Expression.Constant(DateTime.UtcNow)};
-            yield return new object[] {Expression.Constant(null)};
-            yield return new object[] {Expression.Constant(null, typeof(int?))};
+            yield return new object[] { Expression.Constant(DateTime.UtcNow) };
+            yield return new object[] { Expression.Constant(null) };
+            yield return new object[] { Expression.Constant(null, typeof(int?)) };
         }
 
         public static IEnumerable<object[]> DebugInfoExpressionProxy()
         {
-            yield return new object[] {Expression.ClearDebugInfo(Expression.SymbolDocument(""))};
-            yield return new object[] {Expression.DebugInfo(Expression.SymbolDocument(""), 1, 2, 3, 4)};
+            yield return new object[] { Expression.ClearDebugInfo(Expression.SymbolDocument("")) };
+            yield return new object[]
+            {
+                Expression.DebugInfo(Expression.SymbolDocument(""), 1, 2, 3, 4),
+            };
         }
 
         public static IEnumerable<object[]> DefaultExpressionProxy()
         {
-            yield return new object[] {Expression.Empty()};
-            yield return new object[] {Expression.Default(typeof(int))};
+            yield return new object[] { Expression.Empty() };
+            yield return new object[] { Expression.Default(typeof(int)) };
         }
 
         public static IEnumerable<object[]> GotoExpressionProxy()
         {
-            yield return new object[] {Expression.Continue(Expression.Label(typeof(void)))};
-            yield return new object[] {Expression.Break(Expression.Label(typeof(void)), typeof(void))};
-            yield return
-                new object[]
-                {Expression.Return(Expression.Label(typeof(object)), Expression.Constant(""), typeof(object))};
+            yield return new object[] { Expression.Continue(Expression.Label(typeof(void))) };
+            yield return new object[]
+            {
+                Expression.Break(Expression.Label(typeof(void)), typeof(void)),
+            };
+            yield return new object[]
+            {
+                Expression.Return(
+                    Expression.Label(typeof(object)),
+                    Expression.Constant(""),
+                    typeof(object)
+                ),
+            };
         }
 
         public static IEnumerable<object[]> IndexExpressionProxy()
         {
-            yield return
-                new object[] {Expression.ArrayAccess(Expression.Constant(new[] {1, 2, 3}), Expression.Constant(2))};
-            yield return
-                new object[]
-                {
-                    Expression.Property(
-                        Expression.Default(typeof(Dictionary<string, int>)), "Item", Expression.Constant("key"))
-                };
+            yield return new object[]
+            {
+                Expression.ArrayAccess(
+                    Expression.Constant(new[] { 1, 2, 3 }),
+                    Expression.Constant(2)
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.Property(
+                    Expression.Default(typeof(Dictionary<string, int>)),
+                    "Item",
+                    Expression.Constant("key")
+                ),
+            };
         }
 
         public static IEnumerable<object[]> InvocationExpressionProxy()
         {
             Func<int, int, int> addFunc = (x, y) => x + y;
-            yield return
-                new object[]
-                {Expression.Invoke(Expression.Constant(addFunc), Expression.Constant(4), Expression.Constant(5))};
+            yield return new object[]
+            {
+                Expression.Invoke(
+                    Expression.Constant(addFunc),
+                    Expression.Constant(4),
+                    Expression.Constant(5)
+                ),
+            };
 
             for (int i = 0; i != 7; ++i)
             {
-                ParameterExpression[] parameters = Enumerable.Range(0, i).Select(_ => Expression.Parameter(typeof(int))).ToArray();
-                Expression[] arguments = Enumerable.Range(0, i).Select(x => (Expression)Expression.Constant(x)).ToArray();
-                yield return
-                    new object[] {Expression.Invoke(Expression.Lambda(Expression.Empty(), parameters), arguments)};
-                yield return
-                    new object[] {Expression.Invoke(Expression.Lambda(Expression.Constant(0), parameters), arguments)};
+                ParameterExpression[] parameters = Enumerable
+                    .Range(0, i)
+                    .Select(_ => Expression.Parameter(typeof(int)))
+                    .ToArray();
+                Expression[] arguments = Enumerable
+                    .Range(0, i)
+                    .Select(x => (Expression)Expression.Constant(x))
+                    .ToArray();
+                yield return new object[]
+                {
+                    Expression.Invoke(Expression.Lambda(Expression.Empty(), parameters), arguments),
+                };
+                yield return new object[]
+                {
+                    Expression.Invoke(
+                        Expression.Lambda(Expression.Constant(0), parameters),
+                        arguments
+                    ),
+                };
             }
         }
 
         public static IEnumerable<object[]> LabelExpressionProxy()
         {
-            yield return new object[] {Expression.Label(Expression.Label(typeof(void)))};
-            yield return new object[] {Expression.Label(Expression.Label(typeof(string)), Expression.Constant("!"))};
+            yield return new object[] { Expression.Label(Expression.Label(typeof(void))) };
+            yield return new object[]
+            {
+                Expression.Label(Expression.Label(typeof(string)), Expression.Constant("!")),
+            };
         }
 
         public static IEnumerable<object[]> LambdaExpressionProxy()
         {
             Expression<Func<int, int, int>> add = (x, y) => x + y;
-            yield return new object[] {add};
-            yield return new object[] {Expression.Lambda(Expression.Empty())};
+            yield return new object[] { add };
+            yield return new object[] { Expression.Lambda(Expression.Empty()) };
         }
 
         public static IEnumerable<object[]> ListInitExpressionProxy()
         {
-            Expression<Func<List<int>>> exp = () => new List<int> {1, 2, 3};
-            yield return new object[] {exp.Body};
+            Expression<Func<List<int>>> exp = () => new List<int> { 1, 2, 3 };
+            yield return new object[] { exp.Body };
         }
 
         public static IEnumerable<object[]> LoopExpressionProxy()
         {
-            yield return new object[] {Expression.Loop(Expression.Empty())};
-            yield return new object[] {Expression.Loop(Expression.Empty(), Expression.Label(typeof(void)))};
-            yield return
-                new object[]
-                {Expression.Loop(Expression.Empty(), Expression.Label(typeof(void)), Expression.Label(typeof(void)))};
+            yield return new object[] { Expression.Loop(Expression.Empty()) };
+            yield return new object[]
+            {
+                Expression.Loop(Expression.Empty(), Expression.Label(typeof(void))),
+            };
+            yield return new object[]
+            {
+                Expression.Loop(
+                    Expression.Empty(),
+                    Expression.Label(typeof(void)),
+                    Expression.Label(typeof(void))
+                ),
+            };
         }
 
         public static IEnumerable<object[]> MemberExpressionProxy()
         {
-            yield return new object[] {Expression.Field(null, typeof(ExpressionDebuggerTypeProxyTests), nameof(DebugViewProperty))};
-            yield return new object[] {Expression.Property(Expression.Constant(""), "Length")};
+            yield return new object[]
+            {
+                Expression.Field(
+                    null,
+                    typeof(ExpressionDebuggerTypeProxyTests),
+                    nameof(DebugViewProperty)
+                ),
+            };
+            yield return new object[] { Expression.Property(Expression.Constant(""), "Length") };
         }
 
         public static IEnumerable<object[]> MemberInitExpressionProxy()
         {
-            yield return
-                new object[]
-                {
-                    Expression.MemberInit(
-                        Expression.New(typeof(Outer)),
-                        Expression.MemberBind(
-                            typeof(Outer).GetProperty(nameof(Outer.InnerProperty)),
-                            Expression.Bind(typeof(Inner).GetProperty(nameof(Inner.Value)), Expression.Constant(3))))
-                };
+            yield return new object[]
+            {
+                Expression.MemberInit(
+                    Expression.New(typeof(Outer)),
+                    Expression.MemberBind(
+                        typeof(Outer).GetProperty(nameof(Outer.InnerProperty)),
+                        Expression.Bind(
+                            typeof(Inner).GetProperty(nameof(Inner.Value)),
+                            Expression.Constant(3)
+                        )
+                    )
+                ),
+            };
         }
 
         public static IEnumerable<object[]> MethodCallExpressionProxy()
         {
-            yield return new object[] {Expression.Call(Expression.Constant(1), "ToString", new Type[0])};
+            yield return new object[]
+            {
+                Expression.Call(Expression.Constant(1), "ToString", new Type[0]),
+            };
             Expression<Func<bool>> exp = () => 1.Equals(2);
-            yield return new object[] {exp.Body};
+            yield return new object[] { exp.Body };
         }
 
         public static IEnumerable<object[]> NewArrayExpressionProxy()
         {
-            yield return
-                new object[] {Expression.NewArrayBounds(typeof(int), Expression.Constant(2), Expression.Constant(2))};
-            yield return
-                new object[]
-                {Expression.NewArrayInit(typeof(string), Expression.Constant("A"), Expression.Constant("B"))};
+            yield return new object[]
+            {
+                Expression.NewArrayBounds(
+                    typeof(int),
+                    Expression.Constant(2),
+                    Expression.Constant(2)
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.NewArrayInit(
+                    typeof(string),
+                    Expression.Constant("A"),
+                    Expression.Constant("B")
+                ),
+            };
         }
 
         public static IEnumerable<object[]> NewExpressionProxy()
         {
-            yield return new object[] {Expression.New(typeof(object))};
-            yield return
-                new object[]
-                {
-                    Expression.New(
-                        typeof(string).GetConstructors().First(c => c.GetParameters().Length == 2),
-                        Expression.Constant('x'), Expression.Constant(3))
-                };
+            yield return new object[] { Expression.New(typeof(object)) };
+            yield return new object[]
+            {
+                Expression.New(
+                    typeof(string).GetConstructors().First(c => c.GetParameters().Length == 2),
+                    Expression.Constant('x'),
+                    Expression.Constant(3)
+                ),
+            };
         }
 
         public static IEnumerable<object[]> ParameterExpressionProxy()
         {
-            yield return new object[] {Expression.Variable(typeof(int))};
-            yield return new object[] {Expression.Parameter(typeof(Expression))};
-            yield return new object[] {Expression.Parameter(typeof(int).MakeByRefType())};
+            yield return new object[] { Expression.Variable(typeof(int)) };
+            yield return new object[] { Expression.Parameter(typeof(Expression)) };
+            yield return new object[] { Expression.Parameter(typeof(int).MakeByRefType()) };
         }
 
         public static IEnumerable<object[]> RuntimeVariablesExpressionProxy()
         {
-            yield return new object[] {Expression.RuntimeVariables(Expression.Variable(typeof(int)))};
-            yield return new object[] {Expression.RuntimeVariables()};
+            yield return new object[]
+            {
+                Expression.RuntimeVariables(Expression.Variable(typeof(int))),
+            };
+            yield return new object[] { Expression.RuntimeVariables() };
         }
 
         public static IEnumerable<object[]> SwitchCaseExpressionProxy()
         {
-            yield return new object[] {Expression.SwitchCase(Expression.Empty(), Expression.Constant(0))};
+            yield return new object[]
+            {
+                Expression.SwitchCase(Expression.Empty(), Expression.Constant(0)),
+            };
         }
 
         public static IEnumerable<object[]> SwitchExpressionProxy()
         {
-            yield return new object[] {Expression.Switch(Expression.Constant(2))};
-            yield return
-                new object[]
-                {
-                    Expression.Switch(
-                        Expression.Constant(2), Expression.Constant("!"),
-                        Expression.SwitchCase(Expression.Constant("X"), Expression.Constant(1)))
-                };
+            yield return new object[] { Expression.Switch(Expression.Constant(2)) };
+            yield return new object[]
+            {
+                Expression.Switch(
+                    Expression.Constant(2),
+                    Expression.Constant("!"),
+                    Expression.SwitchCase(Expression.Constant("X"), Expression.Constant(1))
+                ),
+            };
         }
 
         public static IEnumerable<object[]> TryExpressionProxy()
         {
-            yield return new object[] {Expression.TryFault(Expression.Empty(), Expression.Empty())};
-            yield return new object[] {Expression.TryFinally(Expression.Empty(), Expression.Empty())};
-            yield return
-                new object[]
-                {
-                    Expression.TryCatch(
-                        Expression.Constant(1), Expression.Catch(typeof(Exception), Expression.Constant(2)))
-                };
-            yield return
-                new object[]
-                {
-                    Expression.TryCatchFinally(
-                        Expression.Constant(1), Expression.Empty(),
-                        Expression.Catch(typeof(Exception), Expression.Constant(2)))
-                };
+            yield return new object[]
+            {
+                Expression.TryFault(Expression.Empty(), Expression.Empty()),
+            };
+            yield return new object[]
+            {
+                Expression.TryFinally(Expression.Empty(), Expression.Empty()),
+            };
+            yield return new object[]
+            {
+                Expression.TryCatch(
+                    Expression.Constant(1),
+                    Expression.Catch(typeof(Exception), Expression.Constant(2))
+                ),
+            };
+            yield return new object[]
+            {
+                Expression.TryCatchFinally(
+                    Expression.Constant(1),
+                    Expression.Empty(),
+                    Expression.Catch(typeof(Exception), Expression.Constant(2))
+                ),
+            };
         }
 
         public static IEnumerable<object[]> TypeBinaryExpressionProxy()
         {
-            yield return new object[] {Expression.TypeIs(Expression.Constant(2), typeof(string))};
-            yield return new object[] {Expression.TypeAs(Expression.Constant("", typeof(object)), typeof(string))};
+            yield return new object[] { Expression.TypeIs(Expression.Constant(2), typeof(string)) };
+            yield return new object[]
+            {
+                Expression.TypeAs(Expression.Constant("", typeof(object)), typeof(string)),
+            };
         }
 
         public static IEnumerable<object[]> UnaryExpressionProxy()
         {
-            yield return new object[] {Expression.Not(Expression.Constant(true))};
-            yield return new object[] {Expression.Increment(Expression.Variable(typeof(int)))};
-            yield return new object[] {Expression.OnesComplement(Expression.Constant(23))};
+            yield return new object[] { Expression.Not(Expression.Constant(true)) };
+            yield return new object[] { Expression.Increment(Expression.Variable(typeof(int))) };
+            yield return new object[] { Expression.OnesComplement(Expression.Constant(23)) };
         }
     }
 }

@@ -54,7 +54,10 @@ public class AcceptedResult : ObjectResult
         }
         else
         {
-            Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = locationUri.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
 
         StatusCode = DefaultStatusCode;

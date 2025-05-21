@@ -20,7 +20,7 @@ namespace Microsoft.Web.Mvc.Test
             ActionExecutingContext filterContext = new ActionExecutingContext
             {
                 ActionParameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase),
-                Controller = controller
+                Controller = controller,
             };
             filterContext.ActionParameters["foo"] = "fooAction";
             filterContext.ActionParameters["bar"] = "barAction";
@@ -46,7 +46,7 @@ namespace Microsoft.Web.Mvc.Test
             ActionExecutingContext filterContext = new ActionExecutingContext
             {
                 ActionParameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase),
-                Controller = controller
+                Controller = controller,
             };
             filterContext.ActionParameters["foo"] = "originalFoo";
             filterContext.ActionParameters["bar"] = "originalBar";
@@ -66,15 +66,16 @@ namespace Microsoft.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { attr.OnActionExecuting(null); }, "filterContext");
+                delegate
+                {
+                    attr.OnActionExecuting(null);
+                },
+                "filterContext"
+            );
         }
 
-        private class SampleSyncController : Controller
-        {
-        }
+        private class SampleSyncController : Controller { }
 
-        private class SampleAsyncController : AsyncController
-        {
-        }
+        private class SampleAsyncController : AsyncController { }
     }
 }

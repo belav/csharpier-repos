@@ -30,109 +30,111 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
-{public class ButtonColumn_CommandName
-    : GHTBaseWeb {
- 	protected System.Web.UI.WebControls.DataGrid DataGrid1;
- 	protected System.Web.UI.WebControls.DataGrid DataGrid2;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest2;
- 	protected System.Web.UI.WebControls.DataGrid DataGrid3;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest3;
- 	protected System.Web.UI.WebControls.DataGrid DataGrid4;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest4;
- 	protected GHTWebControls.GHTSubTest GHTSubTest1;
-	 #region Web Form Designer generated code
-	 override protected void OnInit(EventArgs e) {
-		 //
-		 // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-		 //
-		 InitializeComponent();
-		 base.OnInit(e);
-	 }
-		
-	 /// <summary>
-	 /// Required method for Designer support - do not modify
-	 /// the contents of this method with the code editor.
-	 /// </summary>
-	 private void InitializeComponent() {    
-		 this.Load += new System.EventHandler(this.Page_Load);
+{
+    public class ButtonColumn_CommandName : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.DataGrid DataGrid1;
+        protected System.Web.UI.WebControls.DataGrid DataGrid2;
+        protected GHTWebControls.GHTSubTest Ghtsubtest2;
+        protected System.Web.UI.WebControls.DataGrid DataGrid3;
+        protected GHTWebControls.GHTSubTest Ghtsubtest3;
+        protected System.Web.UI.WebControls.DataGrid DataGrid4;
+        protected GHTWebControls.GHTSubTest Ghtsubtest4;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-	 }
-	 #endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-	 private void Page_Load(object sender, EventArgs e)
-	 {
-		 HtmlForm form1 = (HtmlForm) this.FindControl("Form1");
-		 this.GHTTestBegin(form1);
-		 base.GHTActiveSubTest = this.GHTSubTest1;
-		 try
-		 {
-			 this.DataGrid1.DataSource = GHDataSources.DSDataTable();
-			 ButtonColumn column1 = new ButtonColumn();
-			 column1.DataTextField = "Name";
-			 column1.CommandName = "";
-			 this.DataGrid1.Columns.Add(column1);
-			 this.DataGrid1.DataBind();
-			 this.GHTSubTestAddResult(column1.CommandName);
-		 }
-		 catch (Exception exception5)
-		 {
-			 // (exception5);
-			 Exception exception1 = exception5;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception1);
-			 // ProjectData.ClearProjectError();
-		 }
-		 base.GHTActiveSubTest = this.Ghtsubtest2;
-		 try
-		 {
-			 this.DataGrid2.DataSource = GHDataSources.DSDataTable();
-			 ButtonColumn column2 = new ButtonColumn();
-			 column2.DataTextField = "Name";
-			 column2.CommandName = "MyCommand";
-			 this.DataGrid2.Columns.Add(column2);
-			 this.DataGrid2.DataBind();
-			 this.GHTSubTestAddResult(column2.CommandName);
-		 }
-		 catch (Exception exception6)
-		 {
-			 // (exception6);
-			 Exception exception2 = exception6;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception2);
-			 // ProjectData.ClearProjectError();
-		 }
-		 base.GHTActiveSubTest = this.Ghtsubtest3;
-		 try
-		 {
-			 this.DataGrid3.DataSource = GHDataSources.DSDataTable();
-			 this.DataGrid3.DataBind();
-			 this.GHTSubTestAddResult(((ButtonColumn) this.DataGrid3.Columns[0]).CommandName);
-		 }
-		 catch (Exception exception7)
-		 {
-			 // (exception7);
-			 Exception exception3 = exception7;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception3);
-			 // ProjectData.ClearProjectError();
-		 }
-		 base.GHTActiveSubTest = this.Ghtsubtest4;
-		 try
-		 {
-			 this.DataGrid4.DataSource = GHDataSources.DSDataTable();
-			 this.DataGrid4.DataBind();
-			 this.GHTSubTestAddResult(((ButtonColumn) this.DataGrid4.Columns[0]).CommandName);
-		 }
-		 catch (Exception exception8)
-		 {
-			 // (exception8);
-			 Exception exception4 = exception8;
-			 this.GHTSubTestUnexpectedExceptionCaught(exception4);
-			 // ProjectData.ClearProjectError();
-		 }
-		 this.GHTTestEnd();
-	 }
- 
- }
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        private void Page_Load(object sender, EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)this.FindControl("Form1");
+            this.GHTTestBegin(form1);
+            base.GHTActiveSubTest = this.GHTSubTest1;
+            try
+            {
+                this.DataGrid1.DataSource = GHDataSources.DSDataTable();
+                ButtonColumn column1 = new ButtonColumn();
+                column1.DataTextField = "Name";
+                column1.CommandName = "";
+                this.DataGrid1.Columns.Add(column1);
+                this.DataGrid1.DataBind();
+                this.GHTSubTestAddResult(column1.CommandName);
+            }
+            catch (Exception exception5)
+            {
+                // (exception5);
+                Exception exception1 = exception5;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            base.GHTActiveSubTest = this.Ghtsubtest2;
+            try
+            {
+                this.DataGrid2.DataSource = GHDataSources.DSDataTable();
+                ButtonColumn column2 = new ButtonColumn();
+                column2.DataTextField = "Name";
+                column2.CommandName = "MyCommand";
+                this.DataGrid2.Columns.Add(column2);
+                this.DataGrid2.DataBind();
+                this.GHTSubTestAddResult(column2.CommandName);
+            }
+            catch (Exception exception6)
+            {
+                // (exception6);
+                Exception exception2 = exception6;
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+                // ProjectData.ClearProjectError();
+            }
+            base.GHTActiveSubTest = this.Ghtsubtest3;
+            try
+            {
+                this.DataGrid3.DataSource = GHDataSources.DSDataTable();
+                this.DataGrid3.DataBind();
+                this.GHTSubTestAddResult(((ButtonColumn)this.DataGrid3.Columns[0]).CommandName);
+            }
+            catch (Exception exception7)
+            {
+                // (exception7);
+                Exception exception3 = exception7;
+                this.GHTSubTestUnexpectedExceptionCaught(exception3);
+                // ProjectData.ClearProjectError();
+            }
+            base.GHTActiveSubTest = this.Ghtsubtest4;
+            try
+            {
+                this.DataGrid4.DataSource = GHDataSources.DSDataTable();
+                this.DataGrid4.DataBind();
+                this.GHTSubTestAddResult(((ButtonColumn)this.DataGrid4.Columns[0]).CommandName);
+            }
+            catch (Exception exception8)
+            {
+                // (exception8);
+                Exception exception4 = exception8;
+                this.GHTSubTestUnexpectedExceptionCaught(exception4);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTTestEnd();
+        }
+    }
 }

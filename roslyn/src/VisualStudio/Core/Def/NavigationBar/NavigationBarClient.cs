@@ -21,13 +21,13 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 {
-    internal class NavigationBarClient :
-        IVsDropdownBarClient,
-        IVsDropdownBarClient3,
-        IVsDropdownBarClient4,
-        IVsDropdownBarClientEx,
-        IVsCoTaskMemFreeMyStrings,
-        INavigationBarPresenter
+    internal class NavigationBarClient
+        : IVsDropdownBarClient,
+            IVsDropdownBarClient3,
+            IVsDropdownBarClient4,
+            IVsDropdownBarClientEx,
+            IVsCoTaskMemFreeMyStrings,
+            INavigationBarPresenter
     {
         private readonly IVsDropdownBarManager _manager;
         private readonly VsCodeWindowViewTracker _codeWindowViewTracker;
@@ -41,13 +41,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             IVsDropdownBarManager manager,
             IVsCodeWindow codeWindow,
             IServiceProvider serviceProvider,
-            VisualStudioWorkspaceImpl workspace)
+            VisualStudioWorkspaceImpl workspace
+        )
         {
             _manager = manager;
             _codeWindowViewTracker = new VsCodeWindowViewTracker(
                 codeWindow,
                 serviceProvider.GetMefService<IThreadingContext>(),
-                serviceProvider.GetMefService<IVsEditorAdaptersFactoryService>());
+                serviceProvider.GetMefService<IVsEditorAdaptersFactoryService>()
+            );
             _codeWindowViewTracker.CaretMovedOrActiveViewChanged += OnCaretMovedOrActiveViewChanged;
 
             _workspace = workspace;
@@ -63,9 +65,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 
             _dropdownBar.GetCurrentSelection(1, out var currentTypeIndex);
 
-            return currentTypeIndex >= 0
-                ? _currentTypeItems[currentTypeIndex]
-                : null;
+            return currentTypeIndex >= 0 ? _currentTypeItems[currentTypeIndex] : null;
         }
 
         private NavigationBarItem GetItem(int combo, int index)
@@ -80,7 +80,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 
                 case 2:
                     var item = GetCurrentTypeItem();
-                    Contract.ThrowIfNull(item, "We shouldn't be getting requests for member items if we had no type selected.");
+                    Contract.ThrowIfNull(
+                        item,
+                        "We shouldn't be getting requests for member items if we had no type selected."
+                    );
                     return item.ChildItems[index];
 
                 default:
@@ -88,9 +91,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             }
         }
 
-        int IVsDropdownBarClient.GetComboAttributes(int iCombo, out uint pcEntries, out uint puEntryType, out IntPtr phImageList)
+        int IVsDropdownBarClient.GetComboAttributes(
+            int iCombo,
+            out uint pcEntries,
+            out uint puEntryType,
+            out IntPtr phImageList
+        )
         {
-            puEntryType = (uint)(DROPDOWNENTRYTYPE.ENTRY_TEXT | DROPDOWNENTRYTYPE.ENTRY_ATTR | DROPDOWNENTRYTYPE.ENTRY_IMAGE);
+            puEntryType = (uint)(
+                DROPDOWNENTRYTYPE.ENTRY_TEXT
+                | DROPDOWNENTRYTYPE.ENTRY_ATTR
+                | DROPDOWNENTRYTYPE.ENTRY_IMAGE
+            );
 
             // We no longer need to return an HIMAGELIST, we now use IVsDropdownBarClient4.GetEntryImage which uses monikers directly.
             phImageList = IntPtr.Zero;
@@ -108,9 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
                 case 2:
                     var currentTypeItem = GetCurrentTypeItem();
 
-                    pcEntries = currentTypeItem != null
-                        ? (uint)currentTypeItem.ChildItems.Length
-                        : 0;
+                    pcEntries =
+                        currentTypeItem != null ? (uint)currentTypeItem.ChildItems.Length : 0;
 
                     break;
 
@@ -124,10 +135,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 
         int IVsDropdownBarClient.GetComboTipText(int iCombo, out string? pbstrText)
         {
-            Contract.ThrowIfNull(_dropdownBar, "The dropdown is asking us for things, so we should have a reference to it.");
+            Contract.ThrowIfNull(
+                _dropdownBar,
+                "The dropdown is asking us for things, so we should have a reference to it."
+            );
             var selectedItemPreviewText = string.Empty;
 
-            if (_dropdownBar.GetCurrentSelection(iCombo, out var selectionIndex) == VSConstants.S_OK && selectionIndex >= 0)
+            if (
+                _dropdownBar.GetCurrentSelection(iCombo, out var selectionIndex) == VSConstants.S_OK
+                && selectionIndex >= 0
+            )
             {
                 selectedItemPreviewText = GetItem(iCombo, selectionIndex).Text;
             }
@@ -135,21 +152,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             switch (iCombo)
             {
                 case 0:
-                    var keybindingString = KeyBindingHelper.GetGlobalKeyBinding(VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.MoveToDropdownBar);
+                    var keybindingString = KeyBindingHelper.GetGlobalKeyBinding(
+                        VSConstants.GUID_VSStandardCommandSet97,
+                        (int)VSConstants.VSStd97CmdID.MoveToDropdownBar
+                    );
                     if (!string.IsNullOrWhiteSpace(keybindingString))
                     {
-                        pbstrText = string.Format(ServicesVSResources.Project_colon_0_1_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to, selectedItemPreviewText, keybindingString);
+                        pbstrText = string.Format(
+                            ServicesVSResources.Project_colon_0_1_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to,
+                            selectedItemPreviewText,
+                            keybindingString
+                        );
                     }
                     else
                     {
-                        pbstrText = string.Format(ServicesVSResources.Project_colon_0_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to, selectedItemPreviewText);
+                        pbstrText = string.Format(
+                            ServicesVSResources.Project_colon_0_Use_the_dropdown_to_view_and_switch_to_other_projects_this_file_may_belong_to,
+                            selectedItemPreviewText
+                        );
                     }
 
                     return VSConstants.S_OK;
 
                 case 1:
                 case 2:
-                    pbstrText = string.Format(ServicesVSResources._0_Use_the_dropdown_to_view_and_navigate_to_other_items_in_this_file, selectedItemPreviewText);
+                    pbstrText = string.Format(
+                        ServicesVSResources._0_Use_the_dropdown_to_view_and_navigate_to_other_items_in_this_file,
+                        selectedItemPreviewText
+                    );
                     return VSConstants.S_OK;
 
                 default:
@@ -198,14 +228,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
 
         int IVsDropdownBarClient.OnItemChosen(int iCombo, int iIndex)
         {
-            Contract.ThrowIfNull(_dropdownBar, "The dropdown is asking us for things, so we should have a reference to it.");
+            Contract.ThrowIfNull(
+                _dropdownBar,
+                "The dropdown is asking us for things, so we should have a reference to it."
+            );
 
             int selection;
 
             // If we chose an item for the type drop-down, then refresh the member dropdown
             if (iCombo == (int)NavigationBarDropdownKind.Type)
             {
-                _dropdownBar.GetCurrentSelection((int)NavigationBarDropdownKind.Member, out selection);
+                _dropdownBar.GetCurrentSelection(
+                    (int)NavigationBarDropdownKind.Member,
+                    out selection
+                );
                 _dropdownBar.RefreshCombo((int)NavigationBarDropdownKind.Member, selection);
             }
 
@@ -220,8 +256,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             return VSConstants.S_OK;
         }
 
-        int IVsDropdownBarClient.OnItemSelected(int iCombo, int iIndex)
-            => VSConstants.S_OK;
+        int IVsDropdownBarClient.OnItemSelected(int iCombo, int iIndex) => VSConstants.S_OK;
 
         int IVsDropdownBarClient.SetDropdownBar(IVsDropdownBar pDropdownBar)
         {
@@ -236,7 +271,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             return VSConstants.S_OK;
         }
 
-        int IVsDropdownBarClient3.GetAutomationProperties(int iCombo, out string? pbstrName, out string? pbstrId)
+        int IVsDropdownBarClient3.GetAutomationProperties(
+            int iCombo,
+            out string? pbstrName,
+            out string? pbstrId
+        )
         {
             switch (iCombo)
             {
@@ -259,7 +298,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             }
         }
 
-        int IVsDropdownBarClient3.GetEntryImage(int iCombo, int iIndex, out int piImageIndex, out IntPtr phImageList)
+        int IVsDropdownBarClient3.GetEntryImage(
+            int iCombo,
+            int iIndex,
+            out int piImageIndex,
+            out IntPtr phImageList
+        )
         {
             // This class implements IVsDropdownBarClient4 and expects IVsDropdownBarClient4.GetEntryImage() to be called instead
             phImageList = IntPtr.Zero;
@@ -276,7 +320,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             {
                 if (_workspace.TryGetHierarchy(projectItem.DocumentId.ProjectId, out var hierarchy))
                 {
-                    return _imageService.GetImageMonikerForHierarchyItem(hierarchy, VSConstants.VSITEMID_ROOT, (int)__VSHIERARCHYIMAGEASPECT.HIA_Icon);
+                    return _imageService.GetImageMonikerForHierarchyItem(
+                        hierarchy,
+                        VSConstants.VSITEMID_ROOT,
+                        (int)__VSHIERARCHYIMAGEASPECT.HIA_Icon
+                    );
                 }
             }
 
@@ -301,7 +349,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
             NavigationBarProjectItem? selectedProject,
             ImmutableArray<NavigationBarItem> types,
             NavigationBarItem? selectedType,
-            NavigationBarItem? selectedMember)
+            NavigationBarItem? selectedMember
+        )
         {
             _projectItems = projects;
             _currentTypeItems = types;
@@ -312,9 +361,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigationBar
                 return;
             }
 
-            var projectIndex = selectedProject != null ? _projectItems.IndexOf(selectedProject) : -1;
+            var projectIndex =
+                selectedProject != null ? _projectItems.IndexOf(selectedProject) : -1;
             var typeIndex = selectedType != null ? _currentTypeItems.IndexOf(selectedType) : -1;
-            var memberIndex = selectedType != null && selectedMember != null ? selectedType.ChildItems.IndexOf(selectedMember) : -1;
+            var memberIndex =
+                selectedType != null && selectedMember != null
+                    ? selectedType.ChildItems.IndexOf(selectedMember)
+                    : -1;
 
             _dropdownBar.RefreshCombo((int)NavigationBarDropdownKind.Project, projectIndex);
             _dropdownBar.RefreshCombo((int)NavigationBarDropdownKind.Type, typeIndex);

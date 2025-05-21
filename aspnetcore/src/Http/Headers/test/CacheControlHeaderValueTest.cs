@@ -44,14 +44,16 @@ public class CacheControlHeaderValueTest
         // String collection properties
         Assert.NotNull(cacheControl.NoCacheHeaders);
         Assert.Throws<ArgumentException>(() => cacheControl.NoCacheHeaders.Add(null));
-        Assert.Throws<FormatException>(() => cacheControl.NoCacheHeaders.Add("invalid PLACEHOLDER"));
+        Assert.Throws<FormatException>(() => cacheControl.NoCacheHeaders.Add("invalid PLACEHOLDER")
+        );
         cacheControl.NoCacheHeaders.Add("PLACEHOLDER");
         Assert.Equal(1, cacheControl.NoCacheHeaders.Count);
         Assert.Equal("PLACEHOLDER", cacheControl.NoCacheHeaders.First());
 
         Assert.NotNull(cacheControl.PrivateHeaders);
         Assert.Throws<ArgumentException>(() => cacheControl.PrivateHeaders.Add(null));
-        Assert.Throws<FormatException>(() => cacheControl.PrivateHeaders.Add("invalid PLACEHOLDER"));
+        Assert.Throws<FormatException>(() => cacheControl.PrivateHeaders.Add("invalid PLACEHOLDER")
+        );
         cacheControl.PrivateHeaders.Add("PLACEHOLDER");
         Assert.Equal(1, cacheControl.PrivateHeaders.Count);
         Assert.Equal("PLACEHOLDER", cacheControl.PrivateHeaders.First());
@@ -87,7 +89,10 @@ public class CacheControlHeaderValueTest
         cacheControl.MaxStaleLimit = new TimeSpan(0, 2, 5);
         Assert.Equal("no-store, no-cache, max-age=70, max-stale=125", cacheControl.ToString());
         cacheControl.MinFresh = new TimeSpan(0, 3, 0);
-        Assert.Equal("no-store, no-cache, max-age=70, max-stale=125, min-fresh=180", cacheControl.ToString());
+        Assert.Equal(
+            "no-store, no-cache, max-age=70, max-stale=125, min-fresh=180",
+            cacheControl.ToString()
+        );
 
         cacheControl = new CacheControlHeaderValue();
         cacheControl.NoTransform = true;
@@ -96,7 +101,10 @@ public class CacheControlHeaderValueTest
         Assert.Equal("no-transform, only-if-cached", cacheControl.ToString());
         cacheControl.Extensions.Add(new NameValueHeaderValue("custom"));
         cacheControl.Extensions.Add(new NameValueHeaderValue("customName", "customValue"));
-        Assert.Equal("no-transform, only-if-cached, custom, customName=customValue", cacheControl.ToString());
+        Assert.Equal(
+            "no-transform, only-if-cached, custom, customName=customValue",
+            cacheControl.ToString()
+        );
 
         cacheControl = new CacheControlHeaderValue();
         cacheControl.Extensions.Add(new NameValueHeaderValue("custom"));
@@ -123,9 +131,15 @@ public class CacheControlHeaderValueTest
         cacheControl.PrivateHeaders.Add("PLACEHOLDER3");
         Assert.Equal("private=\"PLACEHOLDER2, PLACEHOLDER3\"", cacheControl.ToString());
         cacheControl.MustRevalidate = true;
-        Assert.Equal("must-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"", cacheControl.ToString());
+        Assert.Equal(
+            "must-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"",
+            cacheControl.ToString()
+        );
         cacheControl.ProxyRevalidate = true;
-        Assert.Equal("must-revalidate, proxy-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"", cacheControl.ToString());
+        Assert.Equal(
+            "must-revalidate, proxy-revalidate, private=\"PLACEHOLDER2, PLACEHOLDER3\"",
+            cacheControl.ToString()
+        );
     }
 
     [Fact]
@@ -406,7 +420,10 @@ public class CacheControlHeaderValueTest
         expected.ProxyRevalidate = true;
         expected.Extensions.Add(new NameValueHeaderValue("c", "d"));
         expected.Extensions.Add(new NameValueHeaderValue("a", "b"));
-        CheckValidTryParse(",public, , private=\"PLACEHOLDER1\", must-revalidate, c=d, proxy-revalidate, a=b", expected);
+        CheckValidTryParse(
+            ",public, , private=\"PLACEHOLDER1\", must-revalidate, c=d, proxy-revalidate, a=b",
+            expected
+        );
 
         expected = new CacheControlHeaderValue();
         expected.Private = true;
@@ -546,7 +563,11 @@ public class CacheControlHeaderValueTest
 
     #region Helper methods
 
-    private void CompareHashCodes(CacheControlHeaderValue x, CacheControlHeaderValue y, bool areEqual)
+    private void CompareHashCodes(
+        CacheControlHeaderValue x,
+        CacheControlHeaderValue y,
+        bool areEqual
+    )
     {
         if (areEqual)
         {

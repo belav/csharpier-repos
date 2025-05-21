@@ -3,7 +3,6 @@
 //ThreadStatics are only initialized on the first thread to call the constructor
 //   All other threads get the value 0 set for value types
 
-
 using System;
 using System.Threading;
 using Xunit;
@@ -25,24 +24,22 @@ public class MyData
 
     private bool CheckValues()
     {
-        if(Two != 0)
+        if (Two != 0)
             return false;
         return true;
     }
-
 }
 
 public class Test_threadstatic06
 {
-
     private int retVal = 0;
 
     [Fact]
     public static int TestEntryPoint()
     {
-        Test_threadstatic06 staticsTest = new Test_threadstatic06();        
+        Test_threadstatic06 staticsTest = new Test_threadstatic06();
         staticsTest.RunTest();
-        Console.WriteLine(100 == staticsTest.retVal ? "Test Passed":"Test Failed");
+        Console.WriteLine(100 == staticsTest.retVal ? "Test Passed" : "Test Failed");
         return staticsTest.retVal;
     }
 
@@ -58,24 +55,19 @@ public class Test_threadstatic06
             Console.WriteLine("Init did not pass");
             retVal = 25;
             return;
-        }        
-        
+        }
+
         Thread t = new Thread(data.ThreadTarget);
         t.Start();
-        if(!t.IsAlive)
+        if (!t.IsAlive)
         {
             Console.WriteLine("Thread was not set to Alive after starting");
             retVal = 50;
             return;
         }
-        data.autoEvent.Set();            
+        data.autoEvent.Set();
         t.Join();
-        if(data.pass)
+        if (data.pass)
             retVal = 100;
     }
-
 }
-
-
-
-

@@ -7,9 +7,7 @@ using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Xml;
 using System.Xml.XPath;
-
 using Internal.TypeSystem;
-
 using EcmaModule = Internal.TypeSystem.Ecma.EcmaModule;
 
 namespace ILCompiler
@@ -24,7 +22,11 @@ namespace ILCompiler
 
         protected ManifestResourceBlockingPolicy() { }
 
-        public ManifestResourceBlockingPolicy(Logger logger, IReadOnlyDictionary<string, bool> switchValues, IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> globalBlocks)
+        public ManifestResourceBlockingPolicy(
+            Logger logger,
+            IReadOnlyDictionary<string, bool> switchValues,
+            IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> globalBlocks
+        )
         {
             _hashtable = new FeatureSwitchHashtable(logger, switchValues, globalBlocks);
         }
@@ -35,12 +37,17 @@ namespace ILCompiler
         /// </summary>
         public virtual bool IsManifestResourceBlocked(ModuleDesc module, string resourceName)
         {
-            return module is EcmaModule ecmaModule &&
-                (_hashtable.GetOrCreateValue(ecmaModule).BlockedResources.Contains(resourceName)
-                || (resourceName.StartsWith("ILLink.") && resourceName.EndsWith(".xml")));
+            return module is EcmaModule ecmaModule
+                && (
+                    _hashtable.GetOrCreateValue(ecmaModule).BlockedResources.Contains(resourceName)
+                    || (resourceName.StartsWith("ILLink.") && resourceName.EndsWith(".xml"))
+                );
         }
 
-        public static IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> UnionBlockings(IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> left, IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> right)
+        public static IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> UnionBlockings(
+            IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> left,
+            IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> right
+        )
         {
             var result = new Dictionary<ModuleDesc, HashSet<string>>();
             if (left != null)
@@ -50,7 +57,10 @@ namespace ILCompiler
 
             return AsReadOnlyDictionary(result);
 
-            static void AddAll(Dictionary<ModuleDesc, HashSet<string>> result, IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> addend)
+            static void AddAll(
+                Dictionary<ModuleDesc, HashSet<string>> result,
+                IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> addend
+            )
             {
                 foreach (var item in addend)
                 {
@@ -61,7 +71,9 @@ namespace ILCompiler
             }
         }
 
-        private static Dictionary<ModuleDesc, IReadOnlySet<string>> AsReadOnlyDictionary(Dictionary<ModuleDesc, HashSet<string>> original)
+        private static Dictionary<ModuleDesc, IReadOnlySet<string>> AsReadOnlyDictionary(
+            Dictionary<ModuleDesc, HashSet<string>> original
+        )
         {
             // IReadOnlyDictionary is not variant, so we need to:
             var copy = new Dictionary<ModuleDesc, IReadOnlySet<string>>();
@@ -70,23 +82,36 @@ namespace ILCompiler
             return copy;
         }
 
-        private sealed class FeatureSwitchHashtable : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
+        private sealed class FeatureSwitchHashtable
+            : LockFreeReaderHashtable<EcmaModule, AssemblyFeatureInfo>
         {
             private readonly IReadOnlyDictionary<string, bool> _switchValues;
             private readonly IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> _globalBlocks;
             private readonly Logger _logger;
 
-            public FeatureSwitchHashtable(Logger logger, IReadOnlyDictionary<string, bool> switchValues, IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> globalBlocks)
+            public FeatureSwitchHashtable(
+                Logger logger,
+                IReadOnlyDictionary<string, bool> switchValues,
+                IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> globalBlocks
+            )
             {
                 _logger = logger;
                 _switchValues = switchValues;
                 _globalBlocks = globalBlocks;
             }
 
-            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) => key == value.Module;
-            protected override bool CompareValueToValue(AssemblyFeatureInfo value1, AssemblyFeatureInfo value2) => value1.Module == value2.Module;
+            protected override bool CompareKeyToValue(EcmaModule key, AssemblyFeatureInfo value) =>
+                key == value.Module;
+
+            protected override bool CompareValueToValue(
+                AssemblyFeatureInfo value1,
+                AssemblyFeatureInfo value2
+            ) => value1.Module == value2.Module;
+
             protected override int GetKeyHashCode(EcmaModule key) => key.GetHashCode();
-            protected override int GetValueHashCode(AssemblyFeatureInfo value) => value.Module.GetHashCode();
+
+            protected override int GetValueHashCode(AssemblyFeatureInfo value) =>
+                value.Module.GetHashCode();
 
             protected override AssemblyFeatureInfo CreateValueFromKey(EcmaModule key)
             {
@@ -100,16 +125,25 @@ namespace ILCompiler
 
             public IReadOnlySet<string> BlockedResources { get; }
 
-            public AssemblyFeatureInfo(EcmaModule module, Logger logger, IReadOnlyDictionary<string, bool> featureSwitchValues, IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> globalBlocks)
+            public AssemblyFeatureInfo(
+                EcmaModule module,
+                Logger logger,
+                IReadOnlyDictionary<string, bool> featureSwitchValues,
+                IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> globalBlocks
+            )
             {
                 Module = module;
                 BlockedResources = new HashSet<string>();
 
-                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress);
+                PEMemoryBlock resourceDirectory = module.PEReader.GetSectionData(
+                    module.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
+                );
 
                 foreach (var resourceHandle in module.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = module.MetadataReader.GetManifestResource(resourceHandle);
+                    ManifestResource resource = module.MetadataReader.GetManifestResource(
+                        resourceHandle
+                    );
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)
@@ -120,7 +154,10 @@ namespace ILCompiler
                     string resourceName = module.MetadataReader.GetString(resource.Name);
                     if (resourceName == "ILLink.Substitutions.xml")
                     {
-                        BlobReader reader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                        BlobReader reader = resourceDirectory.GetReader(
+                            (int)resource.Offset,
+                            resourceDirectory.Length - (int)resource.Offset
+                        );
                         int length = (int)reader.ReadUInt32();
 
                         UnmanagedMemoryStream ms;
@@ -129,11 +166,22 @@ namespace ILCompiler
                             ms = new UnmanagedMemoryStream(reader.CurrentPointer, length);
                         }
 
-                        BlockedResources = SubstitutionsReader.GetSubstitutions(logger, module.Context, ms, resource, module, "resource " + resourceName + " in " + module.ToString(), featureSwitchValues)[module];
+                        BlockedResources = SubstitutionsReader.GetSubstitutions(
+                            logger,
+                            module.Context,
+                            ms,
+                            resource,
+                            module,
+                            "resource " + resourceName + " in " + module.ToString(),
+                            featureSwitchValues
+                        )[module];
                     }
                 }
 
-                if (globalBlocks != null && globalBlocks.TryGetValue(module, out IReadOnlySet<string> fromGlobal))
+                if (
+                    globalBlocks != null
+                    && globalBlocks.TryGetValue(module, out IReadOnlySet<string> fromGlobal)
+                )
                 {
                     var result = new HashSet<string>(fromGlobal);
                     result.UnionWith(BlockedResources);
@@ -146,27 +194,75 @@ namespace ILCompiler
         {
             private readonly Dictionary<ModuleDesc, HashSet<string>> _substitutions = new();
 
-            private SubstitutionsReader(Logger logger, TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(logger, context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues)
+            private SubstitutionsReader(
+                Logger logger,
+                TypeSystemContext context,
+                Stream documentStream,
+                ManifestResource resource,
+                ModuleDesc resourceAssembly,
+                string xmlDocumentLocation,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
+                : base(
+                    logger,
+                    context,
+                    documentStream,
+                    resource,
+                    resourceAssembly,
+                    xmlDocumentLocation,
+                    featureSwitchValues
+                )
             {
                 _substitutions.Add(resourceAssembly, new HashSet<string>());
             }
 
-            private SubstitutionsReader(Logger logger, TypeSystemContext context, XmlReader document, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(logger, context, document, xmlDocumentLocation, featureSwitchValues)
-            {
-            }
+            private SubstitutionsReader(
+                Logger logger,
+                TypeSystemContext context,
+                XmlReader document,
+                string xmlDocumentLocation,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
+                : base(logger, context, document, xmlDocumentLocation, featureSwitchValues) { }
 
-            public static IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> GetSubstitutions(Logger logger, TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public static IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> GetSubstitutions(
+                Logger logger,
+                TypeSystemContext context,
+                Stream documentStream,
+                ManifestResource resource,
+                ModuleDesc resourceAssembly,
+                string xmlDocumentLocation,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
-                var rdr = new SubstitutionsReader(logger, context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues);
+                var rdr = new SubstitutionsReader(
+                    logger,
+                    context,
+                    documentStream,
+                    resource,
+                    resourceAssembly,
+                    xmlDocumentLocation,
+                    featureSwitchValues
+                );
                 rdr.ProcessXml(false);
                 return AsReadOnlyDictionary(rdr._substitutions);
             }
 
-            public static IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> GetSubstitutions(Logger logger, TypeSystemContext context, XmlReader document, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+            public static IReadOnlyDictionary<ModuleDesc, IReadOnlySet<string>> GetSubstitutions(
+                Logger logger,
+                TypeSystemContext context,
+                XmlReader document,
+                string xmlDocumentLocation,
+                IReadOnlyDictionary<string, bool> featureSwitchValues
+            )
             {
-                var rdr = new SubstitutionsReader(logger, context, document, xmlDocumentLocation, featureSwitchValues);
+                var rdr = new SubstitutionsReader(
+                    logger,
+                    context,
+                    document,
+                    xmlDocumentLocation,
+                    featureSwitchValues
+                );
                 rdr.ProcessXml(false);
                 return AsReadOnlyDictionary(rdr._substitutions);
             }
@@ -198,13 +294,18 @@ namespace ILCompiler
                 }
             }
 
-            protected override void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+            protected override void ProcessAssembly(
+                ModuleDesc assembly,
+                XPathNavigator nav,
+                bool warnOnUnresolvedTypes
+            )
             {
                 ProcessResources(assembly, nav);
             }
 
             // Should not be resolving types. That's useless work.
-            protected override void ProcessType(TypeDesc type, XPathNavigator nav) => throw new System.NotImplementedException();
+            protected override void ProcessType(TypeDesc type, XPathNavigator nav) =>
+                throw new System.NotImplementedException();
         }
     }
 

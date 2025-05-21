@@ -14,18 +14,19 @@ public class HttpValidationProblemDetails : ProblemDetails
     /// Initializes a new instance of <see cref="HttpValidationProblemDetails"/>.
     /// </summary>
     public HttpValidationProblemDetails()
-        : this(new Dictionary<string, string[]>(StringComparer.Ordinal))
-    {
-    }
+        : this(new Dictionary<string, string[]>(StringComparer.Ordinal)) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="HttpValidationProblemDetails"/> using the specified <paramref name="errors"/>.
     /// </summary>
     /// <param name="errors">The validation errors.</param>
     public HttpValidationProblemDetails(IDictionary<string, string[]> errors)
-        : this(new Dictionary<string, string[]>(errors ?? throw new ArgumentNullException(nameof(errors)), StringComparer.Ordinal))
-    {
-    }
+        : this(
+            new Dictionary<string, string[]>(
+                errors ?? throw new ArgumentNullException(nameof(errors)),
+                StringComparer.Ordinal
+            )
+        ) { }
 
     private HttpValidationProblemDetails(Dictionary<string, string[]> errors)
     {
@@ -36,5 +37,6 @@ public class HttpValidationProblemDetails : ProblemDetails
     /// <summary>
     /// Gets the validation errors associated with this instance of <see cref="HttpValidationProblemDetails"/>.
     /// </summary>
-    public IDictionary<string, string[]> Errors { get; set; } = new Dictionary<string, string[]>(StringComparer.Ordinal);
+    public IDictionary<string, string[]> Errors { get; set; } =
+        new Dictionary<string, string[]>(StringComparer.Ordinal);
 }

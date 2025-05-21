@@ -5,14 +5,14 @@
 #region Using directives
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Reflection;
-using System.Runtime.Serialization;
-using System.Workflow.ComponentModel;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Serialization;
+using System.Text;
+using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Xml;
 
@@ -22,10 +22,15 @@ namespace System.Workflow.Activities
 {
     internal static class CorrelationResolver
     {
-        static Dictionary<Type, CorrelationMethodResolver> cachedTypeResolver = new Dictionary<Type, CorrelationMethodResolver>();
+        static Dictionary<Type, CorrelationMethodResolver> cachedTypeResolver =
+            new Dictionary<Type, CorrelationMethodResolver>();
         static object mutex = new object();
 
-        internal static bool IsInitializingMember(Type interfaceType, string memberName, object[] methodArgs)
+        internal static bool IsInitializingMember(
+            Type interfaceType,
+            string memberName,
+            object[] methodArgs
+        )
         {
             if (interfaceType == null)
                 throw new ArgumentNullException("interfaceType");
@@ -34,11 +39,18 @@ namespace System.Workflow.Activities
             if (memberName.Length == 0)
                 throw new ArgumentException(SR.GetString(SR.Error_EventNameMissing));
 
-            ICorrelationProvider correlationProvider = CorrelationResolver.GetCorrelationProvider(interfaceType);
+            ICorrelationProvider correlationProvider = CorrelationResolver.GetCorrelationProvider(
+                interfaceType
+            );
             return correlationProvider.IsInitializingMember(interfaceType, memberName, methodArgs);
         }
 
-        internal static ICollection<CorrelationProperty> ResolveCorrelationValues(Type interfaceType, string eventName, object[] eventArgs, bool provideInitializerTokens)
+        internal static ICollection<CorrelationProperty> ResolveCorrelationValues(
+            Type interfaceType,
+            string eventName,
+            object[] eventArgs,
+            bool provideInitializerTokens
+        )
         {
             if (interfaceType == null)
                 throw new ArgumentNullException("interfaceType");
@@ -47,8 +59,15 @@ namespace System.Workflow.Activities
             if (eventName.Length == 0)
                 throw new ArgumentException(SR.GetString(SR.Error_EventNameMissing));
 
-            ICorrelationProvider correlationProvider = CorrelationResolver.GetCorrelationProvider(interfaceType);
-            return correlationProvider.ResolveCorrelationPropertyValues(interfaceType, eventName, eventArgs, provideInitializerTokens);
+            ICorrelationProvider correlationProvider = CorrelationResolver.GetCorrelationProvider(
+                interfaceType
+            );
+            return correlationProvider.ResolveCorrelationPropertyValues(
+                interfaceType,
+                eventName,
+                eventArgs,
+                provideInitializerTokens
+            );
         }
 
         internal static ICorrelationProvider GetCorrelationProvider(Type interfaceType)
@@ -101,14 +120,27 @@ namespace System.Workflow.Activities
                         if (this.correlationProvider == null)
                         {
                             ICorrelationProvider provider = null;
-                            object[] corrProviderAttribs = this.interfaceType.GetCustomAttributes(typeof(CorrelationProviderAttribute), true);
+                            object[] corrProviderAttribs = this.interfaceType.GetCustomAttributes(
+                                typeof(CorrelationProviderAttribute),
+                                true
+                            );
                             if (corrProviderAttribs.Length == 0)
                             {
-                                corrProviderAttribs = this.interfaceType.GetCustomAttributes(typeof(ExternalDataExchangeAttribute), true);
-                                object[] corrParameterAttribs = this.interfaceType.GetCustomAttributes(typeof(CorrelationParameterAttribute), true);
-                                if (corrProviderAttribs.Length != 0 && corrParameterAttribs.Length != 0)
+                                corrProviderAttribs = this.interfaceType.GetCustomAttributes(
+                                    typeof(ExternalDataExchangeAttribute),
+                                    true
+                                );
+                                object[] corrParameterAttribs =
+                                    this.interfaceType.GetCustomAttributes(
+                                        typeof(CorrelationParameterAttribute),
+                                        true
+                                    );
+                                if (
+                                    corrProviderAttribs.Length != 0
+                                    && corrParameterAttribs.Length != 0
+                                )
                                 {
-                                    // no provider specified but it is a data exchange correlation service 
+                                    // no provider specified but it is a data exchange correlation service
                                     // hence use our default correlation
                                     provider = new DefaultCorrelationProvider(this.interfaceType);
                                 }
@@ -120,9 +152,11 @@ namespace System.Workflow.Activities
                             }
                             else
                             {
-                                CorrelationProviderAttribute cpattrib = corrProviderAttribs[0] as CorrelationProviderAttribute;
+                                CorrelationProviderAttribute cpattrib =
+                                    corrProviderAttribs[0] as CorrelationProviderAttribute;
                                 Type providerType = cpattrib.CorrelationProviderType;
-                                provider = Activator.CreateInstance(providerType) as ICorrelationProvider;
+                                provider =
+                                    Activator.CreateInstance(providerType) as ICorrelationProvider;
                             }
 
                             System.Threading.Thread.MemoryBarrier();
@@ -167,9 +201,25 @@ namespace System.Workflow.Activities
                     string s = split[i];
                     if (null == arg)
                         break;
-                    val = type.InvokeMember(s, BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetField | BindingFlags.GetProperty, null, arg, null, null);
+                    val = type.InvokeMember(
+                        s,
+                        BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.GetField
+                            | BindingFlags.GetProperty,
+                        null,
+                        arg,
+                        null,
+                        null
+                    );
 
-                    MemberInfo[] mInfos = type.GetMember(s, BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetField | BindingFlags.GetProperty);
+                    MemberInfo[] mInfos = type.GetMember(
+                        s,
+                        BindingFlags.Public
+                            | BindingFlags.Instance
+                            | BindingFlags.GetField
+                            | BindingFlags.GetProperty
+                    );
 
                     type = GetMemberType(mInfos[0]);
                     arg = val;
@@ -180,10 +230,7 @@ namespace System.Workflow.Activities
 
         internal string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         private Type GetMemberType(MemberInfo mInfo)
@@ -200,7 +247,10 @@ namespace System.Workflow.Activities
                     break;
 
                 default:
-                    Debug.Assert(false, "locationPath points to something other than a Field/Property");
+                    Debug.Assert(
+                        false,
+                        "locationPath points to something other than a Field/Property"
+                    );
                     return null;
             }
 
@@ -227,7 +277,12 @@ namespace System.Workflow.Activities
             this.interfaceType = interfaceType;
         }
 
-        ICollection<CorrelationProperty> ICorrelationProvider.ResolveCorrelationPropertyValues(Type interfaceType, string methodName, object[] methodArgs, bool provideInitializerTokens)
+        ICollection<CorrelationProperty> ICorrelationProvider.ResolveCorrelationPropertyValues(
+            Type interfaceType,
+            string methodName,
+            object[] methodArgs,
+            bool provideInitializerTokens
+        )
         {
             CorrelationPropertyValue[] correlationProperties = null;
 
@@ -241,7 +296,10 @@ namespace System.Workflow.Activities
             {
                 lock (this.cachedCorrelationPropertiesSync)
                 {
-                    this.cachedCorrelationProperties.TryGetValue(methodName, out correlationProperties);
+                    this.cachedCorrelationProperties.TryGetValue(
+                        methodName,
+                        out correlationProperties
+                    );
                     if (correlationProperties == null)
                     {
                         correlationProperties = GetCorrelationProperties(interfaceType, methodName);
@@ -253,7 +311,12 @@ namespace System.Workflow.Activities
             List<CorrelationProperty> predicates = new List<CorrelationProperty>();
             for (int i = 0; i < correlationProperties.Length; i++)
             {
-                predicates.Add(new CorrelationProperty(correlationProperties[i].Name, correlationProperties[i].GetValue(methodArgs)));
+                predicates.Add(
+                    new CorrelationProperty(
+                        correlationProperties[i].Name,
+                        correlationProperties[i].GetValue(methodArgs)
+                    )
+                );
             }
 
             return predicates;
@@ -273,14 +336,28 @@ namespace System.Workflow.Activities
                             // note this is separated out since we may need to distinguish between events & methods
                             foreach (EventInfo member in this.interfaceType.GetEvents())
                             {
-                                if ((member.GetCustomAttributes(typeof(CorrelationInitializerAttribute), true)).Length > 0)
+                                if (
+                                    (
+                                        member.GetCustomAttributes(
+                                            typeof(CorrelationInitializerAttribute),
+                                            true
+                                        )
+                                    ).Length > 0
+                                )
                                 {
                                     members.Add(member.Name, true);
                                 }
                             }
                             foreach (MethodInfo member in this.interfaceType.GetMethods())
                             {
-                                if ((member.GetCustomAttributes(typeof(CorrelationInitializerAttribute), true)).Length > 0)
+                                if (
+                                    (
+                                        member.GetCustomAttributes(
+                                            typeof(CorrelationInitializerAttribute),
+                                            true
+                                        )
+                                    ).Length > 0
+                                )
                                 {
                                     members.Add(member.Name, false);
                                 }
@@ -294,23 +371,44 @@ namespace System.Workflow.Activities
             }
         }
 
-        bool ICorrelationProvider.IsInitializingMember(Type interfaceType, string memberName, object[] methodArgs)
+        bool ICorrelationProvider.IsInitializingMember(
+            Type interfaceType,
+            string memberName,
+            object[] methodArgs
+        )
         {
             return InitializerCorrelationPropertys.ContainsKey(memberName);
         }
 
-        private CorrelationPropertyValue[] GetCorrelationProperties(Type interfaceType, string methodName)
+        private CorrelationPropertyValue[] GetCorrelationProperties(
+            Type interfaceType,
+            string methodName
+        )
         {
             CorrelationPropertyValue[] correlationProperties = null;
 
-            if (interfaceType.GetCustomAttributes(typeof(ExternalDataExchangeAttribute), true).Length == 0)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ExternalDataExchangeException, interfaceType.AssemblyQualifiedName));
+            if (
+                interfaceType
+                    .GetCustomAttributes(typeof(ExternalDataExchangeAttribute), true)
+                    .Length == 0
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ExternalDataExchangeException,
+                        interfaceType.AssemblyQualifiedName
+                    )
+                );
 
             List<Object> correlationParamAttributes = new List<Object>();
             correlationParamAttributes.AddRange(GetCorrelationParameterAttributes(interfaceType));
 
             if (correlationParamAttributes.Count == 0)
-                throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationParameterException, interfaceType.AssemblyQualifiedName));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_CorrelationParameterException,
+                        interfaceType.AssemblyQualifiedName
+                    )
+                );
 
             correlationProperties = new CorrelationPropertyValue[correlationParamAttributes.Count];
 
@@ -330,25 +428,45 @@ namespace System.Workflow.Activities
             foreach (CorrelationParameterAttribute paramAttribute in correlationParamAttributes)
             {
                 String location = paramAttribute.Name;
-                CorrelationAliasAttribute aliasAttribute = GetMatchingCorrelationAlias(paramAttribute, corrAliases, correlationParamAttributes.Count == 1);
+                CorrelationAliasAttribute aliasAttribute = GetMatchingCorrelationAlias(
+                    paramAttribute,
+                    corrAliases,
+                    correlationParamAttributes.Count == 1
+                );
 
                 if (aliasAttribute != null)
                     location = aliasAttribute.Path;
 
-                CorrelationPropertyValue value = GetCorrelationProperty(parameters, paramAttribute.Name, location);
+                CorrelationPropertyValue value = GetCorrelationProperty(
+                    parameters,
+                    paramAttribute.Name,
+                    location
+                );
                 if (value == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CorrelationParameterException, interfaceType.AssemblyQualifiedName, paramAttribute.Name, methodName));
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.Error_CorrelationParameterException,
+                            interfaceType.AssemblyQualifiedName,
+                            paramAttribute.Name,
+                            methodName
+                        )
+                    );
 
                 correlationProperties[i++] = value;
             }
             return correlationProperties;
         }
 
-        private CorrelationAliasAttribute GetMatchingCorrelationAlias(CorrelationParameterAttribute paramAttribute, Dictionary<String, CorrelationAliasAttribute> correlationAliases, bool defaultParameter)
+        private CorrelationAliasAttribute GetMatchingCorrelationAlias(
+            CorrelationParameterAttribute paramAttribute,
+            Dictionary<String, CorrelationAliasAttribute> correlationAliases,
+            bool defaultParameter
+        )
         {
             CorrelationAliasAttribute corrAlias = null;
 
-            if (correlationAliases == null) return null;
+            if (correlationAliases == null)
+                return null;
 
             if (defaultParameter)
             {
@@ -362,7 +480,11 @@ namespace System.Workflow.Activities
             return corrAlias;
         }
 
-        private CorrelationPropertyValue GetCorrelationProperty(ParameterInfo[] parameters, String propertyName, String location)
+        private CorrelationPropertyValue GetCorrelationProperty(
+            ParameterInfo[] parameters,
+            String propertyName,
+            String location
+        )
         {
             string[] split = location.Split(new Char[] { '.' });
 
@@ -373,27 +495,38 @@ namespace System.Workflow.Activities
                     string aliasedLocation = "e." + location;
                     return GetCorrelationProperty(parameters, propertyName, "e", aliasedLocation);
                 }
-
             }
             string parameterName = split[0];
 
             return GetCorrelationProperty(parameters, propertyName, parameterName, location);
         }
 
-        private void GetMethodInfo(Type interfaceType, string methodName, out MethodInfo methodInfo, out Dictionary<String, CorrelationAliasAttribute> correlationAliases)
+        private void GetMethodInfo(
+            Type interfaceType,
+            string methodName,
+            out MethodInfo methodInfo,
+            out Dictionary<String, CorrelationAliasAttribute> correlationAliases
+        )
         {
             correlationAliases = new Dictionary<String, CorrelationAliasAttribute>();
             Object[] customAttrs = null;
             methodInfo = null;
             // check events
-            BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            BindingFlags bindingFlags =
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             EventInfo eventInfo = interfaceType.GetEvent(methodName, bindingFlags);
             if (eventInfo != null)
             {
-                customAttrs = eventInfo.GetCustomAttributes(typeof(CorrelationAliasAttribute), true);
+                customAttrs = eventInfo.GetCustomAttributes(
+                    typeof(CorrelationAliasAttribute),
+                    true
+                );
                 if (customAttrs == null || customAttrs.Length == 0)
                 {
-                    customAttrs = eventInfo.EventHandlerType.GetCustomAttributes(typeof(CorrelationAliasAttribute), true);
+                    customAttrs = eventInfo.EventHandlerType.GetCustomAttributes(
+                        typeof(CorrelationAliasAttribute),
+                        true
+                    );
                 }
                 MethodInfo[] methInfo = eventInfo.EventHandlerType.GetMethods();
                 methodInfo = methInfo[0];
@@ -404,9 +537,15 @@ namespace System.Workflow.Activities
                 methodInfo = interfaceType.GetMethod(methodName, bindingFlags);
                 if (methodInfo == null)
                 {
-                    throw new MissingMethodException(interfaceType.AssemblyQualifiedName, methodName);
+                    throw new MissingMethodException(
+                        interfaceType.AssemblyQualifiedName,
+                        methodName
+                    );
                 }
-                customAttrs = methodInfo.GetCustomAttributes(typeof(CorrelationAliasAttribute), true);
+                customAttrs = methodInfo.GetCustomAttributes(
+                    typeof(CorrelationAliasAttribute),
+                    true
+                );
             }
 
             foreach (CorrelationAliasAttribute aliasAttribute in customAttrs)
@@ -417,11 +556,19 @@ namespace System.Workflow.Activities
                     if (aliasAttribute.Name == null)
                         throw new ArgumentNullException("ParameterName");
                 }
-                correlationAliases.Add(aliasAttribute.Name == null ? "" : aliasAttribute.Name, aliasAttribute);
+                correlationAliases.Add(
+                    aliasAttribute.Name == null ? "" : aliasAttribute.Name,
+                    aliasAttribute
+                );
             }
         }
 
-        private CorrelationPropertyValue GetCorrelationProperty(ParameterInfo[] parameters, string propertyName, string parameterName, string location)
+        private CorrelationPropertyValue GetCorrelationProperty(
+            ParameterInfo[] parameters,
+            string propertyName,
+            string parameterName,
+            string location
+        )
         {
             for (int j = 0; parameters != null && j < parameters.Length; j++)
             {
@@ -444,18 +591,25 @@ namespace System.Workflow.Activities
 
     internal sealed class NonCorrelatedProvider : ICorrelationProvider
     {
-        internal NonCorrelatedProvider()
-        {
-        }
+        internal NonCorrelatedProvider() { }
 
-        ICollection<CorrelationProperty> ICorrelationProvider.ResolveCorrelationPropertyValues(Type interfaceType, string methodName, object[] methodArgs, bool provideInitializerTokens)
+        ICollection<CorrelationProperty> ICorrelationProvider.ResolveCorrelationPropertyValues(
+            Type interfaceType,
+            string methodName,
+            object[] methodArgs,
+            bool provideInitializerTokens
+        )
         {
-            // non correlated 
+            // non correlated
             // no values to return
             return null;
         }
 
-        bool ICorrelationProvider.IsInitializingMember(Type interfaceType, string memberName, object[] methodArgs)
+        bool ICorrelationProvider.IsInitializingMember(
+            Type interfaceType,
+            string memberName,
+            object[] methodArgs
+        )
         {
             return true;
         }

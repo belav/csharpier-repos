@@ -22,8 +22,8 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
     protected PersistedGrantDbContextFixtureBase Fixture { get; }
 
     [ConditionalFact]
-    public async Task Can_call_PersistedGrantStore_GetAllAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_PersistedGrantStore_GetAllAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveGrants(context);
@@ -32,13 +32,16 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
             {
                 var store = new PersistedGrantStore(context, new FakeLogger<PersistedGrantStore>());
 
-                var results = (await store.GetAllAsync(
-                    new PersistedGrantFilter
-                    {
-                        Type = "T1",
-                        SessionId = "Se1",
-                        SubjectId = "Su1"
-                    })).ToList();
+                var results = (
+                    await store.GetAllAsync(
+                        new PersistedGrantFilter
+                        {
+                            Type = "T1",
+                            SessionId = "Se1",
+                            SubjectId = "Su1",
+                        }
+                    )
+                ).ToList();
 
                 Assert.Equal(2, results.Count);
             }
@@ -59,8 +62,9 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                 CreationTime = DateTime.Now,
                 Expiration = null,
                 ConsumedTime = null,
-                Data = "Data1"
-            });
+                Data = "Data1",
+            }
+        );
         await store.StoreAsync(
             new PersistedGrant
             {
@@ -73,8 +77,9 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                 CreationTime = DateTime.Now,
                 Expiration = DateTime.Now + new TimeSpan(1, 0, 0, 0),
                 ConsumedTime = null,
-                Data = "Data2"
-            });
+                Data = "Data2",
+            }
+        );
         await store.StoreAsync(
             new PersistedGrant
             {
@@ -87,13 +92,14 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                 CreationTime = DateTime.Now,
                 Expiration = null,
                 ConsumedTime = null,
-                Data = "Data3"
-            });
+                Data = "Data3",
+            }
+        );
     }
 
     [ConditionalFact]
-    public async Task Can_call_PersistedGrantStore_GetAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_PersistedGrantStore_GetAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveGrants(context);
@@ -108,8 +114,8 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
         );
 
     [ConditionalFact]
-    public async Task Can_call_PersistedGrantStore_RemoveAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_PersistedGrantStore_RemoveAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveGrants(context);
@@ -125,8 +131,8 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
         );
 
     [ConditionalFact]
-    public async Task Can_call_PersistedGrantStore_RemoveAllAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_PersistedGrantStore_RemoveAllAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveGrants(context);
@@ -140,8 +146,9 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                     {
                         Type = "T1",
                         SessionId = "Se1",
-                        SubjectId = "Su1"
-                    });
+                        SubjectId = "Su1",
+                    }
+                );
 
                 Assert.Null(await store.GetAsync("K1"));
                 Assert.Null(await store.GetAsync("K2"));
@@ -150,8 +157,8 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
         );
 
     [ConditionalFact]
-    public async Task Can_call_TokenCleanupService_RemoveExpiredGrantsAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_TokenCleanupService_RemoveExpiredGrantsAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveGrants(context);
@@ -159,37 +166,49 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
             },
             async context =>
             {
-                var service = new TokenCleanupService(new OperationalStoreOptions(), context, new FakeLogger<TokenCleanupService>());
+                var service = new TokenCleanupService(
+                    new OperationalStoreOptions(),
+                    context,
+                    new FakeLogger<TokenCleanupService>()
+                );
 
                 await service.RemoveExpiredGrantsAsync();
             }
         );
 
     [ConditionalFact]
-    public async Task Can_call_DeviceFlowStore_FindByUserCodeAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_DeviceFlowStore_FindByUserCodeAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveDevices(context);
             },
             async context =>
             {
-                var store = new DeviceFlowStore(context, new PersistentGrantSerializer(), new FakeLogger<DeviceFlowStore>());
+                var store = new DeviceFlowStore(
+                    context,
+                    new PersistentGrantSerializer(),
+                    new FakeLogger<DeviceFlowStore>()
+                );
 
                 Assert.Equal("D2", (await store.FindByUserCodeAsync("U2")).Description);
             }
         );
 
     [ConditionalFact]
-    public async Task Can_call_DeviceFlowStore_FindByDeviceCodeAsync_and_RemoveByDeviceCodeAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+    public async Task Can_call_DeviceFlowStore_FindByDeviceCodeAsync_and_RemoveByDeviceCodeAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveDevices(context);
             },
             async context =>
             {
-                var store = new DeviceFlowStore(context, new PersistentGrantSerializer(), new FakeLogger<DeviceFlowStore>());
+                var store = new DeviceFlowStore(
+                    context,
+                    new PersistentGrantSerializer(),
+                    new FakeLogger<DeviceFlowStore>()
+                );
 
                 Assert.Equal("D2", (await store.FindByDeviceCodeAsync("DC2")).Description);
                 await store.RemoveByDeviceCodeAsync("DC2");
@@ -201,10 +220,16 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
 
     private static async Task SaveDevices(PersistedGrantDbContext context)
     {
-        var store = new DeviceFlowStore(context, new PersistentGrantSerializer(), new FakeLogger<DeviceFlowStore>());
+        var store = new DeviceFlowStore(
+            context,
+            new PersistentGrantSerializer(),
+            new FakeLogger<DeviceFlowStore>()
+        );
 
         await store.StoreDeviceAuthorizationAsync(
-            "DC1", "U1", new DeviceCode
+            "DC1",
+            "U1",
+            new DeviceCode
             {
                 CreationTime = DateTime.Now,
                 Lifetime = 100,
@@ -214,11 +239,14 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                 IsAuthorized = true,
                 RequestedScopes = new List<string>(),
                 AuthorizedScopes = new List<string>(),
-                SessionId = "S1"
-            });
+                SessionId = "S1",
+            }
+        );
 
         await store.StoreDeviceAuthorizationAsync(
-            "DC2", "U2", new DeviceCode
+            "DC2",
+            "U2",
+            new DeviceCode
             {
                 CreationTime = DateTime.Now,
                 Lifetime = 100,
@@ -228,11 +256,14 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                 IsAuthorized = true,
                 RequestedScopes = new List<string>(),
                 AuthorizedScopes = new List<string>(),
-                SessionId = "S2"
-            });
+                SessionId = "S2",
+            }
+        );
 
         await store.StoreDeviceAuthorizationAsync(
-            "DC3", "U3", new DeviceCode
+            "DC3",
+            "U3",
+            new DeviceCode
             {
                 CreationTime = DateTime.Now,
                 Lifetime = 100,
@@ -242,8 +273,9 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                 IsAuthorized = true,
                 RequestedScopes = new List<string>(),
                 AuthorizedScopes = new List<string>(),
-                SessionId = "S3"
-            });
+                SessionId = "S3",
+            }
+        );
     }
 
     [ConditionalFact]
@@ -251,14 +283,17 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
     {
         using (var context = CreateContext())
         {
-            var entityTypeMappings = context.Model.GetEntityTypes().Select(e => new EntityTypeMapping(e)).ToList();
+            var entityTypeMappings = context
+                .Model.GetEntityTypes()
+                .Select(e => new EntityTypeMapping(e))
+                .ToList();
 
             EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);
         }
     }
 
-    protected virtual List<EntityTypeMapping> ExpectedMappings
-        => new()
+    protected virtual List<EntityTypeMapping> ExpectedMappings =>
+        new()
         {
             new EntityTypeMapping
             {
@@ -277,10 +312,7 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
                     "Property: DeviceFlowCodes.SessionId (string) MaxLength(100)",
                     "Property: DeviceFlowCodes.SubjectId (string) MaxLength(200)",
                 },
-                Indexes =
-                {
-                    "{'DeviceCode'} Unique", "{'Expiration'} ",
-                },
+                Indexes = { "{'DeviceCode'} Unique", "{'Expiration'} " },
             },
             new EntityTypeMapping
             {
@@ -309,37 +341,44 @@ public abstract class PersistedGrantDbContextTestBase<TFixture> : IClassFixture<
             },
         };
 
-    protected PersistedGrantDbContext CreateContext()
-        => Fixture.CreateContext();
+    protected PersistedGrantDbContext CreateContext() => Fixture.CreateContext();
 
     protected virtual Task ExecuteWithStrategyInTransactionAsync(
         Func<PersistedGrantDbContext, Task> testOperation,
         Func<PersistedGrantDbContext, Task> nestedTestOperation1 = null,
         Func<PersistedGrantDbContext, Task> nestedTestOperation2 = null,
-        Func<PersistedGrantDbContext, Task> nestedTestOperation3 = null)
-        => TestHelpers.ExecuteWithStrategyInTransactionAsync(
-            CreateContext, UseTransaction,
-            testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+        Func<PersistedGrantDbContext, Task> nestedTestOperation3 = null
+    ) =>
+        TestHelpers.ExecuteWithStrategyInTransactionAsync(
+            CreateContext,
+            UseTransaction,
+            testOperation,
+            nestedTestOperation1,
+            nestedTestOperation2,
+            nestedTestOperation3
+        );
 
-    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected virtual void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    public abstract class PersistedGrantDbContextFixtureBase : SharedStoreFixtureBase<PersistedGrantDbContext>
+    public abstract class PersistedGrantDbContextFixtureBase
+        : SharedStoreFixtureBase<PersistedGrantDbContext>
     {
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection)
-                .AddSingleton<OperationalStoreOptions>();
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection).AddSingleton<OperationalStoreOptions>();
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder)
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
-                .ConfigureWarnings(
-                    b => b.Default(WarningBehavior.Throw)
+                .ConfigureWarnings(b =>
+                    b.Default(WarningBehavior.Throw)
                         .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                );
 
-        protected override bool UsePooling
-            => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
+        protected override bool UsePooling => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
     }
 }

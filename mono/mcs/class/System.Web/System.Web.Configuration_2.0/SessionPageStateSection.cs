@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,37 +32,41 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class SessionPageStateSection : ConfigurationSection
+    {
+        static ConfigurationProperty historySizeProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        public const int DefaultHistorySize = 9;
 
-	public sealed class SessionPageStateSection : ConfigurationSection
-	{
-		static ConfigurationProperty historySizeProp;
-		static ConfigurationPropertyCollection properties;
+        static SessionPageStateSection()
+        {
+            historySizeProp = new ConfigurationProperty(
+                "historySize",
+                typeof(int),
+                DefaultHistorySize,
+                TypeDescriptor.GetConverter(typeof(int)),
+                new IntegerValidator(1, Int32.MaxValue),
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
 
-		public const int DefaultHistorySize = 9;
+            properties.Add(historySizeProp);
+        }
 
-		static SessionPageStateSection ()
-		{
-			historySizeProp = new ConfigurationProperty ("historySize", typeof (int), DefaultHistorySize,
-								     TypeDescriptor.GetConverter (typeof (int)),
-								     new IntegerValidator (1, Int32.MaxValue),
-								     ConfigurationPropertyOptions.None);
-			properties = new ConfigurationPropertyCollection ();
+        [IntegerValidator(MinValue = 1, MaxValue = Int32.MaxValue)]
+        [ConfigurationProperty("historySize", DefaultValue = "9")]
+        public int HistorySize
+        {
+            get { return (int)base[historySizeProp]; }
+            set { base[historySizeProp] = value; }
+        }
 
-			properties.Add (historySizeProp);
-		}
-
-		[IntegerValidator (MinValue = 1, MaxValue = Int32.MaxValue)]
-		[ConfigurationProperty ("historySize", DefaultValue = "9")]
-		public int HistorySize {
-			get { return (int) base [historySizeProp];}
-			set { base[historySizeProp] = value; }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

@@ -43,8 +43,14 @@
         <Target Type="T:MyFramework.MyNamespace.MyClass" />
       </Targets>
       <Member MemberName="AnExtension">
-        <MemberSignature Language="C#" Value="public static bool AnExtension (this MyFramework.MyNamespace.MyClass value);" />
-        <MemberSignature Language="ILAsm" Value=".method public static hidebysig bool AnExtension(class MyFramework.MyNamespace.MyClass value) cil managed" />
+        <MemberSignature
+          Language="C#"
+          Value="public static bool AnExtension (this MyFramework.MyNamespace.MyClass value);"
+        />
+        <MemberSignature
+          Language="ILAsm"
+          Value=".method public static hidebysig bool AnExtension(class MyFramework.MyNamespace.MyClass value) cil managed"
+        />
         <MemberType>ExtensionMethod</MemberType>
         <ReturnValue>
           <ReturnType>System.Boolean</ReturnType>
@@ -56,7 +62,10 @@
           <param name="value">To be added.</param>
           <summary>To be added.</summary>
         </Docs>
-        <Link Type="MyFramework.MyNamespace.MyClassExtensions" Member="M:MyFramework.MyNamespace.MyClassExtensions.AnExtension(MyFramework.MyNamespace.MyClass)" />
+        <Link
+          Type="MyFramework.MyNamespace.MyClassExtensions"
+          Member="M:MyFramework.MyNamespace.MyClassExtensions.AnExtension(MyFramework.MyNamespace.MyClass)"
+        />
       </Member>
     </ExtensionMethod>
   </ExtensionMethods>

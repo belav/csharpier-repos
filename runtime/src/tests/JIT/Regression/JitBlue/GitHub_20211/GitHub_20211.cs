@@ -75,7 +75,11 @@ namespace GitHub_20211
             return (double)Math.Sqrt(arg[0]);
         }
 
-        enum Result { Pass, Fail }
+        enum Result
+        {
+            Pass,
+            Fail,
+        }
 
         struct TestRunner
         {

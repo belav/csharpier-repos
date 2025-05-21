@@ -13,17 +13,17 @@ using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.EntityModel.Emitters;
-using SOM = System.Data.EntityModel.SchemaObjectModel;
-using System.Diagnostics;
-using System.Data.Metadata.Edm;
 using System.Data.Entity.Design;
-using System.IO;
-using System.Data.EntityModel.SchemaObjectModel;
-using System.Data.Entity.Design.SsdlGenerator;
-using System.Linq;
 using System.Data.Entity.Design.Common;
+using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.EntityModel.Emitters;
+using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Runtime.Versioning;
+using SOM = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel
 {
@@ -48,7 +48,12 @@ namespace System.Data.EntityModel
         #endregion
 
         #region Public Methods
-        public ClientApiGenerator(Schema sourceSchema, EdmItemCollection edmItemCollection, EntityClassGenerator generator, List<EdmSchemaError> errors)
+        public ClientApiGenerator(
+            Schema sourceSchema,
+            EdmItemCollection edmItemCollection,
+            EntityClassGenerator generator,
+            List<EdmSchemaError> errors
+        )
         {
             Debug.Assert(sourceSchema != null, "sourceSchema is null");
             Debug.Assert(edmItemCollection != null, "edmItemCollection is null");
@@ -71,8 +76,8 @@ namespace System.Data.EntityModel
         /// <param name="outputUri">The Uri for the output. Can be null.</param>
         /// <returns>A list of GeneratorErrors.</returns>
         [ResourceExposure(ResourceScope.None)] //No resource is exposed.
-        [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)] //For Path.GetTempPath method. 
-                                                                            //We use tha path to create a temp file stream which is consistent with the resource consumption of machine.
+        [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)] //For Path.GetTempPath method.
+        //We use tha path to create a temp file stream which is consistent with the resource consumption of machine.
 
         internal void GenerateCode(LazyTextWriterCreator target, string targetLocation)
         {
@@ -97,7 +102,8 @@ namespace System.Data.EntityModel
                         break;
                 }
 
-                _isLanguageCaseSensitive = (provider.LanguageOptions & LanguageOptions.CaseInsensitive) == 0;
+                _isLanguageCaseSensitive =
+                    (provider.LanguageOptions & LanguageOptions.CaseInsensitive) == 0;
 
                 new NamespaceEmitter(this, _codeNamespace, target.TargetFilePath).Emit();
 
@@ -109,17 +115,30 @@ namespace System.Data.EntityModel
 
                 if (FixUps.Count == 0 || !FixUpCollection.IsLanguageSupported(Language))
                 {
-                    indentedTextWriter = new IndentedTextWriter(target.GetOrCreateTextWriter(), "\t");
+                    indentedTextWriter = new IndentedTextWriter(
+                        target.GetOrCreateTextWriter(),
+                        "\t"
+                    );
                 }
                 else
                 {
                     // need to write to a temporary file so we can do fixups...
                     tempFiles = new TempFileCollection(Path.GetTempPath());
-                    string filename = Path.Combine(tempFiles.TempDir, "EdmCodeGenFixup-" + Guid.NewGuid().ToString() + ".tmp");
+                    string filename = Path.Combine(
+                        tempFiles.TempDir,
+                        "EdmCodeGenFixup-" + Guid.NewGuid().ToString() + ".tmp"
+                    );
                     tempFiles.AddFile(filename, false);
-                    tempFileStream = new System.IO.FileStream(filename, System.IO.FileMode.CreateNew, System.IO.FileAccess.ReadWrite,
-                        System.IO.FileShare.None);
-                    indentedTextWriter = new IndentedTextWriter(new System.IO.StreamWriter(tempFileStream), "\t");
+                    tempFileStream = new System.IO.FileStream(
+                        filename,
+                        System.IO.FileMode.CreateNew,
+                        System.IO.FileAccess.ReadWrite,
+                        System.IO.FileShare.None
+                    );
+                    indentedTextWriter = new IndentedTextWriter(
+                        new System.IO.StreamWriter(tempFileStream),
+                        "\t"
+                    );
                 }
 
                 CodeGeneratorOptions styleOptions = new CodeGeneratorOptions();
@@ -134,7 +153,12 @@ namespace System.Data.EntityModel
                     indentedTextWriter.Flush();
                     tempFileStream.Seek(0, System.IO.SeekOrigin.Begin);
                     reader = new System.IO.StreamReader(tempFileStream);
-                    FixUps.Do(reader, target.GetOrCreateTextWriter(), Language, SourceObjectNamespaceName != string.Empty);
+                    FixUps.Do(
+                        reader,
+                        target.GetOrCreateTextWriter(),
+                        Language,
+                        SourceObjectNamespaceName != string.Empty
+                    );
                 }
             }
             catch (System.UnauthorizedAccessException ex)
@@ -197,17 +221,23 @@ namespace System.Data.EntityModel
             try
             {
                 _edmItemCollection.GetItem<GlobalItem>(
-                                                        item.Identity,
-                                                        true   // ignore case
-                                                    );
+                    item.Identity,
+                    true // ignore case
+                );
             }
             catch (InvalidOperationException)
             {
-                AddError(Strings.ItemExistsWithDifferentCase(item.BuiltInTypeKind.ToString(), item.Identity), ModelBuilderErrorCode.IncompatibleSettingForCaseSensitiveOption,
-                    EdmSchemaErrorSeverity.Error, item.Identity);
+                AddError(
+                    Strings.ItemExistsWithDifferentCase(
+                        item.BuiltInTypeKind.ToString(),
+                        item.Identity
+                    ),
+                    ModelBuilderErrorCode.IncompatibleSettingForCaseSensitiveOption,
+                    EdmSchemaErrorSeverity.Error,
+                    item.Identity
+                );
             }
         }
-
 
         /// <summary>
         /// Verification code invoked for properties
@@ -223,16 +253,23 @@ namespace System.Data.EntityModel
             Debug.Assert(item != null);
 
             ReadOnlyMetadataCollection<EdmMember> members = item.DeclaringType.Members;
-            
+
             HashSet<string> set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (EdmMember member in members)
             {
-                if (set.Contains(member.Identity) &&
-                    item.Identity.Equals(member.Identity, StringComparison.OrdinalIgnoreCase))
+                if (
+                    set.Contains(member.Identity)
+                    && item.Identity.Equals(member.Identity, StringComparison.OrdinalIgnoreCase)
+                )
                 {
-                    AddError(Strings.PropertyExistsWithDifferentCase(item.Identity), ModelBuilderErrorCode.IncompatibleSettingForCaseSensitiveOption,
-                    EdmSchemaErrorSeverity.Error, item.DeclaringType.FullName, item.Identity);
+                    AddError(
+                        Strings.PropertyExistsWithDifferentCase(item.Identity),
+                        ModelBuilderErrorCode.IncompatibleSettingForCaseSensitiveOption,
+                        EdmSchemaErrorSeverity.Error,
+                        item.DeclaringType.FullName,
+                        item.Identity
+                    );
                 }
                 else
                 {
@@ -245,7 +282,9 @@ namespace System.Data.EntityModel
         /// Verification code invoked for entity sets
         /// </summary>
         /// <param name="item">The entity container being generated</param>
-        internal void VerifyLanguageCaseSensitiveCompatibilityForEntitySet(System.Data.Metadata.Edm.EntityContainer item)
+        internal void VerifyLanguageCaseSensitiveCompatibilityForEntitySet(
+            System.Data.Metadata.Edm.EntityContainer item
+        )
         {
             if (_isLanguageCaseSensitive)
             {
@@ -263,9 +302,14 @@ namespace System.Data.EntityModel
                     EntitySet entitySet = (EntitySet)entitySetBase;
                     if (set.Contains(entitySet.Identity))
                     {
-                        AddError(ModelBuilderErrorCode.IncompatibleSettingForCaseSensitiveOption,
-                        EdmSchemaErrorSeverity.Error, new InvalidOperationException(Strings.EntitySetExistsWithDifferentCase(entitySet.Identity)),
-                        item.Name);
+                        AddError(
+                            ModelBuilderErrorCode.IncompatibleSettingForCaseSensitiveOption,
+                            EdmSchemaErrorSeverity.Error,
+                            new InvalidOperationException(
+                                Strings.EntitySetExistsWithDifferentCase(entitySet.Identity)
+                            ),
+                            item.Name
+                        );
                     }
                     else
                     {
@@ -281,10 +325,13 @@ namespace System.Data.EntityModel
         }
 
         private static System.Data.EntityModel.SchemaObjectModel.SchemaElement GetSchemaElement(
-            System.Data.EntityModel.SchemaObjectModel.Schema schema, string itemIdentity)
+            System.Data.EntityModel.SchemaObjectModel.Schema schema,
+            string itemIdentity
+        )
         {
-            List<System.Data.EntityModel.SchemaObjectModel.SchemaType> schemaTypes =
-                           schema.SchemaTypes.Where(p => p.Identity == itemIdentity).ToList();
+            List<System.Data.EntityModel.SchemaObjectModel.SchemaType> schemaTypes = schema
+                .SchemaTypes.Where(p => p.Identity == itemIdentity)
+                .ToList();
             if (null != schemaTypes && schemaTypes.Count > 0)
             {
                 return (System.Data.EntityModel.SchemaObjectModel.SchemaElement)schemaTypes.First();
@@ -293,14 +340,21 @@ namespace System.Data.EntityModel
             {
                 return null;
             }
-
         }
 
-        internal static void GetElementLocationInfo(System.Data.EntityModel.SchemaObjectModel.Schema schema, string itemIdentity, out int lineNumber, out int linePosition)
+        internal static void GetElementLocationInfo(
+            System.Data.EntityModel.SchemaObjectModel.Schema schema,
+            string itemIdentity,
+            out int lineNumber,
+            out int linePosition
+        )
         {
-            System.Data.EntityModel.SchemaObjectModel.SchemaElement element = GetSchemaElement(schema, itemIdentity);
+            System.Data.EntityModel.SchemaObjectModel.SchemaElement element = GetSchemaElement(
+                schema,
+                itemIdentity
+            );
 
-            if(null != element)
+            if (null != element)
             {
                 lineNumber = element.LineNumber;
                 linePosition = element.LinePosition;
@@ -311,20 +365,32 @@ namespace System.Data.EntityModel
             }
         }
 
-        internal static void GetElementLocationInfo(System.Data.EntityModel.SchemaObjectModel.Schema schema, string parentIdentity, string itemIdentity, out int lineNumber, out int linePosition)
+        internal static void GetElementLocationInfo(
+            System.Data.EntityModel.SchemaObjectModel.Schema schema,
+            string parentIdentity,
+            string itemIdentity,
+            out int lineNumber,
+            out int linePosition
+        )
         {
             lineNumber = linePosition = -1;
 
-            System.Data.EntityModel.SchemaObjectModel.SchemaElement element = GetSchemaElement(schema, parentIdentity);
-            System.Data.EntityModel.SchemaObjectModel.StructuredType elementWithProperty = 
+            System.Data.EntityModel.SchemaObjectModel.SchemaElement element = GetSchemaElement(
+                schema,
+                parentIdentity
+            );
+            System.Data.EntityModel.SchemaObjectModel.StructuredType elementWithProperty =
                 element as System.Data.EntityModel.SchemaObjectModel.StructuredType;
 
-            if (null != elementWithProperty && elementWithProperty.Properties.ContainsKey(itemIdentity))
+            if (
+                null != elementWithProperty
+                && elementWithProperty.Properties.ContainsKey(itemIdentity)
+            )
             {
-                    lineNumber = elementWithProperty.Properties[itemIdentity].LineNumber;
-                    linePosition = elementWithProperty.Properties[itemIdentity].LinePosition;
+                lineNumber = elementWithProperty.Properties[itemIdentity].LineNumber;
+                linePosition = elementWithProperty.Properties[itemIdentity].LinePosition;
             }
-            else if( null != element)
+            else if (null != element)
             {
                 lineNumber = element.LineNumber;
                 linePosition = element.LinePosition;
@@ -337,10 +403,7 @@ namespace System.Data.EntityModel
 
         internal LanguageOption Language
         {
-            get
-            {
-                return _generator.LanguageOption;
-            }
+            get { return _generator.LanguageOption; }
         }
 
         internal TypeReference TypeReference
@@ -359,43 +422,119 @@ namespace System.Data.EntityModel
             }
         }
 
-        public void AddError(string message, ModelBuilderErrorCode errorCode, EdmSchemaErrorSeverity severity)
+        public void AddError(
+            string message,
+            ModelBuilderErrorCode errorCode,
+            EdmSchemaErrorSeverity severity
+        )
         {
             _errors.Add(new EdmSchemaError(message, (int)errorCode, severity));
         }
 
-        public void AddError(ModelBuilderErrorCode errorCode, EdmSchemaErrorSeverity severity, Exception ex)
+        public void AddError(
+            ModelBuilderErrorCode errorCode,
+            EdmSchemaErrorSeverity severity,
+            Exception ex
+        )
         {
             _errors.Add(new EdmSchemaError(ex.Message, (int)errorCode, severity, ex));
         }
 
-        internal void AddError(string message, ModelBuilderErrorCode errorCode, EdmSchemaErrorSeverity severity, Exception ex)
+        internal void AddError(
+            string message,
+            ModelBuilderErrorCode errorCode,
+            EdmSchemaErrorSeverity severity,
+            Exception ex
+        )
         {
             _errors.Add(new EdmSchemaError(message, (int)errorCode, severity, ex));
         }
 
-        internal void AddError(ModelBuilderErrorCode errorCode, EdmSchemaErrorSeverity severity, Exception ex, string itemIdentity)
+        internal void AddError(
+            ModelBuilderErrorCode errorCode,
+            EdmSchemaErrorSeverity severity,
+            Exception ex,
+            string itemIdentity
+        )
         {
-            int lineNumber, linePosition;
-            ClientApiGenerator.GetElementLocationInfo(this._sourceSchema, itemIdentity, out lineNumber, out linePosition);
+            int lineNumber,
+                linePosition;
+            ClientApiGenerator.GetElementLocationInfo(
+                this._sourceSchema,
+                itemIdentity,
+                out lineNumber,
+                out linePosition
+            );
 
-            _errors.Add(new EdmSchemaError(ex.Message, (int)errorCode, severity, this._sourceSchema.Location, lineNumber, linePosition, ex));
+            _errors.Add(
+                new EdmSchemaError(
+                    ex.Message,
+                    (int)errorCode,
+                    severity,
+                    this._sourceSchema.Location,
+                    lineNumber,
+                    linePosition,
+                    ex
+                )
+            );
         }
 
-        internal void AddError(string message, ModelBuilderErrorCode errorCode, EdmSchemaErrorSeverity severity, string itemIdentity)
+        internal void AddError(
+            string message,
+            ModelBuilderErrorCode errorCode,
+            EdmSchemaErrorSeverity severity,
+            string itemIdentity
+        )
         {
-            int lineNumber, linePosition;
-            ClientApiGenerator.GetElementLocationInfo(this._sourceSchema, itemIdentity, out lineNumber, out linePosition);
+            int lineNumber,
+                linePosition;
+            ClientApiGenerator.GetElementLocationInfo(
+                this._sourceSchema,
+                itemIdentity,
+                out lineNumber,
+                out linePosition
+            );
 
-            _errors.Add(new EdmSchemaError(message, (int)errorCode, severity, this._sourceSchema.Location, lineNumber, linePosition));
+            _errors.Add(
+                new EdmSchemaError(
+                    message,
+                    (int)errorCode,
+                    severity,
+                    this._sourceSchema.Location,
+                    lineNumber,
+                    linePosition
+                )
+            );
         }
 
-        internal void AddError(string message, ModelBuilderErrorCode errorCode, EdmSchemaErrorSeverity severity, string parentIdentity, string itemIdentity)
+        internal void AddError(
+            string message,
+            ModelBuilderErrorCode errorCode,
+            EdmSchemaErrorSeverity severity,
+            string parentIdentity,
+            string itemIdentity
+        )
         {
-            int lineNumber, linePosition;
-            ClientApiGenerator.GetElementLocationInfo(this._sourceSchema, parentIdentity, itemIdentity, out lineNumber, out linePosition);
+            int lineNumber,
+                linePosition;
+            ClientApiGenerator.GetElementLocationInfo(
+                this._sourceSchema,
+                parentIdentity,
+                itemIdentity,
+                out lineNumber,
+                out linePosition
+            );
 
-            _errors.Add(new EdmSchemaError(message, (int)errorCode, severity, this._sourceSchema.Location, lineNumber, linePosition));
+            _errors.Add(
+                new EdmSchemaError(
+                    message,
+                    (int)errorCode,
+                    severity,
+                    this._sourceSchema.Location,
+                    lineNumber,
+                    linePosition
+                )
+            );
         }
 
         /// <summary>
@@ -429,13 +568,22 @@ namespace System.Data.EntityModel
 
         public CodeTypeReference GetFullyQualifiedTypeReference(EdmType type)
         {
-            string fullObjectName = CreateFullName(GetObjectNamespace(type.NamespaceName), type.Name);
+            string fullObjectName = CreateFullName(
+                GetObjectNamespace(type.NamespaceName),
+                type.Name
+            );
             return TypeReference.FromString(fullObjectName);
         }
 
-        public CodeTypeReference GetFullyQualifiedTypeReference(EdmType type, bool addGlobalQualifier)
+        public CodeTypeReference GetFullyQualifiedTypeReference(
+            EdmType type,
+            bool addGlobalQualifier
+        )
         {
-            string fullObjectName = CreateFullName(GetObjectNamespace(type.NamespaceName), type.Name);
+            string fullObjectName = CreateFullName(
+                GetObjectNamespace(type.NamespaceName),
+                type.Name
+            );
             return TypeReference.FromString(fullObjectName, addGlobalQualifier);
         }
 
@@ -455,7 +603,9 @@ namespace System.Data.EntityModel
 
             if (type.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
             {
-                return type.ClrType.IsValueType ? TypeReference.NullableForType(type.ClrType) : TypeReference.ForType(type.ClrType);
+                return type.ClrType.IsValueType
+                    ? TypeReference.NullableForType(type.ClrType)
+                    : TypeReference.ForType(type.ClrType);
             }
             else
             {
@@ -475,18 +625,12 @@ namespace System.Data.EntityModel
 
         public string SourceEdmNamespaceName
         {
-            get
-            {
-                return _sourceSchema.Namespace;
-            }
+            get { return _sourceSchema.Namespace; }
         }
 
         public string SourceObjectNamespaceName
         {
-            get
-            {
-                return GetObjectNamespace(SourceEdmNamespaceName);
-            }
+            get { return GetObjectNamespace(SourceEdmNamespaceName); }
         }
 
         private string GetObjectNamespace(string csdlNamespaceName)
@@ -494,7 +638,12 @@ namespace System.Data.EntityModel
             Debug.Assert(csdlNamespaceName != null, "csdlNamespaceName is null");
 
             string objectNamespace;
-            if (_generator.EdmToObjectNamespaceMap.TryGetObjectNamespace(csdlNamespaceName, out objectNamespace))
+            if (
+                _generator.EdmToObjectNamespaceMap.TryGetObjectNamespace(
+                    csdlNamespaceName,
+                    out objectNamespace
+                )
+            )
             {
                 return objectNamespace;
             }
@@ -502,9 +651,8 @@ namespace System.Data.EntityModel
             return csdlNamespaceName;
         }
 
-
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <value></value>
         internal FixUpCollection FixUps
@@ -562,6 +710,5 @@ namespace System.Data.EntityModel
         }
 
         #endregion
-
     }
 }

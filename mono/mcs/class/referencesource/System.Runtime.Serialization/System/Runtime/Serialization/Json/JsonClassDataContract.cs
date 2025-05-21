@@ -4,24 +4,28 @@
 
 namespace System.Runtime.Serialization.Json
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Security;
     using System.Threading;
     using System.Xml;
-    using System.Diagnostics;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Collections.Generic;
-    using System.Security;
 
     class JsonClassDataContract : JsonDataContract
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + "Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         JsonClassDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         public JsonClassDataContract(ClassDataContract traditionalDataContract)
             : base(new JsonClassDataContractCriticalHelper(traditionalDataContract))
@@ -31,8 +35,10 @@ namespace System.Runtime.Serialization.Json
 
         internal JsonFormatClassReaderDelegate JsonFormatReaderDelegate
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical JsonFormatReaderDelegate property.",
-                Safe = "JsonFormatReaderDelegate only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical JsonFormatReaderDelegate property.",
+                Safe = "JsonFormatReaderDelegate only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -44,9 +50,15 @@ namespace System.Runtime.Serialization.Json
                         {
                             if (TraditionalClassDataContract.IsReadOnlyContract)
                             {
-                                DataContract.ThrowInvalidDataContractException(TraditionalClassDataContract.DeserializationExceptionMessage, null /*type*/);
+                                DataContract.ThrowInvalidDataContractException(
+                                    TraditionalClassDataContract.DeserializationExceptionMessage,
+                                    null /*type*/
+                                );
                             }
-                            JsonFormatClassReaderDelegate tempDelegate = new JsonFormatReaderGenerator().GenerateClassReader(TraditionalClassDataContract);
+                            JsonFormatClassReaderDelegate tempDelegate =
+                                new JsonFormatReaderGenerator().GenerateClassReader(
+                                    TraditionalClassDataContract
+                                );
                             Thread.MemoryBarrier();
                             helper.JsonFormatReaderDelegate = tempDelegate;
                         }
@@ -58,8 +70,10 @@ namespace System.Runtime.Serialization.Json
 
         internal JsonFormatClassWriterDelegate JsonFormatWriterDelegate
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical JsonFormatWriterDelegate property.",
-                Safe = "JsonFormatWriterDelegate only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical JsonFormatWriterDelegate property.",
+                Safe = "JsonFormatWriterDelegate only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -69,7 +83,10 @@ namespace System.Runtime.Serialization.Json
                     {
                         if (helper.JsonFormatWriterDelegate == null)
                         {
-                            JsonFormatClassWriterDelegate tempDelegate = new JsonFormatWriterGenerator().GenerateClassWriter(TraditionalClassDataContract);
+                            JsonFormatClassWriterDelegate tempDelegate =
+                                new JsonFormatWriterGenerator().GenerateClassWriter(
+                                    TraditionalClassDataContract
+                                );
                             Thread.MemoryBarrier();
                             helper.JsonFormatWriterDelegate = tempDelegate;
                         }
@@ -81,45 +98,76 @@ namespace System.Runtime.Serialization.Json
 
         internal XmlDictionaryString[] MemberNames
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical MemberNames property.",
-                Safe = "MemberNames only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical MemberNames property.",
+                Safe = "MemberNames only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.MemberNames; }
         }
 
         internal override string TypeName
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical TypeName property.",
-                Safe = "TypeName only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical TypeName property.",
+                Safe = "TypeName only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.TypeName; }
         }
 
-
         ClassDataContract TraditionalClassDataContract
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical TraditionalClassDataContract property.",
-                Safe = "TraditionalClassDataContract only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical TraditionalClassDataContract property.",
+                Safe = "TraditionalClassDataContract only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return this.helper.TraditionalClassDataContract; }
         }
 
-        public override object ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson context)
+        public override object ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson context
+        )
         {
             jsonReader.Read();
-            object o = JsonFormatReaderDelegate(jsonReader, context, XmlDictionaryString.Empty, MemberNames);
+            object o = JsonFormatReaderDelegate(
+                jsonReader,
+                context,
+                XmlDictionaryString.Empty,
+                MemberNames
+            );
             jsonReader.ReadEndElement();
             return o;
         }
 
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
-            jsonWriter.WriteAttributeString(null, JsonGlobals.typeString, null, JsonGlobals.objectString);
-            JsonFormatWriterDelegate(jsonWriter, obj, context, TraditionalClassDataContract, MemberNames);
+            jsonWriter.WriteAttributeString(
+                null,
+                JsonGlobals.typeString,
+                null,
+                JsonGlobals.objectString
+            );
+            JsonFormatWriterDelegate(
+                jsonWriter,
+                obj,
+                context,
+                TraditionalClassDataContract,
+                MemberNames
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for (de)serializing types."
-            + "Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for (de)serializing types."
+                + "Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
 #pragma warning disable 618 // have not moved to the v4 security model yet
         [SecurityCritical(SecurityCriticalScope.Everything)]
@@ -136,7 +184,15 @@ namespace System.Runtime.Serialization.Json
             public JsonClassDataContractCriticalHelper(ClassDataContract traditionalDataContract)
                 : base(traditionalDataContract)
             {
-                this.typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value) ? traditionalDataContract.Name.Value : string.Concat(traditionalDataContract.Name.Value, JsonGlobals.NameValueSeparatorString, XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(traditionalDataContract.Namespace.Value));
+                this.typeName = string.IsNullOrEmpty(traditionalDataContract.Namespace.Value)
+                    ? traditionalDataContract.Name.Value
+                    : string.Concat(
+                        traditionalDataContract.Name.Value,
+                        JsonGlobals.NameValueSeparatorString,
+                        XmlObjectSerializerWriteContextComplexJson.TruncateDefaultDataContractNamespace(
+                            traditionalDataContract.Namespace.Value
+                        )
+                    );
                 this.traditionalClassDataContract = traditionalDataContract;
                 CopyMembersAndCheckDuplicateNames();
             }
@@ -168,25 +224,45 @@ namespace System.Runtime.Serialization.Json
                 if (traditionalClassDataContract.MemberNames != null)
                 {
                     int memberCount = traditionalClassDataContract.MemberNames.Length;
-                    Dictionary<string, object> memberTable = new Dictionary<string, object>(memberCount);
+                    Dictionary<string, object> memberTable = new Dictionary<string, object>(
+                        memberCount
+                    );
                     XmlDictionaryString[] decodedMemberNames = new XmlDictionaryString[memberCount];
                     for (int i = 0; i < memberCount; i++)
                     {
-                        if (memberTable.ContainsKey(traditionalClassDataContract.MemberNames[i].Value))
+                        if (
+                            memberTable.ContainsKey(
+                                traditionalClassDataContract.MemberNames[i].Value
+                            )
+                        )
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.GetString(SR.JsonDuplicateMemberNames,
-                                DataContract.GetClrTypeFullName(traditionalClassDataContract.UnderlyingType), traditionalClassDataContract.MemberNames[i].Value)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SerializationException(
+                                    SR.GetString(
+                                        SR.JsonDuplicateMemberNames,
+                                        DataContract.GetClrTypeFullName(
+                                            traditionalClassDataContract.UnderlyingType
+                                        ),
+                                        traditionalClassDataContract.MemberNames[i].Value
+                                    )
+                                )
+                            );
                         }
                         else
                         {
-                            memberTable.Add(traditionalClassDataContract.MemberNames[i].Value, null);
-                            decodedMemberNames[i] = DataContractJsonSerializer.ConvertXmlNameToJsonName(traditionalClassDataContract.MemberNames[i]);
+                            memberTable.Add(
+                                traditionalClassDataContract.MemberNames[i].Value,
+                                null
+                            );
+                            decodedMemberNames[i] =
+                                DataContractJsonSerializer.ConvertXmlNameToJsonName(
+                                    traditionalClassDataContract.MemberNames[i]
+                                );
                         }
                     }
                     this.memberNames = decodedMemberNames;
                 }
             }
         }
-
     }
 }

@@ -25,27 +25,32 @@ internal sealed class RateLimitingMetrics : IDisposable
         _activeRequestLeasesCounter = _meter.CreateUpDownCounter<long>(
             "aspnetcore.rate_limiting.active_request_leases",
             unit: "{request}",
-            description: "Number of HTTP requests that are currently active on the server that hold a rate limiting lease.");
+            description: "Number of HTTP requests that are currently active on the server that hold a rate limiting lease."
+        );
 
         _requestLeaseDurationCounter = _meter.CreateHistogram<double>(
             "aspnetcore.rate_limiting.request_lease.duration",
             unit: "s",
-            description: "The duration of rate limiting leases held by HTTP requests on the server.");
+            description: "The duration of rate limiting leases held by HTTP requests on the server."
+        );
 
         _queuedRequestsCounter = _meter.CreateUpDownCounter<long>(
             "aspnetcore.rate_limiting.queued_requests",
             unit: "{request}",
-            description: "Number of HTTP requests that are currently queued, waiting to acquire a rate limiting lease.");
+            description: "Number of HTTP requests that are currently queued, waiting to acquire a rate limiting lease."
+        );
 
         _queuedRequestDurationCounter = _meter.CreateHistogram<double>(
             "aspnetcore.rate_limiting.request.time_in_queue",
             unit: "s",
-            description: "The duration of HTTP requests in a queue, waiting to acquire a rate limiting lease.");
+            description: "The duration of HTTP requests in a queue, waiting to acquire a rate limiting lease."
+        );
 
         _requestsCounter = _meter.CreateCounter<long>(
             "aspnetcore.rate_limiting.requests",
             unit: "{request}",
-            description: "Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease.");
+            description: "Number of requests that tried to acquire a rate limiting lease. Requests could be rejected by global or endpoint rate limiting policies. Or the request could be canceled while waiting for the lease."
+        );
     }
 
     public void LeaseFailed(in MetricsContext metricsContext, RequestRejectionReason reason)
@@ -81,16 +86,28 @@ internal sealed class RateLimitingMetrics : IDisposable
         _activeRequestLeasesCounter.Add(1, tags);
     }
 
-    public void LeaseEnd(in MetricsContext metricsContext, long startTimestamp, long currentTimestamp)
+    public void LeaseEnd(
+        in MetricsContext metricsContext,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
-        if (metricsContext.CurrentLeasedRequestsCounterEnabled || _requestLeaseDurationCounter.Enabled || _requestsCounter.Enabled)
+        if (
+            metricsContext.CurrentLeasedRequestsCounterEnabled
+            || _requestLeaseDurationCounter.Enabled
+            || _requestsCounter.Enabled
+        )
         {
             LeaseEndCore(metricsContext, startTimestamp, currentTimestamp);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void LeaseEndCore(in MetricsContext metricsContext, long startTimestamp, long currentTimestamp)
+    private void LeaseEndCore(
+        in MetricsContext metricsContext,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
         var tags = new TagList();
         InitializeRateLimitingTags(ref tags, metricsContext);
@@ -130,16 +147,29 @@ internal sealed class RateLimitingMetrics : IDisposable
         _queuedRequestsCounter.Add(1, tags);
     }
 
-    public void QueueEnd(in MetricsContext metricsContext, RequestRejectionReason? reason, long startTimestamp, long currentTimestamp)
+    public void QueueEnd(
+        in MetricsContext metricsContext,
+        RequestRejectionReason? reason,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
-        if (metricsContext.CurrentQueuedRequestsCounterEnabled || _queuedRequestDurationCounter.Enabled)
+        if (
+            metricsContext.CurrentQueuedRequestsCounterEnabled
+            || _queuedRequestDurationCounter.Enabled
+        )
         {
             QueueEndCore(metricsContext, reason, startTimestamp, currentTimestamp);
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private void QueueEndCore(in MetricsContext metricsContext, RequestRejectionReason? reason, long startTimestamp, long currentTimestamp)
+    private void QueueEndCore(
+        in MetricsContext metricsContext,
+        RequestRejectionReason? reason,
+        long startTimestamp,
+        long currentTimestamp
+    )
     {
         var tags = new TagList();
         InitializeRateLimitingTags(ref tags, metricsContext);
@@ -151,7 +181,10 @@ internal sealed class RateLimitingMetrics : IDisposable
 
         if (_queuedRequestDurationCounter.Enabled)
         {
-            tags.Add("aspnetcore.rate_limiting.result", reason != null ? GetResult(reason.Value) : "acquired");
+            tags.Add(
+                "aspnetcore.rate_limiting.result",
+                reason != null ? GetResult(reason.Value) : "acquired"
+            );
             var duration = Stopwatch.GetElapsedTime(startTimestamp, currentTimestamp);
             _queuedRequestDurationCounter.Record(duration.TotalSeconds, tags);
         }
@@ -162,7 +195,10 @@ internal sealed class RateLimitingMetrics : IDisposable
         _meter.Dispose();
     }
 
-    private static void InitializeRateLimitingTags(ref TagList tags, in MetricsContext metricsContext)
+    private static void InitializeRateLimitingTags(
+        ref TagList tags,
+        in MetricsContext metricsContext
+    )
     {
         if (metricsContext.PolicyName is not null)
         {
@@ -177,12 +213,16 @@ internal sealed class RateLimitingMetrics : IDisposable
             RequestRejectionReason.EndpointLimiter => "endpoint_limiter",
             RequestRejectionReason.GlobalLimiter => "global_limiter",
             RequestRejectionReason.RequestCanceled => "request_canceled",
-            _ => throw new InvalidOperationException("Unexpected value: " + reason)
+            _ => throw new InvalidOperationException("Unexpected value: " + reason),
         };
     }
 
     public MetricsContext CreateContext(string? policyName)
     {
-        return new MetricsContext(policyName, _activeRequestLeasesCounter.Enabled, _queuedRequestsCounter.Enabled);
+        return new MetricsContext(
+            policyName,
+            _activeRequestLeasesCounter.Enabled,
+            _queuedRequestsCounter.Enabled
+        );
     }
 }

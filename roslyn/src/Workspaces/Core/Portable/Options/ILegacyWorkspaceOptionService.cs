@@ -29,5 +29,6 @@ internal interface ILegacyGlobalOptionService
 
     void SetOptions(
         ImmutableArray<KeyValuePair<OptionKey2, object?>> internallyDefinedOptions,
-        ImmutableArray<KeyValuePair<OptionKey, object?>> externallyDefinedOptions);
+        ImmutableArray<KeyValuePair<OptionKey, object?>> externallyDefinedOptions
+    );
 }

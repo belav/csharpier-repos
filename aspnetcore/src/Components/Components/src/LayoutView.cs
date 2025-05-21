@@ -46,7 +46,11 @@ public class LayoutView : IComponent
         return Task.CompletedTask;
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "Layout components are preserved because the LayoutAttribute constructor parameter is correctly annotated.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2072",
+        Justification = "Layout components are preserved because the LayoutAttribute constructor parameter is correctly annotated."
+    )]
     private void Render()
     {
         // In the middle goes the supplied content
@@ -64,18 +68,22 @@ public class LayoutView : IComponent
         _renderHandle.Render(fragment);
     }
 
-    private static RenderFragment WrapInLayout([DynamicallyAccessedMembers(Component)] Type layoutType, RenderFragment bodyParam)
+    private static RenderFragment WrapInLayout(
+        [DynamicallyAccessedMembers(Component)] Type layoutType,
+        RenderFragment bodyParam
+    )
     {
         void Render(RenderTreeBuilder builder)
         {
             builder.OpenComponent(0, layoutType);
             builder.AddComponentParameter(1, LayoutComponentBase.BodyPropertyName, bodyParam);
             builder.CloseComponent();
-        };
+        }
+        ;
 
         return Render;
     }
 
-    private static Type? GetParentLayoutType(Type type)
-        => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType;
+    private static Type? GetParentLayoutType(Type type) =>
+        type.GetCustomAttribute<LayoutAttribute>()?.LayoutType;
 }

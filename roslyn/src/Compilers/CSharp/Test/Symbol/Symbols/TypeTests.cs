@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [Fact]
         public void AlphaRenaming()
         {
-            var code = @"
+            var code =
+                @"
 class A1 : A<int> {}
 class A2 : A<int> {}
 class A<T> {
@@ -58,13 +59,13 @@ class A<T> {
 }
 ";
             var compilation = CreateCompilation(code);
-            var aint1 = compilation.GlobalNamespace.GetTypeMembers("A1")[0].BaseType();  // A<int>
-            var aint2 = compilation.GlobalNamespace.GetTypeMembers("A2")[0].BaseType();  // A<int>
-            var b1 = aint1.GetTypeMembers("B", 1).Single();                            // A<int>.B<U>
-            var b2 = aint2.GetTypeMembers("B", 1).Single();                            // A<int>.B<U>
-            Assert.NotSame(b1.TypeParameters[0], b2.TypeParameters[0]);                // they've been alpha renamed independently
-            Assert.Equal(b1.TypeParameters[0], b2.TypeParameters[0]);                  // but happen to be the same type
-            var xtype1 = (b1.GetMembers("X")[0] as FieldSymbol).Type;                  // Types using them are the same too
+            var aint1 = compilation.GlobalNamespace.GetTypeMembers("A1")[0].BaseType(); // A<int>
+            var aint2 = compilation.GlobalNamespace.GetTypeMembers("A2")[0].BaseType(); // A<int>
+            var b1 = aint1.GetTypeMembers("B", 1).Single(); // A<int>.B<U>
+            var b2 = aint2.GetTypeMembers("B", 1).Single(); // A<int>.B<U>
+            Assert.NotSame(b1.TypeParameters[0], b2.TypeParameters[0]); // they've been alpha renamed independently
+            Assert.Equal(b1.TypeParameters[0], b2.TypeParameters[0]); // but happen to be the same type
+            var xtype1 = (b1.GetMembers("X")[0] as FieldSymbol).Type; // Types using them are the same too
             var xtype2 = (b2.GetMembers("X")[0] as FieldSymbol).Type;
             Assert.Equal(xtype1, xtype2);
         }
@@ -73,7 +74,7 @@ class A<T> {
         public void Access1()
         {
             var text =
-@"
+                @"
 class A {
 }
 struct S {
@@ -94,16 +95,29 @@ interface B {
         [Theory, MemberData(nameof(FileScopedOrBracedNamespace))]
         public void InheritedTypesCrossTrees(string ob, string cb)
         {
-            var text = @"namespace MT " + ob + @"
+            var text =
+                @"namespace MT "
+                + ob
+                + @"
     public interface IGoo { void Goo(); }
     public interface IGoo<T, R> { R Goo(T t); }
-" + cb + @"
+"
+                + cb
+                + @"
 ";
-            var text1 = @"namespace MT " + ob + @"
+            var text1 =
+                @"namespace MT "
+                + ob
+                + @"
     public interface IBar<T> : IGoo { void Bar(T t); }
-" + cb + @"
+"
+                + cb
+                + @"
 ";
-            var text2 = @"namespace NS " + ob + @"
+            var text2 =
+                @"namespace NS "
+                + ob
+                + @"
     using System;
     using MT;
     public class A<T> : IGoo<T, string>, IBar<string> {
@@ -113,11 +127,18 @@ interface B {
     }
 
     public class B : A<int> {}
-" + cb + @"
+"
+                + cb
+                + @"
 ";
-            var text3 = @"namespace NS " + ob + @"
+            var text3 =
+                @"namespace NS "
+                + ob
+                + @"
     public class C : B {}
-" + cb + @"
+"
+                + cb
+                + @"
 ";
 
             var comp = CreateCompilation(new[] { text, text1, text2, text3 });
@@ -127,9 +148,7 @@ interface B {
             var type1 = ns.GetTypeMembers("C", 0).SingleOrDefault() as NamedTypeSymbol;
             Assert.Equal(0, type1.Interfaces().Length);
             Assert.Equal(3, type1.AllInterfaces().Length);
-            var sorted = (from i in type1.AllInterfaces()
-                          orderby i.Name
-                          select i).ToArray();
+            var sorted = (from i in type1.AllInterfaces() orderby i.Name select i).ToArray();
             var i1 = sorted[0] as NamedTypeSymbol;
             var i2 = sorted[1] as NamedTypeSymbol;
             var i3 = sorted[2] as NamedTypeSymbol;
@@ -161,17 +180,20 @@ interface B {
         [Fact]
         public void InheritedTypesCrossComps()
         {
-            var text = @"namespace MT {
+            var text =
+                @"namespace MT {
     public interface IGoo { void Goo(); }
     public interface IGoo<T, R> { R Goo(T t); }
     public interface IEmpty { }
 }
 ";
-            var text1 = @"namespace MT {
+            var text1 =
+                @"namespace MT {
     public interface IBar<T> : IGoo, IEmpty { void Bar(T t); }
 }
 ";
-            var text2 = @"namespace NS {
+            var text2 =
+                @"namespace NS {
     using MT;
     public class A<T> : IGoo<T, string>, IBar<T>, IGoo {
         void IGoo.Goo() { }
@@ -182,19 +204,26 @@ interface B {
     public class B : A<ulong> {}
 }
 ";
-            var text3 = @"namespace NS {
+            var text3 =
+                @"namespace NS {
     public class C : B {}
 }
 ";
             var comp1 = CreateCompilation(text);
             var compRef1 = new CSharpCompilationReference(comp1);
 
-            var comp2 = CreateCompilation(new string[] { text1, text2 }, assemblyName: "Test1",
-                            references: new List<MetadataReference> { compRef1 });
+            var comp2 = CreateCompilation(
+                new string[] { text1, text2 },
+                assemblyName: "Test1",
+                references: new List<MetadataReference> { compRef1 }
+            );
             var compRef2 = new CSharpCompilationReference(comp2);
 
-            var comp = CreateCompilation(text3, assemblyName: "Test2",
-                            references: new List<MetadataReference> { compRef2, compRef1 });
+            var comp = CreateCompilation(
+                text3,
+                assemblyName: "Test2",
+                references: new List<MetadataReference> { compRef2, compRef1 }
+            );
 
             Assert.Equal(0, comp1.GetDiagnostics().Count());
             Assert.Equal(0, comp2.GetDiagnostics().Count());
@@ -207,9 +236,7 @@ interface B {
             Assert.Equal(0, type1.Interfaces().Length);
             //
             Assert.Equal(4, type1.AllInterfaces().Length);
-            var sorted = (from i in type1.AllInterfaces()
-                          orderby i.Name
-                          select i).ToArray();
+            var sorted = (from i in type1.AllInterfaces() orderby i.Name select i).ToArray();
             var i1 = sorted[0] as NamedTypeSymbol;
             var i2 = sorted[1] as NamedTypeSymbol;
             var i3 = sorted[2] as NamedTypeSymbol;
@@ -246,7 +273,8 @@ interface B {
         [Fact]
         public void NestedTypes()
         {
-            var text = @"namespace NS
+            var text =
+                @"namespace NS
     using System;
     public class Test
     {
@@ -310,13 +338,15 @@ interface B {
         [Fact]
         public void PartialTypeCrossTrees()
         {
-            var text = @"
+            var text =
+                @"
 namespace MT {
     using System.Collections.Generic;
     public partial interface IGoo<T> { void Goo(); }
 }
 ";
-            var text1 = @"
+            var text1 =
+                @"
 namespace MT {
     using System.Collections.Generic;
     public partial interface IGoo<T> { T Goo(T t); }
@@ -332,7 +362,8 @@ namespace NS {
     }
 }
 ";
-            var text2 = @"
+            var text2 =
+                @"
 namespace NS {
     using MT;
     public partial class A<T> : IGoo<T>
@@ -363,64 +394,83 @@ namespace NS {
         public void TypeCrossComps()
         {
             #region "Interface Impl"
-            var text = @"
+            var text =
+                @"
     public interface IGoo  {
         void M0();
     }
 ";
 
-            var text1 = @"
+            var text1 =
+                @"
     public class Goo : IGoo  {
         public void M0() {}
     }
 ";
             var comp1 = CreateCompilation(text);
             var compRef1 = new CSharpCompilationReference(comp1);
-            var comp = CreateCompilation(text1, references: new List<MetadataReference> { compRef1 }, assemblyName: "Comp2");
+            var comp = CreateCompilation(
+                text1,
+                references: new List<MetadataReference> { compRef1 },
+                assemblyName: "Comp2"
+            );
 
             Assert.Equal(0, comp.GetDiagnostics().Count());
             #endregion
 
             #region "Interface Inherit"
-            text = @"
+            text =
+                @"
     public interface IGoo  {
         void M0();
     }
 ";
 
-            text1 = @"
+            text1 =
+                @"
     public interface IBar : IGoo  {
         void M1();
     }
 ";
             comp1 = CreateCompilation(text);
             compRef1 = new CSharpCompilationReference(comp1);
-            comp = CreateCompilation(text1, references: new List<MetadataReference> { compRef1 }, assemblyName: "Comp2");
+            comp = CreateCompilation(
+                text1,
+                references: new List<MetadataReference> { compRef1 },
+                assemblyName: "Comp2"
+            );
 
             Assert.Equal(0, comp.GetDiagnostics().Count());
             #endregion
 
             #region "Class Inherit"
-            text = @"
+            text =
+                @"
 public class A { 
     void M0() {}
 }
 ";
 
-            text1 = @"
+            text1 =
+                @"
 public class B : A { 
     void M1() {}
 }
 ";
             comp1 = CreateCompilation(text);
             compRef1 = new CSharpCompilationReference(comp1);
-            comp = CreateCompilation(text1, references: new List<MetadataReference> { compRef1 }, assemblyName: "Comp2");
+            comp = CreateCompilation(
+                text1,
+                references: new List<MetadataReference> { compRef1 },
+                assemblyName: "Comp2"
+            );
 
             Assert.Equal(0, comp.GetDiagnostics().Count());
             #endregion
 
             #region "Partial"
-            text = @"
+            text =
+                @"
 public partial interface IBar {
     void M0();
 }
@@ -428,7 +478,8 @@ public partial interface IBar {
 public partial class A { }
 ";
 
-            text1 = @"
+            text1 =
+                @"
 public partial interface IBar {
     void M1();
 }
@@ -437,17 +488,25 @@ public partial class A { }
 ";
             comp1 = CreateCompilation(text);
             compRef1 = new CSharpCompilationReference(comp1);
-            comp = CreateCompilation(text1, references: new List<MetadataReference> { compRef1 }, assemblyName: "Comp2");
+            comp = CreateCompilation(
+                text1,
+                references: new List<MetadataReference> { compRef1 },
+                assemblyName: "Comp2"
+            );
 
             Assert.Equal(0, comp.GetDiagnostics().Count());
             #endregion
         }
 
-        [Fact, WorkItem(537233, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537233"), WorkItem(537313, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537313")]
+        [
+            Fact,
+            WorkItem(537233, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537233"),
+            WorkItem(537313, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537313")
+        ]
         public void ArrayTypes()
         {
             var text =
-@"public class Test
+                @"public class Test
 {
     static int[,] intAryField;
     internal ulong[][,] ulongAryField;
@@ -523,10 +582,15 @@ public partial class A { }
         // .NET 2/3.0 (7) IList&[T] -> ICollection&[T] ->IEnumerable&[T]; ICloneable;
         // .NET 4.0 (9) IList&[T] -> ICollection&[T] ->IEnumerable&[T]; ICloneable; IStructuralComparable; IStructuralEquatable
         // Array T[] impl IList[T] only
-        [Fact, WorkItem(537300, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537300"), WorkItem(527247, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527247")]
+        [
+            Fact,
+            WorkItem(537300, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537300"),
+            WorkItem(527247, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/527247")
+        ]
         public void ArrayTypeInterfaces()
         {
-            var text = @"
+            var text =
+                @"
 public class A {
     static byte[][] AryField;
     static byte[,] AryField2;
@@ -560,11 +624,20 @@ public class A {
             var i9 = sorted[8] as NamedTypeSymbol;
             Assert.Equal("System.ICloneable", i1.ToTestDisplayString());
             Assert.Equal("System.Collections.ICollection", i2.ToTestDisplayString());
-            Assert.Equal("System.Collections.Generic.ICollection<System.Byte[]>", i3.ToTestDisplayString());
-            Assert.Equal("System.Collections.Generic.IEnumerable<System.Byte[]>", i4.ToTestDisplayString());
+            Assert.Equal(
+                "System.Collections.Generic.ICollection<System.Byte[]>",
+                i3.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.Collections.Generic.IEnumerable<System.Byte[]>",
+                i4.ToTestDisplayString()
+            );
             Assert.Equal("System.Collections.IEnumerable", i5.ToTestDisplayString());
             Assert.Equal("System.Collections.IList", i6.ToTestDisplayString());
-            Assert.Equal("System.Collections.Generic.IList<System.Byte[]>", i7.ToTestDisplayString());
+            Assert.Equal(
+                "System.Collections.Generic.IList<System.Byte[]>",
+                i7.ToTestDisplayString()
+            );
             Assert.Equal("System.Collections.IStructuralComparable", i8.ToTestDisplayString());
             Assert.Equal("System.Collections.IStructuralEquatable", i9.ToTestDisplayString());
 
@@ -576,7 +649,8 @@ public class A {
         [Fact]
         public void ArrayTypeGetHashCode()
         {
-            var text = @"public class A {
+            var text =
+                @"public class A {
     public uint[] AryField1;
     static string[][] AryField2;
     private sbyte[,,] AryField3;
@@ -610,7 +684,7 @@ public class A {
         public void DynamicType()
         {
             var text =
-@"class A 
+                @"class A 
 {
     object field1;
     dynamic field2;
@@ -623,7 +697,10 @@ public class A {
                 if (m.Name == "field1")
                 {
                     var f1 = (m as FieldSymbol).Type;
-                    Assert.False(f1 is ErrorTypeSymbol, f1.GetType().ToString() + " : " + f1.ToTestDisplayString());
+                    Assert.False(
+                        f1 is ErrorTypeSymbol,
+                        f1.GetType().ToString() + " : " + f1.ToTestDisplayString()
+                    );
                 }
                 else if (m.Name == "field2")
                 {
@@ -640,7 +717,10 @@ public class A {
             Assert.Equal(SymbolKind.Field, obj.Kind);
             Assert.True(obj.IsDefinition);
             var objType = (obj as FieldSymbol).Type;
-            Assert.False(objType is ErrorTypeSymbol, objType.GetType().ToString() + " : " + objType.ToTestDisplayString());
+            Assert.False(
+                objType is ErrorTypeSymbol,
+                objType.GetType().ToString() + " : " + objType.ToTestDisplayString()
+            );
             Assert.NotEqual(SymbolKind.ErrorType, objType.Kind);
 
             var dyn = a.GetMembers("field2").Single();
@@ -648,7 +728,10 @@ public class A {
             Assert.Equal(SymbolKind.Field, dyn.Kind);
             Assert.True(dyn.IsDefinition);
             var dynType = (obj as FieldSymbol).Type;
-            Assert.False(dynType is ErrorTypeSymbol, dynType.GetType().ToString() + " : " + dynType.ToTestDisplayString()); // this is ok
+            Assert.False(
+                dynType is ErrorTypeSymbol,
+                dynType.GetType().ToString() + " : " + dynType.ToTestDisplayString()
+            ); // this is ok
             Assert.NotEqual(SymbolKind.ErrorType, dynType.Kind);
         }
 
@@ -657,7 +740,7 @@ public class A {
         public void EnumFields()
         {
             var text =
-@"public enum MyEnum 
+                @"public enum MyEnum 
 {
     One,
     Two = 2,
@@ -689,7 +772,8 @@ public class A {
         [Fact] // TODO: Dev10 does not report ERR_SameFullNameAggAgg here - source wins.
         public void SourceAndMetadata_SpecialType()
         {
-            var text = @"
+            var text =
+                @"
 using System;
  
 namespace System
@@ -707,10 +791,12 @@ namespace System
             compilation.VerifyDiagnostics(
                 // (10,13): warning CS0436: The type 'System.Void' in '' conflicts with the imported type 'void' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
                 //             System.Void.Equals(1, 1);
-                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "System.Void").WithArguments("", "System.Void", RuntimeCorLibName.FullName, "void"),
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "System.Void")
+                    .WithArguments("", "System.Void", RuntimeCorLibName.FullName, "void"),
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;"));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
+            );
         }
 
         [WorkItem(542479, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542479")]
@@ -718,13 +804,15 @@ namespace System
         [Fact] // TODO: Dev10 does not report ERR_SameFullNameAggAgg here - source wins.
         public void SourceAndMetadata_NonSpecialType()
         {
-            var refSource = @"
+            var refSource =
+                @"
 namespace N
 {
     public class C {}
 }";
 
-            var csharp = @"
+            var csharp =
+                @"
 using System;
  
 namespace N
@@ -744,17 +832,25 @@ namespace N
             compilation.VerifyDiagnostics(
                 // (10,13): warning CS0436: The type 'N.C' in '' conflicts with the imported type 'N.C' in 'RefAsm, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Using the type defined in ''.
                 //             N.C.Equals(1, 1);
-                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "N.C").WithArguments("", "N.C", "RefAsm, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "N.C"),
+                Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "N.C")
+                    .WithArguments(
+                        "",
+                        "N.C",
+                        "RefAsm, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "N.C"
+                    ),
                 // (2,1): info CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;"));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
+            );
         }
 
         [WorkItem(542479, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542479")]
         [Fact]
         public void DuplicateType()
         {
-            string referenceText = @"
+            string referenceText =
+                @"
 namespace N
 {
     public class C { }
@@ -766,7 +862,8 @@ namespace N
             var compilation2 = CreateCompilation(referenceText, assemblyName: "B");
             compilation2.VerifyDiagnostics();
 
-            var testText = @"
+            var testText =
+                @"
 namespace M
 {
     public struct Test
@@ -778,18 +875,32 @@ namespace M
     }
 }";
 
-            var compilation3 = CreateCompilation(testText, new[] { new CSharpCompilationReference(compilation1), new CSharpCompilationReference(compilation2) });
+            var compilation3 = CreateCompilation(
+                testText,
+                new[]
+                {
+                    new CSharpCompilationReference(compilation1),
+                    new CSharpCompilationReference(compilation2),
+                }
+            );
             compilation3.VerifyDiagnostics(
                 // (8,13): error CS0433: The type 'N.C' exists in both 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 //             N.C.ToString();
-                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "N.C").WithArguments("A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", "N.C", "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"));
+                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "N.C")
+                    .WithArguments(
+                        "A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                        "N.C",
+                        "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+            );
         }
 
         [WorkItem(320, "https://github.com/dotnet/cli/issues/320")]
         [Fact]
         public void DuplicateCoreFxPublicTypes()
         {
-            var sysConsoleSrc = @"
+            var sysConsoleSrc =
+                @"
 [assembly: System.Reflection.AssemblyVersion(""4.0.0.0"")]
 
 namespace System
@@ -801,12 +912,17 @@ namespace System
 }
 ";
             var sysConsoleRef = CreateEmptyCompilation(
-                sysConsoleSrc,
-                new[] { SystemRuntimePP7Ref },
-                TestOptions.ReleaseDll.WithCryptoPublicKey(TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a),
-                assemblyName: "System.Console").EmitToImageReference();
+                    sysConsoleSrc,
+                    new[] { SystemRuntimePP7Ref },
+                    TestOptions.ReleaseDll.WithCryptoPublicKey(
+                        TestResources.TestKeys.PublicKey_b03f5f7f11d50a3a
+                    ),
+                    assemblyName: "System.Console"
+                )
+                .EmitToImageReference();
 
-            var mainSrc = @"
+            var mainSrc =
+                @"
 System.Console.Goo(); 
 Goo();
 ";
@@ -814,20 +930,35 @@ Goo();
             var main1 = CreateEmptyCompilation(
                 new[] { Parse(mainSrc, options: TestOptions.Script) },
                 new[] { MscorlibRef_v46, sysConsoleRef },
-                TestOptions.ReleaseDll.WithUsings("System.Console"));
+                TestOptions.ReleaseDll.WithUsings("System.Console")
+            );
 
             main1.VerifyDiagnostics(
                 // error CS0433: The type 'Console' exists in both 'System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' and 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
-                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg).WithArguments("System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Console", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg)
+                    .WithArguments(
+                        "System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                        "System.Console",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    ),
                 // (1,9): error CS0433: The type 'Console' exists in both 'System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' and 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
-                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "System.Console").WithArguments("System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", "System.Console", "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"),
+                Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "System.Console")
+                    .WithArguments(
+                        "System.Console, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                        "System.Console",
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    ),
                 // (2,9): error CS0103: The name 'Goo' does not exist in the current context
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "Goo").WithArguments("Goo"));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "Goo").WithArguments("Goo")
+            );
 
             var main2 = CreateEmptyCompilation(
                 new[] { Parse(mainSrc, options: TestOptions.Script) },
                 new[] { MscorlibRef_v46, sysConsoleRef, SystemRuntimeFacadeRef },
-                TestOptions.ReleaseDll.WithUsings("System.Console").WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes));
+                TestOptions
+                    .ReleaseDll.WithUsings("System.Console")
+                    .WithTopLevelBinderFlags(BinderFlags.IgnoreCorLibraryDuplicatedTypes)
+            );
 
             main2.VerifyDiagnostics();
         }
@@ -836,7 +967,7 @@ Goo();
         public void SimpleGeneric()
         {
             var text =
-@"namespace NS
+                @"namespace NS
 {
     public interface IGoo<T> {}
 
@@ -846,7 +977,8 @@ Goo();
 }";
 
             var comp = CreateCompilation(text);
-            var namespaceNS = comp.GlobalNamespace.GetMembers("NS").First() as NamespaceOrTypeSymbol;
+            var namespaceNS =
+                comp.GlobalNamespace.GetMembers("NS").First() as NamespaceOrTypeSymbol;
             Assert.Equal(3, namespaceNS.GetMembers().Length);
 
             var igoo = namespaceNS.GetTypeMembers("IGoo").First();
@@ -890,9 +1022,12 @@ Goo();
         [Fact]
         public void UseTypeInNetModule()
         {
-            var module1Ref = ModuleMetadata.CreateFromImage(TestResources.SymbolsTests.netModule.netModule1).GetReference(display: "netModule1.netmodule");
+            var module1Ref = ModuleMetadata
+                .CreateFromImage(TestResources.SymbolsTests.netModule.netModule1)
+                .GetReference(display: "netModule1.netmodule");
 
-            var text = @"class Test
+            var text =
+                @"class Test
 {
     Class1 a = null;
 }";
@@ -913,7 +1048,7 @@ Goo();
         public void ClassNameWithPrecedingAtChar()
         {
             var text =
-@"using System;
+                @"using System;
 
 static class @main
 {
@@ -933,7 +1068,8 @@ static class @main
         public void ReturnsVoidWithoutCorlib()
         {
             // ensure a return type of "void" remains so even when corlib is unavailable.
-            string code = @"
+            string code =
+                @"
                 class Test
                 {
                     void Main()
@@ -941,7 +1077,8 @@ static class @main
                     }
                 }";
             var comp = CreateEmptyCompilation(code);
-            NamedTypeSymbol testTypeSymbol = comp.Assembly.GlobalNamespace.GetTypeMembers("Test").Single() as NamedTypeSymbol;
+            NamedTypeSymbol testTypeSymbol =
+                comp.Assembly.GlobalNamespace.GetTypeMembers("Test").Single() as NamedTypeSymbol;
             MethodSymbol methodSymbol = testTypeSymbol.GetMembers("Main").Single() as MethodSymbol;
             Assert.Equal("void Test.Main()", methodSymbol.ToTestDisplayString());
         }
@@ -951,7 +1088,7 @@ static class @main
         public void ClassWithMultipleConstr()
         {
             var text =
-@"public class MyClass 
+                @"public class MyClass 
 {
     public MyClass() 
     {
@@ -964,7 +1101,13 @@ static class @main
 ";
             var comp = CreateCompilation(text);
             var typeSym = comp.Assembly.GlobalNamespace.GetTypeMembers("MyClass").First();
-            var actual = string.Join(", ", typeSym.GetMembers().Select(symbol => symbol.ToTestDisplayString()).OrderBy(name => name));
+            var actual = string.Join(
+                ", ",
+                typeSym
+                    .GetMembers()
+                    .Select(symbol => symbol.ToTestDisplayString())
+                    .OrderBy(name => name)
+            );
             Assert.Equal("MyClass..ctor(), MyClass..ctor(System.Int32 DummyInt)", actual);
         }
 
@@ -972,12 +1115,14 @@ static class @main
         [Fact]
         public void BaseTypeNotDefinedInSrc()
         {
-            string code = @"
+            string code =
+                @"
 public class MyClass : T1
 {
 }";
             var comp = CreateEmptyCompilation(code);
-            NamedTypeSymbol testTypeSymbol = comp.Assembly.GlobalNamespace.GetTypeMembers("MyClass").Single() as NamedTypeSymbol;
+            NamedTypeSymbol testTypeSymbol =
+                comp.Assembly.GlobalNamespace.GetTypeMembers("MyClass").Single() as NamedTypeSymbol;
             Assert.Equal("T1", testTypeSymbol.BaseType().ToTestDisplayString());
         }
 
@@ -985,12 +1130,14 @@ public class MyClass : T1
         [Fact]
         public void IllegalTypeArgumentInBaseType()
         {
-            string code = @"
+            string code =
+                @"
 public class GC1<T> {}
 public class X : GC1<BOGUS> {}
 ";
             var comp = CreateEmptyCompilation(code);
-            NamedTypeSymbol testTypeSymbol = comp.Assembly.GlobalNamespace.GetTypeMembers("X").Single() as NamedTypeSymbol;
+            NamedTypeSymbol testTypeSymbol =
+                comp.Assembly.GlobalNamespace.GetTypeMembers("X").Single() as NamedTypeSymbol;
             Assert.Equal("GC1<BOGUS>", testTypeSymbol.BaseType().ToTestDisplayString());
         }
 
@@ -999,7 +1146,7 @@ public class X : GC1<BOGUS> {}
         public void MethodInDerivedGenericClassWithParamOfIllegalGenericType()
         {
             var text =
-@"public class BaseT<T> : GenericClass {}
+                @"public class BaseT<T> : GenericClass {}
 
 public class SubGenericClass<T> : BaseT<T>
 {        
@@ -1015,8 +1162,14 @@ public class SubGenericClass<T> : BaseT<T>
             var comp = CreateCompilation(text);
             var typeSym = comp.Assembly.GlobalNamespace.GetTypeMembers("SubGenericClass").First();
             var actualSymbols = typeSym.GetMembers();
-            var actual = string.Join(", ", actualSymbols.Select(symbol => symbol.ToTestDisplayString()).OrderBy(name => name));
-            Assert.Equal("SubGenericClass<T>..ctor(), void SubGenericClass<T>.Meth3(GC1<T> t), void SubGenericClass<T>.Meth4(System.NonexistentType t)", actual);
+            var actual = string.Join(
+                ", ",
+                actualSymbols.Select(symbol => symbol.ToTestDisplayString()).OrderBy(name => name)
+            );
+            Assert.Equal(
+                "SubGenericClass<T>..ctor(), void SubGenericClass<T>.Meth3(GC1<T> t), void SubGenericClass<T>.Meth4(System.NonexistentType t)",
+                actual
+            );
         }
 
         [WorkItem(537449, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537449")]
@@ -1024,7 +1177,7 @@ public class SubGenericClass<T> : BaseT<T>
         public void TestAllInterfaces()
         {
             var text =
-@"
+                @"
 interface I1 {}
 interface I2 : I1 {}
 interface I3 : I1, I2 {}
@@ -1045,7 +1198,8 @@ interface I5 : I3, I4 {}
         [Fact]
         public void NamespaceSameNameAsMetadataClass()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 namespace Convert
@@ -1067,7 +1221,8 @@ namespace Convert
         [Fact]
         public void NamespaceMemberArity()
         {
-            var text = @"
+            var text =
+                @"
 namespace NS1.NS2
 {
     internal class A<T1,T2,T3,T4,T5,T6,T7,T8,T9,T10, T11> {}
@@ -1086,7 +1241,8 @@ namespace NS1.NS2
         [Fact]
         public void NamespaceSameNameAsMetadataNamespace()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1107,7 +1263,8 @@ namespace Collections {
         [Fact]
         public void EmptyNameErrorSymbolErr()
         {
-            var text = @"
+            var text =
+                @"
 namespace NS
 {
   class A { }
@@ -1126,7 +1283,8 @@ namespace NS
         [Fact]
         public void NestedTypeAccessibility01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class A
@@ -1143,7 +1301,8 @@ class A
         [Fact]
         public void PartialClassWithBaseType()
         {
-            var text = @"
+            var text =
+                @"
 class C1 { }
 partial class C2 : C1 {}
 partial class C2 : C1 {}
@@ -1157,7 +1316,8 @@ partial class C2 : C1 {}
         [Fact]
         public void InaccessibleTypesSkipped()
         {
-            var text = @"
+            var text =
+                @"
 class B
 {
     public class A
@@ -1175,7 +1335,11 @@ class D : C
 }";
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
-            Assert.Equal(0, comp.GetDeclarationDiagnostics().Count(diag => !ErrorFacts.IsWarning((ErrorCode)diag.Code)));
+            Assert.Equal(
+                0,
+                comp.GetDeclarationDiagnostics()
+                    .Count(diag => !ErrorFacts.IsWarning((ErrorCode)diag.Code))
+            );
             var global = comp.GlobalNamespace;
             var d = global.GetMembers("D").Single() as NamedTypeSymbol;
             var x = d.GetMembers("x").Single() as FieldSymbol;
@@ -1186,7 +1350,8 @@ class D : C
         [Fact]
         public void ImportedVersusSource()
         {
-            var text = @"
+            var text =
+                @"
 namespace System
 {
     public class String { }
@@ -1194,20 +1359,34 @@ namespace System
 }";
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
-            Assert.Equal(0, comp.GetDeclarationDiagnostics().Count(e => e.Severity >= DiagnosticSeverity.Error));
+            Assert.Equal(
+                0,
+                comp.GetDeclarationDiagnostics().Count(e => e.Severity >= DiagnosticSeverity.Error)
+            );
             var global = comp.GlobalNamespace;
             var system = global.GetMembers("System").Single() as NamespaceSymbol;
             var mystring = system.GetMembers("MyString").Single() as NamedTypeSymbol;
             var sourceString = mystring.BaseType();
-            Assert.Equal(0,
-                sourceString.GetMembers()
-                .Count(m => !(m is MethodSymbol) || (m as MethodSymbol).MethodKind != MethodKind.Constructor));
+            Assert.Equal(
+                0,
+                sourceString
+                    .GetMembers()
+                    .Count(m =>
+                        !(m is MethodSymbol)
+                        || (m as MethodSymbol).MethodKind != MethodKind.Constructor
+                    )
+            );
         }
 
-        [Fact, WorkItem(538012, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538012"), WorkItem(538580, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538580")]
+        [
+            Fact,
+            WorkItem(538012, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538012"),
+            WorkItem(538580, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538580")
+        ]
         public void ErrorTypeSymbolWithArity()
         {
-            var text = @"
+            var text =
+                @"
 namespace N
 {
     public interface IGoo<T, V, U> {}
@@ -1266,7 +1445,8 @@ namespace N
         [Fact]
         public void ErrorWithoutInterfaceGuess()
         {
-            var text = @"
+            var text =
+                @"
 class Base<T> { }
 interface Interface1<T> { }
 interface Interface2<T> { }
@@ -1372,7 +1552,8 @@ partial class Derived6 : Base<int, int>, Interface1<int, int> { }
         [Fact]
         public void CircularNestedInterfaceDeclaration()
         {
-            var text = @"
+            var text =
+                @"
 class Bar : Bar.IGoo
 {
     public interface IGoo { Goo GetGoo(); }
@@ -1385,7 +1566,8 @@ class Bar : Bar.IGoo
             Assert.Empty(comp.GetDiagnostics());
             var bar = comp.GetTypeByMetadataName("Bar");
             var iGooGetGoo = comp.GetTypeByMetadataName("Bar+IGoo").GetMembers("GetGoo").Single();
-            MethodSymbol getGoo = (MethodSymbol)bar.FindImplementationForInterfaceMember(iGooGetGoo);
+            MethodSymbol getGoo = (MethodSymbol)
+                bar.FindImplementationForInterfaceMember(iGooGetGoo);
             Assert.Equal("Bar.GetGoo()", getGoo.ToString());
         }
 
@@ -1393,7 +1575,8 @@ class Bar : Bar.IGoo
         [Fact]
         public void ExplicitlyImplementGenericInterface()
         {
-            var text = @"
+            var text =
+                @"
 public interface I<Q>
 {
     void Goo();
@@ -1409,12 +1592,14 @@ public class Test1<Q> : I<Q>
         [Fact]
         public void MetadataNameOfGenericTypes()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class Gen1<T,U,V>
 {}
 class NonGen
 {}
-");
+"
+            );
 
             var globalNS = compilation.GlobalNamespace;
             var gen1Class = ((NamedTypeSymbol)globalNS.GetMembers("Gen1").First());
@@ -1433,8 +1618,11 @@ class NonGen
         [ClrOnlyFact]
         public void MultiDimArray()
         {
-            var r = MetadataReference.CreateFromImage(TestResources.SymbolsTests.Methods.CSMethods.AsImmutableOrNull());
-            var source = @"
+            var r = MetadataReference.CreateFromImage(
+                TestResources.SymbolsTests.Methods.CSMethods.AsImmutableOrNull()
+            );
+            var source =
+                @"
 class Program
 {
     static void Main()
@@ -1451,7 +1639,8 @@ class Program
         {
             var comp = CreateCompilation(@"public void TopLevelMethod() {}");
 
-            var errSymbol = comp.SourceModule.GlobalNamespace.GetMembers().FirstOrDefault() as NamedTypeSymbol;
+            var errSymbol =
+                comp.SourceModule.GlobalNamespace.GetMembers().FirstOrDefault() as NamedTypeSymbol;
             Assert.NotNull(errSymbol);
             Assert.Equal(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName, errSymbol.Name);
             Assert.False(errSymbol.IsErrorType(), "ErrorType");
@@ -1464,7 +1653,7 @@ class Program
         public void SimpleNullable()
         {
             var text =
-@"namespace NS
+                @"namespace NS
 {
     public class A 
     {
@@ -1473,17 +1662,22 @@ class Program
 }";
 
             var comp = CreateCompilation(text);
-            var namespaceNS = comp.GlobalNamespace.GetMembers("NS").First() as NamespaceOrTypeSymbol;
+            var namespaceNS =
+                comp.GlobalNamespace.GetMembers("NS").First() as NamespaceOrTypeSymbol;
             var classA = namespaceNS.GetTypeMembers("A").First();
             var varX = classA.GetMembers("x").First() as FieldSymbol;
             Assert.Equal(SymbolKind.Field, varX.Kind);
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), varX.Type.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                varX.Type.OriginalDefinition
+            );
         }
 
         [Fact]
         public void BuiltInTypeNullableTest01()
         {
-            var text = @"
+            var text =
+                @"
 public class NullableTest
 {
     // As Field Type
@@ -1500,11 +1694,16 @@ public class NullableTest
 ";
 
             var comp = CreateCompilation(text);
-            var topType = comp.SourceModule.GlobalNamespace.GetTypeMembers("NullableTest").FirstOrDefault();
+            var topType = comp
+                .SourceModule.GlobalNamespace.GetTypeMembers("NullableTest")
+                .FirstOrDefault();
             // ------------------------------
             var mem = topType.GetMembers("field01").Single();
             var memType = (mem as FieldSymbol).Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
             Assert.True(memType.CanBeAssignedNull());
 
             var underType = memType.GetNullableUnderlyingType();
@@ -1522,7 +1721,10 @@ public class NullableTest
             // ------------------------------
             mem = topType.GetMembers("Prop01").Single();
             memType = (mem as PropertySymbol).Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
             Assert.True(memType.CanBeAssignedNull());
 
             underType = memType.StrippedType();
@@ -1541,13 +1743,22 @@ public class NullableTest
             var paras = mem.GetParameters();
             Assert.Equal(2, paras.Length);
             memType = paras[0].Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_UInt16), memType.GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_UInt16),
+                memType.GetNullableUnderlyingType()
+            );
             memType = paras[1].Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_UInt32), memType.GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_UInt32),
+                memType.GetNullableUnderlyingType()
+            );
             // ------------------------------
             mem = topType.GetMembers("Method01").Single();
             memType = (mem as MethodSymbol).ReturnType;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
             Assert.True(memType.CanBeAssignedNull());
             underType = memType.StrippedType();
             Assert.Same(comp.GetSpecialType(SpecialType.System_Int32), underType);
@@ -1557,9 +1768,15 @@ public class NullableTest
             Assert.Equal(RefKind.Ref, paras[0].RefKind);
             Assert.Equal(RefKind.Out, paras[1].RefKind);
             memType = paras[0].Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Int64), memType.GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Int64),
+                memType.GetNullableUnderlyingType()
+            );
             memType = paras[1].Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_UInt64), memType.GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_UInt64),
+                memType.GetNullableUnderlyingType()
+            );
             // ------------------------------
             mem = topType.GetMembers("Method02").Single();
             memType = (mem as MethodSymbol).ReturnType;
@@ -1573,16 +1790,23 @@ public class NullableTest
             Assert.True(paras[0].IsOptional);
             Assert.True(paras[1].IsParams);
             memType = paras[0].Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Double), memType.GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Double),
+                memType.GetNullableUnderlyingType()
+            );
             memType = paras[1].Type;
             Assert.True(memType.IsArray());
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Single), (memType as ArrayTypeSymbol).ElementType.GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Single),
+                (memType as ArrayTypeSymbol).ElementType.GetNullableUnderlyingType()
+            );
         }
 
         [Fact]
         public void EnumStructNullableTest01()
         {
-            var text = @"
+            var text =
+                @"
 public enum E {    Zero, One, Two    }
 
 public struct S
@@ -1613,7 +1837,10 @@ public struct S
             var deleType = (mem as EventSymbol).Type;
             Assert.True(deleType.IsDelegateType());
             var memType = deleType.DelegateInvokeMethod().ReturnType;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
 
             var paras = deleType.DelegateParameters();
             Assert.False(paras[0].IsOptional);
@@ -1638,7 +1865,10 @@ public struct S
             // ------------------------------
             mem = topType.GetMembers(WellKnownMemberNames.AdditionOperatorName).Single();
             memType = (mem as MethodSymbol).ReturnType;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
             Assert.True(memType.CanBeAssignedNull());
 
             paras = mem.GetParameters();
@@ -1651,7 +1881,8 @@ public struct S
         [Fact]
         public void LocalNullableTest01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 
@@ -1673,7 +1904,8 @@ class A
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var mnode = (MethodDeclarationSyntax)tree.FindNodeOrTokenByKind(SyntaxKind.MethodDeclaration);
+            var mnode = (MethodDeclarationSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.MethodDeclaration);
             var localvars = model.AnalyzeDataFlow(mnode.Body).VariablesDeclared;
             var locals = localvars.OrderBy(s => s.Name).Select(s => s).ToArray();
             // 4 locals + 2 lambda params
@@ -1685,8 +1917,15 @@ class A
             // --------------------
             // local01
             var memType = anonymousType.GetMember<IPropertySymbol>("p0").Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
-            Assert.Equal((locals[0] as ILocalSymbol).Type, memType, SymbolEqualityComparer.ConsiderEverything);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
+            Assert.Equal(
+                (locals[0] as ILocalSymbol).Type,
+                memType,
+                SymbolEqualityComparer.ConsiderEverything
+            );
 
             // --------------------
             var nestedType = anonymousType.GetMember<IPropertySymbol>("p1").Type;
@@ -1695,13 +1934,16 @@ class A
             memType = nestedType.GetMember<IPropertySymbol>("p1").Type;
             Assert.True(memType.IsDelegateType());
             Assert.Same((locals[1] as ILocalSymbol).Type, memType);
-            // 
+            //
             var paras = ((INamedTypeSymbol)memType).DelegateInvokeMethod.Parameters;
             memType = paras[0].Type;
             Assert.True(memType.IsNullableType());
             Assert.False(memType.GetSymbol().CanBeConst());
             memType = paras[1].Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
             Assert.Equal(TypeKind.Enum, memType.GetNullableUnderlyingType().TypeKind);
             Assert.Equal("System.PlatformID?", memType.ToDisplayString());
 
@@ -1725,7 +1967,8 @@ class A
         [Fact]
         public void TypeParameterNullableTest01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1757,13 +2000,17 @@ namespace NS
             var comp = (Compilation)CreateCompilation(tree);
             var model = comp.GetSemanticModel(tree);
 
-            var node1 = (LocalDeclarationStatementSyntax)tree.FindNodeOrTokenByKind(SyntaxKind.LocalDeclarationStatement, 3);
+            var node1 = (LocalDeclarationStatementSyntax)
+                tree.FindNodeOrTokenByKind(SyntaxKind.LocalDeclarationStatement, 3);
             var loc = node1.Declaration.Variables.First();
             var sym = model.GetDeclaredSymbol(node1.Declaration.Variables.First()) as ILocalSymbol;
             // --------------------
             // R?
             var memType = sym.Type;
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Nullable_T), memType.OriginalDefinition);
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Nullable_T),
+                memType.OriginalDefinition
+            );
             Assert.Equal("System.PlatformID?", memType.ToDisplayString());
 
             var nodes = GetBindingNodes<SyntaxNode>(comp).ToList();
@@ -1779,7 +2026,10 @@ namespace NS
             // decimal?
             tinfo = model.GetTypeInfo(nodes[2] as LiteralExpressionSyntax);
             Assert.True(((ITypeSymbol)tinfo.ConvertedType).IsNullableType());
-            Assert.Same(comp.GetSpecialType(SpecialType.System_Decimal), ((ITypeSymbol)tinfo.ConvertedType).GetNullableUnderlyingType());
+            Assert.Same(
+                comp.GetSpecialType(SpecialType.System_Decimal),
+                ((ITypeSymbol)tinfo.ConvertedType).GetNullableUnderlyingType()
+            );
             Assert.Equal("decimal?", tinfo.ConvertedType.ToDisplayString());
         }
 
@@ -1788,7 +2038,8 @@ namespace NS
         [Fact]
         public void DynamicVersusObject()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 class Goo {
     dynamic X;
@@ -1804,7 +2055,10 @@ class Goo {
             var Func_Dynamic = (Goo.GetMembers("Z")[0] as FieldSymbol).Type;
             var Func_Object = (Goo.GetMembers("W")[0] as FieldSymbol).Type;
 
-            var comparator = CSharp.Symbols.SymbolEqualityComparer.IgnoringDynamicTupleNamesAndNullability;
+            var comparator = CSharp
+                .Symbols
+                .SymbolEqualityComparer
+                .IgnoringDynamicTupleNamesAndNullability;
             Assert.NotEqual(Object, Dynamic);
             Assert.Equal(comparator.GetHashCode(Dynamic), comparator.GetHashCode(Object));
             Assert.True(comparator.Equals(Dynamic, Object));
@@ -1819,7 +2073,8 @@ class Goo {
         [Fact]
         public void UnboundGenericTypeEquality()
         {
-            var code = @"
+            var code =
+                @"
 class C<T>
 {
 }
@@ -1835,7 +2090,8 @@ class C<T>
         [Fact]
         public void SymbolInfoForUnboundGenericTypeObjectCreation()
         {
-            var code = @"
+            var code =
+                @"
 class C<T>
 {
     static void Main()
@@ -1848,21 +2104,30 @@ class C<T>
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var syntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ObjectCreationExpressionSyntax>().Single();
+            var syntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ObjectCreationExpressionSyntax>()
+                .Single();
 
             var info = model.GetSymbolInfo(syntax);
             var symbol = info.Symbol;
             var originalDefinition = compilation.GlobalNamespace.GetMember<INamedTypeSymbol>("C");
 
-            Assert.Equal(originalDefinition.InstanceConstructors.Single(), symbol.OriginalDefinition);
+            Assert.Equal(
+                originalDefinition.InstanceConstructors.Single(),
+                symbol.OriginalDefinition
+            );
             Assert.False(symbol.ContainingType.IsUnboundGenericType);
-            Assert.IsType<UnboundArgumentErrorTypeSymbol>(symbol.ContainingType.TypeArguments.Single().GetSymbol());
+            Assert.IsType<UnboundArgumentErrorTypeSymbol>(
+                symbol.ContainingType.TypeArguments.Single().GetSymbol()
+            );
         }
 
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_01()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 [TypeIdentifier]
@@ -1884,7 +2149,8 @@ public interface I1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_02()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 [TypeIdentifierAttribute]
@@ -1900,7 +2166,8 @@ public interface I1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_03()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -1917,13 +2184,19 @@ namespace NS1
 
             Assert.False(i1.IsExplicitDefinitionOfNoPiaLocalType);
 
-            compilation.GetDeclarationDiagnostics().Verify(
-                // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
-                //     using alias1 = TypeIdentifier; 
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier").WithArguments("TypeIdentifier").WithLocation(6, 20),
-                // (8,6): error CS0616: 'TypeIdentifier' is not an attribute class
-                //     [alias1]
-                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1").WithArguments("TypeIdentifier").WithLocation(8, 6)
+            compilation
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
+                    //     using alias1 = TypeIdentifier;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier")
+                        .WithArguments("TypeIdentifier")
+                        .WithLocation(6, 20),
+                    // (8,6): error CS0616: 'TypeIdentifier' is not an attribute class
+                    //     [alias1]
+                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1")
+                        .WithArguments("TypeIdentifier")
+                        .WithLocation(8, 6)
                 );
 
             compilation = CreateCompilation(code);
@@ -1935,7 +2208,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_04()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -1952,23 +2226,32 @@ namespace NS1
 
             Assert.False(i1.IsExplicitDefinitionOfNoPiaLocalType);
 
-            compilation.GetDeclarationDiagnostics().Verify(
-                // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
-                //     using alias1 = TypeIdentifier; 
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier").WithArguments("TypeIdentifier").WithLocation(6, 20),
-                // (8,6): error CS0246: The type or namespace name 'alias1AttributeAttribute' could not be found (are you missing a using directive or an assembly reference?)
-                //     [alias1Attribute]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute").WithArguments("alias1AttributeAttribute").WithLocation(8, 6),
-                // (8,6): error CS0246: The type or namespace name 'alias1Attribute' could not be found (are you missing a using directive or an assembly reference?)
-                //     [alias1Attribute]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute").WithArguments("alias1Attribute").WithLocation(8, 6)
+            compilation
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (6,20): error CS0246: The type or namespace name 'TypeIdentifier' could not be found (are you missing a using directive or an assembly reference?)
+                    //     using alias1 = TypeIdentifier;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "TypeIdentifier")
+                        .WithArguments("TypeIdentifier")
+                        .WithLocation(6, 20),
+                    // (8,6): error CS0246: The type or namespace name 'alias1AttributeAttribute' could not be found (are you missing a using directive or an assembly reference?)
+                    //     [alias1Attribute]
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute")
+                        .WithArguments("alias1AttributeAttribute")
+                        .WithLocation(8, 6),
+                    // (8,6): error CS0246: The type or namespace name 'alias1Attribute' could not be found (are you missing a using directive or an assembly reference?)
+                    //     [alias1Attribute]
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1Attribute")
+                        .WithArguments("alias1Attribute")
+                        .WithLocation(8, 6)
                 );
         }
 
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_05()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -1989,7 +2272,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_06()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -2010,7 +2294,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_07()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -2031,7 +2316,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_08()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -2052,7 +2338,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_09()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -2078,7 +2365,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_10()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -2102,7 +2390,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_11()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 
 namespace NS1
@@ -2128,7 +2417,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_12()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
@@ -2179,7 +2469,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_13()
         {
-            var code = @"
+            var code =
+                @"
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 
@@ -2230,7 +2521,8 @@ namespace NS1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_14()
         {
-            var code = @"
+            var code =
+                @"
 namespace NS1
 {
     using alias1 = System.Runtime.InteropServices; 
@@ -2245,17 +2537,22 @@ namespace NS1
 
             Assert.False(i1.IsExplicitDefinitionOfNoPiaLocalType);
 
-            compilation.GetDeclarationDiagnostics().Verify(
-                // (6,6): error CS0616: 'System.Runtime.InteropServices' is not an attribute class
-                //     [alias1]
-                Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1").WithArguments("System.Runtime.InteropServices").WithLocation(6, 6)
+            compilation
+                .GetDeclarationDiagnostics()
+                .Verify(
+                    // (6,6): error CS0616: 'System.Runtime.InteropServices' is not an attribute class
+                    //     [alias1]
+                    Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "alias1")
+                        .WithArguments("System.Runtime.InteropServices")
+                        .WithLocation(6, 6)
                 );
         }
 
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_15()
         {
-            var code = @"
+            var code =
+                @"
 [System.Runtime.InteropServices.TypeIdentifier]
 public interface I1
 {
@@ -2269,7 +2566,8 @@ public interface I1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_16()
         {
-            var code = @"
+            var code =
+                @"
 [System.Runtime.InteropServices.TypeIdentifierAttribute]
 public interface I1
 {
@@ -2283,7 +2581,8 @@ public interface I1
         [Fact]
         public void IsExplicitDefinitionOfNoPiaLocalType_17()
         {
-            var code = @"
+            var code =
+                @"
 using alias1 = System.Runtime.InteropServices.TypeIdentifierAttribute;
 
 [alias1]
@@ -2300,7 +2599,8 @@ public interface I1
         [WorkItem(41501, "https://github.com/dotnet/roslyn/issues/41501")]
         public void ImplementNestedInterface_01()
         {
-            var text = @"
+            var text =
+                @"
 public struct TestStruct : TestStruct.IInnerInterface
 {
     public interface IInnerInterface
@@ -2316,7 +2616,8 @@ public struct TestStruct : TestStruct.IInnerInterface
         [WorkItem(41501, "https://github.com/dotnet/roslyn/issues/41501")]
         public void ImplementNestedInterface_02()
         {
-            var text = @"
+            var text =
+                @"
 public class TestClass : TestClass.IInnerInterface
 {
     public interface IInnerInterface
@@ -2331,13 +2632,15 @@ public class TestClass : TestClass.IInnerInterface
         [Fact]
         public void CallingConventionOnMethods_FromSource()
         {
-            var sourceComp = CreateCompilation(@"
+            var sourceComp = CreateCompilation(
+                @"
 class C
 {
     void M1() { }
     void M2(params object[] p) { }
     void M3(__arglist) { }
-}");
+}"
+            );
 
             sourceComp.VerifyDiagnostics();
             var c = sourceComp.GetTypeByMetadataName("C").GetPublicSymbol();
@@ -2360,7 +2663,9 @@ class C
         [Fact]
         public void CallingConventionOnMethods_FromMetadata()
         {
-            var metadataComp = CreateCompilationWithIL("", ilSource: @"
+            var metadataComp = CreateCompilationWithIL(
+                "",
+                ilSource: @"
 .class public auto ansi beforefieldinit C extends [mscorlib]System.Object
 {
     .method public hidebysig instance void M1 () cil managed 
@@ -2385,7 +2690,8 @@ class C
         call instance void [mscorlib]System.Object::.ctor()
         ret
     }
-}");
+}"
+            );
 
             metadataComp.VerifyDiagnostics();
             var c = metadataComp.GetTypeByMetadataName("C").GetPublicSymbol();
@@ -2408,10 +2714,9 @@ class C
         [Fact]
         public void TypeMissingIdentifier_Members()
         {
-            const string source =
-                """
+            const string source = """
                 namespace N;
-                
+
                 public class
                 {
                     public void F();
@@ -2429,20 +2734,28 @@ class C
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(3, 13),
                 // 0.cs(5,17): error CS0501: '.F()' must declare a body because it is not marked abstract, extern, or partial
                 //     public void F();
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F").WithArguments("N..F()").WithLocation(5, 17),
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F")
+                    .WithArguments("N..F()")
+                    .WithLocation(5, 17),
                 // 0.cs(7,13): error CS1001: Identifier expected
                 // public class
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(7, 13),
                 // 0.cs(8,1): error CS0101: The namespace 'N' already contains a definition for ''
                 // {
-                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "").WithArguments("", "N").WithLocation(8, 1),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "")
+                    .WithArguments("", "N")
+                    .WithLocation(8, 1),
                 // 0.cs(9,17): error CS0501: '.F()' must declare a body because it is not marked abstract, extern, or partial
                 //     public void F();
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F").WithArguments("N..F()").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F")
+                    .WithArguments("N..F()")
+                    .WithLocation(9, 17),
                 // 0.cs(9,17): error CS0111: Type '' already defines a member called 'F' with the same parameter types
                 //     public void F();
-                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "F").WithArguments("F", "N.").WithLocation(9, 17)
-                );
+                Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "F")
+                    .WithArguments("F", "N.")
+                    .WithLocation(9, 17)
+            );
 
             var outerNamespace = comp.GlobalNamespace.GetNestedNamespace("N");
 
@@ -2460,7 +2773,9 @@ class C
                 var typeMembers = namedType.GetMembers();
                 Assert.Equal(3, typeMembers.Length);
 
-                var method = typeMembers.OfType<MethodSymbol>().First(m => m is { MethodKind: not MethodKind.Constructor });
+                var method = typeMembers
+                    .OfType<MethodSymbol>()
+                    .First(m => m is { MethodKind: not MethodKind.Constructor });
                 Assert.Equal("F", method.Name);
 
                 Assert.True(uniqueMethods.Add(method));
@@ -2472,21 +2787,20 @@ class C
         [Fact]
         public void TypeMissingIdentifier_Nested()
         {
-            const string source =
-                """
+            const string source = """
                 namespace N;
-                
+
                 public partial class
                 {
                     partial class;
                     partial struct;
                     partial interface;
                     partial enum { }
-                
+
                     partial record;
                     partial record class;
                     partial record struct;
-                
+
                     readonly partial record struct;
                 }
                 file partial class
@@ -2495,11 +2809,11 @@ class C
                     partial struct;
                     partial interface;
                     partial enum { }
-                
+
                     partial record;
                     partial record class;
                     partial record struct;
-                
+
                     readonly partial record struct;
                 }
                 """;
@@ -2511,31 +2825,43 @@ class C
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(3, 21),
                 // (4,1): error CS9052: File-local type '' cannot use accessibility modifiers.
                 // {
-                Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "").WithArguments("N.").WithLocation(4, 1),
+                Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "")
+                    .WithArguments("N.")
+                    .WithLocation(4, 1),
                 // (5,18): error CS1001: Identifier expected
                 //     partial class;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(5, 18),
                 // (5,18): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial class;
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(5, 18),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(5, 18),
                 // (6,19): error CS1001: Identifier expected
                 //     partial struct;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(6, 19),
                 // (6,19): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial struct;
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(6, 19),
                 // (6,19): error CS0261: Partial declarations of '.' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 //     partial struct;
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "").WithArguments("N..").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "")
+                    .WithArguments("N..")
+                    .WithLocation(6, 19),
                 // (7,22): error CS1001: Identifier expected
                 //     partial interface;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(7, 22),
                 // (7,22): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial interface;
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(7, 22),
                 // (7,22): error CS0261: Partial declarations of '.' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 //     partial interface;
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "").WithArguments("N..").WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "")
+                    .WithArguments("N..")
+                    .WithLocation(7, 22),
                 // (8,18): error CS1001: Identifier expected
                 //     partial enum { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(8, 18),
@@ -2544,19 +2870,27 @@ class C
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "").WithLocation(8, 18),
                 // (8,18): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial enum { }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(8, 18),
                 // (8,18): error CS0102: The type '' already contains a definition for ''
                 //     partial enum { }
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "").WithArguments("N.", "").WithLocation(8, 18),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "")
+                    .WithArguments("N.", "")
+                    .WithLocation(8, 18),
                 // (10,19): error CS1001: Identifier expected
                 //     partial record;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(10, 19),
                 // (10,19): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial record;
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(10, 19),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(10, 19),
                 // (10,19): error CS0261: Partial declarations of '.' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 //     partial record;
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "").WithArguments("N..").WithLocation(10, 19),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "")
+                    .WithArguments("N..")
+                    .WithLocation(10, 19),
                 // (11,25): error CS1001: Identifier expected
                 //     partial record class;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(11, 25),
@@ -2565,10 +2899,14 @@ class C
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(12, 26),
                 // (12,26): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial record struct;
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(12, 26),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(12, 26),
                 // (12,26): error CS0261: Partial declarations of '.' must be all classes, all record classes, all structs, all record structs, or all interfaces
                 //     partial record struct;
-                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "").WithArguments("N..").WithLocation(12, 26),
+                Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "")
+                    .WithArguments("N..")
+                    .WithLocation(12, 26),
                 // (14,35): error CS1001: Identifier expected
                 //     readonly partial record struct;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(14, 35),
@@ -2592,10 +2930,14 @@ class C
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "").WithLocation(21, 18),
                 // (21,18): error CS0542: '': member names cannot be the same as their enclosing type
                 //     partial enum { }
-                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "").WithArguments("").WithLocation(21, 18),
+                Diagnostic(ErrorCode.ERR_MemberNameSameAsType, "")
+                    .WithArguments("")
+                    .WithLocation(21, 18),
                 // (21,18): error CS0102: The type '' already contains a definition for ''
                 //     partial enum { }
-                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "").WithArguments("N.", "").WithLocation(21, 18),
+                Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "")
+                    .WithArguments("N.", "")
+                    .WithLocation(21, 18),
                 // (23,19): error CS1001: Identifier expected
                 //     partial record;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(23, 19),
@@ -2608,7 +2950,7 @@ class C
                 // (27,35): error CS1001: Identifier expected
                 //     readonly partial record struct;
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(27, 35)
-                );
+            );
 
             var outerNamespace = comp.GlobalNamespace.GetNestedNamespace("N");
 
