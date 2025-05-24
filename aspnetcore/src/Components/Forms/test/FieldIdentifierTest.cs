@@ -28,8 +28,7 @@ public class FieldIdentifierTest
     [Fact]
     public void CannotUseNullFieldName()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() =>
-            new FieldIdentifier(new object(), null)
+        var ex = Assert.Throws<ArgumentNullException>(() => new FieldIdentifier(new object(), null)
         );
         Assert.Equal("fieldName", ex.ParamName);
     }

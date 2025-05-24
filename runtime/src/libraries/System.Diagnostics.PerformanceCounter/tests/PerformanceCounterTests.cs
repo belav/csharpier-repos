@@ -51,8 +51,7 @@ namespace System.Diagnostics.Tests
         {
             using (
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
-                    () =>
-                        new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
+                    () => new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
                 )
             )
             {
@@ -86,8 +85,7 @@ namespace System.Diagnostics.Tests
 
             using (
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
-                    () =>
-                        new PerformanceCounter(categoryName, counterName, instanceName)
+                    () => new PerformanceCounter(categoryName, counterName, instanceName)
                 )
             )
             {
@@ -118,8 +116,7 @@ namespace System.Diagnostics.Tests
 
             using (
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
-                    () =>
-                        new PerformanceCounter(categoryName, counterName)
+                    () => new PerformanceCounter(categoryName, counterName)
                 )
             )
             {
@@ -208,8 +205,7 @@ namespace System.Diagnostics.Tests
         {
             using (
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
-                    () =>
-                        new PerformanceCounter("Processor", "Interrupts/sec", "_Total", ".")
+                    () => new PerformanceCounter("Processor", "Interrupts/sec", "_Total", ".")
                 )
             )
             {
@@ -238,8 +234,7 @@ namespace System.Diagnostics.Tests
         {
             using (
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
-                    () =>
-                        new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
+                    () => new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
                 )
             )
             {
@@ -259,8 +254,7 @@ namespace System.Diagnostics.Tests
         {
             using (
                 PerformanceCounter counterSample = Helpers.RetryOnAllPlatformsWithClosingResources(
-                    () =>
-                        new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
+                    () => new PerformanceCounter("Processor", "Interrupts/sec", "0", ".")
                 )
             )
             {

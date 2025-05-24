@@ -1070,8 +1070,7 @@ namespace System.Net.Http.Functional.Tests
                     task =>
                     {
                         OperationCanceledException e = Assert.ThrowsAny<OperationCanceledException>(
-                            () =>
-                                task.GetAwaiter().GetResult()
+                            () => task.GetAwaiter().GetResult()
                         );
                         TimeoutException timeoutException = (TimeoutException)e.InnerException;
                         Assert.NotNull(timeoutException);

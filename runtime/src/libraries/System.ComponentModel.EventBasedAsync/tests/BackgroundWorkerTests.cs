@@ -180,8 +180,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     try
                     {
                         TargetInvocationException ex = Assert.Throws<TargetInvocationException>(
-                            () =>
-                                e.Result
+                            () => e.Result
                         );
                         Assert.True(ex.InnerException is TestException);
                         Assert.Equal(expectedExceptionMsg, ex.InnerException.Message);

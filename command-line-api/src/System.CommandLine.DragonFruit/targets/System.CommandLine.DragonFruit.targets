@@ -40,7 +40,11 @@
 
         
 
+        
+
         entryPointFullTypeName: "$([System.String]::Copy('$(StartupObject)').Trim())"
+
+
 
 
 

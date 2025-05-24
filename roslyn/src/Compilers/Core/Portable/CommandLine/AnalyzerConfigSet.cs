@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis
             );
 
         private readonly ObjectPool<List<Section>> _sectionKeyPool = new ObjectPool<List<Section>>(
-            () =>
-                new List<Section>()
+            () => new List<Section>()
         );
 
         private StrongBox<AnalyzerConfigOptionsResult>? _lazyConfigOptions;

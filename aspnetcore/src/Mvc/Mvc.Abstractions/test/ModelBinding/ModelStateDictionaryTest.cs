@@ -252,8 +252,7 @@ public class ModelStateDictionaryTest
         source.AddModelError("key", "some-error");
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldValid("key")
+        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldValid("key")
         );
 
         // Assert
@@ -1779,8 +1778,7 @@ public class ModelStateDictionaryTest
         source.MaxStateDepth = stateDepth;
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() =>
-            source.MarkFieldSkipped(key)
+        var exception = Assert.Throws<InvalidOperationException>(() => source.MarkFieldSkipped(key)
         );
 
         // Assert

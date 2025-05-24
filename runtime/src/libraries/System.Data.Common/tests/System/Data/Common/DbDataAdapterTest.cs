@@ -83,8 +83,7 @@ namespace System.Data.Tests.Common
         {
             MyAdapter da = new MyAdapter();
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
-                da.ExecuteBatch()
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() => da.ExecuteBatch()
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

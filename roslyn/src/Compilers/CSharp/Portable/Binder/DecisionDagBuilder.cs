@@ -2323,8 +2323,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private sealed class DagState
         {
             private static readonly ObjectPool<DagState> s_dagStatePool = new ObjectPool<DagState>(
-                static () =>
-                    new DagState()
+                static () => new DagState()
             );
 
             /// <summary>

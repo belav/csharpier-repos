@@ -1294,8 +1294,7 @@ Assert.Fail();
             Assert.Equal(2, table.Rows.Count);
             Assert.Equal(DataRowState.Deleted, table.Rows[1].RowState);
 
-            ConstraintException ex = Assert.Throws<ConstraintException>(() =>
-                table.RejectChanges()
+            ConstraintException ex = Assert.Throws<ConstraintException>(() => table.RejectChanges()
             );
             // Column 'col' is constrained to be unique.
             // Value '1' is already present

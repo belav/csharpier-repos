@@ -392,8 +392,7 @@ public class SqliteBlobTest : IDisposable
         using (var stream = CreateStream())
         {
             stream.Position = 2;
-            var ex = Assert.Throws<NotSupportedException>(() =>
-                stream.Write(new byte[] { 3 }, 0, 1)
+            var ex = Assert.Throws<NotSupportedException>(() => stream.Write(new byte[] { 3 }, 0, 1)
             );
             Assert.Equal(Resources.ResizeNotSupported, ex.Message);
         }
@@ -404,8 +403,7 @@ public class SqliteBlobTest : IDisposable
     {
         using (var stream = CreateStream(readOnly: true))
         {
-            var ex = Assert.Throws<NotSupportedException>(() =>
-                stream.Write(new byte[] { 1 }, 0, 1)
+            var ex = Assert.Throws<NotSupportedException>(() => stream.Write(new byte[] { 1 }, 0, 1)
             );
 
             Assert.Equal(Resources.WriteNotSupported, ex.Message);

@@ -593,8 +593,7 @@ public class SqliteConnectionTest
     {
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
-        var ex = Assert.Throws<ArgumentNullException>(() =>
-            connection.CreateCollation(null!, null)
+        var ex = Assert.Throws<ArgumentNullException>(() => connection.CreateCollation(null!, null)
         );
 
         Assert.Equal("name", ex.ParamName);

@@ -525,8 +525,7 @@ namespace System.Text.Json.Serialization.Tests
                     }
 
                     TargetInvocationException exception = Assert.Throws<TargetInvocationException>(
-                        () =>
-                            propertyInfo.SetValue(property, propertyInfo.GetValue(property))
+                        () => propertyInfo.SetValue(property, propertyInfo.GetValue(property))
                     );
                     Assert.NotNull(exception.InnerException);
                     Assert.IsType<InvalidOperationException>(exception.InnerException);

@@ -2756,8 +2756,7 @@ namespace System.Activities.XamlIntegration
         CompiledDataContextDescriptor PushDataContextDescriptor()
         {
             CompiledDataContextDescriptor contextDescriptor = new CompiledDataContextDescriptor(
-                () =>
-                    this.IsVB
+                () => this.IsVB
             )
             {
                 CodeTypeDeclaration = GenerateCompiledDataContext(false),

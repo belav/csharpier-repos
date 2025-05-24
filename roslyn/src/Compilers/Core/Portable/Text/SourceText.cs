@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Text
             CharBufferCount
         );
         private static readonly ObjectPool<XxHash128> s_contentHashPool = new ObjectPool<XxHash128>(
-            () =>
-                new XxHash128()
+            () => new XxHash128()
         );
 
         private readonly SourceHashAlgorithm _checksumAlgorithm;

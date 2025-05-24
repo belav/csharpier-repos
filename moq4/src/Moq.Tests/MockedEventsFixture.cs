@@ -898,8 +898,7 @@ namespace Moq.Tests
             var mock = new Mock<IAdder<EventArgs>>();
 
             //Act
-            var exception = Record.Exception(() =>
-                mock.VerifyRemove(m => m.Do(It.IsAny<string>()))
+            var exception = Record.Exception(() => mock.VerifyRemove(m => m.Do(It.IsAny<string>()))
             );
 
             //Assert

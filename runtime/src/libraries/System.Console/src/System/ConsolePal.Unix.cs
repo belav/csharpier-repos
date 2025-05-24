@@ -46,8 +46,7 @@ namespace System
             get { return s_terminalFormatStringsInstance.Value; }
         }
         private static readonly Lazy<TerminalFormatStrings> s_terminalFormatStringsInstance = new(
-            () =>
-                new TerminalFormatStrings(TermInfo.DatabaseFactory.ReadActiveDatabase())
+            () => new TerminalFormatStrings(TermInfo.DatabaseFactory.ReadActiveDatabase())
         );
 
         public static Stream OpenStandardInput()

@@ -83,11 +83,9 @@ namespace System.IO.Pipelines.Tests
             ValueTask<FlushResult> flushResult1 = Pipe.Writer.FlushAsync();
             ValueTask<FlushResult> flushResult2 = Pipe.Writer.FlushAsync();
 
-            var task1 = Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await flushResult1
+            var task1 = Assert.ThrowsAsync<InvalidOperationException>(async () => await flushResult1
             );
-            var task2 = Assert.ThrowsAsync<InvalidOperationException>(async () =>
-                await flushResult2
+            var task2 = Assert.ThrowsAsync<InvalidOperationException>(async () => await flushResult2
             );
 
             var exception1 = await task1;

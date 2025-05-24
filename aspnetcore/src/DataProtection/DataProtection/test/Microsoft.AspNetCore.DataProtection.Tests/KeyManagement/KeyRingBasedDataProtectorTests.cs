@@ -137,8 +137,7 @@ public class KeyRingBasedDataProtectorTests
         );
 
         // Act & assert
-        var ex = ExceptionAssert2.ThrowsCryptographicException(() =>
-            protector.Protect(new byte[0])
+        var ex = ExceptionAssert2.ThrowsCryptographicException(() => protector.Protect(new byte[0])
         );
         Assert.IsAssignableFrom<MockException>(ex.InnerException);
     }
