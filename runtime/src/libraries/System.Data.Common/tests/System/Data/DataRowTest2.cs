@@ -1138,7 +1138,8 @@ namespace System.Data.Tests
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "Col0" + @"[\p{Pf}\p{Po}]", ex1.Message);
             Assert.Matches(@"\b" + "TableA" + @"\b", ex1.Message);
 
-            ArgumentException ex2 = Assert.Throws<ArgumentException>(() => dr[new DataColumn("ZZZ")]
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
+                dr[new DataColumn("ZZZ")]
             );
             // Column 'Col0' does not belong to table TableA
             Assert.Null(ex2.InnerException);
@@ -1635,7 +1636,8 @@ namespace System.Data.Tests
 
             DataRow dr = dt.Rows[0];
 
-            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() => dr[(string)null]
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
+                dr[(string)null]
             );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);

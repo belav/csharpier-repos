@@ -131,7 +131,8 @@ namespace System.Composition.UnitTests
                 typeof(ButThereIsAnother),
                 typeof(RequiresOnlyOne)
             );
-            var x = Assert.Throws<CompositionFailedException>(() => cc.GetExport<RequiresOnlyOne>()
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                cc.GetExport<RequiresOnlyOne>()
             );
             Assert.Equal(
                 "Only one export for the contract 'ShouldBeOne' is allowed, but the following parts: 'ButThereIsAnother', 'ShouldBeOne' export it."

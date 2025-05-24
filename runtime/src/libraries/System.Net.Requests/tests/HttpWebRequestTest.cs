@@ -757,7 +757,8 @@ namespace System.Net.Tests
                     request.Timeout = 30; // ms.
 
                     var sw = Stopwatch.StartNew();
-                    WebException exception = Assert.Throws<WebException>(() => request.GetResponse()
+                    WebException exception = Assert.Throws<WebException>(() =>
+                        request.GetResponse()
                     );
                     sw.Stop();
 
@@ -1648,7 +1649,8 @@ namespace System.Net.Tests
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             request.Method = HttpMethod.Post.Method;
             request.Abort();
-            WebException ex = Assert.Throws<WebException>(() => request.BeginGetResponse(null, null)
+            WebException ex = Assert.Throws<WebException>(() =>
+                request.BeginGetResponse(null, null)
             );
             Assert.Equal(WebExceptionStatus.RequestCanceled, ex.Status);
         }

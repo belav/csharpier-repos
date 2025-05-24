@@ -43,7 +43,8 @@ public class SqliteTransactionTest
         using var connection = new SqliteConnection("Data Source=:memory:");
         connection.Open();
 
-        var ex = Assert.Throws<ArgumentException>(() => connection.BeginTransaction(isolationLevel)
+        var ex = Assert.Throws<ArgumentException>(() =>
+            connection.BeginTransaction(isolationLevel)
         );
 
         Assert.Equal(Resources.InvalidIsolationLevel(isolationLevel), ex.Message);

@@ -353,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Completion
         // The FilterItems method might need to handle a large list of items when import completion is enabled and filter text is
         // very short, i.e. <= 1. Therefore, use pooled list to avoid repeated (potentially LOH) allocations.
         private static readonly ObjectPool<List<MatchResult>> s_listOfMatchResultPool = new(
-            factory: () => new()
+            factory: () =>
+                new()
         );
 
         /// <summary>

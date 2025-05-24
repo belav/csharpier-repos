@@ -65,7 +65,8 @@ internal sealed class CSharpUsePrimaryConstructorDiagnosticAnalyzer()
     public const string AllFieldsName = "<>AllFields";
     public const string AllPropertiesName = "<>AllProperties";
 
-    private static readonly ObjectPool<ConcurrentSet<ISymbol>> s_concurrentSetPool = new(() => new()
+    private static readonly ObjectPool<ConcurrentSet<ISymbol>> s_concurrentSetPool = new(() =>
+        new()
     );
 
     public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>

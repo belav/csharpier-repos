@@ -1619,7 +1619,8 @@ namespace MonoTests.System.Reflection
             Assert.IsNotNull(method);
             Assert.IsTrue(method.IsVirtual);
 
-            var ex = Assert.Catch<Exception>(() => method.Invoke(fieldInfoWrapper, new object[] { })
+            var ex = Assert.Catch<Exception>(() =>
+                method.Invoke(fieldInfoWrapper, new object[] { })
             );
             Assert.IsTrue(ex.InnerException is SystemException);
         }

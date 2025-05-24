@@ -953,7 +953,8 @@ public class RoutePatternFactoryTest
         var left = RoutePatternFactory.Parse("/{id}");
         var right = RoutePatternFactory.Parse("/{ID}");
 
-        var ex = Assert.Throws<RoutePatternException>(() => RoutePatternFactory.Combine(left, right)
+        var ex = Assert.Throws<RoutePatternException>(() =>
+            RoutePatternFactory.Combine(left, right)
         );
 
         Assert.Equal("/{id}/{ID}", ex.Pattern);

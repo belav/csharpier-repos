@@ -221,7 +221,8 @@ namespace System.Xml.XmlReaderTests
             var reader = XmlReader.Create(new MemoryStream(bytes));
 
             Assert.True(reader.Read());
-            XmlException ex = Assert.Throws<XmlException>(() => reader.ReadElementContentAsString()
+            XmlException ex = Assert.Throws<XmlException>(() =>
+                reader.ReadElementContentAsString()
             );
             Assert.Contains(_invalidCharInThisEncoding, ex.Message);
         }

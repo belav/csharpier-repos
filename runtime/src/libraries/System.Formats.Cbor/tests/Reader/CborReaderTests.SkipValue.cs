@@ -112,7 +112,8 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, conformanceMode);
 
-            CborContentException exn = Assert.Throws<CborContentException>(() => reader.SkipValue()
+            CborContentException exn = Assert.Throws<CborContentException>(() =>
+                reader.SkipValue()
             );
             Assert.NotNull(exn.InnerException);
             Assert.IsType<DecoderFallbackException>(exn.InnerException);

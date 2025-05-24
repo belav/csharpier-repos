@@ -433,7 +433,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 () => GetAccessors(capturedLazyMember)
             );
             Lazy<IDictionary<string, object>> lazyMetadata = new Lazy<IDictionary<string, object>>(
-                () => this.TranslateExportMetadata(capturedReflectionExport)
+                () =>
+                    this.TranslateExportMetadata(capturedReflectionExport)
             );
 
             export = new ReflectionMemberExportDefinition(

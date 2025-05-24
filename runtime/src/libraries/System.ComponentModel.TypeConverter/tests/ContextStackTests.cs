@@ -78,7 +78,8 @@ namespace System.ComponentModel.Tests
         public void Append_Context_Null()
         {
             ContextStack stack = new ContextStack();
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => stack.Append(null)
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                stack.Append(null)
             );
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);
@@ -149,7 +150,8 @@ namespace System.ComponentModel.Tests
         {
             ContextStack stack = new ContextStack();
             stack.Push(new Foo());
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => stack[(Type)null]
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                stack[(Type)null]
             );
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);

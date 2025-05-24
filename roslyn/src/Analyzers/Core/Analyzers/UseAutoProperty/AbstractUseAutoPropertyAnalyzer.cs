@@ -38,9 +38,11 @@ internal abstract class AbstractUseAutoPropertyAnalyzer<
     /// ConcurrentStack as that's the only concurrent collection that supports 'Clear' in netstandard2.
     /// </summary>
     private static readonly ObjectPool<ConcurrentStack<AnalysisResult>> s_analysisResultPool = new(
-        () => new()
+        () =>
+            new()
     );
-    private static readonly ObjectPool<ConcurrentSet<IFieldSymbol>> s_fieldSetPool = new(() => new()
+    private static readonly ObjectPool<ConcurrentSet<IFieldSymbol>> s_fieldSetPool = new(() =>
+        new()
     );
     private static readonly ObjectPool<ConcurrentSet<SyntaxNode>> s_nodeSetPool = new(() => new());
     private static readonly ObjectPool<

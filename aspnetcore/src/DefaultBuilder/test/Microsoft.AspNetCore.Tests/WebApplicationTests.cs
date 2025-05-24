@@ -2193,7 +2193,8 @@ public class WebApplicationTests
         var ex1 = Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.Configure((context, app) => { })
         );
-        var ex2 = Assert.Throws<NotSupportedException>(() => builder.WebHost.UseStartup<MyStartup>()
+        var ex2 = Assert.Throws<NotSupportedException>(() =>
+            builder.WebHost.UseStartup<MyStartup>()
         );
         var ex3 = Assert.Throws<NotSupportedException>(() =>
             builder.WebHost.UseStartup(typeof(MyStartup))
