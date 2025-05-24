@@ -39,7 +39,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetNullableFOut(true, 1.0f, out float? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableF(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableF(default, default)
         );
 
         float?[] values = new float?[] { default, default, default, default, default };

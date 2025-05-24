@@ -62,7 +62,8 @@ namespace System.Net.Primitives.Functional.Tests
             CookieContainer cc = new CookieContainer();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => cc.Capacity = 0); // <= 0
-            Assert.Throws<ArgumentOutOfRangeException>(() => cc.Capacity = cc.PerDomainCapacity - 1
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cc.Capacity = cc.PerDomainCapacity - 1
             ); // < per domain capacity
         }
 
@@ -107,7 +108,8 @@ namespace System.Net.Primitives.Functional.Tests
             CookieContainer cc = new CookieContainer();
 
             Assert.Throws<ArgumentOutOfRangeException>(() => cc.PerDomainCapacity = 0); // Per domain capacity <= 0
-            Assert.Throws<ArgumentOutOfRangeException>(() => cc.PerDomainCapacity = cc.Capacity + 1
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                cc.PerDomainCapacity = cc.Capacity + 1
             ); // Per domain capacity >= Capacity
         }
 

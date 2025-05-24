@@ -587,7 +587,8 @@ namespace System.Security.Cryptography.Tests
                 )
             )
             {
-                Assert.Throws<OverflowException>(() => cryptoStream.Write(buffer, 0, buffer.Length)
+                Assert.Throws<OverflowException>(() =>
+                    cryptoStream.Write(buffer, 0, buffer.Length)
                 );
             }
         }

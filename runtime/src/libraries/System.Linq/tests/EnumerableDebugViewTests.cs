@@ -78,7 +78,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> source = Enumerable.Range(10, 0);
             object debugView = CreateSystemCore_EnumerableDebugView(source);
-            Exception exc = Assert.Throws<TargetInvocationException>(() => GetItems<int>(debugView)
+            Exception exc = Assert.Throws<TargetInvocationException>(() =>
+                GetItems<int>(debugView)
             );
             Assert.NotNull(exc.InnerException);
             Assert.Equal(

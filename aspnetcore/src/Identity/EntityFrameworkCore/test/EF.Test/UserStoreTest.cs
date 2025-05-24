@@ -118,11 +118,14 @@ public class UserStoreTest
         await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
             await store.FindByNameAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.CreateAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.CreateAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.UpdateAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.UpdateAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.DeleteAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.DeleteAsync(null)
         );
         await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
             await store.SetEmailConfirmedAsync(null, true)

@@ -236,7 +236,8 @@ namespace System.IO.Pipelines.Tests
         public void ThrowsOnAdvanceOverMemorySize()
         {
             Memory<byte> buffer = Pipe.Writer.GetMemory(1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => Pipe.Writer.Advance(buffer.Length + 1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Pipe.Writer.Advance(buffer.Length + 1)
             );
         }
 

@@ -150,7 +150,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void CtorImageRectangle_Empty_Attributes()
         {
-            Assert.Throws<OutOfMemoryException>(() => new TextureBrush(image, new Rectangle(), attr)
+            Assert.Throws<OutOfMemoryException>(() =>
+                new TextureBrush(image, new Rectangle(), attr)
             );
         }
 

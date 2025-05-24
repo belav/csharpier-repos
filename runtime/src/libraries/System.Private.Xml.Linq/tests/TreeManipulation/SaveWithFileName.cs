@@ -132,7 +132,8 @@ namespace XLinqTests
         [Fact]
         public void XStreamingElementSave_NullParameter()
         {
-            Assert.Throws<ArgumentNullException>(() => new XStreamingElement("e").Save((string)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new XStreamingElement("e").Save((string)null)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 new XStreamingElement("e").Save((string)null, SaveOptions.DisableFormatting)

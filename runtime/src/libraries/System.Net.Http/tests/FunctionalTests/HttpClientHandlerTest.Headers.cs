@@ -543,7 +543,8 @@ namespace System.Net.Http.Functional.Tests
                 )
             )
             {
-                await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(TestAsync, m)
+                await Assert.ThrowsAsync<HttpRequestException>(() =>
+                    client.SendAsync(TestAsync, m)
                 );
             }
         }

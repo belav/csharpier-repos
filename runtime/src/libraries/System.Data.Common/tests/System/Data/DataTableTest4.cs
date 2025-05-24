@@ -1510,7 +1510,8 @@ namespace System.Data.Tests
                 DataTable table = new DataTable("Table1");
                 table.Columns.Add(new DataColumn("id", typeof(int)));
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(stream)
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    table.ReadXml(stream)
                 );
                 // DataTable 'Table1' does not match to
                 // any DataTable in source
@@ -1686,7 +1687,8 @@ namespace System.Data.Tests
                 table.Columns.Add(new DataColumn("id", Type.GetType("System.Int32")));
                 ds.Tables.Add(table);
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(stream)
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    table.ReadXml(stream)
                 );
                 // DataTable 'Table1' does not match to
                 // any DataTable in sources

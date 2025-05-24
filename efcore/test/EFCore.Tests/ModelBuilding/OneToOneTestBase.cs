@@ -2120,7 +2120,8 @@ public abstract partial class ModelBuilderTest
                     nameof(OrderDetails)
                 ),
                 Assert
-                    .Throws<InvalidOperationException>(() => modelBuilder.Entity<Order>().HasNoKey()
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Order>().HasNoKey()
                     )
                     .Message
             );
@@ -2141,7 +2142,8 @@ public abstract partial class ModelBuilderTest
             Assert.Equal(
                 CoreStrings.NavigationToKeylessType(nameof(OrderDetails.Order), nameof(Order)),
                 Assert
-                    .Throws<InvalidOperationException>(() => modelBuilder.Entity<Order>().HasNoKey()
+                    .Throws<InvalidOperationException>(() =>
+                        modelBuilder.Entity<Order>().HasNoKey()
                     )
                     .Message
             );

@@ -1343,7 +1343,8 @@ namespace System.Net.Quic.Tests
                         {
                             waitForAbortTcs.SetResult(ex.ApplicationErrorCode.Value);
                             QuicException readEx = await Assert.ThrowsAsync<QuicException>(
-                                async () => await stream.ReadAsync(new byte[1])
+                                async () =>
+                                    await stream.ReadAsync(new byte[1])
                             );
                             Assert.Equal(ex, readEx);
                         }

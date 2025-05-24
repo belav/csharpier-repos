@@ -431,12 +431,14 @@ namespace System.IO.Compression
         [Fact]
         public void Ctor_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionLevel.Fastest)
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionLevel.Fastest)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 CreateStream(null, CompressionMode.Decompress)
             );
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionMode.Compress)
+            Assert.Throws<ArgumentNullException>(() =>
+                CreateStream(null, CompressionMode.Compress)
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -489,7 +491,8 @@ namespace System.IO.Compression
                     CompressionMode.Decompress
                 )
             )
-                Assert.Throws<InvalidDataException>(() => decompressor.Read(new byte[1024], 0, 1024)
+                Assert.Throws<InvalidDataException>(() =>
+                    decompressor.Read(new byte[1024], 0, 1024)
                 );
             using (
                 var decompressor = CreateStream(

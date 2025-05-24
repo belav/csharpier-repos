@@ -57,11 +57,14 @@ public class RoleStoreTest : IClassFixture<InMemoryDatabaseFixture>
         await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
             await store.SetRoleNameAsync(null, null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.CreateAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.CreateAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.UpdateAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.UpdateAsync(null)
         );
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await store.DeleteAsync(null)
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await store.DeleteAsync(null)
         );
     }
 

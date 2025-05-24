@@ -248,7 +248,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             JsonTypeInfo jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(typeof(Poco), new());
-            Assert.Throws<ArgumentOutOfRangeException>(() => jsonTypeInfo.NumberHandling = handling
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                jsonTypeInfo.NumberHandling = handling
             );
         }
 
@@ -524,7 +525,8 @@ namespace System.Text.Json.Serialization.Tests
                     }
 
                     TargetInvocationException exception = Assert.Throws<TargetInvocationException>(
-                        () => propertyInfo.SetValue(property, propertyInfo.GetValue(property))
+                        () =>
+                            propertyInfo.SetValue(property, propertyInfo.GetValue(property))
                     );
                     Assert.NotNull(exception.InnerException);
                     Assert.IsType<InvalidOperationException>(exception.InnerException);
@@ -689,7 +691,8 @@ namespace System.Text.Json.Serialization.Tests
 
             MyClass obj = new() { Value = "foo" };
 
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize<MyClass>(obj, o)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize<MyClass>(obj, o)
             );
         }
 
@@ -720,7 +723,8 @@ namespace System.Text.Json.Serialization.Tests
 
             MyClass obj = new() { Value = "foo" };
 
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize<MyClass>(obj, o)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize<MyClass>(obj, o)
             );
         }
 
@@ -863,7 +867,8 @@ namespace System.Text.Json.Serialization.Tests
                 JsonTypeInfo.CreateJsonTypeInfo(typeof(string), null)
             );
             Assert.Throws<ArgumentNullException>(() => JsonTypeInfo.CreateJsonTypeInfo(null, null));
-            Assert.Throws<ArgumentNullException>(() => JsonTypeInfo.CreateJsonTypeInfo<string>(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonTypeInfo.CreateJsonTypeInfo<string>(null)
             );
         }
 

@@ -529,7 +529,8 @@ namespace Dynamic
         {
             const int E_ABORT = unchecked((int)0x80004004);
             string message = "CUSTOM ERROR MESSAGE";
-            COMException comException = Assert.Throws<COMException>(() => obj.Fail(E_ABORT, message)
+            COMException comException = Assert.Throws<COMException>(() =>
+                obj.Fail(E_ABORT, message)
             );
             Assert.Equal(E_ABORT, comException.HResult);
             Assert.Equal(message, comException.Message);

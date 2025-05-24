@@ -347,7 +347,8 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Throws<ArgumentException>(() =>
                 Marshal.OffsetOf(typeof(NonExistField), "NonExistField")
             );
-            Assert.Throws<ArgumentException>(() => Marshal.OffsetOf<NonExistField>("NonExistField")
+            Assert.Throws<ArgumentException>(() =>
+                Marshal.OffsetOf<NonExistField>("NonExistField")
             );
         }
 

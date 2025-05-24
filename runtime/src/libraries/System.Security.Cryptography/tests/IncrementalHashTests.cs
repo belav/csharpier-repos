@@ -131,7 +131,8 @@ namespace System.Security.Cryptography.Tests
                     () => incrementalHash.AppendData(new byte[1], 0, 2)
                 );
 
-                Assert.Throws<ArgumentException>(() => incrementalHash.AppendData(new byte[2], 1, 2)
+                Assert.Throws<ArgumentException>(() =>
+                    incrementalHash.AppendData(new byte[2], 1, 2)
                 );
             }
         }

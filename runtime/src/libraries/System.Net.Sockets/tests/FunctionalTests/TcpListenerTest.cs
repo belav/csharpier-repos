@@ -146,7 +146,8 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<InvalidOperationException>(() => listener.AcceptSocket());
             Assert.Throws<InvalidOperationException>(() => listener.AcceptTcpClient());
             Assert.Throws<InvalidOperationException>(() => listener.BeginAcceptSocket(null, null));
-            Assert.Throws<InvalidOperationException>(() => listener.BeginAcceptTcpClient(null, null)
+            Assert.Throws<InvalidOperationException>(() =>
+                listener.BeginAcceptTcpClient(null, null)
             );
             Assert.Throws<InvalidOperationException>(() =>
             {

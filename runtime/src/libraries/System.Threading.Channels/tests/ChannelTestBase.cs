@@ -1281,7 +1281,8 @@ namespace System.Threading.Channels.Tests
             Assert.True(c.Writer.TryWrite(42));
             Assert.True(await read);
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().OnCompleted(() => { })
+            Assert.Throws<InvalidOperationException>(() =>
+                read.GetAwaiter().OnCompleted(() => { })
             );
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().GetResult());
         }
@@ -1299,7 +1300,8 @@ namespace System.Threading.Channels.Tests
             Assert.True(c.Writer.TryWrite(42));
             Assert.Equal(42, await read);
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().OnCompleted(() => { })
+            Assert.Throws<InvalidOperationException>(() =>
+                read.GetAwaiter().OnCompleted(() => { })
             );
             Assert.Throws<InvalidOperationException>(() => read.GetAwaiter().GetResult());
         }
@@ -1317,7 +1319,8 @@ namespace System.Threading.Channels.Tests
             await c.Reader.ReadAsync();
             Assert.True(await write);
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().OnCompleted(() => { })
+            Assert.Throws<InvalidOperationException>(() =>
+                write.GetAwaiter().OnCompleted(() => { })
             );
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().GetResult());
         }
@@ -1335,7 +1338,8 @@ namespace System.Threading.Channels.Tests
             await c.Reader.ReadAsync();
             await write;
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().IsCompleted);
-            Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().OnCompleted(() => { })
+            Assert.Throws<InvalidOperationException>(() =>
+                write.GetAwaiter().OnCompleted(() => { })
             );
             Assert.Throws<InvalidOperationException>(() => write.GetAwaiter().GetResult());
         }

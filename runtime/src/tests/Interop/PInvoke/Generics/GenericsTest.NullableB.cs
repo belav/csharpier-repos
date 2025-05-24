@@ -39,7 +39,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetNullableBOut(true, false, out bool? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableB(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableB(default, default)
         );
 
         bool?[] values = new bool?[] { default, default, default, default, default };

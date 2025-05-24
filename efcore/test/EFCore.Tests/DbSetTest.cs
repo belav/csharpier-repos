@@ -847,7 +847,8 @@ public class DbSetTest
         Assert.Equal(
             CoreStrings.DataBindingWithIListSource,
             Assert
-                .Throws<NotSupportedException>(() => ((IListSource)context.Gus.Distinct()).GetList()
+                .Throws<NotSupportedException>(() =>
+                    ((IListSource)context.Gus.Distinct()).GetList()
                 )
                 .Message
         );

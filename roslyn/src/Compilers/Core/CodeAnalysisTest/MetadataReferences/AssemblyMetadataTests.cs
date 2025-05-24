@@ -27,10 +27,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             byte[] arrayImage = null;
-            Assert.Throws<ArgumentNullException>(() => AssemblyMetadata.CreateFromImage(arrayImage)
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.CreateFromImage(arrayImage)
             );
 
-            Assert.Throws<ArgumentNullException>(() => AssemblyMetadata.Create((ModuleMetadata)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.Create((ModuleMetadata)null)
             );
             Assert.Throws<ArgumentException>(() =>
                 AssemblyMetadata.Create(default(ImmutableArray<ModuleMetadata>))
@@ -60,7 +62,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 AssemblyMetadata.Create(ImmutableArray.Create((ModuleMetadata)null))
             );
 
-            Assert.Throws<ArgumentNullException>(() => AssemblyMetadata.CreateFromFile((string)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                AssemblyMetadata.CreateFromFile((string)null)
             );
         }
 

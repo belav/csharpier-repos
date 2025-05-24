@@ -44,7 +44,8 @@ namespace System.Security.Cryptography.Xml.Tests
             string xml = "<a />";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            Assert.Throws<CryptographicException>(() => new EncryptionProperty(doc.DocumentElement)
+            Assert.Throws<CryptographicException>(() =>
+                new EncryptionProperty(doc.DocumentElement)
             );
         }
 

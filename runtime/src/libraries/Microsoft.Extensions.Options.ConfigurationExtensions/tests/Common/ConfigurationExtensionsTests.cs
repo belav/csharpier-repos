@@ -18,13 +18,15 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             // Null options builder.
             OptionsBuilder<FakeOptions>? optionsBuilder = null;
             Assert.Throws<ArgumentNullException>(() => optionsBuilder!.Bind(s_emptyConfig));
-            Assert.Throws<ArgumentNullException>(() => optionsBuilder!.Bind(s_emptyConfig, _ => { })
+            Assert.Throws<ArgumentNullException>(() =>
+                optionsBuilder!.Bind(s_emptyConfig, _ => { })
             );
 
             // Null configuration.
             optionsBuilder = CreateOptionsBuilder();
             Assert.Throws<ArgumentNullException>(() => optionsBuilder.Bind(config: null!));
-            Assert.Throws<ArgumentNullException>(() => optionsBuilder.Bind(config: null!, _ => { })
+            Assert.Throws<ArgumentNullException>(() =>
+                optionsBuilder.Bind(config: null!, _ => { })
             );
 
             // Null configureBinder.

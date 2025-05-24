@@ -177,7 +177,8 @@ public class CompiledModelSqlServerTest : CompiledModelRelationalTestBase
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
             Assert
-                .Throws<InvalidOperationException>(() => principalId.GetIdentitySeed(principalTable)
+                .Throws<InvalidOperationException>(() =>
+                    principalId.GetIdentitySeed(principalTable)
                 )
                 .Message
         );

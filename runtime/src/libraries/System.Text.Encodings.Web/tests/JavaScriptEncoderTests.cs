@@ -19,7 +19,8 @@ namespace System.Text.Encodings.Web.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 JavaScriptEncoder.Create((TextEncoderSettings)null)
             );
-            Assert.Throws<ArgumentNullException>(() => JavaScriptEncoder.Create((UnicodeRange)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                JavaScriptEncoder.Create((UnicodeRange)null)
             );
         }
 

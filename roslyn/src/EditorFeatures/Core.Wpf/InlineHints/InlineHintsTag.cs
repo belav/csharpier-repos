@@ -321,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         private async Task StartToolTipServiceAsync(IToolTipPresenter toolTipPresenter)
         {
             var threadingContext = _taggerProvider.ThreadingContext;
-            var uiList = await Task.Run(() => CreateDescriptionAsync(threadingContext.DisposalToken)
+            var uiList = await Task.Run(() =>
+                    CreateDescriptionAsync(threadingContext.DisposalToken)
                 )
                 .ConfigureAwait(false);
             await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(

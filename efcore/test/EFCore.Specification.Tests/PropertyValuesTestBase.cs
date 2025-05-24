@@ -1166,7 +1166,8 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 nameof(CurrentEmployee)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => clonedValues.GetValue<string>(termProperty)
+                .Throws<InvalidOperationException>(() =>
+                    clonedValues.GetValue<string>(termProperty)
                 )
                 .Message
         );

@@ -427,7 +427,8 @@ namespace System.Text.Json.Serialization.Tests
             else
             {
                 InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () => await Serializer.DeserializeWrapper("{}", type)
+                    async () =>
+                        await Serializer.DeserializeWrapper("{}", type)
                 );
                 string exAsStr = ex.ToString();
                 Assert.Contains("MyString", exAsStr);

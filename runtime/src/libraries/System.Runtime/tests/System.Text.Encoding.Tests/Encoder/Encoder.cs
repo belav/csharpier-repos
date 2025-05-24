@@ -401,7 +401,8 @@ namespace System.Text.Encodings.Tests
                 Assert.Throws<EncoderFallbackException>(() =>
                     encoder.GetBytes(pChars, 1, pBytes, 2, true)
                 );
-                Assert.Throws<EncoderFallbackException>(() => encoder.GetByteCount(pChars, 1, true)
+                Assert.Throws<EncoderFallbackException>(() =>
+                    encoder.GetByteCount(pChars, 1, true)
                 );
             }
         }

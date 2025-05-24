@@ -181,7 +181,8 @@ namespace System.Text.Json.Serialization.Tests
                 },
             };
 
-            ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(poco, options)
+            ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Serialize(poco, options)
             );
             Assert.Contains(typeof(int[,]).ToString(), ex.Message);
             Assert.Contains("Path: $.InvalidProperty.NotSupported.", ex.Message);

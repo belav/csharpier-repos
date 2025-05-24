@@ -447,7 +447,8 @@ WHERE 0 = 1
         AssertCompatibilityLevelTooLow(() => base.Column_collection_of_ints_Contains(async));
 
     public override Task Column_collection_of_nullable_ints_Contains(bool async) =>
-        AssertCompatibilityLevelTooLow(() => base.Column_collection_of_nullable_ints_Contains(async)
+        AssertCompatibilityLevelTooLow(() =>
+            base.Column_collection_of_nullable_ints_Contains(async)
         );
 
     public override Task Column_collection_of_nullable_ints_Contains_null(bool async) =>
@@ -590,7 +591,8 @@ ORDER BY [p].[Id]
         );
 
     public override Task Inline_collection_Except_column_collection(bool async) =>
-        AssertCompatibilityLevelTooLow(() => base.Inline_collection_Except_column_collection(async)
+        AssertCompatibilityLevelTooLow(() =>
+            base.Inline_collection_Except_column_collection(async)
         );
 
     public override async Task Column_collection_equality_parameter_collection(bool async)

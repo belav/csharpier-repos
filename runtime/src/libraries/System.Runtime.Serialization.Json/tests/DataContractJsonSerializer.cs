@@ -3392,7 +3392,8 @@ public static partial class DataContractJsonSerializerTests
         serializer.WriteObject(ms, original);
         var serializedJsonValue = Encoding.UTF8.GetString(ms.ToArray());
         serializedJsonValue = serializedJsonValue.Replace("2011", "         2011");
-        Assert.Throws<SerializationException>(() => DeserializeString<DateTime>(serializedJsonValue)
+        Assert.Throws<SerializationException>(() =>
+            DeserializeString<DateTime>(serializedJsonValue)
         );
     }
 

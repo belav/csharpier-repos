@@ -110,7 +110,8 @@ namespace System.Net.Sockets.Tests
                     };
 
                     Assert.True(client.ReceiveAsync(receiveSaea));
-                    Assert.Throws<InvalidOperationException>(() => client.ReceiveAsync(receiveSaea)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        client.ReceiveAsync(receiveSaea)
                     ); // already in progress
 
                     receiveSaea.Dispose();

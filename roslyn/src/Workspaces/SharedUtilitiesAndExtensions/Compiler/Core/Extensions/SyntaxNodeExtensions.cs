@@ -1057,7 +1057,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             private static readonly ObjectPool<Stack<TDirectiveTriviaSyntax>> s_stackPool = new(
-                () => new()
+                () =>
+                    new()
             );
 
             public static DirectiveInfo<TDirectiveTriviaSyntax> GetDirectiveInfoForRoot(

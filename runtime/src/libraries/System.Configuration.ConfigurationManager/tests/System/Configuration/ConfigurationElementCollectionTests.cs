@@ -208,7 +208,8 @@ namespace System.ConfigurationTests
         [Fact]
         public void BaseAddIndexNullThrows()
         {
-            Assert.Throws<NullReferenceException>(() => new SimpleCollection().TestBaseAdd(-1, null)
+            Assert.Throws<NullReferenceException>(() =>
+                new SimpleCollection().TestBaseAdd(-1, null)
             );
         }
 

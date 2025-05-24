@@ -227,7 +227,8 @@ namespace System.Composition.Hosting.Core.Tests
                 );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                Assert.Throws<NullReferenceException>(() => context.GetOrCreate(1, null, Activator)
+                Assert.Throws<NullReferenceException>(() =>
+                    context.GetOrCreate(1, null, Activator)
                 );
             }
         }

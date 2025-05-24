@@ -117,7 +117,8 @@ public class ProxyTests
         Assert.Equal(
             ProxiesStrings.EntityTypeNotFoundShared(nameof(SharedTypeEntityType)),
             Assert
-                .Throws<InvalidOperationException>(() => context.CreateProxy<SharedTypeEntityType>()
+                .Throws<InvalidOperationException>(() =>
+                    context.CreateProxy<SharedTypeEntityType>()
                 )
                 .Message
         );

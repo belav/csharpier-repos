@@ -370,11 +370,13 @@ namespace System.Data.Tests
             //immediately upon assignment. We don't do this yet hence we don't throw
             //an exception at this point.
             // Cannot find column [nimi].
-            Assert.Throws<EvaluateException>(() => c.Expression = "iif (nimi = 24, 'hurrey', 'boo')"
+            Assert.Throws<EvaluateException>(() =>
+                c.Expression = "iif (nimi = 24, 'hurrey', 'boo')"
             );
 
             // Cannot perform '=' operation on System.String and System.Int32.
-            Assert.Throws<EvaluateException>(() => c.Expression = "iif (name = 24, 'hurrey', 'boo')"
+            Assert.Throws<EvaluateException>(() =>
+                c.Expression = "iif (name = 24, 'hurrey', 'boo')"
             );
 
             // Invalid type name 'Boolean'.

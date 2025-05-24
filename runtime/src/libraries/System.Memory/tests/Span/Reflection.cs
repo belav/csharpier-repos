@@ -25,7 +25,8 @@ namespace System.SpanTests
                 nameof(MemoryExtensions.AsSpan),
                 new Type[] { typeof(string) }
             );
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { "Hello" })
+            Assert.Throws<NotSupportedException>(() =>
+                method.Invoke(null, new object[] { "Hello" })
             );
 
             method = type.GetMethod(
@@ -53,7 +54,8 @@ namespace System.SpanTests
             Type type = typeof(BinaryPrimitives);
 
             MethodInfo method = type.GetMethod(nameof(BinaryPrimitives.ReadInt16LittleEndian));
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { default })
+            Assert.Throws<NotSupportedException>(() =>
+                method.Invoke(null, new object[] { default })
             );
 
             method = type.GetMethod(nameof(BinaryPrimitives.TryReadInt16LittleEndian));
@@ -74,7 +76,8 @@ namespace System.SpanTests
             Type refIntType = refInt.GetType();
 
             MethodInfo method = createSpanMethod.MakeGenericMethod(refIntType);
-            Assert.Throws<NotSupportedException>(() => method.Invoke(null, new object[] { null, 0 })
+            Assert.Throws<NotSupportedException>(() =>
+                method.Invoke(null, new object[] { null, 0 })
             );
         }
 

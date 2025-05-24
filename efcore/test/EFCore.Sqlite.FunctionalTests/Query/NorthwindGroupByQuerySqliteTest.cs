@@ -34,7 +34,8 @@ public class NorthwindGroupByQuerySqliteTest
     public override Task Select_uncorrelated_collection_with_groupby_when_outer_is_distinct(
         bool async
     ) =>
-        AssertApplyNotSupported(() => base.Select_uncorrelated_collection_with_groupby_works(async)
+        AssertApplyNotSupported(() =>
+            base.Select_uncorrelated_collection_with_groupby_works(async)
         );
 
     public override Task AsEnumerable_in_subquery_for_GroupBy(bool async) =>

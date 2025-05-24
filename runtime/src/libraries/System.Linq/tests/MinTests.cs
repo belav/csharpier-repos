@@ -1011,7 +1011,8 @@ namespace System.Linq.Tests
         public void Min_DateTime_EmptySource_ThrowsInvalidOperationException()
         {
             Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Min());
-            Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<DateTime>().Min(x => x)
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<DateTime>().Min(x => x)
             );
             Assert.Throws<InvalidOperationException>(() => Array.Empty<DateTime>().Min());
             Assert.Throws<InvalidOperationException>(() => new List<DateTime>().Min());

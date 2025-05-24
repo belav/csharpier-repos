@@ -151,7 +151,8 @@ namespace System.IO.Pipelines.Tests
             PipeReader reader = PipeReader.Create(ReadOnlySequence<byte>.Empty);
 
             reader.Complete();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync()
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await reader.ReadAsync()
             );
         }
 

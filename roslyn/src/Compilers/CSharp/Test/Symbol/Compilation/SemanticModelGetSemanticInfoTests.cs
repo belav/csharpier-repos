@@ -1819,7 +1819,8 @@ class C
 
             Assert.Throws<ArgumentNullException>(() => model.GetSymbolInfo((ExpressionSyntax)null));
             Assert.Throws<ArgumentNullException>(() => model.GetTypeInfo((ExpressionSyntax)null));
-            Assert.Throws<ArgumentNullException>(() => model.GetMemberGroup((ExpressionSyntax)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                model.GetMemberGroup((ExpressionSyntax)null)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 model.GetConstantValue((ExpressionSyntax)null)

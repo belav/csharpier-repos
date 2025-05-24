@@ -719,7 +719,8 @@ namespace System.Collections.Tests
                 IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(count);
                 TKey missingKey = GetNewKey(dictionary);
                 dictionary.Add(missingKey, CreateTValue(34251));
-                Assert.Throws<ArgumentException>(() => dictionary.Add(missingKey, CreateTValue(134))
+                Assert.Throws<ArgumentException>(() =>
+                    dictionary.Add(missingKey, CreateTValue(134))
                 );
             }
         }

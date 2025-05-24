@@ -313,7 +313,8 @@ namespace System.Collections.Tests
             SortedList<TKey, TValue> dictionary =
                 (SortedList<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                dictionary.GetKeyAtIndex(int.MinValue)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count));
             Assert.Throws<ArgumentOutOfRangeException>(() => dictionary.GetKeyAtIndex(count + 1));

@@ -1117,7 +1117,8 @@ namespace System.Tests
         [MemberData(nameof(IsDefined_NonIntegerValue_TestData))]
         public void IsDefined_NonIntegerValue_ThrowsThrowsInvalidOperationException(object value)
         {
-            Assert.Throws<InvalidOperationException>(() => Enum.IsDefined(typeof(SimpleEnum), value)
+            Assert.Throws<InvalidOperationException>(() =>
+                Enum.IsDefined(typeof(SimpleEnum), value)
             );
         }
 
@@ -2641,9 +2642,11 @@ namespace System.Tests
             Assert.Throws<ArgumentException>(() =>
                 Enum.GetName(genericArgumentWithEnumConstraint, 1)
             );
-            Assert.Throws<ArgumentException>(() => Enum.GetNames(genericArgumentWithEnumConstraint)
+            Assert.Throws<ArgumentException>(() =>
+                Enum.GetNames(genericArgumentWithEnumConstraint)
             );
-            Assert.Throws<ArgumentException>(() => Enum.GetValues(genericArgumentWithEnumConstraint)
+            Assert.Throws<ArgumentException>(() =>
+                Enum.GetValues(genericArgumentWithEnumConstraint)
             );
         }
 
@@ -4437,7 +4440,8 @@ namespace System.Tests
                 () => Enum.Format(typeof(SimpleEnum), "Red", "F")
             ); // Value is of the wrong integral
 
-            Assert.Throws<FormatException>(() => Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "")
+            Assert.Throws<FormatException>(() =>
+                Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "")
             ); // Format is empty
             Assert.Throws<FormatException>(() =>
                 Enum.Format(typeof(SimpleEnum), SimpleEnum.Red, "   \t")

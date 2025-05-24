@@ -493,7 +493,8 @@ namespace MemoryMarshalGetArrayDataReferenceTest
             ThrowsNRE(() => ref ptrMd(null));
 
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference((Array)NoInline<byte[]>(null)));
-            ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference((Array)NoInline<string[]>(null))
+            ThrowsNRE(() =>
+                ref MemoryMarshal.GetArrayDataReference((Array)NoInline<string[]>(null))
             );
             ThrowsNRE(() => ref MemoryMarshal.GetArrayDataReference(NoInline<Array>(null)));
 

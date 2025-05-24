@@ -26,7 +26,8 @@ namespace System.Xml.Tests
             Uri absoluteUri = new Uri("https://dot.net/");
             Type typeToReturn = typeof(Stream);
 
-            Assert.Throws<XmlException>(() => resolver.GetEntity(absoluteUri, "role", typeToReturn)
+            Assert.Throws<XmlException>(() =>
+                resolver.GetEntity(absoluteUri, "role", typeToReturn)
             );
         }
 

@@ -248,7 +248,8 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
         );
 
     public override Task Include_after_SelectMany_throws(bool async) =>
-        Assert.ThrowsAsync<NullReferenceException>(() => base.Include_after_SelectMany_throws(async)
+        Assert.ThrowsAsync<NullReferenceException>(() =>
+            base.Include_after_SelectMany_throws(async)
         );
 
     public override Task String_concat_on_various_types(bool async) =>

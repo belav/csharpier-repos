@@ -212,7 +212,8 @@ namespace System.Formats.Tar.Tests
                         }
                     }
                     // The reader must stay alive because it's in charge of disposing all the entries it collected
-                    Assert.Throws<ObjectDisposedException>(() => entry.DataStream.Read(new byte[1])
+                    Assert.Throws<ObjectDisposedException>(() =>
+                        entry.DataStream.Read(new byte[1])
                     );
                 }
             }

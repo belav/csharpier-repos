@@ -79,7 +79,8 @@ namespace Dynamic.Tests
             dynamic d = new ExplicitlyImplementedGenericInInterface<SubClass>();
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericInInterface<BaseClass>>(d)
+            Assert.Throws<InvalidCastException>(() =>
+                Helpers.Cast<GenericInInterface<BaseClass>>(d)
             );
 
             var y = Helpers.Cast<GenericInInterface<SubClass>>(d);
@@ -94,7 +95,8 @@ namespace Dynamic.Tests
             dynamic d = new ExplicitlyImplementedGenericOutInterface<BaseClass>();
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericOutInterface<SubClass>>(d)
+            Assert.Throws<InvalidCastException>(() =>
+                Helpers.Cast<GenericOutInterface<SubClass>>(d)
             );
 
             var y = Helpers.Cast<GenericOutInterface<BaseClass>>(d);

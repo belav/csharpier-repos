@@ -59,12 +59,14 @@ public unsafe class ManagedPointers
     {
         Console.WriteLine($"Running {nameof(Validate_IntrinsicMethodsWithByRef_NullByRef)}...");
 
-        Assert.Throws<NullReferenceException>(() => Interlocked.Increment(ref Unsafe.NullRef<int>())
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Increment(ref Unsafe.NullRef<int>())
         );
         Assert.Throws<NullReferenceException>(() =>
             Interlocked.Increment(ref Unsafe.NullRef<long>())
         );
-        Assert.Throws<NullReferenceException>(() => Interlocked.Decrement(ref Unsafe.NullRef<int>())
+        Assert.Throws<NullReferenceException>(() =>
+            Interlocked.Decrement(ref Unsafe.NullRef<int>())
         );
         Assert.Throws<NullReferenceException>(() =>
             Interlocked.Decrement(ref Unsafe.NullRef<long>())

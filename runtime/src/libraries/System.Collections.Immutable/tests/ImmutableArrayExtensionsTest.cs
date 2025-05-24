@@ -664,7 +664,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<InvalidOperationException>(() =>
                 ImmutableArrayExtensions.Last(s_empty, n => true)
             );
-            Assert.Throws<ArgumentNullException>(() => ImmutableArrayExtensions.Last(s_empty, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ImmutableArrayExtensions.Last(s_empty, null)
             );
 
             Assert.Throws<InvalidOperationException>(() =>
@@ -780,7 +781,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void SingleEmpty()
         {
-            Assert.Throws<InvalidOperationException>(() => ImmutableArrayExtensions.Single(s_empty)
+            Assert.Throws<InvalidOperationException>(() =>
+                ImmutableArrayExtensions.Single(s_empty)
             );
             Assert.Throws<InvalidOperationException>(() =>
                 ImmutableArrayExtensions.Single(s_empty, n => true)

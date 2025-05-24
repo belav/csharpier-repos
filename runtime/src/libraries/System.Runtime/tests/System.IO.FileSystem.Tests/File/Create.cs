@@ -248,7 +248,8 @@ namespace System.IO.Tests
                 Assert.True(File.Exists(testFile + "aAAa"));
                 Assert.Equal(2, Directory.GetFiles(testDir.FullName).Length);
             }
-            Assert.Throws<DirectoryNotFoundException>(() => File.Create(testFile.ToLowerInvariant())
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                File.Create(testFile.ToLowerInvariant())
             );
         }
 

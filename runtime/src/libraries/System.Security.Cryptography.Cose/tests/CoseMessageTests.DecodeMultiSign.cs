@@ -118,7 +118,8 @@ namespace System.Security.Cryptography.Cose.Tests
             writer.WriteNull();
             writer.WriteNull();
             writer.WriteEndArray();
-            Assert.Throws<CryptographicException>(() => CoseMessage.DecodeMultiSign(writer.Encode())
+            Assert.Throws<CryptographicException>(() =>
+                CoseMessage.DecodeMultiSign(writer.Encode())
             );
         }
 

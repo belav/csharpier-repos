@@ -36,7 +36,8 @@ namespace System.IO.Tests
         public void NonExistentDirectory()
         {
             DirectoryInfo valid = Directory.CreateDirectory(GetTestFilePath());
-            Assert.Throws<DirectoryNotFoundException>(() => Move(GetTestFilePath(), valid.FullName)
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                Move(GetTestFilePath(), valid.FullName)
             );
             Assert.Throws<DirectoryNotFoundException>(() =>
                 Move(
@@ -104,7 +105,8 @@ namespace System.IO.Tests
             string source = GetTestFilePath();
             string destination = GetTestFilePath();
             File.Create(source).Dispose();
-            Assert.Throws<IOException>(() => Move(source + Path.DirectorySeparatorChar, destination)
+            Assert.Throws<IOException>(() =>
+                Move(source + Path.DirectorySeparatorChar, destination)
             );
         }
 
@@ -225,10 +227,12 @@ namespace System.IO.Tests
                 (path) =>
                 {
                     AssertExtensions.ThrowsAny<PathTooLongException, DirectoryNotFoundException>(
-                        () => Move(testDir, path)
+                        () =>
+                            Move(testDir, path)
                     );
                     AssertExtensions.ThrowsAny<PathTooLongException, DirectoryNotFoundException>(
-                        () => Move(path, testDir)
+                        () =>
+                            Move(path, testDir)
                     );
                 }
             );
@@ -350,7 +354,8 @@ namespace System.IO.Tests
             Directory.CreateDirectory(Path.Combine(TestDirectory, "FOO", "bar"));
             Directory.CreateDirectory(Path.Combine(TestDirectory, "foo"));
 
-            Assert.Throws<IOException>(() => Move(directoryToBeMoved, Path.Combine(newPath, "bar"))
+            Assert.Throws<IOException>(() =>
+                Move(directoryToBeMoved, Path.Combine(newPath, "bar"))
             );
         }
 

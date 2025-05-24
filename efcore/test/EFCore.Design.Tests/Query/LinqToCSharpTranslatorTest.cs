@@ -49,7 +49,8 @@ public class LinqToCSharpTranslatorTest
 
     [Fact]
     public void Constant_throws_on_unsupported_type() =>
-        Assert.Throws<NotSupportedException>(() => AssertExpression(Constant(default(DateTime)), "")
+        Assert.Throws<NotSupportedException>(() =>
+            AssertExpression(Constant(default(DateTime)), "")
         );
 
     [Fact]

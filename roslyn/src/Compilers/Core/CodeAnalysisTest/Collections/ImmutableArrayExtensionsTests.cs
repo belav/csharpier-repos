@@ -145,7 +145,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<NullReferenceException>(() => default(ImmutableArray<int>).Single());
             Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>().Single());
             Assert.Equal(1, ImmutableArray.Create<int>(1).Single());
-            Assert.Throws<InvalidOperationException>(() => ImmutableArray.Create<int>(1, 2).Single()
+            Assert.Throws<InvalidOperationException>(() =>
+                ImmutableArray.Create<int>(1, 2).Single()
             );
 
             Func<int, bool> isOdd = x => x % 2 == 1;

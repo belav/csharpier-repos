@@ -154,7 +154,8 @@ namespace System.Web.Helpers.Test
         public void SHA1HashTest_WithNull_ThrowsException()
         {
             Assert.Throws<ArgumentNullException>(() => Crypto.SHA1((string)null));
-            Assert.Throws<ArgumentNullException>(() => Crypto.Hash((byte[])null, algorithm: "SHa1")
+            Assert.Throws<ArgumentNullException>(() =>
+                Crypto.Hash((byte[])null, algorithm: "SHa1")
             );
         }
 

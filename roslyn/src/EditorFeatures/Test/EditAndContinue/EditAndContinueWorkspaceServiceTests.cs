@@ -3606,7 +3606,8 @@ class G
             Assert.Throws<InvalidOperationException>(() =>
                 debuggingSession.CommitSolutionUpdate(out var _)
             );
-            Assert.Throws<InvalidOperationException>(() => debuggingSession.DiscardSolutionUpdate()
+            Assert.Throws<InvalidOperationException>(() =>
+                debuggingSession.DiscardSolutionUpdate()
             );
 
             // no change in non-remappable regions since we didn't have any active statements:

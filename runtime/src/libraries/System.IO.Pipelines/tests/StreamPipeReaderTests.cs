@@ -248,7 +248,8 @@ namespace System.IO.Pipelines.Tests
             PipeReader reader = PipeReader.Create(Stream.Null);
 
             reader.Complete();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync()
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await reader.ReadAsync()
             );
         }
 

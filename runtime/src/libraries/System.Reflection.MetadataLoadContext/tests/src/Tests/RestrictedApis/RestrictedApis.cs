@@ -78,7 +78,8 @@ namespace System.Reflection.Tests
                             );
                             Assert.Throws<InvalidOperationException>(() => c.MethodHandle);
                             Assert.Throws<InvalidOperationException>(() => c.IsSecurityCritical);
-                            Assert.Throws<InvalidOperationException>(() => c.IsSecuritySafeCritical
+                            Assert.Throws<InvalidOperationException>(() =>
+                                c.IsSecuritySafeCritical
                             );
                             Assert.Throws<InvalidOperationException>(() => c.IsSecurityTransparent);
                         }
@@ -97,14 +98,16 @@ namespace System.Reflection.Tests
                         {
                             Assert.Throws<InvalidOperationException>(() => f.FieldHandle);
                             Assert.Throws<InvalidOperationException>(() => f.GetValue(null));
-                            Assert.Throws<InvalidOperationException>(() => f.GetValueDirect(default)
+                            Assert.Throws<InvalidOperationException>(() =>
+                                f.GetValueDirect(default)
                             );
                             Assert.Throws<InvalidOperationException>(() => f.SetValue(null, null));
                             Assert.Throws<InvalidOperationException>(() =>
                                 f.SetValueDirect(default, null)
                             );
                             Assert.Throws<InvalidOperationException>(() => f.IsSecurityCritical);
-                            Assert.Throws<InvalidOperationException>(() => f.IsSecuritySafeCritical
+                            Assert.Throws<InvalidOperationException>(() =>
+                                f.IsSecuritySafeCritical
                             );
                             Assert.Throws<InvalidOperationException>(() => f.IsSecurityTransparent);
                         }
@@ -129,7 +132,8 @@ namespace System.Reflection.Tests
                                 m.CreateDelegate(null, null)
                             );
                             Assert.Throws<InvalidOperationException>(() => m.IsSecurityCritical);
-                            Assert.Throws<InvalidOperationException>(() => m.IsSecuritySafeCritical
+                            Assert.Throws<InvalidOperationException>(() =>
+                                m.IsSecuritySafeCritical
                             );
                             Assert.Throws<InvalidOperationException>(() => m.IsSecurityTransparent);
                         }

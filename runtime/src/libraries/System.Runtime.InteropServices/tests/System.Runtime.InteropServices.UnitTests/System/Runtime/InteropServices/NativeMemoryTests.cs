@@ -59,7 +59,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void AlignedAllocZeroAlignmentTest()
         {
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedAlloc((uint)sizeof(nuint), 0)
+            Assert.Throws<ArgumentException>(() =>
+                NativeMemory.AlignedAlloc((uint)sizeof(nuint), 0)
             );
         }
 

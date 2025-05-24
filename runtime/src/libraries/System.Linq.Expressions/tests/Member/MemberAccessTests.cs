@@ -127,7 +127,8 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<long>> e = () => default(long?).Value;
             Func<long> f = e.Compile(useInterpreter);
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => f()
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
+                f()
             );
             Assert.Equal(localizedMessage, exception.Message);
         }

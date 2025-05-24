@@ -116,7 +116,8 @@ public class ServiceProviderExtensionsTest
         Assert.Equal(
             KarlQuote,
             Assert
-                .Throws<NotSupportedException>(() => serviceProvider.GetService(typeof(IPilkington))
+                .Throws<NotSupportedException>(() =>
+                    serviceProvider.GetService(typeof(IPilkington))
                 )
                 .Message
         );

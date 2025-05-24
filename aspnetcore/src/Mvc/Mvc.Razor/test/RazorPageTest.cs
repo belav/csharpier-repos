@@ -697,7 +697,8 @@ public class RazorPageTest
         await page.ExecuteAsync();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => page.EnsureRenderedBodyOrSections()
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            page.EnsureRenderedBodyOrSections()
         );
         Assert.Equal(
             $"RenderBody has not been called for the page at '{path}'. To ignore call IgnoreBody().",
@@ -736,7 +737,8 @@ public class RazorPageTest
         await page.ExecuteAsync();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => page.EnsureRenderedBodyOrSections()
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            page.EnsureRenderedBodyOrSections()
         );
         Assert.Equal(
             "The following sections have been defined but have not been rendered by the page at "

@@ -128,7 +128,8 @@ using Goo = System.Data;"
         public void GetStartPoint_Name()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(() => import.GetStartPoint(vsCMPart.vsCMPartName)
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetStartPoint(vsCMPart.vsCMPartName)
             );
         }
 
@@ -199,7 +200,8 @@ using Goo = System.Data;"
         public void GetEndPoint_Header()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(() => import.GetEndPoint(vsCMPart.vsCMPartHeader)
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartHeader)
             );
         }
 
@@ -234,7 +236,8 @@ using Goo = System.Data;"
         public void GetEndPoint_Whole()
         {
             var import = GetCodeImport(2);
-            Assert.Throws<NotImplementedException>(() => import.GetEndPoint(vsCMPart.vsCMPartWhole)
+            Assert.Throws<NotImplementedException>(() =>
+                import.GetEndPoint(vsCMPart.vsCMPartWhole)
             );
         }
 

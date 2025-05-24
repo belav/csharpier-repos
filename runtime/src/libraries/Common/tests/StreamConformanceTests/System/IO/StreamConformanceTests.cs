@@ -2813,7 +2813,8 @@ namespace System.IO.Tests
 
                 await Assert.ThrowsAsync<InvalidOperationException>(async () => await r);
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().IsCompleted);
-                Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().OnCompleted(() => { })
+                Assert.Throws<InvalidOperationException>(() =>
+                    r.GetAwaiter().OnCompleted(() => { })
                 );
                 Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().GetResult());
             }
@@ -2833,7 +2834,8 @@ namespace System.IO.Tests
                 var b = new byte[1];
                 ValueTask<int> r = readable.ReadAsync(b);
                 r.GetAwaiter().OnCompleted(() => { });
-                Assert.Throws<InvalidOperationException>(() => r.GetAwaiter().OnCompleted(() => { })
+                Assert.Throws<InvalidOperationException>(() =>
+                    r.GetAwaiter().OnCompleted(() => { })
                 );
             }
         }

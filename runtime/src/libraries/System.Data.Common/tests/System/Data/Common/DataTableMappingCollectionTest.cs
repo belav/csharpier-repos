@@ -354,7 +354,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveAtException2()
         {
-            Assert.Throws<IndexOutOfRangeException>(() => _tableMapCollection.RemoveAt("sourceAge")
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                _tableMapCollection.RemoveAt("sourceAge")
             );
         }
 

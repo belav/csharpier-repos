@@ -746,7 +746,8 @@ namespace System.Text.Tests
                 Assert.Throws<DecoderFallbackException>(() => encoding.GetString(bytes));
             }
 
-            Assert.Throws<DecoderFallbackException>(() => encoding.GetCharCount(bytes, index, count)
+            Assert.Throws<DecoderFallbackException>(() =>
+                encoding.GetCharCount(bytes, index, count)
             );
 
             Assert.Throws<DecoderFallbackException>(() => encoding.GetChars(bytes, index, count));

@@ -621,7 +621,8 @@ Environment.ProcessorCount
             Assert.Equal(3, state3.Result.ReturnValue);
             var c3C3 = (INamedTypeSymbol)lookupMember(compilation3, "Submission#2", "C3");
             var c3C1 = c3C3.BaseType;
-            Assert.Throws<ArgumentException>(() => compilation2.IsSymbolAccessibleWithin(c3C3, c3C1)
+            Assert.Throws<ArgumentException>(() =>
+                compilation2.IsSymbolAccessibleWithin(c3C3, c3C1)
             );
             Assert.True(compilation3.IsSymbolAccessibleWithin(c3C3, c3C1));
 

@@ -460,7 +460,8 @@ namespace Microsoft.Extensions.Primitives
             if (collection.Count > 0)
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(actual, -1));
-                Assert.Throws<ArgumentException>(() => collection.CopyTo(actual, actual.Length + 1)
+                Assert.Throws<ArgumentException>(() =>
+                    collection.CopyTo(actual, actual.Length + 1)
                 );
             }
             collection.CopyTo(actual, 0);

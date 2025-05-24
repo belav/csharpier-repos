@@ -174,7 +174,8 @@ namespace System.Text.Json.Serialization.Tests
         [Theory]
         [MemberData(nameof(GetUnsupportedDictionaries))]
         public Task ThrowUnsupported_Serialize<TKey, TValue>(Dictionary<TKey, TValue> dictionary) =>
-            Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(dictionary)
+            Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.SerializeWrapper(dictionary)
             );
 
         [Theory]

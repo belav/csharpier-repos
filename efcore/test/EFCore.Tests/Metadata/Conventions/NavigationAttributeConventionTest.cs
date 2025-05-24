@@ -569,7 +569,8 @@ public class NavigationAttributeConventionTest
                 nameof(SelfReferencingEntity.AnotherEntity)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(() =>
+                    RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -588,7 +589,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(() =>
+                    RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -607,7 +609,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(() =>
+                    RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );
@@ -626,7 +629,8 @@ public class NavigationAttributeConventionTest
                 nameof(Principal)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => RunEntityTypeConventions(entityTypeBuilder)
+                .Throws<InvalidOperationException>(() =>
+                    RunEntityTypeConventions(entityTypeBuilder)
                 )
                 .Message
         );

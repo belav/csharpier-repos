@@ -33,7 +33,8 @@ namespace System.Diagnostics.Tests
                         }
                     );
                     Helpers.Retry(() => eventLog.EnableRaisingEvents = waitOnEvent);
-                    Helpers.Retry(() => eventLog.WriteEntry(message, EventLogEntryType.Information)
+                    Helpers.Retry(() =>
+                        eventLog.WriteEntry(message, EventLogEntryType.Information)
                     );
                     if (waitOnEvent)
                     {

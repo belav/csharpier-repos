@@ -322,21 +322,24 @@ public class QueryableExtensionsTest
         await SourceNonAsyncQueryableTest(() => Source().AnyAsync());
         await SourceNonAsyncQueryableTest(() => Source().AnyAsync(e => true));
         await SourceNonAsyncQueryableTest(() => Source<int>().AverageAsync());
-        await SourceNonAsyncQueryableTest(() => Source<int>().AverageAsync(new CancellationToken())
+        await SourceNonAsyncQueryableTest(() =>
+            Source<int>().AverageAsync(new CancellationToken())
         );
         await SourceNonAsyncQueryableTest(() => Source<int>().AverageAsync(e => e));
         await SourceNonAsyncQueryableTest(() =>
             Source<int>().AverageAsync(e => e, new CancellationToken())
         );
         await SourceNonAsyncQueryableTest(() => Source<int?>().AverageAsync());
-        await SourceNonAsyncQueryableTest(() => Source<int?>().AverageAsync(new CancellationToken())
+        await SourceNonAsyncQueryableTest(() =>
+            Source<int?>().AverageAsync(new CancellationToken())
         );
         await SourceNonAsyncQueryableTest(() => Source<int?>().AverageAsync(e => e));
         await SourceNonAsyncQueryableTest(() =>
             Source<int?>().AverageAsync(e => e, new CancellationToken())
         );
         await SourceNonAsyncQueryableTest(() => Source<long>().AverageAsync());
-        await SourceNonAsyncQueryableTest(() => Source<long>().AverageAsync(new CancellationToken())
+        await SourceNonAsyncQueryableTest(() =>
+            Source<long>().AverageAsync(new CancellationToken())
         );
         await SourceNonAsyncQueryableTest(() => Source<long>().AverageAsync(e => e));
         await SourceNonAsyncQueryableTest(() =>

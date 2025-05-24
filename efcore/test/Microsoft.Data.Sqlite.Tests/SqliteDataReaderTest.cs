@@ -774,7 +774,8 @@ public class SqliteDataReaderTest
 
             using (var reader = connection.ExecuteReader("SELECT 1;"))
             {
-                var ex = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetDataTypeName(1)
+                var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    reader.GetDataTypeName(1)
                 );
 
                 Assert.Equal("ordinal", ex.ParamName);
@@ -1265,7 +1266,8 @@ public class SqliteDataReaderTest
 
             using (var reader = connection.ExecuteReader("SELECT 1;"))
             {
-                var ex = Assert.Throws<ArgumentOutOfRangeException>(() => reader.GetOrdinal("Name")
+                var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    reader.GetOrdinal("Name")
                 );
                 Assert.NotNull(ex.Message);
                 Assert.Equal("name", ex.ParamName);

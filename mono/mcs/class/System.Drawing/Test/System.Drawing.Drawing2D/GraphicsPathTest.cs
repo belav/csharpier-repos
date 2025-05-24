@@ -62,7 +62,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Constructor_Point_Null_Byte()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath((Point[])null, new byte[1])
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath((Point[])null, new byte[1])
             );
         }
 
@@ -81,7 +82,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Constructor_PointF_Null_Byte()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath((PointF[])null, new byte[1])
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath((PointF[])null, new byte[1])
             );
         }
 
@@ -407,7 +409,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddBeziers_Point_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddBeziers((Point[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath().AddBeziers((Point[])null)
             );
         }
 
@@ -433,7 +436,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddBeziers_PointF_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddBeziers((PointF[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath().AddBeziers((PointF[])null)
             );
         }
 
@@ -891,7 +895,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddPolygon_Point_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddPolygon((Point[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath().AddPolygon((Point[])null)
             );
         }
 
@@ -928,7 +933,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void AddPolygon_PointF_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().AddPolygon((PointF[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath().AddPolygon((PointF[])null)
             );
         }
 
@@ -1452,7 +1458,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         public void AddCurve_PointF_1()
         {
             GraphicsPath gp = new GraphicsPath();
-            Assert.Throws<ArgumentException>(() => gp.AddCurve(new PointF[1] { new PointF(1f, 1f) })
+            Assert.Throws<ArgumentException>(() =>
+                gp.AddCurve(new PointF[1] { new PointF(1f, 1f) })
             );
         }
 
@@ -2677,7 +2684,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void Widen_Pen_Null_Matrix()
         {
-            Assert.Throws<ArgumentNullException>(() => new GraphicsPath().Widen(null, new Matrix())
+            Assert.Throws<ArgumentNullException>(() =>
+                new GraphicsPath().Widen(null, new Matrix())
             );
         }
 

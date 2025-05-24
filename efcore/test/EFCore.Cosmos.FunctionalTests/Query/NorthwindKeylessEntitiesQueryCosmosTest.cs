@@ -64,7 +64,8 @@ WHERE (c["Discriminator"] = "ProductView")
 
     public override async Task Entity_mapped_to_view_on_right_side_of_join(bool async)
     {
-        await AssertTranslationFailed(() => base.Entity_mapped_to_view_on_right_side_of_join(async)
+        await AssertTranslationFailed(() =>
+            base.Entity_mapped_to_view_on_right_side_of_join(async)
         );
 
         AssertSql();
@@ -148,7 +149,8 @@ WHERE ((c["Discriminator"] = "Order") AND (c["CustomerID"] = "ALFKI"))
     public override async Task KeylessEntity_with_included_navs_multi_level(bool async)
     {
         // Left join translation. Issue #17314.
-        await AssertTranslationFailed(() => base.KeylessEntity_with_included_navs_multi_level(async)
+        await AssertTranslationFailed(() =>
+            base.KeylessEntity_with_included_navs_multi_level(async)
         );
 
         AssertSql();

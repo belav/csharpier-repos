@@ -201,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(-1, list.IndexOf(triviaD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, triviaD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, triviaD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { triviaD })
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(-1, new[] { triviaD })
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 list.InsertRange(list.Count + 1, new[] { triviaD })
@@ -260,9 +261,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(0));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(1, triviaD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, triviaD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(1, new[] { triviaD })
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(1, new[] { triviaD })
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { triviaD })
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(-1, new[] { triviaD })
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Replace(triviaD, triviaE));
             Assert.Throws<ArgumentOutOfRangeException>(() =>

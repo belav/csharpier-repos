@@ -384,7 +384,8 @@ WHERE pow(CAST("o"."Discount" AS REAL), 2.0) > 0.05000000074505806
         AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection(async));
 
     public override Task Sum_over_truncate_works_correctly_in_projection_2(bool async) =>
-        AssertTranslationFailed(() => base.Sum_over_truncate_works_correctly_in_projection_2(async)
+        AssertTranslationFailed(() =>
+            base.Sum_over_truncate_works_correctly_in_projection_2(async)
         );
 
     public override Task Where_math_round2(bool async) =>

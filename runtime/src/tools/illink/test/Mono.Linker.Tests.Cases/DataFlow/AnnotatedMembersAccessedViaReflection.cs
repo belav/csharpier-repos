@@ -186,7 +186,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 var _ = new Action(
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    () => MethodWithAnnotatedThisParameter()
+                    () =>
+                        MethodWithAnnotatedThisParameter()
                 );
             }
 

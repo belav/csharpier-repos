@@ -28,9 +28,11 @@ public class StringWithQualityHeaderValueTest
         Assert.Throws<ArgumentException>(() => new StringWithQualityHeaderValue("", 0.1));
         Assert.Throws<FormatException>(() => new StringWithQualityHeaderValue("in valid", 0.1));
 
-        Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", 1.1)
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new StringWithQualityHeaderValue("t", 1.1)
         );
-        Assert.Throws<ArgumentOutOfRangeException>(() => new StringWithQualityHeaderValue("t", -0.1)
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new StringWithQualityHeaderValue("t", -0.1)
         );
     }
 

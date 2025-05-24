@@ -49,7 +49,8 @@ public partial class EntityTypeTest
         Assert.Equal(
             CoreStrings.ModelReadOnly,
             Assert
-                .Throws<InvalidOperationException>(() => entityTypeA.AddServiceProperty(A.GProperty)
+                .Throws<InvalidOperationException>(() =>
+                    entityTypeA.AddServiceProperty(A.GProperty)
                 )
                 .Message
         );
@@ -566,7 +567,8 @@ public partial class EntityTypeTest
                 nameof(Customer)
             ),
             Assert
-                .Throws<InvalidOperationException>(() => orderType.RemoveKey(customerKey.Properties)
+                .Throws<InvalidOperationException>(() =>
+                    orderType.RemoveKey(customerKey.Properties)
                 )
                 .Message
         );

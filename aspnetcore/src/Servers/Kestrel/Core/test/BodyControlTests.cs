@@ -165,7 +165,8 @@ public class BodyControlTests
         Assert.Throws<ObjectDisposedException>(() => requestPipe.CancelPendingRead());
         Assert.Throws<ObjectDisposedException>(() => requestPipe.TryRead(out var res));
         Assert.Throws<ObjectDisposedException>(() => requestPipe.Complete());
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await requestPipe.ReadAsync()
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await requestPipe.ReadAsync()
         );
     }
 

@@ -279,7 +279,8 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteReader_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteReader()
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SqliteCommand().ExecuteReader()
         );
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteReader"), ex.Message);
@@ -330,7 +331,8 @@ public class SqliteCommandTest
     [Fact]
     public void ExecuteScalar_throws_when_no_connection()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => new SqliteCommand().ExecuteScalar()
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            new SqliteCommand().ExecuteScalar()
         );
 
         Assert.Equal(Resources.CallRequiresOpenConnection("ExecuteScalar"), ex.Message);
@@ -622,7 +624,8 @@ public class SqliteCommandTest
                 {
                     command.Transaction = transaction;
 
-                    var ex = Assert.Throws<InvalidOperationException>(() => command.ExecuteReader()
+                    var ex = Assert.Throws<InvalidOperationException>(() =>
+                        command.ExecuteReader()
                     );
 
                     Assert.Equal(Resources.TransactionConnectionMismatch, ex.Message);

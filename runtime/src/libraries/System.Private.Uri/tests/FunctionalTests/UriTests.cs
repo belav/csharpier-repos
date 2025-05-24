@@ -802,7 +802,8 @@ namespace System.PrivateUri.Tests
         [InlineData("10000000000")]
         public static void Uri_InvalidPort_ThrowsUriFormatException(string portString)
         {
-            Assert.Throws<UriFormatException>(() => new Uri($"http://www.contoso.com:{portString}")
+            Assert.Throws<UriFormatException>(() =>
+                new Uri($"http://www.contoso.com:{portString}")
             );
         }
 

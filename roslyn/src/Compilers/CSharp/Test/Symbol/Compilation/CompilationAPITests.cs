@@ -3235,7 +3235,8 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 arrayType.ElementType.NullableAnnotation
             );
 
-            Assert.Throws<ArgumentException>(() => comp.CreateArrayTypeSymbol(elementType, default)
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateArrayTypeSymbol(elementType, default)
             );
             Assert.Throws<ArgumentException>(() => comp.CreateArrayTypeSymbol(elementType, 0));
 
@@ -3250,7 +3251,8 @@ public class C { public static FrameworkName Goo() { return null; }}";
             Assert.Throws<ArgumentException>(() =>
                 comp.CreateArrayTypeSymbol(elementType, rank: default)
             );
-            Assert.Throws<ArgumentException>(() => comp.CreateArrayTypeSymbol(elementType, rank: 0)
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateArrayTypeSymbol(elementType, rank: 0)
             );
 
             arrayType = comp.CreateArrayTypeSymbol(elementType, elementNullableAnnotation: default);

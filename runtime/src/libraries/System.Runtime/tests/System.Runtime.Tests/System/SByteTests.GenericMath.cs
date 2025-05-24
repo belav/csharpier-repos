@@ -3966,9 +3966,11 @@ namespace System.Tests
             Assert.Equal((sbyte)0x00, NumberBaseHelper<sbyte>.CreateChecked<byte>(0x00));
             Assert.Equal((sbyte)0x01, NumberBaseHelper<sbyte>.CreateChecked<byte>(0x01));
             Assert.Equal((sbyte)0x7F, NumberBaseHelper<sbyte>.CreateChecked<byte>(0x7F));
-            Assert.Throws<OverflowException>(() => NumberBaseHelper<sbyte>.CreateChecked<byte>(0x80)
+            Assert.Throws<OverflowException>(() =>
+                NumberBaseHelper<sbyte>.CreateChecked<byte>(0x80)
             );
-            Assert.Throws<OverflowException>(() => NumberBaseHelper<sbyte>.CreateChecked<byte>(0xFF)
+            Assert.Throws<OverflowException>(() =>
+                NumberBaseHelper<sbyte>.CreateChecked<byte>(0xFF)
             );
         }
 

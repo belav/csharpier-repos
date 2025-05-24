@@ -87,7 +87,8 @@ namespace System.Threading.Tasks.Tests
             cts.Cancel();
             wakeLoop.Set();
 
-            Assert.ThrowsAny<OperationCanceledException>(() => wrappedTask.GetAwaiter().GetResult()
+            Assert.ThrowsAny<OperationCanceledException>(() =>
+                wrappedTask.GetAwaiter().GetResult()
             );
 
             // verify result : Stopped <==> if Completed is false and LowestBreakIteration == null

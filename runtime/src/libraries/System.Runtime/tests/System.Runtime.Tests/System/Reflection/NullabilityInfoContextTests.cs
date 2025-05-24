@@ -856,11 +856,13 @@ namespace System.Reflection.Tests
                 () =>
                 {
                     FieldInfo field = testType.GetField("FieldNullable", flags);
-                    Assert.Throws<InvalidOperationException>(() => nullabilityContext.Create(field)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        nullabilityContext.Create(field)
                     );
 
                     EventInfo @event = testType.GetEvent("EventNullable");
-                    Assert.Throws<InvalidOperationException>(() => nullabilityContext.Create(@event)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        nullabilityContext.Create(@event)
                     );
 
                     PropertyInfo property = testType.GetProperty("PropertyNullable", flags);

@@ -76,12 +76,14 @@ namespace System.Text.Tests
 
             // Act & assert
 
-            RunTest(() => transcodingStream.ReadAsync(new byte[0], 0, 0, expectedCancellationToken)
+            RunTest(() =>
+                transcodingStream.ReadAsync(new byte[0], 0, 0, expectedCancellationToken)
             );
             RunTest(() =>
                 transcodingStream.ReadAsync(Memory<byte>.Empty, expectedCancellationToken).AsTask()
             );
-            RunTest(() => transcodingStream.WriteAsync(new byte[0], 0, 0, expectedCancellationToken)
+            RunTest(() =>
+                transcodingStream.WriteAsync(new byte[0], 0, 0, expectedCancellationToken)
             );
             RunTest(() =>
                 transcodingStream
@@ -226,7 +228,8 @@ namespace System.Text.Tests
                 (object)transcodingStream.ReadAsync(Memory<byte>.Empty)
             );
             Assert.Throws<ObjectDisposedException>(() => (object)transcodingStream.ReadByte());
-            Assert.Throws<ObjectDisposedException>(() => transcodingStream.Write(new byte[0], 0, 0)
+            Assert.Throws<ObjectDisposedException>(() =>
+                transcodingStream.Write(new byte[0], 0, 0)
             );
             Assert.Throws<ObjectDisposedException>(() =>
                 transcodingStream.Write(ReadOnlySpan<byte>.Empty)
@@ -916,7 +919,8 @@ namespace System.Text.Tests
             Assert.Throws<NotSupportedException>(() => transcodingStream.Length);
             Assert.Throws<NotSupportedException>(() => transcodingStream.Position);
             Assert.Throws<NotSupportedException>(() => transcodingStream.Position = 0);
-            Assert.Throws<NotSupportedException>(() => transcodingStream.Seek(0, SeekOrigin.Current)
+            Assert.Throws<NotSupportedException>(() =>
+                transcodingStream.Seek(0, SeekOrigin.Current)
             );
             Assert.Throws<NotSupportedException>(() => transcodingStream.SetLength(0));
         }

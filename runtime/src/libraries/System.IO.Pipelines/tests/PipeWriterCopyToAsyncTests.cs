@@ -28,7 +28,8 @@ namespace System.IO.Pipelines.Tests
         public async Task CopyToAsyncThrowsArgumentNullExceptionForNullDestination()
         {
             var stream = new MemoryStream();
-            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() => stream.CopyToAsync(null)
+            var ex = await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                stream.CopyToAsync(null)
             );
             Assert.Equal("destination", ex.ParamName);
         }

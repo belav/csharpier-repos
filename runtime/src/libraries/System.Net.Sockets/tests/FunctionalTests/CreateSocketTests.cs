@@ -99,7 +99,8 @@ namespace System.Net.Sockets.Tests
             ProtocolType protocolType
         )
         {
-            Assert.Throws<SocketException>(() => new Socket(addressFamily, socketType, protocolType)
+            Assert.Throws<SocketException>(() =>
+                new Socket(addressFamily, socketType, protocolType)
             );
         }
 

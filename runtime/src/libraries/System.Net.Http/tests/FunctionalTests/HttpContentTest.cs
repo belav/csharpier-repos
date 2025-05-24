@@ -150,7 +150,8 @@ namespace System.Net.Http.Functional.Tests
             cts.Cancel();
 
             using var ms = new MemoryStream();
-            await Assert.ThrowsAsync<TaskCanceledException>(() => content.CopyToAsync(ms, cts.Token)
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                content.CopyToAsync(ms, cts.Token)
             );
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(0, content.CreateContentReadStreamCount);
@@ -166,7 +167,8 @@ namespace System.Net.Http.Functional.Tests
             cts.Cancel();
 
             using var ms = new MemoryStream();
-            await Assert.ThrowsAsync<TaskCanceledException>(() => content.CopyToAsync(ms, cts.Token)
+            await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                content.CopyToAsync(ms, cts.Token)
             );
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(0, content.CreateContentReadStreamCount);

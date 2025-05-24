@@ -439,7 +439,8 @@ namespace System.Collections.Tests
             linkedList = new LinkedList<T>();
             items = new T[] { CreateT(seed++) };
             linkedList.AddLast(items[0]);
-            Assert.Throws<ArgumentNullException>(() => linkedList.AddBefore(linkedList.First, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                linkedList.AddBefore(linkedList.First, null)
             ); //"Err_0808ajeoia Expected null newNode to throws ArgumentNullException\n"
             InitialItems_Tests(linkedList, items);
 

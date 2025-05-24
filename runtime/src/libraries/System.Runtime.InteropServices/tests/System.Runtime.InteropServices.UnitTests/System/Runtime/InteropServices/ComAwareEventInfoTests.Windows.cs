@@ -82,7 +82,8 @@ namespace System.Runtime.InteropServices.Tests
             var attribute = new ComAwareEventInfo(typeBuilder.CreateType(), "Event");
             var target = new ComImportObject();
             Delegate handler = new EventHandler(EventHandler);
-            Assert.Throws<AmbiguousMatchException>(() => attribute.AddEventHandler(target, handler)
+            Assert.Throws<AmbiguousMatchException>(() =>
+                attribute.AddEventHandler(target, handler)
             );
             Assert.Throws<AmbiguousMatchException>(() =>
                 attribute.RemoveEventHandler(target, handler)

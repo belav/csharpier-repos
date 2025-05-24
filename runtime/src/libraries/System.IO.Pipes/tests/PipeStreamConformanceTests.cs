@@ -120,7 +120,8 @@ namespace System.IO.Pipes.Tests
             Assert.Throws<ObjectDisposedException>(() => server.Disconnect());
             Assert.Throws<ObjectDisposedException>(() => server.GetImpersonationUserName());
             Assert.Throws<ObjectDisposedException>(() => server.WaitForConnection());
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => server.WaitForConnectionAsync()
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                server.WaitForConnectionAsync()
             );
             await ValidateDisposedExceptionsAsync(server as Stream);
         }
@@ -591,7 +592,8 @@ namespace System.IO.Pipes.Tests
 
             if (client.CanRead)
             {
-                Assert.Throws<InvalidOperationException>(() => client.Read(buffer, 0, buffer.Length)
+                Assert.Throws<InvalidOperationException>(() =>
+                    client.Read(buffer, 0, buffer.Length)
                 );
                 Assert.Throws<InvalidOperationException>(() => client.ReadByte());
                 Assert.Throws<InvalidOperationException>(() =>
@@ -641,7 +643,8 @@ namespace System.IO.Pipes.Tests
             Assert.Throws<ObjectDisposedException>(() => server.Disconnect());
             Assert.Throws<ObjectDisposedException>(() => server.GetImpersonationUserName());
             Assert.Throws<ObjectDisposedException>(() => server.WaitForConnection());
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => server.WaitForConnectionAsync()
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                server.WaitForConnectionAsync()
             );
         }
 

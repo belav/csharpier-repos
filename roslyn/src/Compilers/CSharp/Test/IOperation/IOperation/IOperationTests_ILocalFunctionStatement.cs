@@ -2033,7 +2033,8 @@ struct C
             Assert.NotNull(graphD2);
             Assert.Same(graphD1, graphD2.Parent);
 
-            Assert.Throws<ArgumentNullException>(() => graphM.GetLocalFunctionControlFlowGraph(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                graphM.GetLocalFunctionControlFlowGraph(null)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 graphM.GetLocalFunctionControlFlowGraph(localFunctionD2)

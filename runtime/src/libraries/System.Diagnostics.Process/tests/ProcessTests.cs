@@ -1271,7 +1271,8 @@ namespace System.Diagnostics.Tests
         public void TestInvalidPriorityClass(ProcessPriorityClass priorityClass)
         {
             var process = new Process();
-            Assert.Throws<InvalidEnumArgumentException>(() => process.PriorityClass = priorityClass
+            Assert.Throws<InvalidEnumArgumentException>(() =>
+                process.PriorityClass = priorityClass
             );
         }
 

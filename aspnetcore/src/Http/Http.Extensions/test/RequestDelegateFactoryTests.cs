@@ -1243,11 +1243,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Span<byte> Method2() => "hello world"u8.ToArray();
         RefStruct Method3() => new("hello world"u8);
 
-        var ex1 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method1)
+        var ex1 = Assert.Throws<NotSupportedException>(() =>
+            RequestDelegateFactory.Create(Method1)
         );
-        var ex2 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method2)
+        var ex2 = Assert.Throws<NotSupportedException>(() =>
+            RequestDelegateFactory.Create(Method2)
         );
-        var ex3 = Assert.Throws<NotSupportedException>(() => RequestDelegateFactory.Create(Method3)
+        var ex3 = Assert.Throws<NotSupportedException>(() =>
+            RequestDelegateFactory.Create(Method3)
         );
 
         Assert.Equal("Unsupported return type: System.ReadOnlySpan<byte>", ex1.Message);

@@ -956,7 +956,8 @@ namespace System.Buffers.Text.Tests
             }
 
             // negative input
-            Assert.Throws<ArgumentOutOfRangeException>(() => Base64.GetMaxDecodedFromUtf8Length(-1)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                Base64.GetMaxDecodedFromUtf8Length(-1)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 Base64.GetMaxDecodedFromUtf8Length(int.MinValue)

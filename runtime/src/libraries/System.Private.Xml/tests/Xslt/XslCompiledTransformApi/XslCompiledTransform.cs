@@ -4785,7 +4785,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
             if (LoadXSL("showParam.xsl", xslInputType, readerType) == 1)
             {
-                Assert.Throws<System.ArgumentException>(() => xslt.Transform(szFullFilename, "    ")
+                Assert.Throws<System.ArgumentException>(() =>
+                    xslt.Transform(szFullFilename, "    ")
                 );
                 return;
             }

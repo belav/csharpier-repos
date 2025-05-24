@@ -884,7 +884,8 @@ namespace System.Threading.RateLimiting.Test
 
             // Throws after disposal
             Assert.Throws<ObjectDisposedException>(() => limiter.AttemptAcquire(1));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => limiter.AcquireAsync(1).AsTask()
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                limiter.AcquireAsync(1).AsTask()
             );
         }
 
@@ -921,7 +922,8 @@ namespace System.Threading.RateLimiting.Test
 
             // Throws after disposal
             Assert.Throws<ObjectDisposedException>(() => limiter.AttemptAcquire(1));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => limiter.AcquireAsync(1).AsTask()
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                limiter.AcquireAsync(1).AsTask()
             );
         }
 

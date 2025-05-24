@@ -122,7 +122,8 @@ namespace System.IO.Tests
 
         [Fact]
         public Task Read_FileNotFound() =>
-            Assert.ThrowsAsync<FileNotFoundException>(async () => await ReadAsync(GetTestFilePath())
+            Assert.ThrowsAsync<FileNotFoundException>(async () =>
+                await ReadAsync(GetTestFilePath())
             );
 
         /// <summary>

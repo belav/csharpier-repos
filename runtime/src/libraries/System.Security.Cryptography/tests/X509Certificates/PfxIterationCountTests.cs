@@ -182,7 +182,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 );
             }
 
-            CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() => Import(blob)
+            CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() =>
+                Import(blob)
             );
 
             if (PfxTests.IsPkcs12IterationCountAllowed(iterationCount, PfxTests.DefaultIterations))

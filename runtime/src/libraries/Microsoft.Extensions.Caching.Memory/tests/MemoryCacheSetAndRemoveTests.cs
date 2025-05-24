@@ -840,7 +840,8 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cache = CreateCache();
             var value = new object();
-            Assert.Throws<ArgumentNullException>(() => cache.Set(null, value, expirationToken: null)
+            Assert.Throws<ArgumentNullException>(() =>
+                cache.Set(null, value, expirationToken: null)
             );
         }
 

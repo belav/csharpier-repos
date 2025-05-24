@@ -862,9 +862,11 @@ namespace Microsoft.VisualBasic.Tests
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: false)
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.WeekdayName(0, Abbreviate: false)
                 );
-                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: true)
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.WeekdayName(0, Abbreviate: true)
                 );
 
                 Assert.Equal("Sunday", DateAndTime.WeekdayName(1, Abbreviate: false));

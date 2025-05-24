@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<EndOfStreamException>(() =>
                 EmbeddedText.FromStream("path", new TruncatingStream(1000))
             );
-            Assert.Throws<IOException>(() => EmbeddedText.FromStream("path", new ReadFailsStream())
+            Assert.Throws<IOException>(() =>
+                EmbeddedText.FromStream("path", new ReadFailsStream())
             );
         }
 

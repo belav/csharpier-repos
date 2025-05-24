@@ -39,7 +39,8 @@ unsafe partial class GenericsTest
             GenericsNative.GetNullableUOut(true, 1u, out uint? value3)
         );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddNullableU(default, default)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddNullableU(default, default)
         );
 
         uint?[] values = new uint?[] { default, default, default, default, default };

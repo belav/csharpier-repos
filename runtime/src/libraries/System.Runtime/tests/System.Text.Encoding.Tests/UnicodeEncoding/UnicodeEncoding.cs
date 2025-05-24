@@ -104,7 +104,8 @@ namespace System.Text.Encodings.Tests
                 Assert.Throws<EncoderFallbackException>(() =>
                     enc.GetBytes(pInvalidSurrogate, 2, pBytes, 10)
                 );
-                Assert.Throws<EncoderFallbackException>(() => enc.GetByteCount(pInvalidSurrogate, 2)
+                Assert.Throws<EncoderFallbackException>(() =>
+                    enc.GetByteCount(pInvalidSurrogate, 2)
                 );
             }
         }

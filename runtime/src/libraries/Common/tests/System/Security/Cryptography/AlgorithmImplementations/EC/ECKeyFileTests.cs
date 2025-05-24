@@ -98,7 +98,8 @@ namespace System.Security.Cryptography.Tests
             );
 
             Assert.Throws<ObjectDisposedException>(() => key.ExportECPrivateKey());
-            Assert.Throws<ObjectDisposedException>(() => key.TryExportECPrivateKey(ecPrivate, out _)
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.TryExportECPrivateKey(ecPrivate, out _)
             );
             Assert.Throws<ObjectDisposedException>(() => key.ExportPkcs8PrivateKey());
             Assert.Throws<ObjectDisposedException>(() =>

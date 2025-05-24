@@ -558,7 +558,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Equal(2, signer.CounterSignerInfos.Count);
             Assert.Single(cms.SignerInfos[0].CounterSignerInfos);
 
-            Assert.Throws<CryptographicException>(() => signer.RemoveCounterSignature(counterSigner)
+            Assert.Throws<CryptographicException>(() =>
+                signer.RemoveCounterSignature(counterSigner)
             );
         }
 
@@ -573,7 +574,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.RemoveSignature(signer);
             Assert.NotEmpty(signer.CounterSignerInfos);
 
-            Assert.Throws<CryptographicException>(() => signer.RemoveCounterSignature(counterSigner)
+            Assert.Throws<CryptographicException>(() =>
+                signer.RemoveCounterSignature(counterSigner)
             );
         }
 

@@ -520,9 +520,11 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Min());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Min());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Min());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Min()
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<double>().Min()
             );
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Min()
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Empty<decimal>().Min()
             );
             Assert.Throws<InvalidOperationException>(() =>
                 ParallelEnumerable.Empty<NotComparable>().Min()

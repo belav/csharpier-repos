@@ -6234,7 +6234,8 @@ public class RendererTest
 
         public void TriggerRender()
         {
-            var t = _renderHandle.Dispatcher.InvokeAsync(() => _renderHandle.Render(_renderFragment)
+            var t = _renderHandle.Dispatcher.InvokeAsync(() =>
+                _renderHandle.Render(_renderFragment)
             );
             // This should always be run synchronously
             Assert.True(t.IsCompleted);

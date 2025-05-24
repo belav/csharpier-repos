@@ -503,7 +503,8 @@ namespace System.Net.Tests
                     Assert.Throws<NotSupportedException>(() => inputStream.Position);
                     Assert.Throws<NotSupportedException>(() => inputStream.Position = 1);
 
-                    Assert.Throws<NotSupportedException>(() => inputStream.Seek(0, SeekOrigin.Begin)
+                    Assert.Throws<NotSupportedException>(() =>
+                        inputStream.Seek(0, SeekOrigin.Begin)
                     );
                 }
 

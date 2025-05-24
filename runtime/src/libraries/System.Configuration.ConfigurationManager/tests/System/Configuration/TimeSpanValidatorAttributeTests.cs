@@ -122,7 +122,8 @@ namespace System.ConfigurationTests
 
                 attribute.MaxValueString = new TimeSpan(2, 2, 2, 2).ToString();
                 ArgumentOutOfRangeException result = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => attribute.MinValueString = new TimeSpan(3, 3, 3, 3).ToString()
+                    () =>
+                        attribute.MinValueString = new TimeSpan(3, 3, 3, 3).ToString()
                 );
                 ArgumentOutOfRangeException expectedException = new ArgumentOutOfRangeException(
                     "value",
@@ -141,7 +142,8 @@ namespace System.ConfigurationTests
 
                 attribute.MinValueString = new TimeSpan(2, 2, 2, 2).ToString();
                 ArgumentOutOfRangeException result = Assert.Throws<ArgumentOutOfRangeException>(
-                    () => attribute.MaxValueString = new TimeSpan(1, 1, 1, 1).ToString()
+                    () =>
+                        attribute.MaxValueString = new TimeSpan(1, 1, 1, 1).ToString()
                 );
                 ArgumentOutOfRangeException expectedException = new ArgumentOutOfRangeException(
                     "value",

@@ -526,7 +526,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 #pragma warning disable CS0618 // Type or member is obsolete
                     readException = await Assert.ThrowsAsync<BadHttpRequestException>(
 #pragma warning restore CS0618 // Type or member is obsolete
-                        async () => await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
+                        async () =>
+                        await httpContext.Request.Body.ReadAsync(new byte[1], 0, 1)
                     );
                 },
                 new TestServiceContext(LoggerFactory)
@@ -2793,7 +2794,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     );
 
                     var writeException = await Assert.ThrowsAsync<ObjectDisposedException>(
-                        async () => await response.BodyWriter.FlushAsync()
+                        async () =>
+                            await response.BodyWriter.FlushAsync()
                     );
                     Assert.Same(onStartingException, writeException.InnerException);
                 },
@@ -4016,7 +4018,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
                     await response.StartAsync();
 
-                    Assert.Throws<ArgumentOutOfRangeException>(() => response.BodyWriter.Advance(-1)
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        response.BodyWriter.Advance(-1)
                     );
                 },
                 testContext
@@ -4050,7 +4053,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     var response = httpContext.Response;
 
-                    Assert.Throws<ArgumentOutOfRangeException>(() => response.BodyWriter.Advance(-1)
+                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                        response.BodyWriter.Advance(-1)
                     );
                     return Task.CompletedTask;
                 },

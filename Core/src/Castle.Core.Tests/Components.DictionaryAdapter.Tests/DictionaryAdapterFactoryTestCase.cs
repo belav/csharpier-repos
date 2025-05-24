@@ -69,7 +69,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
         [Test]
         public void CreateAdapter_NoPrefixWithMethod_ThrowsException()
         {
-            Assert.Throws<TypeLoadException>(() => factory.GetAdapter<IPersonWithMethod>(dictionary)
+            Assert.Throws<TypeLoadException>(() =>
+                factory.GetAdapter<IPersonWithMethod>(dictionary)
             );
         }
 

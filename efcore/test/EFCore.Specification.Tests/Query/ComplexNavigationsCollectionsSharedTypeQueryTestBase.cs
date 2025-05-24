@@ -40,7 +40,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
         );
 
     public override Task Include_collection_with_multiple_orderbys_complex(bool async) =>
-        AssertIncludeOnNonEntity(() => base.Include_collection_with_multiple_orderbys_complex(async)
+        AssertIncludeOnNonEntity(() =>
+            base.Include_collection_with_multiple_orderbys_complex(async)
         );
 
     public override Task Include_collection_with_multiple_orderbys_complex_repeated(bool async) =>
@@ -56,7 +57,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
         );
 
     public override Task Include_collection_with_multiple_orderbys_member(bool async) =>
-        AssertIncludeOnNonEntity(() => base.Include_collection_with_multiple_orderbys_member(async)
+        AssertIncludeOnNonEntity(() =>
+            base.Include_collection_with_multiple_orderbys_member(async)
         );
 
     public override Task Include_collection_with_multiple_orderbys_methodcall(bool async) =>

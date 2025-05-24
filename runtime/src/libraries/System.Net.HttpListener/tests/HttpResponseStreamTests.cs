@@ -247,7 +247,8 @@ namespace System.Net.Tests
             {
                 Assert.False(outputStream.CanRead);
 
-                Assert.Throws<InvalidOperationException>(() => outputStream.Read(new byte[0], 0, 0)
+                Assert.Throws<InvalidOperationException>(() =>
+                    outputStream.Read(new byte[0], 0, 0)
                 );
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
                     outputStream.ReadAsync(new byte[0], 0, 0)

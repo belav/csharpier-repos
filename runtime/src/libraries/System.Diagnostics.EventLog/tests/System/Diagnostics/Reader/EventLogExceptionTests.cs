@@ -25,7 +25,8 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void EventLogReadingException_Ctor()
         {
-            Assert.ThrowsAsync<EventLogReadingException>(() => throw new EventLogReadingException()
+            Assert.ThrowsAsync<EventLogReadingException>(() =>
+                throw new EventLogReadingException()
             );
             Assert.ThrowsAsync<EventLogReadingException>(() =>
                 throw new EventLogReadingException("message")

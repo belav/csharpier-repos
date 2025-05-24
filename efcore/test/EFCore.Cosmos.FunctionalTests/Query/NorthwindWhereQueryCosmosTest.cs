@@ -1988,7 +1988,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_constructed_multi_value_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(() => base.Where_compare_constructed_multi_value_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_constructed_multi_value_equal(async)
         );
 
         AssertSql();
@@ -2035,7 +2036,8 @@ WHERE ((c["Discriminator"] = "Product") AND false)
     public override async Task Where_compare_tuple_create_constructed_equal(bool async)
     {
         // Anonymous type to constant comparison. Issue #14672.
-        await AssertTranslationFailed(() => base.Where_compare_tuple_create_constructed_equal(async)
+        await AssertTranslationFailed(() =>
+            base.Where_compare_tuple_create_constructed_equal(async)
         );
 
         AssertSql();
@@ -2138,7 +2140,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = @__p_0))
     public override async Task Where_multiple_contains_in_subquery_with_or(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Where_multiple_contains_in_subquery_with_or(async)
+        await AssertTranslationFailed(() =>
+            base.Where_multiple_contains_in_subquery_with_or(async)
         );
 
         AssertSql();
@@ -2147,7 +2150,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = @__p_0))
     public override async Task Where_multiple_contains_in_subquery_with_and(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Where_multiple_contains_in_subquery_with_and(async)
+        await AssertTranslationFailed(() =>
+            base.Where_multiple_contains_in_subquery_with_and(async)
         );
 
         AssertSql();
@@ -2345,7 +2349,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_ToList_Contains(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Where_collection_navigation_ToList_Contains(async)
+        await AssertTranslationFailed(() =>
+            base.Where_collection_navigation_ToList_Contains(async)
         );
 
         AssertSql();
@@ -2362,7 +2367,8 @@ WHERE ((c["Discriminator"] = "Product") AND (true ? false : true))
     public override async Task Where_collection_navigation_ToArray_Contains(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Where_collection_navigation_ToArray_Contains(async)
+        await AssertTranslationFailed(() =>
+            base.Where_collection_navigation_ToArray_Contains(async)
         );
 
         AssertSql();
@@ -2621,7 +2627,8 @@ WHERE ((c["Discriminator"] = "Customer") AND (c["CustomerID"] = "ALFKI"))
     public override async Task Last_over_custom_projection_compared_to_null(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Last_over_custom_projection_compared_to_null(async)
+        await AssertTranslationFailed(() =>
+            base.Last_over_custom_projection_compared_to_null(async)
         );
 
         AssertSql();

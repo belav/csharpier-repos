@@ -17,7 +17,8 @@ public unsafe class Runtime_54956
 
         succeeded &= Test(() => SideEffects_Vector_AndNot(Array.Empty<Vector<int>>(), null));
 
-        succeeded &= Test(() => SideEffects_Avx2_PermuteVar8x32(Array.Empty<Vector256<int>>(), null)
+        succeeded &= Test(() =>
+            SideEffects_Avx2_PermuteVar8x32(Array.Empty<Vector256<int>>(), null)
         );
         succeeded &= Test(() =>
             SideEffects_Avx2_ShiftLeftLogical(Array.Empty<Vector256<int>>(), null)

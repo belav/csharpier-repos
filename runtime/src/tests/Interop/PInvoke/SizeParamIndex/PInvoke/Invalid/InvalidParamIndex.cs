@@ -23,7 +23,8 @@ public class Program
     public static void TestEntryPoint()
     {
         Assert.Throws<MarshalDirectiveException>(() => SizeParamIndexTooBig(out var _, out var _));
-        Assert.Throws<MarshalDirectiveException>(() => SizeParamIndexWrongType(out var _, out var _)
+        Assert.Throws<MarshalDirectiveException>(() =>
+            SizeParamIndexWrongType(out var _, out var _)
         );
     }
 }

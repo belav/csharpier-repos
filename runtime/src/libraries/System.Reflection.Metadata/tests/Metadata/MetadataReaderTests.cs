@@ -4394,7 +4394,8 @@ namespace System.Reflection.Metadata.Tests
                 null,
                 () => MetadataReader.GetAssemblyName(string.Empty)
             );
-            Assert.Throws<FileNotFoundException>(() => MetadataReader.GetAssemblyName("IDontExist")
+            Assert.Throws<FileNotFoundException>(() =>
+                MetadataReader.GetAssemblyName("IDontExist")
             );
 
             using (var tempFile = new TempFile(Path.GetTempFileName(), 0)) // Zero-size file

@@ -59,7 +59,8 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<CryptographicException>(() => new AesGcm(key));
             Assert.Throws<CryptographicException>(() => new AesGcm(key.AsSpan()));
 #pragma warning restore SYSLIB0053
-            Assert.Throws<CryptographicException>(() => new AesGcm(key, AesGcm.TagByteSizes.MinSize)
+            Assert.Throws<CryptographicException>(() =>
+                new AesGcm(key, AesGcm.TagByteSizes.MinSize)
             );
             Assert.Throws<CryptographicException>(() =>
                 new AesGcm(key.AsSpan(), AesGcm.TagByteSizes.MinSize)

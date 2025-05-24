@@ -350,7 +350,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void DefaultBufferSizeFail()
         {
-            Assert.Throws<ArgumentException>(() => new JsonSerializerOptions().DefaultBufferSize = 0
+            Assert.Throws<ArgumentException>(() =>
+                new JsonSerializerOptions().DefaultBufferSize = 0
             );
             Assert.Throws<ArgumentException>(() =>
                 new JsonSerializerOptions().DefaultBufferSize = -1
@@ -1225,7 +1226,8 @@ namespace System.Text.Json.Serialization.Tests
                 );
                 Assert.Contains(effectiveMaxDepthAsStr, ex.ToString());
 
-                ex = Assert.Throws<JsonException>(() => JsonSerializer.Serialize(myList, newOptions)
+                ex = Assert.Throws<JsonException>(() =>
+                    JsonSerializer.Serialize(myList, newOptions)
                 );
                 Assert.Contains(effectiveMaxDepthAsStr, ex.ToString());
             }
@@ -2045,7 +2047,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions();
             Assert.Throws<ArgumentException>(() => options.GetTypeInfo(type));
-            Assert.Throws<ArgumentException>(() => options.TryGetTypeInfo(type, out JsonTypeInfo? _)
+            Assert.Throws<ArgumentException>(() =>
+                options.TryGetTypeInfo(type, out JsonTypeInfo? _)
             );
         }
 

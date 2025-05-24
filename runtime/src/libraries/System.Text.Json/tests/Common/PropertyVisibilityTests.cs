@@ -3064,7 +3064,8 @@ namespace System.Text.Json.Serialization.Tests
         public virtual async Task JsonIgnoreCondition_WhenWritingNull_OnValueType_Fail(Type type)
         {
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await Serializer.DeserializeWrapper("{}", type)
+                async () =>
+                    await Serializer.DeserializeWrapper("{}", type)
             );
             string exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);
@@ -3090,7 +3091,8 @@ namespace System.Text.Json.Serialization.Tests
         )
         {
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await Serializer.DeserializeWrapper("", type)
+                async () =>
+                    await Serializer.DeserializeWrapper("", type)
             );
             string exAsStr = ex.ToString();
             Assert.Contains("JsonIgnoreCondition.WhenWritingNull", exAsStr);

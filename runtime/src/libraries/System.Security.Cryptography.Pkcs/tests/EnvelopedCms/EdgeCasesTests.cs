@@ -307,7 +307,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             ContentInfo contentInfo = new ContentInfo(new byte[3]);
-            Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(contentInfo, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                ignore = new EnvelopedCms(contentInfo, null)
             );
         }
 
@@ -355,7 +356,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             if (useSpan)
             {
 #if !NETFRAMEWORK
-                Assert.ThrowsAny<CryptographicException>(() => cms.Decode(ReadOnlySpan<byte>.Empty)
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    cms.Decode(ReadOnlySpan<byte>.Empty)
                 );
 #else
                 throw new Xunit.Sdk.XunitException(

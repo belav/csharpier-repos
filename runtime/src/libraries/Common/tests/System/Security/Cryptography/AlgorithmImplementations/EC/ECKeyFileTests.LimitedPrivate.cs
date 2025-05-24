@@ -36,7 +36,8 @@ AAAA//////////+85vqtpxeehPO5ysL8YyVRAgEBBCcwJQIBAQQgcKEsLbFoRe1W
 
             T key = CreateKey();
             key.ImportPkcs8PrivateKey(Convert.FromBase64String(base64), out _);
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() => Exercise(key)
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() =>
+                Exercise(key)
             );
             Assert.Equal(NTE_PERM, ex.HResult);
         }

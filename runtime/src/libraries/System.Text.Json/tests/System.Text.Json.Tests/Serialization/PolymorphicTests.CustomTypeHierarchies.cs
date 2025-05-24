@@ -370,7 +370,8 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             PolymorphicClass value = new PolymorphicClass.DerivedAbstractClass.DerivedClass();
-            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value)
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.SerializeWrapper(value)
             );
         }
 
@@ -3555,7 +3556,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             PolymorphicClass_CustomConverter_TypeDiscriminator value =
                 new PolymorphicClass_CustomConverter_TypeDiscriminator.DerivedClass();
-            await Assert.ThrowsAsync<NotSupportedException>(() => Serializer.SerializeWrapper(value)
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Serializer.SerializeWrapper(value)
             );
         }
 

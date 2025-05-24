@@ -79,7 +79,8 @@ namespace System.Data.OleDb.Tests
             Assert.False(new OleDbCommand().Parameters.GetEnumerator().MoveNext());
 
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Add(0));
-            Assert.Throws<ArgumentNullException>(() => new OleDbCommand().Parameters.AddRange(null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new OleDbCommand().Parameters.AddRange(null)
             );
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Insert(0, 0));
             Assert.Throws<InvalidCastException>(() => new OleDbCommand().Parameters.Remove(0));

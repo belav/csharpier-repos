@@ -114,7 +114,8 @@ namespace System.Xml.XmlDocumentTests
             Assert.Throws<ArgumentNullException>(() =>
                 xmlDocument.GetElementsByTagName("product", null)
             );
-            Assert.Throws<ArgumentNullException>(() => xmlDocument.GetElementsByTagName(null, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlDocument.GetElementsByTagName(null, null)
             );
         }
 

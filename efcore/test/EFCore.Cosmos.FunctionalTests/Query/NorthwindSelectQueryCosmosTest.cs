@@ -80,7 +80,8 @@ WHERE (c["Discriminator"] = "Order")
     public override async Task Projection_when_arithmetic_mixed_subqueries(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Projection_when_arithmetic_mixed_subqueries(async)
+        await AssertTranslationFailed(() =>
+            base.Projection_when_arithmetic_mixed_subqueries(async)
         );
 
         AssertSql();
@@ -1827,7 +1828,8 @@ ORDER BY c["OrderID"]
     public override async Task Reverse_in_projection_subquery_single_result(bool async)
     {
         // Cosmos client evaluation. Issue #17246.
-        await AssertTranslationFailed(() => base.Reverse_in_projection_subquery_single_result(async)
+        await AssertTranslationFailed(() =>
+            base.Reverse_in_projection_subquery_single_result(async)
         );
 
         AssertSql();

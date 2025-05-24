@@ -208,7 +208,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 )
             );
             Assert.Null(msg.Content);
-            Assert.Throws<InvalidOperationException>(() => Verify(msg, DefaultKey, s_sampleContent)
+            Assert.Throws<InvalidOperationException>(() =>
+                Verify(msg, DefaultKey, s_sampleContent)
             );
         }
 
@@ -226,7 +227,8 @@ namespace System.Security.Cryptography.Cose.Tests
                 )
             );
             Assert.NotNull(msg.Content);
-            Assert.Throws<InvalidOperationException>(() => Verify(msg, DefaultKey, s_sampleContent)
+            Assert.Throws<InvalidOperationException>(() =>
+                Verify(msg, DefaultKey, s_sampleContent)
             );
         }
 

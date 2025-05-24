@@ -223,7 +223,8 @@ public class HttpRequestStreamTests
         var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), pipeReader);
         pipeReader.StartAcceptingReads(null);
         pipeReader.Abort();
-        await Assert.ThrowsAsync<TaskCanceledException>(() => stream.CopyToAsync(Mock.Of<Stream>())
+        await Assert.ThrowsAsync<TaskCanceledException>(() =>
+            stream.CopyToAsync(Mock.Of<Stream>())
         );
     }
 

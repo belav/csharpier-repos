@@ -117,7 +117,8 @@ namespace System.Text.Json.Serialization.Tests
                 obj = Activator.CreateInstance(type.MakeGenericType(typeof(string), typeof(int)));
             }
 
-            await Assert.ThrowsAsync<ArgumentException>(() => Serializer.SerializeWrapper(obj, type)
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                Serializer.SerializeWrapper(obj, type)
             );
         }
 

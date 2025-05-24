@@ -559,7 +559,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(task.IsCompleted);
 
             gate.Set();
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => task.AsTask()
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                task.AsTask()
             );
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
@@ -721,7 +722,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.False(task.IsCompleted);
 
             gate.Set();
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => task.AsTask()
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                task.AsTask()
             );
             Assert.Same(fault, exception);
         }

@@ -297,7 +297,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void SendRequest_DsmlAuthRequest_ThrowsNotSupportedException()
         {
             var connection = new LdapConnection("server");
-            Assert.Throws<NotSupportedException>(() => connection.SendRequest(new DsmlAuthRequest())
+            Assert.Throws<NotSupportedException>(() =>
+                connection.SendRequest(new DsmlAuthRequest())
             );
         }
 

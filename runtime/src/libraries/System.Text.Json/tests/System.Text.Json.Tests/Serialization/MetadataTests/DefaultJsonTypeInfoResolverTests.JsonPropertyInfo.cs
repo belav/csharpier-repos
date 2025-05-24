@@ -1161,7 +1161,8 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.False(property.ShouldSerialize(null, null));
                         Assert.False(property.ShouldSerialize(null, ""));
                         Assert.False(property.ShouldSerialize(null, "asd"));
-                        Assert.Throws<InvalidCastException>(() => property.ShouldSerialize(null, 0)
+                        Assert.Throws<InvalidCastException>(() =>
+                            property.ShouldSerialize(null, 0)
                         );
 
                         Assert.Null(property.Get);
@@ -1184,7 +1185,8 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.False(property.ShouldSerialize(null, null));
                         Assert.True(property.ShouldSerialize(null, ""));
                         Assert.True(property.ShouldSerialize(null, "asd"));
-                        Assert.Throws<InvalidCastException>(() => property.ShouldSerialize(null, 0)
+                        Assert.Throws<InvalidCastException>(() =>
+                            property.ShouldSerialize(null, 0)
                         );
                         break;
                     case JsonIgnoreCondition.Never:
@@ -1192,7 +1194,8 @@ namespace System.Text.Json.Serialization.Tests
                         Assert.True(property.ShouldSerialize(null, null));
                         Assert.True(property.ShouldSerialize(null, ""));
                         Assert.True(property.ShouldSerialize(null, "asd"));
-                        Assert.Throws<InvalidCastException>(() => property.ShouldSerialize(null, 0)
+                        Assert.Throws<InvalidCastException>(() =>
+                            property.ShouldSerialize(null, 0)
                         );
                         break;
                 }
@@ -1564,7 +1567,8 @@ namespace System.Text.Json.Serialization.Tests
             };
 
             var value = new ClassWithTwoExtensionDataLikeProperties();
-            Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(value, options)
+            Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Serialize(value, options)
             );
             Assert.True(resolverRanToCompletion);
         }

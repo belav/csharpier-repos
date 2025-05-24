@@ -657,7 +657,8 @@ namespace System.Net.Http.Functional.Tests
                 {
                     if (PlatformDetection.IsBrowser) // TypeError: Failed to fetch
                     {
-                        await Assert.ThrowsAsync<HttpRequestException>(() => ReadAsStreamHelper(uri)
+                        await Assert.ThrowsAsync<HttpRequestException>(() =>
+                            ReadAsStreamHelper(uri)
                         );
                     }
                     else if (IsWinHttpHandler)

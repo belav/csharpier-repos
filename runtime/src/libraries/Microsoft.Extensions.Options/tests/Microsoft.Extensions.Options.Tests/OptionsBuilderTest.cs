@@ -759,7 +759,8 @@ namespace Microsoft.Extensions.Options.Tests
 
             var startupValidator = sp.GetRequiredService<IStartupValidator>();
 
-            var error = Assert.Throws<OptionsValidationException>(() => startupValidator.Validate()
+            var error = Assert.Throws<OptionsValidationException>(() =>
+                startupValidator.Validate()
             );
             ValidateFailure<ComplexOptions>(
                 error,

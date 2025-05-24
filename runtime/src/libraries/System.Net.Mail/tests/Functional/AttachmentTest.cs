@@ -22,7 +22,8 @@ namespace System.Net.Mail.Tests
         public void TestNullStream()
         {
             Stream s = null;
-            Assert.Throws<ArgumentNullException>(() => new Attachment(s, "application/octet-stream")
+            Assert.Throws<ArgumentNullException>(() =>
+                new Attachment(s, "application/octet-stream")
             );
         }
 

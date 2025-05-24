@@ -491,7 +491,8 @@ namespace System.Net.Http.Functional.Tests
                 async Task ValidateCancellationAsync(Task t)
                 {
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => t
+                        () =>
+                            t
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
                 }
@@ -630,7 +631,8 @@ namespace System.Net.Http.Functional.Tests
                     cts.Cancel();
 
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => httpClient.GetStringAsync(uri, cts.Token)
+                        () =>
+                            httpClient.GetStringAsync(uri, cts.Token)
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
 
@@ -657,7 +659,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient httpClient = CreateHttpClient();
 
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => httpClient.GetStringAsync(uri, cts.Token)
+                        () =>
+                            httpClient.GetStringAsync(uri, cts.Token)
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
                 },
@@ -816,7 +819,8 @@ namespace System.Net.Http.Functional.Tests
                     cts.Cancel();
 
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => httpClient.GetByteArrayAsync(uri, cts.Token)
+                        () =>
+                            httpClient.GetByteArrayAsync(uri, cts.Token)
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
 
@@ -843,7 +847,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient httpClient = CreateHttpClient();
 
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => httpClient.GetByteArrayAsync(uri, cts.Token)
+                        () =>
+                            httpClient.GetByteArrayAsync(uri, cts.Token)
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
                 },
@@ -903,7 +908,8 @@ namespace System.Net.Http.Functional.Tests
                     cts.Cancel();
 
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => httpClient.GetStreamAsync(uri, cts.Token)
+                        () =>
+                            httpClient.GetStreamAsync(uri, cts.Token)
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
 
@@ -930,7 +936,8 @@ namespace System.Net.Http.Functional.Tests
                     using HttpClient httpClient = CreateHttpClient();
 
                     TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(
-                        () => httpClient.GetStreamAsync(uri, cts.Token)
+                        () =>
+                            httpClient.GetStreamAsync(uri, cts.Token)
                     );
                     Assert.Equal(cts.Token, tce.CancellationToken);
                 },
@@ -1063,7 +1070,8 @@ namespace System.Net.Http.Functional.Tests
                     task =>
                     {
                         OperationCanceledException e = Assert.ThrowsAny<OperationCanceledException>(
-                            () => task.GetAwaiter().GetResult()
+                            () =>
+                                task.GetAwaiter().GetResult()
                         );
                         TimeoutException timeoutException = (TimeoutException)e.InnerException;
                         Assert.NotNull(timeoutException);
@@ -1196,7 +1204,8 @@ namespace System.Net.Http.Functional.Tests
             client.Timeout = TimeSpan.FromSeconds(42);
 
             OperationCanceledException e = await Assert.ThrowsAsync<OperationCanceledException>(
-                () => client.GetAsync(CreateFakeUri())
+                () =>
+                    client.GetAsync(CreateFakeUri())
             );
 
             Assert.Null(e.InnerException);
@@ -1266,7 +1275,8 @@ namespace System.Net.Http.Functional.Tests
 
                 cts.Cancel();
 
-                TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(() => t1
+                TaskCanceledException tce = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                    t1
                 );
                 Assert.Equal(cts.Token, tce.CancellationToken);
             }

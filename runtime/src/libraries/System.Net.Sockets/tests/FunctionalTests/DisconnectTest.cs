@@ -106,7 +106,8 @@ namespace System.Net.Sockets.Tests
                     // Note that the new connect operation must be asynchronous
                     // (why? I'm not sure, but that's the way it works currently)
                     // So try connecting synchronously, and it should fail
-                    Assert.Throws<InvalidOperationException>(() => client.Connect(server2.EndPoint)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        client.Connect(server2.EndPoint)
                     );
                 }
             }

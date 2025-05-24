@@ -173,10 +173,12 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\""));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("")); // Empty JSON is invalid
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("1234")); // Can't convert a JSON number to JSON string/char
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"stringTooLong\"")
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<char>("\"stringTooLong\"")
             );
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\u0059B\""));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\uD800\uDC00\"")
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<char>("\"\uD800\uDC00\"")
             );
             Assert.Equal('a', JsonSerializer.Deserialize<char>("\"a\""));
             Assert.Equal('Y', JsonSerializer.Deserialize<char>("\"\u0059\""));
@@ -197,7 +199,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Throws<JsonException>(() =>
                 JsonSerializer.Deserialize<SimpleStruct>(nullStringAsBytes)
             );
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleStruct>(nullString)
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<SimpleStruct>(nullString)
             );
 
             // null can be assigned to nullable structs.
@@ -263,7 +266,8 @@ namespace System.Text.Json.Serialization.Tests
             if (type.IsValueType)
             {
                 // Unsupported struct types throw
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize("null", type)
+                Assert.Throws<NotSupportedException>(() =>
+                    JsonSerializer.Deserialize("null", type)
                 );
 
                 var options = new JsonSerializerOptions { IgnoreNullValues = true };

@@ -31,7 +31,8 @@ namespace System.IO.Tests
                 TimeFunctions(),
                 (item) =>
                 {
-                    Assert.Throws<ArgumentException>(() => item.Setter(string.Empty, DateTime.Today)
+                    Assert.Throws<ArgumentException>(() =>
+                        item.Setter(string.Empty, DateTime.Today)
                     );
                     Assert.Throws<ArgumentException>(() => item.Getter(string.Empty));
                 }

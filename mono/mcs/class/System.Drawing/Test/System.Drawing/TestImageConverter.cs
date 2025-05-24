@@ -175,7 +175,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void ConvertFrom_BadString()
         {
-            Assert.Throws<NotSupportedException>(() => imgConv.ConvertFrom("System.Drawing.String")
+            Assert.Throws<NotSupportedException>(() =>
+                imgConv.ConvertFrom("System.Drawing.String")
             );
         }
 

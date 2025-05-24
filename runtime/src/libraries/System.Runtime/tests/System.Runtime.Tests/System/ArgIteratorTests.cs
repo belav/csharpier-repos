@@ -129,7 +129,8 @@ namespace System.Tests
                 new ArgIterator().GetNextArg(new RuntimeTypeHandle())
             );
             Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetNextArgType());
-            Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().GetRemainingCount()
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new ArgIterator().GetRemainingCount()
             );
         }
     }

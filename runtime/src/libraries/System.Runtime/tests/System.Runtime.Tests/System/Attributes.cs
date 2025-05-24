@@ -559,7 +559,8 @@ namespace System.Tests
         [Fact]
         public static void NegTest()
         {
-            Assert.Throws<ArgumentNullException>(() => Attribute.GetCustomAttributes((Assembly)null)
+            Assert.Throws<ArgumentNullException>(() =>
+                Attribute.GetCustomAttributes((Assembly)null)
             );
             Assert.Throws<ArgumentNullException>(() => Attribute.GetCustomAttributes((Module)null));
             Assert.Throws<ArgumentNullException>(() =>

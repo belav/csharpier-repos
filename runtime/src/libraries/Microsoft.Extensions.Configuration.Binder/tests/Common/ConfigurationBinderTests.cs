@@ -2384,7 +2384,8 @@ namespace Microsoft.Extensions
             IConfiguration? configuration = null;
 
             Assert.Throws<ArgumentNullException>(() => configuration.Get<GeolocationClass>());
-            Assert.Throws<ArgumentNullException>(() => configuration.Get<GeolocationClass>(_ => { })
+            Assert.Throws<ArgumentNullException>(() =>
+                configuration.Get<GeolocationClass>(_ => { })
             );
             Assert.Throws<ArgumentNullException>(() => configuration.Get<Geolocation>());
             Assert.Throws<ArgumentNullException>(() => configuration.Get<Geolocation>(_ => { }));
@@ -2429,7 +2430,8 @@ namespace Microsoft.Extensions
                 Assert.Throws<ArgumentNullException>(() =>
                     configuration.GetValue<GeolocationClass>(key, defaultValue: null)
                 );
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue<Geolocation>(key)
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<Geolocation>(key)
                 );
                 Assert.Throws<ArgumentNullException>(() =>
                     configuration.GetValue<Geolocation>(key, defaultValue: default)

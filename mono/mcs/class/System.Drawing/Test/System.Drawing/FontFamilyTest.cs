@@ -112,7 +112,8 @@ namespace MonoTests.System.Drawing
         [Test]
         public void FontFamily_String_PrivateFontCollection()
         {
-            Assert.Throws<ArgumentException>(() => new FontFamily(name, new PrivateFontCollection())
+            Assert.Throws<ArgumentException>(() =>
+                new FontFamily(name, new PrivateFontCollection())
             );
         }
 

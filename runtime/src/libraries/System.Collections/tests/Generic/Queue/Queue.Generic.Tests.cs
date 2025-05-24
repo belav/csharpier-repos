@@ -248,7 +248,8 @@ namespace System.Collections.Tests
         {
             Queue<T> queue = GenericQueueFactory(size);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => queue.TrimExcess(newCapacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() =>
+                queue.TrimExcess(newCapacity)
             );
         }
 

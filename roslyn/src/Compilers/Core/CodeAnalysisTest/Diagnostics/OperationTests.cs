@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             );
 
             // Index out of range: Index > Length
-            Assert.Throws<ArgumentOutOfRangeException>(() => dynamicExpression.GetArgumentName(100)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                dynamicExpression.GetArgumentName(100)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 dynamicExpression.GetArgumentRefKind(100)

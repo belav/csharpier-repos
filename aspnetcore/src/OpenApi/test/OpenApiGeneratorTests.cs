@@ -259,7 +259,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(typeof(TimeSpan), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         var responses = operation.Responses;
@@ -285,7 +286,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(typeof(InferredJsonClass), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => Results.Ok(new InferredJsonClass())
+            () =>
+                Results.Ok(new InferredJsonClass())
         );
 
         Assert.Equal(2, operation.Responses.Count);
@@ -308,7 +310,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(typeof(TimeSpan), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(2, operation.Responses.Count);
@@ -326,7 +329,8 @@ public class OpenApiOperationGeneratorTests
         var operation = GetOpenApiOperation(
             [ProducesResponseType(StatusCodes.Status100Continue)]
             [ProducesResponseType(StatusCodes.Status101SwitchingProtocols)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(2, operation.Responses.Count);
@@ -347,7 +351,8 @@ public class OpenApiOperationGeneratorTests
             [ProducesResponseType(StatusCodes.Status300MultipleChoices)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
             [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(5, operation.Responses.Count);
@@ -375,7 +380,8 @@ public class OpenApiOperationGeneratorTests
             [ProducesResponseType(46)]
             [ProducesResponseType(654)]
             [ProducesResponseType(1111)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(3, operation.Responses.Count);

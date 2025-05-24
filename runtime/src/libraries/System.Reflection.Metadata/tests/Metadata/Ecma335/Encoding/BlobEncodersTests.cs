@@ -738,11 +738,14 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             AssertEx.Equal(new byte[] { 0x54 }, b.ToArray());
             b.Clear();
 
-            Assert.Throws<ArgumentNullException>(() => e.AddArgument(true, null, _ => { }, _ => { })
+            Assert.Throws<ArgumentNullException>(() =>
+                e.AddArgument(true, null, _ => { }, _ => { })
             );
-            Assert.Throws<ArgumentNullException>(() => e.AddArgument(true, _ => { }, null, _ => { })
+            Assert.Throws<ArgumentNullException>(() =>
+                e.AddArgument(true, _ => { }, null, _ => { })
             );
-            Assert.Throws<ArgumentNullException>(() => e.AddArgument(true, _ => { }, _ => { }, null)
+            Assert.Throws<ArgumentNullException>(() =>
+                e.AddArgument(true, _ => { }, _ => { }, null)
             );
         }
 
@@ -1112,9 +1115,11 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             AssertEx.Equal(new byte[] { 0x1C }, b.ToArray());
             b.Clear();
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => e.PrimitiveType(PrimitiveTypeCode.Void)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                e.PrimitiveType(PrimitiveTypeCode.Void)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(() => e.PrimitiveType((PrimitiveTypeCode)255)
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                e.PrimitiveType((PrimitiveTypeCode)255)
             );
         }
 

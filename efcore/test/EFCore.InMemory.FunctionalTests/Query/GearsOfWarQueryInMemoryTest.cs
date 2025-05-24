@@ -171,7 +171,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
         );
 
     public override Task Include_after_SelectMany_throws(bool async) =>
-        Assert.ThrowsAsync<NullReferenceException>(() => base.Include_after_SelectMany_throws(async)
+        Assert.ThrowsAsync<NullReferenceException>(() =>
+            base.Include_after_SelectMany_throws(async)
         );
 
     public override async Task Include_on_GroupJoin_SelectMany_DefaultIfEmpty_with_coalesce_result4(

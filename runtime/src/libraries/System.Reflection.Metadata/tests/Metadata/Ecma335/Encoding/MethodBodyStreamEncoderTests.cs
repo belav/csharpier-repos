@@ -1202,7 +1202,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var l0 = il.DefineLabel();
 
             AssertExtensions.Throws<ArgumentException>("opCode", () => il.Branch(ILOpCode.Nop, l0));
-            Assert.Throws<ArgumentNullException>(() => il.Branch(ILOpCode.Br, default(LabelHandle))
+            Assert.Throws<ArgumentNullException>(() =>
+                il.Branch(ILOpCode.Br, default(LabelHandle))
             );
             AssertExtensions.Throws<ArgumentException>("label", () => il.Branch(ILOpCode.Br, l2));
         }

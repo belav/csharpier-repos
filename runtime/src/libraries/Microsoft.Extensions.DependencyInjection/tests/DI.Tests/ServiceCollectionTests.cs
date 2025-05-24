@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Throws<InvalidOperationException>(() => serviceCollection.Clear());
             Assert.Throws<InvalidOperationException>(() => serviceCollection.Remove(descriptor));
             Assert.Throws<InvalidOperationException>(() => serviceCollection.Add(descriptor2));
-            Assert.Throws<InvalidOperationException>(() => serviceCollection.Insert(0, descriptor2)
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceCollection.Insert(0, descriptor2)
             );
             Assert.Throws<InvalidOperationException>(() => serviceCollection.RemoveAt(0));
 

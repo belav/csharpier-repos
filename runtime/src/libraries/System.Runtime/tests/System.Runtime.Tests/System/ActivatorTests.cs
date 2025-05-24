@@ -233,7 +233,8 @@ namespace System.Tests
         public void CreateInstance_InvalidType_ThrowsNotSupportedException(Type type)
         {
             Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(type));
-            Assert.Throws<NotSupportedException>(() => Activator.CreateInstance(type, new object[0])
+            Assert.Throws<NotSupportedException>(() =>
+                Activator.CreateInstance(type, new object[0])
             );
         }
 

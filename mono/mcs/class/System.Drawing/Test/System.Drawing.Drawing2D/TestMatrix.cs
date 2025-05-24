@@ -575,7 +575,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void TransformPoints_PointF_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new Matrix().TransformPoints((PointF[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new Matrix().TransformPoints((PointF[])null)
             );
         }
 
@@ -614,14 +615,16 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void TransformVectors_Point_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new Matrix().TransformVectors((Point[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new Matrix().TransformVectors((Point[])null)
             );
         }
 
         [Test]
         public void TransformVectors_PointF_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new Matrix().TransformVectors((PointF[])null)
+            Assert.Throws<ArgumentNullException>(() =>
+                new Matrix().TransformVectors((PointF[])null)
             );
         }
 
@@ -670,7 +673,8 @@ namespace MonoTests.System.Drawing.Drawing2D
         [Test]
         public void VectorTransformPoints_Empty()
         {
-            Assert.Throws<ArgumentException>(() => new Matrix().VectorTransformPoints(new Point[0])
+            Assert.Throws<ArgumentException>(() =>
+                new Matrix().VectorTransformPoints(new Point[0])
             );
         }
     }

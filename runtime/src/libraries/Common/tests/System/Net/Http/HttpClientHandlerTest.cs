@@ -1643,7 +1643,8 @@ namespace System.Net.Http.Functional.Tests
                             Assert.ThrowsAny<ArgumentException>(() =>
                                 responseStream.BeginRead(new byte[1], 0, 2, null, null)
                             );
-                            Assert.Throws<ArgumentNullException>(() => responseStream.EndRead(null)
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.EndRead(null)
                             );
                             Assert.Throws<ArgumentNullException>(() =>
                             {
@@ -2015,7 +2016,8 @@ namespace System.Net.Http.Functional.Tests
                             Assert.ThrowsAny<ArgumentException>(() =>
                                 responseStream.BeginRead(new byte[1], 0, 2, null, null)
                             );
-                            Assert.Throws<ArgumentNullException>(() => responseStream.EndRead(null)
+                            Assert.Throws<ArgumentNullException>(() =>
+                                responseStream.EndRead(null)
                             );
                             Assert.Throws<ArgumentNullException>(() =>
                             {

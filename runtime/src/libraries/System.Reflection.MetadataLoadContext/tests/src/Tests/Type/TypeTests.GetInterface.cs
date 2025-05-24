@@ -75,7 +75,8 @@ namespace System.Reflection.Tests
         public static void Test_GetInterface_NamespaceOptionalityTriggersAmbiguity()
         {
             Type t = typeof(TwoFoo1).Project();
-            Assert.Throws<AmbiguousMatchException>(() => t.GetInterface("IFoo1", ignoreCase: false)
+            Assert.Throws<AmbiguousMatchException>(() =>
+                t.GetInterface("IFoo1", ignoreCase: false)
             );
         }
 

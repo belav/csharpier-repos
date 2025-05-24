@@ -689,7 +689,8 @@ namespace System.Net.Sockets.Tests
                 "path",
                 () => new UnixDomainSocketEndPoint(new string('s', 1000))
             );
-            Assert.Throws<PlatformNotSupportedException>(() => new UnixDomainSocketEndPoint("hello")
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new UnixDomainSocketEndPoint("hello")
             );
         }
 

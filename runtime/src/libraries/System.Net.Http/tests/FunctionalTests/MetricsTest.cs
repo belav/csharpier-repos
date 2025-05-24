@@ -407,7 +407,8 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Version = UseVersion,
                     };
-                    Task<HttpResponseMessage> clientTask = Task.Run(() => SendAsync(client, request)
+                    Task<HttpResponseMessage> clientTask = Task.Run(() =>
+                        SendAsync(client, request)
                     );
                     await connectionStarted.Task;
                     using InstrumentRecorder<long> recorder = new(

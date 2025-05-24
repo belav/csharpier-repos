@@ -617,7 +617,8 @@ namespace System.Threading.RateLimiting.Tests
             innerLimiter2.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
             // Run Timer
-            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter)
+            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
+                Utils.RunTimerFunc(limiter)
             );
 
             Assert.True(dispose1Called);
@@ -676,7 +677,8 @@ namespace System.Threading.RateLimiting.Tests
             };
             idleLimiter.IdleDurationImpl = () => TimeSpan.FromMinutes(1);
 
-            var ex = await Assert.ThrowsAsync<AggregateException>(() => Utils.RunTimerFunc(limiter)
+            var ex = await Assert.ThrowsAsync<AggregateException>(() =>
+                Utils.RunTimerFunc(limiter)
             );
             Assert.Single(ex.InnerExceptions);
 

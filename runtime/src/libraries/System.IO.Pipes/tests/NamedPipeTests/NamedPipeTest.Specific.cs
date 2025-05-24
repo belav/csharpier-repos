@@ -70,7 +70,8 @@ namespace System.IO.Pipes.Tests
             using (NamedPipeClientStream client = new NamedPipeClientStream(".", "notthere"))
             {
                 var ctx = new CancellationTokenSource();
-                Assert.Throws<TimeoutException>(() => client.Connect(TimeSpan.FromMilliseconds(60))
+                Assert.Throws<TimeoutException>(() =>
+                    client.Connect(TimeSpan.FromMilliseconds(60))
                 ); // 60 to be over internal 50 interval
                 await Assert.ThrowsAsync<TimeoutException>(() =>
                     client.ConnectAsync(TimeSpan.FromMilliseconds(50), default)

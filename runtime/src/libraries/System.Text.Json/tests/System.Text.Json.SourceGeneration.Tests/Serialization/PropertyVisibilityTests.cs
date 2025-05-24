@@ -29,7 +29,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         )
         {
             InvalidOperationException ioe = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await Serializer.DeserializeWrapper("", type)
+                async () =>
+                    await Serializer.DeserializeWrapper("", type)
             );
             ValidateInvalidOperationException();
 

@@ -1984,7 +1984,8 @@ namespace System.Text.Json.Tests
                 Assert.Throws<ObjectDisposedException>(() => root.GetString());
                 const string ThrowsAnyway = "throws-anyway";
                 Assert.Throws<ObjectDisposedException>(() => root.ValueEquals(ThrowsAnyway));
-                Assert.Throws<ObjectDisposedException>(() => root.ValueEquals(ThrowsAnyway.AsSpan())
+                Assert.Throws<ObjectDisposedException>(() =>
+                    root.ValueEquals(ThrowsAnyway.AsSpan())
                 );
                 Assert.Throws<ObjectDisposedException>(() =>
                     root.ValueEquals(Encoding.UTF8.GetBytes(ThrowsAnyway))
@@ -2052,7 +2053,8 @@ namespace System.Text.Json.Tests
                 root.ValueEquals(Encoding.UTF8.GetBytes(ThrowsAnyway))
             );
             Assert.Throws<InvalidOperationException>(() => root.GetBytesFromBase64());
-            Assert.Throws<InvalidOperationException>(() => root.TryGetBytesFromBase64(out byte[] _)
+            Assert.Throws<InvalidOperationException>(() =>
+                root.TryGetBytesFromBase64(out byte[] _)
             );
             Assert.Throws<InvalidOperationException>(() => root.GetDateTime());
             Assert.Throws<InvalidOperationException>(() => root.GetDateTimeOffset());
@@ -2576,7 +2578,8 @@ namespace System.Text.Json.Tests
         {
             using (JsonDocument doc = JsonDocument.Parse("{\"name\":\"value\"}"))
             {
-                Assert.Throws<ArgumentException>(() => doc.RootElement.GetProperty("unpaired\uDFFE")
+                Assert.Throws<ArgumentException>(() =>
+                    doc.RootElement.GetProperty("unpaired\uDFFE")
                 );
 
                 Assert.Throws<ArgumentException>(() =>

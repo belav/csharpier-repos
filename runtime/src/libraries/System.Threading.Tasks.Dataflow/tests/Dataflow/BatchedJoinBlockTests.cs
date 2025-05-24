@@ -153,7 +153,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestCompletionTask()
         {
-            await DataflowTestHelpers.TestCompletionTask(() => new BatchedJoinBlock<int, string>(2)
+            await DataflowTestHelpers.TestCompletionTask(() =>
+                new BatchedJoinBlock<int, string>(2)
             );
             await DataflowTestHelpers.TestCompletionTask(() =>
                 new BatchedJoinBlock<int, string, double>(2)

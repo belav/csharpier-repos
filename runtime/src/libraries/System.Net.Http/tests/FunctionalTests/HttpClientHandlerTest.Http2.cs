@@ -29,7 +29,8 @@ namespace System.Net.Http.Functional.Tests
 
         private async Task AssertProtocolErrorAsync(Task task, ProtocolErrors errorCode)
         {
-            HttpRequestException outerEx = await Assert.ThrowsAsync<HttpRequestException>(() => task
+            HttpRequestException outerEx = await Assert.ThrowsAsync<HttpRequestException>(() =>
+                task
             );
             _output.WriteLine($"Outer exception: {outerEx}");
             Assert.Equal(HttpRequestError.HttpProtocolError, outerEx.HttpRequestError);
@@ -2394,7 +2395,8 @@ namespace System.Net.Http.Functional.Tests
                 Stopwatch stopwatch = Stopwatch.StartNew();
 
                 cts.Cancel();
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await clientTask
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await clientTask
                 );
 
                 // Ensure that the cancellation occurs promptly
@@ -2444,7 +2446,8 @@ namespace System.Net.Http.Functional.Tests
                 await Task.Delay(1000);
                 cts.Cancel();
 
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await clientTask
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                    await clientTask
                 );
             }
         }
@@ -4164,7 +4167,8 @@ namespace System.Net.Http.Functional.Tests
                         stream.SetException(new ArithmeticException("Injected test exception"));
 
                         HttpRequestException e = await Assert.ThrowsAsync<HttpRequestException>(
-                            () => response.Content.ReadAsStringAsync()
+                            () =>
+                                response.Content.ReadAsStringAsync()
                         );
                         Assert.IsType<IOException>(e.InnerException);
 

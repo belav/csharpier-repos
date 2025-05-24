@@ -1052,7 +1052,8 @@ namespace System.Collections.Immutable.Tests
         {
             Assert.Throws<NullReferenceException>(() => s_emptyDefault.Length);
             Assert.Throws<InvalidOperationException>(() => ((ICollection)s_emptyDefault).Count);
-            Assert.Throws<InvalidOperationException>(() => ((ICollection<int>)s_emptyDefault).Count
+            Assert.Throws<InvalidOperationException>(() =>
+                ((ICollection<int>)s_emptyDefault).Count
             );
             Assert.Throws<InvalidOperationException>(() =>
                 ((IReadOnlyCollection<int>)s_emptyDefault).Count
@@ -1077,7 +1078,8 @@ namespace System.Collections.Immutable.Tests
         {
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.IndexOf(5));
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.IndexOf(5, 0));
-            TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.IndexOf(5, 0, 0)
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.IndexOf(5, 0, 0)
             );
         }
 
@@ -1085,7 +1087,8 @@ namespace System.Collections.Immutable.Tests
         public void LastIndexOfInvalid()
         {
             TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.LastIndexOf(5));
-            TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.LastIndexOf(5, 0)
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.LastIndexOf(5, 0)
             );
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 s_emptyDefault.LastIndexOf(5, 0, 0)
@@ -1570,7 +1573,8 @@ namespace System.Collections.Immutable.Tests
         {
             // If the lhs or the rhs is a default ImmutableArray, AddRange should throw.
 
-            TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.AddRange(source)
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.AddRange(source)
             ); // Enumerable overload
             TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
                 s_emptyDefault.AddRange(source.ToImmutableArray())
@@ -1675,7 +1679,8 @@ namespace System.Collections.Immutable.Tests
         [InlineData(0)]
         public void InsertDefaultInvalid(int index)
         {
-            TestExtensionsMethods.ValidateDefaultThisBehavior(() => s_emptyDefault.Insert(index, 10)
+            TestExtensionsMethods.ValidateDefaultThisBehavior(() =>
+                s_emptyDefault.Insert(index, 10)
             );
         }
 
@@ -2790,7 +2795,8 @@ namespace System.Collections.Immutable.Tests
             Assert.Throws<IndexOutOfRangeException>(() => array[array.Length]);
             Assert.Throws<IndexOutOfRangeException>(() => ((IList)array)[array.Length]);
             Assert.Throws<IndexOutOfRangeException>(() => ((IList<int>)array)[array.Length]);
-            Assert.Throws<IndexOutOfRangeException>(() => ((IReadOnlyList<int>)array)[array.Length]
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                ((IReadOnlyList<int>)array)[array.Length]
             );
 
             Assert.Throws<IndexOutOfRangeException>(() => array[array.Length + 1]);
