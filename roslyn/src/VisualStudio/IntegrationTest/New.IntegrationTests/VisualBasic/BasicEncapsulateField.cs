@@ -16,13 +16,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     public class BasicEncapsulateField : AbstractEditorTest
     {
         public BasicEncapsulateField()
-            : base(nameof(BasicEncapsulateField))
-        {
-        }
+            : base(nameof(BasicEncapsulateField)) { }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 Module Module1
         Public $$name As Integer? = 0
     Sub Main()
@@ -38,13 +37,30 @@ End Module";
             var encapsulateField = TestServices.EncapsulateField;
             var dialog = TestServices.PreviewChangesDialog;
             await encapsulateField.InvokeAsync(HangMitigatingCancellationToken);
-            await dialog.VerifyOpenAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
-            await dialog.ClickCancelAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
-            await dialog.VerifyClosedAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
+            await dialog.VerifyOpenAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
+            await dialog.ClickCancelAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
+            await dialog.VerifyClosedAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
             await encapsulateField.InvokeAsync(HangMitigatingCancellationToken);
-            await dialog.VerifyOpenAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
-            await dialog.ClickApplyAndWaitForFeatureAsync(encapsulateField.DialogName, FeatureAttribute.EncapsulateField, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(@"    Private _name As Integer? = 0
+            await dialog.VerifyOpenAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
+            await dialog.ClickApplyAndWaitForFeatureAsync(
+                encapsulateField.DialogName,
+                FeatureAttribute.EncapsulateField,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"    Private _name As Integer? = 0
 
     Public Property Name As Integer?
         Get
@@ -53,7 +69,9 @@ End Module";
         Set(value As Integer?)
             _name = value
         End Set
-    End Property", cancellationToken: HangMitigatingCancellationToken);
+    End Property",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -63,13 +81,25 @@ End Module";
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
-            await using (var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(HangMitigatingCancellationToken))
+            await using (
+                var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices.EditorVerifier.CodeActionAsync("Encapsulate field: 'name' (and use property)", applyFix: true, blockUntilComplete: true, cancellationToken: HangMitigatingCancellationToken);
+                await TestServices.Editor.InvokeCodeActionListAsync(
+                    HangMitigatingCancellationToken
+                );
+                await TestServices.EditorVerifier.CodeActionAsync(
+                    "Encapsulate field: 'name' (and use property)",
+                    applyFix: true,
+                    blockUntilComplete: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             }
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Module Module1
     Private _name As Integer? = 0
 
@@ -85,7 +115,9 @@ Module Module1
     Sub Main()
         Name = 90
     End Sub
-End Module", cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -95,13 +127,25 @@ End Module", cancellationToken: HangMitigatingCancellationToken);
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
-            await using (var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(HangMitigatingCancellationToken))
+            await using (
+                var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices.EditorVerifier.CodeActionAsync("Encapsulate field: 'name' (but still use field)", applyFix: true, blockUntilComplete: true, cancellationToken: HangMitigatingCancellationToken);
+                await TestServices.Editor.InvokeCodeActionListAsync(
+                    HangMitigatingCancellationToken
+                );
+                await TestServices.EditorVerifier.CodeActionAsync(
+                    "Encapsulate field: 'name' (but still use field)",
+                    applyFix: true,
+                    blockUntilComplete: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             }
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 Module Module1
     Private _name As Integer? = 0
 
@@ -117,7 +161,9 @@ Module Module1
     Sub Main()
         name = 90
     End Sub
-End Module", cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

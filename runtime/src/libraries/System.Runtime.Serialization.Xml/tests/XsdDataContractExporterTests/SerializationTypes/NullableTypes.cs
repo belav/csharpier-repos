@@ -11,15 +11,22 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     [DataContract]
     public struct Point
     {
-
         Nullable<int> x;
         Nullable<int> y;
 
         [DataMember]
-        public Nullable<int> X { get { return x; } set { x = value; } }
-        [DataMember]
-        public Nullable<int> Y { get { return y; } set { y = value; } }
+        public Nullable<int> X
+        {
+            get { return x; }
+            set { x = value; }
+        }
 
+        [DataMember]
+        public Nullable<int> Y
+        {
+            get { return y; }
+            set { y = value; }
+        }
     }
 
     [DataContract]
@@ -27,6 +34,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     {
         [DataMember]
         public Nullable<Point> TopLeft;
+
         [DataMember]
         public Point? BottomRight;
     }
@@ -38,9 +46,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         Nullable<Point>[] points;
 
         [SecurityCritical]
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context) { }
     }
 
     [Serializable]
@@ -61,6 +67,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         Nullable<DateTimeOffset> nullableDTO;
 
         [DataMember]
-        public Nullable<DateTimeOffset> NullableDTO { get { return nullableDTO; } set { nullableDTO = value; } }
+        public Nullable<DateTimeOffset> NullableDTO
+        {
+            get { return nullableDTO; }
+            set { nullableDTO = value; }
+        }
     }
 }

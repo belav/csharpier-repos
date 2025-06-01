@@ -10,7 +10,11 @@ namespace System
         internal static bool GetBooleanConfig(string switchName, bool defaultValue) =>
             AppContext.TryGetSwitch(switchName, out bool value) ? value : defaultValue;
 
-        internal static bool GetBooleanConfig(string switchName, string envVariable, bool defaultValue = false)
+        internal static bool GetBooleanConfig(
+            string switchName,
+            string envVariable,
+            bool defaultValue = false
+        )
         {
             string? str = Environment.GetEnvironmentVariable(envVariable);
             if (str != null)
@@ -28,7 +32,11 @@ namespace System
             return GetBooleanConfig(switchName, defaultValue);
         }
 
-        internal static int GetInt32Config(string configName, int defaultValue, bool allowNegative = true)
+        internal static int GetInt32Config(
+            string configName,
+            int defaultValue,
+            bool allowNegative = true
+        )
         {
             try
             {
@@ -53,7 +61,11 @@ namespace System
                         }
                         else
                         {
-                            result = int.Parse(str, NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
+                            result = int.Parse(
+                                str,
+                                NumberStyles.AllowLeadingSign,
+                                NumberFormatInfo.InvariantInfo
+                            );
                         }
                         break;
                     case IConvertible convertible:
@@ -72,7 +84,12 @@ namespace System
             }
         }
 
-        internal static int GetInt32Config(string configName, string envVariable, int defaultValue, bool allowNegative = true)
+        internal static int GetInt32Config(
+            string configName,
+            string envVariable,
+            int defaultValue,
+            bool allowNegative = true
+        )
         {
             string? str = Environment.GetEnvironmentVariable(envVariable);
             if (str != null)
@@ -93,7 +110,11 @@ namespace System
                     }
                     else
                     {
-                        result = int.Parse(str, NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
+                        result = int.Parse(
+                            str,
+                            NumberStyles.AllowLeadingSign,
+                            NumberFormatInfo.InvariantInfo
+                        );
                     }
 
                     if (allowNegative || result >= 0)
@@ -101,18 +122,18 @@ namespace System
                         return result;
                     }
                 }
-                catch (FormatException)
-                {
-                }
-                catch (OverflowException)
-                {
-                }
+                catch (FormatException) { }
+                catch (OverflowException) { }
             }
 
             return GetInt32Config(configName, defaultValue, allowNegative);
         }
 
-        internal static short GetInt16Config(string configName, short defaultValue, bool allowNegative = true)
+        internal static short GetInt16Config(
+            string configName,
+            short defaultValue,
+            bool allowNegative = true
+        )
         {
             try
             {
@@ -121,14 +142,14 @@ namespace System
                 switch (config)
                 {
                     case uint value:
+                    {
+                        result = (short)value;
+                        if ((uint)result != value)
                         {
-                            result = (short)value;
-                            if ((uint)result != value)
-                            {
-                                return defaultValue; // overflow
-                            }
-                            break;
+                            return defaultValue; // overflow
                         }
+                        break;
+                    }
                     case string str:
                         if (str.StartsWith("0x"))
                         {
@@ -140,7 +161,11 @@ namespace System
                         }
                         else
                         {
-                            result = short.Parse(str, NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
+                            result = short.Parse(
+                                str,
+                                NumberStyles.AllowLeadingSign,
+                                NumberFormatInfo.InvariantInfo
+                            );
                         }
                         break;
                     case IConvertible convertible:
@@ -159,7 +184,12 @@ namespace System
             }
         }
 
-        internal static short GetInt16Config(string configName, string envVariable, short defaultValue, bool allowNegative = true)
+        internal static short GetInt16Config(
+            string configName,
+            string envVariable,
+            short defaultValue,
+            bool allowNegative = true
+        )
         {
             string? str = Environment.GetEnvironmentVariable(envVariable);
             if (str != null)
@@ -180,7 +210,11 @@ namespace System
                     }
                     else
                     {
-                        result = short.Parse(str, NumberStyles.AllowLeadingSign, NumberFormatInfo.InvariantInfo);
+                        result = short.Parse(
+                            str,
+                            NumberStyles.AllowLeadingSign,
+                            NumberFormatInfo.InvariantInfo
+                        );
                     }
 
                     if (allowNegative || result >= 0)
@@ -188,12 +222,8 @@ namespace System
                         return result;
                     }
                 }
-                catch (FormatException)
-                {
-                }
-                catch (OverflowException)
-                {
-                }
+                catch (FormatException) { }
+                catch (OverflowException) { }
             }
 
             return GetInt16Config(configName, defaultValue, allowNegative);

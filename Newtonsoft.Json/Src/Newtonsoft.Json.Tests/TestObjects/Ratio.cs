@@ -106,9 +106,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public double ToDouble(IFormatProvider provider)
         {
-            return _denominator == 0
-                ? double.NaN
-                : (double)_numerator / _denominator;
+            return _denominator == 0 ? double.NaN : (double)_numerator / _denominator;
         }
 
         public short ToInt16(IFormatProvider provider)
@@ -133,9 +131,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public float ToSingle(IFormatProvider provider)
         {
-            return _denominator == 0
-                ? float.NaN
-                : (float)_numerator / _denominator;
+            return _denominator == 0 ? float.NaN : (float)_numerator / _denominator;
         }
 
         public string ToString(IFormatProvider provider)
@@ -191,7 +187,9 @@ namespace Newtonsoft.Json.Tests.TestObjects
                     string.Format(
                         CultureInfo.InvariantCulture,
                         "Text '{0}' is invalid text representation of ratio",
-                        input));
+                        input
+                    )
+                );
             }
             return result;
         }
@@ -219,8 +217,20 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 else
                 {
                     int denominator;
-                    if (int.TryParse(input.Substring(0, fractionIndex), NumberStyles.Integer, formatProvider, out numerator) &&
-                        int.TryParse(input.Substring(fractionIndex + 1), NumberStyles.Integer, formatProvider, out denominator))
+                    if (
+                        int.TryParse(
+                            input.Substring(0, fractionIndex),
+                            NumberStyles.Integer,
+                            formatProvider,
+                            out numerator
+                        )
+                        && int.TryParse(
+                            input.Substring(fractionIndex + 1),
+                            NumberStyles.Integer,
+                            formatProvider,
+                            out denominator
+                        )
+                    )
                     {
                         result = new Ratio(numerator, denominator);
                         return true;

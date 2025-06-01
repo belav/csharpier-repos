@@ -1,37 +1,31 @@
 using System;
-using System.Runtime.InteropServices;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
-public struct EmptyStruct {
-}
+public struct EmptyStruct { }
 
 [StructLayout(LayoutKind.Sequential)]
-public struct EmptySequentialStruct {
-}
+public struct EmptySequentialStruct { }
 
 [StructLayout(LayoutKind.Explicit)]
-public struct EmptyExplicitStruct {
-}
+public struct EmptyExplicitStruct { }
 
 [StructLayout(LayoutKind.Sequential, Pack = 4)]
-public struct EmptySequentialPackStruct {
-}
+public struct EmptySequentialPackStruct { }
 
 [StructLayout(LayoutKind.Explicit, Pack = 4)]
-public struct EmptyExplicitPackStruct {
-}
+public struct EmptyExplicitPackStruct { }
 
 [StructLayout(LayoutKind.Explicit, Size = 0)]
-public struct EmptyExplicitSize0Struct {
-}
+public struct EmptyExplicitSize0Struct { }
 
 [StructLayout(LayoutKind.Explicit, Size = 1)]
-public struct EmptyExplicitSize1Struct {
-}
+public struct EmptyExplicitSize1Struct { }
 
 [StructLayout(LayoutKind.Sequential, Pack = 1)]
-public struct TestOffsets {
+public struct TestOffsets
+{
     public int A;
     public EmptyStruct B;
     public int C;
@@ -41,8 +35,10 @@ public struct TestOffsets {
     public int G;
 }
 
-class Program {    
-    private static unsafe void CheckSize<T> (int expected, ref int exitCode) {
+class Program
+{
+    private static unsafe void CheckSize<T>(int expected, ref int exitCode)
+    {
         var t = typeof(T);
         var actualSize = Marshal.SizeOf(t);
 
@@ -54,7 +50,8 @@ class Program {
 
     // https://bugzilla.xamarin.com/show_bug.cgi?id=18941
     // Marshal.SizeOf should never report 0, even for empty structs or structs with Size=0 attribute
-    public static int Main () {
+    public static int Main()
+    {
         int exitCode = 0;
 
         CheckSize<EmptyStruct>(1, ref exitCode);
@@ -70,27 +67,32 @@ class Program {
 
         var t = typeof(TestOffsets);
         var actualOffsets = (
-            from f in t.GetFields() 
+            from f in t.GetFields()
             select (name: f.Name, offset: Marshal.OffsetOf(t, f.Name).ToInt32())
         ).ToList();
 
-        var expectedOffsets = new [] {
+        var expectedOffsets = new[]
+        {
             (name: "A", offset: 0),
             (name: "B", offset: 4),
             (name: "C", offset: 5),
             (name: "D", offset: 9),
             (name: "E", offset: 10),
             (name: "F", offset: 14),
-            (name: "G", offset: 15)
+            (name: "G", offset: 15),
         };
 
-        if (!actualOffsets.SequenceEqual(expectedOffsets)) {
+        if (!actualOffsets.SequenceEqual(expectedOffsets))
+        {
             Console.WriteLine("Field offset mismatch:");
 
-            for (int i = 0; i < expectedOffsets.Length; i++) {
+            for (int i = 0; i < expectedOffsets.Length; i++)
+            {
                 var expected = expectedOffsets[i];
                 var actual = actualOffsets[i];
-                Console.WriteLine($"OffsetOf({t.Name}.{actual.name}) == {actual.offset}, expected OffsetOf({expected.name}) == {expected.offset}.");
+                Console.WriteLine(
+                    $"OffsetOf({t.Name}.{actual.name}) == {actual.offset}, expected OffsetOf({expected.name}) == {expected.offset}."
+                );
             }
         }
 

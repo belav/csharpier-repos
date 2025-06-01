@@ -10,8 +10,8 @@ namespace System.ServiceModel.Channels
     {
         public static bool IsDefined(ContextExchangeMechanism value)
         {
-            return value == ContextExchangeMechanism.ContextSoapHeader ||
-                value == ContextExchangeMechanism.HttpCookie;
+            return value == ContextExchangeMechanism.ContextSoapHeader
+                || value == ContextExchangeMechanism.HttpCookie;
         }
     }
 }

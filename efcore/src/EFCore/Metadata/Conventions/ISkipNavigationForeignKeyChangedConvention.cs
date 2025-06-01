@@ -22,5 +22,6 @@ public interface ISkipNavigationForeignKeyChangedConvention : IConvention
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionForeignKey? foreignKey,
         IConventionForeignKey? oldForeignKey,
-        IConventionContext<IConventionForeignKey> context);
+        IConventionContext<IConventionForeignKey> context
+    );
 }

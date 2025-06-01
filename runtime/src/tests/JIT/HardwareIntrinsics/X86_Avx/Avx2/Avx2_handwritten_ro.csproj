@@ -10,7 +10,6 @@
   <ItemGroup>
     <Compile Include="HandwrittenProgram.cs" />
     <Compile Include="..\..\X86\Shared\SimpleUnOpTest_DataTable.cs" />
-
     <Compile Include="BroadcastVector128ToVector256.cs" />
     <Compile Include="ConvertToVector256Int16.Byte.cs" />
     <Compile Include="ConvertToVector256Int16.SByte.cs" />

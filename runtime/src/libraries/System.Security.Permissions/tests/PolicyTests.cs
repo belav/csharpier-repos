@@ -19,10 +19,14 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void PolicyLevelCallMethods()
         {
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             NamedPermissionSet nps = new NamedPermissionSet("test");
             pl.AddNamedPermissionSet(nps);
-            nps = pl.ChangeNamedPermissionSet("test", new PermissionSet(new Permissions.PermissionState()));
+            nps = pl.ChangeNamedPermissionSet(
+                "test",
+                new PermissionSet(new Permissions.PermissionState())
+            );
 #pragma warning disable 618
             PolicyLevel.CreateAppDomainLevel();
 #pragma warning restore 618
@@ -47,7 +51,8 @@ namespace System.Security.Permissions.Tests
             bool equals = ps.Equals(ps2);
             int hash = ps.GetHashCode();
             SecurityElement se = new SecurityElement("");
-            PolicyLevel pl = (PolicyLevel)FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
+            PolicyLevel pl = (PolicyLevel)
+                FormatterServices.GetUninitializedObject(typeof(PolicyLevel));
             ps.FromXml(se);
             ps.FromXml(se, pl);
             se = ps.ToXml();

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,26 +30,30 @@ using System.Collections.Specialized;
 
 namespace System.Web.UI
 {
-	public sealed class CompiledBindableTemplateBuilder : IBindableTemplate
-	{
-		BuildTemplateMethod templateMethod;
-		ExtractTemplateValuesMethod extractMethod;
+    public sealed class CompiledBindableTemplateBuilder : IBindableTemplate
+    {
+        BuildTemplateMethod templateMethod;
+        ExtractTemplateValuesMethod extractMethod;
 
-		public CompiledBindableTemplateBuilder (BuildTemplateMethod buildTemplateMethod, ExtractTemplateValuesMethod extractTemplateValuesMethod)
-		{
-			this.templateMethod = buildTemplateMethod;
-			this.extractMethod = extractTemplateValuesMethod;
-		}
+        public CompiledBindableTemplateBuilder(
+            BuildTemplateMethod buildTemplateMethod,
+            ExtractTemplateValuesMethod extractTemplateValuesMethod
+        )
+        {
+            this.templateMethod = buildTemplateMethod;
+            this.extractMethod = extractTemplateValuesMethod;
+        }
 
-		public void InstantiateIn (Control container)
-		{
-			templateMethod (container);
-		}
-		
-		public IOrderedDictionary ExtractValues (Control container)
-		{
-			if (extractMethod == null) return null;
-			return extractMethod (container);
-		}
-	}
+        public void InstantiateIn(Control container)
+        {
+            templateMethod(container);
+        }
+
+        public IOrderedDictionary ExtractValues(Control container)
+        {
+            if (extractMethod == null)
+                return null;
+            return extractMethod(container);
+        }
+    }
 }

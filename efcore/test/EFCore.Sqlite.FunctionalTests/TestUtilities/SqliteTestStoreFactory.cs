@@ -7,18 +7,13 @@ public class SqliteTestStoreFactory : RelationalTestStoreFactory
 {
     public static SqliteTestStoreFactory Instance { get; } = new();
 
-    protected SqliteTestStoreFactory()
-    {
-    }
+    protected SqliteTestStoreFactory() { }
 
-    public override TestStore Create(string storeName)
-        => SqliteTestStore.Create(storeName);
+    public override TestStore Create(string storeName) => SqliteTestStore.Create(storeName);
 
-    public override TestStore GetOrCreate(string storeName)
-        => SqliteTestStore.GetOrCreate(storeName);
+    public override TestStore GetOrCreate(string storeName) =>
+        SqliteTestStore.GetOrCreate(storeName);
 
-    public override IServiceCollection AddProviderServices(IServiceCollection serviceCollection)
-        => serviceCollection
-            .AddEntityFrameworkSqlite()
-            .AddEntityFrameworkSqliteNetTopologySuite();
+    public override IServiceCollection AddProviderServices(IServiceCollection serviceCollection) =>
+        serviceCollection.AddEntityFrameworkSqlite().AddEntityFrameworkSqliteNetTopologySuite();
 }

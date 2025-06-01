@@ -21,8 +21,12 @@ namespace System.Web.Http.Controllers
         /// <param name="request">The HTTP request.</param>
         /// <param name="controllerDescriptor">The controller descriptor.</param>
         /// <param name="controller">The controller.</param>
-        public HttpControllerContext(HttpRequestContext requestContext, HttpRequestMessage request,
-            HttpControllerDescriptor controllerDescriptor, IHttpController controller)
+        public HttpControllerContext(
+            HttpRequestContext requestContext,
+            HttpRequestMessage request,
+            HttpControllerDescriptor controllerDescriptor,
+            IHttpController controller
+        )
         {
             if (requestContext == null)
             {
@@ -50,8 +54,11 @@ namespace System.Web.Http.Controllers
             _controller = controller;
         }
 
-        public HttpControllerContext(HttpConfiguration configuration, IHttpRouteData routeData,
-            HttpRequestMessage request)
+        public HttpControllerContext(
+            HttpConfiguration configuration,
+            IHttpRouteData routeData,
+            HttpRequestMessage request
+        )
         {
             if (configuration == null)
             {
@@ -71,7 +78,7 @@ namespace System.Web.Http.Controllers
             _requestContext = new HttpRequestContext
             {
                 Configuration = configuration,
-                RouteData = routeData
+                RouteData = routeData,
             };
             _request = request;
         }
@@ -82,17 +89,14 @@ namespace System.Web.Http.Controllers
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
         public HttpControllerContext()
         {
-            // Note: This constructor is also used by a FormDataCollectionExtensions where we attempt to create a 
+            // Note: This constructor is also used by a FormDataCollectionExtensions where we attempt to create a
             // controller context with incomplete request context.
             _requestContext = new HttpRequestContext();
         }
 
         public HttpConfiguration Configuration
         {
-            get
-            {
-                return _requestContext.Configuration;
-            }
+            get { return _requestContext.Configuration; }
             set
             {
                 if (value == null)

@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-using System.Diagnostics.Metrics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
 using System.Runtime.ExceptionServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
@@ -37,14 +37,17 @@ internal sealed class ExceptionHandlerMiddlewareImpl
         DiagnosticListener diagnosticListener,
         IEnumerable<IExceptionHandler> exceptionHandlers,
         IMeterFactory meterFactory,
-        IProblemDetailsService? problemDetailsService = null)
+        IProblemDetailsService? problemDetailsService = null
+    )
     {
         _next = next;
         _options = options.Value;
         _logger = loggerFactory.CreateLogger<ExceptionHandlerMiddleware>();
         _clearCacheHeadersDelegate = ClearCacheHeaders;
         _diagnosticListener = diagnosticListener;
-        _exceptionHandlers = exceptionHandlers as IExceptionHandler[] ?? new List<IExceptionHandler>(exceptionHandlers).ToArray();
+        _exceptionHandlers =
+            exceptionHandlers as IExceptionHandler[]
+            ?? new List<IExceptionHandler>(exceptionHandlers).ToArray();
         _metrics = new DiagnosticsMetrics(meterFactory);
         _problemDetailsService = problemDetailsService;
 
@@ -54,7 +57,9 @@ internal sealed class ExceptionHandlerMiddlewareImpl
             {
                 if (problemDetailsService == null)
                 {
-                    throw new InvalidOperationException(Resources.ExceptionHandlerOptions_NotConfiguredCorrectly);
+                    throw new InvalidOperationException(
+                        Resources.ExceptionHandlerOptions_NotConfiguredCorrectly
+                    );
                 }
             }
             else
@@ -90,7 +95,11 @@ internal sealed class ExceptionHandlerMiddlewareImpl
 
         return HandleException(context, edi);
 
-        static async Task Awaited(ExceptionHandlerMiddlewareImpl middleware, HttpContext context, Task task)
+        static async Task Awaited(
+            ExceptionHandlerMiddlewareImpl middleware,
+            HttpContext context,
+            Task task
+        )
         {
             ExceptionDispatchInfo? edi = null;
             try
@@ -114,7 +123,12 @@ internal sealed class ExceptionHandlerMiddlewareImpl
     {
         var exceptionName = edi.SourceException.GetType().FullName!;
 
-        if ((edi.SourceException is OperationCanceledException || edi.SourceException is IOException) && context.RequestAborted.IsCancellationRequested)
+        if (
+            (
+                edi.SourceException is OperationCanceledException
+                || edi.SourceException is IOException
+            ) && context.RequestAborted.IsCancellationRequested
+        )
         {
             _logger.RequestAbortedException();
 
@@ -144,7 +158,9 @@ internal sealed class ExceptionHandlerMiddlewareImpl
             context.Request.Path = _options.ExceptionHandlingPath;
         }
         var oldScope = _options.CreateScopeForErrors ? context.RequestServices : null;
-        using var scope = _options.CreateScopeForErrors ? context.RequestServices.GetRequiredService<IServiceScopeFactory>().CreateScope() : null;
+        using var scope = _options.CreateScopeForErrors
+            ? context.RequestServices.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            : null;
 
         try
         {
@@ -158,7 +174,7 @@ internal sealed class ExceptionHandlerMiddlewareImpl
                 Error = edi.SourceException,
                 Path = originalPath.Value!,
                 Endpoint = context.GetEndpoint(),
-                RouteValues = context.Features.Get<IRouteValuesFeature>()?.RouteValues
+                RouteValues = context.Features.Get<IRouteValuesFeature>()?.RouteValues,
             };
 
             ClearHttpContext(context);
@@ -172,7 +188,11 @@ internal sealed class ExceptionHandlerMiddlewareImpl
             var handled = false;
             foreach (var exceptionHandler in _exceptionHandlers)
             {
-                handled = await exceptionHandler.TryHandleAsync(context, edi.SourceException, context.RequestAborted);
+                handled = await exceptionHandler.TryHandleAsync(
+                    context,
+                    edi.SourceException,
+                    context.RequestAborted
+                );
                 if (handled)
                 {
                     handler = exceptionHandler.GetType().FullName;
@@ -188,13 +208,15 @@ internal sealed class ExceptionHandlerMiddlewareImpl
                 }
                 else
                 {
-                    handled = await _problemDetailsService!.TryWriteAsync(new()
-                    {
-                        HttpContext = context,
-                        AdditionalMetadata = exceptionHandlerFeature.Endpoint?.Metadata,
-                        ProblemDetails = { Status = DefaultStatusCode },
-                        Exception = edi.SourceException,
-                    });
+                    handled = await _problemDetailsService!.TryWriteAsync(
+                        new()
+                        {
+                            HttpContext = context,
+                            AdditionalMetadata = exceptionHandlerFeature.Endpoint?.Metadata,
+                            ProblemDetails = { Status = DefaultStatusCode },
+                            Exception = edi.SourceException,
+                        }
+                    );
                     if (handled)
                     {
                         handler = _problemDetailsService.GetType().FullName;
@@ -202,21 +224,35 @@ internal sealed class ExceptionHandlerMiddlewareImpl
                 }
             }
             // If the response has already started, assume exception handler was successful.
-            if (context.Response.HasStarted || handled || context.Response.StatusCode != StatusCodes.Status404NotFound || _options.AllowStatusCode404Response)
+            if (
+                context.Response.HasStarted
+                || handled
+                || context.Response.StatusCode != StatusCodes.Status404NotFound
+                || _options.AllowStatusCode404Response
+            )
             {
                 const string eventName = "Microsoft.AspNetCore.Diagnostics.HandledException";
                 if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled(eventName))
                 {
-                    WriteDiagnosticEvent(_diagnosticListener, eventName, new { httpContext = context, exception = edi.SourceException });
+                    WriteDiagnosticEvent(
+                        _diagnosticListener,
+                        eventName,
+                        new { httpContext = context, exception = edi.SourceException }
+                    );
                 }
 
                 _metrics.RequestException(exceptionName, ExceptionResult.Handled, handler);
                 return;
             }
 
-            edi = ExceptionDispatchInfo.Capture(new InvalidOperationException($"The exception handler configured on {nameof(ExceptionHandlerOptions)} produced a 404 status response. " +
-                $"This {nameof(InvalidOperationException)} containing the original exception was thrown since this is often due to a misconfigured {nameof(ExceptionHandlerOptions.ExceptionHandlingPath)}. " +
-                $"If the exception handler is expected to return 404 status responses then set {nameof(ExceptionHandlerOptions.AllowStatusCode404Response)} to true.", edi.SourceException));
+            edi = ExceptionDispatchInfo.Capture(
+                new InvalidOperationException(
+                    $"The exception handler configured on {nameof(ExceptionHandlerOptions)} produced a 404 status response. "
+                        + $"This {nameof(InvalidOperationException)} containing the original exception was thrown since this is often due to a misconfigured {nameof(ExceptionHandlerOptions.ExceptionHandlingPath)}. "
+                        + $"If the exception handler is expected to return 404 status responses then set {nameof(ExceptionHandlerOptions.AllowStatusCode404Response)} to true.",
+                    edi.SourceException
+                )
+            );
         }
         catch (Exception ex2)
         {
@@ -235,10 +271,15 @@ internal sealed class ExceptionHandlerMiddlewareImpl
         _metrics.RequestException(exceptionName, ExceptionResult.Unhandled, handler: null);
         edi.Throw(); // Re-throw wrapped exception or the original if we couldn't handle it
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026",
-            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency.")]
-        static void WriteDiagnosticEvent<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TValue>(DiagnosticSource diagnosticSource, string name, TValue value)
-            => diagnosticSource.Write(name, value);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026",
+            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency."
+        )]
+        static void WriteDiagnosticEvent<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] TValue
+        >(DiagnosticSource diagnosticSource, string name, TValue value) =>
+            diagnosticSource.Write(name, value);
     }
 
     private static void ClearHttpContext(HttpContext context)

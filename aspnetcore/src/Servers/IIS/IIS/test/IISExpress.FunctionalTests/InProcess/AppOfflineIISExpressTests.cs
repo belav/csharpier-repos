@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
@@ -14,9 +14,8 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class AppOfflineIISExpressTests : IISFunctionalTestBase
 {
-    public AppOfflineIISExpressTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public AppOfflineIISExpressTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task AppOfflineDroppedWhileSiteStarting_SiteShutsDown_InProcess()
@@ -55,7 +54,11 @@ public class AppOfflineIISExpressTests : IISFunctionalTestBase
                 {
                     // For IISExpress, we need to catch the exception because IISExpress will not restart a process if it crashed.
                     // RemoveAppOffline will fail due to a bad request exception as the server is down.
-                    Assert.Contains(TestSink.Writes, context => context.Message.Contains("Drained all requests, notifying managed."));
+                    Assert.Contains(
+                        TestSink.Writes,
+                        context =>
+                            context.Message.Contains("Drained all requests, notifying managed.")
+                    );
                     deploymentResult.AssertWorkerProcessStop();
                     return;
                 }

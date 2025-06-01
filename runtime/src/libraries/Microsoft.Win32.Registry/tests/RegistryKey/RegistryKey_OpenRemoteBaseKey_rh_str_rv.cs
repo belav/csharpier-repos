@@ -13,10 +13,18 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed machine name is null
-            Assert.Throws<ArgumentNullException>(() => RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, null, RegistryView.Default));
+            Assert.Throws<ArgumentNullException>(() =>
+                RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, null, RegistryView.Default)
+            );
 
             // Should throw if remote machine does not exist
-            Assert.Throws<IOException>(() => RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, "Non-Existing-Machine", RegistryView.Default));
+            Assert.Throws<IOException>(() =>
+                RegistryKey.OpenRemoteBaseKey(
+                    RegistryHive.LocalMachine,
+                    "Non-Existing-Machine",
+                    RegistryView.Default
+                )
+            );
         }
     }
 }

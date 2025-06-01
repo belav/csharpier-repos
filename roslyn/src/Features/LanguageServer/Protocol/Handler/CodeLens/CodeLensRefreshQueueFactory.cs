@@ -22,19 +22,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeLens
         public CodeLensRefreshQueueFactory(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
-            IGlobalOptionService globalOptionService)
+            IGlobalOptionService globalOptionService
+        )
         {
             _asyncListenerProvider = asynchronousOperationListenerProvider;
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
             _globalOptionService = globalOptionService;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
-            var notificationManager = lspServices.GetRequiredService<IClientLanguageServerManager>();
+            var notificationManager =
+                lspServices.GetRequiredService<IClientLanguageServerManager>();
             var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
 
-            return new CodeLensRefreshQueue(_asyncListenerProvider, _lspWorkspaceRegistrationService, lspWorkspaceManager, notificationManager, _globalOptionService);
+            return new CodeLensRefreshQueue(
+                _asyncListenerProvider,
+                _lspWorkspaceRegistrationService,
+                lspWorkspaceManager,
+                notificationManager,
+                _globalOptionService
+            );
         }
     }
 }

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -9,13 +8,16 @@
     <EnableDefaultItems>true</EnableDefaultItems>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(LibrariesProjectRoot)Common\tests\TestUtilities.Unicode\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="System.Private.Runtime.UnicodeData" Version="$(SystemPrivateRuntimeUnicodeDataVersion)" ExcludeAssets="contentFiles" GeneratePathProperty="true" />
+    <PackageReference
+      Include="System.Private.Runtime.UnicodeData"
+      Version="$(SystemPrivateRuntimeUnicodeDataVersion)"
+      ExcludeAssets="contentFiles"
+      GeneratePathProperty="true"
+    />
     <EmbeddedResource Include="$(PkgSystem_Private_Runtime_UnicodeData)\contentFiles\any\any\$(UnicodeUcdVersion).0\ucd\CaseFolding.txt">
       <Link>UnicodeData\CaseFolding.txt</Link>
       <LogicalName>CaseFolding.txt</LogicalName>
@@ -45,11 +47,12 @@
       <LogicalName>emoji-data.txt</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" Version="$(MicrosoftDotNetXUnitExtensionsVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.XUnitExtensions"
+      Version="$(MicrosoftDotNetXUnitExtensionsVersion)"
+    />
     <PackageReference Include="xunit.core" Version="$(XUnitVersion)" ExcludeAssets="build" />
     <PackageReference Include="xunit.assert" Version="$(XUnitVersion)" />
   </ItemGroup>
-
 </Project>

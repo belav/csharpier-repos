@@ -13,7 +13,7 @@ public class Test_LoadType
     public static void TestEntryPoint()
     {
         S s = CReloc5<char>.s;
-            
+
         Console.WriteLine("PASS");
     }
 }

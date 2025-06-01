@@ -32,7 +32,9 @@ public class ContentResult : ActionResult, IStatusCodeActionResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<ContentResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<ContentResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

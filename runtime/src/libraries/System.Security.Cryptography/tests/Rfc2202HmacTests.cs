@@ -6,7 +6,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Tests
 {
-    public abstract class Rfc2202HmacTests<THmacTrait> : HmacTests<THmacTrait> where THmacTrait : IHmacTrait
+    public abstract class Rfc2202HmacTests<THmacTrait> : HmacTests<THmacTrait>
+        where THmacTrait : IHmacTrait
     {
         private static readonly byte[][] s_testData2202 =
         {
@@ -17,15 +18,15 @@ namespace System.Security.Cryptography.Tests
             ByteUtils.RepeatByte(0xcd, 50),
             ByteUtils.AsciiBytes("Test With Truncation"),
             ByteUtils.AsciiBytes("Test Using Larger Than Block-Size Key - Hash Key First"),
-            ByteUtils.AsciiBytes("Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"),
+            ByteUtils.AsciiBytes(
+                "Test Using Larger Than Block-Size Key and Larger Than One Block-Size Data"
+            ),
         };
 
         // The keys for test cases 1, 3, and 5 for RFC2202 are sized to match the
         // algorithm (16 bytes for MD5, 20 for SHA-1), so they need to be provided by
         // the more derived type.
-        protected Rfc2202HmacTests(byte[][] testKeys, byte[][] testMacs) :
-            base(testKeys, s_testData2202, testMacs)
-        {
-        }
+        protected Rfc2202HmacTests(byte[][] testKeys, byte[][] testMacs)
+            : base(testKeys, s_testData2202, testMacs) { }
     }
 }

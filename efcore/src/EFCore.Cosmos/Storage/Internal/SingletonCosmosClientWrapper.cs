@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Storage.Internal;
 /// </summary>
 public class SingletonCosmosClientWrapper : ISingletonCosmosClientWrapper
 {
-    private static readonly string UserAgent = " Microsoft.EntityFrameworkCore.Cosmos/" + ProductInfo.GetVersion();
+    private static readonly string UserAgent =
+        " Microsoft.EntityFrameworkCore.Cosmos/" + ProductInfo.GetVersion();
     private readonly CosmosClientOptions _options;
     private readonly string? _endpoint;
     private readonly string? _key;
@@ -34,7 +35,11 @@ public class SingletonCosmosClientWrapper : ISingletonCosmosClientWrapper
         _key = options.AccountKey;
         _connectionString = options.ConnectionString;
         _tokenCredential = options.TokenCredential;
-        var configuration = new CosmosClientOptions { ApplicationName = UserAgent, Serializer = new JsonCosmosSerializer() };
+        var configuration = new CosmosClientOptions
+        {
+            ApplicationName = UserAgent,
+            Serializer = new JsonCosmosSerializer(),
+        };
 
         if (options.Region != null)
         {
@@ -78,7 +83,9 @@ public class SingletonCosmosClientWrapper : ISingletonCosmosClientWrapper
 
         if (options.GatewayModeMaxConnectionLimit != null)
         {
-            configuration.GatewayModeMaxConnectionLimit = options.GatewayModeMaxConnectionLimit.Value;
+            configuration.GatewayModeMaxConnectionLimit = options
+                .GatewayModeMaxConnectionLimit
+                .Value;
         }
 
         if (options.MaxTcpConnectionsPerEndpoint != null)
@@ -105,8 +112,8 @@ public class SingletonCosmosClientWrapper : ISingletonCosmosClientWrapper
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual CosmosClient Client
-        => _client ??= string.IsNullOrEmpty(_connectionString)
+    public virtual CosmosClient Client =>
+        _client ??= string.IsNullOrEmpty(_connectionString)
             ? _tokenCredential == null
                 ? new CosmosClient(_endpoint, _key, _options)
                 : new CosmosClient(_endpoint, _tokenCredential, _options)

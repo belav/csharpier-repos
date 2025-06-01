@@ -5,10 +5,10 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Runtime;
-    using System.Diagnostics.CodeAnalysis;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -16,31 +16,19 @@ namespace System.Activities.Statements
     {
         internal const string PropertyName = "System.Compensation.CompensationToken";
         internal const long RootCompensationId = 0;
-            
+
         internal CompensationToken(CompensationTokenData tokenData)
         {
             this.CompensationId = tokenData.CompensationId;
         }
-        
-        [DataMember(EmitDefaultValue = false)]
-        internal long CompensationId
-        {
-            get;
-            set;
-        }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool CompensateCalled
-        {
-            get;
-            set;
-        }
+        internal long CompensationId { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool ConfirmCalled
-        {
-            get;
-            set;
-        }
+        internal bool CompensateCalled { get; set; }
+
+        [DataMember(EmitDefaultValue = false)]
+        internal bool ConfirmCalled { get; set; }
     }
 }

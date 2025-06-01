@@ -1,39 +1,39 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <PropertyGroup Condition="'$(RuntimeIdentifier)' != '' and '$(NETCoreSdkPortableRuntimeIdentifier)' != ''">
     <!-- Define the name of the runtime specific compiler package to import -->
     <_hostOS>$(NETCoreSdkPortableRuntimeIdentifier.SubString(0, $(NETCoreSdkPortableRuntimeIdentifier.LastIndexOf('-'))))</_hostOS>
-
     <_originalTargetOS>$(RuntimeIdentifier.SubString(0, $(RuntimeIdentifier.LastIndexOf('-'))))</_originalTargetOS>
     <_indexOfPeriod>$(_originalTargetOS.IndexOf('.'))</_indexOfPeriod>
-    <_originalTargetOS Condition="'$(_indexOfPeriod)' &gt; -1">$(_originalTargetOS.SubString(0, $(_indexOfPeriod)))</_originalTargetOS>
+    <_originalTargetOS Condition="'$(_indexOfPeriod)' &gt; -1"
+      >$(_originalTargetOS.SubString(0, $(_indexOfPeriod)))</_originalTargetOS
+    >
     <_originalTargetOS Condition="$(_originalTargetOS.StartsWith('win'))">win</_originalTargetOS>
-
     <!-- On non-Windows, determine _hostArchitecture from NETCoreSdkPortableRuntimeIdentifier -->
-    <_hostArchitecture Condition="'$(OS)' != 'Windows_NT'">$(NETCoreSdkPortableRuntimeIdentifier.SubString($([MSBuild]::Add($(NETCoreSdkPortableRuntimeIdentifier.LastIndexOf('-')), 1))))</_hostArchitecture>
+    <_hostArchitecture Condition="'$(OS)' != 'Windows_NT'"
+      >$(NETCoreSdkPortableRuntimeIdentifier.SubString($([MSBuild]::Add($(NETCoreSdkPortableRuntimeIdentifier.LastIndexOf('-')), 1))))</_hostArchitecture
+    >
     <!-- On Windows, default to host that matches OS architecture on Windows. It allows compilation using msbuild.exe that is x86 by default -->
-    <_hostArchitecture Condition="'$(OS)' == 'Windows_NT'">$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</_hostArchitecture>
-
+    <_hostArchitecture Condition="'$(OS)' == 'Windows_NT'"
+      >$([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant)</_hostArchitecture
+    >
     <!-- Determine _targetArchitecture from RuntimeIdentifier -->
     <_targetArchitecture>$(RuntimeIdentifier.SubString($([MSBuild]::Add($(RuntimeIdentifier.LastIndexOf('-')), 1))))</_targetArchitecture>
-
     <_hostPackageName>runtime.$(_hostOS)-$(_hostArchitecture).Microsoft.DotNet.ILCompiler</_hostPackageName>
     <_targetPackageName>runtime.$(_originalTargetOS)-$(_targetArchitecture).Microsoft.DotNet.ILCompiler</_targetPackageName>
-
     <!-- Treat linux-musl and linux-bionic etc. as linux -->
     <_targetOS>$(_originalTargetOS)</_targetOS>
     <_linuxToken>linux-</_linuxToken>
-    <_linuxLibcFlavor Condition="$(_targetOS.StartsWith($(_linuxToken)))">$(_targetOS.SubString($(_linuxToken.Length)))</_linuxLibcFlavor>
+    <_linuxLibcFlavor Condition="$(_targetOS.StartsWith($(_linuxToken)))"
+      >$(_targetOS.SubString($(_linuxToken.Length)))</_linuxLibcFlavor
+    >
     <_targetOS Condition="$(_targetOS.StartsWith($(_linuxToken)))">linux</_targetOS>
   </PropertyGroup>
-
   <PropertyGroup>
     <!-- If the NativeAOT toolchain is being consumed via package, runtime-specific properties must be set before compilation can proceed -->
     <ImportRuntimeIlcPackageTargetDependsOn>RunResolvePackageDependencies</ImportRuntimeIlcPackageTargetDependsOn>
     <IlcSetupPropertiesDependsOn>ImportRuntimeIlcPackageTarget</IlcSetupPropertiesDependsOn>
     <IlcDynamicBuildPropertyDependencies>SetupProperties</IlcDynamicBuildPropertyDependencies>
   </PropertyGroup>
-
   <!-- Update the KnownILCompilerPack version to match the PackageReference, in case there's an explicit reference to a specific version. -->
   <!-- The _IlcReferencedAsPackage check is only there for using live ILCompiler targets (not a supported scenario outside of dotnet/runtime). -->
   <ItemGroup Condition="'$(_IlcReferencedAsPackage)' != 'false'">
@@ -41,26 +41,39 @@
       <ILCompilerPackVersion>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName($([System.IO.Path]::GetDirectoryName($(ILCompilerTargetsPath)))))))</ILCompilerPackVersion>
     </KnownILCompilerPack>
   </ItemGroup>
-
   <!-- Generate a warning if the user added an explicit PackageReference  -->
-  <Target Name="GenerateILCompilerExplicitPackageReferenceWarning" Condition="'$(SuppressGenerateILCompilerExplicitPackageReferenceWarning)' == '' and '$(ILCompilerTargetsPath)' != ''"
-      BeforeTargets="ImportRuntimeIlcPackageTarget">
-    <Warning Condition="'%(PackageReference.Identity)' == 'Microsoft.DotNet.ILCompiler' And '%(PackageReference.IsImplicitlyDefined)' != 'true'"
-             Text="Delete explicit 'Microsoft.DotNet.ILCompiler' package reference in your project file to avoid versioning problems." />
+  <Target
+    Name="GenerateILCompilerExplicitPackageReferenceWarning"
+    Condition="'$(SuppressGenerateILCompilerExplicitPackageReferenceWarning)' == '' and '$(ILCompilerTargetsPath)' != ''"
+    BeforeTargets="ImportRuntimeIlcPackageTarget"
+  >
+    <Warning
+      Condition="'%(PackageReference.Identity)' == 'Microsoft.DotNet.ILCompiler' And '%(PackageReference.IsImplicitlyDefined)' != 'true'"
+      Text="Delete explicit 'Microsoft.DotNet.ILCompiler' package reference in your project file to avoid versioning problems."
+    />
   </Target>
-
   <!-- Locate the runtime package according to the current target runtime -->
-  <Target Name="ImportRuntimeIlcPackageTarget" Condition="'$(BuildingFrameworkLibrary)' != 'true' and '$(PublishAot)' == 'true'" DependsOnTargets="$(ImportRuntimeIlcPackageTargetDependsOn)" BeforeTargets="Publish">
-    <Error Condition="'@(ResolvedILCompilerPack)' == ''" Text="The ResolvedILCompilerPack ItemGroup is required for target ImportRuntimeIlcPackageTarget" />
-
+  <Target
+    Name="ImportRuntimeIlcPackageTarget"
+    Condition="'$(BuildingFrameworkLibrary)' != 'true' and '$(PublishAot)' == 'true'"
+    DependsOnTargets="$(ImportRuntimeIlcPackageTargetDependsOn)"
+    BeforeTargets="Publish"
+  >
+    <Error
+      Condition="'@(ResolvedILCompilerPack)' == ''"
+      Text="The ResolvedILCompilerPack ItemGroup is required for target ImportRuntimeIlcPackageTarget"
+    />
     <PropertyGroup>
-      <IlcHostPackagePath Condition="'@(ResolvedILCompilerPack)' == '$(_hostPackageName)'">@(ResolvedILCompilerPack->'%(PackageDirectory)')</IlcHostPackagePath>
-      <RuntimePackagePath Condition="'@(ResolvedTargetILCompilerPack)' == '$(_targetPackageName)'">@(ResolvedTargetILCompilerPack->'%(PackageDirectory)')</RuntimePackagePath>
-      <RuntimePackagePath Condition="'@(ResolvedTargetILCompilerPack)' == ''">@(ResolvedILCompilerPack->'%(PackageDirectory)')</RuntimePackagePath>
+      <IlcHostPackagePath Condition="'@(ResolvedILCompilerPack)' == '$(_hostPackageName)'"
+        >@(ResolvedILCompilerPack-&gt;'%(PackageDirectory)')</IlcHostPackagePath
+      >
+      <RuntimePackagePath Condition="'@(ResolvedTargetILCompilerPack)' == '$(_targetPackageName)'"
+        >@(ResolvedTargetILCompilerPack-&gt;'%(PackageDirectory)')</RuntimePackagePath
+      >
+      <RuntimePackagePath Condition="'@(ResolvedTargetILCompilerPack)' == ''"
+        >@(ResolvedILCompilerPack-&gt;'%(PackageDirectory)')</RuntimePackagePath
+      >
     </PropertyGroup>
-
   </Target>
-
   <Import Project="$(MSBuildThisFileDirectory)\Microsoft.NETCore.Native.targets" />
-
 </Project>

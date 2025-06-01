@@ -33,7 +33,8 @@ public static class ModelExplorerExtensions
         if (modelExplorer.Metadata.SimpleDisplayProperty != null)
         {
             var propertyExplorer = modelExplorer.GetExplorerForProperty(
-                modelExplorer.Metadata.SimpleDisplayProperty);
+                modelExplorer.Metadata.SimpleDisplayProperty
+            );
             if (propertyExplorer?.Model != null)
             {
                 return propertyExplorer.Model.ToString();
@@ -48,7 +49,9 @@ public static class ModelExplorerExtensions
         if (modelExplorer.Metadata.IsEnum && modelExplorer.Model is Enum modelEnum)
         {
             var enumStringValue = modelEnum.ToString("d");
-            var enumGroupedDisplayNamesAndValues = modelExplorer.Metadata.EnumGroupedDisplayNamesAndValues;
+            var enumGroupedDisplayNamesAndValues = modelExplorer
+                .Metadata
+                .EnumGroupedDisplayNamesAndValues;
 
             Debug.Assert(enumGroupedDisplayNamesAndValues != null);
 

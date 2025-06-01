@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core web socket middleware for use on top of opaque servers.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -10,17 +9,14 @@
     <IsPackable>false</IsPackable>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Http" />
     <Reference Include="Microsoft.Extensions.Logging.Abstractions" />
     <Reference Include="Microsoft.Extensions.Options" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ValueStringBuilder\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.WebSockets.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.WebSockets.MicroBenchmarks" />

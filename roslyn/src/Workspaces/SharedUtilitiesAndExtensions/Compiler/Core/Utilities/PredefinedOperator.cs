@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
         Addition = 1,
         BitwiseAnd = 1 << 1,
         BitwiseOr = 1 << 2,
-        Complement = 1 << 3,  // ~ or ! in C#, 'Not' in VB.
+        Complement = 1 << 3, // ~ or ! in C#, 'Not' in VB.
         Concatenate = 1 << 4,
         Decrement = 1 << 5,
         Division = 1 << 6,

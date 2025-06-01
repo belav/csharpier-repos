@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,80 +28,98 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace SystemWebTestShim {
-	using Orig = System.Web.UI.Adapters;
+namespace SystemWebTestShim
+{
+    using Orig = System.Web.UI.Adapters;
 
-	public class PageAdapter : Orig.PageAdapter {
+    public class PageAdapter : Orig.PageAdapter
+    {
 #if TARGET_DOTNET
-		public PageAdapter (Page p) : base () { }
+        public PageAdapter(Page p)
+            : base() { }
 #else
-		public PageAdapter (Page p) : base (p) {}
+        public PageAdapter(Page p)
+            : base(p) { }
 #endif
-	}
+    }
 }
 
-namespace SystemWebTestShim {
-	using Orig = System.Web.UI.WebControls.Adapters;
+namespace SystemWebTestShim
+{
+    using Orig = System.Web.UI.WebControls.Adapters;
 
-	public class DataBoundControlAdapter : Orig.DataBoundControlAdapter {
+    public class DataBoundControlAdapter : Orig.DataBoundControlAdapter
+    {
 #if TARGET_DOTNET
-		public DataBoundControlAdapter (DataBoundControl c) : base () { }
+        public DataBoundControlAdapter(DataBoundControl c)
+            : base() { }
 #else
-		public DataBoundControlAdapter (DataBoundControl c) : base (c) {}
+        public DataBoundControlAdapter(DataBoundControl c)
+            : base(c) { }
 #endif
 
-		public new void PerformDataBinding (IEnumerable data)
-		{
-			base.PerformDataBinding (data);
-		}
-	}
+        public new void PerformDataBinding(IEnumerable data)
+        {
+            base.PerformDataBinding(data);
+        }
+    }
 
-	public class HierarchicalDataBoundControlAdapter : Orig.HierarchicalDataBoundControlAdapter {
+    public class HierarchicalDataBoundControlAdapter : Orig.HierarchicalDataBoundControlAdapter
+    {
 #if TARGET_DOTNET
-		public HierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl h) : base () { }
+        public HierarchicalDataBoundControlAdapter(HierarchicalDataBoundControl h)
+            : base() { }
 #else
-		public HierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl h) : base (h) {}
+        public HierarchicalDataBoundControlAdapter(HierarchicalDataBoundControl h)
+            : base(h) { }
 #endif
 
-		public new void PerformDataBinding ()
-		{
-			base.PerformDataBinding ();
-		}
-	}
+        public new void PerformDataBinding()
+        {
+            base.PerformDataBinding();
+        }
+    }
 
-	public class WebControlAdapter : Orig.WebControlAdapter {
+    public class WebControlAdapter : Orig.WebControlAdapter
+    {
 #if TARGET_DOTNET
-		public WebControlAdapter (WebControl c) : base () {}
+        public WebControlAdapter(WebControl c)
+            : base() { }
 #else
-		public WebControlAdapter (WebControl c) : base (c) {}
+        public WebControlAdapter(WebControl c)
+            : base(c) { }
 #endif
-	}
+    }
 
-	public class MenuAdapter : Orig.MenuAdapter {
+    public class MenuAdapter : Orig.MenuAdapter
+    {
 #if TARGET_DOTNET
-		public MenuAdapter (Menu c) : base () {}
+        public MenuAdapter(Menu c)
+            : base() { }
 #else
-		public MenuAdapter (Menu c) : base (c) {}
+        public MenuAdapter(Menu c)
+            : base(c) { }
 #endif
-	}
+    }
 
-	public class HideDisabledControlAdapter : Orig.HideDisabledControlAdapter {
+    public class HideDisabledControlAdapter : Orig.HideDisabledControlAdapter
+    {
 #if TARGET_DOTNET
-		public HideDisabledControlAdapter (WebControl c) : base () { }
+        public HideDisabledControlAdapter(WebControl c)
+            : base() { }
 #else
-		public HideDisabledControlAdapter (WebControl c) : base (c) {}
+        public HideDisabledControlAdapter(WebControl c)
+            : base(c) { }
 #endif
 
-		public new void Render (HtmlTextWriter w)
-		{
-			base.Render (w);
-		}
-	}
+        public new void Render(HtmlTextWriter w)
+        {
+            base.Render(w);
+        }
+    }
 }
-

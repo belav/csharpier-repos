@@ -1,10 +1,10 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
-using System.Linq;
-using Xunit;
 using System.CommandLine.Rendering.Views;
+using System.Linq;
+using FluentAssertions;
+using Xunit;
 
 namespace System.CommandLine.Rendering.Tests
 {
@@ -15,10 +15,7 @@ namespace System.CommandLine.Rendering.Tests
 
         public ViewWrappingTests()
         {
-            _terminal = new TestTerminal
-                       {
-                           Width = 150
-                       };
+            _terminal = new TestTerminal { Width = 150 };
 
             consoleRenderer = new ConsoleRenderer(_terminal);
         }
@@ -30,18 +27,16 @@ namespace System.CommandLine.Rendering.Tests
 
             var view = new ContentView(text);
 
-            view.Render(consoleRenderer,
-                new Region(0, 0, 5, 2));
+            view.Render(consoleRenderer, new Region(0, 0, 5, 2));
 
-            _terminal.RenderOperations()
-                    .Select(l => l.Text)
-                    .Should()
-                    .BeEquivalentTo(
-                        new[] {
-                            "1 1 1",
-                            "2 2  "
-                        },
-                        options => options.WithStrictOrdering());
+            _terminal
+                .RenderOperations()
+                .Select(l => l.Text)
+                .Should()
+                .BeEquivalentTo(
+                    new[] { "1 1 1", "2 2  " },
+                    options => options.WithStrictOrdering()
+                );
         }
     }
 }

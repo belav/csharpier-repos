@@ -9,6 +9,6 @@ namespace System.Web.Mvc
         Hidden,
         Password,
         Radio,
-        Text
+        Text,
     }
 }

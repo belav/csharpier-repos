@@ -5,9 +5,9 @@
 #nullable disable
 
 using System;
-using System.Runtime.InteropServices;
-using System.Reflection;
 using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.DiaSymReader
 {
@@ -26,8 +26,8 @@ namespace Microsoft.DiaSymReader
 
         public override int GetTokenFromSig(byte* voidPointerSig, int byteCountSig)
         {
-            // Only used when building constant signature. 
-            // We trick SymWriter into embedding NIL token into the PDB if 
+            // Only used when building constant signature.
+            // We trick SymWriter into embedding NIL token into the PDB if
             // we don't have a real signature token matching the constant type.
             return 0x11000000;
         }
@@ -38,11 +38,19 @@ namespace Microsoft.DiaSymReader
             int qualifiedNameBufferLength,
             [Out] int* qualifiedNameLength,
             [Out] TypeAttributes* attributes,
-            [Out] int* baseType)
+            [Out] int* baseType
+        )
         {
             Debug.Assert(baseType == null);
 
-            if (!_metadataProvider.TryGetTypeDefinitionInfo(typeDef, out var namespaceName, out var typeName, out var attrib))
+            if (
+                !_metadataProvider.TryGetTypeDefinitionInfo(
+                    typeDef,
+                    out var namespaceName,
+                    out var typeName,
+                    out var attrib
+                )
+            )
             {
                 return HResult.E_INVALIDARG;
             }
@@ -54,7 +62,8 @@ namespace Microsoft.DiaSymReader
                     qualifiedNameBufferLength,
                     qualifiedNameLength,
                     namespaceName,
-                    typeName);
+                    typeName
+                );
             }
 
             if (attributes != null)
@@ -70,12 +79,14 @@ namespace Microsoft.DiaSymReader
             [Out] int* resolutionScope, // ModuleRef or AssemblyRef
             [Out] char* qualifiedName,
             int qualifiedNameBufferLength,
-            [Out] int* qualifiedNameLength)
-            => throw new NotImplementedException();
+            [Out] int* qualifiedNameLength
+        ) => throw new NotImplementedException();
 
         public override int GetNestedClassProps(int nestedClass, out int enclosingClass)
         {
-            return _metadataProvider.TryGetEnclosingType(nestedClass, out enclosingClass) ? HResult.S_OK : HResult.E_FAIL;
+            return _metadataProvider.TryGetEnclosingType(nestedClass, out enclosingClass)
+                ? HResult.S_OK
+                : HResult.E_FAIL;
         }
 
         // The only purpose of this method is to get type name of the method and declaring type token (opaque for SymWriter), everything else is ignored by the SymWriter.
@@ -91,7 +102,8 @@ namespace Microsoft.DiaSymReader
             [Out] byte** signature,
             [Out] int* signatureLength,
             [Out] int* relativeVirtualAddress,
-            [Out] MethodImplAttributes* implAttributes)
+            [Out] MethodImplAttributes* implAttributes
+        )
         {
             Debug.Assert(attributes == null);
             Debug.Assert(signature == null);
@@ -99,7 +111,13 @@ namespace Microsoft.DiaSymReader
             Debug.Assert(relativeVirtualAddress == null);
             Debug.Assert(implAttributes == null);
 
-            if (!_metadataProvider.TryGetMethodInfo(methodDef, out var nameStr, out var declaringTypeToken))
+            if (
+                !_metadataProvider.TryGetMethodInfo(
+                    methodDef,
+                    out var nameStr,
+                    out var declaringTypeToken
+                )
+            )
             {
                 return HResult.E_INVALIDARG;
             }

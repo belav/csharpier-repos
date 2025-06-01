@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertProgram
         [Fact]
         public async Task TestNotOnFileWithNoGlobalStatements()
         {
-            var code = @"
+            var code =
+                @"
 $$
 class C
 {
@@ -36,14 +37,15 @@ class C
                 {
                     // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                     DiagnosticResult.CompilerError("CS5001"),
-                }
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNotOnEmptyFile()
         {
-            var code = @"
+            var code =
+                @"
 $$
 ";
             await new VerifyCS.Test
@@ -56,7 +58,7 @@ $$
                 {
                     // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                     DiagnosticResult.CompilerError("CS5001"),
-                }
+                },
             }.RunAsync();
         }
 
@@ -66,10 +68,12 @@ $$
             // default preference is to prefer top level namespaces.  As such, we only offer to convert to the alternative as a refactoring.
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 $$System.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -85,7 +89,8 @@ internal class Program
         [Fact]
         public async Task TestNotOfferedInLibrary()
         {
-            var code = @"
+            var code =
+                @"
 $${|CS8805:System.Console.WriteLine(0);|}
 ";
             await new VerifyCS.Test
@@ -102,10 +107,12 @@ $${|CS8805:System.Console.WriteLine(0);|}
             // user actually prefers top level statements.  As such, we only offer to convert to the alternative as a refactoring.
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 $$System.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -117,15 +124,20 @@ internal class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, true, NotificationOption2.Suggestion },
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        true,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNoConvertToProgramMainWithProgramMainPreferenceSuggestion()
         {
-            var code = @"
+            var code =
+                @"
 $$System.Console.WriteLine(0);
 ";
             await new VerifyCS.Test
@@ -136,15 +148,20 @@ $$System.Console.WriteLine(0);
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Suggestion },
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Suggestion
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestNoConvertToProgramMainWithProgramMainPreferenceSilent()
         {
-            var code = @"
+            var code =
+                @"
 $$System.Console.WriteLine(0);
 ";
             await new VerifyCS.Test
@@ -155,8 +172,12 @@ $$System.Console.WriteLine(0);
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.Silent },
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.Silent
+                    },
+                },
             }.RunAsync();
         }
 
@@ -166,10 +187,12 @@ $$System.Console.WriteLine(0);
             // if the user has the analyzer suppressed, then we want to supply teh refactoring.
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 $$System.Console.WriteLine(0);
 ",
-                FixedCode = @"
+                FixedCode =
+                    @"
 internal class Program
 {
     private static void Main(string[] args)
@@ -181,8 +204,12 @@ internal class Program
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTopLevelStatements, false, NotificationOption2.None },
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferTopLevelStatements,
+                        false,
+                        NotificationOption2.None
+                    },
+                },
             }.RunAsync();
         }
     }

@@ -26,7 +26,11 @@ namespace System.Web.WebPages.Administration.Test
         public void PackagesSourceFileThrowsIfTheXmlElementDoesNotContainUrl()
         {
             // Arrange
-            var element = new XElement("source", new XAttribute("displayname", "foo"), new XAttribute("filterpreferred", false));
+            var element = new XElement(
+                "source",
+                new XAttribute("displayname", "foo"),
+                new XAttribute("filterpreferred", false)
+            );
 
             // Act and Assert
             Assert.Throws<FormatException>(() => PackageSourceFile.ParsePackageSource(element));
@@ -36,7 +40,11 @@ namespace System.Web.WebPages.Administration.Test
         public void PackagesSourceFileThrowsIfTheXmlElementDoesNotContainName()
         {
             // Arrange
-            var element = new XElement("source", new XAttribute("url", "http://microsoft.com"), new XAttribute("filterpreferred", false));
+            var element = new XElement(
+                "source",
+                new XAttribute("url", "http://microsoft.com"),
+                new XAttribute("filterpreferred", false)
+            );
 
             // Act and Assert
             Assert.Throws<FormatException>(() => PackageSourceFile.ParsePackageSource(element));
@@ -46,9 +54,13 @@ namespace System.Web.WebPages.Administration.Test
         public void PackagesSourceFileDoesNotThrowIfXmlElementDoesNotContainPreferred()
         {
             // Arrange
-            var element = new XElement("source", new XAttribute("displayname", "foo"), new XAttribute("url", "http://microsoft.com"));
+            var element = new XElement(
+                "source",
+                new XAttribute("displayname", "foo"),
+                new XAttribute("url", "http://microsoft.com")
+            );
 
-            // Act 
+            // Act
             var item = PackageSourceFile.ParsePackageSource(element);
 
             // Assert
@@ -59,11 +71,12 @@ namespace System.Web.WebPages.Administration.Test
         public void PackagesSourceFileThrowsIfTheFeedUrlIsMalformed()
         {
             // Arrange
-            var element = new XElement("source",
-                                       new XAttribute("displayname", "foo"),
-                                       new XAttribute("url", "bad-url.com"),
-                                       new XAttribute("filterpreferred", false)
-                );
+            var element = new XElement(
+                "source",
+                new XAttribute("displayname", "foo"),
+                new XAttribute("url", "bad-url.com"),
+                new XAttribute("filterpreferred", false)
+            );
 
             // Act and Assert
             Assert.Throws<FormatException>(() => PackageSourceFile.ParsePackageSource(element));
@@ -73,13 +86,14 @@ namespace System.Web.WebPages.Administration.Test
         public void PackagesSourceFileParsesXElement()
         {
             // Arrange
-            var element = new XElement("source",
-                                       new XAttribute("displayname", "foo"),
-                                       new XAttribute("url", "http://www.microsoft.com"),
-                                       new XAttribute("filterpreferred", true)
-                );
+            var element = new XElement(
+                "source",
+                new XAttribute("displayname", "foo"),
+                new XAttribute("url", "http://www.microsoft.com"),
+                new XAttribute("filterpreferred", true)
+            );
 
-            // Act 
+            // Act
             var WebPackageSource = PackageSourceFile.ParsePackageSource(element);
 
             // Assert
@@ -93,17 +107,31 @@ namespace System.Web.WebPages.Administration.Test
         {
             // Arrange
             var document = new XDocument(
-                new XElement("sources",
-                             new XElement("source", new XAttribute("displayname", "Feed1"), new XAttribute("url", "http://www.microsoft.com/feed1"), new XAttribute("filterpreferred", true)),
-                             new XElement("source", new XAttribute("displayname", "Feed2"), new XAttribute("url", "http://www.microsoft.com/feed2"), new XAttribute("filterpreferred", true))
-                    ));
+                new XElement(
+                    "sources",
+                    new XElement(
+                        "source",
+                        new XAttribute("displayname", "Feed1"),
+                        new XAttribute("url", "http://www.microsoft.com/feed1"),
+                        new XAttribute("filterpreferred", true)
+                    ),
+                    new XElement(
+                        "source",
+                        new XAttribute("displayname", "Feed2"),
+                        new XAttribute("url", "http://www.microsoft.com/feed2"),
+                        new XAttribute("filterpreferred", true)
+                    )
+                )
+            );
             var stream = new MemoryStream();
             document.Save(stream);
             stream = new MemoryStream(stream.ToArray());
             string xml = new StreamReader(stream).ReadToEnd().TrimEnd('\0');
 
-            // Act 
-            var result = PackageSourceFile.ReadFeeds(() => new MemoryStream(Encoding.Default.GetBytes(xml)));
+            // Act
+            var result = PackageSourceFile.ReadFeeds(() =>
+                new MemoryStream(Encoding.Default.GetBytes(xml))
+            );
 
             // Assert
             Assert.Equal(2, result.Count());
@@ -118,7 +146,10 @@ namespace System.Web.WebPages.Administration.Test
             var packagesSources = new[]
             {
                 new WebPackageSource(name: "Feed1", source: "http://www.microsoft.com/Feed1"),
-                new WebPackageSource(name: "Feed2", source: "http://www.microsoft.com/Feed2") { FilterPreferredPackages = true }
+                new WebPackageSource(name: "Feed2", source: "http://www.microsoft.com/Feed2")
+                {
+                    FilterPreferredPackages = true,
+                },
             };
             var stream = new MemoryStream();
 

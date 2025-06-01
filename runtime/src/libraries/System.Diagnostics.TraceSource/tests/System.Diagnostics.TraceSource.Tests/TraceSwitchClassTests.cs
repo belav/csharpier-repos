@@ -31,7 +31,6 @@ namespace System.Diagnostics.TraceSourceTests
             Assert.Throws<ArgumentNullException>(() => item.Level);
         }
 
-
         [Fact]
         public void LevelTest()
         {
@@ -39,13 +38,25 @@ namespace System.Diagnostics.TraceSourceTests
             Assert.Equal(TraceLevel.Error, item.Level);
             item.Level = TraceLevel.Info;
             Assert.Equal(TraceLevel.Info, item.Level);
-            AssertExtensions.Throws<ArgumentException>(null, () => item.Level = (TraceLevel)(TraceLevel.Off - 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => item.Level = (TraceLevel)(TraceLevel.Verbose + 1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => item.Level = (TraceLevel)(TraceLevel.Off - 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => item.Level = (TraceLevel)(TraceLevel.Verbose + 1)
+            );
         }
 
         [Theory]
         [InlineData(TraceLevel.Off, false, false, false, false)]
-        public void TraceLevelTest(TraceLevel level, bool error, bool warning, bool info, bool verbose)
+        public void TraceLevelTest(
+            TraceLevel level,
+            bool error,
+            bool warning,
+            bool info,
+            bool verbose
+        )
         {
             var item = new TraceSwitch("SwitchName", "Description");
             item.Level = level;
@@ -57,7 +68,8 @@ namespace System.Diagnostics.TraceSourceTests
 
         class TestTraceSwitch : TraceSwitch
         {
-            public TestTraceSwitch() : base(null, null) { }
+            public TestTraceSwitch()
+                : base(null, null) { }
 
             public void SetSwitchSetting(int value)
             {

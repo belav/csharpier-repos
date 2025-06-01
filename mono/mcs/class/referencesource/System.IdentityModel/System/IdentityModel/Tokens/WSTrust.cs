@@ -19,7 +19,10 @@ namespace System.IdentityModel.Security
         KeyInfoSerializer securityTokenSerializer;
         TrustDictionary serializerDictionary;
 
-        public WSTrust(KeyInfoSerializer securityTokenSerializer, TrustDictionary serializerDictionary)
+        public WSTrust(
+            KeyInfoSerializer securityTokenSerializer,
+            TrustDictionary serializerDictionary
+        )
         {
             this.securityTokenSerializer = securityTokenSerializer;
             this.serializerDictionary = serializerDictionary;
@@ -27,18 +30,19 @@ namespace System.IdentityModel.Security
 
         public TrustDictionary SerializerDictionary
         {
-            get
-            {
-                return this.serializerDictionary;
-            }
+            get { return this.serializerDictionary; }
         }
 
-        public override void PopulateTokenEntries(IList<SecurityTokenSerializer.TokenEntry> tokenEntryList)
+        public override void PopulateTokenEntries(
+            IList<SecurityTokenSerializer.TokenEntry> tokenEntryList
+        )
         {
             tokenEntryList.Add(new BinarySecretTokenEntry(this));
         }
 
-        public override void PopulateKeyIdentifierClauseEntries(IList<SecurityTokenSerializer.KeyIdentifierClauseEntry> keyIdentifierClauseEntries)
+        public override void PopulateKeyIdentifierClauseEntries(
+            IList<SecurityTokenSerializer.KeyIdentifierClauseEntry> keyIdentifierClauseEntries
+        )
         {
             keyIdentifierClauseEntries.Add(new BinarySecretClauseEntry(this));
             keyIdentifierClauseEntries.Add(new GenericXmlSecurityKeyIdentifierClauseEntry(this));
@@ -53,12 +57,28 @@ namespace System.IdentityModel.Security
                 this.parent = parent;
             }
 
-            protected override XmlDictionaryString LocalName { get { return parent.SerializerDictionary.BinarySecret; } }
-            protected override XmlDictionaryString NamespaceUri { get { return parent.SerializerDictionary.Namespace; } }
-            protected override Type[] GetTokenTypesCore() { return new Type[] { typeof(BinarySecretSecurityToken) }; }
-            public override string TokenTypeUri { get { return null; } }
-            protected override string ValueTypeUri { get { return null; } }
+            protected override XmlDictionaryString LocalName
+            {
+                get { return parent.SerializerDictionary.BinarySecret; }
+            }
+            protected override XmlDictionaryString NamespaceUri
+            {
+                get { return parent.SerializerDictionary.Namespace; }
+            }
 
+            protected override Type[] GetTokenTypesCore()
+            {
+                return new Type[] { typeof(BinarySecretSecurityToken) };
+            }
+
+            public override string TokenTypeUri
+            {
+                get { return null; }
+            }
+            protected override string ValueTypeUri
+            {
+                get { return null; }
+            }
         }
 
         internal class BinarySecretClauseEntry : KeyIdentifierClauseEntry
@@ -74,12 +94,18 @@ namespace System.IdentityModel.Security
 
                 if (parent.SerializerDictionary is TrustDec2005Dictionary)
                 {
-                    this.otherDictionary = parent.securityTokenSerializer.DictionaryManager.TrustFeb2005Dictionary;
+                    this.otherDictionary = parent
+                        .securityTokenSerializer
+                        .DictionaryManager
+                        .TrustFeb2005Dictionary;
                 }
 
                 if (parent.SerializerDictionary is TrustFeb2005Dictionary)
                 {
-                    this.otherDictionary = parent.securityTokenSerializer.DictionaryManager.TrustDec2005Dictionary;
+                    this.otherDictionary = parent
+                        .securityTokenSerializer
+                        .DictionaryManager
+                        .TrustDec2005Dictionary;
                 }
 
                 // always set it, so we don't have to worry about null
@@ -97,7 +123,9 @@ namespace System.IdentityModel.Security
                 get { return this.parent.SerializerDictionary.Namespace; }
             }
 
-            public override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(XmlDictionaryReader reader)
+            public override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(
+                XmlDictionaryReader reader
+            )
             {
                 byte[] secret = reader.ReadElementContentAsBase64();
                 return new BinarySecretKeyIdentifierClause(secret, false);
@@ -110,14 +138,25 @@ namespace System.IdentityModel.Security
 
             public override bool CanReadKeyIdentifierClauseCore(XmlDictionaryReader reader)
             {
-                return (reader.IsStartElement(this.LocalName, this.NamespaceUri) || reader.IsStartElement(this.LocalName, this.otherDictionary.Namespace));
+                return (
+                    reader.IsStartElement(this.LocalName, this.NamespaceUri)
+                    || reader.IsStartElement(this.LocalName, this.otherDictionary.Namespace)
+                );
             }
 
-            public override void WriteKeyIdentifierClauseCore(XmlDictionaryWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+            public override void WriteKeyIdentifierClauseCore(
+                XmlDictionaryWriter writer,
+                SecurityKeyIdentifierClause keyIdentifierClause
+            )
             {
-                BinarySecretKeyIdentifierClause skic = keyIdentifierClause as BinarySecretKeyIdentifierClause;
+                BinarySecretKeyIdentifierClause skic =
+                    keyIdentifierClause as BinarySecretKeyIdentifierClause;
                 byte[] secret = skic.GetKeyBytes();
-                writer.WriteStartElement(this.parent.SerializerDictionary.Prefix.Value, this.parent.SerializerDictionary.BinarySecret, this.parent.SerializerDictionary.Namespace);
+                writer.WriteStartElement(
+                    this.parent.SerializerDictionary.Prefix.Value,
+                    this.parent.SerializerDictionary.BinarySecret,
+                    this.parent.SerializerDictionary.Namespace
+                );
                 writer.WriteBase64(secret, 0, secret.Length);
                 writer.WriteEndElement();
             }
@@ -147,7 +186,9 @@ namespace System.IdentityModel.Security
                 return false;
             }
 
-            public override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(XmlDictionaryReader reader)
+            public override SecurityKeyIdentifierClause ReadKeyIdentifierClauseCore(
+                XmlDictionaryReader reader
+            )
             {
                 return null;
             }
@@ -157,14 +198,23 @@ namespace System.IdentityModel.Security
                 return keyIdentifierClause is GenericXmlSecurityKeyIdentifierClause;
             }
 
-            public override void WriteKeyIdentifierClauseCore(XmlDictionaryWriter writer, SecurityKeyIdentifierClause keyIdentifierClause)
+            public override void WriteKeyIdentifierClauseCore(
+                XmlDictionaryWriter writer,
+                SecurityKeyIdentifierClause keyIdentifierClause
+            )
             {
-                GenericXmlSecurityKeyIdentifierClause genericXmlSecurityKeyIdentifierClause = keyIdentifierClause as GenericXmlSecurityKeyIdentifierClause;
+                GenericXmlSecurityKeyIdentifierClause genericXmlSecurityKeyIdentifierClause =
+                    keyIdentifierClause as GenericXmlSecurityKeyIdentifierClause;
                 genericXmlSecurityKeyIdentifierClause.ReferenceXml.WriteTo(writer);
             }
         }
 
-        protected static bool CheckElement(XmlElement element, string name, string ns, out string value)
+        protected static bool CheckElement(
+            XmlElement element,
+            string name,
+            string ns,
+            out string value
+        )
         {
             value = null;
             if (element.LocalName != name || element.NamespaceURI != ns)

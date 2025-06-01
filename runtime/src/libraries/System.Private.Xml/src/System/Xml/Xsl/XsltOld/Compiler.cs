@@ -29,7 +29,13 @@ namespace System.Xml.Xsl.XsltOld
         internal XmlSortOrder order;
         internal XmlCaseOrder caseOrder;
 
-        public Sort(int sortkey, string? xmllang, XmlDataType datatype, XmlSortOrder xmlorder, XmlCaseOrder xmlcaseorder)
+        public Sort(
+            int sortkey,
+            string? xmllang,
+            XmlDataType datatype,
+            XmlSortOrder xmlorder,
+            XmlCaseOrder xmlcaseorder
+        )
         {
             select = sortkey;
             lang = xmllang;
@@ -43,7 +49,7 @@ namespace System.Xml.Xsl.XsltOld
     {
         JScript,
         VisualBasic,
-        CSharp
+        CSharp,
     }
 
     internal sealed class Compiler
@@ -195,7 +201,12 @@ namespace System.Xml.Xsl.XsltOld
                 }
                 catch (Exception e)
                 {
-                    throw new XsltCompileException(e, this.Input!.BaseURI, this.Input.LineNumber, this.Input.LinePosition);
+                    throw new XsltCompileException(
+                        e,
+                        this.Input!.BaseURI,
+                        this.Input.LineNumber,
+                        this.Input.LinePosition
+                    );
                 }
 
                 this.stylesheet!.ProcessTemplates();
@@ -255,12 +266,19 @@ namespace System.Xml.Xsl.XsltOld
 
         internal void InsertExtensionNamespace()
         {
-            InsertExtensionNamespace(Input!.Navigator.GetAttribute(Input.Atoms.ExtensionElementPrefixes, Input.Atoms.UriXsl));
+            InsertExtensionNamespace(
+                Input!.Navigator.GetAttribute(
+                    Input.Atoms.ExtensionElementPrefixes,
+                    Input.Atoms.UriXsl
+                )
+            );
         }
 
         internal void InsertExcludedNamespace()
         {
-            InsertExcludedNamespace(Input!.Navigator.GetAttribute(Input.Atoms.ExcludeResultPrefixes, Input.Atoms.UriXsl));
+            InsertExcludedNamespace(
+                Input!.Navigator.GetAttribute(Input.Atoms.ExcludeResultPrefixes, Input.Atoms.UriXsl)
+            );
         }
 
         internal bool IsExtensionNamespace(string nspace)
@@ -293,8 +311,7 @@ namespace System.Xml.Xsl.XsltOld
                 do
                 {
                     _scopeManager.PushNamespace(input.LocalName, input.Value);
-                }
-                while (input.MoveToNextNamespace());
+                } while (input.MoveToNextNamespace());
                 input.ToParent();
             }
         }
@@ -324,7 +341,11 @@ namespace System.Xml.Xsl.XsltOld
             else
             {
                 Debug.Assert(_currentTemplate != null);
-                Debug.Assert(variable.VarType == VariableType.LocalVariable || variable.VarType == VariableType.LocalParameter || variable.VarType == VariableType.WithParameter);
+                Debug.Assert(
+                    variable.VarType == VariableType.LocalVariable
+                        || variable.VarType == VariableType.LocalParameter
+                        || variable.VarType == VariableType.WithParameter
+                );
                 varScope = _scopeManager.VariableScope;
             }
 
@@ -442,7 +463,9 @@ namespace System.Xml.Xsl.XsltOld
                 for (int idx = 0; idx < nsList.Length; idx++)
                 {
                     string prefix = nsList[idx];
-                    nsList[idx] = _scopeManager.ResolveXmlNamespace(prefix == "#default" ? string.Empty : prefix);
+                    nsList[idx] = _scopeManager.ResolveXmlNamespace(
+                        prefix == "#default" ? string.Empty : prefix
+                    );
                 }
             }
             catch (XsltException)
@@ -487,7 +510,8 @@ namespace System.Xml.Xsl.XsltOld
                     string nspace = input.NamespaceURI;
                     string name = input.LocalName;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
                     if (Ref.Equal(name, attributeAtom))
                     {
@@ -500,8 +524,7 @@ namespace System.Xml.Xsl.XsltOld
                             throw XsltException.Create(SR.Xslt_InvalidAttribute, name, element);
                         }
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
@@ -514,7 +537,8 @@ namespace System.Xml.Xsl.XsltOld
 
         internal XmlQualifiedName CreateXPathQName(string qname)
         {
-            string prefix, local;
+            string prefix,
+                local;
             PrefixQName.ParseQualifiedName(qname, out prefix, out local);
 
             return new XmlQualifiedName(local, _scopeManager.ResolveXPathNamespace(prefix));
@@ -522,7 +546,8 @@ namespace System.Xml.Xsl.XsltOld
 
         internal XmlQualifiedName CreateXmlQName(string qname)
         {
-            string prefix, local;
+            string prefix,
+                local;
             PrefixQName.ParseQualifiedName(qname, out prefix, out local);
 
             return new XmlQualifiedName(local, _scopeManager.ResolveXmlNamespace(prefix));
@@ -548,7 +573,10 @@ namespace System.Xml.Xsl.XsltOld
 
         private void AddDocumentURI(string href)
         {
-            Debug.Assert(!_documentURIs.Contains(href), "Circular references must be checked while processing xsl:include and xsl:import");
+            Debug.Assert(
+                !_documentURIs.Contains(href),
+                "Circular references must be checked while processing xsl:include and xsl:import"
+            );
             _documentURIs.Add(href, null);
         }
 
@@ -567,7 +595,10 @@ namespace System.Xml.Xsl.XsltOld
         {
             Debug.Assert(_xmlResolver != null);
             string baseUri = this.Input!.BaseURI;
-            Uri uri = _xmlResolver.ResolveUri((baseUri.Length != 0) ? _xmlResolver.ResolveUri(null, baseUri) : null, relativeUri);
+            Uri uri = _xmlResolver.ResolveUri(
+                (baseUri.Length != 0) ? _xmlResolver.ResolveUri(null, baseUri) : null,
+                relativeUri
+            );
             if (uri == null)
             {
                 throw XsltException.Create(SR.Xslt_CantResolve, relativeUri);
@@ -588,7 +619,11 @@ namespace System.Xml.Xsl.XsltOld
                     tr.XmlResolver = _xmlResolver;
                 }
                 // reader is closed by Compiler.LoadDocument()
-                return new NavigatorInput(Compiler.LoadDocument(tr).CreateNavigator(), resolved, _rootScope);
+                return new NavigatorInput(
+                    Compiler.LoadDocument(tr).CreateNavigator(),
+                    resolved,
+                    _rootScope
+                );
             }
             else if (input is XPathNavigator)
             {
@@ -701,7 +736,12 @@ namespace System.Xml.Xsl.XsltOld
         //
         internal int AddQuery(string xpathQuery)
         {
-            return AddQuery(xpathQuery, /*allowVars:*/true, /*allowKey*/true, false);
+            return AddQuery(
+                xpathQuery, /*allowVars:*/
+                true, /*allowKey*/
+                true,
+                false
+            );
         }
 
         internal int AddQuery(string xpathQuery, bool allowVar, bool allowKey, bool isPattern)
@@ -712,9 +752,10 @@ namespace System.Xml.Xsl.XsltOld
             try
             {
                 expr = new CompiledXpathExpr(
-                    (isPattern
-                        ? _queryBuilder.BuildPatternQuery(xpathQuery, allowVar, allowKey)
-                        : _queryBuilder.Build(xpathQuery, allowVar, allowKey)
+                    (
+                        isPattern
+                            ? _queryBuilder.BuildPatternQuery(xpathQuery, allowVar, allowKey)
+                            : _queryBuilder.Build(xpathQuery, allowVar, allowKey)
                     ),
                     xpathQuery,
                     false
@@ -724,9 +765,18 @@ namespace System.Xml.Xsl.XsltOld
             {
                 if (!ForwardCompatibility)
                 {
-                    throw XsltException.Create(SR.Xslt_InvalidXPath, new string[] { xpathQuery }, e);
+                    throw XsltException.Create(
+                        SR.Xslt_InvalidXPath,
+                        new string[] { xpathQuery },
+                        e
+                    );
                 }
-                expr = new ErrorXPathExpression(xpathQuery, this.Input!.BaseURI, this.Input.LineNumber, this.Input.LinePosition);
+                expr = new ErrorXPathExpression(
+                    xpathQuery,
+                    this.Input!.BaseURI,
+                    this.Input.LineNumber,
+                    this.Input.LinePosition
+                );
             }
             _queryStore.Add(new TheQuery(expr, _scopeManager));
             return _queryStore.Count - 1;
@@ -734,26 +784,39 @@ namespace System.Xml.Xsl.XsltOld
 
         internal int AddStringQuery(string xpathQuery)
         {
-            string modifiedQuery = XmlCharType.IsOnlyWhitespace(xpathQuery) ? xpathQuery : $"string({xpathQuery})";
+            string modifiedQuery = XmlCharType.IsOnlyWhitespace(xpathQuery)
+                ? xpathQuery
+                : $"string({xpathQuery})";
             return AddQuery(modifiedQuery);
         }
 
         internal int AddBooleanQuery(string xpathQuery)
         {
-            string modifiedQuery = XmlCharType.IsOnlyWhitespace(xpathQuery) ? xpathQuery : $"boolean({xpathQuery})";
+            string modifiedQuery = XmlCharType.IsOnlyWhitespace(xpathQuery)
+                ? xpathQuery
+                : $"boolean({xpathQuery})";
             return AddQuery(modifiedQuery);
         }
 
         //
         // Script support
         //
-        private readonly Hashtable[] _typeDeclsByLang = new Hashtable[] { new Hashtable(), new Hashtable(), new Hashtable() };
+        private readonly Hashtable[] _typeDeclsByLang = new Hashtable[]
+        {
+            new Hashtable(),
+            new Hashtable(),
+            new Hashtable(),
+        };
 
         internal void AddScript(ScriptingLanguage lang, string ns)
         {
             ValidateExtensionNamespace(ns);
 
-            for (ScriptingLanguage langTmp = ScriptingLanguage.JScript; langTmp <= ScriptingLanguage.CSharp; langTmp++)
+            for (
+                ScriptingLanguage langTmp = ScriptingLanguage.JScript;
+                langTmp <= ScriptingLanguage.CSharp;
+                langTmp++
+            )
             {
                 Hashtable typeDecls = _typeDeclsByLang[(int)langTmp];
                 if (lang == langTmp)
@@ -779,8 +842,8 @@ namespace System.Xml.Xsl.XsltOld
         public string GetNsAlias(ref string prefix)
         {
             Debug.Assert(
-                Ref.Equal(_input!.LocalName, _input.Atoms.StylesheetPrefix) ||
-                Ref.Equal(_input.LocalName, _input.Atoms.ResultPrefix)
+                Ref.Equal(_input!.LocalName, _input.Atoms.StylesheetPrefix)
+                    || Ref.Equal(_input.LocalName, _input.Atoms.ResultPrefix)
             );
             if (prefix == "#default")
             {
@@ -839,9 +902,9 @@ namespace System.Xml.Xsl.XsltOld
         private static void getXPathLex(string avt, ref int start, StringBuilder lex)
         {
             // AVT parser states
-            const int InExp = 0;      // Inside AVT expression
-            const int InLiteralA = 1;      // Inside literal in expression, apostrophe delimited
-            const int InLiteralQ = 2;      // Inside literal in expression, quote delimited
+            const int InExp = 0; // Inside AVT expression
+            const int InLiteralA = 1; // Inside literal in expression, apostrophe delimited
+            const int InLiteralQ = 2; // Inside literal in expression, quote delimited
             Debug.Assert(avt.Length != start, "Empty string not supposed here");
             Debug.Assert(lex.Length == 0, "Builder should to be reset here");
             Debug.Assert(avt[start] == '{', "We calling getXPathLex() only after we really meet {");
@@ -890,10 +953,18 @@ namespace System.Xml.Xsl.XsltOld
             }
 
             // if we meet end of string before } we have an error
-            throw XsltException.Create(state == InExp ? SR.Xslt_OpenBracesAvt : SR.Xslt_OpenLiteralAvt, avt);
+            throw XsltException.Create(
+                state == InExp ? SR.Xslt_OpenBracesAvt : SR.Xslt_OpenLiteralAvt,
+                avt
+            );
         }
 
-        private static bool GetNextAvtLex(string avt, ref int start, StringBuilder lex, out bool isAvt)
+        private static bool GetNextAvtLex(
+            string avt,
+            ref int start,
+            StringBuilder lex,
+            out bool isAvt
+        )
         {
             Debug.Assert(start <= avt.Length);
 #if DEBUG
@@ -941,7 +1012,10 @@ namespace System.Xml.Xsl.XsltOld
                     }
                 }
             }
-            Debug.Assert(!constant || list.Count <= 1, "We can't have more then 1 text event if now {avt} found");
+            Debug.Assert(
+                !constant || list.Count <= 1,
+                "We can't have more then 1 text event if now {avt} found"
+            );
             return list;
         }
 
@@ -989,7 +1063,7 @@ namespace System.Xml.Xsl.XsltOld
         }
 
         public ChooseAction CreateChooseAction()
-        {//!!! don't need to be here
+        { //!!! don't need to be here
             ChooseAction action = new ChooseAction();
             action.Compile(this);
             return action;
@@ -1159,8 +1233,15 @@ namespace System.Xml.Xsl.XsltOld
         internal sealed class ErrorXPathExpression : CompiledXpathExpr
         {
             private readonly string _baseUri;
-            private readonly int _lineNumber, _linePosition;
-            public ErrorXPathExpression(string expression, string baseUri, int lineNumber, int linePosition)
+            private readonly int _lineNumber,
+                _linePosition;
+
+            public ErrorXPathExpression(
+                string expression,
+                string baseUri,
+                int lineNumber,
+                int linePosition
+            )
                 : base(null!, expression, false)
             {
                 _baseUri = baseUri;
@@ -1168,10 +1249,21 @@ namespace System.Xml.Xsl.XsltOld
                 _linePosition = linePosition;
             }
 
-            public override XPathExpression Clone() { return this; }
+            public override XPathExpression Clone()
+            {
+                return this;
+            }
+
             public override void CheckErrors()
             {
-                throw new XsltException(SR.Xslt_InvalidXPath, new string[] { Expression }, _baseUri, _lineNumber, _linePosition, null);
+                throw new XsltException(
+                    SR.Xslt_InvalidXPath,
+                    new string[] { Expression },
+                    _baseUri,
+                    _lineNumber,
+                    _linePosition,
+                    null
+                );
             }
         }
     }

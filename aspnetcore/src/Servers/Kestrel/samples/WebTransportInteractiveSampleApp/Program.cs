@@ -19,74 +19,85 @@ var hash = SHA256.HashData(certificate.RawData);
 var certStr = Convert.ToBase64String(hash);
 
 // configure the ports
-builder.WebHost.ConfigureKestrel((context, options) =>
-{
-    // website configured port
-    options.Listen(IPAddress.Any, 5001, listenOptions =>
+builder.WebHost.ConfigureKestrel(
+    (context, options) =>
     {
-        listenOptions.UseHttps();
-        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-    });
-    // webtransport configured port
-    options.Listen(IPAddress.Any, 5002, listenOptions =>
-    {
-        listenOptions.UseHttps(certificate);
-        listenOptions.UseConnectionLogging();
-        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-    });
-});
+        // website configured port
+        options.Listen(
+            IPAddress.Any,
+            5001,
+            listenOptions =>
+            {
+                listenOptions.UseHttps();
+                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+            }
+        );
+        // webtransport configured port
+        options.Listen(
+            IPAddress.Any,
+            5002,
+            listenOptions =>
+            {
+                listenOptions.UseHttps(certificate);
+                listenOptions.UseConnectionLogging();
+                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+            }
+        );
+    }
+);
 
 var app = builder.Build();
 
 // make index.html accessible
 app.UseFileServer();
 
-app.Use(async (context, next) =>
-{
-    // configure /certificate.js to inject the certificate hash
-    if (context.Request.Path.Value?.Equals("/certificate.js") ?? false)
+app.Use(
+    async (context, next) =>
     {
-        context.Response.ContentType = "application/javascript";
-        await context.Response.WriteAsync($"var CERTIFICATE = '{certStr}';");
-    }
-
-    // configure the serverside application
-    else
-    {
-        var feature = context.Features.GetRequiredFeature<IHttpWebTransportFeature>();
-        if (!feature.IsWebTransportRequest)
+        // configure /certificate.js to inject the certificate hash
+        if (context.Request.Path.Value?.Equals("/certificate.js") ?? false)
         {
-            await next(context);
+            context.Response.ContentType = "application/javascript";
+            await context.Response.WriteAsync($"var CERTIFICATE = '{certStr}';");
         }
-
-        var session = await feature.AcceptAsync(CancellationToken.None);
-
-        if (session is null)
+        // configure the serverside application
+        else
         {
-            return;
-        }
-
-        while (true)
-        {
-            ConnectionContext? stream = null;
-            IStreamDirectionFeature? direction = null;
-            // wait until we get a stream
-            stream = await session.AcceptStreamAsync(CancellationToken.None);
-            if (stream is not null)
+            var feature = context.Features.GetRequiredFeature<IHttpWebTransportFeature>();
+            if (!feature.IsWebTransportRequest)
             {
-                direction = stream.Features.GetRequiredFeature<IStreamDirectionFeature>();
-                if (direction.CanRead && direction.CanWrite)
+                await next(context);
+            }
+
+            var session = await feature.AcceptAsync(CancellationToken.None);
+
+            if (session is null)
+            {
+                return;
+            }
+
+            while (true)
+            {
+                ConnectionContext? stream = null;
+                IStreamDirectionFeature? direction = null;
+                // wait until we get a stream
+                stream = await session.AcceptStreamAsync(CancellationToken.None);
+                if (stream is not null)
                 {
-                    _ = handleBidirectionalStream(session, stream);
-                }
-                else
-                {
-                    _ = handleUnidirectionalStream(session, stream);
+                    direction = stream.Features.GetRequiredFeature<IStreamDirectionFeature>();
+                    if (direction.CanRead && direction.CanWrite)
+                    {
+                        _ = handleBidirectionalStream(session, stream);
+                    }
+                    else
+                    {
+                        _ = handleUnidirectionalStream(session, stream);
+                    }
                 }
             }
         }
     }
-});
+);
 
 await app.RunAsync();
 
@@ -106,7 +117,6 @@ static async Task handleUnidirectionalStream(IWebTransportSession session, Conne
 
         Console.WriteLine("RECEIVED FROM CLIENT:");
         Console.WriteLine(message);
-
     }
 }
 
@@ -145,11 +155,17 @@ static async Task ApplySpecialCommands(IWebTransportSession session, string mess
             var stream = await session.OpenUnidirectionalStreamAsync();
             if (stream is not null)
             {
-                await stream.Transport.Output.WriteAsync(new("Created a new stream from the client and sent this message then closing the stream."u8.ToArray()));
+                await stream.Transport.Output.WriteAsync(
+                    new(
+                        "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
+                    )
+                );
             }
             break;
         case "Abort":
-            session.Abort(256 /*No error*/);
+            session.Abort(
+                256 /*No error*/
+            );
             break;
         default:
             break; // in all other cases the string is not a special command
@@ -182,12 +198,19 @@ static X509Certificate2 GenerateManualCertificate()
     using var ec = ECDsa.Create(ECCurve.NamedCurves.nistP256);
     CertificateRequest req = new("CN=localhost", ec, HashAlgorithmName.SHA256);
     // Adds purpose
-    req.CertificateExtensions.Add(new X509EnhancedKeyUsageExtension(new OidCollection
-    {
-        new("1.3.6.1.5.5.7.3.1") // serverAuth
-    }, false));
+    req.CertificateExtensions.Add(
+        new X509EnhancedKeyUsageExtension(
+            new OidCollection
+            {
+                new("1.3.6.1.5.5.7.3.1"), // serverAuth
+            },
+            false
+        )
+    );
     // Adds usage
-    req.CertificateExtensions.Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
+    req.CertificateExtensions.Add(
+        new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
+    );
     // Adds subject alternate names
     req.CertificateExtensions.Add(sanBuilder.Build());
     // Sign

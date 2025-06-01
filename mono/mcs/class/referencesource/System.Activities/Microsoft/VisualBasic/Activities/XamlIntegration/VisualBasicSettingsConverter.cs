@@ -5,19 +5,17 @@
 namespace Microsoft.VisualBasic.Activities.XamlIntegration
 {
     using System;
-    using System.ComponentModel;
-    using System.Runtime;
-    using System.Globalization;
     using System.Activities;
+    using System.ComponentModel;
+    using System.Globalization;
+    using System.Runtime;
 
     // this class is necessary in order for our value serializer to get called by XAML,
     // even though the functionality is a no-op
     public sealed class VisualBasicSettingsConverter : TypeConverter
-    {        
+    {
         public VisualBasicSettingsConverter()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -38,12 +36,20 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string sourceString = value as string;
             if (sourceString != null)
             {
-                if (sourceString.Equals(VisualBasicSettingsValueSerializer.ImplementationVisualBasicSettingsValue))
+                if (
+                    sourceString.Equals(
+                        VisualBasicSettingsValueSerializer.ImplementationVisualBasicSettingsValue
+                    )
+                )
                 {
                     // this is the VBSettings for the internal implementation
                     // suppress its Xaml serialization
@@ -55,9 +61,18 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                     return settings;
                 }
 
-                if (!(sourceString.Equals(String.Empty) || sourceString.Equals(VisualBasicSettingsValueSerializer.VisualBasicSettingsValue)))
+                if (
+                    !(
+                        sourceString.Equals(String.Empty)
+                        || sourceString.Equals(
+                            VisualBasicSettingsValueSerializer.VisualBasicSettingsValue
+                        )
+                    )
+                )
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidVisualBasicSettingsValue));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.InvalidVisualBasicSettingsValue)
+                    );
                 }
 
                 return CollectXmlNamespacesAndAssemblies(context);
@@ -65,7 +80,12 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             return base.ConvertTo(context, culture, value, destinationType);
         }
@@ -74,6 +94,5 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
         {
             return VisualBasicExpressionConverter.CollectXmlNamespacesAndAssemblies(context);
         }
-
     }
 }

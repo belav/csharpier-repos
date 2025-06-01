@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///         examples.
 ///     </para>
 /// </remarks>
-public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimitiveCollectionBuilder
+public class ComplexTypePrimitiveCollectionBuilder<TProperty>
+    : ComplexTypePrimitiveCollectionBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,9 +29,7 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </summary>
     [EntityFrameworkInternal]
     public ComplexTypePrimitiveCollectionBuilder(IMutableProperty property)
-        : base(property)
-    {
-    }
+        : base(property) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -39,8 +38,10 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasAnnotation(string annotation, object? value)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasAnnotation(annotation, value);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasAnnotation(
+        string annotation,
+        object? value
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasAnnotation(annotation, value);
 
     /// <summary>
     ///     Configures whether this property must have a value assigned or whether null is a valid value.
@@ -49,8 +50,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </summary>
     /// <param name="required">A value indicating whether the property is required.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> IsRequired(bool required = true)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.IsRequired(required);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> IsRequired(
+        bool required = true
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.IsRequired(required);
 
     /// <summary>
     ///     Configures the maximum length of data that can be stored in this property.
@@ -60,8 +62,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     ///     The maximum length of data allowed in the property. A value of <c>-1</c> indicates that the property has no maximum length.
     /// </param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasMaxLength(int maxLength)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasMaxLength(maxLength);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasMaxLength(
+        int maxLength
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasMaxLength(maxLength);
 
     /// <summary>
     ///     Configures the value that will be used to determine if the property has been set or not. If the property is set to the
@@ -70,8 +73,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </summary>
     /// <param name="sentinel">The sentinel value.</param>
     /// <returns>The same builder instance if the configuration was applied, <see langword="null" /> otherwise.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasSentinel(object? sentinel)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasSentinel(
+        object? sentinel
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
 
     /// <summary>
     ///     Configures the value that will be used to determine if the property has been set or not. If the property is set to the
@@ -80,8 +84,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </summary>
     /// <param name="sentinel">The sentinel value.</param>
     /// <returns>The same builder instance if the configuration was applied, <see langword="null" /> otherwise.</returns>
-    public virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasSentinel(TProperty? sentinel)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
+    public virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasSentinel(
+        TProperty? sentinel
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
 
     /// <summary>
     ///     Configures the property as capable of persisting unicode characters.
@@ -89,8 +94,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </summary>
     /// <param name="unicode">A value indicating whether the property can contain unicode characters.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> IsUnicode(bool unicode = true)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.IsUnicode(unicode);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> IsUnicode(
+        bool unicode = true
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.IsUnicode(unicode);
 
     /// <summary>
     ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -113,10 +119,12 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </remarks>
     /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGenerator
-        <[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TGenerator>()
-        where TGenerator : ValueGenerator
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator<TGenerator>();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGenerator<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TGenerator
+    >()
+        where TGenerator : ValueGenerator =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator<TGenerator>();
 
     /// <summary>
     ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -145,8 +153,10 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGenerator(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? valueGeneratorType)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator(valueGeneratorType);
+            Type? valueGeneratorType
+    ) =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)
+            base.HasValueGenerator(valueGeneratorType);
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -174,10 +184,11 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </remarks>
     /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory
-        <[DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory>()
-        where TFactory : ValueGeneratorFactory
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasValueGeneratorFactory<TFactory>();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory<
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
+    >()
+        where TFactory : ValueGeneratorFactory =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasValueGeneratorFactory<TFactory>();
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -207,8 +218,10 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactoryType)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasValueGeneratorFactory(valueGeneratorFactoryType);
+            Type? valueGeneratorFactoryType
+    ) =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)
+            base.HasValueGeneratorFactory(valueGeneratorFactoryType);
 
     /// <summary>
     ///     Configures whether this property should be used as a concurrency token. When a property is configured
@@ -219,8 +232,10 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </summary>
     /// <param name="concurrencyToken">A value indicating whether this property is a concurrency token.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> IsConcurrencyToken(bool concurrencyToken = true)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.IsConcurrencyToken(concurrencyToken);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> IsConcurrencyToken(
+        bool concurrencyToken = true
+    ) =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.IsConcurrencyToken(concurrencyToken);
 
     /// <summary>
     ///     Configures a property to never have a value generated when an instance of this
@@ -231,8 +246,8 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     ///     Note that temporary values may still be generated for use internally before a
     ///     new entity is saved.
     /// </remarks>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedNever()
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedNever();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedNever() =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedNever();
 
     /// <summary>
     ///     Configures a property to have a value generated only when saving a new entity, unless a non-null,
@@ -241,29 +256,29 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     ///     of saving the entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAdd()
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAdd();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAdd() =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAdd();
 
     /// <summary>
     ///     Configures a property to have a value generated when saving a new or existing entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAddOrUpdate()
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAddOrUpdate();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAddOrUpdate() =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAddOrUpdate();
 
     /// <summary>
     ///     Configures a property to have a value generated when saving an existing entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdate()
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdate();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdate() =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdate();
 
     /// <summary>
     ///     Configures a property to have a value generated under certain conditions when saving an existing entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdateSometimes()
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdateSometimes();
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdateSometimes() =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdateSometimes();
 
     /// <summary>
     ///     Sets the backing field to use for this property.
@@ -286,15 +301,18 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </remarks>
     /// <param name="fieldName">The field name.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasField(string fieldName)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasField(fieldName);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasField(
+        string fieldName
+    ) => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.HasField(fieldName);
 
     /// <summary>
     ///     Configures the elements of this collection.
     /// </summary>
     /// <param name="builderAction">An action that performs configuration of the collection element type.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ElementType(Action<ElementTypeBuilder> builderAction)
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> ElementType(
+        Action<ElementTypeBuilder> builderAction
+    )
     {
         builderAction(ElementType());
 
@@ -318,6 +336,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty> : ComplexTypePrimi
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)base.UsePropertyAccessMode(propertyAccessMode);
+    public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> UsePropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    ) =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)
+            base.UsePropertyAccessMode(propertyAccessMode);
 }

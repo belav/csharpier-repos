@@ -22,7 +22,8 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
 
     public HttpContextFormValueMapper(
         HttpContextFormDataProvider formData,
-        IOptions<RazorComponentsServiceOptions> options)
+        IOptions<RazorComponentsServiceOptions> options
+    )
     {
         _formData = formData;
         _options = options.Value._formMappingOptions;
@@ -31,8 +32,10 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
     public bool CanMap(Type valueType, string scopeName, string? formName)
     {
         // We must always match on scope
-        if (!_formData.TryGetIncomingHandlerName(out var incomingScopeQualifiedFormName)
-            || !MatchesScope(incomingScopeQualifiedFormName, scopeName, out var incomingFormName))
+        if (
+            !_formData.TryGetIncomingHandlerName(out var incomingScopeQualifiedFormName)
+            || !MatchesScope(incomingScopeQualifiedFormName, scopeName, out var incomingFormName)
+        )
         {
             return false;
         }
@@ -46,18 +49,27 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
         return _options.ResolveConverter(valueType) is not null;
     }
 
-    private static bool MatchesScope(string incomingScopeQualifiedFormName, string currentMappingScopeName, out ReadOnlySpan<char> incomingFormName)
+    private static bool MatchesScope(
+        string incomingScopeQualifiedFormName,
+        string currentMappingScopeName,
+        out ReadOnlySpan<char> incomingFormName
+    )
     {
         if (incomingScopeQualifiedFormName.StartsWith('['))
         {
             // The scope-qualified name is in the form "[scopename]formname", so validate that the [scopename]
             // prefix matches and return the formname part
             var incomingScopeQualifiedFormNameSpan = incomingScopeQualifiedFormName.AsSpan();
-            if (incomingScopeQualifiedFormNameSpan[1..].StartsWith(currentMappingScopeName, StringComparison.Ordinal)
+            if (
+                incomingScopeQualifiedFormNameSpan[1..]
+                    .StartsWith(currentMappingScopeName, StringComparison.Ordinal)
                 && incomingScopeQualifiedFormName.Length >= currentMappingScopeName.Length + 2
-                && incomingScopeQualifiedFormName[currentMappingScopeName.Length + 1] == ']')
+                && incomingScopeQualifiedFormName[currentMappingScopeName.Length + 1] == ']'
+            )
             {
-                incomingFormName = incomingScopeQualifiedFormNameSpan[(currentMappingScopeName.Length + 2)..];
+                incomingFormName = incomingScopeQualifiedFormNameSpan[
+                    (currentMappingScopeName.Length + 2)..
+                ];
                 return true;
             }
         }
@@ -90,8 +102,8 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
     }
 
     private FormValueSupplier CreateDeserializer(Type type) =>
-        (FormValueSupplier)Activator.CreateInstance(typeof(FormValueSupplier<>)
-        .MakeGenericType(type))!;
+        (FormValueSupplier)
+            Activator.CreateInstance(typeof(FormValueSupplier<>).MakeGenericType(type))!;
 
     internal abstract class FormValueSupplier
     {
@@ -101,7 +113,8 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
             FormValueMappingContext context,
             FormDataMapperOptions options,
             IReadOnlyDictionary<string, StringValues> form,
-            IFormFileCollection formFiles);
+            IFormFileCollection formFiles
+        );
     }
 
     internal class FormValueSupplier<T> : FormValueSupplier
@@ -112,7 +125,8 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
             FormValueMappingContext context,
             FormDataMapperOptions options,
             IReadOnlyDictionary<string, StringValues> form,
-            IFormFileCollection formFiles)
+            IFormFileCollection formFiles
+        )
         {
             if (form.Count == 0)
             {
@@ -133,12 +147,13 @@ internal sealed class HttpContextFormValueMapper : IFormValueMapper
                     dictionary,
                     CultureInfo.InvariantCulture,
                     buffer.AsMemory(0, options.MaxKeyBufferSize),
-                    formFiles)
+                    formFiles
+                )
                 {
                     ErrorHandler = context.OnError,
                     AttachInstanceToErrorsHandler = context.MapErrorToContainer,
                     MaxRecursionDepth = options.MaxRecursionDepth,
-                    MaxErrorCount = options.MaxErrorCount
+                    MaxErrorCount = options.MaxErrorCount,
                 };
 
                 reader.PushPrefix(context.ParameterName);

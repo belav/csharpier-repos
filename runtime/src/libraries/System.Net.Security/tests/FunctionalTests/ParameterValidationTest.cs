@@ -3,10 +3,8 @@
 
 using System.Net.Sockets;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
-
 
 namespace System.Net.Security.Tests
 {
@@ -15,14 +13,24 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task SslStreamConstructor_BadEncryptionPolicy_ThrowException()
         {
-            (NetworkStream clientStream, NetworkStream serverStream) = await TestHelper.GetConnectedTcpStreamsAsync();
+            (NetworkStream clientStream, NetworkStream serverStream) =
+                await TestHelper.GetConnectedTcpStreamsAsync();
             using (clientStream)
             using (serverStream)
             {
-                AssertExtensions.Throws<ArgumentException>("encryptionPolicy", () =>
-                {
-                    SslStream sslStream = new SslStream(clientStream, false, TestHelper.AllowAnyServerCertificate, null, (EncryptionPolicy)100);
-                });
+                AssertExtensions.Throws<ArgumentException>(
+                    "encryptionPolicy",
+                    () =>
+                    {
+                        SslStream sslStream = new SslStream(
+                            clientStream,
+                            false,
+                            TestHelper.AllowAnyServerCertificate,
+                            null,
+                            (EncryptionPolicy)100
+                        );
+                    }
+                );
             }
         }
     }

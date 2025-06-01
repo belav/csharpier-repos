@@ -15,15 +15,11 @@ internal sealed class WindowsCertificateManager : CertificateManager
 {
     private const int UserCancelledErrorCode = 1223;
 
-    public WindowsCertificateManager()
-    {
-    }
+    public WindowsCertificateManager() { }
 
     // For testing purposes only
     internal WindowsCertificateManager(string subject, int version)
-        : base(subject, version)
-    {
-    }
+        : base(subject, version) { }
 
     protected override bool IsExportable(X509Certificate2 c)
     {
@@ -32,14 +28,21 @@ internal sealed class WindowsCertificateManager : CertificateManager
         return true;
 #else
         using var key = c.GetRSAPrivateKey();
-        return (key is RSACryptoServiceProvider rsaPrivateKey &&
-                rsaPrivateKey.CspKeyContainerInfo.Exportable) ||
-            (key is RSACng cngPrivateKey &&
-                cngPrivateKey.Key.ExportPolicy == CngExportPolicies.AllowExport);
+        return (
+                key is RSACryptoServiceProvider rsaPrivateKey
+                && rsaPrivateKey.CspKeyContainerInfo.Exportable
+            )
+            || (
+                key is RSACng cngPrivateKey
+                && cngPrivateKey.Key.ExportPolicy == CngExportPolicies.AllowExport
+            );
 #endif
     }
 
-    internal override CheckCertificateStateResult CheckCertificateState(X509Certificate2 candidate, bool interactive)
+    internal override CheckCertificateStateResult CheckCertificateState(
+        X509Certificate2 candidate,
+        bool interactive
+    )
     {
         return new CheckCertificateStateResult(true, null);
     }
@@ -49,13 +52,21 @@ internal sealed class WindowsCertificateManager : CertificateManager
         // Do nothing since we don't have anything to check here.
     }
 
-    protected override X509Certificate2 SaveCertificateCore(X509Certificate2 certificate, StoreName storeName, StoreLocation storeLocation)
+    protected override X509Certificate2 SaveCertificateCore(
+        X509Certificate2 certificate,
+        StoreName storeName,
+        StoreLocation storeLocation
+    )
     {
         // On non OSX systems we need to export the certificate and import it so that the transient
         // key that we generated gets persisted.
         var export = certificate.Export(X509ContentType.Pkcs12, "");
         certificate.Dispose();
-        certificate = new X509Certificate2(export, "", X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+        certificate = new X509Certificate2(
+            export,
+            "",
+            X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable
+        );
         Array.Clear(export, 0, export.Length);
         certificate.FriendlyName = AspNetHttpsOidFriendlyName;
 
@@ -64,21 +75,28 @@ internal sealed class WindowsCertificateManager : CertificateManager
             store.Open(OpenFlags.ReadWrite);
             store.Add(certificate);
             store.Close();
-        };
+        }
+        ;
 
         return certificate;
     }
 
     protected override void TrustCertificateCore(X509Certificate2 certificate)
     {
-        using var publicCertificate = new X509Certificate2(certificate.Export(X509ContentType.Cert));
+        using var publicCertificate = new X509Certificate2(
+            certificate.Export(X509ContentType.Cert)
+        );
 
         publicCertificate.FriendlyName = certificate.FriendlyName;
 
         using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
 
         store.Open(OpenFlags.ReadWrite);
-        var existing = store.Certificates.Find(X509FindType.FindByThumbprint, publicCertificate.Thumbprint, validOnly: false);
+        var existing = store.Certificates.Find(
+            X509FindType.FindByThumbprint,
+            publicCertificate.Thumbprint,
+            validOnly: false
+        );
         if (existing.Count > 0)
         {
             Log.WindowsCertificateAlreadyTrusted();
@@ -105,8 +123,8 @@ internal sealed class WindowsCertificateManager : CertificateManager
         using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
 
         store.Open(OpenFlags.ReadWrite);
-        var matching = store.Certificates
-            .OfType<X509Certificate2>()
+        var matching = store
+            .Certificates.OfType<X509Certificate2>()
             .SingleOrDefault(c => c.SerialNumber == certificate.SerialNumber);
 
         if (matching != null)
@@ -124,11 +142,19 @@ internal sealed class WindowsCertificateManager : CertificateManager
 
     public override bool IsTrusted(X509Certificate2 certificate)
     {
-        return ListCertificates(StoreName.Root, StoreLocation.CurrentUser, isValid: true, requireExportable: false)
+        return ListCertificates(
+                StoreName.Root,
+                StoreLocation.CurrentUser,
+                isValid: true,
+                requireExportable: false
+            )
             .Any(c => c.Thumbprint == certificate.Thumbprint);
     }
 
-    protected override IList<X509Certificate2> GetCertificatesToRemove(StoreName storeName, StoreLocation storeLocation)
+    protected override IList<X509Certificate2> GetCertificatesToRemove(
+        StoreName storeName,
+        StoreLocation storeLocation
+    )
     {
         return ListCertificates(storeName, storeLocation, isValid: false);
     }

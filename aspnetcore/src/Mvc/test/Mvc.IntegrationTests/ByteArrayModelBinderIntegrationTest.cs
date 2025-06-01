@@ -25,7 +25,7 @@ public class ByteArrayModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var prefix = fallBackScenario ? string.Empty : "Parameter1";
@@ -34,11 +34,10 @@ public class ByteArrayModelBinderIntegrationTest
         // any valid base64 string
         var expectedValue = new byte[] { 12, 13 };
         var value = Convert.ToBase64String(expectedValue);
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(queryStringKey, value);
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(queryStringKey, value);
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -74,12 +73,9 @@ public class ByteArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
 
-            ParameterType = typeof(byte[])
+            ParameterType = typeof(byte[]),
         };
 
         // No data is passed.
@@ -107,21 +103,17 @@ public class ByteArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(byte[])
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(byte[]),
         };
 
         // any valid base64 string
         var value = "four";
         var expectedValue = Convert.FromBase64String(value);
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("CustomParameter", value);
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("CustomParameter", value);
+        });
 
         var modelState = testContext.ModelState;
 

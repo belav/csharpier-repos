@@ -18,11 +18,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
     {
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal SchemaComplexType(Schema parentElement)
-        :   base(parentElement)
+            : base(parentElement)
         {
             if (Schema.DataModel == SchemaDataModelOption.EntityDataModel)
                 OtherContent.Add(Schema.SchemaSource);
@@ -34,18 +34,24 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Protected Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal override void ResolveTopLevelNames()
         {
             base.ResolveTopLevelNames();
 
-            if ( BaseType != null )
+            if (BaseType != null)
             {
-                if ( !(BaseType is SchemaComplexType) )
+                if (!(BaseType is SchemaComplexType))
                 {
-                    AddError( ErrorCode.InvalidBaseType, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidBaseTypeForNestedType(BaseType.FQName,FQName));
+                    AddError(
+                        ErrorCode.InvalidBaseType,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidBaseTypeForNestedType(
+                            BaseType.FQName,
+                            FQName
+                        )
+                    );
                 }
             }
         }
@@ -55,7 +61,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             if (base.HandleElement(reader))
             {
                 return true;
-            } 
+            }
             else if (CanHandleElement(reader, XmlConstants.ValueAnnotation))
             {
                 // EF does not support this EDM 3.0 element, so ignore it.

@@ -9,6 +9,4 @@ namespace Microsoft.JSInterop.Infrastructure;
 /// This property is public to support cross-assembly accessibility for WebAssembly and should not be used by user code.
 /// </summary>
 [EditorBrowsable(EditorBrowsableState.Never)]
-public interface IJSVoidResult
-{
-}
+public interface IJSVoidResult { }

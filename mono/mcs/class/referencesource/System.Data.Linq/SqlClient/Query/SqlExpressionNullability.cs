@@ -2,43 +2,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
-using System.Text;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Data.Linq;
 using System.Data.Linq.Provider;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Text;
 
-namespace System.Data.Linq.SqlClient {
-
-    internal static class SqlExpressionNullability {
-
+namespace System.Data.Linq.SqlClient
+{
+    internal static class SqlExpressionNullability
+    {
         /// <summary>
         /// Determines whether the given expression may return a null result.
         /// </summary>
         /// <param name="expr">The expression to check.</param>
         /// <returns>null means that it couldn't be determined</returns>
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification="These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-        internal static bool? CanBeNull(SqlExpression expr) {
-            switch (expr.NodeType) {
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+        )]
+        internal static bool? CanBeNull(SqlExpression expr)
+        {
+            switch (expr.NodeType)
+            {
                 case SqlNodeType.ExprSet:
                     SqlExprSet exprSet = (SqlExprSet)expr;
                     return CanBeNull(exprSet.Expressions);
 
-                case SqlNodeType.SimpleCase:                  
+                case SqlNodeType.SimpleCase:
                     SqlSimpleCase sc = (SqlSimpleCase)expr;
                     return CanBeNull(sc.Whens.Select(w => w.Value));
 
                 case SqlNodeType.Column:
                     SqlColumn col = (SqlColumn)expr;
-                    if (col.MetaMember != null) {
+                    if (col.MetaMember != null)
+                    {
                         return col.MetaMember.CanBeNull;
                     }
-                    else if (col.Expression != null) {
+                    else if (col.Expression != null)
+                    {
                         return CanBeNull(col.Expression);
                     }
-                    return null;  // Don't know.
+                    return null; // Don't know.
 
                 case SqlNodeType.ColumnRef:
                     SqlColumnRef cref = (SqlColumnRef)expr;
@@ -64,7 +72,8 @@ namespace System.Data.Linq.SqlClient {
                 case SqlNodeType.BitAnd:
                 case SqlNodeType.BitOr:
                 case SqlNodeType.BitXor:
-                case SqlNodeType.Concat: {
+                case SqlNodeType.Concat:
+                {
                     SqlBinary bop = (SqlBinary)expr;
                     bool? left = CanBeNull(bop.Left);
                     bool? right = CanBeNull(bop.Right);
@@ -72,12 +81,14 @@ namespace System.Data.Linq.SqlClient {
                 }
 
                 case SqlNodeType.Negate:
-                case SqlNodeType.BitNot: {
+                case SqlNodeType.BitNot:
+                {
                     SqlUnary uop = (SqlUnary)expr;
                     return CanBeNull(uop.Operand);
                 }
 
-                case SqlNodeType.Lift: {
+                case SqlNodeType.Lift:
+                {
                     SqlLift lift = (SqlLift)expr;
                     return CanBeNull(lift.Expression);
                 }
@@ -85,7 +96,7 @@ namespace System.Data.Linq.SqlClient {
                 case SqlNodeType.OuterJoinedValue:
                     return true;
 
-                default: 
+                default:
                     return null; // Don't know.
             }
         }
@@ -96,14 +107,16 @@ namespace System.Data.Linq.SqlClient {
         ///   * If no expressions are nullable, but at least one is 'don't know', the collection is 'don't know'.
         ///   * Otherwise all expressions are non-nullable and the nullability is false.
         /// </summary>
-        private static bool? CanBeNull(IEnumerable<SqlExpression> exprs) {
+        private static bool? CanBeNull(IEnumerable<SqlExpression> exprs)
+        {
             bool hasAtleastOneUnknown = false;
-            foreach(SqlExpression e in exprs) {
+            foreach (SqlExpression e in exprs)
+            {
                 bool? nullability = CanBeNull(e);
 
                 // Even one expression that could return null means the
                 // collection can return null.
-                if (nullability == true) 
+                if (nullability == true)
                     return true;
 
                 // If there is one or more 'unknown' and no definitely nullable

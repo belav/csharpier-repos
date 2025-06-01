@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.ResponseCompression;
 /// </summary>
 internal sealed class CompressionProviderFactory : ICompressionProvider
 {
-    public CompressionProviderFactory([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type providerType)
+    public CompressionProviderFactory(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type providerType
+    )
     {
         ProviderType = providerType;
     }
@@ -24,7 +27,8 @@ internal sealed class CompressionProviderFactory : ICompressionProvider
     {
         ArgumentNullException.ThrowIfNull(serviceProvider);
 
-        return (ICompressionProvider)ActivatorUtilities.CreateInstance(serviceProvider, ProviderType, Type.EmptyTypes);
+        return (ICompressionProvider)
+            ActivatorUtilities.CreateInstance(serviceProvider, ProviderType, Type.EmptyTypes);
     }
 
     string ICompressionProvider.EncodingName

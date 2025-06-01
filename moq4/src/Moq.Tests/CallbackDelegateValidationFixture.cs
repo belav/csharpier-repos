@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-
 using Moq.Language.Flow;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -17,7 +15,6 @@ namespace Moq.Tests
     /// </summary>
     /// <seealso cref="ReturnsDelegateValidationFixture"/>
     public class CallbackDelegateValidationFixture
-
     /* Unmerged change from project 'Moq.Tests(net6.0)'
     Before:
             private ISetup<IFoo> setup;
@@ -95,22 +92,16 @@ namespace Moq.Tests
 
     public partial class Instance
     {
-        public void Action(int x)
-        {
-        }
+        public void Action(int x) { }
     }
 
     public static partial class Static
     {
-        public static void Action(int x)
-        {
-        }
+        public static void Action(int x) { }
     }
 
     public static partial class Extension
     {
-        public static void Action(this IEnumerable<int> self, int x)
-        {
-        }
+        public static void Action(this IEnumerable<int> self, int x) { }
     }
 }

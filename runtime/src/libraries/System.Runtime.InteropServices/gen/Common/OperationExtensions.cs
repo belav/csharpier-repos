@@ -9,7 +9,10 @@ namespace Microsoft.Interop.Analyzers
 {
     internal static class OperationExtensions
     {
-        public static IArgumentOperation? GetArgumentByOrdinal(this IInvocationOperation operation, int ordinal)
+        public static IArgumentOperation? GetArgumentByOrdinal(
+            this IInvocationOperation operation,
+            int ordinal
+        )
         {
             if (operation.TargetMethod.Parameters.Length <= ordinal)
             {
@@ -25,7 +28,11 @@ namespace Microsoft.Interop.Analyzers
             }
             return null;
         }
-        public static IArgumentOperation? GetArgumentByOrdinal(this IObjectCreationOperation operation, int ordinal)
+
+        public static IArgumentOperation? GetArgumentByOrdinal(
+            this IObjectCreationOperation operation,
+            int ordinal
+        )
         {
             if (operation.Constructor.Parameters.Length <= ordinal)
             {

@@ -31,7 +31,9 @@ public class ServerTests
             {
                 var responseTask = client.GetAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
 
                 client.CancelPendingRequests();
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(() => responseTask);
@@ -60,7 +62,9 @@ public class ServerTests
             {
                 var responseTask = client.GetAsync(address);
 
-                var context = await server.AcceptAsync(Utilities.DefaultTimeout).Before(responseTask);
+                var context = await server
+                    .AcceptAsync(Utilities.DefaultTimeout)
+                    .Before(responseTask);
                 context.Dispose();
 
                 var response = await responseTask;

@@ -26,8 +26,18 @@ internal static partial class Interop
         /// success; if the return value is equal to the size then the result may have been truncated.
         /// On failure, returns a negative value.
         /// </returns>
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SNPrintF", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
-        internal static unsafe partial int SNPrintF(byte* str, int size, string format, string arg1);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SNPrintF",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
+        internal static unsafe partial int SNPrintF(
+            byte* str,
+            int size,
+            string format,
+            string arg1
+        );
 
         /// <summary>
         /// Takes a string and applies a formatting to it to transform
@@ -47,7 +57,12 @@ internal static partial class Interop
         /// success; if the return value is equal to the size then the result may have been truncated.
         /// On failure, returns a negative value.
         /// </returns>
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SNPrintF", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SNPrintF",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         internal static unsafe partial int SNPrintF(byte* str, int size, string format, int arg1);
     }
 }

@@ -62,7 +62,15 @@ namespace System.Reflection.Emit
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern byte[] GetBlob(Assembly asmb, ConstructorInfo con, object?[] constructorArgs, PropertyInfo[] namedProperties, object[] propertyValues, FieldInfo[] namedFields, object[] fieldValues);
+        private static extern byte[] GetBlob(
+            Assembly asmb,
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object[] propertyValues,
+            FieldInfo[] namedFields,
+            object[] fieldValues
+        );
 
         internal object Invoke()
         {
@@ -88,26 +96,67 @@ namespace System.Reflection.Emit
 
         public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs)
         {
-            Initialize(con, constructorArgs, Array.Empty<PropertyInfo>(), Array.Empty<object>(),
-                    Array.Empty<FieldInfo>(), Array.Empty<object>());
+            Initialize(
+                con,
+                constructorArgs,
+                Array.Empty<PropertyInfo>(),
+                Array.Empty<object>(),
+                Array.Empty<FieldInfo>(),
+                Array.Empty<object>()
+            );
         }
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs,
-                FieldInfo[] namedFields, object[] fieldValues)
+
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            FieldInfo[] namedFields,
+            object[] fieldValues
+        )
         {
-            Initialize(con, constructorArgs, Array.Empty<PropertyInfo>(), Array.Empty<object>(),
-                    namedFields, fieldValues);
+            Initialize(
+                con,
+                constructorArgs,
+                Array.Empty<PropertyInfo>(),
+                Array.Empty<object>(),
+                namedFields,
+                fieldValues
+            );
         }
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs,
-                PropertyInfo[] namedProperties, object[] propertyValues)
+
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object[] propertyValues
+        )
         {
-            Initialize(con, constructorArgs, namedProperties, propertyValues, Array.Empty<FieldInfo>(),
-                    Array.Empty<object>());
+            Initialize(
+                con,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                Array.Empty<FieldInfo>(),
+                Array.Empty<object>()
+            );
         }
-        public CustomAttributeBuilder(ConstructorInfo con, object?[] constructorArgs,
-                PropertyInfo[] namedProperties, object[] propertyValues,
-                FieldInfo[] namedFields, object[] fieldValues)
+
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object[] propertyValues,
+            FieldInfo[] namedFields,
+            object[] fieldValues
+        )
         {
-            Initialize(con, constructorArgs, namedProperties, propertyValues, namedFields, fieldValues);
+            Initialize(
+                con,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                namedFields,
+                fieldValues
+            );
         }
 
         private static bool IsValidType(Type t)
@@ -121,9 +170,25 @@ namespace System.Reflection.Emit
                 // depends on this
                 Enum.GetUnderlyingType(t);
             }
-            if (t.IsClass && !(t.IsArray || t == typeof(object) || typeof(Type).IsAssignableFrom(t) || t == typeof(string) || t.Assembly.GetName().Name == "mscorlib"))
+            if (
+                t.IsClass
+                && !(
+                    t.IsArray
+                    || t == typeof(object)
+                    || typeof(Type).IsAssignableFrom(t)
+                    || t == typeof(string)
+                    || t.Assembly.GetName().Name == "mscorlib"
+                )
+            )
                 return false;
-            if (t.IsValueType && !(t.IsPrimitive || t.IsEnum || ((t.Assembly is AssemblyBuilder) && t.Assembly.GetName().Name == "mscorlib")))
+            if (
+                t.IsValueType
+                && !(
+                    t.IsPrimitive
+                    || t.IsEnum
+                    || ((t.Assembly is AssemblyBuilder) && t.Assembly.GetName().Name == "mscorlib")
+                )
+            )
                 return false;
             return true;
         }
@@ -137,7 +202,12 @@ namespace System.Reflection.Emit
             {
                 if (t.IsArray && t.GetArrayRank() == 1)
                     return IsValidType(t.GetElementType()!);
-                if (!t.IsPrimitive && !typeof(Type).IsAssignableFrom(t) && t != typeof(string) && !t.IsEnum)
+                if (
+                    !t.IsPrimitive
+                    && !typeof(Type).IsAssignableFrom(t)
+                    && t != typeof(string)
+                    && !t.IsEnum
+                )
                     return false;
             }
             return true;
@@ -158,9 +228,14 @@ namespace System.Reflection.Emit
             return true;
         }
 
-        private void Initialize(ConstructorInfo con, object?[] constructorArgs,
-                PropertyInfo[] namedProperties, object[] propertyValues,
-                FieldInfo[] namedFields, object[] fieldValues)
+        private void Initialize(
+            ConstructorInfo con,
+            object?[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object[] propertyValues,
+            FieldInfo[] namedFields,
+            object[] fieldValues
+        )
         {
             ctor = con;
             args = constructorArgs;
@@ -181,11 +256,16 @@ namespace System.Reflection.Emit
             if (con.GetParametersCount() != constructorArgs.Length)
                 throw new ArgumentException(SR.Argument_BadParameterCountsForConstructor);
             if (namedProperties.Length != propertyValues.Length)
-                throw new ArgumentException(SR.Arg_ArrayLengthsDiffer, "namedProperties, propertyValues");
+                throw new ArgumentException(
+                    SR.Arg_ArrayLengthsDiffer,
+                    "namedProperties, propertyValues"
+                );
             if (namedFields.Length != fieldValues.Length)
                 throw new ArgumentException(SR.Arg_ArrayLengthsDiffer, "namedFields, fieldValues");
-            if ((con.Attributes & MethodAttributes.Static) == MethodAttributes.Static ||
-                    (con.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Private)
+            if (
+                (con.Attributes & MethodAttributes.Static) == MethodAttributes.Static
+                || (con.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Private
+            )
                 throw new ArgumentException(SR.Argument_BadConstructor);
 
             // Here coreclr does
@@ -199,22 +279,38 @@ namespace System.Reflection.Emit
             {
                 Type t = fi.DeclaringType!;
                 if ((atype != t) && (!t.IsSubclassOf(atype)) && (!atype.IsSubclassOf(t)))
-                    throw new ArgumentException(SR.Format(SR.Argument_FieldDoesNotBelongToConstructorClass, fi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_FieldDoesNotBelongToConstructorClass, fi.Name)
+                    );
                 if (!IsValidType(fi.FieldType))
-                    throw new ArgumentException(SR.Format(SR.Argument_FieldDoesNotHaveAValidType, fi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_FieldDoesNotHaveAValidType, fi.Name)
+                    );
                 if (!IsValidValue(fi.FieldType, fieldValues[i]))
-                    throw new ArgumentException(SR.Format(SR.Argument_FieldDoesNotHaveAValidValue, fi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_FieldDoesNotHaveAValidValue, fi.Name)
+                    );
                 // FIXME: Check enums and TypeBuilders as well
                 if (fieldValues[i] != null)
                     // IsEnum does not seem to work on TypeBuilders
-                    if (!(fi.FieldType is TypeBuilder) && !fi.FieldType.IsEnum && !fi.FieldType.IsInstanceOfType(fieldValues[i]))
+                    if (
+                        !(fi.FieldType is TypeBuilder)
+                        && !fi.FieldType.IsEnum
+                        && !fi.FieldType.IsInstanceOfType(fieldValues[i])
+                    )
                     {
                         //
                         // mcs always uses object[] for array types and
                         // MS.NET allows this
                         //
                         if (!fi.FieldType.IsArray)
-                            throw new ArgumentException(SR.Format(SR.Argument_UnmatchedFieldValueAndType, fi.Name, fi.FieldType));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Argument_UnmatchedFieldValueAndType,
+                                    fi.Name,
+                                    fi.FieldType
+                                )
+                            );
                     }
                 i++;
             }
@@ -223,19 +319,38 @@ namespace System.Reflection.Emit
             foreach (PropertyInfo pi in namedProperties)
             {
                 if (!pi.CanWrite)
-                    throw new ArgumentException(SR.Format(SR.Argument_PropertyMissingSetter, pi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_PropertyMissingSetter, pi.Name)
+                    );
                 Type t = pi.DeclaringType!;
                 if ((atype != t) && (!t.IsSubclassOf(atype)) && (!atype.IsSubclassOf(t)))
-                    throw new ArgumentException(SR.Format(SR.Argument_PropertyClassUnmatchedWithConstructor, pi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_PropertyClassUnmatchedWithConstructor, pi.Name)
+                    );
                 if (!IsValidType(pi.PropertyType))
-                    throw new ArgumentException(SR.Format(SR.Argument_PropertyInvalidType, pi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_PropertyInvalidType, pi.Name)
+                    );
                 if (!IsValidValue(pi.PropertyType, propertyValues[i]))
-                    throw new ArgumentException(SR.Format(SR.Argument_PropertyInvalidValue, pi.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_PropertyInvalidValue, pi.Name)
+                    );
                 if (propertyValues[i] != null)
                 {
-                    if (!(pi.PropertyType is TypeBuilder) && !pi.PropertyType.IsEnum && !pi.PropertyType.IsInstanceOfType(propertyValues[i]))
+                    if (
+                        !(pi.PropertyType is TypeBuilder)
+                        && !pi.PropertyType.IsEnum
+                        && !pi.PropertyType.IsInstanceOfType(propertyValues[i])
+                    )
                         if (!pi.PropertyType.IsArray)
-                            throw new ArgumentException(SR.Format(SR.Argument_PropertyUnmatchingPropertyType, pi.Name, pi.PropertyType, propertyValues[i]));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Argument_PropertyUnmatchingPropertyType,
+                                    pi.Name,
+                                    pi.PropertyType,
+                                    propertyValues[i]
+                                )
+                            );
                 }
                 i++;
             }
@@ -249,21 +364,47 @@ namespace System.Reflection.Emit
                     if (!IsValidType(paramType))
                         throw new ArgumentException(SR.Format(SR.Argument_ParameterInvalidType, i));
                     if (!IsValidValue(paramType, constructorArgs[i]))
-                        throw new ArgumentException(SR.Format(SR.Argument_ParameterInvalidValue, i));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_ParameterInvalidValue, i)
+                        );
 
                     if (constructorArgs[i] != null)
                     {
-                        if (!(paramType is TypeBuilder) && !paramType.IsEnum && !paramType.IsInstanceOfType(constructorArgs[i]))
+                        if (
+                            !(paramType is TypeBuilder)
+                            && !paramType.IsEnum
+                            && !paramType.IsInstanceOfType(constructorArgs[i])
+                        )
                             if (!paramType.IsArray)
-                                throw new ArgumentException(SR.Format(SR.Argument_ParameterHasUnmatchedArgumentValue, i, paramType, constructorArgs[i]));
+                                throw new ArgumentException(
+                                    SR.Format(
+                                        SR.Argument_ParameterHasUnmatchedArgumentValue,
+                                        i,
+                                        paramType,
+                                        constructorArgs[i]
+                                    )
+                                );
                         if (!IsValidParam(constructorArgs[i]!, paramType))
-                            throw new ArgumentException(SR.Format(SR.Argument_BadParameterTypeForCAB, constructorArgs[i]!.GetType()));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Argument_BadParameterTypeForCAB,
+                                    constructorArgs[i]!.GetType()
+                                )
+                            );
                     }
                 }
                 i++;
             }
 
-            data = GetBlob(atype.Assembly, con, constructorArgs, namedProperties, propertyValues, namedFields, fieldValues);
+            data = GetBlob(
+                atype.Assembly,
+                con,
+                constructorArgs,
+                namedProperties,
+                propertyValues,
+                namedFields,
+                fieldValues
+            );
         }
 
         /* helper methods */
@@ -281,7 +422,11 @@ namespace System.Reflection.Emit
             }
             else
             {
-                len = ((data[pos] & 0x1f) << 24) + (data[pos + 1] << 16) + (data[pos + 2] << 8) + data[pos + 3];
+                len =
+                    ((data[pos] & 0x1f) << 24)
+                    + (data[pos + 1] << 16)
+                    + (data[pos + 2] << 8)
+                    + data[pos + 3];
                 pos += 4;
             }
             rpos = pos;
@@ -315,9 +460,15 @@ namespace System.Reflection.Emit
             return decode_string(data, 2, out _);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2057:UnrecognizedReflectionPattern",
-            Justification = "Types referenced from custom attributes are preserved")]
-        internal static UnmanagedMarshal get_umarshal(CustomAttributeBuilder customBuilder, bool is_field)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2057:UnrecognizedReflectionPattern",
+            Justification = "Types referenced from custom attributes are preserved"
+        )]
+        internal static UnmanagedMarshal get_umarshal(
+            CustomAttributeBuilder customBuilder,
+            bool is_field
+        )
         {
             byte[] data = customBuilder.Data;
             UnmanagedType subtype = (UnmanagedType)0x50; /* NATIVE_MAX */
@@ -402,7 +553,9 @@ namespace System.Reflection.Emit
                         marshalCookie = decode_string(data, pos, out pos)!;
                         break;
                     default:
-                        throw new Exception(SR.Format(SR.Exception_UnknownMarshalAsAttributeField, named_name));
+                        throw new Exception(
+                            SR.Format(SR.Exception_UnknownMarshalAsAttributeField, named_name)
+                        );
                 }
             }
 
@@ -410,12 +563,16 @@ namespace System.Reflection.Emit
             {
                 case UnmanagedType.LPArray:
                     if (hasSize)
-                        return UnmanagedMarshal.DefineLPArrayInternal(subtype, sizeConst, sizeParamIndex);
+                        return UnmanagedMarshal.DefineLPArrayInternal(
+                            subtype,
+                            sizeConst,
+                            sizeParamIndex
+                        );
                     else
                         return UnmanagedMarshal.DefineLPArray(subtype);
 #if FEATURE_COMINTEROP
-			case UnmanagedType.SafeArray:
-				return UnmanagedMarshal.DefineSafeArray (subtype);
+                case UnmanagedType.SafeArray:
+                    return UnmanagedMarshal.DefineSafeArray(subtype);
 #endif
                 case UnmanagedType.ByValArray:
                     if (!is_field)
@@ -425,8 +582,13 @@ namespace System.Reflection.Emit
                 case UnmanagedType.ByValTStr:
                     return UnmanagedMarshal.DefineByValTStr(sizeConst);
 #if FEATURE_COMINTEROP
-			case UnmanagedType.CustomMarshaler:
-				return UnmanagedMarshal.DefineCustom (marshalTypeRef, marshalCookie, marshalTypeName, Guid.Empty);
+                case UnmanagedType.CustomMarshaler:
+                    return UnmanagedMarshal.DefineCustom(
+                        marshalTypeRef,
+                        marshalCookie,
+                        marshalTypeName,
+                        Guid.Empty
+                    );
 #endif
                 default:
                     return UnmanagedMarshal.DefineUnmanagedMarshal((UnmanagedType)utype);
@@ -450,10 +612,17 @@ namespace System.Reflection.Emit
                 0x0c => typeof(float),
                 0x0d => typeof(double),
                 0x0e => typeof(string),
-                _ => throw new Exception(SR.Format(SR.ArgumentException_InvalidTypeArgument, elementType)),
+                _ => throw new Exception(
+                    SR.Format(SR.ArgumentException_InvalidTypeArgument, elementType)
+                ),
             };
 
-        private static object? decode_cattr_value(Type t, ReadOnlySpan<byte> data, int pos, out int rpos)
+        private static object? decode_cattr_value(
+            Type t,
+            ReadOnlySpan<byte> data,
+            int pos,
+            out int rpos
+        )
         {
             switch (Type.GetTypeCode(t))
             {
@@ -468,7 +637,10 @@ namespace System.Reflection.Emit
                     return string_from_bytes(data, pos, len);
                 case TypeCode.Int32:
                     rpos = pos + 4;
-                    return data[pos] + (data[pos + 1] << 8) + (data[pos + 2] << 16) + (data[pos + 3] << 24);
+                    return data[pos]
+                        + (data[pos + 1] << 8)
+                        + (data[pos + 2] << 16)
+                        + (data[pos + 3] << 24);
                 case TypeCode.Boolean:
                     rpos = pos + 1;
                     return (data[pos] == 0) ? false : true;
@@ -481,7 +653,9 @@ namespace System.Reflection.Emit
                     else
                         throw new Exception(SR.Exception_UnhandledSubType);
                 default:
-                    throw new Exception("FIXME: Type " + t + " not yet handled in decode_cattr_value.");
+                    throw new Exception(
+                        "FIXME: Type " + t + " not yet handled in decode_cattr_value."
+                    );
             }
         }
 
@@ -500,11 +674,20 @@ namespace System.Reflection.Emit
             return decode_cattr(ctor, data);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2057:UnrecognizedReflectionPattern",
-            Justification = "Types referenced from custom attributes are preserved")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Types referenced from custom attributes are preserved")]
-        internal static CustomAttributeInfo decode_cattr(ConstructorInfo ctor, ReadOnlySpan<byte> data)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2057:UnrecognizedReflectionPattern",
+            Justification = "Types referenced from custom attributes are preserved"
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Types referenced from custom attributes are preserved"
+        )]
+        internal static CustomAttributeInfo decode_cattr(
+            ConstructorInfo ctor,
+            ReadOnlySpan<byte> data
+        )
         {
             int pos;
 
@@ -512,7 +695,9 @@ namespace System.Reflection.Emit
 
             // Prolog
             if (data.Length < 2)
-                throw new Exception(SR.Format(SR.Exception_InvalidCustomAttributeLength, data.Length));
+                throw new Exception(
+                    SR.Format(SR.Exception_InvalidCustomAttributeLength, data.Length)
+                );
             if ((data[0] != 0x1) || (data[1] != 0x00))
                 throw new Exception(SR.Exception_InvalidProlog);
             pos = 2;
@@ -549,9 +734,18 @@ namespace System.Reflection.Emit
                 if (named_type == 0x53)
                 {
                     /* Field */
-                    FieldInfo? fi = ctor.DeclaringType!.GetField(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                    FieldInfo? fi = ctor.DeclaringType!.GetField(
+                        name,
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    );
                     if (fi == null)
-                        throw new Exception(SR.Format(SR.Exception_EmptyFieldForCustomAttributeType, ctor.DeclaringType, name));
+                        throw new Exception(
+                            SR.Format(
+                                SR.Exception_EmptyFieldForCustomAttributeType,
+                                ctor.DeclaringType,
+                                name
+                            )
+                        );
 
                     object? val = decode_cattr_value(fi.FieldType, data, pos, out pos);
                     if (enum_type_name != null)

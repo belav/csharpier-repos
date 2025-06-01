@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Client;
-using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Tests;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Logging.Testing;
@@ -51,7 +51,9 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
     [Fact]
     public void CannotCreateConnectionWithNullUrlOnOptions()
     {
-        var exception = Assert.Throws<ArgumentException>(() => new HttpConnection(new HttpConnectionOptions(), NullLoggerFactory.Instance));
+        var exception = Assert.Throws<ArgumentException>(() =>
+            new HttpConnection(new HttpConnectionOptions(), NullLoggerFactory.Instance)
+        );
         Assert.Equal("httpConnectionOptions", exception.ParamName);
     }
 
@@ -59,8 +61,13 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
     public void CannotSetConnectionId()
     {
         var connection = new HttpConnection(new Uri("http://fakeuri.org/"));
-        var exception = Assert.Throws<InvalidOperationException>(() => connection.ConnectionId = "custom conneciton ID");
-        Assert.Equal("The ConnectionId is set internally and should not be set by user code.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            connection.ConnectionId = "custom conneciton ID"
+        );
+        Assert.Equal(
+            "The ConnectionId is set internally and should not be set by user code.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -69,12 +76,16 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
         var testHttpHandler = TestHttpMessageHandler.CreateDefault();
 
         var negotiateUrlTcs = new TaskCompletionSource<string>();
-        testHttpHandler.OnNegotiate((request, cancellationToken) =>
-        {
-            negotiateUrlTcs.TrySetResult(request.RequestUri.ToString());
-            return ResponseUtils.CreateResponse(HttpStatusCode.OK,
-                ResponseUtils.CreateNegotiationContent());
-        });
+        testHttpHandler.OnNegotiate(
+            (request, cancellationToken) =>
+            {
+                negotiateUrlTcs.TrySetResult(request.RequestUri.ToString());
+                return ResponseUtils.CreateResponse(
+                    HttpStatusCode.OK,
+                    ResponseUtils.CreateNegotiationContent()
+                );
+            }
+        );
 
         HttpClientHandler httpClientHandler = null;
 
@@ -98,7 +109,8 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
             async (connection) =>
             {
                 await connection.StartAsync().DefaultTimeout();
-            });
+            }
+        );
 
         Assert.NotNull(httpClientHandler);
         Assert.Equal(1, httpClientHandler.CookieContainer.Count);
@@ -122,20 +134,26 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
     {
         var testHttpHandler = new TestHttpMessageHandler(false);
 
-        testHttpHandler.OnNegotiate((request, cancellationToken) => ResponseUtils.CreateResponse(HttpStatusCode.BadGateway));
+        testHttpHandler.OnNegotiate(
+            (request, cancellationToken) => ResponseUtils.CreateResponse(HttpStatusCode.BadGateway)
+        );
 
         var httpOptions = new HttpConnectionOptions();
         httpOptions.Url = new Uri("http://fakeuri.org/");
         httpOptions.HttpMessageHandlerFactory = inner => testHttpHandler;
 
-        const string loggerName = "Microsoft.AspNetCore.Http.Connections.Client.Internal.LoggingHttpMessageHandler";
+        const string loggerName =
+            "Microsoft.AspNetCore.Http.Connections.Client.Internal.LoggingHttpMessageHandler";
         var testSink = new TestSink();
         var logger = new TestLogger(loggerName, testSink, true);
 
         var mockLoggerFactory = new Mock<ILoggerFactory>();
         mockLoggerFactory
             .Setup(m => m.CreateLogger(It.IsAny<string>()))
-            .Returns((string categoryName) => (categoryName == loggerName) ? (ILogger)logger : NullLogger.Instance);
+            .Returns(
+                (string categoryName) =>
+                    (categoryName == loggerName) ? (ILogger)logger : NullLogger.Instance
+            );
 
         try
         {
@@ -144,7 +162,8 @@ public partial class HttpConnectionTests : VerifiableLoggedTest
                 async (connection) =>
                 {
                     await connection.StartAsync().DefaultTimeout();
-                });
+                }
+            );
         }
         catch
         {

@@ -28,7 +28,8 @@ public class PageHandlerExecutedContext : FilterContext
         PageContext pageContext,
         IList<IFilterMetadata> filters,
         HandlerMethodDescriptor? handlerMethod,
-        object handlerInstance)
+        object handlerInstance
+    )
         : base(pageContext, filters)
     {
         ArgumentNullException.ThrowIfNull(handlerInstance);
@@ -75,7 +76,6 @@ public class PageHandlerExecutedContext : FilterContext
                 return _exception;
             }
         }
-
         set
         {
             _exceptionDispatchInfo = null;
@@ -90,7 +90,6 @@ public class PageHandlerExecutedContext : FilterContext
     public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
     {
         get => _exceptionDispatchInfo;
-
         set
         {
             _exception = null;

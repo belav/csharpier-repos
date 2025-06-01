@@ -18,18 +18,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class ImplicitNamedTypeSymbol : SourceMemberContainerTypeSymbol
     {
-        internal ImplicitNamedTypeSymbol(NamespaceOrTypeSymbol containingSymbol, MergedTypeDeclaration declaration, BindingDiagnosticBag diagnostics)
+        internal ImplicitNamedTypeSymbol(
+            NamespaceOrTypeSymbol containingSymbol,
+            MergedTypeDeclaration declaration,
+            BindingDiagnosticBag diagnostics
+        )
             : base(containingSymbol, declaration, diagnostics)
         {
-            Debug.Assert(declaration.Kind == DeclarationKind.ImplicitClass ||
-                         declaration.Kind == DeclarationKind.Submission ||
-                         declaration.Kind == DeclarationKind.Script);
+            Debug.Assert(
+                declaration.Kind == DeclarationKind.ImplicitClass
+                    || declaration.Kind == DeclarationKind.Submission
+                    || declaration.Kind == DeclarationKind.Script
+            );
 
             state.NotePartComplete(CompletionPart.EnumUnderlyingType); // No work to do for this.
         }
 
-        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData)
-            => throw ExceptionUtilities.Unreachable();
+        protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
+            throw ExceptionUtilities.Unreachable();
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -53,27 +59,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Returns null for a submission class.
         /// This ensures that a submission class does not inherit methods such as ToString or GetHashCode.
         /// </summary>
-        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics
-            => IsScriptClass ? null : this.DeclaringCompilation.GetSpecialType(Microsoft.CodeAnalysis.SpecialType.System_Object);
+        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+            IsScriptClass
+                ? null
+                : this.DeclaringCompilation.GetSpecialType(
+                    Microsoft.CodeAnalysis.SpecialType.System_Object
+                );
 
         protected override void CheckBase(BindingDiagnosticBag diagnostics)
         {
-            // check that System.Object is available. 
+            // check that System.Object is available.
             // Although submission semantically doesn't have a base class we need to emit one.
-            diagnostics.ReportUseSite(this.DeclaringCompilation.GetSpecialType(SpecialType.System_Object), GetFirstLocation());
+            diagnostics.ReportUseSite(
+                this.DeclaringCompilation.GetSpecialType(SpecialType.System_Object),
+                GetFirstLocation()
+            );
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return BaseTypeNoUseSiteDiagnostics;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return ImmutableArray<NamedTypeSymbol>.Empty;
         }
@@ -173,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsInterpolatedStringHandlerType => false;
 
-        internal sealed override NamedTypeSymbol AsNativeInteger() => throw ExceptionUtilities.Unreachable();
+        internal sealed override NamedTypeSymbol AsNativeInteger() =>
+            throw ExceptionUtilities.Unreachable();
 
         internal sealed override NamedTypeSymbol NativeIntegerUnderlyingType => null;
 
@@ -184,7 +204,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
 #nullable enable
-        internal sealed override bool HasCollectionBuilderAttribute(out TypeSymbol? builderType, out string? methodName)
+        internal sealed override bool HasCollectionBuilderAttribute(
+            out TypeSymbol? builderType,
+            out string? methodName
+        )
         {
             builderType = null;
             methodName = null;

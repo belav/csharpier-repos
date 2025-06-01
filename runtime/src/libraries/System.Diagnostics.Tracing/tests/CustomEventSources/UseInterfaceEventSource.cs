@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
@@ -26,10 +25,14 @@ namespace SdtEventSources
 
         [Event(1)]
         public void Error(int errorCode, string msg)
-        { WriteEvent(1, errorCode, msg); }
+        {
+            WriteEvent(1, errorCode, msg);
+        }
 
         [Event(2)]
         public void Warning(string msg)
-        { WriteEvent(2, msg); }
+        {
+            WriteEvent(2, msg);
+        }
     }
 }

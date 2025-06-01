@@ -11,9 +11,7 @@ internal sealed class ChangeCookieAction : UrlAction
     private CookieOptions? _cachedOptions;
 
     public ChangeCookieAction(string name)
-        : this(name, () => DateTimeOffset.UtcNow)
-    {
-    }
+        : this(name, () => DateTimeOffset.UtcNow) { }
 
     // for testing
     internal ChangeCookieAction(string name, Func<DateTimeOffset> timeSource)
@@ -32,7 +30,11 @@ internal sealed class ChangeCookieAction : UrlAction
     public bool Secure { get; set; }
     public bool HttpOnly { get; set; }
 
-    public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override void ApplyAction(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var options = GetOrCreateOptions();
         context.HttpContext.Response.Cookies.Append(Name, Value ?? string.Empty, options);
@@ -49,7 +51,7 @@ internal sealed class ChangeCookieAction : UrlAction
                 HttpOnly = HttpOnly,
                 Secure = Secure,
                 Path = Path,
-                Expires = now.Add(Lifetime)
+                Expires = now.Add(Lifetime),
             };
         }
 
@@ -60,7 +62,7 @@ internal sealed class ChangeCookieAction : UrlAction
                 Domain = Domain,
                 HttpOnly = HttpOnly,
                 Secure = Secure,
-                Path = Path
+                Path = Path,
             };
         }
 

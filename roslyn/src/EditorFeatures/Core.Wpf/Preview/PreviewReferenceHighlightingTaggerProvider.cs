@@ -4,15 +4,15 @@
 
 #nullable disable
 
+using System;
 using System.ComponentModel.Composition;
+using Microsoft.CodeAnalysis.Editor.ReferenceHighlighting;
 using Microsoft.CodeAnalysis.Editor.Shared.Preview;
 using Microsoft.CodeAnalysis.Editor.Shared.Tagging;
+using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Text.Tagging;
 using Microsoft.VisualStudio.Utilities;
-using Microsoft.CodeAnalysis.Editor.ReferenceHighlighting;
-using System;
-using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
@@ -31,9 +31,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PreviewReferenceHighlightingTaggerProvider()
-            : base(PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey, ReferenceHighlightTag.Instance)
-        {
-        }
+            : base(
+                PredefinedPreviewTaggerKeys.ReferenceHighlightingSpansKey,
+                ReferenceHighlightTag.Instance
+            ) { }
     }
 
     [Export(typeof(ITaggerProvider))]
@@ -47,9 +48,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PreviewWrittenReferenceHighlightingTaggerProvider()
-            : base(PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey, WrittenReferenceHighlightTag.Instance)
-        {
-        }
+            : base(
+                PredefinedPreviewTaggerKeys.WrittenReferenceHighlightingSpansKey,
+                WrittenReferenceHighlightTag.Instance
+            ) { }
     }
 
     [Export(typeof(ITaggerProvider))]
@@ -63,8 +65,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public PreviewDefinitionHighlightingTaggerProvider()
-            : base(PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey, DefinitionHighlightTag.Instance)
-        {
-        }
+            : base(
+                PredefinedPreviewTaggerKeys.DefinitionHighlightingSpansKey,
+                DefinitionHighlightTag.Instance
+            ) { }
     }
 }

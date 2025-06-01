@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,80 +29,94 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	internal abstract class LayeredOutputChannel : LayeredCommunicationObject, IOutputChannel
-	{
-		IOutputChannel inner;
+    internal abstract class LayeredOutputChannel : LayeredCommunicationObject, IOutputChannel
+    {
+        IOutputChannel inner;
 
-		public LayeredOutputChannel (IOutputChannel source)
-			: base (source)
-		{
-			inner = source;
-		}
+        public LayeredOutputChannel(IOutputChannel source)
+            : base(source)
+        {
+            inner = source;
+        }
 
-		public abstract ChannelFactoryBase Factory { get; }
+        public abstract ChannelFactoryBase Factory { get; }
 
-		public override ChannelManagerBase ChannelManager {
-			get { return Factory; }
-		}
+        public override ChannelManagerBase ChannelManager
+        {
+            get { return Factory; }
+        }
 
-		// IOutputChannel
-		public virtual EndpointAddress RemoteAddress {
-			get { return inner.RemoteAddress; }
-		}
+        // IOutputChannel
+        public virtual EndpointAddress RemoteAddress
+        {
+            get { return inner.RemoteAddress; }
+        }
 
-		public IAsyncResult BeginSend (Message message, AsyncCallback callback, object state)
-		{
-			// FIXME: send + receive?
-			return BeginSend (message, Factory.DefaultSendTimeout, callback, state);
-		}
+        public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
+        {
+            // FIXME: send + receive?
+            return BeginSend(message, Factory.DefaultSendTimeout, callback, state);
+        }
 
-		public virtual IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			ThrowIfNotOpen ();
-			return OnBeginSend (message, timeout, callback, state);
-		}
+        public virtual IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            ThrowIfNotOpen();
+            return OnBeginSend(message, timeout, callback, state);
+        }
 
-		protected virtual IAsyncResult OnBeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			return inner.BeginSend (message, timeout, callback, state);
-		}
+        protected virtual IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            return inner.BeginSend(message, timeout, callback, state);
+        }
 
-		public void EndSend (IAsyncResult result)
-		{
-			OnEndSend (result);
-		}
+        public void EndSend(IAsyncResult result)
+        {
+            OnEndSend(result);
+        }
 
-		protected virtual void OnEndSend (IAsyncResult result)
-		{
-			inner.EndSend (result);
-		}
+        protected virtual void OnEndSend(IAsyncResult result)
+        {
+            inner.EndSend(result);
+        }
 
-		public void Send (Message message)
-		{
-			// FIXME: send + receive?
-			Send (message, Factory.DefaultSendTimeout);
-		}
+        public void Send(Message message)
+        {
+            // FIXME: send + receive?
+            Send(message, Factory.DefaultSendTimeout);
+        }
 
-		public void Send (Message message, TimeSpan timeout)
-		{
-			ThrowIfNotOpen ();
-			OnSend (message, timeout);
-		}
+        public void Send(Message message, TimeSpan timeout)
+        {
+            ThrowIfNotOpen();
+            OnSend(message, timeout);
+        }
 
-		protected virtual void OnSend (Message message, TimeSpan timeout)
-		{
-			inner.Send (message, timeout);
-		}
+        protected virtual void OnSend(Message message, TimeSpan timeout)
+        {
+            inner.Send(message, timeout);
+        }
 
-		public virtual Uri Via {
-			get { return inner.Via; }
-		}
+        public virtual Uri Via
+        {
+            get { return inner.Via; }
+        }
 
-		// IChannel
+        // IChannel
 
-		public virtual T GetProperty<T> () where T : class
-		{
-			return inner.GetProperty<T> ();
-		}
-	}
+        public virtual T GetProperty<T>()
+            where T : class
+        {
+            return inner.GetProperty<T>();
+        }
+    }
 }

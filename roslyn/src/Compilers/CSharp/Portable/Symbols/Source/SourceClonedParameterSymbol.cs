@@ -22,7 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected readonly SourceParameterSymbol _originalParam;
 
-        internal SourceClonedParameterSymbol(SourceParameterSymbol originalParam, Symbol newOwner, int newOrdinal, bool suppressOptional)
+        internal SourceClonedParameterSymbol(
+            SourceParameterSymbol originalParam,
+            Symbol newOwner,
+            int newOrdinal,
+            bool suppressOptional
+        )
             : base(newOwner, newOrdinal)
         {
             Debug.Assert((object)originalParam != null);
@@ -38,7 +43,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                // Since you can't get from the syntax node that represents the original parameter 
+                // Since you can't get from the syntax node that represents the original parameter
                 // back to this symbol we decided not to return the original syntax node here.
                 return ImmutableArray<SyntaxReference>.Empty;
             }
@@ -54,7 +59,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // pseudo-custom attributes are not suppressed:
-                return _suppressOptional ? _originalParam.HasOptionalAttribute : _originalParam.IsMetadataOptional;
+                return _suppressOptional
+                    ? _originalParam.HasOptionalAttribute
+                    : _originalParam.IsMetadataOptional;
             }
         }
 
@@ -69,7 +76,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // pseudo-custom attributes are not suppressed:
-                return _suppressOptional ? _originalParam.DefaultValueFromAttributes : _originalParam.ExplicitDefaultConstantValue;
+                return _suppressOptional
+                    ? _originalParam.DefaultValueFromAttributes
+                    : _originalParam.ExplicitDefaultConstantValue;
             }
         }
 
@@ -145,9 +154,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ImmutableHashSet<string>.Empty; }
         }
 
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => throw ExceptionUtilities.Unreachable();
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override bool HasInterpolatedStringHandlerArgumentError => throw ExceptionUtilities.Unreachable();
+        internal override bool HasInterpolatedStringHandlerArgumentError =>
+            throw ExceptionUtilities.Unreachable();
 
         #endregion
     }

@@ -66,7 +66,10 @@ namespace RabbitMQ.Client.Impl
     {
         private NetworkBinaryReader m_reader;
 
-        public NetworkBinaryReader BaseReader { get { return m_reader; } }
+        public NetworkBinaryReader BaseReader
+        {
+            get { return m_reader; }
+        }
 
         protected ushort m_flagWord;
         protected ushort m_bitCount;
@@ -78,13 +81,18 @@ namespace RabbitMQ.Client.Impl
             m_bitCount = 15; // the correct position to force a m_flagWord read
         }
 
-        public bool ContinuationBitSet { get { return ((m_flagWord & 1) != 0); } }
+        public bool ContinuationBitSet
+        {
+            get { return ((m_flagWord & 1) != 0); }
+        }
 
         public void ReadFlagWord()
         {
             if (!ContinuationBitSet)
             {
-                throw new MalformedFrameException("Attempted to read flag word when none advertised");
+                throw new MalformedFrameException(
+                    "Attempted to read flag word when none advertised"
+                );
             }
             m_flagWord = m_reader.ReadUInt16();
             m_bitCount = 0;
@@ -102,7 +110,7 @@ namespace RabbitMQ.Client.Impl
             m_bitCount++;
             return result;
         }
-        
+
         public void FinishPresence()
         {
             if (ContinuationBitSet)
@@ -125,7 +133,7 @@ namespace RabbitMQ.Client.Impl
         {
             return WireFormatting.ReadShortstr(m_reader);
         }
-        
+
         public byte[] ReadLongstr()
         {
             return WireFormatting.ReadLongstr(m_reader);

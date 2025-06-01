@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
@@ -24,12 +23,29 @@ namespace ILCompiler
             /// This method also records bindings for any generic instances it finds inside the tree expression.
             /// Sometimes, this side-effect is all that's wanted - in such cases, invoke this method with a default collector.
             /// </summary>
-            private static void ForEachEmbeddedGenericFormal(TypeDesc typeExpression, Instantiation typeContext, Instantiation methodContext, ref EmbeddingStateList collector)
+            private static void ForEachEmbeddedGenericFormal(
+                TypeDesc typeExpression,
+                Instantiation typeContext,
+                Instantiation methodContext,
+                ref EmbeddingStateList collector
+            )
             {
-                ForEachEmbeddedGenericFormalWorker(typeExpression, typeContext, methodContext, ref collector, depth: 0);
+                ForEachEmbeddedGenericFormalWorker(
+                    typeExpression,
+                    typeContext,
+                    methodContext,
+                    ref collector,
+                    depth: 0
+                );
             }
 
-            private static void ForEachEmbeddedGenericFormalWorker(TypeDesc type, Instantiation typeContext, Instantiation methodContext, ref EmbeddingStateList collector, int depth)
+            private static void ForEachEmbeddedGenericFormalWorker(
+                TypeDesc type,
+                Instantiation typeContext,
+                Instantiation methodContext,
+                ref EmbeddingStateList collector,
+                int depth
+            )
             {
                 switch (type.Category)
                 {
@@ -37,16 +53,24 @@ namespace ILCompiler
                     case TypeFlags.SzArray:
                     case TypeFlags.ByRef:
                     case TypeFlags.Pointer:
-                        ForEachEmbeddedGenericFormalWorker(((ParameterizedType)type).ParameterType, typeContext, methodContext, ref collector, depth + 1);
+                        ForEachEmbeddedGenericFormalWorker(
+                            ((ParameterizedType)type).ParameterType,
+                            typeContext,
+                            methodContext,
+                            ref collector,
+                            depth + 1
+                        );
                         return;
                     case TypeFlags.FunctionPointer:
                         return;
                     case TypeFlags.SignatureMethodVariable:
-                        var methodParam = (EcmaGenericParameter)methodContext[((SignatureMethodVariable)type).Index];
+                        var methodParam = (EcmaGenericParameter)
+                            methodContext[((SignatureMethodVariable)type).Index];
                         collector.Collect(methodParam, depth);
                         return;
                     case TypeFlags.SignatureTypeVariable:
-                        var typeParam = (EcmaGenericParameter)typeContext[((SignatureTypeVariable)type).Index];
+                        var typeParam = (EcmaGenericParameter)
+                            typeContext[((SignatureTypeVariable)type).Index];
                         collector.Collect(typeParam, depth);
                         return;
                     default:
@@ -61,15 +85,29 @@ namespace ILCompiler
                         Instantiation genericTypeArguments = type.Instantiation;
                         for (int i = 0; i < genericTypeArguments.Length; i++)
                         {
-                            var genericTypeParameter = (EcmaGenericParameter)genericTypeParameters[i];
+                            var genericTypeParameter = (EcmaGenericParameter)
+                                genericTypeParameters[i];
                             TypeDesc genericTypeArgument = genericTypeArguments[i];
 
                             int newDepth = depth + 1;
-                            collector.Push(static delegate (in EmbeddingState state, GraphBuilder builder, EcmaGenericParameter embedded, int depth)
-                            {
-                                bool isProperEmbedding = (depth > state.NewDepth);
-                                builder.RecordBinding(state.GenericTypeParameter, embedded, isProperEmbedding);
-                            }, genericTypeParameter, newDepth);
+                            collector.Push(
+                                static delegate(
+                                    in EmbeddingState state,
+                                    GraphBuilder builder,
+                                    EcmaGenericParameter embedded,
+                                    int depth
+                                )
+                                {
+                                    bool isProperEmbedding = (depth > state.NewDepth);
+                                    builder.RecordBinding(
+                                        state.GenericTypeParameter,
+                                        embedded,
+                                        isProperEmbedding
+                                    );
+                                },
+                                genericTypeParameter,
+                                newDepth
+                            );
                             ForEachEmbeddedGenericFormalWorker(
                                 genericTypeArgument,
                                 typeContext,
@@ -83,7 +121,12 @@ namespace ILCompiler
                 }
             }
 
-            private delegate void Collector(in EmbeddingState state, GraphBuilder builder, EcmaGenericParameter embedded, int depth);
+            private delegate void Collector(
+                in EmbeddingState state,
+                GraphBuilder builder,
+                EcmaGenericParameter embedded,
+                int depth
+            );
 
             private struct EmbeddingState
             {
@@ -91,10 +134,22 @@ namespace ILCompiler
                 public readonly EcmaGenericParameter GenericTypeParameter;
                 public readonly int NewDepth;
 
-                public EmbeddingState(Collector collector, EcmaGenericParameter genericTypeParameter, int newDepth)
-                    => (_collector, GenericTypeParameter, NewDepth) = (collector, genericTypeParameter, newDepth);
+                public EmbeddingState(
+                    Collector collector,
+                    EcmaGenericParameter genericTypeParameter,
+                    int newDepth
+                ) =>
+                    (_collector, GenericTypeParameter, NewDepth) = (
+                        collector,
+                        genericTypeParameter,
+                        newDepth
+                    );
 
-                public void Invoke(GraphBuilder builder, EcmaGenericParameter embedded, int depth2) => _collector(this, builder, embedded, depth2);
+                public void Invoke(
+                    GraphBuilder builder,
+                    EcmaGenericParameter embedded,
+                    int depth2
+                ) => _collector(this, builder, embedded, depth2);
             }
 
             private struct EmbeddingStateList
@@ -112,15 +167,31 @@ namespace ILCompiler
 
                 public EmbeddingStateList(GraphBuilder builder) => _builder = builder;
 
-                public void Push(Collector collector, EcmaGenericParameter genericTypeParameter, int newDepth)
+                public void Push(
+                    Collector collector,
+                    EcmaGenericParameter genericTypeParameter,
+                    int newDepth
+                )
                 {
-                    EmbeddingState state = new EmbeddingState(collector, genericTypeParameter, newDepth);
+                    EmbeddingState state = new EmbeddingState(
+                        collector,
+                        genericTypeParameter,
+                        newDepth
+                    );
                     switch (_numItems)
                     {
-                        case 0: _item0 = state; break;
-                        case 1: _item1 = state; break;
-                        case 2: _item2 = state; break;
-                        case 3: _item3 = state; break;
+                        case 0:
+                            _item0 = state;
+                            break;
+                        case 1:
+                            _item1 = state;
+                            break;
+                        case 2:
+                            _item2 = state;
+                            break;
+                        case 3:
+                            _item3 = state;
+                            break;
                         default:
                             (_overflow ??= new List<EmbeddingState>()).Add(state);
                             break;

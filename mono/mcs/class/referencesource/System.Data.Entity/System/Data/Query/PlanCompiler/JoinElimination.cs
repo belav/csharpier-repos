@@ -9,36 +9,35 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
+using System.Data.Query.InternalTrees;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
 
 using System.Globalization;
 
-using System.Data.Query.InternalTrees;
-using System.Data.Metadata.Edm;
-
 namespace System.Data.Query.PlanCompiler
 {
     /// <summary>
-    /// The JoinElimination module is intended to do just that - eliminate unnecessary joins. 
+    /// The JoinElimination module is intended to do just that - eliminate unnecessary joins.
     /// This module deals with the following kinds of joins
-    ///    * Self-joins: The join can be eliminated, and either of the table instances can be 
+    ///    * Self-joins: The join can be eliminated, and either of the table instances can be
     ///                  used instead
     ///    * Implied self-joins: Same as above
-    ///    * PK-FK joins: (More generally, UniqueKey-FK joins): Eliminate the join, and use just the FK table, if no 
+    ///    * PK-FK joins: (More generally, UniqueKey-FK joins): Eliminate the join, and use just the FK table, if no
     ///       column of the PK table is used (other than the join condition)
     ///    * PK-PK joins: Eliminate the right side table, if we have a left-outer join
     /// </summary>
@@ -50,9 +49,15 @@ namespace System.Data.Query.PlanCompiler
 
         #region private state
         private PlanCompiler m_compilerState;
-        private Command Command { get { return m_compilerState.Command; } }
-        private ConstraintManager ConstraintManager { get { return m_compilerState.ConstraintManager;  } }
-        private Dictionary<Node, Node> m_joinGraphUnnecessaryMap = new Dictionary<Node,Node>();
+        private Command Command
+        {
+            get { return m_compilerState.Command; }
+        }
+        private ConstraintManager ConstraintManager
+        {
+            get { return m_compilerState.ConstraintManager; }
+        }
+        private Dictionary<Node, Node> m_joinGraphUnnecessaryMap = new Dictionary<Node, Node>();
         private VarRemapper m_varRemapper;
         private bool m_treeModified = false;
         private VarRefManager m_varRefManager;
@@ -64,7 +69,7 @@ namespace System.Data.Query.PlanCompiler
         {
             m_compilerState = compilerState;
             m_varRemapper = new VarRemapper(m_compilerState.Command);
-            m_varRefManager = new VarRefManager(m_compilerState.Command); 
+            m_varRefManager = new VarRefManager(m_compilerState.Command);
         }
         #endregion
 
@@ -102,14 +107,20 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Do the real processing of the join graph. 
+        /// Do the real processing of the join graph.
         /// </summary>
         /// <param name="joinNode">current join node</param>
         /// <returns>modified join node</returns>
         private Node ProcessJoinGraph(Node joinNode)
         {
             // Build the join graph
-            JoinGraph joinGraph = new JoinGraph(this.Command, this.ConstraintManager, this.m_varRefManager, joinNode, this.IsSqlCeProvider);
+            JoinGraph joinGraph = new JoinGraph(
+                this.Command,
+                this.ConstraintManager,
+                this.m_varRefManager,
+                joinNode,
+                this.IsSqlCeProvider
+            );
 
             // Get the transformed node tree
             VarMap remappedVars;
@@ -141,17 +152,22 @@ namespace System.Data.Query.PlanCompiler
                 {
                     // Figure out if we are using SQL CE by asking the store provider manifest for its namespace name.
                     PlanCompiler.Assert(m_compilerState != null, "Plan compiler cannot be null");
-                    var sspace = (StoreItemCollection)m_compilerState.MetadataWorkspace.GetItemCollection(Metadata.Edm.DataSpace.SSpace);
+                    var sspace = (StoreItemCollection)
+                        m_compilerState.MetadataWorkspace.GetItemCollection(
+                            Metadata.Edm.DataSpace.SSpace
+                        );
                     if (sspace != null)
                     {
-                        m_isSqlCe = sspace.StoreProviderManifest.NamespaceName == JoinElimination.SqlServerCeNamespaceName;
+                        m_isSqlCe =
+                            sspace.StoreProviderManifest.NamespaceName
+                            == JoinElimination.SqlServerCeNamespaceName;
                     }
                 }
                 // If the sspace was null then m_isSqlCe still doesn't have a value. Use 'false' as default.
                 return m_isSqlCe.HasValue ? m_isSqlCe.Value : false;
             }
         }
-        
+
         /// <summary>
         /// Default handler for a node. Simply visits the children, then handles any var
         /// remapping, and then recomputes the node info
@@ -220,6 +236,5 @@ namespace System.Data.Query.PlanCompiler
         #endregion
 
         #endregion
-
     }
 }

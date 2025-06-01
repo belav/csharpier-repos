@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Moq.Language.Flow;
 
 namespace Moq.Language
@@ -85,15 +84,15 @@ namespace Moq.Language
         /// mock.Setup(x => x.Execute("ping"))
         ///     .Returns(() => returnValues[0]);
         /// </code>
-        /// The lambda expression to retrieve the return value is lazy-executed, 
-        /// meaning that its value may change depending on the moment the method 
-        /// is executed and the value the <c>returnValues</c> array has at 
+        /// The lambda expression to retrieve the return value is lazy-executed,
+        /// meaning that its value may change depending on the moment the method
+        /// is executed and the value the <c>returnValues</c> array has at
         /// that moment.
         /// </example>
         IReturnsResult<TMock> Returns(Func<TResult> valueFunction);
 
         /// <summary>
-        /// Specifies a function that will calculate the value to return from the method, 
+        /// Specifies a function that will calculate the value to return from the method,
         /// retrieving the arguments for the invocation.
         /// </summary>
         /// <typeparam name="T">The type of the argument of the invoked method.</typeparam>
@@ -101,9 +100,9 @@ namespace Moq.Language
         /// <example group="returns">
         /// Return a calculated value which is evaluated lazily at the time of the invocation.
         /// <para>
-        /// The lookup list can change between invocations and the setup 
-        /// will return different values accordingly. Also, notice how the specific 
-        /// string argument is retrieved by simply declaring it as part of the lambda 
+        /// The lookup list can change between invocations and the setup
+        /// will return different values accordingly. Also, notice how the specific
+        /// string argument is retrieved by simply declaring it as part of the lambda
         /// expression:
         /// </para>
         /// <code>

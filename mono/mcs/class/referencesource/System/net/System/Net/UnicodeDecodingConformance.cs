@@ -47,7 +47,12 @@ namespace System.Net.Configuration
         /// in the SMP unless they're represented as HTML-encoded surrogates, so the input
         /// string "&amp;#144308;" would result in the output string "&amp;#144308;".
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Compat", Justification = "Shorthand for 'compatibility mode'.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Compat",
+            Justification = "Shorthand for 'compatibility mode'."
+        )]
         Compat,
 
         /// <summary>
@@ -61,5 +66,4 @@ namespace System.Net.Configuration
         /// </remarks>
         Loose,
     }
-
 }

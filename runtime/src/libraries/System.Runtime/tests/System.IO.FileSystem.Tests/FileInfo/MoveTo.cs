@@ -23,8 +23,18 @@ namespace System.IO.Tests
             FileInfo testFile = new FileInfo(GetTestFilePath());
             testFile.Create().Dispose();
             Assert.Throws<FileNotFoundException>(() => Move(GetTestFilePath(), testFile.FullName));
-            Assert.Throws<DirectoryNotFoundException>(() => Move(testFile.FullName, Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())));
-            Assert.Throws<DirectoryNotFoundException>(() => Move(Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()), testFile.FullName));
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                Move(
+                    testFile.FullName,
+                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName())
+                )
+            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                Move(
+                    Path.Combine(TestDirectory, GetTestFileName(), GetTestFileName()),
+                    testFile.FullName
+                )
+            );
         }
     }
 }

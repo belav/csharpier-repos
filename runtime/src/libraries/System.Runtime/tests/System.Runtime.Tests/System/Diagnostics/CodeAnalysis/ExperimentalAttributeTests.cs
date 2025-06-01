@@ -28,10 +28,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
         [InlineData("https://contoso.com/obsoletion-warnings/{0}")]
         public void TestSetUrlFormat(string urlFormat)
         {
-            var attr = new ExperimentalAttribute("diagnosticId")
-            {
-                UrlFormat = urlFormat
-            };
+            var attr = new ExperimentalAttribute("diagnosticId") { UrlFormat = urlFormat };
 
             Assert.Equal("diagnosticId", attr.DiagnosticId);
             Assert.Equal(urlFormat, attr.UrlFormat);

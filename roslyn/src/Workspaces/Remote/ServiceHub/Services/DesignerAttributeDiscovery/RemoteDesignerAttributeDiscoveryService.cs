@@ -9,7 +9,9 @@ using Microsoft.CodeAnalysis.DesignerAttribute;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteDesignerAttributeDiscoveryService : BrokeredServiceBase, IRemoteDesignerAttributeDiscoveryService
+    internal sealed class RemoteDesignerAttributeDiscoveryService
+        : BrokeredServiceBase,
+            IRemoteDesignerAttributeDiscoveryService
     {
         private sealed class CallbackWrapper : IDesignerAttributeDiscoveryService.ICallback
         {
@@ -18,25 +20,46 @@ namespace Microsoft.CodeAnalysis.Remote
 
             public CallbackWrapper(
                 RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback,
-                RemoteServiceCallbackId callbackId)
+                RemoteServiceCallbackId callbackId
+            )
             {
                 _callback = callback;
                 _callbackId = callbackId;
             }
 
-            public ValueTask ReportDesignerAttributeDataAsync(ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken)
-                => _callback.InvokeAsync((callback, cancellationToken) => callback.ReportDesignerAttributeDataAsync(_callbackId, data, cancellationToken), cancellationToken);
+            public ValueTask ReportDesignerAttributeDataAsync(
+                ImmutableArray<DesignerAttributeData> data,
+                CancellationToken cancellationToken
+            ) =>
+                _callback.InvokeAsync(
+                    (callback, cancellationToken) =>
+                        callback.ReportDesignerAttributeDataAsync(
+                            _callbackId,
+                            data,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                );
         }
 
-        internal sealed class Factory : FactoryBase<IRemoteDesignerAttributeDiscoveryService, IRemoteDesignerAttributeDiscoveryService.ICallback>
+        internal sealed class Factory
+            : FactoryBase<
+                IRemoteDesignerAttributeDiscoveryService,
+                IRemoteDesignerAttributeDiscoveryService.ICallback
+            >
         {
-            protected override IRemoteDesignerAttributeDiscoveryService CreateService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback)
-                => new RemoteDesignerAttributeDiscoveryService(arguments, callback);
+            protected override IRemoteDesignerAttributeDiscoveryService CreateService(
+                in ServiceConstructionArguments arguments,
+                RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback
+            ) => new RemoteDesignerAttributeDiscoveryService(arguments, callback);
         }
 
         private readonly RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> _callback;
 
-        public RemoteDesignerAttributeDiscoveryService(in ServiceConstructionArguments arguments, RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback)
+        public RemoteDesignerAttributeDiscoveryService(
+            in ServiceConstructionArguments arguments,
+            RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback
+        )
             : base(arguments)
         {
             _callback = callback;
@@ -47,17 +70,25 @@ namespace Microsoft.CodeAnalysis.Remote
             Checksum solutionChecksum,
             DocumentId? priorityDocument,
             bool useFrozenSnapshots,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return RunServiceAsync(
                 solutionChecksum,
                 solution =>
                 {
-                    var service = solution.Services.GetRequiredService<IDesignerAttributeDiscoveryService>();
+                    var service =
+                        solution.Services.GetRequiredService<IDesignerAttributeDiscoveryService>();
                     return service.ProcessSolutionAsync(
-                        solution, priorityDocument, useFrozenSnapshots, new CallbackWrapper(_callback, callbackId), cancellationToken);
+                        solution,
+                        priorityDocument,
+                        useFrozenSnapshots,
+                        new CallbackWrapper(_callback, callbackId),
+                        cancellationToken
+                    );
                 },
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -24,7 +22,17 @@ namespace Internal.IL.Stubs
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();
                 codeStream.EmitLdArg(0);
-                codeStream.Emit(ILOpcode.ldflda, emit.NewToken(method.Context.SystemModule.GetKnownType("System.Runtime.CompilerServices", "RawData").GetField("Data")));
+                codeStream.Emit(
+                    ILOpcode.ldflda,
+                    emit.NewToken(
+                        method
+                            .Context.SystemModule.GetKnownType(
+                                "System.Runtime.CompilerServices",
+                                "RawData"
+                            )
+                            .GetField("Data")
+                    )
+                );
                 codeStream.EmitLdc(-method.Context.Target.PointerSize);
                 codeStream.Emit(ILOpcode.add);
                 codeStream.Emit(ILOpcode.ldind_i);
@@ -45,7 +53,9 @@ namespace Internal.IL.Stubs
             bool result;
             if (methodName == "IsReferenceOrContainsReferences")
             {
-                result = elementType.IsGCPointer || (elementType is DefType defType && defType.ContainsGCPointers);
+                result =
+                    elementType.IsGCPointer
+                    || (elementType is DefType defType && defType.ContainsGCPointers);
             }
             else if (methodName == "IsReference")
             {
@@ -78,23 +88,36 @@ namespace Internal.IL.Stubs
                         result = false;
                         if (elementType is MetadataType mdType)
                         {
-                            if (mdType.Module == mdType.Context.SystemModule &&
-                                mdType.Namespace == "System.Text" &&
-                                mdType.Name == "Rune")
+                            if (
+                                mdType.Module == mdType.Context.SystemModule
+                                && mdType.Namespace == "System.Text"
+                                && mdType.Name == "Rune"
+                            )
                             {
                                 result = true;
                             }
                             else if (mdType.IsValueType)
                             {
-                                bool? equatable = ComparerIntrinsics.ImplementsIEquatable(mdType.GetTypeDefinition());
+                                bool? equatable = ComparerIntrinsics.ImplementsIEquatable(
+                                    mdType.GetTypeDefinition()
+                                );
 
                                 if (equatable.HasValue && !equatable.Value)
                                 {
                                     // Value type that can use memcmp and that doesn't override object.Equals or implement IEquatable<T>.Equals.
-                                    MethodDesc objectEquals = mdType.Context.GetWellKnownType(WellKnownType.Object).GetMethod("Equals", null);
+                                    MethodDesc objectEquals = mdType
+                                        .Context.GetWellKnownType(WellKnownType.Object)
+                                        .GetMethod("Equals", null);
                                     result =
-                                        mdType.FindVirtualFunctionTargetMethodOnObjectType(objectEquals).OwningType != mdType &&
-                                        ComparerIntrinsics.CanCompareValueTypeBits(mdType, objectEquals);
+                                        mdType
+                                            .FindVirtualFunctionTargetMethodOnObjectType(
+                                                objectEquals
+                                            )
+                                            .OwningType != mdType
+                                        && ComparerIntrinsics.CanCompareValueTypeBits(
+                                            mdType,
+                                            objectEquals
+                                        );
                                 }
                             }
                         }
@@ -108,7 +131,12 @@ namespace Internal.IL.Stubs
 
             ILOpcode opcode = result ? ILOpcode.ldc_i4_1 : ILOpcode.ldc_i4_0;
 
-            return new ILStubMethodIL(method, new byte[] { (byte)opcode, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), Array.Empty<object>());
+            return new ILStubMethodIL(
+                method,
+                new byte[] { (byte)opcode, (byte)ILOpcode.ret },
+                Array.Empty<LocalVariableDefinition>(),
+                Array.Empty<object>()
+            );
         }
     }
 }

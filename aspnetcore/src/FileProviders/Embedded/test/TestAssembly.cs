@@ -13,7 +13,10 @@ namespace Microsoft.Extensions.FileProviders;
 
 internal class TestAssembly : Assembly
 {
-    public TestAssembly(string manifest, string manifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml")
+    public TestAssembly(
+        string manifest,
+        string manifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml"
+    )
     {
         ManifestStream = new MemoryStream();
         using (var writer = new StreamWriter(ManifestStream, Encoding.UTF8, 1024, leaveOpen: true))
@@ -25,18 +28,29 @@ internal class TestAssembly : Assembly
         ManifestName = manifestName;
     }
 
-    public TestAssembly(TestEntry entry, string manifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml")
+    public TestAssembly(
+        TestEntry entry,
+        string manifestName = "Microsoft.Extensions.FileProviders.Embedded.Manifest.xml"
+    )
     {
         ManifestName = manifestName;
 
         var manifest = new XDocument(
             new XDeclaration("1.0", "utf-8", "yes"),
-            new XElement("Manifest",
+            new XElement(
+                "Manifest",
                 new XElement("ManifestVersion", "1.0"),
-                new XElement("FileSystem", entry.Children.Select(c => c.ToXElement()))));
+                new XElement("FileSystem", entry.Children.Select(c => c.ToXElement()))
+            )
+        );
 
         ManifestStream = new MemoryStream();
-        using (var writer = XmlWriter.Create(ManifestStream, new XmlWriterSettings { CloseOutput = false }))
+        using (
+            var writer = XmlWriter.Create(
+                ManifestStream,
+                new XmlWriterSettings { CloseOutput = false }
+            )
+        )
         {
             manifest.WriteTo(writer);
         }

@@ -30,15 +30,17 @@ namespace System.Web.Http.ModelBinding
             descriptor.Setup(desc => desc.IsOptional).Returns(false);
             var binding = new FormatterParameterBinding(descriptor.Object, formatters, null);
 
-            HttpResponseException exception = Assert.Throws<HttpResponseException>(
-                () => binding.ReadContentAsync(request, typeof(string), formatters, null));
+            HttpResponseException exception = Assert.Throws<HttpResponseException>(() =>
+                binding.ReadContentAsync(request, typeof(string), formatters, null)
+            );
 
             Assert.Equal(HttpStatusCode.UnsupportedMediaType, exception.Response.StatusCode);
             HttpError error;
             exception.Response.TryGetContentValue(out error);
             Assert.Equal(
                 "The request contains an entity body but no Content-Type header. The inferred media type 'application/octet-stream' is not supported for this resource.",
-                error.Message);
+                error.Message
+            );
         }
 
         [Fact]
@@ -51,15 +53,17 @@ namespace System.Web.Http.ModelBinding
             descriptor.Setup(desc => desc.IsOptional).Returns(false);
             var binding = new FormatterParameterBinding(descriptor.Object, formatters, null);
 
-            HttpResponseException exception = Assert.Throws<HttpResponseException>(
-                () => binding.ReadContentAsync(request, typeof(string), formatters, null));
+            HttpResponseException exception = Assert.Throws<HttpResponseException>(() =>
+                binding.ReadContentAsync(request, typeof(string), formatters, null)
+            );
 
             Assert.Equal(HttpStatusCode.UnsupportedMediaType, exception.Response.StatusCode);
             HttpError error;
             exception.Response.TryGetContentValue(out error);
             Assert.Equal(
                 "The request entity's media type 'text/plain' is not supported for this resource.",
-                error.Message);
+                error.Message
+            );
         }
 
         [Fact]
@@ -73,12 +77,22 @@ namespace System.Web.Http.ModelBinding
             IBodyModelValidator validator = null;
             ModelMetadataProvider metadataProvider = new Mock<ModelMetadataProvider>().Object;
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpActionContext actionContext = new HttpActionContext { ControllerContext = new HttpControllerContext { Request = request } };
+            HttpActionContext actionContext = new HttpActionContext
+            {
+                ControllerContext = new HttpControllerContext { Request = request },
+            };
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            Mock<FormatterParameterBinding> binding = new Mock<FormatterParameterBinding>(parameter.Object, formatters, validator);
+            Mock<FormatterParameterBinding> binding = new Mock<FormatterParameterBinding>(
+                parameter.Object,
+                formatters,
+                validator
+            );
             binding.CallBase = true;
-            binding.Setup(b => b.ReadContentAsync(request, null, formatters, It.IsAny<IFormatterLogger>()))
+            binding
+                .Setup(b =>
+                    b.ReadContentAsync(request, null, formatters, It.IsAny<IFormatterLogger>())
+                )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -105,12 +119,25 @@ namespace System.Web.Http.ModelBinding
             Mock<MediaTypeFormatter> formatter = new Mock<MediaTypeFormatter>();
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter.Object.SupportedMediaTypes.Add(request.Content.Headers.ContentType);
-            formatter.Setup(f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), request.Content, logger, cts.Token))
+            formatter
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(int),
+                        It.IsAny<Stream>(),
+                        request.Content,
+                        logger,
+                        cts.Token
+                    )
+                )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
             var formatters = new[] { formatter.Object };
-            FormatterParameterBinding binding = new FormatterParameterBinding(parameter.Object, formatters, validator);
+            FormatterParameterBinding binding = new FormatterParameterBinding(
+                parameter.Object,
+                formatters,
+                validator
+            );
 
             // Act
             await binding.ReadContentAsync(request, typeof(int), formatters, logger, cts.Token);

@@ -14,16 +14,23 @@ public class WebsiteInformationTagHelper : TagHelper
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
         output.TagName = "section";
-        output.PostContent.AppendHtml(string.Format(
-            CultureInfo.InvariantCulture,
-            "<p><strong>Version:</strong> {0}</p>" + Environment.NewLine +
-            "<p><strong>Copyright Year:</strong> {1}</p>" + Environment.NewLine +
-            "<p><strong>Approved:</strong> {2}</p>" + Environment.NewLine +
-            "<p><strong>Number of tags to show:</strong> {3}</p>" + Environment.NewLine,
-            Info.Version,
-            Info.CopyrightYear,
-            Info.Approved,
-            Info.TagsToShow));
+        output.PostContent.AppendHtml(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "<p><strong>Version:</strong> {0}</p>"
+                    + Environment.NewLine
+                    + "<p><strong>Copyright Year:</strong> {1}</p>"
+                    + Environment.NewLine
+                    + "<p><strong>Approved:</strong> {2}</p>"
+                    + Environment.NewLine
+                    + "<p><strong>Number of tags to show:</strong> {3}</p>"
+                    + Environment.NewLine,
+                Info.Version,
+                Info.CopyrightYear,
+                Info.Approved,
+                Info.TagsToShow
+            )
+        );
         output.TagMode = TagMode.StartTagAndEndTag;
     }
 }

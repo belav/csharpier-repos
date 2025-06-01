@@ -1,6 +1,9 @@
-﻿namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData
+{
     using System;
-    internal interface IMetaChildrenColumn : IMetaColumn {
+
+    internal interface IMetaChildrenColumn : IMetaColumn
+    {
         IMetaTable ChildTable { get; }
         IMetaColumn ColumnInOtherTable { get; }
         string GetChildrenListPath(object row);

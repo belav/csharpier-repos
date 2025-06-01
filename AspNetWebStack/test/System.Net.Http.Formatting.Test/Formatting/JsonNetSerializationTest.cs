@@ -56,62 +56,158 @@ namespace System.Net.Http.Formatting
                     { false, "false" },
                     { AttributeTargets.Assembly | AttributeTargets.Constructor, "33" },
                     { ConsoleColor.DarkCyan, "3" },
-                    { new DateTimeOffset(1999, 5, 27, 4, 34, 45, TimeSpan.Zero), "\"1999-05-27T04:34:45+00:00\"" },
+                    {
+                        new DateTimeOffset(1999, 5, 27, 4, 34, 45, TimeSpan.Zero),
+                        "\"1999-05-27T04:34:45+00:00\""
+                    },
                     { new TimeSpan(5, 30, 0), "\"05:30:00\"" },
                     { new Uri("http://www.bing.com"), @"""http://www.bing.com""" },
                     { new Uri("http://www.bing.com/"), @"""http://www.bing.com/""" },
                     { new Uri("http://www.bing.com/foo"), @"""http://www.bing.com/foo""" },
                     { new Uri("http://www.bing.com/foo/"), @"""http://www.bing.com/foo/""" },
-                    { new Guid("4ed1cd44-11d7-4b27-b623-0b8b553c8906"), "\"4ed1cd44-11d7-4b27-b623-0b8b553c8906\"" },
-
+                    {
+                        new Guid("4ed1cd44-11d7-4b27-b623-0b8b553c8906"),
+                        "\"4ed1cd44-11d7-4b27-b623-0b8b553c8906\""
+                    },
                     // Structs
-                    { new Point() { x = 45, Y = -5}, "{\"x\":45,\"Y\":-5}" },
-
+                    {
+                        new Point() { x = 45, Y = -5 },
+                        "{\"x\":45,\"Y\":-5}"
+                    },
                     // Arrays
-                    { new object[] {}, "[]" },
-                    { new int[] { 1, 2, 3}, "[1,2,3]" },
-                    { new string[] { "a", "b"}, "[\"a\",\"b\"]" },
-                    { new Point[] { new Point() { x = 10, Y = 10}, new Point() { x = 20, Y = 20}}, "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]" },
-
+                    { new object[] { }, "[]" },
+                    { new int[] { 1, 2, 3 }, "[1,2,3]" },
+                    { new string[] { "a", "b" }, "[\"a\",\"b\"]" },
+                    {
+                        new Point[]
+                        {
+                            new Point() { x = 10, Y = 10 },
+                            new Point() { x = 20, Y = 20 },
+                        },
+                        "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
+                    },
                     // Collections
-                    { new List<int> { 1, 2, 3}, "[1,2,3]" },
-                    { new List<string> { "a", "b"}, "[\"a\",\"b\"]" },
-                    { new List<Point> { new Point() { x = 10, Y = 10}, new Point() { x = 20, Y = 20}}, "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]" },
-                    { new MyList<int> { 1, 2, 3}, "[1,2,3]" },
-                    { new MyList<string> { "a", "b"}, "[\"a\",\"b\"]" },
-                    { new MyList<Point> { new Point() { x = 10, Y = 10}, new Point() { x = 20, Y = 20}}, "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]" },
-
+                    {
+                        new List<int> { 1, 2, 3 },
+                        "[1,2,3]"
+                    },
+                    {
+                        new List<string> { "a", "b" },
+                        "[\"a\",\"b\"]"
+                    },
+                    {
+                        new List<Point>
+                        {
+                            new Point() { x = 10, Y = 10 },
+                            new Point() { x = 20, Y = 20 },
+                        },
+                        "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
+                    },
+                    {
+                        new MyList<int> { 1, 2, 3 },
+                        "[1,2,3]"
+                    },
+                    {
+                        new MyList<string> { "a", "b" },
+                        "[\"a\",\"b\"]"
+                    },
+                    {
+                        new MyList<Point>
+                        {
+                            new Point() { x = 10, Y = 10 },
+                            new Point() { x = 20, Y = 20 },
+                        },
+                        "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
+                    },
                     // Dictionaries
 
-                    { new Dictionary<string, string> { { "k1", "v1" }, { "k2", "v2" } }, "{\"k1\":\"v1\",\"k2\":\"v2\"}" },
-                    { new Dictionary<int, string> { { 1, "v1" }, { 2, "v2" } }, "{\"1\":\"v1\",\"2\":\"v2\"}" },
-
+                    {
+                        new Dictionary<string, string> { { "k1", "v1" }, { "k2", "v2" } },
+                        "{\"k1\":\"v1\",\"k2\":\"v2\"}"
+                    },
+                    {
+                        new Dictionary<int, string> { { 1, "v1" }, { 2, "v2" } },
+                        "{\"1\":\"v1\",\"2\":\"v2\"}"
+                    },
                     // Anonymous types
-                    { new { Anon1 = 56, Anon2 = "foo"}, "{\"Anon1\":56,\"Anon2\":\"foo\"}" },
-
+                    { new { Anon1 = 56, Anon2 = "foo" }, "{\"Anon1\":56,\"Anon2\":\"foo\"}" },
                     // Classes
-                    { new DataContractType() { s = "foo", i = 49, NotAMember = "Error" }, "{\"s\":\"foo\",\"i\":49}" },
-                    { new POCOType() { s = "foo", t = "Error"}, "{\"s\":\"foo\"}" },
+                    {
+                        new DataContractType()
+                        {
+                            s = "foo",
+                            i = 49,
+                            NotAMember = "Error",
+                        },
+                        "{\"s\":\"foo\",\"i\":49}"
+                    },
+                    {
+                        new POCOType() { s = "foo", t = "Error" },
+                        "{\"s\":\"foo\"}"
+                    },
 #if !Testing_NetStandard1_3 // Only publics are serialized in netstandard1.3
-                    { new SerializableType("protected") { publicField = "public", protectedInternalField = "protected internal", internalField = "internal", PublicProperty = "private", nonSerializedField = "Error" }, "{\"publicField\":\"public\",\"internalField\":\"internal\",\"protectedInternalField\":\"protected internal\",\"protectedField\":\"protected\",\"privateField\":\"private\"}" },
+                    {
+                        new SerializableType("protected")
+                        {
+                            publicField = "public",
+                            protectedInternalField = "protected internal",
+                            internalField = "internal",
+                            PublicProperty = "private",
+                            nonSerializedField = "Error",
+                        },
+                        "{\"publicField\":\"public\",\"internalField\":\"internal\",\"protectedInternalField\":\"protected internal\",\"protectedField\":\"protected\",\"privateField\":\"private\"}"
+                    },
 #else
-                    { new SerializableType("protected") { publicField = "public", protectedInternalField = "protected internal", internalField = "internal", PublicProperty = "private", nonSerializedField = "Error" }, "{\"publicField\":\"public\",\"PublicProperty\":\"private\"}" },
+                    {
+                        new SerializableType("protected")
+                        {
+                            publicField = "public",
+                            protectedInternalField = "protected internal",
+                            internalField = "internal",
+                            PublicProperty = "private",
+                            nonSerializedField = "Error",
+                        },
+                        "{\"publicField\":\"public\",\"PublicProperty\":\"private\"}"
+                    },
 #endif
-                    { new { field1 = "x", field2 = (string)null, field3 = "y" }, "{\"field1\":\"x\",\"field2\":null,\"field3\":\"y\"}" },
-
+                    {
+                        new
+                        {
+                            field1 = "x",
+                            field2 = (string)null,
+                            field3 = "y",
+                        },
+                        "{\"field1\":\"x\",\"field2\":null,\"field3\":\"y\"}"
+                    },
                     // Generics
-                    { new KeyValuePair<string, bool>("foo", false), "{\"Key\":\"foo\",\"Value\":false}" },
-
+                    {
+                        new KeyValuePair<string, bool>("foo", false),
+                        "{\"Key\":\"foo\",\"Value\":false}"
+                    },
                     // ISerializable types
-                    { new ISerializableType() { Property = "Value" }, "{\"SomeProperty\":\"Value\"}" },
-
+                    {
+                        new ISerializableType() { Property = "Value" },
+                        "{\"SomeProperty\":\"Value\"}"
+                    },
                     // JSON Values
                     { new JValue(false), "false" },
                     { new JValue(54), "54" },
                     { new JValue("s"), "\"s\"" },
-                    { new JArray() { new JValue(1), new JValue(2) }, "[1,2]" },
-                    { new JObject() { { "k1", new JValue("v1") }, { "k2", new JValue("v2") } }, "{\"k1\":\"v1\",\"k2\":\"v2\"}" },
-                    { new KeyValuePair<JToken, JToken>(new JValue("k"), new JArray() { new JValue("v1"), new JValue("v2") }), "{\"Key\":\"k\",\"Value\":[\"v1\",\"v2\"]}" },
+                    {
+                        new JArray() { new JValue(1), new JValue(2) },
+                        "[1,2]"
+                    },
+                    {
+                        new JObject() { { "k1", new JValue("v1") }, { "k2", new JValue("v2") } },
+                        "{\"k1\":\"v1\",\"k2\":\"v2\"}"
+                    },
+                    {
+                        new KeyValuePair<JToken, JToken>(
+                            new JValue("k"),
+                            new JArray() { new JValue("v1"), new JValue("v2") }
+                        ),
+                        "{\"Key\":\"k\",\"Value\":[\"v1\",\"v2\"]}"
+                    },
                 };
             }
         }
@@ -125,14 +221,17 @@ namespace System.Net.Http.Formatting
                     // Null
                     { null, "null", typeof(POCOType) },
                     { JValue.CreateNull(), "null", typeof(JToken) },
-
                     // Nullables
                     { new int?(), "null", typeof(int?) },
                     { new Point?(), "null", typeof(Point?) },
                     { new ConsoleColor?(), "null", typeof(ConsoleColor?) },
                     { new int?(45), "45", typeof(int?) },
-                    { new Point?(new Point() { x = 45, Y = -5 }), "{\"x\":45,\"Y\":-5}", typeof(Point?) },
-                    { new ConsoleColor?(ConsoleColor.DarkMagenta), "5", typeof(ConsoleColor?)},
+                    {
+                        new Point?(new Point() { x = 45, Y = -5 }),
+                        "{\"x\":45,\"Y\":-5}",
+                        typeof(Point?)
+                    },
+                    { new ConsoleColor?(ConsoleColor.DarkMagenta), "5", typeof(ConsoleColor?) },
                 };
             }
         }
@@ -148,19 +247,31 @@ namespace System.Net.Http.Formatting
         [PropertyData("SerializedJson")]
         public Task JsonDeserializesToExpectedObject(object expectedObject, string json)
         {
-            return JsonDeserializesToExpectedObjectWithProvidedType(expectedObject, json, expectedObject.GetType());
+            return JsonDeserializesToExpectedObjectWithProvidedType(
+                expectedObject,
+                json,
+                expectedObject.GetType()
+            );
         }
 
         [Theory]
         [PropertyData("TypedSerializedJson")]
-        public async Task ObjectsSerializeToExpectedJsonWithProvidedType(object o, string expectedJson, Type type)
+        public async Task ObjectsSerializeToExpectedJsonWithProvidedType(
+            object o,
+            string expectedJson,
+            Type type
+        )
         {
             Assert.Equal(expectedJson, await SerializeAsync(o, type));
         }
 
         [Theory]
         [PropertyData("TypedSerializedJson")]
-        public async Task JsonDeserializesToExpectedObjectWithProvidedType(object expectedObject, string json, Type type)
+        public async Task JsonDeserializesToExpectedObjectWithProvidedType(
+            object expectedObject,
+            string json,
+            Type type
+        )
         {
             if (expectedObject == null)
             {
@@ -181,7 +292,8 @@ namespace System.Net.Http.Formatting
             string json = await SerializeAsync(o, typeof(TypeWithCallbacks));
             Assert.Equal("12", o.callbackOrder);
 
-            TypeWithCallbacks deserializedObject = (await DeserializeAsync(json, typeof(TypeWithCallbacks))) as TypeWithCallbacks;
+            TypeWithCallbacks deserializedObject =
+                (await DeserializeAsync(json, typeof(TypeWithCallbacks))) as TypeWithCallbacks;
             Assert.Equal("34", deserializedObject.callbackOrder);
         }
 
@@ -222,7 +334,8 @@ namespace System.Net.Http.Formatting
         {
             string json = "{}";
 
-            POCOType deserializedObject = (await DeserializeAsync(json, typeof(POCOType))) as POCOType;
+            POCOType deserializedObject =
+                (await DeserializeAsync(json, typeof(POCOType))) as POCOType;
 
             Assert.Null(deserializedObject.s);
         }
@@ -243,7 +356,9 @@ namespace System.Net.Http.Formatting
             }
             string json = sb.ToString();
 
-            return Assert.ThrowsAsync<JsonReaderException>(() => DeserializeAsync(json, typeof(object)));
+            return Assert.ThrowsAsync<JsonReaderException>(() =>
+                DeserializeAsync(json, typeof(object))
+            );
         }
 
         [Theory]
@@ -269,10 +384,13 @@ namespace System.Net.Http.Formatting
             string deserializedString = (await DeserializeAsync(json, typeof(string))) as string;
 
             Assert.Equal(expectedString, deserializedString);
-
         }
 
-        private static async Task<string> SerializeAsync(object o, Type type, MediaTypeFormatter formatter = null)
+        private static async Task<string> SerializeAsync(
+            object o,
+            Type type,
+            MediaTypeFormatter formatter = null
+        )
         {
             formatter = formatter ?? new JsonMediaTypeFormatter();
             MemoryStream ms = new MemoryStream();
@@ -282,7 +400,12 @@ namespace System.Net.Http.Formatting
             return new StreamReader(ms).ReadToEnd();
         }
 
-        internal static Task<object> DeserializeAsync(string json, Type type, MediaTypeFormatter formatter = null, IFormatterLogger formatterLogger = null)
+        internal static Task<object> DeserializeAsync(
+            string json,
+            Type type,
+            MediaTypeFormatter formatter = null,
+            IFormatterLogger formatterLogger = null
+        )
         {
             formatter = formatter ?? new JsonMediaTypeFormatter();
             MemoryStream ms = new MemoryStream();
@@ -291,7 +414,12 @@ namespace System.Net.Http.Formatting
             ms.Flush();
             ms.Position = 0;
 
-            return formatter.ReadFromStreamAsync(type, ms, content: null, formatterLogger: formatterLogger);
+            return formatter.ReadFromStreamAsync(
+                type,
+                ms,
+                content: null,
+                formatterLogger: formatterLogger
+            );
         }
     }
 
@@ -303,7 +431,11 @@ namespace System.Net.Http.Formatting
 
             if (xType == y.GetType())
             {
-                if (typeof(JToken).IsAssignableFrom(xType) || xType == typeof(ArgumentNullException) || xType == typeof(KeyValuePair<JToken, JToken>))
+                if (
+                    typeof(JToken).IsAssignableFrom(xType)
+                    || xType == typeof(ArgumentNullException)
+                    || xType == typeof(KeyValuePair<JToken, JToken>)
+                )
                 {
                     return x.ToString() == y.ToString();
                 }
@@ -367,7 +499,8 @@ namespace System.Net.Http.Formatting
             throw new NotImplementedException();
         }
 
-        bool Equals<T>(object x, object y) where T : IEquatable<T>
+        bool Equals<T>(object x, object y)
+            where T : IEquatable<T>
         {
             IEquatable<T> yEquatable = (IEquatable<T>)y;
             return yEquatable.Equals((T)x);
@@ -476,14 +609,8 @@ namespace System.Net.Http.Formatting
 
         public string PublicProperty
         {
-            get
-            {
-                return privateField;
-            }
-            set
-            {
-                this.privateField = value;
-            }
+            get { return privateField; }
+            set { this.privateField = value; }
         }
 
         [NonSerialized]
@@ -492,15 +619,14 @@ namespace System.Net.Http.Formatting
         public bool Equals(SerializableType other)
         {
 #if !Testing_NetStandard1_3 // Only publics are serialized in netstandard1.3. privateField is serialized through PublicProperty
-            return this.publicField == other.publicField &&
-                this.internalField == other.internalField &&
-                this.protectedInternalField == other.protectedInternalField &&
-                this.protectedField == other.protectedField &&
-                this.privateField == other.privateField;
+            return this.publicField == other.publicField
+                && this.internalField == other.internalField
+                && this.protectedInternalField == other.protectedInternalField
+                && this.protectedField == other.protectedField
+                && this.privateField == other.privateField;
 #else
             // this.privateField is serialized through this.PublicProperty, thus the comparison here
-            return this.publicField == other.publicField &&
-                this.privateField == other.privateField;
+            return this.publicField == other.publicField && this.privateField == other.privateField;
 #endif
         }
     }
@@ -523,13 +649,9 @@ namespace System.Net.Http.Formatting
         public Ref Reference;
     }
 
-    public class Base
-    {
-    }
+    public class Base { }
 
-    public class Derived : Base
-    {
-    }
+    public class Derived : Base { }
 
     [DataContract]
     public class TypeWithCallbacks
@@ -561,16 +683,12 @@ namespace System.Net.Http.Formatting
         }
     }
 
-    public class DangerousType
-    {
-    }
+    public class DangerousType { }
 
     [Serializable]
     public class ISerializableType : ISerializable, IEquatable<ISerializableType>
     {
-        public ISerializableType()
-        {
-        }
+        public ISerializableType() { }
 
         protected ISerializableType(SerializationInfo info, StreamingContext context)
         {
@@ -580,11 +698,7 @@ namespace System.Net.Http.Formatting
             Property = (string)info.GetValue("SomeProperty", typeof(String));
         }
 
-        public string Property
-        {
-            get;
-            set;
-        }
+        public string Property { get; set; }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

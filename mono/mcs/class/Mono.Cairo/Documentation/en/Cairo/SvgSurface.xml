@@ -16,7 +16,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SvgSurface (string filename, double width, double height);" />
+      <MemberSignature
+        Language="C#"
+        Value="public SvgSurface (string filename, double width, double height);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="filename" Type="System.String" />
@@ -36,7 +39,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RestrictToVersion">
-      <MemberSignature Language="C#" Value="public void RestrictToVersion (Cairo.SvgVersion version);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void RestrictToVersion (Cairo.SvgVersion version);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

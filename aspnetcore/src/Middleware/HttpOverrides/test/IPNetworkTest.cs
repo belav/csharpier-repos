@@ -63,13 +63,18 @@ public class IPNetworkTest
     [InlineData("192.168.1.1", 33)]
     [InlineData("2001:db8:3c4d::1", -1)]
     [InlineData("2001:db8:3c4d::1", 129)]
-    public void Ctor_WithPrefixLengthOutOfRange_ThrowsArgumentOutOfRangeException(string prefixText, int prefixLength)
+    public void Ctor_WithPrefixLengthOutOfRange_ThrowsArgumentOutOfRangeException(
+        string prefixText,
+        int prefixLength
+    )
     {
         // Arrange
         var address = IPAddress.Parse(prefixText);
 
         // Act
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => new IPNetwork(address, prefixLength));
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new IPNetwork(address, prefixLength)
+        );
 
         // Assert
         Assert.StartsWith("The prefix length was out of range.", ex.Message);
@@ -77,7 +82,11 @@ public class IPNetworkTest
 
     [Theory]
     [MemberData(nameof(ValidPrefixWithPrefixLengthData))]
-    public void Parse_WithValidFormat_ParsedCorrectly(string input, string expectedPrefix, int expectedPrefixLength)
+    public void Parse_WithValidFormat_ParsedCorrectly(
+        string input,
+        string expectedPrefix,
+        int expectedPrefixLength
+    )
     {
         // Act
         var network = IPNetwork.Parse(input);
@@ -108,7 +117,11 @@ public class IPNetworkTest
 
     [Theory]
     [MemberData(nameof(ValidPrefixWithPrefixLengthData))]
-    public void TryParse_WithValidFormat_ParsedCorrectly(string input, string expectedPrefix, int expectedPrefixLength)
+    public void TryParse_WithValidFormat_ParsedCorrectly(
+        string input,
+        string expectedPrefix,
+        int expectedPrefixLength
+    )
     {
         // Act
         var result = IPNetwork.TryParse(input, out var network);
@@ -134,64 +147,61 @@ public class IPNetworkTest
         Assert.Null(network);
     }
 
-    public static TheoryData<string, string, int> ValidPrefixWithPrefixLengthData() => new()
-    {
-        // IPv4
-        { "10.1.0.0/16", "10.1.0.0", 16 },
-        { "10.1.1.0/8", "10.1.1.0", 8 },
-        { "174.0.0.0/7", "174.0.0.0", 7 },
-        { "10.174.0.0/15", "10.174.0.0", 15 },
-        { "10.168.0.0/14", "10.168.0.0", 14 },
-        { "192.168.0.1/31", "192.168.0.1", 31 },
-        { "192.168.0.1/31", "192.168.0.1", 31 },
-        { "192.168.0.1/32", "192.168.0.1", 32 },
-        { "192.168.1.1/0", "192.168.1.1", 0 },
-        { "192.168.1.1/0", "192.168.1.1", 0 },
+    public static TheoryData<string, string, int> ValidPrefixWithPrefixLengthData() =>
+        new()
+        {
+            // IPv4
+            { "10.1.0.0/16", "10.1.0.0", 16 },
+            { "10.1.1.0/8", "10.1.1.0", 8 },
+            { "174.0.0.0/7", "174.0.0.0", 7 },
+            { "10.174.0.0/15", "10.174.0.0", 15 },
+            { "10.168.0.0/14", "10.168.0.0", 14 },
+            { "192.168.0.1/31", "192.168.0.1", 31 },
+            { "192.168.0.1/31", "192.168.0.1", 31 },
+            { "192.168.0.1/32", "192.168.0.1", 32 },
+            { "192.168.1.1/0", "192.168.1.1", 0 },
+            { "192.168.1.1/0", "192.168.1.1", 0 },
+            // IPv6
+            { "2001:db8:3c4d::/127", "2001:db8:3c4d::", 127 },
+            { "2001:db8:3c4d::1/128", "2001:db8:3c4d::1", 128 },
+            { "2001:db8:3c4d::1/0", "2001:db8:3c4d::1", 0 },
+            { "2001:db8:3c4d::1/0", "2001:db8:3c4d::1", 0 },
+        };
 
-        // IPv6
-        { "2001:db8:3c4d::/127", "2001:db8:3c4d::", 127 },
-        { "2001:db8:3c4d::1/128", "2001:db8:3c4d::1", 128 },
-        { "2001:db8:3c4d::1/0", "2001:db8:3c4d::1", 0 },
-        { "2001:db8:3c4d::1/0", "2001:db8:3c4d::1", 0 }
-    };
+    public static TheoryData<string> InvalidPrefixOrPrefixLengthData() =>
+        new()
+        {
+            string.Empty,
+            "abcdefg",
+            // Missing forward slash
+            "10.1.0.016",
+            "2001:db8:3c4d::1127",
+            // Invalid prefix
+            "/16",
+            "10.1./16",
+            "10.1.0./16",
+            "10.1.ABC.0/16",
+            "200123:db8:3c4d::/127",
+            ":db8:3c4d::/127",
+            "2001:?:3c4d::1/0",
+            // Invalid prefix length
+            "10.1.0.0/",
+            "10.1.0.0/16-",
+            "10.1.0.0/ABC",
+            "2001:db8:3c4d::/",
+            "2001:db8:3c4d::1/128-",
+            "2001:db8:3c4d::1/ABC",
+        };
 
-    public static TheoryData<string> InvalidPrefixOrPrefixLengthData() => new()
-    {
-        string.Empty,
-        "abcdefg",
-
-        // Missing forward slash
-        "10.1.0.016",
-        "2001:db8:3c4d::1127",
-
-        // Invalid prefix
-        "/16",
-        "10.1./16",
-        "10.1.0./16",
-        "10.1.ABC.0/16",
-        "200123:db8:3c4d::/127",
-        ":db8:3c4d::/127",
-        "2001:?:3c4d::1/0",
-
-        // Invalid prefix length
-        "10.1.0.0/",
-        "10.1.0.0/16-",
-        "10.1.0.0/ABC",
-        "2001:db8:3c4d::/",
-        "2001:db8:3c4d::1/128-",
-        "2001:db8:3c4d::1/ABC"
-    };
-
-    public static TheoryData<string> PrefixLengthOutOfRangeData() => new()
-    {
-        // Negative prefix length
-        "10.1.0.0/-16",
-        "2001:db8:3c4d::/-127",
-
-        // Prefix length out of range (IPv4)
-        "10.1.0.0/33",
-
-        // Prefix length out of range (IPv6)
-        "2001:db8:3c4d::/129"
-    };
+    public static TheoryData<string> PrefixLengthOutOfRangeData() =>
+        new()
+        {
+            // Negative prefix length
+            "10.1.0.0/-16",
+            "2001:db8:3c4d::/-127",
+            // Prefix length out of range (IPv4)
+            "10.1.0.0/33",
+            // Prefix length out of range (IPv6)
+            "2001:db8:3c4d::/129",
+        };
 }

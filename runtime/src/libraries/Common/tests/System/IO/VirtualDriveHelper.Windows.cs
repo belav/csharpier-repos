@@ -14,6 +14,7 @@ namespace System.IO
     {
         // Temporary Windows directory that can be mounted to a drive letter using the subst command
         private string? _virtualDriveTargetDir = null;
+
         // Windows drive letter that points to a mounted directory using the subst command
         private char _virtualDriveLetter = default;
 
@@ -43,7 +44,10 @@ namespace System.IO
                 if (_virtualDriveTargetDir == null)
                 {
                     // Create a folder inside the temp directory so that it can be mounted to a drive letter with subst
-                    _virtualDriveTargetDir = Path.Join(Path.GetTempPath(), Path.GetRandomFileName());
+                    _virtualDriveTargetDir = Path.Join(
+                        Path.GetTempPath(),
+                        Path.GetRandomFileName()
+                    );
                     Directory.CreateDirectory(_virtualDriveTargetDir);
                 }
 
@@ -74,10 +78,14 @@ namespace System.IO
         private static char CreateVirtualDrive(string targetDir)
         {
             char driveLetter = GetNextAvailableDriveLetter();
-            bool success = RunProcess(CreateProcessStartInfo("cmd", "/c", SubstPath, $"{driveLetter}:", targetDir));
+            bool success = RunProcess(
+                CreateProcessStartInfo("cmd", "/c", SubstPath, $"{driveLetter}:", targetDir)
+            );
             if (!success || !DriveInfo.GetDrives().Any(x => x.Name[0] == driveLetter))
             {
-                throw new InvalidOperationException($"Could not create virtual drive {driveLetter}: with subst");
+                throw new InvalidOperationException(
+                    $"Could not create virtual drive {driveLetter}: with subst"
+                );
             }
             return driveLetter;
 
@@ -105,20 +113,27 @@ namespace System.IO
         /// </summary>
         private static void DeleteVirtualDrive(char driveLetter)
         {
-            bool success = RunProcess(CreateProcessStartInfo("cmd", "/c", SubstPath, "/d", $"{driveLetter}:"));
+            bool success = RunProcess(
+                CreateProcessStartInfo("cmd", "/c", SubstPath, "/d", $"{driveLetter}:")
+            );
             if (!success || DriveInfo.GetDrives().Any(x => x.Name[0] == driveLetter))
             {
-                throw new InvalidOperationException($"Could not delete virtual drive {driveLetter}: with subst");
+                throw new InvalidOperationException(
+                    $"Could not delete virtual drive {driveLetter}: with subst"
+                );
             }
         }
 
-        private static ProcessStartInfo CreateProcessStartInfo(string fileName, params string[] arguments)
+        private static ProcessStartInfo CreateProcessStartInfo(
+            string fileName,
+            params string[] arguments
+        )
         {
             var info = new ProcessStartInfo
             {
                 FileName = fileName,
                 UseShellExecute = false,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             };
 
             foreach (var argument in arguments)
@@ -140,7 +155,8 @@ namespace System.IO
         {
             get
             {
-                string systemRoot = Environment.GetEnvironmentVariable("SystemRoot") ?? @"C:\Windows";
+                string systemRoot =
+                    Environment.GetEnvironmentVariable("SystemRoot") ?? @"C:\Windows";
                 return Path.Join(systemRoot, "System32", "subst.exe");
             }
         }

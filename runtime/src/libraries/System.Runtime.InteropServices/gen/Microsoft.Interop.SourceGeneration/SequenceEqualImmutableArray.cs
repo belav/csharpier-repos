@@ -15,23 +15,28 @@ namespace Microsoft.Interop
     /// for many scenarios. This wrapper type allows us to use <see cref="ImmutableArray{T}" />s in our other record types without having to write an Equals method
     /// that we may forget to update if we add new elements to the record.
     /// </summary>
-    public readonly record struct SequenceEqualImmutableArray<T>(ImmutableArray<T> Array, IEqualityComparer<T> Comparer) : IEnumerable<T>
+    public readonly record struct SequenceEqualImmutableArray<T>(
+        ImmutableArray<T> Array,
+        IEqualityComparer<T> Comparer
+    ) : IEnumerable<T>
     {
         public SequenceEqualImmutableArray(ImmutableArray<T> array)
-            : this(array, EqualityComparer<T>.Default)
-        {
-        }
+            : this(array, EqualityComparer<T>.Default) { }
 
         public SequenceEqualImmutableArray<T> Add(T value)
         {
             return new SequenceEqualImmutableArray<T>(Array.Add(value));
         }
 
-        public T this[int i] { get => Array[i]; }
+        public T this[int i]
+        {
+            get => Array[i];
+        }
 
         public int Length => Array.Length;
-        public SequenceEqualImmutableArray<T> Insert(int index, T item)
-            => new SequenceEqualImmutableArray<T>(Array.Insert(index, item), Comparer);
+
+        public SequenceEqualImmutableArray<T> Insert(int index, T item) =>
+            new SequenceEqualImmutableArray<T>(Array.Insert(index, item), Comparer);
 
         public override int GetHashCode() => HashCode.SequentialValuesHash(Array);
 
@@ -41,20 +46,30 @@ namespace Microsoft.Interop
         }
 
         public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Array).GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Array).GetEnumerator();
     }
 
     public static partial class CollectionExtensions
     {
-        public static SequenceEqualImmutableArray<T> ToSequenceEqualImmutableArray<T>(this IEnumerable<T> source, IEqualityComparer<T> comparer)
+        public static SequenceEqualImmutableArray<T> ToSequenceEqualImmutableArray<T>(
+            this IEnumerable<T> source,
+            IEqualityComparer<T> comparer
+        )
         {
             return new(source.ToImmutableArray(), comparer);
         }
-        public static SequenceEqualImmutableArray<T> ToSequenceEqualImmutableArray<T>(this IEnumerable<T> source)
+
+        public static SequenceEqualImmutableArray<T> ToSequenceEqualImmutableArray<T>(
+            this IEnumerable<T> source
+        )
         {
             return new(source.ToImmutableArray());
         }
-        public static SequenceEqualImmutableArray<T> ToSequenceEqual<T>(this ImmutableArray<T> source)
+
+        public static SequenceEqualImmutableArray<T> ToSequenceEqual<T>(
+            this ImmutableArray<T> source
+        )
         {
             return new(source);
         }

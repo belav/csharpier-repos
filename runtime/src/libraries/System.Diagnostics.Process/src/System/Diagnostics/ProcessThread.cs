@@ -13,7 +13,9 @@ namespace System.Diagnostics
     ///       returned from the System.Diagnostics.Process.ProcessThread property of the System.Diagnostics.Process component.
     ///    </para>
     /// </devdoc>
-    [Designer("System.Diagnostics.Design.ProcessThreadDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Designer(
+        "System.Diagnostics.Design.ProcessThreadDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public partial class ProcessThread : Component
     {
         private readonly bool _isRemoteMachine;
@@ -164,7 +166,7 @@ namespace System.Diagnostics
         /// <internalonly/>
         private enum State
         {
-            IsLocal = 0x2
+            IsLocal = 0x2,
         }
     }
 }

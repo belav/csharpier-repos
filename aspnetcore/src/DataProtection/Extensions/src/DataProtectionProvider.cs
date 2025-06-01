@@ -28,8 +28,12 @@ public static class DataProtectionProvider
 
         return CreateProvider(
             keyDirectory: null,
-            setupAction: builder => { builder.SetApplicationName(applicationName); },
-            certificate: null);
+            setupAction: builder =>
+            {
+                builder.SetApplicationName(applicationName);
+            },
+            certificate: null
+        );
     }
 
     /// <summary>
@@ -54,7 +58,8 @@ public static class DataProtectionProvider
     /// system. See <see cref="IDataProtectionBuilder"/> for more information.</param>
     public static IDataProtectionProvider Create(
         DirectoryInfo keyDirectory,
-        Action<IDataProtectionBuilder> setupAction)
+        Action<IDataProtectionBuilder> setupAction
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(keyDirectory);
         ArgumentNullThrowHelper.ThrowIfNull(setupAction);
@@ -69,15 +74,22 @@ public static class DataProtectionProvider
     /// <param name="applicationName">An identifier that uniquely discriminates this application from all other
     /// applications on the machine.</param>
     /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
-    public static IDataProtectionProvider Create(string applicationName, X509Certificate2 certificate)
+    public static IDataProtectionProvider Create(
+        string applicationName,
+        X509Certificate2 certificate
+    )
     {
         ArgumentThrowHelper.ThrowIfNullOrEmpty(applicationName);
         ArgumentNullThrowHelper.ThrowIfNull(certificate);
 
         return CreateProvider(
             keyDirectory: null,
-            setupAction: builder => { builder.SetApplicationName(applicationName); },
-            certificate: certificate);
+            setupAction: builder =>
+            {
+                builder.SetApplicationName(applicationName);
+            },
+            certificate: certificate
+        );
     }
 
     /// <summary>
@@ -89,7 +101,8 @@ public static class DataProtectionProvider
     /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
     public static IDataProtectionProvider Create(
         DirectoryInfo keyDirectory,
-        X509Certificate2 certificate)
+        X509Certificate2 certificate
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(keyDirectory);
         ArgumentNullThrowHelper.ThrowIfNull(certificate);
@@ -109,7 +122,8 @@ public static class DataProtectionProvider
     public static IDataProtectionProvider Create(
         DirectoryInfo keyDirectory,
         Action<IDataProtectionBuilder> setupAction,
-        X509Certificate2 certificate)
+        X509Certificate2 certificate
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(keyDirectory);
         ArgumentNullThrowHelper.ThrowIfNull(setupAction);
@@ -121,7 +135,8 @@ public static class DataProtectionProvider
     internal static IDataProtectionProvider CreateProvider(
         DirectoryInfo? keyDirectory,
         Action<IDataProtectionBuilder> setupAction,
-        X509Certificate2? certificate)
+        X509Certificate2? certificate
+    )
     {
         // build the service collection
         var serviceCollection = new ServiceCollection();
@@ -140,6 +155,8 @@ public static class DataProtectionProvider
         setupAction(builder);
 
         // extract the provider instance from the service collection
-        return serviceCollection.BuildServiceProvider().GetRequiredService<IDataProtectionProvider>();
+        return serviceCollection
+            .BuildServiceProvider()
+            .GetRequiredService<IDataProtectionProvider>();
     }
 }

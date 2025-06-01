@@ -3,7 +3,7 @@
 
 namespace NativeVarargTest
 {
-    public struct OneIntStruct 
+    public struct OneIntStruct
     {
         public int a;
     }

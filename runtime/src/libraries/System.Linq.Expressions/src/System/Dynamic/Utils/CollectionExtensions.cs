@@ -94,7 +94,10 @@ namespace System.Dynamic.Utils
             return h;
         }
 
-        public static bool ListEquals<T>(this ReadOnlyCollection<T> first, ReadOnlyCollection<T> second)
+        public static bool ListEquals<T>(
+            this ReadOnlyCollection<T> first,
+            ReadOnlyCollection<T> second
+        )
         {
             if (first == second)
             {

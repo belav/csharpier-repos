@@ -43,12 +43,11 @@ internal readonly record struct WorkspaceConfigurationOptions(
 #else
         false,
 #endif
-    [property: DataMember(Order = 4)] bool RunSourceGeneratorsInSameProcessOnly = false)
+    [property: DataMember(Order = 4)] bool RunSourceGeneratorsInSameProcessOnly = false
+)
 {
     public WorkspaceConfigurationOptions()
-        : this(CacheStorage: StorageDatabase.SQLite)
-    {
-    }
+        : this(CacheStorage: StorageDatabase.SQLite) { }
 
     public static readonly WorkspaceConfigurationOptions Default = new();
 
@@ -60,5 +59,6 @@ internal readonly record struct WorkspaceConfigurationOptions(
         CacheStorage: StorageDatabase.None,
         EnableOpeningSourceGeneratedFiles: false,
         DisableRecoverableText: false,
-        RunSourceGeneratorsInSameProcessOnly: false);
+        RunSourceGeneratorsInSameProcessOnly: false
+    );
 }

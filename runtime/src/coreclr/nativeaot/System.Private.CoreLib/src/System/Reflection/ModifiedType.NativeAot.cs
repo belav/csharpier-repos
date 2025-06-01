@@ -3,9 +3,7 @@
 
 using System.Collections.Generic;
 using System.Reflection.Runtime.General;
-
 using Internal.Metadata.NativeFormat;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace System.Reflection
@@ -16,8 +14,9 @@ namespace System.Reflection
         {
             internal readonly MetadataReader Reader;
             internal readonly Handle Handle;
-            public TypeSignature(MetadataReader reader, Handle handle)
-                => (Reader, Handle) = (reader, handle);
+
+            public TypeSignature(MetadataReader reader, Handle handle) =>
+                (Reader, Handle) = (reader, handle);
         }
 
         internal Type GetTypeParameter(Type unmodifiedType, int index)
@@ -29,43 +28,92 @@ namespace System.Reflection
                 handle = reader.GetModifiedType(handle.ToModifiedTypeHandle(reader)).Type;
 
             if (handle.HandleType == HandleType.TypeSpecification)
-                handle = reader.GetTypeSpecification(handle.ToTypeSpecificationHandle(reader)).Signature;
+                handle = reader
+                    .GetTypeSpecification(handle.ToTypeSpecificationHandle(reader))
+                    .Signature;
 
             switch (handle.HandleType)
             {
                 case HandleType.SZArraySignature:
                     Debug.Assert(index == 0);
-                    return Create(unmodifiedType, new TypeSignature(reader, reader.GetSZArraySignature(handle.ToSZArraySignatureHandle(reader)).ElementType));
+                    return Create(
+                        unmodifiedType,
+                        new TypeSignature(
+                            reader,
+                            reader
+                                .GetSZArraySignature(handle.ToSZArraySignatureHandle(reader))
+                                .ElementType
+                        )
+                    );
                 case HandleType.ArraySignature:
                     Debug.Assert(index == 0);
-                    return Create(unmodifiedType, new TypeSignature(reader, reader.GetArraySignature(handle.ToArraySignatureHandle(reader)).ElementType));
+                    return Create(
+                        unmodifiedType,
+                        new TypeSignature(
+                            reader,
+                            reader
+                                .GetArraySignature(handle.ToArraySignatureHandle(reader))
+                                .ElementType
+                        )
+                    );
                 case HandleType.PointerSignature:
                     Debug.Assert(index == 0);
-                    return Create(unmodifiedType, new TypeSignature(reader, reader.GetPointerSignature(handle.ToPointerSignatureHandle(reader)).Type));
+                    return Create(
+                        unmodifiedType,
+                        new TypeSignature(
+                            reader,
+                            reader.GetPointerSignature(handle.ToPointerSignatureHandle(reader)).Type
+                        )
+                    );
                 case HandleType.ByReferenceSignature:
                     Debug.Assert(index == 0);
-                    return Create(unmodifiedType, new TypeSignature(reader, reader.GetByReferenceSignature(handle.ToByReferenceSignatureHandle(reader)).Type));
+                    return Create(
+                        unmodifiedType,
+                        new TypeSignature(
+                            reader,
+                            reader
+                                .GetByReferenceSignature(
+                                    handle.ToByReferenceSignatureHandle(reader)
+                                )
+                                .Type
+                        )
+                    );
                 case HandleType.FunctionPointerSignature:
                     {
                         MethodSignature functionSig = reader.GetMethodSignature(
-                            reader.GetFunctionPointerSignature(handle.ToFunctionPointerSignatureHandle(reader)).Signature);
+                            reader
+                                .GetFunctionPointerSignature(
+                                    handle.ToFunctionPointerSignatureHandle(reader)
+                                )
+                                .Signature
+                        );
                         if (index-- == 0)
-                            return Create(unmodifiedType, new TypeSignature(reader, functionSig.ReturnType));
+                            return Create(
+                                unmodifiedType,
+                                new TypeSignature(reader, functionSig.ReturnType)
+                            );
 
                         Debug.Assert(index <= functionSig.Parameters.Count);
                         foreach (Handle paramHandle in functionSig.Parameters)
                             if (index-- == 0)
-                                return Create(unmodifiedType, new TypeSignature(reader, paramHandle));
+                                return Create(
+                                    unmodifiedType,
+                                    new TypeSignature(reader, paramHandle)
+                                );
                     }
                     break;
                 case HandleType.TypeInstantiationSignature:
                     {
-                        TypeInstantiationSignature typeInst =
-                            reader.GetTypeInstantiationSignature(handle.ToTypeInstantiationSignatureHandle(reader));
+                        TypeInstantiationSignature typeInst = reader.GetTypeInstantiationSignature(
+                            handle.ToTypeInstantiationSignatureHandle(reader)
+                        );
                         Debug.Assert(index < typeInst.GenericTypeArguments.Count);
                         foreach (Handle paramHandle in typeInst.GenericTypeArguments)
                             if (index-- == 0)
-                                return Create(unmodifiedType, new TypeSignature(reader, paramHandle));
+                                return Create(
+                                    unmodifiedType,
+                                    new TypeSignature(reader, paramHandle)
+                                );
                     }
                     break;
             }
@@ -77,15 +125,31 @@ namespace System.Reflection
         internal SignatureCallingConvention GetCallingConventionFromFunctionPointer()
         {
             MetadataReader reader = _typeSignature.Reader;
-            Handle fnPtrTypeSigHandle = reader.GetTypeSpecification(
-                _typeSignature.Handle.ToTypeSpecificationHandle(reader)).Signature;
-            MethodSignatureHandle methodSigHandle = reader.GetFunctionPointerSignature(
-                fnPtrTypeSigHandle.ToFunctionPointerSignatureHandle(reader)).Signature;
+            Handle fnPtrTypeSigHandle = reader
+                .GetTypeSpecification(_typeSignature.Handle.ToTypeSpecificationHandle(reader))
+                .Signature;
+            MethodSignatureHandle methodSigHandle = reader
+                .GetFunctionPointerSignature(
+                    fnPtrTypeSigHandle.ToFunctionPointerSignatureHandle(reader)
+                )
+                .Signature;
 
-            Debug.Assert((int)Internal.Metadata.NativeFormat.SignatureCallingConvention.StdCall == (int)SignatureCallingConvention.StdCall);
-            Debug.Assert((int)Internal.Metadata.NativeFormat.SignatureCallingConvention.Unmanaged == (int)SignatureCallingConvention.Unmanaged);
-            return (SignatureCallingConvention)(reader.GetMethodSignature(methodSigHandle).CallingConvention
-                & Internal.Metadata.NativeFormat.SignatureCallingConvention.UnmanagedCallingConventionMask);
+            Debug.Assert(
+                (int)Internal.Metadata.NativeFormat.SignatureCallingConvention.StdCall
+                    == (int)SignatureCallingConvention.StdCall
+            );
+            Debug.Assert(
+                (int)Internal.Metadata.NativeFormat.SignatureCallingConvention.Unmanaged
+                    == (int)SignatureCallingConvention.Unmanaged
+            );
+            return (SignatureCallingConvention)(
+                reader.GetMethodSignature(methodSigHandle).CallingConvention
+                & Internal
+                    .Metadata
+                    .NativeFormat
+                    .SignatureCallingConvention
+                    .UnmanagedCallingConventionMask
+            );
         }
 
         private Type[] GetCustomModifiers(bool required)
@@ -104,7 +168,9 @@ namespace System.Reflection
                 if (modifiedType.IsOptional == required)
                     continue;
 
-                builder.Add(modifiedType.ModifierType.Resolve(reader, new TypeContext(null, null)).ToType());
+                builder.Add(
+                    modifiedType.ModifierType.Resolve(reader, new TypeContext(null, null)).ToType()
+                );
             }
 
             Type[] result = builder.ToArray();
@@ -117,7 +183,10 @@ namespace System.Reflection
             return result;
         }
 
-        public static Type Create(Type unmodifiedType, MetadataReader reader, Handle typeSignature)
-            => ModifiedType.Create(unmodifiedType, new TypeSignature(reader, typeSignature));
+        public static Type Create(
+            Type unmodifiedType,
+            MetadataReader reader,
+            Handle typeSignature
+        ) => ModifiedType.Create(unmodifiedType, new TypeSignature(reader, typeSignature));
     }
 }

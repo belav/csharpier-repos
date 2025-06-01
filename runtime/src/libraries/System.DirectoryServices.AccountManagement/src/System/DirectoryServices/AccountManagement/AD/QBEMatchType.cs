@@ -18,26 +18,14 @@ namespace System.DirectoryServices.AccountManagement
 
         internal object Value
         {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
+            get { return _value; }
+            set { _value = value; }
         }
 
         internal MatchType Match
         {
-            get
-            {
-                return _matchType;
-            }
-            set
-            {
-                _matchType = value;
-            }
+            get { return _matchType; }
+            set { _matchType = value; }
         }
     }
 }

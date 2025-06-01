@@ -15,7 +15,15 @@ namespace Legacy.Support
 {
     public static class TCSupport
     {
-        public enum SerialPortRequirements { None, OneSerialPort, TwoSerialPorts, NullModem, Loopback, LoopbackOrNullModem };
+        public enum SerialPortRequirements
+        {
+            None,
+            OneSerialPort,
+            TwoSerialPorts,
+            NullModem,
+            Loopback,
+            LoopbackOrNullModem,
+        };
 
         private static LocalMachineSerialInfo s_localMachineSerialInfo;
         private static SerialPortRequirements s_localMachineSerialPortRequirements;
@@ -55,7 +63,9 @@ namespace Legacy.Support
         {
             string[] installedPortNames = PortHelper.GetPorts();
             bool nullModemPresent = false;
-            string portName1 = null, portName2 = null, loopbackPortName = null;
+            string portName1 = null,
+                portName2 = null,
+                loopbackPortName = null;
 
             Array.Sort(installedPortNames);
             PrintInfo("Installed ports : " + string.Join(",", installedPortNames));
@@ -66,9 +76,17 @@ namespace Legacy.Support
 
             // Find any pair of ports which are null-modem connected
             // If there is a pair like this, then they take precedence over any other way of identifying two available ports
-            for (int firstIndex = 0; firstIndex < openablePortNames.Count && !nullModemPresent; firstIndex++)
+            for (
+                int firstIndex = 0;
+                firstIndex < openablePortNames.Count && !nullModemPresent;
+                firstIndex++
+            )
             {
-                for (int secondIndex = firstIndex + 1; secondIndex < openablePortNames.Count && !nullModemPresent; secondIndex++)
+                for (
+                    int secondIndex = firstIndex + 1;
+                    secondIndex < openablePortNames.Count && !nullModemPresent;
+                    secondIndex++
+                )
                 {
                     string firstPortName = openablePortNames[firstIndex];
                     string secondPortName = openablePortNames[secondIndex];
@@ -80,7 +98,11 @@ namespace Legacy.Support
                         portName2 = secondPortName;
                         nullModemPresent = true;
 
-                        PrintInfo("Null-modem connection from {0} to {1}", firstPortName, secondPortName);
+                        PrintInfo(
+                            "Null-modem connection from {0} to {1}",
+                            firstPortName,
+                            secondPortName
+                        );
                     }
                 }
             }
@@ -122,14 +144,21 @@ namespace Legacy.Support
             PrintInfo("Loopback port name         : " + loopbackPortName);
             PrintInfo("NullModem present          : " + nullModemPresent);
 
-            s_localMachineSerialInfo = new LocalMachineSerialInfo(portName1, portName2, loopbackPortName, nullModemPresent);
+            s_localMachineSerialInfo = new LocalMachineSerialInfo(
+                portName1,
+                portName2,
+                loopbackPortName,
+                nullModemPresent
+            );
 
             if (portName1 != null)
             {
                 // Measure how big a packet we need to write to be sure to see blocking behaviour at a port
                 try
                 {
-                    s_flowControlCapabilities = SerialPortConnection.MeasureFlowControlCapabilities(portName1);
+                    s_flowControlCapabilities = SerialPortConnection.MeasureFlowControlCapabilities(
+                        portName1
+                    );
                 }
                 catch (Exception e)
                 {
@@ -176,7 +205,9 @@ namespace Legacy.Support
             return openablePortNames;
         }
 
-        public static bool SufficientHardwareRequirements(SerialPortRequirements serialPortRequirements)
+        public static bool SufficientHardwareRequirements(
+            SerialPortRequirements serialPortRequirements
+        )
         {
             switch (serialPortRequirements)
             {
@@ -184,20 +215,23 @@ namespace Legacy.Support
                     return true;
 
                 case SerialPortRequirements.OneSerialPort:
-                    return s_localMachineSerialPortRequirements == SerialPortRequirements.OneSerialPort ||
-                        s_localMachineSerialPortRequirements == SerialPortRequirements.TwoSerialPorts ||
-                        s_localMachineSerialPortRequirements == SerialPortRequirements.Loopback ||
-                        s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
+                    return s_localMachineSerialPortRequirements
+                            == SerialPortRequirements.OneSerialPort
+                        || s_localMachineSerialPortRequirements
+                            == SerialPortRequirements.TwoSerialPorts
+                        || s_localMachineSerialPortRequirements == SerialPortRequirements.Loopback
+                        || s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
                 case SerialPortRequirements.TwoSerialPorts:
-                    return s_localMachineSerialPortRequirements == SerialPortRequirements.TwoSerialPorts ||
-                        s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
+                    return s_localMachineSerialPortRequirements
+                            == SerialPortRequirements.TwoSerialPorts
+                        || s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
                 case SerialPortRequirements.NullModem:
                     return s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
                 case SerialPortRequirements.Loopback:
                     return s_localMachineSerialPortRequirements == SerialPortRequirements.Loopback;
                 case SerialPortRequirements.LoopbackOrNullModem:
-                    return s_localMachineSerialPortRequirements == SerialPortRequirements.Loopback ||
-                        s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
+                    return s_localMachineSerialPortRequirements == SerialPortRequirements.Loopback
+                        || s_localMachineSerialPortRequirements == SerialPortRequirements.NullModem;
             }
 
             return false;
@@ -246,18 +280,27 @@ namespace Legacy.Support
         /// </summary>
         public static bool RunShortStressTests { get; set; } = true;
 
-        public static int MinimumBlockingByteCount => s_flowControlCapabilities.MinimumBlockingByteCount;
-        public static int HardwareTransmitBufferSize => s_flowControlCapabilities.HardwareTransmitBufferSize;
-        public static bool HardwareWriteBlockingAvailable => s_flowControlCapabilities.HardwareWriteBlockingAvailable;
+        public static int MinimumBlockingByteCount =>
+            s_flowControlCapabilities.MinimumBlockingByteCount;
+        public static int HardwareTransmitBufferSize =>
+            s_flowControlCapabilities.HardwareTransmitBufferSize;
+        public static bool HardwareWriteBlockingAvailable =>
+            s_flowControlCapabilities.HardwareWriteBlockingAvailable;
 
         public delegate bool Predicate();
 
         public delegate T ValueGenerator<T>();
 
-        public static void WaitForPredicate(Predicate predicate, int maxWait, string errorMessageFormat, params object[] formatArgs)
+        public static void WaitForPredicate(
+            Predicate predicate,
+            int maxWait,
+            string errorMessageFormat,
+            params object[] formatArgs
+        )
         {
             WaitForPredicate(predicate, maxWait, string.Format(errorMessageFormat, formatArgs));
         }
+
         public static void WaitForPredicate(Predicate predicate, int maxWait, string errorMessage)
         {
             Stopwatch stopWatch = Stopwatch.StartNew();
@@ -272,8 +315,12 @@ namespace Legacy.Support
             Assert.True(predicateValue, errorMessage);
         }
 
-        public static void WaitForExpected<T>(ValueGenerator<T> actualValueGenerator, T expectedValue, int maxWait,
-            string errorMessage)
+        public static void WaitForExpected<T>(
+            ValueGenerator<T> actualValueGenerator,
+            T expectedValue,
+            int maxWait,
+            string errorMessage
+        )
         {
             Stopwatch stopWatch = new Stopwatch();
             bool result;
@@ -285,15 +332,21 @@ namespace Legacy.Support
             do
             {
                 actualValue = actualValueGenerator();
-                result = actualValue == null ? null == expectedValue : actualValue.Equals(expectedValue);
+                result =
+                    actualValue == null ? null == expectedValue : actualValue.Equals(expectedValue);
 
                 Thread.Sleep(iterationWaitTime);
                 iterationWaitTime = 10; //This is just to ensure there is no delay the first time we check
             } while (!result && stopWatch.ElapsedMilliseconds < maxWait);
 
-            Assert.True(result, errorMessage +
-                                " Expected:" + (null == expectedValue ? "<null>" : expectedValue.ToString()) +
-                                " Actual:" + (null == actualValue ? "<null>" : actualValue.ToString()));
+            Assert.True(
+                result,
+                errorMessage
+                    + " Expected:"
+                    + (null == expectedValue ? "<null>" : expectedValue.ToString())
+                    + " Actual:"
+                    + (null == actualValue ? "<null>" : actualValue.ToString())
+            );
         }
 
         private const int MIN_RANDOM_CHAR = 0;
@@ -308,10 +361,16 @@ namespace Legacy.Support
         private const int MAX_RANDOM_ASCII_CHAR = 127;
 
         private static readonly Random s_random = new Random(-55);
-        private static FlowControlCapabilities s_flowControlCapabilities = new FlowControlCapabilities(0, 0, false);
+        private static FlowControlCapabilities s_flowControlCapabilities =
+            new FlowControlCapabilities(0, 0, false);
 
         [Flags]
-        public enum CharacterOptions { None, Surrogates, ASCII };
+        public enum CharacterOptions
+        {
+            None,
+            Surrogates,
+            ASCII,
+        };
 
         public static char[] GetRandomChars(int count, bool withSurrogates)
         {
@@ -331,7 +390,12 @@ namespace Legacy.Support
                 return GetRandomCharsWithoutSurrogates(count);
         }
 
-        public static void GetRandomChars(char[] chars, int index, int count, CharacterOptions options)
+        public static void GetRandomChars(
+            char[] chars,
+            int index,
+            int count,
+            CharacterOptions options
+        )
         {
             if (0 != (options & CharacterOptions.Surrogates))
                 GetRandomCharsWithSurrogates(chars, index, count);
@@ -533,7 +597,10 @@ namespace Legacy.Support
             int lastSearchIndex = (count + startIndex) - search.Length;
             if (lastSearchIndex >= input.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(input), "Searching will result in accessing element past the end of the array");
+                throw new ArgumentOutOfRangeException(
+                    nameof(input),
+                    "Searching will result in accessing element past the end of the array"
+                );
             }
 
             for (int i = startIndex; i <= lastSearchIndex; ++i)
@@ -541,7 +608,11 @@ namespace Legacy.Support
                 if (input[i] == search[0])
                 {
                     bool match = true;
-                    for (int searchIndex = 1, inputIndex = i + 1; searchIndex < search.Length; ++searchIndex, ++inputIndex)
+                    for (
+                        int searchIndex = 1, inputIndex = i + 1;
+                        searchIndex < search.Length;
+                        ++searchIndex, ++inputIndex
+                    )
                     {
                         match = input[inputIndex] == search[searchIndex];
 
@@ -604,9 +675,20 @@ namespace Legacy.Support
             int tempLength = length + index;
             for (int i = index; i < tempLength; ++i)
             {
-                bool result = expectedArray[i] == null ? null != actualArray[i] : expectedArray[i].Equals(actualArray[i]);
+                bool result =
+                    expectedArray[i] == null
+                        ? null != actualArray[i]
+                        : expectedArray[i].Equals(actualArray[i]);
 
-                Assert.True(result, string.Format("Err_55808aoped Items differ at {0} expected {1} actual {2}", i, expectedArray[i], actualArray[i]));
+                Assert.True(
+                    result,
+                    string.Format(
+                        "Err_55808aoped Items differ at {0} expected {1} actual {2}",
+                        i,
+                        expectedArray[i],
+                        actualArray[i]
+                    )
+                );
             }
         }
 
@@ -625,7 +707,6 @@ namespace Legacy.Support
             }
         }
 
-
         /// <summary>
         /// Wait for write data to be written into a blocked (by adverse flow control) port
         /// </summary>
@@ -635,7 +716,10 @@ namespace Legacy.Support
             while (com.BytesToWrite + HardwareTransmitBufferSize < bufferLength)
             {
                 Thread.Sleep(50);
-                Assert.True(sw.ElapsedMilliseconds < 3000, $"Timeout while waiting for data to be written to port (wrote {bufferLength}, queued {com.BytesToWrite}, bufSize {HardwareTransmitBufferSize})");
+                Assert.True(
+                    sw.ElapsedMilliseconds < 3000,
+                    $"Timeout while waiting for data to be written to port (wrote {bufferLength}, queued {com.BytesToWrite}, bufSize {HardwareTransmitBufferSize})"
+                );
             }
         }
 
@@ -658,7 +742,10 @@ namespace Legacy.Support
             while (com.BytesToRead < bufferLength)
             {
                 Thread.Sleep(50);
-                Assert.True(sw.ElapsedMilliseconds < 3000, $"Timeout while waiting for data to be arrive at port (expected {bufferLength}, available {com.BytesToRead})");
+                Assert.True(
+                    sw.ElapsedMilliseconds < 3000,
+                    $"Timeout while waiting for data to be arrive at port (expected {bufferLength}, available {com.BytesToRead})"
+                );
             }
         }
 

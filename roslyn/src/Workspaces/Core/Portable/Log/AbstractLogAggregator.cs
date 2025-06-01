@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// <summary>
     /// helper class to aggregate some numeric value log in client side
     /// </summary>
-    internal abstract class AbstractLogAggregator<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
+    internal abstract class AbstractLogAggregator<TKey, TValue>
+        : IEnumerable<KeyValuePair<TKey, TValue>>
         where TKey : notnull
         where TValue : class // TValue being constrained to a class will ensure that the ConcurrentDictionaries won't be JITted with structs
     {
@@ -25,7 +26,10 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// types is they prevent the runtime from sharing the same JITted code for each different generic instantiation. In this case,
         /// the cost of boxing is cheaper than the cost of the extra JIT.
         /// </remarks>
-        private readonly ConcurrentDictionary<object, TValue> _map = new(concurrencyLevel: 2, capacity: 2);
+        private readonly ConcurrentDictionary<object, TValue> _map = new(
+            concurrencyLevel: 2,
+            capacity: 2
+        );
         private readonly Func<object, TValue> _createCounter;
 
         protected AbstractLogAggregator()
@@ -39,15 +43,17 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         public void Clear() => _map.Clear();
 
-        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
-            => _map.Select(static kvp => new KeyValuePair<TKey, TValue>((TKey)kvp.Key, kvp.Value)).GetEnumerator();
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() =>
+            _map.Select(static kvp => new KeyValuePair<TKey, TValue>((TKey)kvp.Key, kvp.Value))
+                .GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => this.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1279909", AllowCaptures = false)]
-        protected TValue GetCounter(TKey key)
-            => _map.GetOrAdd((object)key, _createCounter);
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1279909",
+            AllowCaptures = false
+        )]
+        protected TValue GetCounter(TKey key) => _map.GetOrAdd((object)key, _createCounter);
 
         protected bool TryGetCounter(TKey key, [MaybeNullWhen(false)] out TValue counter)
         {

@@ -18,7 +18,13 @@ namespace System.IO.Compression.Tests
             string noBaseDir = GetTestFilePath();
             ZipFile.CreateFromDirectory(folderName, noBaseDir);
 
-            await IsZipSameAsDirAsync(noBaseDir, folderName, ZipArchiveMode.Read, requireExplicit: false, checkTimes: false);
+            await IsZipSameAsDirAsync(
+                noBaseDir,
+                folderName,
+                ZipArchiveMode.Read,
+                requireExplicit: false,
+                checkTimes: false
+            );
         }
 
         [Fact]
@@ -28,12 +34,18 @@ namespace System.IO.Compression.Tests
             string withBaseDir = GetTestFilePath();
             ZipFile.CreateFromDirectory(folderName, withBaseDir, CompressionLevel.Optimal, true);
 
-            IEnumerable<string> expected = Directory.EnumerateFiles(zfolder("normal"), "*", SearchOption.AllDirectories);
+            IEnumerable<string> expected = Directory.EnumerateFiles(
+                zfolder("normal"),
+                "*",
+                SearchOption.AllDirectories
+            );
             using (ZipArchive actual_withbasedir = ZipFile.Open(withBaseDir, ZipArchiveMode.Read))
             {
                 foreach (ZipArchiveEntry actualEntry in actual_withbasedir.Entries)
                 {
-                    string expectedFile = expected.Single(i => Path.GetFileName(i).Equals(actualEntry.Name));
+                    string expectedFile = expected.Single(i =>
+                        Path.GetFileName(i).Equals(actualEntry.Name)
+                    );
                     Assert.StartsWith("normal", actualEntry.FullName);
                     Assert.Equal(new FileInfo(expectedFile).Length, actualEntry.Length);
                     using (Stream expectedStream = File.OpenRead(expectedFile))
@@ -52,12 +64,18 @@ namespace System.IO.Compression.Tests
             string withBaseDir = GetTestFilePath();
             ZipFile.CreateFromDirectory(folderName, withBaseDir, CompressionLevel.Optimal, true);
 
-            IEnumerable<string> expected = Directory.EnumerateFiles(zfolder("normal"), "*", SearchOption.AllDirectories);
+            IEnumerable<string> expected = Directory.EnumerateFiles(
+                zfolder("normal"),
+                "*",
+                SearchOption.AllDirectories
+            );
             using (ZipArchive actual_withbasedir = ZipFile.Open(withBaseDir, ZipArchiveMode.Read))
             {
                 foreach (ZipArchiveEntry actualEntry in actual_withbasedir.Entries)
                 {
-                    string expectedFile = expected.Single(i => Path.GetFileName(i).Equals(actualEntry.Name));
+                    string expectedFile = expected.Single(i =>
+                        Path.GetFileName(i).Equals(actualEntry.Name)
+                    );
                     Assert.StartsWith("normal", actualEntry.FullName);
                     Assert.Equal(new FileInfo(expectedFile).Length, actualEntry.Length);
                     using (Stream expectedStream = File.OpenRead(expectedFile))
@@ -79,8 +97,19 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = ZipFile.OpenRead(noBaseDir))
             {
                 IEnumerable<string> actual = archive.Entries.Select(entry => entry.Name);
-                IEnumerable<string> expected = Directory.EnumerateFileSystemEntries(zfolder("unicode"), "*", SearchOption.AllDirectories).ToList();
-                Assert.True(Enumerable.SequenceEqual(expected.Select(i => Path.GetFileName(i)), actual.Select(i => i)));
+                IEnumerable<string> expected = Directory
+                    .EnumerateFileSystemEntries(
+                        zfolder("unicode"),
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                    .ToList();
+                Assert.True(
+                    Enumerable.SequenceEqual(
+                        expected.Select(i => Path.GetFileName(i)),
+                        actual.Select(i => i)
+                    )
+                );
             }
         }
 
@@ -94,8 +123,12 @@ namespace System.IO.Compression.Tests
 
                 string archivePath = GetTestFilePath();
                 ZipFile.CreateFromDirectory(
-                    rootDir.FullName, archivePath,
-                    CompressionLevel.Optimal, false, Encoding.UTF8);
+                    rootDir.FullName,
+                    archivePath,
+                    CompressionLevel.Optimal,
+                    false,
+                    Encoding.UTF8
+                );
 
                 using (ZipArchive archive = ZipFile.OpenRead(archivePath))
                 {
@@ -116,10 +149,20 @@ namespace System.IO.Compression.Tests
 
                 string archivePath = GetTestFilePath();
                 ZipFile.CreateFromDirectory(
-                    rootDir.FullName, archivePath,
-                    CompressionLevel.Optimal, false, entryEncoding);
+                    rootDir.FullName,
+                    archivePath,
+                    CompressionLevel.Optimal,
+                    false,
+                    entryEncoding
+                );
 
-                using (ZipArchive archive = ZipFile.Open(archivePath, ZipArchiveMode.Read, entryEncoding))
+                using (
+                    ZipArchive archive = ZipFile.Open(
+                        archivePath,
+                        ZipArchiveMode.Read,
+                        entryEncoding
+                    )
+                )
                 {
                     Assert.Equal(1, archive.Entries.Count);
                     Assert.StartsWith("empty1", archive.Entries[0].FullName);
@@ -135,8 +178,11 @@ namespace System.IO.Compression.Tests
                 DirectoryInfo emptyRoot = new DirectoryInfo(tempFolder.Path);
                 string archivePath = GetTestFilePath();
                 ZipFile.CreateFromDirectory(
-                    emptyRoot.FullName, archivePath,
-                    CompressionLevel.Optimal, true);
+                    emptyRoot.FullName,
+                    archivePath,
+                    CompressionLevel.Optimal,
+                    true
+                );
 
                 using (ZipArchive archive = ZipFile.OpenRead(archivePath))
                 {

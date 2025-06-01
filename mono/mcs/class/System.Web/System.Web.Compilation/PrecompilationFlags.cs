@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,23 +28,19 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace System.Web.Compilation
 {
-	[Flags]
-	public enum PrecompilationFlags
-	{
-		Default                      =   0,
-		Updatable                    =   1,
-		OverwriteTarget              =   2,
-		ForceDebug                   =   4,
-		Clean                        =   8,
-		CodeAnalysis                 =  16,
-		AllowPartiallyTrustedCallers =  32,
-		DelaySign                    =  64,
-		FixedNames                   = 128
-	}
-
+    [Flags]
+    public enum PrecompilationFlags
+    {
+        Default = 0,
+        Updatable = 1,
+        OverwriteTarget = 2,
+        ForceDebug = 4,
+        Clean = 8,
+        CodeAnalysis = 16,
+        AllowPartiallyTrustedCallers = 32,
+        DelaySign = 64,
+        FixedNames = 128,
+    }
 }
-
-

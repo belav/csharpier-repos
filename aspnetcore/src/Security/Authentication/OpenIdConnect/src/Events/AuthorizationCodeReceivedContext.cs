@@ -20,7 +20,8 @@ public class AuthorizationCodeReceivedContext : RemoteAuthenticationContext<Open
         HttpContext context,
         AuthenticationScheme scheme,
         OpenIdConnectOptions options,
-        AuthenticationProperties properties)
+        AuthenticationProperties properties
+    )
         : base(context, scheme, options, properties) { }
 
     /// <summary>
@@ -78,7 +79,11 @@ public class AuthorizationCodeReceivedContext : RemoteAuthenticationContext<Open
     /// </summary>
     public void HandleCodeRedemption(string accessToken, string idToken)
     {
-        TokenEndpointResponse = new OpenIdConnectMessage() { AccessToken = accessToken, IdToken = idToken };
+        TokenEndpointResponse = new OpenIdConnectMessage()
+        {
+            AccessToken = accessToken,
+            IdToken = idToken,
+        };
     }
 
     /// <summary>

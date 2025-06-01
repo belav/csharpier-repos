@@ -20,22 +20,42 @@ public class InMemoryEFOnlyUsersTest
         _fixture = fixture;
     }
 
-    protected override object CreateTestContext()
-        => InMemoryContext<IdentityUser>.Create(_fixture.Connection);
+    protected override object CreateTestContext() =>
+        InMemoryContext<IdentityUser>.Create(_fixture.Connection);
 
-    protected override void AddUserStore(IServiceCollection services, object context = null)
-        => services.AddSingleton<IUserStore<IdentityUser>>(new UserStore<IdentityUser, IdentityRole, DbContext, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, IdentityUserToken<string>, IdentityRoleClaim<string>>((InMemoryContext<IdentityUser>)context, new IdentityErrorDescriber()));
+    protected override void AddUserStore(IServiceCollection services, object context = null) =>
+        services.AddSingleton<IUserStore<IdentityUser>>(
+            new UserStore<
+                IdentityUser,
+                IdentityRole,
+                DbContext,
+                string,
+                IdentityUserClaim<string>,
+                IdentityUserRole<string>,
+                IdentityUserLogin<string>,
+                IdentityUserToken<string>,
+                IdentityRoleClaim<string>
+            >((InMemoryContext<IdentityUser>)context, new IdentityErrorDescriber())
+        );
 
-    protected override IdentityUser CreateTestUser(string namePrefix = "", string email = "", string phoneNumber = "",
-        bool lockoutEnabled = false, DateTimeOffset? lockoutEnd = default(DateTimeOffset?), bool useNamePrefixAsUserName = false)
+    protected override IdentityUser CreateTestUser(
+        string namePrefix = "",
+        string email = "",
+        string phoneNumber = "",
+        bool lockoutEnabled = false,
+        DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
+        bool useNamePrefixAsUserName = false
+    )
     {
         return new IdentityUser
         {
-            UserName = useNamePrefixAsUserName ? namePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
+            UserName = useNamePrefixAsUserName
+                ? namePrefix
+                : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
             Email = email,
             PhoneNumber = phoneNumber,
             LockoutEnabled = lockoutEnabled,
-            LockoutEnd = lockoutEnd
+            LockoutEnd = lockoutEnd,
         };
     }
 
@@ -44,9 +64,13 @@ public class InMemoryEFOnlyUsersTest
         user.PasswordHash = hashedPassword;
     }
 
-    protected override Expression<Func<IdentityUser, bool>> UserNameEqualsPredicate(string userName) => u => u.UserName == userName;
+    protected override Expression<Func<IdentityUser, bool>> UserNameEqualsPredicate(
+        string userName
+    ) => u => u.UserName == userName;
 
 #pragma warning disable CA1310 // Specify StringComparison for correctness
-    protected override Expression<Func<IdentityUser, bool>> UserNameStartsWithPredicate(string userName) => u => u.UserName.StartsWith(userName);
+    protected override Expression<Func<IdentityUser, bool>> UserNameStartsWithPredicate(
+        string userName
+    ) => u => u.UserName.StartsWith(userName);
 #pragma warning restore CA1310 // Specify StringComparison for correctness
 }

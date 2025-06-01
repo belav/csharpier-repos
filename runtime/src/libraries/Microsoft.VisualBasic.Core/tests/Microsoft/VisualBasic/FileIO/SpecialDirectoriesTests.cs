@@ -2,14 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using static System.Environment;
 using Xunit;
+using static System.Environment;
 
 namespace Microsoft.VisualBasic.FileIO.Tests
 {
     public class SpecialDirectoriesTests
     {
-        private static void CheckSpecialFolder(SpecialFolder folder, Func<string> getSpecialDirectory)
+        private static void CheckSpecialFolder(
+            SpecialFolder folder,
+            Func<string> getSpecialDirectory
+        )
         {
             var path = Environment.GetFolderPath(folder);
             if (string.IsNullOrEmpty(path))
@@ -26,14 +29,18 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Supported on netfx")]
         public static void AllUsersApplicationDataFolderTest()
         {
-            Assert.Throws<System.IO.DirectoryNotFoundException>(() => SpecialDirectories.AllUsersApplicationData);
+            Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
+                SpecialDirectories.AllUsersApplicationData
+            );
         }
 
         [Fact]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Supported on netfx")]
         public static void CurrentUserApplicationDataFolderTest()
         {
-            Assert.Throws<System.IO.DirectoryNotFoundException>(() => SpecialDirectories.CurrentUserApplicationData);
+            Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
+                SpecialDirectories.CurrentUserApplicationData
+            );
         }
 
         [Fact]
@@ -47,7 +54,9 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         {
             if (PlatformDetection.IsWindowsNanoServer)
             {
-                Assert.Throws<System.IO.DirectoryNotFoundException>(() => SpecialDirectories.MyDocuments);
+                Assert.Throws<System.IO.DirectoryNotFoundException>(() =>
+                    SpecialDirectories.MyDocuments
+                );
             }
             else
             {
@@ -83,12 +92,19 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         public static void TempFolderTest()
         {
             // On Nano Server >=1809 the temp path's case is changed during the normalization.
-            Assert.Equal(TrimSeparators(System.IO.Path.GetTempPath()), TrimSeparators(SpecialDirectories.Temp), ignoreCase: PlatformDetection.IsWindowsNanoServer);
+            Assert.Equal(
+                TrimSeparators(System.IO.Path.GetTempPath()),
+                TrimSeparators(SpecialDirectories.Temp),
+                ignoreCase: PlatformDetection.IsWindowsNanoServer
+            );
         }
 
         private static string TrimSeparators(string s)
         {
-            return s.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar);
+            return s.TrimEnd(
+                System.IO.Path.DirectorySeparatorChar,
+                System.IO.Path.AltDirectorySeparatorChar
+            );
         }
     }
 }

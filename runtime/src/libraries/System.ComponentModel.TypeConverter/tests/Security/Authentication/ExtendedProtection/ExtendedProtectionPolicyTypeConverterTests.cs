@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Globalization;
 using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
+using System.Globalization;
 using Xunit;
 
 namespace System.Security.Authentication.ExtendedProtection.Tests
@@ -30,34 +30,63 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Security is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Net.Security is not supported on this platform."
+        )]
         public void ConvertTo_NullTypeTests()
         {
-            Assert.Throws<ArgumentNullException>(() => converter.ConvertTo(null, CultureInfo.InvariantCulture, new ExtendedProtectionPolicy(PolicyEnforcement.Never), null));
+            Assert.Throws<ArgumentNullException>(() =>
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    new ExtendedProtectionPolicy(PolicyEnforcement.Never),
+                    null
+                )
+            );
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Security is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Net.Security is not supported on this platform."
+        )]
         public void ConvertTo_PositiveTests()
         {
             ExtendedProtectionPolicy policy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
 
-            InstanceDescriptor instanceDescriptor = converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, typeof(InstanceDescriptor)) as InstanceDescriptor;
-            ExtendedProtectionPolicy instanceResult = instanceDescriptor.Invoke() as ExtendedProtectionPolicy;
+            InstanceDescriptor instanceDescriptor =
+                converter.ConvertTo(
+                    null,
+                    CultureInfo.InvariantCulture,
+                    policy,
+                    typeof(InstanceDescriptor)
+                ) as InstanceDescriptor;
+            ExtendedProtectionPolicy instanceResult =
+                instanceDescriptor.Invoke() as ExtendedProtectionPolicy;
             Assert.NotNull(instanceDescriptor);
             Assert.NotNull(instanceResult);
             Assert.Equal(PolicyEnforcement.Never, instanceResult.PolicyEnforcement);
             Assert.Equal(policy.ProtectionScenario, instanceResult.ProtectionScenario);
             Assert.Null(instanceResult.CustomServiceNames);
 
-            Assert.Equal(string.Empty,
-                converter.ConvertTo(null, CultureInfo.InvariantCulture, null, typeof(string)) as string);
-            Assert.Equal(policy.ToString(),
-                converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, typeof(string)) as string);
+            Assert.Equal(
+                string.Empty,
+                converter.ConvertTo(null, CultureInfo.InvariantCulture, null, typeof(string))
+                    as string
+            );
+            Assert.Equal(
+                policy.ToString(),
+                converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, typeof(string))
+                    as string
+            );
         }
 
         [Theory]
-        [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Security is not supported on this platform.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "System.Net.Security is not supported on this platform."
+        )]
         [InlineData(typeof(int))]
         [InlineData(typeof(ExtendedProtectionPolicy))]
         [InlineData(typeof(bool))]
@@ -67,9 +96,12 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
         {
             ExtendedProtectionPolicy policy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
 
-            Assert.Throws<NotSupportedException>(() => converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, destinationType));
+            Assert.Throws<NotSupportedException>(() =>
+                converter.ConvertTo(null, CultureInfo.InvariantCulture, policy, destinationType)
+            );
         }
 
-        private ExtendedProtectionPolicyTypeConverter converter = new ExtendedProtectionPolicyTypeConverter();
+        private ExtendedProtectionPolicyTypeConverter converter =
+            new ExtendedProtectionPolicyTypeConverter();
     }
 }

@@ -45,7 +45,15 @@ namespace System.Reflection.PortableExecutable
     {
         public static bool IsValid(this PEStreamOptions options)
         {
-            return (options & ~(PEStreamOptions.LeaveOpen | PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata | PEStreamOptions.IsLoadedImage)) == 0;
+            return (
+                    options
+                    & ~(
+                        PEStreamOptions.LeaveOpen
+                        | PEStreamOptions.PrefetchEntireImage
+                        | PEStreamOptions.PrefetchMetadata
+                        | PEStreamOptions.IsLoadedImage
+                    )
+                ) == 0;
         }
     }
 }

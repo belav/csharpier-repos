@@ -28,10 +28,7 @@ public class PageViewLocationExpanderTest
     {
         // Arrange
         var context = CreateContext(pageName: null);
-        var locations = new string[]
-        {
-                "/ignore-me",
-        };
+        var locations = new string[] { "/ignore-me" };
 
         var expander = new PageViewLocationExpander();
 
@@ -50,10 +47,7 @@ public class PageViewLocationExpanderTest
         // Arrange
         var context = CreateContext(pageName: "test");
         context.ActionContext.ActionDescriptor = new ControllerActionDescriptor();
-        var locations = new string[]
-        {
-                "/ignore-me",
-        };
+        var locations = new string[] { "/ignore-me" };
 
         var expander = new PageViewLocationExpander();
 
@@ -69,10 +63,7 @@ public class PageViewLocationExpanderTest
     {
         // Arrange
         var context = CreateContext(pageName: null);
-        var locations = new string[]
-        {
-                "/ignore-me",
-        };
+        var locations = new string[] { "/ignore-me" };
 
         var expander = new PageViewLocationExpander();
 
@@ -89,15 +80,13 @@ public class PageViewLocationExpanderTest
     [InlineData("/Customers/Add", new string[] { "/Customers/{0}.cshtml", "/{0}.cshtml" })]
     public void ExpandLocations_ExpandsDirectories_WhenLocationContainsPage(
         string pageName,
-        string[] expected)
+        string[] expected
+    )
     {
         // Arrange
         var context = CreateContext(pageName: pageName);
 
-        var locations = new string[]
-        {
-                "/{1}/{0}.cshtml",
-        };
+        var locations = new string[] { "/{1}/{0}.cshtml" };
 
         var expander = new PageViewLocationExpander();
 
@@ -116,18 +105,18 @@ public class PageViewLocationExpanderTest
 
         var locations = new string[]
         {
-                "/Pages/{1}/{0}.cshtml",
-                "/More/Paths/{1}/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
+            "/Pages/{1}/{0}.cshtml",
+            "/More/Paths/{1}/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
         };
 
         var expected = new string[]
         {
-                "/Pages/Customers/{0}.cshtml",
-                "/Pages/{0}.cshtml",
-                "/More/Paths/Customers/{0}.cshtml",
-                "/More/Paths/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
+            "/Pages/Customers/{0}.cshtml",
+            "/Pages/{0}.cshtml",
+            "/More/Paths/Customers/{0}.cshtml",
+            "/More/Paths/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
         };
 
         var expander = new PageViewLocationExpander();
@@ -141,15 +130,15 @@ public class PageViewLocationExpanderTest
 
     [Theory]
     [InlineData("/Index", new[] { "/Areas/{2}/Pages/{0}.cshtml" })]
-    [InlineData("/Manage/User", new[] { "/Areas/{2}/Pages/Manage/{0}.cshtml", "/Areas/{2}/Pages/{0}.cshtml" })]
+    [InlineData(
+        "/Manage/User",
+        new[] { "/Areas/{2}/Pages/Manage/{0}.cshtml", "/Areas/{2}/Pages/{0}.cshtml" }
+    )]
     public void ExpandLocations_ExpandsAreaPaths(string pageName, string[] expected)
     {
         // Arrange
         var context = CreateContext(pageName: pageName);
-        var locations = new[]
-        {
-                "/Areas/{2}/Pages/{1}/{0}.cshtml",
-            };
+        var locations = new[] { "/Areas/{2}/Pages/{1}/{0}.cshtml" };
 
         var expander = new PageViewLocationExpander();
 
@@ -167,27 +156,27 @@ public class PageViewLocationExpanderTest
         var context = CreateContext(pageName: "/Customers/Edit");
         var locations = new[]
         {
-                "/Areas/{2}/Pages/{1}/{0}.cshtml",
-                "/Areas/{2}/Pages/Shared/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/Areas/{2}/Pages/Shared/{0}.cshtml",
-                "/User/Customized/{1}/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-                "/Pages/Shared/{0}.cshtml",
-            };
+            "/Areas/{2}/Pages/{1}/{0}.cshtml",
+            "/Areas/{2}/Pages/Shared/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/Areas/{2}/Pages/Shared/{0}.cshtml",
+            "/User/Customized/{1}/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
+            "/Pages/Shared/{0}.cshtml",
+        };
 
         var expected = new[]
         {
-                "/Areas/{2}/Pages/Customers/{0}.cshtml",
-                "/Areas/{2}/Pages/{0}.cshtml",
-                "/Areas/{2}/Pages/Shared/{0}.cshtml",
-                "/Areas/{2}/Views/Shared/{0}.cshtml",
-                "/Areas/{2}/Pages/Shared/{0}.cshtml",
-                "/User/Customized/Customers/{0}.cshtml",
-                "/User/Customized/{0}.cshtml",
-                "/Views/Shared/{0}.cshtml",
-                "/Pages/Shared/{0}.cshtml",
-            };
+            "/Areas/{2}/Pages/Customers/{0}.cshtml",
+            "/Areas/{2}/Pages/{0}.cshtml",
+            "/Areas/{2}/Pages/Shared/{0}.cshtml",
+            "/Areas/{2}/Views/Shared/{0}.cshtml",
+            "/Areas/{2}/Pages/Shared/{0}.cshtml",
+            "/User/Customized/Customers/{0}.cshtml",
+            "/User/Customized/{0}.cshtml",
+            "/Views/Shared/{0}.cshtml",
+            "/Pages/Shared/{0}.cshtml",
+        };
 
         var expander = new PageViewLocationExpander();
 
@@ -198,12 +187,12 @@ public class PageViewLocationExpanderTest
         Assert.Equal(expected, actual.ToArray());
     }
 
-    private ViewLocationExpanderContext CreateContext(string viewName = "_LoginPartial.cshtml", string pageName = null)
+    private ViewLocationExpanderContext CreateContext(
+        string viewName = "_LoginPartial.cshtml",
+        string pageName = null
+    )
     {
-        var actionContext = new ActionContext
-        {
-            ActionDescriptor = new PageActionDescriptor(),
-        };
+        var actionContext = new ActionContext { ActionDescriptor = new PageActionDescriptor() };
 
         return new ViewLocationExpanderContext(
             actionContext,
@@ -211,7 +200,8 @@ public class PageViewLocationExpanderTest
             controllerName: null,
             areaName: null,
             pageName: pageName,
-            isMainPage: true)
+            isMainPage: true
+        )
         {
             Values = new Dictionary<string, string>(),
         };

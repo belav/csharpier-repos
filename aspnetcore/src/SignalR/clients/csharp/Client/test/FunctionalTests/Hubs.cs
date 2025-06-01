@@ -41,9 +41,11 @@ public class TestHub : Hub
         return Context.ConnectionId;
     }
 
-    public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+    public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+        TestHubMethodsImpl.StreamEcho(source);
 
-    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+        TestHubMethodsImpl.StreamEchoInt(source);
 
     public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 
@@ -82,11 +84,11 @@ public class TestHub : Hub
 
         object[] result =
         {
-                feature.LocalPort,
-                feature.RemotePort,
-                feature.LocalIpAddress.ToString(),
-                feature.RemoteIpAddress.ToString()
-            };
+            feature.LocalPort,
+            feature.RemotePort,
+            feature.LocalIpAddress.ToString(),
+            feature.RemoteIpAddress.ToString(),
+        };
 
         return result;
     }
@@ -120,9 +122,7 @@ public class TestHub : Hub
     {
         public Unserializable Child { get; private set; }
 
-        private Unserializable()
-        {
-        }
+        private Unserializable() { }
 
         internal static Unserializable Create()
         {
@@ -161,9 +161,11 @@ public class DynamicTestHub : DynamicHub
         return Context.ConnectionId;
     }
 
-    public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+    public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+        TestHubMethodsImpl.StreamEcho(source);
 
-    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+        TestHubMethodsImpl.StreamEchoInt(source);
 
     public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 }
@@ -195,9 +197,11 @@ public class TestHubT : Hub<ITestHub>
         return Context.ConnectionId;
     }
 
-    public ChannelReader<string> StreamEcho(ChannelReader<string> source) => TestHubMethodsImpl.StreamEcho(source);
+    public ChannelReader<string> StreamEcho(ChannelReader<string> source) =>
+        TestHubMethodsImpl.StreamEcho(source);
 
-    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) => TestHubMethodsImpl.StreamEchoInt(source);
+    public ChannelReader<int> StreamEchoInt(ChannelReader<int> source) =>
+        TestHubMethodsImpl.StreamEchoInt(source);
 
     public IAsyncEnumerable<int> StreamIAsyncConsumer(IAsyncEnumerable<int> source) => source;
 }

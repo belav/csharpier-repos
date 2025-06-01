@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,37 +31,38 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public sealed class NetTcpSecurity
-	{
-		public NetTcpSecurity ()
-			: this (SecurityMode.Transport)
-		{
-		}
+    public sealed class NetTcpSecurity
+    {
+        public NetTcpSecurity()
+            : this(SecurityMode.Transport) { }
 
-		internal NetTcpSecurity (SecurityMode mode)
-		{
-			this.mode = mode;
-			this.message = new MessageSecurityOverTcp ();
-			this.transport = new TcpTransportSecurity ();
-		}
+        internal NetTcpSecurity(SecurityMode mode)
+        {
+            this.mode = mode;
+            this.message = new MessageSecurityOverTcp();
+            this.transport = new TcpTransportSecurity();
+        }
 
-		MessageSecurityOverTcp message;
-		SecurityMode mode;
-		TcpTransportSecurity transport;
+        MessageSecurityOverTcp message;
+        SecurityMode mode;
+        TcpTransportSecurity transport;
 
-		public MessageSecurityOverTcp Message {
-			get { return message; }
-			set { message = value; }
-		}
+        public MessageSecurityOverTcp Message
+        {
+            get { return message; }
+            set { message = value; }
+        }
 
-		public SecurityMode Mode {
-			get { return mode; }
-			set { mode = value; }
-		}
+        public SecurityMode Mode
+        {
+            get { return mode; }
+            set { mode = value; }
+        }
 
-		public TcpTransportSecurity Transport {
-			get { return transport; }
-			set { transport = value; }
-		}
-	}
+        public TcpTransportSecurity Transport
+        {
+            get { return transport; }
+            set { transport = value; }
+        }
+    }
 }

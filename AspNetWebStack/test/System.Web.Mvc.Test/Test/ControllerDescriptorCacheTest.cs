@@ -15,8 +15,14 @@ namespace System.Web.Mvc.Test
             ControllerDescriptorCache cache = new ControllerDescriptorCache();
 
             // Act
-            ControllerDescriptor descriptor1 = cache.GetDescriptor(controllerType, () => new ReflectedControllerDescriptor(controllerType));
-            ControllerDescriptor descriptor2 = cache.GetDescriptor(controllerType, () => new ReflectedControllerDescriptor(controllerType));
+            ControllerDescriptor descriptor1 = cache.GetDescriptor(
+                controllerType,
+                () => new ReflectedControllerDescriptor(controllerType)
+            );
+            ControllerDescriptor descriptor2 = cache.GetDescriptor(
+                controllerType,
+                () => new ReflectedControllerDescriptor(controllerType)
+            );
 
             // Assert
             Assert.Same(controllerType, descriptor1.ControllerType);
@@ -39,7 +45,8 @@ namespace System.Web.Mvc.Test
                     Assert.Same(argument, innerState);
                     return new ReflectedControllerDescriptor(controllerType);
                 },
-                argument);
+                argument
+            );
             ControllerDescriptor descriptor2 = cache.GetDescriptor(
                 controllerType,
                 (object innerState) =>
@@ -47,7 +54,8 @@ namespace System.Web.Mvc.Test
                     Assert.Same(argument, innerState);
                     return new ReflectedControllerDescriptor(controllerType);
                 },
-                argument);
+                argument
+            );
 
             // Assert
             Assert.Same(controllerType, descriptor1.ControllerType);

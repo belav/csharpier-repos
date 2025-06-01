@@ -10,16 +10,16 @@ using System.Diagnostics;
 using System.Xml.Schema;
 using System.Xml.Xsl;
 
-namespace System.Xml.Xsl.Qil {
-
+namespace System.Xml.Xsl.Qil
+{
     /// <summary>
     /// View over a Qil operators that introduce iterators (Loop, Filter, etc.).
     /// </summary>
     /// <remarks>
     /// Don't construct QIL nodes directly; instead, use the <see cref="QilFactory">QilFactory</see>.
     /// </remarks>
-    internal class QilLoop : QilBinary {
-
+    internal class QilLoop : QilBinary
+    {
         //-----------------------------------------------
         // Constructor
         //-----------------------------------------------
@@ -27,20 +27,21 @@ namespace System.Xml.Xsl.Qil {
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilLoop(QilNodeType nodeType, QilNode variable, QilNode body) : base(nodeType, variable, body) {
-        }
-
+        public QilLoop(QilNodeType nodeType, QilNode variable, QilNode body)
+            : base(nodeType, variable, body) { }
 
         //-----------------------------------------------
         // QilLoop methods
         //-----------------------------------------------
 
-        public QilIterator Variable {
-            get { return (QilIterator) Left; }
+        public QilIterator Variable
+        {
+            get { return (QilIterator)Left; }
             set { Left = value; }
         }
 
-        public QilNode Body {
+        public QilNode Body
+        {
             get { return Right; }
             set { Right = value; }
         }

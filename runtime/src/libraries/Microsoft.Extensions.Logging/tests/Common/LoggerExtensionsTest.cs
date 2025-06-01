@@ -362,10 +362,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.LogTrace(0, testLogValues.ToString());
@@ -421,10 +418,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.LogTrace(1, testLogValues.ToString());
@@ -480,10 +474,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.LogTrace(0, _exception, testLogValues.ToString());
@@ -500,49 +491,37 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(LogLevel.Trace, trace.LogLevel);
             Assert.Equal(0, trace.EventId);
             Assert.Equal(_exception, trace.Exception);
-            Assert.Equal(
-                "Test 1",
-                trace.Formatter(trace.State, trace.Exception));
+            Assert.Equal("Test 1", trace.Formatter(trace.State, trace.Exception));
 
             Assert.True(sink.Writes.TryTake(out var information));
             Assert.Equal(LogLevel.Information, information.LogLevel);
             Assert.Equal(0, information.EventId);
             Assert.Equal(_exception, information.Exception);
-            Assert.Equal(
-                "Test 1",
-                information.Formatter(information.State, information.Exception));
+            Assert.Equal("Test 1", information.Formatter(information.State, information.Exception));
 
             Assert.True(sink.Writes.TryTake(out var warning));
             Assert.Equal(LogLevel.Warning, warning.LogLevel);
             Assert.Equal(0, warning.EventId);
             Assert.Equal(_exception, warning.Exception);
-            Assert.Equal(
-                "Test 1",
-                warning.Formatter(warning.State, warning.Exception));
+            Assert.Equal("Test 1", warning.Formatter(warning.State, warning.Exception));
 
             Assert.True(sink.Writes.TryTake(out var error));
             Assert.Equal(LogLevel.Error, error.LogLevel);
             Assert.Equal(0, error.EventId);
             Assert.Equal(_exception, error.Exception);
-            Assert.Equal(
-                "Test 1",
-                error.Formatter(error.State, error.Exception));
+            Assert.Equal("Test 1", error.Formatter(error.State, error.Exception));
 
             Assert.True(sink.Writes.TryTake(out var critical));
             Assert.Equal(LogLevel.Critical, critical.LogLevel);
             Assert.Equal(0, critical.EventId);
             Assert.Equal(_exception, critical.Exception);
-            Assert.Equal(
-                "Test 1",
-                critical.Formatter(critical.State, critical.Exception));
+            Assert.Equal("Test 1", critical.Formatter(critical.State, critical.Exception));
 
             Assert.True(sink.Writes.TryTake(out var debug));
             Assert.Equal(LogLevel.Debug, debug.LogLevel);
             Assert.Equal(0, debug.EventId);
             Assert.Equal(_exception, debug.Exception);
-            Assert.Equal(
-                "Test 1",
-                debug.Formatter(debug.State, debug.Exception));
+            Assert.Equal("Test 1", debug.Formatter(debug.State, debug.Exception));
         }
 
         [Fact]
@@ -551,10 +530,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.LogTrace(1, _exception, testLogValues.ToString());
@@ -572,54 +548,42 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(testLogValues.ToString(), trace.State.ToString());
             Assert.Equal(1, trace.EventId);
             Assert.Equal(_exception, trace.Exception);
-            Assert.Equal(
-                "Test 1",
-                trace.Formatter(trace.State, trace.Exception));
+            Assert.Equal("Test 1", trace.Formatter(trace.State, trace.Exception));
 
             Assert.True(sink.Writes.TryTake(out var information));
             Assert.Equal(LogLevel.Information, information.LogLevel);
             Assert.Equal(testLogValues.ToString(), information.State.ToString());
             Assert.Equal(2, information.EventId);
             Assert.Equal(_exception, information.Exception);
-            Assert.Equal(
-                "Test 1",
-                information.Formatter(information.State, information.Exception));
+            Assert.Equal("Test 1", information.Formatter(information.State, information.Exception));
 
             Assert.True(sink.Writes.TryTake(out var warning));
             Assert.Equal(LogLevel.Warning, warning.LogLevel);
             Assert.Equal(testLogValues.ToString(), warning.State.ToString());
             Assert.Equal(3, warning.EventId);
             Assert.Equal(_exception, warning.Exception);
-            Assert.Equal(
-                "Test 1",
-                warning.Formatter(warning.State, warning.Exception));
+            Assert.Equal("Test 1", warning.Formatter(warning.State, warning.Exception));
 
             Assert.True(sink.Writes.TryTake(out var error));
             Assert.Equal(LogLevel.Error, error.LogLevel);
             Assert.Equal(testLogValues.ToString(), error.State.ToString());
             Assert.Equal(4, error.EventId);
             Assert.Equal(_exception, error.Exception);
-            Assert.Equal(
-                "Test 1",
-                error.Formatter(error.State, error.Exception));
+            Assert.Equal("Test 1", error.Formatter(error.State, error.Exception));
 
             Assert.True(sink.Writes.TryTake(out var critical));
             Assert.Equal(LogLevel.Critical, critical.LogLevel);
             Assert.Equal(testLogValues.ToString(), critical.State.ToString());
             Assert.Equal(5, critical.EventId);
             Assert.Equal(_exception, critical.Exception);
-            Assert.Equal(
-                "Test 1",
-                critical.Formatter(critical.State, critical.Exception));
+            Assert.Equal("Test 1", critical.Formatter(critical.State, critical.Exception));
 
             Assert.True(sink.Writes.TryTake(out var debug));
             Assert.Equal(LogLevel.Debug, debug.LogLevel);
             Assert.Equal(testLogValues.ToString(), debug.State.ToString());
             Assert.Equal(6, debug.EventId);
             Assert.Equal(_exception, debug.Exception);
-            Assert.Equal(
-                "Test 1",
-                debug.Formatter(debug.State, debug.Exception));
+            Assert.Equal("Test 1", debug.Formatter(debug.State, debug.Exception));
         }
 
         [Theory]
@@ -701,7 +665,10 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(LogLevel.Error, 4)]
         [InlineData(LogLevel.Critical, 5)]
         [InlineData(LogLevel.Debug, 6)]
-        public void LogLevel_FormatMessageAndEventId_LogsCorrectValues(LogLevel logLevel, int eventId)
+        public void LogLevel_FormatMessageAndEventId_LogsCorrectValues(
+            LogLevel logLevel,
+            int eventId
+        )
         {
             // Arrange
             var sink = new TestSink();
@@ -749,7 +716,10 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(LogLevel.Error, 4)]
         [InlineData(LogLevel.Critical, 5)]
         [InlineData(LogLevel.Debug, 6)]
-        public void LogLevel_MessageEventIdAndError_LogsCorrectValues(LogLevel logLevel, int eventId)
+        public void LogLevel_MessageEventIdAndError_LogsCorrectValues(
+            LogLevel logLevel,
+            int eventId
+        )
         {
             // Arrange
             var sink = new TestSink();
@@ -778,10 +748,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.Log(logLevel, 0, testLogValues.ToString());
@@ -806,10 +773,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.Log(logLevel, eventId, testLogValues.ToString());
@@ -834,10 +798,7 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.Log(logLevel, 0, _exception, testLogValues.ToString());
@@ -847,9 +808,7 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(logLevel, write.LogLevel);
             Assert.Equal(0, write.EventId);
             Assert.Equal(_exception, write.Exception);
-            Assert.Equal(
-                "Test 1",
-                write.Formatter(write.State, write.Exception));
+            Assert.Equal("Test 1", write.Formatter(write.State, write.Exception));
         }
 
         [Theory]
@@ -859,15 +818,15 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData(LogLevel.Error, 4)]
         [InlineData(LogLevel.Critical, 5)]
         [InlineData(LogLevel.Debug, 6)]
-        public void LogLevel_LogValuesEventIdAndError_LogsCorrectValues(LogLevel logLevel, int eventId)
+        public void LogLevel_LogValuesEventIdAndError_LogsCorrectValues(
+            LogLevel logLevel,
+            int eventId
+        )
         {
             // Arrange
             var sink = new TestSink();
             var logger = SetUp(sink);
-            var testLogValues = new TestLogValues()
-            {
-                Value = 1
-            };
+            var testLogValues = new TestLogValues() { Value = 1 };
 
             // Act
             logger.Log(logLevel, eventId, _exception, testLogValues.ToString());
@@ -878,9 +837,7 @@ namespace Microsoft.Extensions.Logging.Test
             Assert.Equal(testLogValues.ToString(), write.State.ToString());
             Assert.Equal(eventId, write.EventId);
             Assert.Equal(_exception, write.Exception);
-            Assert.Equal(
-                "Test 1",
-                write.Formatter(write.State, write.Exception));
+            Assert.Equal("Test 1", write.Formatter(write.State, write.Exception));
         }
 
         [Fact]
@@ -889,7 +846,8 @@ namespace Microsoft.Extensions.Logging.Test
             // Arrange
             var testSink = new TestSink(
                 writeEnabled: (writeContext) => true,
-                beginEnabled: (beginScopeContext) => true);
+                beginEnabled: (beginScopeContext) => true
+            );
             var logger = new TestLogger("TestLogger", testSink, enabled: true);
             var actionName = "App.Controllers.Home.Index";
             var expectedStringMessage = "Executing action " + actionName;
@@ -903,10 +861,16 @@ namespace Microsoft.Extensions.Logging.Test
             var scopeState = (FormattedLogValues)sinkScope.Scope;
             Assert.Equal(expectedStringMessage, scopeState.ToString());
             Assert.True(scopeState.Count > 0);
-            Assert.Contains(scopeState, (kvp) =>
-            {
-                return (string.Equals(kvp.Key, "ActionName") && string.Equals(kvp.Value?.ToString(), actionName));
-            });
+            Assert.Contains(
+                scopeState,
+                (kvp) =>
+                {
+                    return (
+                        string.Equals(kvp.Key, "ActionName")
+                        && string.Equals(kvp.Value?.ToString(), actionName)
+                    );
+                }
+            );
         }
 
         private class TestLogValues : IReadOnlyList<KeyValuePair<string, object>>
@@ -925,10 +889,7 @@ namespace Microsoft.Extensions.Logging.Test
 
             public int Count
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             public int Value { get; set; }

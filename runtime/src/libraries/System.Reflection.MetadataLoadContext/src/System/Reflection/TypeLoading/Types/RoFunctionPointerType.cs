@@ -46,12 +46,21 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool IsFunctionPointer => true;
         public sealed override bool IsUnmanagedFunctionPointer => _isUnmanaged;
-        public sealed override Type GetFunctionPointerReturnType() => _returnType.UnderlyingSystemType;
-        public sealed override Type[] GetFunctionPointerParameterTypes() => _parameterTypes.CloneArrayToUnmodifiedTypes();
+
+        public sealed override Type GetFunctionPointerReturnType() =>
+            _returnType.UnderlyingSystemType;
+
+        public sealed override Type[] GetFunctionPointerParameterTypes() =>
+            _parameterTypes.CloneArrayToUnmodifiedTypes();
+
         protected sealed override string? ComputeFullName() => null;
+
         protected sealed override string ComputeName() => string.Empty;
 
-        internal static SignatureCallingConvention GetCallingConvention(MethodSignature<RoType> signature, out bool isUnmanaged)
+        internal static SignatureCallingConvention GetCallingConvention(
+            MethodSignature<RoType> signature,
+            out bool isUnmanaged
+        )
         {
             SignatureCallingConvention callKind = signature.Header.CallingConvention;
 
@@ -97,16 +106,20 @@ namespace System.Reflection.TypeLoading
         }
 
         protected sealed override string? ComputeNamespace() => null;
+
         public sealed override string ToString() => GetToString();
+
         public sealed override string? AssemblyQualifiedName => null;
 
         internal sealed override RoModule GetRoModule() => _module;
+
         public sealed override int GetHashCode()
         {
             return ToString().GetHashCode();
         }
 
         public sealed override bool Equals([NotNullWhen(true)] Type? type) => Equals((object?)type);
+
         public sealed override bool Equals([NotNullWhen(true)] object? obj)
         {
             // Treat as an unmodified type; do not not include the modified type values including
@@ -137,12 +150,18 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => false;
+
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
+
         public sealed override bool IsConstructedGenericType => false;
         public sealed override bool IsGenericParameter => false;
         public sealed override bool IsGenericTypeParameter => false;
@@ -167,47 +186,94 @@ namespace System.Reflection.TypeLoading
 
         protected sealed override TypeCode GetTypeCodeImpl() => TypeCode.Object;
 
-        public sealed override int GetArrayRank() => throw new ArgumentException(SR.Argument_HasToBeArrayClass);
+        public sealed override int GetArrayRank() =>
+            throw new ArgumentException(SR.Argument_HasToBeArrayClass);
 
-        public sealed override MethodBase DeclaringMethod => throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+        public sealed override MethodBase DeclaringMethod =>
+            throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+
         protected sealed override RoType? ComputeDeclaringType() => null;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
-        internal sealed override bool IsCustomAttributeDefined(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name) => false;
-        internal sealed override CustomAttributeData? TryFindCustomAttribute(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name) => null;
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
+
+        internal sealed override bool IsCustomAttributeDefined(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        ) => false;
+
+        internal sealed override CustomAttributeData? TryFindCustomAttribute(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        ) => null;
 
         public sealed override int MetadataToken => 0x02000000; // nil TypeDef token
 
         internal sealed override RoType? GetRoElementType() => null;
 
-        public sealed override Type GetGenericTypeDefinition() => throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
-        internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
-        internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
-        protected internal sealed override RoType[] GetGenericArgumentsNoCopy() => Array.Empty<RoType>();
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
-        public sealed override Type MakeGenericType(params Type[] typeArguments) => throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericTypeDefinition, this));
+        public sealed override Type GetGenericTypeDefinition() =>
+            throw new InvalidOperationException(SR.InvalidOperation_NotGenericType);
 
-        public sealed override GenericParameterAttributes GenericParameterAttributes => throw new InvalidOperationException(SR.Arg_NotGenericParameter);
-        public sealed override int GenericParameterPosition => throw new InvalidOperationException(SR.Arg_NotGenericParameter);
-        public sealed override Type[] GetGenericParameterConstraints() => throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+        internal sealed override RoType[] GetGenericTypeParametersNoCopy() => Array.Empty<RoType>();
+
+        internal sealed override RoType[] GetGenericTypeArgumentsNoCopy() => Array.Empty<RoType>();
+
+        protected internal sealed override RoType[] GetGenericArgumentsNoCopy() =>
+            Array.Empty<RoType>();
+
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
+        public sealed override Type MakeGenericType(params Type[] typeArguments) =>
+            throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericTypeDefinition, this));
+
+        public sealed override GenericParameterAttributes GenericParameterAttributes =>
+            throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+        public sealed override int GenericParameterPosition =>
+            throw new InvalidOperationException(SR.Arg_NotGenericParameter);
+
+        public sealed override Type[] GetGenericParameterConstraints() =>
+            throw new InvalidOperationException(SR.Arg_NotGenericParameter);
 
         public sealed override Guid GUID => Guid.Empty;
         public sealed override StructLayoutAttribute? StructLayoutAttribute => null;
-        protected internal sealed override RoType ComputeEnumUnderlyingType() => throw new ArgumentException(SR.Arg_MustBeEnum);
+
+        protected internal sealed override RoType ComputeEnumUnderlyingType() =>
+            throw new ArgumentException(SR.Arg_MustBeEnum);
 
         // Low level support for the BindingFlag-driven enumerator apis.
-        internal sealed override IEnumerable<EventInfo> GetEventsCore(NameFilter? filter, Type reflectedType) => Array.Empty<EventInfo>();
-        internal sealed override IEnumerable<FieldInfo> GetFieldsCore(NameFilter? filter, Type reflectedType) => Array.Empty<FieldInfo>();
-        internal sealed override IEnumerable<PropertyInfo> GetPropertiesCore(NameFilter? filter, Type reflectedType) => Array.Empty<PropertyInfo>();
-        internal sealed override IEnumerable<RoType> GetNestedTypesCore(NameFilter? filter) => Array.Empty<RoType>();
+        internal sealed override IEnumerable<EventInfo> GetEventsCore(
+            NameFilter? filter,
+            Type reflectedType
+        ) => Array.Empty<EventInfo>();
 
+        internal sealed override IEnumerable<FieldInfo> GetFieldsCore(
+            NameFilter? filter,
+            Type reflectedType
+        ) => Array.Empty<FieldInfo>();
+
+        internal sealed override IEnumerable<PropertyInfo> GetPropertiesCore(
+            NameFilter? filter,
+            Type reflectedType
+        ) => Array.Empty<PropertyInfo>();
+
+        internal sealed override IEnumerable<RoType> GetNestedTypesCore(NameFilter? filter) =>
+            Array.Empty<RoType>();
 
         protected sealed override TypeAttributes ComputeAttributeFlags() => TypeAttributes.Public;
 
         internal sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() => null;
-        internal sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces() => Array.Empty<RoType>();
 
-        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(NameFilter? filter) => Array.Empty<ConstructorInfo>();
-        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(NameFilter? filter, Type reflectedType) => Array.Empty<MethodInfo>();
+        internal sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces() =>
+            Array.Empty<RoType>();
+
+        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
+            NameFilter? filter
+        ) => Array.Empty<ConstructorInfo>();
+
+        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
+            NameFilter? filter,
+            Type reflectedType
+        ) => Array.Empty<MethodInfo>();
     }
 }

@@ -11,6 +11,5 @@
     <MergedWrapperProjectReference Include="generics/syncdelegate/*.??proj" />
     <MergedWrapperProjectReference Include="regressions/**/*.??proj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

@@ -12,9 +12,7 @@ namespace Microsoft.AspNetCore.InternalTesting;
 internal sealed class ConditionalTheoryDiscoverer : TheoryDiscoverer
 {
     public ConditionalTheoryDiscoverer(IMessageSink diagnosticMessageSink)
-        : base(diagnosticMessageSink)
-    {
-    }
+        : base(diagnosticMessageSink) { }
 
     private sealed class OptionsWithPreEnumerationEnabled : ITestFrameworkDiscoveryOptions
     {
@@ -22,28 +20,55 @@ internal sealed class ConditionalTheoryDiscoverer : TheoryDiscoverer
 
         private readonly ITestFrameworkDiscoveryOptions _original;
 
-        public OptionsWithPreEnumerationEnabled(ITestFrameworkDiscoveryOptions original)
-            => _original = original;
+        public OptionsWithPreEnumerationEnabled(ITestFrameworkDiscoveryOptions original) =>
+            _original = original;
 
-        public TValue GetValue<TValue>(string name)
-            => (name == PreEnumerateTheories) ? (TValue)(object)true : _original.GetValue<TValue>(name);
+        public TValue GetValue<TValue>(string name) =>
+            (name == PreEnumerateTheories)
+                ? (TValue)(object)true
+                : _original.GetValue<TValue>(name);
 
-        public void SetValue<TValue>(string name, TValue value)
-            => _original.SetValue(name, value);
+        public void SetValue<TValue>(string name, TValue value) => _original.SetValue(name, value);
     }
 
-    public override IEnumerable<IXunitTestCase> Discover(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
-        => base.Discover(new OptionsWithPreEnumerationEnabled(discoveryOptions), testMethod, theoryAttribute);
+    public override IEnumerable<IXunitTestCase> Discover(
+        ITestFrameworkDiscoveryOptions discoveryOptions,
+        ITestMethod testMethod,
+        IAttributeInfo theoryAttribute
+    ) =>
+        base.Discover(
+            new OptionsWithPreEnumerationEnabled(discoveryOptions),
+            testMethod,
+            theoryAttribute
+        );
 
-    protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute)
+    protected override IEnumerable<IXunitTestCase> CreateTestCasesForTheory(
+        ITestFrameworkDiscoveryOptions discoveryOptions,
+        ITestMethod testMethod,
+        IAttributeInfo theoryAttribute
+    )
     {
         var skipReason = testMethod.EvaluateSkipConditions();
         return skipReason != null
-           ? new[] { new SkippedTestCase(skipReason, DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), TestMethodDisplayOptions.None, testMethod) }
-           : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
+            ? new[]
+            {
+                new SkippedTestCase(
+                    skipReason,
+                    DiagnosticMessageSink,
+                    discoveryOptions.MethodDisplayOrDefault(),
+                    TestMethodDisplayOptions.None,
+                    testMethod
+                ),
+            }
+            : base.CreateTestCasesForTheory(discoveryOptions, testMethod, theoryAttribute);
     }
 
-    protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute, object[] dataRow)
+    protected override IEnumerable<IXunitTestCase> CreateTestCasesForDataRow(
+        ITestFrameworkDiscoveryOptions discoveryOptions,
+        ITestMethod testMethod,
+        IAttributeInfo theoryAttribute,
+        object[] dataRow
+    )
     {
         var skipReason = testMethod.EvaluateSkipConditions();
         if (skipReason == null && dataRow?.Length > 0)
@@ -60,9 +85,20 @@ internal sealed class ConditionalTheoryDiscoverer : TheoryDiscoverer
             }
         }
 
-        return skipReason != null ?
-            base.CreateTestCasesForSkippedDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow, skipReason)
-            : base.CreateTestCasesForDataRow(discoveryOptions, testMethod, theoryAttribute, dataRow);
+        return skipReason != null
+            ? base.CreateTestCasesForSkippedDataRow(
+                discoveryOptions,
+                testMethod,
+                theoryAttribute,
+                dataRow,
+                skipReason
+            )
+            : base.CreateTestCasesForDataRow(
+                discoveryOptions,
+                testMethod,
+                theoryAttribute,
+                dataRow
+            );
     }
 
     protected override IEnumerable<IXunitTestCase> CreateTestCasesForSkippedDataRow(
@@ -70,17 +106,38 @@ internal sealed class ConditionalTheoryDiscoverer : TheoryDiscoverer
         ITestMethod testMethod,
         IAttributeInfo theoryAttribute,
         object[] dataRow,
-        string skipReason)
+        string skipReason
+    )
     {
         return new[]
         {
-                new WORKAROUND_SkippedDataRowTestCase(DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), discoveryOptions.MethodDisplayOptionsOrDefault(), testMethod, skipReason, dataRow),
-            };
+            new WORKAROUND_SkippedDataRowTestCase(
+                DiagnosticMessageSink,
+                discoveryOptions.MethodDisplayOrDefault(),
+                discoveryOptions.MethodDisplayOptionsOrDefault(),
+                testMethod,
+                skipReason,
+                dataRow
+            ),
+        };
     }
 
     [Obsolete]
-    protected override IXunitTestCase CreateTestCaseForSkippedDataRow(ITestFrameworkDiscoveryOptions discoveryOptions, ITestMethod testMethod, IAttributeInfo theoryAttribute, object[] dataRow, string skipReason)
+    protected override IXunitTestCase CreateTestCaseForSkippedDataRow(
+        ITestFrameworkDiscoveryOptions discoveryOptions,
+        ITestMethod testMethod,
+        IAttributeInfo theoryAttribute,
+        object[] dataRow,
+        string skipReason
+    )
     {
-        return new WORKAROUND_SkippedDataRowTestCase(DiagnosticMessageSink, discoveryOptions.MethodDisplayOrDefault(), discoveryOptions.MethodDisplayOptionsOrDefault(), testMethod, skipReason, dataRow);
+        return new WORKAROUND_SkippedDataRowTestCase(
+            DiagnosticMessageSink,
+            discoveryOptions.MethodDisplayOrDefault(),
+            discoveryOptions.MethodDisplayOptionsOrDefault(),
+            testMethod,
+            skipReason,
+            dataRow
+        );
     }
 }

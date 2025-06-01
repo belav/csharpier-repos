@@ -3,13 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Composition.Hosting;
+using System.Composition.Hosting.Core;
+using System.Composition.Runtime;
+using System.Composition.UnitTests.Util;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Composition.Hosting;
-using System.Composition.Hosting.Core;
-using System.Composition.UnitTests.Util;
-using System.Composition.Runtime;
 using Xunit;
 
 namespace System.Composition.UnitTests

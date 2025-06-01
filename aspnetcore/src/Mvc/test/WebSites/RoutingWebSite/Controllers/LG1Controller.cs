@@ -16,7 +16,10 @@ public class LG1Controller : Controller
 
     public string LinkToSelf()
     {
-        return _linkGenerator.GetPathByAction(HttpContext, values: QueryToRouteValues(HttpContext.Request.Query));
+        return _linkGenerator.GetPathByAction(
+            HttpContext,
+            values: QueryToRouteValues(HttpContext.Request.Query)
+        );
     }
 
     public string LinkToAnotherAction()
@@ -24,7 +27,8 @@ public class LG1Controller : Controller
         return _linkGenerator.GetPathByAction(
             HttpContext,
             action: nameof(LinkToSelf),
-            values: QueryToRouteValues(HttpContext.Request.Query));
+            values: QueryToRouteValues(HttpContext.Request.Query)
+        );
     }
 
     public string LinkToAnotherController()
@@ -33,7 +37,8 @@ public class LG1Controller : Controller
             HttpContext,
             controller: "LG2",
             action: nameof(LG2Controller.SomeAction),
-            values: QueryToRouteValues(HttpContext.Request.Query));
+            values: QueryToRouteValues(HttpContext.Request.Query)
+        );
     }
 
     public string LinkToAnArea()
@@ -45,7 +50,8 @@ public class LG1Controller : Controller
             HttpContext,
             controller: "LG3",
             action: nameof(LG3Controller.SomeAction),
-            values: values);
+            values: values
+        );
     }
 
     public string LinkToPage()
@@ -53,7 +59,8 @@ public class LG1Controller : Controller
         return _linkGenerator.GetPathByPage(
             HttpContext,
             page: "/LGPage",
-            values: QueryToRouteValues(HttpContext.Request.Query));
+            values: QueryToRouteValues(HttpContext.Request.Query)
+        );
     }
 
     public string LinkToPageWithTransformedPath()
@@ -61,7 +68,8 @@ public class LG1Controller : Controller
         return _linkGenerator.GetPathByPage(
             HttpContext,
             page: "/PageRouteTransformer/TestPage",
-            values: QueryToRouteValues(HttpContext.Request.Query));
+            values: QueryToRouteValues(HttpContext.Request.Query)
+        );
     }
 
     public string LinkToPageInArea()
@@ -72,7 +80,8 @@ public class LG1Controller : Controller
             HttpContext,
             page: "/LGAreaPage",
             handler: "a-handler",
-            values: values);
+            values: values
+        );
     }
 
     public string LinkWithFullUri()
@@ -82,7 +91,8 @@ public class LG1Controller : Controller
             controller: "LG1",
             action: nameof(LinkWithFullUri),
             values: QueryToRouteValues(HttpContext.Request.Query),
-            fragment: new FragmentString("#hi"));
+            fragment: new FragmentString("#hi")
+        );
     }
 
     public string LinkToPageWithFullUri()
@@ -90,7 +100,8 @@ public class LG1Controller : Controller
         return _linkGenerator.GetUriByPage(
             HttpContext,
             page: "/LGPage",
-            values: QueryToRouteValues(HttpContext.Request.Query));
+            values: QueryToRouteValues(HttpContext.Request.Query)
+        );
     }
 
     public string LinkWithFullUriWithoutHttpContext()
@@ -101,7 +112,8 @@ public class LG1Controller : Controller
             controller: "LG1",
             action: nameof(LinkWithFullUri),
             values: QueryToRouteValues(HttpContext.Request.Query),
-            fragment: new FragmentString("#hi"));
+            fragment: new FragmentString("#hi")
+        );
     }
 
     public string LinkToPageWithFullUriWithoutHttpContext()
@@ -113,7 +125,8 @@ public class LG1Controller : Controller
             host: new HostString("www.example.com"),
             page: "/LGAreaPage",
             handler: "a-handler",
-            values: values);
+            values: values
+        );
     }
 
     public string LinkToRouteWithNoMvcParameters(int? custom = null)
@@ -122,11 +135,14 @@ public class LG1Controller : Controller
             scheme: "https",
             host: new HostString("www.example.com"),
             routeName: "routewithnomvcparameters",
-            values: new { custom = custom, });
+            values: new { custom = custom }
+        );
     }
 
     private static RouteValueDictionary QueryToRouteValues(IQueryCollection query)
     {
-        return new RouteValueDictionary(query.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToString()));
+        return new RouteValueDictionary(
+            query.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToString())
+        );
     }
 }

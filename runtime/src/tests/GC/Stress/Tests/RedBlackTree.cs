@@ -3,25 +3,24 @@
 
 /*************************** Left Leaning Red-Black Tree *************************************
 
- * An Implementation of Left Leaning Red Black trees based on 
+ * An Implementation of Left Leaning Red Black trees based on
         Robert Sedgewick's paper:
           http://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
 **********************************************************************************************/
-
 
 using System;
 
 public enum Color
 {
     Red,
-    Black
+    Black,
 }
 
 public enum Child
 {
     Left,
     Right,
-    None
+    None,
 }
 
 [System.Diagnostics.DebuggerDisplay("key={key};l={left.key};r={right.key};p={parent.key}")]
@@ -57,7 +56,7 @@ public class Tree
             InsertNode();
 #if DEBUG
             TestLibrary.Logging.WriteLine("RedBlack tree now has {0} nodes", i);
-#endif 
+#endif
             GC.Collect();
         }
 #if DEBUG
@@ -65,7 +64,9 @@ public class Tree
 #endif
     }
 
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining
+    )]
     public void CheckTree(bool expectBalanced)
     {
 #if CHECKINVARIANTS
@@ -73,12 +74,23 @@ public class Tree
 #endif
     }
 
-    private int CheckTreeRecursive(bool expectBalanced, Node curr, Node parent, int min, int max, bool notRed)
+    private int CheckTreeRecursive(
+        bool expectBalanced,
+        Node curr,
+        Node parent,
+        int min,
+        int max,
+        bool notRed
+    )
     {
-        if (curr == null) return 0;
+        if (curr == null)
+            return 0;
 
         if (expectBalanced && notRed && curr.color == Color.Red)
-            TestLibrary.TestFramework.LogError("", "Rule 5: Red node, with red child, or red right child");
+            TestLibrary.TestFramework.LogError(
+                "",
+                "Rule 5: Red node, with red child, or red right child"
+            );
         if (curr.parent != parent)
             TestLibrary.TestFramework.LogError("", "Parent pointer has become corrupt.");
 
@@ -88,7 +100,14 @@ public class Tree
         if (curr.key > max && curr.key < min)
             TestLibrary.TestFramework.LogError("", "Rule 1: Tree is not sorted");
 
-        var leftRank = CheckTreeRecursive(expectBalanced, curr.left, curr, min, curr.key, curr.color == Color.Red);
+        var leftRank = CheckTreeRecursive(
+            expectBalanced,
+            curr.left,
+            curr,
+            min,
+            curr.key,
+            curr.color == Color.Red
+        );
         var rightRank = CheckTreeRecursive(expectBalanced, curr.right, curr, curr.key, max, true);
 
         if (expectBalanced && leftRank != rightRank)
@@ -98,6 +117,7 @@ public class Tree
 
         return currRank;
     }
+
     private void RotateLeft(ref Node x)
     {
         //Swing pointers around for rotation
@@ -107,7 +127,8 @@ public class Tree
 
         //patch parent pointers
         r.parent = x.parent;
-        if (x.right != null) x.right.parent = x;
+        if (x.right != null)
+            x.right.parent = x;
         x.parent = r;
 
         //Fix colors
@@ -118,6 +139,7 @@ public class Tree
         //Update incoming reference
         x = r;
     }
+
     private void RotateRight(ref Node x)
     {
         //Swing pointers around for rotation
@@ -128,7 +150,8 @@ public class Tree
         //patch parent pointers
         l.parent = x.parent;
         x.parent = l;
-        if (x.left != null) x.left.parent = x;
+        if (x.left != null)
+            x.left.parent = x;
 
         //Fix colors
         var c = x.color;
@@ -220,7 +243,7 @@ public class Tree
         }
 
         temp.key = k;
-        temp.color = Color.Red;   //Rule 4: Leaf is red
+        temp.color = Color.Red; //Rule 4: Leaf is red
         temp.array = new int[k]; // Just allocating array of size of the key
 
         return temp;
@@ -228,19 +251,25 @@ public class Tree
 
     public bool UniqueKey(Node r, int k)
     {
-        if (_root == null) return true;
+        if (_root == null)
+            return true;
 
-        if (k == r.key) return false;
+        if (k == r.key)
+            return false;
 
         if (k < r.key)
         {
-            if (r.left != null) return (UniqueKey(r.left, k));
-            else return true;
+            if (r.left != null)
+                return (UniqueKey(r.left, k));
+            else
+                return true;
         }
         else
         {
-            if (r.right != null) return (UniqueKey(r.right, k));
-            else return true;
+            if (r.right != null)
+                return (UniqueKey(r.right, k));
+            else
+                return true;
         }
     }
 
@@ -293,7 +322,6 @@ public class Tree
 
     public bool DeleteNode(ref Node n, int key)
     {
-
         if (n.key != key && n.left == null && n.right == null)
         {
             Fixup(ref n);
@@ -310,7 +338,8 @@ public class Tree
         }
         else
         {
-            if (IsRed(n.left)) RotateRight(ref n);
+            if (IsRed(n.left))
+                RotateRight(ref n);
 
             if (n.right == null)
             {
@@ -347,7 +376,7 @@ public class Tree
         Node min;
         if (curr.left == null)
         {
-            min = curr;// Left leaning, so no left child means no child.
+            min = curr; // Left leaning, so no left child means no child.
             curr = null;
             return min;
         }
@@ -362,7 +391,6 @@ public class Tree
         return min;
     }
 
-
     public void PrintTree(Node r)
     {
         PrintTree(r, "");
@@ -370,16 +398,18 @@ public class Tree
 
     public void PrintTree(Node r, String offset)
     {
-        if (r == null) return;
+        if (r == null)
+            return;
 
         offset = offset + " ";
 
-        if (r.left != null) PrintTree(r.left, offset);
+        if (r.left != null)
+            PrintTree(r.left, offset);
         TestLibrary.Logging.WriteLine("{0}{1}, {2}", offset, r.key, r.color);
-        if (r.right != null) PrintTree(r.right, offset);
+        if (r.right != null)
+            PrintTree(r.right, offset);
     }
 }
-
 
 public class Test
 {
@@ -441,4 +471,3 @@ public class Test
         return 100;
     }
 }
-

@@ -12,9 +12,9 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
     [DataContract]
     internal readonly struct ManagedHotReloadAvailability(
         ManagedHotReloadAvailabilityStatus status,
-        string? localizedMessage = null)
+        string? localizedMessage = null
+    )
     {
-
         /// <summary>
         /// Status for the managed hot reload session.
         /// </summary>

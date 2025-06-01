@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <UserSecretsId>aspnet-StaticFilesAuth-AFE2BD9D-1575-4C3E-BE32-3F15C5BC9947</UserSecretsId>
     <IsTestAssetProject>true</IsTestAssetProject>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="PrivateFiles\private.html" />
     <None Remove="PrivateFiles\private.txt" />
@@ -13,7 +11,6 @@
     <None Remove="PrivateFiles\Users\User1\user1file.html" />
     <None Remove="PrivateFiles\Users\User2\user2file.html" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="PrivateFiles\private.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -31,7 +28,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Authentication.Cookies" />
@@ -39,5 +35,4 @@
     <Reference Include="Microsoft.AspNetCore.Mvc" />
     <Reference Include="Microsoft.AspNetCore.StaticFiles" />
   </ItemGroup>
-
 </Project>

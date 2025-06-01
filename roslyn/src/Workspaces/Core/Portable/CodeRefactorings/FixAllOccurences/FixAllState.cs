@@ -18,7 +18,8 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings
 {
-    internal sealed class FixAllState : CommonFixAllState<CodeRefactoringProvider, FixAllProvider, FixAllState>
+    internal sealed class FixAllState
+        : CommonFixAllState<CodeRefactoringProvider, FixAllProvider, FixAllState>
     {
         /// <summary>
         /// Original selection span from which FixAll was invoked.
@@ -39,11 +40,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CodeRefactoringProvider codeRefactoringProvider,
             CodeActionOptionsProvider optionsProvider,
             FixAllScope fixAllScope,
-            CodeAction codeAction)
-            : this(fixAllProvider, document ?? throw new ArgumentNullException(nameof(document)), document.Project, selectionSpan, codeRefactoringProvider,
-                   optionsProvider, fixAllScope, codeAction.Title, codeAction.EquivalenceKey)
-        {
-        }
+            CodeAction codeAction
+        )
+            : this(
+                fixAllProvider,
+                document ?? throw new ArgumentNullException(nameof(document)),
+                document.Project,
+                selectionSpan,
+                codeRefactoringProvider,
+                optionsProvider,
+                fixAllScope,
+                codeAction.Title,
+                codeAction.EquivalenceKey
+            ) { }
 
         public FixAllState(
             FixAllProvider fixAllProvider,
@@ -52,11 +61,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CodeRefactoringProvider codeRefactoringProvider,
             CodeActionOptionsProvider optionsProvider,
             FixAllScope fixAllScope,
-            CodeAction codeAction)
-            : this(fixAllProvider, document: null, project ?? throw new ArgumentNullException(nameof(project)), selectionSpan, codeRefactoringProvider,
-                   optionsProvider, fixAllScope, codeAction.Title, codeAction.EquivalenceKey)
-        {
-        }
+            CodeAction codeAction
+        )
+            : this(
+                fixAllProvider,
+                document: null,
+                project ?? throw new ArgumentNullException(nameof(project)),
+                selectionSpan,
+                codeRefactoringProvider,
+                optionsProvider,
+                fixAllScope,
+                codeAction.Title,
+                codeAction.EquivalenceKey
+            ) { }
 
         private FixAllState(
             FixAllProvider fixAllProvider,
@@ -67,14 +84,28 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             CodeActionOptionsProvider optionsProvider,
             FixAllScope fixAllScope,
             string codeActionTitle,
-            string? codeActionEquivalenceKey)
-            : base(fixAllProvider, document, project, codeRefactoringProvider, optionsProvider, fixAllScope, codeActionEquivalenceKey)
+            string? codeActionEquivalenceKey
+        )
+            : base(
+                fixAllProvider,
+                document,
+                project,
+                codeRefactoringProvider,
+                optionsProvider,
+                fixAllScope,
+                codeActionEquivalenceKey
+            )
         {
             _selectionSpan = selectionSpan;
             this.CodeActionTitle = codeActionTitle;
         }
 
-        protected override FixAllState With(Document? document, Project project, FixAllScope scope, string? codeActionEquivalenceKey)
+        protected override FixAllState With(
+            Document? document,
+            Project project,
+            FixAllScope scope,
+            string? codeActionEquivalenceKey
+        )
         {
             return new FixAllState(
                 this.FixAllProvider,
@@ -85,27 +116,42 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 this.CodeActionOptionsProvider,
                 scope,
                 this.CodeActionTitle,
-                codeActionEquivalenceKey);
+                codeActionEquivalenceKey
+            );
         }
 
         /// <summary>
         /// Gets the spans to fix by document for the <see cref="FixAllScope"/> for this fix all occurences fix.
         /// If no spans are specified, it indicates the entire document needs to be fixed.
         /// </summary>
-        internal async Task<ImmutableDictionary<Document, Optional<ImmutableArray<TextSpan>>>> GetFixAllSpansAsync(CancellationToken cancellationToken)
+        internal async Task<
+            ImmutableDictionary<Document, Optional<ImmutableArray<TextSpan>>>
+        > GetFixAllSpansAsync(CancellationToken cancellationToken)
         {
             IEnumerable<Document>? documentsToFix = null;
             switch (this.Scope)
             {
-                case FixAllScope.ContainingType or FixAllScope.ContainingMember:
+                case FixAllScope.ContainingType
+                or FixAllScope.ContainingMember:
                     Contract.ThrowIfNull(Document);
-                    var spanMappingService = Document.GetLanguageService<IFixAllSpanMappingService>();
+                    var spanMappingService =
+                        Document.GetLanguageService<IFixAllSpanMappingService>();
                     if (spanMappingService is null)
-                        return ImmutableDictionary<Document, Optional<ImmutableArray<TextSpan>>>.Empty;
+                        return ImmutableDictionary<
+                            Document,
+                            Optional<ImmutableArray<TextSpan>>
+                        >.Empty;
 
-                    var spansByDocument = await spanMappingService.GetFixAllSpansAsync(
-                        Document, _selectionSpan, Scope, cancellationToken).ConfigureAwait(false);
-                    return spansByDocument.Select(kvp => KeyValuePairUtil.Create(kvp.Key, new Optional<ImmutableArray<TextSpan>>(kvp.Value)))
+                    var spansByDocument = await spanMappingService
+                        .GetFixAllSpansAsync(Document, _selectionSpan, Scope, cancellationToken)
+                        .ConfigureAwait(false);
+                    return spansByDocument
+                        .Select(kvp =>
+                            KeyValuePairUtil.Create(
+                                kvp.Key,
+                                new Optional<ImmutableArray<TextSpan>>(kvp.Value)
+                            )
+                        )
                         .ToImmutableDictionaryOrEmpty();
 
                 case FixAllScope.Document:
@@ -125,7 +171,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     return ImmutableDictionary<Document, Optional<ImmutableArray<TextSpan>>>.Empty;
             }
 
-            return documentsToFix.ToImmutableDictionary(d => d, _ => default(Optional<ImmutableArray<TextSpan>>));
+            return documentsToFix.ToImmutableDictionary(
+                d => d,
+                _ => default(Optional<ImmutableArray<TextSpan>>)
+            );
         }
     }
 }

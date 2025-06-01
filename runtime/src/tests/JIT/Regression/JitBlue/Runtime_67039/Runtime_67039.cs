@@ -16,11 +16,11 @@ public class Runtime_67039
         var result = Vector128.ConditionalSelect(Vector128.GreaterThan(left, right), left, right);
 
         Vector128<float> expectedResult = Vector128.Create(4.0f, 3, 3, 4);
-        if (result == expectedResult) 
+        if (result == expectedResult)
         {
             return 100;
         }
-        else 
+        else
         {
             return 0;
         }

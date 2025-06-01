@@ -16,7 +16,10 @@ namespace WebMatrix.Data
         private IDictionary<string, string> _appSettings;
         private IDictionary<string, IDbFileHandler> _handlers;
 
-        public ConfigurationManagerWrapper(IDictionary<string, IDbFileHandler> handlers, string dataDirectory = null)
+        public ConfigurationManagerWrapper(
+            IDictionary<string, IDbFileHandler> handlers,
+            string dataDirectory = null
+        )
         {
             Debug.Assert(handlers != null, "handlers should not be null");
             _dataDirectory = dataDirectory ?? Database.DataDirectory;
@@ -29,8 +32,10 @@ namespace WebMatrix.Data
             {
                 if (_appSettings == null)
                 {
-                    _appSettings = (from string key in ConfigurationManager.AppSettings
-                                    select key).ToDictionary(key => key, key => ConfigurationManager.AppSettings[key]);
+                    _appSettings = (
+                        from string key in ConfigurationManager.AppSettings
+                        select key
+                    ).ToDictionary(key => key, key => ConfigurationManager.AppSettings[key]);
                 }
                 return _appSettings;
             }
@@ -52,7 +57,11 @@ namespace WebMatrix.Data
         }
 
         // For unit testing
-        internal IConnectionConfiguration GetConnection(string name, Func<string, IConnectionConfiguration> getConfigConnection, Func<string, bool> fileExists)
+        internal IConnectionConfiguration GetConnection(
+            string name,
+            Func<string, IConnectionConfiguration> getConfigConnection,
+            Func<string, bool> fileExists
+        )
         {
             // First try config
             IConnectionConfiguration configuraitonConfig = getConfigConnection(name);

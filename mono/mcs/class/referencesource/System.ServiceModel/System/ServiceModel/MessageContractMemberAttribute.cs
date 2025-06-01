@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.Net.Security;
     using System.Runtime.Serialization;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Security;
-    using System.Net.Security;
 
     public abstract class MessageContractMemberAttribute : Attribute
     {
@@ -55,10 +55,15 @@ namespace System.ServiceModel
                 }
                 if (value == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxNameCannotBeEmpty)
+                        )
+                    );
                 }
-                name = value; isNameSetExplicit = true;
+                name = value;
+                isNameSetExplicit = true;
             }
         }
 
@@ -70,14 +75,13 @@ namespace System.ServiceModel
         internal const string ProtectionLevelPropertyName = "ProtectionLevel";
         public ProtectionLevel ProtectionLevel
         {
-            get
-            {
-                return this.protectionLevel;
-            }
+            get { return this.protectionLevel; }
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -89,4 +93,3 @@ namespace System.ServiceModel
         }
     }
 }
-

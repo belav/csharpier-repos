@@ -10,7 +10,16 @@ ref struct MyStruct<A, B>
 {
     static Random r = new Random();
 
-    Span<int> s1, s2, s3, s4, s5, s6, s7, s8, s9, s10;
+    Span<int> s1,
+        s2,
+        s3,
+        s4,
+        s5,
+        s6,
+        s7,
+        s8,
+        s9,
+        s10;
 
     public static void Test(int depth)
     {
@@ -31,10 +40,28 @@ ref struct MyStruct<A, B>
 
     public static void Test(int depth, MyStruct<A, B> u)
     {
-        int x1 = u.s1.Length + u.s2.Length + u.s3.Length + u.s4.Length + u.s5.Length +
-                 u.s6.Length + u.s7.Length + u.s8.Length + u.s9.Length + u.s10.Length;
-        int x2 = u.s1[0] + u.s2[0] + u.s3[0] + u.s4[0] + u.s5[0] +
-                 u.s6[0] + u.s7[0] + u.s8[0] + u.s9[0] + u.s10[0];
+        int x1 =
+            u.s1.Length
+            + u.s2.Length
+            + u.s3.Length
+            + u.s4.Length
+            + u.s5.Length
+            + u.s6.Length
+            + u.s7.Length
+            + u.s8.Length
+            + u.s9.Length
+            + u.s10.Length;
+        int x2 =
+            u.s1[0]
+            + u.s2[0]
+            + u.s3[0]
+            + u.s4[0]
+            + u.s5[0]
+            + u.s6[0]
+            + u.s7[0]
+            + u.s8[0]
+            + u.s9[0]
+            + u.s10[0];
         if (x1 != x2)
             throw new InvalidOperationException();
 

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpOutputAborter
 {
-    internal static ReadOnlySpan<byte> Http2GoAwayHttp11RequiredBytes => [0, 0, 8, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13];
+    internal static ReadOnlySpan<byte> Http2GoAwayHttp11RequiredBytes =>
+        [0, 0, 8, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13];
 
     private const byte ByteCR = (byte)'\r';
     private const byte ByteLF = (byte)'\n';
@@ -62,7 +63,8 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
             _context.ServiceContext.Log,
             _context.TimeoutControl,
             minResponseDataRateFeature: this,
-            outputAborter: this);
+            outputAborter: this
+        );
 
         Input = _context.Transport.Input;
         Output = _http1Output;
@@ -87,7 +89,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
             ServiceContext.ConnectionManager.UpgradedConnectionCount.ReleaseOne();
         }
 
-        TimeoutControl.StartDrainTimeout(MinResponseDataRate, ServerOptions.Limits.MaxResponseBufferSize);
+        TimeoutControl.StartDrainTimeout(
+            MinResponseDataRate,
+            ServerOptions.Limits.MaxResponseBufferSize
+        );
 
         // Prevent RequestAborted from firing. Free up unneeded feature references.
         Reset();
@@ -98,7 +103,11 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
     void IRequestProcessor.OnInputOrOutputCompleted()
     {
         // Closed gracefully.
-        _http1Output.Abort(ServerOptions.FinOnError ? new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient) : null!);
+        _http1Output.Abort(
+            ServerOptions.FinOnError
+                ? new ConnectionAbortedException(CoreStrings.ConnectionAbortedByClient)
+                : null!
+        );
         CancelRequestAbortedToken();
     }
 
@@ -141,14 +150,17 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         Input.CancelPendingRead();
     }
 
-    public void HandleRequestHeadersTimeout()
-        => SendTimeoutResponse();
+    public void HandleRequestHeadersTimeout() => SendTimeoutResponse();
 
     public void HandleReadDataRateTimeout()
     {
         Debug.Assert(MinRequestBodyDataRate != null);
 
-        Log.RequestBodyMinimumDataRateNotSatisfied(ConnectionId, TraceIdentifier, MinRequestBodyDataRate.BytesPerSecond);
+        Log.RequestBodyMinimumDataRateNotSatisfied(
+            ConnectionId,
+            TraceIdentifier,
+            MinRequestBodyDataRate.BytesPerSecond
+        );
         SendTimeoutResponse();
     }
 
@@ -169,7 +181,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
                     break;
                 }
 
-                TimeoutControl.ResetTimeout(ServerOptions.Limits.RequestHeadersTimeout, TimeoutReason.RequestHeaders);
+                TimeoutControl.ResetTimeout(
+                    ServerOptions.Limits.RequestHeadersTimeout,
+                    TimeoutReason.RequestHeaders
+                );
 
                 _requestProcessingStatus = RequestProcessingStatus.ParsingRequestLine;
                 goto case RequestProcessingStatus.ParsingRequestLine;
@@ -210,7 +225,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         bool TrimAndTakeStartLine(ref SequenceReader<byte> reader)
         {
-            var trimmedBuffer = reader.Sequence.Slice(reader.Position, ServerOptions.Limits.MaxRequestLineSize);
+            var trimmedBuffer = reader.Sequence.Slice(
+                reader.Position,
+                ServerOptions.Limits.MaxRequestLineSize
+            );
             var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
 
             if (!_parser.ParseRequestLine(new Http1ParsingHandler(this), ref trimmedReader))
@@ -252,14 +270,24 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         bool TrimAndTakeMessageHeaders(ref SequenceReader<byte> reader, bool trailers)
         {
-            var trimmedBuffer = reader.Sequence.Slice(reader.Position, _remainingRequestHeadersBytesAllowed);
+            var trimmedBuffer = reader.Sequence.Slice(
+                reader.Position,
+                _remainingRequestHeadersBytesAllowed
+            );
             var trimmedReader = new SequenceReader<byte>(trimmedBuffer);
             try
             {
-                if (!_parser.ParseHeaders(new Http1ParsingHandler(this, trailers), ref trimmedReader))
+                if (
+                    !_parser.ParseHeaders(
+                        new Http1ParsingHandler(this, trailers),
+                        ref trimmedReader
+                    )
+                )
                 {
                     // We read the maximum allowed but didn't complete the headers.
-                    KestrelBadHttpRequestException.Throw(RequestRejectionReason.HeadersExceedMaxTotalSize);
+                    KestrelBadHttpRequestException.Throw(
+                        RequestRejectionReason.HeadersExceedMaxTotalSize
+                    );
                 }
 
                 TimeoutControl.CancelTimeout();
@@ -275,7 +303,11 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         }
     }
 
-    public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
+    public void OnStartLine(
+        HttpVersionAndMethod versionAndMethod,
+        TargetOffsetPathLength targetPath,
+        Span<byte> startLine
+    )
     {
         var targetStart = targetPath.Offset;
         // Slice out target
@@ -324,7 +356,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
     // Compare with Http2Stream.TryValidatePseudoHeaders
     private void OnOriginFormTarget(TargetOffsetPathLength targetPath, Span<byte> target)
     {
-        Debug.Assert(target[0] == ByteForwardSlash, "Should only be called when path starts with /");
+        Debug.Assert(
+            target[0] == ByteForwardSlash,
+            "Should only be called when path starts with /"
+        );
 
         _requestTargetForm = HttpRequestTarget.OriginForm;
 
@@ -344,9 +379,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         // Read raw target before mutating memory.
         var previousValue = _parsedRawTarget;
-        if (ServerOptions.DisableStringReuse ||
-            previousValue == null || previousValue.Length != target.Length ||
-            !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target))
+        if (
+            ServerOptions.DisableStringReuse
+            || previousValue == null
+            || previousValue.Length != target.Length
+            || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
+        )
         {
             ParseTarget(targetPath, target);
         }
@@ -403,7 +441,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
             else
             {
                 var path = target[..pathLength];
-                Path = _parsedPath = PathNormalizer.DecodePath(path, targetPath.IsEncoded, RawTarget, queryLength);
+                Path = _parsedPath = PathNormalizer.DecodePath(
+                    path,
+                    targetPath.IsEncoded,
+                    RawTarget,
+                    queryLength
+                );
             }
         }
         catch (InvalidOperationException)
@@ -417,9 +460,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         var previousValue = _parsedQueryString;
         var query = target[targetPath.Length..];
         var queryLength = query.Length;
-        if (ServerOptions.DisableStringReuse ||
-            previousValue == null || previousValue.Length != queryLength ||
-            !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query))
+        if (
+            ServerOptions.DisableStringReuse
+            || previousValue == null
+            || previousValue.Length != queryLength
+            || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query)
+        )
         {
             // The previous string does not match what the bytes would convert to,
             // so we will need to generate a new string.
@@ -463,9 +509,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         // See https://tools.ietf.org/html/rfc3986#section-3.2
 
         var previousValue = _parsedRawTarget;
-        if (ServerOptions.DisableStringReuse ||
-            previousValue == null || previousValue.Length != target.Length ||
-            !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target))
+        if (
+            ServerOptions.DisableStringReuse
+            || previousValue == null
+            || previousValue.Length != target.Length
+            || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
+        )
         {
             // The previous string does not match what the bytes would convert to,
             // so we will need to generate a new string.
@@ -521,9 +570,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         var disableStringReuse = ServerOptions.DisableStringReuse;
         var previousValue = _parsedRawTarget;
-        if (disableStringReuse ||
-            previousValue == null || previousValue.Length != target.Length ||
-            !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target))
+        if (
+            disableStringReuse
+            || previousValue == null
+            || previousValue.Length != target.Length
+            || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, target)
+        )
         {
             try
             {
@@ -553,9 +605,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
             Path = _parsedPath = uri.LocalPath;
             // don't use uri.Query because we need the unescaped version
             previousValue = _parsedQueryString;
-            if (disableStringReuse ||
-                previousValue == null || previousValue.Length != query.Length ||
-                !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query))
+            if (
+                disableStringReuse
+                || previousValue == null
+                || previousValue.Length != query.Length
+                || !StringUtilities.BytesOrdinalEqualsStringAndAscii(previousValue, query)
+            )
             {
                 // The previous string does not match what the bytes would convert to,
                 // so we will need to generate a new string.
@@ -606,7 +661,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         }
         else if (!HttpUtilities.IsHostHeaderValid(hostText))
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.InvalidHostHeader,
+                hostText
+            );
         }
     }
 
@@ -616,7 +674,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         {
             if (hostText != RawTarget)
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidHostHeader,
+                    hostText
+                );
             }
         }
         else if (_requestTargetForm == HttpRequestTarget.AbsoluteForm)
@@ -630,17 +691,28 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
             // When IsDefaultPort = true, we will allow Host: with or without the default port
             if (hostText != _absoluteRequestTarget!.Authority)
             {
-                if (!_absoluteRequestTarget.IsDefaultPort
-                    || hostText != _absoluteRequestTarget.Authority + ":" + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture))
+                if (
+                    !_absoluteRequestTarget.IsDefaultPort
+                    || hostText
+                        != _absoluteRequestTarget.Authority
+                            + ":"
+                            + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture)
+                )
                 {
                     if (_context.ServiceContext.ServerOptions.AllowHostHeaderOverride)
                     {
-                        hostText = _absoluteRequestTarget.Authority + ":" + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture);
+                        hostText =
+                            _absoluteRequestTarget.Authority
+                            + ":"
+                            + _absoluteRequestTarget.Port.ToString(CultureInfo.InvariantCulture);
                         HttpRequestHeaders.HeaderHost = hostText;
                     }
                     else
                     {
-                        KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+                        KestrelBadHttpRequestException.Throw(
+                            RequestRejectionReason.InvalidHostHeader,
+                            hostText
+                        );
                     }
                 }
             }
@@ -648,7 +720,10 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
 
         if (!HttpUtilities.IsHostHeaderValid(hostText))
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidHostHeader, hostText);
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.InvalidHostHeader,
+                hostText
+            );
         }
     }
 
@@ -657,7 +732,8 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         _requestTimedOut = false;
         _requestTargetForm = HttpRequestTarget.Unknown;
         _absoluteRequestTarget = null;
-        _remainingRequestHeadersBytesAllowed = (long)ServerOptions.Limits.MaxRequestHeadersTotalSize + 2;
+        _remainingRequestHeadersBytesAllowed =
+            (long)ServerOptions.Limits.MaxRequestHeadersTotalSize + 2;
 
         MinResponseDataRate = ServerOptions.Limits.MinResponseDataRate;
 
@@ -667,15 +743,13 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         _currentIPersistentStateFeature = this;
     }
 
-    protected override void OnRequestProcessingEnding()
-    {
-    }
+    protected override void OnRequestProcessingEnding() { }
 
-    protected override string CreateRequestId()
-        => StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', _requestCount);
+    protected override string CreateRequestId() =>
+        StringUtilities.ConcatAsHexSuffix(ConnectionId, ':', _requestCount);
 
-    protected override MessageBody CreateMessageBody()
-        => Http1MessageBody.For(_httpVersion, HttpRequestHeaders, this);
+    protected override MessageBody CreateMessageBody() =>
+        Http1MessageBody.For(_httpVersion, HttpRequestHeaders, this);
 
     protected override void BeginRequestProcessing()
     {
@@ -699,9 +773,12 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         {
             isConsumed = ParseRequest(ref reader);
         }
-        catch (InvalidOperationException) when (_requestProcessingStatus == RequestProcessingStatus.ParsingHeaders)
+        catch (InvalidOperationException)
+            when (_requestProcessingStatus == RequestProcessingStatus.ParsingHeaders)
         {
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.MalformedRequestInvalidHeaders);
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.MalformedRequestInvalidHeaders
+            );
             throw;
         }
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -728,7 +805,9 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
                     KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidRequestLine);
                     break;
                 case RequestProcessingStatus.ParsingHeaders:
-                    KestrelBadHttpRequestException.Throw(RequestRejectionReason.MalformedRequestInvalidHeaders);
+                    KestrelBadHttpRequestException.Throw(
+                        RequestRejectionReason.MalformedRequestInvalidHeaders
+                    );
                     break;
             }
         }
@@ -770,15 +849,24 @@ internal partial class Http1Connection : HttpProtocol, IRequestProcessor, IHttpO
         {
             // If there is an unrecognized HTTP version, it is the first request on the connection, and the request line
             // bytes matches the HTTP/2 preface request line bytes then log and return a HTTP/2 GOAWAY frame.
-            if (ex.Reason == RequestRejectionReason.UnrecognizedHTTPVersion
+            if (
+                ex.Reason == RequestRejectionReason.UnrecognizedHTTPVersion
                 && _requestCount == 1
-                && requestData.Length >= PrefaceLineLength)
+                && requestData.Length >= PrefaceLineLength
+            )
             {
-                var clientPrefaceRequestLine = Http2.Http2Connection.ClientPreface.Slice(0, PrefaceLineLength);
+                var clientPrefaceRequestLine = Http2.Http2Connection.ClientPreface.Slice(
+                    0,
+                    PrefaceLineLength
+                );
                 var currentRequestLine = requestData.Slice(0, PrefaceLineLength).ToSpan();
                 if (currentRequestLine.SequenceEqual(clientPrefaceRequestLine))
                 {
-                    Log.PossibleInvalidHttpVersionDetected(ConnectionId, Http.HttpVersion.Http11, Http.HttpVersion.Http2);
+                    Log.PossibleInvalidHttpVersionDetected(
+                        ConnectionId,
+                        Http.HttpVersion.Http11,
+                        Http.HttpVersion.Http2
+                    );
 
                     // Can't write GOAWAY here. Set flag so TryProduceInvalidRequestResponse writes GOAWAY.
                     _http2PrefaceDetected = true;

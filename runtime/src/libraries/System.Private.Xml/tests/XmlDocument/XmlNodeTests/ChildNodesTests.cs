@@ -54,7 +54,9 @@ namespace System.Xml.XmlDocumentTests
         public static void CountMixture1()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root>text<node1><nestednode/></node1><node2/><?PI pi_info?><!-- comment --></root>");
+            xmlDocument.LoadXml(
+                "<root>text<node1><nestednode/></node1><node2/><?PI pi_info?><!-- comment --></root>"
+            );
 
             Assert.Equal(5, xmlDocument.FirstChild.ChildNodes.Count);
         }
@@ -63,9 +65,11 @@ namespace System.Xml.XmlDocumentTests
         public static void XmlWithWhitespace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(@"<a>
+            xmlDocument.LoadXml(
+                @"<a>
           this-is-a
-      </a>");
+      </a>"
+            );
 
             Assert.Equal(1, xmlDocument.FirstChild.ChildNodes.Count);
         }
@@ -182,7 +186,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void ListWithMultipleKinds()
         {
-            var xml = @"<root>
+            var xml =
+                @"<root>
   text node one
   <elem1 child1="""" child2=""duu"" child3=""e1;e2;"" child4=""a1"" child5=""goody"">
      text node two e1; text node three
@@ -214,7 +219,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void ElementNodeWithChildButNoAttribute()
         {
-            var xml = @"<a>
+            var xml =
+                @"<a>
           this-is-a
       </a>";
             var xmlDocument = new XmlDocument();
@@ -227,13 +233,18 @@ namespace System.Xml.XmlDocumentTests
         public static void ReplacingNodeDoesNotChangeChildNodesList()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml(@" <doc doc=""doc""><doc>
+            xmlDocument.LoadXml(
+                @" <doc doc=""doc""><doc>
      doc
-  </doc><html>Just for testing purpose</html></doc>");
+  </doc><html>Just for testing purpose</html></doc>"
+            );
 
             var newNode = xmlDocument.CreateTextNode("new text node");
             var countBefore = xmlDocument.DocumentElement.ChildNodes.Count;
-            xmlDocument.DocumentElement.ReplaceChild(newNode, xmlDocument.DocumentElement.FirstChild);
+            xmlDocument.DocumentElement.ReplaceChild(
+                newNode,
+                xmlDocument.DocumentElement.FirstChild
+            );
 
             Assert.Equal(countBefore, xmlDocument.DocumentElement.ChildNodes.Count);
         }

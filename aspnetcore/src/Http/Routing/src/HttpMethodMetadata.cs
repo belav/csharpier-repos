@@ -22,9 +22,7 @@ public sealed class HttpMethodMetadata : IHttpMethodMetadata
     /// An empty collection means any HTTP method will be accepted.
     /// </param>
     public HttpMethodMetadata(IEnumerable<string> httpMethods)
-        : this(httpMethods, acceptCorsPreflight: false)
-    {
-    }
+        : this(httpMethods, acceptCorsPreflight: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpMethodMetadata" /> class.
@@ -56,6 +54,11 @@ public sealed class HttpMethodMetadata : IHttpMethodMetadata
     /// <inheritdoc/>
     public override string ToString()
     {
-        return DebuggerHelpers.GetDebugText(nameof(HttpMethods), HttpMethods, "Cors", AcceptCorsPreflight);
+        return DebuggerHelpers.GetDebugText(
+            nameof(HttpMethods),
+            HttpMethods,
+            "Cors",
+            AcceptCorsPreflight
+        );
     }
 }

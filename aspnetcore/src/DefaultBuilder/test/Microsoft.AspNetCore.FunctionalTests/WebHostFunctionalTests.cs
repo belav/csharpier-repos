@@ -3,8 +3,8 @@
 
 using System.Net.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.Extensions.Logging;
 using Xunit.Sdk;
 
@@ -15,93 +15,132 @@ public class WebHostFunctionalTests : LoggedTest
     [Fact]
     public async Task Start_RequestDelegate_Url()
     {
-        await ExecuteStartOrStartWithTest(deploymentResult => deploymentResult.HttpClient.GetAsync(string.Empty), "StartRequestDelegateUrlApp");
+        await ExecuteStartOrStartWithTest(
+            deploymentResult => deploymentResult.HttpClient.GetAsync(string.Empty),
+            "StartRequestDelegateUrlApp"
+        );
     }
 
     [Fact]
     public async Task Start_RouteBuilder_Url()
     {
-        await ExecuteStartOrStartWithTest(deploymentResult => deploymentResult.HttpClient.GetAsync("/route"), "StartRouteBuilderUrlApp");
+        await ExecuteStartOrStartWithTest(
+            deploymentResult => deploymentResult.HttpClient.GetAsync("/route"),
+            "StartRouteBuilderUrlApp"
+        );
     }
 
     [Fact]
     public async Task StartWith_IApplicationBuilder_Url()
     {
-        await ExecuteStartOrStartWithTest(deploymentResult => deploymentResult.HttpClient.GetAsync(string.Empty), "StartWithIApplicationBuilderUrlApp");
+        await ExecuteStartOrStartWithTest(
+            deploymentResult => deploymentResult.HttpClient.GetAsync(string.Empty),
+            "StartWithIApplicationBuilderUrlApp"
+        );
     }
 
     [Fact]
     public async Task CreateDefaultBuilder_InitializeWithDefaults()
     {
         var applicationName = "CreateDefaultBuilderApp";
-        await ExecuteTestApp(applicationName, async (deploymentResult, logger) =>
-        {
-            var response = await RetryHelper.RetryRequest(() => deploymentResult.HttpClient.GetAsync(string.Empty), logger, deploymentResult.HostShutdownToken, retryCount: 5);
+        await ExecuteTestApp(
+            applicationName,
+            async (deploymentResult, logger) =>
+            {
+                var response = await RetryHelper.RetryRequest(
+                    () => deploymentResult.HttpClient.GetAsync(string.Empty),
+                    logger,
+                    deploymentResult.HostShutdownToken,
+                    retryCount: 5
+                );
 
-            var responseText = await response.Content.ReadAsStringAsync();
-            try
-            {
-                // Assert server is Kestrel
-                Assert.Equal("Kestrel", response.Headers.Server.ToString());
-                // The application name will be sent in response when all asserts succeed in the test app.
-                Assert.Equal(applicationName, responseText);
-            }
-            catch (XunitException)
-            {
-                logger.LogWarning(response.ToString());
-                logger.LogWarning(responseText);
-                throw;
-            }
-        }, setTestEnvVars: true);
+                var responseText = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    // Assert server is Kestrel
+                    Assert.Equal("Kestrel", response.Headers.Server.ToString());
+                    // The application name will be sent in response when all asserts succeed in the test app.
+                    Assert.Equal(applicationName, responseText);
+                }
+                catch (XunitException)
+                {
+                    logger.LogWarning(response.ToString());
+                    logger.LogWarning(responseText);
+                    throw;
+                }
+            },
+            setTestEnvVars: true
+        );
     }
 
     [Fact]
     public async Task CreateDefaultBuilderOfT_InitializeWithDefaults()
     {
         var applicationName = "CreateDefaultBuilderOfTApp";
-        await ExecuteTestApp(applicationName, async (deploymentResult, logger) =>
-        {
-            var response = await RetryHelper.RetryRequest(() => deploymentResult.HttpClient.GetAsync(string.Empty), logger, deploymentResult.HostShutdownToken, retryCount: 5);
+        await ExecuteTestApp(
+            applicationName,
+            async (deploymentResult, logger) =>
+            {
+                var response = await RetryHelper.RetryRequest(
+                    () => deploymentResult.HttpClient.GetAsync(string.Empty),
+                    logger,
+                    deploymentResult.HostShutdownToken,
+                    retryCount: 5
+                );
 
-            var responseText = await response.Content.ReadAsStringAsync();
-            try
-            {
-                // Assert server is Kestrel
-                Assert.Equal("Kestrel", response.Headers.Server.ToString());
-                // The application name will be sent in response when all asserts succeed in the test app.
-                Assert.Equal(applicationName, responseText);
-            }
-            catch (XunitException)
-            {
-                logger.LogWarning(response.ToString());
-                logger.LogWarning(responseText);
-                throw;
-            }
-        }, setTestEnvVars: true);
+                var responseText = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    // Assert server is Kestrel
+                    Assert.Equal("Kestrel", response.Headers.Server.ToString());
+                    // The application name will be sent in response when all asserts succeed in the test app.
+                    Assert.Equal(applicationName, responseText);
+                }
+                catch (XunitException)
+                {
+                    logger.LogWarning(response.ToString());
+                    logger.LogWarning(responseText);
+                    throw;
+                }
+            },
+            setTestEnvVars: true
+        );
     }
 
     [Theory]
     [InlineData("Development", "InvalidOperationException: Cannot consume scoped service")]
     [InlineData("Production", "Success")]
-    public async Task CreateDefaultBuilder_InitializesDependencyInjectionSettingsBasedOnEnv(string environment, string expected)
+    public async Task CreateDefaultBuilder_InitializesDependencyInjectionSettingsBasedOnEnv(
+        string environment,
+        string expected
+    )
     {
         var applicationName = "DependencyInjectionApp";
-        await ExecuteTestApp(applicationName, async (deploymentResult, logger) =>
-        {
-            var response = await RetryHelper.RetryRequest(() => deploymentResult.HttpClient.GetAsync(string.Empty), logger, deploymentResult.HostShutdownToken);
-            var responseText = await response.Content.ReadAsStringAsync();
-            try
+        await ExecuteTestApp(
+            applicationName,
+            async (deploymentResult, logger) =>
             {
-                // Assert UseDeveloperExceptionPage is called in WebHostStartupFilter.
-                Assert.Contains(expected, responseText);
-            }
-            catch (XunitException)
-            {
-                logger.LogWarning(response.ToString());
-                logger.LogWarning(responseText);
-                throw;
-            }
-        }, setTestEnvVars: true, environment: environment);
+                var response = await RetryHelper.RetryRequest(
+                    () => deploymentResult.HttpClient.GetAsync(string.Empty),
+                    logger,
+                    deploymentResult.HostShutdownToken
+                );
+                var responseText = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    // Assert UseDeveloperExceptionPage is called in WebHostStartupFilter.
+                    Assert.Contains(expected, responseText);
+                }
+                catch (XunitException)
+                {
+                    logger.LogWarning(response.ToString());
+                    logger.LogWarning(responseText);
+                    throw;
+                }
+            },
+            setTestEnvVars: true,
+            environment: environment
+        );
     }
 
     [Fact]
@@ -110,7 +149,9 @@ public class WebHostFunctionalTests : LoggedTest
     {
         try
         {
-            File.WriteAllText("appsettings.json", @"
+            File.WriteAllText(
+                "appsettings.json",
+                @"
 {
     ""Logging"": {
         ""LogLevel"": {
@@ -118,24 +159,45 @@ public class WebHostFunctionalTests : LoggedTest
         }
     }
 }
-");
-            using (var webHost = WebHost.Start("http://127.0.0.1:0", context => context.Response.WriteAsync("Hello, World!")))
+"
+            );
+            using (
+                var webHost = WebHost.Start(
+                    "http://127.0.0.1:0",
+                    context => context.Response.WriteAsync("Hello, World!")
+                )
+            )
             {
                 var factory = (ILoggerFactory)webHost.Services.GetService(typeof(ILoggerFactory));
                 var logger = factory.CreateLogger("Test");
 
-                logger.Log(LogLevel.Information, 0, "Message", null, (s, e) =>
-                {
-                    Assert.True(false, "Information log when log level set to warning in config");
-                    return string.Empty;
-                });
+                logger.Log(
+                    LogLevel.Information,
+                    0,
+                    "Message",
+                    null,
+                    (s, e) =>
+                    {
+                        Assert.True(
+                            false,
+                            "Information log when log level set to warning in config"
+                        );
+                        return string.Empty;
+                    }
+                );
 
                 var logWritten = false;
-                logger.Log(LogLevel.Warning, 0, "Message", null, (s, e) =>
-                {
-                    logWritten = true;
-                    return string.Empty;
-                });
+                logger.Log(
+                    LogLevel.Warning,
+                    0,
+                    "Message",
+                    null,
+                    (s, e) =>
+                    {
+                        logWritten = true;
+                        return string.Empty;
+                    }
+                );
 
                 Assert.True(logWritten);
             }
@@ -151,18 +213,30 @@ public class WebHostFunctionalTests : LoggedTest
     public async Task RunsInIISExpressInProcess()
     {
         var applicationName = "CreateDefaultBuilderApp";
-        var deploymentParameters = new DeploymentParameters(Path.Combine(GetTestSitesPath(), applicationName), ServerType.IISExpress, RuntimeFlavor.CoreClr, RuntimeArchitecture.x64)
+        var deploymentParameters = new DeploymentParameters(
+            Path.Combine(GetTestSitesPath(), applicationName),
+            ServerType.IISExpress,
+            RuntimeFlavor.CoreClr,
+            RuntimeArchitecture.x64
+        )
         {
             TargetFramework = "net9.0",
-            HostingModel = HostingModel.InProcess
+            HostingModel = HostingModel.InProcess,
         };
 
         SetEnvironmentVariables(deploymentParameters, "Development");
 
-        using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, LoggerFactory))
+        using (
+            var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, LoggerFactory)
+        )
         {
             var deploymentResult = await deployer.DeployAsync();
-            var response = await RetryHelper.RetryRequest(() => deploymentResult.HttpClient.GetAsync(string.Empty), Logger, deploymentResult.HostShutdownToken, retryCount: 5);
+            var response = await RetryHelper.RetryRequest(
+                () => deploymentResult.HttpClient.GetAsync(string.Empty),
+                Logger,
+                deploymentResult.HostShutdownToken,
+                retryCount: 5
+            );
 
             var responseText = await response.Content.ReadAsStringAsync();
             try
@@ -181,32 +255,49 @@ public class WebHostFunctionalTests : LoggedTest
         }
     }
 
-    private async Task ExecuteStartOrStartWithTest(Func<DeploymentResult, Task<HttpResponseMessage>> getResponse, string applicationName)
+    private async Task ExecuteStartOrStartWithTest(
+        Func<DeploymentResult, Task<HttpResponseMessage>> getResponse,
+        string applicationName
+    )
     {
-        await ExecuteTestApp(applicationName, async (deploymentResult, logger) =>
-        {
-            var response = await RetryHelper.RetryRequest(() => getResponse(deploymentResult), logger, deploymentResult.HostShutdownToken);
+        await ExecuteTestApp(
+            applicationName,
+            async (deploymentResult, logger) =>
+            {
+                var response = await RetryHelper.RetryRequest(
+                    () => getResponse(deploymentResult),
+                    logger,
+                    deploymentResult.HostShutdownToken
+                );
 
-            var responseText = await response.Content.ReadAsStringAsync();
-            try
-            {
-                Assert.Equal(applicationName, responseText);
+                var responseText = await response.Content.ReadAsStringAsync();
+                try
+                {
+                    Assert.Equal(applicationName, responseText);
+                }
+                catch (XunitException)
+                {
+                    logger.LogWarning(response.ToString());
+                    logger.LogWarning(responseText);
+                    throw;
+                }
             }
-            catch (XunitException)
-            {
-                logger.LogWarning(response.ToString());
-                logger.LogWarning(responseText);
-                throw;
-            }
-        });
+        );
     }
 
-    private async Task ExecuteTestApp(string applicationName,
+    private async Task ExecuteTestApp(
+        string applicationName,
         Func<DeploymentResult, ILogger, Task> assertAction,
         bool setTestEnvVars = false,
-        string environment = "Development")
+        string environment = "Development"
+    )
     {
-        var deploymentParameters = new DeploymentParameters(Path.Combine(GetTestSitesPath(), applicationName), ServerType.Kestrel, RuntimeFlavor.CoreClr, RuntimeArchitectures.Current)
+        var deploymentParameters = new DeploymentParameters(
+            Path.Combine(GetTestSitesPath(), applicationName),
+            ServerType.Kestrel,
+            RuntimeFlavor.CoreClr,
+            RuntimeArchitectures.Current
+        )
         {
             TargetFramework = "net9.0",
         };
@@ -216,7 +307,9 @@ public class WebHostFunctionalTests : LoggedTest
             SetEnvironmentVariables(deploymentParameters, environment);
         }
 
-        using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, LoggerFactory))
+        using (
+            var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, LoggerFactory)
+        )
         {
             var deploymentResult = await deployer.DeployAsync();
 
@@ -224,10 +317,17 @@ public class WebHostFunctionalTests : LoggedTest
         }
     }
 
-    private static void SetEnvironmentVariables(DeploymentParameters deploymentParameters, string environment)
+    private static void SetEnvironmentVariables(
+        DeploymentParameters deploymentParameters,
+        string environment
+    )
     {
-        deploymentParameters.EnvironmentVariables.Add(new KeyValuePair<string, string>("aspnetcore_environment", environment));
-        deploymentParameters.EnvironmentVariables.Add(new KeyValuePair<string, string>("envKey", "envValue"));
+        deploymentParameters.EnvironmentVariables.Add(
+            new KeyValuePair<string, string>("aspnetcore_environment", environment)
+        );
+        deploymentParameters.EnvironmentVariables.Add(
+            new KeyValuePair<string, string>("envKey", "envValue")
+        );
     }
 
     private static string GetTestSitesPath()
@@ -237,15 +337,16 @@ public class WebHostFunctionalTests : LoggedTest
         var directoryInfo = new DirectoryInfo(applicationBasePath);
         do
         {
-            var solutionFileInfo = new FileInfo(Path.Combine(directoryInfo.FullName, "DefaultBuilder.slnf"));
+            var solutionFileInfo = new FileInfo(
+                Path.Combine(directoryInfo.FullName, "DefaultBuilder.slnf")
+            );
             if (solutionFileInfo.Exists)
             {
                 return Path.GetFullPath(Path.Combine(directoryInfo.FullName, "testassets"));
             }
 
             directoryInfo = directoryInfo.Parent;
-        }
-        while (directoryInfo.Parent != null);
+        } while (directoryInfo.Parent != null);
 
         throw new Exception($"Solution root could not be found using {applicationBasePath}");
     }

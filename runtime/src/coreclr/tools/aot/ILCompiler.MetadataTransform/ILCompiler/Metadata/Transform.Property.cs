@@ -2,18 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.Metadata.NativeFormat.Writer;
-
+using CallingConventions = System.Reflection.CallingConventions;
 using Cts = Internal.TypeSystem;
 using Ecma = System.Reflection.Metadata;
-
 using MethodSemanticsAttributes = Internal.Metadata.NativeFormat.MethodSemanticsAttributes;
-using CallingConventions = System.Reflection.CallingConventions;
 
 namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        private Property HandleProperty(Cts.Ecma.EcmaModule module, Ecma.PropertyDefinitionHandle property)
+        private Property HandleProperty(
+            Cts.Ecma.EcmaModule module,
+            Ecma.PropertyDefinitionHandle property
+        )
         {
             Ecma.MetadataReader reader = module.MetadataReader;
 
@@ -23,15 +24,21 @@ namespace ILCompiler.Metadata
             Cts.MethodDesc getterMethod = acc.Getter.IsNil ? null : module.GetMethod(acc.Getter);
             Cts.MethodDesc setterMethod = acc.Setter.IsNil ? null : module.GetMethod(acc.Setter);
 
-            bool getterHasMetadata = getterMethod != null && _policy.GeneratesMetadata(getterMethod);
-            bool setterHasMetadata = setterMethod != null && _policy.GeneratesMetadata(setterMethod);
+            bool getterHasMetadata =
+                getterMethod != null && _policy.GeneratesMetadata(getterMethod);
+            bool setterHasMetadata =
+                setterMethod != null && _policy.GeneratesMetadata(setterMethod);
 
             // Policy: If neither the getter nor setter have metadata, property doesn't have metadata
             if (!getterHasMetadata && !setterHasMetadata)
                 return null;
 
             Ecma.BlobReader sigBlobReader = reader.GetBlobReader(propDef.Signature);
-            Cts.PropertySignature sig = new Cts.Ecma.EcmaSignatureParser(module, sigBlobReader, Cts.NotFoundBehavior.Throw).ParsePropertySignature();
+            Cts.PropertySignature sig = new Cts.Ecma.EcmaSignatureParser(
+                module,
+                sigBlobReader,
+                Cts.NotFoundBehavior.Throw
+            ).ParsePropertySignature();
 
             Property result = new Property
             {
@@ -39,7 +46,9 @@ namespace ILCompiler.Metadata
                 Flags = propDef.Attributes,
                 Signature = new PropertySignature
                 {
-                    CallingConvention = sig.IsStatic ? CallingConventions.Standard : CallingConventions.HasThis,
+                    CallingConvention = sig.IsStatic
+                        ? CallingConventions.Standard
+                        : CallingConventions.HasThis,
                 },
             };
 
@@ -61,20 +70,24 @@ namespace ILCompiler.Metadata
 
             if (getterHasMetadata)
             {
-                result.MethodSemantics.Add(new MethodSemantics
-                {
-                    Attributes = MethodSemanticsAttributes.Getter,
-                    Method = HandleMethodDefinition(getterMethod),
-                });
+                result.MethodSemantics.Add(
+                    new MethodSemantics
+                    {
+                        Attributes = MethodSemanticsAttributes.Getter,
+                        Method = HandleMethodDefinition(getterMethod),
+                    }
+                );
             }
 
             if (setterHasMetadata)
             {
-                result.MethodSemantics.Add(new MethodSemantics
-                {
-                    Attributes = MethodSemanticsAttributes.Setter,
-                    Method = HandleMethodDefinition(setterMethod),
-                });
+                result.MethodSemantics.Add(
+                    new MethodSemantics
+                    {
+                        Attributes = MethodSemanticsAttributes.Setter,
+                        Method = HandleMethodDefinition(setterMethod),
+                    }
+                );
             }
 
             Ecma.ConstantHandle defaultValue = propDef.GetDefaultValue();
@@ -91,6 +104,5 @@ namespace ILCompiler.Metadata
 
             return result;
         }
-
     }
 }

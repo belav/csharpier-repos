@@ -15,7 +15,8 @@ namespace Templates.Test.Helpers;
 public class ProjectFactoryFixture : IDisposable
 {
     private const string LetterChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private readonly ConcurrentDictionary<string, Project> _projects = new ConcurrentDictionary<string, Project>();
+    private readonly ConcurrentDictionary<string, Project> _projects =
+        new ConcurrentDictionary<string, Project>();
 
     public IMessageSink DiagnosticsMessageSink { get; }
 
@@ -33,7 +34,9 @@ public class ProjectFactoryFixture : IDisposable
         var projectKey = Guid.NewGuid().ToString().Substring(0, 10).ToLowerInvariant();
         if (!_projects.TryAdd(projectKey, project))
         {
-            throw new InvalidOperationException($"Project key collision in {nameof(ProjectFactoryFixture)}.{nameof(CreateProject)}!");
+            throw new InvalidOperationException(
+                $"Project key collision in {nameof(ProjectFactoryFixture)}.{nameof(CreateProject)}!"
+            );
         }
 
         return project;
@@ -47,7 +50,7 @@ public class ProjectFactoryFixture : IDisposable
             DiagnosticsMessageSink = DiagnosticsMessageSink,
             // Ensure first character is a letter to avoid random insertions of '_' into template namespace
             // declarations (i.e. make it more stable for testing)
-            ProjectGuid = GetRandomLetter() + Path.GetRandomFileName().Replace(".", string.Empty)
+            ProjectGuid = GetRandomLetter() + Path.GetRandomFileName().Replace(".", string.Empty),
         };
         project.ProjectName = $"AspNet.{project.ProjectGuid}";
 
@@ -58,14 +61,20 @@ public class ProjectFactoryFixture : IDisposable
         return project;
     }
 
-    private static char GetRandomLetter() => LetterChars[Random.Shared.Next(LetterChars.Length - 1)];
+    private static char GetRandomLetter() =>
+        LetterChars[Random.Shared.Next(LetterChars.Length - 1)];
 
     private static string GetTemplateFolderBasePath(Assembly assembly) =>
         (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("HELIX_DIR")))
-        ? assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-            .Single(a => a.Key == "TestTemplateCreationFolder")
-            .Value
-        : Path.Combine(Environment.GetEnvironmentVariable("HELIX_DIR"), "Templates", "BaseFolder");
+            ? assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Single(a => a.Key == "TestTemplateCreationFolder")
+                .Value
+            : Path.Combine(
+                Environment.GetEnvironmentVariable("HELIX_DIR"),
+                "Templates",
+                "BaseFolder"
+            );
 
     public void Dispose()
     {

@@ -31,13 +31,15 @@ public abstract class OutputFormatter : IOutputFormatter, IApiResponseTypeMetada
     /// <inheritdoc />
     public virtual IReadOnlyList<string>? GetSupportedContentTypes(
         string contentType,
-        Type objectType)
+        Type objectType
+    )
     {
         if (SupportedMediaTypes.Count == 0)
         {
             var message = Resources.FormatFormatter_NoMediaTypes(
                 GetType().FullName,
-                nameof(SupportedMediaTypes));
+                nameof(SupportedMediaTypes)
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -49,7 +51,8 @@ public abstract class OutputFormatter : IOutputFormatter, IApiResponseTypeMetada
 
         List<string>? mediaTypes = null;
 
-        var parsedContentType = contentType != null ? new MediaType(contentType) : default(MediaType);
+        var parsedContentType =
+            contentType != null ? new MediaType(contentType) : default(MediaType);
 
         foreach (var mediaType in SupportedMediaTypes)
         {
@@ -98,7 +101,8 @@ public abstract class OutputFormatter : IOutputFormatter, IApiResponseTypeMetada
         {
             var message = Resources.FormatFormatter_NoMediaTypes(
                 GetType().FullName,
-                nameof(SupportedMediaTypes));
+                nameof(SupportedMediaTypes)
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -129,8 +133,10 @@ public abstract class OutputFormatter : IOutputFormatter, IApiResponseTypeMetada
                     // We only do this when comparing against server-defined content types (e.g., those
                     // from [Produces] or Response.ContentType), otherwise we'd potentially be reflecting
                     // back arbitrary Accept header values.
-                    if (context.ContentTypeIsServerDefined
-                        && parsedContentType.IsSubsetOf(supportedMediaType))
+                    if (
+                        context.ContentTypeIsServerDefined
+                        && parsedContentType.IsSubsetOf(supportedMediaType)
+                    )
                     {
                         return true;
                     }

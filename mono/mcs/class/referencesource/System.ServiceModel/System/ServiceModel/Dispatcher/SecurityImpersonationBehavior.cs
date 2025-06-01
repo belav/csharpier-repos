@@ -30,7 +30,7 @@ namespace System.ServiceModel.Dispatcher
     using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
     using SafeNativeMethods = System.ServiceModel.ComIntegration.SafeNativeMethods;
     using Win32Error = System.ServiceModel.ComIntegration.Win32Error;
-    
+
     internal sealed class SecurityImpersonationBehavior
     {
         PrincipalPermissionMode principalPermissionMode;
@@ -56,7 +56,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 ApplyRoleProvider(dispatch);
             }
-            this.domainNameMap = new Dictionary<string, string>(maxDomainNameMapSize, StringComparer.OrdinalIgnoreCase);
+            this.domainNameMap = new Dictionary<string, string>(
+                maxDomainNameMapSize,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public static SecurityImpersonationBehavior CreateIfNecessary(DispatchRuntime dispatch)
@@ -76,7 +79,9 @@ namespace System.ServiceModel.Dispatcher
             get
             {
                 if (anonymousWindowsPrincipal == null)
-                    anonymousWindowsPrincipal = new WindowsPrincipal(WindowsIdentity.GetAnonymous());
+                    anonymousWindowsPrincipal = new WindowsPrincipal(
+                        WindowsIdentity.GetAnonymous()
+                    );
 
                 return anonymousWindowsPrincipal;
             }
@@ -100,8 +105,8 @@ namespace System.ServiceModel.Dispatcher
                 return true;
             }
 
-            // Impersonation behavior is required if 
-            // 1) Contract requires it or 
+            // Impersonation behavior is required if
+            // 1) Contract requires it or
             // 2) Contract allows it and config requires it
             for (int i = 0; i < dispatch.Operations.Count; i++)
             {
@@ -122,7 +127,10 @@ namespace System.ServiceModel.Dispatcher
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        IPrincipal SetCurrentThreadPrincipal(ServiceSecurityContext securityContext, out bool isThreadPrincipalSet)
+        IPrincipal SetCurrentThreadPrincipal(
+            ServiceSecurityContext securityContext,
+            out bool isThreadPrincipalSet
+        )
         {
             IPrincipal result = null;
             IPrincipal principal = null;
@@ -131,7 +139,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.principalPermissionMode == PrincipalPermissionMode.UseWindowsGroups)
             {
-                principal = ( claimsPrincipal is WindowsPrincipal ) ? claimsPrincipal : GetWindowsPrincipal( securityContext );
+                principal =
+                    (claimsPrincipal is WindowsPrincipal)
+                        ? claimsPrincipal
+                        : GetWindowsPrincipal(securityContext);
             }
             else if (this.principalPermissionMode == PrincipalPermissionMode.UseAspNetRoles)
             {
@@ -143,7 +154,7 @@ namespace System.ServiceModel.Dispatcher
             }
             else if (this.principalPermissionMode == PrincipalPermissionMode.Always)
             {
-                principal = claimsPrincipal ?? new ClaimsPrincipal( new ClaimsIdentity() );
+                principal = claimsPrincipal ?? new ClaimsPrincipal(new ClaimsIdentity());
             }
 
             if (principal != null)
@@ -164,29 +175,51 @@ namespace System.ServiceModel.Dispatcher
         static IPrincipal GetCustomPrincipal(ServiceSecurityContext securityContext)
         {
             object customPrincipal;
-            if (securityContext.AuthorizationContext.Properties.TryGetValue(SecurityUtils.Principal, out customPrincipal) && customPrincipal is IPrincipal)
+            if (
+                securityContext.AuthorizationContext.Properties.TryGetValue(
+                    SecurityUtils.Principal,
+                    out customPrincipal
+                )
+                && customPrincipal is IPrincipal
+            )
                 return (IPrincipal)customPrincipal;
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)));
-        }        
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.NoPrincipalSpecifiedInAuthorizationContext)
+                    )
+                );
+        }
 
         internal bool IsSecurityContextImpersonationRequired(ref MessageRpc rpc)
         {
-            return ((rpc.Operation.Impersonation == ImpersonationOption.Required)
-                || ((rpc.Operation.Impersonation == ImpersonationOption.Allowed) && this.impersonateCallerForAllOperations));
+            return (
+                (rpc.Operation.Impersonation == ImpersonationOption.Required)
+                || (
+                    (rpc.Operation.Impersonation == ImpersonationOption.Allowed)
+                    && this.impersonateCallerForAllOperations
+                )
+            );
         }
 
         internal bool IsImpersonationEnabledOnCurrentOperation(ref MessageRpc rpc)
         {
-            return this.IsSecurityContextImpersonationRequired(ref rpc) ||
-                    AspNetEnvironment.Current.RequiresImpersonation ||
-                    this.principalPermissionMode != PrincipalPermissionMode.None;
+            return this.IsSecurityContextImpersonationRequired(ref rpc)
+                || AspNetEnvironment.Current.RequiresImpersonation
+                || this.principalPermissionMode != PrincipalPermissionMode.None;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method StartImpersonation2."
-            + "Caller must ensure that this method is called at an appropriate time and that impersonationContext out param is Dispose()'d correctly.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method StartImpersonation2."
+                + "Caller must ensure that this method is called at an appropriate time and that impersonationContext out param is Dispose()'d correctly."
+        )]
         [SecurityCritical]
-        public void StartImpersonation(ref MessageRpc rpc, out IDisposable impersonationContext, out IPrincipal originalPrincipal, out bool isThreadPrincipalSet)
+        public void StartImpersonation(
+            ref MessageRpc rpc,
+            out IDisposable impersonationContext,
+            out IPrincipal originalPrincipal,
+            out bool isThreadPrincipalSet
+        )
         {
             impersonationContext = null;
             originalPrincipal = null;
@@ -200,18 +233,31 @@ namespace System.ServiceModel.Dispatcher
                 securityContext = null;
 
             if (setThreadPrincipal && securityContext != null)
-                originalPrincipal = this.SetCurrentThreadPrincipal(securityContext, out isThreadPrincipalSet);
+                originalPrincipal = this.SetCurrentThreadPrincipal(
+                    securityContext,
+                    out isThreadPrincipalSet
+                );
 
             if (isSecurityContextImpersonationOn || AspNetEnvironment.Current.RequiresImpersonation)
             {
-                impersonationContext = StartImpersonation2(ref rpc, securityContext, isSecurityContextImpersonationOn);
+                impersonationContext = StartImpersonation2(
+                    ref rpc,
+                    securityContext,
+                    isSecurityContextImpersonationOn
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method HostedImpersonationContext.Impersonate."
-            + "Caller must ensure that this method is called at an appropriate time and that result is Dispose()'d correctly.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method HostedImpersonationContext.Impersonate."
+                + "Caller must ensure that this method is called at an appropriate time and that result is Dispose()'d correctly."
+        )]
         [SecurityCritical]
-        IDisposable StartImpersonation2(ref MessageRpc rpc, ServiceSecurityContext securityContext, bool isSecurityContextImpersonationOn)
+        IDisposable StartImpersonation2(
+            ref MessageRpc rpc,
+            ServiceSecurityContext securityContext,
+            bool isSecurityContextImpersonationOn
+        )
         {
             IDisposable impersonationContext = null;
             try
@@ -219,7 +265,12 @@ namespace System.ServiceModel.Dispatcher
                 if (isSecurityContextImpersonationOn)
                 {
                     if (securityContext == null)
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxSecurityContextPropertyMissingFromRequestMessage)), rpc.Request);
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxSecurityContextPropertyMissingFromRequestMessage)
+                            ),
+                            rpc.Request
+                        );
 
                     WindowsIdentity impersonationToken = securityContext.WindowsIdentity;
                     if (impersonationToken.User != null)
@@ -228,22 +279,42 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else if (securityContext.PrimaryIdentity is WindowsSidIdentity)
                     {
-                        WindowsSidIdentity sidIdentity = (WindowsSidIdentity)securityContext.PrimaryIdentity;
-                        if (sidIdentity.SecurityIdentifier.IsWellKnown(WellKnownSidType.AnonymousSid))
+                        WindowsSidIdentity sidIdentity = (WindowsSidIdentity)
+                            securityContext.PrimaryIdentity;
+                        if (
+                            sidIdentity.SecurityIdentifier.IsWellKnown(
+                                WellKnownSidType.AnonymousSid
+                            )
+                        )
                         {
                             impersonationContext = new WindowsAnonymousIdentity().Impersonate();
                         }
                         else
                         {
-                            string fullyQualifiedDomainName = GetUpnFromDownlevelName(sidIdentity.Name);
-                            using (WindowsIdentity windowsIdentity = new WindowsIdentity(fullyQualifiedDomainName, SecurityUtils.AuthTypeKerberos))
+                            string fullyQualifiedDomainName = GetUpnFromDownlevelName(
+                                sidIdentity.Name
+                            );
+                            using (
+                                WindowsIdentity windowsIdentity = new WindowsIdentity(
+                                    fullyQualifiedDomainName,
+                                    SecurityUtils.AuthTypeKerberos
+                                )
+                            )
                             {
                                 impersonationContext = windowsIdentity.Impersonate();
                             }
                         }
                     }
                     else
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityContextDoesNotAllowImpersonation, rpc.Operation.Action)), rpc.Request);
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SecurityContextDoesNotAllowImpersonation,
+                                    rpc.Operation.Action
+                                )
+                            ),
+                            rpc.Request
+                        );
                 }
                 else if (AspNetEnvironment.Current.RequiresImpersonation)
                 {
@@ -253,13 +324,22 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 
-                SecurityTraceRecordHelper.TraceImpersonationSucceeded(rpc.EventTraceActivity, rpc.Operation);
+                SecurityTraceRecordHelper.TraceImpersonationSucceeded(
+                    rpc.EventTraceActivity,
+                    rpc.Operation
+                );
 
                 // update the impersonation succeed audit
                 if (AuditLevel.Success == (this.auditLevel & AuditLevel.Success))
                 {
-                    SecurityAuditHelper.WriteImpersonationSuccessEvent(this.auditLogLocation,
-                        this.suppressAuditFailure, rpc.Operation.Name, SecurityUtils.GetIdentityNamesFromContext(securityContext.AuthorizationContext));
+                    SecurityAuditHelper.WriteImpersonationSuccessEvent(
+                        this.auditLogLocation,
+                        this.suppressAuditFailure,
+                        rpc.Operation.Name,
+                        SecurityUtils.GetIdentityNamesFromContext(
+                            securityContext.AuthorizationContext
+                        )
+                    );
                 }
             }
             catch (Exception ex)
@@ -268,7 +348,11 @@ namespace System.ServiceModel.Dispatcher
                 {
                     throw;
                 }
-                SecurityTraceRecordHelper.TraceImpersonationFailed(rpc.EventTraceActivity, rpc.Operation, ex);
+                SecurityTraceRecordHelper.TraceImpersonationFailed(
+                    rpc.EventTraceActivity,
+                    rpc.Operation,
+                    ex
+                );
 
                 //
                 // Update the impersonation failure audit
@@ -280,12 +364,19 @@ namespace System.ServiceModel.Dispatcher
                     {
                         string primaryIdentity;
                         if (securityContext != null)
-                            primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(securityContext.AuthorizationContext);
+                            primaryIdentity = SecurityUtils.GetIdentityNamesFromContext(
+                                securityContext.AuthorizationContext
+                            );
                         else
                             primaryIdentity = SecurityUtils.AnonymousIdentity.Name;
 
-                        SecurityAuditHelper.WriteImpersonationFailureEvent(this.auditLogLocation,
-                            this.suppressAuditFailure, rpc.Operation.Name, primaryIdentity, ex);
+                        SecurityAuditHelper.WriteImpersonationFailureEvent(
+                            this.auditLogLocation,
+                            this.suppressAuditFailure,
+                            rpc.Operation.Name,
+                            primaryIdentity,
+                            ex
+                        );
                     }
 #pragma warning suppress 56500
                     catch (Exception auditException)
@@ -293,7 +384,10 @@ namespace System.ServiceModel.Dispatcher
                         if (Fx.IsFatal(auditException))
                             throw;
 
-                        DiagnosticUtility.TraceHandledException(auditException, TraceEventType.Error);
+                        DiagnosticUtility.TraceHandledException(
+                            auditException,
+                            TraceEventType.Error
+                        );
                     }
                 }
 
@@ -303,11 +397,19 @@ namespace System.ServiceModel.Dispatcher
             return impersonationContext;
         }
 
-        public void StopImpersonation(ref MessageRpc rpc, IDisposable impersonationContext, IPrincipal originalPrincipal, bool isThreadPrincipalSet)
+        public void StopImpersonation(
+            ref MessageRpc rpc,
+            IDisposable impersonationContext,
+            IPrincipal originalPrincipal,
+            bool isThreadPrincipalSet
+        )
         {
             try
             {
-                if (IsSecurityContextImpersonationRequired(ref rpc) || AspNetEnvironment.Current.RequiresImpersonation)
+                if (
+                    IsSecurityContextImpersonationRequired(ref rpc)
+                    || AspNetEnvironment.Current.RequiresImpersonation
+                )
                 {
                     if (impersonationContext != null)
                     {
@@ -361,7 +463,12 @@ namespace System.ServiceModel.Dispatcher
                 {
                     securityContext = securityContextProperty.ServiceSecurityContext;
                     if (securityContext == null)
-                        throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityContextMissing, rpc.Operation.Name)), rpc.Request);
+                        throw TraceUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SecurityContextMissing, rpc.Operation.Name)
+                            ),
+                            rpc.Request
+                        );
                 }
 
                 rpc.SecurityContext = securityContext;
@@ -378,9 +485,17 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("downlevelName");
             }
             int delimiterPos = downlevelName.IndexOf('\\');
-            if ((delimiterPos < 0) || (delimiterPos == 0) || (delimiterPos == downlevelName.Length - 1))
+            if (
+                (delimiterPos < 0)
+                || (delimiterPos == 0)
+                || (delimiterPos == downlevelName.Length - 1)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)
+                    )
+                );
             }
             string shortDomainName = downlevelName.Substring(0, delimiterPos + 1);
             string userName = downlevelName.Substring(delimiterPos + 1);
@@ -398,27 +513,54 @@ namespace System.ServiceModel.Dispatcher
             {
                 uint capacity = 50;
                 StringBuilder fullyQualifiedDomainName = new StringBuilder((int)capacity);
-                if (!SafeNativeMethods.TranslateName(shortDomainName, EXTENDED_NAME_FORMAT.NameSamCompatible, EXTENDED_NAME_FORMAT.NameCanonical,
-                    fullyQualifiedDomainName, out capacity))
+                if (
+                    !SafeNativeMethods.TranslateName(
+                        shortDomainName,
+                        EXTENDED_NAME_FORMAT.NameSamCompatible,
+                        EXTENDED_NAME_FORMAT.NameCanonical,
+                        fullyQualifiedDomainName,
+                        out capacity
+                    )
+                )
                 {
                     int errorCode = Marshal.GetLastWin32Error();
                     if (errorCode == (int)Win32Error.ERROR_INSUFFICIENT_BUFFER)
                     {
                         fullyQualifiedDomainName = new StringBuilder((int)capacity);
-                        if (!SafeNativeMethods.TranslateName(shortDomainName, EXTENDED_NAME_FORMAT.NameSamCompatible, EXTENDED_NAME_FORMAT.NameCanonical,
-                            fullyQualifiedDomainName, out capacity))
+                        if (
+                            !SafeNativeMethods.TranslateName(
+                                shortDomainName,
+                                EXTENDED_NAME_FORMAT.NameSamCompatible,
+                                EXTENDED_NAME_FORMAT.NameCanonical,
+                                fullyQualifiedDomainName,
+                                out capacity
+                            )
+                        )
                         {
                             errorCode = Marshal.GetLastWin32Error();
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName), new Win32Exception(errorCode)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
+                                    new Win32Exception(errorCode)
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName), new Win32Exception(errorCode)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName),
+                                new Win32Exception(errorCode)
+                            )
+                        );
                     }
                 }
                 // trim the trailing / from fqdn
-                fullyQualifiedDomainName = fullyQualifiedDomainName.Remove(fullyQualifiedDomainName.Length - 1, 1);
+                fullyQualifiedDomainName = fullyQualifiedDomainName.Remove(
+                    fullyQualifiedDomainName.Length - 1,
+                    1
+                );
                 fullDomainName = fullyQualifiedDomainName.ToString();
 
                 // 3) Save in cache (remove a random item if cache is full)
@@ -447,13 +589,15 @@ namespace System.ServiceModel.Dispatcher
             return userName + "@" + fullDomainName;
         }
 
-
         class WindowsSidPrincipal : IPrincipal
         {
             WindowsSidIdentity identity;
             ServiceSecurityContext securityContext;
 
-            public WindowsSidPrincipal(WindowsSidIdentity identity, ServiceSecurityContext securityContext)
+            public WindowsSidPrincipal(
+                WindowsSidIdentity identity,
+                ServiceSecurityContext securityContext
+            )
             {
                 this.identity = identity;
                 this.securityContext = securityContext;
@@ -470,7 +614,9 @@ namespace System.ServiceModel.Dispatcher
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("role");
 
                 NTAccount account = new NTAccount(role);
-                Claim claim = Claim.CreateWindowsSidClaim((SecurityIdentifier)account.Translate(typeof(SecurityIdentifier)));
+                Claim claim = Claim.CreateWindowsSidClaim(
+                    (SecurityIdentifier)account.Translate(typeof(SecurityIdentifier))
+                );
                 AuthorizationContext authContext = this.securityContext.AuthorizationContext;
                 for (int i = 0; i < authContext.ClaimSets.Count; i++)
                 {
@@ -490,7 +636,14 @@ namespace System.ServiceModel.Dispatcher
 #pragma warning suppress 56523 // The LastWin32Error can be ignored here.
                 IntPtr threadHandle = SafeNativeMethods.GetCurrentThread();
                 SafeCloseHandle tokenHandle;
-                if (!SafeNativeMethods.OpenCurrentThreadToken(threadHandle, TokenAccessLevels.Impersonate, true, out tokenHandle))
+                if (
+                    !SafeNativeMethods.OpenCurrentThreadToken(
+                        threadHandle,
+                        TokenAccessLevels.Impersonate,
+                        true,
+                        out tokenHandle
+                    )
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
                     System.ServiceModel.Diagnostics.Utility.CloseInvalidOutSafeHandle(tokenHandle);
@@ -500,14 +653,18 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new Win32Exception(error)
+                        );
                     }
                 }
 
                 if (!SafeNativeMethods.ImpersonateAnonymousUserOnCurrentThread(threadHandle))
                 {
                     int error = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new Win32Exception(error));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new Win32Exception(error)
+                    );
                 }
 
                 return new ImpersonationContext(threadHandle, tokenHandle);
@@ -536,8 +693,14 @@ namespace System.ServiceModel.Dispatcher
                     if (!SafeNativeMethods.SetCurrentThreadToken(IntPtr.Zero, this.tokenHandle))
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityException(SR.GetString(SR.RevertImpersonationFailure,
-                            new Win32Exception(error).Message)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(
+                                    SR.RevertImpersonationFailure,
+                                    new Win32Exception(error).Message
+                                )
+                            )
+                        );
                     }
                     tokenHandle.Close();
                 }
@@ -554,4 +717,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

@@ -1,5 +1,5 @@
 <doc>
-   <a attr="   &#x20;&#13;&#xa;&#9;   "/>
-   <b attr='   A   &#x20;&#13;&#xa;&#9;   B   '/>
-   <c id=' &apos;   &#x20;&#13;&#xa;&#9;   &apos; '/>
+  <a attr="    &#xD;&#xA;&#x9;   " />
+  <b attr="   A    &#xD;&#xA;&#x9;   B   " />
+  <c id=" '    &#xD;&#xA;&#x9;   ' " />
 </doc>

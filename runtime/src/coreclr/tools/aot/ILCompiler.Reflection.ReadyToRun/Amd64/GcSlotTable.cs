@@ -20,7 +20,13 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
 
             public GcSlot() { }
 
-            public GcSlot(int index, int registerNumber, GcStackSlot stack, GcSlotFlags flags, bool isUntracked = false)
+            public GcSlot(
+                int index,
+                int registerNumber,
+                GcStackSlot stack,
+                GcSlotFlags flags,
+                bool isUntracked = false
+            )
             {
                 Index = index;
                 RegisterNumber = registerNumber;
@@ -32,7 +38,11 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                 }
             }
 
-            public override GcSlotFlags WriteTo(StringBuilder sb, Machine machine, GcSlotFlags prevFlags)
+            public override GcSlotFlags WriteTo(
+                StringBuilder sb,
+                Machine machine,
+                GcSlotFlags prevFlags
+            )
             {
                 if (prevFlags != Flags)
                 {
@@ -75,7 +85,6 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
                         throw new NotImplementedException(machine.ToString());
                 }
             }
-
         }
 
         public uint NumRegisters { get; set; }
@@ -101,18 +110,35 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/vm/gcinfodecoder.cpp">GcSlotDecoder::DecodeSlotTable</a>
         /// </summary>
-        public GcSlotTable(byte[] image, Machine machine, GcInfoTypes gcInfoTypes, ref int bitOffset)
+        public GcSlotTable(
+            byte[] image,
+            Machine machine,
+            GcInfoTypes gcInfoTypes,
+            ref int bitOffset
+        )
         {
             _machine = machine;
 
             if (NativeReader.ReadBits(image, 1, ref bitOffset) != 0)
             {
-                NumRegisters = NativeReader.DecodeVarLengthUnsigned(image, gcInfoTypes.NUM_REGISTERS_ENCBASE, ref bitOffset);
+                NumRegisters = NativeReader.DecodeVarLengthUnsigned(
+                    image,
+                    gcInfoTypes.NUM_REGISTERS_ENCBASE,
+                    ref bitOffset
+                );
             }
             if (NativeReader.ReadBits(image, 1, ref bitOffset) != 0)
             {
-                NumStackSlots = NativeReader.DecodeVarLengthUnsigned(image, gcInfoTypes.NUM_STACK_SLOTS_ENCBASE, ref bitOffset);
-                NumUntracked = NativeReader.DecodeVarLengthUnsigned(image, gcInfoTypes.NUM_UNTRACKED_SLOTS_ENCBASE, ref bitOffset);
+                NumStackSlots = NativeReader.DecodeVarLengthUnsigned(
+                    image,
+                    gcInfoTypes.NUM_STACK_SLOTS_ENCBASE,
+                    ref bitOffset
+                );
+                NumUntracked = NativeReader.DecodeVarLengthUnsigned(
+                    image,
+                    gcInfoTypes.NUM_UNTRACKED_SLOTS_ENCBASE,
+                    ref bitOffset
+                );
             }
             NumSlots = NumRegisters + NumStackSlots + NumUntracked;
 
@@ -135,7 +161,9 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine($"        NumSlots({NumSlots}) = NumRegisters({NumRegisters}) + NumStackSlots({NumStackSlots}) + NumUntracked({NumUntracked})");
+            sb.AppendLine(
+                $"        NumSlots({NumSlots}) = NumRegisters({NumRegisters}) + NumStackSlots({NumStackSlots}) + NumUntracked({NumUntracked})"
+            );
             sb.AppendLine($"        GcSlots:");
             foreach (GcSlot slot in GcSlots)
             {
@@ -150,7 +178,11 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         private void DecodeRegisters(byte[] image, GcInfoTypes gcInfoTypes, ref int bitOffset)
         {
             // We certainly predecode the first register
-            uint regNum = NativeReader.DecodeVarLengthUnsigned(image, gcInfoTypes.REGISTER_ENCBASE, ref bitOffset);
+            uint regNum = NativeReader.DecodeVarLengthUnsigned(
+                image,
+                gcInfoTypes.REGISTER_ENCBASE,
+                ref bitOffset
+            );
             GcSlotFlags flags = (GcSlotFlags)NativeReader.ReadBits(image, 2, ref bitOffset);
             GcSlots.Add(new GcSlot(GcSlots.Count, (int)regNum, null, flags));
 
@@ -158,43 +190,82 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
             {
                 if ((uint)flags != 0)
                 {
-                    regNum = NativeReader.DecodeVarLengthUnsigned(image, gcInfoTypes.REGISTER_ENCBASE, ref bitOffset);
+                    regNum = NativeReader.DecodeVarLengthUnsigned(
+                        image,
+                        gcInfoTypes.REGISTER_ENCBASE,
+                        ref bitOffset
+                    );
                     flags = (GcSlotFlags)NativeReader.ReadBits(image, 2, ref bitOffset);
                 }
                 else
                 {
-                    uint regDelta = NativeReader.DecodeVarLengthUnsigned(image, gcInfoTypes.REGISTER_DELTA_ENCBASE, ref bitOffset) + 1;
+                    uint regDelta =
+                        NativeReader.DecodeVarLengthUnsigned(
+                            image,
+                            gcInfoTypes.REGISTER_DELTA_ENCBASE,
+                            ref bitOffset
+                        ) + 1;
                     regNum += regDelta;
                 }
                 GcSlots.Add(new GcSlot(GcSlots.Count, (int)regNum, null, flags));
             }
         }
 
-        private void DecodeStackSlots(byte[] image, Machine machine, GcInfoTypes gcInfoTypes, uint nSlots, bool isUntracked, ref int bitOffset)
+        private void DecodeStackSlots(
+            byte[] image,
+            Machine machine,
+            GcInfoTypes gcInfoTypes,
+            uint nSlots,
+            bool isUntracked,
+            ref int bitOffset
+        )
         {
             // We have stack slots left and more room to predecode
-            GcStackSlotBase spBase = (GcStackSlotBase)NativeReader.ReadBits(image, 2, ref bitOffset);
-            int normSpOffset = NativeReader.DecodeVarLengthSigned(image, gcInfoTypes.STACK_SLOT_ENCBASE, ref bitOffset);
+            GcStackSlotBase spBase = (GcStackSlotBase)
+                NativeReader.ReadBits(image, 2, ref bitOffset);
+            int normSpOffset = NativeReader.DecodeVarLengthSigned(
+                image,
+                gcInfoTypes.STACK_SLOT_ENCBASE,
+                ref bitOffset
+            );
             int spOffset = gcInfoTypes.DenormalizeStackSlot(normSpOffset);
             GcSlotFlags flags = (GcSlotFlags)NativeReader.ReadBits(image, 2, ref bitOffset);
-            GcSlots.Add(new GcSlot(GcSlots.Count, -1, new GcStackSlot(spOffset, spBase), flags, isUntracked));
+            GcSlots.Add(
+                new GcSlot(GcSlots.Count, -1, new GcStackSlot(spOffset, spBase), flags, isUntracked)
+            );
 
             for (int i = 1; i < nSlots; i++)
             {
                 spBase = (GcStackSlotBase)NativeReader.ReadBits(image, 2, ref bitOffset);
                 if ((uint)flags != 0)
                 {
-                    normSpOffset = NativeReader.DecodeVarLengthSigned(image, gcInfoTypes.STACK_SLOT_ENCBASE, ref bitOffset);
+                    normSpOffset = NativeReader.DecodeVarLengthSigned(
+                        image,
+                        gcInfoTypes.STACK_SLOT_ENCBASE,
+                        ref bitOffset
+                    );
                     spOffset = gcInfoTypes.DenormalizeStackSlot(normSpOffset);
                     flags = (GcSlotFlags)NativeReader.ReadBits(image, 2, ref bitOffset);
                 }
                 else
                 {
-                    int normSpOffsetDelta = NativeReader.DecodeVarLengthSigned(image, gcInfoTypes.STACK_SLOT_DELTA_ENCBASE, ref bitOffset);
+                    int normSpOffsetDelta = NativeReader.DecodeVarLengthSigned(
+                        image,
+                        gcInfoTypes.STACK_SLOT_DELTA_ENCBASE,
+                        ref bitOffset
+                    );
                     normSpOffset += normSpOffsetDelta;
                     spOffset = gcInfoTypes.DenormalizeStackSlot(normSpOffset);
                 }
-                GcSlots.Add(new GcSlot(GcSlots.Count, -1, new GcStackSlot(spOffset, spBase), flags, isUntracked));
+                GcSlots.Add(
+                    new GcSlot(
+                        GcSlots.Count,
+                        -1,
+                        new GcStackSlot(spOffset, spBase),
+                        flags,
+                        isUntracked
+                    )
+                );
             }
         }
     }

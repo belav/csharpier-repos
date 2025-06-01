@@ -22,12 +22,11 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
-namespace System.Windows.Forms {
-
-	public enum StatusBarPanelStyle {
-		Text = 1,
-		OwnerDraw
-	}
+namespace System.Windows.Forms
+{
+    public enum StatusBarPanelStyle
+    {
+        Text = 1,
+        OwnerDraw,
+    }
 }
-

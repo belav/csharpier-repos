@@ -26,7 +26,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -34,7 +37,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test1.vb", "test2.vb");
-            Assert.Equal("/optionstrict:custom /out:test1.exe test1.vb test2.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test1.exe test1.vb test2.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -43,11 +49,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.PathMap = "K1=V1,K2=V2";
-            Assert.Equal("/optionstrict:custom /pathmap:\"K1=V1,K2=V2\" /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /pathmap:\"K1=V1,K2=V2\" /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -56,16 +68,25 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.Deterministic = true;
-            Assert.Equal("/optionstrict:custom /out:test.exe /deterministic+ test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /deterministic+ test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.Deterministic = false;
-            Assert.Equal("/optionstrict:custom /out:test.exe /deterministic- test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /deterministic- test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -74,16 +95,25 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.PublicSign = true;
-            Assert.Equal("/optionstrict:custom /out:test.exe /publicsign+ test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /publicsign+ test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.PublicSign = false;
-            Assert.Equal("/optionstrict:custom /out:test.exe /publicsign- test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /publicsign- test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -92,12 +122,18 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.RuntimeMetadataVersion = "v1234";
-            Assert.Equal("/optionstrict:custom /out:test.exe /runtimemetadataversion:v1234 test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /runtimemetadataversion:v1234 test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.RuntimeMetadataVersion = null;
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -106,7 +142,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.LangVersion = "15.3";
-            Assert.Equal("/optionstrict:custom /out:test.exe /langversion:15.3 test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /langversion:15.3 test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -115,17 +154,26 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.ChecksumAlgorithm = "sha256";
-            Assert.Equal("/optionstrict:custom /out:test.exe /checksumalgorithm:sha256 test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /checksumalgorithm:sha256 test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.ChecksumAlgorithm = null;
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.ChecksumAlgorithm = "";
-            Assert.Equal("/optionstrict:custom /out:test.exe /checksumalgorithm: test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /checksumalgorithm: test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -137,15 +185,24 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             vbc = new Vbc();
             vbc.Instrument = "TestCoverage";
-            Assert.Equal("/optionstrict:custom /instrument:TestCoverage", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /instrument:TestCoverage",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Instrument = "TestCoverage,Mumble";
-            Assert.Equal("/optionstrict:custom /instrument:TestCoverage,Mumble", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /instrument:TestCoverage,Mumble",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Instrument = "TestCoverage,Mumble;Stumble";
-            Assert.Equal("/optionstrict:custom /instrument:TestCoverage,Mumble,Stumble", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /instrument:TestCoverage,Mumble,Stumble",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -154,7 +211,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.TargetType = "library";
-            Assert.Equal("/optionstrict:custom /out:test.dll /target:library test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.dll /target:library test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -163,7 +223,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.TargetType = "bad";
-            Assert.Equal("/optionstrict:custom /out:test.exe /target:bad test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /target:bad test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -172,7 +235,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.OutputAssembly = MSBuildUtil.CreateTaskItem("x.exe");
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            Assert.Equal("/optionstrict:custom /out:x.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:x.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -183,7 +249,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 var vbc = new Vbc();
                 vbc.DefineConstants = s;
                 vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-                Assert.Equal($@"/optionstrict:custom /define:""{s}"" /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+                Assert.Equal(
+                    $@"/optionstrict:custom /define:""{s}"" /out:test.exe test.vb",
+                    vbc.GenerateResponseFileContents()
+                );
             };
 
             test("D1;D2");
@@ -199,7 +268,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 var vbc = new Vbc();
                 vbc.Features = s;
                 vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-                Assert.Equal(@"/optionstrict:custom /out:test.exe /features:a /features:b test.vb", vbc.GenerateResponseFileContents());
+                Assert.Equal(
+                    @"/optionstrict:custom /out:test.exe /features:a /features:b test.vb",
+                    vbc.GenerateResponseFileContents()
+                );
             };
 
             test("a;b");
@@ -218,7 +290,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                 var vbc = new Vbc();
                 vbc.Features = cur;
                 vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-                Assert.Equal(@"/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+                Assert.Equal(
+                    @"/optionstrict:custom /out:test.exe test.vb",
+                    vbc.GenerateResponseFileContents()
+                );
             }
         }
 
@@ -228,32 +303,50 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "full";
-            Assert.Equal("/optionstrict:custom /debug:full /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /debug:full /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "pdbonly";
-            Assert.Equal("/optionstrict:custom /debug:pdbonly /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /debug:pdbonly /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
-            Assert.Equal("/optionstrict:custom /debug:portable /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /debug:portable /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "embedded";
-            Assert.Equal("/optionstrict:custom /debug:embedded /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /debug:embedded /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = null;
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "";
-            Assert.Equal("/optionstrict:custom /debug: /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /debug: /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -263,19 +356,28 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
             vbc.SourceLink = @"C:\x y\z.json";
-            Assert.Equal(@"/optionstrict:custom /debug:portable /out:test.exe /sourcelink:""C:\x y\z.json"" test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:portable /out:test.exe /sourcelink:""C:\x y\z.json"" test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
             vbc.SourceLink = null;
-            Assert.Equal(@"/optionstrict:custom /debug:portable /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:portable /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
             vbc.SourceLink = "";
-            Assert.Equal(@"/optionstrict:custom /debug:portable /out:test.exe /sourcelink: test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:portable /out:test.exe /sourcelink: test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -285,37 +387,55 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
             vbc.EmbeddedFiles = MSBuildUtil.CreateTaskItems(@"test.vb", @"test.txt");
-            Assert.Equal(@"/optionstrict:custom /debug:portable /out:test.exe /embed:test.vb /embed:test.txt test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:portable /out:test.exe /embed:test.vb /embed:test.txt test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
             vbc.EmbeddedFiles = MSBuildUtil.CreateTaskItems(@"C:\x y\z.json");
-            Assert.Equal(@"/optionstrict:custom /debug:portable /out:test.exe /embed:""C:\x y\z.json"" test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:portable /out:test.exe /embed:""C:\x y\z.json"" test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "portable";
             vbc.EmbeddedFiles = null;
-            Assert.Equal(@"/optionstrict:custom /debug:portable /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:portable /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DebugType = "full";
             vbc.EmbeddedFiles = MSBuildUtil.CreateTaskItems();
-            Assert.Equal(@"/optionstrict:custom /debug:full /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:full /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("a;b.vb");
             vbc.DebugType = "full";
             vbc.EmbeddedFiles = MSBuildUtil.CreateTaskItems("a;b.vb");
-            Assert.Equal(@"/optionstrict:custom /debug:full /out:""a;b.exe"" /embed:""a;b.vb"" ""a;b.vb""", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:full /out:""a;b.exe"" /embed:""a;b.vb"" ""a;b.vb""",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("a, b.vb");
             vbc.DebugType = "full";
             vbc.EmbeddedFiles = MSBuildUtil.CreateTaskItems("a, b.vb");
-            Assert.Equal(@"/optionstrict:custom /debug:full /out:""a, b.exe"" /embed:""a, b.vb"" ""a, b.vb""", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /debug:full /out:""a, b.exe"" /embed:""a, b.vb"" ""a, b.vb""",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -326,13 +446,19 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             vbc.EmbeddedFiles = MSBuildUtil.CreateTaskItems(@"test.vb", @"test.txt");
             vbc.EmbedAllSources = true;
 
-            Assert.Equal(@"/optionstrict:custom /out:test.exe /embed /embed:test.vb /embed:test.txt test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /out:test.exe /embed /embed:test.vb /embed:test.txt test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.EmbedAllSources = true;
 
-            Assert.Equal(@"/optionstrict:custom /out:test.exe /embed test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /out:test.exe /embed test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -341,7 +467,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.OutputRefAssembly = MSBuildUtil.CreateTaskItem("ref\\test.dll");
-            Assert.Equal("/optionstrict:custom /out:test.exe /refout:ref\\test.dll test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /refout:ref\\test.dll test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -350,7 +479,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.RefOnly = true;
-            Assert.Equal("/optionstrict:custom /out:test.exe /refonly test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /refonly test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -360,18 +492,27 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.UseSharedCompilation = true;
             vbc.SharedCompilationId = "testPipeName";
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.UseSharedCompilation = false;
             vbc.SharedCompilationId = "testPipeName";
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.SharedCompilationId = "testPipeName";
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -382,7 +523,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.GenerateDocumentation = false;
             vbc.DocumentationFile = "test.xml";
-            Assert.Equal("/doc- /optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/doc- /optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -393,7 +537,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.GenerateDocumentation = true;
             vbc.DocumentationFile = "test.xml";
-            Assert.Equal("/doc+ /optionstrict:custom /doc:test.xml /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/doc+ /optionstrict:custom /doc:test.xml /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -403,7 +550,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.GenerateDocumentation = true;
-            Assert.Equal("/doc+ /optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/doc+ /optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -413,7 +563,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.DocumentationFile = "test.xml";
-            Assert.Equal("/optionstrict:custom /doc:test.xml /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /doc:test.xml /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -422,7 +575,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
         {
             var vbc = new Vbc();
             vbc.SdkPath = @"path\to\sdk";
-            Assert.Equal(@"/optionstrict:custom /sdkpath:path\to\sdk", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /sdkpath:path\to\sdk",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -440,17 +596,32 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(".editorconfig");
-            Assert.Equal(@"/optionstrict:custom /out:test.exe /analyzerconfig:.editorconfig test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                @"/optionstrict:custom /out:test.exe /analyzerconfig:.editorconfig test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb", "subdir\\test.vb");
-            vbc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(".editorconfig", "subdir\\.editorconfig");
-            Assert.Equal(@$"/optionstrict:custom /out:test.exe /analyzerconfig:.editorconfig /analyzerconfig:subdir\.editorconfig test.vb subdir{Path.DirectorySeparatorChar}test.vb", vbc.GenerateResponseFileContents());
+            vbc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(
+                ".editorconfig",
+                "subdir\\.editorconfig"
+            );
+            Assert.Equal(
+                @$"/optionstrict:custom /out:test.exe /analyzerconfig:.editorconfig /analyzerconfig:subdir\.editorconfig test.vb subdir{Path.DirectorySeparatorChar}test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            vbc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems("..\\.editorconfig", "sub dir\\.editorconfig");
-            Assert.Equal(@"/optionstrict:custom /out:test.exe /analyzerconfig:..\.editorconfig /analyzerconfig:""sub dir\.editorconfig"" test.vb", vbc.GenerateResponseFileContents());
+            vbc.AnalyzerConfigFiles = MSBuildUtil.CreateTaskItems(
+                "..\\.editorconfig",
+                "sub dir\\.editorconfig"
+            );
+            Assert.Equal(
+                @"/optionstrict:custom /out:test.exe /analyzerconfig:..\.editorconfig /analyzerconfig:""sub dir\.editorconfig"" test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -460,16 +631,25 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.SkipAnalyzers = true;
-            Assert.Equal("/optionstrict:custom /out:test.exe /skipanalyzers+ test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /skipanalyzers+ test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
             vbc.SkipAnalyzers = false;
-            Assert.Equal("/optionstrict:custom /out:test.exe /skipanalyzers- test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe /skipanalyzers- test.vb",
+                vbc.GenerateResponseFileContents()
+            );
 
             vbc = new Vbc();
             vbc.Sources = MSBuildUtil.CreateTaskItems("test.vb");
-            Assert.Equal("/optionstrict:custom /out:test.exe test.vb", vbc.GenerateResponseFileContents());
+            Assert.Equal(
+                "/optionstrict:custom /out:test.exe test.vb",
+                vbc.GenerateResponseFileContents()
+            );
         }
 
         [Fact]
@@ -480,10 +660,17 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var engine = new ErrorLoggingEngine();
             vbc.BuildEngine = engine;
             // Use reflection to set protected property UsedCommandLineTool to true so Vbc.LogEventsFromTextOutput will pass the messages along to ParseVBErrorOrWarning.
-            typeof(Vbc).GetProperty("UsedCommandLineTool", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)?.SetValue(vbc, true);
+            typeof(Vbc)
+                .GetProperty(
+                    "UsedCommandLineTool",
+                    System.Reflection.BindingFlags.Instance
+                        | System.Reflection.BindingFlags.NonPublic
+                )
+                ?.SetValue(vbc, true);
             // Errors and warnings were generated by compiling the code used in the test at
             // Microsoft.CodeAnalysis.VisualBasic.CommandLine.UnitTests.CommandLineTests.LogErrorsWithColumnNumbers()
-            vbc.LogCompilerOutput(@"
+            vbc.LogCompilerOutput(
+                @"
 C:\Test Path (123)\hellovb.vb(6) : warning BC40008: 'Public Property x As Integer' is obsolete.
 
         x = 3.5
@@ -496,11 +683,22 @@ C:\Test Path (123)\hellovb.vb(7) : error BC30451: 'asdf' is not declared. It may
 
         asdf
         ~~~~
-", Build.Framework.MessageImportance.High);
+",
+                Build.Framework.MessageImportance.High
+            );
             // Check that the column number is being added at the correct place.
-            Assert.Contains(@"C:\Test Path (123)\hellovb.vb(6,9): warning BC40008: 'Public Property x As Integer' is obsolete.", engine.Log);
-            Assert.Contains(@"C:\Test Path (123)\hellovb.vb(6,13): error BC30512: Option Strict On disallows implicit conversions from 'Double' to 'Integer'.", engine.Log);
-            Assert.Contains(@"C:\Test Path (123)\hellovb.vb(7,9): error BC30451: 'asdf' is not declared. It may be inaccessible due to its protection level.", engine.Log);
+            Assert.Contains(
+                @"C:\Test Path (123)\hellovb.vb(6,9): warning BC40008: 'Public Property x As Integer' is obsolete.",
+                engine.Log
+            );
+            Assert.Contains(
+                @"C:\Test Path (123)\hellovb.vb(6,13): error BC30512: Option Strict On disallows implicit conversions from 'Double' to 'Integer'.",
+                engine.Log
+            );
+            Assert.Contains(
+                @"C:\Test Path (123)\hellovb.vb(7,9): error BC30451: 'asdf' is not declared. It may be inaccessible due to its protection level.",
+                engine.Log
+            );
         }
 
         [Fact]
@@ -508,15 +706,20 @@ C:\Test Path (123)\hellovb.vb(7) : error BC30451: 'asdf' is not declared. It may
         public void UnexpectedExceptionLogsMessage()
         {
             var engine = new MockEngine();
-            var vbc = new Vbc()
-            {
-                BuildEngine = engine,
-            };
+            var vbc = new Vbc() { BuildEngine = engine };
 
-            vbc.ExecuteTool(@"q:\path\vbc.exe", "", "", new TestableCompilerServerLogger()
-            {
-                LogFunc = delegate { throw new Exception(""); }
-            });
+            vbc.ExecuteTool(
+                @"q:\path\vbc.exe",
+                "",
+                "",
+                new TestableCompilerServerLogger()
+                {
+                    LogFunc = delegate
+                    {
+                        throw new Exception("");
+                    },
+                }
+            );
             Assert.False(string.IsNullOrEmpty(engine.Log));
         }
 
@@ -538,7 +741,13 @@ C:\Test Path (123)\hellovb.vb(7) : error BC30451: 'asdf' is not declared. It may
                 Sources = MSBuildUtil.CreateTaskItems("test.vb"),
             };
 
-            TaskTestUtil.AssertCommandLine(vbc, engine, "/optionstrict:custom", "/out:test.exe", "test.vb");
+            TaskTestUtil.AssertCommandLine(
+                vbc,
+                engine,
+                "/optionstrict:custom",
+                "/out:test.exe",
+                "test.vb"
+            );
         }
 
         [Fact]
@@ -549,10 +758,18 @@ C:\Test Path (123)\hellovb.vb(7) : error BC30451: 'asdf' is not declared. It may
             {
                 BuildEngine = engine,
                 Sources = MSBuildUtil.CreateTaskItems("test.vb", "blah.vb"),
-                TargetType = "library"
+                TargetType = "library",
             };
 
-            TaskTestUtil.AssertCommandLine(vbc, engine, "/optionstrict:custom", "/out:test.dll", "/target:library", "test.vb", "blah.vb");
+            TaskTestUtil.AssertCommandLine(
+                vbc,
+                engine,
+                "/optionstrict:custom",
+                "/out:test.dll",
+                "/target:library",
+                "test.vb",
+                "blah.vb"
+            );
         }
     }
 }

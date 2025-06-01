@@ -7,13 +7,10 @@ public class OverzealousInitializationSqlServerTest
     : OverzealousInitializationTestBase<OverzealousInitializationSqlServerTest.OverzealousInitializationSqlServerFixture>
 {
     public OverzealousInitializationSqlServerTest(OverzealousInitializationSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class OverzealousInitializationSqlServerFixture : OverzealousInitializationFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

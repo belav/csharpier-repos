@@ -9,7 +9,8 @@ using Xunit;
 
 namespace System.Formats.Tar.Tests
 {
-    public class TarReader_File_GlobalExtendedAttributes_Async_Tests : TarReader_File_Tests_Async_Base
+    public class TarReader_File_GlobalExtendedAttributes_Async_Tests
+        : TarReader_File_Tests_Async_Base
     {
         [Fact]
         public Task Read_Archive_File_Async() =>
@@ -21,7 +22,10 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public Task Read_Archive_File_SymbolicLink_Async() =>
-            Read_Archive_File_SymbolicLink_Async_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_File_SymbolicLink_Async_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public Task Read_Archive_Folder_File_Async() =>
@@ -33,11 +37,17 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public Task Read_Archive_Folder_Subfolder_File_Async() =>
-            Read_Archive_Folder_Subfolder_File_Async_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_Folder_Subfolder_File_Async_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public Task Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async() =>
-            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public Task Read_Archive_Many_Small_Files_Async() =>
@@ -45,7 +55,10 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public Task Read_Archive_LongPath_Splitable_Under255_Async() =>
-            Read_Archive_LongPath_Splitable_Under255_Async_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_LongPath_Splitable_Under255_Async_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public Task Read_Archive_SpecialFiles_Async() =>
@@ -53,11 +66,17 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public Task Read_Archive_File_LongSymbolicLink_Async() =>
-            Read_Archive_File_LongSymbolicLink_Async_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_File_LongSymbolicLink_Async_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public Task Read_Archive_LongFileName_Over100_Under255_Async() =>
-            Read_Archive_LongFileName_Over100_Under255_Async_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_LongFileName_Over100_Under255_Async_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public Task Read_Archive_LongPath_Over255_Async() =>
@@ -72,7 +91,10 @@ namespace System.Formats.Tar.Tests
                 {
                     await using (TarWriter writer = new TarWriter(archiveStream, leaveOpen: true))
                     {
-                        PaxGlobalExtendedAttributesTarEntry gea = new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>());
+                        PaxGlobalExtendedAttributesTarEntry gea =
+                            new PaxGlobalExtendedAttributesTarEntry(
+                                new Dictionary<string, string>()
+                            );
                         await writer.WriteEntryAsync(gea);
                     }
 
@@ -81,7 +103,9 @@ namespace System.Formats.Tar.Tests
                     await using (TarReader reader = new TarReader(archiveStream, leaveOpen: false))
                     {
                         TarEntry entry = await reader.GetNextEntryAsync();
-                        await Assert.ThrowsAsync<InvalidOperationException>(() => entry.ExtractToFileAsync(Path.Join(root.Path, "file"), overwrite: true));
+                        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                            entry.ExtractToFileAsync(Path.Join(root.Path, "file"), overwrite: true)
+                        );
                     }
                 }
             }

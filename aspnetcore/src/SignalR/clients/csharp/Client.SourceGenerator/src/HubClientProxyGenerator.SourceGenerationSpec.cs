@@ -40,7 +40,7 @@ internal partial class HubClientProxyGenerator
     public enum SupportClassification
     {
         Supported,
-        UnsupportedReturnType
+        UnsupportedReturnType,
     }
 
     public sealed class ArgumentSpec

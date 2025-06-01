@@ -30,7 +30,7 @@ public class TestSet
         int nFailures = 0;
 
         CountResults(new ThrowInFinallyNestedInTryTest().Run(), ref nSuccesses, ref nFailures); // FAIL: needs skip to parent code <TODO> investigate </TODO>
-        
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -44,35 +44,35 @@ public class TestSet
     }
 }
 
-public class ThrowInFinallyNestedInTryTest 
+public class ThrowInFinallyNestedInTryTest
 {
     Trace _trace;
-    
-    void MiddleMethod() 
+
+    void MiddleMethod()
     {
         _trace.Write("2");
-        try 
+        try
         {
             _trace.Write("3");
-            try 
+            try
             {
                 _trace.Write("4");
-            } 
-            finally 
+            }
+            finally
             {
                 _trace.Write("5");
-                try 
+                try
                 {
                     _trace.Write("6");
                     throw new System.ArgumentException();
-                } 
-                finally 
+                }
+                finally
                 {
                     _trace.Write("7");
                 }
             }
-        } 
-        finally 
+        }
+        finally
         {
             _trace.Write("8");
         }
@@ -81,22 +81,20 @@ public class ThrowInFinallyNestedInTryTest
     public int Run()
     {
         _trace = new Trace("ThrowInFinallyNestedInTryTest", "0123456789a");
-        
+
         _trace.Write("0");
-        try 
+        try
         {
             _trace.Write("1");
             MiddleMethod();
-        } 
-        catch(Exception e)
+        }
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("9");
         }
         _trace.Write("a");
-        
+
         return _trace.Match();
     }
 }
-
-

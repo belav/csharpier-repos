@@ -14,7 +14,10 @@ namespace System.Data.Metadata.Edm
 
     internal abstract class MetadataArtifactAssemblyResolver
     {
-        internal abstract bool TryResolveAssemblyReference(AssemblyName refernceName, out Assembly assembly);
+        internal abstract bool TryResolveAssemblyReference(
+            AssemblyName refernceName,
+            out Assembly assembly
+        );
         internal abstract IEnumerable<Assembly> GetWildcardAssemblies();
     }
 }

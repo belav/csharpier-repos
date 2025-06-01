@@ -14,13 +14,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 public sealed class TelemetryReporterTests : AbstractLanguageServerHostTests
 {
     public TelemetryReporterTests(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
     private async Task<ITelemetryReporter> CreateReporterAsync()
     {
-        var exportProvider = await LanguageServerTestComposition.CreateExportProviderAsync(TestOutputLogger.Factory, includeDevKitComponents: true);
+        var exportProvider = await LanguageServerTestComposition.CreateExportProviderAsync(
+            TestOutputLogger.Factory,
+            includeDevKitComponents: true
+        );
 
         var reporter = exportProvider.GetExport<ITelemetryReporter>().Value;
         Assert.NotNull(reporter);
@@ -37,7 +38,14 @@ public sealed class TelemetryReporterTests : AbstractLanguageServerHostTests
     public async Task TestFault()
     {
         var service = await CreateReporterAsync();
-        service.ReportFault(GetEventName(nameof(TestFault)), "test description", logLevel: 2, forceDump: false, processId: 0, new Exception());
+        service.ReportFault(
+            GetEventName(nameof(TestFault)),
+            "test description",
+            logLevel: 2,
+            forceDump: false,
+            processId: 0,
+            new Exception()
+        );
     }
 
     [Fact]

@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Security
 {
-    using System.Xml;
-    using System.ServiceModel.Channels;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
 
     sealed class DecryptedHeader : ReadableMessageHeader
     {
@@ -24,9 +24,14 @@ namespace System.ServiceModel.Security
         readonly XmlAttributeHolder[] headerAttributes;
         readonly XmlDictionaryReaderQuotas quotas;
 
-        public DecryptedHeader(byte[] decryptedBuffer,
-            XmlAttributeHolder[] envelopeAttributes, XmlAttributeHolder[] headerAttributes,
-            MessageVersion version, SignatureTargetIdManager idManager, XmlDictionaryReaderQuotas quotas)
+        public DecryptedHeader(
+            byte[] decryptedBuffer,
+            XmlAttributeHolder[] envelopeAttributes,
+            XmlAttributeHolder[] headerAttributes,
+            MessageVersion version,
+            SignatureTargetIdManager idManager,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             if (quotas == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("quotas");
@@ -42,7 +47,14 @@ namespace System.ServiceModel.Security
 
             this.name = reader.LocalName;
             this.namespaceUri = reader.NamespaceURI;
-            MessageHeader.GetHeaderAttributes(reader, version, out this.actor, out this.mustUnderstand, out this.relay, out this.isRefParam);
+            MessageHeader.GetHeaderAttributes(
+                reader,
+                version,
+                out this.actor,
+                out this.mustUnderstand,
+                out this.relay,
+                out this.isRefParam
+            );
             this.id = idManager.ExtractId(reader);
 
             this.cachedReader = reader;
@@ -50,58 +62,37 @@ namespace System.ServiceModel.Security
 
         public override string Actor
         {
-            get
-            {
-                return this.actor;
-            }
+            get { return this.actor; }
         }
 
         public string Id
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
         }
 
         public override bool IsReferenceParameter
         {
-            get
-            {
-                return this.isRefParam;
-            }
+            get { return this.isRefParam; }
         }
-        
+
         public override bool MustUnderstand
         {
-            get
-            {
-                return this.mustUnderstand;
-            }
+            get { return this.mustUnderstand; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         public override string Namespace
         {
-            get
-            {
-                return this.namespaceUri;
-            }
+            get { return this.namespaceUri; }
         }
 
         public override bool Relay
         {
-            get
-            {
-                return this.relay;
-            }
+            get { return this.relay; }
         }
 
         XmlDictionaryReader CreateReader()
@@ -109,7 +100,10 @@ namespace System.ServiceModel.Security
             return ContextImportHelper.CreateSplicedReader(
                 this.decryptedBuffer,
                 this.envelopeAttributes,
-                this.headerAttributes, null, this.quotas);
+                this.headerAttributes,
+                null,
+                this.quotas
+            );
         }
 
         public override XmlDictionaryReader GetHeaderReader()
@@ -127,7 +121,7 @@ namespace System.ServiceModel.Security
 
         public override bool IsMessageVersionSupported(MessageVersion messageVersion)
         {
-            return this.version.Equals( messageVersion );
+            return this.version.Equals(messageVersion);
         }
     }
 }

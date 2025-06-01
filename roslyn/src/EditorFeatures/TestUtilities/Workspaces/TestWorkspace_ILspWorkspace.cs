@@ -14,10 +14,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     {
         bool ILspWorkspace.SupportsMutation => _supportsLspMutation;
 
-        ValueTask ILspWorkspace.UpdateTextIfPresentAsync(DocumentId documentId, SourceText sourceText, CancellationToken cancellationToken)
+        ValueTask ILspWorkspace.UpdateTextIfPresentAsync(
+            DocumentId documentId,
+            SourceText sourceText,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(_supportsLspMutation);
-            OnDocumentTextChanged(documentId, sourceText, PreservationMode.PreserveIdentity, requireDocumentPresent: false);
+            OnDocumentTextChanged(
+                documentId,
+                sourceText,
+                PreservationMode.PreserveIdentity,
+                requireDocumentPresent: false
+            );
             return ValueTaskFactory.CompletedTask;
         }
     }

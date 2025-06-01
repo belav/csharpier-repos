@@ -8,7 +8,11 @@ namespace System.Xml.XmlSchemaTests
     public class TestData
     {
         internal static string _Root = Path.Combine("XmlSchema", "TestFiles", "TestData");
-        internal static string StandardPath = Path.Combine("XmlSchema", "TestFiles", "StandardTests");
+        internal static string StandardPath = Path.Combine(
+            "XmlSchema",
+            "TestFiles",
+            "StandardTests"
+        );
         internal static string _FileXSD1 = Path.Combine(_Root, "schema1.xsd");
         internal static string _FileXSD1bis = Path.Combine(_Root, "schema1bis.xsd");
         internal static string _NmspXSD1 = Path.Combine(_Root, "schema1.xsd");
@@ -18,7 +22,7 @@ namespace System.Xml.XmlSchemaTests
 
         internal static string _XsdAuthor = Path.Combine(_Root, "xsdauthor.xsd");
         internal static string _XsdAuthorNoNs = Path.Combine(_Root, "xsdauthor_nons.xsd"); // No targetNS
-        internal static string _XsdAuthorDup = Path.Combine(_Root, "xsdauthor_dup.xsd");  // Colliding xsd
+        internal static string _XsdAuthorDup = Path.Combine(_Root, "xsdauthor_dup.xsd"); // Colliding xsd
         internal static string _XsdPrice = Path.Combine(_Root, "xsdprice.xsd");
         internal static string _XsdBookExternal = Path.Combine(_Root, "xsdbookexternal.xsd");
         internal static string _NmspBook = Path.Combine(_Root, "xsdbook");

@@ -21,6 +21,6 @@ namespace System.ComponentModel
         /// <summary>
         /// The code generator will produce code for the contents of the object, rather than for the object itself.
         /// </summary>
-        Content
+        Content,
     }
 }

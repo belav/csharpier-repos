@@ -14,7 +14,7 @@ public class BringUpTest_ArrayExc
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static int ArrayExc()
     {
-        int[] a = {1, 2, 3, 4};
+        int[] a = { 1, 2, 3, 4 };
         return a[5];
     }
 

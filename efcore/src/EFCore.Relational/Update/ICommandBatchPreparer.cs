@@ -33,7 +33,10 @@ public interface ICommandBatchPreparer
     /// <param name="entries">The entries that represent the entities to be modified.</param>
     /// <param name="updateAdapter">The model data.</param>
     /// <returns>The list of batches to execute.</returns>
-    IEnumerable<ModificationCommandBatch> BatchCommands(IList<IUpdateEntry> entries, IUpdateAdapter updateAdapter);
+    IEnumerable<ModificationCommandBatch> BatchCommands(
+        IList<IUpdateEntry> entries,
+        IUpdateAdapter updateAdapter
+    );
 
     /// <summary>
     ///     Given a set of modification commands, returns one more ready-to-execute batches for those commands, taking into account e.g.
@@ -42,5 +45,8 @@ public interface ICommandBatchPreparer
     /// <param name="commandSet">The set of commands to be organized in batches.</param>
     /// <param name="moreCommandSets">Whether more command sets are expected after this one within the same save operation.</param>
     /// <returns>The list of batches to execute.</returns>
-    IEnumerable<ModificationCommandBatch> CreateCommandBatches(IEnumerable<IReadOnlyModificationCommand> commandSet, bool moreCommandSets);
+    IEnumerable<ModificationCommandBatch> CreateCommandBatches(
+        IEnumerable<IReadOnlyModificationCommand> commandSet,
+        bool moreCommandSets
+    );
 }

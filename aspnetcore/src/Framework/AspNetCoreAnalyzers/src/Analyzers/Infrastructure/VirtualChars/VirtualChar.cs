@@ -22,7 +22,10 @@ namespace Microsoft.AspNetCore.Analyzers.Infrastructure.VirtualChars;
 /// and the same as "\\\u007a".  However, as these all have wildly different presentations for the user, there needs
 /// to be a way to map back the characters it sees ( '\' and 'z' ) back to the  ranges of characters the user wrote.
 /// </remarks>
-internal readonly struct VirtualChar : IEquatable<VirtualChar>, IComparable<VirtualChar>, IComparable<char>
+internal readonly struct VirtualChar
+    : IEquatable<VirtualChar>,
+        IComparable<VirtualChar>,
+        IComparable<char>
 {
     /// <summary>
     /// The value of this <see cref="VirtualChar"/> as a <see cref="Rune"/> if such a representation is possible.
@@ -49,8 +52,8 @@ internal readonly struct VirtualChar : IEquatable<VirtualChar>, IComparable<Virt
     /// Creates a new <see cref="VirtualChar"/> from the provided <paramref name="rune"/>.  This operation cannot
     /// fail.
     /// </summary>
-    public static VirtualChar Create(Rune rune, TextSpan span)
-        => new(rune, surrogateChar: default, span);
+    public static VirtualChar Create(Rune rune, TextSpan span) =>
+        new(rune, surrogateChar: default, span);
 
     /// <summary>
     /// Creates a new <see cref="VirtualChar"/> from an unpaired high or low surrogate character.  This will throw
@@ -71,7 +74,9 @@ internal readonly struct VirtualChar : IEquatable<VirtualChar>, IComparable<Virt
     {
         if (!(surrogateChar == 0 || rune == Rune.ReplacementChar))
         {
-            throw new InvalidOperationException("If surrogateChar is provided then rune must be Rune.ReplacementChar");
+            throw new InvalidOperationException(
+                "If surrogateChar is provided then rune must be Rune.ReplacementChar"
+            );
         }
 
         if (span.IsEmpty)
@@ -91,36 +96,28 @@ internal readonly struct VirtualChar : IEquatable<VirtualChar>, IComparable<Virt
     /// </summary>
     public int Value => SurrogateChar != 0 ? SurrogateChar : Rune.Value;
 
-    public bool IsDigit
-        => SurrogateChar != 0 ? char.IsDigit(SurrogateChar) : Rune.IsDigit(Rune);
+    public bool IsDigit => SurrogateChar != 0 ? char.IsDigit(SurrogateChar) : Rune.IsDigit(Rune);
 
-    public bool IsLetterOrDigit
-        => SurrogateChar != 0 ? char.IsLetterOrDigit(SurrogateChar) : Rune.IsLetterOrDigit(Rune);
+    public bool IsLetterOrDigit =>
+        SurrogateChar != 0 ? char.IsLetterOrDigit(SurrogateChar) : Rune.IsLetterOrDigit(Rune);
 
-    public bool IsWhiteSpace
-        => SurrogateChar != 0 ? char.IsWhiteSpace(SurrogateChar) : Rune.IsWhiteSpace(Rune);
+    public bool IsWhiteSpace =>
+        SurrogateChar != 0 ? char.IsWhiteSpace(SurrogateChar) : Rune.IsWhiteSpace(Rune);
 
     #region equality
 
-    public static bool operator ==(VirtualChar char1, VirtualChar char2)
-        => char1.Equals(char2);
+    public static bool operator ==(VirtualChar char1, VirtualChar char2) => char1.Equals(char2);
 
-    public static bool operator !=(VirtualChar char1, VirtualChar char2)
-        => !(char1 == char2);
+    public static bool operator !=(VirtualChar char1, VirtualChar char2) => !(char1 == char2);
 
-    public static bool operator ==(VirtualChar ch1, char ch2)
-        => ch1.Value == ch2;
+    public static bool operator ==(VirtualChar ch1, char ch2) => ch1.Value == ch2;
 
-    public static bool operator !=(VirtualChar ch1, char ch2)
-        => !(ch1 == ch2);
+    public static bool operator !=(VirtualChar ch1, char ch2) => !(ch1 == ch2);
 
-    public override bool Equals(object? obj)
-        => obj is VirtualChar vc && Equals(vc);
+    public override bool Equals(object? obj) => obj is VirtualChar vc && Equals(vc);
 
-    public bool Equals(VirtualChar other)
-        => Rune == other.Rune &&
-           SurrogateChar == other.SurrogateChar &&
-           Span == other.Span;
+    public bool Equals(VirtualChar other) =>
+        Rune == other.Rune && SurrogateChar == other.SurrogateChar && Span == other.Span;
 
     public override int GetHashCode()
     {
@@ -136,8 +133,8 @@ internal readonly struct VirtualChar : IEquatable<VirtualChar>, IComparable<Virt
     #region string operations
 
     /// <inheritdoc/>
-    public override string ToString()
-        => SurrogateChar != 0 ? SurrogateChar.ToString() : Rune.ToString();
+    public override string ToString() =>
+        SurrogateChar != 0 ? SurrogateChar.ToString() : Rune.ToString();
 
     public void AppendTo(StringBuilder builder)
     {
@@ -161,35 +158,25 @@ internal readonly struct VirtualChar : IEquatable<VirtualChar>, IComparable<Virt
 
     #region comparable
 
-    public int CompareTo(VirtualChar other)
-        => Value - other.Value;
+    public int CompareTo(VirtualChar other) => Value - other.Value;
 
-    public static bool operator <(VirtualChar ch1, VirtualChar ch2)
-        => ch1.Value < ch2.Value;
+    public static bool operator <(VirtualChar ch1, VirtualChar ch2) => ch1.Value < ch2.Value;
 
-    public static bool operator <=(VirtualChar ch1, VirtualChar ch2)
-        => ch1.Value <= ch2.Value;
+    public static bool operator <=(VirtualChar ch1, VirtualChar ch2) => ch1.Value <= ch2.Value;
 
-    public static bool operator >(VirtualChar ch1, VirtualChar ch2)
-        => ch1.Value > ch2.Value;
+    public static bool operator >(VirtualChar ch1, VirtualChar ch2) => ch1.Value > ch2.Value;
 
-    public static bool operator >=(VirtualChar ch1, VirtualChar ch2)
-        => ch1.Value >= ch2.Value;
+    public static bool operator >=(VirtualChar ch1, VirtualChar ch2) => ch1.Value >= ch2.Value;
 
-    public int CompareTo(char other)
-        => Value - other;
+    public int CompareTo(char other) => Value - other;
 
-    public static bool operator <(VirtualChar ch1, char ch2)
-        => ch1.Value < ch2;
+    public static bool operator <(VirtualChar ch1, char ch2) => ch1.Value < ch2;
 
-    public static bool operator <=(VirtualChar ch1, char ch2)
-        => ch1.Value <= ch2;
+    public static bool operator <=(VirtualChar ch1, char ch2) => ch1.Value <= ch2;
 
-    public static bool operator >(VirtualChar ch1, char ch2)
-        => ch1.Value > ch2;
+    public static bool operator >(VirtualChar ch1, char ch2) => ch1.Value > ch2;
 
-    public static bool operator >=(VirtualChar ch1, char ch2)
-        => ch1.Value >= ch2;
+    public static bool operator >=(VirtualChar ch1, char ch2) => ch1.Value >= ch2;
 
     #endregion
 }

@@ -44,6 +44,7 @@ namespace System.Threading.Channels
     {
         /// <summary>The maximum number of items the bounded channel may store.</summary>
         private int _capacity;
+
         /// <summary>The behavior incurred by write operations when the channel is full.</summary>
         private BoundedChannelFullMode _mode = BoundedChannelFullMode.Wait;
 
@@ -95,7 +96,5 @@ namespace System.Threading.Channels
     }
 
     /// <summary>Provides options that control the behavior of <see cref="UnboundedChannel{T}"/> instances.</summary>
-    public sealed class UnboundedChannelOptions : ChannelOptions
-    {
-    }
+    public sealed class UnboundedChannelOptions : ChannelOptions { }
 }

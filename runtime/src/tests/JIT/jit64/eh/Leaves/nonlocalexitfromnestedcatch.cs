@@ -27,6 +27,7 @@ public class test
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

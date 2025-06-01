@@ -4,20 +4,23 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
+    using System.Security.Authentication;
     using System.Security.Authentication.ExtendedProtection.Configuration;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
-    using System.Security.Authentication;
 
     public sealed partial class TcpTransportSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = TcpTransportSecurity.DefaultClientCredentialType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ClientCredentialType,
+            DefaultValue = TcpTransportSecurity.DefaultClientCredentialType
+        )]
         [ServiceModelEnumValidator(typeof(TcpClientCredentialTypeHelper))]
         public TcpClientCredentialType ClientCredentialType
         {
@@ -25,7 +28,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ClientCredentialType] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ProtectionLevel, DefaultValue = TcpTransportSecurity.DefaultProtectionLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ProtectionLevel,
+            DefaultValue = TcpTransportSecurity.DefaultProtectionLevel
+        )]
         [ServiceModelEnumValidator(typeof(ProtectionLevelHelper))]
         public ProtectionLevel ProtectionLevel
         {
@@ -36,11 +42,18 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ExtendedProtectionPolicy)]
         public ExtendedProtectionPolicyElement ExtendedProtectionPolicy
         {
-            get { return (ExtendedProtectionPolicyElement)base[ConfigurationStrings.ExtendedProtectionPolicy]; }
+            get
+            {
+                return (ExtendedProtectionPolicyElement)
+                    base[ConfigurationStrings.ExtendedProtectionPolicy];
+            }
             private set { base[ConfigurationStrings.ExtendedProtectionPolicy] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SslProtocols, DefaultValue = TransportDefaults.OldDefaultSslProtocols)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SslProtocols,
+            DefaultValue = TransportDefaults.OldDefaultSslProtocols
+        )]
         [ServiceModelEnumValidator(typeof(SslProtocolsHelper))]
         public SslProtocols SslProtocols
         {
@@ -56,7 +69,9 @@ namespace System.ServiceModel.Configuration
             }
             security.ClientCredentialType = this.ClientCredentialType;
             security.ProtectionLevel = this.ProtectionLevel;
-            security.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(this.ExtendedProtectionPolicy);
+            security.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(
+                this.ExtendedProtectionPolicy
+            );
             security.SslProtocols = this.SslProtocols;
         }
 
@@ -66,10 +81,22 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ClientCredentialType, security.ClientCredentialType);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ProtectionLevel, security.ProtectionLevel);
-            ChannelBindingUtility.InitializeFrom(security.ExtendedProtectionPolicy, this.ExtendedProtectionPolicy);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SslProtocols, security.SslProtocols);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ClientCredentialType,
+                security.ClientCredentialType
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ProtectionLevel,
+                security.ProtectionLevel
+            );
+            ChannelBindingUtility.InitializeFrom(
+                security.ExtendedProtectionPolicy,
+                this.ExtendedProtectionPolicy
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SslProtocols,
+                security.SslProtocols
+            );
         }
     }
 }

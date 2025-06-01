@@ -16,5 +16,5 @@ public enum PersistenceMode
     /// <summary>
     /// The state is persisted for a Blazor WebAssembly application.
     /// </summary>
-    WebAssembly
+    WebAssembly,
 }

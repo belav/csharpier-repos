@@ -51,95 +51,181 @@ public class EntityFrameworkServicesBuilder
     ///     It should not be used from application code.
     /// </remarks>
     [EntityFrameworkInternal]
-    public static readonly IDictionary<Type, ServiceCharacteristics> CoreServices
-        = new Dictionary<Type, ServiceCharacteristics>
+    public static readonly IDictionary<Type, ServiceCharacteristics> CoreServices = new Dictionary<
+        Type,
+        ServiceCharacteristics
+    >
+    {
+        { typeof(LoggingDefinitions), new ServiceCharacteristics(ServiceLifetime.Singleton) },
         {
-            { typeof(LoggingDefinitions), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IDatabaseProvider), new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true) },
-            { typeof(IDbSetFinder), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IDbSetInitializer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IDbSetSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IEntityFinderSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IEntityMaterializerSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(ITypeMappingSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IModelCustomizer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IModelCacheKeyFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IModelSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IModelRuntimeInitializer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IInternalEntityEntrySubscriber), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IEntityEntryGraphIterator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IValueGeneratorCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(ISingletonOptionsInitializer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(ILoggingOptions), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(ICoreSingletonOptions), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IModelValidator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(ICompiledQueryCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IValueConverterSelector), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IConstructorBindingFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IRegisteredServices), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IPropertyParameterBindingFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IParameterBindingFactories), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IMemberClassifier), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IMemoryCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IEvaluatableExpressionFilter), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(INavigationExpansionExtensibilityHelper), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IExceptionDetector), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IJsonValueReaderWriterSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IProviderConventionSetBuilder), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IConventionSetBuilder), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDiagnosticsLogger<>), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IInterceptors), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(ILoggerFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IEntityGraphAttacher), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IKeyPropagator), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(INavigationFixer), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(ILocalViewListener), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IStateManager), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IConcurrencyDetector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IInternalEntityEntryNotifier), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IValueGenerationManager), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IChangeTrackerFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IChangeDetector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDbContextServices), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IValueGeneratorSelector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IExecutionStrategyFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IExecutionStrategy), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IAsyncQueryProvider), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IQueryCompiler), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(ICompiledQueryCacheKeyGenerator), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IModel), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDesignTimeModel), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IUpdateAdapterFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(ICurrentDbContext), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDbContextDependencies), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDatabaseFacadeDependencies), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDbContextOptions), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDatabase), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDatabaseCreator), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDbContextTransactionManager), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IQueryContextFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IQueryCompilationContextFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IQueryableMethodTranslatingExpressionVisitorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IQueryTranslationPreprocessorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IQueryTranslationPostprocessorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IShapedQueryCompilingExpressionVisitorFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IDbContextLogger), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IAdHocMapper), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(ILazyLoader), new ServiceCharacteristics(ServiceLifetime.Transient) },
-            { typeof(ILazyLoaderFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
-            { typeof(IParameterBindingFactory), new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true) },
-            { typeof(ITypeMappingSourcePlugin), new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true) },
-            {
-                typeof(IEvaluatableExpressionFilterPlugin),
-                new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
-            },
-            { typeof(ISingletonOptions), new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true) },
-            { typeof(IConventionSetPlugin), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) },
-            { typeof(ISingletonInterceptor), new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true) },
-            { typeof(IResettableService), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) },
-            { typeof(IInterceptor), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) },
-            { typeof(IInterceptorAggregator), new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true) }
-        };
+            typeof(IDatabaseProvider),
+            new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
+        },
+        { typeof(IDbSetFinder), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IDbSetInitializer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IDbSetSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IEntityFinderSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(IEntityMaterializerSource),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        { typeof(ITypeMappingSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IModelCustomizer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IModelCacheKeyFactory), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IModelSource), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IModelRuntimeInitializer), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(IInternalEntityEntrySubscriber),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        {
+            typeof(IEntityEntryGraphIterator),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        { typeof(IValueGeneratorCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(ISingletonOptionsInitializer),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        { typeof(ILoggingOptions), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(ICoreSingletonOptions), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IModelValidator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(ICompiledQueryCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IValueConverterSelector), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(IConstructorBindingFactory),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        { typeof(IRegisteredServices), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(IPropertyParameterBindingFactory),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        {
+            typeof(IParameterBindingFactories),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        { typeof(IMemberClassifier), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        { typeof(IMemoryCache), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(IEvaluatableExpressionFilter),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        {
+            typeof(INavigationExpansionExtensibilityHelper),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        { typeof(IExceptionDetector), new ServiceCharacteristics(ServiceLifetime.Singleton) },
+        {
+            typeof(IJsonValueReaderWriterSource),
+            new ServiceCharacteristics(ServiceLifetime.Singleton)
+        },
+        {
+            typeof(IProviderConventionSetBuilder),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        { typeof(IConventionSetBuilder), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDiagnosticsLogger<>), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IInterceptors), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(ILoggerFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IEntityGraphAttacher), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IKeyPropagator), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(INavigationFixer), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(ILocalViewListener), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IStateManager), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IConcurrencyDetector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        {
+            typeof(IInternalEntityEntryNotifier),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        { typeof(IValueGenerationManager), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IChangeTrackerFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IChangeDetector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDbContextServices), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IValueGeneratorSelector), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IExecutionStrategyFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IExecutionStrategy), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IAsyncQueryProvider), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IQueryCompiler), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        {
+            typeof(ICompiledQueryCacheKeyGenerator),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        { typeof(IModel), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDesignTimeModel), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IUpdateAdapterFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(ICurrentDbContext), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDbContextDependencies), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDatabaseFacadeDependencies), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDbContextOptions), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDatabase), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IDatabaseCreator), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        {
+            typeof(IDbContextTransactionManager),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        { typeof(IQueryContextFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        {
+            typeof(IQueryCompilationContextFactory),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        {
+            typeof(IQueryableMethodTranslatingExpressionVisitorFactory),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        {
+            typeof(IQueryTranslationPreprocessorFactory),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        {
+            typeof(IQueryTranslationPostprocessorFactory),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        {
+            typeof(IShapedQueryCompilingExpressionVisitorFactory),
+            new ServiceCharacteristics(ServiceLifetime.Scoped)
+        },
+        { typeof(IDbContextLogger), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(IAdHocMapper), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        { typeof(ILazyLoader), new ServiceCharacteristics(ServiceLifetime.Transient) },
+        { typeof(ILazyLoaderFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
+        {
+            typeof(IParameterBindingFactory),
+            new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
+        },
+        {
+            typeof(ITypeMappingSourcePlugin),
+            new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
+        },
+        {
+            typeof(IEvaluatableExpressionFilterPlugin),
+            new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
+        },
+        {
+            typeof(ISingletonOptions),
+            new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
+        },
+        {
+            typeof(IConventionSetPlugin),
+            new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true)
+        },
+        {
+            typeof(ISingletonInterceptor),
+            new ServiceCharacteristics(ServiceLifetime.Singleton, multipleRegistrations: true)
+        },
+        {
+            typeof(IResettableService),
+            new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true)
+        },
+        {
+            typeof(IInterceptor),
+            new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true)
+        },
+        {
+            typeof(IInterceptorAggregator),
+            new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true)
+        },
+    };
 
     /// <summary>
     ///     Used by database providers to create a new <see cref="EntityFrameworkServicesBuilder" /> for
@@ -178,7 +264,8 @@ public class EntityFrameworkServicesBuilder
     protected virtual ServiceCharacteristics GetServiceCharacteristics(Type serviceType)
     {
         var characteristics = TryGetServiceCharacteristics(serviceType);
-        return characteristics ?? throw new InvalidOperationException(CoreStrings.NotAnEFService(serviceType.Name));
+        return characteristics
+            ?? throw new InvalidOperationException(CoreStrings.NotAnEFService(serviceType.Name));
     }
 
     /// <summary>
@@ -190,10 +277,8 @@ public class EntityFrameworkServicesBuilder
     /// </remarks>
     /// <param name="serviceType">The type that defines the service API.</param>
     /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if it's not an EF service.</returns>
-    protected virtual ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType)
-        => !CoreServices.TryGetValue(serviceType, out var characteristics)
-            ? null
-            : characteristics;
+    protected virtual ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType) =>
+        !CoreServices.TryGetValue(serviceType, out var characteristics) ? null : characteristics;
 
     /// <summary>
     ///     Database providers should call this method for access to the underlying
@@ -207,13 +292,17 @@ public class EntityFrameworkServicesBuilder
     /// </remarks>
     /// <param name="serviceMap">The underlying map to which provider services should be added.</param>
     /// <returns>This builder, such that further calls can be chained.</returns>
-    public virtual EntityFrameworkServicesBuilder TryAddProviderSpecificServices(Action<ServiceCollectionMap> serviceMap)
+    public virtual EntityFrameworkServicesBuilder TryAddProviderSpecificServices(
+        Action<ServiceCollectionMap> serviceMap
+    )
     {
         ServiceCollectionMap.Validate = serviceType =>
         {
             if (TryGetServiceCharacteristics(serviceType) != null)
             {
-                throw new InvalidOperationException(CoreStrings.NotAProviderService(serviceType.Name));
+                throw new InvalidOperationException(
+                    CoreStrings.NotAProviderService(serviceType.Name)
+                );
             }
         };
 
@@ -281,14 +370,20 @@ public class EntityFrameworkServicesBuilder
         TryAdd<ILoggingOptions, LoggingOptions>();
         TryAdd<ICoreSingletonOptions, CoreSingletonOptions>();
         TryAdd<ISingletonOptions, ILoggingOptions>(p => p.GetRequiredService<ILoggingOptions>());
-        TryAdd<ISingletonOptions, ICoreSingletonOptions>(p => p.GetRequiredService<ICoreSingletonOptions>());
+        TryAdd<ISingletonOptions, ICoreSingletonOptions>(p =>
+            p.GetRequiredService<ICoreSingletonOptions>()
+        );
         TryAdd(p => GetContextServices(p).Model);
         TryAdd<IDesignTimeModel>(p => new DesignTimeModel(GetContextServices(p)));
         TryAdd(p => GetContextServices(p).CurrentContext);
         TryAdd<IDbContextOptions>(p => GetContextServices(p).ContextOptions);
-        TryAdd<IResettableService, ILazyLoaderFactory>(p => p.GetRequiredService<ILazyLoaderFactory>());
+        TryAdd<IResettableService, ILazyLoaderFactory>(p =>
+            p.GetRequiredService<ILazyLoaderFactory>()
+        );
         TryAdd<IResettableService, IStateManager>(p => p.GetRequiredService<IStateManager>());
-        TryAdd<IResettableService, IDbContextTransactionManager>(p => p.GetRequiredService<IDbContextTransactionManager>());
+        TryAdd<IResettableService, IDbContextTransactionManager>(p =>
+            p.GetRequiredService<IDbContextTransactionManager>()
+        );
         TryAdd<IEvaluatableExpressionFilter, EvaluatableExpressionFilter>();
         TryAdd<IValueConverterSelector, ValueConverterSelector>();
         TryAdd<IConstructorBindingFactory, ConstructorBindingFactory>();
@@ -310,15 +405,19 @@ public class EntityFrameworkServicesBuilder
         TryAdd<IAdHocMapper, AdHocMapper>();
         TryAdd<IJsonValueReaderWriterSource, JsonValueReaderWriterSource>();
 
-        TryAdd(
-            p => p.GetService<IDbContextOptions>()?.FindExtension<CoreOptionsExtension>()?.DbContextLogger
-                ?? new NullDbContextLogger());
+        TryAdd(p =>
+            p.GetService<IDbContextOptions>()
+                ?.FindExtension<CoreOptionsExtension>()
+                ?.DbContextLogger ?? new NullDbContextLogger()
+        );
 
         // This has to be lazy to avoid creating instances that are not disposed
-        ServiceCollectionMap
-            .TryAddSingleton<DiagnosticSource>(_ => new DiagnosticListener(DbLoggerCategory.Name));
+        ServiceCollectionMap.TryAddSingleton<DiagnosticSource>(_ => new DiagnosticListener(
+            DbLoggerCategory.Name
+        ));
 
-        ServiceCollectionMap.GetInfrastructure()
+        ServiceCollectionMap
+            .GetInfrastructure()
             .AddDependencySingleton<LazyLoaderParameterBindingFactoryDependencies>()
             .AddDependencySingleton<DatabaseProviderDependencies>()
             .AddDependencySingleton<ModelSourceDependencies>()
@@ -350,13 +449,16 @@ public class EntityFrameworkServicesBuilder
             .AddDependencyScoped<ModelCreationDependencies>();
 
         ServiceCollectionMap.TryAddSingleton<IRegisteredServices>(
-            new RegisteredServices(ServiceCollectionMap.ServiceCollection.Select(s => s.ServiceType)));
+            new RegisteredServices(
+                ServiceCollectionMap.ServiceCollection.Select(s => s.ServiceType)
+            )
+        );
 
         return this;
     }
 
-    private static IDbContextServices GetContextServices(IServiceProvider serviceProvider)
-        => serviceProvider.GetRequiredService<IDbContextServices>();
+    private static IDbContextServices GetContextServices(IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<IDbContextServices>();
 
     /// <summary>
     ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
@@ -371,10 +473,12 @@ public class EntityFrameworkServicesBuilder
     /// <returns>This builder, such that further calls can be chained.</returns>
     public virtual EntityFrameworkServicesBuilder TryAdd<
         TService,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation>()
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TImplementation
+    >()
         where TService : class
-        where TImplementation : class, TService
-        => TryAdd(typeof(TService), typeof(TImplementation));
+        where TImplementation : class, TService =>
+        TryAdd(typeof(TService), typeof(TImplementation));
 
     /// <summary>
     ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
@@ -389,13 +493,19 @@ public class EntityFrameworkServicesBuilder
     /// <returns>This builder, such that further calls can be chained.</returns>
     public virtual EntityFrameworkServicesBuilder TryAdd(
         Type serviceType,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type implementationType
+    )
     {
         var characteristics = GetServiceCharacteristics(serviceType);
 
         if (characteristics.MultipleRegistrations)
         {
-            ServiceCollectionMap.TryAddEnumerable(serviceType, implementationType, characteristics.Lifetime);
+            ServiceCollectionMap.TryAddEnumerable(
+                serviceType,
+                implementationType,
+                characteristics.Lifetime
+            );
         }
         else
         {
@@ -416,10 +526,10 @@ public class EntityFrameworkServicesBuilder
     /// <typeparam name="TService">The contract for the service.</typeparam>
     /// <param name="factory">The factory that will create the service instance.</param>
     /// <returns>This builder, such that further calls can be chained.</returns>
-    public virtual EntityFrameworkServicesBuilder TryAdd
-        <[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService>(Func<IServiceProvider, TService> factory)
-        where TService : class
-        => TryAdd(typeof(TService), typeof(TService), factory);
+    public virtual EntityFrameworkServicesBuilder TryAdd<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
+    >(Func<IServiceProvider, TService> factory)
+        where TService : class => TryAdd(typeof(TService), typeof(TService), factory);
 
     /// <summary>
     ///     Adds a factory for an Entity Framework service only if one has not already been registered.
@@ -433,12 +543,14 @@ public class EntityFrameworkServicesBuilder
     /// <typeparam name="TImplementation">The concrete type that implements the service.</typeparam>
     /// <param name="factory">The factory that will create the service instance.</param>
     /// <returns>This builder, such that further calls can be chained.</returns>
-    public virtual EntityFrameworkServicesBuilder TryAdd
-        <TService, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation>(
-            Func<IServiceProvider, TImplementation> factory)
+    public virtual EntityFrameworkServicesBuilder TryAdd<
+        TService,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TImplementation
+    >(Func<IServiceProvider, TImplementation> factory)
         where TService : class
-        where TImplementation : class, TService
-        => TryAdd(typeof(TService), typeof(TImplementation), factory);
+        where TImplementation : class, TService =>
+        TryAdd(typeof(TService), typeof(TImplementation), factory);
 
     /// <summary>
     ///     Adds a factory for an Entity Framework service only if one has not already been registered.
@@ -454,20 +566,28 @@ public class EntityFrameworkServicesBuilder
     /// <returns>This builder, such that further calls can be chained.</returns>
     public virtual EntityFrameworkServicesBuilder TryAdd(
         Type serviceType,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type implementationType,
-        Func<IServiceProvider, object> factory)
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type implementationType,
+        Func<IServiceProvider, object> factory
+    )
     {
         var characteristics = GetServiceCharacteristics(serviceType);
 
         if (characteristics.MultipleRegistrations)
         {
-            if (implementationType == serviceType
-                || implementationType == typeof(object))
+            if (implementationType == serviceType || implementationType == typeof(object))
             {
-                throw new InvalidOperationException(CoreStrings.ImplementationTypeRequired(serviceType.Name));
+                throw new InvalidOperationException(
+                    CoreStrings.ImplementationTypeRequired(serviceType.Name)
+                );
             }
 
-            ServiceCollectionMap.TryAddEnumerable(serviceType, implementationType, factory, characteristics.Lifetime);
+            ServiceCollectionMap.TryAddEnumerable(
+                serviceType,
+                implementationType,
+                factory,
+                characteristics.Lifetime
+            );
         }
         else
         {
@@ -489,8 +609,7 @@ public class EntityFrameworkServicesBuilder
     /// <param name="implementation">The implementation of the service.</param>
     /// <returns>This builder, such that further calls can be chained.</returns>
     public virtual EntityFrameworkServicesBuilder TryAdd<TService>(TService implementation)
-        where TService : class
-        => TryAdd(typeof(TService), implementation);
+        where TService : class => TryAdd(typeof(TService), implementation);
 
     /// <summary>
     ///     Adds an implementation of an Entity Framework service only if one has not already been registered.
@@ -503,15 +622,15 @@ public class EntityFrameworkServicesBuilder
     /// <param name="serviceType">The contract for the service.</param>
     /// <param name="implementation">The implementation of the service.</param>
     /// <returns>This builder, such that further calls can be chained.</returns>
-    public virtual EntityFrameworkServicesBuilder TryAdd(
-        Type serviceType,
-        object implementation)
+    public virtual EntityFrameworkServicesBuilder TryAdd(Type serviceType, object implementation)
     {
         var characteristics = GetServiceCharacteristics(serviceType);
 
         if (characteristics.Lifetime != ServiceLifetime.Singleton)
         {
-            throw new InvalidOperationException(CoreStrings.SingletonRequired(characteristics.Lifetime, serviceType.Name));
+            throw new InvalidOperationException(
+                CoreStrings.SingletonRequired(characteristics.Lifetime, serviceType.Name)
+            );
         }
 
         if (characteristics.MultipleRegistrations)

@@ -6,18 +6,18 @@ namespace System.Runtime.Diagnostics
 {
     using System;
     using System.Collections;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Security;
+    using System.Security.Permissions;
+    using System.ServiceModel.Internals;
     using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Security.Permissions;
-    using System.ServiceModel.Internals;
-    using System.Collections.Generic;
-    using System.Collections.Concurrent;
 
     sealed class EtwDiagnosticTrace : DiagnosticTraceBase
     {
@@ -32,27 +32,47 @@ namespace System.Runtime.Diagnostics
         const int XmlBracketsLength = 5; // "<></>".Length;
         const int XmlBracketsLengthForNullValue = 4; // "< />".Length; (Empty XML Element)
 
-        static readonly public Guid ImmutableDefaultEtwProviderId = new Guid("{c651f5f6-1c0d-492e-8ae1-b4efd7c9d503}");
-        [Fx.Tag.SecurityNote(Critical = "provider Id to create EtwProvider, which is SecurityCritical")]
+        public static readonly Guid ImmutableDefaultEtwProviderId = new Guid(
+            "{c651f5f6-1c0d-492e-8ae1-b4efd7c9d503}"
+        );
+
+        [Fx.Tag.SecurityNote(
+            Critical = "provider Id to create EtwProvider, which is SecurityCritical"
+        )]
         [SecurityCritical]
         static Guid defaultEtwProviderId = ImmutableDefaultEtwProviderId;
         static Hashtable etwProviderCache = new Hashtable();
-        static bool isVistaOrGreater = Environment.OSVersion.Version.Major >= WindowsVistaMajorNumber;
+        static bool isVistaOrGreater =
+            Environment.OSVersion.Version.Major >= WindowsVistaMajorNumber;
         static Func<string> traceAnnotation;
 
         [Fx.Tag.SecurityNote(Critical = "Stores object created by a critical c'tor")]
         [SecurityCritical]
         EtwProvider etwProvider;
         Guid etwProviderId;
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand")]
+
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        static EventDescriptor transferEventDescriptor = new EventDescriptor(499, 0, (byte)TraceChannel.Analytic, (byte)TraceEventLevel.LogAlways, (byte)TraceEventOpcode.Info, 0x0, 0x20000000001A0065);
+        static EventDescriptor transferEventDescriptor = new EventDescriptor(
+            499,
+            0,
+            (byte)TraceChannel.Analytic,
+            (byte)TraceEventLevel.LogAlways,
+            (byte)TraceEventOpcode.Info,
+            0x0,
+            0x20000000001A0065
+        );
 
         //Compiler will add all static initializers into the static constructor.  Adding an explicit one to mark SecurityCritical.
         [Fx.Tag.SecurityNote(Critical = "setting critical field defaultEtwProviderId")]
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
-                        Justification = "SecurityCriticial method")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.InitializeReferenceTypeStaticFieldsInline,
+            Justification = "SecurityCriticial method"
+        )]
         static EtwDiagnosticTrace()
         {
             // In Partial Trust, initialize to Guid.Empty to disable ETW Tracing.
@@ -82,8 +102,13 @@ namespace System.Runtime.Diagnostics
 
 #pragma warning disable 618
                 EventLogger logger = new EventLogger(this.EventSourceName, null);
-                logger.LogEvent(TraceEventType.Error, TracingEventLogCategory, (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToSetupTracing, false,
-                    exception.ToString());
+                logger.LogEvent(
+                    TraceEventType.Error,
+                    TracingEventLogCategory,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToSetupTracing,
+                    false,
+                    exception.ToString()
+                );
 #pragma warning restore 618
             }
 
@@ -101,10 +126,14 @@ namespace System.Runtime.Diagnostics
                 this.etwProvider = null;
 #pragma warning disable 618
                 EventLogger logger = new EventLogger(this.EventSourceName, null);
-                logger.LogEvent(TraceEventType.Error, TracingEventLogCategory, (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToSetupTracing, false,
-                    exception.ToString());
+                logger.LogEvent(
+                    TraceEventType.Error,
+                    TracingEventLogCategory,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToSetupTracing,
+                    false,
+                    exception.ToString()
+                );
 #pragma warning restore 618
-
             }
 
             if (this.TracingEnabled || this.EtwTracingEnabled)
@@ -115,89 +144,90 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        static public Guid DefaultEtwProviderId
+        public static Guid DefaultEtwProviderId
         {
-            [Fx.Tag.SecurityNote(Critical = "reading critical field defaultEtwProviderId", Safe = "Doesn't leak info\\resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "reading critical field defaultEtwProviderId",
+                Safe = "Doesn't leak info\\resources"
+            )]
             [SecuritySafeCritical]
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecuritySafeCriticial method")]
-            get
-            {
-                return EtwDiagnosticTrace.defaultEtwProviderId;
-            }
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+                Justification = "SecuritySafeCriticial method"
+            )]
+            get { return EtwDiagnosticTrace.defaultEtwProviderId; }
             [Fx.Tag.SecurityNote(Critical = "setting critical field defaultEtwProviderId")]
             [SecurityCritical]
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-                Justification = "SecurityCriticial method")]
-            set
-            {
-                EtwDiagnosticTrace.defaultEtwProviderId = value;
-            }
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+                Justification = "SecurityCriticial method"
+            )]
+            set { EtwDiagnosticTrace.defaultEtwProviderId = value; }
         }
 
         public EtwProvider EtwProvider
         {
             [Fx.Tag.SecurityNote(Critical = "Exposes the critical etwProvider field")]
             [SecurityCritical]
-            get
-            {
-                return this.etwProvider;
-            }
+            get { return this.etwProvider; }
         }
 
         public bool IsEtwProviderEnabled
         {
-            [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-                Safe = "Doesn't leak info\\resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical etwProvider field",
+                Safe = "Doesn't leak info\\resources"
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return (this.EtwTracingEnabled && this.etwProvider.IsEnabled());
-            }
+            get { return (this.EtwTracingEnabled && this.etwProvider.IsEnabled()); }
         }
 
         public Action RefreshState
         {
-            [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-            Safe = "Doesn't leak resources or information")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical etwProvider field",
+                Safe = "Doesn't leak resources or information"
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return this.EtwProvider.ControllerCallBack;
-            }
-
-            [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-            Safe = "Doesn't leak resources or information")]
+            get { return this.EtwProvider.ControllerCallBack; }
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical etwProvider field",
+                Safe = "Doesn't leak resources or information"
+            )]
             [SecuritySafeCritical]
-            set
-            {
-                this.EtwProvider.ControllerCallBack = value;
-            }
+            set { this.EtwProvider.ControllerCallBack = value; }
         }
 
         public bool IsEnd2EndActivityTracingEnabled
         {
-            [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-            Safe = "Doesn't leak resources or information")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical etwProvider field",
+                Safe = "Doesn't leak resources or information"
+            )]
             [SecuritySafeCritical]
             get
             {
-                return this.IsEtwProviderEnabled && this.EtwProvider.IsEnd2EndActivityTracingEnabled;
+                return this.IsEtwProviderEnabled
+                    && this.EtwProvider.IsEnd2EndActivityTracingEnabled;
             }
         }
 
         bool EtwTracingEnabled
         {
-            [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-                Safe = "Doesn't leak info\\resources")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical etwProvider field",
+                Safe = "Doesn't leak info\\resources"
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return (this.etwProvider != null);
-            }
+            get { return (this.etwProvider != null); }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses the security critical etwProvider field", Safe = "Doesn't leak info\\resources")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses the security critical etwProvider field",
+            Safe = "Doesn't leak info\\resources"
+        )]
         [SecuritySafeCritical]
         public void SetEnd2EndActivityTracingEnabled(bool isEnd2EndTracingEnabled)
         {
@@ -214,27 +244,42 @@ namespace System.Runtime.Diagnostics
             return base.ShouldTrace(level) || ShouldTraceToEtw(level);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-            Safe = "Doesn't leak information\\resources")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access critical etwProvider field",
+            Safe = "Doesn't leak information\\resources"
+        )]
         [SecuritySafeCritical]
         public bool ShouldTraceToEtw(TraceEventLevel level)
         {
             return (this.EtwProvider != null && this.EtwProvider.IsEnabled((byte)level, 0));
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand",
-            Safe = "Doesn't leak information\\resources")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand",
+            Safe = "Doesn't leak information\\resources"
+        )]
         [SecuritySafeCritical]
-        public void Event(int eventId, TraceEventLevel traceEventLevel, TraceChannel channel, string description)
+        public void Event(
+            int eventId,
+            TraceEventLevel traceEventLevel,
+            TraceChannel channel,
+            string description
+        )
         {
             if (this.TracingEnabled)
             {
-                EventDescriptor eventDescriptor = EtwDiagnosticTrace.GetEventDescriptor(eventId, channel, traceEventLevel);
+                EventDescriptor eventDescriptor = EtwDiagnosticTrace.GetEventDescriptor(
+                    eventId,
+                    channel,
+                    traceEventLevel
+                );
                 this.Event(ref eventDescriptor, description);
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
         public void Event(ref EventDescriptor eventDescriptor, string description)
         {
@@ -254,8 +299,10 @@ namespace System.Runtime.Diagnostics
             EtwDiagnosticTrace.ActivityId = newId;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Access critical transferEventDescriptor field, as well as other critical methods",
-            Safe = "Doesn't leak information or resources")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access critical transferEventDescriptor field, as well as other critical methods",
+            Safe = "Doesn't leak information or resources"
+        )]
         [SecuritySafeCritical]
         public void TraceTransfer(Guid newId)
         {
@@ -269,11 +316,22 @@ namespace System.Runtime.Diagnostics
                         this.TraceSource.TraceTransfer(0, null, newId);
                     }
                     //also emit to ETW
-                    if (this.IsEtwEventEnabled(ref EtwDiagnosticTrace.transferEventDescriptor, false))
+                    if (
+                        this.IsEtwEventEnabled(
+                            ref EtwDiagnosticTrace.transferEventDescriptor,
+                            false
+                        )
+                    )
                     {
-                        this.etwProvider.WriteTransferEvent(ref EtwDiagnosticTrace.transferEventDescriptor, new EventTraceActivity(oldId), newId,
-                            EtwDiagnosticTrace.traceAnnotation == null ? string.Empty : EtwDiagnosticTrace.traceAnnotation(),
-                            DiagnosticTraceBase.AppDomainFriendlyName);
+                        this.etwProvider.WriteTransferEvent(
+                            ref EtwDiagnosticTrace.transferEventDescriptor,
+                            new EventTraceActivity(oldId),
+                            newId,
+                            EtwDiagnosticTrace.traceAnnotation == null
+                                ? string.Empty
+                                : EtwDiagnosticTrace.traceAnnotation(),
+                            DiagnosticTraceBase.AppDomainFriendlyName
+                        );
                     }
                 }
                 catch (Exception e)
@@ -288,10 +346,20 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        [SuppressMessage("Microsoft.Security.Xml", "CA3057:DoNotUseLoadXml", Justification = "It is internal code. No security concern.")]
-        public void WriteTraceSource(ref EventDescriptor eventDescriptor, string description, TracePayload payload)
+        [SuppressMessage(
+            "Microsoft.Security.Xml",
+            "CA3057:DoNotUseLoadXml",
+            Justification = "It is internal code. No security concern."
+        )]
+        public void WriteTraceSource(
+            ref EventDescriptor eventDescriptor,
+            string description,
+            TracePayload payload
+        )
         {
             if (this.TracingEnabled)
             {
@@ -300,13 +368,29 @@ namespace System.Runtime.Diagnostics
                 {
                     string msdnTraceCode;
                     int legacyEventId;
-                    EtwDiagnosticTrace.GenerateLegacyTraceCode(ref eventDescriptor, out msdnTraceCode, out legacyEventId);
+                    EtwDiagnosticTrace.GenerateLegacyTraceCode(
+                        ref eventDescriptor,
+                        out msdnTraceCode,
+                        out legacyEventId
+                    );
 
-                    string traceString = BuildTrace(ref eventDescriptor, description, payload, msdnTraceCode);
+                    string traceString = BuildTrace(
+                        ref eventDescriptor,
+                        description,
+                        payload,
+                        msdnTraceCode
+                    );
                     XmlDocument traceDocument = new XmlDocument();
                     traceDocument.LoadXml(traceString);
                     navigator = traceDocument.CreateNavigator();
-                    this.TraceSource.TraceData(TraceLevelHelper.GetTraceEventType(eventDescriptor.Level, eventDescriptor.Opcode), legacyEventId, navigator);
+                    this.TraceSource.TraceData(
+                        TraceLevelHelper.GetTraceEventType(
+                            eventDescriptor.Level,
+                            eventDescriptor.Opcode
+                        ),
+                        legacyEventId,
+                        navigator
+                    );
 
                     if (this.CalledShutdown)
                     {
@@ -320,14 +404,24 @@ namespace System.Runtime.Diagnostics
                         throw;
                     }
 
-                    LogTraceFailure(navigator == null ? string.Empty : navigator.ToString(), exception);
+                    LogTraceFailure(
+                        navigator == null ? string.Empty : navigator.ToString(),
+                        exception
+                    );
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        static string BuildTrace(ref EventDescriptor eventDescriptor, string description, TracePayload payload, string msdnTraceCode)
+        static string BuildTrace(
+            ref EventDescriptor eventDescriptor,
+            string description,
+            TracePayload payload,
+            string msdnTraceCode
+        )
         {
             StringBuilder sb = StringBuilderPool.Take();
             try
@@ -337,18 +431,35 @@ namespace System.Runtime.Diagnostics
                     using (XmlTextWriter writer = new XmlTextWriter(stringWriter))
                     {
                         writer.WriteStartElement(DiagnosticStrings.TraceRecordTag);
-                        writer.WriteAttributeString(DiagnosticStrings.NamespaceTag, EtwDiagnosticTrace.TraceRecordVersion);
-                        writer.WriteAttributeString(DiagnosticStrings.SeverityTag,
-                            TraceLevelHelper.LookupSeverity((TraceEventLevel)eventDescriptor.Level, (TraceEventOpcode)eventDescriptor.Opcode));
-                        writer.WriteAttributeString(DiagnosticStrings.ChannelTag, EtwDiagnosticTrace.LookupChannel((TraceChannel)eventDescriptor.Channel));
+                        writer.WriteAttributeString(
+                            DiagnosticStrings.NamespaceTag,
+                            EtwDiagnosticTrace.TraceRecordVersion
+                        );
+                        writer.WriteAttributeString(
+                            DiagnosticStrings.SeverityTag,
+                            TraceLevelHelper.LookupSeverity(
+                                (TraceEventLevel)eventDescriptor.Level,
+                                (TraceEventOpcode)eventDescriptor.Opcode
+                            )
+                        );
+                        writer.WriteAttributeString(
+                            DiagnosticStrings.ChannelTag,
+                            EtwDiagnosticTrace.LookupChannel((TraceChannel)eventDescriptor.Channel)
+                        );
 
                         writer.WriteElementString(DiagnosticStrings.TraceCodeTag, msdnTraceCode);
                         writer.WriteElementString(DiagnosticStrings.DescriptionTag, description);
-                        writer.WriteElementString(DiagnosticStrings.AppDomain, payload.AppDomainFriendlyName);
+                        writer.WriteElementString(
+                            DiagnosticStrings.AppDomain,
+                            payload.AppDomainFriendlyName
+                        );
 
                         if (!string.IsNullOrEmpty(payload.EventSource))
                         {
-                            writer.WriteElementString(DiagnosticStrings.SourceTag, payload.EventSource);
+                            writer.WriteElementString(
+                                DiagnosticStrings.SourceTag,
+                                payload.EventSource
+                            );
                         }
 
                         if (!string.IsNullOrEmpty(payload.ExtendedData))
@@ -375,9 +486,15 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        static void GenerateLegacyTraceCode(ref EventDescriptor eventDescriptor, out string msdnTraceCode, out int legacyEventId)
+        static void GenerateLegacyTraceCode(
+            ref EventDescriptor eventDescriptor,
+            out string msdnTraceCode,
+            out int legacyEventId
+        )
         {
             // To avoid breaking changes between 4.0 and 4.5 we have to use the same values for EventID and TraceCode like in 4.0
             // The mapping between legacy trace code and the new ETW event ids has to be done manually - for example
@@ -387,25 +504,37 @@ namespace System.Runtime.Diagnostics
             switch (eventDescriptor.EventId)
             {
                 case EventIdsWithMsdnTraceCode.AppDomainUnload:
-                    msdnTraceCode = GenerateMsdnTraceCode(DiagnosticTraceSource, TraceCodes.AppDomainUnload);
+                    msdnTraceCode = GenerateMsdnTraceCode(
+                        DiagnosticTraceSource,
+                        TraceCodes.AppDomainUnload
+                    );
                     legacyEventId = LegacyTraceEventIds.AppDomainUnload;
                     break;
                 case EventIdsWithMsdnTraceCode.HandledExceptionError:
                 case EventIdsWithMsdnTraceCode.HandledExceptionWarning:
                 case EventIdsWithMsdnTraceCode.HandledExceptionInfo:
                 case EventIdsWithMsdnTraceCode.HandledExceptionVerbose:
-                    msdnTraceCode = GenerateMsdnTraceCode(DiagnosticTraceSource, TraceCodes.TraceHandledException);
+                    msdnTraceCode = GenerateMsdnTraceCode(
+                        DiagnosticTraceSource,
+                        TraceCodes.TraceHandledException
+                    );
                     legacyEventId = LegacyTraceEventIds.TraceHandledException;
-                    break;    
+                    break;
                 case EventIdsWithMsdnTraceCode.ThrowingExceptionVerbose:
                 case EventIdsWithMsdnTraceCode.ThrowingExceptionWarning:
-                    msdnTraceCode = GenerateMsdnTraceCode(DiagnosticTraceSource, TraceCodes.ThrowingException);
+                    msdnTraceCode = GenerateMsdnTraceCode(
+                        DiagnosticTraceSource,
+                        TraceCodes.ThrowingException
+                    );
                     legacyEventId = LegacyTraceEventIds.ThrowingException;
-                    break; 
+                    break;
                 case EventIdsWithMsdnTraceCode.UnhandledException:
-                    msdnTraceCode = GenerateMsdnTraceCode(DiagnosticTraceSource, TraceCodes.UnhandledException);
+                    msdnTraceCode = GenerateMsdnTraceCode(
+                        DiagnosticTraceSource,
+                        TraceCodes.UnhandledException
+                    );
                     legacyEventId = LegacyTraceEventIds.UnhandledException;
-                    break; 
+                    break;
                 default:
                     msdnTraceCode = eventDescriptor.EventId.ToString(CultureInfo.InvariantCulture);
                     legacyEventId = eventDescriptor.EventId;
@@ -416,10 +545,13 @@ namespace System.Runtime.Diagnostics
         // helper for standardized trace code generation
         static string GenerateMsdnTraceCode(string traceSource, string traceCodeString)
         {
-            return string.Format(CultureInfo.InvariantCulture,
+            return string.Format(
+                CultureInfo.InvariantCulture,
                 "http://msdn.microsoft.com/{0}/library/{1}.{2}.aspx",
                 CultureInfo.CurrentCulture.Name,
-                traceSource, traceCodeString);
+                traceSource,
+                traceCodeString
+            );
         }
 
         static string LookupChannel(TraceChannel traceChannel)
@@ -453,12 +585,21 @@ namespace System.Runtime.Diagnostics
             return channelName;
         }
 
-        public TracePayload GetSerializedPayload(object source, TraceRecord traceRecord, Exception exception)
+        public TracePayload GetSerializedPayload(
+            object source,
+            TraceRecord traceRecord,
+            Exception exception
+        )
         {
             return this.GetSerializedPayload(source, traceRecord, exception, false);
         }
 
-        public TracePayload GetSerializedPayload(object source, TraceRecord traceRecord, Exception exception, bool getServiceReference)
+        public TracePayload GetSerializedPayload(
+            object source,
+            TraceRecord traceRecord,
+            Exception exception,
+            bool getServiceReference
+        )
         {
             string eventSource = null;
             string extendedData = null;
@@ -474,7 +615,9 @@ namespace System.Runtime.Diagnostics
                 StringBuilder sb = StringBuilderPool.Take();
                 try
                 {
-                    using (StringWriter stringWriter = new StringWriter(sb, CultureInfo.CurrentCulture))
+                    using (
+                        StringWriter stringWriter = new StringWriter(sb, CultureInfo.CurrentCulture)
+                    )
                     {
                         using (XmlTextWriter writer = new XmlTextWriter(stringWriter))
                         {
@@ -502,44 +645,70 @@ namespace System.Runtime.Diagnostics
 
             if (getServiceReference && (EtwDiagnosticTrace.traceAnnotation != null))
             {
-                return new TracePayload(serializedException, eventSource, DiagnosticTraceBase.AppDomainFriendlyName, extendedData, EtwDiagnosticTrace.traceAnnotation());
+                return new TracePayload(
+                    serializedException,
+                    eventSource,
+                    DiagnosticTraceBase.AppDomainFriendlyName,
+                    extendedData,
+                    EtwDiagnosticTrace.traceAnnotation()
+                );
             }
 
-            return new TracePayload(serializedException, eventSource, DiagnosticTraceBase.AppDomainFriendlyName, extendedData, string.Empty);
+            return new TracePayload(
+                serializedException,
+                eventSource,
+                DiagnosticTraceBase.AppDomainFriendlyName,
+                extendedData,
+                string.Empty
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand",
-            Safe = "Only queries the status of the provider - does not modify the state")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand",
+            Safe = "Only queries the status of the provider - does not modify the state"
+        )]
         [SecuritySafeCritical]
         public bool IsEtwEventEnabled(ref EventDescriptor eventDescriptor)
         {
             return IsEtwEventEnabled(ref eventDescriptor, true);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand",
-            Safe = "Only queries the status of the provider - does not modify the state")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand",
+            Safe = "Only queries the status of the provider - does not modify the state"
+        )]
         [SecuritySafeCritical]
         public bool IsEtwEventEnabled(ref EventDescriptor eventDescriptor, bool fullCheck)
         {
             // A full check queries ETW via a p/invoke call to see if the event is really enabled.
             // Checking against the level and keywords passed in the ETW callback can provide false positives,
             // but never a false negative.
-            // The only code which specifies false is two generated classes, System.Runtime.TraceCore and 
+            // The only code which specifies false is two generated classes, System.Runtime.TraceCore and
             // System.Activities.EtwTrackingParticipantTrackRecords, and the method EtwDiagnosticTrace.TraceTransfer().
             // FxTrace uses IsEtwEventEnabled without the boolean, which then calls this method specifying true.
             if (fullCheck)
             {
-                return (this.EtwTracingEnabled && this.etwProvider.IsEventEnabled(ref eventDescriptor));
+                return (
+                    this.EtwTracingEnabled && this.etwProvider.IsEventEnabled(ref eventDescriptor)
+                );
             }
 
-            return (this.EtwTracingEnabled && this.etwProvider.IsEnabled(eventDescriptor.Level, eventDescriptor.Keywords));
+            return (
+                this.EtwTracingEnabled
+                && this.etwProvider.IsEnabled(eventDescriptor.Level, eventDescriptor.Keywords)
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Access the critical Listeners property",
-            Safe = "Only Removes the default listener of the local source")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access the critical Listeners property",
+            Safe = "Only Removes the default listener of the local source"
+        )]
         [SecuritySafeCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
-            Justification = "SecuritySafeCriticial method")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "SecuritySafeCriticial method"
+        )]
         void CreateTraceSource()
         {
             if (!string.IsNullOrEmpty(this.TraceSourceName))
@@ -548,7 +717,9 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Sets this.etwProvider and calls EtwProvider constructor, which are Security Critical")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Sets this.etwProvider and calls EtwProvider constructor, which are Security Critical"
+        )]
         [SecurityCritical]
         void CreateEtwProvider(Guid etwProviderId)
         {
@@ -573,9 +744,15 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Usage of EventDescriptor, which is protected by a LinkDemand")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Usage of EventDescriptor, which is protected by a LinkDemand"
+        )]
         [SecurityCritical]
-        static EventDescriptor GetEventDescriptor(int eventId, TraceChannel channel, TraceEventLevel traceEventLevel)
+        static EventDescriptor GetEventDescriptor(
+            int eventId,
+            TraceChannel channel,
+            TraceEventLevel traceEventLevel
+        )
         {
             unchecked
             {
@@ -601,7 +778,15 @@ namespace System.Runtime.Diagnostics
                 {
                     keyword = keyword | 0x0800000000000000;
                 }
-                return new EventDescriptor(eventId, 0x0, (byte)channel, (byte)traceEventLevel, 0x0, 0x0, (long)keyword);
+                return new EventDescriptor(
+                    eventId,
+                    0x0,
+                    (byte)channel,
+                    (byte)traceEventLevel,
+                    0x0,
+                    0x0,
+                    (long)keyword
+                );
             }
         }
 
@@ -617,8 +802,12 @@ namespace System.Runtime.Diagnostics
             {
                 if (TraceCore.AppDomainUnloadIsEnabled(this))
                 {
-                    TraceCore.AppDomainUnload(this, AppDomain.CurrentDomain.FriendlyName,
-                        DiagnosticTraceBase.ProcessName, DiagnosticTraceBase.ProcessId.ToString(CultureInfo.CurrentCulture));
+                    TraceCore.AppDomainUnload(
+                        this,
+                        AppDomain.CurrentDomain.FriendlyName,
+                        DiagnosticTraceBase.ProcessName,
+                        DiagnosticTraceBase.ProcessId.ToString(CultureInfo.CurrentCulture)
+                    );
                 }
                 this.TraceSource.Flush();
             }
@@ -634,8 +823,10 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Access critical etwProvider field",
-            Safe = "Doesn't leak info\\resources")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Access critical etwProvider field",
+            Safe = "Doesn't leak info\\resources"
+        )]
         [SecuritySafeCritical]
         void ShutdownEtwProvider()
         {
@@ -714,7 +905,11 @@ namespace System.Runtime.Diagnostics
         {
             if (TraceCore.UnhandledExceptionIsEnabled(this))
             {
-                TraceCore.UnhandledException(this, exception != null ? exception.ToString() : string.Empty, exception);
+                TraceCore.UnhandledException(
+                    this,
+                    exception != null ? exception.ToString() : string.Empty,
+                    exception
+                );
             }
         }
 
@@ -727,7 +922,12 @@ namespace System.Runtime.Diagnostics
                 {
                     using (XmlTextWriter xml = new XmlTextWriter(stringWriter))
                     {
-                        WriteExceptionToTraceString(xml, exception, maxTraceStringLength, MaxExceptionDepth);
+                        WriteExceptionToTraceString(
+                            xml,
+                            exception,
+                            maxTraceStringLength,
+                            MaxExceptionDepth
+                        );
                         xml.Flush();
                         stringWriter.Flush();
 
@@ -741,7 +941,12 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        static void WriteExceptionToTraceString(XmlTextWriter xml, Exception exception, int remainingLength, int remainingAllowedRecursionDepth)
+        static void WriteExceptionToTraceString(
+            XmlTextWriter xml,
+            Exception exception,
+            int remainingLength,
+            int remainingAllowedRecursionDepth
+        )
         {
             if (remainingAllowedRecursionDepth < 1)
             {
@@ -755,21 +960,39 @@ namespace System.Runtime.Diagnostics
 
             try
             {
-                IList<Tuple<string, string>> exceptionInfo = new List<Tuple<string, string>>() 
+                IList<Tuple<string, string>> exceptionInfo = new List<Tuple<string, string>>()
                 {
-                    new Tuple<string, string> (DiagnosticStrings.ExceptionTypeTag, XmlEncode(exception.GetType().AssemblyQualifiedName)),
-                    new Tuple<string, string> (DiagnosticStrings.MessageTag, XmlEncode(exception.Message)),
-                    new Tuple<string, string> (DiagnosticStrings.StackTraceTag, XmlEncode(StackTraceString(exception))),
-                    new Tuple<string, string> (DiagnosticStrings.ExceptionStringTag, XmlEncode(exception.ToString())),
+                    new Tuple<string, string>(
+                        DiagnosticStrings.ExceptionTypeTag,
+                        XmlEncode(exception.GetType().AssemblyQualifiedName)
+                    ),
+                    new Tuple<string, string>(
+                        DiagnosticStrings.MessageTag,
+                        XmlEncode(exception.Message)
+                    ),
+                    new Tuple<string, string>(
+                        DiagnosticStrings.StackTraceTag,
+                        XmlEncode(StackTraceString(exception))
+                    ),
+                    new Tuple<string, string>(
+                        DiagnosticStrings.ExceptionStringTag,
+                        XmlEncode(exception.ToString())
+                    ),
                 };
 
-                System.ComponentModel.Win32Exception win32Exception = exception as System.ComponentModel.Win32Exception;
+                System.ComponentModel.Win32Exception win32Exception =
+                    exception as System.ComponentModel.Win32Exception;
                 if (win32Exception != null)
                 {
                     exceptionInfo.Add(
                         new Tuple<string, string>(
                             DiagnosticStrings.NativeErrorCodeTag,
-                            win32Exception.NativeErrorCode.ToString("X", CultureInfo.InvariantCulture)));
+                            win32Exception.NativeErrorCode.ToString(
+                                "X",
+                                CultureInfo.InvariantCulture
+                            )
+                        )
+                    );
                 }
 
                 foreach (Tuple<string, string> item in exceptionInfo)
@@ -792,8 +1015,15 @@ namespace System.Runtime.Diagnostics
 
                 if (exception.InnerException != null)
                 {
-                    string innerException = GetInnerException(exception, remainingLength, remainingAllowedRecursionDepth - 1);
-                    if (!string.IsNullOrEmpty(innerException) && innerException.Length < remainingLength)
+                    string innerException = GetInnerException(
+                        exception,
+                        remainingLength,
+                        remainingAllowedRecursionDepth - 1
+                    );
+                    if (
+                        !string.IsNullOrEmpty(innerException)
+                        && innerException.Length < remainingLength
+                    )
                     {
                         xml.WriteRaw(innerException);
                     }
@@ -805,7 +1035,11 @@ namespace System.Runtime.Diagnostics
             }
         }
 
-        static string GetInnerException(Exception exception, int remainingLength, int remainingAllowedRecursionDepth)
+        static string GetInnerException(
+            Exception exception,
+            int remainingLength,
+            int remainingAllowedRecursionDepth
+        )
         {
             if (remainingAllowedRecursionDepth < 1)
             {
@@ -819,12 +1053,23 @@ namespace System.Runtime.Diagnostics
                 {
                     using (XmlTextWriter xml = new XmlTextWriter(stringWriter))
                     {
-                        if (!WriteStartElement(xml, DiagnosticStrings.InnerExceptionTag, ref remainingLength))
+                        if (
+                            !WriteStartElement(
+                                xml,
+                                DiagnosticStrings.InnerExceptionTag,
+                                ref remainingLength
+                            )
+                        )
                         {
                             return null;
                         }
 
-                        WriteExceptionToTraceString(xml, exception.InnerException, remainingLength, remainingAllowedRecursionDepth);
+                        WriteExceptionToTraceString(
+                            xml,
+                            exception.InnerException,
+                            remainingLength,
+                            remainingAllowedRecursionDepth
+                        );
                         xml.WriteEndElement();
                         xml.Flush();
                         stringWriter.Flush();
@@ -848,21 +1093,26 @@ namespace System.Runtime.Diagnostics
                 {
                     using (XmlTextWriter xml = new XmlTextWriter(stringWriter))
                     {
-
                         xml.WriteStartElement(DiagnosticStrings.DataItemsTag);
                         foreach (object dataItem in exception.Data.Keys)
                         {
                             xml.WriteStartElement(DiagnosticStrings.DataTag);
-                            xml.WriteElementString(DiagnosticStrings.KeyTag, XmlEncode(dataItem.ToString()));
+                            xml.WriteElementString(
+                                DiagnosticStrings.KeyTag,
+                                XmlEncode(dataItem.ToString())
+                            );
                             if (exception.Data[dataItem] == null)
                             {
                                 xml.WriteElementString(DiagnosticStrings.ValueTag, string.Empty);
                             }
                             else
                             {
-                                xml.WriteElementString(DiagnosticStrings.ValueTag, XmlEncode(exception.Data[dataItem].ToString()));
+                                xml.WriteElementString(
+                                    DiagnosticStrings.ValueTag,
+                                    XmlEncode(exception.Data[dataItem].ToString())
+                                );
                             }
-                            
+
                             xml.WriteEndElement();
                         }
                         xml.WriteEndElement();
@@ -888,24 +1138,33 @@ namespace System.Runtime.Diagnostics
                 remainingLength -= minXmlLength;
                 return true;
             }
-            return false;            
+            return false;
         }
 
-        static bool WriteXmlElementString(XmlTextWriter xml, string localName, string value, ref int remainingLength)
+        static bool WriteXmlElementString(
+            XmlTextWriter xml,
+            string localName,
+            string value,
+            ref int remainingLength
+        )
         {
             int xmlElementLength;
 
-            // Quirk to fix DevDiv 155469: All previous versions of that platform (up-to 4.6.2) will get the old behavior (throw null ref when Exception Message property is null) 
-            if (string.IsNullOrEmpty(value) && !LocalAppContextSwitches.IncludeNullExceptionMessageInETWTrace)
+            // Quirk to fix DevDiv 155469: All previous versions of that platform (up-to 4.6.2) will get the old behavior (throw null ref when Exception Message property is null)
+            if (
+                string.IsNullOrEmpty(value)
+                && !LocalAppContextSwitches.IncludeNullExceptionMessageInETWTrace
+            )
             {
-                xmlElementLength = localName.Length + EtwDiagnosticTrace.XmlBracketsLengthForNullValue;
+                xmlElementLength =
+                    localName.Length + EtwDiagnosticTrace.XmlBracketsLengthForNullValue;
             }
-
             else
             {
-                xmlElementLength = (localName.Length * 2) + EtwDiagnosticTrace.XmlBracketsLength + value.Length;
+                xmlElementLength =
+                    (localName.Length * 2) + EtwDiagnosticTrace.XmlBracketsLength + value.Length;
             }
-                
+
             if (xmlElementLength <= remainingLength)
             {
                 xml.WriteElementString(localName, value);
@@ -941,7 +1200,7 @@ namespace System.Runtime.Diagnostics
         {
             // Diagnostic trace codes
             public const int Diagnostics = 0X20000;
-            public const int AppDomainUnload = LegacyTraceEventIds.Diagnostics | 0X0001; 
+            public const int AppDomainUnload = LegacyTraceEventIds.Diagnostics | 0X0001;
             public const int EventLog = LegacyTraceEventIds.Diagnostics | 0X0002;
             public const int ThrowingException = LegacyTraceEventIds.Diagnostics | 0X0003;
             public const int TraceHandledException = LegacyTraceEventIds.Diagnostics | 0X0004;
@@ -951,7 +1210,8 @@ namespace System.Runtime.Diagnostics
         static class StringBuilderPool
         {
             const int maxPooledStringBuilders = 64;
-            static readonly ConcurrentQueue<StringBuilder> freeStringBuilders = new ConcurrentQueue<StringBuilder>();
+            static readonly ConcurrentQueue<StringBuilder> freeStringBuilders =
+                new ConcurrentQueue<StringBuilder>();
 
             public static StringBuilder Take()
             {

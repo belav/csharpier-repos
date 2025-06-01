@@ -16,16 +16,26 @@ internal class LspWorkspaceManagerFactory : ILspServiceFactory
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LspWorkspaceManagerFactory(LspWorkspaceRegistrationService lspWorkspaceRegistrationService)
+    public LspWorkspaceManagerFactory(
+        LspWorkspaceRegistrationService lspWorkspaceRegistrationService
+    )
     {
         _workspaceRegistrationService = lspWorkspaceRegistrationService;
     }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    )
     {
         var logger = lspServices.GetRequiredService<ILspServiceLogger>();
         var telemetryLogger = lspServices.GetRequiredService<RequestTelemetryLogger>();
         var miscFilesWorkspace = lspServices.GetService<LspMiscellaneousFilesWorkspace>();
-        return new LspWorkspaceManager(logger, miscFilesWorkspace, _workspaceRegistrationService, telemetryLogger);
+        return new LspWorkspaceManager(
+            logger,
+            miscFilesWorkspace,
+            _workspaceRegistrationService,
+            telemetryLogger
+        );
     }
 }

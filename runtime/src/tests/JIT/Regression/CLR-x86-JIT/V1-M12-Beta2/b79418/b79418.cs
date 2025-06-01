@@ -3,14 +3,13 @@
 //
 
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 using Xunit;
 
 public class PInvokeTest
 {
-
     static String foo = "foo";
     static String bar = "bar";
 

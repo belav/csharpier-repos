@@ -14,7 +14,8 @@ namespace System.Threading.Threads.Tests
             int expectedHResult,
             Func<T> createDefault,
             Func<string, T> createWithMessage,
-            Func<string, Exception, T> createWithMessageAndException)
+            Func<string, Exception, T> createWithMessageAndException
+        )
             where T : Exception
         {
             var ex = createDefault();
@@ -42,7 +43,8 @@ namespace System.Threading.Threads.Tests
                 ThreadInterruptedException_HResult,
                 () => new ThreadInterruptedException(),
                 message => new ThreadInterruptedException(message),
-                (message, innerException) => new ThreadInterruptedException(message, innerException));
+                (message, innerException) => new ThreadInterruptedException(message, innerException)
+            );
         }
 
         [Fact]
@@ -52,7 +54,8 @@ namespace System.Threading.Threads.Tests
                 ThreadStateException_HResult,
                 () => new ThreadStateException(),
                 message => new ThreadStateException(message),
-                (message, innerException) => new ThreadStateException(message, innerException));
+                (message, innerException) => new ThreadStateException(message, innerException)
+            );
         }
     }
 }

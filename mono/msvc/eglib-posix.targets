@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  DefaultTargets="Build"
+  ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <PropertyGroup>
     <ExcludeFromWindowsBuild>true</ExcludeFromWindowsBuild>
   </PropertyGroup>
@@ -19,7 +23,7 @@
     <ClCompile Include="$(MonoSourceLocation)\mono\eglib\gmodule-unix.c">
       <ExcludedFromBuild>$(ExcludeFromWindowsBuild)</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="$(MonoSourceLocation)\mono\eglib\gspawn.c" >
+    <ClCompile Include="$(MonoSourceLocation)\mono\eglib\gspawn.c">
       <ExcludedFromBuild>$(ExcludeFromWindowsBuild)</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="$(MonoSourceLocation)\mono\eglib\gtimer-unix.c">

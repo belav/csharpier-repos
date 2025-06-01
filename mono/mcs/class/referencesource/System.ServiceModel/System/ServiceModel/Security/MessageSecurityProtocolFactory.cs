@@ -5,23 +5,24 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
-    using System.IO;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.IdentityModel.Selectors;
+    using System.IO;
+    using System.Net.Security;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.Net.Security;
 
     abstract class MessageSecurityProtocolFactory : SecurityProtocolFactory
     {
-        internal const MessageProtectionOrder defaultMessageProtectionOrder = MessageProtectionOrder.SignBeforeEncrypt;
+        internal const MessageProtectionOrder defaultMessageProtectionOrder =
+            MessageProtectionOrder.SignBeforeEncrypt;
         internal const bool defaultDoRequestSignatureConfirmation = false;
 
         bool applyIntegrity = true;
@@ -34,9 +35,7 @@ namespace System.ServiceModel.Security
         bool requireConfidentiality = true;
         List<SecurityTokenAuthenticator> wrappedKeyTokenAuthenticator;
 
-        protected MessageSecurityProtocolFactory()
-        {
-        }
+        protected MessageSecurityProtocolFactory() { }
 
         internal MessageSecurityProtocolFactory(MessageSecurityProtocolFactory factory)
             : base(factory)
@@ -47,7 +46,9 @@ namespace System.ServiceModel.Security
             this.applyIntegrity = factory.applyIntegrity;
             this.applyConfidentiality = factory.applyConfidentiality;
             this.identityVerifier = factory.identityVerifier;
-            this.protectionRequirements = new ChannelProtectionRequirements(factory.protectionRequirements);
+            this.protectionRequirements = new ChannelProtectionRequirements(
+                factory.protectionRequirements
+            );
             this.messageProtectionOrder = factory.messageProtectionOrder;
             this.requireIntegrity = factory.requireIntegrity;
             this.requireConfidentiality = factory.requireConfidentiality;
@@ -56,10 +57,7 @@ namespace System.ServiceModel.Security
 
         public bool ApplyConfidentiality
         {
-            get
-            {
-                return this.applyConfidentiality;
-            }
+            get { return this.applyConfidentiality; }
             set
             {
                 ThrowIfImmutable();
@@ -69,10 +67,7 @@ namespace System.ServiceModel.Security
 
         public bool ApplyIntegrity
         {
-            get
-            {
-                return this.applyIntegrity;
-            }
+            get { return this.applyIntegrity; }
             set
             {
                 ThrowIfImmutable();
@@ -82,10 +77,7 @@ namespace System.ServiceModel.Security
 
         public bool DoRequestSignatureConfirmation
         {
-            get
-            {
-                return this.doRequestSignatureConfirmation;
-            }
+            get { return this.doRequestSignatureConfirmation; }
             set
             {
                 ThrowIfImmutable();
@@ -95,10 +87,7 @@ namespace System.ServiceModel.Security
 
         public IdentityVerifier IdentityVerifier
         {
-            get
-            {
-                return this.identityVerifier;
-            }
+            get { return this.identityVerifier; }
             set
             {
                 ThrowIfImmutable();
@@ -108,18 +97,12 @@ namespace System.ServiceModel.Security
 
         public ChannelProtectionRequirements ProtectionRequirements
         {
-            get
-            {
-                return this.protectionRequirements;
-            }
+            get { return this.protectionRequirements; }
         }
 
         public MessageProtectionOrder MessageProtectionOrder
         {
-            get
-            {
-                return this.messageProtectionOrder;
-            }
+            get { return this.messageProtectionOrder; }
             set
             {
                 ThrowIfImmutable();
@@ -129,10 +112,7 @@ namespace System.ServiceModel.Security
 
         public bool RequireIntegrity
         {
-            get
-            {
-                return this.requireIntegrity;
-            }
+            get { return this.requireIntegrity; }
             set
             {
                 ThrowIfImmutable();
@@ -142,10 +122,7 @@ namespace System.ServiceModel.Security
 
         public bool RequireConfidentiality
         {
-            get
-            {
-                return this.requireConfidentiality;
-            }
+            get { return this.requireConfidentiality; }
             set
             {
                 ThrowIfImmutable();
@@ -155,18 +132,17 @@ namespace System.ServiceModel.Security
 
         internal List<SecurityTokenAuthenticator> WrappedKeySecurityTokenAuthenticator
         {
-            get
-            {
-                return this.wrappedKeyTokenAuthenticator;
-            }
+            get { return this.wrappedKeyTokenAuthenticator; }
         }
 
         protected virtual void ValidateCorrelationSecuritySettings()
         {
             if (this.ActAsInitiator && this.SupportsRequestReply)
             {
-                bool savesCorrelationTokenOnRequest = this.ApplyIntegrity || this.ApplyConfidentiality;
-                bool needsCorrelationTokenOnReply = this.RequireIntegrity || this.RequireConfidentiality;
+                bool savesCorrelationTokenOnRequest =
+                    this.ApplyIntegrity || this.ApplyConfidentiality;
+                bool needsCorrelationTokenOnReply =
+                    this.RequireIntegrity || this.RequireConfidentiality;
                 if (!savesCorrelationTokenOnRequest && needsCorrelationTokenOnReply)
                 {
                     OnPropertySettingsError("ApplyIntegrity", false);
@@ -181,30 +157,44 @@ namespace System.ServiceModel.Security
 
             if (this.DetectReplays && !this.RequireIntegrity)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("RequireIntegrity", SR.GetString(SR.ForReplayDetectionToBeDoneRequireIntegrityMustBeSet));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "RequireIntegrity",
+                    SR.GetString(SR.ForReplayDetectionToBeDoneRequireIntegrityMustBeSet)
+                );
             }
 
             if (this.DoRequestSignatureConfirmation)
             {
                 if (!this.SupportsRequestReply)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SignatureConfirmationRequiresRequestReply));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SignatureConfirmationRequiresRequestReply)
+                    );
                 }
                 if (!this.StandardsManager.SecurityVersion.SupportsSignatureConfirmation)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SecurityVersionDoesNotSupportSignatureConfirmation, this.StandardsManager.SecurityVersion));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SecurityVersionDoesNotSupportSignatureConfirmation,
+                            this.StandardsManager.SecurityVersion
+                        )
+                    );
                 }
             }
 
             this.wrappedKeyTokenAuthenticator = new List<SecurityTokenAuthenticator>(1);
-            SecurityTokenAuthenticator authenticator = new NonValidatingSecurityTokenAuthenticator<WrappedKeySecurityToken>();
+            SecurityTokenAuthenticator authenticator =
+                new NonValidatingSecurityTokenAuthenticator<WrappedKeySecurityToken>();
             this.wrappedKeyTokenAuthenticator.Add(authenticator);
 
             ValidateCorrelationSecuritySettings();
         }
 
-        static MessagePartSpecification ExtractMessageParts(string action,
-            ScopedMessagePartSpecification scopedParts, bool isForSignature)
+        static MessagePartSpecification ExtractMessageParts(
+            string action,
+            ScopedMessagePartSpecification scopedParts,
+            bool isForSignature
+        )
         {
             MessagePartSpecification parts = null;
 
@@ -219,17 +209,35 @@ namespace System.ServiceModel.Security
 
             // send back a fault indication that the action is unknown
             SecurityVersion wss = MessageSecurityVersion.Default.SecurityVersion;
-            FaultCode subCode = new FaultCode(wss.InvalidSecurityFaultCode.Value, wss.HeaderNamespace.Value);
+            FaultCode subCode = new FaultCode(
+                wss.InvalidSecurityFaultCode.Value,
+                wss.HeaderNamespace.Value
+            );
             FaultCode senderCode = FaultCode.CreateSenderFaultCode(subCode);
-            FaultReason reason = new FaultReason(SR.GetString(SR.InvalidOrUnrecognizedAction, action), System.Globalization.CultureInfo.CurrentCulture);
+            FaultReason reason = new FaultReason(
+                SR.GetString(SR.InvalidOrUnrecognizedAction, action),
+                System.Globalization.CultureInfo.CurrentCulture
+            );
             MessageFault fault = MessageFault.CreateFault(senderCode, reason);
             if (isForSignature)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoSignaturePartsSpecified, action), null, fault));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.NoSignaturePartsSpecified, action),
+                        null,
+                        fault
+                    )
+                );
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoEncryptionPartsSpecified, action), null, fault));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.NoEncryptionPartsSpecified, action),
+                        null,
+                        fault
+                    )
+                );
             }
         }
 
@@ -240,9 +248,19 @@ namespace System.ServiceModel.Security
                 //return ExtractMessageParts(action, (this.SecurityTokenManager is ClientCredentialsSecurityTokenManager) ? this.ProtectionRequirements.OutgoingEncryptionParts : this.ProtectionRequirements.IncomingEncryptionParts, false);
 
                 if (this.IsDuplexReply)
-                    return ExtractMessageParts(action, this.ProtectionRequirements.OutgoingEncryptionParts, false);
+                    return ExtractMessageParts(
+                        action,
+                        this.ProtectionRequirements.OutgoingEncryptionParts,
+                        false
+                    );
                 else
-                    return ExtractMessageParts(action, (this.ActAsInitiator) ? this.ProtectionRequirements.OutgoingEncryptionParts : this.ProtectionRequirements.IncomingEncryptionParts, false);
+                    return ExtractMessageParts(
+                        action,
+                        (this.ActAsInitiator)
+                            ? this.ProtectionRequirements.OutgoingEncryptionParts
+                            : this.ProtectionRequirements.IncomingEncryptionParts,
+                        false
+                    );
             }
             else
             {
@@ -256,9 +274,19 @@ namespace System.ServiceModel.Security
             {
                 //return ExtractMessageParts(action, (this.SecurityTokenManager is ClientCredentialsSecurityTokenManager) ? this.ProtectionRequirements.OutgoingSignatureParts : this.ProtectionRequirements.IncomingSignatureParts, true);
                 if (this.IsDuplexReply)
-                    return ExtractMessageParts(action, this.ProtectionRequirements.OutgoingSignatureParts, true);
+                    return ExtractMessageParts(
+                        action,
+                        this.ProtectionRequirements.OutgoingSignatureParts,
+                        true
+                    );
                 else
-                    return ExtractMessageParts(action, (this.ActAsInitiator) ? this.ProtectionRequirements.OutgoingSignatureParts : this.ProtectionRequirements.IncomingSignatureParts, true);
+                    return ExtractMessageParts(
+                        action,
+                        (this.ActAsInitiator)
+                            ? this.ProtectionRequirements.OutgoingSignatureParts
+                            : this.ProtectionRequirements.IncomingSignatureParts,
+                        true
+                    );
             }
             else
             {
@@ -272,9 +300,19 @@ namespace System.ServiceModel.Security
             {
                 //return ExtractMessageParts(action, (this.SecurityTokenManager is ClientCredentialsSecurityTokenManager) ? this.ProtectionRequirements.IncomingEncryptionParts : this.ProtectionRequirements.OutgoingEncryptionParts, false);
                 if (this.IsDuplexReply)
-                    return ExtractMessageParts(action, this.ProtectionRequirements.OutgoingEncryptionParts, false);
+                    return ExtractMessageParts(
+                        action,
+                        this.ProtectionRequirements.OutgoingEncryptionParts,
+                        false
+                    );
                 else
-                    return ExtractMessageParts(action, (this.ActAsInitiator) ? this.ProtectionRequirements.IncomingEncryptionParts : this.ProtectionRequirements.OutgoingEncryptionParts, false);
+                    return ExtractMessageParts(
+                        action,
+                        (this.ActAsInitiator)
+                            ? this.ProtectionRequirements.IncomingEncryptionParts
+                            : this.ProtectionRequirements.OutgoingEncryptionParts,
+                        false
+                    );
             }
             else
             {
@@ -288,9 +326,19 @@ namespace System.ServiceModel.Security
             {
                 //return ExtractMessageParts(action, (this.SecurityTokenManager is ClientCredentialsSecurityTokenManager) ? this.ProtectionRequirements.IncomingSignatureParts : this.ProtectionRequirements.OutgoingSignatureParts, true);
                 if (this.IsDuplexReply)
-                    return ExtractMessageParts(action, this.ProtectionRequirements.OutgoingSignatureParts, true);
+                    return ExtractMessageParts(
+                        action,
+                        this.ProtectionRequirements.OutgoingSignatureParts,
+                        true
+                    );
                 else
-                    return ExtractMessageParts(action, (this.ActAsInitiator) ? this.ProtectionRequirements.IncomingSignatureParts : this.ProtectionRequirements.OutgoingSignatureParts, true);
+                    return ExtractMessageParts(
+                        action,
+                        (this.ActAsInitiator)
+                            ? this.ProtectionRequirements.IncomingSignatureParts
+                            : this.ProtectionRequirements.OutgoingSignatureParts,
+                        true
+                    );
             }
             else
             {

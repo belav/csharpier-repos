@@ -1,5 +1,11 @@
-<Type Name="MdiClient+ControlCollection" FullName="System.Windows.Forms.MdiClient+ControlCollection">
-  <TypeSignature Language="C#" Value="public class MdiClient.ControlCollection : System.Windows.Forms.Control.ControlCollection" />
+<Type
+  Name="MdiClient+ControlCollection"
+  FullName="System.Windows.Forms.MdiClient+ControlCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class MdiClient.ControlCollection : System.Windows.Forms.Control.ControlCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -15,7 +21,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ControlCollection (System.Windows.Forms.MdiClient owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ControlCollection (System.Windows.Forms.MdiClient owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.MdiClient" />
@@ -31,7 +40,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public override void Add (System.Windows.Forms.Control value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Add (System.Windows.Forms.Control value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -50,7 +62,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public override void Remove (System.Windows.Forms.Control value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Remove (System.Windows.Forms.Control value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

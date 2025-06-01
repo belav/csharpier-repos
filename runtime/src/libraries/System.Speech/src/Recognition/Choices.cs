@@ -12,9 +12,7 @@ namespace System.Speech.Recognition
     {
         #region Constructors
 
-        public Choices()
-        {
-        }
+        public Choices() { }
 
         public Choices(params string[] phrases)
         {
@@ -57,6 +55,7 @@ namespace System.Speech.Recognition
                 _oneOf.Items.Add(new ItemElement(alternateChoice));
             }
         }
+
         public GrammarBuilder ToGrammarBuilder()
         {
             return new GrammarBuilder(this);
@@ -68,10 +67,7 @@ namespace System.Speech.Recognition
 
         internal OneOfElement OneOf
         {
-            get
-            {
-                return _oneOf;
-            }
+            get { return _oneOf; }
         }
 
         #endregion

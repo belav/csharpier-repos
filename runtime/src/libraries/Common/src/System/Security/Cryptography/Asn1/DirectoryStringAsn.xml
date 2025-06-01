@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <asn:Choice
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="DirectoryStringAsn"
-  namespace="System.Security.Cryptography.Asn1">
-
+  namespace="System.Security.Cryptography.Asn1"
+>
   <!--
     https://tools.ietf.org/html/rfc5280#section-4.1.2.4
 
@@ -17,7 +17,7 @@
   -->
   <asn:T61String name="TeletexString" />
   <asn:PrintableString name="PrintableString" />
-  <asn:AnyValue name="UniversalString"  universalTagNumber="28" />
+  <asn:AnyValue name="UniversalString" universalTagNumber="28" />
   <asn:UTF8String name="Utf8String" />
   <asn:BMPString name="BmpString" />
 </asn:Choice>

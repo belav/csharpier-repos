@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Runtime;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Diagnostics;
 
     abstract class HttpTransportManager : TransportManager, ITransportManagerRegistration
     {
@@ -29,7 +29,11 @@ namespace System.ServiceModel.Channels
             this.listenUri = listenUri;
         }
 
-        internal HttpTransportManager(Uri listenUri, HostNameComparisonMode hostNameComparisonMode, string realm)
+        internal HttpTransportManager(
+            Uri listenUri,
+            HostNameComparisonMode hostNameComparisonMode,
+            string realm
+        )
             : this(listenUri, hostNameComparisonMode)
         {
             this.realm = realm;
@@ -37,56 +41,42 @@ namespace System.ServiceModel.Channels
 
         internal string Realm
         {
-            get
-            {
-                return this.realm;
-            }
+            get { return this.realm; }
         }
 
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get
-            {
-                return this.hostNameComparisonMode;
-            }
+            get { return this.hostNameComparisonMode; }
         }
 
         // are we hosted in Asp.Net? Default is false.
-        internal bool IsHosted
-        {
-            get;
-            set;
-        }
+        internal bool IsHosted { get; set; }
 
         internal override string Scheme
         {
-            get
-            {
-                return Uri.UriSchemeHttp;
-            }
+            get { return Uri.UriSchemeHttp; }
         }
 
         internal virtual UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
         {
-            get
-            {
-                return HttpChannelListener.StaticTransportManagerTable;
-            }
+            get { return HttpChannelListener.StaticTransportManagerTable; }
         }
 
         public Uri ListenUri
         {
-            get
-            {
-                return this.listenUri;
-            }
+            get { return this.listenUri; }
         }
 
         protected void Fault(Exception exception)
         {
             lock (ThisLock)
             {
-                foreach (KeyValuePair<string, UriPrefixTable<HttpChannelListener>> pair in this.addressTables)
+                foreach (
+                    KeyValuePair<
+                        string,
+                        UriPrefixTable<HttpChannelListener>
+                    > pair in this.addressTables
+                )
                 {
                     this.Fault(pair.Value, exception);
                 }
@@ -96,9 +86,9 @@ namespace System.ServiceModel.Channels
         internal virtual bool IsCompatible(HttpChannelListener listener)
         {
             return (
-                (this.hostNameComparisonMode == listener.HostNameComparisonMode) &&
-                (this.realm == listener.Realm)
-                );
+                (this.hostNameComparisonMode == listener.HostNameComparisonMode)
+                && (this.realm == listener.Realm)
+            );
         }
 
         internal override void OnClose(TimeSpan timeout)
@@ -119,36 +109,52 @@ namespace System.ServiceModel.Channels
 
         protected void StartReceiveBytesActivity(ServiceModelActivity activity, Uri requestUri)
         {
-            Fx.Assert(DiagnosticUtility.ShouldUseActivity, "should only call this if we're using SM Activities");
-            ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityReceiveBytes, requestUri.ToString()), ActivityType.ReceiveBytes);
+            Fx.Assert(
+                DiagnosticUtility.ShouldUseActivity,
+                "should only call this if we're using SM Activities"
+            );
+            ServiceModelActivity.Start(
+                activity,
+                SR.GetString(SR.ActivityReceiveBytes, requestUri.ToString()),
+                ActivityType.ReceiveBytes
+            );
         }
 
         protected void TraceMessageReceived(EventTraceActivity eventTraceActivity, Uri listenUri)
         {
             if (TD.HttpMessageReceiveStartIsEnabled())
-            {                
+            {
                 TD.HttpMessageReceiveStart(eventTraceActivity);
             }
         }
 
-        protected bool TryLookupUri(Uri requestUri, string requestMethod,
-                    HostNameComparisonMode hostNameComparisonMode, bool isWebSocketRequest, out HttpChannelListener listener)
+        protected bool TryLookupUri(
+            Uri requestUri,
+            string requestMethod,
+            HostNameComparisonMode hostNameComparisonMode,
+            bool isWebSocketRequest,
+            out HttpChannelListener listener
+        )
         {
             listener = null;
 
             if (isWebSocketRequest)
             {
-                Fx.Assert(StringComparer.OrdinalIgnoreCase.Compare(requestMethod, "GET") == 0, "The requestMethod must be GET in WebSocket case.");
+                Fx.Assert(
+                    StringComparer.OrdinalIgnoreCase.Compare(requestMethod, "GET") == 0,
+                    "The requestMethod must be GET in WebSocket case."
+                );
                 requestMethod = WebSocketTransportSettings.WebSocketMethod;
             }
-            
+
             if (requestMethod == null)
             {
                 requestMethod = string.Empty;
             }
 
             UriPrefixTable<HttpChannelListener> addressTable;
-            Dictionary<string, UriPrefixTable<HttpChannelListener>> localAddressTables = addressTables;
+            Dictionary<string, UriPrefixTable<HttpChannelListener>> localAddressTables =
+                addressTables;
 
             // check for a method match if necessary
             HttpChannelListener methodListener = null;
@@ -156,18 +162,33 @@ namespace System.ServiceModel.Channels
             {
                 if (localAddressTables.TryGetValue(requestMethod, out addressTable))
                 {
-                    if (addressTable.TryLookupUri(requestUri, hostNameComparisonMode, out methodListener)
-                        && string.Compare(requestUri.AbsolutePath, methodListener.Uri.AbsolutePath, StringComparison.OrdinalIgnoreCase) != 0)
+                    if (
+                        addressTable.TryLookupUri(
+                            requestUri,
+                            hostNameComparisonMode,
+                            out methodListener
+                        )
+                        && string.Compare(
+                            requestUri.AbsolutePath,
+                            methodListener.Uri.AbsolutePath,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                    )
                     {
                         methodListener = null;
                     }
                 }
             }
-            // and also check the wildcard bucket 
-            if (localAddressTables.TryGetValue(string.Empty, out addressTable)
-                && addressTable.TryLookupUri(requestUri, hostNameComparisonMode, out listener))
+            // and also check the wildcard bucket
+            if (
+                localAddressTables.TryGetValue(string.Empty, out addressTable)
+                && addressTable.TryLookupUri(requestUri, hostNameComparisonMode, out listener)
+            )
             {
-                if (methodListener != null && methodListener.Uri.AbsoluteUri.Length >= listener.Uri.AbsoluteUri.Length)
+                if (
+                    methodListener != null
+                    && methodListener.Uri.AbsoluteUri.Length >= listener.Uri.AbsoluteUri.Length
+                )
                 {
                     listener = methodListener;
                 }
@@ -179,8 +200,6 @@ namespace System.ServiceModel.Channels
 
             return (listener != null);
         }
-
-
 
         internal override void Register(TransportChannelListener channelListener)
         {
@@ -194,7 +213,9 @@ namespace System.ServiceModel.Channels
                     if (!addressTables.TryGetValue(method, out addressTable))
                     {
                         Dictionary<string, UriPrefixTable<HttpChannelListener>> newAddressTables =
-                            new Dictionary<string, UriPrefixTable<HttpChannelListener>>(addressTables);
+                            new Dictionary<string, UriPrefixTable<HttpChannelListener>>(
+                                addressTables
+                            );
 
                         addressTable = new UriPrefixTable<HttpChannelListener>();
                         newAddressTables[method] = addressTable;
@@ -204,12 +225,18 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            addressTable.RegisterUri(channelListener.Uri,
-                channelListener.InheritBaseAddressSettings ? hostNameComparisonMode : channelListener.HostNameComparisonModeInternal,
-                (HttpChannelListener)channelListener);
+            addressTable.RegisterUri(
+                channelListener.Uri,
+                channelListener.InheritBaseAddressSettings
+                    ? hostNameComparisonMode
+                    : channelListener.HostNameComparisonModeInternal,
+                (HttpChannelListener)channelListener
+            );
         }
 
-        IList<TransportManager> ITransportManagerRegistration.Select(TransportChannelListener channelListener)
+        IList<TransportManager> ITransportManagerRegistration.Select(
+            TransportChannelListener channelListener
+        )
         {
             IList<TransportManager> result = null;
             if (this.IsCompatible((HttpChannelListener)channelListener))
@@ -223,13 +250,23 @@ namespace System.ServiceModel.Channels
         internal override void Unregister(TransportChannelListener channelListener)
         {
             UriPrefixTable<HttpChannelListener> addressTable;
-            if (!addressTables.TryGetValue(((HttpChannelListener)channelListener).Method, out addressTable))
+            if (
+                !addressTables.TryGetValue(
+                    ((HttpChannelListener)channelListener).Method,
+                    out addressTable
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                     SR.ListenerFactoryNotRegistered, channelListener.Uri)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ListenerFactoryNotRegistered, channelListener.Uri)
+                    )
+                );
             }
 
-            HostNameComparisonMode registeredMode = channelListener.InheritBaseAddressSettings ? hostNameComparisonMode : channelListener.HostNameComparisonModeInternal;
+            HostNameComparisonMode registeredMode = channelListener.InheritBaseAddressSettings
+                ? hostNameComparisonMode
+                : channelListener.HostNameComparisonModeInternal;
 
             EnsureRegistered(addressTable, (HttpChannelListener)channelListener, registeredMode);
             addressTable.UnregisterUri(channelListener.Uri, registeredMode);

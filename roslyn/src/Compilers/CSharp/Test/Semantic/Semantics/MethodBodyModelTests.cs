@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void BindAliasWithSameNameClass()
         {
-            var text = @"
+            var text =
+                @"
 using NSA = A;
 
 namespace A
@@ -61,7 +62,8 @@ namespace B
         [Fact, WorkItem(537919, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537919")]
         public void NullRefForNameAndOptionalMethod()
         {
-            var text = @"
+            var text =
+                @"
 public class MyClass
 {
     public object Method01(int x, int y = 0, int z = 1) { return null; }
@@ -84,7 +86,8 @@ public class MyClass
         [Fact]
         public void ConversionsForLiterals()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     static void Main()
@@ -105,7 +108,8 @@ class Program
         [Fact]
         public void ConversionsFromVoid()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class Program
 {
@@ -127,7 +131,8 @@ class Program
             foreach (var e in comp.GetDiagnostics())
             {
                 count[(int)e.Severity]++;
-                if (!errors.ContainsKey(e.Code)) errors[e.Code] = 0;
+                if (!errors.ContainsKey(e.Code))
+                    errors[e.Code] = 0;
                 errors[e.Code] += 1;
             }
 
@@ -143,7 +148,8 @@ class Program
         [Fact]
         public void NullComparisons()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class Program
 {
@@ -168,7 +174,8 @@ class Program
         [Fact]
         public void OvldRslnWithExplicitIfaceImpl()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 interface i1
 {
@@ -208,7 +215,8 @@ class Program
         [Fact]
         public void OverloadResolutionCallThroughInterface()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public interface i1
 {
@@ -248,7 +256,8 @@ class Program
         [Fact]
         public void ComparisonOperatorForRefTypes()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     static void Main()
@@ -271,7 +280,8 @@ class Program
         [Fact]
         public void BindCastConversionOnArithmeticOp()
         {
-            var text = @"
+            var text =
+                @"
 public class MyClass
 {
     public static int Main()
@@ -300,7 +310,8 @@ public class MyClass
         public void NegBindLHSCStyleArray()
         {
             // Expect CS0650 etc.
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -315,8 +326,8 @@ class Test
 
             // The native compiler produces four errors for this: that the [] is in the wrong place
             // is the correct error. It also produces three incorrect errors due to a faulty
-            // error recovery heuristic; it treats the '=' as a statement and the "new int[10];" 
-            // as a statement, and therefore gives three additional errors: that there is 
+            // error recovery heuristic; it treats the '=' as a statement and the "new int[10];"
+            // as a statement, and therefore gives three additional errors: that there is
             // a missing semicolon before and after the '=', and that '=' is not a valid statement.
             // In Roslyn we now do error recovery better and treat the initialization clause
             // as an initializer. We therefore expect one parse error, not four.
@@ -330,7 +341,8 @@ class Test
         [Fact]
         public void NegBindMultiDimArrayInit()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public static int Main()
@@ -341,17 +353,19 @@ class A
 }
 ";
 
-            CreateCompilation(text).VerifyDiagnostics(
-    // (6,42): error CS1525: Invalid expression term ','
-    //         int[,] arr = new int[3,2] {{1,2},,{4,5}};
-    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",")
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (6,42): error CS1525: Invalid expression term ','
+                    //         int[,] arr = new int[3,2] {{1,2},,{4,5}};
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",")
                 );
         }
 
         [Fact]
         public void MethodGroupToDelegate01()
         {
-            var text = @"
+            var text =
+                @"
 delegate bool IntFunc(int x);
 delegate bool LongFunc(long x);
 
@@ -374,7 +388,8 @@ public class Program
         [Fact]
         public void MethodGroupToDelegate02()
         {
-            var text = @"
+            var text =
+                @"
 public class Program2
 {
     delegate void MyAction<T>(T x);
@@ -398,7 +413,8 @@ public class Program2
         [Fact]
         public void MethodGroupToDelegate03()
         {
-            var text = @"
+            var text =
+                @"
 public class Program1
 {
     delegate void MyAction<T>(T x);
@@ -421,7 +437,8 @@ public class Program1
         [Fact]
         public void MethodGroupToDelegate04()
         {
-            var text = @"
+            var text =
+                @"
 public class Program1
 {
     delegate void MyAction<T>(T x);
@@ -445,7 +462,8 @@ public class Program1
         [Fact]
         public void MethodGroupToDelegate05()
         {
-            var text = @"
+            var text =
+                @"
 public class Program1
 {
     delegate void MyAction<T>(T x);
@@ -468,7 +486,8 @@ public class Program1
         [Fact]
         public void MethodGroupToDelegate06()
         {
-            var text = @"
+            var text =
+                @"
 public class Program1
 {
     delegate void MyAction<T>(T x);
@@ -491,7 +510,8 @@ public class Program1
         [Fact]
         public void MethodGroupToDelegate07()
         {
-            var text = @"
+            var text =
+                @"
 public class Program1
 {
     delegate void MyAction<T>(T x);
@@ -514,7 +534,8 @@ public class Program1
         [Fact]
         public void InvokeDelegate01()
         {
-            var text = @"
+            var text =
+                @"
 public class Program
 {
     delegate void MyAction<T>(T x);
@@ -538,7 +559,8 @@ public class Program
         [Fact]
         public void PropertyAmbiguity()
         {
-            var text = @"
+            var text =
+                @"
 interface IA
 {
     int Goo { get; }
@@ -576,7 +598,8 @@ class C
         [Fact]
         public void DelegateMethodAmbiguity()
         {
-            var text = @"
+            var text =
+                @"
 delegate void MyAction<T>(T x);
 
 interface I1
@@ -623,7 +646,8 @@ public class Program : I3
         [Fact]
         public void LocalReferenceTypeConsts()
         {
-            var text = @"
+            var text =
+                @"
 public class c1
 {
 }
@@ -642,14 +666,15 @@ public class Program
                 // (10,18): warning CS0219: The variable 'C' is assigned but its value is never used
                 //         const c1 C = null;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "C").WithArguments("C")
-                );
+            );
         }
 
         [WorkItem(538617, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538617")]
         [Fact]
         public void TypeParameterNotInvocable()
         {
-            var text = @"
+            var text =
+                @"
 class B
 {
     public static void T() { }
@@ -672,7 +697,8 @@ class A<T> : B
         [Fact]
         public void ParenthesizedSetOnlyProperty()
         {
-            var text = @"
+            var text =
+                @"
 namespace ParenthesizedExpression
 {
     class A
@@ -704,7 +730,8 @@ namespace ParenthesizedExpression
         [Fact]
         public void TypeAliasNameIsSameAsProp()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using Kind = MyKind;
 
 enum MyKind
@@ -731,7 +758,8 @@ class C
         [Fact]
         public void TypeWithSameNameAsProp()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 enum Color
 {
     Chartreuse,
@@ -756,7 +784,8 @@ class C
         [Fact]
         public void TypeWithSameNameAsProp2()
         {
-            var text = @"
+            var text =
+                @"
 enum ProtectionLevel
 {
   Privacy = 0
@@ -780,7 +809,8 @@ class F
         [Fact]
         public void TypeWithSameNameAsProp3()
         {
-            var text = @"
+            var text =
+                @"
 using System.ComponentModel;
 enum ProtectionLevel
 {
@@ -801,7 +831,8 @@ class F
         [Fact]
         public void AccessTypeThroughAliasNamespace()
         {
-            var text = @"
+            var text =
+                @"
 namespace Conformance.Expressions
 {
     using LevelInner = LevelOne.LevelTwo.LevelThree;
@@ -838,7 +869,8 @@ namespace LevelOne.LevelTwo.LevelThree
         [Fact]
         public void WarningPassLocalAsRefParameter()
         {
-            var text = @"
+            var text =
+                @"
 public class MyClass 
 {
   public int MyMeth(ref int mbc)  {  return 1;  }
@@ -865,7 +897,8 @@ public static int Main()
         [Fact]
         public void WarningPassLocalAsOutParameter()
         {
-            var text = @"
+            var text =
+                @"
 public class MyClass
 {
     public int MyMeth(out int mbc) { mbc = 1; return mbc; }
@@ -890,7 +923,8 @@ public class TestClass
         [Fact]
         public void SimpleNameThroughUsingAlias()
         {
-            var text = @"using System;
+            var text =
+                @"using System;
 using Kind = MyKind;
 
 enum MyKind
@@ -917,7 +951,8 @@ class C
         [Fact]
         public void MethodInvocationWithMultipleArgsToParams()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 class Test
@@ -937,7 +972,8 @@ class Test
         [Fact, WorkItem(1118749, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1118749")]
         public void InstanceFieldOfEnclosingStruct()
         {
-            var text = @"
+            var text =
+                @"
 struct Outer
 {
     private int f1;
@@ -953,17 +989,21 @@ struct Outer
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
             Assert.Equal(0, comp.GetDeclarationDiagnostics().Count());
-            comp.GetMethodBodyDiagnostics().Verify(
-                // (10,21): error CS0120: An object reference is required for the non-static field, method, or property 'Outer.f1'
-                //             var x = f1 - 1;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "f1").WithArguments("Outer.f1").WithLocation(10, 21)
+            comp.GetMethodBodyDiagnostics()
+                .Verify(
+                    // (10,21): error CS0120: An object reference is required for the non-static field, method, or property 'Outer.f1'
+                    //             var x = f1 - 1;
+                    Diagnostic(ErrorCode.ERR_ObjectRequired, "f1")
+                        .WithArguments("Outer.f1")
+                        .WithLocation(10, 21)
                 );
         }
 
         [Fact, WorkItem(8556, "https://github.com/dotnet/roslyn/issues/8556")]
         public void CastAmbiguousMethodGroupTypeProducesCorrectErrorMessage()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public delegate void Goo ();
@@ -991,10 +1031,18 @@ class Program
 ";
             var tree = Parse(text);
             var comp = CreateCompilation(tree);
-            comp.GetMethodBodyDiagnostics().Verify(
-                // (23,15): error CS0457: Ambiguous user defined conversions 'D.explicit operator D(Goo)' and 'D.implicit operator D(Action)' when converting from 'method group' to 'D'
-                //          D d = (D) Main;
-                Diagnostic(ErrorCode.ERR_AmbigUDConv, "(D) Main").WithArguments("D.explicit operator D(Goo)", "D.implicit operator D(System.Action)", "method group", "D").WithLocation(23, 15)
+            comp.GetMethodBodyDiagnostics()
+                .Verify(
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'D.explicit operator D(Goo)' and 'D.implicit operator D(Action)' when converting from 'method group' to 'D'
+                    //          D d = (D) Main;
+                    Diagnostic(ErrorCode.ERR_AmbigUDConv, "(D) Main")
+                        .WithArguments(
+                            "D.explicit operator D(Goo)",
+                            "D.implicit operator D(System.Action)",
+                            "method group",
+                            "D"
+                        )
+                        .WithLocation(23, 15)
                 );
         }
     }

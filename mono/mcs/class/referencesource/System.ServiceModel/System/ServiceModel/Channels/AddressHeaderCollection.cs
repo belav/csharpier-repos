@@ -4,26 +4,24 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Security;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.ServiceModel.Security;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
 
     public sealed class AddressHeaderCollection : ReadOnlyCollection<AddressHeader>
     {
         static AddressHeaderCollection emptyHeaderCollection = new AddressHeaderCollection();
 
         public AddressHeaderCollection()
-            : base(new List<AddressHeader>())
-        {
-        }
+            : base(new List<AddressHeader>()) { }
 
         public AddressHeaderCollection(IEnumerable<AddressHeader> addressHeaders)
             : base(new List<AddressHeader>(addressHeaders))
@@ -35,7 +33,9 @@ namespace System.ServiceModel.Channels
                 for (int i = 0; i < collection.Count; i++)
                 {
                     if (collection[i] == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0))
+                        );
                 }
             }
             else if (!LocalAppContextSwitches.DisableAddressHeaderCollectionValidation)
@@ -43,7 +43,9 @@ namespace System.ServiceModel.Channels
                 foreach (AddressHeader addressHeader in addressHeaders)
                 {
                     if (addressHeader == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.MessageHeaderIsNull0))
+                        );
                 }
             }
         }
@@ -78,9 +80,13 @@ namespace System.ServiceModel.Channels
         public AddressHeader[] FindAll(string name, string ns)
         {
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             if (ns == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("ns"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("ns")
+                );
 
             List<AddressHeader> results = new List<AddressHeader>();
             for (int i = 0; i < Count; i++)
@@ -98,9 +104,13 @@ namespace System.ServiceModel.Channels
         public AddressHeader FindHeader(string name, string ns)
         {
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             if (ns == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("ns"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("ns")
+                );
 
             AddressHeader matchingHeader = null;
 
@@ -110,7 +120,9 @@ namespace System.ServiceModel.Channels
                 if (header.Name == name && header.Namespace == ns)
                 {
                     if (matchingHeader != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MultipleMessageHeaders, name, ns)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.MultipleMessageHeaders, name, ns))
+                        );
                     matchingHeader = header;
                 }
             }
@@ -150,7 +162,10 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        internal void PopulateHeaderDictionary(StringBuilder builder, Dictionary<string, int> headers)
+        internal void PopulateHeaderDictionary(
+            StringBuilder builder,
+            Dictionary<string, int> headers
+        )
         {
             string key;
             for (int i = 0; i < InternalCount; ++i)
@@ -173,7 +188,10 @@ namespace System.ServiceModel.Channels
             return ReadServiceParameters(reader, false);
         }
 
-        internal static AddressHeaderCollection ReadServiceParameters(XmlDictionaryReader reader, bool isReferenceProperty)
+        internal static AddressHeaderCollection ReadServiceParameters(
+            XmlDictionaryReader reader,
+            bool isReferenceProperty
+        )
         {
             reader.MoveToContent();
             if (reader.IsEmptyElement)

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,37 +37,41 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	class SslStreamSecurityUpgradeAcceptor : StreamSecurityUpgradeAcceptor
-	{
-		SslStreamSecurityUpgradeProvider source;
-		public SslStreamSecurityUpgradeAcceptor (SslStreamSecurityUpgradeProvider source)
-		{
-			this.source = source;
-		}
+    class SslStreamSecurityUpgradeAcceptor : StreamSecurityUpgradeAcceptor
+    {
+        SslStreamSecurityUpgradeProvider source;
 
-		public override SecurityMessageProperty GetRemoteSecurity()
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        public SslStreamSecurityUpgradeAcceptor(SslStreamSecurityUpgradeProvider source)
+        {
+            this.source = source;
+        }
 
-		public override bool CanUpgrade (string contentType)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        public override SecurityMessageProperty GetRemoteSecurity()
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		public override IAsyncResult BeginAcceptUpgrade (
-			Stream stream, AsyncCallback callback, object state)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        public override bool CanUpgrade(string contentType)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		public override Stream EndAcceptUpgrade(IAsyncResult result)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
-	}
+        public override IAsyncResult BeginAcceptUpgrade(
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
+
+        public override Stream EndAcceptUpgrade(IAsyncResult result)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
+    }
 }

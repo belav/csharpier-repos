@@ -20,54 +20,54 @@ public class TouchEventArgsReaderTest
             Type = "type1",
             ChangedTouches = new[]
             {
-                    new TouchPoint
-                    {
-                        ClientX = 1.3,
-                        ClientY = 2.9,
-                        Identifier = 11,
-                        PageX = 7.0,
-                        PageY = 0.23,
-                        ScreenX = 1.0,
-                        ScreenY = 39.2
-                    },
+                new TouchPoint
+                {
+                    ClientX = 1.3,
+                    ClientY = 2.9,
+                    Identifier = 11,
+                    PageX = 7.0,
+                    PageY = 0.23,
+                    ScreenX = 1.0,
+                    ScreenY = 39.2,
                 },
+            },
             Detail = 789,
             TargetTouches = new[]
             {
-                    new TouchPoint
-                    {
-                        ClientX = 2.3,
-                        ClientY = 22.9,
-                        Identifier = 8,
-                        PageX = 786.0,
-                        PageY = 1.4,
-                        ScreenX = 5.0,
-                        ScreenY = 9.2
-                    },
-                    new TouchPoint
-                    {
-                        ClientX = 12.3,
-                        ClientY = 2.9,
-                        Identifier = 17,
-                        PageX = 6.3,
-                        PageY = 13.4,
-                        ScreenX = 4.0,
-                        ScreenY = 7.2
-                    },
+                new TouchPoint
+                {
+                    ClientX = 2.3,
+                    ClientY = 22.9,
+                    Identifier = 8,
+                    PageX = 786.0,
+                    PageY = 1.4,
+                    ScreenX = 5.0,
+                    ScreenY = 9.2,
                 },
+                new TouchPoint
+                {
+                    ClientX = 12.3,
+                    ClientY = 2.9,
+                    Identifier = 17,
+                    PageX = 6.3,
+                    PageY = 13.4,
+                    ScreenX = 4.0,
+                    ScreenY = 7.2,
+                },
+            },
             Touches = new[]
             {
-                    new TouchPoint
-                    {
-                        ClientX = 6.8,
-                        ClientY = 1.9,
-                        Identifier = 3,
-                        PageX = 2.3,
-                        PageY = 3.4,
-                        ScreenX = 4.1,
-                        ScreenY = 8.0,
-                    },
+                new TouchPoint
+                {
+                    ClientX = 6.8,
+                    ClientY = 1.9,
+                    Identifier = 3,
+                    PageX = 2.3,
+                    PageY = 3.4,
+                    ScreenX = 4.1,
+                    ScreenY = 8.0,
                 },
+            },
         };
 
         var jsonElement = GetJsonElement(args);
