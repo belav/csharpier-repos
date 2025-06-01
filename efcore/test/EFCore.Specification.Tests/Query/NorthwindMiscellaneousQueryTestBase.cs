@@ -733,7 +733,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_Customers_Orders_Orders_Skip_Take_Same_Properties(bool async) =>
-        AssertQuery(async, ss => (
+        AssertQuery(
+            async,
+            ss =>
+                (
                     from o in ss.Set<Order>()
                     join ca in ss.Set<Customer>() on o.CustomerID equals ca.CustomerID
                     join cb in ss.Set<Customer>() on o.CustomerID equals cb.CustomerID
@@ -746,7 +749,11 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         ContactNameA = ca.ContactName,
                         ContactNameB = cb.ContactName,
                     }
-                ).Skip(10).Take(5), e => e.OrderID);
+                )
+                    .Skip(10)
+                    .Take(5),
+            e => e.OrderID
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
