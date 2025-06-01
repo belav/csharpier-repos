@@ -2344,7 +2344,9 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     p.Name,
                     r.AmountSold,
                 }
-            ).OrderBy(p => p.Id).ToList();
+            )
+                .OrderBy(p => p.Id)
+                .ToList();
 
             Assert.Equal(2, products.Count);
             Assert.Equal(3, products[0].Id);

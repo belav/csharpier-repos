@@ -1614,28 +1614,44 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_select_correct_table_with_anonymous_projection_in_subquery(
         bool async
-    ) => AssertQuery(async, ss => (
+    ) =>
+        AssertQuery(
+            async,
+            ss =>
+                (
                     from l2 in ss.Set<Level2>()
                     join l1 in ss.Set<Level1>() on l2.Level1_Required_Id equals l1.Id
                     join l3 in ss.Set<Level3>() on l1.Id equals l3.Level2_Required_Id
                     //where l1.Name == "L1 01"
                     //where l3.Name == "L3 010"
                     select new { l2, l1 }
-                ).OrderBy(l => l.l1.Id).Take(3).Select(l => l.l2.Name));
+                )
+                    .OrderBy(l => l.l1.Id)
+                    .Take(3)
+                    .Select(l => l.l2.Name)
+        );
 
     // see issue #31887
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_select_correct_table_in_subquery_when_materialization_is_not_required_in_multiple_joins(
         bool async
-    ) => AssertQuery(async, ss => (
+    ) =>
+        AssertQuery(
+            async,
+            ss =>
+                (
                     from l2 in ss.Set<Level2>()
                     join l1 in ss.Set<Level1>() on l2.Level1_Required_Id equals l1.Id
                     join l3 in ss.Set<Level3>() on l1.Id equals l3.Level2_Required_Id
                     //where l1.Name == "L1 03"
                     //where l3.Name == "L3 08"
                     select l1
-                ).OrderBy(l1 => l1.Id).Take(3).Select(l1 => l1.Name));
+                )
+                    .OrderBy(l1 => l1.Id)
+                    .Take(3)
+                    .Select(l1 => l1.Name)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
