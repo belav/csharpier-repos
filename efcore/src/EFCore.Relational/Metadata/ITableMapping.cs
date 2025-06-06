@@ -65,10 +65,7 @@ public interface ITableMapping : ITableMappingBase
                 builder.Append("TableMapping: ");
             }
 
-            builder
-                .Append(TypeBase.Name)
-                .Append(" - ")
-                .Append(Table.Name);
+            builder.Append(TypeBase.Name).Append(" - ").Append(Table.Name);
 
             builder.Append(" ");
             if (!IncludesDerivedTypes)

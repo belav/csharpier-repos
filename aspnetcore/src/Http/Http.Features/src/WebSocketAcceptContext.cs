@@ -62,8 +62,10 @@ public class WebSocketAcceptContext
         {
             if (value < 9 || value > 15)
             {
-                throw new ArgumentOutOfRangeException(nameof(ServerMaxWindowBits),
-                    "The argument must be a value from 9 to 15.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(ServerMaxWindowBits),
+                    "The argument must be a value from 9 to 15."
+                );
             }
             _serverMaxWindowBits = value;
         }

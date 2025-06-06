@@ -10,13 +10,18 @@ namespace System.Collections.Tests
     /// <summary>
     /// Contains tests that ensure the correctness of the Dictionary class.
     /// </summary>
-    public abstract class SortedDictionary_Generic_Tests<TKey, TValue> : IDictionary_Generic_Tests<TKey, TValue>
+    public abstract class SortedDictionary_Generic_Tests<TKey, TValue>
+        : IDictionary_Generic_Tests<TKey, TValue>
     {
         #region IDictionary<TKey, TValue> Helper Methods
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Empty_Current_UndefinedOperation_Throws => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
-        protected override bool DefaultValueWhenNotAllowed_Throws { get { return false; } }
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
+        protected override bool DefaultValueWhenNotAllowed_Throws
+        {
+            get { return false; }
+        }
 
         protected override IDictionary<TKey, TValue> GenericIDictionaryFactory()
         {
@@ -33,7 +38,10 @@ namespace System.Collections.Tests
         {
             IComparer<TKey> comparer = GetKeyIComparer();
             IDictionary<TKey, TValue> source = GenericIDictionaryFactory(count);
-            SortedDictionary<TKey, TValue> copied = new SortedDictionary<TKey, TValue>(source, comparer);
+            SortedDictionary<TKey, TValue> copied = new SortedDictionary<TKey, TValue>(
+                source,
+                comparer
+            );
             Assert.Equal(source, copied);
             Assert.Equal(comparer, copied.Comparer);
         }
@@ -50,7 +58,9 @@ namespace System.Collections.Tests
         [Fact]
         public void SortedDictionary_Generic_Constructor_NullIDictionary_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => new SortedDictionary<TKey, TValue>((IDictionary<TKey, TValue>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new SortedDictionary<TKey, TValue>((IDictionary<TKey, TValue>)null)
+            );
         }
 
         [Theory]
@@ -59,16 +69,27 @@ namespace System.Collections.Tests
         {
             IComparer<TKey> comparer = GetKeyIComparer();
             IDictionary<TKey, TValue> source = GenericIDictionaryFactory(count);
-            SortedDictionary<TKey, TValue> sourceSorted = new SortedDictionary<TKey, TValue>(source, comparer);
+            SortedDictionary<TKey, TValue> sourceSorted = new SortedDictionary<TKey, TValue>(
+                source,
+                comparer
+            );
             Assert.Equal(source, sourceSorted);
             Assert.Equal(comparer, sourceSorted.Comparer);
             // Test copying a sorted dictionary.
-            SortedDictionary<TKey, TValue> copied = new SortedDictionary<TKey, TValue>(sourceSorted, comparer);
+            SortedDictionary<TKey, TValue> copied = new SortedDictionary<TKey, TValue>(
+                sourceSorted,
+                comparer
+            );
             Assert.Equal(sourceSorted, copied);
             Assert.Equal(comparer, copied.Comparer);
             // Test copying a sorted dictionary with a different comparer.
-            IComparer<TKey> reverseComparer = Comparer<TKey>.Create((key1, key2) => -comparer.Compare(key1, key2));
-            SortedDictionary<TKey, TValue> copiedReverse = new SortedDictionary<TKey, TValue>(sourceSorted, reverseComparer);
+            IComparer<TKey> reverseComparer = Comparer<TKey>.Create(
+                (key1, key2) => -comparer.Compare(key1, key2)
+            );
+            SortedDictionary<TKey, TValue> copiedReverse = new SortedDictionary<TKey, TValue>(
+                sourceSorted,
+                reverseComparer
+            );
             Assert.Equal(sourceSorted, copiedReverse);
             Assert.Equal(reverseComparer, copiedReverse.Comparer);
         }
@@ -81,7 +102,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedDictionary_Generic_ContainsValue_NotPresent(int count)
         {
-            SortedDictionary<TKey, TValue> dictionary = (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            SortedDictionary<TKey, TValue> dictionary =
+                (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             int seed = 4315;
             TValue notPresent = CreateTValue(seed++);
             while (dictionary.Values.Contains(notPresent))
@@ -93,7 +115,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedDictionary_Generic_ContainsValue_Present(int count)
         {
-            SortedDictionary<TKey, TValue> dictionary = (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            SortedDictionary<TKey, TValue> dictionary =
+                (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             int seed = 4315;
             KeyValuePair<TKey, TValue> notPresent = CreateT(seed++);
             while (dictionary.Contains(notPresent))
@@ -106,7 +129,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedDictionary_Generic_ContainsValue_DefaultValueNotPresent(int count)
         {
-            SortedDictionary<TKey, TValue> dictionary = (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            SortedDictionary<TKey, TValue> dictionary =
+                (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.False(dictionary.ContainsValue(default(TValue)));
         }
 
@@ -114,7 +138,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedDictionary_Generic_ContainsValue_DefaultValuePresent(int count)
         {
-            SortedDictionary<TKey, TValue> dictionary = (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            SortedDictionary<TKey, TValue> dictionary =
+                (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             int seed = 4315;
             TKey notPresent = CreateTKey(seed++);
             while (dictionary.ContainsKey(notPresent))
@@ -129,9 +154,12 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void SortedDictionary_Generic_DictionaryIsProperlySortedAccordingToComparer(int setLength)
+        public void SortedDictionary_Generic_DictionaryIsProperlySortedAccordingToComparer(
+            int setLength
+        )
         {
-            SortedDictionary<TKey, TValue> set = (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(setLength);
+            SortedDictionary<TKey, TValue> set =
+                (SortedDictionary<TKey, TValue>)GenericIDictionaryFactory(setLength);
             List<KeyValuePair<TKey, TValue>> expected = set.ToList();
             expected.Sort(GetIComparer());
             int expectedIndex = 0;

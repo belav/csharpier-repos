@@ -10,7 +10,8 @@
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -35,18 +36,20 @@ namespace System.Web.UI {
     using System.Web.UI.WebControls;
     using System.Web.Util;
     using Microsoft.Win32;
+
     //using Debug = System.Web.Util.Debug;
 
-internal static class Util {
+    internal static class Util
+    {
+        internal static string GetUrlWithApplicationPath(HttpContextBase context, string url)
+        {
+            string appPath = context.Request.ApplicationPath ?? String.Empty;
+            if (!appPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
+            {
+                appPath += "/";
+            }
 
-    internal static string GetUrlWithApplicationPath(HttpContextBase context, string url) {
-        string appPath = context.Request.ApplicationPath ?? String.Empty;
-        if (!appPath.EndsWith("/", StringComparison.OrdinalIgnoreCase)) {
-            appPath += "/";
+            return context.Response.ApplyAppPathModifier(appPath + url);
         }
-
-        return context.Response.ApplyAppPathModifier(appPath + url);
     }
-}
-
 }

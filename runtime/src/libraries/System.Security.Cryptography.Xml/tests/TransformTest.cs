@@ -15,10 +15,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     public class ConcreteTransform : Transform
     {
-
         protected override XmlNodeList GetInnerXml()
         {
             throw new NotImplementedException();
@@ -76,14 +74,19 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void GetDigestedOutput_Null()
         {
-            Assert.Throws<NullReferenceException>(() => new ConcreteTransform().GetDigestedOutput(null));
+            Assert.Throws<NullReferenceException>(() =>
+                new ConcreteTransform().GetDigestedOutput(null)
+            );
         }
 
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
         [Theory]
         [InlineData(false, "<a><b><c xmlns=\"urn:foo\" /></b></a>")]
         [InlineData(true, "<a f=\"urn:foo\"><b><c xmlns=\"urn:foo\" /></b></a>")]
-        public void PropagatedNamespaces_XmlDecryptionTransform(bool addPropagatedNamespace, string expectedResult)
+        public void PropagatedNamespaces_XmlDecryptionTransform(
+            bool addPropagatedNamespace,
+            string expectedResult
+        )
         {
             XmlDocument baseDocument = new XmlDocument();
             baseDocument.LoadXml("<a><b><c xmlns=\"urn:foo\"/></b></a>");
@@ -92,7 +95,8 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 EncryptedXml encryptedXml = new EncryptedXml(baseDocument);
                 encryptedXml.AddKeyNameMapping("key", aes);
-                XmlElement bElement = (XmlElement) baseDocument.DocumentElement.SelectSingleNode("b");
+                XmlElement bElement = (XmlElement)
+                    baseDocument.DocumentElement.SelectSingleNode("b");
                 EncryptedData encryptedData = encryptedXml.Encrypt(bElement, "key");
                 EncryptedXml.ReplaceElement(bElement, encryptedData, false);
 
@@ -103,7 +107,8 @@ namespace System.Security.Cryptography.Xml.Tests
                 {
                     decryptionTransform.PropagatedNamespaces.Add("f", "urn:foo");
                 }
-                XmlDocument decryptedDocument = (XmlDocument) decryptionTransform.GetOutput(typeof(XmlDocument));
+                XmlDocument decryptedDocument = (XmlDocument)
+                    decryptionTransform.GetOutput(typeof(XmlDocument));
 
                 Assert.Equal(expectedResult, decryptedDocument.OuterXml);
             }

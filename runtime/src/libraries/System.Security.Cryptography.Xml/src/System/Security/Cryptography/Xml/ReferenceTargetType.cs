@@ -7,6 +7,6 @@ namespace System.Security.Cryptography.Xml
     {
         Stream,
         XmlElement,
-        UriReference
+        UriReference,
     }
 }

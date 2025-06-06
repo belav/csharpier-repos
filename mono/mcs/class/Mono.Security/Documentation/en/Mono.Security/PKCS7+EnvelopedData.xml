@@ -76,7 +76,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ContentInfo">
-      <MemberSignature Language="C#" Value="public Mono.Security.PKCS7.ContentInfo ContentInfo { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.PKCS7.ContentInfo ContentInfo { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.PKCS7+ContentInfo</ReturnType>
@@ -108,7 +111,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="EncryptionAlgorithm">
-      <MemberSignature Language="C#" Value="public Mono.Security.PKCS7.ContentInfo EncryptionAlgorithm { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.PKCS7.ContentInfo EncryptionAlgorithm { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.PKCS7+ContentInfo</ReturnType>
@@ -141,7 +147,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RecipientInfos">
-      <MemberSignature Language="C#" Value="public System.Collections.ArrayList RecipientInfos { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ArrayList RecipientInfos { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>

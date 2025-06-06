@@ -21,11 +21,13 @@ public class CompilationOptionsTests : IClassFixture<MvcTestFixture<RazorWebSite
     {
         // Arrange
         var expected =
-@"This method is running from NETCOREAPP2_0
+            @"This method is running from NETCOREAPP2_0
 This method is only defined in NETCOREAPP2_0";
 
         // Act
-        var body = await Client.GetStringAsync("http://localhost/ViewsConsumingCompilationOptions/");
+        var body = await Client.GetStringAsync(
+            "http://localhost/ViewsConsumingCompilationOptions/"
+        );
 
         // Assert
         Assert.Equal(expected, body.Trim(), ignoreLineEndingDifferences: true);

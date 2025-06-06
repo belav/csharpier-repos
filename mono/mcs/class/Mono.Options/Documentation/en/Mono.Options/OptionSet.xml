@@ -1,6 +1,12 @@
 <Type Name="OptionSet" FullName="Mono.Options.OptionSet">
-  <TypeSignature Language="C#" Value="public class OptionSet : System.Collections.ObjectModel.KeyedCollection&lt;string,Mono.Options.Option&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit OptionSet extends System.Collections.ObjectModel.KeyedCollection`2&lt;string, class Mono.Options.Option&gt;" />
+  <TypeSignature
+    Language="C#"
+    Value="public class OptionSet : System.Collections.ObjectModel.KeyedCollection&lt;string,Mono.Options.Option&gt;"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit OptionSet extends System.Collections.ObjectModel.KeyedCollection`2&lt;string, class Mono.Options.Option&gt;"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Options</AssemblyName>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -17,7 +23,8 @@
     (<see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />,
     <see cref="M:System.Collections.ObjectModel.Collection{Mono.Options.Option}.Remove(``0)" />,
     etc.).
-  </ThreadingSafetyStatement>
+  </ThreadingSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Collections.ObjectModel.KeyedCollection&lt;System.String,Mono.Options.Option&gt;</BaseTypeName>
     <BaseTypeArguments>
@@ -43,29 +50,34 @@
         encountered.  <see cref="T:Mono.Options.Option" />'s are registered 
         with <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         and its overloads.
-      </para>
+      </para
+      >
       <para>
         <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />,
         returns a 
         <see cref="T:System.Collections.Generic.List{System.String}" /> of all
         arguments which were not matched by a registered
         <see cref="T:Mono.Options.Option" />.
-      </para>
+      </para
+      >
       <para>
         Response files, as used by <c>mcs</c> and other compiler tools, may be
         supported by using <see cref="T:Mono.Options.ResponseFileSource" />.
-      </para>
+      </para
+      >
       <para>
         "Headers" -- string constants which allow grouping of options in the
         output of
         <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />
         -- may be provided "inline" with the actual options. The <c>greet</c>
         example below shows such usage.
-      </para>
+      </para
+      >
       <para>
         Three conditions must be met for a sequence of arguments to be
         considered as a match for an <see cref="T:Mono.Options.Option" />:
-      </para>
+      </para
+      >
       <list type="bullet">
         <item>
           <term>
@@ -77,26 +89,57 @@
           <see cref="P:Mono.Options.Option.Prototype" />): <c>-</c>, 
           <c>--</c>, or <c>/</c>.
           There are several different name matching algorithms:
-          <list type="bullet"><item><term><para><paramref name="Simple" /> names are matched when the argument
+          <list type="bullet">
+              <item>
+                <term>
+                  <para>
+                    <paramref name="Simple" /> names are matched when the argument
                 consists solely of a flag followed by an option name.
-              </para><para>
+              </para
+                  >
+                  <para>
                 Examples: <c>-opt</c>, <c>--opt</c>, and <c>/opt</c> are all
                 simple names for the <c>opt</c> option.
-              </para></term></item><item><term><para><paramref name="Boolean" /> names are matched when the
+              </para
+                  >
+                </term>
+              </item>
+              <item>
+                <term>
+                  <para>
+                    <paramref name="Boolean" /> names are matched when the
                 argument consists of a flag, followed by an option name,
                 followed by <c>+</c> or <c>-</c>.  If a <c>+</c> follows the
                 name, the option is enabled, otherwise the option is disabled.
-              </para><para>
+              </para
+                  >
+                  <para>
                 Examples: <c>-opt+</c> and <c>-opt-</c> enable and disble the
                 <c>opt</c> option.
-              </para></term></item><item><term><para><paramref name="Assigned" /> names are matched when the
+              </para
+                  >
+                </term>
+              </item>
+              <item>
+                <term>
+                  <para>
+                    <paramref name="Assigned" /> names are matched when the
                 argument consists of a flag, followed by an option name,
                 followed by a <c>=</c> or <c>:</c>, followed by an (optional)
                 string.
-              </para><para>
+              </para
+                  >
+                  <para>
                 Examples: <c>-opt=A</c>, <c>--opt:B</c>, and <c>/opt=C</c> all
                 provide a value for the <c>opt</c> option.
-              </para></term></item><item><term><para><paramref name="Bundled" /> names are matched only when
+              </para
+                  >
+                </term>
+              </item>
+              <item>
+                <term>
+                  <para>
+                    <paramref name="Bundled" /> names are matched only when
                 simple, boolean, and assigned names are not matched,
                 the flag is <c>-</c>, and the first character matches a
                 registered option.  Any number of (single-character) boolean 
@@ -105,20 +148,30 @@
                 <see cref="F:Mono.Options.OptionValueType.Required" /> option 
                 (which will use all remaining characters within the argument
                 as a value).
-              </para><para>
+              </para
+                  >
+                  <para>
                 Examples: <c>-xvfinput-file</c> could match the boolean 
                 <see cref="T:Mono.Options.Option" />s <c>x</c> and <c>v</c>
                 and the value-accepting option <c>f</c>, which will get the
                 value <c>input-file</c>.  (Other interpretations are also
                 possible, depending upon which options are registered.)
-              </para></term></item><item><term><para>
+              </para
+                  >
+                </term>
+              </item>
+              <item>
+                <term>
+                  <para>
                   As a fallback, a <paramref name="default handler" /> may be
                   registered which will handle <paramref name="all" />
                   arguments which are not handled by any of the above matching
                   algorithms.  The default handler is designated by the name
                   <c>&lt;&gt;</c> (which may be an alias for another named
                   <see cref="T:Mono.Options.Option" />).
-                </para><para>
+                </para
+                  >
+                  <para>
                   Default handlers are useful for argument runs -- sequences
                   of arguments that are not related to each other but are
                   instead related to a prior option on the command line, and it
@@ -127,18 +180,26 @@
                   --format=man FileC</c> would process <c>DirA</c> and
                   <c>DirB</c> with <c>--format=ecma</c> in effect, and then
                   process <c>FileC</c> with <c>--format=man</c> in effect.
-                </para><para>
+                </para
+                  >
+                  <para>
                   See 
                   <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
                   for additional details regarding default option handlers.
-                </para></term></item></list></term>
+                </para
+                  >
+                </term>
+              </item>
+            </list>
+          </term>
         </item>
         <item>
           <term>
           The <paramref name="type" /> must be matched.  
           <see cref="P:Mono.Options.Option.OptionValueType" /> specifies the
           option's type.  See below for more information.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
@@ -147,13 +208,15 @@
           (previous bullet), but the number of values the option either
           accepts or requires is specified by the
           <see cref="P:Mono.Options.Option.MaxValueCount" /> property.
-        </term>
+        </term
+          >
         </item>
       </list>
       <para>
         There are three types of <see cref="T:Mono.Options.Option" />s that
         can be parsed:
-      </para>
+      </para
+      >
       <list type="number">
         <item>
           <term>
@@ -166,7 +229,8 @@
           e.g.  if <c>-option</c> or <c>-option+</c> is specified, and the value
           will be <see langword="default(T)" /> if the value is false, e.g. 
           if <c>-option-</c> is specified.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
@@ -178,13 +242,15 @@
             value only from the current argument.  If the value is not present, 
             <see langword="default(T)" /> is provided to their corresponding
             <see cref="T:System.Action`1" />.
-          </para>
+          </para
+            >
             <para>
             Thus, <c>-opt:value</c> would pass <c>value</c> to the
             action registered for <c>opt</c>, while <c>-opt value</c> would pass
             <see langword="default(T)" /> to the action registered for 
             <c>opt</c> and <c>value</c> would be an unparsed argument.
-          </para>
+          </para
+            >
           </term>
         </item>
         <item>
@@ -197,23 +263,27 @@
             within the current argument, the following argument(s) will be used to
             supply the value(s).  Once enough values have been parsed, 
             their corresponding <see cref="T:System.Action`1" /> is invoked.
-          </para>
+          </para
+            >
             <para>
             Thus, both <c>-opt:value</c> and <c>-opt value</c> would pass 
             <c>value</c> to the action registered for <c>opt</c>.
-          </para>
+          </para
+            >
             <para>
             If no value can be found, an 
             <see cref="T:Mono.Options.OptionException" /> is thrown from
             <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />.
-          </para>
+          </para
+            >
           </term>
         </item>
       </list>
       <block subset="none" type="behaviors">
         <para>
           Use of <c>OptionSet</c> is split up into two parts:
-        </para>
+        </para
+        >
         <list type="number">
           <item>
             <term>Initialization.</term>
@@ -230,14 +300,18 @@
           encountered).  This phase is not thread safe.
           All options added during this phase are considered to have been
           <paramref name="registered" />.
-        </para>
-        <code lang="C#">OptionSet p = new OptionSet () {
+        </para
+        >
+        <code lang="C#"
+          >OptionSet p = new OptionSet () {
   { "option-a", v =&gt; { /* action to perform */ } },
-};</code>
+};</code
+        >
         <para>
           There are three ways to add <see cref="T:Mono.Options.Option" />s
           to the <see cref="T:Mono.Options.OptionSet" />:
-        </para>
+        </para
+        >
         <list type="number">
           <item>
             <term>
@@ -249,7 +323,8 @@
             Explicitly by calling
             <see cref="M:Mono.Options.OptionSet.Add(System.String,System.Action{System.String})" />
             and the other <c>Add</c> overloads.
-          </term>
+          </term
+            >
           </item>
           <item>
             <term>
@@ -259,7 +334,8 @@
             This is not recommended, but is available if you require more
             direct option handling than the default 
             <see cref="T:Mono.Options.Option" /> implementation provides.
-          </term>
+          </term
+            >
           </item>
         </list>
         <para>
@@ -275,14 +351,16 @@
           all arguments that are not used as option values are returned from 
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           or processed by the default handler <c>&lt;&gt;</c>, if registered.
-        </para>
+        </para
+        >
         <code lang="C#">List&lt;string&gt; extra = p.Parse (new string[]{"-option-a"});</code>
       </block>
       <block subset="none" type="overrides">
         <para>
           Subclasses can override the following <see langword="virtual" /> 
           methods to customize option parsing behavior:
-        </para>
+        </para
+        >
         <list type="bullet">
           <item>
             <term>
@@ -301,8 +379,10 @@
       <para>
         The following <c>greet</c> example demonstrates some simple usage of
         <see cref="T:Mono.Options.OptionSet" />.
-      </para>
-      <code lang="C#" src="examples/greet.cs">using System;
+      </para
+      >
+      <code lang="C#" src="examples/greet.cs"
+        >using System;
 using System.Collections.Generic;
 using Mono.Options;
 
@@ -374,10 +454,12 @@ class Test {
 	}
 }
 
-</code>
+</code
+      >
       <para>The output (under the influence of different command-line
         arguments) is:</para>
-      <code lang="sh" src="examples/greet.txt">$ mono greet.exe --help
+      <code lang="sh" src="examples/greet.txt"
+        >$ mono greet.exe --help
 Usage: greet [OPTIONS]+ message
 Greet a list of individuals with an optional message.
 If no message is specified, a generic greeting is used.
@@ -408,7 +490,8 @@ Hello A!
 $ mono greet.exe -r not-an-int
 greet: Could not convert string `not-an-int' to type Int32 for option `-r'.
 Try `greet --help' for more information.
-</code>
+</code
+      >
       <para>
         Notice how the output produced by <c>--help</c> uses the
         descriptions provided during <c>OptionSet</c> initialization.
@@ -423,27 +506,31 @@ Try `greet --help' for more information.
         <c>--name=value</c>,
         <c>/name value</c>, and
         <c>/name=value</c>.
-      </para>
+      </para
+      >
       <para>
         Notice also that the boolean <c>v</c> option can take three
         separate forms: <c>-v</c> and <c>-v+</c>, which both enable the option,
         and <c>-v-</c>, which disables the option.  (The second <c>greet</c>
         invocation uses <c>-v-</c>, which is why no debug messages are shown.)
-      </para>
+      </para
+      >
       <para>
         Finally, note that the action can specify a type to use.  If no type
         is provided, the action parameter will be a 
         <see cref="T:System.String" />.  If a type is provided, then
         <see cref="T:System.ComponentModel.TypeConverter" /> will be used to
         convert a string to the specified type.
-      </para>
+      </para
+      >
     </example>
     <example>
       <para>
         The following example shows how options and values can be bundled
         together.
       </para>
-      <code lang="C#" src="examples/bundling.cs">using System;
+      <code lang="C#" src="examples/bundling.cs"
+        >using System;
 using System.Linq;
 using System.Collections.Generic;
 using Mono.Options;
@@ -523,11 +610,13 @@ class Test {
 	}
 }
 
-</code>
+</code
+      >
       <para>
         The output (under the influence of different command-line arguments) is:
       </para>
-      <code lang="sh" src="examples/bundling.txt">$ mono bundling.exe --help
+      <code lang="sh" src="examples/bundling.txt"
+        >$ mono bundling.exe --help
 Usage: bundling [OPTIONS]+
 Demo program to show the effects of bundling options and their values
 
@@ -611,35 +700,41 @@ Options:
 	    Extract: False
 	       List: False
 	      Color: off
-</code>
+</code
+      >
     </example>
     <example>
       <para>
         The following example shows a custom <c>OptionSet</c> subclass with
         the following additional functionality:
-      </para>
+      </para
+      >
       <list type="number">
         <item>
           <term>
           Option name lookup is done in a case insensitive fashion, so
           <c>--name</c> and <c>--NAME</c> are identical.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
           Option-like strings cannot be used as values to options, so
           <c>--name --repeat</c> is an error.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
           A key/value parser is provided, to show the use of custom 
           <see cref="T:Mono.Options.OptionContext" /> and
           <see cref="T:Mono.Options.Option" /> subclasses.
-        </term>
+        </term
+          >
         </item>
       </list>
-      <code lang="C#" src="examples/subclass.cs">// Case-Insensitive and Concatenating OptionSet
+      <code lang="C#" src="examples/subclass.cs"
+        >// Case-Insensitive and Concatenating OptionSet
 using System;
 using System.Collections.Generic;
 using Mono.Options;
@@ -774,11 +869,13 @@ class Demo {
 	}
 }
 
-</code>
+</code
+      >
       <para>The output (under the influence of different command-line
         arguments) is:
       </para>
-      <code lang="sh" src="examples/subclass.txt">$ mono subclass.exe -n A -Name=B --NAME=C /nAMe D
+      <code lang="sh" src="examples/subclass.txt"
+        >$ mono subclass.exe -n A -Name=B --NAME=C /nAMe D
 Hello A!
 Hello B!
 Hello C!
@@ -796,32 +893,37 @@ Key: e=f
 
 $ mono subclass.exe --map 'a\' 'b\' c 'd\' 'e\' f
 Key: a\b\c=d\e\f
-</code>
+</code
+      >
       <para>Notice:</para>
       <list type="bullet">
         <item>
           <term>
           That <c>--name</c> is treated in a case-insensitive fashion.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
           That <c>repeat</c> has an optional value, so with 
           <c>--Repeat -name A</c> the default <c>int</c> value is passed (0),
           so no message is printed.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
           That <c>name</c> has a required value, so 
           <c>-Name --Repeat 3</c> generates an error.
-        </term>
+        </term
+          >
         </item>
         <item>
           <term>
           The <c>DemoOptionSet.Add()</c> method provides appropriate key/value
           option pairs to the callback method.
-        </term>
+        </term
+          >
         </item>
       </list>
     </example>
@@ -830,7 +932,10 @@ Key: a\b\c=d\e\f
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OptionSet ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -843,21 +948,29 @@ Key: a\b\c=d\e\f
         <summary>
           Creates and initializes a new 
           <see cref="T:Mono.Options.OptionSet" /> class instance.
-        </summary>
+        </summary
+        >
         <remarks>
           <para>
             This constructor causes the created 
             <see cref="T:Mono.Options.OptionSet" /> instance to perform no
             translation of string messages; consequently, no localization is
             performed.
-          </para>
+          </para
+          >
         </remarks>
         <altmember cref="C:Mono.Options.OptionSet(System.Converter{System.String,System.String})" />
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public OptionSet (Converter&lt;string,string&gt; localizer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Converter`2&lt;string, string&gt; localizer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public OptionSet (Converter&lt;string,string&gt; localizer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Converter`2&lt;string, string&gt; localizer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -872,30 +985,35 @@ Key: a\b\c=d\e\f
         <param name="localizer">
           A <see cref="T:System.Converter{System.String,System.String}" />
           instance that will be used to translate strings.
-        </param>
+        </param
+        >
         <summary>
           Creates and initializes a new 
           <see cref="T:Mono.Options.OptionSet" /> class instance.
-        </summary>
+        </summary
+        >
         <remarks>
           <para>
             This constructor initializes the 
             <see cref="P:Mono.Options.OptionSet.MessageLocalizer" /> property
             of the new instance using <paramref name="localizer" />.
-          </para>
+          </para
+          >
           <para>
             Use this constructor when you want to perform some form of
             localization or internationalization on text strings generated
             from the <see cref="T:Mono.Options.OptionSet" /> class.
             Generated strings include:
-          </para>
+          </para
+          >
           <list type="bullet">
             <item>
               <term>
               The <see cref="P:Mono.Options.Option.Description" /> written by
               <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />,
               but not the option names themselves.
-            </term>
+            </term
+              >
             </item>
             <item>
               <term>
@@ -909,7 +1027,8 @@ Key: a\b\c=d\e\f
             See the following example, which demonstrates how different
             localizers alter the program output.
           </para>
-          <code lang="C#" src="examples/localization.cs">// Localization with NDesk.Options.OptionSet.
+          <code lang="C#" src="examples/localization.cs"
+            >// Localization with NDesk.Options.OptionSet.
 //
 // Compile as:
 //   gmcs -r:Mono.Posix.dll -r:NDesk.Options.dll code-localization.cs
@@ -972,10 +1091,12 @@ class LocalizationDemo {
 			Console.WriteLine ("Message level: {0}", verbose);
 	}
 }
-</code>
+</code
+          >
           <para>The output (under the influence of different command-line
             arguments) is:</para>
-          <code lang="sh" src="examples/localization.txt">$ mono localization.exe --help --version
+          <code lang="sh" src="examples/localization.txt"
+            >$ mono localization.exe --help --version
   -h, -?, --help             show this message and exit.
   -v, --verbose              increase message verbosity.
   -n=VALUE                   must be an int
@@ -1001,7 +1122,8 @@ localization: Could not convert string `not-an-int' to type Int32 for option `-n
 
 $ mono localization.exe --with-hello -n not-an-int
 localization: hello:Could not convert string `not-an-int' to type Int32 for option `-n'.
-</code>
+</code
+          >
           <para>Notice:</para>
           <list type="bullet">
             <item>
@@ -1009,13 +1131,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
               The <c>--with-gettext</c> parser uses 
               <see cref="M:Mono.Unix.Catalog.GetString" /> to translate all
               messages
-            </term>
+            </term
+              >
             </item>
             <item>
               <term>
               The <c>-with-hello</c> parser prefixes all 
               descriptions with <c>hello:</c>.
-            </term>
+            </term
+              >
             </item>
             <item>
               <term>
@@ -1030,7 +1154,10 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OptionSet (StringComparer comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.StringComparer comparer) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.StringComparer comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
@@ -1042,16 +1169,24 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="comparer">
           A <see cref="T:System.StringComparer" /> that will be used to compare the option names, 
           e.g. <see cref="M:System.StringComparer.OrdinalIgnoreCase" /> for case insensitive processing.
-        </param>
+        </param
+        >
         <summary>
           Creates and initializes a new 
           <see cref="T:Mono.Options.OptionSet" /> class instance.
-        </summary>
+        </summary
+        >
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public OptionSet (Converter&lt;string,string&gt; localizer, StringComparer comparer);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Converter`2&lt;string, string&gt; localizer, class System.StringComparer comparer) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public OptionSet (Converter&lt;string,string&gt; localizer, StringComparer comparer);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Converter`2&lt;string, string&gt; localizer, class System.StringComparer comparer) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
@@ -1064,20 +1199,29 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="localizer">
           A <see cref="T:System.Converter{System.String,System.String}" />
           instance that will be used to translate strings.
-        </param>
+        </param
+        >
         <param name="comparer">
           A <see cref="T:System.StringComparer" /> that will be used to compare the option names, 
           e.g. <see cref="M:System.StringComparer.OrdinalIgnoreCase" /> for case insensitive processing.
-        </param>
+        </param
+        >
         <summary>
           Creates and initializes a new 
           <see cref="T:Mono.Options.OptionSet" /> class instance.
-        </summary>
+        </summary
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (Mono.Options.ArgumentSource source);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(class Mono.Options.ArgumentSource source) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (Mono.Options.ArgumentSource source);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(class Mono.Options.ArgumentSource source) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.2.0</AssemblyVersion>
@@ -1093,26 +1237,35 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="source">
           A <see cref="T:Mono.Options.ArgumentSource" /> to register for
           argument processing.
-        </param>
+        </param
+        >
         <summary>
           Registers <paramref name="source" /> so that it may be consulted
           during argument processing within
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
-        <remarks>
-        </remarks>
+        </returns
+        >
+        <remarks></remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="source" /> is <see langword="null" />.
-        </exception>
+        </exception
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (Mono.Options.Option option);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(class Mono.Options.Option option) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (Mono.Options.Option option);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(class Mono.Options.Option option) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1129,36 +1282,45 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       <Docs>
         <param name="option">
           The <see cref="T:Mono.Options.Option" /> to register.
-        </param>
+        </param
+        >
         <summary>
           Registers <paramref name="option" /> so that any options matching
           <see cref="M:Mono.Options.Option.GetNames" /> will be treated
           specially by 
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           Registers each option name returned by 
           <see cref="M:Mono.Options.Option.GetNames" />, ensuring that any
           option with a matching name will be handled by the 
           <paramref name="option" /> instance.
-        </remarks>
+        </remarks
+        >
         <exception cref="T:System.ArgumentException">
           <paramref name="option" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="option" /> is <see langword="null" />.
-        </exception>
+        </exception
+        >
       </Docs>
     </Member>
     <Member MemberName="Add">
       <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string header);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string header) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string header) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
@@ -1173,27 +1335,37 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="header">
           A <see cref="T:System.String" /> containing the header to display
           during <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />.
-        </param>
+        </param
+        >
         <summary>
           Declare a header to be printed during
           <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             The <c>Add(string)</c> method can be used to provide option grouping
             in the output generated by
             <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions(System.IO.TextWriter)" />.
-          </para>
+          </para
+          >
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string prototype, Mono.Options.OptionAction&lt;string,string&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, class Mono.Options.OptionAction`2&lt;string, string&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (string prototype, Mono.Options.OptionAction&lt;string,string&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, class Mono.Options.OptionAction`2&lt;string, string&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1206,7 +1378,10 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       </ReturnValue>
       <Parameters>
         <Parameter Name="prototype" Type="System.String" />
-        <Parameter Name="action" Type="Mono.Options.OptionAction&lt;System.String,System.String&gt;" />
+        <Parameter
+          Name="action"
+          Type="Mono.Options.OptionAction&lt;System.String,System.String&gt;"
+        />
       </Parameters>
       <Docs>
         <param name="prototype">
@@ -1215,47 +1390,57 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           Calls 
           <see cref="M:Mono.Options.OptionSet.Add(System.String,System.String,Mono.Options.OptionAction{System.String,System.String})" />
           with a <paramref name="description" /> value of 
           <see langword="null" />.
-        </remarks>
+        </remarks
+        >
         <altmember cref="M:Mono.Options.OptionSet.Add(System.String,System.String,Mono.Options.OptionAction{System.String,System.String})" />
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <exception cref="T:System.ArgumentException">
           <paramref name="prototype" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string prototype, Action&lt;string&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, class System.Action`1&lt;string&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (string prototype, Action&lt;string&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, class System.Action`1&lt;string&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1277,47 +1462,57 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:System.Action{System.String}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           Calls 
           <see cref="M:Mono.Options.OptionSet.Add(System.String,System.String,System.Action{System.String})" />
           with a <paramref name="description" /> value of 
           <see langword="null" />.
-        </remarks>
+        </remarks
+        >
         <altmember cref="M:Mono.Options.OptionSet.Add(System.String,System.String,System.Action{System.String})" />
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <exception cref="T:System.ArgumentException">
           <paramref name="prototype" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string prototype, string description, Mono.Options.OptionAction&lt;string,string&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class Mono.Options.OptionAction`2&lt;string, string&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (string prototype, string description, Mono.Options.OptionAction&lt;string,string&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class Mono.Options.OptionAction`2&lt;string, string&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1331,7 +1526,10 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       <Parameters>
         <Parameter Name="prototype" Type="System.String" />
         <Parameter Name="description" Type="System.String" />
-        <Parameter Name="action" Type="Mono.Options.OptionAction&lt;System.String,System.String&gt;" />
+        <Parameter
+          Name="action"
+          Type="Mono.Options.OptionAction&lt;System.String,System.String&gt;"
+        />
       </Parameters>
       <Docs>
         <param name="prototype">
@@ -1340,56 +1538,68 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="description">
           A <see cref="T:System.String" /> to be used to initialize
           the <see cref="P:Mono.Options.Option.Description" /> property.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             Use this method when <paramref name="prototype" /> should accept
             two values, generally a key and a value.
-          </para>
+          </para
+          >
           <block subset="none" type="note">
             If <paramref name="prototype" /> specifies a 
             <see cref="F:Mono.Options.OptionValueType.Optional" /> option,
             then it's possible that both the key and the value will be
             <see langword="null" /> in the callback function.
-          </block>
+          </block
+          >
         </remarks>
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <exception cref="T:System.ArgumentException">
           <paramref name="prototype" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string prototype, string description, Action&lt;string&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class System.Action`1&lt;string&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (string prototype, string description, Action&lt;string&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class System.Action`1&lt;string&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1412,46 +1622,55 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="description">
           A <see cref="T:System.String" /> containing to used to initialize
           the <see cref="P:Mono.Options.Option.Description" /> property.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:System.Action{System.String}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
-        <remarks>
-        </remarks>
+        </returns
+        >
+        <remarks></remarks>
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <exception cref="T:System.ArgumentException">
           <paramref name="option" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string prototype, string description, Mono.Options.OptionAction&lt;string,string&gt; action, bool hidden);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class Mono.Options.OptionAction`2&lt;string, string&gt; action, bool hidden) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (string prototype, string description, Mono.Options.OptionAction&lt;string,string&gt; action, bool hidden);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class Mono.Options.OptionAction`2&lt;string, string&gt; action, bool hidden) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
@@ -1462,7 +1681,10 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       <Parameters>
         <Parameter Name="prototype" Type="System.String" />
         <Parameter Name="description" Type="System.String" />
-        <Parameter Name="action" Type="Mono.Options.OptionAction&lt;System.String,System.String&gt;" />
+        <Parameter
+          Name="action"
+          Type="Mono.Options.OptionAction&lt;System.String,System.String&gt;"
+        />
         <Parameter Name="hidden" Type="System.Boolean" />
       </Parameters>
       <Docs>
@@ -1472,51 +1694,61 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           separator list; see
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="description">
           A <see cref="T:System.String" /> containing to used to initialize
           the <see cref="P:Mono.Options.Option.Description" /> property.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:Mono.Options.OptionAction{System.String,System.String}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <param name="hidden">
           A <see cref="T:System.Boolean" /> specifying whether or not the
           Option should be displayed in
           <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
-        <remarks>
-        </remarks>
+        </returns
+        >
+        <remarks></remarks>
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <exception cref="T:System.ArgumentException">
           <paramref name="option" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add (string prototype, string description, Action&lt;string&gt; action, bool hidden);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class System.Action`1&lt;string&gt; action, bool hidden) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add (string prototype, string description, Action&lt;string&gt; action, bool hidden);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add(string prototype, string description, class System.Action`1&lt;string&gt; action, bool hidden) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.3.0</AssemblyVersion>
@@ -1537,51 +1769,61 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           separator list; see
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="description">
           A <see cref="T:System.String" /> containing to used to initialize
           the <see cref="P:Mono.Options.Option.Description" /> property.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:System.Action{System.String}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <param name="hidden">
           A <see cref="T:System.Boolean" /> specifying whether or not the
           Option should be displayed in
           <see cref="M:Mono.Options.OptionSet.WriteOptionDescriptions" />.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
-        <remarks>
-        </remarks>
+        </returns
+        >
+        <remarks></remarks>
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <exception cref="T:System.ArgumentException">
           <paramref name="option" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add&lt;T&gt; (string prototype, Action&lt;T&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;T&gt;(string prototype, class System.Action`1&lt;!!T&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add&lt;T&gt; (string prototype, Action&lt;T&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;T&gt;(string prototype, class System.Action`1&lt;!!T&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1603,47 +1845,60 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <typeparam name="T">
           The type of the option to parse and provide to the 
           <paramref name="action" /> callback.
-        </typeparam>
+        </typeparam
+        >
         <param name="prototype">
           A <see cref="T:System.String" /> containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:System.Action{``0}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           Calls 
           <see cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
           with a <paramref name="description" /> value of 
           <see langword="null" />.
-        </remarks>
+        </remarks
+        >
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <altmember cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
         <exception cref="T:System.ArgumentException">
           <paramref name="option" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
       </Docs>
     </Member>
     <Member MemberName="Add&lt;T&gt;">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add&lt;T&gt; (string prototype, string description, Action&lt;T&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;T&gt;(string prototype, string description, class System.Action`1&lt;!!T&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add&lt;T&gt; (string prototype, string description, Action&lt;T&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;T&gt;(string prototype, string description, class System.Action`1&lt;!!T&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1666,33 +1921,39 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <typeparam name="T">
           The type of the option to parse and provide to the 
           <paramref name="action" /> callback.
-        </typeparam>
+        </typeparam
+        >
         <param name="prototype">
           A <see cref="T:System.String" /> containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="description">
           A <see cref="T:System.String" /> containing to used to initialize
           the <see cref="P:Mono.Options.Option.Description" /> property.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:System.Action{``0}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             Use this typed overload when you want strongly typed option values
@@ -1701,7 +1962,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             is used to lookup the
             <see cref="T:System.ComponentModel.TypeConverter" /> to use when
             performing the string-to-type conversion.
-          </para>
+          </para
+          >
           <para>
             Special support is provided for <see cref="T:System.Nullable{X}" />
             types; <see cref="T:System.ComponentModel.TypeConverter" />
@@ -1712,14 +1974,16 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             <typeparamref name="X" /> type.  This allows straightforward use
             of nullable types, identical to using any other strongly typed
             value.
-          </para>
+          </para
+          >
           <block subset="none" type="note">
             <para>
               If <paramref name="prototype" /> specifies an
               <see cref="F:Mono.Options.OptionValueType.Optional" /> value
               and the value is not provided, then <c>default(T)</c> is
               provided as the value to <paramref name="action" />.
-            </para>
+            </para
+            >
           </block>
         </remarks>
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
@@ -1727,19 +1991,24 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           <paramref name="option" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add&lt;TKey,TValue&gt;">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add&lt;TKey,TValue&gt; (string prototype, Mono.Options.OptionAction&lt;TKey,TValue&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;TKey, TValue&gt;(string prototype, class Mono.Options.OptionAction`2&lt;!!TKey, !!TValue&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add&lt;TKey,TValue&gt; (string prototype, Mono.Options.OptionAction&lt;TKey,TValue&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;TKey, TValue&gt;(string prototype, class Mono.Options.OptionAction`2&lt;!!TKey, !!TValue&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1762,58 +2031,70 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <typeparam name="TKey">
           The type of the first argument to parse and provide to the 
           <paramref name="action" /> callback.
-        </typeparam>
+        </typeparam
+        >
         <typeparam name="TValue">
           The type of the second argument to parse and provide to the 
           <paramref name="action" /> callback.
-        </typeparam>
+        </typeparam
+        >
         <param name="prototype">
           A <see cref="T:System.String" /> containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:Mono.Options.OptionAction{TKey,TValue}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           Calls 
           <see cref="M:Mono.Options.OptionSet.Add``2(System.String,System.String,Mono.Options.OptionAction{``0,``1})" />
           with a <paramref name="description" /> value of 
           <see langword="null" />.
-        </remarks>
+        </remarks
+        >
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
         <altmember cref="M:Mono.Options.OptionSet.Add``2(System.String,System.String,Mono.Options.OptionAction{``0,``1})" />
         <exception cref="T:System.ArgumentException">
           <paramref name="prototype" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="Add&lt;TKey,TValue&gt;">
-      <MemberSignature Language="C#" Value="public Mono.Options.OptionSet Add&lt;TKey,TValue&gt; (string prototype, string description, Mono.Options.OptionAction&lt;TKey,TValue&gt; action);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;TKey, TValue&gt;(string prototype, string description, class Mono.Options.OptionAction`2&lt;!!TKey, !!TValue&gt; action) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Options.OptionSet Add&lt;TKey,TValue&gt; (string prototype, string description, Mono.Options.OptionAction&lt;TKey,TValue&gt; action);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Options.OptionSet Add&lt;TKey, TValue&gt;(string prototype, string description, class Mono.Options.OptionAction`2&lt;!!TKey, !!TValue&gt; action) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1837,42 +2118,50 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <typeparam name="TKey">
           The type of the first argument to parse and provide to the 
           <paramref name="action" /> callback.
-        </typeparam>
+        </typeparam
+        >
         <typeparam name="TValue">
           The type of the second argument to parse and provide to the 
           <paramref name="action" /> callback.
-        </typeparam>
+        </typeparam
+        >
         <param name="prototype">
           A <see cref="T:System.String" /> containing all option aliases to
           register, an (optional) type specifier, and an (optional) value
           separator list; see 
           <see cref="C:Mono.Options.Option(System.String,System.String,System.Int32)" />
           for details.
-        </param>
+        </param
+        >
         <param name="description">
           A <see cref="T:System.String" /> to be used to initialize
           the <see cref="P:Mono.Options.Option.Description" /> property.
-        </param>
+        </param
+        >
         <param name="action">
           A <see cref="T:Mono.Options.OptionAction{TKey,TValue}" />
           to invoke when an option is parsed.
-        </param>
+        </param
+        >
         <summary>
           Registers each alias within <paramref name="prototype" /> so that any 
           options matching the aliases in <paramref name="prototype" /> will be
           handled by <paramref name="action" /> during any subsequent
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           calls.
-        </summary>
+        </summary
+        >
         <returns>
           The current <see cref="T:Mono.Options.OptionSet" /> instance.
           This is to permit method chaining.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             Use this method when <paramref name="prototype" /> should accept
             two typed values, generally a key and a value.
-          </para>
+          </para
+          >
           <block subset="none" type="note">
             <para>
               If <paramref name="prototype" /> specifies an
@@ -1880,7 +2169,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
               and the value is not provided, then <c>default(TKey)</c> and
               <c>default(TValue)</c> may be provided as the values to
               <paramref name="action" />.
-            </para>
+            </para
+            >
           </block>
         </remarks>
         <altmember cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
@@ -1888,19 +2178,24 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           <paramref name="prototype" /> has an alias (as returned from
           <see cref="M:Mono.Options.Option.GetNames" />) that conflicts with
           a previously registered <see cref="T:Mono.Options.Option" />.
-        </exception>
+        </exception
+        >
         <exception cref="T:System.ArgumentNullException">
-          <para>
-            <paramref name="prototype" /> is <see langword="null" /></para>
+          <para><paramref name="prototype" /> is <see langword="null" /></para>
           <para>-or-</para>
-          <para>
-            <paramref name="action" /> is <see langword="null" /></para>
+          <para><paramref name="action" /> is <see langword="null" /></para>
         </exception>
       </Docs>
     </Member>
     <Member MemberName="ArgumentSources">
-      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;Mono.Options.ArgumentSource&gt; ArgumentSources { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class Mono.Options.ArgumentSource&gt; ArgumentSources" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ObjectModel.ReadOnlyCollection&lt;Mono.Options.ArgumentSource&gt; ArgumentSources { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Collections.ObjectModel.ReadOnlyCollection`1&lt;class Mono.Options.ArgumentSource&gt; ArgumentSources"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.2.0</AssemblyVersion>
@@ -1915,20 +2210,27 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           <see cref="T:Mono.Options.ArgumentSource" />s which will be consulted during 
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           processing.
-        </summary>
+        </summary
+        >
         <value>
           A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection{Mono.Options.ArgumentSource}" />
           containing all <see cref="T:Mono.Options.ArgumentSource" />s which
           have been 
           <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.ArgumentSource)" />ed.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="CreateOptionContext">
-      <MemberSignature Language="C#" Value="protected virtual Mono.Options.OptionContext CreateOptionContext ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Mono.Options.OptionContext CreateOptionContext() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual Mono.Options.OptionContext CreateOptionContext ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance class Mono.Options.OptionContext CreateOptionContext() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -1943,13 +2245,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       <Docs>
         <summary>
           Creates an <see cref="T:Mono.Options.OptionContext" /> instance.
-        </summary>
+        </summary
+        >
         <returns>
           A <see cref="T:Mono.Options.OptionContext" /> instance to be used
           when parsing all options during the current
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           call.
-        </returns>
+        </returns
+        >
         <remarks>
           <block subset="none" type="overrides">
             <para>
@@ -1960,7 +2264,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
               additional information during the current 
               <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
               invocation.
-            </para>
+            </para
+            >
           </block>
         </remarks>
         <altmember cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
@@ -1968,8 +2273,14 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       </Docs>
     </Member>
     <Member MemberName="GetKeyForItem">
-      <MemberSignature Language="C#" Value="protected override string GetKeyForItem (Mono.Options.Option item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string GetKeyForItem(class Mono.Options.Option item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override string GetKeyForItem (Mono.Options.Option item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance string GetKeyForItem(class Mono.Options.Option item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.1.0</AssemblyVersion>
@@ -1985,14 +2296,17 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
       <Docs>
         <param name="item">
           An <see cref="T:Mono.Options.Option" /> to return the key of.
-        </param>
+        </param
+        >
         <summary>
           Returns <c><paramref name="item" />.GetNames()[0]</c>.
-        </summary>
+        </summary
+        >
         <returns>
           A <see cref="T:System.String" /> containing the first alias returned
           by <see cref="M:Mono.Options.Option.GetNames" />.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             This is to support the 
@@ -2001,7 +2315,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             <see cref="T:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}" />
             assumes only one key per item, so we arbitrarily choose the first
             item in the option alias list.
-          </para>
+          </para
+          >
           <block subset="none" type="note">
             All aliases returned by 
             <see cref="M:Mono.Options.Option.GetNames" /> are still
@@ -2015,13 +2330,20 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             <see cref="P:System.Collections.ObjectModel.KeyedCollection{System.String,Mono.Options.Option}.Item(`0)" />
             will both correctly use all aliases returned by 
             <see cref="M:Mono.Options.Option.GetNames" />.
-          </block>
+          </block
+          >
         </remarks>
       </Docs>
     </Member>
     <Member MemberName="GetOptionForName">
-      <MemberSignature Language="C#" Value="protected Mono.Options.Option GetOptionForName (string option);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class Mono.Options.Option GetOptionForName(string option) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected Mono.Options.Option GetOptionForName (string option);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance class Mono.Options.Option GetOptionForName(string option) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2044,33 +2366,44 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="option">
           A <see cref="T:System.String" /> containing the option name to
           lookup.
-        </param>
+        </param
+        >
         <summary>
           Looks up the <see cref="T:Mono.Options.Option" /> registered to
           handle the option name <paramref name="option" />.
-        </summary>
+        </summary
+        >
         <returns>
           The <see cref="T:Mono.Options.Option" /> instance registered to
           handle the option name <paramref name="option" />.
           If there is no registered handler for <paramref name="option" />,
           then <see langword="null" /> is returned.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             Subclasses can use this function to perform 
             <paramref name="option" /> lookup when overriding
             <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />.
-          </para>
+          </para
+          >
         </remarks>
         <altmember cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
         <exception cref="T:System.ArgumentNullException">
           <paramref name="option" /> is <see langword="null" />.
-        </exception>
+        </exception
+        >
       </Docs>
     </Member>
     <Member MemberName="GetOptionParts">
-      <MemberSignature Language="C#" Value="protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance bool GetOptionParts(string argument, [out] string&amp; flag, [out] string&amp; name, [out] string&amp; sep, [out] string&amp; value) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected bool GetOptionParts (string argument, out string flag, out string name, out string sep, out string value);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig instance bool GetOptionParts(string argument, [out] string&amp; flag, [out] string&amp; name, [out] string&amp; sep, [out] string&amp; value) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2092,14 +2425,16 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="argument">
           A <see cref="T:System.String" /> containing the option to parse into
           its constituent parts.
-        </param>
+        </param
+        >
         <param name="flag">
           A <see cref="T:System.String" /> reference which will be set to 
           <see langword="null" /> if the method returns 
           <see langword="false" />, or set to the flag the option starts with
           if the method returns <see langword="true" />.
           Valid flags include: <c>-</c>, <c>--</c>, and <c>/</c>.
-        </param>
+        </param
+        >
         <param name="name">
           A <see cref="T:System.String" /> reference which will be set to 
           <see langword="null" /> if the method returns 
@@ -2109,7 +2444,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           prior call to 
           <see cref="M:Mono.Options.OptionSet.Add(Mono.Options.Option)" />
           or related overload.
-        </param>
+        </param
+        >
         <param name="sep">
           A <see cref="T:System.String" /> reference which will be set to 
           <see langword="null" /> if either the method returns 
@@ -2119,7 +2455,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           <c>=</c> or <c>:</c>, then <paramref name="sep" /> will contain
           either <c>=</c> or <c>:</c>, whichever was found within 
           <paramref name="argument" />.
-        </param>
+        </param
+        >
         <param name="value">
           A <see cref="T:System.String" /> reference which will be set to 
           <see langword="null" /> if either the method returns 
@@ -2128,10 +2465,12 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           <paramref name="sep" /> is not <see langword="null" />, then
           <paramref name="value" /> will contain all text after 
           <paramref name="sep" />.
-        </param>
+        </param
+        >
         <summary>
           Splits <paramref name="argument" /> into its constituent parts.
-        </summary>
+        </summary
+        >
         <returns>
           <see langword="true" /> if <paramref name="argument" /> could be split
           into its constituent parts, and <paramref name="flag" /> and 
@@ -2140,14 +2479,16 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
           not they are present within <paramref name="argument" />);
           <see langword="true" /> if <paramref name="argument" /> is not the
           possible start of a valid option.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             Subclasses can call this method from their 
             <see cref="M:Mono.Options.OptionSet.Parse(System.String,Mono.Options.OptionContext)" />
             method to determine whether a given string is an option, and to
             split the option up for further processing.
-          </para>
+          </para
+          >
           <para>
             For example, <c>GetOptionParts("foo", ...)</c> would return 
             <see langword="false" />, while 
@@ -2156,16 +2497,24 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             <paramref name="name" /> containing <c>foo</c>, 
             <paramref name="sep" /> containing <c>=</c>, and
             <paramref name="value" /> containing <c>bar</c>.
-          </para>
+          </para
+          >
         </remarks>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="argument" /> is <see langword="null" />.
-        </exception>
+        </exception
+        >
       </Docs>
     </Member>
     <Member MemberName="InsertItem">
-      <MemberSignature Language="C#" Value="protected override void InsertItem (int index, Mono.Options.Option item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void InsertItem(int32 index, class Mono.Options.Option item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void InsertItem (int index, Mono.Options.Option item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void InsertItem(int32 index, class Mono.Options.Option item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2184,21 +2533,29 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <param name="index">
           A <see cref="T:System.Int32" /> specifying the index to insert 
           <paramref name="item" /> into.
-        </param>
+        </param
+        >
         <param name="item">
           The <see cref="T:Mono.Options.Option" /> to insert.
-        </param>
+        </param
+        >
         <summary>
           Inserts <paramref name="item" /> at the specified 
           <paramref name="index" />.
-        </summary>
-        <remarks>
-        </remarks>
+        </summary
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="MessageLocalizer">
-      <MemberSignature Language="C#" Value="public Converter&lt;string,string&gt; MessageLocalizer { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Converter`2&lt;string, string&gt; MessageLocalizer" />
+      <MemberSignature
+        Language="C#"
+        Value="public Converter&lt;string,string&gt; MessageLocalizer { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Converter`2&lt;string, string&gt; MessageLocalizer"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2216,21 +2573,29 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <value>
           A <see cref="T:System.Converter{System.String,System.String}" />
           that can be used to localize messages.
-        </value>
+        </value
+        >
         <remarks>
           <para>
             <see cref="T:Mono.Options.Option" /> subclasses can use this
             property 
             (via <see cref="P:Mono.Options.OptionContext.OptionSet" />) to
             perform message localization for their own exception messages.
-          </para>
+          </para
+          >
         </remarks>
         <altmember cref="C:Mono.Options.OptionSet(System.Converter{System.String,System.String})" />
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.List&lt;string&gt; Parse (System.Collections.Generic.IEnumerable&lt;string&gt; arguments);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;string&gt; Parse(class System.Collections.Generic.IEnumerable`1&lt;string&gt; arguments) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.Generic.List&lt;string&gt; Parse (System.Collections.Generic.IEnumerable&lt;string&gt; arguments);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class System.Collections.Generic.List`1&lt;string&gt; Parse(class System.Collections.Generic.IEnumerable`1&lt;string&gt; arguments) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2242,22 +2607,28 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
         <ReturnType>System.Collections.Generic.List&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="arguments" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
+        <Parameter
+          Name="arguments"
+          Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;"
+        />
       </Parameters>
       <Docs>
         <param name="arguments">
           A <see cref="T:System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
           containing all arguments to parse.
-        </param>
+        </param
+        >
         <summary>
           Parses each <see cref="T:System.String" /> within 
           <paramref name="arguments" />, invoking any registered
           <paramref name="actions" /> if a registered option is encountered.
-        </summary>
+        </summary
+        >
         <returns>
           A <see cref="T:System.Collections.Generic.List{System.String}" />
           containing all unhandled arguments.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             <c>Parse</c> looks at each argument from <paramref name="arguments" /> in order, passing each argument to each
@@ -2268,7 +2639,8 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             replacement sequence is used) or no <c>ArgumentSource</c> supports
             the argument.  <c>Parse</c> then attempts to process argument as
             an option.
-          </para>
+          </para
+          >
           <para>
             An argument is unhandled if:
           </para>
@@ -2278,14 +2650,16 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
               There is no default handler registered (the <c>&lt;&gt;</c>
               handler).  If there is a default handler registered, then the
               default handler is invoked for otherwise-unhandled arguments.
-            </term>
+            </term
+              >
             </item>
             <item>
               <term>
               The option starts with a flag such as <c>-</c>, <c>--</c>,
               <c>/</c>, and the option name following the flag is
               unregistered.
-            </term>
+            </term
+              >
             </item>
             <item>
               <term>
@@ -2302,13 +2676,15 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             is frequently used to permit users to provide option-like
             filenames, e.g. <c>ls -lF -- -l</c> to view the file <c>-l</c>
             instead of needing to use <c>ls -lF ./-l</c>.
-          </para>
+          </para
+          >
         </remarks>
         <exception cref="T:Mono.Options.OptionException">
           <para>
             A value was not found for an <see cref="T:Mono.Options.Option" />
             requiring a value.
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             An attempt was made to bundle together an option requiring a
@@ -2321,14 +2697,17 @@ localization: hello:Could not convert string `not-an-int' to type Int32 for opti
             <see cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
             and related methods.  The originating exception is provided via
             the <see cref="P:System.Exception.InnerException" /> property.
-          </para>
+          </para
+          >
         </exception>
         <example>
           <para>
             The following example demonstrates some simple usage of 
             <see cref="T:Mono.Options.OptionSet" />.
-          </para>
-          <code lang="C#" src="examples/greet.cs">using System;
+          </para
+          >
+          <code lang="C#" src="examples/greet.cs"
+            >using System;
 using System.Collections.Generic;
 using Mono.Options;
 
@@ -2400,13 +2779,20 @@ class Test {
 	}
 }
 
-</code>
+</code
+          >
         </example>
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="protected virtual bool Parse (string argument, Mono.Options.OptionContext c);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance bool Parse(string argument, class Mono.Options.OptionContext c) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected virtual bool Parse (string argument, Mono.Options.OptionContext c);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig newslot virtual instance bool Parse(string argument, class Mono.Options.OptionContext c) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2425,23 +2811,27 @@ class Test {
         <param name="argument">
           A <see cref="T:System.String" /> containing the current option to
           parse.
-        </param>
+        </param
+        >
         <param name="c">
           A <see cref="T:Mono.Options.OptionContext" /> containing the
           current parser context.
-        </param>
+        </param
+        >
         <summary>
           Parses <paramref name="argument" /> and invokes
           <see cref="M:Mono.Options.Option.Invoke(Mono.Options.OptionContext)" /> 
           if appropriate.
-        </summary>
+        </summary
+        >
         <returns>
           A <see cref="T:System.Boolean" /> specifying whether or not
           <paramref name="argument" /> was handled.
           If <see langword="false" />, then
           <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
           will return <paramref name="argument" /> as an unhandled option.
-        </returns>
+        </returns
+        >
         <remarks>
           <para>
             This method is called for each <see cref="T:System.String" />
@@ -2452,7 +2842,8 @@ class Test {
             chain together multiple options to form a single option (as is
             necessary when an option and its value are separated, e.g. with
             <c>-option value</c>).
-          </para>
+          </para
+          >
           <block subset="none" type="behaviors">
             <para>
               The default implementation will check 
@@ -2466,13 +2857,15 @@ class Test {
               to <see cref="P:Mono.Options.OptionContext.OptionValues" /> and
               <see cref="M:Mono.Options.Option.Invoke(Mono.Options.OptionContext)" />
               is invoked.
-            </para>
+            </para
+            >
             <para>
               Next, <see cref="M:Mono.Options.OptionSet.GetOptionParts(System.String,System.String@,System.String@,System.String@,System.String@)" />
               is invoked.  If <c>GetOptionParts</c> returns 
               <see langword="false" />, then <see langword="false" /> is
               returned from <c>Parse</c>.
-            </para>
+            </para
+            >
             <para>
               Finally, check to see if the <paramref name="name" /> returned
               from <c>GetOptionParts</c> is registered; if it is, handle it
@@ -2481,7 +2874,8 @@ class Test {
               option.  If <paramref name="name" /> isn't any registered
               option, then <see langword="false" /> is returned.
               Otherwise, <see langword="true" /> is returned.
-            </para>
+            </para
+            >
           </block>
           <block subset="none" type="overrides">
             <para>
@@ -2489,13 +2883,15 @@ class Test {
               customize the per-option parsing within the containing
               <see cref="M:Mono.Options.OptionSet.Parse(System.Collections.Generic.IEnumerable{System.String})" />
               invocation.
-            </para>
+            </para
+            >
             <para>
               Inheriting types should consider overriding 
               <see cref="M:Mono.Options.OptionSet.CreateOptionContext" />
               if they want to store extra information for use and retrieval
               during each <c>Parse</c> invocation.
-            </para>
+            </para
+            >
           </block>
         </remarks>
         <altmember cref="M:Mono.Options.OptionSet.CreateOptionContext" />
@@ -2504,7 +2900,10 @@ class Test {
     </Member>
     <Member MemberName="RemoveItem">
       <MemberSignature Language="C#" Value="protected override void RemoveItem (int index);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void RemoveItem(int32 index) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void RemoveItem(int32 index) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2522,18 +2921,25 @@ class Test {
         <param name="index">
           A <see cref="T:System.Int32" /> containing the index of the 
           <see cref="T:Mono.Options.Option" /> to remove.
-        </param>
+        </param
+        >
         <summary>
           Removes the <see cref="T:Mono.Options.Option" /> at the specified
           <paramref name="index" />.
-        </summary>
-        <remarks>
-        </remarks>
+        </summary
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="SetItem">
-      <MemberSignature Language="C#" Value="protected override void SetItem (int index, Mono.Options.Option item);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetItem(int32 index, class Mono.Options.Option item) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetItem (int index, Mono.Options.Option item);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetItem(int32 index, class Mono.Options.Option item) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2552,23 +2958,31 @@ class Test {
         <param name="index">
           A <see cref="T:System.Int32" /> containing the index of the 
           <see cref="T:Mono.Options.Option" /> to change.
-        </param>
+        </param
+        >
         <param name="item">
           The new <see cref="T:Mono.Options.Option" /> to set at
           <paramref name="index" />.
-        </param>
+        </param
+        >
         <summary>
           Removes the current <see cref="T:Mono.Options.Option" /> at 
           <paramref name="index" /> and sets <paramref name="item" /> 
           as the value for the <paramref name="index" /> value.
-        </summary>
-        <remarks>
-        </remarks>
+        </summary
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="WriteOptionDescriptions">
-      <MemberSignature Language="C#" Value="public void WriteOptionDescriptions (System.IO.TextWriter o);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WriteOptionDescriptions(class System.IO.TextWriter o) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void WriteOptionDescriptions (System.IO.TextWriter o);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WriteOptionDescriptions(class System.IO.TextWriter o) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.2.0.0</AssemblyVersion>
@@ -2586,34 +3000,40 @@ class Test {
         <param name="o">
           The <see cref="T:System.IO.TextWriter" /> to write option
           descriptions to.
-        </param>
+        </param
+        >
         <summary>
           Writes <see cref="T:Mono.Options.Option" /> documentation to 
           <paramref name="o" />.
-        </summary>
+        </summary
+        >
         <remarks>
           <para>
             Writes <see cref="T:Mono.Options.Option" /> documentation to
             <paramref name="o" />.
-          </para>
+          </para
+          >
           <para>
             If <see cref="P:Mono.Options.Option.Hidden" /> is
             <see langword="true" />, then the Option will not be written to
             <paramref name="o" />.
-          </para>
+          </para
+          >
           <para>
             For each <see cref="T:Mono.Options.Option" /> previously added to
             the current instance, this method writes out a comma-separated
             list of all <see cref="M:Mono.Options.Option.GetNames" />
             followed by the <see cref="P:Mono.Options.Option.Description" />.
-          </para>
+          </para
+          >
           <para>
             The <see cref="P:Mono.Options.Option.Description" /> is
             automatically wrapped so that output will flow nicely across
             multiple lines.  Wrapping is preferred at explicit embedded 
             newline characters (<c>\n</c>) or spaces, but words will be split
             (by adding a <c>-</c>) if necessary.
-          </para>
+          </para
+          >
           <para>
             Options requiring a value have <c>=VALUE</c> appended to their
             last name, while options with an optional value have
@@ -2621,20 +3041,23 @@ class Test {
             The <c>VALUE</c> string can be changed by using a format
             specifier-like string within the 
             <see cref="P:Mono.Options.Option.Description" />.
-          </para>
+          </para
+          >
           <para>
             For <see cref="T:Mono.Options.Option" />s accepting one value,
             the string <c>{VALUE}</c> or <c>{0:VALUE}</c> can be used to
             explicitly provide the value name.  For <c>Option</c>s accepting
             more than one value, the leading number is used to specify which
             value the string is for.
-          </para>
+          </para
+          >
           <para>
             Once all <see cref="T:Mono.Options.Option" />s have been written,
             all <see cref="T:Mono.Options.ArgumentSource" />s are printed out
             using <see cref="M:Mono.Options.ArgumentSource.GetNames" /> and
             <see cref="P:Mono.Options.ArgumentSource.Description" />.
-          </para>
+          </para
+          >
         </remarks>
         <example>
           <para>
@@ -2642,8 +3065,10 @@ class Test {
             <see cref="T:Mono.Options.OptionSet" /> instance to accept a
             variety of parameters and provides a description for each
             parameter:
-          </para>
-          <code lang="C#" src="examples/greet.cs">using System;
+          </para
+          >
+          <code lang="C#" src="examples/greet.cs"
+            >using System;
 using System.Collections.Generic;
 using Mono.Options;
 
@@ -2715,7 +3140,8 @@ class Test {
 	}
 }
 
-</code>
+</code
+          >
           <para>
             Notice that when the above program is invoked with the
             <c>--help</c> parameter, 
@@ -2724,8 +3150,10 @@ class Test {
             description, that the <c>--repeat</c> description spans
             multiple lines, and that format specifiers such as <c>{NAME}</c>
             are used to provide a description for the option value:
-          </para>
-          <code lang="sh" src="examples/greet.txt">$ mono greet.exe --help
+          </para
+          >
+          <code lang="sh" src="examples/greet.txt"
+            >$ mono greet.exe --help
 Usage: greet [OPTIONS]+ message
 Greet a list of individuals with an optional message.
 If no message is specified, a generic greeting is used.
@@ -2756,7 +3184,8 @@ Hello A!
 $ mono greet.exe -r not-an-int
 greet: Could not convert string `not-an-int' to type Int32 for option `-r'.
 Try `greet --help' for more information.
-</code>
+</code
+          >
         </example>
       </Docs>
     </Member>

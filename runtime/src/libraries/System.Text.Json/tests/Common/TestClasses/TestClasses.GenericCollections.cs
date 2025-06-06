@@ -13,7 +13,10 @@ namespace System.Text.Json.Serialization.Tests
         public GenericICollectionWrapper<string> MyStringICollectionWrapper { get; set; }
         public StringIListWrapper MyStringIListWrapper { get; set; }
         public StringISetWrapper MyStringISetWrapper { get; set; }
-        public GenericIDictionaryWrapper<string, string> MyStringToStringIDictionaryWrapper { get; set; }
+        public GenericIDictionaryWrapper<
+            string,
+            string
+        > MyStringToStringIDictionaryWrapper { get; set; }
         public StringListWrapper MyStringListWrapper { get; set; }
         public StringStackWrapper MyStringStackWrapper { get; set; }
         public StringQueueWrapper MyStringQueueWrapper { get; set; }
@@ -22,24 +25,26 @@ namespace System.Text.Json.Serialization.Tests
         public StringSortedSetWrapper MyStringSortedSetWrapper { get; set; }
         public StringToStringDictionaryWrapper MyStringToStringDictionaryWrapper { get; set; }
         public StringToStringSortedDictionaryWrapper MyStringToStringSortedDictionaryWrapper { get; set; }
-        public StringToGenericDictionaryWrapper<StringToGenericDictionaryWrapper<string>> MyStringToGenericDictionaryWrapper { get; set; }
+        public StringToGenericDictionaryWrapper<
+            StringToGenericDictionaryWrapper<string>
+        > MyStringToGenericDictionaryWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringICollectionWrapper"" : [""Hello""]," +
-            @"""MyStringIListWrapper"" : [""Hello""]," +
-            @"""MyStringISetWrapper"" : [""Hello""]," +
-            @"""MyStringToStringIDictionaryWrapper"" : {""key"" : ""value""}," +
-            @"""MyStringListWrapper"" : [""Hello""]," +
-            @"""MyStringStackWrapper"" : [""Hello""]," +
-            @"""MyStringQueueWrapper"" : [""Hello""]," +
-            @"""MyStringHashSetWrapper"" : [""Hello""]," +
-            @"""MyStringLinkedListWrapper"" : [""Hello""]," +
-            @"""MyStringSortedSetWrapper"" : [""Hello""]," +
-            @"""MyStringToStringDictionaryWrapper"" : {""key"" : ""value""}," +
-            @"""MyStringToStringSortedDictionaryWrapper"" : {""key"" : ""value""}," +
-            @"""MyStringToGenericDictionaryWrapper"" : {""key"" : {""key"" : ""value""}}" +
-            @"}";
+            @"{"
+            + @"""MyStringICollectionWrapper"" : [""Hello""],"
+            + @"""MyStringIListWrapper"" : [""Hello""],"
+            + @"""MyStringISetWrapper"" : [""Hello""],"
+            + @"""MyStringToStringIDictionaryWrapper"" : {""key"" : ""value""},"
+            + @"""MyStringListWrapper"" : [""Hello""],"
+            + @"""MyStringStackWrapper"" : [""Hello""],"
+            + @"""MyStringQueueWrapper"" : [""Hello""],"
+            + @"""MyStringHashSetWrapper"" : [""Hello""],"
+            + @"""MyStringLinkedListWrapper"" : [""Hello""],"
+            + @"""MyStringSortedSetWrapper"" : [""Hello""],"
+            + @"""MyStringToStringDictionaryWrapper"" : {""key"" : ""value""},"
+            + @"""MyStringToStringSortedDictionaryWrapper"" : {""key"" : ""value""},"
+            + @"""MyStringToGenericDictionaryWrapper"" : {""key"" : {""key"" : ""value""}}"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -48,16 +53,33 @@ namespace System.Text.Json.Serialization.Tests
             MyStringICollectionWrapper = new GenericICollectionWrapper<string>() { "Hello" };
             MyStringIListWrapper = new StringIListWrapper() { "Hello" };
             MyStringISetWrapper = new StringISetWrapper() { "Hello" };
-            MyStringToStringIDictionaryWrapper = new GenericIDictionaryWrapper<string, string>() { { "key", "value" } };
+            MyStringToStringIDictionaryWrapper = new GenericIDictionaryWrapper<string, string>()
+            {
+                { "key", "value" },
+            };
             MyStringListWrapper = new StringListWrapper() { "Hello" };
             MyStringStackWrapper = new StringStackWrapper(new List<string> { "Hello" });
             MyStringQueueWrapper = new StringQueueWrapper(new List<string> { "Hello" });
             MyStringHashSetWrapper = new StringHashSetWrapper() { "Hello" };
             MyStringLinkedListWrapper = new StringLinkedListWrapper(new List<string> { "Hello" });
             MyStringSortedSetWrapper = new StringSortedSetWrapper() { "Hello" };
-            MyStringToStringDictionaryWrapper = new StringToStringDictionaryWrapper() { { "key", "value" } };
-            MyStringToStringSortedDictionaryWrapper = new StringToStringSortedDictionaryWrapper() { { "key", "value" } };
-            MyStringToGenericDictionaryWrapper = new StringToGenericDictionaryWrapper<StringToGenericDictionaryWrapper<string>>() { { "key", new StringToGenericDictionaryWrapper<string>() { { "key", "value" } } } };
+            MyStringToStringDictionaryWrapper = new StringToStringDictionaryWrapper()
+            {
+                { "key", "value" },
+            };
+            MyStringToStringSortedDictionaryWrapper = new StringToStringSortedDictionaryWrapper()
+            {
+                { "key", "value" },
+            };
+            MyStringToGenericDictionaryWrapper = new StringToGenericDictionaryWrapper<
+                StringToGenericDictionaryWrapper<string>
+            >()
+            {
+                {
+                    "key",
+                    new StringToGenericDictionaryWrapper<string>() { { "key", "value" } }
+                },
+            };
         }
 
         public void Verify()
@@ -83,16 +105,14 @@ namespace System.Text.Json.Serialization.Tests
         public StringIEnumerableWrapper MyStringIEnumerableWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIEnumerableWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIEnumerableWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIEnumerableWrapper = new StringIEnumerableWrapper(new List<string>{ "Hello" });
+            MyStringIEnumerableWrapper = new StringIEnumerableWrapper(new List<string> { "Hello" });
         }
     }
 
@@ -101,16 +121,16 @@ namespace System.Text.Json.Serialization.Tests
         public WrapperForIReadOnlyCollectionOfT<string> MyStringIReadOnlyCollectionWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIReadOnlyCollectionWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIReadOnlyCollectionWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIReadOnlyCollectionWrapper = new WrapperForIReadOnlyCollectionOfT<string>(new List<string> { "Hello" });
+            MyStringIReadOnlyCollectionWrapper = new WrapperForIReadOnlyCollectionOfT<string>(
+                new List<string> { "Hello" }
+            );
         }
     }
 
@@ -119,35 +139,38 @@ namespace System.Text.Json.Serialization.Tests
         public StringIReadOnlyListWrapper MyStringIReadOnlyListWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringIReadOnlyListWrapper"" : [""Hello""]" +
-            @"}";
+            @"{" + @"""MyStringIReadOnlyListWrapper"" : [""Hello""]" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringIReadOnlyListWrapper = new StringIReadOnlyListWrapper(new List<string> { "Hello" });
+            MyStringIReadOnlyListWrapper = new StringIReadOnlyListWrapper(
+                new List<string> { "Hello" }
+            );
         }
     }
 
     public class SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper
     {
-        public GenericIReadOnlyDictionaryWrapper<string, string> MyStringToStringIReadOnlyDictionaryWrapper { get; set; }
+        public GenericIReadOnlyDictionaryWrapper<
+            string,
+            string
+        > MyStringToStringIReadOnlyDictionaryWrapper { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""MyStringToStringIReadOnlyDictionaryWrapper"" : {""key"" : ""value""}" +
-            @"}";
+            @"{" + @"""MyStringToStringIReadOnlyDictionaryWrapper"" : {""key"" : ""value""}" + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
         // Call only when testing serialization.
         public void Initialize()
         {
-            MyStringToStringIReadOnlyDictionaryWrapper = new GenericIReadOnlyDictionaryWrapper<string, string>(
-                new Dictionary<string, string>() { { "key", "value" } });
+            MyStringToStringIReadOnlyDictionaryWrapper = new GenericIReadOnlyDictionaryWrapper<
+                string,
+                string
+            >(new Dictionary<string, string>() { { "key", "value" } });
         }
     }
 
@@ -214,7 +237,11 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<string> _list = new List<string>();
 
-        public string this[int index] { get => _list[index]; set => _list[index] = value; }
+        public string this[int index]
+        {
+            get => _list[index];
+            set => _list[index] = value;
+        }
 
         public int Count => _list.Count;
 
@@ -280,7 +307,11 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly List<T> _list = new List<T>();
 
-        public T this[int index] { get => _list[index]; set => _list[index] = value; }
+        public T this[int index]
+        {
+            get => _list[index];
+            set => _list[index] = value;
+        }
 
         public int Count => _list.Count;
 
@@ -514,7 +545,7 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class ReadOnlyStringISetWrapper: StringISetWrapper
+    public class ReadOnlyStringISetWrapper : StringISetWrapper
     {
         public override bool IsReadOnly => true;
     }
@@ -741,7 +772,11 @@ namespace System.Text.Json.Serialization.Tests
             _dict = new Dictionary<TKey, TValue>(items);
         }
 
-        public TValue this[TKey key] { get => ((IDictionary<TKey, TValue>)_dict)[key]; set => ((IDictionary<TKey, TValue>)_dict)[key] = value; }
+        public TValue this[TKey key]
+        {
+            get => ((IDictionary<TKey, TValue>)_dict)[key];
+            set => ((IDictionary<TKey, TValue>)_dict)[key] = value;
+        }
 
         public ICollection<TKey> Keys => ((IDictionary<TKey, TValue>)_dict).Keys;
 
@@ -807,26 +842,31 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class GenericIDictionaryWrapperPrivateConstructor<TKey, TValue> : GenericIDictionaryWrapper<TKey, TValue>
+    public class GenericIDictionaryWrapperPrivateConstructor<TKey, TValue>
+        : GenericIDictionaryWrapper<TKey, TValue>
     {
         private GenericIDictionaryWrapperPrivateConstructor() { }
     }
 
-    public class GenericIDictionaryWrapperInternalConstructor<TKey, TValue> : GenericIDictionaryWrapper<TKey, TValue>
+    public class GenericIDictionaryWrapperInternalConstructor<TKey, TValue>
+        : GenericIDictionaryWrapper<TKey, TValue>
     {
         internal GenericIDictionaryWrapperInternalConstructor() { }
     }
 
-    public class GenericIDictonaryWrapperThreeGenericParameters<TKey, TValue, TUnused> : GenericIDictionaryWrapper<TKey, TValue> { }
+    public class GenericIDictonaryWrapperThreeGenericParameters<TKey, TValue, TUnused>
+        : GenericIDictionaryWrapper<TKey, TValue> { }
 
-    public class ReadOnlyStringToStringIDictionaryWrapper : GenericIDictionaryWrapper<string, string>
+    public class ReadOnlyStringToStringIDictionaryWrapper
+        : GenericIDictionaryWrapper<string, string>
     {
         public override bool IsReadOnly => true;
     }
 
     public class StringToObjectIDictionaryWrapper : GenericIDictionaryWrapper<string, object> { }
 
-    public class StringToGenericIDictionaryWrapper<TValue> : GenericIDictionaryWrapper<string, TValue> { }
+    public class StringToGenericIDictionaryWrapper<TValue>
+        : GenericIDictionaryWrapper<string, TValue> { }
 
     public class GenericIReadOnlyDictionaryWrapper<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>
     {
@@ -846,7 +886,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public IEnumerable<TKey> Keys => ((IReadOnlyDictionary<TKey, TValue>)_dictionary).Keys;
 
-        public IEnumerable<TValue> Values => ((IReadOnlyDictionary<TKey, TValue>)_dictionary).Values;
+        public IEnumerable<TValue> Values =>
+            ((IReadOnlyDictionary<TKey, TValue>)_dictionary).Values;
 
         public int Count => ((IReadOnlyDictionary<TKey, TValue>)_dictionary).Count;
 
@@ -871,25 +912,23 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class StringToStringIReadOnlyDictionaryWrapperPrivateConstructor : GenericIReadOnlyDictionaryWrapper<string, string>
+    public class StringToStringIReadOnlyDictionaryWrapperPrivateConstructor
+        : GenericIReadOnlyDictionaryWrapper<string, string>
     {
         private StringToStringIReadOnlyDictionaryWrapperPrivateConstructor() { }
     }
 
-    public class StringToStringIReadOnlyDictionaryWrapperInternalConstructor : GenericIReadOnlyDictionaryWrapper<string, string>
+    public class StringToStringIReadOnlyDictionaryWrapperInternalConstructor
+        : GenericIReadOnlyDictionaryWrapper<string, string>
     {
         internal StringToStringIReadOnlyDictionaryWrapperInternalConstructor() { }
     }
 
     public class StringListWrapper : List<string> { }
 
-    class MyMyList<T> : GenericListWrapper<T>
-    {
-    }
+    class MyMyList<T> : GenericListWrapper<T> { }
 
-    class MyListString : GenericListWrapper<string>
-    {
-    }
+    class MyListString : GenericListWrapper<string> { }
 
     public class GenericListWrapper<T> : List<T> { }
 
@@ -1091,12 +1130,14 @@ namespace System.Text.Json.Serialization.Tests
         }
     }
 
-    public class StringToGenericDictionaryWrapperPrivateConstructor<T> : StringToGenericDictionaryWrapper<T>
+    public class StringToGenericDictionaryWrapperPrivateConstructor<T>
+        : StringToGenericDictionaryWrapper<T>
     {
         private StringToGenericDictionaryWrapperPrivateConstructor() { }
     }
 
-    public class StringToGenericDictionaryWrapperInternalConstructor<T> : StringToGenericDictionaryWrapper<T>
+    public class StringToGenericDictionaryWrapperInternalConstructor<T>
+        : StringToGenericDictionaryWrapper<T>
     {
         internal StringToGenericDictionaryWrapperInternalConstructor() { }
     }
@@ -1578,19 +1619,22 @@ namespace System.Text.Json.Serialization.Tests
         public GenericStructIDictionaryWrapper<string, string> Dictionary { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""List"" : [10]," +
-            @"""Collection"" : [30]," +
-            @"""Set"" : [50]," +
-            @"""Dictionary"" : {""key1"" : ""value1""}" +
-            @"}";
+            @"{"
+            + @"""List"" : [10],"
+            + @"""Collection"" : [30],"
+            + @"""Set"" : [50],"
+            + @"""Dictionary"" : {""key1"" : ""value1""}"
+            + @"}";
 
         public void Initialize()
         {
             List = new GenericStructIListWrapper<int>() { 10 };
             Collection = new GenericStructICollectionWrapper<int>() { 30 };
             Set = new GenericStructISetWrapper<int>() { 50 };
-            Dictionary = new GenericStructIDictionaryWrapper<string, string>() { { "key1", "value1" } };
+            Dictionary = new GenericStructIDictionaryWrapper<string, string>()
+            {
+                { "key1", "value1" },
+            };
         }
 
         public void Verify()
@@ -1614,19 +1658,22 @@ namespace System.Text.Json.Serialization.Tests
         public GenericStructIDictionaryWrapper<string, string>? Dictionary { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-            @"""List"" : [10]," +
-            @"""Collection"" : [30]," +
-            @"""Set"" : [50]," +
-            @"""Dictionary"" : {""key1"" : ""value1""}" +
-            @"}";
+            @"{"
+            + @"""List"" : [10],"
+            + @"""Collection"" : [30],"
+            + @"""Set"" : [50],"
+            + @"""Dictionary"" : {""key1"" : ""value1""}"
+            + @"}";
 
         public void Initialize()
         {
             List = new GenericStructIListWrapper<int>() { 10 };
             Collection = new GenericStructICollectionWrapper<int>() { 30 };
             Set = new GenericStructISetWrapper<int>() { 50 };
-            Dictionary = new GenericStructIDictionaryWrapper<string, string>() { { "key1", "value1" } };
+            Dictionary = new GenericStructIDictionaryWrapper<string, string>()
+            {
+                { "key1", "value1" },
+            };
         }
 
         public void Verify()

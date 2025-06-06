@@ -4,13 +4,12 @@
 using System.Buffers;
 using System.IO.Pipelines;
 using BenchmarkDotNet.Attributes;
-
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl;
-using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
@@ -26,13 +25,19 @@ public class Http2FrameWriterBenchmark
     {
         _memoryPool = PinnedBlockMemoryPoolFactory.Create();
 
-        var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         _pipe = new Pipe(options);
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System));
+            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System)
+        );
 
         _frameWriter = new Http2FrameWriter(
             new NullPipeWriter(),
@@ -43,7 +48,8 @@ public class Http2FrameWriterBenchmark
             minResponseDataRate: null,
             "TestConnectionId",
             _memoryPool,
-            serviceContext);
+            serviceContext
+        );
 
         _responseHeaders = new HttpResponseHeaders();
         var headers = (IHeaderDictionary)_responseHeaders;
@@ -54,7 +60,12 @@ public class Http2FrameWriterBenchmark
     [Benchmark]
     public void WriteResponseHeaders()
     {
-        _frameWriter.WriteResponseHeaders(streamId: 0, 200, Http2HeadersFrameFlags.END_STREAM, _responseHeaders);
+        _frameWriter.WriteResponseHeaders(
+            streamId: 0,
+            200,
+            Http2HeadersFrameFlags.END_STREAM,
+            _responseHeaders
+        );
     }
 
     [GlobalCleanup]

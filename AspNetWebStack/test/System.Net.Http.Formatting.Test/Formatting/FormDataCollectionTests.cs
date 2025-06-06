@@ -71,8 +71,8 @@ namespace System.Net.Http.Formatting
         {
             Dictionary<string, string> pairs = new Dictionary<string, string>
             {
-                { "x",  "1"},
-                { "y" , "2"}
+                { "x", "1" },
+                { "y", "2" },
             };
 
             var form = new FormDataCollection(pairs);
@@ -99,7 +99,9 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void GetValues()
         {
-            FormDataCollection form = new FormDataCollection(new Uri("http://foo.com/?x=1&x=2&x=3"));
+            FormDataCollection form = new FormDataCollection(
+                new Uri("http://foo.com/?x=1&x=2&x=3")
+            );
 
             Assert.Equal(new string[] { "1", "2", "3" }, form.GetValues("x"));
         }
@@ -119,7 +121,9 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void ToNameValueCollection()
         {
-            FormDataCollection form = new FormDataCollection(new Uri("http://foo.com/?x=1a&y=2&x=1b&=ValueOnly&KeyOnly"));
+            FormDataCollection form = new FormDataCollection(
+                new Uri("http://foo.com/?x=1a&y=2&x=1b&=ValueOnly&KeyOnly")
+            );
 
             var nvc = form.ReadAsNameValueCollection();
 

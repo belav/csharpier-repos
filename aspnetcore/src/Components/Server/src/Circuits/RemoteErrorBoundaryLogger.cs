@@ -14,7 +14,11 @@ internal sealed partial class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
     private readonly IJSRuntime _jsRuntime;
     private readonly CircuitOptions _options;
 
-    public RemoteErrorBoundaryLogger(ILogger<ErrorBoundary> logger, IJSRuntime jsRuntime, IOptions<CircuitOptions> options)
+    public RemoteErrorBoundaryLogger(
+        ILogger<ErrorBoundary> logger,
+        IJSRuntime jsRuntime,
+        IOptions<CircuitOptions> options
+    )
     {
         _logger = logger;
         _jsRuntime = jsRuntime;
@@ -44,7 +48,16 @@ internal sealed partial class RemoteErrorBoundaryLogger : IErrorBoundaryLogger
 
     private static partial class Log
     {
-        [LoggerMessage(100, LogLevel.Warning, "Unhandled exception rendering component: {Message}", EventName = "ExceptionCaughtByErrorBoundary")]
-        public static partial void ExceptionCaughtByErrorBoundary(ILogger logger, string message, Exception exception);
+        [LoggerMessage(
+            100,
+            LogLevel.Warning,
+            "Unhandled exception rendering component: {Message}",
+            EventName = "ExceptionCaughtByErrorBoundary"
+        )]
+        public static partial void ExceptionCaughtByErrorBoundary(
+            ILogger logger,
+            string message,
+            Exception exception
+        );
     }
 }

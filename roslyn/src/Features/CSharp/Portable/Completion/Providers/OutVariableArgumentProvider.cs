@@ -17,9 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OutVariableArgumentProvider()
-        {
-        }
+        public OutVariableArgumentProvider() { }
 
         public override Task ProvideArgumentAsync(ArgumentContext context)
         {
@@ -38,8 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             // Since tihs provider runs after ContextVariableArgumentProvider, we know there is no suitable target in
             // the current context. Instead, offer to declare a new variable.
             var name = context.Parameter.Name;
-            if (SyntaxFacts.GetKeywordKind(name) != SyntaxKind.None
-                || SyntaxFacts.GetContextualKeywordKind(name) != SyntaxKind.None)
+            if (
+                SyntaxFacts.GetKeywordKind(name) != SyntaxKind.None
+                || SyntaxFacts.GetContextualKeywordKind(name) != SyntaxKind.None
+            )
             {
                 name = "@" + name;
             }
@@ -49,12 +49,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 refKindKeyword: SyntaxFactory.Token(SyntaxKind.OutKeyword),
                 SyntaxFactory.DeclarationExpression(
                     type: SyntaxFactory.IdentifierName("var"),
-                    designation: SyntaxFactory.SingleVariableDesignation(SyntaxFactory.Identifier(
-                        SyntaxFactory.TriviaList(),
-                        contextualKind: SyntaxKind.None,
-                        text: name,
-                        valueText: context.Parameter.Name,
-                        SyntaxFactory.TriviaList()))));
+                    designation: SyntaxFactory.SingleVariableDesignation(
+                        SyntaxFactory.Identifier(
+                            SyntaxFactory.TriviaList(),
+                            contextualKind: SyntaxKind.None,
+                            text: name,
+                            valueText: context.Parameter.Name,
+                            SyntaxFactory.TriviaList()
+                        )
+                    )
+                )
+            );
 
             context.DefaultValue = syntax.NormalizeWhitespace().ToFullString();
             return Task.CompletedTask;

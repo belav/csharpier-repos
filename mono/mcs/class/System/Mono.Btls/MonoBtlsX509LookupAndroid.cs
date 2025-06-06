@@ -32,12 +32,12 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Btls
 {
-	internal class MonoBtlsX509LookupAndroid : MonoBtlsX509LookupMono
-	{
-		protected override MonoBtlsX509 OnGetBySubject (MonoBtlsX509Name name)
-		{
-			return AndroidPlatform.CertStoreLookup (name);
-		}
-	}
+    internal class MonoBtlsX509LookupAndroid : MonoBtlsX509LookupMono
+    {
+        protected override MonoBtlsX509 OnGetBySubject(MonoBtlsX509Name name)
+        {
+            return AndroidPlatform.CertStoreLookup(name);
+        }
+    }
 }
 #endif

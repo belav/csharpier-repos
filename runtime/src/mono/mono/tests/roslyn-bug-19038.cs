@@ -1,7 +1,8 @@
 using System;
 using System.Reflection;
 
-unsafe public class C {
+public unsafe class C
+{
     public int Value;
 
     static void Main()
@@ -10,7 +11,7 @@ unsafe public class C {
         FieldInfo info = typeof(C).GetField("Value");
         TypedReference reference = __makeref(a);
 
-        if (!(reference is TypedReference reference0)) 
+        if (!(reference is TypedReference reference0))
             throw new Exception("TypedReference");
 
         info.SetValueDirect(reference0, 34);
@@ -20,7 +21,7 @@ unsafe public class C {
             throw new Exception("SetValueDirect");
 
         int z = 56;
-        if (CopyRefInt(ref z) != 56) 
+        if (CopyRefInt(ref z) != 56)
             throw new Exception("ref z");
 
         Console.WriteLine("ok");
@@ -28,7 +29,7 @@ unsafe public class C {
 
     static int CopyRefInt(ref int z)
     {
-        if (!(z is int z0)) 
+        if (!(z is int z0))
             throw new Exception("CopyRefInt");
         return z0;
     }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
  **
@@ -13,43 +13,43 @@
  **
  ===========================================================*/
 
-namespace System.Runtime.Serialization.Formatters.Binary {
-
+namespace System.Runtime.Serialization.Formatters.Binary
+{
     using System;
-    using System.IO;
-    using System.Reflection;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Runtime.Serialization.Formatters;
-#if FEATURE_REMOTING    
-    using System.Runtime.Remoting.Proxies;
-#endif
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
-
     using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
-    
+#if FEATURE_REMOTING
+    using System.Runtime.Remoting.Proxies;
+#endif
+
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class BinaryFormatter :
+    public sealed class BinaryFormatter :
 #if DISABLE_REMOTING || (!FEATURE_REMOTING && !MONO)
         IFormatter
 #else
-        IRemotingFormatter 
+        IRemotingFormatter
 #endif
     {
-
         internal ISurrogateSelector m_surrogates;
         internal StreamingContext m_context;
         internal SerializationBinder m_binder;
+
         //internal FormatterTypeStyle m_typeFormat = FormatterTypeStyle.TypesWhenNeeded;
         internal FormatterTypeStyle m_typeFormat = FormatterTypeStyle.TypesAlways; // For version resiliency, always put out types
         internal FormatterAssemblyStyle m_assemblyFormat = FormatterAssemblyStyle.Simple;
         internal TypeFilterLevel m_securityLevel = TypeFilterLevel.Full;
         internal Object[] m_crossAppDomainArray = null;
-        private static Dictionary<Type, TypeInformation> typeNameCache = new Dictionary<Type, TypeInformation>();
+        private static Dictionary<Type, TypeInformation> typeNameCache =
+            new Dictionary<Type, TypeInformation>();
 
         // Property which specifies how types are serialized,
         // FormatterTypeStyle Enum specifies options
@@ -75,17 +75,20 @@ namespace System.Runtime.Serialization.Formatters.Binary {
             set { m_securityLevel = value; }
         }
 
-        public ISurrogateSelector SurrogateSelector {
+        public ISurrogateSelector SurrogateSelector
+        {
             get { return m_surrogates; }
             set { m_surrogates = value; }
         }
 
-        public SerializationBinder Binder {
+        public SerializationBinder Binder
+        {
             get { return m_binder; }
             set { m_binder = value; }
         }
 
-        public StreamingContext Context {
+        public StreamingContext Context
+        {
             get { return m_context; }
             set { m_context = value; }
         }
@@ -98,12 +101,11 @@ namespace System.Runtime.Serialization.Formatters.Binary {
         }
 
         // Constructor
-        public BinaryFormatter(ISurrogateSelector selector, StreamingContext context) {
+        public BinaryFormatter(ISurrogateSelector selector, StreamingContext context)
+        {
             m_surrogates = selector;
             m_context = context;
         }
-
-
 
         // Deserialize the stream into an object graph.
         public Object Deserialize(Stream serializationStream)
@@ -111,20 +113,25 @@ namespace System.Runtime.Serialization.Formatters.Binary {
             return Deserialize(serializationStream, null);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal Object Deserialize(Stream serializationStream, HeaderHandler handler, bool fCheck)
         {
-#if FEATURE_REMOTING        
+#if FEATURE_REMOTING
             return Deserialize(serializationStream, handler, fCheck, null);
 #else
             if (serializationStream == null)
             {
-                throw new ArgumentNullException("serializationStream", Environment.GetResourceString("ArgumentNull_WithParamName", serializationStream));
+                throw new ArgumentNullException(
+                    "serializationStream",
+                    Environment.GetResourceString("ArgumentNull_WithParamName", serializationStream)
+                );
             }
             Contract.EndContractBlock();
 
             if (serializationStream.CanSeek && (serializationStream.Length == 0))
-                throw new SerializationException(Environment.GetResourceString("Serialization_Stream"));
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_Stream")
+                );
 
             SerTrace.Log(this, "Deserialize Entry");
             InternalFE formatterEnums = new InternalFE();
@@ -133,69 +140,122 @@ namespace System.Runtime.Serialization.Formatters.Binary {
             formatterEnums.FEassemblyFormat = m_assemblyFormat;
             formatterEnums.FEsecurityLevel = m_securityLevel;
 
-            ObjectReader sor = new ObjectReader(serializationStream, m_surrogates, m_context, formatterEnums, m_binder);
+            ObjectReader sor = new ObjectReader(
+                serializationStream,
+                m_surrogates,
+                m_context,
+                formatterEnums,
+                m_binder
+            );
             sor.crossAppDomainArray = m_crossAppDomainArray;
             return sor.Deserialize(handler, new __BinaryParser(serializationStream, sor), fCheck);
 
 #endif
-
         }
 
-
-
         // Deserialize the stream into an object graph.
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public Object Deserialize(Stream serializationStream, HeaderHandler handler) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public Object Deserialize(Stream serializationStream, HeaderHandler handler)
+        {
             return Deserialize(serializationStream, handler, true);
         }
 
 #if FEATURE_REMOTING || (MOBILE_LEGACY && !DISABLE_REMOTING)
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public Object DeserializeMethodResponse(Stream serializationStream, HeaderHandler handler, IMethodCallMessage methodCallMessage) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public Object DeserializeMethodResponse(
+            Stream serializationStream,
+            HeaderHandler handler,
+            IMethodCallMessage methodCallMessage
+        )
+        {
             return Deserialize(serializationStream, handler, true, methodCallMessage);
         }
 #endif
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [System.Runtime.InteropServices.ComVisible(false)]
-        public Object UnsafeDeserialize(Stream serializationStream, HeaderHandler handler) {
+        public Object UnsafeDeserialize(Stream serializationStream, HeaderHandler handler)
+        {
             return Deserialize(serializationStream, handler, false);
         }
 
 #if FEATURE_REMOTING || (MOBILE_LEGACY && !DISABLE_REMOTING)
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [System.Runtime.InteropServices.ComVisible(false)]
-        public Object UnsafeDeserializeMethodResponse(Stream serializationStream, HeaderHandler handler, IMethodCallMessage methodCallMessage) {
+        public Object UnsafeDeserializeMethodResponse(
+            Stream serializationStream,
+            HeaderHandler handler,
+            IMethodCallMessage methodCallMessage
+        )
+        {
             return Deserialize(serializationStream, handler, false, methodCallMessage);
-        }         
+        }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal Object Deserialize(Stream serializationStream, HeaderHandler handler, bool fCheck, IMethodCallMessage methodCallMessage) {
-            return Deserialize(serializationStream, handler, fCheck, false/*isCrossAppDomain*/, methodCallMessage);
+        [System.Security.SecurityCritical] // auto-generated
+        internal Object Deserialize(
+            Stream serializationStream,
+            HeaderHandler handler,
+            bool fCheck,
+            IMethodCallMessage methodCallMessage
+        )
+        {
+            return Deserialize(
+                serializationStream,
+                handler,
+                fCheck,
+                false /*isCrossAppDomain*/
+                ,
+                methodCallMessage
+            );
         }
 
         // Deserialize the stream into an object graph.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal Object Deserialize(Stream serializationStream, HeaderHandler handler, bool fCheck, bool isCrossAppDomain, IMethodCallMessage methodCallMessage) {
-            if (serializationStream==null)
+        [System.Security.SecurityCritical] // auto-generated
+        internal Object Deserialize(
+            Stream serializationStream,
+            HeaderHandler handler,
+            bool fCheck,
+            bool isCrossAppDomain,
+            IMethodCallMessage methodCallMessage
+        )
+        {
+            if (serializationStream == null)
             {
-                throw new ArgumentNullException("serializationStream", Environment.GetResourceString("ArgumentNull_WithParamName",serializationStream));
+                throw new ArgumentNullException(
+                    "serializationStream",
+                    Environment.GetResourceString("ArgumentNull_WithParamName", serializationStream)
+                );
             }
             Contract.EndContractBlock();
 
             if (serializationStream.CanSeek && (serializationStream.Length == 0))
-                throw new SerializationException(Environment.GetResourceString("Serialization_Stream"));
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_Stream")
+                );
 
             SerTrace.Log(this, "Deserialize Entry");
             InternalFE formatterEnums = new InternalFE();
             formatterEnums.FEtypeFormat = m_typeFormat;
             formatterEnums.FEserializerTypeEnum = InternalSerializerTypeE.Binary;
-            formatterEnums.FEassemblyFormat = m_assemblyFormat;         
-            formatterEnums.FEsecurityLevel = m_securityLevel;            
+            formatterEnums.FEassemblyFormat = m_assemblyFormat;
+            formatterEnums.FEsecurityLevel = m_securityLevel;
 
-               ObjectReader sor = new ObjectReader(serializationStream, m_surrogates, m_context, formatterEnums, m_binder);
+            ObjectReader sor = new ObjectReader(
+                serializationStream,
+                m_surrogates,
+                m_context,
+                formatterEnums,
+                m_binder
+            );
             sor.crossAppDomainArray = m_crossAppDomainArray;
-            return sor.Deserialize(handler, new __BinaryParser(serializationStream, sor), fCheck, isCrossAppDomain, methodCallMessage);
-    }
+            return sor.Deserialize(
+                handler,
+                new __BinaryParser(serializationStream, sor),
+                fCheck,
+                isCrossAppDomain,
+                methodCallMessage
+            );
+        }
 #endif // FEATURE_REMOTING
 
         public void Serialize(Stream serializationStream, Object graph)
@@ -205,7 +265,7 @@ namespace System.Runtime.Serialization.Formatters.Binary {
 
         // Commences the process of serializing the entire graph.  All of the data (in the appropriate format
         // is emitted onto the stream).
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public void Serialize(Stream serializationStream, Object graph, Header[] headers)
         {
             Serialize(serializationStream, graph, headers, true);
@@ -213,12 +273,20 @@ namespace System.Runtime.Serialization.Formatters.Binary {
 
         // Commences the process of serializing the entire graph.  All of the data (in the appropriate format
         // is emitted onto the stream).
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void Serialize(Stream serializationStream, Object graph, Header[] headers, bool fCheck)
+        [System.Security.SecurityCritical] // auto-generated
+        internal void Serialize(
+            Stream serializationStream,
+            Object graph,
+            Header[] headers,
+            bool fCheck
+        )
         {
             if (serializationStream == null)
             {
-                throw new ArgumentNullException("serializationStream", Environment.GetResourceString("ArgumentNull_WithParamName", serializationStream));
+                throw new ArgumentNullException(
+                    "serializationStream",
+                    Environment.GetResourceString("ArgumentNull_WithParamName", serializationStream)
+                );
             }
             Contract.EndContractBlock();
             SerTrace.Log(this, "Serialize Entry");
@@ -229,7 +297,11 @@ namespace System.Runtime.Serialization.Formatters.Binary {
             formatterEnums.FEassemblyFormat = m_assemblyFormat;
 
             ObjectWriter sow = new ObjectWriter(m_surrogates, m_context, formatterEnums, m_binder);
-            __BinaryWriter binaryWriter = new __BinaryWriter(serializationStream, sow, m_typeFormat);
+            __BinaryWriter binaryWriter = new __BinaryWriter(
+                serializationStream,
+                sow,
+                m_typeFormat
+            );
             sow.Serialize(graph, headers, binaryWriter, fCheck);
             m_crossAppDomainArray = sow.crossAppDomainArray;
         }
@@ -242,8 +314,15 @@ namespace System.Runtime.Serialization.Formatters.Binary {
                 if (!typeNameCache.TryGetValue(type, out typeInformation))
                 {
                     bool hasTypeForwardedFrom;
-                    string assemblyName = FormatterServices.GetClrAssemblyName(type, out hasTypeForwardedFrom);
-                    typeInformation = new TypeInformation(FormatterServices.GetClrTypeFullName(type), assemblyName, hasTypeForwardedFrom);
+                    string assemblyName = FormatterServices.GetClrAssemblyName(
+                        type,
+                        out hasTypeForwardedFrom
+                    );
+                    typeInformation = new TypeInformation(
+                        FormatterServices.GetClrTypeFullName(type),
+                        assemblyName,
+                        hasTypeForwardedFrom
+                    );
                     typeNameCache.Add(type, typeInformation);
                 }
                 return typeInformation;

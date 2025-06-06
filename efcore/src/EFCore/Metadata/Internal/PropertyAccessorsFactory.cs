@@ -21,13 +21,15 @@ public class PropertyAccessorsFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual PropertyAccessors Create(IPropertyBase propertyBase)
-        => (PropertyAccessors)GenericCreate
-            .MakeGenericMethod(propertyBase.ClrType)
-            .Invoke(null, new object[] { propertyBase })!;
+    public virtual PropertyAccessors Create(IPropertyBase propertyBase) =>
+        (PropertyAccessors)
+            GenericCreate
+                .MakeGenericMethod(propertyBase.ClrType)
+                .Invoke(null, new object[] { propertyBase })!;
 
-    private static readonly MethodInfo GenericCreate
-        = typeof(PropertyAccessorsFactory).GetTypeInfo().GetDeclaredMethod(nameof(CreateGeneric))!;
+    private static readonly MethodInfo GenericCreate = typeof(PropertyAccessorsFactory)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(CreateGeneric))!;
 
     [UsedImplicitly]
     private static PropertyAccessors CreateGeneric<TProperty>(IPropertyBase propertyBase)
@@ -39,12 +41,14 @@ public class PropertyAccessorsFactory
             CreateCurrentValueGetter<TProperty>(propertyBase, useStoreGeneratedValues: false),
             property == null ? null : CreateOriginalValueGetter<TProperty>(property),
             CreateRelationshipSnapshotGetter<TProperty>(propertyBase),
-            property == null ? null : CreateValueBufferGetter(property));
+            property == null ? null : CreateValueBufferGetter(property)
+        );
     }
 
     private static Func<InternalEntityEntry, TProperty> CreateCurrentValueGetter<TProperty>(
         IPropertyBase propertyBase,
-        bool useStoreGeneratedValues)
+        bool useStoreGeneratedValues
+    )
     {
         var entityClrType = propertyBase.DeclaringType.ContainingEntityType.ClrType;
         var entryParameter = Expression.Parameter(typeof(InternalEntityEntry), "entry");
@@ -59,7 +63,8 @@ public class PropertyAccessorsFactory
             currentValueExpression = Expression.Call(
                 entryParameter,
                 InternalEntityEntry.MakeReadShadowValueMethod(typeof(TProperty)),
-                Expression.Constant(shadowIndex));
+                Expression.Constant(shadowIndex)
+            );
 
             hasSentinelValueExpression = currentValueExpression.MakeHasSentinel(propertyBase);
         }
@@ -67,44 +72,62 @@ public class PropertyAccessorsFactory
         {
             var convertedExpression = Expression.Convert(
                 Expression.Property(entryParameter, nameof(InternalEntityEntry.Entity)),
-                entityClrType);
+                entityClrType
+            );
 
             var memberInfo = propertyBase.GetMemberInfo(forMaterialization: false, forSet: false);
 
             currentValueExpression = PropertyBase.CreateMemberAccess(
-                propertyBase, convertedExpression, memberInfo, fromContainingType: false);
+                propertyBase,
+                convertedExpression,
+                memberInfo,
+                fromContainingType: false
+            );
             hasSentinelValueExpression = currentValueExpression.MakeHasSentinel(propertyBase);
 
             if (currentValueExpression.Type != typeof(TProperty))
             {
-                if (currentValueExpression.Type.IsNullableType()
-                    && !typeof(TProperty).IsNullableType())
+                if (
+                    currentValueExpression.Type.IsNullableType()
+                    && !typeof(TProperty).IsNullableType()
+                )
                 {
-                    var nullableValue = Expression.Variable(currentValueExpression.Type, "nullableValue");
+                    var nullableValue = Expression.Variable(
+                        currentValueExpression.Type,
+                        "nullableValue"
+                    );
 
                     currentValueExpression = Expression.Block(
                         new[] { nullableValue },
                         new List<Expression>
                         {
-                            Expression.Assign(
-                                nullableValue,
-                                currentValueExpression),
+                            Expression.Assign(nullableValue, currentValueExpression),
                             currentValueExpression.Type.IsValueType
                                 ? Expression.Condition(
                                     Expression.MakeMemberAccess(
                                         nullableValue,
-                                        nullableValue.Type.GetProperty("HasValue")!),
+                                        nullableValue.Type.GetProperty("HasValue")!
+                                    ),
                                     Expression.Convert(nullableValue, typeof(TProperty)),
-                                    Expression.Default(typeof(TProperty)))
+                                    Expression.Default(typeof(TProperty))
+                                )
                                 : Expression.Condition(
-                                    Expression.ReferenceEqual(nullableValue, Expression.Constant(null)),
+                                    Expression.ReferenceEqual(
+                                        nullableValue,
+                                        Expression.Constant(null)
+                                    ),
                                     Expression.Default(typeof(TProperty)),
-                                    Expression.Convert(nullableValue, typeof(TProperty)))
-                        });
+                                    Expression.Convert(nullableValue, typeof(TProperty))
+                                ),
+                        }
+                    );
                 }
                 else
                 {
-                    currentValueExpression = Expression.Convert(currentValueExpression, typeof(TProperty));
+                    currentValueExpression = Expression.Convert(
+                        currentValueExpression,
+                        typeof(TProperty)
+                    );
                 }
             }
         }
@@ -115,70 +138,96 @@ public class PropertyAccessorsFactory
                 Expression.Call(
                     entryParameter,
                     InternalEntityEntry.FlaggedAsStoreGeneratedMethod,
-                    Expression.Constant(propertyIndex)),
+                    Expression.Constant(propertyIndex)
+                ),
                 Expression.Call(
                     entryParameter,
                     InternalEntityEntry.MakeReadStoreGeneratedValueMethod(typeof(TProperty)),
-                    Expression.Constant(storeGeneratedIndex)),
+                    Expression.Constant(storeGeneratedIndex)
+                ),
                 Expression.Condition(
                     Expression.AndAlso(
                         Expression.Call(
                             entryParameter,
                             InternalEntityEntry.FlaggedAsTemporaryMethod,
-                            Expression.Constant(propertyIndex)),
-                        hasSentinelValueExpression),
+                            Expression.Constant(propertyIndex)
+                        ),
+                        hasSentinelValueExpression
+                    ),
                     Expression.Call(
                         entryParameter,
                         InternalEntityEntry.MakeReadTemporaryValueMethod(typeof(TProperty)),
-                        Expression.Constant(storeGeneratedIndex)),
-                    currentValueExpression));
+                        Expression.Constant(storeGeneratedIndex)
+                    ),
+                    currentValueExpression
+                )
+            );
         }
 
-        return Expression.Lambda<Func<InternalEntityEntry, TProperty>>(
-                currentValueExpression,
-                entryParameter)
+        return Expression
+            .Lambda<Func<InternalEntityEntry, TProperty>>(currentValueExpression, entryParameter)
             .Compile();
     }
 
-    private static Func<InternalEntityEntry, TProperty> CreateOriginalValueGetter<TProperty>(IProperty property)
+    private static Func<InternalEntityEntry, TProperty> CreateOriginalValueGetter<TProperty>(
+        IProperty property
+    )
     {
         var entryParameter = Expression.Parameter(typeof(InternalEntityEntry), "entry");
         var originalValuesIndex = property.GetOriginalValueIndex();
 
-        return Expression.Lambda<Func<InternalEntityEntry, TProperty>>(
+        return Expression
+            .Lambda<Func<InternalEntityEntry, TProperty>>(
                 originalValuesIndex >= 0
                     ? Expression.Call(
                         entryParameter,
                         InternalEntityEntry.MakeReadOriginalValueMethod(typeof(TProperty)),
                         Expression.Constant(property),
-                        Expression.Constant(originalValuesIndex))
+                        Expression.Constant(originalValuesIndex)
+                    )
                     : Expression.Block(
                         Expression.Throw(
                             Expression.Constant(
                                 new InvalidOperationException(
-                                    CoreStrings.OriginalValueNotTracked(property.Name, property.DeclaringType.DisplayName())))),
-                        Expression.Constant(default(TProperty), typeof(TProperty))),
-                entryParameter)
+                                    CoreStrings.OriginalValueNotTracked(
+                                        property.Name,
+                                        property.DeclaringType.DisplayName()
+                                    )
+                                )
+                            )
+                        ),
+                        Expression.Constant(default(TProperty), typeof(TProperty))
+                    ),
+                entryParameter
+            )
             .Compile();
     }
 
-    private static Func<InternalEntityEntry, TProperty> CreateRelationshipSnapshotGetter<TProperty>(IPropertyBase propertyBase)
+    private static Func<InternalEntityEntry, TProperty> CreateRelationshipSnapshotGetter<TProperty>(
+        IPropertyBase propertyBase
+    )
     {
         var entryParameter = Expression.Parameter(typeof(InternalEntityEntry), "entry");
         var relationshipIndex = (propertyBase as IProperty)?.GetRelationshipIndex() ?? -1;
 
-        return Expression.Lambda<Func<InternalEntityEntry, TProperty>>(
+        return Expression
+            .Lambda<Func<InternalEntityEntry, TProperty>>(
                 relationshipIndex >= 0
                     ? Expression.Call(
                         entryParameter,
-                        InternalEntityEntry.MakeReadRelationshipSnapshotValueMethod(typeof(TProperty)),
+                        InternalEntityEntry.MakeReadRelationshipSnapshotValueMethod(
+                            typeof(TProperty)
+                        ),
                         Expression.Constant(propertyBase),
-                        Expression.Constant(relationshipIndex))
+                        Expression.Constant(relationshipIndex)
+                    )
                     : Expression.Call(
                         entryParameter,
                         InternalEntityEntry.MakeGetCurrentValueMethod(typeof(TProperty)),
-                        Expression.Constant(propertyBase)),
-                entryParameter)
+                        Expression.Constant(propertyBase)
+                    ),
+                entryParameter
+            )
             .Compile();
     }
 
@@ -186,12 +235,15 @@ public class PropertyAccessorsFactory
     {
         var valueBufferParameter = Expression.Parameter(typeof(ValueBuffer), "valueBuffer");
 
-        return Expression.Lambda<Func<ValueBuffer, object>>(
+        return Expression
+            .Lambda<Func<ValueBuffer, object>>(
                 Expression.Call(
                     valueBufferParameter,
                     ValueBuffer.GetValueMethod,
-                    Expression.Constant(property.GetIndex())),
-                valueBufferParameter)
+                    Expression.Constant(property.GetIndex())
+                ),
+                valueBufferParameter
+            )
             .Compile();
     }
 }

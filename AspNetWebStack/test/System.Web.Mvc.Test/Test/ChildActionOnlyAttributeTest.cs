@@ -16,9 +16,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => attr.OnAuthorization(null /* filterContext */),
+                () =>
+                    attr.OnAuthorization(
+                        null /* filterContext */
+                    ),
                 "filterContext"
-                );
+            );
         }
 
         [Fact]
@@ -47,8 +50,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { attr.OnAuthorization(context.Object); },
-                @"The action 'some name' is accessible only by a child request.");
+                delegate
+                {
+                    attr.OnAuthorization(context.Object);
+                },
+                @"The action 'some name' is accessible only by a child request."
+            );
         }
     }
 }

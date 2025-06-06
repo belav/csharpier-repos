@@ -6,46 +6,60 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
 
-    internal enum Aggregate {
+    internal enum Aggregate
+    {
         None = FunctionId.none,
         Sum = FunctionId.Sum,
         Avg = FunctionId.Avg,
         Min = FunctionId.Min,
         Max = FunctionId.Max,
         Count = FunctionId.Count,
-        StDev = FunctionId.StDev,   // Statistical standard deviation
-        Var = FunctionId.Var,       // Statistical variance
+        StDev = FunctionId.StDev, // Statistical standard deviation
+        Var = FunctionId.Var, // Statistical variance
     }
 
-    internal sealed class AggregateNode : ExpressionNode {
+    internal sealed class AggregateNode : ExpressionNode
+    {
         private readonly AggregateType type;
         private readonly Aggregate aggregate;
-        private readonly bool local;     // set to true if the aggregate calculated localy (for the current table)
+        private readonly bool local; // set to true if the aggregate calculated localy (for the current table)
 
         private readonly string relationName;
         private readonly string columnName;
 
-        // 
+        //
 
         private DataTable childTable;
         private DataColumn column;
         private DataRelation relation;
 
-        internal AggregateNode(DataTable table, FunctionId aggregateType, string columnName) :
-            this(table, aggregateType, columnName, true, null) {
-        }
+        internal AggregateNode(DataTable table, FunctionId aggregateType, string columnName)
+            : this(table, aggregateType, columnName, true, null) { }
 
-        internal AggregateNode(DataTable table, FunctionId aggregateType, string columnName, string relationName) :
-            this(table, aggregateType, columnName, false, relationName) {
-        }
+        internal AggregateNode(
+            DataTable table,
+            FunctionId aggregateType,
+            string columnName,
+            string relationName
+        )
+            : this(table, aggregateType, columnName, false, relationName) { }
 
-        internal AggregateNode(DataTable table, FunctionId aggregateType, string columnName, bool local, string relationName) : base(table) {
+        internal AggregateNode(
+            DataTable table,
+            FunctionId aggregateType,
+            string columnName,
+            bool local,
+            string relationName
+        )
+            : base(table)
+        {
             Debug.Assert(columnName != null, "Invalid parameter column name (null).");
             this.aggregate = (Aggregate)(int)aggregateType;
 
@@ -63,7 +77,8 @@ namespace System.Data {
                 this.type = AggregateType.Var;
             else if (aggregateType == FunctionId.StDev)
                 this.type = AggregateType.StDev;
-            else {
+            else
+            {
                 throw ExprException.UndefinedFunction(Function.FunctionName[(Int32)aggregateType]);
             }
 
@@ -71,32 +86,41 @@ namespace System.Data {
             this.relationName = relationName;
             this.columnName = columnName;
         }
-        internal override void Bind(DataTable table, List<DataColumn> list) {
+
+        internal override void Bind(DataTable table, List<DataColumn> list)
+        {
             BindTable(table);
             if (table == null)
                 throw ExprException.AggregateUnbound(this.ToString());
 
-            if (local) {
+            if (local)
+            {
                 relation = null;
             }
-            else {
+            else
+            {
                 DataRelationCollection relations;
                 relations = table.ChildRelations;
 
-                if (relationName == null) {
+                if (relationName == null)
+                {
                     // must have one and only one relation
 
-                    if (relations.Count > 1) {
+                    if (relations.Count > 1)
+                    {
                         throw ExprException.UnresolvedRelation(table.TableName, this.ToString());
                     }
-                    if (relations.Count == 1) {
+                    if (relations.Count == 1)
+                    {
                         relation = relations[0];
                     }
-                    else {
+                    else
+                    {
                         throw ExprException.AggregateUnbound(this.ToString());
                     }
                 }
-                else {
+                else
+                {
                     relation = relations[relationName];
                 }
             }
@@ -113,81 +137,104 @@ namespace System.Data {
             Debug.Assert(column != null, "Failed to bind column " + columnName);
 
             int i;
-            for (i = 0; i < list.Count; i++) {
+            for (i = 0; i < list.Count; i++)
+            {
                 // walk the list, check if the current column already on the list
                 DataColumn dataColumn = (DataColumn)list[i];
-                if (column == dataColumn) {
+                if (column == dataColumn)
+                {
                     break;
                 }
             }
-            if (i >= list.Count) {
+            if (i >= list.Count)
+            {
                 list.Add(column);
             }
-            
+
             // SQLBU 383715: Staleness of computed values in expression column as the relationship end columns are not being added to the dependent column list.
             AggregateNode.Bind(relation, list);
         }
 
         internal static void Bind(DataRelation relation, List<DataColumn> list)
         {
-            if (null != relation) {                
+            if (null != relation)
+            {
                 // add the ends of the relationship the expression depends on
-                foreach (DataColumn c in relation.ChildColumnsReference) {
-                    if (!list.Contains(c)) {
+                foreach (DataColumn c in relation.ChildColumnsReference)
+                {
+                    if (!list.Contains(c))
+                    {
                         list.Add(c);
                     }
                 }
-                foreach (DataColumn c in relation.ParentColumnsReference) {
-                    if (!list.Contains(c)) {
+                foreach (DataColumn c in relation.ParentColumnsReference)
+                {
+                    if (!list.Contains(c))
+                    {
                         list.Add(c);
                     }
                 }
             }
         }
 
-        internal override object Eval() {
+        internal override object Eval()
+        {
             return Eval(null, DataRowVersion.Default);
         }
 
-        internal override object Eval(DataRow row, DataRowVersion version) {
+        internal override object Eval(DataRow row, DataRowVersion version)
+        {
             if (childTable == null)
                 throw ExprException.AggregateUnbound(this.ToString());
 
             DataRow[] rows;
 
-            if (local) {
+            if (local)
+            {
                 rows = new DataRow[childTable.Rows.Count];
                 childTable.Rows.CopyTo(rows, 0);
             }
-            else {
-                if (row == null) {
+            else
+            {
+                if (row == null)
+                {
                     throw ExprException.EvalNoContext();
                 }
-                if (relation == null) {
+                if (relation == null)
+                {
                     throw ExprException.AggregateUnbound(this.ToString());
                 }
                 rows = row.GetChildRows(relation, version);
             }
 
             int[] records;
-            if (version == DataRowVersion.Proposed) {
+            if (version == DataRowVersion.Proposed)
+            {
                 version = DataRowVersion.Default;
             }
 
             List<int> recordList = new List<int>();
 
-            for (int i = 0; i < rows.Length; i++) {
-                if (rows[i].RowState == DataRowState.Deleted) {
-                    if (DataRowAction.Rollback != rows[i]._action) {
+            for (int i = 0; i < rows.Length; i++)
+            {
+                if (rows[i].RowState == DataRowState.Deleted)
+                {
+                    if (DataRowAction.Rollback != rows[i]._action)
+                    {
                         continue;
                     }
                     Debug.Assert(DataRowVersion.Original == version, "wrong version");
                     version = DataRowVersion.Original;
                 }
-                else if ((DataRowAction.Rollback == rows[i]._action) && (rows[i].RowState == DataRowState.Added)) {
+                else if (
+                    (DataRowAction.Rollback == rows[i]._action)
+                    && (rows[i].RowState == DataRowState.Added)
+                )
+                {
                     continue; // WebData 91297
                 }
-                if (version == DataRowVersion.Original && rows[i].oldRecord == -1) {
+                if (version == DataRowVersion.Original && rows[i].oldRecord == -1)
+                {
                     continue;
                 }
                 recordList.Add(rows[i].GetRecordFromVersion(version));
@@ -198,42 +245,52 @@ namespace System.Data {
         }
 
         // Helper for the DataTable.Compute method
-        internal override object Eval(int[] records) {
+        internal override object Eval(int[] records)
+        {
             if (childTable == null)
                 throw ExprException.AggregateUnbound(this.ToString());
-            if (!local) {
+            if (!local)
+            {
                 throw ExprException.ComputeNotAggregate(this.ToString());
             }
             return column.GetAggregateValue(records, type);
         }
 
-        internal override bool IsConstant() {
+        internal override bool IsConstant()
+        {
             return false;
         }
 
-        internal override bool IsTableConstant() {
+        internal override bool IsTableConstant()
+        {
             return local;
         }
 
-        internal override bool HasLocalAggregate() {
+        internal override bool HasLocalAggregate()
+        {
             return local;
         }
-        
-        internal override bool HasRemoteAggregate() {
+
+        internal override bool HasRemoteAggregate()
+        {
             return !local;
         }
 
-        internal override bool DependsOn(DataColumn column) {
-            if (this.column == column) {
+        internal override bool DependsOn(DataColumn column)
+        {
+            if (this.column == column)
+            {
                 return true;
             }
-            if (this.column.Computed) {
+            if (this.column.Computed)
+            {
                 return this.column.DataExpression.DependsOn(column);
             }
             return false;
         }
 
-        internal override ExpressionNode Optimize() {
+        internal override ExpressionNode Optimize()
+        {
             return this;
         }
     }

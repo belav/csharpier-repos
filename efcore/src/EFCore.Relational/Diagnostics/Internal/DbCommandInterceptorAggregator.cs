@@ -17,8 +17,9 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override IDbCommandInterceptor CreateChain(IEnumerable<IDbCommandInterceptor> interceptors)
-        => new CompositeDbCommandInterceptor(interceptors);
+    protected override IDbCommandInterceptor CreateChain(
+        IEnumerable<IDbCommandInterceptor> interceptors
+    ) => new CompositeDbCommandInterceptor(interceptors);
 
     private sealed class CompositeDbCommandInterceptor : IDbCommandInterceptor
     {
@@ -31,7 +32,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
 
         public InterceptionResult<DbCommand> CommandCreating(
             CommandCorrelatedEventData eventData,
-            InterceptionResult<DbCommand> result)
+            InterceptionResult<DbCommand> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -41,9 +43,7 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             return result;
         }
 
-        public DbCommand CommandCreated(
-            CommandEndEventData eventData,
-            DbCommand result)
+        public DbCommand CommandCreated(CommandEndEventData eventData, DbCommand result)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -53,9 +53,7 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             return result;
         }
 
-        public DbCommand CommandInitialized(
-            CommandEndEventData eventData,
-            DbCommand result)
+        public DbCommand CommandInitialized(CommandEndEventData eventData, DbCommand result)
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -68,7 +66,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<DbDataReader> result)
+            InterceptionResult<DbDataReader> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -81,7 +80,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public InterceptionResult<object> ScalarExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<object> result)
+            InterceptionResult<object> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -94,7 +94,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public InterceptionResult<int> NonQueryExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<int> result)
+            InterceptionResult<int> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -108,11 +109,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<DbDataReader> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ReaderExecutingAsync(command, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .ReaderExecutingAsync(command, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -123,11 +126,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<object> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ScalarExecutingAsync(command, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .ScalarExecutingAsync(command, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -138,11 +143,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<int> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].NonQueryExecutingAsync(command, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .NonQueryExecutingAsync(command, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -152,7 +159,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public DbDataReader ReaderExecuted(
             DbCommand command,
             CommandExecutedEventData eventData,
-            DbDataReader result)
+            DbDataReader result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -165,7 +173,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public object? ScalarExecuted(
             DbCommand command,
             CommandExecutedEventData eventData,
-            object? result)
+            object? result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -178,7 +187,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public int NonQueryExecuted(
             DbCommand command,
             CommandExecutedEventData eventData,
-            int result)
+            int result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -192,11 +202,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             DbCommand command,
             CommandExecutedEventData eventData,
             DbDataReader result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ReaderExecutedAsync(command, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .ReaderExecutedAsync(command, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -207,11 +219,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             DbCommand command,
             CommandExecutedEventData eventData,
             object? result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].ScalarExecutedAsync(command, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .ScalarExecutedAsync(command, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -222,11 +236,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
             DbCommand command,
             CommandExecutedEventData eventData,
             int result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].NonQueryExecutedAsync(command, eventData, result, cancellationToken)
+                result = await _interceptors[i]
+                    .NonQueryExecutedAsync(command, eventData, result, cancellationToken)
                     .ConfigureAwait(false);
             }
 
@@ -244,11 +260,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public async Task CommandCanceledAsync(
             DbCommand command,
             CommandEndEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].CommandCanceledAsync(command, eventData, cancellationToken)
+                await _interceptors[i]
+                    .CommandCanceledAsync(command, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
@@ -264,16 +282,22 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public async Task CommandFailedAsync(
             DbCommand command,
             CommandErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                await _interceptors[i].CommandFailedAsync(command, eventData, cancellationToken)
+                await _interceptors[i]
+                    .CommandFailedAsync(command, eventData, cancellationToken)
                     .ConfigureAwait(false);
             }
         }
 
-        public InterceptionResult DataReaderClosing(DbCommand command, DataReaderClosingEventData eventData, InterceptionResult result)
+        public InterceptionResult DataReaderClosing(
+            DbCommand command,
+            DataReaderClosingEventData eventData,
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -286,11 +310,13 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public async ValueTask<InterceptionResult> DataReaderClosingAsync(
             DbCommand command,
             DataReaderClosingEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                result = await _interceptors[i].DataReaderClosingAsync(command, eventData, result)
+                result = await _interceptors[i]
+                    .DataReaderClosingAsync(command, eventData, result)
                     .ConfigureAwait(false);
             }
 
@@ -300,7 +326,8 @@ public class DbCommandInterceptorAggregator : InterceptorAggregator<IDbCommandIn
         public InterceptionResult DataReaderDisposing(
             DbCommand command,
             DataReaderDisposingEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {

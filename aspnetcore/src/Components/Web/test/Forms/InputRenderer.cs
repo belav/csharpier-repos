@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Components.Forms;
 
 internal static class InputRenderer
 {
-    public static async Task<TComponent> RenderAndGetComponent<TValue, TComponent>(TestInputHostComponent<TValue, TComponent> hostComponent)
-    where TComponent : InputBase<TValue>
+    public static async Task<TComponent> RenderAndGetComponent<TValue, TComponent>(
+        TestInputHostComponent<TValue, TComponent> hostComponent
+    )
+        where TComponent : InputBase<TValue>
     {
         var testRenderer = new TestRenderer();
         var componentId = testRenderer.AssignRootComponentId(hostComponent);
@@ -17,10 +19,10 @@ internal static class InputRenderer
         return FindComponent<TComponent>(testRenderer.Batches.Single());
     }
 
-    private static TComponent FindComponent<TComponent>(CapturedBatch batch)
-        => batch.ReferenceFrames
-                .Where(f => f.FrameType == RenderTreeFrameType.Component)
-                .Select(f => f.Component)
-                .OfType<TComponent>()
-                .Single();
+    private static TComponent FindComponent<TComponent>(CapturedBatch batch) =>
+        batch
+            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+            .Select(f => f.Component)
+            .OfType<TComponent>()
+            .Single();
 }

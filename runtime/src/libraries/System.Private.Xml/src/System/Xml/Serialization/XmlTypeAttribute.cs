@@ -9,7 +9,12 @@ namespace System.Xml.Serialization
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct
+    )]
     public class XmlTypeAttribute : System.Attribute
     {
         private bool _includeInSchema = true;
@@ -20,9 +25,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlTypeAttribute()
-        {
-        }
+        public XmlTypeAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

@@ -29,7 +29,10 @@ public static class GenericHostBuilderExtensions
     /// <param name="builder">The <see cref="IHostBuilder" /> instance to configure.</param>
     /// <param name="configure">The configure callback</param>
     /// <returns>A reference to the <paramref name="builder"/> after the operation has completed.</returns>
-    public static IHostBuilder ConfigureWebHostDefaults(this IHostBuilder builder, Action<IWebHostBuilder> configure)
+    public static IHostBuilder ConfigureWebHostDefaults(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(configure);
 
@@ -55,15 +58,22 @@ public static class GenericHostBuilderExtensions
     /// <param name="configure">The configure callback</param>
     /// <param name="configureOptions">The delegate that configures the <see cref="WebHostBuilderOptions"/>.</param>
     /// <returns>A reference to the <paramref name="builder"/> after the operation has completed.</returns>
-    public static IHostBuilder ConfigureWebHostDefaults(this IHostBuilder builder, Action<IWebHostBuilder> configure, Action<WebHostBuilderOptions> configureOptions)
+    public static IHostBuilder ConfigureWebHostDefaults(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure,
+        Action<WebHostBuilderOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(configure);
 
-        return builder.ConfigureWebHost(webHostBuilder =>
-        {
-            WebHost.ConfigureWebDefaults(webHostBuilder);
+        return builder.ConfigureWebHost(
+            webHostBuilder =>
+            {
+                WebHost.ConfigureWebDefaults(webHostBuilder);
 
-            configure(webHostBuilder);
-        }, configureOptions);
+                configure(webHostBuilder);
+            },
+            configureOptions
+        );
     }
 }

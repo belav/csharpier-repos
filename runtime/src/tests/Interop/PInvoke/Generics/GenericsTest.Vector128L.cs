@@ -30,7 +30,10 @@ unsafe partial class GenericsNative
     public static extern Vector128<long> AddVector128Ls(Vector128<long>* pValues, int count);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Vector128<long> AddVector128Ls([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Vector128<long>[] pValues, int count);
+    public static extern Vector128<long> AddVector128Ls(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Vector128<long>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Vector128<long> AddVector128Ls(in Vector128<long> pValues, int count);
@@ -47,7 +50,9 @@ unsafe partial class GenericsTest
         Assert.Equal(value2.GetElement(0), 1L);
         Assert.Equal(value2.GetElement(1), 2L);
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector128LOut(1L, 2L, out Vector128<long> value3));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector128LOut(1L, 2L, out Vector128<long> value3)
+        );
 
         Vector128<long>* value4 = GenericsNative.GetVector128LPtr(1L, 2L);
         Assert.Equal(value4->GetElement(0), 1L);
@@ -55,9 +60,12 @@ unsafe partial class GenericsTest
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector128LRef(1L, 2L));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector128L(default, default));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector128L(default, default)
+        );
 
-        Vector128<long>[] values = new Vector128<long>[] {
+        Vector128<long>[] values = new Vector128<long>[]
+        {
             default,
             value2,
             default,
@@ -65,15 +73,20 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(() => {
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
             fixed (Vector128<long>* pValues = &values[0])
             {
                 GenericsNative.AddVector128Ls(pValues, values.Length);
             }
         });
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector128Ls(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector128Ls(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector128Ls(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector128Ls(in values[0], values.Length)
+        );
     }
 }

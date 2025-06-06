@@ -4,39 +4,56 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using CoreFXTestLibrary;
+using TypeOfRepo;
 #if INTERNAL_CONTRACTS
 using Internal.Runtime.Augments;
 #endif
-using CoreFXTestLibrary;
-using TypeOfRepo;
 
 namespace ArrayTests
 {
     public class SomeClassForArrayTests
     {
         public string m_Member;
-        public SomeClassForArrayTests() { }
-        public override string ToString() { return m_Member; }
-    }
 
+        public SomeClassForArrayTests() { }
+
+        public override string ToString()
+        {
+            return m_Member;
+        }
+    }
 
     public struct GenericStruct<T>
     {
         public GenericStruct(T t)
-        { _val = t; }
+        {
+            _val = t;
+        }
 
         T _val;
-        public override string ToString() { return _val.ToString(); }
+
+        public override string ToString()
+        {
+            return _val.ToString();
+        }
     }
 
     public class GenericClass<T>
     {
         public GenericClass(T t)
-        { _val = t; }
+        {
+            _val = t;
+        }
+
         T _val;
-        public override string ToString() { return _val.ToString(); }
+
+        public override string ToString()
+        {
+            return _val.ToString();
+        }
     }
 
     public abstract class SetArrayValBase
@@ -65,7 +82,8 @@ namespace ArrayTests
         public abstract void FillArray(object array, object val);
     }
 
-    public class IndexOfVal<T> : IndexOfValBase where T:struct
+    public class IndexOfVal<T> : IndexOfValBase
+        where T : struct
     {
         public override void FillArray(object array, object val)
         {
@@ -82,25 +100,51 @@ namespace ArrayTests
 
     public struct GenStructImplementsIEquatable<T> : IEquatable<GenStructImplementsIEquatable<T>>
     {
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public bool Equals(GenStructImplementsIEquatable<T> other) { return true; }
-        public override bool Equals(object other) { return false; }
-        public override int GetHashCode() { return 0; }
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public bool Equals(GenStructImplementsIEquatable<T> other)
+        {
+            return true;
+        }
+
+        public override bool Equals(object other)
+        {
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
 
     public struct GenStructImplementsIEquatable2<T> : IEquatable<GenStructImplementsIEquatable2<T>>
     {
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public bool Equals(GenStructImplementsIEquatable2<T> other) { return true; }
-        public override bool Equals(object other) { return false; }
-        public override int GetHashCode() { return 0; }
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public bool Equals(GenStructImplementsIEquatable2<T> other)
+        {
+            return true;
+        }
+
+        public override bool Equals(object other)
+        {
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
 
     public class ArrayTests
     {
         static void TestForEach(object[] array)
         {
-            foreach(var item1 in array)
+            foreach (var item1 in array)
             {
                 foreach (var item2 in (object[])item1)
                 {
@@ -112,36 +156,42 @@ namespace ArrayTests
         static void AddItemsToArray(object o)
         {
             Array array = (Array)o;
-            array.SetValue(new SomeClassForArrayTests[]
-                { 
-                    new SomeClassForArrayTests{ m_Member = "a1" },
-                    new SomeClassForArrayTests{ m_Member = "a2" },
-                    new SomeClassForArrayTests{ m_Member = "a3" },
-                }, 0);
+            array.SetValue(
+                new SomeClassForArrayTests[]
+                {
+                    new SomeClassForArrayTests { m_Member = "a1" },
+                    new SomeClassForArrayTests { m_Member = "a2" },
+                    new SomeClassForArrayTests { m_Member = "a3" },
+                },
+                0
+            );
             array.SetValue(array.GetValue(0), 1);
-            array.SetValue(new SomeClassForArrayTests[]
-                { 
-                    new SomeClassForArrayTests{ m_Member = "a4" },
-                    new SomeClassForArrayTests{ m_Member = "a5" },
-                }, 2);
+            array.SetValue(
+                new SomeClassForArrayTests[]
+                {
+                    new SomeClassForArrayTests { m_Member = "a4" },
+                    new SomeClassForArrayTests { m_Member = "a5" },
+                },
+                2
+            );
         }
-        
-        public static void DynamicMDArrayTest<T>(Func<T,T> getValue)
+
+        public static void DynamicMDArrayTest<T>(Func<T, T> getValue)
         {
             T lastValue = default(T);
 
             T[,,] array = new T[1, 2, 3];
             for (int i = 0; i < 1; i++)
-                for (int j = 0; j < 2; j++)
-                    for (int k = 0; k < 3; k++)
-                        array[i, j, k] = lastValue = getValue(lastValue);
+            for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 3; k++)
+                array[i, j, k] = lastValue = getValue(lastValue);
 
             int index = 0;
             string[] expected = new string[] { "10", "20", "30", "40", "50", "60" };
             foreach (var item in (IEnumerable)array)
                 Assert.AreEqual(expected[index++], item.ToString());
         }
-        
+
         [TestMethod]
         public static void TestArrays()
         {
@@ -151,10 +201,16 @@ namespace ArrayTests
             TypeInfo myArray = TypeOf.AT_ArrayTests.MakeArrayType().GetTypeInfo();
             Assert.AreEqual("ArrayTests.ArrayTests[]", myArray.ToString());
 
-            TypeInfo listArray = TypeOf.List.MakeGenericType(TypeOf.AT_ArrayTests).MakeArrayType().GetTypeInfo();
-            Assert.AreEqual("System.Collections.Generic.List`1[ArrayTests.ArrayTests][]", listArray.ToString());
+            TypeInfo listArray = TypeOf
+                .List.MakeGenericType(TypeOf.AT_ArrayTests)
+                .MakeArrayType()
+                .GetTypeInfo();
+            Assert.AreEqual(
+                "System.Collections.Generic.List`1[ArrayTests.ArrayTests][]",
+                listArray.ToString()
+            );
 
-            // Array types can have multiple EETypes representing them. 
+            // Array types can have multiple EETypes representing them.
             // Verify that at the end of the day, all of them are "equal" and castable to each other.
             // Same array types created twice using MakeArrayType() to test the caching logic in the runtime.
             Type t1 = TypeOf.AT_SomeClassForArrayTests.MakeArrayType().MakeArrayType();
@@ -192,58 +248,78 @@ namespace ArrayTests
         {
 #if UNIVERSAL_GENERICS
             var typeofGenStructOfString = typeof(GenericStruct<>).MakeGenericType(TypeOf.String);
-            var typeofSetArrayValGenStructOfString = typeof(SetArrayVal<>).MakeGenericType(typeofGenStructOfString);
+            var typeofSetArrayValGenStructOfString = typeof(SetArrayVal<>).MakeGenericType(
+                typeofGenStructOfString
+            );
             var typeofGenStructOfShort = typeof(GenericStruct<>).MakeGenericType(TypeOf.Short);
-            var typeofSetArrayValGenStructOfShort = typeof(SetArrayVal<>).MakeGenericType(typeofGenStructOfShort);
+            var typeofSetArrayValGenStructOfShort = typeof(SetArrayVal<>).MakeGenericType(
+                typeofGenStructOfShort
+            );
             var typeofGenClassOfString = typeof(GenericClass<>).MakeGenericType(TypeOf.String);
-            var typeofSetArrayValGenClassOfString = typeof(SetArrayVal<>).MakeGenericType(typeofGenClassOfString);
+            var typeofSetArrayValGenClassOfString = typeof(SetArrayVal<>).MakeGenericType(
+                typeofGenClassOfString
+            );
             var typeofGenClassOfShort = typeof(GenericClass<>).MakeGenericType(TypeOf.Short);
-            var typeofSetArrayValGenClassOfShort = typeof(SetArrayVal<>).MakeGenericType(typeofGenClassOfShort);
+            var typeofSetArrayValGenClassOfShort = typeof(SetArrayVal<>).MakeGenericType(
+                typeofGenClassOfShort
+            );
 
 #if INTERNAL_CONTRACTS
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfString.TypeHandle));
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfShort.TypeHandle));
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfString.TypeHandle));
-            Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfShort.TypeHandle));
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfString.TypeHandle)
+            );
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenStructOfShort.TypeHandle)
+            );
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfString.TypeHandle)
+            );
+            Assert.IsTrue(
+                RuntimeAugments.IsDynamicType(typeofSetArrayValGenClassOfShort.TypeHandle)
+            );
 #endif
 
             Array array_GS_String = Array.CreateInstance(typeofGenStructOfString, 1);
             var mdArrayRank2_GS_String = Array.CreateInstance(typeofGenStructOfString, 2, 3);
-            SetArrayValBase setVal_GS_String = (SetArrayValBase)Activator.CreateInstance(typeofSetArrayValGenStructOfString);
+            SetArrayValBase setVal_GS_String = (SetArrayValBase)
+                Activator.CreateInstance(typeofSetArrayValGenStructOfString);
 
             var array_GS_Short = Array.CreateInstance(typeofGenStructOfShort, 4);
             var mdArrayRank2_GS_Short = Array.CreateInstance(typeofGenStructOfShort, 5, 6);
-            SetArrayValBase setVal_GS_Short = (SetArrayValBase)Activator.CreateInstance(typeofSetArrayValGenStructOfShort);
+            SetArrayValBase setVal_GS_Short = (SetArrayValBase)
+                Activator.CreateInstance(typeofSetArrayValGenStructOfShort);
 
             var array_GC_String = Array.CreateInstance(typeofGenClassOfString, 7);
             var mdArrayRank2_GC_String = Array.CreateInstance(typeofGenClassOfString, 8, 9);
-            SetArrayValBase setVal_GC_String = (SetArrayValBase)Activator.CreateInstance(typeofSetArrayValGenClassOfString);
+            SetArrayValBase setVal_GC_String = (SetArrayValBase)
+                Activator.CreateInstance(typeofSetArrayValGenClassOfString);
 
             var array_GC_Short = Array.CreateInstance(typeofGenClassOfShort, 10);
             var mdArrayRank2_GC_Short = Array.CreateInstance(typeofGenClassOfShort, 11, 12);
-            SetArrayValBase setVal_GC_Short = (SetArrayValBase)Activator.CreateInstance(typeofSetArrayValGenClassOfShort);
+            SetArrayValBase setVal_GC_Short = (SetArrayValBase)
+                Activator.CreateInstance(typeofSetArrayValGenClassOfShort);
 
             setVal_GS_String.SetVal(array_GS_String, "TestStr", 0);
             setVal_GS_String.SetVal(mdArrayRank2_GS_String, "TestStr", 1, 2);
             Assert.AreEqual("TestStr", array_GS_String.GetValue(0).ToString());
-            Assert.AreEqual("TestStr", mdArrayRank2_GS_String.GetValue(1,2).ToString());
+            Assert.AreEqual("TestStr", mdArrayRank2_GS_String.GetValue(1, 2).ToString());
 
             setVal_GS_Short.SetVal(array_GS_Short, (short)123, 0);
             setVal_GS_Short.SetVal(mdArrayRank2_GS_Short, (short)123, 1, 2);
             Assert.AreEqual("123", array_GS_Short.GetValue(0).ToString());
-            Assert.AreEqual("123", mdArrayRank2_GS_Short.GetValue(1,2).ToString());
+            Assert.AreEqual("123", mdArrayRank2_GS_Short.GetValue(1, 2).ToString());
 
             setVal_GC_String.SetVal(array_GC_String, "TestStr", 0);
             setVal_GC_String.SetVal(mdArrayRank2_GC_String, "TestStr", 1, 2);
             Assert.AreEqual("TestStr", array_GC_String.GetValue(0).ToString());
-            Assert.AreEqual("TestStr", mdArrayRank2_GC_String.GetValue(1,2).ToString());
+            Assert.AreEqual("TestStr", mdArrayRank2_GC_String.GetValue(1, 2).ToString());
 
             setVal_GC_Short.SetVal(array_GC_Short, (short)123, 0);
             setVal_GC_Short.SetVal(mdArrayRank2_GC_Short, (short)123, 1, 2);
             Assert.AreEqual("123", array_GC_Short.GetValue(0).ToString());
-            Assert.AreEqual("123", mdArrayRank2_GC_Short.GetValue(1,2).ToString());
+            Assert.AreEqual("123", mdArrayRank2_GC_Short.GetValue(1, 2).ToString());
 #endif
-        } 
+        }
 
         [TestMethod]
         public static void TestMDArrays()
@@ -252,16 +328,19 @@ namespace ArrayTests
             int[,,] array = new int[1, 2, 3];
             int value = 1;
             for (int i = 0; i < 1; i++)
-                for (int j = 0; j < 2; j++)
-                    for (int k = 0; k < 3; k++)
-                        array[i, j, k] = value++;
+            for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 3; k++)
+                array[i, j, k] = value++;
 
             int index = 0;
             string[] expected = new string[] { "1", "2", "3", "4", "5", "6" };
             foreach (var item in (IEnumerable)array)
                 Assert.AreEqual(expected[index++], item.ToString());
 
-            MethodInfo mi = typeof(ArrayTests).GetTypeInfo().GetDeclaredMethod("DynamicMDArrayTest").MakeGenericMethod(TypeOf.Short);
+            MethodInfo mi = typeof(ArrayTests)
+                .GetTypeInfo()
+                .GetDeclaredMethod("DynamicMDArrayTest")
+                .MakeGenericMethod(TypeOf.Short);
             mi.Invoke(null, new object[] { new Func<short, short>((val) => (short)(val + 10)) });
 #endif
         }
@@ -271,17 +350,33 @@ namespace ArrayTests
         {
 #if UNIVERSAL_GENERICS
             // Test USG Scenario
-            var typeofGenStructOfString = typeof(GenStructImplementsIEquatable<>).MakeGenericType(TypeOf.String);
-            var typeofIndexOfValGenStructOfString = typeof(IndexOfVal<>).MakeGenericType(typeofGenStructOfString);
+            var typeofGenStructOfString = typeof(GenStructImplementsIEquatable<>).MakeGenericType(
+                TypeOf.String
+            );
+            var typeofIndexOfValGenStructOfString = typeof(IndexOfVal<>).MakeGenericType(
+                typeofGenStructOfString
+            );
 #if INTERNAL_CONTRACTS
             Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofGenStructOfString.TypeHandle));
 #endif
-            var typeofNullableGenStructOfString = typeof(Nullable<>).MakeGenericType(typeofGenStructOfString);
+            var typeofNullableGenStructOfString = typeof(Nullable<>).MakeGenericType(
+                typeofGenStructOfString
+            );
 
             Array array_GS_String = Array.CreateInstance(typeofNullableGenStructOfString, 1);
-            IndexOfValBase indexOf_GS_String = (IndexOfValBase)Activator.CreateInstance(typeofIndexOfValGenStructOfString);
-            indexOf_GS_String.FillArray(array_GS_String, Activator.CreateInstance(typeofGenStructOfString));
-            Assert.AreEqual(0, indexOf_GS_String.IndexOf(array_GS_String, Activator.CreateInstance(typeofGenStructOfString)));
+            IndexOfValBase indexOf_GS_String = (IndexOfValBase)
+                Activator.CreateInstance(typeofIndexOfValGenStructOfString);
+            indexOf_GS_String.FillArray(
+                array_GS_String,
+                Activator.CreateInstance(typeofGenStructOfString)
+            );
+            Assert.AreEqual(
+                0,
+                indexOf_GS_String.IndexOf(
+                    array_GS_String,
+                    Activator.CreateInstance(typeofGenStructOfString)
+                )
+            );
 #endif
         }
 
@@ -289,23 +384,43 @@ namespace ArrayTests
         public static void TestArrayIndexOfNullableStructOfCanon_Canon()
         {
             // Force canonical implementation Array.IndexOf<GenStructImplementsIEquatable2<__Canon>?>() to be generated and used
-            GenStructImplementsIEquatable2<object>?[] arr = new GenStructImplementsIEquatable2<object>?[10];
-            IndexOfValBase indexOfValCanonForcer = new IndexOfVal<GenStructImplementsIEquatable2<object>>();
+            GenStructImplementsIEquatable2<object>?[] arr =
+                new GenStructImplementsIEquatable2<object>?[10];
+            IndexOfValBase indexOfValCanonForcer =
+                new IndexOfVal<GenStructImplementsIEquatable2<object>>();
             indexOfValCanonForcer.FillArray(arr, default(GenStructImplementsIEquatable2<object>));
-            Console.WriteLine(indexOfValCanonForcer.IndexOf(arr, default(GenStructImplementsIEquatable2<object>)));
+            Console.WriteLine(
+                indexOfValCanonForcer.IndexOf(arr, default(GenStructImplementsIEquatable2<object>))
+            );
 
             // Just as in the above USG logic
-            var typeofGenStructOfString = typeof(GenStructImplementsIEquatable2<>).MakeGenericType(TypeOf.String);
-            var typeofIndexOfValGenStructOfString = typeof(IndexOfVal<>).MakeGenericType(typeofGenStructOfString);
+            var typeofGenStructOfString = typeof(GenStructImplementsIEquatable2<>).MakeGenericType(
+                TypeOf.String
+            );
+            var typeofIndexOfValGenStructOfString = typeof(IndexOfVal<>).MakeGenericType(
+                typeofGenStructOfString
+            );
 #if INTERNAL_CONTRACTS
             Assert.IsTrue(RuntimeAugments.IsDynamicType(typeofGenStructOfString.TypeHandle));
 #endif
-            var typeofNullableGenStructOfString = typeof(Nullable<>).MakeGenericType(typeofGenStructOfString);
+            var typeofNullableGenStructOfString = typeof(Nullable<>).MakeGenericType(
+                typeofGenStructOfString
+            );
 
             Array array_GS_String = Array.CreateInstance(typeofNullableGenStructOfString, 1);
-            IndexOfValBase indexOf_GS_String = (IndexOfValBase)Activator.CreateInstance(typeofIndexOfValGenStructOfString);
-            indexOf_GS_String.FillArray(array_GS_String, Activator.CreateInstance(typeofGenStructOfString));
-            Assert.AreEqual(0, indexOf_GS_String.IndexOf(array_GS_String, Activator.CreateInstance(typeofGenStructOfString)));
+            IndexOfValBase indexOf_GS_String = (IndexOfValBase)
+                Activator.CreateInstance(typeofIndexOfValGenStructOfString);
+            indexOf_GS_String.FillArray(
+                array_GS_String,
+                Activator.CreateInstance(typeofGenStructOfString)
+            );
+            Assert.AreEqual(
+                0,
+                indexOf_GS_String.IndexOf(
+                    array_GS_String,
+                    Activator.CreateInstance(typeofGenStructOfString)
+                )
+            );
         }
     }
 }

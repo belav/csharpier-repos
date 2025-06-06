@@ -5,22 +5,18 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
-    using System.Text;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
+    using System.Text;
 
     public class MessagePropertyDescription : MessagePartDescription
     {
         public MessagePropertyDescription(string name)
-            : base(name, "")
-        {
-        }
+            : base(name, "") { }
 
         internal MessagePropertyDescription(MessagePropertyDescription other)
-            : base(other)
-        {
-        }
+            : base(other) { }
 
         internal override MessagePartDescription Clone()
         {

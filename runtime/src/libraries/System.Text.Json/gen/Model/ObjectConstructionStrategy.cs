@@ -12,10 +12,12 @@ namespace System.Text.Json.SourceGeneration
         /// Object is abstract or an interface.
         /// </summary>
         NotApplicable = 0,
+
         /// <summary>
         /// Object should be created with a parameterless constructor.
         /// </summary>
         ParameterlessConstructor = 1,
+
         /// <summary>
         /// Object should be created with a parameterized constructor.
         /// </summary>

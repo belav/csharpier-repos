@@ -28,9 +28,7 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </summary>
     [EntityFrameworkInternal]
     public PrimitiveCollectionBuilder(IMutableProperty property)
-        : base(property)
-    {
-    }
+        : base(property) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -39,8 +37,10 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> HasAnnotation(string annotation, object? value)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasAnnotation(annotation, value);
+    public new virtual PrimitiveCollectionBuilder<TProperty> HasAnnotation(
+        string annotation,
+        object? value
+    ) => (PrimitiveCollectionBuilder<TProperty>)base.HasAnnotation(annotation, value);
 
     /// <summary>
     ///     Configures whether this property must have a value assigned or whether null is a valid value.
@@ -49,8 +49,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </summary>
     /// <param name="required">A value indicating whether the property is required.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> IsRequired(bool required = true)
-        => (PrimitiveCollectionBuilder<TProperty>)base.IsRequired(required);
+    public new virtual PrimitiveCollectionBuilder<TProperty> IsRequired(bool required = true) =>
+        (PrimitiveCollectionBuilder<TProperty>)base.IsRequired(required);
 
     /// <summary>
     ///     Configures the maximum length of data that can be stored in this property.
@@ -60,8 +60,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     ///     The maximum length of data allowed in the property. A value of <c>-1</c> indicates that the property has no maximum length.
     /// </param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> HasMaxLength(int maxLength)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasMaxLength(maxLength);
+    public new virtual PrimitiveCollectionBuilder<TProperty> HasMaxLength(int maxLength) =>
+        (PrimitiveCollectionBuilder<TProperty>)base.HasMaxLength(maxLength);
 
     /// <summary>
     ///     Configures the value that will be used to determine if the property has been set or not. If the property is set to the
@@ -70,8 +70,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </summary>
     /// <param name="sentinel">The sentinel value.</param>
     /// <returns>The same builder instance if the configuration was applied, <see langword="null" /> otherwise.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> HasSentinel(object? sentinel)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
+    public new virtual PrimitiveCollectionBuilder<TProperty> HasSentinel(object? sentinel) =>
+        (PrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
 
     /// <summary>
     ///     Configures the value that will be used to determine if the property has been set or not. If the property is set to the
@@ -80,8 +80,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </summary>
     /// <param name="sentinel">The sentinel value.</param>
     /// <returns>The same builder instance if the configuration was applied, <see langword="null" /> otherwise.</returns>
-    public virtual PrimitiveCollectionBuilder<TProperty> HasSentinel(TProperty? sentinel)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
+    public virtual PrimitiveCollectionBuilder<TProperty> HasSentinel(TProperty? sentinel) =>
+        (PrimitiveCollectionBuilder<TProperty>)base.HasSentinel(sentinel);
 
     /// <summary>
     ///     Configures the property as capable of persisting unicode characters.
@@ -89,8 +89,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </summary>
     /// <param name="unicode">A value indicating whether the property can contain unicode characters.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> IsUnicode(bool unicode = true)
-        => (PrimitiveCollectionBuilder<TProperty>)base.IsUnicode(unicode);
+    public new virtual PrimitiveCollectionBuilder<TProperty> IsUnicode(bool unicode = true) =>
+        (PrimitiveCollectionBuilder<TProperty>)base.IsUnicode(unicode);
 
     /// <summary>
     ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -113,10 +113,12 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </remarks>
     /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGenerator
-        <[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TGenerator>()
-        where TGenerator : ValueGenerator
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator<TGenerator>();
+    public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGenerator<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            TGenerator
+    >()
+        where TGenerator : ValueGenerator =>
+        (PrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator<TGenerator>();
 
     /// <summary>
     ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -145,8 +147,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGenerator(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? valueGeneratorType)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator(valueGeneratorType);
+            Type? valueGeneratorType
+    ) => (PrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator(valueGeneratorType);
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -174,10 +176,11 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </remarks>
     /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory
-        <[DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory>()
-        where TFactory : ValueGeneratorFactory
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasValueGeneratorFactory<TFactory>();
+    public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory<
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
+    >()
+        where TFactory : ValueGeneratorFactory =>
+        (PrimitiveCollectionBuilder<TProperty>)base.HasValueGeneratorFactory<TFactory>();
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -207,8 +210,10 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactoryType)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasValueGeneratorFactory(valueGeneratorFactoryType);
+            Type? valueGeneratorFactoryType
+    ) =>
+        (PrimitiveCollectionBuilder<TProperty>)
+            base.HasValueGeneratorFactory(valueGeneratorFactoryType);
 
     /// <summary>
     ///     Configures whether this property should be used as a concurrency token. When a property is configured
@@ -219,8 +224,9 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </summary>
     /// <param name="concurrencyToken">A value indicating whether this property is a concurrency token.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> IsConcurrencyToken(bool concurrencyToken = true)
-        => (PrimitiveCollectionBuilder<TProperty>)base.IsConcurrencyToken(concurrencyToken);
+    public new virtual PrimitiveCollectionBuilder<TProperty> IsConcurrencyToken(
+        bool concurrencyToken = true
+    ) => (PrimitiveCollectionBuilder<TProperty>)base.IsConcurrencyToken(concurrencyToken);
 
     /// <summary>
     ///     Configures a property to never have a value generated when an instance of this
@@ -231,8 +237,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     ///     Note that temporary values may still be generated for use internally before a
     ///     new entity is saved.
     /// </remarks>
-    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedNever()
-        => (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedNever();
+    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedNever() =>
+        (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedNever();
 
     /// <summary>
     ///     Configures a property to have a value generated only when saving a new entity, unless a non-null,
@@ -241,29 +247,29 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     ///     of saving the entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAdd()
-        => (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAdd();
+    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAdd() =>
+        (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAdd();
 
     /// <summary>
     ///     Configures a property to have a value generated when saving a new or existing entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAddOrUpdate()
-        => (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAddOrUpdate();
+    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnAddOrUpdate() =>
+        (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnAddOrUpdate();
 
     /// <summary>
     ///     Configures a property to have a value generated when saving an existing entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdate()
-        => (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdate();
+    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdate() =>
+        (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdate();
 
     /// <summary>
     ///     Configures a property to have a value generated under certain conditions when saving an existing entity.
     /// </summary>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdateSometimes()
-        => (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdateSometimes();
+    public new virtual PrimitiveCollectionBuilder<TProperty> ValueGeneratedOnUpdateSometimes() =>
+        (PrimitiveCollectionBuilder<TProperty>)base.ValueGeneratedOnUpdateSometimes();
 
     /// <summary>
     ///     Sets the backing field to use for this property.
@@ -286,15 +292,17 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </remarks>
     /// <param name="fieldName">The field name.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> HasField(string fieldName)
-        => (PrimitiveCollectionBuilder<TProperty>)base.HasField(fieldName);
+    public new virtual PrimitiveCollectionBuilder<TProperty> HasField(string fieldName) =>
+        (PrimitiveCollectionBuilder<TProperty>)base.HasField(fieldName);
 
     /// <summary>
     ///     Configures the elements of this collection.
     /// </summary>
     /// <param name="builderAction">An action that performs configuration of the collection element type.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> ElementType(Action<ElementTypeBuilder> builderAction)
+    public new virtual PrimitiveCollectionBuilder<TProperty> ElementType(
+        Action<ElementTypeBuilder> builderAction
+    )
     {
         builderAction(ElementType());
 
@@ -318,6 +326,7 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for this property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual PrimitiveCollectionBuilder<TProperty> UsePropertyAccessMode(PropertyAccessMode propertyAccessMode)
-        => (PrimitiveCollectionBuilder<TProperty>)base.UsePropertyAccessMode(propertyAccessMode);
+    public new virtual PrimitiveCollectionBuilder<TProperty> UsePropertyAccessMode(
+        PropertyAccessMode propertyAccessMode
+    ) => (PrimitiveCollectionBuilder<TProperty>)base.UsePropertyAccessMode(propertyAccessMode);
 }

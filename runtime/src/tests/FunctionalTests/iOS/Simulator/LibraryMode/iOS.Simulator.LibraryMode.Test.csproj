@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk" TreatAsLocalProperty="MonoForceInterpreter">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <MonoForceInterpreter>false</MonoForceInterpreter>
@@ -17,8 +16,6 @@
     <BundlesResources Condition="'$(BundlesResources)' == ''">false</BundlesResources>
     <iOSLikeDedup Condition="'$(iOSLikeDedup)' == ''">false</iOSLikeDedup>
   </PropertyGroup>
-
-
   <ItemGroup>
     <!-- Preserves the UnmanagedCallersOnly method -->
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />

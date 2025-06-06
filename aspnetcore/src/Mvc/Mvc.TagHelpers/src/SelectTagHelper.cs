@@ -85,20 +85,28 @@ public class SelectTagHelper : TagHelper
         // IHtmlGenerator will enforce name requirements.
         if (For.Metadata == null)
         {
-            throw new InvalidOperationException(Resources.FormatTagHelpers_NoProvidedMetadata(
-                "<select>",
-                ForAttributeName,
-                nameof(IModelMetadataProvider),
-                For.Name));
+            throw new InvalidOperationException(
+                Resources.FormatTagHelpers_NoProvidedMetadata(
+                    "<select>",
+                    ForAttributeName,
+                    nameof(IModelMetadataProvider),
+                    For.Name
+                )
+            );
         }
 
         // Base allowMultiple on the instance or declared type of the expression to avoid a
         // "SelectExpressionNotEnumerable" InvalidOperationException during generation.
         // Metadata.IsEnumerableType is similar but does not take runtime type into account.
         var realModelType = For.ModelExplorer.ModelType;
-        _allowMultiple = typeof(string) != realModelType &&
-            typeof(IEnumerable).IsAssignableFrom(realModelType);
-        _currentValues = Generator.GetCurrentValues(ViewContext, For.ModelExplorer, For.Name, _allowMultiple);
+        _allowMultiple =
+            typeof(string) != realModelType && typeof(IEnumerable).IsAssignableFrom(realModelType);
+        _currentValues = Generator.GetCurrentValues(
+            ViewContext,
+            For.ModelExplorer,
+            For.Name,
+            _allowMultiple
+        );
 
         // Whether or not (not being highly unlikely) we generate anything, could update contained <option/>
         // elements. Provide selected values for <option/> tag helpers.
@@ -132,14 +140,16 @@ public class SelectTagHelper : TagHelper
 
         // Ensure Generator does not throw due to empty "fullName" if user provided a name attribute.
         IDictionary<string, object> htmlAttributes = null;
-        if (string.IsNullOrEmpty(For.Name) &&
-            string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix) &&
-            !string.IsNullOrEmpty(Name))
+        if (
+            string.IsNullOrEmpty(For.Name)
+            && string.IsNullOrEmpty(ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix)
+            && !string.IsNullOrEmpty(Name)
+        )
         {
             htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-                {
-                    { "name", Name },
-                };
+            {
+                { "name", Name },
+            };
         }
 
         var tagBuilder = Generator.GenerateSelect(
@@ -150,7 +160,8 @@ public class SelectTagHelper : TagHelper
             selectList: items,
             currentValues: _currentValues,
             allowMultiple: _allowMultiple,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
 
         if (tagBuilder != null)
         {

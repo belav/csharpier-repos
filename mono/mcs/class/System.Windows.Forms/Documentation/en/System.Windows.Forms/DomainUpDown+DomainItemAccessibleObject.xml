@@ -1,5 +1,11 @@
-<Type Name="DomainUpDown+DomainItemAccessibleObject" FullName="System.Windows.Forms.DomainUpDown+DomainItemAccessibleObject">
-  <TypeSignature Language="C#" Value="public class DomainUpDown.DomainItemAccessibleObject : System.Windows.Forms.AccessibleObject" />
+<Type
+  Name="DomainUpDown+DomainItemAccessibleObject"
+  FullName="System.Windows.Forms.DomainUpDown+DomainItemAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DomainUpDown.DomainItemAccessibleObject : System.Windows.Forms.AccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -20,7 +26,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public DomainItemAccessibleObject (string name, System.Windows.Forms.AccessibleObject parent);" />
+      <MemberSignature
+        Language="C#"
+        Value="public DomainItemAccessibleObject (string name, System.Windows.Forms.AccessibleObject parent);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="name" Type="System.String" />
@@ -54,7 +63,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Parent">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleObject Parent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleObject Parent { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleObject</ReturnType>
@@ -70,7 +82,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Role">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleRole Role { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleRole Role { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleRole</ReturnType>
@@ -86,7 +101,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="State">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleStates State { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleStates State { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.AccessibleStates</ReturnType>

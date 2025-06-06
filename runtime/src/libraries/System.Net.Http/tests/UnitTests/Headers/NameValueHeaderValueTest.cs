@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -12,14 +11,26 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_NameNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => { NameValueHeaderValue nameValue = new NameValueHeaderValue((string)null); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                {
+                    NameValueHeaderValue nameValue = new NameValueHeaderValue((string)null);
+                }
+            );
         }
 
         [Fact]
         public void Ctor_NameEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>("name", () => { NameValueHeaderValue nameValue = new NameValueHeaderValue(string.Empty); });
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () =>
+                {
+                    NameValueHeaderValue nameValue = new NameValueHeaderValue(string.Empty);
+                }
+            );
         }
 
         [Theory]
@@ -84,7 +95,11 @@ namespace System.Net.Http.Tests
         public void Value_CallSetterWithInvalidValues_Throw()
         {
             // Just verify that the setter calls the same validation the ctor invokes.
-            Assert.Throws<FormatException>(() => { var x = new NameValueHeaderValue("name"); x.Value = " x "; });
+            Assert.Throws<FormatException>(() =>
+            {
+                var x = new NameValueHeaderValue("name");
+                x.Value = " x ";
+            });
         }
 
         [Fact]
@@ -217,45 +232,103 @@ namespace System.Net.Http.Tests
         {
             NameValueHeaderValue result = null;
 
-            Assert.Equal(10, NameValueHeaderValue.GetNameValueLength("name=value", 0, DummyCreator, out result));
+            Assert.Equal(
+                10,
+                NameValueHeaderValue.GetNameValueLength("name=value", 0, DummyCreator, out result)
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("value", result.Value);
 
-            Assert.Equal(10, NameValueHeaderValue.GetNameValueLength(" name=value", 1, DummyCreator, out result));
+            Assert.Equal(
+                10,
+                NameValueHeaderValue.GetNameValueLength(" name=value", 1, DummyCreator, out result)
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("value", result.Value);
 
-            Assert.Equal(4, NameValueHeaderValue.GetNameValueLength(" name", 1, DummyCreator, out result));
+            Assert.Equal(
+                4,
+                NameValueHeaderValue.GetNameValueLength(" name", 1, DummyCreator, out result)
+            );
             Assert.Equal("name", result.Name);
             Assert.Null(result.Value);
 
-            Assert.Equal(17, NameValueHeaderValue.GetNameValueLength("name=\"quoted str\"", 0, DummyCreator,
-                out result));
+            Assert.Equal(
+                17,
+                NameValueHeaderValue.GetNameValueLength(
+                    "name=\"quoted str\"",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("\"quoted str\"", result.Value);
 
-            Assert.Equal(17, NameValueHeaderValue.GetNameValueLength(" name=\"quoted str\"", 1, DummyCreator,
-                out result));
+            Assert.Equal(
+                17,
+                NameValueHeaderValue.GetNameValueLength(
+                    " name=\"quoted str\"",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("\"quoted str\"", result.Value);
 
-            Assert.Equal(12, NameValueHeaderValue.GetNameValueLength("name\t =va1ue\"", 0, DummyCreator, out result));
+            Assert.Equal(
+                12,
+                NameValueHeaderValue.GetNameValueLength(
+                    "name\t =va1ue\"",
+                    0,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("va1ue", result.Value);
 
-            Assert.Equal(12, NameValueHeaderValue.GetNameValueLength(" name= va*ue ", 1, DummyCreator, out result));
+            Assert.Equal(
+                12,
+                NameValueHeaderValue.GetNameValueLength(
+                    " name= va*ue ",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("va*ue", result.Value);
 
-            Assert.Equal(6, NameValueHeaderValue.GetNameValueLength(" name  ", 1, DummyCreator, out result));
+            Assert.Equal(
+                6,
+                NameValueHeaderValue.GetNameValueLength(" name  ", 1, DummyCreator, out result)
+            );
             Assert.Equal("name", result.Name);
             Assert.Null(result.Value);
 
-            Assert.Equal(12, NameValueHeaderValue.GetNameValueLength(" name= va*ue ,", 1, DummyCreator, out result));
+            Assert.Equal(
+                12,
+                NameValueHeaderValue.GetNameValueLength(
+                    " name= va*ue ,",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("va*ue", result.Value);
 
-            Assert.Equal(9, NameValueHeaderValue.GetNameValueLength(" name = va:ue", 1, DummyCreator, out result));
+            Assert.Equal(
+                9,
+                NameValueHeaderValue.GetNameValueLength(
+                    " name = va:ue",
+                    1,
+                    DummyCreator,
+                    out result
+                )
+            );
             Assert.Equal("name", result.Name);
             Assert.Equal("va", result.Value);
         }
@@ -265,15 +338,30 @@ namespace System.Net.Http.Tests
         {
             NameValueHeaderValue result = null;
 
-            Assert.Equal(0, NameValueHeaderValue.GetNameValueLength(" name=value", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                NameValueHeaderValue.GetNameValueLength(" name=value", 0, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, NameValueHeaderValue.GetNameValueLength(" name=", 1, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                NameValueHeaderValue.GetNameValueLength(" name=", 1, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, NameValueHeaderValue.GetNameValueLength(" ,", 1, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                NameValueHeaderValue.GetNameValueLength(" ,", 1, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, NameValueHeaderValue.GetNameValueLength("name=value", 10, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                NameValueHeaderValue.GetNameValueLength("name=value", 10, DummyCreator, out result)
+            );
             Assert.Null(result);
-            Assert.Equal(0, NameValueHeaderValue.GetNameValueLength("", 0, DummyCreator, out result));
+            Assert.Equal(
+                0,
+                NameValueHeaderValue.GetNameValueLength("", 0, DummyCreator, out result)
+            );
             Assert.Null(result);
         }
 
@@ -328,7 +416,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { NameValueHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                NameValueHeaderValue.Parse(input);
+            });
 
             Assert.False(NameValueHeaderValue.TryParse(input, out NameValueHeaderValue result));
             Assert.Null(result);
@@ -342,7 +433,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string name, string value)
         {
-            Assert.Throws<FormatException>(() => { new NameValueHeaderValue(name, value); });
+            Assert.Throws<FormatException>(() =>
+            {
+                new NameValueHeaderValue(name, value);
+            });
         }
 
         private static NameValueHeaderValue DummyCreator()

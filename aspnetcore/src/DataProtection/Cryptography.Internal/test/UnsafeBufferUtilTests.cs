@@ -91,7 +91,11 @@ public unsafe class UnsafeBufferUtilTests
         // Act
         fixed (char* pExpected = expected)
         {
-            UnsafeBufferUtil.BlockCopy(from: pExpected, to: testHandle, byteCount: (uint)cbExpected);
+            UnsafeBufferUtil.BlockCopy(
+                from: pExpected,
+                to: testHandle,
+                byteCount: (uint)cbExpected
+            );
         }
 
         // Assert

@@ -75,7 +75,7 @@ namespace System.Data.Common.Internal.Materialization
                 // LINQ has anonymous types that aren't going to show up in our
                 // metadata workspace, and we don't want to hydrate a record when
                 // we need an anonymous type.  LINQ solves this by annotating the
-                // edmType with some additional information, which we'll pick up 
+                // edmType with some additional information, which we'll pick up
                 // here.
                 InitializerMetadata initializer;
                 if (InitializerMetadata.TryGetInitializerMetadata(type, out initializer))
@@ -98,7 +98,9 @@ namespace System.Data.Common.Internal.Materialization
                     if (_spanIndex != null)
                     {
                         Append("<<");
-                        Dictionary<int, AssociationEndMember> spanMap = _spanIndex.GetSpanMap((RowType)type);
+                        Dictionary<int, AssociationEndMember> spanMap = _spanIndex.GetSpanMap(
+                            (RowType)type
+                        );
                         if (null != spanMap)
                         {
                             string separator = string.Empty;
@@ -170,7 +172,8 @@ namespace System.Data.Common.Internal.Materialization
             }
             else
             {
-                DiscriminatedEntityIdentity discriminated = (DiscriminatedEntityIdentity)entityIdentity;
+                DiscriminatedEntityIdentity discriminated =
+                    (DiscriminatedEntityIdentity)entityIdentity;
                 Append("CM", discriminated.EntitySetColumnMap);
                 foreach (EntitySet entitySet in discriminated.EntitySetMap)
                 {
@@ -248,15 +251,23 @@ namespace System.Data.Common.Internal.Materialization
             Append("Ref-", columnMap.EntityIdentity);
 
             EntityType referencedEntityType;
-            bool isRefType = TypeHelpers.TryGetRefEntityType(columnMap.Type, out referencedEntityType);
+            bool isRefType = TypeHelpers.TryGetRefEntityType(
+                columnMap.Type,
+                out referencedEntityType
+            );
             Debug.Assert(isRefType, "RefColumnMap is not of RefType?");
             Append(",T", referencedEntityType);
         }
 
         internal override void Visit(ScalarColumnMap columnMap, int dummy)
         {
-            String description = String.Format(CultureInfo.InvariantCulture,
-                                            "S({0}-{1}:{2})", columnMap.CommandId, columnMap.ColumnPos, columnMap.Type.Identity);
+            String description = String.Format(
+                CultureInfo.InvariantCulture,
+                "S({0}-{1}:{2})",
+                columnMap.CommandId,
+                columnMap.ColumnPos,
+                columnMap.Type.Identity
+            );
             Append(description);
         }
 
@@ -269,17 +280,19 @@ namespace System.Data.Common.Internal.Materialization
 
         internal override void Visit(VarRefColumnMap columnMap, int dummy)
         {
-            Debug.Fail("must not encounter VarRef in ColumnMap for key (eliminated in final ColumnMap)");
+            Debug.Fail(
+                "must not encounter VarRef in ColumnMap for key (eliminated in final ColumnMap)"
+            );
         }
 
         internal override void Visit(MultipleDiscriminatorPolymorphicColumnMap columnMap, int dummy)
         {
             // MultipleDiscriminator maps contain an opaque discriminator delegate, so recompilation
             // is always required. Generate a unique key for the discriminator.
-            // 
+            //
             Append(String.Format(CultureInfo.InvariantCulture, "MD-{0}", Guid.NewGuid()));
         }
-    
+
         #endregion
     }
 }

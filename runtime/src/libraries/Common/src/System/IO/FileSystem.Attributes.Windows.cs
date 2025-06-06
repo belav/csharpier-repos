@@ -23,10 +23,14 @@ namespace System.IO
             Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data = default;
             lastError = FillAttributeInfo(path, ref data, returnErrorOnNotFound: true);
 
-            return
-                (lastError == 0) &&
-                (data.dwFileAttributes != -1) &&
-                ((data.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY) != 0);
+            return (lastError == 0)
+                && (data.dwFileAttributes != -1)
+                && (
+                    (
+                        data.dwFileAttributes
+                        & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                    ) != 0
+                );
         }
 
         public static bool FileExists(string fullPath)
@@ -34,10 +38,14 @@ namespace System.IO
             Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data = default;
             int errorCode = FillAttributeInfo(fullPath, ref data, returnErrorOnNotFound: true);
 
-            return
-                (errorCode == 0) &&
-                (data.dwFileAttributes != -1) &&
-                ((data.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY) == 0);
+            return (errorCode == 0)
+                && (data.dwFileAttributes != -1)
+                && (
+                    (
+                        data.dwFileAttributes
+                        & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                    ) == 0
+                );
         }
 
         /// <summary>
@@ -47,7 +55,11 @@ namespace System.IO
         /// <param name="path">The file path from which the file attribute information will be filled.</param>
         /// <param name="data">A struct that will contain the attribute information.</param>
         /// <param name="returnErrorOnNotFound">Return the error code for not found errors?</param>
-        internal static int FillAttributeInfo(string? path, ref Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data, bool returnErrorOnNotFound)
+        internal static int FillAttributeInfo(
+            string? path,
+            ref Interop.Kernel32.WIN32_FILE_ATTRIBUTE_DATA data,
+            bool returnErrorOnNotFound
+        )
         {
             int errorCode = Interop.Errors.ERROR_SUCCESS;
 
@@ -56,15 +68,25 @@ namespace System.IO
 
             using (DisableMediaInsertionPrompt.Create())
             {
-                if (!Interop.Kernel32.GetFileAttributesEx(path, Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard, ref data))
+                if (
+                    !Interop.Kernel32.GetFileAttributesEx(
+                        path,
+                        Interop.Kernel32.GET_FILEEX_INFO_LEVELS.GetFileExInfoStandard,
+                        ref data
+                    )
+                )
                 {
                     errorCode = Marshal.GetLastPInvokeError();
 
                     if (!IsPathUnreachableError(errorCode))
                     {
                         // Assert so we can track down other cases (if any) to add to our test suite
-                        Debug.Assert(errorCode == Interop.Errors.ERROR_ACCESS_DENIED || errorCode == Interop.Errors.ERROR_SHARING_VIOLATION || errorCode == Interop.Errors.ERROR_SEM_TIMEOUT,
-                            $"Unexpected error code getting attributes {errorCode} from path {path}");
+                        Debug.Assert(
+                            errorCode == Interop.Errors.ERROR_ACCESS_DENIED
+                                || errorCode == Interop.Errors.ERROR_SHARING_VIOLATION
+                                || errorCode == Interop.Errors.ERROR_SEM_TIMEOUT,
+                            $"Unexpected error code getting attributes {errorCode} from path {path}"
+                        );
 
                         // Files that are marked for deletion will not let you GetFileAttributes,
                         // ERROR_ACCESS_DENIED is given back without filling out the data struct.
@@ -80,7 +102,12 @@ namespace System.IO
                         // cases that we know we don't want to retry on.
 
                         Interop.Kernel32.WIN32_FIND_DATA findData = default;
-                        using (SafeFindHandle handle = Interop.Kernel32.FindFirstFile(path!, ref findData))
+                        using (
+                            SafeFindHandle handle = Interop.Kernel32.FindFirstFile(
+                                path!,
+                                ref findData
+                            )
+                        )
                         {
                             if (handle.IsInvalid)
                             {
@@ -126,8 +153,8 @@ namespace System.IO
                 case Interop.Errors.ERROR_INVALID_PARAMETER:
                 case Interop.Errors.ERROR_NETWORK_UNREACHABLE:
                 case Interop.Errors.ERROR_NETWORK_ACCESS_DENIED:
-                case Interop.Errors.ERROR_INVALID_HANDLE:           // eg from \\.\CON
-                case Interop.Errors.ERROR_FILENAME_EXCED_RANGE:     // Path is too long
+                case Interop.Errors.ERROR_INVALID_HANDLE: // eg from \\.\CON
+                case Interop.Errors.ERROR_FILENAME_EXCED_RANGE: // Path is too long
                     return true;
                 default:
                     return false;

@@ -17,13 +17,20 @@ public unsafe class CngAuthenticatedEncryptorBaseTests
         var encryptorMock = new Mock<MockableEncryptor>();
         encryptorMock
             .Setup(o => o.DecryptHook(It.IsAny<IntPtr>(), 2, It.IsAny<IntPtr>(), 4))
-            .Returns((IntPtr pbCiphertext, uint cbCiphertext, IntPtr pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData) =>
-            {
-                // ensure that pointers started at the right place
-                Assert.Equal((byte)0x03, *(byte*)pbCiphertext);
-                Assert.Equal((byte)0x11, *(byte*)pbAdditionalAuthenticatedData);
-                return new byte[] { 0x20, 0x21, 0x22 };
-            });
+            .Returns(
+                (
+                    IntPtr pbCiphertext,
+                    uint cbCiphertext,
+                    IntPtr pbAdditionalAuthenticatedData,
+                    uint cbAdditionalAuthenticatedData
+                ) =>
+                {
+                    // ensure that pointers started at the right place
+                    Assert.Equal((byte)0x03, *(byte*)pbCiphertext);
+                    Assert.Equal((byte)0x11, *(byte*)pbAdditionalAuthenticatedData);
+                    return new byte[] { 0x20, 0x21, 0x22 };
+                }
+            );
 
         // Act
         var retVal = encryptorMock.Object.Decrypt(ciphertext, aad);
@@ -42,13 +49,20 @@ public unsafe class CngAuthenticatedEncryptorBaseTests
         var encryptorMock = new Mock<MockableEncryptor>();
         encryptorMock
             .Setup(o => o.DecryptHook(It.IsAny<IntPtr>(), 2, It.IsAny<IntPtr>(), 0))
-            .Returns((IntPtr pbCiphertext, uint cbCiphertext, IntPtr pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData) =>
-            {
-                // ensure that pointers started at the right place
-                Assert.Equal((byte)0x03, *(byte*)pbCiphertext);
-                Assert.NotEqual(IntPtr.Zero, pbAdditionalAuthenticatedData); // CNG will complain if this pointer is zero
-                return new byte[] { 0x20, 0x21, 0x22 };
-            });
+            .Returns(
+                (
+                    IntPtr pbCiphertext,
+                    uint cbCiphertext,
+                    IntPtr pbAdditionalAuthenticatedData,
+                    uint cbAdditionalAuthenticatedData
+                ) =>
+                {
+                    // ensure that pointers started at the right place
+                    Assert.Equal((byte)0x03, *(byte*)pbCiphertext);
+                    Assert.NotEqual(IntPtr.Zero, pbAdditionalAuthenticatedData); // CNG will complain if this pointer is zero
+                    return new byte[] { 0x20, 0x21, 0x22 };
+                }
+            );
 
         // Act
         var retVal = encryptorMock.Object.Decrypt(ciphertext, aad);
@@ -67,13 +81,20 @@ public unsafe class CngAuthenticatedEncryptorBaseTests
         var encryptorMock = new Mock<MockableEncryptor>();
         encryptorMock
             .Setup(o => o.DecryptHook(It.IsAny<IntPtr>(), 0, It.IsAny<IntPtr>(), 4))
-            .Returns((IntPtr pbCiphertext, uint cbCiphertext, IntPtr pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData) =>
-            {
-                // ensure that pointers started at the right place
-                Assert.NotEqual(IntPtr.Zero, pbCiphertext); // CNG will complain if this pointer is zero
-                Assert.Equal((byte)0x11, *(byte*)pbAdditionalAuthenticatedData);
-                return new byte[] { 0x20, 0x21, 0x22 };
-            });
+            .Returns(
+                (
+                    IntPtr pbCiphertext,
+                    uint cbCiphertext,
+                    IntPtr pbAdditionalAuthenticatedData,
+                    uint cbAdditionalAuthenticatedData
+                ) =>
+                {
+                    // ensure that pointers started at the right place
+                    Assert.NotEqual(IntPtr.Zero, pbCiphertext); // CNG will complain if this pointer is zero
+                    Assert.Equal((byte)0x11, *(byte*)pbAdditionalAuthenticatedData);
+                    return new byte[] { 0x20, 0x21, 0x22 };
+                }
+            );
 
         // Act
         var retVal = encryptorMock.Object.Decrypt(ciphertext, aad);
@@ -84,22 +105,56 @@ public unsafe class CngAuthenticatedEncryptorBaseTests
 
     internal abstract class MockableEncryptor : CngAuthenticatedEncryptorBase
     {
-        public override void Dispose()
+        public override void Dispose() { }
+
+        public abstract byte[] DecryptHook(
+            IntPtr pbCiphertext,
+            uint cbCiphertext,
+            IntPtr pbAdditionalAuthenticatedData,
+            uint cbAdditionalAuthenticatedData
+        );
+
+        protected sealed override unsafe byte[] DecryptImpl(
+            byte* pbCiphertext,
+            uint cbCiphertext,
+            byte* pbAdditionalAuthenticatedData,
+            uint cbAdditionalAuthenticatedData
+        )
         {
+            return DecryptHook(
+                (IntPtr)pbCiphertext,
+                cbCiphertext,
+                (IntPtr)pbAdditionalAuthenticatedData,
+                cbAdditionalAuthenticatedData
+            );
         }
 
-        public abstract byte[] DecryptHook(IntPtr pbCiphertext, uint cbCiphertext, IntPtr pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData);
+        public abstract byte[] EncryptHook(
+            IntPtr pbPlaintext,
+            uint cbPlaintext,
+            IntPtr pbAdditionalAuthenticatedData,
+            uint cbAdditionalAuthenticatedData,
+            uint cbPreBuffer,
+            uint cbPostBuffer
+        );
 
-        protected sealed override unsafe byte[] DecryptImpl(byte* pbCiphertext, uint cbCiphertext, byte* pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData)
+        protected sealed override unsafe byte[] EncryptImpl(
+            byte* pbPlaintext,
+            uint cbPlaintext,
+            byte* pbAdditionalAuthenticatedData,
+            uint cbAdditionalAuthenticatedData,
+            uint cbPreBuffer,
+            uint cbPostBuffer
+        )
         {
-            return DecryptHook((IntPtr)pbCiphertext, cbCiphertext, (IntPtr)pbAdditionalAuthenticatedData, cbAdditionalAuthenticatedData);
-        }
-
-        public abstract byte[] EncryptHook(IntPtr pbPlaintext, uint cbPlaintext, IntPtr pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData, uint cbPreBuffer, uint cbPostBuffer);
-
-        protected sealed override unsafe byte[] EncryptImpl(byte* pbPlaintext, uint cbPlaintext, byte* pbAdditionalAuthenticatedData, uint cbAdditionalAuthenticatedData, uint cbPreBuffer, uint cbPostBuffer)
-        {
-            return EncryptHook((IntPtr)pbPlaintext, cbPlaintext, (IntPtr)pbAdditionalAuthenticatedData, cbAdditionalAuthenticatedData, cbPreBuffer, cbPostBuffer);
+            return EncryptHook(
+                (IntPtr)pbPlaintext,
+                cbPlaintext,
+                (IntPtr)pbAdditionalAuthenticatedData,
+                cbAdditionalAuthenticatedData,
+                cbPreBuffer,
+                cbPostBuffer
+            );
         }
     }
 }

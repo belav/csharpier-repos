@@ -16,14 +16,20 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestBaseClassMethods()
         {
-            VerifyMethods(typeof(TypeInfoMethodBaseClass).Project(), TypeInfoMethodBaseClass.PublicMethodNames);
+            VerifyMethods(
+                typeof(TypeInfoMethodBaseClass).Project(),
+                TypeInfoMethodBaseClass.PublicMethodNames
+            );
         }
 
         // Verify Declared Methods for a Base class
         [Fact]
         public static void TestDerivedClassMethods()
         {
-            VerifyMethods(typeof(TypeInfoMethodSubClass).Project(), TypeInfoMethodSubClass.PublicMethodNames);
+            VerifyMethods(
+                typeof(TypeInfoMethodSubClass).Project(),
+                TypeInfoMethodSubClass.PublicMethodNames
+            );
         }
 
         //private helper methods
@@ -70,30 +76,45 @@ namespace System.Reflection.Tests
     //Metadata for Reflection
     public class TypeInfoMethodBaseClass
     {
-        public static string[] PublicMethodNames = new string[] {   "PubBaseMeth1",
-                                                                    "PubBaseMeth1",
-                                                                    "PubMeth1",
-                                                                    "PubMeth2",
-                                                                    "PubMeth3",
-                                                                    "PubMeth2ToOverride"};
+        public static string[] PublicMethodNames = new string[]
+        {
+            "PubBaseMeth1",
+            "PubBaseMeth1",
+            "PubMeth1",
+            "PubMeth2",
+            "PubMeth3",
+            "PubMeth2ToOverride",
+        };
 
         public void PubBaseMeth1() { }
+
         public void PubBaseMeth1(string str) { }
+
         public void PubMeth1() { }
+
         public virtual void PubMeth2() { }
+
         public virtual void PubMeth2ToOverride() { }
+
         public static void PubMeth3() { }
     }
 
     public class TypeInfoMethodSubClass : TypeInfoMethodBaseClass
     {
-        public static new string[] PublicMethodNames = new string[]{ "PubMeth1",
-                                                                 "PubMeth2",
-                                                                 "PubMeth3",
-                                                                 "PubMeth2ToOverride"};
+        public static new string[] PublicMethodNames = new string[]
+        {
+            "PubMeth1",
+            "PubMeth2",
+            "PubMeth3",
+            "PubMeth2ToOverride",
+        };
+
         public new void PubMeth1() { }
+
         public new virtual void PubMeth2() { }
+
         public override void PubMeth2ToOverride() { }
+
         public static new void PubMeth3() { }
     }
 }

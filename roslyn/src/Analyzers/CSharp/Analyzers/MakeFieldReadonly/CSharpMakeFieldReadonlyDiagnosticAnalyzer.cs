@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.MakeFieldReadonly
     {
         protected override ISyntaxKinds SyntaxKinds => CSharpSyntaxKinds.Instance;
 
-        protected override bool IsWrittenTo(SemanticModel semanticModel, ThisExpressionSyntax expression, CancellationToken cancellationToken)
-            => expression.IsWrittenTo(semanticModel, cancellationToken);
+        protected override bool IsWrittenTo(
+            SemanticModel semanticModel,
+            ThisExpressionSyntax expression,
+            CancellationToken cancellationToken
+        ) => expression.IsWrittenTo(semanticModel, cancellationToken);
     }
 }

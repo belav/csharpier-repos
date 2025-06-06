@@ -5,12 +5,12 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal override SyntaxNode ScopeDesignator { get; }
 
-        internal ExpressionVariableBinder(SyntaxNode scopeDesignator, Binder next) : base(next)
+        internal ExpressionVariableBinder(SyntaxNode scopeDesignator, Binder next)
+            : base(next)
         {
             this.ScopeDesignator = scopeDesignator;
         }
@@ -26,12 +27,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override ImmutableArray<LocalSymbol> BuildLocals()
         {
             var builder = ArrayBuilder<LocalSymbol>.GetInstance();
-            ExpressionVariableFinder.FindExpressionVariables(this, builder, (CSharpSyntaxNode)ScopeDesignator,
-                                                             GetBinder((CSharpSyntaxNode)ScopeDesignator));
+            ExpressionVariableFinder.FindExpressionVariables(
+                this,
+                builder,
+                (CSharpSyntaxNode)ScopeDesignator,
+                GetBinder((CSharpSyntaxNode)ScopeDesignator)
+            );
             return builder.ToImmutableAndFree();
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (ScopeDesignator == scopeDesignator)
             {
@@ -41,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }

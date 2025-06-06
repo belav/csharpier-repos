@@ -9,7 +9,11 @@ namespace System.ServiceModel.Activation
     using System.IO;
     using System.Web.Compilation;
 
-    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "instantiated from config")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1812:AvoidUninstantiatedInternalClasses",
+        Justification = "instantiated from config"
+    )]
     [BuildProviderAppliesTo(BuildProviderAppliesTo.All)]
     [ServiceActivationBuildProvider]
     class WorkflowServiceBuildProvider : BuildProvider
@@ -34,16 +38,19 @@ namespace System.ServiceModel.Activation
 
         Type ServiceHostFactoryType
         {
-            get
-            {
-                return typeof(WorkflowServiceHostFactory);
-            }
+            get { return typeof(WorkflowServiceHostFactory); }
         }
 
         //CompileStringTemplate : "__VIRTUAL_PATH__|__FACTORY_NAME__|__SERVICE_VALUE__";
         public override string GetCustomString(CompilerResults results)
         {
-            return (base.VirtualPath + "|" + ServiceHostFactoryType.AssemblyQualifiedName + "|" + base.VirtualPath);
+            return (
+                base.VirtualPath
+                + "|"
+                + ServiceHostFactoryType.AssemblyQualifiedName
+                + "|"
+                + base.VirtualPath
+            );
         }
 
         public override BuildProviderResultFlags GetResultFlags(CompilerResults results)

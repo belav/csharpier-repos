@@ -35,7 +35,10 @@ public class ResponseCookiesFeature : IResponseCookiesFeature
     /// </param>
     /// <param name="builderPool">The <see cref="ObjectPool{T}"/>, if available.</param>
     [Obsolete("This constructor is obsolete and will be removed in a future version.")]
-    public ResponseCookiesFeature(IFeatureCollection features, ObjectPool<StringBuilder>? builderPool)
+    public ResponseCookiesFeature(
+        IFeatureCollection features,
+        ObjectPool<StringBuilder>? builderPool
+    )
     {
         _features = features ?? throw new ArgumentNullException(nameof(features));
     }

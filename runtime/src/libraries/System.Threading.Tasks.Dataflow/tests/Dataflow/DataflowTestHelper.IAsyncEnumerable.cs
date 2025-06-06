@@ -7,7 +7,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
 {
     internal static partial class DataflowTestHelpers
     {
-        internal static Func<int, IAsyncEnumerable<int>> ToAsyncEnumerable = item => AsyncEnumerable.Repeat(item, 1);
+        internal static Func<int, IAsyncEnumerable<int>> ToAsyncEnumerable = item =>
+            AsyncEnumerable.Repeat(item, 1);
     }
 
     internal static partial class AsyncEnumerable
@@ -31,7 +32,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
             }
         }
 
-        internal static async IAsyncEnumerable<T> ToAsyncEnumerable<T>(this IEnumerable<T> enumerable)
+        internal static async IAsyncEnumerable<T> ToAsyncEnumerable<T>(
+            this IEnumerable<T> enumerable
+        )
         {
             foreach (T item in enumerable)
             {

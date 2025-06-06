@@ -11,11 +11,12 @@ namespace System.Linq.Parallel.Tests
 {
     public static class ExchangeTests
     {
-        private static readonly ParallelMergeOptions[] Options = new[] {
+        private static readonly ParallelMergeOptions[] Options = new[]
+        {
             ParallelMergeOptions.AutoBuffered,
             ParallelMergeOptions.Default,
             ParallelMergeOptions.FullyBuffered,
-            ParallelMergeOptions.NotBuffered
+            ParallelMergeOptions.NotBuffered,
         };
 
         /// <summary>
@@ -27,7 +28,12 @@ namespace System.Linq.Parallel.Tests
         /// the second element is the count, and the third is the number of partitions or degrees of parallelism to use.</returns>
         public static IEnumerable<object[]> PartitioningData(int[] counts)
         {
-            foreach (object[] results in Sources.Ranges(counts.DefaultIfEmpty(Sources.OuterLoopCount), x => new[] { 1, 2, 4 }))
+            foreach (
+                object[] results in Sources.Ranges(
+                    counts.DefaultIfEmpty(Sources.OuterLoopCount),
+                    x => new[] { 1, 2, 4 }
+                )
+            )
             {
                 yield return results;
             }
@@ -43,7 +49,12 @@ namespace System.Linq.Parallel.Tests
         /// the second element is the count, and the third is the ParallelMergeOption to use.</returns>
         public static IEnumerable<object[]> MergeData(int[] counts)
         {
-            foreach (object[] results in Sources.Ranges(counts.DefaultIfEmpty(Sources.OuterLoopCount), x => Options))
+            foreach (
+                object[] results in Sources.Ranges(
+                    counts.DefaultIfEmpty(Sources.OuterLoopCount),
+                    x => Options
+                )
+            )
             {
                 yield return results;
             }
@@ -60,7 +71,10 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (int count in counts)
             {
-                var labeled = Labeled.Label("ThrowOnEnumeration " + count, Enumerables<int>.ThrowOnEnumeration(count).AsParallel().AsOrdered());
+                var labeled = Labeled.Label(
+                    "ThrowOnEnumeration " + count,
+                    Enumerables<int>.ThrowOnEnumeration(count).AsParallel().AsOrdered()
+                );
                 foreach (ParallelMergeOptions option in Options)
                 {
                     yield return new object[] { labeled, count, option };
@@ -90,8 +104,16 @@ namespace System.Linq.Parallel.Tests
 
         [ConditionalTheory]
         [MemberData(nameof(PartitioningData), new[] { 0, 1, 2, 16, 1024 })]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
-        public static void Partitioning_Default(Labeled<ParallelQuery<int>> labeled, int count, int partitions)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
+        public static void Partitioning_Default(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int partitions
+        )
         {
             if (partitions > 1 && !PlatformDetection.IsThreadingSupported)
             {
@@ -108,15 +130,28 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(PartitioningData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Partitioning_Default_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int partitions)
+        [MemberData(
+            nameof(PartitioningData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Partitioning_Default_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int partitions
+        )
         {
             Partitioning_Default(labeled, count, partitions);
         }
 
         [ConditionalTheory]
         [MemberData(nameof(PartitioningData), new[] { 0, 1, 2, 16, 1024 })]
-        public static void Partitioning_Striped(Labeled<ParallelQuery<int>> labeled, int count, int partitions)
+        public static void Partitioning_Striped(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int partitions
+        )
         {
             if (partitions > 1 && !PlatformDetection.IsThreadingSupported)
             {
@@ -124,7 +159,9 @@ namespace System.Linq.Parallel.Tests
             }
 
             int seen = 0;
-            foreach (int i in labeled.Item.WithDegreeOfParallelism(partitions).Take(count).Select(i => i))
+            foreach (
+                int i in labeled.Item.WithDegreeOfParallelism(partitions).Take(count).Select(i => i)
+            )
             {
                 Assert.Equal(seen++, i);
             }
@@ -132,15 +169,28 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(PartitioningData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Partitioning_Striped_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int partitions)
+        [MemberData(
+            nameof(PartitioningData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Partitioning_Striped_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int partitions
+        )
         {
             Partitioning_Striped(labeled, count, partitions);
         }
 
         [Theory]
         [MemberData(nameof(MergeData), new[] { 0, 1, 2, 16, 1024 })]
-        public static void Merge_Ordered(Labeled<ParallelQuery<int>> labeled, int count, ParallelMergeOptions options)
+        public static void Merge_Ordered(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            ParallelMergeOptions options
+        )
         {
             _ = count;
             int seen = 0;
@@ -152,75 +202,141 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MergeData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Merge_Ordered_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, ParallelMergeOptions options)
+        [MemberData(
+            nameof(MergeData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Merge_Ordered_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            ParallelMergeOptions options
+        )
         {
             Merge_Ordered(labeled, count, options);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(ThrowOnCount_AllMergeOptions_MemberData), new[] { 4, 8 })]
         // FailingMergeData has enumerables that throw errors when attempting to perform the nth enumeration.
         // This test checks whether the query runs in a pipelined or buffered fashion.
-        public static void Merge_Ordered_Pipelining(Labeled<ParallelQuery<int>> labeled, int count, ParallelMergeOptions options)
+        public static void Merge_Ordered_Pipelining(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            ParallelMergeOptions options
+        )
         {
-            Assert.Equal(0, labeled.Item.WithDegreeOfParallelism(count - 1).WithMergeOptions(options).First());
+            Assert.Equal(
+                0,
+                labeled.Item.WithDegreeOfParallelism(count - 1).WithMergeOptions(options).First()
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(MergeData), new[] { 4, 8 })]
         // This test checks whether the query runs in a pipelined or buffered fashion.
-        public static void Merge_Ordered_Pipelining_Select(Labeled<ParallelQuery<int>> labeled, int count, ParallelMergeOptions options)
+        public static void Merge_Ordered_Pipelining_Select(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            ParallelMergeOptions options
+        )
         {
             int countdown = count;
             Func<int, int> down = i =>
             {
-                if (Interlocked.Decrement(ref countdown) == 0) throw new DeliberateTestException();
+                if (Interlocked.Decrement(ref countdown) == 0)
+                    throw new DeliberateTestException();
                 return i;
             };
-            Assert.Equal(0, labeled.Item.WithDegreeOfParallelism(count - 1).WithMergeOptions(options).Select(down).First());
+            Assert.Equal(
+                0,
+                labeled
+                    .Item.WithDegreeOfParallelism(count - 1)
+                    .WithMergeOptions(options)
+                    .Select(down)
+                    .First()
+            );
         }
 
         [Theory]
-        [MemberData(nameof(UnorderedSources.Ranges), new[] { 2 }, MemberType = typeof(UnorderedSources))]
+        [MemberData(
+            nameof(UnorderedSources.Ranges),
+            new[] { 2 },
+            MemberType = typeof(UnorderedSources)
+        )]
         public static void Merge_ArgumentException(Labeled<ParallelQuery<int>> labeled, int count)
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
 
-            AssertExtensions.Throws<ArgumentException>(null, () => query.WithMergeOptions((ParallelMergeOptions)4));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => query.WithMergeOptions((ParallelMergeOptions)4)
+            );
         }
 
         [Theory]
         [MemberData(nameof(AllMergeOptions_Multiple))]
-        public static void WithMergeOptions_Multiple(ParallelMergeOptions first, ParallelMergeOptions second)
+        public static void WithMergeOptions_Multiple(
+            ParallelMergeOptions first,
+            ParallelMergeOptions second
+        )
         {
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithMergeOptions(first).WithMergeOptions(second));
+            Assert.Throws<InvalidOperationException>(() =>
+                ParallelEnumerable.Range(0, 1).WithMergeOptions(first).WithMergeOptions(second)
+            );
         }
 
         [Fact]
         public static void Merge_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int>)null).WithMergeOptions(ParallelMergeOptions.AutoBuffered));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int>)null).WithMergeOptions(ParallelMergeOptions.AutoBuffered)
+            );
         }
 
         // The plinq chunk partitioner takes an IEnumerator over the source, and disposes the
         // enumerator when it is finished. If an exception occurs, the calling enumerator disposes
         // the source enumerator... but then other worker threads may generate ODEs.
         // This test verifies any such ODEs are not reflected in the output exception.
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [MemberData(nameof(UnorderedSources.BinaryRanges), new[] { 16 }, new[] { 16 }, MemberType = typeof(UnorderedSources))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
+        [MemberData(
+            nameof(UnorderedSources.BinaryRanges),
+            new[] { 16 },
+            new[] { 16 },
+            MemberType = typeof(UnorderedSources)
+        )]
         public static void PlinqChunkPartitioner_DontEnumerateAfterException(
-            Labeled<ParallelQuery<int>> left, int leftCount,
-            Labeled<ParallelQuery<int>> right, int rightCount)
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            Labeled<ParallelQuery<int>> right,
+            int rightCount
+        )
         {
             _ = leftCount;
             _ = rightCount;
-            ParallelQuery<int> query =
-                left.Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
-                    .Select(x => { if (x == 4) throw new DeliberateTestException(); return x; })
-                    .Zip(right.Item, (a, b) => a + b)
-                .AsParallel().WithExecutionMode(ParallelExecutionMode.ForceParallelism);
+            ParallelQuery<int> query = left
+                .Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+                .Select(x =>
+                {
+                    if (x == 4)
+                        throw new DeliberateTestException();
+                    return x;
+                })
+                .Zip(right.Item, (a, b) => a + b)
+                .AsParallel()
+                .WithExecutionMode(ParallelExecutionMode.ForceParallelism);
 
             AggregateException ae = Assert.Throws<AggregateException>(() => query.ToArray());
             Assert.Single(ae.InnerExceptions);
@@ -231,18 +347,36 @@ namespace System.Linq.Parallel.Tests
         // disposes the enumerator when it is finished.  If an exception occurs, the calling
         // enumerator disposes the source enumerator... but then other worker threads may generate ODEs.
         // This test verifies any such ODEs are not reflected in the output exception.
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [MemberData(nameof(UnorderedSources.BinaryRanges), new[] { 16 }, new[] { 16 }, MemberType = typeof(UnorderedSources))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
+        [MemberData(
+            nameof(UnorderedSources.BinaryRanges),
+            new[] { 16 },
+            new[] { 16 },
+            MemberType = typeof(UnorderedSources)
+        )]
         public static void ManualChunkPartitioner_DontEnumerateAfterException(
-            Labeled<ParallelQuery<int>> left, int leftCount,
-            Labeled<ParallelQuery<int>> right, int rightCount)
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            Labeled<ParallelQuery<int>> right,
+            int rightCount
+        )
         {
             _ = leftCount;
             _ = rightCount;
-            ParallelQuery<int> query =
-                Partitioner.Create(left.Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
-                    .Select(x => { if (x == 4) throw new DeliberateTestException(); return x; })
-                    .Zip(right.Item, (a, b) => a + b))
+            ParallelQuery<int> query = Partitioner
+                .Create(
+                    left.Item.WithExecutionMode(ParallelExecutionMode.ForceParallelism)
+                        .Select(x =>
+                        {
+                            if (x == 4)
+                                throw new DeliberateTestException();
+                            return x;
+                        })
+                        .Zip(right.Item, (a, b) => a + b)
+                )
                 .AsParallel();
 
             AggregateException ae = Assert.Throws<AggregateException>(() => query.ToArray());

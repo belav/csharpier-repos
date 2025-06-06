@@ -8,7 +8,6 @@ public class Handler
 {
     private int _totalTestCount = 0;
 
-
     public bool GetInitialThresholdTest()
     {
         _totalTestCount++;
@@ -33,7 +32,6 @@ public class Handler
 
         return true;
     }
-
 
     public bool GetMaximumThresholdTest()
     {
@@ -60,7 +58,6 @@ public class Handler
         return true;
     }
 
-
     public bool GetName()
     {
         _totalTestCount++;
@@ -68,7 +65,15 @@ public class Handler
 
         HandleCollector hc = null;
 
-        string[] names = { String.Empty, "a", "name", "name with spaces", new String('a', 50000), "\uA112\uA0E4\uA0F9" };
+        string[] names =
+        {
+            String.Empty,
+            "a",
+            "name",
+            "name with spaces",
+            new String('a', 50000),
+            "\uA112\uA0E4\uA0F9",
+        };
 
         foreach (string s in names)
         {
@@ -85,7 +90,6 @@ public class Handler
 
         return true;
     }
-
 
     public bool RunTest()
     {
@@ -106,10 +110,8 @@ public class Handler
             count++;
         }
 
-
         return (count == _totalTestCount);
     }
-
 
     public static int Main()
     {

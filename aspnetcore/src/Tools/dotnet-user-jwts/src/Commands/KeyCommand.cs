@@ -11,47 +11,70 @@ internal sealed class KeyCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command("key", cmd =>
-        {
-            cmd.Description = Resources.KeyCommand_Description;
-
-            var schemeOption = cmd.Option(
-                "--scheme",
-                Resources.KeyCommand_SchemeOption_Description,
-                CommandOptionType.SingleValue);
-
-            var issuerOption = cmd.Option(
-                "--issuer",
-                Resources.KeyCommand_IssuerOption_Description,
-                CommandOptionType.SingleValue
-            );
-
-            var resetOption = cmd.Option(
-                "--reset",
-                Resources.KeyCommand_ResetOption_Description,
-                CommandOptionType.NoValue);
-
-            var forceOption = cmd.Option(
-                "--force",
-                Resources.KeyCommand_ForceOption_Description,
-                CommandOptionType.NoValue);
-
-            cmd.HelpOption("-h|--help");
-
-            cmd.OnExecute(() =>
+        app.Command(
+            "key",
+            cmd =>
             {
-                return Execute(cmd.Reporter,
-                    cmd.ProjectOption.Value(),
-                    schemeOption.Value() ?? DevJwtsDefaults.Scheme,
-                    issuerOption.Value() ?? DevJwtsDefaults.Issuer,
-                    resetOption.HasValue(), forceOption.HasValue());
-            });
-        });
+                cmd.Description = Resources.KeyCommand_Description;
+
+                var schemeOption = cmd.Option(
+                    "--scheme",
+                    Resources.KeyCommand_SchemeOption_Description,
+                    CommandOptionType.SingleValue
+                );
+
+                var issuerOption = cmd.Option(
+                    "--issuer",
+                    Resources.KeyCommand_IssuerOption_Description,
+                    CommandOptionType.SingleValue
+                );
+
+                var resetOption = cmd.Option(
+                    "--reset",
+                    Resources.KeyCommand_ResetOption_Description,
+                    CommandOptionType.NoValue
+                );
+
+                var forceOption = cmd.Option(
+                    "--force",
+                    Resources.KeyCommand_ForceOption_Description,
+                    CommandOptionType.NoValue
+                );
+
+                cmd.HelpOption("-h|--help");
+
+                cmd.OnExecute(() =>
+                {
+                    return Execute(
+                        cmd.Reporter,
+                        cmd.ProjectOption.Value(),
+                        schemeOption.Value() ?? DevJwtsDefaults.Scheme,
+                        issuerOption.Value() ?? DevJwtsDefaults.Issuer,
+                        resetOption.HasValue(),
+                        forceOption.HasValue()
+                    );
+                });
+            }
+        );
     }
 
-    private static int Execute(IReporter reporter, string projectPath, string scheme, string issuer, bool reset, bool force)
+    private static int Execute(
+        IReporter reporter,
+        string projectPath,
+        string scheme,
+        string issuer,
+        bool reset,
+        bool force
+    )
     {
-        if (!DevJwtCliHelpers.GetProjectAndSecretsId(projectPath, reporter, out var _, out var userSecretsId))
+        if (
+            !DevJwtCliHelpers.GetProjectAndSecretsId(
+                projectPath,
+                reporter,
+                out var _,
+                out var userSecretsId
+            )
+        )
         {
             return 1;
         }
@@ -69,12 +92,21 @@ internal sealed class KeyCommand
                 }
             }
 
-            var key = SigningKeysHandler.CreateSigningKeyMaterial(userSecretsId, scheme, issuer, reset: true);
+            var key = SigningKeysHandler.CreateSigningKeyMaterial(
+                userSecretsId,
+                scheme,
+                issuer,
+                reset: true
+            );
             reporter.Output(Resources.FormatKeyCommand_KeyCreated(Convert.ToBase64String(key)));
             return 0;
         }
 
-        var signingKeyMaterial = SigningKeysHandler.GetSigningKeyMaterial(userSecretsId, scheme, issuer);
+        var signingKeyMaterial = SigningKeysHandler.GetSigningKeyMaterial(
+            userSecretsId,
+            scheme,
+            issuer
+        );
 
         if (signingKeyMaterial is null)
         {
@@ -82,7 +114,9 @@ internal sealed class KeyCommand
             return 0;
         }
 
-        reporter.Output(Resources.FormatKeyCommand_Confirmed(Convert.ToBase64String(signingKeyMaterial)));
+        reporter.Output(
+            Resources.FormatKeyCommand_Confirmed(Convert.ToBase64String(signingKeyMaterial))
+        );
         return 0;
     }
 }

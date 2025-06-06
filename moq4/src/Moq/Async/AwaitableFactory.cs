@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Moq.Async
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal static class AwaitableFactory
@@ -30,7 +29,6 @@ namespace Moq.Async
         static class AwaitableFactory
     */
     static class AwaitableFactory
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private static readonly Dictionary<Type, Func<Type, IAwaitableFactory>> Providers;
@@ -60,8 +58,10 @@ namespace Moq.Async
             {
                 [typeof(Task)] = awaitableType => TaskFactory.Instance,
                 [typeof(ValueTask)] = awaitableType => ValueTaskFactory.Instance,
-                [typeof(Task<>)] = awaitableType => AwaitableFactory.Create(typeof(TaskFactory<>), awaitableType),
-                [typeof(ValueTask<>)] = awaitableType => AwaitableFactory.Create(typeof(ValueTaskFactory<>), awaitableType),
+                [typeof(Task<>)] = awaitableType =>
+                    AwaitableFactory.Create(typeof(TaskFactory<>), awaitableType),
+                [typeof(ValueTask<>)] = awaitableType =>
+                    AwaitableFactory.Create(typeof(ValueTaskFactory<>), awaitableType),
             };
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
@@ -88,9 +88,10 @@ namespace Moq.Async
 
         static IAwaitableFactory Create(Type awaitableFactoryType, Type awaitableType)
         {
-            return (IAwaitableFactory)Activator.CreateInstance(
-                awaitableFactoryType.MakeGenericType(
-                    awaitableType.GetGenericArguments()));
+            return (IAwaitableFactory)
+                Activator.CreateInstance(
+                    awaitableFactoryType.MakeGenericType(awaitableType.GetGenericArguments())
+                );
         }
 
         public static IAwaitableFactory TryGet(Type type)

@@ -5,14 +5,14 @@
 #nullable disable
 
 using System.Linq;
-using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
+using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Reflection;
 using static Roslyn.Test.Utilities.TestMetadata;
 
 //test
@@ -24,16 +24,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void Test1()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-            {
-                TestReferences.SymbolsTests.MDTestLib1,
-                TestReferences.SymbolsTests.MDTestLib2,
-                TestReferences.SymbolsTests.Methods.CSMethods,
-                TestReferences.SymbolsTests.Methods.VBMethods,
-                Net40.mscorlib,
-                TestReferences.SymbolsTests.Methods.ByRefReturn
-            },
-            options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.MDTestLib1,
+                    TestReferences.SymbolsTests.MDTestLib2,
+                    TestReferences.SymbolsTests.Methods.CSMethods,
+                    TestReferences.SymbolsTests.Methods.VBMethods,
+                    Net40.mscorlib,
+                    TestReferences.SymbolsTests.Methods.ByRefReturn,
+                },
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
 
             var module1 = assemblies[0].Modules[0];
             var module2 = assemblies[1].Modules[0];
@@ -79,11 +83,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.False(localM3.ReturnsVoid);
             Assert.Equal(Accessibility.Protected, localM3.DeclaredAccessibility);
 
-            Assert.Equal("C1<System.Type> TC10.M4(ref C1<System.Type> x, ref TC8 y)", localM4.ToTestDisplayString());
+            Assert.Equal(
+                "C1<System.Type> TC10.M4(ref C1<System.Type> x, ref TC8 y)",
+                localM4.ToTestDisplayString()
+            );
             Assert.False(localM4.ReturnsVoid);
             Assert.Equal(Accessibility.Internal, localM4.DeclaredAccessibility);
 
-            Assert.Equal("void TC10.M5(ref C1<System.Type>[,,] x, ref TC8[] y)", localM5.ToTestDisplayString());
+            Assert.Equal(
+                "void TC10.M5(ref C1<System.Type>[,,] x, ref TC8[] y)",
+                localM5.ToTestDisplayString()
+            );
             Assert.True(localM5.ReturnsVoid);
             Assert.Equal(Accessibility.ProtectedOrInternal, localM5.DeclaredAccessibility);
 
@@ -116,7 +126,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             Assert.False(basicC1_M1.Parameters[0].IsOptional);
             Assert.False(basicC1_M1.Parameters[0].HasExplicitDefaultValue);
-            Assert.Same(module4, basicC1_M1.Parameters[0].Locations.Single().MetadataModuleInternal);
+            Assert.Same(
+                module4,
+                basicC1_M1.Parameters[0].Locations.Single().MetadataModuleInternal
+            );
 
             Assert.True(basicC1_M2.Parameters[0].IsOptional);
             Assert.False(basicC1_M2.Parameters[0].HasExplicitDefaultValue);
@@ -173,11 +186,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var basicC2_M1 = (MethodSymbol)basicC2.GetMembers("M1").Single();
             Assert.Equal("void C2<T4>.M1<T5>(T5 x, T4 y)", basicC2_M1.ToTestDisplayString());
 
-            var console = module5.GlobalNamespace.GetMembers("System").OfType<NamespaceSymbol>().Single().
-                GetTypeMembers("Console").Single();
+            var console = module5
+                .GlobalNamespace.GetMembers("System")
+                .OfType<NamespaceSymbol>()
+                .Single()
+                .GetTypeMembers("Console")
+                .Single();
 
-            Assert.Equal(1, console.GetMembers("WriteLine").OfType<MethodSymbol>().Count(m => m.IsVararg));
-            Assert.True(console.GetMembers("WriteLine").OfType<MethodSymbol>().Single(m => m.IsVararg).IsStatic);
+            Assert.Equal(
+                1,
+                console.GetMembers("WriteLine").OfType<MethodSymbol>().Count(m => m.IsVararg)
+            );
+            Assert.True(
+                console
+                    .GetMembers("WriteLine")
+                    .OfType<MethodSymbol>()
+                    .Single(m => m.IsVararg)
+                    .IsStatic
+            );
 
             var basicModifiers1 = module4.GlobalNamespace.GetTypeMembers("Modifiers1").Single();
 
@@ -372,7 +398,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.False(csharpModifiers3_M4.HidesBaseMethodsByName);
             Assert.False(csharpModifiers3_M4.IsOverride);
 
-            var byrefReturnMethod = byrefReturn.GlobalNamespace.GetTypeMembers("ByRefReturn").Single().GetMembers("M").OfType<MethodSymbol>().Single();
+            var byrefReturnMethod = byrefReturn
+                .GlobalNamespace.GetTypeMembers("ByRefReturn")
+                .Single()
+                .GetMembers("M")
+                .OfType<MethodSymbol>()
+                .Single();
             Assert.Equal(RefKind.Ref, byrefReturnMethod.RefKind);
             Assert.Equal(TypeKind.Struct, byrefReturnMethod.ReturnType.TypeKind);
         }
@@ -381,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void TestExplicitImplementationSimple()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.CSharp);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.CSharp
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
@@ -405,7 +437,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void TestExplicitImplementationMultiple()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
@@ -424,8 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.True(@class.Interfaces().Contains(interface1));
             Assert.True(@class.Interfaces().Contains(interface2));
 
-            var classMethod = (MethodSymbol)@class.GetMembers("Method").Single();   //  the method is considered to be Ordinary 
-            Assert.Equal(MethodKind.Ordinary, classMethod.MethodKind);              //  because it has name without '.'
+            var classMethod = (MethodSymbol)@class.GetMembers("Method").Single(); //  the method is considered to be Ordinary
+            Assert.Equal(MethodKind.Ordinary, classMethod.MethodKind); //  because it has name without '.'
 
             var explicitImpls = classMethod.ExplicitInterfaceImplementations;
             Assert.Equal(2, explicitImpls.Length);
@@ -441,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -449,7 +483,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
             var interfaceMethod = (MethodSymbol)@interface.GetMembers("Method").Last(); //this assumes decl order
-            Assert.Equal("void IGeneric<T>.Method<U>(T t, U u)", interfaceMethod.ToTestDisplayString()); //make sure we got the one we expected
+            Assert.Equal(
+                "void IGeneric<T>.Method<U>(T t, U u)",
+                interfaceMethod.ToTestDisplayString()
+            ); //make sure we got the one we expected
 
             var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Generic").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
@@ -457,12 +494,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceMethod = (MethodSymbol)substitutedInterface.GetMembers("Method").Last(); //this assumes decl order
-            Assert.Equal("void IGeneric<S>.Method<U>(S t, U u)", substitutedInterfaceMethod.ToTestDisplayString()); //make sure we got the one we expected
+            var substitutedInterfaceMethod = (MethodSymbol)
+                substitutedInterface.GetMembers("Method").Last(); //this assumes decl order
+            Assert.Equal(
+                "void IGeneric<S>.Method<U>(S t, U u)",
+                substitutedInterfaceMethod.ToTestDisplayString()
+            ); //make sure we got the one we expected
             Assert.Equal(interfaceMethod, substitutedInterfaceMethod.OriginalDefinition);
 
             var classMethod = (MethodSymbol)@class.GetMembers("IGeneric<S>.Method").Last(); //this assumes decl order
-            Assert.Equal("void Generic<S>.IGeneric<S>.Method<V>(S s, V v)", classMethod.ToTestDisplayString()); //make sure we got the one we expected
+            Assert.Equal(
+                "void Generic<S>.IGeneric<S>.Method<V>(S s, V v)",
+                classMethod.ToTestDisplayString()
+            ); //make sure we got the one we expected
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, classMethod.MethodKind);
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();
@@ -477,7 +521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -485,7 +530,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
             var interfaceMethod = (MethodSymbol)@interface.GetMembers("Method").Last(); //this assumes decl order
-            Assert.Equal("void IGeneric<T>.Method<U>(T t, U u)", interfaceMethod.ToTestDisplayString()); //make sure we got the one we expected
+            Assert.Equal(
+                "void IGeneric<T>.Method<U>(T t, U u)",
+                interfaceMethod.ToTestDisplayString()
+            ); //make sure we got the one we expected
 
             var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Constructed").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
@@ -493,12 +541,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceMethod = (MethodSymbol)substitutedInterface.GetMembers("Method").Last(); //this assumes decl order
-            Assert.Equal("void IGeneric<System.Int32>.Method<U>(System.Int32 t, U u)", substitutedInterfaceMethod.ToTestDisplayString()); //make sure we got the one we expected
+            var substitutedInterfaceMethod = (MethodSymbol)
+                substitutedInterface.GetMembers("Method").Last(); //this assumes decl order
+            Assert.Equal(
+                "void IGeneric<System.Int32>.Method<U>(System.Int32 t, U u)",
+                substitutedInterfaceMethod.ToTestDisplayString()
+            ); //make sure we got the one we expected
             Assert.Equal(interfaceMethod, substitutedInterfaceMethod.OriginalDefinition);
 
-            var classMethod = (MethodSymbol)@class.GetMembers("IGeneric<System.Int32>.Method").Last(); //this assumes decl order
-            Assert.Equal("void Constructed.IGeneric<System.Int32>.Method<W>(System.Int32 i, W w)", classMethod.ToTestDisplayString()); //make sure we got the one we expected
+            var classMethod = (MethodSymbol)
+                @class.GetMembers("IGeneric<System.Int32>.Method").Last(); //this assumes decl order
+            Assert.Equal(
+                "void Constructed.IGeneric<System.Int32>.Method<W>(System.Int32 i, W w)",
+                classMethod.ToTestDisplayString()
+            ); //make sure we got the one we expected
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, classMethod.MethodKind);
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();
@@ -509,25 +565,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void TestExplicitImplementationInterfaceCycleSuccess()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
-            var cyclicInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("ImplementsSelf").Single();
+            var cyclicInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ImplementsSelf").Single();
             Assert.Equal(TypeKind.Interface, cyclicInterface.TypeKind);
 
-            var implementedInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("I1").Single();
+            var implementedInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("I1").Single();
             Assert.Equal(TypeKind.Interface, implementedInterface.TypeKind);
 
-            var interface2Method = (MethodSymbol)implementedInterface.GetMembers("Method1").Single();
+            var interface2Method = (MethodSymbol)
+                implementedInterface.GetMembers("Method1").Single();
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("InterfaceCycleSuccess").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("InterfaceCycleSuccess").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.True(@class.Interfaces().Contains(cyclicInterface));
             Assert.True(@class.Interfaces().Contains(implementedInterface));
 
-            var classMethod = (MethodSymbol)@class.GetMembers("Method").Single();   //  the method is considered to be Ordinary 
-            Assert.Equal(MethodKind.Ordinary, classMethod.MethodKind);              //  because it has name without '.'
+            var classMethod = (MethodSymbol)@class.GetMembers("Method").Single(); //  the method is considered to be Ordinary
+            Assert.Equal(MethodKind.Ordinary, classMethod.MethodKind); //  because it has name without '.'
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();
             Assert.Equal(interface2Method, explicitImpl);
@@ -537,14 +598,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void TestExplicitImplementationInterfaceCycleFailure()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
-            var cyclicInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("ImplementsSelf").Single();
+            var cyclicInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ImplementsSelf").Single();
             Assert.Equal(TypeKind.Interface, cyclicInterface.TypeKind);
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("InterfaceCycleFailure").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("InterfaceCycleFailure").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.True(@class.Interfaces().Contains(cyclicInterface));
 
@@ -568,20 +632,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var defInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("Interface").Single();
+            var defInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("Interface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
 
             var defInterfaceMethod = (MethodSymbol)defInterface.GetMembers("Method").Single();
 
-            var refInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IGenericInterface").Single();
+            var refInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGenericInterface").Single();
             Assert.Equal(TypeKind.Interface, defInterface.TypeKind);
             Assert.True(refInterface.Interfaces().Contains(defInterface));
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IndirectImplementation").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IndirectImplementation").Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
 
             var classInterfacesConstructedFrom = @class.Interfaces().Select(i => i.ConstructedFrom);
@@ -597,21 +665,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// IL type explicitly overrides a class (vs interface) method.  
+        /// IL type explicitly overrides a class (vs interface) method.
         /// ExplicitInterfaceImplementations should be empty.
         /// </summary>
         [Fact]
         public void TestExplicitImplementationOfClassMethod()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
-            var baseClass = (NamedTypeSymbol)globalNamespace.GetTypeMembers("ExplicitlyImplementedClass").Single();
+            var baseClass = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ExplicitlyImplementedClass").Single();
             Assert.Equal(TypeKind.Class, baseClass.TypeKind);
 
-            var derivedClass = (NamedTypeSymbol)globalNamespace.GetTypeMembers("ExplicitlyImplementsAClass").Single();
+            var derivedClass = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("ExplicitlyImplementsAClass").Single();
             Assert.Equal(TypeKind.Class, derivedClass.TypeKind);
             Assert.Equal(baseClass, derivedClass.BaseType());
 
@@ -628,7 +699,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         public void TestExplicitImplementationOfUnrelatedInterfaceMethod()
         {
             var assembly = MetadataTestHelpers.GetSymbolForReference(
-                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL);
+                TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL
+            );
 
             var globalNamespace = assembly.GlobalNamespace;
 
@@ -636,7 +708,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(0, @interface.Arity);
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace
+                    .GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods")
+                    .Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.Equal(0, @class.AllInterfaces().Length);
 
@@ -661,7 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.IL,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
@@ -669,7 +745,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(1, @interface.Arity);
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
-            var @class = (NamedTypeSymbol)globalNamespace.GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods").Single();
+            var @class = (NamedTypeSymbol)
+                globalNamespace
+                    .GetTypeMembers("ExplicitlyImplementsUnrelatedInterfaceMethods")
+                    .Single();
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.Equal(0, @class.AllInterfaces().Length);
 
@@ -695,11 +774,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     Net451.mscorlib,
                     TestReferences.SymbolsTests.ExplicitInterfaceImplementation.Methods.CSharp,
-                });
+                }
+            );
 
             var globalNamespace = assemblies.ElementAt(1).GlobalNamespace;
 
-            var outerInterface = (NamedTypeSymbol)globalNamespace.GetTypeMembers("IGeneric2").Single();
+            var outerInterface = (NamedTypeSymbol)
+                globalNamespace.GetTypeMembers("IGeneric2").Single();
             Assert.Equal(1, outerInterface.Arity);
             Assert.Equal(TypeKind.Interface, outerInterface.TypeKind);
 
@@ -728,7 +809,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CheckInnerClassHelper(innerClass4, "Outer<T>.IInner<T>.Method", innerInterfaceMethod);
         }
 
-        private static void CheckInnerClassHelper(NamedTypeSymbol innerClass, string methodName, Symbol interfaceMethod)
+        private static void CheckInnerClassHelper(
+            NamedTypeSymbol innerClass,
+            string methodName,
+            Symbol interfaceMethod
+        )
         {
             var @interface = interfaceMethod.ContainingType;
 
@@ -737,7 +822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(@interface, innerClass.Interfaces().Single().ConstructedFrom);
 
             var innerClassMethod = (MethodSymbol)innerClass.GetMembers(methodName).Single();
-            var innerClassImplementingMethod = innerClassMethod.ExplicitInterfaceImplementations.Single();
+            var innerClassImplementingMethod =
+                innerClassMethod.ExplicitInterfaceImplementations.Single();
             Assert.Equal(interfaceMethod, innerClassImplementingMethod.OriginalDefinition);
             Assert.Equal(@interface, innerClassImplementingMethod.ContainingType.ConstructedFrom);
         }
@@ -745,7 +831,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void TestVirtualnessFlags_Invoke()
         {
-            var source = @"
+            var source =
+                @"
 class Invoke
 {
     void Goo(MetadataModifiers m)
@@ -769,43 +856,60 @@ class Invoke
     }
 }
 ";
-            var compilation = CreateCompilation(source, new[] { TestReferences.SymbolsTests.Methods.ILMethods });
+            var compilation = CreateCompilation(
+                source,
+                new[] { TestReferences.SymbolsTests.Methods.ILMethods }
+            );
             compilation.VerifyDiagnostics(); // No errors, as in Dev10
         }
 
         [Fact]
         public void TestVirtualnessFlags_NoOverride()
         {
-            var source = @"
+            var source =
+                @"
 class Abstract : MetadataModifiers
 {
     //CS0534 for methods 2, 5, 8, 9, 11, 12, 14, 15
 }
 ";
-            var compilation = CreateCompilation(source, new[] { TestReferences.SymbolsTests.Methods.ILMethods });
+            var compilation = CreateCompilation(
+                source,
+                new[] { TestReferences.SymbolsTests.Methods.ILMethods }
+            );
             compilation.VerifyDiagnostics(
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M02()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M02()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M02()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M05()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M05()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M05()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M08()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M08()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M08()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M09()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M09()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M09()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M11()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M11()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M11()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M12()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M12()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M12()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M14()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M14()"),
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M14()"),
                 // (2,7): error CS0534: 'Abstract' does not implement inherited abstract member 'MetadataModifiers.M15()'
-                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract").WithArguments("Abstract", "MetadataModifiers.M15()"));
+                Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Abstract")
+                    .WithArguments("Abstract", "MetadataModifiers.M15()")
+            );
         }
 
         [Fact]
         public void TestVirtualnessFlags_Override()
         {
-            var source = @"
+            var source =
+                @"
 class Override : MetadataModifiers
 {
     public override void M00() { } //CS0506
@@ -826,20 +930,30 @@ class Override : MetadataModifiers
     public override void M15() { }
 }
 ";
-            var compilation = CreateCompilation(source, new[] { TestReferences.SymbolsTests.Methods.ILMethods });
+            var compilation = CreateCompilation(
+                source,
+                new[] { TestReferences.SymbolsTests.Methods.ILMethods }
+            );
             compilation.VerifyDiagnostics(
                 // (4,26): error CS0506: 'Override.M00()': cannot override inherited member 'MetadataModifiers.M00()' because it is not marked virtual, abstract, or override
-                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M00").WithArguments("Override.M00()", "MetadataModifiers.M00()"),
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M00")
+                    .WithArguments("Override.M00()", "MetadataModifiers.M00()"),
                 // (5,26): error CS0506: 'Override.M01()': cannot override inherited member 'MetadataModifiers.M01()' because it is not marked virtual, abstract, or override
-                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M01").WithArguments("Override.M01()", "MetadataModifiers.M01()"),
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M01")
+                    .WithArguments("Override.M01()", "MetadataModifiers.M01()"),
                 // (8,26): error CS0506: 'Override.M04()': cannot override inherited member 'MetadataModifiers.M04()' because it is not marked virtual, abstract, or override
-                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M04").WithArguments("Override.M04()", "MetadataModifiers.M04()"),
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M04")
+                    .WithArguments("Override.M04()", "MetadataModifiers.M04()"),
                 // (11,26): error CS0506: 'Override.M07()': cannot override inherited member 'MetadataModifiers.M07()' because it is not marked virtual, abstract, or override
-                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M07").WithArguments("Override.M07()", "MetadataModifiers.M07()"),
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M07")
+                    .WithArguments("Override.M07()", "MetadataModifiers.M07()"),
                 // (14,26): error CS0239: 'Override.M10()': cannot override inherited member 'MetadataModifiers.M10()' because it is sealed
-                Diagnostic(ErrorCode.ERR_CantOverrideSealed, "M10").WithArguments("Override.M10()", "MetadataModifiers.M10()"),
+                Diagnostic(ErrorCode.ERR_CantOverrideSealed, "M10")
+                    .WithArguments("Override.M10()", "MetadataModifiers.M10()"),
                 // (17,26): error CS0506: 'Override.M13()': cannot override inherited member 'MetadataModifiers.M13()' because it is not marked virtual, abstract, or override
-                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M13").WithArguments("Override.M13()", "MetadataModifiers.M13()"));
+                Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "M13")
+                    .WithArguments("Override.M13()", "MetadataModifiers.M13()")
+            );
         }
 
         [ClrOnlyFact]
@@ -848,54 +962,189 @@ class Override : MetadataModifiers
             // All combinations of VirtualContract, NewSlotVTable, AbstractImpl, and FinalContract - without explicit overriding
             // NOTE: some won't peverify (newslot/final/abstract without virtual, abstract with final)
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, 0, isExplicitOverride: false);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                0,
+                isExplicitOverride: false
+            );
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Override, MethodAttributes.Virtual, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.NewSlot, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.Abstract, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.Final, isExplicitOverride: false);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Override,
+                MethodAttributes.Virtual,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.NewSlot,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.Abstract,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.Final,
+                isExplicitOverride: false
+            );
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Virtual, MethodAttributes.Virtual | MethodAttributes.NewSlot, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.AbstractOverride, MethodAttributes.Virtual | MethodAttributes.Abstract, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.SealedOverride, MethodAttributes.Virtual | MethodAttributes.Final, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.NewSlot | MethodAttributes.Abstract, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.NewSlot | MethodAttributes.Final, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: false);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Virtual,
+                MethodAttributes.Virtual | MethodAttributes.NewSlot,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.AbstractOverride,
+                MethodAttributes.Virtual | MethodAttributes.Abstract,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.SealedOverride,
+                MethodAttributes.Virtual | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.NewSlot | MethodAttributes.Abstract,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.NewSlot | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.Abstract | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.AbstractOverride, MethodAttributes.Virtual | MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final, isExplicitOverride: false);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract, isExplicitOverride: false);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.AbstractOverride,
+                MethodAttributes.Virtual | MethodAttributes.Abstract | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract,
+                isExplicitOverride: false
+            );
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: false);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.Virtual
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract
+                    | MethodAttributes.Final,
+                isExplicitOverride: false
+            );
 
             // All combinations of VirtualContract, NewSlotVTable, AbstractImpl, and FinalContract - with explicit overriding
 
             CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, 0, isExplicitOverride: true);
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Override, MethodAttributes.Virtual, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.NewSlot, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.Abstract, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.Final, isExplicitOverride: true);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Override,
+                MethodAttributes.Virtual,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.NewSlot,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.Abstract,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.Final,
+                isExplicitOverride: true
+            );
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Override, MethodAttributes.Virtual | MethodAttributes.NewSlot, isExplicitOverride: true); //differs from above
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.AbstractOverride, MethodAttributes.Virtual | MethodAttributes.Abstract, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.SealedOverride, MethodAttributes.Virtual | MethodAttributes.Final, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.NewSlot | MethodAttributes.Abstract, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.NonVirtual, MethodAttributes.NewSlot | MethodAttributes.Final, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: true);
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Override,
+                MethodAttributes.Virtual | MethodAttributes.NewSlot,
+                isExplicitOverride: true
+            ); //differs from above
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.AbstractOverride,
+                MethodAttributes.Virtual | MethodAttributes.Abstract,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.SealedOverride,
+                MethodAttributes.Virtual | MethodAttributes.Final,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.NewSlot | MethodAttributes.Abstract,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.NonVirtual,
+                MethodAttributes.NewSlot | MethodAttributes.Final,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.Abstract | MethodAttributes.Final,
+                isExplicitOverride: true
+            );
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.Abstract, MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.AbstractOverride, MethodAttributes.Virtual | MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: true);
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.SealedOverride, MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final, isExplicitOverride: true); //differs from above
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.AbstractOverride, MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract, isExplicitOverride: true); //differs from above
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.Abstract,
+                MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Final,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.AbstractOverride,
+                MethodAttributes.Virtual | MethodAttributes.Abstract | MethodAttributes.Final,
+                isExplicitOverride: true
+            );
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.SealedOverride,
+                MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Final,
+                isExplicitOverride: true
+            ); //differs from above
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.AbstractOverride,
+                MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract,
+                isExplicitOverride: true
+            ); //differs from above
 
-            CheckLoadingVirtualnessFlags(SymbolVirtualness.AbstractOverride, MethodAttributes.Virtual | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Final, isExplicitOverride: true); //differs from above
+            CheckLoadingVirtualnessFlags(
+                SymbolVirtualness.AbstractOverride,
+                MethodAttributes.Virtual
+                    | MethodAttributes.NewSlot
+                    | MethodAttributes.Abstract
+                    | MethodAttributes.Final,
+                isExplicitOverride: true
+            ); //differs from above
         }
 
-        private void CheckLoadingVirtualnessFlags(SymbolVirtualness expectedVirtualness, MethodAttributes flags, bool isExplicitOverride)
+        private void CheckLoadingVirtualnessFlags(
+            SymbolVirtualness expectedVirtualness,
+            MethodAttributes flags,
+            bool isExplicitOverride
+        )
         {
-            const string ilTemplate = @"
+            const string ilTemplate =
+                @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {{
@@ -955,54 +1204,60 @@ class Override : MetadataModifiers
             string explicitOverride = isExplicitOverride ? ".override Base::M" : "";
             string body = ((flags & MethodAttributes.Abstract) != 0) ? "" : "ret";
 
-            CompileWithCustomILSource("", string.Format(ilTemplate, modifiers, explicitOverride, body), compilation =>
-            {
-                var derivedClass = compilation.GlobalNamespace.GetMember<PENamedTypeSymbol>("Derived");
-                var method = derivedClass.GetMember<MethodSymbol>("M");
-
-                switch (expectedVirtualness)
+            CompileWithCustomILSource(
+                "",
+                string.Format(ilTemplate, modifiers, explicitOverride, body),
+                compilation =>
                 {
-                    case SymbolVirtualness.NonVirtual:
-                        Assert.False(method.IsVirtual);
-                        Assert.False(method.IsOverride);
-                        Assert.False(method.IsAbstract);
-                        Assert.False(method.IsSealed);
-                        break;
-                    case SymbolVirtualness.Virtual:
-                        Assert.True(method.IsVirtual);
-                        Assert.False(method.IsOverride);
-                        Assert.False(method.IsAbstract);
-                        Assert.False(method.IsSealed);
-                        break;
-                    case SymbolVirtualness.Override:
-                        Assert.False(method.IsVirtual);
-                        Assert.True(method.IsOverride);
-                        Assert.False(method.IsAbstract);
-                        Assert.False(method.IsSealed);
-                        break;
-                    case SymbolVirtualness.SealedOverride:
-                        Assert.False(method.IsVirtual);
-                        Assert.True(method.IsOverride);
-                        Assert.False(method.IsAbstract);
-                        Assert.True(method.IsSealed);
-                        break;
-                    case SymbolVirtualness.Abstract:
-                        Assert.False(method.IsVirtual);
-                        Assert.False(method.IsOverride);
-                        Assert.True(method.IsAbstract);
-                        Assert.False(method.IsSealed);
-                        break;
-                    case SymbolVirtualness.AbstractOverride:
-                        Assert.False(method.IsVirtual);
-                        Assert.True(method.IsOverride);
-                        Assert.True(method.IsAbstract);
-                        Assert.False(method.IsSealed);
-                        break;
-                    default:
-                        Assert.False(true, "Unexpected enum value " + expectedVirtualness);
-                        break;
+                    var derivedClass = compilation.GlobalNamespace.GetMember<PENamedTypeSymbol>(
+                        "Derived"
+                    );
+                    var method = derivedClass.GetMember<MethodSymbol>("M");
+
+                    switch (expectedVirtualness)
+                    {
+                        case SymbolVirtualness.NonVirtual:
+                            Assert.False(method.IsVirtual);
+                            Assert.False(method.IsOverride);
+                            Assert.False(method.IsAbstract);
+                            Assert.False(method.IsSealed);
+                            break;
+                        case SymbolVirtualness.Virtual:
+                            Assert.True(method.IsVirtual);
+                            Assert.False(method.IsOverride);
+                            Assert.False(method.IsAbstract);
+                            Assert.False(method.IsSealed);
+                            break;
+                        case SymbolVirtualness.Override:
+                            Assert.False(method.IsVirtual);
+                            Assert.True(method.IsOverride);
+                            Assert.False(method.IsAbstract);
+                            Assert.False(method.IsSealed);
+                            break;
+                        case SymbolVirtualness.SealedOverride:
+                            Assert.False(method.IsVirtual);
+                            Assert.True(method.IsOverride);
+                            Assert.False(method.IsAbstract);
+                            Assert.True(method.IsSealed);
+                            break;
+                        case SymbolVirtualness.Abstract:
+                            Assert.False(method.IsVirtual);
+                            Assert.False(method.IsOverride);
+                            Assert.True(method.IsAbstract);
+                            Assert.False(method.IsSealed);
+                            break;
+                        case SymbolVirtualness.AbstractOverride:
+                            Assert.False(method.IsVirtual);
+                            Assert.True(method.IsOverride);
+                            Assert.True(method.IsAbstract);
+                            Assert.False(method.IsSealed);
+                            break;
+                        default:
+                            Assert.False(true, "Unexpected enum value " + expectedVirtualness);
+                            break;
+                    }
                 }
-            });
+            );
         }
 
         // Note that not all combinations are possible.
@@ -1019,7 +1274,8 @@ class Override : MetadataModifiers
         [Fact]
         public void Constructors1()
         {
-            string ilSource = @"
+            string ilSource =
+                @"
 .class private auto ansi cls1
        extends [mscorlib]System.Object
 {
@@ -1179,7 +1435,10 @@ class Override : MetadataModifiers
 
             foreach (var m in compilation.GetTypeByMetadataName("cls1").GetMembers())
             {
-                Assert.Equal(m.Name == ".cctor" ? MethodKind.StaticConstructor : MethodKind.Constructor, ((MethodSymbol)m).MethodKind);
+                Assert.Equal(
+                    m.Name == ".cctor" ? MethodKind.StaticConstructor : MethodKind.Constructor,
+                    ((MethodSymbol)m).MethodKind
+                );
             }
 
             foreach (var m in compilation.GetTypeByMetadataName("Instance_vs_Static").GetMembers())
@@ -1221,7 +1480,8 @@ class Override : MetadataModifiers
         [Fact]
         public void OverridesAndLackOfNewSlot()
         {
-            string ilSource = @"
+            string ilSource =
+                @"
 .class interface public abstract auto ansi serializable Microsoft.FSharp.Control.IDelegateEvent`1<([mscorlib]System.Delegate) TDelegate>
 {
   .method public hidebysig abstract virtual 
@@ -1239,7 +1499,11 @@ class Override : MetadataModifiers
 
             var compilation = CreateCompilationWithILAndMscorlib40("", ilSource);
 
-            foreach (var m in compilation.GetTypeByMetadataName("Microsoft.FSharp.Control.IDelegateEvent`1").GetMembers())
+            foreach (
+                var m in compilation
+                    .GetTypeByMetadataName("Microsoft.FSharp.Control.IDelegateEvent`1")
+                    .GetMembers()
+            )
             {
                 Assert.False(((MethodSymbol)m).IsVirtual);
                 Assert.True(((MethodSymbol)m).IsAbstract);
@@ -1250,7 +1514,8 @@ class Override : MetadataModifiers
         [Fact]
         public void MemberSignature_LongFormType()
         {
-            string source = @"
+            string source =
+                @"
 public class D
 {
     public static void Main()
@@ -1260,7 +1525,9 @@ public class D
     }
 }
 ";
-            var longFormRef = MetadataReference.CreateFromImage(TestResources.MetadataTests.Invalid.LongTypeFormInSignature);
+            var longFormRef = MetadataReference.CreateFromImage(
+                TestResources.MetadataTests.Invalid.LongTypeFormInSignature
+            );
 
             var c = CreateCompilation(source, new[] { longFormRef });
 
@@ -1268,14 +1535,16 @@ public class D
                 // (6,20): error CS0570: 'C.RT()' is not supported by the language
                 Diagnostic(ErrorCode.ERR_BindToBogus, "RT").WithArguments("C.RT()"),
                 // (7,20): error CS0570: 'C.VT()' is not supported by the language
-                Diagnostic(ErrorCode.ERR_BindToBogus, "VT").WithArguments("C.VT()"));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "VT").WithArguments("C.VT()")
+            );
         }
 
         [WorkItem(7971, "https://github.com/dotnet/roslyn/issues/7971")]
         [Fact(Skip = "7971")]
         public void MemberSignature_CycleTrhuTypeSpecInCustomModifiers()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void Main()
@@ -1284,7 +1553,9 @@ class P
     }
 }
 ";
-            var lib = MetadataReference.CreateFromImage(TestResources.MetadataTests.Invalid.Signatures.SignatureCycle2);
+            var lib = MetadataReference.CreateFromImage(
+                TestResources.MetadataTests.Invalid.Signatures.SignatureCycle2
+            );
 
             var c = CreateCompilation(source, new[] { lib });
 
@@ -1295,7 +1566,8 @@ class P
         [Fact]
         public void MemberSignature_TypeSpecInWrongPlace()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void Main()
@@ -1304,21 +1576,25 @@ class P
     }
 }
 ";
-            var lib = MetadataReference.CreateFromImage(TestResources.MetadataTests.Invalid.Signatures.TypeSpecInWrongPlace);
+            var lib = MetadataReference.CreateFromImage(
+                TestResources.MetadataTests.Invalid.Signatures.TypeSpecInWrongPlace
+            );
 
             var c = CreateCompilation(source, new[] { lib });
 
             c.VerifyDiagnostics(
                 // (6,14): error CS0570: 'User.X(?)' is not supported by the language
                 //         User.X(new System.Collections.Generic.List<int>());
-                Diagnostic(ErrorCode.ERR_BindToBogus, "X").WithArguments("User.X(?)"));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "X").WithArguments("User.X(?)")
+            );
         }
 
         [WorkItem(666162, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/666162")]
         [Fact]
         public void Repro666162()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { }
 .assembly extern Missing { }
 .assembly Lib { }
@@ -1352,11 +1628,17 @@ class P
             Assert.False(method.ReturnTypeWithAnnotations.IsDefault);
         }
 
-        [Fact, WorkItem(217681, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=217681")]
+        [
+            Fact,
+            WorkItem(
+                217681,
+                "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?id=217681"
+            )
+        ]
         public void LoadingMethodWithPublicAndPrivateAccessibility()
         {
             string source =
-@"
+                @"
 public class D
 {
    public static void Main()
@@ -1367,7 +1649,12 @@ public class D
    }
 }
 ";
-            var references = new[] { MetadataReference.CreateFromImage(TestResources.SymbolsTests.Metadata.PublicAndPrivateFlags) };
+            var references = new[]
+            {
+                MetadataReference.CreateFromImage(
+                    TestResources.SymbolsTests.Metadata.PublicAndPrivateFlags
+                ),
+            };
 
             var comp = CreateCompilation(source, references: references);
 
@@ -1375,14 +1662,18 @@ public class D
             comp.VerifyDiagnostics(
                 // (6,15): error CS0122: 'C.M()' is inaccessible due to its protection level
                 //       new C().M();
-                Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("C.M()").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_BadAccess, "M")
+                    .WithArguments("C.M()")
+                    .WithLocation(6, 15),
                 // (7,40): error CS0122: 'C.F' is inaccessible due to its protection level
                 //       System.Console.WriteLine(new C().F);
                 Diagnostic(ErrorCode.ERR_BadAccess, "F").WithArguments("C.F").WithLocation(7, 40),
                 // (8,13): error CS0122: 'C.C2' is inaccessible due to its protection level
                 //       new C.C2().M2();
-                Diagnostic(ErrorCode.ERR_BadAccess, "C2").WithArguments("C.C2").WithLocation(8, 13)
-                );
+                Diagnostic(ErrorCode.ERR_BadAccess, "C2")
+                    .WithArguments("C.C2")
+                    .WithLocation(8, 13)
+            );
         }
     }
 }

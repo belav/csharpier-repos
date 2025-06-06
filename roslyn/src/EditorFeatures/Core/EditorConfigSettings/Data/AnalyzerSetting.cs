@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
         private readonly DiagnosticDescriptor _descriptor;
         private readonly AnalyzerSettingsUpdater _settingsUpdater;
 
-        public AnalyzerSetting(DiagnosticDescriptor descriptor,
-                               ReportDiagnostic effectiveSeverity,
-                               AnalyzerSettingsUpdater settingsUpdater,
-                               Language language,
-                               SettingLocation location)
+        public AnalyzerSetting(
+            DiagnosticDescriptor descriptor,
+            ReportDiagnostic effectiveSeverity,
+            AnalyzerSettingsUpdater settingsUpdater,
+            Language language,
+            SettingLocation location
+        )
         {
             _descriptor = descriptor;
             _settingsUpdater = settingsUpdater;
@@ -33,7 +35,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             IsEnabled = enabled;
             Severity = effectiveSeverity;
             Language = language;
-            IsNotConfigurable = descriptor.CustomTags.Any(t => t == WellKnownDiagnosticTags.NotConfigurable);
+            IsNotConfigurable = descriptor.CustomTags.Any(t =>
+                t == WellKnownDiagnosticTags.NotConfigurable
+            );
             Location = location;
         }
 

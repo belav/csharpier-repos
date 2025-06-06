@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,17 +11,20 @@ namespace Test
     public class AA
     {
         float m_fField1 = 426.19f;
+
         static float Method1(ref object[] param1, int param2, ref bool[] param3, double[] param4)
         {
             while (param2 > (int)param4[2])
             {
-                do
-                {
-                } while (210.11f == (new AA().m_fField1 - (float)param4[2]) +
-                                    ((float)param4[2] + (float)param4[2]));
+                do { } while (
+                    210.11f
+                    == (new AA().m_fField1 - (float)param4[2])
+                        + ((float)param4[2] + (float)param4[2])
+                );
             }
             return 0.0f;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

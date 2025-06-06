@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 using Internal.Runtime;
 
 namespace System.Runtime
@@ -26,10 +25,10 @@ namespace System.Runtime
     internal static class TypeCast
     {
 #if DEBUG
-        private const int InitialCacheSize = 8;    // MUST BE A POWER OF TWO
-        private const int MaximumCacheSize = 512;  // make this lower than release to make it easier to reach this in tests.
+        private const int InitialCacheSize = 8; // MUST BE A POWER OF TWO
+        private const int MaximumCacheSize = 512; // make this lower than release to make it easier to reach this in tests.
 #else
-        private const int InitialCacheSize = 128;  // MUST BE A POWER OF TWO
+        private const int InitialCacheSize = 128; // MUST BE A POWER OF TWO
         private const int MaximumCacheSize = 4096; // 4096 * sizeof(CastCacheEntry) is 98304 bytes on 64bit. We will rarely need this much though.
 #endif // DEBUG
 
@@ -69,7 +68,10 @@ namespace System.Runtime
                 MethodTable* mt = obj.GetMethodTable();
                 if (mt != pTargetType)
                 {
-                    CastResult result = s_castCache.TryGet((nuint)mt + (int)AssignmentVariation.BoxedSource, (nuint)pTargetType);
+                    CastResult result = s_castCache.TryGet(
+                        (nuint)mt + (int)AssignmentVariation.BoxedSource,
+                        (nuint)pTargetType
+                    );
                     if (result == CastResult.CanCast)
                     {
                         // do nothing
@@ -87,7 +89,7 @@ namespace System.Runtime
 
             return obj;
 
-        slowPath:
+            slowPath:
             // fall through to the slow helper
             return IsInstanceOfAny_NoCacheLookup(pTargetType, obj);
         }
@@ -116,10 +118,12 @@ namespace System.Runtime
 
                     do
                     {
-                        if (interfaceMap[0] == pTargetType ||
-                            interfaceMap[1] == pTargetType ||
-                            interfaceMap[2] == pTargetType ||
-                            interfaceMap[3] == pTargetType)
+                        if (
+                            interfaceMap[0] == pTargetType
+                            || interfaceMap[1] == pTargetType
+                            || interfaceMap[2] == pTargetType
+                            || interfaceMap[3] == pTargetType
+                        )
                         {
                             goto done;
                         }
@@ -134,7 +138,7 @@ namespace System.Runtime
                         goto extra;
                     }
 
-                few:
+                    few:
                     do
                     {
                         if (interfaceMap[0] == pTargetType)
@@ -147,7 +151,7 @@ namespace System.Runtime
                         interfaceCount--;
                     } while (interfaceCount > 0);
 
-                extra:
+                    extra:
                     if (mt->IsIDynamicInterfaceCastable)
                     {
                         goto slowPath;
@@ -157,21 +161,30 @@ namespace System.Runtime
                 obj = null;
             }
 
-        done:
+            done:
 
             return obj;
 
-        slowPath:
+            slowPath:
 
             return IsInstanceOfInterface_Helper(pTargetType, obj);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static unsafe object? IsInstanceOfInterface_Helper(MethodTable* pTargetType, object? obj)
+        private static unsafe object? IsInstanceOfInterface_Helper(
+            MethodTable* pTargetType,
+            object? obj
+        )
         {
             // If object type implements IDynamicInterfaceCastable then there's one more way to check whether it implements
             // the interface.
-            if (!IsInstanceOfInterfaceViaIDynamicInterfaceCastable(pTargetType, obj, throwing: false))
+            if (
+                !IsInstanceOfInterfaceViaIDynamicInterfaceCastable(
+                    pTargetType,
+                    obj,
+                    throwing: false
+                )
+            )
                 obj = null;
 
             return obj;
@@ -180,10 +193,22 @@ namespace System.Runtime
         [RuntimeExport("RhTypeCast_IsInstanceOfClass")]
         public static unsafe object? IsInstanceOfClass(MethodTable* pTargetType, object? obj)
         {
-            Debug.Assert(!pTargetType->IsParameterizedType, "IsInstanceOfClass called with parameterized MethodTable");
-            Debug.Assert(!pTargetType->IsFunctionPointer, "IsInstanceOfClass called with function pointer MethodTable");
-            Debug.Assert(!pTargetType->IsInterface, "IsInstanceOfClass called with interface MethodTable");
-            Debug.Assert(!pTargetType->HasGenericVariance, "IsInstanceOfClass with variant MethodTable");
+            Debug.Assert(
+                !pTargetType->IsParameterizedType,
+                "IsInstanceOfClass called with parameterized MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->IsFunctionPointer,
+                "IsInstanceOfClass called with function pointer MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->IsInterface,
+                "IsInstanceOfClass called with interface MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->HasGenericVariance,
+                "IsInstanceOfClass with variant MethodTable"
+            );
 
             if (obj == null || obj.GetMethodTable() == pTargetType)
                 return obj;
@@ -234,10 +259,10 @@ namespace System.Runtime
                 mt = mt->NonArrayBaseType;
             }
 
-        fail:
+            fail:
             obj = null;
 
-        done:
+            done:
             return obj;
         }
 
@@ -292,7 +317,7 @@ namespace System.Runtime
 
             return obj;
 
-        slowPath:
+            slowPath:
             // fall through to the slow helper
             object objRet = CheckCastAny_NoCacheLookup(pTargetType, obj);
             // Make sure that the fast helper have not lied
@@ -327,10 +352,12 @@ namespace System.Runtime
 
                 do
                 {
-                    if (interfaceMap[0] == pTargetType ||
-                        interfaceMap[1] == pTargetType ||
-                        interfaceMap[2] == pTargetType ||
-                        interfaceMap[3] == pTargetType)
+                    if (
+                        interfaceMap[0] == pTargetType
+                        || interfaceMap[1] == pTargetType
+                        || interfaceMap[2] == pTargetType
+                        || interfaceMap[3] == pTargetType
+                    )
                     {
                         goto done;
                     }
@@ -346,7 +373,7 @@ namespace System.Runtime
                     goto slowPath;
                 }
 
-            few:
+                few:
                 do
                 {
                     if (interfaceMap[0] == pTargetType)
@@ -362,10 +389,10 @@ namespace System.Runtime
                 goto slowPath;
             }
 
-        done:
+            done:
             return obj;
 
-        slowPath:
+            slowPath:
 
             return CheckCastInterface_Helper(pTargetType, obj);
         }
@@ -375,8 +402,14 @@ namespace System.Runtime
         {
             // If object type implements IDynamicInterfaceCastable then there's one more way to check whether it implements
             // the interface.
-            if (obj.GetMethodTable()->IsIDynamicInterfaceCastable
-                && IsInstanceOfInterfaceViaIDynamicInterfaceCastable(pTargetType, obj, throwing: true))
+            if (
+                obj.GetMethodTable()->IsIDynamicInterfaceCastable
+                && IsInstanceOfInterfaceViaIDynamicInterfaceCastable(
+                    pTargetType,
+                    obj,
+                    throwing: true
+                )
+            )
             {
                 return obj;
             }
@@ -389,10 +422,22 @@ namespace System.Runtime
         [RuntimeExport("RhTypeCast_CheckCastClass")]
         public static unsafe object CheckCastClass(MethodTable* pTargetType, object obj)
         {
-            Debug.Assert(!pTargetType->IsParameterizedType, "CheckCastClass called with parameterized MethodTable");
-            Debug.Assert(!pTargetType->IsFunctionPointer, "CheckCastClass called with function pointer MethodTable");
-            Debug.Assert(!pTargetType->IsInterface, "CheckCastClass called with interface MethodTable");
-            Debug.Assert(!pTargetType->HasGenericVariance, "CheckCastClass with variant MethodTable");
+            Debug.Assert(
+                !pTargetType->IsParameterizedType,
+                "CheckCastClass called with parameterized MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->IsFunctionPointer,
+                "CheckCastClass called with function pointer MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->IsInterface,
+                "CheckCastClass called with interface MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->HasGenericVariance,
+                "CheckCastClass with variant MethodTable"
+            );
 
             if (obj == null || obj.GetMethodTable() == pTargetType)
             {
@@ -407,13 +452,28 @@ namespace System.Runtime
         [RuntimeExport("RhTypeCast_CheckCastClassSpecial")]
         private static unsafe object CheckCastClassSpecial(MethodTable* pTargetType, object obj)
         {
-            Debug.Assert(!pTargetType->IsParameterizedType, "CheckCastClass called with parameterized MethodTable");
-            Debug.Assert(!pTargetType->IsFunctionPointer, "CheckCastClass called with function pointer MethodTable");
-            Debug.Assert(!pTargetType->IsInterface, "CheckCastClass called with interface MethodTable");
-            Debug.Assert(!pTargetType->HasGenericVariance, "CheckCastClass with variant MethodTable");
+            Debug.Assert(
+                !pTargetType->IsParameterizedType,
+                "CheckCastClass called with parameterized MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->IsFunctionPointer,
+                "CheckCastClass called with function pointer MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->IsInterface,
+                "CheckCastClass called with interface MethodTable"
+            );
+            Debug.Assert(
+                !pTargetType->HasGenericVariance,
+                "CheckCastClass with variant MethodTable"
+            );
 
             MethodTable* mt = obj.GetMethodTable();
-            Debug.Assert(mt != pTargetType, "The check for the trivial cases should be inlined by the JIT");
+            Debug.Assert(
+                mt != pTargetType,
+                "The check for the trivial cases should be inlined by the JIT"
+            );
 
             if (!mt->IsCanonical)
             {
@@ -461,17 +521,23 @@ namespace System.Runtime
 
             goto fail;
 
-        done:
+            done:
             return obj;
 
-        fail:
+            fail:
             return ThrowInvalidCastException(pTargetType);
         }
 
-        private static unsafe bool IsInstanceOfInterfaceViaIDynamicInterfaceCastable(MethodTable* pTargetType, object obj, bool throwing)
+        private static unsafe bool IsInstanceOfInterfaceViaIDynamicInterfaceCastable(
+            MethodTable* pTargetType,
+            object obj,
+            bool throwing
+        )
         {
-            var pfnIsInterfaceImplemented = (delegate*<object, MethodTable*, bool, bool>)
-                pTargetType->GetClasslibFunction(ClassLibFunctionId.IDynamicCastableIsInterfaceImplemented);
+            var pfnIsInterfaceImplemented = (delegate* <object, MethodTable*, bool, bool>)
+                pTargetType->GetClasslibFunction(
+                    ClassLibFunctionId.IDynamicCastableIsInterfaceImplemented
+                );
             return pfnIsInterfaceImplemented(obj, pTargetType, throwing);
         }
 
@@ -484,8 +550,14 @@ namespace System.Runtime
             Debug.Assert(!pBaseType->IsInterface, "did not expect interface type");
             Debug.Assert(!pBaseType->IsParameterizedType, "did not expect parameterType");
             Debug.Assert(!pBaseType->IsFunctionPointer, "did not expect function pointer");
-            Debug.Assert(pBaseType->IsCanonical || pBaseType->IsGenericTypeDefinition, "unexpected MethodTable");
-            Debug.Assert(pDerivedType->IsCanonical || pDerivedType->IsGenericTypeDefinition, "unexpected MethodTable");
+            Debug.Assert(
+                pBaseType->IsCanonical || pBaseType->IsGenericTypeDefinition,
+                "unexpected MethodTable"
+            );
+            Debug.Assert(
+                pDerivedType->IsCanonical || pDerivedType->IsGenericTypeDefinition,
+                "unexpected MethodTable"
+            );
 
             // If a generic type definition reaches this function, then the function should return false unless the types are equivalent.
             // This works as the NonArrayBaseType of a GenericTypeDefinition is always null.
@@ -496,17 +568,23 @@ namespace System.Runtime
                     return true;
 
                 pDerivedType = pDerivedType->NonArrayBaseType;
-            }
-            while (pDerivedType != null);
+            } while (pDerivedType != null);
 
             return false;
         }
 
-        private static unsafe bool ImplementsInterface(MethodTable* pObjType, MethodTable* pTargetType, EETypePairList* pVisited)
+        private static unsafe bool ImplementsInterface(
+            MethodTable* pObjType,
+            MethodTable* pTargetType,
+            EETypePairList* pVisited
+        )
         {
             Debug.Assert(!pTargetType->IsParameterizedType, "did not expect parameterized type");
             Debug.Assert(!pTargetType->IsFunctionPointer, "did not expect function pointer type");
-            Debug.Assert(pTargetType->IsInterface, "IsInstanceOfInterface called with non-interface MethodTable");
+            Debug.Assert(
+                pTargetType->IsInterface,
+                "IsInstanceOfInterface called with non-interface MethodTable"
+            );
 
             int numInterfaces = pObjType->NumInterfaces;
             MethodTable** interfaceMap = pObjType->InterfaceMap;
@@ -537,7 +615,6 @@ namespace System.Runtime
 
                 Debug.Assert(pTargetVarianceInfo != null, "did not expect empty variance info");
 
-
                 for (int i = 0; i < numInterfaces; i++)
                 {
                     MethodTable* pInterfaceType = interfaceMap[i];
@@ -560,19 +637,29 @@ namespace System.Runtime
                         int interfaceArity = (int)pInterfaceType->GenericArity;
                         GenericVariance* pInterfaceVarianceInfo = pInterfaceType->GenericVariance;
 
-                        Debug.Assert(pInterfaceVarianceInfo != null, "did not expect empty variance info");
+                        Debug.Assert(
+                            pInterfaceVarianceInfo != null,
+                            "did not expect empty variance info"
+                        );
 
                         // The types represent different instantiations of the same generic type. The
                         // arity of both had better be the same.
-                        Debug.Assert(targetArity == interfaceArity, "arity mismatch between generic instantiations");
+                        Debug.Assert(
+                            targetArity == interfaceArity,
+                            "arity mismatch between generic instantiations"
+                        );
 
                         // Compare the instantiations to see if they're compatible taking variance into account.
-                        if (TypeParametersAreCompatible(targetArity,
-                                                        interfaceInstantiation,
-                                                        targetInstantiation,
-                                                        pTargetVarianceInfo,
-                                                        fArrayCovariance,
-                                                        pVisited))
+                        if (
+                            TypeParametersAreCompatible(
+                                targetArity,
+                                interfaceInstantiation,
+                                targetInstantiation,
+                                pTargetVarianceInfo,
+                                fArrayCovariance,
+                                pVisited
+                            )
+                        )
                             return true;
                     }
                 }
@@ -582,7 +669,11 @@ namespace System.Runtime
         }
 
         // Compare two types to see if they are compatible via generic variance.
-        private static unsafe bool TypesAreCompatibleViaGenericVariance(MethodTable* pSourceType, MethodTable* pTargetType, EETypePairList* pVisited)
+        private static unsafe bool TypesAreCompatibleViaGenericVariance(
+            MethodTable* pSourceType,
+            MethodTable* pTargetType,
+            EETypePairList* pVisited
+        )
         {
             MethodTable* pTargetGenericType = pTargetType->GenericDefinition;
             MethodTable* pSourceGenericType = pSourceType->GenericDefinition;
@@ -606,15 +697,22 @@ namespace System.Runtime
 
                 // The types represent different instantiations of the same generic type. The
                 // arity of both had better be the same.
-                Debug.Assert(targetArity == sourceArity, "arity mismatch between generic instantiations");
+                Debug.Assert(
+                    targetArity == sourceArity,
+                    "arity mismatch between generic instantiations"
+                );
 
                 // Compare the instantiations to see if they're compatible taking variance into account.
-                if (TypeParametersAreCompatible(targetArity,
-                                                sourceInstantiation,
-                                                targetInstantiation,
-                                                pTargetVarianceInfo,
-                                                false,
-                                                pVisited))
+                if (
+                    TypeParametersAreCompatible(
+                        targetArity,
+                        sourceInstantiation,
+                        targetInstantiation,
+                        pTargetVarianceInfo,
+                        false,
+                        pVisited
+                    )
+                )
                 {
                     return true;
                 }
@@ -628,12 +726,14 @@ namespace System.Runtime
         // implies their arities are the same as well). The fForceCovariance argument tells the method to
         // override the defined variance of each parameter and instead assume it is covariant. This is used to
         // implement covariant array interfaces.
-        internal static unsafe bool TypeParametersAreCompatible(int arity,
-                                                               MethodTableList sourceInstantiation,
-                                                               MethodTableList targetInstantiation,
-                                                               GenericVariance* pVarianceInfo,
-                                                               bool fForceCovariance,
-                                                               EETypePairList* pVisited)
+        internal static unsafe bool TypeParametersAreCompatible(
+            int arity,
+            MethodTableList sourceInstantiation,
+            MethodTableList targetInstantiation,
+            GenericVariance* pVarianceInfo,
+            bool fForceCovariance,
+            EETypePairList* pVisited
+        )
         {
             // Walk through the instantiations comparing the cast compatibility of each pair
             // of type args.
@@ -668,7 +768,14 @@ namespace System.Runtime
                         //   class Foo : ICovariant<Bar> is ICovariant<IBar>
                         //   class Foo : ICovariant<IBar> is ICovariant<Object>
 
-                        if (!AreTypesAssignableInternal(pSourceArgType, pTargetArgType, AssignmentVariation.Unboxed, pVisited))
+                        if (
+                            !AreTypesAssignableInternal(
+                                pSourceArgType,
+                                pTargetArgType,
+                                AssignmentVariation.Unboxed,
+                                pVisited
+                            )
+                        )
                             return false;
 
                         break;
@@ -683,7 +790,14 @@ namespace System.Runtime
 
                         // This call is just like the call for Covariance above except true is passed
                         // to the fAllowSizeEquivalence parameter to allow the int/uint matching to work
-                        if (!AreTypesAssignableInternal(pSourceArgType, pTargetArgType, AssignmentVariation.AllowSizeEquivalence, pVisited))
+                        if (
+                            !AreTypesAssignableInternal(
+                                pSourceArgType,
+                                pTargetArgType,
+                                AssignmentVariation.AllowSizeEquivalence,
+                                pVisited
+                            )
+                        )
                             return false;
 
                         break;
@@ -698,7 +812,14 @@ namespace System.Runtime
                         //   class Foo : IContravariant<IBar> is IContravariant<Bar>
                         //   class Foo : IContravariant<Object> is IContravariant<IBar>
 
-                        if (!AreTypesAssignableInternal(pTargetArgType, pSourceArgType, AssignmentVariation.Unboxed, pVisited))
+                        if (
+                            !AreTypesAssignableInternal(
+                                pTargetArgType,
+                                pSourceArgType,
+                                AssignmentVariation.Unboxed,
+                                pVisited
+                            )
+                        )
                             return false;
 
                         break;
@@ -723,12 +844,26 @@ namespace System.Runtime
             Debug.Assert(array.GetMethodTable()->IsArray, "first argument must be an array");
 
             MethodTable* arrayElemType = array.GetMethodTable()->RelatedParameterType;
-            if (AreTypesAssignableInternal(obj.GetMethodTable(), arrayElemType, AssignmentVariation.BoxedSource, null))
+            if (
+                AreTypesAssignableInternal(
+                    obj.GetMethodTable(),
+                    arrayElemType,
+                    AssignmentVariation.BoxedSource,
+                    null
+                )
+            )
                 return;
 
             // If object type implements IDynamicInterfaceCastable then there's one more way to check whether it implements
             // the interface.
-            if (obj.GetMethodTable()->IsIDynamicInterfaceCastable && IsInstanceOfInterfaceViaIDynamicInterfaceCastable(arrayElemType, obj, throwing: false))
+            if (
+                obj.GetMethodTable()->IsIDynamicInterfaceCastable
+                && IsInstanceOfInterfaceViaIDynamicInterfaceCastable(
+                    arrayElemType,
+                    obj,
+                    throwing: false
+                )
+            )
                 return;
 
             // Throw the array type mismatch exception defined by the classlib, using the input array's MethodTable*
@@ -765,7 +900,9 @@ namespace System.Runtime
             {
                 throw array.GetMethodTable()->GetClasslibException(ExceptionIDs.IndexOutOfRange);
             }
-            ref object rawData = ref Unsafe.As<byte, object>(ref Unsafe.As<RawArrayData>(array).Data);
+            ref object rawData = ref Unsafe.As<byte, object>(
+                ref Unsafe.As<RawArrayData>(array).Data
+            );
             ref object element = ref Unsafe.Add(ref rawData, index);
 #endif
 
@@ -777,15 +914,15 @@ namespace System.Runtime
             if (elementType != obj.GetMethodTable())
                 goto notExactMatch;
 
-        doWrite:
+            doWrite:
             InternalCalls.RhpAssignRef(ref element, obj);
             return;
 
-        assigningNull:
+            assigningNull:
             element = null;
             return;
 
-        notExactMatch:
+            notExactMatch:
 #if INPLACE_RUNTIME
             // This optimization only makes sense for inplace runtime where there's only one System.Object.
             if (array.GetMethodTable() == MethodTable.Of<object[]>())
@@ -796,9 +933,16 @@ namespace System.Runtime
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static unsafe void StelemRef_Helper(ref object element, MethodTable* elementType, object obj)
+        private static unsafe void StelemRef_Helper(
+            ref object element,
+            MethodTable* elementType,
+            object obj
+        )
         {
-            CastResult result = s_castCache.TryGet((nuint)obj.GetMethodTable() + (int)AssignmentVariation.BoxedSource, (nuint)elementType);
+            CastResult result = s_castCache.TryGet(
+                (nuint)obj.GetMethodTable() + (int)AssignmentVariation.BoxedSource,
+                (nuint)elementType
+            );
             if (result == CastResult.CanCast)
             {
                 InternalCalls.RhpAssignRef(ref element, obj);
@@ -808,7 +952,11 @@ namespace System.Runtime
             StelemRef_Helper_NoCacheLookup(ref element, elementType, obj);
         }
 
-        private static unsafe void StelemRef_Helper_NoCacheLookup(ref object element, MethodTable* elementType, object obj)
+        private static unsafe void StelemRef_Helper_NoCacheLookup(
+            ref object element,
+            MethodTable* elementType,
+            object obj
+        )
         {
             object? castedObj = IsInstanceOfAny_NoCacheLookup(elementType, obj);
             if (castedObj != null)
@@ -825,7 +973,10 @@ namespace System.Runtime
         [RuntimeExport("RhpLdelemaRef")]
         public static unsafe ref object LdelemaRef(Array array, nint index, IntPtr elementType)
         {
-            Debug.Assert(array is null || array.GetMethodTable()->IsArray, "first argument must be an array");
+            Debug.Assert(
+                array is null || array.GetMethodTable()->IsArray,
+                "first argument must be an array"
+            );
 
 #if INPLACE_RUNTIME
             // this will throw appropriate exceptions if array is null or access is out of range.
@@ -837,9 +988,13 @@ namespace System.Runtime
             }
             if ((uint)index >= (uint)array.Length)
             {
-                throw ((MethodTable*)elementType)->GetClasslibException(ExceptionIDs.IndexOutOfRange);
+                throw ((MethodTable*)elementType)->GetClasslibException(
+                    ExceptionIDs.IndexOutOfRange
+                );
             }
-            ref object rawData = ref Unsafe.As<byte, object>(ref Unsafe.As<RawArrayData>(array).Data);
+            ref object rawData = ref Unsafe.As<byte, object>(
+                ref Unsafe.As<RawArrayData>(array).Data
+            );
             ref object element = ref Unsafe.Add(ref rawData, index);
 #endif
 
@@ -866,7 +1021,10 @@ namespace System.Runtime
         {
             MethodTable* pObjType = obj.GetMethodTable();
 
-            Debug.Assert(pTargetType->IsArray, "IsInstanceOfArray called with non-array MethodTable");
+            Debug.Assert(
+                pTargetType->IsArray,
+                "IsInstanceOfArray called with non-array MethodTable"
+            );
 
             // if the types match, we are done
             if (pObjType == pTargetType)
@@ -891,8 +1049,14 @@ namespace System.Runtime
                 }
             }
 
-            if (AreTypesAssignableInternal(pObjType->RelatedParameterType, pTargetType->RelatedParameterType,
-                AssignmentVariation.AllowSizeEquivalence, null))
+            if (
+                AreTypesAssignableInternal(
+                    pObjType->RelatedParameterType,
+                    pTargetType->RelatedParameterType,
+                    AssignmentVariation.AllowSizeEquivalence,
+                    null
+                )
+            )
             {
                 return obj;
             }
@@ -917,9 +1081,22 @@ namespace System.Runtime
 
         private static unsafe object IsInstanceOfVariantType(MethodTable* pTargetType, object obj)
         {
-            if (!AreTypesAssignableInternal(obj.GetMethodTable(), pTargetType, AssignmentVariation.BoxedSource, null)
-                && (!obj.GetMethodTable()->IsIDynamicInterfaceCastable
-                || !IsInstanceOfInterfaceViaIDynamicInterfaceCastable(pTargetType, obj, throwing: false)))
+            if (
+                !AreTypesAssignableInternal(
+                    obj.GetMethodTable(),
+                    pTargetType,
+                    AssignmentVariation.BoxedSource,
+                    null
+                )
+                && (
+                    !obj.GetMethodTable()->IsIDynamicInterfaceCastable
+                    || !IsInstanceOfInterfaceViaIDynamicInterfaceCastable(
+                        pTargetType,
+                        obj,
+                        throwing: false
+                    )
+                )
+            )
             {
                 return null;
             }
@@ -929,9 +1106,22 @@ namespace System.Runtime
 
         private static unsafe object CheckCastVariantType(MethodTable* pTargetType, object obj)
         {
-            if (!AreTypesAssignableInternal(obj.GetMethodTable(), pTargetType, AssignmentVariation.BoxedSource, null)
-                && (!obj.GetMethodTable()->IsIDynamicInterfaceCastable
-                || !IsInstanceOfInterfaceViaIDynamicInterfaceCastable(pTargetType, obj, throwing: true)))
+            if (
+                !AreTypesAssignableInternal(
+                    obj.GetMethodTable(),
+                    pTargetType,
+                    AssignmentVariation.BoxedSource,
+                    null
+                )
+                && (
+                    !obj.GetMethodTable()->IsIDynamicInterfaceCastable
+                    || !IsInstanceOfInterfaceViaIDynamicInterfaceCastable(
+                        pTargetType,
+                        obj,
+                        throwing: true
+                    )
+                )
+            )
             {
                 return ThrowInvalidCastException(pTargetType);
             }
@@ -939,7 +1129,9 @@ namespace System.Runtime
             return obj;
         }
 
-        private static unsafe EETypeElementType GetNormalizedIntegralArrayElementType(MethodTable* type)
+        private static unsafe EETypeElementType GetNormalizedIntegralArrayElementType(
+            MethodTable* type
+        )
         {
             EETypeElementType elementType = type->ElementType;
             switch (elementType)
@@ -968,14 +1160,22 @@ namespace System.Runtime
             private MethodTable* _eetype2;
             private EETypePairList* _next;
 
-            public EETypePairList(MethodTable* pEEType1, MethodTable* pEEType2, EETypePairList* pNext)
+            public EETypePairList(
+                MethodTable* pEEType1,
+                MethodTable* pEEType2,
+                EETypePairList* pNext
+            )
             {
                 _eetype1 = pEEType1;
                 _eetype2 = pEEType2;
                 _next = pNext;
             }
 
-            public static bool Exists(EETypePairList* pList, MethodTable* pEEType1, MethodTable* pEEType2)
+            public static bool Exists(
+                EETypePairList* pList,
+                MethodTable* pEEType1,
+                MethodTable* pEEType2
+            )
             {
                 while (pList != null)
                 {
@@ -996,7 +1196,10 @@ namespace System.Runtime
         // compatible with Object and ValueType and an enum source is additionally compatible with Enum.
         //
         [RuntimeExport("RhTypeCast_AreTypesAssignable")]
-        public static unsafe bool AreTypesAssignable(MethodTable* pSourceType, MethodTable* pTargetType)
+        public static unsafe bool AreTypesAssignable(
+            MethodTable* pSourceType,
+            MethodTable* pTargetType
+        )
         {
             // Special case: Generic Type definitions are not assignable in a mrt sense
             // in any way. Assignability of those types is handled by reflection logic.
@@ -1017,12 +1220,22 @@ namespace System.Runtime
                 return pSourceType == pNullableType;
             }
 
-            return AreTypesAssignableInternal(pSourceType, pTargetType, AssignmentVariation.BoxedSource, null);
+            return AreTypesAssignableInternal(
+                pSourceType,
+                pTargetType,
+                AssignmentVariation.BoxedSource,
+                null
+            );
         }
 
         // Internal recursively callable version of the export method above.
         // It keeps track of visited type pairs and returns a failure if type assignability yields a self-dependent cycle.
-        public static unsafe bool AreTypesAssignableInternal(MethodTable* pSourceType, MethodTable* pTargetType, AssignmentVariation variation, EETypePairList* pVisited)
+        public static unsafe bool AreTypesAssignableInternal(
+            MethodTable* pSourceType,
+            MethodTable* pTargetType,
+            AssignmentVariation variation,
+            EETypePairList* pVisited
+        )
         {
             // Important special case -- it breaks infinite recursion
             if (pSourceType == pTargetType)
@@ -1039,7 +1252,12 @@ namespace System.Runtime
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static unsafe bool CacheMiss(MethodTable* pSourceType, MethodTable* pTargetType, AssignmentVariation variation, EETypePairList* pVisited)
+        private static unsafe bool CacheMiss(
+            MethodTable* pSourceType,
+            MethodTable* pTargetType,
+            AssignmentVariation variation,
+            EETypePairList* pVisited
+        )
         {
             //
             // First, check if we previously visited the input types pair, to avoid infinite recursions
@@ -1051,7 +1269,12 @@ namespace System.Runtime
             // Call into the type cast code to calculate the result
             //
             EETypePairList newList = new EETypePairList(pSourceType, pTargetType, pVisited);
-            bool result = TypeCast.AreTypesAssignableInternalUncached(pSourceType, pTargetType, variation, &newList);
+            bool result = TypeCast.AreTypesAssignableInternalUncached(
+                pSourceType,
+                pTargetType,
+                variation,
+                &newList
+            );
 
             //
             // Update the cache
@@ -1062,10 +1285,18 @@ namespace System.Runtime
             return result;
         }
 
-        internal static unsafe bool AreTypesAssignableInternalUncached(MethodTable* pSourceType, MethodTable* pTargetType, AssignmentVariation variation, EETypePairList* pVisited)
+        internal static unsafe bool AreTypesAssignableInternalUncached(
+            MethodTable* pSourceType,
+            MethodTable* pTargetType,
+            AssignmentVariation variation,
+            EETypePairList* pVisited
+        )
         {
             bool fBoxedSource = (variation == AssignmentVariation.BoxedSource);
-            bool fAllowSizeEquivalence = ((variation & AssignmentVariation.AllowSizeEquivalence) == AssignmentVariation.AllowSizeEquivalence);
+            bool fAllowSizeEquivalence = (
+                (variation & AssignmentVariation.AllowSizeEquivalence)
+                == AssignmentVariation.AllowSizeEquivalence
+            );
 
             //
             // Are the types identical?
@@ -1102,8 +1333,10 @@ namespace System.Runtime
             //
             if (pTargetType->IsParameterizedType)
             {
-                if (pSourceType->IsParameterizedType
-                    && (pTargetType->ParameterizedTypeShape == pSourceType->ParameterizedTypeShape))
+                if (
+                    pSourceType->IsParameterizedType
+                    && (pTargetType->ParameterizedTypeShape == pSourceType->ParameterizedTypeShape)
+                )
                 {
                     MethodTable* pSourceRelatedParameterType = pSourceType->RelatedParameterType;
                     // Source type is also a parameterized type. Are the parameter types compatible?
@@ -1134,8 +1367,12 @@ namespace System.Runtime
                         // Note that using AreTypesAssignableInternal with AssignmentVariation.AllowSizeEquivalence
                         // here handles array covariance as well as IFoo[] -> Foo[] etc.  We are not using
                         // AssignmentVariation.BoxedSource because int[] is not assignable to object[].
-                        return AreTypesAssignableInternal(pSourceType->RelatedParameterType,
-                            pTargetType->RelatedParameterType, AssignmentVariation.AllowSizeEquivalence, pVisited);
+                        return AreTypesAssignableInternal(
+                            pSourceType->RelatedParameterType,
+                            pTargetType->RelatedParameterType,
+                            AssignmentVariation.AllowSizeEquivalence,
+                            pVisited
+                        );
                     }
                 }
 
@@ -1175,7 +1412,10 @@ namespace System.Runtime
                 // same size.
                 if (fAllowSizeEquivalence && pTargetType->IsPrimitive)
                 {
-                    if (GetNormalizedIntegralArrayElementType(pSourceType) == GetNormalizedIntegralArrayElementType(pTargetType))
+                    if (
+                        GetNormalizedIntegralArrayElementType(pSourceType)
+                        == GetNormalizedIntegralArrayElementType(pTargetType)
+                    )
                         return true;
 
                     // Non-identical value types aren't equivalent in any other case (since value types are
@@ -1213,7 +1453,10 @@ namespace System.Runtime
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static unsafe object? IsInstanceOfAny_NoCacheLookup(MethodTable* pTargetType, object obj)
+        private static unsafe object? IsInstanceOfAny_NoCacheLookup(
+            MethodTable* pTargetType,
+            object obj
+        )
         {
             MethodTable* pSourceType = obj.GetMethodTable();
             object? retObj;
@@ -1247,7 +1490,8 @@ namespace System.Runtime
                 //
                 // Update the cache
                 //
-                nuint sourceAndVariation = (nuint)pSourceType + (uint)AssignmentVariation.BoxedSource;
+                nuint sourceAndVariation =
+                    (nuint)pSourceType + (uint)AssignmentVariation.BoxedSource;
                 s_castCache.TrySet(sourceAndVariation, (nuint)pTargetType, retObj != null);
             }
 
@@ -1255,7 +1499,10 @@ namespace System.Runtime
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static unsafe object CheckCastAny_NoCacheLookup(MethodTable* pTargetType, object obj)
+        private static unsafe object CheckCastAny_NoCacheLookup(
+            MethodTable* pTargetType,
+            object obj
+        )
         {
             MethodTable* pSourceType = obj.GetMethodTable();
             if (pTargetType->IsArray)
@@ -1286,7 +1533,8 @@ namespace System.Runtime
                 //
                 // Update the cache
                 //
-                nuint sourceAndVariation = (nuint)pSourceType + (uint)AssignmentVariation.BoxedSource;
+                nuint sourceAndVariation =
+                    (nuint)pSourceType + (uint)AssignmentVariation.BoxedSource;
                 s_castCache.TrySet(sourceAndVariation, (nuint)pTargetType, true);
             }
 

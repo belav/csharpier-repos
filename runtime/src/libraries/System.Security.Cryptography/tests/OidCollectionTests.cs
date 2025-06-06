@@ -60,7 +60,9 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void CopyTo_NonGeneric_Success()
         {
-            ValidateCopyTo((collection, array, index) => ((ICollection)collection).CopyTo(array, index));
+            ValidateCopyTo(
+                (collection, array, index) => ((ICollection)collection).CopyTo(array, index)
+            );
         }
 
         private static void ValidateCopyTo(Action<OidCollection, Oid[], int> copyTo)
@@ -92,24 +94,35 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public void CopyTo_Throws()
         {
-            ValidateCopyToThrows((collection, array, index) => collection.CopyTo(array, index), paramName: "destinationArray");
+            ValidateCopyToThrows(
+                (collection, array, index) => collection.CopyTo(array, index),
+                paramName: "destinationArray"
+            );
         }
 
         [Fact]
         public void CopyTo_NonGeneric_Throws()
         {
-            ValidateCopyToThrows((collection, array, index) => ((ICollection)collection).CopyTo(array, index), c =>
-            {
-                ICollection ic = c;
-                AssertExtensions.Throws<ArgumentException>(null, () => ic.CopyTo(new Oid[4, 3], 0));
-                Assert.Throws<InvalidCastException>(() => ic.CopyTo(new string[10], 0));
-            }, paramName: null);
+            ValidateCopyToThrows(
+                (collection, array, index) => ((ICollection)collection).CopyTo(array, index),
+                c =>
+                {
+                    ICollection ic = c;
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => ic.CopyTo(new Oid[4, 3], 0)
+                    );
+                    Assert.Throws<InvalidCastException>(() => ic.CopyTo(new string[10], 0));
+                },
+                paramName: null
+            );
         }
 
         private static void ValidateCopyToThrows(
             Action<OidCollection, Oid[], int> copyTo,
             Action<OidCollection> additionalValidation = null,
-            string paramName = null)
+            string paramName = null
+        )
         {
             var item1 = new Oid(Sha1Oid, Sha1Name);
             var item2 = new Oid(Sha256Oid, Sha256Name);
@@ -121,13 +134,20 @@ namespace System.Security.Cryptography.Tests
             Assert.Throws<ArgumentNullException>(() => copyTo(c, null, 0));
             Assert.Throws<ArgumentNullException>(() => copyTo(c, null, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => copyTo(c, new Oid[10], -1));
-            AssertExtensions.Throws<ArgumentException>(paramName, null, () => copyTo(c, new Oid[10], 7));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                null,
+                () => copyTo(c, new Oid[10], 7)
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => copyTo(c, new Oid[10], 1000));
 
             additionalValidation?.Invoke(c);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public void CopyTo_NonZeroLowerBound_ThrowsIndexOutOfRangeException()
         {
             Oid item = new Oid(Sha1Oid, Sha1Name);
@@ -150,7 +170,8 @@ namespace System.Security.Cryptography.Tests
 
         private static void ValidateEnumerator<TEnumerator, TCurrent>(
             Func<OidCollection, TEnumerator> getEnumerator,
-            Func<TEnumerator, TCurrent> getCurrent)
+            Func<TEnumerator, TCurrent> getCurrent
+        )
             where TEnumerator : IEnumerator
             where TCurrent : class
         {

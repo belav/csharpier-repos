@@ -5,23 +5,24 @@
 namespace System.ServiceModel.Routing
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Channels;
-    using System.Collections.Generic;
+    using System.ServiceModel.Dispatcher;
     using System.Threading;
 
     abstract class RoutingChannelExtension : IExtension<IContextChannel>
     {
-        static AsyncCallback closeChannelsCallback = Fx.ThunkCallback(CloseChannelsCallback);        
+        static AsyncCallback closeChannelsCallback = Fx.ThunkCallback(CloseChannelsCallback);
         static AsyncCallback shutdownCallback = Fx.ThunkCallback(ShutdownCallback);
         IContextChannel channel;
         bool hasSession;
         RoutingBehavior.RoutingEndpointBehavior endpointBehavior;
         RoutingService sessionService;
         volatile SessionChannels sessionChannels;
+
         [Fx.Tag.SynchronizationObject]
         object thisLock;
 
@@ -32,11 +33,7 @@ namespace System.ServiceModel.Routing
             this.thisLock = new object();
         }
 
-        internal Guid ActivityID
-        {
-            get;
-            private set;
-        }
+        internal Guid ActivityID { get; private set; }
 
         public string EndpointName
         {
@@ -53,18 +50,18 @@ namespace System.ServiceModel.Routing
             get { return this.endpointBehavior.ImpersonationRequired; }
         }
 
-        public TimeSpan OperationTimeout
-        {
-            get;
-            private set;
-        }
+        public TimeSpan OperationTimeout { get; private set; }
 
         public bool ReceiveContextEnabled
         {
             get { return this.endpointBehavior.ReceiveContextEnabled; }
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "get_SessionChannels is called by RoutingService..ctor")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "get_SessionChannels is called by RoutingService..ctor"
+        )]
         public SessionChannels SessionChannels
         {
             get
@@ -75,7 +72,10 @@ namespace System.ServiceModel.Routing
                     {
                         if (this.sessionChannels == null)
                         {
-                            Fx.AssertAndThrow(!(this.ImpersonationRequired && !this.HasSession), "Shouldn't allocate SessionChannels if session-less and impersonating");
+                            Fx.AssertAndThrow(
+                                !(this.ImpersonationRequired && !this.HasSession),
+                                "Shouldn't allocate SessionChannels if session-less and impersonating"
+                            );
                             this.sessionChannels = new SessionChannels(this.ActivityID);
                         }
                     }
@@ -89,7 +89,11 @@ namespace System.ServiceModel.Routing
             get { return this.endpointBehavior.TransactedReceiveEnabled; }
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "AttachService is called by RoutingService..ctor")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "AttachService is called by RoutingService..ctor"
+        )]
         public void AttachService(RoutingService service)
         {
             SessionChannels channelsToClose = null;
@@ -103,7 +107,10 @@ namespace System.ServiceModel.Routing
                         oldConfig = this.sessionService.RoutingConfig;
                     }
 
-                    if (oldConfig != null && !object.ReferenceEquals(service.RoutingConfig, oldConfig))
+                    if (
+                        oldConfig != null
+                        && !object.ReferenceEquals(service.RoutingConfig, oldConfig)
+                    )
                     {
                         //The RoutingConfiguration has changed.  We need to release any old channels that are cached.
                         channelsToClose = this.sessionChannels;
@@ -112,18 +119,30 @@ namespace System.ServiceModel.Routing
                 }
                 else
                 {
-                    Fx.Assert(this.sessionService == null, "There must only be one RoutingService created for a sessionful channel");
+                    Fx.Assert(
+                        this.sessionService == null,
+                        "There must only be one RoutingService created for a sessionful channel"
+                    );
                 }
                 this.sessionService = service;
             }
 
             if (channelsToClose != null)
             {
-                channelsToClose.BeginClose(this.channel.OperationTimeout, closeChannelsCallback, channelsToClose);
+                channelsToClose.BeginClose(
+                    this.channel.OperationTimeout,
+                    closeChannelsCallback,
+                    channelsToClose
+                );
             }
         }
 
-        public abstract IAsyncResult BeginShutdown(RoutingService service, TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginShutdown(
+            RoutingService service,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         static void CloseChannelsCallback(IAsyncResult asyncResult)
         {
@@ -177,7 +196,9 @@ namespace System.ServiceModel.Routing
             this.channel.Close();
         }
 
-        public static RoutingChannelExtension Create(RoutingBehavior.RoutingEndpointBehavior endpointBehavior)
+        public static RoutingChannelExtension Create(
+            RoutingBehavior.RoutingEndpointBehavior endpointBehavior
+        )
         {
             Type contractType = endpointBehavior.Endpoint.Contract.ContractType;
             if (contractType == typeof(IDuplexSessionRouter))
@@ -194,7 +215,10 @@ namespace System.ServiceModel.Routing
             }
             else
             {
-                Fx.Assert(contractType == typeof(ISimplexSessionRouter), "Was a new contract added?");
+                Fx.Assert(
+                    contractType == typeof(ISimplexSessionRouter),
+                    "Was a new contract added?"
+                );
                 return new RoutingChannelExtension<ISimplexSessionRouter>(endpointBehavior);
             }
         }
@@ -206,7 +230,12 @@ namespace System.ServiceModel.Routing
             {
                 if (this.sessionService != null)
                 {
-                    IAsyncResult result = this.BeginShutdown(this.sessionService, closeTimeout, shutdownCallback, this);
+                    IAsyncResult result = this.BeginShutdown(
+                        this.sessionService,
+                        closeTimeout,
+                        shutdownCallback,
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         this.ShutdownComplete(result);
@@ -234,7 +263,9 @@ namespace System.ServiceModel.Routing
             FxTrace.Trace.SetAndTraceTransfer(this.ActivityID, true);
 
             //Notify the error handlers that a problem occurred
-            foreach (IErrorHandler errorHandler in this.endpointBehavior.ChannelDispatcher.ErrorHandlers)
+            foreach (
+                IErrorHandler errorHandler in this.endpointBehavior.ChannelDispatcher.ErrorHandlers
+            )
             {
                 if (errorHandler.HandleError(exception))
                 {
@@ -264,19 +295,20 @@ namespace System.ServiceModel.Routing
             this.OperationTimeout = owner.OperationTimeout;
         }
 
-        void IExtension<IContextChannel>.Detach(IContextChannel owner)
-        {
-        }
+        void IExtension<IContextChannel>.Detach(IContextChannel owner) { }
     }
 
     sealed class RoutingChannelExtension<T> : RoutingChannelExtension
     {
         public RoutingChannelExtension(RoutingBehavior.RoutingEndpointBehavior endpointBehavior)
-            : base(endpointBehavior)
-        {
-        }
+            : base(endpointBehavior) { }
 
-        public override IAsyncResult BeginShutdown(RoutingService service, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginShutdown(
+            RoutingService service,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ProcessMessagesAsyncResult<T>(null, service, timeout, callback, state);
         }

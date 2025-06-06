@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Components;
 
 internal readonly struct PersistComponentStateRegistration(
     Func<Task> callback,
-    IComponentRenderMode? renderMode)
+    IComponentRenderMode? renderMode
+)
 {
     public Func<Task> Callback { get; } = callback;
 

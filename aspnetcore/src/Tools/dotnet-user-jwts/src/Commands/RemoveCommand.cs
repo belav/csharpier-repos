@@ -10,28 +10,41 @@ internal sealed class RemoveCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command("remove", cmd =>
-        {
-            cmd.Description = Resources.RemoveCommand_Description;
-
-            var idArgument = cmd.Argument("[id]", Resources.RemoveCommand_IdArgument_Description);
-            cmd.HelpOption("-h|--help");
-
-            cmd.OnExecute(() =>
+        app.Command(
+            "remove",
+            cmd =>
             {
-                if (idArgument.Value is null)
+                cmd.Description = Resources.RemoveCommand_Description;
+
+                var idArgument = cmd.Argument(
+                    "[id]",
+                    Resources.RemoveCommand_IdArgument_Description
+                );
+                cmd.HelpOption("-h|--help");
+
+                cmd.OnExecute(() =>
                 {
-                    cmd.ShowHelp();
-                    return 0;
-                }
-                return Execute(cmd.Reporter, cmd.ProjectOption.Value(), idArgument.Value);
-            });
-        });
+                    if (idArgument.Value is null)
+                    {
+                        cmd.ShowHelp();
+                        return 0;
+                    }
+                    return Execute(cmd.Reporter, cmd.ProjectOption.Value(), idArgument.Value);
+                });
+            }
+        );
     }
 
     private static int Execute(IReporter reporter, string projectPath, string id)
     {
-        if (!DevJwtCliHelpers.GetProjectAndSecretsId(projectPath, reporter, out var project, out var userSecretsId))
+        if (
+            !DevJwtCliHelpers.GetProjectAndSecretsId(
+                projectPath,
+                reporter,
+                out var project,
+                out var userSecretsId
+            )
+        )
         {
             return 1;
         }
@@ -43,7 +56,10 @@ internal sealed class RemoveCommand
             return 1;
         }
 
-        var appsettingsFilePath = Path.Combine(Path.GetDirectoryName(project), "appsettings.Development.json");
+        var appsettingsFilePath = Path.Combine(
+            Path.GetDirectoryName(project),
+            "appsettings.Development.json"
+        );
         JwtAuthenticationSchemeSettings.RemoveScheme(appsettingsFilePath, jwt.Scheme);
         jwtStore.Jwts.Remove(id);
         jwtStore.Save();

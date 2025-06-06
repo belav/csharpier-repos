@@ -24,7 +24,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal IntMinMaxAggregationOperator(IEnumerable<int> child, int sign) : base(child)
+        internal IntMinMaxAggregationOperator(IEnumerable<int> child, int sign)
+            : base(child)
         {
             Debug.Assert(sign == -1 || sign == 1, "invalid sign");
             _sign = sign;
@@ -44,7 +45,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<int> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<int> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Throw an error for empty results.
                 if (!enumerator.MoveNext())
@@ -88,9 +94,19 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<int, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<int, TKey> source, object? sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<int, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new IntMinMaxAggregationOperatorEnumerator<TKey>(source, index, _sign, cancellationToken);
+            return new IntMinMaxAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                _sign,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -98,7 +114,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class IntMinMaxAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<int>
+        private sealed class IntMinMaxAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<int>
         {
             private readonly QueryOperatorEnumerator<int, TKey> _source; // The source data.
             private readonly int _sign; // The sign for comparisons (-1 means min, 1 means max).
@@ -107,9 +124,13 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal IntMinMaxAggregationOperatorEnumerator(QueryOperatorEnumerator<int, TKey> source, int partitionIndex, int sign,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal IntMinMaxAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<int, TKey> source,
+                int partitionIndex,
+                int sign,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

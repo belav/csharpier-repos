@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.Debugging
     {
         Design,
         Break,
-        Run
+        Run,
     }
 }

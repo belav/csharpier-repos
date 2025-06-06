@@ -11,11 +11,22 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
 {
     internal abstract class AbstractSingleChangeSnippetProvider : AbstractSnippetProvider
     {
-        protected abstract Task<TextChange> GenerateSnippetTextChangeAsync(Document document, int position, CancellationToken cancellationToken);
+        protected abstract Task<TextChange> GenerateSnippetTextChangeAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
-        protected sealed override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(Document document, int position, CancellationToken cancellationToken)
+        protected sealed override async Task<
+            ImmutableArray<TextChange>
+        > GenerateSnippetTextChangesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var change = await GenerateSnippetTextChangeAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var change = await GenerateSnippetTextChangeAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             return ImmutableArray.Create(change);
         }
     }

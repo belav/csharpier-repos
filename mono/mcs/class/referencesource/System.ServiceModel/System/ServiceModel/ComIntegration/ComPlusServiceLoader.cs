@@ -4,10 +4,10 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Description;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
-    using System.Diagnostics;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
 
     class ComPlusServiceLoader
@@ -16,13 +16,13 @@ namespace System.ServiceModel.ComIntegration
         ConfigLoader configLoader;
         ComPlusTypeLoader typeLoader;
 
-        public ComPlusServiceLoader (ServiceInfo info)
+        public ComPlusServiceLoader(ServiceInfo info)
         {
             this.info = info;
             this.typeLoader = new ComPlusTypeLoader(info);
             this.configLoader = new ConfigLoader(typeLoader);
         }
-        
+
         public ServiceDescription Load(ServiceHostBase host)
         {
             ServiceDescription service = new ServiceDescription(this.info.ServiceName);
@@ -30,16 +30,25 @@ namespace System.ServiceModel.ComIntegration
             // ServiceBehaviorAttribute needs to go first in the behaviors collection (before config stuff)
             AddBehaviors(service);
 
-            this.configLoader.LoadServiceDescription(host, service, this.info.ServiceElement, host.LoadConfigurationSectionHelper);
+            this.configLoader.LoadServiceDescription(
+                host,
+                service,
+                this.info.ServiceElement,
+                host.LoadConfigurationSectionHelper
+            );
 
             ValidateConfigInstanceSettings(service);
 
-            ComPlusServiceHostTrace.Trace(TraceEventType.Information, TraceCode.ComIntegrationServiceHostCreatedServiceEndpoint,
-                                SR.TraceCodeComIntegrationServiceHostCreatedServiceEndpoint,  this.info, service.Endpoints);            
+            ComPlusServiceHostTrace.Trace(
+                TraceEventType.Information,
+                TraceCode.ComIntegrationServiceHostCreatedServiceEndpoint,
+                SR.TraceCodeComIntegrationServiceHostCreatedServiceEndpoint,
+                this.info,
+                service.Endpoints
+            );
 
             return service;
         }
-
 
         void AddBehaviors(ServiceDescription service)
         {
@@ -47,7 +56,7 @@ namespace System.ServiceModel.ComIntegration
             // At the moment, none of the settings we care about can be modified
             // through configuration. That may change in the future.
             // However, we never want to silently overwrite a user's configuration.
-            // So we should either accept overrides or reject them, but never 
+            // So we should either accept overrides or reject them, but never
             // silently update them.
             //
 
@@ -65,10 +74,12 @@ namespace System.ServiceModel.ComIntegration
 
             if (AspNetEnvironment.Enabled)
             {
-                AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements = service.Behaviors.Find<AspNetCompatibilityRequirementsAttribute>();
+                AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements =
+                    service.Behaviors.Find<AspNetCompatibilityRequirementsAttribute>();
                 if (aspNetCompatibilityRequirements == null)
                 {
-                    aspNetCompatibilityRequirements = new AspNetCompatibilityRequirementsAttribute();
+                    aspNetCompatibilityRequirements =
+                        new AspNetCompatibilityRequirementsAttribute();
                     service.Behaviors.Add(aspNetCompatibilityRequirements);
                 }
             }
@@ -79,7 +90,8 @@ namespace System.ServiceModel.ComIntegration
             ServiceBehaviorAttribute serviceBehavior;
             if (service.Behaviors.Contains(typeof(ServiceBehaviorAttribute)))
             {
-                serviceBehavior = (ServiceBehaviorAttribute)service.Behaviors[typeof(ServiceBehaviorAttribute)];
+                serviceBehavior = (ServiceBehaviorAttribute)
+                    service.Behaviors[typeof(ServiceBehaviorAttribute)];
             }
             else
             {
@@ -100,14 +112,18 @@ namespace System.ServiceModel.ComIntegration
                     if (endpoint.Contract.SessionMode == SessionMode.Required)
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerCall)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements()
+                            );
 
                         serviceBehavior.InstanceContextMode = InstanceContextMode.PerSession;
                     }
                     else
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerSession)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements()
+                            );
 
                         serviceBehavior.InstanceContextMode = InstanceContextMode.PerCall;
                     }

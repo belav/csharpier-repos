@@ -95,6 +95,6 @@ namespace System.ServiceModel.Diagnostics
         TransportAuthenticationSuccess = 0x40060007,
         TransportAuthenticationFailure = 0xC0060008,
         ImpersonationSuccess = 0x40060009,
-        ImpersonationFailure = 0xC006000A
+        ImpersonationFailure = 0xC006000A,
     }
 }

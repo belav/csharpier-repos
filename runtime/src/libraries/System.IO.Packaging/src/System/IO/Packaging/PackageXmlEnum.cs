@@ -33,6 +33,6 @@ namespace System.IO.Packaging
         LastModifiedBy,
         ContentStatus,
         Revision,
-        LastPrinted
+        LastPrinted,
     }
 }

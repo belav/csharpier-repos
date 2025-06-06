@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 public struct AA
 {
     static void f()
@@ -18,6 +19,7 @@ public struct AA
         }
         do { } while (flag);
     }
+
     [Fact]
     public static void TestEntryPoint()
     {

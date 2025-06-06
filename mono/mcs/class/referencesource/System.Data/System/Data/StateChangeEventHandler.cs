@@ -6,7 +6,8 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
 
     public delegate void StateChangeEventHandler(object sender, StateChangeEventArgs e);

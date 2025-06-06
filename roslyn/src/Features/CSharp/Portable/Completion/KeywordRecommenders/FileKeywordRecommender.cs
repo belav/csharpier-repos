@@ -13,18 +13,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders;
 
 internal class FileKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
 {
-    private static readonly ISet<SyntaxKind> s_validModifiers = SyntaxKindSet.AllMemberModifiers
-        .Where(s => s != SyntaxKind.FileKeyword && !SyntaxFacts.IsAccessibilityModifier(s))
+    private static readonly ISet<SyntaxKind> s_validModifiers = SyntaxKindSet
+        .AllMemberModifiers.Where(s =>
+            s != SyntaxKind.FileKeyword && !SyntaxFacts.IsAccessibilityModifier(s)
+        )
         .ToSet();
 
     public FileKeywordRecommender()
-        : base(SyntaxKind.FileKeyword)
-    {
-    }
+        : base(SyntaxKind.FileKeyword) { }
 
-    protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+    protected override bool IsValidContext(
+        int position,
+        CSharpSyntaxContext context,
+        CancellationToken cancellationToken
+    )
     {
         return context.ContainingTypeDeclaration == null
-            && context.IsTypeDeclarationContext(s_validModifiers, SyntaxKindSet.AllTypeDeclarations, canBePartial: true, cancellationToken);
+            && context.IsTypeDeclarationContext(
+                s_validModifiers,
+                SyntaxKindSet.AllTypeDeclarations,
+                canBePartial: true,
+                cancellationToken
+            );
     }
 }

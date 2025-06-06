@@ -18,7 +18,8 @@ internal ref struct FormatterBinaryWriter
     // note it also has APIs for writing raw BLOBs
 
     private readonly IBufferWriter<byte> target;
-    private int offset, length;
+    private int offset,
+        length;
     private ref byte root;
 
     public FormatterBinaryWriter(IBufferWriter<byte> target)
@@ -55,7 +56,6 @@ internal ref struct FormatterBinaryWriter
             Debug.Assert(offset >= 0 && offset <= length);
             Debug.Assert(length > 0);
         }
-
     }
 
     // Writes a byte to this stream. The current position of the stream is
@@ -117,7 +117,8 @@ internal ref struct FormatterBinaryWriter
         root = ref MemoryMarshal.GetReference(span);
 
         DebugAssertValid();
-        static void Throw() => throw new InvalidOperationException("Unable to acquire non-empty write buffer");
+        static void Throw() =>
+            throw new InvalidOperationException("Unable to acquire non-empty write buffer");
     }
 
     public void Flush() // commits the current buffer and leave in a buffer-free state
@@ -177,8 +178,7 @@ internal ref struct FormatterBinaryWriter
 
     public void WriteRaw(scoped ReadOnlySpan<byte> value)
     {
-        if (value.IsEmpty)
-        { } // nothing to do
+        if (value.IsEmpty) { } // nothing to do
         else if ((offset + value.Length) <= length)
         {
             value.CopyTo(AvailableBuffer);
@@ -201,7 +201,6 @@ internal ref struct FormatterBinaryWriter
             value.Slice(start: 0, length: toWrite).CopyTo(available);
             offset += toWrite;
             value = value.Slice(start: toWrite);
-        }
-        while (!value.IsEmpty);
+        } while (!value.IsEmpty);
     }
 }

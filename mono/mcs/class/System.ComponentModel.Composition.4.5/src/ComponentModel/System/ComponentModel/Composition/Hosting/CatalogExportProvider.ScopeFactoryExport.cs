@@ -17,8 +17,13 @@ namespace System.ComponentModel.Composition.Hosting
             private readonly ScopeManager _scopeManager;
             private readonly CompositionScopeDefinition _catalog;
 
-            internal ScopeFactoryExport(ScopeManager scopeManager, CompositionScopeDefinition catalog, ComposablePartDefinition partDefinition, ExportDefinition exportDefinition) :
-                base(partDefinition, exportDefinition)
+            internal ScopeFactoryExport(
+                ScopeManager scopeManager,
+                CompositionScopeDefinition catalog,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition exportDefinition
+            )
+                : base(partDefinition, exportDefinition)
             {
                 this._scopeManager = scopeManager;
                 this._catalog = catalog;
@@ -42,7 +47,10 @@ namespace System.ComponentModel.Composition.Hosting
                 private Export _export;
                 private readonly object _lock = new object();
 
-                public ScopeCatalogExport(ScopeFactoryExport scopeFactoryExport, Func<ComposablePartDefinition, bool> catalogFilter)
+                public ScopeCatalogExport(
+                    ScopeFactoryExport scopeFactoryExport,
+                    Func<ComposablePartDefinition, bool> catalogFilter
+                )
                 {
                     this._scopeFactoryExport = scopeFactoryExport;
                     this._catalogFilter = catalogFilter;
@@ -50,10 +58,7 @@ namespace System.ComponentModel.Composition.Hosting
 
                 public override ExportDefinition Definition
                 {
-                    get
-                    {
-                        return this._scopeFactoryExport.UnderlyingExportDefinition;
-                    }
+                    get { return this._scopeFactoryExport.UnderlyingExportDefinition; }
                 }
 
                 protected override object GetExportedValueCore()
@@ -62,11 +67,23 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         // Need to create a new scopedefinition that is filtered by the ExportProvider
                         var filteredScopeDefinition = new CompositionScopeDefinition(
-                            new FilteredCatalog(this._scopeFactoryExport._catalog, this._catalogFilter), 
-                            this._scopeFactoryExport._catalog.Children);
-                        var childContainer = this._scopeFactoryExport._scopeManager.CreateChildContainer(filteredScopeDefinition);
+                            new FilteredCatalog(
+                                this._scopeFactoryExport._catalog,
+                                this._catalogFilter
+                            ),
+                            this._scopeFactoryExport._catalog.Children
+                        );
+                        var childContainer =
+                            this._scopeFactoryExport._scopeManager.CreateChildContainer(
+                                filteredScopeDefinition
+                            );
 
-                        var export = childContainer.CatalogExportProvider.CreateExport(this._scopeFactoryExport.UnderlyingPartDefinition, this._scopeFactoryExport.UnderlyingExportDefinition, false, CreationPolicy.Any);
+                        var export = childContainer.CatalogExportProvider.CreateExport(
+                            this._scopeFactoryExport.UnderlyingPartDefinition,
+                            this._scopeFactoryExport.UnderlyingExportDefinition,
+                            false,
+                            CreationPolicy.Any
+                        );
                         lock (this._lock)
                         {
                             if (this._export == null)
@@ -106,7 +123,7 @@ namespace System.ComponentModel.Composition.Hosting
                         }
                     }
 
-                    if(childContainer != null)
+                    if (childContainer != null)
                     {
                         childContainer.Dispose();
                     }

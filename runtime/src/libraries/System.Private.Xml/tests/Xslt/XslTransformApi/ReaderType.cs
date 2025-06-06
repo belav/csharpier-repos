@@ -5,6 +5,10 @@ namespace System.Xml.Tests
 {
     public enum ReaderType
     {
-        XmlTextReader, XmlNodeReader, XmlValidatingReader, XsltReader, Unknown
+        XmlTextReader,
+        XmlNodeReader,
+        XmlValidatingReader,
+        XsltReader,
+        Unknown,
     }
 }

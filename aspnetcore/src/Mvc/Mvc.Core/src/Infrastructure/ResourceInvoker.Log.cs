@@ -33,7 +33,10 @@ internal partial class ResourceInvoker
                     }
                     else
                     {
-                        stringBuilder.Append(CultureInfo.InvariantCulture, $"{key} = \"{value}\", ");
+                        stringBuilder.Append(
+                            CultureInfo.InvariantCulture,
+                            $"{key} = \"{value}\", "
+                        );
                     }
                     index++;
                 }
@@ -54,7 +57,8 @@ internal partial class ResourceInvoker
                             stringBuilder.ToString(),
                             controllerActionDescriptor.MethodInfo,
                             controllerName,
-                            controllerType.Assembly.GetName().Name);
+                            controllerType.Assembly.GetName().Name
+                        );
                     }
                     else
                     {
@@ -64,22 +68,75 @@ internal partial class ResourceInvoker
             }
         }
 
-        [LoggerMessage(101, LogLevel.Information, "Route matched with {RouteData}. Executing action {ActionName}", EventName = "ActionExecuting", SkipEnabledCheck = true)]
-        private static partial void ActionExecuting(ILogger logger, string routeData, string? actionName);
+        [LoggerMessage(
+            101,
+            LogLevel.Information,
+            "Route matched with {RouteData}. Executing action {ActionName}",
+            EventName = "ActionExecuting",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ActionExecuting(
+            ILogger logger,
+            string routeData,
+            string? actionName
+        );
 
-        [LoggerMessage(102, LogLevel.Information, "Route matched with {RouteData}. Executing controller action with signature {MethodInfo} on controller {Controller} ({AssemblyName}).", EventName = "ControllerActionExecuting", SkipEnabledCheck = true)]
-        private static partial void ControllerActionExecuting(ILogger logger, string routeData, MethodInfo methodInfo, string controller, string? assemblyName);
+        [LoggerMessage(
+            102,
+            LogLevel.Information,
+            "Route matched with {RouteData}. Executing controller action with signature {MethodInfo} on controller {Controller} ({AssemblyName}).",
+            EventName = "ControllerActionExecuting",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ControllerActionExecuting(
+            ILogger logger,
+            string routeData,
+            MethodInfo methodInfo,
+            string controller,
+            string? assemblyName
+        );
 
-        [LoggerMessage(103, LogLevel.Information, "Route matched with {RouteData}. Executing page {PageName}", EventName = "PageExecuting", SkipEnabledCheck = true)]
-        private static partial void PageExecuting(ILogger logger, string routeData, string? pageName);
+        [LoggerMessage(
+            103,
+            LogLevel.Information,
+            "Route matched with {RouteData}. Executing page {PageName}",
+            EventName = "PageExecuting",
+            SkipEnabledCheck = true
+        )]
+        private static partial void PageExecuting(
+            ILogger logger,
+            string routeData,
+            string? pageName
+        );
 
-        [LoggerMessage(3, LogLevel.Information, "Authorization failed for the request at filter '{AuthorizationFilter}'.", EventName = "AuthorizationFailure")]
-        public static partial void AuthorizationFailure(ILogger logger, IFilterMetadata authorizationFilter);
+        [LoggerMessage(
+            3,
+            LogLevel.Information,
+            "Authorization failed for the request at filter '{AuthorizationFilter}'.",
+            EventName = "AuthorizationFailure"
+        )]
+        public static partial void AuthorizationFailure(
+            ILogger logger,
+            IFilterMetadata authorizationFilter
+        );
 
-        [LoggerMessage(4, LogLevel.Debug, "Request was short circuited at resource filter '{ResourceFilter}'.", EventName = "ResourceFilterShortCircuit")]
-        public static partial void ResourceFilterShortCircuited(ILogger logger, IFilterMetadata resourceFilter);
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "Request was short circuited at resource filter '{ResourceFilter}'.",
+            EventName = "ResourceFilterShortCircuit"
+        )]
+        public static partial void ResourceFilterShortCircuited(
+            ILogger logger,
+            IFilterMetadata resourceFilter
+        );
 
-        [LoggerMessage(5, LogLevel.Trace, "Before executing action result {ActionResult}.", EventName = "BeforeExecutingActionResult")]
+        [LoggerMessage(
+            5,
+            LogLevel.Trace,
+            "Before executing action result {ActionResult}.",
+            EventName = "BeforeExecutingActionResult"
+        )]
         private static partial void BeforeExecutingActionResult(ILogger logger, Type actionResult);
 
         public static void BeforeExecutingActionResult(ILogger logger, IActionResult actionResult)
@@ -87,7 +144,12 @@ internal partial class ResourceInvoker
             BeforeExecutingActionResult(logger, actionResult.GetType());
         }
 
-        [LoggerMessage(6, LogLevel.Trace, "After executing action result {ActionResult}.", EventName = "AfterExecutingActionResult")]
+        [LoggerMessage(
+            6,
+            LogLevel.Trace,
+            "After executing action result {ActionResult}.",
+            EventName = "AfterExecutingActionResult"
+        )]
         private static partial void AfterExecutingActionResult(ILogger logger, Type actionResult);
 
         public static void AfterExecutingActionResult(ILogger logger, IActionResult actionResult)
@@ -95,7 +157,11 @@ internal partial class ResourceInvoker
             AfterExecutingActionResult(logger, actionResult.GetType());
         }
 
-        public static void ExecutedAction(ILogger logger, ActionDescriptor action, TimeSpan timeSpan)
+        public static void ExecutedAction(
+            ILogger logger,
+            ActionDescriptor action,
+            TimeSpan timeSpan
+        )
         {
             // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
             if (logger.IsEnabled(LogLevel.Information))
@@ -111,10 +177,30 @@ internal partial class ResourceInvoker
             }
         }
 
-        [LoggerMessage(104, LogLevel.Information, "Executed page {PageName} in {ElapsedMilliseconds}ms", EventName = "PageExecuted", SkipEnabledCheck = true)]
-        private static partial void PageExecuted(ILogger logger, string? pageName, double elapsedMilliseconds);
+        [LoggerMessage(
+            104,
+            LogLevel.Information,
+            "Executed page {PageName} in {ElapsedMilliseconds}ms",
+            EventName = "PageExecuted",
+            SkipEnabledCheck = true
+        )]
+        private static partial void PageExecuted(
+            ILogger logger,
+            string? pageName,
+            double elapsedMilliseconds
+        );
 
-        [LoggerMessage(105, LogLevel.Information, "Executed action {ActionName} in {ElapsedMilliseconds}ms", EventName = "ActionExecuted", SkipEnabledCheck = true)]
-        private static partial void ActionExecuted(ILogger logger, string? actionName, double elapsedMilliseconds);
+        [LoggerMessage(
+            105,
+            LogLevel.Information,
+            "Executed action {ActionName} in {ElapsedMilliseconds}ms",
+            EventName = "ActionExecuted",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ActionExecuted(
+            ILogger logger,
+            string? actionName,
+            double elapsedMilliseconds
+        );
     }
 }

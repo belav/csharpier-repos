@@ -22,7 +22,10 @@ namespace System.Security.Cryptography.Pkcs
             _recipients.Add(recipient);
         }
 
-        public CmsRecipientCollection(SubjectIdentifierType recipientIdentifierType, X509Certificate2Collection certificates)
+        public CmsRecipientCollection(
+            SubjectIdentifierType recipientIdentifierType,
+            X509Certificate2Collection certificates
+        )
         {
             if (certificates == null)
                 throw new NullReferenceException(); //Desktop compat: this is the wrong exception to throw but it is the compatible one.
@@ -39,7 +42,10 @@ namespace System.Security.Cryptography.Pkcs
             get
             {
                 if (index < 0 || index >= _recipients.Count)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexMustBeLess
+                    );
 
                 return _recipients[index];
             }
@@ -47,10 +53,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public int Count
         {
-            get
-            {
-                return _recipients.Count;
-            }
+            get { return _recipients.Count; }
         }
 
         public int Add(CmsRecipient recipient)
@@ -95,7 +98,10 @@ namespace System.Security.Cryptography.Pkcs
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index > array.Length - Count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -114,7 +120,10 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index > array.Length - Count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -123,18 +132,12 @@ namespace System.Security.Cryptography.Pkcs
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         private readonly List<CmsRecipient> _recipients;

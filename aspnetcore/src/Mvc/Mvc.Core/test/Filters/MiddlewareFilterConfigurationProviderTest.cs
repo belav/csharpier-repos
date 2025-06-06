@@ -21,10 +21,15 @@ public class MiddlewareFilterConfigurationProviderTest
         var provider = new MiddlewareFilterConfigurationProvider();
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(configurationType));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(configurationType)
+        );
 
         // Assert
-        Assert.Equal($"Unable to create an instance of type '{configurationType}'. The type specified in configurationType must not be abstract and must have a parameterless constructor.", exception.Message);
+        Assert.Equal(
+            $"Unable to create an instance of type '{configurationType}'. The type specified in configurationType must not be abstract and must have a parameterless constructor.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -34,7 +39,9 @@ public class MiddlewareFilterConfigurationProviderTest
         var provider = new MiddlewareFilterConfigurationProvider();
 
         // Act
-        var configureDelegate = MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(typeof(ValidConfigure_WithNoEnvironment));
+        var configureDelegate = MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(
+            typeof(ValidConfigure_WithNoEnvironment)
+        );
 
         // Assert
         Assert.NotNull(configureDelegate);
@@ -52,7 +59,9 @@ public class MiddlewareFilterConfigurationProviderTest
         var provider = new MiddlewareFilterConfigurationProvider();
 
         // Act
-        var configureDelegate = MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(typeof(ValidConfigure_WithNoEnvironment_AdditionalServices));
+        var configureDelegate = MiddlewareFilterConfigurationProvider.CreateConfigureDelegate(
+            typeof(ValidConfigure_WithNoEnvironment_AdditionalServices)
+        );
 
         // Assert
         Assert.NotNull(configureDelegate);
@@ -64,7 +73,8 @@ public class MiddlewareFilterConfigurationProviderTest
         // Arrange
         var type = typeof(InvalidType_NoConfigure);
         var provider = new MiddlewareFilterConfigurationProvider();
-        var expected = $"A public method named 'Configure' could not be found in the '{type.FullName}' type.";
+        var expected =
+            $"A public method named 'Configure' could not be found in the '{type.FullName}' type.";
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
@@ -80,7 +90,8 @@ public class MiddlewareFilterConfigurationProviderTest
         // Arrange
         var type = typeof(InvalidType_NoPublic_Configure);
         var provider = new MiddlewareFilterConfigurationProvider();
-        var expected = $"A public method named 'Configure' could not be found in the '{type.FullName}' type.";
+        var expected =
+            $"A public method named 'Configure' could not be found in the '{type.FullName}' type.";
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() =>
@@ -99,9 +110,7 @@ public class MiddlewareFilterConfigurationProviderTest
         var serviceProvider = services.BuildServiceProvider();
 
         var applicationBuilder = new Mock<IApplicationBuilder>();
-        applicationBuilder
-            .SetupGet(a => a.ApplicationServices)
-            .Returns(serviceProvider);
+        applicationBuilder.SetupGet(a => a.ApplicationServices).Returns(serviceProvider);
 
         return applicationBuilder.Object;
     }
@@ -116,7 +125,8 @@ public class MiddlewareFilterConfigurationProviderTest
         public void Configure(
             IApplicationBuilder appBuilder,
             IWebHostEnvironment hostingEnvironment,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             ArgumentNullException.ThrowIfNull(hostingEnvironment);
             ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -133,7 +143,8 @@ public class MiddlewareFilterConfigurationProviderTest
         public void ConfigureProduction(
             IApplicationBuilder appBuilder,
             IWebHostEnvironment hostingEnvironment,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory
+        )
         {
             ArgumentNullException.ThrowIfNull(hostingEnvironment);
             ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -142,49 +153,30 @@ public class MiddlewareFilterConfigurationProviderTest
 
     private class MultipleConfigureWithEnvironments
     {
-        public void ConfigureDevelopment(IApplicationBuilder appBuilder)
-        {
+        public void ConfigureDevelopment(IApplicationBuilder appBuilder) { }
 
-        }
-
-        public void ConfigureProduction(IApplicationBuilder appBuilder)
-        {
-
-        }
+        public void ConfigureProduction(IApplicationBuilder appBuilder) { }
     }
 
     private class InvalidConfigure_NoParameters
     {
-        public void Configure()
-        {
-
-        }
+        public void Configure() { }
     }
 
     private class InvalidType_NoConfigure
     {
-        public void Foo(IApplicationBuilder appBuilder)
-        {
-
-        }
+        public void Foo(IApplicationBuilder appBuilder) { }
     }
 
     private class InvalidType_NoPublic_Configure
     {
-        private void Configure(IApplicationBuilder appBuilder)
-        {
-
-        }
+        private void Configure(IApplicationBuilder appBuilder) { }
     }
 
-    private abstract class AbstractType
-    {
-    }
+    private abstract class AbstractType { }
 
     private class NoParameterlessConstructor
     {
-        public NoParameterlessConstructor(object a)
-        {
-        }
+        public NoParameterlessConstructor(object a) { }
     }
 }

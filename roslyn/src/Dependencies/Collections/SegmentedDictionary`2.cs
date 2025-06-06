@@ -29,14 +29,17 @@ namespace Microsoft.CodeAnalysis.Collections
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class SegmentedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IDictionary, IReadOnlyDictionary<TKey, TValue>
+    internal sealed class SegmentedDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+            IDictionary,
+            IReadOnlyDictionary<TKey, TValue>
         where TKey : notnull
     {
         private const bool SupportsComparerDevirtualization
 #if NETCOREAPP
-            = true;
+        = true;
 #else
-            = false;
+        = false;
 #endif
 
         private SegmentedArray<int> _buckets;
@@ -46,6 +49,7 @@ namespace Microsoft.CodeAnalysis.Collections
         private int _freeList;
         private int _freeCount;
         private int _version;
+
 #if NETCOREAPP
         private readonly IEqualityComparer<TKey>? _comparer;
 #else
@@ -60,19 +64,13 @@ namespace Microsoft.CodeAnalysis.Collections
         private const int StartOfFreeList = -3;
 
         public SegmentedDictionary()
-            : this(0, null)
-        {
-        }
+            : this(0, null) { }
 
         public SegmentedDictionary(int capacity)
-            : this(capacity, null)
-        {
-        }
+            : this(capacity, null) { }
 
         public SegmentedDictionary(IEqualityComparer<TKey>? comparer)
-            : this(0, comparer)
-        {
-        }
+            : this(0, comparer) { }
 
         public SegmentedDictionary(int capacity, IEqualityComparer<TKey>? comparer)
         {
@@ -98,11 +96,12 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         public SegmentedDictionary(IDictionary<TKey, TValue> dictionary)
-            : this(dictionary, null)
-        {
-        }
+            : this(dictionary, null) { }
 
-        public SegmentedDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey>? comparer)
+        public SegmentedDictionary(
+            IDictionary<TKey, TValue> dictionary,
+            IEqualityComparer<TKey>? comparer
+        )
             : this(dictionary != null ? dictionary.Count : 0, comparer)
         {
             if (dictionary == null)
@@ -136,11 +135,12 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         public SegmentedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
-            : this(collection, null)
-        {
-        }
+            : this(collection, null) { }
 
-        public SegmentedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey>? comparer)
+        public SegmentedDictionary(
+            IEnumerable<KeyValuePair<TKey, TValue>> collection,
+            IEqualityComparer<TKey>? comparer
+        )
             : this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
         {
             if (collection == null)
@@ -156,10 +156,7 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public IEqualityComparer<TKey> Comparer
         {
-            get
-            {
-                return _comparer ?? EqualityComparer<TKey>.Default;
-            }
+            get { return _comparer ?? EqualityComparer<TKey>.Default; }
         }
 
         public int Count => _count - _freeCount;
@@ -202,13 +199,18 @@ namespace Microsoft.CodeAnalysis.Collections
             Debug.Assert(modified); // If there was an existing key and the Add failed, an exception will already have been thrown.
         }
 
-        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> keyValuePair)
-            => Add(keyValuePair.Key, keyValuePair.Value);
+        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> keyValuePair) =>
+            Add(keyValuePair.Key, keyValuePair.Value);
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> keyValuePair)
+        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(
+            KeyValuePair<TKey, TValue> keyValuePair
+        )
         {
             ref var value = ref FindValue(keyValuePair.Key);
-            if (!RoslynUnsafe.IsNullRef(ref value) && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value))
+            if (
+                !RoslynUnsafe.IsNullRef(ref value)
+                && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value)
+            )
             {
                 return true;
             }
@@ -219,7 +221,10 @@ namespace Microsoft.CodeAnalysis.Collections
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> keyValuePair)
         {
             ref var value = ref FindValue(keyValuePair.Key);
-            if (!RoslynUnsafe.IsNullRef(ref value) && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value))
+            if (
+                !RoslynUnsafe.IsNullRef(ref value)
+                && EqualityComparer<TValue>.Default.Equals(value, keyValuePair.Value)
+            )
             {
                 Remove(keyValuePair.Key);
                 return true;
@@ -245,8 +250,7 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        public bool ContainsKey(TKey key)
-            => !RoslynUnsafe.IsNullRef(ref FindValue(key));
+        public bool ContainsKey(TKey key) => !RoslynUnsafe.IsNullRef(ref FindValue(key));
 
         public bool ContainsValue(TValue value)
         {
@@ -266,7 +270,10 @@ namespace Microsoft.CodeAnalysis.Collections
                 // ValueType: Devirtualize with EqualityComparer<TValue>.Default intrinsic
                 for (var i = 0; i < _count; i++)
                 {
-                    if (entries[i]._next >= -1 && EqualityComparer<TValue>.Default.Equals(entries[i]._value, value))
+                    if (
+                        entries[i]._next >= -1
+                        && EqualityComparer<TValue>.Default.Equals(entries[i]._value, value)
+                    )
                     {
                         return true;
                     }
@@ -313,16 +320,19 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 if (entries[i]._next >= -1)
                 {
-                    array[index++] = new KeyValuePair<TKey, TValue>(entries[i]._key, entries[i]._value);
+                    array[index++] = new KeyValuePair<TKey, TValue>(
+                        entries[i]._key,
+                        entries[i]._value
+                    );
                 }
             }
         }
 
-        public Enumerator GetEnumerator()
-            => new(this, Enumerator.KeyValuePair);
+        public Enumerator GetEnumerator() => new(this, Enumerator.KeyValuePair);
 
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
-            => new Enumerator(this, Enumerator.KeyValuePair);
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator() => new Enumerator(this, Enumerator.KeyValuePair);
 
         private ref TValue FindValue(TKey key)
         {
@@ -357,7 +367,10 @@ namespace Microsoft.CodeAnalysis.Collections
                             }
 
                             entry = ref entries[i];
-                            if (entry._hashCode == hashCode && EqualityComparer<TKey>.Default.Equals(entry._key, key))
+                            if (
+                                entry._hashCode == hashCode
+                                && EqualityComparer<TKey>.Default.Equals(entry._key, key)
+                            )
                             {
                                 goto ReturnFound;
                             }
@@ -389,7 +402,10 @@ namespace Microsoft.CodeAnalysis.Collections
                             }
 
                             entry = ref entries[i];
-                            if (entry._hashCode == hashCode && defaultComparer.Equals(entry._key, key))
+                            if (
+                                entry._hashCode == hashCode
+                                && defaultComparer.Equals(entry._key, key)
+                            )
                             {
                                 goto ReturnFound;
                             }
@@ -439,13 +455,13 @@ namespace Microsoft.CodeAnalysis.Collections
 
             goto ReturnNotFound;
 
-ConcurrentOperation:
+            ConcurrentOperation:
             ThrowHelper.ThrowInvalidOperationException_ConcurrentOperationsNotSupported();
-ReturnFound:
+            ReturnFound:
             ref TValue value = ref entry._value;
-Return:
+            Return:
             return ref value;
-ReturnNotFound:
+            ReturnNotFound:
             value = ref RoslynUnsafe.NullRef<TValue>();
             goto Return;
         }
@@ -482,7 +498,11 @@ ReturnNotFound:
             Debug.Assert(entries.Length > 0, "expected entries to be non-empty");
 
             var comparer = _comparer;
-            var hashCode = (uint)((SupportsComparerDevirtualization && comparer == null) ? key.GetHashCode() : comparer.GetHashCode(key));
+            var hashCode = (uint)(
+                (SupportsComparerDevirtualization && comparer == null)
+                    ? key.GetHashCode()
+                    : comparer.GetHashCode(key)
+            );
 
             uint collisionCount = 0;
             ref var bucket = ref GetBucket(hashCode);
@@ -502,7 +522,10 @@ ReturnNotFound:
                             break;
                         }
 
-                        if (entries[i]._hashCode == hashCode && EqualityComparer<TKey>.Default.Equals(entries[i]._key, key))
+                        if (
+                            entries[i]._hashCode == hashCode
+                            && EqualityComparer<TKey>.Default.Equals(entries[i]._key, key)
+                        )
                         {
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
@@ -544,7 +567,10 @@ ReturnNotFound:
                             break;
                         }
 
-                        if (entries[i]._hashCode == hashCode && defaultComparer.Equals(entries[i]._key, key))
+                        if (
+                            entries[i]._hashCode == hashCode
+                            && defaultComparer.Equals(entries[i]._key, key)
+                        )
                         {
                             if (behavior == InsertionBehavior.OverwriteExisting)
                             {
@@ -615,7 +641,10 @@ ReturnNotFound:
             if (_freeCount > 0)
             {
                 index = _freeList;
-                Debug.Assert((StartOfFreeList - entries[_freeList]._next) >= -1, "shouldn't overflow because `next` cannot underflow");
+                Debug.Assert(
+                    (StartOfFreeList - entries[_freeList]._next) >= -1,
+                    "shouldn't overflow because `next` cannot underflow"
+                );
                 _freeList = StartOfFreeList - entries[_freeList]._next;
                 _freeCount--;
             }
@@ -642,8 +671,7 @@ ReturnNotFound:
             return true;
         }
 
-        private void Resize()
-            => Resize(HashHelpers.ExpandPrime(_count));
+        private void Resize() => Resize(HashHelpers.ExpandPrime(_count));
 
         private void Resize(int newSize)
         {
@@ -695,7 +723,13 @@ ReturnNotFound:
                 {
                     ref var entry = ref entries[i];
 
-                    if (entry._hashCode == hashCode && (_comparer?.Equals(entry._key, key) ?? EqualityComparer<TKey>.Default.Equals(entry._key, key)))
+                    if (
+                        entry._hashCode == hashCode
+                        && (
+                            _comparer?.Equals(entry._key, key)
+                            ?? EqualityComparer<TKey>.Default.Equals(entry._key, key)
+                        )
+                    )
                     {
                         if (last < 0)
                         {
@@ -706,7 +740,10 @@ ReturnNotFound:
                             entries[last]._next = entry._next;
                         }
 
-                        Debug.Assert((StartOfFreeList - _freeList) < 0, "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646");
+                        Debug.Assert(
+                            (StartOfFreeList - _freeList) < 0,
+                            "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646"
+                        );
                         entry._next = StartOfFreeList - _freeList;
 
 #if NETCOREAPP
@@ -767,7 +804,13 @@ ReturnNotFound:
                 {
                     ref var entry = ref entries[i];
 
-                    if (entry._hashCode == hashCode && (_comparer?.Equals(entry._key, key) ?? EqualityComparer<TKey>.Default.Equals(entry._key, key)))
+                    if (
+                        entry._hashCode == hashCode
+                        && (
+                            _comparer?.Equals(entry._key, key)
+                            ?? EqualityComparer<TKey>.Default.Equals(entry._key, key)
+                        )
+                    )
                     {
                         if (last < 0)
                         {
@@ -780,7 +823,10 @@ ReturnNotFound:
 
                         value = entry._value;
 
-                        Debug.Assert((StartOfFreeList - _freeList) < 0, "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646");
+                        Debug.Assert(
+                            (StartOfFreeList - _freeList) < 0,
+                            "shouldn't underflow because max hashtable length is MaxPrimeArrayLength = 0x7FEFFFFD(2146435069) _freelist underflow threshold 2147483646"
+                        );
                         entry._next = StartOfFreeList - _freeList;
 
 #if NETCOREAPP
@@ -834,13 +880,14 @@ ReturnNotFound:
             return false;
         }
 
-        public bool TryAdd(TKey key, TValue value)
-            => TryInsert(key, value, InsertionBehavior.None);
+        public bool TryAdd(TKey key, TValue value) => TryInsert(key, value, InsertionBehavior.None);
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => false;
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int index)
-            => CopyTo(array, index);
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+            KeyValuePair<TKey, TValue>[] array,
+            int index
+        ) => CopyTo(array, index);
 
         void ICollection.CopyTo(Array array, int index)
         {
@@ -880,7 +927,10 @@ ReturnNotFound:
                 {
                     if (entries[i]._next >= -1)
                     {
-                        dictEntryArray[index++] = new DictionaryEntry(entries[i]._key, entries[i]._value);
+                        dictEntryArray[index++] = new DictionaryEntry(
+                            entries[i]._key,
+                            entries[i]._value
+                        );
                     }
                 }
             }
@@ -900,7 +950,10 @@ ReturnNotFound:
                     {
                         if (entries[i]._next >= -1)
                         {
-                            objects[index++] = new KeyValuePair<TKey, TValue>(entries[i]._key, entries[i]._value);
+                            objects[index++] = new KeyValuePair<TKey, TValue>(
+                                entries[i]._key,
+                                entries[i]._value
+                            );
                         }
                     }
                 }
@@ -911,8 +964,7 @@ ReturnNotFound:
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => new Enumerator(this, Enumerator.KeyValuePair);
+        IEnumerator IEnumerable.GetEnumerator() => new Enumerator(this, Enumerator.KeyValuePair);
 
         /// <summary>
         /// Ensures that the dictionary can hold up to 'capacity' entries without any further expansion of its backing storage
@@ -954,8 +1006,7 @@ ReturnNotFound:
         /// dictionary.Clear();
         /// dictionary.TrimExcess();
         /// </remarks>
-        public void TrimExcess()
-            => TrimExcess(Count);
+        public void TrimExcess() => TrimExcess(Count);
 
         /// <summary>
         /// Sets the capacity of this dictionary to hold up 'capacity' entries without any further expansion of its backing storage
@@ -1035,7 +1086,10 @@ ReturnNotFound:
                 {
                     ThrowHelper.ThrowArgumentNullException(ExceptionArgument.key);
                 }
-                ThrowHelper.IfNullAndNullsAreIllegalThenThrow<TValue>(value, ExceptionArgument.value);
+                ThrowHelper.IfNullAndNullsAreIllegalThenThrow<TValue>(
+                    value,
+                    ExceptionArgument.value
+                );
 
                 try
                 {
@@ -1102,8 +1156,8 @@ ReturnNotFound:
             return false;
         }
 
-        IDictionaryEnumerator IDictionary.GetEnumerator()
-            => new Enumerator(this, Enumerator.DictEntry);
+        IDictionaryEnumerator IDictionary.GetEnumerator() =>
+            new Enumerator(this, Enumerator.DictEntry);
 
         void IDictionary.Remove(object key)
         {
@@ -1117,19 +1171,22 @@ ReturnNotFound:
         private ref int GetBucket(uint hashCode)
         {
             var buckets = _buckets;
-            return ref buckets[(int)HashHelpers.FastMod(hashCode, (uint)buckets.Length, _fastModMultiplier)];
+            return ref buckets[
+                (int)HashHelpers.FastMod(hashCode, (uint)buckets.Length, _fastModMultiplier)
+            ];
         }
 
         private struct Entry
         {
             public uint _hashCode;
+
             /// <summary>
             /// 0-based index of next entry in chain: -1 means end of chain
             /// also encodes whether this entry _itself_ is part of the free list by changing sign and subtracting 3,
             /// so -2 means end of free list, -3 means index 0 but on free list, -4 means index 1 but on free list, etc.
             /// </summary>
             public int _next;
-            public TKey _key;     // Key of entry
+            public TKey _key; // Key of entry
             public TValue _value; // Value of entry
         }
 
@@ -1139,12 +1196,15 @@ ReturnNotFound:
             private readonly int _version;
             private int _index;
             private KeyValuePair<TKey, TValue> _current;
-            private readonly int _getEnumeratorRetType;  // What should Enumerator.Current return?
+            private readonly int _getEnumeratorRetType; // What should Enumerator.Current return?
 
             internal const int DictEntry = 1;
             internal const int KeyValuePair = 2;
 
-            internal Enumerator(SegmentedDictionary<TKey, TValue> dictionary, int getEnumeratorRetType)
+            internal Enumerator(
+                SegmentedDictionary<TKey, TValue> dictionary,
+                int getEnumeratorRetType
+            )
             {
                 _dictionary = dictionary;
                 _version = dictionary._version;
@@ -1180,9 +1240,7 @@ ReturnNotFound:
 
             public readonly KeyValuePair<TKey, TValue> Current => _current;
 
-            public readonly void Dispose()
-            {
-            }
+            public readonly void Dispose() { }
 
             readonly object? IEnumerator.Current
             {
@@ -1255,7 +1313,10 @@ ReturnNotFound:
 
         [DebuggerTypeProxy(typeof(DictionaryKeyCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class KeyCollection : ICollection<TKey>, ICollection, IReadOnlyCollection<TKey>
+        public sealed class KeyCollection
+            : ICollection<TKey>,
+                ICollection,
+                IReadOnlyCollection<TKey>
         {
             private readonly SegmentedDictionary<TKey, TValue> _dictionary;
 
@@ -1269,8 +1330,7 @@ ReturnNotFound:
                 _dictionary = dictionary;
             }
 
-            public Enumerator GetEnumerator()
-                => new Enumerator(_dictionary);
+            public Enumerator GetEnumerator() => new Enumerator(_dictionary);
 
             public void CopyTo(TKey[] array, int index)
             {
@@ -1302,26 +1362,29 @@ ReturnNotFound:
 
             bool ICollection<TKey>.IsReadOnly => true;
 
-            void ICollection<TKey>.Add(TKey item)
-                => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_KeyCollectionSet);
+            void ICollection<TKey>.Add(TKey item) =>
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_KeyCollectionSet
+                );
 
-            void ICollection<TKey>.Clear()
-                => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_KeyCollectionSet);
+            void ICollection<TKey>.Clear() =>
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_KeyCollectionSet
+                );
 
-            bool ICollection<TKey>.Contains(TKey item)
-                => _dictionary.ContainsKey(item);
+            bool ICollection<TKey>.Contains(TKey item) => _dictionary.ContainsKey(item);
 
             bool ICollection<TKey>.Remove(TKey item)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_KeyCollectionSet);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_KeyCollectionSet
+                );
                 return false;
             }
 
-            IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator()
-                => new Enumerator(_dictionary);
+            IEnumerator<TKey> IEnumerable<TKey>.GetEnumerator() => new Enumerator(_dictionary);
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => new Enumerator(_dictionary);
+            IEnumerator IEnumerable.GetEnumerator() => new Enumerator(_dictionary);
 
             void ICollection.CopyTo(Array array, int index)
             {
@@ -1332,7 +1395,9 @@ ReturnNotFound:
 
                 if (array.Rank != 1)
                 {
-                    ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_RankMultiDimNotSupported);
+                    ThrowHelper.ThrowArgumentException(
+                        ExceptionResource.Arg_RankMultiDimNotSupported
+                    );
                 }
 
                 if (array.GetLowerBound(0) != 0)
@@ -1398,9 +1463,7 @@ ReturnNotFound:
                     _currentKey = default;
                 }
 
-                public readonly void Dispose()
-                {
-                }
+                public readonly void Dispose() { }
 
                 public bool MoveNext()
                 {
@@ -1455,7 +1518,10 @@ ReturnNotFound:
 
         [DebuggerTypeProxy(typeof(DictionaryValueCollectionDebugView<,>))]
         [DebuggerDisplay("Count = {Count}")]
-        public sealed class ValueCollection : ICollection<TValue>, ICollection, IReadOnlyCollection<TValue>
+        public sealed class ValueCollection
+            : ICollection<TValue>,
+                ICollection,
+                IReadOnlyCollection<TValue>
         {
             private readonly SegmentedDictionary<TKey, TValue> _dictionary;
 
@@ -1469,8 +1535,7 @@ ReturnNotFound:
                 _dictionary = dictionary;
             }
 
-            public Enumerator GetEnumerator()
-                => new Enumerator(_dictionary);
+            public Enumerator GetEnumerator() => new Enumerator(_dictionary);
 
             public void CopyTo(TValue[] array, int index)
             {
@@ -1502,26 +1567,29 @@ ReturnNotFound:
 
             bool ICollection<TValue>.IsReadOnly => true;
 
-            void ICollection<TValue>.Add(TValue item)
-                => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ValueCollectionSet);
+            void ICollection<TValue>.Add(TValue item) =>
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ValueCollectionSet
+                );
 
             bool ICollection<TValue>.Remove(TValue item)
             {
-                ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ValueCollectionSet);
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ValueCollectionSet
+                );
                 return false;
             }
 
-            void ICollection<TValue>.Clear()
-                => ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ValueCollectionSet);
+            void ICollection<TValue>.Clear() =>
+                ThrowHelper.ThrowNotSupportedException(
+                    ExceptionResource.NotSupported_ValueCollectionSet
+                );
 
-            bool ICollection<TValue>.Contains(TValue item)
-                => _dictionary.ContainsValue(item);
+            bool ICollection<TValue>.Contains(TValue item) => _dictionary.ContainsValue(item);
 
-            IEnumerator<TValue> IEnumerable<TValue>.GetEnumerator()
-                => new Enumerator(_dictionary);
+            IEnumerator<TValue> IEnumerable<TValue>.GetEnumerator() => new Enumerator(_dictionary);
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => new Enumerator(_dictionary);
+            IEnumerator IEnumerable.GetEnumerator() => new Enumerator(_dictionary);
 
             void ICollection.CopyTo(Array array, int index)
             {
@@ -1532,7 +1600,9 @@ ReturnNotFound:
 
                 if (array.Rank != 1)
                 {
-                    ThrowHelper.ThrowArgumentException(ExceptionResource.Arg_RankMultiDimNotSupported);
+                    ThrowHelper.ThrowArgumentException(
+                        ExceptionResource.Arg_RankMultiDimNotSupported
+                    );
                 }
 
                 if (array.GetLowerBound(0) != 0)
@@ -1598,9 +1668,7 @@ ReturnNotFound:
                     _currentValue = default;
                 }
 
-                public readonly void Dispose()
-                {
-                }
+                public readonly void Dispose() { }
 
                 public bool MoveNext()
                 {

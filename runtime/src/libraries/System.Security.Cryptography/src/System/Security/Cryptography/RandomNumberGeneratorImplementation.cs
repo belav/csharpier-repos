@@ -7,12 +7,11 @@ namespace System.Security.Cryptography
     {
         // a singleton which always calls into a thread-safe implementation
         // and whose Dispose method no-ops
-        internal static readonly RandomNumberGeneratorImplementation s_singleton = new RandomNumberGeneratorImplementation();
+        internal static readonly RandomNumberGeneratorImplementation s_singleton =
+            new RandomNumberGeneratorImplementation();
 
         // private ctor used only by singleton
-        private RandomNumberGeneratorImplementation()
-        {
-        }
+        private RandomNumberGeneratorImplementation() { }
 
         // As long as each implementation can provide a static GetBytes(ref byte buf, int length)
         // they can share this one implementation of FillSpan.
@@ -20,7 +19,8 @@ namespace System.Security.Cryptography
         {
             if (data.Length > 0)
             {
-                fixed (byte* ptr = data) GetBytes(ptr, data.Length);
+                fixed (byte* ptr = data)
+                    GetBytes(ptr, data.Length);
             }
         }
 
@@ -41,7 +41,8 @@ namespace System.Security.Cryptography
         {
             if (data.Length > 0)
             {
-                fixed (byte* ptr = data) GetBytes(ptr, data.Length);
+                fixed (byte* ptr = data)
+                    GetBytes(ptr, data.Length);
             }
         }
 

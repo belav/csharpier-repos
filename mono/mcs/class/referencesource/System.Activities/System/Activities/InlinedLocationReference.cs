@@ -15,7 +15,11 @@ namespace System.Activities
         bool allowWrites;
         bool allowGetLocation;
 
-        public InlinedLocationReference(LocationReference innerReference, Activity validAccessor, ArgumentDirection accessDirection)
+        public InlinedLocationReference(
+            LocationReference innerReference,
+            Activity validAccessor,
+            ArgumentDirection accessDirection
+        )
         {
             this.innerReference = innerReference;
             this.validAccessor = validAccessor;
@@ -34,18 +38,12 @@ namespace System.Activities
 
         protected override string NameCore
         {
-            get
-            {
-                return this.innerReference.Name;
-            }
+            get { return this.innerReference.Name; }
         }
-        
+
         protected override Type TypeCore
         {
-            get
-            {
-                return this.innerReference.Type;
-            }
+            get { return this.innerReference.Type; }
         }
 
         public override Location GetLocation(ActivityContext context)
@@ -57,7 +55,11 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowGetLocation)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetLocationOnPublicAccessReference(context.Activity)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetLocationOnPublicAccessReference(context.Activity)
+                    )
+                );
             }
             return GetLocationCore(context);
         }
@@ -67,18 +69,25 @@ namespace System.Activities
             ValidateAccessor(context);
             if (!this.allowReads)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ReadAccessToWriteOnlyPublicReference(context.Activity)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.ReadAccessToWriteOnlyPublicReference(context.Activity)
+                    )
+                );
             }
             return GetLocationCore(context);
         }
-
 
         internal override Location GetLocationForWrite(ActivityContext context)
         {
             ValidateAccessor(context);
             if (!this.allowWrites)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WriteAccessToReadOnlyPublicReference(context.Activity)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.WriteAccessToReadOnlyPublicReference(context.Activity)
+                    )
+                );
             }
             return GetLocationCore(context);
         }
@@ -91,7 +100,14 @@ namespace System.Activities
 
             if (!object.ReferenceEquals(context.Activity, this.validAccessor))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InlinedLocationReferenceOnlyAccessibleByOwner(context.Activity, this.validAccessor)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.InlinedLocationReferenceOnlyAccessibleByOwner(
+                            context.Activity,
+                            this.validAccessor
+                        )
+                    )
+                );
             }
         }
 
@@ -110,10 +126,7 @@ namespace System.Activities
 
         LocationReference ILocationReferenceWrapper.LocationReference
         {
-            get
-            {
-                return this.innerReference;
-            }
+            get { return this.innerReference; }
         }
     }
 }

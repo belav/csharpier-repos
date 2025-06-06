@@ -18,20 +18,13 @@ public class MyDispose : IDisposable
 
     public bool IsDisposed
     {
-        get
-        {
-            return disposed;
-        }
-        set
-        {
-            disposed = value;
-        }
+        get { return disposed; }
+        set { disposed = value; }
     }
 }
 
 public class Test_repro
 {
-
     // OUT:
     //   TRUE  if the object was DISPOSED
     //   FALSE if the object was NOT DISPOSED
@@ -84,7 +77,6 @@ public class Test_repro
         return result;
     }
 
-
     // OUT:
     //   TRUE  if the object was DISPOSED
     //   FALSE if the object was NOT DISPOSED
@@ -101,7 +93,6 @@ public class Test_repro
         return true;
     }
 
-
     // OUT:
     //   TRUE  if the object was DISPOSED
     //   FALSE if the object was NOT DISPOSED
@@ -117,7 +108,7 @@ public class Test_repro
 
         return true;
 
-    EXIT:
+        EXIT:
 
         return false;
     }
@@ -135,7 +126,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("SwitchTests1: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "SwitchTests1: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
 
@@ -145,7 +139,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("SwitchTests2: MyDispose.Dispose() called too many times 12 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "SwitchTests2: MyDispose.Dispose() called too many times 12 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
         if (wasDisposed)
@@ -153,10 +150,11 @@ public class Test_repro
             // the object should not have been disposed entering
             //  these method calls
             // if the object was disposed then there was an issue
-            Console.WriteLine("SwitchTests1: Object was Disposed upon entering the method call (in error)");
+            Console.WriteLine(
+                "SwitchTests1: Object was Disposed upon entering the method call (in error)"
+            );
             return -2;
         }
-
 
         // called with object disposed
         m.DisposeCounter = 0;
@@ -166,7 +164,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("SwitchTests3: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "SwitchTests3: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
 
@@ -176,7 +177,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("SwitchTests4: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "SwitchTests4: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
         if (!wasDisposed)
@@ -184,7 +188,9 @@ public class Test_repro
             // the object should have been disposed entering
             //  these method calls
             // if the object was not disposed then there was an issue
-            Console.WriteLine("SwitchTests2: Object was not Disposed upon entering the method call (in error)");
+            Console.WriteLine(
+                "SwitchTests2: Object was not Disposed upon entering the method call (in error)"
+            );
             return -2;
         }
 
@@ -203,7 +209,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("ReturnTests1: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "ReturnTests1: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
         if (wasDisposed)
@@ -211,7 +220,9 @@ public class Test_repro
             // the object should not have been disposed entering
             //  this method call
             // if the object was disposed then there was an issue
-            Console.WriteLine("ReturnTests1: Object was Disposed upon entering the method call (in error)");
+            Console.WriteLine(
+                "ReturnTests1: Object was Disposed upon entering the method call (in error)"
+            );
             return -2;
         }
 
@@ -222,7 +233,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("ReturnTests2: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "ReturnTests2: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
         if (!wasDisposed)
@@ -230,7 +244,9 @@ public class Test_repro
             // the object should have been disposed entering
             //  this method call
             // if the object was not disposed then there was an issue
-            Console.WriteLine("ReturnTests2: Object was not Disposed upon entering the method call (in error)");
+            Console.WriteLine(
+                "ReturnTests2: Object was not Disposed upon entering the method call (in error)"
+            );
             return -2;
         }
 
@@ -249,7 +265,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("GotoTests1: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "GotoTests1: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
         if (wasDisposed)
@@ -257,7 +276,9 @@ public class Test_repro
             // the object should not have been disposed entering
             //  this method call
             // if the object was disposed then there was an issue
-            Console.WriteLine("GotoTests1: Object was Disposed upon entering the method call (in error)");
+            Console.WriteLine(
+                "GotoTests1: Object was Disposed upon entering the method call (in error)"
+            );
             return -2;
         }
 
@@ -268,7 +289,10 @@ public class Test_repro
 
         if (1 != m.DisposeCounter)
         {
-            Console.WriteLine("GotoTests2: MyDispose.Dispose() called too many times 1 != {0}", m.DisposeCounter);
+            Console.WriteLine(
+                "GotoTests2: MyDispose.Dispose() called too many times 1 != {0}",
+                m.DisposeCounter
+            );
             return -1;
         }
         if (!wasDisposed)
@@ -276,10 +300,11 @@ public class Test_repro
             // the object should have been disposed entering
             //  this method call
             // if the object was not disposed then there was an issue
-            Console.WriteLine("GotoTests2: Object was not Disposed upon entering the method call (in error)");
+            Console.WriteLine(
+                "GotoTests2: Object was not Disposed upon entering the method call (in error)"
+            );
             return -2;
         }
-
 
         return 0;
     }
@@ -311,6 +336,3 @@ public class Test_repro
         }
     }
 }
-
-
-

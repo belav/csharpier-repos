@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -58,7 +57,12 @@ namespace Moq.Tests
 
         static object CreateProxy(Type type, IInterceptor interceptor)
         {
-            return ProxyFactory.Instance.CreateProxy(type, interceptor, Type.EmptyTypes, new object[0]);
+            return ProxyFactory.Instance.CreateProxy(
+                type,
+                interceptor,
+                Type.EmptyTypes,
+                new object[0]
+            );
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
@@ -69,7 +73,6 @@ namespace Moq.Tests
         }
 
         sealed class Echo : IInterceptor
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private readonly object returnValue;

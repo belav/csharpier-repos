@@ -4,31 +4,28 @@ using System.Collections.Generic;
 
 namespace MonoGenericIteratorTest
 {
-	public class MyType
-	{
-	}
+    public class MyType { }
 
-	public abstract class MyCollectionBase<T> : Dictionary<string, T>
-	{
-		public new virtual IEnumerator GetEnumerator ()
-		{
-			return Values.GetEnumerator ();
-		}
-	}
+    public abstract class MyCollectionBase<T> : Dictionary<string, T>
+    {
+        public new virtual IEnumerator GetEnumerator()
+        {
+            return Values.GetEnumerator();
+        }
+    }
 
-	public class MyCollection : MyCollectionBase<MyType>
-	{
-	}
+    public class MyCollection : MyCollectionBase<MyType> { }
 
-	class MainClass
-	{
-		public static void Main (string[] args)
-		{
-			MyCollection myCollection = new MyCollection ();
+    class MainClass
+    {
+        public static void Main(string[] args)
+        {
+            MyCollection myCollection = new MyCollection();
 
-			foreach (MyType item in myCollection) {
-				Console.WriteLine ("Success.");
-			}
-		}
-	}
+            foreach (MyType item in myCollection)
+            {
+                Console.WriteLine("Success.");
+            }
+        }
+    }
 }

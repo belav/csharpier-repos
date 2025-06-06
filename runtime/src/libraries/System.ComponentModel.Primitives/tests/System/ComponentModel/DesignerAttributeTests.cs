@@ -17,7 +17,10 @@ namespace System.ComponentModel.Tests
         {
             var attribute = new DesignerAttribute(designerTypeName);
             Assert.Equal(designerTypeName, attribute.DesignerTypeName);
-            Assert.Equal("System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", attribute.DesignerBaseTypeName);
+            Assert.Equal(
+                "System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                attribute.DesignerBaseTypeName
+            );
         }
 
         [Theory]
@@ -28,7 +31,10 @@ namespace System.ComponentModel.Tests
         {
             var attribute = new DesignerAttribute(designerType);
             Assert.Equal(designerType.AssemblyQualifiedName, attribute.DesignerTypeName);
-            Assert.Equal("System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", attribute.DesignerBaseTypeName);
+            Assert.Equal(
+                "System.ComponentModel.Design.IDesigner, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                attribute.DesignerBaseTypeName
+            );
         }
 
         [Theory]
@@ -67,29 +73,55 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullDesignerTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() => new DesignerAttribute((string)null));
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() => new DesignerAttribute(null, "designerBaseTypeName"));
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() => new DesignerAttribute((string)null, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
+                new DesignerAttribute((string)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
+                new DesignerAttribute(null, "designerBaseTypeName")
+            );
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
+                new DesignerAttribute((string)null, typeof(int))
+            );
         }
 
         [Fact]
         public void Ctor_NullDesignerType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("designerType", () => new DesignerAttribute((Type)null));
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("designerType", () => new DesignerAttribute((Type)null, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "designerType",
+                () => new DesignerAttribute((Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "designerType",
+                () => new DesignerAttribute((Type)null, typeof(int))
+            );
         }
 
         [Fact]
         public void Ctor_NullDesignerBaseType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("designerBaseType", () => new DesignerAttribute("designerTypeName", (Type)null));
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("designerBaseType", () => new DesignerAttribute(typeof(int), null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "designerBaseType",
+                () => new DesignerAttribute("designerTypeName", (Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "designerBaseType",
+                () => new DesignerAttribute(typeof(int), null)
+            );
         }
 
         public static IEnumerable<object[]> TypeId_TestData()
         {
-            yield return new object[] { "BaseDesignerTypeName", "System.ComponentModel.DesignerAttributeBaseDesignerTypeName" };
-            yield return new object[] { "BaseDesignerTypeName,Other", "System.ComponentModel.DesignerAttributeBaseDesignerTypeName" };
+            yield return new object[]
+            {
+                "BaseDesignerTypeName",
+                "System.ComponentModel.DesignerAttributeBaseDesignerTypeName",
+            };
+            yield return new object[]
+            {
+                "BaseDesignerTypeName,Other",
+                "System.ComponentModel.DesignerAttributeBaseDesignerTypeName",
+            };
             yield return new object[] { string.Empty, "System.ComponentModel.DesignerAttribute" };
             yield return new object[] { null, "System.ComponentModel.DesignerAttribute" };
         }
@@ -107,14 +139,49 @@ namespace System.ComponentModel.Tests
         {
             var attribute = new DesignerAttribute("designerTypeName", "designerBaseTypeName");
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new DesignerAttribute("designerTypeName", "designerBaseTypeName"), true };
-            yield return new object[] { attribute, new DesignerAttribute("designertypename", "designerBaseTypeName"), false };
-            yield return new object[] { attribute, new DesignerAttribute("designerTypeName", "designerbasetypename"), false };
-            yield return new object[] { attribute, new DesignerAttribute("designerTypeName", (string)null), false };
+            yield return new object[]
+            {
+                attribute,
+                new DesignerAttribute("designerTypeName", "designerBaseTypeName"),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DesignerAttribute("designertypename", "designerBaseTypeName"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DesignerAttribute("designerTypeName", "designerbasetypename"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new DesignerAttribute("designerTypeName", (string)null),
+                false,
+            };
 
-            yield return new object[] { new DesignerAttribute("designerTypeName", (string)null), new DesignerAttribute("designerTypeName", (string)null), true };
-            yield return new object[] { new DesignerAttribute("designerTypeName", (string)null), new DesignerAttribute("designertypename", (string)null), false };
-            yield return new object[] { new DesignerAttribute("designerTypeName", (string)null), new DesignerAttribute("designerTypeName", "designertBaseTypeName"), false };
+            yield return new object[]
+            {
+                new DesignerAttribute("designerTypeName", (string)null),
+                new DesignerAttribute("designerTypeName", (string)null),
+                true,
+            };
+            yield return new object[]
+            {
+                new DesignerAttribute("designerTypeName", (string)null),
+                new DesignerAttribute("designertypename", (string)null),
+                false,
+            };
+            yield return new object[]
+            {
+                new DesignerAttribute("designerTypeName", (string)null),
+                new DesignerAttribute("designerTypeName", "designertBaseTypeName"),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -122,7 +189,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(DesignerAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            DesignerAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is DesignerAttribute)

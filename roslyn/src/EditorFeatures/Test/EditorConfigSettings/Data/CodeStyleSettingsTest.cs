@@ -9,8 +9,8 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CodeStyle;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data;
-using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
     [UseExportProvider]
     public class CodeStyleSettingsTest
     {
-        private static IGlobalOptionService GetGlobalOptions(Workspace workspace)
-            => workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+        private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
+            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
         [Theory]
         [InlineData(true)]
@@ -35,9 +35,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
                 new TestAnalyzerConfigOptions(),
                 globalOptions,
                 LanguageNames.CSharp,
-                ".editorconfig");
+                ".editorconfig"
+            );
 
-            var setting = CodeStyleSetting.Create(option, description: "TestDesciption", options, updater: null!);
+            var setting = CodeStyleSetting.Create(
+                option,
+                description: "TestDesciption",
+                options,
+                updater: null!
+            );
             Assert.Equal(string.Empty, setting.Category);
             Assert.Equal("TestDesciption", setting.Description);
             Assert.False(setting.IsDefinedInEditorConfig);
@@ -59,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
                 new TestAnalyzerConfigOptions(),
                 globalOptions,
                 LanguageNames.CSharp,
-                ".editorconfig");
+                ".editorconfig"
+            );
 
             var setting = CodeStyleSetting.Create(
                 option,
@@ -67,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
                 options,
                 updater: null!,
                 enumValues: (DayOfWeek[])Enum.GetValues(typeof(DayOfWeek)),
-                valueDescriptions: Enum.GetNames(typeof(DayOfWeek)));
+                valueDescriptions: Enum.GetNames(typeof(DayOfWeek))
+            );
 
             Assert.Equal(string.Empty, setting.Category);
             Assert.Equal("TestDesciption", setting.Description);
@@ -83,8 +91,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
             return new Option2<CodeStyleOption2<bool>>(
                 name: "dotnet_test_option",
                 defaultValue: defaultCodeStyle,
-                serializer: new EditorConfigValueSerializer<CodeStyleOption2<bool>>(_ => defaultCodeStyle, _ => "default"),
-                isEditorConfigOption: true);
+                serializer: new EditorConfigValueSerializer<CodeStyleOption2<bool>>(
+                    _ => defaultCodeStyle,
+                    _ => "default"
+                ),
+                isEditorConfigOption: true
+            );
         }
 
         private static Option2<CodeStyleOption2<T>> CreateEnumOption<T>(T defaultValue)
@@ -94,17 +106,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EditorConfigSettings.Data
             return new Option2<CodeStyleOption2<T>>(
                 name: "dotnet_test_option",
                 defaultValue: defaultCodeStyle,
-                serializer: new EditorConfigValueSerializer<CodeStyleOption2<T>>(_ => defaultCodeStyle, _ => "default"),
-                isEditorConfigOption: true);
+                serializer: new EditorConfigValueSerializer<CodeStyleOption2<T>>(
+                    _ => defaultCodeStyle,
+                    _ => "default"
+                ),
+                isEditorConfigOption: true
+            );
         }
 
         private class TestAnalyzerConfigOptions : AnalyzerConfigOptions
         {
             private readonly IDictionary<string, string> _dictionary;
-            public TestAnalyzerConfigOptions((string, string)[]? options = null)
-                => _dictionary = options?.ToDictionary(x => x.Item1, x => x.Item2) ?? new Dictionary<string, string>();
-            public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
-                => _dictionary.TryGetValue(key, out value);
+
+            public TestAnalyzerConfigOptions((string, string)[]? options = null) =>
+                _dictionary =
+                    options?.ToDictionary(x => x.Item1, x => x.Item2)
+                    ?? new Dictionary<string, string>();
+
+            public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+                _dictionary.TryGetValue(key, out value);
         }
     }
 }

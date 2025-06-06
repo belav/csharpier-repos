@@ -2,11 +2,11 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Diagnostics.Contracts;
+using Microsoft.TestCommon;
+using Moq;
 #if ASPNETWEBAPI
 using System.Web.Http.Controllers;
 #endif
-using Microsoft.TestCommon;
-using Moq;
 
 #if ASPNETWEBAPI
 using TActionDescriptor = System.Web.Http.Controllers.HttpActionDescriptor;
@@ -91,8 +91,12 @@ namespace System.Web.Mvc.Routing
             RouteEntry expectedEntry = CreateEntry();
 
             IDirectRouteBuilder builder = CreateBuilder(() => expectedEntry);
-            DirectRouteFactoryContext context = CreateContext((template) => template == expectedTemplate ? builder :
-                new DirectRouteBuilder(new TActionDescriptor[0], targetIsAction: true));
+            DirectRouteFactoryContext context = CreateContext(
+                (template) =>
+                    template == expectedTemplate
+                        ? builder
+                        : new DirectRouteBuilder(new TActionDescriptor[0], targetIsAction: true)
+            );
 
             // Act
             RouteEntry entry = product.CreateRoute(context);
@@ -494,8 +498,11 @@ namespace System.Web.Mvc.Routing
         public void AttributeUsage_IsAsSpecified()
         {
             // Act
-            AttributeUsageAttribute usage = (AttributeUsageAttribute)Attribute.GetCustomAttribute(
-                typeof(RouteFactoryAttribute), typeof(AttributeUsageAttribute));
+            AttributeUsageAttribute usage = (AttributeUsageAttribute)
+                Attribute.GetCustomAttribute(
+                    typeof(RouteFactoryAttribute),
+                    typeof(AttributeUsageAttribute)
+                );
 
             // Assert
             Assert.NotNull(usage);
@@ -509,7 +516,9 @@ namespace System.Web.Mvc.Routing
             return new LambdaDirectRouteBuilder(build);
         }
 
-        private static DirectRouteFactoryContext CreateContext(Func<string, IDirectRouteBuilder> createBuilder)
+        private static DirectRouteFactoryContext CreateContext(
+            Func<string, IDirectRouteBuilder> createBuilder
+        )
         {
             return new LambdaDirectRouteFactoryContext(createBuilder);
         }
@@ -552,12 +561,20 @@ namespace System.Web.Mvc.Routing
 
             public LambdaDirectRouteFactoryContext(Func<string, IDirectRouteBuilder> createBuilder)
 #if ASPNETWEBAPI
-                : base(null, new TActionDescriptor[] { new Mock<TActionDescriptor>().Object },
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object,
-                targetIsAction: true)
+                : base(
+                    null,
+                    new TActionDescriptor[] { new Mock<TActionDescriptor>().Object },
+                    new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object,
+                    targetIsAction: true
+                )
 #else
-                : base(null, null, new TActionDescriptor[] { CreateStubActionDescriptor() },
-                new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object, targetIsAction: true)
+                : base(
+                    null,
+                    null,
+                    new TActionDescriptor[] { CreateStubActionDescriptor() },
+                    new Mock<IInlineConstraintResolver>(MockBehavior.Strict).Object,
+                    targetIsAction: true
+                )
 #endif
             {
                 Contract.Assert(createBuilder != null);
@@ -573,7 +590,8 @@ namespace System.Web.Mvc.Routing
             private static ActionDescriptor CreateStubActionDescriptor()
             {
                 Mock<ActionDescriptor> mock = new Mock<TActionDescriptor>();
-                mock.Setup(m => m.ControllerDescriptor).Returns(new Mock<ControllerDescriptor>().Object);
+                mock.Setup(m => m.ControllerDescriptor)
+                    .Returns(new Mock<ControllerDescriptor>().Object);
                 return mock.Object;
             }
 #endif

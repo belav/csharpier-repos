@@ -17,18 +17,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.NavigateTo
 {
     internal sealed class VisualStudioNavigateToPreviewService : INavigateToPreviewService
     {
-        public __VSPROVISIONALVIEWINGSTATUS GetProvisionalViewingStatus(INavigableItem.NavigableDocument document)
+        public __VSPROVISIONALVIEWINGSTATUS GetProvisionalViewingStatus(
+            INavigableItem.NavigableDocument document
+        )
         {
             if (document.FilePath == null)
             {
                 return __VSPROVISIONALVIEWINGSTATUS.PVS_Disabled;
             }
 
-            return (__VSPROVISIONALVIEWINGSTATUS)VsShellUtilities.GetProvisionalViewingStatus(document.FilePath);
+            return (__VSPROVISIONALVIEWINGSTATUS)
+                VsShellUtilities.GetProvisionalViewingStatus(document.FilePath);
         }
 
-        public bool CanPreview(Document document)
-            => ContainedDocument.TryGetContainedDocument(document.Id) == null;
+        public bool CanPreview(Document document) =>
+            ContainedDocument.TryGetContainedDocument(document.Id) == null;
 
         public void PreviewItem(INavigateToItemDisplay itemDisplay)
         {

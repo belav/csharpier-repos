@@ -12,8 +12,16 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Sets the specified limits to the <see cref="HttpRequest.Form"/>.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class RequestFormLimitsAttribute : Attribute, IFilterFactory, IOrderedFilter, IFormOptionsMetadata
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class RequestFormLimitsAttribute
+    : Attribute,
+        IFilterFactory,
+        IOrderedFilter,
+        IFormOptionsMetadata
 {
     /// <summary>
     /// Gets the order value for determining the order of execution of filters. Filters execute in

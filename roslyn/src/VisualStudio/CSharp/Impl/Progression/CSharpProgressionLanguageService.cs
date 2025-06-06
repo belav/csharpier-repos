@@ -30,30 +30,33 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
             globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining,
             typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
             genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-            memberOptions: SymbolDisplayMemberOptions.IncludeParameters |
-                           SymbolDisplayMemberOptions.IncludeContainingType,
-            parameterOptions: SymbolDisplayParameterOptions.IncludeType |
-                              SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                              SymbolDisplayParameterOptions.IncludeOptionalBrackets,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeContainingType,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         private static readonly SymbolDisplayFormat s_labelFormat = new(
             genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-            memberOptions: SymbolDisplayMemberOptions.IncludeParameters |
-                           SymbolDisplayMemberOptions.IncludeExplicitInterface,
-            parameterOptions: SymbolDisplayParameterOptions.IncludeType |
-                              SymbolDisplayParameterOptions.IncludeParamsRefOut |
-                              SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
             delegateStyle: SymbolDisplayDelegateStyle.NameAndParameters,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpProgressionLanguageService()
-        {
-        }
+        public CSharpProgressionLanguageService() { }
 
-        public IEnumerable<SyntaxNode> GetTopLevelNodesFromDocument(SyntaxNode root, CancellationToken cancellationToken)
+        public IEnumerable<SyntaxNode> GetTopLevelNodesFromDocument(
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        )
         {
             // We implement this method lazily so we are able to abort as soon as we need to.
             if (!cancellationToken.IsCancellationRequested)
@@ -66,16 +69,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
                     var node = nodes.Pop();
                     if (!cancellationToken.IsCancellationRequested)
                     {
-                        if (node.Kind() is SyntaxKind.ClassDeclaration or
-                            SyntaxKind.RecordDeclaration or
-                            SyntaxKind.RecordStructDeclaration or
-                            SyntaxKind.DelegateDeclaration or
-                            SyntaxKind.EnumDeclaration or
-                            SyntaxKind.InterfaceDeclaration or
-                            SyntaxKind.StructDeclaration or
-                            SyntaxKind.VariableDeclarator or
-                            SyntaxKind.MethodDeclaration or
-                            SyntaxKind.PropertyDeclaration)
+                        if (
+                            node.Kind()
+                            is SyntaxKind.ClassDeclaration
+                                or SyntaxKind.RecordDeclaration
+                                or SyntaxKind.RecordStructDeclaration
+                                or SyntaxKind.DelegateDeclaration
+                                or SyntaxKind.EnumDeclaration
+                                or SyntaxKind.InterfaceDeclaration
+                                or SyntaxKind.StructDeclaration
+                                or SyntaxKind.VariableDeclarator
+                                or SyntaxKind.MethodDeclaration
+                                or SyntaxKind.PropertyDeclaration
+                        )
                         {
                             yield return node;
                         }
@@ -91,13 +97,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
             }
         }
 
-        public string GetDescriptionForSymbol(ISymbol symbol, bool includeContainingSymbol)
-            => GetSymbolText(symbol, includeContainingSymbol, s_descriptionFormat);
+        public string GetDescriptionForSymbol(ISymbol symbol, bool includeContainingSymbol) =>
+            GetSymbolText(symbol, includeContainingSymbol, s_descriptionFormat);
 
-        public string GetLabelForSymbol(ISymbol symbol, bool includeContainingSymbol)
-            => GetSymbolText(symbol, includeContainingSymbol, s_labelFormat);
+        public string GetLabelForSymbol(ISymbol symbol, bool includeContainingSymbol) =>
+            GetSymbolText(symbol, includeContainingSymbol, s_labelFormat);
 
-        private static string GetSymbolText(ISymbol symbol, bool includeContainingSymbol, SymbolDisplayFormat displayFormat)
+        private static string GetSymbolText(
+            ISymbol symbol,
+            bool includeContainingSymbol,
+            SymbolDisplayFormat displayFormat
+        )
         {
             var label = symbol.ToDisplayString(displayFormat);
 
@@ -120,16 +130,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
         {
             switch (symbol)
             {
-                case IEventSymbol f: return f.Type;
-                case IFieldSymbol f: return f.ContainingType.TypeKind == TypeKind.Enum ? null : f.Type;
-                case IMethodSymbol m: return IncludeReturnType(m) ? m.ReturnType : null;
-                case IPropertySymbol p: return p.Type;
-                case INamedTypeSymbol n: return n.IsDelegateType() ? n.DelegateInvokeMethod.ReturnType : null;
-                default: return null;
+                case IEventSymbol f:
+                    return f.Type;
+                case IFieldSymbol f:
+                    return f.ContainingType.TypeKind == TypeKind.Enum ? null : f.Type;
+                case IMethodSymbol m:
+                    return IncludeReturnType(m) ? m.ReturnType : null;
+                case IPropertySymbol p:
+                    return p.Type;
+                case INamedTypeSymbol n:
+                    return n.IsDelegateType() ? n.DelegateInvokeMethod.ReturnType : null;
+                default:
+                    return null;
             }
         }
 
-        private static bool IncludeReturnType(IMethodSymbol f)
-            => f.MethodKind is MethodKind.Ordinary or MethodKind.ExplicitInterfaceImplementation;
+        private static bool IncludeReturnType(IMethodSymbol f) =>
+            f.MethodKind is MethodKind.Ordinary or MethodKind.ExplicitInterfaceImplementation;
     }
 }

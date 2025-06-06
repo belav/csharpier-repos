@@ -42,7 +42,11 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IReadOnlyList<AnalyzerReference> AnalyzerReferences { get; }
 
-        private SolutionInfo(SolutionAttributes attributes, IReadOnlyList<ProjectInfo> projects, IReadOnlyList<AnalyzerReference> analyzerReferences)
+        private SolutionInfo(
+            SolutionAttributes attributes,
+            IReadOnlyList<ProjectInfo> projects,
+            IReadOnlyList<AnalyzerReference> analyzerReferences
+        )
         {
             Attributes = attributes;
             Projects = projects;
@@ -58,7 +62,8 @@ namespace Microsoft.CodeAnalysis
             SolutionId id,
             VersionStamp version,
             string? filePath,
-            IEnumerable<ProjectInfo>? projects)
+            IEnumerable<ProjectInfo>? projects
+        )
         {
             return Create(id, version, filePath, projects, analyzerReferences: null);
         }
@@ -71,26 +76,40 @@ namespace Microsoft.CodeAnalysis
             VersionStamp version,
             string? filePath = null,
             IEnumerable<ProjectInfo>? projects = null,
-            IEnumerable<AnalyzerReference>? analyzerReferences = null)
+            IEnumerable<AnalyzerReference>? analyzerReferences = null
+        )
         {
             return new SolutionInfo(
                 new SolutionAttributes(
                     id ?? throw new ArgumentNullException(nameof(id)),
                     version,
                     filePath,
-                    telemetryId: default),
-                PublicContract.ToBoxedImmutableArrayWithDistinctNonNullItems(projects, nameof(projects)),
-                PublicContract.ToBoxedImmutableArrayWithDistinctNonNullItems(analyzerReferences, nameof(analyzerReferences)));
+                    telemetryId: default
+                ),
+                PublicContract.ToBoxedImmutableArrayWithDistinctNonNullItems(
+                    projects,
+                    nameof(projects)
+                ),
+                PublicContract.ToBoxedImmutableArrayWithDistinctNonNullItems(
+                    analyzerReferences,
+                    nameof(analyzerReferences)
+                )
+            );
         }
 
-        internal SolutionInfo WithTelemetryId(Guid telemetryId)
-            => new(Attributes.With(telemetryId: telemetryId), Projects, AnalyzerReferences);
+        internal SolutionInfo WithTelemetryId(Guid telemetryId) =>
+            new(Attributes.With(telemetryId: telemetryId), Projects, AnalyzerReferences);
 
         /// <summary>
         /// type that contains information regarding this solution itself but
         /// no tree information such as project info
         /// </summary>
-        internal sealed class SolutionAttributes(SolutionId id, VersionStamp version, string? filePath, Guid telemetryId)
+        internal sealed class SolutionAttributes(
+            SolutionId id,
+            VersionStamp version,
+            string? filePath,
+            Guid telemetryId
+        )
         {
             private SingleInitNullable<Checksum> _lazyChecksum;
 
@@ -117,15 +136,18 @@ namespace Microsoft.CodeAnalysis
             public SolutionAttributes With(
                 VersionStamp? version = null,
                 Optional<string?> filePath = default,
-                Optional<Guid> telemetryId = default)
+                Optional<Guid> telemetryId = default
+            )
             {
                 var newVersion = version ?? Version;
                 var newFilePath = filePath.HasValue ? filePath.Value : FilePath;
                 var newTelemetryId = telemetryId.HasValue ? telemetryId.Value : TelemetryId;
 
-                if (newVersion == Version &&
-                    newFilePath == FilePath &&
-                    newTelemetryId == TelemetryId)
+                if (
+                    newVersion == Version
+                    && newFilePath == FilePath
+                    && newTelemetryId == TelemetryId
+                )
                 {
                     return this;
                 }
@@ -152,11 +174,20 @@ namespace Microsoft.CodeAnalysis
                 var filePath = reader.ReadString();
                 var telemetryId = reader.ReadGuid();
 
-                return new SolutionAttributes(solutionId, VersionStamp.Create(), filePath, telemetryId);
+                return new SolutionAttributes(
+                    solutionId,
+                    VersionStamp.Create(),
+                    filePath,
+                    telemetryId
+                );
             }
 
-            public Checksum Checksum
-                => _lazyChecksum.Initialize(static @this => Checksum.Create(@this, static (@this, writer) => @this.WriteTo(writer)), this);
+            public Checksum Checksum =>
+                _lazyChecksum.Initialize(
+                    static @this =>
+                        Checksum.Create(@this, static (@this, writer) => @this.WriteTo(writer)),
+                    this
+                );
         }
     }
 }

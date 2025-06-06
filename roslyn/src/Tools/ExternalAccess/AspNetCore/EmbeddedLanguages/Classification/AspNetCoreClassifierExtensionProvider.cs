@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLanguages
 {
@@ -12,12 +12,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
         : AbstractProjectExtensionProvider<
             AspNetCoreClassifierExtensionProvider,
             IAspNetCoreEmbeddedLanguageClassifier,
-            ExportAspNetCoreEmbeddedLanguageClassifierAttribute>
+            ExportAspNetCoreEmbeddedLanguageClassifierAttribute
+        >
     {
-        protected override ImmutableArray<string> GetLanguages(ExportAspNetCoreEmbeddedLanguageClassifierAttribute exportAttribute)
-            => ImmutableArray.Create(exportAttribute.Language);
+        protected override ImmutableArray<string> GetLanguages(
+            ExportAspNetCoreEmbeddedLanguageClassifierAttribute exportAttribute
+        ) => ImmutableArray.Create(exportAttribute.Language);
 
-        protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<IAspNetCoreEmbeddedLanguageClassifier> extensions)
+        protected override bool TryGetExtensionsFromReference(
+            AnalyzerReference reference,
+            out ImmutableArray<IAspNetCoreEmbeddedLanguageClassifier> extensions
+        )
         {
             extensions = default;
             return false;

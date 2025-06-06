@@ -4,19 +4,19 @@
 
 #nullable disable
 
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
-using Roslyn.VisualStudio.Services.Interactive;
 using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.ComponentModel.Design;
-using Microsoft.VisualStudio.ComponentModelHost;
-using Microsoft.CodeAnalysis.Editor;
 using System.Threading;
-using Task = System.Threading.Tasks.Task;
+using Microsoft.CodeAnalysis.Editor;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using Roslyn.VisualStudio.Services.Interactive;
+using Task = System.Threading.Tasks.Task;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
 {
@@ -41,16 +41,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
             OleMenuCommandService menuCommandService,
             IVsMonitorSelection monitorSelection,
             IComponentModel componentModel,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _contentType = contentType;
             _menuCommandService = menuCommandService;
             _monitorSelection = monitorSelection;
             _componentModel = componentModel;
             _threadingContext = threadingContext;
-            _resetInteractiveCommand = _componentModel.DefaultExportProvider
-                .GetExports<IResetInteractiveCommand, ContentTypeMetadata>()
-                .Where(resetInteractiveService => resetInteractiveService.Metadata.ContentTypes.Contains(_contentType))
+            _resetInteractiveCommand = _componentModel
+                .DefaultExportProvider.GetExports<IResetInteractiveCommand, ContentTypeMetadata>()
+                .Where(resetInteractiveService =>
+                    resetInteractiveService.Metadata.ContentTypes.Contains(_contentType)
+                )
                 .SingleOrDefault();
         }
 
@@ -61,16 +64,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 {
                     ResetInteractiveCommand.Value.ExecuteResetInteractive();
                 },
-                GetResetInteractiveFromProjectCommandID());
+                GetResetInteractiveFromProjectCommandID()
+            );
 
             resetInteractiveFromProjectCommand.Supported = true;
 
             resetInteractiveFromProjectCommand.BeforeQueryStatus += (_, __) =>
             {
                 GetActiveProject(out var project, out var frameworkName);
-                var available = ResetInteractiveCommand != null
-                    && project != null && project.Kind == ProjectKind
-                    && frameworkName != null && frameworkName.Identifier == ".NETFramework";
+                var available =
+                    ResetInteractiveCommand != null
+                    && project != null
+                    && project.Kind == ProjectKind
+                    && frameworkName != null
+                    && frameworkName.Identifier == ".NETFramework";
 
                 resetInteractiveFromProjectCommand.Enabled = available;
                 resetInteractiveFromProjectCommand.Supported = available;
@@ -98,7 +105,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                         out hierarchyPointer,
                         out var itemid,
                         out var multiItemSelect,
-                        out selectionContainerPointer));
+                        out selectionContainerPointer
+                    )
+                );
 
                 if (itemid != (uint)VSConstants.VSITEMID.Root)
                 {
@@ -111,11 +120,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interactive
                 }
 
                 Marshal.ThrowExceptionForHR(
-                    hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID.VSHPROPID_ExtObject, out var extensibilityObject));
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID.VSHPROPID_ExtObject,
+                        out var extensibilityObject
+                    )
+                );
                 Marshal.ThrowExceptionForHR(
-                    hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID3.VSHPROPID_TargetFrameworkVersion, out var targetFrameworkVersion));
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID3.VSHPROPID_TargetFrameworkVersion,
+                        out var targetFrameworkVersion
+                    )
+                );
                 Marshal.ThrowExceptionForHR(
-                    hierarchy.GetProperty((uint)VSConstants.VSITEMID.Root, (int)__VSHPROPID4.VSHPROPID_TargetFrameworkMoniker, out var targetFrameworkMonikerObject));
+                    hierarchy.GetProperty(
+                        (uint)VSConstants.VSITEMID.Root,
+                        (int)__VSHPROPID4.VSHPROPID_TargetFrameworkMoniker,
+                        out var targetFrameworkMonikerObject
+                    )
+                );
 
                 var targetFrameworkMoniker = targetFrameworkMonikerObject as string;
                 frameworkName = new System.Runtime.Versioning.FrameworkName(targetFrameworkMoniker);

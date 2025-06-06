@@ -7,20 +7,18 @@ public class GraphUpdatesSqliteSnapshotNotificationsTest
     : GraphUpdatesSqliteTestBase<GraphUpdatesSqliteSnapshotNotificationsTest.SqliteFixture>
 {
     public GraphUpdatesSqliteSnapshotNotificationsTest(SqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqliteFixture : GraphUpdatesSqliteFixtureBase
     {
-        protected override string StoreName
-            => "GraphUpdatesSnapshotTest";
+        protected override string StoreName => "GraphUpdatesSnapshotTest";
 
-        public override bool AutoDetectChanges
-            => true;
+        public override bool AutoDetectChanges => true;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

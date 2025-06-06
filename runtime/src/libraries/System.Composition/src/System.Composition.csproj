@@ -16,12 +16,10 @@ System.Composition.Convention.ConventionBuilder
 System.Composition.Hosting.CompositionHost
 System.Composition.CompositionContext
 System.Composition.CompositionContextExtensions</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.AttributedModel\src\System.Composition.AttributedModel.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Convention\src\System.Composition.Convention.csproj" />
@@ -29,7 +27,6 @@ System.Composition.CompositionContextExtensions</PackageDescription>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.Runtime\src\System.Composition.Runtime.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Composition.TypedParts\src\System.Composition.TypedParts.csproj" />
   </ItemGroup>
-
   <!-- Create placeholder files in the meta package to make sure that NuGet picks the right asset. -->
   <ItemGroup>
     <None Include="$(PlaceholderFile)" PackagePath="lib/netstandard2.0" Pack="true" />

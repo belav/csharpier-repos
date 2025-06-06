@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,25 +31,25 @@ using System.Text;
 
 namespace System.ServiceModel.Channels
 {
-	internal class TextMessageEncoderFactory : MessageEncoderFactory
-	{
-		TextMessageEncodingBindingElement owner;
-		TextMessageEncoder encoder;
+    internal class TextMessageEncoderFactory : MessageEncoderFactory
+    {
+        TextMessageEncodingBindingElement owner;
+        TextMessageEncoder encoder;
 
-		public TextMessageEncoderFactory (
-			TextMessageEncodingBindingElement owner)
-		{
-			this.owner = owner;
-			encoder = new TextMessageEncoder (
-				MessageVersion, owner.WriteEncoding);
-		}
+        public TextMessageEncoderFactory(TextMessageEncodingBindingElement owner)
+        {
+            this.owner = owner;
+            encoder = new TextMessageEncoder(MessageVersion, owner.WriteEncoding);
+        }
 
-		public override MessageEncoder Encoder {
-			get { return encoder; }
-		}
+        public override MessageEncoder Encoder
+        {
+            get { return encoder; }
+        }
 
-		public override MessageVersion MessageVersion {
-			get { return owner.MessageVersion; }
-		}
-	}
+        public override MessageVersion MessageVersion
+        {
+            get { return owner.MessageVersion; }
+        }
+    }
 }

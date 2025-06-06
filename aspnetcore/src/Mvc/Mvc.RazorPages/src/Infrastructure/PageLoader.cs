@@ -17,8 +17,12 @@ public abstract class PageLoader : IPageLoader
     /// </summary>
     /// <param name="actionDescriptor">The <see cref="PageActionDescriptor"/>.</param>
     /// <returns>A <see cref="Task"/> that on completion returns a <see cref="CompiledPageActionDescriptor"/>.</returns>
-    [Obsolete("This overload is obsolete and no longer called by the framework. Use the overload that includes an EndpointMetadataCollection.")]
-    public abstract Task<CompiledPageActionDescriptor> LoadAsync(PageActionDescriptor actionDescriptor);
+    [Obsolete(
+        "This overload is obsolete and no longer called by the framework. Use the overload that includes an EndpointMetadataCollection."
+    )]
+    public abstract Task<CompiledPageActionDescriptor> LoadAsync(
+        PageActionDescriptor actionDescriptor
+    );
 
     /// <summary>
     /// Produces a <see cref="CompiledPageActionDescriptor"/> given a <see cref="PageActionDescriptor"/>.
@@ -26,9 +30,11 @@ public abstract class PageLoader : IPageLoader
     /// <param name="actionDescriptor">The <see cref="PageActionDescriptor"/>.</param>
     /// <param name="endpointMetadata">The <see cref="EndpointMetadataCollection"/>.</param>
     /// <returns>A <see cref="Task"/> that on completion returns a <see cref="CompiledPageActionDescriptor"/>.</returns>
-    public virtual Task<CompiledPageActionDescriptor> LoadAsync(PageActionDescriptor actionDescriptor, EndpointMetadataCollection endpointMetadata)
-        => throw new NotSupportedException();
+    public virtual Task<CompiledPageActionDescriptor> LoadAsync(
+        PageActionDescriptor actionDescriptor,
+        EndpointMetadataCollection endpointMetadata
+    ) => throw new NotSupportedException();
 
-    CompiledPageActionDescriptor IPageLoader.Load(PageActionDescriptor actionDescriptor)
-        => LoadAsync(actionDescriptor, EndpointMetadataCollection.Empty).GetAwaiter().GetResult();
+    CompiledPageActionDescriptor IPageLoader.Load(PageActionDescriptor actionDescriptor) =>
+        LoadAsync(actionDescriptor, EndpointMetadataCollection.Empty).GetAwaiter().GetResult();
 }

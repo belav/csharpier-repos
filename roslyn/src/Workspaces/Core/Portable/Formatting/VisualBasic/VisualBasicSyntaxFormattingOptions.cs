@@ -10,17 +10,18 @@ using Microsoft.CodeAnalysis.Options;
 namespace Microsoft.CodeAnalysis.VisualBasic.Formatting;
 
 [DataContract]
-internal sealed record class VisualBasicSyntaxFormattingOptions : SyntaxFormattingOptions, IEquatable<VisualBasicSyntaxFormattingOptions>
+internal sealed record class VisualBasicSyntaxFormattingOptions
+    : SyntaxFormattingOptions,
+        IEquatable<VisualBasicSyntaxFormattingOptions>
 {
     public static readonly VisualBasicSyntaxFormattingOptions Default = new();
 
     internal VisualBasicSyntaxFormattingOptions()
-        : base()
-    {
-    }
+        : base() { }
 
-    internal VisualBasicSyntaxFormattingOptions(IOptionsReader options, VisualBasicSyntaxFormattingOptions? fallbackOptions)
-        : base(options, fallbackOptions ?? Default, LanguageNames.VisualBasic)
-    {
-    }
+    internal VisualBasicSyntaxFormattingOptions(
+        IOptionsReader options,
+        VisualBasicSyntaxFormattingOptions? fallbackOptions
+    )
+        : base(options, fallbackOptions ?? Default, LanguageNames.VisualBasic) { }
 }

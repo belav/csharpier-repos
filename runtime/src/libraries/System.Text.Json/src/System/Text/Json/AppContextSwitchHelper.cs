@@ -8,7 +8,9 @@ namespace System.Text.Json
         public static bool IsSourceGenReflectionFallbackEnabled { get; } =
             AppContext.TryGetSwitch(
                 switchName: "System.Text.Json.Serialization.EnableSourceGenReflectionFallback",
-                isEnabled: out bool value)
-            ? value : false;
+                isEnabled: out bool value
+            )
+                ? value
+                : false;
     }
 }

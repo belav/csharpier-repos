@@ -35,8 +35,6 @@ namespace System.Xml.FactoryReaderTests
         }
     }
 
-
-
     ////////////////////////////////////////////////////////////////
     // FactoryReader factory
     //
@@ -94,256 +92,163 @@ namespace System.Xml.FactoryReaderTests
                 return reader;
             }
 
-            throw new
-                CTestFailedException("Factory Reader not created");
+            throw new CTestFailedException("Factory Reader not created");
         }
     }
 
     [TestCase(Name = "ErrorCondition", Desc = "FactoryReader")]
-    internal class TCErrorConditionReader : TCErrorCondition
-    {
-    }
+    internal class TCErrorConditionReader : TCErrorCondition { }
 
     [TestCase(Name = "XMLException", Desc = "FactoryReader")]
-    public class TCXMLExceptionReader : TCXMLException
-    {
-    }
+    public class TCXMLExceptionReader : TCXMLException { }
 
     [TestCase(Name = "LinePos", Desc = "FactoryReader")]
-    public class TCLinePosReader : TCLinePos
-    {
-    }
+    public class TCLinePosReader : TCLinePos { }
 
     [TestCase(Name = "Depth", Desc = "FactoryReader")]
-    internal class TCDepthReader : TCDepth
-    {
-    }
+    internal class TCDepthReader : TCDepth { }
 
     [TestCase(Name = "Namespace", Desc = "FactoryReader")]
-    internal class TCNamespaceReader : TCNamespace
-    {
-    }
+    internal class TCNamespaceReader : TCNamespace { }
 
     [TestCase(Name = "LookupNamespace", Desc = "FactoryReader")]
-    internal class TCLookupNamespaceReader : TCLookupNamespace
-    {
-    }
+    internal class TCLookupNamespaceReader : TCLookupNamespace { }
 
     [TestCase(Name = "HasValue", Desc = "FactoryReader")]
-    internal class TCHasValueReader : TCHasValue
-    {
-    }
+    internal class TCHasValueReader : TCHasValue { }
 
     [TestCase(Name = "IsEmptyElement", Desc = "FactoryReader")]
-    internal class TCIsEmptyElementReader : TCIsEmptyElement
-    {
-    }
+    internal class TCIsEmptyElementReader : TCIsEmptyElement { }
 
     [TestCase(Name = "XmlSpace", Desc = "FactoryReader")]
-    internal class TCXmlSpaceReader : TCXmlSpace
-    {
-    }
+    internal class TCXmlSpaceReader : TCXmlSpace { }
 
     [TestCase(Name = "XmlLang", Desc = "FactoryReader")]
-    internal class TCXmlLangReader : TCXmlLang
-    {
-    }
+    internal class TCXmlLangReader : TCXmlLang { }
 
     [TestCase(Name = "Skip", Desc = "FactoryReader")]
-    internal class TCSkipReader : TCSkip
-    {
-    }
+    internal class TCSkipReader : TCSkip { }
 
     [TestCase(Name = "BaseURI", Desc = "FactoryReader")]
-    internal class TCBaseURIReader : TCBaseURI
-    {
-    }
+    internal class TCBaseURIReader : TCBaseURI { }
 
     [TestCase(Name = "InvalidXML", Desc = "FactoryReader")]
-    internal class TCInvalidXMLReader : TCInvalidXML
-    {
-    }
+    internal class TCInvalidXMLReader : TCInvalidXML { }
 
     [TestCase(Name = "ReadOuterXml", Desc = "FactoryReader")]
-    internal class TCReadOuterXmlReader : TCReadOuterXml
-    {
-    }
+    internal class TCReadOuterXmlReader : TCReadOuterXml { }
 
     [TestCase(Name = "AttributeAccess", Desc = "FactoryReader")]
-    internal class TCAttributeAccessReader : TCAttributeAccess
-    {
-    }
+    internal class TCAttributeAccessReader : TCAttributeAccess { }
 
     [TestCase(Name = "This(Name) and This(Name, Namespace)", Desc = "FactoryReader")]
-    internal class TCThisNameReader : TCThisName
-    {
-    }
+    internal class TCThisNameReader : TCThisName { }
 
-    [TestCase(Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)", Desc = "FactoryReader")]
-    internal class TCMoveToAttributeReader : TCMoveToAttribute
-    {
-    }
+    [TestCase(
+        Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
+        Desc = "FactoryReader"
+    )]
+    internal class TCMoveToAttributeReader : TCMoveToAttribute { }
 
     [TestCase(Name = "GetAttribute (Ordinal)", Desc = "FactoryReader")]
-    internal class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal
-    {
-    }
+    internal class TCGetAttributeOrdinalReader : TCGetAttributeOrdinal { }
 
-    [TestCase(Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)", Desc = "FactoryReader")]
-    internal class TCGetAttributeNameReader : TCGetAttributeName
-    {
-    }
+    [TestCase(
+        Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
+        Desc = "FactoryReader"
+    )]
+    internal class TCGetAttributeNameReader : TCGetAttributeName { }
 
     [TestCase(Name = "This [Ordinal]", Desc = "FactoryReader")]
-    internal class TCThisOrdinalReader : TCThisOrdinal
-    {
-    }
+    internal class TCThisOrdinalReader : TCThisOrdinal { }
 
     [TestCase(Name = "MoveToAttribute(Ordinal)", Desc = "FactoryReader")]
-    internal class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal
-    {
-    }
+    internal class TCMoveToAttributeOrdinalReader : TCMoveToAttributeOrdinal { }
 
     [TestCase(Name = "MoveToFirstAttribute()", Desc = "FactoryReader")]
-    internal class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute
-    {
-    }
+    internal class TCMoveToFirstAttributeReader : TCMoveToFirstAttribute { }
 
     [TestCase(Name = "MoveToNextAttribute()", Desc = "FactoryReader")]
-    internal class TCMoveToNextAttributeReader : TCMoveToNextAttribute
-    {
-    }
+    internal class TCMoveToNextAttributeReader : TCMoveToNextAttribute { }
 
     [TestCase(Name = "Attribute Test when NodeType != Attributes", Desc = "FactoryReader")]
-    internal class TCAttributeTestReader : TCAttributeTest
-    {
-    }
+    internal class TCAttributeTestReader : TCAttributeTest { }
 
     [TestCase(Name = "Attributes test on XmlDeclaration DCR52258", Desc = "FactoryReader")]
-    internal class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration
-    {
-    }
+    internal class TCAttributeXmlDeclarationReader : TCAttributeXmlDeclaration { }
 
     [TestCase(Name = "xmlns as local name DCR50345", Desc = "FactoryReader")]
-    internal class TCXmlnsReader : TCXmlns
-    {
-    }
+    internal class TCXmlnsReader : TCXmlns { }
 
     [TestCase(Name = "bounded namespace to xmlns prefix DCR50881", Desc = "FactoryReader")]
-    internal class TCXmlnsPrefixReader : TCXmlnsPrefix
-    {
-    }
+    internal class TCXmlnsPrefixReader : TCXmlnsPrefix { }
 
     [TestCase(Name = "ReadState", Desc = "FactoryReader")]
-    internal class TCReadStateReader : TCReadState
-    {
-    }
+    internal class TCReadStateReader : TCReadState { }
 
     [TestCase(Name = "ReadInnerXml", Desc = "FactoryReader")]
-    internal class TCReadInnerXmlReader : TCReadInnerXml
-    {
-    }
+    internal class TCReadInnerXmlReader : TCReadInnerXml { }
 
     [TestCase(Name = "MoveToContent", Desc = "FactoryReader")]
-    internal class TCMoveToContentReader : TCMoveToContent
-    {
-    }
+    internal class TCMoveToContentReader : TCMoveToContent { }
 
     [TestCase(Name = "IsStartElement", Desc = "FactoryReader")]
-    internal class TCIsStartElementReader : TCIsStartElement
-    {
-    }
+    internal class TCIsStartElementReader : TCIsStartElement { }
 
     [TestCase(Name = "ReadStartElement", Desc = "FactoryReader")]
-    internal class TCReadStartElementReader : TCReadStartElement
-    {
-    }
+    internal class TCReadStartElementReader : TCReadStartElement { }
 
     [TestCase(Name = "ReadEndElement", Desc = "FactoryReader")]
-    internal class TCReadEndElementReader : TCReadEndElement
-    {
-    }
+    internal class TCReadEndElementReader : TCReadEndElement { }
 
     [TestCase(Name = "ResolveEntity and ReadAttributeValue", Desc = "FactoryReader")]
-    internal class TCResolveEntityReader : TCResolveEntity
-    {
-    }
+    internal class TCResolveEntityReader : TCResolveEntity { }
 
     [TestCase(Name = "ReadAttributeValue", Desc = "FactoryReader")]
-    internal class TCReadAttributeValueReader : TCReadAttributeValue
-    {
-    }
+    internal class TCReadAttributeValueReader : TCReadAttributeValue { }
 
     [TestCase(Name = "Read", Desc = "FactoryReader")]
-    internal class TCReadReader : TCRead2
-    {
-    }
+    internal class TCReadReader : TCRead2 { }
 
     [TestCase(Name = "MoveToElement", Desc = "FactoryReader")]
-    internal class TCMoveToElementReader : TCMoveToElement
-    {
-    }
+    internal class TCMoveToElementReader : TCMoveToElement { }
 
     [TestCase(Name = "Dispose", Desc = "FactoryReader")]
-    internal class TCDisposeReader : TCDispose
-    {
-    }
+    internal class TCDisposeReader : TCDispose { }
 
     [TestCase(Name = "Buffer Boundaries", Desc = "FactoryReader")]
-    internal class TCBufferBoundariesReader : TCBufferBoundaries
-    {
-    }
+    internal class TCBufferBoundariesReader : TCBufferBoundaries { }
 
     //[TestCase(Name = "BeforeRead", Desc = "BeforeRead")]
     //[TestCase(Name = "AfterReadIsFalse", Desc = "AfterReadIsFalse")]
     //[TestCase(Name = "AfterCloseInTheMiddle", Desc = "AfterCloseInTheMiddle")]
     //[TestCase(Name = "AfterClose", Desc = "AfterClose")]
-    internal class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase
-    {
-    }
+    internal class TCXmlNodeIntegrityTestFile : TCXMLIntegrityBase { }
 
     [TestCase(Name = "Read Subtree", Desc = "FactoryReader")]
-    internal class TCReadSubtreeReader : TCReadSubtree
-    {
-    }
+    internal class TCReadSubtreeReader : TCReadSubtree { }
 
     [TestCase(Name = "ReadToDescendant", Desc = "FactoryReader")]
-    internal class TCReadToDescendantReader : TCReadToDescendant
-    {
-    }
+    internal class TCReadToDescendantReader : TCReadToDescendant { }
 
     [TestCase(Name = "ReadToNextSibling", Desc = "FactoryReader")]
-    internal class TCReadToNextSiblingReader : TCReadToNextSibling
-    {
-    }
+    internal class TCReadToNextSiblingReader : TCReadToNextSibling { }
 
     [TestCase(Name = "ReadValue", Desc = "FactoryReader")]
-    internal class TCReadValueReader : TCReadValue
-    {
-    }
+    internal class TCReadValueReader : TCReadValue { }
 
     [TestCase(Name = "ReadContentAsBase64", Desc = "FactoryReader")]
-    internal class TCReadContentAsBase64Reader : TCReadContentAsBase64
-    {
-    }
+    internal class TCReadContentAsBase64Reader : TCReadContentAsBase64 { }
 
     [TestCase(Name = "ReadElementContentAsBase64", Desc = "FactoryReader")]
-    internal class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64
-    {
-    }
+    internal class TCReadElementContentAsBase64Reader : TCReadElementContentAsBase64 { }
 
     [TestCase(Name = "ReadContentAsBinHex", Desc = "FactoryReader")]
-    internal class TCReadContentAsBinHexReader : TCReadContentAsBinHex
-    {
-    }
+    internal class TCReadContentAsBinHexReader : TCReadContentAsBinHex { }
 
     [TestCase(Name = "ReadElementContentAsBinHex", Desc = "FactoryReader")]
-    internal class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex
-    {
-    }
+    internal class TCReadElementContentAsBinHexReader : TCReadElementContentAsBinHex { }
 
     [TestCase(Name = "ReadToFollowing", Desc = "FactoryReader")]
-    internal class TCReadToFollowingReader : TCReadToFollowing
-    {
-    }
+    internal class TCReadToFollowingReader : TCReadToFollowing { }
 }

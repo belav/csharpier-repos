@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public class AA
     {
         static ulong m_ul;
+
         [Fact]
         public static void TestEntryPoint()
         {

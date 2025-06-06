@@ -27,129 +27,142 @@
 //
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using NUnit.Framework;
 
-namespace MonoTests.System.Linq.Expressions {
+namespace MonoTests.System.Linq.Expressions
+{
+    [TestFixture]
+    [Category("SRE")]
+    public class ExpressionTest_ListBind
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void MemberNull()
+        {
+            Expression.ListBind(null as MemberInfo, new List<ElementInit>());
+        }
 
-	[TestFixture]
-	[Category("SRE")]
-	public class ExpressionTest_ListBind {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PropertyAccessorNull()
+        {
+            Expression.ListBind(null as MethodInfo, new List<ElementInit>());
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void MemberNull ()
-		{
-			Expression.ListBind (null as MemberInfo, new List<ElementInit> ());
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ArgNull()
+        {
+            var list = new List<ElementInit>();
+            list.Add(null);
+            Expression.ListBind(typeof(Foo).GetProperty("Bar").GetSetMethod(), list);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void PropertyAccessorNull ()
-		{
-			Expression.ListBind (null as MethodInfo, new List<ElementInit> ());
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MemberTypeImplementIEnumerable()
+        {
+            Expression.ListBind(typeof(Foo).GetMember("baz")[0], new List<ElementInit>());
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ArgNull ()
-		{
-			var list = new List<ElementInit> ();
-			list.Add (null);
-			Expression.ListBind (typeof (Foo).GetProperty ("Bar").GetSetMethod (), list);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MethodeGetImplementIEnumerable2()
+        {
+            Expression.ListBind(
+                typeof(Foo).GetProperty("BarBar").GetGetMethod(),
+                new List<ElementInit>()
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MemberTypeImplementIEnumerable ()
-		{
-			Expression.ListBind (typeof (Foo).GetMember ("baz") [0], new List<ElementInit> ());
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MethodMustBeAnAccessor()
+        {
+            Expression.ListBind(typeof(Foo).GetMethod("test"), new List<ElementInit>());
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MethodeGetImplementIEnumerable2 ()
-		{
-			Expression.ListBind (typeof (Foo).GetProperty ("BarBar").GetGetMethod (), new List<ElementInit> ());
-		}
+        [Test]
+        public void ListBindToString()
+        {
+            var add = typeof(List<string>).GetMethod("Add");
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void MethodMustBeAnAccessor ()
-		{
-			Expression.ListBind (typeof (Foo).GetMethod ("test"), new List<ElementInit> ());
-		}
+            var list = new List<ElementInit>()
+            {
+                Expression.ElementInit(add, Expression.Constant("foo")),
+                Expression.ElementInit(add, Expression.Constant("bar")),
+                Expression.ElementInit(add, Expression.Constant("baz")),
+            };
 
-		[Test]
-		public void ListBindToString ()
-		{
-			var add = typeof (List<string>).GetMethod ("Add");
+            var binding = Expression.ListBind(typeof(Foo).GetProperty("List"), list);
 
-			var list = new List<ElementInit> () {
-				Expression.ElementInit (add, Expression.Constant ("foo")),
-				Expression.ElementInit (add, Expression.Constant ("bar")),
-				Expression.ElementInit (add, Expression.Constant ("baz")),
-			};
+            Assert.AreEqual(
+                "List = {Void Add(System.String)(\"foo\"), Void Add(System.String)(\"bar\"), Void Add(System.String)(\"baz\")}",
+                binding.ToString()
+            );
+        }
 
-			var binding = Expression.ListBind (typeof (Foo).GetProperty ("List"), list);
+        [Test]
+        public void CompiledListBinding()
+        {
+            var add = typeof(List<string>).GetMethod("Add");
 
-			Assert.AreEqual ("List = {Void Add(System.String)(\"foo\"), Void Add(System.String)(\"bar\"), Void Add(System.String)(\"baz\")}", binding.ToString ());
-		}
+            var lb = Expression
+                .Lambda<Func<Foo>>(
+                    Expression.MemberInit(
+                        Expression.New(typeof(Foo)),
+                        Expression.ListBind(
+                            typeof(Foo).GetProperty("List"),
+                            Expression.ElementInit(add, Expression.Constant("foo")),
+                            Expression.ElementInit(add, Expression.Constant("bar")),
+                            Expression.ElementInit(add, Expression.Constant("baz"))
+                        )
+                    )
+                )
+                .Compile();
 
-		[Test]
-		public void CompiledListBinding ()
-		{
-			var add = typeof (List<string>).GetMethod ("Add");
+            var foo = lb();
 
-			var lb = Expression.Lambda<Func<Foo>> (
-				Expression.MemberInit (
-					Expression.New (typeof (Foo)),
-					Expression.ListBind (
-						typeof (Foo).GetProperty ("List"),
-						Expression.ElementInit (add, Expression.Constant ("foo")),
-						Expression.ElementInit (add, Expression.Constant ("bar")),
-						Expression.ElementInit (add, Expression.Constant ("baz"))))).Compile ();
+            Assert.IsNotNull(foo);
+            Assert.AreEqual(3, foo.List.Count);
+            Assert.AreEqual("foo", foo.List[0]);
+            Assert.AreEqual("bar", foo.List[1]);
+            Assert.AreEqual("baz", foo.List[2]);
+        }
 
-			var foo = lb ();
+        public class Foo
+        {
+            public string[] foo;
+            public string str;
 
-			Assert.IsNotNull (foo);
-			Assert.AreEqual (3, foo.List.Count);
-			Assert.AreEqual ("foo", foo.List [0]);
-			Assert.AreEqual ("bar", foo.List [1]);
-			Assert.AreEqual ("baz", foo.List [2]);
-		}
+            public int baz;
 
-		public class Foo {
+            private List<string> list = new List<string>();
 
-			public string [] foo;
-			public string str;
+            public List<string> List
+            {
+                get { return list; }
+            }
 
-			public int baz;
+            public string[] Bar
+            {
+                get { return foo; }
+                set { foo = value; }
+            }
 
-			private List<string> list = new List<string> ();
+            public int BarBar
+            {
+                get { return 0; }
+            }
 
-			public List<string> List {
-				get { return list; }
-			}
-
-			public string [] Bar
-			{
-				get { return foo; }
-				set { foo = value; }
-			}
-
-			public int BarBar
-			{
-				get { return 0; }
-			}
-
-			public string [] test ()
-			{
-				return null;
-			}
-		}
-	}
+            public string[] test()
+            {
+                return null;
+            }
+        }
+    }
 }

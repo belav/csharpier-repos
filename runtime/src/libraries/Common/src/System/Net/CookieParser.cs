@@ -12,11 +12,11 @@ namespace System.Net
     {
         // State types
         Nothing,
-        NameValuePair,  // X=Y
-        Attribute,      // X
-        EndToken,       // ';'
-        EndCookie,      // ','
-        End,            // EOLN
+        NameValuePair, // X=Y
+        Attribute, // X
+        EndToken, // ';'
+        EndCookie, // ','
+        End, // EOLN
         Equals,
 
         // Value types
@@ -32,7 +32,7 @@ namespace System.Net
         Secure,
         HttpOnly,
         Unknown,
-        Version
+        Version,
     }
 
     // CookieTokenizer
@@ -54,7 +54,8 @@ namespace System.Net
         private int _cookieStartIndex;
         private int _cookieLength;
 
-        internal CookieTokenizer(string tokenStream) : this()
+        internal CookieTokenizer(string tokenStream)
+            : this()
         {
             _length = tokenStream.Length;
             _tokenStream = tokenStream;
@@ -63,70 +64,37 @@ namespace System.Net
 
         internal bool EndOfCookie
         {
-            get
-            {
-                return _eofCookie;
-            }
-            set
-            {
-                _eofCookie = value;
-            }
+            get { return _eofCookie; }
+            set { _eofCookie = value; }
         }
 
         internal bool Eof
         {
-            get
-            {
-                return _index >= _length;
-            }
+            get { return _index >= _length; }
         }
 
         internal string? Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get { return _name; }
+            set { _name = value; }
         }
 
         internal bool Quoted
         {
-            get
-            {
-                return _quoted;
-            }
-            set
-            {
-                _quoted = value;
-            }
+            get { return _quoted; }
+            set { _quoted = value; }
         }
 
         internal CookieToken Token
         {
-            get
-            {
-                return _token;
-            }
-            set
-            {
-                _token = value;
-            }
+            get { return _token; }
+            set { _token = value; }
         }
 
         internal string Value
         {
-            get
-            {
-                return _value;
-            }
-            set
-            {
-                _value = value;
-            }
+            get { return _value; }
+            set { _value = value; }
         }
 
         // Extract
@@ -138,9 +106,9 @@ namespace System.Net
 
             if (_tokenLength != 0)
             {
-                tokenString = Quoted ?
-                    _tokenStream.Substring(_start, _tokenLength) :
-                    _tokenStream.SubstringTrim(_start, _tokenLength);
+                tokenString = Quoted
+                    ? _tokenStream.Substring(_start, _tokenLength)
+                    : _tokenStream.SubstringTrim(_start, _tokenLength);
             }
             return tokenString;
         }
@@ -239,10 +207,12 @@ namespace System.Net
                     // In effect, we ignore everything after quoted string until the next delimiter.
                     ignoreComma = false;
                 }
-                while ((_index < _length)
-                       && (_tokenStream[_index] != ';')
-                       && (ignoreEquals || (_tokenStream[_index] != '='))
-                       && (ignoreComma || (_tokenStream[_index] != ',')))
+                while (
+                    (_index < _length)
+                    && (_tokenStream[_index] != ';')
+                    && (ignoreEquals || (_tokenStream[_index] != '='))
+                    && (ignoreComma || (_tokenStream[_index] != ','))
+                )
                 {
                     // Fixing 2 things:
                     // 1) ignore day of week in cookie string
@@ -443,10 +413,7 @@ namespace System.Net
 
             internal CookieToken Token
             {
-                get
-                {
-                    return _token;
-                }
+                get { return _token; }
             }
 
             internal bool IsEqualTo(string? value)
@@ -456,7 +423,8 @@ namespace System.Net
         }
 
         // Recognized attributes in order of expected frequency.
-        private static readonly RecognizedAttribute[] s_recognizedAttributes = {
+        private static readonly RecognizedAttribute[] s_recognizedAttributes =
+        {
             new RecognizedAttribute(CookieFields.PathAttributeName, CookieToken.Path),
             new RecognizedAttribute(CookieFields.MaxAgeAttributeName, CookieToken.MaxAge),
             new RecognizedAttribute(CookieFields.ExpiresAttributeName, CookieToken.Expires),
@@ -470,7 +438,8 @@ namespace System.Net
             new RecognizedAttribute(CookieFields.HttpOnlyAttributeName, CookieToken.HttpOnly),
         };
 
-        private static readonly RecognizedAttribute[] s_recognizedServerAttributes = {
+        private static readonly RecognizedAttribute[] s_recognizedServerAttributes =
+        {
             new RecognizedAttribute('$' + CookieFields.PathAttributeName, CookieToken.Path),
             new RecognizedAttribute('$' + CookieFields.VersionAttributeName, CookieToken.Version),
             new RecognizedAttribute('$' + CookieFields.DomainAttributeName, CookieToken.Domain),
@@ -535,9 +504,17 @@ namespace System.Net
                     // We need to use Cookie.InternalSetName instead of the Cookie.set_Name wrapped in a try catch block, as
                     // Cookie.set_Name keeps the original name if the string is empty or null.
                     // Unfortunately this API is internal so we use reflection to access it. The method is cached for performance reasons.
-                    MethodInfo? method = typeof(Cookie).GetMethod("InternalSetName", BindingFlags.Instance | BindingFlags.NonPublic);
-                    Debug.Assert(method != null, "We need to use an internal method named InternalSetName that is declared on Cookie.");
-                    s_internalSetNameMethod = (Func<Cookie, string?, bool>)Delegate.CreateDelegate(typeof(Func<Cookie, string?, bool>), method);
+                    MethodInfo? method = typeof(Cookie).GetMethod(
+                        "InternalSetName",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    );
+                    Debug.Assert(
+                        method != null,
+                        "We need to use an internal method named InternalSetName that is declared on Cookie."
+                    );
+                    s_internalSetNameMethod =
+                        (Func<Cookie, string?, bool>)
+                            Delegate.CreateDelegate(typeof(Func<Cookie, string?, bool>), method);
                 }
 
                 return s_internalSetNameMethod;
@@ -553,8 +530,14 @@ namespace System.Net
                 if (s_isQuotedDomainField == null)
                 {
                     // TODO https://github.com/dotnet/runtime/issues/19348:
-                    FieldInfo? field = typeof(Cookie).GetField("IsQuotedDomain", BindingFlags.Instance | BindingFlags.NonPublic);
-                    Debug.Assert(field != null, "We need to use an internal field named IsQuotedDomain that is declared on Cookie.");
+                    FieldInfo? field = typeof(Cookie).GetField(
+                        "IsQuotedDomain",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    );
+                    Debug.Assert(
+                        field != null,
+                        "We need to use an internal field named IsQuotedDomain that is declared on Cookie."
+                    );
                     s_isQuotedDomainField = field;
                 }
 
@@ -570,8 +553,14 @@ namespace System.Net
                 if (s_isQuotedVersionField == null)
                 {
                     // TODO https://github.com/dotnet/runtime/issues/19348:
-                    FieldInfo? field = typeof(Cookie).GetField("IsQuotedVersion", BindingFlags.Instance | BindingFlags.NonPublic);
-                    Debug.Assert(field != null, "We need to use an internal field named IsQuotedVersion that is declared on Cookie.");
+                    FieldInfo? field = typeof(Cookie).GetField(
+                        "IsQuotedVersion",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    );
+                    Debug.Assert(
+                        field != null,
+                        "We need to use an internal field named IsQuotedVersion that is declared on Cookie."
+                    );
                     s_isQuotedVersionField = field;
                 }
 
@@ -600,7 +589,10 @@ namespace System.Net
             do
             {
                 CookieToken token = _tokenizer.Next(cookie == null, true);
-                if (cookie == null && (token == CookieToken.NameValuePair || token == CookieToken.Attribute))
+                if (
+                    cookie == null
+                    && (token == CookieToken.NameValuePair || token == CookieToken.Attribute)
+                )
                 {
                     cookie = new Cookie();
                     InternalSetNameMethod(cookie, _tokenizer.Name);
@@ -625,7 +617,13 @@ namespace System.Net
                                     if (!commentUriSet)
                                     {
                                         commentUriSet = true;
-                                        if (Uri.TryCreate(CheckQuoted(_tokenizer.Value), UriKind.Absolute, out Uri? parsed))
+                                        if (
+                                            Uri.TryCreate(
+                                                CheckQuoted(_tokenizer.Value),
+                                                UriKind.Absolute,
+                                                out Uri? parsed
+                                            )
+                                        )
                                         {
                                             cookie!.CommentUri = parsed;
                                         }
@@ -646,8 +644,15 @@ namespace System.Net
                                     {
                                         expiresSet = true;
 
-                                        if (DateTime.TryParse(CheckQuoted(_tokenizer.Value),
-                                            CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AdjustToUniversal, out DateTime expires))
+                                        if (
+                                            DateTime.TryParse(
+                                                CheckQuoted(_tokenizer.Value),
+                                                CultureInfo.InvariantCulture,
+                                                DateTimeStyles.AllowWhiteSpaces
+                                                    | DateTimeStyles.AdjustToUniversal,
+                                                out DateTime expires
+                                            )
+                                        )
                                         {
                                             cookie!.Expires = expires;
                                         }
@@ -663,7 +668,12 @@ namespace System.Net
                                     if (!expiresSet)
                                     {
                                         expiresSet = true;
-                                        if (int.TryParse(CheckQuoted(_tokenizer.Value), out int parsed))
+                                        if (
+                                            int.TryParse(
+                                                CheckQuoted(_tokenizer.Value),
+                                                out int parsed
+                                            )
+                                        )
                                         {
                                             cookie!.Expires = DateTime.Now.AddSeconds(parsed);
                                         }
@@ -707,7 +717,10 @@ namespace System.Net
                                         if (int.TryParse(CheckQuoted(_tokenizer.Value), out parsed))
                                         {
                                             cookie!.Version = parsed;
-                                            IsQuotedVersionField.SetValue(cookie, _tokenizer.Quoted);
+                                            IsQuotedVersionField.SetValue(
+                                                cookie,
+                                                _tokenizer.Quoted
+                                            );
                                         }
                                         else
                                         {

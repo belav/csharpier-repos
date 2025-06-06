@@ -3,7 +3,6 @@
 
 using System;
 using Internal.TypeSystem;
-
 using Xunit;
 
 namespace TypeSystemTests
@@ -32,13 +31,20 @@ namespace TypeSystemTests
             _testModuleX64 = systemModuleX64;
 
             _contextX64Linux = new TestTypeSystemContext(TargetArchitecture.X64, TargetOS.Linux);
-            var systemModuleX64Linux = _contextX64Linux.CreateModuleForSimpleName("CoreTestAssembly");
+            var systemModuleX64Linux = _contextX64Linux.CreateModuleForSimpleName(
+                "CoreTestAssembly"
+            );
             _contextX64Linux.SetSystemModule(systemModuleX64Linux);
 
             _testModuleX64Linux = systemModuleX64Linux;
 
-            _contextX64Windows = new TestTypeSystemContext(TargetArchitecture.X64, TargetOS.Windows);
-            var systemModuleX64Windows = _contextX64Windows.CreateModuleForSimpleName("CoreTestAssembly");
+            _contextX64Windows = new TestTypeSystemContext(
+                TargetArchitecture.X64,
+                TargetOS.Windows
+            );
+            var systemModuleX64Windows = _contextX64Windows.CreateModuleForSimpleName(
+                "CoreTestAssembly"
+            );
             _contextX64Windows.SetSystemModule(systemModuleX64Windows);
 
             _testModuleX64Windows = systemModuleX64Windows;
@@ -148,9 +154,18 @@ namespace TypeSystemTests
             Assert.Equal(0x18, tARM.GetField("_4").Offset.AsInt);
             Assert.Equal(0x18, tX86.GetField("_4").Offset.AsInt);
 
-            MetadataType tX64FieldStruct = _testModuleX64.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tX86FieldStruct = _testModuleX86.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tARMFieldStruct = _testModuleARM.GetType(_namespace, _type + "FieldStruct");
+            MetadataType tX64FieldStruct = _testModuleX64.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tX86FieldStruct = _testModuleX86.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tARMFieldStruct = _testModuleARM.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
 
             Assert.Equal(0x8, tX64FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x8, tX86FieldStruct.GetField("_struct").Offset.AsInt);
@@ -203,14 +218,22 @@ namespace TypeSystemTests
             Assert.Equal(0xC, tARM.GetField("_4").Offset.AsInt);
             Assert.Equal(0xC, tX86.GetField("_4").Offset.AsInt);
 
-            MetadataType tX64FieldStruct = _testModuleX64.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tX86FieldStruct = _testModuleX86.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tARMFieldStruct = _testModuleARM.GetType(_namespace, _type + "FieldStruct");
+            MetadataType tX64FieldStruct = _testModuleX64.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tX86FieldStruct = _testModuleX86.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tARMFieldStruct = _testModuleARM.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
 
             Assert.Equal(0x4, tX64FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x4, tX86FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x4, tARMFieldStruct.GetField("_struct").Offset.AsInt);
-
         }
 
         [Fact]
@@ -259,9 +282,18 @@ namespace TypeSystemTests
             Assert.Equal(0x6, tARM.GetField("_4").Offset.AsInt);
             Assert.Equal(0x6, tX86.GetField("_4").Offset.AsInt);
 
-            MetadataType tX64FieldStruct = _testModuleX64.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tX86FieldStruct = _testModuleX86.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tARMFieldStruct = _testModuleARM.GetType(_namespace, _type + "FieldStruct");
+            MetadataType tX64FieldStruct = _testModuleX64.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tX86FieldStruct = _testModuleX86.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tARMFieldStruct = _testModuleARM.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
 
             Assert.Equal(0x2, tX64FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x2, tX86FieldStruct.GetField("_struct").Offset.AsInt);
@@ -314,9 +346,18 @@ namespace TypeSystemTests
             Assert.Equal(0x14, tARM.GetField("_4").Offset.AsInt);
             Assert.Equal(0x14, tX86.GetField("_4").Offset.AsInt);
 
-            MetadataType tX64FieldStruct = _testModuleX64.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tX86FieldStruct = _testModuleX86.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tARMFieldStruct = _testModuleARM.GetType(_namespace, _type + "FieldStruct");
+            MetadataType tX64FieldStruct = _testModuleX64.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tX86FieldStruct = _testModuleX86.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tARMFieldStruct = _testModuleARM.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
 
             Assert.Equal(0x8, tX64FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x4, tX86FieldStruct.GetField("_struct").Offset.AsInt);
@@ -369,14 +410,22 @@ namespace TypeSystemTests
             Assert.Equal(0xA, tARM.GetField("_4").Offset.AsInt);
             Assert.Equal(0xA, tX86.GetField("_4").Offset.AsInt);
 
-            MetadataType tX64FieldStruct = _testModuleX64.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tX86FieldStruct = _testModuleX86.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tARMFieldStruct = _testModuleARM.GetType(_namespace, _type + "FieldStruct");
+            MetadataType tX64FieldStruct = _testModuleX64.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tX86FieldStruct = _testModuleX86.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tARMFieldStruct = _testModuleARM.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
 
             Assert.Equal(0x8, tX64FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x4, tX86FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x4, tARMFieldStruct.GetField("_struct").Offset.AsInt);
-
         }
 
         [Fact]
@@ -425,9 +474,18 @@ namespace TypeSystemTests
             Assert.Equal(0x5, tARM.GetField("_4").Offset.AsInt);
             Assert.Equal(0x5, tX86.GetField("_4").Offset.AsInt);
 
-            MetadataType tX64FieldStruct = _testModuleX64.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tX86FieldStruct = _testModuleX86.GetType(_namespace, _type + "FieldStruct");
-            MetadataType tARMFieldStruct = _testModuleARM.GetType(_namespace, _type + "FieldStruct");
+            MetadataType tX64FieldStruct = _testModuleX64.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tX86FieldStruct = _testModuleX86.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
+            MetadataType tARMFieldStruct = _testModuleARM.GetType(
+                _namespace,
+                _type + "FieldStruct"
+            );
 
             Assert.Equal(0x8, tX64FieldStruct.GetField("_struct").Offset.AsInt);
             Assert.Equal(0x4, tX86FieldStruct.GetField("_struct").Offset.AsInt);
@@ -462,14 +520,46 @@ namespace TypeSystemTests
         }
 
         [Theory]
-        [InlineData("StructStructByte_StructByteAuto", new int[] { 1, 1, 1 }, new int[] { 2, 2, 2 })]
-        [InlineData("StructStructByte_Struct2BytesAuto", new int[] { 2, 2, 2 }, new int[] { 4, 4, 4 })]
-        [InlineData("StructStructByte_Struct3BytesAuto", new int[] { 4, 4, 4 }, new int[] { 8, 8, 8 })]
-        [InlineData("StructStructByte_Struct4BytesAuto", new int[] { 4, 4, 4 }, new int[] { 8, 8, 8 })]
-        [InlineData("StructStructByte_Struct5BytesAuto", new int[] { 8, 4, 4 }, new int[] { 16, 12, 12 })]
-        [InlineData("StructStructByte_Struct8BytesAuto", new int[] { 8, 4, 4 }, new int[] { 16, 12, 12 })]
-        [InlineData("StructStructByte_Struct9BytesAuto", new int[] { 8, 4, 4 }, new int[] { 24, 16, 16 })]
-        public void TestAlignmentBehavior_AutoAlignmentRules(string wrapperType, int[] alignment, int[] size)
+        [InlineData(
+            "StructStructByte_StructByteAuto",
+            new int[] { 1, 1, 1 },
+            new int[] { 2, 2, 2 }
+        )]
+        [InlineData(
+            "StructStructByte_Struct2BytesAuto",
+            new int[] { 2, 2, 2 },
+            new int[] { 4, 4, 4 }
+        )]
+        [InlineData(
+            "StructStructByte_Struct3BytesAuto",
+            new int[] { 4, 4, 4 },
+            new int[] { 8, 8, 8 }
+        )]
+        [InlineData(
+            "StructStructByte_Struct4BytesAuto",
+            new int[] { 4, 4, 4 },
+            new int[] { 8, 8, 8 }
+        )]
+        [InlineData(
+            "StructStructByte_Struct5BytesAuto",
+            new int[] { 8, 4, 4 },
+            new int[] { 16, 12, 12 }
+        )]
+        [InlineData(
+            "StructStructByte_Struct8BytesAuto",
+            new int[] { 8, 4, 4 },
+            new int[] { 16, 12, 12 }
+        )]
+        [InlineData(
+            "StructStructByte_Struct9BytesAuto",
+            new int[] { 8, 4, 4 },
+            new int[] { 24, 16, 16 }
+        )]
+        public void TestAlignmentBehavior_AutoAlignmentRules(
+            string wrapperType,
+            int[] alignment,
+            int[] size
+        )
         {
             string _namespace = "Sequential";
             string _type = wrapperType;
@@ -507,7 +597,12 @@ namespace TypeSystemTests
         [InlineData("StructStructByte_UInt128StructAuto", "X64Linux", 16, 32)]
         [InlineData("StructStructByte_UInt128StructAuto", "X64Windows", 16, 32)]
         // Variation of TestAlignmentBehavior_AutoAlignmentRules above that is able to deal with os specific behavior
-        public void TestAlignmentBehavior_AutoAlignmentRulesWithOSDependence(string wrapperType, string osArch, int alignment, int size)
+        public void TestAlignmentBehavior_AutoAlignmentRulesWithOSDependence(
+            string wrapperType,
+            string osArch,
+            int alignment,
+            int size
+        )
         {
             ModuleDesc testModule;
             switch (osArch)

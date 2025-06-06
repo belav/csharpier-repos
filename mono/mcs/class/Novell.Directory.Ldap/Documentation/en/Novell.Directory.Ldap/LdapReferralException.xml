@@ -1,10 +1,12 @@
 <Type Name="LdapReferralException" FullName="Novell.Directory.Ldap.LdapReferralException">
-  <TypeSignature Language="C#" Value="public class LdapReferralException : Novell.Directory.Ldap.LdapException, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapReferralException : Novell.Directory.Ldap.LdapException, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -72,7 +74,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, object[] arguments)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, object[] arguments)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -86,7 +91,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, System.Exception rootException)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, System.Exception rootException)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -100,7 +108,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, object[] arguments, System.Exception rootException)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, object[] arguments, System.Exception rootException)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -116,7 +127,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, int resultCode, string serverMessage)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, int resultCode, string serverMessage)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -132,7 +146,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, object[] arguments, int resultCode, string serverMessage)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, object[] arguments, int resultCode, string serverMessage)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -150,7 +167,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, int resultCode, string serverMessage, System.Exception rootException)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, int resultCode, string serverMessage, System.Exception rootException)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />
@@ -168,7 +188,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapReferralException(string message, object[] arguments, int resultCode, string serverMessage, System.Exception rootException)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapReferralException(string message, object[] arguments, int resultCode, string serverMessage, System.Exception rootException)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />

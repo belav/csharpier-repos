@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportCSharpVisualBasicStatelessLspService(typeof(FormatDocumentOnTypeHandler)), Shared]
     [Method(Methods.TextDocumentOnTypeFormattingName)]
-    internal sealed class FormatDocumentOnTypeHandler : ILspServiceDocumentRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]?>
+    internal sealed class FormatDocumentOnTypeHandler
+        : ILspServiceDocumentRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]?>
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -37,47 +38,86 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             _globalOptions = globalOptions;
         }
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(DocumentOnTypeFormattingParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            DocumentOnTypeFormattingParams request
+        ) => request.TextDocument;
 
         public async Task<TextEdit[]?> HandleRequestAsync(
             DocumentOnTypeFormattingParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = context.Document;
             if (document is null)
                 return null;
 
-            var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(request.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            if (string.IsNullOrEmpty(request.Character) || SyntaxFacts.IsNewLine(request.Character[0]))
+            if (
+                string.IsNullOrEmpty(request.Character)
+                || SyntaxFacts.IsNewLine(request.Character[0])
+            )
             {
                 return Array.Empty<TextEdit>();
             }
 
-            var formattingService = document.Project.Services.GetRequiredService<ISyntaxFormattingService>();
-            var documentSyntax = await ParsedDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            var formattingService =
+                document.Project.Services.GetRequiredService<ISyntaxFormattingService>();
+            var documentSyntax = await ParsedDocument
+                .CreateAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            if (!formattingService.ShouldFormatOnTypedCharacter(documentSyntax, request.Character[0], position, cancellationToken))
+            if (
+                !formattingService.ShouldFormatOnTypedCharacter(
+                    documentSyntax,
+                    request.Character[0],
+                    position,
+                    cancellationToken
+                )
+            )
             {
                 return Array.Empty<TextEdit>();
             }
 
             // We should use the options passed in by LSP instead of the document's options.
-            var formattingOptions = await ProtocolConversions.GetFormattingOptionsAsync(request.Options, document, _globalOptions, cancellationToken).ConfigureAwait(false);
+            var formattingOptions = await ProtocolConversions
+                .GetFormattingOptionsAsync(
+                    request.Options,
+                    document,
+                    _globalOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var indentationOptions = new IndentationOptions(formattingOptions)
             {
-                AutoFormattingOptions = _globalOptions.GetAutoFormattingOptions(document.Project.Language)
+                AutoFormattingOptions = _globalOptions.GetAutoFormattingOptions(
+                    document.Project.Language
+                ),
             };
 
-            var textChanges = formattingService.GetFormattingChangesOnTypedCharacter(documentSyntax, position, indentationOptions, cancellationToken);
+            var textChanges = formattingService.GetFormattingChangesOnTypedCharacter(
+                documentSyntax,
+                position,
+                indentationOptions,
+                cancellationToken
+            );
             if (textChanges.IsEmpty)
             {
                 return Array.Empty<TextEdit>();
             }
 
             var edits = new ArrayBuilder<TextEdit>();
-            edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, documentSyntax.Text)));
+            edits.AddRange(
+                textChanges.Select(change =>
+                    ProtocolConversions.TextChangeToTextEdit(change, documentSyntax.Text)
+                )
+            );
             return edits.ToArrayAndFree();
         }
     }

@@ -3,7 +3,6 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Runtime\Serialization\Schema\Import\SurrogateTests.cs" />
     <Compile Include="System\Runtime\Serialization\Schema\RoundTripTest.cs" />
@@ -11,10 +10,8 @@
     <Compile Include="System\Runtime\Serialization\Schema\DataContracts.cs" />
     <Compile Include="System\Runtime\Serialization\Schema\Import\ImportOptionsTests.cs" />
     <Compile Include="System\Runtime\Serialization\Schema\SchemaUtils.cs" />
-
     <TrimmerRootDescriptor Include="ILLink.Descriptors.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\src\System.Runtime.Serialization.Schema.csproj" />
   </ItemGroup>

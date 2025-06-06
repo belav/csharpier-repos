@@ -41,94 +41,60 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public IEnumerable<MetadataReference> MetadataReferences
         {
-            get
-            {
-                return _metadataReferences;
-            }
+            get { return _metadataReferences; }
         }
 
         public IEnumerable<AnalyzerReference> AnalyzerReferences
         {
-            get
-            {
-                return _analyzerReferences;
-            }
+            get { return _analyzerReferences; }
         }
 
         public CompilationOptions CompilationOptions
         {
-            get
-            {
-                return _compilationOptions;
-            }
+            get { return _compilationOptions; }
         }
 
         public ParseOptions ParseOptions
         {
-            get
-            {
-                return _parseOptions;
-            }
+            get { return _parseOptions; }
         }
 
         public ProjectId Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
         }
 
         public bool IsSubmission
         {
-            get
-            {
-                return _isSubmission;
-            }
+            get { return _isSubmission; }
         }
 
         public string AssemblyName
         {
-            get
-            {
-                return _assemblyName;
-            }
+            get { return _assemblyName; }
         }
 
         public Type HostObjectType
         {
-            get
-            {
-                return _hostObjectType;
-            }
+            get { return _hostObjectType; }
         }
 
         public VersionStamp Version
         {
-            get
-            {
-                return _version;
-            }
+            get { return _version; }
         }
 
         public string FilePath
         {
-            get
-            {
-                return _filePath;
-            }
+            get { return _filePath; }
         }
 
-        internal void OnProjectFilePathChanged(string filePath)
-            => _filePath = filePath;
+        internal void OnProjectFilePathChanged(string filePath) => _filePath = filePath;
 
         public string OutputFilePath
         {
@@ -144,25 +110,26 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             HostLanguageServices languageServices,
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
-            params MetadataReference[] references)
-            : this(languageServices, compilationOptions, parseOptions, "Test", references)
-        {
-        }
+            params MetadataReference[] references
+        )
+            : this(languageServices, compilationOptions, parseOptions, "Test", references) { }
+
         internal TestHostProject(
             HostLanguageServices languageServices,
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             string assemblyName,
-            params MetadataReference[] references)
-            : this(languageServices,
-                   compilationOptions,
-                   parseOptions,
-                   assemblyName: assemblyName,
-                   projectName: assemblyName,
-                   references: references,
-                   documents: Array.Empty<TestHostDocument>())
-        {
-        }
+            params MetadataReference[] references
+        )
+            : this(
+                languageServices,
+                compilationOptions,
+                parseOptions,
+                assemblyName: assemblyName,
+                projectName: assemblyName,
+                references: references,
+                documents: Array.Empty<TestHostDocument>()
+            ) { }
 
         internal TestHostProject(
             HostLanguageServices languageServices,
@@ -178,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             bool isSubmission = false,
             string filePath = null,
             IList<AnalyzerReference> analyzerReferences = null,
-            string defaultNamespace = null)
+            string defaultNamespace = null
+        )
         {
             _assemblyName = assemblyName;
             _name = projectName;
@@ -187,10 +155,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             _compilationOptions = compilationOptions;
             _parseOptions = parseOptions;
             _metadataReferences = references;
-            _analyzerReferences = analyzerReferences ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
+            _analyzerReferences =
+                analyzerReferences ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
             this.Documents = documents;
-            this.AdditionalDocuments = additionalDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            this.AnalyzerConfigDocuments = analyzerConfigDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AdditionalDocuments =
+                additionalDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AnalyzerConfigDocuments =
+                analyzerConfigDocuments
+                ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
             ProjectReferences = SpecializedCollections.EmptyEnumerable<ProjectReference>();
             _isSubmission = isSubmission;
             _hostObjectType = hostObjectType;
@@ -211,10 +183,23 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IEnumerable<MetadataReference> metadataReferences = null,
             IEnumerable<AnalyzerReference> analyzerReferences = null,
             string assemblyName = null,
-            string defaultNamespace = null)
-            : this(workspace, name, language, compilationOptions, parseOptions, SpecializedCollections.SingletonEnumerable(document), SpecializedCollections.EmptyEnumerable<TestHostDocument>(), SpecializedCollections.EmptyEnumerable<TestHostDocument>(), projectReferences, metadataReferences, analyzerReferences, assemblyName, defaultNamespace)
-        {
-        }
+            string defaultNamespace = null
+        )
+            : this(
+                workspace,
+                name,
+                language,
+                compilationOptions,
+                parseOptions,
+                SpecializedCollections.SingletonEnumerable(document),
+                SpecializedCollections.EmptyEnumerable<TestHostDocument>(),
+                SpecializedCollections.EmptyEnumerable<TestHostDocument>(),
+                projectReferences,
+                metadataReferences,
+                analyzerReferences,
+                assemblyName,
+                defaultNamespace
+            ) { }
 
         public TestHostProject(
             TestWorkspace workspace,
@@ -229,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             IEnumerable<MetadataReference> metadataReferences = null,
             IEnumerable<AnalyzerReference> analyzerReferences = null,
             string assemblyName = null,
-            string defaultNamespace = null)
+            string defaultNamespace = null
+        )
         {
             _name = name ?? "TestProject";
 
@@ -238,14 +224,29 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             language = language ?? LanguageNames.CSharp;
             _languageServices = workspace.Services.GetLanguageServices(language);
 
-            _compilationOptions = compilationOptions ?? this.LanguageServiceProvider.GetService<ICompilationFactoryService>().GetDefaultCompilationOptions();
-            _parseOptions = parseOptions ?? this.LanguageServiceProvider.GetService<ISyntaxTreeFactoryService>().GetDefaultParseOptions();
-            this.Documents = documents ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            this.AdditionalDocuments = additionalDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            this.AnalyzerConfigDocuments = analyzerConfigDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
-            ProjectReferences = projectReferences != null ? projectReferences.Select(p => new ProjectReference(p.Id)) : SpecializedCollections.EmptyEnumerable<ProjectReference>();
-            _metadataReferences = metadataReferences ?? new MetadataReference[] { TestMetadata.Net451.mscorlib };
-            _analyzerReferences = analyzerReferences ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
+            _compilationOptions =
+                compilationOptions
+                ?? this.LanguageServiceProvider.GetService<ICompilationFactoryService>()
+                    .GetDefaultCompilationOptions();
+            _parseOptions =
+                parseOptions
+                ?? this.LanguageServiceProvider.GetService<ISyntaxTreeFactoryService>()
+                    .GetDefaultParseOptions();
+            this.Documents =
+                documents ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AdditionalDocuments =
+                additionalDocuments ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            this.AnalyzerConfigDocuments =
+                analyzerConfigDocuments
+                ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();
+            ProjectReferences =
+                projectReferences != null
+                    ? projectReferences.Select(p => new ProjectReference(p.Id))
+                    : SpecializedCollections.EmptyEnumerable<ProjectReference>();
+            _metadataReferences =
+                metadataReferences ?? new MetadataReference[] { TestMetadata.Net451.mscorlib };
+            _analyzerReferences =
+                analyzerReferences ?? SpecializedCollections.EmptyEnumerable<AnalyzerReference>();
             _assemblyName = assemblyName ?? "TestProject";
             _version = VersionStamp.Create();
             _outputFilePath = GetTestOutputFilePath(_filePath);
@@ -304,41 +305,39 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             document.SetProject(this);
         }
 
-        internal void RemoveDocument(TestHostDocument document)
-            => this.Documents = this.Documents.Where(d => d != document);
+        internal void RemoveDocument(TestHostDocument document) =>
+            this.Documents = this.Documents.Where(d => d != document);
 
         internal void AddAdditionalDocument(TestHostDocument document)
         {
-            this.AdditionalDocuments = this.AdditionalDocuments.Concat(new TestHostDocument[] { document });
+            this.AdditionalDocuments = this.AdditionalDocuments.Concat(
+                new TestHostDocument[] { document }
+            );
             document.SetProject(this);
         }
 
-        internal void RemoveAdditionalDocument(TestHostDocument document)
-            => this.AdditionalDocuments = this.AdditionalDocuments.Where(d => d != document);
+        internal void RemoveAdditionalDocument(TestHostDocument document) =>
+            this.AdditionalDocuments = this.AdditionalDocuments.Where(d => d != document);
 
         internal void AddAnalyzerConfigDocument(TestHostDocument document)
         {
-            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments.Concat(new TestHostDocument[] { document });
+            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments.Concat(
+                new TestHostDocument[] { document }
+            );
             document.SetProject(this);
         }
 
-        internal void RemoveAnalyzerConfigDocument(TestHostDocument document)
-            => this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments.Where(d => d != document);
+        internal void RemoveAnalyzerConfigDocument(TestHostDocument document) =>
+            this.AnalyzerConfigDocuments = this.AnalyzerConfigDocuments.Where(d => d != document);
 
         public string Language
         {
-            get
-            {
-                return _languageServices.Language;
-            }
+            get { return _languageServices.Language; }
         }
 
         internal HostLanguageServices LanguageServiceProvider
         {
-            get
-            {
-                return _languageServices;
-            }
+            get { return _languageServices; }
         }
 
         public ProjectInfo ToProjectInfo()
@@ -355,16 +354,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     defaultNamespace: DefaultNamespace,
                     filePath: FilePath,
                     outputFilePath: OutputFilePath,
-                    isSubmission: IsSubmission),
+                    isSubmission: IsSubmission
+                ),
                 CompilationOptions,
                 ParseOptions,
-                documents: Documents.Where(d => !d.IsSourceGenerated).Select(d => d.ToDocumentInfo()),
+                documents: Documents
+                    .Where(d => !d.IsSourceGenerated)
+                    .Select(d => d.ToDocumentInfo()),
                 ProjectReferences,
                 MetadataReferences,
                 AnalyzerReferences,
                 additionalDocuments: AdditionalDocuments.Select(d => d.ToDocumentInfo()),
                 analyzerConfigDocuments: AnalyzerConfigDocuments.Select(d => d.ToDocumentInfo()),
-                HostObjectType);
+                HostObjectType
+            );
         }
 
         // It is identical with the internal extension method 'GetDefaultExtension' defined in OutputKind.cs.
@@ -401,16 +404,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 outputFilePath = Path.GetDirectoryName(filepath);
             }
-            catch (ArgumentException)
-            {
-            }
+            catch (ArgumentException) { }
 
             if (string.IsNullOrEmpty(outputFilePath))
             {
                 outputFilePath = @"Z:\";
             }
 
-            return this.CompilationOptions == null ? "" : Path.Combine(outputFilePath, this.AssemblyName + GetDefaultExtension(this.CompilationOptions.OutputKind));
+            return this.CompilationOptions == null
+                ? ""
+                : Path.Combine(
+                    outputFilePath,
+                    this.AssemblyName + GetDefaultExtension(this.CompilationOptions.OutputKind)
+                );
         }
     }
 }

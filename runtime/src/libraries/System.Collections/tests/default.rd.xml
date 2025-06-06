@@ -11,7 +11,6 @@
         <Method Name="CopyTo_Size_Invalid" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Private.CoreLib" />
         </Method>
-
         <Method Name="CopyTo" Dynamic="Required All">
           <GenericArgument Name="System.Boolean, System.Private.CoreLib" />
         </Method>
@@ -22,7 +21,6 @@
           <GenericArgument Name="System.Int32, System.Private.CoreLib" />
         </Method>
       </Type>
-
       <Type Name="System.Collections.Generic.Tests.EqualityComparerTests">
         <Method Name="EqualsTest" Dynamic="Required All">
           <GenericArgument Name="System.Byte, System.Private.CoreLib" />
@@ -45,7 +43,6 @@
         <Method Name="EqualsTest" Dynamic="Required All">
           <GenericArgument Name="System.Collections.Tests.NonEquatableValueType, System.Collections.Tests" />
         </Method>
-
         <Method Name="EqualsTest" Dynamic="Required All">
           <GenericArgument Name="System.Byte, System.Private.CoreLib" />
         </Method>
@@ -67,7 +64,6 @@
         <Method Name="EqualsTest" Dynamic="Required All">
           <GenericArgument Name="System.Collections.Tests.NonEquatableValueType, System.Collections.Tests" />
         </Method>
-
         <Method Name="NullableEquals" Dynamic="Required All">
           <GenericArgument Name="System.Byte, System.Private.CoreLib" />
         </Method>
@@ -89,7 +85,6 @@
         <Method Name="NullableEquals" Dynamic="Required All">
           <GenericArgument Name="System.Collections.Tests.NonEquatableValueType, System.Collections.Tests" />
         </Method>
-
         <Method Name="GetHashCodeTest" Dynamic="Required All">
           <GenericArgument Name="System.Byte, System.Private.CoreLib" />
         </Method>
@@ -111,7 +106,6 @@
         <Method Name="GetHashCodeTest" Dynamic="Required All">
           <GenericArgument Name="System.Collections.Tests.NonEquatableValueType, System.Collections.Tests" />
         </Method>
-
         <Method Name="NullableGetHashCode" Dynamic="Required All">
           <GenericArgument Name="System.Byte, System.Private.CoreLib" />
         </Method>
@@ -134,7 +128,6 @@
           <GenericArgument Name="System.Collections.Tests.NonEquatableValueType, System.Collections.Tests" />
         </Method>
       </Type>
-
       <Type Name="System.Collections.Generic.Tests.ComparerTests">
         <Method Name="MostComparisons" Dynamic="Required All">
           <GenericArgument Name="System.UInt64Enum, System.Collections.Tests" />
@@ -150,7 +143,6 @@
         </Method>
       </Type>
     </Assembly>
-
     <Assembly Name="System.Private.CoreLib">
       <!-- Test doing things the static analysis cannot predict. Could also fix the test. -->
       <Type Name="System.Collections.Generic.Dictionary`2" Dynamic="Required All" />

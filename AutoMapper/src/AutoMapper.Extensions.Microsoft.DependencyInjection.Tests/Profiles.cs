@@ -2,15 +2,9 @@
 
 namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 {
-    public class Source
-    {
-        
-    }
+    public class Source { }
 
-    public class Dest
-    {
-        
-    }
+    public class Dest { }
 
     public class Source2
     {
@@ -50,8 +44,12 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         {
             CreateMap<Source2, Dest2>()
                 .ForMember(d => d.ResolvedValue, opt => opt.MapFrom<DependencyResolver>())
-                .ForMember(d => d.ConvertedValue, opt => opt.ConvertUsing<DependencyValueConverter, int>());
-            CreateMap(typeof(Enum), typeof(EnumDescriptor<>)).ConvertUsing(typeof(EnumDescriptorTypeConverter<>));
+                .ForMember(
+                    d => d.ConvertedValue,
+                    opt => opt.ConvertUsing<DependencyValueConverter, int>()
+                );
+            CreateMap(typeof(Enum), typeof(EnumDescriptor<>))
+                .ConvertUsing(typeof(EnumDescriptorTypeConverter<>));
         }
     }
 
@@ -64,7 +62,12 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
             _service = service;
         }
 
-        public int Resolve(object source, object destination, int destMember, ResolutionContext context)
+        public int Resolve(
+            object source,
+            object destination,
+            int destMember,
+            ResolutionContext context
+        )
         {
             return _service.Modify(destMember);
         }
@@ -99,9 +102,14 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         public void Process(object source, object destination, ResolutionContext context) { }
     }
 
-    internal class FooValueResolver: IValueResolver<object, object, object>
+    internal class FooValueResolver : IValueResolver<object, object, object>
     {
-        public object Resolve(object source, object destination, object destMember, ResolutionContext context)
+        public object Resolve(
+            object source,
+            object destination,
+            object destMember,
+            ResolutionContext context
+        )
         {
             return null;
         }
@@ -109,7 +117,13 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 
     internal class FooMemberValueResolver : IMemberValueResolver<object, object, object, object>
     {
-        public object Resolve(object source, object destination, object sourceMember, object destMember, ResolutionContext context)
+        public object Resolve(
+            object source,
+            object destination,
+            object sourceMember,
+            object destMember,
+            ResolutionContext context
+        )
         {
             return null;
         }
@@ -123,22 +137,26 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
         }
     }
 
-    public class EnumDescriptor<TSource> where TSource : Enum
+    public class EnumDescriptor<TSource>
+        where TSource : Enum
     {
         public int Value { get; set; }
     }
 
-    public class EnumDescriptorTypeConverter<TSource> : ITypeConverter<Enum, EnumDescriptor<TSource>>
+    public class EnumDescriptorTypeConverter<TSource>
+        : ITypeConverter<Enum, EnumDescriptor<TSource>>
         where TSource : Enum
     {
-        public EnumDescriptor<TSource> Convert(Enum source, EnumDescriptor<TSource> destination, ResolutionContext context) => 
-            new EnumDescriptor<TSource>{ Value = int.MaxValue };
+        public EnumDescriptor<TSource> Convert(
+            Enum source,
+            EnumDescriptor<TSource> destination,
+            ResolutionContext context
+        ) => new EnumDescriptor<TSource> { Value = int.MaxValue };
     }
 
     internal class FooValueConverter : IValueConverter<int, int>
     {
-        public int Convert(int sourceMember, ResolutionContext context)
-            => sourceMember + 1;
+        public int Convert(int sourceMember, ResolutionContext context) => sourceMember + 1;
     }
 
     internal class DependencyValueConverter : IValueConverter<int, int>
@@ -147,7 +165,7 @@ namespace AutoMapper.Extensions.Microsoft.DependencyInjection.Tests
 
         public DependencyValueConverter(ISomeService service) => _service = service;
 
-        public int Convert(int sourceMember, ResolutionContext context)
-            => _service.Modify(sourceMember);
+        public int Convert(int sourceMember, ResolutionContext context) =>
+            _service.Modify(sourceMember);
     }
 }

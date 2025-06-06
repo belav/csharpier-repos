@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Mvc;
 /// For more information, see <see href="https://learn.microsoft.com/aspnet/core/web-api/#apicontroller-attribute">ApiController attribute</see>.
 /// </para>
 /// </summary>
-[AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class ApiControllerAttribute : ControllerAttribute, IApiBehaviorMetadata
-{
-}
+[AttributeUsage(
+    AttributeTargets.Assembly | AttributeTargets.Class,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class ApiControllerAttribute : ControllerAttribute, IApiBehaviorMetadata { }

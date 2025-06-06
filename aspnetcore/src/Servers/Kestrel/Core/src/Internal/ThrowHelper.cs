@@ -14,14 +14,19 @@ internal sealed class BuffersThrowHelper
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(ExceptionArgument argument)
+    private static ArgumentOutOfRangeException GetArgumentOutOfRangeException(
+        ExceptionArgument argument
+    )
     {
         return new ArgumentOutOfRangeException(GetArgumentName(argument));
     }
 
     private static string GetArgumentName(ExceptionArgument argument)
     {
-        Debug.Assert(Enum.IsDefined(typeof(ExceptionArgument), argument), "The enum value is not defined, please check the ExceptionArgument Enum.");
+        Debug.Assert(
+            Enum.IsDefined(typeof(ExceptionArgument), argument),
+            "The enum value is not defined, please check the ExceptionArgument Enum."
+        );
 
         return argument.ToString();
     }

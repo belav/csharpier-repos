@@ -27,7 +27,14 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null, null };
             yield return new object[] { "", new ResourceCollectionInfo[0] };
-            yield return new object[] { "title", new ResourceCollectionInfo[] { new ResourceCollectionInfo("title", new Uri("http://microsoft.com")) } };
+            yield return new object[]
+            {
+                "title",
+                new ResourceCollectionInfo[]
+                {
+                    new ResourceCollectionInfo("title", new Uri("http://microsoft.com")),
+                },
+            };
         }
 
         [Theory]
@@ -53,13 +60,27 @@ namespace System.ServiceModel.Syndication.Tests
         public static IEnumerable<object[]> Ctor_TextSyndicationContent_Collections_Data()
         {
             yield return new object[] { null, null };
-            yield return new object[] { new TextSyndicationContent("", TextSyndicationContentKind.Html), new ResourceCollectionInfo[0] };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new ResourceCollectionInfo[] { new ResourceCollectionInfo("title", new Uri("http://microsoft.com")) } };
+            yield return new object[]
+            {
+                new TextSyndicationContent("", TextSyndicationContentKind.Html),
+                new ResourceCollectionInfo[0],
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new ResourceCollectionInfo[]
+                {
+                    new ResourceCollectionInfo("title", new Uri("http://microsoft.com")),
+                },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TextSyndicationContent_Collections_Data))]
-        public void Ctor_TextSyndicationContent_Collections(TextSyndicationContent title, ResourceCollectionInfo[] collections)
+        public void Ctor_TextSyndicationContent_Collections(
+            TextSyndicationContent title,
+            ResourceCollectionInfo[] collections
+        )
         {
             var workspace = new Workspace(title, collections);
             Assert.Empty(workspace.AttributeExtensions);
@@ -73,8 +94,14 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_NullValueInCollections_ThrowsArgumentNullException()
         {
             var collections = new ResourceCollectionInfo[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("item", () => new Workspace("title", collections));
-            AssertExtensions.Throws<ArgumentNullException>("item", () => new Workspace(new TextSyndicationContent("title"), collections));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () => new Workspace("title", collections)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () => new Workspace(new TextSyndicationContent("title"), collections)
+            );
         }
 
         [Fact]
@@ -134,7 +161,12 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("name", "http://www.w3.org/2000/xmlns/", "value", "version")]
         [InlineData("type", "ns", "value", "version")]
         [InlineData("name", "http://www.w3.org/2001/XMLSchema-instance", "value", "version")]
-        public void TryParseAttribute_Invoke_ReturnsFalse(string name, string ns, string value, string version)
+        public void TryParseAttribute_Invoke_ReturnsFalse(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             var workspace = new WorkspaceSubclass();
             Assert.False(workspace.TryParseAttributeEntryPoint(name, ns, value, version));
@@ -162,19 +194,28 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var workspace = new WorkspaceSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => workspace.WriteAttributeExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => workspace.WriteAttributeExtensionsEntryPoint(writer, version)
+            );
 
             workspace.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             workspace.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             workspace.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => workspace.WriteAttributeExtensionsEntryPoint(writer, "version"));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => workspace.WriteAttributeExtensionsEntryPoint(writer, "version")
+            );
         }
 
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var workspace = new WorkspaceSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => workspace.WriteAttributeExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => workspace.WriteAttributeExtensionsEntryPoint(null, "version")
+            );
         }
 
         [Theory]
@@ -184,37 +225,54 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var workspace = new WorkspaceSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => workspace.WriteElementExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => workspace.WriteElementExtensionsEntryPoint(writer, version)
+            );
 
             workspace.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             workspace.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<WorkspaceTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<WorkspaceTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </WorkspaceTests.ExtensionObject>
 <WorkspaceTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</WorkspaceTests.ExtensionObject>", writer => workspace.WriteElementExtensionsEntryPoint(writer, version));
+</WorkspaceTests.ExtensionObject>",
+                writer => workspace.WriteElementExtensionsEntryPoint(writer, version)
+            );
         }
 
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var workspace = new WorkspaceSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => workspace.WriteElementExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => workspace.WriteElementExtensionsEntryPoint(null, "version")
+            );
         }
 
         public class WorkspaceSubclass : Workspace
         {
-            public ResourceCollectionInfo CreateResourceCollectionEntryPoint() => CreateResourceCollection();
+            public ResourceCollectionInfo CreateResourceCollectionEntryPoint() =>
+                CreateResourceCollection();
 
-            public bool TryParseAttributeEntryPoint(string name, string ns, string value, string version) => TryParseAttribute(name, ns, value, version);
+            public bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => TryParseAttribute(name, ns, value, version);
 
-            public bool TryParseElementEntryPoint(XmlReader reader, string version) => TryParseElement(reader, version);
+            public bool TryParseElementEntryPoint(XmlReader reader, string version) =>
+                TryParseElement(reader, version);
 
-            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) => WriteAttributeExtensions(writer, version);
+            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteAttributeExtensions(writer, version);
 
-            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) => WriteElementExtensions(writer, version);
+            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteElementExtensions(writer, version);
         }
 
         [DataContract]

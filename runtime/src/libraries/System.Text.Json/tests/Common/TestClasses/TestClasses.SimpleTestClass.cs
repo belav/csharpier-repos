@@ -79,10 +79,16 @@ namespace System.Text.Json.Serialization.Tests
         public IDictionary MyStringToStringIDict { get; set; }
         public Dictionary<string, string> MyStringToStringGenericDict { get; set; }
         public IDictionary<string, string> MyStringToStringGenericIDict { get; set; }
-        public IReadOnlyDictionary<string, string> MyStringToStringGenericIReadOnlyDict { get; set; }
+        public IReadOnlyDictionary<
+            string,
+            string
+        > MyStringToStringGenericIReadOnlyDict { get; set; }
         public ImmutableDictionary<string, string> MyStringToStringImmutableDict { get; set; }
         public IImmutableDictionary<string, string> MyStringToStringIImmutableDict { get; set; }
-        public ImmutableSortedDictionary<string, string> MyStringToStringImmutableSortedDict { get; set; }
+        public ImmutableSortedDictionary<
+            string,
+            string
+        > MyStringToStringImmutableSortedDict { get; set; }
         public Stack<string> MyStringStackT { get; set; }
         public Queue<string> MyStringQueueT { get; set; }
         public HashSet<string> MyStringHashSetT { get; set; }
@@ -99,93 +105,98 @@ namespace System.Text.Json.Serialization.Tests
         public ImmutableSortedSet<string> MyStringImmutableSortedSetT { get; set; }
         public List<string> MyListOfNullString { get; set; }
 
-        public static readonly string s_json = $"{{{s_partialJsonProperties},{s_partialJsonArrays}}}";
-        public static readonly string s_json_flipped = $"{{{s_partialJsonArrays},{s_partialJsonProperties}}}";
+        public static readonly string s_json =
+            $"{{{s_partialJsonProperties},{s_partialJsonArrays}}}";
+        public static readonly string s_json_flipped =
+            $"{{{s_partialJsonArrays},{s_partialJsonProperties}}}";
 
         private const string s_partialJsonProperties =
-                @"""MyInt16"" : 1," +
-                @"""MyInt32"" : 2," +
-                @"""MyInt64"" : 3," +
-                @"""MyUInt16"" : 4," +
-                @"""MyUInt32"" : 5," +
-                @"""MyUInt64"" : 6," +
-                @"""MyByte"" : 7," +
-                @"""MySByte"" : 8," +
-                @"""MyChar"" : ""a""," +
-                @"""MyString"" : ""Hello""," +
-                @"""MyBooleanTrue"" : true," +
-                @"""MyBooleanFalse"" : false," +
-                @"""MySingle"" : 1.1," +
-                @"""MyDouble"" : 2.2," +
-                @"""MyDecimal"" : 3.3," +
-                @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z""," +
-                @"""MyDateTimeOffset"" : ""2019-01-30T12:01:02.0000000+01:00""," +
-                @"""MyGuid"" : ""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""," +
-                @"""MyUri"" : ""https://github.com/dotnet/runtime""," +
-                @"""MyEnum"" : 2," + // int by default
-                @"""MyInt64Enum"" : -9223372036854775808," +
-                @"""MyUInt64Enum"" : 18446744073709551615," +
-                @"""MyStringToStringKeyValuePair"" : {""Key"" : ""myKey"", ""Value"" : ""myValue""}," +
-                @"""MyStringToStringIDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringGenericDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringGenericIDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringGenericIReadOnlyDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringImmutableDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringIImmutableDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringImmutableSortedDict"" : {""key"" : ""value""}," +
-                @"""MySimpleStruct"" : {""One"" : 11, ""Two"" : 1.9999, ""Three"" : 33}," +
-                @"""MySimpleTestStruct"" : {""MyInt64"" : 64, ""MyString"" :""Hello"", ""MyInt32Array"" : [32]}";
+            @"""MyInt16"" : 1,"
+            + @"""MyInt32"" : 2,"
+            + @"""MyInt64"" : 3,"
+            + @"""MyUInt16"" : 4,"
+            + @"""MyUInt32"" : 5,"
+            + @"""MyUInt64"" : 6,"
+            + @"""MyByte"" : 7,"
+            + @"""MySByte"" : 8,"
+            + @"""MyChar"" : ""a"","
+            + @"""MyString"" : ""Hello"","
+            + @"""MyBooleanTrue"" : true,"
+            + @"""MyBooleanFalse"" : false,"
+            + @"""MySingle"" : 1.1,"
+            + @"""MyDouble"" : 2.2,"
+            + @"""MyDecimal"" : 3.3,"
+            + @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z"","
+            + @"""MyDateTimeOffset"" : ""2019-01-30T12:01:02.0000000+01:00"","
+            + @"""MyGuid"" : ""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"","
+            + @"""MyUri"" : ""https://github.com/dotnet/runtime"","
+            + @"""MyEnum"" : 2,"
+            + // int by default
+            @"""MyInt64Enum"" : -9223372036854775808,"
+            + @"""MyUInt64Enum"" : 18446744073709551615,"
+            + @"""MyStringToStringKeyValuePair"" : {""Key"" : ""myKey"", ""Value"" : ""myValue""},"
+            + @"""MyStringToStringIDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericIDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericIReadOnlyDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringImmutableDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringIImmutableDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringImmutableSortedDict"" : {""key"" : ""value""},"
+            + @"""MySimpleStruct"" : {""One"" : 11, ""Two"" : 1.9999, ""Three"" : 33},"
+            + @"""MySimpleTestStruct"" : {""MyInt64"" : 64, ""MyString"" :""Hello"", ""MyInt32Array"" : [32]}";
 
         private const string s_partialJsonArrays =
-                @"""MyInt16Array"" : [1]," +
-                @"""MyInt32Array"" : [2]," +
-                @"""MyInt64Array"" : [3]," +
-                @"""MyUInt16Array"" : [4]," +
-                @"""MyUInt32Array"" : [5]," +
-                @"""MyUInt64Array"" : [6]," +
-                @"""MyByteArray"" : ""Bw==""," + // Base64 encoded value of 7
-                @"""MySByteArray"" : [8]," +
-                @"""MyCharArray"" : [""a""]," +
-                @"""MyStringArray"" : [""Hello""]," +
-                @"""MyBooleanTrueArray"" : [true]," +
-                @"""MyBooleanFalseArray"" : [false]," +
-                @"""MySingleArray"" : [1.1]," +
-                @"""MyDoubleArray"" : [2.2]," +
-                @"""MyDecimalArray"" : [3.3]," +
-                @"""MyDateTimeArray"" : [""2019-01-30T12:01:02.0000000Z""]," +
-                @"""MyDateTimeOffsetArray"" : [""2019-01-30T12:01:02.0000000+01:00""]," +
-                @"""MyGuidArray"" : [""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""]," +
-                @"""MyUriArray"" : [""https://github.com/dotnet/runtime""]," +
-                @"""MyEnumArray"" : [2]," + // int by default
-                @"""MyInt16TwoDimensionArray"" : [[10, 11],[20, 21]]," +
-                @"""MyInt16TwoDimensionList"" : [[10, 11],[20, 21]]," +
-                @"""MyInt16ThreeDimensionArray"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]]," +
-                @"""MyInt16ThreeDimensionList"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]]," +
-                @"""MyStringList"" : [""Hello""]," +
-                @"""MyStringIEnumerable"" : [""Hello""]," +
-                @"""MyStringIList"" : [""Hello""]," +
-                @"""MyStringICollection"" : [""Hello""]," +
-                @"""MyStringIEnumerableT"" : [""Hello""]," +
-                @"""MyStringIListT"" : [""Hello""]," +
-                @"""MyStringICollectionT"" : [""Hello""]," +
-                @"""MyStringIReadOnlyCollectionT"" : [""Hello""]," +
-                @"""MyStringIReadOnlyListT"" : [""Hello""]," +
-                @"""MyStringISetT"" : [""Hello""]," +
-                @"""MyStringStackT"" : [""Hello"", ""World""]," +
-                @"""MyStringQueueT"" : [""Hello"", ""World""]," +
-                @"""MyStringHashSetT"" : [""Hello""]," +
-                @"""MyStringLinkedListT"" : [""Hello""]," +
-                @"""MyStringSortedSetT"" : [""Hello""]," +
-                @"""MyStringIImmutableListT"" : [""Hello""]," +
-                @"""MyStringIImmutableStackT"" : [""Hello""]," +
-                @"""MyStringIImmutableQueueT"" : [""Hello""]," +
-                @"""MyStringIImmutableSetT"" : [""Hello""]," +
-                @"""MyStringImmutableHashSetT"" : [""Hello""]," +
-                @"""MyStringImmutableListT"" : [""Hello""]," +
-                @"""MyStringImmutableStackT"" : [""Hello""]," +
-                @"""MyStringImmutablQueueT"" : [""Hello""]," +
-                @"""MyStringImmutableSortedSetT"" : [""Hello""]," +
-                @"""MyListOfNullString"" : [null]";
+            @"""MyInt16Array"" : [1],"
+            + @"""MyInt32Array"" : [2],"
+            + @"""MyInt64Array"" : [3],"
+            + @"""MyUInt16Array"" : [4],"
+            + @"""MyUInt32Array"" : [5],"
+            + @"""MyUInt64Array"" : [6],"
+            + @"""MyByteArray"" : ""Bw=="","
+            + // Base64 encoded value of 7
+            @"""MySByteArray"" : [8],"
+            + @"""MyCharArray"" : [""a""],"
+            + @"""MyStringArray"" : [""Hello""],"
+            + @"""MyBooleanTrueArray"" : [true],"
+            + @"""MyBooleanFalseArray"" : [false],"
+            + @"""MySingleArray"" : [1.1],"
+            + @"""MyDoubleArray"" : [2.2],"
+            + @"""MyDecimalArray"" : [3.3],"
+            + @"""MyDateTimeArray"" : [""2019-01-30T12:01:02.0000000Z""],"
+            + @"""MyDateTimeOffsetArray"" : [""2019-01-30T12:01:02.0000000+01:00""],"
+            + @"""MyGuidArray"" : [""1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6""],"
+            + @"""MyUriArray"" : [""https://github.com/dotnet/runtime""],"
+            + @"""MyEnumArray"" : [2],"
+            + // int by default
+            @"""MyInt16TwoDimensionArray"" : [[10, 11],[20, 21]],"
+            + @"""MyInt16TwoDimensionList"" : [[10, 11],[20, 21]],"
+            + @"""MyInt16ThreeDimensionArray"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]],"
+            + @"""MyInt16ThreeDimensionList"" : [[[11, 12],[13, 14]],[[21,22],[23,24]]],"
+            + @"""MyStringList"" : [""Hello""],"
+            + @"""MyStringIEnumerable"" : [""Hello""],"
+            + @"""MyStringIList"" : [""Hello""],"
+            + @"""MyStringICollection"" : [""Hello""],"
+            + @"""MyStringIEnumerableT"" : [""Hello""],"
+            + @"""MyStringIListT"" : [""Hello""],"
+            + @"""MyStringICollectionT"" : [""Hello""],"
+            + @"""MyStringIReadOnlyCollectionT"" : [""Hello""],"
+            + @"""MyStringIReadOnlyListT"" : [""Hello""],"
+            + @"""MyStringISetT"" : [""Hello""],"
+            + @"""MyStringStackT"" : [""Hello"", ""World""],"
+            + @"""MyStringQueueT"" : [""Hello"", ""World""],"
+            + @"""MyStringHashSetT"" : [""Hello""],"
+            + @"""MyStringLinkedListT"" : [""Hello""],"
+            + @"""MyStringSortedSetT"" : [""Hello""],"
+            + @"""MyStringIImmutableListT"" : [""Hello""],"
+            + @"""MyStringIImmutableStackT"" : [""Hello""],"
+            + @"""MyStringIImmutableQueueT"" : [""Hello""],"
+            + @"""MyStringIImmutableSetT"" : [""Hello""],"
+            + @"""MyStringImmutableHashSetT"" : [""Hello""],"
+            + @"""MyStringImmutableListT"" : [""Hello""],"
+            + @"""MyStringImmutableStackT"" : [""Hello""],"
+            + @"""MyStringImmutablQueueT"" : [""Hello""],"
+            + @"""MyStringImmutableSortedSetT"" : [""Hello""],"
+            + @"""MyListOfNullString"" : [null]";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -228,13 +239,24 @@ namespace System.Text.Json.Serialization.Tests
             MySingleArray = new float[] { 1.1f };
             MyDoubleArray = new double[] { 2.2d };
             MyDecimalArray = new decimal[] { 3.3m };
-            MyDateTimeArray = new DateTime[] { new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) };
-            MyDateTimeOffsetArray = new DateTimeOffset[] { new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)) };
+            MyDateTimeArray = new DateTime[]
+            {
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+            };
+            MyDateTimeOffsetArray = new DateTimeOffset[]
+            {
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+            };
             MyGuidArray = new Guid[] { new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6") };
             MyUriArray = new Uri[] { new Uri("https://github.com/dotnet/runtime") };
             MyEnumArray = new SampleEnum[] { SampleEnum.Two };
             MySimpleStruct = new SimpleStruct { One = 11, Two = 1.9999 };
-            MySimpleTestStruct = new SimpleTestStruct { MyInt64 = 64, MyString = "Hello", MyInt32Array = new int[] { 32 } };
+            MySimpleTestStruct = new SimpleTestStruct
+            {
+                MyInt64 = 64,
+                MyString = "Hello",
+                MyInt32Array = new int[] { 32 },
+            };
 
             MyInt16TwoDimensionArray = new int[2][];
             MyInt16TwoDimensionArray[0] = new int[] { 10, 11 };
@@ -280,13 +302,22 @@ namespace System.Text.Json.Serialization.Tests
 
             MyStringToStringGenericDict = new Dictionary<string, string> { { "key", "value" } };
             MyStringToStringGenericIDict = new Dictionary<string, string> { { "key", "value" } };
-            MyStringToStringGenericIReadOnlyDict = new Dictionary<string, string> { { "key", "value" } };
+            MyStringToStringGenericIReadOnlyDict = new Dictionary<string, string>
+            {
+                { "key", "value" },
+            };
 
-            MyStringToStringImmutableDict = ImmutableDictionary.CreateRange(MyStringToStringGenericDict);
-            MyStringToStringIImmutableDict = ImmutableDictionary.CreateRange(MyStringToStringGenericDict);
-            MyStringToStringImmutableSortedDict = ImmutableSortedDictionary.CreateRange(MyStringToStringGenericDict);
+            MyStringToStringImmutableDict = ImmutableDictionary.CreateRange(
+                MyStringToStringGenericDict
+            );
+            MyStringToStringIImmutableDict = ImmutableDictionary.CreateRange(
+                MyStringToStringGenericDict
+            );
+            MyStringToStringImmutableSortedDict = ImmutableSortedDictionary.CreateRange(
+                MyStringToStringGenericDict
+            );
 
-            MyStringStackT = new Stack<string>(new List<string>() { "Hello", "World" } );
+            MyStringStackT = new Stack<string>(new List<string>() { "Hello", "World" });
             MyStringQueueT = new Queue<string>(new List<string>() { "Hello", "World" });
             MyStringHashSetT = new HashSet<string>(new List<string>() { "Hello" });
             MyStringLinkedListT = new LinkedList<string>(new List<string>() { "Hello" });
@@ -300,7 +331,9 @@ namespace System.Text.Json.Serialization.Tests
             MyStringImmutableListT = ImmutableList.CreateRange(new List<string> { "Hello" });
             MyStringImmutableStackT = ImmutableStack.CreateRange(new List<string> { "Hello" });
             MyStringImmutablQueueT = ImmutableQueue.CreateRange(new List<string> { "Hello" });
-            MyStringImmutableSortedSetT = ImmutableSortedSet.CreateRange(new List<string> { "Hello" });
+            MyStringImmutableSortedSetT = ImmutableSortedSet.CreateRange(
+                new List<string> { "Hello" }
+            );
 
             MyListOfNullString = new List<string> { null };
         }
@@ -323,7 +356,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1.1f, MySingle);
             Assert.Equal(2.2d, MyDouble);
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTime);
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)), MyDateTimeOffset);
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                MyDateTimeOffset
+            );
             Assert.Equal(new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"), MyGuid);
             Assert.Equal(new Uri("https://github.com/dotnet/runtime"), MyUri);
             Assert.Equal(SampleEnum.Two, MyEnum);
@@ -351,7 +387,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1.1f, MySingleArray[0]);
             Assert.Equal(2.2d, MyDoubleArray[0]);
             Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), MyDateTimeArray[0]);
-            Assert.Equal(new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)), MyDateTimeOffsetArray[0]);
+            Assert.Equal(
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
+                MyDateTimeOffsetArray[0]
+            );
             Assert.Equal(new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6"), MyGuidArray[0]);
             Assert.Equal(new Uri("https://github.com/dotnet/runtime"), MyUriArray[0]);
             Assert.Equal(SampleEnum.Two, MyEnumArray[0]);

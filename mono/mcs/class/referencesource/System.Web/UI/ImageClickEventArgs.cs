@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="ImageClickEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class ImageClickEventArgs : EventArgs {
-
+    public sealed class ImageClickEventArgs : EventArgs
+    {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -36,11 +36,11 @@ namespace System.Web.UI {
         /// </devdoc>
         public double YRaw;
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ImageClickEventArgs(int x,int y) {
+        public ImageClickEventArgs(int x, int y)
+        {
             this.X = x;
             this.Y = y;
         }
@@ -48,12 +48,12 @@ namespace System.Web.UI {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ImageClickEventArgs(int x, int y, double xRaw, double yRaw) {
+        public ImageClickEventArgs(int x, int y, double xRaw, double yRaw)
+        {
             this.X = x;
             this.Y = y;
             this.XRaw = xRaw;
             this.YRaw = yRaw;
         }
-
     }
 }

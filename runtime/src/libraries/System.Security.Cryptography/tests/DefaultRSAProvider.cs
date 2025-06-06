@@ -32,15 +32,17 @@ namespace System.Security.Cryptography.Rsa.Tests
                 if (!_supports384PrivateKey.HasValue)
                 {
                     // For Windows 7 (Microsoft Windows 6.1) and Windows 8 (Microsoft Windows 6.2) this is false for RSACng.
-                    _supports384PrivateKey = !RuntimeInformation.OSDescription.Contains("Windows 6.1") &&
-                        !RuntimeInformation.OSDescription.Contains("Windows 6.2");
+                    _supports384PrivateKey =
+                        !RuntimeInformation.OSDescription.Contains("Windows 6.1")
+                        && !RuntimeInformation.OSDescription.Contains("Windows 6.2");
                 }
 
                 return _supports384PrivateKey.Value;
             }
         }
 
-        public bool SupportsSha1Signatures => _supportsSha1Signatures ??= SignatureSupport.CanProduceSha1Signature(Create());
+        public bool SupportsSha1Signatures =>
+            _supportsSha1Signatures ??= SignatureSupport.CanProduceSha1Signature(Create());
 
         public bool SupportsLargeExponent => true;
 

@@ -1,10 +1,12 @@
 <Type Name="InterThreadException" FullName="Novell.Directory.Ldap.InterThreadException">
-  <TypeSignature Language="C#" Value="public class InterThreadException : Novell.Directory.Ldap.LdapException, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class InterThreadException : Novell.Directory.Ldap.LdapException, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>

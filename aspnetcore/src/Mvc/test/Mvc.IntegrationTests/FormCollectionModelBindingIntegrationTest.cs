@@ -32,16 +32,15 @@ public class FormCollectionModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address.Zip", "12345");
-                UpdateRequest(request, data, "Address.File");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address.Zip", "12345");
+            UpdateRequest(request, data, "Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -56,7 +55,9 @@ public class FormCollectionModelBindingIntegrationTest
         // Model
         var boundPerson = Assert.IsType<Person>(modelBindingResult.Model);
         Assert.NotNull(boundPerson.Address);
-        var formCollection = Assert.IsAssignableFrom<IFormCollection>(boundPerson.Address.FileCollection);
+        var formCollection = Assert.IsAssignableFrom<IFormCollection>(
+            boundPerson.Address.FileCollection
+        );
         var file = Assert.Single(formCollection.Files);
         Assert.Equal("form-data; name=Address.File; filename=text.txt", file.ContentDisposition);
         var reader = new StreamReader(file.OpenReadStream());
@@ -83,15 +84,14 @@ public class FormCollectionModelBindingIntegrationTest
                 // Setting a custom parameter prevents it from falling back to an empty prefix.
                 BinderModelName = "CustomParameter",
             },
-            ParameterType = typeof(IFormCollection)
+            ParameterType = typeof(IFormCollection),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "CustomParameter");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "CustomParameter");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -123,11 +123,8 @@ public class FormCollectionModelBindingIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo
-            {
-                BinderModelName = "CustomParameter",
-            },
-            ParameterType = typeof(IFormCollection)
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(IFormCollection),
         };
 
         // No data is passed.
@@ -157,15 +154,18 @@ public class FormCollectionModelBindingIntegrationTest
     {
         const string fileName = "text.txt";
         var fileCollection = new FormFileCollection();
-        var formCollection = new FormCollection(new Dictionary<string, StringValues>(), fileCollection);
+        var formCollection = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            fileCollection
+        );
         var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
 
         request.Form = formCollection;
-        request.ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
+        request.ContentType =
+            "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
         request.Headers["Content-Disposition"] = $"form-data; name={name}; filename={fileName}";
-        fileCollection.Add(new FormFile(memoryStream, 0, data.Length, name, fileName)
-        {
-            Headers = request.Headers
-        });
+        fileCollection.Add(
+            new FormFile(memoryStream, 0, data.Length, name, fileName) { Headers = request.Headers }
+        );
     }
 }

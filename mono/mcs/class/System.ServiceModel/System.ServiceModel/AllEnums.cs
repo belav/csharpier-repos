@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,404 +27,401 @@
 //
 namespace System.ServiceModel.Activation
 {
-	public enum AspNetCompatibilityRequirementsMode
-	{
-		NotAllowed,
-		Allowed,
-		Required,
-	}
+    public enum AspNetCompatibilityRequirementsMode
+    {
+        NotAllowed,
+        Allowed,
+        Required,
+    }
 }
 
 namespace System.ServiceModel
 {
-	public enum AddressFilterMode
-	{
-		Exact,
-		Prefix,
-		Any
-	}
+    public enum AddressFilterMode
+    {
+        Exact,
+        Prefix,
+        Any,
+    }
 
-	public enum AuditLevel
-	{
-		None,
-		Success,
-		Failure,
-		SuccessOrFailure,
-	}
+    public enum AuditLevel
+    {
+        None,
+        Success,
+        Failure,
+        SuccessOrFailure,
+    }
 
-	public enum AuditLogLocation
-	{
-		Default,
-		Application,
-		Security,
-	}
+    public enum AuditLogLocation
+    {
+        Default,
+        Application,
+        Security,
+    }
 
-	public enum BasicHttpMessageCredentialType
-	{
-		UserName,
-		Certificate,
-	}
+    public enum BasicHttpMessageCredentialType
+    {
+        UserName,
+        Certificate,
+    }
 
-	public enum BasicHttpSecurityMode
-	{
-		None,
-		Transport,
-		Message,
-		TransportWithMessageCredential,
-		TransportCredentialOnly,
-	}
+    public enum BasicHttpSecurityMode
+    {
+        None,
+        Transport,
+        Message,
+        TransportWithMessageCredential,
+        TransportCredentialOnly,
+    }
 
-	public enum BasicHttpsSecurityMode
-	{
-		Transport,
-		TransportWithMessageCredential
-	}
+    public enum BasicHttpsSecurityMode
+    {
+        Transport,
+        TransportWithMessageCredential,
+    }
 
-	public enum CommunicationState
-	{
-		Created,
-		Opening,
-		Opened,
-		Closing,
-		Closed,
-		Faulted,
-	}
+    public enum CommunicationState
+    {
+        Created,
+        Opening,
+        Opened,
+        Closing,
+        Closed,
+        Faulted,
+    }
 
-	public enum ConcurrencyMode
-	{
-		Single,
-		Reentrant,
-		Multiple,
-	}
+    public enum ConcurrencyMode
+    {
+        Single,
+        Reentrant,
+        Multiple,
+    }
 
-	public enum HostNameComparisonMode
-	{
-		StrongWildcard,
-		Exact,
-		WeakWildcard,
-	}
+    public enum HostNameComparisonMode
+    {
+        StrongWildcard,
+        Exact,
+        WeakWildcard,
+    }
 
-	public enum ImpersonationOption
-	{
-		NotAllowed,
-		Allowed,
-		Required,
-	}
+    public enum ImpersonationOption
+    {
+        NotAllowed,
+        Allowed,
+        Required,
+    }
 
-	public enum InstanceContextMode
-	{
-		PerSession,
-		PerCall,
-		Single,
-	}
+    public enum InstanceContextMode
+    {
+        PerSession,
+        PerCall,
+        Single,
+    }
 
-	public enum NetMsmqSecurityMode
-	{
-		None,
-		Transport,
-		Message,
-		Both,
-	}
+    public enum NetMsmqSecurityMode
+    {
+        None,
+        Transport,
+        Message,
+        Both,
+    }
 
-	public enum NetNamedPipeSecurityMode
-	{
-		None,
-		Transport,
-	}
+    public enum NetNamedPipeSecurityMode
+    {
+        None,
+        Transport,
+    }
 
-	public enum OperationFormatStyle
-	{
-		Document,
-		Rpc,
-	}
+    public enum OperationFormatStyle
+    {
+        Document,
+        Rpc,
+    }
 
-	public enum OperationFormatUse
-	{
-		Literal,
-		Encoded,
-	}
+    public enum OperationFormatUse
+    {
+        Literal,
+        Encoded,
+    }
 
-	public enum PeerMessageOrigination
-	{
-		Local,
-		Remote,
-	}
+    public enum PeerMessageOrigination
+    {
+        Local,
+        Remote,
+    }
 
-	public enum PeerMessagePropagation
-	{
-		None,
-		Local,
-		Remote,
-		LocalAndRemote,
-	}
+    public enum PeerMessagePropagation
+    {
+        None,
+        Local,
+        Remote,
+        LocalAndRemote,
+    }
 
-	public enum QueuedDeliveryRequirementsMode
-	{
-		Allowed,
-		Required,
-		NotAllowed,
-	}
+    public enum QueuedDeliveryRequirementsMode
+    {
+        Allowed,
+        Required,
+        NotAllowed,
+    }
 
-	public enum PeerTransportCredentialType
-	{
-		Password,
-		Certificate,
-	}
+    public enum PeerTransportCredentialType
+    {
+        Password,
+        Certificate,
+    }
 
-	public enum ReceiveErrorHandling
-	{
-		Fault,
-		Drop,
-		Reject,
-		Move,
-	}
+    public enum ReceiveErrorHandling
+    {
+        Fault,
+        Drop,
+        Reject,
+        Move,
+    }
 
-	public enum ReleaseInstanceMode
-	{
-		None,
-		BeforeCall,
-		AfterCall,
-		BeforeAndAfterCall,
-	}
+    public enum ReleaseInstanceMode
+    {
+        None,
+        BeforeCall,
+        AfterCall,
+        BeforeAndAfterCall,
+    }
 
-	public enum SessionMode
-	{
-		Allowed,
-		Required,
-		NotAllowed,
-	}
+    public enum SessionMode
+    {
+        Allowed,
+        Required,
+        NotAllowed,
+    }
 
-	public enum TransactionFlowOption
-	{
-		NotAllowed,
-		Allowed,
-		Mandatory,
-	}
+    public enum TransactionFlowOption
+    {
+        NotAllowed,
+        Allowed,
+        Mandatory,
+    }
 
-	public enum WSDualHttpSecurityMode
-	{
-		None,
-		Message,
-	}
+    public enum WSDualHttpSecurityMode
+    {
+        None,
+        Message,
+    }
 
-	public enum WSFederationHttpSecurityMode
-	{
-		None,
-		Message,
-		TransportWithMessageCredential,
-	}
+    public enum WSFederationHttpSecurityMode
+    {
+        None,
+        Message,
+        TransportWithMessageCredential,
+    }
 
-	public enum WSMessageEncoding
-	{
-		Text,
-		Mtom,
-	}
-
+    public enum WSMessageEncoding
+    {
+        Text,
+        Mtom,
+    }
 }
 
 namespace System.ServiceModel // used to be S.SM.Ch
 {
-	public enum DeadLetterQueue
-	{
-		None,
-		System,
-		Custom,
-	}
+    public enum DeadLetterQueue
+    {
+        None,
+        System,
+        Custom,
+    }
 
-	public enum HttpClientCredentialType
-	{
-		None,
-		Basic,
-		Digest,
-		Ntlm,
-		Windows,
-		Certificate,
-		InheritedFromHost
-	}
+    public enum HttpClientCredentialType
+    {
+        None,
+        Basic,
+        Digest,
+        Ntlm,
+        Windows,
+        Certificate,
+        InheritedFromHost,
+    }
 
-	public enum HttpProxyCredentialType
-	{
-		None,
-		Basic,
-		Digest,
-		Ntlm,
-		Windows,
-	}
+    public enum HttpProxyCredentialType
+    {
+        None,
+        Basic,
+        Digest,
+        Ntlm,
+        Windows,
+    }
 
-	public enum MessageCredentialType
-	{
-		None,
-		Windows,
-		UserName,
-		Certificate,
-		IssuedToken,
-	}
+    public enum MessageCredentialType
+    {
+        None,
+        Windows,
+        UserName,
+        Certificate,
+        IssuedToken,
+    }
 
-	public enum MsmqAuthenticationMode
-	{
-		None,
-		WindowsDomain,
-		Certificate,
-	}
+    public enum MsmqAuthenticationMode
+    {
+        None,
+        WindowsDomain,
+        Certificate,
+    }
 
-	public enum MsmqEncryptionAlgorithm
-	{
-		RC4Stream,
-		Aes,
-	}
+    public enum MsmqEncryptionAlgorithm
+    {
+        RC4Stream,
+        Aes,
+    }
 
-	public enum MsmqSecureHashAlgorithm
-	{
-		MD5,
-		Sha1,
-		Sha256,
-		Sha512,
-	}
+    public enum MsmqSecureHashAlgorithm
+    {
+        MD5,
+        Sha1,
+        Sha256,
+        Sha512,
+    }
 
-	public enum QueueTransferProtocol
-	{
-		Native,
-		Srmp,
-		SrmpSecure,
-	}
+    public enum QueueTransferProtocol
+    {
+        Native,
+        Srmp,
+        SrmpSecure,
+    }
 
-	public enum SecurityMode
-	{
-		None,
-		Transport,
-		Message,
-		TransportWithMessageCredential,
-	}
+    public enum SecurityMode
+    {
+        None,
+        Transport,
+        Message,
+        TransportWithMessageCredential,
+    }
 
-	public enum TcpClientCredentialType
-	{
-		None,
-		Windows,
-		Certificate,
-	}
+    public enum TcpClientCredentialType
+    {
+        None,
+        Windows,
+        Certificate,
+    }
 }
 
 namespace System.ServiceModel.Channels
 {
-	public enum MessageState
-	{
-		Created,
-		Read,
-		Written,
-		Copied,
-		Closed,
-	}
+    public enum MessageState
+    {
+        Created,
+        Read,
+        Written,
+        Copied,
+        Closed,
+    }
 
-	public enum SecurityHeaderLayout
-	{
-		Strict,
-		Lax,
-		LaxTimestampFirst,
-		LaxTimestampLast,
-	}
+    public enum SecurityHeaderLayout
+    {
+        Strict,
+        Lax,
+        LaxTimestampFirst,
+        LaxTimestampLast,
+    }
 
-	public enum SupportedAddressingMode
-	{
-		Anonymous,
-		NonAnonymous,
-		Mixed
-	}
+    public enum SupportedAddressingMode
+    {
+        Anonymous,
+        NonAnonymous,
+        Mixed,
+    }
 
-	public enum TransferSession
-	{
-		None,
-		Ordered,
-		Unordered,
-	}
-
+    public enum TransferSession
+    {
+        None,
+        Ordered,
+        Unordered,
+    }
 }
 
 namespace System.ServiceModel.Description
 {
-	public enum PrincipalPermissionMode
-	{
-		None,
-		UseWindowsGroups,
-		UseAspNetRoles,
-		Custom,
-	}
+    public enum PrincipalPermissionMode
+    {
+        None,
+        UseWindowsGroups,
+        UseAspNetRoles,
+        Custom,
+    }
 
-	public enum MessageDirection
-	{
-		Input,
-		Output,
-	}
+    public enum MessageDirection
+    {
+        Input,
+        Output,
+    }
 
-	public enum ListenUriMode
-	{
-		Explicit,
-		Unique,
-	}
+    public enum ListenUriMode
+    {
+        Explicit,
+        Unique,
+    }
 
-	public enum MetadataExchangeClientMode
-	{
-		MetadataExchange,
-		HttpGet
-	}
+    public enum MetadataExchangeClientMode
+    {
+        MetadataExchange,
+        HttpGet,
+    }
 
-	[Flags]
-	public enum ServiceContractGenerationOptions
-	{
-		None,
-		AsynchronousMethods = 1,
-		ChannelInterface = 2,
-		InternalTypes = 4,
-		ClientClass = 8,
-		TypedMessages = 16,
-		EventBasedAsynchronousMethods = 32,
-	}
+    [Flags]
+    public enum ServiceContractGenerationOptions
+    {
+        None,
+        AsynchronousMethods = 1,
+        ChannelInterface = 2,
+        InternalTypes = 4,
+        ClientClass = 8,
+        TypedMessages = 16,
+        EventBasedAsynchronousMethods = 32,
+    }
 }
 
 namespace System.ServiceModel.MsmqIntegration
 {
-	public enum MsmqIntegrationSecurityMode
-	{
-		None,
-		Transport,
-	}
+    public enum MsmqIntegrationSecurityMode
+    {
+        None,
+        Transport,
+    }
 
-	public enum MsmqMessageSerializationFormat
-	{
-		Xml,
-		Binary,
-		ActiveX,
-		ByteArray,
-		Stream,
-	}
+    public enum MsmqMessageSerializationFormat
+    {
+        Xml,
+        Binary,
+        ActiveX,
+        ByteArray,
+        Stream,
+    }
 }
 
 namespace System.ServiceModel.Security
 {
-	public enum UserNamePasswordValidationMode
-	{
-		Windows,
-		MembershipProvider,
-		Custom,
-	}
-
+    public enum UserNamePasswordValidationMode
+    {
+        Windows,
+        MembershipProvider,
+        Custom,
+    }
 }
 
 namespace System.ServiceModel.Security.Tokens
 {
-	public enum SecurityTokenInclusionMode
-	{
-		AlwaysToRecipient,
-		Never,
-		Once,
-		AlwaysToInitiator,
-	}
+    public enum SecurityTokenInclusionMode
+    {
+        AlwaysToRecipient,
+        Never,
+        Once,
+        AlwaysToInitiator,
+    }
 
-	public enum X509KeyIdentifierClauseType
-	{
-		Any,
-		Thumbprint,
-		IssuerSerial,
-		SubjectKeyIdentifier,
-		RawDataKeyIdentifier,
-	}
+    public enum X509KeyIdentifierClauseType
+    {
+        Any,
+        Thumbprint,
+        IssuerSerial,
+        SubjectKeyIdentifier,
+        RawDataKeyIdentifier,
+    }
 }

@@ -28,5 +28,5 @@ internal enum FlagType
     QSLast,
     Redirect,
     Skip,
-    Type
+    Type,
 }

@@ -20,7 +20,12 @@ namespace System.Reflection.Tests
 
         private static void TestMethods1Worker(Type t)
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MethodInfo m = t.GetMethod("Method1", bf);
             Assert.Equal("Method1", m.Name);
             Assert.Equal(t, m.DeclaringType);
@@ -31,7 +36,10 @@ namespace System.Reflection.Tests
             Assert.False(m.IsGenericMethod);
             Assert.Equal(MethodAttributes.Public | MethodAttributes.HideBySig, m.Attributes);
             Assert.Equal(MethodImplAttributes.IL, m.MethodImplementationFlags);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, m.CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                m.CallingConvention
+            );
 
             Type theT = t.GetGenericArguments()[0];
             Assert.Equal(typeof(bool).Project(), m.ReturnType);
@@ -68,7 +76,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static unsafe void TestAllCoreTypes()
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MethodInfo m = typeof(ClassWithMethods1<>).Project().GetMethod("TestPrimitives1", bf);
             Assert.Equal(typeof(void).Project(), m.ReturnParameter.ParameterType);
             ParameterInfo[] ps = m.GetParameters();
@@ -147,12 +160,19 @@ namespace System.Reflection.Tests
         public static void TestGenericMethods1()
         {
             TestGenericMethods1Worker(typeof(GenericClassWithGenericMethods1<,>).Project());
-            TestGenericMethods1Worker(typeof(GenericClassWithGenericMethods1<int, string>).Project());
+            TestGenericMethods1Worker(
+                typeof(GenericClassWithGenericMethods1<int, string>).Project()
+            );
         }
 
         private static void TestGenericMethods1Worker(Type t)
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MethodInfo m = t.GetMethod("GenericMethod1", bf);
 
             Assert.Equal(m, m.GetGenericMethodDefinition());
@@ -182,12 +202,15 @@ namespace System.Reflection.Tests
             Type actual = p.ParameterType;
 
             //GenericClass5<N, M[], IEnumerable<U>, T[,], int>
-            Type expected = typeof(GenericClass5<,,,,>).Project().MakeGenericType(
-                theN,
-                theM.MakeArrayType(),
-                typeof(IEnumerable<>).Project().MakeGenericType(theU),
-                theT.MakeArrayType(2),
-                typeof(int).Project());
+            Type expected = typeof(GenericClass5<,,,,>)
+                .Project()
+                .MakeGenericType(
+                    theN,
+                    theM.MakeArrayType(),
+                    typeof(IEnumerable<>).Project().MakeGenericType(theU),
+                    theT.MakeArrayType(2),
+                    typeof(int).Project()
+                );
             Assert.Equal(expected, actual);
 
             m.TestGenericMethodInfoInvariants();
@@ -196,13 +219,22 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestConstructedGenericMethods1()
         {
-            TestConstructedGenericMethods1Worker(typeof(GenericClassWithGenericMethods1<,>).Project());
-            TestConstructedGenericMethods1Worker(typeof(GenericClassWithGenericMethods1<int, string>).Project());
+            TestConstructedGenericMethods1Worker(
+                typeof(GenericClassWithGenericMethods1<,>).Project()
+            );
+            TestConstructedGenericMethods1Worker(
+                typeof(GenericClassWithGenericMethods1<int, string>).Project()
+            );
         }
 
         private static void TestConstructedGenericMethods1Worker(Type t)
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MethodInfo gm = t.GetMethod("GenericMethod1", bf);
             MethodInfo m = gm.MakeGenericMethod(typeof(object).Project(), typeof(string).Project());
 
@@ -232,12 +264,15 @@ namespace System.Reflection.Tests
             Type actual = p.ParameterType;
 
             //GenericClass5<N, M[], IEnumerable<U>, T[,], int>
-            Type expected = typeof(GenericClass5<,,,,>).Project().MakeGenericType(
-                theN,
-                theM.MakeArrayType(),
-                typeof(IEnumerable<>).Project().MakeGenericType(theU),
-                theT.MakeArrayType(2),
-                typeof(int).Project());
+            Type expected = typeof(GenericClass5<,,,,>)
+                .Project()
+                .MakeGenericType(
+                    theN,
+                    theM.MakeArrayType(),
+                    typeof(IEnumerable<>).Project().MakeGenericType(theU),
+                    theT.MakeArrayType(2),
+                    typeof(int).Project()
+                );
             Assert.Equal(expected, actual);
 
             m.TestConstructedGenericMethodInfoInvariants();
@@ -246,9 +281,13 @@ namespace System.Reflection.Tests
         [Fact]
         public static unsafe void TestCustomModifiers1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new CoreMetadataAssemblyResolver(), "mscorlib"))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new CoreMetadataAssemblyResolver(),
+                    "mscorlib"
+                )
+            )
             {
-
                 Assembly a = lc.LoadFromByteArray(TestData.s_CustomModifiersImage);
                 Type t = a.GetType("N", throwOnError: true);
                 Type reqA = a.GetType("ReqA", throwOnError: true);
@@ -274,7 +313,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestMethodBody1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new CoreMetadataAssemblyResolver(), "mscorlib"))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new CoreMetadataAssemblyResolver(),
+                    "mscorlib"
+                )
+            )
             {
                 Assembly coreAssembly = lc.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyWithMethodBodyImage);
@@ -295,11 +339,17 @@ namespace System.Reflection.Tests
 
                 Assert.Equal(0, lvis[0].LocalIndex);
                 Assert.False(lvis[0].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Single", throwOnError: true), lvis[0].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.Single", throwOnError: true),
+                    lvis[0].LocalType
+                );
 
                 Assert.Equal(1, lvis[1].LocalIndex);
                 Assert.False(lvis[1].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Double", throwOnError: true), lvis[1].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.Double", throwOnError: true),
+                    lvis[1].LocalType
+                );
 
                 Assert.Equal(2, lvis[2].LocalIndex);
                 Assert.False(lvis[2].IsPinned);
@@ -311,27 +361,47 @@ namespace System.Reflection.Tests
 
                 Assert.Equal(4, lvis[4].LocalIndex);
                 Assert.False(lvis[4].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Collections.Generic.IList`1", throwOnError: true).MakeGenericType(theM), lvis[4].LocalType);
+                Assert.Equal(
+                    coreAssembly
+                        .GetType("System.Collections.Generic.IList`1", throwOnError: true)
+                        .MakeGenericType(theM),
+                    lvis[4].LocalType
+                );
 
                 Assert.Equal(5, lvis[5].LocalIndex);
                 Assert.False(lvis[5].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.String", throwOnError: true), lvis[5].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.String", throwOnError: true),
+                    lvis[5].LocalType
+                );
 
                 Assert.Equal(6, lvis[6].LocalIndex);
                 Assert.False(lvis[6].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Int32", throwOnError: true).MakeArrayType(), lvis[6].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.Int32", throwOnError: true).MakeArrayType(),
+                    lvis[6].LocalType
+                );
 
                 Assert.Equal(7, lvis[7].LocalIndex);
                 Assert.True(lvis[7].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Int32", throwOnError: true).MakeByRefType(), lvis[7].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.Int32", throwOnError: true).MakeByRefType(),
+                    lvis[7].LocalType
+                );
 
                 Assert.Equal(8, lvis[8].LocalIndex);
                 Assert.False(lvis[8].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Int32", throwOnError: true).MakeArrayType(), lvis[8].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.Int32", throwOnError: true).MakeArrayType(),
+                    lvis[8].LocalType
+                );
 
                 Assert.Equal(9, lvis[9].LocalIndex);
                 Assert.False(lvis[9].IsPinned);
-                Assert.Equal(coreAssembly.GetType("System.Boolean", throwOnError: true), lvis[9].LocalType);
+                Assert.Equal(
+                    coreAssembly.GetType("System.Boolean", throwOnError: true),
+                    lvis[9].LocalType
+                );
 
                 IList<ExceptionHandlingClause> ehcs = mb.ExceptionHandlingClauses;
                 Assert.Equal(2, ehcs.Count);
@@ -356,7 +426,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestEHClauses()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new CoreMetadataAssemblyResolver(), "mscorlib"))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new CoreMetadataAssemblyResolver(),
+                    "mscorlib"
+                )
+            )
             {
                 Assembly coreAssembly = lc.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyWithEhClausesImage);
@@ -387,7 +462,9 @@ namespace System.Reflection.Tests
                     Type sysInt32 = coreAssembly.GetType("System.Int32", throwOnError: true);
                     Type sysSingle = coreAssembly.GetType("System.Single", throwOnError: true);
 
-                    MethodInfo m = gt.MakeGenericType(sysInt32).GetMethod("Catch").MakeGenericMethod(sysSingle);
+                    MethodInfo m = gt.MakeGenericType(sysInt32)
+                        .GetMethod("Catch")
+                        .MakeGenericMethod(sysSingle);
 
                     MethodBody body = m.GetMethodBody();
                     IList<ExceptionHandlingClause> ehs = body.ExceptionHandlingClauses;
@@ -452,8 +529,17 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestCallingConventions()
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
-            MethodBase[] mbs = (MethodBase[])(typeof(ExerciseCallingConventions).Project().GetMember("*", MemberTypes.Method | MemberTypes.Constructor, bf));
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
+            MethodBase[] mbs = (MethodBase[])(
+                typeof(ExerciseCallingConventions)
+                    .Project()
+                    .GetMember("*", MemberTypes.Method | MemberTypes.Constructor, bf)
+            );
             mbs = mbs.OrderBy(m => m.Name).ToArray();
             Assert.Equal(5, mbs.Length);
 
@@ -461,16 +547,25 @@ namespace System.Reflection.Tests
             Assert.Equal(CallingConventions.Standard, mbs[0].CallingConvention);
 
             Assert.Equal(".ctor", mbs[1].Name);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, mbs[1].CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                mbs[1].CallingConvention
+            );
 
             Assert.Equal("InstanceMethod", mbs[2].Name);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, mbs[2].CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                mbs[2].CallingConvention
+            );
 
             Assert.Equal("StaticMethod", mbs[3].Name);
             Assert.Equal(CallingConventions.Standard, mbs[3].CallingConvention);
 
             Assert.Equal("VirtualMethod", mbs[4].Name);
-            Assert.Equal(CallingConventions.Standard | CallingConventions.HasThis, mbs[4].CallingConvention);
+            Assert.Equal(
+                CallingConventions.Standard | CallingConventions.HasThis,
+                mbs[4].CallingConvention
+            );
         }
     }
 }

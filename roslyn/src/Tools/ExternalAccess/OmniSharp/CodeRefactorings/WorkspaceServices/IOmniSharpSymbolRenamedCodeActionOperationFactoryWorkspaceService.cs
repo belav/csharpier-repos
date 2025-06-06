@@ -8,6 +8,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeRefactorings.Works
 {
     interface IOmniSharpSymbolRenamedCodeActionOperationFactoryWorkspaceService
     {
-        CodeActionOperation CreateSymbolRenamedOperation(ISymbol symbol, string newName, Solution startingSolution, Solution updatedSolution);
+        CodeActionOperation CreateSymbolRenamedOperation(
+            ISymbol symbol,
+            string newName,
+            Solution startingSolution,
+            Solution updatedSolution
+        );
     }
 }

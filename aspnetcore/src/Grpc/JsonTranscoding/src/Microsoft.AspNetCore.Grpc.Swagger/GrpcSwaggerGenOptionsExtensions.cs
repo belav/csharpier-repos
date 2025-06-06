@@ -19,9 +19,13 @@ public static class GrpcSwaggerGenOptionsExtensions
     /// <param name="xmlDocFactory">A factory method that returns XML Comments as an XPathDocument</param>
     public static void IncludeGrpcXmlComments(
         this SwaggerGenOptions swaggerGenOptions,
-        Func<XPathDocument> xmlDocFactory)
+        Func<XPathDocument> xmlDocFactory
+    )
     {
-        swaggerGenOptions.IncludeGrpcXmlComments(xmlDocFactory, includeControllerXmlComments: false);
+        swaggerGenOptions.IncludeGrpcXmlComments(
+            xmlDocFactory,
+            includeControllerXmlComments: false
+        );
     }
 
     /// <summary>
@@ -36,7 +40,8 @@ public static class GrpcSwaggerGenOptionsExtensions
     public static void IncludeGrpcXmlComments(
         this SwaggerGenOptions swaggerGenOptions,
         Func<XPathDocument> xmlDocFactory,
-        bool includeControllerXmlComments)
+        bool includeControllerXmlComments
+    )
     {
         var xmlDoc = xmlDocFactory();
         swaggerGenOptions.OperationFilter<GrpcXmlCommentsOperationFilter>(xmlDoc);
@@ -54,7 +59,8 @@ public static class GrpcSwaggerGenOptionsExtensions
     /// <param name="filePath">An absolute path to the file that contains XML Comments</param>
     public static void IncludeGrpcXmlComments(
         this SwaggerGenOptions swaggerGenOptions,
-        string filePath)
+        string filePath
+    )
     {
         swaggerGenOptions.IncludeGrpcXmlComments(() => new XPathDocument(filePath));
     }
@@ -71,8 +77,12 @@ public static class GrpcSwaggerGenOptionsExtensions
     public static void IncludeGrpcXmlComments(
         this SwaggerGenOptions swaggerGenOptions,
         string filePath,
-        bool includeControllerXmlComments)
+        bool includeControllerXmlComments
+    )
     {
-        swaggerGenOptions.IncludeGrpcXmlComments(() => new XPathDocument(filePath), includeControllerXmlComments);
+        swaggerGenOptions.IncludeGrpcXmlComments(
+            () => new XPathDocument(filePath),
+            includeControllerXmlComments
+        );
     }
 }

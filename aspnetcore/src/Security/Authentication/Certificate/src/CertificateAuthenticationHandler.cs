@@ -11,7 +11,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
-internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<CertificateAuthenticationOptions>
+internal sealed class CertificateAuthenticationHandler
+    : AuthenticationHandler<CertificateAuthenticationOptions>
 {
     private static readonly Oid ClientCertificateOid = new Oid("1.3.6.1.5.5.7.3.2");
     private ICertificateValidationCache? _cache;
@@ -19,9 +20,9 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
     public CertificateAuthenticationHandler(
         IOptionsMonitor<CertificateAuthenticationOptions> options,
         ILoggerFactory logger,
-        UrlEncoder encoder) : base(options, logger, encoder)
-    {
-    }
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
@@ -37,7 +38,8 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
     /// Creates a new instance of the events instance.
     /// </summary>
     /// <returns>A new instance of the events instance.</returns>
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new CertificateAuthenticationEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new CertificateAuthenticationEvents());
 
     protected override Task InitializeHandlerAsync()
     {
@@ -103,23 +105,31 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
 
     private async Task<CertificateAuthenticationFailedContext> HandleFailureAsync(Exception error)
     {
-        var authenticationFailedContext = new CertificateAuthenticationFailedContext(Context, Scheme, Options)
+        var authenticationFailedContext = new CertificateAuthenticationFailedContext(
+            Context,
+            Scheme,
+            Options
+        )
         {
-            Exception = error
+            Exception = error,
         };
 
         await Events.AuthenticationFailed(authenticationFailedContext);
         return authenticationFailedContext;
     }
 
-    private async Task<AuthenticateResult> ValidateCertificateAsync(X509Certificate2 clientCertificate)
+    private async Task<AuthenticateResult> ValidateCertificateAsync(
+        X509Certificate2 clientCertificate
+    )
     {
         var isCertificateSelfSigned = clientCertificate.IsSelfSigned();
 
         // If we have a self signed cert, and they're not allowed, exit early and not bother with
         // any other validations.
-        if (isCertificateSelfSigned &&
-            !Options.AllowedCertificateTypes.HasFlag(CertificateTypes.SelfSigned))
+        if (
+            isCertificateSelfSigned
+            && !Options.AllowedCertificateTypes.HasFlag(CertificateTypes.SelfSigned)
+        )
         {
             Logger.CertificateRejected("Self signed", clientCertificate.Subject);
             return AuthenticateResults.NoSelfSigned;
@@ -127,18 +137,17 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
 
         // If we have a chained cert, and they're not allowed, exit early and not bother with
         // any other validations.
-        if (!isCertificateSelfSigned &&
-            !Options.AllowedCertificateTypes.HasFlag(CertificateTypes.Chained))
+        if (
+            !isCertificateSelfSigned
+            && !Options.AllowedCertificateTypes.HasFlag(CertificateTypes.Chained)
+        )
         {
             Logger.CertificateRejected("Chained", clientCertificate.Subject);
             return AuthenticateResults.NoChainedCertificates;
         }
 
         var chainPolicy = BuildChainPolicy(clientCertificate, isCertificateSelfSigned);
-        using var chain = new X509Chain
-        {
-            ChainPolicy = chainPolicy
-        };
+        using var chain = new X509Chain { ChainPolicy = chainPolicy };
 
         var certificateIsValid = chain.Build(clientCertificate);
         if (!certificateIsValid)
@@ -146,7 +155,9 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
             var chainErrors = new List<string>(chain.ChainStatus.Length);
             foreach (var validationFailure in chain.ChainStatus)
             {
-                chainErrors.Add($"{validationFailure.Status} {validationFailure.StatusInformation}");
+                chainErrors.Add(
+                    $"{validationFailure.Status} {validationFailure.StatusInformation}"
+                );
             }
             Logger.CertificateFailedValidation(clientCertificate.Subject, chainErrors);
             return AuthenticateResults.InvalidClientCertificate;
@@ -155,7 +166,7 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
         var certificateValidatedContext = new CertificateValidatedContext(Context, Scheme, Options)
         {
             ClientCertificate = clientCertificate,
-            Principal = CreatePrincipal(clientCertificate)
+            Principal = CreatePrincipal(clientCertificate),
         };
 
         await Events.CertificateValidated(certificateValidatedContext);
@@ -171,7 +182,12 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
 
     protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
     {
-        var authenticationChallengedContext = new CertificateChallengeContext(Context, Scheme, Options, properties);
+        var authenticationChallengedContext = new CertificateChallengeContext(
+            Context,
+            Scheme,
+            Options,
+            properties
+        );
         await Events.Challenge(authenticationChallengedContext);
 
         if (authenticationChallengedContext.Handled)
@@ -184,7 +200,10 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
         await HandleForbiddenAsync(properties);
     }
 
-    private X509ChainPolicy BuildChainPolicy(X509Certificate2 certificate, bool isCertificateSelfSigned)
+    private X509ChainPolicy BuildChainPolicy(
+        X509Certificate2 certificate,
+        bool isCertificateSelfSigned
+    )
     {
         // Now build the chain validation options.
         X509RevocationFlag revocationFlag = Options.RevocationFlag;
@@ -242,51 +261,85 @@ internal sealed class CertificateAuthenticationHandler : AuthenticationHandler<C
         claims.Add(new Claim("issuer", issuer, ClaimValueTypes.String, Options.ClaimsIssuer));
 
         var thumbprint = certificate.Thumbprint;
-        claims.Add(new Claim(ClaimTypes.Thumbprint, thumbprint, ClaimValueTypes.Base64Binary, Options.ClaimsIssuer));
+        claims.Add(
+            new Claim(
+                ClaimTypes.Thumbprint,
+                thumbprint,
+                ClaimValueTypes.Base64Binary,
+                Options.ClaimsIssuer
+            )
+        );
 
         var value = certificate.SubjectName.Name;
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.X500DistinguishedName, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(
+                    ClaimTypes.X500DistinguishedName,
+                    value,
+                    ClaimValueTypes.String,
+                    Options.ClaimsIssuer
+                )
+            );
         }
 
         value = certificate.SerialNumber;
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.SerialNumber, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(
+                    ClaimTypes.SerialNumber,
+                    value,
+                    ClaimValueTypes.String,
+                    Options.ClaimsIssuer
+                )
+            );
         }
 
         value = certificate.GetNameInfo(X509NameType.DnsName, false);
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.Dns, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(ClaimTypes.Dns, value, ClaimValueTypes.String, Options.ClaimsIssuer)
+            );
         }
 
         value = certificate.GetNameInfo(X509NameType.SimpleName, false);
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.Name, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(ClaimTypes.Name, value, ClaimValueTypes.String, Options.ClaimsIssuer)
+            );
         }
 
         value = certificate.GetNameInfo(X509NameType.EmailName, false);
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.Email, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(ClaimTypes.Email, value, ClaimValueTypes.String, Options.ClaimsIssuer)
+            );
         }
 
         value = certificate.GetNameInfo(X509NameType.UpnName, false);
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.Upn, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(ClaimTypes.Upn, value, ClaimValueTypes.String, Options.ClaimsIssuer)
+            );
         }
 
         value = certificate.GetNameInfo(X509NameType.UrlName, false);
         if (!string.IsNullOrWhiteSpace(value))
         {
-            claims.Add(new Claim(ClaimTypes.Uri, value, ClaimValueTypes.String, Options.ClaimsIssuer));
+            claims.Add(
+                new Claim(ClaimTypes.Uri, value, ClaimValueTypes.String, Options.ClaimsIssuer)
+            );
         }
 
-        var identity = new ClaimsIdentity(claims, CertificateAuthenticationDefaults.AuthenticationScheme);
+        var identity = new ClaimsIdentity(
+            claims,
+            CertificateAuthenticationDefaults.AuthenticationScheme
+        );
         return new ClaimsPrincipal(identity);
     }
 }

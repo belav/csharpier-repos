@@ -28,22 +28,16 @@ public class AttributeRouteTest
         ActionDescriptor selected = null;
 
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
-                {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{key1}"
-                    },
-                },
-                new ActionDescriptor()
-                {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Store/Buy/{key2}"
-                    },
-                },
-            };
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "api/Blog/{key1}" },
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "api/Store/Buy/{key2}" },
+            },
+        };
 
         Func<ActionDescriptor[], IRouter> handlerFactory = (_) =>
         {
@@ -64,7 +58,6 @@ public class AttributeRouteTest
                     routeContext.Handler = (c) => Task.CompletedTask;
 
                     return Task.CompletedTask;
-
                 });
             return handler.Object;
         };
@@ -114,22 +107,22 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{id}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-            };
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -150,7 +143,8 @@ public class AttributeRouteTest
                 Assert.Equal(17, e.Order);
                 Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
                 Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -158,22 +152,22 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id:int}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{id:int}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-            };
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -194,7 +188,8 @@ public class AttributeRouteTest
                 Assert.Equal(17, e.Order);
                 Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
                 Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -202,22 +197,22 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{*slug=hello}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{*slug=hello}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-            };
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -238,7 +233,8 @@ public class AttributeRouteTest
                 Assert.Equal(17, e.Order);
                 Assert.Equal(ToRouteValueDictionary(actions[0].RouteValues), e.RequiredLinkValues);
                 Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     // These actions seem like duplicates, but this is a real case that can happen where two different
@@ -249,36 +245,36 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{id}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-                new ActionDescriptor()
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index2" },
-                    },
+                    { "controller", "Blog" },
+                    { "action", "Index" },
                 },
-            };
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo()
+                {
+                    Template = "api/Blog/{id}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
+                },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index2" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -309,7 +305,8 @@ public class AttributeRouteTest
                 Assert.Equal(17, e.Order);
                 Assert.Equal(ToRouteValueDictionary(actions[1].RouteValues), e.RequiredLinkValues);
                 Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -317,22 +314,22 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{id}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-            };
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -352,7 +349,8 @@ public class AttributeRouteTest
                 Assert.Equal("BLOG_INDEX", e.RouteName);
                 Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
                 Assert.Empty(e.Defaults);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -360,22 +358,22 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id:int}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{id:int}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-            };
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -395,7 +393,8 @@ public class AttributeRouteTest
                 Assert.Equal("BLOG_INDEX", e.RouteName);
                 Assert.Equal("api/Blog/{id:int}", e.RouteTemplate.TemplateText);
                 Assert.Empty(e.Defaults);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -403,22 +402,22 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{*slug=hello}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{*slug=hello}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-            };
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -439,8 +438,10 @@ public class AttributeRouteTest
                 Assert.Equal("api/Blog/{*slug=hello}", e.RouteTemplate.TemplateText);
                 Assert.Collection(
                     e.Defaults.OrderBy(kvp => kvp.Key),
-                    kvp => Assert.Equal(new KeyValuePair<string, object>("slug", "hello"), kvp));
-            });
+                    kvp => Assert.Equal(new KeyValuePair<string, object>("slug", "hello"), kvp)
+                );
+            }
+        );
     }
 
     // These actions seem like duplicates, but this is a real case that can happen where two different
@@ -451,36 +452,36 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index" },
-                    },
+                    Template = "api/Blog/{id}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
                 },
-                new ActionDescriptor()
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "api/Blog/{id}",
-                        Name = "BLOG_INDEX",
-                        Order = 17,
-                    },
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Blog" },
-                        { "action", "Index2" },
-                    },
+                    { "controller", "Blog" },
+                    { "action", "Index" },
                 },
-            };
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo()
+                {
+                    Template = "api/Blog/{id}",
+                    Name = "BLOG_INDEX",
+                    Order = 17,
+                },
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Blog" },
+                    { "action", "Index2" },
+                },
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -500,29 +501,33 @@ public class AttributeRouteTest
                 Assert.Equal("BLOG_INDEX", e.RouteName);
                 Assert.Equal("api/Blog/{id}", e.RouteTemplate.TemplateText);
                 Assert.Empty(e.Defaults);
-            });
+            }
+        );
     }
 
     [Theory]
     [InlineData("")]
     [InlineData("GetBlogById")]
-    public void AttributeRoute_ThrowsRouteCreationException_ForConstraintsNotTakingArguments(string routeName)
+    public void AttributeRoute_ThrowsRouteCreationException_ForConstraintsNotTakingArguments(
+        string routeName
+    )
     {
         // Arrange
         var routeTemplate = "api/Blog/{id:int(10)}";
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo()
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = routeTemplate,
-                        Name = routeName
-                    }
+                    Template = routeTemplate,
+                    Name = routeName,
                 },
-            };
-        var expectedErrorMessage = "An error occurred while adding a route to the route builder. " +
-                    $"Route name '{routeName}' and template '{routeTemplate}'.";
+            },
+        };
+        var expectedErrorMessage =
+            "An error occurred while adding a route to the route builder. "
+            + $"Route name '{routeName}' and template '{routeTemplate}'.";
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -542,34 +547,34 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/get/{id}",
-                        Name = "BLOG_LINK1",
-                        SuppressLinkGeneration = true,
-                    },
+                    Template = "blog/get/{id}",
+                    Name = "BLOG_LINK1",
+                    SuppressLinkGeneration = true,
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/{snake-cased-name}",
-                        Name = "BLOG_INDEX2",
-                    },
+                    Template = "blog/{snake-cased-name}",
+                    Name = "BLOG_INDEX2",
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/",
-                        Name = "BLOG_HOME",
-                        SuppressPathMatching = true,
-                    },
+                    Template = "blog/",
+                    Name = "BLOG_HOME",
+                    SuppressPathMatching = true,
                 },
-            };
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -590,7 +595,8 @@ public class AttributeRouteTest
             {
                 Assert.Equal("BLOG_HOME", e.RouteName);
                 Assert.Equal("blog/", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -598,34 +604,34 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/get/{id}",
-                        Name = "BLOG_LINK1",
-                        SuppressLinkGeneration = true,
-                    },
+                    Template = "blog/get/{id}",
+                    Name = "BLOG_LINK1",
+                    SuppressLinkGeneration = true,
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/get/{id}",
-                        Name = "BLOG_LINK2",
-                    },
+                    Template = "blog/get/{id}",
+                    Name = "BLOG_LINK2",
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/",
-                        Name = "BLOG_HOME",
-                        SuppressPathMatching = true,
-                    },
+                    Template = "blog/",
+                    Name = "BLOG_HOME",
+                    SuppressPathMatching = true,
                 },
-            };
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -646,7 +652,8 @@ public class AttributeRouteTest
             {
                 Assert.Equal("BLOG_HOME", e.RouteName);
                 Assert.Equal("blog/", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -654,34 +661,34 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/get/{id}",
-                        Name = "BLOG_LINK1",
-                        SuppressLinkGeneration = true,
-                    },
+                    Template = "blog/get/{id}",
+                    Name = "BLOG_LINK1",
+                    SuppressLinkGeneration = true,
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/{snake-cased-name}",
-                        Name = "BLOG_LINK2",
-                    },
+                    Template = "blog/{snake-cased-name}",
+                    Name = "BLOG_LINK2",
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/",
-                        Name = "BLOG_HOME",
-                        SuppressPathMatching = true,
-                    },
+                    Template = "blog/",
+                    Name = "BLOG_HOME",
+                    SuppressPathMatching = true,
                 },
-            };
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -702,7 +709,8 @@ public class AttributeRouteTest
             {
                 Assert.Equal("BLOG_LINK2", e.RouteName);
                 Assert.Equal("blog/{snake-cased-name}", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -710,34 +718,34 @@ public class AttributeRouteTest
     {
         // Arrange
         var actions = new List<ActionDescriptor>()
+        {
+            new ActionDescriptor()
             {
-                new ActionDescriptor()
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/get/{id}",
-                        Name = "BLOG_LINK1",
-                        SuppressPathMatching = true,
-                    },
+                    Template = "blog/get/{id}",
+                    Name = "BLOG_LINK1",
+                    SuppressPathMatching = true,
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/get/{id}",
-                        Name = "BLOG_LINK2",
-                    },
+                    Template = "blog/get/{id}",
+                    Name = "BLOG_LINK2",
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                AttributeRouteInfo = new AttributeRouteInfo
                 {
-                    AttributeRouteInfo = new AttributeRouteInfo
-                    {
-                        Template = "blog/",
-                        Name = "BLOG_HOME",
-                        SuppressLinkGeneration = true,
-                    },
+                    Template = "blog/",
+                    Name = "BLOG_HOME",
+                    SuppressLinkGeneration = true,
                 },
-            };
+            },
+        };
 
         var builder = CreateBuilder();
         var actionDescriptorProvider = CreateActionDescriptorProvider(actions);
@@ -758,7 +766,8 @@ public class AttributeRouteTest
             {
                 Assert.Equal("BLOG_HOME", e.RouteName);
                 Assert.Equal("blog/", e.RouteTemplate.TemplateText);
-            });
+            }
+        );
     }
 
     private static TreeRouteBuilder CreateBuilder()
@@ -784,9 +793,12 @@ public class AttributeRouteTest
     }
 
     private static Mock<IActionDescriptorCollectionProvider> CreateActionDescriptorProvider(
-        IReadOnlyList<ActionDescriptor> actions)
+        IReadOnlyList<ActionDescriptor> actions
+    )
     {
-        var actionDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>(MockBehavior.Strict);
+        var actionDescriptorProvider = new Mock<IActionDescriptorCollectionProvider>(
+            MockBehavior.Strict
+        );
         actionDescriptorProvider
             .SetupGet(ad => ad.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, version: 1));
@@ -796,14 +808,16 @@ public class AttributeRouteTest
 
     private static AttributeRoute CreateRoute(
         IRouter handler,
-        IActionDescriptorCollectionProvider actionDescriptorProvider)
+        IActionDescriptorCollectionProvider actionDescriptorProvider
+    )
     {
         return CreateRoute((_) => handler, actionDescriptorProvider);
     }
 
     private static AttributeRoute CreateRoute(
         Func<ActionDescriptor[], IRouter> handlerFactory,
-        IActionDescriptorCollectionProvider actionDescriptorProvider)
+        IActionDescriptorCollectionProvider actionDescriptorProvider
+    )
     {
         var services = new ServiceCollection()
             .AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance)

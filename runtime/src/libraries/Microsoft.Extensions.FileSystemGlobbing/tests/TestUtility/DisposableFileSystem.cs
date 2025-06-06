@@ -13,7 +13,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
 #if NETCOREAPP
             DirectoryInfo = Directory.CreateTempSubdirectory();
 #else
-            DirectoryInfo = new DirectoryInfo(Path.Combine(Path.GetTempPath(), Path.GetRandomFileName()));
+            DirectoryInfo = new DirectoryInfo(
+                Path.Combine(Path.GetTempPath(), Path.GetRandomFileName())
+            );
             DirectoryInfo.Create();
 #endif
             RootPath = DirectoryInfo.FullName;
@@ -44,7 +46,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.TestUtility
 
                 File.WriteAllText(
                     fullPath,
-                    string.Format("Automatically generated for testing on {0:yyyy}/{0:MM}/{0:dd} {0:hh}:{0:mm}:{0:ss}", DateTime.UtcNow));
+                    string.Format(
+                        "Automatically generated for testing on {0:yyyy}/{0:MM}/{0:dd} {0:hh}:{0:mm}:{0:ss}",
+                        DateTime.UtcNow
+                    )
+                );
             }
 
             return this;

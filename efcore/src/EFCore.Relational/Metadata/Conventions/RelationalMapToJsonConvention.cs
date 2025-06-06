@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvention, IModelFinalizingConvention
+public class RelationalMapToJsonConvention
+    : IEntityTypeAnnotationChangedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalMapToJsonConvention" />.
@@ -20,7 +22,8 @@ public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvent
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this convention.</param>
     public RelationalMapToJsonConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -43,27 +46,38 @@ public class RelationalMapToJsonConvention : IEntityTypeAnnotationChangedConvent
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
-    {
-    }
+        IConventionContext<IConventionAnnotation> context
+    ) { }
 
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
-        foreach (var jsonEntityType in modelBuilder.Metadata.GetEntityTypes().Where(e => e.IsMappedToJson()))
+        foreach (
+            var jsonEntityType in modelBuilder
+                .Metadata.GetEntityTypes()
+                .Where(e => e.IsMappedToJson())
+        )
         {
-            foreach (var enumProperty in jsonEntityType
-                         .GetDeclaredProperties()
-                         .Where(p => p.ClrType.UnwrapNullableType().IsEnum))
+            foreach (
+                var enumProperty in jsonEntityType
+                    .GetDeclaredProperties()
+                    .Where(p => p.ClrType.UnwrapNullableType().IsEnum)
+            )
             {
                 // If the enum is mapped with no conversion, then use the reader/writer that handles legacy string values and warns.
-                if (enumProperty.GetValueConverter() == null
-                    && enumProperty.GetProviderClrType() == null)
+                if (
+                    enumProperty.GetValueConverter() == null
+                    && enumProperty.GetProviderClrType() == null
+                )
                 {
                     enumProperty.SetJsonValueReaderWriterType(
-                        typeof(JsonWarningEnumReaderWriter<>).MakeGenericType(enumProperty.ClrType.UnwrapNullableType()));
+                        typeof(JsonWarningEnumReaderWriter<>).MakeGenericType(
+                            enumProperty.ClrType.UnwrapNullableType()
+                        )
+                    );
                 }
             }
         }

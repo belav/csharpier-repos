@@ -15,12 +15,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => 42, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
-            MutableObjectModelBinderProvider binderProvider = new MutableObjectModelBinderProvider();
+            MutableObjectModelBinderProvider binderProvider =
+                new MutableObjectModelBinderProvider();
 
             // Act
             IExtensibleModelBinder binder = binderProvider.GetBinder(null, bindingContext);
@@ -35,15 +39,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => 42, typeof(int)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo.bar", "someValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } },
             };
 
-            MutableObjectModelBinderProvider binderProvider = new MutableObjectModelBinderProvider();
+            MutableObjectModelBinderProvider binderProvider =
+                new MutableObjectModelBinderProvider();
 
             // Act
             IExtensibleModelBinder binder = binderProvider.GetBinder(null, bindingContext);
@@ -59,15 +64,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ComplexModelDto)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ComplexModelDto)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo.bar", "someValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } },
             };
 
-            MutableObjectModelBinderProvider binderProvider = new MutableObjectModelBinderProvider();
+            MutableObjectModelBinderProvider binderProvider =
+                new MutableObjectModelBinderProvider();
 
             // Act
             IExtensibleModelBinder binder = binderProvider.GetBinder(null, bindingContext);

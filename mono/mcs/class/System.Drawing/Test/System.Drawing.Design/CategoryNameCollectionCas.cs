@@ -1,5 +1,5 @@
 //
-// CategoryNameCollectionCas.cs 
+// CategoryNameCollectionCas.cs
 //	- CAS unit tests for System.Drawing.Design.CategoryNameCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,57 +27,56 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Drawing.Design;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Drawing.Design {
+namespace MonoCasTests.System.Drawing.Design
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CategoryNameCollectionCas
+    {
+        private ConstructorInfo ctor;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CategoryNameCollectionCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // this executes at fulltrust
+            ConstructorInfo[] infos = typeof(CategoryNameCollection).GetConstructors();
+            ctor = infos[0];
+        }
 
-		private ConstructorInfo ctor;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this executes at fulltrust
-			ConstructorInfo[] infos = typeof (CategoryNameCollection).GetConstructors ();
-			ctor = infos[0];
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Create()
+        {
+            new CategoryNameCollection(new string[0]);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        // we use reflection to call CategoryNameCollection class as it's
+        // protected by a  LinkDemand (which will be converted into full demand,
+        // i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Create ()
-		{
-			new CategoryNameCollection (new string[0]);
-		}
-
-		// we use reflection to call CategoryNameCollection class as it's 
-		// protected by a  LinkDemand (which will be converted into full demand, 
-		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Create_LinkDemand ()
-		{
-			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (ctor, "constructor");
-			ctor.Invoke (new object[1] { (string[])null });
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, SkipVerification = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Create_LinkDemand()
+        {
+            // requires FullTrust, so denying anything break the requirements
+            Assert.IsNotNull(ctor, "constructor");
+            ctor.Invoke(new object[1] { (string[])null });
+        }
+    }
 }

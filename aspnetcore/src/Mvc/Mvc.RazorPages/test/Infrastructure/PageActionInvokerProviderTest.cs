@@ -27,11 +27,13 @@ public class PageInvokerProviderTest
     public void OnProvidersExecuting_WithEmptyModel_PopulatesCacheEntry()
     {
         // Arrange
-        var descriptor = CreateCompiledPageActionDescriptor(new PageActionDescriptor
-        {
-            RelativePath = "/Path1",
-            FilterDescriptors = new FilterDescriptor[0],
-        });
+        var descriptor = CreateCompiledPageActionDescriptor(
+            new PageActionDescriptor
+            {
+                RelativePath = "/Path1",
+                FilterDescriptors = new FilterDescriptor[0],
+            }
+        );
 
         Func<PageContext, ViewContext, object> factory = (a, b) => null;
         Func<PageContext, ViewContext, object, ValueTask> releaser = (a, b, c) => default;
@@ -46,16 +48,16 @@ public class PageInvokerProviderTest
             .Setup(f => f.CreateAsyncPageDisposer(It.IsAny<CompiledPageActionDescriptor>()))
             .Returns(releaser);
 
-        var invokerProvider = CreateInvokerProvider(
-            loader,
-            pageFactoryProvider.Object);
+        var invokerProvider = CreateInvokerProvider(loader, pageFactoryProvider.Object);
 
-        var context = new ActionInvokerProviderContext(new ActionContext()
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext()
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act
         invokerProvider.OnProvidersExecuting(context);
@@ -80,10 +82,11 @@ public class PageInvokerProviderTest
             new PageActionDescriptor
             {
                 RelativePath = "/Path1",
-                FilterDescriptors = new FilterDescriptor[0]
+                FilterDescriptors = new FilterDescriptor[0],
             },
             pageType: typeof(PageWithModel),
-            modelType: typeof(DerivedTestPageModel));
+            modelType: typeof(DerivedTestPageModel)
+        );
 
         Func<PageContext, ViewContext, object> factory = (a, b) => null;
         Func<PageContext, ViewContext, object, ValueTask> releaser = (a, b, c) => default;
@@ -110,14 +113,17 @@ public class PageInvokerProviderTest
         var invokerProvider = CreateInvokerProvider(
             loader,
             pageFactoryProvider.Object,
-            modelFactoryProvider.Object);
+            modelFactoryProvider.Object
+        );
 
-        var context = new ActionInvokerProviderContext(new ActionContext()
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext()
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act
         invokerProvider.OnProvidersExecuting(context);
@@ -128,7 +134,9 @@ public class PageInvokerProviderTest
         var actionInvoker = Assert.IsType<PageActionInvoker>(context.Result);
 
         var entry = actionInvoker.CacheEntry;
-        var compiledPageActionDescriptor = Assert.IsType<CompiledPageActionDescriptor>(entry.ActionDescriptor);
+        var compiledPageActionDescriptor = Assert.IsType<CompiledPageActionDescriptor>(
+            entry.ActionDescriptor
+        );
         Assert.Equal(descriptor.RelativePath, compiledPageActionDescriptor.RelativePath);
         Assert.Same(factory, entry.PageFactory);
         Assert.Same(releaser, entry.ReleasePage);
@@ -150,12 +158,15 @@ public class PageInvokerProviderTest
     public void OnProvidersExecuting_CachesViewStartFactories()
     {
         // Arrange
-        var descriptor = CreateCompiledPageActionDescriptor(new PageActionDescriptor
-        {
-            RelativePath = "/Home/Path1/File.cshtml",
-            ViewEnginePath = "/Home/Path1/File.cshtml",
-            FilterDescriptors = new FilterDescriptor[0],
-        }, pageType: typeof(PageWithModel));
+        var descriptor = CreateCompiledPageActionDescriptor(
+            new PageActionDescriptor
+            {
+                RelativePath = "/Home/Path1/File.cshtml",
+                ViewEnginePath = "/Home/Path1/File.cshtml",
+                FilterDescriptors = new FilterDescriptor[0],
+            },
+            pageType: typeof(PageWithModel)
+        );
 
         var loader = Mock.Of<PageLoader>();
         var razorPageFactoryProvider = new Mock<IRazorPageFactoryProvider>();
@@ -176,14 +187,17 @@ public class PageInvokerProviderTest
 
         var invokerProvider = CreateInvokerProvider(
             loader,
-            razorPageFactoryProvider: razorPageFactoryProvider.Object);
+            razorPageFactoryProvider: razorPageFactoryProvider.Object
+        );
 
-        var context = new ActionInvokerProviderContext(new ActionContext()
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext()
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act
         invokerProvider.OnProvidersExecuting(context);
@@ -199,23 +213,26 @@ public class PageInvokerProviderTest
     public void OnProvidersExecuting_CachesEntries()
     {
         // Arrange
-        var descriptor = CreateCompiledPageActionDescriptor(new PageActionDescriptor
-        {
-            RelativePath = "/Path1",
-            FilterDescriptors = new FilterDescriptor[0],
-        });
+        var descriptor = CreateCompiledPageActionDescriptor(
+            new PageActionDescriptor
+            {
+                RelativePath = "/Path1",
+                FilterDescriptors = new FilterDescriptor[0],
+            }
+        );
 
         var loader = Mock.Of<PageLoader>();
 
-        var invokerProvider = CreateInvokerProvider(
-            loader);
+        var invokerProvider = CreateInvokerProvider(loader);
 
-        var context = new ActionInvokerProviderContext(new ActionContext
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act - 1
         invokerProvider.OnProvidersExecuting(context);
@@ -226,12 +243,14 @@ public class PageInvokerProviderTest
         var entry1 = actionInvoker.CacheEntry;
 
         // Act - 2
-        context = new ActionInvokerProviderContext(new ActionContext
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        context = new ActionInvokerProviderContext(
+            new ActionContext
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
         invokerProvider.OnProvidersExecuting(context);
 
         // Assert - 2
@@ -245,23 +264,28 @@ public class PageInvokerProviderTest
     public void OnProvidersExecuting_DoesNotInvokePageLoader_WhenEndpointRoutingIsUsed()
     {
         // Arrange
-        var descriptor = CreateCompiledPageActionDescriptor(new PageActionDescriptor
-        {
-            RelativePath = "/Path1",
-            FilterDescriptors = new FilterDescriptor[0],
-        });
+        var descriptor = CreateCompiledPageActionDescriptor(
+            new PageActionDescriptor
+            {
+                RelativePath = "/Path1",
+                FilterDescriptors = new FilterDescriptor[0],
+            }
+        );
 
         var loader = new Mock<PageLoader>();
         var invokerProvider = CreateInvokerProvider(
             loader.Object,
-            mvcOptions: new MvcOptions { EnableEndpointRouting = true });
+            mvcOptions: new MvcOptions { EnableEndpointRouting = true }
+        );
 
-        var context = new ActionInvokerProviderContext(new ActionContext
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act
         invokerProvider.OnProvidersExecuting(context);
@@ -269,7 +293,14 @@ public class PageInvokerProviderTest
         // Assert
         Assert.NotNull(context.Result);
         Assert.IsType<PageActionInvoker>(context.Result);
-        loader.Verify(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()), Times.Never());
+        loader.Verify(
+            l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                ),
+            Times.Never()
+        );
     }
 
     [Fact]
@@ -283,19 +314,23 @@ public class PageInvokerProviderTest
         };
 
         var loader = new Mock<PageLoader>();
-        loader.Setup(l => l.LoadAsync(descriptor, EndpointMetadataCollection.Empty))
+        loader
+            .Setup(l => l.LoadAsync(descriptor, EndpointMetadataCollection.Empty))
             .ReturnsAsync(CreateCompiledPageActionDescriptor(descriptor));
 
         var invokerProvider = CreateInvokerProvider(
             loader.Object,
-            mvcOptions: new MvcOptions { EnableEndpointRouting = false });
+            mvcOptions: new MvcOptions { EnableEndpointRouting = false }
+        );
 
-        var context = new ActionInvokerProviderContext(new ActionContext
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act
         invokerProvider.OnProvidersExecuting(context);
@@ -303,36 +338,48 @@ public class PageInvokerProviderTest
         // Assert
         Assert.NotNull(context.Result);
         Assert.IsType<PageActionInvoker>(context.Result);
-        loader.Verify(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()), Times.Once());
+        loader.Verify(
+            l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                ),
+            Times.Once()
+        );
     }
 
     [Fact]
     public void CacheUpdatesWhenDescriptorChanges()
     {
         // Arrange
-        var descriptor = CreateCompiledPageActionDescriptor(new PageActionDescriptor
-        {
-            RelativePath = "/Path1",
-            FilterDescriptors = new FilterDescriptor[0],
-        });
+        var descriptor = CreateCompiledPageActionDescriptor(
+            new PageActionDescriptor
+            {
+                RelativePath = "/Path1",
+                FilterDescriptors = new FilterDescriptor[0],
+            }
+        );
 
-        var descriptor2 = CreateCompiledPageActionDescriptor(new PageActionDescriptor
-        {
-            RelativePath = "/Path1",
-            FilterDescriptors = new FilterDescriptor[0],
-        });
+        var descriptor2 = CreateCompiledPageActionDescriptor(
+            new PageActionDescriptor
+            {
+                RelativePath = "/Path1",
+                FilterDescriptors = new FilterDescriptor[0],
+            }
+        );
 
         var loader = Mock.Of<PageLoader>();
 
-        var invokerProvider = CreateInvokerProvider(
-             loader);
+        var invokerProvider = CreateInvokerProvider(loader);
 
-        var context1 = new ActionInvokerProviderContext(new ActionContext()
-        {
-            ActionDescriptor = descriptor,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context1 = new ActionInvokerProviderContext(
+            new ActionContext()
+            {
+                ActionDescriptor = descriptor,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act - 1
         invokerProvider.OnProvidersExecuting(context1);
@@ -344,12 +391,14 @@ public class PageInvokerProviderTest
 
         // Act - 2
 
-        var context2 = new ActionInvokerProviderContext(new ActionContext()
-        {
-            ActionDescriptor = descriptor2,
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context2 = new ActionInvokerProviderContext(
+            new ActionContext()
+            {
+                ActionDescriptor = descriptor2,
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         invokerProvider.OnProvidersExecuting(context2);
 
@@ -363,13 +412,12 @@ public class PageInvokerProviderTest
     [Fact]
     public void GetViewStartFactories_FindsFullHierarchy()
     {
-
         // Arrange
         var descriptor = new PageActionDescriptor()
         {
             RelativePath = "/Pages/Level1/Level2/Index.cshtml",
             FilterDescriptors = new FilterDescriptor[0],
-            ViewEnginePath = "/Pages/Level1/Level2/Index.cshtml"
+            ViewEnginePath = "/Pages/Level1/Level2/Index.cshtml",
         };
 
         var compiledPageDescriptor = new CompiledPageActionDescriptor(descriptor)
@@ -379,24 +427,25 @@ public class PageInvokerProviderTest
 
         var loader = new Mock<PageLoader>();
         loader
-            .Setup(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()))
+            .Setup(l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                )
+            )
             .ReturnsAsync(compiledPageDescriptor);
 
         var mock = new Mock<IRazorPageFactoryProvider>(MockBehavior.Strict);
-        mock
-            .Setup(p => p.CreateFactory("/Pages/Level1/Level2/_ViewStart.cshtml"))
+        mock.Setup(p => p.CreateFactory("/Pages/Level1/Level2/_ViewStart.cshtml"))
             .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), () => null))
             .Verifiable();
-        mock
-            .Setup(p => p.CreateFactory("/Pages/Level1/_ViewStart.cshtml"))
+        mock.Setup(p => p.CreateFactory("/Pages/Level1/_ViewStart.cshtml"))
             .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), () => null))
             .Verifiable();
-        mock
-            .Setup(p => p.CreateFactory("/Pages/_ViewStart.cshtml"))
+        mock.Setup(p => p.CreateFactory("/Pages/_ViewStart.cshtml"))
             .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), () => null))
             .Verifiable();
-        mock
-            .Setup(p => p.CreateFactory("/_ViewStart.cshtml"))
+        mock.Setup(p => p.CreateFactory("/_ViewStart.cshtml"))
             .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), () => null))
             .Verifiable();
 
@@ -404,7 +453,8 @@ public class PageInvokerProviderTest
 
         var invokerProvider = CreateInvokerProvider(
             loader.Object,
-            razorPageFactoryProvider: razorPageFactoryProvider);
+            razorPageFactoryProvider: razorPageFactoryProvider
+        );
 
         // Act
         var factories = invokerProvider.Cache.GetViewStartFactories(compiledPageDescriptor);
@@ -423,12 +473,17 @@ public class PageInvokerProviderTest
         {
             RelativePath = "/Views/Deeper/Index.cshtml",
             FilterDescriptors = new FilterDescriptor[0],
-            ViewEnginePath = "/Views/Deeper/Index.cshtml"
+            ViewEnginePath = "/Views/Deeper/Index.cshtml",
         };
 
         var loader = new Mock<PageLoader>();
         loader
-            .Setup(l => l.LoadAsync(It.IsAny<PageActionDescriptor>(), It.IsAny<EndpointMetadataCollection>()))
+            .Setup(l =>
+                l.LoadAsync(
+                    It.IsAny<PageActionDescriptor>(),
+                    It.IsAny<EndpointMetadataCollection>()
+                )
+            )
             .ReturnsAsync(CreateCompiledPageActionDescriptor(descriptor, typeof(TestPageModel)));
 
         var pageFactory = new Mock<IRazorPageFactoryProvider>();
@@ -437,7 +492,9 @@ public class PageInvokerProviderTest
             .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), () => null));
         pageFactory
             .Setup(f => f.CreateFactory("/Views/_ViewStart.cshtml"))
-            .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), razorPageFactory: null));
+            .Returns(
+                new RazorPageFactoryResult(new CompiledViewDescriptor(), razorPageFactory: null)
+            );
         pageFactory
             .Setup(f => f.CreateFactory("/_ViewStart.cshtml"))
             .Returns(new RazorPageFactoryResult(new CompiledViewDescriptor(), () => null));
@@ -449,7 +506,8 @@ public class PageInvokerProviderTest
             loader.Object,
             pageProvider: null,
             modelProvider: null,
-            razorPageFactoryProvider: pageFactory.Object);
+            razorPageFactoryProvider: pageFactory.Object
+        );
 
         var compiledDescriptor = CreateCompiledPageActionDescriptor(descriptor);
 
@@ -463,7 +521,8 @@ public class PageInvokerProviderTest
     private static CompiledPageActionDescriptor CreateCompiledPageActionDescriptor(
         PageActionDescriptor descriptor,
         Type pageType = null,
-        Type modelType = null)
+        Type modelType = null
+    )
     {
         pageType = pageType ?? typeof(object);
         var pageTypeInfo = pageType.GetTypeInfo();
@@ -494,12 +553,16 @@ public class PageInvokerProviderTest
         IPageFactoryProvider pageProvider = null,
         IPageModelFactoryProvider modelProvider = null,
         IRazorPageFactoryProvider razorPageFactoryProvider = null,
-        MvcOptions mvcOptions = null)
+        MvcOptions mvcOptions = null
+    )
     {
         var tempDataFactory = new Mock<ITempDataDictionaryFactory>();
         tempDataFactory
             .Setup(t => t.GetTempData(It.IsAny<HttpContext>()))
-            .Returns((HttpContext context) => new TempDataDictionary(context, Mock.Of<ITempDataProvider>()));
+            .Returns(
+                (HttpContext context) =>
+                    new TempDataDictionary(context, Mock.Of<ITempDataProvider>())
+            );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
@@ -510,7 +573,8 @@ public class PageInvokerProviderTest
             TestModelBinderFactory.CreateDefault(),
             Mock.Of<IObjectModelValidator>(),
             Options.Create(mvcOptions),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var cache = new PageActionInvokerCache(
             pageProvider ?? Mock.Of<IPageFactoryProvider>(),
@@ -519,7 +583,8 @@ public class PageInvokerProviderTest
             new IFilterProvider[0],
             parameterBinder,
             modelMetadataProvider,
-            modelBinderFactory);
+            modelBinderFactory
+        );
 
         return new PageActionInvokerProvider(
             loader,
@@ -531,7 +596,8 @@ public class PageInvokerProviderTest
             Mock.Of<IPageHandlerMethodSelector>(),
             new DiagnosticListener("Microsoft.AspNetCore"),
             NullLoggerFactory.Instance,
-            new ActionResultTypeMapper());
+            new ActionResultTypeMapper()
+        );
     }
 
     private class PageWithModel
@@ -541,12 +607,8 @@ public class PageInvokerProviderTest
 
     private class TestPageModel
     {
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
     }
 
-    private class DerivedTestPageModel : TestPageModel
-    {
-    }
+    private class DerivedTestPageModel : TestPageModel { }
 }

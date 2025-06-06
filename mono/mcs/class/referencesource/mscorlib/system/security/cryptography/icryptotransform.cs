@@ -1,32 +1,33 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*
  *
  * ICryptoTransform.cs
-// 
+//
 // <OWNER>ShawnFa</OWNER>
  *
  * Author: bal
  *
  */
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     using System;
     using System.IO;
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface ICryptoTransform : IDisposable {
-
+    public interface ICryptoTransform : IDisposable
+    {
         int InputBlockSize { get; }
 
         int OutputBlockSize { get; }
 
         // CanTransformMultipleBlocks == true implies that TransformBlock() can accept any number
         // of whole blocks, not just a single block.  If CanTransformMultipleBlocks is false, you have
-        // to feed blocks one at a time.  
+        // to feed blocks one at a time.
         bool CanTransformMultipleBlocks { get; }
 
         // If CanReuseTransform is true, then after a call to TransformFinalBlock() the transform
@@ -37,11 +38,17 @@ namespace System.Security.Cryptography {
         // The return value of TransformBlock is the number of bytes returned to outputBuffer and is
         // always <= OutputBlockSize.  If CanTransformMultipleBlocks is true, then inputCount may be
         // any positive multiple of InputBlockSize
-        int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset);
+        int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        );
 
         // Special function for transforming the last block or partial block in the stream.  The
         // return value is an array containting the remaining transformed bytes.
-        // We return a new array here because the amount of information we send back at the end could 
+        // We return a new array here because the amount of information we send back at the end could
         // be larger than a single block once padding is accounted for.
         byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount);
     }

@@ -12,12 +12,17 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
-    [ExportCompletionProvider(nameof(AggregateEmbeddedLanguageCompletionProvider), LanguageNames.CSharp)]
+    [ExportCompletionProvider(
+        nameof(AggregateEmbeddedLanguageCompletionProvider),
+        LanguageNames.CSharp
+    )]
     [ExtensionOrder(After = nameof(ExtensionMethodImportCompletionProvider))]
     [Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal class AggregateEmbeddedLanguageCompletionProvider([ImportMany] IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices) : AbstractAggregateEmbeddedLanguageCompletionProvider(languageServices, LanguageNames.CSharp)
+    internal class AggregateEmbeddedLanguageCompletionProvider(
+        [ImportMany] IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices
+    ) : AbstractAggregateEmbeddedLanguageCompletionProvider(languageServices, LanguageNames.CSharp)
     {
         internal override string Language => LanguageNames.CSharp;
     }

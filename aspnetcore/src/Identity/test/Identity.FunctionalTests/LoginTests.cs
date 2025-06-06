@@ -8,7 +8,8 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Identity.FunctionalTests;
 
-public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFactory<TStartup, TContext>>
+public abstract class LoginTests<TStartup, TContext>
+    : IClassFixture<ServerFactory<TStartup, TContext>>
     where TStartup : class
     where TContext : DbContext
 {
@@ -43,8 +44,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupGlobalAuthorizeFilter();
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -86,8 +88,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupGlobalAuthorizeFilter();
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -122,7 +125,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
 
         // Act & Assert
         // Use a new client to simulate a new browser session.
-        await UserStories.LoginExistingUserRecoveryCodeAsync(newClient, userName, password, recoveryCode);
+        await UserStories.LoginExistingUserRecoveryCodeAsync(
+            newClient,
+            userName,
+            password,
+            recoveryCode
+        );
     }
 
     [Fact]
@@ -132,8 +140,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupGlobalAuthorizeFilter();
 
-        var server = ServerFactory
-            .WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
         var client = server.CreateClient();
         var newClient = server.CreateClient();
 
@@ -147,7 +156,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
 
         // Act & Assert
         // Use a new client to simulate a new browser session.
-        await UserStories.LoginExistingUserRecoveryCodeAsync(newClient, userName, password, recoveryCode);
+        await UserStories.LoginExistingUserRecoveryCodeAsync(
+            newClient,
+            userName,
+            password,
+            recoveryCode
+        );
     }
 
     [Fact]
@@ -155,11 +169,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     {
         // Arrange
         var emailSender = new ContosoEmailSender();
-        void ConfigureTestServices(IServiceCollection services) => services
-                .SetupTestEmailSender(emailSender)
-                .SetupEmailRequired();
+        void ConfigureTestServices(IServiceCollection services) =>
+            services.SetupTestEmailSender(emailSender).SetupEmailRequired();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -171,7 +186,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
 
         // Act & Assert
         // Use a new client to simulate a new browser session.
-        await Assert.ThrowsAnyAsync<XunitException>(() => UserStories.LoginExistingUserAsync(newClient, userName, password));
+        await Assert.ThrowsAnyAsync<XunitException>(() =>
+            UserStories.LoginExistingUserAsync(newClient, userName, password)
+        );
     }
 
     [Fact]
@@ -179,12 +196,15 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     {
         // Arrange
         var emailSender = new ContosoEmailSender();
-        void ConfigureTestServices(IServiceCollection services) => services
+        void ConfigureTestServices(IServiceCollection services) =>
+            services
                 .SetupTestEmailSender(emailSender)
                 .SetupEmailRequired()
                 .SetupGlobalAuthorizeFilter();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -196,7 +216,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
 
         // Act & Assert
         // Use a new client to simulate a new browser session.
-        await Assert.ThrowsAnyAsync<XunitException>(() => UserStories.LoginExistingUserAsync(newClient, userName, password));
+        await Assert.ThrowsAnyAsync<XunitException>(() =>
+            UserStories.LoginExistingUserAsync(newClient, userName, password)
+        );
     }
 
     [Fact]
@@ -204,11 +226,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     {
         // Arrange
         var emailSender = new ContosoEmailSender();
-        void ConfigureTestServices(IServiceCollection services) => services
-            .SetupTestEmailSender(emailSender)
-            .SetupEmailRequired();
+        void ConfigureTestServices(IServiceCollection services) =>
+            services.SetupTestEmailSender(emailSender).SetupEmailRequired();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -231,11 +254,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     {
         // Arrange
         var emailSender = new ContosoEmailSender();
-        void ConfigureTestServices(IServiceCollection services) => services
-            .SetupTestEmailSender(emailSender)
-            .SetupEmailRequired();
+        void ConfigureTestServices(IServiceCollection services) =>
+            services.SetupTestEmailSender(emailSender).SetupEmailRequired();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -258,12 +282,15 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     {
         // Arrange
         var emailSender = new ContosoEmailSender();
-        void ConfigureTestServices(IServiceCollection services) => services
-            .SetupTestEmailSender(emailSender)
-            .SetupEmailRequired()
-            .SetupGlobalAuthorizeFilter();
+        void ConfigureTestServices(IServiceCollection services) =>
+            services
+                .SetupTestEmailSender(emailSender)
+                .SetupEmailRequired()
+                .SetupGlobalAuthorizeFilter();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -288,7 +315,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupTestThirdPartyLogin();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -306,11 +335,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     public async Task CanLoginWithASocialLoginProvider_WithGlobalAuthorizeFilter()
     {
         // Arrange
-        void ConfigureTestServices(IServiceCollection services) => services
-            .SetupTestThirdPartyLogin()
-            .SetupGlobalAuthorizeFilter();
+        void ConfigureTestServices(IServiceCollection services) =>
+            services.SetupTestThirdPartyLogin().SetupGlobalAuthorizeFilter();
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();
@@ -329,10 +359,12 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
     {
         // Arrange
         var emailSender = new ContosoEmailSender();
-        void ConfigureTestServices(IServiceCollection services) => services
-            .SetupTestEmailSender(emailSender);
+        void ConfigureTestServices(IServiceCollection services) =>
+            services.SetupTestEmailSender(emailSender);
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var resetPasswordClient = server.CreateClient();
@@ -362,7 +394,9 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
         void ConfigureTestServices(IServiceCollection services) =>
             services.SetupGlobalAuthorizeFilter().SetupTestEmailSender(emailSender);
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var resetPasswordClient = server.CreateClient();
@@ -390,9 +424,14 @@ public abstract class LoginTests<TStartup, TContext> : IClassFixture<ServerFacto
         // Arrange
         var emailSender = new ContosoEmailSender();
         void ConfigureTestServices(IServiceCollection services) =>
-            services.SetupGlobalAuthorizeFilter().SetupMaxFailedAccessAttempts().SetupTestEmailSender(emailSender);
+            services
+                .SetupGlobalAuthorizeFilter()
+                .SetupMaxFailedAccessAttempts()
+                .SetupTestEmailSender(emailSender);
 
-        var server = ServerFactory.WithWebHostBuilder(whb => whb.ConfigureServices(ConfigureTestServices));
+        var server = ServerFactory.WithWebHostBuilder(whb =>
+            whb.ConfigureServices(ConfigureTestServices)
+        );
 
         var client = server.CreateClient();
         var newClient = server.CreateClient();

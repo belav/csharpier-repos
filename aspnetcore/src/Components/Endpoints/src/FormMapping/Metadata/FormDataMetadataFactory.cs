@@ -11,15 +11,27 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping.Metadata;
 
-internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> factories, ILoggerFactory loggerFactory)
+internal partial class FormDataMetadataFactory(
+    List<IFormDataConverterFactory> factories,
+    ILoggerFactory loggerFactory
+)
 {
     private readonly object _lock = new object();
     private readonly FormMetadataContext _context = new();
-    private readonly ParsableConverterFactory _parsableFactory = factories.OfType<ParsableConverterFactory>().Single();
-    private readonly DictionaryConverterFactory _dictionaryFactory = factories.OfType<DictionaryConverterFactory>().Single();
-    private readonly FileConverterFactory _fileConverterFactory = factories.OfType<FileConverterFactory>().Single();
-    private readonly CollectionConverterFactory _collectionFactory = factories.OfType<CollectionConverterFactory>().Single();
-    private readonly ILogger<FormDataMetadataFactory> _logger = loggerFactory.CreateLogger<FormDataMetadataFactory>();
+    private readonly ParsableConverterFactory _parsableFactory = factories
+        .OfType<ParsableConverterFactory>()
+        .Single();
+    private readonly DictionaryConverterFactory _dictionaryFactory = factories
+        .OfType<DictionaryConverterFactory>()
+        .Single();
+    private readonly FileConverterFactory _fileConverterFactory = factories
+        .OfType<FileConverterFactory>()
+        .Single();
+    private readonly CollectionConverterFactory _collectionFactory = factories
+        .OfType<CollectionConverterFactory>()
+        .Single();
+    private readonly ILogger<FormDataMetadataFactory> _logger =
+        loggerFactory.CreateLogger<FormDataMetadataFactory>();
 
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
@@ -50,7 +62,9 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 }
 
                 // Try to get the metadata for the type or create and add a new instance.
-                var result = _context.TypeMetadata.TryGetValue(type, out var value) ? value : new FormDataTypeMetadata(type);
+                var result = _context.TypeMetadata.TryGetValue(type, out var value)
+                    ? value
+                    : new FormDataTypeMetadata(type);
                 if (value == null)
                 {
                     Log.NoMetadataFound(_logger, type);
@@ -78,9 +92,14 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 }
 
                 // These blocks are evaluated in a specific order.
-                if (_parsableFactory.CanConvert(type, options) || type.IsEnum ||
-                    (Nullable.GetUnderlyingType(type) is { } underlyingType &&
-                        _parsableFactory.CanConvert(underlyingType, options)))
+                if (
+                    _parsableFactory.CanConvert(type, options)
+                    || type.IsEnum
+                    || (
+                        Nullable.GetUnderlyingType(type) is { } underlyingType
+                        && _parsableFactory.CanConvert(underlyingType, options)
+                    )
+                )
                 {
                     Log.PrimitiveType(_logger, type);
                     result.Kind = FormDataTypeKind.Primitive;
@@ -103,7 +122,9 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 {
                     Log.DictionaryType(_logger, type);
                     result.Kind = FormDataTypeKind.Dictionary;
-                    var (keyType, valueType) = DictionaryConverterFactory.ResolveDictionaryTypes(type)!;
+                    var (keyType, valueType) = DictionaryConverterFactory.ResolveDictionaryTypes(
+                        type
+                    )!;
                     result.KeyType = GetOrCreateMetadataFor(keyType, options);
                     result.ValueType = GetOrCreateMetadataFor(valueType, options);
                     return result;
@@ -113,7 +134,10 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 {
                     Log.CollectionType(_logger, type);
                     result.Kind = FormDataTypeKind.Collection;
-                    result.ElementType = GetOrCreateMetadataFor(CollectionConverterFactory.ResolveElementType(type)!, options);
+                    result.ElementType = GetOrCreateMetadataFor(
+                        CollectionConverterFactory.ResolveElementType(type)!,
+                        options
+                    );
                     return result;
                 }
 
@@ -162,7 +186,8 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 {
                     if (_logger.IsEnabled(LogLevel.Debug))
                     {
-                        var parameters = $"({string.Join(", ", result.Constructor.GetParameters().Select(p => p.ParameterType.Name))})";
+                        var parameters =
+                            $"({string.Join(", ", result.Constructor.GetParameters().Select(p => p.ParameterType.Name))})";
                         Log.ConstructorFound(_logger, type, parameters);
                     }
 
@@ -170,16 +195,31 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
 
                     foreach (var parameter in values)
                     {
-                        Log.ConstructorParameter(_logger, type, parameter.Name!, parameter.ParameterType);
-                        var parameterTypeInfo = GetOrCreateMetadataFor(parameter.ParameterType, options);
+                        Log.ConstructorParameter(
+                            _logger,
+                            type,
+                            parameter.Name!,
+                            parameter.ParameterType
+                        );
+                        var parameterTypeInfo = GetOrCreateMetadataFor(
+                            parameter.ParameterType,
+                            options
+                        );
                         if (parameterTypeInfo == null)
                         {
-                            Log.ConstructorParameterTypeNotSupported(_logger, type, parameter.Name!, parameter.ParameterType);
+                            Log.ConstructorParameterTypeNotSupported(
+                                _logger,
+                                type,
+                                parameter.Name!,
+                                parameter.ParameterType
+                            );
                             _context.TypeMetadata.Remove(type);
                             return null;
                         }
 
-                        result.ConstructorParameters.Add(new FormDataParameterMetadata(parameter, parameterTypeInfo));
+                        result.ConstructorParameters.Add(
+                            new FormDataParameterMetadata(parameter, parameterTypeInfo)
+                        );
                     }
                 }
 
@@ -188,17 +228,30 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 {
                     var property = propertyHelper.Property;
                     Log.CandidateProperty(_logger, propertyHelper.Name, property.PropertyType);
-                    var matchingConstructorParameter = result
-                        .ConstructorParameters
-                        .FirstOrDefault(p => string.Equals(p.Name, property.Name, StringComparison.OrdinalIgnoreCase));
+                    var matchingConstructorParameter = result.ConstructorParameters.FirstOrDefault(
+                        p =>
+                            string.Equals(p.Name, property.Name, StringComparison.OrdinalIgnoreCase)
+                    );
 
                     if (matchingConstructorParameter != null)
                     {
-                        Log.MatchingConstructorParameterFound(_logger, matchingConstructorParameter.Name, property.Name);
+                        Log.MatchingConstructorParameterFound(
+                            _logger,
+                            matchingConstructorParameter.Name,
+                            property.Name
+                        );
                         var dataMember = property.GetCustomAttribute<DataMemberAttribute>();
-                        if (dataMember != null && dataMember.IsNameSetExplicitly && dataMember.Name != null)
+                        if (
+                            dataMember != null
+                            && dataMember.IsNameSetExplicitly
+                            && dataMember.Name != null
+                        )
                         {
-                            Log.CustomParameterNameMetadata(_logger, dataMember.Name, property.Name);
+                            Log.CustomParameterNameMetadata(
+                                _logger,
+                                dataMember.Name,
+                                property.Name
+                            );
                             matchingConstructorParameter.Name = dataMember.Name;
                         }
 
@@ -224,16 +277,29 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                     var propertyTypeInfo = GetOrCreateMetadataFor(property.PropertyType, options);
                     if (propertyTypeInfo == null)
                     {
-                        Log.PropertyTypeNotSupported(_logger, type, property.Name, property.PropertyType);
+                        Log.PropertyTypeNotSupported(
+                            _logger,
+                            type,
+                            property.Name,
+                            property.PropertyType
+                        );
                         _context.TypeMetadata.Remove(type);
                         return null;
                     }
                     var propertyInfo = new FormDataPropertyMetadata(property, propertyTypeInfo);
 
                     var dataMemberAttribute = property.GetCustomAttribute<DataMemberAttribute>();
-                    if (dataMemberAttribute != null && dataMemberAttribute.IsNameSetExplicitly && dataMemberAttribute.Name != null)
+                    if (
+                        dataMemberAttribute != null
+                        && dataMemberAttribute.IsNameSetExplicitly
+                        && dataMemberAttribute.Name != null
+                    )
                     {
-                        Log.CustomParameterNameMetadata(_logger, dataMemberAttribute.Name, property.Name);
+                        Log.CustomParameterNameMetadata(
+                            _logger,
+                            dataMemberAttribute.Name,
+                            property.Name
+                        );
                         propertyInfo.Name = dataMemberAttribute.Name;
                         propertyInfo.Required = dataMemberAttribute.IsRequired;
                         Log.PropertyRequired(_logger, propertyInfo.Name);
@@ -285,7 +351,6 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
                 // This means that the type is recursive.
                 result.IsRecursive = true;
                 ReportRecursiveChain(type);
-
             }
             else if (type.IsSubclassOf(_context.CurrentTypes[i]))
             {
@@ -304,7 +369,10 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
         {
             if (_logger.IsEnabled(LogLevel.Debug))
             {
-                var chain = string.Join(" -> ", _context.CurrentTypes.Append(type).Select(t => t.Name));
+                var chain = string.Join(
+                    " -> ",
+                    _context.CurrentTypes.Append(type).Select(t => t.Name)
+                );
                 Log.RecursiveTypeFound(_logger, type, chain);
             }
         }
@@ -322,7 +390,9 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
         {
             if (ResolutionInProgress)
             {
-                throw new InvalidOperationException("Cannot begin a new resolution graph while one is already in progress.");
+                throw new InvalidOperationException(
+                    "Cannot begin a new resolution graph while one is already in progress."
+                );
             }
             ResolutionInProgress = true;
         }
@@ -331,7 +401,9 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
         {
             if (!ResolutionInProgress)
             {
-                throw new InvalidOperationException("Cannot end a resolution graph while one is not in progress.");
+                throw new InvalidOperationException(
+                    "Cannot end a resolution graph while one is not in progress."
+                );
             }
             ResolutionInProgress = false;
             CurrentTypes.Clear();
@@ -350,79 +422,281 @@ internal partial class FormDataMetadataFactory(List<IFormDataConverterFactory> f
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Begin resolve metadata graph for type '{Type}'.", EventName = nameof(StartResolveMetadataGraph))]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Begin resolve metadata graph for type '{Type}'.",
+            EventName = nameof(StartResolveMetadataGraph)
+        )]
         public static partial void StartResolveMetadataGraph(ILogger logger, Type type);
 
-        [LoggerMessage(2, LogLevel.Debug, "End resolve metadata graph for type '{Type}'.", EventName = nameof(EndResolveMetadataGraph))]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "End resolve metadata graph for type '{Type}'.",
+            EventName = nameof(EndResolveMetadataGraph)
+        )]
         public static partial void EndResolveMetadataGraph(ILogger logger, Type type);
 
-        [LoggerMessage(3, LogLevel.Debug, "Cached metadata found for type '{Type}'.", EventName = nameof(Metadata))]
-        public static partial void MetadataFound(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Cached metadata found for type '{Type}'.",
+            EventName = nameof(Metadata)
+        )]
+        public static partial void MetadataFound(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(4, LogLevel.Debug, "No cached metadata graph for type '{Type}'.", EventName = nameof(NoMetadataFound))]
-        public static partial void NoMetadataFound(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "No cached metadata graph for type '{Type}'.",
+            EventName = nameof(NoMetadataFound)
+        )]
+        public static partial void NoMetadataFound(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(5, LogLevel.Debug, "Recursive type '{Type}' found in the resolution graph '{Chain}'.", EventName = nameof(RecursiveTypeFound))]
-        public static partial void RecursiveTypeFound(ILogger<FormDataMetadataFactory> logger, Type type, string chain);
+        [LoggerMessage(
+            5,
+            LogLevel.Debug,
+            "Recursive type '{Type}' found in the resolution graph '{Chain}'.",
+            EventName = nameof(RecursiveTypeFound)
+        )]
+        public static partial void RecursiveTypeFound(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type,
+            string chain
+        );
 
-        [LoggerMessage(6, LogLevel.Debug, "'{Type}' identified as primitive.", EventName = nameof(PrimitiveType))]
-        public static partial void PrimitiveType(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            6,
+            LogLevel.Debug,
+            "'{Type}' identified as primitive.",
+            EventName = nameof(PrimitiveType)
+        )]
+        public static partial void PrimitiveType(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(7, LogLevel.Debug, "'{Type}' identified as dictionary.", EventName = nameof(DictionaryType))]
-        public static partial void DictionaryType(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            7,
+            LogLevel.Debug,
+            "'{Type}' identified as dictionary.",
+            EventName = nameof(DictionaryType)
+        )]
+        public static partial void DictionaryType(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(8, LogLevel.Debug, "'{Type}' identified as collection.", EventName = nameof(CollectionType))]
-        public static partial void CollectionType(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            8,
+            LogLevel.Debug,
+            "'{Type}' identified as collection.",
+            EventName = nameof(CollectionType)
+        )]
+        public static partial void CollectionType(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(9, LogLevel.Debug, "'{Type}' identified as object.", EventName = nameof(ObjectType))]
+        [LoggerMessage(
+            9,
+            LogLevel.Debug,
+            "'{Type}' identified as object.",
+            EventName = nameof(ObjectType)
+        )]
         public static partial void ObjectType(ILogger<FormDataMetadataFactory> logger, Type type);
 
-        [LoggerMessage(10, LogLevel.Debug, "Constructor found for type '{Type}' with parameters '{Parameters}'.", EventName = nameof(ConstructorFound))]
-        public static partial void ConstructorFound(ILogger<FormDataMetadataFactory> logger, Type type, string parameters);
+        [LoggerMessage(
+            10,
+            LogLevel.Debug,
+            "Constructor found for type '{Type}' with parameters '{Parameters}'.",
+            EventName = nameof(ConstructorFound)
+        )]
+        public static partial void ConstructorFound(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type,
+            string parameters
+        );
 
-        [LoggerMessage(11, LogLevel.Debug, "Constructor parameter '{Name}' of type '{ParameterType}' found for type '{Type}'.", EventName = nameof(ConstructorParameter))]
-        public static partial void ConstructorParameter(ILogger<FormDataMetadataFactory> logger, Type type, string name, Type parameterType);
+        [LoggerMessage(
+            11,
+            LogLevel.Debug,
+            "Constructor parameter '{Name}' of type '{ParameterType}' found for type '{Type}'.",
+            EventName = nameof(ConstructorParameter)
+        )]
+        public static partial void ConstructorParameter(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type,
+            string name,
+            Type parameterType
+        );
 
-        [LoggerMessage(12, LogLevel.Debug, "Candidate property '{Name}' of type '{PropertyType}'.", EventName = nameof(CandidateProperty))]
-        public static partial void CandidateProperty(ILogger<FormDataMetadataFactory> logger, string name, Type propertyType);
+        [LoggerMessage(
+            12,
+            LogLevel.Debug,
+            "Candidate property '{Name}' of type '{PropertyType}'.",
+            EventName = nameof(CandidateProperty)
+        )]
+        public static partial void CandidateProperty(
+            ILogger<FormDataMetadataFactory> logger,
+            string name,
+            Type propertyType
+        );
 
-        [LoggerMessage(13, LogLevel.Debug, "Candidate property {PropertyName} has a matching constructor parameter '{ConstructorParameterName}'.", EventName = nameof(MatchingConstructorParameterFound))]
-        public static partial void MatchingConstructorParameterFound(ILogger<FormDataMetadataFactory> logger, string constructorParameterName, string propertyName);
+        [LoggerMessage(
+            13,
+            LogLevel.Debug,
+            "Candidate property {PropertyName} has a matching constructor parameter '{ConstructorParameterName}'.",
+            EventName = nameof(MatchingConstructorParameterFound)
+        )]
+        public static partial void MatchingConstructorParameterFound(
+            ILogger<FormDataMetadataFactory> logger,
+            string constructorParameterName,
+            string propertyName
+        );
 
-        [LoggerMessage(14, LogLevel.Debug, "Candidate property or constructor parameter {PropertyName} defines a custom name '{CustomName}'.", EventName = nameof(CustomParameterNameMetadata))]
-        public static partial void CustomParameterNameMetadata(ILogger<FormDataMetadataFactory> logger, string customName, string propertyName);
+        [LoggerMessage(
+            14,
+            LogLevel.Debug,
+            "Candidate property or constructor parameter {PropertyName} defines a custom name '{CustomName}'.",
+            EventName = nameof(CustomParameterNameMetadata)
+        )]
+        public static partial void CustomParameterNameMetadata(
+            ILogger<FormDataMetadataFactory> logger,
+            string customName,
+            string propertyName
+        );
 
-        [LoggerMessage(15, LogLevel.Debug, "Candidate property {Name} will not be mapped. It has been explicitly ignored.", EventName = nameof(IgnoredProperty))]
-        public static partial void IgnoredProperty(ILogger<FormDataMetadataFactory> logger, string name);
+        [LoggerMessage(
+            15,
+            LogLevel.Debug,
+            "Candidate property {Name} will not be mapped. It has been explicitly ignored.",
+            EventName = nameof(IgnoredProperty)
+        )]
+        public static partial void IgnoredProperty(
+            ILogger<FormDataMetadataFactory> logger,
+            string name
+        );
 
-        [LoggerMessage(16, LogLevel.Debug, "Candidate property {Name} will not be mapped. It has no public setter.", EventName = nameof(NonPublicSetter))]
-        public static partial void NonPublicSetter(ILogger<FormDataMetadataFactory> logger, string name);
+        [LoggerMessage(
+            16,
+            LogLevel.Debug,
+            "Candidate property {Name} will not be mapped. It has no public setter.",
+            EventName = nameof(NonPublicSetter)
+        )]
+        public static partial void NonPublicSetter(
+            ILogger<FormDataMetadataFactory> logger,
+            string name
+        );
 
-        [LoggerMessage(17, LogLevel.Debug, "Candidate property {Name} is marked as required.", EventName = nameof(PropertyRequired))]
-        public static partial void PropertyRequired(ILogger<FormDataMetadataFactory> logger, string name);
+        [LoggerMessage(
+            17,
+            LogLevel.Debug,
+            "Candidate property {Name} is marked as required.",
+            EventName = nameof(PropertyRequired)
+        )]
+        public static partial void PropertyRequired(
+            ILogger<FormDataMetadataFactory> logger,
+            string name
+        );
 
-        [LoggerMessage(18, LogLevel.Debug, "Metadata created for {Type}.", EventName = nameof(MetadataComputed))]
-        public static partial void MetadataComputed(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            18,
+            LogLevel.Debug,
+            "Metadata created for {Type}.",
+            EventName = nameof(MetadataComputed)
+        )]
+        public static partial void MetadataComputed(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(19, LogLevel.Debug, "Can not map type generic type definition '{Type}'.", EventName = nameof(GenericTypeDefinitionNotSupported))]
-        public static partial void GenericTypeDefinitionNotSupported(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            19,
+            LogLevel.Debug,
+            "Can not map type generic type definition '{Type}'.",
+            EventName = nameof(GenericTypeDefinitionNotSupported)
+        )]
+        public static partial void GenericTypeDefinitionNotSupported(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(20, LogLevel.Debug, "Unable to select a constructor. Multiple public constructors found for type '{Type}'.", EventName = nameof(MultiplePublicConstructorsFound))]
-        public static partial void MultiplePublicConstructorsFound(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            20,
+            LogLevel.Debug,
+            "Unable to select a constructor. Multiple public constructors found for type '{Type}'.",
+            EventName = nameof(MultiplePublicConstructorsFound)
+        )]
+        public static partial void MultiplePublicConstructorsFound(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(21, LogLevel.Debug, "Can not map interface type '{Type}'.", EventName = nameof(InterfacesNotSupported))]
-        public static partial void InterfacesNotSupported(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            21,
+            LogLevel.Debug,
+            "Can not map interface type '{Type}'.",
+            EventName = nameof(InterfacesNotSupported)
+        )]
+        public static partial void InterfacesNotSupported(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(22, LogLevel.Debug, "Can not map abstract type '{Type}'.", EventName = nameof(AbstractClassesNotSupported))]
-        public static partial void AbstractClassesNotSupported(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            22,
+            LogLevel.Debug,
+            "Can not map abstract type '{Type}'.",
+            EventName = nameof(AbstractClassesNotSupported)
+        )]
+        public static partial void AbstractClassesNotSupported(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(23, LogLevel.Debug, "Unable to select a constructor. No public constructors found for type '{Type}'.", EventName = nameof(NoPublicConstructorFound))]
-        public static partial void NoPublicConstructorFound(ILogger<FormDataMetadataFactory> logger, Type type);
+        [LoggerMessage(
+            23,
+            LogLevel.Debug,
+            "Unable to select a constructor. No public constructors found for type '{Type}'.",
+            EventName = nameof(NoPublicConstructorFound)
+        )]
+        public static partial void NoPublicConstructorFound(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type
+        );
 
-        [LoggerMessage(24, LogLevel.Debug, "Can not map type '{Type}'. Constructor parameter {Name} of type {ParameterType} is not supported.", EventName = nameof(ConstructorParameterTypeNotSupported))]
-        public static partial void ConstructorParameterTypeNotSupported(ILogger<FormDataMetadataFactory> logger, Type type, string name, Type parameterType);
+        [LoggerMessage(
+            24,
+            LogLevel.Debug,
+            "Can not map type '{Type}'. Constructor parameter {Name} of type {ParameterType} is not supported.",
+            EventName = nameof(ConstructorParameterTypeNotSupported)
+        )]
+        public static partial void ConstructorParameterTypeNotSupported(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type,
+            string name,
+            Type parameterType
+        );
 
-        [LoggerMessage(25, LogLevel.Debug, "Can not map type '{Type}'. Property {Name} of type {PropertyType} is not supported.", EventName = nameof(PropertyTypeNotSupported))]
-        public static partial void PropertyTypeNotSupported(ILogger<FormDataMetadataFactory> logger, Type type, string name, Type propertyType);
+        [LoggerMessage(
+            25,
+            LogLevel.Debug,
+            "Can not map type '{Type}'. Property {Name} of type {PropertyType} is not supported.",
+            EventName = nameof(PropertyTypeNotSupported)
+        )]
+        public static partial void PropertyTypeNotSupported(
+            ILogger<FormDataMetadataFactory> logger,
+            Type type,
+            string name,
+            Type propertyType
+        );
     }
 }

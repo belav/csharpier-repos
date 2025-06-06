@@ -18,8 +18,8 @@ public static class RelationalPropertyExtensions
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public static string? GetConfiguredColumnType(this IReadOnlyProperty property)
-        => (string?)property[RelationalAnnotationNames.ColumnType];
+    public static string? GetConfiguredColumnType(this IReadOnlyProperty property) =>
+        (string?)property[RelationalAnnotationNames.ColumnType];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -27,9 +27,9 @@ public static class RelationalPropertyExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsOrdinalKeyProperty(this IReadOnlyProperty property)
-        => property.FindContainingPrimaryKey() is { Properties.Count: > 1 }
-            && !property.IsForeignKey()
-            && property.ClrType == typeof(int)
-            && property.GetJsonPropertyName() == null;
+    public static bool IsOrdinalKeyProperty(this IReadOnlyProperty property) =>
+        property.FindContainingPrimaryKey() is { Properties.Count: > 1 }
+        && !property.IsForeignKey()
+        && property.ClrType == typeof(int)
+        && property.GetJsonPropertyName() == null;
 }

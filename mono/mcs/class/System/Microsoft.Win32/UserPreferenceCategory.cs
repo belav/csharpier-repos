@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,23 +27,23 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Microsoft.Win32 {
-
-	public enum UserPreferenceCategory {
-
-		Accessibility = 1,
-		Color = 2,
-		Desktop = 3,
-		General = 4,
-		Icon = 5,
-		Keyboard = 6,
-		Menu = 7,
-		Mouse = 8,
-		Policy = 9,
-		Power = 10,
-		Screensaver = 11,
-		Window = 12,
-		Locale = 13,
-		VisualStyle
-	}
+namespace Microsoft.Win32
+{
+    public enum UserPreferenceCategory
+    {
+        Accessibility = 1,
+        Color = 2,
+        Desktop = 3,
+        General = 4,
+        Icon = 5,
+        Keyboard = 6,
+        Menu = 7,
+        Mouse = 8,
+        Policy = 9,
+        Power = 10,
+        Screensaver = 11,
+        Window = 12,
+        Locale = 13,
+        VisualStyle,
+    }
 }

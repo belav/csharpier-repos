@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Moq.Language.Flow;
 
 namespace Moq.Language
@@ -64,7 +63,7 @@ namespace Moq.Language
         /// </summary>
         /// <param name="action">The callback method to invoke.</param>
         /// <example>
-        /// The following example specifies a callback to set a boolean 
+        /// The following example specifies a callback to set a boolean
         /// value that can be used later:
         /// <code>
         /// var called = false;
@@ -80,9 +79,9 @@ namespace Moq.Language
         /// <typeparam name="T">The argument type of the invoked method.</typeparam>
         /// <param name="action">The callback method to invoke.</param>
         /// <example>
-        /// Invokes the given callback with the concrete invocation argument value. 
+        /// Invokes the given callback with the concrete invocation argument value.
         /// <para>
-        /// Notice how the specific string argument is retrieved by simply declaring 
+        /// Notice how the specific string argument is retrieved by simply declaring
         /// it as part of the lambda expression for the callback:
         /// </para>
         /// <code>

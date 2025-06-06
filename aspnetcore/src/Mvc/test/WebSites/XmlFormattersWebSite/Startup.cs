@@ -13,7 +13,8 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // Add MVC services to the services container
-        services.AddControllers()
+        services
+            .AddControllers()
             .AddXmlDataContractSerializerFormatters()
             .AddXmlSerializerFormatters();
 
@@ -67,32 +68,56 @@ public class Startup
             }
 
             xmlSerializerInputFormatter.SupportedMediaTypes.Clear();
-            xmlSerializerInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml-xmlser"));
-            xmlSerializerInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml-xmlser"));
-            xmlSerializerInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/problem+xml"));
+            xmlSerializerInputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/xml-xmlser")
+            );
+            xmlSerializerInputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("text/xml-xmlser")
+            );
+            xmlSerializerInputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/problem+xml")
+            );
 
             xmlSerializerOutputFormatter.SupportedMediaTypes.Clear();
-            xmlSerializerOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml-xmlser"));
-            xmlSerializerOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml-xmlser"));
-            xmlSerializerOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/problem+xml"));
+            xmlSerializerOutputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/xml-xmlser")
+            );
+            xmlSerializerOutputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("text/xml-xmlser")
+            );
+            xmlSerializerOutputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/problem+xml")
+            );
 
             dcsInputFormatter.SupportedMediaTypes.Clear();
-            dcsInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml-dcs"));
+            dcsInputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/xml-dcs")
+            );
             dcsInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml-dcs"));
-            dcsInputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/problem+xml"));
+            dcsInputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/problem+xml")
+            );
 
             dcsOutputFormatter.SupportedMediaTypes.Clear();
-            dcsOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/xml-dcs"));
+            dcsOutputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/xml-dcs")
+            );
             dcsOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/xml-dcs"));
-            dcsOutputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/problem+xml"));
+            dcsOutputFormatter.SupportedMediaTypes.Add(
+                new MediaTypeHeaderValue("application/problem+xml")
+            );
 
             options.InputFormatters.Add(dcsInputFormatter);
             options.InputFormatters.Add(xmlSerializerInputFormatter);
             options.OutputFormatters.Add(dcsOutputFormatter);
             options.OutputFormatters.Add(xmlSerializerOutputFormatter);
 
-            xmlSerializerInputFormatter.WrapperProviderFactories.Add(new PersonWrapperProviderFactory());
-            xmlSerializerOutputFormatter.WrapperProviderFactories.Add(new PersonWrapperProviderFactory());
+            xmlSerializerInputFormatter.WrapperProviderFactories.Add(
+                new PersonWrapperProviderFactory()
+            );
+            xmlSerializerOutputFormatter.WrapperProviderFactories.Add(
+                new PersonWrapperProviderFactory()
+            );
             dcsInputFormatter.WrapperProviderFactories.Add(new PersonWrapperProviderFactory());
             dcsOutputFormatter.WrapperProviderFactories.Add(new PersonWrapperProviderFactory());
         });
@@ -109,8 +134,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -122,4 +146,3 @@ public class Startup
             .UseKestrel()
             .UseIISIntegration();
 }
-

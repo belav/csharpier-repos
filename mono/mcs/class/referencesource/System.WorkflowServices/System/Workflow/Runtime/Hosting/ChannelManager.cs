@@ -9,13 +9,13 @@ namespace System.Workflow.Runtime.Hosting
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Diagnostics;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Description;
     using System.Workflow.Activities;
-    using System.Diagnostics;
     using System.Workflow.ComponentModel;
 
     class ChannelManager
@@ -50,11 +50,17 @@ namespace System.Workflow.Runtime.Hosting
                         EndpointAddress cacheAddress = null;
                         if (endpoint.Contract.ContractType != null)
                         {
-                            cacheAddress = ChannelManagerHelpers.BuildCacheAddress(endpoint.Name, endpoint.Contract.ContractType);
+                            cacheAddress = ChannelManagerHelpers.BuildCacheAddress(
+                                endpoint.Name,
+                                endpoint.Contract.ContractType
+                            );
                         }
                         else
                         {
-                            cacheAddress = ChannelManagerHelpers.BuildCacheAddress(endpoint.Name, endpoint.Contract.Name);
+                            cacheAddress = ChannelManagerHelpers.BuildCacheAddress(
+                                endpoint.Name,
+                                endpoint.Contract.Name
+                            );
                         }
                         this.endpoints.Add(cacheAddress, endpoint);
                     }
@@ -64,10 +70,7 @@ namespace System.Workflow.Runtime.Hosting
 
         object ThisLock
         {
-            get
-            {
-                return this.channelPool;
-            }
+            get { return this.channelPool; }
         }
 
         public void Close()
@@ -118,13 +121,26 @@ namespace System.Workflow.Runtime.Hosting
             }
             else
             {
-                this.channelPool.ReturnConnection(key, channel, connectionIsStillGood, ServiceDefaults.CloseTimeout);
+                this.channelPool.ReturnConnection(
+                    key,
+                    channel,
+                    connectionIsStillGood,
+                    ServiceDefaults.CloseTimeout
+                );
             }
         }
 
-        public PooledChannel TakeChannel(string endpointName, Type contractType, string customAddress, out ChannelPoolKey key)
+        public PooledChannel TakeChannel(
+            string endpointName,
+            Type contractType,
+            string customAddress,
+            out ChannelPoolKey key
+        )
         {
-            EndpointAddress cacheAddress = ChannelManagerHelpers.BuildCacheAddress(endpointName, contractType);
+            EndpointAddress cacheAddress = ChannelManagerHelpers.BuildCacheAddress(
+                endpointName,
+                contractType
+            );
             Uri via = (customAddress != null) ? new Uri(customAddress) : defaultViaUri;
 
             if (this.closed)
@@ -133,7 +149,10 @@ namespace System.Workflow.Runtime.Hosting
                 return null;
             }
 
-            this.endpointMappings[cacheAddress] = new KeyValuePair<string, Type>(endpointName, contractType);
+            this.endpointMappings[cacheAddress] = new KeyValuePair<string, Type>(
+                endpointName,
+                contractType
+            );
 
             return this.TakeChannel(cacheAddress, via, out key);
         }
@@ -154,15 +173,32 @@ namespace System.Workflow.Runtime.Hosting
                         EndpointAddress cacheAddress = address;
                         if (factory.SupportsClientAuthentication)
                         {
-                            cacheAddress = ChannelManagerHelpers.BuildCacheAddressWithIdentity(address);
+                            cacheAddress = ChannelManagerHelpers.BuildCacheAddressWithIdentity(
+                                address
+                            );
                         }
 
-                        channel = this.channelPool.TakeConnection(cacheAddress, via, ServiceDefaults.OpenTimeout, out key);
+                        channel = this.channelPool.TakeConnection(
+                            cacheAddress,
+                            via,
+                            ServiceDefaults.OpenTimeout,
+                            out key
+                        );
                         while (channel != null && channel.State != CommunicationState.Opened)
                         {
                             // Loop will exit because non-opened channels are returned with 'connectionStillGood=false'
-                            this.channelPool.ReturnConnection(key, channel, false, ServiceDefaults.CloseTimeout);
-                            channel = this.channelPool.TakeConnection(cacheAddress, via, ServiceDefaults.OpenTimeout, out key);
+                            this.channelPool.ReturnConnection(
+                                key,
+                                channel,
+                                false,
+                                ServiceDefaults.CloseTimeout
+                            );
+                            channel = this.channelPool.TakeConnection(
+                                cacheAddress,
+                                via,
+                                ServiceDefaults.OpenTimeout,
+                                out key
+                            );
                         }
 
                         if (channel == null)
@@ -183,12 +219,21 @@ namespace System.Workflow.Runtime.Hosting
             return channel;
         }
 
-        PooledChannel CreateChannel(ChannelFactoryReference factory, EndpointAddress address, Uri via, out bool channelCreated)
+        PooledChannel CreateChannel(
+            ChannelFactoryReference factory,
+            EndpointAddress address,
+            Uri via,
+            out bool channelCreated
+        )
         {
             PooledChannel pooledChannel = null;
             channelCreated = false;
 
-            IChannel channel = ChannelManagerHelpers.CreateChannel(factory.ContractType, factory.ChannelFactory, (via == defaultViaUri) ? null : via.ToString());
+            IChannel channel = ChannelManagerHelpers.CreateChannel(
+                factory.ContractType,
+                factory.ChannelFactory,
+                (via == defaultViaUri) ? null : via.ToString()
+            );
             if (channel != null)
             {
                 pooledChannel = new PooledChannel(this, factory, address, channel);
@@ -209,12 +254,17 @@ namespace System.Workflow.Runtime.Hosting
 
             if (this.endpointMappings.ContainsKey(address))
             {
-                endpointData = (KeyValuePair<string, Type>) this.endpointMappings[address];
+                endpointData = (KeyValuePair<string, Type>)this.endpointMappings[address];
                 if (endpointMappings != null)
                 {
                     return new ChannelFactoryReference(
-                        ChannelManagerHelpers.CreateChannelFactory(endpointData.Key, endpointData.Value, this.endpoints),
-                        endpointData.Value);
+                        ChannelManagerHelpers.CreateChannelFactory(
+                            endpointData.Key,
+                            endpointData.Value,
+                            this.endpoints
+                        ),
+                        endpointData.Value
+                    );
                 }
             }
 
@@ -231,7 +281,9 @@ namespace System.Workflow.Runtime.Hosting
             lock (this.ThisLock)
             {
                 bool closeFactory = channelFactory.Release();
-                bool invalidFactory = (channelFactory.ChannelFactory.State != CommunicationState.Opened);
+                bool invalidFactory = (
+                    channelFactory.ChannelFactory.State != CommunicationState.Opened
+                );
 
                 if (closeFactory || invalidFactory)
                 {
@@ -259,7 +311,10 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (this.factoryCache.TryGetValue(address, out factory))
                 {
-                    if (factory == null || factory.ChannelFactory.State != CommunicationState.Opened)
+                    if (
+                        factory == null
+                        || factory.ChannelFactory.State != CommunicationState.Opened
+                    )
                     {
                         this.factoryCache.Remove(address);
                         factory = null;
@@ -296,35 +351,30 @@ namespace System.Workflow.Runtime.Hosting
                 this.channelFactory = channelFactory;
                 this.contractType = contractType;
 
-                ISecurityCapabilities securityCapabilities = channelFactory.Endpoint.Binding.GetProperty<ISecurityCapabilities>(new BindingParameterCollection());
+                ISecurityCapabilities securityCapabilities =
+                    channelFactory.Endpoint.Binding.GetProperty<ISecurityCapabilities>(
+                        new BindingParameterCollection()
+                    );
                 if (securityCapabilities != null)
                 {
-                    this.supportsClientAuthentication = securityCapabilities.SupportsClientAuthentication;
+                    this.supportsClientAuthentication =
+                        securityCapabilities.SupportsClientAuthentication;
                 }
             }
 
             public ChannelFactory ChannelFactory
             {
-                get
-                {
-                    return this.channelFactory;
-                }
+                get { return this.channelFactory; }
             }
 
             public Type ContractType
             {
-                get
-                {
-                    return this.contractType;
-                }
+                get { return this.contractType; }
             }
 
             public bool SupportsClientAuthentication
             {
-                get
-                {
-                    return this.supportsClientAuthentication;
-                }
+                get { return this.supportsClientAuthentication; }
             }
 
             public void Abort()
@@ -357,7 +407,12 @@ namespace System.Workflow.Runtime.Hosting
             ChannelFactoryReference factoryReference;
             ChannelManager owner;
 
-            internal PooledChannel(ChannelManager owner, ChannelFactoryReference factoryReference, EndpointAddress factoryKey, IChannel channel)
+            internal PooledChannel(
+                ChannelManager owner,
+                ChannelFactoryReference factoryReference,
+                EndpointAddress factoryKey,
+                IChannel channel
+            )
             {
                 this.owner = owner;
                 this.factoryReference = factoryReference;
@@ -367,18 +422,12 @@ namespace System.Workflow.Runtime.Hosting
 
             public IChannel InnerChannel
             {
-                get
-                {
-                    return this.channel;
-                }
+                get { return this.channel; }
             }
 
             public CommunicationState State
             {
-                get
-                {
-                    return this.channel.State;
-                }
+                get { return this.channel.State; }
             }
 
             public void Abort()
@@ -404,11 +453,17 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 catch (CommunicationException communicationException)
                 {
-                    DiagnosticUtility.TraceHandledException(communicationException, TraceEventType.Information);
+                    DiagnosticUtility.TraceHandledException(
+                        communicationException,
+                        TraceEventType.Information
+                    );
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    DiagnosticUtility.TraceHandledException(timeoutException, TraceEventType.Information);
+                    DiagnosticUtility.TraceHandledException(
+                        timeoutException,
+                        TraceEventType.Information
+                    );
                 }
                 finally
                 {
@@ -427,9 +482,11 @@ namespace System.Workflow.Runtime.Hosting
         class PooledChannelPool : IdlingCommunicationPool<ChannelPoolKey, PooledChannel>
         {
             public PooledChannelPool(ChannelPoolSettings settings)
-                : base(settings.MaxOutboundChannelsPerEndpoint, settings.IdleTimeout, settings.LeaseTimeout)
-            {
-            }
+                : base(
+                    settings.MaxOutboundChannelsPerEndpoint,
+                    settings.IdleTimeout,
+                    settings.LeaseTimeout
+                ) { }
 
             protected override void AbortItem(PooledChannel item)
             {

@@ -7,14 +7,15 @@ namespace System.ServiceModel.Security
     using System.Collections.Generic;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
-    using System.ServiceModel;
     using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
 
     public class IssuedTokenServiceCredential
     {
         internal const bool DefaultAllowUntrustedRsaIssuers = false;
         internal const AudienceUriMode DefaultAudienceUriMode = AudienceUriMode.Always;
-        internal const X509CertificateValidationMode DefaultCertificateValidationMode = X509CertificateValidationMode.ChainTrust;
+        internal const X509CertificateValidationMode DefaultCertificateValidationMode =
+            X509CertificateValidationMode.ChainTrust;
         internal const X509RevocationMode DefaultRevocationMode = X509RevocationMode.Online;
         internal const StoreLocation DefaultTrustedStoreLocation = StoreLocation.LocalMachine;
 
@@ -62,10 +63,7 @@ namespace System.ServiceModel.Security
 
         public AudienceUriMode AudienceUriMode
         {
-            get
-            {
-                return this.audienceUriMode;
-            }
+            get { return this.audienceUriMode; }
             set
             {
                 ThrowIfImmutable();
@@ -74,37 +72,30 @@ namespace System.ServiceModel.Security
             }
         }
 
-
-        public IList<X509Certificate2> KnownCertificates 
-        { 
-            get 
+        public IList<X509Certificate2> KnownCertificates
+        {
+            get
             {
                 if (this.isReadOnly)
                     return this.knownCertificates.AsReadOnly();
                 else
-                    return this.knownCertificates; 
+                    return this.knownCertificates;
             }
         }
-        
+
         public SamlSerializer SamlSerializer
-        { 
-            get 
-            { 
-                return this.samlSerializer; 
-            } 
-            set 
+        {
+            get { return this.samlSerializer; }
+            set
             {
                 ThrowIfImmutable();
                 this.samlSerializer = value;
-            } 
+            }
         }
 
         public X509CertificateValidationMode CertificateValidationMode
         {
-            get
-            {
-                return this.certificateValidationMode;
-            }
+            get { return this.certificateValidationMode; }
             set
             {
                 X509CertificateValidationModeHelper.Validate(value);
@@ -115,10 +106,7 @@ namespace System.ServiceModel.Security
 
         public X509RevocationMode RevocationMode
         {
-            get
-            {
-                return this.revocationMode;
-            }
+            get { return this.revocationMode; }
             set
             {
                 ThrowIfImmutable();
@@ -128,10 +116,7 @@ namespace System.ServiceModel.Security
 
         public StoreLocation TrustedStoreLocation
         {
-            get
-            {
-                return this.trustedStoreLocation;
-            }
+            get { return this.trustedStoreLocation; }
             set
             {
                 ThrowIfImmutable();
@@ -141,10 +126,7 @@ namespace System.ServiceModel.Security
 
         public X509CertificateValidator CustomCertificateValidator
         {
-            get
-            {
-                return this.customCertificateValidator;
-            }
+            get { return this.customCertificateValidator; }
             set
             {
                 ThrowIfImmutable();
@@ -154,10 +136,7 @@ namespace System.ServiceModel.Security
 
         public bool AllowUntrustedRsaIssuers
         {
-            get
-            {
-                return this.allowUntrustedRsaIssuers;
-            }
+            get { return this.allowUntrustedRsaIssuers; }
             set
             {
                 ThrowIfImmutable();
@@ -179,7 +158,11 @@ namespace System.ServiceModel.Security
             {
                 if (this.customCertificateValidator == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MissingCustomCertificateValidator)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MissingCustomCertificateValidator)
+                        )
+                    );
                 }
                 return this.customCertificateValidator;
             }
@@ -190,11 +173,17 @@ namespace System.ServiceModel.Security
                 chainPolicy.RevocationMode = this.revocationMode;
                 if (this.certificateValidationMode == X509CertificateValidationMode.ChainTrust)
                 {
-                    return X509CertificateValidator.CreateChainTrustValidator(useMachineContext, chainPolicy);
+                    return X509CertificateValidator.CreateChainTrustValidator(
+                        useMachineContext,
+                        chainPolicy
+                    );
                 }
                 else
                 {
-                    return X509CertificateValidator.CreatePeerOrChainTrustValidator(useMachineContext, chainPolicy);
+                    return X509CertificateValidator.CreatePeerOrChainTrustValidator(
+                        useMachineContext,
+                        chainPolicy
+                    );
                 }
             }
         }
@@ -208,7 +197,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

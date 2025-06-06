@@ -18,10 +18,11 @@ public class ConfigureOptionsTests
     [InlineData(null)]
     public void InitializesIsEnabled(bool? enabled)
     {
-        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new[]
-        {
-                new KeyValuePair<string, string>("IsEnabledKey", enabled?.ToString())
-            }).Build();
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new[] { new KeyValuePair<string, string>("IsEnabledKey", enabled?.ToString()) }
+            )
+            .Build();
 
         var options = new BatchingLoggerOptions();
         new BatchLoggerConfigureOptions(configuration, "IsEnabledKey").Configure(options);
@@ -32,10 +33,17 @@ public class ConfigureOptionsTests
     [Fact]
     public void InitializesLogDirectory()
     {
-        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new[]
-        {
-                new KeyValuePair<string, string>("APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL", "http://container/url")
-            }).Build();
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new[]
+                {
+                    new KeyValuePair<string, string>(
+                        "APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL",
+                        "http://container/url"
+                    ),
+                }
+            )
+            .Build();
 
         var contextMock = new Mock<IWebAppContext>();
         contextMock.SetupGet(c => c.HomeFolder).Returns("Home");
@@ -49,10 +57,17 @@ public class ConfigureOptionsTests
     [Fact]
     public void InitializesBlobUriSiteInstanceAndName()
     {
-        var configuration = new ConfigurationBuilder().AddInMemoryCollection(new[]
-        {
-                new KeyValuePair<string, string>("APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL", "http://container/url")
-            }).Build();
+        var configuration = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new[]
+                {
+                    new KeyValuePair<string, string>(
+                        "APPSETTING_DIAGNOSTICS_AZUREBLOBCONTAINERSASURL",
+                        "http://container/url"
+                    ),
+                }
+            )
+            .Build();
 
         var contextMock = new Mock<IWebAppContext>();
         contextMock.SetupGet(c => c.HomeFolder).Returns("Home");
@@ -60,11 +75,18 @@ public class ConfigureOptionsTests
         contextMock.SetupGet(c => c.SiteName).Returns("Name");
 
         var options = new AzureBlobLoggerOptions();
-        new BlobLoggerConfigureOptions(configuration, contextMock.Object, options => options.FileNameFormat = _ => "FilenameFormat").Configure(options);
+        new BlobLoggerConfigureOptions(
+            configuration,
+            contextMock.Object,
+            options => options.FileNameFormat = _ => "FilenameFormat"
+        ).Configure(options);
 
         Assert.Equal("http://container/url", options.ContainerUrl);
         Assert.Equal("InstanceId", options.ApplicationInstanceId);
         Assert.Equal("Name", options.ApplicationName);
-        Assert.Equal("FilenameFormat", options.FileNameFormat(new AzureBlobLoggerContext("", "", DateTimeOffset.MinValue)));
+        Assert.Equal(
+            "FilenameFormat",
+            options.FileNameFormat(new AzureBlobLoggerContext("", "", DateTimeOffset.MinValue))
+        );
     }
 }

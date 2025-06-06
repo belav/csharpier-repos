@@ -15,6 +15,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(bool b)
         {
             Test.Status = 1;
@@ -37,8 +38,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.bolliteral002.bolliteral002
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -51,6 +50,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(bool b)
         {
             Test.Status = 1;
@@ -73,8 +73,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral001.chrliteral001
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -87,6 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -109,8 +108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral002.chrliteral002
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -123,6 +120,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -145,8 +143,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral003.chrliteral003
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -159,6 +155,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -181,8 +178,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral004.chrliteral004
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -195,6 +190,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -217,8 +213,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral005.chrliteral005
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -231,6 +225,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -253,8 +248,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral006.chrliteral006
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -267,6 +260,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -289,8 +283,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral007.chrliteral007
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -303,6 +295,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -325,8 +318,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral008.chrliteral008
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -339,6 +330,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -361,8 +353,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral009.chrliteral009
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -375,6 +365,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -397,8 +388,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral010.chrliteral010
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -411,6 +400,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -433,8 +423,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.chrliteral011.chrliteral011
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -447,6 +435,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -469,8 +458,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral001.integeregeregerliteral001
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -483,6 +470,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -510,8 +498,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral002.integeregeregerliteral002
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -524,6 +510,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -551,8 +538,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral003.integeregeregerliteral003
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -565,6 +550,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -592,8 +578,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral004.integeregeregerliteral004
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -607,6 +591,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -634,8 +619,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral005.integeregeregerliteral005
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -650,6 +633,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -706,8 +690,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral006.integeregeregerliteral006
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -720,6 +702,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -766,8 +749,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral007.integeregeregerliteral007
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -780,6 +761,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -807,8 +789,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral008.integeregeregerliteral008
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -821,6 +801,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -848,8 +829,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.integeregeregerliteral009.integeregeregerliteral009
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -862,6 +841,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(dynamic b)
         {
             Test.Status = 1;
@@ -889,13 +869,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral001.nullliteral001
 {
     public class Test
     {
         public static int Status;
+
         public void Method(float? b)
         {
             Test.Status = 1;
@@ -919,8 +898,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral002.nullliteral002
 {
     // <Title> Tests overload resolution when a null literal is passed to the binder</Title>
@@ -929,13 +906,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class Base
-    {
-    }
+    public class Base { }
 
     public class Test
     {
         public static int Status;
+
         public void Method(Base b)
         {
             Test.Status = 1;
@@ -959,13 +935,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral003.nullliteral003
 {
     public class Test
     {
         public static int Status;
+
         public void Method(float? b)
         {
             Test.Status = 1;
@@ -994,19 +969,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral004.nullliteral004
 {
     public class Test
     {
-        public void Method(float? b)
-        {
-        }
+        public void Method(float? b) { }
 
-        public void Method(string S)
-        {
-        }
+        public void Method(string S) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1023,7 +992,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Test.Method(float?)", "Test.Method(string)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Test.Method(float?)",
+                    "Test.Method(string)"
+                );
                 if (ret)
                     return 0;
             }
@@ -1034,13 +1008,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral005.nullliteral005
 {
     public class Test
     {
         public static int Status;
+
         public void Method(float? b, int x)
         {
             Test.Status = 1;
@@ -1065,8 +1038,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral006.nullliteral006
 {
     // <Title> Tests overload resolution when a null literal is passed to the binder</Title>
@@ -1075,13 +1046,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class Base
-    {
-    }
+    public class Base { }
 
     public class Test
     {
         public static int Status;
+
         public void Method(Base b, int x)
         {
             Test.Status = 1;
@@ -1106,19 +1076,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.nullliteral007.nullliteral007
 {
     public class Test
     {
-        public void Method(float? b, int x)
-        {
-        }
+        public void Method(float? b, int x) { }
 
-        public void Method(string S, int x)
-        {
-        }
+        public void Method(string S, int x) { }
 
         [Fact]
         public static void DynamicCSharpRunTest()
@@ -1136,7 +1100,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Test.Method(float?, int)", "Test.Method(string, int)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Test.Method(float?, int)",
+                    "Test.Method(string, int)"
+                );
                 if (ret)
                     return 0;
             }
@@ -1146,8 +1115,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral001.realliteral001
 {
@@ -1161,6 +1128,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;
@@ -1188,8 +1156,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral002.realliteral002
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -1202,6 +1168,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;
@@ -1229,8 +1196,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral003.realliteral003
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -1243,6 +1208,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(decimal b)
         {
             Test.Status = 1;
@@ -1270,8 +1236,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral004.realliteral004
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -1284,6 +1248,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status = 0;
+
         public void Method(decimal b)
         {
             Test.Status = 1;
@@ -1306,8 +1271,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral005.realliteral005
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -1320,6 +1283,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;
@@ -1347,8 +1311,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral006.realliteral006
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -1361,6 +1323,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;
@@ -1388,8 +1351,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.realliteral007.realliteral007
 {
     // <Title> Tests overload resolution when a numeral literal is passed to the binder</Title>
@@ -1402,6 +1363,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(decimal b)
         {
             Test.Status = 1;
@@ -1429,8 +1391,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.strliteral001.strliteral001
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -1443,6 +1403,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(string b)
         {
             Test.Status = 1;
@@ -1465,8 +1426,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.strliteral002.strliteral002
 {
     // <Title> Tests overload resolution when a char literal is passed to the binder</Title>
@@ -1479,6 +1438,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(string b)
         {
             Test.Status = 1;
@@ -1501,13 +1461,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral001.zeroliteral001
 {
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -1531,13 +1490,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral002.zeroliteral002
 {
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -1561,13 +1519,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral003.zeroliteral003
 {
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;
@@ -1591,13 +1548,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral004.zeroliteral004
 {
     public class Test
     {
         public static int Status;
+
         public void Method(decimal b)
         {
             Test.Status = 1;
@@ -1621,13 +1577,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral005.zeroliteral005
 {
     public class Test
     {
         public static int Status;
+
         public void Method(double b)
         {
             Test.Status = 1;
@@ -1651,13 +1606,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral006.zeroliteral006
 {
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -1681,13 +1635,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral007.zeroliteral007
 {
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -1710,14 +1663,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral008.zeroliteral008
 {
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -1741,13 +1693,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral009.zeroliteral009
 {
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -1771,13 +1722,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral010.zeroliteral010
 {
     public class Test
     {
         public static int Status;
+
         public void Method(int? b)
         {
             Test.Status = 1;
@@ -1801,13 +1751,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral011.zeroliteral011
 {
     public class Test
     {
         public static int Status;
+
         public void Method(float? b)
         {
             Test.Status = 1;
@@ -1831,13 +1780,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral012.zeroliteral012
 {
     public class Test
     {
         public static int Status = -1;
+
         public void Method(decimal? b)
         {
             Test.Status = 1;
@@ -1867,13 +1815,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral013.zeroliteral013
 {
     public class Test
     {
         public static int Status;
+
         public void Method(double? b)
         {
             Test.Status = 1;
@@ -1897,13 +1844,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral014.zeroliteral014
 {
     public class Test
     {
         public static int Status;
+
         public void Method(byte? b)
         {
             Test.Status = 1;
@@ -1927,13 +1873,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral015.zeroliteral015
 {
     public class Test
     {
         public static int Status;
+
         public void Method(ushort? b)
         {
             Test.Status = 1;
@@ -1956,14 +1901,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral016.zeroliteral016
 {
     public class Test
     {
         public static int Status;
+
         public void Method(ushort? b)
         {
             Test.Status = 1;
@@ -1987,13 +1931,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral017.zeroliteral017
 {
     public class Test
     {
         public static int Status;
+
         public void Method(char b)
         {
             Test.Status = 1;
@@ -2017,8 +1960,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral018.zeroliteral018
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -2030,12 +1971,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public enum Enumeration
     {
         One,
-        Two
+        Two,
     }
 
     public class Test
     {
         public static int Status;
+
         public void Method(Enumeration b)
         {
             Test.Status = 1;
@@ -2059,8 +2001,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteral019.zeroliteral019
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -2073,12 +2013,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public enum Enumeration
     {
         One,
-        Two
+        Two,
     }
 
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2105,7 +2046,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.AmbigCall, ex.Message, "Test.Method(short)", "Test.Method(Enumeration)");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.AmbigCall,
+                    ex.Message,
+                    "Test.Method(short)",
+                    "Test.Method(Enumeration)"
+                );
                 if (ret)
                     return 0;
             }
@@ -2115,8 +2061,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution001.zeroliteralresolution001
 {
@@ -2130,6 +2074,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2156,8 +2101,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution002.zeroliteralresolution002
 {
@@ -2171,6 +2114,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2197,8 +2141,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution003.zeroliteralresolution003
 {
@@ -2212,6 +2154,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2238,8 +2181,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution004.zeroliteralresolution004
 {
@@ -2253,6 +2194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2279,8 +2221,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution005.zeroliteralresolution005
 {
@@ -2294,6 +2234,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2320,8 +2261,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution006.zeroliteralresolution006
 {
@@ -2335,6 +2274,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2361,8 +2301,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution007.zeroliteralresolution007
 {
@@ -2376,6 +2314,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2402,8 +2341,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution008.zeroliteralresolution008
 {
@@ -2417,6 +2354,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2443,8 +2381,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution009.zeroliteralresolution009
 {
@@ -2458,6 +2394,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2484,8 +2421,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution010.zeroliteralresolution010
 {
@@ -2499,6 +2434,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(sbyte b)
         {
             Test.Status = 1;
@@ -2526,8 +2462,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution011.zeroliteralresolution011
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -2540,6 +2474,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2566,8 +2501,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution012.zeroliteralresolution012
 {
@@ -2581,6 +2514,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2607,8 +2541,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution013.zeroliteralresolution013
 {
@@ -2622,6 +2554,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2648,8 +2581,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution014.zeroliteralresolution014
 {
@@ -2663,6 +2594,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2689,8 +2621,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution015.zeroliteralresolution015
 {
@@ -2704,6 +2634,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2730,8 +2661,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution016.zeroliteralresolution016
 {
@@ -2745,6 +2674,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2771,8 +2701,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution017.zeroliteralresolution017
 {
@@ -2786,6 +2714,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2812,8 +2741,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution018.zeroliteralresolution018
 {
@@ -2827,6 +2754,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2853,8 +2781,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution019.zeroliteralresolution019
 {
@@ -2868,6 +2794,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(short b)
         {
             Test.Status = 1;
@@ -2895,8 +2822,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution020.zeroliteralresolution020
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -2909,6 +2834,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -2935,8 +2861,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution021.zeroliteralresolution021
 {
@@ -2950,6 +2874,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -2976,8 +2901,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution022.zeroliteralresolution022
 {
@@ -2991,6 +2914,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -3017,8 +2941,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution023.zeroliteralresolution023
 {
@@ -3032,6 +2954,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -3058,8 +2981,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution024.zeroliteralresolution024
 {
@@ -3073,6 +2994,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -3099,8 +3021,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution025.zeroliteralresolution025
 {
@@ -3114,6 +3034,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -3140,8 +3061,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution026.zeroliteralresolution026
 {
@@ -3155,6 +3074,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -3181,8 +3101,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution027.zeroliteralresolution027
 {
@@ -3196,6 +3114,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(int b)
         {
             Test.Status = 1;
@@ -3223,8 +3142,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution028.zeroliteralresolution028
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -3237,6 +3154,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3263,8 +3181,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution029.zeroliteralresolution029
 {
@@ -3278,6 +3194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3304,8 +3221,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution030.zeroliteralresolution030
 {
@@ -3319,6 +3234,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3346,8 +3262,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution031.zeroliteralresolution031
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -3360,6 +3274,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3386,8 +3301,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution032.zeroliteralresolution032
 {
@@ -3401,6 +3314,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3427,8 +3341,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution033.zeroliteralresolution033
 {
@@ -3442,6 +3354,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3468,8 +3381,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution034.zeroliteralresolution034
 {
@@ -3483,6 +3394,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(long b)
         {
             Test.Status = 1;
@@ -3510,8 +3422,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution035.zeroliteralresolution035
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -3524,6 +3434,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -3550,8 +3461,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution036.zeroliteralresolution036
 {
@@ -3565,6 +3474,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -3591,8 +3501,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution037.zeroliteralresolution037
 {
@@ -3606,6 +3514,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -3632,8 +3541,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution038.zeroliteralresolution038
 {
@@ -3647,6 +3554,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -3673,8 +3581,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution039.zeroliteralresolution039
 {
@@ -3688,6 +3594,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -3714,8 +3621,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution040.zeroliteralresolution040
 {
@@ -3729,6 +3634,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(byte b)
         {
             Test.Status = 1;
@@ -3756,8 +3662,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution041.zeroliteralresolution041
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -3770,6 +3674,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -3796,8 +3701,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution042.zeroliteralresolution042
 {
@@ -3811,6 +3714,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -3837,8 +3741,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution043.zeroliteralresolution043
 {
@@ -3852,6 +3754,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -3878,8 +3781,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution044.zeroliteralresolution044
 {
@@ -3893,6 +3794,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -3919,8 +3821,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution045.zeroliteralresolution045
 {
@@ -3934,6 +3834,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ushort b)
         {
             Test.Status = 1;
@@ -3961,8 +3862,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution046.zeroliteralresolution046
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -3975,6 +3874,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -4001,8 +3901,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution047.zeroliteralresolution047
 {
@@ -4016,6 +3914,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -4042,8 +3941,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution048.zeroliteralresolution048
 {
@@ -4057,6 +3954,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -4083,8 +3981,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
         }
     } //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution049.zeroliteralresolution049
 {
@@ -4098,6 +3994,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(uint b)
         {
             Test.Status = 1;
@@ -4125,8 +4022,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution050.zeroliteralresolution050
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -4139,6 +4034,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ulong b)
         {
             Test.Status = 1;
@@ -4166,8 +4062,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution051.zeroliteralresolution051
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -4180,6 +4074,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ulong b)
         {
             Test.Status = 1;
@@ -4207,8 +4102,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution052.zeroliteralresolution052
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -4221,6 +4114,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(ulong b)
         {
             Test.Status = 1;
@@ -4248,8 +4142,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution053.zeroliteralresolution053
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -4262,6 +4154,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;
@@ -4289,8 +4182,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     } //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Methods.literals.zeroliteralresolution054.zeroliteralresolution054
 {
     // <Title> Tests overload resolution when a zero literal is passed to the binder</Title>
@@ -4303,6 +4194,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public class Test
     {
         public static int Status;
+
         public void Method(float b)
         {
             Test.Status = 1;

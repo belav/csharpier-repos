@@ -21,7 +21,10 @@ public class DefaultHttpContextTests
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(() => context.Session);
-        Assert.Equal("Session has not been configured for this application or request.", exception.Message);
+        Assert.Equal(
+            "Session has not been configured for this application or request.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -188,8 +191,7 @@ public class DefaultHttpContextTests
     [Fact]
     public void RequestServicesAreNotOverwrittenIfAlreadySet()
     {
-        var serviceProvider = new ServiceCollection()
-                    .BuildServiceProvider();
+        var serviceProvider = new ServiceCollection().BuildServiceProvider();
 
         var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
 
@@ -230,9 +232,9 @@ public class DefaultHttpContextTests
     [Fact]
     public async Task RequestServicesAreDisposedAsynOnCompleted()
     {
-        var serviceProvider = new AsyncDisposableServiceProvider(new ServiceCollection()
-            .AddTransient<DisposableThing>()
-            .BuildServiceProvider());
+        var serviceProvider = new AsyncDisposableServiceProvider(
+            new ServiceCollection().AddTransient<DisposableThing>().BuildServiceProvider()
+        );
 
         var scopeFactory = serviceProvider.GetRequiredService<IServiceScopeFactory>();
         DisposableThing instance = null;
@@ -334,15 +336,16 @@ public class DefaultHttpContextTests
     {
         var type = value.GetType();
 
-        var field = type
-            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+        var field = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
             .Single(f =>
-                f.FieldType.GetTypeInfo().IsGenericType &&
-                f.FieldType.GetGenericTypeDefinition() == typeof(FeatureReferences<>));
+                f.FieldType.GetTypeInfo().IsGenericType
+                && f.FieldType.GetGenericTypeDefinition() == typeof(FeatureReferences<>)
+            );
 
-        var boxedExpectedStruct = features == null ?
-            Activator.CreateInstance(field.FieldType) :
-            Activator.CreateInstance(field.FieldType, features);
+        var boxedExpectedStruct =
+            features == null
+                ? Activator.CreateInstance(field.FieldType)
+                : Activator.CreateInstance(field.FieldType, features);
 
         var boxedActualStruct = field.GetValue(value);
 
@@ -362,15 +365,18 @@ public class DefaultHttpContextTests
     {
         var type = value.GetType();
 
-        var properties = type
-            .GetProperties(BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance)
+        var properties = type.GetProperties(
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+            )
             .Where(p => p.PropertyType.GetTypeInfo().IsInterface);
 
         TestFeatureProperties(value, features, properties);
 
-        var fields = type
-            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-            .Where(f => f.FieldType.GetTypeInfo().IsInterface && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null);
+        var fields = type.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(f =>
+                f.FieldType.GetTypeInfo().IsInterface
+                && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null
+            );
 
         foreach (var field in fields)
         {
@@ -385,10 +391,13 @@ public class DefaultHttpContextTests
                 Assert.NotNull(v);
             }
         }
-
     }
 
-    private static void TestFeatureProperties(object value, IFeatureCollection features, IEnumerable<PropertyInfo> properties)
+    private static void TestFeatureProperties(
+        object value,
+        IFeatureCollection features,
+        IEnumerable<PropertyInfo> properties
+    )
     {
         foreach (var property in properties)
         {
@@ -417,6 +426,7 @@ public class DefaultHttpContextTests
     private class DisposableThing : IDisposable
     {
         public bool Disposed { get; set; }
+
         public void Dispose()
         {
             Disposed = true;
@@ -425,7 +435,8 @@ public class DefaultHttpContextTests
 
     private class TestHttpResponseFeature : IHttpResponseFeature
     {
-        public List<(Func<object, Task> callback, object state)> CompletedCallbacks = new List<(Func<object, Task> callback, object state)>();
+        public List<(Func<object, Task> callback, object state)> CompletedCallbacks =
+            new List<(Func<object, Task> callback, object state)>();
 
         public int StatusCode { get; set; }
         public string ReasonPhrase { get; set; }
@@ -439,21 +450,23 @@ public class DefaultHttpContextTests
             CompletedCallbacks.Add((callback, state));
         }
 
-        public void OnStarting(Func<object, Task> callback, object state)
-        {
-        }
+        public void OnStarting(Func<object, Task> callback, object state) { }
     }
 
     private class TestSession : ISession
     {
-        private readonly Dictionary<string, byte[]> _store
-            = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, byte[]> _store = new Dictionary<string, byte[]>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public string Id { get; set; }
 
         public bool IsAvailable { get; } = true;
 
-        public IEnumerable<string> Keys { get { return _store.Keys; } }
+        public IEnumerable<string> Keys
+        {
+            get { return _store.Keys; }
+        }
 
         public void Clear()
         {
@@ -495,10 +508,7 @@ public class DefaultHttpContextTests
     {
         public bool IsWebSocketRequest
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public Task<WebSocket> AcceptAsync(WebSocketAcceptContext context)
@@ -507,7 +517,10 @@ public class DefaultHttpContextTests
         }
     }
 
-    private class AsyncDisposableServiceProvider : IServiceProvider, IDisposable, IServiceScopeFactory
+    private class AsyncDisposableServiceProvider
+        : IServiceProvider,
+            IDisposable,
+            IServiceScopeFactory
     {
         private readonly ServiceProvider _serviceProvider;
 
@@ -535,7 +548,9 @@ public class DefaultHttpContextTests
 
         public IServiceScope CreateScope()
         {
-            var scope = new AsyncServiceScope(_serviceProvider.GetService<IServiceScopeFactory>().CreateScope());
+            var scope = new AsyncServiceScope(
+                _serviceProvider.GetService<IServiceScopeFactory>().CreateScope()
+            );
             Scopes.Add(scope);
             return scope;
         }

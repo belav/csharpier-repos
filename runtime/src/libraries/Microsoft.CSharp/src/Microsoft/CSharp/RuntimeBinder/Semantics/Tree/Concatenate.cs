@@ -13,7 +13,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Assert(first?.Type != null);
             Debug.Assert(second?.Type != null);
-            Debug.Assert(first.Type.IsPredefType(PredefinedType.PT_STRING) || second.Type.IsPredefType(PredefinedType.PT_STRING));
+            Debug.Assert(
+                first.Type.IsPredefType(PredefinedType.PT_STRING)
+                    || second.Type.IsPredefType(PredefinedType.PT_STRING)
+            );
             FirstArgument = first;
             SecondArgument = second;
         }

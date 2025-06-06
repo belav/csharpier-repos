@@ -11,64 +11,72 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class AbstractKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validNonInterfaceMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.ExternKeyword,
-            SyntaxKind.InternalKeyword,
-            SyntaxKind.NewKeyword,
-            SyntaxKind.PublicKeyword,
-            SyntaxKind.ProtectedKeyword,
-            SyntaxKind.UnsafeKeyword,
-            SyntaxKind.OverrideKeyword,
-        };
-
-        private static readonly ISet<SyntaxKind> s_validInterfaceMemberModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-        {
-            SyntaxKind.ExternKeyword,
-            SyntaxKind.InternalKeyword,
-            SyntaxKind.NewKeyword,
-            SyntaxKind.PublicKeyword,
-            SyntaxKind.ProtectedKeyword,
-            SyntaxKind.StaticKeyword,
-            SyntaxKind.UnsafeKeyword,
-            SyntaxKind.OverrideKeyword,
-        };
-
-        private static readonly ISet<SyntaxKind> s_validTypeModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+        private static readonly ISet<SyntaxKind> s_validNonInterfaceMemberModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
             {
+                SyntaxKind.ExternKeyword,
                 SyntaxKind.InternalKeyword,
                 SyntaxKind.NewKeyword,
                 SyntaxKind.PublicKeyword,
-                SyntaxKind.PrivateKeyword,
                 SyntaxKind.ProtectedKeyword,
                 SyntaxKind.UnsafeKeyword,
-                SyntaxKind.FileKeyword,
+                SyntaxKind.OverrideKeyword,
             };
 
-        public AbstractKeywordRecommender()
-            : base(SyntaxKind.AbstractKeyword)
-        {
-        }
+        private static readonly ISet<SyntaxKind> s_validInterfaceMemberModifiers =
+            new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
+            {
+                SyntaxKind.ExternKeyword,
+                SyntaxKind.InternalKeyword,
+                SyntaxKind.NewKeyword,
+                SyntaxKind.PublicKeyword,
+                SyntaxKind.ProtectedKeyword,
+                SyntaxKind.StaticKeyword,
+                SyntaxKind.UnsafeKeyword,
+                SyntaxKind.OverrideKeyword,
+            };
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static readonly ISet<SyntaxKind> s_validTypeModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
         {
-            return
-                context.IsGlobalStatementContext ||
-                context.IsMemberDeclarationContext(
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.NewKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.ProtectedKeyword,
+            SyntaxKind.UnsafeKeyword,
+            SyntaxKind.FileKeyword,
+        };
+
+        public AbstractKeywordRecommender()
+            : base(SyntaxKind.AbstractKeyword) { }
+
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
+        {
+            return context.IsGlobalStatementContext
+                || context.IsMemberDeclarationContext(
                     validModifiers: s_validNonInterfaceMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken) ||
-                context.IsMemberDeclarationContext(
+                    cancellationToken: cancellationToken
+                )
+                || context.IsMemberDeclarationContext(
                     validModifiers: s_validInterfaceMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.InterfaceOnlyTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken) ||
-                context.IsTypeDeclarationContext(
+                    cancellationToken: cancellationToken
+                )
+                || context.IsTypeDeclarationContext(
                     validModifiers: s_validTypeModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken);
+                    cancellationToken: cancellationToken
+                );
         }
     }
 }

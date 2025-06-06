@@ -11,7 +11,12 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="IResult"/> that on execution will write Problem Details
 /// HTTP API responses based on <see href="https://tools.ietf.org/html/rfc7807"/>
 /// </summary>
-public sealed class ProblemHttpResult : IResult, IStatusCodeHttpResult, IContentTypeHttpResult, IValueHttpResult, IValueHttpResult<ProblemDetails>
+public sealed class ProblemHttpResult
+    : IResult,
+        IStatusCodeHttpResult,
+        IContentTypeHttpResult,
+        IValueHttpResult,
+        IValueHttpResult<ProblemDetails>
 {
     /// <summary>
     /// Creates a new <see cref="ProblemHttpResult"/> instance with
@@ -52,7 +57,8 @@ public sealed class ProblemHttpResult : IResult, IStatusCodeHttpResult, IContent
 
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
         var logger = loggerFactory.CreateLogger(typeof(ProblemHttpResult));
-        var problemDetailsService = httpContext.RequestServices.GetService<IProblemDetailsService>();
+        var problemDetailsService =
+            httpContext.RequestServices.GetService<IProblemDetailsService>();
 
         if (StatusCode is { } code)
         {
@@ -60,13 +66,19 @@ public sealed class ProblemHttpResult : IResult, IStatusCodeHttpResult, IContent
             httpContext.Response.StatusCode = code;
         }
 
-        if (problemDetailsService is null || !await problemDetailsService.TryWriteAsync(new() { HttpContext = httpContext, ProblemDetails = ProblemDetails }))
+        if (
+            problemDetailsService is null
+            || !await problemDetailsService.TryWriteAsync(
+                new() { HttpContext = httpContext, ProblemDetails = ProblemDetails }
+            )
+        )
         {
             await HttpResultsHelper.WriteResultAsJsonAsync(
                 httpContext,
                 logger,
                 value: ProblemDetails,
-                ContentType);
+                ContentType
+            );
         }
     }
 }

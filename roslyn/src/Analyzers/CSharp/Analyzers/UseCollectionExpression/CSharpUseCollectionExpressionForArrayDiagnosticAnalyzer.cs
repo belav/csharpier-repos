@@ -19,15 +19,21 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
     : AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer
 {
     public CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseCollectionExpressionForArrayDiagnosticId,
-               EnforceOnBuildValues.UseCollectionExpressionForArray)
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseCollectionExpressionForArrayDiagnosticId,
+            EnforceOnBuildValues.UseCollectionExpressionForArray
+        ) { }
 
     protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context)
     {
-        context.RegisterSyntaxNodeAction(AnalyzeArrayInitializerExpression, SyntaxKind.ArrayInitializerExpression);
-        context.RegisterSyntaxNodeAction(AnalyzeArrayCreationExpression, SyntaxKind.ArrayCreationExpression);
+        context.RegisterSyntaxNodeAction(
+            AnalyzeArrayInitializerExpression,
+            SyntaxKind.ArrayInitializerExpression
+        );
+        context.RegisterSyntaxNodeAction(
+            AnalyzeArrayCreationExpression,
+            SyntaxKind.ArrayCreationExpression
+        );
     }
 
     private void AnalyzeArrayCreationExpression(SyntaxNodeAnalysisContext context)
@@ -57,7 +63,8 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
     public static ImmutableArray<CollectionExpressionMatch<StatementSyntax>> TryGetMatches(
         SemanticModel semanticModel,
         ArrayCreationExpressionSyntax expression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // we have `new T[...] ...;` defer to analyzer to find the items that follow that may need to
         // be added to the collection expression.
@@ -66,12 +73,19 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
             expression,
             static e => e.Type,
             static e => e.Initializer,
-            cancellationToken);
+            cancellationToken
+        );
         if (matches.IsDefault)
             return default;
 
-        if (!UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
-                semanticModel, expression, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
+                semanticModel,
+                expression,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
         {
             return default;
         }
@@ -82,12 +96,19 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
     public static ImmutableArray<CollectionExpressionMatch<StatementSyntax>> TryGetMatches(
         SemanticModel semanticModel,
         ImplicitArrayCreationExpressionSyntax expression,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // if we have `new[] { ... }` we have no subsequent matches to add to the collection. All values come
         // from within the initializer.
-        if (!UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
-                semanticModel, expression, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
+                semanticModel,
+                expression,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
         {
             return default;
         }
@@ -107,7 +128,10 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
         if (!option.Value || ShouldSkipAnalysis(context, option.Notification))
             return;
 
-        var isConcreteOrImplicitArrayCreation = initializer.Parent is ArrayCreationExpressionSyntax or ImplicitArrayCreationExpressionSyntax;
+        var isConcreteOrImplicitArrayCreation =
+            initializer.Parent
+                is ArrayCreationExpressionSyntax
+                    or ImplicitArrayCreationExpressionSyntax;
 
         // a naked `{ ... }` can only be converted to a collection expression when in the exact form `x = { ... }`
         if (!isConcreteOrImplicitArrayCreation && initializer.Parent is not EqualsValueClauseSyntax)
@@ -117,8 +141,14 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
             ? (ExpressionSyntax)initializer.GetRequiredParent()
             : initializer;
 
-        if (!UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
-                semanticModel, arrayCreationExpression, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
+                semanticModel,
+                arrayCreationExpression,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
         {
             return;
         }
@@ -127,8 +157,16 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
         {
             var matches = initializer.Parent switch
             {
-                ArrayCreationExpressionSyntax arrayCreation => TryGetMatches(semanticModel, arrayCreation, cancellationToken),
-                ImplicitArrayCreationExpressionSyntax arrayCreation => TryGetMatches(semanticModel, arrayCreation, cancellationToken),
+                ArrayCreationExpressionSyntax arrayCreation => TryGetMatches(
+                    semanticModel,
+                    arrayCreation,
+                    cancellationToken
+                ),
+                ImplicitArrayCreationExpressionSyntax arrayCreation => TryGetMatches(
+                    semanticModel,
+                    arrayCreation,
+                    cancellationToken
+                ),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
@@ -143,37 +181,58 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
             // int[] = { 1, 2, 3 };
             //
             // In this case, we always have a target type, so it should always be valid to convert this to a collection expression.
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                initializer.OpenBraceToken.GetLocation(),
-                option.Notification,
-                additionalLocations: ImmutableArray.Create(initializer.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    initializer.OpenBraceToken.GetLocation(),
+                    option.Notification,
+                    additionalLocations: ImmutableArray.Create(initializer.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 
-    private void ReportArrayCreationDiagnostics(SyntaxNodeAnalysisContext context, SyntaxTree syntaxTree, CodeStyleOption2<bool> option, ExpressionSyntax expression)
+    private void ReportArrayCreationDiagnostics(
+        SyntaxNodeAnalysisContext context,
+        SyntaxTree syntaxTree,
+        CodeStyleOption2<bool> option,
+        ExpressionSyntax expression
+    )
     {
         var locations = ImmutableArray.Create(expression.GetLocation());
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            expression.GetFirstToken().GetLocation(),
-            option.Notification,
-            additionalLocations: locations,
-            properties: null));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                expression.GetFirstToken().GetLocation(),
+                option.Notification,
+                additionalLocations: locations,
+                properties: null
+            )
+        );
 
         var additionalUnnecessaryLocations = ImmutableArray.Create(
-            syntaxTree.GetLocation(TextSpan.FromBounds(
-                expression.SpanStart,
-                expression is ArrayCreationExpressionSyntax arrayCreationExpression
-                    ? arrayCreationExpression.Type.Span.End
-                    : ((ImplicitArrayCreationExpressionSyntax)expression).CloseBracketToken.Span.End)));
+            syntaxTree.GetLocation(
+                TextSpan.FromBounds(
+                    expression.SpanStart,
+                    expression is ArrayCreationExpressionSyntax arrayCreationExpression
+                        ? arrayCreationExpression.Type.Span.End
+                        : ((ImplicitArrayCreationExpressionSyntax)expression)
+                            .CloseBracketToken
+                            .Span
+                            .End
+                )
+            )
+        );
 
-        context.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-            UnnecessaryCodeDescriptor,
-            additionalUnnecessaryLocations[0],
-            NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
-            additionalLocations: locations,
-            additionalUnnecessaryLocations: additionalUnnecessaryLocations));
+        context.ReportDiagnostic(
+            DiagnosticHelper.CreateWithLocationTags(
+                UnnecessaryCodeDescriptor,
+                additionalUnnecessaryLocations[0],
+                NotificationOption2.ForSeverity(UnnecessaryCodeDescriptor.DefaultSeverity),
+                additionalLocations: locations,
+                additionalUnnecessaryLocations: additionalUnnecessaryLocations
+            )
+        );
     }
 }

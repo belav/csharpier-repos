@@ -14,10 +14,7 @@ public class SimpleObjectIntegrationTest
     public void TestDoubleValueProperty()
     {
         // Arrange
-        var targetObject = new SimpleObject()
-        {
-            DoubleValue = 9.8
-        };
+        var targetObject = new SimpleObject() { DoubleValue = 9.8 };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Test("DoubleValue", 9.8);
@@ -30,11 +27,7 @@ public class SimpleObjectIntegrationTest
     public void CopyStringProperty_ToAnotherStringProperty()
     {
         // Arrange
-        var targetObject = new SimpleObject()
-        {
-            StringProperty = "A",
-            AnotherStringProperty = "B"
-        };
+        var targetObject = new SimpleObject() { StringProperty = "A", AnotherStringProperty = "B" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Copy("StringProperty", "AnotherStringProperty");
@@ -53,7 +46,7 @@ public class SimpleObjectIntegrationTest
         var targetObject = new SimpleObject()
         {
             StringProperty = null,
-            AnotherStringProperty = "B"
+            AnotherStringProperty = "B",
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -70,11 +63,7 @@ public class SimpleObjectIntegrationTest
     public void MoveIntegerProperty_ToAnotherIntegerProperty()
     {
         // Arrange
-        var targetObject = new SimpleObject()
-        {
-            IntegerValue = 2,
-            AnotherIntegerValue = 3
-        };
+        var targetObject = new SimpleObject() { IntegerValue = 2, AnotherIntegerValue = 3 };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Move("IntegerValue", "AnotherIntegerValue");
@@ -91,10 +80,7 @@ public class SimpleObjectIntegrationTest
     public void RemoveDecimalPropertyValue()
     {
         // Arrange
-        var targetObject = new SimpleObject()
-        {
-            DecimalValue = 9.8M
-        };
+        var targetObject = new SimpleObject() { DecimalValue = 9.8M };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Remove("DecimalValue");
@@ -110,10 +96,7 @@ public class SimpleObjectIntegrationTest
     public void ReplaceGuid()
     {
         // Arrange
-        var targetObject = new SimpleObject()
-        {
-            GuidValue = Guid.NewGuid()
-        };
+        var targetObject = new SimpleObject() { GuidValue = Guid.NewGuid() };
 
         var newGuid = Guid.NewGuid();
         var patchDocument = new JsonPatchDocument();
@@ -130,10 +113,7 @@ public class SimpleObjectIntegrationTest
     public void AddReplacesGuid()
     {
         // Arrange
-        var targetObject = new SimpleObject()
-        {
-            GuidValue = Guid.NewGuid()
-        };
+        var targetObject = new SimpleObject() { GuidValue = Guid.NewGuid() };
 
         var newGuid = Guid.NewGuid();
         var patchDocument = new JsonPatchDocument();
@@ -164,7 +144,10 @@ public class SimpleObjectIntegrationTest
         var ex = Assert.Throws<JsonPatchException>(() => document.ApplyTo(target));
 
         // Assert
-        Assert.Equal("For operation 'move', the target location specified by path '/Object/goodbye' was not found.", ex.Message);
+        Assert.Equal(
+            "For operation 'move', the target location specified by path '/Object/goodbye' was not found.",
+            ex.Message
+        );
     }
 
     private class Regression_AspNetCore3634_Object

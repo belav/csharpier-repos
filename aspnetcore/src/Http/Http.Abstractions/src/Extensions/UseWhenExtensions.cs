@@ -19,7 +19,11 @@ public static class UseWhenExtensions
     /// <param name="predicate">Invoked with the request environment to determine if the branch should be taken</param>
     /// <param name="configuration">Configures a branch to take</param>
     /// <returns></returns>
-    public static IApplicationBuilder UseWhen(this IApplicationBuilder app, Predicate predicate, Action<IApplicationBuilder> configuration)
+    public static IApplicationBuilder UseWhen(
+        this IApplicationBuilder app,
+        Predicate predicate,
+        Action<IApplicationBuilder> configuration
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(predicate);

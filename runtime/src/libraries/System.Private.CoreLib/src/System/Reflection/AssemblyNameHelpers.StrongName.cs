@@ -61,7 +61,8 @@ namespace System.Reflection
                 return true;
 
             // If a hash algorithm is specified, it must be a sensible value
-            bool fHashAlgorithmValid = GetAlgClass(hashAlgID) == ALG_CLASS_HASH && GetAlgSid(hashAlgID) >= ALG_SID_SHA1;
+            bool fHashAlgorithmValid =
+                GetAlgClass(hashAlgID) == ALG_CLASS_HASH && GetAlgSid(hashAlgID) >= ALG_SID_SHA1;
             if (hashAlgID != 0 && !fHashAlgorithmValid)
                 return false;
 
@@ -98,6 +99,24 @@ namespace System.Reflection
 
         private const int PublicKeyTokenLength = 8;
 
-        private static ReadOnlySpan<byte> EcmaKey => [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00];
+        private static ReadOnlySpan<byte> EcmaKey =>
+            [
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x04,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+            ];
     }
 }

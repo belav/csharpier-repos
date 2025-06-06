@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Roslyn.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
+using Roslyn.Utilities;
 using Cci = Microsoft.Cci;
 
 namespace Microsoft.CodeAnalysis.Emit.NoPia
@@ -33,23 +33,30 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
-        internal abstract class CommonEmbeddedTypeParameter : Cci.IEmbeddedDefinition, Cci.IGenericMethodParameter
+        internal abstract class CommonEmbeddedTypeParameter
+            : Cci.IEmbeddedDefinition,
+                Cci.IGenericMethodParameter
         {
             public readonly TEmbeddedMethod ContainingMethod;
             public readonly TTypeParameterSymbol UnderlyingTypeParameter;
 
-            protected CommonEmbeddedTypeParameter(TEmbeddedMethod containingMethod, TTypeParameterSymbol underlyingTypeParameter)
+            protected CommonEmbeddedTypeParameter(
+                TEmbeddedMethod containingMethod,
+                TTypeParameterSymbol underlyingTypeParameter
+            )
             {
                 this.ContainingMethod = containingMethod;
                 this.UnderlyingTypeParameter = underlyingTypeParameter;
             }
 
-            public bool IsEncDeleted
-                => false;
+            public bool IsEncDeleted => false;
 
-            protected abstract IEnumerable<Cci.TypeReferenceWithAttributes> GetConstraints(EmitContext context);
+            protected abstract IEnumerable<Cci.TypeReferenceWithAttributes> GetConstraints(
+                EmitContext context
+            );
             protected abstract bool MustBeReferenceType { get; }
             protected abstract bool MustBeValueType { get; }
             protected abstract bool MustHaveDefaultConstructor { get; }
@@ -58,39 +65,29 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.IMethodDefinition Cci.IGenericMethodParameter.DefiningMethod
             {
-                get
-                {
-                    return ContainingMethod;
-                }
+                get { return ContainingMethod; }
             }
 
-            IEnumerable<Cci.TypeReferenceWithAttributes> Cci.IGenericParameter.GetConstraints(EmitContext context)
+            IEnumerable<Cci.TypeReferenceWithAttributes> Cci.IGenericParameter.GetConstraints(
+                EmitContext context
+            )
             {
                 return GetConstraints(context);
             }
 
             bool Cci.IGenericParameter.MustBeReferenceType
             {
-                get
-                {
-                    return MustBeReferenceType;
-                }
+                get { return MustBeReferenceType; }
             }
 
             bool Cci.IGenericParameter.MustBeValueType
             {
-                get
-                {
-                    return MustBeValueType;
-                }
+                get { return MustBeValueType; }
             }
 
             bool Cci.IGenericParameter.MustHaveDefaultConstructor
             {
-                get
-                {
-                    return MustHaveDefaultConstructor;
-                }
+                get { return MustHaveDefaultConstructor; }
             }
 
             Cci.TypeParameterVariance Cci.IGenericParameter.Variance
@@ -104,18 +101,12 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.IGenericMethodParameter Cci.IGenericParameter.AsGenericMethodParameter
             {
-                get
-                {
-                    return this;
-                }
+                get { return this; }
             }
 
             Cci.IGenericTypeParameter Cci.IGenericParameter.AsGenericTypeParameter
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             bool Cci.ITypeReference.IsEnum
@@ -135,10 +126,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.PrimitiveTypeCode Cci.ITypeReference.TypeCode
             {
-                get
-                {
-                    return Cci.PrimitiveTypeCode.NotPrimitive;
-                }
+                get { return Cci.PrimitiveTypeCode.NotPrimitive; }
             }
 
             TypeDefinitionHandle Cci.ITypeReference.TypeDef
@@ -161,7 +149,9 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 get { return null; }
             }
 
-            Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
+            Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
+                EmitContext context
+            )
             {
                 return null;
             }
@@ -216,10 +206,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             ushort Cci.IParameterListEntry.Index
             {
-                get
-                {
-                    return Index;
-                }
+                get { return Index; }
             }
 
             Cci.IMethodReference Cci.IGenericMethodParameterReference.DefiningMethod

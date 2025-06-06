@@ -16,21 +16,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedRecordBaseEquals : SynthesizedRecordOrdinaryMethod
     {
-        public SynthesizedRecordBaseEquals(SourceMemberContainerTypeSymbol containingType, int memberOffset)
-            : base(containingType, WellKnownMemberNames.ObjectEquals, memberOffset, DeclarationModifiers.Public | DeclarationModifiers.Override | DeclarationModifiers.Sealed)
+        public SynthesizedRecordBaseEquals(
+            SourceMemberContainerTypeSymbol containingType,
+            int memberOffset
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.ObjectEquals,
+                memberOffset,
+                DeclarationModifiers.Public
+                    | DeclarationModifiers.Override
+                    | DeclarationModifiers.Sealed
+            )
         {
             Debug.Assert(!containingType.IsRecordStruct);
         }
 
-        protected override (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
+        protected override (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics)
         {
             var compilation = DeclaringCompilation;
             var location = ReturnTypeLocation;
-            return (ReturnType: TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_Boolean, location, diagnostics)),
-                    Parameters: ImmutableArray.Create<ParameterSymbol>(
-                                    new SourceSimpleParameterSymbol(owner: this,
-                                                                    TypeWithAnnotations.Create(ContainingType.BaseTypeNoUseSiteDiagnostics, NullableAnnotation.Annotated),
-                                                                    ordinal: 0, RefKind.None, ScopedKind.None, "other", Locations)));
+            return (
+                ReturnType: TypeWithAnnotations.Create(
+                    Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Boolean,
+                        location,
+                        diagnostics
+                    )
+                ),
+                Parameters: ImmutableArray.Create<ParameterSymbol>(
+                    new SourceSimpleParameterSymbol(
+                        owner: this,
+                        TypeWithAnnotations.Create(
+                            ContainingType.BaseTypeNoUseSiteDiagnostics,
+                            NullableAnnotation.Annotated
+                        ),
+                        ordinal: 0,
+                        RefKind.None,
+                        ScopedKind.None,
+                        "other",
+                        Locations
+                    )
+                )
+            );
         }
 
         protected override int GetParameterCountFromSyntax() => 1;
@@ -41,16 +73,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var overridden = OverriddenMethod;
 
-            if (overridden is object &&
-                !overridden.ContainingType.Equals(ContainingType.BaseTypeNoUseSiteDiagnostics, TypeCompareKind.AllIgnoreOptions))
+            if (
+                overridden is object
+                && !overridden.ContainingType.Equals(
+                    ContainingType.BaseTypeNoUseSiteDiagnostics,
+                    TypeCompareKind.AllIgnoreOptions
+                )
+            )
             {
-                diagnostics.Add(ErrorCode.ERR_DoesNotOverrideBaseMethod, GetFirstLocation(), this, ContainingType.BaseTypeNoUseSiteDiagnostics);
+                diagnostics.Add(
+                    ErrorCode.ERR_DoesNotOverrideBaseMethod,
+                    GetFirstLocation(),
+                    this,
+                    ContainingType.BaseTypeNoUseSiteDiagnostics
+                );
             }
         }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, this.SyntaxNode, compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                this.SyntaxNode,
+                compilationState,
+                diagnostics
+            );
 
             try
             {
@@ -64,8 +114,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var retExpr = F.Call(
                     F.This(),
-                    ContainingType.GetMembersUnordered().OfType<SynthesizedRecordObjEquals>().Single(),
-                    F.Convert(F.SpecialType(SpecialType.System_Object), F.Parameter(parameter)));
+                    ContainingType
+                        .GetMembersUnordered()
+                        .OfType<SynthesizedRecordObjEquals>()
+                        .Single(),
+                    F.Convert(F.SpecialType(SpecialType.System_Object), F.Parameter(parameter))
+                );
 
                 F.CloseMethod(F.Block(F.Return(retExpr)));
             }

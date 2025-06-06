@@ -8,38 +8,51 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-internal sealed class ValueConverter<TMessage> : SettingsConverterBase<TMessage> where TMessage : IMessage, new()
+internal sealed class ValueConverter<TMessage> : SettingsConverterBase<TMessage>
+    where TMessage : IMessage, new()
 {
     public override bool HandleNull => true;
 
-    public ValueConverter(JsonContext context) : base(context)
-    {
-    }
+    public ValueConverter(JsonContext context)
+        : base(context) { }
 
-    public override TMessage? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TMessage? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var message = new TMessage();
         var fields = message.Descriptor.Fields;
         switch (reader.TokenType)
         {
             case JsonTokenType.StartObject:
-                {
-                    var field = fields[Value.StructValueFieldNumber];
-                    var structMessage = JsonSerializer.Deserialize(ref reader, field.MessageType.ClrType, options);
-                    field.Accessor.SetValue(message, structMessage);
-                    break;
-                }
+            {
+                var field = fields[Value.StructValueFieldNumber];
+                var structMessage = JsonSerializer.Deserialize(
+                    ref reader,
+                    field.MessageType.ClrType,
+                    options
+                );
+                field.Accessor.SetValue(message, structMessage);
+                break;
+            }
             case JsonTokenType.StartArray:
-                {
-                    var field = fields[Value.ListValueFieldNumber];
-                    var list = JsonSerializer.Deserialize(ref reader, field.MessageType.ClrType, options);
-                    field.Accessor.SetValue(message, list);
-                    break;
-                }
+            {
+                var field = fields[Value.ListValueFieldNumber];
+                var list = JsonSerializer.Deserialize(
+                    ref reader,
+                    field.MessageType.ClrType,
+                    options
+                );
+                field.Accessor.SetValue(message, list);
+                break;
+            }
             case JsonTokenType.Comment:
                 break;
             case JsonTokenType.String:
-                fields[Value.StringValueFieldNumber].Accessor.SetValue(message, reader.GetString()!);
+                fields[Value.StringValueFieldNumber]
+                    .Accessor.SetValue(message, reader.GetString()!);
                 break;
             case JsonTokenType.Number:
                 fields[Value.NumberValueFieldNumber].Accessor.SetValue(message, reader.GetDouble());
@@ -65,7 +78,9 @@ internal sealed class ValueConverter<TMessage> : SettingsConverterBase<TMessage>
         var specifiedField = value.Descriptor.Oneofs[0].Accessor.GetCaseFieldDescriptor(value);
         if (specifiedField == null)
         {
-            throw new InvalidOperationException("Value message must contain a value for the oneof.");
+            throw new InvalidOperationException(
+                "Value message must contain a value for the oneof."
+            );
         }
 
         object v = specifiedField.Accessor.GetValue(value);
@@ -83,7 +98,9 @@ internal sealed class ValueConverter<TMessage> : SettingsConverterBase<TMessage>
                 writer.WriteNullValue();
                 break;
             default:
-                throw new InvalidOperationException("Unexpected case in struct field: " + specifiedField.FieldNumber);
+                throw new InvalidOperationException(
+                    "Unexpected case in struct field: " + specifiedField.FieldNumber
+                );
         }
     }
 }

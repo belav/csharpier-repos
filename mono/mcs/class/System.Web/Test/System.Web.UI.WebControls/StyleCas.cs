@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,47 +26,46 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class StyleCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            StyleTest unit = new StyleTest();
+            unit.Style_Defaults();
+            unit.Style_State();
+            unit.Style_Merge();
+            unit.Style_Copy();
+            unit.StyleFonts();
+            unit.CopyFrom_Null();
+            unit.CopyFrom_Self();
+            unit.CopyFrom_Empty();
+            unit.CopyFrom();
+            unit.CopyFrom_IsEmpty();
+            unit.Constructor_StateBag_Null();
+            unit.Empty();
+            unit.FontInfo_Empty();
+            unit.Render();
+            unit.Style_CssClass();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class StyleCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			StyleTest unit = new StyleTest ();
-			unit.Style_Defaults ();
-			unit.Style_State ();
-			unit.Style_Merge ();
-			unit.Style_Copy ();
-			unit.StyleFonts ();
-			unit.CopyFrom_Null ();
-			unit.CopyFrom_Self ();
-			unit.CopyFrom_Empty ();
-			unit.CopyFrom ();
-			unit.CopyFrom_IsEmpty ();
-			unit.Constructor_StateBag_Null ();
-			unit.Empty ();
-			unit.FontInfo_Empty ();
-			unit.Render ();
-			unit.Style_CssClass ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (Style); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Style); }
+        }
+    }
 }

@@ -7,6 +7,6 @@ namespace System.IO
     {
         Files = 0x1,
         Directories = 0x2,
-        Both = 0x3
+        Both = 0x3,
     }
 }

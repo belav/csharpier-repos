@@ -1,16 +1,16 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Interface:  IReadOnlyDictionary<TKey, TValue>
-** 
+**
 ** <OWNER>matell</OWNER>
 **
 ** Purpose: Base interface for read-only generic dictionaries.
-** 
+**
 ===========================================================*/
 using System;
 using System.Diagnostics.Contracts;
@@ -21,7 +21,8 @@ namespace System.Collections.Generic
 #if CONTRACTS_FULL
     [ContractClass(typeof(IReadOnlyDictionaryContract<,>))]
 #endif
-    public interface IReadOnlyDictionary<TKey, TValue> : IReadOnlyCollection<KeyValuePair<TKey, TValue>>
+    public interface IReadOnlyDictionary<TKey, TValue>
+        : IReadOnlyCollection<KeyValuePair<TKey, TValue>>
     {
         bool ContainsKey(TKey key);
         bool TryGetValue(TKey key, out TValue value);
@@ -33,7 +34,8 @@ namespace System.Collections.Generic
 
 #if CONTRACTS_FULL
     [ContractClassFor(typeof(IReadOnlyDictionary<,>))]
-    internal abstract class IReadOnlyDictionaryContract<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>
+    internal abstract class IReadOnlyDictionaryContract<TKey, TValue>
+        : IReadOnlyDictionary<TKey, TValue>
     {
         bool IReadOnlyDictionary<TKey, TValue>.ContainsKey(TKey key)
         {
@@ -51,29 +53,34 @@ namespace System.Collections.Generic
             get { return default(TValue); }
         }
 
-        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys {
-            get {
+        IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<IEnumerable<TKey>>() != null);
                 return default(IEnumerable<TKey>);
             }
         }
 
-        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values {
-            get {
+        IEnumerable<TValue> IReadOnlyDictionary<TKey, TValue>.Values
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<IEnumerable<TValue>>() != null);
                 return default(IEnumerable<TValue>);
             }
         }
 
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator()
         {
             return default(IEnumerator<KeyValuePair<TKey, TValue>>);
         }
 
-        int IReadOnlyCollection<KeyValuePair<TKey, TValue>>.Count {
-            get {
-                return default(int);
-            }
+        int IReadOnlyCollection<KeyValuePair<TKey, TValue>>.Count
+        {
+            get { return default(int); }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

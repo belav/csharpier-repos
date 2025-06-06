@@ -1,7 +1,7 @@
 ﻿// ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -14,12 +14,11 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 
 namespace System.Linq.Parallel
 {
-
     //---------------------------------------------------------------------------------------
     // The sort helper abstraction hides the implementation of our parallel merge sort.  See
     // comments below for more details.  In summary, there will be one sort helper per
@@ -38,7 +37,6 @@ namespace System.Linq.Parallel
 
     internal class SortHelper<TInputOutput, TKey> : SortHelper<TInputOutput>, IDisposable
     {
-
         private QueryOperatorEnumerator<TInputOutput, TKey> m_source; // The data source from which to pull data.
         private int m_partitionCount; // The partition count.
         private int m_partitionIndex; // This helper's index.
@@ -59,10 +57,18 @@ namespace System.Linq.Parallel
         // shouldn't need to worry about.
         //
 
-        private SortHelper(QueryOperatorEnumerator<TInputOutput, TKey> source, int partitionCount, int partitionIndex,
-            QueryTaskGroupState groupState, int[][] sharedIndices,
-            OrdinalIndexState indexState, IComparer<TKey> keyComparer,
-            GrowingArray<TKey>[] sharedkeys, TInputOutput[][] sharedValues, Barrier[,] sharedBarriers)
+        private SortHelper(
+            QueryOperatorEnumerator<TInputOutput, TKey> source,
+            int partitionCount,
+            int partitionIndex,
+            QueryTaskGroupState groupState,
+            int[][] sharedIndices,
+            OrdinalIndexState indexState,
+            IComparer<TKey> keyComparer,
+            GrowingArray<TKey>[] sharedkeys,
+            TInputOutput[][] sharedValues,
+            Barrier[,] sharedBarriers
+        )
         {
             Contract.Assert(source != null);
             Contract.Assert(groupState != null);
@@ -76,7 +82,7 @@ namespace System.Linq.Parallel
             Contract.Assert(sharedIndices.Length <= sharedkeys.Length);
             Contract.Assert(sharedIndices.Length == sharedValues.Length);
             Contract.Assert(sharedIndices.Length == sharedBarriers.GetLength(1));
-#if !MONO            
+#if !MONO
             Contract.Assert(groupState.CancellationState.MergedCancellationToken != null);
 #endif
 
@@ -107,14 +113,19 @@ namespace System.Linq.Parallel
         //
 
         internal static SortHelper<TInputOutput, TKey>[] GenerateSortHelpers(
-            PartitionedStream<TInputOutput, TKey> partitions, QueryTaskGroupState groupState)
+            PartitionedStream<TInputOutput, TKey> partitions,
+            QueryTaskGroupState groupState
+        )
         {
             int degreeOfParallelism = partitions.PartitionCount;
-            SortHelper<TInputOutput, TKey>[] helpers = new SortHelper<TInputOutput, TKey>[degreeOfParallelism];
+            SortHelper<TInputOutput, TKey>[] helpers = new SortHelper<TInputOutput, TKey>[
+                degreeOfParallelism
+            ];
 
             // Calculate the next highest power of two greater than or equal to the DOP.
             // Also, calculate phaseCount = log2(degreeOfParallelismPow2)
-            int degreeOfParallelismPow2 = 1, phaseCount = 0;
+            int degreeOfParallelismPow2 = 1,
+                phaseCount = 0;
             while (degreeOfParallelismPow2 < degreeOfParallelism)
             {
                 phaseCount++;
@@ -150,10 +161,17 @@ namespace System.Linq.Parallel
             for (int i = 0; i < degreeOfParallelism; i++)
             {
                 helpers[i] = new SortHelper<TInputOutput, TKey>(
-                    partitions[i], degreeOfParallelism, i,
-                    groupState, sharedIndices,
-                    partitions.OrdinalIndexState, partitions.KeyComparer,
-                    sharedKeys, sharedValues, sharedBarriers);
+                    partitions[i],
+                    degreeOfParallelism,
+                    i,
+                    groupState,
+                    sharedIndices,
+                    partitions.OrdinalIndexState,
+                    partitions.KeyComparer,
+                    sharedKeys,
+                    sharedValues,
+                    sharedBarriers
+                );
             }
 
             return helpers;
@@ -254,8 +272,7 @@ namespace System.Linq.Parallel
                         // Accumulate the keys and values so that we can sort them in a moment.
                         keys.Add(currentKey);
                         values.Add(current);
-                    }
-                    while (m_source.MoveNext(ref current, ref currentKey));
+                    } while (m_source.MoveNext(ref current, ref currentKey));
                 }
             }
             finally
@@ -274,7 +291,11 @@ namespace System.Linq.Parallel
         //     according to the sort criteria used.
         //
 
-        private void QuickSortIndicesInPlace(GrowingArray<TKey> keys, List<TInputOutput> values, OrdinalIndexState ordinalIndexState)
+        private void QuickSortIndicesInPlace(
+            GrowingArray<TKey> keys,
+            List<TInputOutput> values,
+            OrdinalIndexState ordinalIndexState
+        )
         {
             Contract.Assert(keys != null);
             Contract.Assert(values != null);
@@ -288,10 +309,15 @@ namespace System.Linq.Parallel
             }
 
             // Now sort the indices in place.
-            if (indices.Length > 1
-                && ordinalIndexState.IsWorseThan(OrdinalIndexState.Increasing))
+            if (indices.Length > 1 && ordinalIndexState.IsWorseThan(OrdinalIndexState.Increasing))
             {
-                QuickSort(0, indices.Length - 1, keys.InternalArray, indices, m_groupState.CancellationState.MergedCancellationToken);
+                QuickSort(
+                    0,
+                    indices.Length - 1,
+                    keys.InternalArray,
+                    indices,
+                    m_groupState.CancellationState.MergedCancellationToken
+                );
             }
 
             if (m_partitionCount == 1)
@@ -386,11 +412,11 @@ namespace System.Linq.Parallel
 
                     TInputOutput[] myValues = m_sharedValues[m_partitionIndex];
 
-
                     // First we must rendezvous with our merge partner so we know the previous sort
                     // and merge phase has been completed.  By convention, we always use the left-most
                     // partner's barrier for this; all that matters is that both uses the same.
-                    m_sharedBarriers[phase, Math.Min(m_partitionIndex, partnerIndex)].SignalAndWait(cancelToken);
+                    m_sharedBarriers[phase, Math.Min(m_partitionIndex, partnerIndex)]
+                        .SignalAndWait(cancelToken);
 
                     // Grab the two sorted inputs and then merge them cooperatively into one list.  One
                     // worker merges from left-to-right until it's placed elements up to the half-way
@@ -439,16 +465,25 @@ namespace System.Linq.Parallel
                         // the caveat that we stop merging once we reach the half-way point (since our partner
                         // is doing the same for the right half).  Note that during the last phase we only
                         // copy the values and not the indices or keys.
-                        int m = (totalCount + 1)/2;
-                        int i = 0, j0 = 0, j1 = 0;
+                        int m = (totalCount + 1) / 2;
+                        int i = 0,
+                            j0 = 0,
+                            j1 = 0;
                         while (i < m)
                         {
                             if ((i & CancellationState.POLL_INTERVAL) == 0)
                                 CancellationState.ThrowIfCanceled(cancelToken);
 
-                            if (j0 < leftCount && (j1 >= rightCount ||
-                                                   m_keyComparer.Compare(myKeysArr[myIndices[j0]],
-                                                                         rightKeys[rightIndices[j1]]) <= 0))
+                            if (
+                                j0 < leftCount
+                                && (
+                                    j1 >= rightCount
+                                    || m_keyComparer.Compare(
+                                        myKeysArr[myIndices[j0]],
+                                        rightKeys[rightIndices[j1]]
+                                    ) <= 0
+                                )
+                            )
                             {
                                 if (isLastPhase)
                                 {
@@ -492,7 +527,7 @@ namespace System.Linq.Parallel
 
                         // After the barrier, the other partition will have made two things available to us:
                         // (1) its own indices, keys, and values, stored in the cell that used to hold our data,
-                        // and (2) the arrays into which merged data will go, stored in its shared array cells.  
+                        // and (2) the arrays into which merged data will go, stored in its shared array cells.
                         // We will snag references to all of these things.
                         int[] leftIndices = m_sharedIndices[m_partitionIndex];
                         TKey[] leftKeys = m_sharedKeys[m_partitionIndex].InternalArray;
@@ -512,16 +547,25 @@ namespace System.Linq.Parallel
                         // the caveat that we stop merging once we reach the half-way point (since our partner
                         // is doing the same for the left half).  Note that during the last phase we only
                         // copy the values and not the indices or keys.
-                        int m = (totalCount + 1)/2;
-                        int i = totalCount - 1, j0 = leftCount - 1, j1 = rightCount - 1;
+                        int m = (totalCount + 1) / 2;
+                        int i = totalCount - 1,
+                            j0 = leftCount - 1,
+                            j1 = rightCount - 1;
                         while (i >= m)
                         {
                             if ((i & CancellationState.POLL_INTERVAL) == 0)
                                 CancellationState.ThrowIfCanceled(cancelToken);
 
-                            if (j0 >= 0 && (j1 < 0 ||
-                                            m_keyComparer.Compare(leftKeys[leftIndices[j0]],
-                                                                  myKeysArr[myIndices[j1]]) > 0))
+                            if (
+                                j0 >= 0
+                                && (
+                                    j1 < 0
+                                    || m_keyComparer.Compare(
+                                        leftKeys[leftIndices[j0]],
+                                        myKeysArr[myIndices[j1]]
+                                    ) > 0
+                                )
+                            )
                             {
                                 if (isLastPhase)
                                 {
@@ -580,7 +624,13 @@ namespace System.Linq.Parallel
         // will have been placed in sorted order based on the keys provided.
         //
 
-        private void QuickSort(int left, int right, TKey[] keys, int[] indices, CancellationToken cancelToken)
+        private void QuickSort(
+            int left,
+            int right,
+            TKey[] keys,
+            int[] indices,
+            CancellationToken cancelToken
+        )
         {
             Contract.Assert(keys != null, "need a non-null keyset");
             Contract.Assert(keys.Length >= indices.Length);
@@ -589,7 +639,7 @@ namespace System.Linq.Parallel
             Contract.Assert(0 <= right && right < keys.Length);
 
             // cancellation check.
-            // only test for intervals that are wider than so many items, else this test is 
+            // only test for intervals that are wider than so many items, else this test is
             // relatively expensive compared to the work being performend.
             if (right - left > CancellationState.POLL_INTERVAL)
                 CancellationState.ThrowIfCanceled(cancelToken);
@@ -603,10 +653,15 @@ namespace System.Linq.Parallel
 
                 do
                 {
-                    while (m_keyComparer.Compare(keys[indices[i]], pivotKey) < 0) i++;
-                    while (m_keyComparer.Compare(keys[indices[j]], pivotKey) > 0) j--;
+                    while (m_keyComparer.Compare(keys[indices[i]], pivotKey) < 0)
+                        i++;
+                    while (m_keyComparer.Compare(keys[indices[j]], pivotKey) > 0)
+                        j--;
 
-                    Contract.Assert(i >= left && j <= right, "(i>=left && j<=right) sort failed - bogus IComparer?");
+                    Contract.Assert(
+                        i >= left && j <= right,
+                        "(i>=left && j<=right) sort failed - bogus IComparer?"
+                    );
 
                     if (i > j)
                     {
@@ -623,8 +678,7 @@ namespace System.Linq.Parallel
 
                     i++;
                     j--;
-                }
-                while (i <= j);
+                } while (i <= j);
 
                 if (j - left <= right - i)
                 {
@@ -642,8 +696,7 @@ namespace System.Linq.Parallel
                     }
                     right = j;
                 }
-            }
-            while (left < right);
+            } while (left < right);
         }
     }
 }

@@ -31,12 +31,22 @@ public static class RouteHandlerServices
     /// <param name="createRequestDelegate">A delegate for constructing a RequestDelegate.</param>
     /// <returns></returns>
     public static RouteHandlerBuilder Map(
-            IEndpointRouteBuilder endpoints,
-            string pattern,
-            Delegate handler,
-            IEnumerable<string>? httpMethods,
-            Func<MethodInfo, RequestDelegateFactoryOptions?, RequestDelegateMetadataResult> populateMetadata,
-            Func<Delegate, RequestDelegateFactoryOptions, RequestDelegateMetadataResult?, RequestDelegateResult> createRequestDelegate)
+        IEndpointRouteBuilder endpoints,
+        string pattern,
+        Delegate handler,
+        IEnumerable<string>? httpMethods,
+        Func<
+            MethodInfo,
+            RequestDelegateFactoryOptions?,
+            RequestDelegateMetadataResult
+        > populateMetadata,
+        Func<
+            Delegate,
+            RequestDelegateFactoryOptions,
+            RequestDelegateMetadataResult?,
+            RequestDelegateResult
+        > createRequestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);
@@ -45,12 +55,14 @@ public static class RouteHandlerServices
         ArgumentNullException.ThrowIfNull(createRequestDelegate);
 
         return endpoints
-              .GetOrAddRouteEndpointDataSource()
-              .AddRouteHandler(RoutePatternFactory.Parse(pattern),
-                               handler,
-                               httpMethods,
-                               isFallback: false,
-                               populateMetadata,
-                               createRequestDelegate);
+            .GetOrAddRouteEndpointDataSource()
+            .AddRouteHandler(
+                RoutePatternFactory.Parse(pattern),
+                handler,
+                httpMethods,
+                isFallback: false,
+                populateMetadata,
+                createRequestDelegate
+            );
     }
 }

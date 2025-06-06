@@ -3,37 +3,34 @@
 //-----------------------------------------------------------------------------
 namespace System.IdentityModel.Selectors
 {
-
     using System;
-    using System.IO;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
-    using System.IdentityModel.Claims;
-    using System.Text;
-    using System.Xml;
-    using System.IdentityModel.Tokens;
-    using System.ServiceProcess;
     using System.Globalization;
-    using System.Runtime.ConstrainedExecution;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Tokens;
+    using System.IO;
     using System.Runtime.CompilerServices;
-    using Microsoft.InfoCards.Diagnostics;
-    using Microsoft.Win32;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
+    using System.ServiceProcess;
+    using System.Text;
     using System.Text.RegularExpressions;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
-
+    using System.Xml;
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
-    using System.Security;
+    using Microsoft.InfoCards.Diagnostics;
+    using Microsoft.Win32;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:
     // If v2 is installed, this class will route calls to the native dll that was installed with v2.
-    // This class essentially mimics the behavior in CSD Main 58552 which has been checked into the .Net branch for Win7 
+    // This class essentially mimics the behavior in CSD Main 58552 which has been checked into the .Net branch for Win7
     //
     class CardSpaceShim
     {
@@ -75,7 +72,7 @@ namespace System.IdentityModel.Selectors
         //
         // GetBrowserToken not required because that is accomplished via Pheonix bit etc. (not exposed thru
         // managed interface).
-        // 
+        //
 
         //
         // Summary:
@@ -96,7 +93,10 @@ namespace System.IdentityModel.Selectors
                         m_implementationDll = SafeLibraryHandle.LoadLibraryW(implDllPath);
                         if (m_implementationDll.IsInvalid)
                         {
-                            throw NativeMethods.ThrowWin32ExceptionWithContext(new Win32Exception(), implDllPath);
+                            throw NativeMethods.ThrowWin32ExceptionWithContext(
+                                new Win32Exception(),
+                                implDllPath
+                            );
                         }
 
                         try
@@ -105,95 +105,175 @@ namespace System.IdentityModel.Selectors
                             // Functions are listed in alphabetical order
                             //
 
-                            IntPtr procaddr1 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "CloseCryptoHandle");
-                            m_csShimCloseCryptoHandle =
-                                (CsV2CloseCryptoHandle)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr1, typeof(CsV2CloseCryptoHandle));
+                            IntPtr procaddr1 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "CloseCryptoHandle"
+                            );
+                            m_csShimCloseCryptoHandle = (CsV2CloseCryptoHandle)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr1,
+                                    typeof(CsV2CloseCryptoHandle)
+                                );
 
                             IntPtr procaddr2 = NativeMethods.GetProcAddressWrapper(
-                                m_implementationDll, "Decrypt");
-                            m_csShimDecrypt =
-                                (CsV2Decrypt)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr2, typeof(CsV2Decrypt));
+                                m_implementationDll,
+                                "Decrypt"
+                            );
+                            m_csShimDecrypt = (CsV2Decrypt)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr2,
+                                    typeof(CsV2Decrypt)
+                                );
 
-                            IntPtr procaddr3 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "Encrypt");
-                            m_csShimEncrypt =
-                                (CsV2Encrypt)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr3, typeof(CsV2Encrypt));
+                            IntPtr procaddr3 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "Encrypt"
+                            );
+                            m_csShimEncrypt = (CsV2Encrypt)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr3,
+                                    typeof(CsV2Encrypt)
+                                );
 
-                            IntPtr procaddr4 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "FreeToken");
-                            m_csShimFreeToken =
-                                (CsV2FreeToken)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr4, typeof(CsV2FreeToken));
+                            IntPtr procaddr4 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "FreeToken"
+                            );
+                            m_csShimFreeToken = (CsV2FreeToken)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr4,
+                                    typeof(CsV2FreeToken)
+                                );
 
-                            IntPtr procaddr5 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "GenerateDerivedKey");
-                            m_csShimGenerateDerivedKey =
-                                (CsV2GenerateDerivedKey)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr5, typeof(CsV2GenerateDerivedKey));
+                            IntPtr procaddr5 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "GenerateDerivedKey"
+                            );
+                            m_csShimGenerateDerivedKey = (CsV2GenerateDerivedKey)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr5,
+                                    typeof(CsV2GenerateDerivedKey)
+                                );
 
-                            IntPtr procaddr6 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "GetCryptoTransform");
-                            m_csShimGetCryptoTransform =
-                                (CsV2GetCryptoTransform)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr6, typeof(CsV2GetCryptoTransform));
+                            IntPtr procaddr6 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "GetCryptoTransform"
+                            );
+                            m_csShimGetCryptoTransform = (CsV2GetCryptoTransform)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr6,
+                                    typeof(CsV2GetCryptoTransform)
+                                );
 
-                            IntPtr procaddr7 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "GetKeyedHash");
-                            m_csShimGetKeyedHash =
-                                (CsV2GetKeyedHash)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr7, typeof(CsV2GetKeyedHash));
+                            IntPtr procaddr7 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "GetKeyedHash"
+                            );
+                            m_csShimGetKeyedHash = (CsV2GetKeyedHash)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr7,
+                                    typeof(CsV2GetKeyedHash)
+                                );
 
-                            IntPtr procaddr8 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "GetToken");
-                            m_csShimGetToken =
-                                (CsV2GetToken)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr8, typeof(CsV2GetToken));
+                            IntPtr procaddr8 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "GetToken"
+                            );
+                            m_csShimGetToken = (CsV2GetToken)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr8,
+                                    typeof(CsV2GetToken)
+                                );
 
-                            IntPtr procaddr9 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "HashCore");
-                            m_csShimHashCore =
-                                (CsV2HashCore)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr9, typeof(CsV2HashCore));
+                            IntPtr procaddr9 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "HashCore"
+                            );
+                            m_csShimHashCore = (CsV2HashCore)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr9,
+                                    typeof(CsV2HashCore)
+                                );
 
-                            IntPtr procaddr10 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "HashFinal");
-                            m_csShimHashFinal =
-                                (CsV2HashFinal)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr10, typeof(CsV2HashFinal));
+                            IntPtr procaddr10 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "HashFinal"
+                            );
+                            m_csShimHashFinal = (CsV2HashFinal)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr10,
+                                    typeof(CsV2HashFinal)
+                                );
 
-                            IntPtr procaddr11 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "ImportInformationCard");
-                            m_csShimImportInformationCard =
-                                (CsV2ImportInformationCard)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr11, typeof(CsV2ImportInformationCard));
+                            IntPtr procaddr11 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "ImportInformationCard"
+                            );
+                            m_csShimImportInformationCard = (CsV2ImportInformationCard)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr11,
+                                    typeof(CsV2ImportInformationCard)
+                                );
 
-                            IntPtr procaddr12 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "ManageCardSpace");
-                            m_csShimManageCardSpace =
-                                (CsV2ManageCardSpace)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr12, typeof(CsV2ManageCardSpace));
+                            IntPtr procaddr12 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "ManageCardSpace"
+                            );
+                            m_csShimManageCardSpace = (CsV2ManageCardSpace)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr12,
+                                    typeof(CsV2ManageCardSpace)
+                                );
 
-                            IntPtr procaddr13 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "SignHash");
-                            m_csShimSignHash =
-                                (CsV2SignHash)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr13, typeof(CsV2SignHash));
+                            IntPtr procaddr13 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "SignHash"
+                            );
+                            m_csShimSignHash = (CsV2SignHash)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr13,
+                                    typeof(CsV2SignHash)
+                                );
 
-                            IntPtr procaddr14 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "TransformBlock");
-                            m_csShimTransformBlock =
-                                (CsV2TransformBlock)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr14, typeof(CsV2TransformBlock));
+                            IntPtr procaddr14 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "TransformBlock"
+                            );
+                            m_csShimTransformBlock = (CsV2TransformBlock)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr14,
+                                    typeof(CsV2TransformBlock)
+                                );
 
-                            IntPtr procaddr15 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "TransformFinalBlock");
-                            m_csShimTransformFinalBlock =
-                                (CsV2TransformFinalBlock)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr15, typeof(CsV2TransformFinalBlock));
+                            IntPtr procaddr15 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "TransformFinalBlock"
+                            );
+                            m_csShimTransformFinalBlock = (CsV2TransformFinalBlock)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr15,
+                                    typeof(CsV2TransformFinalBlock)
+                                );
 
-
-                            IntPtr procaddr16 = NativeMethods.GetProcAddressWrapper(m_implementationDll, "VerifyHash");
-                            m_csShimVerifyHash =
-                                (CsV2VerifyHash)Marshal.GetDelegateForFunctionPointer(
-                                                            procaddr16, typeof(CsV2VerifyHash));
-
+                            IntPtr procaddr16 = NativeMethods.GetProcAddressWrapper(
+                                m_implementationDll,
+                                "VerifyHash"
+                            );
+                            m_csShimVerifyHash = (CsV2VerifyHash)
+                                Marshal.GetDelegateForFunctionPointer(
+                                    procaddr16,
+                                    typeof(CsV2VerifyHash)
+                                );
                         }
                         catch (Win32Exception)
                         {
                             //
                             // NB: IDT.ThrowHelperError would have logged for the Win32Exception
                             //
-                            IDT.Assert(!m_isInitialized, "If an exception occurred, we expect this to be false");
+                            IDT.Assert(
+                                !m_isInitialized,
+                                "If an exception occurred, we expect this to be false"
+                            );
                             throw;
                         }
 
@@ -215,14 +295,12 @@ namespace System.IdentityModel.Selectors
             return Regex.IsMatch(fileName, "^[A-Za-z0-9]+$");
         }
 
-
-
         //
         // Summary:
-        // Return the path to the v2 (or a version above v2) implementation dll. 
+        // Return the path to the v2 (or a version above v2) implementation dll.
         // We expect this to be infocardapi2.dll unless overriden by a registry key
         //
-        // Remarks: It is left upto the caller to check if the v2+ implementation 
+        // Remarks: It is left upto the caller to check if the v2+ implementation
         // dll actually exists or not.
         //
         private string GetV2ImplementationDllPath()
@@ -236,13 +314,15 @@ namespace System.IdentityModel.Selectors
             {
                 if (null != implDllKey)
                 {
-                    v2AndAboveImplementationDll = (string)implDllKey.GetValue(REDIRECT_DLL_IMPLEMENTATION_VALUE);
+                    v2AndAboveImplementationDll = (string)
+                        implDllKey.GetValue(REDIRECT_DLL_IMPLEMENTATION_VALUE);
 
                     if (!String.IsNullOrEmpty(v2AndAboveImplementationDll))
                     {
                         string v2RegPath = Path.Combine(
-                                                Environment.GetFolderPath(Environment.SpecialFolder.System),
-                                                v2AndAboveImplementationDll + ".dll");
+                            Environment.GetFolderPath(Environment.SpecialFolder.System),
+                            v2AndAboveImplementationDll + ".dll"
+                        );
 
                         //
                         // Is the filename safe (use alphanumeric like the CSD Main 58552). Does it exist?
@@ -256,8 +336,7 @@ namespace System.IdentityModel.Selectors
                 }
             }
 
-
-            // 
+            //
             // If reg key was not found or not safe, or value was not found, or found to be empty,
             // then use the default of infocardapi2.dll
             //
@@ -266,22 +345,25 @@ namespace System.IdentityModel.Selectors
                 v2AndAboveImplementationDll = REDIRECT_DLL_IMPLEMENTATION_VALUE_DEFAULT;
             }
 
-            IDT.Assert(!String.IsNullOrEmpty(v2AndAboveImplementationDll), "v2AndAboveImplementationDll should not be empty");
+            IDT.Assert(
+                !String.IsNullOrEmpty(v2AndAboveImplementationDll),
+                "v2AndAboveImplementationDll should not be empty"
+            );
 
             //
             // Get the full path to the v2Above dll
             //
             return Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.System),
-                v2AndAboveImplementationDll + ".dll");
-
+                v2AndAboveImplementationDll + ".dll"
+            );
         }
 
         //
         // Summary:
         // Return handle to the CardSpace implementation dll.
         // We will first check to see if a v2 (or above) redirection dll has been installed.
-        // If not we will check to see if the v1 infocardapi.dll is installed. 
+        // If not we will check to see if the v1 infocardapi.dll is installed.
         // If that's not found as well, an exception is thrown
         //
         private string GetCardSpaceImplementationDll()
@@ -293,20 +375,22 @@ namespace System.IdentityModel.Selectors
                 // Choose infocardapi.dll, if v2+ dll does not exist
                 //
                 implDllFullPath = Path.Combine(
-                                        Environment.GetFolderPath(Environment.SpecialFolder.System),
-                                        REDIRECT_DLL_CARDSPACE_V1 + ".dll");
+                    Environment.GetFolderPath(Environment.SpecialFolder.System),
+                    REDIRECT_DLL_CARDSPACE_V1 + ".dll"
+                );
 
                 if (!File.Exists(implDllFullPath))
                 {
                     //
                     // If this does not exist either, then even CardSpace v1 is NOT installed
-                    // on this machine. Note: Throwing an exception using IDT.ThrowHelperError 
+                    // on this machine. Note: Throwing an exception using IDT.ThrowHelperError
                     // does not log to event log unless it derives from InfoCardBaseException.
                     // This seems fine given that we don't want to be logging as "CardSpace X.0.0.0",
                     // rather we'll let the client application log to event log if desired.
                     //
                     throw IDT.ThrowHelperError(
-                        new CardSpaceException(SR.GetString(SR.ClientAPIServiceNotInstalledError)));
+                        new CardSpaceException(SR.GetString(SR.ClientAPIServiceNotInstalledError))
+                    );
                 }
             }
 
@@ -321,115 +405,122 @@ namespace System.IdentityModel.Selectors
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate System.Int32 CsV2GetToken(
-                                      int cPolicyChain,
-                                      SafeHandle pPolicyChain,
-                                      out SafeTokenHandle securityToken,
-                                      out InternalRefCountedHandle pCryptoHandle);
-
+            int cPolicyChain,
+            SafeHandle pPolicyChain,
+            out SafeTokenHandle securityToken,
+            out InternalRefCountedHandle pCryptoHandle
+        );
 
         internal delegate System.Int32 CsV2ImportInformationCard(
-             [MarshalAs(UnmanagedType.LPWStr)]
-             string nativeFileName);
+            [MarshalAs(UnmanagedType.LPWStr)] string nativeFileName
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate int CsV2Encrypt(
-                                       InternalRefCountedHandle nativeCryptoHandle,
-                                       bool fOAEP,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       int cbInData,
-                                       SafeHandle pInData,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       out int pcbOutData,
-                                       out GlobalAllocSafeHandle pOutData);
+            InternalRefCountedHandle nativeCryptoHandle,
+            bool fOAEP,
+            [MarshalAs(UnmanagedType.U4)] int cbInData,
+            SafeHandle pInData,
+            [MarshalAs(UnmanagedType.U4)] out int pcbOutData,
+            out GlobalAllocSafeHandle pOutData
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate int CsV2Decrypt(
-                                       InternalRefCountedHandle nativeCryptoHandle,
-                                       bool fOAEP,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       int cbInData,
-                                       SafeHandle pInData,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       out int pcbOutData,
-                                       out GlobalAllocSafeHandle pOutData);
+            InternalRefCountedHandle nativeCryptoHandle,
+            bool fOAEP,
+            [MarshalAs(UnmanagedType.U4)] int cbInData,
+            SafeHandle pInData,
+            [MarshalAs(UnmanagedType.U4)] out int pcbOutData,
+            out GlobalAllocSafeHandle pOutData
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate int CsV2SignHash(
-                                       InternalRefCountedHandle nativeCryptoHandle,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       int cbHash,
-                                       SafeHandle pInData,
-                                       SafeHandle pHashAlgOid,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       out int pcbSig,
-                                       out GlobalAllocSafeHandle pSig);
+            InternalRefCountedHandle nativeCryptoHandle,
+            [MarshalAs(UnmanagedType.U4)] int cbHash,
+            SafeHandle pInData,
+            SafeHandle pHashAlgOid,
+            [MarshalAs(UnmanagedType.U4)] out int pcbSig,
+            out GlobalAllocSafeHandle pSig
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate int CsV2VerifyHash(
-                                       InternalRefCountedHandle nativeCryptoHandle,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       int cbHash,
-                                       SafeHandle pInData,
-                                       SafeHandle pHashAlgOid,
-                                       [MarshalAs(UnmanagedType.U4)]
-                                       int pcbSig,
-                                       SafeHandle pSig,
-                                       out bool verified);
+            InternalRefCountedHandle nativeCryptoHandle,
+            [MarshalAs(UnmanagedType.U4)] int cbHash,
+            SafeHandle pInData,
+            SafeHandle pHashAlgOid,
+            [MarshalAs(UnmanagedType.U4)] int pcbSig,
+            SafeHandle pSig,
+            out bool verified
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
-        internal delegate int CsV2GenerateDerivedKey(InternalRefCountedHandle nativeCryptoHandle,
-                                                     int cbLabel,
-                                                     SafeHandle pLabel,
-                                                     int cbNonce,
-                                                     SafeHandle pNonce,
-                                                     int derivedKeyLength,
-                                                     int offset,
-                                                     [MarshalAs(UnmanagedType.LPWStr)]
-                                                     string derivationAlgUri,
-                                                     out int cbDerivedKey,
-                                                     out GlobalAllocSafeHandle pDerivedKey);
+        internal delegate int CsV2GenerateDerivedKey(
+            InternalRefCountedHandle nativeCryptoHandle,
+            int cbLabel,
+            SafeHandle pLabel,
+            int cbNonce,
+            SafeHandle pNonce,
+            int derivedKeyLength,
+            int offset,
+            [MarshalAs(UnmanagedType.LPWStr)] string derivationAlgUri,
+            out int cbDerivedKey,
+            out GlobalAllocSafeHandle pDerivedKey
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate int CsV2GetCryptoTransform(
-                                       InternalRefCountedHandle nativeCryptoHandle,
-                                       int mode,
-                                       int padding,
-                                       int feedbackSize,
-                                       int direction,
-                                       int cbIV,
-                                       SafeHandle pIV,
-                                       out InternalRefCountedHandle nativeTransformHandle);
+            InternalRefCountedHandle nativeCryptoHandle,
+            int mode,
+            int padding,
+            int feedbackSize,
+            int direction,
+            int cbIV,
+            SafeHandle pIV,
+            out InternalRefCountedHandle nativeTransformHandle
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
-        internal delegate int CsV2TransformBlock(InternalRefCountedHandle nativeCryptoHandle,
-                                                 int cbInData,
-                                                 SafeHandle pInData,
-                                                 out int cbOutData,
-                                                 out GlobalAllocSafeHandle pOutData);
+        internal delegate int CsV2TransformBlock(
+            InternalRefCountedHandle nativeCryptoHandle,
+            int cbInData,
+            SafeHandle pInData,
+            out int cbOutData,
+            out GlobalAllocSafeHandle pOutData
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
-        internal delegate int CsV2TransformFinalBlock(InternalRefCountedHandle nativeCryptoHandle,
-                                                 int cbInData,
-                                                 SafeHandle pInData,
-                                                 out int cbOutData,
-                                                 out GlobalAllocSafeHandle pOutData);
+        internal delegate int CsV2TransformFinalBlock(
+            InternalRefCountedHandle nativeCryptoHandle,
+            int cbInData,
+            SafeHandle pInData,
+            out int cbOutData,
+            out GlobalAllocSafeHandle pOutData
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
         internal delegate int CsV2GetKeyedHash(
-                                       InternalRefCountedHandle nativeCryptoHandle,
-                                       out InternalRefCountedHandle nativeHashHandle);
+            InternalRefCountedHandle nativeCryptoHandle,
+            out InternalRefCountedHandle nativeHashHandle
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
-        internal delegate int CsV2HashCore(InternalRefCountedHandle nativeCryptoHandle,
-                                          int cbInData,
-                                          SafeHandle pInData);
+        internal delegate int CsV2HashCore(
+            InternalRefCountedHandle nativeCryptoHandle,
+            int cbInData,
+            SafeHandle pInData
+        );
 
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.MayFail )]
-        internal delegate int CsV2HashFinal(InternalRefCountedHandle nativeCryptoHandle,
-                                            int cbInData,
-                                            SafeHandle pInData,
-                                            out int cbOutData,
-                                            out GlobalAllocSafeHandle pOutData);
+        internal delegate int CsV2HashFinal(
+            InternalRefCountedHandle nativeCryptoHandle,
+            int cbInData,
+            SafeHandle pInData,
+            out int cbOutData,
+            out GlobalAllocSafeHandle pOutData
+        );
 
         [SuppressUnmanagedCodeSecurity]
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.Success )]
@@ -438,6 +529,5 @@ namespace System.IdentityModel.Selectors
         [SuppressUnmanagedCodeSecurity]
         //[ReliabilityContract( Consistency.WillNotCorruptState, Cer.Success )]
         internal delegate System.Int32 CsV2FreeToken([In] IntPtr token);
-
     }
 }

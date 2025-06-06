@@ -4,10 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    interface IServerConfig2 {
+namespace System.Web.Configuration
+{
+    interface IServerConfig2
+    {
         bool IsWithinApp(string virtualPath);
     }
 }
-

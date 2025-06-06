@@ -20,28 +20,30 @@ public class HealthCheckEndpointRouteBuilderExtensionsTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        endpoints.MapHealthChecks("/healthz");
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapHealthChecks("/healthz");
+                        });
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddRouting();
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddRouting();
-                });
-            }).Build();
+            })
+            .Build();
 
         var ex = Assert.Throws<InvalidOperationException>(() => host.Start());
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddHealthChecks' inside the call to 'ConfigureServices(...)' " +
-            "in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddHealthChecks' inside the call to 'ConfigureServices(...)' "
+                + "in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -52,21 +54,22 @@ public class HealthCheckEndpointRouteBuilderExtensionsTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        endpoints.MapHealthChecks("/healthz");
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
+                        {
+                            endpoints.MapHealthChecks("/healthz");
+                        });
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddRouting();
+                        services.AddHealthChecks();
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddRouting();
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -90,28 +93,32 @@ public class HealthCheckEndpointRouteBuilderExtensionsTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseRouting();
-                    app.UseEndpoints(endpoints =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        endpoints.MapHealthChecks("/healthz", new HealthCheckOptions
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints =>
                         {
-                            ResponseWriter = async (context, report) =>
-                            {
-                                context.Response.ContentType = "text/plain";
-                                await context.Response.WriteAsync("Custom!");
-                            }
+                            endpoints.MapHealthChecks(
+                                "/healthz",
+                                new HealthCheckOptions
+                                {
+                                    ResponseWriter = async (context, report) =>
+                                    {
+                                        context.Response.ContentType = "text/plain";
+                                        await context.Response.WriteAsync("Custom!");
+                                    },
+                                }
+                            );
                         });
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddRouting();
+                        services.AddHealthChecks();
                     });
-                })
-                .ConfigureServices(services =>
-                {
-                    services.AddRouting();
-                    services.AddHealthChecks();
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 

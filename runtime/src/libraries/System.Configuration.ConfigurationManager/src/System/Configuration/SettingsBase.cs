@@ -53,17 +53,23 @@ namespace System.Configuration
         private object GetPropertyValueByName(string propertyName)
         {
             if (Properties == null || _propertyValues == null || Properties.Count == 0)
-                throw new SettingsPropertyNotFoundException(SR.Format(SR.SettingsPropertyNotFound, propertyName));
+                throw new SettingsPropertyNotFoundException(
+                    SR.Format(SR.SettingsPropertyNotFound, propertyName)
+                );
             SettingsProperty pp = Properties[propertyName];
             if (pp == null)
-                throw new SettingsPropertyNotFoundException(SR.Format(SR.SettingsPropertyNotFound, propertyName));
+                throw new SettingsPropertyNotFoundException(
+                    SR.Format(SR.SettingsPropertyNotFound, propertyName)
+                );
             SettingsPropertyValue p = _propertyValues[propertyName];
             if (p == null)
             {
                 GetPropertiesFromProvider(pp.Provider);
                 p = _propertyValues[propertyName];
                 if (p == null)
-                    throw new SettingsPropertyNotFoundException(SR.Format(SR.SettingsPropertyNotFound, propertyName));
+                    throw new SettingsPropertyNotFoundException(
+                        SR.Format(SR.SettingsPropertyNotFound, propertyName)
+                    );
             }
             return p.PropertyValue;
         }
@@ -71,17 +77,25 @@ namespace System.Configuration
         private void SetPropertyValueByName(string propertyName, object propertyValue)
         {
             if (Properties == null || _propertyValues == null || Properties.Count == 0)
-                throw new SettingsPropertyNotFoundException(SR.Format(SR.SettingsPropertyNotFound, propertyName));
+                throw new SettingsPropertyNotFoundException(
+                    SR.Format(SR.SettingsPropertyNotFound, propertyName)
+                );
 
             SettingsProperty pp = Properties[propertyName];
             if (pp == null)
-                throw new SettingsPropertyNotFoundException(SR.Format(SR.SettingsPropertyNotFound, propertyName));
+                throw new SettingsPropertyNotFoundException(
+                    SR.Format(SR.SettingsPropertyNotFound, propertyName)
+                );
 
             if (pp.IsReadOnly)
-                throw new SettingsPropertyIsReadOnlyException(SR.Format(SR.SettingsPropertyReadOnly, propertyName));
+                throw new SettingsPropertyIsReadOnlyException(
+                    SR.Format(SR.SettingsPropertyReadOnly, propertyName)
+                );
 
             if (propertyValue != null && !pp.PropertyType.IsInstanceOfType(propertyValue))
-                throw new SettingsPropertyWrongTypeException(SR.Format(SR.SettingsPropertyWrongType, propertyName));
+                throw new SettingsPropertyWrongTypeException(
+                    SR.Format(SR.SettingsPropertyWrongType, propertyName)
+                );
 
             SettingsPropertyValue p = _propertyValues[propertyName];
             if (p == null)
@@ -89,16 +103,19 @@ namespace System.Configuration
                 GetPropertiesFromProvider(pp.Provider);
                 p = _propertyValues[propertyName];
                 if (p == null)
-                    throw new SettingsPropertyNotFoundException(SR.Format(SR.SettingsPropertyNotFound, propertyName));
+                    throw new SettingsPropertyNotFoundException(
+                        SR.Format(SR.SettingsPropertyNotFound, propertyName)
+                    );
             }
 
             p.PropertyValue = propertyValue;
         }
 
         public void Initialize(
-                SettingsContext context,
-                SettingsPropertyCollection properties,
-                SettingsProviderCollection providers)
+            SettingsContext context,
+            SettingsPropertyCollection properties,
+            SettingsProviderCollection providers
+        )
         {
             _context = context;
             _properties = properties;
@@ -144,10 +161,22 @@ namespace System.Configuration
                 pp.IsDirty = false;
         }
 
-        public virtual SettingsPropertyCollection Properties { get { return _properties; } }
-        public virtual SettingsProviderCollection Providers { get { return _providers; } }
-        public virtual SettingsPropertyValueCollection PropertyValues { get { return _propertyValues; } }
-        public virtual SettingsContext Context { get { return _context; } }
+        public virtual SettingsPropertyCollection Properties
+        {
+            get { return _properties; }
+        }
+        public virtual SettingsProviderCollection Providers
+        {
+            get { return _providers; }
+        }
+        public virtual SettingsPropertyValueCollection PropertyValues
+        {
+            get { return _propertyValues; }
+        }
+        public virtual SettingsContext Context
+        {
+            get { return _context; }
+        }
 
         private void GetPropertiesFromProvider(SettingsProvider provider)
         {
@@ -178,6 +207,9 @@ namespace System.Configuration
         }
 
         [Browsable(false)]
-        public bool IsSynchronized { get { return _isSynchronized; } }
+        public bool IsSynchronized
+        {
+            get { return _isSynchronized; }
+        }
     }
 }

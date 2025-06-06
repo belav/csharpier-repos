@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimeTextMatch.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,117 +31,130 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	public sealed class MimeTextMatch {
+namespace System.Web.Services.Description
+{
+    public sealed class MimeTextMatch
+    {
+        #region Fields
 
-		#region Fields
+        int capture;
+        int group;
+        bool ignoreCase;
+        MimeTextMatchCollection matches;
+        string name;
+        string pattern;
+        int repeats;
+        string type;
 
-		int capture;
-		int group;
-		bool ignoreCase;
-		MimeTextMatchCollection matches;
-		string name;
-		string pattern;
-		int repeats;
-		string type;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
-		
-		public MimeTextMatch ()
-		{
-			capture = 0;
-			group = 1;
-			ignoreCase = false;
-			matches = null;
-			name = String.Empty;
-			pattern = String.Empty;
-			repeats = 1;
-			type = String.Empty;
-		}
-		
-		#endregion // Constructors
+        public MimeTextMatch()
+        {
+            capture = 0;
+            group = 1;
+            ignoreCase = false;
+            matches = null;
+            name = String.Empty;
+            pattern = String.Empty;
+            repeats = 1;
+            type = String.Empty;
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[DefaultValue (0)]
-		[XmlAttribute ("capture")]
-		public int Capture {
-			get { return capture; }
-			set {
-				if (value < 0)
-					throw new ArgumentException ();
-				capture = value; 
-			}
-		}
-	
-		[DefaultValue (1)]	
-		[XmlAttribute ("group")]
-		public int Group {
-			get { return group; }
-			set {
-				if (value < 0)
-					throw new ArgumentException ();
-				group = value; 
-			}
-		}
+        #region Properties
 
-		[XmlAttribute ("ignoreCase")]
-		public bool IgnoreCase {
-			get { return ignoreCase; }
-			set { ignoreCase = value; }
-		}
+        [DefaultValue(0)]
+        [XmlAttribute("capture")]
+        public int Capture
+        {
+            get { return capture; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException();
+                capture = value;
+            }
+        }
 
-		[XmlElement ("match")]
-		public MimeTextMatchCollection Matches {
-			get { return matches; }
-		}
+        [DefaultValue(1)]
+        [XmlAttribute("group")]
+        public int Group
+        {
+            get { return group; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException();
+                group = value;
+            }
+        }
 
-		[XmlAttribute ("name")]
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
+        [XmlAttribute("ignoreCase")]
+        public bool IgnoreCase
+        {
+            get { return ignoreCase; }
+            set { ignoreCase = value; }
+        }
 
-		[XmlAttribute ("pattern")]
-		public string Pattern {
-			get { return pattern; }
-			set { pattern = value; }
-		}
+        [XmlElement("match")]
+        public MimeTextMatchCollection Matches
+        {
+            get { return matches; }
+        }
 
-		[XmlIgnore]
-		public int Repeats {
-			get { return repeats; }
-			set {
-				if (value < 0)
-					throw new ArgumentException ();
-				repeats = value; 
-			}
-		}
+        [XmlAttribute("name")]
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
-		[DefaultValue ("1")]
-		[XmlAttribute ("repeats")]
-		public string RepeatsString {
-			get { return Repeats.ToString (); }
-			set { Repeats = Int32.Parse (value); }
-		}
+        [XmlAttribute("pattern")]
+        public string Pattern
+        {
+            get { return pattern; }
+            set { pattern = value; }
+        }
 
-		[XmlAttribute ("type")]
-		public string Type {
-			get { return type; }
-			set { type = value; }
-		}
+        [XmlIgnore]
+        public int Repeats
+        {
+            get { return repeats; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException();
+                repeats = value;
+            }
+        }
 
-		#endregion // Properties
+        [DefaultValue("1")]
+        [XmlAttribute("repeats")]
+        public string RepeatsString
+        {
+            get { return Repeats.ToString(); }
+            set { Repeats = Int32.Parse(value); }
+        }
 
-		#region Methods
+        [XmlAttribute("type")]
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
 
-		internal void SetParent (MimeTextMatchCollection matches) 
-		{
-			this.matches = matches;
-		}
+        #endregion // Properties
 
-		#endregion // Methods
-	}
+        #region Methods
+
+        internal void SetParent(MimeTextMatchCollection matches)
+        {
+            this.matches = matches;
+        }
+
+        #endregion // Methods
+    }
 }
