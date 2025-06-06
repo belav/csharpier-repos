@@ -2163,8 +2163,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     RecursivePatternSyntax recursivePattern => GetTypesForRecursivePattern(
                         recursivePattern
                     ),
-                    _
-                        when SemanticModel.GetOperation(pattern, CancellationToken)
+                    _ when SemanticModel.GetOperation(pattern, CancellationToken)
                             is IPatternOperation patternOperation =>
                     // In cases like this: c is Color.Green or $$
                     // "pattern" is a DeclarationPatternSyntax and Color.Green is assumed to be the narrowed type.
