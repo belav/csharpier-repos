@@ -14,18 +14,25 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         internal sealed class FindLiteralsServerCallback(
             Solution solution,
-            IStreamingFindLiteralReferencesProgress progress)
+            IStreamingFindLiteralReferencesProgress progress
+        )
         {
-            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken)
-                => progress.ProgressTracker.AddItemsAsync(count, cancellationToken);
+            public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken) =>
+                progress.ProgressTracker.AddItemsAsync(count, cancellationToken);
 
-            public ValueTask ItemsCompletedAsync(int count, CancellationToken cancellationToken)
-                => progress.ProgressTracker.ItemsCompletedAsync(count, cancellationToken);
+            public ValueTask ItemsCompletedAsync(int count, CancellationToken cancellationToken) =>
+                progress.ProgressTracker.ItemsCompletedAsync(count, cancellationToken);
 
-            public async ValueTask OnLiteralReferenceFoundAsync(DocumentId documentId, TextSpan span, CancellationToken cancellationToken)
+            public async ValueTask OnLiteralReferenceFoundAsync(
+                DocumentId documentId,
+                TextSpan span,
+                CancellationToken cancellationToken
+            )
             {
                 var document = solution.GetRequiredDocument(documentId);
-                await progress.OnReferenceFoundAsync(document, span, cancellationToken).ConfigureAwait(false);
+                await progress
+                    .OnReferenceFoundAsync(document, span, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

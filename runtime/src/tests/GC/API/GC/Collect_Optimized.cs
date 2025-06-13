@@ -2,14 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
-using System.Runtime;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using System.Runtime;
 
 public class OptimizedCollect
 {
-
     public static void Usage()
     {
         Console.WriteLine("Usage:");
@@ -20,7 +19,6 @@ public class OptimizedCollect
     protected int collectionCount;
     protected int newCollectionCount;
 
-
     public void PreTest()
     {
         b = new List<byte[]>();
@@ -29,7 +27,6 @@ public class OptimizedCollect
 
     public void RunTest(int gen)
     {
-
         newCollectionCount = collectionCount = GC.CollectionCount(gen);
         while (collectionCount == newCollectionCount)
         {
@@ -37,21 +34,18 @@ public class OptimizedCollect
             GC.Collect(gen, GCCollectionMode.Optimized);
             newCollectionCount = GC.CollectionCount(gen);
         }
-
     }
 
-
-    public static int Main(string[] args )
+    public static int Main(string[] args)
     {
-
         int gen = -1;
-        if ( (args.Length!=1) || (!Int32.TryParse(args[0], out gen)) )
+        if ((args.Length != 1) || (!Int32.TryParse(args[0], out gen)))
         {
             Usage();
             return 0;
         }
 
-        if ( (gen < 0) || (gen>2) )
+        if ((gen < 0) || (gen > 2))
         {
             Usage();
             return 0;
@@ -63,6 +57,4 @@ public class OptimizedCollect
 
         return 100;
     }
-
-
 }

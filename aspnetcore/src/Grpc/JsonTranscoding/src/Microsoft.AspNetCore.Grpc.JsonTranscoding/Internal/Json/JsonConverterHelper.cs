@@ -20,7 +20,10 @@ internal static class JsonConverterHelper
 {
     internal const int WrapperValueFieldNumber = Int32Value.ValueFieldNumber;
 
-    internal static readonly Dictionary<string, Type> WellKnownTypeNames = new Dictionary<string, Type>
+    internal static readonly Dictionary<string, Type> WellKnownTypeNames = new Dictionary<
+        string,
+        Type
+    >
     {
         [Any.Descriptor.FullName] = typeof(AnyConverter<>),
         [Duration.Descriptor.FullName] = typeof(DurationConverter<>),
@@ -31,7 +34,10 @@ internal static class JsonConverterHelper
         [Value.Descriptor.FullName] = typeof(ValueConverter<>),
     };
 
-    internal static JsonSerializerOptions CreateSerializerOptions(JsonContext context, bool isStreamingOptions = false)
+    internal static JsonSerializerOptions CreateSerializerOptions(
+        JsonContext context,
+        bool isStreamingOptions = false
+    )
     {
         // Streaming is line delimited between messages. That means JSON can't be indented as it adds new lines.
         // For streaming to work, indenting must be disabled when streaming.
@@ -39,14 +45,15 @@ internal static class JsonConverterHelper
 
         var typeInfoResolver = JsonTypeInfoResolver.Combine(
             new MessageTypeInfoResolver(context),
-            new DefaultJsonTypeInfoResolver());
+            new DefaultJsonTypeInfoResolver()
+        );
 
         var options = new JsonSerializerOptions
         {
             WriteIndented = writeIndented,
             NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            TypeInfoResolver = typeInfoResolver
+            TypeInfoResolver = typeInfoResolver,
         };
         options.Converters.Add(new NullValueConverter());
         options.Converters.Add(new ByteStringConverter());
@@ -68,7 +75,10 @@ internal static class JsonConverterHelper
             var keyField = mapFields[0];
             var valueField = mapFields[1];
 
-            return typeof(MapField<,>).MakeGenericType(GetFieldTypeCore(keyField), GetFieldTypeCore(valueField));
+            return typeof(MapField<,>).MakeGenericType(
+                GetFieldTypeCore(keyField),
+                GetFieldTypeCore(valueField)
+            );
         }
         else if (descriptor.IsRepeated)
         {
@@ -100,7 +110,9 @@ internal static class JsonConverterHelper
             case FieldType.SFixed32:
                 return nullableType ? typeof(int?) : typeof(int);
             case FieldType.Enum:
-                return nullableType ? typeof(Nullable<>).MakeGenericType(descriptor.EnumType.ClrType) : descriptor.EnumType.ClrType;
+                return nullableType
+                    ? typeof(Nullable<>).MakeGenericType(descriptor.EnumType.ClrType)
+                    : descriptor.EnumType.ClrType;
             case FieldType.Fixed32:
             case FieldType.UInt32:
                 return nullableType ? typeof(uint?) : typeof(uint);
@@ -126,7 +138,12 @@ internal static class JsonConverterHelper
         }
     }
 
-    public static void PopulateMap(ref Utf8JsonReader reader, JsonSerializerOptions options, IMessage message, FieldDescriptor fieldDescriptor)
+    public static void PopulateMap(
+        ref Utf8JsonReader reader,
+        JsonSerializerOptions options,
+        IMessage message,
+        FieldDescriptor fieldDescriptor
+    )
     {
         var mapFields = fieldDescriptor.MessageType.Fields.InFieldNumberOrder();
         var mapKey = mapFields[0];
@@ -136,7 +153,8 @@ internal static class JsonConverterHelper
         var valueType = GetFieldType(mapValue);
 
         var repeatedFieldType = typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
-        var newValues = (IDictionary)JsonSerializer.Deserialize(ref reader, repeatedFieldType, options)!;
+        var newValues = (IDictionary)
+            JsonSerializer.Deserialize(ref reader, repeatedFieldType, options)!;
 
         var existingValue = (IDictionary)fieldDescriptor.Accessor.GetValue(message);
         foreach (DictionaryEntry item in newValues)
@@ -145,7 +163,12 @@ internal static class JsonConverterHelper
         }
     }
 
-    public static void PopulateList(ref Utf8JsonReader reader, JsonSerializerOptions options, IMessage message, FieldDescriptor fieldDescriptor)
+    public static void PopulateList(
+        ref Utf8JsonReader reader,
+        JsonSerializerOptions options,
+        IMessage message,
+        FieldDescriptor fieldDescriptor
+    )
     {
         var fieldType = GetFieldType(fieldDescriptor);
         var itemType = fieldType.GetGenericArguments()[0];
@@ -163,13 +186,18 @@ internal static class JsonConverterHelper
     /// Determines whether or not a field value should be serialized according to the field,
     /// its value in the message, and the settings of this formatter.
     /// </summary>
-    public static bool ShouldFormatFieldValue(IMessage message, FieldDescriptor field, object? value, bool formatDefaultValues) =>
+    public static bool ShouldFormatFieldValue(
+        IMessage message,
+        FieldDescriptor field,
+        object? value,
+        bool formatDefaultValues
+    ) =>
         field.HasPresence
-        // Fields that support presence *just* use that
-        ? field.Accessor.HasValue(message)
-        // Otherwise, format if either we've been asked to format default values, or if it's
-        // not a default value anyway.
-        : formatDefaultValues || !IsDefaultValue(field, value);
+            // Fields that support presence *just* use that
+            ? field.Accessor.HasValue(message)
+            // Otherwise, format if either we've been asked to format default values, or if it's
+            // not a default value anyway.
+            : formatDefaultValues || !IsDefaultValue(field, value);
 
     private static bool IsDefaultValue(FieldDescriptor descriptor, object? value)
     {

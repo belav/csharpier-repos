@@ -9,5 +9,5 @@ public enum TestPlatform
     None = 0,
     Windows = 1 << 0,
     Linux = 1 << 1,
-    Mac = 1 << 2
+    Mac = 1 << 2,
 }

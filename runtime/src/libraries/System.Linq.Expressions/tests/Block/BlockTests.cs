@@ -19,81 +19,128 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static IEnumerable<KeyValuePair<Expression, object>> BlockClosureVariableInitialization()
+        private static IEnumerable<
+            KeyValuePair<Expression, object>
+        > BlockClosureVariableInitialization()
         {
             {
                 ParameterExpression p = Expression.Parameter(typeof(int));
                 ParameterExpression q = Expression.Parameter(typeof(Func<int>));
                 Expression<Func<int>> l = Expression.Lambda<Func<int>>(p);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(int));
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(int)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(int));
                 ParameterExpression q = Expression.Parameter(typeof(Action<int>));
                 ParameterExpression x = Expression.Parameter(typeof(int));
-                Expression<Action<int>> l = Expression.Lambda<Action<int>>(Expression.Assign(p, x), x);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(int));
+                Expression<Action<int>> l = Expression.Lambda<Action<int>>(
+                    Expression.Assign(p, x),
+                    x
+                );
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(int)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(TimeSpan));
                 ParameterExpression q = Expression.Parameter(typeof(Func<TimeSpan>));
                 Expression<Func<TimeSpan>> l = Expression.Lambda<Func<TimeSpan>>(p);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(TimeSpan));
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(TimeSpan)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(TimeSpan));
                 ParameterExpression q = Expression.Parameter(typeof(Action<TimeSpan>));
                 ParameterExpression x = Expression.Parameter(typeof(TimeSpan));
-                Expression<Action<TimeSpan>> l = Expression.Lambda<Action<TimeSpan>>(Expression.Assign(p, x), x);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(TimeSpan));
+                Expression<Action<TimeSpan>> l = Expression.Lambda<Action<TimeSpan>>(
+                    Expression.Assign(p, x),
+                    x
+                );
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(TimeSpan)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(string));
                 ParameterExpression q = Expression.Parameter(typeof(Func<string>));
                 Expression<Func<string>> l = Expression.Lambda<Func<string>>(p);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(string));
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(string)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(string));
                 ParameterExpression q = Expression.Parameter(typeof(Action<string>));
                 ParameterExpression x = Expression.Parameter(typeof(string));
-                Expression<Action<string>> l = Expression.Lambda<Action<string>>(Expression.Assign(p, x), x);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(string));
+                Expression<Action<string>> l = Expression.Lambda<Action<string>>(
+                    Expression.Assign(p, x),
+                    x
+                );
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(string)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(int?));
                 ParameterExpression q = Expression.Parameter(typeof(Func<int?>));
                 Expression<Func<int?>> l = Expression.Lambda<Func<int?>>(p);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(int?));
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(int?)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(int?));
                 ParameterExpression q = Expression.Parameter(typeof(Action<int?>));
                 ParameterExpression x = Expression.Parameter(typeof(int?));
-                Expression<Action<int?>> l = Expression.Lambda<Action<int?>>(Expression.Assign(p, x), x);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(int?));
+                Expression<Action<int?>> l = Expression.Lambda<Action<int?>>(
+                    Expression.Assign(p, x),
+                    x
+                );
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(int?)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(TimeSpan?));
                 ParameterExpression q = Expression.Parameter(typeof(Func<TimeSpan?>));
                 Expression<Func<TimeSpan?>> l = Expression.Lambda<Func<TimeSpan?>>(p);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(TimeSpan?));
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(TimeSpan?)
+                );
             }
 
             {
                 ParameterExpression p = Expression.Parameter(typeof(TimeSpan?));
                 ParameterExpression q = Expression.Parameter(typeof(Action<TimeSpan?>));
                 ParameterExpression x = Expression.Parameter(typeof(TimeSpan?));
-                Expression<Action<TimeSpan?>> l = Expression.Lambda<Action<TimeSpan?>>(Expression.Assign(p, x), x);
-                yield return new KeyValuePair<Expression, object>(Expression.Block(new[] { p, q }, Expression.Assign(q, l), p), default(TimeSpan?));
+                Expression<Action<TimeSpan?>> l = Expression.Lambda<Action<TimeSpan?>>(
+                    Expression.Assign(p, x),
+                    x
+                );
+                yield return new KeyValuePair<Expression, object>(
+                    Expression.Block(new[] { p, q }, Expression.Assign(q, l), p),
+                    default(TimeSpan?)
+                );
             }
         }
 
@@ -101,11 +148,15 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static void VerifyBlockClosureVariableInitialization(Expression e, object o, bool useInterpreter)
+        private static void VerifyBlockClosureVariableInitialization(
+            Expression e,
+            object o,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object>> f =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(e, typeof(object)));
+            Expression<Func<object>> f = Expression.Lambda<Func<object>>(
+                Expression.Convert(e, typeof(object))
+            );
 
             Func<object> c = f.Compile(useInterpreter);
             Assert.Equal(o, c());
@@ -117,7 +168,10 @@ namespace System.Linq.Expressions.Tests
         {
             protected override Expression VisitParameter(ParameterExpression node)
             {
-                return Expression.Parameter(node.IsByRef ? node.Type.MakeByRefType() : node.Type, node.Name);
+                return Expression.Parameter(
+                    node.IsByRef ? node.Type.MakeByRefType() : node.Type,
+                    node.Name
+                );
             }
         }
 
@@ -127,7 +181,7 @@ namespace System.Linq.Expressions.Tests
             BlockExpression block = Expression.Block(
                 new[] { Expression.Parameter(typeof(int)), Expression.Parameter(typeof(string)) },
                 Expression.Empty()
-                );
+            );
             Assert.NotSame(block, new ParameterChangingVisitor().Visit(block));
         }
 
@@ -138,7 +192,7 @@ namespace System.Linq.Expressions.Tests
                 new[] { Expression.Parameter(typeof(int)), Expression.Parameter(typeof(string)) },
                 Expression.Empty(),
                 Expression.Empty()
-                );
+            );
             Assert.NotSame(block, new ParameterChangingVisitor().Visit(block));
         }
 
@@ -149,7 +203,7 @@ namespace System.Linq.Expressions.Tests
                 typeof(object),
                 new[] { Expression.Parameter(typeof(int)), Expression.Parameter(typeof(string)) },
                 Expression.Constant("")
-                );
+            );
             Assert.NotSame(block, new ParameterChangingVisitor().Visit(block));
         }
 
@@ -185,7 +239,10 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void EmptyScope(bool useInterpreter)
         {
-            BlockExpression scope = Expression.Block(new[] { Expression.Parameter(typeof(int), "x") }, new Expression[0]);
+            BlockExpression scope = Expression.Block(
+                new[] { Expression.Parameter(typeof(int), "x") },
+                new Expression[0]
+            );
             Assert.Equal(typeof(void), scope.Type);
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => scope.Result);
             Action nop = Expression.Lambda<Action>(scope).Compile(useInterpreter);
@@ -196,7 +253,11 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void EmptyScopeExplicitType(bool useInterpreter)
         {
-            BlockExpression scope = Expression.Block(typeof(void), new[] { Expression.Parameter(typeof(int), "x") }, new Expression[0]);
+            BlockExpression scope = Expression.Block(
+                typeof(void),
+                new[] { Expression.Parameter(typeof(int), "x") },
+                new Expression[0]
+            );
             Assert.Equal(typeof(void), scope.Type);
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => scope.Result);
             Action nop = Expression.Lambda<Action>(scope).Compile(useInterpreter);
@@ -206,10 +267,15 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void EmptyScopeExplicitWrongType()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.Block(
-                typeof(int),
-                new[] { Expression.Parameter(typeof(int), "x") },
-                new Expression[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    Expression.Block(
+                        typeof(int),
+                        new[] { Expression.Parameter(typeof(int), "x") },
+                        new Expression[0]
+                    )
+            );
         }
 
         [Fact]
@@ -218,10 +284,20 @@ namespace System.Linq.Expressions.Tests
             BlockExpression e1 = Expression.Block(Expression.Empty());
             Assert.Equal("{ ... }", e1.ToString());
 
-            BlockExpression e2 = Expression.Block(new[] { Expression.Parameter(typeof(int), "x") }, Expression.Empty());
+            BlockExpression e2 = Expression.Block(
+                new[] { Expression.Parameter(typeof(int), "x") },
+                Expression.Empty()
+            );
             Assert.Equal("{var x; ... }", e2.ToString());
 
-            BlockExpression e3 = Expression.Block(new[] { Expression.Parameter(typeof(int), "x"), Expression.Parameter(typeof(int), "y") }, Expression.Empty());
+            BlockExpression e3 = Expression.Block(
+                new[]
+                {
+                    Expression.Parameter(typeof(int), "x"),
+                    Expression.Parameter(typeof(int), "y"),
+                },
+                Expression.Empty()
+            );
             Assert.Equal("{var x;var y; ... }", e3.ToString());
         }
 
@@ -230,24 +306,27 @@ namespace System.Linq.Expressions.Tests
         public static void InsignificantBlock()
         {
             Expression<Action> nop = Expression.Lambda<Action>(
-                    Expression.Block(
-                        Expression.Block(Expression.Empty(), Expression.Default(typeof(void))),
-                        Expression.Block(Expression.Empty(), Expression.Default(typeof(void))),
-                        Expression.Block(Expression.Empty(), Expression.Default(typeof(void))),
-                        Expression.Block(Expression.Empty(), Expression.Default(typeof(void)))));
+                Expression.Block(
+                    Expression.Block(Expression.Empty(), Expression.Default(typeof(void))),
+                    Expression.Block(Expression.Empty(), Expression.Default(typeof(void))),
+                    Expression.Block(Expression.Empty(), Expression.Default(typeof(void))),
+                    Expression.Block(Expression.Empty(), Expression.Default(typeof(void)))
+                )
+            );
 
             nop.Verify(
-@".method void ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure)
+                @".method void ::lambda_method(class [System.Linq.Expressions]System.Runtime.CompilerServices.Closure)
 {
   .maxstack 0
   IL_0000: ret
 }",
-@"object lambda_method(object[])
+                @"object lambda_method(object[])
 {
   .locals 0
   .maxstack 0
   .maxcontinuation 0
-}");
+}"
+            );
         }
 
         [Theory]
@@ -261,13 +340,25 @@ namespace System.Linq.Expressions.Tests
             //         return p.Value;
             //     };
             const int value = 42;
-            ParameterExpression p = Expression.Variable(typeof(ValueTypeWithParameterlessConstructorThatThrows));
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Block(
-                        new[] { p },
-                        Expression.Assign(p, Expression.Constant(new ValueTypeWithParameterlessConstructorThatThrows(value), typeof(ValueTypeWithParameterlessConstructorThatThrows))),
-                        Expression.Field(p, typeof(ValueTypeWithParameterlessConstructorThatThrows).GetField("Value"))));
+            ParameterExpression p = Expression.Variable(
+                typeof(ValueTypeWithParameterlessConstructorThatThrows)
+            );
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Block(
+                    new[] { p },
+                    Expression.Assign(
+                        p,
+                        Expression.Constant(
+                            new ValueTypeWithParameterlessConstructorThatThrows(value),
+                            typeof(ValueTypeWithParameterlessConstructorThatThrows)
+                        )
+                    ),
+                    Expression.Field(
+                        p,
+                        typeof(ValueTypeWithParameterlessConstructorThatThrows).GetField("Value")
+                    )
+                )
+            );
 
             Func<object> f = e.Compile(useInterpreter);
             Assert.Equal(value, f());
@@ -284,17 +375,36 @@ namespace System.Linq.Expressions.Tests
             //         return p;
             //     };
             const int value = 42;
-            ParameterExpression p = Expression.Variable(typeof(ValueTypeWithParameterlessConstructorThatThrows?));
+            ParameterExpression p = Expression.Variable(
+                typeof(ValueTypeWithParameterlessConstructorThatThrows?)
+            );
             Expression<Func<ValueTypeWithParameterlessConstructorThatThrows?>> e =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows?>>(
                     Expression.Block(
                         new[] { p },
-                        Expression.Assign(p,
+                        Expression.Assign(
+                            p,
                             Expression.Condition(
-                                Expression.Property(p, typeof(ValueTypeWithParameterlessConstructorThatThrows?).GetProperty("HasValue")),
-                                Expression.Constant((ValueTypeWithParameterlessConstructorThatThrows?)new ValueTypeWithParameterlessConstructorThatThrows(value), typeof(ValueTypeWithParameterlessConstructorThatThrows?)),
-                                Expression.Constant(null, typeof(ValueTypeWithParameterlessConstructorThatThrows?)))),
-                        p));
+                                Expression.Property(
+                                    p,
+                                    typeof(ValueTypeWithParameterlessConstructorThatThrows?).GetProperty(
+                                        "HasValue"
+                                    )
+                                ),
+                                Expression.Constant(
+                                    (ValueTypeWithParameterlessConstructorThatThrows?)
+                                        new ValueTypeWithParameterlessConstructorThatThrows(value),
+                                    typeof(ValueTypeWithParameterlessConstructorThatThrows?)
+                                ),
+                                Expression.Constant(
+                                    null,
+                                    typeof(ValueTypeWithParameterlessConstructorThatThrows?)
+                                )
+                            )
+                        ),
+                        p
+                    )
+                );
 
             Func<ValueTypeWithParameterlessConstructorThatThrows?> f = e.Compile(useInterpreter);
             Assert.Null(f());
@@ -312,15 +422,32 @@ namespace System.Linq.Expressions.Tests
             //         return q().Value;
             //     };
             const int value = 42;
-            ParameterExpression p = Expression.Parameter(typeof(ValueTypeWithParameterlessConstructorThatThrows));
-            ParameterExpression q = Expression.Parameter(typeof(Func<ValueTypeWithParameterlessConstructorThatThrows>));
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Block(
-                        new[] { p, q },
-                        Expression.Assign(q, Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows>>(p)),
-                        Expression.Assign(p, Expression.Constant(new ValueTypeWithParameterlessConstructorThatThrows(value), typeof(ValueTypeWithParameterlessConstructorThatThrows))),
-                        Expression.Field(Expression.Invoke(q), typeof(ValueTypeWithParameterlessConstructorThatThrows).GetField("Value"))));
+            ParameterExpression p = Expression.Parameter(
+                typeof(ValueTypeWithParameterlessConstructorThatThrows)
+            );
+            ParameterExpression q = Expression.Parameter(
+                typeof(Func<ValueTypeWithParameterlessConstructorThatThrows>)
+            );
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Block(
+                    new[] { p, q },
+                    Expression.Assign(
+                        q,
+                        Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows>>(p)
+                    ),
+                    Expression.Assign(
+                        p,
+                        Expression.Constant(
+                            new ValueTypeWithParameterlessConstructorThatThrows(value),
+                            typeof(ValueTypeWithParameterlessConstructorThatThrows)
+                        )
+                    ),
+                    Expression.Field(
+                        Expression.Invoke(q),
+                        typeof(ValueTypeWithParameterlessConstructorThatThrows).GetField("Value")
+                    )
+                )
+            );
 
             Func<object> f = e.Compile(useInterpreter);
             Assert.Equal(value, f());
@@ -336,14 +463,25 @@ namespace System.Linq.Expressions.Tests
             //         q = () => p;
             //         return q();
             //     };
-            ParameterExpression p = Expression.Parameter(typeof(ValueTypeWithParameterlessConstructorThatThrows?));
-            ParameterExpression q = Expression.Parameter(typeof(Func<ValueTypeWithParameterlessConstructorThatThrows?>));
+            ParameterExpression p = Expression.Parameter(
+                typeof(ValueTypeWithParameterlessConstructorThatThrows?)
+            );
+            ParameterExpression q = Expression.Parameter(
+                typeof(Func<ValueTypeWithParameterlessConstructorThatThrows?>)
+            );
             Expression<Func<ValueTypeWithParameterlessConstructorThatThrows?>> e =
                 Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows?>>(
                     Expression.Block(
                         new[] { p, q },
-                        Expression.Assign(q, Expression.Lambda<Func<ValueTypeWithParameterlessConstructorThatThrows?>>(p)),
-                        Expression.Invoke(q)));
+                        Expression.Assign(
+                            q,
+                            Expression.Lambda<
+                                Func<ValueTypeWithParameterlessConstructorThatThrows?>
+                            >(p)
+                        ),
+                        Expression.Invoke(q)
+                    )
+                );
 
             Func<ValueTypeWithParameterlessConstructorThatThrows?> f = e.Compile(useInterpreter);
             Assert.Null(f());

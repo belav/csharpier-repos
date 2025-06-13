@@ -55,57 +55,80 @@ namespace System.Net.Http.Tests
             // Example from RFC 7838, Section 3: change of port.
             yield return new object[]
             {
-                "h2=\":8000\"", new []
+                "h2=\":8000\"",
+                new[]
                 {
-                    new AltSvcHeaderValue("h2", host: null, port: 8000, defaultAge, persist: false)
-                }
+                    new AltSvcHeaderValue("h2", host: null, port: 8000, defaultAge, persist: false),
+                },
             };
 
             // Example from RFC 7838, Section 3: change of host/port.
             yield return new object[]
             {
-                "h2=\"new.example.org:80\"", new []
+                "h2=\"new.example.org:80\"",
+                new[]
                 {
-                    new AltSvcHeaderValue("h2", "new.example.org", port: 80, defaultAge, persist: false)
-                }
+                    new AltSvcHeaderValue(
+                        "h2",
+                        "new.example.org",
+                        port: 80,
+                        defaultAge,
+                        persist: false
+                    ),
+                },
             };
 
             // Example from RFC 7838, Section 3: multiple services in one line.
             yield return new object[]
             {
-                "h2=\"alt.example.com:8000\", h2=\":443\"", new []
+                "h2=\"alt.example.com:8000\", h2=\":443\"",
+                new[]
                 {
-                    new AltSvcHeaderValue("h2", "alt.example.com", port: 8000, defaultAge, persist: false),
-                    new AltSvcHeaderValue("h2", host: null, port: 443, defaultAge, persist: false)
-                }
+                    new AltSvcHeaderValue(
+                        "h2",
+                        "alt.example.com",
+                        port: 8000,
+                        defaultAge,
+                        persist: false
+                    ),
+                    new AltSvcHeaderValue("h2", host: null, port: 443, defaultAge, persist: false),
+                },
             };
 
             // Example from RFC 7838, Section 3.1: change of port with max age.
             yield return new object[]
             {
-                "h2=\":443\"; ma=3600", new []
+                "h2=\":443\"; ma=3600",
+                new[]
                 {
-                    new AltSvcHeaderValue("h2", host: null, port: 443, TimeSpan.FromTicks(TimeSpan.TicksPerSecond * 3600), persist: false)
-                }
+                    new AltSvcHeaderValue(
+                        "h2",
+                        host: null,
+                        port: 443,
+                        TimeSpan.FromTicks(TimeSpan.TicksPerSecond * 3600),
+                        persist: false
+                    ),
+                },
             };
 
             // Example from RFC 7838, Section 3.1: change of port with max age and persist.
             yield return new object[]
             {
-                "h2=\":443\"; ma=2592000; persist=1", new []
+                "h2=\":443\"; ma=2592000; persist=1",
+                new[]
                 {
-                    new AltSvcHeaderValue("h2", host: null, port: 443, TimeSpan.FromTicks(TimeSpan.TicksPerSecond * 2592000), persist: true)
-                }
+                    new AltSvcHeaderValue(
+                        "h2",
+                        host: null,
+                        port: 443,
+                        TimeSpan.FromTicks(TimeSpan.TicksPerSecond * 2592000),
+                        persist: true
+                    ),
+                },
             };
 
             // "clear".
-            yield return new object[]
-            {
-                "clear", new []
-                {
-                    AltSvcHeaderValue.Clear
-                }
-            };
+            yield return new object[] { "clear", new[] { AltSvcHeaderValue.Clear } };
         }
     }
 }

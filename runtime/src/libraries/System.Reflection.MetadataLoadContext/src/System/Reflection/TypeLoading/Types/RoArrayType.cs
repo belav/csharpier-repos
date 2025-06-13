@@ -25,16 +25,20 @@ namespace System.Reflection.TypeLoading
         }
 
         protected sealed override bool IsArrayImpl() => true;
+
         public sealed override bool IsSZArray => !_multiDim;
         public sealed override bool IsVariableBoundArray => _multiDim;
+
         protected sealed override bool IsByRefImpl() => false;
+
         protected sealed override bool IsPointerImpl() => false;
 
         protected sealed override string Suffix => Helpers.ComputeArraySuffix(_rank, _multiDim);
 
         public sealed override int GetArrayRank() => _rank;
 
-        internal sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() => Loader.GetCoreType(CoreType.Array);
+        internal sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() =>
+            Loader.GetCoreType(CoreType.Array);
 
         internal sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces()
         {
@@ -50,9 +54,14 @@ namespace System.Reflection.TypeLoading
                     // All of our types are from a fixed list so we know they're supposed be generic interfaces taking one type parameter.
                     // But since we're loading them from a core assembly that the user supplied us, we should verify and skip if
                     // this is not the case.
-                    if (ifc is RoDefinitionType roDefinitionType && roDefinitionType.GetGenericParameterCount() == 1)
+                    if (
+                        ifc is RoDefinitionType roDefinitionType
+                        && roDefinitionType.GetGenericParameterCount() == 1
+                    )
                     {
-                        yield return roDefinitionType.GetUniqueConstructedGenericType(typeArguments);
+                        yield return roDefinitionType.GetUniqueConstructedGenericType(
+                            typeArguments
+                        );
                     }
                 }
             }
@@ -67,10 +76,18 @@ namespace System.Reflection.TypeLoading
         };
 
 #pragma warning disable SYSLIB0050 // TypeAttributes.Serialized flag is obsolete
-        protected sealed override TypeAttributes ComputeAttributeFlags() => TypeAttributes.AutoLayout | TypeAttributes.AnsiClass | TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.Serializable;
+        protected sealed override TypeAttributes ComputeAttributeFlags() =>
+            TypeAttributes.AutoLayout
+            | TypeAttributes.AnsiClass
+            | TypeAttributes.Class
+            | TypeAttributes.Public
+            | TypeAttributes.Sealed
+            | TypeAttributes.Serializable;
 #pragma warning restore SYSLIB0050
 
-        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(NameFilter? filter)
+        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
+            NameFilter? filter
+        )
         {
             if (filter == null || filter.Matches(ConstructorInfo.ConstructorName))
             {
@@ -149,7 +166,10 @@ namespace System.Reflection.TypeLoading
             }
         }
 
-        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(NameFilter? filter, Type reflectedType)
+        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
+            NameFilter? filter,
+            Type reflectedType
+        )
         {
             int rank = _rank;
 
@@ -185,7 +205,13 @@ namespace System.Reflection.TypeLoading
                 {
                     addressParameters[i] = systemInt32;
                 }
-                yield return new RoSyntheticMethod(this, 2, "Address", elementType.GetUniqueByRefType(), addressParameters);
+                yield return new RoSyntheticMethod(
+                    this,
+                    2,
+                    "Address",
+                    elementType.GetUniqueByRefType(),
+                    addressParameters
+                );
             }
         }
     }

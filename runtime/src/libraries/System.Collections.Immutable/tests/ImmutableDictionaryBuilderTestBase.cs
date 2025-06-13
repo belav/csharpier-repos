@@ -67,7 +67,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ContainsPair()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5);
             IDictionary<string, int> builder = this.GetBuilder(map);
             Assert.True(builder.Contains(new KeyValuePair<string, int>("five", 5)));
         }
@@ -75,7 +76,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void RemovePair()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5)
+                .Add("six", 6);
             IDictionary<string, int> builder = this.GetBuilder(map);
             Assert.True(builder.Remove(new KeyValuePair<string, int>("five", 5)));
             Assert.False(builder.Remove(new KeyValuePair<string, int>("foo", 1)));
@@ -86,7 +89,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void RemoveKey()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5)
+                .Add("six", 6);
             IDictionary<string, int> builder = this.GetBuilder(map);
             builder.Remove("five");
             Assert.Equal(1, builder.Count);
@@ -96,7 +101,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void CopyTo()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5);
             IDictionary<string, int> builder = this.GetBuilder(map);
             var array = new KeyValuePair<string, int>[2]; // intentionally larger than source.
             builder.CopyTo(array, 1);
@@ -116,25 +122,37 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Keys()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5)
+                .Add("six", 6);
             IDictionary<string, int> builder = this.GetBuilder(map);
             CollectionAssertAreEquivalent(new[] { "five", "six" }, builder.Keys);
-            CollectionAssertAreEquivalent(new[] { "five", "six" }, ((IReadOnlyDictionary<string, int>)builder).Keys.ToArray());
+            CollectionAssertAreEquivalent(
+                new[] { "five", "six" },
+                ((IReadOnlyDictionary<string, int>)builder).Keys.ToArray()
+            );
         }
 
         [Fact]
         public void Values()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5)
+                .Add("six", 6);
             IDictionary<string, int> builder = this.GetBuilder(map);
             CollectionAssertAreEquivalent(new[] { 5, 6 }, builder.Values);
-            CollectionAssertAreEquivalent(new[] { 5, 6 }, ((IReadOnlyDictionary<string, int>)builder).Values.ToArray());
+            CollectionAssertAreEquivalent(
+                new[] { 5, 6 },
+                ((IReadOnlyDictionary<string, int>)builder).Values.ToArray()
+            );
         }
 
         [Fact]
         public void TryGetValue()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5)
+                .Add("six", 6);
             IDictionary<string, int> builder = this.GetBuilder(map);
             int value;
             Assert.True(builder.TryGetValue("five", out value) && value == 5);
@@ -146,7 +164,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateTest()
         {
-            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>().Add("five", 5).Add("six", 6);
+            IImmutableDictionary<string, int> map = this.GetEmptyImmutableDictionary<string, int>()
+                .Add("five", 5)
+                .Add("six", 6);
             IDictionary<string, int> builder = this.GetBuilder(map);
             using (IEnumerator<KeyValuePair<string, int>> enumerator = builder.GetEnumerator())
             {
@@ -236,14 +256,18 @@ namespace System.Collections.Immutable.Tests
             var array = new object[builder.Count + 1];
             collection.CopyTo(array, 1);
             Assert.Null(array[0]);
-            Assert.Equal(new object[] { null, new DictionaryEntry("b", 2), }, array);
+            Assert.Equal(new object[] { null, new DictionaryEntry("b", 2) }, array);
 
             Assert.False(collection.IsSynchronized);
             Assert.NotNull(collection.SyncRoot);
             Assert.Same(collection.SyncRoot, collection.SyncRoot);
         }
 
-        protected abstract bool TryGetKeyHelper<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey equalKey, out TKey actualKey);
+        protected abstract bool TryGetKeyHelper<TKey, TValue>(
+            IDictionary<TKey, TValue> dictionary,
+            TKey equalKey,
+            out TKey actualKey
+        );
 
         /// <summary>
         /// Gets the Builder for a given dictionary instance.
@@ -251,7 +275,9 @@ namespace System.Collections.Immutable.Tests
         /// <typeparam name="TKey">The type of key.</typeparam>
         /// <typeparam name="TValue">The type of value.</typeparam>
         /// <returns>The builder.</returns>
-        protected abstract IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(IImmutableDictionary<TKey, TValue> basis = null);
+        protected abstract IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> basis = null
+        );
 
         /// <summary>
         /// Gets an empty immutable dictionary.
@@ -259,8 +285,13 @@ namespace System.Collections.Immutable.Tests
         /// <typeparam name="TKey">The type of key.</typeparam>
         /// <typeparam name="TValue">The type of value.</typeparam>
         /// <returns>The immutable dictionary.</returns>
-        protected abstract IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<TKey, TValue>();
+        protected abstract IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<
+            TKey,
+            TValue
+        >();
 
-        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer);
+        protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        );
     }
 }

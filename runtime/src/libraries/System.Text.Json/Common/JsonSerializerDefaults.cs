@@ -15,12 +15,13 @@ namespace System.Text.Json
         /// This option implies that property names are treated as case-sensitive and that "PascalCase" name formatting should be employed.
         /// </remarks>
         General = 0,
+
         /// <summary>
         /// Specifies that values should be used more appropriate to web-based scenarios.
         /// </summary>
         /// <remarks>
         /// This option implies that property names are treated as case-insensitive and that "camelCase" name formatting should be employed.
         /// </remarks>
-        Web = 1
+        Web = 1,
     }
 }

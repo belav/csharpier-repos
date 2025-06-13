@@ -27,20 +27,38 @@ internal static partial class HttpUtilities
     private const ulong _http10VersionLong = 3471766442030158920; // GetAsciiStringAsLong("HTTP/1.0"); const results in better codegen
     private const ulong _http11VersionLong = 3543824036068086856; // GetAsciiStringAsLong("HTTP/1.1"); const results in better codegen
 
-    private static readonly UTF8Encoding DefaultRequestHeaderEncoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+    private static readonly UTF8Encoding DefaultRequestHeaderEncoding = new UTF8Encoding(
+        encoderShouldEmitUTF8Identifier: false,
+        throwOnInvalidBytes: true
+    );
     private static readonly SpanAction<char, IntPtr> s_getHeaderName = GetHeaderName;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void SetKnownMethod(ulong mask, ulong knownMethodUlong, HttpMethod knownMethod, int length)
+    private static void SetKnownMethod(
+        ulong mask,
+        ulong knownMethodUlong,
+        HttpMethod knownMethod,
+        int length
+    )
     {
-        _knownMethods[GetKnownMethodIndex(knownMethodUlong)] = new Tuple<ulong, ulong, HttpMethod, int>(mask, knownMethodUlong, knownMethod, length);
+        _knownMethods[GetKnownMethodIndex(knownMethodUlong)] = new Tuple<
+            ulong,
+            ulong,
+            HttpMethod,
+            int
+        >(mask, knownMethodUlong, knownMethod, length);
     }
 
     private static void FillKnownMethodsGaps()
     {
         var knownMethods = _knownMethods;
         var length = knownMethods.Length;
-        var invalidHttpMethod = new Tuple<ulong, ulong, HttpMethod, int>(_mask8Chars, 0ul, HttpMethod.Custom, 0);
+        var invalidHttpMethod = new Tuple<ulong, ulong, HttpMethod, int>(
+            _mask8Chars,
+            0ul,
+            HttpMethod.Custom,
+            0
+        );
         for (int i = 0; i < length; i++)
         {
             if (knownMethods[i] == null)
@@ -104,18 +122,25 @@ internal static partial class HttpUtilities
             // in the string
             if (!StringUtilities.TryGetAsciiString((byte*)state.ToPointer(), output, buffer.Length))
             {
-                KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidCharactersInHeaderName);
+                KestrelBadHttpRequestException.Throw(
+                    RequestRejectionReason.InvalidCharactersInHeaderName
+                );
             }
         }
     }
 
-    public static string GetAsciiStringNonNullCharacters(this Span<byte> span)
-        => StringUtilities.GetAsciiStringNonNullCharacters(span);
+    public static string GetAsciiStringNonNullCharacters(this Span<byte> span) =>
+        StringUtilities.GetAsciiStringNonNullCharacters(span);
 
-    public static string GetAsciiOrUTF8StringNonNullCharacters(this ReadOnlySpan<byte> span)
-        => StringUtilities.GetAsciiOrUTF8StringNonNullCharacters(span, DefaultRequestHeaderEncoding);
+    public static string GetAsciiOrUTF8StringNonNullCharacters(this ReadOnlySpan<byte> span) =>
+        StringUtilities.GetAsciiOrUTF8StringNonNullCharacters(span, DefaultRequestHeaderEncoding);
 
-    public static string GetRequestHeaderString(this ReadOnlySpan<byte> span, string name, Func<string, Encoding?> encodingSelector, bool checkForNewlineChars)
+    public static string GetRequestHeaderString(
+        this ReadOnlySpan<byte> span,
+        string name,
+        Func<string, Encoding?> encodingSelector,
+        bool checkForNewlineChars
+    )
     {
         string result;
         if (ReferenceEquals(KestrelServerOptions.DefaultHeaderEncodingSelector, encodingSelector))
@@ -130,13 +155,19 @@ internal static partial class HttpUtilities
         // New Line characters (CR, LF) are considered invalid at this point.
         if (checkForNewlineChars && ((ReadOnlySpan<char>)result).IndexOfAny('\r', '\n') >= 0)
         {
-            throw new InvalidOperationException("Newline characters (CR/LF) are not allowed in request headers.");
+            throw new InvalidOperationException(
+                "Newline characters (CR/LF) are not allowed in request headers."
+            );
         }
 
         return result;
     }
 
-    private static string GetRequestHeaderStringWithoutDefaultEncodingCore(this ReadOnlySpan<byte> span, string name, Func<string, Encoding?> encodingSelector)
+    private static string GetRequestHeaderStringWithoutDefaultEncodingCore(
+        this ReadOnlySpan<byte> span,
+        string name,
+        Func<string, Encoding?> encodingSelector
+    )
     {
         var encoding = encodingSelector(name);
 
@@ -188,7 +219,11 @@ internal static partial class HttpUtilities
     /// To optimize performance the GET method will be checked first.
     /// </remarks>
     /// <returns><c>true</c> if the input matches a known string, <c>false</c> otherwise.</returns>
-    public static bool GetKnownMethod(this ReadOnlySpan<byte> span, out HttpMethod method, out int length)
+    public static bool GetKnownMethod(
+        this ReadOnlySpan<byte> span,
+        out HttpMethod method,
+        out int length
+    )
     {
         method = GetKnownMethod(span, out length);
         return method != HttpMethod.Custom;
@@ -243,7 +278,7 @@ internal static partial class HttpUtilities
         // The generation of that table was done by GNU gperf tool.
         // Once we have that perfect hash we use another lookup-table to get the know HTTP-method if found
         // or return HttpMethod.Custom if not found.
-        // 
+        //
         // Further info and how to call gperf see https://github.com/dotnet/aspnetcore/pull/44096
         //
         // Code here could be removed if Roslyn improvements from
@@ -262,13 +297,18 @@ internal static partial class HttpUtilities
         {
             var methodsLookup = Methods();
 
-            Debug.Assert(WordListForPerfectHashOfMethods.Length == (MaxHashValue + 1) && methodsLookup.Length == (MaxHashValue + 1));
+            Debug.Assert(
+                WordListForPerfectHashOfMethods.Length == (MaxHashValue + 1)
+                    && methodsLookup.Length == (MaxHashValue + 1)
+            );
 
             var index = PerfectHash(value);
 
-            if (index < (uint)WordListForPerfectHashOfMethods.Length
+            if (
+                index < (uint)WordListForPerfectHashOfMethods.Length
                 && WordListForPerfectHashOfMethods[index] == value
-                && index < (uint)methodsLookup.Length)
+                && index < (uint)methodsLookup.Length
+            )
             {
                 return methodsLookup[(int)index];
             }
@@ -281,32 +321,262 @@ internal static partial class HttpUtilities
         {
             ReadOnlySpan<byte> associatedValues =
             [
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13,  5,  0, 13,
-                13,  0,  0, 13, 13, 13, 13, 13, 13,  0,
-                 5, 13, 13, 13,  0, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13, 13, 13, 13, 13,
-                13, 13, 13, 13, 13, 13
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                5,
+                0,
+                13,
+                13,
+                0,
+                0,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                0,
+                5,
+                13,
+                13,
+                13,
+                0,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
+                13,
             ];
 
             var c = MemoryMarshal.GetReference(str);
@@ -317,21 +587,21 @@ internal static partial class HttpUtilities
         }
 
         static ReadOnlySpan<HttpMethod> Methods() =>
-        [
-            HttpMethod.None,
-            HttpMethod.None,
-            HttpMethod.None,
-            HttpMethod.Get,
-            HttpMethod.Head,
-            HttpMethod.Trace,
-            HttpMethod.Delete,
-            HttpMethod.Options,
-            HttpMethod.Put,
-            HttpMethod.Post,
-            HttpMethod.Patch,
-            HttpMethod.None,
-            HttpMethod.Connect
-        ];
+            [
+                HttpMethod.None,
+                HttpMethod.None,
+                HttpMethod.None,
+                HttpMethod.Get,
+                HttpMethod.Head,
+                HttpMethod.Trace,
+                HttpMethod.Delete,
+                HttpMethod.Options,
+                HttpMethod.Put,
+                HttpMethod.Post,
+                HttpMethod.Patch,
+                HttpMethod.None,
+                HttpMethod.Connect,
+            ];
     }
 
     private static readonly string[] WordListForPerfectHashOfMethods =
@@ -348,7 +618,7 @@ internal static partial class HttpUtilities
         "POST",
         "PATCH",
         "",
-        "CONNECT"
+        "CONNECT",
     };
 
     /// <summary>
@@ -362,7 +632,11 @@ internal static partial class HttpUtilities
     /// To optimize performance the HTTP/1.1 will be checked first.
     /// </remarks>
     /// <returns><c>true</c> if the input matches a known string, <c>false</c> otherwise.</returns>
-    public static bool GetKnownVersion(this ReadOnlySpan<byte> span, out HttpVersion knownVersion, out byte length)
+    public static bool GetKnownVersion(
+        this ReadOnlySpan<byte> span,
+        out HttpVersion knownVersion,
+        out byte length
+    )
     {
         if (span.Length > sizeof(ulong) && span[sizeof(ulong)] == (byte)'\r')
         {
@@ -448,7 +722,8 @@ internal static partial class HttpUtilities
             default:
                 Debug.Fail("Unexpected HttpVersion: " + httpVersion);
                 return null;
-        };
+        }
+        ;
     }
 
     public static string? MethodToString(HttpMethod method)
@@ -583,9 +858,13 @@ internal static partial class HttpUtilities
             || (uint)((ch | 32) - 'a') < 6u;
     }
 
-    public static AltSvcHeader? GetEndpointAltSvc(System.Net.IPEndPoint endpoint, HttpProtocols protocols)
+    public static AltSvcHeader? GetEndpointAltSvc(
+        System.Net.IPEndPoint endpoint,
+        HttpProtocols protocols
+    )
     {
-        var hasHttp1OrHttp2 = protocols.HasFlag(HttpProtocols.Http1) || protocols.HasFlag(HttpProtocols.Http2);
+        var hasHttp1OrHttp2 =
+            protocols.HasFlag(HttpProtocols.Http1) || protocols.HasFlag(HttpProtocols.Http2);
         var hasHttp3 = protocols.HasFlag(HttpProtocols.Http3);
 
         if (hasHttp1OrHttp2 && hasHttp3)
@@ -594,7 +873,8 @@ internal static partial class HttpUtilities
             // This is the default cache if none is specified with Alt-Svc, but it appears that all
             // popular HTTP/3 websites explicitly specifies a cache duration in the header.
             // Specify a value to be consistent.
-            var text = "h3=\":" + endpoint.Port.ToString(CultureInfo.InvariantCulture) + "\"; ma=86400";
+            var text =
+                "h3=\":" + endpoint.Port.ToString(CultureInfo.InvariantCulture) + "\"; ma=86400";
             var bytes = Encoding.ASCII.GetBytes($"\r\nAlt-Svc: " + text);
             return new AltSvcHeader(text, bytes);
         }
@@ -606,7 +886,7 @@ internal static partial class HttpUtilities
 internal sealed class AltSvcHeader
 {
     public string Value { get; }
-    
+
     public byte[] RawBytes { get; }
 
     public AltSvcHeader(string value, byte[] rawBytes)

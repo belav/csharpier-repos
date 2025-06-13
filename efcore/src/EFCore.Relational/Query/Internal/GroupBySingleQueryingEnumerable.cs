@@ -13,7 +13,9 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 public class GroupBySingleQueryingEnumerable<TKey, TElement>
-    : IEnumerable<IGrouping<TKey, TElement>>, IAsyncEnumerable<IGrouping<TKey, TElement>>, IRelationalQueryingEnumerable
+    : IEnumerable<IGrouping<TKey, TElement>>,
+        IAsyncEnumerable<IGrouping<TKey, TElement>>,
+        IRelationalQueryingEnumerable
 {
     private readonly RelationalQueryContext _relationalQueryContext;
     private readonly RelationalCommandCache _relationalCommandCache;
@@ -21,7 +23,13 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
     private readonly Func<QueryContext, DbDataReader, TKey> _keySelector;
     private readonly Func<QueryContext, DbDataReader, object[]> _keyIdentifier;
     private readonly IReadOnlyList<ValueComparer> _keyIdentifierValueComparers;
-    private readonly Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, TElement> _elementSelector;
+    private readonly Func<
+        QueryContext,
+        DbDataReader,
+        ResultContext,
+        SingleQueryResultCoordinator,
+        TElement
+    > _elementSelector;
     private readonly Type _contextType;
     private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
     private readonly bool _standAloneStateManager;
@@ -41,11 +49,18 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
         Func<QueryContext, DbDataReader, TKey> keySelector,
         Func<QueryContext, DbDataReader, object[]> keyIdentifier,
         IReadOnlyList<ValueComparer> keyIdentifierValueComparers,
-        Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, TElement> elementSelector,
+        Func<
+            QueryContext,
+            DbDataReader,
+            ResultContext,
+            SingleQueryResultCoordinator,
+            TElement
+        > elementSelector,
         Type contextType,
         bool standAloneStateManager,
         bool detailedErrorsEnabled,
-        bool threadSafetyChecksEnabled)
+        bool threadSafetyChecksEnabled
+    )
     {
         _relationalQueryContext = relationalQueryContext;
         _relationalCommandCache = relationalCommandCache;
@@ -67,7 +82,9 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerator<IGrouping<TKey, TElement>> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+    public virtual IAsyncEnumerator<IGrouping<TKey, TElement>> GetAsyncEnumerator(
+        CancellationToken cancellationToken = default
+    )
     {
         _relationalQueryContext.CancellationToken = cancellationToken;
 
@@ -80,8 +97,7 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerator<IGrouping<TKey, TElement>> GetEnumerator()
-        => new Enumerator(this);
+    public virtual IEnumerator<IGrouping<TKey, TElement>> GetEnumerator() => new Enumerator(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,8 +105,7 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IEnumerator IEnumerable.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -98,8 +113,8 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DbCommand CreateDbCommand()
-        => _relationalCommandCache
+    public virtual DbCommand CreateDbCommand() =>
+        _relationalCommandCache
             .GetRelationalCommandTemplate(_relationalQueryContext.ParameterValues)
             .CreateDbCommand(
                 new RelationalCommandParameterObject(
@@ -107,9 +122,12 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                     _relationalQueryContext.ParameterValues,
                     null,
                     null,
-                    null, CommandSource.LinqQuery),
+                    null,
+                    CommandSource.LinqQuery
+                ),
                 Guid.Empty,
-                (DbCommandMethod)(-1));
+                (DbCommandMethod)(-1)
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -133,19 +151,20 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
             _elements = new List<TElement>();
         }
 
-        internal void Add(TElement element)
-            => _elements.Add(element);
+        internal void Add(TElement element) => _elements.Add(element);
 
         public TKey Key { get; }
 
-        public IEnumerator<TElement> GetEnumerator()
-            => _elements.GetEnumerator();
+        public IEnumerator<TElement> GetEnumerator() => _elements.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 
-    private static bool CompareIdentifiers(IReadOnlyList<ValueComparer> valueComparers, object[] left, object[] right)
+    private static bool CompareIdentifiers(
+        IReadOnlyList<ValueComparer> valueComparers,
+        object[] left,
+        object[] right
+    )
     {
         // Ignoring size check on all for perf as they should be same unless bug in code.
         for (var i = 0; i < left.Length; i++)
@@ -167,7 +186,13 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
         private readonly Func<QueryContext, DbDataReader, TKey> _keySelector;
         private readonly Func<QueryContext, DbDataReader, object[]> _keyIdentifier;
         private readonly IReadOnlyList<ValueComparer> _keyIdentifierValueComparers;
-        private readonly Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, TElement> _elementSelector;
+        private readonly Func<
+            QueryContext,
+            DbDataReader,
+            ResultContext,
+            SingleQueryResultCoordinator,
+            TElement
+        > _elementSelector;
         private readonly Type _contextType;
         private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
         private readonly bool _standAloneStateManager;
@@ -203,8 +228,7 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
 
         public IGrouping<TKey, TElement> Current { get; private set; }
 
-        object IEnumerator.Current
-            => Current;
+        object IEnumerator.Current => Current;
 
         public bool MoveNext()
         {
@@ -217,7 +241,10 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                     if (_dataReader == null)
                     {
                         _relationalQueryContext.ExecutionStrategy.Execute(
-                            this, static (_, enumerator) => InitializeReader(enumerator), null);
+                            this,
+                            static (_, enumerator) => InitializeReader(enumerator),
+                            null
+                        );
                     }
 
                     var hasNext = _resultCoordinator!.HasNext ?? _dataReader!.Read();
@@ -232,7 +259,11 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                             _resultCoordinator.ResultReady = true;
                             _resultCoordinator.HasNext = null;
                             var element = _elementSelector(
-                                _relationalQueryContext, _dbDataReader!, _resultCoordinator.ResultContext, _resultCoordinator);
+                                _relationalQueryContext,
+                                _dbDataReader!,
+                                _resultCoordinator.ResultContext,
+                                _resultCoordinator
+                            );
                             if (_resultCoordinator.ResultReady)
                             {
                                 _resultCoordinator.ResultContext.Values = null;
@@ -248,9 +279,13 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                                 }
 
                                 // Check if grouping key changed
-                                if (!CompareIdentifiers(
-                                        _keyIdentifierValueComparers, keyIdentifier,
-                                        _keyIdentifier(_relationalQueryContext, _dbDataReader!)))
+                                if (
+                                    !CompareIdentifiers(
+                                        _keyIdentifierValueComparers,
+                                        keyIdentifier,
+                                        _keyIdentifier(_relationalQueryContext, _dbDataReader!)
+                                    )
+                                )
                                 {
                                     _resultCoordinator.HasNext = true;
                                     Current = group;
@@ -265,7 +300,11 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                                     _resultCoordinator.HasNext = false;
                                     _resultCoordinator.ResultReady = true;
                                     element = _elementSelector(
-                                        _relationalQueryContext, _dbDataReader!, _resultCoordinator.ResultContext, _resultCoordinator);
+                                        _relationalQueryContext,
+                                        _dbDataReader!,
+                                        _resultCoordinator.ResultContext,
+                                        _resultCoordinator
+                                    );
 
                                     group.Add(element);
                                 }
@@ -273,8 +312,7 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                                 Current = group;
                                 break;
                             }
-                        }
-                        while (true);
+                        } while (true);
                     }
                     else
                     {
@@ -308,7 +346,9 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
             EntityFrameworkEventSource.Log.QueryExecuting();
 
             var relationalCommand = enumerator._relationalCommand =
-                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
+                    enumerator._relationalQueryContext
+                );
 
             var dataReader = enumerator._dataReader = relationalCommand.ExecuteReader(
                 new RelationalCommandParameterObject(
@@ -318,12 +358,16 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                     enumerator._relationalQueryContext.Context,
                     enumerator._relationalQueryContext.CommandLogger,
                     enumerator._detailedErrorsEnabled,
-                    CommandSource.LinqQuery));
+                    CommandSource.LinqQuery
+                )
+            );
             enumerator._dbDataReader = dataReader.DbDataReader;
 
             enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-            enumerator._relationalQueryContext.InitializeStateManager(enumerator._standAloneStateManager);
+            enumerator._relationalQueryContext.InitializeStateManager(
+                enumerator._standAloneStateManager
+            );
 
             return false;
         }
@@ -339,8 +383,8 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
             }
         }
 
-        public void Reset()
-            => throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
+        public void Reset() =>
+            throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
     }
 
     private sealed class AsyncEnumerator : IAsyncEnumerator<IGrouping<TKey, TElement>>
@@ -351,7 +395,13 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
         private readonly Func<QueryContext, DbDataReader, TKey> _keySelector;
         private readonly Func<QueryContext, DbDataReader, object[]> _keyIdentifier;
         private readonly IReadOnlyList<ValueComparer> _keyIdentifierValueComparers;
-        private readonly Func<QueryContext, DbDataReader, ResultContext, SingleQueryResultCoordinator, TElement> _elementSelector;
+        private readonly Func<
+            QueryContext,
+            DbDataReader,
+            ResultContext,
+            SingleQueryResultCoordinator,
+            TElement
+        > _elementSelector;
         private readonly Type _contextType;
         private readonly IDiagnosticsLogger<DbLoggerCategory.Query> _queryLogger;
         private readonly bool _standAloneStateManager;
@@ -399,15 +449,20 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                 {
                     if (_dataReader == null)
                     {
-                        await _relationalQueryContext.ExecutionStrategy.ExecuteAsync(
+                        await _relationalQueryContext
+                            .ExecutionStrategy.ExecuteAsync(
                                 this,
-                                static (_, enumerator, cancellationToken) => InitializeReaderAsync(enumerator, cancellationToken),
+                                static (_, enumerator, cancellationToken) =>
+                                    InitializeReaderAsync(enumerator, cancellationToken),
                                 null,
-                                _cancellationToken)
+                                _cancellationToken
+                            )
                             .ConfigureAwait(false);
                     }
 
-                    var hasNext = _resultCoordinator!.HasNext ?? await _dataReader!.ReadAsync(_cancellationToken).ConfigureAwait(false);
+                    var hasNext =
+                        _resultCoordinator!.HasNext
+                        ?? await _dataReader!.ReadAsync(_cancellationToken).ConfigureAwait(false);
 
                     if (hasNext)
                     {
@@ -419,14 +474,23 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                             _resultCoordinator.ResultReady = true;
                             _resultCoordinator.HasNext = null;
                             var element = _elementSelector(
-                                _relationalQueryContext, _dbDataReader!, _resultCoordinator.ResultContext, _resultCoordinator);
+                                _relationalQueryContext,
+                                _dbDataReader!,
+                                _resultCoordinator.ResultContext,
+                                _resultCoordinator
+                            );
                             if (_resultCoordinator.ResultReady)
                             {
                                 _resultCoordinator.ResultContext.Values = null;
                                 group.Add(element);
                             }
 
-                            if (_resultCoordinator!.HasNext ?? await _dataReader!.ReadAsync(_cancellationToken).ConfigureAwait(false))
+                            if (
+                                _resultCoordinator!.HasNext
+                                ?? await _dataReader!
+                                    .ReadAsync(_cancellationToken)
+                                    .ConfigureAwait(false)
+                            )
                             {
                                 if (!_resultCoordinator.ResultReady)
                                 {
@@ -435,9 +499,13 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                                 }
 
                                 // Check if grouping key changed
-                                if (!CompareIdentifiers(
-                                        _keyIdentifierValueComparers, keyIdentifier,
-                                        _keyIdentifier(_relationalQueryContext, _dbDataReader!)))
+                                if (
+                                    !CompareIdentifiers(
+                                        _keyIdentifierValueComparers,
+                                        keyIdentifier,
+                                        _keyIdentifier(_relationalQueryContext, _dbDataReader!)
+                                    )
+                                )
                                 {
                                     _resultCoordinator.HasNext = true;
                                     Current = group;
@@ -452,7 +520,11 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                                     _resultCoordinator.HasNext = false;
                                     _resultCoordinator.ResultReady = true;
                                     element = _elementSelector(
-                                        _relationalQueryContext, _dbDataReader!, _resultCoordinator.ResultContext, _resultCoordinator);
+                                        _relationalQueryContext,
+                                        _dbDataReader!,
+                                        _resultCoordinator.ResultContext,
+                                        _resultCoordinator
+                                    );
 
                                     group.Add(element);
                                 }
@@ -460,8 +532,7 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
                                 Current = group;
                                 break;
                             }
-                        }
-                        while (true);
+                        } while (true);
                     }
                     else
                     {
@@ -490,28 +561,39 @@ public class GroupBySingleQueryingEnumerable<TKey, TElement>
             }
         }
 
-        private static async Task<bool> InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+        private static async Task<bool> InitializeReaderAsync(
+            AsyncEnumerator enumerator,
+            CancellationToken cancellationToken
+        )
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
             var relationalCommand = enumerator._relationalCommand =
-                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
+                    enumerator._relationalQueryContext
+                );
 
-            var dataReader = enumerator._dataReader = await relationalCommand.ExecuteReaderAsync(
+            var dataReader = enumerator._dataReader = await relationalCommand
+                .ExecuteReaderAsync(
                     new RelationalCommandParameterObject(
                         enumerator._relationalQueryContext.Connection,
                         enumerator._relationalQueryContext.ParameterValues,
                         enumerator._readerColumns,
                         enumerator._relationalQueryContext.Context,
                         enumerator._relationalQueryContext.CommandLogger,
-                        enumerator._detailedErrorsEnabled, CommandSource.LinqQuery),
-                    cancellationToken)
+                        enumerator._detailedErrorsEnabled,
+                        CommandSource.LinqQuery
+                    ),
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
             enumerator._dbDataReader = dataReader.DbDataReader;
 
             enumerator._resultCoordinator = new SingleQueryResultCoordinator();
 
-            enumerator._relationalQueryContext.InitializeStateManager(enumerator._standAloneStateManager);
+            enumerator._relationalQueryContext.InitializeStateManager(
+                enumerator._standAloneStateManager
+            );
 
             return false;
         }

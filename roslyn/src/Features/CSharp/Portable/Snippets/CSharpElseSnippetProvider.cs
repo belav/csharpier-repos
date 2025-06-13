@@ -23,14 +23,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpElseSnippetProvider()
-        {
-        }
+        public CSharpElseSnippetProvider() { }
 
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-            var syntaxContext = (CSharpSyntaxContext)document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
+            var syntaxContext = (CSharpSyntaxContext)
+                document
+                    .GetRequiredLanguageService<ISyntaxContextService>()
+                    .CreateContext(document, semanticModel, position, cancellationToken);
 
             var token = syntaxContext.TargetToken;
 
@@ -56,30 +63,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 }
             }
 
-            return isAfterIfStatement && await base.IsValidSnippetLocationAsync(document, position, cancellationToken).ConfigureAwait(false);
+            return isAfterIfStatement
+                && await base.IsValidSnippetLocationAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
-        protected override Task<TextChange> GenerateSnippetTextChangeAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override Task<TextChange> GenerateSnippetTextChangeAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var elseClause = SyntaxFactory.ElseClause(SyntaxFactory.Block());
-            return Task.FromResult(new TextChange(TextSpan.FromBounds(position, position), elseClause.ToFullString()));
+            return Task.FromResult(
+                new TextChange(TextSpan.FromBounds(position, position), elseClause.ToFullString())
+            );
         }
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             return CSharpSnippetHelpers.GetTargetCaretPositionInBlock<ElseClauseSyntax>(
                 caretTarget,
                 static c => (BlockSyntax)c.Statement,
-                sourceText);
+                sourceText
+            );
         }
 
-        protected override Task<Document> AddIndentationToDocumentAsync(Document document, CancellationToken cancellationToken)
+        protected override Task<Document> AddIndentationToDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return CSharpSnippetHelpers.AddBlockIndentationToDocumentAsync<ElseClauseSyntax>(
                 document,
                 FindSnippetAnnotation,
                 static c => (BlockSyntax)c.Statement,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

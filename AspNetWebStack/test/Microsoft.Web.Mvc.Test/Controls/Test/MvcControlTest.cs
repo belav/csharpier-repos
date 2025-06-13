@@ -76,8 +76,6 @@ namespace Microsoft.Web.Mvc.Controls.Test
             Assert.Null(vc);
         }
 
-        private sealed class DummyMvcControl : MvcControl
-        {
-        }
+        private sealed class DummyMvcControl : MvcControl { }
     }
 }

@@ -27,12 +27,25 @@ public class ServerVariableTests
     [InlineData("REQUEST_URI", "http://example.com/foo?bar=1", (int)UriMatchPart.Full)]
     [InlineData("REQUEST_METHOD", "GET", (int)UriMatchPart.Full)]
     [InlineData("SERVER_NAME", "example.com", (int)UriMatchPart.Full)]
-    public void CheckServerVariableParsingAndApplication(string variable, string expected, int uriMatchPart)
+    public void CheckServerVariableParsingAndApplication(
+        string variable,
+        string expected,
+        int uriMatchPart
+    )
     {
         // Arrange and Act
         var testParserContext = new ParserContext("test");
-        var serverVar = ServerVariables.FindServerVariable(variable, testParserContext, (UriMatchPart)uriMatchPart, true);
-        var lookup = serverVar.Evaluate(CreateTestRewriteContext(), CreateTestRuleMatch().BackReferences, CreateTestCondMatch().BackReferences);
+        var serverVar = ServerVariables.FindServerVariable(
+            variable,
+            testParserContext,
+            (UriMatchPart)uriMatchPart,
+            true
+        );
+        var lookup = serverVar.Evaluate(
+            CreateTestRewriteContext(),
+            CreateTestRuleMatch().BackReferences,
+            CreateTestCondMatch().BackReferences
+        );
         // Assert
         Assert.Equal(expected, lookup);
     }
@@ -54,32 +67,49 @@ public class ServerVariableTests
     [InlineData("REQUEST_URI", "/other-foo", (int)UriMatchPart.Full)]
     [InlineData("REQUEST_METHOD", "POST", (int)UriMatchPart.Full)]
     [InlineData("SERVER_NAME", "otherexample.com", (int)UriMatchPart.Full)]
-    public void CheckServerVariableFeatureHasPrecedenceWhenEnabled(string variable, string expected, int uriMatchPart)
+    public void CheckServerVariableFeatureHasPrecedenceWhenEnabled(
+        string variable,
+        string expected,
+        int uriMatchPart
+    )
     {
         // Arrange and Act
         var testParserContext = new ParserContext("test");
-        var serverVar = ServerVariables.FindServerVariable(variable, testParserContext, (UriMatchPart)uriMatchPart, false);
+        var serverVar = ServerVariables.FindServerVariable(
+            variable,
+            testParserContext,
+            (UriMatchPart)uriMatchPart,
+            false
+        );
         var httpContext = CreateTestHttpContext();
-        httpContext.Features.Set<IServerVariablesFeature>(new TestServerVariablesFeature(new Dictionary<string, string>
-        {
-            ["CONTENT_LENGTH"] = "20",
-            ["CONTENT_TYPE"] = "text/xml",
-            ["HTTP_ACCEPT"] = "other-accept",
-            ["HTTP_COOKIE"] = "other-cookie",
-            ["HTTP_HOST"] = "otherexample.com",
-            ["HTTP_REFERER"] = "other-referer",
-            ["HTTP_USER_AGENT"] = "other-useragent",
-            ["HTTP_CONNECTION"] = "other-connection",
-            ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
-            ["QUERY_STRING"] = "bar=2",
-            ["REQUEST_FILENAME"] = "/other-foo",
-            ["REQUEST_URI"] = "/other-foo",
-            ["REQUEST_METHOD"] = "POST",
-            ["SERVER_NAME"] = "otherexample.com",
-        }));
+        httpContext.Features.Set<IServerVariablesFeature>(
+            new TestServerVariablesFeature(
+                new Dictionary<string, string>
+                {
+                    ["CONTENT_LENGTH"] = "20",
+                    ["CONTENT_TYPE"] = "text/xml",
+                    ["HTTP_ACCEPT"] = "other-accept",
+                    ["HTTP_COOKIE"] = "other-cookie",
+                    ["HTTP_HOST"] = "otherexample.com",
+                    ["HTTP_REFERER"] = "other-referer",
+                    ["HTTP_USER_AGENT"] = "other-useragent",
+                    ["HTTP_CONNECTION"] = "other-connection",
+                    ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
+                    ["QUERY_STRING"] = "bar=2",
+                    ["REQUEST_FILENAME"] = "/other-foo",
+                    ["REQUEST_URI"] = "/other-foo",
+                    ["REQUEST_METHOD"] = "POST",
+                    ["SERVER_NAME"] = "otherexample.com",
+                }
+            )
+        );
 
         var rewriteContext = CreateTestRewriteContext(httpContext);
-        var lookup = serverVar.Evaluate(rewriteContext, CreateTestRuleMatch().BackReferences, CreateTestCondMatch().BackReferences);
+        var lookup = serverVar.Evaluate(
+            rewriteContext,
+            CreateTestRuleMatch().BackReferences,
+            CreateTestCondMatch().BackReferences
+        );
 
         // Assert
         Assert.Equal(expected, lookup);
@@ -102,31 +132,48 @@ public class ServerVariableTests
     [InlineData("REQUEST_URI", "http://example.com/foo?bar=1", (int)UriMatchPart.Full)]
     [InlineData("REQUEST_METHOD", "GET", (int)UriMatchPart.Full)]
     [InlineData("SERVER_NAME", "example.com", (int)UriMatchPart.Full)]
-    public void CheckServerVariableFeatureIsntUsedWhenDisabled(string variable, string expected, int uriMatchPart)
+    public void CheckServerVariableFeatureIsntUsedWhenDisabled(
+        string variable,
+        string expected,
+        int uriMatchPart
+    )
     {
         // Arrange and Act
         var testParserContext = new ParserContext("test");
-        var serverVar = ServerVariables.FindServerVariable(variable, testParserContext, (UriMatchPart)uriMatchPart, true);
+        var serverVar = ServerVariables.FindServerVariable(
+            variable,
+            testParserContext,
+            (UriMatchPart)uriMatchPart,
+            true
+        );
         var httpContext = CreateTestHttpContext();
-        httpContext.Features.Set<IServerVariablesFeature>(new TestServerVariablesFeature(new Dictionary<string, string>
-        {
-            ["CONTENT_LENGTH"] = "20",
-            ["CONTENT_TYPE"] = "text/xml",
-            ["HTTP_ACCEPT"] = "other-accept",
-            ["HTTP_COOKIE"] = "other-cookie",
-            ["HTTP_HOST"] = "otherexample.com",
-            ["HTTP_REFERER"] = "other-referer",
-            ["HTTP_USER_AGENT"] = "other-useragent",
-            ["HTTP_CONNECTION"] = "other-connection",
-            ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
-            ["QUERY_STRING"] = "bar=2",
-            ["REQUEST_FILENAME"] = "/other-foo",
-            ["REQUEST_URI"] = "/other-foo",
-            ["REQUEST_METHOD"] = "POST"
-        }));
+        httpContext.Features.Set<IServerVariablesFeature>(
+            new TestServerVariablesFeature(
+                new Dictionary<string, string>
+                {
+                    ["CONTENT_LENGTH"] = "20",
+                    ["CONTENT_TYPE"] = "text/xml",
+                    ["HTTP_ACCEPT"] = "other-accept",
+                    ["HTTP_COOKIE"] = "other-cookie",
+                    ["HTTP_HOST"] = "otherexample.com",
+                    ["HTTP_REFERER"] = "other-referer",
+                    ["HTTP_USER_AGENT"] = "other-useragent",
+                    ["HTTP_CONNECTION"] = "other-connection",
+                    ["HTTP_URL"] = "http://otherexample.com/other-foo?bar=2",
+                    ["QUERY_STRING"] = "bar=2",
+                    ["REQUEST_FILENAME"] = "/other-foo",
+                    ["REQUEST_URI"] = "/other-foo",
+                    ["REQUEST_METHOD"] = "POST",
+                }
+            )
+        );
 
         var rewriteContext = CreateTestRewriteContext(httpContext);
-        var lookup = serverVar.Evaluate(rewriteContext, CreateTestRuleMatch().BackReferences, CreateTestCondMatch().BackReferences);
+        var lookup = serverVar.Evaluate(
+            rewriteContext,
+            CreateTestRuleMatch().BackReferences,
+            CreateTestCondMatch().BackReferences
+        );
 
         // Assert
         Assert.Equal(expected, lookup);
@@ -174,8 +221,17 @@ public class ServerVariableTests
         var context = new DefaultHttpContext();
         var rewriteContext = new RewriteContext { HttpContext = context };
         var testParserContext = new ParserContext("test");
-        var serverVar = ServerVariables.FindServerVariable("QUERY_STRING", testParserContext, UriMatchPart.Path, true);
-        var lookup = serverVar.Evaluate(rewriteContext, CreateTestRuleMatch().BackReferences, CreateTestCondMatch().BackReferences);
+        var serverVar = ServerVariables.FindServerVariable(
+            "QUERY_STRING",
+            testParserContext,
+            UriMatchPart.Path,
+            true
+        );
+        var lookup = serverVar.Evaluate(
+            rewriteContext,
+            CreateTestRuleMatch().BackReferences,
+            CreateTestCondMatch().BackReferences
+        );
 
         Assert.Equal(string.Empty, lookup);
     }

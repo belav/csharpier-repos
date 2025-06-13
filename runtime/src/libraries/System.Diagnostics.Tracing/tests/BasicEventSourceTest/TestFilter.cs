@@ -3,12 +3,12 @@
 
 using System;
 using System.Collections.ObjectModel;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
 
 namespace BasicEventSourceTests
 {

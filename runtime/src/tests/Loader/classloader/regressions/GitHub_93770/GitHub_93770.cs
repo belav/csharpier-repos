@@ -26,75 +26,77 @@ public class ReproGH93770
         I1 i1 = c;
         Helper(i1);
     }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Helper(I1 i1)
     {
-    var e = 0;
-    var n = i1.M0();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M1();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M2();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M3();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M4();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M5();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M6();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M7();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M8();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M9();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M10();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M11();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M12();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M13();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M14();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M15();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M16();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M17();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M18();
-    Assert.Equal(e, n);
-    e++;
-    n = i1.M19();
-    Assert.Equal(e, n);
-    e++;
+        var e = 0;
+        var n = i1.M0();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M1();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M2();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M3();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M4();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M5();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M6();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M7();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M8();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M9();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M10();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M11();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M12();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M13();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M14();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M15();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M16();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M17();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M18();
+        Assert.Equal(e, n);
+        e++;
+        n = i1.M19();
+        Assert.Equal(e, n);
+        e++;
     }
 }
 
-public interface I1 {
-    public static T Id<T> (T t)=> t;
+public interface I1
+{
+    public static T Id<T>(T t) => t;
 
     public int M0() => 0;
     public int M1() => 1;
@@ -117,11 +119,6 @@ public interface I1 {
     public int M17() => 17;
     public int M18() => 18;
     public int M19() => 19;
-
 }
 
-public class C : I1 {
-
-}
-
-
+public class C : I1 { }

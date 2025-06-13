@@ -24,29 +24,69 @@ namespace System.Text.Unicode.Tests
         {
             bool shouldAppend;
 
-            new Utf8.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new byte[Math.Max(0, literalLength)], out shouldAppend);
+            new Utf8.TryWriteInterpolatedStringHandler(
+                literalLength,
+                formattedCount,
+                new byte[Math.Max(0, literalLength)],
+                out shouldAppend
+            );
             Assert.True(shouldAppend);
 
-            new Utf8.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new byte[1 + Math.Max(0, literalLength)], out shouldAppend);
+            new Utf8.TryWriteInterpolatedStringHandler(
+                literalLength,
+                formattedCount,
+                new byte[1 + Math.Max(0, literalLength)],
+                out shouldAppend
+            );
             Assert.True(shouldAppend);
 
             if (literalLength > 0)
             {
-                new Utf8.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new byte[literalLength - 1], out shouldAppend);
+                new Utf8.TryWriteInterpolatedStringHandler(
+                    literalLength,
+                    formattedCount,
+                    new byte[literalLength - 1],
+                    out shouldAppend
+                );
                 Assert.False(shouldAppend);
             }
 
-            foreach (IFormatProvider provider in new IFormatProvider[] { null, new ConcatFormatter(), CultureInfo.InvariantCulture, CultureInfo.CurrentCulture, new CultureInfo("en-US"), new CultureInfo("fr-FR") })
+            foreach (
+                IFormatProvider provider in new IFormatProvider[]
+                {
+                    null,
+                    new ConcatFormatter(),
+                    CultureInfo.InvariantCulture,
+                    CultureInfo.CurrentCulture,
+                    new CultureInfo("en-US"),
+                    new CultureInfo("fr-FR"),
+                }
+            )
             {
-                new Utf8.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new byte[Math.Max(0, literalLength)], out shouldAppend);
+                new Utf8.TryWriteInterpolatedStringHandler(
+                    literalLength,
+                    formattedCount,
+                    new byte[Math.Max(0, literalLength)],
+                    out shouldAppend
+                );
                 Assert.True(shouldAppend);
 
-                new Utf8.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new byte[1 + Math.Max(0, literalLength)], out shouldAppend);
+                new Utf8.TryWriteInterpolatedStringHandler(
+                    literalLength,
+                    formattedCount,
+                    new byte[1 + Math.Max(0, literalLength)],
+                    out shouldAppend
+                );
                 Assert.True(shouldAppend);
 
                 if (literalLength > 0)
                 {
-                    new Utf8.TryWriteInterpolatedStringHandler(literalLength, formattedCount, new byte[literalLength - 1], out shouldAppend);
+                    new Utf8.TryWriteInterpolatedStringHandler(
+                        literalLength,
+                        formattedCount,
+                        new byte[literalLength - 1],
+                        out shouldAppend
+                    );
                     Assert.False(shouldAppend);
                 }
             }
@@ -65,7 +105,10 @@ namespace System.Text.Unicode.Tests
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
@@ -87,17 +130,26 @@ namespace System.Text.Unicode.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // span, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     actual.AppendFormatted((ReadOnlySpan<char>)s, alignment);
 
                     // span, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     actual.AppendFormatted((ReadOnlySpan<char>)s, alignment, "X2");
                 }
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
@@ -121,17 +173,26 @@ namespace System.Text.Unicode.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // span, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     actual.AppendFormatted(utf8, alignment);
 
                     // span, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     actual.AppendFormatted(utf8, alignment, "X2");
                 }
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
@@ -140,7 +201,9 @@ namespace System.Text.Unicode.Tests
             var expected = new StringBuilder();
             var actual = new Utf8.TryWriteInterpolatedStringHandler(0, 0, _buffer, out _);
 
-            foreach (string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" })
+            foreach (
+                string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" }
+            )
             {
                 // string
                 expected.AppendFormat("{0}", s);
@@ -153,17 +216,26 @@ namespace System.Text.Unicode.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // string, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     actual.AppendFormatted(s, alignment);
 
                     // string, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     actual.AppendFormatted(s, alignment, "X2");
                 }
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
@@ -194,7 +266,10 @@ namespace System.Text.Unicode.Tests
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
@@ -203,15 +278,28 @@ namespace System.Text.Unicode.Tests
             var expected = new StringBuilder();
             var actual = new Utf8.TryWriteInterpolatedStringHandler(0, 0, _buffer, out _);
 
-            foreach (string rawInput in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" })
-            {
-                foreach (object o in new object[]
+            foreach (
+                string rawInput in new[]
                 {
-                    rawInput, // raw string directly; ToString will return itself
-                    new StringWrapper(rawInput), // wrapper object that returns string from ToString
-                    new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
-                    new SpanFormattableStringWrapper(rawInput) // ISpanFormattable wrapper around string
-                })
+                    null,
+                    "",
+                    "a",
+                    "bc",
+                    "def",
+                    "this is a longer string",
+                    "!",
+                }
+            )
+            {
+                foreach (
+                    object o in new object[]
+                    {
+                        rawInput, // raw string directly; ToString will return itself
+                        new StringWrapper(rawInput), // wrapper object that returns string from ToString
+                        new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
+                        new SpanFormattableStringWrapper(rawInput), // ISpanFormattable wrapper around string
+                    }
+                )
                 {
                     // object
                     expected.AppendFormat("{0}", o);
@@ -234,7 +322,10 @@ namespace System.Text.Unicode.Tests
                     foreach (int alignment in new[] { 0, 3, -3 })
                     {
                         // object, alignment
-                        expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", o);
+                        expected.AppendFormat(
+                            "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                            o
+                        );
                         actual.AppendFormatted(o, alignment);
                         if (o is IHasToStringState tss3)
                         {
@@ -243,7 +334,10 @@ namespace System.Text.Unicode.Tests
                         }
 
                         // object, alignment, format
-                        expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", o);
+                        expected.AppendFormat(
+                            "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                            o
+                        );
                         actual.AppendFormatted(o, alignment, "X2");
                         if (o is IHasToStringState tss4)
                         {
@@ -255,16 +349,26 @@ namespace System.Text.Unicode.Tests
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
         public void AppendFormatted_ReferenceTypes_CreateProviderFlowed()
         {
             var provider = new CultureInfo("en-US");
-            Utf8.TryWriteInterpolatedStringHandler handler = new Utf8.TryWriteInterpolatedStringHandler(1, 2, _buffer, provider, out _);
+            Utf8.TryWriteInterpolatedStringHandler handler =
+                new Utf8.TryWriteInterpolatedStringHandler(1, 2, _buffer, provider, out _);
 
-            foreach (IHasToStringState tss in new IHasToStringState[] { new FormattableStringWrapper("hello"), new  SpanFormattableStringWrapper("hello") })
+            foreach (
+                IHasToStringState tss in new IHasToStringState[]
+                {
+                    new FormattableStringWrapper("hello"),
+                    new SpanFormattableStringWrapper("hello"),
+                }
+            )
             {
                 handler.AppendFormatted(tss);
                 Assert.Same(provider, tss.ToStringState.LastProvider);
@@ -290,13 +394,22 @@ namespace System.Text.Unicode.Tests
 
             foreach (string s in new[] { null, "", "a" })
             {
-                foreach (IHasToStringState tss in new IHasToStringState[] { new FormattableStringWrapper(s), new  SpanFormattableStringWrapper(s) })
+                foreach (
+                    IHasToStringState tss in new IHasToStringState[]
+                    {
+                        new FormattableStringWrapper(s),
+                        new SpanFormattableStringWrapper(s),
+                    }
+                )
                 {
                     void AssertTss(IHasToStringState tss, string format)
                     {
                         Assert.Equal(format, tss.ToStringState.LastFormat);
                         Assert.Same(provider, tss.ToStringState.LastProvider);
-                        Assert.Equal(ToStringMode.ICustomFormatterFormat, tss.ToStringState.ToStringMode);
+                        Assert.Equal(
+                            ToStringMode.ICustomFormatterFormat,
+                            tss.ToStringState.ToStringMode
+                        );
                     }
 
                     // object
@@ -322,7 +435,10 @@ namespace System.Text.Unicode.Tests
             }
 
             Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-            Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                expected.ToString(),
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
         [Fact]
@@ -348,20 +464,31 @@ namespace System.Text.Unicode.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // struct, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", t);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        t
+                    );
                     actual.AppendFormatted(t, alignment);
-                    Assert.True(string.IsNullOrEmpty(((IHasToStringState)t).ToStringState.LastFormat));
+                    Assert.True(
+                        string.IsNullOrEmpty(((IHasToStringState)t).ToStringState.LastFormat)
+                    );
                     AssertModeMatchesType(((IHasToStringState)t));
 
                     // struct, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", t);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        t
+                    );
                     actual.AppendFormatted(t, alignment, "X2");
                     Assert.Equal("X2", ((IHasToStringState)t).ToStringState.LastFormat);
                     AssertModeMatchesType(((IHasToStringState)t));
                 }
 
                 Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-                Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+                Assert.Equal(
+                    expected.ToString(),
+                    Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+                );
             }
 
             Test(new FormattableInt32Wrapper(42));
@@ -376,7 +503,8 @@ namespace System.Text.Unicode.Tests
             void Test<T>(T t)
             {
                 var provider = new CultureInfo("en-US");
-                Utf8.TryWriteInterpolatedStringHandler handler = new Utf8.TryWriteInterpolatedStringHandler(1, 2, _buffer, provider, out _);
+                Utf8.TryWriteInterpolatedStringHandler handler =
+                    new Utf8.TryWriteInterpolatedStringHandler(1, 2, _buffer, provider, out _);
 
                 handler.AppendFormatted(t);
                 Assert.Same(provider, ((IHasToStringState)t).ToStringState.LastProvider);
@@ -408,11 +536,20 @@ namespace System.Text.Unicode.Tests
                 {
                     Assert.Equal(format, ((IHasToStringState)tss).ToStringState.LastFormat);
                     Assert.Same(provider, ((IHasToStringState)tss).ToStringState.LastProvider);
-                    Assert.Equal(ToStringMode.ICustomFormatterFormat, ((IHasToStringState)tss).ToStringState.ToStringMode);
+                    Assert.Equal(
+                        ToStringMode.ICustomFormatterFormat,
+                        ((IHasToStringState)tss).ToStringState.ToStringMode
+                    );
                 }
 
                 var expected = new StringBuilder();
-                var actual = new Utf8.TryWriteInterpolatedStringHandler(0, 0, _buffer, provider, out _);
+                var actual = new Utf8.TryWriteInterpolatedStringHandler(
+                    0,
+                    0,
+                    _buffer,
+                    provider,
+                    out _
+                );
 
                 // struct
                 expected.AppendFormat(provider, "{0}", t);
@@ -435,7 +572,10 @@ namespace System.Text.Unicode.Tests
                 AssertTss(t, "X2");
 
                 Assert.True(Utf8.TryWrite(_buffer, ref actual, out int bytesWritten));
-                Assert.Equal(expected.ToString(), Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+                Assert.Equal(
+                    expected.ToString(),
+                    Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+                );
             }
 
             Test(new FormattableInt32Wrapper(42));
@@ -447,7 +587,12 @@ namespace System.Text.Unicode.Tests
         [Fact]
         public void AppendFormatted_EmptyBuffer_ZeroLengthWritesSuccessful()
         {
-            Utf8.TryWriteInterpolatedStringHandler b = new Utf8.TryWriteInterpolatedStringHandler(0, 0, _buffer.AsSpan(0, 0), out bool shouldAppend);
+            Utf8.TryWriteInterpolatedStringHandler b = new Utf8.TryWriteInterpolatedStringHandler(
+                0,
+                0,
+                _buffer.AsSpan(0, 0),
+                out bool shouldAppend
+            );
             Assert.True(shouldAppend);
 
             Assert.True(b.AppendLiteral(""));
@@ -475,7 +620,8 @@ namespace System.Text.Unicode.Tests
 
             for (int i = 0; i <= 31; i++)
             {
-                Utf8.TryWriteInterpolatedStringHandler b = new Utf8.TryWriteInterpolatedStringHandler(0, 0, buffer, out bool shouldAppend);
+                Utf8.TryWriteInterpolatedStringHandler b =
+                    new Utf8.TryWriteInterpolatedStringHandler(0, 0, buffer, out bool shouldAppend);
                 Assert.True(shouldAppend);
 
                 Assert.True(b.AppendLiteral(new string('s', bufferLength)));
@@ -495,19 +641,35 @@ namespace System.Text.Unicode.Tests
                     10 => b.AppendFormatted(new FormattableStringWrapper(" ")),
                     11 => b.AppendFormatted(new FormattableStringWrapper(" "), alignment: 0),
                     12 => b.AppendFormatted(new FormattableStringWrapper(" "), format: "X2"),
-                    13 => b.AppendFormatted(new FormattableStringWrapper(" "), alignment: 0, format: "X2"),
+                    13 => b.AppendFormatted(
+                        new FormattableStringWrapper(" "),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     14 => b.AppendFormatted(new SpanFormattableStringWrapper(" ")),
                     15 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), alignment: 0),
                     16 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), format: "X2"),
-                    17 => b.AppendFormatted(new SpanFormattableStringWrapper(" "), alignment: 0, format: "X2"),
+                    17 => b.AppendFormatted(
+                        new SpanFormattableStringWrapper(" "),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     18 => b.AppendFormatted(new FormattableInt32Wrapper(1)),
                     19 => b.AppendFormatted(new FormattableInt32Wrapper(1), alignment: 0),
                     20 => b.AppendFormatted(new FormattableInt32Wrapper(1), format: "X2"),
-                    21 => b.AppendFormatted(new FormattableInt32Wrapper(1), alignment: 0, format: "X2"),
+                    21 => b.AppendFormatted(
+                        new FormattableInt32Wrapper(1),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     22 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1)),
                     23 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), alignment: 0),
                     24 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), format: "X2"),
-                    25 => b.AppendFormatted(new SpanFormattableInt32Wrapper(1), alignment: 0, format: "X2"),
+                    25 => b.AppendFormatted(
+                        new SpanFormattableInt32Wrapper(1),
+                        alignment: 0,
+                        format: "X2"
+                    ),
                     26 => b.AppendFormatted<string>("", alignment: 1),
                     27 => b.AppendFormatted<string>("", alignment: -1),
                     28 => b.AppendFormatted<string>(" ", alignment: 1, format: "X2"),
@@ -528,7 +690,13 @@ namespace System.Text.Unicode.Tests
         {
             var provider = new ConstFormatter(" ");
 
-            Utf8.TryWriteInterpolatedStringHandler b = new Utf8.TryWriteInterpolatedStringHandler(0, 0, _buffer.AsSpan(0, 0), provider, out bool shouldAppend);
+            Utf8.TryWriteInterpolatedStringHandler b = new Utf8.TryWriteInterpolatedStringHandler(
+                0,
+                0,
+                _buffer.AsSpan(0, 0),
+                provider,
+                out bool shouldAppend
+            );
             Assert.True(shouldAppend);
 
             // don't use custom formatter
@@ -559,17 +727,25 @@ namespace System.Text.Unicode.Tests
             bool boolValue = true;
             Version versionValue = Version.Parse("1.2.3.4");
 
-            bool formatted = Utf8.TryWrite(_buffer, $"Hello {int32Value,8:X4}  {boolValue}   {versionValue}", out int bytesWritten);
+            bool formatted = Utf8.TryWrite(
+                _buffer,
+                $"Hello {int32Value, 8:X4}  {boolValue}   {versionValue}",
+                out int bytesWritten
+            );
             Assert.True(formatted);
-            Assert.Equal("Hello     0400  True   1.2.3.4", Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten)));
+            Assert.Equal(
+                "Hello     0400  True   1.2.3.4",
+                Encoding.UTF8.GetString(_buffer.AsSpan(0, bytesWritten))
+            );
         }
 
-        private static void AssertModeMatchesType<T>(T tss) where T : IHasToStringState
+        private static void AssertModeMatchesType<T>(T tss)
+            where T : IHasToStringState
         {
             ToStringMode expected =
-                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat :
-                tss is IFormattable ? ToStringMode.IFormattableToString :
-                ToStringMode.ObjectToString;
+                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat
+                : tss is IFormattable ? ToStringMode.IFormattableToString
+                : ToStringMode.ObjectToString;
             Assert.Equal(expected, tss.ToStringState.ToStringMode);
         }
 
@@ -584,13 +760,20 @@ namespace System.Text.Unicode.Tests
                 _value = value;
             }
 
-            public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<byte> utf8Destination,
+                out int bytesWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
                 ToStringState.ToStringMode = ToStringMode.ISpanFormattableTryFormat;
 
-                ReadOnlySpan<byte> src = Encoding.UTF8.GetBytes(_value.ToString(format.ToString(), provider)).AsSpan();
+                ReadOnlySpan<byte> src = Encoding
+                    .UTF8.GetBytes(_value.ToString(format.ToString(), provider))
+                    .AsSpan();
                 if (src.TryCopyTo(utf8Destination))
                 {
                     bytesWritten = src.Length;
@@ -618,14 +801,22 @@ namespace System.Text.Unicode.Tests
             }
         }
 
-        private sealed class SpanFormattableStringWrapper : IFormattable, ISpanFormattable, IHasToStringState
+        private sealed class SpanFormattableStringWrapper
+            : IFormattable,
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly string _value;
             public ToStringState ToStringState { get; } = new ToStringState();
 
             public SpanFormattableStringWrapper(string value) => _value = value;
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
@@ -665,7 +856,10 @@ namespace System.Text.Unicode.Tests
             }
         }
 
-        private struct SpanFormattableInt32Wrapper : IFormattable, ISpanFormattable, IHasToStringState
+        private struct SpanFormattableInt32Wrapper
+            : IFormattable,
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly int _value;
             public ToStringState ToStringState { get; }
@@ -676,7 +870,12 @@ namespace System.Text.Unicode.Tests
                 _value = value;
             }
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
@@ -785,7 +984,8 @@ namespace System.Text.Unicode.Tests
 
         private sealed class ConcatFormatter : IFormatProvider, ICustomFormatter
         {
-            public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+            public object GetFormat(Type formatType) =>
+                formatType == typeof(ICustomFormatter) ? this : null;
 
             public string Format(string format, object arg, IFormatProvider formatProvider)
             {
@@ -809,9 +1009,11 @@ namespace System.Text.Unicode.Tests
 
             public ConstFormatter(string value) => _value = value;
 
-            public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+            public object GetFormat(Type formatType) =>
+                formatType == typeof(ICustomFormatter) ? this : null;
 
-            public string Format(string format, object arg, IFormatProvider formatProvider) => _value;
+            public string Format(string format, object arg, IFormatProvider formatProvider) =>
+                _value;
         }
     }
 }

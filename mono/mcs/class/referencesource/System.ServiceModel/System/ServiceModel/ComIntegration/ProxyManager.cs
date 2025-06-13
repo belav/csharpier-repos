@@ -19,12 +19,12 @@ namespace System.ServiceModel.ComIntegration
             this.proxyCreator = proxyCreator;
             InterfaceIDToComProxy = new Dictionary<Guid, ComProxy>();
         }
+
         bool IsIntrinsic(ref Guid riid)
         {
-            if ((riid == typeof(IChannelOptions).GUID)
-                 ||
-                 (riid == typeof(IChannelCredentials).GUID)
-                 )
+            if (
+                (riid == typeof(IChannelOptions).GUID) || (riid == typeof(IChannelCredentials).GUID)
+            )
                 return true;
             return false;
         }
@@ -33,7 +33,8 @@ namespace System.ServiceModel.ComIntegration
         {
             lock (this)
             {
-                IEnumerator<KeyValuePair<Guid, ComProxy>> enumeratorInterfaces = InterfaceIDToComProxy.GetEnumerator();
+                IEnumerator<KeyValuePair<Guid, ComProxy>> enumeratorInterfaces =
+                    InterfaceIDToComProxy.GetEnumerator();
                 while (enumeratorInterfaces.MoveNext())
                 {
                     KeyValuePair<Guid, ComProxy> current = enumeratorInterfaces.Current;
@@ -60,9 +61,15 @@ namespace System.ServiceModel.ComIntegration
             if (proxyCreator.SupportsIntrinsics())
             {
                 if (riid == typeof(IChannelOptions).GUID)
-                    return ChannelOptions.Create(outerProxy, proxyCreator as IProvideChannelBuilderSettings);
+                    return ChannelOptions.Create(
+                        outerProxy,
+                        proxyCreator as IProvideChannelBuilderSettings
+                    );
                 else if (riid == typeof(IChannelCredentials).GUID)
-                    return ChannelCredentials.Create(outerProxy, proxyCreator as IProvideChannelBuilderSettings);
+                    return ChannelCredentials.Create(
+                        outerProxy,
+                        proxyCreator as IProvideChannelBuilderSettings
+                    );
                 else
                 {
                     throw Fx.AssertAndThrow("Given IID is not an intrinsic");
@@ -112,9 +119,7 @@ namespace System.ServiceModel.ComIntegration
 
                 e = e.GetBaseException();
                 return Marshal.GetHRForException(e);
-
             }
-
         }
 
         int IProxyManager.InterfaceSupportsErrorInfo(ref Guid riid)
@@ -123,14 +128,13 @@ namespace System.ServiceModel.ComIntegration
                 return HR.S_OK;
             else
                 return proxyCreator.SupportsErrorInfo(ref riid) ? HR.S_OK : HR.S_FALSE;
-
         }
 
         void IProxyManager.GetIDsOfNames(
-                        [MarshalAs(UnmanagedType.LPWStr)] string name,
-                        IntPtr pDispID)
+            [MarshalAs(UnmanagedType.LPWStr)] string name,
+            IntPtr pDispID
+        )
         {
-
             Int32 dispID = -1;
             switch (name)
             {
@@ -143,18 +147,16 @@ namespace System.ServiceModel.ComIntegration
             }
             Marshal.WriteInt32(pDispID, (int)dispID);
         }
+
         int IProxyManager.Invoke(
-                       UInt32 dispIdMember,
-                       IntPtr outerProxy,
-                       IntPtr pVarResult,
-                       IntPtr pExcepInfo
-
-                   )
+            UInt32 dispIdMember,
+            IntPtr outerProxy,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo
+        )
         {
-
             try
             {
-
                 ComProxy comProxy = null;
                 Guid riid;
                 if ((dispIdMember == 1))
@@ -179,7 +181,8 @@ namespace System.ServiceModel.ComIntegration
 
                 if (pExcepInfo != IntPtr.Zero)
                 {
-                    System.Runtime.InteropServices.ComTypes.EXCEPINFO exceptionInfo = new System.Runtime.InteropServices.ComTypes.EXCEPINFO();
+                    System.Runtime.InteropServices.ComTypes.EXCEPINFO exceptionInfo =
+                        new System.Runtime.InteropServices.ComTypes.EXCEPINFO();
                     e = e.GetBaseException();
                     exceptionInfo.bstrDescription = e.Message;
                     exceptionInfo.bstrSource = e.Source;

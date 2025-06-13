@@ -24,19 +24,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionExpression;
 
 using static UseCollectionExpressionHelpers;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCollectionExpressionForArray), Shared]
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.UseCollectionExpressionForArray
+    ),
+    Shared
+]
 internal partial class CSharpUseCollectionExpressionForArrayCodeFixProvider
     : ForkingSyntaxEditorBasedCodeFixProvider<ExpressionSyntax>
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public CSharpUseCollectionExpressionForArrayCodeFixProvider()
-        : base(CSharpCodeFixesResources.Use_collection_expression,
-               IDEDiagnosticIds.UseCollectionExpressionForArrayDiagnosticId)
-    {
-    }
+        : base(
+            CSharpCodeFixesResources.Use_collection_expression,
+            IDEDiagnosticIds.UseCollectionExpressionForArrayDiagnosticId
+        ) { }
 
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(IDEDiagnosticIds.UseCollectionExpressionForArrayDiagnosticId);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(IDEDiagnosticIds.UseCollectionExpressionForArrayDiagnosticId);
 
     protected sealed override async Task FixAsync(
         Document document,
@@ -44,16 +51,19 @@ internal partial class CSharpUseCollectionExpressionForArrayCodeFixProvider
         CodeActionOptionsProvider fallbackOptions,
         ExpressionSyntax arrayCreationExpression,
         ImmutableDictionary<string, string?> properties,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var services = document.Project.Solution.Services;
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
         var originalRoot = editor.OriginalRoot;
 
-        if (arrayCreationExpression
-                is not ArrayCreationExpressionSyntax
+        if (
+            arrayCreationExpression
+            is not ArrayCreationExpressionSyntax
                 and not ImplicitArrayCreationExpressionSyntax
-                and not InitializerExpressionSyntax)
+                and not InitializerExpressionSyntax
+        )
         {
             return;
         }
@@ -65,33 +75,46 @@ internal partial class CSharpUseCollectionExpressionForArrayCodeFixProvider
                 initializer,
                 ConvertInitializerToCollectionExpression(
                     initializer,
-                    IsOnSingleLine(text, initializer)));
+                    IsOnSingleLine(text, initializer)
+                )
+            );
         }
         else
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var matches = GetMatches(semanticModel, arrayCreationExpression);
             if (matches.IsDefault)
                 return;
 
-            var collectionExpression = await CSharpCollectionExpressionRewriter.CreateCollectionExpressionAsync(
-                document,
-                fallbackOptions,
-                arrayCreationExpression,
-                matches,
-                static e => e switch
-                {
-                    ArrayCreationExpressionSyntax arrayCreation => arrayCreation.Initializer,
-                    ImplicitArrayCreationExpressionSyntax implicitArrayCreation => implicitArrayCreation.Initializer,
-                    _ => throw ExceptionUtilities.Unreachable(),
-                },
-                static (e, i) => e switch
-                {
-                    ArrayCreationExpressionSyntax arrayCreation => arrayCreation.WithInitializer(i),
-                    ImplicitArrayCreationExpressionSyntax implicitArrayCreation => implicitArrayCreation.WithInitializer(i),
-                    _ => throw ExceptionUtilities.Unreachable(),
-                },
-                cancellationToken).ConfigureAwait(false);
+            var collectionExpression = await CSharpCollectionExpressionRewriter
+                .CreateCollectionExpressionAsync(
+                    document,
+                    fallbackOptions,
+                    arrayCreationExpression,
+                    matches,
+                    static e =>
+                        e switch
+                        {
+                            ArrayCreationExpressionSyntax arrayCreation =>
+                                arrayCreation.Initializer,
+                            ImplicitArrayCreationExpressionSyntax implicitArrayCreation =>
+                                implicitArrayCreation.Initializer,
+                            _ => throw ExceptionUtilities.Unreachable(),
+                        },
+                    static (e, i) =>
+                        e switch
+                        {
+                            ArrayCreationExpressionSyntax arrayCreation =>
+                                arrayCreation.WithInitializer(i),
+                            ImplicitArrayCreationExpressionSyntax implicitArrayCreation =>
+                                implicitArrayCreation.WithInitializer(i),
+                            _ => throw ExceptionUtilities.Unreachable(),
+                        },
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             editor.ReplaceNode(arrayCreationExpression, collectionExpression);
             foreach (var match in matches)
@@ -100,17 +123,28 @@ internal partial class CSharpUseCollectionExpressionForArrayCodeFixProvider
 
         return;
 
-        static bool IsOnSingleLine(SourceText sourceText, SyntaxNode node)
-            => sourceText.AreOnSameLine(node.GetFirstToken(), node.GetLastToken());
+        static bool IsOnSingleLine(SourceText sourceText, SyntaxNode node) =>
+            sourceText.AreOnSameLine(node.GetFirstToken(), node.GetLastToken());
 
-        ImmutableArray<CollectionExpressionMatch<StatementSyntax>> GetMatches(SemanticModel semanticModel, ExpressionSyntax expression)
-            => expression switch
+        ImmutableArray<CollectionExpressionMatch<StatementSyntax>> GetMatches(
+            SemanticModel semanticModel,
+            ExpressionSyntax expression
+        ) =>
+            expression switch
             {
-                ImplicitArrayCreationExpressionSyntax arrayCreation
-                    => CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(semanticModel, arrayCreation, cancellationToken),
+                ImplicitArrayCreationExpressionSyntax arrayCreation =>
+                    CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(
+                        semanticModel,
+                        arrayCreation,
+                        cancellationToken
+                    ),
 
-                ArrayCreationExpressionSyntax arrayCreation
-                    => CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(semanticModel, arrayCreation, cancellationToken),
+                ArrayCreationExpressionSyntax arrayCreation =>
+                    CSharpUseCollectionExpressionForArrayDiagnosticAnalyzer.TryGetMatches(
+                        semanticModel,
+                        arrayCreation,
+                        cancellationToken
+                    ),
 
                 // We validated this is unreachable in the caller.
                 _ => throw ExceptionUtilities.Unreachable(),

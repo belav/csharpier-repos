@@ -10,8 +10,9 @@ namespace System.Net.Security
     internal static class TargetHostNameHelper
     {
         private static readonly IdnMapping s_idnMapping = new IdnMapping();
-        private static readonly SearchValues<char> s_safeDnsChars =
-            SearchValues.Create("-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz");
+        private static readonly SearchValues<char> s_safeDnsChars = SearchValues.Create(
+            "-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz"
+        );
 
         private static bool IsSafeDnsString(ReadOnlySpan<char> name) =>
             !name.ContainsAnyExcept(s_safeDnsChars);
@@ -68,7 +69,12 @@ namespace System.Net.Security
 
                 fixed (char* ipStringPtr = &MemoryMarshal.GetReference(ipSpan))
                 {
-                    tmpAddr = IPv4AddressHelper.ParseNonCanonical(ipStringPtr, 0, ref end, notImplicitFile: true);
+                    tmpAddr = IPv4AddressHelper.ParseNonCanonical(
+                        ipStringPtr,
+                        0,
+                        ref end,
+                        notImplicitFile: true
+                    );
                 }
 
                 if (tmpAddr != IPv4AddressHelper.Invalid && end == ipSpan.Length)

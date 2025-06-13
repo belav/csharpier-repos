@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,101 +31,114 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
+namespace System.Reflection.Emit
+{
+    [ComVisible(true)]
+    public class DynamicILInfo
+    {
+        DynamicMethod method;
 
-	[ComVisible (true)]
-	public class DynamicILInfo {
+        internal DynamicILInfo() { }
 
-		DynamicMethod method;
+        internal DynamicILInfo(DynamicMethod method)
+        {
+            this.method = method;
+        }
 
-		internal DynamicILInfo ()
-		{
-		}
+        public DynamicMethod DynamicMethod
+        {
+            get { return method; }
+        }
 
-		internal DynamicILInfo (DynamicMethod method)
-		{
-			this.method = method;
-		}
+        [MonoTODO]
+        public int GetTokenFor(byte[] signature)
+        {
+            throw new NotImplementedException();
+        }
 
-		public DynamicMethod DynamicMethod { 
-			get {
-				return method;
-			}
-		}
+        public int GetTokenFor(DynamicMethod method)
+        {
+            return this.method.GetILGenerator().TokenGenerator.GetToken(method, false);
+        }
 
-		[MonoTODO]
-		public int GetTokenFor (byte[] signature) {
-			throw new NotImplementedException ();
-		}
+        public int GetTokenFor(RuntimeFieldHandle field)
+        {
+            return this
+                .method.GetILGenerator()
+                .TokenGenerator.GetToken(FieldInfo.GetFieldFromHandle(field), false);
+        }
 
-		public int GetTokenFor (DynamicMethod method) {
-			return this.method.GetILGenerator ().TokenGenerator.GetToken (method, false);
-		}
+        public int GetTokenFor(RuntimeMethodHandle method)
+        {
+            MethodBase mi = MethodBase.GetMethodFromHandle(method);
+            return this.method.GetILGenerator().TokenGenerator.GetToken(mi, false);
+        }
 
-		public int GetTokenFor (RuntimeFieldHandle field) {
-			return this.method.GetILGenerator ().TokenGenerator.GetToken (FieldInfo.GetFieldFromHandle (field), false);
-		}
+        public int GetTokenFor(RuntimeTypeHandle type)
+        {
+            Type t = Type.GetTypeFromHandle(type);
+            return this.method.GetILGenerator().TokenGenerator.GetToken(t, false);
+        }
 
-		public int GetTokenFor (RuntimeMethodHandle method) {
-			MethodBase mi = MethodBase.GetMethodFromHandle (method);
-			return this.method.GetILGenerator ().TokenGenerator.GetToken (mi, false);
-		}
+        public int GetTokenFor(string literal)
+        {
+            return method.GetILGenerator().TokenGenerator.GetToken(literal);
+        }
 
-		public int GetTokenFor (RuntimeTypeHandle type) {
-			Type t = Type.GetTypeFromHandle (type);
-			return this.method.GetILGenerator ().TokenGenerator.GetToken (t, false);
-		}
+        [MonoTODO]
+        public int GetTokenFor(RuntimeMethodHandle method, RuntimeTypeHandle contextType)
+        {
+            throw new NotImplementedException();
+        }
 
-		public int GetTokenFor (string literal) {
-			return method.GetILGenerator ().TokenGenerator.GetToken (literal);
-		}
+        [MonoTODO]
+        public int GetTokenFor(RuntimeFieldHandle field, RuntimeTypeHandle contextType)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public int GetTokenFor (RuntimeMethodHandle method, RuntimeTypeHandle contextType) {
-			throw new NotImplementedException ();
-		}
+        public void SetCode(byte[] code, int maxStackSize)
+        {
+            if (code == null)
+                throw new ArgumentNullException("code");
+            method.GetILGenerator().SetCode(code, maxStackSize);
+        }
 
-		[MonoTODO]
-		public int GetTokenFor (RuntimeFieldHandle field, RuntimeTypeHandle contextType) {
-			throw new NotImplementedException ();
-		}
+        [CLSCompliantAttribute(false)]
+        public unsafe void SetCode(byte* code, int codeSize, int maxStackSize)
+        {
+            if (code == null)
+                throw new ArgumentNullException("code");
+            method.GetILGenerator().SetCode(code, codeSize, maxStackSize);
+        }
 
-		public void SetCode (byte[] code, int maxStackSize) {
-			if (code == null)
-				throw new ArgumentNullException ("code");
-			method.GetILGenerator ().SetCode (code, maxStackSize);
-		}
+        [MonoTODO]
+        public void SetExceptions(byte[] exceptions)
+        {
+            throw new NotImplementedException();
+        }
 
-		[CLSCompliantAttribute(false)] 
-		public unsafe void SetCode (byte* code, int codeSize, int maxStackSize) {
-			if (code == null)
-				throw new ArgumentNullException ("code");
-			method.GetILGenerator ().SetCode (code, codeSize, maxStackSize);
-		}
+        [MonoTODO]
+        [CLSCompliantAttribute(false)]
+        public unsafe void SetExceptions(byte* exceptions, int exceptionsSize)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void SetExceptions (byte[] exceptions) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void SetLocalSignature(byte[] localSignature)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		[CLSCompliantAttribute(false)] 
-		public unsafe void SetExceptions (byte* exceptions, int exceptionsSize) {
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO]
-		public void SetLocalSignature (byte[] localSignature) {
-			throw new NotImplementedException ();
-		}
-
-		[CLSCompliantAttribute(false)] 
-		public unsafe void SetLocalSignature (byte* localSignature, int signatureSize) {
-			byte[] b = new byte [signatureSize];
-			for (int i = 0; i < signatureSize; ++i)
-				b [i] = localSignature [i];
-		}
-	}
+        [CLSCompliantAttribute(false)]
+        public unsafe void SetLocalSignature(byte* localSignature, int signatureSize)
+        {
+            byte[] b = new byte[signatureSize];
+            for (int i = 0; i < signatureSize; ++i)
+                b[i] = localSignature[i];
+        }
+    }
 }
 
 #endif

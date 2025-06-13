@@ -13,10 +13,10 @@ namespace System.Diagnostics.Tests
         [InlineData("Application", true)]
         public void ReadEvent(string logName, bool useQuery)
         {
-            var eventLog =
-                useQuery
+            var eventLog = useQuery
                 ? new EventLogReader(
-                     new EventLogQuery(logName, PathType.LogName) { ReverseDirection = true })
+                    new EventLogQuery(logName, PathType.LogName) { ReverseDirection = true }
+                )
                 : new EventLogReader(logName);
 
             using (eventLog)
@@ -47,11 +47,19 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery(null, PathType.FilePath, "*[System[(Level=2)]]") { ReverseDirection = true };
+            var query = new EventLogQuery(null, PathType.FilePath, "*[System[(Level=2)]]")
+            {
+                ReverseDirection = true,
+            };
             if (useBookmark)
             {
                 Assert.Throws<EventLogException>(() => new EventLogReader(query, bookmark: null));
-                Assert.Throws<EventLogException>(() => new EventLogReader(query, bookmark: Helpers.GetBookmark("Application", PathType.LogName)));
+                Assert.Throws<EventLogException>(() =>
+                    new EventLogReader(
+                        query,
+                        bookmark: Helpers.GetBookmark("Application", PathType.LogName)
+                    )
+                );
             }
             else
             {
@@ -66,11 +74,19 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery(null, PathType.FilePath, "*[System[(Level=2)]]") { TolerateQueryErrors = true };
+            var query = new EventLogQuery(null, PathType.FilePath, "*[System[(Level=2)]]")
+            {
+                TolerateQueryErrors = true,
+            };
             if (useBookmark)
             {
                 Assert.Throws<EventLogException>(() => new EventLogReader(query, bookmark: null));
-                Assert.Throws<EventLogException>(() => new EventLogReader(query, bookmark: Helpers.GetBookmark("Application", PathType.LogName)));
+                Assert.Throws<EventLogException>(() =>
+                    new EventLogReader(
+                        query,
+                        bookmark: Helpers.GetBookmark("Application", PathType.LogName)
+                    )
+                );
             }
             else
             {
@@ -83,8 +99,14 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true };
-            var eventLog = new EventLogReader(query, Helpers.GetBookmark("Application", PathType.LogName));
+            var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
+            var eventLog = new EventLogReader(
+                query,
+                Helpers.GetBookmark("Application", PathType.LogName)
+            );
             using (eventLog)
             {
                 using (var record = (EventLogRecord)eventLog.ReadEvent())

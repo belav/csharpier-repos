@@ -10,6 +10,4 @@ namespace Microsoft.AspNetCore.Http.Timeouts;
 /// Completely disables the request timeouts middleware from applying to this endpoint.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-public sealed class DisableRequestTimeoutAttribute : Attribute
-{
-}
+public sealed class DisableRequestTimeoutAttribute : Attribute { }

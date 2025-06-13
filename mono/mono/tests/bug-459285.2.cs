@@ -15,20 +15,20 @@ public class Foo<T>
     }
 }
 
-public class Bar: Foo<string>
-{
-}
-
+public class Bar : Foo<string> { }
 
 public class MainClass
 {
     public static int Main()
     {
-	    try {
-		    new Bar().DoSomething();
-	    } catch {
-		    return 0;
-	    }
-	    return 1;
+        try
+        {
+            new Bar().DoSomething();
+        }
+        catch
+        {
+            return 0;
+        }
+        return 1;
     }
 }

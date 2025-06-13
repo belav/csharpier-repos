@@ -30,7 +30,9 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"[\0-ad-\uFFFF-[a-d]]", @"[\0-ad-\uFFFF-[a-d]]")]
         public void DescribeSet(string set, string expected)
         {
-            RegexNode setNode = RegexParser.Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture).Root.Child(0);
+            RegexNode setNode = RegexParser
+                .Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.Child(0);
             Assert.Equal(expected, RegexCharClass.DescribeSet(setNode.Str!));
         }
 
@@ -50,7 +52,16 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"[^\0-\u007F]", false, true, true, false, true, '\0', '\u0080')]
         [InlineData(@"[^\0-\u0080]", false, false, true, false, true, '\0', '\u0081')]
         [InlineData(@"[\u0001-\u007F]", false, false, false, true, true, '\u0001', '\u0080')]
-        [InlineData(@"[\u0000-\u0010\u0012-\u007F]", false, false, false, true, true, '\u0000', '\u0080')]
+        [InlineData(
+            @"[\u0000-\u0010\u0012-\u007F]",
+            false,
+            false,
+            false,
+            true,
+            true,
+            '\u0000',
+            '\u0080'
+        )]
         [InlineData(@"[a-z-[b-d]]", false, false, false, true, true, 'a', (char)('z' + 1))]
         [InlineData(@"[\0-\u007F-[b-d]]", false, false, false, true, true, '\0', '\u0080')]
         public void Analyze(
@@ -61,9 +72,12 @@ namespace System.Text.RegularExpressions.Tests
             bool containsOnlyAscii,
             bool onlyRanges,
             char lowerBoundInclusiveIfOnlyRanges,
-            char upperBoundExclusiveIfOnlyRanges)
+            char upperBoundExclusiveIfOnlyRanges
+        )
         {
-            RegexNode setNode = RegexParser.Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture).Root.Child(0);
+            RegexNode setNode = RegexParser
+                .Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.Child(0);
             RegexCharClass.CharClassAnalysisResults results = RegexCharClass.Analyze(setNode.Str!);
 
             Assert.Equal(allAsciiContained, results.AllAsciiContained);

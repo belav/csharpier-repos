@@ -7,30 +7,32 @@
 // #define COLLECT_STATS
 
 using System;
+using System.Text;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 {
     internal partial class LexerCache
     {
-        private static readonly ObjectPool<CachingIdentityFactory<string, SyntaxKind>> s_keywordKindPool =
-            CachingIdentityFactory<string, SyntaxKind>.CreatePool(
-                            512,
-                            (key) =>
-                            {
-                                var kind = SyntaxFacts.GetKeywordKind(key);
-                                if (kind == SyntaxKind.None)
-                                {
-                                    kind = SyntaxFacts.GetContextualKeywordKind(key);
-                                }
+        private static readonly ObjectPool<
+            CachingIdentityFactory<string, SyntaxKind>
+        > s_keywordKindPool = CachingIdentityFactory<string, SyntaxKind>.CreatePool(
+            512,
+            (key) =>
+            {
+                var kind = SyntaxFacts.GetKeywordKind(key);
+                if (kind == SyntaxKind.None)
+                {
+                    kind = SyntaxFacts.GetContextualKeywordKind(key);
+                }
 
-                                return kind;
-                            });
+                return kind;
+            }
+        );
 
         private readonly TextKeyedCache<SyntaxTrivia> _triviaMap;
         private readonly TextKeyedCache<SyntaxToken> _tokenMap;
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int keyStart,
             int keyLength,
             int hashCode,
-            Func<SyntaxTrivia> createTriviaFunction)
+            Func<SyntaxTrivia> createTriviaFunction
+        )
         {
             var value = _triviaMap.FindItem(textBuffer, keyStart, keyLength, hashCode);
 
@@ -107,14 +110,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int keyStart,
             int keyLength,
             int hashCode,
-            Func<SyntaxToken> createTokenFunction)
+            Func<SyntaxToken> createTokenFunction
+        )
         {
             var value = _tokenMap.FindItem(textBuffer, keyStart, keyLength, hashCode);
 
             if (value == null)
             {
 #if COLLECT_STATS
-                    Miss();
+                Miss();
 #endif
                 value = createTokenFunction();
                 _tokenMap.AddItem(textBuffer, keyStart, keyLength, hashCode, value);
@@ -122,7 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             else
             {
 #if COLLECT_STATS
-                    Hit();
+                Hit();
 #endif
             }
 

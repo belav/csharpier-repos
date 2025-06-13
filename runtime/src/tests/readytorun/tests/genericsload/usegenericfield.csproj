@@ -4,7 +4,6 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <ZapRequire>1</ZapRequire>
     <CLRTestPriority>1</CLRTestPriority>
-
     <!-- This is an explicit crossgen test -->
     <AlwaysUseCrossGen2>true</AlwaysUseCrossGen2>
   </PropertyGroup>

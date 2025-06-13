@@ -22,19 +22,31 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.InlineHints
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpInlineHintsService(
-            [Import(AllowDefault = true)] IFSharpInlineHintsService? service)
+            [Import(AllowDefault = true)] IFSharpInlineHintsService? service
+        )
         {
             _service = service;
         }
 
         public async Task<ImmutableArray<InlineHint>> GetInlineHintsAsync(
-            Document document, TextSpan textSpan, InlineHintsOptions options, bool displayAllOverride, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            InlineHintsOptions options,
+            bool displayAllOverride,
+            CancellationToken cancellationToken
+        )
         {
             if (_service == null)
                 return ImmutableArray<InlineHint>.Empty;
 
-            var hints = await _service.GetInlineHintsAsync(document, textSpan, cancellationToken).ConfigureAwait(false);
-            return hints.SelectAsArray(h => new InlineHint(h.Span, h.DisplayParts, (d, c) => h.GetDescriptionAsync(d, c)));
+            var hints = await _service
+                .GetInlineHintsAsync(document, textSpan, cancellationToken)
+                .ConfigureAwait(false);
+            return hints.SelectAsArray(h => new InlineHint(
+                h.Span,
+                h.DisplayParts,
+                (d, c) => h.GetDescriptionAsync(d, c)
+            ));
         }
     }
 }

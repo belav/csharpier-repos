@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="DefaultBindingPropertyAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -15,8 +16,8 @@ namespace System.ComponentModel {
     ///    <para>Specifies the default binding property for a component.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public sealed class DefaultBindingPropertyAttribute : Attribute {
-
+    public sealed class DefaultBindingPropertyAttribute : Attribute
+    {
         private readonly string name;
 
         /// <devdoc>
@@ -25,7 +26,8 @@ namespace System.ComponentModel {
         ///       the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public DefaultBindingPropertyAttribute() {
+        public DefaultBindingPropertyAttribute()
+        {
             this.name = null;
         }
 
@@ -35,7 +37,8 @@ namespace System.ComponentModel {
         ///       the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public DefaultBindingPropertyAttribute(string name) {
+        public DefaultBindingPropertyAttribute(string name)
+        {
             this.name = name;
         }
 
@@ -45,26 +48,28 @@ namespace System.ComponentModel {
         ///       bound to.
         ///    </para>
         /// </devdoc>
-        public string Name {
-            get {
-                return name;
-            }
+        public string Name
+        {
+            get { return name; }
         }
 
         /// <devdoc>
         ///    <para>
         ///       Specifies the default value for the <see cref='System.ComponentModel.DefaultBindingPropertyAttribute'/>, which is <see langword='null'/>. This
-        ///    <see langword='static '/>field is read-only. 
+        ///    <see langword='static '/>field is read-only.
         ///    </para>
         /// </devdoc>
-        public static readonly DefaultBindingPropertyAttribute Default = new DefaultBindingPropertyAttribute();
+        public static readonly DefaultBindingPropertyAttribute Default =
+            new DefaultBindingPropertyAttribute();
 
-        public override bool Equals(object obj) {
-            DefaultBindingPropertyAttribute other = obj as DefaultBindingPropertyAttribute; 
+        public override bool Equals(object obj)
+        {
+            DefaultBindingPropertyAttribute other = obj as DefaultBindingPropertyAttribute;
             return other != null && other.Name == name;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
     }

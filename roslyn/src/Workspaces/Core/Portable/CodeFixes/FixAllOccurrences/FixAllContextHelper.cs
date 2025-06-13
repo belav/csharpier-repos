@@ -19,8 +19,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 {
     internal static partial class FixAllContextHelper
     {
-        public static async Task<ImmutableDictionary<Document, ImmutableArray<Diagnostic>>> GetDocumentDiagnosticsToFixAsync(
-            FixAllContext fixAllContext)
+        public static async Task<
+            ImmutableDictionary<Document, ImmutableArray<Diagnostic>>
+        > GetDocumentDiagnosticsToFixAsync(FixAllContext fixAllContext)
         {
             var cancellationToken = fixAllContext.CancellationToken;
 
@@ -35,37 +36,65 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             {
                 case FixAllScope.Document:
                     // Note: We avoid fixing diagnostics in generated code.
-                    if (document != null && !await document.IsGeneratedCodeAsync(cancellationToken).ConfigureAwait(false))
+                    if (
+                        document != null
+                        && !await document
+                            .IsGeneratedCodeAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    )
                     {
-                        var documentDiagnostics = await fixAllContext.GetDocumentDiagnosticsAsync(document).ConfigureAwait(false);
-                        return ImmutableDictionary<Document, ImmutableArray<Diagnostic>>.Empty.SetItem(document, documentDiagnostics);
+                        var documentDiagnostics = await fixAllContext
+                            .GetDocumentDiagnosticsAsync(document)
+                            .ConfigureAwait(false);
+                        return ImmutableDictionary<
+                            Document,
+                            ImmutableArray<Diagnostic>
+                        >.Empty.SetItem(document, documentDiagnostics);
                     }
 
                     break;
 
-                case FixAllScope.ContainingMember or FixAllScope.ContainingType:
+                case FixAllScope.ContainingMember
+                or FixAllScope.ContainingType:
                     // Note: We avoid fixing diagnostics in generated code.
-                    if (document != null && !await document.IsGeneratedCodeAsync(cancellationToken).ConfigureAwait(false))
+                    if (
+                        document != null
+                        && !await document
+                            .IsGeneratedCodeAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    )
                     {
                         var diagnosticSpan = fixAllContext.State.DiagnosticSpan;
-                        if (diagnosticSpan.HasValue &&
-                            document.GetLanguageService<IFixAllSpanMappingService>() is { } spanMappingService)
+                        if (
+                            diagnosticSpan.HasValue
+                            && document.GetLanguageService<IFixAllSpanMappingService>()
+                                is { } spanMappingService
+                        )
                         {
-                            var documentsAndSpans = await spanMappingService.GetFixAllSpansAsync(document,
-                                diagnosticSpan.Value, fixAllContext.Scope, fixAllContext.CancellationToken).ConfigureAwait(false);
-                            return await GetSpanDiagnosticsAsync(fixAllContext, documentsAndSpans).ConfigureAwait(false);
+                            var documentsAndSpans = await spanMappingService
+                                .GetFixAllSpansAsync(
+                                    document,
+                                    diagnosticSpan.Value,
+                                    fixAllContext.Scope,
+                                    fixAllContext.CancellationToken
+                                )
+                                .ConfigureAwait(false);
+                            return await GetSpanDiagnosticsAsync(fixAllContext, documentsAndSpans)
+                                .ConfigureAwait(false);
                         }
                     }
 
                     break;
 
                 case FixAllScope.Project:
-                    allDiagnostics = await fixAllContext.GetAllDiagnosticsAsync(project).ConfigureAwait(false);
+                    allDiagnostics = await fixAllContext
+                        .GetAllDiagnosticsAsync(project)
+                        .ConfigureAwait(false);
                     break;
 
                 case FixAllScope.Solution:
-                    var projectsToFix = project.Solution.Projects
-                        .Where(p => p.Language == project.Language)
+                    var projectsToFix = project
+                        .Solution.Projects.Where(p => p.Language == project.Language)
                         .ToImmutableArray();
 
                     // Update the progress dialog with the count of projects to actually fix. We'll update the progress
@@ -73,14 +102,26 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
                     progressTracker.AddItems(projectsToFix.Length);
 
-                    var diagnostics = new ConcurrentDictionary<ProjectId, ImmutableArray<Diagnostic>>();
-                    using (var _ = ArrayBuilder<Task>.GetInstance(projectsToFix.Length, out var tasks))
+                    var diagnostics =
+                        new ConcurrentDictionary<ProjectId, ImmutableArray<Diagnostic>>();
+                    using (
+                        var _ = ArrayBuilder<Task>.GetInstance(projectsToFix.Length, out var tasks)
+                    )
                     {
                         foreach (var projectToFix in projectsToFix)
-                            tasks.Add(Task.Run(async () => await AddDocumentDiagnosticsAsync(diagnostics, projectToFix).ConfigureAwait(false), cancellationToken));
+                            tasks.Add(
+                                Task.Run(
+                                    async () =>
+                                        await AddDocumentDiagnosticsAsync(diagnostics, projectToFix)
+                                            .ConfigureAwait(false),
+                                    cancellationToken
+                                )
+                            );
 
                         await Task.WhenAll(tasks).ConfigureAwait(false);
-                        allDiagnostics = allDiagnostics.AddRange(diagnostics.SelectMany(i => i.Value));
+                        allDiagnostics = allDiagnostics.AddRange(
+                            diagnostics.SelectMany(i => i.Value)
+                        );
                     }
 
                     break;
@@ -92,13 +133,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
 
             return await GetDocumentDiagnosticsToFixAsync(
-                fixAllContext.Solution, allDiagnostics, fixAllContext.CancellationToken).ConfigureAwait(false);
+                    fixAllContext.Solution,
+                    allDiagnostics,
+                    fixAllContext.CancellationToken
+                )
+                .ConfigureAwait(false);
 
-            async Task AddDocumentDiagnosticsAsync(ConcurrentDictionary<ProjectId, ImmutableArray<Diagnostic>> diagnostics, Project projectToFix)
+            async Task AddDocumentDiagnosticsAsync(
+                ConcurrentDictionary<ProjectId, ImmutableArray<Diagnostic>> diagnostics,
+                Project projectToFix
+            )
             {
                 try
                 {
-                    var projectDiagnostics = await fixAllContext.GetAllDiagnosticsAsync(projectToFix).ConfigureAwait(false);
+                    var projectDiagnostics = await fixAllContext
+                        .GetAllDiagnosticsAsync(projectToFix)
+                        .ConfigureAwait(false);
                     diagnostics.TryAdd(projectToFix.Id, projectDiagnostics);
                 }
                 finally
@@ -107,16 +157,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 }
             }
 
-            static async Task<ImmutableDictionary<Document, ImmutableArray<Diagnostic>>> GetSpanDiagnosticsAsync(
+            static async Task<
+                ImmutableDictionary<Document, ImmutableArray<Diagnostic>>
+            > GetSpanDiagnosticsAsync(
                 FixAllContext fixAllContext,
-                IEnumerable<KeyValuePair<Document, ImmutableArray<TextSpan>>> documentsAndSpans)
+                IEnumerable<KeyValuePair<Document, ImmutableArray<TextSpan>>> documentsAndSpans
+            )
             {
                 var builder = PooledDictionary<Document, ArrayBuilder<Diagnostic>>.GetInstance();
                 foreach (var (document, spans) in documentsAndSpans)
                 {
                     foreach (var span in spans)
                     {
-                        var documentDiagnostics = await fixAllContext.GetDocumentSpanDiagnosticsAsync(document, span).ConfigureAwait(false);
+                        var documentDiagnostics = await fixAllContext
+                            .GetDocumentSpanDiagnosticsAsync(document, span)
+                            .ConfigureAwait(false);
                         builder.MultiAddRange(document, documentDiagnostics);
                     }
                 }
@@ -125,15 +180,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
         }
 
-        private static async Task<ImmutableDictionary<Document, ImmutableArray<Diagnostic>>> GetDocumentDiagnosticsToFixAsync(
+        private static async Task<
+            ImmutableDictionary<Document, ImmutableArray<Diagnostic>>
+        > GetDocumentDiagnosticsToFixAsync(
             Solution solution,
             ImmutableArray<Diagnostic> diagnostics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var builder = ImmutableDictionary.CreateBuilder<Document, ImmutableArray<Diagnostic>>();
 
             // NOTE: We use 'GetTextDocumentForLocation' extension to ensure we also handle external location diagnostics in non-C#/VB languages.
-            foreach (var (textDocument, diagnosticsForDocument) in diagnostics.GroupBy(d => solution.GetTextDocumentForLocation(d.Location)))
+            foreach (
+                var (textDocument, diagnosticsForDocument) in diagnostics.GroupBy(d =>
+                    solution.GetTextDocumentForLocation(d.Location)
+                )
+            )
             {
                 if (textDocument is not Document document)
                     continue;

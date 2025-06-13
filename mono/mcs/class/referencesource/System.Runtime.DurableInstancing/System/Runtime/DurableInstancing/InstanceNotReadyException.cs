@@ -12,40 +12,35 @@ namespace System.Runtime.DurableInstancing
     public class InstanceNotReadyException : InstancePersistenceCommandException
     {
         public InstanceNotReadyException()
-            : this(SRCore.InstanceNotReadyDefault, null)
-        {
-        }
+            : this(SRCore.InstanceNotReadyDefault, null) { }
 
         public InstanceNotReadyException(string message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public InstanceNotReadyException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceNotReadyException(XName commandName, Guid instanceId)
-            : this(commandName, instanceId, null)
-        {
-        }
+            : this(commandName, instanceId, null) { }
 
-        public InstanceNotReadyException(XName commandName, Guid instanceId, Exception innerException)
-            : this(commandName, instanceId, ToMessage(instanceId), innerException)
-        {
-        }
+        public InstanceNotReadyException(
+            XName commandName,
+            Guid instanceId,
+            Exception innerException
+        )
+            : this(commandName, instanceId, ToMessage(instanceId), innerException) { }
 
-        public InstanceNotReadyException(XName commandName, Guid instanceId, string message, Exception innerException)
-            : base(commandName, instanceId, message, innerException)
-        {
-        }
+        public InstanceNotReadyException(
+            XName commandName,
+            Guid instanceId,
+            string message,
+            Exception innerException
+        )
+            : base(commandName, instanceId, message, innerException) { }
 
         [SecurityCritical]
         protected InstanceNotReadyException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         static string ToMessage(Guid instanceId)
         {

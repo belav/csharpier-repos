@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
-    public interface IWebPart {
-
+    public interface IWebPart
+    {
         string CatalogIconImageUrl { get; set; }
 
         string Description { get; set; }

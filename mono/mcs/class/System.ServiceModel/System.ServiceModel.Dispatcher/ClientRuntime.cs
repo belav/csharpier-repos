@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,115 +33,133 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Dispatcher
 {
-	public sealed class ClientRuntime
-	{
-		SynchronizedCollection<IChannelInitializer> channel_initializers
-			= new SynchronizedCollection<IChannelInitializer> ();
-		SynchronizedCollection<IInteractiveChannelInitializer> interactive_channel_initializers
-			= new SynchronizedCollection<IInteractiveChannelInitializer> ();
-		SynchronizedCollection<IClientMessageInspector> inspectors
-			= new SynchronizedCollection<IClientMessageInspector> ();
-		ClientOperation.ClientOperationCollection operations
-			= new ClientOperation.ClientOperationCollection ();
-		IClientOperationSelector selector;
-		Uri via;
-		bool validate, manual_addressing;
-		string contract_name, contract_ns;
-		int max_fault_size = 0x10000; // FIXME: not verified.
+    public sealed class ClientRuntime
+    {
+        SynchronizedCollection<IChannelInitializer> channel_initializers =
+            new SynchronizedCollection<IChannelInitializer>();
+        SynchronizedCollection<IInteractiveChannelInitializer> interactive_channel_initializers =
+            new SynchronizedCollection<IInteractiveChannelInitializer>();
+        SynchronizedCollection<IClientMessageInspector> inspectors =
+            new SynchronizedCollection<IClientMessageInspector>();
+        ClientOperation.ClientOperationCollection operations =
+            new ClientOperation.ClientOperationCollection();
+        IClientOperationSelector selector;
+        Uri via;
+        bool validate,
+            manual_addressing;
+        string contract_name,
+            contract_ns;
+        int max_fault_size = 0x10000; // FIXME: not verified.
 
-		// .ctor() for Clients
-		internal ClientRuntime (string name, string ns, object callbackDispatchRuntime)
-		{
-			contract_name = name;
-			contract_ns = ns;
+        // .ctor() for Clients
+        internal ClientRuntime(string name, string ns, object callbackDispatchRuntime)
+        {
+            contract_name = name;
+            contract_ns = ns;
 #if !MOBILE
-			CallbackDispatchRuntime = (DispatchRuntime) callbackDispatchRuntime ?? new DispatchRuntime (null, this);
+            CallbackDispatchRuntime =
+                (DispatchRuntime)callbackDispatchRuntime ?? new DispatchRuntime(null, this);
 #endif
-		}
+        }
 
-		public Type CallbackClientType { get; set; }
+        public Type CallbackClientType { get; set; }
 
-		public SynchronizedCollection<IChannelInitializer> ChannelInitializers {
-			get { return channel_initializers; }
-		}
+        public SynchronizedCollection<IChannelInitializer> ChannelInitializers
+        {
+            get { return channel_initializers; }
+        }
 
-		public SynchronizedCollection<IInteractiveChannelInitializer> InteractiveChannelInitializers {
-			get { return interactive_channel_initializers;}
-		}
+        public SynchronizedCollection<IInteractiveChannelInitializer> InteractiveChannelInitializers
+        {
+            get { return interactive_channel_initializers; }
+        }
 
-		public string ContractName {
-			get { return contract_name; }
-		}
+        public string ContractName
+        {
+            get { return contract_name; }
+        }
 
-		public string ContractNamespace {
-			get { return contract_ns; }
-		}
+        public string ContractNamespace
+        {
+            get { return contract_ns; }
+        }
 
-		
-		public Type ContractClientType { get; set; }
+        public Type ContractClientType { get; set; }
 
 #if !MOBILE
-		public DispatchRuntime CallbackDispatchRuntime { get; internal set; }
+        public DispatchRuntime CallbackDispatchRuntime { get; internal set; }
 #endif
 
-		public SynchronizedCollection<IClientMessageInspector> MessageInspectors {
-			get { return inspectors; }
-		}
+        public SynchronizedCollection<IClientMessageInspector> MessageInspectors
+        {
+            get { return inspectors; }
+        }
 
 #if MOBILE
-		public KeyedCollection<string,ClientOperation> Operations {
-			get { return operations; }
-		}
+        public KeyedCollection<string, ClientOperation> Operations
+        {
+            get { return operations; }
+        }
 #else
-		public SynchronizedKeyedCollection<string,ClientOperation> Operations {
-			get { return operations; }
-		}
+        public SynchronizedKeyedCollection<string, ClientOperation> Operations
+        {
+            get { return operations; }
+        }
 #endif
 
-		[MonoTODO]
-		public ICollection<ClientOperation> ClientOperations {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ICollection<ClientOperation> ClientOperations
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public ICollection<IClientMessageInspector> ClientMessageInspectors {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ICollection<IClientMessageInspector> ClientMessageInspectors
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool ManualAddressing {
-			get { return manual_addressing; }
-			set { manual_addressing = value; }
-		}
+        public bool ManualAddressing
+        {
+            get { return manual_addressing; }
+            set { manual_addressing = value; }
+        }
 
-		public int MaxFaultSize {
-			get { return max_fault_size; }
-			set { max_fault_size = value; }
-		}
+        public int MaxFaultSize
+        {
+            get { return max_fault_size; }
+            set { max_fault_size = value; }
+        }
 
-		public IClientOperationSelector OperationSelector {
-			get { return selector; }
-			set { selector = value; }
-		}
+        public IClientOperationSelector OperationSelector
+        {
+            get { return selector; }
+            set { selector = value; }
+        }
 
-		public bool ValidateMustUnderstand {
-			get { return validate; }
-			set { validate = value; }
-		}
+        public bool ValidateMustUnderstand
+        {
+            get { return validate; }
+            set { validate = value; }
+        }
 
-		public Uri Via {
-			get { return via; }
-			set { via = value; }
-		}
+        public Uri Via
+        {
+            get { return via; }
+            set { via = value; }
+        }
 
-		[MonoTODO]
-		public ClientOperation UnhandledClientOperation {
-			get { throw new NotImplementedException (); }
-		}
-		
-		[MonoTODO]
-		public bool MessageVersionNoneFaultsEnabled {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public ClientOperation UnhandledClientOperation
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public bool MessageVersionNoneFaultsEnabled
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+    }
 }

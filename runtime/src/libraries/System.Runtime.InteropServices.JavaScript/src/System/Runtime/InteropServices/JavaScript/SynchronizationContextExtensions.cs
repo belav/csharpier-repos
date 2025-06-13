@@ -20,17 +20,20 @@ namespace System.Runtime.InteropServices.JavaScript
             }
 
             Exception? exc = default;
-            self.Send((_value) =>
-            {
-                try
+            self.Send(
+                (_value) =>
                 {
-                    body((T)_value!);
-                }
-                catch (Exception ex)
-                {
-                    exc = ex;
-                }
-            }, value);
+                    try
+                    {
+                        body((T)_value!);
+                    }
+                    catch (Exception ex)
+                    {
+                        exc = ex;
+                    }
+                },
+                value
+            );
             if (exc != null)
             {
                 throw exc;
@@ -39,21 +42,25 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public static TRes Send<TRes>(this SynchronizationContext? self, Func<TRes> body)
         {
-            if (self == null) return body();
+            if (self == null)
+                return body();
 
             TRes? value = default;
             Exception? exc = default;
-            self.Send((_) =>
-            {
-                try
+            self.Send(
+                (_) =>
                 {
-                    value = body();
-                }
-                catch (Exception ex)
-                {
-                    exc = ex;
-                }
-            }, null);
+                    try
+                    {
+                        value = body();
+                    }
+                    catch (Exception ex)
+                    {
+                        exc = ex;
+                    }
+                },
+                null
+            );
             if (exc != null)
             {
                 throw exc;
@@ -61,23 +68,31 @@ namespace System.Runtime.InteropServices.JavaScript
             return value!;
         }
 
-        public static TRes Send<T1, TRes>(this SynchronizationContext? self, Func<T1, TRes> body, T1 p1)
+        public static TRes Send<T1, TRes>(
+            this SynchronizationContext? self,
+            Func<T1, TRes> body,
+            T1 p1
+        )
         {
-            if (self == null) return body(p1);
+            if (self == null)
+                return body(p1);
 
             TRes? value = default;
             Exception? exc = default;
-            self.Send((_) =>
-            {
-                try
+            self.Send(
+                (_) =>
                 {
-                    value = body(p1);
-                }
-                catch (Exception ex)
-                {
-                    exc = ex;
-                }
-            }, null);
+                    try
+                    {
+                        value = body(p1);
+                    }
+                    catch (Exception ex)
+                    {
+                        exc = ex;
+                    }
+                },
+                null
+            );
             if (exc != null)
             {
                 throw exc;

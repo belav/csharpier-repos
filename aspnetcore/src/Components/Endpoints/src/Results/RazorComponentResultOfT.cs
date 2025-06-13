@@ -11,29 +11,28 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="IResult"/> that renders a Razor Component.
 /// </summary>
 public class RazorComponentResult<[DynamicallyAccessedMembers(Component)] TComponent>
-    : RazorComponentResult where TComponent: IComponent
+    : RazorComponentResult
+    where TComponent : IComponent
 {
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
-    public RazorComponentResult() : base(typeof(TComponent))
-    {
-    }
+    public RazorComponentResult()
+        : base(typeof(TComponent)) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
     /// <param name="parameters">Parameters for the component.</param>
     public RazorComponentResult(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] object parameters) : base(typeof(TComponent), parameters)
-    {
-    }
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] object parameters
+    )
+        : base(typeof(TComponent), parameters) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
     /// <param name="parameters">Parameters for the component.</param>
-    public RazorComponentResult(IReadOnlyDictionary<string, object?> parameters) : base(typeof(TComponent), parameters)
-    {
-    }
+    public RazorComponentResult(IReadOnlyDictionary<string, object?> parameters)
+        : base(typeof(TComponent), parameters) { }
 }

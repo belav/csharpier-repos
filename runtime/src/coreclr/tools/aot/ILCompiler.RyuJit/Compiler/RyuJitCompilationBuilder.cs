@@ -3,10 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.IL;
 using Internal.JitInterface;
 
@@ -16,16 +14,27 @@ namespace ILCompiler
     {
         // These need to provide reasonable defaults so that the user can optionally skip
         // calling the Use/Configure methods and still get something reasonable back.
-        private KeyValuePair<string, string>[] _ryujitOptions = Array.Empty<KeyValuePair<string, string>>();
+        private KeyValuePair<string, string>[] _ryujitOptions = Array.Empty<
+            KeyValuePair<string, string>
+        >();
         private ILProvider _ilProvider = new NativeAotILProvider();
         private ProfileDataManager _profileDataManager;
         private string _jitPath;
 
-        public RyuJitCompilationBuilder(CompilerTypeSystemContext context, CompilationModuleGroup group)
-            : base(context, group,
-                  new NativeAotNameMangler(context.Target.IsWindows ? (NodeMangler)new WindowsNodeMangler() : (NodeMangler)new UnixNodeMangler(), false))
-        {
-        }
+        public RyuJitCompilationBuilder(
+            CompilerTypeSystemContext context,
+            CompilationModuleGroup group
+        )
+            : base(
+                context,
+                group,
+                new NativeAotNameMangler(
+                    context.Target.IsWindows
+                        ? (NodeMangler)new WindowsNodeMangler()
+                        : (NodeMangler)new UnixNodeMangler(),
+                    false
+                )
+            ) { }
 
         public RyuJitCompilationBuilder UseProfileData(IEnumerable<string> mibcFiles)
         {
@@ -123,11 +132,44 @@ namespace ILCompiler
             if (_resilient)
                 options |= RyuJitCompilationOptions.UseResilience;
 
-            var factory = new RyuJitNodeFactory(_context, _compilationGroup, _metadataManager, _interopStubManager, _nameMangler, _vtableSliceProvider, _dictionaryLayoutProvider, _inlinedThreadStatics, GetPreinitializationManager());
+            var factory = new RyuJitNodeFactory(
+                _context,
+                _compilationGroup,
+                _metadataManager,
+                _interopStubManager,
+                _nameMangler,
+                _vtableSliceProvider,
+                _dictionaryLayoutProvider,
+                _inlinedThreadStatics,
+                GetPreinitializationManager()
+            );
 
-            JitConfigProvider.Initialize(_context.Target, jitFlagBuilder.ToArray(), _ryujitOptions, _jitPath);
-            DependencyAnalyzerBase<NodeFactory> graph = CreateDependencyGraph(factory, new ObjectNode.ObjectNodeComparer(CompilerComparer.Instance));
-            return new RyuJitCompilation(graph, factory, _compilationRoots, _ilProvider, _debugInformationProvider, _logger, _devirtualizationManager, _inliningPolicy ?? _compilationGroup, _instructionSetSupport, _profileDataManager, _methodImportationErrorProvider, _readOnlyFieldPolicy, options, _parallelism);
+            JitConfigProvider.Initialize(
+                _context.Target,
+                jitFlagBuilder.ToArray(),
+                _ryujitOptions,
+                _jitPath
+            );
+            DependencyAnalyzerBase<NodeFactory> graph = CreateDependencyGraph(
+                factory,
+                new ObjectNode.ObjectNodeComparer(CompilerComparer.Instance)
+            );
+            return new RyuJitCompilation(
+                graph,
+                factory,
+                _compilationRoots,
+                _ilProvider,
+                _debugInformationProvider,
+                _logger,
+                _devirtualizationManager,
+                _inliningPolicy ?? _compilationGroup,
+                _instructionSetSupport,
+                _profileDataManager,
+                _methodImportationErrorProvider,
+                _readOnlyFieldPolicy,
+                options,
+                _parallelism
+            );
         }
     }
 }

@@ -29,7 +29,9 @@ public class CookieOptionsTests
         };
         var copy = new CookieOptions(original);
 
-        var properties = typeof(CookieOptions).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        var properties = typeof(CookieOptions).GetProperties(
+            BindingFlags.Public | BindingFlags.Instance
+        );
 
         foreach (var property in properties)
         {

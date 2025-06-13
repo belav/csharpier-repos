@@ -16,15 +16,15 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseSystemHashCode)]
-    public partial class UseSystemHashCodeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseSystemHashCodeTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseSystemHashCodeTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new UseSystemHashCodeDiagnosticAnalyzer(), new UseSystemHashCodeCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new UseSystemHashCodeDiagnosticAnalyzer(), new UseSystemHashCodeCodeFixProvider());
 
         [Fact]
         public async Task TestDerivedClassWithFieldWithBase()
@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(base.GetHashCode(), j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(base.GetHashCode());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -197,7 +200,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -241,7 +245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -266,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hashCode;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -290,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -314,7 +321,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hashCode;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -339,7 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hashCode;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -364,7 +373,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hashCode;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -389,7 +399,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -429,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -469,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -496,7 +509,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hashCode;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -521,7 +535,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hashCode;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -562,7 +577,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -603,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -637,7 +654,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -671,7 +689,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(j);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -709,7 +728,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -750,7 +770,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -791,7 +812,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -832,7 +854,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -873,7 +896,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -918,7 +942,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -963,7 +988,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1008,7 +1034,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1053,7 +1080,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1098,7 +1126,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1143,7 +1172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1188,7 +1218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1233,7 +1264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return System.HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1255,7 +1287,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return HashCode.Combine(i, S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1280,7 +1313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hash.ToHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39916")]
@@ -1334,7 +1368,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hash.ToHashCode();
                     }
                 }
-                """, new TestParameters(options: UseVarTestExtensions.PreferImplicitTypeWithInfo(this)));
+                """,
+                new TestParameters(options: UseVarTestExtensions.PreferImplicitTypeWithInfo(this))
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39916")]
@@ -1388,7 +1424,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return hash.ToHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1407,7 +1444,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return j;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1426,7 +1464,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return j.GetHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1445,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
                         return base.GetHashCode();
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

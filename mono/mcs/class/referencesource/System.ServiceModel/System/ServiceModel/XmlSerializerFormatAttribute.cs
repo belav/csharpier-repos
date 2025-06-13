@@ -5,7 +5,12 @@ namespace System.ServiceModel
 {
     using System;
 
-    [AttributeUsage(ServiceModelAttributeTargets.ServiceContract | ServiceModelAttributeTargets.OperationContract, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        ServiceModelAttributeTargets.ServiceContract
+            | ServiceModelAttributeTargets.OperationContract,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class XmlSerializerFormatAttribute : Attribute
     {
         bool supportFaults = false;
@@ -48,19 +53,23 @@ namespace System.ServiceModel
             set { use = value ? OperationFormatUse.Encoded : OperationFormatUse.Literal; }
         }
 
-        static internal void ValidateOperationFormatStyle(OperationFormatStyle value)
+        internal static void ValidateOperationFormatStyle(OperationFormatStyle value)
         {
             if (!OperationFormatStyleHelper.IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("value")
+                );
             }
         }
 
-        static internal void ValidateOperationFormatUse(OperationFormatUse value)
+        internal static void ValidateOperationFormatUse(OperationFormatUse value)
         {
             if (!OperationFormatUseHelper.IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("value")
+                );
             }
         }
     }

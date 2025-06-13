@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// managed <see cref="System.Security.Cryptography.SymmetricAlgorithm"/> and
 /// <see cref="System.Security.Cryptography.KeyedHashAlgorithm"/> types.
 /// </summary>
-public sealed class ManagedAuthenticatedEncryptorConfiguration : AlgorithmConfiguration, IInternalAlgorithmConfiguration
+public sealed class ManagedAuthenticatedEncryptorConfiguration
+    : AlgorithmConfiguration,
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The type of the algorithm to use for symmetric encryption.
@@ -59,7 +61,9 @@ public sealed class ManagedAuthenticatedEncryptorConfiguration : AlgorithmConfig
         return internalConfiguration.CreateDescriptorFromSecret(Secret.Random(KDK_SIZE_IN_BYTES));
     }
 
-    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(ISecret secret)
+    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
+        ISecret secret
+    )
     {
         return new ManagedAuthenticatedEncryptorDescriptor(this, secret);
     }

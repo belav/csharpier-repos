@@ -4,24 +4,36 @@
 
 namespace System.ServiceModel.Security
 {
-    sealed class LaxTimestampLastModeSecurityHeaderElementInferenceEngine : LaxModeSecurityHeaderElementInferenceEngine
+    sealed class LaxTimestampLastModeSecurityHeaderElementInferenceEngine
+        : LaxModeSecurityHeaderElementInferenceEngine
     {
-        static LaxTimestampLastModeSecurityHeaderElementInferenceEngine instance = new LaxTimestampLastModeSecurityHeaderElementInferenceEngine();
+        static LaxTimestampLastModeSecurityHeaderElementInferenceEngine instance =
+            new LaxTimestampLastModeSecurityHeaderElementInferenceEngine();
 
         LaxTimestampLastModeSecurityHeaderElementInferenceEngine() { }
 
-        internal new static LaxTimestampLastModeSecurityHeaderElementInferenceEngine Instance
+        internal static new LaxTimestampLastModeSecurityHeaderElementInferenceEngine Instance
         {
             get { return instance; }
         }
 
-        public override void MarkElements(ReceiveSecurityHeaderElementManager elementManager, bool messageSecurityMode)
+        public override void MarkElements(
+            ReceiveSecurityHeaderElementManager elementManager,
+            bool messageSecurityMode
+        )
         {
             for (int position = 0; position < elementManager.Count - 1; position++)
             {
-                if (elementManager.GetElementCategory(position) == ReceiveSecurityHeaderElementCategory.Timestamp)
+                if (
+                    elementManager.GetElementCategory(position)
+                    == ReceiveSecurityHeaderElementCategory.Timestamp
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.TimestampMustOccurLastInSecurityHeaderLayout)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.TimestampMustOccurLastInSecurityHeaderLayout)
+                        )
+                    );
                 }
             }
             base.MarkElements(elementManager, messageSecurityMode);

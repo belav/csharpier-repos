@@ -15,31 +15,29 @@ internal sealed partial class HubClientProxyGenerator
 {
     public sealed class Parser
     {
-        internal static bool IsSyntaxTargetForAttribute(SyntaxNode node) => node is AttributeSyntax
-        {
-            Name: IdentifierNameSyntax
-            {
-                Identifier:
+        internal static bool IsSyntaxTargetForAttribute(SyntaxNode node) =>
+            node
+                is AttributeSyntax
                 {
-                    Text: "HubClientProxy"
-                }
-            },
-            Parent:
-            {
-                Parent: MethodDeclarationSyntax
-                {
-                    Parent: ClassDeclarationSyntax
-                }
-            }
-        };
+                    Name: IdentifierNameSyntax { Identifier: { Text: "HubClientProxy" } },
+                    Parent: { Parent: MethodDeclarationSyntax { Parent: ClassDeclarationSyntax } }
+                };
 
-        internal static MethodDeclarationSyntax? GetSemanticTargetForAttribute(GeneratorSyntaxContext context)
+        internal static MethodDeclarationSyntax? GetSemanticTargetForAttribute(
+            GeneratorSyntaxContext context
+        )
         {
             var attributeSyntax = (AttributeSyntax)context.Node;
-            var attributeSymbol = ModelExtensions.GetSymbolInfo(context.SemanticModel, attributeSyntax).Symbol;
+            var attributeSymbol = ModelExtensions
+                .GetSymbolInfo(context.SemanticModel, attributeSyntax)
+                .Symbol;
 
-            if (attributeSymbol is null ||
-                !attributeSymbol.ToString().EndsWith("HubClientProxyAttribute()", StringComparison.Ordinal))
+            if (
+                attributeSymbol is null
+                || !attributeSymbol
+                    .ToString()
+                    .EndsWith("HubClientProxyAttribute()", StringComparison.Ordinal)
+            )
             {
                 return null;
             }
@@ -47,68 +45,100 @@ internal sealed partial class HubClientProxyGenerator
             return (MethodDeclarationSyntax)attributeSyntax.Parent.Parent;
         }
 
-        private static bool IsExtensionMethodSignatureValid(IMethodSymbol symbol, SourceProductionContext context)
+        private static bool IsExtensionMethodSignatureValid(
+            IMethodSymbol symbol,
+            SourceProductionContext context
+        )
         {
             // Check that the method is partial
             if (!symbol.IsPartialDefinition)
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodIsNotPartial,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodIsNotPartial,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
             // Check that the method is an extension
             if (!symbol.IsExtensionMethod)
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodIsNotExtension,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodIsNotExtension,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
             // Check that the method has one type parameter
             if (symbol.Arity != 1)
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodTypeArgCountIsBad,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodTypeArgCountIsBad,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
             // Check that the method has correct parameters
             if (symbol.Parameters.Length != 2)
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodArgCountIsBad,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodArgCountIsBad,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
             // Check that the type parameter matches 2nd parameter type
-            if (!SymbolEqualityComparer.Default.Equals(symbol.TypeArguments[0], symbol.Parameters[1].Type))
+            if (
+                !SymbolEqualityComparer.Default.Equals(
+                    symbol.TypeArguments[0],
+                    symbol.Parameters[1].Type
+                )
+            )
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodTypeArgAndProviderTypeDoesNotMatch,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodTypeArgAndProviderTypeDoesNotMatch,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
             // Check that the type parameter matches 2nd parameter type
             if (symbol.ReturnType.ToString() != "System.IDisposable")
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodHasBadReturnType,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodHasBadReturnType,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
             var hubConnectionSymbol = symbol.Parameters[0].Type as INamedTypeSymbol;
-            if (hubConnectionSymbol.ToString() != "Microsoft.AspNetCore.SignalR.Client.HubConnection")
+            if (
+                hubConnectionSymbol.ToString()
+                != "Microsoft.AspNetCore.SignalR.Client.HubConnection"
+            )
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodArgIsNotHubConnection,
-                    symbol.Locations[0]));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodArgIsNotHubConnection,
+                        symbol.Locations[0]
+                    )
+                );
                 return false;
             }
 
@@ -134,20 +164,21 @@ internal sealed partial class HubClientProxyGenerator
             return true;
         }
 
-        internal static bool IsSyntaxTargetForGeneration(SyntaxNode node) => node is MemberAccessExpressionSyntax
-        {
-            Name: GenericNameSyntax
-            {
-                Arity: 1
-            }
-        };
+        internal static bool IsSyntaxTargetForGeneration(SyntaxNode node) =>
+            node is MemberAccessExpressionSyntax { Name: GenericNameSyntax { Arity: 1 } };
 
-        internal static MemberAccessExpressionSyntax? GetSemanticTargetForGeneration(GeneratorSyntaxContext context)
+        internal static MemberAccessExpressionSyntax? GetSemanticTargetForGeneration(
+            GeneratorSyntaxContext context
+        )
         {
             var memberAccessExpressionSyntax = (MemberAccessExpressionSyntax)context.Node;
 
-            if (ModelExtensions.GetSymbolInfo(context.SemanticModel, memberAccessExpressionSyntax).Symbol is not IMethodSymbol
-                methodSymbol)
+            if (
+                ModelExtensions
+                    .GetSymbolInfo(context.SemanticModel, memberAccessExpressionSyntax)
+                    .Symbol
+                is not IMethodSymbol methodSymbol
+            )
             {
                 return null;
             }
@@ -159,8 +190,11 @@ internal sealed partial class HubClientProxyGenerator
 
             foreach (var attributeData in methodSymbol.GetAttributes())
             {
-                if (!attributeData.AttributeClass.ToString()
-                    .EndsWith("HubClientProxyAttribute", StringComparison.Ordinal))
+                if (
+                    !attributeData
+                        .AttributeClass.ToString()
+                        .EndsWith("HubClientProxyAttribute", StringComparison.Ordinal)
+                )
                 {
                     continue;
                 }
@@ -180,7 +214,10 @@ internal sealed partial class HubClientProxyGenerator
             _compilation = compilation;
         }
 
-        internal SourceGenerationSpec Parse(ImmutableArray<MethodDeclarationSyntax> methodDeclarationSyntaxes, ImmutableArray<MemberAccessExpressionSyntax> syntaxList)
+        internal SourceGenerationSpec Parse(
+            ImmutableArray<MethodDeclarationSyntax> methodDeclarationSyntaxes,
+            ImmutableArray<MemberAccessExpressionSyntax> syntaxList
+        )
         {
             // Source generation spec will be populated by type specs for each hub type.
             // Type specs themselves are populated by method specs which are populated by argument specs.
@@ -196,7 +233,9 @@ internal sealed partial class HubClientProxyGenerator
                     _context.ReportDiagnostic(
                         Diagnostic.Create(
                             DiagnosticDescriptors.TooManyHubClientProxyAttributedMethods,
-                            extraneous.GetLocation()));
+                            extraneous.GetLocation()
+                        )
+                    );
                 }
 
                 // nothing to do
@@ -205,39 +244,60 @@ internal sealed partial class HubClientProxyGenerator
 
             var methodDeclarationSyntax = methodDeclarationSyntaxes[0];
 
-            var registerCallbackProviderSemanticModel = _compilation.GetSemanticModel(methodDeclarationSyntax.SyntaxTree);
-            var registerCallbackProviderMethodSymbol = (IMethodSymbol)registerCallbackProviderSemanticModel.GetDeclaredSymbol(methodDeclarationSyntax);
-            var registerCallbackProviderClassSymbol = (INamedTypeSymbol)registerCallbackProviderMethodSymbol.ContainingSymbol;
+            var registerCallbackProviderSemanticModel = _compilation.GetSemanticModel(
+                methodDeclarationSyntax.SyntaxTree
+            );
+            var registerCallbackProviderMethodSymbol = (IMethodSymbol)
+                registerCallbackProviderSemanticModel.GetDeclaredSymbol(methodDeclarationSyntax);
+            var registerCallbackProviderClassSymbol = (INamedTypeSymbol)
+                registerCallbackProviderMethodSymbol.ContainingSymbol;
 
             // Populate spec with metadata on user-specific get proxy method and class
             if (!IsExtensionMethodSignatureValid(registerCallbackProviderMethodSymbol, _context))
             {
                 return sourceGenerationSpec;
             }
-            if (!IsExtensionClassSignatureValid((ClassDeclarationSyntax)methodDeclarationSyntax.Parent))
+            if (
+                !IsExtensionClassSignatureValid(
+                    (ClassDeclarationSyntax)methodDeclarationSyntax.Parent
+                )
+            )
             {
                 return sourceGenerationSpec;
             }
 
             sourceGenerationSpec.SetterMethodAccessibility =
-                GeneratorHelpers.GetAccessibilityString(registerCallbackProviderMethodSymbol.DeclaredAccessibility);
-            sourceGenerationSpec.SetterClassAccessibility =
-                GeneratorHelpers.GetAccessibilityString(registerCallbackProviderClassSymbol.DeclaredAccessibility);
+                GeneratorHelpers.GetAccessibilityString(
+                    registerCallbackProviderMethodSymbol.DeclaredAccessibility
+                );
+            sourceGenerationSpec.SetterClassAccessibility = GeneratorHelpers.GetAccessibilityString(
+                registerCallbackProviderClassSymbol.DeclaredAccessibility
+            );
             if (sourceGenerationSpec.SetterMethodAccessibility is null)
             {
-                _context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.HubClientProxyAttributedMethodBadAccessibility,
-                    methodDeclarationSyntax.GetLocation()));
+                _context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.HubClientProxyAttributedMethodBadAccessibility,
+                        methodDeclarationSyntax.GetLocation()
+                    )
+                );
                 return sourceGenerationSpec;
             }
             sourceGenerationSpec.SetterMethodName = registerCallbackProviderMethodSymbol.Name;
             sourceGenerationSpec.SetterClassName = registerCallbackProviderClassSymbol.Name;
-            sourceGenerationSpec.SetterNamespace = registerCallbackProviderClassSymbol.ContainingNamespace.ToString();
-            sourceGenerationSpec.SetterTypeParameterName = registerCallbackProviderMethodSymbol.TypeParameters[0].Name;
-            sourceGenerationSpec.SetterHubConnectionParameterName = registerCallbackProviderMethodSymbol.Parameters[0].Name;
-            sourceGenerationSpec.SetterProviderParameterName = registerCallbackProviderMethodSymbol.Parameters[1].Name;
+            sourceGenerationSpec.SetterNamespace =
+                registerCallbackProviderClassSymbol.ContainingNamespace.ToString();
+            sourceGenerationSpec.SetterTypeParameterName = registerCallbackProviderMethodSymbol
+                .TypeParameters[0]
+                .Name;
+            sourceGenerationSpec.SetterHubConnectionParameterName =
+                registerCallbackProviderMethodSymbol.Parameters[0].Name;
+            sourceGenerationSpec.SetterProviderParameterName = registerCallbackProviderMethodSymbol
+                .Parameters[1]
+                .Name;
 
-            var providerSymbols = new Dictionary<string, (ITypeSymbol, MemberAccessExpressionSyntax)>();
+            var providerSymbols =
+                new Dictionary<string, (ITypeSymbol, MemberAccessExpressionSyntax)>();
 
             // Go thru candidates and filter further
             foreach (var memberAccess in syntaxList)
@@ -251,13 +311,16 @@ internal sealed partial class HubClientProxyGenerator
                     var argModel = _compilation.GetSemanticModel(argType.SyntaxTree);
                     symbol = (ITypeSymbol)argModel.GetSymbolInfo(argType).Symbol;
                 }
-                else if (memberAccess.Name is not GenericNameSyntax
-                         && memberAccess.Parent.ChildNodes().FirstOrDefault(x => x is ArgumentListSyntax) is
-                             ArgumentListSyntax
-                         { Arguments: { Count: 1 } } als)
+                else if (
+                    memberAccess.Name is not GenericNameSyntax
+                    && memberAccess.Parent.ChildNodes().FirstOrDefault(x => x is ArgumentListSyntax)
+                        is ArgumentListSyntax { Arguments: { Count: 1 } } als
+                )
                 {
                     // Method isn't using generic syntax so inspect first expression in arguments to deduce the type
-                    var argModel = _compilation.GetSemanticModel(als.Arguments[0].Expression.SyntaxTree);
+                    var argModel = _compilation.GetSemanticModel(
+                        als.Arguments[0].Expression.SyntaxTree
+                    );
                     var argTypeInfo = argModel.GetTypeInfo(als.Arguments[0].Expression);
                     symbol = argTypeInfo.Type;
                 }
@@ -278,32 +341,44 @@ internal sealed partial class HubClientProxyGenerator
                 {
                     FullyQualifiedTypeName = providerSymbol.ToString(),
                     TypeName = providerSymbol.Name,
-                    CallSite = memberAccess.GetLocation()
+                    CallSite = memberAccess.GetLocation(),
                 };
 
-                var members = providerSymbol.GetMembers()
+                var members = providerSymbol
+                    .GetMembers()
                     .Where(member => member.Kind == SymbolKind.Method)
                     .Select(member => (IMethodSymbol)member)
-                    .Union<IMethodSymbol>(providerSymbol.AllInterfaces.SelectMany(x => x
-                        .GetMembers()
-                        .Where(member => member.Kind == SymbolKind.Method)
-                        .Select(member => (IMethodSymbol)member)), SymbolEqualityComparer.Default).ToList();
+                    .Union<IMethodSymbol>(
+                        providerSymbol.AllInterfaces.SelectMany(x =>
+                            x.GetMembers()
+                                .Where(member => member.Kind == SymbolKind.Method)
+                                .Select(member => (IMethodSymbol)member)
+                        ),
+                        SymbolEqualityComparer.Default
+                    )
+                    .ToList();
 
                 // Generate spec for each method
                 foreach (var member in members)
                 {
-                    var methodSpec = new MethodSpec
-                    {
-                        Name = member.Name
-                    };
+                    var methodSpec = new MethodSpec { Name = member.Name };
 
                     // Validate return type
-                    if (!(member.ReturnsVoid || member.ReturnType is INamedTypeSymbol { Arity: 0, Name: "Task" }))
+                    if (
+                        !(
+                            member.ReturnsVoid
+                            || member.ReturnType is INamedTypeSymbol { Arity: 0, Name: "Task" }
+                        )
+                    )
                     {
-                        _context.ReportDiagnostic(Diagnostic.Create(
-                            DiagnosticDescriptors.HubClientProxyUnsupportedReturnType,
-                            typeSpec.CallSite,
-                            methodSpec.Name, member.ReturnType.Name));
+                        _context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                DiagnosticDescriptors.HubClientProxyUnsupportedReturnType,
+                                typeSpec.CallSite,
+                                methodSpec.Name,
+                                member.ReturnType.Name
+                            )
+                        );
                         methodSpec.Support = SupportClassification.UnsupportedReturnType;
                         methodSpec.SupportHint = "Return type must be void or Task";
                     }
@@ -314,7 +389,7 @@ internal sealed partial class HubClientProxyGenerator
                         var argumentSpec = new ArgumentSpec
                         {
                             Name = parameter.Name,
-                            FullyQualifiedTypeName = parameter.Type.ToString()
+                            FullyQualifiedTypeName = parameter.Type.ToString(),
                         };
 
                         methodSpec.Arguments.Add(argumentSpec);

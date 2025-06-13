@@ -6,26 +6,20 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// description for class Test
-	/// </summary>
-	public partial class Test
-	{
-		/// test
-		public Test ()
-		{
-		}
-	}
+    /// <summary>
+    /// description for class Test
+    /// </summary>
+    public partial class Test
+    {
+        /// test
+        public Test() { }
+    }
 
-	public partial class Test
-	{
-		/// test 2
-		public void Foo ()
-		{
-		}
+    public partial class Test
+    {
+        /// test 2
+        public void Foo() { }
 
-		static void Main ()
-		{
-		}
-	}
+        static void Main() { }
+    }
 }

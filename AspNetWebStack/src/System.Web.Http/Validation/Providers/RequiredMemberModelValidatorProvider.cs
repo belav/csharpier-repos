@@ -19,7 +19,10 @@ namespace System.Web.Http.Validation.Providers
             _requiredMemberSelector = requiredMemberSelector;
         }
 
-        public override IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, IEnumerable<ModelValidatorProvider> validatorProviders)
+        public override IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            IEnumerable<ModelValidatorProvider> validatorProviders
+        )
         {
             string propertyName = metadata.PropertyName;
             // if we're validating a property and not a type
@@ -28,7 +31,10 @@ namespace System.Web.Http.Validation.Providers
                 PropertyInfo metadataProperty = metadata.ContainerType.GetProperty(propertyName);
                 if (_requiredMemberSelector.IsRequiredMember(metadataProperty))
                 {
-                    return new ModelValidator[] { new RequiredMemberModelValidator(validatorProviders) };
+                    return new ModelValidator[]
+                    {
+                        new RequiredMemberModelValidator(validatorProviders),
+                    };
                 }
             }
 

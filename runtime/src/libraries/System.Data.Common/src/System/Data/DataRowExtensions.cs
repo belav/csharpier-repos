@@ -155,16 +155,23 @@ namespace System.Data
                 }
                 return NonNullableField;
 
-                [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2090:MakeGenericMethod",
-                    Justification = "'NullableField<TElem> where TElem : struct' implies 'TElem : new()'. Nullable does not make use of new() so it is safe." +
-                    "The warning is only issued when IsDynamicCodeSupported is true.")]
+                [UnconditionalSuppressMessage(
+                    "ReflectionAnalysis",
+                    "IL2090:MakeGenericMethod",
+                    Justification = "'NullableField<TElem> where TElem : struct' implies 'TElem : new()'. Nullable does not make use of new() so it is safe."
+                        + "The warning is only issued when IsDynamicCodeSupported is true."
+                )]
                 static Func<object, T?> CreateWhenDynamicCodeSupported()
                 {
 #pragma warning disable IL3050 // There is a path that is safe for AOT executed when IsDynamicCodeSupported is false.
                     return typeof(UnboxT<T>)
-                       .GetMethod("NullableField", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic)!
-                       .MakeGenericMethod(Nullable.GetUnderlyingType(typeof(T))!)
-                       .CreateDelegate<Func<object, T>>();
+                        .GetMethod(
+                            "NullableField",
+                            System.Reflection.BindingFlags.Static
+                                | System.Reflection.BindingFlags.NonPublic
+                        )!
+                        .MakeGenericMethod(Nullable.GetUnderlyingType(typeof(T))!)
+                        .CreateDelegate<Func<object, T>>();
 #pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
                 }
             }
@@ -175,7 +182,9 @@ namespace System.Data
                 {
                     if (default(T) is null)
                         return default;
-                    throw DataSetUtil.InvalidCast(SR.Format(SR.DataSetLinq_NonNullableCast, typeof(T)));
+                    throw DataSetUtil.InvalidCast(
+                        SR.Format(SR.DataSetLinq_NonNullableCast, typeof(T))
+                    );
                 }
                 return (T)value;
             }
@@ -194,15 +203,20 @@ namespace System.Data
 
                 // Convert does all sorts of conversions. We are only interested in conversions for enums.
                 Type fromType = valueType.IsEnum ? Enum.GetUnderlyingType(valueType) : valueType;
-                Type toType = nullableType.IsEnum ? Enum.GetUnderlyingType(nullableType) : nullableType;
+                Type toType = nullableType.IsEnum
+                    ? Enum.GetUnderlyingType(nullableType)
+                    : nullableType;
                 if (fromType == toType)
-                    value = nullableType.IsEnum ? Enum.ToObject(nullableType, value) : Convert.ChangeType(value, nullableType, null);
+                    value = nullableType.IsEnum
+                        ? Enum.ToObject(nullableType, value)
+                        : Convert.ChangeType(value, nullableType, null);
 
                 return (T)value;
             }
 
-            private static Nullable<TElem> NullableField<TElem>(object value) where TElem : struct
-                => value == DBNull.Value ? default : new Nullable<TElem>((TElem)value);
+            private static Nullable<TElem> NullableField<TElem>(object value)
+                where TElem : struct =>
+                value == DBNull.Value ? default : new Nullable<TElem>((TElem)value);
         }
     }
 }

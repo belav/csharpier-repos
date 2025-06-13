@@ -1,14 +1,13 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Common
 {
@@ -31,14 +30,13 @@ namespace System.Data.Services.Common
 
         Updated,
 
-
         Published,
 
         Rights,
 
         Summary,
 
-        Title
+        Title,
     }
 
     public enum SyndicationTextContentKind
@@ -47,13 +45,13 @@ namespace System.Data.Services.Common
 
         Html,
 
-        Xhtml
+        Xhtml,
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public sealed class EntityPropertyMappingAttribute : Attribute
     {
-#region Private Members
+        #region Private Members
 
         private const string AtomNamespacePrefix = "atom";
 
@@ -70,38 +68,55 @@ namespace System.Data.Services.Common
         private readonly String targetNamespaceUri;
 
         private readonly bool keepInContent;
-#endregion
+        #endregion
 
-#region Constructors
+        #region Constructors
 
-        public EntityPropertyMappingAttribute(String sourcePath, SyndicationItemProperty targetSyndicationItem, SyndicationTextContentKind targetTextContentKind, bool keepInContent)
+        public EntityPropertyMappingAttribute(
+            String sourcePath,
+            SyndicationItemProperty targetSyndicationItem,
+            SyndicationTextContentKind targetTextContentKind,
+            bool keepInContent
+        )
         {
             if (String.IsNullOrEmpty(sourcePath))
             {
-                throw new ArgumentException(Strings.EntityPropertyMapping_EpmAttribute("sourcePath"));
+                throw new ArgumentException(
+                    Strings.EntityPropertyMapping_EpmAttribute("sourcePath")
+                );
             }
 
-            this.sourcePath            = sourcePath;
-            this.targetPath            = SyndicationItemPropertyToPath(targetSyndicationItem);
+            this.sourcePath = sourcePath;
+            this.targetPath = SyndicationItemPropertyToPath(targetSyndicationItem);
             this.targetSyndicationItem = targetSyndicationItem;
             this.targetTextContentKind = targetTextContentKind;
             this.targetNamespacePrefix = EntityPropertyMappingAttribute.AtomNamespacePrefix;
-            this.targetNamespaceUri    = XmlConstants.AtomNamespace;
-            this.keepInContent         = keepInContent;
+            this.targetNamespaceUri = XmlConstants.AtomNamespace;
+            this.keepInContent = keepInContent;
         }
 
-        public EntityPropertyMappingAttribute(String sourcePath, String targetPath, String targetNamespacePrefix, String targetNamespaceUri, bool keepInContent)
+        public EntityPropertyMappingAttribute(
+            String sourcePath,
+            String targetPath,
+            String targetNamespacePrefix,
+            String targetNamespaceUri,
+            bool keepInContent
+        )
         {
             if (String.IsNullOrEmpty(sourcePath))
             {
-                throw new ArgumentException(Strings.EntityPropertyMapping_EpmAttribute("sourcePath"));
+                throw new ArgumentException(
+                    Strings.EntityPropertyMapping_EpmAttribute("sourcePath")
+                );
             }
 
             this.sourcePath = sourcePath;
 
             if (String.IsNullOrEmpty(targetPath))
             {
-                throw new ArgumentException(Strings.EntityPropertyMapping_EpmAttribute("targetPath"));
+                throw new ArgumentException(
+                    Strings.EntityPropertyMapping_EpmAttribute("targetPath")
+                );
             }
 
             if (targetPath[0] == '@')
@@ -117,7 +132,9 @@ namespace System.Data.Services.Common
 
             if (String.IsNullOrEmpty(targetNamespaceUri))
             {
-                throw new ArgumentException(Strings.EntityPropertyMapping_EpmAttribute("targetNamespaceUri"));
+                throw new ArgumentException(
+                    Strings.EntityPropertyMapping_EpmAttribute("targetNamespaceUri")
+                );
             }
 
             this.targetNamespaceUri = targetNamespaceUri;
@@ -125,7 +142,9 @@ namespace System.Data.Services.Common
             Uri uri;
             if (!Uri.TryCreate(targetNamespaceUri, UriKind.Absolute, out uri))
             {
-                throw new ArgumentException(Strings.EntityPropertyMapping_TargetNamespaceUriNotValid(targetNamespaceUri));
+                throw new ArgumentException(
+                    Strings.EntityPropertyMapping_TargetNamespaceUriNotValid(targetNamespaceUri)
+                );
             }
 
             this.keepInContent = keepInContent;
@@ -170,7 +189,9 @@ namespace System.Data.Services.Common
 
         #endregion
 
-        internal static String SyndicationItemPropertyToPath(SyndicationItemProperty targetSyndicationItem)
+        internal static String SyndicationItemPropertyToPath(
+            SyndicationItemProperty targetSyndicationItem
+        )
         {
             switch (targetSyndicationItem)
             {
@@ -197,10 +218,12 @@ namespace System.Data.Services.Common
                 case SyndicationItemProperty.Title:
                     return "title";
                 default:
-                    throw new ArgumentException(Strings.EntityPropertyMapping_EpmAttribute("targetSyndicationItem"));
+                    throw new ArgumentException(
+                        Strings.EntityPropertyMapping_EpmAttribute("targetSyndicationItem")
+                    );
             }
         }
 
-#endregion 
+        #endregion
     }
 }

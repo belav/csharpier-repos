@@ -28,7 +28,7 @@ namespace System.Web.Http.ValueProviders.Providers
                 storage[RequestLocalStorageKey] = provider;
             }
 
-            return provider;       
+            return provider;
         }
     }
 }

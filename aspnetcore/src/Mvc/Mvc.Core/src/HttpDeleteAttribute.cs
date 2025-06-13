@@ -17,9 +17,7 @@ public class HttpDeleteAttribute : HttpMethodAttribute
     /// Creates a new <see cref="HttpDeleteAttribute"/>.
     /// </summary>
     public HttpDeleteAttribute()
-        : base(_supportedMethods)
-    {
-    }
+        : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpDeleteAttribute"/> with the given route template.

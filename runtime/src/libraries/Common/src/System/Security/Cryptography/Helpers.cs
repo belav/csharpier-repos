@@ -29,7 +29,8 @@ namespace Internal.Cryptography
 #if NETCOREAPP
         [UnsupportedOSPlatformGuard("android")]
         [UnsupportedOSPlatformGuard("browser")]
-        public static bool IsRC2Supported => !OperatingSystem.IsAndroid() && !OperatingSystem.IsBrowser();
+        public static bool IsRC2Supported =>
+            !OperatingSystem.IsAndroid() && !OperatingSystem.IsBrowser();
 #else
         public static bool IsRC2Supported => true;
 #endif
@@ -53,7 +54,11 @@ namespace Internal.Cryptography
             };
         }
 
-        internal static bool TryCopyToDestination(this ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        internal static bool TryCopyToDestination(
+            this ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (source.TryCopyTo(destination))
             {
@@ -75,7 +80,9 @@ namespace Internal.Cryptography
                 Oids.Sha512 => 512 >> 3,
                 Oids.Sha1 => 160 >> 3,
                 Oids.Md5 => 128 >> 3,
-                _ => throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashOid)),
+                _ => throw new CryptographicException(
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashOid)
+                ),
             };
         }
     }

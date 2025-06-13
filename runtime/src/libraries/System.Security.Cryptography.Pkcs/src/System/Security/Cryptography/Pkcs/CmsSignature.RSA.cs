@@ -16,14 +16,35 @@ namespace System.Security.Cryptography.Pkcs
         static partial void PrepareRegistrationRsa(Dictionary<string, CmsSignature> lookup)
         {
             lookup.Add(Oids.Rsa, new RSAPkcs1CmsSignature(null, null));
-            lookup.Add(Oids.RsaPkcs1Sha1, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha1, HashAlgorithmName.SHA1));
-            lookup.Add(Oids.RsaPkcs1Sha256, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha256, HashAlgorithmName.SHA256));
-            lookup.Add(Oids.RsaPkcs1Sha384, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha384, HashAlgorithmName.SHA384));
-            lookup.Add(Oids.RsaPkcs1Sha512, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha512, HashAlgorithmName.SHA512));
+            lookup.Add(
+                Oids.RsaPkcs1Sha1,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha1, HashAlgorithmName.SHA1)
+            );
+            lookup.Add(
+                Oids.RsaPkcs1Sha256,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha256, HashAlgorithmName.SHA256)
+            );
+            lookup.Add(
+                Oids.RsaPkcs1Sha384,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha384, HashAlgorithmName.SHA384)
+            );
+            lookup.Add(
+                Oids.RsaPkcs1Sha512,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha512, HashAlgorithmName.SHA512)
+            );
 #if NET8_0_OR_GREATER
-            lookup.Add(Oids.RsaPkcs1Sha3_256, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha3_256, HashAlgorithmName.SHA3_256));
-            lookup.Add(Oids.RsaPkcs1Sha3_384, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha3_384, HashAlgorithmName.SHA3_384));
-            lookup.Add(Oids.RsaPkcs1Sha3_512, new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha3_512, HashAlgorithmName.SHA3_512));
+            lookup.Add(
+                Oids.RsaPkcs1Sha3_256,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha3_256, HashAlgorithmName.SHA3_256)
+            );
+            lookup.Add(
+                Oids.RsaPkcs1Sha3_384,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha3_384, HashAlgorithmName.SHA3_384)
+            );
+            lookup.Add(
+                Oids.RsaPkcs1Sha3_512,
+                new RSAPkcs1CmsSignature(Oids.RsaPkcs1Sha3_512, HashAlgorithmName.SHA3_512)
+            );
 #endif
             lookup.Add(Oids.RsaPss, new RSAPssCmsSignature());
         }
@@ -55,7 +76,8 @@ namespace System.Security.Cryptography.Pkcs
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
                 ReadOnlyMemory<byte>? signatureParameters,
-                X509Certificate2 certificate)
+                X509Certificate2 certificate
+            )
             {
                 if (_expectedDigest.HasValue && _expectedDigest.Value != digestAlgorithmName)
                 {
@@ -63,14 +85,17 @@ namespace System.Security.Cryptography.Pkcs
                         SR.Format(
                             SR.Cryptography_Cms_InvalidSignerHashForSignatureAlg,
                             digestAlgorithmOid,
-                            _signatureAlgorithm));
+                            _signatureAlgorithm
+                        )
+                    );
                 }
 
                 RSASignaturePadding padding = GetSignaturePadding(
                     signatureParameters,
                     digestAlgorithmOid,
                     digestAlgorithmName,
-                    valueHash.Length);
+                    valueHash.Length
+                );
 
                 RSA? publicKey = certificate.GetRSAPublicKey();
 
@@ -87,14 +112,16 @@ namespace System.Security.Cryptography.Pkcs
                     signature,
 #endif
                     digestAlgorithmName,
-                    padding);
+                    padding
+                );
             }
 
             protected abstract RSASignaturePadding GetSignaturePadding(
                 ReadOnlyMemory<byte>? signatureParameters,
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
-                int digestValueLength);
+                int digestValueLength
+            );
 
             private protected static bool SignCore(
 #if NETCOREAPP || NETSTANDARD2_1
@@ -107,14 +134,16 @@ namespace System.Security.Cryptography.Pkcs
                 AsymmetricAlgorithm? key,
                 bool silent,
                 RSASignaturePadding signaturePadding,
-                [NotNullWhen(true)] out byte[]? signatureValue)
+                [NotNullWhen(true)] out byte[]? signatureValue
+            )
             {
                 RSA certPublicKey = certificate.GetRSAPublicKey()!;
 
                 // If there's no private key, fall back to the public key for a "no private key" exception.
-                RSA? privateKey = key as RSA ??
-                    PkcsPal.Instance.GetPrivateKeyForSigning<RSA>(certificate, silent) ??
-                    certPublicKey;
+                RSA? privateKey =
+                    key as RSA
+                    ?? PkcsPal.Instance.GetPrivateKeyForSigning<RSA>(certificate, silent)
+                    ?? certPublicKey;
 
                 if (privateKey is null)
                 {
@@ -130,13 +159,22 @@ namespace System.Security.Cryptography.Pkcs
                     signature,
                     hashAlgorithmName,
                     signaturePadding,
-                    out int bytesWritten);
+                    out int bytesWritten
+                );
 
                 if (signed && signature.Length == bytesWritten)
                 {
                     signatureValue = signature;
 
-                    if (key is not null && !certPublicKey.VerifyHash(dataHash, signatureValue, hashAlgorithmName, signaturePadding))
+                    if (
+                        key is not null
+                        && !certPublicKey.VerifyHash(
+                            dataHash,
+                            signatureValue,
+                            hashAlgorithmName,
+                            signaturePadding
+                        )
+                    )
                     {
                         // key did not match certificate
                         signatureValue = null;
@@ -153,9 +191,18 @@ namespace System.Security.Cryptography.Pkcs
                     dataHash,
 #endif
                     hashAlgorithmName,
-                    signaturePadding);
+                    signaturePadding
+                );
 
-                if (key is not null && !certPublicKey.VerifyHash(dataHash, signatureValue, hashAlgorithmName, signaturePadding))
+                if (
+                    key is not null
+                    && !certPublicKey.VerifyHash(
+                        dataHash,
+                        signatureValue,
+                        hashAlgorithmName,
+                        signaturePadding
+                    )
+                )
                 {
                     // key did not match certificate
                     signatureValue = null;
@@ -170,16 +217,18 @@ namespace System.Security.Cryptography.Pkcs
         {
             internal override RSASignaturePadding? SignaturePadding => RSASignaturePadding.Pkcs1;
 
-            public RSAPkcs1CmsSignature(string? signatureAlgorithm, HashAlgorithmName? expectedDigest)
-                : base(signatureAlgorithm, expectedDigest)
-            {
-            }
+            public RSAPkcs1CmsSignature(
+                string? signatureAlgorithm,
+                HashAlgorithmName? expectedDigest
+            )
+                : base(signatureAlgorithm, expectedDigest) { }
 
             protected override RSASignaturePadding GetSignaturePadding(
                 ReadOnlyMemory<byte>? signatureParameters,
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
-                int digestValueLength)
+                int digestValueLength
+            )
             {
                 if (signatureParameters == null)
                 {
@@ -210,7 +259,8 @@ namespace System.Security.Cryptography.Pkcs
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
                 [NotNullWhen(true)] out byte[]? signatureValue,
-                out byte[]? signatureParameters)
+                out byte[]? signatureParameters
+            )
             {
                 bool result = SignCore(
                     dataHash,
@@ -219,7 +269,8 @@ namespace System.Security.Cryptography.Pkcs
                     key,
                     silent,
                     RSASignaturePadding.Pkcs1,
-                    out signatureValue);
+                    out signatureValue
+                );
 
                 signatureAlgorithm = result ? Oids.Rsa : null;
                 signatureParameters = null;
@@ -243,11 +294,58 @@ namespace System.Security.Cryptography.Pkcs
             //        OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.1
             //  [2]
             //    INTEGER 32
-            private static readonly byte[] s_rsaPssSha256Parameters = new byte[] {
-                0x30, 0x30, 0xA0, 0x0D, 0x30, 0x0B, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02,
-                0x01, 0xA1, 0x1A, 0x30, 0x18, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x08,
-                0x30, 0x0B, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0xA2, 0x03, 0x02,
-                0x01, 0x20,
+            private static readonly byte[] s_rsaPssSha256Parameters = new byte[]
+            {
+                0x30,
+                0x30,
+                0xA0,
+                0x0D,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x01,
+                0xA1,
+                0x1A,
+                0x30,
+                0x18,
+                0x06,
+                0x09,
+                0x2A,
+                0x86,
+                0x48,
+                0x86,
+                0xF7,
+                0x0D,
+                0x01,
+                0x01,
+                0x08,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x01,
+                0xA2,
+                0x03,
+                0x02,
+                0x01,
+                0x20,
             };
 
             // SEQUENCE
@@ -261,11 +359,58 @@ namespace System.Security.Cryptography.Pkcs
             //        OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.2
             //  [2]
             //    INTEGER 48
-            private static readonly byte[] s_rsaPssSha384Parameters = new byte[] {
-                0x30, 0x30, 0xA0, 0x0D, 0x30, 0x0B, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02,
-                0x02, 0xA1, 0x1A, 0x30, 0x18, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x08,
-                0x30, 0x0B, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0xA2, 0x03, 0x02,
-                0x01, 0x30,
+            private static readonly byte[] s_rsaPssSha384Parameters = new byte[]
+            {
+                0x30,
+                0x30,
+                0xA0,
+                0x0D,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x02,
+                0xA1,
+                0x1A,
+                0x30,
+                0x18,
+                0x06,
+                0x09,
+                0x2A,
+                0x86,
+                0x48,
+                0x86,
+                0xF7,
+                0x0D,
+                0x01,
+                0x01,
+                0x08,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x02,
+                0xA2,
+                0x03,
+                0x02,
+                0x01,
+                0x30,
             };
 
             // SEQUENCE
@@ -279,31 +424,81 @@ namespace System.Security.Cryptography.Pkcs
             //        OBJECT IDENTIFIER 2.16.840.1.101.3.4.2.3
             //  [2]
             //    INTEGER 64
-            private static readonly byte[] s_rsaPssSha512Parameters = new byte[] {
-                0x30, 0x30, 0xA0, 0x0D, 0x30, 0x0B, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02,
-                0x03, 0xA1, 0x1A, 0x30, 0x18, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x08,
-                0x30, 0x0B, 0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0xA2, 0x03, 0x02,
-                0x01, 0x40,
+            private static readonly byte[] s_rsaPssSha512Parameters = new byte[]
+            {
+                0x30,
+                0x30,
+                0xA0,
+                0x0D,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x03,
+                0xA1,
+                0x1A,
+                0x30,
+                0x18,
+                0x06,
+                0x09,
+                0x2A,
+                0x86,
+                0x48,
+                0x86,
+                0xF7,
+                0x0D,
+                0x01,
+                0x01,
+                0x08,
+                0x30,
+                0x0B,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x03,
+                0xA2,
+                0x03,
+                0x02,
+                0x01,
+                0x40,
             };
 
             internal override RSASignaturePadding? SignaturePadding => RSASignaturePadding.Pss;
 
-            public RSAPssCmsSignature() : base(null, null)
-            {
-            }
+            public RSAPssCmsSignature()
+                : base(null, null) { }
 
             protected override RSASignaturePadding GetSignaturePadding(
                 ReadOnlyMemory<byte>? signatureParameters,
                 string? digestAlgorithmOid,
                 HashAlgorithmName digestAlgorithmName,
-                int digestValueLength)
+                int digestValueLength
+            )
             {
                 if (signatureParameters == null)
                 {
                     throw new CryptographicException(SR.Cryptography_Pkcs_PssParametersMissing);
                 }
 
-                PssParamsAsn pssParams = PssParamsAsn.Decode(signatureParameters.Value, AsnEncodingRules.DER);
+                PssParamsAsn pssParams = PssParamsAsn.Decode(
+                    signatureParameters.Value,
+                    AsnEncodingRules.DER
+                );
 
                 if (pssParams.HashAlgorithm.Algorithm != digestAlgorithmOid)
                 {
@@ -311,7 +506,9 @@ namespace System.Security.Cryptography.Pkcs
                         SR.Format(
                             SR.Cryptography_Pkcs_PssParametersHashMismatch,
                             pssParams.HashAlgorithm.Algorithm,
-                            digestAlgorithmOid));
+                            digestAlgorithmOid
+                        )
+                    );
                 }
 
                 RSASignaturePadding padding = pssParams.GetSignaturePadding(digestValueLength);
@@ -330,7 +527,8 @@ namespace System.Security.Cryptography.Pkcs
                 bool silent,
                 [NotNullWhen(true)] out string? signatureAlgorithm,
                 [NotNullWhen(true)] out byte[]? signatureValue,
-                out byte[]? signatureParameters)
+                out byte[]? signatureParameters
+            )
             {
                 bool result = SignCore(
                     dataHash,
@@ -339,7 +537,8 @@ namespace System.Security.Cryptography.Pkcs
                     key,
                     silent,
                     RSASignaturePadding.Pss,
-                    out signatureValue);
+                    out signatureValue
+                );
 
                 if (result)
                 {
@@ -365,7 +564,10 @@ namespace System.Security.Cryptography.Pkcs
                     {
                         // The only hash algorithm we don't support is MD5.
                         // We shouldn't get here with anything other than MD5.
-                        Debug.Assert(hashAlgorithmName == HashAlgorithmName.MD5, $"Unsupported digest algorithm '{hashAlgorithmName.Name}'");
+                        Debug.Assert(
+                            hashAlgorithmName == HashAlgorithmName.MD5,
+                            $"Unsupported digest algorithm '{hashAlgorithmName.Name}'"
+                        );
                         signatureAlgorithm = null;
                         signatureParameters = null;
                         return false;

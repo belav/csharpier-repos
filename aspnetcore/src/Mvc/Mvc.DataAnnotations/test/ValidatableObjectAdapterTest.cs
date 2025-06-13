@@ -9,8 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class ValidatableObjectAdapterTest
 {
-    private static readonly ModelMetadataProvider _metadataProvider
-        = TestModelMetadataProvider.CreateDefaultProvider();
+    private static readonly ModelMetadataProvider _metadataProvider =
+        TestModelMetadataProvider.CreateDefaultProvider();
 
     // Inspired by DataAnnotationsModelValidatorTest.Validate_SetsMemberName_AsExpectedData but using a type that
     // implements IValidatableObject. Values are metadata, expected DisplayName, and expected MemberName.
@@ -21,89 +21,108 @@ public class ValidatableObjectAdapterTest
             var method = typeof(SampleModel).GetMethod(nameof(SampleModel.IsLovely));
             var parameter = method.GetParameters()[0]; // IsLovely(SampleModel other)
             return new TheoryData<ModelMetadata, string, string>
+            {
                 {
-                    {
-                        // Validating a property.
-                        _metadataProvider.GetMetadataForProperty(
-                            typeof(SampleModelContainer),
-                            nameof(SampleModelContainer.SampleModel)),
-                        nameof(SampleModelContainer.SampleModel),
+                    // Validating a property.
+                    _metadataProvider.GetMetadataForProperty(
+                        typeof(SampleModelContainer),
                         nameof(SampleModelContainer.SampleModel)
-                    },
-                    {
-                        // Validating a property with [Display(Name = "...")].
-                        _metadataProvider.GetMetadataForProperty(
-                            typeof(SampleModelContainer),
-                            nameof(SampleModelContainer.SampleModelWithDisplay)),
-                        "sample model",
+                    ),
+                    nameof(SampleModelContainer.SampleModel),
+                    nameof(SampleModelContainer.SampleModel)
+                },
+                {
+                    // Validating a property with [Display(Name = "...")].
+                    _metadataProvider.GetMetadataForProperty(
+                        typeof(SampleModelContainer),
                         nameof(SampleModelContainer.SampleModelWithDisplay)
-                    },
-                    {
-                        // Validating a parameter.
-                        _metadataProvider.GetMetadataForParameter(parameter),
-                        "other",
-                        "other"
-                    },
-                    {
-                        // Validating a top-level parameter when using old-fashioned metadata provider.
-                        // Or, validating an element of a collection.
-                        _metadataProvider.GetMetadataForType(typeof(SampleModel)),
-                        nameof(SampleModel),
-                        null
-                    },
-                };
+                    ),
+                    "sample model",
+                    nameof(SampleModelContainer.SampleModelWithDisplay)
+                },
+                {
+                    // Validating a parameter.
+                    _metadataProvider.GetMetadataForParameter(parameter),
+                    "other",
+                    "other"
+                },
+                {
+                    // Validating a top-level parameter when using old-fashioned metadata provider.
+                    // Or, validating an element of a collection.
+                    _metadataProvider.GetMetadataForType(typeof(SampleModel)),
+                    nameof(SampleModel),
+                    null
+                },
+            };
         }
     }
 
-    public static TheoryData<ValidationResult[], ModelValidationResult[]> Validate_ReturnsExpectedResultsData
+    public static TheoryData<
+        ValidationResult[],
+        ModelValidationResult[]
+    > Validate_ReturnsExpectedResultsData
     {
         get
         {
             return new TheoryData<ValidationResult[], ModelValidationResult[]>
+            {
                 {
+                    new[] { new ValidationResult("Error message") },
+                    new[] { new ModelValidationResult(memberName: null, message: "Error message") }
+                },
+                {
+                    new[]
                     {
-                        new[] { new ValidationResult("Error message") },
-                        new[] { new ModelValidationResult(memberName: null, message: "Error message") }
+                        new ValidationResult(
+                            "Error message",
+                            new[] { nameof(SampleModel.FirstName) }
+                        ),
                     },
+                    new[]
                     {
-                        new[] { new ValidationResult("Error message", new[] { nameof(SampleModel.FirstName) }) },
-                        new[] { new ModelValidationResult(nameof(SampleModel.FirstName), "Error message") }
-                    },
+                        new ModelValidationResult(nameof(SampleModel.FirstName), "Error message"),
+                    }
+                },
+                {
+                    new[]
                     {
-                        new[]
-                        {
-                            new ValidationResult("Error message1"),
-                            new ValidationResult("Error message2", new[] { nameof(SampleModel.FirstName) }),
-                            new ValidationResult("Error message3", new[] { nameof(SampleModel.LastName) }),
-                            new ValidationResult("Error message4", new[] { nameof(SampleModel) }),
-                        },
-                        new[]
-                        {
-                            new ModelValidationResult(memberName: null, message: "Error message1"),
-                            new ModelValidationResult(nameof(SampleModel.FirstName), "Error message2"),
-                            new ModelValidationResult(nameof(SampleModel.LastName), "Error message3"),
-                            // No special case for ValidationContext.MemberName==ValidationResult.MemberName
-                            new ModelValidationResult(nameof(SampleModel), "Error message4"),
-                        }
+                        new ValidationResult("Error message1"),
+                        new ValidationResult(
+                            "Error message2",
+                            new[] { nameof(SampleModel.FirstName) }
+                        ),
+                        new ValidationResult(
+                            "Error message3",
+                            new[] { nameof(SampleModel.LastName) }
+                        ),
+                        new ValidationResult("Error message4", new[] { nameof(SampleModel) }),
                     },
+                    new[]
                     {
-                        new[]
-                        {
-                            new ValidationResult("Error message1", new[]
-                            {
-                                nameof(SampleModel.FirstName),
-                                nameof(SampleModel.LastName),
-                            }),
-                            new ValidationResult("Error message2"),
-                        },
-                        new[]
-                        {
-                            new ModelValidationResult(nameof(SampleModel.FirstName), "Error message1"),
-                            new ModelValidationResult(nameof(SampleModel.LastName), "Error message1"),
-                            new ModelValidationResult(memberName: null, message: "Error message2"),
-                        }
+                        new ModelValidationResult(memberName: null, message: "Error message1"),
+                        new ModelValidationResult(nameof(SampleModel.FirstName), "Error message2"),
+                        new ModelValidationResult(nameof(SampleModel.LastName), "Error message3"),
+                        // No special case for ValidationContext.MemberName==ValidationResult.MemberName
+                        new ModelValidationResult(nameof(SampleModel), "Error message4"),
+                    }
+                },
+                {
+                    new[]
+                    {
+                        new ValidationResult(
+                            "Error message1",
+                            new[] { nameof(SampleModel.FirstName), nameof(SampleModel.LastName) }
+                        ),
+                        new ValidationResult("Error message2"),
                     },
-                };
+                    new[]
+                    {
+                        new ModelValidationResult(nameof(SampleModel.FirstName), "Error message1"),
+                        new ModelValidationResult(nameof(SampleModel.LastName), "Error message1"),
+                        new ModelValidationResult(memberName: null, message: "Error message2"),
+                    }
+                },
+            };
         }
     }
 
@@ -112,7 +131,8 @@ public class ValidatableObjectAdapterTest
     public void Validate_PassesExpectedNames(
         ModelMetadata metadata,
         string expectedDisplayName,
-        string expectedMemberName)
+        string expectedMemberName
+    )
     {
         // Arrange
         var adapter = new ValidatableObjectAdapter();
@@ -122,7 +142,8 @@ public class ValidatableObjectAdapterTest
             metadata,
             _metadataProvider,
             container: new SampleModelContainer(),
-            model: model);
+            model: model
+        );
 
         // Act
         var results = adapter.Validate(validationContext);
@@ -140,7 +161,8 @@ public class ValidatableObjectAdapterTest
     [MemberData(nameof(Validate_ReturnsExpectedResultsData))]
     public void Validate_ReturnsExpectedResults(
         ValidationResult[] innerResults,
-        ModelValidationResult[] expectedResults)
+        ModelValidationResult[] expectedResults
+    )
     {
         // Arrange
         var adapter = new ValidatableObjectAdapter();
@@ -152,13 +174,15 @@ public class ValidatableObjectAdapterTest
 
         var metadata = _metadataProvider.GetMetadataForProperty(
             typeof(SampleModelContainer),
-            nameof(SampleModelContainer.SampleModel));
+            nameof(SampleModelContainer.SampleModel)
+        );
         var validationContext = new ModelValidationContext(
             new ActionContext(),
             metadata,
             _metadataProvider,
             container: null,
-            model: model);
+            model: model
+        );
 
         // Act
         var results = adapter.Validate(validationContext);

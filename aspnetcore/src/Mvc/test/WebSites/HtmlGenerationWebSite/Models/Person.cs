@@ -10,43 +10,19 @@ public class Person
 {
     [HiddenInput(DisplayValue = false)]
     [Range(1, 100)]
-    public int Number
-    {
-        get;
-        set;
-    }
+    public int Number { get; set; }
 
-    public string Name
-    {
-        get;
-        set;
-    }
+    public string Name { get; set; }
 
     [Required]
-    public string Password
-    {
-        get;
-        set;
-    }
+    public string Password { get; set; }
 
     [EnumDataType(typeof(Gender))]
     [UIHint("GenderUsingTagHelpers")]
-    public Gender Gender
-    {
-        get;
-        set;
-    }
+    public Gender Gender { get; set; }
 
-    public string PhoneNumber
-    {
-        get;
-        set;
-    }
+    public string PhoneNumber { get; set; }
 
     [DataType(DataType.EmailAddress)]
-    public string Email
-    {
-        get;
-        set;
-    }
+    public string Email { get; set; }
 }

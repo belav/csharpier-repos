@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,52 +38,49 @@ using System.Collections;
 using System.Data;
 using Mono.Data.PostgreSqlClient;
 
-namespace TestSystemDataPgSqlClient 
+namespace TestSystemDataPgSqlClient
 {
-	public class TestPgSqlDataAdapter 
-	{
-		public static void Test() 
-		{
-			string connectionString;
-			string sqlQuery;
-			PgSqlDataAdapter adapter;
-			DataSet dataSet = null;
+    public class TestPgSqlDataAdapter
+    {
+        public static void Test()
+        {
+            string connectionString;
+            string sqlQuery;
+            PgSqlDataAdapter adapter;
+            DataSet dataSet = null;
 
-			connectionString =
-				"host=localhost;" +
-				"dbname=test;" +
-				"user=postgres";
-						
-			sqlQuery = "select * from pg_tables";
+            connectionString = "host=localhost;" + "dbname=test;" + "user=postgres";
 
-			System.Console.WriteLine ("new PgSqlDataAdapter...");
-			adapter = new PgSqlDataAdapter (sqlQuery, 
-					connectionString);
+            sqlQuery = "select * from pg_tables";
 
-			System.Console.WriteLine ("new DataSet...");
-			dataSet = new DataSet ();
+            System.Console.WriteLine("new PgSqlDataAdapter...");
+            adapter = new PgSqlDataAdapter(sqlQuery, connectionString);
 
-			try {
-				System.Console.WriteLine("Fill...");
-				adapter.Fill (dataSet);
+            System.Console.WriteLine("new DataSet...");
+            dataSet = new DataSet();
 
-			}
-			catch (NotImplementedException e) {
-				Console.WriteLine("Exception Caught: " + e);
-			}		
-			
-			System.Console.WriteLine ("get row...");
-			if (dataSet != null) {
-				foreach (DataRow row in dataSet.Tables["Table"].Rows)
-					Console.WriteLine("tablename: " + row["tablename"]);
-				System.Console.WriteLine("Done.");
-			}
+            try
+            {
+                System.Console.WriteLine("Fill...");
+                adapter.Fill(dataSet);
+            }
+            catch (NotImplementedException e)
+            {
+                Console.WriteLine("Exception Caught: " + e);
+            }
 
-		}
+            System.Console.WriteLine("get row...");
+            if (dataSet != null)
+            {
+                foreach (DataRow row in dataSet.Tables["Table"].Rows)
+                    Console.WriteLine("tablename: " + row["tablename"]);
+                System.Console.WriteLine("Done.");
+            }
+        }
 
-		public static void Main() 
-		{
-			Test();
-		}
-	}
+        public static void Main()
+        {
+            Test();
+        }
+    }
 }

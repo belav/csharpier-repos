@@ -14,7 +14,9 @@ public class Program
         {
             Console.Error.WriteLine("Usage: WebSocketSample <URL>");
             Console.Error.WriteLine("");
-            Console.Error.WriteLine("To connect to an ASP.NET Connection Handler, use 'ws://example.com/path/to/hub' or 'wss://example.com/path/to/hub' (for HTTPS)");
+            Console.Error.WriteLine(
+                "To connect to an ASP.NET Connection Handler, use 'ws://example.com/path/to/hub' or 'wss://example.com/path/to/hub' (for HTTPS)"
+            );
             return 1;
         }
 
@@ -35,10 +37,19 @@ public class Program
             while ((line = Console.ReadLine()) != null)
             {
                 var bytes = Encoding.UTF8.GetBytes(line);
-                await ws.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Text, endOfMessage: true, cancellationToken: CancellationToken.None);
+                await ws.SendAsync(
+                    new ArraySegment<byte>(bytes),
+                    WebSocketMessageType.Text,
+                    endOfMessage: true,
+                    cancellationToken: CancellationToken.None
+                );
             }
 
-            await ws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+            await ws.CloseOutputAsync(
+                WebSocketCloseStatus.NormalClosure,
+                "",
+                CancellationToken.None
+            );
         });
 
         var receiving = Receiving(ws);
@@ -52,21 +63,25 @@ public class Program
 
         while (true)
         {
-            var result = await ws.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            var result = await ws.ReceiveAsync(
+                new ArraySegment<byte>(buffer),
+                CancellationToken.None
+            );
 
             if (result.MessageType == WebSocketMessageType.Text)
             {
                 Console.WriteLine(Encoding.UTF8.GetString(buffer, 0, result.Count));
             }
-            else if (result.MessageType == WebSocketMessageType.Binary)
-            {
-            }
+            else if (result.MessageType == WebSocketMessageType.Binary) { }
             else if (result.MessageType == WebSocketMessageType.Close)
             {
-                await ws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
+                await ws.CloseOutputAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    "",
+                    CancellationToken.None
+                );
                 break;
             }
-
         }
     }
 }

@@ -2,10 +2,10 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 // -----------------------------------------------------------------------
 using System;
-using System.Reflection;
-using Microsoft.Internal;
-using System.Threading;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -24,7 +24,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
                 case MemberTypes.Property:
                     Assumes.IsTrue(accessors.Length == 2);
-                    return ReflectionExtensions.CreateReflectionProperty((MethodInfo)accessors[0], (MethodInfo)accessors[1]);
+                    return ReflectionExtensions.CreateReflectionProperty(
+                        (MethodInfo)accessors[0],
+                        (MethodInfo)accessors[1]
+                    );
 
                 case MemberTypes.NestedType:
                 case MemberTypes.TypeInfo:
@@ -45,7 +48,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 PropertyInfo property = member as PropertyInfo;
                 Assumes.NotNull(property);
 
-                MemberInfo[] accessors = new MemberInfo[] { property.GetGetMethod(true), property.GetSetMethod(true)};
+                MemberInfo[] accessors = new MemberInfo[]
+                {
+                    property.GetGetMethod(true),
+                    property.GetSetMethod(true),
+                };
                 return new LazyMemberInfo(MemberTypes.Property, accessors);
             }
             else
@@ -54,24 +61,35 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
         }
 
-        public static ReflectionWritableMember ToReflectionWriteableMember(this LazyMemberInfo lazyMember)
+        public static ReflectionWritableMember ToReflectionWriteableMember(
+            this LazyMemberInfo lazyMember
+        )
         {
-            Assumes.IsTrue((lazyMember.MemberType == MemberTypes.Field) || (lazyMember.MemberType == MemberTypes.Property));
+            Assumes.IsTrue(
+                (lazyMember.MemberType == MemberTypes.Field)
+                    || (lazyMember.MemberType == MemberTypes.Property)
+            );
 
-            ReflectionWritableMember reflectionMember = lazyMember.ToReflectionMember() as ReflectionWritableMember;
+            ReflectionWritableMember reflectionMember =
+                lazyMember.ToReflectionMember() as ReflectionWritableMember;
             Assumes.NotNull(reflectionMember);
 
             return reflectionMember;
         }
 
-
         public static ReflectionProperty ToReflectionProperty(this PropertyInfo property)
         {
             Assumes.NotNull(property);
-            return CreateReflectionProperty(property.GetGetMethod(true), property.GetSetMethod(true));
+            return CreateReflectionProperty(
+                property.GetGetMethod(true),
+                property.GetSetMethod(true)
+            );
         }
 
-        public static ReflectionProperty CreateReflectionProperty(MethodInfo getMethod, MethodInfo setMethod)
+        public static ReflectionProperty CreateReflectionProperty(
+            MethodInfo getMethod,
+            MethodInfo setMethod
+        )
         {
             Assumes.IsTrue(getMethod != null || setMethod != null);
 

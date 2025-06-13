@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     /// <summary>
     /// Utility class that can be used to track the progress of an operation in a threadsafe manner.
     /// </summary>
-    internal sealed class StreamingProgressTracker(Func<int, int, CancellationToken, ValueTask>? updateAction = null) : IStreamingProgressTracker
+    internal sealed class StreamingProgressTracker(
+        Func<int, int, CancellationToken, ValueTask>? updateAction = null
+    ) : IStreamingProgressTracker
     {
         private int _completedItems;
         private int _totalItems;
@@ -28,7 +30,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return UpdateAsync(cancellationToken);
         }
 
-        private ValueTask UpdateAsync(CancellationToken cancellationToken)
-            => updateAction?.Invoke(Volatile.Read(ref _completedItems), Volatile.Read(ref _totalItems), cancellationToken) ?? default;
+        private ValueTask UpdateAsync(CancellationToken cancellationToken) =>
+            updateAction?.Invoke(
+                Volatile.Read(ref _completedItems),
+                Volatile.Read(ref _totalItems),
+                cancellationToken
+            ) ?? default;
     }
 }

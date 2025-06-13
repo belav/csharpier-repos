@@ -2,34 +2,41 @@
 // <copyright file="SoapElementAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
 
     /// <include file='doc\SoapElementAttribute.uex' path='docs/doc[@for="SoapElementAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-    public class SoapElementAttribute : System.Attribute {
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
+    public class SoapElementAttribute : System.Attribute
+    {
         string elementName;
         string dataType;
         bool nullable;
-        
+
         /// <include file='doc\SoapElementAttribute.uex' path='docs/doc[@for="SoapElementAttribute.SoapElementAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapElementAttribute() {
-        }
-        
+        public SoapElementAttribute() { }
+
         /// <include file='doc\SoapElementAttribute.uex' path='docs/doc[@for="SoapElementAttribute.SoapElementAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapElementAttribute(string elementName) {
+        public SoapElementAttribute(string elementName)
+        {
             this.elementName = elementName;
         }
 
@@ -37,7 +44,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ElementName {
+        public string ElementName
+        {
             get { return elementName == null ? string.Empty : elementName; }
             set { elementName = value; }
         }
@@ -46,7 +54,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string DataType {
+        public string DataType
+        {
             get { return dataType == null ? string.Empty : dataType; }
             set { dataType = value; }
         }
@@ -55,10 +64,10 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsNullable {
+        public bool IsNullable
+        {
             get { return nullable; }
             set { nullable = value; }
         }
-
     }
 }

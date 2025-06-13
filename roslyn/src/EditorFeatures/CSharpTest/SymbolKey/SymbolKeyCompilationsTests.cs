@@ -74,8 +74,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var comp1 = CreateCompilation(src1, assemblyName: "Test");
             var comp2 = CreateCompilation(src2, assemblyName: "Test");
 
-            var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name);
-            var newSymbols = GetSourceSymbols(comp2, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name);
+            var originalSymbols = GetSourceSymbols(
+                    comp1,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name);
+            var newSymbols = GetSourceSymbols(
+                    comp2,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name);
 
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, comp1);
         }
@@ -95,8 +103,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var comp1 = CreateCompilation(src1, assemblyName: "C2CErrorSymbolUnchanged01");
             var comp2 = CreateCompilation(src2, assemblyName: "C2CErrorSymbolUnchanged01");
 
-            var symbol01 = comp1.SourceModule.GlobalNamespace.GetMembers().FirstOrDefault() as NamedTypeSymbol;
-            var symbol02 = comp1.SourceModule.GlobalNamespace.GetMembers().FirstOrDefault() as NamedTypeSymbol;
+            var symbol01 =
+                comp1.SourceModule.GlobalNamespace.GetMembers().FirstOrDefault() as NamedTypeSymbol;
+            var symbol02 =
+                comp1.SourceModule.GlobalNamespace.GetMembers().FirstOrDefault() as NamedTypeSymbol;
 
             Assert.NotNull(symbol01);
             Assert.NotNull(symbol02);
@@ -104,8 +114,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             Assert.NotEqual(SymbolKind.ErrorType, symbol01.Kind);
             Assert.NotEqual(SymbolKind.ErrorType, symbol02.Kind);
 
-            var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name);
-            var newSymbols = GetSourceSymbols(comp2, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name);
+            var originalSymbols = GetSourceSymbols(
+                    comp1,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name);
+            var newSymbols = GetSourceSymbols(
+                    comp2,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name);
 
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, comp1);
         }
@@ -127,14 +145,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
 
             var comp = (Compilation)CreateCompilation(src, assemblyName: "Test");
 
-            var ns = comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
+            var ns =
+                comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
             var type = ns.GetTypeMembers("C1").FirstOrDefault();
             var definition = type.GetMembers("M").First() as IMethodSymbol;
             var implementation = definition.PartialImplementationPart;
 
             // Assert that both the definition and implementation resolve back to themselves
             Assert.Equal(definition, ResolveSymbol(definition, comp, SymbolKeyComparison.None));
-            Assert.Equal(implementation, ResolveSymbol(implementation, comp, SymbolKeyComparison.None));
+            Assert.Equal(
+                implementation,
+                ResolveSymbol(implementation, comp, SymbolKeyComparison.None)
+            );
         }
 
         [Fact]
@@ -154,14 +176,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
 
             var comp = (Compilation)CreateCompilation(src, assemblyName: "Test");
 
-            var ns = comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
+            var ns =
+                comp.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
             var type = ns.GetTypeMembers("C1").FirstOrDefault();
             var definition = type.GetMembers("M").First() as IMethodSymbol;
             var implementation = definition.PartialImplementationPart;
 
             // Assert that both the definition and implementation resolve back to themselves
             Assert.Equal(definition, ResolveSymbol(definition, comp, SymbolKeyComparison.None));
-            Assert.Equal(implementation, ResolveSymbol(implementation, comp, SymbolKeyComparison.None));
+            Assert.Equal(
+                implementation,
+                ResolveSymbol(implementation, comp, SymbolKeyComparison.None)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/916341")]
@@ -198,8 +224,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var compilation = (Compilation)CreateCompilation(src, assemblyName: "Test");
 
             var type = compilation.SourceModule.GlobalNamespace.GetTypeMembers("C").Single();
-            var indexer1 = type.GetMembers().Where(m => m.MetadataName == "I.Item").Single() as IPropertySymbol;
-            var indexer2 = type.GetMembers().Where(m => m.MetadataName == "I<T>.Item").Single() as IPropertySymbol;
+            var indexer1 =
+                type.GetMembers().Where(m => m.MetadataName == "I.Item").Single()
+                as IPropertySymbol;
+            var indexer2 =
+                type.GetMembers().Where(m => m.MetadataName == "I<T>.Item").Single()
+                as IPropertySymbol;
 
             AssertSymbolKeysEqual(indexer1, indexer2, SymbolKeyComparison.None, expectEqual: false);
 
@@ -210,8 +240,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         [Fact]
         public void RecursiveReferenceToConstructedGeneric()
         {
-            var src1 =
-                """
+            var src1 = """
                 using System.Collections.Generic;
 
                 class C
@@ -229,15 +258,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var symbols1 = GetSourceSymbols(comp1, includeLocal: true).ToList();
             var symbols2 = GetSourceSymbols(comp1, includeLocal: true).ToList();
 
-            // First, make sure that all the symbols in this file resolve properly 
+            // First, make sure that all the symbols in this file resolve properly
             // to themselves.
             ResolveAndVerifySymbolList(symbols1, symbols2, comp1);
 
-            // Now do this for the members of types we see.  We want this 
+            // Now do this for the members of types we see.  We want this
             // so we hit things like the members of the constructed type
             // List<Z>
-            var members1 = symbols1.OfType<INamespaceOrTypeSymbol>().SelectMany(n => n.GetMembers()).ToList();
-            var members2 = symbols2.OfType<INamespaceOrTypeSymbol>().SelectMany(n => n.GetMembers()).ToList();
+            var members1 = symbols1
+                .OfType<INamespaceOrTypeSymbol>()
+                .SelectMany(n => n.GetMembers())
+                .ToList();
+            var members2 = symbols2
+                .OfType<INamespaceOrTypeSymbol>()
+                .SelectMany(n => n.GetMembers())
+                .ToList();
 
             ResolveAndVerifySymbolList(members1, members2, comp1);
         }
@@ -256,8 +291,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var originalComp = CreateCompilation(src1, assemblyName: "Test");
             var newComp = CreateCompilation(src1, assemblyName: "Test");
 
-            var originalSymbols = GetSourceSymbols(originalComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
-            var newSymbols = GetSourceSymbols(newComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
+            var originalSymbols = GetSourceSymbols(
+                    originalComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
+            var newSymbols = GetSourceSymbols(
+                    newComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
 
             Assert.Equal(3, originalSymbols.Length);
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, originalComp);
@@ -277,8 +322,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var originalComp = CreateCompilation(src1, assemblyName: "Test");
             var newComp = CreateCompilation(src1, assemblyName: "Test");
 
-            var originalSymbols = GetSourceSymbols(originalComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
-            var newSymbols = GetSourceSymbols(newComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
+            var originalSymbols = GetSourceSymbols(
+                    originalComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
+            var newSymbols = GetSourceSymbols(
+                    newComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
 
             Assert.Equal(3, originalSymbols.Length);
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, originalComp);
@@ -299,11 +354,35 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             // note that the IDE can only distinguish file-local type symbols with the same name when they have distinct file paths.
             // We are OK with this as we will require file types with identical names to have distinct file paths later in the preview.
             // See https://github.com/dotnet/roslyn/issues/61999
-            var originalComp = CreateCompilation(new[] { SyntaxFactory.ParseSyntaxTree(src1, path: "file1.cs"), SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs") }, assemblyName: "Test");
-            var newComp = CreateCompilation(new[] { SyntaxFactory.ParseSyntaxTree(src1, path: "file1.cs"), SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs") }, assemblyName: "Test");
+            var originalComp = CreateCompilation(
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(src1, path: "file1.cs"),
+                    SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs"),
+                },
+                assemblyName: "Test"
+            );
+            var newComp = CreateCompilation(
+                new[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(src1, path: "file1.cs"),
+                    SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs"),
+                },
+                assemblyName: "Test"
+            );
 
-            var originalSymbols = GetSourceSymbols(originalComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
-            var newSymbols = GetSourceSymbols(newComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
+            var originalSymbols = GetSourceSymbols(
+                    originalComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
+            var newSymbols = GetSourceSymbols(
+                    newComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
 
             Assert.Equal(4, originalSymbols.Length);
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, originalComp);
@@ -313,26 +392,42 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         public void FileType4()
         {
             // we should be able to distinguish a file-local type and non-file-local type when they have the same source name.
-            var src1 = SyntaxFactory.ParseSyntaxTree("""
+            var src1 = SyntaxFactory.ParseSyntaxTree(
+                """
                 using System;
 
                 namespace N1.N2
                 {
                     file class C { }
                 }
-                """, path: "File1.cs");
+                """,
+                path: "File1.cs"
+            );
 
-            var src2 = SyntaxFactory.ParseSyntaxTree("""
+            var src2 = SyntaxFactory.ParseSyntaxTree(
+                """
                 namespace N1.N2
                 {
                     class C { }
                 }
-                """, path: "File2.cs");
+                """,
+                path: "File2.cs"
+            );
             var originalComp = CreateCompilation(new[] { src1, src2 }, assemblyName: "Test");
             var newComp = CreateCompilation(new[] { src1, src2 }, assemblyName: "Test");
 
-            var originalSymbols = GetSourceSymbols(originalComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
-            var newSymbols = GetSourceSymbols(newComp, SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace).OrderBy(s => s.Name).ToArray();
+            var originalSymbols = GetSourceSymbols(
+                    originalComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
+            var newSymbols = GetSourceSymbols(
+                    newComp,
+                    SymbolCategory.DeclaredType | SymbolCategory.DeclaredNamespace
+                )
+                .OrderBy(s => s.Name)
+                .ToArray();
 
             Assert.Equal(4, originalSymbols.Length);
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, originalComp);
@@ -432,10 +527,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var comp1 = (Compilation)CreateCompilation(src1, assemblyName: "Test");
             var comp2 = (Compilation)CreateCompilation(src2, assemblyName: "Test");
 
-            var namespace1 = comp1.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
+            var namespace1 =
+                comp1.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
             var typeSym00 = namespace1.GetTypeMembers("C1").FirstOrDefault();
 
-            var namespace2 = comp2.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
+            var namespace2 =
+                comp2.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
             var typeSym01 = namespace2.GetTypeMembers("C1").FirstOrDefault();
             var typeSym02 = namespace2.GetTypeMembers("C2").Single();
 
@@ -481,11 +578,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var comp1 = CreateCompilation(src1, assemblyName: "Test");
             var comp2 = CreateCompilation(src2, assemblyName: "Test");
 
-            var originalSymbols = GetSourceSymbols(comp1, SymbolCategory.NonTypeMember | SymbolCategory.Parameter)
-                                      .Where(s => !s.IsAccessor()).OrderBy(s => s.Name);
+            var originalSymbols = GetSourceSymbols(
+                    comp1,
+                    SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+                )
+                .Where(s => !s.IsAccessor())
+                .OrderBy(s => s.Name);
 
-            var newSymbols = GetSourceSymbols(comp2, SymbolCategory.NonTypeMember | SymbolCategory.Parameter)
-                                 .Where(s => !s.IsAccessor()).OrderBy(s => s.Name);
+            var newSymbols = GetSourceSymbols(
+                    comp2,
+                    SymbolCategory.NonTypeMember | SymbolCategory.Parameter
+                )
+                .Where(s => !s.IsAccessor())
+                .OrderBy(s => s.Name);
 
             ResolveAndVerifySymbolList(newSymbols, originalSymbols, comp1);
         }
@@ -521,8 +626,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var typeSym2 = comp2.SourceModule.GlobalNamespace.GetTypeMembers("Test").Single();
             var newSymbols = typeSym2.GetMembers(WellKnownMemberNames.Indexer);
 
-            ResolveAndVerifySymbol(newSymbols.First(), originalSymbols.First(), comp1, SymbolKeyComparison.None);
-            ResolveAndVerifySymbol(newSymbols.Last(), originalSymbols.Last(), comp1, SymbolKeyComparison.None);
+            ResolveAndVerifySymbol(
+                newSymbols.First(),
+                originalSymbols.First(),
+                comp1,
+                SymbolKeyComparison.None
+            );
+            ResolveAndVerifySymbol(
+                newSymbols.Last(),
+                originalSymbols.Last(),
+                comp1,
+                SymbolKeyComparison.None
+            );
         }
 
         [Fact]
@@ -540,23 +655,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             var comp1 = (Compilation)CreateCompilation(src, assemblyName: "Assembly1");
             var comp2 = (Compilation)CreateCompilation(src, assemblyName: "Assembly2");
 
-            var namespace1 = comp1.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
+            var namespace1 =
+                comp1.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
             var typeSym01 = namespace1.GetTypeMembers("C1").FirstOrDefault();
 
-            var namespace2 = comp2.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
+            var namespace2 =
+                comp2.SourceModule.GlobalNamespace.GetMembers("NS").Single() as INamespaceSymbol;
             var typeSym02 = namespace2.GetTypeMembers("C1").FirstOrDefault();
 
             // new C1 resolves to old C1 if we ignore assembly and module ids
-            ResolveAndVerifySymbol(typeSym02, typeSym01, comp1, SymbolKeyComparison.IgnoreAssemblyIds);
+            ResolveAndVerifySymbol(
+                typeSym02,
+                typeSym01,
+                comp1,
+                SymbolKeyComparison.IgnoreAssemblyIds
+            );
 
             // new C1 DOES NOT resolve to old C1 if we don't ignore assembly and module ids
             Assert.Null(ResolveSymbol(typeSym02, comp1, SymbolKeyComparison.None));
         }
 
-        [WpfFact(Skip = "530169"), WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530169")]
+        [
+            WpfFact(Skip = "530169"),
+            WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530169")
+        ]
         public void C2CAssemblyChanged02()
         {
-            var src = @"[assembly: System.Reflection.AssemblyVersion(""1.2.3.4"")] public class C {}";
+            var src =
+                @"[assembly: System.Reflection.AssemblyVersion(""1.2.3.4"")] public class C {}";
 
             // same identity
             var comp1 = (Compilation)CreateCompilation(src, assemblyName: "Assembly");
@@ -584,7 +710,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530170")]
         public void C2CAssemblyChanged03()
         {
-            var src = @"[assembly: System.Reflection.AssemblyVersion(""1.2.3.4"")] public class C {}";
+            var src =
+                @"[assembly: System.Reflection.AssemblyVersion(""1.2.3.4"")] public class C {}";
 
             // -------------------------------------------------------
             // different name
@@ -595,14 +722,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             ISymbol assembly2 = compilation2.Assembly;
 
             // different
-            AssertSymbolKeysEqual(assembly2, assembly1, SymbolKeyComparison.None, expectEqual: false);
+            AssertSymbolKeysEqual(
+                assembly2,
+                assembly1,
+                SymbolKeyComparison.None,
+                expectEqual: false
+            );
             Assert.Null(ResolveSymbol(assembly2, compilation1, SymbolKeyComparison.None));
 
             // ignore means ALL assembly/module symbols have same ID
-            AssertSymbolKeysEqual(assembly2, assembly1, SymbolKeyComparison.IgnoreAssemblyIds, expectEqual: true);
+            AssertSymbolKeysEqual(
+                assembly2,
+                assembly1,
+                SymbolKeyComparison.IgnoreAssemblyIds,
+                expectEqual: true
+            );
 
             // But can NOT be resolved
-            Assert.Null(ResolveSymbol(assembly2, compilation1, SymbolKeyComparison.IgnoreAssemblyIds));
+            Assert.Null(
+                ResolveSymbol(assembly2, compilation1, SymbolKeyComparison.IgnoreAssemblyIds)
+            );
 
             // Module
             var module1 = compilation1.Assembly.Modules.First();
@@ -613,7 +752,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             Assert.Null(ResolveSymbol(module1, compilation2, SymbolKeyComparison.None));
 
             AssertSymbolKeysEqual(module2, module1, SymbolKeyComparison.IgnoreAssemblyIds);
-            Assert.Null(ResolveSymbol(module2, compilation1, SymbolKeyComparison.IgnoreAssemblyIds));
+            Assert.Null(
+                ResolveSymbol(module2, compilation1, SymbolKeyComparison.IgnoreAssemblyIds)
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546254")]

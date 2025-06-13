@@ -26,7 +26,8 @@ internal class ResourceManagerStringProvider : IResourceStringProvider
         IResourceNamesCache resourceCache,
         ResourceManager resourceManager,
         Assembly assembly,
-        string baseName)
+        string baseName
+    )
     {
         _resourceManager = resourceManager;
         _resourceNamesCache = resourceCache;
@@ -57,32 +58,41 @@ internal class ResourceManagerStringProvider : IResourceStringProvider
     {
         var cacheKey = GetResourceCacheKey(culture);
 
-        return _resourceNamesCache.GetOrAdd(cacheKey, _ =>
-        {
-            // We purposly don't dispose the ResourceSet because it causes an ObjectDisposedException when you try to read the values later.
-            var resourceSet = _resourceManager.GetResourceSet(culture, createIfNotExists: true, tryParents: false);
-            if (resourceSet == null)
+        return _resourceNamesCache.GetOrAdd(
+            cacheKey,
+            _ =>
             {
-                if (throwOnMissing)
+                // We purposly don't dispose the ResourceSet because it causes an ObjectDisposedException when you try to read the values later.
+                var resourceSet = _resourceManager.GetResourceSet(
+                    culture,
+                    createIfNotExists: true,
+                    tryParents: false
+                );
+                if (resourceSet == null)
                 {
-                    throw new MissingManifestResourceException(Resources.FormatLocalization_MissingManifest(GetResourceName(culture)));
+                    if (throwOnMissing)
+                    {
+                        throw new MissingManifestResourceException(
+                            Resources.FormatLocalization_MissingManifest(GetResourceName(culture))
+                        );
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else
-                {
-                    return null;
-                }
-            }
 
-            var names = new List<string>();
-            foreach (DictionaryEntry? entry in resourceSet)
-            {
-                if (entry?.Key is string key)
+                var names = new List<string>();
+                foreach (DictionaryEntry? entry in resourceSet)
                 {
-                    names.Add(key);
+                    if (entry?.Key is string key)
+                    {
+                        names.Add(key);
+                    }
                 }
-            }
 
-            return names;
-        });
+                return names;
+            }
+        );
     }
 }

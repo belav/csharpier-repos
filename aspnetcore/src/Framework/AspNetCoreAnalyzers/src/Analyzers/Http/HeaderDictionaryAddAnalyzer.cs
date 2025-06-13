@@ -14,7 +14,8 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class HeaderDictionaryAddAnalyzer : DiagnosticAnalyzer
 {
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        ImmutableArray.Create(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -27,52 +28,55 @@ public sealed class HeaderDictionaryAddAnalyzer : DiagnosticAnalyzer
     {
         var wellKnownTypes = WellKnownTypes.GetOrCreate(context.Compilation);
 
-        context.RegisterOperationAction(context =>
-        {
-            var invocation = (IInvocationOperation)context.Operation;
-
-            if (IsAddMethod(invocation.TargetMethod)
-                && invocation.TargetMethod.Parameters.Length == 2
-                && SymbolEqualityComparer.Default.Equals(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IHeaderDictionary), invocation.Instance?.Type))
+        context.RegisterOperationAction(
+            context =>
             {
-                AddDiagnosticWarning(context, invocation.Syntax.GetLocation());
-            }
+                var invocation = (IInvocationOperation)context.Operation;
 
-        }, OperationKind.Invocation);
+                if (
+                    IsAddMethod(invocation.TargetMethod)
+                    && invocation.TargetMethod.Parameters.Length == 2
+                    && SymbolEqualityComparer.Default.Equals(
+                        wellKnownTypes.Get(
+                            WellKnownType.Microsoft_AspNetCore_Http_IHeaderDictionary
+                        ),
+                        invocation.Instance?.Type
+                    )
+                )
+                {
+                    AddDiagnosticWarning(context, invocation.Syntax.GetLocation());
+                }
+            },
+            OperationKind.Invocation
+        );
     }
 
     private static bool IsAddMethod(IMethodSymbol method)
     {
-        return method is
-        {
-            Name: "Add",
-            ContainingType:
-            {
-                Name: "IDictionary",
-                ContainingNamespace:
+        return method
+            is {
+                Name: "Add",
+                ContainingType:
                 {
-                    Name: "Generic",
+                    Name: "IDictionary",
                     ContainingNamespace:
                     {
-                        Name: "Collections",
+                        Name: "Generic",
                         ContainingNamespace:
                         {
-                            Name: "System",
+                            Name: "Collections",
                             ContainingNamespace:
-                            {
-                                IsGlobalNamespace: true
-                            }
+                            { Name: "System", ContainingNamespace: { IsGlobalNamespace: true } }
                         }
                     }
                 }
-            }
-        };
+            };
     }
 
     private static void AddDiagnosticWarning(OperationAnalysisContext context, Location location)
     {
-        context.ReportDiagnostic(Diagnostic.Create(
-            DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd,
-            location));
+        context.ReportDiagnostic(
+            Diagnostic.Create(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd, location)
+        );
     }
 }

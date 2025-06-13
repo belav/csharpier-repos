@@ -1,34 +1,41 @@
 //------------------------------------------------------------------------------
 // <copyright file="UrlPath.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * UrlPath class.
- * 
+ *
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-using System.Text;
-using System.Runtime.Serialization.Formatters;
-using System.Runtime.InteropServices;
 using System.Collections;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters;
+using System.Text;
 
 namespace System.Web.Mobile
 {
     /*
      * URL Path library.
      */
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal static class UrlPath
     {
         private const char appRelativeCharacter = '~';
 
         internal static bool IsRooted(String basepath)
         {
-            return(basepath == null || basepath.Length == 0 || basepath[0] == '/' || basepath[0] == '\\');
+            return (
+                basepath == null
+                || basepath.Length == 0
+                || basepath[0] == '/'
+                || basepath[0] == '\\'
+            );
         }
 
         internal static bool IsRelativeUrl(string url)
@@ -55,7 +62,7 @@ namespace System.Web.Mobile
             }
 
             // Make sure there is a filename after the last '/'
-            Debug.Assert(path[path.Length-1] != '/', "Path should not end with a /");
+            Debug.Assert(path[path.Length - 1] != '/', "Path should not end with a /");
 
             string dir = path.Substring(0, path.LastIndexOf('/'));
 
@@ -100,7 +107,11 @@ namespace System.Web.Mobile
             {
                 // If the relative path starts with "~/" or "~\", treat it as app root
                 // relative (bug 68628)
-                if (relative.Length >=3 && relative[0] == appRelativeCharacter && (relative[1] == '/' || relative[1] == '\\'))
+                if (
+                    relative.Length >= 3
+                    && relative[0] == appRelativeCharacter
+                    && (relative[1] == '/' || relative[1] == '\\')
+                )
                 {
                     String appPath = HttpRuntime.AppDomainAppVirtualPath;
                     if (appPath.Length > 1)
@@ -156,9 +167,17 @@ namespace System.Web.Mobile
                     return (queryString != null) ? (path + queryString) : path;
                 }
 
-                if ((examine == 0 || path[examine - 1] == '/')
-                    && (examine + 1 == length || path[examine + 1] == '/' ||
-                        (path[examine + 1] == '.' && (examine + 2 == length || path[examine + 2] == '/'))))
+                if (
+                    (examine == 0 || path[examine - 1] == '/')
+                    && (
+                        examine + 1 == length
+                        || path[examine + 1] == '/'
+                        || (
+                            path[examine + 1] == '.'
+                            && (examine + 2 == length || path[examine + 2] == '/')
+                        )
+                    )
+                )
                 {
                     break;
                 }
@@ -171,7 +190,7 @@ namespace System.Web.Mobile
             int start;
             examine = 0;
 
-            for (;;)
+            for (; ; )
             {
                 start = examine;
                 examine = path.IndexOf('/', start + 1);
@@ -181,9 +200,11 @@ namespace System.Web.Mobile
                     examine = length;
                 }
 
-                if (examine - start <= 3 &&
-                    (examine < 1 || path[examine - 1] == '.') &&
-                    (start + 1 >= length || path[start + 1] == '.'))
+                if (
+                    examine - start <= 3
+                    && (examine < 1 || path[examine - 1] == '.')
+                    && (start + 1 >= length || path[start + 1] == '.')
+                )
                 {
                     if (examine - start == 3)
                     {
@@ -235,17 +256,20 @@ namespace System.Web.Mobile
         // If a virtual path is app relative (i.e. starts with ~/), change it to
         // start with the actuall app path.
         // E.g. ~/Sub/foo.aspx --> /MyApp/Sub/foo.aspx
-        internal static string MakeVirtualPathAppAbsolute(string virtualPath) {
-
+        internal static string MakeVirtualPathAppAbsolute(string virtualPath)
+        {
             // If the path is exactly "~", just return the app root path
             if (virtualPath.Length == 1 && virtualPath[0] == appRelativeCharacter)
                 return HttpRuntime.AppDomainAppVirtualPath;
 
             // If the virtual path starts with "~/" or "~\", replace with the app path
             // relative (ASURT 68628)
-            if (virtualPath.Length >=2 && virtualPath[0] == appRelativeCharacter &&
-                (virtualPath[1] == '/' || virtualPath[1] == '\\')) {
-
+            if (
+                virtualPath.Length >= 2
+                && virtualPath[0] == appRelativeCharacter
+                && (virtualPath[1] == '/' || virtualPath[1] == '\\')
+            )
+            {
                 string appPath = HttpRuntime.AppDomainAppVirtualPath;
 
                 if (appPath.Length > 1)
@@ -259,5 +283,3 @@ namespace System.Web.Mobile
         }
     }
 }
-
-

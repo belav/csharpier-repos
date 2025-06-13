@@ -36,7 +36,10 @@ public static class FallbackEndpointRouteBuilderExtensions
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// </remarks>
-    public static IEndpointConventionBuilder MapFallback(this IEndpointRouteBuilder endpoints, RequestDelegate requestDelegate)
+    public static IEndpointConventionBuilder MapFallback(
+        this IEndpointRouteBuilder endpoints,
+        RequestDelegate requestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(requestDelegate);
@@ -68,7 +71,8 @@ public static class FallbackEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallback(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);

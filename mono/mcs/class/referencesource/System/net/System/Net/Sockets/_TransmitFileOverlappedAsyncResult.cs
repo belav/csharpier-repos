@@ -4,10 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
-    using System.Net;
     using System.IO;
+    using System.Net;
     using System.Runtime.InteropServices;
     using System.Threading;
     using Microsoft.Win32;
@@ -16,28 +17,30 @@ namespace System.Net.Sockets {
     //  OverlappedAsyncResult - used to take care of storage for async Socket operation
     //   from the BeginSend, BeginSendTo, BeginReceive, BeginReceiveFrom calls.
     //
-    internal class TransmitFileOverlappedAsyncResult : BaseOverlappedAsyncResult {
-
+    internal class TransmitFileOverlappedAsyncResult : BaseOverlappedAsyncResult
+    {
         //
         // internal class members
         //
 
-        private FileStream              m_fileStream;
-        private TransmitFileOptions     m_flags;
-        private TransmitFileBuffers     m_buffers;
+        private FileStream m_fileStream;
+        private TransmitFileOptions m_flags;
+        private TransmitFileBuffers m_buffers;
 
         // Constructor. We take in the socket that's creating us, the caller's
         // state object, and the buffer on which the I/O will be performed.
         // We save the socket and state, pin the callers's buffer, and allocate
         // an event for the WaitHandle.
         //
-        internal TransmitFileOverlappedAsyncResult(Socket socket, Object asyncState, AsyncCallback asyncCallback)
-        : base(socket, asyncState, asyncCallback) {
-        }
+        internal TransmitFileOverlappedAsyncResult(
+            Socket socket,
+            Object asyncState,
+            AsyncCallback asyncCallback
+        )
+            : base(socket, asyncState, asyncCallback) { }
 
-        internal TransmitFileOverlappedAsyncResult(Socket socket):base(socket){
-        }
-
+        internal TransmitFileOverlappedAsyncResult(Socket socket)
+            : base(socket) { }
 
         //
         // SetUnmanagedStructures -
@@ -46,7 +49,14 @@ namespace System.Net.Sockets {
         //   to prepare specific structures and ints that lie in unmanaged memory
         //   since the Overlapped calls can be Async
         //
-        internal void SetUnmanagedStructures(byte[] preBuffer, byte[] postBuffer, FileStream fileStream, TransmitFileOptions flags, bool sync) {
+        internal void SetUnmanagedStructures(
+            byte[] preBuffer,
+            byte[] postBuffer,
+            FileStream fileStream,
+            TransmitFileOptions flags,
+            bool sync
+        )
+        {
             //
             // fill in flags if we use it.
             //
@@ -59,10 +69,10 @@ namespace System.Net.Sockets {
             m_buffers = null;
             int buffsNumber = 0;
 
-            if (preBuffer != null && preBuffer.Length>0)
+            if (preBuffer != null && preBuffer.Length > 0)
                 ++buffsNumber;
 
-            if (postBuffer != null && postBuffer.Length>0)
+            if (postBuffer != null && postBuffer.Length > 0)
                 ++buffsNumber;
 
             object[] objectsToPin = null;
@@ -72,15 +82,17 @@ namespace System.Net.Sockets {
                 objectsToPin = new object[buffsNumber];
 
                 m_buffers = new TransmitFileBuffers();
-                
+
                 objectsToPin[--buffsNumber] = m_buffers;
 
-                if (preBuffer != null && preBuffer.Length>0) {
+                if (preBuffer != null && preBuffer.Length > 0)
+                {
                     m_buffers.preBufferLength = preBuffer.Length;
                     objectsToPin[--buffsNumber] = preBuffer;
                 }
 
-                if (postBuffer != null && postBuffer.Length>0) {
+                if (postBuffer != null && postBuffer.Length > 0)
+                {
                     m_buffers.postBufferLength = postBuffer.Length;
                     objectsToPin[--buffsNumber] = postBuffer;
                 }
@@ -108,10 +120,15 @@ namespace System.Net.Sockets {
             {
                 base.SetUnmanagedStructures(null);
             }
-
         } // SetUnmanagedStructures()
 
-        internal void SetUnmanagedStructures(byte[] preBuffer, byte[] postBuffer, FileStream fileStream, TransmitFileOptions flags, ref OverlappedCache overlappedCache)
+        internal void SetUnmanagedStructures(
+            byte[] preBuffer,
+            byte[] postBuffer,
+            FileStream fileStream,
+            TransmitFileOptions flags,
+            ref OverlappedCache overlappedCache
+        )
         {
             SetupCache(ref overlappedCache);
             SetUnmanagedStructures(preBuffer, postBuffer, fileStream, flags, false);
@@ -119,8 +136,10 @@ namespace System.Net.Sockets {
 
         // Utility cleanup routine. Frees pinned and unmanged memory.
         //
-        protected override void ForceReleaseUnmanagedStructures() {
-            if (m_fileStream != null ) {
+        protected override void ForceReleaseUnmanagedStructures()
+        {
+            if (m_fileStream != null)
+            {
                 m_fileStream.Close();
                 m_fileStream = null;
             }
@@ -128,7 +147,6 @@ namespace System.Net.Sockets {
             // clenaup base class
             //
             base.ForceReleaseUnmanagedStructures();
-
         } // CleanupUnmanagedStructures()
 
         internal void SyncReleaseUnmanagedStructures()
@@ -136,22 +154,14 @@ namespace System.Net.Sockets {
             ForceReleaseUnmanagedStructures();
         }
 
-        internal TransmitFileBuffers TransmitFileBuffers{
-            get{
-                return m_buffers;
-            }
+        internal TransmitFileBuffers TransmitFileBuffers
+        {
+            get { return m_buffers; }
         }
 
-        internal TransmitFileOptions Flags{
-            get{
-                return m_flags;
-            }
+        internal TransmitFileOptions Flags
+        {
+            get { return m_flags; }
         }
-
-
     }; // class OverlappedAsyncResult
-
-
-
-
 } // namespace System.Net.Sockets

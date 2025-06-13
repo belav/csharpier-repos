@@ -97,27 +97,51 @@ namespace System.Collections.ObjectModel.Tests
         public static void RemoveAtTest()
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
-            ObservableCollection<Guid> col0 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col1 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col2 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
+            ObservableCollection<Guid> col0 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col1 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col2 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
 
             col0.RemoveAt(0);
             string collectionString = "";
             foreach (var item in col1)
                 collectionString += item + ", ";
-            Assert.False(col0.Contains(anArray[0]), "Collection0 should no longer contain the item: " + anArray[0] + " Collection: " + collectionString);
+            Assert.False(
+                col0.Contains(anArray[0]),
+                "Collection0 should no longer contain the item: "
+                    + anArray[0]
+                    + " Collection: "
+                    + collectionString
+            );
 
             col1.RemoveAt(1);
             collectionString = "";
             foreach (var item in col1)
                 collectionString += item + ", ";
-            Assert.False(col1.Contains(anArray[1]), "Collection1 should no longer contain the item: " + anArray[1] + " Collection: " + collectionString);
+            Assert.False(
+                col1.Contains(anArray[1]),
+                "Collection1 should no longer contain the item: "
+                    + anArray[1]
+                    + " Collection: "
+                    + collectionString
+            );
 
             col2.RemoveAt(2);
             collectionString = "";
             foreach (var item in col2)
                 collectionString += item + ", ";
-            Assert.False(col2.Contains(anArray[2]), "Collection2 should no longer contain the item: " + anArray[2] + " Collection: " + collectionString);
+            Assert.False(
+                col2.Contains(anArray[2]),
+                "Collection2 should no longer contain the item: "
+                    + anArray[2]
+                    + " Collection: "
+                    + collectionString
+            );
 
             string[] anArrayString = { "one", "two", "three", "four" };
             ObservableCollection<string> col = new ObservableCollection<string>(anArrayString);
@@ -135,18 +159,46 @@ namespace System.Collections.ObjectModel.Tests
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             ObservableCollection<Guid> collection = new ObservableCollection<Guid>(anArray);
-            collection.CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
+            collection.CollectionChanged += (o, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
             foreach (var index in iArrInvalidValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.RemoveAt(index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.RemoveAt(index)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
 
-            int[] iArrLargeValues = new int[] { collection.Count, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrLargeValues = new int[]
+            {
+                collection.Count,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
             foreach (var index in iArrLargeValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.RemoveAt(index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.RemoveAt(index)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
         }
@@ -159,11 +211,21 @@ namespace System.Collections.ObjectModel.Tests
         public static void MoveTest()
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
-            ObservableCollection<Guid> col01 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col10 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col12 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col21 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col20 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
+            ObservableCollection<Guid> col01 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col10 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col12 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col21 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col20 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
 
             col01.Move(0, 1);
             Assert.Equal(anArray[0], col01[1]);
@@ -182,7 +244,9 @@ namespace System.Collections.ObjectModel.Tests
 
             CollectionAndPropertyChangedTester helper = new CollectionAndPropertyChangedTester();
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>(anArrayString);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                anArrayString
+            );
             helper.MoveItemTest(collection, 0, 2);
             helper.MoveItemTest(collection, 3, 0);
             helper.MoveItemTest(collection, 1, 2);
@@ -203,20 +267,48 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<string> collection = null;
 
             int validIndex = 2;
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
-            int[] iArrLargeValues = new int[] { anArray.Length, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
+            int[] iArrLargeValues = new int[]
+            {
+                anArray.Length,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
 
             foreach (var index in iArrInvalidValues)
             {
                 collection = new ObservableCollection<string>(anArray);
-                collection.CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
+                collection.CollectionChanged += (o, e) =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                };
 
                 // invalid startIndex, valid destination index.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Move(index, validIndex));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Move(index, validIndex)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
 
                 // valid startIndex, invalid destIndex.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Move(validIndex, index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Move(validIndex, index)
+                );
                 //NOTE: It actually moves the item right out of the collection.So the count is one less.
                 //Assert.Equal(anArray.Length, collection.Count, "Collection should not have changed. index: " + index);
             }
@@ -224,14 +316,23 @@ namespace System.Collections.ObjectModel.Tests
             foreach (var index in iArrLargeValues)
             {
                 collection = new ObservableCollection<string>(anArray);
-                collection.CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
+                collection.CollectionChanged += (o, e) =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                };
 
                 // invalid startIndex, valid destination index.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Move(index, validIndex));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Move(index, validIndex)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
 
                 // valid startIndex, invalid destIndex.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Move(validIndex, index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Move(validIndex, index)
+                );
                 //NOTE: It actually moves the item right out of the collection. So the count is one less.
                 //Assert.Equal(anArray.Length, collection.Count, "Collection should not have changed.");
             }
@@ -244,9 +345,15 @@ namespace System.Collections.ObjectModel.Tests
         public static void InsertTest()
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
-            ObservableCollection<Guid> col0 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col1 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
-            ObservableCollection<Guid> col3 = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
+            ObservableCollection<Guid> col0 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col1 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
+            ObservableCollection<Guid> col3 = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
 
             //inserting item at the beginning.
             Guid g0 = Guid.NewGuid();
@@ -264,7 +371,9 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(g3, col3[col3.Count - 1]);
 
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>((IEnumerable<string>)anArrayString);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                (IEnumerable<string>)anArrayString
+            );
             CollectionAndPropertyChangedTester helper = new CollectionAndPropertyChangedTester();
             helper.AddOrInsertItemTest(collection, "seven", 2);
             helper.AddOrInsertItemTest(collection, "zero", 0);
@@ -281,20 +390,48 @@ namespace System.Collections.ObjectModel.Tests
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             ObservableCollection<Guid> collection = new ObservableCollection<Guid>(anArray);
-            collection.CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
+            collection.CollectionChanged += (o, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
 
             Guid itemToInsert = Guid.NewGuid();
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
             foreach (var index in iArrInvalidValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Insert(index, itemToInsert));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Insert(index, itemToInsert)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
 
-            int[] iArrLargeValues = new int[] { collection.Count + 1, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrLargeValues = new int[]
+            {
+                collection.Count + 1,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
             foreach (var index in iArrLargeValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Insert(index, itemToInsert));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Insert(index, itemToInsert)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
         }
@@ -307,7 +444,9 @@ namespace System.Collections.ObjectModel.Tests
         public static void ReplaceItemTest()
         {
             string[] anArray = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>((IEnumerable<string>)anArray);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                (IEnumerable<string>)anArray
+            );
             CollectionAndPropertyChangedTester helper = new CollectionAndPropertyChangedTester();
             helper.ReplaceItemTest(collection, 1, "seven");
             helper.ReplaceItemTest(collection, 3, "zero");
@@ -321,18 +460,35 @@ namespace System.Collections.ObjectModel.Tests
         public static void ContainsTest()
         {
             string[] anArray = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>((IEnumerable<string>)anArray);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                (IEnumerable<string>)anArray
+            );
             string collectionString = "";
 
             foreach (var item in collection)
                 collectionString += item + ", ";
 
             for (int i = 0; i < collection.Count; ++i)
-                Assert.True(collection.Contains(anArray[i]), "ObservableCollection did not contain the item: " + anArray[i] + " Collection: " + collectionString);
+                Assert.True(
+                    collection.Contains(anArray[i]),
+                    "ObservableCollection did not contain the item: "
+                        + anArray[i]
+                        + " Collection: "
+                        + collectionString
+                );
 
             string g = "six";
-            Assert.False(collection.Contains(g), "Collection contained an item that should not have been there. guid: " + g + " Collection: " + collectionString);
-            Assert.False(collection.Contains(null), "Collection should not have contained null. Collection: " + collectionString);
+            Assert.False(
+                collection.Contains(g),
+                "Collection contained an item that should not have been there. guid: "
+                    + g
+                    + " Collection: "
+                    + collectionString
+            );
+            Assert.False(
+                collection.Contains(null),
+                "Collection should not have contained null. Collection: " + collectionString
+            );
         }
 
         /// <summary>
@@ -343,7 +499,9 @@ namespace System.Collections.ObjectModel.Tests
         public static void IndexOfTest()
         {
             string[] anArray = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>((IEnumerable<string>)anArray);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                (IEnumerable<string>)anArray
+            );
 
             for (int i = 0; i < anArray.Length; ++i)
                 Assert.Equal(i, collection.IndexOf(anArray[i]));
@@ -371,7 +529,9 @@ namespace System.Collections.ObjectModel.Tests
         public static void CopyToTest()
         {
             string[] anArray = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>((IEnumerable<string>)anArray);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                (IEnumerable<string>)anArray
+            );
 
             string[] aCopy = new string[collection.Count];
             collection.CopyTo(aCopy, 0);
@@ -386,9 +546,15 @@ namespace System.Collections.ObjectModel.Tests
             {
                 string value = aCopy[i];
                 if (i == 0)
-                    Assert.True(null == value, "Should not have a value since we did not start copying there.");
+                    Assert.True(
+                        null == value,
+                        "Should not have a value since we did not start copying there."
+                    );
                 else if (i == (aCopy.Length - 1))
-                    Assert.True(null == value, "Should not have a value since the collection is shorter than the copy array..");
+                    Assert.True(
+                        null == value,
+                        "Should not have a value since the collection is shorter than the copy array.."
+                    );
                 else
                 {
                     int indexInCollection = i - offsetIndex;
@@ -411,27 +577,66 @@ namespace System.Collections.ObjectModel.Tests
             string[] anArray = new string[] { "one", "two", "three", "four" };
             ObservableCollection<string> collection = new ObservableCollection<string>(anArray);
 
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
             foreach (var index in iArrInvalidValues)
             {
                 string[] aCopy = new string[collection.Count];
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("destinationIndex", "dstIndex", () => collection.CopyTo(aCopy, index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "destinationIndex",
+                    "dstIndex",
+                    () => collection.CopyTo(aCopy, index)
+                );
             }
 
-            int[] iArrLargeValues = new int[] { collection.Count, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrLargeValues = new int[]
+            {
+                collection.Count,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
             foreach (var index in iArrLargeValues)
             {
                 string[] aCopy = new string[collection.Count];
-                AssertExtensions.Throws<ArgumentException>("destinationArray", null, () => collection.CopyTo(aCopy, index));
+                AssertExtensions.Throws<ArgumentException>(
+                    "destinationArray",
+                    null,
+                    () => collection.CopyTo(aCopy, index)
+                );
             }
 
-            AssertExtensions.Throws<ArgumentNullException>("destinationArray", "dest", () => collection.CopyTo(null, 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destinationArray",
+                "dest",
+                () => collection.CopyTo(null, 1)
+            );
 
             string[] copy = new string[collection.Count - 1];
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => collection.CopyTo(copy, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => collection.CopyTo(copy, 0)
+            );
 
             copy = new string[0];
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => collection.CopyTo(copy, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => collection.CopyTo(copy, 0)
+            );
         }
 
         /// <summary>
@@ -442,7 +647,9 @@ namespace System.Collections.ObjectModel.Tests
         public static void GetEnumeratorTest()
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
-            ObservableCollection<Guid> col = new ObservableCollection<Guid>((IEnumerable<Guid>)anArray);
+            ObservableCollection<Guid> col = new ObservableCollection<Guid>(
+                (IEnumerable<Guid>)anArray
+            );
 
             int i = 0;
             IEnumerator<Guid> e;
@@ -467,6 +674,7 @@ namespace System.Collections.ObjectModel.Tests
 
         // Number of collection changed events that were ACTUALLY fired.
         public int NumCollectionChangedFired { get; private set; }
+
         // Number of collection changed events that are EXPECTED to be fired.
         public int ExpectedCollectionChangedFired { get; private set; }
 
@@ -486,14 +694,18 @@ namespace System.Collections.ObjectModel.Tests
         /// Will perform an Add or Insert on the given Collection depending on whether the
         /// insertIndex is null or not. If it is null, will Add, otherwise, will Insert.
         /// </summary>
-        public void AddOrInsertItemTest(ObservableCollection<string> collection, string itemToAdd, int? insertIndex = null)
+        public void AddOrInsertItemTest(
+            ObservableCollection<string> collection,
+            string itemToAdd,
+            int? insertIndex = null
+        )
         {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             collection.CollectionChanged += Collection_CollectionChanged;
@@ -524,9 +736,13 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(expectedCount, collection.Count);
             Assert.Equal(ExpectedCollectionChangedFired, NumCollectionChangedFired);
 
-
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just added an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just added an item"
+                );
 
             collection.CollectionChanged -= Collection_CollectionChanged;
             collectionPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -542,7 +758,7 @@ namespace System.Collections.ObjectModel.Tests
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             collection.CollectionChanged += Collection_CollectionChanged;
@@ -558,7 +774,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(ExpectedCollectionChangedFired, NumCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just cleared the collection");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just cleared the collection"
+                );
 
             collection.CollectionChanged -= Collection_CollectionChanged;
             collectionPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -567,7 +788,11 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Given a collection, will move an item from the oldIndex to the newIndex.
         /// </summary>
-        public void MoveItemTest(ObservableCollection<string> collection, int oldIndex, int newIndex)
+        public void MoveItemTest(
+            ObservableCollection<string> collection,
+            int oldIndex,
+            int newIndex
+        )
         {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
@@ -592,7 +817,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(ExpectedCollectionChangedFired, NumCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just moved an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just moved an item"
+                );
 
             collection.CollectionChanged -= Collection_CollectionChanged;
             collectionPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -601,7 +831,11 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Will set that new item at the specified index in the given collection.
         /// </summary>
-        public void ReplaceItemTest(ObservableCollection<string> collection, int index, string newItem)
+        public void ReplaceItemTest(
+            ObservableCollection<string> collection,
+            int index,
+            string newItem
+        )
         {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
@@ -626,7 +860,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(ExpectedCollectionChangedFired, NumCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just replaced an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just replaced an item"
+                );
 
             collection.CollectionChanged -= Collection_CollectionChanged;
             collectionPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -637,14 +876,20 @@ namespace System.Collections.ObjectModel.Tests
         /// from the index. If the item has duplicates, will verify that only the first
         /// instance was removed.
         /// </summary>
-        public void RemoveItemTest(ObservableCollection<string> collection, int itemIndex, string itemToRemove, bool isSuccessfulRemove, bool hasDuplicates)
+        public void RemoveItemTest(
+            ObservableCollection<string> collection,
+            int itemIndex,
+            string itemToRemove,
+            bool isSuccessfulRemove,
+            bool hasDuplicates
+        )
         {
             INotifyPropertyChanged collectionPropertyChanged = collection;
             collectionPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             collection.CollectionChanged += Collection_CollectionChanged;
@@ -667,14 +912,24 @@ namespace System.Collections.ObjectModel.Tests
             if (isSuccessfulRemove)
             {
                 foreach (var item in _expectedPropertyChanged)
-                    Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since there were items removed.");
+                    Assert.True(
+                        item.IsFound,
+                        "The propertychanged event should have fired for"
+                            + item.Name
+                            + ", since there were items removed."
+                    );
 
                 Assert.True(removedItem, "Should have been successful in removing the item.");
             }
             else
             {
                 foreach (var item in _expectedPropertyChanged)
-                    Assert.False(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since there were no items removed.");
+                    Assert.False(
+                        item.IsFound,
+                        "The propertychanged event should have fired for"
+                            + item.Name
+                            + ", since there were no items removed."
+                    );
 
                 Assert.False(removedItem, "Should not have been successful in removing the item.");
             }
@@ -697,7 +952,7 @@ namespace System.Collections.ObjectModel.Tests
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             collection.CollectionChanged += Collection_CollectionChanged;
@@ -718,7 +973,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(ExpectedCollectionChangedFired, NumCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just removed an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just removed an item"
+                );
 
             collection.CollectionChanged -= Collection_CollectionChanged;
             collectionPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -735,9 +995,15 @@ namespace System.Collections.ObjectModel.Tests
             if (ExpectedNewItems != null)
             {
                 foreach (var newItem in e.NewItems)
-                    Assert.True(ExpectedNewItems.Contains(newItem), "newItem was not in the ExpectedNewItems. newItem: " + newItem);
+                    Assert.True(
+                        ExpectedNewItems.Contains(newItem),
+                        "newItem was not in the ExpectedNewItems. newItem: " + newItem
+                    );
                 foreach (var expectedItem in ExpectedNewItems)
-                    Assert.True(e.NewItems.Contains(expectedItem), "expectedItem was not in e.NewItems. expectedItem: " + expectedItem);
+                    Assert.True(
+                        e.NewItems.Contains(expectedItem),
+                        "expectedItem was not in e.NewItems. expectedItem: " + expectedItem
+                    );
             }
             else
             {
@@ -747,9 +1013,15 @@ namespace System.Collections.ObjectModel.Tests
             if (ExpectedOldItems != null)
             {
                 foreach (var oldItem in e.OldItems)
-                    Assert.True(ExpectedOldItems.Contains(oldItem), "oldItem was not in the ExpectedOldItems. oldItem: " + oldItem);
+                    Assert.True(
+                        ExpectedOldItems.Contains(oldItem),
+                        "oldItem was not in the ExpectedOldItems. oldItem: " + oldItem
+                    );
                 foreach (var expectedItem in ExpectedOldItems)
-                    Assert.True(e.OldItems.Contains(expectedItem), "expectedItem was not in e.OldItems. expectedItem: " + expectedItem);
+                    Assert.True(
+                        e.OldItems.Contains(expectedItem),
+                        "expectedItem was not in e.OldItems. expectedItem: " + expectedItem
+                    );
             }
             else
             {

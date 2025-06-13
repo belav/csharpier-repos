@@ -40,19 +40,25 @@ public class WsFederationTestHandlers
     {
         using var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .Configure(ConfigureApp)
                     .ConfigureServices(services =>
                     {
-                        services.AddAuthentication(sharedOptions =>
-                        {
-                            sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            sharedOptions.DefaultChallengeScheme = WsFederationDefaults.AuthenticationScheme;
-                        })
-                        .AddCookie()
-                        .AddWsFederation();
-                    }))
+                        services
+                            .AddAuthentication(sharedOptions =>
+                            {
+                                sharedOptions.DefaultScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                sharedOptions.DefaultSignInScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                sharedOptions.DefaultChallengeScheme =
+                                    WsFederationDefaults.AuthenticationScheme;
+                            })
+                            .AddCookie()
+                            .AddWsFederation();
+                    })
+            )
             .Build();
 
         await host.StartAsync();
@@ -60,8 +66,13 @@ public class WsFederationTestHandlers
         var httpClient = server.CreateClient();
 
         // Verify if the request is redirected to STS with right parameters
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => httpClient.GetAsync("/"));
-        Assert.Equal("Provide MetadataAddress, Configuration, or ConfigurationManager to WsFederationOptions", exception.Message);
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            httpClient.GetAsync("/")
+        );
+        Assert.Equal(
+            "Provide MetadataAddress, Configuration, or ConfigurationManager to WsFederationOptions",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -71,11 +82,17 @@ public class WsFederationTestHandlers
 
         // Verify if the request is redirected to STS with right parameters
         var response = await httpClient.GetAsync("/");
-        Assert.Equal("https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/wsfed", response.Headers.Location.GetLeftPart(System.UriPartial.Path));
+        Assert.Equal(
+            "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/wsfed",
+            response.Headers.Location.GetLeftPart(System.UriPartial.Path)
+        );
         var queryItems = QueryHelpers.ParseQuery(response.Headers.Location.Query);
 
         Assert.Equal("http://Automation1", queryItems["wtrealm"]);
-        Assert.True(queryItems["wctx"].ToString().Equals(CustomStateDataFormat.ValidStateData), "wctx does not equal ValidStateData");
+        Assert.True(
+            queryItems["wctx"].ToString().Equals(CustomStateDataFormat.ValidStateData),
+            "wctx does not equal ValidStateData"
+        );
         Assert.Equal(httpClient.BaseAddress + "signin-wsfed", queryItems["wreply"]);
         Assert.Equal("wsignin1.0", queryItems["wa"]);
     }
@@ -87,11 +104,17 @@ public class WsFederationTestHandlers
 
         // Verify if the request is redirected to STS with right parameters
         var response = await httpClient.GetAsync("/mapped-challenge");
-        Assert.Equal("https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/wsfed", response.Headers.Location.GetLeftPart(System.UriPartial.Path));
+        Assert.Equal(
+            "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/wsfed",
+            response.Headers.Location.GetLeftPart(System.UriPartial.Path)
+        );
         var queryItems = QueryHelpers.ParseQuery(response.Headers.Location.Query);
 
         Assert.Equal("http://Automation1", queryItems["wtrealm"]);
-        Assert.True(queryItems["wctx"].ToString().Equals(CustomStateDataFormat.ValidStateData), "wctx does not equal ValidStateData");
+        Assert.True(
+            queryItems["wctx"].ToString().Equals(CustomStateDataFormat.ValidStateData),
+            "wctx does not equal ValidStateData"
+        );
         Assert.Equal(httpClient.BaseAddress + "signin-wsfed", queryItems["wreply"]);
         Assert.Equal("wsignin1.0", queryItems["wa"]);
     }
@@ -103,12 +126,21 @@ public class WsFederationTestHandlers
 
         // Verify if the request is redirected to STS with right parameters
         var response = await httpClient.GetAsync("/premapped-challenge");
-        Assert.Equal("https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/wsfed", response.Headers.Location.GetLeftPart(System.UriPartial.Path));
+        Assert.Equal(
+            "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/wsfed",
+            response.Headers.Location.GetLeftPart(System.UriPartial.Path)
+        );
         var queryItems = QueryHelpers.ParseQuery(response.Headers.Location.Query);
 
         Assert.Equal("http://Automation1", queryItems["wtrealm"]);
-        Assert.True(queryItems["wctx"].ToString().Equals(CustomStateDataFormat.ValidStateData), "wctx does not equal ValidStateData");
-        Assert.Equal(httpClient.BaseAddress + "premapped-challenge/signin-wsfed", queryItems["wreply"]);
+        Assert.True(
+            queryItems["wctx"].ToString().Equals(CustomStateDataFormat.ValidStateData),
+            "wctx does not equal ValidStateData"
+        );
+        Assert.Equal(
+            httpClient.BaseAddress + "premapped-challenge/signin-wsfed",
+            queryItems["wreply"]
+        );
         Assert.Equal("wsignin1.0", queryItems["wa"]);
     }
 
@@ -133,7 +165,10 @@ public class WsFederationTestHandlers
         response = await httpClient.SendAsync(request);
 
         // Did the request end in the actual resource requested for
-        Assert.Equal(WsFederationDefaults.AuthenticationScheme, await response.Content.ReadAsStringAsync());
+        Assert.Equal(
+            WsFederationDefaults.AuthenticationScheme,
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -141,7 +176,9 @@ public class WsFederationTestHandlers
     {
         var httpClient = await CreateClient();
         var form = CreateSignInContent("WsFederation/ValidToken.xml", suppressWctx: true);
-        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(() => httpClient.PostAsync(httpClient.BaseAddress + "signin-wsfed", form));
+        var exception = await Assert.ThrowsAsync<AuthenticationFailureException>(() =>
+            httpClient.PostAsync(httpClient.BaseAddress + "signin-wsfed", form)
+        );
         Assert.Contains("Unsolicited logins are not allowed.", exception.InnerException.Message);
     }
 
@@ -160,7 +197,10 @@ public class WsFederationTestHandlers
         response = await httpClient.SendAsync(request);
 
         // Did the request end in the actual resource requested for
-        Assert.Equal(WsFederationDefaults.AuthenticationScheme, await response.Content.ReadAsStringAsync());
+        Assert.Equal(
+            WsFederationDefaults.AuthenticationScheme,
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]
@@ -190,7 +230,10 @@ public class WsFederationTestHandlers
         response.EnsureSuccessStatusCode();
 
         var cookie = response.Headers.GetValues(HeaderNames.SetCookie).Single();
-        Assert.Equal(".AspNetCore.Cookies=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; samesite=lax; httponly", cookie);
+        Assert.Equal(
+            ".AspNetCore.Cookies=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; samesite=lax; httponly",
+            cookie
+        );
         Assert.Equal("OnRemoteSignOut", response.Headers.GetValues("EventHeader").Single());
         Assert.Equal("", await response.Content.ReadAsStringAsync());
     }
@@ -200,29 +243,36 @@ public class WsFederationTestHandlers
     {
         using var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .ConfigureServices(services =>
                     {
                         services.AddSingleton<MyWsFedEvents>();
-                        services.AddAuthentication(sharedOptions =>
-                        {
-                            sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                            sharedOptions.DefaultChallengeScheme = WsFederationDefaults.AuthenticationScheme;
-                        })
-                        .AddCookie()
-                        .AddWsFederation(options =>
-                        {
-                            options.Wtrealm = "http://Automation1";
-                            options.MetadataAddress = "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
-                            options.BackchannelHttpHandler = new WaadMetadataDocumentHandler();
-                            options.EventsType = typeof(MyWsFedEvents);
-                        });
+                        services
+                            .AddAuthentication(sharedOptions =>
+                            {
+                                sharedOptions.DefaultScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                sharedOptions.DefaultSignInScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                sharedOptions.DefaultChallengeScheme =
+                                    WsFederationDefaults.AuthenticationScheme;
+                            })
+                            .AddCookie()
+                            .AddWsFederation(options =>
+                            {
+                                options.Wtrealm = "http://Automation1";
+                                options.MetadataAddress =
+                                    "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
+                                options.BackchannelHttpHandler = new WaadMetadataDocumentHandler();
+                                options.EventsType = typeof(MyWsFedEvents);
+                            });
                     })
                     .Configure(app =>
                     {
                         app.Run(context => context.ChallengeAsync());
-                    }))
+                    })
+            )
             .Build();
 
         await host.StartAsync();
@@ -241,7 +291,11 @@ public class WsFederationTestHandlers
         }
     }
 
-    private FormUrlEncodedContent CreateSignInContent(string tokenFile, string wctx = null, bool suppressWctx = false)
+    private FormUrlEncodedContent CreateSignInContent(
+        string tokenFile,
+        string wctx = null,
+        bool suppressWctx = false
+    )
     {
         var kvps = new List<KeyValuePair<string, string>>();
         kvps.Add(new KeyValuePair<string, string>("wa", "wsignin1.0"));
@@ -259,12 +313,17 @@ public class WsFederationTestHandlers
 
     private void CopyCookies(HttpResponseMessage response, HttpRequestMessage request)
     {
-        var cookies = SetCookieHeaderValue.ParseList(response.Headers.GetValues(HeaderNames.SetCookie).ToList());
+        var cookies = SetCookieHeaderValue.ParseList(
+            response.Headers.GetValues(HeaderNames.SetCookie).ToList()
+        );
         foreach (var cookie in cookies)
         {
             if (cookie.Value.HasValue)
             {
-                request.Headers.Add(HeaderNames.Cookie, new CookieHeaderValue(cookie.Name, cookie.Value).ToString());
+                request.Headers.Add(
+                    HeaderNames.Cookie,
+                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                );
             }
         }
     }
@@ -273,84 +332,114 @@ public class WsFederationTestHandlers
     {
         var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
-                .Configure(ConfigureApp)
-                .ConfigureServices(services =>
-                {
-                    services.AddAuthentication(sharedOptions =>
+                builder
+                    .UseTestServer()
+                    .Configure(ConfigureApp)
+                    .ConfigureServices(services =>
                     {
-                        sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        sharedOptions.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                        sharedOptions.DefaultChallengeScheme = WsFederationDefaults.AuthenticationScheme;
+                        services
+                            .AddAuthentication(sharedOptions =>
+                            {
+                                sharedOptions.DefaultScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                sharedOptions.DefaultSignInScheme =
+                                    CookieAuthenticationDefaults.AuthenticationScheme;
+                                sharedOptions.DefaultChallengeScheme =
+                                    WsFederationDefaults.AuthenticationScheme;
+                            })
+                            .AddCookie()
+                            .AddWsFederation(options =>
+                            {
+                                options.Wtrealm = "http://Automation1";
+                                options.MetadataAddress =
+                                    "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
+                                options.BackchannelHttpHandler = new WaadMetadataDocumentHandler();
+                                options.StateDataFormat = new CustomStateDataFormat();
+                                options.TokenHandlers.Clear();
+                                options.TokenHandlers.Add(new TestSecurityTokenHandler());
+                                options.UseTokenLifetime = false;
+                                options.AllowUnsolicitedLogins = allowUnsolicited;
+                                options.Events = new WsFederationEvents()
+                                {
+                                    OnMessageReceived = context =>
+                                    {
+                                        if (
+                                            !context.ProtocolMessage.Parameters.TryGetValue(
+                                                "suppressWctx",
+                                                out var suppress
+                                            )
+                                        )
+                                        {
+                                            Assert.True(
+                                                context.ProtocolMessage.Wctx.Equals("customValue"),
+                                                "wctx is not my custom value"
+                                            );
+                                        }
+                                        context.HttpContext.Items["MessageReceived"] = true;
+                                        return Task.FromResult(0);
+                                    },
+                                    OnRedirectToIdentityProvider = context =>
+                                    {
+                                        if (context.ProtocolMessage.IsSignInMessage)
+                                        {
+                                            // Sign in message
+                                            context.ProtocolMessage.Wctx = "customValue";
+                                        }
+
+                                        return Task.FromResult(0);
+                                    },
+                                    OnSecurityTokenReceived = context =>
+                                    {
+                                        context.HttpContext.Items["SecurityTokenReceived"] = true;
+                                        return Task.FromResult(0);
+                                    },
+                                    OnSecurityTokenValidated = context =>
+                                    {
+                                        Assert.True(
+                                            (bool)context.HttpContext.Items["MessageReceived"],
+                                            "MessageReceived notification not invoked"
+                                        );
+                                        Assert.True(
+                                            (bool)
+                                                context.HttpContext.Items["SecurityTokenReceived"],
+                                            "SecurityTokenReceived notification not invoked"
+                                        );
+
+                                        if (context.Principal != null)
+                                        {
+                                            var identity = context.Principal.Identities.Single();
+                                            identity.AddClaim(new Claim("ReturnEndpoint", "true"));
+                                            identity.AddClaim(new Claim("Authenticated", "true"));
+                                            identity.AddClaim(
+                                                new Claim(
+                                                    identity.RoleClaimType,
+                                                    "Guest",
+                                                    ClaimValueTypes.String
+                                                )
+                                            );
+                                        }
+
+                                        return Task.FromResult(0);
+                                    },
+                                    OnAuthenticationFailed = context =>
+                                    {
+                                        context.HttpContext.Items["AuthenticationFailed"] = true;
+                                        //Change the request url to something different and skip Wsfed. This new url will handle the request and let us know if this notification was invoked.
+                                        context.HttpContext.Request.Path = new PathString(
+                                            "/AuthenticationFailed"
+                                        );
+                                        context.SkipHandler();
+                                        return Task.FromResult(0);
+                                    },
+                                    OnRemoteSignOut = context =>
+                                    {
+                                        context.Response.Headers["EventHeader"] = "OnRemoteSignOut";
+                                        return Task.FromResult(0);
+                                    },
+                                };
+                            });
                     })
-                    .AddCookie()
-                    .AddWsFederation(options =>
-                    {
-                        options.Wtrealm = "http://Automation1";
-                        options.MetadataAddress = "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
-                        options.BackchannelHttpHandler = new WaadMetadataDocumentHandler();
-                        options.StateDataFormat = new CustomStateDataFormat();
-                        options.TokenHandlers.Clear();
-                        options.TokenHandlers.Add(new TestSecurityTokenHandler());
-                        options.UseTokenLifetime = false;
-                        options.AllowUnsolicitedLogins = allowUnsolicited;
-                        options.Events = new WsFederationEvents()
-                        {
-                            OnMessageReceived = context =>
-                            {
-                                if (!context.ProtocolMessage.Parameters.TryGetValue("suppressWctx", out var suppress))
-                                {
-                                    Assert.True(context.ProtocolMessage.Wctx.Equals("customValue"), "wctx is not my custom value");
-                                }
-                                context.HttpContext.Items["MessageReceived"] = true;
-                                return Task.FromResult(0);
-                            },
-                            OnRedirectToIdentityProvider = context =>
-                            {
-                                if (context.ProtocolMessage.IsSignInMessage)
-                                {
-                                    // Sign in message
-                                    context.ProtocolMessage.Wctx = "customValue";
-                                }
-
-                                return Task.FromResult(0);
-                            },
-                            OnSecurityTokenReceived = context =>
-                            {
-                                context.HttpContext.Items["SecurityTokenReceived"] = true;
-                                return Task.FromResult(0);
-                            },
-                            OnSecurityTokenValidated = context =>
-                            {
-                                Assert.True((bool)context.HttpContext.Items["MessageReceived"], "MessageReceived notification not invoked");
-                                Assert.True((bool)context.HttpContext.Items["SecurityTokenReceived"], "SecurityTokenReceived notification not invoked");
-
-                                if (context.Principal != null)
-                                {
-                                    var identity = context.Principal.Identities.Single();
-                                    identity.AddClaim(new Claim("ReturnEndpoint", "true"));
-                                    identity.AddClaim(new Claim("Authenticated", "true"));
-                                    identity.AddClaim(new Claim(identity.RoleClaimType, "Guest", ClaimValueTypes.String));
-                                }
-
-                                return Task.FromResult(0);
-                            },
-                            OnAuthenticationFailed = context =>
-                            {
-                                context.HttpContext.Items["AuthenticationFailed"] = true;
-                                //Change the request url to something different and skip Wsfed. This new url will handle the request and let us know if this notification was invoked.
-                                context.HttpContext.Request.Path = new PathString("/AuthenticationFailed");
-                                context.SkipHandler();
-                                return Task.FromResult(0);
-                            },
-                            OnRemoteSignOut = context =>
-                            {
-                                context.Response.Headers["EventHeader"] = "OnRemoteSignOut";
-                                return Task.FromResult(0);
-                            }
-                        };
-                    });
-                }))
+            )
             .Build();
 
         await host.StartAsync();
@@ -360,57 +449,78 @@ public class WsFederationTestHandlers
 
     private void ConfigureApp(IApplicationBuilder app)
     {
-        app.Map("/PreMapped-Challenge", mapped =>
-        {
-            mapped.UseAuthentication();
-            mapped.Run(async context =>
+        app.Map(
+            "/PreMapped-Challenge",
+            mapped =>
             {
-                await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-            });
-        });
+                mapped.UseAuthentication();
+                mapped.Run(async context =>
+                {
+                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+                });
+            }
+        );
 
         app.UseAuthentication();
 
-        app.Map("/Logout", subApp =>
+        app.Map(
+            "/Logout",
+            subApp =>
             {
                 subApp.Run(async context =>
+                {
+                    if (context.User.Identity.IsAuthenticated)
                     {
-                        if (context.User.Identity.IsAuthenticated)
+                        var authProperties = new AuthenticationProperties()
                         {
-                            var authProperties = new AuthenticationProperties() { RedirectUri = context.Request.GetEncodedUrl() };
-                            await context.SignOutAsync(WsFederationDefaults.AuthenticationScheme, authProperties);
-                            await context.Response.WriteAsync("Signing out...");
-                        }
-                        else
-                        {
-                            await context.Response.WriteAsync("SignedOut");
-                        }
-                    });
-            });
+                            RedirectUri = context.Request.GetEncodedUrl(),
+                        };
+                        await context.SignOutAsync(
+                            WsFederationDefaults.AuthenticationScheme,
+                            authProperties
+                        );
+                        await context.Response.WriteAsync("Signing out...");
+                    }
+                    else
+                    {
+                        await context.Response.WriteAsync("SignedOut");
+                    }
+                });
+            }
+        );
 
-        app.Map("/AuthenticationFailed", subApp =>
-        {
-            subApp.Run(async context =>
+        app.Map(
+            "/AuthenticationFailed",
+            subApp =>
             {
-                await context.Response.WriteAsync("AuthenticationFailed");
-            });
-        });
+                subApp.Run(async context =>
+                {
+                    await context.Response.WriteAsync("AuthenticationFailed");
+                });
+            }
+        );
 
-        app.Map("/signout-wsfed", subApp =>
-        {
-            subApp.Run(async context =>
+        app.Map(
+            "/signout-wsfed",
+            subApp =>
             {
-                await context.Response.WriteAsync("signout-wsfed");
-            });
-        });
+                subApp.Run(async context =>
+                {
+                    await context.Response.WriteAsync("signout-wsfed");
+                });
+            }
+        );
 
-        app.Map("/mapped-challenge", subApp =>
-        {
-            subApp.Run(async context =>
+        app.Map(
+            "/mapped-challenge",
+            subApp =>
             {
-                await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-            });
-        });
+                subApp.Run(async context =>
+                {
+                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+                });
+            }
+        );
 
         app.Run(async context =>
         {
@@ -423,12 +533,19 @@ public class WsFederationTestHandlers
             else
             {
                 var identity = context.User.Identities.Single();
-                if (identity.NameClaimType == "Name_Failed" && identity.RoleClaimType == "Role_Failed")
+                if (
+                    identity.NameClaimType == "Name_Failed"
+                    && identity.RoleClaimType == "Role_Failed"
+                )
                 {
                     context.Response.StatusCode = 500;
                     await context.Response.WriteAsync("SignIn_Failed");
                 }
-                else if (!identity.HasClaim("Authenticated", "true") || !identity.HasClaim("ReturnEndpoint", "true") || !identity.HasClaim(identity.RoleClaimType, "Guest"))
+                else if (
+                    !identity.HasClaim("Authenticated", "true")
+                    || !identity.HasClaim("ReturnEndpoint", "true")
+                    || !identity.HasClaim(identity.RoleClaimType, "Guest")
+                )
                 {
                     await context.Response.WriteAsync("Provider not invoked");
                     return;
@@ -443,10 +560,16 @@ public class WsFederationTestHandlers
 
     private class WaadMetadataDocumentHandler : HttpMessageHandler
     {
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             var metadata = File.ReadAllText(@"WsFederation/federationmetadata.xml");
-            var newResponse = new HttpResponseMessage() { Content = new StringContent(metadata, Encoding.UTF8, "text/xml") };
+            var newResponse = new HttpResponseMessage()
+            {
+                Content = new StringContent(metadata, Encoding.UTF8, "text/xml"),
+            };
             return Task.FromResult<HttpResponseMessage>(newResponse);
         }
     }

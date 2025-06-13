@@ -10,7 +10,6 @@
   <ItemGroup>
     <Compile Include="HandwrittenProgram.cs" />
     <Compile Include="TestTableSse2.cs" />
-
     <Compile Include="AlignVector128.cs" />
     <Compile Include="ConvertScalarToVector128Double.cs" />
     <Compile Include="ConvertScalarToVector128Single.cs" />

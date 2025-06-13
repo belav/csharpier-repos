@@ -29,7 +29,12 @@ public class Runtime_87508
             return -1;
         }
 
-        if (!Unsafe.AreSame(ref MemoryMarshal.GetReference(line), ref MemoryMarshal.GetArrayDataReference(_emptyChars)))
+        if (
+            !Unsafe.AreSame(
+                ref MemoryMarshal.GetReference(line),
+                ref MemoryMarshal.GetArrayDataReference(_emptyChars)
+            )
+        )
         {
             Console.WriteLine("FAIL: References were not equal");
             return -2;

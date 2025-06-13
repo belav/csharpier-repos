@@ -31,30 +31,33 @@ namespace System.ServiceModel.Channels
         object thisLock = new object();
         UnblockChannelCloseHandler unblockChannelCloseCallback;
 
-        protected ChannelReliableSession(ChannelBase channel, IReliableFactorySettings settings, IReliableChannelBinder binder, FaultHelper faultHelper)
+        protected ChannelReliableSession(
+            ChannelBase channel,
+            IReliableFactorySettings settings,
+            IReliableChannelBinder binder,
+            FaultHelper faultHelper
+        )
         {
             this.channel = channel;
             this.settings = settings;
             this.binder = binder;
             this.faultHelper = faultHelper;
-            this.inactivityTimer = new InterruptibleTimer(this.settings.InactivityTimeout, new WaitCallback(this.OnInactivityElapsed), null);
+            this.inactivityTimer = new InterruptibleTimer(
+                this.settings.InactivityTimeout,
+                new WaitCallback(this.OnInactivityElapsed),
+                null
+            );
             this.initiationTime = ReliableMessagingConstants.UnknownInitiationTime;
         }
 
         protected ChannelBase Channel
         {
-            get
-            {
-                return this.channel;
-            }
+            get { return this.channel; }
         }
 
         protected Guard Guard
         {
-            get
-            {
-                return this.guard;
-            }
+            get { return this.guard; }
         }
 
         public string Id
@@ -71,75 +74,42 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan InitiationTime
         {
-            get
-            {
-                return this.initiationTime;
-            }
-            protected set
-            {
-                this.initiationTime = value;
-            }
+            get { return this.initiationTime; }
+            protected set { this.initiationTime = value; }
         }
 
         public UniqueId InputID
         {
-            get
-            {
-                return this.inputID;
-            }
-            protected set
-            {
-                this.inputID = value;
-            }
+            get { return this.inputID; }
+            protected set { this.inputID = value; }
         }
 
         protected FaultHelper FaultHelper
         {
-            get
-            {
-                return this.faultHelper;
-            }
+            get { return this.faultHelper; }
         }
 
         public UniqueId OutputID
         {
-            get
-            {
-                return this.outputID;
-            }
-            protected set
-            {
-                this.outputID = value;
-            }
+            get { return this.outputID; }
+            protected set { this.outputID = value; }
         }
 
-        public abstract UniqueId SequenceID
-        {
-            get;
-        }
+        public abstract UniqueId SequenceID { get; }
 
         public IReliableFactorySettings Settings
         {
-            get
-            {
-                return this.settings;
-            }
+            get { return this.settings; }
         }
 
         protected object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         public UnblockChannelCloseHandler UnblockChannelCloseCallback
         {
-            set
-            {
-                this.unblockChannelCloseCallback = value;
-            }
+            set { this.unblockChannelCloseCallback = value; }
         }
 
         public virtual void Abort()
@@ -156,31 +126,44 @@ namespace System.ServiceModel.Channels
                     return;
 
                 // Can only send a fault if the other side did not send one already.
-                sendFault = this.canSendFault && (this.faulted != SessionFaultState.RemotelyFaulted);    // NotFaulted || LocallyFaulted
+                sendFault =
+                    this.canSendFault && (this.faulted != SessionFaultState.RemotelyFaulted); // NotFaulted || LocallyFaulted
                 this.faulted = SessionFaultState.CleanedUp;
             }
 
             if (sendFault)
             {
-                if ((this.binder.State == CommunicationState.Opened)
+                if (
+                    (this.binder.State == CommunicationState.Opened)
                     && this.binder.Connected
-                    && (this.binder.CanSendAsynchronously || (this.replyFaultContext != null)))
+                    && (this.binder.CanSendAsynchronously || (this.replyFaultContext != null))
+                )
                 {
                     if (this.terminatingFault == null)
                     {
                         UniqueId sequenceId = this.InputID ?? this.OutputID;
                         if (sequenceId != null)
                         {
-                            WsrmFault fault = SequenceTerminatedFault.CreateCommunicationFault(sequenceId, SR.GetString(SR.SequenceTerminatedOnAbort), null);
-                            this.terminatingFault = fault.CreateMessage(this.settings.MessageVersion,
-                                this.settings.ReliableMessagingVersion);
+                            WsrmFault fault = SequenceTerminatedFault.CreateCommunicationFault(
+                                sequenceId,
+                                SR.GetString(SR.SequenceTerminatedOnAbort),
+                                null
+                            );
+                            this.terminatingFault = fault.CreateMessage(
+                                this.settings.MessageVersion,
+                                this.settings.ReliableMessagingVersion
+                            );
                         }
                     }
 
                     if (this.terminatingFault != null)
                     {
                         this.AddFinalRanges();
-                        this.faultHelper.SendFaultAsync(this.binder, this.replyFaultContext, this.terminatingFault);
+                        this.faultHelper.SendFaultAsync(
+                            this.binder,
+                            this.replyFaultContext,
+                            this.terminatingFault
+                        );
                         return;
                     }
                 }
@@ -200,17 +183,30 @@ namespace System.ServiceModel.Channels
             // faults for the converse sequence.
             if (this.finalRanges != null)
             {
-                WsrmUtilities.AddAcknowledgementHeader(this.settings.ReliableMessagingVersion,
-                    this.terminatingFault, this.InputID, this.finalRanges, true);
+                WsrmUtilities.AddAcknowledgementHeader(
+                    this.settings.ReliableMessagingVersion,
+                    this.terminatingFault,
+                    this.InputID,
+                    this.finalRanges,
+                    true
+                );
             }
         }
 
-        public virtual IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.guard.BeginClose(timeout, callback, state);
         }
 
-        public abstract IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         public virtual void Close(TimeSpan timeout)
         {
@@ -234,7 +230,6 @@ namespace System.ServiceModel.Channels
 
         protected virtual void FaultCore()
         {
-
             if (TD.ReliableSessionChannelFaultedIsEnabled())
             {
                 TD.ReliableSessionChannelFaulted(this.Id);
@@ -245,16 +240,23 @@ namespace System.ServiceModel.Channels
 
         public void OnLocalFault(Exception e, WsrmFault fault, RequestContext context)
         {
-            Message faultMessage = (fault == null) ? null : fault.CreateMessage(this.settings.MessageVersion,
-                this.settings.ReliableMessagingVersion);
+            Message faultMessage =
+                (fault == null)
+                    ? null
+                    : fault.CreateMessage(
+                        this.settings.MessageVersion,
+                        this.settings.ReliableMessagingVersion
+                    );
             this.OnLocalFault(e, faultMessage, context);
         }
 
         public void OnLocalFault(Exception e, Message faultMessage, RequestContext context)
         {
-            if (this.channel.Aborted ||
-                this.channel.State == CommunicationState.Faulted ||
-                this.channel.State == CommunicationState.Closed)
+            if (
+                this.channel.Aborted
+                || this.channel.State == CommunicationState.Faulted
+                || this.channel.State == CommunicationState.Closed
+            )
             {
                 if (faultMessage != null)
                     faultMessage.Close();
@@ -284,9 +286,11 @@ namespace System.ServiceModel.Channels
 
         public void OnRemoteFault(Exception e)
         {
-            if (this.channel.Aborted ||
-                this.channel.State == CommunicationState.Faulted ||
-                this.channel.State == CommunicationState.Closed)
+            if (
+                this.channel.Aborted
+                || this.channel.State == CommunicationState.Faulted
+                || this.channel.State == CommunicationState.Closed
+            )
             {
                 return;
             }
@@ -321,19 +325,26 @@ namespace System.ServiceModel.Channels
                     return;
 
                 // Can only send a fault if the other side did not send one already.
-                sendFault = this.canSendFault && (this.faulted != SessionFaultState.RemotelyFaulted);  // LocallyFaulted
+                sendFault =
+                    this.canSendFault && (this.faulted != SessionFaultState.RemotelyFaulted); // LocallyFaulted
                 this.faulted = SessionFaultState.CleanedUp;
             }
 
             if (sendFault)
             {
-                if ((this.binder.State == CommunicationState.Opened)
+                if (
+                    (this.binder.State == CommunicationState.Opened)
                     && this.binder.Connected
                     && (this.binder.CanSendAsynchronously || (this.replyFaultContext != null))
-                    && (this.terminatingFault != null))
+                    && (this.terminatingFault != null)
+                )
                 {
                     this.AddFinalRanges();
-                    this.faultHelper.SendFaultAsync(this.binder, this.replyFaultContext, this.terminatingFault);
+                    this.faultHelper.SendFaultAsync(
+                        this.binder,
+                        this.replyFaultContext,
+                        this.terminatingFault
+                    );
                     return;
                 }
             }
@@ -350,7 +361,10 @@ namespace System.ServiceModel.Channels
         {
             WsrmFault fault;
             Exception e;
-            string exceptionMessage = SR.GetString(SR.SequenceTerminatedInactivityTimeoutExceeded, this.settings.InactivityTimeout);
+            string exceptionMessage = SR.GetString(
+                SR.SequenceTerminatedInactivityTimeoutExceeded,
+                this.settings.InactivityTimeout
+            );
 
             if (TD.InactivityTimeoutIsEnabled())
             {
@@ -359,8 +373,15 @@ namespace System.ServiceModel.Channels
 
             if (this.SequenceID != null)
             {
-                string faultReason = SR.GetString(SR.SequenceTerminatedInactivityTimeoutExceeded, this.settings.InactivityTimeout);
-                fault = SequenceTerminatedFault.CreateCommunicationFault(this.SequenceID, faultReason, exceptionMessage);
+                string faultReason = SR.GetString(
+                    SR.SequenceTerminatedInactivityTimeoutExceeded,
+                    this.settings.InactivityTimeout
+                );
+                fault = SequenceTerminatedFault.CreateCommunicationFault(
+                    this.SequenceID,
+                    faultReason,
+                    exceptionMessage
+                );
                 e = fault.CreateException();
             }
             else
@@ -403,14 +424,21 @@ namespace System.ServiceModel.Channels
                 if (this.SequenceID != null)
                 {
                     string reason = SR.GetString(SR.CouldNotParseWithAction, info.Action);
-                    fault = SequenceTerminatedFault.CreateProtocolFault(this.SequenceID, reason, null);
+                    fault = SequenceTerminatedFault.CreateProtocolFault(
+                        this.SequenceID,
+                        reason,
+                        null
+                    );
                 }
                 else
                 {
                     fault = null;
                 }
 
-                e = new ProtocolException(SR.GetString(SR.MessageExceptionOccurred), info.ParsingException);
+                e = new ProtocolException(
+                    SR.GetString(SR.MessageExceptionOccurred),
+                    info.ParsingException
+                );
                 this.OnLocalFault(throwException ? null : e, fault, context);
             }
             else if (info.FaultReply != null)
@@ -418,31 +446,48 @@ namespace System.ServiceModel.Channels
                 e = info.FaultException;
                 this.OnLocalFault(throwException ? null : e, info.FaultReply, context);
             }
-            else if ((info.WsrmHeaderFault != null) && (info.WsrmHeaderFault.SequenceID != this.InputID)
-                && (info.WsrmHeaderFault.SequenceID != this.OutputID))
+            else if (
+                (info.WsrmHeaderFault != null)
+                && (info.WsrmHeaderFault.SequenceID != this.InputID)
+                && (info.WsrmHeaderFault.SequenceID != this.OutputID)
+            )
             {
-                e = new ProtocolException(SR.GetString(SR.WrongIdentifierFault, FaultException.GetSafeReasonText(info.WsrmHeaderFault.Reason)));
+                e = new ProtocolException(
+                    SR.GetString(
+                        SR.WrongIdentifierFault,
+                        FaultException.GetSafeReasonText(info.WsrmHeaderFault.Reason)
+                    )
+                );
                 this.OnLocalFault(throwException ? null : e, (Message)null, context);
             }
             else if (info.FaultInfo != null)
             {
                 if (this.isSessionClosed)
                 {
-                    UnknownSequenceFault unknownSequenceFault = info.FaultInfo as UnknownSequenceFault;
+                    UnknownSequenceFault unknownSequenceFault =
+                        info.FaultInfo as UnknownSequenceFault;
 
                     if (unknownSequenceFault != null)
                     {
                         UniqueId sequenceId = unknownSequenceFault.SequenceID;
 
-                        if (((this.OutputID != null) && (this.OutputID == sequenceId))
-                            || ((this.InputID != null) && (this.InputID == sequenceId)))
+                        if (
+                            ((this.OutputID != null) && (this.OutputID == sequenceId))
+                            || ((this.InputID != null) && (this.InputID == sequenceId))
+                        )
                         {
-                            if (this.settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                            if (
+                                this.settings.ReliableMessagingVersion
+                                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                            )
                             {
                                 info.Message.Close();
                                 return false;
                             }
-                            else if (this.settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+                            else if (
+                                this.settings.ReliableMessagingVersion
+                                == ReliableMessagingVersion.WSReliableMessaging11
+                            )
                             {
                                 return true;
                             }
@@ -510,7 +555,11 @@ namespace System.ServiceModel.Channels
             return this.VerifyDuplexProtocolElements(info, context, false);
         }
 
-        public bool VerifyDuplexProtocolElements(WsrmMessageInfo info, RequestContext context, bool throwException)
+        public bool VerifyDuplexProtocolElements(
+            WsrmMessageInfo info,
+            RequestContext context,
+            bool throwException
+        )
         {
             WsrmFault fault = this.VerifyDuplexProtocolElements(info);
 
@@ -534,16 +583,35 @@ namespace System.ServiceModel.Channels
 
         protected virtual WsrmFault VerifyDuplexProtocolElements(WsrmMessageInfo info)
         {
-            if (info.AcknowledgementInfo != null && info.AcknowledgementInfo.SequenceID != this.OutputID)
+            if (
+                info.AcknowledgementInfo != null
+                && info.AcknowledgementInfo.SequenceID != this.OutputID
+            )
                 return new UnknownSequenceFault(info.AcknowledgementInfo.SequenceID);
-            else if (info.AckRequestedInfo != null && info.AckRequestedInfo.SequenceID != this.InputID)
+            else if (
+                info.AckRequestedInfo != null
+                && info.AckRequestedInfo.SequenceID != this.InputID
+            )
                 return new UnknownSequenceFault(info.AckRequestedInfo.SequenceID);
-            else if (info.SequencedMessageInfo != null && info.SequencedMessageInfo.SequenceID != this.InputID)
+            else if (
+                info.SequencedMessageInfo != null
+                && info.SequencedMessageInfo.SequenceID != this.InputID
+            )
                 return new UnknownSequenceFault(info.SequencedMessageInfo.SequenceID);
-            else if (info.TerminateSequenceInfo != null && info.TerminateSequenceInfo.Identifier != this.InputID)
+            else if (
+                info.TerminateSequenceInfo != null
+                && info.TerminateSequenceInfo.Identifier != this.InputID
+            )
             {
-                if (this.Settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
-                    return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedTerminateSequence), SR.GetString(SR.UnexpectedTerminateSequence));
+                if (
+                    this.Settings.ReliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                )
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.OutputID,
+                        SR.GetString(SR.SequenceTerminatedUnexpectedTerminateSequence),
+                        SR.GetString(SR.UnexpectedTerminateSequence)
+                    );
                 else if (info.TerminateSequenceInfo.Identifier == this.OutputID)
                     return null;
                 else
@@ -566,7 +634,11 @@ namespace System.ServiceModel.Channels
                     return null;
                 else if (info.CloseSequenceInfo.Identifier == this.OutputID)
                     // Spec allows RM-Destination close, but we do not.
-                    return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnsupportedClose), SR.GetString(SR.UnsupportedCloseExceptionString));
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.OutputID,
+                        SR.GetString(SR.SequenceTerminatedUnsupportedClose),
+                        SR.GetString(SR.UnsupportedCloseExceptionString)
+                    );
                 else
                     return new UnknownSequenceFault(info.CloseSequenceInfo.Identifier);
             }
@@ -577,7 +649,11 @@ namespace System.ServiceModel.Channels
                 if (info.CloseSequenceResponseInfo.Identifier == this.OutputID)
                     return null;
                 else if (info.CloseSequenceResponseInfo.Identifier == this.InputID)
-                    return SequenceTerminatedFault.CreateProtocolFault(this.InputID, SR.GetString(SR.SequenceTerminatedUnexpectedCloseSequenceResponse), SR.GetString(SR.UnexpectedCloseSequenceResponse));
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.InputID,
+                        SR.GetString(SR.SequenceTerminatedUnexpectedCloseSequenceResponse),
+                        SR.GetString(SR.UnexpectedCloseSequenceResponse)
+                    );
                 else
                     return new UnknownSequenceFault(info.CloseSequenceResponseInfo.Identifier);
             }
@@ -590,7 +666,11 @@ namespace System.ServiceModel.Channels
             return this.VerifySimplexProtocolElements(info, context, false);
         }
 
-        public bool VerifySimplexProtocolElements(WsrmMessageInfo info, RequestContext context, bool throwException)
+        public bool VerifySimplexProtocolElements(
+            WsrmMessageInfo info,
+            RequestContext context,
+            bool throwException
+        )
         {
             WsrmFault fault = this.VerifySimplexProtocolElements(info);
 
@@ -621,7 +701,7 @@ namespace System.ServiceModel.Channels
             NotFaulted,
             LocallyFaulted,
             RemotelyFaulted,
-            CleanedUp
+            CleanedUp,
         }
 
         public delegate void UnblockChannelCloseHandler();
@@ -638,12 +718,22 @@ namespace System.ServiceModel.Channels
 
         public delegate void PollingHandler();
 
-        public ClientReliableSession(ChannelBase channel, IReliableFactorySettings factory, IClientReliableChannelBinder binder, FaultHelper faultHelper, UniqueId inputID) :
-            base(channel, factory, binder, faultHelper)
+        public ClientReliableSession(
+            ChannelBase channel,
+            IReliableFactorySettings factory,
+            IClientReliableChannelBinder binder,
+            FaultHelper faultHelper,
+            UniqueId inputID
+        )
+            : base(channel, factory, binder, faultHelper)
         {
             this.binder = binder;
             this.InputID = inputID;
-            this.pollingTimer = new InterruptibleTimer(this.GetPollingInterval(), this.OnPollingTimerElapsed, null);
+            this.pollingTimer = new InterruptibleTimer(
+                this.GetPollingInterval(),
+                this.OnPollingTimerElapsed,
+                null
+            );
 
             if (this.binder.Channel is IRequestChannel)
             {
@@ -651,8 +741,10 @@ namespace System.ServiceModel.Channels
             }
             else if (this.binder.Channel is IDuplexChannel)
             {
-                SendReceiveReliableRequestor sendReceiveRequestor = new SendReceiveReliableRequestor();
-                sendReceiveRequestor.TimeoutIsSafe = !this.ChannelSupportsOneCreateSequenceAttempt();
+                SendReceiveReliableRequestor sendReceiveRequestor =
+                    new SendReceiveReliableRequestor();
+                sendReceiveRequestor.TimeoutIsSafe =
+                    !this.ChannelSupportsOneCreateSequenceAttempt();
                 this.requestor = sendReceiveRequestor;
             }
             else
@@ -661,37 +753,41 @@ namespace System.ServiceModel.Channels
             }
 
             MessageVersion messageVersion = this.Settings.MessageVersion;
-            ReliableMessagingVersion reliableMessagingVersion = this.Settings.ReliableMessagingVersion;
+            ReliableMessagingVersion reliableMessagingVersion =
+                this.Settings.ReliableMessagingVersion;
             this.requestor.MessageVersion = messageVersion;
             this.requestor.Binder = this.binder;
             this.requestor.IsCreateSequence = true;
             this.requestor.TimeoutString1Index = SR.TimeoutOnOpen;
-            this.requestor.MessageAction = WsrmIndex.GetCreateSequenceActionHeader(messageVersion.Addressing,
-                reliableMessagingVersion);
-            if ((reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
-                && (this.binder.GetInnerSession() is ISecureConversationSession))
+            this.requestor.MessageAction = WsrmIndex.GetCreateSequenceActionHeader(
+                messageVersion.Addressing,
+                reliableMessagingVersion
+            );
+            if (
+                (reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+                && (this.binder.GetInnerSession() is ISecureConversationSession)
+            )
             {
                 this.requestor.MessageHeader = new WsrmUsesSequenceSTRHeader();
             }
-            this.requestor.MessageBody = new CreateSequence(this.Settings.MessageVersion.Addressing,
-                reliableMessagingVersion, this.Settings.Ordered, this.binder, this.InputID);
+            this.requestor.MessageBody = new CreateSequence(
+                this.Settings.MessageVersion.Addressing,
+                reliableMessagingVersion,
+                this.Settings.Ordered,
+                this.binder,
+                this.InputID
+            );
             this.requestor.SetRequestResponsePattern();
         }
 
         public PollingHandler PollingCallback
         {
-            set
-            {
-                this.pollingHandler = value;
-            }
+            set { this.pollingHandler = value; }
         }
 
         public override UniqueId SequenceID
         {
-            get
-            {
-                return this.OutputID;
-            }
+            get { return this.OutputID; }
         }
 
         public override void Abort()
@@ -704,11 +800,17 @@ namespace System.ServiceModel.Channels
             base.Abort();
         }
 
-        public override IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.pollingHandler == null)
             {
-                throw Fx.AssertAndThrow("The client reliable channel must set the polling handler prior to opening the client reliable session.");
+                throw Fx.AssertAndThrow(
+                    "The client reliable channel must set the polling handler prior to opening the client reliable session."
+                );
             }
 
             return new OpenAsyncResult(this, timeout, callback, state);
@@ -721,7 +823,10 @@ namespace System.ServiceModel.Channels
             if (channel == null)
                 return false;
 
-            return (channel.Session is ISecuritySession && !(channel.Session is ISecureConversationSession));
+            return (
+                channel.Session is ISecuritySession
+                && !(channel.Session is ISecureConversationSession)
+            );
         }
 
         public override void Close(TimeSpan timeout)
@@ -753,17 +858,27 @@ namespace System.ServiceModel.Channels
             switch (this.pollingMode)
             {
                 case PollingMode.Idle:
-                    return Ticks.ToTimeSpan(Ticks.FromTimeSpan(this.Settings.InactivityTimeout) / 2);
+                    return Ticks.ToTimeSpan(
+                        Ticks.FromTimeSpan(this.Settings.InactivityTimeout) / 2
+                    );
 
                 case PollingMode.KeepAlive:
-                    return WsrmUtilities.CalculateKeepAliveInterval(this.Settings.InactivityTimeout, this.Settings.MaxRetryCount);
+                    return WsrmUtilities.CalculateKeepAliveInterval(
+                        this.Settings.InactivityTimeout,
+                        this.Settings.MaxRetryCount
+                    );
 
                 case PollingMode.NotPolling:
                     return TimeSpan.MaxValue;
 
                 case PollingMode.FastPolling:
-                    TimeSpan keepAliveInterval = WsrmUtilities.CalculateKeepAliveInterval(this.Settings.InactivityTimeout, this.Settings.MaxRetryCount);
-                    TimeSpan fastPollingInterval = Ticks.ToTimeSpan(Ticks.FromTimeSpan(this.binder.DefaultSendTimeout) / 2);
+                    TimeSpan keepAliveInterval = WsrmUtilities.CalculateKeepAliveInterval(
+                        this.Settings.InactivityTimeout,
+                        this.Settings.MaxRetryCount
+                    );
+                    TimeSpan fastPollingInterval = Ticks.ToTimeSpan(
+                        Ticks.FromTimeSpan(this.binder.DefaultSendTimeout) / 2
+                    );
 
                     if (fastPollingInterval < keepAliveInterval)
                         return fastPollingInterval;
@@ -825,7 +940,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.pollingHandler == null)
             {
-                throw Fx.AssertAndThrow("The client reliable channel must set the polling handler prior to opening the client reliable session.");
+                throw Fx.AssertAndThrow(
+                    "The client reliable channel must set the polling handler prior to opening the client reliable session."
+                );
             }
 
             DateTime start = DateTime.UtcNow;
@@ -859,18 +976,33 @@ namespace System.ServiceModel.Channels
             {
                 if (response.IsFault)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WsrmUtilities.CreateCSFaultException(
-                        this.Settings.MessageVersion, this.Settings.ReliableMessagingVersion, response,
-                        this.binder.Channel));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        WsrmUtilities.CreateCSFaultException(
+                            this.Settings.MessageVersion,
+                            this.Settings.ReliableMessagingVersion,
+                            response,
+                            this.binder.Channel
+                        )
+                    );
                 }
                 else
                 {
-                    WsrmMessageInfo info = WsrmMessageInfo.Get(this.Settings.MessageVersion,
-                        this.Settings.ReliableMessagingVersion, this.binder.Channel, this.binder.GetInnerSession(),
-                        response, true);
+                    WsrmMessageInfo info = WsrmMessageInfo.Get(
+                        this.Settings.MessageVersion,
+                        this.Settings.ReliableMessagingVersion,
+                        this.binder.Channel,
+                        this.binder.GetInnerSession(),
+                        response,
+                        true
+                    );
 
                     if (info.ParsingException != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.UnparsableCSResponse), info.ParsingException));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(SR.UnparsableCSResponse),
+                                info.ParsingException
+                            )
+                        );
 
                     // this throws and sends a fault if something is wrong with the info
                     this.ProcessInfo(info, null, true);
@@ -881,23 +1013,40 @@ namespace System.ServiceModel.Channels
 
                     if (createResponse == null)
                     {
-                        exceptionReason = SR.GetString(SR.InvalidWsrmResponseChannelNotOpened,
-                            WsrmFeb2005Strings.CreateSequence, info.Action,
-                            WsrmIndex.GetCreateSequenceResponseActionString(this.Settings.ReliableMessagingVersion));
+                        exceptionReason = SR.GetString(
+                            SR.InvalidWsrmResponseChannelNotOpened,
+                            WsrmFeb2005Strings.CreateSequence,
+                            info.Action,
+                            WsrmIndex.GetCreateSequenceResponseActionString(
+                                this.Settings.ReliableMessagingVersion
+                            )
+                        );
                     }
                     else if (!object.Equals(createResponse.RelatesTo, this.requestor.MessageId))
                     {
-                        exceptionReason = SR.GetString(SR.WsrmMessageWithWrongRelatesToExceptionString, WsrmFeb2005Strings.CreateSequence);
-                        faultReason = SR.GetString(SR.WsrmMessageWithWrongRelatesToFaultString, WsrmFeb2005Strings.CreateSequence);
+                        exceptionReason = SR.GetString(
+                            SR.WsrmMessageWithWrongRelatesToExceptionString,
+                            WsrmFeb2005Strings.CreateSequence
+                        );
+                        faultReason = SR.GetString(
+                            SR.WsrmMessageWithWrongRelatesToFaultString,
+                            WsrmFeb2005Strings.CreateSequence
+                        );
                     }
                     else if ((createResponse.AcceptAcksTo == null) && (this.InputID != null))
                     {
-                        if (this.Settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                        if (
+                            this.Settings.ReliableMessagingVersion
+                            == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                        )
                         {
                             exceptionReason = SR.GetString(SR.CSResponseWithoutOffer);
                             faultReason = SR.GetString(SR.CSResponseWithoutOfferReason);
                         }
-                        else if (this.Settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+                        else if (
+                            this.Settings.ReliableMessagingVersion
+                            == ReliableMessagingVersion.WSReliableMessaging11
+                        )
                         {
                             exceptionReason = SR.GetString(SR.CSResponseOfferRejected);
                             faultReason = SR.GetString(SR.CSResponseOfferRejectedReason);
@@ -912,7 +1061,10 @@ namespace System.ServiceModel.Channels
                         exceptionReason = SR.GetString(SR.CSResponseWithOffer);
                         faultReason = SR.GetString(SR.CSResponseWithOfferReason);
                     }
-                    else if (createResponse.AcceptAcksTo != null && (createResponse.AcceptAcksTo.Uri != this.binder.RemoteAddress.Uri))
+                    else if (
+                        createResponse.AcceptAcksTo != null
+                        && (createResponse.AcceptAcksTo.Uri != this.binder.RemoteAddress.Uri)
+                    )
                     {
                         exceptionReason = SR.GetString(SR.AcksToMustBeSameAsRemoteAddress);
                         faultReason = SR.GetString(SR.AcksToMustBeSameAsRemoteAddressReason);
@@ -921,12 +1073,18 @@ namespace System.ServiceModel.Channels
                     if ((faultReason != null) && (createResponse != null))
                     {
                         UniqueId sequenceId = createResponse.Identifier;
-                        WsrmFault fault = SequenceTerminatedFault.CreateProtocolFault(sequenceId, faultReason, null);
+                        WsrmFault fault = SequenceTerminatedFault.CreateProtocolFault(
+                            sequenceId,
+                            faultReason,
+                            null
+                        );
                         this.OnLocalFault(null, fault, null);
                     }
 
                     if (exceptionReason != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(exceptionReason));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(exceptionReason)
+                        );
                 }
             }
 
@@ -942,7 +1100,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.pollingMode != PollingMode.NotPolling)
                 {
-                    throw Fx.AssertAndThrow("Can't resume polling if pollingMode != PollingMode.NotPolling");
+                    throw Fx.AssertAndThrow(
+                        "Can't resume polling if pollingMode != PollingMode.NotPolling"
+                    );
                 }
 
                 if (fastPolling)
@@ -984,27 +1144,56 @@ namespace System.ServiceModel.Channels
             if (fault != null)
                 return fault;
             else if (info.CreateSequenceInfo != null)
-                return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedCS), SR.GetString(SR.UnexpectedCS));
-            else if (info.CreateSequenceResponseInfo != null && info.CreateSequenceResponseInfo.Identifier != this.OutputID)
-                return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedCSROfferId), SR.GetString(SR.UnexpectedCSROfferId));
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.OutputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedCS),
+                    SR.GetString(SR.UnexpectedCS)
+                );
+            else if (
+                info.CreateSequenceResponseInfo != null
+                && info.CreateSequenceResponseInfo.Identifier != this.OutputID
+            )
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.OutputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedCSROfferId),
+                    SR.GetString(SR.UnexpectedCSROfferId)
+                );
             else
                 return null;
         }
 
         protected override WsrmFault VerifySimplexProtocolElements(WsrmMessageInfo info)
         {
-            if (info.AcknowledgementInfo != null && info.AcknowledgementInfo.SequenceID != this.OutputID)
+            if (
+                info.AcknowledgementInfo != null
+                && info.AcknowledgementInfo.SequenceID != this.OutputID
+            )
                 return new UnknownSequenceFault(info.AcknowledgementInfo.SequenceID);
             else if (info.AckRequestedInfo != null)
-                return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedAckRequested), SR.GetString(SR.UnexpectedAckRequested));
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.OutputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedAckRequested),
+                    SR.GetString(SR.UnexpectedAckRequested)
+                );
             else if (info.CreateSequenceInfo != null)
-                return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedCS), SR.GetString(SR.UnexpectedCS));
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.OutputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedCS),
+                    SR.GetString(SR.UnexpectedCS)
+                );
             else if (info.SequencedMessageInfo != null)
                 return new UnknownSequenceFault(info.SequencedMessageInfo.SequenceID);
             else if (info.TerminateSequenceInfo != null)
             {
-                if (this.Settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
-                    return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedTerminateSequence), SR.GetString(SR.UnexpectedTerminateSequence));
+                if (
+                    this.Settings.ReliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                )
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.OutputID,
+                        SR.GetString(SR.SequenceTerminatedUnexpectedTerminateSequence),
+                        SR.GetString(SR.UnexpectedTerminateSequence)
+                    );
                 else if (info.TerminateSequenceInfo.Identifier == this.OutputID)
                     return null;
                 else
@@ -1024,7 +1213,11 @@ namespace System.ServiceModel.Channels
                 WsrmUtilities.AssertWsrm11(this.Settings.ReliableMessagingVersion);
 
                 if (info.CloseSequenceInfo.Identifier == this.OutputID)
-                    return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnsupportedClose), SR.GetString(SR.UnsupportedCloseExceptionString));
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.OutputID,
+                        SR.GetString(SR.SequenceTerminatedUnsupportedClose),
+                        SR.GetString(SR.UnsupportedCloseExceptionString)
+                    );
                 else
                     return new UnknownSequenceFault(info.CloseSequenceInfo.Identifier);
             }
@@ -1043,17 +1236,28 @@ namespace System.ServiceModel.Channels
 
         class OpenAsyncResult : AsyncResult
         {
-            static AsyncCallback onRequestComplete = Fx.ThunkCallback(new AsyncCallback(OnRequestCompleteStatic));
+            static AsyncCallback onRequestComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnRequestCompleteStatic)
+            );
             ClientReliableSession session;
             DateTime start;
 
-            public OpenAsyncResult(ClientReliableSession session, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                ClientReliableSession session,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.session = session;
                 this.start = DateTime.UtcNow;
 
-                IAsyncResult result = this.session.requestor.BeginRequest(timeout, onRequestComplete, this);
+                IAsyncResult result = this.session.requestor.BeginRequest(
+                    timeout,
+                    onRequestComplete,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.CompleteRequest(result);
@@ -1101,7 +1305,7 @@ namespace System.ServiceModel.Channels
             Idle,
             KeepAlive,
             FastPolling,
-            NotPolling
+            NotPolling,
         }
     }
 
@@ -1113,7 +1317,8 @@ namespace System.ServiceModel.Channels
             IServerReliableChannelBinder binder,
             FaultHelper faultHelper,
             UniqueId inputID,
-            UniqueId outputID)
+            UniqueId outputID
+        )
             : base(channel, listener, binder, faultHelper)
         {
             this.InputID = inputID;
@@ -1122,13 +1327,14 @@ namespace System.ServiceModel.Channels
 
         public override UniqueId SequenceID
         {
-            get
-            {
-                return this.InputID;
-            }
+            get { return this.InputID; }
         }
 
-        public override IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -1139,9 +1345,7 @@ namespace System.ServiceModel.Channels
             base.StartInactivityTimer();
         }
 
-        public override void OnLocalActivity()
-        {
-        }
+        public override void OnLocalActivity() { }
 
         public override void Open(TimeSpan timeout)
         {
@@ -1154,10 +1358,21 @@ namespace System.ServiceModel.Channels
 
             if (fault != null)
                 return fault;
-            else if (info.CreateSequenceInfo != null && info.CreateSequenceInfo.OfferIdentifier != this.OutputID)
-                return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedCSOfferId), SR.GetString(SR.UnexpectedCSOfferId));
+            else if (
+                info.CreateSequenceInfo != null
+                && info.CreateSequenceInfo.OfferIdentifier != this.OutputID
+            )
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.OutputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedCSOfferId),
+                    SR.GetString(SR.UnexpectedCSOfferId)
+                );
             else if (info.CreateSequenceResponseInfo != null)
-                return SequenceTerminatedFault.CreateProtocolFault(this.OutputID, SR.GetString(SR.SequenceTerminatedUnexpectedCSR), SR.GetString(SR.UnexpectedCSR));
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.OutputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedCSR),
+                    SR.GetString(SR.UnexpectedCSR)
+                );
             else
                 return null;
         }
@@ -1165,21 +1380,42 @@ namespace System.ServiceModel.Channels
         protected override WsrmFault VerifySimplexProtocolElements(WsrmMessageInfo info)
         {
             if (info.AcknowledgementInfo != null)
-                return SequenceTerminatedFault.CreateProtocolFault(this.InputID, SR.GetString(SR.SequenceTerminatedUnexpectedAcknowledgement), SR.GetString(SR.UnexpectedAcknowledgement));
-            else if (info.AckRequestedInfo != null && info.AckRequestedInfo.SequenceID != this.InputID)
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.InputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedAcknowledgement),
+                    SR.GetString(SR.UnexpectedAcknowledgement)
+                );
+            else if (
+                info.AckRequestedInfo != null
+                && info.AckRequestedInfo.SequenceID != this.InputID
+            )
                 return new UnknownSequenceFault(info.AckRequestedInfo.SequenceID);
             else if (info.CreateSequenceResponseInfo != null)
-                return SequenceTerminatedFault.CreateProtocolFault(this.InputID, SR.GetString(SR.SequenceTerminatedUnexpectedCSR), SR.GetString(SR.UnexpectedCSR));
-            else if (info.SequencedMessageInfo != null && info.SequencedMessageInfo.SequenceID != this.InputID)
+                return SequenceTerminatedFault.CreateProtocolFault(
+                    this.InputID,
+                    SR.GetString(SR.SequenceTerminatedUnexpectedCSR),
+                    SR.GetString(SR.UnexpectedCSR)
+                );
+            else if (
+                info.SequencedMessageInfo != null
+                && info.SequencedMessageInfo.SequenceID != this.InputID
+            )
                 return new UnknownSequenceFault(info.SequencedMessageInfo.SequenceID);
-            else if (info.TerminateSequenceInfo != null && info.TerminateSequenceInfo.Identifier != this.InputID)
+            else if (
+                info.TerminateSequenceInfo != null
+                && info.TerminateSequenceInfo.Identifier != this.InputID
+            )
                 return new UnknownSequenceFault(info.TerminateSequenceInfo.Identifier);
             else if (info.TerminateSequenceResponseInfo != null)
             {
                 WsrmUtilities.AssertWsrm11(this.Settings.ReliableMessagingVersion);
 
                 if (info.TerminateSequenceResponseInfo.Identifier == this.InputID)
-                    return SequenceTerminatedFault.CreateProtocolFault(this.InputID, SR.GetString(SR.SequenceTerminatedUnexpectedTerminateSequenceResponse), SR.GetString(SR.UnexpectedTerminateSequenceResponse));
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.InputID,
+                        SR.GetString(SR.SequenceTerminatedUnexpectedTerminateSequenceResponse),
+                        SR.GetString(SR.UnexpectedTerminateSequenceResponse)
+                    );
                 else
                     return new UnknownSequenceFault(info.TerminateSequenceResponseInfo.Identifier);
             }
@@ -1197,7 +1433,11 @@ namespace System.ServiceModel.Channels
                 WsrmUtilities.AssertWsrm11(this.Settings.ReliableMessagingVersion);
 
                 if (info.CloseSequenceResponseInfo.Identifier == this.InputID)
-                    return SequenceTerminatedFault.CreateProtocolFault(this.InputID, SR.GetString(SR.SequenceTerminatedUnexpectedCloseSequenceResponse), SR.GetString(SR.UnexpectedCloseSequenceResponse));
+                    return SequenceTerminatedFault.CreateProtocolFault(
+                        this.InputID,
+                        SR.GetString(SR.SequenceTerminatedUnexpectedCloseSequenceResponse),
+                        SR.GetString(SR.UnexpectedCloseSequenceResponse)
+                    );
                 else
                     return new UnknownSequenceFault(info.CloseSequenceResponseInfo.Identifier);
             }

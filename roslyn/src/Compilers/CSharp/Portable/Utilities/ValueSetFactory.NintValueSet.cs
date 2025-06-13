@@ -14,9 +14,17 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private sealed class NintValueSet : IValueSet<int>, IValueSet
         {
-            public static readonly NintValueSet AllValues = new NintValueSet(hasSmall: true, values: NumericValueSet<int, IntTC>.AllValues, hasLarge: true);
+            public static readonly NintValueSet AllValues = new NintValueSet(
+                hasSmall: true,
+                values: NumericValueSet<int, IntTC>.AllValues,
+                hasLarge: true
+            );
 
-            public static readonly NintValueSet NoValues = new NintValueSet(hasSmall: false, values: NumericValueSet<int, IntTC>.NoValues, hasLarge: false);
+            public static readonly NintValueSet NoValues = new NintValueSet(
+                hasSmall: false,
+                values: NumericValueSet<int, IntTC>.NoValues,
+                hasLarge: false
+            );
 
             private readonly IValueSet<int> _values;
 
@@ -64,25 +72,59 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public bool All(BinaryOperatorKind relation, int value)
             {
-                if (_hasLarge && relation switch { LessThan => true, LessThanOrEqual => true, _ => false })
+                if (
+                    _hasLarge
+                    && relation switch
+                    {
+                        LessThan => true,
+                        LessThanOrEqual => true,
+                        _ => false,
+                    }
+                )
                     return false;
-                if (_hasSmall && relation switch { GreaterThan => true, GreaterThanOrEqual => true, _ => false })
+                if (
+                    _hasSmall
+                    && relation switch
+                    {
+                        GreaterThan => true,
+                        GreaterThanOrEqual => true,
+                        _ => false,
+                    }
+                )
                     return false;
                 return _values.All(relation, value);
             }
 
-            bool IValueSet.All(BinaryOperatorKind relation, ConstantValue value) => value.IsBad || All(relation, value.Int32Value);
+            bool IValueSet.All(BinaryOperatorKind relation, ConstantValue value) =>
+                value.IsBad || All(relation, value.Int32Value);
 
             public bool Any(BinaryOperatorKind relation, int value)
             {
-                if (_hasSmall && relation switch { LessThan => true, LessThanOrEqual => true, _ => false })
+                if (
+                    _hasSmall
+                    && relation switch
+                    {
+                        LessThan => true,
+                        LessThanOrEqual => true,
+                        _ => false,
+                    }
+                )
                     return true;
-                if (_hasLarge && relation switch { GreaterThan => true, GreaterThanOrEqual => true, _ => false })
+                if (
+                    _hasLarge
+                    && relation switch
+                    {
+                        GreaterThan => true,
+                        GreaterThanOrEqual => true,
+                        _ => false,
+                    }
+                )
                     return true;
                 return _values.Any(relation, value);
             }
 
-            bool IValueSet.Any(BinaryOperatorKind relation, ConstantValue value) => value.IsBad || Any(relation, value.Int32Value);
+            bool IValueSet.Any(BinaryOperatorKind relation, ConstantValue value) =>
+                value.IsBad || Any(relation, value.Int32Value);
 
             public IValueSet<int> Complement()
             {
@@ -90,7 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     hasSmall: !this._hasSmall,
                     values: this._values.Complement(),
                     hasLarge: !this._hasLarge
-                    );
+                );
             }
 
             IValueSet IValueSet.Complement() => this.Complement();
@@ -102,7 +144,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     hasSmall: this._hasSmall && other._hasSmall,
                     values: this._values.Intersect(other._values),
                     hasLarge: this._hasLarge && other._hasLarge
-                    );
+                );
             }
 
             IValueSet IValueSet.Intersect(IValueSet other) => this.Intersect((NintValueSet)other);
@@ -114,18 +156,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                     hasSmall: this._hasSmall || other._hasSmall,
                     values: this._values.Union(other._values),
                     hasLarge: this._hasLarge || other._hasLarge
-                    );
+                );
             }
 
             IValueSet IValueSet.Union(IValueSet other) => this.Union((NintValueSet)other);
 
-            public override bool Equals(object? obj) => obj is NintValueSet other &&
-                this._hasSmall == other._hasSmall &&
-                this._hasLarge == other._hasLarge &&
-                this._values.Equals(other._values);
+            public override bool Equals(object? obj) =>
+                obj is NintValueSet other
+                && this._hasSmall == other._hasSmall
+                && this._hasLarge == other._hasLarge
+                && this._values.Equals(other._values);
 
             public override int GetHashCode() =>
-                Hash.Combine(this._hasSmall.GetHashCode(), Hash.Combine(this._hasLarge.GetHashCode(), this._values.GetHashCode()));
+                Hash.Combine(
+                    this._hasSmall.GetHashCode(),
+                    Hash.Combine(this._hasLarge.GetHashCode(), this._values.GetHashCode())
+                );
 
             public override string ToString()
             {

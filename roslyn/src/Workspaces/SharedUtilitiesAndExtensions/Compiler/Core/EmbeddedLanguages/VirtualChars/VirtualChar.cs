@@ -51,8 +51,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// Creates a new <see cref="VirtualChar"/> from the provided <paramref name="rune"/>.  This operation cannot
         /// fail.
         /// </summary>
-        public static VirtualChar Create(Rune rune, TextSpan span)
-            => new(rune, surrogateChar: default, span);
+        public static VirtualChar Create(Rune rune, TextSpan span) =>
+            new(rune, surrogateChar: default, span);
 
         /// <summary>
         /// Creates a new <see cref="VirtualChar"/> from an unpaired high or low surrogate character.  This will throw
@@ -69,8 +69,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 
         private VirtualChar(Rune rune, char surrogateChar, TextSpan span)
         {
-            Contract.ThrowIfFalse(surrogateChar == 0 || rune == Rune.ReplacementChar,
-                "If surrogateChar is provided then rune must be Rune.ReplacementChar");
+            Contract.ThrowIfFalse(
+                surrogateChar == 0 || rune == Rune.ReplacementChar,
+                "If surrogateChar is provided then rune must be Rune.ReplacementChar"
+            );
 
             if (span.IsEmpty)
                 throw new ArgumentException("Span should not be empty.", nameof(span));
@@ -87,36 +89,34 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         /// </summary>
         public int Value => SurrogateChar != 0 ? SurrogateChar : Rune.Value;
 
-        public bool IsDigit
-            => SurrogateChar != 0 ? char.IsDigit(SurrogateChar) : Rune.IsDigit(Rune);
+        public bool IsDigit =>
+            SurrogateChar != 0 ? char.IsDigit(SurrogateChar) : Rune.IsDigit(Rune);
 
-        public bool IsLetter
-            => SurrogateChar != 0 ? char.IsLetter(SurrogateChar) : Rune.IsLetter(Rune);
+        public bool IsLetter =>
+            SurrogateChar != 0 ? char.IsLetter(SurrogateChar) : Rune.IsLetter(Rune);
 
-        public bool IsLetterOrDigit
-            => SurrogateChar != 0 ? char.IsLetterOrDigit(SurrogateChar) : Rune.IsLetterOrDigit(Rune);
+        public bool IsLetterOrDigit =>
+            SurrogateChar != 0 ? char.IsLetterOrDigit(SurrogateChar) : Rune.IsLetterOrDigit(Rune);
 
-        public bool IsWhiteSpace
-            => SurrogateChar != 0 ? char.IsWhiteSpace(SurrogateChar) : Rune.IsWhiteSpace(Rune);
+        public bool IsWhiteSpace =>
+            SurrogateChar != 0 ? char.IsWhiteSpace(SurrogateChar) : Rune.IsWhiteSpace(Rune);
 
         /// <inheritdoc cref="Rune.Utf16SequenceLength" />
         public int Utf16SequenceLength => SurrogateChar != 0 ? 1 : Rune.Utf16SequenceLength;
 
         #region equality
 
-        public static bool operator ==(VirtualChar ch1, char ch2)
-            => ch1.Value == ch2;
+        public static bool operator ==(VirtualChar ch1, char ch2) => ch1.Value == ch2;
 
-        public static bool operator !=(VirtualChar ch1, char ch2)
-            => !(ch1 == ch2);
+        public static bool operator !=(VirtualChar ch1, char ch2) => !(ch1 == ch2);
 
         #endregion
 
         #region string operations
 
         /// <inheritdoc/>
-        public override string ToString()
-            => SurrogateChar != 0 ? SurrogateChar.ToString() : Rune.ToString();
+        public override string ToString() =>
+            SurrogateChar != 0 ? SurrogateChar.ToString() : Rune.ToString();
 
         public void AppendTo(StringBuilder builder)
         {
@@ -138,35 +138,25 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 
         #region comparable
 
-        public int CompareTo(VirtualChar other)
-            => this.Value - other.Value;
+        public int CompareTo(VirtualChar other) => this.Value - other.Value;
 
-        public static bool operator <(VirtualChar ch1, VirtualChar ch2)
-            => ch1.Value < ch2.Value;
+        public static bool operator <(VirtualChar ch1, VirtualChar ch2) => ch1.Value < ch2.Value;
 
-        public static bool operator <=(VirtualChar ch1, VirtualChar ch2)
-            => ch1.Value <= ch2.Value;
+        public static bool operator <=(VirtualChar ch1, VirtualChar ch2) => ch1.Value <= ch2.Value;
 
-        public static bool operator >(VirtualChar ch1, VirtualChar ch2)
-            => ch1.Value > ch2.Value;
+        public static bool operator >(VirtualChar ch1, VirtualChar ch2) => ch1.Value > ch2.Value;
 
-        public static bool operator >=(VirtualChar ch1, VirtualChar ch2)
-            => ch1.Value >= ch2.Value;
+        public static bool operator >=(VirtualChar ch1, VirtualChar ch2) => ch1.Value >= ch2.Value;
 
-        public int CompareTo(char other)
-            => this.Value - other;
+        public int CompareTo(char other) => this.Value - other;
 
-        public static bool operator <(VirtualChar ch1, char ch2)
-            => ch1.Value < ch2;
+        public static bool operator <(VirtualChar ch1, char ch2) => ch1.Value < ch2;
 
-        public static bool operator <=(VirtualChar ch1, char ch2)
-            => ch1.Value <= ch2;
+        public static bool operator <=(VirtualChar ch1, char ch2) => ch1.Value <= ch2;
 
-        public static bool operator >(VirtualChar ch1, char ch2)
-            => ch1.Value > ch2;
+        public static bool operator >(VirtualChar ch1, char ch2) => ch1.Value > ch2;
 
-        public static bool operator >=(VirtualChar ch1, char ch2)
-            => ch1.Value >= ch2;
+        public static bool operator >=(VirtualChar ch1, char ch2) => ch1.Value >= ch2;
 
         #endregion
     }

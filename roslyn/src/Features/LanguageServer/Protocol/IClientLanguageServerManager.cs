@@ -14,9 +14,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 /// </summary>
 internal interface IClientLanguageServerManager : ILspService
 {
-    Task<TResponse> SendRequestAsync<TParams, TResponse>(string methodName, TParams @params, CancellationToken cancellationToken);
+    Task<TResponse> SendRequestAsync<TParams, TResponse>(
+        string methodName,
+        TParams @params,
+        CancellationToken cancellationToken
+    );
     ValueTask SendRequestAsync(string methodName, CancellationToken cancellationToken);
-    ValueTask SendRequestAsync<TParams>(string methodName, TParams @params, CancellationToken cancellationToken);
+    ValueTask SendRequestAsync<TParams>(
+        string methodName,
+        TParams @params,
+        CancellationToken cancellationToken
+    );
     ValueTask SendNotificationAsync(string methodName, CancellationToken cancellationToken);
-    ValueTask SendNotificationAsync<TParams>(string methodName, TParams @params, CancellationToken cancellationToken);
+    ValueTask SendNotificationAsync<TParams>(
+        string methodName,
+        TParams @params,
+        CancellationToken cancellationToken
+    );
 }

@@ -15,8 +15,16 @@ namespace Microsoft.AspNetCore.Mvc;
 /// response content types. The <see cref="ContentTypes"/> value is used to set
 /// <see cref="ObjectResult.ContentTypes"/>.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class ProducesAttribute : Attribute, IResultFilter, IOrderedFilter, IApiResponseMetadataProvider
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class ProducesAttribute
+    : Attribute,
+        IResultFilter,
+        IOrderedFilter,
+        IApiResponseMetadataProvider
 {
     /// <summary>
     /// Initializes an instance of <see cref="ProducesAttribute"/>.
@@ -87,9 +95,7 @@ public class ProducesAttribute : Attribute, IResultFilter, IOrderedFilter, IApiR
     }
 
     /// <inheritdoc />
-    public virtual void OnResultExecuted(ResultExecutedContext context)
-    {
-    }
+    public virtual void OnResultExecuted(ResultExecutedContext context) { }
 
     /// <inheritdoc />
     public void SetContentTypes(MediaTypeCollection contentTypes)
@@ -113,7 +119,8 @@ public class ProducesAttribute : Attribute, IResultFilter, IOrderedFilter, IApiR
             if (contentType.HasWildcard)
             {
                 throw new InvalidOperationException(
-                    Resources.FormatMatchAllContentTypeIsNotAllowed(arg));
+                    Resources.FormatMatchAllContentTypeIsNotAllowed(arg)
+                );
             }
 
             contentTypes.Add(arg);

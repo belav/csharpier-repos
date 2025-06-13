@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.NativeFormat;
 using Internal.ReadyToRunConstants;
 using Internal.Text;
@@ -24,13 +23,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             InliningInfo2,
             CrossModuleInliningForCrossModuleDataOnly,
-            CrossModuleAllMethods
+            CrossModuleAllMethods,
         }
 
         private readonly InfoType _inlineInfoType;
         private ReadyToRunSymbolNodeFactory _symbolNodeFactory;
 
-        public InliningInfoNode(EcmaModule module, InfoType inlineInfoType) : base(module)
+        public InliningInfoNode(EcmaModule module, InfoType inlineInfoType)
+            : base(module)
         {
             _inlineInfoType = inlineInfoType;
             if (AllowCrossModuleInlines)
@@ -50,20 +50,33 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         protected override string ModuleSpecificName => "__ReadyToRunInliningInfoTable__";
 
-        private bool AllowCrossModuleInlines => _inlineInfoType == InfoType.CrossModuleAllMethods || _inlineInfoType == InfoType.CrossModuleInliningForCrossModuleDataOnly;
+        private bool AllowCrossModuleInlines =>
+            _inlineInfoType == InfoType.CrossModuleAllMethods
+            || _inlineInfoType == InfoType.CrossModuleInliningForCrossModuleDataOnly;
         private bool ReportAllInlinesInSearch => _inlineInfoType == InfoType.CrossModuleAllMethods;
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
-            Dictionary<EcmaMethod, HashSet<EcmaMethod>> inlineeToInliners = new Dictionary<EcmaMethod, HashSet<EcmaMethod>>();
+            Dictionary<EcmaMethod, HashSet<EcmaMethod>> inlineeToInliners =
+                new Dictionary<EcmaMethod, HashSet<EcmaMethod>>();
 
             // Build a map from inlinee to the list of inliners
             // We are only interested in the generic definitions of these.
-            foreach (MethodWithGCInfo methodNode in factory.EnumerateCompiledMethods(_module, CompiledMethodCategory.All))
+            foreach (
+                MethodWithGCInfo methodNode in factory.EnumerateCompiledMethods(
+                    _module,
+                    CompiledMethodCategory.All
+                )
+            )
             {
                 MethodDesc[] inlinees = methodNode.InlinedMethods;
                 MethodDesc inliner = methodNode.Method;
@@ -78,7 +91,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 // Only encode inlining info for inliners within the active module, or if cross module inline format is in use
                 Debug.Assert(AllowCrossModuleInlines || (inlinerDefinition.Module == _module));
 
-                bool inlinerReportAllVersionsWithInlinee = !AllowCrossModuleInlines || factory.CompilationModuleGroup.CrossModuleCompileable(inlinerDefinition);
+                bool inlinerReportAllVersionsWithInlinee =
+                    !AllowCrossModuleInlines
+                    || factory.CompilationModuleGroup.CrossModuleCompileable(inlinerDefinition);
 
                 foreach (MethodDesc inlinee in inlinees)
                 {
@@ -100,7 +115,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         // We'll definitely track this inline
                     }
-                    else if (factory.CompilationModuleGroup.VersionsWithMethodBody(inlineeDefinition))
+                    else if (
+                        factory.CompilationModuleGroup.VersionsWithMethodBody(inlineeDefinition)
+                    )
                     {
                         if (!inlinerReportAllVersionsWithInlinee)
                         {
@@ -110,7 +127,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     }
                     else
                     {
-                        Debug.Assert(factory.CompilationModuleGroup.CrossModuleInlineable(inlineeDefinition));
+                        Debug.Assert(
+                            factory.CompilationModuleGroup.CrossModuleInlineable(inlineeDefinition)
+                        );
                         if (_inlineInfoType != InfoType.CrossModuleInliningForCrossModuleDataOnly)
                         {
                             // We'll won't report this method
@@ -118,7 +137,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         }
                     }
 
-                    if (!inlineeToInliners.TryGetValue(ecmaInlineeDefinition, out HashSet<EcmaMethod> inliners))
+                    if (
+                        !inlineeToInliners.TryGetValue(
+                            ecmaInlineeDefinition,
+                            out HashSet<EcmaMethod> inliners
+                        )
+                    )
                     {
                         inliners = new HashSet<EcmaMethod>();
                         inlineeToInliners.Add(ecmaInlineeDefinition, inliners);
@@ -139,7 +163,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 EcmaMethod inlinee = inlineeWithInliners.Key;
                 int inlineeRid = MetadataTokens.GetRowNumber(inlinee.Handle);
                 int hashCode;
-                
+
                 if (AllowCrossModuleInlines)
                 {
                     // CrossModuleInlineInfo format
@@ -164,29 +188,39 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     //    - if flag is set, followed by module ID
                     Debug.Assert(_module != null);
                     bool isForeignInlinee = inlinee.Module != _module;
-                    sig.Append(new UnsignedConstant((uint)(inlineeRid << 1 | (isForeignInlinee ? 1 : 0))));
+                    sig.Append(
+                        new UnsignedConstant((uint)(inlineeRid << 1 | (isForeignInlinee ? 1 : 0)))
+                    );
                     if (isForeignInlinee)
                     {
-                        sig.Append(new UnsignedConstant((uint)factory.ManifestMetadataTable.ModuleToIndex(inlinee.Module)));
+                        sig.Append(
+                            new UnsignedConstant(
+                                (uint)factory.ManifestMetadataTable.ModuleToIndex(inlinee.Module)
+                            )
+                        );
                     }
 
-                    List<EcmaMethod> sortedInliners = new List<EcmaMethod>(inlineeWithInliners.Value);
-                    sortedInliners.MergeSort((a, b) =>
-                    {
-                        if (a == b)
-                            return 0;
+                    List<EcmaMethod> sortedInliners = new List<EcmaMethod>(
+                        inlineeWithInliners.Value
+                    );
+                    sortedInliners.MergeSort(
+                        (a, b) =>
+                        {
+                            if (a == b)
+                                return 0;
 
-                        int aRid = MetadataTokens.GetRowNumber(a.Handle);
-                        int bRid = MetadataTokens.GetRowNumber(b.Handle);
-                        if (aRid < bRid)
-                            return -1;
-                        else if (aRid > bRid)
-                            return 1;
+                            int aRid = MetadataTokens.GetRowNumber(a.Handle);
+                            int bRid = MetadataTokens.GetRowNumber(b.Handle);
+                            if (aRid < bRid)
+                                return -1;
+                            else if (aRid > bRid)
+                                return 1;
 
-                        int result = a.Module.CompareTo(b.Module);
-                        Debug.Assert(result != 0);
-                        return result;
-                    });
+                            int result = a.Module.CompareTo(b.Module);
+                            Debug.Assert(result != 0);
+                            return result;
+                        }
+                    );
 
                     int baseRid = 0;
                     foreach (EcmaMethod inliner in sortedInliners)
@@ -196,10 +230,17 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         baseRid = inlinerRid;
                         Debug.Assert(ridDelta >= 0);
                         bool isForeignInliner = inliner.Module != _module;
-                        sig.Append(new UnsignedConstant((uint)(ridDelta << 1 | (isForeignInliner ? 1 : 0))));
+                        sig.Append(
+                            new UnsignedConstant((uint)(ridDelta << 1 | (isForeignInliner ? 1 : 0)))
+                        );
                         if (isForeignInliner)
                         {
-                            sig.Append(new UnsignedConstant((uint)factory.ManifestMetadataTable.ModuleToIndex(inliner.Module)));
+                            sig.Append(
+                                new UnsignedConstant(
+                                    (uint)
+                                        factory.ManifestMetadataTable.ModuleToIndex(inliner.Module)
+                                )
+                            );
                         }
                     }
                 }
@@ -225,52 +266,68 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     //      Inliner RID deltas (for single module version bubble images)
                     //        - a sequence of inliner RID deltas
 
-                    bool crossModuleMultiModuleFormat = (factory.CompilationModuleGroup.GetReadyToRunFlags() & ReadyToRunFlags.READYTORUN_FLAG_MultiModuleVersionBubble) != 0;
+                    bool crossModuleMultiModuleFormat =
+                        (
+                            factory.CompilationModuleGroup.GetReadyToRunFlags()
+                            & ReadyToRunFlags.READYTORUN_FLAG_MultiModuleVersionBubble
+                        ) != 0;
 
                     Debug.Assert(_module == null);
-                    bool isCrossModuleInlinee = !factory.CompilationModuleGroup.VersionsWithMethodBody(inlinee);
-                    Debug.Assert(!isCrossModuleInlinee || factory.CompilationModuleGroup.CrossModuleInlineable(inlinee));
+                    bool isCrossModuleInlinee =
+                        !factory.CompilationModuleGroup.VersionsWithMethodBody(inlinee);
+                    Debug.Assert(
+                        !isCrossModuleInlinee
+                            || factory.CompilationModuleGroup.CrossModuleInlineable(inlinee)
+                    );
 
                     EcmaMethod[] sortedInliners = new EcmaMethod[inlineeWithInliners.Value.Count];
                     inlineeWithInliners.Value.CopyTo(sortedInliners);
 
-                    sortedInliners.MergeSort((a, b) =>
-                    {
-                        if (a == b)
-                            return 0;
-
-                        bool isCrossModuleInlinerA = !factory.CompilationModuleGroup.VersionsWithMethodBody(a);
-                        bool isCrossModuleInlinerB = !factory.CompilationModuleGroup.VersionsWithMethodBody(b);
-                        if (isCrossModuleInlinerA != isCrossModuleInlinerB)
+                    sortedInliners.MergeSort(
+                        (a, b) =>
                         {
+                            if (a == b)
+                                return 0;
+
+                            bool isCrossModuleInlinerA =
+                                !factory.CompilationModuleGroup.VersionsWithMethodBody(a);
+                            bool isCrossModuleInlinerB =
+                                !factory.CompilationModuleGroup.VersionsWithMethodBody(b);
+                            if (isCrossModuleInlinerA != isCrossModuleInlinerB)
+                            {
+                                if (isCrossModuleInlinerA)
+                                    return -1;
+                                else
+                                    return 1;
+                            }
+
+                            int result;
                             if (isCrossModuleInlinerA)
-                                return -1;
+                            {
+                                int indexA = _symbolNodeFactory
+                                    .CheckILBodyFixupSignature(a)
+                                    .IndexFromBeginningOfArray;
+                                int indexB = _symbolNodeFactory
+                                    .CheckILBodyFixupSignature(b)
+                                    .IndexFromBeginningOfArray;
+                                Debug.Assert(indexA != indexB);
+                                result = indexA.CompareTo(indexB);
+                            }
                             else
-                                return 1;
-                        }
+                            {
+                                int aRid = MetadataTokens.GetRowNumber(a.Handle);
+                                int bRid = MetadataTokens.GetRowNumber(b.Handle);
+                                if (aRid < bRid)
+                                    return -1;
+                                else if (aRid > bRid)
+                                    return 1;
 
-                        int result;
-                        if (isCrossModuleInlinerA)
-                        {
-                            int indexA = _symbolNodeFactory.CheckILBodyFixupSignature(a).IndexFromBeginningOfArray;
-                            int indexB = _symbolNodeFactory.CheckILBodyFixupSignature(b).IndexFromBeginningOfArray;
-                            Debug.Assert(indexA != indexB);
-                            result = indexA.CompareTo(indexB);
+                                result = a.Module.CompareTo(b.Module);
+                            }
+                            Debug.Assert(result != 0);
+                            return result;
                         }
-                        else
-                        {
-                            int aRid = MetadataTokens.GetRowNumber(a.Handle);
-                            int bRid = MetadataTokens.GetRowNumber(b.Handle);
-                            if (aRid < bRid)
-                                return -1;
-                            else if (aRid > bRid)
-                                return 1;
-
-                            result = a.Module.CompareTo(b.Module);
-                        }
-                        Debug.Assert(result != 0);
-                        return result;
-                    });
+                    );
 
                     uint crossModuleInlinerCount = 0;
                     foreach (var method in sortedInliners)
@@ -288,24 +345,36 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         uint indexOfInlinee;
                         if (isCrossModuleInlinee)
                         {
-                            indexOfInlinee = (uint)_symbolNodeFactory.CheckILBodyFixupSignature(inlinee).IndexFromBeginningOfArray;
+                            indexOfInlinee = (uint)
+                                _symbolNodeFactory
+                                    .CheckILBodyFixupSignature(inlinee)
+                                    .IndexFromBeginningOfArray;
                         }
                         else
                         {
                             indexOfInlinee = (uint)MetadataTokens.GetRowNumber(inlinee.Handle);
                         }
 
-                        encodedInlinee = indexOfInlinee << (int)ReadyToRunCrossModuleInlineFlags.CrossModuleInlinerIndexShift;
+                        encodedInlinee =
+                            indexOfInlinee
+                            << (int)ReadyToRunCrossModuleInlineFlags.CrossModuleInlinerIndexShift;
 
                         if (isCrossModuleInlinee)
-                            encodedInlinee |= (uint)ReadyToRunCrossModuleInlineFlags.CrossModuleInlinee;
+                            encodedInlinee |= (uint)
+                                ReadyToRunCrossModuleInlineFlags.CrossModuleInlinee;
 
                         if (crossModuleInlinerCount > 0)
-                            encodedInlinee |= (uint)ReadyToRunCrossModuleInlineFlags.HasCrossModuleInliners;
+                            encodedInlinee |= (uint)
+                                ReadyToRunCrossModuleInlineFlags.HasCrossModuleInliners;
 
                         sig.Append(new UnsignedConstant(encodedInlinee));
                         if (crossModuleMultiModuleFormat && !isCrossModuleInlinee)
-                            sig.Append(new UnsignedConstant((uint)factory.ManifestMetadataTable.ModuleToIndex(inlinee.Module)));
+                            sig.Append(
+                                new UnsignedConstant(
+                                    (uint)
+                                        factory.ManifestMetadataTable.ModuleToIndex(inlinee.Module)
+                                )
+                            );
 
                         int inlinerIndex = 0;
                         if (crossModuleInlinerCount > 0)
@@ -316,7 +385,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             {
                                 var inliner = sortedInliners[inlinerIndex];
 
-                                uint ilBodyIndex = (uint)_symbolNodeFactory.CheckILBodyFixupSignature(inliner).IndexFromBeginningOfArray;
+                                uint ilBodyIndex = (uint)
+                                    _symbolNodeFactory
+                                        .CheckILBodyFixupSignature(inliner)
+                                        .IndexFromBeginningOfArray;
                                 uint ridDelta = ilBodyIndex - baseIndex;
                                 sig.Append(new UnsignedConstant(ridDelta));
                             }
@@ -334,14 +406,24 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                             if (crossModuleMultiModuleFormat)
                             {
-                                uint encodedRid = ridDelta << (int)ReadyToRunCrossModuleInlineFlags.InlinerRidShift;
+                                uint encodedRid =
+                                    ridDelta
+                                    << (int)ReadyToRunCrossModuleInlineFlags.InlinerRidShift;
                                 if (isForeignInliner)
-                                    encodedRid |= (uint)ReadyToRunCrossModuleInlineFlags.InlinerRidHasModule;
+                                    encodedRid |= (uint)
+                                        ReadyToRunCrossModuleInlineFlags.InlinerRidHasModule;
 
                                 sig.Append(new UnsignedConstant(encodedRid));
                                 if (isForeignInliner)
                                 {
-                                    sig.Append(new UnsignedConstant((uint)factory.ManifestMetadataTable.ModuleToIndex(inliner.Module)));
+                                    sig.Append(
+                                        new UnsignedConstant(
+                                            (uint)
+                                                factory.ManifestMetadataTable.ModuleToIndex(
+                                                    inliner.Module
+                                                )
+                                        )
+                                    );
                                 }
                             }
                             else
@@ -362,7 +444,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: writerContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public override int ClassCode => -87382891;

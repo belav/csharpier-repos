@@ -20,9 +20,7 @@ public class RedirectHandler : DelegatingHandler
     /// Creates a new instance of <see cref="RedirectHandler"/>.
     /// </summary>
     public RedirectHandler()
-        : this(maxRedirects: DefaultMaxRedirects)
-    {
-    }
+        : this(maxRedirects: DefaultMaxRedirects) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="RedirectHandler"/>.
@@ -42,18 +40,25 @@ public class RedirectHandler : DelegatingHandler
     public int MaxRedirects { get; }
 
     /// <inheritdoc />
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var remainingRedirects = MaxRedirects;
         var redirectRequest = new HttpRequestMessage();
-        var originalRequestContent = HasBody(request) ? await DuplicateRequestContent(request) : null;
+        var originalRequestContent = HasBody(request)
+            ? await DuplicateRequestContent(request)
+            : null;
         CopyRequestHeaders(request.Headers, redirectRequest.Headers);
         var response = await base.SendAsync(request, cancellationToken);
         while (IsRedirect(response) && remainingRedirects > 0)
         {
             remainingRedirects--;
             UpdateRedirectRequest(response, redirectRequest, originalRequestContent);
-            originalRequestContent = HasBody(redirectRequest) ? await DuplicateRequestContent(redirectRequest) : null;
+            originalRequestContent = HasBody(redirectRequest)
+                ? await DuplicateRequestContent(redirectRequest)
+                : null;
             response = await base.SendAsync(redirectRequest, cancellationToken);
         }
 
@@ -83,7 +88,8 @@ public class RedirectHandler : DelegatingHandler
     private static void CopyContentHeaders(
         HttpContent originalRequestContent,
         HttpContent newRequestContent,
-        HttpContent contentCopy)
+        HttpContent contentCopy
+    )
     {
         foreach (var header in originalRequestContent.Headers)
         {
@@ -94,7 +100,8 @@ public class RedirectHandler : DelegatingHandler
 
     private static void CopyRequestHeaders(
         HttpRequestHeaders originalRequestHeaders,
-        HttpRequestHeaders redirectRequestHeaders)
+        HttpRequestHeaders redirectRequestHeaders
+    )
     {
         foreach (var header in originalRequestHeaders)
         {
@@ -108,7 +115,9 @@ public class RedirectHandler : DelegatingHandler
         }
     }
 
-    private static async Task<(Stream originalBody, Stream copy)> CopyBody(HttpRequestMessage request)
+    private static async Task<(Stream originalBody, Stream copy)> CopyBody(
+        HttpRequestMessage request
+    )
     {
         var originalBody = await request.Content!.ReadAsStreamAsync();
         var bodyCopy = new MemoryStream();
@@ -132,7 +141,8 @@ public class RedirectHandler : DelegatingHandler
     private static void UpdateRedirectRequest(
         HttpResponseMessage response,
         HttpRequestMessage redirect,
-        HttpContent? originalContent)
+        HttpContent? originalContent
+    )
     {
         Debug.Assert(response.RequestMessage is not null);
 
@@ -165,13 +175,12 @@ public class RedirectHandler : DelegatingHandler
     }
 
     private static bool ShouldKeepVerb(HttpResponseMessage response) =>
-        response.StatusCode == HttpStatusCode.RedirectKeepVerb ||
-            (int)response.StatusCode == 308;
+        response.StatusCode == HttpStatusCode.RedirectKeepVerb || (int)response.StatusCode == 308;
 
     private static bool IsRedirect(HttpResponseMessage response) =>
-        response.StatusCode == HttpStatusCode.MovedPermanently ||
-            response.StatusCode == HttpStatusCode.Redirect ||
-            response.StatusCode == HttpStatusCode.RedirectMethod ||
-            response.StatusCode == HttpStatusCode.RedirectKeepVerb ||
-            (int)response.StatusCode == 308;
+        response.StatusCode == HttpStatusCode.MovedPermanently
+        || response.StatusCode == HttpStatusCode.Redirect
+        || response.StatusCode == HttpStatusCode.RedirectMethod
+        || response.StatusCode == HttpStatusCode.RedirectKeepVerb
+        || (int)response.StatusCode == 308;
 }

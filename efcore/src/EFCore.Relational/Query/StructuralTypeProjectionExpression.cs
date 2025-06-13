@@ -33,16 +33,16 @@ public class StructuralTypeProjectionExpression : Expression
         IReadOnlyDictionary<IProperty, ColumnExpression> propertyExpressionMap,
         IReadOnlyDictionary<ITableBase, TableReferenceExpression> tableMap,
         bool nullable = false,
-        SqlExpression? discriminatorExpression = null)
+        SqlExpression? discriminatorExpression = null
+    )
         : this(
             type,
             propertyExpressionMap,
             new Dictionary<INavigation, StructuralTypeShaperExpression>(),
             tableMap,
             nullable,
-            discriminatorExpression)
-    {
-    }
+            discriminatorExpression
+        ) { }
 
     private StructuralTypeProjectionExpression(
         ITypeBase type,
@@ -50,7 +50,8 @@ public class StructuralTypeProjectionExpression : Expression
         Dictionary<INavigation, StructuralTypeShaperExpression> ownedNavigationMap,
         IReadOnlyDictionary<ITableBase, TableReferenceExpression> tableMap,
         bool nullable,
-        SqlExpression? discriminatorExpression = null)
+        SqlExpression? discriminatorExpression = null
+    )
     {
         StructuralType = type;
         _propertyExpressionMap = propertyExpressionMap;
@@ -95,12 +96,10 @@ public class StructuralTypeProjectionExpression : Expression
     public virtual SqlExpression? DiscriminatorExpression { get; }
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
-    public override Type Type
-        => StructuralType.ClrType;
+    public override Type Type => StructuralType.ClrType;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -120,7 +119,10 @@ public class StructuralTypeProjectionExpression : Expression
         foreach (var (_, tableExpression) in TableMap)
         {
             var newTableExpression = (TableReferenceExpression)visitor.Visit(tableExpression);
-            Check.DebugAssert(newTableExpression == tableExpression, $"New {nameof(TableReferenceExpression)} returned during visitation!");
+            Check.DebugAssert(
+                newTableExpression == tableExpression,
+                $"New {nameof(TableReferenceExpression)} returned during visitation!"
+            );
         }
 
         var discriminatorExpression = (SqlExpression?)visitor.Visit(DiscriminatorExpression);
@@ -129,14 +131,21 @@ public class StructuralTypeProjectionExpression : Expression
         var ownedNavigationMap = new Dictionary<INavigation, StructuralTypeShaperExpression>();
         foreach (var (navigation, entityShaperExpression) in _ownedNavigationMap)
         {
-            var newExpression = (StructuralTypeShaperExpression)visitor.Visit(entityShaperExpression);
+            var newExpression = (StructuralTypeShaperExpression)
+                visitor.Visit(entityShaperExpression);
             changed |= newExpression != entityShaperExpression;
             ownedNavigationMap[navigation] = newExpression;
         }
 
         return changed
             ? new StructuralTypeProjectionExpression(
-                StructuralType, propertyExpressionMap, ownedNavigationMap, TableMap, IsNullable, discriminatorExpression)
+                StructuralType,
+                propertyExpressionMap,
+                ownedNavigationMap,
+                TableMap,
+                IsNullable,
+                discriminatorExpression
+            )
             : this;
     }
 
@@ -180,7 +189,8 @@ public class StructuralTypeProjectionExpression : Expression
             ownedNavigationMap,
             TableMap,
             nullable: true,
-            discriminatorExpression);
+            discriminatorExpression
+        );
     }
 
     /// <summary>
@@ -192,21 +202,28 @@ public class StructuralTypeProjectionExpression : Expression
     {
         if (StructuralType is not IEntityType entityType)
         {
-            throw new UnreachableException($"{nameof(UpdateEntityType)} called on non-entity type '{StructuralType.DisplayName()}'");
+            throw new UnreachableException(
+                $"{nameof(UpdateEntityType)} called on non-entity type '{StructuralType.DisplayName()}'"
+            );
         }
 
         if (!derivedType.GetAllBaseTypes().Contains(entityType))
         {
             throw new InvalidOperationException(
                 RelationalStrings.InvalidDerivedTypeInEntityProjection(
-                    derivedType.DisplayName(), entityType.DisplayName()));
+                    derivedType.DisplayName(),
+                    entityType.DisplayName()
+                )
+            );
         }
 
         var propertyExpressionMap = new Dictionary<IProperty, ColumnExpression>();
         foreach (var (property, columnExpression) in _propertyExpressionMap)
         {
-            if (derivedType.IsAssignableFrom(property.DeclaringType)
-                || property.DeclaringType.IsAssignableFrom(derivedType))
+            if (
+                derivedType.IsAssignableFrom(property.DeclaringType)
+                || property.DeclaringType.IsAssignableFrom(derivedType)
+            )
             {
                 propertyExpressionMap[property] = columnExpression;
             }
@@ -215,8 +232,10 @@ public class StructuralTypeProjectionExpression : Expression
         var ownedNavigationMap = new Dictionary<INavigation, StructuralTypeShaperExpression>();
         foreach (var (navigation, entityShaperExpression) in _ownedNavigationMap)
         {
-            if (derivedType.IsAssignableFrom(navigation.DeclaringEntityType)
-                || navigation.DeclaringEntityType.IsAssignableFrom(derivedType))
+            if (
+                derivedType.IsAssignableFrom(navigation.DeclaringEntityType)
+                || navigation.DeclaringEntityType.IsAssignableFrom(derivedType)
+            )
             {
                 ownedNavigationMap[navigation] = entityShaperExpression;
             }
@@ -245,25 +264,42 @@ public class StructuralTypeProjectionExpression : Expression
 
             case null:
                 throw new UnreachableException(
-                    $"Cannot be in {nameof(UpdateEntityType)} for entity type '{entityType.DisplayName()}' which has no mapping strategy");
+                    $"Cannot be in {nameof(UpdateEntityType)} for entity type '{entityType.DisplayName()}' which has no mapping strategy"
+                );
             default:
-                throw new UnreachableException("Unknown mapping strategy: " + entityType.GetMappingStrategy());
+                throw new UnreachableException(
+                    "Unknown mapping strategy: " + entityType.GetMappingStrategy()
+                );
         }
 
         var discriminatorExpression = DiscriminatorExpression;
         if (discriminatorExpression is CaseExpression caseExpression)
         {
-            var entityTypesToSelect =
-                derivedType.GetConcreteDerivedTypesInclusive().Select(e => (string)e.GetDiscriminatorValue()!).ToList();
-            var whenClauses = caseExpression.WhenClauses
-                .Where(wc => entityTypesToSelect.Contains((string)((SqlConstantExpression)wc.Result).Value!))
+            var entityTypesToSelect = derivedType
+                .GetConcreteDerivedTypesInclusive()
+                .Select(e => (string)e.GetDiscriminatorValue()!)
+                .ToList();
+            var whenClauses = caseExpression
+                .WhenClauses.Where(wc =>
+                    entityTypesToSelect.Contains((string)((SqlConstantExpression)wc.Result).Value!)
+                )
                 .ToList();
 
-            discriminatorExpression = caseExpression.Update(operand: null, whenClauses, elseResult: null);
+            discriminatorExpression = caseExpression.Update(
+                operand: null,
+                whenClauses,
+                elseResult: null
+            );
         }
 
         return new StructuralTypeProjectionExpression(
-            derivedType, propertyExpressionMap, ownedNavigationMap, newTableMap ?? TableMap, IsNullable, discriminatorExpression);
+            derivedType,
+            propertyExpressionMap,
+            ownedNavigationMap,
+            newTableMap ?? TableMap,
+            IsNullable,
+            discriminatorExpression
+        );
     }
 
     /// <summary>
@@ -273,11 +309,18 @@ public class StructuralTypeProjectionExpression : Expression
     /// <returns>A column which is a SQL representation of the property.</returns>
     public virtual ColumnExpression BindProperty(IProperty property)
     {
-        if (!StructuralType.IsAssignableFrom(property.DeclaringType)
-            && !property.DeclaringType.IsAssignableFrom(StructuralType))
+        if (
+            !StructuralType.IsAssignableFrom(property.DeclaringType)
+            && !property.DeclaringType.IsAssignableFrom(StructuralType)
+        )
         {
             throw new InvalidOperationException(
-                RelationalStrings.UnableToBindMemberToEntityProjection("property", property.Name, StructuralType.DisplayName()));
+                RelationalStrings.UnableToBindMemberToEntityProjection(
+                    "property",
+                    property.Name,
+                    StructuralType.DisplayName()
+                )
+            );
         }
 
         return _propertyExpressionMap[property];
@@ -288,11 +331,17 @@ public class StructuralTypeProjectionExpression : Expression
     /// </summary>
     /// <param name="complexProperty">A complex property to bind.</param>
     /// <returns>A shaper expression for the target complex type.</returns>
-    public virtual StructuralTypeShaperExpression BindComplexProperty(IComplexProperty complexProperty)
+    public virtual StructuralTypeShaperExpression BindComplexProperty(
+        IComplexProperty complexProperty
+    )
     {
-        if (_complexPropertyCache is null || !_complexPropertyCache.TryGetValue(complexProperty, out var resultShaper))
+        if (
+            _complexPropertyCache is null
+            || !_complexPropertyCache.TryGetValue(complexProperty, out var resultShaper)
+        )
         {
-            _complexPropertyCache ??= new Dictionary<IComplexProperty, StructuralTypeShaperExpression>();
+            _complexPropertyCache ??=
+                new Dictionary<IComplexProperty, StructuralTypeShaperExpression>();
             resultShaper = _complexPropertyCache[complexProperty] =
                 SelectExpression.GenerateComplexPropertyShaperExpression(this, complexProperty);
         }
@@ -305,18 +354,28 @@ public class StructuralTypeProjectionExpression : Expression
     /// </summary>
     /// <param name="navigation">A navigation to add binding for.</param>
     /// <param name="shaper">An entity shaper expression for the target type.</param>
-    public virtual void AddNavigationBinding(INavigation navigation, StructuralTypeShaperExpression shaper)
+    public virtual void AddNavigationBinding(
+        INavigation navigation,
+        StructuralTypeShaperExpression shaper
+    )
     {
         if (StructuralType is not IEntityType entityType)
         {
             throw new UnreachableException("Navigations are only supported on entity types");
         }
 
-        if (!entityType.IsAssignableFrom(navigation.DeclaringEntityType)
-            && !navigation.DeclaringEntityType.IsAssignableFrom(entityType))
+        if (
+            !entityType.IsAssignableFrom(navigation.DeclaringEntityType)
+            && !navigation.DeclaringEntityType.IsAssignableFrom(entityType)
+        )
         {
             throw new InvalidOperationException(
-                RelationalStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, entityType.DisplayName()));
+                RelationalStrings.UnableToBindMemberToEntityProjection(
+                    "navigation",
+                    navigation.Name,
+                    entityType.DisplayName()
+                )
+            );
         }
 
         _ownedNavigationMap[navigation] = shaper;
@@ -335,19 +394,24 @@ public class StructuralTypeProjectionExpression : Expression
             throw new UnreachableException("Navigations are only supported on entity types");
         }
 
-        if (!entityType.IsAssignableFrom(navigation.DeclaringEntityType)
-            && !navigation.DeclaringEntityType.IsAssignableFrom(entityType))
+        if (
+            !entityType.IsAssignableFrom(navigation.DeclaringEntityType)
+            && !navigation.DeclaringEntityType.IsAssignableFrom(entityType)
+        )
         {
             throw new InvalidOperationException(
-                RelationalStrings.UnableToBindMemberToEntityProjection("navigation", navigation.Name, entityType.DisplayName()));
+                RelationalStrings.UnableToBindMemberToEntityProjection(
+                    "navigation",
+                    navigation.Name,
+                    entityType.DisplayName()
+                )
+            );
         }
 
-        return _ownedNavigationMap.TryGetValue(navigation, out var expression)
-            ? expression
-            : null;
+        return _ownedNavigationMap.TryGetValue(navigation, out var expression) ? expression : null;
     }
 
     /// <inheritdoc />
-    public override string ToString()
-        => $"EntityProjectionExpression: {StructuralType.ShortName()}";
+    public override string ToString() =>
+        $"EntityProjectionExpression: {StructuralType.ShortName()}";
 }

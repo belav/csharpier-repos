@@ -31,7 +31,10 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Throws<COMException>(() => Activator.CreateInstance(type));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabledWithOSAutomationSupport))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabledWithOSAutomationSupport)
+        )]
         public void GetTypeFromCLSID_CLSIDExists_ReturnsExpected()
         {
             Type type = Marshal.GetTypeFromCLSID(TestCLSID);
@@ -49,12 +52,22 @@ namespace System.Runtime.InteropServices.Tests
             Assert.NotNull(Activator.CreateInstance(type));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabledWithOSAutomationSupport))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabledWithOSAutomationSupport)
+        )]
         public void GetTypeFromCLSID_CLSIDExists_Server_ReturnsExpected()
         {
-            Type type = Type.GetTypeFromCLSID(TestCLSID, server: TestServerName, throwOnError: true);
+            Type type = Type.GetTypeFromCLSID(
+                TestCLSID,
+                server: TestServerName,
+                throwOnError: true
+            );
             Assert.NotNull(type);
-            Assert.Same(type, Type.GetTypeFromProgID(TestProgID, server: TestServerName, throwOnError: true));
+            Assert.Same(
+                type,
+                Type.GetTypeFromProgID(TestProgID, server: TestServerName, throwOnError: true)
+            );
 
             Assert.Throws<COMException>(() => Activator.CreateInstance(type));
         }
@@ -65,7 +78,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Null(Marshal.GetTypeFromCLSID(Guid.Empty));
             Assert.Null(Type.GetTypeFromCLSID(Guid.Empty, throwOnError: false));
-            Assert.Throws<PlatformNotSupportedException>(() => Type.GetTypeFromCLSID(Guid.Empty, throwOnError: true));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Type.GetTypeFromCLSID(Guid.Empty, throwOnError: true)
+            );
         }
 
         [Fact]
@@ -73,13 +88,18 @@ namespace System.Runtime.InteropServices.Tests
         public void GetTypeFromProgID_Unix()
         {
             Assert.Null(Type.GetTypeFromProgID(TestProgID, throwOnError: false));
-            Assert.Throws<PlatformNotSupportedException>(() => Type.GetTypeFromProgID(TestProgID, throwOnError: true));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Type.GetTypeFromProgID(TestProgID, throwOnError: true)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetTypeFromProgID_ReturnsExpected()
         {
-            AssertExtensions.Throws<ArgumentNullException>("progID", () => Type.GetTypeFromProgID(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "progID",
+                () => Type.GetTypeFromProgID(null)
+            );
         }
     }
 }

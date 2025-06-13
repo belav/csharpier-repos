@@ -7,13 +7,16 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-	/// <summary>Base class used for all tests that need to spawn a remote process.</summary>
-	public abstract partial class RemoteExecutorTestBase : FileCleanupTestBase
-	{
-		// protected static readonly string HostRunnerName = "mono";
-		protected static readonly string HostRunner = Process.GetCurrentProcess().MainModule.FileName;
+    /// <summary>Base class used for all tests that need to spawn a remote process.</summary>
+    public abstract partial class RemoteExecutorTestBase : FileCleanupTestBase
+    {
+        // protected static readonly string HostRunnerName = "mono";
+        protected static readonly string HostRunner = Process
+            .GetCurrentProcess()
+            .MainModule.FileName;
 
-		// Should be ../lib/$(PROFILE)/tests/RemoteExecutorConsoleApp.exe
-		static readonly string ExtraParameter = "--debug " + Environment.GetEnvironmentVariable ("REMOTE_EXECUTOR");
-	}
+        // Should be ../lib/$(PROFILE)/tests/RemoteExecutorConsoleApp.exe
+        static readonly string ExtraParameter =
+            "--debug " + Environment.GetEnvironmentVariable("REMOTE_EXECUTOR");
+    }
 }

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection;
-
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 
 namespace Microsoft.AspNetCore.Mvc;
@@ -25,14 +24,10 @@ public class TestApplicationPart : ApplicationPart, IApplicationPartTypeProvider
     }
 
     public TestApplicationPart(IEnumerable<Type> types)
-        : this(types.Select(t => t.GetTypeInfo()))
-    {
-    }
+        : this(types.Select(t => t.GetTypeInfo())) { }
 
     public TestApplicationPart(params Type[] types)
-        : this(types.Select(t => t.GetTypeInfo()))
-    {
-    }
+        : this(types.Select(t => t.GetTypeInfo())) { }
 
     public override string Name => "Test part";
 

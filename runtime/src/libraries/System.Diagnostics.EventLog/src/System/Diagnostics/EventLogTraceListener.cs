@@ -11,9 +11,7 @@ namespace System.Diagnostics
     {
         private bool _nameSet;
 
-        public EventLogTraceListener()
-        {
-        }
+        public EventLogTraceListener() { }
 
         public EventLogTraceListener(EventLog eventLog)
             : base(eventLog != null ? eventLog.Source : string.Empty)
@@ -23,17 +21,10 @@ namespace System.Diagnostics
 
         public EventLogTraceListener(string source)
         {
-            EventLog = new EventLog
-            {
-                Source = source
-            };
+            EventLog = new EventLog { Source = source };
         }
 
-        public EventLog EventLog
-        {
-            get;
-            set;
-        }
+        public EventLog EventLog { get; set; }
 
         public override string Name
         {
@@ -47,7 +38,6 @@ namespace System.Diagnostics
 
                 return base.Name;
             }
-
             set
             {
                 _nameSet = true;
@@ -78,9 +68,19 @@ namespace System.Diagnostics
         public override void WriteLine(string message) => Write(message);
 
         [ComVisible(false)]
-        public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType severity, int id, string format, params object[] args)
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            string format,
+            params object[] args
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, severity, id, format, args, null, null))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, severity, id, format, args, null, null)
+            )
                 return;
 
             EventInstance data = CreateEventInstance(severity, id);
@@ -101,33 +101,62 @@ namespace System.Diagnostics
             }
             else
             {
-                EventLog.WriteEvent(data, string.Format(CultureInfo.InvariantCulture, format, args));
+                EventLog.WriteEvent(
+                    data,
+                    string.Format(CultureInfo.InvariantCulture, format, args)
+                );
             }
-
         }
 
         [ComVisible(false)]
-        public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType severity, int id, string message)
+        public override void TraceEvent(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            string message
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, severity, id, message, null, null, null))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, severity, id, message, null, null, null)
+            )
                 return;
 
             EventLog.WriteEvent(CreateEventInstance(severity, id), message);
         }
 
         [ComVisible(false)]
-        public override void TraceData(TraceEventCache eventCache, string source, TraceEventType severity, int id, object data)
+        public override void TraceData(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            object data
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, severity, id, null, null, data, null))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, severity, id, null, null, data, null)
+            )
                 return;
 
             EventLog.WriteEvent(CreateEventInstance(severity, id), new object[] { data });
         }
 
         [ComVisible(false)]
-        public override void TraceData(TraceEventCache eventCache, string source, TraceEventType severity, int id, params object[] data)
+        public override void TraceData(
+            TraceEventCache eventCache,
+            string source,
+            TraceEventType severity,
+            int id,
+            params object[] data
+        )
         {
-            if (Filter != null && !Filter.ShouldTrace(eventCache, source, severity, id, null, null, null, data))
+            if (
+                Filter != null
+                && !Filter.ShouldTrace(eventCache, source, severity, id, null, null, null, data)
+            )
                 return;
 
             EventInstance inst = CreateEventInstance(severity, id);
@@ -172,6 +201,5 @@ namespace System.Diagnostics
 
             return data;
         }
-
     }
 }

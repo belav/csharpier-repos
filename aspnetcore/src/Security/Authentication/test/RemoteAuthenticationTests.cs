@@ -11,43 +11,61 @@ using Microsoft.Extensions.Hosting;
 
 namespace Microsoft.AspNetCore.Authentication;
 
-public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthenticationTests<TOptions> where TOptions : RemoteAuthenticationOptions
+public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthenticationTests<TOptions>
+    where TOptions : RemoteAuthenticationOptions
 {
     protected override string DisplayName => DefaultScheme;
 
-    private Task<IHost> CreateHost(Action<TOptions> configureOptions, Func<HttpContext, Task> testpath = null, bool isDefault = true)
-        => CreateHostWithServices(s =>
-        {
-            var builder = s.AddAuthentication();
-            s.AddSingleton<IConfiguration>(new ConfigurationManager());
-            if (isDefault)
+    private Task<IHost> CreateHost(
+        Action<TOptions> configureOptions,
+        Func<HttpContext, Task> testpath = null,
+        bool isDefault = true
+    ) =>
+        CreateHostWithServices(
+            s =>
             {
-                s.Configure<AuthenticationOptions>(o => o.DefaultScheme = DefaultScheme);
-            }
-            RegisterAuth(builder, o =>
-            {
-                o.TimeProvider = TimeProvider;
-                configureOptions(o);
-            });
-        }, testpath);
+                var builder = s.AddAuthentication();
+                s.AddSingleton<IConfiguration>(new ConfigurationManager());
+                if (isDefault)
+                {
+                    s.Configure<AuthenticationOptions>(o => o.DefaultScheme = DefaultScheme);
+                }
+                RegisterAuth(
+                    builder,
+                    o =>
+                    {
+                        o.TimeProvider = TimeProvider;
+                        configureOptions(o);
+                    }
+                );
+            },
+            testpath
+        );
 
-    protected virtual async Task<IHost> CreateHostWithServices(Action<IServiceCollection> configureServices, Func<HttpContext, Task> testpath = null)
+    protected virtual async Task<IHost> CreateHostWithServices(
+        Action<IServiceCollection> configureServices,
+        Func<HttpContext, Task> testpath = null
+    )
     {
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
-                webHostBuilder.UseTestServer()
+                webHostBuilder
+                    .UseTestServer()
                     .Configure(app =>
                     {
-                        app.Use(async (context, next) =>
-                        {
-                            if (testpath != null)
+                        app.Use(
+                            async (context, next) =>
                             {
-                                await testpath(context);
+                                if (testpath != null)
+                                {
+                                    await testpath(context);
+                                }
+                                await next(context);
                             }
-                            await next(context);
-                        });
+                        );
                     })
-                    .ConfigureServices(configureServices))
+                    .ConfigureServices(configureServices)
+            )
             .Build();
         await host.StartAsync();
         return host;
@@ -64,22 +82,27 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
                 ConfigureDefaults(o);
                 o.SignInScheme = DefaultScheme;
             },
-            context => context.ChallengeAsync(DefaultScheme));
+            context => context.ChallengeAsync(DefaultScheme)
+        );
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAsync<InvalidOperationException>(() => server.SendAsync("https://example.com/challenge"));
+        var error = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.SendAsync("https://example.com/challenge")
+        );
         Assert.Contains("cannot be set to itself", error.Message);
     }
 
     [Fact]
     public async Task VerifySignInSchemeCannotBeSetToSelfUsingDefaultScheme()
     {
-
         using var host = await CreateHost(
             o => o.SignInScheme = null,
             context => context.ChallengeAsync(DefaultScheme),
-            isDefault: true);
+            isDefault: true
+        );
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAsync<InvalidOperationException>(() => server.SendAsync("https://example.com/challenge"));
+        var error = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.SendAsync("https://example.com/challenge")
+        );
         Assert.Contains("cannot be set to itself", error.Message);
     }
 
@@ -89,12 +112,17 @@ public abstract class RemoteAuthenticationTests<TOptions> : SharedAuthentication
         using var host = await CreateHostWithServices(
             services =>
             {
-                var builder = services.AddAuthentication(o => o.DefaultSignInScheme = DefaultScheme);
+                var builder = services.AddAuthentication(o =>
+                    o.DefaultSignInScheme = DefaultScheme
+                );
                 RegisterAuth(builder, o => o.SignInScheme = null);
             },
-            context => context.ChallengeAsync(DefaultScheme));
+            context => context.ChallengeAsync(DefaultScheme)
+        );
         using var server = host.GetTestServer();
-        var error = await Assert.ThrowsAsync<InvalidOperationException>(() => server.SendAsync("https://example.com/challenge"));
+        var error = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            server.SendAsync("https://example.com/challenge")
+        );
         Assert.Contains("cannot be set to itself", error.Message);
     }
 }

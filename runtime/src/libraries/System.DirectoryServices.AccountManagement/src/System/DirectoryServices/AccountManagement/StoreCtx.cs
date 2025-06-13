@@ -11,8 +11,9 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal enum PrincipalAccessMask
     {
-        ChangePassword
+        ChangePassword,
     }
+
     internal abstract class StoreCtx : IDisposable
     {
         //
@@ -27,11 +28,7 @@ namespace System.DirectoryServices.AccountManagement
         private PrincipalContext _owningContext;
         internal PrincipalContext OwningContext
         {
-            get
-            {
-                return _owningContext;
-            }
-
+            get { return _owningContext; }
             set
             {
                 Debug.Assert(value != null);
@@ -86,6 +83,7 @@ namespace System.DirectoryServices.AccountManagement
 
         // Loads the store values from p.UnderlyingObject into p, performing schema mapping as needed.
         internal abstract void Load(Principal p);
+
         // Loads only the psecified property into the principal object.  The object should have already been persisted or searched for this to happen.
         internal abstract void Load(Principal p, string principalPropertyName);
 
@@ -94,7 +92,11 @@ namespace System.DirectoryServices.AccountManagement
         // principalType can be used to scope the search to principals of a specified type, e.g., users or groups.
         // Specify typeof(Principal) to search all principal types.
         internal abstract Principal FindPrincipalByIdentRef(
-                                    Type principalType, string urnScheme, string urnValue, DateTime referenceDate);
+            Type principalType,
+            string urnScheme,
+            string urnValue,
+            DateTime referenceDate
+        );
 
         // Returns a type indicating the type of object that would be returned as the wormhole for the specified
         // Principal.  For some StoreCtxs, this method may always return a constant (e.g., typeof(DirectoryEntry)
@@ -113,7 +115,11 @@ namespace System.DirectoryServices.AccountManagement
 
         // methods for manipulating passwords
         internal abstract void SetPassword(AuthenticablePrincipal p, string newPassword);
-        internal abstract void ChangePassword(AuthenticablePrincipal p, string oldPassword, string newPassword);
+        internal abstract void ChangePassword(
+            AuthenticablePrincipal p,
+            string oldPassword,
+            string newPassword
+        );
         internal abstract void ExpirePassword(AuthenticablePrincipal p);
         internal abstract void UnexpirePassword(AuthenticablePrincipal p);
 
@@ -121,28 +127,49 @@ namespace System.DirectoryServices.AccountManagement
 
         // the various FindBy* methods
         internal abstract ResultSet FindByLockoutTime(
-            DateTime dt, MatchType matchType, Type principalType);
+            DateTime dt,
+            MatchType matchType,
+            Type principalType
+        );
         internal abstract ResultSet FindByLogonTime(
-            DateTime dt, MatchType matchType, Type principalType);
+            DateTime dt,
+            MatchType matchType,
+            Type principalType
+        );
         internal abstract ResultSet FindByPasswordSetTime(
-            DateTime dt, MatchType matchType, Type principalType);
+            DateTime dt,
+            MatchType matchType,
+            Type principalType
+        );
         internal abstract ResultSet FindByBadPasswordAttempt(
-            DateTime dt, MatchType matchType, Type principalType);
+            DateTime dt,
+            MatchType matchType,
+            Type principalType
+        );
         internal abstract ResultSet FindByExpirationTime(
-            DateTime dt, MatchType matchType, Type principalType);
+            DateTime dt,
+            MatchType matchType,
+            Type principalType
+        );
 
         // Get groups of which p is a direct member
         internal abstract ResultSet GetGroupsMemberOf(Principal p);
 
         // Get groups from this ctx which contain a principal corresponding to foreignPrincipal
         // (which is a principal from foreignContext)
-        internal abstract ResultSet GetGroupsMemberOf(Principal foreignPrincipal, StoreCtx foreignContext);
+        internal abstract ResultSet GetGroupsMemberOf(
+            Principal foreignPrincipal,
+            StoreCtx foreignContext
+        );
 
         // Get groups of which p is a member, using AuthZ S4U APIs for recursive membership
         internal abstract ResultSet GetGroupsMemberOfAZ(Principal p);
 
         // Get members of group g
-        internal abstract BookmarkableResultSet GetGroupMembership(GroupPrincipal g, bool recursive);
+        internal abstract BookmarkableResultSet GetGroupMembership(
+            GroupPrincipal g,
+            bool recursive
+        );
 
         // Is p a member of g in the store?
         internal abstract bool SupportsNativeMembershipTest { get; }
@@ -150,11 +177,18 @@ namespace System.DirectoryServices.AccountManagement
 
         // Can a Clear() operation be performed on the specified group?  If not, also returns
         // a string containing a human-readable explanation of why not, suitable for use in an exception.
-        internal abstract bool CanGroupBeCleared(GroupPrincipal g, out string explanationForFailure);
+        internal abstract bool CanGroupBeCleared(
+            GroupPrincipal g,
+            out string explanationForFailure
+        );
 
         // Can the given member be removed from the specified group?  If not, also returns
         // a string containing a human-readable explanation of why not, suitable for use in an exception.
-        internal abstract bool CanGroupMemberBeRemoved(GroupPrincipal g, Principal member, out string explanationForFailure);
+        internal abstract bool CanGroupMemberBeRemoved(
+            GroupPrincipal g,
+            Principal member,
+            out string explanationForFailure
+        );
 
         //
         // Query operations
@@ -261,7 +295,7 @@ namespace System.DirectoryServices.AccountManagement
             PropertyNames.PrincipalStructuralObjectClass,
             PropertyNames.PrincipalName,
             PropertyNames.PrincipalDistinguishedName,
-            PropertyNames.PrincipalExtensionCache
+            PropertyNames.PrincipalExtensionCache,
         };
 
         internal static string[] authenticablePrincipalProperties = new string[]
@@ -274,7 +308,7 @@ namespace System.DirectoryServices.AccountManagement
             PropertyNames.AcctInfoLastLogon,
             PropertyNames.AcctInfoAcctLockoutTime,
             PropertyNames.AcctInfoBadLogonCount,
-            PropertyNames.PwdInfoLastPasswordSet
+            PropertyNames.PwdInfoLastPasswordSet,
         };
 
         // includes AccountInfo and PasswordInfo
@@ -286,7 +320,6 @@ namespace System.DirectoryServices.AccountManagement
             PropertyNames.UserEmailAddress,
             PropertyNames.UserVoiceTelephoneNumber,
             PropertyNames.UserEmployeeID,
-
             PropertyNames.AcctInfoPermittedWorkstations,
             PropertyNames.AcctInfoPermittedLogonTimes,
             PropertyNames.AcctInfoSmartcardRequired,
@@ -294,22 +327,21 @@ namespace System.DirectoryServices.AccountManagement
             PropertyNames.AcctInfoHomeDirectory,
             PropertyNames.AcctInfoHomeDrive,
             PropertyNames.AcctInfoScriptPath,
-
             PropertyNames.PwdInfoPasswordNotRequired,
             PropertyNames.PwdInfoPasswordNeverExpires,
             PropertyNames.PwdInfoCannotChangePassword,
-            PropertyNames.PwdInfoAllowReversiblePasswordEncryption
+            PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
         };
 
         internal static string[] groupProperties = new string[]
         {
             PropertyNames.GroupIsSecurityGroup,
-            PropertyNames.GroupGroupScope
+            PropertyNames.GroupGroupScope,
         };
 
         internal static string[] computerProperties = new string[]
         {
-            PropertyNames.ComputerServicePrincipalNames
+            PropertyNames.ComputerServicePrincipalNames,
         };
 
         protected QbeFilterDescription BuildQbeFilterDescription(Principal p)
@@ -328,17 +360,23 @@ namespace System.DirectoryServices.AccountManagement
             if (p is AuthenticablePrincipal)
                 BuildFilterSet(p, authenticablePrincipalProperties, qbeFilterDescription);
 
-            if (p is UserPrincipal)  // includes AccountInfo and PasswordInfo
+            if (p is UserPrincipal) // includes AccountInfo and PasswordInfo
             {
                 // AcctInfoExpirationDate and AcctInfoExpiredAccount represent filters on the same property
                 // check that only one is specified
-                if (p.GetChangeStatusForProperty(PropertyNames.AcctInfoExpirationDate) &&
-                        p.GetChangeStatusForProperty(PropertyNames.AcctInfoExpiredAccount))
+                if (
+                    p.GetChangeStatusForProperty(PropertyNames.AcctInfoExpirationDate)
+                    && p.GetChangeStatusForProperty(PropertyNames.AcctInfoExpiredAccount)
+                )
                 {
                     throw new InvalidOperationException(
-                                       SR.Format(
-                                           SR.StoreCtxMultipleFiltersForPropertyUnsupported,
-                                           PropertyNamesExternal.GetExternalForm(ExpirationDateFilter.PropertyNameStatic)));
+                        SR.Format(
+                            SR.StoreCtxMultipleFiltersForPropertyUnsupported,
+                            PropertyNamesExternal.GetExternalForm(
+                                ExpirationDateFilter.PropertyNameStatic
+                            )
+                        )
+                    );
                 }
 
                 BuildFilterSet(p, userProperties, qbeFilterDescription);
@@ -355,7 +393,11 @@ namespace System.DirectoryServices.AccountManagement
 
         // Applies to supplied propertySet to the supplied Principal, and adds any resulting filters
         // to qbeFilterDescription.
-        private void BuildFilterSet(Principal p, string[] propertySet, QbeFilterDescription qbeFilterDescription)
+        private void BuildFilterSet(
+            Principal p,
+            string[] propertySet,
+            QbeFilterDescription qbeFilterDescription
+        )
         {
             foreach (string propertyName in propertySet)
             {
@@ -365,13 +407,14 @@ namespace System.DirectoryServices.AccountManagement
                     object value = p.GetValueForProperty(propertyName);
 
                     GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "StoreCtx",
-                            "BuildFilterSet: type={0}, property name={1}, property value={2} of type {3}",
-                            p.GetType().ToString(),
-                            propertyName,
-                            value.ToString(),
-                            value.GetType().ToString());
+                        GlobalDebug.Info,
+                        "StoreCtx",
+                        "BuildFilterSet: type={0}, property name={1}, property value={2} of type {3}",
+                        p.GetType().ToString(),
+                        propertyName,
+                        value.ToString(),
+                        value.GetType().ToString()
+                    );
 
                     // Build the right filter based on type of the property value
                     if (value is PrincipalValueCollection<string> trackingList)
@@ -435,7 +478,9 @@ namespace System.DirectoryServices.AccountManagement
                         else
                         {
                             // Internal error.  Didn't match either the known multivalued or scalar cases.
-                            Debug.Fail($"StoreCtx.BuildFilterSet: fell off end looking for {propertyName} of type {value.GetType()}");
+                            Debug.Fail(
+                                $"StoreCtx.BuildFilterSet: fell off end looking for {propertyName} of type {value.GetType()}"
+                            );
                         }
 
                         qbeFilterDescription.FiltersToApply.Add(filter);

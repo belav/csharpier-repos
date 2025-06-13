@@ -21,7 +21,11 @@ namespace System.Net.Http.Formatting
         /// <param name="queryStringParameterValue">The value of the query string parameter specified by <paramref name="queryStringParameterName"/>.</param>
         /// <param name="mediaType">The media type to use if the query parameter specified by <paramref name="queryStringParameterName"/> is present
         /// and assigned the value specified by <paramref name="queryStringParameterValue"/>.</param>
-        public QueryStringMapping(string queryStringParameterName, string queryStringParameterValue, string mediaType)
+        public QueryStringMapping(
+            string queryStringParameterName,
+            string queryStringParameterValue,
+            string mediaType
+        )
             : base(mediaType)
         {
             Initialize(queryStringParameterName, queryStringParameterValue);
@@ -34,7 +38,11 @@ namespace System.Net.Http.Formatting
         /// <param name="queryStringParameterValue">The value of the query string parameter specified by <paramref name="queryStringParameterName"/>.</param>
         /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to use if the query parameter specified by <paramref name="queryStringParameterName"/> is present
         /// and assigned the value specified by <paramref name="queryStringParameterValue"/>.</param>
-        public QueryStringMapping(string queryStringParameterName, string queryStringParameterValue, MediaTypeHeaderValue mediaType)
+        public QueryStringMapping(
+            string queryStringParameterName,
+            string queryStringParameterValue,
+            MediaTypeHeaderValue mediaType
+        )
             : base(mediaType)
         {
             Initialize(queryStringParameterName, queryStringParameterValue);
@@ -65,14 +73,19 @@ namespace System.Net.Http.Formatting
             }
 
             NameValueCollection queryString = GetQueryString(request.RequestUri);
-            return DoesQueryStringMatch(queryString) ? FormattingUtilities.Match : FormattingUtilities.NoMatch;
+            return DoesQueryStringMatch(queryString)
+                ? FormattingUtilities.Match
+                : FormattingUtilities.NoMatch;
         }
 
         private static NameValueCollection GetQueryString(Uri uri)
         {
             if (uri == null)
             {
-                throw Error.InvalidOperation(Properties.Resources.NonNullUriRequiredForMediaTypeMapping, _queryStringMappingType.Name);
+                throw Error.InvalidOperation(
+                    Properties.Resources.NonNullUriRequiredForMediaTypeMapping,
+                    _queryStringMappingType.Name
+                );
             }
 
             return new FormDataCollection(uri).ReadAsNameValueCollection();
@@ -100,10 +113,22 @@ namespace System.Net.Http.Formatting
             {
                 foreach (string queryParameter in queryString.AllKeys)
                 {
-                    if (String.Equals(queryParameter, QueryStringParameterName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        String.Equals(
+                            queryParameter,
+                            QueryStringParameterName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         string queryValue = queryString[queryParameter];
-                        if (String.Equals(queryValue, QueryStringParameterValue, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            String.Equals(
+                                queryValue,
+                                QueryStringParameterValue,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             return true;
                         }

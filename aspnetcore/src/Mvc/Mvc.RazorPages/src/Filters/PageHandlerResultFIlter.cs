@@ -20,9 +20,12 @@ internal sealed class PageHandlerResultFilter : IAsyncResultFilter, IOrderedFilt
         var handler = context.Controller;
         if (handler == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(context.Controller),
-                nameof(ResultExecutingContext)));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(context.Controller),
+                    nameof(ResultExecutingContext)
+                )
+            );
         }
 
         if (handler is IAsyncResultFilter asyncResultFilter)
@@ -42,7 +45,8 @@ internal sealed class PageHandlerResultFilter : IAsyncResultFilter, IOrderedFilt
     private static async Task ExecuteSyncFilter(
         ResultExecutingContext context,
         ResultExecutionDelegate next,
-        IResultFilter resultFilter)
+        IResultFilter resultFilter
+    )
     {
         resultFilter.OnResultExecuting(context);
         if (!context.Cancel)

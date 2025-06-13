@@ -19,10 +19,12 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
     internal abstract partial class AbstractMoveToNamespaceCodeAction(
         IMoveToNamespaceService moveToNamespaceService,
         MoveToNamespaceAnalysisResult analysisResult,
-        CodeCleanupOptionsProvider cleanupOptions) : CodeActionWithOptions
+        CodeCleanupOptionsProvider cleanupOptions
+    ) : CodeActionWithOptions
     {
         private readonly IMoveToNamespaceService _moveToNamespaceService = moveToNamespaceService;
-        private readonly MoveToNamespaceAnalysisResult _moveToNamespaceAnalysisResult = analysisResult;
+        private readonly MoveToNamespaceAnalysisResult _moveToNamespaceAnalysisResult =
+            analysisResult;
         private readonly CodeCleanupOptionsProvider _cleanupOptions = cleanupOptions;
 
         /// <summary>
@@ -37,22 +39,33 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             return _moveToNamespaceService.GetChangeNamespaceOptions(
                 _moveToNamespaceAnalysisResult.Document,
                 _moveToNamespaceAnalysisResult.OriginalNamespace,
-                _moveToNamespaceAnalysisResult.Namespaces);
+                _moveToNamespaceAnalysisResult.Namespaces
+            );
         }
 
-        protected sealed override async Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
-            object options, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+        protected sealed override async Task<
+            IEnumerable<CodeActionOperation>
+        > ComputeOperationsAsync(
+            object options,
+            IProgress<CodeAnalysisProgress> progressTracker,
+            CancellationToken cancellationToken
+        )
         {
             // We won't get an empty target namespace from VS, but still should handle it w/o crashing.
-            if (options is MoveToNamespaceOptionsResult moveToNamespaceOptions &&
-                !moveToNamespaceOptions.IsCancelled &&
-                !string.IsNullOrEmpty(moveToNamespaceOptions.Namespace))
+            if (
+                options is MoveToNamespaceOptionsResult moveToNamespaceOptions
+                && !moveToNamespaceOptions.IsCancelled
+                && !string.IsNullOrEmpty(moveToNamespaceOptions.Namespace)
+            )
             {
-                var moveToNamespaceResult = await _moveToNamespaceService.MoveToNamespaceAsync(
-                    _moveToNamespaceAnalysisResult,
-                    moveToNamespaceOptions.Namespace,
-                    _cleanupOptions,
-                    cancellationToken).ConfigureAwait(false);
+                var moveToNamespaceResult = await _moveToNamespaceService
+                    .MoveToNamespaceAsync(
+                        _moveToNamespaceAnalysisResult,
+                        moveToNamespaceOptions.Namespace,
+                        _cleanupOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (moveToNamespaceResult.Succeeded)
                 {
@@ -63,39 +76,63 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             return SpecializedCollections.EmptyEnumerable<CodeActionOperation>();
         }
 
-        private static ImmutableArray<CodeActionOperation> CreateRenameOperations(MoveToNamespaceResult moveToNamespaceResult)
+        private static ImmutableArray<CodeActionOperation> CreateRenameOperations(
+            MoveToNamespaceResult moveToNamespaceResult
+        )
         {
             Debug.Assert(moveToNamespaceResult.Succeeded);
 
-            using var _ = PooledObjects.ArrayBuilder<CodeActionOperation>.GetInstance(out var operations);
+            using var _ = PooledObjects.ArrayBuilder<CodeActionOperation>.GetInstance(
+                out var operations
+            );
             operations.Add(new ApplyChangesOperation(moveToNamespaceResult.UpdatedSolution));
 
-            var symbolRenameCodeActionOperationFactory = moveToNamespaceResult.UpdatedSolution.Services.GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
+            var symbolRenameCodeActionOperationFactory =
+                moveToNamespaceResult.UpdatedSolution.Services.GetService<ISymbolRenamedCodeActionOperationFactoryWorkspaceService>();
 
             // It's possible we're not in a host context providing this service, in which case just provide a code
             // action that won't notify of the symbol rename. Without the symbol rename operation, code generators (like
             // WPF) may not know to regenerate code correctly.
             if (symbolRenameCodeActionOperationFactory != null)
             {
-                foreach (var (newName, symbol) in moveToNamespaceResult.NewNameOriginalSymbolMapping)
+                foreach (
+                    var (newName, symbol) in moveToNamespaceResult.NewNameOriginalSymbolMapping
+                )
                 {
-                    operations.Add(symbolRenameCodeActionOperationFactory.CreateSymbolRenamedOperation(
-                        symbol,
-                        newName,
-                        moveToNamespaceResult.OriginalSolution,
-                        moveToNamespaceResult.UpdatedSolution));
+                    operations.Add(
+                        symbolRenameCodeActionOperationFactory.CreateSymbolRenamedOperation(
+                            symbol,
+                            newName,
+                            moveToNamespaceResult.OriginalSolution,
+                            moveToNamespaceResult.UpdatedSolution
+                        )
+                    );
                 }
             }
 
             return operations.ToImmutable();
         }
 
-        public static AbstractMoveToNamespaceCodeAction Generate(IMoveToNamespaceService changeNamespaceService, MoveToNamespaceAnalysisResult analysisResult, CodeCleanupOptionsProvider cleanupOptions)
-            => analysisResult.Container switch
+        public static AbstractMoveToNamespaceCodeAction Generate(
+            IMoveToNamespaceService changeNamespaceService,
+            MoveToNamespaceAnalysisResult analysisResult,
+            CodeCleanupOptionsProvider cleanupOptions
+        ) =>
+            analysisResult.Container switch
             {
-                MoveToNamespaceAnalysisResult.ContainerType.NamedType => new MoveTypeToNamespaceCodeAction(changeNamespaceService, analysisResult, cleanupOptions),
-                MoveToNamespaceAnalysisResult.ContainerType.Namespace => new MoveItemsToNamespaceCodeAction(changeNamespaceService, analysisResult, cleanupOptions),
-                _ => throw ExceptionUtilities.UnexpectedValue(analysisResult.Container)
+                MoveToNamespaceAnalysisResult.ContainerType.NamedType =>
+                    new MoveTypeToNamespaceCodeAction(
+                        changeNamespaceService,
+                        analysisResult,
+                        cleanupOptions
+                    ),
+                MoveToNamespaceAnalysisResult.ContainerType.Namespace =>
+                    new MoveItemsToNamespaceCodeAction(
+                        changeNamespaceService,
+                        analysisResult,
+                        cleanupOptions
+                    ),
+                _ => throw ExceptionUtilities.UnexpectedValue(analysisResult.Container),
             };
     }
 }

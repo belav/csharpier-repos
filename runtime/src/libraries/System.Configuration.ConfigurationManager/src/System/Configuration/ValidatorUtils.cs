@@ -10,23 +10,34 @@ namespace System.Configuration
     {
         public static void HelperParamValidation(object value, Type allowedType)
         {
-            if (value == null) return;
+            if (value == null)
+                return;
 
             if (value.GetType() != allowedType)
                 throw new ArgumentException(SR.Validator_value_type_invalid, string.Empty);
         }
 
-        public static void ValidateScalar<T>(T value, T min, T max, T resolution, bool exclusiveRange)
+        public static void ValidateScalar<T>(
+            T value,
+            T min,
+            T max,
+            T resolution,
+            bool exclusiveRange
+        )
             where T : IComparable<T>
         {
             ValidateRangeImpl(value, min, max, exclusiveRange);
 
             // Validate the resolution
-            ValidateResolution(resolution.ToString(), Convert.ToInt64(value, CultureInfo.InvariantCulture),
-                Convert.ToInt64(resolution, CultureInfo.InvariantCulture));
+            ValidateResolution(
+                resolution.ToString(),
+                Convert.ToInt64(value, CultureInfo.InvariantCulture),
+                Convert.ToInt64(resolution, CultureInfo.InvariantCulture)
+            );
         }
 
-        private static void ValidateRangeImpl<T>(T value, T min, T max, bool exclusiveRange) where T : IComparable<T>
+        private static void ValidateRangeImpl<T>(T value, T min, T max, bool exclusiveRange)
+            where T : IComparable<T>
         {
             IComparable<T> itfValue = value;
 
@@ -38,7 +49,8 @@ namespace System.Configuration
                 valueIsInRange = false;
             }
 
-            if (valueIsInRange ^ exclusiveRange) return;
+            if (valueIsInRange ^ exclusiveRange)
+                return;
 
             // Throw range validation error
             string error;
@@ -58,30 +70,43 @@ namespace System.Configuration
                     : SR.Validation_scalar_range_violation_not_in_range;
             }
 
-            throw new ArgumentException(SR.Format(CultureInfo.InvariantCulture,
-                error,
-                min.ToString(),
-                max.ToString()));
+            throw new ArgumentException(
+                SR.Format(CultureInfo.InvariantCulture, error, min.ToString(), max.ToString())
+            );
         }
 
-        private static void ValidateResolution(string resolutionAsString, long value, long resolution)
+        private static void ValidateResolution(
+            string resolutionAsString,
+            long value,
+            long resolution
+        )
         {
             Debug.Assert(resolution > 0, "resolution > 0");
 
             if (value % resolution != 0)
-                throw new ArgumentException(SR.Format(SR.Validator_scalar_resolution_violation, resolutionAsString));
+                throw new ArgumentException(
+                    SR.Format(SR.Validator_scalar_resolution_violation, resolutionAsString)
+                );
         }
 
-        public static void ValidateScalar(TimeSpan value, TimeSpan min, TimeSpan max, long resolutionInSeconds,
-            bool exclusiveRange)
+        public static void ValidateScalar(
+            TimeSpan value,
+            TimeSpan min,
+            TimeSpan max,
+            long resolutionInSeconds,
+            bool exclusiveRange
+        )
         {
             ValidateRangeImpl(value, min, max, exclusiveRange);
 
             // Validate the resolution
             if (resolutionInSeconds > 0)
             {
-                ValidateResolution(TimeSpan.FromSeconds(resolutionInSeconds).ToString(), value.Ticks,
-                    resolutionInSeconds * TimeSpan.TicksPerSecond);
+                ValidateResolution(
+                    TimeSpan.FromSeconds(resolutionInSeconds).ToString(),
+                    value.Ticks,
+                    resolutionInSeconds * TimeSpan.TicksPerSecond
+                );
             }
         }
     }

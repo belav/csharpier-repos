@@ -13,12 +13,7 @@ public class ILEmitTrieFactoryTest
         var is64Bit = IntPtr.Size == 8;
         var expected = is64Bit;
 
-        var entries = new[]
-        {
-                ("foo", 0),
-                ("badr", 0),
-                ("", 0),
-            };
+        var entries = new[] { ("foo", 0), ("badr", 0), ("", 0) };
 
         // Act
         var actual = ILEmitTrieFactory.ShouldVectorize(entries);
@@ -31,12 +26,7 @@ public class ILEmitTrieFactoryTest
     public void ShouldVectorize_ReturnsFalseForSmallStrings()
     {
         // Arrange
-        var entries = new[]
-        {
-                ("foo", 0),
-                ("sma", 0),
-                ("", 0),
-            };
+        var entries = new[] { ("foo", 0), ("sma", 0), ("", 0) };
 
         // Act
         var actual = ILEmitTrieFactory.ShouldVectorize(entries);

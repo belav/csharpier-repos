@@ -47,21 +47,37 @@ public class NestedDtos : IntegrationTest<NestedDtos.DatabaseInitializer>
     {
         protected override void Seed(TestContext context)
         {
-            context.Arts.AddRange(new[] {
-                new Art { AName = "art1", Sem = new Sem { Name = "sem1" } },
-                new Art { AName = "art2", Sem = new Sem { Name = "sem2" } },
-                new Art { AName = "art3", Sem = new Sem { Name = "sem3" } },
-            });
+            context.Arts.AddRange(
+                new[]
+                {
+                    new Art
+                    {
+                        AName = "art1",
+                        Sem = new Sem { Name = "sem1" },
+                    },
+                    new Art
+                    {
+                        AName = "art2",
+                        Sem = new Sem { Name = "sem2" },
+                    },
+                    new Art
+                    {
+                        AName = "art3",
+                        Sem = new Sem { Name = "sem3" },
+                    },
+                }
+            );
 
             base.Seed(context);
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Sem, SemDto>().MaxDepth(1).ConstructUsing(s => new SemDto());
-        cfg.CreateProjection<Art, ArtDto>().MaxDepth(1).ConstructUsing(s => new ArtDto());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Sem, SemDto>().MaxDepth(1).ConstructUsing(s => new SemDto());
+            cfg.CreateProjection<Art, ArtDto>().MaxDepth(1).ConstructUsing(s => new ArtDto());
+        });
 
     [Fact]
     public void Should_project_nested_dto()

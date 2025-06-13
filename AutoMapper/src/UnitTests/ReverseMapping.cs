@@ -8,15 +8,23 @@ public class ReverseMapWithStaticField : AutoMapperSpecBase
     {
         public Guid Id { get; set; }
     }
+
     class Destination
     {
         public Guid Id { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
-        c.CreateMap<Destination, Source>().ForMember(src => src.Id, opt => opt.MapFrom(_ => Guid.Empty)).ReverseMap());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+            c.CreateMap<Destination, Source>()
+                .ForMember(src => src.Id, opt => opt.MapFrom(_ => Guid.Empty))
+                .ReverseMap()
+        );
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }
+
 public class InvalidReverseMap : NonValidatingSpecBase
 {
     public class One
@@ -31,32 +39,30 @@ public class InvalidReverseMap : NonValidatingSpecBase
         public Three Three { get; set; }
     }
 
-    public class Three
-    {
-    }
+    public class Three { }
 
-    public class Three2
-    {
-    }
+    public class Three2 { }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-    {
-        cfg.CreateMap<One, Two>()
-            .ForMember(d => d.Name, o => o.MapFrom(s => "name"))
-            .ForMember(d => d.Three, o => o.MapFrom(s => s.Three2))
-            .ReverseMap();
-        cfg.CreateMap<Three, Three2>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<One, Two>()
+                .ForMember(d => d.Name, o => o.MapFrom(s => "name"))
+                .ForMember(d => d.Three, o => o.MapFrom(s => s.Three2))
+                .ReverseMap();
+            cfg.CreateMap<Three, Three2>();
+        });
 
     [Fact]
     public void Should_report_the_error()
     {
-        new Action(AssertConfigurationIsValid)
-            .ShouldThrowException((AutoMapperConfigurationException ex) =>
+        new Action(AssertConfigurationIsValid).ShouldThrowException(
+            (AutoMapperConfigurationException ex) =>
             {
                 ex.MemberMap.DestinationName.ShouldBe("Three");
                 ex.Types.ShouldBe(new TypePair(typeof(One), typeof(Two)));
-            });
+            }
+        );
     }
 }
 
@@ -72,17 +78,23 @@ public class MapFromReverseResolveUsing : AutoMapperSpecBase
         public int Total { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.CreateMap<Destination, Source>()
-         .ForMember(dest => dest.Total, opt => opt.MapFrom(x => x.Total))
-         .ReverseMap()
-         .ForMember(dest => dest.Total, opt => opt.MapFrom<CustomResolver>());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+            c.CreateMap<Destination, Source>()
+                .ForMember(dest => dest.Total, opt => opt.MapFrom(x => x.Total))
+                .ReverseMap()
+                .ForMember(dest => dest.Total, opt => opt.MapFrom<CustomResolver>());
+        });
 
     public class CustomResolver : IValueResolver<Source, Destination, int>
     {
-        public int Resolve(Source source, Destination destination, int member, ResolutionContext context)
+        public int Resolve(
+            Source source,
+            Destination destination,
+            int member,
+            ResolutionContext context
+        )
         {
             return Int32.MaxValue;
         }
@@ -112,10 +124,11 @@ public class MethodsWithReverse : AutoMapperSpecBase
         public int OrderItemsCount { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(c=>
-    {
-        c.CreateMap<Order, OrderDto>().ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+            c.CreateMap<Order, OrderDto>().ReverseMap();
+        });
 
     [Fact]
     public void ShouldMapOk()
@@ -148,21 +161,24 @@ public class ReverseForPath : AutoMapperSpecBase
         public decimal Total { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<OrderDto, Order>()
-            .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
-            .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total))
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<OrderDto, Order>()
+                .ForPath(o => o.CustomerHolder.Customer.Name, o => o.MapFrom(s => s.CustomerName))
+                .ForPath(o => o.CustomerHolder.Customer.Total, o => o.MapFrom(s => s.Total))
+                .ReverseMap();
+        });
 
     [Fact]
     public void Should_flatten()
     {
-        var model = new Order {
-            CustomerHolder = new CustomerHolder {
-                    Customer = new Customer { Name = "George Costanza", Total = 74.85m }
-                }
+        var model = new Order
+        {
+            CustomerHolder = new CustomerHolder
+            {
+                Customer = new Customer { Name = "George Costanza", Total = 74.85m },
+            },
         };
         var dto = Mapper.Map<OrderDto>(model);
         dto.CustomerName.ShouldBe("George Costanza");
@@ -194,13 +210,14 @@ public class ReverseMapFrom : AutoMapperSpecBase
         public decimal Total { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Order, OrderDto>()
-            .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.CustomerHolder.Customer.Name))
-            .ForMember(d => d.Total, o => o.MapFrom(s => s.CustomerHolder.Customer.Total))
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Order, OrderDto>()
+                .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.CustomerHolder.Customer.Name))
+                .ForMember(d => d.Total, o => o.MapFrom(s => s.CustomerHolder.Customer.Total))
+                .ReverseMap();
+        });
 
     [Fact]
     public void Should_unflatten()
@@ -226,13 +243,13 @@ public class ReverseMapFromNamingConvention : AutoMapperSpecBase
         public string OrderName { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
-        cfg.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
-        cfg.CreateMap<OrderEntity, OrderDto>()
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
+            cfg.DestinationMemberNamingConvention = new PascalCaseNamingConvention();
+            cfg.CreateMap<OrderEntity, OrderDto>().ReverseMap();
+        });
 
     [Fact]
     public void Should_map_reverse()
@@ -256,12 +273,13 @@ public class ReverseMapFromSourceMemberName : AutoMapperSpecBase
         public int Value2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>()
-            .ForMember(d => d.Value2, o => o.MapFrom("Value"))
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.Value2, o => o.MapFrom("Value"))
+                .ReverseMap();
+        });
 
     [Fact]
     public void Should_reverse_map_ok()
@@ -296,18 +314,26 @@ public class ReverseDefaultFlatteningWithIgnoreMember : AutoMapperSpecBase
         public decimal CustomerholderCustomerTotal { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Order, OrderDto>()
-            .ReverseMap()
-            .ForMember(d=>d.Customerholder, o=>o.Ignore())
-            .ForPath(d=>d.Customerholder.Customer.Total, o=>o.MapFrom(s=>s.CustomerholderCustomerTotal));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Order, OrderDto>()
+                .ReverseMap()
+                .ForMember(d => d.Customerholder, o => o.Ignore())
+                .ForPath(
+                    d => d.Customerholder.Customer.Total,
+                    o => o.MapFrom(s => s.CustomerholderCustomerTotal)
+                );
+        });
 
     [Fact]
     public void Should_unflatten()
     {
-        var dto = new OrderDto { CustomerholderCustomerName = "George Costanza", CustomerholderCustomerTotal = 74.85m };
+        var dto = new OrderDto
+        {
+            CustomerholderCustomerName = "George Costanza",
+            CustomerholderCustomerTotal = 74.85m,
+        };
         var model = Mapper.Map<Order>(dto);
         model.Customerholder.Customer.Name.ShouldBeNull();
         model.Customerholder.Customer.Total.ShouldBe(74.85m);
@@ -338,16 +364,20 @@ public class ReverseDefaultFlattening : AutoMapperSpecBase
         public decimal CustomerholderCustomerTotal { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Order, OrderDto>()
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Order, OrderDto>().ReverseMap();
+        });
 
     [Fact]
     public void Should_unflatten()
     {
-        var dto = new OrderDto { CustomerholderCustomerName = "George Costanza", CustomerholderCustomerTotal = 74.85m };
+        var dto = new OrderDto
+        {
+            CustomerholderCustomerName = "George Costanza",
+            CustomerholderCustomerTotal = 74.85m,
+        };
         var model = Mapper.Map<Order>(dto);
         model.Customerholder.Customer.Name.ShouldBe("George Costanza");
         model.Customerholder.Customer.Total.ShouldBe(74.85m);
@@ -357,7 +387,8 @@ public class ReverseDefaultFlattening : AutoMapperSpecBase
 public class ReverseMapConventions : AutoMapperSpecBase
 {
     Rotator_Ad_Run _destination;
-    DateTime _startDate = DateTime.Now, _endDate = DateTime.Now.AddHours(2);
+    DateTime _startDate = DateTime.Now,
+        _endDate = DateTime.Now.AddHours(2);
 
     public class Rotator_Ad_Run
     {
@@ -378,26 +409,42 @@ public class ReverseMapConventions : AutoMapperSpecBase
         public Regex SplittingExpression { get; } = new Regex(@"\p{Lu}[a-z0-9]*(?=_?)");
 
         public string SeparatorCharacter => "_";
-        public string[] Split(string input) => SplittingExpression.Matches(input).Select(m => m.Value).ToArray();
+
+        public string[] Split(string input) =>
+            SplittingExpression.Matches(input).Select(m => m.Value).ToArray();
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProfile("MyMapperProfile", prf =>
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
         {
-            prf.SourceMemberNamingConvention = new UnderscoreNamingConvention();
-            prf.CreateMap<Rotator_Ad_Run, RotatorAdRunViewModel>();
+            cfg.CreateProfile(
+                "MyMapperProfile",
+                prf =>
+                {
+                    prf.SourceMemberNamingConvention = new UnderscoreNamingConvention();
+                    prf.CreateMap<Rotator_Ad_Run, RotatorAdRunViewModel>();
+                }
+            );
+            cfg.CreateProfile(
+                "MyMapperProfile2",
+                prf =>
+                {
+                    prf.DestinationMemberNamingConvention = new UnderscoreNamingConvention();
+                    prf.CreateMap<RotatorAdRunViewModel, Rotator_Ad_Run>();
+                }
+            );
         });
-        cfg.CreateProfile("MyMapperProfile2", prf =>
-        {
-            prf.DestinationMemberNamingConvention = new UnderscoreNamingConvention();
-            prf.CreateMap<RotatorAdRunViewModel, Rotator_Ad_Run>();
-        });
-    });
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<RotatorAdRunViewModel, Rotator_Ad_Run>(new RotatorAdRunViewModel { Enabled = true, EndDate = _endDate, StartDate = _startDate });
+        _destination = Mapper.Map<RotatorAdRunViewModel, Rotator_Ad_Run>(
+            new RotatorAdRunViewModel
+            {
+                Enabled = true,
+                EndDate = _endDate,
+                StartDate = _startDate,
+            }
+        );
     }
 
     [Fact]
@@ -417,23 +464,21 @@ public class When_reverse_mapping_classes_with_simple_properties : AutoMapperSpe
     {
         public int Value { get; set; }
     }
+
     public class Destination
     {
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>()
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().ReverseMap();
+        });
 
     protected override void Because_of()
     {
-        var dest = new Destination
-        {
-            Value = 10
-        };
+        var dest = new Destination { Value = 10 };
         _source = Mapper.Map<Destination, Source>(dest);
     }
 
@@ -450,16 +495,18 @@ public class When_validating_only_against_source_members_and_source_matches : Au
     {
         public int Value { get; set; }
     }
+
     public class Destination
     {
         public int Value { get; set; }
         public int Value2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>(MemberList.Source);
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>(MemberList.Source);
+        });
 
     [Fact]
     public void Should_only_map_source_members()
@@ -470,22 +517,25 @@ public class When_validating_only_against_source_members_and_source_matches : Au
     }
 }
 
-public class When_validating_only_against_source_members_and_source_does_not_match : NonValidatingSpecBase
+public class When_validating_only_against_source_members_and_source_does_not_match
+    : NonValidatingSpecBase
 {
     public class Source
     {
         public int Value { get; set; }
         public int Value2 { get; set; }
     }
+
     public class Destination
     {
         public int Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>(MemberList.Source);
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>(MemberList.Source);
+        });
 
     [Fact]
     public void Should_throw_a_configuration_validation_error()
@@ -494,47 +544,55 @@ public class When_validating_only_against_source_members_and_source_does_not_mat
     }
 }
 
-public class When_validating_only_against_source_members_and_unmatching_source_members_are_manually_mapped : AutoMapperSpecBase
+public class When_validating_only_against_source_members_and_unmatching_source_members_are_manually_mapped
+    : AutoMapperSpecBase
 {
     public class Source
     {
         public int Value { get; set; }
         public int Value2 { get; set; }
     }
+
     public class Destination
     {
         public int Value { get; set; }
         public int Value3 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>(MemberList.Source)
-            .ForMember(dest => dest.Value3, opt => opt.MapFrom(src => src.Value2));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>(MemberList.Source)
+                .ForMember(dest => dest.Value3, opt => opt.MapFrom(src => src.Value2));
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }
 
-public class When_validating_only_against_source_members_and_unmatching_source_members_are_manually_mapped_with_resolvers : AutoMapperSpecBase
+public class When_validating_only_against_source_members_and_unmatching_source_members_are_manually_mapped_with_resolvers
+    : AutoMapperSpecBase
 {
     public class Source
     {
         public int Value { get; set; }
         public int Value2 { get; set; }
     }
+
     public class Destination
     {
         public int Value { get; set; }
         public int Value3 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>(MemberList.Source)
-            .ForMember(dest => dest.Value3, opt => opt.MapFrom(src => src.Value2))
-            .ForSourceMember(src => src.Value2, opt => opt.DoNotValidate());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>(MemberList.Source)
+                .ForMember(dest => dest.Value3, opt => opt.MapFrom(src => src.Value2))
+                .ForSourceMember(src => src.Value2, opt => opt.DoNotValidate());
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }
@@ -552,12 +610,14 @@ public class When_reverse_mapping_and_ignoring_via_method : AutoMapperSpecBase
         public int Ignored { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Dest>()
-            .ForMember(d => d.Ignored, opt => opt.Ignore())
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Dest>()
+                .ForMember(d => d.Ignored, opt => opt.Ignore())
+                .ReverseMap();
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }
@@ -584,8 +644,9 @@ public class When_reverse_mapping_and_ignoring : NonValidatingSpecBase
         {
             cfg.CreateMap<Foo, Foo2>();
         });
-        var typeMap = config.GetAllTypeMaps()
-                  .First(x => x.SourceType == typeof(Foo) && x.DestinationType == typeof(Foo2));
+        var typeMap = config
+            .GetAllTypeMaps()
+            .First(x => x.SourceType == typeof(Foo) && x.DestinationType == typeof(Foo2));
         //Act
         var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
         //Assert
@@ -600,8 +661,9 @@ public class When_reverse_mapping_and_ignoring : NonValidatingSpecBase
         {
             cfg.CreateMap<Foo, Foo2>().ReverseMap();
         });
-        var typeMap = config.GetAllTypeMaps()
-                  .First(x => x.SourceType == typeof(Foo2) && x.DestinationType == typeof(Foo));
+        var typeMap = config
+            .GetAllTypeMaps()
+            .First(x => x.SourceType == typeof(Foo2) && x.DestinationType == typeof(Foo));
         //Act
         var unmappedPropertyNames = typeMap.GetUnmappedPropertyNames();
         //Assert
@@ -617,23 +679,21 @@ public class When_reverse_mapping_open_generics : AutoMapperSpecBase
     {
         public T Value { get; set; }
     }
+
     public class Destination<T>
     {
         public T Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap(typeof(Source<>), typeof(Destination<>)).ReverseMap();
+        });
 
     protected override void Because_of()
     {
-        var dest = new Destination<int>
-        {
-            Value = 10
-        };
+        var dest = new Destination<int> { Value = 10 };
         _source = Mapper.Map<Destination<int>, Source<int>>(dest);
     }
 
@@ -651,24 +711,30 @@ public class When_reverse_mapping_open_generics_with_MapFrom : AutoMapperSpecBas
         public T Value { get; set; }
         public string StringValue { get; set; }
     }
+
     public class Destination<T>
     {
         public T Value2 { get; set; }
         public string StringValue2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
-            .ForMember("Value2", o => o.MapFrom("Value"))
-            .ForMember("StringValue2", o => o.MapFrom("StringValue"))
-            .ReverseMap();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
+                .ForMember("Value2", o => o.MapFrom("Value"))
+                .ForMember("StringValue2", o => o.MapFrom("StringValue"))
+                .ReverseMap();
+        });
 
     [Fact]
     public void Should_reverse_map_ok()
     {
-        Destination<int> destination = new Destination<int> { Value2 = 1337, StringValue2 = "StringValue2" };
+        Destination<int> destination = new Destination<int>
+        {
+            Value2 = 1337,
+            StringValue2 = "StringValue2",
+        };
         Source<int> source = Mapper.Map<Destination<int>, Source<int>>(destination);
         source.Value.ShouldBe(1337);
         source.StringValue.ShouldBe("StringValue2");

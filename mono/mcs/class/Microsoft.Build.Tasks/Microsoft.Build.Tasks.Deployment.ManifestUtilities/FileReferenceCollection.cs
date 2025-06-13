@@ -25,73 +25,73 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class FileReferenceCollection : IEnumerable {
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class FileReferenceCollection : IEnumerable
+    {
+        List<FileReference> list;
 
-		List <FileReference> list;
+        FileReferenceCollection()
+        {
+            list = new List<FileReference>();
+        }
 
-		FileReferenceCollection ()
-		{
-			list = new List <FileReference> ();
-		}
-	
-		[MonoTODO]
-		public FileReference Add (FileReference file)
-		{
-			list.Add (file);
-			return file;
-		}
+        [MonoTODO]
+        public FileReference Add(FileReference file)
+        {
+            list.Add(file);
+            return file;
+        }
 
-		[MonoTODO]
-		public FileReference Add (string path)
-		{
-			FileReference fr = new FileReference (path);
-			list.Add (fr);
-			return fr;
-		}
-		
-		[MonoTODO]
-		public void Clear ()
-		{
-			list.Clear ();
-		}
-		
-		[MonoTODO]
-		public FileReference FindTargetPath (string targetPath)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-		
-		[MonoTODO]
-		public void Remove (FileReference file)
-		{
-			list.Remove (file);
-		}
-		
-		[MonoTODO]
-		public int Count {
-			get { return list.Count; }
-		}
-		
-		[MonoTODO]
-		public FileReference this [int index] {
-			get { return list [index]; }
-		}
-	}
+        [MonoTODO]
+        public FileReference Add(string path)
+        {
+            FileReference fr = new FileReference(path);
+            list.Add(fr);
+            return fr;
+        }
+
+        [MonoTODO]
+        public void Clear()
+        {
+            list.Clear();
+        }
+
+        [MonoTODO]
+        public FileReference FindTargetPath(string targetPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+
+        [MonoTODO]
+        public void Remove(FileReference file)
+        {
+            list.Remove(file);
+        }
+
+        [MonoTODO]
+        public int Count
+        {
+            get { return list.Count; }
+        }
+
+        [MonoTODO]
+        public FileReference this[int index]
+        {
+            get { return list[index]; }
+        }
+    }
 }
-

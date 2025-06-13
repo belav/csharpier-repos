@@ -30,9 +30,7 @@ public sealed class SqliteJsonDateTimeOffsetReaderWriter : JsonValueReaderWriter
     /// </summary>
     public static SqliteJsonDateTimeOffsetReaderWriter Instance { get; } = new();
 
-    private SqliteJsonDateTimeOffsetReaderWriter()
-    {
-    }
+    private SqliteJsonDateTimeOffsetReaderWriter() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,9 +38,13 @@ public sealed class SqliteJsonDateTimeOffsetReaderWriter : JsonValueReaderWriter
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override DateTimeOffset FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
+    public override DateTimeOffset FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    )
         // => manager.CurrentReader.GetDateTimeOffset();
-        => DateTimeOffset.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
+        =>
+        DateTimeOffset.Parse(manager.CurrentReader.GetString()!, CultureInfo.InvariantCulture);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,8 +54,11 @@ public sealed class SqliteJsonDateTimeOffsetReaderWriter : JsonValueReaderWriter
     /// </summary>
     public override void ToJsonTyped(Utf8JsonWriter writer, DateTimeOffset value)
         // We use UnsafeRelaxedJsonEscaping to prevent the DateTimeOffset plus (+) sign from getting escaped
-        => writer.WriteStringValue(
+        =>
+        writer.WriteStringValue(
             JsonEncodedText.Encode(
                 string.Format(CultureInfo.InvariantCulture, DateTimeOffsetFormatConst, value),
-                JavaScriptEncoder.UnsafeRelaxedJsonEscaping));
+                JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            )
+        );
 }

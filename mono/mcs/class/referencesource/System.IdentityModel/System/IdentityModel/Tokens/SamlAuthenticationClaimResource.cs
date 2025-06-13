@@ -16,6 +16,7 @@ namespace System.IdentityModel.Tokens
     {
         [DataMember]
         DateTime authenticationInstant;
+
         [DataMember]
         string authenticationMethod;
 
@@ -31,9 +32,13 @@ namespace System.IdentityModel.Tokens
         void OnDeserialized(StreamingContext ctx)
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authenticationMethod");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authenticationMethod"
+                );
             if (authorityBindings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorityBindings");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorityBindings"
+                );
         }
 
         public SamlAuthenticationClaimResource(
@@ -41,10 +46,12 @@ namespace System.IdentityModel.Tokens
             string authenticationMethod,
             string dnsAddress,
             string ipAddress
-            )
+        )
         {
             if (string.IsNullOrEmpty(authenticationMethod))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authenticationMethod");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authenticationMethod"
+                );
 
             this.authenticationInstant = authenticationInstant;
             this.authenticationMethod = authenticationMethod;
@@ -59,11 +66,13 @@ namespace System.IdentityModel.Tokens
             string dnsAddress,
             string ipAddress,
             IEnumerable<SamlAuthorityBinding> authorityBindings
-            )
+        )
             : this(authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
         {
             if (authorityBindings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("authorityBindings"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("authorityBindings")
+                );
 
             List<SamlAuthorityBinding> tempList = new List<SamlAuthorityBinding>();
             foreach (SamlAuthorityBinding authorityBinding in authorityBindings)
@@ -72,7 +81,6 @@ namespace System.IdentityModel.Tokens
                     tempList.Add(authorityBinding);
             }
             this.authorityBindings = tempList.AsReadOnly();
-
         }
 
         public SamlAuthenticationClaimResource(
@@ -81,38 +89,30 @@ namespace System.IdentityModel.Tokens
             string dnsAddress,
             string ipAddress,
             ReadOnlyCollection<SamlAuthorityBinding> authorityBindings
-            )
+        )
             : this(authenticationInstant, authenticationMethod, dnsAddress, ipAddress)
         {
             if (authorityBindings == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("authorityBindings"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("authorityBindings")
+                );
 
             this.authorityBindings = authorityBindings;
-
         }
 
         public DateTime AuthenticationInstant
         {
-            get
-            {
-                return this.authenticationInstant;
-            }
+            get { return this.authenticationInstant; }
         }
 
         public string AuthenticationMethod
         {
-            get
-            {
-                return this.authenticationMethod;
-            }
+            get { return this.authenticationMethod; }
         }
 
         public ReadOnlyCollection<SamlAuthorityBinding> AuthorityBindings
         {
-            get
-            {
-                return this.authorityBindings;
-            }
+            get { return this.authorityBindings; }
         }
 
         // this private member is for serialization only.
@@ -137,18 +137,12 @@ namespace System.IdentityModel.Tokens
 
         public string IPAddress
         {
-            get
-            {
-                return this.ipAddress;
-            }
+            get { return this.ipAddress; }
         }
 
         public string DnsAddress
         {
-            get
-            {
-                return this.dnsAddress;
-            }
+            get { return this.dnsAddress; }
         }
 
         public override bool Equals(object obj)
@@ -163,11 +157,13 @@ namespace System.IdentityModel.Tokens
             if (rhs == null)
                 return false;
 
-            if ((this.AuthenticationInstant != rhs.AuthenticationInstant) ||
-                (this.AuthenticationMethod != rhs.AuthenticationMethod) ||
-                (this.AuthorityBindings.Count != rhs.AuthorityBindings.Count) ||
-                (this.IPAddress != rhs.IPAddress) ||
-                (this.DnsAddress != rhs.DnsAddress))
+            if (
+                (this.AuthenticationInstant != rhs.AuthenticationInstant)
+                || (this.AuthenticationMethod != rhs.AuthenticationMethod)
+                || (this.AuthorityBindings.Count != rhs.AuthorityBindings.Count)
+                || (this.IPAddress != rhs.IPAddress)
+                || (this.DnsAddress != rhs.DnsAddress)
+            )
                 return false;
 
             int i = 0;
@@ -176,9 +172,14 @@ namespace System.IdentityModel.Tokens
                 bool matched = false;
                 for (int j = 0; j < rhs.AuthorityBindings.Count; ++j)
                 {
-                    if ((this.AuthorityBindings[i].AuthorityKind == rhs.AuthorityBindings[j].AuthorityKind) &&
-                        (this.AuthorityBindings[i].Binding == rhs.AuthorityBindings[j].Binding) &&
-                        (this.AuthorityBindings[i].Location == rhs.AuthorityBindings[j].Location))
+                    if (
+                        (
+                            this.AuthorityBindings[i].AuthorityKind
+                            == rhs.AuthorityBindings[j].AuthorityKind
+                        )
+                        && (this.AuthorityBindings[i].Binding == rhs.AuthorityBindings[j].Binding)
+                        && (this.AuthorityBindings[i].Location == rhs.AuthorityBindings[j].Location)
+                    )
                     {
                         matched = true;
                         break;
@@ -194,8 +195,9 @@ namespace System.IdentityModel.Tokens
 
         public override int GetHashCode()
         {
-            return (this.authenticationInstant.GetHashCode() ^ this.authenticationMethod.GetHashCode());
+            return (
+                this.authenticationInstant.GetHashCode() ^ this.authenticationMethod.GetHashCode()
+            );
         }
     }
-
 }

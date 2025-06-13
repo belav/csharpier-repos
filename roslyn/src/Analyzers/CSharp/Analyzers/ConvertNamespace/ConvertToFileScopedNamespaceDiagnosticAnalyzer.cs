@@ -13,21 +13,26 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class ConvertToFileScopedNamespaceDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class ConvertToFileScopedNamespaceDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConvertToFileScopedNamespaceDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId,
-                   EnforceOnBuildValues.UseFileScopedNamespace,
-                   CSharpCodeStyleOptions.NamespaceDeclarations,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Convert_to_file_scoped_namespace), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseFileScopedNamespaceDiagnosticId,
+                EnforceOnBuildValues.UseFileScopedNamespace,
+                CSharpCodeStyleOptions.NamespaceDeclarations,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Convert_to_file_scoped_namespace),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeNamespace, SyntaxKind.NamespaceDeclaration);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(AnalyzeNamespace, SyntaxKind.NamespaceDeclaration);
 
         private void AnalyzeNamespace(SyntaxNodeAnalysisContext context)
         {
@@ -42,27 +47,43 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 context.ReportDiagnostic(diagnostic);
         }
 
-        private Diagnostic? AnalyzeNamespace(SyntaxNodeAnalysisContext context, CompilationUnitSyntax root, BaseNamespaceDeclarationSyntax declaration)
+        private Diagnostic? AnalyzeNamespace(
+            SyntaxNodeAnalysisContext context,
+            CompilationUnitSyntax root,
+            BaseNamespaceDeclarationSyntax declaration
+        )
         {
             var option = context.GetCSharpAnalyzerOptions().NamespaceDeclarations;
-            if (ShouldSkipAnalysis(context, option.Notification)
-                || !ConvertNamespaceAnalysis.CanOfferUseFileScoped(option, root, declaration, forAnalyzer: true))
+            if (
+                ShouldSkipAnalysis(context, option.Notification)
+                || !ConvertNamespaceAnalysis.CanOfferUseFileScoped(
+                    option,
+                    root,
+                    declaration,
+                    forAnalyzer: true
+                )
+            )
             {
                 return null;
             }
 
             // if the diagnostic is hidden, show it anywhere from the `namespace` keyword through the name.
             // otherwise, if it's not hidden, just squiggle the name.
-            var diagnosticLocation = option.Notification.Severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) != ReportDiagnostic.Hidden
-                ? declaration.Name.GetLocation()
-                : declaration.SyntaxTree.GetLocation(TextSpan.FromBounds(declaration.SpanStart, declaration.Name.Span.End));
+            var diagnosticLocation =
+                option.Notification.Severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                != ReportDiagnostic.Hidden
+                    ? declaration.Name.GetLocation()
+                    : declaration.SyntaxTree.GetLocation(
+                        TextSpan.FromBounds(declaration.SpanStart, declaration.Name.Span.End)
+                    );
 
             return DiagnosticHelper.Create(
                 this.Descriptor,
                 diagnosticLocation,
                 option.Notification,
                 ImmutableArray.Create(declaration.GetLocation()),
-                ImmutableDictionary<string, string?>.Empty);
+                ImmutableDictionary<string, string?>.Empty
+            );
         }
     }
 }

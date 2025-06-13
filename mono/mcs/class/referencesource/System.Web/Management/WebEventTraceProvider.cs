@@ -4,19 +4,20 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Management {
+namespace System.Web.Management
+{
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Provider;
-    using System.Collections.Specialized;
-    using System.Web.Util;
     using System.Security.Permissions;
+    using System.Web.Util;
 
     ////////////
     // Events
     ////////////
 
-    public sealed class TraceWebEventProvider : WebEventProvider, IInternalWebEventProvider {
-
+    public sealed class TraceWebEventProvider : WebEventProvider, IInternalWebEventProvider
+    {
         internal TraceWebEventProvider() { }
 
         public override void Initialize(string name, NameValueCollection config)
@@ -29,20 +30,18 @@ namespace System.Web.Management {
 
         public override void ProcessEvent(WebBaseEvent eventRaised)
         {
-            if (eventRaised is WebBaseErrorEvent) {
+            if (eventRaised is WebBaseErrorEvent)
+            {
                 System.Diagnostics.Trace.TraceError(eventRaised.ToString());
             }
-            else {
+            else
+            {
                 System.Diagnostics.Trace.TraceInformation(eventRaised.ToString());
             }
         }
 
-        public override void Flush() {
-        }
+        public override void Flush() { }
 
-        public override void Shutdown() {
-        }
+        public override void Shutdown() { }
     }
-
 }
-

@@ -37,9 +37,7 @@ public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IE
     /// </summary>
     /// <param name="values">The submitted values.</param>
     public ValueProviderResult(StringValues values)
-        : this(values, _invariantCulture)
-    {
-    }
+        : this(values, _invariantCulture) { }
 
     /// <summary>
     /// Creates a new <see cref="ValueProviderResult"/>.

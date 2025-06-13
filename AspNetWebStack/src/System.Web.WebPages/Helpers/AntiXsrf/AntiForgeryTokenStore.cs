@@ -13,7 +13,10 @@ namespace System.Web.Helpers.AntiXsrf
         private readonly IAntiForgeryConfig _config;
         private readonly IAntiForgeryTokenSerializer _serializer;
 
-        internal AntiForgeryTokenStore(IAntiForgeryConfig config, IAntiForgeryTokenSerializer serializer)
+        internal AntiForgeryTokenStore(
+            IAntiForgeryConfig config,
+            IAntiForgeryTokenSerializer serializer
+        )
         {
             _config = config;
             _serializer = serializer;
@@ -48,7 +51,7 @@ namespace System.Web.Helpers.AntiXsrf
             string serializedToken = _serializer.Serialize(token);
             HttpCookie newCookie = new HttpCookie(_config.CookieName, serializedToken)
             {
-                HttpOnly = true
+                HttpOnly = true,
             };
 
             // Note: don't use "newCookie.Secure = _config.RequireSSL;" since the default

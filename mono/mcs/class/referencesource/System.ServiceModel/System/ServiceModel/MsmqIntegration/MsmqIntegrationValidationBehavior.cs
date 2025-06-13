@@ -3,12 +3,12 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.MsmqIntegration
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Channels;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Dispatcher;
 
     class MsmqIntegrationValidationBehavior : IEndpointBehavior, IServiceBehavior
     {
@@ -39,27 +39,37 @@ namespace System.ServiceModel.MsmqIntegration
             }
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        {
-        }
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
-        {
-        }
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("description");
@@ -89,7 +99,11 @@ namespace System.ServiceModel.MsmqIntegration
             return false;
         }
 
-        void ValidateHelper(ContractDescription contract, Binding binding, ServiceDescription description)
+        void ValidateHelper(
+            ContractDescription contract,
+            Binding binding,
+            ServiceDescription description
+        )
         {
             foreach (OperationDescription operation in contract.Operations)
             {
@@ -103,14 +117,24 @@ namespace System.ServiceModel.MsmqIntegration
                 if (message.Body.Parts.Count == 1) // Single MsmqMessage<> argument is also legal
                 {
                     Type type = message.Body.Parts[0].Type;
-                    if (type.IsGenericType && (type.GetGenericTypeDefinition() == typeof(MsmqMessage<>)))
+                    if (
+                        type.IsGenericType
+                        && (type.GetGenericTypeDefinition() == typeof(MsmqMessage<>))
+                    )
                         continue;
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                                                              SR.GetString(SR.MsmqInvalidServiceOperationForMsmqIntegrationBinding, binding.Name, operation.Name, contract.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.MsmqInvalidServiceOperationForMsmqIntegrationBinding,
+                            binding.Name,
+                            operation.Name,
+                            contract.Name
+                        )
+                    )
+                );
             }
         }
     }
 }
-

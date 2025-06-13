@@ -19,6 +19,6 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         ForNonInterfaceMembers = 2,
 
         // Remove any accessibility modifier that matches the default
-        OmitIfDefault = 3
+        OmitIfDefault = 3,
     }
 }

@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private readonly string _documentTitle;
         private readonly string _documentTooltip;
 
-        internal MetadataAsSourceFile(string filePath, Location identifierLocation, string documentTitle, string documentTooltip)
+        internal MetadataAsSourceFile(
+            string filePath,
+            Location identifierLocation,
+            string documentTitle,
+            string documentTooltip
+        )
         {
             _filePath = filePath;
             _identifierLocation = identifierLocation;

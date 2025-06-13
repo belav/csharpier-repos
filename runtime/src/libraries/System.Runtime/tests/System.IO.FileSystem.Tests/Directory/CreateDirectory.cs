@@ -10,7 +10,10 @@ namespace System.IO.Tests
 {
     public class Directory_CreateDirectory : FileSystemTest
     {
-        public static TheoryData ReservedDeviceNames = IOInputs.GetReservedDeviceNames().ToTheoryData();
+        public static TheoryData ReservedDeviceNames = IOInputs
+            .GetReservedDeviceNames()
+            .ToTheoryData();
+
         #region Utilities
 
         public virtual DirectoryInfo Create(string path)
@@ -28,14 +31,16 @@ namespace System.IO.Tests
         public void FileNameIsToString_NotFullPath()
         {
             // We're checking that we're maintaining the original path
-            RemoteExecutor.Invoke(() =>
-            {
-                Environment.CurrentDirectory = TestDirectory;
-                string subdir = Path.GetRandomFileName();
-                DirectoryInfo info = Create(subdir);
-                Assert.Equal(subdir, info.ToString());
-                Environment.CurrentDirectory = Path.GetTempPath();
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    Environment.CurrentDirectory = TestDirectory;
+                    string subdir = Path.GetRandomFileName();
+                    DirectoryInfo info = Create(subdir);
+                    Assert.Equal(subdir, info.ToString());
+                    Environment.CurrentDirectory = Path.GetTempPath();
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -146,30 +151,34 @@ namespace System.IO.Tests
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
 
-            string path = IOServices.AddTrailingSlashIfNeeded(Path.Combine(testDir.FullName, component));
+            string path = IOServices.AddTrailingSlashIfNeeded(
+                Path.Combine(testDir.FullName, component)
+            );
             DirectoryInfo result = Create(path);
 
             Assert.Equal(path, result.FullName);
             Assert.True(result.Exists);
         }
 
-        [ConditionalTheory(nameof(UsingNewNormalization)),
-            MemberData(nameof(ValidPathComponentNames))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // trailing slash
+        [
+            ConditionalTheory(nameof(UsingNewNormalization)),
+            MemberData(nameof(ValidPathComponentNames))
+        ]
+        [PlatformSpecific(TestPlatforms.Windows)] // trailing slash
         public void ValidExtendedPathWithTrailingSlash(string component)
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
 
-            string path = IOInputs.ExtendedPrefix + IOServices.AddTrailingSlashIfNeeded(Path.Combine(testDir.FullName, component));
+            string path =
+                IOInputs.ExtendedPrefix
+                + IOServices.AddTrailingSlashIfNeeded(Path.Combine(testDir.FullName, component));
             DirectoryInfo result = Create(path);
 
             Assert.Equal(path, result.FullName);
             Assert.True(result.Exists);
-
         }
 
-        [Theory,
-            MemberData(nameof(ValidPathComponentNames))]
+        [Theory, MemberData(nameof(ValidPathComponentNames))]
         public void ValidPathWithoutTrailingSlash(string component)
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
@@ -179,7 +188,6 @@ namespace System.IO.Tests
 
             Assert.Equal(path, result.FullName);
             Assert.True(Directory.Exists(result.FullName));
-
         }
 
         [Fact]
@@ -214,18 +222,25 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory,
-            MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
-        [SkipOnPlatform(TestPlatforms.Browser, "Browser does not have a limit on the maximum component length")]
+        [Theory, MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
+        [SkipOnPlatform(
+            TestPlatforms.Browser,
+            "Browser does not have a limit on the maximum component length"
+        )]
         public void DirectoryWithComponentLongerThanMaxComponentAsPath_ThrowsException(string path)
         {
-            AssertExtensions.ThrowsAny<IOException, DirectoryNotFoundException, PathTooLongException>(() => Create(path));
+            AssertExtensions.ThrowsAny<
+                IOException,
+                DirectoryNotFoundException,
+                PathTooLongException
+            >(() => Create(path));
         }
 
-        [Theory,
-            MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
+        [Theory, MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
         [PlatformSpecific(TestPlatforms.Browser)] // Browser specific test in case the check changes in the future
-        public void DirectoryWithComponentLongerThanMaxComponentAsPath_BrowserDoesNotThrowException(string path)
+        public void DirectoryWithComponentLongerThanMaxComponentAsPath_BrowserDoesNotThrowException(
+            string path
+        )
         {
             DirectoryInfo result = Create(path);
             Assert.True(Directory.Exists(path));
@@ -241,61 +256,86 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(nameof(AreAllLongPathsAvailable))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // long directory path succeeds
+        [PlatformSpecific(TestPlatforms.Windows)] // long directory path succeeds
         public void DirectoryLongerThanMaxPath_Succeeds()
         {
             var paths = IOInputs.GetPathsLongerThanMaxPath(GetTestFilePath());
-            Assert.All(paths, (path) =>
-            {
-                DirectoryInfo result = Create(path);
-                Assert.True(Directory.Exists(result.FullName));
-            });
+            Assert.All(
+                paths,
+                (path) =>
+                {
+                    DirectoryInfo result = Create(path);
+                    Assert.True(Directory.Exists(result.FullName));
+                }
+            );
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // long directory path throws PathTooLongException
+        [PlatformSpecific(TestPlatforms.Windows)] // long directory path throws PathTooLongException
         public void DirectoryLongerThanMaxLongPath_ThrowsPathTooLongException()
         {
             var paths = IOInputs.GetPathsLongerThanMaxLongPath(GetTestFilePath());
-            Assert.All(paths, (path) =>
-            {
-                Assert.Throws<PathTooLongException>(() => Create(path));
-            });
+            Assert.All(
+                paths,
+                (path) =>
+                {
+                    Assert.Throws<PathTooLongException>(() => Create(path));
+                }
+            );
         }
 
         [ConditionalFact(nameof(LongPathsAreNotBlocked), nameof(UsingNewNormalization))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void DirectoryLongerThanMaxLongPathWithExtendedSyntax_ThrowsException()
         {
-            var paths = IOInputs.GetPathsLongerThanMaxLongPath(GetTestFilePath(), useExtendedSyntax: true);
+            var paths = IOInputs.GetPathsLongerThanMaxLongPath(
+                GetTestFilePath(),
+                useExtendedSyntax: true
+            );
 
             // Ideally this should be PathTooLongException or DirectoryNotFoundException but on some machines
             // windows gives us ERROR_INVALID_NAME, producing IOException.
-            Assert.All(paths, path =>
-                AssertExtensions.ThrowsAny<PathTooLongException, DirectoryNotFoundException, IOException>(() => Create(path)));
+            Assert.All(
+                paths,
+                path =>
+                    AssertExtensions.ThrowsAny<
+                        PathTooLongException,
+                        DirectoryNotFoundException,
+                        IOException
+                    >(() => Create(path))
+            );
         }
 
         [ConditionalFact(nameof(LongPathsAreNotBlocked), nameof(UsingNewNormalization))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // long directory path with extended syntax succeeds
+        [PlatformSpecific(TestPlatforms.Windows)] // long directory path with extended syntax succeeds
         public void ExtendedDirectoryLongerThanLegacyMaxPath_Succeeds()
         {
-            var paths = IOInputs.GetPathsLongerThanMaxPath(GetTestFilePath(), useExtendedSyntax: true);
-            Assert.All(paths, (path) =>
-            {
-                Assert.True(Create(path).Exists);
-            });
+            var paths = IOInputs.GetPathsLongerThanMaxPath(
+                GetTestFilePath(),
+                useExtendedSyntax: true
+            );
+            Assert.All(
+                paths,
+                (path) =>
+                {
+                    Assert.True(Create(path).Exists);
+                }
+            );
         }
 
         [ConditionalFact(nameof(AreAllLongPathsAvailable))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // long directory path succeeds
+        [PlatformSpecific(TestPlatforms.Windows)] // long directory path succeeds
         public void DirectoryLongerThanMaxDirectoryAsPath_Succeeds()
         {
             var paths = IOInputs.GetPathsLongerThanMaxDirectory(GetTestFilePath());
-            Assert.All(paths, (path) =>
-            {
-                var result = Create(path);
-                Assert.True(Directory.Exists(result.FullName));
-            });
+            Assert.All(
+                paths,
+                (path) =>
+                {
+                    var result = Create(path);
+                    Assert.True(Directory.Exists(result.FullName));
+                }
+            );
         }
 
         [Fact]
@@ -310,7 +350,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // deeply nested directories allowed
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // deeply nested directories allowed
         public void UnixPathWithDeeplyNestedDirectories()
         {
             DirectoryInfo parent = Create(GetTestFilePath());
@@ -321,36 +361,30 @@ namespace System.IO.Tests
             }
         }
 
-        [Theory,
-            MemberData(nameof(SimpleWhiteSpace))]
+        [Theory, MemberData(nameof(SimpleWhiteSpace))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsSimpleWhiteSpaceAsPath_ThrowsArgumentException(string path)
         {
             Assert.Throws<ArgumentException>(() => Create(path));
         }
 
-        [Theory,
-            MemberData(nameof(ControlWhiteSpace))]
+        [Theory, MemberData(nameof(ControlWhiteSpace))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void WindowsWhiteSpaceAsPath_ThrowsIOException_Core(string path)
         {
             Assert.Throws<IOException>(() => Create(path));
         }
 
-
-        [Theory,
-            MemberData(nameof(WhiteSpace))]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // whitespace as path allowed
+        [Theory, MemberData(nameof(WhiteSpace))]
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // whitespace as path allowed
         public void UnixWhiteSpaceAsPath_Allowed(string path)
         {
             Create(Path.Combine(TestDirectory, path));
             Assert.True(Directory.Exists(Path.Combine(TestDirectory, path)));
-
         }
 
-        [Theory,
-            MemberData(nameof(NonControlWhiteSpace))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // trailing whitespace in path is removed on Windows
+        [Theory, MemberData(nameof(NonControlWhiteSpace))]
+        [PlatformSpecific(TestPlatforms.Windows)] // trailing whitespace in path is removed on Windows
         public void TrailingWhiteSpace_NotTrimmed(string component)
         {
             // In .NET Core we don't trim anything other than space (' ')
@@ -362,9 +396,8 @@ namespace System.IO.Tests
             Assert.Equal(testDir.FullName, IOServices.RemoveTrailingSlash(result.FullName));
         }
 
-        [Theory,
-            MemberData(nameof(SimpleWhiteSpace))] //*Just Spaces*
-        [PlatformSpecific(TestPlatforms.Windows)]  // trailing whitespace in path is removed on Windows
+        [Theory, MemberData(nameof(SimpleWhiteSpace))] //*Just Spaces*
+        [PlatformSpecific(TestPlatforms.Windows)] // trailing whitespace in path is removed on Windows
         public void TrailingSpace_NotTrimmed(string component)
         {
             DirectoryInfo testDir = Create(GetTestFilePath());
@@ -375,9 +408,8 @@ namespace System.IO.Tests
             Assert.Equal(testDir.FullName, IOServices.RemoveTrailingSlash(result.FullName));
         }
 
-        [ConditionalTheory(nameof(UsingNewNormalization)),
-            MemberData(nameof(SimpleWhiteSpace))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // extended syntax with whitespace
+        [ConditionalTheory(nameof(UsingNewNormalization)), MemberData(nameof(SimpleWhiteSpace))]
+        [PlatformSpecific(TestPlatforms.Windows)] // extended syntax with whitespace
         public void WindowsExtendedSyntaxWhiteSpace(string path)
         {
             string extendedPath = Path.Combine(IOInputs.ExtendedPrefix + TestDirectory, path);
@@ -385,9 +417,8 @@ namespace System.IO.Tests
             Assert.True(Directory.Exists(extendedPath), extendedPath);
         }
 
-        [Theory,
-            MemberData(nameof(WhiteSpace))]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // trailing whitespace in path treated as significant on Unix
+        [Theory, MemberData(nameof(WhiteSpace))]
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // trailing whitespace in path treated as significant on Unix
         public void UnixNonSignificantTrailingWhiteSpace(string component)
         {
             // Unix treats trailing/prename whitespace as significant and a part of the name.
@@ -398,17 +429,19 @@ namespace System.IO.Tests
 
             Assert.True(Directory.Exists(result.FullName));
             Assert.NotEqual(testDir.FullName, IOServices.RemoveTrailingSlash(result.FullName));
-
         }
 
-        [Theory,
-            MemberData(nameof(PathsWithColons))]
+        [Theory, MemberData(nameof(PathsWithColons))]
         [PlatformSpecific(TestPlatforms.Windows)] // alternate data streams
         public void PathWithColons_ThrowsIOException_Core(string path)
         {
             if (PlatformDetection.IsInAppContainer)
             {
-                AssertExtensions.ThrowsAny<DirectoryNotFoundException, IOException, UnauthorizedAccessException>(() => Create(Path.Combine(TestDirectory, path)));
+                AssertExtensions.ThrowsAny<
+                    DirectoryNotFoundException,
+                    IOException,
+                    UnauthorizedAccessException
+                >(() => Create(Path.Combine(TestDirectory, path)));
             }
             else
             {
@@ -428,11 +461,13 @@ namespace System.IO.Tests
         [MemberData(nameof(ReservedDeviceNames))]
         public void PathWithReservedDeviceNameAsExtendedPath(string path)
         {
-            Assert.True(Create(IOInputs.ExtendedPrefix + Path.Combine(TestDirectory, path)).Exists, path);
+            Assert.True(
+                Create(IOInputs.ExtendedPrefix + Path.Combine(TestDirectory, path)).Exists,
+                path
+            );
         }
 
-        [Theory,
-            MemberData(nameof(UncPathsWithoutShareName))]
+        [Theory, MemberData(nameof(UncPathsWithoutShareName))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void UncPathWithoutShareNameAsPath_ThrowsIOException_Core(string path)
         {
@@ -456,7 +491,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // drive letters
+        [PlatformSpecific(TestPlatforms.Windows)] // drive letters
         public void DriveLetter_Windows()
         {
             // On Windows, DirectoryInfo will replace "<DriveLetter>:" with "."
@@ -467,36 +502,38 @@ namespace System.IO.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // drive letters casing
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // drive letters casing
         public void DriveLetter_Unix()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                Directory.SetCurrentDirectory(Path.GetTempPath());
-                // On Unix, there's no special casing for drive letters.  These may or may not be valid names, depending
-                // on the file system underlying the current directory.  Unix file systems typically allow these, but,
-                // for example, these names are not allowed if running on a file system mounted from a Windows machine.
-                DirectoryInfo driveLetter;
-                try
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    driveLetter = Create("C:");
-                }
-                catch (IOException)
-                {
-                    return;
-                }
-                var current = Create(".");
-                Assert.Equal("C:", driveLetter.Name);
-                Assert.Equal(Path.Combine(current.FullName, "C:"), driveLetter.FullName);
-                try
-                {
-                    // If this test is inherited then it's possible this call will fail due to the "C:" directory
-                    // being deleted in that other test before this call. What we care about testing (proper path
-                    // handling) is unaffected by this race condition.
-                    Directory.Delete("C:");
-                }
-                catch (DirectoryNotFoundException) { }
-            }).Dispose();
+                    Directory.SetCurrentDirectory(Path.GetTempPath());
+                    // On Unix, there's no special casing for drive letters.  These may or may not be valid names, depending
+                    // on the file system underlying the current directory.  Unix file systems typically allow these, but,
+                    // for example, these names are not allowed if running on a file system mounted from a Windows machine.
+                    DirectoryInfo driveLetter;
+                    try
+                    {
+                        driveLetter = Create("C:");
+                    }
+                    catch (IOException)
+                    {
+                        return;
+                    }
+                    var current = Create(".");
+                    Assert.Equal("C:", driveLetter.Name);
+                    Assert.Equal(Path.Combine(current.FullName, "C:"), driveLetter.FullName);
+                    try
+                    {
+                        // If this test is inherited then it's possible this call will fail due to the "C:" directory
+                        // being deleted in that other test before this call. What we care about testing (proper path
+                        // handling) is unaffected by this race condition.
+                        Directory.Delete("C:");
+                    }
+                    catch (DirectoryNotFoundException) { }
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -523,11 +560,13 @@ namespace System.IO.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/14378")]
         [PlatformSpecific(TestPlatforms.Windows)] // testing drive labels
         public void NotReadyDriveAsPath_ThrowsDirectoryNotFoundException()
-        {   // Behavior is suspect, should really have thrown IOException similar to the SubDirectory case
+        { // Behavior is suspect, should really have thrown IOException similar to the SubDirectory case
             var drive = IOServices.GetNotReadyDrive();
             if (drive == null)
             {
-                Console.WriteLine("Skipping test. Unable to find a not-ready drive, such as CD-Rom with no disc inserted.");
+                Console.WriteLine(
+                    "Skipping test. Unable to find a not-ready drive, such as CD-Rom with no disc inserted."
+                );
                 return;
             }
 
@@ -545,7 +584,9 @@ namespace System.IO.Tests
             var drive = IOServices.GetNotReadyDrive();
             if (drive == null)
             {
-                Console.WriteLine("Skipping test. Unable to find a not-ready drive, such as CD-Rom with no disc inserted.");
+                Console.WriteLine(
+                    "Skipping test. Unable to find a not-ready drive, such as CD-Rom with no disc inserted."
+                );
                 return;
             }
 

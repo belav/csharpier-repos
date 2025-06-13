@@ -4,10 +4,11 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
-    using System.Configuration.Internal;
     using System.Configuration;
+    using System.Configuration.Internal;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
@@ -20,22 +21,26 @@ namespace System.Web.Configuration {
     using System.Xml;
 
     //
-    // Receives file change notifications from the FileChangesMonitor, 
+    // Receives file change notifications from the FileChangesMonitor,
     // and forwards them to a callback on a configuration host.
     //
-    sealed class WebConfigurationHostFileChange {
-        StreamChangeCallback    _callback;
+    sealed class WebConfigurationHostFileChange
+    {
+        StreamChangeCallback _callback;
 
-        internal WebConfigurationHostFileChange(StreamChangeCallback callback) {
+        internal WebConfigurationHostFileChange(StreamChangeCallback callback)
+        {
             _callback = callback;
         }
 
-        internal void OnFileChanged(object sender, FileChangeEvent e) {
+        internal void OnFileChanged(object sender, FileChangeEvent e)
+        {
             _callback(e.FileName);
         }
 
-        internal StreamChangeCallback Callback {
-            get {return _callback;}
+        internal StreamChangeCallback Callback
+        {
+            get { return _callback; }
         }
     }
 }

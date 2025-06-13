@@ -1,15 +1,17 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 namespace System.CodeDom
 {
     public class CodeNamespace : CodeObject
     {
         private string _name;
-        private readonly CodeNamespaceImportCollection _imports = new CodeNamespaceImportCollection();
-        private readonly CodeCommentStatementCollection _comments = new CodeCommentStatementCollection();
-        private readonly CodeTypeDeclarationCollection _classes = new CodeTypeDeclarationCollection();
+        private readonly CodeNamespaceImportCollection _imports =
+            new CodeNamespaceImportCollection();
+        private readonly CodeCommentStatementCollection _comments =
+            new CodeCommentStatementCollection();
+        private readonly CodeTypeDeclarationCollection _classes =
+            new CodeTypeDeclarationCollection();
 
         private int _populated;
         private const int ImportsCollection = 0x1;

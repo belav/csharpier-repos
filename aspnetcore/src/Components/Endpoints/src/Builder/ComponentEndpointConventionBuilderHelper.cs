@@ -15,9 +15,11 @@ public static class ComponentEndpointConventionBuilderHelper
     /// </summary>
     /// <param name="builder"></param>
     /// <param name="renderMode"></param>
-    public static void AddRenderMode(RazorComponentsEndpointConventionBuilder builder, IComponentRenderMode renderMode)
+    public static void AddRenderMode(
+        RazorComponentsEndpointConventionBuilder builder,
+        IComponentRenderMode renderMode
+    )
     {
         builder.AddRenderMode(renderMode);
     }
 }
-

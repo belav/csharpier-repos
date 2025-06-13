@@ -18,22 +18,35 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Calculates and caches results of changed documents analysis. 
+    /// Calculates and caches results of changed documents analysis.
     /// The work is triggered by an incremental analyzer on idle or explicitly when "continue" operation is executed.
     /// Contains analyses of the latest observed document versions.
     /// </summary>
-    internal sealed class EditAndContinueDocumentAnalysesCache(AsyncLazy<ActiveStatementsMap> baseActiveStatements, AsyncLazy<EditAndContinueCapabilities> capabilities)
+    internal sealed class EditAndContinueDocumentAnalysesCache(
+        AsyncLazy<ActiveStatementsMap> baseActiveStatements,
+        AsyncLazy<EditAndContinueCapabilities> capabilities
+    )
     {
         private readonly object _guard = new();
-        private readonly Dictionary<DocumentId, (AsyncLazy<DocumentAnalysisResults> results, Project baseProject, Document document, ImmutableArray<LinePositionSpan> activeStatementSpans)> _analyses = new();
-        private readonly AsyncLazy<ActiveStatementsMap> _baseActiveStatements = baseActiveStatements;
+        private readonly Dictionary<
+            DocumentId,
+            (
+                AsyncLazy<DocumentAnalysisResults> results,
+                Project baseProject,
+                Document document,
+                ImmutableArray<LinePositionSpan> activeStatementSpans
+            )
+        > _analyses = new();
+        private readonly AsyncLazy<ActiveStatementsMap> _baseActiveStatements =
+            baseActiveStatements;
         private readonly AsyncLazy<EditAndContinueCapabilities> _capabilities = capabilities;
 
         public async ValueTask<ImmutableArray<DocumentAnalysisResults>> GetDocumentAnalysesAsync(
             CommittedSolution oldSolution,
             IReadOnlyList<(Document? oldDocument, Document newDocument)> documents,
             ActiveStatementSpanProvider activeStatementSpanProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -42,12 +55,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<DocumentAnalysisResults>.Empty;
                 }
 
-                var tasks = documents.Select(document => Task.Run(() => GetDocumentAnalysisAsync(oldSolution, document.oldDocument, document.newDocument, activeStatementSpanProvider, cancellationToken).AsTask(), cancellationToken));
+                var tasks = documents.Select(document =>
+                    Task.Run(
+                        () =>
+                            GetDocumentAnalysisAsync(
+                                    oldSolution,
+                                    document.oldDocument,
+                                    document.newDocument,
+                                    activeStatementSpanProvider,
+                                    cancellationToken
+                                )
+                                .AsTask(),
+                        cancellationToken
+                    )
+                );
                 var allResults = await Task.WhenAll(tasks).ConfigureAwait(false);
 
                 return allResults.ToImmutableArray();
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable();
             }
@@ -64,11 +91,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             Document? oldDocument,
             Document newDocument,
             ActiveStatementSpanProvider activeStatementSpanProvider,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var unmappedActiveStatementSpans = await GetLatestUnmappedActiveStatementSpansAsync(oldDocument, newDocument, activeStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+                var unmappedActiveStatementSpans = await GetLatestUnmappedActiveStatementSpansAsync(
+                        oldDocument,
+                        newDocument,
+                        activeStatementSpanProvider,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // The base project may have been updated as documents were brought up-to-date in the committed solution.
                 // Get the latest available snapshot of the base project from the committed solution and use it for analyses of all documents,
@@ -77,18 +111,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // but are not up-to-date. These documents do not have impact on the analysis unless we read semantic information
                 // from the project compilation. When reading such information we need to be aware of its potential incompleteness
                 // and consult the compiler output binary (see https://github.com/dotnet/roslyn/issues/51261).
-                var oldProject = oldDocument?.Project ?? oldSolution.GetRequiredProject(newDocument.Project.Id);
+                var oldProject =
+                    oldDocument?.Project ?? oldSolution.GetRequiredProject(newDocument.Project.Id);
 
                 AsyncLazy<DocumentAnalysisResults> lazyResults;
 
                 lock (_guard)
                 {
-                    lazyResults = GetDocumentAnalysisNoLock(oldProject, newDocument, unmappedActiveStatementSpans);
+                    lazyResults = GetDocumentAnalysisNoLock(
+                        oldProject,
+                        newDocument,
+                        unmappedActiveStatementSpans
+                    );
                 }
 
                 return await lazyResults.GetValueAsync(cancellationToken).ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable();
             }
@@ -97,7 +137,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// Calculates unmapped active statement spans in the <paramref name="newDocument"/> from spans provided by <paramref name="newActiveStatementSpanProvider"/>.
         /// </summary>
-        private async Task<ImmutableArray<LinePositionSpan>> GetLatestUnmappedActiveStatementSpansAsync(Document? oldDocument, Document newDocument, ActiveStatementSpanProvider newActiveStatementSpanProvider, CancellationToken cancellationToken)
+        private async Task<
+            ImmutableArray<LinePositionSpan>
+        > GetLatestUnmappedActiveStatementSpansAsync(
+            Document? oldDocument,
+            Document newDocument,
+            ActiveStatementSpanProvider newActiveStatementSpanProvider,
+            CancellationToken cancellationToken
+        )
         {
             if (oldDocument == null)
             {
@@ -111,13 +158,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return ImmutableArray<LinePositionSpan>.Empty;
             }
 
-            var newTree = await newDocument.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var newTree = await newDocument
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newLineMappings = newTree.GetLineMappings(cancellationToken);
 
             // No #line directives -- retrieve the current location of tracking spans directly for this document:
             if (!newLineMappings.Any())
             {
-                var newMappedDocumentSpans = await newActiveStatementSpanProvider(newDocument.Id, newDocument.FilePath, cancellationToken).ConfigureAwait(false);
+                var newMappedDocumentSpans = await newActiveStatementSpanProvider(
+                        newDocument.Id,
+                        newDocument.FilePath,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return newMappedDocumentSpans.SelectAsArray(s => s.LineSpan);
             }
 
@@ -125,19 +179,39 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             // we need to find all documents that #line directives in this document map to.
             // We retrieve the tracking spans for all such documents and then map them back to this document.
 
-            using var _1 = PooledDictionary<string, ImmutableArray<ActiveStatementSpan>>.GetInstance(out var mappedSpansByDocumentPath);
-            using var _2 = ArrayBuilder<LinePositionSpan>.GetInstance(out var activeStatementSpansBuilder);
+            using var _1 = PooledDictionary<
+                string,
+                ImmutableArray<ActiveStatementSpan>
+            >.GetInstance(out var mappedSpansByDocumentPath);
+            using var _2 = ArrayBuilder<LinePositionSpan>.GetInstance(
+                out var activeStatementSpansBuilder
+            );
 
-            var baseActiveStatements = await _baseActiveStatements.GetValueAsync(cancellationToken).ConfigureAwait(false);
-            var analyzer = newDocument.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
-            var oldActiveStatements = await baseActiveStatements.GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken).ConfigureAwait(false);
+            var baseActiveStatements = await _baseActiveStatements
+                .GetValueAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var analyzer =
+                newDocument.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+            var oldActiveStatements = await baseActiveStatements
+                .GetOldActiveStatementsAsync(analyzer, oldDocument, cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var oldActiveStatement in oldActiveStatements)
             {
                 var mappedFilePath = oldActiveStatement.Statement.FileSpan.Path;
-                if (!mappedSpansByDocumentPath.TryGetValue(mappedFilePath, out var newMappedDocumentSpans))
+                if (
+                    !mappedSpansByDocumentPath.TryGetValue(
+                        mappedFilePath,
+                        out var newMappedDocumentSpans
+                    )
+                )
                 {
-                    newMappedDocumentSpans = await newActiveStatementSpanProvider((newDocument.FilePath == mappedFilePath) ? newDocument.Id : null, mappedFilePath, cancellationToken).ConfigureAwait(false);
+                    newMappedDocumentSpans = await newActiveStatementSpanProvider(
+                            (newDocument.FilePath == mappedFilePath) ? newDocument.Id : null,
+                            mappedFilePath,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     mappedSpansByDocumentPath.Add(mappedFilePath, newMappedDocumentSpans);
                 }
 
@@ -148,36 +222,51 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
 
                 // all baseline spans are being tracked in their corresponding mapped documents (if a span is deleted it's still tracked as empty):
-                var newMappedDocumentActiveSpan = newMappedDocumentSpans.GetStatement(oldActiveStatement.Statement.Ordinal);
-                Debug.Assert(newMappedDocumentActiveSpan.UnmappedDocumentId == null || newMappedDocumentActiveSpan.UnmappedDocumentId == newDocument.Id);
+                var newMappedDocumentActiveSpan = newMappedDocumentSpans.GetStatement(
+                    oldActiveStatement.Statement.Ordinal
+                );
+                Debug.Assert(
+                    newMappedDocumentActiveSpan.UnmappedDocumentId == null
+                        || newMappedDocumentActiveSpan.UnmappedDocumentId == newDocument.Id
+                );
 
                 // TODO: optimize
-                var newLineMappingContainingActiveSpan = newLineMappings.FirstOrDefault(mapping => mapping.MappedSpan.Span.Contains(newMappedDocumentActiveSpan.LineSpan));
+                var newLineMappingContainingActiveSpan = newLineMappings.FirstOrDefault(mapping =>
+                    mapping.MappedSpan.Span.Contains(newMappedDocumentActiveSpan.LineSpan)
+                );
 
-                var unmappedSpan = newLineMappingContainingActiveSpan.MappedSpan.IsValid ? newLineMappingContainingActiveSpan.Span : default;
+                var unmappedSpan = newLineMappingContainingActiveSpan.MappedSpan.IsValid
+                    ? newLineMappingContainingActiveSpan.Span
+                    : default;
                 activeStatementSpansBuilder.Add(unmappedSpan);
             }
 
             return activeStatementSpansBuilder.ToImmutable();
         }
 
-        private AsyncLazy<DocumentAnalysisResults> GetDocumentAnalysisNoLock(Project baseProject, Document document, ImmutableArray<LinePositionSpan> activeStatementSpans)
+        private AsyncLazy<DocumentAnalysisResults> GetDocumentAnalysisNoLock(
+            Project baseProject,
+            Document document,
+            ImmutableArray<LinePositionSpan> activeStatementSpans
+        )
         {
             // Do not reuse an analysis of the document unless its snasphot is exactly the same as was used to calculate the results.
             // Note that comparing document snapshots in effect compares the entire solution snapshots (when another document is changed a new solution snapshot is created
             // that creates new document snapshots for all queried documents).
             // Also check the base project snapshot since the analysis uses semantic information from the base project as well.
-            // 
+            //
             // It would be possible to reuse analysis results of documents whose content does not change in between two solution snapshots.
             // However, we'd need rather sophisticated caching logic. The semantic analysis gathers information from other documents when
             // calculating results for a specific document. In some cases it's easy to record the set of documents the analysis depends on.
             // For example, when analyzing a partial class we can record all documents its declaration spans. However, in other cases the analysis
             // checks for absence of a top-level type symbol. Adding a symbol to any document thus invalidates such analysis. It'd be possible
             // to keep track of which type symbols an analysis is conditional upon, if it was worth the extra complexity.
-            if (_analyses.TryGetValue(document.Id, out var analysis) &&
-                analysis.baseProject == baseProject &&
-                analysis.document == document &&
-                analysis.activeStatementSpans.SequenceEqual(activeStatementSpans))
+            if (
+                _analyses.TryGetValue(document.Id, out var analysis)
+                && analysis.baseProject == baseProject
+                && analysis.document == document
+                && analysis.activeStatementSpans.SequenceEqual(activeStatementSpans)
+            )
             {
                 return analysis.results;
             }
@@ -187,14 +276,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     try
                     {
-                        var analyzer = document.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
-                        return await analyzer.AnalyzeDocumentAsync(baseProject, _baseActiveStatements, document, activeStatementSpans, _capabilities, cancellationToken).ConfigureAwait(false);
+                        var analyzer =
+                            document.Project.Services.GetRequiredService<IEditAndContinueAnalyzer>();
+                        return await analyzer
+                            .AnalyzeDocumentAsync(
+                                baseProject,
+                                _baseActiveStatements,
+                                document,
+                                activeStatementSpans,
+                                _capabilities,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
-                    catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                    catch (Exception e)
+                        when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                     {
                         throw ExceptionUtilities.Unreachable();
                     }
-                });
+                }
+            );
 
             // Previous results for this document id are discarded as they are no longer relevant.
             // The only relevant analysis is for the latest base and document snapshots.

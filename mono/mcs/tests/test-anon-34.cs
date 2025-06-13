@@ -18,48 +18,58 @@ using System.Timers;
 #endregion
 
 namespace Delegates
-{ class Space
-  { public int Value;
+{
+    class Space
+    {
+        public int Value;
 
-    public delegate void DoCopy();
+        public delegate void DoCopy();
 
-    public DoCopy CopyIt;
+        public DoCopy CopyIt;
 
-    public void Leak(bool useArray, int max)
-    { DoCopy one = null;
+        public void Leak(bool useArray, int max)
+        {
+            DoCopy one = null;
 
-      if(useArray)
-      { 
-        int[] work;
-        
-        one = delegate 
-              { work = new int[max];
-              };
-      }
-      else
-      { 
-        one = delegate { int xans = (max + 1) * max / 2; };
-      }
+            if (useArray)
+            {
+                int[] work;
 
-       Console.WriteLine("Here goes...");
-	one();
-	Console.WriteLine("... made it");
-    }
-  }
+                one = delegate
+                {
+                    work = new int[max];
+                };
+            }
+            else
+            {
+                one = delegate
+                {
+                    int xans = (max + 1) * max / 2;
+                };
+            }
 
-  class Program
-  { static void SpaceLeak()
-    { Space s = new Space();
-
-      Console.WriteLine(s.Value);
-
-      s.Leak(false, 1);
-
-      Console.WriteLine(s.Value);
+            Console.WriteLine("Here goes...");
+            one();
+            Console.WriteLine("... made it");
+        }
     }
 
-    public static void Main(string[] args)
-    { SpaceLeak();
+    class Program
+    {
+        static void SpaceLeak()
+        {
+            Space s = new Space();
+
+            Console.WriteLine(s.Value);
+
+            s.Leak(false, 1);
+
+            Console.WriteLine(s.Value);
+        }
+
+        public static void Main(string[] args)
+        {
+            SpaceLeak();
+        }
     }
-  }
 }

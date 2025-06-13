@@ -9,7 +9,12 @@ namespace System.ComponentModel
     ///  Specifies the visibility of this property or method as seen by the designer
     /// serializer.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Event)]
+    [AttributeUsage(
+        AttributeTargets.Property
+            | AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Event
+    )]
     public sealed class DesignerSerializationVisibilityAttribute : Attribute
     {
         /// <summary>
@@ -17,20 +22,23 @@ namespace System.ComponentModel
         /// rather than the property itself.
         /// This <see langword='static'/> field is read-only.
         /// </summary>
-        public static readonly DesignerSerializationVisibilityAttribute Content = new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content);
+        public static readonly DesignerSerializationVisibilityAttribute Content =
+            new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content);
 
         /// <summary>
         /// Specifies that a visual designer will not serialize the value of this property.
         /// This <see langword='static'/> field is read-only.
         /// </summary>
-        public static readonly DesignerSerializationVisibilityAttribute Hidden = new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden);
+        public static readonly DesignerSerializationVisibilityAttribute Hidden =
+            new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden);
 
         /// <summary>
         /// Specifies that a visual designer may use default rules when serializing the
         /// value of a property.
         /// This <see langword='static'/> field is read-only.
         /// </summary>
-        public static readonly DesignerSerializationVisibilityAttribute Visible = new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Visible);
+        public static readonly DesignerSerializationVisibilityAttribute Visible =
+            new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Visible);
 
         /// <summary>
         /// Specifies the default value, which is <see cref='System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible'/>,

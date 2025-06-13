@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,94 +25,106 @@
 
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
-	public class ApplicationContext : IDisposable
-	{
-		#region Local Variables
-		Form main_form;
-		object tag;
-		bool thread_exit_raised;
+namespace System.Windows.Forms
+{
+    public class ApplicationContext : IDisposable
+    {
+        #region Local Variables
+        Form main_form;
+        object tag;
+        bool thread_exit_raised;
 
-		#endregion	// Local Variables
+        #endregion	// Local Variables
 
-		#region Public Constructors & Destructors
-		public ApplicationContext() : this(null) {
-		}
+        #region Public Constructors & Destructors
+        public ApplicationContext()
+            : this(null) { }
 
-		public ApplicationContext(Form mainForm) {
-			MainForm = mainForm; // Use  property to get event handling setup
-		}
+        public ApplicationContext(Form mainForm)
+        {
+            MainForm = mainForm; // Use  property to get event handling setup
+        }
 
-		~ApplicationContext() {
-			this.Dispose(false);
-		}
-		#endregion	// Public Constructors & Destructors
+        ~ApplicationContext()
+        {
+            this.Dispose(false);
+        }
+        #endregion	// Public Constructors & Destructors
 
-		#region Public Instance Properties
-		public Form MainForm {
-			get {
-				return main_form;
-			}
+        #region Public Instance Properties
+        public Form MainForm
+        {
+            get { return main_form; }
+            set
+            {
+                if (main_form != value)
+                {
+                    // Catch when the form is destroyed so we can fire OnMainFormClosed
 
-			set {
-				if (main_form != value) {
-					// Catch when the form is destroyed so we can fire OnMainFormClosed
+                    if (main_form != null)
+                    {
+                        main_form.HandleDestroyed -= new EventHandler(OnMainFormClosed);
+                    }
+                    main_form = value;
+                    if (main_form != null)
+                    {
+                        main_form.HandleDestroyed += new EventHandler(OnMainFormClosed);
+                    }
+                }
+            }
+        }
 
-					if (main_form != null) {
-						main_form.HandleDestroyed -= new EventHandler(OnMainFormClosed);
-					}
-					main_form = value;
-					if (main_form != null) {
-						main_form.HandleDestroyed += new EventHandler(OnMainFormClosed);
-					}
-				}
-			}
-		}
+        [BindableAttribute(true)]
+        [DefaultValue(null)]
+        [LocalizableAttribute(false)]
+        [TypeConverterAttribute(typeof(StringConverter))]
+        public Object Tag
+        {
+            get { return tag; }
+            set { tag = value; }
+        }
+        #endregion	// Public Instance Properties
 
-		[BindableAttribute (true)] 
-		[DefaultValue (null)]
-		[LocalizableAttribute (false)] 
-		[TypeConverterAttribute (typeof(StringConverter))] 
-		public Object Tag {
-			get { return tag; }
-			set { tag = value; }
-		}
-		#endregion	// Public Instance Properties
+        #region Public Instance Methods
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		#region Public Instance Methods
-		public void Dispose() {
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        public void ExitThread()
+        {
+            ExitThreadCore();
+        }
+        #endregion	// Public Instance Methods
 
-		public void ExitThread() {
-			ExitThreadCore();
-		}
-		#endregion	// Public Instance Methods
+        #region Protected Instance Methods
+        protected virtual void Dispose(bool disposing)
+        {
+            MainForm = null;
+            tag = null;
+        }
 
-		#region Protected Instance Methods
-		protected virtual void Dispose(bool disposing) {
-			MainForm = null;
-			tag = null;
-		}
+        protected virtual void ExitThreadCore()
+        {
+            if (Application.MWFThread.Current.Context == this)
+                XplatUI.PostQuitMessage(0);
+            if (!thread_exit_raised && ThreadExit != null)
+            {
+                thread_exit_raised = true;
+                ThreadExit(this, EventArgs.Empty);
+            }
+        }
 
-		protected virtual void ExitThreadCore() {
-			if (Application.MWFThread.Current.Context == this)
-				XplatUI.PostQuitMessage(0);
-			if (!thread_exit_raised && ThreadExit != null) {
-				thread_exit_raised = true;
-				ThreadExit(this, EventArgs.Empty);
-			}
-		}
+        protected virtual void OnMainFormClosed(object sender, EventArgs e)
+        {
+            if (!MainForm.RecreatingHandle)
+                ExitThreadCore();
+        }
+        #endregion	// Public Instance Methods
 
-		protected virtual void OnMainFormClosed(object sender, EventArgs e) {
-			if (!MainForm.RecreatingHandle)
-				ExitThreadCore();
-		}
-		#endregion	// Public Instance Methods
-
-		#region Events
-		public event EventHandler ThreadExit;
-		#endregion	// Events
-	}
+        #region Events
+        public event EventHandler ThreadExit;
+        #endregion	// Events
+    }
 }

@@ -21,5 +21,5 @@ internal enum RequestRejectionReason
 {
     EndpointLimiter,
     GlobalLimiter,
-    RequestCanceled
+    RequestCanceled,
 }

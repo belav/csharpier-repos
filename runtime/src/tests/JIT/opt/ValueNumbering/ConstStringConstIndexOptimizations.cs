@@ -81,7 +81,7 @@ public static class ConstStringConstIndexOptimizations
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume(object _) {}
+    static void Consume(object _) { }
 
     static void ThrowIOORE(Action action)
     {

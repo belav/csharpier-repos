@@ -30,183 +30,184 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
-{public class DataListItem_ItemType
-    : GHTBaseWeb {
-	 #region Web Form Designer generated code
-	 override protected void OnInit(EventArgs e) {
-		 //
-		 // CODEGEN: This call is required by the ASP.NET Web Form Designer.
-		 //
-		 InitializeComponent();
-		 base.OnInit(e);
-	 }
-		
-	 /// <summary>
-	 /// Required method for Designer support - do not modify
-	 /// the contents of this method with the code editor.
-	 /// </summary>
-	 private void InitializeComponent() {    
-		 this.Load += new System.EventHandler(this.Page_Load);
-		 this.DataList1.ItemCreated += new DataListItemEventHandler(DataList1_ItemCreated);
-
-	 }
-	 #endregion
-
- 	protected System.Web.UI.WebControls.DataList DataList1;
- 	protected GHTWebControls.GHTSubTest GHTSubTest1;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest2;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest3;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest4;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest8;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest7;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest6;
- 	protected GHTWebControls.GHTSubTest Ghtsubtest5;
-        protected static string [] m_data = new string[] {"aaa", "bbb", "ccc", "ddd"};
-
-        private void Page_Load(object sender, System.EventArgs e) {
-            HtmlForm frm = (HtmlForm)FindControl("form1");
-            GHTTestBegin(frm);
-            DataList1.DataBind();;
-
+{
+    public class DataListItem_ItemType : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
         }
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+            this.DataList1.ItemCreated += new DataListItemEventHandler(DataList1_ItemCreated);
+        }
+        #endregion
 
-	 private void DataList1_ItemCreated(object sender, DataListItemEventArgs e)
-	 {
-		 switch (e.Item.ItemType)
-		 {
-			 case ListItemType.Header:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest4, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception12)
-				 {
-					 // ProjectData.SetProjectError(exception12);
-					 Exception exception4 = exception12;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception4);
-					 // ProjectData.ClearProjectError();
-				 }
-				 this.GHTSubTestEnd();
-				 return;
-			 }
-			 case ListItemType.Footer:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest3, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception11)
-				 {
-					 // ProjectData.SetProjectError(exception11);
-					 Exception exception3 = exception11;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception3);
-					 // ProjectData.ClearProjectError();
-				 }
-				 this.GHTSubTestEnd();
-				 return;
-			 }
-			 case ListItemType.Item:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest5, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception13)
-				 {
-					 // ProjectData.SetProjectError(exception13);
-					 Exception exception5 = exception13;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception5);
-					 // ProjectData.ClearProjectError();
-				 }
-				 this.GHTSubTestEnd();
-				 return;
-			 }
-			 case ListItemType.AlternatingItem:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.GHTSubTest1, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception9)
-				 {
-					 // ProjectData.SetProjectError(exception9);
-					 Exception exception1 = exception9;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception1);
-					 // ProjectData.ClearProjectError();
-				 }
-				 return;
-			 }
-			 case ListItemType.SelectedItem:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest7, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception15)
-				 {
-					 // ProjectData.SetProjectError(exception15);
-					 Exception exception7 = exception15;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception7);
-					 // ProjectData.ClearProjectError();
-				 }
-				 this.GHTSubTestEnd();
-				 return;
-			 }
-			 case ListItemType.EditItem:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest2, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception10)
-				 {
-					 // ProjectData.SetProjectError(exception10);
-					 Exception exception2 = exception10;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception2);
-					 // ProjectData.ClearProjectError();
-				 }
-				 return;
-			 }
-			 case ListItemType.Separator:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest8, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception16)
-				 {
-					 // ProjectData.SetProjectError(exception16);
-					 Exception exception8 = exception16;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception8);
-					 // ProjectData.ClearProjectError();
-				 }
-				 this.GHTSubTestEnd();
-				 return;
-			 }
-			 case ListItemType.Pager:
-			 {
-				 try
-				 {
-					 this.GHTSubTestAddResult(this.Ghtsubtest6, e.Item.ItemIndex.ToString());
-				 }
-				 catch (Exception exception14)
-				 {
-					 // ProjectData.SetProjectError(exception14);
-					 Exception exception6 = exception14;
-					 this.GHTSubTestUnexpectedExceptionCaught(exception6);
-					 // ProjectData.ClearProjectError();
-				 }
-				 this.GHTSubTestEnd();
-				 return;
-			 }
-		 }
-	 }
- 
- }
+        protected System.Web.UI.WebControls.DataList DataList1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected GHTWebControls.GHTSubTest Ghtsubtest2;
+        protected GHTWebControls.GHTSubTest Ghtsubtest3;
+        protected GHTWebControls.GHTSubTest Ghtsubtest4;
+        protected GHTWebControls.GHTSubTest Ghtsubtest8;
+        protected GHTWebControls.GHTSubTest Ghtsubtest7;
+        protected GHTWebControls.GHTSubTest Ghtsubtest6;
+        protected GHTWebControls.GHTSubTest Ghtsubtest5;
+        protected static string[] m_data = new string[] { "aaa", "bbb", "ccc", "ddd" };
+
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("form1");
+            GHTTestBegin(frm);
+            DataList1.DataBind();
+            ;
+        }
+
+        private void DataList1_ItemCreated(object sender, DataListItemEventArgs e)
+        {
+            switch (e.Item.ItemType)
+            {
+                case ListItemType.Header:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest4, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception12)
+                    {
+                        // ProjectData.SetProjectError(exception12);
+                        Exception exception4 = exception12;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception4);
+                        // ProjectData.ClearProjectError();
+                    }
+                    this.GHTSubTestEnd();
+                    return;
+                }
+                case ListItemType.Footer:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest3, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception11)
+                    {
+                        // ProjectData.SetProjectError(exception11);
+                        Exception exception3 = exception11;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception3);
+                        // ProjectData.ClearProjectError();
+                    }
+                    this.GHTSubTestEnd();
+                    return;
+                }
+                case ListItemType.Item:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest5, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception13)
+                    {
+                        // ProjectData.SetProjectError(exception13);
+                        Exception exception5 = exception13;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception5);
+                        // ProjectData.ClearProjectError();
+                    }
+                    this.GHTSubTestEnd();
+                    return;
+                }
+                case ListItemType.AlternatingItem:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.GHTSubTest1, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception9)
+                    {
+                        // ProjectData.SetProjectError(exception9);
+                        Exception exception1 = exception9;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                        // ProjectData.ClearProjectError();
+                    }
+                    return;
+                }
+                case ListItemType.SelectedItem:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest7, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception15)
+                    {
+                        // ProjectData.SetProjectError(exception15);
+                        Exception exception7 = exception15;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception7);
+                        // ProjectData.ClearProjectError();
+                    }
+                    this.GHTSubTestEnd();
+                    return;
+                }
+                case ListItemType.EditItem:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest2, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception10)
+                    {
+                        // ProjectData.SetProjectError(exception10);
+                        Exception exception2 = exception10;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception2);
+                        // ProjectData.ClearProjectError();
+                    }
+                    return;
+                }
+                case ListItemType.Separator:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest8, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception16)
+                    {
+                        // ProjectData.SetProjectError(exception16);
+                        Exception exception8 = exception16;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception8);
+                        // ProjectData.ClearProjectError();
+                    }
+                    this.GHTSubTestEnd();
+                    return;
+                }
+                case ListItemType.Pager:
+                {
+                    try
+                    {
+                        this.GHTSubTestAddResult(this.Ghtsubtest6, e.Item.ItemIndex.ToString());
+                    }
+                    catch (Exception exception14)
+                    {
+                        // ProjectData.SetProjectError(exception14);
+                        Exception exception6 = exception14;
+                        this.GHTSubTestUnexpectedExceptionCaught(exception6);
+                        // ProjectData.ClearProjectError();
+                    }
+                    this.GHTSubTestEnd();
+                    return;
+                }
+            }
+        }
+    }
 }

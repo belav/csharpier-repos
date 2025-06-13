@@ -14,7 +14,11 @@ namespace System.ServiceModel.Channels
             return new DefaultFaultConverter(version);
         }
 
-        protected abstract bool OnTryCreateException(Message message, MessageFault fault, out Exception exception);
+        protected abstract bool OnTryCreateException(
+            Message message,
+            MessageFault fault,
+            out Exception exception
+        );
         protected abstract bool OnTryCreateFaultMessage(Exception exception, out Message message);
 
         public bool TryCreateException(Message message, MessageFault fault, out Exception exception)
@@ -34,7 +38,10 @@ namespace System.ServiceModel.Channels
             {
                 if (exception == null)
                 {
-                    string text = SR.GetString(SR.FaultConverterDidNotCreateException, this.GetType().Name);
+                    string text = SR.GetString(
+                        SR.FaultConverterDidNotCreateException,
+                        this.GetType().Name
+                    );
                     Exception error = new InvalidOperationException(text);
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
                 }
@@ -43,7 +50,10 @@ namespace System.ServiceModel.Channels
             {
                 if (exception != null)
                 {
-                    string text = SR.GetString(SR.FaultConverterCreatedException, this.GetType().Name);
+                    string text = SR.GetString(
+                        SR.FaultConverterCreatedException,
+                        this.GetType().Name
+                    );
                     Exception error = new InvalidOperationException(text, exception);
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
                 }
@@ -60,7 +70,10 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    string text = SR.GetString(SR.FaultConverterDidNotCreateFaultMessage, this.GetType().Name);
+                    string text = SR.GetString(
+                        SR.FaultConverterDidNotCreateFaultMessage,
+                        this.GetType().Name
+                    );
                     Exception error = new InvalidOperationException(text);
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
                 }
@@ -69,7 +82,10 @@ namespace System.ServiceModel.Channels
             {
                 if (message != null)
                 {
-                    string text = SR.GetString(SR.FaultConverterCreatedFaultMessage, this.GetType().Name);
+                    string text = SR.GetString(
+                        SR.FaultConverterCreatedFaultMessage,
+                        this.GetType().Name
+                    );
                     Exception error = new InvalidOperationException(text);
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
                 }
@@ -87,15 +103,31 @@ namespace System.ServiceModel.Channels
                 this.version = version;
             }
 
-            protected override bool OnTryCreateException(Message message, MessageFault fault, out Exception exception)
+            protected override bool OnTryCreateException(
+                Message message,
+                MessageFault fault,
+                out Exception exception
+            )
             {
                 exception = null;
 
                 // SOAP MustUnderstand
-                if (string.Compare(fault.Code.Namespace, version.Envelope.Namespace, StringComparison.Ordinal) == 0
-                    && string.Compare(fault.Code.Name, MessageStrings.MustUnderstandFault, StringComparison.Ordinal) == 0)
+                if (
+                    string.Compare(
+                        fault.Code.Namespace,
+                        version.Envelope.Namespace,
+                        StringComparison.Ordinal
+                    ) == 0
+                    && string.Compare(
+                        fault.Code.Name,
+                        MessageStrings.MustUnderstandFault,
+                        StringComparison.Ordinal
+                    ) == 0
+                )
                 {
-                    exception = new ProtocolException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                    exception = new ProtocolException(
+                        fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text
+                    );
                     return true;
                 }
 
@@ -129,50 +161,134 @@ namespace System.ServiceModel.Channels
                 if (checkSender)
                 {
                     // WS-Addressing
-                    if (string.Compare(code.Namespace, version.Addressing.Namespace, StringComparison.Ordinal) == 0)
+                    if (
+                        string.Compare(
+                            code.Namespace,
+                            version.Addressing.Namespace,
+                            StringComparison.Ordinal
+                        ) == 0
+                    )
                     {
-                        if (string.Compare(code.Name, AddressingStrings.ActionNotSupported, StringComparison.Ordinal) == 0)
+                        if (
+                            string.Compare(
+                                code.Name,
+                                AddressingStrings.ActionNotSupported,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
-                            exception = new ActionNotSupportedException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                            exception = new ActionNotSupportedException(
+                                fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text
+                            );
                             return true;
                         }
-                        else if (string.Compare(code.Name, AddressingStrings.DestinationUnreachable, StringComparison.Ordinal) == 0)
+                        else if (
+                            string.Compare(
+                                code.Name,
+                                AddressingStrings.DestinationUnreachable,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
-                            exception = new EndpointNotFoundException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                            exception = new EndpointNotFoundException(
+                                fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text
+                            );
                             return true;
                         }
-                        else if (string.Compare(code.Name, Addressing10Strings.InvalidAddressingHeader, StringComparison.Ordinal) == 0)
+                        else if (
+                            string.Compare(
+                                code.Name,
+                                Addressing10Strings.InvalidAddressingHeader,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
-                            if (code.SubCode != null && string.Compare(code.SubCode.Namespace, version.Addressing.Namespace, StringComparison.Ordinal) == 0 &&
-                                string.Compare(code.SubCode.Name, Addressing10Strings.InvalidCardinality, StringComparison.Ordinal) == 0)
+                            if (
+                                code.SubCode != null
+                                && string.Compare(
+                                    code.SubCode.Namespace,
+                                    version.Addressing.Namespace,
+                                    StringComparison.Ordinal
+                                ) == 0
+                                && string.Compare(
+                                    code.SubCode.Name,
+                                    Addressing10Strings.InvalidCardinality,
+                                    StringComparison.Ordinal
+                                ) == 0
+                            )
                             {
-                                exception = new MessageHeaderException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text, true);
+                                exception = new MessageHeaderException(
+                                    fault
+                                        .Reason.GetMatchingTranslation(CultureInfo.CurrentCulture)
+                                        .Text,
+                                    true
+                                );
                                 return true;
                             }
                         }
                         else if (version.Addressing == AddressingVersion.WSAddressing10)
                         {
-                            if (string.Compare(code.Name, Addressing10Strings.MessageAddressingHeaderRequired, StringComparison.Ordinal) == 0)
+                            if (
+                                string.Compare(
+                                    code.Name,
+                                    Addressing10Strings.MessageAddressingHeaderRequired,
+                                    StringComparison.Ordinal
+                                ) == 0
+                            )
                             {
-                                exception = new MessageHeaderException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                                exception = new MessageHeaderException(
+                                    fault
+                                        .Reason.GetMatchingTranslation(CultureInfo.CurrentCulture)
+                                        .Text
+                                );
                                 return true;
                             }
-                            else if (string.Compare(code.Name, Addressing10Strings.InvalidAddressingHeader, StringComparison.Ordinal) == 0)
+                            else if (
+                                string.Compare(
+                                    code.Name,
+                                    Addressing10Strings.InvalidAddressingHeader,
+                                    StringComparison.Ordinal
+                                ) == 0
+                            )
                             {
-                                exception = new ProtocolException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                                exception = new ProtocolException(
+                                    fault
+                                        .Reason.GetMatchingTranslation(CultureInfo.CurrentCulture)
+                                        .Text
+                                );
                                 return true;
                             }
                         }
                         else
                         {
-                            if (string.Compare(code.Name, Addressing200408Strings.MessageInformationHeaderRequired, StringComparison.Ordinal) == 0)
+                            if (
+                                string.Compare(
+                                    code.Name,
+                                    Addressing200408Strings.MessageInformationHeaderRequired,
+                                    StringComparison.Ordinal
+                                ) == 0
+                            )
                             {
-                                exception = new ProtocolException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                                exception = new ProtocolException(
+                                    fault
+                                        .Reason.GetMatchingTranslation(CultureInfo.CurrentCulture)
+                                        .Text
+                                );
                                 return true;
                             }
-                            else if (string.Compare(code.Name, Addressing200408Strings.InvalidMessageInformationHeader, StringComparison.Ordinal) == 0)
+                            else if (
+                                string.Compare(
+                                    code.Name,
+                                    Addressing200408Strings.InvalidMessageInformationHeader,
+                                    StringComparison.Ordinal
+                                ) == 0
+                            )
                             {
-                                exception = new ProtocolException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                                exception = new ProtocolException(
+                                    fault
+                                        .Reason.GetMatchingTranslation(CultureInfo.CurrentCulture)
+                                        .Text
+                                );
                                 return true;
                             }
                         }
@@ -182,11 +298,25 @@ namespace System.ServiceModel.Channels
                 if (checkReceiver)
                 {
                     // WS-Addressing
-                    if (string.Compare(code.Namespace, version.Addressing.Namespace, StringComparison.Ordinal) == 0)
+                    if (
+                        string.Compare(
+                            code.Namespace,
+                            version.Addressing.Namespace,
+                            StringComparison.Ordinal
+                        ) == 0
+                    )
                     {
-                        if (string.Compare(code.Name, AddressingStrings.EndpointUnavailable, StringComparison.Ordinal) == 0)
+                        if (
+                            string.Compare(
+                                code.Name,
+                                AddressingStrings.EndpointUnavailable,
+                                StringComparison.Ordinal
+                            ) == 0
+                        )
                         {
-                            exception = new ServerTooBusyException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                            exception = new ServerTooBusyException(
+                                fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text
+                            );
                             return true;
                         }
                     }
@@ -195,7 +325,10 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            protected override bool OnTryCreateFaultMessage(Exception exception, out Message message)
+            protected override bool OnTryCreateFaultMessage(
+                Exception exception,
+                out Message message
+            )
             {
                 // WSA
                 if (this.version.Addressing == AddressingVersion.WSAddressing10)
@@ -211,7 +344,8 @@ namespace System.ServiceModel.Channels
                     }
                     else if (exception is ActionMismatchAddressingException)
                     {
-                        ActionMismatchAddressingException amae = exception as ActionMismatchAddressingException;
+                        ActionMismatchAddressingException amae =
+                            exception as ActionMismatchAddressingException;
                         message = amae.ProvideFault(this.version);
                         return true;
                     }

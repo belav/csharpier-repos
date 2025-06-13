@@ -5,12 +5,14 @@
 // there should be an IG label for one of the unreachable block, but we were not creating it leading
 // to an assert failure.
 using Xunit;
+
 public class _65659_2
 {
     public static bool[][,] s_2;
     public static short[,][] s_8;
     public static bool[] s_10;
     public static ushort[][] s_29;
+
     [Fact]
     public static void TestEntryPoint()
     {

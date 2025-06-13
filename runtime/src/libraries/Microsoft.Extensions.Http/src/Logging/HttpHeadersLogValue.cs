@@ -17,7 +17,12 @@ namespace Microsoft.Extensions.Http.Logging
         private string? _formatted;
         private List<KeyValuePair<string, object>>? _values;
 
-        public HttpHeadersLogValue(Kind kind, HttpHeaders headers, HttpHeaders? contentHeaders, Func<string, bool> shouldRedactHeaderValue)
+        public HttpHeadersLogValue(
+            Kind kind,
+            HttpHeaders headers,
+            HttpHeaders? contentHeaders,
+            Func<string, bool> shouldRedactHeaderValue
+        )
         {
             _kind = kind;
             _shouldRedactHeaderValue = shouldRedactHeaderValue;
@@ -88,7 +93,9 @@ namespace Microsoft.Extensions.Http.Logging
             if (_formatted == null)
             {
                 var builder = new StringBuilder();
-                builder.AppendLine(_kind == Kind.Request ? "Request Headers:" : "Response Headers:");
+                builder.AppendLine(
+                    _kind == Kind.Request ? "Request Headers:" : "Response Headers:"
+                );
 
                 for (int i = 0; i < Values.Count; i++)
                 {

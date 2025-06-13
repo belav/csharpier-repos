@@ -25,7 +25,8 @@ namespace System.ServiceModel.Dispatcher
         internal const string WsaNoneNS = AddressingNoneStrings.Namespace;
         internal const string TempUriNS = NamingHelper.DefaultNamespace;
         internal const string SerializationNS = EndpointAddressProcessor.SerNs;
-        internal const string IndigoNS = "http://schemas.microsoft.com/serviceModel/2004/05/xpathfunctions";
+        internal const string IndigoNS =
+            "http://schemas.microsoft.com/serviceModel/2004/05/xpathfunctions";
 
         // Namespace prefixes
         internal const string S11P = "s11";
@@ -58,25 +59,36 @@ namespace System.ServiceModel.Dispatcher
         // Functions with no arguments
         internal static readonly XPathMessageFunction HeaderFun = new XPathMessageFunctionHeader();
         internal static readonly XPathMessageFunction BodyFun = new XPathMessageFunctionBody();
-        internal static readonly XPathMessageFunction SoapUriFun = new XPathMessageFunctionSoapUri();
-        internal static readonly XPathMessageFunction MessageIDFun = new XPathMessageFunctionMessageID();
-        internal static readonly XPathMessageFunction RelatesToFun = new XPathMessageFunctionRelatesTo();
-        internal static readonly XPathMessageFunction ReplyToFun = new XPathMessageFunctionReplyTo();
+        internal static readonly XPathMessageFunction SoapUriFun =
+            new XPathMessageFunctionSoapUri();
+        internal static readonly XPathMessageFunction MessageIDFun =
+            new XPathMessageFunctionMessageID();
+        internal static readonly XPathMessageFunction RelatesToFun =
+            new XPathMessageFunctionRelatesTo();
+        internal static readonly XPathMessageFunction ReplyToFun =
+            new XPathMessageFunctionReplyTo();
         internal static readonly XPathMessageFunction FromFun = new XPathMessageFunctionFrom();
-        internal static readonly XPathMessageFunction FaultToFun = new XPathMessageFunctionFaultTo();
+        internal static readonly XPathMessageFunction FaultToFun =
+            new XPathMessageFunctionFaultTo();
         internal static readonly XPathMessageFunction ToFun = new XPathMessageFunctionTo();
         internal static readonly XPathMessageFunction ActionFun = new XPathMessageFunctionAction();
-        internal static readonly XPathMessageFunction DateNowFun = new XPathMessageFunctionDateNow();
+        internal static readonly XPathMessageFunction DateNowFun =
+            new XPathMessageFunctionDateNow();
 
         // Functions with arguments
-        internal static readonly XPathMessageFunction HeadersWithActorFun = new XPathMessageFunctionHeadersWithActor();
+        internal static readonly XPathMessageFunction HeadersWithActorFun =
+            new XPathMessageFunctionHeadersWithActor();
         internal static readonly XPathMessageFunction ActorFun = new XPathMessageFunctionActor();
-        internal static readonly XPathMessageFunction IsMandatoryFun = new XPathMessageFunctionIsMandatory();
-        internal static readonly XPathMessageFunction IsActorNextFun = new XPathMessageFunctionIsActorNext();
-        internal static readonly XPathMessageFunction IsActorUltRecFun = new XPathMessageFunctionIsActorUltimateReceiver();
+        internal static readonly XPathMessageFunction IsMandatoryFun =
+            new XPathMessageFunctionIsMandatory();
+        internal static readonly XPathMessageFunction IsActorNextFun =
+            new XPathMessageFunctionIsActorNext();
+        internal static readonly XPathMessageFunction IsActorUltRecFun =
+            new XPathMessageFunctionIsActorUltimateReceiver();
         internal static readonly XPathMessageFunction DateFun = new XPathMessageFunctionDateStr();
         internal static readonly XPathMessageFunction SpanFun = new XPathMessageFunctionSpanStr();
-        internal static readonly XPathMessageFunction CorrelationDataFun = new XPathMessageFunctionCorrelationData();
+        internal static readonly XPathMessageFunction CorrelationDataFun =
+            new XPathMessageFunctionCorrelationData();
 
         // Function signatures
         static Function[] functions;
@@ -103,7 +115,7 @@ namespace System.ServiceModel.Dispatcher
                 new Function(IndigoNS, "date-time", DateFun),
                 new Function(IndigoNS, "duration", SpanFun),
                 new Function(IndigoNS, "utc-now", DateNowFun),
-                new Function(IndigoNS, "correlation-data", CorrelationDataFun)
+                new Function(IndigoNS, "correlation-data", CorrelationDataFun),
             };
 
             defaultNamespaces = new Dictionary<string, string>()
@@ -114,14 +126,12 @@ namespace System.ServiceModel.Dispatcher
                 { Wsa200408P, Wsa200408NS },
                 { TempUriP, TempUriNS },
                 { SerializationP, SerializationNS },
-                { IndigoP, IndigoNS }
+                { IndigoP, IndigoNS },
             };
         }
 
         public XPathMessageContext()
-            : this(new NameTable())
-        {
-        }
+            : this(new NameTable()) { }
 
         public XPathMessageContext(NameTable table)
             : base(ArgValidator(table))
@@ -141,10 +151,7 @@ namespace System.ServiceModel.Dispatcher
 
         public override bool Whitespace
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override int CompareDocument(string baseUri, string nextBaseUri)
@@ -157,7 +164,11 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 
-        public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
+        public override IXsltContextFunction ResolveFunction(
+            string prefix,
+            string name,
+            XPathResultType[] argTypes
+        )
         {
             if (argTypes == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("argTypes");
@@ -201,8 +212,18 @@ namespace System.ServiceModel.Dispatcher
 
     internal abstract class XPathMessageFunction : IXsltContextFunction
     {
-        internal readonly static DateTime ZeroDate = new DateTime(1, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        internal readonly static XmlNamespaceManager Namespaces = new XmlNamespaceManager(new NameTable());
+        internal static readonly DateTime ZeroDate = new DateTime(
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            DateTimeKind.Utc
+        );
+        internal static readonly XmlNamespaceManager Namespaces = new XmlNamespaceManager(
+            new NameTable()
+        );
 
         XPathResultType[] argTypes;
         int maxArgs;
@@ -215,7 +236,12 @@ namespace System.ServiceModel.Dispatcher
             Namespaces.AddNamespace(XPathMessageContext.S12P, XPathMessageContext.S12NS);
         }
 
-        protected XPathMessageFunction(XPathResultType[] argTypes, int max, int min, XPathResultType retType)
+        protected XPathMessageFunction(
+            XPathResultType[] argTypes,
+            int max,
+            int min,
+            XPathResultType retType
+        )
         {
             this.argTypes = argTypes;
             this.maxArgs = max;
@@ -225,37 +251,29 @@ namespace System.ServiceModel.Dispatcher
 
         public XPathResultType[] ArgTypes
         {
-            get
-            {
-                return this.argTypes;
-            }
+            get { return this.argTypes; }
         }
 
         public int Maxargs
         {
-            get
-            {
-                return this.maxArgs;
-            }
+            get { return this.maxArgs; }
         }
 
         public int Minargs
         {
-            get
-            {
-                return this.minArgs;
-            }
+            get { return this.minArgs; }
         }
 
         public XPathResultType ReturnType
         {
-            get
-            {
-                return this.retType;
-            }
+            get { return this.retType; }
         }
 
-        public abstract object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext);
+        public abstract object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        );
         internal abstract void InvokeInternal(ProcessingContext context, int argCount);
 
         // Must save/clone navigator before passing to these functions
@@ -272,7 +290,14 @@ namespace System.ServiceModel.Dispatcher
 
             do
             {
-                if (nav.LocalName == name && (nav.NamespaceURI == XPathMessageContext.Wsa10NS || nav.NamespaceURI == XPathMessageContext.Wsa200408NS || nav.NamespaceURI == XPathMessageContext.WsaNoneNS))
+                if (
+                    nav.LocalName == name
+                    && (
+                        nav.NamespaceURI == XPathMessageContext.Wsa10NS
+                        || nav.NamespaceURI == XPathMessageContext.Wsa200408NS
+                        || nav.NamespaceURI == XPathMessageContext.WsaNoneNS
+                    )
+                )
                 {
                     return true;
                 }
@@ -303,7 +328,13 @@ namespace System.ServiceModel.Dispatcher
         {
             while (nav.MoveToNext())
             {
-                if (nav.LocalName == name && (nav.NamespaceURI == XPathMessageContext.Wsa10NS || nav.NamespaceURI == XPathMessageContext.Wsa200408NS))
+                if (
+                    nav.LocalName == name
+                    && (
+                        nav.NamespaceURI == XPathMessageContext.Wsa10NS
+                        || nav.NamespaceURI == XPathMessageContext.Wsa200408NS
+                    )
+                )
                 {
                     return true;
                 }
@@ -334,7 +365,10 @@ namespace System.ServiceModel.Dispatcher
             }
 
             string ns = nav.NamespaceURI;
-            if (nav.LocalName != XPathMessageContext.EnvelopeE || (ns != XPathMessageContext.S11NS && ns != XPathMessageContext.S12NS))
+            if (
+                nav.LocalName != XPathMessageContext.EnvelopeE
+                || (ns != XPathMessageContext.S11NS && ns != XPathMessageContext.S12NS)
+            )
             {
                 return false;
             }
@@ -364,7 +398,10 @@ namespace System.ServiceModel.Dispatcher
             }
 
             string ns = nav.NamespaceURI;
-            if (nav.LocalName != XPathMessageContext.EnvelopeE || (ns != XPathMessageContext.S11NS && ns != XPathMessageContext.S12NS))
+            if (
+                nav.LocalName != XPathMessageContext.EnvelopeE
+                || (ns != XPathMessageContext.S11NS && ns != XPathMessageContext.S12NS)
+            )
             {
                 return false;
             }
@@ -407,7 +444,9 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.QueryFunctionStringArg)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.QueryFunctionStringArg))
+                );
             }
         }
 
@@ -435,18 +474,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal XPathResultType ReturnType
         {
-            get
-            {
-                return this.function.ReturnType;
-            }
+            get { return this.function.ReturnType; }
         }
 
         internal int ArgCount
         {
-            get
-            {
-                return this.argCount;
-            }
+            get { return this.argCount; }
         }
 
         internal override bool Equals(Opcode op)
@@ -480,12 +513,10 @@ namespace System.ServiceModel.Dispatcher
 #if NO
 
     // These classes are left around in case we decide to implement our own variables or any new functions.
-    
+
     internal abstract class XPathMessageVariable : IXsltContextVariable
     {
-        protected XPathMessageVariable()
-        {
-        }
+        protected XPathMessageVariable() { }
 
         public abstract bool IsLocal { get; }
         public abstract bool IsParam { get; }
@@ -497,7 +528,7 @@ namespace System.ServiceModel.Dispatcher
         {
             context.PushFrame();
             int count = context.IterationCount;
-            if(count > 0)
+            if (count > 0)
             {
                 ValuePush(context, count);
             }
@@ -509,36 +540,40 @@ namespace System.ServiceModel.Dispatcher
     internal class PushXPathMessageVariableOpcode : Opcode
     {
         XPathMessageVariable variable;
-        
+
         internal PushXPathMessageVariableOpcode(XPathMessageVariable var)
             : base(OpcodeID.PushXsltVariable)
         {
             this.variable = var;
         }
-        
+
         internal override bool Equals(Opcode op)
         {
             if (base.Equals(op))
             {
                 PushXPathMessageVariableOpcode var = op as PushXPathMessageVariableOpcode;
-                if(var != null)
+                if (var != null)
                 {
                     return this.variable == var.variable;
                 }
             }
             return false;
         }
-        
+
         internal override Opcode Eval(ProcessingContext context)
         {
             this.variable.EvaluateInternal(context);
             return this.next;
         }
-        
+
 #if DEBUG_FILTER
         public override string ToString()
         {
-            return string.Format("{0} XPathMessageVariable: {1}", base.ToString(), this.variable.ToString());
+            return string.Format(
+                "{0} XPathMessageVariable: {1}",
+                base.ToString(),
+                this.variable.ToString()
+            );
         }
 #endif
     }
@@ -555,7 +590,7 @@ namespace System.ServiceModel.Dispatcher
             XmlDocument doc = new XmlDocument();
             navigator = doc.CreateNavigator();
         }
-        
+
         public XPathMessageFunctionQuick(string xpath)
         {
             this.context = new XPathMessageContext();
@@ -563,39 +598,27 @@ namespace System.ServiceModel.Dispatcher
             this.expr.SetContext(context);
             this.retType = this.expr.ReturnType;
         }
-              
+
         public XPathResultType[] ArgTypes
         {
-            get
-            {
-                return new XPathResultType[] {};
-            }
+            get { return new XPathResultType[] { }; }
         }
-        
+
         public int Maxargs
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
-        
+
         public int Minargs
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
-        
+
         public XPathResultType ReturnType
         {
-            get
-            {
-                return this.retType;
-            }
+            get { return this.retType; }
         }
-        
+
         public object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
         {
             return docContext.Evaluate(this.expr);
@@ -606,9 +629,7 @@ namespace System.ServiceModel.Dispatcher
     internal class XPathMessageFunctionAction : XPathMessageFunction
     {
         public XPathMessageFunctionAction()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.String)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.String) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -652,7 +673,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             SeekableMessageNavigator nav = docContext as SeekableMessageNavigator;
             if (nav != null)
@@ -679,9 +704,7 @@ namespace System.ServiceModel.Dispatcher
     internal class XPathMessageFunctionTo : XPathMessageFunction
     {
         public XPathMessageFunctionTo()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.String)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.String) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -715,7 +738,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             SeekableMessageNavigator nav = docContext as SeekableMessageNavigator;
             if (nav != null)
@@ -742,9 +769,7 @@ namespace System.ServiceModel.Dispatcher
     internal class XPathMessageFunctionMessageID : XPathMessageFunction
     {
         public XPathMessageFunctionMessageID()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.String)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.String) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -778,7 +803,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             SeekableMessageNavigator nav = docContext as SeekableMessageNavigator;
             if (nav != null)
@@ -807,9 +836,7 @@ namespace System.ServiceModel.Dispatcher
         XPathExpression expr;
 
         public XPathMessageFunctionHeader()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.NodeSet)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.NodeSet) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -836,11 +863,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             if (this.expr == null)
             {
-                XPathExpression e = docContext.Compile("(/s11:Envelope/s11:Header | /s12:Envelope/s12:Header)[1]");
+                XPathExpression e = docContext.Compile(
+                    "(/s11:Envelope/s11:Header | /s12:Envelope/s12:Header)[1]"
+                );
                 e.SetContext(Namespaces);
                 this.expr = e;
             }
@@ -853,9 +886,7 @@ namespace System.ServiceModel.Dispatcher
         XPathExpression expr;
 
         public XPathMessageFunctionBody()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.NodeSet)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.NodeSet) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -884,11 +915,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             if (this.expr == null)
             {
-                XPathExpression e = docContext.Compile("(/s11:Envelope/s11:Body | /s12:Envelope/s12:Body)[1]");
+                XPathExpression e = docContext.Compile(
+                    "(/s11:Envelope/s11:Body | /s12:Envelope/s12:Body)[1]"
+                );
                 e.SetContext(Namespaces);
                 this.expr = e;
             }
@@ -899,9 +936,7 @@ namespace System.ServiceModel.Dispatcher
     internal class XPathMessageFunctionSoapUri : XPathMessageFunction
     {
         public XPathMessageFunctionSoapUri()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.String)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.String) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -932,7 +967,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             SeekableMessageNavigator nav = docContext as SeekableMessageNavigator;
             if (nav != null)
@@ -948,7 +987,10 @@ namespace System.ServiceModel.Dispatcher
             if (nav.MoveToFirstChild())
             {
                 string ns = nav.NamespaceURI;
-                if (nav.LocalName != XPathMessageContext.EnvelopeE || (ns != XPathMessageContext.S11NS && ns != XPathMessageContext.S12NS))
+                if (
+                    nav.LocalName != XPathMessageContext.EnvelopeE
+                    || (ns != XPathMessageContext.S11NS && ns != XPathMessageContext.S12NS)
+                )
                 {
                     return string.Empty;
                 }
@@ -968,8 +1010,7 @@ namespace System.ServiceModel.Dispatcher
     {
         internal XPathMessageFunctionActor()
             : base(new XPathResultType[] { XPathResultType.NodeSet }, 1, 1, XPathResultType.String)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -995,7 +1036,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             XPathNodeIterator iter = (XPathNodeIterator)args[0];
             if (!iter.MoveNext())
@@ -1008,16 +1053,28 @@ namespace System.ServiceModel.Dispatcher
 
         internal static string ExtractFromNavigator(XPathNavigator nav)
         {
-            string actor11 = nav.GetAttribute(XPathMessageContext.Actor11A, XPathMessageContext.S11NS);
-            string actor12 = nav.GetAttribute(XPathMessageContext.Actor12A, XPathMessageContext.S12NS);
+            string actor11 = nav.GetAttribute(
+                XPathMessageContext.Actor11A,
+                XPathMessageContext.S11NS
+            );
+            string actor12 = nav.GetAttribute(
+                XPathMessageContext.Actor12A,
+                XPathMessageContext.S12NS
+            );
 
             nav.MoveToRoot();
             nav.MoveToFirstChild();
-            if (nav.LocalName == XPathMessageContext.EnvelopeE && nav.NamespaceURI == XPathMessageContext.S11NS)
+            if (
+                nav.LocalName == XPathMessageContext.EnvelopeE
+                && nav.NamespaceURI == XPathMessageContext.S11NS
+            )
             {
                 return actor11;
             }
-            else if (nav.LocalName == XPathMessageContext.EnvelopeE && nav.NamespaceURI == XPathMessageContext.S12NS)
+            else if (
+                nav.LocalName == XPathMessageContext.EnvelopeE
+                && nav.NamespaceURI == XPathMessageContext.S12NS
+            )
             {
                 return actor12;
             }
@@ -1030,8 +1087,7 @@ namespace System.ServiceModel.Dispatcher
     {
         internal XPathMessageFunctionIsMandatory()
             : base(new XPathResultType[] { XPathResultType.NodeSet }, 1, 1, XPathResultType.Boolean)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1057,7 +1113,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             XPathNodeIterator iter = (XPathNodeIterator)args[0];
             if (!iter.MoveNext())
@@ -1070,16 +1130,28 @@ namespace System.ServiceModel.Dispatcher
 
         internal static bool ExtractFromNavigator(XPathNavigator nav)
         {
-            string mand11 = nav.GetAttribute(XPathMessageContext.MandatoryA, XPathMessageContext.S11NS);
-            string mand12 = nav.GetAttribute(XPathMessageContext.MandatoryA, XPathMessageContext.S12NS);
+            string mand11 = nav.GetAttribute(
+                XPathMessageContext.MandatoryA,
+                XPathMessageContext.S11NS
+            );
+            string mand12 = nav.GetAttribute(
+                XPathMessageContext.MandatoryA,
+                XPathMessageContext.S12NS
+            );
 
             nav.MoveToRoot();
             nav.MoveToFirstChild();
-            if (nav.LocalName == XPathMessageContext.EnvelopeE && nav.NamespaceURI == XPathMessageContext.S11NS)
+            if (
+                nav.LocalName == XPathMessageContext.EnvelopeE
+                && nav.NamespaceURI == XPathMessageContext.S11NS
+            )
             {
                 return mand11 == "1";
             }
-            else if (nav.LocalName == XPathMessageContext.EnvelopeE && nav.NamespaceURI == XPathMessageContext.S12NS)
+            else if (
+                nav.LocalName == XPathMessageContext.EnvelopeE
+                && nav.NamespaceURI == XPathMessageContext.S12NS
+            )
             {
                 return mand12 == "true";
             }
@@ -1095,8 +1167,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal XPathMessageFunctionIsActorNext()
             : base(new XPathResultType[] { XPathResultType.NodeSet }, 1, 1, XPathResultType.Boolean)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1169,8 +1240,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal XPathMessageFunctionIsActorUltimateReceiver()
             : base(new XPathResultType[] { XPathResultType.NodeSet }, 1, 1, XPathResultType.Boolean)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1236,8 +1306,7 @@ namespace System.ServiceModel.Dispatcher
     {
         internal XPathMessageFunctionHeadersWithActor()
             : base(new XPathResultType[] { XPathResultType.String }, 1, 1, XPathResultType.NodeSet)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1274,86 +1343,101 @@ namespace System.ServiceModel.Dispatcher
             nav.CurrentPosition = p;
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             string actor = ToString(args[0]);
-            string e = string.Format(CultureInfo.InvariantCulture, "/s11:Envelope/s11:Header/*[@s11:actor='{0}'] | /s12:Envelope/s12:Header/*[@s12:role='{1}']", actor, actor);
+            string e = string.Format(
+                CultureInfo.InvariantCulture,
+                "/s11:Envelope/s11:Header/*[@s11:actor='{0}'] | /s12:Envelope/s12:Header/*[@s12:role='{1}']",
+                actor,
+                actor
+            );
             XPathExpression expr = docContext.Compile(e);
             expr.SetContext(xsltContext);
             return docContext.Evaluate(expr);
 
 #if NO
-            // PERF, Microsoft, I drafted this implementation before we found out that a bug in the Fx implementation would 
+            // PERF, Microsoft, I drafted this implementation before we found out that a bug in the Fx implementation would
             //               prevent us from constructing an XPathNodeIterator that they would accept.  I'm keeping it
             //               around in the hope that I will be able to use it by M5.4.  If not, it will be deleted.
-            
+
             XPathNavigator basicNav = docContext.Clone();
             SeekableXPathNavigator nav = basicNav as SeekableXPathNavigator;
-            if(nav == null)
+            if (nav == null)
             {
                 nav = new GenericSeekableNavigator(basicNav);
             }
-            
+
             string actor = (string)args[0];
             NodeSequence seq = new NodeSequence();
             XPathNodeIterator result = new NodeSequenceIterator(seq);
-            
+
             nav.MoveToRoot();
-            if(!nav.MoveToFirstChild())
+            if (!nav.MoveToFirstChild())
             {
                 return result;
             }
 
-            if(nav.LocalName != "Envelope")
+            if (nav.LocalName != "Envelope")
             {
                 return result;
             }
-            
-            if(nav.NamespaceURI == XPathMessageContext.S11NS)
+
+            if (nav.NamespaceURI == XPathMessageContext.S11NS)
             {
                 // Move to Header
-                if(nav.MoveToFirstChild() && nav.LocalName == "Header" && nav.NamespaceURI == XPathMessageContext.S11NS)
+                if (
+                    nav.MoveToFirstChild()
+                    && nav.LocalName == "Header"
+                    && nav.NamespaceURI == XPathMessageContext.S11NS
+                )
                 {
                     // Move to first Header block
-                    if(nav.MoveToFirstChild())
+                    if (nav.MoveToFirstChild())
                     {
                         // Iterate over header blocks
                         do
                         {
-                            if(nav.MoveToAttribute("actor", XPathMessageContext.S11NS))
+                            if (nav.MoveToAttribute("actor", XPathMessageContext.S11NS))
                             {
-                                if(nav.Value == actor)
+                                if (nav.Value == actor)
                                 {
                                     seq.Add(nav);
                                 }
                                 nav.MoveToParent();
                             }
-                                    
-                        } while(nav.MoveToNext());
+                        } while (nav.MoveToNext());
                     }
                 }
             }
-            else if(nav.NamespaceURI == XPathMessageContext.S12NS)
+            else if (nav.NamespaceURI == XPathMessageContext.S12NS)
             {
                 // Move to Header
-                if(nav.MoveToFirstChild() && nav.LocalName == "Header" && nav.NamespaceURI == XPathMessageContext.S12NS)
+                if (
+                    nav.MoveToFirstChild()
+                    && nav.LocalName == "Header"
+                    && nav.NamespaceURI == XPathMessageContext.S12NS
+                )
                 {
                     // Move to first Header block
-                    if(nav.MoveToFirstChild())
+                    if (nav.MoveToFirstChild())
                     {
                         // Iterate over header blocks
                         do
                         {
-                            if(nav.MoveToAttribute("role", XPathMessageContext.S12NS))
+                            if (nav.MoveToAttribute("role", XPathMessageContext.S12NS))
                             {
-                                if(nav.Value == actor)
+                                if (nav.Value == actor)
                                 {
                                     seq.Add(nav);
                                 }
                                 nav.MoveToParent();
                             }
-                                    
-                        } while(nav.MoveToNext());
+                        } while (nav.MoveToNext());
                     }
                 }
             }
@@ -1368,9 +1452,7 @@ namespace System.ServiceModel.Dispatcher
         XPathExpression expr;
 
         internal XPathMessageFunctionRelatesTo()
-            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet)
-        {
-        }
+            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1402,11 +1484,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             if (this.expr == null)
             {
-                XPathExpression e = docContext.Compile("sm:header()/wsa10:RelatesTo | sm:header()/wsaAugust2004:RelatesTo");
+                XPathExpression e = docContext.Compile(
+                    "sm:header()/wsa10:RelatesTo | sm:header()/wsaAugust2004:RelatesTo"
+                );
                 e.SetContext(new XPathMessageContext());
                 this.expr = e;
             }
@@ -1419,9 +1507,7 @@ namespace System.ServiceModel.Dispatcher
         XPathExpression expr;
 
         internal XPathMessageFunctionReplyTo()
-            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet)
-        {
-        }
+            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1449,12 +1535,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
-
             if (this.expr == null)
             {
-                XPathExpression e = docContext.Compile("(sm:header()/wsa10:ReplyTo | sm:header()/wsaAugust2004:ReplyTo)[1]");
+                XPathExpression e = docContext.Compile(
+                    "(sm:header()/wsa10:ReplyTo | sm:header()/wsaAugust2004:ReplyTo)[1]"
+                );
                 e.SetContext(new XPathMessageContext());
                 this.expr = e;
             }
@@ -1467,9 +1558,7 @@ namespace System.ServiceModel.Dispatcher
         XPathExpression expr;
 
         internal XPathMessageFunctionFrom()
-            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet)
-        {
-        }
+            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1497,11 +1586,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             if (this.expr == null)
             {
-                XPathExpression e = docContext.Compile("(sm:header()/wsa10:From | sm:header()/wsaAugust2004:From)[1]");
+                XPathExpression e = docContext.Compile(
+                    "(sm:header()/wsa10:From | sm:header()/wsaAugust2004:From)[1]"
+                );
                 e.SetContext(new XPathMessageContext());
                 this.expr = e;
             }
@@ -1514,9 +1609,7 @@ namespace System.ServiceModel.Dispatcher
         XPathExpression expr;
 
         internal XPathMessageFunctionFaultTo()
-            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet)
-        {
-        }
+            : base(new XPathResultType[] { }, 0, 0, XPathResultType.NodeSet) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1544,11 +1637,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             if (this.expr == null)
             {
-                XPathExpression e = docContext.Compile("(sm:header()/wsa10:FaultTo | sm:header()/wsaAugust2004:FaultTo)[1]");
+                XPathExpression e = docContext.Compile(
+                    "(sm:header()/wsa10:FaultTo | sm:header()/wsaAugust2004:FaultTo)[1]"
+                );
                 e.SetContext(new XPathMessageContext());
                 this.expr = e;
             }
@@ -1560,8 +1659,7 @@ namespace System.ServiceModel.Dispatcher
     {
         internal XPathMessageFunctionDateStr()
             : base(new XPathResultType[1] { XPathResultType.String }, 1, 1, XPathResultType.Number)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1574,7 +1672,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             return Convert(ToString(args[0]));
         }
@@ -1583,7 +1685,13 @@ namespace System.ServiceModel.Dispatcher
         {
             try
             {
-                return ConvertDate(DateTime.Parse(dateStr, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.RoundtripKind));
+                return ConvertDate(
+                    DateTime.Parse(
+                        dateStr,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.RoundtripKind
+                    )
+                );
             }
             catch (FormatException)
             {
@@ -1597,9 +1705,7 @@ namespace System.ServiceModel.Dispatcher
         static XPathResultType[] argTypes = new XPathResultType[1] { XPathResultType.String };
 
         public XPathMessageFunctionCorrelationData()
-            : base(argTypes, 1, 1, XPathResultType.String)
-        {
-        }
+            : base(argTypes, 1, 1, XPathResultType.String) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1613,7 +1719,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 string value;
 
-                if (data == null || !data.TryGetValue(context.PeekString(nameArg.basePtr), out value))
+                if (
+                    data == null
+                    || !data.TryGetValue(context.PeekString(nameArg.basePtr), out value)
+                )
                 {
                     value = string.Empty;
                 }
@@ -1623,7 +1732,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             SeekableMessageNavigator nav = docContext as SeekableMessageNavigator;
 
@@ -1633,8 +1746,10 @@ namespace System.ServiceModel.Dispatcher
                 CorrelationDataMessageProperty data;
                 string value;
 
-                if (!CorrelationDataMessageProperty.TryGet(message, out data) ||
-                    !data.TryGetValue((string)args[0], out value))
+                if (
+                    !CorrelationDataMessageProperty.TryGet(message, out data)
+                    || !data.TryGetValue((string)args[0], out value)
+                )
                 {
                     value = string.Empty;
                 }
@@ -1651,9 +1766,7 @@ namespace System.ServiceModel.Dispatcher
     internal class XPathMessageFunctionDateNow : XPathMessageFunction
     {
         internal XPathMessageFunctionDateNow()
-            : base(new XPathResultType[0], 0, 0, XPathResultType.Number)
-        {
-        }
+            : base(new XPathResultType[0], 0, 0, XPathResultType.Number) { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1665,7 +1778,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             return ConvertDate(DateTime.UtcNow);
         }
@@ -1675,8 +1792,7 @@ namespace System.ServiceModel.Dispatcher
     {
         internal XPathMessageFunctionSpanStr()
             : base(new XPathResultType[1] { XPathResultType.String }, 1, 1, XPathResultType.Number)
-        {
-        }
+        { }
 
         internal override void InvokeInternal(ProcessingContext context, int argCount)
         {
@@ -1689,7 +1805,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        public override object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
+        public override object Invoke(
+            XsltContext xsltContext,
+            object[] args,
+            XPathNavigator docContext
+        )
         {
             return Convert(ToString(args[0]));
         }

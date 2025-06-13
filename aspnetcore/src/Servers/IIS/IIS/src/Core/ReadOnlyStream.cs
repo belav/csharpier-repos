@@ -17,8 +17,7 @@ internal abstract class ReadOnlyStream : Stream
 
     public override bool CanSeek => false;
 
-    public override long Length
-        => throw new NotSupportedException();
+    public override long Length => throw new NotSupportedException();
 
     public override long Position
     {
@@ -26,9 +25,7 @@ internal abstract class ReadOnlyStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override void Flush()
-    {
-    }
+    public override void Flush() { }
 
     public override Task FlushAsync(CancellationToken cancellationToken)
     {
@@ -50,12 +47,20 @@ internal abstract class ReadOnlyStream : Stream
         throw new NotSupportedException();
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotSupportedException();
     }

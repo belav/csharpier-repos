@@ -131,8 +131,18 @@ namespace System.IO
                     return false;
                 }
                 // Check If the match is at the beginning of the string, or is preceded by a newline.
-                else if (keyIndex == 0
-                    || (keyIndex >= Environment.NewLine.Length && _buffer.AsSpan(keyIndex - Environment.NewLine.Length, Environment.NewLine.Length).SequenceEqual(Environment.NewLine)))
+                else if (
+                    keyIndex == 0
+                    || (
+                        keyIndex >= Environment.NewLine.Length
+                        && _buffer
+                            .AsSpan(
+                                keyIndex - Environment.NewLine.Length,
+                                Environment.NewLine.Length
+                            )
+                            .SequenceEqual(Environment.NewLine)
+                    )
+                )
                 {
                     // Check if the match is followed by whitespace, meaning it is not part of a larger word.
                     if (HasFollowingWhitespace(keyIndex, key.Length))
@@ -171,7 +181,9 @@ namespace System.IO
             }
             else
             {
-                throw new InvalidOperationException("Unable to parse value " + value + " of key " + key + " as an Int32.");
+                throw new InvalidOperationException(
+                    "Unable to parse value " + value + " of key " + key + " as an Int32."
+                );
             }
         }
 
@@ -189,13 +201,17 @@ namespace System.IO
             // PERF: We don't need to allocate a new string here, we can parse an Int64 "in-place" in the existing string.
             string value = GetNextValue(key);
             long result;
-            if (long.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out result))
+            if (
+                long.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out result)
+            )
             {
                 return result;
             }
             else
             {
-                throw new InvalidOperationException("Unable to parse value " + value + " of key " + key + " as an Int64.");
+                throw new InvalidOperationException(
+                    "Unable to parse value " + value + " of key " + key + " as an Int64."
+                );
             }
         }
 

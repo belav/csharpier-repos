@@ -7,19 +7,19 @@
 namespace System.Web.Configuration
 {
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.IO;
-    using System.Text;
-    using System.Security.Cryptography;
-    using System.Web.Util;
-    using System.Globalization;
-    using System.Web.Hosting;
-    using System.Runtime.InteropServices;
+    using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 
     public enum MachineKeyValidation
     {
@@ -27,12 +27,27 @@ namespace System.Web.Configuration
         SHA1,
         TripleDES,
         AES,
-        [SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Justification = "Matches spec and previous shipped values")]
+
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1705:LongAcronymsShouldBePascalCased",
+            Justification = "Matches spec and previous shipped values"
+        )]
         HMACSHA256,
-        [SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Justification = "Matches spec and previous shipped values")]
+
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1705:LongAcronymsShouldBePascalCased",
+            Justification = "Matches spec and previous shipped values"
+        )]
         HMACSHA384,
-        [SuppressMessage("Microsoft.Naming", "CA1705:LongAcronymsShouldBePascalCased", Justification = "Matches spec and previous shipped values")]
+
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1705:LongAcronymsShouldBePascalCased",
+            Justification = "Matches spec and previous shipped values"
+        )]
         HMACSHA512,
-        Custom
+        Custom,
     }
 }

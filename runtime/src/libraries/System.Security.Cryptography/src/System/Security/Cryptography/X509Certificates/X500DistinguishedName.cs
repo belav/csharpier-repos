@@ -13,9 +13,7 @@ namespace System.Security.Cryptography.X509Certificates
         private List<X500RelativeDistinguishedName>? _parsedAttributes;
 
         public X500DistinguishedName(byte[] encodedDistinguishedName)
-            : base(new Oid(null, null), encodedDistinguishedName)
-        {
-        }
+            : base(new Oid(null, null), encodedDistinguishedName) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X500DistinguishedName"/>
@@ -26,14 +24,10 @@ namespace System.Security.Cryptography.X509Certificates
         /// </param>
         /// <seealso cref="Encode"/>
         public X500DistinguishedName(ReadOnlySpan<byte> encodedDistinguishedName)
-            : base(new Oid(null, null), encodedDistinguishedName)
-        {
-        }
+            : base(new Oid(null, null), encodedDistinguishedName) { }
 
         public X500DistinguishedName(AsnEncodedData encodedDistinguishedName)
-            : base(encodedDistinguishedName)
-        {
-        }
+            : base(encodedDistinguishedName) { }
 
         public X500DistinguishedName(X500DistinguishedName distinguishedName)
             : base(distinguishedName)
@@ -42,9 +36,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X500DistinguishedName(string distinguishedName)
-            : this(distinguishedName, X500DistinguishedNameFlags.Reversed)
-        {
-        }
+            : this(distinguishedName, X500DistinguishedNameFlags.Reversed) { }
 
         public X500DistinguishedName(string distinguishedName, X500DistinguishedNameFlags flag)
             : base(new Oid(null, null), Encode(distinguishedName, flag))
@@ -52,7 +44,8 @@ namespace System.Security.Cryptography.X509Certificates
             _lazyDistinguishedName = distinguishedName;
         }
 
-        public string Name => _lazyDistinguishedName ??= Decode(X500DistinguishedNameFlags.Reversed);
+        public string Name =>
+            _lazyDistinguishedName ??= Decode(X500DistinguishedNameFlags.Reversed);
 
         public string Decode(X500DistinguishedNameFlags flag)
         {
@@ -78,9 +71,12 @@ namespace System.Security.Cryptography.X509Certificates
         /// <exception cref="CryptographicException">
         ///   The X.500 Name is not a proper DER-encoded X.500 Name value.
         /// </exception>
-        public IEnumerable<X500RelativeDistinguishedName> EnumerateRelativeDistinguishedNames(bool reversed = true)
+        public IEnumerable<X500RelativeDistinguishedName> EnumerateRelativeDistinguishedNames(
+            bool reversed = true
+        )
         {
-            List<X500RelativeDistinguishedName> parsedAttributes = _parsedAttributes ??= ParseAttributes(RawData);
+            List<X500RelativeDistinguishedName> parsedAttributes = _parsedAttributes ??=
+                ParseAttributes(RawData);
 
             return EnumerateRelativeDistinguishedNames(parsedAttributes, reversed);
         }
@@ -105,7 +101,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         private static IEnumerable<X500RelativeDistinguishedName> EnumerateRelativeDistinguishedNames(
             List<X500RelativeDistinguishedName> parsedAttributes,
-            bool reversed)
+            bool reversed
+        )
         {
             if (reversed)
             {
@@ -145,7 +142,9 @@ namespace System.Security.Cryptography.X509Certificates
                         throw new UnreachableException();
                     }
 
-                    var rdn = new X500RelativeDistinguishedName(rawDataMemory.Slice(offset, encodedValue.Length));
+                    var rdn = new X500RelativeDistinguishedName(
+                        rawDataMemory.Slice(offset, encodedValue.Length)
+                    );
                     sequence.ReadEncodedValue();
                     (parsedAttributes ??= new List<X500RelativeDistinguishedName>()).Add(rdn);
                 }

@@ -62,8 +62,9 @@ public class PropertyHelperTest
         // Arrange
         var expected = "new value";
         var instance = new BaseClass { PropA = "old value" };
-        var helper = PropertyHelper.GetProperties(
-            instance.GetType()).First(prop => prop.Name == "PropA");
+        var helper = PropertyHelper
+            .GetProperties(instance.GetType())
+            .First(prop => prop.Name == "PropA");
 
         // Act
         helper.SetValue(instance, expected);
@@ -78,8 +79,9 @@ public class PropertyHelperTest
         // Arrange
         var expected = "new value";
         var instance = new BaseClass { PropA = "old value" };
-        var helper = PropertyHelper.GetProperties(
-            instance.GetType()).First(prop => prop.Name == "PropA");
+        var helper = PropertyHelper
+            .GetProperties(instance.GetType())
+            .First(prop => prop.Name == "PropA");
 
         // Act and Assert
         Assert.NotNull(helper.ValueSetter);
@@ -216,8 +218,16 @@ public class PropertyHelperTest
         anonymous.StringProp = "Five";
 
         // Act + Assert
-        var helper1 = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()).Where(prop => prop.Name == "IntProp"));
-        var helper2 = Assert.Single(PropertyHelper.GetProperties(anonymous.GetType().GetTypeInfo()).Where(prop => prop.Name == "StringProp"));
+        var helper1 = Assert.Single(
+            PropertyHelper
+                .GetProperties(anonymous.GetType().GetTypeInfo())
+                .Where(prop => prop.Name == "IntProp")
+        );
+        var helper2 = Assert.Single(
+            PropertyHelper
+                .GetProperties(anonymous.GetType().GetTypeInfo())
+                .Where(prop => prop.Name == "StringProp")
+        );
         Assert.Equal(3, helper1.GetValue(anonymous));
         Assert.Equal("Five", helper2.GetValue(anonymous));
     }
@@ -294,8 +304,15 @@ public class PropertyHelperTest
         // Assert
         Assert.Collection(
             helpers.OrderBy(helper => helper.Name, StringComparer.Ordinal),
-            helper => { Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal); },
-            helper => { Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal); });
+            helper =>
+            {
+                Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal);
+            },
+            helper =>
+            {
+                Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal);
+            }
+        );
     }
 
     [Fact]
@@ -310,10 +327,23 @@ public class PropertyHelperTest
         // Assert
         Assert.Collection(
             helpers.OrderBy(helper => helper.Name, StringComparer.Ordinal),
-            helper => { Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal); },
-            helper => { Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal); },
-            helper => { Assert.Equal(expectedNames[2], helper.Name, StringComparer.Ordinal); },
-            helper => { Assert.Equal(expectedNames[3], helper.Name, StringComparer.Ordinal); });
+            helper =>
+            {
+                Assert.Equal(expectedNames[0], helper.Name, StringComparer.Ordinal);
+            },
+            helper =>
+            {
+                Assert.Equal(expectedNames[1], helper.Name, StringComparer.Ordinal);
+            },
+            helper =>
+            {
+                Assert.Equal(expectedNames[2], helper.Name, StringComparer.Ordinal);
+            },
+            helper =>
+            {
+                Assert.Equal(expectedNames[3], helper.Name, StringComparer.Ordinal);
+            }
+        );
     }
 
     [Fact]
@@ -583,39 +613,29 @@ public class PropertyHelperTest
         get
         {
             return new TheoryData<object, KeyValuePair<string, object>>
+            {
                 {
-                    {
-                        new
-                        {
-                            selected = true,
-                            SeLeCtEd = false
-                        },
-                        new KeyValuePair<string, object>("selected", false)
-                    },
-                    {
-                        new
-                        {
-                            SeLeCtEd = false,
-                            selected = true
-                        },
-                        new KeyValuePair<string, object>("SeLeCtEd", true)
-                    },
-                    {
-                        new
-                        {
-                            SelECTeD = false,
-                            SeLECTED = true
-                        },
-                        new KeyValuePair<string, object>("SelECTeD", true)
-                    }
-                };
+                    new { selected = true, SeLeCtEd = false },
+                    new KeyValuePair<string, object>("selected", false)
+                },
+                {
+                    new { SeLeCtEd = false, selected = true },
+                    new KeyValuePair<string, object>("SeLeCtEd", true)
+                },
+                {
+                    new { SelECTeD = false, SeLECTED = true },
+                    new KeyValuePair<string, object>("SelECTeD", true)
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(IgnoreCaseTestData))]
-    public void ObjectToDictionary_IgnoresPropertyCase(object testObject,
-                                                       KeyValuePair<string, object> expectedEntry)
+    public void ObjectToDictionary_IgnoresPropertyCase(
+        object testObject,
+        KeyValuePair<string, object> expectedEntry
+    )
     {
         // Act
         var result = PropertyHelper.ObjectToDictionary(testObject);
@@ -704,7 +724,12 @@ public class PropertyHelperTest
     public void ObjectToDictionary_ReturnsInheritedProperties()
     {
         // Arrange
-        var value = new ThreeDPoint() { X = 5, Y = 10, Z = 17 };
+        var value = new ThreeDPoint()
+        {
+            X = 5,
+            Y = 10,
+            Z = 17,
+        };
 
         // Act
         var dictValues = PropertyHelper.ObjectToDictionary(value);
@@ -743,9 +768,7 @@ public class PropertyHelperTest
         public int Prop5 { get; set; }
     }
 
-    private readonly ref struct MyRefStruct
-    {
-    }
+    private readonly ref struct MyRefStruct { }
 #elif NETFRAMEWORK
 #else
 #error Unknown TFM - update the set of TFMs where we test for ref structs
@@ -758,7 +781,10 @@ public class PropertyHelperTest
 
     private class SetOnly
     {
-        public int Prop2 { set { } }
+        public int Prop2
+        {
+            set { }
+        }
         public int Prop6 { get; set; }
     }
 

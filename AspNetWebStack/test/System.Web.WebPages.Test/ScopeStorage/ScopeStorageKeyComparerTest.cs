@@ -13,7 +13,10 @@ namespace System.Web.WebPages.Test
         public void ScopeStorageComparerPerformsCaseInsensitiveOrdinalComparisonForStrings()
         {
             // Arrange
-            var dictionary = new Dictionary<object, object>(ScopeStorageComparer.Instance) { { "foo", "bar" } };
+            var dictionary = new Dictionary<object, object>(ScopeStorageComparer.Instance)
+            {
+                { "foo", "bar" },
+            };
 
             // Act and Assert
             Assert.Equal("bar", dictionary["foo"]);
@@ -24,7 +27,14 @@ namespace System.Web.WebPages.Test
         public void ScopeStorageComparerPerformsRegularComparisonForOtherTypes()
         {
             // Arrange
-            var stateStorage = new Dictionary<object, object> { { 4, "4-value" }, { new Person { ID = 10 }, "person-value" } };
+            var stateStorage = new Dictionary<object, object>
+            {
+                { 4, "4-value" },
+                {
+                    new Person { ID = 10 },
+                    "person-value"
+                },
+            };
 
             // Act and Assert
             Assert.Equal("4-value", stateStorage[4]);

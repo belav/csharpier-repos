@@ -31,9 +31,11 @@ namespace System.IO
 
             // If we have the exact same string we were passed in, don't allocate another string.
             // TryExpandShortName does this input identity check.
-            string result = builder.AsSpan().IndexOf('~') >= 0
-                ? TryExpandShortFileName(ref builder, originalPath: path)
-                : builder.AsSpan().Equals(path.AsSpan(), StringComparison.Ordinal) ? path : builder.ToString();
+            string result =
+                builder.AsSpan().IndexOf('~') >= 0
+                    ? TryExpandShortFileName(ref builder, originalPath: path)
+                : builder.AsSpan().Equals(path.AsSpan(), StringComparison.Ordinal) ? path
+                : builder.ToString();
 
             // Clear the buffer
             builder.Dispose();
@@ -53,9 +55,10 @@ namespace System.IO
             // Get the full path
             GetFullPathName(path.AsSpan(terminate: true), ref builder);
 
-            string result = builder.AsSpan().IndexOf('~') >= 0
-                ? TryExpandShortFileName(ref builder, originalPath: null)
-                : builder.ToString();
+            string result =
+                builder.AsSpan().IndexOf('~') >= 0
+                    ? TryExpandShortFileName(ref builder, originalPath: null)
+                    : builder.ToString();
 
             // Clear the buffer
             builder.Dispose();
@@ -74,7 +77,16 @@ namespace System.IO
             Debug.Assert(PathInternal.IsPartiallyQualified(path) || !PathInternal.IsExtended(path));
 
             uint result;
-            while ((result = Interop.Kernel32.GetFullPathNameW(ref MemoryMarshal.GetReference(path), (uint)builder.Capacity, ref builder.GetPinnableReference(), IntPtr.Zero)) > builder.Capacity)
+            while (
+                (
+                    result = Interop.Kernel32.GetFullPathNameW(
+                        ref MemoryMarshal.GetReference(path),
+                        (uint)builder.Capacity,
+                        ref builder.GetPinnableReference(),
+                        IntPtr.Zero
+                    )
+                ) > builder.Capacity
+            )
             {
                 // Reported size is greater than the buffer size. Increase the capacity.
                 builder.EnsureCapacity(checked((int)result));
@@ -92,7 +104,11 @@ namespace System.IO
             builder.Length = (int)result;
         }
 
-        internal static int PrependDevicePathChars(ref ValueStringBuilder content, bool isDosUnc, ref ValueStringBuilder buffer)
+        internal static int PrependDevicePathChars(
+            ref ValueStringBuilder content,
+            bool isDosUnc,
+            ref ValueStringBuilder buffer
+        )
         {
             int length = content.Length;
 
@@ -123,12 +139,18 @@ namespace System.IO
             }
         }
 
-        internal static string TryExpandShortFileName(ref ValueStringBuilder outputBuilder, string? originalPath)
+        internal static string TryExpandShortFileName(
+            ref ValueStringBuilder outputBuilder,
+            string? originalPath
+        )
         {
             // We guarantee we'll expand short names for paths that only partially exist. As such, we need to find the part of the path that actually does exist. To
             // avoid allocating a lot we'll create only one input array and modify the contents with embedded nulls.
 
-            Debug.Assert(!PathInternal.IsPartiallyQualified(outputBuilder.AsSpan()), "should have resolved by now");
+            Debug.Assert(
+                !PathInternal.IsPartiallyQualified(outputBuilder.AsSpan()),
+                "should have resolved by now"
+            );
 
             // We'll have one of a few cases by now (the normalized path will have already:
             //
@@ -164,8 +186,16 @@ namespace System.IO
             }
             else
             {
-                isDosUnc = !PathInternal.IsDevice(outputBuilder.AsSpan()) && outputBuilder.Length > 1 && outputBuilder[0] == '\\' && outputBuilder[1] == '\\';
-                rootDifference = PrependDevicePathChars(ref outputBuilder, isDosUnc, ref inputBuilder);
+                isDosUnc =
+                    !PathInternal.IsDevice(outputBuilder.AsSpan())
+                    && outputBuilder.Length > 1
+                    && outputBuilder[0] == '\\'
+                    && outputBuilder[1] == '\\';
+                rootDifference = PrependDevicePathChars(
+                    ref outputBuilder,
+                    isDosUnc,
+                    ref inputBuilder
+                );
             }
 
             rootLength += rootDifference;
@@ -177,16 +207,23 @@ namespace System.IO
             while (!success)
             {
                 uint result = Interop.Kernel32.GetLongPathNameW(
-                    ref inputBuilder.GetPinnableReference(terminate: true), ref outputBuilder.GetPinnableReference(), (uint)outputBuilder.Capacity);
+                    ref inputBuilder.GetPinnableReference(terminate: true),
+                    ref outputBuilder.GetPinnableReference(),
+                    (uint)outputBuilder.Capacity
+                );
 
                 // Replace any temporary null we added
-                if (inputBuilder[foundIndex] == '\0') inputBuilder[foundIndex] = '\\';
+                if (inputBuilder[foundIndex] == '\0')
+                    inputBuilder[foundIndex] = '\\';
 
                 if (result == 0)
                 {
                     // Look to see if we couldn't find the file
                     int error = Marshal.GetLastPInvokeError();
-                    if (error != Interop.Errors.ERROR_FILE_NOT_FOUND && error != Interop.Errors.ERROR_PATH_NOT_FOUND)
+                    if (
+                        error != Interop.Errors.ERROR_FILE_NOT_FOUND
+                        && error != Interop.Errors.ERROR_PATH_NOT_FOUND
+                    )
                     {
                         // Some other failure, give up
                         break;
@@ -195,7 +232,12 @@ namespace System.IO
                     // We couldn't find the path at the given index, start looking further back in the string.
                     foundIndex--;
 
-                    for (; foundIndex > rootLength && inputBuilder[foundIndex] != '\\'; foundIndex--) ;
+                    for (
+                        ;
+                        foundIndex > rootLength && inputBuilder[foundIndex] != '\\';
+                        foundIndex--
+                    )
+                        ;
                     if (foundIndex == rootLength)
                     {
                         // Can't trim the path back any further
@@ -220,13 +262,17 @@ namespace System.IO
                     if (foundIndex < inputLength - 1)
                     {
                         // It was a partial find, put the non-existent part of the path back
-                        outputBuilder.Append(inputBuilder.AsSpan(foundIndex, inputBuilder.Length - foundIndex));
+                        outputBuilder.Append(
+                            inputBuilder.AsSpan(foundIndex, inputBuilder.Length - foundIndex)
+                        );
                     }
                 }
             }
 
             // If we were able to expand the path, use it, otherwise use the original full path result
-            ref ValueStringBuilder builderToUse = ref (success ? ref outputBuilder : ref inputBuilder);
+            ref ValueStringBuilder builderToUse = ref (
+                success ? ref outputBuilder : ref inputBuilder
+            );
 
             // Switch back from \\?\ to \\.\ if necessary
             if (wasDotDevice)
@@ -234,13 +280,19 @@ namespace System.IO
 
             // Change from \\?\UNC\ to \\?\UN\\ if needed
             if (isDosUnc)
-                builderToUse[PathInternal.UncExtendedPrefixLength - PathInternal.UncPrefixLength] = '\\';
+                builderToUse[PathInternal.UncExtendedPrefixLength - PathInternal.UncPrefixLength] =
+                    '\\';
 
             // Strip out any added characters at the front of the string
             ReadOnlySpan<char> output = builderToUse.AsSpan(rootDifference);
 
-            string returnValue = ((originalPath != null) && output.Equals(originalPath.AsSpan(), StringComparison.Ordinal))
-                ? originalPath : output.ToString();
+            string returnValue =
+                (
+                    (originalPath != null)
+                    && output.Equals(originalPath.AsSpan(), StringComparison.Ordinal)
+                )
+                    ? originalPath
+                    : output.ToString();
 
             inputBuilder.Dispose();
             return returnValue;

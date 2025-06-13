@@ -27,7 +27,10 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-    [RequiresUnreferencedCode("Razor Pages does not currently support trimming or native AOT.", Url = "https://aka.ms/aspnet/trimming")]
+    [RequiresUnreferencedCode(
+        "Razor Pages does not currently support trimming or native AOT.",
+        Url = "https://aka.ms/aspnet/trimming"
+    )]
     public static IMvcCoreBuilder AddRazorPages(this IMvcCoreBuilder builder)
     {
         ArgumentNullException.ThrowIfNull(builder);
@@ -47,7 +50,8 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddRazorPages(
         this IMvcCoreBuilder builder,
-        Action<RazorPagesOptions> setupAction)
+        Action<RazorPagesOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);
@@ -67,16 +71,24 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
     /// <param name="builder">The <see cref="IMvcCoreBuilder"/>.</param>
     /// <param name="rootDirectory">The application relative path to use as the root directory.</param>
     /// <returns></returns>
-    public static IMvcCoreBuilder WithRazorPagesRoot(this IMvcCoreBuilder builder, string rootDirectory)
+    public static IMvcCoreBuilder WithRazorPagesRoot(
+        this IMvcCoreBuilder builder,
+        string rootDirectory
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
         if (string.IsNullOrEmpty(rootDirectory))
         {
-            throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(rootDirectory));
+            throw new ArgumentException(
+                Resources.ArgumentCannotBeNullOrEmpty,
+                nameof(rootDirectory)
+            );
         }
 
-        builder.Services.Configure<RazorPagesOptions>(options => options.RootDirectory = rootDirectory);
+        builder.Services.Configure<RazorPagesOptions>(options =>
+            options.RootDirectory = rootDirectory
+        );
         return builder;
     }
 
@@ -85,20 +97,31 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
     {
         // Options
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<RazorViewEngineOptions>, RazorPagesRazorViewEngineOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<RazorViewEngineOptions>,
+                RazorPagesRazorViewEngineOptionsSetup
+            >()
+        );
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<RazorPagesOptions>, RazorPagesOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<RazorPagesOptions>,
+                RazorPagesOptionsSetup
+            >()
+        );
 
         // Routing
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<MatcherPolicy, DynamicPageEndpointMatcherPolicy>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<MatcherPolicy, DynamicPageEndpointMatcherPolicy>()
+        );
         services.TryAddSingleton<DynamicPageEndpointSelectorCache>();
         services.TryAddSingleton<PageActionEndpointDataSourceIdProvider>();
 
         // Action description and invocation
         var actionDescriptorProvider = services.FirstOrDefault(f =>
-            f.ServiceType == typeof(IActionDescriptorProvider) &&
-            f.ImplementationType == typeof(PageActionDescriptorProvider));
+            f.ServiceType == typeof(IActionDescriptorProvider)
+            && f.ImplementationType == typeof(PageActionDescriptorProvider)
+        );
 
         if (actionDescriptorProvider is null)
         {
@@ -107,32 +130,68 @@ public static class MvcRazorPagesMvcCoreBuilderExtensions
             // ones from non-physical file providers). We'll instead avoid adding it if PageADP is already registered. Similarly,
             // AddRazorRuntimeCompilation will remove CompiledPageADP if it is registered.
             services.TryAddEnumerable(
-                ServiceDescriptor.Singleton<IActionDescriptorProvider, CompiledPageActionDescriptorProvider>());
+                ServiceDescriptor.Singleton<
+                    IActionDescriptorProvider,
+                    CompiledPageActionDescriptorProvider
+                >()
+            );
         }
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageRouteModelProvider, CompiledPageRouteModelProvider>());
+            ServiceDescriptor.Singleton<IPageRouteModelProvider, CompiledPageRouteModelProvider>()
+        );
         services.TryAddSingleton<PageActionEndpointDataSourceFactory>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<MatcherPolicy, DynamicPageEndpointMatcherPolicy>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<MatcherPolicy, DynamicPageEndpointMatcherPolicy>()
+        );
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageApplicationModelProvider, DefaultPageApplicationModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageApplicationModelProvider,
+                DefaultPageApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageApplicationModelProvider, AutoValidateAntiforgeryPageApplicationModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageApplicationModelProvider,
+                AutoValidateAntiforgeryPageApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageApplicationModelProvider, AuthorizationPageApplicationModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageApplicationModelProvider,
+                AuthorizationPageApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageApplicationModelProvider, TempDataFilterPageApplicationModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageApplicationModelProvider,
+                TempDataFilterPageApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageApplicationModelProvider, ViewDataAttributePageApplicationModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageApplicationModelProvider,
+                ViewDataAttributePageApplicationModelProvider
+            >()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageApplicationModelProvider, ResponseCacheFilterApplicationModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageApplicationModelProvider,
+                ResponseCacheFilterApplicationModelProvider
+            >()
+        );
 
-        services.TryAddSingleton<IPageApplicationModelPartsProvider, DefaultPageApplicationModelPartsProvider>();
+        services.TryAddSingleton<
+            IPageApplicationModelPartsProvider,
+            DefaultPageApplicationModelPartsProvider
+        >();
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IActionInvokerProvider, PageActionInvokerProvider>());
+            ServiceDescriptor.Singleton<IActionInvokerProvider, PageActionInvokerProvider>()
+        );
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IRequestDelegateFactory, PageRequestDelegateFactory>());
+            ServiceDescriptor.Singleton<IRequestDelegateFactory, PageRequestDelegateFactory>()
+        );
         services.TryAddSingleton<PageActionInvokerCache>();
 
         // Page and Page model creation and activation

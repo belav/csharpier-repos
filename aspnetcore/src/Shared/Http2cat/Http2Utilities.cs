@@ -16,11 +16,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 
@@ -31,29 +31,45 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
     public static ReadOnlySpan<byte> ClientPreface => "PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n"u8;
     public const int MaxRequestHeaderFieldSize = 16 * 1024;
     public static readonly string FourKHeaderValue = new string('a', 4096);
-    private static readonly Encoding HeaderValueEncoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+    private static readonly Encoding HeaderValueEncoding = new UTF8Encoding(
+        encoderShouldEmitUTF8Identifier: false,
+        throwOnInvalidBytes: true
+    );
 
     public static readonly IEnumerable<KeyValuePair<string, string>> BrowserRequestHeaders = new[]
     {
-            new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:443"),
-            new KeyValuePair<string, string>("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"),
-            new KeyValuePair<string, string>("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
-            new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
-            new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
-            new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),
-        };
+        new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:443"),
+        new KeyValuePair<string, string>(
+            "user-agent",
+            "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"
+        ),
+        new KeyValuePair<string, string>(
+            "accept",
+            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        ),
+        new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
+        new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
+        new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),
+    };
 
-    public static readonly IEnumerable<KeyValuePair<string, string>> BrowserRequestHeadersHttp = new[]
-    {
+    public static readonly IEnumerable<KeyValuePair<string, string>> BrowserRequestHeadersHttp =
+        new[]
+        {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>("user-agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"),
-            new KeyValuePair<string, string>("accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"),
+            new KeyValuePair<string, string>(
+                "user-agent",
+                "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:54.0) Gecko/20100101 Firefox/54.0"
+            ),
+            new KeyValuePair<string, string>(
+                "accept",
+                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            ),
             new KeyValuePair<string, string>("accept-language", "en-US,en;q=0.5"),
             new KeyValuePair<string, string>("accept-encoding", "gzip, deflate, br"),
             new KeyValuePair<string, string>("upgrade-insecure-requests", "1"),
@@ -61,14 +77,15 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     public static readonly IEnumerable<KeyValuePair<string, string>> PostRequestHeaders = new[]
     {
-            new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-        };
+        new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
+    };
 
-    public static readonly IEnumerable<KeyValuePair<string, string>> ExpectContinueRequestHeaders = new[]
-    {
+    public static readonly IEnumerable<KeyValuePair<string, string>> ExpectContinueRequestHeaders =
+        new[]
+        {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "127.0.0.1"),
@@ -78,24 +95,13 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     public static readonly IEnumerable<KeyValuePair<string, string>> RequestTrailers = new[]
     {
-            new KeyValuePair<string, string>("trailer-one", "1"),
-            new KeyValuePair<string, string>("trailer-two", "2"),
-        };
+        new KeyValuePair<string, string>("trailer-one", "1"),
+        new KeyValuePair<string, string>("trailer-two", "2"),
+    };
 
-    public static readonly IEnumerable<KeyValuePair<string, string>> OneContinuationRequestHeaders = new[]
-    {
-            new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>("a", FourKHeaderValue),
-            new KeyValuePair<string, string>("b", FourKHeaderValue),
-            new KeyValuePair<string, string>("c", FourKHeaderValue),
-            new KeyValuePair<string, string>("d", FourKHeaderValue)
-        };
-
-    public static readonly IEnumerable<KeyValuePair<string, string>> TwoContinuationsRequestHeaders = new[]
-    {
+    public static readonly IEnumerable<KeyValuePair<string, string>> OneContinuationRequestHeaders =
+        new[]
+        {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
@@ -104,13 +110,30 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
             new KeyValuePair<string, string>("b", FourKHeaderValue),
             new KeyValuePair<string, string>("c", FourKHeaderValue),
             new KeyValuePair<string, string>("d", FourKHeaderValue),
-            new KeyValuePair<string, string>("e", FourKHeaderValue),
-            new KeyValuePair<string, string>("f", FourKHeaderValue),
-            new KeyValuePair<string, string>("g", FourKHeaderValue),
         };
 
-    public static IEnumerable<KeyValuePair<string, string>> ReadRateRequestHeaders(int expectedBytes) => new[]
+    public static readonly IEnumerable<
+        KeyValuePair<string, string>
+    > TwoContinuationsRequestHeaders = new[]
     {
+        new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
+        new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
+        new KeyValuePair<string, string>("a", FourKHeaderValue),
+        new KeyValuePair<string, string>("b", FourKHeaderValue),
+        new KeyValuePair<string, string>("c", FourKHeaderValue),
+        new KeyValuePair<string, string>("d", FourKHeaderValue),
+        new KeyValuePair<string, string>("e", FourKHeaderValue),
+        new KeyValuePair<string, string>("f", FourKHeaderValue),
+        new KeyValuePair<string, string>("g", FourKHeaderValue),
+    };
+
+    public static IEnumerable<KeyValuePair<string, string>> ReadRateRequestHeaders(
+        int expectedBytes
+    ) =>
+        new[]
+        {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "POST"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/" + expectedBytes),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "https"),
@@ -121,21 +144,37 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
     public static readonly byte[] _worldBytes = Encoding.ASCII.GetBytes("world");
     public static readonly byte[] _helloWorldBytes = Encoding.ASCII.GetBytes("hello, world");
     public static readonly byte[] _noData = Array.Empty<byte>();
-    public static readonly byte[] _maxData = Encoding.ASCII.GetBytes(new string('a', Http2PeerSettings.MinAllowedMaxFrameSize));
+    public static readonly byte[] _maxData = Encoding.ASCII.GetBytes(
+        new string('a', Http2PeerSettings.MinAllowedMaxFrameSize)
+    );
 
     internal readonly Http2PeerSettings _clientSettings = new Http2PeerSettings();
     internal readonly HPackDecoder _hpackDecoder;
-    private readonly byte[] _headerEncodingBuffer = new byte[Http2PeerSettings.MinAllowedMaxFrameSize];
+    private readonly byte[] _headerEncodingBuffer = new byte[
+        Http2PeerSettings.MinAllowedMaxFrameSize
+    ];
 
-    public readonly Dictionary<string, string> _decodedHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+    public readonly Dictionary<string, string> _decodedHeaders = new Dictionary<string, string>(
+        StringComparer.OrdinalIgnoreCase
+    );
 
     internal DuplexPipe.DuplexPipePair _pair;
     public long _bytesReceived;
 
-    public Http2Utilities(ConnectionContext clientConnectionContext, ILogger logger, CancellationToken stopToken)
+    public Http2Utilities(
+        ConnectionContext clientConnectionContext,
+        ILogger logger,
+        CancellationToken stopToken
+    )
     {
-        _hpackDecoder = new HPackDecoder((int)_clientSettings.HeaderTableSize, MaxRequestHeaderFieldSize);
-        _pair = new DuplexPipe.DuplexPipePair(transport: null, application: clientConnectionContext.Transport);
+        _hpackDecoder = new HPackDecoder(
+            (int)_clientSettings.HeaderTableSize,
+            MaxRequestHeaderFieldSize
+        );
+        _pair = new DuplexPipe.DuplexPipePair(
+            transport: null,
+            application: clientConnectionContext.Transport
+        );
         Logger = logger;
         StopToken = stopToken;
     }
@@ -145,7 +184,8 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     void IHttpStreamHeadersHandler.OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
-        _decodedHeaders[name.GetAsciiStringNonNullCharacters()] = value.GetAsciiOrUTF8StringNonNullCharacters(HeaderValueEncoding);
+        _decodedHeaders[name.GetAsciiStringNonNullCharacters()] =
+            value.GetAsciiOrUTF8StringNonNullCharacters(HeaderValueEncoding);
     }
 
     void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
@@ -155,23 +195,33 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         await SendPreambleAsync().ConfigureAwait(false);
         await SendSettingsAsync();
 
-        await ExpectAsync(Http2FrameType.SETTINGS,
+        await ExpectAsync(
+            Http2FrameType.SETTINGS,
             withLength: expectedSettingsCount * Http2FrameReader.SettingSize,
             withFlags: 0,
-            withStreamId: 0);
+            withStreamId: 0
+        );
 
-        await ExpectAsync(Http2FrameType.WINDOW_UPDATE,
+        await ExpectAsync(
+            Http2FrameType.WINDOW_UPDATE,
             withLength: 4,
             withFlags: 0,
-            withStreamId: 0);
+            withStreamId: 0
+        );
 
-        await ExpectAsync(Http2FrameType.SETTINGS,
+        await ExpectAsync(
+            Http2FrameType.SETTINGS,
             withLength: 0,
             withFlags: (byte)Http2SettingsFrameFlags.ACK,
-            withStreamId: 0);
+            withStreamId: 0
+        );
     }
 
-    public Task StartStreamAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, bool endStream)
+    public Task StartStreamAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
 
@@ -215,13 +265,18 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         return FlushAsync(writableBuffer);
     }
 
-    private static IEnumerator<KeyValuePair<string, string>> GetHeadersEnumerator(IEnumerable<KeyValuePair<string, string>> headers)
+    private static IEnumerator<KeyValuePair<string, string>> GetHeadersEnumerator(
+        IEnumerable<KeyValuePair<string, string>> headers
+    )
     {
         var headersEnumerator = headers.GetEnumerator();
         return headersEnumerator;
     }
 
-    internal Dictionary<string, string> DecodeHeaders(Http2FrameWithPayload frame, bool endHeaders = false)
+    internal Dictionary<string, string> DecodeHeaders(
+        Http2FrameWithPayload frame,
+        bool endHeaders = false
+    )
     {
         Assert.Equal(Http2FrameType.HEADERS, frame.Type);
         _hpackDecoder.Decode(frame.PayloadSequence, endHeaders, handler: this);
@@ -269,22 +324,37 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
     */
-    public Task SendHeadersWithPaddingAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, byte padLength, bool endStream)
+    public Task SendHeadersWithPaddingAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        byte padLength,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
 
         var frame = new Http2Frame();
 
-        frame.PrepareHeaders(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PADDED, streamId);
+        frame.PrepareHeaders(
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PADDED,
+            streamId
+        );
         frame.HeadersPadLength = padLength;
 
         var extendedHeaderLength = 1; // Padding length field
         var buffer = _headerEncodingBuffer.AsSpan();
         var extendedHeader = buffer.Slice(0, extendedHeaderLength);
         extendedHeader[0] = padLength;
-        var payload = buffer.Slice(extendedHeaderLength, buffer.Length - padLength - extendedHeaderLength);
+        var payload = buffer.Slice(
+            extendedHeaderLength,
+            buffer.Length - padLength - extendedHeaderLength
+        );
 
-        HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers), payload, out var length);
+        HPackHeaderWriter.BeginEncodeHeaders(
+            GetHeadersEnumerator(headers),
+            payload,
+            out var length
+        );
         var padding = buffer.Slice(extendedHeaderLength + length, padLength);
         padding.Clear();
 
@@ -309,12 +379,21 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         |                   Header Block Fragment (*)                 ...
         +---------------------------------------------------------------+
     */
-    public Task SendHeadersWithPriorityAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, byte priority, int streamDependency, bool endStream)
+    public Task SendHeadersWithPriorityAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        byte priority,
+        int streamDependency,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
 
         var frame = new Http2Frame();
-        frame.PrepareHeaders(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PRIORITY, streamId);
+        frame.PrepareHeaders(
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PRIORITY,
+            streamId
+        );
         frame.HeadersPriorityWeight = priority;
         frame.HeadersStreamDependency = streamDependency;
 
@@ -325,7 +404,11 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         extendedHeader[4] = priority;
         var payload = buffer.Slice(extendedHeaderLength);
 
-        HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers), payload, out var length);
+        HPackHeaderWriter.BeginEncodeHeaders(
+            GetHeadersEnumerator(headers),
+            payload,
+            out var length
+        );
 
         frame.PayloadLength = extendedHeaderLength + length;
 
@@ -352,12 +435,24 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         |                           Padding (*)                       ...
         +---------------------------------------------------------------+
     */
-    public Task SendHeadersWithPaddingAndPriorityAsync(int streamId, IEnumerable<KeyValuePair<string, string>> headers, byte padLength, byte priority, int streamDependency, bool endStream)
+    public Task SendHeadersWithPaddingAndPriorityAsync(
+        int streamId,
+        IEnumerable<KeyValuePair<string, string>> headers,
+        byte padLength,
+        byte priority,
+        int streamDependency,
+        bool endStream
+    )
     {
         var writableBuffer = _pair.Application.Output;
 
         var frame = new Http2Frame();
-        frame.PrepareHeaders(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.PADDED | Http2HeadersFrameFlags.PRIORITY, streamId);
+        frame.PrepareHeaders(
+            Http2HeadersFrameFlags.END_HEADERS
+                | Http2HeadersFrameFlags.PADDED
+                | Http2HeadersFrameFlags.PRIORITY,
+            streamId
+        );
         frame.HeadersPadLength = padLength;
         frame.HeadersPriorityWeight = priority;
         frame.HeadersStreamDependency = streamDependency;
@@ -368,9 +463,16 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         extendedHeader[0] = padLength;
         Bitshifter.WriteUInt31BigEndian(extendedHeader.Slice(1), (uint)streamDependency);
         extendedHeader[5] = priority;
-        var payload = buffer.Slice(extendedHeaderLength, buffer.Length - padLength - extendedHeaderLength);
+        var payload = buffer.Slice(
+            extendedHeaderLength,
+            buffer.Length - padLength - extendedHeaderLength
+        );
 
-        HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers), payload, out var length);
+        HPackHeaderWriter.BeginEncodeHeaders(
+            GetHeadersEnumerator(headers),
+            payload,
+            out var length
+        );
         var padding = buffer.Slice(extendedHeaderLength + length, padLength);
         padding.Clear();
 
@@ -459,7 +561,10 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         await SendAsync(payload);
     }
 
-    internal async Task SendSettingsWithInvalidParameterValueAsync(Http2SettingsParameter parameter, uint value)
+    internal async Task SendSettingsWithInvalidParameterValueAsync(
+        Http2SettingsParameter parameter,
+        uint value
+    )
     {
         var writableBuffer = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -489,14 +594,22 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         return FlushAsync(writableBuffer);
     }
 
-    internal async Task<bool> SendHeadersAsync(int streamId, Http2HeadersFrameFlags flags, IEnumerable<KeyValuePair<string, string>> headers)
+    internal async Task<bool> SendHeadersAsync(
+        int streamId,
+        Http2HeadersFrameFlags flags,
+        IEnumerable<KeyValuePair<string, string>> headers
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
 
         frame.PrepareHeaders(flags, streamId);
         var buffer = _headerEncodingBuffer.AsMemory();
-        var done = HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers), buffer.Span, out var length);
+        var done = HPackHeaderWriter.BeginEncodeHeaders(
+            GetHeadersEnumerator(headers),
+            buffer.Span,
+            out var length
+        );
         frame.PayloadLength = length;
 
         WriteHeader(frame, outputWriter);
@@ -505,7 +618,11 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         return done;
     }
 
-    internal async Task SendHeadersAsync(int streamId, Http2HeadersFrameFlags flags, byte[] headerBlock)
+    internal async Task SendHeadersAsync(
+        int streamId,
+        Http2HeadersFrameFlags flags,
+        byte[] headerBlock
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -519,7 +636,10 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     public async Task SendInvalidHeadersFrameAsync(int streamId, int payloadLength, byte padLength)
     {
-        Assert.True(padLength >= payloadLength, $"{nameof(padLength)} must be greater than or equal to {nameof(payloadLength)} to create an invalid frame.");
+        Assert.True(
+            padLength >= payloadLength,
+            $"{nameof(padLength)} must be greater than or equal to {nameof(payloadLength)} to create an invalid frame."
+        );
 
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -554,14 +674,22 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         await SendAsync(payload);
     }
 
-    internal async Task<bool> SendContinuationAsync(int streamId, Http2ContinuationFrameFlags flags, IEnumerator<KeyValuePair<string, string>> headersEnumerator)
+    internal async Task<bool> SendContinuationAsync(
+        int streamId,
+        Http2ContinuationFrameFlags flags,
+        IEnumerator<KeyValuePair<string, string>> headersEnumerator
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
 
         frame.PrepareContinuation(flags, streamId);
         var buffer = _headerEncodingBuffer.AsMemory();
-        var done = HPackHeaderWriter.ContinueEncodeHeaders(headersEnumerator, buffer.Span, out var length);
+        var done = HPackHeaderWriter.ContinueEncodeHeaders(
+            headersEnumerator,
+            buffer.Span,
+            out var length
+        );
         frame.PayloadLength = length;
 
         WriteHeader(frame, outputWriter);
@@ -570,7 +698,11 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         return done;
     }
 
-    internal async Task SendContinuationAsync(int streamId, Http2ContinuationFrameFlags flags, byte[] payload)
+    internal async Task SendContinuationAsync(
+        int streamId,
+        Http2ContinuationFrameFlags flags,
+        byte[] payload
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -582,14 +714,22 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         await SendAsync(payload);
     }
 
-    internal async Task<bool> SendContinuationAsync(int streamId, Http2ContinuationFrameFlags flags, IEnumerable<KeyValuePair<string, string>> headers)
+    internal async Task<bool> SendContinuationAsync(
+        int streamId,
+        Http2ContinuationFrameFlags flags,
+        IEnumerable<KeyValuePair<string, string>> headers
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
 
         frame.PrepareContinuation(flags, streamId);
         var buffer = _headerEncodingBuffer.AsMemory();
-        var done = HPackHeaderWriter.BeginEncodeHeaders(GetHeadersEnumerator(headers), buffer.Span, out var length);
+        var done = HPackHeaderWriter.BeginEncodeHeaders(
+            GetHeadersEnumerator(headers),
+            buffer.Span,
+            out var length
+        );
         frame.PayloadLength = length;
 
         WriteHeader(frame, outputWriter);
@@ -641,7 +781,12 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         return SendAsync(data.Span);
     }
 
-    public async Task SendDataWithPaddingAsync(int streamId, Memory<byte> data, byte padLength, bool endStream)
+    public async Task SendDataWithPaddingAsync(
+        int streamId,
+        Memory<byte> data,
+        byte padLength,
+        bool endStream
+    )
     {
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -663,7 +808,10 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     public Task SendInvalidDataFrameAsync(int streamId, int frameLength, byte padLength)
     {
-        Assert.True(padLength >= frameLength, $"{nameof(padLength)} must be greater than or equal to {nameof(frameLength)} to create an invalid frame.");
+        Assert.True(
+            padLength >= frameLength,
+            $"{nameof(padLength)} must be greater than or equal to {nameof(frameLength)} to create an invalid frame."
+        );
 
         var outputWriter = _pair.Application.Output;
         var frame = new Http2Frame();
@@ -723,7 +871,12 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
     {
         var outputWriter = _pair.Application.Output;
         var priorityFrame = new Http2Frame();
-        priorityFrame.PreparePriority(streamId, streamDependency: streamDependency, exclusive: false, weight: 0);
+        priorityFrame.PreparePriority(
+            streamId,
+            streamDependency: streamDependency,
+            exclusive: false,
+            weight: 0
+        );
 
         var payload = new byte[priorityFrame.PayloadLength].AsSpan();
         Bitshifter.WriteUInt31BigEndian(payload, (uint)streamDependency);
@@ -823,7 +976,9 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         return FlushAsync(outputWriter);
     }
 
-    internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize)
+    internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(
+        uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize
+    )
     {
         var frame = new Http2FrameWithPayload();
 
@@ -838,7 +993,14 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
             {
                 Assert.True(buffer.Length > 0);
 
-                if (Http2FrameReader.TryReadFrame(ref buffer, frame, maxFrameSize, out var framePayload))
+                if (
+                    Http2FrameReader.TryReadFrame(
+                        ref buffer,
+                        frame,
+                        maxFrameSize,
+                        out var framePayload
+                    )
+                )
                 {
                     consumed = examined = framePayload.End;
                     frame.Payload = framePayload.ToArray();
@@ -862,7 +1024,12 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         }
     }
 
-    internal async Task<Http2FrameWithPayload> ExpectAsync(Http2FrameType type, int withLength, byte withFlags, int withStreamId)
+    internal async Task<Http2FrameWithPayload> ExpectAsync(
+        Http2FrameType type,
+        int withLength,
+        byte withFlags,
+        int withStreamId
+    )
     {
         var frame = await ReceiveFrameAsync((uint)withLength);
 
@@ -884,19 +1051,32 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     public Task WaitForConnectionStopAsync(int expectedLastStreamId, bool ignoreNonGoAwayFrames)
     {
-        return WaitForConnectionErrorAsync<Exception>(ignoreNonGoAwayFrames, expectedLastStreamId, Http2ErrorCode.NO_ERROR);
+        return WaitForConnectionErrorAsync<Exception>(
+            ignoreNonGoAwayFrames,
+            expectedLastStreamId,
+            Http2ErrorCode.NO_ERROR
+        );
     }
 
-    internal Task ReceiveHeadersAsync(int expectedStreamId, Action<IDictionary<string, string>> verifyHeaders = null)
-        => ReceiveHeadersAsync(expectedStreamId, endStream: false, verifyHeaders);
+    internal Task ReceiveHeadersAsync(
+        int expectedStreamId,
+        Action<IDictionary<string, string>> verifyHeaders = null
+    ) => ReceiveHeadersAsync(expectedStreamId, endStream: false, verifyHeaders);
 
-    internal async Task ReceiveHeadersAsync(int expectedStreamId, bool endStream = false, Action<IDictionary<string, string>> verifyHeaders = null)
+    internal async Task ReceiveHeadersAsync(
+        int expectedStreamId,
+        bool endStream = false,
+        Action<IDictionary<string, string>> verifyHeaders = null
+    )
     {
         var headersFrame = await ReceiveFrameAsync();
         Assert.Equal(Http2FrameType.HEADERS, headersFrame.Type);
         Assert.Equal(expectedStreamId, headersFrame.StreamId);
         Assert.True((headersFrame.Flags & (byte)Http2HeadersFrameFlags.END_HEADERS) != 0);
-        Assert.Equal(endStream, (headersFrame.Flags & (byte)Http2HeadersFrameFlags.END_STREAM) != 0);
+        Assert.Equal(
+            endStream,
+            (headersFrame.Flags & (byte)Http2HeadersFrameFlags.END_STREAM) != 0
+        );
         Logger.LogInformation("Received headers in a single frame.");
 
         ResetHeaders();
@@ -904,15 +1084,27 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         verifyHeaders?.Invoke(_decodedHeaders);
     }
 
-    internal static void VerifyDataFrame(Http2Frame frame, int expectedStreamId, bool endOfStream, int length)
+    internal static void VerifyDataFrame(
+        Http2Frame frame,
+        int expectedStreamId,
+        bool endOfStream,
+        int length
+    )
     {
         Assert.Equal(Http2FrameType.DATA, frame.Type);
         Assert.Equal(expectedStreamId, frame.StreamId);
-        Assert.Equal(endOfStream ? Http2DataFrameFlags.END_STREAM : Http2DataFrameFlags.NONE, frame.DataFlags);
+        Assert.Equal(
+            endOfStream ? Http2DataFrameFlags.END_STREAM : Http2DataFrameFlags.NONE,
+            frame.DataFlags
+        );
         Assert.Equal(length, frame.PayloadLength);
     }
 
-    internal static void VerifyGoAway(Http2Frame frame, int expectedLastStreamId, Http2ErrorCode expectedErrorCode)
+    internal static void VerifyGoAway(
+        Http2Frame frame,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
     {
         Assert.Equal(Http2FrameType.GOAWAY, frame.Type);
         Assert.Equal(8, frame.PayloadLength);
@@ -922,7 +1114,11 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         Assert.Equal(expectedErrorCode, frame.GoAwayErrorCode);
     }
 
-    internal static void VerifyResetFrame(Http2Frame frame, int expectedStreamId, Http2ErrorCode expectedErrorCode)
+    internal static void VerifyResetFrame(
+        Http2Frame frame,
+        int expectedStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
     {
         Assert.Equal(Http2FrameType.RST_STREAM, frame.Type);
         Assert.Equal(expectedStreamId, frame.StreamId);
@@ -931,14 +1127,26 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         Assert.Equal(0, frame.Flags);
     }
 
-    internal async Task WaitForConnectionErrorAsync<TException>(bool ignoreNonGoAwayFrames, int expectedLastStreamId, Http2ErrorCode expectedErrorCode)
+    internal async Task WaitForConnectionErrorAsync<TException>(
+        bool ignoreNonGoAwayFrames,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
         where TException : Exception
     {
-        await WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(ignoreNonGoAwayFrames, expectedLastStreamId, expectedErrorCode);
+        await WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(
+            ignoreNonGoAwayFrames,
+            expectedLastStreamId,
+            expectedErrorCode
+        );
         _pair.Application.Output.Complete();
     }
 
-    internal async Task WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(bool ignoreNonGoAwayFrames, int expectedLastStreamId, Http2ErrorCode expectedErrorCode)
+    internal async Task WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(
+        bool ignoreNonGoAwayFrames,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
         where TException : Exception
     {
         var frame = await ReceiveFrameAsync();
@@ -954,7 +1162,10 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         VerifyGoAway(frame, expectedLastStreamId, expectedErrorCode);
     }
 
-    internal async Task WaitForStreamErrorAsync(int expectedStreamId, Http2ErrorCode expectedErrorCode)
+    internal async Task WaitForStreamErrorAsync(
+        int expectedStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
     {
         var frame = await ReceiveFrameAsync();
 
@@ -976,16 +1187,19 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         ((IHttpStreamHeadersHandler)this).OnHeader(H2StaticTable.Get(index - 1).Name, value);
     }
 
-    public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    public void OnDynamicIndexedHeader(
+        int? index,
+        ReadOnlySpan<byte> name,
+        ReadOnlySpan<byte> value
+    )
     {
         ((IHttpStreamHeadersHandler)this).OnHeader(name, value);
     }
 
     internal sealed class Http2FrameWithPayload : Http2Frame
     {
-        public Http2FrameWithPayload() : base()
-        {
-        }
+        public Http2FrameWithPayload()
+            : base() { }
 
         // This does not contain extended headers
         public Memory<byte> Payload { get; set; }
@@ -1013,7 +1227,14 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
         public static void Equal(string expected, string actual, bool ignoreCase = false)
         {
-            if (!expected.Equals(actual, ignoreCase ? StringComparison.InvariantCultureIgnoreCase : StringComparison.InvariantCulture))
+            if (
+                !expected.Equals(
+                    actual,
+                    ignoreCase
+                        ? StringComparison.InvariantCultureIgnoreCase
+                        : StringComparison.InvariantCulture
+                )
+            )
             {
                 throw new Exception($"Assert.Equal('{expected}', '{actual}') failed");
             }

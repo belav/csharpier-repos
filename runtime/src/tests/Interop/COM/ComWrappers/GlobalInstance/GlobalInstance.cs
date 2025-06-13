@@ -7,7 +7,6 @@ namespace ComWrappersTests.GlobalInstance
     using System.Collections;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
     using ComWrappersTests.Common;
     using TestLibrary;
     using Xunit;
@@ -16,44 +15,58 @@ namespace ComWrappersTests.GlobalInstance
     {
         struct MarshalInterface
         {
-            [DllImport(nameof(MockReferenceTrackerRuntime), EntryPoint="CreateTrackerObject_SkipTrackerRuntime")]
+            [DllImport(
+                nameof(MockReferenceTrackerRuntime),
+                EntryPoint = "CreateTrackerObject_SkipTrackerRuntime"
+            )]
             [return: MarshalAs(UnmanagedType.IUnknown)]
-            extern public static object CreateTrackerObjectAsIUnknown();
+            public static extern object CreateTrackerObjectAsIUnknown();
 
-            [DllImport(nameof(MockReferenceTrackerRuntime), EntryPoint="CreateTrackerObject_SkipTrackerRuntime")]
+            [DllImport(
+                nameof(MockReferenceTrackerRuntime),
+                EntryPoint = "CreateTrackerObject_SkipTrackerRuntime"
+            )]
             [return: MarshalAs(UnmanagedType.Interface)]
-            extern public static FakeWrapper CreateTrackerObjectAsInterface();
+            public static extern FakeWrapper CreateTrackerObjectAsInterface();
 
-            [DllImport(nameof(MockReferenceTrackerRuntime), EntryPoint="CreateTrackerObject_SkipTrackerRuntime")]
+            [DllImport(
+                nameof(MockReferenceTrackerRuntime),
+                EntryPoint = "CreateTrackerObject_SkipTrackerRuntime"
+            )]
             [return: MarshalAs(UnmanagedType.Interface)]
-            extern public static Test CreateTrackerObjectWrongType();
+            public static extern Test CreateTrackerObjectWrongType();
 
             [DllImport(nameof(MockReferenceTrackerRuntime))]
-            extern public static int UpdateTestObjectAsIUnknown(
+            public static extern int UpdateTestObjectAsIUnknown(
                 [MarshalAs(UnmanagedType.IUnknown)] object testObj,
                 int i,
-                [MarshalAs(UnmanagedType.IUnknown)] out object ret);
+                [MarshalAs(UnmanagedType.IUnknown)] out object ret
+            );
 
             [DllImport(nameof(MockReferenceTrackerRuntime))]
-            extern public static int UpdateTestObjectAsIDispatch(
+            public static extern int UpdateTestObjectAsIDispatch(
                 [MarshalAs(UnmanagedType.IDispatch)] object testObj,
                 int i,
-                [MarshalAs(UnmanagedType.IDispatch)] out object ret);
+                [MarshalAs(UnmanagedType.IDispatch)] out object ret
+            );
 
             [DllImport(nameof(MockReferenceTrackerRuntime))]
-            extern public static int UpdateTestObjectAsInterface(
+            public static extern int UpdateTestObjectAsInterface(
                 [MarshalAs(UnmanagedType.Interface)] ITest testObj,
                 int i,
-                [Out, MarshalAs(UnmanagedType.Interface)] out ITest ret);
+                [Out, MarshalAs(UnmanagedType.Interface)] out ITest ret
+            );
         }
 
         private const string ManagedServerTypeName = "ConsumeNETServerTesting";
 
         private const string IID_IDISPATCH = "00020400-0000-0000-C000-000000000046";
         private const string IID_IINSPECTABLE = "AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90";
+
         class TestEx : Test
         {
             public readonly Guid[] Interfaces;
+
             public TestEx(params string[] iids)
             {
                 Interfaces = new Guid[iids.Length];
@@ -66,6 +79,7 @@ namespace ComWrappersTests.GlobalInstance
         {
             private delegate int _AddRef(IntPtr This);
             private delegate int _Release(IntPtr This);
+
             private struct IUnknownWrapperVtbl
             {
                 public IntPtr QueryInterface;
@@ -101,7 +115,11 @@ namespace ComWrappersTests.GlobalInstance
 
             public object LastComputeVtablesObject { get; private set; } = null;
 
-            protected unsafe override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            )
             {
                 LastComputeVtablesObject = obj;
 
@@ -126,13 +144,20 @@ namespace ComWrappersTests.GlobalInstance
                     {
                         QueryInterface = fpQueryInterface,
                         AddRef = fpAddRef,
-                        Release = fpRelease
+                        Release = fpRelease,
                     };
-                    var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IUnknownVtbl), sizeof(IUnknownVtbl));
+                    var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(IUnknownVtbl),
+                        sizeof(IUnknownVtbl)
+                    );
                     Marshal.StructureToPtr(vtbl, vtblRaw, false);
 
                     // Including interfaces to allow QI, but not actually returning a valid vtable, since it is not needed for the tests here.
-                    var entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IUnknownVtbl), sizeof(ComInterfaceEntry));
+                    var entryRaw = (ComInterfaceEntry*)
+                        RuntimeHelpers.AllocateTypeAssociatedMemory(
+                            typeof(IUnknownVtbl),
+                            sizeof(ComInterfaceEntry)
+                        );
                     entryRaw[0].IID = typeof(Server.Contract.IConsumeNETServer).GUID;
                     entryRaw[0].Vtable = vtblRaw;
 
@@ -149,11 +174,12 @@ namespace ComWrappersTests.GlobalInstance
                 if (ReturnInvalid)
                     return null;
 
-                Guid[] iids = {
+                Guid[] iids =
+                {
                     typeof(ITrackerObject).GUID,
                     typeof(ITest).GUID,
                     typeof(Server.Contract.IDispatchTesting).GUID,
-                    typeof(Server.Contract.IConsumeNETServer).GUID
+                    typeof(Server.Contract.IConsumeNETServer).GUID,
                 };
 
                 for (var i = 0; i < iids.Length; i++)
@@ -191,25 +217,35 @@ namespace ComWrappersTests.GlobalInstance
                 {
                     QueryInterface = fpQueryInterface,
                     AddRef = fpAddRef,
-                    Release = fpRelease
+                    Release = fpRelease,
                 };
 
                 var vtbl = new ITestVtbl()
                 {
                     IUnknownImpl = iUnknownVtbl,
-                    SetValue = Marshal.GetFunctionPointerForDelegate(ITestVtbl.pSetValue)
+                    SetValue = Marshal.GetFunctionPointerForDelegate(ITestVtbl.pSetValue),
                 };
-                var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ITestVtbl), sizeof(ITestVtbl));
+                var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ITestVtbl),
+                    sizeof(ITestVtbl)
+                );
                 Marshal.StructureToPtr(vtbl, vtblRaw, false);
 
                 int countLocal = obj is TestEx ? ((TestEx)obj).Interfaces.Length + 1 : 1;
-                var entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ITestVtbl), sizeof(ComInterfaceEntry) * countLocal);
+                var entryRaw = (ComInterfaceEntry*)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(ITestVtbl),
+                        sizeof(ComInterfaceEntry) * countLocal
+                    );
                 entryRaw[0].IID = typeof(ITest).GUID;
                 entryRaw[0].Vtable = vtblRaw;
 
                 if (obj is TestEx)
                 {
-                    var iUnknownVtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(IUnknownVtbl), sizeof(IUnknownVtbl));
+                    var iUnknownVtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(IUnknownVtbl),
+                        sizeof(IUnknownVtbl)
+                    );
                     Marshal.StructureToPtr(iUnknownVtbl, iUnknownVtblRaw, false);
 
                     var testEx = (TestEx)obj;
@@ -232,18 +268,16 @@ namespace ComWrappersTests.GlobalInstance
 
             var wrappers1 = GlobalComWrappers.Instance;
             ComWrappers.RegisterForMarshalling(wrappers1);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForMarshalling(wrappers1);
-                });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForMarshalling(wrappers1);
+            });
 
             var wrappers2 = new GlobalComWrappers();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForMarshalling(wrappers2);
-                });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForMarshalling(wrappers2);
+            });
         }
 
         private static void ValidateRegisterForTrackerSupport()
@@ -252,23 +286,23 @@ namespace ComWrappersTests.GlobalInstance
 
             var wrappers1 = GlobalComWrappers.Instance;
             ComWrappers.RegisterForTrackerSupport(wrappers1);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForTrackerSupport(wrappers1);
-                });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForTrackerSupport(wrappers1);
+            });
 
             var wrappers2 = new GlobalComWrappers();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForTrackerSupport(wrappers2);
-                });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForTrackerSupport(wrappers2);
+            });
         }
 
         private static void ValidateMarshalAPIs(bool validateUseRegistered)
         {
-            string scenario = validateUseRegistered ? "use registered wrapper" : "fall back to runtime";
+            string scenario = validateUseRegistered
+                ? "use registered wrapper"
+                : "fall back to runtime";
             Console.WriteLine($"Running {nameof(ValidateMarshalAPIs)}: {scenario}...");
 
             GlobalComWrappers registeredWrapper = GlobalComWrappers.Instance;
@@ -298,7 +332,9 @@ namespace ComWrappersTests.GlobalInstance
                 Assert.NotEqual(IntPtr.Zero, dispatchWrapper);
                 Assert.Equal(dispatchObj, registeredWrapper.LastComputeVtablesObject);
 
-                Console.WriteLine($" -- Validate Marshal.GetIDispatchForObject != Marshal.GetIUnknownForObject...");
+                Console.WriteLine(
+                    $" -- Validate Marshal.GetIDispatchForObject != Marshal.GetIUnknownForObject..."
+                );
                 IntPtr unknownWrapper = Marshal.GetIUnknownForObject(dispatchObj);
                 Assert.NotEqual(IntPtr.Zero, unknownWrapper);
                 Assert.NotEqual(unknownWrapper, dispatchWrapper);
@@ -324,36 +360,57 @@ namespace ComWrappersTests.GlobalInstance
 
         private static void ValidatePInvokes(bool validateUseRegistered)
         {
-            string scenario = validateUseRegistered ? "use registered wrapper" : "fall back to runtime";
+            string scenario = validateUseRegistered
+                ? "use registered wrapper"
+                : "fall back to runtime";
             Console.WriteLine($"Running {nameof(ValidatePInvokes)}: {scenario}...");
 
             GlobalComWrappers.Instance.ReturnInvalid = !validateUseRegistered;
 
             Console.WriteLine($" -- Validate MarshalAs IUnknown...");
-            ValidateInterfaceMarshaler<object>(MarshalInterface.UpdateTestObjectAsIUnknown, shouldSucceed: validateUseRegistered);
+            ValidateInterfaceMarshaler<object>(
+                MarshalInterface.UpdateTestObjectAsIUnknown,
+                shouldSucceed: validateUseRegistered
+            );
             object obj = MarshalInterface.CreateTrackerObjectAsIUnknown();
             Assert.Equal(validateUseRegistered, obj is FakeWrapper);
 
             if (validateUseRegistered)
             {
                 Console.WriteLine($" -- Validate MarshalAs IDispatch...");
-                ValidateInterfaceMarshaler<object>(MarshalInterface.UpdateTestObjectAsIDispatch, shouldSucceed: true, new TestEx(IID_IDISPATCH));
+                ValidateInterfaceMarshaler<object>(
+                    MarshalInterface.UpdateTestObjectAsIDispatch,
+                    shouldSucceed: true,
+                    new TestEx(IID_IDISPATCH)
+                );
             }
 
             Console.WriteLine($" -- Validate MarshalAs Interface...");
-            ValidateInterfaceMarshaler<ITest>(MarshalInterface.UpdateTestObjectAsInterface, shouldSucceed: true);
+            ValidateInterfaceMarshaler<ITest>(
+                MarshalInterface.UpdateTestObjectAsInterface,
+                shouldSucceed: true
+            );
 
             if (validateUseRegistered)
             {
-                Assert.Throws<InvalidCastException>(() => MarshalInterface.CreateTrackerObjectWrongType());
+                Assert.Throws<InvalidCastException>(() =>
+                    MarshalInterface.CreateTrackerObjectWrongType()
+                );
 
                 FakeWrapper wrapper = MarshalInterface.CreateTrackerObjectAsInterface();
                 Assert.NotNull(wrapper);
             }
         }
 
-        private delegate int UpdateTestObject<T>(T testObj, int i, out T ret) where T : class;
-        private static void ValidateInterfaceMarshaler<T>(UpdateTestObject<T> func, bool shouldSucceed, Test testObj = null) where T : class
+        private delegate int UpdateTestObject<T>(T testObj, int i, out T ret)
+            where T : class;
+
+        private static void ValidateInterfaceMarshaler<T>(
+            UpdateTestObject<T> func,
+            bool shouldSucceed,
+            Test testObj = null
+        )
+            where T : class
         {
             const int E_NOINTERFACE = unchecked((int)0x80004002);
             int value = 10;
@@ -378,7 +435,9 @@ namespace ComWrappersTests.GlobalInstance
 
         private static void ValidateComActivation(bool validateUseRegistered)
         {
-            string scenario = validateUseRegistered ? "use registered wrapper" : "fall back to runtime";
+            string scenario = validateUseRegistered
+                ? "use registered wrapper"
+                : "fall back to runtime";
             Console.WriteLine($"Running {nameof(ValidateComActivation)}: {scenario}...");
             GlobalComWrappers.Instance.ReturnInvalid = !validateUseRegistered;
 
@@ -393,7 +452,7 @@ namespace ComWrappersTests.GlobalInstance
         {
             bool returnValid = !GlobalComWrappers.Instance.ReturnInvalid;
 
-            Type t= Type.GetTypeFromCLSID(Guid.Parse(Server.Contract.Guids.DispatchTesting));
+            Type t = Type.GetTypeFromCLSID(Guid.Parse(Server.Contract.Guids.DispatchTesting));
             var server = Activator.CreateInstance(t);
             Assert.Equal(returnValid, server is FakeWrapper);
 
@@ -411,9 +470,18 @@ namespace ComWrappersTests.GlobalInstance
             Environment.SetEnvironmentVariable("CORESHIM_COMACT_ASSEMBLYNAME", "NETServer");
             Environment.SetEnvironmentVariable("CORESHIM_COMACT_TYPENAME", ManagedServerTypeName);
 
-            using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(0, string.Empty, string.Empty, string.Empty))
+            using (
+                HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                    0,
+                    string.Empty,
+                    string.Empty,
+                    string.Empty
+                )
+            )
             {
-                Type t = Type.GetTypeFromCLSID(Guid.Parse(Server.Contract.Guids.ConsumeNETServerTesting));
+                Type t = Type.GetTypeFromCLSID(
+                    Guid.Parse(Server.Contract.Guids.ConsumeNETServerTesting)
+                );
                 var server = Activator.CreateInstance(t);
                 Assert.Equal(returnValid, server is FakeWrapper);
                 object serverUnwrapped = GlobalComWrappers.Instance.LastComputeVtablesObject;
@@ -423,7 +491,10 @@ namespace ComWrappersTests.GlobalInstance
                 var obj = Marshal.GetObjectForIUnknown(ptr);
                 Assert.Equal(server, obj);
                 Assert.Equal(returnValid, obj is FakeWrapper);
-                serverUnwrapped.GetType().GetMethod("NotEqualByRCW").Invoke(serverUnwrapped, new object[] { obj });
+                serverUnwrapped
+                    .GetType()
+                    .GetMethod("NotEqualByRCW")
+                    .Invoke(serverUnwrapped, new object[] { obj });
             }
         }
 
@@ -441,4 +512,3 @@ namespace ComWrappersTests.GlobalInstance
         }
     }
 }
-

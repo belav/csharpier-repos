@@ -26,10 +26,7 @@ public class ObjectResultExecutorTest
         httpContext.Request.Headers.Accept = "application/xml"; // This will not be used
         httpContext.Response.ContentType = "text/json";
 
-        var result = new ObjectResult("input")
-        {
-            ContentTypes = { "text/xml", },
-        };
+        var result = new ObjectResult("input") { ContentTypes = { "text/xml" } };
         result.Formatters.Add(new TestXmlOutputFormatter());
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestStringOutputFormatter()); // This will be chosen based on the content type
@@ -123,7 +120,7 @@ public class ObjectResultExecutorTest
         {
             ContentTypes = { "text/plain" }, // This will not be used
         };
-        result.Formatters.Add(new TestXmlOutputFormatter());  // This will be chosen based on the problem details content type
+        result.Formatters.Add(new TestXmlOutputFormatter()); // This will be chosen based on the problem details content type
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestStringOutputFormatter());
 
@@ -131,7 +128,10 @@ public class ObjectResultExecutorTest
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        MediaTypeAssert.Equal("application/problem+xml; charset=utf-8", httpContext.Response.ContentType);
+        MediaTypeAssert.Equal(
+            "application/problem+xml; charset=utf-8",
+            httpContext.Response.ContentType
+        );
     }
 
     [Fact]
@@ -153,7 +153,10 @@ public class ObjectResultExecutorTest
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        MediaTypeAssert.Equal("application/problem+xml; charset=utf-8", httpContext.Response.ContentType);
+        MediaTypeAssert.Equal(
+            "application/problem+xml; charset=utf-8",
+            httpContext.Response.ContentType
+        );
     }
 
     [Fact]
@@ -175,7 +178,10 @@ public class ObjectResultExecutorTest
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        MediaTypeAssert.Equal("application/problem+xml; charset=utf-8", httpContext.Response.ContentType);
+        MediaTypeAssert.Equal(
+            "application/problem+xml; charset=utf-8",
+            httpContext.Response.ContentType
+        );
     }
 
     [Fact]
@@ -201,7 +207,10 @@ public class ObjectResultExecutorTest
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        MediaTypeAssert.Equal("application/problem+json; charset=utf-8", httpContext.Response.ContentType);
+        MediaTypeAssert.Equal(
+            "application/problem+json; charset=utf-8",
+            httpContext.Response.ContentType
+        );
     }
 
     [Fact]
@@ -226,7 +235,10 @@ public class ObjectResultExecutorTest
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        MediaTypeAssert.Equal("application/problem+xml; charset=utf-8", httpContext.Response.ContentType);
+        MediaTypeAssert.Equal(
+            "application/problem+xml; charset=utf-8",
+            httpContext.Response.ContentType
+        );
     }
 
     [Fact]
@@ -239,7 +251,7 @@ public class ObjectResultExecutorTest
         var actionContext = new ActionContext() { HttpContext = httpContext };
 
         var result = new ObjectResult(new ProblemDetails());
-        result.Formatters.Add(new TestXmlOutputFormatter());  // This will be chosen based on the problem details added content type
+        result.Formatters.Add(new TestXmlOutputFormatter()); // This will be chosen based on the problem details added content type
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestStringOutputFormatter());
 
@@ -247,7 +259,10 @@ public class ObjectResultExecutorTest
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        MediaTypeAssert.Equal("application/problem+xml; charset=utf-8", httpContext.Response.ContentType);
+        MediaTypeAssert.Equal(
+            "application/problem+xml; charset=utf-8",
+            httpContext.Response.ContentType
+        );
     }
 
     [Fact]
@@ -256,24 +271,24 @@ public class ObjectResultExecutorTest
         // Arrange
         var executor = CreateExecutor();
 
-        var actionContext = new ActionContext()
-        {
-            HttpContext = GetHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
 
         var result = new ObjectResult("input");
 
         // This formatter won't write anything
         result.Formatters = new FormatterCollection<IOutputFormatter>
-            {
-                new CannotWriteFormatter(),
-            };
+        {
+            new CannotWriteFormatter(),
+        };
 
         // Act
         await executor.ExecuteAsync(actionContext, result);
 
         // Assert
-        Assert.Equal(StatusCodes.Status406NotAcceptable, actionContext.HttpContext.Response.StatusCode);
+        Assert.Equal(
+            StatusCodes.Status406NotAcceptable,
+            actionContext.HttpContext.Response.StatusCode
+        );
     }
 
     [Fact]
@@ -285,10 +300,7 @@ public class ObjectResultExecutorTest
 
         var executor = CreateExecutor(options: options);
 
-        var actionContext = new ActionContext()
-        {
-            HttpContext = GetHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
 
         var result = new ObjectResult("someValue");
 
@@ -298,25 +310,25 @@ public class ObjectResultExecutorTest
         // Assert
         Assert.Equal(
             "application/json; charset=utf-8",
-            actionContext.HttpContext.Response.Headers.ContentType);
+            actionContext.HttpContext.Response.Headers.ContentType
+        );
     }
 
     [Fact]
     public async Task ExecuteAsync_ThrowsWithNoFormatters()
     {
         // Arrange
-        var expected = $"'{typeof(MvcOptions).FullName}.{nameof(MvcOptions.OutputFormatters)}' must not be " +
-            $"empty. At least one '{typeof(IOutputFormatter).FullName}' is required to format a response.";
+        var expected =
+            $"'{typeof(MvcOptions).FullName}.{nameof(MvcOptions.OutputFormatters)}' must not be "
+            + $"empty. At least one '{typeof(IOutputFormatter).FullName}' is required to format a response.";
         var executor = CreateExecutor();
-        var actionContext = new ActionContext
-        {
-            HttpContext = GetHttpContext(),
-        };
+        var actionContext = new ActionContext { HttpContext = GetHttpContext() };
         var result = new ObjectResult("some value");
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => executor.ExecuteAsync(actionContext, result));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            executor.ExecuteAsync(actionContext, result)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -328,8 +340,14 @@ public class ObjectResultExecutorTest
     [InlineData(new[] { "application/xml", "*/*", "application/json" }, "*/*")]
     [InlineData(new[] { "*/*", "application/json" }, "*/*")]
     [InlineData(new[] { "application/json", "application/*+json" }, "application/*+json")]
-    [InlineData(new[] { "application/entiy+json;*", "application/json" }, "application/entiy+json;*")]
-    public async Task ExecuteAsync_MatchAllContentType_Throws(string[] contentTypes, string invalidContentType)
+    [InlineData(
+        new[] { "application/entiy+json;*", "application/json" },
+        "application/entiy+json;*"
+    )]
+    public async Task ExecuteAsync_MatchAllContentType_Throws(
+        string[] contentTypes,
+        string invalidContentType
+    )
     {
         // Arrange
         var result = new ObjectResult("input");
@@ -347,30 +365,39 @@ public class ObjectResultExecutorTest
         var actionContext = new ActionContext() { HttpContext = new DefaultHttpContext() };
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => executor.ExecuteAsync(actionContext, result));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            executor.ExecuteAsync(actionContext, result)
+        );
 
         var expectedMessage = string.Format(
             CultureInfo.CurrentCulture,
-            "The content-type '{0}' added in the 'ContentTypes' property is " +
-            "invalid. Media types which match all types or match all subtypes are not supported.",
-          invalidContentType);
+            "The content-type '{0}' added in the 'ContentTypes' property is "
+                + "invalid. Media types which match all types or match all subtypes are not supported.",
+            invalidContentType
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
     [Theory]
     // Chrome & Opera
-    [InlineData("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", "application/json; charset=utf-8")]
+    [InlineData(
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "application/json; charset=utf-8"
+    )]
     // IE
     [InlineData("text/html,application/xhtml+xml,*/*", "application/json; charset=utf-8")]
     // Firefox & Safari
-    [InlineData("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "application/json; charset=utf-8")]
+    [InlineData(
+        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "application/json; charset=utf-8"
+    )]
     // Misc
     [InlineData("*/*", @"application/json; charset=utf-8")]
     [InlineData("text/html,*/*;q=0.8,application/xml;q=0.9", "application/json; charset=utf-8")]
     public async Task ExecuteAsync_SelectDefaultFormatter_OnAllMediaRangeAcceptHeaderMediaType(
         string acceptHeader,
-        string expectedContentType)
+        string expectedContentType
+    )
     {
         // Arrange
         var options = new MvcOptions();
@@ -382,10 +409,7 @@ public class ObjectResultExecutorTest
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestXmlOutputFormatter());
 
-        var actionContext = new ActionContext()
-        {
-            HttpContext = GetHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
         actionContext.HttpContext.Request.Headers.Accept = acceptHeader;
 
         // Act
@@ -397,17 +421,24 @@ public class ObjectResultExecutorTest
 
     [Theory]
     // Chrome & Opera
-    [InlineData("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8", "application/xml; charset=utf-8")]
+    [InlineData(
+        "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "application/xml; charset=utf-8"
+    )]
     // IE
     [InlineData("text/html,application/xhtml+xml,*/*", "application/json; charset=utf-8")]
     // Firefox & Safari
-    [InlineData("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "application/xml; charset=utf-8")]
+    [InlineData(
+        "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "application/xml; charset=utf-8"
+    )]
     // Misc
     [InlineData("*/*", @"application/json; charset=utf-8")]
     [InlineData("text/html,*/*;q=0.8,application/xml;q=0.9", "application/xml; charset=utf-8")]
     public async Task ObjectResult_PerformsContentNegotiation_OnAllMediaRangeAcceptHeaderMediaType(
         string acceptHeader,
-        string expectedContentType)
+        string expectedContentType
+    )
     {
         // Arrange
         var options = new MvcOptions();
@@ -419,10 +450,7 @@ public class ObjectResultExecutorTest
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestXmlOutputFormatter());
 
-        var actionContext = new ActionContext()
-        {
-            HttpContext = GetHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
         actionContext.HttpContext.Request.Headers.Accept = acceptHeader;
 
         // Act
@@ -442,10 +470,7 @@ public class ObjectResultExecutorTest
         var formatter = new TestJsonOutputFormatter();
         result.Formatters.Add(formatter);
 
-        var actionContext = new ActionContext()
-        {
-            HttpContext = GetHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
 
         // Act
         await executor.ExecuteAsync(actionContext, result);
@@ -478,8 +503,16 @@ public class ObjectResultExecutorTest
     {
         options ??= new MvcOptions();
         var optionsAccessor = Options.Create(options);
-        var selector = new DefaultOutputFormatterSelector(optionsAccessor, NullLoggerFactory.Instance);
-        return new ObjectResultExecutor(selector, new TestHttpResponseStreamWriterFactory(), NullLoggerFactory.Instance, optionsAccessor);
+        var selector = new DefaultOutputFormatterSelector(
+            optionsAccessor,
+            NullLoggerFactory.Instance
+        );
+        return new ObjectResultExecutor(
+            selector,
+            new TestHttpResponseStreamWriterFactory(),
+            NullLoggerFactory.Instance,
+            optionsAccessor
+        );
     }
 
     private class CannotWriteFormatter : IOutputFormatter
@@ -508,7 +541,10 @@ public class ObjectResultExecutorTest
 
         public OutputFormatterWriteContext LastOutputFormatterContext { get; private set; }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             LastOutputFormatterContext = context;
             return Task.FromResult(0);
@@ -526,7 +562,10 @@ public class ObjectResultExecutorTest
             SupportedEncodings.Add(Encoding.UTF8);
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             return Task.FromResult(0);
         }
@@ -541,7 +580,10 @@ public class ObjectResultExecutorTest
             SupportedEncodings.Add(Encoding.UTF8);
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             return Task.FromResult(0);
         }

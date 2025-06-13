@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <inheritdoc />
-public class RelationalAggregateMethodCallTranslatorProvider : IAggregateMethodCallTranslatorProvider
+public class RelationalAggregateMethodCallTranslatorProvider
+    : IAggregateMethodCallTranslatorProvider
 {
     private readonly List<IAggregateMethodCallTranslator> _plugins = new();
     private readonly List<IAggregateMethodCallTranslator> _translators = new();
@@ -16,7 +17,9 @@ public class RelationalAggregateMethodCallTranslatorProvider : IAggregateMethodC
     ///     Creates a new instance of the <see cref="RelationalAggregateMethodCallTranslatorProvider" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    public RelationalAggregateMethodCallTranslatorProvider(RelationalAggregateMethodCallTranslatorProviderDependencies dependencies)
+    public RelationalAggregateMethodCallTranslatorProvider(
+        RelationalAggregateMethodCallTranslatorProviderDependencies dependencies
+    )
     {
         Dependencies = dependencies;
 
@@ -25,7 +28,11 @@ public class RelationalAggregateMethodCallTranslatorProvider : IAggregateMethodC
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
 
         _translators.AddRange(
-            new IAggregateMethodCallTranslator[] { new QueryableAggregateMethodTranslator(sqlExpressionFactory) });
+            new IAggregateMethodCallTranslator[]
+            {
+                new QueryableAggregateMethodTranslator(sqlExpressionFactory),
+            }
+        );
     }
 
     /// <summary>
@@ -35,11 +42,12 @@ public class RelationalAggregateMethodCallTranslatorProvider : IAggregateMethodC
 
     /// <inheritdoc />
     public virtual SqlExpression? Translate(
-            IModel model,
-            MethodInfo method,
-            EnumerableExpression source,
-            IReadOnlyList<SqlExpression> arguments,
-            IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IModel model,
+        MethodInfo method,
+        EnumerableExpression source,
+        IReadOnlyList<SqlExpression> arguments,
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
         // TODO: Add support for user defined aggregate functions
         //var dbFunction = model.FindDbFunction(method);
         //if (dbFunction != null)
@@ -67,7 +75,9 @@ public class RelationalAggregateMethodCallTranslatorProvider : IAggregateMethodC
         //            method.ReturnType.UnwrapNullableType(),
         //            dbFunction.TypeMapping);
         //}
-        => _plugins.Concat(_translators)
+        =>
+        _plugins
+            .Concat(_translators)
             .Select(t => t.Translate(method, source, arguments, logger))
             .FirstOrDefault(t => t != null);
 
@@ -75,6 +85,7 @@ public class RelationalAggregateMethodCallTranslatorProvider : IAggregateMethodC
     ///     Adds additional translators which will take priority over existing registered translators.
     /// </summary>
     /// <param name="translators">Translators to add.</param>
-    protected virtual void AddTranslators(IEnumerable<IAggregateMethodCallTranslator> translators)
-        => _translators.InsertRange(0, translators);
+    protected virtual void AddTranslators(
+        IEnumerable<IAggregateMethodCallTranslator> translators
+    ) => _translators.InsertRange(0, translators);
 }

@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.Text;
 using Internal.TypeSystem.Ecma;
 
@@ -47,10 +46,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 CustomAttribute customAttribute = reader.GetCustomAttribute(handle);
                 EntityHandle customAttributeConstructorHandle = customAttribute.Constructor;
-                string customAttributeTypeNamespace, customAttributeTypeName;
-                ReadCustomAttributeTypeNameWithoutResolving(customAttributeConstructorHandle, out customAttributeTypeNamespace, out customAttributeTypeName);
+                string customAttributeTypeNamespace,
+                    customAttributeTypeName;
+                ReadCustomAttributeTypeNameWithoutResolving(
+                    customAttributeConstructorHandle,
+                    out customAttributeTypeNamespace,
+                    out customAttributeTypeName
+                );
                 // System.Runtime.CompilerServices.NullableAttribute is NEVER added to the table (There are *many* of these, and they provide no useful value to the runtime)
-                if (customAttributeTypeNamespace == "System.Runtime.CompilerServices" && customAttributeTypeName == "NullableAttribute")
+                if (
+                    customAttributeTypeNamespace == "System.Runtime.CompilerServices"
+                    && customAttributeTypeName == "NullableAttribute"
+                )
                 {
                     continue;
                 }
@@ -83,12 +90,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (!addToTable)
                     continue;
 
-                customAttributeEntries.Add(new CustomAttributeEntry
-                {
-                    TypeNamespace = customAttributeTypeNamespace,
-                    TypeName = customAttributeTypeName,
-                    Parent = reader.GetToken(customAttribute.Parent)
-                });
+                customAttributeEntries.Add(
+                    new CustomAttributeEntry
+                    {
+                        TypeNamespace = customAttributeTypeNamespace,
+                        TypeName = customAttributeTypeName,
+                        Parent = reader.GetToken(customAttribute.Parent),
+                    }
+                );
             }
             return customAttributeEntries;
         }
@@ -101,13 +110,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
          * not want to actually resolve the types. So we used this dummy signature
          * type provider to extract the first type handle.
          */
-        private class FirstTypeHandleExtractor : ISignatureTypeProvider<DummyType, DummyGenericContext>
+        private class FirstTypeHandleExtractor
+            : ISignatureTypeProvider<DummyType, DummyGenericContext>
         {
             private EntityHandle _firstTypeHandle;
 
             public EntityHandle FirstTypeHandle => _firstTypeHandle;
 
-            public DummyType GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+            public DummyType GetTypeFromDefinition(
+                MetadataReader reader,
+                TypeDefinitionHandle handle,
+                byte rawTypeKind
+            )
             {
                 if (_firstTypeHandle.IsNil)
                 {
@@ -116,7 +130,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return new DummyType();
             }
 
-            public DummyType GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+            public DummyType GetTypeFromReference(
+                MetadataReader reader,
+                TypeReferenceHandle handle,
+                byte rawTypeKind
+            )
             {
                 if (_firstTypeHandle.IsNil)
                 {
@@ -144,12 +162,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return DummyType.Instance;
             }
 
-            public DummyType GetGenericInstantiation(DummyType genericType, ImmutableArray<DummyType> typeArguments)
+            public DummyType GetGenericInstantiation(
+                DummyType genericType,
+                ImmutableArray<DummyType> typeArguments
+            )
             {
                 return DummyType.Instance;
             }
 
-            public DummyType GetGenericMethodParameter(DummyGenericContext genericContext, int index)
+            public DummyType GetGenericMethodParameter(
+                DummyGenericContext genericContext,
+                int index
+            )
             {
                 return DummyType.Instance;
             }
@@ -159,7 +183,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return DummyType.Instance;
             }
 
-            public DummyType GetModifiedType(DummyType modifier, DummyType unmodifiedType, bool isRequired)
+            public DummyType GetModifiedType(
+                DummyType modifier,
+                DummyType unmodifiedType,
+                bool isRequired
+            )
             {
                 return DummyType.Instance;
             }
@@ -184,7 +212,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 return DummyType.Instance;
             }
 
-            public DummyType GetTypeFromSpecification(MetadataReader reader, DummyGenericContext genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
+            public DummyType GetTypeFromSpecification(
+                MetadataReader reader,
+                DummyGenericContext genericContext,
+                TypeSpecificationHandle handle,
+                byte rawTypeKind
+            )
             {
                 return DummyType.Instance;
             }
@@ -199,13 +232,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             public static DummyType Instance = new DummyType();
         }
 
-        private class DummyGenericContext
-        {
-        }
+        private class DummyGenericContext { }
 
         #endregion
 
-        private void ReadCustomAttributeTypeNameWithoutResolving(EntityHandle customAttributeConstructorHandle, out string customAttributeTypeNamespace, out string customAttributeTypeName)
+        private void ReadCustomAttributeTypeNameWithoutResolving(
+            EntityHandle customAttributeConstructorHandle,
+            out string customAttributeTypeNamespace,
+            out string customAttributeTypeName
+        )
         {
             /**
              * It is possible that the assembly that defines the attribute is not provided as a reference assembly.
@@ -218,39 +253,81 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
              */
             if (customAttributeConstructorHandle.Kind == HandleKind.MethodDefinition)
             {
-                MethodDefinitionHandle customAttributeConstructorDefinitionHandle = (MethodDefinitionHandle)customAttributeConstructorHandle;
-                MethodDefinition customAttributeConstructorDefinition = _module.MetadataReader.GetMethodDefinition(customAttributeConstructorDefinitionHandle);
-                TypeDefinitionHandle customAttributeConstructorTypeDefinitionHandle = customAttributeConstructorDefinition.GetDeclaringType();
-                GetTypeNameFromTypeDefinitionHandle(customAttributeConstructorTypeDefinitionHandle, out customAttributeTypeNamespace, out customAttributeTypeName);
+                MethodDefinitionHandle customAttributeConstructorDefinitionHandle =
+                    (MethodDefinitionHandle)customAttributeConstructorHandle;
+                MethodDefinition customAttributeConstructorDefinition =
+                    _module.MetadataReader.GetMethodDefinition(
+                        customAttributeConstructorDefinitionHandle
+                    );
+                TypeDefinitionHandle customAttributeConstructorTypeDefinitionHandle =
+                    customAttributeConstructorDefinition.GetDeclaringType();
+                GetTypeNameFromTypeDefinitionHandle(
+                    customAttributeConstructorTypeDefinitionHandle,
+                    out customAttributeTypeNamespace,
+                    out customAttributeTypeName
+                );
             }
             else if (customAttributeConstructorHandle.Kind == HandleKind.MemberReference)
             {
-                MemberReferenceHandle customAttributeConstructorReferenceHandle = (MemberReferenceHandle)customAttributeConstructorHandle;
-                MemberReference customAttributeConstructorReference = _module.MetadataReader.GetMemberReference(customAttributeConstructorReferenceHandle);
-                EntityHandle customAttributeConstructorReferenceParentHandle = customAttributeConstructorReference.Parent;
-                if (customAttributeConstructorReferenceParentHandle.Kind == HandleKind.TypeReference)
+                MemberReferenceHandle customAttributeConstructorReferenceHandle =
+                    (MemberReferenceHandle)customAttributeConstructorHandle;
+                MemberReference customAttributeConstructorReference =
+                    _module.MetadataReader.GetMemberReference(
+                        customAttributeConstructorReferenceHandle
+                    );
+                EntityHandle customAttributeConstructorReferenceParentHandle =
+                    customAttributeConstructorReference.Parent;
+                if (
+                    customAttributeConstructorReferenceParentHandle.Kind == HandleKind.TypeReference
+                )
                 {
-                    TypeReferenceHandle customAttributeConstructorTypeReferenceHandle = (TypeReferenceHandle)customAttributeConstructorReferenceParentHandle;
-                    GetTypeNameFromTypeReferenceHandle(customAttributeConstructorTypeReferenceHandle, out customAttributeTypeNamespace, out customAttributeTypeName);
+                    TypeReferenceHandle customAttributeConstructorTypeReferenceHandle =
+                        (TypeReferenceHandle)customAttributeConstructorReferenceParentHandle;
+                    GetTypeNameFromTypeReferenceHandle(
+                        customAttributeConstructorTypeReferenceHandle,
+                        out customAttributeTypeNamespace,
+                        out customAttributeTypeName
+                    );
                 }
                 else
                 {
-                    Debug.Assert(customAttributeConstructorReferenceParentHandle.Kind == HandleKind.TypeSpecification);
-                    TypeSpecificationHandle customAttributeConstructorTypeSpecificationHandle = (TypeSpecificationHandle)customAttributeConstructorReferenceParentHandle;
-                    TypeSpecification customAttributeConstructorTypeSpecification = _module.MetadataReader.GetTypeSpecification(customAttributeConstructorTypeSpecificationHandle);
-                    FirstTypeHandleExtractor fakeSignatureTypeProvider = new FirstTypeHandleExtractor();
-                    customAttributeConstructorTypeSpecification.DecodeSignature(fakeSignatureTypeProvider, new DummyGenericContext());
+                    Debug.Assert(
+                        customAttributeConstructorReferenceParentHandle.Kind
+                            == HandleKind.TypeSpecification
+                    );
+                    TypeSpecificationHandle customAttributeConstructorTypeSpecificationHandle =
+                        (TypeSpecificationHandle)customAttributeConstructorReferenceParentHandle;
+                    TypeSpecification customAttributeConstructorTypeSpecification =
+                        _module.MetadataReader.GetTypeSpecification(
+                            customAttributeConstructorTypeSpecificationHandle
+                        );
+                    FirstTypeHandleExtractor fakeSignatureTypeProvider =
+                        new FirstTypeHandleExtractor();
+                    customAttributeConstructorTypeSpecification.DecodeSignature(
+                        fakeSignatureTypeProvider,
+                        new DummyGenericContext()
+                    );
                     EntityHandle firstTypeHandle = fakeSignatureTypeProvider.FirstTypeHandle;
                     if (firstTypeHandle.Kind == HandleKind.TypeDefinition)
                     {
-                        TypeDefinitionHandle customAttributeConstructorTypeDefinitionHandle = (TypeDefinitionHandle)firstTypeHandle;
-                        GetTypeNameFromTypeDefinitionHandle(customAttributeConstructorTypeDefinitionHandle, out customAttributeTypeNamespace, out customAttributeTypeName);
+                        TypeDefinitionHandle customAttributeConstructorTypeDefinitionHandle =
+                            (TypeDefinitionHandle)firstTypeHandle;
+                        GetTypeNameFromTypeDefinitionHandle(
+                            customAttributeConstructorTypeDefinitionHandle,
+                            out customAttributeTypeNamespace,
+                            out customAttributeTypeName
+                        );
                     }
                     else
                     {
                         Debug.Assert(firstTypeHandle.Kind == HandleKind.TypeReference);
-                        TypeReferenceHandle customAttributeConstructorTypeReferenceHandle = (TypeReferenceHandle)firstTypeHandle;
-                        GetTypeNameFromTypeReferenceHandle(customAttributeConstructorTypeReferenceHandle, out customAttributeTypeNamespace, out customAttributeTypeName);
+                        TypeReferenceHandle customAttributeConstructorTypeReferenceHandle =
+                            (TypeReferenceHandle)firstTypeHandle;
+                        GetTypeNameFromTypeReferenceHandle(
+                            customAttributeConstructorTypeReferenceHandle,
+                            out customAttributeTypeNamespace,
+                            out customAttributeTypeName
+                        );
                     }
                 }
             }
@@ -262,18 +339,30 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        private void GetTypeNameFromTypeReferenceHandle(TypeReferenceHandle typeReferenceHandle, out string typeNamespace, out string typeName)
+        private void GetTypeNameFromTypeReferenceHandle(
+            TypeReferenceHandle typeReferenceHandle,
+            out string typeNamespace,
+            out string typeName
+        )
         {
-            TypeReference typeReference = _module.MetadataReader.GetTypeReference(typeReferenceHandle);
+            TypeReference typeReference = _module.MetadataReader.GetTypeReference(
+                typeReferenceHandle
+            );
             StringHandle typeNamespaceHandle = typeReference.Namespace;
             StringHandle typeNameHandle = typeReference.Name;
             typeNamespace = _module.MetadataReader.GetString(typeNamespaceHandle);
             typeName = _module.MetadataReader.GetString(typeNameHandle);
         }
 
-        private void GetTypeNameFromTypeDefinitionHandle(TypeDefinitionHandle typeDefinitionHandle, out string typeNamespace, out string typeName)
+        private void GetTypeNameFromTypeDefinitionHandle(
+            TypeDefinitionHandle typeDefinitionHandle,
+            out string typeNamespace,
+            out string typeName
+        )
         {
-            TypeDefinition typeDefinition = _module.MetadataReader.GetTypeDefinition(typeDefinitionHandle);
+            TypeDefinition typeDefinition = _module.MetadataReader.GetTypeDefinition(
+                typeDefinitionHandle
+            );
             StringHandle typeNamespaceHandle = typeDefinition.Namespace;
             StringHandle typeNameHandle = typeDefinition.Name;
             typeNamespace = _module.MetadataReader.GetString(typeNamespaceHandle);
@@ -300,13 +389,23 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             List<CustomAttributeEntry> customAttributeEntries = GetCustomAttributeEntries();
             int countOfEntries = customAttributeEntries.Count;
             if (countOfEntries == 0)
             {
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
             }
 
             // Buckets have 8 entries
@@ -328,14 +427,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 tryAgainWithBiggerTable = false;
                 uint actualSizeOfTable = bucketCount * 8; // Buckets have 8 entries in them
                 pTable = new ushort[actualSizeOfTable];
-                uint[] state = new uint[] {729055690, 833774698, 218408041, 493449127};
+                uint[] state = new uint[] { 729055690, 833774698, 218408041, 493449127 };
                 // Attempt to fill table
                 foreach (var customAttributeEntry in customAttributeEntries)
                 {
-                    string name = customAttributeEntry.TypeNamespace + "." + customAttributeEntry.TypeName;
+                    string name =
+                        customAttributeEntry.TypeNamespace + "." + customAttributeEntry.TypeName;
                     // This hashing algorithm MUST match exactly the logic in NativeCuckooFilter
                     int hashOfAttribute = ReadyToRunHashCode.NameHashCode(name);
-                    uint hash = unchecked((uint)ReadyToRunHashCode.CombineTwoValuesIntoHash((uint)hashOfAttribute, (uint)customAttributeEntry.Parent));
+                    uint hash = unchecked(
+                        (uint)
+                            ReadyToRunHashCode.CombineTwoValuesIntoHash(
+                                (uint)hashOfAttribute,
+                                (uint)customAttributeEntry.Parent
+                            )
+                    );
                     ushort fingerprint = (ushort)(hash >> 16);
                     if (fingerprint == 0)
                     {
@@ -373,7 +479,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         }
                         return false;
                     };
-                    Action<uint, ushort> fillEmptyEntryInBucket = (uint bucketIndex, ushort fprint) =>
+                    Action<uint, ushort> fillEmptyEntryInBucket = (
+                        uint bucketIndex,
+                        ushort fprint
+                    ) =>
                     {
                         for (int i = 0; i < 8; i++)
                         {
@@ -386,7 +495,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         Debug.Assert(false, "Not possible to reach here");
                     };
                     // Scan for pre-existing fingerprint entry in buckets
-                    if (hasEntryInBucket(bucketAIndex, fingerprint) || hasEntryInBucket(bucketBIndex, fingerprint))
+                    if (
+                        hasEntryInBucket(bucketAIndex, fingerprint)
+                        || hasEntryInBucket(bucketBIndex, fingerprint)
+                    )
                     {
                         continue;
                     }
@@ -438,8 +550,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     // bucket entry kicking path requires bucket counts to be power of two in size due to use of xor to retrieve second hash
                     bucketCount *= 2;
                 }
-            }
-            while(tryAgainWithBiggerTable && ((countOfRetries++) < 2));
+            } while (tryAgainWithBiggerTable && ((countOfRetries++) < 2));
 
             byte[] result;
             if (tryAgainWithBiggerTable)

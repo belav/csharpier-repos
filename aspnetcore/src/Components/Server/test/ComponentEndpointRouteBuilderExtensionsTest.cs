@@ -26,9 +26,10 @@ public class ComponentEndpointRouteBuilderExtensionsTest
         var app = applicationBuilder
             .UseRouting()
             .UseEndpoints(endpoints =>
-        {
-            endpoints.MapBlazorHub(dispatchOptions => called = true);
-        }).Build();
+            {
+                endpoints.MapBlazorHub(dispatchOptions => called = true);
+            })
+            .Build();
 
         // Assert
         Assert.True(called);
@@ -47,7 +48,8 @@ public class ComponentEndpointRouteBuilderExtensionsTest
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapBlazorHub("_blazor", dispatchOptions => called = true);
-            }).Build();
+            })
+            .Build();
 
         // Assert
         Assert.True(called);
@@ -67,16 +69,17 @@ public class ComponentEndpointRouteBuilderExtensionsTest
             .UseEndpoints(endpoints =>
             {
                 endpoints
-                .MapBlazorHub(dispatchOptions => called = true)
-                .WithMetadata("initial-md")
-                .Finally(builder =>
-                {
-                    if (builder.Metadata.Any(md => md is string smd && smd == "initial-md"))
+                    .MapBlazorHub(dispatchOptions => called = true)
+                    .WithMetadata("initial-md")
+                    .Finally(builder =>
                     {
-                        buildersAffected.Add(builder.DisplayName);
-                    }
-                });
-            }).Build();
+                        if (builder.Metadata.Any(md => md is string smd && smd == "initial-md"))
+                        {
+                            buildersAffected.Add(builder.DisplayName);
+                        }
+                    });
+            })
+            .Build();
 
         // Trigger endpoint construction
         app.Invoke(new DefaultHttpContext());
@@ -113,7 +116,8 @@ public class ComponentEndpointRouteBuilderExtensionsTest
                 {
                     populatedMetadata = b.Metadata.OfType<string>().ToArray();
                 });
-            }).Build();
+            })
+            .Build();
 
         // Trigger endpoint construction
         app.Invoke(new DefaultHttpContext());

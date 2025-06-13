@@ -30,7 +30,8 @@ namespace System.Web.Mvc.Test
             TagBuilder builder = new TagBuilder("SomeTag");
 
             // Act
-            SortedDictionary<string, string> attributes = builder.Attributes as SortedDictionary<string, string>;
+            SortedDictionary<string, string> attributes =
+                builder.Attributes as SortedDictionary<string, string>;
 
             // Assert
             Assert.NotNull(attributes);
@@ -54,14 +55,26 @@ namespace System.Web.Mvc.Test
         public void ConstructorWithEmptyTagNameThrows()
         {
             Assert.ThrowsArgumentNullOrEmptyString(
-                delegate { new TagBuilder(String.Empty); }, "tagName");
+                delegate
+                {
+                    new TagBuilder(String.Empty);
+                },
+                "tagName"
+            );
         }
 
         [Fact]
         public void ConstructorWithNullTagNameThrows()
         {
             Assert.ThrowsArgumentNullOrEmptyString(
-                delegate { new TagBuilder(null /* tagName */); }, "tagName");
+                delegate
+                {
+                    new TagBuilder(
+                        null /* tagName */
+                    );
+                },
+                "tagName"
+            );
         }
 
         [Fact]
@@ -70,7 +83,8 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => TagBuilder.CreateSanitizedId("tagId", null),
-                "invalidCharReplacement");
+                "invalidCharReplacement"
+            );
         }
 
         [Fact]
@@ -120,10 +134,14 @@ namespace System.Web.Mvc.Test
         public void CreateSanitizedId_ReturnsSanitizedId()
         {
             // Arrange
-            string expected = "ABCXYZabcxyz012789!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!-!REPL!_!REPL!!REPL!:";
+            string expected =
+                "ABCXYZabcxyz012789!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!!REPL!-!REPL!_!REPL!!REPL!:";
 
             // Act
-            string retVal = TagBuilder.CreateSanitizedId("ABCXYZabcxyz012789!@#$%^&*()-=_+.:", "!REPL!");
+            string retVal = TagBuilder.CreateSanitizedId(
+                "ABCXYZabcxyz012789!@#$%^&*()-=_+.:",
+                "!REPL!"
+            );
 
             // Assert
             Assert.Equal(expected, retVal);
@@ -220,7 +238,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmptyString(
-                delegate { builder.MergeAttribute(String.Empty, "value"); }, "key");
+                delegate
+                {
+                    builder.MergeAttribute(String.Empty, "value");
+                },
+                "key"
+            );
         }
 
         [Fact]
@@ -231,7 +254,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmptyString(
-                delegate { builder.MergeAttribute(null, "value"); }, "key");
+                delegate
+                {
+                    builder.MergeAttribute(null, "value");
+                },
+                "key"
+            );
         }
 
         [Fact]
@@ -244,7 +272,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, string> newAttrs = new Dictionary<string, string>
             {
                 { "a", "newA" },
-                { "b", "newB" }
+                { "b", "newB" },
             };
 
             // Act
@@ -266,7 +294,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, string> newAttrs = new Dictionary<string, string>
             {
                 { "a", "newA" },
-                { "b", "newB" }
+                { "b", "newB" },
             };
 
             // Act
@@ -308,17 +336,17 @@ namespace System.Web.Mvc.Test
         public void ToStringDefaultsToNormal()
         {
             // Arrange
-            TagBuilder builder = new TagBuilder("SomeTag")
-            {
-                InnerHtml = "<x&y>"
-            };
+            TagBuilder builder = new TagBuilder("SomeTag") { InnerHtml = "<x&y>" };
             builder.MergeAttributes(GetAttributesDictionary());
 
             // Act
             string output = builder.ToString();
 
             // Assert
-            Assert.Equal(@"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>""><x&y></SomeTag>", output);
+            Assert.Equal(
+                @"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>""><x&y></SomeTag>",
+                output
+            );
         }
 
         [Fact]
@@ -340,10 +368,7 @@ namespace System.Web.Mvc.Test
         public void ToStringEndTag()
         {
             // Arrange
-            TagBuilder builder = new TagBuilder("SomeTag")
-            {
-                InnerHtml = "<x&y>"
-            };
+            TagBuilder builder = new TagBuilder("SomeTag") { InnerHtml = "<x&y>" };
             builder.MergeAttributes(GetAttributesDictionary());
 
             // Act
@@ -357,51 +382,51 @@ namespace System.Web.Mvc.Test
         public void ToStringNormal()
         {
             // Arrange
-            TagBuilder builder = new TagBuilder("SomeTag")
-            {
-                InnerHtml = "<x&y>"
-            };
+            TagBuilder builder = new TagBuilder("SomeTag") { InnerHtml = "<x&y>" };
             builder.MergeAttributes(GetAttributesDictionary());
 
             // Act
             string output = builder.ToString(TagRenderMode.Normal);
 
             // Assert
-            Assert.Equal(@"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>""><x&y></SomeTag>", output);
+            Assert.Equal(
+                @"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>""><x&y></SomeTag>",
+                output
+            );
         }
 
         [Fact]
         public void ToStringSelfClosing()
         {
             // Arrange
-            TagBuilder builder = new TagBuilder("SomeTag")
-            {
-                InnerHtml = "<x&y>"
-            };
+            TagBuilder builder = new TagBuilder("SomeTag") { InnerHtml = "<x&y>" };
             builder.MergeAttributes(GetAttributesDictionary());
 
             // Act
             string output = builder.ToString(TagRenderMode.SelfClosing);
 
             // Assert
-            Assert.Equal(@"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>"" />", output);
+            Assert.Equal(
+                @"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>"" />",
+                output
+            );
         }
 
         [Fact]
         public void ToStringStartTag()
         {
             // Arrange
-            TagBuilder builder = new TagBuilder("SomeTag")
-            {
-                InnerHtml = "<x&y>"
-            };
+            TagBuilder builder = new TagBuilder("SomeTag") { InnerHtml = "<x&y>" };
             builder.MergeAttributes(GetAttributesDictionary());
 
             // Act
             string output = builder.ToString(TagRenderMode.StartTag);
 
             // Assert
-            Assert.Equal(@"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>"">", output);
+            Assert.Equal(
+                @"<SomeTag a=""Foo"" b=""Bar&amp;Baz"" c=""&lt;&quot;Quux&quot;>"">",
+                output
+            );
         }
 
         private static IDictionary<string, string> GetAttributesDictionary()
@@ -410,7 +435,7 @@ namespace System.Web.Mvc.Test
             {
                 { "a", "Foo" },
                 { "b", "Bar&Baz" },
-                { "c", @"<""Quux"">" }
+                { "c", @"<""Quux"">" },
             };
         }
     }

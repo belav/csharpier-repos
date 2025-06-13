@@ -11,7 +11,6 @@ using Microsoft.Test.ModuleCore;
 
 namespace XLinqTests
 {
-
     public class ParamsObjectsCreation : XLinqTestCase
     {
         // Type is CoreXml.Test.XLinq.FunctionalTests+TreeManipulationTests+ParamsObjectsCreation
@@ -21,29 +20,248 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(XDocumentAddParams) { Attribute = new VariationAttribute("XDocument - adding Comment") { Param = "XComment", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParams) { Attribute = new VariationAttribute("XDocument - combination off allowed types in correct order, without decl") { Param = "Mix2", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParams) { Attribute = new VariationAttribute("XDocument - adding PI") { Param = "XPI", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParams) { Attribute = new VariationAttribute("XDocument - adding element") { Param = "XElement", Priority = 0 } });
-            AddChild(new TestVariation(XDocumentAddParams) { Attribute = new VariationAttribute("XDocument - adding string/whitespace") { Param = "Whitespace", Priority = 2 } });
-            AddChild(new TestVariation(XDocumentAddParams) { Attribute = new VariationAttribute("XDocument - combination off allowed types in correct order") { Param = "Mix1", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParamsCloning) { Attribute = new VariationAttribute("XDocument - combination off allowed types in correct order,  cloned") { Param = "Mix1", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParamsCloning) { Attribute = new VariationAttribute("XDocument - adding string/whitespace") { Param = "Whitespace", Priority = 2 } });
-            AddChild(new TestVariation(XDocumentAddParamsCloning) { Attribute = new VariationAttribute("XDocument - adding Comment cloned") { Param = "XComment", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParamsCloning) { Attribute = new VariationAttribute("XDocument - adding element cloned") { Param = "XElement", Priority = 0 } });
-            AddChild(new TestVariation(XDocumentAddParamsCloning) { Attribute = new VariationAttribute("XDocument - combination off allowed types in correct order, without decl;  cloned") { Param = "Mix2", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentAddParamsCloning) { Attribute = new VariationAttribute("XDocument - adding PI cloned") { Param = "XPI", Priority = 1 } });
-            AddChild(new TestVariation(CreateXDocumentMixNoArrayNotConnected) { Attribute = new VariationAttribute("XDocument - params no array") { Priority = 0 } });
-            AddChild(new TestVariation(CreateXDocumentMixNoArrayConnected) { Attribute = new VariationAttribute("XDocument - params no array - connected") { Priority = 0 } });
-            AddChild(new TestVariation(XDocumentAddParamsInvalid) { Attribute = new VariationAttribute("XDocument - Invalid case - XDocument node") { Param = "Document", Priority = 2 } });
-            AddChild(new TestVariation(XDocumentAddParamsInvalid) { Attribute = new VariationAttribute("XDocument - Invalid case - Mix with attribute") { Param = "MixAttr", Priority = 2 } });
-            AddChild(new TestVariation(XDocumentAddParamsInvalid) { Attribute = new VariationAttribute("XDocument - Invalid case - attribute node") { Param = "Attribute", Priority = 1 } });
-            AddChild(new TestVariation(XDocumentInvalidCloneSanity) { Attribute = new VariationAttribute("XDocument - Invalid case with clone - double root - sanity") { Priority = 1 } });
-            AddChild(new TestVariation(XDocumentTheSameReferenceSanity) { Attribute = new VariationAttribute("XDocument - the same node instance, connected - sanity") { Param = true, Priority = 1 } });
-            AddChild(new TestVariation(XDocumentTheSameReferenceSanity) { Attribute = new VariationAttribute("XDocument - the same node instance - sanity") { Param = false, Priority = 1 } });
-            AddChild(new TestVariation(XDocumentIEnumerable) { Attribute = new VariationAttribute("XDocument - IEnumerable - connected") { Param = true, Priority = 0 } });
-            AddChild(new TestVariation(XDocumentIEnumerable) { Attribute = new VariationAttribute("XDocument - IEnumerable - not connected") { Param = false, Priority = 0 } });
-            AddChild(new TestVariation(XDocument2xIEnumerable) { Attribute = new VariationAttribute("XDocument - 2 x IEnumerable - sanity") { Priority = 0 } });
+            AddChild(
+                new TestVariation(XDocumentAddParams)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding Comment")
+                    {
+                        Param = "XComment",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParams)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - combination off allowed types in correct order, without decl"
+                    )
+                    {
+                        Param = "Mix2",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParams)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding PI")
+                    {
+                        Param = "XPI",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParams)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding element")
+                    {
+                        Param = "XElement",
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParams)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding string/whitespace")
+                    {
+                        Param = "Whitespace",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParams)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - combination off allowed types in correct order"
+                    )
+                    {
+                        Param = "Mix1",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsCloning)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - combination off allowed types in correct order,  cloned"
+                    )
+                    {
+                        Param = "Mix1",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsCloning)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding string/whitespace")
+                    {
+                        Param = "Whitespace",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsCloning)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding Comment cloned")
+                    {
+                        Param = "XComment",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsCloning)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding element cloned")
+                    {
+                        Param = "XElement",
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsCloning)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - combination off allowed types in correct order, without decl;  cloned"
+                    )
+                    {
+                        Param = "Mix2",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsCloning)
+                {
+                    Attribute = new VariationAttribute("XDocument - adding PI cloned")
+                    {
+                        Param = "XPI",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocumentMixNoArrayNotConnected)
+                {
+                    Attribute = new VariationAttribute("XDocument - params no array")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(CreateXDocumentMixNoArrayConnected)
+                {
+                    Attribute = new VariationAttribute("XDocument - params no array - connected")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsInvalid)
+                {
+                    Attribute = new VariationAttribute("XDocument - Invalid case - XDocument node")
+                    {
+                        Param = "Document",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsInvalid)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - Invalid case - Mix with attribute"
+                    )
+                    {
+                        Param = "MixAttr",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentAddParamsInvalid)
+                {
+                    Attribute = new VariationAttribute("XDocument - Invalid case - attribute node")
+                    {
+                        Param = "Attribute",
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentInvalidCloneSanity)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - Invalid case with clone - double root - sanity"
+                    )
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentTheSameReferenceSanity)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - the same node instance, connected - sanity"
+                    )
+                    {
+                        Param = true,
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentTheSameReferenceSanity)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument - the same node instance - sanity"
+                    )
+                    {
+                        Param = false,
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentIEnumerable)
+                {
+                    Attribute = new VariationAttribute("XDocument - IEnumerable - connected")
+                    {
+                        Param = true,
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocumentIEnumerable)
+                {
+                    Attribute = new VariationAttribute("XDocument - IEnumerable - not connected")
+                    {
+                        Param = false,
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(XDocument2xIEnumerable)
+                {
+                    Attribute = new VariationAttribute("XDocument - 2 x IEnumerable - sanity")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
         }
 
         // XDocument
@@ -67,7 +285,12 @@ namespace XLinqTests
 
         public void CreateXDocumentMixNoArrayConnected()
         {
-            var doc1 = new XDocument(new XProcessingInstruction("PI", "data"), new XComment("comm1"), new XElement("root", new XAttribute("id", "a1")), new XComment("comm2"));
+            var doc1 = new XDocument(
+                new XProcessingInstruction("PI", "data"),
+                new XComment("comm1"),
+                new XElement("root", new XAttribute("id", "a1")),
+                new XComment("comm2")
+            );
 
             var nodes = new XNode[4];
             XNode nn = doc1.FirstNode;
@@ -93,7 +316,13 @@ namespace XLinqTests
 
         public void CreateXDocumentMixNoArrayNotConnected()
         {
-            XNode[] nodes = { new XProcessingInstruction("PI", "data"), new XComment("comm1"), new XElement("root", new XAttribute("id", "a1")), new XComment("comm2") };
+            XNode[] nodes =
+            {
+                new XProcessingInstruction("PI", "data"),
+                new XComment("comm1"),
+                new XElement("root", new XAttribute("id", "a1")),
+                new XComment("comm2"),
+            };
 
             var doc = new XDocument(nodes[0], nodes[1], nodes[2], nodes[3]);
             int nodeCounter = 0;
@@ -174,10 +403,22 @@ namespace XLinqTests
                     parameters = new object[] { new XText(" ") };
                     break;
                 case "Mix1":
-                    parameters = new object[] { new XComment("comment"), new XProcessingInstruction("Click", "data"), new XElement("root"), new XProcessingInstruction("Click2", "data2") };
+                    parameters = new object[]
+                    {
+                        new XComment("comment"),
+                        new XProcessingInstruction("Click", "data"),
+                        new XElement("root"),
+                        new XProcessingInstruction("Click2", "data2"),
+                    };
                     break;
                 case "Mix2":
-                    parameters = new object[] { new XComment("comment"), new XProcessingInstruction("Click", "data"), new XElement("root"), new XProcessingInstruction("Click2", "data2") };
+                    parameters = new object[]
+                    {
+                        new XComment("comment"),
+                        new XProcessingInstruction("Click", "data"),
+                        new XElement("root"),
+                        new XProcessingInstruction("Click2", "data2"),
+                    };
                     break;
                 default:
                     TestLog.Compare(false, "Test case: Wrong param");
@@ -193,7 +434,10 @@ namespace XLinqTests
             {
                 TestLog.Compare(node != null, "node != null");
                 TestLog.Compare(node == parameters[counter], "Node identity");
-                TestLog.Compare(XNode.DeepEquals(node, parameters[counter] as XNode), "node equals param");
+                TestLog.Compare(
+                    XNode.DeepEquals(node, parameters[counter] as XNode),
+                    "node equals param"
+                );
                 TestLog.Compare(node.Document, doc, "Document property");
                 counter++;
             }
@@ -301,19 +545,36 @@ namespace XLinqTests
                     paras = new object[] { new XAttribute("mu", "hu") };
                     break;
                 case "Document":
-                    paras = new object[] { new XDocument(), new XProcessingInstruction("Click", "data") };
+                    paras = new object[]
+                    {
+                        new XDocument(),
+                        new XProcessingInstruction("Click", "data"),
+                    };
                     break;
                 case "MixAttr":
-                    paras = new object[] { new XElement("aloha"), new XProcessingInstruction("PI", "data"), new XAttribute("id", "a") };
+                    paras = new object[]
+                    {
+                        new XElement("aloha"),
+                        new XProcessingInstruction("PI", "data"),
+                        new XAttribute("id", "a"),
+                    };
                     break;
                 case "DoubleRoot":
                     paras = new object[] { new XElement("first"), new XElement("Second") };
                     break;
                 case "DoubleDocType":
-                    paras = new object[] { new XDocumentType("root", "", "", ""), new XDocumentType("root", "", "", "") };
+                    paras = new object[]
+                    {
+                        new XDocumentType("root", "", "", ""),
+                        new XDocumentType("root", "", "", ""),
+                    };
                     break;
                 case "InvalidOrder":
-                    paras = new object[] { new XElement("first"), new XDocumentType("root", "", "", "") };
+                    paras = new object[]
+                    {
+                        new XElement("first"),
+                        new XDocumentType("root", "", "", ""),
+                    };
                     break;
 
                 default:
@@ -344,7 +605,9 @@ namespace XLinqTests
             if (connected)
             {
                 doc1 = new XDocument(
-                    new XProcessingInstruction("PI", "data"), new XElement("root"));
+                    new XProcessingInstruction("PI", "data"),
+                    new XElement("root")
+                );
                 var list = new List<XNode>();
                 for (XNode n = doc1.FirstNode; n != null; n = n.NextNode)
                 {
@@ -422,9 +685,20 @@ namespace XLinqTests
 
             if (connected)
             {
-                doc1 = new XDocument(new XElement("root", new XElement("A"), new XProcessingInstruction("PI", "data")));
+                doc1 = new XDocument(
+                    new XElement(
+                        "root",
+                        new XElement("A"),
+                        new XProcessingInstruction("PI", "data")
+                    )
+                );
 
-                paras = new object[] { doc1.Root.LastNode, doc1.Root.LastNode, doc1.Root.Element("A") };
+                paras = new object[]
+                {
+                    doc1.Root.LastNode,
+                    doc1.Root.LastNode,
+                    doc1.Root.Element("A"),
+                };
             }
             else
             {
@@ -440,11 +714,19 @@ namespace XLinqTests
             XNode rootElem = secondPI.NextNode;
 
             TestLog.Compare(firstPI != null, "firstPI != null");
-            TestLog.Compare(firstPI.NodeType, XmlNodeType.ProcessingInstruction, "firstPI nodetype");
+            TestLog.Compare(
+                firstPI.NodeType,
+                XmlNodeType.ProcessingInstruction,
+                "firstPI nodetype"
+            );
             TestLog.Compare(firstPI is XProcessingInstruction, "firstPI is XPI");
 
             TestLog.Compare(secondPI != null, "secondPI != null");
-            TestLog.Compare(secondPI.NodeType, XmlNodeType.ProcessingInstruction, "secondPI nodetype");
+            TestLog.Compare(
+                secondPI.NodeType,
+                XmlNodeType.ProcessingInstruction,
+                "secondPI nodetype"
+            );
             TestLog.Compare(secondPI is XProcessingInstruction, "secondPI is XPI");
 
             TestLog.Compare(rootElem != null, "rootElem != null");
@@ -453,7 +735,10 @@ namespace XLinqTests
             TestLog.Compare(rootElem.NextNode == null, "rootElem NextNode");
 
             TestLog.Compare(firstPI != secondPI, "firstPI != secondPI");
-            TestLog.Compare(XNode.DeepEquals(firstPI, secondPI), "XNode.DeepEquals(firstPI,secondPI)");
+            TestLog.Compare(
+                XNode.DeepEquals(firstPI, secondPI),
+                "XNode.DeepEquals(firstPI,secondPI)"
+            );
 
             foreach (object o in paras)
             {

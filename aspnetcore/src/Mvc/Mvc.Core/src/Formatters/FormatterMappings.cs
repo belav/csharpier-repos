@@ -12,8 +12,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// </summary>
 public class FormatterMappings
 {
-    private readonly Dictionary<string, string> _map =
-        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, string> _map = new Dictionary<string, string>(
+        StringComparer.OrdinalIgnoreCase
+    );
 
     /// <summary>
     /// Sets mapping for the format to specified media type.
@@ -54,8 +55,10 @@ public class FormatterMappings
     {
         if (string.IsNullOrEmpty(format))
         {
-            var message = Resources.FormatFormatFormatterMappings_GetMediaTypeMappingForFormat_InvalidFormat(
-                nameof(format));
+            var message =
+                Resources.FormatFormatFormatterMappings_GetMediaTypeMappingForFormat_InvalidFormat(
+                    nameof(format)
+                );
 
             throw new ArgumentException(message, nameof(format));
         }
@@ -85,8 +88,13 @@ public class FormatterMappings
         if (contentType.Type == "*" || contentType.SubType == "*")
         {
             throw new ArgumentException(
-                string.Format(CultureInfo.CurrentCulture, Resources.FormatterMappings_NotValidMediaType, contentType),
-                nameof(contentType));
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.FormatterMappings_NotValidMediaType,
+                    contentType
+                ),
+                nameof(contentType)
+            );
         }
     }
 
@@ -101,7 +109,10 @@ public class FormatterMappings
         {
             if (format == ".")
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Resources.Format_NotValid, format), nameof(format));
+                throw new ArgumentException(
+                    string.Format(CultureInfo.CurrentCulture, Resources.Format_NotValid, format),
+                    nameof(format)
+                );
             }
 
             format = format.Substring(1);

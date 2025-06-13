@@ -22,11 +22,7 @@ public class PageSaveTempDataPropertyFilterTest
         {
             ["TempDataProperty-Test"] = "Old-Value",
         };
-        var pageModel = new TestPageModel()
-        {
-            Test = "TestString",
-            Test2 = "Test2",
-        };
+        var pageModel = new TestPageModel() { Test = "TestString", Test2 = "Test2" };
 
         var filter = CreatePageSaveTempDataPropertyFilter(tempData, "TempDataProperty-");
         filter.Subject = pageModel;
@@ -46,9 +42,9 @@ public class PageSaveTempDataPropertyFilterTest
         var httpContext = new DefaultHttpContext();
 
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                { "TempDataProperty-Test", "Value" }
-            };
+        {
+            { "TempDataProperty-Test", "Value" },
+        };
 
         var pageModel = new TestPageModel();
 
@@ -65,7 +61,8 @@ public class PageSaveTempDataPropertyFilterTest
             Array.Empty<IFilterMetadata>(),
             null,
             new Dictionary<string, object>(),
-            pageModel);
+            pageModel
+        );
 
         // Act
         filter.OnPageHandlerExecuting(context);
@@ -82,9 +79,9 @@ public class PageSaveTempDataPropertyFilterTest
         var httpContext = new DefaultHttpContext();
 
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                { "TempDataProperty-Test", "Value" }
-            };
+        {
+            { "TempDataProperty-Test", "Value" },
+        };
         tempData.Save();
 
         var pageModel = new TestPageModel();
@@ -106,7 +103,8 @@ public class PageSaveTempDataPropertyFilterTest
             Array.Empty<IFilterMetadata>(),
             null,
             new Dictionary<string, object>(),
-            pageModel);
+            pageModel
+        );
 
         // Act
         filter.OnPageHandlerExecuting(context);
@@ -115,7 +113,8 @@ public class PageSaveTempDataPropertyFilterTest
         Assert.Collection(
             filter.Properties.OrderBy(p => p.PropertyInfo.Name),
             p => Assert.Equal(testProperty, p.PropertyInfo),
-            p => Assert.Equal(test2Property, p.PropertyInfo));
+            p => Assert.Equal(test2Property, p.PropertyInfo)
+        );
     }
 
     [Fact]
@@ -125,10 +124,10 @@ public class PageSaveTempDataPropertyFilterTest
         var httpContext = new DefaultHttpContext();
 
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
-            {
-                { "TempDataProperty-Test", "Prefix-Value" },
-                { "Test", "Value" }
-            };
+        {
+            { "TempDataProperty-Test", "Prefix-Value" },
+            { "Test", "Value" },
+        };
         tempData.Save();
 
         var model = new TestPageModel();
@@ -146,7 +145,8 @@ public class PageSaveTempDataPropertyFilterTest
             Array.Empty<IFilterMetadata>(),
             null,
             new Dictionary<string, object>(),
-            model);
+            model
+        );
 
         // Act
         filter.OnPageHandlerExecuting(context);
@@ -166,10 +166,7 @@ public class PageSaveTempDataPropertyFilterTest
         {
             ["Test"] = "Old-Value",
         };
-        var pageModel = new TestPageModel
-        {
-            Test = "New-Value",
-        };
+        var pageModel = new TestPageModel { Test = "New-Value" };
 
         var filter = CreatePageSaveTempDataPropertyFilter(tempData, string.Empty);
         filter.Subject = pageModel;
@@ -184,15 +181,17 @@ public class PageSaveTempDataPropertyFilterTest
             {
                 Assert.Equal("Test", item.Key);
                 Assert.Equal("New-Value", item.Value);
-            });
+            }
+        );
     }
 
-    private PageSaveTempDataPropertyFilter CreatePageSaveTempDataPropertyFilter(TempDataDictionary tempData, string prefix)
+    private PageSaveTempDataPropertyFilter CreatePageSaveTempDataPropertyFilter(
+        TempDataDictionary tempData,
+        string prefix
+    )
     {
         var factory = new Mock<ITempDataDictionaryFactory>();
-        factory
-            .Setup(f => f.GetTempData(It.IsAny<HttpContext>()))
-            .Returns(tempData);
+        factory.Setup(f => f.GetTempData(It.IsAny<HttpContext>())).Returns(tempData);
 
         var pageModelType = typeof(TestPageModel);
         var property1 = pageModelType.GetProperty(nameof(TestPageModel.Test));
@@ -202,9 +201,9 @@ public class PageSaveTempDataPropertyFilterTest
         {
             Properties = new[]
             {
-                    new LifecycleProperty(property1, prefix + property1.Name),
-                    new LifecycleProperty(property2, prefix + property2.Name),
-                }
+                new LifecycleProperty(property1, prefix + property1.Name),
+                new LifecycleProperty(property2, prefix + property2.Name),
+            },
         };
 
         return filter;

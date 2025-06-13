@@ -27,5 +27,5 @@ public enum DataCompressionType
     /// <summary>
     ///     Index is compressed by using page compression.
     /// </summary>
-    Page
+    Page,
 }

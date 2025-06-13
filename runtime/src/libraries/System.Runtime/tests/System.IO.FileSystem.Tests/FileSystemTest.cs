@@ -10,7 +10,17 @@ namespace System.IO.Tests
 {
     public abstract partial class FileSystemTest : FileCleanupTestBase
     {
-        public static readonly byte[] TestBuffer = { 0xBA, 0x5E, 0xBA, 0x11, 0xF0, 0x07, 0xBA, 0x11 };
+        public static readonly byte[] TestBuffer =
+        {
+            0xBA,
+            0x5E,
+            0xBA,
+            0x11,
+            0xF0,
+            0x07,
+            0xBA,
+            0x11,
+        };
 
         public static bool AreAllLongPathsAvailable => PathFeatures.AreAllLongPathsAvailable();
 
@@ -18,20 +28,32 @@ namespace System.IO.Tests
 
         public static bool UsingNewNormalization => !PathFeatures.IsUsingLegacyPathNormalization();
 
-        public static bool ReservedDeviceNamesAreBlocked => PlatformDetection.IsWindows && !PlatformDetection.IsWindows10OrLater;
+        public static bool ReservedDeviceNamesAreBlocked =>
+            PlatformDetection.IsWindows && !PlatformDetection.IsWindows10OrLater;
 
         public static TheoryData<string> PathsWithInvalidColons = TestData.PathsWithInvalidColons;
-        public static TheoryData<string> PathsWithInvalidCharacters = TestData.PathsWithInvalidCharacters;
+        public static TheoryData<string> PathsWithInvalidCharacters =
+            TestData.PathsWithInvalidCharacters;
         public static TheoryData<char> TrailingCharacters = TestData.TrailingCharacters;
-        public static TheoryData ValidPathComponentNames = IOInputs.GetValidPathComponentNames().ToTheoryData();
+        public static TheoryData ValidPathComponentNames = IOInputs
+            .GetValidPathComponentNames()
+            .ToTheoryData();
         public static TheoryData SimpleWhiteSpace = IOInputs.GetSimpleWhiteSpace().ToTheoryData();
         public static TheoryData WhiteSpace = IOInputs.GetWhiteSpace().ToTheoryData();
-        public static TheoryData UncPathsWithoutShareName = IOInputs.GetUncPathsWithoutShareName().ToTheoryData();
-        public static TheoryData PathsWithReservedDeviceNames = IOInputs.GetPathsWithReservedDeviceNames().ToTheoryData();
+        public static TheoryData UncPathsWithoutShareName = IOInputs
+            .GetUncPathsWithoutShareName()
+            .ToTheoryData();
+        public static TheoryData PathsWithReservedDeviceNames = IOInputs
+            .GetPathsWithReservedDeviceNames()
+            .ToTheoryData();
         public static TheoryData PathsWithColons = IOInputs.GetPathsWithColons().ToTheoryData();
-        public static TheoryData PathsWithComponentLongerThanMaxComponent = IOInputs.GetPathsWithComponentLongerThanMaxComponent().ToTheoryData();
+        public static TheoryData PathsWithComponentLongerThanMaxComponent = IOInputs
+            .GetPathsWithComponentLongerThanMaxComponent()
+            .ToTheoryData();
         public static TheoryData ControlWhiteSpace = IOInputs.GetControlWhiteSpace().ToTheoryData();
-        public static TheoryData NonControlWhiteSpace = IOInputs.GetNonControlWhiteSpace().ToTheoryData();
+        public static TheoryData NonControlWhiteSpace = IOInputs
+            .GetNonControlWhiteSpace()
+            .ToTheoryData();
 
         public static TheoryData<string> TrailingSeparators
         {
@@ -41,7 +63,7 @@ namespace System.IO.Tests
                 {
                     "",
                     "" + Path.DirectorySeparatorChar,
-                    "" + Path.DirectorySeparatorChar + Path.DirectorySeparatorChar
+                    "" + Path.DirectorySeparatorChar + Path.DirectorySeparatorChar,
                 };
 
                 if (PlatformDetection.IsWindows)
@@ -58,7 +80,10 @@ namespace System.IO.Tests
         /// </summary>
         /// <param name="testAction">Test action to perform. The string argument will be read only directory.</param>
         /// <param name="subDirectoryName">Optional subdirectory to create.</param>
-        protected void ReadOnly_FileSystemHelper(Action<string> testAction, string subDirectoryName = null)
+        protected void ReadOnly_FileSystemHelper(
+            Action<string> testAction,
+            string subDirectoryName = null
+        )
         {
             // Set up read only file system
             // Set up the source directory
@@ -77,11 +102,19 @@ namespace System.IO.Tests
             string readOnlyDirectory = GetTestFilePath();
             Directory.CreateDirectory(readOnlyDirectory);
 
-            Assert.Equal(0, AdminHelpers.RunAsSudo($"mount --bind {sourceDirectory} {readOnlyDirectory}"));
+            Assert.Equal(
+                0,
+                AdminHelpers.RunAsSudo($"mount --bind {sourceDirectory} {readOnlyDirectory}")
+            );
 
             try
             {
-                Assert.Equal(0, AdminHelpers.RunAsSudo($"mount -o remount,ro,bind {sourceDirectory} {readOnlyDirectory}"));
+                Assert.Equal(
+                    0,
+                    AdminHelpers.RunAsSudo(
+                        $"mount -o remount,ro,bind {sourceDirectory} {readOnlyDirectory}"
+                    )
+                );
                 testAction(readOnlyDirectory);
             }
             finally
@@ -102,8 +135,20 @@ namespace System.IO.Tests
         /// </remarks>
         protected static bool GetIsCaseSensitiveByProbing(string probingDirectory)
         {
-            string pathWithUpperCase = Path.Combine(probingDirectory, $"CASESENSITIVETEST{Guid.NewGuid():N}");
-            using (new FileStream(pathWithUpperCase, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.None, 0x1000, FileOptions.DeleteOnClose))
+            string pathWithUpperCase = Path.Combine(
+                probingDirectory,
+                $"CASESENSITIVETEST{Guid.NewGuid():N}"
+            );
+            using (
+                new FileStream(
+                    pathWithUpperCase,
+                    FileMode.CreateNew,
+                    FileAccess.ReadWrite,
+                    FileShare.None,
+                    0x1000,
+                    FileOptions.DeleteOnClose
+                )
+            )
             {
                 string lowerCased = pathWithUpperCase.ToLowerInvariant();
                 return !File.Exists(lowerCased);
@@ -111,15 +156,15 @@ namespace System.IO.Tests
         }
 
         protected const UnixFileMode AllAccess =
-                UnixFileMode.UserRead |
-                UnixFileMode.UserWrite |
-                UnixFileMode.UserExecute |
-                UnixFileMode.GroupRead |
-                UnixFileMode.GroupWrite |
-                UnixFileMode.GroupExecute |
-                UnixFileMode.OtherRead |
-                UnixFileMode.OtherWrite |
-                UnixFileMode.OtherExecute;
+            UnixFileMode.UserRead
+            | UnixFileMode.UserWrite
+            | UnixFileMode.UserExecute
+            | UnixFileMode.GroupRead
+            | UnixFileMode.GroupWrite
+            | UnixFileMode.GroupExecute
+            | UnixFileMode.OtherRead
+            | UnixFileMode.OtherWrite
+            | UnixFileMode.OtherExecute;
 
         public static IEnumerable<object[]> TestUnixFileModes
         {
@@ -145,12 +190,14 @@ namespace System.IO.Tests
             {
                 // The umask can't be retrieved without changing it.
                 // We launch a child process to get its value.
-                using Process px = Process.Start(new ProcessStartInfo
-                {
-                    FileName = "/bin/sh",
-                    ArgumentList = { "-c", "umask" },
-                    RedirectStandardOutput = true
-                });
+                using Process px = Process.Start(
+                    new ProcessStartInfo
+                    {
+                        FileName = "/bin/sh",
+                        ArgumentList = { "-c", "umask" },
+                        RedirectStandardOutput = true,
+                    }
+                );
                 string stdout = px.StandardOutput.ReadToEnd().Trim();
                 s_umask = (UnixFileMode)Convert.ToInt32(stdout, 8);
             }

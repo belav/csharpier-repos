@@ -40,8 +40,10 @@ namespace System.IdentityModel.Claims
 
         [DataMember(Name = "ClaimType")]
         string claimType;
+
         [DataMember(Name = "Resource")]
         object resource;
+
         [DataMember(Name = "Right")]
         string right;
 
@@ -52,11 +54,17 @@ namespace System.IdentityModel.Claims
             if (claimType == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("claimType");
             if (claimType.Length <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("claimType", SR.GetString(SR.ArgumentCannotBeEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "claimType",
+                    SR.GetString(SR.ArgumentCannotBeEmptyString)
+                );
             if (right == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("right");
             if (right.Length <= 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("right", SR.GetString(SR.ArgumentCannotBeEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "right",
+                    SR.GetString(SR.ArgumentCannotBeEmptyString)
+                );
 
             this.claimType = StringUtil.OptimizeString(claimType);
             this.resource = resource;
@@ -64,16 +72,12 @@ namespace System.IdentityModel.Claims
             this.comparer = comparer;
         }
 
-        public Claim(string claimType, object resource, string right) : this(claimType, resource, right, null)
-        {
-        }
+        public Claim(string claimType, object resource, string right)
+            : this(claimType, resource, right, null) { }
 
         public static IEqualityComparer<Claim> DefaultComparer
         {
-            get
-            {
-                return EqualityComparer<Claim>.Default;
-            }
+            get { return EqualityComparer<Claim>.Default; }
         }
 
         public static Claim System
@@ -124,7 +128,12 @@ namespace System.IdentityModel.Claims
             if (hash == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("hash");
 
-            return new Claim(ClaimTypes.Hash, SecurityUtils.CloneBuffer(hash), Rights.PossessProperty, ClaimComparer.Hash);
+            return new Claim(
+                ClaimTypes.Hash,
+                SecurityUtils.CloneBuffer(hash),
+                Rights.PossessProperty,
+                ClaimComparer.Hash
+            );
         }
 
         public static Claim CreateMailAddressClaim(MailAddress mailAddress)
@@ -164,7 +173,12 @@ namespace System.IdentityModel.Claims
             if (thumbprint == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("thumbprint");
 
-            return new Claim(ClaimTypes.Thumbprint, SecurityUtils.CloneBuffer(thumbprint), Rights.PossessProperty, ClaimComparer.Thumbprint);
+            return new Claim(
+                ClaimTypes.Thumbprint,
+                SecurityUtils.CloneBuffer(thumbprint),
+                Rights.PossessProperty,
+                ClaimComparer.Thumbprint
+            );
         }
 
         public static Claim CreateUpnClaim(string upn)
@@ -191,12 +205,21 @@ namespace System.IdentityModel.Claims
             return new Claim(ClaimTypes.Sid, sid, Rights.PossessProperty);
         }
 
-        public static Claim CreateX500DistinguishedNameClaim(X500DistinguishedName x500DistinguishedName)
+        public static Claim CreateX500DistinguishedNameClaim(
+            X500DistinguishedName x500DistinguishedName
+        )
         {
             if (x500DistinguishedName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("x500DistinguishedName");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "x500DistinguishedName"
+                );
 
-            return new Claim(ClaimTypes.X500DistinguishedName, x500DistinguishedName, Rights.PossessProperty, ClaimComparer.X500DistinguishedName);
+            return new Claim(
+                ClaimTypes.X500DistinguishedName,
+                x500DistinguishedName,
+                Rights.PossessProperty,
+                ClaimComparer.X500DistinguishedName
+            );
         }
 
         public override bool Equals(object obj)
@@ -215,7 +238,12 @@ namespace System.IdentityModel.Claims
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture, "{0}: {1}", this.right, this.claimType);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0}: {1}",
+                this.right,
+                this.claimType
+            );
         }
     }
 }

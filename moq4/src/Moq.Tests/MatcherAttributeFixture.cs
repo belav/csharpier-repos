@@ -2,12 +2,15 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
 {
-    [Obsolete("This fixture contains tests related to `" + nameof(MatcherAttribute) + "`, which is obsolete.")]
+    [Obsolete(
+        "This fixture contains tests related to `"
+            + nameof(MatcherAttribute)
+            + "`, which is obsolete."
+    )]
     public class MatcherAttributeFixture
     {
         public interface IFoo
@@ -148,7 +151,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>(MockBehavior.Strict);
 
-            Assert.Throws<MissingMethodException>(() => mock.Setup(x => x.Bar(MatcherHookWithoutMatcherMethod())));
+            Assert.Throws<MissingMethodException>(() =>
+                mock.Setup(x => x.Bar(MatcherHookWithoutMatcherMethod()))
+            );
         }
 
         [Matcher]
@@ -162,7 +167,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>(MockBehavior.Strict);
 
-            Assert.Throws<MissingMethodException>(() => mock.Setup(x => x.Bar(MatcherHook2WithoutMatcherMethod(6))));
+            Assert.Throws<MissingMethodException>(() =>
+                mock.Setup(x => x.Bar(MatcherHook2WithoutMatcherMethod(6)))
+            );
         }
 
         [Matcher]
@@ -206,7 +213,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>(MockBehavior.Strict);
 
-            Assert.Throws<MissingMethodException>(() => mock.Setup(x => x.Bar(NonStaticMatcherHookWithoutMatcherMethod())));
+            Assert.Throws<MissingMethodException>(() =>
+                mock.Setup(x => x.Bar(NonStaticMatcherHookWithoutMatcherMethod()))
+            );
         }
 
         [Matcher]

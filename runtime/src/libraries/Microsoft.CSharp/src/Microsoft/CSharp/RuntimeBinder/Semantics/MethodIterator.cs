@@ -21,10 +21,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             private readonly symbmask_t _mask;
             private readonly EXPRFLAG _flags;
             private readonly ArgInfos _nonTrailingNamedArguments;
+
             // Internal state.
             private int _currentTypeIndex;
 
-            public CMethodIterator(Name name, TypeArray containingTypes, CType qualifyingType, AggregateSymbol context, int arity, EXPRFLAG flags, symbmask_t mask, ArgInfos nonTrailingNamedArguments)
+            public CMethodIterator(
+                Name name,
+                TypeArray containingTypes,
+                CType qualifyingType,
+                AggregateSymbol context,
+                int arity,
+                EXPRFLAG flags,
+                symbmask_t mask,
+                ArgInfos nonTrailingNamedArguments
+            )
             {
                 Debug.Assert(name != null);
                 Debug.Assert(containingTypes != null);
@@ -50,7 +60,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             public bool IsCurrentSymbolMisnamed { get; private set; }
 
-            public bool MoveNext() => (CurrentType != null || FindNextTypeForInstanceMethods()) && FindNextMethod();
+            public bool MoveNext() =>
+                (CurrentType != null || FindNextTypeForInstanceMethods()) && FindNextMethod();
 
             public bool AtEnd => CurrentSymbol == null;
 
@@ -61,29 +72,49 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 {
                     // Make sure that whether we're seeing a ctor is consistent with the flag.
                     // The only properties we handle are indexers.
-                    if (_mask == symbmask_t.MASK_MethodSymbol && (
-                            0 == (_flags & EXPRFLAG.EXF_CTOR) != !((MethodSymbol)CurrentSymbol).IsConstructor() ||
-                            0 == (_flags & EXPRFLAG.EXF_OPERATOR) != !((MethodSymbol)CurrentSymbol).isOperator) ||
-                        _mask == symbmask_t.MASK_PropertySymbol && !(CurrentSymbol is IndexerSymbol))
+                    if (
+                        _mask == symbmask_t.MASK_MethodSymbol
+                            && (
+                                0 == (_flags & EXPRFLAG.EXF_CTOR)
+                                    != !((MethodSymbol)CurrentSymbol).IsConstructor()
+                                || 0 == (_flags & EXPRFLAG.EXF_OPERATOR)
+                                    != !((MethodSymbol)CurrentSymbol).isOperator
+                            )
+                        || _mask == symbmask_t.MASK_PropertySymbol
+                            && !(CurrentSymbol is IndexerSymbol)
+                    )
                     {
                         // Get the next symbol.
                         return false;
                     }
 
                     // If our arity is non-0, we must match arity with this symbol.
-                    if (_arity > 0 & _mask == symbmask_t.MASK_MethodSymbol && ((MethodSymbol)CurrentSymbol).typeVars.Count != _arity)
+                    if (
+                        _arity > 0 & _mask == symbmask_t.MASK_MethodSymbol
+                        && ((MethodSymbol)CurrentSymbol).typeVars.Count != _arity
+                    )
                     {
                         return false;
                     }
 
                     // If this symbol's not callable, no good.
-                    if (!ExpressionBinder.IsMethPropCallable(CurrentSymbol, (_flags & EXPRFLAG.EXF_USERCALLABLE) != 0))
+                    if (
+                        !ExpressionBinder.IsMethPropCallable(
+                            CurrentSymbol,
+                            (_flags & EXPRFLAG.EXF_USERCALLABLE) != 0
+                        )
+                    )
                     {
                         return false;
                     }
 
                     // Check access. If Sym is not accessible, then let it through and mark it.
-                    IsCurrentSymbolInaccessible = !CSemanticChecker.CheckAccess(CurrentSymbol, CurrentType, _context, _qualifyingType);
+                    IsCurrentSymbolInaccessible = !CSemanticChecker.CheckAccess(
+                        CurrentSymbol,
+                        CurrentType,
+                        _context,
+                        _qualifyingType
+                    );
 
                     // Check bogus. If Sym is bogus, then let it through and mark it.
                     IsCurrentSymbolBogus = CSemanticChecker.CheckBogus(CurrentSymbol);
@@ -99,8 +130,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ArgInfos args = _nonTrailingNamedArguments;
                 if (args != null)
                 {
-                    List<Name> paramNames = ExpressionBinder.GroupToArgsBinder
-                        .FindMostDerivedMethod(CurrentSymbol, _qualifyingType)
+                    List<Name> paramNames = ExpressionBinder
+                        .GroupToArgsBinder.FindMostDerivedMethod(CurrentSymbol, _qualifyingType)
                         .ParameterNames;
 
                     List<Expr> argExpressions = args.prgexpr;
@@ -109,7 +140,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         if (argExpressions[i] is ExprNamedArgumentSpecification named)
                         {
                             // Either wrong name, or correct name but we have more params arguments to follow.
-                            if (paramNames[i] != named.Name || i == paramNames.Count - 1 && i != args.carg - 1)
+                            if (
+                                paramNames[i] != named.Name
+                                || i == paramNames.Count - 1 && i != args.carg - 1
+                            )
                             {
                                 return true;
                             }
@@ -124,9 +158,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             {
                 while (true)
                 {
-                    CurrentSymbol = (CurrentSymbol == null
-                        ? SymbolLoader.LookupAggMember(_name, CurrentType.OwningAggregate, _mask)
-                        : CurrentSymbol.LookupNext(_mask)) as MethodOrPropertySymbol;
+                    CurrentSymbol =
+                        (
+                            CurrentSymbol == null
+                                ? SymbolLoader.LookupAggMember(
+                                    _name,
+                                    CurrentType.OwningAggregate,
+                                    _mask
+                                )
+                                : CurrentSymbol.LookupNext(_mask)
+                        ) as MethodOrPropertySymbol;
 
                     // If we couldn't find a sym, we look up the type chain and get the next type.
                     if (CurrentSymbol == null)

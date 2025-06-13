@@ -1,6 +1,12 @@
 <Type Name="ExceptionEventRequest" FullName="Mono.Debugger.Soft.ExceptionEventRequest">
-  <TypeSignature Language="C#" Value="public sealed class ExceptionEventRequest : Mono.Debugger.Soft.EventRequest" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit ExceptionEventRequest extends Mono.Debugger.Soft.EventRequest" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class ExceptionEventRequest : Mono.Debugger.Soft.EventRequest"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit ExceptionEventRequest extends Mono.Debugger.Soft.EventRequest"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Debugger.Soft</AssemblyName>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -16,7 +22,10 @@
   <Members>
     <Member MemberName="Enable">
       <MemberSignature Language="C#" Value="public override void Enable ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Enable() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Enable() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>
@@ -31,8 +40,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExceptionType">
-      <MemberSignature Language="C#" Value="public Mono.Debugger.Soft.TypeMirror ExceptionType { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Debugger.Soft.TypeMirror ExceptionType" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Debugger.Soft.TypeMirror ExceptionType { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Debugger.Soft.TypeMirror ExceptionType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>0.0.0.0</AssemblyVersion>

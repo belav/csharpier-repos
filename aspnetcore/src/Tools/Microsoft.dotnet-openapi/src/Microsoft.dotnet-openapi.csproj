@@ -8,18 +8,15 @@
     <PackageId>Microsoft.dotnet-openapi</PackageId>
     <PackAsTool>true</PackAsTool>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)CommandLineUtils\**\*.cs" />
     <Compile Include="$(ToolSharedSourceRoot)CommandLine\**\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Build" ExcludeAssets="runtime" />
     <Reference Include="Microsoft.Build.Locator" />
     <Reference Include="System.Private.Uri" />
   </ItemGroup>
-
   <ItemGroup>
     <AssemblyAttribute Include="Microsoft.DotNet.Openapi.Tools.Internal.OpenApiDependencyAttribute">
       <_Parameter1>NSwag.ApiDescription.Client</_Parameter1>
@@ -32,7 +29,6 @@
       <_Parameter3>NSwagCSharp;NSwagTypeScript</_Parameter3>
     </AssemblyAttribute>
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.DotNet.Open.Api.Tools.Tests" />
   </ItemGroup>

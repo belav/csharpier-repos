@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,86 +31,87 @@
 //
 
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Text;
-using System.Diagnostics.Contracts;
 using Mono;
 
-namespace System.Reflection {
-	
-	internal struct MonoPropertyInfo {
-		public Type parent;
-		public Type declaring_type;
-		public String name;
-		public MethodInfo get_method;
-		public MethodInfo set_method;
-		public PropertyAttributes attrs;
-	}
+namespace System.Reflection
+{
+    internal struct MonoPropertyInfo
+    {
+        public Type parent;
+        public Type declaring_type;
+        public String name;
+        public MethodInfo get_method;
+        public MethodInfo set_method;
+        public PropertyAttributes attrs;
+    }
 
-	[Flags]
-	internal enum PInfo {
-		Attributes = 1,
-		GetMethod  = 1 << 1,
-		SetMethod  = 1 << 2,
-		ReflectedType = 1 << 3,
-		DeclaringType = 1 << 4,
-		Name = 1 << 5
-		
-	}
+    [Flags]
+    internal enum PInfo
+    {
+        Attributes = 1,
+        GetMethod = 1 << 1,
+        SetMethod = 1 << 2,
+        ReflectedType = 1 << 3,
+        DeclaringType = 1 << 4,
+        Name = 1 << 5,
+    }
 
-	internal delegate object GetterAdapter (object _this);
-	internal delegate R Getter<T,R> (T _this);
+    internal delegate object GetterAdapter(object _this);
+    internal delegate R Getter<T, R>(T _this);
 
-	[Serializable]
-	[StructLayout (LayoutKind.Sequential)]
-	internal class RuntimePropertyInfo : PropertyInfo
-	, ISerializable
-	{
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    internal class RuntimePropertyInfo : PropertyInfo, ISerializable
+    {
 #pragma warning disable 649
-		internal IntPtr klass;
-		internal IntPtr prop;
-		MonoPropertyInfo info;
-		PInfo cached;
-		GetterAdapter cached_getter;
+        internal IntPtr klass;
+        internal IntPtr prop;
+        MonoPropertyInfo info;
+        PInfo cached;
+        GetterAdapter cached_getter;
 #pragma warning restore 649
-		
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		internal static extern void get_property_info (RuntimePropertyInfo prop, ref MonoPropertyInfo info,
-							       PInfo req_info);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal static extern Type[] GetTypeModifiers (RuntimePropertyInfo prop, bool optional);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern void get_property_info(
+            RuntimePropertyInfo prop,
+            ref MonoPropertyInfo info,
+            PInfo req_info
+        );
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal static extern object get_default_value (RuntimePropertyInfo prop);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern Type[] GetTypeModifiers(RuntimePropertyInfo prop, bool optional);
 
-		internal BindingFlags BindingFlags => 0;
-		
-		public override Module Module {
-			get {
-				return GetRuntimeModule ();
-			}
-		}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern object get_default_value(RuntimePropertyInfo prop);
 
-		internal RuntimeType GetDeclaringTypeInternal ()
-		{
-			return (RuntimeType) DeclaringType;
-		}
+        internal BindingFlags BindingFlags => 0;
 
-		RuntimeType ReflectedTypeInternal {
-			get {
-				return (RuntimeType) ReflectedType;
-			}
-		}
+        public override Module Module
+        {
+            get { return GetRuntimeModule(); }
+        }
 
-		internal RuntimeModule GetRuntimeModule ()
-		{
-			return GetDeclaringTypeInternal ().GetRuntimeModule ();
-		}
+        internal RuntimeType GetDeclaringTypeInternal()
+        {
+            return (RuntimeType)DeclaringType;
+        }
+
+        RuntimeType ReflectedTypeInternal
+        {
+            get { return (RuntimeType)ReflectedType; }
+        }
+
+        internal RuntimeModule GetRuntimeModule()
+        {
+            return GetDeclaringTypeInternal().GetRuntimeModule();
+        }
 
         #region Object Overrides
         public override String ToString()
@@ -125,16 +126,17 @@ namespace System.Reflection {
             sbName.Append(" ");
             sbName.Append(Name);
 
-			var pi = GetIndexParameters ();
-			if (pi.Length > 0) {
-				sbName.Append (" [");
-				RuntimeParameterInfo.FormatParameters (sbName, pi, 0, serialization);
-				sbName.Append ("]");
-			}
+            var pi = GetIndexParameters();
+            if (pi.Length > 0)
+            {
+                sbName.Append(" [");
+                RuntimeParameterInfo.FormatParameters(sbName, pi, 0, serialization);
+                sbName.Append("]");
+            }
 
             return sbName.ToString();
         }
-        #endregion		
+        #endregion
 
         #region ISerializable Implementation
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -150,7 +152,8 @@ namespace System.Reflection {
                 ToString(),
                 SerializationToString(),
                 MemberTypes.Property,
-                null);
+                null
+            );
         }
 
         internal string SerializationToString()
@@ -159,310 +162,380 @@ namespace System.Reflection {
         }
         #endregion
 
-		void CachePropertyInfo (PInfo flags)
-		{
-			if ((cached & flags) != flags) {
-				get_property_info (this, ref info, flags);
-				cached |= flags;
-			}
-		}
-		
-		public override PropertyAttributes Attributes {
-			get {
-				CachePropertyInfo (PInfo.Attributes);
-				return info.attrs;
-			}
-		}
-		
-		public override bool CanRead {
-			get {
-				CachePropertyInfo (PInfo.GetMethod);
-				return (info.get_method != null);
-			}
-		}
-		
-		public override bool CanWrite {
-			get {
-				CachePropertyInfo (PInfo.SetMethod);
-				return (info.set_method != null);
-			}
-		}
+        void CachePropertyInfo(PInfo flags)
+        {
+            if ((cached & flags) != flags)
+            {
+                get_property_info(this, ref info, flags);
+                cached |= flags;
+            }
+        }
 
-		public override Type PropertyType {
-			get {
-				CachePropertyInfo (PInfo.GetMethod | PInfo.SetMethod);
+        public override PropertyAttributes Attributes
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.Attributes);
+                return info.attrs;
+            }
+        }
 
-				if (info.get_method != null) {
-					return info.get_method.ReturnType;
-				} else {
-					ParameterInfo[] parameters = info.set_method.GetParametersInternal ();
-					
-					return parameters [parameters.Length - 1].ParameterType;
-				}
-			}
-		}
+        public override bool CanRead
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.GetMethod);
+                return (info.get_method != null);
+            }
+        }
 
-		public override Type ReflectedType {
-			get {
-				CachePropertyInfo (PInfo.ReflectedType);
-				return info.parent;
-			}
-		}
-		
-		public override Type DeclaringType {
-			get {
-				CachePropertyInfo (PInfo.DeclaringType);
-				return info.declaring_type;
-			}
-		}
-		
-		public override string Name {
-			get {
-				CachePropertyInfo (PInfo.Name);
-				return info.name;
-			}
-		}
+        public override bool CanWrite
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.SetMethod);
+                return (info.set_method != null);
+            }
+        }
 
-		public override MethodInfo[] GetAccessors (bool nonPublic)
-		{
-			int nget = 0;
-			int nset = 0;
-			
-			CachePropertyInfo (PInfo.GetMethod | PInfo.SetMethod);
+        public override Type PropertyType
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.GetMethod | PInfo.SetMethod);
 
-			if (info.set_method != null && (nonPublic || info.set_method.IsPublic))
-				nset = 1;
-			if (info.get_method != null && (nonPublic || info.get_method.IsPublic))
-				nget = 1;
+                if (info.get_method != null)
+                {
+                    return info.get_method.ReturnType;
+                }
+                else
+                {
+                    ParameterInfo[] parameters = info.set_method.GetParametersInternal();
 
-			MethodInfo[] res = new MethodInfo [nget + nset];
-			int n = 0;
-			if (nset != 0)
-				res [n++] = info.set_method;
-			if (nget != 0)
-				res [n++] = info.get_method;
-			return res;
-		}
+                    return parameters[parameters.Length - 1].ParameterType;
+                }
+            }
+        }
 
-		public override MethodInfo GetGetMethod (bool nonPublic)
-		{
-			CachePropertyInfo (PInfo.GetMethod);
-			if (info.get_method != null && (nonPublic || info.get_method.IsPublic))
-				return info.get_method;
-			else
-				return null;
-		}
+        public override Type ReflectedType
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.ReflectedType);
+                return info.parent;
+            }
+        }
 
-		public override ParameterInfo[] GetIndexParameters ()
-		{
-			CachePropertyInfo (PInfo.GetMethod | PInfo.SetMethod);
-			ParameterInfo[] src;
-			int length;
-			if (info.get_method != null) {
-				src = info.get_method.GetParametersInternal ();
-				length = src.Length;
-			} else if (info.set_method != null) {
-				src = info.set_method.GetParametersInternal ();
-				length = src.Length - 1;
-			} else
-				return EmptyArray<ParameterInfo>.Value;
+        public override Type DeclaringType
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.DeclaringType);
+                return info.declaring_type;
+            }
+        }
 
-			var dest = new ParameterInfo [length];
-			for (int i = 0; i < length; ++i) {
-				dest [i] = RuntimeParameterInfo.New (src [i], this);
-			}
-			return dest;	
-		}
-		
-		public override MethodInfo GetSetMethod (bool nonPublic)
-		{
-			CachePropertyInfo (PInfo.SetMethod);
-			if (info.set_method != null && (nonPublic || info.set_method.IsPublic))
-				return info.set_method;
-			else
-				return null;
-		}
+        public override string Name
+        {
+            get
+            {
+                CachePropertyInfo(PInfo.Name);
+                return info.name;
+            }
+        }
 
+        public override MethodInfo[] GetAccessors(bool nonPublic)
+        {
+            int nget = 0;
+            int nset = 0;
 
-		/*TODO verify for attribute based default values, just like ParameterInfo*/
-		public override object GetConstantValue ()
-		{
-			return get_default_value (this);
-		}
+            CachePropertyInfo(PInfo.GetMethod | PInfo.SetMethod);
 
-		public override object GetRawConstantValue() {
-			return get_default_value (this);
-		}
+            if (info.set_method != null && (nonPublic || info.set_method.IsPublic))
+                nset = 1;
+            if (info.get_method != null && (nonPublic || info.get_method.IsPublic))
+                nget = 1;
 
-		// According to MSDN the inherit parameter is ignored here and
-		// the behavior always defaults to inherit = false
-		//
-		public override bool IsDefined (Type attributeType, bool inherit)
-		{
-			return MonoCustomAttrs.IsDefined (this, attributeType, false);
-		}
+            MethodInfo[] res = new MethodInfo[nget + nset];
+            int n = 0;
+            if (nset != 0)
+                res[n++] = info.set_method;
+            if (nget != 0)
+                res[n++] = info.get_method;
+            return res;
+        }
 
-		public override object[] GetCustomAttributes (bool inherit)
-		{
-			return MonoCustomAttrs.GetCustomAttributes (this, false);
-		}
-		
-		public override object[] GetCustomAttributes (Type attributeType, bool inherit)
-		{
-			return MonoCustomAttrs.GetCustomAttributes (this, attributeType, false);
-		}
+        public override MethodInfo GetGetMethod(bool nonPublic)
+        {
+            CachePropertyInfo(PInfo.GetMethod);
+            if (info.get_method != null && (nonPublic || info.get_method.IsPublic))
+                return info.get_method;
+            else
+                return null;
+        }
 
+        public override ParameterInfo[] GetIndexParameters()
+        {
+            CachePropertyInfo(PInfo.GetMethod | PInfo.SetMethod);
+            ParameterInfo[] src;
+            int length;
+            if (info.get_method != null)
+            {
+                src = info.get_method.GetParametersInternal();
+                length = src.Length;
+            }
+            else if (info.set_method != null)
+            {
+                src = info.set_method.GetParametersInternal();
+                length = src.Length - 1;
+            }
+            else
+                return EmptyArray<ParameterInfo>.Value;
 
-		delegate object GetterAdapter (object _this);
-		delegate R Getter<T,R> (T _this);
-		delegate R StaticGetter<R> ();
+            var dest = new ParameterInfo[length];
+            for (int i = 0; i < length; ++i)
+            {
+                dest[i] = RuntimeParameterInfo.New(src[i], this);
+            }
+            return dest;
+        }
+
+        public override MethodInfo GetSetMethod(bool nonPublic)
+        {
+            CachePropertyInfo(PInfo.SetMethod);
+            if (info.set_method != null && (nonPublic || info.set_method.IsPublic))
+                return info.set_method;
+            else
+                return null;
+        }
+
+        /*TODO verify for attribute based default values, just like ParameterInfo*/
+        public override object GetConstantValue()
+        {
+            return get_default_value(this);
+        }
+
+        public override object GetRawConstantValue()
+        {
+            return get_default_value(this);
+        }
+
+        // According to MSDN the inherit parameter is ignored here and
+        // the behavior always defaults to inherit = false
+        //
+        public override bool IsDefined(Type attributeType, bool inherit)
+        {
+            return MonoCustomAttrs.IsDefined(this, attributeType, false);
+        }
+
+        public override object[] GetCustomAttributes(bool inherit)
+        {
+            return MonoCustomAttrs.GetCustomAttributes(this, false);
+        }
+
+        public override object[] GetCustomAttributes(Type attributeType, bool inherit)
+        {
+            return MonoCustomAttrs.GetCustomAttributes(this, attributeType, false);
+        }
+
+        delegate object GetterAdapter(object _this);
+        delegate R Getter<T, R>(T _this);
+        delegate R StaticGetter<R>();
 
 #pragma warning disable 169
-		// Used via reflection
-		static object GetterAdapterFrame<T,R> (Getter<T,R> getter, object obj)
-		{
-			return getter ((T)obj);
-		}
+        // Used via reflection
+        static object GetterAdapterFrame<T, R>(Getter<T, R> getter, object obj)
+        {
+            return getter((T)obj);
+        }
 
-		static object StaticGetterAdapterFrame<R> (StaticGetter<R> getter, object obj)
-		{
-			return getter ();
-		}
+        static object StaticGetterAdapterFrame<R>(StaticGetter<R> getter, object obj)
+        {
+            return getter();
+        }
 #pragma warning restore 169
 
-		/*
-		 * The idea behing this optimization is to use a pair of delegates to simulate the same effect of doing a reflection call.
-		 * The first delegate cast the this argument to the right type and the second does points to the target method.
-		 */
-		static GetterAdapter CreateGetterDelegate (MethodInfo method)
-		{
-			Type[] typeVector;
-			Type getterType;
-			object getterDelegate;
-			MethodInfo adapterFrame;
-			Type getterDelegateType;
-			string frameName;
+        /*
+         * The idea behing this optimization is to use a pair of delegates to simulate the same effect of doing a reflection call.
+         * The first delegate cast the this argument to the right type and the second does points to the target method.
+         */
+        static GetterAdapter CreateGetterDelegate(MethodInfo method)
+        {
+            Type[] typeVector;
+            Type getterType;
+            object getterDelegate;
+            MethodInfo adapterFrame;
+            Type getterDelegateType;
+            string frameName;
 
-			if (method.IsStatic) {
-				typeVector = new Type[] { method.ReturnType };
-				getterDelegateType = typeof (StaticGetter<>);
-				frameName = "StaticGetterAdapterFrame";
-			} else {
-				typeVector = new Type[] { method.DeclaringType, method.ReturnType };
-				getterDelegateType = typeof (Getter<,>);
-				frameName = "GetterAdapterFrame";
-			}
+            if (method.IsStatic)
+            {
+                typeVector = new Type[] { method.ReturnType };
+                getterDelegateType = typeof(StaticGetter<>);
+                frameName = "StaticGetterAdapterFrame";
+            }
+            else
+            {
+                typeVector = new Type[] { method.DeclaringType, method.ReturnType };
+                getterDelegateType = typeof(Getter<,>);
+                frameName = "GetterAdapterFrame";
+            }
 
-			getterType = getterDelegateType.MakeGenericType (typeVector);
-			getterDelegate = Delegate.CreateDelegate (getterType, method);
-			adapterFrame = typeof (RuntimePropertyInfo).GetMethod (frameName, BindingFlags.Static | BindingFlags.NonPublic);
-			adapterFrame = adapterFrame.MakeGenericMethod (typeVector);
-			return (GetterAdapter)Delegate.CreateDelegate (typeof (GetterAdapter), getterDelegate, adapterFrame, true);
-		}
-			
-		public override object GetValue (object obj, object[] index)
-		{
-			if (index == null || index.Length == 0) {
-				/*FIXME we should check if the number of arguments matches the expected one, otherwise the error message will be pretty criptic.*/
+            getterType = getterDelegateType.MakeGenericType(typeVector);
+            getterDelegate = Delegate.CreateDelegate(getterType, method);
+            adapterFrame = typeof(RuntimePropertyInfo).GetMethod(
+                frameName,
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
+            adapterFrame = adapterFrame.MakeGenericMethod(typeVector);
+            return (GetterAdapter)
+                Delegate.CreateDelegate(typeof(GetterAdapter), getterDelegate, adapterFrame, true);
+        }
+
+        public override object GetValue(object obj, object[] index)
+        {
+            if (index == null || index.Length == 0)
+            {
+                /*FIXME we should check if the number of arguments matches the expected one, otherwise the error message will be pretty criptic.*/
 #if !FULL_AOT_RUNTIME
-				if (cached_getter == null) {
-					MethodInfo method = GetGetMethod (true);
-					if (method == null)
-						throw new ArgumentException ($"Get Method not found for '{Name}'");
-					if (!DeclaringType.IsValueType && !PropertyType.IsByRef && !method.ContainsGenericParameters) { //FIXME find a way to build an invoke delegate for value types.
-						cached_getter = CreateGetterDelegate (method);
-						// The try-catch preserves the .Invoke () behaviour
-						try {
-							return cached_getter (obj);
-						} catch (Exception ex) {
-							throw new TargetInvocationException (ex);
-						}
-					}
-				} else {
-					try {
-						return cached_getter (obj);
-					} catch (Exception ex) {
-						throw new TargetInvocationException (ex);
-					}
-				}
+                if (cached_getter == null)
+                {
+                    MethodInfo method = GetGetMethod(true);
+                    if (method == null)
+                        throw new ArgumentException($"Get Method not found for '{Name}'");
+                    if (
+                        !DeclaringType.IsValueType
+                        && !PropertyType.IsByRef
+                        && !method.ContainsGenericParameters
+                    )
+                    { //FIXME find a way to build an invoke delegate for value types.
+                        cached_getter = CreateGetterDelegate(method);
+                        // The try-catch preserves the .Invoke () behaviour
+                        try
+                        {
+                            return cached_getter(obj);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new TargetInvocationException(ex);
+                        }
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        return cached_getter(obj);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new TargetInvocationException(ex);
+                    }
+                }
 #endif
-			}
+            }
 
-			return GetValue (obj, BindingFlags.Default, null, index, null);
-		}
+            return GetValue(obj, BindingFlags.Default, null, index, null);
+        }
 
-		public override object GetValue (object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
-		{
-			object ret = null;
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
+        {
+            object ret = null;
 
-			MethodInfo method = GetGetMethod (true);
-			if (method == null)
-				throw new ArgumentException ($"Get Method not found for '{Name}'");
+            MethodInfo method = GetGetMethod(true);
+            if (method == null)
+                throw new ArgumentException($"Get Method not found for '{Name}'");
 
-			try {
-				if (index == null || index.Length == 0) 
-					ret = method.Invoke (obj, invokeAttr, binder, null, culture);
-				else
-					ret = method.Invoke (obj, invokeAttr, binder, index, culture);
-			}
-			catch (SecurityException se) {
-				throw new TargetInvocationException (se);
-			}
+            try
+            {
+                if (index == null || index.Length == 0)
+                    ret = method.Invoke(obj, invokeAttr, binder, null, culture);
+                else
+                    ret = method.Invoke(obj, invokeAttr, binder, index, culture);
+            }
+            catch (SecurityException se)
+            {
+                throw new TargetInvocationException(se);
+            }
 
-			return ret;
-		}
+            return ret;
+        }
 
-		public override void SetValue (object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
-		{
-			MethodInfo method = GetSetMethod (true);
-			if (method == null)
-				throw new ArgumentException ("Set Method not found for '" + Name + "'");
-			
-			object [] parms;
-			if (index == null || index.Length == 0) 
-				parms = new object [] {value};
-			else {
-				int ilen = index.Length;
-				parms = new object [ilen+ 1];
-				index.CopyTo (parms, 0);
-				parms [ilen] = value;
-			}
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
+        {
+            MethodInfo method = GetSetMethod(true);
+            if (method == null)
+                throw new ArgumentException("Set Method not found for '" + Name + "'");
 
-			method.Invoke (obj, invokeAttr, binder, parms, culture);
-		}
+            object[] parms;
+            if (index == null || index.Length == 0)
+                parms = new object[] { value };
+            else
+            {
+                int ilen = index.Length;
+                parms = new object[ilen + 1];
+                index.CopyTo(parms, 0);
+                parms[ilen] = value;
+            }
 
-		public override Type[] GetOptionalCustomModifiers () => GetCustomModifiers (true);
+            method.Invoke(obj, invokeAttr, binder, parms, culture);
+        }
 
-		public override Type[] GetRequiredCustomModifiers () => GetCustomModifiers (false);
+        public override Type[] GetOptionalCustomModifiers() => GetCustomModifiers(true);
 
-		private Type[] GetCustomModifiers (bool optional) => GetTypeModifiers (this, optional) ?? Type.EmptyTypes;
+        public override Type[] GetRequiredCustomModifiers() => GetCustomModifiers(false);
 
-		public override IList<CustomAttributeData> GetCustomAttributesData () {
-			return CustomAttributeData.GetCustomAttributes (this);
-		}
+        private Type[] GetCustomModifiers(bool optional) =>
+            GetTypeModifiers(this, optional) ?? Type.EmptyTypes;
 
-		public sealed override bool HasSameMetadataDefinitionAs (MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimePropertyInfo> (other);
+        public override IList<CustomAttributeData> GetCustomAttributesData()
+        {
+            return CustomAttributeData.GetCustomAttributes(this);
+        }
 
-		public override int MetadataToken {
-			get {
-				return get_metadata_token (this);
-			}
-		}
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimePropertyInfo>(other);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal static extern int get_metadata_token (RuntimePropertyInfo monoProperty);
+        public override int MetadataToken
+        {
+            get { return get_metadata_token(this); }
+        }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern PropertyInfo internal_from_handle_type (IntPtr event_handle, IntPtr type_handle);
+        internal static extern int get_metadata_token(RuntimePropertyInfo monoProperty);
 
-        internal static PropertyInfo GetPropertyFromHandle (RuntimePropertyHandle handle, RuntimeTypeHandle reflectedType)
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern PropertyInfo internal_from_handle_type(
+            IntPtr event_handle,
+            IntPtr type_handle
+        );
+
+        internal static PropertyInfo GetPropertyFromHandle(
+            RuntimePropertyHandle handle,
+            RuntimeTypeHandle reflectedType
+        )
         {
             if (handle.Value == IntPtr.Zero)
-                throw new ArgumentException ("The handle is invalid.");
-            PropertyInfo pi = internal_from_handle_type (handle.Value, reflectedType.Value);
+                throw new ArgumentException("The handle is invalid.");
+            PropertyInfo pi = internal_from_handle_type(handle.Value, reflectedType.Value);
             if (pi == null)
-                throw new ArgumentException ("The property handle and the type handle are incompatible.");
+                throw new ArgumentException(
+                    "The property handle and the type handle are incompatible."
+                );
             return pi;
-        }		
-	}
+        }
+    }
 }

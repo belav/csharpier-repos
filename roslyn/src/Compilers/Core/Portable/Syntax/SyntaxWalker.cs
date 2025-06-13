@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Called when the walker visits a token.  This method may be overridden if subclasses want
-        /// to handle the token.  Overrides should call back into this base method if they want the 
+        /// to handle the token.  Overrides should call back into this base method if they want the
         /// trivia of this token to be visited.
         /// </summary>
         /// <param name="token">The current token that the walker is visiting.</param>

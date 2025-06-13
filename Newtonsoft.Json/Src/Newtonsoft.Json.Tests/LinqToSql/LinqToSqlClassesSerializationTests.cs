@@ -51,21 +51,28 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             person.FirstName = "FirstName!";
             person.LastName = "LastName!";
             person.PersonId = new Guid("7AA027AA-C995-4986-908D-999D8063599F");
-            person.PersonRoles.Add(new PersonRole
-            {
-                PersonRoleId = new Guid("B012DD41-71DF-4839-B8D5-D1333FB886BC"),
-                Role = role
-            });
+            person.PersonRoles.Add(
+                new PersonRole
+                {
+                    PersonRoleId = new Guid("B012DD41-71DF-4839-B8D5-D1333FB886BC"),
+                    Role = role,
+                }
+            );
 
             person.Department = new Department
             {
                 DepartmentId = new Guid("08F68BF9-929B-4434-BC47-C9489D22112B"),
-                Name = "Name!"
+                Name = "Name!",
             };
 
-            string json = JsonConvert.SerializeObject(person, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            string json = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""first_name"": ""FirstName!"",
   ""LastName"": ""LastName!"",
   ""PersonId"": ""7aa027aa-c995-4986-908d-999d8063599f"",
@@ -85,13 +92,16 @@ namespace Newtonsoft.Json.Tests.LinqToSql
     ""DepartmentId"": ""08f68bf9-929b-4434-bc47-c9489d22112b"",
     ""Name"": ""!emaN""
   }
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void Deserialize()
         {
-            string json = @"{
+            string json =
+                @"{
   ""first_name"": ""FirstName!"",
   ""LastName"": ""LastName!"",
   ""PersonId"": ""7aa027aa-c995-4986-908d-999d8063599f"",
@@ -120,16 +130,23 @@ namespace Newtonsoft.Json.Tests.LinqToSql
             Assert.AreEqual("LastName!", person.LastName);
             Assert.AreEqual(1, person.PersonRoles.Count);
             Assert.AreEqual(person.PersonId, person.PersonRoles[0].PersonId);
-            Assert.AreEqual(new Guid("67EA92B7-4BD3-4718-BD75-3C7EDF800B34"), person.PersonRoles[0].RoleId);
+            Assert.AreEqual(
+                new Guid("67EA92B7-4BD3-4718-BD75-3C7EDF800B34"),
+                person.PersonRoles[0].RoleId
+            );
             Assert.IsNotNull(person.PersonRoles[0].Role);
             Assert.AreEqual(1, person.PersonRoles[0].Role.PersonRoles.Count);
 
             Assert.AreEqual("Name!", person.Department.Name);
 
-            TableAttribute tableAttribute = JsonTypeReflector.GetAttribute<TableAttribute>(typeof(Person));
+            TableAttribute tableAttribute = JsonTypeReflector.GetAttribute<TableAttribute>(
+                typeof(Person)
+            );
             Assert.AreEqual("", tableAttribute.Name);
 
-            ColumnAttribute columnAttribute = JsonTypeReflector.GetAttribute<ColumnAttribute>(typeof(Person).GetProperty("FirstName"));
+            ColumnAttribute columnAttribute = JsonTypeReflector.GetAttribute<ColumnAttribute>(
+                typeof(Person).GetProperty("FirstName")
+            );
             Assert.AreEqual("_FirstName", columnAttribute.Storage);
         }
     }

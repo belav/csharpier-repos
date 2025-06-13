@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,15 +32,15 @@ using System;
 
 namespace System.Runtime.InteropServices.ComTypes
 {
-	[FlagsAttribute]
-	public enum ADVF
-	{
-		ADVF_NODATA = 1,
-		ADVF_PRIMEFIRST = 2,
-		ADVF_ONLYONCE = 4,
-		ADVFCACHE_NOHANDLER = 8,
-		ADVFCACHE_FORCEBUILTIN = 16,
-		ADVFCACHE_ONSAVE = 32,
-		ADVF_DATAONSTOP = 64,
-	}
+    [FlagsAttribute]
+    public enum ADVF
+    {
+        ADVF_NODATA = 1,
+        ADVF_PRIMEFIRST = 2,
+        ADVF_ONLYONCE = 4,
+        ADVFCACHE_NOHANDLER = 8,
+        ADVFCACHE_FORCEBUILTIN = 16,
+        ADVFCACHE_ONSAVE = 32,
+        ADVF_DATAONSTOP = 64,
+    }
 }

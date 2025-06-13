@@ -11,14 +11,17 @@ namespace System
     /// The exception class for OOM.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class OutOfMemoryException : SystemException
     {
-        public OutOfMemoryException() : base(
+        public OutOfMemoryException()
+            : base(
 #if CORECLR
-            GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
+                GetMessageFromNativeResources(ExceptionMessageKind.OutOfMemory)
 #else
-            SR.Arg_OutOfMemoryException
+                SR.Arg_OutOfMemoryException
 #endif
             )
         {
@@ -37,10 +40,13 @@ namespace System
             HResult = HResults.COR_E_OUTOFMEMORY;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected OutOfMemoryException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected OutOfMemoryException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

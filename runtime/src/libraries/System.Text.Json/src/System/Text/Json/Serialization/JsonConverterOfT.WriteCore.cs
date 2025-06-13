@@ -9,13 +9,15 @@ namespace System.Text.Json.Serialization
             Utf8JsonWriter writer,
             in T? value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             try
             {
                 return TryWrite(writer, value, options, ref state);
             }
-            catch (InvalidOperationException ex) when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
+            catch (InvalidOperationException ex)
+                when (ex.Source == ThrowHelper.ExceptionSourceValueToRethrowAsJsonException)
             {
                 ThrowHelper.ReThrowWithPath(ref state, ex);
                 throw;

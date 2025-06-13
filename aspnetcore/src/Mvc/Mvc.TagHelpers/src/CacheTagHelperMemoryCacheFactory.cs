@@ -18,11 +18,13 @@ public class CacheTagHelperMemoryCacheFactory
     /// <param name="options">The <see cref="CacheTagHelperOptions"/> to apply to the <see cref="Cache"/>.</param>
     public CacheTagHelperMemoryCacheFactory(IOptions<CacheTagHelperOptions> options)
     {
-        Cache = new MemoryCache(new MemoryCacheOptions
-        {
-            SizeLimit = options.Value.SizeLimit,
-            TrackLinkedCacheEntries = true,
-        });
+        Cache = new MemoryCache(
+            new MemoryCacheOptions
+            {
+                SizeLimit = options.Value.SizeLimit,
+                TrackLinkedCacheEntries = true,
+            }
+        );
     }
 
     // For testing only.

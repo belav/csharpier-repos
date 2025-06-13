@@ -19,19 +19,34 @@ namespace Microsoft.CodeAnalysis.NavigationBar
             ImmutableArray<RoslynNavigationBarItem> childItems = default,
             int indent = 0,
             bool bolded = false,
-            bool grayed = false) : RoslynNavigationBarItem(RoslynNavigationBarItemKind.Actionless, text, glyph, bolded, grayed, indent, childItems), IEquatable<ActionlessItem>
+            bool grayed = false
+        )
+            : RoslynNavigationBarItem(
+                RoslynNavigationBarItemKind.Actionless,
+                text,
+                glyph,
+                bolded,
+                grayed,
+                indent,
+                childItems
+            ),
+                IEquatable<ActionlessItem>
         {
-            protected internal override SerializableNavigationBarItem Dehydrate()
-                => SerializableNavigationBarItem.ActionlessItem(Text, Glyph, SerializableNavigationBarItem.Dehydrate(ChildItems), Indent, Bolded, Grayed);
+            protected internal override SerializableNavigationBarItem Dehydrate() =>
+                SerializableNavigationBarItem.ActionlessItem(
+                    Text,
+                    Glyph,
+                    SerializableNavigationBarItem.Dehydrate(ChildItems),
+                    Indent,
+                    Bolded,
+                    Grayed
+                );
 
-            public override bool Equals(object? obj)
-                => Equals(obj as ActionlessItem);
+            public override bool Equals(object? obj) => Equals(obj as ActionlessItem);
 
-            public bool Equals(ActionlessItem? other)
-                => base.Equals(other);
+            public bool Equals(ActionlessItem? other) => base.Equals(other);
 
-            public override int GetHashCode()
-                => throw new NotImplementedException();
+            public override int GetHashCode() => throw new NotImplementedException();
         }
     }
 }

@@ -19,8 +19,13 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 ImmutableArray<IParameterSymbol> @params = targetMethod.Parameters;
                 int paramCount = @params.Length;
 
-                if (!targetMethod.IsGenericMethod ||
-                    !SymbolEqualityComparer.Default.Equals(_typeSymbols.IServiceCollection, @params[0].Type))
+                if (
+                    !targetMethod.IsGenericMethod
+                    || !SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.IServiceCollection,
+                        @params[0].Type
+                    )
+                )
                 {
                     return;
                 }
@@ -32,7 +37,13 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 MethodsToGen overload;
 
-                if (paramCount is 2 && SymbolEqualityComparer.Default.Equals(_typeSymbols.IConfiguration, @params[1].Type))
+                if (
+                    paramCount is 2
+                    && SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.IConfiguration,
+                        @params[1].Type
+                    )
+                )
                 {
                     overload = MethodsToGen.ServiceCollectionExt_Configure_T;
                 }
@@ -41,13 +52,26 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     ITypeSymbol? secondParamType = @params[1].Type;
                     ITypeSymbol? thirdParamType = @params[2].Type;
 
-                    if (secondParamType.SpecialType is SpecialType.System_String &&
-                        SymbolEqualityComparer.Default.Equals(_typeSymbols.IConfiguration, thirdParamType))
+                    if (
+                        secondParamType.SpecialType is SpecialType.System_String
+                        && SymbolEqualityComparer.Default.Equals(
+                            _typeSymbols.IConfiguration,
+                            thirdParamType
+                        )
+                    )
                     {
                         overload = MethodsToGen.ServiceCollectionExt_Configure_T_name;
                     }
-                    else if (SymbolEqualityComparer.Default.Equals(_typeSymbols.IConfiguration, secondParamType) &&
-                        SymbolEqualityComparer.Default.Equals(_typeSymbols.ActionOfBinderOptions, thirdParamType))
+                    else if (
+                        SymbolEqualityComparer.Default.Equals(
+                            _typeSymbols.IConfiguration,
+                            secondParamType
+                        )
+                        && SymbolEqualityComparer.Default.Equals(
+                            _typeSymbols.ActionOfBinderOptions,
+                            thirdParamType
+                        )
+                    )
                     {
                         overload = MethodsToGen.ServiceCollectionExt_Configure_T_BinderOptions;
                     }
@@ -56,10 +80,18 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         return;
                     }
                 }
-                else if (paramCount is 4 &&
-                    @params[1].Type.SpecialType is SpecialType.System_String &&
-                    SymbolEqualityComparer.Default.Equals(_typeSymbols.IConfiguration, @params[2].Type) &&
-                    SymbolEqualityComparer.Default.Equals(_typeSymbols.ActionOfBinderOptions, @params[3].Type))
+                else if (
+                    paramCount is 4
+                    && @params[1].Type.SpecialType is SpecialType.System_String
+                    && SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.IConfiguration,
+                        @params[2].Type
+                    )
+                    && SymbolEqualityComparer.Default.Equals(
+                        _typeSymbols.ActionOfBinderOptions,
+                        @params[3].Type
+                    )
+                )
                 {
                     overload = MethodsToGen.ServiceCollectionExt_Configure_T_name_BinderOptions;
                 }
@@ -69,25 +101,38 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     return;
                 }
 
-                ITypeSymbol? typeSymbol = targetMethod.TypeArguments[0].WithNullableAnnotation(NullableAnnotation.None);
+                ITypeSymbol? typeSymbol = targetMethod
+                    .TypeArguments[0]
+                    .WithNullableAnnotation(NullableAnnotation.None);
                 // This would violate generic type constraint; any such invocation could not have been included in the initial parser.
                 Debug.Assert(typeSymbol?.IsValueType is not true);
 
                 EnqueueTargetTypeForRootInvocation(typeSymbol, overload, invocation);
             }
 
-            private void RegisterInterceptor_ServiceCollectionExt(TypeParseInfo typeParseInfo, TypeSpec typeSpec)
+            private void RegisterInterceptor_ServiceCollectionExt(
+                TypeParseInfo typeParseInfo,
+                TypeSpec typeSpec
+            )
             {
                 MethodsToGen overload = typeParseInfo.BindingOverload;
 
-                if (typeSpec is ComplexTypeSpec complexTypeSpec &&
-                    TryRegisterTypeForOverloadGen_ServiceCollectionExt(overload, complexTypeSpec))
+                if (
+                    typeSpec is ComplexTypeSpec complexTypeSpec
+                    && TryRegisterTypeForOverloadGen_ServiceCollectionExt(overload, complexTypeSpec)
+                )
                 {
-                    _interceptorInfoBuilder.RegisterInterceptor(overload, typeParseInfo.BinderInvocation.Operation);
+                    _interceptorInfoBuilder.RegisterInterceptor(
+                        overload,
+                        typeParseInfo.BinderInvocation.Operation
+                    );
                 }
             }
 
-            private bool TryRegisterTypeForOverloadGen_ServiceCollectionExt(MethodsToGen overload, ComplexTypeSpec typeSpec)
+            private bool TryRegisterTypeForOverloadGen_ServiceCollectionExt(
+                MethodsToGen overload,
+                ComplexTypeSpec typeSpec
+            )
             {
                 Debug.Assert((MethodsToGen.ServiceCollectionExt_Any & overload) is not 0);
 

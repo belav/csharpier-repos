@@ -7,6 +7,6 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
     {
         None,
         CoreClr,
-        Clr
+        Clr,
     }
 }

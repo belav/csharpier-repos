@@ -12,9 +12,7 @@ namespace System.Web.Mvc.Test
         private class DerivedDataTypeAttribute : DataTypeAttribute
         {
             public DerivedDataTypeAttribute(DataType dataType)
-                : base(dataType)
-            {
-            }
+                : base(dataType) { }
 
             public override string GetDataTypeName()
             {
@@ -40,7 +38,8 @@ namespace System.Web.Mvc.Test
         public void DataTypeAttributeDoesNotCallAttributeGetDataTypeName()
         {
             // Arrange
-            Func<DataTypeAttribute, Boolean> isDataTypeAttribute = t => (t as DataTypeAttribute) != null;
+            Func<DataTypeAttribute, Boolean> isDataTypeAttribute = t =>
+                (t as DataTypeAttribute) != null;
 
             foreach (DataType dataTypeValue in Enum.GetValues(typeof(DataType)))
             {
@@ -49,7 +48,10 @@ namespace System.Web.Mvc.Test
                     Mock<DataTypeAttribute> dataType = new Mock<DataTypeAttribute>(dataTypeValue);
 
                     // Act
-                    string actualTypeName = DataTypeUtil.ToDataTypeName(dataType.Object, dta => dta as DataTypeAttribute != null);
+                    string actualTypeName = DataTypeUtil.ToDataTypeName(
+                        dataType.Object,
+                        dta => dta as DataTypeAttribute != null
+                    );
 
                     // Assert
                     Assert.Equal(dataTypeValue.ToString(), actualTypeName);
@@ -62,7 +64,8 @@ namespace System.Web.Mvc.Test
         public void CustomDataTypeNameCallsAttributeGetDataTypeName()
         {
             // Arrange
-            Func<DataTypeAttribute, Boolean> isDataTypeAttribute = t => (t as DataTypeAttribute) != null;
+            Func<DataTypeAttribute, Boolean> isDataTypeAttribute = t =>
+                (t as DataTypeAttribute) != null;
 
             Mock<DataTypeAttribute> customDataType = new Mock<DataTypeAttribute>(DataType.Custom);
             customDataType.Setup(c => c.GetDataTypeName()).Returns("CustomTypeName").Verifiable();

@@ -11,17 +11,13 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void Constructor_Document_Null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new SignedXml((XmlDocument) null)
-            );
+            Assert.Throws<ArgumentNullException>(() => new SignedXml((XmlDocument)null));
         }
 
         [Fact]
         public void Constructor_XmlElement_Null()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new SignedXml((XmlElement) null)
-            );
+            Assert.Throws<ArgumentNullException>(() => new SignedXml((XmlElement)null));
         }
 
         [Fact]
@@ -39,14 +35,16 @@ namespace System.Security.Cryptography.Xml.Tests
             Assert.NotNull(signedXml.Signature);
             Assert.NotNull(signedXml.Signature.SignedInfo);
 
-            Assert.Equal(signedXml.SafeCanonicalizationMethods,
-                new []
+            Assert.Equal(
+                signedXml.SafeCanonicalizationMethods,
+                new[]
                 {
                     SignedXml.XmlDsigC14NTransformUrl,
                     SignedXml.XmlDsigC14NWithCommentsTransformUrl,
                     SignedXml.XmlDsigExcC14NTransformUrl,
-                    SignedXml.XmlDsigExcC14NWithCommentsTransformUrl
-                });
+                    SignedXml.XmlDsigExcC14NWithCommentsTransformUrl,
+                }
+            );
             Assert.NotNull(signedXml.SignatureFormatValidator);
 
             Assert.Null(signedXml.SignatureLength);

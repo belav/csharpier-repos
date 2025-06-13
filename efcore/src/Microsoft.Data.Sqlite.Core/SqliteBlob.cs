@@ -34,10 +34,16 @@ namespace Microsoft.Data.Sqlite
             string tableName,
             string columnName,
             long rowid,
-            bool readOnly = false)
-            : this(connection, SqliteConnection.MainDatabaseName, tableName, columnName, rowid, readOnly)
-        {
-        }
+            bool readOnly = false
+        )
+            : this(
+                connection,
+                SqliteConnection.MainDatabaseName,
+                tableName,
+                columnName,
+                rowid,
+                readOnly
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteBlob" /> class.
@@ -55,7 +61,8 @@ namespace Microsoft.Data.Sqlite
             string tableName,
             string columnName,
             long rowid,
-            bool readOnly = false)
+            bool readOnly = false
+        )
         {
             if (connection?.State != ConnectionState.Open)
             {
@@ -81,7 +88,8 @@ namespace Microsoft.Data.Sqlite
                 columnName,
                 rowid,
                 readOnly ? 0 : 1,
-                out _blob);
+                out _blob
+            );
             SqliteException.ThrowExceptionForRC(rc, _connection.Handle);
             Length = sqlite3_blob_bytes(_blob);
         }
@@ -91,8 +99,7 @@ namespace Microsoft.Data.Sqlite
         ///     Always true.
         /// </summary>
         /// <value><see langword="true" /> if the stream supports reading; otherwise, <see langword="false" />. </value>
-        public override bool CanRead
-            => true;
+        public override bool CanRead => true;
 
         /// <summary>
         ///     Gets a value indicating whether the current stream supports writing.
@@ -105,8 +112,7 @@ namespace Microsoft.Data.Sqlite
         ///     Always true.
         /// </summary>
         /// <value><see langword="true" /> if the stream supports seeking; otherwise, <see langword="false" />. </value>
-        public override bool CanSeek
-            => true;
+        public override bool CanSeek => true;
 
         /// <summary>
         ///     Gets the length in bytes of the stream.
@@ -306,7 +312,10 @@ namespace Microsoft.Data.Sqlite
                     position = Length + offset;
                     break;
                 default:
-                    throw new ArgumentException(Resources.InvalidEnumValue(typeof(SeekOrigin), origin), nameof(origin));
+                    throw new ArgumentException(
+                        Resources.InvalidEnumValue(typeof(SeekOrigin), origin),
+                        nameof(origin)
+                    );
             }
 
             if (position < 0)
@@ -336,9 +345,7 @@ namespace Microsoft.Data.Sqlite
         ///     Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
         ///     Does nothing.
         /// </summary>
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         /// <summary>
         ///     Sets the length of the current stream. This is not supported by sqlite blobs.
@@ -346,7 +353,7 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="value">The desired length of the current stream in bytes.</param>
         /// <exception cref="NotSupportedException">Always.</exception>
-        public override void SetLength(long value)
-            => throw new NotSupportedException(Resources.ResizeNotSupported);
+        public override void SetLength(long value) =>
+            throw new NotSupportedException(Resources.ResizeNotSupported);
     }
 }

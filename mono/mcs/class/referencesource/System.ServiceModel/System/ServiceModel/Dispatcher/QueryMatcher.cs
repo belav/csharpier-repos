@@ -18,7 +18,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum QueryCompilerFlags
     {
         None = 0x00000000,
-        InverseQuery = 0x00000001
+        InverseQuery = 0x00000001,
     }
 
     internal struct FilterResult
@@ -41,26 +41,17 @@ namespace System.ServiceModel.Dispatcher
 #if NO
         internal ICollection<MessageFilter> Matches
         {
-            get
-            {
-                return this.processor.ResultSet;
-            }            
+            get { return this.processor.ResultSet; }
         }
 #endif
         internal QueryProcessor Processor
         {
-            get
-            {
-                return this.processor;
-            }
+            get { return this.processor; }
         }
 
         internal bool Result
         {
-            get
-            {
-                return this.result;
-            }
+            get { return this.result; }
         }
 
         internal MessageFilter GetSingleMatch()
@@ -70,7 +61,13 @@ namespace System.ServiceModel.Dispatcher
             switch (matches.Count)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MultipleFilterMatchesException(SR.GetString(SR.FilterMultipleMatches), null, matches));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MultipleFilterMatchesException(
+                            SR.GetString(SR.FilterMultipleMatches),
+                            null,
+                            matches
+                        )
+                    );
 
                 case 0:
                     match = null;
@@ -111,11 +108,17 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XPathNavigatorException e)
             {
-                throw TraceUtility.ThrowHelperError(e.Process(this.matcher.RootOpcode), this.message);
+                throw TraceUtility.ThrowHelperError(
+                    e.Process(this.matcher.RootOpcode),
+                    this.message
+                );
             }
             catch (NavigatorInvalidBodyAccessException e)
             {
-                throw TraceUtility.ThrowHelperError(e.Process(this.matcher.RootOpcode), this.message);
+                throw TraceUtility.ThrowHelperError(
+                    e.Process(this.matcher.RootOpcode),
+                    this.message
+                );
             }
             finally
             {
@@ -159,11 +162,14 @@ namespace System.ServiceModel.Dispatcher
 
                 if (typeof(TResult) == typeof(XPathResult))
                 {
-                    return (IEnumerator<KeyValuePair<MessageQuery, TResult>>)(object)results.GetEnumerator();
+                    return (IEnumerator<KeyValuePair<MessageQuery, TResult>>)
+                        (object)results.GetEnumerator();
                 }
-                else if (typeof(TResult) == typeof(string) ||
-                    typeof(TResult) == typeof(bool) ||
-                    typeof(TResult) == typeof(object))
+                else if (
+                    typeof(TResult) == typeof(string)
+                    || typeof(TResult) == typeof(bool)
+                    || typeof(TResult) == typeof(object)
+                )
                 {
                     Collection<KeyValuePair<MessageQuery, TResult>> typedResults =
                         new Collection<KeyValuePair<MessageQuery, TResult>>();
@@ -174,22 +180,33 @@ namespace System.ServiceModel.Dispatcher
                         {
                             typedResults.Add(
                                 new KeyValuePair<MessageQuery, TResult>(
-                                    result.Key, (TResult)(object)result.Value.GetResultAsString()));
+                                    result.Key,
+                                    (TResult)(object)result.Value.GetResultAsString()
+                                )
+                            );
                         }
                         else if (typeof(TResult) == typeof(bool))
                         {
                             typedResults.Add(
                                 new KeyValuePair<MessageQuery, TResult>(
-                                    result.Key, (TResult)(object)result.Value.GetResultAsBoolean()));
+                                    result.Key,
+                                    (TResult)(object)result.Value.GetResultAsBoolean()
+                                )
+                            );
                         }
                         else
                         {
-                            typedResults.Add(new KeyValuePair<MessageQuery, TResult>(
-                                result.Key, (TResult)(object)result.Value));
+                            typedResults.Add(
+                                new KeyValuePair<MessageQuery, TResult>(
+                                    result.Key,
+                                    (TResult)(object)result.Value
+                                )
+                            );
                         }
                     }
 
-                    return (IEnumerator<KeyValuePair<MessageQuery, TResult>>)typedResults.GetEnumerator();
+                    return (IEnumerator<KeyValuePair<MessageQuery, TResult>>)
+                        typedResults.GetEnumerator();
                 }
                 else
                 {
@@ -198,11 +215,17 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XPathNavigatorException e)
             {
-                throw TraceUtility.ThrowHelperError(e.Process(this.matcher.RootOpcode), this.message);
+                throw TraceUtility.ThrowHelperError(
+                    e.Process(this.matcher.RootOpcode),
+                    this.message
+                );
             }
             catch (NavigatorInvalidBodyAccessException e)
             {
-                throw TraceUtility.ThrowHelperError(e.Process(this.matcher.RootOpcode), this.message);
+                throw TraceUtility.ThrowHelperError(
+                    e.Process(this.matcher.RootOpcode),
+                    this.message
+                );
             }
             finally
             {
@@ -222,16 +245,16 @@ namespace System.ServiceModel.Dispatcher
     }
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal abstract class QueryMatcher
     {
-        static IFunctionLibrary[] defaultFunctionLibs;  // The set of function libraries that our XPath compiler will link to
-        static XPathNavigator fxCompiler;       // fx compiler
+        static IFunctionLibrary[] defaultFunctionLibs; // The set of function libraries that our XPath compiler will link to
+        static XPathNavigator fxCompiler; // fx compiler
 
-        protected int maxNodes;     // Maximum # of nodes that we will process while performing any individual match
-        protected Opcode query;     // root opcode - this is where query evaluation starts
-        protected int subExprVars;  // the number of subexpr node sequences the processing context must hold
+        protected int maxNodes; // Maximum # of nodes that we will process while performing any individual match
+        protected Opcode query; // root opcode - this is where query evaluation starts
+        protected int subExprVars; // the number of subexpr node sequences the processing context must hold
 
         // Processor Pool
         protected WeakReference processorPool;
@@ -240,9 +263,7 @@ namespace System.ServiceModel.Dispatcher
         {
             QueryProcessor processor;
 
-            internal QueryProcessorPool()
-            {
-            }
+            internal QueryProcessorPool() { }
 
             internal QueryProcessor Pop()
             {
@@ -266,7 +287,10 @@ namespace System.ServiceModel.Dispatcher
         [SuppressMessage("Microsoft.Security.Xml", "CA3057:DoNotUseLoadXml")]
         static QueryMatcher()
         {
-            QueryMatcher.defaultFunctionLibs = new IFunctionLibrary[] { new XPathFunctionLibrary() };
+            QueryMatcher.defaultFunctionLibs = new IFunctionLibrary[]
+            {
+                new XPathFunctionLibrary(),
+            };
 
             // For some incomprehensible reason, the Framework XPath compiler requires an instance of an XPath navigator
             // to compile an xpath. This compiler uses a dummy xml document to create a navigator
@@ -282,29 +306,25 @@ namespace System.ServiceModel.Dispatcher
             this.processorPool = new WeakReference(null);
             this.subExprVars = 0;
         }
-#if NO       
+
+#if NO
         internal QueryMatcher(QueryMatcher matcher)
         {
-            this.processorPool = new WeakReference(null); 
+            this.processorPool = new WeakReference(null);
             this.maxNodes = matcher.maxNodes;
             this.query = matcher.query;
             this.subExprVars = matcher.subExprVars;
         }
 #endif
+
         internal bool IsCompiled
         {
-            get
-            {
-                return (null != this.query);
-            }
+            get { return (null != this.query); }
         }
 
         internal int NodeQuota
         {
-            get
-            {
-                return this.maxNodes;
-            }
+            get { return this.maxNodes; }
             set
             {
                 Fx.Assert(value > 0, "");
@@ -314,26 +334,25 @@ namespace System.ServiceModel.Dispatcher
 
         internal Opcode RootOpcode
         {
-            get
-            {
-                return this.query;
-            }
+            get { return this.query; }
         }
 
         internal int SubExprVarCount
         {
-            get
-            {
-                return this.subExprVars;
-            }
+            get { return this.subExprVars; }
         }
 
         /// <summary>
         /// Compile the given filter to run on an external (fx) xpath engine
         /// </summary>
-        internal static OpcodeBlock CompileForExternalEngine(string expression, XmlNamespaceManager namespaces, object item, bool match)
+        internal static OpcodeBlock CompileForExternalEngine(
+            string expression,
+            XmlNamespaceManager namespaces,
+            object item,
+            bool match
+        )
         {
-            // Compile...            
+            // Compile...
             XPathExpression xpathExpr = QueryMatcher.fxCompiler.Compile(expression);
 
             // Fx will bind prefixes and functions here.
@@ -351,7 +370,9 @@ namespace System.ServiceModel.Dispatcher
 
                         if (prefix.Length > 0 && namespaces.LookupNamespace(prefix) == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XsltException(SR.GetString(SR.FilterUndefinedPrefix, prefix)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new XsltException(SR.GetString(SR.FilterUndefinedPrefix, prefix))
+                            );
                         }
                     }
                 }
@@ -365,7 +386,9 @@ namespace System.ServiceModel.Dispatcher
             if (XPathResultType.Error == xpathExpr.ReturnType)
             {
                 // This should never be reached.  The above property should throw if there's an error
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XPathException(SR.GetString(SR.FilterCouldNotCompile, expression)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XPathException(SR.GetString(SR.FilterCouldNotCompile, expression))
+                );
             }
 
             OpcodeBlock codeBlock = new OpcodeBlock();
@@ -388,17 +411,34 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// Compile the given filter for evaluation using the internal engine. 
+        /// Compile the given filter for evaluation using the internal engine.
         /// </summary>
         /// <param name="flags">Caller customizes optimizations via the flags parameter</param>
         /// <param name="returnType">Every xpath expression has a return type</param>
         /// <returns>The opcode block we execute to evaluate</returns>
-        internal static OpcodeBlock CompileForInternalEngine(XPathMessageFilter filter, QueryCompilerFlags flags, IFunctionLibrary[] functionLibs, out ValueDataType returnType)
+        internal static OpcodeBlock CompileForInternalEngine(
+            XPathMessageFilter filter,
+            QueryCompilerFlags flags,
+            IFunctionLibrary[] functionLibs,
+            out ValueDataType returnType
+        )
         {
-            return QueryMatcher.CompileForInternalEngine(filter.XPath.Trim(), filter.namespaces, flags, functionLibs, out returnType);
+            return QueryMatcher.CompileForInternalEngine(
+                filter.XPath.Trim(),
+                filter.namespaces,
+                flags,
+                functionLibs,
+                out returnType
+            );
         }
 
-        internal static OpcodeBlock CompileForInternalEngine(string xpath, XmlNamespaceManager nsManager, QueryCompilerFlags flags, IFunctionLibrary[] functionLibs, out ValueDataType returnType)
+        internal static OpcodeBlock CompileForInternalEngine(
+            string xpath,
+            XmlNamespaceManager nsManager,
+            QueryCompilerFlags flags,
+            IFunctionLibrary[] functionLibs,
+            out ValueDataType returnType
+        )
         {
             OpcodeBlock codeBlock;
 
@@ -418,7 +458,9 @@ namespace System.ServiceModel.Dispatcher
 
                 if (null == parseTree)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.CouldNotParseExpression));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryCompileException(QueryCompileError.CouldNotParseExpression)
+                    );
                 }
 
                 returnType = parseTree.ReturnType;
@@ -432,9 +474,20 @@ namespace System.ServiceModel.Dispatcher
             return codeBlock;
         }
 
-        internal static OpcodeBlock CompileForInternalEngine(string xpath, XmlNamespaceManager ns, QueryCompilerFlags flags, out ValueDataType returnType)
+        internal static OpcodeBlock CompileForInternalEngine(
+            string xpath,
+            XmlNamespaceManager ns,
+            QueryCompilerFlags flags,
+            out ValueDataType returnType
+        )
         {
-            return QueryMatcher.CompileForInternalEngine(xpath, ns, flags, QueryMatcher.defaultFunctionLibs, out returnType);
+            return QueryMatcher.CompileForInternalEngine(
+                xpath,
+                ns,
+                flags,
+                QueryMatcher.defaultFunctionLibs,
+                out returnType
+            );
         }
 
         internal SeekableXPathNavigator CreateMessageNavigator(Message message, bool matchBody)
@@ -515,7 +568,11 @@ namespace System.ServiceModel.Dispatcher
             return result;
         }
 
-        internal FilterResult Match(Message message, bool matchBody, ICollection<MessageFilter> matches)
+        internal FilterResult Match(
+            Message message,
+            bool matchBody,
+            ICollection<MessageFilter> matches
+        )
         {
             QueryProcessor processor = this.CreateProcessor();
             processor.MatchSet = matches;
@@ -550,7 +607,10 @@ namespace System.ServiceModel.Dispatcher
         /// <summary>
         /// Execute matches over the given seekable navigator. If the navigator is not safe, wrap it with one that is
         /// </summary>
-        internal FilterResult Match(SeekableXPathNavigator navigator, ICollection<MessageFilter> matches)
+        internal FilterResult Match(
+            SeekableXPathNavigator navigator,
+            ICollection<MessageFilter> matches
+        )
         {
             // If the matcher places restrictions on the # of nodes we will inspect, and the navigator passed does
             // not do any nodecounting itself, we must make that navigator safe by wrapping it
@@ -633,26 +693,31 @@ namespace System.ServiceModel.Dispatcher
     internal enum XPathFilterFlags
     {
         None = 0x00,
-        AlwaysMatch = 0x01,     // filter always matches
-        IsFxFilter = 0x02,      // filter is matched using the framework engine
+        AlwaysMatch = 0x01, // filter always matches
+        IsFxFilter = 0x02, // filter is matched using the framework engine
     }
 
     /// <summary>
     /// A matcher used to evalute single XPath expressions
-    /// </summary>    
+    /// </summary>
     internal class XPathQueryMatcher : QueryMatcher
     {
         XPathFilterFlags flags;
         bool match;
         static PushBooleanOpcode matchAlwaysFilter; // used for compiling xpaths that always match - i.e. xpath.Length == 0
-        static OpcodeBlock rootFilter;        // used for compiling "/"
+        static OpcodeBlock rootFilter; // used for compiling "/"
 
         static XPathQueryMatcher()
         {
             XPathQueryMatcher.matchAlwaysFilter = new PushBooleanOpcode(true); //dummy
 
             ValueDataType returnType;
-            XPathQueryMatcher.rootFilter = QueryMatcher.CompileForInternalEngine("/", null, QueryCompilerFlags.None, out returnType);
+            XPathQueryMatcher.rootFilter = QueryMatcher.CompileForInternalEngine(
+                "/",
+                null,
+                QueryCompilerFlags.None,
+                out returnType
+            );
             XPathQueryMatcher.rootFilter.Append(new MatchResultOpcode());
         }
 
@@ -662,27 +727,23 @@ namespace System.ServiceModel.Dispatcher
             this.flags = XPathFilterFlags.None;
             this.match = match;
         }
-#if NO        
+
+#if NO
         internal XPathFilterMatcher(XPathFilterMatcher matcher)
             : base(matcher)
         {
             this.flags = matcher.flags;
         }
 #endif
+
         internal bool IsAlwaysMatch
         {
-            get
-            {
-                return (0 != (this.flags & XPathFilterFlags.AlwaysMatch));
-            }
+            get { return (0 != (this.flags & XPathFilterFlags.AlwaysMatch)); }
         }
 
         internal bool IsFxFilter
         {
-            get
-            {
-                return (0 != (this.flags & XPathFilterFlags.IsFxFilter));
-            }
+            get { return (0 != (this.flags & XPathFilterFlags.IsFxFilter)); }
         }
 
         /// <summary>
@@ -700,9 +761,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     this.CompileForInternal(expression, namespaces);
                 }
-                catch (QueryCompileException)
-                {
-                }
+                catch (QueryCompileException) { }
                 if (null == this.query)
                 {
                     // Try for an external engine that might work..
@@ -746,7 +805,12 @@ namespace System.ServiceModel.Dispatcher
             else
             {
                 ValueDataType returnType;
-                OpcodeBlock codeBlock = QueryMatcher.CompileForInternalEngine(xpath, names, QueryCompilerFlags.None, out returnType);
+                OpcodeBlock codeBlock = QueryMatcher.CompileForInternalEngine(
+                    xpath,
+                    names,
+                    QueryCompilerFlags.None,
+                    out returnType
+                );
                 // Inject a final opcode that will place the query result on the query context
                 // This query is now ready for execution STAND ALONE
                 if (this.match)
@@ -835,7 +899,10 @@ namespace System.ServiceModel.Dispatcher
             INodeCounter counter = navigator as INodeCounter;
             if (counter == null)
             {
-                navigator = new SafeSeekableNavigator(new GenericSeekableNavigator(navigator), this.NodeQuota);
+                navigator = new SafeSeekableNavigator(
+                    new GenericSeekableNavigator(navigator),
+                    this.NodeQuota
+                );
             }
             else
             {
@@ -872,7 +939,12 @@ namespace System.ServiceModel.Dispatcher
             this.match = match;
         }
 
-        internal void Add(string expression, XmlNamespaceManager names, object item, bool forceExternal)
+        internal void Add(
+            string expression,
+            XmlNamespaceManager names,
+            object item,
+            bool forceExternal
+        )
         {
             Fx.Assert(null != item, "");
 
@@ -889,7 +961,14 @@ namespace System.ServiceModel.Dispatcher
                     ValueDataType returnType = ValueDataType.None;
 
                     // Try to compile and merge the compiled query into the query tree
-                    codeBlock.Append(QueryMatcher.CompileForInternalEngine(expression, names, QueryCompilerFlags.InverseQuery, out returnType));
+                    codeBlock.Append(
+                        QueryMatcher.CompileForInternalEngine(
+                            expression,
+                            names,
+                            QueryCompilerFlags.InverseQuery,
+                            out returnType
+                        )
+                    );
 
                     MultipleResultOpcode opcode;
 
@@ -918,7 +997,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (!compiled)
             {
-                codeBlock.Append(QueryMatcher.CompileForExternalEngine(expression, names, item, this.match));
+                codeBlock.Append(
+                    QueryMatcher.CompileForExternalEngine(expression, names, item, this.match)
+                );
             }
 
             // Merge the compiled query into the query tree

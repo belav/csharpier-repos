@@ -15,13 +15,20 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     public class DependencyContextJsonReaderTest
     {
         // Same as the default for StreamWriter
-        private static readonly Encoding s_utf8NoPreamble =
-            new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly Encoding s_utf8NoPreamble = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
         private DependencyContext Read(string text, bool withPreamble = false)
         {
             using (var stream = new MemoryStream(Encoding.UTF8.GetMaxByteCount(text.Length)))
-            using (var writer = new StreamWriter(stream, withPreamble ? Encoding.UTF8 : s_utf8NoPreamble))
+            using (
+                var writer = new StreamWriter(
+                    stream,
+                    withPreamble ? Encoding.UTF8 : s_utf8NoPreamble
+                )
+            )
             {
                 writer.Write(text);
                 writer.Flush();
@@ -37,7 +44,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void ReadsRuntimeTargetInfo(bool withPreamble)
         {
             var context = Read(
-@"{
+                @"{
     ""runtimeTarget"": {
         ""name"":"".NETCoreApp,Version=v1.0/osx.10.10-x64"",
         ""signature"":""target-signature""
@@ -46,7 +53,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
 }",
-                withPreamble);
+                withPreamble
+            );
 
             context.Target.IsPortable.Should().BeFalse();
             context.Target.Framework.Should().Be(".NETCoreApp,Version=v1.0");
@@ -58,8 +66,9 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50872", TestPlatforms.Android)]
         public void ReadsRuntimeTargetInfoWithCommentsIsInvalid()
         {
-            var exception = Assert.ThrowsAny<JsonException>(() => Read(
-@"{
+            var exception = Assert.ThrowsAny<JsonException>(() =>
+                Read(
+                    @"{
     ""runtimeTarget"": {
         ""name"":"".NETCoreApp,Version=v1.0/osx.10.10-x64"",
         ""signature"":""target-signature""
@@ -71,16 +80,21 @@ namespace Microsoft.Extensions.DependencyModel.Tests
          * Ignore multi-line comments
         */
     }
-}"));
+}"
+                )
+            );
 
-            Assert.Equal("'/' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 6 | BytePositionInLine: 8.", exception.Message);
+            Assert.Equal(
+                "'/' is invalid after a value. Expected either ',', '}', or ']'. LineNumber: 6 | BytePositionInLine: 8.",
+                exception.Message
+            );
         }
 
         [Fact]
         public void IgnoredUnknownPropertiesInRuntimeTarget()
         {
             var context = Read(
-@"{
+                @"{
     ""runtimeTarget"": {
         ""shouldIgnoreString"": ""this-will-never-exist"",
         ""shouldIgnoreObject"": {""inner"": [1, 2]},
@@ -90,7 +104,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
-}");
+}"
+            );
             context.Target.IsPortable.Should().BeFalse();
             context.Target.Framework.Should().Be(".NETCoreApp,Version=v1.0");
             context.Target.Runtime.Should().Be("osx.10.10-x64");
@@ -100,7 +115,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [Fact]
         public void GroupsRuntimeAssets()
         {
-            string json = @"
+            string json =
+                @"
  {
      ""targets"": {
          "".NETStandard,Version=v1.5"": {
@@ -130,7 +146,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [Fact]
         public void GroupsRuntimeAssetsWithAssemblyVersions()
         {
-            string json = @"
+            string json =
+                @"
  {
      ""targets"": {
          "".NETStandard,Version=v1.5"": {
@@ -155,10 +172,26 @@ namespace Microsoft.Extensions.DependencyModel.Tests
  }";
 
             RuntimeLibrary runtimeLib = ReadGroupsRuntimeAssets(json);
-            runtimeLib.RuntimeAssemblyGroups.GetRuntimeFileAssets("unix").Single().AssemblyVersion.Should().Be("1.2.3");
-            runtimeLib.RuntimeAssemblyGroups.GetRuntimeFileAssets("unix").Single().FileVersion.Should().Be("4.5.6");
-            runtimeLib.RuntimeAssemblyGroups.GetRuntimeFileAssets("win7").Single().AssemblyVersion.Should().BeNull();
-            runtimeLib.RuntimeAssemblyGroups.GetRuntimeFileAssets("win7").Single().FileVersion.Should().Be("1.2.3");
+            runtimeLib
+                .RuntimeAssemblyGroups.GetRuntimeFileAssets("unix")
+                .Single()
+                .AssemblyVersion.Should()
+                .Be("1.2.3");
+            runtimeLib
+                .RuntimeAssemblyGroups.GetRuntimeFileAssets("unix")
+                .Single()
+                .FileVersion.Should()
+                .Be("4.5.6");
+            runtimeLib
+                .RuntimeAssemblyGroups.GetRuntimeFileAssets("win7")
+                .Single()
+                .AssemblyVersion.Should()
+                .BeNull();
+            runtimeLib
+                .RuntimeAssemblyGroups.GetRuntimeFileAssets("win7")
+                .Single()
+                .FileVersion.Should()
+                .Be("1.2.3");
         }
 
         private RuntimeLibrary ReadGroupsRuntimeAssets(string json)
@@ -180,11 +213,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void SetsPortableIfRuntimeTargetHasNoRid()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {}
     }
-}");
+}"
+            );
             context.Target.IsPortable.Should().BeTrue();
         }
 
@@ -192,14 +226,15 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void SetsNotPortableIfRuntimeTargetHasRid()
         {
             var context = Read(
-@"{
+                @"{
     ""runtimeTarget"": {
         ""name"": "".NETCoreApp,Version=v1.0/osx.10.10-x64""
     },
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
-}");
+}"
+            );
             context.Target.IsPortable.Should().BeFalse();
         }
 
@@ -207,11 +242,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void ReadsMainTarget()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {}
     }
-}");
+}"
+            );
             context.Target.Framework.Should().Be(".NETCoreApp,Version=v1.0");
         }
 
@@ -219,13 +255,14 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void IgnoresExtraTopLevelNodes()
         {
             var context = Read(
-@"{
+                @"{
     ""shouldIgnoreObject"": {""inner"": [1, 2]},
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {}
     },
     ""shouldIgnoreString"": ""this-will-never-exist""
-}");
+}"
+            );
             context.Target.Framework.Should().Be(".NETCoreApp,Version=v1.0");
         }
 
@@ -233,7 +270,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void ReadsRuntimeGraph()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     },
@@ -242,22 +279,32 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         ""osx.10.11-x64"": [ ""osx"" ],
         ""rhel.7-x64"": [ ""linux-x64"", ""unix"" ]
     }
-}");
-            context.RuntimeGraph.Should().Contain(p => p.Runtime == "osx.10.10-x64").Which
-                .Fallbacks.Should().BeEquivalentTo();
+}"
+            );
+            context
+                .RuntimeGraph.Should()
+                .Contain(p => p.Runtime == "osx.10.10-x64")
+                .Which.Fallbacks.Should()
+                .BeEquivalentTo();
 
-            context.RuntimeGraph.Should().Contain(p => p.Runtime == "osx.10.11-x64").Which
-                .Fallbacks.Should().BeEquivalentTo("osx");
+            context
+                .RuntimeGraph.Should()
+                .Contain(p => p.Runtime == "osx.10.11-x64")
+                .Which.Fallbacks.Should()
+                .BeEquivalentTo("osx");
 
-            context.RuntimeGraph.Should().Contain(p => p.Runtime == "rhel.7-x64").Which
-                .Fallbacks.Should().BeEquivalentTo("linux-x64", "unix");
+            context
+                .RuntimeGraph.Should()
+                .Contain(p => p.Runtime == "rhel.7-x64")
+                .Which.Fallbacks.Should()
+                .BeEquivalentTo("linux-x64", "unix");
         }
 
         [Fact]
         public void ReadsCompilationTarget()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""MyApp/1.0.1"": {
@@ -290,14 +337,18 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""hashPath"": ""PachageHashPath""
         }
     }
-}");
+}"
+            );
             context.CompileLibraries.Should().HaveCount(2);
             var project = context.CompileLibraries.Should().Contain(l => l.Name == "MyApp").Subject;
             project.Version.Should().Be("1.0.1");
             project.Assemblies.Should().BeEquivalentTo("MyApp.dll");
             project.Type.Should().Be("project");
 
-            var package = context.CompileLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+            var package = context
+                .CompileLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
             package.Version.Should().Be("1.0.0");
             package.Assemblies.Should().BeEquivalentTo("ref/dotnet5.4/System.Banana.dll");
             package.Hash.Should().Be("HASH-System.Banana");
@@ -311,24 +362,30 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50872", TestPlatforms.Android)]
         public void RejectsMissingLibrary()
         {
-            var exception = Assert.Throws<InvalidOperationException>(() => Read(
-@"{
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                Read(
+                    @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""System.Banana/1.0.0"": {}
         }
     },
     ""libraries"": {}
-}"));
+}"
+                )
+            );
 
-            Assert.Equal($"Cannot find library information for System.Banana/1.0.0", exception.Message);
+            Assert.Equal(
+                $"Cannot find library information for System.Banana/1.0.0",
+                exception.Message
+            );
         }
 
         [Fact]
         public void IgnoresUnknownPropertiesInLibrary()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""System.Banana/1.0.0"": {
@@ -349,10 +406,14 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""sha512"": ""HASH-System.Banana""
         }
     }
-}");
+}"
+            );
             context.CompileLibraries.Should().HaveCount(1);
 
-            var package = context.CompileLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+            var package = context
+                .CompileLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
             package.Version.Should().Be("1.0.0");
             package.Assemblies.Should().BeEquivalentTo("ref/dotnet5.4/System.Banana.dll");
             package.Hash.Should().Be("HASH-System.Banana");
@@ -366,7 +427,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void ReadsCompilationTargetWithNullPathAndHashPath()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""System.Banana/1.0.0"": {
@@ -388,10 +449,14 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""hashPath"": null
         }
     }
-}");
+}"
+            );
             context.CompileLibraries.Should().HaveCount(1);
 
-            var package = context.CompileLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+            var package = context
+                .CompileLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
             package.Version.Should().Be("1.0.0");
             package.Assemblies.Should().BeEquivalentTo("ref/dotnet5.4/System.Banana.dll");
             package.Hash.Should().Be("HASH-System.Banana");
@@ -405,7 +470,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void ReadsCompilationTargetWithMissingPathAndHashPath()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""System.Banana/1.0.0"": {
@@ -425,10 +490,14 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""sha512"": ""HASH-System.Banana""
         }
     }
-}");
+}"
+            );
             context.CompileLibraries.Should().HaveCount(1);
 
-            var package = context.CompileLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+            var package = context
+                .CompileLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
             package.Version.Should().Be("1.0.0");
             package.Assemblies.Should().BeEquivalentTo("ref/dotnet5.4/System.Banana.dll");
             package.Hash.Should().Be("HASH-System.Banana");
@@ -442,7 +511,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void DoesNotReadRuntimeLibraryFromCompilationOnlyEntries()
         {
             var context = Read(
-@"{
+                @"{
     ""targets"": {
         "".NETCoreApp,Version=v1.0"": {
             ""MyApp/1.0.1"": {
@@ -474,12 +543,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""sha512"": ""HASH-System.Banana""
         }
     }
-}");
+}"
+            );
             context.CompileLibraries.Should().HaveCount(2);
             context.RuntimeLibraries.Should().HaveCount(1);
             context.RuntimeLibraries[0].Name.Should().Be("MyApp");
         }
-
 
         [Fact]
         public void ReadsRuntimeLibrariesWithSubtargetsFromMainTargetForPortable()
@@ -493,10 +562,12 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ReadsRuntimeLibrariesWithSubtargetsFromMainTargetForPortableCore(true);
         }
 
-        private void ReadsRuntimeLibrariesWithSubtargetsFromMainTargetForPortableCore(bool useAssemblyVersions)
+        private void ReadsRuntimeLibrariesWithSubtargetsFromMainTargetForPortableCore(
+            bool useAssemblyVersions
+        )
         {
             string json =
-@"{
+                @"{
     ""runtimeTarget"": {
         ""name"": "".NETCoreApp,Version=v1.0""
     },
@@ -520,7 +591,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             if (useAssemblyVersions)
             {
                 json +=
-@"                            ""assemblyVersion"": ""1.2.3"",
+                    @"                            ""assemblyVersion"": ""1.2.3"",
                             ""fileVersion"": ""7.8.9""
                     }";
             }
@@ -530,7 +601,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             }
 
             json +=
-@"                },
+                @"                },
                 ""runtimeTargets"": {
                     ""lib/win7/System.Banana.dll"": { ""assetType"": ""runtime"", ""rid"": ""win7-x64""},
                     ""lib/win7/Banana.dll"": { ""assetType"": ""native"", ""rid"": ""win7-x64""}
@@ -563,7 +634,10 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             project.RuntimeAssemblyGroups.GetDefaultAssets().Should().Contain("MyApp.dll");
             project.Type.Should().Be("project");
 
-            var package = context.RuntimeLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+            var package = context
+                .RuntimeLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
             package.Version.Should().Be("1.0.0");
             package.Hash.Should().Be("HASH-System.Banana");
             package.Type.Should().Be("package");
@@ -571,8 +645,11 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             package.Path.Should().Be("PackagePath");
             package.HashPath.Should().Be("PackageHashPath");
             package.RuntimeStoreManifestName.Should().Be("placeHolderManifest.xml");
-            package.ResourceAssemblies.Should().Contain(a => a.Path == "System.Banana.resources.dll")
-                .Subject.Locale.Should().Be("en-US");
+            package
+                .ResourceAssemblies.Should()
+                .Contain(a => a.Path == "System.Banana.resources.dll")
+                .Subject.Locale.Should()
+                .Be("en-US");
 
             if (useAssemblyVersions)
             {
@@ -585,18 +662,27 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             }
             else
             {
-                package.RuntimeAssemblyGroups.GetDefaultAssets().Should().Contain("lib/dotnet5.4/System.Banana.dll");
+                package
+                    .RuntimeAssemblyGroups.GetDefaultAssets()
+                    .Should()
+                    .Contain("lib/dotnet5.4/System.Banana.dll");
             }
 
-            package.RuntimeAssemblyGroups.GetRuntimeAssets("win7-x64").Should().Contain("lib/win7/System.Banana.dll");
-            package.NativeLibraryGroups.GetRuntimeAssets("win7-x64").Should().Contain("lib/win7/Banana.dll");
+            package
+                .RuntimeAssemblyGroups.GetRuntimeAssets("win7-x64")
+                .Should()
+                .Contain("lib/win7/System.Banana.dll");
+            package
+                .NativeLibraryGroups.GetRuntimeAssets("win7-x64")
+                .Should()
+                .Contain("lib/win7/Banana.dll");
         }
 
         [Fact]
         public void ReadsRuntimeTargetPlaceholdersAsEmptyGroups()
         {
             var context = Read(
-@"{
+                @"{
     ""runtimeTarget"": {
         ""name"": "".NETCoreApp,Version=v1.0""
     },
@@ -617,22 +703,32 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""sha512"": ""HASH-System.Banana""
         }
     }
-}");
+}"
+            );
             context.CompileLibraries.Should().HaveCount(1);
 
-            var package = context.RuntimeLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+            var package = context
+                .RuntimeLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
 
-            package.RuntimeAssemblyGroups.Should().Contain(g => g.Runtime == "win7-x64")
-                .Which.AssetPaths.Should().BeEmpty();
-            package.NativeLibraryGroups.Should().Contain(g => g.Runtime == "linux-x64")
-                .Which.AssetPaths.Should().BeEmpty();
+            package
+                .RuntimeAssemblyGroups.Should()
+                .Contain(g => g.Runtime == "win7-x64")
+                .Which.AssetPaths.Should()
+                .BeEmpty();
+            package
+                .NativeLibraryGroups.Should()
+                .Contain(g => g.Runtime == "linux-x64")
+                .Which.AssetPaths.Should()
+                .BeEmpty();
         }
 
         [Fact]
         public void IgnoresUnknownPropertiesInRuntimeTargets()
         {
             var context = Read(
-@"{
+                @"{
     ""runtimeTarget"": {
         ""name"": "".NETCoreApp,Version=v1.0""
     },
@@ -658,20 +754,30 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""sha512"": ""HASH-System.Banana""
         }
     }
-}");
-            var package = context.RuntimeLibraries.Should().Contain(l => l.Name == "System.Banana").Subject;
+}"
+            );
+            var package = context
+                .RuntimeLibraries.Should()
+                .Contain(l => l.Name == "System.Banana")
+                .Subject;
 
-            package.RuntimeAssemblyGroups.Should().Contain(g => g.Runtime == "win7-x64")
-                .Which.AssetPaths.Should().BeEmpty();
-            package.NativeLibraryGroups.Should().Contain(g => g.Runtime == "linux-x64")
-                .Which.AssetPaths.Should().BeEmpty();
+            package
+                .RuntimeAssemblyGroups.Should()
+                .Contain(g => g.Runtime == "win7-x64")
+                .Which.AssetPaths.Should()
+                .BeEmpty();
+            package
+                .NativeLibraryGroups.Should()
+                .Contain(g => g.Runtime == "linux-x64")
+                .Which.AssetPaths.Should()
+                .BeEmpty();
         }
 
         [Fact]
         public void ReadsRuntimePackLibrary()
         {
             var context = Read(
-@"{
+                @"{
     ""runtimeTarget"": {
         ""name"": "".NETCoreApp,Version=v5.0/win-x86"",
         ""signature"": """"
@@ -700,7 +806,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             ""sha512"": """"
         }
     }
-}");
+}"
+            );
 
             var runtimeLibrary = context.RuntimeLibraries.Should().ContainSingle().Subject;
             runtimeLibrary.Type.Should().Be("runtimepack");
@@ -711,7 +818,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         public void ReadsCompilationOptions()
         {
             var context = Read(
-@"{
+                @"{
     ""compilationOptions"": {
         ""allowUnsafe"": true,
         ""defines"": [""MY"", ""DEFINES""],
@@ -728,7 +835,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
-}");
+}"
+            );
             context.CompilationOptions.AllowUnsafe.Should().Be(true);
             context.CompilationOptions.Defines.Should().BeEquivalentTo(new[] { "MY", "DEFINES" });
             context.CompilationOptions.DelaySign.Should().Be(true);
@@ -745,22 +853,28 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [Fact]
         public void FailsToReadInvalidDefines()
         {
-            Assert.Throws<FormatException>(() => Read(
-@"{
+            Assert
+                .Throws<FormatException>(() =>
+                    Read(
+                        @"{
     ""compilationOptions"": {
         ""defines"": ""MY"",
     },
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
-}")).Message.Should().Contain("line 2 position 23");
+}"
+                    )
+                )
+                .Message.Should()
+                .Contain("line 2 position 23");
         }
 
         [Fact]
         public void IgnoresUnknownPropertiesInCompilationOptions()
         {
             var context = Read(
-@"{
+                @"{
     ""compilationOptions"": {
         ""shouldIgnoreString"": ""this-will-never-exist"",
         ""shouldIgnoreObject"": {""inner"": [1, 2]},
@@ -779,7 +893,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
     ""targets"": {
         "".NETCoreApp,Version=v1.0/osx.10.10-x64"": {}
     }
-}");
+}"
+            );
             context.CompilationOptions.AllowUnsafe.Should().Be(true);
             context.CompilationOptions.Defines.Should().BeEquivalentTo(new[] { "MY", "DEFINES" });
             context.CompilationOptions.DelaySign.Should().Be(true);
@@ -796,8 +911,9 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         [Fact]
         public void FailsToReadNullLibraryType()
         {
-            Assert.Throws<FormatException>(() => Read(
-@"{
+            Assert.Throws<FormatException>(() =>
+                Read(
+                    @"{
     ""libraries"":{
         ""System.Banana/1.0.0"": {
             ""type"": null,
@@ -806,25 +922,31 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         }
     }
 }
-"));
+"
+                )
+            );
         }
 
         [Fact]
         public void FailsToReadEmptyTargetName()
         {
-            Assert.Throws<FormatException>(() => Read(
-@"{
+            Assert.Throws<FormatException>(() =>
+                Read(
+                    @"{
      ""targets"": {
         """": {}
     }
- }"));
+ }"
+                )
+            );
         }
 
         [Fact]
         public void FailsToReadEmptyLibraryType()
         {
-            Assert.Throws<FormatException>(() => Read(
-@"{
+            Assert.Throws<FormatException>(() =>
+                Read(
+                    @"{
     ""libraries"":{
         ""System.Banana/1.0.0"": {
             ""type"": """",
@@ -833,7 +955,9 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         }
     }
 }
-"));
+"
+                )
+            );
         }
     }
 }

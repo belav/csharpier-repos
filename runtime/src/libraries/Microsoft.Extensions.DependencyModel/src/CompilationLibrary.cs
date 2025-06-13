@@ -10,18 +10,29 @@ namespace Microsoft.Extensions.DependencyModel
 {
     public class CompilationLibrary : Library
     {
-        public CompilationLibrary(string type,
+        public CompilationLibrary(
+            string type,
             string name,
             string version,
             string? hash,
             IEnumerable<string> assemblies,
             IEnumerable<Dependency> dependencies,
-            bool serviceable)
-            : this(type, name, version, hash, assemblies, dependencies, serviceable, path: null, hashPath: null)
-        {
-        }
+            bool serviceable
+        )
+            : this(
+                type,
+                name,
+                version,
+                hash,
+                assemblies,
+                dependencies,
+                serviceable,
+                path: null,
+                hashPath: null
+            ) { }
 
-        public CompilationLibrary(string type,
+        public CompilationLibrary(
+            string type,
             string name,
             string version,
             string? hash,
@@ -29,7 +40,8 @@ namespace Microsoft.Extensions.DependencyModel
             IEnumerable<Dependency> dependencies,
             bool serviceable,
             string? path,
-            string? hashPath)
+            string? hashPath
+        )
             : base(type, name, version, hash, dependencies, serviceable, path, hashPath)
         {
             ThrowHelper.ThrowIfNull(assemblies);
@@ -39,12 +51,15 @@ namespace Microsoft.Extensions.DependencyModel
 
         public IReadOnlyList<string> Assemblies { get; }
 
-        internal static ICompilationAssemblyResolver DefaultResolver { get; } = new CompositeCompilationAssemblyResolver(new ICompilationAssemblyResolver[]
-        {
-            new AppBaseCompilationAssemblyResolver(),
-            new ReferenceAssemblyPathResolver(),
-            new PackageCompilationAssemblyResolver()
-        });
+        internal static ICompilationAssemblyResolver DefaultResolver { get; } =
+            new CompositeCompilationAssemblyResolver(
+                new ICompilationAssemblyResolver[]
+                {
+                    new AppBaseCompilationAssemblyResolver(),
+                    new ReferenceAssemblyPathResolver(),
+                    new PackageCompilationAssemblyResolver(),
+                }
+            );
 
         public IEnumerable<string> ResolveReferencePaths()
         {
@@ -53,7 +68,9 @@ namespace Microsoft.Extensions.DependencyModel
             return ResolveReferencePaths(DefaultResolver, assemblies);
         }
 
-        public IEnumerable<string> ResolveReferencePaths(params ICompilationAssemblyResolver[] customResolvers)
+        public IEnumerable<string> ResolveReferencePaths(
+            params ICompilationAssemblyResolver[] customResolvers
+        )
         {
             var assemblies = new List<string>();
 
@@ -71,7 +88,10 @@ namespace Microsoft.Extensions.DependencyModel
             return ResolveReferencePaths(DefaultResolver, assemblies);
         }
 
-        private List<string> ResolveReferencePaths(ICompilationAssemblyResolver resolver, List<string> assemblies)
+        private List<string> ResolveReferencePaths(
+            ICompilationAssemblyResolver resolver,
+            List<string> assemblies
+        )
         {
             if (!resolver.TryResolveAssemblyPaths(this, assemblies))
             {

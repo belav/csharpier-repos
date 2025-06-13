@@ -52,7 +52,10 @@ public class Program
 
             if (paramRequiredModifiers.Length > 0)
             {
-                if (paramRequiredModifiers.Length > 1 || paramRequiredModifiers[0] != typeof(FooModifier))
+                if (
+                    paramRequiredModifiers.Length > 1
+                    || paramRequiredModifiers[0] != typeof(FooModifier)
+                )
                     throw new Exception();
                 else
                     paramModreqFoo = method;
@@ -70,7 +73,10 @@ public class Program
             }
             else if (retParamOptionalModifiers.Length > 0)
             {
-                if (retParamOptionalModifiers.Length > 1 || retParamOptionalModifiers[0] != typeof(FooModifier))
+                if (
+                    retParamOptionalModifiers.Length > 1
+                    || retParamOptionalModifiers[0] != typeof(FooModifier)
+                )
                     throw new Exception();
                 else
                     returnModoptFoo = method;
@@ -117,10 +123,16 @@ public class Program
         if ((int)returnModoptFoo.Invoke(derivedClass, new object[] { 0 }) != 104)
             return 205;
 
-        if ((int)arrayModopt1.Invoke(baseClass, new object[] { null }) + 100 != (int)arrayModopt1.Invoke(derivedClass, new object[] { null }))
+        if (
+            (int)arrayModopt1.Invoke(baseClass, new object[] { null }) + 100
+            != (int)arrayModopt1.Invoke(derivedClass, new object[] { null })
+        )
             return 301;
 
-        if ((int)arrayModopt2.Invoke(baseClass, new object[] { null }) + 100 != (int)arrayModopt2.Invoke(derivedClass, new object[] { null }))
+        if (
+            (int)arrayModopt2.Invoke(baseClass, new object[] { null }) + 100
+            != (int)arrayModopt2.Invoke(derivedClass, new object[] { null })
+        )
             return 302;
 
         //

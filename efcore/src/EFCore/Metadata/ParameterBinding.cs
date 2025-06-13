@@ -17,9 +17,7 @@ public abstract class ParameterBinding
     /// </summary>
     /// <param name="parameterType">The parameter CLR type.</param>
     /// <param name="consumedProperties">The properties that are handled by this binding and so do not need to be set in some other way.</param>
-    protected ParameterBinding(
-        Type parameterType,
-        params IPropertyBase[]? consumedProperties)
+    protected ParameterBinding(Type parameterType, params IPropertyBase[]? consumedProperties)
     {
         Check.NotNull(parameterType, nameof(parameterType));
 

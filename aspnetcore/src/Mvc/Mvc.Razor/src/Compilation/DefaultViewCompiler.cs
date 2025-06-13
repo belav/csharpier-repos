@@ -25,7 +25,8 @@ internal partial class DefaultViewCompiler : IViewCompiler
 
     public DefaultViewCompiler(
         ApplicationPartManager applicationPartManager,
-        ILogger<DefaultViewCompiler> logger)
+        ILogger<DefaultViewCompiler> logger
+    )
     {
         _applicationPartManager = applicationPartManager;
         _logger = logger;
@@ -51,7 +52,8 @@ internal partial class DefaultViewCompiler : IViewCompiler
         // views that differ only by case.
         var compiledViews = new Dictionary<string, Task<CompiledViewDescriptor>>(
             viewsFeature.ViewDescriptors.Count,
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
 
         foreach (var compiledView in viewsFeature.ViewDescriptors)
         {
@@ -108,11 +110,13 @@ internal partial class DefaultViewCompiler : IViewCompiler
 
         // Entry does not exist. Attempt to create one.
         Log.ViewCompilerCouldNotFindFileAtPath(_logger, relativePath);
-        return Task.FromResult(new CompiledViewDescriptor
-        {
-            RelativePath = normalizedPath,
-            ExpirationTokens = Array.Empty<IChangeToken>(),
-        });
+        return Task.FromResult(
+            new CompiledViewDescriptor
+            {
+                RelativePath = normalizedPath,
+                ExpirationTokens = Array.Empty<IChangeToken>(),
+            }
+        );
     }
 
     private string GetNormalizedPath(string relativePath)
@@ -134,16 +138,39 @@ internal partial class DefaultViewCompiler : IViewCompiler
 
     private static partial class Log
     {
-        [LoggerMessage(3, LogLevel.Debug, "Initializing Razor view compiler with compiled view: '{ViewName}'.", EventName = "ViewCompilerLocatedCompiledView")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Initializing Razor view compiler with compiled view: '{ViewName}'.",
+            EventName = "ViewCompilerLocatedCompiledView"
+        )]
         public static partial void ViewCompilerLocatedCompiledView(ILogger logger, string viewName);
 
-        [LoggerMessage(4, LogLevel.Debug, "Initializing Razor view compiler with no compiled views.", EventName = "ViewCompilerNoCompiledViewsFound")]
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "Initializing Razor view compiler with no compiled views.",
+            EventName = "ViewCompilerNoCompiledViewsFound"
+        )]
         public static partial void ViewCompilerNoCompiledViewsFound(ILogger logger);
 
-        [LoggerMessage(5, LogLevel.Trace, "Located compiled view for view at path '{Path}'.", EventName = "ViewCompilerLocatedCompiledViewForPath")]
-        public static partial void ViewCompilerLocatedCompiledViewForPath(ILogger logger, string path);
+        [LoggerMessage(
+            5,
+            LogLevel.Trace,
+            "Located compiled view for view at path '{Path}'.",
+            EventName = "ViewCompilerLocatedCompiledViewForPath"
+        )]
+        public static partial void ViewCompilerLocatedCompiledViewForPath(
+            ILogger logger,
+            string path
+        );
 
-        [LoggerMessage(7, LogLevel.Trace, "Could not find a file for view at path '{Path}'.", EventName = "ViewCompilerCouldNotFindFileAtPath")]
+        [LoggerMessage(
+            7,
+            LogLevel.Trace,
+            "Could not find a file for view at path '{Path}'.",
+            EventName = "ViewCompilerCouldNotFindFileAtPath"
+        )]
         public static partial void ViewCompilerCouldNotFindFileAtPath(ILogger logger, string path);
     }
 }

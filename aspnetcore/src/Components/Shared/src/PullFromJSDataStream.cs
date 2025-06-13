@@ -21,9 +21,15 @@ internal sealed class PullFromJSDataStream : Stream
         IJSRuntime runtime,
         IJSStreamReference jsStreamReference,
         long totalLength,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        var jsDataStream = new PullFromJSDataStream(runtime, jsStreamReference, totalLength, cancellationToken);
+        var jsDataStream = new PullFromJSDataStream(
+            runtime,
+            jsStreamReference,
+            totalLength,
+            cancellationToken
+        );
         return jsDataStream;
     }
 
@@ -31,7 +37,8 @@ internal sealed class PullFromJSDataStream : Stream
         IJSRuntime runtime,
         IJSStreamReference jsStreamReference,
         long totalLength,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         _runtime = runtime;
         _jsStreamReference = jsStreamReference;
@@ -54,25 +61,29 @@ internal sealed class PullFromJSDataStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override void Flush()
-        => throw new NotSupportedException();
+    public override void Flush() => throw new NotSupportedException();
 
-    public override int Read(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException("Synchronous reads are not supported.");
+    public override int Read(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException("Synchronous reads are not supported.");
 
-    public override long Seek(long offset, SeekOrigin origin)
-        => throw new NotSupportedException();
+    public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
-    public override void SetLength(long value)
-        => throw new NotSupportedException();
+    public override void SetLength(long value) => throw new NotSupportedException();
 
-    public override void Write(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => await ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => await ReadAsync(buffer.AsMemory(offset, count), cancellationToken);
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         var bytesRead = await RequestDataFromJSAsync(buffer.Length);
         ThrowIfCancellationRequested(cancellationToken);
@@ -83,8 +94,10 @@ internal sealed class PullFromJSDataStream : Stream
 
     private void ThrowIfCancellationRequested(CancellationToken cancellationToken)
     {
-        if (cancellationToken.IsCancellationRequested ||
-            _streamCancellationToken.IsCancellationRequested)
+        if (
+            cancellationToken.IsCancellationRequested
+            || _streamCancellationToken.IsCancellationRequested
+        )
         {
             throw new TaskCanceledException();
         }
@@ -93,10 +106,17 @@ internal sealed class PullFromJSDataStream : Stream
     private async ValueTask<byte[]> RequestDataFromJSAsync(int numBytesToRead)
     {
         numBytesToRead = (int)Math.Min(numBytesToRead, _totalLength - _offset);
-        var bytesRead = await _runtime.InvokeAsync<byte[]>("Blazor._internal.getJSDataStreamChunk", _jsStreamReference, _offset, numBytesToRead);
+        var bytesRead = await _runtime.InvokeAsync<byte[]>(
+            "Blazor._internal.getJSDataStreamChunk",
+            _jsStreamReference,
+            _offset,
+            numBytesToRead
+        );
         if (bytesRead.Length != numBytesToRead)
         {
-            throw new EndOfStreamException("Failed to read the requested number of bytes from the stream.");
+            throw new EndOfStreamException(
+                "Failed to read the requested number of bytes from the stream."
+            );
         }
 
         _offset += bytesRead.Length;

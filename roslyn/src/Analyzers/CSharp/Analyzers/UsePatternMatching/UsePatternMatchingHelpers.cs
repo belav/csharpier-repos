@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             [NotNullWhen(true)] out ConditionalAccessExpressionSyntax? conditionalAccessExpression,
             out BinaryExpressionSyntax? binaryExpression,
             out IsPatternExpressionSyntax? isPatternExpression,
-            out LanguageVersion requiredLanguageVersion)
+            out LanguageVersion requiredLanguageVersion
+        )
         {
             conditionalAccessExpression = null;
             binaryExpression = null;
@@ -26,11 +27,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             if (asExpression.Kind() == SyntaxKind.AsExpression)
             {
                 // has to be `(expr as T)`
-                if (asExpression.Parent is not ParenthesizedExpressionSyntax
+                if (
+                    asExpression.Parent
+                    is not ParenthesizedExpressionSyntax
                     {
                         // Has to be `(expr as T)?...`
                         Parent: ConditionalAccessExpressionSyntax parentConditionalAccess
-                    })
+                    }
+                )
                 {
                     return false;
                 }
@@ -51,8 +55,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 if (whenNotNull is not MemberBindingExpressionSyntax)
                     return false;
 
-                if (conditionalAccessExpression.Parent is BinaryExpressionSyntax(SyntaxKind.EqualsExpression) parentBinaryExpression1 &&
-                    parentBinaryExpression1.Left == conditionalAccessExpression)
+                if (
+                    conditionalAccessExpression.Parent
+                        is BinaryExpressionSyntax
+                        (SyntaxKind.EqualsExpression) parentBinaryExpression1
+                    && parentBinaryExpression1.Left == conditionalAccessExpression
+                )
                 {
                     // `(expr as T)?... == other_expr
                     //
@@ -60,14 +68,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     binaryExpression = parentBinaryExpression1;
                     return true;
                 }
-                else if (conditionalAccessExpression.Parent is
-                        BinaryExpressionSyntax(
-                            SyntaxKind.NotEqualsExpression or
-                            SyntaxKind.GreaterThanExpression or
-                            SyntaxKind.GreaterThanOrEqualExpression or
-                            SyntaxKind.LessThanExpression or
-                            SyntaxKind.LessThanOrEqualExpression) parentBinaryExpression2 &&
-                    parentBinaryExpression2.Left == conditionalAccessExpression)
+                else if (
+                    conditionalAccessExpression.Parent
+                        is BinaryExpressionSyntax
+                        (
+                            SyntaxKind.NotEqualsExpression
+                                or SyntaxKind.GreaterThanExpression
+                                or SyntaxKind.GreaterThanOrEqualExpression
+                                or SyntaxKind.LessThanExpression
+                                or SyntaxKind.LessThanOrEqualExpression
+                        ) parentBinaryExpression2
+                    && parentBinaryExpression2.Left == conditionalAccessExpression
+                )
                 {
                     // `(expr as T)?... != other_expr
                     //
@@ -75,10 +87,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     binaryExpression = parentBinaryExpression2;
 
                     // relational patterns need c# 9 or above.
-                    requiredLanguageVersion = (LanguageVersion)Math.Max((int)requiredLanguageVersion, (int)LanguageVersion.CSharp9);
+                    requiredLanguageVersion = (LanguageVersion)
+                        Math.Max((int)requiredLanguageVersion, (int)LanguageVersion.CSharp9);
                     return true;
                 }
-                else if (conditionalAccessExpression.Parent is IsPatternExpressionSyntax parentIsPatternExpression)
+                else if (
+                    conditionalAccessExpression.Parent
+                    is IsPatternExpressionSyntax parentIsPatternExpression
+                )
                 {
                     // `(expr as T)?... is pattern`
                     //
@@ -86,10 +102,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                     //
                     // `(expr as T)?... is not X y`.  As it is not legal to transform into `expr is T { Member: not X y }`.
                     // Specifically, `not variable` patterns are not legal except at the top level of a pattern.
-                    if (parentIsPatternExpression.Pattern is UnaryPatternSyntax
+                    if (
+                        parentIsPatternExpression.Pattern is UnaryPatternSyntax
                         {
-                            Pattern: DeclarationPatternSyntax or VarPatternSyntax or RecursivePatternSyntax { Designation: not null }
-                        })
+                            Pattern: DeclarationPatternSyntax
+                                or VarPatternSyntax
+                                or RecursivePatternSyntax { Designation: not null }
+                        }
+                    )
                     {
                         return false;
                     }

@@ -34,7 +34,8 @@ internal class SSRRenderModeBoundary : IComponent
     public SSRRenderModeBoundary(
         HttpContext httpContext,
         [DynamicallyAccessedMembers(Component)] Type componentType,
-        IComponentRenderMode renderMode)
+        IComponentRenderMode renderMode
+    )
     {
         AssertRenderModeIsConfigured(httpContext, componentType, renderMode);
 
@@ -45,13 +46,22 @@ internal class SSRRenderModeBoundary : IComponent
             InteractiveServerRenderMode mode => mode.Prerender,
             InteractiveWebAssemblyRenderMode mode => mode.Prerender,
             InteractiveAutoRenderMode mode => mode.Prerender,
-            _ => throw new ArgumentException($"Server-side rendering does not support the render mode '{renderMode}'.", nameof(renderMode))
+            _ => throw new ArgumentException(
+                $"Server-side rendering does not support the render mode '{renderMode}'.",
+                nameof(renderMode)
+            ),
         };
     }
 
-    private static void AssertRenderModeIsConfigured(HttpContext httpContext, Type componentType, IComponentRenderMode renderMode)
+    private static void AssertRenderModeIsConfigured(
+        HttpContext httpContext,
+        Type componentType,
+        IComponentRenderMode renderMode
+    )
     {
-        var configuredRenderModesMetadata = httpContext.GetEndpoint()?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
+        var configuredRenderModesMetadata = httpContext
+            .GetEndpoint()
+            ?.Metadata.GetMetadata<ConfiguredRenderModesMetadata>();
         if (configuredRenderModesMetadata is null)
         {
             // This is not a Razor Components endpoint. It might be that the app is using RazorComponentResult,
@@ -66,16 +76,35 @@ internal class SSRRenderModeBoundary : IComponent
         // We have to allow for specified rendermodes being subclases of the known types
         if (renderMode is InteractiveServerRenderMode || renderMode is InteractiveAutoRenderMode)
         {
-            AssertRenderModeIsConfigured<InteractiveServerRenderMode>(componentType, renderMode, configuredModes, "AddInteractiveServerRenderMode");
+            AssertRenderModeIsConfigured<InteractiveServerRenderMode>(
+                componentType,
+                renderMode,
+                configuredModes,
+                "AddInteractiveServerRenderMode"
+            );
         }
 
-        if (renderMode is InteractiveWebAssemblyRenderMode || renderMode is InteractiveAutoRenderMode)
+        if (
+            renderMode is InteractiveWebAssemblyRenderMode
+            || renderMode is InteractiveAutoRenderMode
+        )
         {
-            AssertRenderModeIsConfigured<InteractiveWebAssemblyRenderMode>(componentType, renderMode, configuredModes, "AddInteractiveWebAssemblyRenderMode");
+            AssertRenderModeIsConfigured<InteractiveWebAssemblyRenderMode>(
+                componentType,
+                renderMode,
+                configuredModes,
+                "AddInteractiveWebAssemblyRenderMode"
+            );
         }
     }
 
-    private static void AssertRenderModeIsConfigured<TRequiredMode>(Type componentType, IComponentRenderMode specifiedMode, IComponentRenderMode[] configuredModes, string expectedCall) where TRequiredMode : IComponentRenderMode
+    private static void AssertRenderModeIsConfigured<TRequiredMode>(
+        Type componentType,
+        IComponentRenderMode specifiedMode,
+        IComponentRenderMode[] configuredModes,
+        string expectedCall
+    )
+        where TRequiredMode : IComponentRenderMode
     {
         foreach (var configuredMode in configuredModes)
         {
@@ -86,11 +115,13 @@ internal class SSRRenderModeBoundary : IComponent
             }
         }
 
-        throw new InvalidOperationException($"A component of type '{componentType}' has render mode '{specifiedMode.GetType().Name}', " +
-            $"but the required endpoints are not mapped on the server. When calling " +
-            $"'{nameof(RazorComponentsEndpointRouteBuilderExtensions.MapRazorComponents)}', add a call to " +
-            $"'{expectedCall}'. For example, " +
-            $"'builder.{nameof(RazorComponentsEndpointRouteBuilderExtensions.MapRazorComponents)}<...>.{expectedCall}()'");
+        throw new InvalidOperationException(
+            $"A component of type '{componentType}' has render mode '{specifiedMode.GetType().Name}', "
+                + $"but the required endpoints are not mapped on the server. When calling "
+                + $"'{nameof(RazorComponentsEndpointRouteBuilderExtensions.MapRazorComponents)}', add a call to "
+                + $"'{expectedCall}'. For example, "
+                + $"'builder.{nameof(RazorComponentsEndpointRouteBuilderExtensions.MapRazorComponents)}<...>.{expectedCall}()'"
+        );
     }
 
     public void Attach(RenderHandle renderHandle)
@@ -123,9 +154,14 @@ internal class SSRRenderModeBoundary : IComponent
             if (value is Delegate)
             {
                 var valueType = value.GetType();
-                if (valueType.IsGenericType && valueType.GetGenericTypeDefinition() == typeof(RenderFragment<>))
+                if (
+                    valueType.IsGenericType
+                    && valueType.GetGenericTypeDefinition() == typeof(RenderFragment<>)
+                )
                 {
-                    throw new InvalidOperationException($"Cannot pass RenderFragment<T> parameter '{name}' to component '{_componentType.Name}' with rendermode '{RenderMode.GetType().Name}'. Templated content can't be passed across a rendermode boundary, because it is arbitrary code and cannot be serialized.");
+                    throw new InvalidOperationException(
+                        $"Cannot pass RenderFragment<T> parameter '{name}' to component '{_componentType.Name}' with rendermode '{RenderMode.GetType().Name}'. Templated content can't be passed across a rendermode boundary, because it is arbitrary code and cannot be serialized."
+                    );
                 }
                 else
                 {
@@ -134,7 +170,9 @@ internal class SSRRenderModeBoundary : IComponent
                     // somehow without actually emitting its result directly, wait for quiescence, and then prerender
                     // the output into a separate buffer so we can serialize it in a special way.
                     // A prototype implementation is at https://github.com/dotnet/aspnetcore/commit/ed330ff5b143974d9060828a760ad486b1d386ac
-                    throw new InvalidOperationException($"Cannot pass the parameter '{name}' to component '{_componentType.Name}' with rendermode '{RenderMode.GetType().Name}'. This is because the parameter is of the delegate type '{value.GetType()}', which is arbitrary code and cannot be serialized.");
+                    throw new InvalidOperationException(
+                        $"Cannot pass the parameter '{name}' to component '{_componentType.Name}' with rendermode '{RenderMode.GetType().Name}'. This is because the parameter is of the delegate type '{value.GetType()}', which is arbitrary code and cannot be serialized."
+                    );
                 }
             }
         }
@@ -164,25 +202,49 @@ internal class SSRRenderModeBoundary : IComponent
 
         var marker = RenderMode switch
         {
-            InteractiveServerRenderMode server => ComponentMarker.Create(ComponentMarker.ServerMarkerType, server.Prerender, _markerKey),
-            InteractiveWebAssemblyRenderMode webAssembly => ComponentMarker.Create(ComponentMarker.WebAssemblyMarkerType, webAssembly.Prerender, _markerKey),
-            InteractiveAutoRenderMode auto => ComponentMarker.Create(ComponentMarker.AutoMarkerType, auto.Prerender, _markerKey),
-            _ => throw new UnreachableException($"Unknown render mode {RenderMode.GetType().FullName}"),
+            InteractiveServerRenderMode server => ComponentMarker.Create(
+                ComponentMarker.ServerMarkerType,
+                server.Prerender,
+                _markerKey
+            ),
+            InteractiveWebAssemblyRenderMode webAssembly => ComponentMarker.Create(
+                ComponentMarker.WebAssemblyMarkerType,
+                webAssembly.Prerender,
+                _markerKey
+            ),
+            InteractiveAutoRenderMode auto => ComponentMarker.Create(
+                ComponentMarker.AutoMarkerType,
+                auto.Prerender,
+                _markerKey
+            ),
+            _ => throw new UnreachableException(
+                $"Unknown render mode {RenderMode.GetType().FullName}"
+            ),
         };
 
         if (RenderMode is InteractiveServerRenderMode or InteractiveAutoRenderMode)
         {
             // Lazy because we don't actually want to require a whole chain of services including Data Protection
             // to be required unless you actually use Server render mode.
-            var serverComponentSerializer = httpContext.RequestServices.GetRequiredService<ServerComponentSerializer>();
+            var serverComponentSerializer =
+                httpContext.RequestServices.GetRequiredService<ServerComponentSerializer>();
 
             var invocationId = EndpointHtmlRenderer.GetOrCreateInvocationId(httpContext);
-            serverComponentSerializer.SerializeInvocation(ref marker, invocationId, _componentType, parameters);
+            serverComponentSerializer.SerializeInvocation(
+                ref marker,
+                invocationId,
+                _componentType,
+                parameters
+            );
         }
 
         if (RenderMode is InteractiveWebAssemblyRenderMode or InteractiveAutoRenderMode)
         {
-            WebAssemblyComponentSerializer.SerializeInvocation(ref marker, _componentType, parameters);
+            WebAssemblyComponentSerializer.SerializeInvocation(
+                ref marker,
+                _componentType,
+                parameters
+            );
         }
 
         return marker;
@@ -190,16 +252,17 @@ internal class SSRRenderModeBoundary : IComponent
 
     private ComponentMarkerKey GenerateMarkerKey(int sequence, object? componentKey)
     {
-        var componentTypeNameHash = _componentTypeNameHashCache.GetOrAdd(_componentType, TypeNameHash.Compute);
+        var componentTypeNameHash = _componentTypeNameHashCache.GetOrAdd(
+            _componentType,
+            TypeNameHash.Compute
+        );
         var sequenceString = sequence.ToString(CultureInfo.InvariantCulture);
 
         var locationHash = $"{componentTypeNameHash}:{sequenceString}";
-        var formattedComponentKey = (componentKey as IFormattable)?.ToString(null, CultureInfo.InvariantCulture) ?? string.Empty;
+        var formattedComponentKey =
+            (componentKey as IFormattable)?.ToString(null, CultureInfo.InvariantCulture)
+            ?? string.Empty;
 
-        return new()
-        {
-            LocationHash = locationHash,
-            FormattedComponentKey = formattedComponentKey,
-        };
+        return new() { LocationHash = locationHash, FormattedComponentKey = formattedComponentKey };
     }
 }

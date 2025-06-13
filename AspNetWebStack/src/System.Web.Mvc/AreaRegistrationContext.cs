@@ -11,12 +11,12 @@ namespace System.Web.Mvc
 {
     public class AreaRegistrationContext
     {
-        private readonly HashSet<string> _namespaces = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> _namespaces = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public AreaRegistrationContext(string areaName, RouteCollection routes)
-            : this(areaName, routes, null)
-        {
-        }
+            : this(areaName, routes, null) { }
 
         public AreaRegistrationContext(string areaName, RouteCollection routes, object state)
         {
@@ -45,38 +45,103 @@ namespace System.Web.Mvc
 
         public object State { get; private set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public Route MapRoute(string name, string url)
         {
-            return MapRoute(name, url, (object)null /* defaults */);
+            return MapRoute(
+                name,
+                url,
+                (object)null /* defaults */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public Route MapRoute(string name, string url, object defaults)
         {
-            return MapRoute(name, url, defaults, (object)null /* constraints */);
+            return MapRoute(
+                name,
+                url,
+                defaults,
+                (object)null /* constraints */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public Route MapRoute(string name, string url, object defaults, object constraints)
         {
-            return MapRoute(name, url, defaults, constraints, null /* namespaces */);
+            return MapRoute(
+                name,
+                url,
+                defaults,
+                constraints,
+                null /* namespaces */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public Route MapRoute(string name, string url, string[] namespaces)
         {
-            return MapRoute(name, url, (object)null /* defaults */, namespaces);
+            return MapRoute(
+                name,
+                url,
+                (object)
+                    null /* defaults */
+                ,
+                namespaces
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public Route MapRoute(string name, string url, object defaults, string[] namespaces)
         {
-            return MapRoute(name, url, defaults, null /* constraints */, namespaces);
+            return MapRoute(
+                name,
+                url,
+                defaults,
+                null /* constraints */
+                ,
+                namespaces
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
-        public Route MapRoute(string name, string url, object defaults, object constraints, string[] namespaces)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
+        public Route MapRoute(
+            string name,
+            string url,
+            object defaults,
+            object constraints,
+            string[] namespaces
+        )
         {
             if (namespaces == null && Namespaces != null)
             {

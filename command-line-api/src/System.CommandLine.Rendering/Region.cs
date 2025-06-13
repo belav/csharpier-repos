@@ -6,7 +6,7 @@ namespace System.CommandLine.Rendering
     public class Region
     {
         public static readonly Region EntireTerminal = new EntireTerminalRegion();
-        
+
         public static readonly Region Scrolling = new ScrollingTerminalRegion();
 
         public Region(
@@ -14,7 +14,8 @@ namespace System.CommandLine.Rendering
             int top,
             int? width = null,
             int? height = null,
-            bool isOverwrittenOnRender = true)
+            bool isOverwrittenOnRender = true
+        )
         {
             if (height < 0)
             {
@@ -36,14 +37,8 @@ namespace System.CommandLine.Rendering
                 throw new ArgumentOutOfRangeException(nameof(left));
             }
 
-            Height = height ??
-                     (Console.IsOutputRedirected
-                          ? 100
-                          : Console.WindowHeight);
-            Width = width ??
-                    (Console.IsOutputRedirected
-                         ? 100
-                         : Console.WindowWidth);
+            Height = height ?? (Console.IsOutputRedirected ? 100 : Console.WindowHeight);
+            Width = width ?? (Console.IsOutputRedirected ? 100 : Console.WindowWidth);
             Top = top;
             Left = left;
 
@@ -51,9 +46,7 @@ namespace System.CommandLine.Rendering
         }
 
         public Region(int left, int top, Size size)
-            : this(left, top, size.Width, size.Height)
-        {
-        }
+            : this(left, top, size.Width, size.Height) { }
 
         public virtual int Height { get; }
 

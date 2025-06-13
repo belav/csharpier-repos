@@ -15,6 +15,6 @@ namespace Microsoft.CodeAnalysis
         Primitive = 1,
         Enum = 2,
         Type = 3,
-        Array = 4
+        Array = 4,
     }
 }

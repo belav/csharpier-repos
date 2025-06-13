@@ -14,30 +14,49 @@ namespace System.Formats.Cbor.Tests
         public static byte[] ExportECDsaPublicKey(ECDsa ecDsa, HashAlgorithmName? hashAlgName)
         {
             ECParameters ecParams = ecDsa.ExportParameters(includePrivateParameters: false);
-            var writer = new CborWriter(CborConformanceMode.Ctap2Canonical, convertIndefiniteLengthEncodings: true);
+            var writer = new CborWriter(
+                CborConformanceMode.Ctap2Canonical,
+                convertIndefiniteLengthEncodings: true
+            );
             WriteECParametersAsCosePublicKey(writer, ecParams, hashAlgName);
             return writer.Encode();
         }
 
-        public static (ECDsa ecDsa, HashAlgorithmName? hashAlgName) ParseECDsaPublicKey(byte[] coseKey)
+        public static (ECDsa ecDsa, HashAlgorithmName? hashAlgName) ParseECDsaPublicKey(
+            byte[] coseKey
+        )
         {
             var reader = new CborReader(coseKey, CborConformanceMode.Ctap2Canonical);
-            (ECParameters ecParams, HashAlgorithmName? hashAlgName) = ReadECParametersAsCosePublicKey(reader);
+            (ECParameters ecParams, HashAlgorithmName? hashAlgName) =
+                ReadECParametersAsCosePublicKey(reader);
             return (ECDsa.Create(ecParams), hashAlgName);
         }
 
-        private static void WriteECParametersAsCosePublicKey(CborWriter writer, ECParameters ecParams, HashAlgorithmName? algorithmName)
+        private static void WriteECParametersAsCosePublicKey(
+            CborWriter writer,
+            ECParameters ecParams,
+            HashAlgorithmName? algorithmName
+        )
         {
-            Debug.Assert(writer.ConformanceMode == CborConformanceMode.Ctap2Canonical && writer.ConvertIndefiniteLengthEncodings);
+            Debug.Assert(
+                writer.ConformanceMode == CborConformanceMode.Ctap2Canonical
+                    && writer.ConvertIndefiniteLengthEncodings
+            );
 
             if (ecParams.Q.X is null || ecParams.Q.Y is null)
             {
-                throw new ArgumentException("does not specify a public key point.", nameof(ecParams));
+                throw new ArgumentException(
+                    "does not specify a public key point.",
+                    nameof(ecParams)
+                );
             }
 
             // run these first to perform necessary validation
             (CoseKeyType kty, CoseCrvId crv) = MapECCurveToCoseKtyAndCrv(ecParams.Curve);
-            CoseKeyAlgorithm? alg = (algorithmName != null) ? MapHashAlgorithmNameToCoseKeyAlg(algorithmName.Value) : (CoseKeyAlgorithm?)null;
+            CoseKeyAlgorithm? alg =
+                (algorithmName != null)
+                    ? MapHashAlgorithmNameToCoseKeyAlg(algorithmName.Value)
+                    : (CoseKeyAlgorithm?)null;
 
             // Begin writing a CBOR object
             writer.WriteStartMap(definiteLength: null);
@@ -70,7 +89,10 @@ namespace System.Formats.Cbor.Tests
             {
                 if (!curve.IsNamed)
                 {
-                    throw new ArgumentException("EC COSE keys only support named curves.", nameof(curve));
+                    throw new ArgumentException(
+                        "EC COSE keys only support named curves.",
+                        nameof(curve)
+                    );
                 }
 
                 if (MatchesOid(ECCurve.NamedCurves.nistP256))
@@ -90,13 +112,17 @@ namespace System.Formats.Cbor.Tests
 
                 throw new ArgumentException("Unrecognized named curve", curve.Oid.Value);
 
-                bool MatchesOid(ECCurve namedCurve) => curve.Oid.Value == namedCurve.Oid.Value
+                bool MatchesOid(ECCurve namedCurve) =>
+                    curve.Oid.Value == namedCurve.Oid.Value
 #if NETFRAMEWORK
                     // If this check fails, resolve the OID Value yourself.
                     // See https://github.com/dotnet/runtime/issues/62813#issuecomment-994114540
-                    || (curve.Oid.Value is null && curve.Oid.FriendlyName == namedCurve.Oid.FriendlyName)
+                    || (
+                        curve.Oid.Value is null
+                        && curve.Oid.FriendlyName == namedCurve.Oid.FriendlyName
+                    )
 #endif
-                    ;
+                ;
             }
 
             static CoseKeyAlgorithm MapHashAlgorithmNameToCoseKeyAlg(HashAlgorithmName name)
@@ -116,7 +142,10 @@ namespace System.Formats.Cbor.Tests
                     return CoseKeyAlgorithm.ES512;
                 }
 
-                throw new ArgumentException("Unrecognized hash algorithm name.", nameof(HashAlgorithmName));
+                throw new ArgumentException(
+                    "Unrecognized hash algorithm name.",
+                    nameof(HashAlgorithmName)
+                );
 
                 bool MatchesName(HashAlgorithmName candidate) => name.Name == candidate.Name;
             }
@@ -127,14 +156,16 @@ namespace System.Formats.Cbor.Tests
             }
         }
 
-        private static (ECParameters, HashAlgorithmName?) ReadECParametersAsCosePublicKey(CborReader reader)
+        private static (ECParameters, HashAlgorithmName?) ReadECParametersAsCosePublicKey(
+            CborReader reader
+        )
         {
             Debug.Assert(reader.ConformanceMode == CborConformanceMode.Ctap2Canonical);
 
             // CTAP2 conformance mode requires that fields are sorted by key encoding.
             // We take advantage of this by reading keys in that order.
             // NB1. COSE labels are not sorted according to canonical integer ordering,
-            //      negative labels must always follow positive labels. 
+            //      negative labels must always follow positive labels.
             // NB2. Any unrecognized keys will result in the reader failing.
             // NB3. in order to support optional fields, we need to store the latest read label.
             CoseKeyLabel? latestReadLabel = null;
@@ -204,7 +235,13 @@ namespace System.Formats.Cbor.Tests
                 return (kty, crv) switch
                 {
                     (CoseKeyType.EC2, CoseCrvId.P256 or CoseCrvId.P384 or CoseCrvId.P521) => true,
-                    (CoseKeyType.OKP, CoseCrvId.X255519 or CoseCrvId.X448 or CoseCrvId.Ed25519 or CoseCrvId.Ed448) => true,
+                    (
+                        CoseKeyType.OKP,
+                        CoseCrvId.X255519
+                            or CoseCrvId.X448
+                            or CoseCrvId.Ed25519
+                            or CoseCrvId.Ed448
+                    ) => true,
                     _ => false,
                 };
                 ;
@@ -217,10 +254,8 @@ namespace System.Formats.Cbor.Tests
                     CoseCrvId.P256 => ECCurve.NamedCurves.nistP256,
                     CoseCrvId.P384 => ECCurve.NamedCurves.nistP384,
                     CoseCrvId.P521 => ECCurve.NamedCurves.nistP521,
-                    CoseCrvId.X255519 or
-                    CoseCrvId.X448 or
-                    CoseCrvId.Ed25519 or
-                    CoseCrvId.Ed448 => throw new NotImplementedException("OKP type curves not implemented."),
+                    CoseCrvId.X255519 or CoseCrvId.X448 or CoseCrvId.Ed25519 or CoseCrvId.Ed448 =>
+                        throw new NotImplementedException("OKP type curves not implemented."),
                     _ => throw new CborContentException("Unrecognized COSE crv value."),
                 };
             }

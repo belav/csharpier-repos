@@ -1,10 +1,12 @@
 <Type Name="LdapAddRequest" FullName="Novell.Directory.Ldap.LdapAddRequest">
-  <TypeSignature Language="C#" Value="public class LdapAddRequest : Novell.Directory.Ldap.LdapMessage" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapAddRequest : Novell.Directory.Ldap.LdapMessage"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +49,10 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapAddRequest(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapControl[] cont)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapAddRequest(Novell.Directory.Ldap.LdapEntry entry, Novell.Directory.Ldap.LdapControl[] cont)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="entry" Type="Novell.Directory.Ldap.LdapEntry" />
@@ -61,7 +66,10 @@
       </Docs>
     </Member>
     <Member MemberName="Entry">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.LdapEntry Entry { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.LdapEntry Entry { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.LdapEntry</ReturnType>

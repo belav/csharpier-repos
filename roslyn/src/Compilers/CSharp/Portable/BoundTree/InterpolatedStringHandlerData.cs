@@ -13,14 +13,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly TypeSymbol BuilderType;
         public readonly BoundExpression Construction;
         public readonly bool UsesBoolReturns;
+
         /// <summary>
         /// The placeholders that are used for <see cref="Construction"/>.
         /// </summary>
         public readonly ImmutableArray<BoundInterpolatedStringArgumentPlaceholder> ArgumentPlaceholders;
 
-        public readonly ImmutableArray<ImmutableArray<(bool IsLiteral, bool HasAlignment, bool HasFormat)>> PositionInfo;
+        public readonly ImmutableArray<
+            ImmutableArray<(bool IsLiteral, bool HasAlignment, bool HasFormat)>
+        > PositionInfo;
 
-        public bool HasTrailingHandlerValidityParameter => ArgumentPlaceholders.Length > 0 && ArgumentPlaceholders[^1].ArgumentIndex == BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter;
+        public bool HasTrailingHandlerValidityParameter =>
+            ArgumentPlaceholders.Length > 0
+            && ArgumentPlaceholders[^1].ArgumentIndex
+                == BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter;
 
         public readonly BoundInterpolatedStringHandlerPlaceholder ReceiverPlaceholder;
 
@@ -31,13 +37,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression construction,
             bool usesBoolReturns,
             ImmutableArray<BoundInterpolatedStringArgumentPlaceholder> placeholders,
-            ImmutableArray<ImmutableArray<(bool IsLiteral, bool HasAlignment, bool HasFormat)>> positionInfo,
-            BoundInterpolatedStringHandlerPlaceholder receiverPlaceholder)
+            ImmutableArray<
+                ImmutableArray<(bool IsLiteral, bool HasAlignment, bool HasFormat)>
+            > positionInfo,
+            BoundInterpolatedStringHandlerPlaceholder receiverPlaceholder
+        )
         {
-            Debug.Assert(construction is BoundObjectCreationExpression or BoundDynamicObjectCreationExpression or BoundBadExpression);
+            Debug.Assert(
+                construction
+                    is BoundObjectCreationExpression
+                        or BoundDynamicObjectCreationExpression
+                        or BoundBadExpression
+            );
             Debug.Assert(!placeholders.IsDefault);
             // Only the last placeholder may be the out parameter.
-            Debug.Assert(placeholders.IsEmpty || placeholders.AsSpan()[..^1].All(item => item.ArgumentIndex != BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter));
+            Debug.Assert(
+                placeholders.IsEmpty
+                    || placeholders
+                        .AsSpan()[..^1]
+                        .All(item =>
+                            item.ArgumentIndex
+                            != BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter
+                        )
+            );
             Debug.Assert(!positionInfo.IsDefault);
             BuilderType = builderType;
             Construction = construction;
@@ -51,7 +73,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Simple helper method to get the object creation expression for this data. This should only be used in
         /// scenarios where the data in <see cref="Construction"/> is known to be valid, or it will throw.
         /// </summary>
-        public readonly BoundObjectCreationExpression GetValidConstructor()
-            => (BoundObjectCreationExpression)Construction;
+        public readonly BoundObjectCreationExpression GetValidConstructor() =>
+            (BoundObjectCreationExpression)Construction;
     }
 }

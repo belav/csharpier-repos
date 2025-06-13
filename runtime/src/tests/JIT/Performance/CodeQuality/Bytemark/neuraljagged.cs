@@ -78,19 +78,19 @@ public class NeuralJagged : NNetStruct
     /*
     ** DEFINES
     */
-    public static int T = 1;            /* TRUE */
-    public static int F = 0;            /* FALSE */
+    public static int T = 1; /* TRUE */
+    public static int F = 0; /* FALSE */
     public static int ERR = -1;
-    public static int MAXPATS = 10;     /* max number of patterns in data file */
-    public static int IN_X_SIZE = 5;    /* number of neurodes/row of input layer */
-    public static int IN_Y_SIZE = 7;    /* number of neurodes/col of input layer */
-    public static int IN_SIZE = 35;     /* equals IN_X_SIZE*IN_Y_SIZE */
-    public static int MID_SIZE = 8;     /* number of neurodes in middle layer */
-    public static int OUT_SIZE = 8;     /* number of neurodes in output layer */
-    public static double MARGIN = 0.1;  /* how near to 1,0 do we have to come to stop? */
-    public static double BETA = 0.09;   /* beta learning constant */
-    public static double ALPHA = 0.09;  /* momentum term constant */
-    public static double STOP = 0.1;    /* when worst_error less than STOP, training is done */
+    public static int MAXPATS = 10; /* max number of patterns in data file */
+    public static int IN_X_SIZE = 5; /* number of neurodes/row of input layer */
+    public static int IN_Y_SIZE = 7; /* number of neurodes/col of input layer */
+    public static int IN_SIZE = 35; /* equals IN_X_SIZE*IN_Y_SIZE */
+    public static int MID_SIZE = 8; /* number of neurodes in middle layer */
+    public static int OUT_SIZE = 8; /* number of neurodes in output layer */
+    public static double MARGIN = 0.1; /* how near to 1,0 do we have to come to stop? */
+    public static double BETA = 0.09; /* beta learning constant */
+    public static double ALPHA = 0.09; /* momentum term constant */
+    public static double STOP = 0.1; /* when worst_error less than STOP, training is done */
 
     /*
     **  MAXNNETLOOPS
@@ -101,7 +101,6 @@ public class NeuralJagged : NNetStruct
     ** has sufficient horsepower.
     */
     public static int MAXNNETLOOPS = 50000;
-
 
     /*
     ** GLOBALS
@@ -125,17 +124,16 @@ public class NeuralJagged : NNetStruct
     public static double worst_error = 0.0; /* worst error each pass through the data */
     public static double average_error = 0.0; /* average error each pass through the data */
     public static double[] avg_out_error = new double[MAXPATS];
-    public static int iteration_count = 0;    /* number of passes thru network so far */
-    public static int numpats = 0;            /* number of patterns in data file */
-    public static int numpasses = 0;          /* number of training passes through data file */
-    public static int learned = 0;            /* flag--if TRUE, network has learned all patterns */
+    public static int iteration_count = 0; /* number of passes thru network so far */
+    public static int numpats = 0; /* number of patterns in data file */
+    public static int numpasses = 0; /* number of training passes through data file */
+    public static int learned = 0; /* flag--if TRUE, network has learned all patterns */
 
     /*
     ** The Neural Net test requires an input data file.
     ** The name is specified here.
     */
     public static string inpath = "NNET.DAT";
-
 
     public static void Init()
     {
@@ -159,8 +157,7 @@ public class NeuralJagged : NNetStruct
         }
     }
 
-    public override
-    double Run()
+    public override double Run()
     {
         Init();
         return DoNNET(this);
@@ -207,13 +204,24 @@ public class NeuralJagged : NNetStruct
     **
     ** Returns -1 if any file error occurred, otherwise 0.
     **/
-    private
-    void read_data_file()
+    private void read_data_file()
     {
-        int xinsize = 0, yinsize = 0, youtsize = 0;
-        int patt = 0, element = 0, i = 0, row = 0;
+        int xinsize = 0,
+            yinsize = 0,
+            youtsize = 0;
+        int patt = 0,
+            element = 0,
+            i = 0,
+            row = 0;
         int vals_read = 0;
-        int val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, val6 = 0, val7 = 0, val8 = 0;
+        int val1 = 0,
+            val2 = 0,
+            val3 = 0,
+            val4 = 0,
+            val5 = 0,
+            val6 = 0,
+            val7 = 0,
+            val8 = 0;
         Object[] results = new Object[8];
         string input = NeuralData.Input;
         StringReader infile = new StringReader(input);
@@ -253,11 +261,16 @@ public class NeuralJagged : NNetStruct
                 }
                 element = row * xinsize;
 
-                in_pats[patt][element] = (double)val1; element++;
-                in_pats[patt][element] = (double)val2; element++;
-                in_pats[patt][element] = (double)val3; element++;
-                in_pats[patt][element] = (double)val4; element++;
-                in_pats[patt][element] = (double)val5; element++;
+                in_pats[patt][element] = (double)val1;
+                element++;
+                in_pats[patt][element] = (double)val2;
+                element++;
+                in_pats[patt][element] = (double)val3;
+                element++;
+                in_pats[patt][element] = (double)val4;
+                element++;
+                in_pats[patt][element] = (double)val5;
+                element++;
             }
             for (i = 0; i < IN_SIZE; i++)
             {
@@ -277,19 +290,26 @@ public class NeuralJagged : NNetStruct
             val7 = (int)results[6];
             val8 = (int)results[7];
 
-            out_pats[patt][element] = (double)val1; element++;
-            out_pats[patt][element] = (double)val2; element++;
-            out_pats[patt][element] = (double)val3; element++;
-            out_pats[patt][element] = (double)val4; element++;
-            out_pats[patt][element] = (double)val5; element++;
-            out_pats[patt][element] = (double)val6; element++;
-            out_pats[patt][element] = (double)val7; element++;
-            out_pats[patt][element] = (double)val8; element++;
+            out_pats[patt][element] = (double)val1;
+            element++;
+            out_pats[patt][element] = (double)val2;
+            element++;
+            out_pats[patt][element] = (double)val3;
+            element++;
+            out_pats[patt][element] = (double)val4;
+            element++;
+            out_pats[patt][element] = (double)val5;
+            element++;
+            out_pats[patt][element] = (double)val6;
+            element++;
+            out_pats[patt][element] = (double)val7;
+            element++;
+            out_pats[patt][element] = (double)val8;
+            element++;
         }
     }
 
-    private
-    double DoNNET(NNetStruct locnnetstruct)
+    private double DoNNET(NNetStruct locnnetstruct)
     {
         //    string errorcontext = "CPU:NNET";
         //    int systemerror = 0;
@@ -323,9 +343,7 @@ public class NeuralJagged : NNetStruct
             ** # of loops and increasing the loop count until we
             ** get a number of loops that we can use.
             */
-            for (locnnetstruct.loops = 1;
-                locnnetstruct.loops < MAXNNETLOOPS;
-                locnnetstruct.loops++)
+            for (locnnetstruct.loops = 1; locnnetstruct.loops < MAXNNETLOOPS; locnnetstruct.loops++)
             {
                 ByteMark.randnum(3);
                 if (DoNNetIteration(locnnetstruct.loops) > global.min_ticks)
@@ -341,7 +359,7 @@ public class NeuralJagged : NNetStruct
 
         do
         {
-            ByteMark.randnum(3);    /* Gotta do this for Neural Net */
+            ByteMark.randnum(3); /* Gotta do this for Neural Net */
             accumtime += DoNNetIteration(locnnetstruct.loops);
             iterations += (double)locnnetstruct.loops;
         } while (ByteMark.TicksToSecs(accumtime) < locnnetstruct.request_secs);
@@ -366,7 +384,7 @@ public class NeuralJagged : NNetStruct
     */
     public static long DoNNetIteration(long nloops)
     {
-        long elapsed;          /* Elapsed time */
+        long elapsed; /* Elapsed time */
         int patt;
 
         /*
@@ -388,8 +406,8 @@ public class NeuralJagged : NNetStruct
             {
                 for (patt = 0; patt < numpats; patt++)
                 {
-                    worst_error = 0.0;      /* reset this every pass through data */
-                    move_wt_changes();      /* move last pass's wt changes to momentum array */
+                    worst_error = 0.0; /* reset this every pass through data */
+                    move_wt_changes(); /* move last pass's wt changes to momentum array */
                     do_forward_pass(patt);
                     do_back_pass(patt);
                     iteration_count++;
@@ -413,13 +431,14 @@ public class NeuralJagged : NNetStruct
     public static void do_mid_forward(int patt)
     {
         double sum;
-        int neurode, i;
+        int neurode,
+            i;
 
         for (neurode = 0; neurode < MID_SIZE; neurode++)
         {
             sum = 0.0;
             for (i = 0; i < IN_SIZE; i++)
-            {       /* compute weighted sum of input signals */
+            { /* compute weighted sum of input signals */
                 sum += mid_wts[neurode][i] * in_pats[patt][i];
             }
             /*
@@ -442,13 +461,14 @@ public class NeuralJagged : NNetStruct
     public static void do_out_forward()
     {
         double sum;
-        int neurode, i;
+        int neurode,
+            i;
 
         for (neurode = 0; neurode < OUT_SIZE; neurode++)
         {
             sum = 0.0;
             for (i = 0; i < MID_SIZE; i++)
-            {       /*
+            { /*
                 ** compute weighted sum of input signals
                 ** from middle layer
                 */
@@ -507,8 +527,8 @@ public class NeuralJagged : NNetStruct
     **/
     public static void do_forward_pass(int patt)
     {
-        do_mid_forward(patt);   /* process forward pass, middle layer */
-        do_out_forward();       /* process forward pass, output layer */
+        do_mid_forward(patt); /* process forward pass, middle layer */
+        do_out_forward(); /* process forward pass, output layer */
         /* display_output(patt);        ** display results of forward pass */
         return;
     }
@@ -522,7 +542,9 @@ public class NeuralJagged : NNetStruct
     public static void do_out_error(int patt)
     {
         int neurode;
-        double error, tot_error, sum;
+        double error,
+            tot_error,
+            sum;
 
         tot_error = 0.0;
         sum = 0.0;
@@ -560,7 +582,8 @@ public class NeuralJagged : NNetStruct
     **/
     public static void worst_pass_error()
     {
-        double error, sum;
+        double error,
+            sum;
 
         int i;
 
@@ -568,7 +591,8 @@ public class NeuralJagged : NNetStruct
         sum = 0.0;
         for (i = 0; i < numpats; i++)
         {
-            if (tot_out_error[i] > error) error = tot_out_error[i];
+            if (tot_out_error[i] > error)
+                error = tot_out_error[i];
             sum += avg_out_error[i];
         }
         worst_error = error;
@@ -589,7 +613,8 @@ public class NeuralJagged : NNetStruct
     public static void do_mid_error()
     {
         double sum;
-        int neurode, i;
+        int neurode,
+            i;
 
         for (neurode = 0; neurode < MID_SIZE; neurode++)
         {
@@ -617,8 +642,11 @@ public class NeuralJagged : NNetStruct
     **/
     public static void adjust_out_wts()
     {
-        int weight, neurode;
-        double learn, delta, alph;
+        int weight,
+            neurode;
+        double learn,
+            delta,
+            alph;
 
         learn = BETA;
         alph = ALPHA;
@@ -649,8 +677,11 @@ public class NeuralJagged : NNetStruct
     **/
     public static void adjust_mid_wts(int patt)
     {
-        int weight, neurode;
-        double learn, alph, delta;
+        int weight,
+            neurode;
+        double learn,
+            alph,
+            delta;
 
         learn = BETA;
         alph = ALPHA;
@@ -687,7 +718,6 @@ public class NeuralJagged : NNetStruct
         return;
     }
 
-
     /**********************
     ** move_wt_changes() **
     ***********************
@@ -697,24 +727,25 @@ public class NeuralJagged : NNetStruct
     **/
     public static void move_wt_changes()
     {
-        int i, j;
+        int i,
+            j;
 
         for (i = 0; i < MID_SIZE; i++)
-            for (j = 0; j < IN_SIZE; j++)
-            {
-                mid_wt_change[i][j] = mid_wt_cum_change[i][j];
-                /*
-                ** Zero it out for next pass accumulation.
-                */
-                mid_wt_cum_change[i][j] = 0.0;
-            }
+        for (j = 0; j < IN_SIZE; j++)
+        {
+            mid_wt_change[i][j] = mid_wt_cum_change[i][j];
+            /*
+            ** Zero it out for next pass accumulation.
+            */
+            mid_wt_cum_change[i][j] = 0.0;
+        }
 
         for (i = 0; i < OUT_SIZE; i++)
-            for (j = 0; j < MID_SIZE; j++)
-            {
-                out_wt_change[i][j] = out_wt_cum_change[i][j];
-                out_wt_cum_change[i][j] = 0.0;
-            }
+        for (j = 0; j < MID_SIZE; j++)
+        {
+            out_wt_change[i][j] = out_wt_cum_change[i][j];
+            out_wt_cum_change[i][j] = 0.0;
+        }
 
         return;
     }
@@ -730,19 +761,24 @@ public class NeuralJagged : NNetStruct
     **/
     public static int check_out_error()
     {
-        int result, i, error;
+        int result,
+            i,
+            error;
 
         result = T;
         error = F;
-        worst_pass_error();     /* identify the worst error in this pass */
+        worst_pass_error(); /* identify the worst error in this pass */
 
         for (i = 0; i < numpats; i++)
         {
-            if (worst_error >= STOP) result = F;
-            if (tot_out_error[i] >= 16.0) error = T;
+            if (worst_error >= STOP)
+                result = F;
+            if (tot_out_error[i] >= 16.0)
+                error = T;
         }
 
-        if (error == T) result = ERR;
+        if (error == T)
+            result = ERR;
 
         return (result);
     }
@@ -754,7 +790,8 @@ public class NeuralJagged : NNetStruct
     **/
     public static void zero_changes()
     {
-        int i, j;
+        int i,
+            j;
 
         for (i = 0; i < MID_SIZE; i++)
         {
@@ -788,7 +825,8 @@ public class NeuralJagged : NNetStruct
     **/
     public static void randomize_wts()
     {
-        int neurode, i;
+        int neurode,
+            i;
         double value;
 
         /*
@@ -874,4 +912,3 @@ public class NeuralJagged : NNetStruct
     }
     */
 }
-

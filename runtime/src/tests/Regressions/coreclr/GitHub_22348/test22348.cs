@@ -18,7 +18,7 @@ public class Test22348
         {
             Console.WriteLine(e);
         }
-        
+
         return 100;
     }
 }

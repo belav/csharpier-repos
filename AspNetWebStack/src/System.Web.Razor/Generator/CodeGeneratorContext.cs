@@ -46,15 +46,38 @@ namespace System.Web.Razor.Generator
 
         public string CurrentBufferedStatement
         {
-            get { return _currentBuffer == null ? String.Empty : _currentBuffer.Builder.ToString(); }
+            get
+            {
+                return _currentBuffer == null ? String.Empty : _currentBuffer.Builder.ToString();
+            }
         }
 
-        public static CodeGeneratorContext Create(RazorEngineHost host, string className, string rootNamespace, string sourceFile, bool shouldGenerateLinePragmas)
+        public static CodeGeneratorContext Create(
+            RazorEngineHost host,
+            string className,
+            string rootNamespace,
+            string sourceFile,
+            bool shouldGenerateLinePragmas
+        )
         {
-            return Create(host, null, className, rootNamespace, sourceFile, shouldGenerateLinePragmas);
+            return Create(
+                host,
+                null,
+                className,
+                rootNamespace,
+                sourceFile,
+                shouldGenerateLinePragmas
+            );
         }
 
-        internal static CodeGeneratorContext Create(RazorEngineHost host, Func<CodeWriter> writerFactory, string className, string rootNamespace, string sourceFile, bool shouldGenerateLinePragmas)
+        internal static CodeGeneratorContext Create(
+            RazorEngineHost host,
+            Func<CodeWriter> writerFactory,
+            string className,
+            string rootNamespace,
+            string sourceFile,
+            bool shouldGenerateLinePragmas
+        )
         {
             CodeGeneratorContext context = new CodeGeneratorContext()
             {
@@ -63,24 +86,21 @@ namespace System.Web.Razor.Generator
                 SourceFile = shouldGenerateLinePragmas ? sourceFile : null,
                 CompileUnit = new CodeCompileUnit(),
                 Namespace = new CodeNamespace(rootNamespace),
-                GeneratedClass = new CodeTypeDeclaration(className)
-                {
-                    IsClass = true
-                },
+                GeneratedClass = new CodeTypeDeclaration(className) { IsClass = true },
                 TargetMethod = new CodeMemberMethod()
                 {
                     Name = host.GeneratedClassContext.ExecuteMethodName,
-                    Attributes = MemberAttributes.Override | MemberAttributes.Public
+                    Attributes = MemberAttributes.Override | MemberAttributes.Public,
                 },
-                CodeMappings = new Dictionary<int, GeneratedCodeMapping>()
+                CodeMappings = new Dictionary<int, GeneratedCodeMapping>(),
             };
             context.CompileUnit.Namespaces.Add(context.Namespace);
             context.Namespace.Types.Add(context.GeneratedClass);
             context.GeneratedClass.Members.Add(context.TargetMethod);
 
-            context.Namespace.Imports.AddRange(host.NamespaceImports
-                                                   .Select(s => new CodeNamespaceImport(s))
-                                                   .ToArray());
+            context.Namespace.Imports.AddRange(
+                host.NamespaceImports.Select(s => new CodeNamespaceImport(s)).ToArray()
+            );
 
             return context;
         }
@@ -92,19 +112,37 @@ namespace System.Web.Razor.Generator
                 _designTimeHelperMethod = new CodeMemberMethod()
                 {
                     Name = DesignTimeHelperMethodName,
-                    Attributes = MemberAttributes.Private
+                    Attributes = MemberAttributes.Private,
                 };
                 _designTimeHelperMethod.Statements.Add(
-                    new CodeSnippetStatement(BuildCodeString(cw => cw.WriteDisableUnusedFieldWarningPragma())));
+                    new CodeSnippetStatement(
+                        BuildCodeString(cw => cw.WriteDisableUnusedFieldWarningPragma())
+                    )
+                );
                 _designTimeHelperMethod.Statements.Add(
-                    new CodeSnippetStatement(BuildCodeString(cw => cw.WriteRestoreUnusedFieldWarningPragma())));
+                    new CodeSnippetStatement(
+                        BuildCodeString(cw => cw.WriteRestoreUnusedFieldWarningPragma())
+                    )
+                );
                 GeneratedClass.Members.Insert(0, _designTimeHelperMethod);
             }
-            _designTimeHelperMethod.Statements.Insert(_designTimeHelperMethod.Statements.Count - 1, statement);
+            _designTimeHelperMethod.Statements.Insert(
+                _designTimeHelperMethod.Statements.Count - 1,
+                statement
+            );
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2233:OperationsShouldNotOverflow", MessageId = "generatedCodeStart+1", Justification = "There is no risk of overflow in this case")]
-        public int AddCodeMapping(SourceLocation sourceLocation, int generatedCodeStart, int generatedCodeLength)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2233:OperationsShouldNotOverflow",
+            MessageId = "generatedCodeStart+1",
+            Justification = "There is no risk of overflow in this case"
+        )]
+        public int AddCodeMapping(
+            SourceLocation sourceLocation,
+            int generatedCodeStart,
+            int generatedCodeLength
+        )
         {
             if (generatedCodeStart == Int32.MaxValue)
             {
@@ -116,32 +154,53 @@ namespace System.Web.Razor.Generator
                 startLine: sourceLocation.LineIndex + 1,
                 startColumn: sourceLocation.CharacterIndex + 1,
                 startGeneratedColumn: generatedCodeStart + 1,
-                codeLength: generatedCodeLength);
+                codeLength: generatedCodeLength
+            );
 
             int id = _nextDesignTimePragmaId++;
             CodeMappings[id] = mapping;
             return id;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method requires that a Span be provided")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "This method requires that a Span be provided"
+        )]
         public CodeLinePragma GenerateLinePragma(Span target)
         {
             return GenerateLinePragma(target, 0);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method requires that a Span be provided")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "This method requires that a Span be provided"
+        )]
         public CodeLinePragma GenerateLinePragma(Span target, int generatedCodeStart)
         {
             return GenerateLinePragma(target, generatedCodeStart, target.Content.Length);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "This method requires that a Span be provided")]
-        public CodeLinePragma GenerateLinePragma(Span target, int generatedCodeStart, int codeLength)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "This method requires that a Span be provided"
+        )]
+        public CodeLinePragma GenerateLinePragma(
+            Span target,
+            int generatedCodeStart,
+            int codeLength
+        )
         {
             return GenerateLinePragma(target.Start, generatedCodeStart, codeLength);
         }
 
-        public CodeLinePragma GenerateLinePragma(SourceLocation start, int generatedCodeStart, int codeLength)
+        public CodeLinePragma GenerateLinePragma(
+            SourceLocation start,
+            int generatedCodeStart,
+            int codeLength
+        )
         {
             if (!String.IsNullOrEmpty(SourceFile))
             {
@@ -179,10 +238,17 @@ namespace System.Web.Razor.Generator
                 }
 
                 int paddingLength; // unused, in this case there is enough context in the original code to calculate the right padding length
-                                   // (padded.Length - _currentBuffer.Builder.Length)
+                // (padded.Length - _currentBuffer.Builder.Length)
 
-                string padded = CodeGeneratorPaddingHelper.Pad(Host, _currentBuffer.Builder.ToString(), sourceSpan, start, out paddingLength);
-                _currentBuffer.GeneratedCodeStart = start + (padded.Length - _currentBuffer.Builder.Length);
+                string padded = CodeGeneratorPaddingHelper.Pad(
+                    Host,
+                    _currentBuffer.Builder.ToString(),
+                    sourceSpan,
+                    start,
+                    out paddingLength
+                );
+                _currentBuffer.GeneratedCodeStart =
+                    start + (padded.Length - _currentBuffer.Builder.Length);
                 _currentBuffer.Builder.Clear();
                 _currentBuffer.Builder.Append(padded);
             }
@@ -244,11 +310,13 @@ namespace System.Web.Razor.Generator
         {
             if (!_expressionHelperVariableWriten)
             {
-                GeneratedClass.Members.Insert(0,
-                                              new CodeMemberField(typeof(object), "__o")
-                                              {
-                                                  Attributes = MemberAttributes.Private | MemberAttributes.Static
-                                              });
+                GeneratedClass.Members.Insert(
+                    0,
+                    new CodeMemberField(typeof(object), "__o")
+                    {
+                        Attributes = MemberAttributes.Private | MemberAttributes.Static,
+                    }
+                );
                 _expressionHelperVariableWriten = true;
             }
         }
@@ -263,27 +331,37 @@ namespace System.Web.Razor.Generator
             });
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We explicitly want the lower-case string here")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "We explicitly want the lower-case string here"
+        )]
         public void AddContextCall(Span contentSpan, string methodName, bool isLiteral)
         {
-            AddStatement(BuildCodeString(cw =>
-            {
-                cw.WriteStartMethodInvoke(methodName);
-                if (!String.IsNullOrEmpty(TargetWriterName))
+            AddStatement(
+                BuildCodeString(cw =>
                 {
-                    cw.WriteSnippet(TargetWriterName);
+                    cw.WriteStartMethodInvoke(methodName);
+                    if (!String.IsNullOrEmpty(TargetWriterName))
+                    {
+                        cw.WriteSnippet(TargetWriterName);
+                        cw.WriteParameterSeparator();
+                    }
+                    cw.WriteStringLiteral(Host.InstrumentedSourceFilePath);
                     cw.WriteParameterSeparator();
-                }
-                cw.WriteStringLiteral(Host.InstrumentedSourceFilePath);
-                cw.WriteParameterSeparator();
-                cw.WriteSnippet(contentSpan.Start.AbsoluteIndex.ToString(CultureInfo.InvariantCulture));
-                cw.WriteParameterSeparator();
-                cw.WriteSnippet(contentSpan.Content.Length.ToString(CultureInfo.InvariantCulture));
-                cw.WriteParameterSeparator();
-                cw.WriteSnippet(isLiteral.ToString().ToLowerInvariant());
-                cw.WriteEndMethodInvoke();
-                cw.WriteEndStatement();
-            }));
+                    cw.WriteSnippet(
+                        contentSpan.Start.AbsoluteIndex.ToString(CultureInfo.InvariantCulture)
+                    );
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(
+                        contentSpan.Content.Length.ToString(CultureInfo.InvariantCulture)
+                    );
+                    cw.WriteParameterSeparator();
+                    cw.WriteSnippet(isLiteral.ToString().ToLowerInvariant());
+                    cw.WriteEndMethodInvoke();
+                    cw.WriteEndStatement();
+                })
+            );
         }
 
         internal CodeWriter CreateCodeWriter()

@@ -26,7 +26,16 @@ namespace System.Security.AccessControl.Tests
             // case 1, only one ACE, get at index 0
             rawAcl = new RawAcl(1, 1);
             index = 0;
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, genericAce);
 
             verifierGenericAce = rawAcl[index];
@@ -34,9 +43,27 @@ namespace System.Security.AccessControl.Tests
 
             //case 2, two ACEs, get at index Count -1
             rawAcl = new RawAcl(1, 2);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, genericAce);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, genericAce);
 
             index = rawAcl.Count - 1;
@@ -45,11 +72,41 @@ namespace System.Security.AccessControl.Tests
 
             //case 3, only three ACEs, index at Count/2
             rawAcl = new RawAcl(1, 3);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, genericAce);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, genericAce);
-            rawAcl.InsertAce(2, new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)), false, null));
+            rawAcl.InsertAce(
+                2,
+                new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)
+                    ),
+                    false,
+                    null
+                )
+            );
             index = rawAcl.Count / 2;
             verifierGenericAce = rawAcl[index];
             Assert.True(genericAce == verifierGenericAce);
@@ -57,46 +114,144 @@ namespace System.Security.AccessControl.Tests
             // case 4, only one ACE, set at index 0
             rawAcl = new RawAcl(1, 1);
             index = 0;
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, genericAce);
             previousCount = rawAcl.Count;
             previousLength = rawAcl.BinaryLength - genericAce.BinaryLength;
 
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessDenied, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessDenied,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)
+                ),
+                false,
+                null
+            );
             rawAcl[index] = genericAce;
             verifierGenericAce = rawAcl[index];
-            Assert.True((genericAce == verifierGenericAce) && (previousCount == rawAcl.Count) && (previousLength + genericAce.BinaryLength == rawAcl.BinaryLength));
+            Assert.True(
+                (genericAce == verifierGenericAce)
+                    && (previousCount == rawAcl.Count)
+                    && (previousLength + genericAce.BinaryLength == rawAcl.BinaryLength)
+            );
 
             //case 5, two ACEs, set at index Count -1
             rawAcl = new RawAcl(1, 2);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, genericAce);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, genericAce);
             previousCount = rawAcl.Count;
             previousLength = rawAcl.BinaryLength - genericAce.BinaryLength;
 
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessDenied, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessDenied,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)
+                ),
+                false,
+                null
+            );
             index = rawAcl.Count - 1;
             rawAcl[index] = genericAce;
             verifierGenericAce = rawAcl[index];
-            Assert.True(((genericAce == verifierGenericAce) && (previousCount == rawAcl.Count) && (previousLength + genericAce.BinaryLength == rawAcl.BinaryLength)));
+            Assert.True(
+                (
+                    (genericAce == verifierGenericAce)
+                    && (previousCount == rawAcl.Count)
+                    && (previousLength + genericAce.BinaryLength == rawAcl.BinaryLength)
+                )
+            );
 
             //case 6, only three ACEs, index at Count/2
             rawAcl = new RawAcl(1, 3);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner1)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, genericAce);
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner2)
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(1, genericAce);
-            rawAcl.InsertAce(2, new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)), false, null));
+            rawAcl.InsertAce(
+                2,
+                new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner3)
+                    ),
+                    false,
+                    null
+                )
+            );
             previousCount = rawAcl.Count;
             previousLength = rawAcl.BinaryLength - genericAce.BinaryLength;
 
             index = rawAcl.Count / 2;
-            genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessDenied, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner4)), false, null);
+            genericAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessDenied,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(owner4)
+                ),
+                false,
+                null
+            );
             rawAcl[index] = genericAce;
             verifierGenericAce = rawAcl[index];
-            Assert.True((genericAce == verifierGenericAce) && (previousCount == rawAcl.Count) && (previousLength + genericAce.BinaryLength == rawAcl.BinaryLength));
+            Assert.True(
+                (genericAce == verifierGenericAce)
+                    && (previousCount == rawAcl.Count)
+                    && (previousLength + genericAce.BinaryLength == rawAcl.BinaryLength)
+            );
         }
 
         [Fact]
@@ -107,7 +262,6 @@ namespace System.Security.AccessControl.Tests
             GenericAce verifierGenericAce = null;
             string owner = null;
             int index = 0;
-
 
             // case 1, no ACE, get index at -1
 
@@ -134,7 +288,16 @@ namespace System.Security.AccessControl.Tests
                 rawAcl = new RawAcl(1, 1);
                 index = -1;
                 owner = "BA";
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl[index] = genericAce;
             });
             //case 4, set index at Count
@@ -144,7 +307,16 @@ namespace System.Security.AccessControl.Tests
                 rawAcl = new RawAcl(1, 1);
                 index = rawAcl.Count;
                 owner = "BA";
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl[index] = genericAce;
             });
             //case 5, set null Ace
@@ -153,7 +325,16 @@ namespace System.Security.AccessControl.Tests
             {
                 rawAcl = new RawAcl(1, 1);
                 index = 0;
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(0, genericAce);
                 genericAce = null;
                 rawAcl[index] = genericAce;
@@ -165,7 +346,16 @@ namespace System.Security.AccessControl.Tests
                 byte[] opaque = new byte[GenericAcl.MaxBinaryLength + 1 - 8 - 4];
                 rawAcl = new RawAcl(1, 1);
                 index = 0;
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(0, genericAce);
                 genericAce = new CustomAce(AceType.MaxDefinedAceType + 1, (AceFlags)223, opaque);
                 rawAcl[index] = genericAce;

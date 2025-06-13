@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
 
-    public interface IStateFormatter {
-
+    public interface IStateFormatter
+    {
         object Deserialize(string serializedState);
 
         string Serialize(object state);
