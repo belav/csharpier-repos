@@ -169,8 +169,7 @@ namespace System.Text.RegularExpressions
                 {
                     case RegexNodeKind.Atomic:
                     case RegexNodeKind.Capture:
-                    case RegexNodeKind.Loop
-                    or RegexNodeKind.Lazyloop when node.M > 0:
+                    case RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.M > 0:
                         node = node.Child(0);
                         continue;
 

@@ -34,8 +34,7 @@ namespace System.Text.Json.Serialization.Metadata
         {
             switch (resolver)
             {
-                case null
-                or EmptyJsonTypeInfoResolver:
+                case null or EmptyJsonTypeInfoResolver:
                     break;
 
                 case JsonTypeInfoResolverChain otherChain:

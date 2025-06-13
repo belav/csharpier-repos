@@ -78,8 +78,7 @@ namespace System.Text.Json.Nodes
         {
             switch (node)
             {
-                case null
-                or JsonObject:
+                case null or JsonObject:
                     return false;
                 case JsonValue value:
                     // JsonValue instances have special comparison semantics, dispatch to their implementation.

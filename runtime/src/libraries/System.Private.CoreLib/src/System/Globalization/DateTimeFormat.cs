@@ -1128,8 +1128,7 @@ namespace System
                 switch (format[0])
                 {
                     // Round trip format
-                    case 'o'
-                    or 'O':
+                    case 'o' or 'O':
                         Span<char> span = stackalloc char[FormatOMaxLength];
                         TryFormatO(dateTime, offset, span, out charsWritten);
                         Debug.Assert(charsWritten is >= FormatOMinLength and <= FormatOMaxLength);
@@ -1269,8 +1268,7 @@ namespace System
                 switch (format[0])
                 {
                     // Round trip format
-                    case 'o'
-                    or 'O':
+                    case 'o' or 'O':
                         return TryFormatO(dateTime, offset, destination, out charsWritten);
 
                     // RFC1123 format

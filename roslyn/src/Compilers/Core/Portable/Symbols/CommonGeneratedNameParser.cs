@@ -40,8 +40,7 @@ internal static partial class CommonGeneratedNames
             var c = (i >= 0) ? metadataNameSuffix[i] : '\0';
             switch (c)
             {
-                case >= '0'
-                and <= '9':
+                case >= '0' and <= '9':
                     value += (c - '0') * power;
                     if (value > int.MaxValue)
                     {

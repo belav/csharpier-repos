@@ -183,9 +183,7 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 switch (filePath[i])
                 {
-                    case ':'
-                    or '\\'
-                    or '/':
+                    case ':' or '\\' or '/':
                     case char ch when !char.IsLetterOrDigit(ch):
                         builder.Append('_');
                         break;
