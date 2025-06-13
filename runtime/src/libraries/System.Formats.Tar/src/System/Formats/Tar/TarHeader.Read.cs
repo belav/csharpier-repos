@@ -227,12 +227,10 @@ namespace System.Formats.Tar
 
             switch (_typeFlag)
             {
-                case TarEntryType.ExtendedAttributes
-                or TarEntryType.GlobalExtendedAttributes:
+                case TarEntryType.ExtendedAttributes or TarEntryType.GlobalExtendedAttributes:
                     ReadExtendedAttributesBlock(archiveStream);
                     break;
-                case TarEntryType.LongLink
-                or TarEntryType.LongPath:
+                case TarEntryType.LongLink or TarEntryType.LongPath:
                     ReadGnuLongPathDataBlock(archiveStream);
                     break;
                 case TarEntryType.BlockDevice:
@@ -297,13 +295,11 @@ namespace System.Formats.Tar
 
             switch (_typeFlag)
             {
-                case TarEntryType.ExtendedAttributes
-                or TarEntryType.GlobalExtendedAttributes:
+                case TarEntryType.ExtendedAttributes or TarEntryType.GlobalExtendedAttributes:
                     await ReadExtendedAttributesBlockAsync(archiveStream, cancellationToken)
                         .ConfigureAwait(false);
                     break;
-                case TarEntryType.LongLink
-                or TarEntryType.LongPath:
+                case TarEntryType.LongLink or TarEntryType.LongPath:
                     await ReadGnuLongPathDataBlockAsync(archiveStream, cancellationToken)
                         .ConfigureAwait(false);
                     break;
@@ -570,8 +566,7 @@ namespace System.Formats.Tar
             Span<byte> version = buffer.Slice(FieldLocations.Version, FieldLengths.Version);
             switch (_format)
             {
-                case TarEntryFormat.Ustar
-                or TarEntryFormat.Pax:
+                case TarEntryFormat.Ustar or TarEntryFormat.Pax:
                     // The POSIX formats have a 6 byte Magic "ustar\0", followed by a 2 byte Version "00"
                     if (!version.SequenceEqual(UstarVersionBytes))
                     {

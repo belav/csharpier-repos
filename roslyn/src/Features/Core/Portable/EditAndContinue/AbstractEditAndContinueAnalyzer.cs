@@ -5281,8 +5281,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             switch (symbol)
             {
-                case IMethodSymbol
-                or IFieldSymbol:
+                case IMethodSymbol or IFieldSymbol:
                     AddUpdate(symbol);
                     break;
 
@@ -5333,8 +5332,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         {
             switch (oldSymbol)
             {
-                case IMethodSymbol
-                or IFieldSymbol:
+                case IMethodSymbol or IFieldSymbol:
                     AddDelete(oldSymbol);
                     break;
 

@@ -320,8 +320,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             switch (typeSymbol.SpecialType)
             {
-                case SpecialType.System_Array
-                or SpecialType.System_ValueType:
+                case SpecialType.System_Array or SpecialType.System_ValueType:
                     return true;
 
                 case SpecialType.System_Delegate:

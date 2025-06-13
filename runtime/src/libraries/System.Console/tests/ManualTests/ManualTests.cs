@@ -457,8 +457,7 @@ namespace System
 
             switch (info.Key)
             {
-                case ConsoleKey.Y
-                or ConsoleKey.N:
+                case ConsoleKey.Y or ConsoleKey.N:
                     Assert.Equal(ConsoleKey.Y, info.Key);
                     break;
 

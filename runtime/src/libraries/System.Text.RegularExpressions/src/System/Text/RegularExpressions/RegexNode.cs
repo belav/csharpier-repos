@@ -158,9 +158,7 @@ namespace System.Text.RegularExpressions
         {
             switch (Kind)
             {
-                case RegexNodeKind.Oneloop
-                or RegexNodeKind.Notoneloop
-                or RegexNodeKind.Setloop:
+                case RegexNodeKind.Oneloop or RegexNodeKind.Notoneloop or RegexNodeKind.Setloop:
                     // For loops, we simply change the Type to the atomic variant.
                     // Atomic greedy loops should consume as many values as they can.
                     Kind += RegexNodeKind.Oneloopatomic - RegexNodeKind.Oneloop;
@@ -487,9 +485,7 @@ namespace System.Text.RegularExpressions
                     case RegexNodeKind.Oneloop
                     or RegexNodeKind.Notoneloop
                     or RegexNodeKind.Setloop:
-                    case RegexNodeKind.Onelazy
-                    or RegexNodeKind.Notonelazy
-                    or RegexNodeKind.Setlazy:
+                    case RegexNodeKind.Onelazy or RegexNodeKind.Notonelazy or RegexNodeKind.Setlazy:
                         node.MakeLoopAtomic();
                         break;
 
@@ -1214,9 +1210,7 @@ namespace System.Text.RegularExpressions
                     RegexNode required = children[startingIndex].Child(0);
                     switch (required.Kind)
                     {
-                        case RegexNodeKind.One
-                        or RegexNodeKind.Notone
-                        or RegexNodeKind.Set:
+                        case RegexNodeKind.One or RegexNodeKind.Notone or RegexNodeKind.Set:
                         case RegexNodeKind.Oneloopatomic
                         or RegexNodeKind.Notoneloopatomic
                         or RegexNodeKind.Setloopatomic:
@@ -1569,8 +1563,7 @@ namespace System.Text.RegularExpressions
                         case RegexNodeKind.Concatenate:
                         case RegexNodeKind.Capture:
                         case RegexNodeKind.Group:
-                        case RegexNodeKind.Loop
-                        or RegexNodeKind.Lazyloop when node.M > 0:
+                        case RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.M > 0:
                         case RegexNodeKind.PositiveLookaround:
                             node = node.Child(0);
                             continue;
@@ -2416,8 +2409,7 @@ namespace System.Text.RegularExpressions
                         case RegexNodeKind.Atomic:
                         case RegexNodeKind.PositiveLookaround
                             when (subsequent.Options & RegexOptions.RightToLeft) == 0: // only lookaheads, not lookbehinds (represented as RTL PositiveLookaround nodes)
-                        case RegexNodeKind.Loop
-                        or RegexNodeKind.Lazyloop when subsequent.M > 0:
+                        case RegexNodeKind.Loop or RegexNodeKind.Lazyloop when subsequent.M > 0:
                             subsequent = subsequent.Child(0);
                             continue;
                     }
@@ -2487,8 +2479,7 @@ namespace System.Text.RegularExpressions
                                     && !RegexCharClass.CharInClass(node.Ch, subsequent.Str!):
                             case RegexNodeKind.Multi when node.Ch != subsequent.Str![0]:
                             case RegexNodeKind.End:
-                            case RegexNodeKind.EndZ
-                            or RegexNodeKind.Eol when node.Ch != '\n':
+                            case RegexNodeKind.EndZ or RegexNodeKind.Eol when node.Ch != '\n':
                                 return true;
 
                             case RegexNodeKind.Onelazy

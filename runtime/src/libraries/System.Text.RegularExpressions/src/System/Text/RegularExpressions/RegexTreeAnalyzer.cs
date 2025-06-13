@@ -57,8 +57,7 @@ namespace System.Text.RegularExpressions
                     switch (node.Kind)
                     {
                         case RegexNodeKind.Alternate:
-                        case RegexNodeKind.Loop
-                        or RegexNodeKind.Lazyloop when node.M != node.N:
+                        case RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.M != node.N:
                         case RegexNodeKind.Oneloop
                         or RegexNodeKind.Notoneloop
                         or RegexNodeKind.Setloop

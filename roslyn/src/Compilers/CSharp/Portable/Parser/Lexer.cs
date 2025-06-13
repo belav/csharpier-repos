@@ -772,8 +772,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // All the 'common' identifier characters are represented directly in these switch cases for optimal
                 // perf.  Calling IsIdentifierChar() functions is relatively expensive.
                 case '_':
-                case (>= 'a' and <= 'z')
-                or (>= 'A' and <= 'Z'):
+                case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
                     this.ScanIdentifierOrKeyword(ref info);
                     break;
 
@@ -1596,8 +1595,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         );
                         info.IsVerbatim = false;
                         return true;
-                    case >= '0'
-                    and <= '9':
+                    case >= '0' and <= '9':
                         if (currentOffset == startOffset)
                         {
                             return false;
@@ -1606,8 +1604,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         {
                             goto case '_';
                         }
-                    case (>= 'a' and <= 'z')
-                    or (>= 'A' and <= 'Z'):
+                    case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
                     case '_':
                         // All of these characters are valid inside an identifier.
                         // consume it and keep processing.
@@ -1673,8 +1670,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                         goto LoopExit;
                     case '_':
-                    case (>= 'a' and <= 'z')
-                    or (>= 'A' and <= 'Z'):
+                    case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
                     {
                         // Again, these are the 'common' identifier characters...
                         break;
@@ -1702,8 +1698,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         // Again, these are the 'common' identifier characters...
                         break;
                     }
-                    case >= '1'
-                    and <= '9':
+                    case >= '1' and <= '9':
                     {
                         if (_identLen == 0)
                         {
@@ -1947,8 +1942,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         goto default;
 
                     case '_':
-                    case (>= 'a' and <= 'z')
-                    or (>= 'A' and <= 'Z'):
+                    case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
                     {
                         // Again, these are the 'common' identifier characters...
                         break;

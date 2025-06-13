@@ -131,8 +131,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             IEnumerable<Document>? documentsToFix = null;
             switch (this.Scope)
             {
-                case FixAllScope.ContainingType
-                or FixAllScope.ContainingMember:
+                case FixAllScope.ContainingType or FixAllScope.ContainingMember:
                     Contract.ThrowIfNull(Document);
                     var spanMappingService =
                         Document.GetLanguageService<IFixAllSpanMappingService>();
