@@ -45,7 +45,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (_lazyTypeConversions is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyTypeConversions, new TypeConversions(this), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyTypeConversions,
+                        new TypeConversions(this),
+                        null
+                    );
                 }
 
                 return _lazyTypeConversions;
@@ -68,14 +72,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (_lazySpecialTypes == null)
             {
-                Interlocked.CompareExchange(ref _lazySpecialTypes,
-                    new NamedTypeSymbol[(int)SpecialType.Count + 1], null);
+                Interlocked.CompareExchange(
+                    ref _lazySpecialTypes,
+                    new NamedTypeSymbol[(int)SpecialType.Count + 1],
+                    null
+                );
             }
 
             if ((object)_lazySpecialTypes[(int)type] == null)
             {
-                MetadataTypeName emittedFullName = MetadataTypeName.FromFullName(SpecialTypes.GetMetadataName(type), useCLSCompliantNameArityEncoding: true);
-                NamedTypeSymbol corType = new MissingMetadataTypeSymbol.TopLevel(this.moduleSymbol, ref emittedFullName, type);
+                MetadataTypeName emittedFullName = MetadataTypeName.FromFullName(
+                    SpecialTypes.GetMetadataName(type),
+                    useCLSCompliantNameArityEncoding: true
+                );
+                NamedTypeSymbol corType = new MissingMetadataTypeSymbol.TopLevel(
+                    this.moduleSymbol,
+                    ref emittedFullName,
+                    type
+                );
                 Interlocked.CompareExchange(ref _lazySpecialTypes[(int)type], corType, null);
             }
 

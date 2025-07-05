@@ -14,9 +14,13 @@ namespace System.Net.Http.Json.Functional.Tests
 {
     public abstract partial class JsonContentTestsBase
     {
-        protected abstract Task<HttpResponseMessage> SendAsync(HttpClient client, HttpRequestMessage request);
+        protected abstract Task<HttpResponseMessage> SendAsync(
+            HttpClient client,
+            HttpRequestMessage request
+        );
 
         private class Foo { }
+
         private class Bar { }
 
         [JsonSerializable(typeof(Foo))]
@@ -94,7 +98,7 @@ namespace System.Net.Http.Json.Functional.Tests
             content = JsonContent.Create(foo, FooContext.Default.Foo, mediaType: mediaType);
             Assert.Same(mediaType, content.Headers.ContentType);
 
-            content = JsonContent.Create((object) foo, FooContext.Default.Foo, mediaType: mediaType);
+            content = JsonContent.Create((object)foo, FooContext.Default.Foo, mediaType: mediaType);
             Assert.Same(mediaType, content.Headers.ContentType);
         }
 
@@ -114,10 +118,15 @@ namespace System.Net.Http.Json.Functional.Tests
                         await SendAsync(client, request);
                     }
                 },
-                async server => {
+                async server =>
+                {
                     HttpRequestData req = await server.HandleRequestAsync();
-                    Assert.Equal("application/json; charset=\"utf-8\"", req.GetSingleHeaderValue("Content-Type"));
-                });
+                    Assert.Equal(
+                        "application/json; charset=\"utf-8\"",
+                        req.GetSingleHeaderValue("Content-Type")
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -128,7 +137,10 @@ namespace System.Net.Http.Json.Functional.Tests
 
             jsonContent1.Headers.ContentType.CharSet = "foo-bar";
 
-            Assert.NotEqual(jsonContent1.Headers.ContentType.CharSet, jsonContent2.Headers.ContentType.CharSet);
+            Assert.NotEqual(
+                jsonContent1.Headers.ContentType.CharSet,
+                jsonContent2.Headers.ContentType.CharSet
+            );
             Assert.NotSame(jsonContent1.Headers.ContentType, jsonContent2.Headers.ContentType);
         }
 
@@ -141,15 +153,22 @@ namespace System.Net.Http.Json.Functional.Tests
                     using (HttpClient client = new HttpClient(handler))
                     {
                         var request = new HttpRequestMessage(HttpMethod.Post, uri);
-                        MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse("foo/bar; charset=utf-8");
+                        MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse(
+                            "foo/bar; charset=utf-8"
+                        );
                         request.Content = JsonContent.Create(Person.Create(), mediaType: mediaType);
                         await SendAsync(client, request);
                     }
                 },
-                async server => {
+                async server =>
+                {
                     HttpRequestData req = await server.HandleRequestAsync();
-                    Assert.Equal("foo/bar; charset=utf-8", req.GetSingleHeaderValue("Content-Type"));
-                });
+                    Assert.Equal(
+                        "foo/bar; charset=utf-8",
+                        req.GetSingleHeaderValue("Content-Type")
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -176,8 +195,11 @@ namespace System.Net.Http.Json.Functional.Tests
         }
 
         [Fact]
-        public void JsonContentInputTypeIsNull()
-            => AssertExtensions.Throws<ArgumentNullException>("inputType", () => JsonContent.Create(null, inputType: null, mediaType: null));
+        public void JsonContentInputTypeIsNull() =>
+            AssertExtensions.Throws<ArgumentNullException>(
+                "inputType",
+                () => JsonContent.Create(null, inputType: null, mediaType: null)
+            );
 
         [Fact]
         public void JsonContentThrowsOnIncompatibleTypeAsync()
@@ -189,14 +211,18 @@ namespace System.Net.Http.Json.Functional.Tests
                 string strTypeOfBar = typeOfBar.ToString();
 
                 // Validate for reflection
-                Exception ex = Assert.Throws<ArgumentException>(() => JsonContent.Create(foo, typeOfBar));
+                Exception ex = Assert.Throws<ArgumentException>(() =>
+                    JsonContent.Create(foo, typeOfBar)
+                );
                 Assert.Contains(strTypeOfBar, ex.Message);
 
                 string afterInputTypeMessage = ex.Message.Split(strTypeOfBar.ToCharArray())[1];
                 Assert.Contains(afterInputTypeMessage, ex.Message);
 
                 // Validate for weakly-typed JsonTypeInfo
-                ex = Assert.Throws<ArgumentException>(() => JsonContent.Create((object) foo, FooContext.Default.Bar));
+                ex = Assert.Throws<ArgumentException>(() =>
+                    JsonContent.Create((object)foo, FooContext.Default.Bar)
+                );
                 Assert.Contains(strTypeOfBar, ex.Message);
 
                 afterInputTypeMessage = ex.Message.Split(strTypeOfBar.ToCharArray())[1];
@@ -207,8 +233,15 @@ namespace System.Net.Http.Json.Functional.Tests
         [Fact]
         public void JsonContentTypeInfoIsNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("jsonTypeInfo", () => JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo) null, mediaType: null));
-            AssertExtensions.Throws<ArgumentNullException>("jsonTypeInfo", () => JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo<Foo>) null, mediaType: null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "jsonTypeInfo",
+                () => JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo)null, mediaType: null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "jsonTypeInfo",
+                () =>
+                    JsonContent.Create(null, jsonTypeInfo: (JsonTypeInfo<Foo>)null, mediaType: null)
+            );
         }
 
         [Fact]
@@ -220,18 +253,31 @@ namespace System.Net.Http.Json.Functional.Tests
                     using (HttpClient client = new HttpClient(handler))
                     {
                         var request = new HttpRequestMessage(HttpMethod.Post, uri);
-                        MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse("application/json; charset=utf-16");
+                        MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse(
+                            "application/json; charset=utf-16"
+                        );
                         // Pass new options to avoid using the Default Web Options that use camelCase.
-                        request.Content = JsonContent.Create(Person.Create(), mediaType: mediaType, options: new JsonSerializerOptions());
+                        request.Content = JsonContent.Create(
+                            Person.Create(),
+                            mediaType: mediaType,
+                            options: new JsonSerializerOptions()
+                        );
                         await SendAsync(client, request);
                     }
                 },
-                async server => {
+                async server =>
+                {
                     HttpRequestData req = await server.HandleRequestAsync();
-                    Assert.Equal("application/json; charset=utf-16", req.GetSingleHeaderValue("Content-Type"));
-                    Person per = JsonSerializer.Deserialize<Person>(Encoding.Unicode.GetString(req.Body));
+                    Assert.Equal(
+                        "application/json; charset=utf-16",
+                        req.GetSingleHeaderValue("Content-Type")
+                    );
+                    Person per = JsonSerializer.Deserialize<Person>(
+                        Encoding.Unicode.GetString(req.Body)
+                    );
                     per.Validate();
-                });
+                }
+            );
         }
 
         [Fact]
@@ -249,7 +295,8 @@ namespace System.Net.Http.Json.Functional.Tests
                         await SendAsync(client, request);
                     }
                 },
-                server => server.HandleRequestAsync());
+                server => server.HandleRequestAsync()
+            );
         }
 
         [Fact]
@@ -261,23 +308,33 @@ namespace System.Net.Http.Json.Functional.Tests
                     using (HttpClient client = new HttpClient(handler))
                     {
                         var request = new HttpRequestMessage(HttpMethod.Post, uri);
-                        MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse("application/json; charset=utf-16");
-                        JsonContent content = JsonContent.Create(Person.Create(), mediaType: mediaType);
+                        MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse(
+                            "application/json; charset=utf-16"
+                        );
+                        JsonContent content = JsonContent.Create(
+                            Person.Create(),
+                            mediaType: mediaType
+                        );
                         content.Headers.ContentType = null;
 
                         request.Content = content;
                         await SendAsync(client, request);
                     }
                 },
-                async server => {
+                async server =>
+                {
                     HttpRequestData req = await server.HandleRequestAsync();
                     Assert.Equal(0, req.GetHeaderValueCount("Content-Type"));
-                });
+                }
+            );
         }
     }
 
     public class JsonContentTests_Async : JsonContentTestsBase
     {
-        protected override Task<HttpResponseMessage> SendAsync(HttpClient client, HttpRequestMessage request) => client.SendAsync(request);
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpClient client,
+            HttpRequestMessage request
+        ) => client.SendAsync(request);
     }
 }

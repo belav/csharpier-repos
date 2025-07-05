@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.Routing;
 
 internal sealed partial class EndpointRoutingMiddleware
 {
-    private const string DiagnosticsEndpointMatchedKey = "Microsoft.AspNetCore.Routing.EndpointMatched";
+    private const string DiagnosticsEndpointMatchedKey =
+        "Microsoft.AspNetCore.Routing.EndpointMatched";
 
     private readonly MatcherFactory _matcherFactory;
     private readonly ILogger _logger;
@@ -39,13 +40,15 @@ internal sealed partial class EndpointRoutingMiddleware
         DiagnosticListener diagnosticListener,
         IOptions<RouteOptions> routeOptions,
         RoutingMetrics metrics,
-        RequestDelegate next)
+        RequestDelegate next
+    )
     {
         ArgumentNullException.ThrowIfNull(endpointRouteBuilder);
 
         _matcherFactory = matcherFactory ?? throw new ArgumentNullException(nameof(matcherFactory));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _diagnosticListener = diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
+        _diagnosticListener =
+            diagnosticListener ?? throw new ArgumentNullException(nameof(diagnosticListener));
         _metrics = metrics;
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _routeOptions = routeOptions.Value;
@@ -83,14 +86,22 @@ internal sealed partial class EndpointRoutingMiddleware
         return SetRoutingAndContinue(httpContext);
 
         // Awaited fallbacks for when the Tasks do not synchronously complete
-        static async Task AwaitMatcher(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task<Matcher> matcherTask)
+        static async Task AwaitMatcher(
+            EndpointRoutingMiddleware middleware,
+            HttpContext httpContext,
+            Task<Matcher> matcherTask
+        )
         {
             var matcher = await matcherTask;
             await matcher.MatchAsync(httpContext);
             await middleware.SetRoutingAndContinue(httpContext);
         }
 
-        static async Task AwaitMatch(EndpointRoutingMiddleware middleware, HttpContext httpContext, Task matchTask)
+        static async Task AwaitMatch(
+            EndpointRoutingMiddleware middleware,
+            HttpContext httpContext,
+            Task matchTask
+        )
         {
             await matchTask;
             await middleware.SetRoutingAndContinue(httpContext);
@@ -110,7 +121,10 @@ internal sealed partial class EndpointRoutingMiddleware
         else
         {
             // Raise an event if the route matched
-            if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey))
+            if (
+                _diagnosticListener.IsEnabled()
+                && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey)
+            )
             {
                 Write(_diagnosticListener, httpContext);
             }
@@ -128,7 +142,9 @@ internal sealed partial class EndpointRoutingMiddleware
 
                 // It shouldn't be possible for a route to be matched via the route matcher and not have a route.
                 // Just in case, add a special (missing) value as the route tag to metrics.
-                var route = endpoint.Metadata.GetMetadata<IRouteDiagnosticsMetadata>()?.Route ?? "(missing)";
+                var route =
+                    endpoint.Metadata.GetMetadata<IRouteDiagnosticsMetadata>()?.Route
+                    ?? "(missing)";
                 _metrics.MatchSuccess(route, isFallback);
             }
 
@@ -146,8 +162,11 @@ internal sealed partial class EndpointRoutingMiddleware
 
         return _next(httpContext);
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-            Justification = "The values being passed into Write are being consumed by the application already.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = "The values being passed into Write are being consumed by the application already."
+        )]
         static void Write(DiagnosticListener diagnosticListener, HttpContext httpContext)
         {
             // We're just going to send the HttpContext since it has all of the relevant information
@@ -155,7 +174,11 @@ internal sealed partial class EndpointRoutingMiddleware
         }
     }
 
-    private Task ExecuteShortCircuit(ShortCircuitMetadata shortCircuitMetadata, Endpoint endpoint, HttpContext httpContext)
+    private Task ExecuteShortCircuit(
+        ShortCircuitMetadata shortCircuitMetadata,
+        Endpoint endpoint,
+        HttpContext httpContext
+    )
     {
         // This check should be kept in sync with the one in EndpointMiddleware
         if (!_routeOptions.SuppressCheckForUnhandledSecurityMetadata)
@@ -170,9 +193,12 @@ internal sealed partial class EndpointRoutingMiddleware
                 ThrowCannotShortCircuitACorsRouteException(endpoint);
             }
 
-            if (endpoint.Metadata.GetMetadata<IAntiforgeryMetadata>() is { RequiresValidation: true } &&
-                httpContext.Request.Method is {} method &&
-                HttpExtensions.IsValidHttpMethodForForm(method))
+            if (
+                endpoint.Metadata.GetMetadata<IAntiforgeryMetadata>()
+                    is { RequiresValidation: true }
+                && httpContext.Request.Method is { } method
+                && HttpExtensions.IsValidHttpMethodForForm(method)
+            )
             {
                 ThrowCannotShortCircuitAnAntiforgeryRouteException(endpoint);
             }
@@ -222,7 +248,6 @@ internal sealed partial class EndpointRoutingMiddleware
                     Log.ExecutedEndpoint(logger, endpoint);
                 }
             }
-
         }
         else
         {
@@ -250,8 +275,14 @@ internal sealed partial class EndpointRoutingMiddleware
 
     private Task<Matcher> InitializeCoreAsync()
     {
-        var initialization = new TaskCompletionSource<Matcher>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var initializationTask = Interlocked.CompareExchange(ref _initializationTask, initialization.Task, null);
+        var initialization = new TaskCompletionSource<Matcher>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var initializationTask = Interlocked.CompareExchange(
+            ref _initializationTask,
+            initialization.Task,
+            null
+        );
         if (initializationTask != null)
         {
             // This thread lost the race, join the existing task.
@@ -283,25 +314,33 @@ internal sealed partial class EndpointRoutingMiddleware
 
     private static void ThrowCannotShortCircuitAnAuthRouteException(Endpoint endpoint)
     {
-        throw new InvalidOperationException($"Endpoint {endpoint.DisplayName} contains authorization metadata, " +
-            "but this endpoint is marked with short circuit and it will execute on Routing Middleware.");
+        throw new InvalidOperationException(
+            $"Endpoint {endpoint.DisplayName} contains authorization metadata, "
+                + "but this endpoint is marked with short circuit and it will execute on Routing Middleware."
+        );
     }
 
     private static void ThrowCannotShortCircuitACorsRouteException(Endpoint endpoint)
     {
-        throw new InvalidOperationException($"Endpoint {endpoint.DisplayName} contains CORS metadata, " +
-            "but this endpoint is marked with short circuit and it will execute on Routing Middleware.");
+        throw new InvalidOperationException(
+            $"Endpoint {endpoint.DisplayName} contains CORS metadata, "
+                + "but this endpoint is marked with short circuit and it will execute on Routing Middleware."
+        );
     }
 
     private static void ThrowCannotShortCircuitAnAntiforgeryRouteException(Endpoint endpoint)
     {
-        throw new InvalidOperationException($"Endpoint {endpoint.DisplayName} contains anti-forgery metadata, " +
-            "but this endpoint is marked with short circuit and it will execute on Routing Middleware.");
+        throw new InvalidOperationException(
+            $"Endpoint {endpoint.DisplayName} contains anti-forgery metadata, "
+                + "but this endpoint is marked with short circuit and it will execute on Routing Middleware."
+        );
     }
 
     private void SetMaxRequestBodySize(HttpContext context)
     {
-        var sizeLimitMetadata = context.GetEndpoint()?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>();
+        var sizeLimitMetadata = context
+            .GetEndpoint()
+            ?.Metadata?.GetMetadata<IRequestSizeLimitMetadata>();
         if (sizeLimitMetadata == null)
         {
             Log.RequestSizeLimitMetadataNotFound(_logger);
@@ -324,8 +363,10 @@ internal sealed partial class EndpointRoutingMiddleware
 
             if (maxRequestBodySize.HasValue)
             {
-                Log.MaxRequestBodySizeSet(_logger,
-                    maxRequestBodySize.Value.ToString(CultureInfo.InvariantCulture));
+                Log.MaxRequestBodySizeSet(
+                    _logger,
+                    maxRequestBodySize.Value.ToString(CultureInfo.InvariantCulture)
+                );
             }
             else
             {
@@ -336,46 +377,106 @@ internal sealed partial class EndpointRoutingMiddleware
 
     private static partial class Log
     {
-        public static void MatchSuccess(ILogger logger, Endpoint endpoint)
-            => MatchSuccess(logger, endpoint.DisplayName);
+        public static void MatchSuccess(ILogger logger, Endpoint endpoint) =>
+            MatchSuccess(logger, endpoint.DisplayName);
 
-        [LoggerMessage(1, LogLevel.Debug, "Request matched endpoint '{EndpointName}'", EventName = "MatchSuccess")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Request matched endpoint '{EndpointName}'",
+            EventName = "MatchSuccess"
+        )]
         private static partial void MatchSuccess(ILogger logger, string? endpointName);
 
-        [LoggerMessage(2, LogLevel.Debug, "Request did not match any endpoints", EventName = "MatchFailure")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Request did not match any endpoints",
+            EventName = "MatchFailure"
+        )]
         public static partial void MatchFailure(ILogger logger);
 
-        public static void MatchSkipped(ILogger logger, Endpoint endpoint)
-            => MatchingSkipped(logger, endpoint.DisplayName);
+        public static void MatchSkipped(ILogger logger, Endpoint endpoint) =>
+            MatchingSkipped(logger, endpoint.DisplayName);
 
-        [LoggerMessage(3, LogLevel.Debug, "Endpoint '{EndpointName}' already set, skipping route matching.", EventName = "MatchingSkipped")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Endpoint '{EndpointName}' already set, skipping route matching.",
+            EventName = "MatchingSkipped"
+        )]
         private static partial void MatchingSkipped(ILogger logger, string? endpointName);
 
-        [LoggerMessage(4, LogLevel.Information, "The endpoint '{EndpointName}' is being executed without running additional middleware.", EventName = "ExecutingEndpoint")]
+        [LoggerMessage(
+            4,
+            LogLevel.Information,
+            "The endpoint '{EndpointName}' is being executed without running additional middleware.",
+            EventName = "ExecutingEndpoint"
+        )]
         public static partial void ExecutingEndpoint(ILogger logger, Endpoint endpointName);
 
-        [LoggerMessage(5, LogLevel.Information, "The endpoint '{EndpointName}' has been executed without running additional middleware.", EventName = "ExecutedEndpoint")]
+        [LoggerMessage(
+            5,
+            LogLevel.Information,
+            "The endpoint '{EndpointName}' has been executed without running additional middleware.",
+            EventName = "ExecutedEndpoint"
+        )]
         public static partial void ExecutedEndpoint(ILogger logger, Endpoint endpointName);
 
-        [LoggerMessage(6, LogLevel.Information, "The endpoint '{EndpointName}' is being short circuited without running additional middleware or producing a response.", EventName = "ShortCircuitedEndpoint")]
+        [LoggerMessage(
+            6,
+            LogLevel.Information,
+            "The endpoint '{EndpointName}' is being short circuited without running additional middleware or producing a response.",
+            EventName = "ShortCircuitedEndpoint"
+        )]
         public static partial void ShortCircuitedEndpoint(ILogger logger, Endpoint endpointName);
 
-        [LoggerMessage(7, LogLevel.Debug, "Matched endpoint '{EndpointName}' is a fallback endpoint.", EventName = "FallbackMatch")]
+        [LoggerMessage(
+            7,
+            LogLevel.Debug,
+            "Matched endpoint '{EndpointName}' is a fallback endpoint.",
+            EventName = "FallbackMatch"
+        )]
         public static partial void FallbackMatch(ILogger logger, Endpoint endpointName);
 
-        [LoggerMessage(8, LogLevel.Trace, $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.", EventName = "RequestSizeLimitMetadataNotFound")]
+        [LoggerMessage(
+            8,
+            LogLevel.Trace,
+            $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.",
+            EventName = "RequestSizeLimitMetadataNotFound"
+        )]
         public static partial void RequestSizeLimitMetadataNotFound(ILogger logger);
 
-        [LoggerMessage(9, LogLevel.Warning, $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.", EventName = "RequestSizeFeatureNotFound")]
+        [LoggerMessage(
+            9,
+            LogLevel.Warning,
+            $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.",
+            EventName = "RequestSizeFeatureNotFound"
+        )]
         public static partial void RequestSizeFeatureNotFound(ILogger logger);
 
-        [LoggerMessage(10, LogLevel.Warning, $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.", EventName = "RequestSizeFeatureIsReadOnly")]
+        [LoggerMessage(
+            10,
+            LogLevel.Warning,
+            $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.",
+            EventName = "RequestSizeFeatureIsReadOnly"
+        )]
         public static partial void RequestSizeFeatureIsReadOnly(ILogger logger);
 
-        [LoggerMessage(11, LogLevel.Debug, "The maximum request body size has been set to {RequestSize}.", EventName = "MaxRequestBodySizeSet")]
+        [LoggerMessage(
+            11,
+            LogLevel.Debug,
+            "The maximum request body size has been set to {RequestSize}.",
+            EventName = "MaxRequestBodySizeSet"
+        )]
         public static partial void MaxRequestBodySizeSet(ILogger logger, string requestSize);
 
-        [LoggerMessage(12, LogLevel.Debug, "The maximum request body size has been disabled.", EventName = "MaxRequestBodySizeDisabled")]
+        [LoggerMessage(
+            12,
+            LogLevel.Debug,
+            "The maximum request body size has been disabled.",
+            EventName = "MaxRequestBodySizeDisabled"
+        )]
         public static partial void MaxRequestBodySizeDisabled(ILogger logger);
     }
 }

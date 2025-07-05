@@ -45,39 +45,63 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_NEG1()
         {
-            VerifyReadException<ArgumentOutOfRangeException>(new byte[defaultByteArraySize], -1, defaultByteCount);
+            VerifyReadException<ArgumentOutOfRangeException>(
+                new byte[defaultByteArraySize],
+                -1,
+                defaultByteCount
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_NEGRND()
         {
             var rndGen = new Random(-55);
-            VerifyReadException<ArgumentOutOfRangeException>(new byte[defaultByteArraySize], rndGen.Next(int.MinValue, 0), defaultByteCount);
+            VerifyReadException<ArgumentOutOfRangeException>(
+                new byte[defaultByteArraySize],
+                rndGen.Next(int.MinValue, 0),
+                defaultByteCount
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_MinInt()
         {
-            VerifyReadException<ArgumentOutOfRangeException>(new byte[defaultByteArraySize], int.MinValue, defaultByteCount);
+            VerifyReadException<ArgumentOutOfRangeException>(
+                new byte[defaultByteArraySize],
+                int.MinValue,
+                defaultByteCount
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_NEG1()
         {
-            VerifyReadException<ArgumentOutOfRangeException>(new byte[defaultByteArraySize], defaultByteOffset, -1);
+            VerifyReadException<ArgumentOutOfRangeException>(
+                new byte[defaultByteArraySize],
+                defaultByteOffset,
+                -1
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_NEGRND()
         {
             var rndGen = new Random(-55);
-            VerifyReadException<ArgumentOutOfRangeException>(new byte[defaultByteArraySize], defaultByteOffset, rndGen.Next(int.MinValue, 0));
+            VerifyReadException<ArgumentOutOfRangeException>(
+                new byte[defaultByteArraySize],
+                defaultByteOffset,
+                rndGen.Next(int.MinValue, 0)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_MinInt()
         {
-            VerifyReadException<ArgumentOutOfRangeException>(new byte[defaultByteArraySize], defaultByteOffset, int.MinValue);
+            VerifyReadException<ArgumentOutOfRangeException>(
+                new byte[defaultByteArraySize],
+                defaultByteOffset,
+                int.MinValue
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -169,8 +193,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void Callback()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var callbackHandler = new CallbackHandler();
 
@@ -181,12 +209,20 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(new byte[numRndBytesToRead], 0, numRndBytesToRead,
-                    callbackHandler.Callback, null);
+                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
+                    new byte[numRndBytesToRead],
+                    0,
+                    numRndBytesToRead,
+                    callbackHandler.Callback,
+                    null
+                );
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
 
                 Assert.Null(readAsyncResult.AsyncState);
-                Assert.False(readAsyncResult.CompletedSynchronously, "Should not have completed sync (read)");
+                Assert.False(
+                    readAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (read)"
+                );
                 Assert.False(readAsyncResult.IsCompleted, "Should not have completed yet");
 
                 com2.Write(new byte[numRndBytesToRead], 0, numRndBytesToRead);
@@ -204,10 +240,16 @@ namespace System.IO.Ports.Tests
                 }
 
                 Assert.Null(callbackReadAsyncResult.AsyncState);
-                Assert.False(callbackReadAsyncResult.CompletedSynchronously, "Should not have completed sync (cback)");
+                Assert.False(
+                    callbackReadAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (cback)"
+                );
                 Assert.True(callbackReadAsyncResult.IsCompleted, "Should have completed (cback)");
                 Assert.Null(readAsyncResult.AsyncState);
-                Assert.False(readAsyncResult.CompletedSynchronously, "Should not have completed sync (read)");
+                Assert.False(
+                    readAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (read)"
+                );
                 Assert.True(readAsyncResult.IsCompleted, "Should have completed (read)");
             }
         }
@@ -215,8 +257,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void Callback_EndReadonCallback()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var callbackHandler = new CallbackHandler(com1);
 
@@ -227,8 +273,13 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(new byte[numRndBytesToRead], 0, numRndBytesToRead,
-                    callbackHandler.Callback, null);
+                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
+                    new byte[numRndBytesToRead],
+                    0,
+                    numRndBytesToRead,
+                    callbackHandler.Callback,
+                    null
+                );
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
 
                 Assert.Null(readAsyncResult.AsyncState);
@@ -250,20 +301,29 @@ namespace System.IO.Ports.Tests
                 }
 
                 Assert.Null(callbackReadAsyncResult.AsyncState);
-                Assert.False(callbackReadAsyncResult.CompletedSynchronously, "Should not have completed sync (cback)");
+                Assert.False(
+                    callbackReadAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (cback)"
+                );
                 Assert.True(callbackReadAsyncResult.IsCompleted, "Should have completed (cback)");
                 Assert.Null(readAsyncResult.AsyncState);
-                Assert.False(readAsyncResult.CompletedSynchronously, "Should not have completed sync (read)");
+                Assert.False(
+                    readAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (read)"
+                );
                 Assert.True(readAsyncResult.IsCompleted, "Should have completed (read)");
             }
         }
 
-
         [ConditionalFact(nameof(HasNullModem))]
         public void Callback_State()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var callbackHandler = new CallbackHandler();
 
@@ -274,8 +334,13 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(new byte[numRndBytesToRead], 0, numRndBytesToRead,
-                    callbackHandler.Callback, this);
+                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
+                    new byte[numRndBytesToRead],
+                    0,
+                    numRndBytesToRead,
+                    callbackHandler.Callback,
+                    this
+                );
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
                 Assert.Equal(this, readAsyncResult.AsyncState);
                 Assert.False(readAsyncResult.CompletedSynchronously);
@@ -307,14 +372,24 @@ namespace System.IO.Ports.Tests
 
         #region Verification for Test Cases
 
-        private void VerifyReadException<T>(byte[] buffer, int offset, int count) where T : Exception
+        private void VerifyReadException<T>(byte[] buffer, int offset, int count)
+            where T : Exception
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
-                Debug.WriteLine("Verifying read method throws {0} buffer.Length={1}, offset={2}, count={3}",
-                                typeof(T), bufferLength, offset, count);
+                Debug.WriteLine(
+                    "Verifying read method throws {0} buffer.Length={1}, offset={2}, count={3}",
+                    typeof(T),
+                    bufferLength,
+                    offset,
+                    count
+                );
 
                 com.Open();
 
@@ -330,8 +405,12 @@ namespace System.IO.Ports.Tests
 
         private void VerifyRead(byte[] buffer, int offset, int count, int numberOfBytesToRead)
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var rndGen = new Random(-55);
                 var bytesToWrite = new byte[numberOfBytesToRead];
@@ -347,7 +426,13 @@ namespace System.IO.Ports.Tests
                 // Generate some random bytes in the buffer
                 rndGen.NextBytes(buffer);
 
-                Debug.WriteLine("Verifying read method buffer.Length={0}, offset={1}, count={2} with {3} random chars", buffer.Length, offset, count, bytesToWrite.Length);
+                Debug.WriteLine(
+                    "Verifying read method buffer.Length={0}, offset={1}, count={2} with {3} random chars",
+                    buffer.Length,
+                    offset,
+                    count,
+                    bytesToWrite.Length
+                );
 
                 com1.ReadTimeout = 500;
 
@@ -358,7 +443,14 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        private void VerifyBytesReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] bytesToWrite, byte[] rcvBuffer, int offset, int count)
+        private void VerifyBytesReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            byte[] rcvBuffer,
+            int offset,
+            int count
+        )
         {
             var buffer = new byte[bytesToWrite.Length];
             int totalBytesRead;
@@ -374,8 +466,13 @@ namespace System.IO.Ports.Tests
 
             do
             {
-                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(rcvBuffer, offset, count,
-                    callbackHandler.Callback, this);
+                IAsyncResult readAsyncResult = com1.BaseStream.BeginRead(
+                    rcvBuffer,
+                    offset,
+                    count,
+                    callbackHandler.Callback,
+                    this
+                );
                 readAsyncResult.AsyncWaitHandle.WaitOne();
                 callbackHandler.BeginReadAsyncResult = readAsyncResult;
 
@@ -388,11 +485,15 @@ namespace System.IO.Ports.Tests
                 Assert.False(readAsyncResult.CompletedSynchronously);
                 Assert.True(readAsyncResult.IsCompleted);
 
-                if ((bytesToRead > bytesRead && count != bytesRead) ||
-                    (bytesToRead <= bytesRead && bytesRead != bytesToRead))
+                if (
+                    (bytesToRead > bytesRead && count != bytesRead)
+                    || (bytesToRead <= bytesRead && bytesRead != bytesToRead)
+                )
                 {
                     // If we have not read all of the characters that we should have
-                    Fail("ERROR!!!: Read did not return all of the characters that were in SerialPort buffer");
+                    Fail(
+                        "ERROR!!!: Read did not return all of the characters that were in SerialPort buffer"
+                    );
                 }
 
                 if (bytesToWrite.Length < totalBytesRead + bytesRead)
@@ -408,7 +509,11 @@ namespace System.IO.Ports.Tests
 
                 if (bytesToWrite.Length - totalBytesRead != com1.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", bytesToWrite.Length - totalBytesRead, com1.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        bytesToWrite.Length - totalBytesRead,
+                        com1.BytesToRead
+                    );
                 }
 
                 oldRcvBuffer = (byte[])rcvBuffer.Clone();
@@ -426,7 +531,12 @@ namespace System.IO.Ports.Tests
             {
                 if (actualBuffer[i] != expectedBuffer[i])
                 {
-                    Fail("ERROR!!!: Expected {0} in buffer at {1} actual {2}", (int)expectedBuffer[i], i, (int)actualBuffer[i]);
+                    Fail(
+                        "ERROR!!!: Expected {0} in buffer at {1} actual {2}",
+                        (int)expectedBuffer[i],
+                        i,
+                        (int)actualBuffer[i]
+                    );
                 }
             }
 
@@ -435,7 +545,12 @@ namespace System.IO.Ports.Tests
             {
                 if (actualBuffer[i] != expectedBuffer[i])
                 {
-                    Fail("ERROR!!!: Expected {0} in buffer at {1} actual {2}", (int)expectedBuffer[i], i, (int)actualBuffer[i]);
+                    Fail(
+                        "ERROR!!!: Expected {0} in buffer at {1} actual {2}",
+                        (int)expectedBuffer[i],
+                        i,
+                        (int)actualBuffer[i]
+                    );
                 }
             }
         }
@@ -446,7 +561,8 @@ namespace System.IO.Ports.Tests
             private IAsyncResult _beginReadAsyncResult;
             private readonly SerialPort _com;
 
-            public CallbackHandler() : this(null) { }
+            public CallbackHandler()
+                : this(null) { }
 
             public CallbackHandler(SerialPort com)
             {
@@ -459,7 +575,10 @@ namespace System.IO.Ports.Tests
                 {
                     _readAsyncResult = readAsyncResult;
 
-                    Assert.True(readAsyncResult.IsCompleted, "IAsyncResult passed into callback is not completed");
+                    Assert.True(
+                        readAsyncResult.IsCompleted,
+                        "IAsyncResult passed into callback is not completed"
+                    );
 
                     while (null == _beginReadAsyncResult)
                     {
@@ -468,7 +587,9 @@ namespace System.IO.Ports.Tests
 
                     if (null != _beginReadAsyncResult && !_beginReadAsyncResult.IsCompleted)
                     {
-                        Fail("Err_7907azpu Expected IAsyncResult returned from begin read to not be completed");
+                        Fail(
+                            "Err_7907azpu Expected IAsyncResult returned from begin read to not be completed"
+                        );
                     }
 
                     if (null != _com)
@@ -476,19 +597,22 @@ namespace System.IO.Ports.Tests
                         _com.BaseStream.EndRead(_beginReadAsyncResult);
                         if (!_beginReadAsyncResult.IsCompleted)
                         {
-                            Fail("Err_6498afead Expected IAsyncResult returned from begin read to not be completed");
+                            Fail(
+                                "Err_6498afead Expected IAsyncResult returned from begin read to not be completed"
+                            );
                         }
 
                         if (!readAsyncResult.IsCompleted)
                         {
-                            Fail("Err_1398ehpo Expected IAsyncResult passed into callback to not be completed");
+                            Fail(
+                                "Err_1398ehpo Expected IAsyncResult passed into callback to not be completed"
+                            );
                         }
                     }
 
                     Monitor.Pulse(this);
                 }
             }
-
 
             public IAsyncResult ReadAsyncResult
             {
@@ -508,10 +632,7 @@ namespace System.IO.Ports.Tests
 
             public IAsyncResult BeginReadAsyncResult
             {
-                get
-                {
-                    return _beginReadAsyncResult;
-                }
+                get { return _beginReadAsyncResult; }
                 set
                 {
                     lock (this)

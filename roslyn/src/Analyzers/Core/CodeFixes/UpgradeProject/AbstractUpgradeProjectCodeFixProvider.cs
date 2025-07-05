@@ -47,7 +47,9 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             var result = new List<CodeAction>();
             var language = project.Language;
 
-            var upgradeableProjects = solution.Projects.Where(p => CanUpgrade(p, language, newVersion)).AsImmutable();
+            var upgradeableProjects = solution
+                .Projects.Where(p => CanUpgrade(p, language, newVersion))
+                .AsImmutable();
 
             if (upgradeableProjects.Length == 0)
             {
@@ -55,8 +57,10 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             }
 
             var fixOneProjectTitle = string.Format(UpgradeThisProjectResource, newVersion);
-            var fixOneProject = ProjectOptionsChangeAction.Create(fixOneProjectTitle,
-                _ => Task.FromResult(UpgradeProject(project, newVersion)));
+            var fixOneProject = ProjectOptionsChangeAction.Create(
+                fixOneProjectTitle,
+                _ => Task.FromResult(UpgradeProject(project, newVersion))
+            );
 
             result.Add(fixOneProject);
 
@@ -64,8 +68,10 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             {
                 var fixAllProjectsTitle = string.Format(UpgradeAllProjectsResource, newVersion);
 
-                var fixAllProjects = ProjectOptionsChangeAction.Create(fixAllProjectsTitle,
-                    ct => Task.FromResult(UpgradeAllProjects(solution, language, newVersion, ct)));
+                var fixAllProjects = ProjectOptionsChangeAction.Create(
+                    fixAllProjectsTitle,
+                    ct => Task.FromResult(UpgradeAllProjects(solution, language, newVersion, ct))
+                );
 
                 result.Add(fixAllProjects);
             }
@@ -73,7 +79,12 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             return result.AsImmutable();
         }
 
-        public Solution UpgradeAllProjects(Solution solution, string language, string version, CancellationToken cancellationToken)
+        public Solution UpgradeAllProjects(
+            Solution solution,
+            string language,
+            string version,
+            CancellationToken cancellationToken
+        )
         {
             var currentSolution = solution;
             foreach (var projectId in solution.Projects.Select(p => p.Id))
@@ -90,8 +101,8 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
             return currentSolution;
         }
 
-        private bool CanUpgrade(Project project, string language, string version)
-            => project.Language == language && IsUpgrade(project, version);
+        private bool CanUpgrade(Project project, string language, string version) =>
+            project.Language == language && IsUpgrade(project, version);
     }
 
 #if CODE_STYLE
@@ -102,20 +113,27 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
 
         private readonly Func<CancellationToken, Task<Solution>> _createChangedSolution;
 
-        private ProjectOptionsChangeAction(string title, Func<CancellationToken, Task<Solution>> createChangedSolution)
+        private ProjectOptionsChangeAction(
+            string title,
+            Func<CancellationToken, Task<Solution>> createChangedSolution
+        )
         {
             this.Title = title;
             _createChangedSolution = createChangedSolution;
         }
 
-        public static ProjectOptionsChangeAction Create(string title, Func<CancellationToken, Task<Solution>> createChangedSolution)
-            => new(title, createChangedSolution);
+        public static ProjectOptionsChangeAction Create(
+            string title,
+            Func<CancellationToken, Task<Solution>> createChangedSolution
+        ) => new(title, createChangedSolution);
 
-        protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
-            => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
+        protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
 
-        protected override async Task<Solution?> GetChangedSolutionAsync(CancellationToken cancellationToken)
-            => await _createChangedSolution(cancellationToken).ConfigureAwait(false);
+        protected override async Task<Solution?> GetChangedSolutionAsync(
+            CancellationToken cancellationToken
+        ) => await _createChangedSolution(cancellationToken).ConfigureAwait(false);
     }
 
 #else
@@ -124,16 +142,34 @@ namespace Microsoft.CodeAnalysis.UpgradeProject
     {
         public override ImmutableArray<string> Tags => RequiresNonDocumentChangeTags;
 
-        private ProjectOptionsChangeAction(string title, Func<IProgress<CodeAnalysisProgress>, CancellationToken, Task<Solution>> createChangedSolution)
-            : base(title, createChangedSolution, equivalenceKey: null, priority: CodeActionPriority.Default, createdFromFactoryMethod: true)
-        {
-        }
+        private ProjectOptionsChangeAction(
+            string title,
+            Func<
+                IProgress<CodeAnalysisProgress>,
+                CancellationToken,
+                Task<Solution>
+            > createChangedSolution
+        )
+            : base(
+                title,
+                createChangedSolution,
+                equivalenceKey: null,
+                priority: CodeActionPriority.Default,
+                createdFromFactoryMethod: true
+            ) { }
 
-        public static ProjectOptionsChangeAction Create(string title, Func<IProgress<CodeAnalysisProgress>, CancellationToken, Task<Solution>> createChangedSolution)
-            => new(title, createChangedSolution);
+        public static ProjectOptionsChangeAction Create(
+            string title,
+            Func<
+                IProgress<CodeAnalysisProgress>,
+                CancellationToken,
+                Task<Solution>
+            > createChangedSolution
+        ) => new(title, createChangedSolution);
 
-        protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(CancellationToken cancellationToken)
-            => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
+        protected override Task<IEnumerable<CodeActionOperation>> ComputePreviewOperationsAsync(
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
     }
 
 #endif

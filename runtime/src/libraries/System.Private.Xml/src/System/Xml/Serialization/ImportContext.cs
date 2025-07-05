@@ -27,7 +27,8 @@ namespace System.Xml.Serialization
             _shareTypes = shareTypes;
         }
 
-        internal ImportContext() : this(null, false) { }
+        internal ImportContext()
+            : this(null, false) { }
 
         internal SchemaObjectCache Cache => _cache ??= new SchemaObjectCache();
 
@@ -54,6 +55,7 @@ namespace System.Xml.Serialization
         private Hashtable? _hash;
         private Hashtable? _objectCache;
         private StringCollection? _warnings;
+
         // UNDONE remove me soon, this is debug only code
         internal Hashtable looks = new Hashtable();
         private Hashtable Graph => _graph ??= new Hashtable();
@@ -91,8 +93,17 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    Warnings.Add(SR.Format(SR.XmlMismatchSchemaObjects, item.GetType().Name, qname.Name, qname.Namespace));
-                    Warnings.Add($"DEBUG:Cached item key:\r\n{(string?)looks[cachedItem]}\r\nnew item key:\r\n{(string?)looks[item]}");
+                    Warnings.Add(
+                        SR.Format(
+                            SR.XmlMismatchSchemaObjects,
+                            item.GetType().Name,
+                            qname.Name,
+                            qname.Namespace
+                        )
+                    );
+                    Warnings.Add(
+                        $"DEBUG:Cached item key:\r\n{(string?)looks[cachedItem]}\r\nnew item key:\r\n{(string?)looks[item]}"
+                    );
                 }
             }
             // no match found we need to insert the new type in the cache
@@ -168,9 +179,7 @@ namespace System.Xml.Serialization
             object? hash = Hash[o];
             if (hash != null)
             {
-                if (hash is XmlSchemaObject)
-                {
-                }
+                if (hash is XmlSchemaObject) { }
                 else
                 {
                     return (int)hash;
@@ -301,7 +310,10 @@ namespace System.Xml.Serialization
                     }
                     if (particle is XmlSchemaGroupRef refGroup)
                     {
-                        particle = ((XmlSchemaGroup)_schemas.Find(refGroup.RefName, typeof(XmlSchemaGroup), false)!).Particle;
+                        particle = (
+                            (XmlSchemaGroup)
+                                _schemas.Find(refGroup.RefName, typeof(XmlSchemaGroup), false)!
+                        ).Particle;
                     }
                     else if (particle is XmlSchemaGroupBase)
                     {
@@ -327,20 +339,28 @@ namespace System.Xml.Serialization
                     }
                     else if (t == typeof(XmlSchemaSimpleTypeUnion))
                     {
-                        XmlQualifiedName[]? memberTypes = ((XmlSchemaSimpleTypeUnion)item).MemberTypes;
+                        XmlQualifiedName[]? memberTypes = (
+                            (XmlSchemaSimpleTypeUnion)item
+                        ).MemberTypes;
 
                         if (memberTypes != null)
                         {
                             for (int i = 0; i < memberTypes.Length; i++)
                             {
-                                XmlSchemaType? type = (XmlSchemaType?)_schemas.Find(memberTypes[i], typeof(XmlSchemaType), false);
+                                XmlSchemaType? type = (XmlSchemaType?)
+                                    _schemas.Find(memberTypes[i], typeof(XmlSchemaType), false);
                                 AddRef(refs, type);
                             }
                         }
                     }
                 }
-                if (baseType == null && !baseName.IsEmpty && baseName.Namespace != XmlSchema.Namespace)
-                    baseType = (XmlSchemaType?)_schemas.Find(baseName, typeof(XmlSchemaType), false);
+                if (
+                    baseType == null
+                    && !baseName.IsEmpty
+                    && baseName.Namespace != XmlSchema.Namespace
+                )
+                    baseType = (XmlSchemaType?)
+                        _schemas.Find(baseName, typeof(XmlSchemaType), false);
 
                 if (baseType != null)
                 {
@@ -365,18 +385,21 @@ namespace System.Xml.Serialization
                 {
                     if (el.SubstitutionGroup.Namespace != XmlSchema.Namespace)
                     {
-                        XmlSchemaElement? head = (XmlSchemaElement?)_schemas.Find(el.SubstitutionGroup, typeof(XmlSchemaElement), false);
+                        XmlSchemaElement? head = (XmlSchemaElement?)
+                            _schemas.Find(el.SubstitutionGroup, typeof(XmlSchemaElement), false);
                         AddRef(refs, head);
                     }
                 }
                 if (!el.RefName.IsEmpty)
                 {
-                    el = (XmlSchemaElement)_schemas.Find(el.RefName, typeof(XmlSchemaElement), false)!;
+                    el = (XmlSchemaElement)
+                        _schemas.Find(el.RefName, typeof(XmlSchemaElement), false)!;
                     AddRef(refs, el);
                 }
                 else if (!el.SchemaTypeName.IsEmpty)
                 {
-                    XmlSchemaType? type = (XmlSchemaType?)_schemas.Find(el.SchemaTypeName, typeof(XmlSchemaType), false);
+                    XmlSchemaType? type = (XmlSchemaType?)
+                        _schemas.Find(el.SchemaTypeName, typeof(XmlSchemaType), false);
                     AddRef(refs, type);
                 }
                 else
@@ -390,7 +413,8 @@ namespace System.Xml.Serialization
             }
             else if (t == typeof(XmlSchemaGroupRef))
             {
-                XmlSchemaGroup? group = (XmlSchemaGroup?)_schemas.Find(((XmlSchemaGroupRef)item).RefName, typeof(XmlSchemaGroup), false);
+                XmlSchemaGroup? group = (XmlSchemaGroup?)
+                    _schemas.Find(((XmlSchemaGroupRef)item).RefName, typeof(XmlSchemaGroup), false);
                 AddRef(refs, group);
             }
             else if (typeof(XmlSchemaGroupBase).IsAssignableFrom(t))
@@ -402,7 +426,12 @@ namespace System.Xml.Serialization
             }
             else if (t == typeof(XmlSchemaAttributeGroupRef))
             {
-                XmlSchemaAttributeGroup? group = (XmlSchemaAttributeGroup?)_schemas.Find(((XmlSchemaAttributeGroupRef)item).RefName, typeof(XmlSchemaAttributeGroup), false);
+                XmlSchemaAttributeGroup? group = (XmlSchemaAttributeGroup?)
+                    _schemas.Find(
+                        ((XmlSchemaAttributeGroupRef)item).RefName,
+                        typeof(XmlSchemaAttributeGroup),
+                        false
+                    );
                 AddRef(refs, group);
             }
             else if (t == typeof(XmlSchemaAttributeGroup))
@@ -417,12 +446,14 @@ namespace System.Xml.Serialization
                 XmlSchemaAttribute? at = (XmlSchemaAttribute)item;
                 if (!at.RefName.IsEmpty)
                 {
-                    at = (XmlSchemaAttribute?)_schemas.Find(at.RefName, typeof(XmlSchemaAttribute), false);
+                    at = (XmlSchemaAttribute?)
+                        _schemas.Find(at.RefName, typeof(XmlSchemaAttribute), false);
                     AddRef(refs, at);
                 }
                 else if (!at.SchemaTypeName.IsEmpty)
                 {
-                    XmlSchemaType? type = (XmlSchemaType?)_schemas.Find(at.SchemaTypeName, typeof(XmlSchemaType), false);
+                    XmlSchemaType? type = (XmlSchemaType?)
+                        _schemas.Find(at.SchemaTypeName, typeof(XmlSchemaType), false);
                     AddRef(refs, type);
                 }
                 else
@@ -432,17 +463,26 @@ namespace System.Xml.Serialization
             }
             if (typeof(XmlSchemaAnnotated).IsAssignableFrom(t))
             {
-                XmlAttribute[]? attrs = (XmlAttribute[]?)((XmlSchemaAnnotated)item).UnhandledAttributes;
+                XmlAttribute[]? attrs = (XmlAttribute[]?)
+                    ((XmlSchemaAnnotated)item).UnhandledAttributes;
 
                 if (attrs != null)
                 {
                     for (int i = 0; i < attrs.Length; i++)
                     {
                         XmlAttribute attribute = attrs[i];
-                        if (attribute.LocalName == Wsdl.ArrayType && attribute.NamespaceURI == Wsdl.Namespace)
+                        if (
+                            attribute.LocalName == Wsdl.ArrayType
+                            && attribute.NamespaceURI == Wsdl.Namespace
+                        )
                         {
-                            XmlQualifiedName qname = TypeScope.ParseWsdlArrayType(attribute.Value, out _, item);
-                            XmlSchemaType? type = (XmlSchemaType?)_schemas.Find(qname, typeof(XmlSchemaType), false);
+                            XmlQualifiedName qname = TypeScope.ParseWsdlArrayType(
+                                attribute.Value,
+                                out _,
+                                item
+                            );
+                            XmlSchemaType? type = (XmlSchemaType?)
+                                _schemas.Find(qname, typeof(XmlSchemaType), false);
                             AddRef(refs, type);
                         }
                     }

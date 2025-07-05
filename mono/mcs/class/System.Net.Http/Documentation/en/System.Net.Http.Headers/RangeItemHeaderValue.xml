@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="RangeItemHeaderValue" FullName="System.Net.Http.Headers.RangeItemHeaderValue">
   <TypeSignature Language="C#" Value="public class RangeItemHeaderValue : ICloneable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit RangeItemHeaderValue extends System.Object implements class System.ICloneable" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit RangeItemHeaderValue extends System.Object implements class System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Net.Http</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -17,7 +20,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Net.Http.Headers.RangeHeaderValue" /> class provides support for a byte range in a Range header as defined in <see cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see> by the IETF. </para>
+      <para
+        >The <see cref="T:System.Net.Http.Headers.RangeHeaderValue" /> class provides support for a byte range in a Range header as defined in <see
+          cref="http://go.microsoft.com/fwlink/?LinkID=241642"
+          >RFC 2616</see
+        > by the IETF. </para
+      >
       <para>A Range header can specify multiple byte ranges.</para>
       <para>An example of a byte-range in a Range header in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
       <para>Range: bytes=0-99\r\n\r\n</para>
@@ -33,8 +41,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public RangeItemHeaderValue (Nullable&lt;long&gt; from, Nullable&lt;long&gt; to);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Nullable`1&lt;int64&gt; from, valuetype System.Nullable`1&lt;int64&gt; to) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public RangeItemHeaderValue (Nullable&lt;long&gt; from, Nullable&lt;long&gt; to);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(valuetype System.Nullable`1&lt;int64&gt; from, valuetype System.Nullable`1&lt;int64&gt; to) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -48,21 +62,38 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>An example of a byte-range in a Range header in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
           <para>Range: bytes=0-99\r\n\r\n</para>
-          <para>For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. </para>
+          <para
+            >For this example, the <paramref name="from" /> parameter would be specified as 0 and the <paramref name="to" /> parameter would be specified as 99. </para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> class.</para>
+          <para
+            >Initializes a new instance of the <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> class.</para
+          >
         </summary>
         <param name="from">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position at which to start sending data.</param>
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The position at which to start sending data.</param
+        >
         <param name="to">
-          <attribution license="cc4" from="Microsoft" modified="false" />The position at which to stop sending data.</param>
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The position at which to stop sending data.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="Equals">
       <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -77,20 +108,32 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para>
+          <para
+            >Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Returns <see cref="T:System.Boolean" />.</para>
-          <para>true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para>
+          <para
+            >true if the specified <see cref="T:System.Object" /> is equal to the current object; otherwise, false.</para
+          >
         </returns>
         <param name="obj">
-          <attribution license="cc4" from="Microsoft" modified="false" />The object to compare with the current object.</param>
+          <attribution
+            license="cc4"
+            from="Microsoft"
+            modified="false"
+          />The object to compare with the current object.</param
+        >
       </Docs>
     </Member>
     <Member MemberName="From">
       <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; From { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; From" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1&lt;int64&gt; From"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -109,7 +152,10 @@
     </Member>
     <Member MemberName="GetHashCode">
       <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -122,11 +168,15 @@
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.</para>
-          <para>The <see cref="M:System.Net.Http.Headers.RangeItemHeaderValue.GetHashCode" />  method is suitable for use in hashing algorithms and data structures such as a hash table.</para>
+          <para
+            >The <see cref="M:System.Net.Http.Headers.RangeItemHeaderValue.GetHashCode" />  method is suitable for use in hashing algorithms and data structures such as a hash table.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Serves as a hash function for an <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para>
+          <para
+            >Serves as a hash function for an <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -137,7 +187,10 @@
     </Member>
     <Member MemberName="System.ICloneable.Clone">
       <MemberSignature Language="C#" Value="object ICloneable.Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance object System.ICloneable.Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method hidebysig newslot virtual instance object System.ICloneable.Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -150,7 +203,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> instance.</para>
+          <para
+            >Creates a new object that is a copy of the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> instance.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -161,7 +216,10 @@
     </Member>
     <Member MemberName="To">
       <MemberSignature Language="C#" Value="public Nullable&lt;long&gt; To { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Nullable`1&lt;int64&gt; To" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Nullable`1&lt;int64&gt; To"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -180,7 +238,10 @@
     </Member>
     <Member MemberName="ToString">
       <MemberSignature Language="C#" Value="public override string ToString ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string ToString() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -193,7 +254,9 @@
         <remarks>To be added.</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Returns a string that represents the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para>
+          <para
+            >Returns a string that represents the current <see cref="T:System.Net.Http.Headers.RangeItemHeaderValue" /> object.</para
+          >
         </summary>
         <returns>
           <attribution license="cc4" from="Microsoft" modified="false" />

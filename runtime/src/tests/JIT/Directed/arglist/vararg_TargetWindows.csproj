@@ -5,7 +5,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);WIN32</DefineConstants>
     <!-- There is a Windows and a non-Windows version of this test to allow it to be compiled for all targets -->
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
     <DebugType>PdbOnly</DebugType>
   </PropertyGroup>
   <ItemGroup>

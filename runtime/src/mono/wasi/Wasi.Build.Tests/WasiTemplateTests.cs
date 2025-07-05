@@ -4,10 +4,10 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using Wasm.Build.Tests;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using Wasm.Build.Tests;
 
 #nullable enable
 
@@ -16,15 +16,25 @@ namespace Wasi.Build.Tests;
 public class WasiTemplateTests : BuildTestBase
 {
     public WasiTemplateTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+        : base(output, buildContext) { }
 
     [Theory]
-    [InlineData("Debug", /*aot*/ false)]
-    [InlineData("Debug", /*aot*/ true)]
-    [InlineData("Release", /*aot*/ false)]
-    [InlineData("Release", /*aot*/ true)]
+    [InlineData(
+        "Debug", /*aot*/
+        false
+    )]
+    [InlineData(
+        "Debug", /*aot*/
+        true
+    )]
+    [InlineData(
+        "Release", /*aot*/
+        false
+    )]
+    [InlineData(
+        "Release", /*aot*/
+        true
+    )]
     public void ConsoleBuildThenPublish(string config, bool aot)
     {
         string id = $"{config}_{GetRandomId()}";
@@ -37,16 +47,22 @@ public class WasiTemplateTests : BuildTestBase
 
         if (aot)
         {
-            AddItemsPropertiesToProject(projectFile, "<RunAOTCompilation>true</RunAOTCompilation><_WasmDevel>false</_WasmDevel>");
+            AddItemsPropertiesToProject(
+                projectFile,
+                "<RunAOTCompilation>true</RunAOTCompilation><_WasmDevel>false</_WasmDevel>"
+            );
         }
 
-        BuildProject(buildArgs,
-                    id: id,
-                    new BuildProjectOptions(
-                        DotnetWasmFromRuntimePack: true,
-                        CreateProject: false,
-                        Publish: false,
-                        TargetFramework: BuildTestBase.DefaultTargetFramework));
+        BuildProject(
+            buildArgs,
+            id: id,
+            new BuildProjectOptions(
+                DotnetWasmFromRuntimePack: true,
+                CreateProject: false,
+                Publish: false,
+                TargetFramework: BuildTestBase.DefaultTargetFramework
+            )
+        );
 
         // ActiveIssue: https://github.com/dotnet/runtime/issues/82515
         int expectedExitCode = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 1 : 42;
@@ -54,9 +70,9 @@ public class WasiTemplateTests : BuildTestBase
         string runArgs = $"run --no-build -c {config}";
         runArgs += " x y z";
         var res = new RunCommand(s_buildEnv, _testOutput, label: id)
-                            .WithWorkingDirectory(_projectDir!)
-                            .ExecuteWithCapturedOutput(runArgs)
-                            .EnsureExitCode(expectedExitCode);
+            .WithWorkingDirectory(_projectDir!)
+            .ExecuteWithCapturedOutput(runArgs)
+            .EnsureExitCode(expectedExitCode);
 
         Assert.Contains("Hello, Wasi Console!", res.Output);
         Assert.Contains("args[0] = x", res.Output);
@@ -68,20 +84,27 @@ public class WasiTemplateTests : BuildTestBase
 
         File.Move(product!.LogFile, Path.ChangeExtension(product.LogFile!, ".first.binlog"));
 
-        _testOutput.WriteLine($"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}");
+        _testOutput.WriteLine(
+            $"{Environment.NewLine}Publishing with no changes ..{Environment.NewLine}"
+        );
 
         bool expectRelinking = config == "Release";
-        BuildProject(buildArgs,
-                    id: id,
-                    new BuildProjectOptions(
-                        DotnetWasmFromRuntimePack: !expectRelinking,
-                        CreateProject: false,
-                        Publish: true,
-                        TargetFramework: BuildTestBase.DefaultTargetFramework,
-                        UseCache: false));
+        BuildProject(
+            buildArgs,
+            id: id,
+            new BuildProjectOptions(
+                DotnetWasmFromRuntimePack: !expectRelinking,
+                CreateProject: false,
+                Publish: true,
+                TargetFramework: BuildTestBase.DefaultTargetFramework,
+                UseCache: false
+            )
+        );
     }
 
-    public static TheoryData<string, bool> TestDataForConsolePublishAndRunForSingleFileBundle(bool propertyValue)
+    public static TheoryData<string, bool> TestDataForConsolePublishAndRunForSingleFileBundle(
+        bool propertyValue
+    )
     {
         var data = new TheoryData<string, bool>();
         data.Add("Debug", propertyValue);
@@ -92,7 +115,10 @@ public class WasiTemplateTests : BuildTestBase
     [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
     [MemberData(nameof(TestDataForConsolePublishAndRunForSingleFileBundle), parameters: false)]
     [MemberData(nameof(TestDataForConsolePublishAndRunForSingleFileBundle), parameters: true)]
-    public void ConsolePublishAndRunForSingleFileBundle_InvariantTimeZone(string config, bool invariantTimezone)
+    public void ConsolePublishAndRunForSingleFileBundle_InvariantTimeZone(
+        string config,
+        bool invariantTimezone
+    )
     {
         string mainWithTzTest = """
             using System;
@@ -114,9 +140,15 @@ public class WasiTemplateTests : BuildTestBase
             return 42;
             """;
 
-        string extraProperties = invariantTimezone ? "<InvariantTimezone>true</InvariantTimezone>" : "";
-        CommandResult res = ConsolePublishAndRunForSingleFileBundleInternal(config, mainWithTzTest, extraProperties: extraProperties);
-        if(invariantTimezone)
+        string extraProperties = invariantTimezone
+            ? "<InvariantTimezone>true</InvariantTimezone>"
+            : "";
+        CommandResult res = ConsolePublishAndRunForSingleFileBundleInternal(
+            config,
+            mainWithTzTest,
+            extraProperties: extraProperties
+        );
+        if (invariantTimezone)
             Assert.Contains("Could not find Asia/Tokyo", res.Output);
         else
             Assert.Contains("Asia/Tokyo BaseUtcOffset is 09:00:00", res.Output);
@@ -125,7 +157,10 @@ public class WasiTemplateTests : BuildTestBase
     [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
     [MemberData(nameof(TestDataForConsolePublishAndRunForSingleFileBundle), parameters: false)]
     [MemberData(nameof(TestDataForConsolePublishAndRunForSingleFileBundle), parameters: true)]
-    public void ConsolePublishAndRunForSingleFileBundle_InvariantGlobalization(string config, bool invariantGlobalization)
+    public void ConsolePublishAndRunForSingleFileBundle_InvariantGlobalization(
+        string config,
+        bool invariantGlobalization
+    )
     {
         string mainWithGlobalizationTest = """
             using System;
@@ -139,12 +174,23 @@ public class WasiTemplateTests : BuildTestBase
             return 42;
             """;
 
-        string extraProperties = invariantGlobalization ? "<InvariantGlobalization>true</InvariantGlobalization>" : "";
-        CommandResult res = ConsolePublishAndRunForSingleFileBundleInternal(config, mainWithGlobalizationTest, extraProperties: extraProperties);
+        string extraProperties = invariantGlobalization
+            ? "<InvariantGlobalization>true</InvariantGlobalization>"
+            : "";
+        CommandResult res = ConsolePublishAndRunForSingleFileBundleInternal(
+            config,
+            mainWithGlobalizationTest,
+            extraProperties: extraProperties
+        );
         Assert.Contains("Number: 1", res.Output);
     }
 
-    private CommandResult ConsolePublishAndRunForSingleFileBundleInternal(string config, string programContents, string extraProperties = "", bool aot = false)
+    private CommandResult ConsolePublishAndRunForSingleFileBundleInternal(
+        string config,
+        string programContents,
+        string extraProperties = "",
+        bool aot = false
+    )
     {
         if (programContents.Length == 0)
             throw new ArgumentException("Cannot be empty", nameof(programContents));
@@ -160,23 +206,26 @@ public class WasiTemplateTests : BuildTestBase
         var buildArgs = new BuildArgs(projectName, config, aot, id, null);
         buildArgs = ExpandBuildArgs(buildArgs);
 
-        BuildProject(buildArgs,
-                    id: id,
-                    new BuildProjectOptions(
-                        DotnetWasmFromRuntimePack: false, // singlefilebundle will always relink
-                        CreateProject: false,
-                        Publish: true,
-                        TargetFramework: BuildTestBase.DefaultTargetFramework,
-                        UseCache: false));
+        BuildProject(
+            buildArgs,
+            id: id,
+            new BuildProjectOptions(
+                DotnetWasmFromRuntimePack: false, // singlefilebundle will always relink
+                CreateProject: false,
+                Publish: true,
+                TargetFramework: BuildTestBase.DefaultTargetFramework,
+                UseCache: false
+            )
+        );
 
         int expectedExitCode = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 1 : 42;
 
         string runArgs = $"run --no-build -c {config}";
         runArgs += " x y z";
         var res = new RunCommand(s_buildEnv, _testOutput, label: id)
-                            .WithWorkingDirectory(_projectDir!)
-                            .ExecuteWithCapturedOutput(runArgs)
-                            .EnsureExitCode(expectedExitCode);
+            .WithWorkingDirectory(_projectDir!)
+            .ExecuteWithCapturedOutput(runArgs)
+            .EnsureExitCode(expectedExitCode);
 
         Assert.Contains("Hello, Wasi Console!", res.Output);
         Assert.Contains("args[0] = x", res.Output);
@@ -187,42 +236,69 @@ public class WasiTemplateTests : BuildTestBase
     }
 
     [Theory]
-    [InlineData("Debug", /*appendRID*/ true, /*useArtifacts*/ false)]
-    [InlineData("Debug", /*appendRID*/ true, /*useArtifacts*/ true)]
-    [InlineData("Debug", /*appendRID*/ false, /*useArtifacts*/ false)]
-    [InlineData("Debug", /*appendRID*/ false, /*useArtifacts*/ true)]
-    public void ConsoleBuildAndRunForDifferentOutputPaths(string config, bool appendRID, bool useArtifacts)
+    [InlineData(
+        "Debug", /*appendRID*/
+        true, /*useArtifacts*/
+        false
+    )]
+    [InlineData(
+        "Debug", /*appendRID*/
+        true, /*useArtifacts*/
+        true
+    )]
+    [InlineData(
+        "Debug", /*appendRID*/
+        false, /*useArtifacts*/
+        false
+    )]
+    [InlineData(
+        "Debug", /*appendRID*/
+        false, /*useArtifacts*/
+        true
+    )]
+    public void ConsoleBuildAndRunForDifferentOutputPaths(
+        string config,
+        bool appendRID,
+        bool useArtifacts
+    )
     {
         string extraPropertiesForDBP = "";
         if (appendRID)
-            extraPropertiesForDBP += "<AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>";
+            extraPropertiesForDBP +=
+                "<AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>";
         if (useArtifacts)
-            extraPropertiesForDBP += "<UseArtifactsOutput>true</UseArtifactsOutput><ArtifactsPath>.</ArtifactsPath>";
+            extraPropertiesForDBP +=
+                "<UseArtifactsOutput>true</UseArtifactsOutput><ArtifactsPath>.</ArtifactsPath>";
 
         string id = $"{config}_{GetRandomId()}";
         string projectFile = CreateWasmTemplateProject(id, "wasiconsole");
         string projectName = Path.GetFileNameWithoutExtension(projectFile);
 
         if (!string.IsNullOrEmpty(extraPropertiesForDBP))
-            AddItemsPropertiesToProject(Path.Combine(Path.GetDirectoryName(projectFile)!, "Directory.Build.props"),
-                                        extraPropertiesForDBP);
+            AddItemsPropertiesToProject(
+                Path.Combine(Path.GetDirectoryName(projectFile)!, "Directory.Build.props"),
+                extraPropertiesForDBP
+            );
 
         var buildArgs = new BuildArgs(projectName, config, false, id, null);
         buildArgs = ExpandBuildArgs(buildArgs);
 
-        BuildProject(buildArgs,
-                    id: id,
-                    new BuildProjectOptions(
-                        DotnetWasmFromRuntimePack: true,
-                        CreateProject: false,
-                        Publish: false,
-                        TargetFramework: BuildTestBase.DefaultTargetFramework,
-                        UseCache: false));
+        BuildProject(
+            buildArgs,
+            id: id,
+            new BuildProjectOptions(
+                DotnetWasmFromRuntimePack: true,
+                CreateProject: false,
+                Publish: false,
+                TargetFramework: BuildTestBase.DefaultTargetFramework,
+                UseCache: false
+            )
+        );
 
         CommandResult res = new RunCommand(s_buildEnv, _testOutput)
-                                    .WithWorkingDirectory(_projectDir!)
-                                    .ExecuteWithCapturedOutput($"run --no-silent --no-build -c {config} x y z")
-                                    .EnsureSuccessful();
+            .WithWorkingDirectory(_projectDir!)
+            .ExecuteWithCapturedOutput($"run --no-silent --no-build -c {config} x y z")
+            .EnsureSuccessful();
 
         Assert.Contains("Hello, Wasi Console!", res.Output);
     }

@@ -22,7 +22,9 @@ public class DefaultHubLifetimeManagerBenchmark
     [GlobalSetup]
     public void GlobalSetup()
     {
-        _hubLifetimeManager = new DefaultHubLifetimeManager<Hub>(NullLogger<DefaultHubLifetimeManager<Hub>>.Instance);
+        _hubLifetimeManager = new DefaultHubLifetimeManager<Hub>(
+            NullLogger<DefaultHubLifetimeManager<Hub>>.Instance
+        );
         _connectionIds = new List<string>();
         _subsetConnectionIds = new List<string>();
         _groupNames = new List<string>();
@@ -46,13 +48,17 @@ public class DefaultHubLifetimeManagerBenchmark
             var connectionContext = new TestConnectionContext
             {
                 ConnectionId = connectionId,
-                Transport = new TestDuplexPipe(ForceAsync)
+                Transport = new TestDuplexPipe(ForceAsync),
             };
             var contextOptions = new HubConnectionContextOptions()
             {
                 KeepAliveInterval = TimeSpan.Zero,
             };
-            var hubConnectionContext = new HubConnectionContext(connectionContext, contextOptions, NullLoggerFactory.Instance);
+            var hubConnectionContext = new HubConnectionContext(
+                connectionContext,
+                contextOptions,
+                NullLoggerFactory.Instance
+            );
             hubConnectionContext.UserIdentifier = userIdentifier;
             hubConnectionContext.Protocol = jsonHubProtocol;
 
@@ -78,48 +84,81 @@ public class DefaultHubLifetimeManagerBenchmark
     [Benchmark]
     public Task SendGroupAsync()
     {
-        return _hubLifetimeManager.SendGroupAsync(_groupNames[0], "MethodName", Array.Empty<object>());
+        return _hubLifetimeManager.SendGroupAsync(
+            _groupNames[0],
+            "MethodName",
+            Array.Empty<object>()
+        );
     }
 
     [Benchmark]
     public Task SendGroupsAsync()
     {
-        return _hubLifetimeManager.SendGroupsAsync(_groupNames, "MethodName", Array.Empty<object>());
+        return _hubLifetimeManager.SendGroupsAsync(
+            _groupNames,
+            "MethodName",
+            Array.Empty<object>()
+        );
     }
 
     [Benchmark]
     public Task SendGroupExceptAsync()
     {
-        return _hubLifetimeManager.SendGroupExceptAsync(_groupNames[0], "MethodName", Array.Empty<object>(), _subsetConnectionIds);
+        return _hubLifetimeManager.SendGroupExceptAsync(
+            _groupNames[0],
+            "MethodName",
+            Array.Empty<object>(),
+            _subsetConnectionIds
+        );
     }
 
     [Benchmark]
     public Task SendAllExceptAsync()
     {
-        return _hubLifetimeManager.SendAllExceptAsync("MethodName", Array.Empty<object>(), _subsetConnectionIds);
+        return _hubLifetimeManager.SendAllExceptAsync(
+            "MethodName",
+            Array.Empty<object>(),
+            _subsetConnectionIds
+        );
     }
 
     [Benchmark]
     public Task SendConnectionAsync()
     {
-        return _hubLifetimeManager.SendConnectionAsync(_connectionIds[0], "MethodName", Array.Empty<object>());
+        return _hubLifetimeManager.SendConnectionAsync(
+            _connectionIds[0],
+            "MethodName",
+            Array.Empty<object>()
+        );
     }
 
     [Benchmark]
     public Task SendConnectionsAsync()
     {
-        return _hubLifetimeManager.SendConnectionsAsync(_subsetConnectionIds, "MethodName", Array.Empty<object>());
+        return _hubLifetimeManager.SendConnectionsAsync(
+            _subsetConnectionIds,
+            "MethodName",
+            Array.Empty<object>()
+        );
     }
 
     [Benchmark]
     public Task SendUserAsync()
     {
-        return _hubLifetimeManager.SendUserAsync(_userIdentifiers[0], "MethodName", Array.Empty<object>());
+        return _hubLifetimeManager.SendUserAsync(
+            _userIdentifiers[0],
+            "MethodName",
+            Array.Empty<object>()
+        );
     }
 
     [Benchmark]
     public Task SendUsersAsync()
     {
-        return _hubLifetimeManager.SendUsersAsync(_userIdentifiers, "MethodName", Array.Empty<object>());
+        return _hubLifetimeManager.SendUsersAsync(
+            _userIdentifiers,
+            "MethodName",
+            Array.Empty<object>()
+        );
     }
 }

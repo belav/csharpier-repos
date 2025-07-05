@@ -16,12 +16,13 @@ namespace System
 
         // Some time zones may give better display names using their location names rather than their generic name.
         // We can update this list as need arises.
-        private static readonly string[] s_ZonesThatUseLocationName = new[] {
-            "Europe/Minsk",       // Prefer "Belarus Time" over "Moscow Standard Time (Minsk)"
-            "Europe/Moscow",      // Prefer "Moscow Time" over "Moscow Standard Time"
-            "Europe/Simferopol",  // Prefer "Simferopol Time" over "Moscow Standard Time (Simferopol)"
-            "Pacific/Apia",       // Prefer "Samoa Time" over "Apia Time"
-            "Pacific/Pitcairn"    // Prefer "Pitcairn Islands Time" over "Pitcairn Time"
+        private static readonly string[] s_ZonesThatUseLocationName = new[]
+        {
+            "Europe/Minsk", // Prefer "Belarus Time" over "Moscow Standard Time (Minsk)"
+            "Europe/Moscow", // Prefer "Moscow Time" over "Moscow Standard Time"
+            "Europe/Simferopol", // Prefer "Simferopol Time" over "Moscow Standard Time (Simferopol)"
+            "Pacific/Apia", // Prefer "Samoa Time" over "Apia Time"
+            "Pacific/Pitcairn", // Prefer "Pitcairn Islands Time" over "Pitcairn Time"
         };
 #endif
 
@@ -39,15 +40,28 @@ namespace System
 #endif
             // Don't bother looking up the name for invariant or English cultures
             CultureInfo uiCulture = CultureInfo.CurrentUICulture;
-            if (GlobalizationMode.Invariant || uiCulture.Name.Length == 0 || uiCulture.TwoLetterISOLanguageName == "en")
+            if (
+                GlobalizationMode.Invariant
+                || uiCulture.Name.Length == 0
+                || uiCulture.TwoLetterISOLanguageName == "en"
+            )
                 return InvariantUtcStandardDisplayName;
 
             // Try to get a localized version of "Coordinated Universal Time" from the globalization data
             string? standardDisplayName = null;
-            GetDisplayName(UtcId, Interop.Globalization.TimeZoneDisplayNameType.Standard, uiCulture.Name, ref standardDisplayName);
+            GetDisplayName(
+                UtcId,
+                Interop.Globalization.TimeZoneDisplayNameType.Standard,
+                uiCulture.Name,
+                ref standardDisplayName
+            );
 
             // Final safety check.  Don't allow null or abbreviations
-            if (standardDisplayName == null || standardDisplayName == "GMT" || standardDisplayName == "UTC")
+            if (
+                standardDisplayName == null
+                || standardDisplayName == "GMT"
+                || standardDisplayName == "UTC"
+            )
                 standardDisplayName = InvariantUtcStandardDisplayName;
 
             return standardDisplayName;
@@ -89,16 +103,31 @@ namespace System
 
         private static void GetStandardDisplayName(string timeZoneId, ref string? displayName)
         {
-            GetDisplayName(timeZoneId, Interop.Globalization.TimeZoneDisplayNameType.Standard, UICulture.Name, ref displayName);
+            GetDisplayName(
+                timeZoneId,
+                Interop.Globalization.TimeZoneDisplayNameType.Standard,
+                UICulture.Name,
+                ref displayName
+            );
         }
 
         private static void GetDaylightDisplayName(string timeZoneId, ref string? displayName)
         {
-            GetDisplayName(timeZoneId, Interop.Globalization.TimeZoneDisplayNameType.DaylightSavings, UICulture.Name, ref displayName);
+            GetDisplayName(
+                timeZoneId,
+                Interop.Globalization.TimeZoneDisplayNameType.DaylightSavings,
+                UICulture.Name,
+                ref displayName
+            );
         }
 
         // Helper function that retrieves various forms of time zone display names from ICU
-        private static unsafe void GetDisplayName(string timeZoneId, Interop.Globalization.TimeZoneDisplayNameType nameType, string uiCulture, ref string? displayName)
+        private static unsafe void GetDisplayName(
+            string timeZoneId,
+            Interop.Globalization.TimeZoneDisplayNameType nameType,
+            string uiCulture,
+            ref string? displayName
+        )
         {
             if (GlobalizationMode.Invariant)
             {
@@ -113,15 +142,30 @@ namespace System
                     {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                         if (GlobalizationMode.Hybrid)
-                            return Interop.Globalization.GetTimeZoneDisplayNameNative(locale, locale.Length, id, id.Length, type, bufferPtr, buffer.Length);
+                            return Interop.Globalization.GetTimeZoneDisplayNameNative(
+                                locale,
+                                locale.Length,
+                                id,
+                                id.Length,
+                                type,
+                                bufferPtr,
+                                buffer.Length
+                            );
 #endif
-                        return Interop.Globalization.GetTimeZoneDisplayName(locale, id, type, bufferPtr, buffer.Length);
+                        return Interop.Globalization.GetTimeZoneDisplayName(
+                            locale,
+                            id,
+                            type,
+                            bufferPtr,
+                            buffer.Length
+                        );
                     }
                 },
                 uiCulture,
                 timeZoneId,
                 nameType,
-                out timeZoneDisplayName);
+                out timeZoneDisplayName
+            );
 
             if (!result && uiCulture != FallbackCultureName)
             {
@@ -133,15 +177,30 @@ namespace System
                         {
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
                             if (GlobalizationMode.Hybrid)
-                                return Interop.Globalization.GetTimeZoneDisplayNameNative(locale, locale.Length, id, id.Length, type, bufferPtr, buffer.Length);
+                                return Interop.Globalization.GetTimeZoneDisplayNameNative(
+                                    locale,
+                                    locale.Length,
+                                    id,
+                                    id.Length,
+                                    type,
+                                    bufferPtr,
+                                    buffer.Length
+                                );
 #endif
-                            return Interop.Globalization.GetTimeZoneDisplayName(locale, id, type, bufferPtr, buffer.Length);
+                            return Interop.Globalization.GetTimeZoneDisplayName(
+                                locale,
+                                id,
+                                type,
+                                bufferPtr,
+                                buffer.Length
+                            );
                         }
                     },
                     FallbackCultureName,
                     timeZoneId,
                     nameType,
-                    out timeZoneDisplayName);
+                    out timeZoneDisplayName
+                );
             }
 
             // If there is an unknown error, don't set the displayName field.
@@ -153,17 +212,30 @@ namespace System
         }
 
         // Helper function that builds the value backing the DisplayName field from globalization data.
-        private static void GetFullValueForDisplayNameField(string timeZoneId, TimeSpan baseUtcOffset, ref string? displayName)
+        private static void GetFullValueForDisplayNameField(
+            string timeZoneId,
+            TimeSpan baseUtcOffset,
+            ref string? displayName
+        )
         {
             CultureInfo uiCulture = UICulture;
             // Get the base offset to prefix in front of the time zone.
             // Only UTC and its aliases have "(UTC)", handled earlier.  All other zones include an offset, even if it's zero.
-            string baseOffsetText = string.Create(null, stackalloc char[128], $"(UTC{(baseUtcOffset >= TimeSpan.Zero ? '+' : '-')}{baseUtcOffset:hh\\:mm})");
+            string baseOffsetText = string.Create(
+                null,
+                stackalloc char[128],
+                $"(UTC{(baseUtcOffset >= TimeSpan.Zero ? '+' : '-')}{baseUtcOffset:hh\\:mm})"
+            );
 
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             Debug.Assert(GlobalizationMode.Hybrid);
             string? timeZoneName = null;
-            GetDisplayName(timeZoneId, Interop.Globalization.TimeZoneDisplayNameType.TimeZoneName, uiCulture.Name, ref timeZoneName);
+            GetDisplayName(
+                timeZoneId,
+                Interop.Globalization.TimeZoneDisplayNameType.TimeZoneName,
+                uiCulture.Name,
+                ref timeZoneName
+            );
             // For this target, be consistent with other time zone display names that use the ID.
             displayName = $"{baseOffsetText} {timeZoneName}";
             return;
@@ -174,7 +246,12 @@ namespace System
 
             // Try to get the generic name for this time zone.
             string? genericName = null;
-            GetDisplayName(timeZoneId, Interop.Globalization.TimeZoneDisplayNameType.Generic, uiCulture.Name, ref genericName);
+            GetDisplayName(
+                timeZoneId,
+                Interop.Globalization.TimeZoneDisplayNameType.Generic,
+                uiCulture.Name,
+                ref genericName
+            );
             if (genericName == null)
             {
                 // We'll use the fallback display name value already set.
@@ -183,14 +260,24 @@ namespace System
 
             // Get the generic location name.
             string? genericLocationName = null;
-            GetDisplayName(timeZoneId, Interop.Globalization.TimeZoneDisplayNameType.GenericLocation, uiCulture.Name, ref genericLocationName);
+            GetDisplayName(
+                timeZoneId,
+                Interop.Globalization.TimeZoneDisplayNameType.GenericLocation,
+                uiCulture.Name,
+                ref genericLocationName
+            );
 
             // Some edge cases only apply when the offset is +00:00.
             if (baseUtcOffset == TimeSpan.Zero)
             {
                 // GMT and its aliases will just use the equivalent of "Greenwich Mean Time".
                 string? gmtLocationName = null;
-                GetDisplayName(GmtId, Interop.Globalization.TimeZoneDisplayNameType.GenericLocation, uiCulture.Name, ref gmtLocationName);
+                GetDisplayName(
+                    GmtId,
+                    Interop.Globalization.TimeZoneDisplayNameType.GenericLocation,
+                    uiCulture.Name,
+                    ref gmtLocationName
+                );
                 if (genericLocationName == gmtLocationName)
                 {
                     displayName = $"{baseOffsetText} {genericName}";
@@ -200,7 +287,12 @@ namespace System
                 // Other zones with a zero offset and the equivalent of "Greenwich Mean Time" should only use the location name.
                 // For example, prefer "Iceland Time" over "Greenwich Mean Time (Reykjavik)".
                 string? gmtGenericName = null;
-                GetDisplayName(GmtId, Interop.Globalization.TimeZoneDisplayNameType.Generic, uiCulture.Name, ref gmtGenericName);
+                GetDisplayName(
+                    GmtId,
+                    Interop.Globalization.TimeZoneDisplayNameType.Generic,
+                    uiCulture.Name,
+                    ref gmtGenericName
+                );
                 if (genericName == gmtGenericName)
                 {
                     displayName = $"{baseOffsetText} {genericLocationName}";
@@ -227,7 +319,13 @@ namespace System
             }
 
             // Prefer location names in some special cases.
-            if (StringArrayContains(timeZoneId, s_ZonesThatUseLocationName, StringComparison.OrdinalIgnoreCase))
+            if (
+                StringArrayContains(
+                    timeZoneId,
+                    s_ZonesThatUseLocationName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 displayName = $"{baseOffsetText} {genericLocationName}";
                 return;
@@ -235,7 +333,14 @@ namespace System
 
             // See if we should include the exemplar city name.
             string exemplarCityName = GetExemplarCityName(timeZoneId, uiCulture.Name);
-            if (uiCulture.CompareInfo.IndexOf(genericName, exemplarCityName, CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace) >= 0 && genericLocationName != null)
+            if (
+                uiCulture.CompareInfo.IndexOf(
+                    genericName,
+                    exemplarCityName,
+                    CompareOptions.IgnoreCase | CompareOptions.IgnoreNonSpace
+                ) >= 0
+                && genericLocationName != null
+            )
             {
                 // When an exemplar city is already part of the generic name,
                 // there's no need to repeat it again so just use the generic name.
@@ -275,7 +380,12 @@ namespace System
         {
             // First try to get the name through the localization data.
             string? exemplarCityName = null;
-            GetDisplayName(timeZoneId, Interop.Globalization.TimeZoneDisplayNameType.ExemplarCity, uiCultureName, ref exemplarCityName);
+            GetDisplayName(
+                timeZoneId,
+                Interop.Globalization.TimeZoneDisplayNameType.ExemplarCity,
+                uiCultureName,
+                ref exemplarCityName
+            );
             if (!string.IsNullOrEmpty(exemplarCityName))
                 return exemplarCityName;
 

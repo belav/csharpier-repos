@@ -53,11 +53,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             private void AddValueExpression()
             {
                 // If we're in a setter/adder/remover then add "value".
-                if (_parentStatement.GetAncestorOrThis<AccessorDeclarationSyntax>() is (kind:
-                        SyntaxKind.SetAccessorDeclaration or
-                        SyntaxKind.InitAccessorDeclaration or
-                        SyntaxKind.AddAccessorDeclaration or
-                        SyntaxKind.RemoveAccessorDeclaration))
+                if (
+                    _parentStatement.GetAncestorOrThis<AccessorDeclarationSyntax>() is
+
+                    (
+                        kind: SyntaxKind.SetAccessorDeclaration
+                            or SyntaxKind.InitAccessorDeclaration
+                            or SyntaxKind.AddAccessorDeclaration
+                            or SyntaxKind.RemoveAccessorDeclaration
+                    )
+                )
                 {
                     _expressions.Add("value");
                 }
@@ -66,8 +71,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             private void AddThisExpression()
             {
                 // If it's an instance member, then also add "this".
-                var memberDeclaration = _parentStatement.GetAncestorOrThis<MemberDeclarationSyntax>();
-                if (!memberDeclaration.IsKind(SyntaxKind.GlobalStatement) && !memberDeclaration.GetModifiers().Any(SyntaxKind.StaticKeyword))
+                var memberDeclaration =
+                    _parentStatement.GetAncestorOrThis<MemberDeclarationSyntax>();
+                if (
+                    !memberDeclaration.IsKind(SyntaxKind.GlobalStatement)
+                    && !memberDeclaration.GetModifiers().Any(SyntaxKind.StaticKeyword)
+                )
                 {
                     _expressions.Add("this");
                 }
@@ -78,8 +87,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 var block = GetImmediatelyContainingBlock();
 
                 // if we're the start of a "catch(Goo e)" clause, then add "e".
-                if (block != null && block?.Parent is CatchClauseSyntax catchClause &&
-                    catchClause.Declaration != null && catchClause.Declaration.Identifier.Kind() != SyntaxKind.None)
+                if (
+                    block != null
+                    && block?.Parent is CatchClauseSyntax catchClause
+                    && catchClause.Declaration != null
+                    && catchClause.Declaration.Identifier.Kind() != SyntaxKind.None
+                )
                 {
                     _expressions.Add(catchClause.Declaration.Identifier.ValueText);
                 }
@@ -87,21 +100,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             private BlockSyntax GetImmediatelyContainingBlock()
             {
-                return IsFirstBlockStatement()
-                    ? (BlockSyntax)_parentStatement.Parent
+                return IsFirstBlockStatement() ? (BlockSyntax)_parentStatement.Parent
                     : _parentStatement is BlockSyntax block && block.OpenBraceToken == _token
                         ? (BlockSyntax)_parentStatement
-                        : null;
+                    : null;
             }
 
-            private bool IsFirstBlockStatement()
-                => _parentStatement.Parent is BlockSyntax parentBlockOpt && parentBlockOpt.Statements.FirstOrDefault() == _parentStatement;
+            private bool IsFirstBlockStatement() =>
+                _parentStatement.Parent is BlockSyntax parentBlockOpt
+                && parentBlockOpt.Statements.FirstOrDefault() == _parentStatement;
 
             private void AddCurrentDeclaration()
             {
                 if (_parentStatement is LocalDeclarationStatementSyntax)
                 {
-                    AddRelevantExpressions(_parentStatement, _expressions, includeDeclarations: true);
+                    AddRelevantExpressions(
+                        _parentStatement,
+                        _expressions,
+                        includeDeclarations: true
+                    );
                 }
             }
 
@@ -116,9 +133,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     var parameterList = memberDeclaration.GetParameterList();
                     AddParameters(parameterList);
                 }
-                else if (block is null
-                    && _parentStatement.Parent is GlobalStatementSyntax { Parent: CompilationUnitSyntax compilationUnit } globalStatement
-                    && compilationUnit.Members.FirstOrDefault() == globalStatement)
+                else if (
+                    block is null
+                    && _parentStatement.Parent
+                        is GlobalStatementSyntax
+                        {
+                            Parent: CompilationUnitSyntax compilationUnit
+                        } globalStatement
+                    && compilationUnit.Members.FirstOrDefault() == globalStatement
+                )
                 {
                     _expressions.Add("args");
                 }
@@ -130,10 +153,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
                 // and we're the start of a method, then also add the parameters of that method to
                 // the proximity expressions.
-                if (block != null &&
-                    block.Parent is AccessorDeclarationSyntax &&
-                    block.Parent.Parent is AccessorListSyntax &&
-                    block.Parent.Parent.Parent is IndexerDeclarationSyntax indexerDeclaration)
+                if (
+                    block != null
+                    && block.Parent is AccessorDeclarationSyntax
+                    && block.Parent.Parent is AccessorListSyntax
+                    && block.Parent.Parent.Parent is IndexerDeclarationSyntax indexerDeclaration
+                )
                 {
                     var parameterList = indexerDeclaration.ParameterList;
                     AddParameters(parameterList);
@@ -146,7 +171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 {
                     _expressions.AddRange(
                         from p in parameterList.Parameters
-                        select p.Identifier.ValueText);
+                        select p.Identifier.ValueText
+                    );
                 }
             }
 
@@ -155,10 +181,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 var line = _syntaxTree.GetText(cancellationToken).Lines.IndexOf(_position);
 
                 // If there's are more statements following us on the same line, then add them as
-                // well. 
-                for (var nextStatement = _parentStatement.GetNextStatement();
-                     nextStatement != null && _syntaxTree.GetText(cancellationToken).Lines.IndexOf(nextStatement.SpanStart) == line;
-                     nextStatement = nextStatement.GetNextStatement())
+                // well.
+                for (
+                    var nextStatement = _parentStatement.GetNextStatement();
+                    nextStatement != null
+                        && _syntaxTree
+                            .GetText(cancellationToken)
+                            .Lines.IndexOf(nextStatement.SpanStart) == line;
+                    nextStatement = nextStatement.GetNextStatement()
+                )
                 {
                     AddRelevantExpressions(nextStatement, _expressions, includeDeclarations: false);
                 }
@@ -166,14 +197,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             private void AddPrecedingRelevantExpressions()
             {
-                // If we're not the first statement in this block, 
+                // If we're not the first statement in this block,
                 // and there's an expression or declaration statement directly above us,
                 // then add the expressions from that as well.
 
                 StatementSyntax previousStatement;
 
-                if (_parentStatement is BlockSyntax block &&
-                    block.CloseBraceToken == _token)
+                if (_parentStatement is BlockSyntax block && block.CloseBraceToken == _token)
                 {
                     // If we're at the last brace of a block, use the last
                     // statement in the block.
@@ -190,10 +220,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     {
                         case SyntaxKind.ExpressionStatement:
                         case SyntaxKind.LocalDeclarationStatement:
-                            AddRelevantExpressions(previousStatement, _expressions, includeDeclarations: true);
+                            AddRelevantExpressions(
+                                previousStatement,
+                                _expressions,
+                                includeDeclarations: true
+                            );
                             break;
                         case SyntaxKind.DoStatement:
-                            AddExpressionTerms((previousStatement as DoStatementSyntax).Condition, _expressions);
+                            AddExpressionTerms(
+                                (previousStatement as DoStatementSyntax).Condition,
+                                _expressions
+                            );
                             AddLastStatementOfConstruct(previousStatement);
                             break;
                         case SyntaxKind.ForStatement:
@@ -207,7 +244,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         case SyntaxKind.SwitchStatement:
                         case SyntaxKind.TryStatement:
                         case SyntaxKind.UsingStatement:
-                            AddRelevantExpressions(previousStatement, _expressions, includeDeclarations: false);
+                            AddRelevantExpressions(
+                                previousStatement,
+                                _expressions,
+                                includeDeclarations: false
+                            );
                             AddLastStatementOfConstruct(previousStatement);
                             break;
                         default:
@@ -217,10 +258,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 else
                 {
                     // This is the first statement of the block. Go to the nearest enclosing statement and add its expressions
-                    var statementAncestor = _parentStatement.Ancestors().OfType<StatementSyntax>().FirstOrDefault(node => !node.IsKind(SyntaxKind.Block));
+                    var statementAncestor = _parentStatement
+                        .Ancestors()
+                        .OfType<StatementSyntax>()
+                        .FirstOrDefault(node => !node.IsKind(SyntaxKind.Block));
                     if (statementAncestor != null)
                     {
-                        AddRelevantExpressions(statementAncestor, _expressions, includeDeclarations: true);
+                        AddRelevantExpressions(
+                            statementAncestor,
+                            _expressions,
+                            includeDeclarations: true
+                        );
                     }
                 }
             }
@@ -235,7 +283,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 switch (statement.Kind())
                 {
                     case SyntaxKind.Block:
-                        AddLastStatementOfConstruct((statement as BlockSyntax).Statements.LastOrDefault());
+                        AddLastStatementOfConstruct(
+                            (statement as BlockSyntax).Statements.LastOrDefault()
+                        );
                         break;
                     case SyntaxKind.BreakStatement:
                     case SyntaxKind.ContinueStatement:
@@ -253,7 +303,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                         break;
                     case SyntaxKind.ForEachStatement:
                     case SyntaxKind.ForEachVariableStatement:
-                        AddLastStatementOfConstruct((statement as CommonForEachStatementSyntax).Statement);
+                        AddLastStatementOfConstruct(
+                            (statement as CommonForEachStatementSyntax).Statement
+                        );
                         break;
                     case SyntaxKind.IfStatement:
                         var ifStatement = statement as IfStatementSyntax;

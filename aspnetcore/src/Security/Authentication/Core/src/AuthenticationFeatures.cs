@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Keeps the User and AuthenticationResult consistent with each other
 /// </summary>
-internal sealed class AuthenticationFeatures : IAuthenticateResultFeature, IHttpAuthenticationFeature
+internal sealed class AuthenticationFeatures
+    : IAuthenticateResultFeature,
+        IHttpAuthenticationFeature
 {
     private ClaimsPrincipal? _user;
     private AuthenticateResult? _result;

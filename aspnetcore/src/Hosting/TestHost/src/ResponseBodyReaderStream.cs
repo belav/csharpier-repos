@@ -50,14 +50,24 @@ internal sealed class ResponseBodyReaderStream : Stream
 
     public override void Flush() => throw new NotSupportedException();
 
-    public override Task FlushAsync(CancellationToken cancellationToken) => throw new NotSupportedException();
+    public override Task FlushAsync(CancellationToken cancellationToken) =>
+        throw new NotSupportedException();
 
     // Write with count 0 will still trigger OnFirstWrite
-    public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => throw new NotSupportedException();
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken) => throw new NotSupportedException();
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    ) => throw new NotSupportedException();
 
     #endregion NotSupported
 
@@ -66,12 +76,20 @@ internal sealed class ResponseBodyReaderStream : Stream
         return ReadAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
     }
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         CheckAborted();
 

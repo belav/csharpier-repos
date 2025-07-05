@@ -4,13 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     /// <devdoc>
-    /// 
+    ///
     /// </devdoc>
-    public interface IIntellisenseBuilder {
-
+    public interface IIntellisenseBuilder
+    {
         /// <devdoc>
         /// Return a localized name.
         /// </devdoc>
@@ -23,8 +23,11 @@ namespace System.ComponentModel {
         /// language - indicates which language service is calling the builder
         /// value - expression being edited
         /// newValue - return the new value
-        /// </devdoc> 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1045:DoNotPassTypesByReference")]
-        bool Show(string language, string value, ref string newValue);       
+        /// </devdoc>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1045:DoNotPassTypesByReference"
+        )]
+        bool Show(string language, string value, ref string newValue);
     }
 }

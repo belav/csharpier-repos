@@ -22,7 +22,8 @@ namespace System.ServiceModel.Activities
     {
         Variable<RuntimeTransactionHandle> transactionHandle;
         Collection<Variable> variables;
-        const string AbortInstanceOnTransactionFailurePropertyName = "AbortInstanceOnTransactionFailure";
+        const string AbortInstanceOnTransactionFailurePropertyName =
+            "AbortInstanceOnTransactionFailure";
         const string RequestPropertyName = "Request";
         const string BodyPropertyName = "Body";
         Variable<bool> isNested;
@@ -30,9 +31,9 @@ namespace System.ServiceModel.Activities
 
         public TransactedReceiveScope()
         {
-            this.transactionHandle = new Variable<RuntimeTransactionHandle>           
+            this.transactionHandle = new Variable<RuntimeTransactionHandle>
             {
-                Name = "TransactionHandle"
+                Name = "TransactionHandle",
             };
             this.isNested = new Variable<bool>();
 
@@ -40,18 +41,10 @@ namespace System.ServiceModel.Activities
         }
 
         [DefaultValue(null)]
-        public Receive Request
-        {
-            get;
-            set;
-        }
+        public Receive Request { get; set; }
 
         [DefaultValue(null)]
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
         public Collection<Variable> Variables
         {
@@ -68,7 +61,7 @@ namespace System.ServiceModel.Activities
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -81,7 +74,9 @@ namespace System.ServiceModel.Activities
             {
                 if (transactionCommitCallback == null)
                 {
-                    transactionCommitCallback = Fx.ThunkCallback(new AsyncCallback(TransactionCommitCallback));
+                    transactionCommitCallback = Fx.ThunkCallback(
+                        new AsyncCallback(TransactionCommitCallback)
+                    );
                 }
 
                 return transactionCommitCallback;
@@ -90,12 +85,17 @@ namespace System.ServiceModel.Activities
 
         Constraint ProcessChildSubtreeConstraints()
         {
-            DelegateInArgument<TransactedReceiveScope> element = new DelegateInArgument<TransactedReceiveScope> { Name = "element" };
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext> { Name = "validationContext" };
-            DelegateInArgument<Activity> child = new DelegateInArgument<Activity> { Name = "child" };
+            DelegateInArgument<TransactedReceiveScope> element =
+                new DelegateInArgument<TransactedReceiveScope> { Name = "element" };
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext> { Name = "validationContext" };
+            DelegateInArgument<Activity> child = new DelegateInArgument<Activity>
+            {
+                Name = "child",
+            };
             Variable<bool> nestedCompensableActivity = new Variable<bool>
             {
-                Name = "nestedCompensableActivity"
+                Name = "nestedCompensableActivity",
             };
 
             return new Constraint<TransactedReceiveScope>
@@ -107,7 +107,7 @@ namespace System.ServiceModel.Activities
                     Handler = new Sequence
                     {
                         Variables = { nestedCompensableActivity },
-                        Activities = 
+                        Activities =
                         {
                             new ForEach<Activity>
                             {
@@ -118,9 +118,9 @@ namespace System.ServiceModel.Activities
                                 Body = new ActivityAction<Activity>
                                 {
                                     Argument = child,
-                                    Handler = new Sequence                                   
+                                    Handler = new Sequence
                                     {
-                                        Activities = 
+                                        Activities =
                                         {
                                             new If()
                                             {
@@ -128,28 +128,34 @@ namespace System.ServiceModel.Activities
                                                 {
                                                     Left = new ObtainType
                                                     {
-                                                        Input = new InArgument<Activity>(child)
+                                                        Input = new InArgument<Activity>(child),
                                                     },
-                                                    Right = new InArgument<Type>(context => typeof(TransactionScope))
+                                                    Right = new InArgument<Type>(context =>
+                                                        typeof(TransactionScope)
+                                                    ),
                                                 },
                                                 Then = new AssertValidation
                                                 {
                                                     IsWarning = true,
-                                                    Assertion = new NestedChildTransactionScopeActivityAbortInstanceFlagValidator
-                                                    {
-                                                         Child = child
-                                                    },
+                                                    Assertion =
+                                                        new NestedChildTransactionScopeActivityAbortInstanceFlagValidator
+                                                        {
+                                                            Child = child,
+                                                        },
                                                     //Message = new InArgument<string>(env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
                                                     Message = new InArgument<string>
                                                     {
-                                                        Expression = new NestedChildTransactionScopeActivityAbortInstanceFlagValidatorMessage
-                                                        {
-                                                            Child = child,
-                                                            ParentDisplayName = this.DisplayName
-                                                        }
+                                                        Expression =
+                                                            new NestedChildTransactionScopeActivityAbortInstanceFlagValidatorMessage
+                                                            {
+                                                                Child = child,
+                                                                ParentDisplayName =
+                                                                    this.DisplayName,
+                                                            },
                                                     },
-                                                    PropertyName = AbortInstanceOnTransactionFailurePropertyName
-                                                }
+                                                    PropertyName =
+                                                        AbortInstanceOnTransactionFailurePropertyName,
+                                                },
                                             },
                                             new If()
                                             {
@@ -157,19 +163,23 @@ namespace System.ServiceModel.Activities
                                                 {
                                                     Left = new ObtainType
                                                     {
-                                                        Input = new InArgument<Activity>(child)
+                                                        Input = new InArgument<Activity>(child),
                                                     },
-                                                    Right = new InArgument<Type>(context => typeof(CompensableActivity))
+                                                    Right = new InArgument<Type>(context =>
+                                                        typeof(CompensableActivity)
+                                                    ),
                                                 },
                                                 Then = new Assign<bool>
                                                 {
-                                                    To = new OutArgument<bool>(nestedCompensableActivity),
-                                                    Value = new InArgument<bool>(true)
-                                                }
-                                            }
-                                        }
-                                    }                                   
-                                }
+                                                    To = new OutArgument<bool>(
+                                                        nestedCompensableActivity
+                                                    ),
+                                                    Value = new InArgument<bool>(true),
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
                             },
                             new AssertValidation
                             {
@@ -180,16 +190,18 @@ namespace System.ServiceModel.Activities
                                     {
                                         Operand = new VariableValue<bool>
                                         {
-                                            Variable = nestedCompensableActivity
-                                        }
-                                    }
+                                            Variable = nestedCompensableActivity,
+                                        },
+                                    },
                                 },
-                                Message = new InArgument<string>(SR2.CompensableActivityInsideTransactedReceiveScope),
-                                PropertyName = BodyPropertyName
-                            }
-                        }
-                    }
-                }
+                                Message = new InArgument<string>(
+                                    SR2.CompensableActivityInsideTransactedReceiveScope
+                                ),
+                                PropertyName = BodyPropertyName,
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -197,7 +209,13 @@ namespace System.ServiceModel.Activities
         {
             if (this.Request == null)
             {
-                metadata.AddValidationError(new ValidationError(SR2.TransactedReceiveScopeMustHaveValidReceive(this.DisplayName), false, RequestPropertyName));
+                metadata.AddValidationError(
+                    new ValidationError(
+                        SR2.TransactedReceiveScopeMustHaveValidReceive(this.DisplayName),
+                        false,
+                        RequestPropertyName
+                    )
+                );
             }
             metadata.AddChild(this.Request);
             metadata.AddChild(this.Body);
@@ -210,27 +228,42 @@ namespace System.ServiceModel.Activities
         {
             if (this.Request == null)
             {
-                throw FxTrace.Exception.AsError(new ValidationException(SR2.TransactedReceiveScopeRequiresReceive(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR2.TransactedReceiveScopeRequiresReceive(this.DisplayName)
+                    )
+                );
             }
-            // we have to do this in code since we aren't fully modeled (in order for 
+            // we have to do this in code since we aren't fully modeled (in order for
             // dynamic update to work correctly)
             RuntimeTransactionHandle handleInstance = this.transactionHandle.Get(context);
             Fx.Assert(handleInstance != null, "RuntimeTransactionHandle is null");
 
             //This is used by InternalReceiveMessage to update the InitiatingTransaction so that we can later call Commit/Complete on it
-            context.Properties.Add(TransactedReceiveData.TransactedReceiveDataExecutionPropertyName, new TransactedReceiveData());
+            context.Properties.Add(
+                TransactedReceiveData.TransactedReceiveDataExecutionPropertyName,
+                new TransactedReceiveData()
+            );
 
-            RuntimeTransactionHandle foundHandle = context.Properties.Find(handleInstance.ExecutionPropertyName) as RuntimeTransactionHandle;
+            RuntimeTransactionHandle foundHandle =
+                context.Properties.Find(handleInstance.ExecutionPropertyName)
+                as RuntimeTransactionHandle;
             if (foundHandle == null)
             {
                 context.Properties.Add(handleInstance.ExecutionPropertyName, handleInstance);
             }
             else
             {
-                 //nested case
+                //nested case
                 if (foundHandle.SuppressTransaction)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.CannotNestTransactedReceiveScopeWhenAmbientHandleIsSuppressed(this.DisplayName)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR2.CannotNestTransactedReceiveScopeWhenAmbientHandleIsSuppressed(
+                                this.DisplayName
+                            )
+                        )
+                    );
                 }
 
                 // Verify if TRS is root and if the foundHandle is not from the parent HandleScope<RTH>
@@ -238,7 +271,7 @@ namespace System.ServiceModel.Activities
                 {
                     handleInstance = foundHandle;
                     this.isNested.Set(context, true);
-                }                
+                }
             }
             context.ScheduleActivity(this.Request, new CompletionCallback(OnReceiveCompleted));
         }
@@ -257,31 +290,52 @@ namespace System.ServiceModel.Activities
 
         void OnBodyCompleted(NativeActivityContext context, ActivityInstance completedInstance)
         {
-            TransactedReceiveData transactedReceiveData = context.Properties.Find(TransactedReceiveData.TransactedReceiveDataExecutionPropertyName) as TransactedReceiveData;
-            Fx.Assert(transactedReceiveData != null, "TransactedReceiveScope.OnBodyComplete - transactedreceivedata is null");
+            TransactedReceiveData transactedReceiveData =
+                context.Properties.Find(
+                    TransactedReceiveData.TransactedReceiveDataExecutionPropertyName
+                ) as TransactedReceiveData;
+            Fx.Assert(
+                transactedReceiveData != null,
+                "TransactedReceiveScope.OnBodyComplete - transactedreceivedata is null"
+            );
 
             //Non Nested
             if (!this.isNested.Get(context))
             {
-                Fx.Assert(transactedReceiveData.InitiatingTransaction != null, "TransactedReceiveScope.OnBodyComplete - Initiating transaction is null");
-                System.Transactions.CommittableTransaction committableTransaction = transactedReceiveData.InitiatingTransaction as System.Transactions.CommittableTransaction;
-                //If the initiating transaction was a committable transaction => this is a server side only transaction. Commit it here instead of letting the dispatcher deal with it 
+                Fx.Assert(
+                    transactedReceiveData.InitiatingTransaction != null,
+                    "TransactedReceiveScope.OnBodyComplete - Initiating transaction is null"
+                );
+                System.Transactions.CommittableTransaction committableTransaction =
+                    transactedReceiveData.InitiatingTransaction
+                    as System.Transactions.CommittableTransaction;
+                //If the initiating transaction was a committable transaction => this is a server side only transaction. Commit it here instead of letting the dispatcher deal with it
                 //since we are Auto Complete = false and we want the completion of the TransactedReceiveScope to initiate the Commit.
                 if (committableTransaction != null)
                 {
-                    committableTransaction.BeginCommit(TransactionCommitAsyncCallback, committableTransaction);
+                    committableTransaction.BeginCommit(
+                        TransactionCommitAsyncCallback,
+                        committableTransaction
+                    );
                 }
                 else
                 {
                     //If the initiating transaction was a dependent transaction instead => this is a flowed in transaction, let's just complete the dependent clone
-                    System.Transactions.DependentTransaction dependentTransaction = transactedReceiveData.InitiatingTransaction as System.Transactions.DependentTransaction;
-                    Fx.Assert(dependentTransaction != null, "TransactedReceiveScope.OnBodyComplete - DependentClone was null");
+                    System.Transactions.DependentTransaction dependentTransaction =
+                        transactedReceiveData.InitiatingTransaction
+                        as System.Transactions.DependentTransaction;
+                    Fx.Assert(
+                        dependentTransaction != null,
+                        "TransactedReceiveScope.OnBodyComplete - DependentClone was null"
+                    );
                     dependentTransaction.Complete();
                 }
             }
             else //Nested scenario - e.g TRS inside a TSA and in a flow case :- we still need to complete the dependent transaction
             {
-                System.Transactions.DependentTransaction dependentTransaction = transactedReceiveData.InitiatingTransaction as System.Transactions.DependentTransaction;
+                System.Transactions.DependentTransaction dependentTransaction =
+                    transactedReceiveData.InitiatingTransaction
+                    as System.Transactions.DependentTransaction;
                 if (dependentTransaction != null)
                 {
                     dependentTransaction.Complete();
@@ -291,8 +345,12 @@ namespace System.ServiceModel.Activities
 
         static void TransactionCommitCallback(IAsyncResult result)
         {
-            System.Transactions.CommittableTransaction committableTransaction = result.AsyncState as System.Transactions.CommittableTransaction;
-            Fx.Assert(committableTransaction != null, "TransactedReceiveScope - In the static TransactionCommitCallback, the committable transaction was null");
+            System.Transactions.CommittableTransaction committableTransaction =
+                result.AsyncState as System.Transactions.CommittableTransaction;
+            Fx.Assert(
+                committableTransaction != null,
+                "TransactedReceiveScope - In the static TransactionCommitCallback, the committable transaction was null"
+            );
             try
             {
                 committableTransaction.EndCommit(result);
@@ -303,7 +361,10 @@ namespace System.ServiceModel.Activities
                 //The runtime will do the right thing based on the AbortInstanceOnTransactionFailure flag. We simply trace out that the call to EndCommit failed from this static callback
                 if (TD.TransactedReceiveScopeEndCommitFailedIsEnabled())
                 {
-                    TD.TransactedReceiveScopeEndCommitFailed(committableTransaction.TransactionInformation.LocalIdentifier, ex.Message);
+                    TD.TransactedReceiveScopeEndCommitFailed(
+                        committableTransaction.TransactionInformation.LocalIdentifier,
+                        ex.Message
+                    );
                 }
             }
         }
@@ -311,34 +372,33 @@ namespace System.ServiceModel.Activities
         //
         class ObtainType : CodeActivity<Type>
         {
-            public ObtainType()
-            {
-            }
+            public ObtainType() { }
 
-            public InArgument<Activity> Input
-            {
-                get;
-                set;
-            }
+            public InArgument<Activity> Input { get; set; }
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument inputArgument = new RuntimeArgument("Input", typeof(Activity), ArgumentDirection.In);
+                RuntimeArgument inputArgument = new RuntimeArgument(
+                    "Input",
+                    typeof(Activity),
+                    ArgumentDirection.In
+                );
                 if (this.Input == null)
                 {
                     this.Input = new InArgument<Activity>();
                 }
                 metadata.Bind(this.Input, inputArgument);
 
-                RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(Type), ArgumentDirection.Out);
+                RuntimeArgument resultArgument = new RuntimeArgument(
+                    "Result",
+                    typeof(Type),
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.Result, resultArgument);
 
                 metadata.SetArgumentsCollection(
-                    new Collection<RuntimeArgument>
-                {
-                    inputArgument,
-                    resultArgument
-                });
+                    new Collection<RuntimeArgument> { inputArgument, resultArgument }
+                );
             }
 
             protected override Type Execute(CodeActivityContext context)
@@ -349,30 +409,31 @@ namespace System.ServiceModel.Activities
 
         class NestedChildTransactionScopeActivityAbortInstanceFlagValidator : CodeActivity<bool>
         {
-            public InArgument<Activity> Child
-            {
-                get;
-                set;
-            }
+            public InArgument<Activity> Child { get; set; }
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument childArgument = new RuntimeArgument("Child", typeof(Activity), ArgumentDirection.In);
+                RuntimeArgument childArgument = new RuntimeArgument(
+                    "Child",
+                    typeof(Activity),
+                    ArgumentDirection.In
+                );
                 if (this.Child == null)
                 {
                     this.Child = new InArgument<Activity>();
                 }
                 metadata.Bind(this.Child, childArgument);
 
-                RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(bool), ArgumentDirection.Out);
+                RuntimeArgument resultArgument = new RuntimeArgument(
+                    "Result",
+                    typeof(bool),
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.Result, resultArgument);
 
                 metadata.SetArgumentsCollection(
-                    new Collection<RuntimeArgument>
-                {
-                    childArgument,
-                    resultArgument
-                });
+                    new Collection<RuntimeArgument> { childArgument, resultArgument }
+                );
             }
 
             protected override bool Execute(CodeActivityContext context)
@@ -386,10 +447,10 @@ namespace System.ServiceModel.Activities
 
                     //We dont care whether the flag was explicitly set
                     // a) We cant tell whether the flag was explicitly set on the child
-                    // b) This is mostly a scenario where the WF calls into a library. It is OK 
+                    // b) This is mostly a scenario where the WF calls into a library. It is OK
                     // to flag the warning either
 
-                    return transactionScopeActivity.AbortInstanceOnTransactionFailure; 
+                    return transactionScopeActivity.AbortInstanceOnTransactionFailure;
                 }
 
                 return true;
@@ -397,37 +458,42 @@ namespace System.ServiceModel.Activities
         }
 
         // Message = new InArgument<string>(env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
-        class NestedChildTransactionScopeActivityAbortInstanceFlagValidatorMessage : CodeActivity<string>
+        class NestedChildTransactionScopeActivityAbortInstanceFlagValidatorMessage
+            : CodeActivity<string>
         {
-            public InArgument<Activity> Child
-            {
-                get;
-                set;
-            }
+            public InArgument<Activity> Child { get; set; }
 
-            public InArgument<string> ParentDisplayName
-            {
-                get;
-                set;
-            }
+            public InArgument<string> ParentDisplayName { get; set; }
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument childArgument = new RuntimeArgument("Child", typeof(Activity), ArgumentDirection.In);
+                RuntimeArgument childArgument = new RuntimeArgument(
+                    "Child",
+                    typeof(Activity),
+                    ArgumentDirection.In
+                );
                 if (this.Child == null)
                 {
                     this.Child = new InArgument<Activity>();
                 }
                 metadata.Bind(this.Child, childArgument);
 
-                RuntimeArgument parentDisplayNameArgument = new RuntimeArgument("ParentDisplayName", typeof(string), ArgumentDirection.In);
+                RuntimeArgument parentDisplayNameArgument = new RuntimeArgument(
+                    "ParentDisplayName",
+                    typeof(string),
+                    ArgumentDirection.In
+                );
                 if (this.ParentDisplayName == null)
                 {
                     this.ParentDisplayName = new InArgument<string>();
                 }
                 metadata.Bind(this.ParentDisplayName, parentDisplayNameArgument);
 
-                RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(string), ArgumentDirection.Out);
+                RuntimeArgument resultArgument = new RuntimeArgument(
+                    "Result",
+                    typeof(string),
+                    ArgumentDirection.Out
+                );
                 if (this.Result == null)
                 {
                     this.Result = new OutArgument<string>();
@@ -436,18 +502,22 @@ namespace System.ServiceModel.Activities
 
                 metadata.SetArgumentsCollection(
                     new Collection<RuntimeArgument>
-                {
-                    childArgument,
-                    parentDisplayNameArgument,
-                    resultArgument
-                });
+                    {
+                        childArgument,
+                        parentDisplayNameArgument,
+                        resultArgument,
+                    }
+                );
             }
 
             protected override string Execute(CodeActivityContext context)
             {
                 // env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)
-                return SR.AbortInstanceOnTransactionFailureDoesNotMatch(this.Child.Get(context).DisplayName, this.ParentDisplayName.Get(context));
+                return SR.AbortInstanceOnTransactionFailureDoesNotMatch(
+                    this.Child.Get(context).DisplayName,
+                    this.ParentDisplayName.Get(context)
+                );
             }
         }
-    }  
+    }
 }

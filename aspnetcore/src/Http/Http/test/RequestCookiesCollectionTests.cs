@@ -25,7 +25,25 @@ public class RequestCookiesCollectionTests
     [Fact]
     public void ParseManyCookies()
     {
-        var cookies = RequestCookieCollection.Parse(new StringValues(new[] { "a=a", "b=b", "c=c", "d=d", "e=e", "f=f", "g=g", "h=h", "i=i", "j=j", "k=k", "l=l" }));
+        var cookies = RequestCookieCollection.Parse(
+            new StringValues(
+                new[]
+                {
+                    "a=a",
+                    "b=b",
+                    "c=c",
+                    "d=d",
+                    "e=e",
+                    "f=f",
+                    "g=g",
+                    "h=h",
+                    "i=i",
+                    "j=j",
+                    "k=k",
+                    "l=l",
+                }
+            )
+        );
 
         Assert.Equal(12, cookies.Count);
     }
@@ -41,7 +59,7 @@ public class RequestCookiesCollectionTests
     {
         var cookies = RequestCookieCollection.Parse(new StringValues(new[] { cookieToParse }));
 
-        if(expectedCookieValues == null)
+        if (expectedCookieValues == null)
         {
             Assert.Equal(0, cookies.Count);
             return;

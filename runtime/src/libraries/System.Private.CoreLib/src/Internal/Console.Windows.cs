@@ -10,21 +10,28 @@ namespace Internal
     {
         public static void Write(string s)
         {
-            WriteCore(Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_OUTPUT_HANDLE), s);
+            WriteCore(
+                Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_OUTPUT_HANDLE),
+                s
+            );
         }
 
         public static partial class Error
         {
             public static void Write(string s)
             {
-                WriteCore(Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_ERROR_HANDLE), s);
+                WriteCore(
+                    Interop.Kernel32.GetStdHandle(Interop.Kernel32.HandleTypes.STD_ERROR_HANDLE),
+                    s
+                );
             }
         }
 
         private static unsafe void WriteCore(IntPtr handle, string s)
         {
             int bufferSize = s.Length * 4;
-            Span<byte> bytes = bufferSize < 1024 ? stackalloc byte[bufferSize] : new byte[bufferSize];
+            Span<byte> bytes =
+                bufferSize < 1024 ? stackalloc byte[bufferSize] : new byte[bufferSize];
             int cbytes;
 
             fixed (char* pChars = s)
@@ -32,7 +39,14 @@ namespace Internal
             {
                 cbytes = Interop.Kernel32.WideCharToMultiByte(
                     Interop.Kernel32.GetConsoleOutputCP(),
-                    0, pChars, s.Length, pBytes, bytes.Length, null, null);
+                    0,
+                    pChars,
+                    s.Length,
+                    pBytes,
+                    bytes.Length,
+                    null,
+                    null
+                );
             }
 
             fixed (byte* pBytes = bytes)

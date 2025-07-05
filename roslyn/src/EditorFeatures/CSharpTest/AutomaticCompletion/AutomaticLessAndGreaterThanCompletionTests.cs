@@ -448,7 +448,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                LessAndGreaterThan.OpenCharacter, LessAndGreaterThan.CloseCharacter);
+                LessAndGreaterThan.OpenCharacter,
+                LessAndGreaterThan.CloseCharacter
+            );
         }
     }
 }

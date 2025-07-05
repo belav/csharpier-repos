@@ -4,9 +4,8 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System.Collections.Generic;
-
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 #if !DEBUG
 using EventSymbolAdapter = Microsoft.CodeAnalysis.CSharp.Symbols.EventSymbol;
 #endif
@@ -15,35 +14,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 {
     internal sealed class EmbeddedEvent : EmbeddedTypesManager.CommonEmbeddedEvent
     {
-        public EmbeddedEvent(EventSymbolAdapter underlyingEvent, EmbeddedMethod adder, EmbeddedMethod remover) :
-            base(underlyingEvent, adder, remover, null)
-        {
-        }
+        public EmbeddedEvent(
+            EventSymbolAdapter underlyingEvent,
+            EmbeddedMethod adder,
+            EmbeddedMethod remover
+        )
+            : base(underlyingEvent, adder, remover, null) { }
 
-        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
             return UnderlyingEvent.AdaptedEventSymbol.GetCustomAttributesToEmit(moduleBuilder);
         }
 
         protected override bool IsRuntimeSpecial
         {
-            get
-            {
-                return UnderlyingEvent.AdaptedEventSymbol.HasRuntimeSpecialName;
-            }
+            get { return UnderlyingEvent.AdaptedEventSymbol.HasRuntimeSpecialName; }
         }
 
         protected override bool IsSpecialName
         {
-            get
-            {
-                return UnderlyingEvent.AdaptedEventSymbol.HasSpecialName;
-            }
+            get { return UnderlyingEvent.AdaptedEventSymbol.HasSpecialName; }
         }
 
-        protected override Cci.ITypeReference GetType(PEModuleBuilder moduleBuilder, SyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+        protected override Cci.ITypeReference GetType(
+            PEModuleBuilder moduleBuilder,
+            SyntaxNode syntaxNodeOpt,
+            DiagnosticBag diagnostics
+        )
         {
-            return moduleBuilder.Translate(UnderlyingEvent.AdaptedEventSymbol.Type, syntaxNodeOpt, diagnostics);
+            return moduleBuilder.Translate(
+                UnderlyingEvent.AdaptedEventSymbol.Type,
+                syntaxNodeOpt,
+                diagnostics
+            );
         }
 
         protected override EmbeddedType ContainingType
@@ -51,28 +56,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             get { return AnAccessor.ContainingType; }
         }
 
-        protected override Cci.TypeMemberVisibility Visibility
-            => UnderlyingEvent.AdaptedEventSymbol.MetadataVisibility;
+        protected override Cci.TypeMemberVisibility Visibility =>
+            UnderlyingEvent.AdaptedEventSymbol.MetadataVisibility;
 
         protected override string Name
         {
-            get
-            {
-                return UnderlyingEvent.AdaptedEventSymbol.MetadataName;
-            }
+            get { return UnderlyingEvent.AdaptedEventSymbol.MetadataName; }
         }
 
-        protected override void EmbedCorrespondingComEventInterfaceMethodInternal(SyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics, bool isUsedForComAwareEventBinding)
+        protected override void EmbedCorrespondingComEventInterfaceMethodInternal(
+            SyntaxNode syntaxNodeOpt,
+            DiagnosticBag diagnostics,
+            bool isUsedForComAwareEventBinding
+        )
         {
             // If the event happens to belong to a class with a ComEventInterfaceAttribute, there will also be
-            // a paired method living on its source interface. The ComAwareEventInfo class expects to find this 
+            // a paired method living on its source interface. The ComAwareEventInfo class expects to find this
             // method through reflection. If we embed an event, therefore, we must ensure that the associated source
             // interface method is also included, even if it is not otherwise referenced in the embedding project.
-            NamedTypeSymbol underlyingContainingType = ContainingType.UnderlyingNamedType.AdaptedNamedTypeSymbol;
+            NamedTypeSymbol underlyingContainingType = ContainingType
+                .UnderlyingNamedType
+                .AdaptedNamedTypeSymbol;
 
             foreach (var attrData in underlyingContainingType.GetAttributes())
             {
-                int signatureIndex = attrData.GetTargetAttributeSignatureIndex(AttributeDescription.ComEventInterfaceAttribute);
+                int signatureIndex = attrData.GetTargetAttributeSignatureIndex(
+                    AttributeDescription.ComEventInterfaceAttribute
+                );
                 if (signatureIndex == 0)
                 {
                     bool foundMatch = false;
@@ -86,15 +96,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
 
                     if (!attrData.HasErrors)
                     {
-                        sourceInterface = attrData.CommonConstructorArguments[0].ValueInternal as NamedTypeSymbol;
+                        sourceInterface =
+                            attrData.CommonConstructorArguments[0].ValueInternal as NamedTypeSymbol;
 
                         if ((object)sourceInterface != null)
                         {
-                            foundMatch = EmbedMatchingInterfaceMethods(sourceInterface, syntaxNodeOpt, diagnostics);
+                            foundMatch = EmbedMatchingInterfaceMethods(
+                                sourceInterface,
+                                syntaxNodeOpt,
+                                diagnostics
+                            );
 
-                            foreach (NamedTypeSymbol source in sourceInterface.AllInterfacesNoUseSiteDiagnostics)
+                            foreach (
+                                NamedTypeSymbol source in sourceInterface.AllInterfacesNoUseSiteDiagnostics
+                            )
                             {
-                                if (EmbedMatchingInterfaceMethods(source, syntaxNodeOpt, diagnostics))
+                                if (
+                                    EmbedMatchingInterfaceMethods(
+                                        source,
+                                        syntaxNodeOpt,
+                                        diagnostics
+                                    )
+                                )
                                 {
                                     foundMatch = true;
                                 }
@@ -107,16 +130,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
                         if ((object)sourceInterface == null)
                         {
                             // ERRID_SourceInterfaceMustBeInterface/ERR_MissingSourceInterface
-                            EmbeddedTypesManager.Error(diagnostics, ErrorCode.ERR_MissingSourceInterface, syntaxNodeOpt, underlyingContainingType, UnderlyingEvent.AdaptedEventSymbol);
+                            EmbeddedTypesManager.Error(
+                                diagnostics,
+                                ErrorCode.ERR_MissingSourceInterface,
+                                syntaxNodeOpt,
+                                underlyingContainingType,
+                                UnderlyingEvent.AdaptedEventSymbol
+                            );
                         }
                         else
                         {
-                            var useSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
-                            sourceInterface.AllInterfacesWithDefinitionUseSiteDiagnostics(ref useSiteInfo);
-                            diagnostics.Add(syntaxNodeOpt == null ? NoLocation.Singleton : syntaxNodeOpt.Location, useSiteInfo.Diagnostics);
+                            var useSiteInfo =
+                                CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
+                            sourceInterface.AllInterfacesWithDefinitionUseSiteDiagnostics(
+                                ref useSiteInfo
+                            );
+                            diagnostics.Add(
+                                syntaxNodeOpt == null
+                                    ? NoLocation.Singleton
+                                    : syntaxNodeOpt.Location,
+                                useSiteInfo.Diagnostics
+                            );
 
                             // ERRID_EventNoPIANoBackingMember/ERR_MissingMethodOnSourceInterface
-                            EmbeddedTypesManager.Error(diagnostics, ErrorCode.ERR_MissingMethodOnSourceInterface, syntaxNodeOpt, sourceInterface, UnderlyingEvent.AdaptedEventSymbol.MetadataName, UnderlyingEvent.AdaptedEventSymbol);
+                            EmbeddedTypesManager.Error(
+                                diagnostics,
+                                ErrorCode.ERR_MissingMethodOnSourceInterface,
+                                syntaxNodeOpt,
+                                sourceInterface,
+                                UnderlyingEvent.AdaptedEventSymbol.MetadataName,
+                                UnderlyingEvent.AdaptedEventSymbol
+                            );
                         }
                     }
 
@@ -125,14 +169,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             }
         }
 
-        private bool EmbedMatchingInterfaceMethods(NamedTypeSymbol sourceInterface, SyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics)
+        private bool EmbedMatchingInterfaceMethods(
+            NamedTypeSymbol sourceInterface,
+            SyntaxNode syntaxNodeOpt,
+            DiagnosticBag diagnostics
+        )
         {
             bool foundMatch = false;
-            foreach (Symbol m in sourceInterface.GetMembers(UnderlyingEvent.AdaptedEventSymbol.MetadataName))
+            foreach (
+                Symbol m in sourceInterface.GetMembers(
+                    UnderlyingEvent.AdaptedEventSymbol.MetadataName
+                )
+            )
             {
                 if (m.Kind == SymbolKind.Method)
                 {
-                    TypeManager.EmbedMethodIfNeedTo(((MethodSymbol)m).GetCciAdapter(), syntaxNodeOpt, diagnostics);
+                    TypeManager.EmbedMethodIfNeedTo(
+                        ((MethodSymbol)m).GetCciAdapter(),
+                        syntaxNodeOpt,
+                        diagnostics
+                    );
                     foundMatch = true;
                 }
             }

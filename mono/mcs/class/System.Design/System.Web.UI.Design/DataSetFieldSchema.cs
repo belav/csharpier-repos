@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,61 +28,78 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.Data;
 using System.ComponentModel;
+using System.Data;
 
-namespace System.Web.UI.Design {
+namespace System.Web.UI.Design
+{
+    public sealed class DataSetFieldSchema : IDataSourceFieldSchema
+    {
+        [MonoTODO]
+        public DataSetFieldSchema(DataColumn column)
+        {
+            throw new NotImplementedException();
+        }
 
-	public sealed class DataSetFieldSchema : IDataSourceFieldSchema
-	{
-		[MonoTODO]
-		public DataSetFieldSchema (DataColumn column)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Type DataType
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public Type DataType {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool Identity {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool IsReadOnly {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool IsUnique {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public int Length {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public string Name {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool Nullable {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public int Precision {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public bool PrimaryKey {
-			get { throw new NotImplementedException (); }
-		}
-		[MonoTODO]
-		public int Scale {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public bool Identity
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public bool IsReadOnly
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public bool IsUnique
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public int Length
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public string Name
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public bool Nullable
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public int Precision
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public bool PrimaryKey
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        [MonoTODO]
+        public int Scale
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }
-

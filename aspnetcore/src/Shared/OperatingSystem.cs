@@ -14,7 +14,9 @@ internal sealed class OperatingSystem
 #if NETFRAMEWORK
     private const bool _isBrowser = false;
 #else
-    private static readonly bool _isBrowser = RuntimeInformation.IsOSPlatform(OSPlatform.Create("browser"));
+    private static readonly bool _isBrowser = RuntimeInformation.IsOSPlatform(
+        OSPlatform.Create("browser")
+    );
 #endif
 
     public static bool IsBrowser() => _isBrowser;

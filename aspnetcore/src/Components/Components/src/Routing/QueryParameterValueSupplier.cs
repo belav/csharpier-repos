@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Components.Routing;
 
 internal sealed class QueryParameterValueSupplier
 {
-    private readonly Dictionary<ReadOnlyMemory<char>, StringSegmentAccumulator> _queryParameterValuesByName = new(QueryParameterNameComparer.Instance);
+    private readonly Dictionary<
+        ReadOnlyMemory<char>,
+        StringSegmentAccumulator
+    > _queryParameterValuesByName = new(QueryParameterNameComparer.Instance);
 
     public void ReadParametersFromQuery(ReadOnlyMemory<char> query)
     {
@@ -22,7 +25,11 @@ internal sealed class QueryParameterValueSupplier
             var decodedValue = suppliedPair.DecodeValue();
 
             // This is safe because we don't mutate the dictionary while the ref local is in scope.
-            ref var values = ref CollectionsMarshal.GetValueRefOrAddDefault(_queryParameterValuesByName, decodedName, out _);
+            ref var values = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                _queryParameterValuesByName,
+                decodedName,
+                out _
+            );
             values.Add(decodedValue);
         }
     }
@@ -34,7 +41,9 @@ internal sealed class QueryParameterValueSupplier
 
         if (!UrlValueConstraint.TryGetByTargetType(elementType, out var parser))
         {
-            throw new InvalidOperationException($"Querystring values cannot be parsed as type '{elementType}'.");
+            throw new InvalidOperationException(
+                $"Querystring values cannot be parsed as type '{elementType}'."
+            );
         }
 
         var values = _queryParameterValuesByName.GetValueOrDefault(queryParameterName.AsMemory());

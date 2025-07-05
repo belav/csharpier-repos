@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Xml;
+using System.Data;
 using System.Data.Common;
 using System.Globalization;
-using System.Data;
+using System.Xml;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {
@@ -18,30 +18,43 @@ namespace System.Data.Entity.Design.SsdlGenerator
     /// Strongly type data table for holding the RelationshipDetails
     /// </summary>
     [Serializable]
-    internal sealed class RelationshipDetailsCollection : System.Data.DataTable, System.Collections.IEnumerable
+    internal sealed class RelationshipDetailsCollection
+        : System.Data.DataTable,
+            System.Collections.IEnumerable
     {
         [NonSerialized]
         private System.Data.DataColumn _columnPKCatalog;
+
         [NonSerialized]
         private System.Data.DataColumn _columnPKSchema;
+
         [NonSerialized]
         private System.Data.DataColumn _columnPKTable;
+
         [NonSerialized]
         private System.Data.DataColumn _columnPKColumn;
+
         [NonSerialized]
         private System.Data.DataColumn _columnFKCatalog;
+
         [NonSerialized]
         private System.Data.DataColumn _columnFKSchema;
+
         [NonSerialized]
         private System.Data.DataColumn _columnFKTable;
+
         [NonSerialized]
         private System.Data.DataColumn _columnFKColumn;
+
         [NonSerialized]
         private System.Data.DataColumn _columnOrdinal;
+
         [NonSerialized]
         private System.Data.DataColumn _columnRelationshipName;
+
         [NonSerialized]
         private System.Data.DataColumn _columnRelationshipId;
+
         [NonSerialized]
         private System.Data.DataColumn _columnRelationshipIsCascadeDelete;
 
@@ -62,82 +75,61 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        internal RelationshipDetailsCollection(System.Runtime.Serialization.SerializationInfo serializationInfo, System.Runtime.Serialization.StreamingContext streamingContext)
+        internal RelationshipDetailsCollection(
+            System.Runtime.Serialization.SerializationInfo serializationInfo,
+            System.Runtime.Serialization.StreamingContext streamingContext
+        )
             : base(serializationInfo, streamingContext)
         {
             UpdateMemberFieldsAfterDeserialization();
         }
-
 
         /// <summary>
         /// Gets the PkCatalog column
         /// </summary>
         public System.Data.DataColumn PKCatalogColumn
         {
-            get
-            {
-                return this._columnPKCatalog;
-            }
+            get { return this._columnPKCatalog; }
         }
-
 
         /// <summary>
         /// Gets the PkSchema column
         /// </summary>
         public System.Data.DataColumn PKSchemaColumn
         {
-            get
-            {
-                return this._columnPKSchema;
-            }
+            get { return this._columnPKSchema; }
         }
-
 
         /// <summary>
         /// Gets the PkTable column
         /// </summary>
         public System.Data.DataColumn PKTableColumn
         {
-            get
-            {
-                return this._columnPKTable;
-            }
+            get { return this._columnPKTable; }
         }
-
 
         /// <summary>
         /// Gets the PkColumn column
         /// </summary>
         public System.Data.DataColumn PKColumnColumn
         {
-            get
-            {
-                return this._columnPKColumn;
-            }
+            get { return this._columnPKColumn; }
         }
-
 
         /// <summary>
         /// Gets the FkCatalog column
         /// </summary>
         public System.Data.DataColumn FKCatalogColumn
         {
-            get
-            {
-                return this._columnFKCatalog;
-            }
+            get { return this._columnFKCatalog; }
         }
-
 
         /// <summary>
         /// Gets the FkSchema column
         /// </summary>
         public System.Data.DataColumn FKSchemaColumn
         {
-            get
-            {
-                return this._columnFKSchema;
-            }
+            get { return this._columnFKSchema; }
         }
 
         /// <summary>
@@ -145,10 +137,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn FKTableColumn
         {
-            get
-            {
-                return this._columnFKTable;
-            }
+            get { return this._columnFKTable; }
         }
 
         /// <summary>
@@ -156,42 +145,28 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn FKColumnColumn
         {
-            get
-            {
-                return this._columnFKColumn;
-            }
+            get { return this._columnFKColumn; }
         }
-
 
         /// <summary>
         /// Gets the Ordinal column
         /// </summary>
         public System.Data.DataColumn OrdinalColumn
         {
-            get
-            {
-                return this._columnOrdinal;
-            }
+            get { return this._columnOrdinal; }
         }
-
 
         /// <summary>
         /// Gets the RelationshipName column
         /// </summary>
         public System.Data.DataColumn RelationshipNameColumn
         {
-            get
-            {
-                return this._columnRelationshipName;
-            }
+            get { return this._columnRelationshipName; }
         }
 
         public System.Data.DataColumn RelationshipIdColumn
         {
-            get
-            {
-                return this._columnRelationshipId;
-            }
+            get { return this._columnRelationshipId; }
         }
 
         /// <summary>
@@ -199,10 +174,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public System.Data.DataColumn RelationshipIsCascadeDeleteColumn
         {
-            get
-            {
-                return this._columnRelationshipIsCascadeDelete;
-            }
+            get { return this._columnRelationshipIsCascadeDelete; }
         }
 
         /// <summary>
@@ -238,29 +210,89 @@ namespace System.Data.Entity.Design.SsdlGenerator
 
         private void InitClass()
         {
-            this._columnPKCatalog = new System.Data.DataColumn(PK_CATALOG, typeof(string), null, System.Data.MappingType.Element);
+            this._columnPKCatalog = new System.Data.DataColumn(
+                PK_CATALOG,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnPKCatalog);
-            this._columnPKSchema = new System.Data.DataColumn(PK_SCHEMA, typeof(string), null, System.Data.MappingType.Element);
+            this._columnPKSchema = new System.Data.DataColumn(
+                PK_SCHEMA,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnPKSchema);
-            this._columnPKTable = new System.Data.DataColumn(PK_TABLE, typeof(string), null, System.Data.MappingType.Element);
+            this._columnPKTable = new System.Data.DataColumn(
+                PK_TABLE,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnPKTable);
-            this._columnPKColumn = new System.Data.DataColumn(PK_COLUMN, typeof(string), null, System.Data.MappingType.Element);
+            this._columnPKColumn = new System.Data.DataColumn(
+                PK_COLUMN,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnPKColumn);
-            this._columnFKCatalog = new System.Data.DataColumn(FK_CATALOG, typeof(string), null, System.Data.MappingType.Element);
+            this._columnFKCatalog = new System.Data.DataColumn(
+                FK_CATALOG,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnFKCatalog);
-            this._columnFKSchema = new System.Data.DataColumn(FK_SCHEMA, typeof(string), null, System.Data.MappingType.Element);
+            this._columnFKSchema = new System.Data.DataColumn(
+                FK_SCHEMA,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnFKSchema);
-            this._columnFKTable = new System.Data.DataColumn(FK_TABLE, typeof(string), null, System.Data.MappingType.Element);
+            this._columnFKTable = new System.Data.DataColumn(
+                FK_TABLE,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnFKTable);
-            this._columnFKColumn = new System.Data.DataColumn(FK_COLUMN, typeof(string), null, System.Data.MappingType.Element);
+            this._columnFKColumn = new System.Data.DataColumn(
+                FK_COLUMN,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnFKColumn);
-            this._columnOrdinal = new System.Data.DataColumn(ORDINAL, typeof(int), null, System.Data.MappingType.Element);
+            this._columnOrdinal = new System.Data.DataColumn(
+                ORDINAL,
+                typeof(int),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnOrdinal);
-            this._columnRelationshipName = new System.Data.DataColumn(RELATIONSHIP_NAME, typeof(string), null, System.Data.MappingType.Element);
+            this._columnRelationshipName = new System.Data.DataColumn(
+                RELATIONSHIP_NAME,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnRelationshipName);
-            this._columnRelationshipId = new System.Data.DataColumn(RELATIONSHIP_ID, typeof(string), null, System.Data.MappingType.Element);
+            this._columnRelationshipId = new System.Data.DataColumn(
+                RELATIONSHIP_ID,
+                typeof(string),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnRelationshipId);
-            this._columnRelationshipIsCascadeDelete = new System.Data.DataColumn(RELATIONSHIP_IsCascadeDelete, typeof(bool), null, System.Data.MappingType.Element);
+            this._columnRelationshipIsCascadeDelete = new System.Data.DataColumn(
+                RELATIONSHIP_IsCascadeDelete,
+                typeof(bool),
+                null,
+                System.Data.MappingType.Element
+            );
             base.Columns.Add(this._columnRelationshipIsCascadeDelete);
         }
 
@@ -290,7 +322,6 @@ namespace System.Data.Entity.Design.SsdlGenerator
             return new RelationshipDetailsRow(builder);
         }
 
-
         /// <summary>
         /// Gets the Type that this row is.
         /// </summary>
@@ -300,5 +331,4 @@ namespace System.Data.Entity.Design.SsdlGenerator
             return typeof(RelationshipDetailsRow);
         }
     }
-
 }

@@ -9,11 +9,17 @@ public class ApiConventionResultTest
     public void GetApiConvention_ReturnsNull_IfNoConventionMatches()
     {
         // Arrange
-        var method = typeof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController).GetMethod(nameof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController.NoMatch));
+        var method = typeof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController).GetMethod(
+            nameof(GetApiConvention_ReturnsNull_IfNoConventionMatchesController.NoMatch)
+        );
         var attribute = new ApiConventionTypeAttribute(typeof(DefaultApiConventions));
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, new[] { attribute }, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            new[] { attribute },
+            out var conventionResult
+        );
 
         // Assert
         Assert.False(result);
@@ -29,19 +35,27 @@ public class ApiConventionResultTest
     public void GetApiConvention_ReturnsResultFromConvention()
     {
         // Arrange
-        var method = typeof(GetApiConvention_ReturnsResultFromConventionController)
-            .GetMethod(nameof(GetApiConvention_ReturnsResultFromConventionController.Match));
-        var attribute = new ApiConventionTypeAttribute(typeof(GetApiConvention_ReturnsResultFromConventionType));
+        var method = typeof(GetApiConvention_ReturnsResultFromConventionController).GetMethod(
+            nameof(GetApiConvention_ReturnsResultFromConventionController.Match)
+        );
+        var attribute = new ApiConventionTypeAttribute(
+            typeof(GetApiConvention_ReturnsResultFromConventionType)
+        );
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, new[] { attribute }, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            new[] { attribute },
+            out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
         Assert.Collection(
             conventionResult.ResponseMetadataProviders.OrderBy(o => o.StatusCode),
             r => Assert.Equal(201, r.StatusCode),
-            r => Assert.Equal(403, r.StatusCode));
+            r => Assert.Equal(403, r.StatusCode)
+        );
     }
 
     public class GetApiConvention_ReturnsResultFromConventionController
@@ -65,16 +79,24 @@ public class ApiConventionResultTest
     public void GetApiConvention_ReturnsResultFromFirstMatchingConvention()
     {
         // Arrange
-        var method = typeof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController)
-            .GetMethod(nameof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController.Get));
+        var method =
+            typeof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController).GetMethod(
+                nameof(GetApiConvention_ReturnsResultFromFirstMatchingConventionController.Get)
+            );
         var attributes = new[]
         {
-                new ApiConventionTypeAttribute(typeof(GetApiConvention_ReturnsResultFromConventionType)),
-                new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
-            };
+            new ApiConventionTypeAttribute(
+                typeof(GetApiConvention_ReturnsResultFromConventionType)
+            ),
+            new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
+        };
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, attributes, result: out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            attributes,
+            result: out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
@@ -82,7 +104,8 @@ public class ApiConventionResultTest
             conventionResult.ResponseMetadataProviders.OrderBy(o => o.StatusCode),
             r => Assert.Equal(200, r.StatusCode),
             r => Assert.Equal(202, r.StatusCode),
-            r => Assert.Equal(404, r.StatusCode));
+            r => Assert.Equal(404, r.StatusCode)
+        );
     }
 
     public class GetApiConvention_ReturnsResultFromFirstMatchingConventionController
@@ -94,12 +117,17 @@ public class ApiConventionResultTest
     public void GetApiConvention_GetAction_MatchesDefaultConvention()
     {
         // Arrange
-        var method = typeof(DefaultConventionController)
-            .GetMethod(nameof(DefaultConventionController.GetUser));
+        var method = typeof(DefaultConventionController).GetMethod(
+            nameof(DefaultConventionController.GetUser)
+        );
         var attributes = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, attributes, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            attributes,
+            out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
@@ -107,19 +135,25 @@ public class ApiConventionResultTest
             conventionResult.ResponseMetadataProviders.OrderBy(o => o.StatusCode),
             r => Assert.IsAssignableFrom<IApiDefaultResponseMetadataProvider>(r),
             r => Assert.Equal(200, r.StatusCode),
-            r => Assert.Equal(404, r.StatusCode));
+            r => Assert.Equal(404, r.StatusCode)
+        );
     }
 
     [Fact]
     public void GetApiConvention_PostAction_MatchesDefaultConvention()
     {
         // Arrange
-        var method = typeof(DefaultConventionController)
-            .GetMethod(nameof(DefaultConventionController.PostUser));
+        var method = typeof(DefaultConventionController).GetMethod(
+            nameof(DefaultConventionController.PostUser)
+        );
         var attributes = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, attributes, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            attributes,
+            out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
@@ -127,22 +161,25 @@ public class ApiConventionResultTest
             conventionResult.ResponseMetadataProviders.OrderBy(o => o.StatusCode),
             r => Assert.IsAssignableFrom<IApiDefaultResponseMetadataProvider>(r),
             r => Assert.Equal(201, r.StatusCode),
-            r => Assert.Equal(400, r.StatusCode));
+            r => Assert.Equal(400, r.StatusCode)
+        );
     }
 
     [Fact]
     public void GetApiConvention_PutAction_MatchesDefaultConvention()
     {
         // Arrange
-        var method = typeof(DefaultConventionController)
-            .GetMethod(nameof(DefaultConventionController.PutUser));
-        var conventions = new[]
-        {
-                new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
-            };
+        var method = typeof(DefaultConventionController).GetMethod(
+            nameof(DefaultConventionController.PutUser)
+        );
+        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, conventions, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            conventions,
+            out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
@@ -151,22 +188,25 @@ public class ApiConventionResultTest
             r => Assert.IsAssignableFrom<IApiDefaultResponseMetadataProvider>(r),
             r => Assert.Equal(204, r.StatusCode),
             r => Assert.Equal(400, r.StatusCode),
-            r => Assert.Equal(404, r.StatusCode));
+            r => Assert.Equal(404, r.StatusCode)
+        );
     }
 
     [Fact]
     public void GetApiConvention_DeleteAction_MatchesDefaultConvention()
     {
         // Arrange
-        var method = typeof(DefaultConventionController)
-            .GetMethod(nameof(DefaultConventionController.Delete));
-        var conventions = new[]
-        {
-                new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
-            };
+        var method = typeof(DefaultConventionController).GetMethod(
+            nameof(DefaultConventionController.Delete)
+        );
+        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, conventions, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            conventions,
+            out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
@@ -175,22 +215,25 @@ public class ApiConventionResultTest
             r => Assert.IsAssignableFrom<IApiDefaultResponseMetadataProvider>(r),
             r => Assert.Equal(200, r.StatusCode),
             r => Assert.Equal(400, r.StatusCode),
-            r => Assert.Equal(404, r.StatusCode));
+            r => Assert.Equal(404, r.StatusCode)
+        );
     }
 
     [Fact]
     public void GetApiConvention_UsesApiConventionMethod()
     {
         // Arrange
-        var method = typeof(DefaultConventionController)
-            .GetMethod(nameof(DefaultConventionController.EditUser));
-        var conventions = new[]
-        {
-                new ApiConventionTypeAttribute(typeof(DefaultApiConventions)),
-            };
+        var method = typeof(DefaultConventionController).GetMethod(
+            nameof(DefaultConventionController.EditUser)
+        );
+        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
-        var result = ApiConventionResult.TryGetApiConvention(method, conventions, out var conventionResult);
+        var result = ApiConventionResult.TryGetApiConvention(
+            method,
+            conventions,
+            out var conventionResult
+        );
 
         // Assert
         Assert.True(result);
@@ -198,7 +241,8 @@ public class ApiConventionResultTest
             conventionResult.ResponseMetadataProviders.OrderBy(o => o.StatusCode),
             r => Assert.IsAssignableFrom<IApiDefaultResponseMetadataProvider>(r),
             r => Assert.Equal(201, r.StatusCode),
-            r => Assert.Equal(400, r.StatusCode));
+            r => Assert.Equal(400, r.StatusCode)
+        );
     }
 
     public class DefaultConventionController

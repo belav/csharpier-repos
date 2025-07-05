@@ -235,7 +235,11 @@ namespace System.Reflection.Metadata
                 var right = rightEnumerator.Current;
 
                 int minLength = Math.Min(left.Length - leftStart, right.Length - rightStart);
-                if (!left._buffer.AsSpan(leftStart, minLength).SequenceEqual(right._buffer.AsSpan(rightStart, minLength)))
+                if (
+                    !left
+                        ._buffer.AsSpan(leftStart, minLength)
+                        .SequenceEqual(right._buffer.AsSpan(rightStart, minLength))
+                )
                 {
                     return false;
                 }
@@ -288,7 +292,13 @@ namespace System.Reflection.Metadata
                     int bytesToCopy = Math.Min(bufferEnd, chunkEnd) - bufferStart;
                     Debug.Assert(bytesToCopy >= 0);
 
-                    Array.Copy(chunk._buffer, bufferStart - chunkStart, result, bufferStart - start, bytesToCopy);
+                    Array.Copy(
+                        chunk._buffer,
+                        bufferStart - chunkStart,
+                        result,
+                        bufferStart - start,
+                        bytesToCopy
+                    );
                     bufferStart += bytesToCopy;
 
                     if (bufferStart == bufferEnd)
@@ -421,7 +431,10 @@ namespace System.Reflection.Metadata
             //      ^________________________________________________________|
 
             _nextOrPrevious = (last != this) ? last : prefix;
-            prefix._nextOrPrevious = (first != this) ? first : (prefixFirst != prefix) ? prefixFirst : prefix;
+            prefix._nextOrPrevious =
+                (first != this) ? first
+                : (prefixFirst != prefix) ? prefixFirst
+                : prefix;
 
             if (last != this)
             {
@@ -476,7 +489,8 @@ namespace System.Reflection.Metadata
             // Update the _previousLength of the suffix so that suffix.Count = suffix._previousLength + suffix.Length doesn't change.
             // Note that the resulting previous length might be negative.
             // The value is not used, other than for calculating the value of Count property.
-            suffix._previousLengthOrFrozenSuffixLengthDelta = suffixPreviousLength + oldSuffixLength - suffix.Length;
+            suffix._previousLengthOrFrozenSuffixLengthDelta =
+                suffixPreviousLength + oldSuffixLength - suffix.Length;
 
             if (!isEmpty)
             {
@@ -496,7 +510,10 @@ namespace System.Reflection.Metadata
                 // [First]->[]->[Last] -> [suffix] -> [SuffixFirst]->[]->[SuffixLast]  <- [this]
                 //    ^_______________________________________________________|
                 _nextOrPrevious = suffixLast;
-                suffix._nextOrPrevious = (suffixFirst != suffix) ? suffixFirst : (first != this) ? first : suffix;
+                suffix._nextOrPrevious =
+                    (suffixFirst != suffix) ? suffixFirst
+                    : (first != this) ? first
+                    : suffix;
 
                 if (last != this)
                 {
@@ -534,7 +551,9 @@ namespace System.Reflection.Metadata
             if (newChunk.ChunkCapacity < newLength)
             {
                 // The overridden allocator didn't provide large enough buffer:
-                throw new InvalidOperationException(SR.Format(SR.ReturnedBuilderSizeTooSmall, GetType(), nameof(AllocateChunk)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.ReturnedBuilderSizeTooSmall, GetType(), nameof(AllocateChunk))
+                );
             }
 
             var newBuffer = newChunk._buffer;
@@ -1071,7 +1090,13 @@ namespace System.Reflection.Metadata
             WriteUTF8(value, 0, value.Length, allowUnpairedSurrogates, prependSize: false);
         }
 
-        internal unsafe void WriteUTF8(string str, int start, int length, bool allowUnpairedSurrogates, bool prependSize)
+        internal unsafe void WriteUTF8(
+            string str,
+            int start,
+            int length,
+            bool allowUnpairedSurrogates,
+            bool prependSize
+        )
         {
             Debug.Assert(start >= 0);
             Debug.Assert(length >= 0);
@@ -1090,7 +1115,12 @@ namespace System.Reflection.Metadata
                 // the max size of compressed int is 4B:
                 int byteLimit = FreeBytes - (prependSize ? sizeof(uint) : 0);
 
-                int bytesToCurrent = BlobUtilities.GetUTF8ByteCount(currentPtr, length, byteLimit, out nextPtr);
+                int bytesToCurrent = BlobUtilities.GetUTF8ByteCount(
+                    currentPtr,
+                    length,
+                    byteLimit,
+                    out nextPtr
+                );
                 int charsToCurrent = (int)(nextPtr - currentPtr);
                 int charsToNext = length - charsToCurrent;
                 int bytesToNext = BlobUtilities.GetUTF8ByteCount(nextPtr, charsToNext);
@@ -1100,14 +1130,26 @@ namespace System.Reflection.Metadata
                     WriteCompressedInteger(bytesToCurrent + bytesToNext);
                 }
 
-                _buffer.WriteUTF8(Length, currentPtr, charsToCurrent, bytesToCurrent, allowUnpairedSurrogates);
+                _buffer.WriteUTF8(
+                    Length,
+                    currentPtr,
+                    charsToCurrent,
+                    bytesToCurrent,
+                    allowUnpairedSurrogates
+                );
                 AddLength(bytesToCurrent);
 
                 if (bytesToNext > 0)
                 {
                     Expand(bytesToNext);
 
-                    _buffer.WriteUTF8(0, nextPtr, charsToNext, bytesToNext, allowUnpairedSurrogates);
+                    _buffer.WriteUTF8(
+                        0,
+                        nextPtr,
+                        charsToNext,
+                        bytesToNext,
+                        allowUnpairedSurrogates
+                    );
                     AddLength(bytesToNext);
                 }
             }
@@ -1164,18 +1206,23 @@ namespace System.Reflection.Metadata
 
         internal string GetDebuggerDisplay()
         {
-            return IsHead ?
-                string.Join("->", GetChunks().Select(chunk => $"[{Display(chunk._buffer, chunk.Length)}]")) :
-                $"<{Display(_buffer, Length)}>";
+            return IsHead
+                ? string.Join(
+                    "->",
+                    GetChunks().Select(chunk => $"[{Display(chunk._buffer, chunk.Length)}]")
+                )
+                : $"<{Display(_buffer, Length)}>";
         }
 
         private static string Display(byte[] bytes, int length)
         {
             const int MaxDisplaySize = 64;
 
-            return (length <= MaxDisplaySize) ?
-                BitConverter.ToString(bytes, 0, length) :
-                BitConverter.ToString(bytes, 0, MaxDisplaySize / 2) + "-...-" + BitConverter.ToString(bytes, length - MaxDisplaySize / 2, MaxDisplaySize / 2);
+            return (length <= MaxDisplaySize)
+                ? BitConverter.ToString(bytes, 0, length)
+                : BitConverter.ToString(bytes, 0, MaxDisplaySize / 2)
+                    + "-...-"
+                    + BitConverter.ToString(bytes, length - MaxDisplaySize / 2, MaxDisplaySize / 2);
         }
     }
 }

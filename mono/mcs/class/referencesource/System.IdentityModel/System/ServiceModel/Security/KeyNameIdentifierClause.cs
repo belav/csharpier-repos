@@ -8,7 +8,9 @@ namespace System.ServiceModel.Security
     using System.IdentityModel.Tokens;
     using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class KeyNameIdentifierClause : SecurityKeyIdentifierClause
     {
         string keyName;
@@ -33,7 +35,7 @@ namespace System.ServiceModel.Security
             KeyNameIdentifierClause that = keyIdentifierClause as KeyNameIdentifierClause;
 
             // PreSharp Bug: Parameter 'that' to this public method must be validated: A null-dereference can occur here.
-            #pragma warning suppress 56506
+#pragma warning suppress 56506
             return ReferenceEquals(this, that) || (that != null && that.Matches(this.keyName));
         }
 
@@ -44,7 +46,11 @@ namespace System.ServiceModel.Security
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "KeyNameIdentifierClause(KeyName = '{0}')", this.KeyName);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "KeyNameIdentifierClause(KeyName = '{0}')",
+                this.KeyName
+            );
         }
     }
 }

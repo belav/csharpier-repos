@@ -30,7 +30,10 @@ namespace System.IO.Pipes
         private static readonly char[] s_invalidPathNameChars = Path.GetInvalidPathChars();
 
         /// <summary>Prefix to prepend to all pipe names.</summary>
-        private static readonly string s_pipePrefix = Path.Combine(Path.GetTempPath(), "CoreFxPipe_");
+        private static readonly string s_pipePrefix = Path.Combine(
+            Path.GetTempPath(),
+            "CoreFxPipe_"
+        );
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -55,7 +58,12 @@ namespace System.IO.Pipes
             return ReadCore(buffer);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanRead)
@@ -76,10 +84,14 @@ namespace System.IO.Pipes
                 return Task.FromResult(0);
             }
 
-            return ReadAsyncCore(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return ReadAsyncCore(new Memory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (!CanRead)
             {
@@ -102,11 +114,21 @@ namespace System.IO.Pipes
             return ReadAsyncCore(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-            => TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), callback, state);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) =>
+            TaskToAsyncResult.Begin(
+                ReadAsync(buffer, offset, count, CancellationToken.None),
+                callback,
+                state
+            );
 
-        public override int EndRead(IAsyncResult asyncResult)
-            => TaskToAsyncResult.End<int>(asyncResult);
+        public override int EndRead(IAsyncResult asyncResult) =>
+            TaskToAsyncResult.End<int>(asyncResult);
 
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -131,7 +153,12 @@ namespace System.IO.Pipes
             WriteCore(buffer);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanWrite)
@@ -151,10 +178,16 @@ namespace System.IO.Pipes
                 return Task.CompletedTask;
             }
 
-            return WriteAsyncCore(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken);
+            return WriteAsyncCore(
+                new ReadOnlyMemory<byte>(buffer, offset, count),
+                cancellationToken
+            );
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (!CanWrite)
             {
@@ -176,11 +209,21 @@ namespace System.IO.Pipes
             return new ValueTask(WriteAsyncCore(buffer, cancellationToken));
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-            => TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) =>
+            TaskToAsyncResult.Begin(
+                WriteAsync(buffer, offset, count, CancellationToken.None),
+                callback,
+                state
+            );
 
-        public override void EndWrite(IAsyncResult asyncResult)
-            => TaskToAsyncResult.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) =>
+            TaskToAsyncResult.End(asyncResult);
 
         internal static string GetPipePath(string serverName, string pipeName)
         {
@@ -193,7 +236,10 @@ namespace System.IO.Pipes
             if (string.Equals(pipeName, AnonymousPipeName, StringComparison.OrdinalIgnoreCase))
             {
                 // Match Windows constraint
-                throw new ArgumentOutOfRangeException(nameof(pipeName), SR.ArgumentOutOfRange_AnonymousReserved);
+                throw new ArgumentOutOfRangeException(
+                    nameof(pipeName),
+                    SR.ArgumentOutOfRange_AnonymousReserved
+                );
             }
 
             // Since pipes are stored as files in the system we support either an absolute path to a file name
@@ -202,8 +248,13 @@ namespace System.IO.Pipes
             // cross-platform with Windows (which has only '\' as an invalid char).
             if (Path.IsPathRooted(pipeName))
             {
-                if (pipeName.AsSpan().ContainsAny(s_invalidPathNameChars) || pipeName.EndsWith(Path.DirectorySeparatorChar))
-                    throw new PlatformNotSupportedException(SR.PlatformNotSupported_InvalidPipeNameChars);
+                if (
+                    pipeName.AsSpan().ContainsAny(s_invalidPathNameChars)
+                    || pipeName.EndsWith(Path.DirectorySeparatorChar)
+                )
+                    throw new PlatformNotSupportedException(
+                        SR.PlatformNotSupported_InvalidPipeNameChars
+                    );
 
                 // Caller is in full control of file location.
                 return pipeName;
@@ -211,7 +262,9 @@ namespace System.IO.Pipes
 
             if (pipeName.AsSpan().ContainsAny(s_invalidFileNameChars))
             {
-                throw new PlatformNotSupportedException(SR.PlatformNotSupported_InvalidPipeNameChars);
+                throw new PlatformNotSupportedException(
+                    SR.PlatformNotSupported_InvalidPipeNameChars
+                );
             }
 
             // The pipe is created directly under Path.GetTempPath() with "CoreFXPipe_" prefix.
@@ -235,8 +288,11 @@ namespace System.IO.Pipes
             int result = CheckPipeCall(Interop.Sys.FStat(safePipeHandle, out status));
             if (result == 0)
             {
-                if ((status.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFIFO &&
-                    (status.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFSOCK)
+                if (
+                    (status.Mode & Interop.Sys.FileTypes.S_IFMT) != Interop.Sys.FileTypes.S_IFIFO
+                    && (status.Mode & Interop.Sys.FileTypes.S_IFMT)
+                        != Interop.Sys.FileTypes.S_IFSOCK
+                )
                 {
                     throw new IOException(SR.IO_InvalidPipeHandle);
                 }
@@ -300,11 +356,16 @@ namespace System.IO.Pipes
             }
         }
 
-        private async ValueTask<int> ReadAsyncCore(Memory<byte> destination, CancellationToken cancellationToken)
+        private async ValueTask<int> ReadAsyncCore(
+            Memory<byte> destination,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                return await InternalHandle!.PipeSocket.ReceiveAsync(destination, SocketFlags.None, cancellationToken).ConfigureAwait(false);
+                return await InternalHandle!
+                    .PipeSocket.ReceiveAsync(destination, SocketFlags.None, cancellationToken)
+                    .ConfigureAwait(false);
             }
             catch (SocketException e)
             {
@@ -312,13 +373,18 @@ namespace System.IO.Pipes
             }
         }
 
-        private async Task WriteAsyncCore(ReadOnlyMemory<byte> source, CancellationToken cancellationToken)
+        private async Task WriteAsyncCore(
+            ReadOnlyMemory<byte> source,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 while (source.Length > 0)
                 {
-                    int bytesWritten = await _handle!.PipeSocket.SendAsync(source, SocketFlags.None, cancellationToken).ConfigureAwait(false);
+                    int bytesWritten = await _handle!
+                        .PipeSocket.SendAsync(source, SocketFlags.None, cancellationToken)
+                        .ConfigureAwait(false);
                     Debug.Assert(bytesWritten > 0 && bytesWritten <= source.Length);
                     source = source.Slice(bytesWritten);
                 }
@@ -410,12 +476,17 @@ namespace System.IO.Pipes
                 CheckPipePropertyOperations();
                 if (value < PipeTransmissionMode.Byte || value > PipeTransmissionMode.Message)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                    );
                 }
 
                 if (value != PipeTransmissionMode.Byte) // Unix pipes are only byte-based, not message-based
                 {
-                    throw new PlatformNotSupportedException(SR.PlatformNotSupported_MessageTransmissionMode);
+                    throw new PlatformNotSupportedException(
+                        SR.PlatformNotSupported_MessageTransmissionMode
+                    );
                 }
 
                 // nop, since it's already the only valid value
@@ -432,13 +503,19 @@ namespace System.IO.Pipes
 
         private SemaphoreSlim EnsureAsyncActiveSemaphoreInitialized()
         {
-            return LazyInitializer.EnsureInitialized(ref _asyncActiveSemaphore, () => new SemaphoreSlim(1, 1));
+            return LazyInitializer.EnsureInitialized(
+                ref _asyncActiveSemaphore,
+                () => new SemaphoreSlim(1, 1)
+            );
         }
 
         /// <summary>Creates an anonymous pipe.</summary>
         /// <param name="reader">The resulting reader end of the pipe.</param>
         /// <param name="writer">The resulting writer end of the pipe.</param>
-        internal static unsafe void CreateAnonymousPipe(out SafePipeHandle reader, out SafePipeHandle writer)
+        internal static unsafe void CreateAnonymousPipe(
+            out SafePipeHandle reader,
+            out SafePipeHandle writer
+        )
         {
             // Allocate the safe handle objects prior to calling pipe/pipe2, in order to help slightly in low-mem situations
             reader = new SafePipeHandle();
@@ -480,14 +557,19 @@ namespace System.IO.Pipes
 
             // If we have a handle, get the capacity of the pipe (there's no distinction between in/out direction).
             // If we don't, just return the buffer size that was passed to the constructor.
-            return _handle != null ?
-                CheckPipeCall(Interop.Sys.Fcntl.GetPipeSz(_handle)) :
-                (int)_outBufferSize;
+            return _handle != null
+                ? CheckPipeCall(Interop.Sys.Fcntl.GetPipeSz(_handle))
+                : (int)_outBufferSize;
         }
 
         internal static void ConfigureSocket(
-            Socket s, SafePipeHandle _,
-            PipeDirection direction, int inBufferSize, int outBufferSize, HandleInheritability inheritability)
+            Socket s,
+            SafePipeHandle _,
+            PipeDirection direction,
+            int inBufferSize,
+            int outBufferSize,
+            HandleInheritability inheritability
+        )
         {
             if (inBufferSize > 0)
             {
@@ -500,8 +582,10 @@ namespace System.IO.Pipes
             }
 
             // Sockets are created with O_CLOEXEC.  If inheritability has been requested, we need to unset the flag.
-            if (inheritability == HandleInheritability.Inheritable &&
-                Interop.Sys.Fcntl.SetFD(s.SafeHandle, 0) == -1)
+            if (
+                inheritability == HandleInheritability.Inheritable
+                && Interop.Sys.Fcntl.SetFD(s.SafeHandle, 0) == -1
+            )
             {
                 throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
             }
@@ -520,9 +604,14 @@ namespace System.IO.Pipes
         internal static Exception CreateExceptionForLastError(string? pipeName = null)
         {
             Interop.ErrorInfo error = Interop.Sys.GetLastErrorInfo();
-            return error.Error == Interop.Error.ENOTSUP ?
-                new PlatformNotSupportedException(SR.Format(SR.PlatformNotSupported_OperatingSystemError, nameof(Interop.Error.ENOTSUP))) :
-                Interop.GetExceptionForIoErrno(error, pipeName);
+            return error.Error == Interop.Error.ENOTSUP
+                ? new PlatformNotSupportedException(
+                    SR.Format(
+                        SR.PlatformNotSupported_OperatingSystemError,
+                        nameof(Interop.Error.ENOTSUP)
+                    )
+                )
+                : Interop.GetExceptionForIoErrno(error, pipeName);
         }
     }
 }

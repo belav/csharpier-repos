@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeMethodInvokeExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -20,12 +20,9 @@ namespace System.CodeDom {
     ///       expression to invoke a method, to be called on a given target.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeMethodInvokeExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeMethodInvokeExpression : CodeExpression
+    {
         private CodeMethodReferenceExpression method;
         private CodeExpressionCollection parameters = new CodeExpressionCollection();
 
@@ -34,8 +31,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeMethodInvokeExpression'/>.
         ///    </para>
         /// </devdoc>
-        public CodeMethodInvokeExpression() {
-        }
+        public CodeMethodInvokeExpression() { }
 
         /// <devdoc>
         ///    <para>
@@ -43,7 +39,11 @@ namespace System.CodeDom {
         ///       and parameters.
         ///    </para>
         /// </devdoc>
-        public CodeMethodInvokeExpression(CodeMethodReferenceExpression method, params CodeExpression[] parameters) {
+        public CodeMethodInvokeExpression(
+            CodeMethodReferenceExpression method,
+            params CodeExpression[] parameters
+        )
+        {
             this.method = method;
             Parameters.AddRange(parameters);
         }
@@ -51,7 +51,12 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeMethodInvokeExpression(CodeExpression targetObject, string methodName, params CodeExpression[] parameters) {
+        public CodeMethodInvokeExpression(
+            CodeExpression targetObject,
+            string methodName,
+            params CodeExpression[] parameters
+        )
+        {
             this.method = new CodeMethodReferenceExpression(targetObject, methodName);
             Parameters.AddRange(parameters);
         }
@@ -61,16 +66,17 @@ namespace System.CodeDom {
         ///       Gets or sets the name of the method to invoke.
         ///    </para>
         /// </devdoc>
-        public CodeMethodReferenceExpression Method {
-            get {
-                if (method == null) {
+        public CodeMethodReferenceExpression Method
+        {
+            get
+            {
+                if (method == null)
+                {
                     method = new CodeMethodReferenceExpression();
                 }
                 return method;
             }
-            set {
-                method = value;
-            }
+            set { method = value; }
         }
 
         /// <devdoc>
@@ -79,10 +85,9 @@ namespace System.CodeDom {
         ///       the parameters to invoke the method with.
         ///    </para>
         /// </devdoc>
-        public CodeExpressionCollection Parameters {
-            get {
-                return parameters;
-            }
+        public CodeExpressionCollection Parameters
+        {
+            get { return parameters; }
         }
     }
 }

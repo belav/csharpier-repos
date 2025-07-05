@@ -88,12 +88,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ProjectId projectId,
             string[] analyzerIds,
             IdeAnalyzerOptions ideOptions,
-            bool isExplicit)
+            bool isExplicit
+        )
         {
             Debug.Assert(documentId != null || documentSpan == null);
             Debug.Assert(documentId != null || documentAnalysisKind == null);
-            Debug.Assert(documentAnalysisKind is null or
-                (AnalysisKind?)AnalysisKind.Syntax or (AnalysisKind?)AnalysisKind.Semantic);
+            Debug.Assert(
+                documentAnalysisKind
+                    is null
+                        or (AnalysisKind?)AnalysisKind.Syntax
+                        or (AnalysisKind?)AnalysisKind.Semantic
+            );
             Debug.Assert(analyzerIds.Length > 0);
 
             ReportSuppressedDiagnostics = reportSuppressedDiagnostics;

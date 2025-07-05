@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -20,8 +20,8 @@ namespace System.Linq
     /// <remarks>
     /// <para>
     /// Use <b>NotBuffered</b> for queries that will be consumed and output as streams, this has the lowest latency
-    /// between beginning query execution and elements being yielded. For some queries, such as those involving a 
-    /// sort (OrderBy, OrderByDescending), buffering is essential and a hint of NotBuffered or AutoBuffered will 
+    /// between beginning query execution and elements being yielded. For some queries, such as those involving a
+    /// sort (OrderBy, OrderByDescending), buffering is essential and a hint of NotBuffered or AutoBuffered will
     /// be ignored.
     /// </para>
     /// <para>
@@ -29,7 +29,7 @@ namespace System.Linq
     /// overall performance.
     /// </para>
     /// <para>
-    /// Use <b>FullyBuffered</b> for queries when the entire output can be processed before the information is 
+    /// Use <b>FullyBuffered</b> for queries when the entire output can be processed before the information is
     /// needed. This option offers the best performance when all of the output can be accumulated before yielding
     /// any information, though it is not suitable for stream processing or showing partial results mid-query.
     /// </para>
@@ -42,7 +42,7 @@ namespace System.Linq
         Default = 0,
 
         /// <summary>
-        /// Use a merge without output buffers. As soon as result elements have been computed, 
+        /// Use a merge without output buffers. As soon as result elements have been computed,
         /// make that element available to the consumer of the query.
         /// </summary>
         NotBuffered = 1,
@@ -58,6 +58,6 @@ namespace System.Linq
         /// Use a merge with full output buffers. The system will accumulate all of the
         /// results before making any of them available to the consumer of the query.
         /// </summary>
-        FullyBuffered = 3
+        FullyBuffered = 3,
     }
 }

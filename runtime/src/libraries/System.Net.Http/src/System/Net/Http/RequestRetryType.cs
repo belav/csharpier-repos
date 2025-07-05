@@ -32,6 +32,6 @@ namespace System.Net.Http
         /// The HTTP/2 connection reached the maximum number of streams and
         /// another HTTP/2 connection must be created or found to serve the request.
         /// </summary>
-        RetryOnStreamLimitReached
+        RetryOnStreamLimitReached,
     }
 }

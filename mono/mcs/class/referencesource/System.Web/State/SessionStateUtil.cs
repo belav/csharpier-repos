@@ -8,7 +8,8 @@
  * SessionStateUtil
  *
  */
-namespace System.Web.SessionState {
+namespace System.Web.SessionState
+{
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
@@ -19,11 +20,13 @@ namespace System.Web.SessionState {
     using System.Web.Util;
     using System.Xml;
 
-    public static class SessionStateUtility {
+    public static class SessionStateUtility
+    {
         internal const String SESSION_KEY = "AspSession";
 
         // Used by AltSerialization's BinaryFormatter for session serialization customization
-        public static ISurrogateSelector SerializationSurrogateSelector {
+        public static ISurrogateSelector SerializationSurrogateSelector
+        {
             [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
             get;
             [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
@@ -31,45 +34,70 @@ namespace System.Web.SessionState {
         }
 
         // Called by custom session state module if they want to raise Session_End.
-        static public void RaiseSessionEnd(IHttpSessionState session, Object eventSource, EventArgs eventArgs) {
-            HttpApplicationFactory.EndSession(new HttpSessionState(session), eventSource, eventArgs);
+        static public void RaiseSessionEnd(
+            IHttpSessionState session,
+            Object eventSource,
+            EventArgs eventArgs
+        )
+        {
+            HttpApplicationFactory.EndSession(
+                new HttpSessionState(session),
+                eventSource,
+                eventArgs
+            );
         }
 
         // Called by custom session state module
-        static public void AddHttpSessionStateToContext(HttpContext context, IHttpSessionState container) {
+        static public void AddHttpSessionStateToContext(
+            HttpContext context,
+            IHttpSessionState container
+        )
+        {
             HttpSessionState sessionState = new HttpSessionState(container);
 
-            try {
+            try
+            {
                 context.Items.Add(SESSION_KEY, sessionState);
             }
-            catch (ArgumentException) {
+            catch (ArgumentException)
+            {
                 throw new HttpException(SR.GetString(SR.Cant_have_multiple_session_module));
             }
         }
 
-        static internal void AddHttpSessionStateModuleToContext(HttpContext context, SessionStateModule module, bool delayed) {
+        internal static void AddHttpSessionStateModuleToContext(
+            HttpContext context,
+            SessionStateModule module,
+            bool delayed
+        )
+        {
             context.AddHttpSessionStateModule(module, delayed);
         }
 
-        static internal void RemoveHttpSessionStateFromContext(HttpContext context, bool delayed) {
-            if (!delayed) {
+        internal static void RemoveHttpSessionStateFromContext(HttpContext context, bool delayed)
+        {
+            if (!delayed)
+            {
                 context.Items.Remove(SESSION_KEY);
             }
 
             context.RemoveHttpSessionStateModule();
-         }
+        }
 
         // Called by custom session state module
-        static public void RemoveHttpSessionStateFromContext(HttpContext context) {
+        static public void RemoveHttpSessionStateFromContext(HttpContext context)
+        {
             RemoveHttpSessionStateFromContext(context, false);
         }
 
         // Called by custom session state module
-        static public IHttpSessionState GetHttpSessionStateFromContext(HttpContext context) {
-                return context.Session.Container;
+        static public IHttpSessionState GetHttpSessionStateFromContext(HttpContext context)
+        {
+            return context.Session.Container;
         }
 
-        static public HttpStaticObjectsCollection GetSessionStaticObjects(HttpContext context) {
+        public static HttpStaticObjectsCollection GetSessionStaticObjects(HttpContext context)
+        {
             return context.Application.SessionStaticObjects.Clone();
         }
 
@@ -78,7 +106,8 @@ namespace System.Web.SessionState {
         /// </summary>
         /// <param name="context">The HttpContext.</param>
         /// <returns>A value that indicates whether session state is required by the context.</returns>
-        static public bool IsSessionStateRequired(HttpContext context) {
+        static public bool IsSessionStateRequired(HttpContext context)
+        {
             return context.RequiresSessionState;
         }
 
@@ -87,50 +116,60 @@ namespace System.Web.SessionState {
         /// </summary>
         /// <param name="context">The HttpContext.</param>
         /// <returns>A value that indicates whether session state is read-only in the context.</returns>
-        static public bool IsSessionStateReadOnly(HttpContext context) {
+        static public bool IsSessionStateReadOnly(HttpContext context)
+        {
             return context.ReadOnlySessionState;
         }
 
-        internal static SessionStateStoreData CreateLegitStoreData(HttpContext context,
-                                                    ISessionStateItemCollection sessionItems,
-                                                    HttpStaticObjectsCollection staticObjects,
-                                                    int timeout) {
-            if (sessionItems == null) {
+        internal static SessionStateStoreData CreateLegitStoreData(
+            HttpContext context,
+            ISessionStateItemCollection sessionItems,
+            HttpStaticObjectsCollection staticObjects,
+            int timeout
+        )
+        {
+            if (sessionItems == null)
+            {
                 sessionItems = new SessionStateItemCollection();
             }
 
-            if (staticObjects == null && context != null) {
+            if (staticObjects == null && context != null)
+            {
                 staticObjects = SessionStateUtility.GetSessionStaticObjects(context);
             }
 
             return new SessionStateStoreData(sessionItems, staticObjects, timeout);
         }
 
-
         // This method will take an item and serialize it
         [SecurityPermission(SecurityAction.Assert, SerializationFormatter = true)]
-        internal static void Serialize(SessionStateStoreData item, Stream stream) {
-            bool    hasItems = true;
-            bool    hasStaticObjects = true;
+        internal static void Serialize(SessionStateStoreData item, Stream stream)
+        {
+            bool hasItems = true;
+            bool hasStaticObjects = true;
 
             BinaryWriter writer = new BinaryWriter(stream);
             writer.Write(item.Timeout);
 
-            if (item.Items == null || item.Items.Count == 0) {
+            if (item.Items == null || item.Items.Count == 0)
+            {
                 hasItems = false;
             }
             writer.Write(hasItems);
 
-            if (item.StaticObjects == null || item.StaticObjects.NeverAccessed) {
+            if (item.StaticObjects == null || item.StaticObjects.NeverAccessed)
+            {
                 hasStaticObjects = false;
             }
             writer.Write(hasStaticObjects);
 
-            if (hasItems) {
+            if (hasItems)
+            {
                 ((SessionStateItemCollection)item.Items).Serialize(writer);
             }
 
-            if (hasStaticObjects) {
+            if (hasStaticObjects)
+            {
                 item.StaticObjects.Serialize(writer);
             }
 
@@ -142,59 +181,82 @@ namespace System.Web.SessionState {
         // This version uses the default classes for SessionStateItemCollection, HttpStaticObjectsCollection
         // and SessionStateStoreData
         [SecurityPermission(SecurityAction.Assert, SerializationFormatter = true)]
-        internal static SessionStateStoreData Deserialize(HttpContext context, Stream    stream) {
-
-            int                 timeout;
-            SessionStateItemCollection   sessionItems;
-            bool                hasItems;
-            bool                hasStaticObjects;
+        internal static SessionStateStoreData Deserialize(HttpContext context, Stream stream)
+        {
+            int timeout;
+            SessionStateItemCollection sessionItems;
+            bool hasItems;
+            bool hasStaticObjects;
             HttpStaticObjectsCollection staticObjects;
-            Byte                eof;
+            Byte eof;
 
             Debug.Assert(context != null);
 
-            try {
+            try
+            {
                 BinaryReader reader = new BinaryReader(stream);
                 timeout = reader.ReadInt32();
                 hasItems = reader.ReadBoolean();
                 hasStaticObjects = reader.ReadBoolean();
 
-                if (hasItems) {
+                if (hasItems)
+                {
                     sessionItems = SessionStateItemCollection.Deserialize(reader);
                 }
-                else {
+                else
+                {
                     sessionItems = new SessionStateItemCollection();
                 }
 
-                if (hasStaticObjects) {
+                if (hasStaticObjects)
+                {
                     staticObjects = HttpStaticObjectsCollection.Deserialize(reader);
                 }
-                else {
+                else
+                {
                     staticObjects = SessionStateUtility.GetSessionStaticObjects(context);
                 }
 
                 eof = reader.ReadByte();
-                if (eof != 0xff) {
+                if (eof != 0xff)
+                {
                     throw new HttpException(SR.GetString(SR.Invalid_session_state));
                 }
             }
-            catch (EndOfStreamException) {
+            catch (EndOfStreamException)
+            {
                 throw new HttpException(SR.GetString(SR.Invalid_session_state));
             }
 
             return new SessionStateStoreData(sessionItems, staticObjects, timeout);
         }
 
-        static internal void SerializeStoreData(SessionStateStoreData item, int initialStreamSize, out byte[] buf, out int length, bool compressionEnabled) {
-            using(MemoryStream s = new MemoryStream(initialStreamSize)) {
+        internal static void SerializeStoreData(
+            SessionStateStoreData item,
+            int initialStreamSize,
+            out byte[] buf,
+            out int length,
+            bool compressionEnabled
+        )
+        {
+            using (MemoryStream s = new MemoryStream(initialStreamSize))
+            {
                 SessionStateUtility.Serialize(item, s);
-                if(compressionEnabled) {
+                if (compressionEnabled)
+                {
                     byte[] serializedBuffer = s.GetBuffer();
                     int serializedLength = (int)s.Length;
                     // truncate the MemoryStream so we can write the compressed data in it
                     s.SetLength(0);
                     // compress the serialized bytes
-                    using(DeflateStream zipStream = new DeflateStream(s, CompressionMode.Compress, true)) {
+                    using (
+                        DeflateStream zipStream = new DeflateStream(
+                            s,
+                            CompressionMode.Compress,
+                            true
+                        )
+                    )
+                    {
                         zipStream.Write(serializedBuffer, 0, serializedLength);
                     }
                     // if the session state tables have ANSI_PADDING disabled, last )s are trimmed.
@@ -202,20 +264,32 @@ namespace System.Web.SessionState {
                     s.WriteByte((byte)0xff);
                 }
                 buf = s.GetBuffer();
-                length = (int) s.Length;
+                length = (int)s.Length;
             }
         }
 
-        static internal SessionStateStoreData DeserializeStoreData(HttpContext context, Stream stream, bool compressionEnabled) {
-            if(compressionEnabled) {
+        internal static SessionStateStoreData DeserializeStoreData(
+            HttpContext context,
+            Stream stream,
+            bool compressionEnabled
+        )
+        {
+            if (compressionEnabled)
+            {
                 // apply the compression decorator on top of the stream
                 // the data should not be bigger than 4GB - compression doesn't work for more than that
-                using(DeflateStream zipStream = new DeflateStream(stream, CompressionMode.Decompress, true)) {
+                using (
+                    DeflateStream zipStream = new DeflateStream(
+                        stream,
+                        CompressionMode.Decompress,
+                        true
+                    )
+                )
+                {
                     return SessionStateUtility.Deserialize(context, zipStream);
                 }
             }
             return SessionStateUtility.Deserialize(context, stream);
         }
     }
-
 }

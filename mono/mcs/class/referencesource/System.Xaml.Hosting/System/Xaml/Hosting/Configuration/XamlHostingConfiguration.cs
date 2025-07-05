@@ -6,9 +6,9 @@ namespace System.Xaml.Hosting.Configuration
 {
     using System;
     using System.Configuration;
-    using System.Web.Configuration;
     using System.Runtime;
     using System.Security;
+    using System.Web.Configuration;
 
     static class XamlHostingConfiguration
     {
@@ -18,13 +18,19 @@ namespace System.Xaml.Hosting.Configuration
         internal const string XamlHostingSection = XamlHostingConfigGroup + "/httpHandlers";
         internal const string XamlRootElementType = "xamlRootElementType";
 
-        internal static bool TryGetHttpHandlerType(string virtualPath, Type hostedXamlType, out Type httpHandlerType)
+        internal static bool TryGetHttpHandlerType(
+            string virtualPath,
+            Type hostedXamlType,
+            out Type httpHandlerType
+        )
         {
             XamlHostingSection section = LoadXamlHostingSection(virtualPath);
-            if (null == section) 
-            { 
-                ConfigurationErrorsException configException = new ConfigurationErrorsException(SR.ConfigSectionNotFound);                 
-                throw FxTrace.Exception.AsError(configException); 
+            if (null == section)
+            {
+                ConfigurationErrorsException configException = new ConfigurationErrorsException(
+                    SR.ConfigSectionNotFound
+                );
+                throw FxTrace.Exception.AsError(configException);
             }
             return section.Handlers.TryGetHttpHandlerType(hostedXamlType, out httpHandlerType);
         }
@@ -32,8 +38,11 @@ namespace System.Xaml.Hosting.Configuration
         static XamlHostingSection LoadXamlHostingSection(string virtualPath)
         {
             //WebConfigurationManager returns the same section object for a given virtual directory (not virtual path).
-            return (XamlHostingSection)WebConfigurationManager.GetSection(XamlHostingConfiguration.XamlHostingSection, virtualPath);
+            return (XamlHostingSection)
+                WebConfigurationManager.GetSection(
+                    XamlHostingConfiguration.XamlHostingSection,
+                    virtualPath
+                );
         }
     }
 }
-

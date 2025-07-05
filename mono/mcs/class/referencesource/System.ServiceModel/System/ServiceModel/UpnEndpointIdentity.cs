@@ -41,7 +41,13 @@ namespace System.ServiceModel
             // PreSharp Bug: Parameter 'identity.ResourceType' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506 // Claim.ResourceType will never return null
             if (!identity.ClaimType.Equals(ClaimTypes.Upn))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.UnrecognizedClaimTypeForIdentity, identity.ClaimType, ClaimTypes.Upn));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.UnrecognizedClaimTypeForIdentity,
+                        identity.ClaimType,
+                        ClaimTypes.Upn
+                    )
+                );
 
             base.Initialize(identity);
         }
@@ -64,7 +70,9 @@ namespace System.ServiceModel
                 {
                     if (this.windowsIdentity != null)
                     {
-                        base.Initialize(Claim.CreateUpnClaim(GetUpnFromWindowsIdentity(this.windowsIdentity)));
+                        base.Initialize(
+                            Claim.CreateUpnClaim(GetUpnFromWindowsIdentity(this.windowsIdentity))
+                        );
                         this.windowsIdentity.Dispose();
                         this.windowsIdentity = null;
                     }
@@ -108,7 +116,14 @@ namespace System.ServiceModel
 
             try
             {
-                int result = SafeNativeMethods.DsGetDcName(null, null, IntPtr.Zero, null, (uint)DSFlags.DS_DIRECTORY_SERVICE_REQUIRED, out pDomainControllerInfo);
+                int result = SafeNativeMethods.DsGetDcName(
+                    null,
+                    null,
+                    IntPtr.Zero,
+                    null,
+                    (uint)DSFlags.DS_DIRECTORY_SERVICE_REQUIRED,
+                    out pDomainControllerInfo
+                );
 
                 return result != (int)Win32Error.ERROR_NO_SUCH_DOMAIN;
             }
@@ -129,9 +144,17 @@ namespace System.ServiceModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("downlevelName");
             }
             int delimiterPos = downlevelName.IndexOf('\\');
-            if ((delimiterPos < 0) || (delimiterPos == 0) || (delimiterPos == downlevelName.Length - 1))
+            if (
+                (delimiterPos < 0)
+                || (delimiterPos == 0)
+                || (delimiterPos == downlevelName.Length - 1)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new InvalidOperationException(
+                        SR.GetString(SR.DownlevelNameCannotMapToUpn, downlevelName)
+                    )
+                );
             }
 
             string shortDomainName = downlevelName.Substring(0, delimiterPos + 1);
@@ -140,27 +163,48 @@ namespace System.ServiceModel
 
             uint capacity = 50;
             StringBuilder fullyQualifiedDomainName = new StringBuilder((int)capacity);
-            if (!SafeNativeMethods.TranslateName(shortDomainName, EXTENDED_NAME_FORMAT.NameSamCompatible, EXTENDED_NAME_FORMAT.NameCanonical,
-                fullyQualifiedDomainName, out capacity))
+            if (
+                !SafeNativeMethods.TranslateName(
+                    shortDomainName,
+                    EXTENDED_NAME_FORMAT.NameSamCompatible,
+                    EXTENDED_NAME_FORMAT.NameCanonical,
+                    fullyQualifiedDomainName,
+                    out capacity
+                )
+            )
             {
                 int errorCode = Marshal.GetLastWin32Error();
                 if (errorCode == (int)Win32Error.ERROR_INSUFFICIENT_BUFFER)
                 {
                     fullyQualifiedDomainName = new StringBuilder((int)capacity);
-                    if (!SafeNativeMethods.TranslateName(shortDomainName, EXTENDED_NAME_FORMAT.NameSamCompatible, EXTENDED_NAME_FORMAT.NameCanonical,
-                        fullyQualifiedDomainName, out capacity))
+                    if (
+                        !SafeNativeMethods.TranslateName(
+                            shortDomainName,
+                            EXTENDED_NAME_FORMAT.NameSamCompatible,
+                            EXTENDED_NAME_FORMAT.NameCanonical,
+                            fullyQualifiedDomainName,
+                            out capacity
+                        )
+                    )
                     {
                         errorCode = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new Win32Exception(errorCode));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                            new Win32Exception(errorCode)
+                        );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new Win32Exception(errorCode));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new Win32Exception(errorCode)
+                    );
                 }
             }
             // trim the trailing / from fqdn
-            fullyQualifiedDomainName = fullyQualifiedDomainName.Remove(fullyQualifiedDomainName.Length - 1, 1);
+            fullyQualifiedDomainName = fullyQualifiedDomainName.Remove(
+                fullyQualifiedDomainName.Length - 1,
+                1
+            );
             fullDomainName = fullyQualifiedDomainName.ToString();
 
             return userName + "@" + fullDomainName;
@@ -171,7 +215,11 @@ namespace System.ServiceModel
             if (writer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
-            writer.WriteElementString(XD.AddressingDictionary.Upn, XD.AddressingDictionary.IdentityExtensionNamespace, (string)this.IdentityClaim.Resource);
+            writer.WriteElementString(
+                XD.AddressingDictionary.Upn,
+                XD.AddressingDictionary.IdentityExtensionNamespace,
+                (string)this.IdentityClaim.Resource
+            );
         }
 
         internal SecurityIdentifier GetUpnSid()
@@ -187,7 +235,9 @@ namespace System.ServiceModel
                         try
                         {
                             NTAccount userAccount = new NTAccount(upn);
-                            this.upnSid = userAccount.Translate(typeof(SecurityIdentifier)) as SecurityIdentifier;
+                            this.upnSid =
+                                userAccount.Translate(typeof(SecurityIdentifier))
+                                as SecurityIdentifier;
                         }
 #pragma warning suppress 56500 // covered by FxCOP
                         catch (Exception e)
@@ -215,5 +265,4 @@ namespace System.ServiceModel
             return this.upnSid;
         }
     }
-
 }

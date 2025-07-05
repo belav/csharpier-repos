@@ -12,6 +12,7 @@ namespace SafeHandleTests
     {
         private static readonly IntPtr initialValue = new IntPtr(458613);
         private static readonly IntPtr newValue = new IntPtr(987185);
+
         public static void RunTest()
         {
             var testHandle = new TestSafeHandle(initialValue);
@@ -33,7 +34,7 @@ namespace SafeHandleTests
 
             var str = new SafeHandleNative.StructWithHandle
             {
-                handle = new TestSafeHandle(initialValue)
+                handle = new TestSafeHandle(initialValue),
             };
 
             SafeHandleNative.StructWithSafeHandleByValue(str, initialValue);

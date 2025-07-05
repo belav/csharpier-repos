@@ -8,9 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Roslyn.Utilities;
-using System.Threading;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser
 {
@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         /// to have thread affinity, since the tests have no specific threading requirements. Thus, it's acceptable for ObjectBrowser
         /// to call the _CanCallOnBackground variant. We hope to audit _CanCallOnBackground periodically, and so rather than
         /// having to understand that each of those uses are ObjectBrowser and thus get a special pass.</remarks>
-        public static T WaitAndGetResult_ObjectBrowser<T>(this Task<T> task, CancellationToken cancellationToken)
-            => task.WaitAndGetResult_CanCallOnBackground(cancellationToken);
+        public static T WaitAndGetResult_ObjectBrowser<T>(
+            this Task<T> task,
+            CancellationToken cancellationToken
+        ) => task.WaitAndGetResult_CanCallOnBackground(cancellationToken);
     }
 }

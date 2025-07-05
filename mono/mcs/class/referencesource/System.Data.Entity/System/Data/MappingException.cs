@@ -16,7 +16,7 @@ namespace System.Data
     /// Mapping exception class. Note that this class has state - so if you change even
     /// its internals, it can be a breaking change
     /// </summary>
-    /// 
+    ///
     [Serializable]
     public sealed class MappingException : EntityException
     {
@@ -24,18 +24,14 @@ namespace System.Data
         /// constructor with default message
         /// </summary>
         public MappingException() // required ctor
-            : base(System.Data.Entity.Strings.Mapping_General_Error)
-        {
-        }
+            : base(System.Data.Entity.Strings.Mapping_General_Error) { }
 
         /// <summary>
         /// default constructor
         /// </summary>
         /// <param name="message">localized error message</param>
         public MappingException(string message) // required ctor
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// constructor
@@ -43,8 +39,7 @@ namespace System.Data
         /// <param name="message">localized error message</param>
         /// <param name="innerException">inner exception</param>
         public MappingException(string message, Exception innerException) // required ctor
-            : base(message, innerException) {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         /// constructor for deserialization
@@ -52,9 +47,6 @@ namespace System.Data
         /// <param name="info"></param>
         /// <param name="context"></param>
         private MappingException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
+            : base(info, context) { }
     }
 }

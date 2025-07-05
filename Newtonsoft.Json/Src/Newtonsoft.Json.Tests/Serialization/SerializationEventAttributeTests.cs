@@ -27,16 +27,19 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Tests.TestObjects;
+using Newtonsoft.Json.Utilities;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.TestObjects;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -44,8 +47,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json.Tests.Serialization
 {
@@ -55,7 +56,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectEvents()
         {
-            SerializationEventTestObject[] objs = new[] { new SerializationEventTestObject(), new DerivedSerializationEventTestObject() };
+            SerializationEventTestObject[] objs = new[]
+            {
+                new SerializationEventTestObject(),
+                new DerivedSerializationEventTestObject(),
+            };
 
             foreach (SerializationEventTestObject current in objs)
             {
@@ -68,41 +73,60 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Assert.AreEqual(null, obj.Member5);
 
                 string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-                StringAssert.AreEqual(@"{
+                StringAssert.AreEqual(
+                    @"{
   ""Member1"": 11,
   ""Member2"": ""This value went into the data file during serialization."",
   ""Member4"": null
-}", json);
+}",
+                    json
+                );
 
                 Assert.AreEqual(11, obj.Member1);
                 Assert.AreEqual("This value was reset after serialization.", obj.Member2);
                 Assert.AreEqual("This is a nonserialized value", obj.Member3);
                 Assert.AreEqual(null, obj.Member4);
 
-                string expectedError = String.Format("Error message for member Member6 = Error getting value from 'Member6' on '{0}'.", obj.GetType().FullName);
+                string expectedError = String.Format(
+                    "Error message for member Member6 = Error getting value from 'Member6' on '{0}'.",
+                    obj.GetType().FullName
+                );
                 Assert.AreEqual(expectedError, obj.Member5);
 
-                JObject o = JObject.Parse(@"{
+                JObject o = JObject.Parse(
+                    @"{
   ""Member1"": 11,
   ""Member2"": ""This value went into the data file during serialization."",
   ""Member4"": null
-}");
+}"
+                );
                 o["Member6"] = "Dummy text for error";
 
-                obj = (SerializationEventTestObject)JsonConvert.DeserializeObject(o.ToString(), obj.GetType());
+                obj = (SerializationEventTestObject)
+                    JsonConvert.DeserializeObject(o.ToString(), obj.GetType());
 
                 Assert.AreEqual(11, obj.Member1);
-                Assert.AreEqual("This value went into the data file during serialization.", obj.Member2);
+                Assert.AreEqual(
+                    "This value went into the data file during serialization.",
+                    obj.Member2
+                );
                 Assert.AreEqual("This value was set during deserialization", obj.Member3);
                 Assert.AreEqual("This value was set after deserialization.", obj.Member4);
 
-                expectedError = String.Format("Error message for member Member6 = Error setting value to 'Member6' on '{0}'.", obj.GetType());
+                expectedError = String.Format(
+                    "Error message for member Member6 = Error setting value to 'Member6' on '{0}'.",
+                    obj.GetType()
+                );
                 Assert.AreEqual(expectedError, obj.Member5);
 
-                DerivedSerializationEventTestObject derivedObj = obj as DerivedSerializationEventTestObject;
+                DerivedSerializationEventTestObject derivedObj =
+                    obj as DerivedSerializationEventTestObject;
                 if (derivedObj != null)
                 {
-                    Assert.AreEqual("This value was set after deserialization.", derivedObj.Member7);
+                    Assert.AreEqual(
+                        "This value was set after deserialization.",
+                        derivedObj.Member7
+                    );
                 }
             }
         }
@@ -110,7 +134,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void ObjectWithConstructorEvents()
         {
-            SerializationEventTestObjectWithConstructor obj = new SerializationEventTestObjectWithConstructor(11, "Hello World!", null);
+            SerializationEventTestObjectWithConstructor obj =
+                new SerializationEventTestObjectWithConstructor(11, "Hello World!", null);
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("Hello World!", obj.Member2);
@@ -118,11 +143,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, obj.Member4);
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Member1"": 11,
   ""Member2"": ""This value went into the data file during serialization."",
   ""Member4"": null
-}", json);
+}",
+                json
+            );
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("This value was reset after serialization.", obj.Member2);
@@ -132,7 +160,10 @@ namespace Newtonsoft.Json.Tests.Serialization
             obj = JsonConvert.DeserializeObject<SerializationEventTestObjectWithConstructor>(json);
 
             Assert.AreEqual(11, obj.Member1);
-            Assert.AreEqual("This value went into the data file during serialization.", obj.Member2);
+            Assert.AreEqual(
+                "This value went into the data file during serialization.",
+                obj.Member2
+            );
             Assert.AreEqual("This value was set during deserialization", obj.Member3);
             Assert.AreEqual("This value was set after deserialization.", obj.Member4);
         }
@@ -145,7 +176,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 1.1m,
                 2.222222222m,
                 int.MaxValue,
-                Convert.ToDecimal(Math.PI)
+                Convert.ToDecimal(Math.PI),
             };
 
             Assert.AreEqual(11, obj.Member1);
@@ -154,13 +185,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, obj.Member4);
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   -1.0,
   1.1,
   2.222222222,
   2147483647.0,
   3.14159265358979
-]", json);
+]",
+                json
+            );
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("This value was reset after serialization.", obj.Member2);
@@ -183,7 +217,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 { 1.1m, "first" },
                 { 2.222222222m, "second" },
                 { int.MaxValue, "third" },
-                { Convert.ToDecimal(Math.PI), "fourth" }
+                { Convert.ToDecimal(Math.PI), "fourth" },
             };
 
             Assert.AreEqual(11, obj.Member1);
@@ -192,13 +226,16 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, obj.Member4);
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""1.1"": ""first"",
   ""2.222222222"": ""second"",
   ""2147483647"": ""third"",
   ""3.14159265358979"": ""fourth"",
   ""79228162514264337593543950335"": ""Inserted on serializing""
-}", json);
+}",
+                json
+            );
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("This value was reset after serialization.", obj.Member2);
@@ -225,22 +262,31 @@ namespace Newtonsoft.Json.Tests.Serialization
             Assert.AreEqual(null, obj.Member5);
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Member1"": 11,
   ""Member2"": ""This value went into the data file during serialization."",
   ""Member4"": null
-}", json);
+}",
+                json
+            );
 
             Assert.AreEqual(11, obj.Member1);
             Assert.AreEqual("This value was reset after serialization.", obj.Member2);
             Assert.AreEqual("This is a nonserialized value", obj.Member3);
             Assert.AreEqual(null, obj.Member4);
-            Assert.AreEqual("Error message for member Member6 = Error getting value from 'Member6' on 'Newtonsoft.Json.Tests.TestObjects.SerializationEventTestObject'.", obj.Member5);
+            Assert.AreEqual(
+                "Error message for member Member6 = Error getting value from 'Member6' on 'Newtonsoft.Json.Tests.TestObjects.SerializationEventTestObject'.",
+                obj.Member5
+            );
 
             obj = JsonConvert.DeserializeObject<SerializationEventTestObject>(json);
 
             Assert.AreEqual(11, obj.Member1);
-            Assert.AreEqual("This value went into the data file during serialization.", obj.Member2);
+            Assert.AreEqual(
+                "This value went into the data file during serialization.",
+                obj.Member2
+            );
             Assert.AreEqual("This value was set during deserialization", obj.Member3);
             Assert.AreEqual("This value was set after deserialization.", obj.Member4);
             Assert.AreEqual(null, obj.Member5);
@@ -257,19 +303,22 @@ namespace Newtonsoft.Json.Tests.Serialization
             }
         }
 
-        public class SerializationEventContextSubClassTestObject : SerializationEventBaseTestObject
-        {
-        }
+        public class SerializationEventContextSubClassTestObject
+            : SerializationEventBaseTestObject { }
 
         [Test]
         public void SerializationEventContextTestObjectSubClassTest()
         {
-            SerializationEventContextSubClassTestObject obj = new SerializationEventContextSubClassTestObject();
+            SerializationEventContextSubClassTestObject obj =
+                new SerializationEventContextSubClassTestObject();
 
             string json = JsonConvert.SerializeObject(obj, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""TestMember"": ""Set!""
-}", json);
+}",
+                json
+            );
         }
 
 #if !(PORTABLE || DNXCORE50) || NETSTANDARD2_0 || NET6_0_OR_GREATER
@@ -289,17 +338,21 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             SerializationEventContextTestObject value = new SerializationEventContextTestObject();
 
-            string json = JsonConvert.SerializeObject(value, Formatting.Indented, new JsonSerializerSettings
-            {
-                Context =
-                    new StreamingContext(
-                        StreamingContextStates.Remoting,
-                        "ContextValue")
-            });
+            string json = JsonConvert.SerializeObject(
+                value,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    Context = new StreamingContext(StreamingContextStates.Remoting, "ContextValue"),
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""TestMember"": ""Remoting ContextValue""
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -312,15 +365,19 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Assert.AreEqual(resolver.OnErrorCallbacks.Count, 1);
 
-            var serializer = JsonSerializer.Create(new JsonSerializerSettings
-            {
-                // If I don't specify Error here, the callback isn't called
-                // either, but no exception is thrown.
-                MissingMemberHandling = MissingMemberHandling.Error,
-            });
+            var serializer = JsonSerializer.Create(
+                new JsonSerializerSettings
+                {
+                    // If I don't specify Error here, the callback isn't called
+                    // either, but no exception is thrown.
+                    MissingMemberHandling = MissingMemberHandling.Error,
+                }
+            );
 
             // This throws with missing member exception, rather than calling my callback.
-            var foo = serializer.Deserialize<FooEvent>(new JsonTextReader(new StringReader("{ Id: 25 }")));
+            var foo = serializer.Deserialize<FooEvent>(
+                new JsonTextReader(new StringReader("{ Id: 25 }"))
+            );
 
             // When fixed, this would pass.
             Assert.AreEqual(25, foo.Identifier);
@@ -352,26 +409,32 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             IList<string> e = c.GetEvents();
 
-            StringAssert.AreEqual(@"OnDeserializing
+            StringAssert.AreEqual(
+                @"OnDeserializing
 OnDeserializing_Derived
 OnDeserialized
 OnDeserialized_Derived
 OnSerializing
 OnSerializing_Derived
 OnSerialized
-OnSerialized_Derived", string.Join(Environment.NewLine, e.ToArray()));
+OnSerialized_Derived",
+                string.Join(Environment.NewLine, e.ToArray())
+            );
         }
 
         [Test]
         public void DerivedDerivedSerializationEvents()
         {
-            var c = JsonConvert.DeserializeObject<DerivedDerivedSerializationEventOrderTestObject>("{}");
+            var c = JsonConvert.DeserializeObject<DerivedDerivedSerializationEventOrderTestObject>(
+                "{}"
+            );
 
             JsonConvert.SerializeObject(c, Formatting.Indented);
 
             IList<string> e = c.GetEvents();
 
-            StringAssert.AreEqual(@"OnDeserializing
+            StringAssert.AreEqual(
+                @"OnDeserializing
 OnDeserializing_Derived
 OnDeserializing_Derived_Derived
 OnDeserialized
@@ -382,25 +445,33 @@ OnSerializing_Derived
 OnSerializing_Derived_Derived
 OnSerialized
 OnSerialized_Derived
-OnSerialized_Derived_Derived", string.Join(Environment.NewLine, e.ToArray()));
+OnSerialized_Derived_Derived",
+                string.Join(Environment.NewLine, e.ToArray())
+            );
         }
 
 #if !(NET20)
         [Test]
         public void DerivedDerivedSerializationEvents_DataContractSerializer()
         {
-            string xml = @"<DerivedDerivedSerializationEventOrderTestObject xmlns=""http://schemas.datacontract.org/2004/07/Newtonsoft.Json.Tests.Serialization"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""/>";
+            string xml =
+                @"<DerivedDerivedSerializationEventOrderTestObject xmlns=""http://schemas.datacontract.org/2004/07/Newtonsoft.Json.Tests.Serialization"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""/>";
 
-            DataContractSerializer ss = new DataContractSerializer(typeof(DerivedDerivedSerializationEventOrderTestObject));
+            DataContractSerializer ss = new DataContractSerializer(
+                typeof(DerivedDerivedSerializationEventOrderTestObject)
+            );
 
-            DerivedDerivedSerializationEventOrderTestObject c = (DerivedDerivedSerializationEventOrderTestObject)ss.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
+            DerivedDerivedSerializationEventOrderTestObject c =
+                (DerivedDerivedSerializationEventOrderTestObject)
+                    ss.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(xml)));
 
             MemoryStream ms = new MemoryStream();
             ss.WriteObject(ms, c);
 
             IList<string> e = c.GetEvents();
 
-            StringAssert.AreEqual(@"OnDeserializing
+            StringAssert.AreEqual(
+                @"OnDeserializing
 OnDeserializing_Derived
 OnDeserializing_Derived_Derived
 OnDeserialized
@@ -411,7 +482,9 @@ OnSerializing_Derived
 OnSerializing_Derived_Derived
 OnSerialized
 OnSerialized_Derived
-OnSerialized_Derived_Derived", string.Join(Environment.NewLine, e.ToArray()));
+OnSerialized_Derived_Derived",
+                string.Join(Environment.NewLine, e.ToArray())
+            );
         }
 #endif
 
@@ -421,13 +494,13 @@ OnSerialized_Derived_Derived", string.Join(Environment.NewLine, e.ToArray()));
             ExportPostData d = new ExportPostData
             {
                 user = "user!",
-                contract = new Contract
-                {
-                    contractName = "name!"
-                }
+                contract = new Contract { contractName = "name!" },
             };
 
-            ExceptionAssert.Throws<JsonException>(() => JsonConvert.SerializeObject(d, Formatting.Indented), "Serialization Callback 'Void Deserialized()' in type 'Newtonsoft.Json.Tests.Serialization.Contract' must have a single parameter of type 'System.Runtime.Serialization.StreamingContext'.");
+            ExceptionAssert.Throws<JsonException>(
+                () => JsonConvert.SerializeObject(d, Formatting.Indented),
+                "Serialization Callback 'Void Deserialized()' in type 'Newtonsoft.Json.Tests.Serialization.Contract' must have a single parameter of type 'System.Runtime.Serialization.StreamingContext'."
+            );
         }
     }
 
@@ -497,7 +570,8 @@ OnSerialized_Derived_Derived", string.Join(Environment.NewLine, e.ToArray()));
         }
     }
 
-    public class DerivedDerivedSerializationEventOrderTestObject : DerivedSerializationEventOrderTestObject
+    public class DerivedDerivedSerializationEventOrderTestObject
+        : DerivedSerializationEventOrderTestObject
     {
         [OnSerializing]
         internal new void OnSerializingMethod(StreamingContext context)

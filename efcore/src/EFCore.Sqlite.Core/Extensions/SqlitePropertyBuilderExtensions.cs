@@ -44,8 +44,8 @@ public static class SqlitePropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasSrid<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        int srid)
-        => (PropertyBuilder<TProperty>)HasSrid((PropertyBuilder)propertyBuilder, srid);
+        int srid
+    ) => (PropertyBuilder<TProperty>)HasSrid((PropertyBuilder)propertyBuilder, srid);
 
     /// <summary>
     ///     Configures the SRID of the column that the property maps to when targeting SQLite.
@@ -64,7 +64,8 @@ public static class SqlitePropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasSrid(
         this IConventionPropertyBuilder propertyBuilder,
         int? srid,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (propertyBuilder.CanSetSrid(srid, fromDataAnnotation))
         {
@@ -90,9 +91,6 @@ public static class SqlitePropertyBuilderExtensions
     public static bool CanSetSrid(
         this IConventionPropertyBuilder propertyBuilder,
         int? srid,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(
-            SqliteAnnotationNames.Srid,
-            srid,
-            fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) => propertyBuilder.CanSetAnnotation(SqliteAnnotationNames.Srid, srid, fromDataAnnotation);
 }

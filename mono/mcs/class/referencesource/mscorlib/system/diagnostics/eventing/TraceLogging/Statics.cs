@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Encoding = System.Text.Encoding;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 namespace System.Diagnostics.Tracing
@@ -30,15 +30,12 @@ namespace System.Diagnostics.Tracing
         public const byte OutTypeChainFlag = 128;
         public const EventTags EventTagsMask = (EventTags)0xfffffff;
 
-        public static readonly TraceLoggingDataType IntPtrType = IntPtr.Size == 8
-            ? TraceLoggingDataType.Int64
-            : TraceLoggingDataType.Int32;
-        public static readonly TraceLoggingDataType UIntPtrType = IntPtr.Size == 8
-            ? TraceLoggingDataType.UInt64
-            : TraceLoggingDataType.UInt32;
-        public static readonly TraceLoggingDataType HexIntPtrType = IntPtr.Size == 8
-            ? TraceLoggingDataType.HexInt64
-            : TraceLoggingDataType.HexInt32;
+        public static readonly TraceLoggingDataType IntPtrType =
+            IntPtr.Size == 8 ? TraceLoggingDataType.Int64 : TraceLoggingDataType.Int32;
+        public static readonly TraceLoggingDataType UIntPtrType =
+            IntPtr.Size == 8 ? TraceLoggingDataType.UInt64 : TraceLoggingDataType.UInt32;
+        public static readonly TraceLoggingDataType HexIntPtrType =
+            IntPtr.Size == 8 ? TraceLoggingDataType.HexInt64 : TraceLoggingDataType.HexInt32;
 
         #endregion
 
@@ -83,7 +80,8 @@ namespace System.Diagnostics.Tracing
             string name,
             int prefixSize,
             int suffixSize,
-            int additionalSize)
+            int additionalSize
+        )
         {
             Statics.CheckName(name);
             int metadataSize = Encoding.UTF8.GetByteCount(name) + 3 + prefixSize + suffixSize;
@@ -100,10 +98,10 @@ namespace System.Diagnostics.Tracing
         /// starting at the index given by pos. Updates pos. Writes 1 to 4 bytes,
         /// depending on the value of the tags variable. Usable for event tags and
         /// field tags.
-        /// 
+        ///
         /// Note that 'metadata' can be null, in which case it only updates 'pos'.
         /// This is useful for a two pass approach where you figure out how big to
-        /// make the array, and then you fill it in.   
+        /// make the array, and then you fill it in.
         /// </summary>
         public static void EncodeTags(int tags, ref int pos, byte[] metadata)
         {
@@ -122,46 +120,32 @@ namespace System.Diagnostics.Tracing
                     metadata[pos] = current;
                 }
                 pos += 1;
-            }
-            while (more);
+            } while (more);
         }
 
-        public static byte Combine(
-            int settingValue,
-            byte defaultValue)
+        public static byte Combine(int settingValue, byte defaultValue)
         {
             unchecked
             {
-                return (byte)settingValue == settingValue
-                    ? (byte)settingValue
+                return (byte)settingValue == settingValue ? (byte)settingValue : defaultValue;
+            }
+        }
+
+        public static byte Combine(int settingValue1, int settingValue2, byte defaultValue)
+        {
+            unchecked
+            {
+                return (byte)settingValue1 == settingValue1 ? (byte)settingValue1
+                    : (byte)settingValue2 == settingValue2 ? (byte)settingValue2
                     : defaultValue;
             }
         }
 
-        public static byte Combine(
-            int settingValue1,
-            int settingValue2,
-            byte defaultValue)
+        public static int Combine(int settingValue1, int settingValue2)
         {
             unchecked
             {
-                return (byte)settingValue1 == settingValue1
-                    ? (byte)settingValue1
-                    : (byte)settingValue2 == settingValue2
-                    ? (byte)settingValue2
-                    : defaultValue;
-            }
-        }
-
-        public static int Combine(
-            int settingValue1,
-            int settingValue2)
-        {
-            unchecked
-            {
-                return (byte)settingValue1 == settingValue1
-                    ? settingValue1
-                    : settingValue2;
+                return (byte)settingValue1 == settingValue1 ? settingValue1 : settingValue2;
             }
         }
 
@@ -180,7 +164,8 @@ namespace System.Diagnostics.Tracing
 
         public static TraceLoggingDataType MakeDataType(
             TraceLoggingDataType baseType,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             return (TraceLoggingDataType)(((int)baseType & 0x1f) | ((int)format << 8));
         }
@@ -193,7 +178,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public static TraceLoggingDataType Format8(
             EventFieldFormat format,
-            TraceLoggingDataType native)
+            TraceLoggingDataType native
+        )
         {
             switch (format)
             {
@@ -205,12 +191,12 @@ namespace System.Diagnostics.Tracing
                     return TraceLoggingDataType.Boolean8;
                 case EventFieldFormat.Hexadecimal:
                     return TraceLoggingDataType.HexInt8;
-#if false 
+#if false
                 case EventSourceFieldFormat.Signed:
                     return TraceLoggingDataType.Int8;
                 case EventSourceFieldFormat.Unsigned:
                     return TraceLoggingDataType.UInt8;
-#endif 
+#endif
                 default:
                     return MakeDataType(native, format);
             }
@@ -224,7 +210,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public static TraceLoggingDataType Format16(
             EventFieldFormat format,
-            TraceLoggingDataType native)
+            TraceLoggingDataType native
+        )
         {
             switch (format)
             {
@@ -255,7 +242,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public static TraceLoggingDataType Format32(
             EventFieldFormat format,
-            TraceLoggingDataType native)
+            TraceLoggingDataType native
+        )
         {
             switch (format)
             {
@@ -265,7 +253,7 @@ namespace System.Diagnostics.Tracing
                     return TraceLoggingDataType.Boolean32;
                 case EventFieldFormat.Hexadecimal:
                     return TraceLoggingDataType.HexInt32;
-#if false 
+#if false
                 case EventSourceFieldFormat.Ipv4Address:
                     return TraceLoggingDataType.Ipv4Address;
                 case EventSourceFieldFormat.ProcessId:
@@ -279,7 +267,7 @@ namespace System.Diagnostics.Tracing
 #endif
                 case EventFieldFormat.HResult:
                     return TraceLoggingDataType.HResult;
-#if false 
+#if false
                 case EventSourceFieldFormat.Signed:
                     return TraceLoggingDataType.Int32;
                 case EventSourceFieldFormat.Unsigned:
@@ -298,7 +286,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public static TraceLoggingDataType Format64(
             EventFieldFormat format,
-            TraceLoggingDataType native)
+            TraceLoggingDataType native
+        )
         {
             switch (format)
             {
@@ -306,7 +295,7 @@ namespace System.Diagnostics.Tracing
                     return native;
                 case EventFieldFormat.Hexadecimal:
                     return TraceLoggingDataType.HexInt64;
-#if false 
+#if false
                 case EventSourceFieldFormat.FileTime:
                     return TraceLoggingDataType.FileTime;
                 case EventSourceFieldFormat.Signed:
@@ -327,7 +316,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public static TraceLoggingDataType FormatPtr(
             EventFieldFormat format,
-            TraceLoggingDataType native)
+            TraceLoggingDataType native
+        )
         {
             switch (format)
             {
@@ -335,12 +325,12 @@ namespace System.Diagnostics.Tracing
                     return native;
                 case EventFieldFormat.Hexadecimal:
                     return HexIntPtrType;
-#if false 
+#if false
                 case EventSourceFieldFormat.Signed:
                     return IntPtrType;
                 case EventSourceFieldFormat.Unsigned:
                     return UIntPtrType;
-#endif 
+#endif
                 default:
                     return MakeDataType(native, format);
             }
@@ -413,22 +403,19 @@ namespace System.Diagnostics.Tracing
 #else
             result = declaringType.GetMethod(
                 name,
-                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic);
+                BindingFlags.DeclaredOnly | BindingFlags.Static | BindingFlags.NonPublic
+            );
 #endif
             return result;
         }
 
-        public static bool HasCustomAttribute(
-            PropertyInfo propInfo,
-            Type attributeType)
+        public static bool HasCustomAttribute(PropertyInfo propInfo, Type attributeType)
         {
             bool result;
 #if ES_BUILD_PCL
             result = propInfo.IsDefined(attributeType);
 #else
-            var attributes = propInfo.GetCustomAttributes(
-                attributeType,
-                false);
+            var attributes = propInfo.GetCustomAttributes(attributeType, false);
             result = attributes.Length != 0;
 #endif
             return result;
@@ -494,7 +481,7 @@ namespace System.Diagnostics.Tracing
             else
             {
 #if ES_BUILD_PCL
-            var ifaceTypes = type.GetTypeInfo().ImplementedInterfaces;
+                var ifaceTypes = type.GetTypeInfo().ImplementedInterfaces;
 #else
                 var ifaceTypes = type.FindInterfaces(IsGenericMatch, typeof(IEnumerable<>));
 #endif
@@ -502,10 +489,10 @@ namespace System.Diagnostics.Tracing
                 foreach (var ifaceType in ifaceTypes)
                 {
 #if ES_BUILD_PCL
-                if (!IsGenericMatch(ifaceType, typeof(IEnumerable<>)))
-                {
-                    continue;
-                }
+                    if (!IsGenericMatch(ifaceType, typeof(IEnumerable<>)))
+                    {
+                        continue;
+                    }
 #endif
 
                     if (elementType != null)
@@ -537,17 +524,17 @@ namespace System.Diagnostics.Tracing
         {
             Delegate result;
 #if ES_BUILD_PCL
-            result = methodInfo.CreateDelegate(
-                delegateType);
+            result = methodInfo.CreateDelegate(delegateType);
 #else
-            result = Delegate.CreateDelegate(
-                delegateType,
-                methodInfo);
+            result = Delegate.CreateDelegate(delegateType, methodInfo);
 #endif
             return result;
         }
 
-        public static TraceLoggingTypeInfo GetTypeInfoInstance(Type dataType, List<Type> recursionCheck)
+        public static TraceLoggingTypeInfo GetTypeInfoInstance(
+            Type dataType,
+            List<Type> recursionCheck
+        )
         {
             TraceLoggingTypeInfo result;
 
@@ -567,7 +554,8 @@ namespace System.Diagnostics.Tracing
             {
                 var getInstanceInfo = Statics.GetDeclaredStaticMethod(
                     typeof(TraceLoggingTypeInfo<>).MakeGenericType(dataType),
-                    "GetInstance");
+                    "GetInstance"
+                );
                 var typeInfoObj = getInstanceInfo.Invoke(null, new object[] { recursionCheck });
                 result = (TraceLoggingTypeInfo)typeInfoObj;
             }
@@ -576,21 +564,26 @@ namespace System.Diagnostics.Tracing
         }
 
         public static TraceLoggingTypeInfo<DataType> CreateDefaultTypeInfo<DataType>(
-            List<Type> recursionCheck)
+            List<Type> recursionCheck
+        )
         {
             TraceLoggingTypeInfo result;
             var dataType = typeof(DataType);
 
             if (recursionCheck.Contains(dataType))
             {
-                throw new NotSupportedException(Environment.GetResourceString("EventSource_RecursiveTypeDefinition"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("EventSource_RecursiveTypeDefinition")
+                );
             }
 
             recursionCheck.Add(dataType);
 
             var eventAttrib = Statics.GetCustomAttribute<EventDataAttribute>(dataType);
-            if (eventAttrib != null ||
-                Statics.GetCustomAttribute<CompilerGeneratedAttribute>(dataType) != null)
+            if (
+                eventAttrib != null
+                || Statics.GetCustomAttribute<CompilerGeneratedAttribute>(dataType) != null
+            )
             {
                 var analysis = new TypeAnalysis(dataType, eventAttrib, recursionCheck);
                 result = new InvokeTypeInfo<DataType>(analysis);
@@ -660,9 +653,12 @@ namespace System.Diagnostics.Tracing
                 }
                 else
                 {
-                    result = (TraceLoggingTypeInfo<DataType>)CreateInstance(
-                        typeof(ArrayTypeInfo<>).MakeGenericType(elementType),
-                        GetTypeInfoInstance(elementType, recursionCheck));
+                    result =
+                        (TraceLoggingTypeInfo<DataType>)
+                            CreateInstance(
+                                typeof(ArrayTypeInfo<>).MakeGenericType(elementType),
+                                GetTypeInfoInstance(elementType, recursionCheck)
+                            );
                 }
             }
             else if (Statics.IsEnum(dataType))
@@ -703,7 +699,13 @@ namespace System.Diagnostics.Tracing
                 else
                 {
                     // Unexpected
-                    throw new NotSupportedException(Environment.GetResourceString("EventSource_NotSupportedEnumType", dataType.Name, underlyingType.Name));
+                    throw new NotSupportedException(
+                        Environment.GetResourceString(
+                            "EventSource_NotSupportedEnumType",
+                            dataType.Name,
+                            underlyingType.Name
+                        )
+                    );
                 }
             }
             else if (dataType == typeof(String))
@@ -793,29 +795,46 @@ namespace System.Diagnostics.Tracing
             else if (IsGenericMatch(dataType, typeof(KeyValuePair<,>)))
             {
                 var args = GetGenericArguments(dataType);
-                result = (TraceLoggingTypeInfo<DataType>)CreateInstance(
-                    typeof(KeyValuePairTypeInfo<,>).MakeGenericType(args[0], args[1]),
-                    recursionCheck);
+                result =
+                    (TraceLoggingTypeInfo<DataType>)
+                        CreateInstance(
+                            typeof(KeyValuePairTypeInfo<,>).MakeGenericType(args[0], args[1]),
+                            recursionCheck
+                        );
             }
             else if (IsGenericMatch(dataType, typeof(Nullable<>)))
             {
                 var args = GetGenericArguments(dataType);
-                result = (TraceLoggingTypeInfo<DataType>)CreateInstance(
-                    typeof(NullableTypeInfo<>).MakeGenericType(args[0]),
-                    recursionCheck);
+                result =
+                    (TraceLoggingTypeInfo<DataType>)
+                        CreateInstance(
+                            typeof(NullableTypeInfo<>).MakeGenericType(args[0]),
+                            recursionCheck
+                        );
             }
             else
             {
                 var elementType = FindEnumerableElementType(dataType);
                 if (elementType != null)
                 {
-                    result = (TraceLoggingTypeInfo<DataType>)CreateInstance(
-                        typeof(EnumerableTypeInfo<,>).MakeGenericType(dataType, elementType),
-                        GetTypeInfoInstance(elementType, recursionCheck));
+                    result =
+                        (TraceLoggingTypeInfo<DataType>)
+                            CreateInstance(
+                                typeof(EnumerableTypeInfo<,>).MakeGenericType(
+                                    dataType,
+                                    elementType
+                                ),
+                                GetTypeInfoInstance(elementType, recursionCheck)
+                            );
                 }
                 else
                 {
-                    throw new ArgumentException(Environment.GetResourceString("EventSource_NonCompliantTypeError", dataType.Name));
+                    throw new ArgumentException(
+                        Environment.GetResourceString(
+                            "EventSource_NonCompliantTypeError",
+                            dataType.Name
+                        )
+                    );
                 }
             }
 

@@ -17,20 +17,36 @@ namespace System.Management.Tests
         {
             // The underlying delegate usage can cause some cases to have the PNSE as the inner exception but there is a best effort
             // to throw PNSE for such case.
-            Assert.Throws<PlatformNotSupportedException>(() => new ManagementObject($"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new ManagementObject(
+                    $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                )
+            );
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Get_Win32_LogicalDisk()
         {
-            using (ManagementObject obj = new ManagementObject($"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""))
+            using (
+                ManagementObject obj = new ManagementObject(
+                    $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                )
+            )
             {
                 obj.Get();
                 Assert.True(obj.Properties.Count > 0);
                 Assert.True(ulong.Parse(obj["Size"].ToString()) > 0);
                 var classPath = obj.ClassPath.Path;
-                Assert.Equal($@"\\{Environment.MachineName}\root\cimv2:Win32_LogicalDisk", classPath);
+                Assert.Equal(
+                    $@"\\{Environment.MachineName}\root\cimv2:Win32_LogicalDisk",
+                    classPath
+                );
 
                 var clone = obj.Clone();
                 Assert.False(ReferenceEquals(clone, obj));
@@ -39,11 +55,20 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [OuterLoop]
         public void GetRelated_For_Win32_LogicalDisk()
         {
-            using (ManagementObject obj = new ManagementObject($"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""))
+            using (
+                ManagementObject obj = new ManagementObject(
+                    $"Win32_LogicalDisk.DeviceID=\"{WmiTestHelper.SystemDriveId}\""
+                )
+            )
             using (ManagementObjectCollection relatedCollection = obj.GetRelated())
             {
                 Assert.True(relatedCollection.Count > 0);
@@ -53,10 +78,19 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Set_Property_Win32_ComputerSystem()
         {
-            using (ManagementObject obj = new ManagementObject($"Win32_ComputerSystem.Name=\"{Environment.MachineName}\""))
+            using (
+                ManagementObject obj = new ManagementObject(
+                    $"Win32_ComputerSystem.Name=\"{Environment.MachineName}\""
+                )
+            )
             {
                 obj.Get();
                 obj.SetPropertyValue("Workgroup", "WmiTests");
@@ -64,7 +98,12 @@ namespace System.Management.Tests
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [OuterLoop]
         public void Invoke_Instance_And_Static_Method_Win32_Process()
         {
@@ -75,35 +114,46 @@ namespace System.Management.Tests
             }
             // Retries are sometimes necessary as underlying API call can return
             // ERROR_NOT_READY or occasionally ERROR_INVALID_BLOCK or ERROR_NOT_ENOUGH_MEMORY
-            RetryHelper.Execute(() =>
-            {
-                var processClass = new ManagementClass("Win32_Process");
-                object[] methodArgs = { "notepad.exe", null, null, 0 };
-
-                object resultObj = processClass.InvokeMethod("Create", methodArgs);
-
-                var resultCode = (uint)resultObj;
-                Assert.Equal(0u, resultCode);
-
-                var processId = (uint)methodArgs[3];
-                Assert.True(0u != processId, $"Unexpected process ID: {processId}");
-
-                using (Process targetProcess = Process.GetProcessById((int)processId))
-                using (var process = new ManagementObject($"Win32_Process.Handle=\"{processId}\""))
+            RetryHelper.Execute(
+                () =>
                 {
-                    Assert.False(targetProcess.HasExited);
+                    var processClass = new ManagementClass("Win32_Process");
+                    object[] methodArgs = { "notepad.exe", null, null, 0 };
 
-                    resultObj = process.InvokeMethod("Terminate", new object[] { 0 });
-                    resultCode = (uint)resultObj;
+                    object resultObj = processClass.InvokeMethod("Create", methodArgs);
+
+                    var resultCode = (uint)resultObj;
                     Assert.Equal(0u, resultCode);
 
-                    Assert.True(targetProcess.HasExited);
-                }
-            }, maxAttempts: 10, retryWhen: e => e is XunitException);
+                    var processId = (uint)methodArgs[3];
+                    Assert.True(0u != processId, $"Unexpected process ID: {processId}");
+
+                    using (Process targetProcess = Process.GetProcessById((int)processId))
+                    using (
+                        var process = new ManagementObject($"Win32_Process.Handle=\"{processId}\"")
+                    )
+                    {
+                        Assert.False(targetProcess.HasExited);
+
+                        resultObj = process.InvokeMethod("Terminate", new object[] { 0 });
+                        resultCode = (uint)resultObj;
+                        Assert.Equal(0u, resultCode);
+
+                        Assert.True(targetProcess.HasExited);
+                    }
+                },
+                maxAttempts: 10,
+                retryWhen: e => e is XunitException
+            );
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsWmiSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [OuterLoop]
         public void Serialize_ManagementException()
         {

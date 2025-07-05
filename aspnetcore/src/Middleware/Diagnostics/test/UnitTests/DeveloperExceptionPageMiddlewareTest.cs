@@ -11,9 +11,9 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.Metrics;
 using Microsoft.Extensions.Diagnostics.Metrics.Testing;
@@ -36,7 +36,10 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                     {
                         if (context.Exception is not null)
                         {
-                            context.ProblemDetails.Extensions.Add("OriginalExceptionMessage", context.Exception.Message);
+                            context.ProblemDetails.Extensions.Add(
+                                "OriginalExceptionMessage",
+                                context.Exception.Message
+                            );
                         }
                     };
                 });
@@ -44,17 +47,17 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new Exception("Test exception");
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -67,7 +70,9 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
 
         // Assert
         var body = await response.Content.ReadFromJsonAsync<ProblemDetails>();
-        var originalExceptionMessage = ((JsonElement)body.Extensions["OriginalExceptionMessage"]).GetString();
+        var originalExceptionMessage = (
+            (JsonElement)body.Extensions["OriginalExceptionMessage"]
+        ).GetString();
         Assert.Equal("Test exception", originalExceptionMessage);
     }
 
@@ -84,9 +89,18 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                     configure.CustomizeProblemDetails = (context) =>
                     {
                         var feature = context.HttpContext.Features.Get<IExceptionHandlerFeature>();
-                        context.ProblemDetails.Extensions.Add("OriginalExceptionMessage", feature?.Error.Message);
-                        context.ProblemDetails.Extensions.Add("EndpointDisplayName", feature?.Endpoint?.DisplayName);
-                        context.ProblemDetails.Extensions.Add("RouteValue", feature?.RouteValues?["id"]);
+                        context.ProblemDetails.Extensions.Add(
+                            "OriginalExceptionMessage",
+                            feature?.Error.Message
+                        );
+                        context.ProblemDetails.Extensions.Add(
+                            "EndpointDisplayName",
+                            feature?.Endpoint?.DisplayName
+                        );
+                        context.ProblemDetails.Extensions.Add(
+                            "RouteValue",
+                            feature?.RouteValues?["id"]
+                        );
                         context.ProblemDetails.Extensions.Add("Path", feature?.Path);
                     };
                 });
@@ -94,20 +108,24 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.UseRouting();
-                    app.UseEndpoints(endpoint =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        endpoint.MapGet("/test/{id}", (int id) =>
+                        app.UseDeveloperExceptionPage();
+                        app.UseRouting();
+                        app.UseEndpoints(endpoint =>
                         {
-                            throw new Exception("Test exception");
+                            endpoint.MapGet(
+                                "/test/{id}",
+                                (int id) =>
+                                {
+                                    throw new Exception("Test exception");
+                                }
+                            );
                         });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -120,7 +138,9 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
 
         // Assert
         var body = await response.Content.ReadFromJsonAsync<ProblemDetails>();
-        var originalExceptionMessage = ((JsonElement)body.Extensions["OriginalExceptionMessage"]).GetString();
+        var originalExceptionMessage = (
+            (JsonElement)body.Extensions["OriginalExceptionMessage"]
+        ).GetString();
         var endpointDisplayName = ((JsonElement)body.Extensions["EndpointDisplayName"]).GetString();
         var routeValue = ((JsonElement)body.Extensions["RouteValue"]).GetString();
         var path = ((JsonElement)body.Extensions["Path"]).GetString();
@@ -142,10 +162,20 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                 {
                     configure.CustomizeProblemDetails = (context) =>
                     {
-                        var feature = context.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-                        context.ProblemDetails.Extensions.Add("OriginalExceptionMessage", feature?.Error.Message);
-                        context.ProblemDetails.Extensions.Add("EndpointDisplayName", feature?.Endpoint?.DisplayName);
-                        context.ProblemDetails.Extensions.Add("RouteValue", feature?.RouteValues?["id"]);
+                        var feature =
+                            context.HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+                        context.ProblemDetails.Extensions.Add(
+                            "OriginalExceptionMessage",
+                            feature?.Error.Message
+                        );
+                        context.ProblemDetails.Extensions.Add(
+                            "EndpointDisplayName",
+                            feature?.Endpoint?.DisplayName
+                        );
+                        context.ProblemDetails.Extensions.Add(
+                            "RouteValue",
+                            feature?.RouteValues?["id"]
+                        );
                         context.ProblemDetails.Extensions.Add("Path", feature?.Path);
                     };
                 });
@@ -153,20 +183,24 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.UseRouting();
-                    app.UseEndpoints(endpoint =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        endpoint.MapGet("/test/{id}", (int id) =>
+                        app.UseDeveloperExceptionPage();
+                        app.UseRouting();
+                        app.UseEndpoints(endpoint =>
                         {
-                            throw new Exception("Test exception");
+                            endpoint.MapGet(
+                                "/test/{id}",
+                                (int id) =>
+                                {
+                                    throw new Exception("Test exception");
+                                }
+                            );
                         });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -179,7 +213,9 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
 
         // Assert
         var body = await response.Content.ReadFromJsonAsync<ProblemDetails>();
-        var originalExceptionMessage = ((JsonElement)body.Extensions["OriginalExceptionMessage"]).GetString();
+        var originalExceptionMessage = (
+            (JsonElement)body.Extensions["OriginalExceptionMessage"]
+        ).GetString();
         var endpointDisplayName = ((JsonElement)body.Extensions["EndpointDisplayName"]).GetString();
         var routeValue = ((JsonElement)body.Extensions["RouteValue"]).GetString();
         var path = ((JsonElement)body.Extensions["Path"]).GetString();
@@ -198,17 +234,19 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new Exception("Test exception");
+                        diagnosticListener =
+                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -234,16 +272,17 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new Exception("Test exception");
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -271,16 +310,17 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new Exception("Test exception");
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -309,16 +349,17 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new BadHttpRequestException("Not found!", statusCode);
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new BadHttpRequestException("Not found!", statusCode);
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -342,20 +383,24 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionMessageFilter>();
-                })
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        throw new Exception("Test exception");
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionMessageFilter
+                        >();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -376,22 +421,32 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton<IDeveloperPageExceptionFilter, PassThroughExceptionFilter>();
-                    services.AddSingleton<IDeveloperPageExceptionFilter, AlwaysBadFormatExceptionFilter>();
-                    services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionMessageFilter>();
-                })
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        throw new Exception("Test exception");
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            PassThroughExceptionFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            AlwaysBadFormatExceptionFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionMessageFilter
+                        >();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -414,22 +469,32 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddSingleton<IDeveloperPageExceptionFilter, AlwaysThrowSameMessageFilter>();
-                    services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionMessageFilter>();
-                    services.AddSingleton<IDeveloperPageExceptionFilter, ExceptionToStringFilter>();
-                })
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        throw new Exception("Test exception");
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            AlwaysThrowSameMessageFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionMessageFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionToStringFilter
+                        >();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -449,49 +514,109 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             var variations = new TheoryData<List<CompilationFailure>>();
             var failures = new List<CompilationFailure>();
             var diagnosticMessages = new List<DiagnosticMessage>();
-            variations.Add(new List<CompilationFailure>()
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", diagnosticMessages)
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        "source file content",
+                        "compiled content",
+                        diagnosticMessages
+                    ),
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(null, "source file content", "compiled content", diagnosticMessages)
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(
+                        null,
+                        "source file content",
+                        "compiled content",
+                        diagnosticMessages
+                    ),
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", null, "compiled content", diagnosticMessages)
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        null,
+                        "compiled content",
+                        diagnosticMessages
+                    ),
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", null, diagnosticMessages)
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        "source file content",
+                        null,
+                        diagnosticMessages
+                    ),
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(null, null, null, diagnosticMessages)
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(null, null, null, diagnosticMessages),
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", diagnosticMessages),
-                    new CompilationFailure(@"c:\sourcefilepath.cs", null, "compiled content", diagnosticMessages)
-                });
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        "source file content",
+                        "compiled content",
+                        diagnosticMessages
+                    ),
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        null,
+                        "compiled content",
+                        diagnosticMessages
+                    ),
+                }
+            );
             variations.Add(null);
-            variations.Add(new List<CompilationFailure>()
+            variations.Add(new List<CompilationFailure>() { null });
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    null
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        "source file content",
+                        "compiled content",
+                        diagnosticMessages
+                    ),
+                    null,
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", diagnosticMessages),
-                    null
-                });
-            variations.Add(new List<CompilationFailure>()
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        "source file content",
+                        "compiled content",
+                        null
+                    ),
+                }
+            );
+            variations.Add(
+                new List<CompilationFailure>()
                 {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", null)
-                });
-            variations.Add(new List<CompilationFailure>()
-                {
-                    new CompilationFailure(@"c:\sourcefilepath.cs", "source file content", "compiled content", new List<DiagnosticMessage>(){ null })
-                });
+                    new CompilationFailure(
+                        @"c:\sourcefilepath.cs",
+                        "source file content",
+                        "compiled content",
+                        new List<DiagnosticMessage>() { null }
+                    ),
+                }
+            );
             return variations;
         }
     }
@@ -499,7 +624,8 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
     [Theory]
     [MemberData(nameof(CompilationExceptionData))]
     public async Task NullInfoInCompilationException_ShouldNotThrowExceptionGeneratingExceptionPage(
-        List<CompilationFailure> failures)
+        List<CompilationFailure> failures
+    )
     {
         // Arrange
         DiagnosticListener diagnosticListener = null;
@@ -507,17 +633,19 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new CustomCompilationException(failures);
+                        diagnosticListener =
+                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new CustomCompilationException(failures);
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -540,8 +668,16 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
     {
         // Arrange
         var meterFactory = new TestMeterFactory();
-        using var requestDurationCollector = new MetricCollector<double>(meterFactory, "Microsoft.AspNetCore.Hosting", "http.server.request.duration");
-        using var requestExceptionCollector = new MetricCollector<long>(meterFactory, DiagnosticsMetrics.MeterName, "aspnetcore.diagnostics.exceptions");
+        using var requestDurationCollector = new MetricCollector<double>(
+            meterFactory,
+            "Microsoft.AspNetCore.Hosting",
+            "http.server.request.duration"
+        );
+        using var requestExceptionCollector = new MetricCollector<long>(
+            meterFactory,
+            DiagnosticsMetrics.MeterName,
+            "aspnetcore.diagnostics.exceptions"
+        );
 
         using var host = new HostBuilder()
             .ConfigureServices(s =>
@@ -552,16 +688,17 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    app.UseDeveloperExceptionPage();
-                    app.Run(context =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        throw new Exception("Test exception");
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -581,16 +718,27 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
                 Assert.True(m.Value > 0);
                 Assert.Equal(500, (int)m.Tags["http.response.status_code"]);
                 Assert.Equal("System.Exception", (string)m.Tags["error.type"]);
-            });
-        Assert.Collection(requestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.Exception", "unhandled"));
+            }
+        );
+        Assert.Collection(
+            requestExceptionCollector.GetMeasurementSnapshot(),
+            m => AssertRequestException(m, "System.Exception", "unhandled")
+        );
     }
 
-    private static void AssertRequestException(CollectedMeasurement<long> measurement, string exceptionName, string result, string handler = null)
+    private static void AssertRequestException(
+        CollectedMeasurement<long> measurement,
+        string exceptionName,
+        string result,
+        string handler = null
+    )
     {
         Assert.Equal(1, measurement.Value);
         Assert.Equal(exceptionName, (string)measurement.Tags["error.type"]);
-        Assert.Equal(result, measurement.Tags["aspnetcore.diagnostics.exception.result"].ToString());
+        Assert.Equal(
+            result,
+            measurement.Tags["aspnetcore.diagnostics.exception.result"].ToString()
+        );
         if (handler == null)
         {
             Assert.False(measurement.Tags.ContainsKey("aspnetcore.diagnostics.handler.type"));
@@ -639,7 +787,9 @@ public class DeveloperExceptionPageMiddlewareTest : LoggedTest
     {
         public Task HandleExceptionAsync(ErrorContext context, Func<ErrorContext, Task> next)
         {
-            return next(new ErrorContext(context.HttpContext, new FormatException("Bad format exception!")));
+            return next(
+                new ErrorContext(context.HttpContext, new FormatException("Bad format exception!"))
+            );
         }
     }
 

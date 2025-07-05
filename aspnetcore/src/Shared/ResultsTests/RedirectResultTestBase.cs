@@ -21,7 +21,8 @@ public abstract class RedirectResultTestBase
     public async Task Execute_ReturnsContentPath_WhenItDoesNotStartWithTilde(
         string appRoot,
         string contentPath,
-        string expectedPath)
+        string expectedPath
+    )
     {
         // Arrange
         var httpContext = GetHttpContext(appRoot);
@@ -44,7 +45,8 @@ public abstract class RedirectResultTestBase
     public async Task Execute_ReturnsAppRelativePath_WhenItStartsWithTilde(
         string appRoot,
         string contentPath,
-        string expectedPath)
+        string expectedPath
+    )
     {
         // Arrange
         var httpContext = GetHttpContext(appRoot);
@@ -66,8 +68,7 @@ public abstract class RedirectResultTestBase
         return serviceCollection.BuildServiceProvider();
     }
 
-    private static HttpContext GetHttpContext(
-        string appRoot)
+    private static HttpContext GetHttpContext(string appRoot)
     {
         var httpContext = new DefaultHttpContext();
         httpContext.RequestServices = GetServiceProvider();

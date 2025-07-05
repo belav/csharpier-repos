@@ -19,11 +19,12 @@ public class IdentityMapFactoryFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Func<bool, IIdentityMap> Create(IKey key)
-        => (Func<bool, IIdentityMap>)typeof(IdentityMapFactoryFactory)
-            .GetMethod(nameof(CreateFactory), BindingFlags.NonPublic | BindingFlags.Static)!
-            .MakeGenericMethod(key.GetKeyType())
-            .Invoke(null, new object[] { key })!;
+    public virtual Func<bool, IIdentityMap> Create(IKey key) =>
+        (Func<bool, IIdentityMap>)
+            typeof(IdentityMapFactoryFactory)
+                .GetMethod(nameof(CreateFactory), BindingFlags.NonPublic | BindingFlags.Static)!
+                .MakeGenericMethod(key.GetKeyType())
+                .Invoke(null, new object[] { key })!;
 
     [UsedImplicitly]
     private static Func<bool, IIdentityMap> CreateFactory<TKey>(IKey key)
@@ -32,8 +33,15 @@ public class IdentityMapFactoryFactory
         var factory = key.GetPrincipalKeyValueFactory<TKey>();
 
         return typeof(TKey).IsNullableType()
-            ? sensitiveLoggingEnabled =>
-                new NullableKeyIdentityMap<TKey>(key, factory, sensitiveLoggingEnabled)
-            : sensitiveLoggingEnabled => new IdentityMap<TKey>(key, factory, sensitiveLoggingEnabled);
+            ? sensitiveLoggingEnabled => new NullableKeyIdentityMap<TKey>(
+                key,
+                factory,
+                sensitiveLoggingEnabled
+            )
+            : sensitiveLoggingEnabled => new IdentityMap<TKey>(
+                key,
+                factory,
+                sensitiveLoggingEnabled
+            );
     }
 }

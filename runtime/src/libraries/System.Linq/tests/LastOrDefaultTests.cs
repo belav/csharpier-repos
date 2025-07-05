@@ -12,9 +12,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                             where x > int.MinValue
-                             select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.LastOrDefault(), q.LastOrDefault());
         }
@@ -22,9 +23,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                             where !string.IsNullOrEmpty(x)
-                             select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.LastOrDefault(), q.LastOrDefault());
         }
@@ -86,7 +88,6 @@ namespace System.Linq.Tests
 
             Assert.Equal(expected, source.LastOrDefault(4));
         }
-
 
         [Fact]
         public void IListTManyElementsLastIsDefault()
@@ -299,7 +300,9 @@ namespace System.Linq.Tests
         [Fact]
         public void NotIListPredicateTrueForSome()
         {
-            IEnumerable<int> source = ForceNotCollection(new int[] { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 });
+            IEnumerable<int> source = ForceNotCollection(
+                new int[] { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 }
+            );
             Func<int, bool> predicate = IsEven;
             int expected = 18;
 
@@ -309,7 +312,9 @@ namespace System.Linq.Tests
         [Fact]
         public void NotIListPredicateTrueForSomeRunOnce()
         {
-            IEnumerable<int> source = ForceNotCollection(new int[] { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 });
+            IEnumerable<int> source = ForceNotCollection(
+                new int[] { 3, 7, 10, 7, 9, 2, 11, 18, 13, 9 }
+            );
             Func<int, bool> predicate = IsEven;
             int expected = 18;
 
@@ -319,20 +324,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).LastOrDefault());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).LastOrDefault()
+            );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).LastOrDefault(i => i != 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).LastOrDefault(i => i != 2)
+            );
         }
 
         [Fact]
         public void NullPredicate()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).LastOrDefault(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).LastOrDefault(predicate)
+            );
         }
     }
 }

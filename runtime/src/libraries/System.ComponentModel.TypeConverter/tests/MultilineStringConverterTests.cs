@@ -15,11 +15,13 @@ namespace System.ComponentModel.Tests
         {
             using (new ThreadCultureChange(null, CultureInfo.InvariantCulture))
             {
-                ConvertTo_WithContext(new object[1, 3]
+                ConvertTo_WithContext(
+                    new object[1, 3]
                     {
-                        { "any string", "(Text)", null }
+                        { "any string", "(Text)", null },
                     },
-                    new MultilineStringConverter());
+                    new MultilineStringConverter()
+                );
             }
         }
     }

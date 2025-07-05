@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,41 +28,54 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
-using System.ServiceModel.Description;
 using System.Globalization;
+using System.ServiceModel.Description;
+using System.Text;
 
 namespace System.ServiceModel.Configuration
 {
-	class PolicyVersionConverter : TypeConverter
-	{
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType) {
-			return sourceType == typeof (string);
-		}
+    class PolicyVersionConverter : TypeConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            return sourceType == typeof(string);
+        }
 
-		public override object ConvertFrom (ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-			string policyString = (string) value;
-			switch (policyString.ToLower (CultureInfo.InvariantCulture)) {
-			case "default":
-				return PolicyVersion.Default;
-			case "policy12":
-				return PolicyVersion.Policy12;
-			case "policy15":
-				return PolicyVersion.Policy15;
-			default:
-				throw new ArgumentException ();
-			}
-		}
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
+        {
+            string policyString = (string)value;
+            switch (policyString.ToLower(CultureInfo.InvariantCulture))
+            {
+                case "default":
+                    return PolicyVersion.Default;
+                case "policy12":
+                    return PolicyVersion.Policy12;
+                case "policy15":
+                    return PolicyVersion.Policy15;
+                default:
+                    throw new ArgumentException();
+            }
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-			PolicyVersion policy = (PolicyVersion) value;
-			if (policy == PolicyVersion.Policy12)
-				return "Policy12";
-			else if (policy == PolicyVersion.Policy15)
-				return "Policy15";
-			else
-				return "Default";
-		}
-	}
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            PolicyVersion policy = (PolicyVersion)value;
+            if (policy == PolicyVersion.Policy12)
+                return "Policy12";
+            else if (policy == PolicyVersion.Policy15)
+                return "Policy15";
+            else
+                return "Default";
+        }
+    }
 }

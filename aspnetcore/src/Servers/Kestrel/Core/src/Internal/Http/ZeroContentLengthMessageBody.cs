@@ -15,7 +15,9 @@ internal sealed class ZeroContentLengthMessageBody : MessageBody
 
     public override bool IsEmpty => true;
 
-    public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default) => new ValueTask<ReadResult>(new ReadResult(default, isCanceled: false, isCompleted: true));
+    public override ValueTask<ReadResult> ReadAsync(
+        CancellationToken cancellationToken = default
+    ) => new ValueTask<ReadResult>(new ReadResult(default, isCanceled: false, isCompleted: true));
 
     public override Task ConsumeAsync() => Task.CompletedTask;
 

@@ -10,13 +10,13 @@ namespace System.ServiceModel.Dispatcher
     using System.Diagnostics;
     using System.IdentityModel.Policy;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Web.Security;
-    using System.Runtime.Diagnostics;
 
     public sealed class DispatchRuntime
     {
@@ -64,7 +64,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (endpointDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("endpointDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "endpointDispatcher"
+                );
             }
 
             this.endpointDispatcher = endpointDispatcher;
@@ -83,7 +85,10 @@ namespace System.ServiceModel.Dispatcher
             this.proxyRuntime = proxyRuntime;
             this.instanceProvider = new CallbackInstanceProvider();
             this.channelDispatcher = new ChannelDispatcher(shared);
-            this.instanceContextProvider = InstanceContextProviderBase.GetProviderForMode(InstanceContextMode.PerSession, this);
+            this.instanceContextProvider = InstanceContextProviderBase.GetProviderForMode(
+                InstanceContextMode.PerSession,
+                this
+            );
 
             Fx.Assert(!shared.IsOnServer, "Client constructor called on server?");
         }
@@ -96,34 +101,41 @@ namespace System.ServiceModel.Dispatcher
 
             this.inputSessionShutdownHandlers = this.NewBehaviorCollection<IInputSessionShutdown>();
             this.messageInspectors = this.NewBehaviorCollection<IDispatchMessageInspector>();
-            this.instanceContextInitializers = this.NewBehaviorCollection<IInstanceContextInitializer>();
+            this.instanceContextInitializers =
+                this.NewBehaviorCollection<IInstanceContextInitializer>();
             this.synchronizationContext = ThreadBehavior.GetCurrentSynchronizationContext();
 
             this.automaticInputSessionShutdown = true;
-            this.principalPermissionMode = ServiceAuthorizationBehavior.DefaultPrincipalPermissionMode;
+            this.principalPermissionMode =
+                ServiceAuthorizationBehavior.DefaultPrincipalPermissionMode;
 
             this.securityAuditLogLocation = ServiceSecurityAuditBehavior.defaultAuditLogLocation;
             this.suppressAuditFailure = ServiceSecurityAuditBehavior.defaultSuppressAuditFailure;
-            this.serviceAuthorizationAuditLevel = ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel;
-            this.messageAuthenticationAuditLevel = ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel;
+            this.serviceAuthorizationAuditLevel =
+                ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel;
+            this.messageAuthenticationAuditLevel =
+                ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel;
 
-            this.unhandled = new DispatchOperation(this, "*", MessageHeaders.WildcardAction, MessageHeaders.WildcardAction);
+            this.unhandled = new DispatchOperation(
+                this,
+                "*",
+                MessageHeaders.WildcardAction,
+                MessageHeaders.WildcardAction
+            );
             this.unhandled.InternalFormatter = MessageOperationFormatter.Instance;
             this.unhandled.InternalInvoker = new UnhandledActionInvoker(this);
         }
 
         public IInstanceContextProvider InstanceContextProvider
         {
-            get
-            {
-                return this.instanceContextProvider;
-            }
-
+            get { return this.instanceContextProvider; }
             set
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -141,7 +153,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (value == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -154,10 +168,7 @@ namespace System.ServiceModel.Dispatcher
 
         public ConcurrencyMode ConcurrencyMode
         {
-            get
-            {
-                return this.concurrencyMode;
-            }
+            get { return this.concurrencyMode; }
             set
             {
                 lock (this.ThisLock)
@@ -170,10 +181,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool EnsureOrderedDispatch
         {
-            get
-            {
-                return this.ensureOrderedDispatch;
-            }
+            get { return this.ensureOrderedDispatch; }
             set
             {
                 lock (this.ThisLock)
@@ -186,15 +194,14 @@ namespace System.ServiceModel.Dispatcher
 
         public AuditLogLocation SecurityAuditLogLocation
         {
-            get
-            {
-                return this.securityAuditLogLocation;
-            }
+            get { return this.securityAuditLogLocation; }
             set
             {
                 if (!AuditLogLocationHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -207,10 +214,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool SuppressAuditFailure
         {
-            get
-            {
-                return this.suppressAuditFailure;
-            }
+            get { return this.suppressAuditFailure; }
             set
             {
                 lock (this.ThisLock)
@@ -223,15 +227,14 @@ namespace System.ServiceModel.Dispatcher
 
         public AuditLevel ServiceAuthorizationAuditLevel
         {
-            get
-            {
-                return this.serviceAuthorizationAuditLevel;
-            }
+            get { return this.serviceAuthorizationAuditLevel; }
             set
             {
                 if (!AuditLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -244,15 +247,14 @@ namespace System.ServiceModel.Dispatcher
 
         public AuditLevel MessageAuthenticationAuditLevel
         {
-            get
-            {
-                return this.messageAuthenticationAuditLevel;
-            }
+            get { return this.messageAuthenticationAuditLevel; }
             set
             {
                 if (!AuditLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -265,10 +267,7 @@ namespace System.ServiceModel.Dispatcher
 
         public ReadOnlyCollection<IAuthorizationPolicy> ExternalAuthorizationPolicies
         {
-            get
-            {
-                return this.externalAuthorizationPolicies;
-            }
+            get { return this.externalAuthorizationPolicies; }
             set
             {
                 lock (this.ThisLock)
@@ -282,10 +281,7 @@ namespace System.ServiceModel.Dispatcher
 
         public ServiceAuthenticationManager ServiceAuthenticationManager
         {
-            get
-            {
-                return this.serviceAuthenticationManager;
-            }
+            get { return this.serviceAuthenticationManager; }
             set
             {
                 lock (this.ThisLock)
@@ -299,10 +295,7 @@ namespace System.ServiceModel.Dispatcher
 
         public ServiceAuthorizationManager ServiceAuthorizationManager
         {
-            get
-            {
-                return this.serviceAuthorizationManager;
-            }
+            get { return this.serviceAuthorizationManager; }
             set
             {
                 lock (this.ThisLock)
@@ -316,7 +309,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool AutomaticInputSessionShutdown
         {
-            get { return this.automaticInputSessionShutdown; }        
+            get { return this.automaticInputSessionShutdown; }
             set
             {
                 lock (this.ThisLock)
@@ -358,10 +351,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool ImpersonateCallerForAllOperations
         {
-            get
-            {
-                return this.impersonateCallerForAllOperations;
-            }
+            get { return this.impersonateCallerForAllOperations; }
             set
             {
                 lock (this.ThisLock)
@@ -374,10 +364,7 @@ namespace System.ServiceModel.Dispatcher
 
         public bool ImpersonateOnSerializingReply
         {
-            get
-            {
-                return this.impersonateOnSerializingReply;
-            }
+            get { return this.impersonateOnSerializingReply; }
             set
             {
                 lock (this.ThisLock)
@@ -390,10 +377,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool RequireClaimsPrincipalOnOperationContext
         {
-            get
-            {
-                return this.requireClaimsPrincipalOnOperationContext;
-            }
+            get { return this.requireClaimsPrincipalOnOperationContext; }
             set
             {
                 lock (this.ThisLock)
@@ -469,7 +453,7 @@ namespace System.ServiceModel.Dispatcher
                     this.releaseServiceInstanceOnTransactionComplete = value;
                 }
             }
-        }       
+        }
 
         public SynchronizedCollection<IInstanceContextInitializer> InstanceContextInitializers
         {
@@ -491,15 +475,14 @@ namespace System.ServiceModel.Dispatcher
 
         public PrincipalPermissionMode PrincipalPermissionMode
         {
-            get
-            {
-                return this.principalPermissionMode;
-            }
+            get { return this.principalPermissionMode; }
             set
             {
                 if (!PrincipalPermissionModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 lock (this.ThisLock)
@@ -595,18 +578,19 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool RequiresAuthentication
         {
-            get
-            {
-                return this.isAuthenticationManagerSet;
-            }
+            get { return this.isAuthenticationManagerSet; }
         }
 
         internal bool RequiresAuthorization
         {
             get
             {
-                return (this.isAuthorizationManagerSet || this.isExternalPoliciesSet ||
-                    AuditLevel.Success == (this.serviceAuthorizationAuditLevel & AuditLevel.Success));
+                return (
+                    this.isAuthorizationManagerSet
+                    || this.isExternalPoliciesSet
+                    || AuditLevel.Success
+                        == (this.serviceAuthorizationAuditLevel & AuditLevel.Success)
+                );
             }
         }
 
@@ -668,7 +652,10 @@ namespace System.ServiceModel.Dispatcher
 
                     for (int i = 0; i < this.operations.Count; i++)
                     {
-                        max = System.Math.Max(max, this.operations[i].CallContextInitializers.Count);
+                        max = System.Math.Max(
+                            max,
+                            this.operations[i].CallContextInitializers.Count
+                        );
                     }
                     max = System.Math.Max(max, this.unhandled.CallContextInitializers.Count);
                     return max;
@@ -756,7 +743,11 @@ namespace System.ServiceModel.Dispatcher
             this.shared.LockDownProperties();
             if (this.concurrencyMode != ConcurrencyMode.Single && this.ensureOrderedDispatch)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxDispatchRuntimeNonConcurrentOrEnsureOrderedDispatch)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SfxDispatchRuntimeNonConcurrentOrEnsureOrderedDispatch)
+                    )
+                );
             }
         }
 
@@ -806,14 +797,21 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.UnhandledAction,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.UnhandledAction,
                         SR.GetString(SR.TraceCodeUnhandledAction),
                         new StringTraceRecord("Action", action),
-                        this, null, message);
+                        this,
+                        null,
+                        message
+                    );
                 }
 
-                FaultCode code = FaultCode.CreateSenderFaultCode(AddressingStrings.ActionNotSupported,
-                    message.Version.Addressing.Namespace);
+                FaultCode code = FaultCode.CreateSenderFaultCode(
+                    AddressingStrings.ActionNotSupported,
+                    message.Version.Addressing.Namespace
+                );
                 string reasonText = SR.GetString(SR.SFxNoEndpointMatchingContract, action);
                 FaultReason reason = new FaultReason(reasonText);
 
@@ -821,15 +819,14 @@ namespace System.ServiceModel.Dispatcher
                 ErrorBehavior.ThrowAndCatch(exception);
 
                 ServiceChannel serviceChannel = OperationContext.Current.InternalServiceChannel;
-                OperationContext.Current.OperationCompleted += 
-                    delegate(object sender, EventArgs e) 
+                OperationContext.Current.OperationCompleted += delegate(object sender, EventArgs e)
                 {
                     ChannelDispatcher channelDispatcher = this.dispatchRuntime.ChannelDispatcher;
                     if (!channelDispatcher.HandleError(exception) && serviceChannel.HasSession)
                     {
                         try
                         {
-                            serviceChannel.Close(ChannelHandler.CloseAfterFaultTimeout); 
+                            serviceChannel.Close(ChannelHandler.CloseAfterFaultTimeout);
                         }
                         catch (Exception ex)
                         {
@@ -845,7 +842,11 @@ namespace System.ServiceModel.Dispatcher
                 if (this.dispatchRuntime.shared.EnableFaults)
                 {
                     MessageFault fault = MessageFault.CreateFault(code, reason, action);
-                    return Message.CreateMessage(message.Version, fault, message.Version.Addressing.DefaultFaultAction);
+                    return Message.CreateMessage(
+                        message.Version,
+                        fault,
+                        message.Version.Addressing.DefaultFaultAction
+                    );
                 }
                 else
                 {
@@ -855,14 +856,23 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+            public IAsyncResult InvokeBegin(
+                object instance,
+                object[] inputs,
+                AsyncCallback callback,
+                object state
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
 
             public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException()
+                );
             }
         }
 
@@ -940,7 +950,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (item.Parent != this.outer)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SFxMismatchedOperationParent)
+                    );
                 }
 
                 this.outer.InvalidateRuntime();
@@ -961,7 +973,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 if (item.Parent != this.outer)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxMismatchedOperationParent));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SFxMismatchedOperationParent)
+                    );
                 }
 
                 this.outer.InvalidateRuntime();
@@ -973,17 +987,26 @@ namespace System.ServiceModel.Dispatcher
         {
             object IInstanceProvider.GetInstance(InstanceContext instanceContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCannotActivateCallbackInstace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxCannotActivateCallbackInstace))
+                );
             }
 
             object IInstanceProvider.GetInstance(InstanceContext instanceContext, Message message)
             {
-                throw TraceUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCannotActivateCallbackInstace)), message);
+                throw TraceUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxCannotActivateCallbackInstace)
+                    ),
+                    message
+                );
             }
 
             void IInstanceProvider.ReleaseInstance(InstanceContext instanceContext, object instance)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCannotActivateCallbackInstace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxCannotActivateCallbackInstace))
+                );
             }
         }
     }

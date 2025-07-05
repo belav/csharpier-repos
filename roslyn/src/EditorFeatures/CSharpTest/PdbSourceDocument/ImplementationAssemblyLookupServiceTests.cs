@@ -36,26 +36,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var packDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")).FullName;
-                var dataDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data")).FullName;
-                var sharedDir = Directory.CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0")).FullName;
+                var packDir = Directory
+                    .CreateDirectory(
+                        Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")
+                    )
+                    .FullName;
+                var dataDir = Directory
+                    .CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data"))
+                    .FullName;
+                var sharedDir = Directory
+                    .CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0"))
+                    .FullName;
 
                 // Create reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(packDir, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    packDir,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly
-                CompileTestSource(sharedDir, sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    sharedDir,
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Create FrameworkList.xml
-                File.WriteAllText(Path.Combine(dataDir, "FrameworkList.xml"), """
+                File.WriteAllText(
+                    Path.Combine(dataDir, "FrameworkList.xml"),
+                    """
                     FileList FrameworkName="MyPack">
-                    """);
+                    """
+                );
 
                 var workspace = (TestWorkspace)project.Solution.Workspace;
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.False(service.TryFindImplementationAssemblyPath(GetDllPath(packDir), out var implementationDll));
+                Assert.False(
+                    service.TryFindImplementationAssemblyPath(
+                        GetDllPath(packDir),
+                        out var implementationDll
+                    )
+                );
             });
         }
 
@@ -74,27 +105,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var packDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")).FullName;
-                var dataDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data")).FullName;
-                var sharedDir = Directory.CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0")).FullName;
+                var packDir = Directory
+                    .CreateDirectory(
+                        Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")
+                    )
+                    .FullName;
+                var dataDir = Directory
+                    .CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data"))
+                    .FullName;
+                var sharedDir = Directory
+                    .CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0"))
+                    .FullName;
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(packDir, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    packDir,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly
-                CompileTestSource(sharedDir, sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    sharedDir,
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Create FrameworkList.xml
-                File.WriteAllText(Path.Combine(dataDir, "FrameworkList.xml"), """
+                File.WriteAllText(
+                    Path.Combine(dataDir, "FrameworkList.xml"),
+                    """
                     <FileList FrameworkName="MyPack">
                     </FileList>
-                    """);
+                    """
+                );
 
                 var workspace = (TestWorkspace)project.Solution.Workspace;
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.True(service.TryFindImplementationAssemblyPath(GetDllPath(packDir), out var implementationDll));
+                Assert.True(
+                    service.TryFindImplementationAssemblyPath(
+                        GetDllPath(packDir),
+                        out var implementationDll
+                    )
+                );
                 Assert.Equal(GetDllPath(sharedDir), implementationDll);
             });
         }
@@ -116,27 +178,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 path = Path.Combine(path, "packs", "installed", "here");
 
-                var packDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")).FullName;
-                var dataDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data")).FullName;
-                var sharedDir = Directory.CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0")).FullName;
+                var packDir = Directory
+                    .CreateDirectory(
+                        Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")
+                    )
+                    .FullName;
+                var dataDir = Directory
+                    .CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data"))
+                    .FullName;
+                var sharedDir = Directory
+                    .CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0"))
+                    .FullName;
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(packDir, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    packDir,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly
-                CompileTestSource(sharedDir, sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    sharedDir,
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Create FrameworkList.xml
-                File.WriteAllText(Path.Combine(dataDir, "FrameworkList.xml"), """
+                File.WriteAllText(
+                    Path.Combine(dataDir, "FrameworkList.xml"),
+                    """
                     <FileList FrameworkName="MyPack">
                     </FileList>
-                    """);
+                    """
+                );
 
                 var workspace = (TestWorkspace)project.Solution.Workspace;
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.True(service.TryFindImplementationAssemblyPath(GetDllPath(packDir), out var implementationDll));
+                Assert.True(
+                    service.TryFindImplementationAssemblyPath(
+                        GetDllPath(packDir),
+                        out var implementationDll
+                    )
+                );
                 Assert.Equal(GetDllPath(sharedDir), implementationDll);
             });
         }
@@ -160,13 +253,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
                 var sourceText = SourceText.From(metadataSource, Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
 
@@ -176,19 +279,50 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(dllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.Equal(dllFilePath, service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger()));
+                Assert.Equal(
+                    dllFilePath,
+                    service.FollowTypeForwards(
+                        symbol,
+                        typeForwardDllFilePath,
+                        new NoDuplicatesLogger()
+                    )
+                );
             });
         }
 
@@ -221,7 +355,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("A.B.C.D.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("A.B.C.D.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly to a different DLL
                 var dllFilePath = Path.Combine(path, "implementation.dll");
@@ -229,26 +370,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(dllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                var foundImplementationFilePath = service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger());
+                var foundImplementationFilePath = service.FollowTypeForwards(
+                    symbol,
+                    typeForwardDllFilePath,
+                    new NoDuplicatesLogger()
+                );
                 Assert.Equal(dllFilePath, foundImplementationFilePath);
             });
         }
@@ -282,7 +454,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("A.B.C.D.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("A.B.C.D.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly to a different DLL
                 var dllFilePath = Path.Combine(path, "implementation.dll");
@@ -290,26 +469,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(dllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                var foundImplementationFilePath = service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger());
+                var foundImplementationFilePath = service.FollowTypeForwards(
+                    symbol,
+                    typeForwardDllFilePath,
+                    new NoDuplicatesLogger()
+                );
                 Assert.Equal(dllFilePath, foundImplementationFilePath);
             });
         }
@@ -337,7 +547,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.D.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.D.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly to a different DLL
                 var dllFilePath = Path.Combine(path, "implementation.dll");
@@ -345,26 +562,60 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(dllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.Equal(dllFilePath, service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger()));
+                Assert.Equal(
+                    dllFilePath,
+                    service.FollowTypeForwards(
+                        symbol,
+                        typeForwardDllFilePath,
+                        new NoDuplicatesLogger()
+                    )
+                );
             });
         }
 
@@ -388,7 +639,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly to a different DLL
                 var dllFilePath = Path.Combine(path, "implementation.dll");
@@ -396,33 +654,74 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(dllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.Equal(dllFilePath, service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger()));
+                Assert.Equal(
+                    dllFilePath,
+                    service.FollowTypeForwards(
+                        symbol,
+                        typeForwardDllFilePath,
+                        new NoDuplicatesLogger()
+                    )
+                );
 
                 // We need the DLLs to exist, in order for some checks to pass correct, but to ensure
                 // that the file isn't read, we just zero it out.
                 File.WriteAllBytes(typeForwardDllFilePath, Array.Empty<byte>());
                 File.WriteAllBytes(dllFilePath, Array.Empty<byte>());
 
-                Assert.Equal(dllFilePath, service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger()));
+                Assert.Equal(
+                    dllFilePath,
+                    service.FollowTypeForwards(
+                        symbol,
+                        typeForwardDllFilePath,
+                        new NoDuplicatesLogger()
+                    )
+                );
             });
         }
 
@@ -453,7 +752,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly to a different DLL
                 var dllFilePath = Path.Combine(path, "implementation.dll");
@@ -461,33 +767,74 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(dllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                Assert.Equal(dllFilePath, service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger()));
+                Assert.Equal(
+                    dllFilePath,
+                    service.FollowTypeForwards(
+                        symbol,
+                        typeForwardDllFilePath,
+                        new NoDuplicatesLogger()
+                    )
+                );
 
                 // We need the DLLs to exist, in order for some checks to pass correct, but to ensure
                 // that the file isn't read, we just zero it out.
                 File.WriteAllBytes(typeForwardDllFilePath, Array.Empty<byte>());
                 File.WriteAllBytes(dllFilePath, Array.Empty<byte>());
 
-                Assert.Equal(dllFilePath, service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger()));
+                Assert.Equal(
+                    dllFilePath,
+                    service.FollowTypeForwards(
+                        symbol,
+                        typeForwardDllFilePath,
+                        new NoDuplicatesLogger()
+                    )
+                );
             });
         }
 
@@ -511,7 +858,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly to a different DLL
                 var dllFilePath = Path.Combine(path, "implementation.dll");
@@ -519,39 +873,96 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(path, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL
                 var typeForwardDllFilePath = Path.Combine(path, "typeforward.dll");
                 assemblyName = "typeforward";
 
-                implProject = workspace.CurrentSolution.Projects.First().AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
+                implProject = workspace
+                    .CurrentSolution.Projects.First()
+                    .AddMetadataReference(MetadataReference.CreateFromFile(dllFilePath));
                 var typeForwardSourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, typeForwardSourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    typeForwardSourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Now compile a new implementation in realimplementation.dll
                 var realImplementationDllFilePath = Path.Combine(path, "realimplementation.dll");
                 assemblyName = "realimplementation";
 
                 implProject = workspace.CurrentSolution.Projects.First();
-                CompileTestSource(realImplementationDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    realImplementationDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Now compile a new implementation.dll that typeforwards to realimplementation.dll
                 assemblyName = "implementation";
 
-                implProject = workspace.CurrentSolution.Projects.First().AddMetadataReference(MetadataReference.CreateFromFile(realImplementationDllFilePath));
-                CompileTestSource(dllFilePath, sourceCodePath, pdbFilePath, assemblyName, typeForwardSourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                implProject = workspace
+                    .CurrentSolution.Projects.First()
+                    .AddMetadataReference(
+                        MetadataReference.CreateFromFile(realImplementationDllFilePath)
+                    );
+                CompileTestSource(
+                    dllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    typeForwardSourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 var service = workspace.GetService<IImplementationAssemblyLookupService>();
 
-                var foundImplementationFilePath = service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger());
+                var foundImplementationFilePath = service.FollowTypeForwards(
+                    symbol,
+                    typeForwardDllFilePath,
+                    new NoDuplicatesLogger()
+                );
                 Assert.Equal(realImplementationDllFilePath, foundImplementationFilePath);
 
                 // We need the DLLs to exist, in order for some checks to pass correct, but to ensure
@@ -560,7 +971,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 File.WriteAllBytes(realImplementationDllFilePath, Array.Empty<byte>());
                 File.WriteAllBytes(dllFilePath, Array.Empty<byte>());
 
-                foundImplementationFilePath = service.FollowTypeForwards(symbol, typeForwardDllFilePath, new NoDuplicatesLogger());
+                foundImplementationFilePath = service.FollowTypeForwards(
+                    symbol,
+                    typeForwardDllFilePath,
+                    new NoDuplicatesLogger()
+                );
                 Assert.Equal(realImplementationDllFilePath, foundImplementationFilePath);
             });
         }
@@ -571,6 +986,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
         private class NoDuplicatesLogger : IPdbSourceDocumentLogger
         {
             private readonly HashSet<string> _logs = new();
+
             public void Clear()
             {
                 _logs.Clear();

@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileCategoryAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.MobileControls
 {
     using System;
-    using System.ComponentModel;   
+    using System.ComponentModel;
     using System.Diagnostics;
 
-    [
-        AttributeUsage(AttributeTargets.All)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AttributeUsage(AttributeTargets.All)]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class MobileCategoryAttribute : CategoryAttribute
     {
         private static MobileCategoryAttribute deviceSpecific;
@@ -23,15 +23,16 @@ namespace System.Web.UI.MobileControls
         private static readonly int _prefixLength = _categoryPrefix.Length;
 
         // Initializes a new instance of the CategoryAttribute class.
-        internal /*public*/ MobileCategoryAttribute(String category) : base(category) 
-        {
-        }
+        internal /*public*/
+        MobileCategoryAttribute(String category)
+            : base(category) { }
 
-        internal /*public*/ static CategoryAttribute DeviceSpecific 
+        internal /*public*/
+        static CategoryAttribute DeviceSpecific
         {
-            get 
+            get
             {
-                if (deviceSpecific == null) 
+                if (deviceSpecific == null)
                 {
                     deviceSpecific = new MobileCategoryAttribute(_categoryDeviceSpecific);
                 }
@@ -64,18 +65,21 @@ namespace System.Web.UI.MobileControls
             // fall back to local resource string.
             if (localizedValue == null)
             {
-                localizedValue = (String) SR.GetString(value);
+                localizedValue = (String)SR.GetString(value);
             }
 
             if (localizedValue == null && value.Equals(_usCategoryDeviceSpecific))
             {
-                localizedValue = (String) SR.GetString(SR.Category_DeviceSpecific);
+                localizedValue = (String)SR.GetString(SR.Category_DeviceSpecific);
             }
 
             // This attribute is internal, and we should never have a missing resource string.
-            Debug.Assert(localizedValue != null, 
+            Debug.Assert(
+                localizedValue != null,
                 "All MobileWebForms category attributes should have localized strings.  Category '"
-                + value + "' not found.");
+                    + value
+                    + "' not found."
+            );
             return localizedValue;
         }
     }

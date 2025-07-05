@@ -4,7 +4,5 @@
 namespace System
 {
     // This class represents the void return type
-    public struct Void
-    {
-    }
+    public struct Void { }
 }

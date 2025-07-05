@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** File: AssemblyAttributes
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
@@ -15,15 +15,15 @@
 **
 =============================================================================*/
 
-namespace System.Reflection {
-
+namespace System.Reflection
+{
     using System;
     using System.Configuration.Assemblies;
     using System.Diagnostics.Contracts;
 
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyCopyrightAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyCopyrightAttribute : Attribute
     {
         private String m_copyright;
 
@@ -38,10 +38,9 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyTrademarkAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyTrademarkAttribute : Attribute
     {
         private String m_trademark;
 
@@ -56,10 +55,9 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyProductAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyProductAttribute : Attribute
     {
         private String m_product;
 
@@ -74,12 +72,11 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyCompanyAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyCompanyAttribute : Attribute
     {
-        private String m_company; 
+        private String m_company;
 
         public AssemblyCompanyAttribute(String company)
         {
@@ -92,12 +89,11 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyDescriptionAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyDescriptionAttribute : Attribute
     {
-        private String m_description; 
+        private String m_description;
 
         public AssemblyDescriptionAttribute(String description)
         {
@@ -110,10 +106,9 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyTitleAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyTitleAttribute : Attribute
     {
         private String m_title;
 
@@ -128,12 +123,11 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyConfigurationAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyConfigurationAttribute : Attribute
     {
-        private String m_configuration; 
+        private String m_configuration;
 
         public AssemblyConfigurationAttribute(String configuration)
         {
@@ -146,10 +140,9 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyDefaultAliasAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyDefaultAliasAttribute : Attribute
     {
         private String m_defaultAlias;
 
@@ -163,11 +156,10 @@ namespace System.Reflection {
             get { return m_defaultAlias; }
         }
     }
-        
 
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyInformationalVersionAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyInformationalVersionAttribute : Attribute
     {
         private String m_informationalVersion;
 
@@ -180,12 +172,11 @@ namespace System.Reflection {
         {
             get { return m_informationalVersion; }
         }
-    }   
-    
+    }
 
-    [AttributeUsage(AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyFileVersionAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyFileVersionAttribute : Attribute
     {
         private String _version;
 
@@ -197,17 +188,17 @@ namespace System.Reflection {
             _version = version;
         }
 
-        public String Version {
+        public String Version
+        {
             get { return _version; }
         }
     }
-    
 
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyCultureAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed unsafe class AssemblyCultureAttribute : Attribute
     {
-        private String m_culture; 
+        private String m_culture;
 
         public AssemblyCultureAttribute(String culture)
         {
@@ -220,10 +211,9 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyVersionAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed unsafe class AssemblyVersionAttribute : Attribute
     {
         private String m_version;
 
@@ -238,10 +228,9 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyKeyFileAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyKeyFileAttribute : Attribute
     {
         private String m_keyFile;
 
@@ -256,12 +245,11 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyDelaySignAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyDelaySignAttribute : Attribute
     {
-        private bool m_delaySign; 
+        private bool m_delaySign;
 
         public AssemblyDelaySignAttribute(bool delaySign)
         {
@@ -269,21 +257,20 @@ namespace System.Reflection {
         }
 
         public bool DelaySign
-        { get
-            { return m_delaySign; }
+        {
+            get { return m_delaySign; }
         }
     }
 
-
-    [AttributeUsage(AttributeTargets.Assembly, Inherited=false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyAlgorithmIdAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed unsafe class AssemblyAlgorithmIdAttribute : Attribute
     {
         private uint m_algId;
 
         public AssemblyAlgorithmIdAttribute(AssemblyHashAlgorithm algorithmId)
         {
-            m_algId = (uint) algorithmId;
+            m_algId = (uint)algorithmId;
         }
 
         [CLSCompliant(false)]
@@ -299,21 +286,24 @@ namespace System.Reflection {
         }
     }
 
-
-    [AttributeUsage(AttributeTargets.Assembly, Inherited=false)]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public unsafe sealed class AssemblyFlagsAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed unsafe class AssemblyFlagsAttribute : Attribute
     {
         private AssemblyNameFlags m_flags;
 
-        [Obsolete("This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [CLSCompliant(false)]
         public AssemblyFlagsAttribute(uint flags)
         {
             m_flags = (AssemblyNameFlags)flags;
         }
 
-        [Obsolete("This property has been deprecated. Please use AssemblyFlags instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This property has been deprecated. Please use AssemblyFlags instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         [CLSCompliant(false)]
         public uint Flags
         {
@@ -326,44 +316,45 @@ namespace System.Reflection {
             get { return (int)m_flags; }
         }
 
-        [Obsolete("This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202")]
+        [Obsolete(
+            "This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
         public AssemblyFlagsAttribute(int assemblyFlags)
         {
             m_flags = (AssemblyNameFlags)assemblyFlags;
         }
-
 
         public AssemblyFlagsAttribute(AssemblyNameFlags assemblyFlags)
         {
             m_flags = assemblyFlags;
         }
     }
-    
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=true, Inherited=false)]
-    public sealed class AssemblyMetadataAttribute : Attribute 
+
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    public sealed class AssemblyMetadataAttribute : Attribute
     {
         private String m_key;
         private String m_value;
-		
-        public AssemblyMetadataAttribute(string key, string value) 
+
+        public AssemblyMetadataAttribute(string key, string value)
         {
             m_key = key;
             m_value = value;
         }
-        
+
         public string Key
         {
             get { return m_key; }
         }
-		
+
         public string Value
         {
-            get { return m_value;}
+            get { return m_value; }
         }
-    }   
+    }
 
 #if FEATURE_STRONGNAME_MIGRATION
-    [AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple=false)]
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = false)]
     public sealed class AssemblySignatureKeyAttribute : Attribute
     {
         private String _publicKey;
@@ -387,11 +378,11 @@ namespace System.Reflection {
     }
 #endif
 
-    [AttributeUsage (AttributeTargets.Assembly, Inherited=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class AssemblyKeyNameAttribute : Attribute 
+    [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class AssemblyKeyNameAttribute : Attribute
     {
-        private String m_keyName; 
+        private String m_keyName;
 
         public AssemblyKeyNameAttribute(String keyName)
         {
@@ -403,6 +394,4 @@ namespace System.Reflection {
             get { return m_keyName; }
         }
     }
-
 }
-

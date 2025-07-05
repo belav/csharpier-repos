@@ -11,7 +11,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
     internal static class SyntaxNodeExtensions
     {
-        public static bool TryGetAttributeLists(this SyntaxNode node, out SyntaxList<AttributeListSyntax> attributeLists)
+        public static bool TryGetAttributeLists(
+            this SyntaxNode node,
+            out SyntaxList<AttributeListSyntax> attributeLists
+        )
         {
             if (node is CompilationUnitSyntax compilationUnit)
             {

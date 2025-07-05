@@ -15,17 +15,20 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(TestData.EmptyConfig))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                AppSettingsSection configSection = (AppSettingsSection)config.GetSection("appSettings");
+                AppSettingsSection configSection = (AppSettingsSection)
+                    config.GetSection("appSettings");
                 Assert.Equal("appSettings", configSection.SectionInformation.Name);
-                KeyValueConfigurationElement myAdminKeyVal = new KeyValueConfigurationElement("myAdminTool", "admin.aspx");
+                KeyValueConfigurationElement myAdminKeyVal = new KeyValueConfigurationElement(
+                    "myAdminTool",
+                    "admin.aspx"
+                );
                 KeyValueConfigurationCollection configSettings = config.AppSettings.Settings;
                 Assert.Equal(0, configSettings.AllKeys.Length);
                 config.AppSettings.Settings.Add(myAdminKeyVal);
                 Assert.False(configSection.SectionInformation.IsLocked);
                 config.Save();
 
-                KeyValueConfigurationCollection settings =
-                  config.AppSettings.Settings;
+                KeyValueConfigurationCollection settings = config.AppSettings.Settings;
                 foreach (KeyValueConfigurationElement keyValueElement in settings)
                 {
                     Assert.Equal("myAdminTool", keyValueElement.Key);
@@ -37,7 +40,10 @@ namespace System.ConfigurationTests
         [Fact]
         public void CollectionTypeIsAddRemoveMap()
         {
-            Assert.Equal(ConfigurationElementCollectionType.AddRemoveClearMap, new KeyValueConfigurationCollection().CollectionType);
+            Assert.Equal(
+                ConfigurationElementCollectionType.AddRemoveClearMap,
+                new KeyValueConfigurationCollection().CollectionType
+            );
         }
 
         [Fact]
@@ -64,20 +70,26 @@ namespace System.ConfigurationTests
         [Fact]
         public void AddNullKeyValueThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new KeyValueConfigurationCollection().Add(null, null));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new KeyValueConfigurationCollection().Add(null, null)
+            );
         }
 
         [Fact]
         public void AddNullKeyValueElementThrows()
         {
             var element = new KeyValueConfigurationElement(null, null);
-            Assert.Throws<ConfigurationErrorsException>(() => new KeyValueConfigurationCollection().Add(element));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new KeyValueConfigurationCollection().Add(element)
+            );
         }
 
         [Fact]
         public void AddNullKeyThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new KeyValueConfigurationCollection().Add(null, "foo"));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new KeyValueConfigurationCollection().Add(null, "foo")
+            );
         }
 
         [Fact]
@@ -130,6 +142,7 @@ namespace System.ConfigurationTests
         private class TestKeyValueCollection : KeyValueConfigurationCollection
         {
             public bool TestThrowOnDuplicate => ThrowOnDuplicate;
+
             public ConfigurationElement TestCreateNewElement() => CreateNewElement();
         }
     }

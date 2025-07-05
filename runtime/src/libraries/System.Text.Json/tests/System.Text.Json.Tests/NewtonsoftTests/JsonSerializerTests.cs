@@ -40,35 +40,35 @@ namespace System.Text.Json.Tests
         [Fact]
         public void DeserializeBoolean_Null()
         {
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<IList<bool>>(@"[null]"));
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<bool>>(@"[null]"));
         }
 
         [Fact]
         public void DeserializeBoolean_DateTime()
         {
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<IList<bool>>(@"['2000-12-20T10:55:55Z']"));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<IList<bool>>(@"['2000-12-20T10:55:55Z']")
+            );
         }
 
         [Fact]
         public void DeserializeBoolean_BadString()
         {
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<IList<bool>>(@"['pie']"));
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<bool>>(@"['pie']"));
         }
 
         [Fact]
         public void DeserializeBoolean_EmptyString()
         {
-            Assert.Throws<JsonException>(
-                () => JsonSerializer.Deserialize<IList<bool>>(@"['']"));
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<bool>>(@"['']"));
         }
 
         [Fact]
         public void IncompleteContainers()
         {
-            JsonException e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<object>>("[1,"));
+            JsonException e = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<IList<object>>("[1,")
+            );
             Assert.Contains("Path: $[1] | LineNumber: 0 | BytePositionInLine: 2.", e.Message);
 
             e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<int>>("[1,"));
@@ -77,59 +77,75 @@ namespace System.Text.Json.Tests
             e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IList<int>>("[1"));
             Assert.Contains("Path: $[0] | LineNumber: 0 | BytePositionInLine: 2.", e.Message);
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1,"));
+            e = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1,")
+            );
             Assert.Contains("Path: $.key | LineNumber: 0 | BytePositionInLine: 8.", e.Message);
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1"));
+            e = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<IDictionary<string, int>>("{\"key\":1")
+            );
             Assert.Contains("Path: $.key | LineNumber: 0 | BytePositionInLine: 8.", e.Message);
 
-            e = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<IncompleteTestClass>("{\"key\":1,"));
+            e = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<IncompleteTestClass>("{\"key\":1,")
+            );
             Assert.Contains("$ | LineNumber: 0 | BytePositionInLine: 8.", e.Message);
         }
 
         [Fact]
         public void NewProperty()
         {
-            Assert.Equal(@"{""IsTransient"":true}", JsonSerializer.Serialize(new ChildClass { IsTransient = true }));
+            Assert.Equal(
+                @"{""IsTransient"":true}",
+                JsonSerializer.Serialize(new ChildClass { IsTransient = true })
+            );
 
-            ChildClass childClass = JsonSerializer.Deserialize<ChildClass>(@"{""IsTransient"":true}");
+            ChildClass childClass = JsonSerializer.Deserialize<ChildClass>(
+                @"{""IsTransient"":true}"
+            );
             Assert.True(childClass.IsTransient);
         }
 
         [Fact]
         public void NewPropertyVirtual()
         {
-            Assert.Equal(@"{""IsTransient"":true}", JsonSerializer.Serialize(new ChildClassVirtual { IsTransient = true }));
+            Assert.Equal(
+                @"{""IsTransient"":true}",
+                JsonSerializer.Serialize(new ChildClassVirtual { IsTransient = true })
+            );
 
-            ChildClassVirtual childClass = JsonSerializer.Deserialize<ChildClassVirtual>(@"{""IsTransient"":true}");
+            ChildClassVirtual childClass = JsonSerializer.Deserialize<ChildClassVirtual>(
+                @"{""IsTransient"":true}"
+            );
             Assert.True(childClass.IsTransient);
         }
 
         [Fact]
         public void DeserializeCommentTestObjectWithComments()
         {
-            CommentTestObject o = JsonSerializer.Deserialize<CommentTestObject>(@"{/* Test */}", new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip });
+            CommentTestObject o = JsonSerializer.Deserialize<CommentTestObject>(
+                @"{/* Test */}",
+                new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip }
+            );
             Assert.False(o.A);
 
-            o = JsonSerializer.Deserialize<CommentTestObject>(@"{""A"": true/* Test */}", new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip });
+            o = JsonSerializer.Deserialize<CommentTestObject>(
+                @"{""A"": true/* Test */}",
+                new JsonSerializerOptions { ReadCommentHandling = JsonCommentHandling.Skip }
+            );
             Assert.True(o.A);
         }
 
         [Fact]
         public void PreserveReferencesCallbackTest()
         {
-            PersonReference p1 = new PersonReference
-            {
-                Name = "John Smith"
-            };
-            PersonReference p2 = new PersonReference
-            {
-                Name = "Mary Sue",
-            };
+            PersonReference p1 = new PersonReference { Name = "John Smith" };
+            PersonReference p2 = new PersonReference { Name = "Mary Sue" };
 
             p1.Spouse = p2;
             p2.Spouse = p1;
-            Assert.Throws<JsonException> (() => JsonSerializer.Serialize(p1));
+            Assert.Throws<JsonException>(() => JsonSerializer.Serialize(p1));
         }
     }
 

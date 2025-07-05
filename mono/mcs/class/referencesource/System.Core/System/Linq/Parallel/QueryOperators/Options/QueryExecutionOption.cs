@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -13,10 +13,11 @@
 
 using System.Collections.Generic;
 using System.Threading;
+
 namespace System.Linq.Parallel
 {
     /// <summary>
-    /// Represents operators that set various query execution options. 
+    /// Represents operators that set various query execution options.
     /// </summary>
     /// <typeparam name="TSource"></typeparam>
     internal class QueryExecutionOption<TSource> : QueryOperator<TSource>
@@ -49,7 +50,6 @@ namespace System.Linq.Parallel
         {
             get { return m_indexState; }
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in

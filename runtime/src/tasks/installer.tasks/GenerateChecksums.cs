@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Build.Framework;
 using System;
 using System.IO;
 using System.Security.Cryptography;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.DotNet.Build.Tasks
 {
@@ -26,7 +26,9 @@ namespace Microsoft.DotNet.Build.Tasks
                     string destinationPath = item.GetMetadata("DestinationPath");
                     if (string.IsNullOrEmpty(destinationPath))
                     {
-                        throw new Exception($"Metadata 'DestinationPath' is missing for item '{item.ItemSpec}'.");
+                        throw new Exception(
+                            $"Metadata 'DestinationPath' is missing for item '{item.ItemSpec}'."
+                        );
                     }
 
                     if (!File.Exists(item.ItemSpec))
@@ -38,14 +40,17 @@ namespace Microsoft.DotNet.Build.Tasks
                         MessageImportance.High,
                         "Generating checksum for '{0}' into '{1}'...",
                         item.ItemSpec,
-                        destinationPath);
+                        destinationPath
+                    );
 
                     using (FileStream stream = File.OpenRead(item.ItemSpec))
                     {
-                        using(HashAlgorithm hashAlgorithm = SHA512.Create())
+                        using (HashAlgorithm hashAlgorithm = SHA512.Create())
                         {
                             byte[] hash = hashAlgorithm.ComputeHash(stream);
-                            string checksum = BitConverter.ToString(hash).Replace("-", string.Empty);
+                            string checksum = BitConverter
+                                .ToString(hash)
+                                .Replace("-", string.Empty);
                             File.WriteAllText(destinationPath, checksum);
                         }
                     }
@@ -54,7 +59,10 @@ namespace Microsoft.DotNet.Build.Tasks
                 {
                     // We have 2 log calls because we want a nice error message but we also want to capture the
                     // callstack in the log.
-                    Log.LogError("An exception occurred while trying to generate a checksum for '{0}'.", item.ItemSpec);
+                    Log.LogError(
+                        "An exception occurred while trying to generate a checksum for '{0}'.",
+                        item.ItemSpec
+                    );
                     Log.LogMessage(MessageImportance.Low, e.ToString());
                     return false;
                 }

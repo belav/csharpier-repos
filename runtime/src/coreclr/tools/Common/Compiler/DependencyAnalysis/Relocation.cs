@@ -8,54 +8,57 @@ namespace ILCompiler.DependencyAnalysis
 {
     public enum RelocType
     {
-        IMAGE_REL_BASED_ABSOLUTE             = 0x00,   // No relocation required
-        IMAGE_REL_BASED_ADDR32NB             = 0x02,   // The 32-bit address without an image base (RVA)
-        IMAGE_REL_BASED_HIGHLOW              = 0x03,   // 32 bit address base
-        IMAGE_REL_BASED_THUMB_MOV32          = 0x07,   // Thumb2: based MOVW/MOVT
-        IMAGE_REL_BASED_DIR64                = 0x0A,   // 64 bit address base
-        IMAGE_REL_BASED_REL32                = 0x10,   // 32-bit relative address from byte following reloc
-        IMAGE_REL_BASED_THUMB_BRANCH24       = 0x13,   // Thumb2: based B, BL
-        IMAGE_REL_BASED_THUMB_MOV32_PCREL    = 0x14,   // Thumb2: based MOVW/MOVT
-        IMAGE_REL_BASED_ARM64_BRANCH26       = 0x15,   // Arm64: B, BL
-        IMAGE_REL_BASED_LOONGARCH64_PC       = 0x16,   // LoongArch64: pcaddu12i+imm12
-        IMAGE_REL_BASED_LOONGARCH64_JIR      = 0x17,   // LoongArch64: pcaddu18i+jirl
-        IMAGE_REL_BASED_RELPTR32             = 0x7C,   // 32-bit relative address from byte starting reloc
-                                                       // This is a special NGEN-specific relocation type
-                                                       // for relative pointer (used to make NGen relocation
-                                                       // section smaller)
+        IMAGE_REL_BASED_ABSOLUTE = 0x00, // No relocation required
+        IMAGE_REL_BASED_ADDR32NB = 0x02, // The 32-bit address without an image base (RVA)
+        IMAGE_REL_BASED_HIGHLOW = 0x03, // 32 bit address base
+        IMAGE_REL_BASED_THUMB_MOV32 = 0x07, // Thumb2: based MOVW/MOVT
+        IMAGE_REL_BASED_DIR64 = 0x0A, // 64 bit address base
+        IMAGE_REL_BASED_REL32 = 0x10, // 32-bit relative address from byte following reloc
+        IMAGE_REL_BASED_THUMB_BRANCH24 = 0x13, // Thumb2: based B, BL
+        IMAGE_REL_BASED_THUMB_MOV32_PCREL = 0x14, // Thumb2: based MOVW/MOVT
+        IMAGE_REL_BASED_ARM64_BRANCH26 = 0x15, // Arm64: B, BL
+        IMAGE_REL_BASED_LOONGARCH64_PC = 0x16, // LoongArch64: pcaddu12i+imm12
+        IMAGE_REL_BASED_LOONGARCH64_JIR = 0x17, // LoongArch64: pcaddu18i+jirl
+        IMAGE_REL_BASED_RELPTR32 = 0x7C, // 32-bit relative address from byte starting reloc
 
-        IMAGE_REL_BASED_ARM64_PAGEBASE_REL21 = 0x81,   // ADRP
-        IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A = 0x82,   // ADD/ADDS (immediate) with zero shift, for page offset
-        IMAGE_REL_BASED_ARM64_PAGEOFFSET_12L = 0x83,   // LDR (indexed, unsigned immediate), for page offset
+        // This is a special NGEN-specific relocation type
+        // for relative pointer (used to make NGen relocation
+        // section smaller)
+
+        IMAGE_REL_BASED_ARM64_PAGEBASE_REL21 = 0x81, // ADRP
+        IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A = 0x82, // ADD/ADDS (immediate) with zero shift, for page offset
+        IMAGE_REL_BASED_ARM64_PAGEOFFSET_12L = 0x83, // LDR (indexed, unsigned immediate), for page offset
 
         //
         // Relocation operators related to TLS access
         //
 
         // Windows x64
-        IMAGE_REL_SECREL                     = 0x104,
+        IMAGE_REL_SECREL = 0x104,
 
         // Linux x64
         // GD model
-        IMAGE_REL_TLSGD                      = 0x105,
+        IMAGE_REL_TLSGD = 0x105,
+
         // LE model
-        IMAGE_REL_TPOFF                      = 0x106,
+        IMAGE_REL_TPOFF = 0x106,
 
         // Linux arm64
         //    TLSDESC  (dynamic)
         IMAGE_REL_AARCH64_TLSDESC_ADR_PAGE21 = 0x107,
-        IMAGE_REL_AARCH64_TLSDESC_LD64_LO12  = 0x108,
-        IMAGE_REL_AARCH64_TLSDESC_ADD_LO12   = 0x109,
-        IMAGE_REL_AARCH64_TLSDESC_CALL       = 0x10A,
+        IMAGE_REL_AARCH64_TLSDESC_LD64_LO12 = 0x108,
+        IMAGE_REL_AARCH64_TLSDESC_ADD_LO12 = 0x109,
+        IMAGE_REL_AARCH64_TLSDESC_CALL = 0x10A,
+
         //    LE model
-        IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_HI12    = 0x10B,
+        IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_HI12 = 0x10B,
         IMAGE_REL_AARCH64_TLSLE_ADD_TPREL_LO12_NC = 0x10C,
 
         //
         // Relocations for R2R image production
         //
-        IMAGE_REL_SYMBOL_SIZE                = 0x1000, // The size of data in the image represented by the target symbol node
-        IMAGE_REL_FILE_ABSOLUTE              = 0x1001, // 32 bit offset from beginning of image
+        IMAGE_REL_SYMBOL_SIZE = 0x1000, // The size of data in the image represented by the target symbol node
+        IMAGE_REL_FILE_ABSOLUTE = 0x1001, // 32 bit offset from beginning of image
     }
 
     public struct Relocation
@@ -72,10 +75,10 @@ namespace ILCompiler.DependencyAnalysis
             uint Opcode0 = (uint)p[0];
             uint Opcode1 = (uint)p[1];
             uint Result =
-                ((Opcode0 << 12) & 0xf000) |
-                ((Opcode0 <<  1) & 0x0800) |
-                ((Opcode1 >>  4) & 0x0700) |
-                ((Opcode1 >>  0) & 0x00ff);
+                ((Opcode0 << 12) & 0xf000)
+                | ((Opcode0 << 1) & 0x0800)
+                | ((Opcode1 >> 4) & 0x0700)
+                | ((Opcode1 >> 0) & 0x00ff);
             return (ushort)Result;
         }
 
@@ -87,14 +90,14 @@ namespace ILCompiler.DependencyAnalysis
             uint Opcode0 = (uint)p[0];
             uint Opcode1 = (uint)p[1];
             int val0 = (0xf000 >> 12);
-            int val1 = (0x0800 >>  1);
+            int val1 = (0x0800 >> 1);
             Opcode0 &= ~((uint)val0 | (uint)val1);
-            int val3 = (0x0700 <<  4);
+            int val3 = (0x0700 << 4);
             Opcode1 &= ~((uint)val3 | (0x00ff << 0));
             Opcode0 |= ((uint)imm16 & 0xf000) >> 12;
-            Opcode0 |= ((uint)imm16 & 0x0800) >>  1;
-            Opcode1 |= ((uint)imm16 & 0x0700) <<  4;
-            Opcode1 |= ((uint)imm16 & 0x00ff) <<  0;
+            Opcode0 |= ((uint)imm16 & 0x0800) >> 1;
+            Opcode1 |= ((uint)imm16 & 0x0700) << 4;
+            Opcode1 |= ((uint)imm16 & 0x00ff) << 0;
             p[0] = (ushort)Opcode0;
             p[1] = (ushort)Opcode1;
         }
@@ -140,16 +143,16 @@ namespace ILCompiler.DependencyAnalysis
             uint Opcode0 = (uint)p[0];
             uint Opcode1 = (uint)p[1];
 
-            uint S  = Opcode0 >> 10;
+            uint S = Opcode0 >> 10;
             uint J2 = Opcode1 >> 11;
             uint J1 = Opcode1 >> 13;
 
             uint ret =
-                ((S << 24)              & 0x1000000) |
-                (((J1 ^ S ^ 1) << 23)   & 0x0800000) |
-                (((J2 ^ S ^ 1) << 22)   & 0x0400000) |
-                ((Opcode0 << 12)        & 0x03FF000) |
-                ((Opcode1 <<  1)        & 0x0000FFE);
+                ((S << 24) & 0x1000000)
+                | (((J1 ^ S ^ 1) << 23) & 0x0800000)
+                | (((J2 ^ S ^ 1) << 22) & 0x0400000)
+                | ((Opcode0 << 12) & 0x03FF000)
+                | ((Opcode1 << 1) & 0x0000FFE);
 
             // Sign-extend and return
             return (int)((ret << 7) >> 7);
@@ -173,19 +176,23 @@ namespace ILCompiler.DependencyAnalysis
 
             // Ensure that the ThumbBit is not set on the offset
             // as it cannot be encoded.
-            Debug.Assert((imm24 & 1/*THUMB_CODE*/) == 0);
+            Debug.Assert(
+                (
+                    imm24 & 1 /*THUMB_CODE*/
+                ) == 0
+            );
 
             uint Opcode0 = (uint)p[0];
             uint Opcode1 = (uint)p[1];
             Opcode0 &= 0xF800;
             Opcode1 &= 0xD000;
 
-            uint S  =  (imm24 & 0x1000000) >> 24;
+            uint S = (imm24 & 0x1000000) >> 24;
             uint J1 = ((imm24 & 0x0800000) >> 23) ^ S ^ 1;
             uint J2 = ((imm24 & 0x0400000) >> 22) ^ S ^ 1;
 
-            Opcode0 |=  ((imm24 & 0x03FF000) >> 12) | (S << 10);
-            Opcode1 |=  ((imm24 & 0x0000FFE) >>  1) | (J1 << 13) | (J2 << 11);
+            Opcode0 |= ((imm24 & 0x03FF000) >> 12) | (S << 10);
+            Opcode1 |= ((imm24 & 0x0000FFE) >> 1) | (J1 << 13) | (J2 << 11);
 
             p[0] = (ushort)Opcode0;
             p[1] = (ushort)Opcode1;
@@ -231,12 +238,12 @@ namespace ILCompiler.DependencyAnalysis
             // Check adrp opcode 1ii1 0000 ...
             Debug.Assert((adrpInstr & 0x9F000000) == 0x90000000);
 
-            adrpInstr &= 0x9F00001F;             // keep bits 31, 28-24, 4-0.
-            int immlo = imm21 & 0x03;            // Extract low 2 bits which will occupy 30-29 bits.
+            adrpInstr &= 0x9F00001F; // keep bits 31, 28-24, 4-0.
+            int immlo = imm21 & 0x03; // Extract low 2 bits which will occupy 30-29 bits.
             int immhi = (imm21 & 0x1FFFFC) >> 2; // Extract high 19 bits which will occupy 23-5 bits.
             adrpInstr |= (uint)((immlo << 29) | (immhi << 5));
 
-            *pCode = adrpInstr;                  // write the assembled instruction
+            *pCode = adrpInstr; // write the assembled instruction
 
             Debug.Assert(GetArm64Rel21(pCode) == imm21);
         }
@@ -274,10 +281,10 @@ namespace ILCompiler.DependencyAnalysis
             // Check add opcode 1001 0001 00...
             Debug.Assert((addInstr & 0xFFC00000) == 0x91000000);
 
-            addInstr &= 0xFFC003FF;          // keep bits 31-22, 9-0
+            addInstr &= 0xFFC003FF; // keep bits 31-22, 9-0
             addInstr |= (uint)(imm12 << 10); // Occupy 21-10.
 
-            *pCode = addInstr;               // write the assembled instruction
+            *pCode = addInstr; // write the assembled instruction
 
             Debug.Assert(GetArm64Rel12(pCode) == imm12);
         }
@@ -303,18 +310,18 @@ namespace ILCompiler.DependencyAnalysis
             // Verify that we got a valid offset
             Debug.Assert(FitsInArm64Rel28(imm28));
 
-            Debug.Assert((imm28 & 0x3) == 0);    // the low two bits must be zero
+            Debug.Assert((imm28 & 0x3) == 0); // the low two bits must be zero
 
             uint branchInstr = *pCode;
 
-            branchInstr &= 0xFC000000;       // keep bits 31-26
+            branchInstr &= 0xFC000000; // keep bits 31-26
 
-            Debug.Assert((branchInstr & 0x7FFFFFFF) == 0x14000000);  // Must be B or BL
+            Debug.Assert((branchInstr & 0x7FFFFFFF) == 0x14000000); // Must be B or BL
 
             // Assemble the pc-relative delta 'imm28' into the branch instruction
             branchInstr |= (uint)(((imm28 >> 2) & 0x03FFFFFFU));
 
-            *pCode = branchInstr;          // write the assembled instruction
+            *pCode = branchInstr; // write the assembled instruction
 
             Debug.Assert(GetArm64Rel28(pCode) == imm28);
         }
@@ -346,7 +353,7 @@ namespace ILCompiler.DependencyAnalysis
 
             uint pcInstr = *pCode;
 
-            Debug.Assert((pcInstr & 0xFE000000) == 0x1c000000);  // Must be pcaddu12i
+            Debug.Assert((pcInstr & 0xFE000000) == 0x1c000000); // Must be pcaddu12i
 
             int relOff = (int)imm32 & 0x800;
             int imm = (int)imm32 + relOff;
@@ -355,14 +362,14 @@ namespace ILCompiler.DependencyAnalysis
             // Assemble the pc-relative high 20 bits of 'imm32' into the pcaddu12i instruction
             pcInstr |= (uint)(((imm >> 12) & 0xFFFFF) << 5);
 
-            *pCode = pcInstr;          // write the assembled instruction
+            *pCode = pcInstr; // write the assembled instruction
 
             pcInstr = *(pCode + 1);
 
             // Assemble the pc-relative low 12 bits of 'imm32' into the addid or ld instruction
             pcInstr |= (uint)(relOff << 10);
 
-            *(pCode + 1) = pcInstr;          // write the assembled instruction
+            *(pCode + 1) = pcInstr; // write the assembled instruction
 
             Debug.Assert(GetLoongArch64PC12(pCode) == imm32);
         }
@@ -386,11 +393,11 @@ namespace ILCompiler.DependencyAnalysis
             // Verify that we got a valid offset
             Debug.Assert((imm38 >= -0x2000000000L) && (imm38 < 0x2000000000L));
 
-            Debug.Assert((imm38 & 0x3) == 0);    // the low two bits must be zero
+            Debug.Assert((imm38 & 0x3) == 0); // the low two bits must be zero
 
             uint pcInstr = *pCode;
 
-            Debug.Assert(pcInstr == 0x1e00000e);  // Must be pcaddu18i R14, 0
+            Debug.Assert(pcInstr == 0x1e00000e); // Must be pcaddu18i R14, 0
 
             long relOff = imm38 & 0x20000;
             long imm = imm38 + relOff;
@@ -399,14 +406,14 @@ namespace ILCompiler.DependencyAnalysis
             // Assemble the pc-relative high 20 bits of 'imm38' into the pcaddu12i instruction
             pcInstr |= (uint)(((imm >> 18) & 0xFFFFF) << 5);
 
-            *pCode = pcInstr;          // write the assembled instruction
+            *pCode = pcInstr; // write the assembled instruction
 
             pcInstr = *(pCode + 1);
 
             // Assemble the pc-relative low 18 bits of 'imm38' into the addid or ld instruction
             pcInstr |= (uint)(relOff << 10);
 
-            *(pCode + 1) = pcInstr;          // write the assembled instruction
+            *(pCode + 1) = pcInstr; // write the assembled instruction
 
             Debug.Assert(GetLoongArch64JIR(pCode) == imm38);
         }

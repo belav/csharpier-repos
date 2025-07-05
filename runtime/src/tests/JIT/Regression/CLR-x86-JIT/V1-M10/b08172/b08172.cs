@@ -10,7 +10,8 @@ using Xunit;
 public class Test
 {
     [Fact]
-    public static void TestEntryPoint() {
+    public static void TestEntryPoint()
+    {
         Test app = new Test();
         app.Run(17);
     }

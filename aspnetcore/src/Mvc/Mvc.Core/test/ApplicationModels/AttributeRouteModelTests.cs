@@ -35,8 +35,10 @@ public class AttributeRouteModelTests
                 // Ensure non-default value
                 Assert.NotEmpty((IEnumerable<object>)value1);
             }
-            else if (property.PropertyType.IsValueType ||
-                Nullable.GetUnderlyingType(property.PropertyType) != null)
+            else if (
+                property.PropertyType.IsValueType
+                || Nullable.GetUnderlyingType(property.PropertyType) != null
+            )
             {
                 Assert.Equal(value1, value2);
 
@@ -145,7 +147,11 @@ public class AttributeRouteModelTests
 
     [Theory]
     [MemberData(nameof(ReplaceTokens_ValueValuesData))]
-    public void ReplaceTokens_ValidValues(string template, Dictionary<string, string> values, string expected)
+    public void ReplaceTokens_ValidValues(
+        string template,
+        Dictionary<string, string> values,
+        string expected
+    )
     {
         // Arrange
         // Act
@@ -157,45 +163,57 @@ public class AttributeRouteModelTests
 
     [Theory]
     [MemberData(nameof(ReplaceTokens_InvalidFormatValuesData))]
-    public void ReplaceTokens_InvalidFormat(string template, Dictionary<string, string> values, string reason)
+    public void ReplaceTokens_InvalidFormat(
+        string template,
+        Dictionary<string, string> values,
+        string reason
+    )
     {
         // Arrange
         var expected = string.Format(
             CultureInfo.InvariantCulture,
             "The route template '{0}' has invalid syntax. {1}",
             template,
-            reason);
+            reason
+        );
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => { AttributeRouteModel.ReplaceTokens(template, values); });
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            AttributeRouteModel.ReplaceTokens(template, values);
+        });
 
         // Assert
         Assert.Equal(expected, ex.Message);
     }
 
     [Theory]
-    [InlineData("[area]/[controller]/[action]/{deptName:regex(^[a-zA-Z]{1}[a-zA-Z0-9_]*$)}", "a-zA-Z")]
+    [InlineData(
+        "[area]/[controller]/[action]/{deptName:regex(^[a-zA-Z]{1}[a-zA-Z0-9_]*$)}",
+        "a-zA-Z"
+    )]
     [InlineData("[area]/[controller]/[action2]", "action2")]
     public void ReplaceTokens_UnknownValue(string template, string token)
     {
         // Arrange
         var values = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "area", "Help" },
-                { "controller", "Admin" },
-                { "action", "SeeUsers" },
-            };
+        {
+            { "area", "Help" },
+            { "controller", "Admin" },
+            { "action", "SeeUsers" },
+        };
 
         var expected =
-            $"While processing template '{template}', " +
-            $"a replacement value for the token '{token}' could not be found. " +
-            "Available tokens: 'action, area, controller'. To use a '[' or ']' as a literal string in a " +
-            "route or within a constraint, use '[[' or ']]' instead.";
+            $"While processing template '{template}', "
+            + $"a replacement value for the token '{token}' could not be found. "
+            + "Available tokens: 'action, area, controller'. To use a '[' or ']' as a literal string in a "
+            + "route or within a constraint, use '[[' or ']]' instead.";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => { AttributeRouteModel.ReplaceTokens(template, values); });
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            AttributeRouteModel.ReplaceTokens(template, values);
+        });
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -203,10 +221,7 @@ public class AttributeRouteModelTests
 
     [Theory]
     [MemberData(nameof(CombineOrdersTestData))]
-    public void Combine_Orders(
-        AttributeRouteModel left,
-        AttributeRouteModel right,
-        int? expected)
+    public void Combine_Orders(AttributeRouteModel left, AttributeRouteModel right, int? expected)
     {
         // Arrange & Act
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -221,7 +236,8 @@ public class AttributeRouteModelTests
     public void Combine_ValidReflectedAttributeRouteModels(
         AttributeRouteModel left,
         AttributeRouteModel right,
-        AttributeRouteModel expectedResult)
+        AttributeRouteModel expectedResult
+    )
     {
         // Arrange & Act
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -235,7 +251,8 @@ public class AttributeRouteModelTests
     [MemberData(nameof(NullOrNullTemplateReflectedAttributeRouteModelTestData))]
     public void Combine_NullOrNullTemplateReflectedAttributeRouteModels(
         AttributeRouteModel left,
-        AttributeRouteModel right)
+        AttributeRouteModel right
+    )
     {
         // Arrange & Act
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -248,7 +265,8 @@ public class AttributeRouteModelTests
     [MemberData(nameof(RightOverridesReflectedAttributeRouteModelTestData))]
     public void Combine_RightOverridesReflectedAttributeRouteModel(
         AttributeRouteModel left,
-        AttributeRouteModel right)
+        AttributeRouteModel right
+    )
     {
         // Arrange
         var expectedTemplate = AttributeRouteModel.CombineTemplates(null, right.Template);
@@ -267,7 +285,8 @@ public class AttributeRouteModelTests
     public void Combine_Names(
         AttributeRouteModel left,
         AttributeRouteModel right,
-        string expectedName)
+        string expectedName
+    )
     {
         // Arrange & Act
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
@@ -281,10 +300,7 @@ public class AttributeRouteModelTests
     public void Combine_SetsSuppressLinkGenerationToFalse_IfNeitherIsTrue()
     {
         // Arrange
-        var left = new AttributeRouteModel
-        {
-            Template = "Template"
-        };
+        var left = new AttributeRouteModel { Template = "Template" };
         var right = new AttributeRouteModel();
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -296,7 +312,10 @@ public class AttributeRouteModelTests
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public void Combine_SetsSuppressLinkGenerationToTrue_IfEitherIsTrue(bool leftSuppress, bool rightSuppress)
+    public void Combine_SetsSuppressLinkGenerationToTrue_IfEitherIsTrue(
+        bool leftSuppress,
+        bool rightSuppress
+    )
     {
         // Arrange
         var left = new AttributeRouteModel
@@ -304,10 +323,7 @@ public class AttributeRouteModelTests
             Template = "Template",
             SuppressLinkGeneration = leftSuppress,
         };
-        var right = new AttributeRouteModel
-        {
-            SuppressLinkGeneration = rightSuppress,
-        };
+        var right = new AttributeRouteModel { SuppressLinkGeneration = rightSuppress };
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
         // Assert
@@ -318,10 +334,7 @@ public class AttributeRouteModelTests
     public void Combine_SetsSuppressPathGenerationToFalse_IfNeitherIsTrue()
     {
         // Arrange
-        var left = new AttributeRouteModel
-        {
-            Template = "Template",
-        };
+        var left = new AttributeRouteModel { Template = "Template" };
         var right = new AttributeRouteModel();
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
@@ -333,7 +346,10 @@ public class AttributeRouteModelTests
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public void Combine_SetsSuppressPathGenerationToTrue_IfEitherIsTrue(bool leftSuppress, bool rightSuppress)
+    public void Combine_SetsSuppressPathGenerationToTrue_IfEitherIsTrue(
+        bool leftSuppress,
+        bool rightSuppress
+    )
     {
         // Arrange
         var left = new AttributeRouteModel
@@ -341,10 +357,7 @@ public class AttributeRouteModelTests
             Template = "Template",
             SuppressPathMatching = leftSuppress,
         };
-        var right = new AttributeRouteModel
-        {
-            SuppressPathMatching = rightSuppress,
-        };
+        var right = new AttributeRouteModel { SuppressPathMatching = rightSuppress };
         var combined = AttributeRouteModel.CombineAttributeRouteModel(left, right);
 
         // Assert
@@ -373,32 +386,104 @@ public class AttributeRouteModelTests
             data.Add(Create(template: "~/", order: null, name: "Named"), null, "Named");
             data.Add(Create(template: "", order: null, name: "Named"), null, "Named");
             data.Add(Create(template: "home", order: null, name: "Named"), null, "Named");
-            data.Add(Create(template: "home", order: null, name: "Named"), Create(null, null, null), "Named");
-            data.Add(Create(template: "", order: null, name: "Named"), Create("", null, null), "Named");
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create(null, null, null),
+                "Named"
+            );
+            data.Add(
+                Create(template: "", order: null, name: "Named"),
+                Create("", null, null),
+                "Named"
+            );
 
             // Order doesn't matter for combining the name.
-            data.Add(Create(template: "", order: null, name: "Named"), Create("", 1, null), "Named");
+            data.Add(
+                Create(template: "", order: null, name: "Named"),
+                Create("", 1, null),
+                "Named"
+            );
             data.Add(Create(template: "", order: 1, name: "Named"), Create("", 1, null), "Named");
             data.Add(Create(template: "", order: 2, name: "Named"), Create("", 1, null), "Named");
-            data.Add(Create(template: "", order: null, name: "Named"), Create("index", 1, null), null);
+            data.Add(
+                Create(template: "", order: null, name: "Named"),
+                Create("index", 1, null),
+                null
+            );
             data.Add(Create(template: "", order: 1, name: "Named"), Create("index", 1, null), null);
             data.Add(Create(template: "", order: 2, name: "Named"), Create("index", 1, null), null);
-            data.Add(Create(template: "", order: null, name: "Named"), Create("", 1, "right"), "right");
-            data.Add(Create(template: "", order: 1, name: "Named"), Create("", 1, "right"), "right");
-            data.Add(Create(template: "", order: 2, name: "Named"), Create("", 1, "right"), "right");
+            data.Add(
+                Create(template: "", order: null, name: "Named"),
+                Create("", 1, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "", order: 1, name: "Named"),
+                Create("", 1, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "", order: 2, name: "Named"),
+                Create("", 1, "right"),
+                "right"
+            );
 
             // Combined name is not inherited if right name is provided or the template is not empty.
-            data.Add(Create(template: "/", order: null, name: "Named"), Create(null, null, "right"), "right");
-            data.Add(Create(template: "~/", order: null, name: "Named"), Create(null, null, "right"), "right");
-            data.Add(Create(template: "", order: null, name: "Named"), Create(null, null, "right"), "right");
-            data.Add(Create(template: "home", order: null, name: "Named"), Create(null, null, "right"), "right");
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("index", null, null), null);
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("/", null, null), null);
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("~/", null, null), null);
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("index", null, "right"), "right");
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("/", null, "right"), "right");
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("~/", null, "right"), "right");
-            data.Add(Create(template: "home", order: null, name: "Named"), Create("index", null, ""), "");
+            data.Add(
+                Create(template: "/", order: null, name: "Named"),
+                Create(null, null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "~/", order: null, name: "Named"),
+                Create(null, null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "", order: null, name: "Named"),
+                Create(null, null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create(null, null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("index", null, null),
+                null
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("/", null, null),
+                null
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("~/", null, null),
+                null
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("index", null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("/", null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("~/", null, "right"),
+                "right"
+            );
+            data.Add(
+                Create(template: "home", order: null, name: "Named"),
+                Create("index", null, ""),
+                ""
+            );
 
             return data;
         }
@@ -473,7 +558,8 @@ public class AttributeRouteModelTests
         get
         {
             // AttributeRoute on the controller, attribute route on the action, expected combined attribute route.
-            var data = new TheoryData<AttributeRouteModel, AttributeRouteModel, AttributeRouteModel>();
+            var data =
+                new TheoryData<AttributeRouteModel, AttributeRouteModel, AttributeRouteModel>();
             data.Add(null, Create("Index"), Create("Index"));
             data.Add(Create(null), Create("Index"), Create("Index"));
             data.Add(Create("Home"), null, Create("Home"));
@@ -491,178 +577,178 @@ public class AttributeRouteModelTests
         {
             yield return new object[]
             {
-                    "[controller]/[action]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/Index"
+                "[controller]/[action]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/Index",
             };
 
             yield return new object[]
             {
-                    "[controller]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home"
+                "[controller]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home",
             };
 
             yield return new object[]
             {
-                    "[controller][[",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home["
+                "[controller][[",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home[",
             };
 
             yield return new object[]
             {
-                    "[coNTroller]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home"
+                "[coNTroller]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home",
             };
 
             yield return new object[]
             {
-                    "thisisSomeText[action]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "thisisSomeTextIndex"
+                "thisisSomeText[action]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "thisisSomeTextIndex",
             };
 
             yield return new object[]
             {
-                    "[[-]][[/[[controller]]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "[-][/[controller]"
+                "[[-]][[/[[controller]]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "[-][/[controller]",
             };
 
             yield return new object[]
             {
-                    "[contr[[oller]/[act]]ion]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "contr[oller", "Home" },
-                        { "act]ion", "Index" }
-                    },
-                    "Home/Index"
+                "[contr[[oller]/[act]]ion]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "contr[oller", "Home" },
+                    { "act]ion", "Index" },
+                },
+                "Home/Index",
             };
 
             yield return new object[]
             {
-                    "[controller][action]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "HomeIndex"
+                "[controller][action]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "HomeIndex",
             };
 
             yield return new object[]
             {
-                    "[contr}oller]/[act{ion]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "contr}oller", "Home" },
-                        { "act{ion", "Index" }
-                    },
-                    "Home/Index/{id}"
+                "[contr}oller]/[act{ion]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "contr}oller", "Home" },
+                    { "act{ion", "Index" },
+                },
+                "Home/Index/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[action]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[Index]/{id}"
+                "[controller]/[[[action]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[Index]/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[action]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[[Index]]/{id}"
+                "[controller]/[[[[[action]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[[Index]]/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[[[action]]]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[[[Index]]]/{id}"
+                "[controller]/[[[[[[[action]]]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[[[Index]]]/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[action]]]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[[Index]]]/{id}"
+                "[controller]/[[[[[action]]]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[[Index]]]/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[[[action]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[[[Index]]/{id}"
+                "[controller]/[[[[[[[action]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[[[Index]]/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[action]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[Index]]/{id}"
+                "[controller]/[[[action]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[Index]]/{id}",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[[[action]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Home/[[[Index]/{id}"
+                "[controller]/[[[[[[[action]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Home/[[[Index]/{id}",
             };
         }
     }
@@ -673,127 +759,131 @@ public class AttributeRouteModelTests
         {
             yield return new object[]
             {
-                    "[",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "A replacement token is not closed."
+                "[",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "A replacement token is not closed.",
             };
 
             yield return new object[]
             {
-                    "text]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "text]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "Token delimiters ('[', ']') are imbalanced.",
             };
 
             yield return new object[]
             {
-                    "text]morecooltext",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "text]morecooltext",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "Token delimiters ('[', ']') are imbalanced.",
             };
 
             yield return new object[]
             {
-                    "[action",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "A replacement token is not closed.",
+                "[action",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "A replacement token is not closed.",
             };
 
             yield return new object[]
             {
-                    "[action]]][",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "action]", "Index" }
-                    },
-                    "A replacement token is not closed.",
+                "[action]]][",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "action]", "Index" },
+                },
+                "A replacement token is not closed.",
             };
 
             yield return new object[]
             {
-                    "[action]]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "A replacement token is not closed."
+                "[action]]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "A replacement token is not closed.",
             };
 
             yield return new object[]
             {
-                    "[ac[tion]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape."
+                "[ac[tion]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "An unescaped '[' token is not allowed inside of a replacement token. Use '[[' to escape.",
             };
 
             yield return new object[]
             {
-                    "[]",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
-                    "An empty replacement token ('[]') is not allowed.",
+                "[]",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase),
+                "An empty replacement token ('[]') is not allowed.",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[action]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "[controller]/[[[action]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Token delimiters ('[', ']') are imbalanced.",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[action]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "[controller]/[[[action]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Token delimiters ('[', ']') are imbalanced.",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[action]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "[controller]/[[action]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Token delimiters ('[', ']') are imbalanced.",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[[[action]]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "[controller]/[[[[[[[action]]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Token delimiters ('[', ']') are imbalanced.",
             };
 
             yield return new object[]
             {
-                    "[controller]/[[[[[[action]]]]]]]/{id}",
-                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    "Token delimiters ('[', ']') are imbalanced.",
+                "[controller]/[[[[[[action]]]]]]]/{id}",
+                new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+                "Token delimiters ('[', ']') are imbalanced.",
             };
         }
     }
 
-    private static AttributeRouteModel Create(string template, int? order = null, string name = null)
+    private static AttributeRouteModel Create(
+        string template,
+        int? order = null,
+        string name = null
+    )
     {
         return new AttributeRouteModel
         {
             Template = template,
             Order = order,
-            Name = name
+            Name = name,
         };
     }
 }

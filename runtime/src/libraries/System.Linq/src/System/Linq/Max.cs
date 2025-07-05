@@ -9,23 +9,33 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static int Max(this IEnumerable<int> source) => MinMaxInteger<int, MaxCalc<int>>(source);
+        public static int Max(this IEnumerable<int> source) =>
+            MinMaxInteger<int, MaxCalc<int>>(source);
 
-        public static long Max(this IEnumerable<long> source) => MinMaxInteger<long, MaxCalc<long>>(source);
+        public static long Max(this IEnumerable<long> source) =>
+            MinMaxInteger<long, MaxCalc<long>>(source);
 
-        private readonly struct MaxCalc<T> : IMinMaxCalc<T> where T : struct, IBinaryInteger<T>
+        private readonly struct MaxCalc<T> : IMinMaxCalc<T>
+            where T : struct, IBinaryInteger<T>
         {
             public static bool Compare(T left, T right) => left > right;
-            public static Vector128<T> Compare(Vector128<T> left, Vector128<T> right) => Vector128.Max(left, right);
-            public static Vector256<T> Compare(Vector256<T> left, Vector256<T> right) => Vector256.Max(left, right);
-            public static Vector512<T> Compare(Vector512<T> left, Vector512<T> right) => Vector512.Max(left, right);
+
+            public static Vector128<T> Compare(Vector128<T> left, Vector128<T> right) =>
+                Vector128.Max(left, right);
+
+            public static Vector256<T> Compare(Vector256<T> left, Vector256<T> right) =>
+                Vector256.Max(left, right);
+
+            public static Vector512<T> Compare(Vector512<T> left, Vector512<T> right) =>
+                Vector512.Max(left, right);
         }
 
         public static int? Max(this IEnumerable<int?> source) => MaxInteger(source);
 
         public static long? Max(this IEnumerable<long?> source) => MaxInteger(source);
 
-        private static T? MaxInteger<T>(this IEnumerable<T?> source) where T : struct, IBinaryInteger<T>
+        private static T? MaxInteger<T>(this IEnumerable<T?> source)
+            where T : struct, IBinaryInteger<T>
         {
             if (source == null)
             {
@@ -43,8 +53,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 T valueVal = value.GetValueOrDefault();
                 if (valueVal >= T.Zero)
@@ -95,7 +104,8 @@ namespace System.Linq
 
         public static float? Max(this IEnumerable<float?> source) => MaxFloat(source);
 
-        private static T MaxFloat<T>(this IEnumerable<T> source) where T : struct, IFloatingPointIeee754<T>
+        private static T MaxFloat<T>(this IEnumerable<T> source)
+            where T : struct, IFloatingPointIeee754<T>
         {
             T value;
 
@@ -107,7 +117,8 @@ namespace System.Linq
                 }
 
                 int i;
-                for (i = 0; i < span.Length && T.IsNaN(span[i]); i++) ;
+                for (i = 0; i < span.Length && T.IsNaN(span[i]); i++)
+                    ;
 
                 if (i == span.Length)
                 {
@@ -160,7 +171,8 @@ namespace System.Linq
             return value;
         }
 
-        private static T? MaxFloat<T>(this IEnumerable<T?> source) where T : struct, IFloatingPointIeee754<T>
+        private static T? MaxFloat<T>(this IEnumerable<T?> source)
+            where T : struct, IFloatingPointIeee754<T>
         {
             if (source == null)
             {
@@ -178,8 +190,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 T valueVal = value.GetValueOrDefault();
                 while (T.IsNaN(valueVal))
@@ -258,7 +269,6 @@ namespace System.Linq
             return value;
         }
 
-
         public static decimal? Max(this IEnumerable<decimal?> source)
         {
             if (source == null)
@@ -277,8 +287,7 @@ namespace System.Linq
                     }
 
                     value = e.Current;
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 decimal valueVal = value.GetValueOrDefault();
                 while (e.MoveNext())
@@ -296,7 +305,8 @@ namespace System.Linq
             return value;
         }
 
-        public static TSource? Max<TSource>(this IEnumerable<TSource> source) => Max(source, comparer: null);
+        public static TSource? Max<TSource>(this IEnumerable<TSource> source) =>
+            Max(source, comparer: null);
 
         /// <summary>Returns the maximum value in a generic sequence.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -310,7 +320,10 @@ namespace System.Linq
         /// <para>If <typeparamref name="TSource" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// <para>In Visual Basic query expression syntax, an `Aggregate Into Max()` clause translates to an invocation of <see cref="O:Enumerable.Max" />.</para>
         /// </remarks>
-        public static TSource? Max<TSource>(this IEnumerable<TSource> source, IComparer<TSource>? comparer)
+        public static TSource? Max<TSource>(
+            this IEnumerable<TSource> source,
+            IComparer<TSource>? comparer
+        )
         {
             if (source == null)
             {
@@ -319,16 +332,35 @@ namespace System.Linq
 
             comparer ??= Comparer<TSource>.Default;
 
-            if (typeof(TSource) == typeof(byte) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<byte, MaxCalc<byte>>((IEnumerable<byte>)source);
-            if (typeof(TSource) == typeof(sbyte) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<sbyte, MaxCalc<sbyte>>((IEnumerable<sbyte>)source);
-            if (typeof(TSource) == typeof(ushort) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<ushort, MaxCalc<ushort>>((IEnumerable<ushort>)source);
-            if (typeof(TSource) == typeof(short) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<short, MaxCalc<short>>((IEnumerable<short>)source);
-            if (typeof(TSource) == typeof(uint) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<uint, MaxCalc<uint>>((IEnumerable<uint>)source);
-            if (typeof(TSource) == typeof(int) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<int, MaxCalc<int>>((IEnumerable<int>)source);
-            if (typeof(TSource) == typeof(ulong) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<ulong, MaxCalc<ulong>>((IEnumerable<ulong>)source);
-            if (typeof(TSource) == typeof(long) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<long, MaxCalc<long>>((IEnumerable<long>)source);
-            if (typeof(TSource) == typeof(nuint) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<nuint, MaxCalc<nuint>>((IEnumerable<nuint>)source);
-            if (typeof(TSource) == typeof(nint) && comparer == Comparer<TSource>.Default) return (TSource)(object)MinMaxInteger<nint, MaxCalc<nint>>((IEnumerable<nint>)source);
+            if (typeof(TSource) == typeof(byte) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<byte, MaxCalc<byte>>((IEnumerable<byte>)source);
+            if (typeof(TSource) == typeof(sbyte) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<sbyte, MaxCalc<sbyte>>((IEnumerable<sbyte>)source);
+            if (typeof(TSource) == typeof(ushort) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<ushort, MaxCalc<ushort>>((IEnumerable<ushort>)source);
+            if (typeof(TSource) == typeof(short) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<short, MaxCalc<short>>((IEnumerable<short>)source);
+            if (typeof(TSource) == typeof(uint) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<uint, MaxCalc<uint>>((IEnumerable<uint>)source);
+            if (typeof(TSource) == typeof(int) && comparer == Comparer<TSource>.Default)
+                return (TSource)(object)MinMaxInteger<int, MaxCalc<int>>((IEnumerable<int>)source);
+            if (typeof(TSource) == typeof(ulong) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<ulong, MaxCalc<ulong>>((IEnumerable<ulong>)source);
+            if (typeof(TSource) == typeof(long) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<long, MaxCalc<long>>((IEnumerable<long>)source);
+            if (typeof(TSource) == typeof(nuint) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<nuint, MaxCalc<nuint>>((IEnumerable<nuint>)source);
+            if (typeof(TSource) == typeof(nint) && comparer == Comparer<TSource>.Default)
+                return (TSource)
+                    (object)MinMaxInteger<nint, MaxCalc<nint>>((IEnumerable<nint>)source);
 
             TSource? value = default;
             using (IEnumerator<TSource> e = source.GetEnumerator())
@@ -343,8 +375,7 @@ namespace System.Linq
                         }
 
                         value = e.Current;
-                    }
-                    while (value == null);
+                    } while (value == null);
 
                     while (e.MoveNext())
                     {
@@ -402,7 +433,10 @@ namespace System.Linq
         /// <remarks>
         /// <para>If <typeparamref name="TKey" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) => MaxBy(source, keySelector, null);
+        public static TSource? MaxBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        ) => MaxBy(source, keySelector, null);
 
         /// <summary>Returns the maximum value in a generic sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -416,7 +450,11 @@ namespace System.Linq
         /// <remarks>
         /// <para>If <typeparamref name="TKey" /> is a reference type and the source sequence is empty or contains only values that are <see langword="null" />, this method returns <see langword="null" />.</para>
         /// </remarks>
-        public static TSource? MaxBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey>? comparer)
+        public static TSource? MaxBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IComparer<TKey>? comparer
+        )
         {
             if (source == null)
             {
@@ -463,8 +501,7 @@ namespace System.Linq
 
                         value = e.Current;
                         key = keySelector(value);
-                    }
-                    while (key == null);
+                    } while (key == null);
                 }
 
                 while (e.MoveNext())
@@ -511,15 +548,31 @@ namespace System.Linq
             return value;
         }
 
-        public static int Max<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector) => MaxInteger(source, selector);
+        public static int Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        ) => MaxInteger(source, selector);
 
-        public static int? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector) => MaxInteger(source, selector);
+        public static int? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        ) => MaxInteger(source, selector);
 
-        public static long Max<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector) => MaxInteger(source, selector);
+        public static long Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        ) => MaxInteger(source, selector);
 
-        public static long? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector) => MaxInteger(source, selector);
+        public static long? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        ) => MaxInteger(source, selector);
 
-        private static TResult MaxInteger<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector) where TResult : struct, IBinaryInteger<TResult>
+        private static TResult MaxInteger<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
+            where TResult : struct, IBinaryInteger<TResult>
         {
             if (source == null)
             {
@@ -553,7 +606,11 @@ namespace System.Linq
             return value;
         }
 
-        private static TResult? MaxInteger<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult?> selector) where TResult : struct, IBinaryInteger<TResult>
+        private static TResult? MaxInteger<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult?> selector
+        )
+            where TResult : struct, IBinaryInteger<TResult>
         {
             if (source == null)
             {
@@ -576,8 +633,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 TResult valueVal = value.GetValueOrDefault();
                 if (valueVal >= TResult.Zero)
@@ -620,15 +676,31 @@ namespace System.Linq
             return value;
         }
 
-        public static float Max<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector) => MaxFloat(source, selector);
+        public static float Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        ) => MaxFloat(source, selector);
 
-        public static float? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector) => MaxFloat(source, selector);
+        public static float? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        ) => MaxFloat(source, selector);
 
-        public static double Max<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector) => MaxFloat(source, selector);
+        public static double Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        ) => MaxFloat(source, selector);
 
-        public static double? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector) => MaxFloat(source, selector);
+        public static double? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        ) => MaxFloat(source, selector);
 
-        private static TResult MaxFloat<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector) where TResult : struct, IFloatingPointIeee754<TResult>
+        private static TResult MaxFloat<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
+            where TResult : struct, IFloatingPointIeee754<TResult>
         {
             if (source == null)
             {
@@ -672,7 +744,11 @@ namespace System.Linq
             return value;
         }
 
-        private static TResult? MaxFloat<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult?> selector) where TResult : struct, IFloatingPointIeee754<TResult>
+        private static TResult? MaxFloat<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult?> selector
+        )
+            where TResult : struct, IFloatingPointIeee754<TResult>
         {
             if (source == null)
             {
@@ -695,8 +771,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 TResult valueVal = value.GetValueOrDefault();
                 while (TResult.IsNaN(valueVal))
@@ -731,7 +806,10 @@ namespace System.Linq
             return value;
         }
 
-        public static decimal Max<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector)
+        public static decimal Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        )
         {
             if (source == null)
             {
@@ -765,7 +843,10 @@ namespace System.Linq
             return value;
         }
 
-        public static decimal? Max<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector)
+        public static decimal? Max<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        )
         {
             if (source == null)
             {
@@ -788,8 +869,7 @@ namespace System.Linq
                     }
 
                     value = selector(e.Current);
-                }
-                while (!value.HasValue);
+                } while (!value.HasValue);
 
                 decimal valueVal = value.GetValueOrDefault();
                 while (e.MoveNext())
@@ -807,7 +887,10 @@ namespace System.Linq
             return value;
         }
 
-        public static TResult? Max<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        public static TResult? Max<TSource, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TResult> selector
+        )
         {
             if (source == null)
             {
@@ -832,8 +915,7 @@ namespace System.Linq
                         }
 
                         value = selector(e.Current);
-                    }
-                    while (value == null);
+                    } while (value == null);
 
                     Comparer<TResult> comparer = Comparer<TResult>.Default;
                     while (e.MoveNext())

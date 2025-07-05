@@ -33,13 +33,9 @@ namespace System.Activities.Runtime
             this.scopeHandle = scopeHandle;
         }
 
-
         public bool HasBookmarks
         {
-            get
-            {
-                return this.bookmarks != null && this.bookmarks.Count > 0;
-            }
+            get { return this.bookmarks != null && this.bookmarks.Count > 0; }
         }
 
         [DataMember(Name = "nextId")]
@@ -70,13 +66,20 @@ namespace System.Activities.Runtime
             set { this.scopeHandle = value; }
         }
 
-        public Bookmark CreateBookmark(string name, BookmarkCallback callback, ActivityInstance owningInstance, BookmarkOptions options)
+        public Bookmark CreateBookmark(
+            string name,
+            BookmarkCallback callback,
+            ActivityInstance owningInstance,
+            BookmarkOptions options
+        )
         {
             Bookmark toAdd = new Bookmark(name);
 
             if (this.bookmarks != null && this.bookmarks.ContainsKey(toAdd))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BookmarkAlreadyExists(name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.BookmarkAlreadyExists(name))
+                );
             }
 
             AddBookmark(toAdd, callback, owningInstance, options);
@@ -86,9 +89,16 @@ namespace System.Activities.Runtime
             return toAdd;
         }
 
-        public Bookmark CreateBookmark(BookmarkCallback callback, ActivityInstance owningInstance, BookmarkOptions options)
+        public Bookmark CreateBookmark(
+            BookmarkCallback callback,
+            ActivityInstance owningInstance,
+            BookmarkOptions options
+        )
         {
-            Fx.Assert(this.scope == null, "We only support named bookmarks within bookmark scopes right now.");
+            Fx.Assert(
+                this.scope == null,
+                "We only support named bookmarks within bookmark scopes right now."
+            );
 
             Bookmark bookmark = Bookmark.Create(GetNextBookmarkId());
             AddBookmark(bookmark, callback, owningInstance, options);
@@ -100,8 +110,14 @@ namespace System.Activities.Runtime
 
         void UpdateAllExclusiveHandles(Bookmark bookmark, ActivityInstance owningInstance)
         {
-            Fx.Assert(bookmark != null, "Invalid call to UpdateAllExclusiveHandles. Bookmark was null");
-            Fx.Assert(owningInstance != null, "Invalid call to UpdateAllExclusiveHandles. ActivityInstance was null");
+            Fx.Assert(
+                bookmark != null,
+                "Invalid call to UpdateAllExclusiveHandles. Bookmark was null"
+            );
+            Fx.Assert(
+                owningInstance != null,
+                "Invalid call to UpdateAllExclusiveHandles. ActivityInstance was null"
+            );
 
             if (owningInstance.PropertyManager == null)
             {
@@ -113,7 +129,8 @@ namespace System.Activities.Runtime
                 return;
             }
 
-            List<ExclusiveHandle> handles = owningInstance.PropertyManager.FindAll<ExclusiveHandle>();
+            List<ExclusiveHandle> handles =
+                owningInstance.PropertyManager.FindAll<ExclusiveHandle>();
 
             if (handles == null)
             {
@@ -128,7 +145,9 @@ namespace System.Activities.Runtime
                     if (this.scopeHandle != null)
                     {
                         bool found = false;
-                        foreach (BookmarkScopeHandle bookmarkScopeHandle in handle.RegisteredBookmarkScopes)
+                        foreach (
+                            BookmarkScopeHandle bookmarkScopeHandle in handle.RegisteredBookmarkScopes
+                        )
                         {
                             if (bookmarkScopeHandle == this.scopeHandle)
                             {
@@ -155,18 +174,29 @@ namespace System.Activities.Runtime
             return Bookmark.Create(GetNextBookmarkId());
         }
 
-        void AddBookmark(Bookmark bookmark, BookmarkCallback callback, ActivityInstance owningInstance, BookmarkOptions options)
+        void AddBookmark(
+            Bookmark bookmark,
+            BookmarkCallback callback,
+            ActivityInstance owningInstance,
+            BookmarkOptions options
+        )
         {
             if (this.bookmarks == null)
             {
-                this.bookmarks = new Dictionary<Bookmark, BookmarkCallbackWrapper>(Bookmark.Comparer);
+                this.bookmarks = new Dictionary<Bookmark, BookmarkCallbackWrapper>(
+                    Bookmark.Comparer
+                );
             }
 
             bookmark.Scope = this.scope;
 
-            BookmarkCallbackWrapper bookmarkCallbackWrapper = new BookmarkCallbackWrapper(callback, owningInstance, options)
+            BookmarkCallbackWrapper bookmarkCallbackWrapper = new BookmarkCallbackWrapper(
+                callback,
+                owningInstance,
+                options
+            )
             {
-                Bookmark = bookmark
+                Bookmark = bookmark,
             };
             this.bookmarks.Add(bookmark, bookmarkCallbackWrapper);
 
@@ -174,7 +204,13 @@ namespace System.Activities.Runtime
 
             if (TD.CreateBookmarkIsEnabled())
             {
-                TD.CreateBookmark(owningInstance.Activity.GetType().ToString(), owningInstance.Activity.DisplayName, owningInstance.Id, ActivityUtilities.GetTraceString(bookmark), ActivityUtilities.GetTraceString((BookmarkScope)bookmark.Scope));
+                TD.CreateBookmark(
+                    owningInstance.Activity.GetType().ToString(),
+                    owningInstance.Activity.DisplayName,
+                    owningInstance.Id,
+                    ActivityUtilities.GetTraceString(bookmark),
+                    ActivityUtilities.GetTraceString((BookmarkScope)bookmark.Scope)
+                );
             }
         }
 
@@ -182,7 +218,9 @@ namespace System.Activities.Runtime
         {
             if (this.nextId == long.MaxValue)
             {
-                throw FxTrace.Exception.AsError(new NotSupportedException(SR.OutOfInternalBookmarks));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(SR.OutOfInternalBookmarks)
+                );
             }
 
             long result = this.nextId;
@@ -194,7 +232,11 @@ namespace System.Activities.Runtime
         // to our internal Bookmark object.  This is necessary because we use bookmark objects as the key to our dictionary
         // (hence our ability to resolve an externally created one), but we keep a lot of important information on our internal
         // instance of that bookmark.  We must always perform this translation when doing exclusive handle housekeeping.
-        public bool TryGetBookmarkFromInternalList(Bookmark bookmark, out Bookmark internalBookmark, out BookmarkCallbackWrapper callbackWrapper)
+        public bool TryGetBookmarkFromInternalList(
+            Bookmark bookmark,
+            out Bookmark internalBookmark,
+            out BookmarkCallbackWrapper callbackWrapper
+        )
         {
             internalBookmark = null;
             callbackWrapper = null;
@@ -214,11 +256,24 @@ namespace System.Activities.Runtime
             return false;
         }
 
-        public BookmarkResumptionResult TryGenerateWorkItem(ActivityExecutor executor, bool isExternal, ref Bookmark bookmark, object value, ActivityInstance isolationInstance, out ActivityExecutionWorkItem workItem)
+        public BookmarkResumptionResult TryGenerateWorkItem(
+            ActivityExecutor executor,
+            bool isExternal,
+            ref Bookmark bookmark,
+            object value,
+            ActivityInstance isolationInstance,
+            out ActivityExecutionWorkItem workItem
+        )
         {
             Bookmark internalBookmark = null;
             BookmarkCallbackWrapper callbackWrapper = null;
-            if (!this.TryGetBookmarkFromInternalList(bookmark, out internalBookmark, out callbackWrapper))
+            if (
+                !this.TryGetBookmarkFromInternalList(
+                    bookmark,
+                    out internalBookmark,
+                    out callbackWrapper
+                )
+            )
             {
                 workItem = null;
                 return BookmarkResumptionResult.NotFound;
@@ -248,7 +303,9 @@ namespace System.Activities.Runtime
         {
             Fx.Assert(this.HasBookmarks, "Should only be called if this actually has bookmarks.");
 
-            foreach (KeyValuePair<Bookmark, BookmarkCallbackWrapper> bookmarkEntry in this.bookmarks)
+            foreach (
+                KeyValuePair<Bookmark, BookmarkCallbackWrapper> bookmarkEntry in this.bookmarks
+            )
             {
                 if (bookmarkEntry.Key.IsNamed)
                 {
@@ -279,7 +336,11 @@ namespace System.Activities.Runtime
 
         internal void PurgeSingleBookmark(Bookmark bookmark)
         {
-            Fx.Assert(this.bookmarks.ContainsKey(bookmark) && object.ReferenceEquals(bookmark, this.bookmarks[bookmark].Bookmark), "Something went wrong with our housekeeping - it must exist and must be our intenral reference");
+            Fx.Assert(
+                this.bookmarks.ContainsKey(bookmark)
+                    && object.ReferenceEquals(bookmark, this.bookmarks[bookmark].Bookmark),
+                "Something went wrong with our housekeeping - it must exist and must be our intenral reference"
+            );
             UpdateExclusiveHandleList(bookmark);
             this.bookmarks.Remove(bookmark);
         }
@@ -294,7 +355,9 @@ namespace System.Activities.Runtime
             {
                 if (callbackWrapper.ActivityInstance != instanceAttemptingRemove)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.OnlyBookmarkOwnerCanRemove));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.OnlyBookmarkOwnerCanRemove)
+                    );
                 }
 
                 Remove(internalBookmark, callbackWrapper);

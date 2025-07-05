@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class IMethodSymbolExtensions
     {
-        public static bool CompatibleSignatureToDelegate(this IMethodSymbol method, INamedTypeSymbol delegateType)
+        public static bool CompatibleSignatureToDelegate(
+            this IMethodSymbol method,
+            INamedTypeSymbol delegateType
+        )
         {
             Contract.ThrowIfFalse(delegateType.TypeKind == TypeKind.Delegate);
 
@@ -55,7 +58,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return true;
         }
 
-        public static IMethodSymbol RenameTypeParameters(this IMethodSymbol method, ImmutableArray<string> newNames)
+        public static IMethodSymbol RenameTypeParameters(
+            this IMethodSymbol method,
+            ImmutableArray<string> newNames
+        )
         {
             if (method.TypeParameters.Select(t => t.Name).SequenceEqual(newNames))
             {
@@ -64,7 +70,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var typeGenerator = new TypeGenerator();
             var updatedTypeParameters = RenameTypeParameters(
-                method.TypeParameters, newNames, typeGenerator);
+                method.TypeParameters,
+                newNames,
+                typeGenerator
+            );
 
             var mapping = new Dictionary<ITypeSymbol, ITypeSymbol>(SymbolEqualityComparer.Default);
             for (var i = 0; i < method.TypeParameters.Length; i++)
@@ -83,12 +92,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 method.Name,
                 updatedTypeParameters,
                 method.Parameters.SelectAsArray(p =>
-                    CodeGenerationSymbolFactory.CreateParameterSymbol(p.GetAttributes(), p.RefKind, p.IsParams, p.Type.SubstituteTypes(mapping, typeGenerator), p.Name, p.IsOptional,
-                        p.HasExplicitDefaultValue, p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null)));
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        p.GetAttributes(),
+                        p.RefKind,
+                        p.IsParams,
+                        p.Type.SubstituteTypes(mapping, typeGenerator),
+                        p.Name,
+                        p.IsOptional,
+                        p.HasExplicitDefaultValue,
+                        p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                    )
+                )
+            );
         }
 
         public static IMethodSymbol RenameParameters(
-            this IMethodSymbol method, ImmutableArray<string> parameterNames)
+            this IMethodSymbol method,
+            ImmutableArray<string> parameterNames
+        )
         {
             var parameterList = method.Parameters;
             if (parameterList.Select(p => p.Name).SequenceEqual(parameterNames))
@@ -108,13 +129,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 method.ExplicitInterfaceImplementations,
                 method.Name,
                 method.TypeParameters,
-                parameters);
+                parameters
+            );
         }
 
         private static ImmutableArray<ITypeParameterSymbol> RenameTypeParameters(
             ImmutableArray<ITypeParameterSymbol> typeParameters,
             ImmutableArray<string> newNames,
-            ITypeGenerator typeGenerator)
+            ITypeGenerator typeGenerator
+        )
         {
             // We generate the type parameter in two passes.  The first creates the new type
             // parameter.  The second updates the constraints to point at this new type parameter.
@@ -137,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     typeParameter.HasValueTypeConstraint,
                     typeParameter.HasUnmanagedTypeConstraint,
                     typeParameter.HasNotNullConstraint,
-                    typeParameter.Ordinal);
+                    typeParameter.Ordinal
+                );
 
                 newTypeParameters.Add(newTypeParameter);
                 mapping[typeParameter] = newTypeParameter;
@@ -146,50 +170,70 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // Now we update the constraints.
             foreach (var newTypeParameter in newTypeParameters)
             {
-                newTypeParameter.ConstraintTypes = ImmutableArray.CreateRange(newTypeParameter.ConstraintTypes, t => t.SubstituteTypes(mapping, typeGenerator));
+                newTypeParameter.ConstraintTypes = ImmutableArray.CreateRange(
+                    newTypeParameter.ConstraintTypes,
+                    t => t.SubstituteTypes(mapping, typeGenerator)
+                );
             }
 
             return newTypeParameters.Cast<ITypeParameterSymbol>().ToImmutableArray();
         }
 
         public static IMethodSymbol EnsureNonConflictingNames(
-            this IMethodSymbol method, INamedTypeSymbol containingType, ISyntaxFactsService syntaxFacts)
+            this IMethodSymbol method,
+            INamedTypeSymbol containingType,
+            ISyntaxFactsService syntaxFacts
+        )
         {
             // The method's type parameters may conflict with the type parameters in the type
             // we're generating into.  In that case, rename them.
             var parameterNames = NameGenerator.EnsureUniqueness(
-                method.Parameters.SelectAsArray(p => p.Name), isCaseSensitive: syntaxFacts.IsCaseSensitive);
+                method.Parameters.SelectAsArray(p => p.Name),
+                isCaseSensitive: syntaxFacts.IsCaseSensitive
+            );
 
-            var outerTypeParameterNames =
-                containingType.GetAllTypeParameters()
-                              .Select(tp => tp.Name)
-                              .Concat(method.Name)
-                              .Concat(containingType.Name);
+            var outerTypeParameterNames = containingType
+                .GetAllTypeParameters()
+                .Select(tp => tp.Name)
+                .Concat(method.Name)
+                .Concat(containingType.Name);
 
-            var unusableNames = parameterNames.Concat(outerTypeParameterNames).ToSet(
-                syntaxFacts.IsCaseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase);
+            var unusableNames = parameterNames
+                .Concat(outerTypeParameterNames)
+                .ToSet(
+                    syntaxFacts.IsCaseSensitive
+                        ? StringComparer.Ordinal
+                        : StringComparer.OrdinalIgnoreCase
+                );
 
             var newTypeParameterNames = NameGenerator.EnsureUniqueness(
                 method.TypeParameters.SelectAsArray(tp => tp.Name),
-                n => !unusableNames.Contains(n));
+                n => !unusableNames.Contains(n)
+            );
 
             var updatedMethod = method.RenameTypeParameters(newTypeParameterNames);
             return updatedMethod.RenameParameters(parameterNames);
         }
 
         public static IMethodSymbol RemoveInaccessibleAttributesAndAttributesOfTypes(
-            this IMethodSymbol method, ISymbol accessibleWithin,
-            params INamedTypeSymbol[] removeAttributeTypes)
+            this IMethodSymbol method,
+            ISymbol accessibleWithin,
+            params INamedTypeSymbol[] removeAttributeTypes
+        )
         {
             // Many static predicates use the same state argument in this method
             var arg = (removeAttributeTypes, accessibleWithin);
 
             var methodHasAttribute = method.GetAttributes().Any(shouldRemoveAttribute, arg);
 
-            var someParameterHasAttribute = method.Parameters
-                .Any(static (m, arg) => m.GetAttributes().Any(shouldRemoveAttribute, arg), arg);
+            var someParameterHasAttribute = method.Parameters.Any(
+                static (m, arg) => m.GetAttributes().Any(shouldRemoveAttribute, arg),
+                arg
+            );
 
-            var returnTypeHasAttribute = method.GetReturnTypeAttributes().Any(shouldRemoveAttribute, arg);
+            var returnTypeHasAttribute = method
+                .GetReturnTypeAttributes()
+                .Any(shouldRemoveAttribute, arg);
 
             if (!methodHasAttribute && !someParameterHasAttribute && !returnTypeHasAttribute)
             {
@@ -200,17 +244,38 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 method,
                 containingType: method.ContainingType,
                 explicitInterfaceImplementations: method.ExplicitInterfaceImplementations,
-                attributes: method.GetAttributes().WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg),
-                parameters: method.Parameters.SelectAsArray(static (p, arg) =>
-                    CodeGenerationSymbolFactory.CreateParameterSymbol(
-                        p.GetAttributes().WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg),
-                        p.RefKind, p.IsParams, p.Type, p.Name, p.IsOptional,
-                        p.HasExplicitDefaultValue, p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null), arg),
-                returnTypeAttributes: method.GetReturnTypeAttributes().WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg));
+                attributes: method
+                    .GetAttributes()
+                    .WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg),
+                parameters: method.Parameters.SelectAsArray(
+                    static (p, arg) =>
+                        CodeGenerationSymbolFactory.CreateParameterSymbol(
+                            p.GetAttributes()
+                                .WhereAsArray(
+                                    static (a, arg) => !shouldRemoveAttribute(a, arg),
+                                    arg
+                                ),
+                            p.RefKind,
+                            p.IsParams,
+                            p.Type,
+                            p.Name,
+                            p.IsOptional,
+                            p.HasExplicitDefaultValue,
+                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                        ),
+                    arg
+                ),
+                returnTypeAttributes: method
+                    .GetReturnTypeAttributes()
+                    .WhereAsArray(static (a, arg) => !shouldRemoveAttribute(a, arg), arg)
+            );
 
-            static bool shouldRemoveAttribute(AttributeData a, (INamedTypeSymbol[] removeAttributeTypes, ISymbol accessibleWithin) arg)
-                => arg.removeAttributeTypes.Any(attr => attr.Equals(a.AttributeClass)) ||
-                a.AttributeClass?.IsAccessibleWithin(arg.accessibleWithin) == false;
+            static bool shouldRemoveAttribute(
+                AttributeData a,
+                (INamedTypeSymbol[] removeAttributeTypes, ISymbol accessibleWithin) arg
+            ) =>
+                arg.removeAttributeTypes.Any(attr => attr.Equals(a.AttributeClass))
+                || a.AttributeClass?.IsAccessibleWithin(arg.accessibleWithin) == false;
         }
 
         public static bool? IsMoreSpecificThan(this IMethodSymbol method1, IMethodSymbol method2)
@@ -218,7 +283,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var p1 = method1.Parameters;
             var p2 = method2.Parameters;
 
-            // If the methods don't have the same parameter count, then method1 can't be more or 
+            // If the methods don't have the same parameter count, then method1 can't be more or
             // less specific than method2.
             if (p1.Length != p2.Length)
             {
@@ -227,23 +292,32 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             // If the methods' parameter types differ, or they have different names, then one can't
             // be more specific than the other.
-            if (!SignatureComparer.Instance.HaveSameSignature(method1.Parameters, method2.Parameters) ||
-                !method1.Parameters.Select(p => p.Name).SequenceEqual(method2.Parameters.Select(p => p.Name)))
+            if (
+                !SignatureComparer.Instance.HaveSameSignature(
+                    method1.Parameters,
+                    method2.Parameters
+                )
+                || !method1
+                    .Parameters.Select(p => p.Name)
+                    .SequenceEqual(method2.Parameters.Select(p => p.Name))
+            )
             {
                 return null;
             }
 
             // Ok.  We have two methods that look extremely similar to each other.  However, one might
-            // be more specific if, for example, it was actually written with concrete types (like 'int') 
+            // be more specific if, for example, it was actually written with concrete types (like 'int')
             // versus the other which may have been instantiated from a type parameter.   i.e.
             //
             // class C<T> { void Goo(T t); void Goo(int t); }
             //
-            // THe latter Goo is more specific when comparing "C<int>.Goo(int t)" (method1) vs 
+            // THe latter Goo is more specific when comparing "C<int>.Goo(int t)" (method1) vs
             // "C<int>.Goo(int t)" (method2).
             p1 = method1.OriginalDefinition.Parameters;
             p2 = method2.OriginalDefinition.Parameters;
-            return p1.Select(p => p.Type).ToList().AreMoreSpecificThan(p2.Select(p => p.Type).ToList());
+            return p1.Select(p => p.Type)
+                .ToList()
+                .AreMoreSpecificThan(p2.Select(p => p.Type).ToList());
         }
     }
 }

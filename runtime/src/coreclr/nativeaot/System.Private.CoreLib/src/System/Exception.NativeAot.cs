@@ -8,7 +8,6 @@ using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 using MethodBase = System.Reflection.MethodBase;
 
 namespace System
@@ -35,8 +34,8 @@ namespace System
         private IDictionary? _data;
         private Exception? _innerException;
         private string? _helpURL;
-        private string? _source;         // Mainly used by VB.
-        private int _HResult;     // HResult
+        private string? _source; // Mainly used by VB.
+        private int _HResult; // HResult
 
         // To maintain compatibility across runtimes, if this object was deserialized, it will store its stack trace as a string
         private string? _stackTraceString;
@@ -55,7 +54,7 @@ namespace System
         private IntPtr[]? _corDbgStackTrace;
         private int _idxFirstFreeStackTraceEntry;
 
-        internal static IntPtr EdiSeparator => (IntPtr)1;  // Marks a boundary where an ExceptionDispatchInfo rethrew an exception.
+        internal static IntPtr EdiSeparator => (IntPtr)1; // Marks a boundary where an ExceptionDispatchInfo rethrew an exception.
 
         private void AppendStackIP(IntPtr IP, bool isFirstRethrowFrame)
         {
@@ -98,6 +97,7 @@ namespace System
 
         // Performance metric to count the number of exceptions thrown
         private static uint s_exceptionCount;
+
         internal static uint GetExceptionCount() => s_exceptionCount;
 
         [RuntimeExport("AppendExceptionStackFrame")]
@@ -115,7 +115,8 @@ namespace System
                     return;
 
                 bool isFirstFrame = (flags & (int)RhEHFrameType.RH_EH_FIRST_FRAME) != 0;
-                bool isFirstRethrowFrame = (flags & (int)RhEHFrameType.RH_EH_FIRST_RETHROW_FRAME) != 0;
+                bool isFirstRethrowFrame =
+                    (flags & (int)RhEHFrameType.RH_EH_FIRST_RETHROW_FRAME) != 0;
 
                 // track count for metrics
                 if (isFirstFrame && !isFirstRethrowFrame)
@@ -125,7 +126,12 @@ namespace System
                 // 1. Don't clear if we're rethrowing with `throw;`.
                 // 2. Don't clear if we're throwing through ExceptionDispatchInfo.
                 //    This is done through invoking RestoreDispatchState which sets the last frame to EdiSeparator followed by throwing normally using `throw ex;`.
-                if (!isFirstRethrowFrame && isFirstFrame && ex._idxFirstFreeStackTraceEntry > 0 && ex._corDbgStackTrace[ex._idxFirstFreeStackTraceEntry - 1] != EdiSeparator)
+                if (
+                    !isFirstRethrowFrame
+                    && isFirstFrame
+                    && ex._idxFirstFreeStackTraceEntry > 0
+                    && ex._corDbgStackTrace[ex._idxFirstFreeStackTraceEntry - 1] != EdiSeparator
+                )
                     ex._idxFirstFreeStackTraceEntry = 0;
 
                 // If out of memory, avoid any calls that may allocate.  Otherwise, they may fail
@@ -135,17 +141,28 @@ namespace System
                 if (!fatalOutOfMemory)
                     ex.AppendStackIP(IP, isFirstRethrowFrame);
 
- #if FEATURE_PERFTRACING
+#if FEATURE_PERFTRACING
                 if (isFirstFrame)
                 {
-                    string typeName = !fatalOutOfMemory  ? ex.GetType().ToString() : "System.OutOfMemoryException";
-                    string message = !fatalOutOfMemory  ? ex.Message :
-                        "Insufficient memory to continue the execution of the program.";
+                    string typeName = !fatalOutOfMemory
+                        ? ex.GetType().ToString()
+                        : "System.OutOfMemoryException";
+                    string message = !fatalOutOfMemory
+                        ? ex.Message
+                        : "Insufficient memory to continue the execution of the program.";
 
                     unsafe
                     {
-                        fixed (char* exceptionTypeName = typeName, exceptionMessage = message)
-                            RuntimeImports.NativeRuntimeEventSource_LogExceptionThrown(exceptionTypeName, exceptionMessage, IP, ex.HResult);
+                        fixed (
+                            char* exceptionTypeName = typeName,
+                                exceptionMessage = message
+                        )
+                            RuntimeImports.NativeRuntimeEventSource_LogExceptionThrown(
+                                exceptionTypeName,
+                                exceptionMessage,
+                                IP,
+                                ex.HResult
+                            );
                     }
                 }
 #endif
@@ -228,7 +245,8 @@ namespace System
             internal int StackTraceElementCount;
             // IntPtr * N  : StackTrace elements
         }
-        internal const int CurrentSerializationSignature = 0x31305845;  // 'EX01'
+
+        internal const int CurrentSerializationSignature = 0x31305845; // 'EX01'
 
         /// <summary>
         /// This method performs the serialization of one Exception object into the returned byte[].
@@ -238,7 +256,8 @@ namespace System
             checked
             {
                 int nStackTraceElements = _idxFirstFreeStackTraceEntry;
-                int cbBuffer = sizeof(SERIALIZED_EXCEPTION_HEADER) + (nStackTraceElements * IntPtr.Size);
+                int cbBuffer =
+                    sizeof(SERIALIZED_EXCEPTION_HEADER) + (nStackTraceElements * IntPtr.Size);
 
                 byte[] buffer = new byte[cbBuffer];
                 fixed (byte* pBuffer = &buffer[0])
@@ -247,7 +266,9 @@ namespace System
                     pHeader->HResult = _HResult;
                     pHeader->ExceptionEEType = (nint)this.GetMethodTable();
                     pHeader->StackTraceElementCount = nStackTraceElements;
-                    IntPtr* pStackTraceElements = (IntPtr*)(pBuffer + sizeof(SERIALIZED_EXCEPTION_HEADER));
+                    IntPtr* pStackTraceElements = (IntPtr*)(
+                        pBuffer + sizeof(SERIALIZED_EXCEPTION_HEADER)
+                    );
                     for (int i = 0; i < nStackTraceElements; i++)
                     {
                         pStackTraceElements[i] = _corDbgStackTrace[i];

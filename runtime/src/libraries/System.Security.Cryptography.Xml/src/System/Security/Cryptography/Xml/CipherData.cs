@@ -27,10 +27,7 @@ namespace System.Security.Cryptography.Xml
         [MemberNotNullWhen(true, nameof(_cachedXml))]
         private bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         [DisallowNull]
@@ -42,7 +39,9 @@ namespace System.Security.Cryptography.Xml
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
                 if (CipherValue != null)
-                    throw new CryptographicException(SR.Cryptography_Xml_CipherValueElementRequired);
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_CipherValueElementRequired
+                    );
 
                 _cipherReference = value;
                 _cachedXml = null;
@@ -58,7 +57,9 @@ namespace System.Security.Cryptography.Xml
                 if (value == null)
                     throw new ArgumentNullException(nameof(value));
                 if (CipherReference != null)
-                    throw new CryptographicException(SR.Cryptography_Xml_CipherValueElementRequired);
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_CipherValueElementRequired
+                    );
 
                 _cipherValue = (byte[])value.Clone();
                 _cachedXml = null;
@@ -67,7 +68,8 @@ namespace System.Security.Cryptography.Xml
 
         public XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -77,18 +79,26 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the CipherData element
-            XmlElement cipherDataElement = (XmlElement)document.CreateElement("CipherData", EncryptedXml.XmlEncNamespaceUrl);
+            XmlElement cipherDataElement = (XmlElement)
+                document.CreateElement("CipherData", EncryptedXml.XmlEncNamespaceUrl);
             if (CipherValue != null)
             {
-                XmlElement cipherValueElement = document.CreateElement("CipherValue", EncryptedXml.XmlEncNamespaceUrl);
-                cipherValueElement.AppendChild(document.CreateTextNode(Convert.ToBase64String(CipherValue)));
+                XmlElement cipherValueElement = document.CreateElement(
+                    "CipherValue",
+                    EncryptedXml.XmlEncNamespaceUrl
+                );
+                cipherValueElement.AppendChild(
+                    document.CreateTextNode(Convert.ToBase64String(CipherValue))
+                );
                 cipherDataElement.AppendChild(cipherValueElement);
             }
             else
             {
                 // No CipherValue specified, see if there is a CipherReference
                 if (CipherReference == null)
-                    throw new CryptographicException(SR.Cryptography_Xml_CipherValueElementRequired);
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_CipherValueElementRequired
+                    );
                 cipherDataElement.AppendChild(CipherReference.GetXml(document));
             }
             return cipherDataElement;
@@ -111,8 +121,12 @@ namespace System.Security.Cryptography.Xml
             if (cipherValueNode != null)
             {
                 if (cipherReferenceNode != null)
-                    throw new CryptographicException(SR.Cryptography_Xml_CipherValueElementRequired);
-                _cipherValue = Convert.FromBase64String(Utils.DiscardWhiteSpaces(cipherValueNode.InnerText));
+                    throw new CryptographicException(
+                        SR.Cryptography_Xml_CipherValueElementRequired
+                    );
+                _cipherValue = Convert.FromBase64String(
+                    Utils.DiscardWhiteSpaces(cipherValueNode.InnerText)
+                );
             }
             else if (cipherReferenceNode != null)
             {

@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,32 +26,36 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class LegendItemsCollection : ChartElementCollection<LegendItem>
-	{
-		[MonoTODO]
-		public int Add (Color color, string text)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public int Add (string image, string text)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void Insert (int index, Color color, string text)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void Insert (int index, string image, string text)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void Reverse()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    public class LegendItemsCollection : ChartElementCollection<LegendItem>
+    {
+        [MonoTODO]
+        public int Add(Color color, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public int Add(string image, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Insert(int index, Color color, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Insert(int index, string image, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Reverse()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

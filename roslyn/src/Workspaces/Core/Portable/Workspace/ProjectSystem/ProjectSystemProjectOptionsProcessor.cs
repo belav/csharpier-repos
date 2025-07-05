@@ -44,12 +44,16 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
         public ProjectSystemProjectOptionsProcessor(
             ProjectSystemProject project,
-            SolutionServices workspaceServices)
+            SolutionServices workspaceServices
+        )
         {
             _project = project ?? throw new ArgumentNullException(nameof(project));
             _workspaceServices = workspaceServices;
-            _commandLineParserService = workspaceServices.GetLanguageServices(project.Language).GetRequiredService<ICommandLineParserService>();
-            _temporaryStorageService = workspaceServices.GetRequiredService<ITemporaryStorageServiceInternal>();
+            _commandLineParserService = workspaceServices
+                .GetLanguageServices(project.Language)
+                .GetRequiredService<ICommandLineParserService>();
+            _temporaryStorageService =
+                workspaceServices.GetRequiredService<ITemporaryStorageServiceInternal>();
 
             // Set up _commandLineArgumentsForCommandLine to a default. No lock taken since we're in
             // the constructor so nothing can race.
@@ -88,7 +92,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             if (commandLine == null)
                 throw new ArgumentNullException(nameof(commandLine));
 
-            var arguments = CommandLineParser.SplitCommandLineIntoArguments(commandLine, removeHashComments: false);
+            var arguments = CommandLineParser.SplitCommandLineIntoArguments(
+                commandLine,
+                removeHashComments: false
+            );
 
             SetCommandLine(arguments.ToImmutableArray());
         }
@@ -109,7 +116,6 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         public string? ExplicitRuleSetFilePath
         {
             get => _explicitRuleSetFilePath;
-
             set
             {
                 lock (_gate)
@@ -154,7 +160,12 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
         private void ReparseCommandLine_NoLock(ImmutableArray<string> arguments)
         {
-            _commandLineArgumentsForCommandLine = _commandLineParserService.Parse(arguments, Path.GetDirectoryName(_project.FilePath), isInteractive: false, sdkDirectory: null);
+            _commandLineArgumentsForCommandLine = _commandLineParserService.Parse(
+                arguments,
+                Path.GetDirectoryName(_project.FilePath),
+                isInteractive: false,
+                sdkDirectory: null
+            );
         }
 
         /// <summary>
@@ -168,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
 
         private void UpdateProjectOptions_NoLock()
         {
-            var effectiveRuleSetPath = ExplicitRuleSetFilePath ?? _commandLineArgumentsForCommandLine.RuleSetPath;
+            var effectiveRuleSetPath =
+                ExplicitRuleSetFilePath ?? _commandLineArgumentsForCommandLine.RuleSetPath;
 
             if (_ruleSetFile?.Target.Value.FilePath != effectiveRuleSetPath)
             {
@@ -179,7 +191,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 if (effectiveRuleSetPath != null)
                 {
                     // Ruleset service is not required across all our platforms
-                    _ruleSetFile = _workspaceServices.GetService<IRuleSetManager>()?.GetOrCreateRuleSet(effectiveRuleSetPath);
+                    _ruleSetFile = _workspaceServices
+                        .GetService<IRuleSetManager>()
+                        ?.GetOrCreateRuleSet(effectiveRuleSetPath);
 
                     if (_ruleSetFile != null)
                     {
@@ -188,32 +202,57 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 }
             }
 
-            var compilationOptions = _commandLineArgumentsForCommandLine.CompilationOptions
-                .WithConcurrentBuild(concurrent: false)
-                .WithXmlReferenceResolver(new XmlFileResolver(_commandLineArgumentsForCommandLine.BaseDirectory))
+            var compilationOptions = _commandLineArgumentsForCommandLine
+                .CompilationOptions.WithConcurrentBuild(concurrent: false)
+                .WithXmlReferenceResolver(
+                    new XmlFileResolver(_commandLineArgumentsForCommandLine.BaseDirectory)
+                )
                 .WithAssemblyIdentityComparer(DesktopAssemblyIdentityComparer.Default)
-                .WithStrongNameProvider(new DesktopStrongNameProvider(_commandLineArgumentsForCommandLine.KeyFileSearchPaths.WhereNotNull().ToImmutableArray()));
+                .WithStrongNameProvider(
+                    new DesktopStrongNameProvider(
+                        _commandLineArgumentsForCommandLine
+                            .KeyFileSearchPaths.WhereNotNull()
+                            .ToImmutableArray()
+                    )
+                );
 
             // Override the default documentation mode.
-            var documentationMode = _commandLineArgumentsForCommandLine.DocumentationPath != null ? DocumentationMode.Diagnose : DocumentationMode.Parse;
-            var parseOptions = _commandLineArgumentsForCommandLine.ParseOptions
-                .WithDocumentationMode(documentationMode);
+            var documentationMode =
+                _commandLineArgumentsForCommandLine.DocumentationPath != null
+                    ? DocumentationMode.Diagnose
+                    : DocumentationMode.Parse;
+            var parseOptions =
+                _commandLineArgumentsForCommandLine.ParseOptions.WithDocumentationMode(
+                    documentationMode
+                );
 
             // We've computed what the base values should be; we now give an opportunity for any host-specific settings to be computed
             // before we apply them
-            compilationOptions = ComputeCompilationOptionsWithHostValues(compilationOptions, _ruleSetFile?.Target.Value);
+            compilationOptions = ComputeCompilationOptionsWithHostValues(
+                compilationOptions,
+                _ruleSetFile?.Target.Value
+            );
             parseOptions = ComputeParseOptionsWithHostValues(parseOptions);
 
             // For managed projects, AssemblyName has to be non-null, but the command line we get might be a partial command line
             // and not contain the existing value. Only update if we have one.
-            _project.AssemblyName = _commandLineArgumentsForCommandLine.CompilationName ?? _project.AssemblyName;
+            _project.AssemblyName =
+                _commandLineArgumentsForCommandLine.CompilationName ?? _project.AssemblyName;
             _project.CompilationOptions = compilationOptions;
 
-            var fullOutputFilePath = (_commandLineArgumentsForCommandLine.OutputDirectory != null && _commandLineArgumentsForCommandLine.OutputFileName != null)
-                ? Path.Combine(_commandLineArgumentsForCommandLine.OutputDirectory, _commandLineArgumentsForCommandLine.OutputFileName)
-                : _commandLineArgumentsForCommandLine.OutputFileName;
+            var fullOutputFilePath =
+                (
+                    _commandLineArgumentsForCommandLine.OutputDirectory != null
+                    && _commandLineArgumentsForCommandLine.OutputFileName != null
+                )
+                    ? Path.Combine(
+                        _commandLineArgumentsForCommandLine.OutputDirectory,
+                        _commandLineArgumentsForCommandLine.OutputFileName
+                    )
+                    : _commandLineArgumentsForCommandLine.OutputFileName;
 
-            _project.CompilationOutputAssemblyFilePath = fullOutputFilePath ?? _project.CompilationOutputAssemblyFilePath;
+            _project.CompilationOutputAssemblyFilePath =
+                fullOutputFilePath ?? _project.CompilationOutputAssemblyFilePath;
             _project.ParseOptions = parseOptions;
             _project.ChecksumAlgorithm = _commandLineArgumentsForCommandLine.ChecksumAlgorithm;
         }
@@ -237,7 +276,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
                 // effective values was potentially done by the act of parsing the command line. Even though the command line didn't change textually,
                 // the effective result did. Then we call UpdateProjectOptions_NoLock to reapply any values; that will also re-acquire the new ruleset
                 // includes in the IDE so we can be watching for changes again.
-                var commandLine = _commandLineStorage == null ? ImmutableArray<string>.Empty : _commandLineStorage.ReadLines();
+                var commandLine =
+                    _commandLineStorage == null
+                        ? ImmutableArray<string>.Empty
+                        : _commandLineStorage.ReadLines();
 
                 DisposeOfRuleSetFile_NoLock();
                 ReparseCommandLine_NoLock(commandLine);
@@ -249,15 +291,18 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         /// Overridden by derived classes to provide a hook to modify a <see cref="CompilationOptions"/> with any host-provided values that didn't come from
         /// the command line string.
         /// </summary>
-        protected virtual CompilationOptions ComputeCompilationOptionsWithHostValues(CompilationOptions compilationOptions, IRuleSetFile? ruleSetFile)
-            => compilationOptions;
+        protected virtual CompilationOptions ComputeCompilationOptionsWithHostValues(
+            CompilationOptions compilationOptions,
+            IRuleSetFile? ruleSetFile
+        ) => compilationOptions;
 
         /// <summary>
-        /// Override by derived classes to provide a hook to modify a <see cref="ParseOptions"/> with any host-provided values that didn't come from 
+        /// Override by derived classes to provide a hook to modify a <see cref="ParseOptions"/> with any host-provided values that didn't come from
         /// the command line string.
         /// </summary>
-        protected virtual ParseOptions ComputeParseOptionsWithHostValues(ParseOptions parseOptions)
-            => parseOptions;
+        protected virtual ParseOptions ComputeParseOptionsWithHostValues(
+            ParseOptions parseOptions
+        ) => parseOptions;
 
         /// <summary>
         /// Called by a derived class to notify that we need to update the settings in the project system for something that will be provided

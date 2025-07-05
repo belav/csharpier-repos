@@ -13,9 +13,16 @@ namespace Moq
     ///     <see langword="enum"/> type in order to satisfy generic type constraints of the method where it is used.
     ///   </para>
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Delegate | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Delegate
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct,
+        AllowMultiple = false,
+        Inherited = true
+    )]
     public class TypeMatcherAttribute : Attribute
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Type type;

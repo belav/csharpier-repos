@@ -15,7 +15,10 @@ public class LoginController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> LoginDefaultScheme()
     {
-        var identity = new ClaimsIdentity(new[] { new Claim("ClaimA", "Value") }, CookieAuthenticationDefaults.AuthenticationScheme);
+        var identity = new ClaimsIdentity(
+            new[] { new Claim("ClaimA", "Value") },
+            CookieAuthenticationDefaults.AuthenticationScheme
+        );
         await HttpContext.SignInAsync(scheme: null, new ClaimsPrincipal(identity));
         return Ok();
     }
@@ -23,16 +26,28 @@ public class LoginController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> LoginClaimA()
     {
-        var identity = new ClaimsIdentity(new[] { new Claim("ClaimA", "Value") }, CookieAuthenticationDefaults.AuthenticationScheme);
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+        var identity = new ClaimsIdentity(
+            new[] { new Claim("ClaimA", "Value") },
+            CookieAuthenticationDefaults.AuthenticationScheme
+        );
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(identity)
+        );
         return Ok();
     }
 
     [HttpPost]
     public async Task<IActionResult> LoginClaimAB()
     {
-        var identity = new ClaimsIdentity(new[] { new Claim("ClaimA", "Value"), new Claim("ClaimB", "Value") }, CookieAuthenticationDefaults.AuthenticationScheme);
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+        var identity = new ClaimsIdentity(
+            new[] { new Claim("ClaimA", "Value"), new Claim("ClaimB", "Value") },
+            CookieAuthenticationDefaults.AuthenticationScheme
+        );
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(identity)
+        );
         return Ok();
     }
 

@@ -23,9 +23,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal IntSumAggregationOperator(IEnumerable<int> child) : base(child)
-        {
-        }
+        internal IntSumAggregationOperator(IEnumerable<int> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -41,7 +40,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<int> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<int> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // We just reduce the elements in each output partition.
                 int sum = 0;
@@ -62,7 +66,12 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<int, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<int, TKey> source, object? sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<int, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        )
         {
             return new IntSumAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
         }
@@ -72,7 +81,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class IntSumAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<int>
+        private sealed class IntSumAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<int>
         {
             private readonly QueryOperatorEnumerator<int, TKey> _source; // The source data.
 
@@ -80,9 +90,12 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal IntSumAggregationOperatorEnumerator(QueryOperatorEnumerator<int, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal IntSumAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<int, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;
@@ -108,13 +121,11 @@ namespace System.Linq.Parallel
                     {
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             _cancellationToken.ThrowIfCancellationRequested();
-
                         checked
                         {
                             tempSum += element;
                         }
-                    }
-                    while (source.MoveNext(ref element, ref keyUnused));
+                    } while (source.MoveNext(ref element, ref keyUnused));
 
                     // The sum has been calculated. Now just return.
                     currentElement = tempSum;

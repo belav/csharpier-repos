@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,28 +26,31 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System.Web;
-namespace System.Web.UI {
-	class StringPropertyBuilder : ControlBuilder {
-		string prop_name;
 
-		public StringPropertyBuilder (string prop_name)
-		{
-			this.prop_name = prop_name;
-		}
+namespace System.Web.UI
+{
+    class StringPropertyBuilder : ControlBuilder
+    {
+        string prop_name;
 
-		public string PropertyName {
-			get { return prop_name; }
-		}
+        public StringPropertyBuilder(string prop_name)
+        {
+            this.prop_name = prop_name;
+        }
 
-		public override bool AllowWhitespaceLiterals ()
-		{
-			return false;
-		}
+        public string PropertyName
+        {
+            get { return prop_name; }
+        }
 
-		public override void AppendSubBuilder (ControlBuilder subBuilder)
-		{
-			throw new HttpException ("StringPropertyBuilder should never be called");
-		}
-	}
+        public override bool AllowWhitespaceLiterals()
+        {
+            return false;
+        }
+
+        public override void AppendSubBuilder(ControlBuilder subBuilder)
+        {
+            throw new HttpException("StringPropertyBuilder should never be called");
+        }
+    }
 }
-

@@ -6,14 +6,10 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection.Metadata;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.Logging;
-
 using ILLink.Shared.TrimAnalysis;
-
 using Internal.TypeSystem;
-
 using CustomAttributeValue = System.Reflection.Metadata.CustomAttributeValue<Internal.TypeSystem.TypeDesc>;
 using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore<ILCompiler.DependencyAnalysis.NodeFactory>.DependencyList;
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
@@ -30,7 +26,12 @@ namespace ILCompiler.Dataflow
         private readonly MessageOrigin _origin;
         private readonly DiagnosticContext _diagnosticContext;
 
-        public AttributeDataFlow(Logger logger, NodeFactory factory, FlowAnnotations annotations, in MessageOrigin origin)
+        public AttributeDataFlow(
+            Logger logger,
+            NodeFactory factory,
+            FlowAnnotations annotations,
+            in MessageOrigin origin
+        )
         {
             _annotations = annotations;
             _factory = factory;
@@ -39,13 +40,26 @@ namespace ILCompiler.Dataflow
 
             _diagnosticContext = new DiagnosticContext(
                 _origin,
-                _logger.ShouldSuppressAnalysisWarningsForRequires(_origin.MemberDefinition, DiagnosticUtilities.RequiresUnreferencedCodeAttribute),
-                _logger.ShouldSuppressAnalysisWarningsForRequires(_origin.MemberDefinition, DiagnosticUtilities.RequiresDynamicCodeAttribute),
-                _logger.ShouldSuppressAnalysisWarningsForRequires(_origin.MemberDefinition, DiagnosticUtilities.RequiresAssemblyFilesAttribute),
-                _logger);
+                _logger.ShouldSuppressAnalysisWarningsForRequires(
+                    _origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresUnreferencedCodeAttribute
+                ),
+                _logger.ShouldSuppressAnalysisWarningsForRequires(
+                    _origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresDynamicCodeAttribute
+                ),
+                _logger.ShouldSuppressAnalysisWarningsForRequires(
+                    _origin.MemberDefinition,
+                    DiagnosticUtilities.RequiresAssemblyFilesAttribute
+                ),
+                _logger
+            );
         }
 
-        public DependencyList? ProcessAttributeDataflow(MethodDesc method, CustomAttributeValue arguments)
+        public DependencyList? ProcessAttributeDataflow(
+            MethodDesc method,
+            CustomAttributeValue arguments
+        )
         {
             DependencyList? result = null;
 
@@ -54,7 +68,9 @@ namespace ILCompiler.Dataflow
             // First do the dataflow for the constructor parameters if necessary.
             if (_annotations.RequiresDataflowAnalysisDueToSignature(method))
             {
-                var builder = ImmutableArray.CreateBuilder<object?>(arguments.FixedArguments.Length);
+                var builder = ImmutableArray.CreateBuilder<object?>(
+                    arguments.FixedArguments.Length
+                );
                 foreach (var argument in arguments.FixedArguments)
                 {
                     builder.Add(argument.Value);
@@ -72,7 +88,10 @@ namespace ILCompiler.Dataflow
                     FieldDesc field = attributeType.GetField(namedArgument.Name);
                     if (field != null)
                     {
-                        ReflectionMethodBodyScanner.CheckAndReportAllRequires(_diagnosticContext, field);
+                        ReflectionMethodBodyScanner.CheckAndReportAllRequires(
+                            _diagnosticContext,
+                            field
+                        );
 
                         ProcessAttributeDataflow(field, namedArgument.Value, ref result);
                     }
@@ -80,13 +99,23 @@ namespace ILCompiler.Dataflow
                 else
                 {
                     Debug.Assert(namedArgument.Kind == CustomAttributeNamedArgumentKind.Property);
-                    PropertyPseudoDesc property = ((MetadataType)attributeType).GetProperty(namedArgument.Name, null);
+                    PropertyPseudoDesc property = ((MetadataType)attributeType).GetProperty(
+                        namedArgument.Name,
+                        null
+                    );
                     MethodDesc setter = property.SetMethod;
                     if (setter != null && setter.Signature.Length > 0 && !setter.Signature.IsStatic)
                     {
-                        ReflectionMethodBodyScanner.CheckAndReportAllRequires(_diagnosticContext, setter);
+                        ReflectionMethodBodyScanner.CheckAndReportAllRequires(
+                            _diagnosticContext,
+                            setter
+                        );
 
-                        ProcessAttributeDataflow(setter, ImmutableArray.Create(namedArgument.Value), ref result);
+                        ProcessAttributeDataflow(
+                            setter,
+                            ImmutableArray.Create(namedArgument.Value),
+                            ref result
+                        );
                     }
                 }
             }
@@ -94,38 +123,65 @@ namespace ILCompiler.Dataflow
             return result;
         }
 
-        private void ProcessAttributeDataflow(MethodDesc method, ImmutableArray<object?> arguments, ref DependencyList? result)
+        private void ProcessAttributeDataflow(
+            MethodDesc method,
+            ImmutableArray<object?> arguments,
+            ref DependencyList? result
+        )
         {
             foreach (var parameter in method.GetMetadataParameters())
             {
                 var parameterValue = _annotations.GetMethodParameterValue(parameter);
-                if (parameterValue.DynamicallyAccessedMemberTypes != DynamicallyAccessedMemberTypes.None)
+                if (
+                    parameterValue.DynamicallyAccessedMemberTypes
+                    != DynamicallyAccessedMemberTypes.None
+                )
                 {
-                    MultiValue value = GetValueForCustomAttributeArgument(arguments[parameter.MetadataIndex]);
-                    RequireDynamicallyAccessedMembers(_diagnosticContext, value, parameterValue, method.GetDisplayName(), ref result);
+                    MultiValue value = GetValueForCustomAttributeArgument(
+                        arguments[parameter.MetadataIndex]
+                    );
+                    RequireDynamicallyAccessedMembers(
+                        _diagnosticContext,
+                        value,
+                        parameterValue,
+                        method.GetDisplayName(),
+                        ref result
+                    );
                 }
             }
         }
 
-        private void ProcessAttributeDataflow(FieldDesc field, object? value, ref DependencyList? result)
+        private void ProcessAttributeDataflow(
+            FieldDesc field,
+            object? value,
+            ref DependencyList? result
+        )
         {
             var fieldValueCandidate = _annotations.GetFieldValue(field);
-            if (fieldValueCandidate is ValueWithDynamicallyAccessedMembers fieldValue
-                && fieldValue.DynamicallyAccessedMemberTypes != DynamicallyAccessedMemberTypes.None)
+            if (
+                fieldValueCandidate is ValueWithDynamicallyAccessedMembers fieldValue
+                && fieldValue.DynamicallyAccessedMemberTypes != DynamicallyAccessedMemberTypes.None
+            )
             {
                 MultiValue valueNode = GetValueForCustomAttributeArgument(value);
-                RequireDynamicallyAccessedMembers(_diagnosticContext, valueNode, fieldValue, field.GetDisplayName(), ref result);
+                RequireDynamicallyAccessedMembers(
+                    _diagnosticContext,
+                    valueNode,
+                    fieldValue,
+                    field.GetDisplayName(),
+                    ref result
+                );
             }
         }
 
-        private static MultiValue GetValueForCustomAttributeArgument(object? argument)
-            => argument switch
+        private static MultiValue GetValueForCustomAttributeArgument(object? argument) =>
+            argument switch
             {
                 TypeDesc td => new SystemTypeValue(td),
                 string str => new KnownStringValue(str),
                 null => NullValue.Instance,
                 // We shouldn't have gotten a None annotation from flow annotations since only string/Type can have annotations
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
 
         private void RequireDynamicallyAccessedMembers(
@@ -133,10 +189,22 @@ namespace ILCompiler.Dataflow
             in MultiValue value,
             ValueWithDynamicallyAccessedMembers targetValue,
             string reason,
-            ref DependencyList? result)
+            ref DependencyList? result
+        )
         {
-            var reflectionMarker = new ReflectionMarker(_logger, _factory, _annotations, typeHierarchyDataFlowOrigin: null, enabled: true);
-            var requireDynamicallyAccessedMembersAction = new RequireDynamicallyAccessedMembersAction(reflectionMarker, diagnosticContext, reason);
+            var reflectionMarker = new ReflectionMarker(
+                _logger,
+                _factory,
+                _annotations,
+                typeHierarchyDataFlowOrigin: null,
+                enabled: true
+            );
+            var requireDynamicallyAccessedMembersAction =
+                new RequireDynamicallyAccessedMembersAction(
+                    reflectionMarker,
+                    diagnosticContext,
+                    reason
+                );
             requireDynamicallyAccessedMembersAction.Invoke(value, targetValue);
 
             if (result == null)

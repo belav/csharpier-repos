@@ -23,23 +23,23 @@ namespace hello_trycatchtrycatch_basics_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void inTry()
+        public static void inTry()
         {
             Console.WriteLine("In try");
         }
 
-        static public void inCatch()
+        public static void inCatch()
         {
             Console.WriteLine("In catch");
         }
 
-        static public void inFinally()
+        public static void inFinally()
         {
             Console.WriteLine("In finally");
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

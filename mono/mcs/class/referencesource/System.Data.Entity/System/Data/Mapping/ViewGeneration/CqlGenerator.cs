@@ -7,15 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
-using System.Data.Mapping.ViewGeneration.Structures;
-using System.Collections.Generic;
 using System.Data.Mapping.ViewGeneration.CqlGeneration;
-using System.Text;
-using System.Diagnostics;
+using System.Data.Mapping.ViewGeneration.Structures;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration
 {
@@ -30,14 +30,15 @@ namespace System.Data.Mapping.ViewGeneration
         /// the <paramref name="projectedSlotMap"/> that maps different paths of the entityset (for which the view is being generated) to slot indexes in the view,
         /// creates an object that is capable of generating the Cql for <paramref name="view"/>.
         /// </summary>
-        internal CqlGenerator(CellTreeNode view,
-                              Dictionary<MemberPath,
-                              CaseStatement> caseStatements,
-                              CqlIdentifiers identifiers,
-                              MemberProjectionIndex projectedSlotMap,
-                              int numCellsInView,
-                              BoolExpression topLevelWhereClause,
-                              StorageMappingItemCollection mappingItemCollection)
+        internal CqlGenerator(
+            CellTreeNode view,
+            Dictionary<MemberPath, CaseStatement> caseStatements,
+            CqlIdentifiers identifiers,
+            MemberProjectionIndex projectedSlotMap,
+            int numCellsInView,
+            BoolExpression topLevelWhereClause,
+            StorageMappingItemCollection mappingItemCollection
+        )
         {
             m_view = view;
             m_caseStatements = caseStatements;
@@ -54,23 +55,28 @@ namespace System.Data.Mapping.ViewGeneration
         /// The generated view from the cells.
         /// </summary>
         private readonly CellTreeNode m_view;
+
         /// <summary>
         /// Case statements for the multiconstant fields.
         /// </summary>
         private readonly Dictionary<MemberPath, CaseStatement> m_caseStatements;
+
         /// <summary>
         /// Mapping from member paths to slot indexes.
         /// </summary>
         private MemberProjectionIndex m_projectedSlotMap;
+
         /// <summary>
         /// Number of booleans in the view, one per cell (from0, from1, etc...)
         /// </summary>
         private readonly int m_numBools;
+
         /// <summary>
         /// A counter used to generate aliases for blocks.
         /// </summary>
         private int m_currentBlockNum = 0;
         private readonly BoolExpression m_topLevelWhereClause;
+
         /// <summary>
         /// Identifiers used in the Cql queries.
         /// </summary>
@@ -98,7 +104,7 @@ namespace System.Data.Mapping.ViewGeneration
             // keep growing it
             StringBuilder builder = new StringBuilder(1024);
             blockTree.AsEsql(builder, true, 1);
-            return  builder.ToString();
+            return builder.ToString();
         }
 
         /// <summary>
@@ -112,7 +118,11 @@ namespace System.Data.Mapping.ViewGeneration
             DbExpression query = blockTree.AsCqt(true);
             Debug.Assert(query != null, "Null CQT generated for query/update view.");
 
-            return DbQueryCommandTree.FromValidExpression(m_mappingItemCollection.Workspace, TargetPerspective.TargetPerspectiveDataSpace, query);
+            return DbQueryCommandTree.FromValidExpression(
+                m_mappingItemCollection.Workspace,
+                TargetPerspective.TargetPerspectiveDataSpace,
+                query
+            );
         }
 
         /// <summary>
@@ -131,7 +141,12 @@ namespace System.Data.Mapping.ViewGeneration
             Debug.Assert(requiredSlots.Length == TotalSlots, "Wrong number of requiredSlots");
 
             List<WithRelationship> withRelationships = new List<WithRelationship>();
-            CqlBlock viewBlock = m_view.ToCqlBlock(requiredSlots, m_identifiers, ref m_currentBlockNum, ref withRelationships);
+            CqlBlock viewBlock = m_view.ToCqlBlock(
+                requiredSlots,
+                m_identifiers,
+                ref m_currentBlockNum,
+                ref withRelationships
+            );
 
             // Handle case statements for multiconstant entries
             // Right now, we have a simplication step that removes one of the
@@ -171,8 +186,10 @@ namespace System.Data.Mapping.ViewGeneration
             // Do we require the case statement member slot be produced by the inner queries?
             foreach (CaseStatement caseStatement in m_caseStatements.Values)
             {
-                bool notNeeded = !caseStatement.MemberPath.IsPartOfKey && // keys are required in inner queries for joins conditions
-                                 !caseStatement.DependsOnMemberValue; // if case statement returns its slot value as one of the options, then we need to produce it
+                bool notNeeded =
+                    !caseStatement.MemberPath.IsPartOfKey
+                    && // keys are required in inner queries for joins conditions
+                    !caseStatement.DependsOnMemberValue; // if case statement returns its slot value as one of the options, then we need to produce it
                 if (notNeeded)
                 {
                     requiredSlots[m_projectedSlotMap.IndexOf(caseStatement.MemberPath)] = false;
@@ -187,7 +204,10 @@ namespace System.Data.Mapping.ViewGeneration
         /// Given the <paramref name="viewBlock"/> tree, generates the case statement blocks on top of it (using <see cref="m_caseStatements"/>) and returns the resulting tree.
         /// One block per case statement is generated. Generated blocks are nested, with the <paramref name="viewBlock"/> is the innermost input.
         /// </summary>
-        private CqlBlock ConstructCaseBlocks(CqlBlock viewBlock, IEnumerable<WithRelationship> withRelationships)
+        private CqlBlock ConstructCaseBlocks(
+            CqlBlock viewBlock,
+            IEnumerable<WithRelationship> withRelationships
+        )
         {
             // Get the 0th slot only, i.e., the extent
             bool[] topSlots = new bool[TotalSlots];
@@ -204,12 +224,21 @@ namespace System.Data.Mapping.ViewGeneration
         /// Given the <paramref name="viewBlock"/> tree generated by the cell merging process and the <paramref name="parentRequiredSlots"/>,
         /// generates the block tree for the case statement at or past the startSlotNum, i.e., only for case statements that are beyond startSlotNum.
         /// </summary>
-        private CqlBlock ConstructCaseBlocks(CqlBlock viewBlock, int startSlotNum, bool[] parentRequiredSlots, IEnumerable<WithRelationship> withRelationships)
+        private CqlBlock ConstructCaseBlocks(
+            CqlBlock viewBlock,
+            int startSlotNum,
+            bool[] parentRequiredSlots,
+            IEnumerable<WithRelationship> withRelationships
+        )
         {
             int numMembers = m_projectedSlotMap.Count;
             // Find the next slot for which we have a case statement, i.e.,
             // which was in the multiconstants
-            int foundSlot = FindNextCaseStatementSlot(startSlotNum, parentRequiredSlots, numMembers);
+            int foundSlot = FindNextCaseStatementSlot(
+                startSlotNum,
+                parentRequiredSlots,
+                numMembers
+            );
 
             if (foundSlot == -1)
             {
@@ -222,9 +251,11 @@ namespace System.Data.Mapping.ViewGeneration
             MemberPath thisMember = m_projectedSlotMap[foundSlot];
             bool[] thisRequiredSlots = new bool[TotalSlots];
             GetRequiredSlotsForCaseMember(thisMember, thisRequiredSlots);
-            Debug.Assert(thisRequiredSlots.Length == parentRequiredSlots.Length &&
-                         thisRequiredSlots.Length == TotalSlots,
-                         "Number of slots in array should not vary across blocks");
+            Debug.Assert(
+                thisRequiredSlots.Length == parentRequiredSlots.Length
+                    && thisRequiredSlots.Length == TotalSlots,
+                "Number of slots in array should not vary across blocks"
+            );
 
             // Merge parent's requirements with this requirements
             for (int i = 0; i < TotalSlots; i++)
@@ -242,14 +273,26 @@ namespace System.Data.Mapping.ViewGeneration
             thisRequiredSlots[foundSlot] = thisCaseStatement.DependsOnMemberValue;
 
             // Recursively, determine the block tree for slots beyond foundSlot.
-            CqlBlock childBlock = ConstructCaseBlocks(viewBlock, foundSlot + 1, thisRequiredSlots, null);
+            CqlBlock childBlock = ConstructCaseBlocks(
+                viewBlock,
+                foundSlot + 1,
+                thisRequiredSlots,
+                null
+            );
 
             // For each slot, create a SlotInfo object
-            SlotInfo[] slotInfos = CreateSlotInfosForCaseStatement(parentRequiredSlots, foundSlot, childBlock, thisCaseStatement, withRelationships);
+            SlotInfo[] slotInfos = CreateSlotInfosForCaseStatement(
+                parentRequiredSlots,
+                foundSlot,
+                childBlock,
+                thisCaseStatement,
+                withRelationships
+            );
             m_currentBlockNum++;
 
             // We have a where clause only at the top level
-            BoolExpression whereClause = startSlotNum == 0 ? m_topLevelWhereClause : BoolExpression.True;
+            BoolExpression whereClause =
+                startSlotNum == 0 ? m_topLevelWhereClause : BoolExpression.True;
             if (startSlotNum == 0)
             {
                 // only slot #0 is required by parent; reset all 'required by parent' booleans introduced above
@@ -259,7 +302,14 @@ namespace System.Data.Mapping.ViewGeneration
                 }
             }
 
-            CaseCqlBlock result = new CaseCqlBlock(slotInfos, foundSlot, childBlock, whereClause, m_identifiers, m_currentBlockNum);
+            CaseCqlBlock result = new CaseCqlBlock(
+                slotInfos,
+                foundSlot,
+                childBlock,
+                whereClause,
+                m_identifiers,
+                m_currentBlockNum
+            );
             return result;
         }
 
@@ -267,11 +317,13 @@ namespace System.Data.Mapping.ViewGeneration
         /// Given the slot (<paramref name="foundSlot"/>) and its corresponding case statement (<paramref name="thisCaseStatement"/>),
         /// generates the slotinfos for the cql block producing the case statement.
         /// </summary>
-        private SlotInfo[] CreateSlotInfosForCaseStatement(bool[] parentRequiredSlots, 
-                                                           int foundSlot,
-                                                           CqlBlock childBlock, 
-                                                           CaseStatement thisCaseStatement,
-                                                           IEnumerable<WithRelationship> withRelationships)
+        private SlotInfo[] CreateSlotInfosForCaseStatement(
+            bool[] parentRequiredSlots,
+            int foundSlot,
+            CqlBlock childBlock,
+            CaseStatement thisCaseStatement,
+            IEnumerable<WithRelationship> withRelationships
+        )
         {
             int numSlotsAddedByChildBlock = childBlock.Slots.Count - TotalSlots;
             SlotInfo[] slotInfos = new SlotInfo[TotalSlots + numSlotsAddedByChildBlock];
@@ -309,7 +361,12 @@ namespace System.Data.Mapping.ViewGeneration
                 // Essentially, from a Case statement's parent perspective,
                 // it is saying "If you can produce a slot either by yourself
                 // or your children, please do. Otherwise, do not concoct anything"
-                SlotInfo slotInfo = new SlotInfo(isRequiredByParent && isProjected, isProjected, slot, outputMember);
+                SlotInfo slotInfo = new SlotInfo(
+                    isRequiredByParent && isProjected,
+                    isProjected,
+                    slot,
+                    outputMember
+                );
                 slotInfos[slotNum] = slotInfo;
             }
             for (int i = TotalSlots; i < TotalSlots + numSlotsAddedByChildBlock; i++)
@@ -323,7 +380,11 @@ namespace System.Data.Mapping.ViewGeneration
         /// <summary>
         /// Returns the next slot starting at <paramref name="startSlotNum"/> that is present in the <see cref="m_caseStatements"/>.
         /// </summary>
-        private int FindNextCaseStatementSlot(int startSlotNum, bool[] parentRequiredSlots, int numMembers)
+        private int FindNextCaseStatementSlot(
+            int startSlotNum,
+            bool[] parentRequiredSlots,
+            int numMembers
+        )
         {
             int foundSlot = -1;
             // Simply go through the slots and check the m_caseStatements map
@@ -346,8 +407,14 @@ namespace System.Data.Mapping.ViewGeneration
         /// <param name="caseMemberPath">must be part of <see cref="m_caseStatements"/></param>
         private void GetRequiredSlotsForCaseMember(MemberPath caseMemberPath, bool[] requiredSlots)
         {
-            Debug.Assert(true == m_caseStatements.ContainsKey(caseMemberPath), "Constructing case for regular field?");
-            Debug.Assert(requiredSlots.Length == TotalSlots, "Invalid array size for populating required slots");
+            Debug.Assert(
+                true == m_caseStatements.ContainsKey(caseMemberPath),
+                "Constructing case for regular field?"
+            );
+            Debug.Assert(
+                requiredSlots.Length == TotalSlots,
+                "Invalid array size for populating required slots"
+            );
 
             CaseStatement statement = m_caseStatements[caseMemberPath];
 
@@ -360,7 +427,7 @@ namespace System.Data.Mapping.ViewGeneration
                 ProjectedSlot slot = clause.Value;
                 if (!(slot is ConstantProjectedSlot))
                 {
-                    // If this slot is a scalar and a non-constant, 
+                    // If this slot is a scalar and a non-constant,
                     // we need the lower down blocks to generate it for us
                     requireThisSlot = true;
                 }
@@ -371,7 +438,9 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 foreach (EdmType instantiatedType in statement.InstantiatedTypes)
                 {
-                    foreach (EdmMember childMember in Helper.GetAllStructuralMembers(instantiatedType) )
+                    foreach (
+                        EdmMember childMember in Helper.GetAllStructuralMembers(instantiatedType)
+                    )
                     {
                         int slotNum = GetSlotIndex(caseMemberPath, childMember);
                         requiredSlots[slotNum] = true;
@@ -406,13 +475,18 @@ namespace System.Data.Mapping.ViewGeneration
             {
                 // For a reference, all we need are the keys
                 RefType refType = edmType as RefType;
-                Debug.Assert(refType != null, "What other non scalars do we have? Relation end must be a reference type");
+                Debug.Assert(
+                    refType != null,
+                    "What other non scalars do we have? Relation end must be a reference type"
+                );
 
                 EntityTypeBase refElementType = refType.ElementType;
                 // Go through all the members of elementType and get the key properties
 
-                EntitySet entitySet = MetadataHelper.GetEntitySetAtEnd((AssociationSet)caseMemberPath.Extent,
-                                                                       (AssociationEndMember)caseMemberPath.LeafEdmMember);
+                EntitySet entitySet = MetadataHelper.GetEntitySetAtEnd(
+                    (AssociationSet)caseMemberPath.Extent,
+                    (AssociationEndMember)caseMemberPath.LeafEdmMember
+                );
                 foreach (EdmMember entityMember in refElementType.KeyMembers)
                 {
                     int slotNum = GetSlotIndex(caseMemberPath, entityMember);
@@ -439,7 +513,10 @@ namespace System.Data.Mapping.ViewGeneration
         {
             MemberPath fullMember = new MemberPath(member, child);
             int index = m_projectedSlotMap.IndexOf(fullMember);
-            Debug.Assert(index != -1, "Couldn't locate " + fullMember.ToString() + " in m_projectedSlotMap");
+            Debug.Assert(
+                index != -1,
+                "Couldn't locate " + fullMember.ToString() + " in m_projectedSlotMap"
+            );
             return index;
         }
         #endregion

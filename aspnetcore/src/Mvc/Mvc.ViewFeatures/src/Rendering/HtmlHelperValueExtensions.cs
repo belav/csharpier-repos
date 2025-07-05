@@ -48,7 +48,8 @@ public static class HtmlHelperValueExtensions
     /// </remarks>
     public static string ValueFor<TModel, TResult>(
         this IHtmlHelper<TModel> htmlHelper,
-        Expression<Func<TModel, TResult>> expression)
+        Expression<Func<TModel, TResult>> expression
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlHelper);
         ArgumentNullException.ThrowIfNull(expression);

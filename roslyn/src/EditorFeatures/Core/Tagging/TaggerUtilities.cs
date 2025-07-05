@@ -8,7 +8,11 @@ namespace Microsoft.CodeAnalysis.Tagging
 {
     internal static class TaggerUtilities
     {
-        public static bool SpanEquals(SnapshotSpan? span1, SnapshotSpan? span2, SpanTrackingMode spanTrackingMode)
+        public static bool SpanEquals(
+            SnapshotSpan? span1,
+            SnapshotSpan? span2,
+            SpanTrackingMode spanTrackingMode
+        )
         {
             if (span1 is null && span2 is null)
                 return true;

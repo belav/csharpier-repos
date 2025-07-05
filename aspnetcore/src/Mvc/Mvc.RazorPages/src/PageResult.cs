@@ -51,10 +51,13 @@ public class PageResult : ActionResult
     {
         if (!(context is PageContext pageContext))
         {
-            throw new ArgumentException(Resources.FormatPageViewResult_ContextIsInvalid(
-                nameof(context),
-                nameof(Page),
-                nameof(PageResult)));
+            throw new ArgumentException(
+                Resources.FormatPageViewResult_ContextIsInvalid(
+                    nameof(context),
+                    nameof(Page),
+                    nameof(PageResult)
+                )
+            );
         }
 
         var executor = context.HttpContext.RequestServices.GetRequiredService<PageResultExecutor>();

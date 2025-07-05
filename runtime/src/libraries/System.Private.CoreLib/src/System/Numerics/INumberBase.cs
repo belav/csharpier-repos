@@ -14,21 +14,21 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface INumberBase<TSelf>
         : IAdditionOperators<TSelf, TSelf, TSelf>,
-          IAdditiveIdentity<TSelf, TSelf>,
-          IDecrementOperators<TSelf>,
-          IDivisionOperators<TSelf, TSelf, TSelf>,
-          IEquatable<TSelf>,
-          IEqualityOperators<TSelf, TSelf, bool>,
-          IIncrementOperators<TSelf>,
-          IMultiplicativeIdentity<TSelf, TSelf>,
-          IMultiplyOperators<TSelf, TSelf, TSelf>,
-          ISpanFormattable,
-          ISpanParsable<TSelf>,
-          ISubtractionOperators<TSelf, TSelf, TSelf>,
-          IUnaryPlusOperators<TSelf, TSelf>,
-          IUnaryNegationOperators<TSelf, TSelf>,
-          IUtf8SpanFormattable,
-          IUtf8SpanParsable<TSelf>
+            IAdditiveIdentity<TSelf, TSelf>,
+            IDecrementOperators<TSelf>,
+            IDivisionOperators<TSelf, TSelf, TSelf>,
+            IEquatable<TSelf>,
+            IEqualityOperators<TSelf, TSelf, bool>,
+            IIncrementOperators<TSelf>,
+            IMultiplicativeIdentity<TSelf, TSelf>,
+            IMultiplyOperators<TSelf, TSelf, TSelf>,
+            ISpanFormattable,
+            ISpanParsable<TSelf>,
+            ISubtractionOperators<TSelf, TSelf, TSelf>,
+            IUnaryPlusOperators<TSelf, TSelf>,
+            IUnaryNegationOperators<TSelf, TSelf>,
+            IUtf8SpanFormattable,
+            IUtf8SpanParsable<TSelf>
         where TSelf : INumberBase<TSelf>?
     {
         /// <summary>Gets the value <c>1</c> for the type.</summary>
@@ -64,7 +64,10 @@ namespace System.Numerics
             {
                 result = (TSelf)(object)value;
             }
-            else if (!TSelf.TryConvertFromChecked(value, out result) && !TOther.TryConvertToChecked<TSelf>(value, out result))
+            else if (
+                !TSelf.TryConvertFromChecked(value, out result)
+                && !TOther.TryConvertToChecked<TSelf>(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -89,7 +92,10 @@ namespace System.Numerics
             {
                 result = (TSelf)(object)value;
             }
-            else if (!TSelf.TryConvertFromSaturating(value, out result) && !TOther.TryConvertToSaturating<TSelf>(value, out result))
+            else if (
+                !TSelf.TryConvertFromSaturating(value, out result)
+                && !TOther.TryConvertToSaturating<TSelf>(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -114,7 +120,10 @@ namespace System.Numerics
             {
                 result = (TSelf)(object)value;
             }
-            else if (!TSelf.TryConvertFromTruncating(value, out result) && !TOther.TryConvertToTruncating<TSelf>(value, out result))
+            else if (
+                !TSelf.TryConvertFromTruncating(value, out result)
+                && !TOther.TryConvertToTruncating<TSelf>(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -277,7 +286,11 @@ namespace System.Numerics
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
         /// <exception cref="FormatException"><paramref name="s" /> is not in the correct format.</exception>
         /// <exception cref="OverflowException"><paramref name="s" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        static abstract TSelf Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider);
+        static abstract TSelf Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider
+        );
 
         /// <summary>Parses a span of UTF-8 characters into a value.</summary>
         /// <param name="utf8Text">The span of UTF-8 characters to parse.</param>
@@ -287,7 +300,11 @@ namespace System.Numerics
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
         /// <exception cref="FormatException"><paramref name="utf8Text" /> is not in the correct format.</exception>
         /// <exception cref="OverflowException"><paramref name="utf8Text" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        static virtual TSelf Parse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider)
+        static virtual TSelf Parse(
+            ReadOnlySpan<byte> utf8Text,
+            NumberStyles style,
+            IFormatProvider? provider
+        )
         {
             // Convert text using stackalloc for <= 256 characters and ArrayPool otherwise
 
@@ -306,7 +323,13 @@ namespace System.Numerics
                 utf16Text = utf16TextArray.AsSpan(0, textMaxCharCount);
             }
 
-            OperationStatus utf8TextStatus = Utf8.ToUtf16(utf8Text, utf16Text, out _, out int utf16TextLength, replaceInvalidSequences: false);
+            OperationStatus utf8TextStatus = Utf8.ToUtf16(
+                utf8Text,
+                utf16Text,
+                out _,
+                out int utf16TextLength,
+                replaceInvalidSequences: false
+            );
 
             if (utf8TextStatus != OperationStatus.Done)
             {
@@ -340,9 +363,13 @@ namespace System.Numerics
         /// <param name="result">On return, contains an instance of <typeparamref name="TSelf" /> converted from <paramref name="value" />.</param>
         /// <returns><c>false</c> if <typeparamref name="TOther" /> is not supported; otherwise, <c>true</c>.</returns>
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        protected static abstract bool TryConvertFromChecked<TOther>(TOther value, [MaybeNullWhen(false)] out TSelf result)
+        protected static abstract bool TryConvertFromChecked<TOther>(
+            TOther value,
+            [MaybeNullWhen(false)] out TSelf result
+        )
 #nullable disable
             where TOther : INumberBase<TOther>;
+
 #nullable restore
 
         /// <summary>Tries to convert a value to an instance of the current type, saturating any values that fall outside the representable range of the current type.</summary>
@@ -350,9 +377,13 @@ namespace System.Numerics
         /// <param name="value">The value which is used to create the instance of <typeparamref name="TSelf" />.</param>
         /// <param name="result">On return, contains an instance of <typeparamref name="TSelf" /> converted from <paramref name="value" />.</param>
         /// <returns><c>false</c> if <typeparamref name="TOther" /> is not supported; otherwise, <c>true</c>.</returns>
-        protected static abstract bool TryConvertFromSaturating<TOther>(TOther value, [MaybeNullWhen(false)] out TSelf result)
+        protected static abstract bool TryConvertFromSaturating<TOther>(
+            TOther value,
+            [MaybeNullWhen(false)] out TSelf result
+        )
 #nullable disable
             where TOther : INumberBase<TOther>;
+
 #nullable restore
 
         /// <summary>Tries to convert a value to an instance of the current type, truncating any values that fall outside the representable range of the current type.</summary>
@@ -360,9 +391,13 @@ namespace System.Numerics
         /// <param name="value">The value which is used to create the instance of <typeparamref name="TSelf" />.</param>
         /// <param name="result">On return, contains an instance of <typeparamref name="TSelf" /> converted from <paramref name="value" />.</param>
         /// <returns><c>false</c> if <typeparamref name="TOther" /> is not supported; otherwise, <c>true</c>.</returns>
-        protected static abstract bool TryConvertFromTruncating<TOther>(TOther value, [MaybeNullWhen(false)] out TSelf result)
+        protected static abstract bool TryConvertFromTruncating<TOther>(
+            TOther value,
+            [MaybeNullWhen(false)] out TSelf result
+        )
 #nullable disable
             where TOther : INumberBase<TOther>;
+
 #nullable restore
 
         /// <summary>Tries to convert an instance of the current type to another type, throwing an overflow exception for any values that fall outside the representable range of the current type.</summary>
@@ -371,9 +406,13 @@ namespace System.Numerics
         /// <param name="result">On return, contains an instance of <typeparamref name="TOther" /> converted from <paramref name="value" />.</param>
         /// <returns><c>false</c> if <typeparamref name="TOther" /> is not supported; otherwise, <c>true</c>.</returns>
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <typeparamref name="TOther" />.</exception>
-        protected static abstract bool TryConvertToChecked<TOther>(TSelf value, [MaybeNullWhen(false)] out TOther result)
+        protected static abstract bool TryConvertToChecked<TOther>(
+            TSelf value,
+            [MaybeNullWhen(false)] out TOther result
+        )
 #nullable disable
             where TOther : INumberBase<TOther>;
+
 #nullable restore
 
         /// <summary>Tries to convert an instance of the current type to another type, saturating any values that fall outside the representable range of the current type.</summary>
@@ -381,9 +420,13 @@ namespace System.Numerics
         /// <param name="value">The value which is used to create the instance of <typeparamref name="TOther" />.</param>
         /// <param name="result">On return, contains an instance of <typeparamref name="TOther" /> converted from <paramref name="value" />.</param>
         /// <returns><c>false</c> if <typeparamref name="TOther" /> is not supported; otherwise, <c>true</c>.</returns>
-        protected static abstract bool TryConvertToSaturating<TOther>(TSelf value, [MaybeNullWhen(false)] out TOther result)
+        protected static abstract bool TryConvertToSaturating<TOther>(
+            TSelf value,
+            [MaybeNullWhen(false)] out TOther result
+        )
 #nullable disable
             where TOther : INumberBase<TOther>;
+
 #nullable restore
 
         /// <summary>Tries to convert an instance of the current type to another type, truncating any values that fall outside the representable range of the current type.</summary>
@@ -391,9 +434,13 @@ namespace System.Numerics
         /// <param name="value">The value which is used to create the instance of <typeparamref name="TOther" />.</param>
         /// <param name="result">On return, contains an instance of <typeparamref name="TOther" /> converted from <paramref name="value" />.</param>
         /// <returns><c>false</c> if <typeparamref name="TOther" /> is not supported; otherwise, <c>true</c>.</returns>
-        protected static abstract bool TryConvertToTruncating<TOther>(TSelf value, [MaybeNullWhen(false)] out TOther result)
+        protected static abstract bool TryConvertToTruncating<TOther>(
+            TSelf value,
+            [MaybeNullWhen(false)] out TOther result
+        )
 #nullable disable
             where TOther : INumberBase<TOther>;
+
 #nullable restore
 
         /// <summary>Tries to parse a string into a value.</summary>
@@ -403,7 +450,12 @@ namespace System.Numerics
         /// <param name="result">On return, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        static abstract bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result);
+        static abstract bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            [MaybeNullWhen(false)] out TSelf result
+        );
 
         /// <summary>Tries to parse a span of characters into a value.</summary>
         /// <param name="s">The span of characters to parse.</param>
@@ -412,7 +464,12 @@ namespace System.Numerics
         /// <param name="result">On return, contains the result of successfully parsing <paramref name="s" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="s" /> was successfully parsed; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        static abstract bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result);
+        static abstract bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            [MaybeNullWhen(false)] out TSelf result
+        );
 
         /// <summary>Tries to parse a span of UTF-8 characters into a value.</summary>
         /// <param name="utf8Text">The span of UTF-8 characters to parse.</param>
@@ -421,7 +478,12 @@ namespace System.Numerics
         /// <param name="result">On return, contains the result of successfully parsing <paramref name="utf8Text" /> or an undefined value on failure.</param>
         /// <returns><c>true</c> if <paramref name="utf8Text" /> was successfully parsed; otherwise, <c>false</c>.</returns>
         /// <exception cref="ArgumentException"><paramref name="style" /> is not a supported <see cref="NumberStyles" /> value.</exception>
-        static virtual bool TryParse(ReadOnlySpan<byte> utf8Text, NumberStyles style, IFormatProvider? provider, [MaybeNullWhen(false)] out TSelf result)
+        static virtual bool TryParse(
+            ReadOnlySpan<byte> utf8Text,
+            NumberStyles style,
+            IFormatProvider? provider,
+            [MaybeNullWhen(false)] out TSelf result
+        )
         {
             // Convert text using stackalloc for <= 256 characters and ArrayPool otherwise
 
@@ -440,7 +502,13 @@ namespace System.Numerics
                 utf16Text = utf16TextArray.AsSpan(0, textMaxCharCount);
             }
 
-            OperationStatus utf8TextStatus = Utf8.ToUtf16(utf8Text, utf16Text, out _, out int utf16TextLength, replaceInvalidSequences: false);
+            OperationStatus utf8TextStatus = Utf8.ToUtf16(
+                utf8Text,
+                utf16Text,
+                out _,
+                out int utf16TextLength,
+                replaceInvalidSequences: false
+            );
 
             if (utf8TextStatus != OperationStatus.Done)
             {
@@ -469,7 +537,12 @@ namespace System.Numerics
             return succeeded;
         }
 
-        bool IUtf8SpanFormattable.TryFormat(Span<byte> utf8Destination, out int bytesWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        bool IUtf8SpanFormattable.TryFormat(
+            Span<byte> utf8Destination,
+            out int bytesWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        )
         {
             char[]? utf16DestinationArray;
             scoped Span<char> utf16Destination;
@@ -501,7 +574,13 @@ namespace System.Numerics
             // Make sure we slice the buffer to just the characters written
             utf16Destination = utf16Destination.Slice(0, charsWritten);
 
-            OperationStatus utf8DestinationStatus = Utf8.FromUtf16(utf16Destination, utf8Destination, out _, out bytesWritten, replaceInvalidSequences: false);
+            OperationStatus utf8DestinationStatus = Utf8.FromUtf16(
+                utf16Destination,
+                utf8Destination,
+                out _,
+                out bytesWritten,
+                replaceInvalidSequences: false
+            );
 
             if (utf16DestinationArray != null)
             {
@@ -523,7 +602,10 @@ namespace System.Numerics
             return false;
         }
 
-        static TSelf IUtf8SpanParsable<TSelf>.Parse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider)
+        static TSelf IUtf8SpanParsable<TSelf>.Parse(
+            ReadOnlySpan<byte> utf8Text,
+            IFormatProvider? provider
+        )
         {
             // Convert text using stackalloc for <= 256 characters and ArrayPool otherwise
 
@@ -542,7 +624,13 @@ namespace System.Numerics
                 utf16Text = utf16TextArray.AsSpan(0, textMaxCharCount);
             }
 
-            OperationStatus utf8TextStatus = Utf8.ToUtf16(utf8Text, utf16Text, out _, out int utf16TextLength, replaceInvalidSequences: false);
+            OperationStatus utf8TextStatus = Utf8.ToUtf16(
+                utf8Text,
+                utf16Text,
+                out _,
+                out int utf16TextLength,
+                replaceInvalidSequences: false
+            );
 
             if (utf8TextStatus != OperationStatus.Done)
             {
@@ -570,7 +658,11 @@ namespace System.Numerics
             return result;
         }
 
-        static bool IUtf8SpanParsable<TSelf>.TryParse(ReadOnlySpan<byte> utf8Text, IFormatProvider? provider, [MaybeNullWhen(returnValue: false)] out TSelf result)
+        static bool IUtf8SpanParsable<TSelf>.TryParse(
+            ReadOnlySpan<byte> utf8Text,
+            IFormatProvider? provider,
+            [MaybeNullWhen(returnValue: false)] out TSelf result
+        )
         {
             // Convert text using stackalloc for <= 256 characters and ArrayPool otherwise
 
@@ -589,7 +681,13 @@ namespace System.Numerics
                 utf16Text = utf16TextArray.AsSpan(0, textMaxCharCount);
             }
 
-            OperationStatus utf8TextStatus = Utf8.ToUtf16(utf8Text, utf16Text, out _, out int utf16TextLength, replaceInvalidSequences: false);
+            OperationStatus utf8TextStatus = Utf8.ToUtf16(
+                utf8Text,
+                utf16Text,
+                out _,
+                out int utf16TextLength,
+                replaceInvalidSequences: false
+            );
 
             if (utf8TextStatus != OperationStatus.Done)
             {

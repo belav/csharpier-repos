@@ -5,25 +5,29 @@
 namespace Microsoft.VisualBasic.Activities
 {
     using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Activities;
-    using System.Activities.Expressions;
     using System.Activities.ExpressionParser;
+    using System.Activities.Expressions;
     using System.Activities.XamlIntegration;
-    using System.Linq.Expressions;
-    using System.Windows.Markup;
+    using System.Collections.Generic;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Linq.Expressions;
     using System.Runtime;
+    using System.Windows.Markup;
 
     [DebuggerStepThrough]
-    public sealed class VisualBasicValue<TResult> : CodeActivity<TResult>, IValueSerializableExpression, IExpressionContainer, ITextExpression
+    public sealed class VisualBasicValue<TResult>
+        : CodeActivity<TResult>,
+            IValueSerializableExpression,
+            IExpressionContainer,
+            ITextExpression
     {
         Expression<Func<ActivityContext, TResult>> expressionTree;
         Func<ActivityContext, TResult> compiledExpression;
-        CompiledExpressionInvoker invoker; 
+        CompiledExpressionInvoker invoker;
 
-        public VisualBasicValue() 
+        public VisualBasicValue()
             : base()
         {
             this.UseOldFastPath = true;
@@ -35,27 +39,17 @@ namespace Microsoft.VisualBasic.Activities
             this.ExpressionText = expressionText;
         }
 
-        public string ExpressionText
-        {
-            get;
-            set;
-        }
+        public string ExpressionText { get; set; }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Language
         {
-            get
-            {
-                return VisualBasicHelper.Language;
-            }
+            get { return VisualBasicHelper.Language; }
         }
 
         public bool RequiresCompilation
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         protected override TResult Execute(CodeActivityContext context)
@@ -92,10 +86,15 @@ namespace Microsoft.VisualBasic.Activities
 
             // If ICER is not implemented that means we haven't been compiled
 
-            CodeActivityPublicEnvironmentAccessor publicAccessor = CodeActivityPublicEnvironmentAccessor.Create(metadata);            
+            CodeActivityPublicEnvironmentAccessor publicAccessor =
+                CodeActivityPublicEnvironmentAccessor.Create(metadata);
             try
             {
-                this.expressionTree = VisualBasicHelper.Compile<TResult>(this.ExpressionText, publicAccessor, false);
+                this.expressionTree = VisualBasicHelper.Compile<TResult>(
+                    this.ExpressionText,
+                    publicAccessor,
+                    false
+                );
             }
             catch (SourceExpressionException e)
             {
@@ -105,7 +104,7 @@ namespace Microsoft.VisualBasic.Activities
 
         public bool CanConvertToString(IValueSerializerContext context)
         {
-            // we can always convert to a string 
+            // we can always convert to a string
             return true;
         }
 
@@ -116,35 +115,55 @@ namespace Microsoft.VisualBasic.Activities
         }
 
         public Expression GetExpressionTree()
-        {            
+        {
             if (this.IsMetadataCached)
             {
                 if (this.expressionTree == null)
                 {
                     // it's safe to create this CodeActivityMetadata here,
                     // because we know we are using it only as lookup purpose.
-                    CodeActivityMetadata metadata = new CodeActivityMetadata(this, this.GetParentEnvironment(), false);
-                    CodeActivityPublicEnvironmentAccessor publicAccessor = CodeActivityPublicEnvironmentAccessor.CreateWithoutArgument(metadata);
+                    CodeActivityMetadata metadata = new CodeActivityMetadata(
+                        this,
+                        this.GetParentEnvironment(),
+                        false
+                    );
+                    CodeActivityPublicEnvironmentAccessor publicAccessor =
+                        CodeActivityPublicEnvironmentAccessor.CreateWithoutArgument(metadata);
                     try
-                    {                                                
-                        this.expressionTree = VisualBasicHelper.Compile<TResult>(this.ExpressionText, publicAccessor, false);
+                    {
+                        this.expressionTree = VisualBasicHelper.Compile<TResult>(
+                            this.ExpressionText,
+                            publicAccessor,
+                            false
+                        );
                     }
                     catch (SourceExpressionException e)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.VBExpressionTamperedSinceLastCompiled(e.Message))); 
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.VBExpressionTamperedSinceLastCompiled(e.Message)
+                            )
+                        );
                     }
                     finally
                     {
                         metadata.Dispose();
-                    }                   
+                    }
                 }
 
-                Fx.Assert(this.expressionTree.NodeType == ExpressionType.Lambda, "Lambda expression required");
-                return ExpressionUtilities.RewriteNonCompiledExpressionTree((LambdaExpression)this.expressionTree);
+                Fx.Assert(
+                    this.expressionTree.NodeType == ExpressionType.Lambda,
+                    "Lambda expression required"
+                );
+                return ExpressionUtilities.RewriteNonCompiledExpressionTree(
+                    (LambdaExpression)this.expressionTree
+                );
             }
             else
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ActivityIsUncached)); 
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ActivityIsUncached)
+                );
             }
         }
     }

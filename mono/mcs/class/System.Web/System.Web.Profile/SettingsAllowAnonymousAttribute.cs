@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,27 +30,25 @@ using System;
 
 namespace System.Web.Profile
 {
-	[AttributeUsage (AttributeTargets.Property)]
-	public sealed class SettingsAllowAnonymousAttribute : Attribute
-	{
-		public SettingsAllowAnonymousAttribute (bool allow)
-		{
-			this.allow = allow;
-		}
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class SettingsAllowAnonymousAttribute : Attribute
+    {
+        public SettingsAllowAnonymousAttribute(bool allow)
+        {
+            this.allow = allow;
+        }
 
-		[MonoTODO ("Not implemented")]
-		public override bool IsDefaultAttribute ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("Not implemented")]
+        public override bool IsDefaultAttribute()
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool Allow {
-			get {
-				return allow;
-			}
-		}
+        public bool Allow
+        {
+            get { return allow; }
+        }
 
-		bool allow;
-	}
+        bool allow;
+    }
 }
-

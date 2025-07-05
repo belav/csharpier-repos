@@ -27,7 +27,10 @@ namespace AnalyzerRunner
     {
         private readonly Workspace _workspace;
         private readonly Options _options;
-        private readonly ImmutableDictionary<string, ImmutableArray<CodeRefactoringProvider>> _refactorings;
+        private readonly ImmutableDictionary<
+            string,
+            ImmutableArray<CodeRefactoringProvider>
+        > _refactorings;
         private readonly ImmutableDictionary<string, ImmutableHashSet<int>> _syntaxKinds;
 
         public CodeRefactoringRunner(Workspace workspace, Options options)
@@ -57,13 +60,19 @@ namespace AnalyzerRunner
             {
                 foreach (var document in project.Documents)
                 {
-                    var newDocument = await RefactorDocumentAsync(document, cancellationToken).ConfigureAwait(false);
+                    var newDocument = await RefactorDocumentAsync(document, cancellationToken)
+                        .ConfigureAwait(false);
                     if (newDocument is null)
                     {
                         continue;
                     }
 
-                    updatedSolution = updatedSolution.WithDocumentSyntaxRoot(document.Id, await newDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false));
+                    updatedSolution = updatedSolution.WithDocumentSyntaxRoot(
+                        document.Id,
+                        await newDocument
+                            .GetSyntaxRootAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    );
                 }
             }
 
@@ -73,7 +82,10 @@ namespace AnalyzerRunner
             }
         }
 
-        private async Task<Document> RefactorDocumentAsync(Document document, CancellationToken cancellationToken)
+        private async Task<Document> RefactorDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxKinds = _syntaxKinds[document.Project.Language];
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -87,13 +99,25 @@ namespace AnalyzerRunner
                 foreach (var refactoringProvider in _refactorings[document.Project.Language])
                 {
                     var codeActions = new List<CodeAction>();
-                    var context = new CodeRefactoringContext(document, new TextSpan(node.SpanStart, 0), codeActions.Add, cancellationToken);
-                    await refactoringProvider.ComputeRefactoringsAsync(context).ConfigureAwait(false);
+                    var context = new CodeRefactoringContext(
+                        document,
+                        new TextSpan(node.SpanStart, 0),
+                        codeActions.Add,
+                        cancellationToken
+                    );
+                    await refactoringProvider
+                        .ComputeRefactoringsAsync(context)
+                        .ConfigureAwait(false);
 
                     foreach (var codeAction in codeActions)
                     {
-                        var operations = await codeAction.GetOperationsAsync(
-                            document.Project.Solution, CodeAnalysisProgress.None, cancellationToken).ConfigureAwait(false);
+                        var operations = await codeAction
+                            .GetOperationsAsync(
+                                document.Project.Solution,
+                                CodeAnalysisProgress.None,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         foreach (var operation in operations)
                         {
                             if (operation is not ApplyChangesOperation applyChangesOperation)
@@ -101,9 +125,14 @@ namespace AnalyzerRunner
                                 continue;
                             }
 
-                            var changes = applyChangesOperation.ChangedSolution.GetChanges(document.Project.Solution);
+                            var changes = applyChangesOperation.ChangedSolution.GetChanges(
+                                document.Project.Solution
+                            );
                             var projectChanges = changes.GetProjectChanges().ToArray();
-                            if (projectChanges.Length != 1 || projectChanges[0].ProjectId != document.Project.Id)
+                            if (
+                                projectChanges.Length != 1
+                                || projectChanges[0].ProjectId != document.Project.Id
+                            )
                             {
                                 continue;
                             }
@@ -123,7 +152,9 @@ namespace AnalyzerRunner
             return null;
         }
 
-        private static ImmutableDictionary<string, ImmutableHashSet<int>> GetSyntaxKinds(ImmutableHashSet<string> refactoringNodes)
+        private static ImmutableDictionary<string, ImmutableHashSet<int>> GetSyntaxKinds(
+            ImmutableHashSet<string> refactoringNodes
+        )
         {
             var knownLanguages = new[]
             {
@@ -151,14 +182,29 @@ namespace AnalyzerRunner
             return builder.ToImmutable();
         }
 
-        private static ImmutableDictionary<string, ImmutableArray<CodeRefactoringProvider>> FilterRefactorings(ImmutableDictionary<string, ImmutableArray<Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>>> refactorings, Options options)
+        private static ImmutableDictionary<
+            string,
+            ImmutableArray<CodeRefactoringProvider>
+        > FilterRefactorings(
+            ImmutableDictionary<
+                string,
+                ImmutableArray<Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>>
+            > refactorings,
+            Options options
+        )
         {
             return refactorings.ToImmutableDictionary(
                 pair => pair.Key,
-                pair => FilterRefactorings(pair.Value, options).ToImmutableArray());
+                pair => FilterRefactorings(pair.Value, options).ToImmutableArray()
+            );
         }
 
-        private static IEnumerable<CodeRefactoringProvider> FilterRefactorings(IEnumerable<Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>> refactorings, Options options)
+        private static IEnumerable<CodeRefactoringProvider> FilterRefactorings(
+            IEnumerable<
+                Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>
+            > refactorings,
+            Options options
+        )
         {
             if (options.IncrementalAnalyzerNames.Any())
             {
@@ -197,7 +243,10 @@ namespace AnalyzerRunner
             }
         }
 
-        private static ImmutableDictionary<string, ImmutableArray<Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>>> GetCodeRefactoringProviders(string path)
+        private static ImmutableDictionary<
+            string,
+            ImmutableArray<Lazy<CodeRefactoringProvider, CodeRefactoringProviderMetadata>>
+        > GetCodeRefactoringProviders(string path)
         {
             var assemblies = new List<Assembly>(MefHostServices.DefaultAssemblies);
             if (File.Exists(path))
@@ -214,13 +263,21 @@ namespace AnalyzerRunner
                     }
                     catch
                     {
-                        WriteLine($"Skipped assembly '{Path.GetFileNameWithoutExtension(file)}' during code refactoring discovery.", ConsoleColor.Yellow);
+                        WriteLine(
+                            $"Skipped assembly '{Path.GetFileNameWithoutExtension(file)}' during code refactoring discovery.",
+                            ConsoleColor.Yellow
+                        );
                     }
                 }
             }
 
-            var discovery = new AttributedPartDiscovery(Resolver.DefaultInstance, isNonPublicSupported: true);
-            var parts = Task.Run(() => discovery.CreatePartsAsync(assemblies)).GetAwaiter().GetResult();
+            var discovery = new AttributedPartDiscovery(
+                Resolver.DefaultInstance,
+                isNonPublicSupported: true
+            );
+            var parts = Task.Run(() => discovery.CreatePartsAsync(assemblies))
+                .GetAwaiter()
+                .GetResult();
             var catalog = ComposableCatalog.Create(Resolver.DefaultInstance).AddParts(parts);
 
             var configuration = CompositionConfiguration.Create(catalog);
@@ -228,11 +285,20 @@ namespace AnalyzerRunner
             var exportProviderFactory = runtimeConfiguration.CreateExportProviderFactory();
 
             var exportProvider = exportProviderFactory.CreateExportProvider();
-            var refactorings = exportProvider.GetExports<CodeRefactoringProvider, CodeRefactoringProviderMetadata>();
-            var languages = refactorings.SelectMany(refactoring => refactoring.Metadata.Languages).Distinct();
+            var refactorings = exportProvider.GetExports<
+                CodeRefactoringProvider,
+                CodeRefactoringProviderMetadata
+            >();
+            var languages = refactorings
+                .SelectMany(refactoring => refactoring.Metadata.Languages)
+                .Distinct();
             return languages.ToImmutableDictionary(
                 language => language,
-                language => refactorings.Where(refactoring => refactoring.Metadata.Languages.Contains(language)).ToImmutableArray());
+                language =>
+                    refactorings
+                        .Where(refactoring => refactoring.Metadata.Languages.Contains(language))
+                        .ToImmutableArray()
+            );
         }
 
         private class CodeRefactoringProviderMetadata

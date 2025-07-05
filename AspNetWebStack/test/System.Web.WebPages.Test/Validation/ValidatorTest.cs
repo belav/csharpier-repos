@@ -70,7 +70,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var requiredValidator = Validator.Required("foo");
-            var validationContext = GetValidationContext(GetContext(new { foo = "some value" }), "foo");
+            var validationContext = GetValidationContext(
+                GetContext(new { foo = "some value" }),
+                "foo"
+            );
 
             // Act
             var result = requiredValidator.Validate(validationContext);
@@ -157,8 +160,14 @@ namespace System.Web.WebPages.Validation.Test
             // Assert
             Assert.NotEqual(ValidationResult.Success, result);
             Assert.Equal(
-                String.Format(CultureInfo.CurrentCulture, "Value must be a decimal between {0} and {1}.", 10.8, 12.2),
-                result.ErrorMessage);
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    "Value must be a decimal between {0} and {1}.",
+                    10.8,
+                    12.2
+                ),
+                result.ErrorMessage
+            );
             Assert.Equal("foo", result.MemberNames.Single());
         }
 
@@ -251,7 +260,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.StringLength(10, minLength: 6);
-            var validationContext = GetValidationContext(GetContext(new { bar = "woof woof" }), "bar");
+            var validationContext = GetValidationContext(
+                GetContext(new { bar = "woof woof" }),
+                "bar"
+            );
 
             // Act
             var result = validator.Validate(validationContext);
@@ -266,7 +278,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.StringLength(4);
-            var validationContext = GetValidationContext(GetContext(new { baz = "woof woof" }), "baz");
+            var validationContext = GetValidationContext(
+                GetContext(new { baz = "woof woof" }),
+                "baz"
+            );
 
             // Act
             var result = validator.Validate(validationContext);
@@ -282,8 +297,14 @@ namespace System.Web.WebPages.Validation.Test
         {
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
-            var validator = Validator.StringLength(4, errorMessage: "String must be at least {0} characters long.");
-            var validationContext = GetValidationContext(GetContext(new { baz = "woof woof" }), "baz");
+            var validator = Validator.StringLength(
+                4,
+                errorMessage: "String must be at least {0} characters long."
+            );
+            var validationContext = GetValidationContext(
+                GetContext(new { baz = "woof woof" }),
+                "baz"
+            );
 
             // Act
             var result = validator.Validate(validationContext);
@@ -300,7 +321,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.StringLength(6, 4);
-            var validationContext = GetValidationContext(GetContext(new { baz = "woof woof" }), "baz");
+            var validationContext = GetValidationContext(
+                GetContext(new { baz = "woof woof" }),
+                "baz"
+            );
 
             // Act
             var result = validator.Validate(validationContext);
@@ -317,7 +341,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.StringLength(6, 4, "Range {0} - {1}");
-            var validationContext = GetValidationContext(GetContext(new { baz = "woof woof" }), "baz");
+            var validationContext = GetValidationContext(
+                GetContext(new { baz = "woof woof" }),
+                "baz"
+            );
 
             // Act
             var result = validator.Validate(validationContext);
@@ -563,7 +590,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.Float();
-            var context = GetValidationContext(GetContext(new { Price = Single.MaxValue.ToString() }), "Price");
+            var context = GetValidationContext(
+                GetContext(new { Price = Single.MaxValue.ToString() }),
+                "Price"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -640,7 +670,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.DateTime();
-            var context = GetValidationContext(GetContext(new { dateOfBirth = DateTime.Now.ToString() }), "dateOfBirth");
+            var context = GetValidationContext(
+                GetContext(new { dateOfBirth = DateTime.Now.ToString() }),
+                "dateOfBirth"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -655,7 +688,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.DateTime();
-            var context = GetValidationContext(GetContext(new { dateOfBirth = "23.28" }), "dateOfBirth");
+            var context = GetValidationContext(
+                GetContext(new { dateOfBirth = "23.28" }),
+                "dateOfBirth"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -702,7 +738,15 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.Url();
-            var context = GetValidationContext(GetContext(new { blogUrl = "http://www.microsoft.com?query-param=query-param-value&some-val=&quot;true&quot;" }), "blogUrl");
+            var context = GetValidationContext(
+                GetContext(
+                    new
+                    {
+                        blogUrl = "http://www.microsoft.com?query-param=query-param-value&some-val=&quot;true&quot;",
+                    }
+                ),
+                "blogUrl"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -717,7 +761,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.Url();
-            var context = GetValidationContext(GetContext(new { blogUrl = @"x:\some-path\foo.txt" }), "blogUrl");
+            var context = GetValidationContext(
+                GetContext(new { blogUrl = @"x:\some-path\foo.txt" }),
+                "blogUrl"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -734,7 +781,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.Url();
-            var context = GetValidationContext(GetContext(new { blogUrl = @"\\network-share\some-path\" }), "blogUrl");
+            var context = GetValidationContext(
+                GetContext(new { blogUrl = @"\\network-share\some-path\" }),
+                "blogUrl"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -766,7 +816,10 @@ namespace System.Web.WebPages.Validation.Test
         public void EqualsToValidatorThrowsIfFieldIsNullOrEmpty()
         {
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => Validator.EqualsTo(null), "otherFieldName");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => Validator.EqualsTo(null),
+                "otherFieldName"
+            );
         }
 
         [Fact]
@@ -775,7 +828,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.EqualsTo("password");
-            var context = GetValidationContext(GetContext(new { password = "", confirmPassword = "abcd" }), "confirmPassword");
+            var context = GetValidationContext(
+                GetContext(new { password = "", confirmPassword = "abcd" }),
+                "confirmPassword"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -785,7 +841,10 @@ namespace System.Web.WebPages.Validation.Test
             Assert.Equal("Values do not match.", result.ErrorMessage);
             Assert.Equal("confirmPassword", result.MemberNames.Single());
 
-            context = GetValidationContext(GetContext(new { password = "abcd", confirmPassword = "" }), "confirmPassword");
+            context = GetValidationContext(
+                GetContext(new { password = "abcd", confirmPassword = "" }),
+                "confirmPassword"
+            );
 
             // Act
             result = validator.Validate(context);
@@ -802,7 +861,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.EqualsTo("password");
-            var context = GetValidationContext(GetContext(new { password = "password2", confirmPassword = "abcd" }), "confirmPassword");
+            var context = GetValidationContext(
+                GetContext(new { password = "password2", confirmPassword = "abcd" }),
+                "confirmPassword"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -819,7 +881,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = Validator.EqualsTo("password");
-            var context = GetValidationContext(GetContext(new { password = "abcd", confirmPassword = "abcd" }), "confirmPassword");
+            var context = GetValidationContext(
+                GetContext(new { password = "abcd", confirmPassword = "abcd" }),
+                "confirmPassword"
+            );
 
             // Act
             var result = validator.Validate(context);
@@ -879,7 +944,10 @@ namespace System.Web.WebPages.Validation.Test
             return context.Object;
         }
 
-        private static ValidationContext GetValidationContext(HttpContextBase httpContext, string memberName)
+        private static ValidationContext GetValidationContext(
+            HttpContextBase httpContext,
+            string memberName
+        )
         {
             return new ValidationContext(httpContext, null, null) { MemberName = memberName };
         }

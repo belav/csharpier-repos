@@ -2,33 +2,29 @@
 
 using System;
 
-interface IList 
+interface IList
 {
-	int Count { get; set; }
+    int Count { get; set; }
 }
 
 interface ICounter
 {
-	void Count (int i);
+    void Count(int i);
 }
 
 interface IEx
 {
-	void Count (params int[] i);
+    void Count(params int[] i);
 }
 
-interface IListCounter: IEx, IList, ICounter
-{
-}
+interface IListCounter : IEx, IList, ICounter { }
 
 class Test
 {
-	static void Foo (IListCounter t)
-	{
-		t.Count (1); 
-	}
-	
-	public static void Main ()
-	{
-	}
+    static void Foo(IListCounter t)
+    {
+        t.Count(1);
+    }
+
+    public static void Main() { }
 }

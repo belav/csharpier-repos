@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.ModuleInitializers
         public static void LastLanguageVersionNotSupportingModuleInitializersIs8()
         {
             var source =
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 
 class C
 {
@@ -41,15 +41,17 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             compilation.VerifyDiagnostics(
                 // (5,6): error CS8400: Feature 'module initializers' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     [ModuleInitializer]
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "ModuleInitializer").WithArguments("module initializers", "9.0").WithLocation(5, 6)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "ModuleInitializer")
+                    .WithArguments("module initializers", "9.0")
+                    .WithLocation(5, 6)
+            );
         }
 
         [Fact]
         public static void FirstLanguageVersionSupportingModuleInitializersIs9()
         {
             var source =
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 
 class C
 {
@@ -67,7 +69,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [Fact]
         public void ModuleTypeStaticConstructorIsNotEmittedWhenNoMethodIsMarkedWithModuleInitializerAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -95,13 +98,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Null(rootModuleType.GetMember(".cctor"));
                 },
                 expectedOutput: @"
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void ModuleTypeStaticConstructorCallsMethodMarkedWithModuleInitializerAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -143,13 +148,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 },
                 expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void SingleCallIsGeneratedWhenMethodIsMarkedTwice()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -176,7 +183,8 @@ namespace System.Runtime.CompilerServices
         [Fact]
         public void AttributeCanBeAppliedWithinItsOwnDefinition()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Program 
@@ -193,15 +201,20 @@ namespace System.Runtime.CompilerServices
     } 
 }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 ModuleInitializerAttribute.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void ExternMethodCanBeModuleInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -220,15 +233,19 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 symbolValidator: module =>
                 {
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
-                    var rootModuleType = module.ContainingAssembly.GetTypeByMetadataName("<Module>");
+                    var rootModuleType = module.ContainingAssembly.GetTypeByMetadataName(
+                        "<Module>"
+                    );
                     Assert.NotNull(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void MayBeDeclaredByStruct()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -245,15 +262,20 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 S.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void MayBeDeclaredByInterface()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -274,16 +296,22 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 source,
                 parseOptions: s_parseOptions,
                 targetFramework: TargetFramework.NetCoreApp,
-                expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr ? @"
+                expectedOutput: ExecutionConditionUtil.IsMonoOrCoreClr
+                    ? @"
 I.M
-Program.Main" : null,
-                verify: ExecutionConditionUtil.IsMonoOrCoreClr ? Verification.Passes : Verification.Skipped);
+Program.Main"
+                    : null,
+                verify: ExecutionConditionUtil.IsMonoOrCoreClr
+                    ? Verification.Passes
+                    : Verification.Skipped
+            );
         }
 
         [Fact]
         public void MultipleInitializers_SingleFile()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -310,16 +338,14 @@ class Program
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
 
-            CompileAndVerify(
-                source,
-                parseOptions: s_parseOptions,
-                expectedOutput: "1234");
+            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: "1234");
         }
 
         [Fact]
         public void MultipleInitializers_DifferentContainingTypeKinds()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -354,13 +380,17 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: !ExecutionConditionUtil.IsMonoOrCoreClr ? null : "1234",
-                verify: !ExecutionConditionUtil.IsMonoOrCoreClr ? Verification.Skipped : Verification.Passes);
+                verify: !ExecutionConditionUtil.IsMonoOrCoreClr
+                    ? Verification.Skipped
+                    : Verification.Passes
+            );
         }
 
         [Fact]
         public void MultipleInitializers_MultipleFiles()
         {
-            string source1 = @"
+            string source1 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -374,7 +404,8 @@ class C1
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            string source2 = @"
+            string source2 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -396,7 +427,8 @@ class Program
 }
 ";
 
-            string source3 = @"
+            string source3 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -413,13 +445,15 @@ class C4
             CompileAndVerify(
                 new[] { source1, source2, source3 },
                 parseOptions: s_parseOptions,
-                expectedOutput: "123456");
+                expectedOutput: "123456"
+            );
         }
 
         [Fact]
         public void StaticConstructor_Ordering()
         {
-            const string text = @"
+            const string text =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -441,14 +475,19 @@ class C2
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            var verifier = CompileAndVerify(text, parseOptions: s_parseOptions, expectedOutput: "123");
+            var verifier = CompileAndVerify(
+                text,
+                parseOptions: s_parseOptions,
+                expectedOutput: "123"
+            );
             verifier.VerifyDiagnostics();
         }
 
         [Fact]
         public void StaticConstructor_Ordering_SameType()
         {
-            const string text = @"
+            const string text =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -467,14 +506,19 @@ class C
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            var verifier = CompileAndVerify(text, parseOptions: s_parseOptions, expectedOutput: "123");
+            var verifier = CompileAndVerify(
+                text,
+                parseOptions: s_parseOptions,
+                expectedOutput: "123"
+            );
             verifier.VerifyDiagnostics();
         }
 
         [Fact]
         public void StaticConstructor_DefaultInitializer_SameType()
         {
-            const string text = @"
+            const string text =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -501,7 +545,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 expectedOutput: "hello",
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
             verifier.VerifyDiagnostics();
 
             void validator(ModuleSymbol module)
@@ -518,7 +563,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [Fact]
         public void StaticConstructor_EffectingInitializer_SameType()
         {
-            const string text = @"
+            const string text =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -551,7 +597,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 expectedOutput: "12",
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
             verifier.VerifyDiagnostics();
 
             void validator(ModuleSymbol module)
@@ -567,7 +614,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [Fact]
         public void StaticConstructor_DefaultInitializer_OtherType()
         {
-            const string text = @"
+            const string text =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -597,7 +645,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 expectedOutput: "hello",
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
             verifier.VerifyDiagnostics();
 
             void validator(ModuleSymbol module)
@@ -614,7 +663,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [Fact]
         public void StaticConstructor_EffectingInitializer_OtherType()
         {
-            const string text = @"
+            const string text =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -650,7 +700,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 parseOptions: s_parseOptions,
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 expectedOutput: "12",
-                symbolValidator: validator);
+                symbolValidator: validator
+            );
             verifier.VerifyDiagnostics();
 
             void validator(ModuleSymbol module)
@@ -666,7 +717,8 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
         [Fact]
         public void ModuleInitializerAttributeIncludedByConditionalAttribute()
         {
-            string source = @"
+            string source =
+                @"
 #define INCLUDE
 
 using System;
@@ -689,15 +741,20 @@ namespace System.Runtime.CompilerServices
     class ModuleInitializerAttribute : System.Attribute { }
 }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void ModuleInitializerAttributeExcludedByConditionalAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -718,15 +775,20 @@ namespace System.Runtime.CompilerServices
     class ModuleInitializerAttribute : System.Attribute { }
 }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void ModuleInitializerMethodIncludedByConditionalAttribute()
         {
-            string source = @"
+            string source =
+                @"
 #define INCLUDE
 
 using System;
@@ -748,16 +810,21 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.Preceding
 C.Following
-Program.Main");
+Program.Main"
+            );
         }
 
         [Fact]
         public void ModuleInitializerMethodExcludedByConditionalAttribute()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -779,15 +846,19 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                 symbolValidator: module =>
                 {
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
-                    var rootModuleType = module.ContainingAssembly.GetTypeByMetadataName("<Module>");
+                    var rootModuleType = module.ContainingAssembly.GetTypeByMetadataName(
+                        "<Module>"
+                    );
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void ModuleInitializerMethodIsObsolete()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -804,16 +875,26 @@ class Program
 
 namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                expectedOutput: @"
 C.Init
-Program.Main");
+Program.Main"
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.NetModulesNeedDesktop)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.NetModulesNeedDesktop
+        )]
         public void MultipleNetmodules()
         {
-            var moduleOptions = TestOptions.ReleaseModule.WithMetadataImportOptions(MetadataImportOptions.All);
-            var s1 = @"
+            var moduleOptions = TestOptions.ReleaseModule.WithMetadataImportOptions(
+                MetadataImportOptions.All
+            );
+            var s1 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -827,12 +908,21 @@ public class A
 }
 
 namespace System.Runtime.CompilerServices { public class ModuleInitializerAttribute : System.Attribute { } }";
-            var comp1 = CreateCompilation(s1, options: moduleOptions.WithModuleName("A"), parseOptions: s_parseOptions);
+            var comp1 = CreateCompilation(
+                s1,
+                options: moduleOptions.WithModuleName("A"),
+                parseOptions: s_parseOptions
+            );
             comp1.VerifyDiagnostics();
             var ref1 = comp1.EmitToImageReference();
-            CompileAndVerify(comp1, symbolValidator: validateModuleInitializer, verify: Verification.Skipped);
+            CompileAndVerify(
+                comp1,
+                symbolValidator: validateModuleInitializer,
+                verify: Verification.Skipped
+            );
 
-            var s2 = @"
+            var s2 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -844,15 +934,25 @@ public class B
         Console.Write(2);
     }
 }";
-            var comp2 = CreateCompilation(s2, options: moduleOptions.WithModuleName("B"), parseOptions: s_parseOptions, references: new[] { ref1 });
+            var comp2 = CreateCompilation(
+                s2,
+                options: moduleOptions.WithModuleName("B"),
+                parseOptions: s_parseOptions,
+                references: new[] { ref1 }
+            );
             comp2.VerifyDiagnostics();
             var ref2 = comp2.EmitToImageReference();
-            CompileAndVerify(comp2, symbolValidator: validateModuleInitializer, verify: Verification.Skipped);
+            CompileAndVerify(
+                comp2,
+                symbolValidator: validateModuleInitializer,
+                verify: Verification.Skipped
+            );
 
-            var exeOptions = TestOptions.ReleaseExe
-                .WithMetadataImportOptions(MetadataImportOptions.All)
+            var exeOptions = TestOptions
+                .ReleaseExe.WithMetadataImportOptions(MetadataImportOptions.All)
                 .WithModuleName("C");
-            var s3 = @"
+            var s3 =
+                @"
 using System;
 
 public class Program
@@ -862,11 +962,21 @@ public class Program
         Console.Write(3);
     }
 }";
-            var comp3 = CreateCompilation(s3, options: exeOptions, parseOptions: s_parseOptions, references: new[] { ref1, ref2 });
+            var comp3 = CreateCompilation(
+                s3,
+                options: exeOptions,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 }
+            );
             comp3.VerifyDiagnostics();
-            CompileAndVerify(comp3, symbolValidator: validateNoModuleInitializer, expectedOutput: "3");
+            CompileAndVerify(
+                comp3,
+                symbolValidator: validateNoModuleInitializer,
+                expectedOutput: "3"
+            );
 
-            var s4 = @"
+            var s4 =
+                @"
 using System;
 
 public class Program
@@ -878,11 +988,21 @@ public class Program
         Console.Write(3);
     }
 }";
-            var comp4 = CreateCompilation(s4, options: exeOptions, parseOptions: s_parseOptions, references: new[] { ref1, ref2 });
+            var comp4 = CreateCompilation(
+                s4,
+                options: exeOptions,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 }
+            );
             comp4.VerifyDiagnostics();
-            CompileAndVerify(comp4, symbolValidator: validateNoModuleInitializer, expectedOutput: "123");
+            CompileAndVerify(
+                comp4,
+                symbolValidator: validateNoModuleInitializer,
+                expectedOutput: "123"
+            );
 
-            var s5 = @"
+            var s5 =
+                @"
 using System;
 
 public class Program
@@ -894,12 +1014,22 @@ public class Program
         new A();
     }
 }";
-            var comp5 = CreateCompilation(s5, options: exeOptions, parseOptions: s_parseOptions, references: new[] { ref1, ref2 });
+            var comp5 = CreateCompilation(
+                s5,
+                options: exeOptions,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 }
+            );
             comp5.VerifyDiagnostics();
             // This order seems surprising, but is likely related to the order in which types are loaded when a method is called.
-            CompileAndVerify(comp5, symbolValidator: validateNoModuleInitializer, expectedOutput: "213");
+            CompileAndVerify(
+                comp5,
+                symbolValidator: validateNoModuleInitializer,
+                expectedOutput: "213"
+            );
 
-            var s6 = @"
+            var s6 =
+                @"
 using System;
 
 public class Program
@@ -910,11 +1040,21 @@ public class Program
         Console.Write(3);
     }
 }";
-            var comp6 = CreateCompilation(s6, options: exeOptions, parseOptions: s_parseOptions, references: new[] { ref1, ref2 });
+            var comp6 = CreateCompilation(
+                s6,
+                options: exeOptions,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 }
+            );
             comp6.VerifyDiagnostics();
-            CompileAndVerify(comp6, symbolValidator: validateNoModuleInitializer, expectedOutput: "13");
+            CompileAndVerify(
+                comp6,
+                symbolValidator: validateNoModuleInitializer,
+                expectedOutput: "13"
+            );
 
-            var s7 = @"
+            var s7 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -932,11 +1072,21 @@ public class Program
         Console.Write(3);
     }
 }";
-            var comp7 = CreateCompilation(s7, options: exeOptions, parseOptions: s_parseOptions, references: new[] { ref1, ref2 });
+            var comp7 = CreateCompilation(
+                s7,
+                options: exeOptions,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 }
+            );
             comp7.VerifyDiagnostics();
-            CompileAndVerify(comp7, symbolValidator: validateModuleInitializer, expectedOutput: "023");
+            CompileAndVerify(
+                comp7,
+                symbolValidator: validateModuleInitializer,
+                expectedOutput: "023"
+            );
 
-            var s8 = @"
+            var s8 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -956,9 +1106,18 @@ public class Program
         Console.Write(3);
     }
 }";
-            var comp8 = CreateCompilation(s8, options: exeOptions, parseOptions: s_parseOptions, references: new[] { ref1, ref2 });
+            var comp8 = CreateCompilation(
+                s8,
+                options: exeOptions,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 }
+            );
             comp8.VerifyDiagnostics();
-            CompileAndVerify(comp8, symbolValidator: validateModuleInitializer, expectedOutput: "1023");
+            CompileAndVerify(
+                comp8,
+                symbolValidator: validateModuleInitializer,
+                expectedOutput: "1023"
+            );
 
             void validateModuleInitializer(ModuleSymbol module)
             {
@@ -975,10 +1134,14 @@ public class Program
             }
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = ConditionalSkipReason.NetModulesNeedDesktop)]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = ConditionalSkipReason.NetModulesNeedDesktop
+        )]
         public void NetmoduleFromIL_InitializerNotCalled()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit A
        extends [mscorlib]System.Object
 {
@@ -1023,7 +1186,8 @@ public class Program
 
 } // end of class System.Runtime.CompilerServices.ModuleInitializerAttribute";
 
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -1044,7 +1208,8 @@ public class A
 namespace System.Runtime.CompilerServices { public class ModuleInitializerAttribute : System.Attribute { } }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -1063,15 +1228,35 @@ public class A
 
 namespace System.Runtime.CompilerServices { public class ModuleInitializerAttribute : System.Attribute { } }
 ";
-            var exeOptions = TestOptions.ReleaseExe
-                .WithMetadataImportOptions(MetadataImportOptions.All)
+            var exeOptions = TestOptions
+                .ReleaseExe.WithMetadataImportOptions(MetadataImportOptions.All)
                 .WithModuleName("C");
 
-            var comp = CreateCompilationWithIL(source1, il, parseOptions: s_parseOptions, options: exeOptions);
-            CompileAndVerify(comp, symbolValidator: validateModuleInitializer, verify: Verification.Skipped, expectedOutput: "12");
+            var comp = CreateCompilationWithIL(
+                source1,
+                il,
+                parseOptions: s_parseOptions,
+                options: exeOptions
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: validateModuleInitializer,
+                verify: Verification.Skipped,
+                expectedOutput: "12"
+            );
 
-            comp = CreateCompilationWithIL(source2, il, parseOptions: s_parseOptions, options: exeOptions);
-            CompileAndVerify(comp, symbolValidator: validateNoModuleInitializer, verify: Verification.Skipped, expectedOutput: "1");
+            comp = CreateCompilationWithIL(
+                source2,
+                il,
+                parseOptions: s_parseOptions,
+                options: exeOptions
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: validateNoModuleInitializer,
+                verify: Verification.Skipped,
+                expectedOutput: "1"
+            );
 
             void validateModuleInitializer(ModuleSymbol module)
             {
@@ -1091,14 +1276,18 @@ namespace System.Runtime.CompilerServices { public class ModuleInitializerAttrib
         [Fact]
         public void MultipleAttributesViaExternAlias()
         {
-            var source1 = @"
+            var source1 =
+                @"
 namespace System.Runtime.CompilerServices { public class ModuleInitializerAttribute : System.Attribute { } }
 ";
 
-            var ref1 = CreateCompilation(source1).ToMetadataReference(aliases: ImmutableArray.Create("Alias1"));
-            var ref2 = CreateCompilation(source1).ToMetadataReference(aliases: ImmutableArray.Create("Alias2"));
+            var ref1 = CreateCompilation(source1)
+                .ToMetadataReference(aliases: ImmutableArray.Create("Alias1"));
+            var ref2 = CreateCompilation(source1)
+                .ToMetadataReference(aliases: ImmutableArray.Create("Alias2"));
 
-            var source = @"
+            var source =
+                @"
 extern alias Alias1;
 extern alias Alias2;
 
@@ -1124,14 +1313,20 @@ class Program
     }
 }
 ";
-            CompileAndVerify(source, parseOptions: s_parseOptions, references: new[] { ref1, ref2 }, expectedOutput: "123");
+            CompileAndVerify(
+                source,
+                parseOptions: s_parseOptions,
+                references: new[] { ref1, ref2 },
+                expectedOutput: "123"
+            );
         }
 
         [Fact]
         [WorkItem(56412, "https://github.com/dotnet/roslyn/issues/56412")]
         public void Issue56412()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -1152,10 +1347,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
             CompileAndVerify(
                 source,
                 options: TestOptions.ReleaseExe,
-                emitOptions: EmitOptions.Default.WithDebugInformationFormat(PathUtilities.IsUnixLikePlatform ? DebugInformationFormat.PortablePdb : DebugInformationFormat.Pdb),
+                emitOptions: EmitOptions.Default.WithDebugInformationFormat(
+                    PathUtilities.IsUnixLikePlatform
+                        ? DebugInformationFormat.PortablePdb
+                        : DebugInformationFormat.Pdb
+                ),
                 expectedOutput: @"
 C.M
-Program.Main");
+Program.Main"
+            );
         }
     }
 }

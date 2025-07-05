@@ -11,13 +11,13 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         NoNotification = 0,
         IntraSiteOnly = 1,
-        NotificationAlways = 2
+        NotificationAlways = 2,
     }
 
     public enum ReplicationSpan
     {
         IntraSite = 0,
-        InterSite = 1
+        InterSite = 1,
     }
 
     public class ReplicationConnection : IDisposable
@@ -44,19 +44,27 @@ namespace System.DirectoryServices.ActiveDirectory
             context = new DirectoryContext(context);
 
             // bind to the rootdse to get the servername property
-            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                WellKnownDN.RootDSE
+            );
             try
             {
-                string serverDN = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ServerName)!;
+                string serverDN = (string)
+                    PropertyManager.GetPropertyValue(context, de, PropertyManager.ServerName)!;
                 string connectionContainer = "CN=NTDS Settings," + serverDN;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, connectionContainer);
                 // doing the search to find the connection object based on its name
-                ADSearcher adSearcher = new ADSearcher(de,
-                                                      "(&(objectClass=nTDSConnection)(objectCategory=NTDSConnection)(name=" + Utils.GetEscapedFilterValue(name) + "))",
-                                                      ActiveDirectorySite.s_distinguishedName,
-                                                      SearchScope.OneLevel,
-                                                      false, /* no paged search */
-                                                      false /* don't cache results */);
+                ADSearcher adSearcher = new ADSearcher(
+                    de,
+                    "(&(objectClass=nTDSConnection)(objectCategory=NTDSConnection)(name="
+                        + Utils.GetEscapedFilterValue(name)
+                        + "))",
+                    ActiveDirectorySite.s_distinguishedName,
+                    SearchScope.OneLevel,
+                    false, /* no paged search */
+                    false /* don't cache results */
+                );
                 SearchResult? srchResult = null;
                 try
                 {
@@ -67,7 +75,11 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (e.ErrorCode == unchecked((int)0x80072030))
                     {
                         // object is not found since we cannot even find the container in which to search
-                        throw new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ReplicationConnection), name);
+                        throw new ActiveDirectoryObjectNotFoundException(
+                            SR.DSNotFound,
+                            typeof(ReplicationConnection),
+                            name
+                        );
                     }
                     else
                     {
@@ -78,7 +90,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (srchResult == null)
                 {
                     // no such connection object
-                    Exception e = new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ReplicationConnection), name);
+                    Exception e = new ActiveDirectoryObjectNotFoundException(
+                        SR.DSNotFound,
+                        typeof(ReplicationConnection),
+                        name
+                    );
                     throw e;
                 }
                 else
@@ -93,7 +109,11 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal ReplicationConnection(DirectoryContext context, DirectoryEntry connectionEntry, string name)
+        internal ReplicationConnection(
+            DirectoryContext context,
+            DirectoryEntry connectionEntry,
+            string name
+        )
         {
             this.context = context;
             cachedDirectoryEntry = connectionEntry;
@@ -102,27 +122,51 @@ namespace System.DirectoryServices.ActiveDirectory
             existingConnection = true;
         }
 
-        public ReplicationConnection(DirectoryContext context, string name, DirectoryServer sourceServer) : this(context, name, sourceServer, null, ActiveDirectoryTransportType.Rpc)
-        {
-        }
+        public ReplicationConnection(
+            DirectoryContext context,
+            string name,
+            DirectoryServer sourceServer
+        )
+            : this(context, name, sourceServer, null, ActiveDirectoryTransportType.Rpc) { }
 
-        public ReplicationConnection(DirectoryContext context, string name, DirectoryServer sourceServer, ActiveDirectorySchedule? schedule) : this(context, name, sourceServer, schedule, ActiveDirectoryTransportType.Rpc)
-        {
-        }
+        public ReplicationConnection(
+            DirectoryContext context,
+            string name,
+            DirectoryServer sourceServer,
+            ActiveDirectorySchedule? schedule
+        )
+            : this(context, name, sourceServer, schedule, ActiveDirectoryTransportType.Rpc) { }
 
-        public ReplicationConnection(DirectoryContext context, string name, DirectoryServer sourceServer, ActiveDirectoryTransportType transport) : this(context, name, sourceServer, null, transport)
-        {
-        }
+        public ReplicationConnection(
+            DirectoryContext context,
+            string name,
+            DirectoryServer sourceServer,
+            ActiveDirectoryTransportType transport
+        )
+            : this(context, name, sourceServer, null, transport) { }
 
-        public ReplicationConnection(DirectoryContext context, string name, DirectoryServer sourceServer, ActiveDirectorySchedule? schedule, ActiveDirectoryTransportType transport)
+        public ReplicationConnection(
+            DirectoryContext context,
+            string name,
+            DirectoryServer sourceServer,
+            ActiveDirectorySchedule? schedule,
+            ActiveDirectoryTransportType transport
+        )
         {
             ValidateArgument(context, name);
 
             if (sourceServer == null)
                 throw new ArgumentNullException(nameof(sourceServer));
 
-            if (transport < ActiveDirectoryTransportType.Rpc || transport > ActiveDirectoryTransportType.Smtp)
-                throw new InvalidEnumArgumentException("value", (int)transport, typeof(ActiveDirectoryTransportType));
+            if (
+                transport < ActiveDirectoryTransportType.Rpc
+                || transport > ActiveDirectoryTransportType.Smtp
+            )
+                throw new InvalidEnumArgumentException(
+                    "value",
+                    (int)transport,
+                    typeof(ActiveDirectoryTransportType)
+                );
 
             //  work with copy of the context
             context = new DirectoryContext(context);
@@ -133,10 +177,14 @@ namespace System.DirectoryServices.ActiveDirectory
             _connectionName = name;
             _transport = transport;
 
-            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+            DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                context,
+                WellKnownDN.RootDSE
+            );
             try
             {
-                string serverDN = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ServerName)!;
+                string serverDN = (string)
+                    PropertyManager.GetPropertyValue(context, de, PropertyManager.ServerName)!;
                 string connectionContainer = "CN=NTDS Settings," + serverDN;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, connectionContainer);
 
@@ -149,15 +197,24 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 // sourceserver property
                 DirectoryContext sourceServerContext = sourceServer.Context;
-                de = DirectoryEntryManager.GetDirectoryEntry(sourceServerContext, WellKnownDN.RootDSE);
-                string serverName = (string)PropertyManager.GetPropertyValue(sourceServerContext, de, PropertyManager.ServerName)!;
+                de = DirectoryEntryManager.GetDirectoryEntry(
+                    sourceServerContext,
+                    WellKnownDN.RootDSE
+                );
+                string serverName = (string)
+                    PropertyManager.GetPropertyValue(
+                        sourceServerContext,
+                        de,
+                        PropertyManager.ServerName
+                    )!;
                 serverName = "CN=NTDS Settings," + serverName;
 
                 cachedDirectoryEntry.Properties["fromServer"].Add(serverName);
 
                 // schedule property
                 if (schedule != null)
-                    cachedDirectoryEntry.Properties[nameof(schedule)].Value = schedule.GetUnmanagedSchedule();
+                    cachedDirectoryEntry.Properties[nameof(schedule)].Value =
+                        schedule.GetUnmanagedSchedule();
 
                 // transporttype property
                 string transportPath = Utils.GetDNFromTransportType(TransportType, context);
@@ -172,8 +229,14 @@ namespace System.DirectoryServices.ActiveDirectory
                     if (e.ErrorCode == unchecked((int)0x80072030))
                     {
                         // if it is ADAM and transport type is SMTP, throw NotSupportedException.
-                        DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                        if (Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode) && transport == ActiveDirectoryTransportType.Smtp)
+                        DirectoryEntry tmpDE = DirectoryEntryManager.GetDirectoryEntry(
+                            context,
+                            WellKnownDN.RootDSE
+                        );
+                        if (
+                            Utils.CheckCapability(tmpDE, Capability.ActiveDirectoryApplicationMode)
+                            && transport == ActiveDirectoryTransportType.Smtp
+                        )
                         {
                             throw new NotSupportedException(SR.NotSupportTransportSMTP);
                         }
@@ -219,7 +282,7 @@ namespace System.DirectoryServices.ActiveDirectory
 
         ~ReplicationConnection()
         {
-            Dispose(false);      // finalizer is called => Dispose has not been called yet.
+            Dispose(false); // finalizer is called => Dispose has not been called yet.
         }
 
         public string Name
@@ -243,12 +306,30 @@ namespace System.DirectoryServices.ActiveDirectory
                 // get the source server
                 if (_sourceServerName == null)
                 {
-                    string sourceServerDN = (string)PropertyManager.GetPropertyValue(context, cachedDirectoryEntry, PropertyManager.FromServer)!;
-                    DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, sourceServerDN);
+                    string sourceServerDN = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            cachedDirectoryEntry,
+                            PropertyManager.FromServer
+                        )!;
+                    DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                        context,
+                        sourceServerDN
+                    );
                     if (IsADAM)
                     {
-                        int portnumber = (int)PropertyManager.GetPropertyValue(context, de, PropertyManager.MsDSPortLDAP)!;
-                        string? tmpServerName = (string?)PropertyManager.GetPropertyValue(context, de.Parent, PropertyManager.DnsHostName);
+                        int portnumber = (int)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                de,
+                                PropertyManager.MsDSPortLDAP
+                            )!;
+                        string? tmpServerName = (string?)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                de.Parent,
+                                PropertyManager.DnsHostName
+                            );
                         if (portnumber != 389)
                         {
                             _sourceServerName = tmpServerName + ":" + portnumber;
@@ -256,7 +337,12 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else
                     {
-                        _sourceServerName = (string?)PropertyManager.GetPropertyValue(context, de.Parent, PropertyManager.DnsHostName);
+                        _sourceServerName = (string?)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                de.Parent,
+                                PropertyManager.DnsHostName
+                            );
                     }
                 }
                 return _sourceServerName;
@@ -284,10 +370,20 @@ namespace System.DirectoryServices.ActiveDirectory
                         throw ExceptionHelper.GetExceptionFromCOMException(context, e);
                     }
 
-                    string hostName = (string)PropertyManager.GetPropertyValue(context, serverObject, PropertyManager.DnsHostName)!;
+                    string hostName = (string)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            serverObject,
+                            PropertyManager.DnsHostName
+                        )!;
                     if (IsADAM)
                     {
-                        int portnumber = (int)PropertyManager.GetPropertyValue(context, NTDSObject, PropertyManager.MsDSPortLDAP)!;
+                        int portnumber = (int)
+                            PropertyManager.GetPropertyValue(
+                                context,
+                                NTDSObject,
+                                PropertyManager.MsDSPortLDAP
+                            )!;
                         if (portnumber != 389)
                         {
                             _destinationServerName = hostName + ":" + portnumber;
@@ -555,8 +651,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (_disposed)
                     throw new ObjectDisposedException(GetType().Name);
 
-                if (value < NotificationStatus.NoNotification || value > NotificationStatus.NotificationAlways)
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(NotificationStatus));
+                if (
+                    value < NotificationStatus.NoNotification
+                    || value > NotificationStatus.NotificationAlways
+                )
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(NotificationStatus)
+                    );
 
                 try
                 {
@@ -748,11 +851,20 @@ namespace System.DirectoryServices.ActiveDirectory
                     throw new ObjectDisposedException(GetType().Name);
 
                 // find out whether the site and the destination is in the same site
-                string destinationPath = (string)PropertyManager.GetPropertyValue(context, cachedDirectoryEntry, PropertyManager.FromServer)!;
+                string destinationPath = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        cachedDirectoryEntry,
+                        PropertyManager.FromServer
+                    )!;
                 string? destinationSite = Utils.GetDNComponents(destinationPath)[3].Value;
 
-                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string serverDN = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ServerName)!;
+                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                    context,
+                    WellKnownDN.RootDSE
+                );
+                string serverDN = (string)
+                    PropertyManager.GetPropertyValue(context, de, PropertyManager.ServerName)!;
                 string? serverSite = Utils.GetDNComponents(serverDN)[2].Value;
 
                 if (Utils.Compare(destinationSite, serverSite) == 0)
@@ -808,7 +920,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     }
                     else
                     {
-                        cachedDirectoryEntry.Properties["schedule"].Value = value.GetUnmanagedSchedule();
+                        cachedDirectoryEntry.Properties["schedule"].Value =
+                            value.GetUnmanagedSchedule();
                     }
                 }
                 catch (COMException e)
@@ -822,7 +935,10 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             get
             {
-                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
+                DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                    context,
+                    WellKnownDN.RootDSE
+                );
                 PropertyValueCollection values;
                 try
                 {
@@ -901,7 +1017,10 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             else
             {
-                return DirectoryEntryManager.GetDirectoryEntryInternal(context, cachedDirectoryEntry.Path);
+                return DirectoryEntryManager.GetDirectoryEntryInternal(
+                    context,
+                    cachedDirectoryEntry.Path
+                );
             }
         }
 
@@ -921,7 +1040,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 throw new ArgumentException(SR.EmptyStringParameter, nameof(name));
         }
 
-        private void ValidateTargetAndSourceServer(DirectoryContext context, DirectoryServer sourceServer)
+        private void ValidateTargetAndSourceServer(
+            DirectoryContext context,
+            DirectoryServer sourceServer
+        )
         {
             bool targetIsDC = false;
             DirectoryEntry? targetDE = null;
@@ -935,7 +1057,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     targetIsDC = true;
                 }
-                else if (!Utils.CheckCapability(targetDE, Capability.ActiveDirectoryApplicationMode))
+                else if (
+                    !Utils.CheckCapability(targetDE, Capability.ActiveDirectoryApplicationMode)
+                )
                 {
                     // if it is also not an ADAM instance, it is invalid then
                     throw new ArgumentException(SR.DirectoryContextNeedHost, nameof(context));
@@ -944,33 +1068,68 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (targetIsDC && !(sourceServer is DomainController))
                 {
                     // target and sourceServer are not of the same type
-                    throw new ArgumentException(SR.ConnectionSourcServerShouldBeDC, nameof(sourceServer));
+                    throw new ArgumentException(
+                        SR.ConnectionSourcServerShouldBeDC,
+                        nameof(sourceServer)
+                    );
                 }
                 else if (!targetIsDC && (sourceServer is DomainController))
                 {
                     // target and sourceServer are not of the same type
-                    throw new ArgumentException(SR.ConnectionSourcServerShouldBeADAM, nameof(sourceServer));
+                    throw new ArgumentException(
+                        SR.ConnectionSourcServerShouldBeADAM,
+                        nameof(sourceServer)
+                    );
                 }
 
-                sourceDE = DirectoryEntryManager.GetDirectoryEntry(sourceServer.Context, WellKnownDN.RootDSE);
+                sourceDE = DirectoryEntryManager.GetDirectoryEntry(
+                    sourceServer.Context,
+                    WellKnownDN.RootDSE
+                );
 
                 // now if they are both dc, we need to check whether they come from the same forest
                 if (targetIsDC)
                 {
-                    string? targetRoot = (string?)PropertyManager.GetPropertyValue(context, targetDE, PropertyManager.RootDomainNamingContext);
-                    string? sourceRoot = (string?)PropertyManager.GetPropertyValue(sourceServer.Context, sourceDE, PropertyManager.RootDomainNamingContext);
+                    string? targetRoot = (string?)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            targetDE,
+                            PropertyManager.RootDomainNamingContext
+                        );
+                    string? sourceRoot = (string?)
+                        PropertyManager.GetPropertyValue(
+                            sourceServer.Context,
+                            sourceDE,
+                            PropertyManager.RootDomainNamingContext
+                        );
                     if (Utils.Compare(targetRoot, sourceRoot) != 0)
                     {
-                        throw new ArgumentException(SR.ConnectionSourcServerSameForest, nameof(sourceServer));
+                        throw new ArgumentException(
+                            SR.ConnectionSourcServerSameForest,
+                            nameof(sourceServer)
+                        );
                     }
                 }
                 else
                 {
-                    string? targetRoot = (string?)PropertyManager.GetPropertyValue(context, targetDE, PropertyManager.ConfigurationNamingContext);
-                    string? sourceRoot = (string?)PropertyManager.GetPropertyValue(sourceServer.Context, sourceDE, PropertyManager.ConfigurationNamingContext);
+                    string? targetRoot = (string?)
+                        PropertyManager.GetPropertyValue(
+                            context,
+                            targetDE,
+                            PropertyManager.ConfigurationNamingContext
+                        );
+                    string? sourceRoot = (string?)
+                        PropertyManager.GetPropertyValue(
+                            sourceServer.Context,
+                            sourceDE,
+                            PropertyManager.ConfigurationNamingContext
+                        );
                     if (Utils.Compare(targetRoot, sourceRoot) != 0)
                     {
-                        throw new ArgumentException(SR.ConnectionSourcServerSameConfigSet, nameof(sourceServer));
+                        throw new ArgumentException(
+                            SR.ConnectionSourcServerSameConfigSet,
+                            nameof(sourceServer)
+                        );
                     }
                 }
             }

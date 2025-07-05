@@ -11,15 +11,20 @@ internal class StartupHook
 {
     public static void Initialize()
     {
-        Console.WriteLine($"Hello from startup hook in {(typeof(StartupHook).Assembly.GetName().Name)}!");
+        Console.WriteLine(
+            $"Hello from startup hook in {(typeof(StartupHook).Assembly.GetName().Name)}!"
+        );
 
-        bool addResolver = Environment.GetEnvironmentVariable("TEST_STARTUPHOOK_ADD_RESOLVER") == true.ToString();
+        bool addResolver =
+            Environment.GetEnvironmentVariable("TEST_STARTUPHOOK_ADD_RESOLVER") == true.ToString();
         if (addResolver)
         {
             AssemblyLoadContext.Default.Resolving += OnResolving;
         }
 
-        bool useDependency = Environment.GetEnvironmentVariable("TEST_STARTUPHOOK_USE_DEPENDENCY") == true.ToString();
+        bool useDependency =
+            Environment.GetEnvironmentVariable("TEST_STARTUPHOOK_USE_DEPENDENCY")
+            == true.ToString();
         if (useDependency)
         {
             UseDependency();
@@ -38,8 +43,12 @@ internal class StartupHook
             return null;
 
         Console.WriteLine($"Resolving {assemblyName.Name} in startup hook");
-        string startupHookDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        string sharedLibrary = Path.GetFullPath(Path.Combine(startupHookDirectory, "SharedLibrary.dll"));
+        string startupHookDirectory = Path.GetDirectoryName(
+            Assembly.GetExecutingAssembly().Location
+        );
+        string sharedLibrary = Path.GetFullPath(
+            Path.Combine(startupHookDirectory, "SharedLibrary.dll")
+        );
         return AssemblyLoadContext.Default.LoadFromAssemblyPath(sharedLibrary);
     }
 }

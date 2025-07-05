@@ -33,7 +33,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullDocumentToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("documentToWrite", () => new Formatter(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "documentToWrite",
+                () => new Formatter(null)
+            );
         }
 
         [Fact]
@@ -51,7 +54,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateCategory_NullCategory_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("inlineCategories", () => Formatter.CreateCategoryEntryPoint(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "inlineCategories",
+                () => Formatter.CreateCategoryEntryPoint(null)
+            );
         }
 
         [Fact]
@@ -71,7 +77,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateCollection_NullWorkspace_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("workspace", () => Formatter.CreateCollectionEntryPoint(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "workspace",
+                () => Formatter.CreateCollectionEntryPoint(null)
+            );
         }
 
         [Fact]
@@ -90,7 +99,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateInlineCategories_Invoke_ReturnsExpected()
         {
             var collection = new ResourceCollectionInfo();
-            InlineCategoriesDocument document = Formatter.CreateInlineCategoriesEntryPoint(collection);
+            InlineCategoriesDocument document = Formatter.CreateInlineCategoriesEntryPoint(
+                collection
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);
@@ -103,14 +114,18 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateInlineCategories_NullCategory_ThrowsArgumentNullException()
         {
-            Assert.Throws<NullReferenceException>(() => Formatter.CreateInlineCategoriesEntryPoint(null));
+            Assert.Throws<NullReferenceException>(() =>
+                Formatter.CreateInlineCategoriesEntryPoint(null)
+            );
         }
 
         [Fact]
         public void CreateReferencedCategories_Invoke_ReturnsExpected()
         {
             var collection = new ResourceCollectionInfo();
-            ReferencedCategoriesDocument document = Formatter.CreateReferencedCategoriesEntryPoint(collection);
+            ReferencedCategoriesDocument document = Formatter.CreateReferencedCategoriesEntryPoint(
+                collection
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);
@@ -121,7 +136,9 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateReferencedCategories_NullCategory_ThrowsArgumentNullException()
         {
-            Assert.Throws<NullReferenceException>(() => Formatter.CreateReferencedCategoriesEntryPoint(null));
+            Assert.Throws<NullReferenceException>(() =>
+                Formatter.CreateReferencedCategoriesEntryPoint(null)
+            );
         }
 
         [Fact]
@@ -139,7 +156,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateWorkspace_NullDocument_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("document", () => Formatter.CreateWorkspaceEntryPoint(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "document",
+                () => Formatter.CreateWorkspaceEntryPoint(null)
+            );
         }
 
         [Fact]
@@ -147,18 +167,31 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var settings = new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment };
 
-            using (var stringReader = new StringReader(@"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader, settings))
             {
                 var document = new InlineCategoriesDocument();
                 Formatter.LoadElementExtensionsEntryPoint(reader, document, int.MaxValue);
 
                 Assert.Equal(2, document.ElementExtensions.Count);
-                Assert.Equal(10, document.ElementExtensions[0].GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+                Assert.Equal(
+                    10,
+                    document
+                        .ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
+                );
                 Assert.Equal("ExtensionObject", document.ElementExtensions[0].OuterName);
                 Assert.Empty(document.ElementExtensions[0].OuterNamespace);
                 Assert.Equal("ExtensionObject", document.ElementExtensions[1].OuterName);
-                Assert.Equal("http://www.w3.org/TR/html4/", document.ElementExtensions[1].OuterNamespace);
+                Assert.Equal(
+                    "http://www.w3.org/TR/html4/",
+                    document.ElementExtensions[1].OuterNamespace
+                );
             }
         }
 
@@ -166,7 +199,15 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullCategories_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("categories", () => Formatter.LoadElementExtensionsEntryPoint(reader, (CategoriesDocument)null, int.MaxValue));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "categories",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        reader,
+                        (CategoriesDocument)null,
+                        int.MaxValue
+                    )
+            );
         }
 
         [Fact]
@@ -174,18 +215,31 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var settings = new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment };
 
-            using (var stringReader = new StringReader(@"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader, settings))
             {
                 var collection = new ResourceCollectionInfo();
                 Formatter.LoadElementExtensionsEntryPoint(reader, collection, int.MaxValue);
 
                 Assert.Equal(2, collection.ElementExtensions.Count);
-                Assert.Equal(10, collection.ElementExtensions[0].GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+                Assert.Equal(
+                    10,
+                    collection
+                        .ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
+                );
                 Assert.Equal("ExtensionObject", collection.ElementExtensions[0].OuterName);
                 Assert.Empty(collection.ElementExtensions[0].OuterNamespace);
                 Assert.Equal("ExtensionObject", collection.ElementExtensions[1].OuterName);
-                Assert.Equal("http://www.w3.org/TR/html4/", collection.ElementExtensions[1].OuterNamespace);
+                Assert.Equal(
+                    "http://www.w3.org/TR/html4/",
+                    collection.ElementExtensions[1].OuterNamespace
+                );
             }
         }
 
@@ -193,7 +247,15 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullCollection_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("collection", () => Formatter.LoadElementExtensionsEntryPoint(reader, (ResourceCollectionInfo)null, int.MaxValue));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collection",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        reader,
+                        (ResourceCollectionInfo)null,
+                        int.MaxValue
+                    )
+            );
         }
 
         [Fact]
@@ -201,18 +263,31 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var settings = new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment };
 
-            using (var stringReader = new StringReader(@"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader, settings))
             {
                 var workspace = new Workspace();
                 Formatter.LoadElementExtensionsEntryPoint(reader, workspace, int.MaxValue);
 
                 Assert.Equal(2, workspace.ElementExtensions.Count);
-                Assert.Equal(10, workspace.ElementExtensions[0].GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+                Assert.Equal(
+                    10,
+                    workspace
+                        .ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
+                );
                 Assert.Equal("ExtensionObject", workspace.ElementExtensions[0].OuterName);
                 Assert.Empty(workspace.ElementExtensions[0].OuterNamespace);
                 Assert.Equal("ExtensionObject", workspace.ElementExtensions[1].OuterName);
-                Assert.Equal("http://www.w3.org/TR/html4/", workspace.ElementExtensions[1].OuterNamespace);
+                Assert.Equal(
+                    "http://www.w3.org/TR/html4/",
+                    workspace.ElementExtensions[1].OuterNamespace
+                );
             }
         }
 
@@ -220,7 +295,11 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullWorkspace_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("workspace", () => Formatter.LoadElementExtensionsEntryPoint(reader, (Workspace)null, int.MaxValue));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "workspace",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(reader, (Workspace)null, int.MaxValue)
+            );
         }
 
         [Fact]
@@ -228,18 +307,31 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var settings = new XmlReaderSettings { ConformanceLevel = ConformanceLevel.Fragment };
 
-            using (var stringReader = new StringReader(@"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<ExtensionObject><Value>10</Value></ExtensionObject><ExtensionObject xmlns=""http://www.w3.org/TR/html4/""><Value>11</Value></ExtensionObject>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader, settings))
             {
                 var document = new ServiceDocument();
                 Formatter.LoadElementExtensionsEntryPoint(reader, document, int.MaxValue);
 
                 Assert.Equal(2, document.ElementExtensions.Count);
-                Assert.Equal(10, document.ElementExtensions[0].GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject))).Value);
+                Assert.Equal(
+                    10,
+                    document
+                        .ElementExtensions[0]
+                        .GetObject<ExtensionObject>(new XmlSerializer(typeof(ExtensionObject)))
+                        .Value
+                );
                 Assert.Equal("ExtensionObject", document.ElementExtensions[0].OuterName);
                 Assert.Empty(document.ElementExtensions[0].OuterNamespace);
                 Assert.Equal("ExtensionObject", document.ElementExtensions[1].OuterName);
-                Assert.Equal("http://www.w3.org/TR/html4/", document.ElementExtensions[1].OuterNamespace);
+                Assert.Equal(
+                    "http://www.w3.org/TR/html4/",
+                    document.ElementExtensions[1].OuterNamespace
+                );
             }
         }
 
@@ -247,26 +339,83 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullDocument_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("document", () => Formatter.LoadElementExtensionsEntryPoint(reader, (ServiceDocument)null, int.MaxValue));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "document",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        reader,
+                        (ServiceDocument)null,
+                        int.MaxValue
+                    )
+            );
         }
 
         [Fact]
         public void LoadElementExtensions_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () => Formatter.LoadElementExtensionsEntryPoint(null, new InlineCategoriesDocument(), int.MaxValue));
-            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () => Formatter.LoadElementExtensionsEntryPoint(null, new ResourceCollectionInfo(), int.MaxValue));
-            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () => Formatter.LoadElementExtensionsEntryPoint(null, new ServiceDocument(), int.MaxValue));
-            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () => Formatter.LoadElementExtensionsEntryPoint(null, new Workspace(), int.MaxValue));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "readerOverUnparsedExtensions",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        null,
+                        new InlineCategoriesDocument(),
+                        int.MaxValue
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "readerOverUnparsedExtensions",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        null,
+                        new ResourceCollectionInfo(),
+                        int.MaxValue
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "readerOverUnparsedExtensions",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        null,
+                        new ServiceDocument(),
+                        int.MaxValue
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "readerOverUnparsedExtensions",
+                () => Formatter.LoadElementExtensionsEntryPoint(null, new Workspace(), int.MaxValue)
+            );
         }
 
         [Fact]
         public void LoadElementExtensions_NegativeMaxExtensionSize_ThrowsArgumentOutOfRangeException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () => Formatter.LoadElementExtensionsEntryPoint(reader, new InlineCategoriesDocument(), -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () => Formatter.LoadElementExtensionsEntryPoint(reader, new ResourceCollectionInfo(), -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () => Formatter.LoadElementExtensionsEntryPoint(reader, new ServiceDocument(), -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () => Formatter.LoadElementExtensionsEntryPoint(reader, new Workspace(), -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxExtensionSize",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        reader,
+                        new InlineCategoriesDocument(),
+                        -1
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxExtensionSize",
+                () =>
+                    Formatter.LoadElementExtensionsEntryPoint(
+                        reader,
+                        new ResourceCollectionInfo(),
+                        -1
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxExtensionSize",
+                () => Formatter.LoadElementExtensionsEntryPoint(reader, new ServiceDocument(), -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxExtensionSize",
+                () => Formatter.LoadElementExtensionsEntryPoint(reader, new Workspace(), -1)
+            );
         }
 
         [Fact]
@@ -290,55 +439,149 @@ namespace System.ServiceModel.Syndication.Tests
 
         [Theory]
         [MemberData(nameof(TryParseAttribute_TestData))]
-        public void TryParseAttribute_Categories_ReturnsFalse(string name, string ns, string value, string version)
+        public void TryParseAttribute_Categories_ReturnsFalse(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
-            Assert.False(Formatter.TryParseAttributeEntryPoint(name, ns, value, new InlineCategoriesDocument(), version));
-            Assert.False(Formatter.TryParseAttributeEntryPoint(name, ns, value, new ReferencedCategoriesDocument(), version));
+            Assert.False(
+                Formatter.TryParseAttributeEntryPoint(
+                    name,
+                    ns,
+                    value,
+                    new InlineCategoriesDocument(),
+                    version
+                )
+            );
+            Assert.False(
+                Formatter.TryParseAttributeEntryPoint(
+                    name,
+                    ns,
+                    value,
+                    new ReferencedCategoriesDocument(),
+                    version
+                )
+            );
         }
 
         [Fact]
         public void TryParseAttribute_NullCategories_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("categories", () => Formatter.TryParseAttributeEntryPoint("name", "namespace", "value", (CategoriesDocument)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "categories",
+                () =>
+                    Formatter.TryParseAttributeEntryPoint(
+                        "name",
+                        "namespace",
+                        "value",
+                        (CategoriesDocument)null,
+                        "version"
+                    )
+            );
         }
 
         [Theory]
         [MemberData(nameof(TryParseAttribute_TestData))]
-        public void TryParseAttribute_Collection_Success(string name, string ns, string value, string version)
+        public void TryParseAttribute_Collection_Success(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
-            Assert.False(Formatter.TryParseAttributeEntryPoint(name, ns, value, new ResourceCollectionInfo(), version));
+            Assert.False(
+                Formatter.TryParseAttributeEntryPoint(
+                    name,
+                    ns,
+                    value,
+                    new ResourceCollectionInfo(),
+                    version
+                )
+            );
         }
 
         [Fact]
         public void TryParseAttribute_NullCollection_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("collection", () => Formatter.TryParseAttributeEntryPoint("name", "namespace", "value", (ResourceCollectionInfo)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collection",
+                () =>
+                    Formatter.TryParseAttributeEntryPoint(
+                        "name",
+                        "namespace",
+                        "value",
+                        (ResourceCollectionInfo)null,
+                        "version"
+                    )
+            );
         }
 
         [Theory]
         [MemberData(nameof(TryParseAttribute_TestData))]
-        public void TryParseAttribute_Workspace_Success(string name, string ns, string value, string version)
+        public void TryParseAttribute_Workspace_Success(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
-            Assert.False(Formatter.TryParseAttributeEntryPoint(name, ns, value, new Workspace(), version));
+            Assert.False(
+                Formatter.TryParseAttributeEntryPoint(name, ns, value, new Workspace(), version)
+            );
         }
 
         [Fact]
         public void TryParseAttribute_NullWorkspace_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("workspace", () => Formatter.TryParseAttributeEntryPoint("name", "namespace", "value", (Workspace)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "workspace",
+                () =>
+                    Formatter.TryParseAttributeEntryPoint(
+                        "name",
+                        "namespace",
+                        "value",
+                        (Workspace)null,
+                        "version"
+                    )
+            );
         }
 
         [Theory]
         [MemberData(nameof(TryParseAttribute_TestData))]
-        public void TryParseAttribute_ServiceDocument_Success(string name, string ns, string value, string version)
+        public void TryParseAttribute_ServiceDocument_Success(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
-            Assert.False(Formatter.TryParseAttributeEntryPoint(name, ns, value, new ServiceDocument(), version));
+            Assert.False(
+                Formatter.TryParseAttributeEntryPoint(
+                    name,
+                    ns,
+                    value,
+                    new ServiceDocument(),
+                    version
+                )
+            );
         }
 
         [Fact]
         public void TryParseAttribute_NullDocument_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("document", () => Formatter.TryParseAttributeEntryPoint("name", "namespace", "value", (ServiceDocument)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "document",
+                () =>
+                    Formatter.TryParseAttributeEntryPoint(
+                        "name",
+                        "namespace",
+                        "value",
+                        (ServiceDocument)null,
+                        "version"
+                    )
+            );
         }
 
         public static IEnumerable<object[]> TryParseElement_TestData()
@@ -352,29 +595,51 @@ namespace System.ServiceModel.Syndication.Tests
         [MemberData(nameof(TryParseElement_TestData))]
         public void TryParseElement_Categories_ReturnsFalse(XmlReader reader, string version)
         {
-            Assert.False(Formatter.TryParseElementEntryPoint(reader, new InlineCategoriesDocument(), version));
-            Assert.False(Formatter.TryParseElementEntryPoint(reader, new ReferencedCategoriesDocument(), version));
+            Assert.False(
+                Formatter.TryParseElementEntryPoint(reader, new InlineCategoriesDocument(), version)
+            );
+            Assert.False(
+                Formatter.TryParseElementEntryPoint(
+                    reader,
+                    new ReferencedCategoriesDocument(),
+                    version
+                )
+            );
         }
 
         [Fact]
         public void TryParseElement_NullCategories_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("categories", () => Formatter.TryParseElementEntryPoint(reader, (CategoriesDocument)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "categories",
+                () =>
+                    Formatter.TryParseElementEntryPoint(reader, (CategoriesDocument)null, "version")
+            );
         }
 
         [Theory]
         [MemberData(nameof(TryParseElement_TestData))]
         public void TryParseElement_Collection_Success(XmlReader reader, string version)
         {
-            Assert.False(Formatter.TryParseElementEntryPoint(reader, new ResourceCollectionInfo(), version));
+            Assert.False(
+                Formatter.TryParseElementEntryPoint(reader, new ResourceCollectionInfo(), version)
+            );
         }
 
         [Fact]
         public void TryParseElement_NullCollection_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("collection", () => Formatter.TryParseElementEntryPoint(reader, (ResourceCollectionInfo)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collection",
+                () =>
+                    Formatter.TryParseElementEntryPoint(
+                        reader,
+                        (ResourceCollectionInfo)null,
+                        "version"
+                    )
+            );
         }
 
         [Theory]
@@ -388,21 +653,29 @@ namespace System.ServiceModel.Syndication.Tests
         public void TryParseElement_NullWorkspace_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("workspace", () => Formatter.TryParseElementEntryPoint(reader, (Workspace)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "workspace",
+                () => Formatter.TryParseElementEntryPoint(reader, (Workspace)null, "version")
+            );
         }
 
         [Theory]
         [MemberData(nameof(TryParseElement_TestData))]
         public void TryParseElement_ServiceDocument_Success(XmlReader reader, string version)
         {
-            Assert.False(Formatter.TryParseElementEntryPoint(reader, new ServiceDocument(), version));
+            Assert.False(
+                Formatter.TryParseElementEntryPoint(reader, new ServiceDocument(), version)
+            );
         }
 
         [Fact]
         public void TryParseElement_NullDocument_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>("document", () => Formatter.TryParseElementEntryPoint(reader, (ServiceDocument)null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "document",
+                () => Formatter.TryParseElementEntryPoint(reader, (ServiceDocument)null, "version")
+            );
         }
 
         public static IEnumerable<object[]> Version_TestData()
@@ -417,17 +690,22 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Categories_Success(string version)
         {
             var document = new InlineCategoriesDocument();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version)
+            );
 
             document.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             document.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </ServiceDocumentFormatterTests.ExtensionObject>
 <ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</ServiceDocumentFormatterTests.ExtensionObject>", writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version));
+</ServiceDocumentFormatterTests.ExtensionObject>",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version)
+            );
         }
 
         [Fact]
@@ -436,7 +714,15 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("categories", () => Formatter.WriteElementExtensionsEntryPoint(writer, (CategoriesDocument)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "categories",
+                    () =>
+                        Formatter.WriteElementExtensionsEntryPoint(
+                            writer,
+                            (CategoriesDocument)null,
+                            "version"
+                        )
+                );
             }
         }
 
@@ -445,17 +731,22 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Collection_Success(string version)
         {
             var collection = new ResourceCollectionInfo();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteElementExtensionsEntryPoint(writer, collection, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, collection, version)
+            );
 
             collection.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             collection.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </ServiceDocumentFormatterTests.ExtensionObject>
 <ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</ServiceDocumentFormatterTests.ExtensionObject>", writer => Formatter.WriteElementExtensionsEntryPoint(writer, collection, version));
+</ServiceDocumentFormatterTests.ExtensionObject>",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, collection, version)
+            );
         }
 
         [Fact]
@@ -464,7 +755,15 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("collection", () => Formatter.WriteElementExtensionsEntryPoint(writer, (ResourceCollectionInfo)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "collection",
+                    () =>
+                        Formatter.WriteElementExtensionsEntryPoint(
+                            writer,
+                            (ResourceCollectionInfo)null,
+                            "version"
+                        )
+                );
             }
         }
 
@@ -473,17 +772,22 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Workspace_Success(string version)
         {
             var workspace = new Workspace();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteElementExtensionsEntryPoint(writer, workspace, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, workspace, version)
+            );
 
             workspace.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             workspace.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </ServiceDocumentFormatterTests.ExtensionObject>
 <ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</ServiceDocumentFormatterTests.ExtensionObject>", writer => Formatter.WriteElementExtensionsEntryPoint(writer, workspace, version));
+</ServiceDocumentFormatterTests.ExtensionObject>",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, workspace, version)
+            );
         }
 
         [Fact]
@@ -492,7 +796,15 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("workspace", () => Formatter.WriteElementExtensionsEntryPoint(writer, (Workspace)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "workspace",
+                    () =>
+                        Formatter.WriteElementExtensionsEntryPoint(
+                            writer,
+                            (Workspace)null,
+                            "version"
+                        )
+                );
             }
         }
 
@@ -501,17 +813,22 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_ServiceDocument_Success(string version)
         {
             var document = new ServiceDocument();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version)
+            );
 
             document.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             document.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </ServiceDocumentFormatterTests.ExtensionObject>
 <ServiceDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</ServiceDocumentFormatterTests.ExtensionObject>", writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version));
+</ServiceDocumentFormatterTests.ExtensionObject>",
+                writer => Formatter.WriteElementExtensionsEntryPoint(writer, document, version)
+            );
         }
 
         [Fact]
@@ -520,17 +837,52 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("document", () => Formatter.WriteElementExtensionsEntryPoint(writer, (ServiceDocument)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "document",
+                    () =>
+                        Formatter.WriteElementExtensionsEntryPoint(
+                            writer,
+                            (ServiceDocument)null,
+                            "version"
+                        )
+                );
             }
         }
 
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteElementExtensionsEntryPoint(null, new InlineCategoriesDocument(), "version"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteElementExtensionsEntryPoint(null, new ResourceCollectionInfo(), "version"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteElementExtensionsEntryPoint(null, new ServiceDocument(), "version"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteElementExtensionsEntryPoint(null, new Workspace(), "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    Formatter.WriteElementExtensionsEntryPoint(
+                        null,
+                        new InlineCategoriesDocument(),
+                        "version"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    Formatter.WriteElementExtensionsEntryPoint(
+                        null,
+                        new ResourceCollectionInfo(),
+                        "version"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    Formatter.WriteElementExtensionsEntryPoint(
+                        null,
+                        new ServiceDocument(),
+                        "version"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => Formatter.WriteElementExtensionsEntryPoint(null, new Workspace(), "version")
+            );
         }
 
         [Theory]
@@ -538,12 +890,18 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Categories_Success(string version)
         {
             var document = new InlineCategoriesDocument();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version)
+            );
 
             document.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             document.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             document.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version)
+            );
         }
 
         [Fact]
@@ -552,7 +910,15 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("categories", () => Formatter.WriteAttributeExtensionsEntryPoint(writer, (CategoriesDocument)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "categories",
+                    () =>
+                        Formatter.WriteAttributeExtensionsEntryPoint(
+                            writer,
+                            (CategoriesDocument)null,
+                            "version"
+                        )
+                );
             }
         }
 
@@ -561,12 +927,18 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Collection_Success(string version)
         {
             var collection = new ResourceCollectionInfo();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, collection, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, collection, version)
+            );
 
             collection.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             collection.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             collection.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, collection, version));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, collection, version)
+            );
         }
 
         [Fact]
@@ -575,7 +947,15 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("collection", () => Formatter.WriteAttributeExtensionsEntryPoint(writer, (ResourceCollectionInfo)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "collection",
+                    () =>
+                        Formatter.WriteAttributeExtensionsEntryPoint(
+                            writer,
+                            (ResourceCollectionInfo)null,
+                            "version"
+                        )
+                );
             }
         }
 
@@ -584,12 +964,18 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Workspace_Success(string version)
         {
             var workspace = new Workspace();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, workspace, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, workspace, version)
+            );
 
             workspace.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             workspace.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             workspace.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, workspace, version));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, workspace, version)
+            );
         }
 
         [Fact]
@@ -598,7 +984,15 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("workspace", () => Formatter.WriteAttributeExtensionsEntryPoint(writer, (Workspace)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "workspace",
+                    () =>
+                        Formatter.WriteAttributeExtensionsEntryPoint(
+                            writer,
+                            (Workspace)null,
+                            "version"
+                        )
+                );
             }
         }
 
@@ -607,12 +1001,18 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_ServiceDocument_Success(string version)
         {
             var document = new ServiceDocument();
-            CompareHelper.AssertEqualWriteOutput("", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version)
+            );
 
             document.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             document.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             document.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, document, version)
+            );
         }
 
         [Fact]
@@ -621,123 +1021,256 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>("document", () => Formatter.WriteAttributeExtensionsEntryPoint(writer, (ServiceDocument)null, "version"));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "document",
+                    () =>
+                        Formatter.WriteAttributeExtensionsEntryPoint(
+                            writer,
+                            (ServiceDocument)null,
+                            "version"
+                        )
+                );
             }
         }
 
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteAttributeExtensionsEntryPoint(null, new InlineCategoriesDocument(), "version"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteAttributeExtensionsEntryPoint(null, new ResourceCollectionInfo(), "version"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteAttributeExtensionsEntryPoint(null, new ServiceDocument(), "version"));
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => Formatter.WriteAttributeExtensionsEntryPoint(null, new Workspace(), "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        null,
+                        new InlineCategoriesDocument(),
+                        "version"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        null,
+                        new ResourceCollectionInfo(),
+                        "version"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        null,
+                        new ServiceDocument(),
+                        "version"
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => Formatter.WriteAttributeExtensionsEntryPoint(null, new Workspace(), "version")
+            );
         }
 
         public class Formatter : ServiceDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(ServiceDocument document) : base(document) { }
+            public Formatter(ServiceDocument document)
+                : base(document) { }
 
-            public static SyndicationCategory CreateCategoryEntryPoint(InlineCategoriesDocument inlineCategories) => CreateCategory(inlineCategories);
+            public static SyndicationCategory CreateCategoryEntryPoint(
+                InlineCategoriesDocument inlineCategories
+            ) => CreateCategory(inlineCategories);
 
-            public static ResourceCollectionInfo CreateCollectionEntryPoint(Workspace workspace) => CreateCollection(workspace);
+            public static ResourceCollectionInfo CreateCollectionEntryPoint(Workspace workspace) =>
+                CreateCollection(workspace);
 
             public ServiceDocument CreateDocumentInstanceEntryPoint() => CreateDocumentInstance();
 
-            public static InlineCategoriesDocument CreateInlineCategoriesEntryPoint(ResourceCollectionInfo collection) => CreateInlineCategories(collection);
+            public static InlineCategoriesDocument CreateInlineCategoriesEntryPoint(
+                ResourceCollectionInfo collection
+            ) => CreateInlineCategories(collection);
 
-            public static ReferencedCategoriesDocument CreateReferencedCategoriesEntryPoint(ResourceCollectionInfo collection) => CreateReferencedCategories(collection);
+            public static ReferencedCategoriesDocument CreateReferencedCategoriesEntryPoint(
+                ResourceCollectionInfo collection
+            ) => CreateReferencedCategories(collection);
 
-            public static Workspace CreateWorkspaceEntryPoint(ServiceDocument document) => CreateWorkspace(document);
+            public static Workspace CreateWorkspaceEntryPoint(ServiceDocument document) =>
+                CreateWorkspace(document);
 
-            public static void LoadElementExtensionsEntryPoint(XmlReader reader, CategoriesDocument categories, int maxExtensionSize) => LoadElementExtensions(reader, categories, maxExtensionSize);
+            public static void LoadElementExtensionsEntryPoint(
+                XmlReader reader,
+                CategoriesDocument categories,
+                int maxExtensionSize
+            ) => LoadElementExtensions(reader, categories, maxExtensionSize);
 
-            public static void LoadElementExtensionsEntryPoint(XmlReader reader, ResourceCollectionInfo collection, int maxExtensionSize) => LoadElementExtensions(reader, collection, maxExtensionSize);
+            public static void LoadElementExtensionsEntryPoint(
+                XmlReader reader,
+                ResourceCollectionInfo collection,
+                int maxExtensionSize
+            ) => LoadElementExtensions(reader, collection, maxExtensionSize);
 
-            public static void LoadElementExtensionsEntryPoint(XmlReader reader, Workspace workspace, int maxExtensionSize) => LoadElementExtensions(reader, workspace, maxExtensionSize);
+            public static void LoadElementExtensionsEntryPoint(
+                XmlReader reader,
+                Workspace workspace,
+                int maxExtensionSize
+            ) => LoadElementExtensions(reader, workspace, maxExtensionSize);
 
-            public static void LoadElementExtensionsEntryPoint(XmlReader reader, ServiceDocument document, int maxExtensionSize) => LoadElementExtensions(reader, document, maxExtensionSize);
+            public static void LoadElementExtensionsEntryPoint(
+                XmlReader reader,
+                ServiceDocument document,
+                int maxExtensionSize
+            ) => LoadElementExtensions(reader, document, maxExtensionSize);
 
             public void SetDocumentEntryPoint(ServiceDocument document) => SetDocument(document);
 
-            public static bool TryParseAttributeEntryPoint(string name, string ns, string value, ServiceDocument document, string version)
+            public static bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                ServiceDocument document,
+                string version
+            )
             {
                 return TryParseAttribute(name, ns, value, document, version);
             }
 
-            public static bool TryParseAttributeEntryPoint(string name, string ns, string value, ResourceCollectionInfo collection, string version)
+            public static bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                ResourceCollectionInfo collection,
+                string version
+            )
             {
                 return TryParseAttribute(name, ns, value, collection, version);
             }
 
-            public static bool TryParseAttributeEntryPoint(string name, string ns, string value, CategoriesDocument categories, string version)
+            public static bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                CategoriesDocument categories,
+                string version
+            )
             {
                 return TryParseAttribute(name, ns, value, categories, version);
             }
 
-            public static bool TryParseAttributeEntryPoint(string name, string ns, string value, Workspace workspace, string version)
+            public static bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                Workspace workspace,
+                string version
+            )
             {
                 return TryParseAttribute(name, ns, value, workspace, version);
             }
 
-            public static bool TryParseElementEntryPoint(XmlReader reader, ServiceDocument document, string version)
+            public static bool TryParseElementEntryPoint(
+                XmlReader reader,
+                ServiceDocument document,
+                string version
+            )
             {
                 return TryParseElement(reader, document, version);
             }
 
-            public static bool TryParseElementEntryPoint(XmlReader reader, ResourceCollectionInfo collection, string version)
+            public static bool TryParseElementEntryPoint(
+                XmlReader reader,
+                ResourceCollectionInfo collection,
+                string version
+            )
             {
                 return TryParseElement(reader, collection, version);
             }
 
-            public static bool TryParseElementEntryPoint(XmlReader reader, CategoriesDocument categories, string version)
+            public static bool TryParseElementEntryPoint(
+                XmlReader reader,
+                CategoriesDocument categories,
+                string version
+            )
             {
                 return TryParseElement(reader, categories, version);
             }
 
-            public static bool TryParseElementEntryPoint(XmlReader reader, Workspace workspace, string version)
+            public static bool TryParseElementEntryPoint(
+                XmlReader reader,
+                Workspace workspace,
+                string version
+            )
             {
                 return TryParseElement(reader, workspace, version);
             }
 
-            public static void WriteAttributeExtensionsEntryPoint(XmlWriter writer, CategoriesDocument categories, string version)
+            public static void WriteAttributeExtensionsEntryPoint(
+                XmlWriter writer,
+                CategoriesDocument categories,
+                string version
+            )
             {
                 WriteAttributeExtensions(writer, categories, version);
             }
 
-            public static void WriteAttributeExtensionsEntryPoint(XmlWriter writer, ResourceCollectionInfo collection, string version)
+            public static void WriteAttributeExtensionsEntryPoint(
+                XmlWriter writer,
+                ResourceCollectionInfo collection,
+                string version
+            )
             {
                 WriteAttributeExtensions(writer, collection, version);
             }
 
-            public static void WriteAttributeExtensionsEntryPoint(XmlWriter writer, ServiceDocument document, string version)
+            public static void WriteAttributeExtensionsEntryPoint(
+                XmlWriter writer,
+                ServiceDocument document,
+                string version
+            )
             {
                 WriteAttributeExtensions(writer, document, version);
             }
 
-            public static void WriteAttributeExtensionsEntryPoint(XmlWriter writer, Workspace workspace, string version)
+            public static void WriteAttributeExtensionsEntryPoint(
+                XmlWriter writer,
+                Workspace workspace,
+                string version
+            )
             {
                 WriteAttributeExtensions(writer, workspace, version);
             }
 
-            public static void WriteElementExtensionsEntryPoint(XmlWriter writer, CategoriesDocument categories, string version)
+            public static void WriteElementExtensionsEntryPoint(
+                XmlWriter writer,
+                CategoriesDocument categories,
+                string version
+            )
             {
                 WriteElementExtensions(writer, categories, version);
             }
 
-            public static void WriteElementExtensionsEntryPoint(XmlWriter writer, ResourceCollectionInfo collection, string version)
+            public static void WriteElementExtensionsEntryPoint(
+                XmlWriter writer,
+                ResourceCollectionInfo collection,
+                string version
+            )
             {
                 WriteElementExtensions(writer, collection, version);
             }
 
-            public static void WriteElementExtensionsEntryPoint(XmlWriter writer, ServiceDocument document, string version)
+            public static void WriteElementExtensionsEntryPoint(
+                XmlWriter writer,
+                ServiceDocument document,
+                string version
+            )
             {
                 WriteElementExtensions(writer, document, version);
             }
 
-            public static void WriteElementExtensionsEntryPoint(XmlWriter writer, Workspace workspace, string version)
+            public static void WriteElementExtensionsEntryPoint(
+                XmlWriter writer,
+                Workspace workspace,
+                string version
+            )
             {
                 WriteElementExtensions(writer, workspace, version);
             }

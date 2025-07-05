@@ -13,9 +13,13 @@ internal sealed class DefaultViewCompilerProvider : IViewCompilerProvider
 
     public DefaultViewCompilerProvider(
         ApplicationPartManager applicationPartManager,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
-        _compiler = new DefaultViewCompiler(applicationPartManager, loggerFactory.CreateLogger<DefaultViewCompiler>());
+        _compiler = new DefaultViewCompiler(
+            applicationPartManager,
+            loggerFactory.CreateLogger<DefaultViewCompiler>()
+        );
     }
 
     internal DefaultViewCompiler Compiler => _compiler;

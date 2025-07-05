@@ -15,59 +15,32 @@ namespace System.ServiceModel.Description
         string message;
         string stackTrace;
 
-
         [DataMember(Name = "ExceptionDetail")]
         public ExceptionDetail ExceptionDetail
         {
-           get
-           {
-              return exceptionDetail;
-           }
-           set
-           {
-              exceptionDetail = value;
-           }
+            get { return exceptionDetail; }
+            set { exceptionDetail = value; }
         }
 
         [DataMember(Name = "ExceptionType")]
         public string ExceptionType
         {
-           get
-           {
-              return exceptionType;
-           }
-           set
-           {
-              exceptionType = value;
-           }
+            get { return exceptionType; }
+            set { exceptionType = value; }
         }
 
         [DataMember(Name = "Message")]
         public string Message
         {
-           get
-           {
-               return message;
-           }
-           set
-           {
-               message = value;
-           }
+            get { return message; }
+            set { message = value; }
         }
 
         [DataMember(Name = "StackTrace")]
         public string StackTrace
         {
-           get
-           {
-               return stackTrace;
-           }
-           set
-           {
-               stackTrace = value;
-           }
+            get { return stackTrace; }
+            set { stackTrace = value; }
         }
     }
-
-
 }

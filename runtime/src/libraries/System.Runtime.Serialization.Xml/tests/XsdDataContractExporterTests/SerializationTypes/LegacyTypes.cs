@@ -1,9 +1,9 @@
 using System;
-using System.Xml;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security;
 using System.Runtime.Serialization;
+using System.Security;
+using System.Xml;
 
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests
@@ -36,7 +36,4 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         IntPtr iPtr;
         DBNull dbNull;
     }
-
 }
-
-

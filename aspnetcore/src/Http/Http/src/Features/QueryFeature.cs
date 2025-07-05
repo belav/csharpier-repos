@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Http.Features;
 public class QueryFeature : IQueryFeature
 {
     // Lambda hoisted to static readonly field to improve inlining https://github.com/dotnet/roslyn/issues/13624
-    private static readonly Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature = f => null;
+    private static readonly Func<IFeatureCollection, IHttpRequestFeature?> _nullRequestFeature =
+        f => null;
 
     private FeatureReferences<IHttpRequestFeature> _features;
 
@@ -57,7 +58,10 @@ public class QueryFeature : IQueryFeature
             }
 
             var current = HttpRequestFeature.QueryString;
-            if (_parsedValues == null || !string.Equals(_original, current, StringComparison.Ordinal))
+            if (
+                _parsedValues == null
+                || !string.Equals(_original, current, StringComparison.Ordinal)
+            )
             {
                 _original = current;
 
@@ -94,7 +98,9 @@ public class QueryFeature : IQueryFeature
     /// <param name="queryString">The raw query string value, with or without the leading '?'.</param>
     /// <returns>A collection of parsed keys and values, null if there are no entries.</returns>
     [SkipLocalsInit]
-    internal static AdaptiveCapacityDictionary<string, StringValues>? ParseNullableQueryInternal(string? queryString)
+    internal static AdaptiveCapacityDictionary<string, StringValues>? ParseNullableQueryInternal(
+        string? queryString
+    )
     {
         if (string.IsNullOrEmpty(queryString) || (queryString.Length == 1 && queryString[0] == '?'))
         {
@@ -108,9 +114,7 @@ public class QueryFeature : IQueryFeature
             accumulator.Append(pair.DecodeName().Span, pair.DecodeValue().Span);
         }
 
-        return accumulator.HasValues
-            ? accumulator.GetResults()
-            : null;
+        return accumulator.HasValues ? accumulator.GetResults() : null;
     }
 
     internal struct KvpAccumulator
@@ -122,8 +126,8 @@ public class QueryFeature : IQueryFeature
         private AdaptiveCapacityDictionary<string, StringValues> _accumulator;
         private AdaptiveCapacityDictionary<string, List<string>> _expandingAccumulator;
 
-        public void Append(ReadOnlySpan<char> key, ReadOnlySpan<char> value)
-            => Append(key.ToString(), value.ToString());
+        public void Append(ReadOnlySpan<char> key, ReadOnlySpan<char> value) =>
+            Append(key.ToString(), value.ToString());
 
         /// <summary>
         /// This API supports infrastructure and is not intended to be used
@@ -133,7 +137,9 @@ public class QueryFeature : IQueryFeature
         {
             if (_accumulator is null)
             {
-                _accumulator = new AdaptiveCapacityDictionary<string, StringValues>(StringComparer.OrdinalIgnoreCase);
+                _accumulator = new AdaptiveCapacityDictionary<string, StringValues>(
+                    StringComparer.OrdinalIgnoreCase
+                );
             }
 
             if (!_accumulator.TryGetValue(key, out var values))
@@ -160,7 +166,10 @@ public class QueryFeature : IQueryFeature
 
                 if (_expandingAccumulator is null)
                 {
-                    _expandingAccumulator = new AdaptiveCapacityDictionary<string, List<string>>(capacity: 5, StringComparer.OrdinalIgnoreCase);
+                    _expandingAccumulator = new AdaptiveCapacityDictionary<string, List<string>>(
+                        capacity: 5,
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
 
                 // Already 2 (1 existing + the new one) entries so use List's expansion mechanism for more
@@ -211,7 +220,11 @@ public class QueryFeature : IQueryFeature
                 }
             }
 
-            return _accumulator ?? new AdaptiveCapacityDictionary<string, StringValues>(0, StringComparer.OrdinalIgnoreCase);
+            return _accumulator
+                ?? new AdaptiveCapacityDictionary<string, StringValues>(
+                    0,
+                    StringComparer.OrdinalIgnoreCase
+                );
         }
     }
 }

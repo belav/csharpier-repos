@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Runtime.CompilerServices;
@@ -10,7 +11,6 @@ using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Sample
 {
@@ -22,9 +22,11 @@ namespace Sample
         public override bool BrowserOnly => false;
 
         Measurement[] measurements;
+
         public JSInteropTask()
         {
-            measurements = new Measurement[] {
+            measurements = new Measurement[]
+            {
                 new LegacyExportIntMeasurement(),
                 new JSExportIntMeasurement(),
                 new LegacyExportStringMeasurement(),
@@ -42,8 +44,13 @@ namespace Sample
         {
             public override int InitialSamples => 3;
             public override string Name => "LegacyExportInt";
+
             // because of the aggressive trimming of methods reachable via JS legacy bind_static_method
-            [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, "Sample.ImportsExportsHelper", Test.AssemblyName)]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicMethods,
+                "Sample.ImportsExportsHelper",
+                Test.AssemblyName
+            )]
             public override void RunStep()
             {
                 ImportsExportsHelper.RunLegacyExportInt(10000);
@@ -54,6 +61,7 @@ namespace Sample
         {
             public override int InitialSamples => 10;
             public override string Name => "JSExportInt";
+
             public override void RunStep()
             {
                 ImportsExportsHelper.RunJSExportInt(10000);
@@ -66,7 +74,11 @@ namespace Sample
             public override string Name => "LegacyExportString";
 
             // because of the aggressive trimming of methods reachable via JS legacy bind_static_method
-            [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, "Sample.ImportsExportsHelper", Test.AssemblyName)]
+            [DynamicDependency(
+                DynamicallyAccessedMemberTypes.PublicMethods,
+                "Sample.ImportsExportsHelper",
+                Test.AssemblyName
+            )]
             public override void RunStep()
             {
                 ImportsExportsHelper.RunLegacyExportString(10000);
@@ -77,6 +89,7 @@ namespace Sample
         {
             public override int InitialSamples => 3;
             public override string Name => "JSExportString";
+
             public override void RunStep()
             {
                 ImportsExportsHelper.RunJSExportString(10000);
@@ -87,6 +100,7 @@ namespace Sample
         {
             public override int InitialSamples => 10;
             public override string Name => "JSImportInt";
+
             public override void RunStep()
             {
                 for (var i = 0; i < 10000; i++)
@@ -100,6 +114,7 @@ namespace Sample
         {
             public override int InitialSamples => 3;
             public override string Name => "JSImportString";
+
             public override void RunStep()
             {
                 for (var i = 0; i < 10000; i++)
@@ -114,11 +129,23 @@ namespace Sample
             private DateTime start = DateTime.Now;
             public override int InitialSamples => 3;
             public override string Name => "JSImportManyArgs";
+
             public override void RunStep()
             {
                 for (var i = 0; i < 10000; i++)
                 {
-                    ImportsExportsHelper.ImportTargetManyArgs(currentStep, currentStep + 1, "interned", i + "A" + currentStep, IntPtr.Zero, true, 1L, null, 3.14, start);
+                    ImportsExportsHelper.ImportTargetManyArgs(
+                        currentStep,
+                        currentStep + 1,
+                        "interned",
+                        i + "A" + currentStep,
+                        IntPtr.Zero,
+                        true,
+                        1L,
+                        null,
+                        3.14,
+                        start
+                    );
                 }
             }
         }
@@ -128,6 +155,7 @@ namespace Sample
             public override bool HasRunStepAsync => true;
             public override int InitialSamples => 1;
             public override string Name => "JSImportTask";
+
             public override async Task RunStepAsync()
             {
                 for (var i = 0; i < 10000; i++)
@@ -145,6 +173,7 @@ namespace Sample
             public override bool HasRunStepAsync => true;
             public override int InitialSamples => 1;
             public override string Name => "JSImportTaskFail";
+
             public override async Task RunStepAsync()
             {
                 for (var i = 0; i < 10000; i++)
@@ -168,6 +197,7 @@ namespace Sample
         {
             public override int InitialSamples => 1;
             public override string Name => "JSImportFail";
+
             public override void RunStep()
             {
                 for (var i = 0; i < 10000; i++)
@@ -218,10 +248,18 @@ namespace Sample
         }
 
         [JSImport("Sample.Test.importTargetManyArgs", "main.js")]
-        public static partial double ImportTargetManyArgs(int arg1, int arg2, string arg3, string arg4, IntPtr arg5, bool arg6,
-            [JSMarshalAs<JSType.Number>] long arg7, int? arg8, double arg9,
-            [JSMarshalAs<JSType.Date>] DateTime arg10);
-
+        public static partial double ImportTargetManyArgs(
+            int arg1,
+            int arg2,
+            string arg3,
+            string arg4,
+            IntPtr arg5,
+            bool arg6,
+            [JSMarshalAs<JSType.Number>] long arg7,
+            int? arg8,
+            double arg9,
+            [JSMarshalAs<JSType.Date>] DateTime arg10
+        );
 
         [JSExport]
         public static int JSExportTargetInt(int value)

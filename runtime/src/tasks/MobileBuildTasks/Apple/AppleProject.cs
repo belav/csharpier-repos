@@ -40,18 +40,24 @@ namespace Microsoft.Apple.Build
         public string SdkRoot
         {
             get => sdkRoot;
-            set
-            {
-                sdkRoot = value;
-            }
+            set { sdkRoot = value; }
         }
 
-        public void Build(string workingDir, ClangBuildOptions buildOptions, bool stripDebugSymbols = false)
+        public void Build(
+            string workingDir,
+            ClangBuildOptions buildOptions,
+            bool stripDebugSymbols = false
+        )
         {
             Build(workingDir, buildOptions, defaultMinOSVersion, stripDebugSymbols);
         }
 
-        public void Build(string workingDir, ClangBuildOptions buildOptions, string minOSVersion, bool stripDebugSymbols = false)
+        public void Build(
+            string workingDir,
+            ClangBuildOptions buildOptions,
+            string minOSVersion,
+            bool stripDebugSymbols = false
+        )
         {
             string clangArgs = BuildClangArgs(buildOptions, minOSVersion);
             Utils.RunProcess(logger, "xcrun", workingDir: workingDir, args: clangArgs);
@@ -65,10 +71,19 @@ namespace Microsoft.Apple.Build
 
             if (targetOS == "maccatalyst")
             {
-                string frameworkPath = Path.Combine(SdkRoot, "System", "iOSSupport", "System", "Library", "Frameworks");
+                string frameworkPath = Path.Combine(
+                    SdkRoot,
+                    "System",
+                    "iOSSupport",
+                    "System",
+                    "Library",
+                    "Frameworks"
+                );
                 string iosLibPath = Path.Combine(SdkRoot, "System", "iOSSupport", "usr", "lib");
 
-                buildOptions.CompilerArguments.Add($"-target {targetAbi}-apple-ios{minOSVersion}-macabi");
+                buildOptions.CompilerArguments.Add(
+                    $"-target {targetAbi}-apple-ios{minOSVersion}-macabi"
+                );
                 buildOptions.CompilerArguments.Add($"-isysroot {SdkRoot}");
                 buildOptions.CompilerArguments.Add($"-iframework {frameworkPath}");
 
@@ -82,23 +97,23 @@ namespace Microsoft.Apple.Build
                 buildOptions.CompilerArguments.Add($"-arch {targetAbi}");
             }
 
-            foreach(string compilerArg in buildOptions.CompilerArguments)
+            foreach (string compilerArg in buildOptions.CompilerArguments)
             {
                 ret.Append(compilerArg);
                 ret.Append(' ');
             }
 
-            foreach(string includeDir in buildOptions.IncludePaths)
+            foreach (string includeDir in buildOptions.IncludePaths)
             {
                 ret.Append($"-I {includeDir} ");
             }
 
-            foreach(string linkerArg in buildOptions.LinkerArguments)
+            foreach (string linkerArg in buildOptions.LinkerArguments)
             {
                 ret.Append($"{linkerArg} ");
             }
 
-            foreach(string source in buildOptions.Sources)
+            foreach (string source in buildOptions.Sources)
             {
                 string ext = Path.GetExtension(source);
 
@@ -115,7 +130,7 @@ namespace Microsoft.Apple.Build
             }
 
             HashSet<string> libDirs = new HashSet<string>();
-            foreach(string lib in buildOptions.NativeLibraryPaths)
+            foreach (string lib in buildOptions.NativeLibraryPaths)
             {
                 string rootPath = Path.GetDirectoryName(lib)!;
                 string libName = Path.GetFileName(lib);
@@ -162,7 +177,7 @@ namespace Microsoft.Apple.Build
                 "tvos" => "tvos",
                 "tvossimulator" => "tvos-simulator",
                 "maccatalyst" => "maccatalyst",
-                _ => throw new ArgumentException($"{os} is not supported")
+                _ => throw new ArgumentException($"{os} is not supported"),
             };
     }
 }

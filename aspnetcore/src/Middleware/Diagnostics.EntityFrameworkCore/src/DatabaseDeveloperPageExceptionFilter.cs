@@ -32,7 +32,10 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
     /// </summary>
     /// <param name="logger">The <see cref="ILogger"/>.</param>
     /// <param name="options">The <see cref="IOptions{DatabaseErrorPageOptions}"/>.</param>
-    public DatabaseDeveloperPageExceptionFilter(ILogger<DatabaseDeveloperPageExceptionFilter> logger, IOptions<DatabaseErrorPageOptions> options)
+    public DatabaseDeveloperPageExceptionFilter(
+        ILogger<DatabaseDeveloperPageExceptionFilter> logger,
+        IOptions<DatabaseErrorPageOptions> options
+    )
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
@@ -44,8 +47,9 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
     /// <inheritdoc />
     public async Task HandleExceptionAsync(ErrorContext errorContext, Func<ErrorContext, Task> next)
     {
-        var dbException = errorContext.Exception as DbException
-              ?? errorContext.Exception?.InnerException as DbException;
+        var dbException =
+            errorContext.Exception as DbException
+            ?? errorContext.Exception?.InnerException as DbException;
 
         if (dbException == null)
         {
@@ -56,7 +60,8 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
         try
         {
             // Look for DbContext classes registered in the service provider
-            var registeredContexts = errorContext.HttpContext.RequestServices.GetServices<DbContextOptions>()
+            var registeredContexts = errorContext
+                .HttpContext.RequestServices.GetServices<DbContextOptions>()
                 .Select(o => o.ContextType)
                 .Distinct(); // Workaround for https://github.com/dotnet/efcore/issues/22341
 
@@ -66,7 +71,10 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
 
                 foreach (var registeredContext in registeredContexts)
                 {
-                    var details = await errorContext.HttpContext.GetContextDetailsAsync(registeredContext, _logger);
+                    var details = await errorContext.HttpContext.GetContextDetailsAsync(
+                        registeredContext,
+                        _logger
+                    );
 
                     if (details != null)
                     {
@@ -78,7 +86,12 @@ public sealed class DatabaseDeveloperPageExceptionFilter : IDeveloperPageExcepti
                 {
                     var page = new DatabaseErrorPage
                     {
-                        Model = new DatabaseErrorPageModel(dbException, contextDetails, _options, errorContext.HttpContext.Request.PathBase)
+                        Model = new DatabaseErrorPageModel(
+                            dbException,
+                            contextDetails,
+                            _options,
+                            errorContext.HttpContext.Request.PathBase
+                        ),
                     };
 
                     await page.ExecuteAsync(errorContext.HttpContext);

@@ -24,11 +24,16 @@ namespace System.Collections.Frozen
             int minimumLength,
             int maximumLengthDiff,
             int hashIndex = -1,
-            int hashCount = -1) :
-            base(comparer)
+            int hashCount = -1
+        )
+            : base(comparer)
         {
             Debug.Assert(keys.Length != 0 && keys.Length == values.Length);
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             // we need an extra copy, as the order of items will change
             _keys = new string[keys.Length];
@@ -66,7 +71,9 @@ namespace System.Collections.Frozen
         private protected abstract int GetHashCode(string s);
         private protected override string[] KeysCore => _keys;
         private protected override TValue[] ValuesCore => _values;
+
         private protected override Enumerator GetEnumeratorCore() => new Enumerator(_keys, _values);
+
         private protected override int CountCore => _hashTable.Count;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

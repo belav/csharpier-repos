@@ -1,13 +1,13 @@
 //
 // System.Drawing.Design.FontNameEditor.cs
-// 
+//
 // Authors:
 //   Martin Willemoes Hansen (mwh@sysrq.dk)
 //   Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-// 
+//
 // (C) 2003 Martin Willemoes Hansen
 // (C) 2003 Andreas Nahr
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,41 +31,48 @@
 //
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace System.Drawing.Design
 {
-	public class FontNameEditor : UITypeEditor
-	{
-		private const String PreviewString = "Ab";
+    public class FontNameEditor : UITypeEditor
+    {
+        private const String PreviewString = "Ab";
 
-		public  FontNameEditor()
-		{
-		}
+        public FontNameEditor() { }
 
-		public override bool GetPaintValueSupported (ITypeDescriptorContext context)
-		{
-			return true;
-		}
+        public override bool GetPaintValueSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-		public override void PaintValue (PaintValueEventArgs e)
-		{
-			Graphics G = e.Graphics;
+        public override void PaintValue(PaintValueEventArgs e)
+        {
+            Graphics G = e.Graphics;
 
-			// Draw the background 
-			G.FillRectangle (SystemBrushes.ActiveCaption, e.Bounds);
+            // Draw the background
+            G.FillRectangle(SystemBrushes.ActiveCaption, e.Bounds);
 
-			// Draw the sample string
-			string fontName = e.Value as string;
-			if (fontName != null && fontName.Length > 0) {
-				using (Font font = new Font (fontName, e.Bounds.Height, FontStyle.Regular, GraphicsUnit.Pixel)) {
-					G.DrawString (PreviewString, font, SystemBrushes.ActiveCaptionText, e.Bounds);
-				}
-			}
+            // Draw the sample string
+            string fontName = e.Value as string;
+            if (fontName != null && fontName.Length > 0)
+            {
+                using (
+                    Font font = new Font(
+                        fontName,
+                        e.Bounds.Height,
+                        FontStyle.Regular,
+                        GraphicsUnit.Pixel
+                    )
+                )
+                {
+                    G.DrawString(PreviewString, font, SystemBrushes.ActiveCaptionText, e.Bounds);
+                }
+            }
 
-			// Draw the border again to ensure it is not overlapped by the text
-			G.DrawRectangle (Pens.Black, e.Bounds);
-		}
-	}
+            // Draw the border again to ensure it is not overlapped by the text
+            G.DrawRectangle(Pens.Black, e.Bounds);
+        }
+    }
 }

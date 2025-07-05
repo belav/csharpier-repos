@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -14,9 +14,9 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {
@@ -26,7 +26,7 @@ namespace System.Linq.Parallel
         // (It is not called multiple time if repartitionings occur)
         internal static void LogicalQueryExecutionBegin(int queryID)
         {
-            //We call NOCTD to inform the debugger that multiple threads will most likely be required to 
+            //We call NOCTD to inform the debugger that multiple threads will most likely be required to
             //execute this query.  We do not attempt to run the query even if we think we could, for simplicity and consistency.
 #if !PFX_LEGACY_3_5 && !SILVERLIGHT
             Debugger.NotifyOfCrossThreadDependency();
@@ -36,7 +36,6 @@ namespace System.Linq.Parallel
             PlinqEtwProvider.Log.ParallelQueryBegin(queryID);
 #endif
         }
-
 
         // This method is called once per execution of a logical query.
         // (It is not called multiple time if repartitionings occur)

@@ -17,23 +17,26 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var valueProvider = new SimpleValueProvider
-            {
-                { "someName[foo]", "42" },
-                { "someName[baz]", "200" }
-            };
+        {
+            { "someName[foo]", "42" },
+            { "someName[baz]", "200" },
+        };
         var bindingContext = GetModelBindingContext(valueProvider);
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
 
         // Act
         var collectionResult = await binder.BindComplexCollectionFromIndexes(
             bindingContext,
-            new[] { "foo", "bar", "baz" });
+            new[] { "foo", "bar", "baz" }
+        );
 
         // Assert
         Assert.Equal(new[] { 42, 0, 200 }, collectionResult.Model.ToArray());
 
         // This requires a non-default IValidationStrategy
-        var strategy = Assert.IsType<ExplicitIndexCollectionValidationStrategy>(collectionResult.ValidationStrategy);
+        var strategy = Assert.IsType<ExplicitIndexCollectionValidationStrategy>(
+            collectionResult.ValidationStrategy
+        );
         Assert.Equal(new[] { "foo", "bar", "baz" }, strategy.ElementKeys);
     }
 
@@ -42,16 +45,19 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var valueProvider = new SimpleValueProvider
-            {
-                { "someName[0]", "42" },
-                { "someName[1]", "100" },
-                { "someName[3]", "400" }
-            };
+        {
+            { "someName[0]", "42" },
+            { "someName[1]", "100" },
+            { "someName[3]", "400" },
+        };
         var bindingContext = GetModelBindingContext(valueProvider);
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
 
         // Act
-        var boundCollection = await binder.BindComplexCollectionFromIndexes(bindingContext, indexNames: null);
+        var boundCollection = await binder.BindComplexCollectionFromIndexes(
+            bindingContext,
+            indexNames: null
+        );
 
         // Assert
         Assert.Equal(new[] { 42, 100 }, boundCollection.Model.ToArray());
@@ -67,12 +73,12 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var valueProvider = new SimpleValueProvider
-            {
-                { "someName.index", new[] { "foo", "bar", "baz" } },
-                { "someName[foo]", "42" },
-                { "someName[bar]", "100" },
-                { "someName[baz]", "200" }
-            };
+        {
+            { "someName.index", new[] { "foo", "bar", "baz" } },
+            { "someName[foo]", "42" },
+            { "someName[bar]", "100" },
+            { "someName[baz]", "200" },
+        };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
@@ -92,16 +98,18 @@ public class CollectionModelBinderTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task BindModel_ComplexCollection_BindingContextModelNonNull_Succeeds(bool isReadOnly)
+    public async Task BindModel_ComplexCollection_BindingContextModelNonNull_Succeeds(
+        bool isReadOnly
+    )
     {
         // Arrange
         var valueProvider = new SimpleValueProvider
-            {
-                { "someName.index", new[] { "foo", "bar", "baz" } },
-                { "someName[foo]", "42" },
-                { "someName[bar]", "100" },
-                { "someName[baz]", "200" }
-            };
+        {
+            { "someName.index", new[] { "foo", "bar", "baz" } },
+            { "someName[foo]", "42" },
+            { "someName[bar]", "100" },
+            { "someName[baz]", "200" },
+        };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
         var list = new List<int>();
@@ -127,9 +135,9 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var valueProvider = new SimpleValueProvider
-            {
-                { "someName", new[] { "42", "100", "200" } }
-            };
+        {
+            { "someName", new[] { "42", "100", "200" } },
+        };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
@@ -147,13 +155,15 @@ public class CollectionModelBinderTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task BindModel_SimpleCollection_BindingContextModelNonNull_Succeeds(bool isReadOnly)
+    public async Task BindModel_SimpleCollection_BindingContextModelNonNull_Succeeds(
+        bool isReadOnly
+    )
     {
         // Arrange
         var valueProvider = new SimpleValueProvider
-            {
-                { "someName", new[] { "42", "100", "200" } }
-            };
+        {
+            { "someName", new[] { "42", "100", "200" } },
+        };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
         var list = new List<int>();
@@ -175,10 +185,7 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
-        var valueProvider = new SimpleValueProvider
-            {
-                { "someName", null },
-            };
+        var valueProvider = new SimpleValueProvider { { "someName", null } };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly: false);
 
         // Act
@@ -199,7 +206,10 @@ public class CollectionModelBinderTest
         var context = GetModelBindingContext(new SimpleValueProvider());
 
         // Act
-        var boundCollection = await binder.BindSimpleCollection(context, new ValueProviderResult(new string[0]));
+        var boundCollection = await binder.BindSimpleCollection(
+            context,
+            new ValueProviderResult(new string[0])
+        );
 
         // Assert
         Assert.NotNull(boundCollection.Model);
@@ -211,12 +221,11 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
-        var valueProvider = new SimpleValueProvider
-            {
-                { "someName", "420" },
-            };
+        var valueProvider = new SimpleValueProvider { { "someName", "420" } };
         var context = GetModelBindingContext(valueProvider);
-        var valueProviderResult = new ValueProviderResult(new[] { null, "42", "", "100", null, "200" });
+        var valueProviderResult = new ValueProviderResult(
+            new[] { null, "42", "", "100", null, "200" }
+        );
 
         // Act
         var boundCollection = await binder.BindSimpleCollection(context, valueProviderResult);
@@ -227,7 +236,9 @@ public class CollectionModelBinderTest
     }
 
     private IActionResult ActionWithListParameter(List<string> parameter) => null;
-    private IActionResult ActionWithListParameterDefaultValue(List<string> parameter = null) => null;
+
+    private IActionResult ActionWithListParameterDefaultValue(List<string> parameter = null) =>
+        null;
 
     [Theory]
     [InlineData(false, false)]
@@ -235,13 +246,15 @@ public class CollectionModelBinderTest
     [InlineData(true, false)]
     public async Task CollectionModelBinder_CreatesEmptyCollection_IfIsTopLevelObject(
         bool allowValidatingTopLevelNodes,
-        bool isBindingRequired)
+        bool isBindingRequired
+    )
     {
         // Arrange
         var binder = new CollectionModelBinder<string>(
             new StubModelBinder(result: ModelBindingResult.Failed()),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes);
+            allowValidatingTopLevelNodes
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -251,7 +264,10 @@ public class CollectionModelBinderTest
 
         var metadataProvider = new TestModelMetadataProvider();
         var parameter = typeof(CollectionModelBinderTest)
-            .GetMethod(nameof(ActionWithListParameter), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(ActionWithListParameter),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
         metadataProvider
             .ForParameter(parameter)
@@ -276,7 +292,8 @@ public class CollectionModelBinderTest
         var binder = new CollectionModelBinder<string>(
             new StubModelBinder(result: ModelBindingResult.Failed()),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes: true);
+            allowValidatingTopLevelNodes: true
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -285,11 +302,12 @@ public class CollectionModelBinderTest
 
         var metadataProvider = new TestModelMetadataProvider();
         var parameter = typeof(CollectionModelBinderTest)
-            .GetMethod(nameof(ActionWithListParameter), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(ActionWithListParameter),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
-        metadataProvider
-            .ForParameter(parameter)
-            .BindingDetails(b => b.IsBindingRequired = true);
+        metadataProvider.ForParameter(parameter).BindingDetails(b => b.IsBindingRequired = true);
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForParameter(parameter);
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
@@ -304,7 +322,10 @@ public class CollectionModelBinderTest
         var keyValuePair = Assert.Single(bindingContext.ModelState);
         Assert.Equal("modelName", keyValuePair.Key);
         var error = Assert.Single(keyValuePair.Value.Errors);
-        Assert.Equal("A value for the 'fieldName' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'fieldName' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     // Setup like CollectionModelBinder_CreatesEmptyCollection_IfIsTopLevelObject except
@@ -316,7 +337,8 @@ public class CollectionModelBinderTest
         var binder = new CollectionModelBinder<string>(
             new StubModelBinder(result: ModelBindingResult.Failed()),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes: true);
+            allowValidatingTopLevelNodes: true
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -326,11 +348,12 @@ public class CollectionModelBinderTest
 
         var metadataProvider = new TestModelMetadataProvider();
         var parameter = typeof(CollectionModelBinderTest)
-            .GetMethod(nameof(ActionWithListParameterDefaultValue), BindingFlags.Instance | BindingFlags.NonPublic)
+            .GetMethod(
+                nameof(ActionWithListParameterDefaultValue),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )
             .GetParameters()[0];
-        metadataProvider
-            .ForParameter(parameter)
-            .BindingDetails(b => b.IsBindingRequired = false);
+        metadataProvider.ForParameter(parameter).BindingDetails(b => b.IsBindingRequired = false);
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForParameter(parameter);
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
@@ -352,7 +375,8 @@ public class CollectionModelBinderTest
         // Arrange
         var binder = new CollectionModelBinder<string>(
             new StubModelBinder(result: ModelBindingResult.Failed()),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var bindingContext = CreateContext();
         bindingContext.IsTopLevelObject = true;
@@ -389,13 +413,15 @@ public class CollectionModelBinderTest
     public async Task CollectionModelBinder_DoesNotCreateCollection_IfNotIsTopLevelObject(
         string prefix,
         bool allowValidatingTopLevelNodes,
-        bool isBindingRequired)
+        bool isBindingRequired
+    )
     {
         // Arrange
         var binder = new CollectionModelBinder<string>(
             new StubModelBinder(result: ModelBindingResult.Failed()),
             NullLoggerFactory.Instance,
-            allowValidatingTopLevelNodes);
+            allowValidatingTopLevelNodes
+        );
 
         var bindingContext = CreateContext();
         bindingContext.ModelName = ModelNames.CreatePropertyModelName(prefix, "ListProperty");
@@ -406,7 +432,8 @@ public class CollectionModelBinderTest
             .BindingDetails(b => b.IsBindingRequired = isBindingRequired);
         bindingContext.ModelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithListProperty),
-            nameof(ModelWithListProperty.ListProperty));
+            nameof(ModelWithListProperty.ListProperty)
+        );
 
         bindingContext.ValueProvider = new TestValueProvider(new Dictionary<string, object>());
 
@@ -424,14 +451,14 @@ public class CollectionModelBinderTest
         get
         {
             return new TheoryData<Type, bool>
-                {
-                    { typeof(IEnumerable<int>), true },
-                    { typeof(ICollection<int>), true },
-                    { typeof(IList<int>), true },
-                    { typeof(List<int>), true },
-                    { typeof(LinkedList<int>), true },
-                    { typeof(ISet<int>), false },
-                };
+            {
+                { typeof(IEnumerable<int>), true },
+                { typeof(ICollection<int>), true },
+                { typeof(IList<int>), true },
+                { typeof(List<int>), true },
+                { typeof(LinkedList<int>), true },
+                { typeof(ISet<int>), false },
+            };
         }
     }
 
@@ -467,7 +494,8 @@ public class CollectionModelBinderTest
         // Act
         var boundCollection = await modelBinder.BindSimpleCollection(
             bindingContext,
-            new ValueProviderResult(new string[] { "0" }));
+            new ValueProviderResult(new string[] { "0" })
+        );
 
         // Assert
         Assert.Equal(new[] { 42 }, boundCollection.Model.ToArray());
@@ -475,7 +503,8 @@ public class CollectionModelBinderTest
 
     private static DefaultModelBindingContext GetModelBindingContext(
         IValueProvider valueProvider,
-        bool isReadOnly = false)
+        bool isReadOnly = false
+    )
     {
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
@@ -483,7 +512,8 @@ public class CollectionModelBinderTest
             .BindingDetails(bd => bd.IsReadOnly = isReadOnly);
         var metadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithIListProperty),
-            nameof(ModelWithIListProperty.ListProperty));
+            nameof(ModelWithIListProperty.ListProperty)
+        );
 
         var bindingContext = CreateContext();
         bindingContext.FieldName = "testfieldname";
@@ -514,7 +544,11 @@ public class CollectionModelBinderTest
                 valueToConvert = value.Values.ToArray();
             }
 
-            var model = ModelBindingHelper.ConvertTo(valueToConvert, context.ModelType, value.Culture);
+            var model = ModelBindingHelper.ConvertTo(
+                valueToConvert,
+                context.ModelType,
+                value.Culture
+            );
             if (model == null)
             {
                 return ModelBindingResult.Failed();
@@ -528,10 +562,7 @@ public class CollectionModelBinderTest
 
     private static DefaultModelBindingContext CreateContext()
     {
-        var actionContext = new ActionContext()
-        {
-            HttpContext = new DefaultHttpContext(),
-        };
+        var actionContext = new ActionContext() { HttpContext = new DefaultHttpContext() };
         var modelBindingContext = new DefaultModelBindingContext()
         {
             ActionContext = actionContext,

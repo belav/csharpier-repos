@@ -9,6 +9,7 @@ using System.Globalization;
 
 #pragma warning disable CA1716
 namespace Microsoft.Shared.Data.Validation;
+
 #pragma warning restore CA1716
 
 /// <summary>
@@ -18,14 +19,24 @@ namespace Microsoft.Shared.Data.Validation;
 [ExcludeFromCodeCoverage]
 #endif
 
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-[SuppressMessage("Design", "CA1019:Define accessors for attribute arguments", Justification = "Indirectly we are.")]
+[AttributeUsage(
+    AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+    AllowMultiple = false
+)]
+[SuppressMessage(
+    "Design",
+    "CA1019:Define accessors for attribute arguments",
+    Justification = "Indirectly we are."
+)]
 internal sealed class TimeSpanAttribute : ValidationAttribute
 {
     /// <summary>
     /// Gets the lower bound for time span.
     /// </summary>
-    public TimeSpan Minimum => _minMs.HasValue ? TimeSpan.FromMilliseconds((double)_minMs) : TimeSpan.Parse(_min!, CultureInfo.InvariantCulture);
+    public TimeSpan Minimum =>
+        _minMs.HasValue
+            ? TimeSpan.FromMilliseconds((double)_minMs)
+            : TimeSpan.Parse(_min!, CultureInfo.InvariantCulture);
 
     /// <summary>
     /// Gets the upper bound for time span.
@@ -118,7 +129,9 @@ internal sealed class TimeSpanAttribute : ValidationAttribute
 
         if (min >= max)
         {
-            throw new InvalidOperationException($"{nameof(TimeSpanAttribute)} requires that the minimum value be less than the maximum value (see field {validationContext.GetDisplayName()})");
+            throw new InvalidOperationException(
+                $"{nameof(TimeSpanAttribute)} requires that the minimum value be less than the maximum value (see field {validationContext.GetDisplayName()})"
+            );
         }
 
         if (value == null)
@@ -131,30 +144,44 @@ internal sealed class TimeSpanAttribute : ValidationAttribute
         {
             if (Exclusive && ts <= min)
             {
-                return new ValidationResult($"The field {validationContext.GetDisplayName()} must be > to {min}.", validationContext.GetMemberName());
+                return new ValidationResult(
+                    $"The field {validationContext.GetDisplayName()} must be > to {min}.",
+                    validationContext.GetMemberName()
+                );
             }
 
             if (ts < min)
             {
-                return new ValidationResult($"The field {validationContext.GetDisplayName()} must be >= to {min}.", validationContext.GetMemberName());
+                return new ValidationResult(
+                    $"The field {validationContext.GetDisplayName()} must be >= to {min}.",
+                    validationContext.GetMemberName()
+                );
             }
 
             if (max.HasValue)
             {
                 if (Exclusive && ts >= max.Value)
                 {
-                    return new ValidationResult($"The field {validationContext.GetDisplayName()} must be < to {max}.", validationContext.GetMemberName());
+                    return new ValidationResult(
+                        $"The field {validationContext.GetDisplayName()} must be < to {max}.",
+                        validationContext.GetMemberName()
+                    );
                 }
 
                 if (ts > max.Value)
                 {
-                    return new ValidationResult($"The field {validationContext.GetDisplayName()} must be <= to {max}.", validationContext.GetMemberName());
+                    return new ValidationResult(
+                        $"The field {validationContext.GetDisplayName()} must be <= to {max}.",
+                        validationContext.GetMemberName()
+                    );
                 }
             }
 
             return ValidationResult.Success!;
         }
 
-        throw new InvalidOperationException($"{nameof(TimeSpanAttribute)} can only be used with fields of type TimeSpan (see field {validationContext.GetDisplayName()})");
+        throw new InvalidOperationException(
+            $"{nameof(TimeSpanAttribute)} can only be used with fields of type TimeSpan (see field {validationContext.GetDisplayName()})"
+        );
     }
 }

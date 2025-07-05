@@ -9,7 +9,14 @@ namespace System.Security.AccessControl.Tests
 {
     public abstract class AccessRule_Tests
     {
-        public abstract AccessRule Constructor(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType accessControlType);
+        public abstract AccessRule Constructor(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType accessControlType
+        );
 
         public static IEnumerable<object[]> AccessRule_TestData()
         {
@@ -24,24 +31,126 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public virtual void AccessRule_Constructor_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("identity", () => Constructor(null, 1, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "identity",
+                () =>
+                    Constructor(
+                        null,
+                        1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("accessMask", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 0, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("accessMask", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), -1, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("accessMask", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 2147483647, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("accessMask", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1073741823, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "accessMask",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        0,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "accessMask",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        -1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "accessMask",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        2147483647,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "accessMask",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1073741823,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritanceFlags", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1, true, (InheritanceFlags)4, (PropagationFlags)1, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("propagationFlags", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1, true, (InheritanceFlags)1, (PropagationFlags)4, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("accessControlType", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)3));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "inheritanceFlags",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1,
+                        true,
+                        (InheritanceFlags)4,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "propagationFlags",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)4,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "accessControlType",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)3
+                    )
+            );
         }
 
         [Theory]
         [MemberData(nameof(AccessRule_TestData))]
-        public void AccessRule_Constructor(string sid, int accessMask, bool isInherited, int inheritanceFlags, int propagationFlags, int accessControlType)
+        public void AccessRule_Constructor(
+            string sid,
+            int accessMask,
+            bool isInherited,
+            int inheritanceFlags,
+            int propagationFlags,
+            int accessControlType
+        )
         {
             IdentityReference identityReference = new SecurityIdentifier(sid);
-            AccessRule accessRule = Constructor(identityReference, accessMask, isInherited, (InheritanceFlags)inheritanceFlags, (PropagationFlags)propagationFlags, (AccessControlType)accessControlType);
+            AccessRule accessRule = Constructor(
+                identityReference,
+                accessMask,
+                isInherited,
+                (InheritanceFlags)inheritanceFlags,
+                (PropagationFlags)propagationFlags,
+                (AccessControlType)accessControlType
+            );
 
             Assert.Equal(identityReference, accessRule.IdentityReference);
             Assert.Equal((InheritanceFlags)inheritanceFlags, accessRule.InheritanceFlags);
@@ -52,19 +161,76 @@ namespace System.Security.AccessControl.Tests
 
     public class FileSystemAccessRule_Tests : AccessRule_Tests
     {
-        public override AccessRule Constructor(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType accessControlType)
+        public override AccessRule Constructor(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType accessControlType
+        )
         {
-            return new FileSystemAccessRule(identityReference, FileSystemRights.Read, inheritanceFlags, propagationFlags, accessControlType);
+            return new FileSystemAccessRule(
+                identityReference,
+                FileSystemRights.Read,
+                inheritanceFlags,
+                propagationFlags,
+                accessControlType
+            );
         }
 
         [Fact]
         public override void AccessRule_Constructor_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("identity", () => Constructor(null, 1, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "identity",
+                () =>
+                    Constructor(
+                        null,
+                        1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritanceFlags", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1, true, (InheritanceFlags)4, (PropagationFlags)1, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("propagationFlags", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1, true, (InheritanceFlags)1, (PropagationFlags)4, (AccessControlType)0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("type", () => Constructor(new SecurityIdentifier("S-1-5-32-544"), 1, true, (InheritanceFlags)1, (PropagationFlags)1, (AccessControlType)2));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "inheritanceFlags",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1,
+                        true,
+                        (InheritanceFlags)4,
+                        (PropagationFlags)1,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "propagationFlags",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)4,
+                        (AccessControlType)0
+                    )
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "type",
+                () =>
+                    Constructor(
+                        new SecurityIdentifier("S-1-5-32-544"),
+                        1,
+                        true,
+                        (InheritanceFlags)1,
+                        (PropagationFlags)1,
+                        (AccessControlType)2
+                    )
+            );
         }
     }
 }

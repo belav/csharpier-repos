@@ -19,18 +19,14 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Initializes a new instance of  <see cref="WSTrustSerializationException"/>
         /// </summary>
         public WSTrustSerializationException()
-            : this(SR.GetString(SR.ID3063))
-        {
-        }
+            : this(SR.GetString(SR.ID3063)) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="WSTrustSerializationException"/>
         /// </summary>
         /// <param name="message">The exception message.</param>
         public WSTrustSerializationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="WSTrustSerializationException"/>
@@ -38,9 +34,7 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="message">Exception message.</param>
         /// <param name="inner">Inner exception.</param>
         public WSTrustSerializationException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+            : base(message, inner) { }
 
         /// <summary>
         /// Initializes a new instance of  <see cref="WSTrustSerializationException"/>
@@ -48,8 +42,6 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="info">Serialization information.</param>
         /// <param name="context">Streaming context.</param>
         protected WSTrustSerializationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

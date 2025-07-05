@@ -53,8 +53,14 @@ namespace System.Diagnostics.Tests
                 {
                     Assert.Equal(EventLogType.Operational, configuration.LogType);
                     Assert.False(configuration.IsClassicLog);
-                    Assert.Contains("Microsoft-Windows-TaskScheduler%4Operational.evtx", configuration.LogFilePath);
-                    Assert.Equal("Microsoft-Windows-TaskScheduler", configuration.OwningProviderName);
+                    Assert.Contains(
+                        "Microsoft-Windows-TaskScheduler%4Operational.evtx",
+                        configuration.LogFilePath
+                    );
+                    Assert.Equal(
+                        "Microsoft-Windows-TaskScheduler",
+                        configuration.OwningProviderName
+                    );
                 }
 
                 isEnabled = configuration.IsEnabled;
@@ -80,8 +86,14 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(logMode, configuration.LogMode);
                     Assert.Equal(providerBufferSize, configuration.ProviderBufferSize);
                     Assert.Equal(maximumSizeInBytes, configuration.MaximumSizeInBytes);
-                    Assert.Equal(providerMinimumNumberOfBuffers, configuration.ProviderMinimumNumberOfBuffers);
-                    Assert.Equal(providerMaximumNumberOfBuffers, configuration.ProviderMaximumNumberOfBuffers);
+                    Assert.Equal(
+                        providerMinimumNumberOfBuffers,
+                        configuration.ProviderMinimumNumberOfBuffers
+                    );
+                    Assert.Equal(
+                        providerMaximumNumberOfBuffers,
+                        configuration.ProviderMaximumNumberOfBuffers
+                    );
                     Assert.Equal(providerLevel, configuration.ProviderLevel);
                     Assert.Equal(providerKeywords, configuration.ProviderKeywords);
                     Assert.Equal(providerControlGuid, configuration.ProviderControlGuid);

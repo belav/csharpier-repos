@@ -15,20 +15,29 @@ namespace System.Collections.Generic
         /// <summary>
         /// Remove entries from dictionary that match the removeCondition.
         /// </summary>
-        public static void RemoveFromDictionary<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, Func<KeyValuePair<TKey, TValue>, bool> removeCondition)
+        public static void RemoveFromDictionary<TKey, TValue>(
+            this IDictionary<TKey, TValue> dictionary,
+            Func<KeyValuePair<TKey, TValue>, bool> removeCondition
+        )
         {
             // Pass the delegate as the state to avoid a delegate and closure
-            dictionary.RemoveFromDictionary((entry, innerCondition) =>
+            dictionary.RemoveFromDictionary(
+                (entry, innerCondition) =>
                 {
                     return innerCondition(entry);
                 },
-                removeCondition);
+                removeCondition
+            );
         }
 
         /// <summary>
         /// Remove entries from dictionary that match the removeCondition.
         /// </summary>
-        public static void RemoveFromDictionary<TKey, TValue, TState>(this IDictionary<TKey, TValue> dictionary, Func<KeyValuePair<TKey, TValue>, TState, bool> removeCondition, TState state)
+        public static void RemoveFromDictionary<TKey, TValue, TState>(
+            this IDictionary<TKey, TValue> dictionary,
+            Func<KeyValuePair<TKey, TValue>, TState, bool> removeCondition,
+            TState state
+        )
         {
             Contract.Assert(dictionary != null);
             Contract.Assert(removeCondition != null);
@@ -53,14 +62,18 @@ namespace System.Collections.Generic
 
         /// <summary>
         /// Gets the value of <typeparamref name="T"/> associated with the specified key or <c>default</c> value if
-        /// either the key is not present or the value is not of type <typeparamref name="T"/>. 
+        /// either the key is not present or the value is not of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value associated with the specified key.</typeparam>
         /// <param name="collection">The <see cref="IDictionary{TKey,TValue}"/> instance where <c>TValue</c> is <c>object</c>.</param>
         /// <param name="key">The key whose value to get.</param>
         /// <param name="value">When this method returns, the value associated with the specified key, if the key is found; otherwise, the default value for the type of the value parameter.</param>
         /// <returns><c>true</c> if key was found, value is non-null, and value is of type <typeparamref name="T"/>; otherwise false.</returns>
-        public static bool TryGetValue<T>(this IDictionary<string, object> collection, string key, out T value)
+        public static bool TryGetValue<T>(
+            this IDictionary<string, object> collection,
+            string key,
+            out T value
+        )
         {
             Contract.Assert(collection != null);
 
@@ -78,7 +91,10 @@ namespace System.Collections.Generic
             return false;
         }
 
-        internal static IEnumerable<KeyValuePair<string, TValue>> FindKeysWithPrefix<TValue>(this IDictionary<string, TValue> dictionary, string prefix)
+        internal static IEnumerable<KeyValuePair<string, TValue>> FindKeysWithPrefix<TValue>(
+            this IDictionary<string, TValue> dictionary,
+            string prefix
+        )
         {
             Contract.Assert(dictionary != null);
             Contract.Assert(prefix != null);

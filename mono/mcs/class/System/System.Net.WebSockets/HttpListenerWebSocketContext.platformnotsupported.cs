@@ -27,22 +27,60 @@
 
 namespace System.Net.WebSockets
 {
-	public partial class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
-	{
-		const string EXCEPTION_MESSAGE = "System.Net.WebSockets.HttpListenerWebSocketContext is not supported on the current platform.";
+    public partial class HttpListenerWebSocketContext : System.Net.WebSockets.WebSocketContext
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.WebSockets.HttpListenerWebSocketContext is not supported on the current platform.";
 
-		private HttpListenerWebSocketContext() { }
-		public override System.Net.CookieCollection CookieCollection { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override System.Collections.Specialized.NameValueCollection Headers { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override bool IsAuthenticated { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override bool IsLocal { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override bool IsSecureConnection { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override string Origin { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override System.Uri RequestUri { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override string SecWebSocketKey { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override System.Collections.Generic.IEnumerable<string> SecWebSocketProtocols { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override string SecWebSocketVersion { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override System.Security.Principal.IPrincipal User { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-		public override System.Net.WebSockets.WebSocket WebSocket { get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); } }
-	}
+        private HttpListenerWebSocketContext() { }
+
+        public override System.Net.CookieCollection CookieCollection
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override System.Collections.Specialized.NameValueCollection Headers
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override bool IsAuthenticated
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override bool IsLocal
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override bool IsSecureConnection
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override string Origin
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override System.Uri RequestUri
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override string SecWebSocketKey
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override System.Collections.Generic.IEnumerable<string> SecWebSocketProtocols
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override string SecWebSocketVersion
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override System.Security.Principal.IPrincipal User
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+        public override System.Net.WebSockets.WebSocket WebSocket
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
+    }
 }

@@ -19,13 +19,13 @@ Revision History:
 namespace System.Net.Cache
 {
     using System;
-    using System.Net;
-    using System.Diagnostics;
-    using System.Text;
-    using System.IO;
-    using System.Collections.Specialized;
-    using System.Threading;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Net;
+    using System.Text;
+    using System.Threading;
 
     internal class SingleItemRequestCache :
 #if !FEATURE_PAL
@@ -37,51 +37,54 @@ namespace System.Net.Cache
         bool _UseWinInet;
         FrozenCacheEntry _Entry;
 
-        private sealed class FrozenCacheEntry: RequestCacheEntry {
+        private sealed class FrozenCacheEntry : RequestCacheEntry
+        {
             byte[] _StreamBytes;
             string _Key;
-            
-            public FrozenCacheEntry(string key, RequestCacheEntry entry, Stream stream): this(key, entry, GetBytes(stream))
-            {
-            }
-            public FrozenCacheEntry(string key, RequestCacheEntry entry, byte[] streamBytes): base()
+
+            public FrozenCacheEntry(string key, RequestCacheEntry entry, Stream stream)
+                : this(key, entry, GetBytes(stream)) { }
+
+            public FrozenCacheEntry(string key, RequestCacheEntry entry, byte[] streamBytes)
+                : base()
             {
                 _Key = key;
                 _StreamBytes = streamBytes;
-                 IsPrivateEntry = entry.IsPrivateEntry;
-                 StreamSize = entry.StreamSize;
-                 ExpiresUtc = entry.ExpiresUtc;
-                 HitCount = entry.HitCount;
-                 LastAccessedUtc = entry.LastAccessedUtc;
-                 entry.LastModifiedUtc = entry.LastModifiedUtc;
-                 LastSynchronizedUtc = entry.LastSynchronizedUtc;
-                 MaxStale = entry.MaxStale;
-                 UsageCount = entry.UsageCount;
-                 IsPartialEntry = entry.IsPartialEntry;
-                 EntryMetadata = entry.EntryMetadata;
-                 SystemMetadata  = entry.SystemMetadata;
+                IsPrivateEntry = entry.IsPrivateEntry;
+                StreamSize = entry.StreamSize;
+                ExpiresUtc = entry.ExpiresUtc;
+                HitCount = entry.HitCount;
+                LastAccessedUtc = entry.LastAccessedUtc;
+                entry.LastModifiedUtc = entry.LastModifiedUtc;
+                LastSynchronizedUtc = entry.LastSynchronizedUtc;
+                MaxStale = entry.MaxStale;
+                UsageCount = entry.UsageCount;
+                IsPartialEntry = entry.IsPartialEntry;
+                EntryMetadata = entry.EntryMetadata;
+                SystemMetadata = entry.SystemMetadata;
             }
 
             static byte[] GetBytes(Stream stream)
             {
                 byte[] bytes;
-                bool   resize = false;
+                bool resize = false;
                 if (stream.CanSeek)
                     bytes = new byte[stream.Length];
                 else
                 {
                     resize = true;
-                    bytes = new byte[4096*2];
+                    bytes = new byte[4096 * 2];
                 }
-                
+
                 int offset = 0;
                 while (true)
-                {   int read = stream.Read(bytes, offset, bytes.Length-offset);
+                {
+                    int read = stream.Read(bytes, offset, bytes.Length - offset);
                     if (read == 0)
                         break;
-                    if ((offset+=read) == bytes.Length && resize)
+                    if ((offset += read) == bytes.Length && resize)
                     {
-                        byte[] newBytes = new byte[bytes.Length+4096*2];
+                        byte[] newBytes = new byte[bytes.Length + 4096 * 2];
                         Buffer.BlockCopy(bytes, 0, newBytes, 0, offset);
                         bytes = newBytes;
                     }
@@ -97,19 +100,27 @@ namespace System.Net.Cache
 
             public static FrozenCacheEntry Create(FrozenCacheEntry clonedObject)
             {
-                return (object)clonedObject == (object)null? null: (FrozenCacheEntry) clonedObject.MemberwiseClone();
+                return (object)clonedObject == (object)null
+                    ? null
+                    : (FrozenCacheEntry)clonedObject.MemberwiseClone();
             }
 
-            public byte[] StreamBytes { get {return _StreamBytes;}}
-            public string Key         { get  {return _Key;}}
+            public byte[] StreamBytes
+            {
+                get { return _StreamBytes; }
+            }
+            public string Key
+            {
+                get { return _Key; }
+            }
         }
 
-
-        internal SingleItemRequestCache(bool useWinInet) :
+        internal SingleItemRequestCache(bool useWinInet)
+            :
 #if !FEATURE_PAL
-            base(true, true, false)
+        base(true, true, false)
 #else
-            base(true, true)
+        base(true, true)
 #endif
         {
             _UseWinInet = useWinInet;
@@ -125,7 +136,10 @@ namespace System.Net.Cache
             if (!TryRetrieve(key, out cacheEntry, out result))
             {
                 FileNotFoundException fileNotFoundException = new FileNotFoundException(null, key);
-                throw new IOException(SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message), fileNotFoundException);
+                throw new IOException(
+                    SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message),
+                    fileNotFoundException
+                );
             }
 
             return result;
@@ -135,13 +149,35 @@ namespace System.Net.Cache
         // Passed parameters allow cache to update an entry metadata accordingly.
         // <remarks>  The commit operation should happen on the stream closure. </remarks>
         //
-        internal override Stream Store(string key, long contentLength, DateTime expiresUtc, DateTime lastModifiedUtc, TimeSpan maxStale, StringCollection entryMetadata, StringCollection systemMetadata)
+        internal override Stream Store(
+            string key,
+            long contentLength,
+            DateTime expiresUtc,
+            DateTime lastModifiedUtc,
+            TimeSpan maxStale,
+            StringCollection entryMetadata,
+            StringCollection systemMetadata
+        )
         {
             Stream result;
-            if (!TryStore(key, contentLength, expiresUtc, lastModifiedUtc, maxStale, entryMetadata, systemMetadata, out result))
+            if (
+                !TryStore(
+                    key,
+                    contentLength,
+                    expiresUtc,
+                    lastModifiedUtc,
+                    maxStale,
+                    entryMetadata,
+                    systemMetadata,
+                    out result
+                )
+            )
             {
                 FileNotFoundException fileNotFoundException = new FileNotFoundException(null, key);
-                throw new IOException(SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message), fileNotFoundException);
+                throw new IOException(
+                    SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message),
+                    fileNotFoundException
+                );
             }
 
             return result;
@@ -155,23 +191,51 @@ namespace System.Net.Cache
             if (!TryRemove(key))
             {
                 FileNotFoundException fileNotFoundException = new FileNotFoundException(null, key);
-                throw new IOException(SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message), fileNotFoundException);
+                throw new IOException(
+                    SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message),
+                    fileNotFoundException
+                );
             }
         }
 
         //
         // Updates only metadata associated with a cached entry.
         //
-        internal override void Update(string key, DateTime expiresUtc, DateTime lastModifiedUtc, DateTime lastSynchronizedUtc, TimeSpan maxStale, StringCollection entryMetadata, StringCollection systemMetadata)
+        internal override void Update(
+            string key,
+            DateTime expiresUtc,
+            DateTime lastModifiedUtc,
+            DateTime lastSynchronizedUtc,
+            TimeSpan maxStale,
+            StringCollection entryMetadata,
+            StringCollection systemMetadata
+        )
         {
-            if (!TryUpdate(key, expiresUtc, lastModifiedUtc, lastSynchronizedUtc, maxStale, entryMetadata, systemMetadata))
+            if (
+                !TryUpdate(
+                    key,
+                    expiresUtc,
+                    lastModifiedUtc,
+                    lastSynchronizedUtc,
+                    maxStale,
+                    entryMetadata,
+                    systemMetadata
+                )
+            )
             {
                 FileNotFoundException fileNotFoundException = new FileNotFoundException(null, key);
-                throw new IOException(SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message), fileNotFoundException);
+                throw new IOException(
+                    SR.GetString(SR.net_cache_retrieve_failure, fileNotFoundException.Message),
+                    fileNotFoundException
+                );
             }
         }
 
-        internal override bool TryRetrieve(string key, out RequestCacheEntry cacheEntry, out Stream readStream)
+        internal override bool TryRetrieve(
+            string key,
+            out RequestCacheEntry cacheEntry,
+            out Stream readStream
+        )
         {
             if (key == null)
                 throw new ArgumentNullException("key");
@@ -187,7 +251,7 @@ namespace System.Net.Cache
                 RequestCacheEntry realCacheEntry;
                 if (!_UseWinInet || !base.TryRetrieve(key, out realCacheEntry, out realCacheStream))
                     return false;
-                
+
                 chkEntry = new FrozenCacheEntry(key, realCacheEntry, realCacheStream);
                 // Relasing the WinInet entry earlier because we don't forward metadata-only updates ot it.
                 realCacheStream.Close();
@@ -201,7 +265,16 @@ namespace System.Net.Cache
             return true;
         }
 
-        internal override bool TryStore(string key, long contentLength, DateTime expiresUtc, DateTime lastModifiedUtc, TimeSpan maxStale, StringCollection entryMetadata, StringCollection systemMetadata, out Stream writeStream)
+        internal override bool TryStore(
+            string key,
+            long contentLength,
+            DateTime expiresUtc,
+            DateTime lastModifiedUtc,
+            TimeSpan maxStale,
+            StringCollection entryMetadata,
+            StringCollection systemMetadata,
+            out Stream writeStream
+        )
         {
             if (key == null)
                 throw new ArgumentNullException("key");
@@ -226,10 +299,18 @@ namespace System.Net.Cache
 #if !FEATURE_PAL
             if (_UseWinInet)
             {
-                base.TryStore(key, contentLength, expiresUtc, lastModifiedUtc, maxStale, entryMetadata, systemMetadata, out realWriteStream);
+                base.TryStore(
+                    key,
+                    contentLength,
+                    expiresUtc,
+                    lastModifiedUtc,
+                    maxStale,
+                    entryMetadata,
+                    systemMetadata,
+                    out realWriteStream
+                );
             }
 #endif
-            
             writeStream = new WriteOnlyStream(key, this, requestCacheEntry, realWriteStream);
             return true;
         }
@@ -253,14 +334,22 @@ namespace System.Net.Cache
 #endif
 
             FrozenCacheEntry chkEntry = _Entry;
-            
+
             if (chkEntry != null && chkEntry.Key == key)
                 _Entry = null;
 
             return true;
         }
 
-        internal override bool TryUpdate(string key, DateTime expiresUtc, DateTime lastModifiedUtc, DateTime lastSynchronizedUtc, TimeSpan maxStale, StringCollection entryMetadata, StringCollection systemMetadata)
+        internal override bool TryUpdate(
+            string key,
+            DateTime expiresUtc,
+            DateTime lastModifiedUtc,
+            DateTime lastSynchronizedUtc,
+            TimeSpan maxStale,
+            StringCollection entryMetadata,
+            StringCollection systemMetadata
+        )
         {
             if (key == null)
                 throw new ArgumentNullException("key");
@@ -283,67 +372,101 @@ namespace System.Net.Cache
             _Entry = chkEntry;
             return true;
         }
+
         //
         // We've chosen to no forward to WinInet metadata-only updates
         // Hence our entries are never locked and this method does nothing
         //
-        internal override void UnlockEntry(Stream stream)
-        {
-        }
+        internal override void UnlockEntry(Stream stream) { }
 
         //
         //
         //
-        internal class ReadOnlyStream : Stream, IRequestLifetimeTracker {
+        internal class ReadOnlyStream : Stream, IRequestLifetimeTracker
+        {
             private byte[] _Bytes;
-            private int    _Offset;
-            private bool   _Disposed;
-            private int    _ReadTimeout;
-            private int    _WriteTimeout;
+            private int _Offset;
+            private bool _Disposed;
+            private int _ReadTimeout;
+            private int _WriteTimeout;
             private RequestLifetimeSetter m_RequestLifetimeSetter;
 
-            internal ReadOnlyStream(byte[] bytes): base()
+            internal ReadOnlyStream(byte[] bytes)
+                : base()
             {
-                _Bytes  = bytes;
+                _Bytes = bytes;
                 _Offset = 0;
                 _Disposed = false;
                 _ReadTimeout = _WriteTimeout = -1;
             }
 
-            public override bool CanRead {get {return true;}}
-            public override bool CanSeek {get {return true;}}
-            public override bool CanTimeout {get {return true;}}
-            public override bool CanWrite  {get {return false;}}
-            public override long Length {get {return _Bytes.Length;}}
-            public override long Position {
-                get {return _Offset;}
-                set {
+            public override bool CanRead
+            {
+                get { return true; }
+            }
+            public override bool CanSeek
+            {
+                get { return true; }
+            }
+            public override bool CanTimeout
+            {
+                get { return true; }
+            }
+            public override bool CanWrite
+            {
+                get { return false; }
+            }
+            public override long Length
+            {
+                get { return _Bytes.Length; }
+            }
+            public override long Position
+            {
+                get { return _Offset; }
+                set
+                {
                     if (value < 0 || value > (long)_Bytes.Length)
                         throw new ArgumentOutOfRangeException("value");
                     _Offset = (int)value;
                 }
             }
 
-            public override int ReadTimeout {
-                get {return _ReadTimeout;}
-                set {
-                    if (value<=0 && value!=System.Threading.Timeout.Infinite) 
-                        throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+            public override int ReadTimeout
+            {
+                get { return _ReadTimeout; }
+                set
+                {
+                    if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.net_io_timeout_use_gt_zero)
+                        );
                     _ReadTimeout = value;
                 }
             }
-            public override int WriteTimeout {
-                get {return _WriteTimeout;}
-                set {
-                    if (value<=0 && value!=System.Threading.Timeout.Infinite)
-                        throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+            public override int WriteTimeout
+            {
+                get { return _WriteTimeout; }
+                set
+                {
+                    if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.net_io_timeout_use_gt_zero)
+                        );
                     _WriteTimeout = value;
                 }
             }
 
-            public override void Flush() {}
+            public override void Flush() { }
 
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, Object state)
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                Object state
+            )
             {
                 int result = Read(buffer, offset, count);
 
@@ -351,24 +474,33 @@ namespace System.Net.Cache
                 ar.InvokeCallback(result);
                 return ar;
             }
+
             public override int EndRead(IAsyncResult asyncResult)
             {
                 if (asyncResult == null)
                     throw new ArgumentNullException("asyncResult");
-                LazyAsyncResult ar = (LazyAsyncResult) asyncResult;
-                if (ar.EndCalled) throw new InvalidOperationException(SR.GetString(SR.net_io_invalidendcall, "EndRead"));
+                LazyAsyncResult ar = (LazyAsyncResult)asyncResult;
+                if (ar.EndCalled)
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_io_invalidendcall, "EndRead")
+                    );
                 ar.EndCalled = true;
                 return (int)ar.InternalWaitForCompletion();
             }
 
             public override int Read(byte[] buffer, int offset, int count)
             {
-                if (_Disposed) throw new ObjectDisposedException(GetType().Name);
-                if (buffer==null) throw new ArgumentNullException("buffer");
-                if (offset<0 || offset>buffer.Length) throw new ArgumentOutOfRangeException("offset");
-                if (count<0 || count>buffer.Length-offset) throw new ArgumentOutOfRangeException("count");
-                if (_Offset == _Bytes.Length) return 0;
-                
+                if (_Disposed)
+                    throw new ObjectDisposedException(GetType().Name);
+                if (buffer == null)
+                    throw new ArgumentNullException("buffer");
+                if (offset < 0 || offset > buffer.Length)
+                    throw new ArgumentOutOfRangeException("offset");
+                if (count < 0 || count > buffer.Length - offset)
+                    throw new ArgumentOutOfRangeException("count");
+                if (_Offset == _Bytes.Length)
+                    return 0;
+
                 int chkOffset = (int)_Offset;
                 count = Math.Min(count, _Bytes.Length - chkOffset);
                 System.Buffer.BlockCopy(_Bytes, chkOffset, buffer, offset, count);
@@ -376,32 +508,44 @@ namespace System.Net.Cache
                 _Offset = chkOffset;
                 return count;
             }
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback callback, Object state)
+
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int size,
+                AsyncCallback callback,
+                Object state
+            )
             {
                 throw new NotSupportedException(SR.GetString(SR.net_readonlystream));
             }
+
             public override void EndWrite(IAsyncResult asyncResult)
             {
                 throw new NotSupportedException(SR.GetString(SR.net_readonlystream));
             }
+
             public override void Write(byte[] buffer, int offset, int count)
             {
                 throw new NotSupportedException(SR.GetString(SR.net_readonlystream));
             }
 
-
             public override long Seek(long offset, SeekOrigin origin)
             {
                 switch (origin)
                 {
-                case SeekOrigin.Begin:
+                    case SeekOrigin.Begin:
                         return Position = offset;
-                case SeekOrigin.Current:
+                    case SeekOrigin.Current:
                         return Position += offset;
                     /// <include file='doc\SeekOrigin.uex' path='docs/doc[@for="SeekOrigin.End"]/*' />
-                case SeekOrigin.End:  return Position = _Bytes.Length-offset;
-                default:
-                    throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SeekOrigin"), "origin");
+                    case SeekOrigin.End:
+                        return Position = _Bytes.Length - offset;
+                    default:
+                        throw new ArgumentException(
+                            SR.GetString(SR.net_invalid_enum, "SeekOrigin"),
+                            "origin"
+                        );
                 }
             }
 
@@ -410,34 +554,37 @@ namespace System.Net.Cache
                 throw new NotSupportedException(SR.GetString(SR.net_readonlystream));
             }
 
-
             protected override void Dispose(bool disposing)
             {
-                try {
-                    if (!_Disposed) {
+                try
+                {
+                    if (!_Disposed)
+                    {
                         _Disposed = true;
-                       
-                        if (disposing) {
+
+                        if (disposing)
+                        {
                             RequestLifetimeSetter.Report(m_RequestLifetimeSetter);
                         }
                     }
                 }
-                finally {
+                finally
+                {
                     base.Dispose(disposing);
                 }
             }
 
             internal byte[] Buffer
             {
-                get
-                {
-                    return _Bytes;
-                }
+                get { return _Bytes; }
             }
 
             void IRequestLifetimeTracker.TrackRequestLifetime(long requestStartTimestamp)
             {
-                Debug.Assert(m_RequestLifetimeSetter == null, "TrackRequestLifetime called more than once.");
+                Debug.Assert(
+                    m_RequestLifetimeSetter == null,
+                    "TrackRequestLifetime called more than once."
+                );
                 m_RequestLifetimeSetter = new RequestLifetimeSetter(requestStartTimestamp);
             }
         }
@@ -445,19 +592,25 @@ namespace System.Net.Cache
         //
         //
         //
-        private class WriteOnlyStream: Stream {
-            private string                 _Key;
+        private class WriteOnlyStream : Stream
+        {
+            private string _Key;
             private SingleItemRequestCache _Cache;
-            private RequestCacheEntry      _TempEntry;
-            private Stream                 _RealStream;
-            private long                   _TotalSize;
-            private ArrayList              _Buffers;
+            private RequestCacheEntry _TempEntry;
+            private Stream _RealStream;
+            private long _TotalSize;
+            private ArrayList _Buffers;
 
-            private bool   _Disposed;
-            private int    _ReadTimeout;
-            private int    _WriteTimeout;
+            private bool _Disposed;
+            private int _ReadTimeout;
+            private int _WriteTimeout;
 
-            public WriteOnlyStream(string key, SingleItemRequestCache cache, RequestCacheEntry cacheEntry, Stream realWriteStream)
+            public WriteOnlyStream(
+                string key,
+                SingleItemRequestCache cache,
+                RequestCacheEntry cacheEntry,
+                Stream realWriteStream
+            )
             {
                 _Key = key;
                 _Cache = cache;
@@ -466,81 +619,140 @@ namespace System.Net.Cache
                 _Buffers = new ArrayList();
             }
 
-            public override bool CanRead {get {return false;}}
-            public override bool CanSeek {get {return false;}}
-
-            public override bool CanTimeout {get {return true;}}
-            public override bool CanWrite  {get {return true;}}
-
-            public override long Length {get {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}}
-            
-            public override long Position {
-                get {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
-                set {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
+            public override bool CanRead
+            {
+                get { return false; }
+            }
+            public override bool CanSeek
+            {
+                get { return false; }
             }
 
-            public override int ReadTimeout {
-                get {return _ReadTimeout;}
-                set {
-                    if (value<=0 && value!=System.Threading.Timeout.Infinite)
-                        throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+            public override bool CanTimeout
+            {
+                get { return true; }
+            }
+            public override bool CanWrite
+            {
+                get { return true; }
+            }
+
+            public override long Length
+            {
+                get { throw new NotSupportedException(SR.GetString(SR.net_writeonlystream)); }
+            }
+
+            public override long Position
+            {
+                get { throw new NotSupportedException(SR.GetString(SR.net_writeonlystream)); }
+                set { throw new NotSupportedException(SR.GetString(SR.net_writeonlystream)); }
+            }
+
+            public override int ReadTimeout
+            {
+                get { return _ReadTimeout; }
+                set
+                {
+                    if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.net_io_timeout_use_gt_zero)
+                        );
                     _ReadTimeout = value;
                 }
             }
-            public override int WriteTimeout {
-                get {return _WriteTimeout;}
-                set {
-                    if (value<=0 && value!=System.Threading.Timeout.Infinite)
-                        throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+            public override int WriteTimeout
+            {
+                get { return _WriteTimeout; }
+                set
+                {
+                    if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.net_io_timeout_use_gt_zero)
+                        );
                     _WriteTimeout = value;
                 }
             }
 
-            public override void Flush() {}
+            public override void Flush() { }
 
-            public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, Object state)
-            {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
+            public override IAsyncResult BeginRead(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                Object state
+            )
+            {
+                throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));
+            }
 
             public override int EndRead(IAsyncResult asyncResult)
-            {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
+            {
+                throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));
+            }
 
             public override int Read(byte[] buffer, int offset, int count)
-            {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
+            {
+                throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));
+            }
 
             public override long Seek(long offset, SeekOrigin origin)
-            {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
+            {
+                throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));
+            }
+
             public override void SetLength(long length)
-            {throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));}
+            {
+                throw new NotSupportedException(SR.GetString(SR.net_writeonlystream));
+            }
 
-
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, Object state)
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                Object state
+            )
             {
                 Write(buffer, offset, count);
                 LazyAsyncResult ar = new LazyAsyncResult(null, state, callback);
                 ar.InvokeCallback(null);
                 return ar;
             }
+
             public override void EndWrite(IAsyncResult asyncResult)
             {
                 if (asyncResult == null)
                     throw new ArgumentNullException("asyncResult");
-                LazyAsyncResult ar = (LazyAsyncResult) asyncResult;
-                if (ar.EndCalled) throw new InvalidOperationException(SR.GetString(SR.net_io_invalidendcall, "EndWrite"));
+                LazyAsyncResult ar = (LazyAsyncResult)asyncResult;
+                if (ar.EndCalled)
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_io_invalidendcall, "EndWrite")
+                    );
                 ar.EndCalled = true;
                 ar.InternalWaitForCompletion();
             }
+
             public override void Write(byte[] buffer, int offset, int count)
             {
-                if (_Disposed) throw new ObjectDisposedException(GetType().Name);
-                if (buffer==null) throw new ArgumentNullException("buffer");
-                if (offset<0 || offset>buffer.Length) throw new ArgumentOutOfRangeException("offset");
-                if (count<0  || count>buffer.Length-offset) throw new ArgumentOutOfRangeException("count");
-                
+                if (_Disposed)
+                    throw new ObjectDisposedException(GetType().Name);
+                if (buffer == null)
+                    throw new ArgumentNullException("buffer");
+                if (offset < 0 || offset > buffer.Length)
+                    throw new ArgumentOutOfRangeException("offset");
+                if (count < 0 || count > buffer.Length - offset)
+                    throw new ArgumentOutOfRangeException("count");
+
                 if (_RealStream != null)
-                    try {
+                    try
+                    {
                         _RealStream.Write(buffer, offset, count);
                     }
-                    catch {
+                    catch
+                    {
                         _RealStream.Close();
                         _RealStream = null;
                     }
@@ -554,14 +766,15 @@ namespace System.Net.Cache
             protected override void Dispose(bool disposing)
             {
                 _Disposed = true;
-                base.Dispose(disposing);  // Do we mean to do this here????
-                if (disposing) {
+                base.Dispose(disposing); // Do we mean to do this here????
+                if (disposing)
+                {
                     if (_RealStream != null)
-                        try {
+                        try
+                        {
                             _RealStream.Close();
                         }
-                        catch {
-                        }
+                        catch { }
 
                     byte[] allBytes = new byte[_TotalSize];
                     int offset = 0;
@@ -575,7 +788,6 @@ namespace System.Net.Cache
                     _Cache.Commit(_Key, _TempEntry, allBytes);
                 }
             }
-
         }
     }
 }

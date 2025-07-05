@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,55 +29,58 @@
 
 using System;
 using System.Collections.Specialized;
-using System.Xml;
 using System.IO;
+using System.Xml;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    public sealed class IgnoreSection : ConfigurationSection
+    {
+        string xml;
 
-	public sealed class IgnoreSection : ConfigurationSection
-	{
-		string xml;
+        static ConfigurationPropertyCollection properties;
 
-		static ConfigurationPropertyCollection properties;
+        static IgnoreSection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-		static IgnoreSection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        public IgnoreSection() { }
 
-		public IgnoreSection ()
-		{
-		}
+        protected internal override bool IsModified()
+        {
+            return false;
+        }
 
-		protected internal override  bool IsModified ()
-		{
-			return false;
-		}
+        protected internal override void DeserializeSection(XmlReader xmlReader)
+        {
+            xml = xmlReader.ReadOuterXml();
+        }
 
-		protected internal override void DeserializeSection (XmlReader xmlReader)
-		{
-			xml = xmlReader.ReadOuterXml ();
-		}
+        [MonoTODO]
+        protected internal override void Reset(ConfigurationElement parentSection)
+        {
+            base.Reset(parentSection);
+        }
 
-		[MonoTODO]
-		protected internal override void Reset (ConfigurationElement parentSection)
-		{
-			base.Reset (parentSection);
-		}
+        [MonoTODO]
+        protected internal override void ResetModified()
+        {
+            base.ResetModified();
+        }
 
-		[MonoTODO]
-		protected internal override void ResetModified ()
-		{
-			base.ResetModified ();
-		}
+        protected internal override string SerializeSection(
+            ConfigurationElement parentSection,
+            string name,
+            ConfigurationSaveMode saveMode
+        )
+        {
+            return xml;
+        }
 
-		protected internal override string SerializeSection (ConfigurationElement parentSection, string name, ConfigurationSaveMode saveMode)
-		{
-			return xml;
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

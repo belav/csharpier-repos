@@ -32,8 +32,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <summary>
     ///     Gets the builder that can be used to configure this trigger.
     /// </summary>
-    protected virtual IConventionTriggerBuilder Builder
-        => InternalBuilder;
+    protected virtual IConventionTriggerBuilder Builder => InternalBuilder;
 
     /// <inheritdoc />
     IConventionTriggerBuilder IInfrastructure<IConventionTriggerBuilder>.Instance
@@ -45,8 +44,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <summary>
     ///     The trigger being configured.
     /// </summary>
-    public virtual IMutableTrigger Metadata
-        => InternalBuilder.Metadata;
+    public virtual IMutableTrigger Metadata => InternalBuilder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the trigger. If an annotation with the key specified in <paramref name="annotation" />
@@ -71,8 +69,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -81,8 +78,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -90,8 +86,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

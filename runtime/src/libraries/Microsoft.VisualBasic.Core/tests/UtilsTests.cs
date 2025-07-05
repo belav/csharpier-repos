@@ -16,7 +16,20 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new int[] { 1, 2 }, new int[2], new int[] { 1, 2 } };
             yield return new object[] { new int[] { 1, 2 }, new int[1], new int[] { 1 } };
 
-            yield return new object[] { new int[,] { { 1, 2 }, { 3, 4 } }, new int[2, 2], new int[,] { { 1, 2 }, { 3, 4 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                },
+                new int[2, 2],
+                new int[,]
+                {
+                    { 1, 2 },
+                    { 3, 4 },
+                },
+            };
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
@@ -24,13 +37,29 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 Array array2 = Array.CreateInstance(typeof(int), new int[] { 1 }, new int[] { 2 });
                 yield return new object[] { array1, array2, array2 };
 
-                Array array3 = Array.CreateInstance(typeof(int), new int[] { 1, 1 }, new int[] { 0, -1 });
-                Array array4 = Array.CreateInstance(typeof(int), new int[] { 1, 0 }, new int[] { 0, 2 });
+                Array array3 = Array.CreateInstance(
+                    typeof(int),
+                    new int[] { 1, 1 },
+                    new int[] { 0, -1 }
+                );
+                Array array4 = Array.CreateInstance(
+                    typeof(int),
+                    new int[] { 1, 0 },
+                    new int[] { 0, 2 }
+                );
                 yield return new object[] { array3, array4, array4 };
 
-                Array array5 = Array.CreateInstance(typeof(int), new int[] { 1, 2 }, new int[] { 0, 0 });
-                Array array6 = Array.CreateInstance(typeof(int), new int[] { 1, 1 }, new int[] { 0, 1 });
-                yield return new object[] { array5, array6, array6};
+                Array array5 = Array.CreateInstance(
+                    typeof(int),
+                    new int[] { 1, 2 },
+                    new int[] { 0, 0 }
+                );
+                Array array6 = Array.CreateInstance(
+                    typeof(int),
+                    new int[] { 1, 1 },
+                    new int[] { 0, 1 }
+                );
+                yield return new object[] { array5, array6, array6 };
             }
         }
 
@@ -41,7 +70,6 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             Assert.Same(destination, Utils.CopyArray(source, destination));
             Assert.Equal(expected, destination);
         }
-
 
         [Fact]
         public void CopyArray_NullSourceArray_ReturnsDestination()
@@ -70,22 +98,52 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             Assert.Throws<InvalidCastException>(() => Utils.CopyArray(new int[1], new int[1, 1]));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public void CopyArray_RankGreaterThanTwoAndNonMatchingBounds_ThrowsArrayTypeMismatchException()
         {
-            Array array1 = Array.CreateInstance(typeof(int), new int[] { 1, 2, 3 }, new int[] { 2, 3, 4 });
-            Array array2 = Array.CreateInstance(typeof(int), new int[] { 1, 2, 3}, new int[] { 2, 4, 4 });
+            Array array1 = Array.CreateInstance(
+                typeof(int),
+                new int[] { 1, 2, 3 },
+                new int[] { 2, 3, 4 }
+            );
+            Array array2 = Array.CreateInstance(
+                typeof(int),
+                new int[] { 1, 2, 3 },
+                new int[] { 2, 4, 4 }
+            );
             Assert.Throws<ArrayTypeMismatchException>(() => Utils.CopyArray(array1, array2));
             Assert.Throws<ArrayTypeMismatchException>(() => Utils.CopyArray(array2, array1));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public void CopyArray_NonMatchingBounds_ThrowsArgumentOutOfRangeException()
         {
-            Array array1 = Array.CreateInstance(typeof(int), new int[] { 1, 2 }, new int[] { 2, 3 });
-            Array array2 = Array.CreateInstance(typeof(int), new int[] { 1, 2 }, new int[] { 2, 4 });
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", "srcIndex", () => Utils.CopyArray(array1, array2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", "srcIndex", () => Utils.CopyArray(array2, array1));
+            Array array1 = Array.CreateInstance(
+                typeof(int),
+                new int[] { 1, 2 },
+                new int[] { 2, 3 }
+            );
+            Array array2 = Array.CreateInstance(
+                typeof(int),
+                new int[] { 1, 2 },
+                new int[] { 2, 4 }
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceIndex",
+                "srcIndex",
+                () => Utils.CopyArray(array1, array2)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "sourceIndex",
+                "srcIndex",
+                () => Utils.CopyArray(array2, array1)
+            );
         }
 
         [Fact]
@@ -93,9 +151,21 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         {
             if (System.Threading.Thread.CurrentThread.CurrentCulture.Name == "en-US")
             {
-                Assert.Equal("Argument '42' is not a valid value.", Utils.GetResourceString("Argument_InvalidValue1", "42"));
-                Assert.Equal("Argument '42' is not a valid value.", Utils.GetResourceString(ResourceKey: "Argument_InvalidValue1", Args: new[] { "42" }));
-                Assert.Equal("Application-defined or object-defined error.", Utils.GetResourceString("UnrecognizedResourceKey"));
+                Assert.Equal(
+                    "Argument '42' is not a valid value.",
+                    Utils.GetResourceString("Argument_InvalidValue1", "42")
+                );
+                Assert.Equal(
+                    "Argument '42' is not a valid value.",
+                    Utils.GetResourceString(
+                        ResourceKey: "Argument_InvalidValue1",
+                        Args: new[] { "42" }
+                    )
+                );
+                Assert.Equal(
+                    "Application-defined or object-defined error.",
+                    Utils.GetResourceString("UnrecognizedResourceKey")
+                );
             }
         }
     }

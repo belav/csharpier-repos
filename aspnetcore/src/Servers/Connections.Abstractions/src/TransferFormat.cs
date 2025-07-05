@@ -19,5 +19,5 @@ public enum TransferFormat
     /// <summary>
     /// A text transport format.
     /// </summary>
-    Text = 0x02
+    Text = 0x02,
 }

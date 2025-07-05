@@ -13,7 +13,8 @@ namespace System.ServiceModel
         [ThreadStatic]
         static OperationContextScope legacyCurrentScope;
 
-        static AsyncLocal<OperationContextScope> currentScope = new AsyncLocal<OperationContextScope>();
+        static AsyncLocal<OperationContextScope> currentScope =
+            new AsyncLocal<OperationContextScope>();
 
         OperationContext currentContext;
         bool disposed;
@@ -35,9 +36,10 @@ namespace System.ServiceModel
         {
             get
             {
-                return ServiceModelAppSettings.DisableOperationContextAsyncFlow ? legacyCurrentScope : currentScope.Value;
+                return ServiceModelAppSettings.DisableOperationContextAsyncFlow
+                    ? legacyCurrentScope
+                    : currentScope.Value;
             }
-
             set
             {
                 if (ServiceModelAppSettings.DisableOperationContextAsyncFlow)
@@ -77,14 +79,23 @@ namespace System.ServiceModel
 
         void PopContext()
         {
-            if (ServiceModelAppSettings.DisableOperationContextAsyncFlow && this.thread != Thread.CurrentThread)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInvalidContextScopeThread0)));
+            if (
+                ServiceModelAppSettings.DisableOperationContextAsyncFlow
+                && this.thread != Thread.CurrentThread
+            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxInvalidContextScopeThread0))
+                );
 
             if (CurrentScope != this)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInterleavedContextScopes0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxInterleavedContextScopes0))
+                );
 
             if (OperationContext.Current != this.currentContext)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxContextModifiedInsideScope0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxContextModifiedInsideScope0))
+                );
 
             CurrentScope = this.originalScope;
             OperationContext.Current = this.originalContext;
@@ -94,4 +105,3 @@ namespace System.ServiceModel
         }
     }
 }
-

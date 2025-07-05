@@ -9,19 +9,16 @@
     <Platforms>x64;x86</Platforms>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-
     <!-- We're binplacing these into an existing publish layout so that F5 build in VS updates
          the same bits tests expect to see in artifacts/ilc. That way we never need to wonder which
          binaries are up to date and which are stale. -->
     <GenerateDependencyFile>false</GenerateDependencyFile>
     <Configurations>Debug;Release;Checked</Configurations>
-
     <CommonSourcePath>$(MSBuildThisFileDirectory)..\..\Common\</CommonSourcePath>
     <NativeFormatCommonPath>$(CommonSourcePath)Internal\NativeFormat</NativeFormatCommonPath>
     <MetadataCommonPath>$(CommonSourcePath)\Internal\Metadata\NativeFormat</MetadataCommonPath>
     <MetadataWriterPath>$(MSBuildThisFileDirectory)Internal\Metadata\NativeFormat\Writer</MetadataWriterPath>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
   </ItemGroup>

@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     internal sealed class CollectionBuilderAttributeData
     {
-        public static readonly CollectionBuilderAttributeData Uninitialized = new CollectionBuilderAttributeData(null, null);
+        public static readonly CollectionBuilderAttributeData Uninitialized =
+            new CollectionBuilderAttributeData(null, null);
 
         public CollectionBuilderAttributeData(TypeSymbol? builderType, string? methodName)
         {

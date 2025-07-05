@@ -3,7 +3,7 @@
 //
 // CONTENTS
 //     Activity interface
-// 
+//
 // DESCRIPTION
 //
 // REVISIONS
@@ -14,27 +14,29 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
     using System.CodeDom;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.IO;
     using System.Reflection;
-    using System.Security.Principal;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
-    using Microsoft.CSharp;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Threading;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Threading;
+    using Microsoft.CSharp;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IDynamicPropertyTypeProvider
     {
         Type GetPropertyType(IServiceProvider serviceProvider, string propertyName);
@@ -47,12 +49,16 @@ namespace System.Workflow.ComponentModel
         void OnActivityRemoved(ActivityExecutionContext rootContext, Activity removedActivity);
         void OnWorkflowChangesCompleted(ActivityExecutionContext rootContext);
     }
+
     internal interface ISupportAlternateFlow
     {
         IList<Activity> AlternateFlowActivities { get; }
     }
 
-    [AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = false)]
+    [AttributeUsageAttribute(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = false
+    )]
     internal sealed class ActivityExecutorAttribute : Attribute
     {
         private string executorTypeName = string.Empty;
@@ -70,14 +76,13 @@ namespace System.Workflow.ComponentModel
 
         public string ExecutorTypeName
         {
-            get
-            {
-                return this.executorTypeName;
-            }
+            get { return this.executorTypeName; }
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ActivityExecutionStatus : byte
     {
         Initialized = 0,
@@ -85,10 +90,12 @@ namespace System.Workflow.ComponentModel
         Canceling = 2,
         Closed = 3,
         Compensating = 4,
-        Faulting = 5
+        Faulting = 5,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ActivityExecutionResult : byte
     {
         None = 0,
@@ -96,7 +103,7 @@ namespace System.Workflow.ComponentModel
         Canceled = 2,
         Compensated = 3,
         Faulted = 4,
-        Uninitialized = 5
+        Uninitialized = 5,
     }
 
     internal interface IDependencyObjectAccessor
@@ -108,12 +115,17 @@ namespace System.Workflow.ComponentModel
         void InitializeInstanceForRuntime(IWorkflowCoreRuntime workflowCoreRuntime);
 
         //This is invoked for every activating instance
-        void InitializeActivatingInstanceForRuntime(DependencyObject parentDependencyObject, IWorkflowCoreRuntime workflowCoreRuntime);
+        void InitializeActivatingInstanceForRuntime(
+            DependencyObject parentDependencyObject,
+            IWorkflowCoreRuntime workflowCoreRuntime
+        );
 
         T[] GetInvocationList<T>(DependencyProperty dependencyEvent);
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IStartWorkflow
     {
         Guid StartWorkflow(Type workflowType, Dictionary<string, object> namedArgumentValues);
@@ -127,7 +139,12 @@ namespace System.Workflow.ComponentModel
         Activity CurrentAtomicActivity { get; }
         IDisposable SetCurrentActivity(Activity activity);
 
-        void ScheduleItem(SchedulableItem item, bool isInAtomicTransaction, bool transacted, bool queueInTransaction);
+        void ScheduleItem(
+            SchedulableItem item,
+            bool isInAtomicTransaction,
+            bool transacted,
+            bool queueInTransaction
+        );
         void ActivityStatusChanged(Activity activity, bool transacted, bool committed);
         void RaiseException(Exception e, Activity activity, string responsibleActivity);
 
@@ -141,7 +158,10 @@ namespace System.Workflow.ComponentModel
         int GetNewContextActivityId();
         void RegisterContextActivity(Activity activity);
         void UnregisterContextActivity(Activity activity);
-        Activity LoadContextActivity(ActivityExecutionContextInfo contextInfo, Activity outerContextActivity);
+        Activity LoadContextActivity(
+            ActivityExecutionContextInfo contextInfo,
+            Activity outerContextActivity
+        );
         void SaveContextActivity(Activity contextActivity);
         Activity GetContextActivityForId(int id);
         Object GetService(Activity currentActivity, Type serviceType);
@@ -158,7 +178,13 @@ namespace System.Workflow.ComponentModel
         void TerminateInstance(Exception e);
         bool Resume();
         void CheckpointInstanceState(Activity currentActivity);
-        void RequestRevertToCheckpointState(Activity currentActivity, EventHandler<EventArgs> callbackHandler, EventArgs callbackData, bool suspendOnRevert, string suspendReason);
+        void RequestRevertToCheckpointState(
+            Activity currentActivity,
+            EventHandler<EventArgs> callbackHandler,
+            EventArgs callbackData,
+            bool suspendOnRevert,
+            string suspendReason
+        );
         void DisposeCheckpointState();
 
         // User Tracking
@@ -170,34 +196,37 @@ namespace System.Workflow.ComponentModel
 
     internal interface ITimerService
     {
-        void ScheduleTimer(WaitCallback callback, Guid workflowInstanceId, DateTime whenUtc, Guid timerId);
+        void ScheduleTimer(
+            WaitCallback callback,
+            Guid workflowInstanceId,
+            DateTime whenUtc,
+            Guid timerId
+        );
         void CancelTimer(Guid timerId);
     }
 
     [Serializable()]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowTerminatedException : Exception
     {
         private WorkflowTerminatedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public WorkflowTerminatedException()
-            : base(SR.GetString(SR.Error_WorkflowTerminated))
-        {
-        }
+            : base(SR.GetString(SR.Error_WorkflowTerminated)) { }
 
         public WorkflowTerminatedException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
+
         public WorkflowTerminatedException(string message, Exception exception)
-            : base(message, exception)
-        {
-        }
+            : base(message, exception) { }
     }
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface ICompensatableActivity
     {
         ActivityExecutionStatus Compensate(ActivityExecutionContext executionContext);
@@ -206,34 +235,30 @@ namespace System.Workflow.ComponentModel
     #region Class AlternateFlowActivityAttribute
 
     [AttributeUsageAttribute(AttributeTargets.Class, AllowMultiple = false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class AlternateFlowActivityAttribute : Attribute
-    {
-    }
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class AlternateFlowActivityAttribute : Attribute { }
     #endregion
 
     #region Class SupportsTransactionAttribute
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    internal sealed class SupportsTransactionAttribute : Attribute
-    {
-    }
+    internal sealed class SupportsTransactionAttribute : Attribute { }
     #endregion
 
     #region Class SupportsSynchronizationAttribute
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    internal sealed class SupportsSynchronizationAttribute : Attribute
-    {
-    }
+    internal sealed class SupportsSynchronizationAttribute : Attribute { }
     #endregion
 
     #region Class PersistOnCloseAttribute
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class PersistOnCloseAttribute : Attribute
-    {
-    }
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class PersistOnCloseAttribute : Attribute { }
     #endregion
 }

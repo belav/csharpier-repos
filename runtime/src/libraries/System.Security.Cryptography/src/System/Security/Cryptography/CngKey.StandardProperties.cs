@@ -29,22 +29,26 @@ namespace System.Security.Cryptography
         {
             get
             {
-                string algorithm = _keyHandle.GetPropertyAsString(KeyPropertyName.Algorithm, CngPropertyOptions.None)!;
+                string algorithm = _keyHandle.GetPropertyAsString(
+                    KeyPropertyName.Algorithm,
+                    CngPropertyOptions.None
+                )!;
                 // .NET Framework compat: Don't check for null. Just let CngAlgorithm handle it.
                 return new CngAlgorithm(algorithm);
             }
-
         }
 
         /// <summary>
         ///     Name of the algorithm this key can be used with
         /// </summary>
         public CngAlgorithmGroup? AlgorithmGroup
-
         {
             get
             {
-                string? algorithmGroup = _keyHandle.GetPropertyAsString(KeyPropertyName.AlgorithmGroup, CngPropertyOptions.None);
+                string? algorithmGroup = _keyHandle.GetPropertyAsString(
+                    KeyPropertyName.AlgorithmGroup,
+                    CngPropertyOptions.None
+                );
                 if (algorithmGroup == null)
                     return null;
                 return new CngAlgorithmGroup(algorithmGroup);
@@ -58,14 +62,14 @@ namespace System.Security.Cryptography
         {
             get
             {
-                CngExportPolicies policy = (CngExportPolicies)_keyHandle.GetPropertyAsDword(KeyPropertyName.ExportPolicy, CngPropertyOptions.None);
+                CngExportPolicies policy = (CngExportPolicies)
+                    _keyHandle.GetPropertyAsDword(
+                        KeyPropertyName.ExportPolicy,
+                        CngPropertyOptions.None
+                    );
                 return policy;
             }
-
-            internal set
-            {
-                _keyHandle.SetExportPolicy(value);
-            }
+            internal set { _keyHandle.SetExportPolicy(value); }
         }
 
         /// <summary>
@@ -73,18 +77,12 @@ namespace System.Security.Cryptography
         /// </summary>
         public SafeNCryptKeyHandle Handle
         {
-            get
-            {
-                return _keyHandle.Duplicate();
-            }
+            get { return _keyHandle.Duplicate(); }
         }
 
         internal SafeNCryptKeyHandle HandleNoDuplicate
         {
-            get
-            {
-                return _keyHandle;
-            }
+            get { return _keyHandle; }
         }
 
         /// <summary>
@@ -103,7 +101,14 @@ namespace System.Security.Cryptography
                 {
                     byte propertyValue;
                     int cbResult;
-                    ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(_keyHandle, KeyPropertyName.ClrIsEphemeral, &propertyValue, sizeof(byte), out cbResult, CngPropertyOptions.CustomProperty);
+                    ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                        _keyHandle,
+                        KeyPropertyName.ClrIsEphemeral,
+                        &propertyValue,
+                        sizeof(byte),
+                        out cbResult,
+                        CngPropertyOptions.CustomProperty
+                    );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
                         // Third party Key providers, and Windows PCP KSP won't recognize this property;
@@ -121,13 +126,18 @@ namespace System.Security.Cryptography
                     return true;
                 }
             }
-
             private set
             {
                 unsafe
                 {
                     byte isEphemeral = value ? (byte)1 : (byte)0;
-                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(_keyHandle, KeyPropertyName.ClrIsEphemeral, &isEphemeral, sizeof(byte), CngPropertyOptions.CustomProperty);
+                    ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
+                        _keyHandle,
+                        KeyPropertyName.ClrIsEphemeral,
+                        &isEphemeral,
+                        sizeof(byte),
+                        CngPropertyOptions.CustomProperty
+                    );
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                         throw errorCode.ToCryptographicException();
                 }
@@ -141,8 +151,10 @@ namespace System.Security.Cryptography
         {
             get
             {
-                CngKeyOpenOptions keyType = (CngKeyOpenOptions)_keyHandle.GetPropertyAsDword(KeyPropertyName.KeyType, CngPropertyOptions.None);
-                bool isMachineKey = (keyType & CngKeyOpenOptions.MachineKey) == CngKeyOpenOptions.MachineKey;
+                CngKeyOpenOptions keyType = (CngKeyOpenOptions)
+                    _keyHandle.GetPropertyAsDword(KeyPropertyName.KeyType, CngPropertyOptions.None);
+                bool isMachineKey =
+                    (keyType & CngKeyOpenOptions.MachineKey) == CngKeyOpenOptions.MachineKey;
                 return isMachineKey;
             }
         }
@@ -159,7 +171,10 @@ namespace System.Security.Cryptography
                 if (IsEphemeral)
                     return null;
 
-                string? keyName = _keyHandle.GetPropertyAsString(KeyPropertyName.Name, CngPropertyOptions.None);
+                string? keyName = _keyHandle.GetPropertyAsString(
+                    KeyPropertyName.Name,
+                    CngPropertyOptions.None
+                );
                 return keyName;
             }
         }
@@ -190,7 +205,8 @@ namespace System.Security.Cryptography
                     ErrorCode errorCode = Interop.NCrypt.NCryptGetIntProperty(
                         _keyHandle,
                         KeyPropertyName.PublicKeyLength,
-                        ref keySize);
+                        ref keySize
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -198,7 +214,8 @@ namespace System.Security.Cryptography
                         errorCode = Interop.NCrypt.NCryptGetIntProperty(
                             _keyHandle,
                             KeyPropertyName.Length,
-                            ref keySize);
+                            ref keySize
+                        );
                     }
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -216,19 +233,30 @@ namespace System.Security.Cryptography
                         // if block. We don't want to read from it unless we don't know the key size.
                         CngAlgorithmGroup? algorithmGroup = AlgorithmGroup;
 
-                        if (algorithmGroup == CngAlgorithmGroup.ECDiffieHellman || algorithmGroup == CngAlgorithmGroup.ECDsa)
+                        if (
+                            algorithmGroup == CngAlgorithmGroup.ECDiffieHellman
+                            || algorithmGroup == CngAlgorithmGroup.ECDsa
+                        )
                         {
-                            string? curve = _keyHandle.GetPropertyAsString(KeyPropertyName.ECCCurveName, CngPropertyOptions.None);
+                            string? curve = _keyHandle.GetPropertyAsString(
+                                KeyPropertyName.ECCCurveName,
+                                CngPropertyOptions.None
+                            );
 
                             switch (curve)
                             {
                                 // nistP192 and nistP224 don't have named curve accelerators but we can handle them.
                                 // These string values match the names in https://learn.microsoft.com/en-us/windows/win32/seccng/cng-named-elliptic-curves
-                                case "nistP192": return 192;
-                                case "nistP224": return 224;
-                                case nameof(ECCurve.NamedCurves.nistP256): return 256;
-                                case nameof(ECCurve.NamedCurves.nistP384): return 384;
-                                case nameof(ECCurve.NamedCurves.nistP521): return 521;
+                                case "nistP192":
+                                    return 192;
+                                case "nistP224":
+                                    return 224;
+                                case nameof(ECCurve.NamedCurves.nistP256):
+                                    return 256;
+                                case nameof(ECCurve.NamedCurves.nistP384):
+                                    return 384;
+                                case nameof(ECCurve.NamedCurves.nistP521):
+                                    return 521;
                             }
                         }
                     }
@@ -242,11 +270,12 @@ namespace System.Security.Cryptography
         ///     Usage restrictions on the key
         /// </summary>
         public CngKeyUsages KeyUsage
-
         {
             get
             {
-                CngKeyUsages keyUsage = (CngKeyUsages)(_keyHandle.GetPropertyAsDword(KeyPropertyName.KeyUsage, CngPropertyOptions.None));
+                CngKeyUsages keyUsage = (CngKeyUsages)(
+                    _keyHandle.GetPropertyAsDword(KeyPropertyName.KeyUsage, CngPropertyOptions.None)
+                );
                 return keyUsage;
             }
         }
@@ -258,19 +287,26 @@ namespace System.Security.Cryptography
         {
             get
             {
-                IntPtr parentWindowHandle = _keyHandle.GetPropertyAsIntPtr(KeyPropertyName.ParentWindowHandle, CngPropertyOptions.None);
+                IntPtr parentWindowHandle = _keyHandle.GetPropertyAsIntPtr(
+                    KeyPropertyName.ParentWindowHandle,
+                    CngPropertyOptions.None
+                );
                 return parentWindowHandle;
             }
-
             set
             {
                 unsafe
                 {
-                    Interop.NCrypt.NCryptSetProperty(_keyHandle, KeyPropertyName.ParentWindowHandle, &value, IntPtr.Size, CngPropertyOptions.None);
+                    Interop.NCrypt.NCryptSetProperty(
+                        _keyHandle,
+                        KeyPropertyName.ParentWindowHandle,
+                        &value,
+                        IntPtr.Size,
+                        CngPropertyOptions.None
+                    );
                 }
             }
         }
-
 
         /// <summary>
         ///     KSP which holds this key
@@ -279,7 +315,10 @@ namespace System.Security.Cryptography
         {
             get
             {
-                string? provider = _providerHandle.GetPropertyAsString(ProviderPropertyName.Name, CngPropertyOptions.None);
+                string? provider = _providerHandle.GetPropertyAsString(
+                    ProviderPropertyName.Name,
+                    CngPropertyOptions.None
+                );
                 if (provider == null)
                     return null;
                 return new CngProvider(provider);
@@ -291,10 +330,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public SafeNCryptProviderHandle ProviderHandle
         {
-            get
-            {
-                return _providerHandle.Duplicate();
-            }
+            get { return _providerHandle.Duplicate(); }
         }
 
         /// <summary>
@@ -311,8 +347,18 @@ namespace System.Security.Cryptography
                 unsafe
                 {
                     int numBytesNeeded;
-                    ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(_keyHandle, KeyPropertyName.UIPolicy, null, 0, out numBytesNeeded, CngPropertyOptions.None);
-                    if (errorCode != ErrorCode.ERROR_SUCCESS && errorCode != ErrorCode.NTE_NOT_FOUND)
+                    ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                        _keyHandle,
+                        KeyPropertyName.UIPolicy,
+                        null,
+                        0,
+                        out numBytesNeeded,
+                        CngPropertyOptions.None
+                    );
+                    if (
+                        errorCode != ErrorCode.ERROR_SUCCESS
+                        && errorCode != ErrorCode.NTE_NOT_FOUND
+                    )
                         throw errorCode.ToCryptographicException();
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS || numBytesNeeded == 0)
@@ -336,22 +382,41 @@ namespace System.Security.Cryptography
                         byte[] ncryptUiPolicyAndStrings = new byte[numBytesNeeded];
                         fixed (byte* pNcryptUiPolicyAndStrings = &ncryptUiPolicyAndStrings[0])
                         {
-                            errorCode = Interop.NCrypt.NCryptGetProperty(_keyHandle, KeyPropertyName.UIPolicy, pNcryptUiPolicyAndStrings, ncryptUiPolicyAndStrings.Length, out numBytesNeeded, CngPropertyOptions.None);
+                            errorCode = Interop.NCrypt.NCryptGetProperty(
+                                _keyHandle,
+                                KeyPropertyName.UIPolicy,
+                                pNcryptUiPolicyAndStrings,
+                                ncryptUiPolicyAndStrings.Length,
+                                out numBytesNeeded,
+                                CngPropertyOptions.None
+                            );
                             if (errorCode != ErrorCode.ERROR_SUCCESS)
                                 throw errorCode.ToCryptographicException();
 
-                            NCRYPT_UI_POLICY* pNcryptUiPolicy = (NCRYPT_UI_POLICY*)pNcryptUiPolicyAndStrings;
+                            NCRYPT_UI_POLICY* pNcryptUiPolicy =
+                                (NCRYPT_UI_POLICY*)pNcryptUiPolicyAndStrings;
                             uiProtectionLevel = pNcryptUiPolicy->dwFlags;
                             friendlyName = Marshal.PtrToStringUni(pNcryptUiPolicy->pszFriendlyName);
                             description = Marshal.PtrToStringUni(pNcryptUiPolicy->pszDescription);
-                            creationTitle = Marshal.PtrToStringUni(pNcryptUiPolicy->pszCreationTitle);
+                            creationTitle = Marshal.PtrToStringUni(
+                                pNcryptUiPolicy->pszCreationTitle
+                            );
                         }
                     }
                 }
 
-                string? useContext = _keyHandle.GetPropertyAsString(KeyPropertyName.UseContext, CngPropertyOptions.None);
+                string? useContext = _keyHandle.GetPropertyAsString(
+                    KeyPropertyName.UseContext,
+                    CngPropertyOptions.None
+                );
 
-                return new CngUIPolicy(uiProtectionLevel, friendlyName, description, useContext, creationTitle);
+                return new CngUIPolicy(
+                    uiProtectionLevel,
+                    friendlyName,
+                    description,
+                    useContext,
+                    creationTitle
+                );
             }
         }
 
@@ -366,7 +431,10 @@ namespace System.Security.Cryptography
                 if (IsEphemeral)
                     return null;
 
-                string? uniqueName = _keyHandle.GetPropertyAsString(KeyPropertyName.UniqueName, CngPropertyOptions.None);
+                string? uniqueName = _keyHandle.GetPropertyAsString(
+                    KeyPropertyName.UniqueName,
+                    CngPropertyOptions.None
+                );
                 return uniqueName;
             }
         }

@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,12 +13,11 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
-   
+namespace System.Runtime.InteropServices
+{
     using System;
 
     [Serializable]
-
     public sealed class VariantWrapper
     {
         public VariantWrapper(Object obj)
@@ -26,12 +25,9 @@ namespace System.Runtime.InteropServices {
             m_WrappedObject = obj;
         }
 
-        public Object WrappedObject 
+        public Object WrappedObject
         {
-            get 
-            {
-                return m_WrappedObject;
-            }
+            get { return m_WrappedObject; }
         }
 
         private Object m_WrappedObject;

@@ -11,8 +11,10 @@ using System.Runtime.Serialization.DataContracts;
 using System.Security;
 using System.Text;
 using System.Xml;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, System.Runtime.Serialization.DataContracts.DataContract>;
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 
 namespace System.Runtime.Serialization
 {
@@ -21,9 +23,11 @@ namespace System.Runtime.Serialization
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract void WriteStartObject(XmlDictionaryWriter writer, object? graph);
+
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract void WriteObjectContent(XmlDictionaryWriter writer, object? graph);
+
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public abstract void WriteEndObject(XmlDictionaryWriter writer);
@@ -34,7 +38,11 @@ namespace System.Runtime.Serialization
         {
             ArgumentNullException.ThrowIfNull(stream);
 
-            XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(stream, Encoding.UTF8, false /*ownsStream*/);
+            XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(
+                stream,
+                Encoding.UTF8,
+                false /*ownsStream*/
+            );
             WriteObject(writer, graph);
             writer.Flush();
         }
@@ -91,7 +99,11 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal void WriteObjectHandleExceptions(XmlWriterDelegator writer, object? graph, DataContractResolver? dataContractResolver)
+        internal void WriteObjectHandleExceptions(
+            XmlWriterDelegator writer,
+            object? graph,
+            DataContractResolver? dataContractResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(writer);
 
@@ -101,11 +113,17 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                    ex
+                );
             }
             catch (FormatException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                    ex
+                );
             }
         }
 
@@ -113,10 +131,7 @@ namespace System.Runtime.Serialization
         {
             [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -130,7 +145,11 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal virtual void InternalWriteObject(XmlWriterDelegator writer, object? graph, DataContractResolver? dataContractResolver)
+        internal virtual void InternalWriteObject(
+            XmlWriterDelegator writer,
+            object? graph,
+            DataContractResolver? dataContractResolver
+        )
         {
             InternalWriteObject(writer, graph);
         }
@@ -142,6 +161,7 @@ namespace System.Runtime.Serialization
             Debug.Fail("XmlObjectSerializer.InternalWriteStartObject should never get called");
             throw new NotSupportedException();
         }
+
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         internal virtual void InternalWriteObjectContent(XmlWriterDelegator writer, object? graph)
@@ -149,6 +169,7 @@ namespace System.Runtime.Serialization
             Debug.Fail("XmlObjectSerializer.InternalWriteObjectContent should never get called");
             throw new NotSupportedException();
         }
+
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         internal virtual void InternalWriteEndObject(XmlWriterDelegator writer)
@@ -169,11 +190,17 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
+                    ex
+                );
             }
             catch (FormatException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorWriteStartObject, GetSerializeType(graph), ex),
+                    ex
+                );
             }
         }
 
@@ -186,16 +213,24 @@ namespace System.Runtime.Serialization
             try
             {
                 if (writer.WriteState != WriteState.Element)
-                    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.XmlWriterMustBeInElement, writer.WriteState));
+                    throw XmlObjectSerializer.CreateSerializationException(
+                        SR.Format(SR.XmlWriterMustBeInElement, writer.WriteState)
+                    );
                 InternalWriteObjectContent(writer, graph);
             }
             catch (XmlException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                    ex
+                );
             }
             catch (FormatException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorSerializing, GetSerializeType(graph), ex),
+                    ex
+                );
             }
         }
 
@@ -211,21 +246,37 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorWriteEndObject, null, ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
+                    ex
+                );
             }
             catch (FormatException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorWriteEndObject, null, ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorWriteEndObject, null, ex),
+                    ex
+                );
             }
         }
 
-        internal static void WriteRootElement(XmlWriterDelegator writer, DataContract contract, XmlDictionaryString? name, XmlDictionaryString? ns, bool needsContractNsAtRoot)
+        internal static void WriteRootElement(
+            XmlWriterDelegator writer,
+            DataContract contract,
+            XmlDictionaryString? name,
+            XmlDictionaryString? ns,
+            bool needsContractNsAtRoot
+        )
         {
             if (name == null) // root name not set explicitly
             {
                 if (!contract.HasRoot)
                     return;
-                contract.WriteRootElement(writer, contract.TopLevelElementName!, contract.TopLevelElementNamespace);
+                contract.WriteRootElement(
+                    writer,
+                    contract.TopLevelElementName!,
+                    contract.TopLevelElementNamespace
+                );
             }
             else
             {
@@ -237,12 +288,20 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal static bool CheckIfNeedsContractNsAtRoot(XmlDictionaryString? name, XmlDictionaryString? ns, DataContract contract)
+        internal static bool CheckIfNeedsContractNsAtRoot(
+            XmlDictionaryString? name,
+            XmlDictionaryString? ns,
+            DataContract contract
+        )
         {
             if (name == null)
                 return false;
 
-            if (contract.IsBuiltInDataContract || !contract.CanContainReferences || contract.IsISerializable)
+            if (
+                contract.IsBuiltInDataContract
+                || !contract.CanContainReferences
+                || contract.IsISerializable
+            )
             {
                 return false;
             }
@@ -256,13 +315,27 @@ namespace System.Runtime.Serialization
 
         internal static void WriteNull(XmlWriterDelegator writer)
         {
-            writer.WriteAttributeBool(Globals.XsiPrefix, DictionaryGlobals.XsiNilLocalName, DictionaryGlobals.SchemaInstanceNamespace, true);
+            writer.WriteAttributeBool(
+                Globals.XsiPrefix,
+                DictionaryGlobals.XsiNilLocalName,
+                DictionaryGlobals.SchemaInstanceNamespace,
+                true
+            );
         }
 
-        internal static bool IsContractDeclared(DataContract contract, DataContract declaredContract)
+        internal static bool IsContractDeclared(
+            DataContract contract,
+            DataContract declaredContract
+        )
         {
-            return (object.ReferenceEquals(contract.Name, declaredContract.Name) && object.ReferenceEquals(contract.Namespace, declaredContract.Namespace))
-                || (contract.Name.Value == declaredContract.Name.Value && contract.Namespace.Value == declaredContract.Namespace.Value);
+            return (
+                    object.ReferenceEquals(contract.Name, declaredContract.Name)
+                    && object.ReferenceEquals(contract.Namespace, declaredContract.Namespace)
+                )
+                || (
+                    contract.Name.Value == declaredContract.Name.Value
+                    && contract.Namespace.Value == declaredContract.Namespace.Value
+                );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -271,7 +344,9 @@ namespace System.Runtime.Serialization
         {
             ArgumentNullException.ThrowIfNull(stream);
 
-            return ReadObject(XmlDictionaryReader.CreateTextReader(stream, XmlDictionaryReaderQuotas.Max));
+            return ReadObject(
+                XmlDictionaryReader.CreateTextReader(stream, XmlDictionaryReaderQuotas.Max)
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -287,7 +362,10 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public virtual object? ReadObject(XmlDictionaryReader reader)
         {
-            return ReadObjectHandleExceptions(new XmlReaderDelegator(reader), true /*verifyObjectName*/);
+            return ReadObjectHandleExceptions(
+                new XmlReaderDelegator(reader),
+                true /*verifyObjectName*/
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -318,14 +396,21 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal virtual object? InternalReadObject(XmlReaderDelegator reader, bool verifyObjectName)
+        internal virtual object? InternalReadObject(
+            XmlReaderDelegator reader,
+            bool verifyObjectName
+        )
         {
             return ReadObject(reader.UnderlyingReader, verifyObjectName);
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal virtual object? InternalReadObject(XmlReaderDelegator reader, bool verifyObjectName, DataContractResolver? dataContractResolver)
+        internal virtual object? InternalReadObject(
+            XmlReaderDelegator reader,
+            bool verifyObjectName,
+            DataContractResolver? dataContractResolver
+        )
         {
             return InternalReadObject(reader, verifyObjectName);
         }
@@ -340,14 +425,21 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal object? ReadObjectHandleExceptions(XmlReaderDelegator reader, bool verifyObjectName)
+        internal object? ReadObjectHandleExceptions(
+            XmlReaderDelegator reader,
+            bool verifyObjectName
+        )
         {
             return ReadObjectHandleExceptions(reader, verifyObjectName, null);
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal object? ReadObjectHandleExceptions(XmlReaderDelegator reader, bool verifyObjectName, DataContractResolver? dataContractResolver)
+        internal object? ReadObjectHandleExceptions(
+            XmlReaderDelegator reader,
+            bool verifyObjectName,
+            DataContractResolver? dataContractResolver
+        )
         {
             ArgumentNullException.ThrowIfNull(reader);
 
@@ -357,11 +449,17 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
+                    ex
+                );
             }
             catch (FormatException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorDeserializing, GetDeserializeType(), ex),
+                    ex
+                );
             }
         }
 
@@ -377,11 +475,17 @@ namespace System.Runtime.Serialization
             }
             catch (XmlException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
+                    ex
+                );
             }
             catch (FormatException ex)
             {
-                throw XmlObjectSerializer.CreateSerializationException(GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex), ex);
+                throw XmlObjectSerializer.CreateSerializationException(
+                    GetTypeInfoError(SR.ErrorIsStartObject, GetDeserializeType(), ex),
+                    ex
+                );
             }
         }
 
@@ -397,7 +501,12 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static bool IsRootElement(XmlReaderDelegator reader, DataContract contract, XmlDictionaryString? name, XmlDictionaryString? ns)
+        internal static bool IsRootElement(
+            XmlReaderDelegator reader,
+            DataContract contract,
+            XmlDictionaryString? name,
+            XmlDictionaryString? ns
+        )
         {
             reader.MoveToElement();
             if (name != null) // root name set explicitly
@@ -409,7 +518,12 @@ namespace System.Runtime.Serialization
                 if (!contract.HasRoot)
                     return reader.IsStartElement();
 
-                if (reader.IsStartElement(contract.TopLevelElementName!, contract.TopLevelElementNamespace!))
+                if (
+                    reader.IsStartElement(
+                        contract.TopLevelElementName!,
+                        contract.TopLevelElementNamespace!
+                    )
+                )
                     return true;
 
                 ClassDataContract? classContract = contract as ClassDataContract;
@@ -417,14 +531,26 @@ namespace System.Runtime.Serialization
                     classContract = classContract.BaseClassContract;
                 while (classContract != null)
                 {
-                    if (reader.IsStartElement(classContract.TopLevelElementName!, classContract.TopLevelElementNamespace!))
+                    if (
+                        reader.IsStartElement(
+                            classContract.TopLevelElementName!,
+                            classContract.TopLevelElementNamespace!
+                        )
+                    )
                         return true;
                     classContract = classContract.BaseClassContract;
                 }
                 if (classContract == null)
                 {
-                    DataContract objectContract = PrimitiveDataContract.GetPrimitiveDataContract(Globals.TypeOfObject)!;
-                    if (reader.IsStartElement(objectContract.TopLevelElementName!, objectContract.TopLevelElementNamespace!))
+                    DataContract objectContract = PrimitiveDataContract.GetPrimitiveDataContract(
+                        Globals.TypeOfObject
+                    )!;
+                    if (
+                        reader.IsStartElement(
+                            objectContract.TopLevelElementName!,
+                            objectContract.TopLevelElementNamespace!
+                        )
+                    )
                         return true;
                 }
                 return false;
@@ -434,13 +560,30 @@ namespace System.Runtime.Serialization
         internal static string TryAddLineInfo(XmlReaderDelegator reader, string errorMessage)
         {
             if (reader.HasLineInfo())
-                return string.Create(CultureInfo.InvariantCulture, $"{SR.Format(SR.ErrorInLine, reader.LineNumber, reader.LinePosition)} {errorMessage}");
+                return string.Create(
+                    CultureInfo.InvariantCulture,
+                    $"{SR.Format(SR.ErrorInLine, reader.LineNumber, reader.LinePosition)} {errorMessage}"
+                );
             return errorMessage;
         }
 
-        internal static Exception CreateSerializationExceptionWithReaderDetails(string errorMessage, XmlReaderDelegator reader)
+        internal static Exception CreateSerializationExceptionWithReaderDetails(
+            string errorMessage,
+            XmlReaderDelegator reader
+        )
         {
-            return XmlObjectSerializer.CreateSerializationException(TryAddLineInfo(reader, SR.Format(SR.EncounteredWithNameNamespace, errorMessage, reader.NodeType, reader.LocalName, reader.NamespaceURI)));
+            return XmlObjectSerializer.CreateSerializationException(
+                TryAddLineInfo(
+                    reader,
+                    SR.Format(
+                        SR.EncounteredWithNameNamespace,
+                        errorMessage,
+                        reader.NodeType,
+                        reader.LocalName,
+                        reader.NamespaceURI
+                    )
+                )
+            );
         }
 
         internal static SerializationException CreateSerializationException(string errorMessage)
@@ -449,14 +592,26 @@ namespace System.Runtime.Serialization
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static SerializationException CreateSerializationException(string errorMessage, Exception? innerException)
+        internal static SerializationException CreateSerializationException(
+            string errorMessage,
+            Exception? innerException
+        )
         {
             return new SerializationException(errorMessage, innerException);
         }
-        internal static string GetTypeInfoError(string errorMessage, Type? type, Exception innerException)
+
+        internal static string GetTypeInfoError(
+            string errorMessage,
+            Type? type,
+            Exception innerException
+        )
         {
-            string typeInfo = (type == null) ? string.Empty : SR.Format(SR.ErrorTypeInfo, DataContract.GetClrTypeFullName(type));
-            string innerExceptionMessage = (innerException == null) ? string.Empty : innerException.Message;
+            string typeInfo =
+                (type == null)
+                    ? string.Empty
+                    : SR.Format(SR.ErrorTypeInfo, DataContract.GetClrTypeFullName(type));
+            string innerExceptionMessage =
+                (innerException == null) ? string.Empty : innerException.Message;
             return SR.Format(errorMessage, typeInfo, innerExceptionMessage);
         }
 
@@ -472,7 +627,8 @@ namespace System.Runtime.Serialization
 
 #pragma warning disable SYSLIB0050 // IFormatterConverter is obsolete
         private static IFormatterConverter? s_formatterConverter;
-        internal static IFormatterConverter FormatterConverter => s_formatterConverter ??= new FormatterConverter();
+        internal static IFormatterConverter FormatterConverter =>
+            s_formatterConverter ??= new FormatterConverter();
 #pragma warning restore SYSLIB0050
     }
 }

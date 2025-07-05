@@ -7,8 +7,8 @@
 namespace System.Configuration
 {
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Configuration.Provider;
+    using System.Runtime.Serialization;
     using System.Xml;
 
     ////////////////////////////////////////////////////////////
@@ -18,25 +18,28 @@ namespace System.Configuration
     {
         public override void Add(ProviderBase provider)
         {
-            if( provider == null )
+            if (provider == null)
             {
-                throw new ArgumentNullException( "provider" );
+                throw new ArgumentNullException("provider");
             }
 
-            if( !( provider is ProtectedConfigurationProvider ) )
-           {
-                throw new ArgumentException(SR.GetString(SR.Config_provider_must_implement_type, typeof(ProtectedConfigurationProvider).ToString()), "provider");
-           }
+            if (!(provider is ProtectedConfigurationProvider))
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Config_provider_must_implement_type,
+                        typeof(ProtectedConfigurationProvider).ToString()
+                    ),
+                    "provider"
+                );
+            }
 
-            base.Add( provider );
+            base.Add(provider);
         }
 
-        new public ProtectedConfigurationProvider this[string name]
+        public new ProtectedConfigurationProvider this[string name]
         {
-            get
-            {
-                return (ProtectedConfigurationProvider)base[name];
-            }
+            get { return (ProtectedConfigurationProvider)base[name]; }
         }
     }
 }

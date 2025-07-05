@@ -57,11 +57,16 @@ namespace System.Xml.Xsl
 
             // Convert Xsd list
             if (schemaType.DerivedBy == XmlSchemaDerivationMethod.List)
-                return PrimeProduct(Type(((XmlSchemaSimpleTypeList)schemaType.Content!).BaseItemType!, isStrict), XmlQueryCardinality.ZeroOrMore);
+                return PrimeProduct(
+                    Type(((XmlSchemaSimpleTypeList)schemaType.Content!).BaseItemType!, isStrict),
+                    XmlQueryCardinality.ZeroOrMore
+                );
 
             // Convert Xsd union
             Debug.Assert(schemaType.DerivedBy == XmlSchemaDerivationMethod.Union);
-            XmlSchemaSimpleType[] baseMemberTypes = ((XmlSchemaSimpleTypeUnion)schemaType.Content!).BaseMemberTypes!;
+            XmlSchemaSimpleType[] baseMemberTypes = (
+                (XmlSchemaSimpleTypeUnion)schemaType.Content!
+            ).BaseMemberTypes!;
             XmlQueryType[] queryMemberTypes = new XmlQueryType[baseMemberTypes!.Length];
 
             for (int i = 0; i < baseMemberTypes.Length; i++)
@@ -78,7 +83,10 @@ namespace System.Xml.Xsl
         /// <returns>the union type</returns>
         public static XmlQueryType Choice(XmlQueryType left, XmlQueryType right)
         {
-            return SequenceType.Create(ChoiceType.Create(PrimeChoice(new List<XmlQueryType>(left), right)), left.Cardinality | right.Cardinality);
+            return SequenceType.Create(
+                ChoiceType.Create(PrimeChoice(new List<XmlQueryType>(left), right)),
+                left.Cardinality | right.Cardinality
+            );
         }
 
         /// <summary>
@@ -124,7 +132,10 @@ namespace System.Xml.Xsl
         /// <returns>the sequence type</returns>
         public static XmlQueryType Sequence(XmlQueryType left, XmlQueryType right)
         {
-            return SequenceType.Create(ChoiceType.Create(PrimeChoice(new List<XmlQueryType>(left), right)), left.Cardinality + right.Cardinality);
+            return SequenceType.Create(
+                ChoiceType.Create(PrimeChoice(new List<XmlQueryType>(left), right)),
+                left.Cardinality + right.Cardinality
+            );
         }
 
 #if NEVER
@@ -133,7 +144,8 @@ namespace System.Xml.Xsl
         /// </summary>
         /// <param name="types">the sequence of types</param>
         /// <returns>the sequence type</returns>
-        public XmlQueryType Sequence(params XmlQueryType[] types) {
+        public XmlQueryType Sequence(params XmlQueryType[] types)
+        {
             XmlQueryCardinality card = XmlQueryCardinality.Zero;
 
             foreach (XmlQueryType t in types)
@@ -184,43 +196,100 @@ namespace System.Xml.Xsl
         public static readonly XmlQueryType Empty = SequenceType.Zero;
 
         public static readonly XmlQueryType Item = TF.Type(XmlTypeCode.Item, false);
-        public static readonly XmlQueryType ItemS = TF.PrimeProduct(Item, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType ItemS = TF.PrimeProduct(
+            Item,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Node = TF.Type(XmlTypeCode.Node, false);
-        public static readonly XmlQueryType NodeS = TF.PrimeProduct(Node, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType NodeS = TF.PrimeProduct(
+            Node,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Element = TF.Type(XmlTypeCode.Element, false);
-        public static readonly XmlQueryType ElementS = TF.PrimeProduct(Element, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType ElementS = TF.PrimeProduct(
+            Element,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Document = TF.Type(XmlTypeCode.Document, false);
-        public static readonly XmlQueryType DocumentS = TF.PrimeProduct(Document, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType DocumentS = TF.PrimeProduct(
+            Document,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Attribute = TF.Type(XmlTypeCode.Attribute, false);
-        public static readonly XmlQueryType AttributeQ = TF.PrimeProduct(Attribute, XmlQueryCardinality.ZeroOrOne);
-        public static readonly XmlQueryType AttributeS = TF.PrimeProduct(Attribute, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType AttributeQ = TF.PrimeProduct(
+            Attribute,
+            XmlQueryCardinality.ZeroOrOne
+        );
+        public static readonly XmlQueryType AttributeS = TF.PrimeProduct(
+            Attribute,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Namespace = TF.Type(XmlTypeCode.Namespace, false);
-        public static readonly XmlQueryType NamespaceS = TF.PrimeProduct(Namespace, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType NamespaceS = TF.PrimeProduct(
+            Namespace,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Text = TF.Type(XmlTypeCode.Text, false);
-        public static readonly XmlQueryType TextS = TF.PrimeProduct(Text, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType TextS = TF.PrimeProduct(
+            Text,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Comment = TF.Type(XmlTypeCode.Comment, false);
-        public static readonly XmlQueryType CommentS = TF.PrimeProduct(Comment, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType CommentS = TF.PrimeProduct(
+            Comment,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType PI = TF.Type(XmlTypeCode.ProcessingInstruction, false);
-        public static readonly XmlQueryType PIS = TF.PrimeProduct(PI, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType PIS = TF.PrimeProduct(
+            PI,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType DocumentOrElement = TF.Choice(Document, Element);
-        public static readonly XmlQueryType DocumentOrElementQ = TF.PrimeProduct(DocumentOrElement, XmlQueryCardinality.ZeroOrOne);
-        public static readonly XmlQueryType DocumentOrElementS = TF.PrimeProduct(DocumentOrElement, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType DocumentOrElementQ = TF.PrimeProduct(
+            DocumentOrElement,
+            XmlQueryCardinality.ZeroOrOne
+        );
+        public static readonly XmlQueryType DocumentOrElementS = TF.PrimeProduct(
+            DocumentOrElement,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Content = TF.Choice(Element, Comment, PI, Text);
-        public static readonly XmlQueryType ContentS = TF.PrimeProduct(Content, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType ContentS = TF.PrimeProduct(
+            Content,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType DocumentOrContent = TF.Choice(Document, Content);
-        public static readonly XmlQueryType DocumentOrContentS = TF.PrimeProduct(DocumentOrContent, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType DocumentOrContentS = TF.PrimeProduct(
+            DocumentOrContent,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType AttributeOrContent = TF.Choice(Attribute, Content);
-        public static readonly XmlQueryType AttributeOrContentS = TF.PrimeProduct(AttributeOrContent, XmlQueryCardinality.ZeroOrMore);
-        public static readonly XmlQueryType AnyAtomicType = TF.Type(XmlTypeCode.AnyAtomicType, false);
-        public static readonly XmlQueryType AnyAtomicTypeS = TF.PrimeProduct(AnyAtomicType, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType AttributeOrContentS = TF.PrimeProduct(
+            AttributeOrContent,
+            XmlQueryCardinality.ZeroOrMore
+        );
+        public static readonly XmlQueryType AnyAtomicType = TF.Type(
+            XmlTypeCode.AnyAtomicType,
+            false
+        );
+        public static readonly XmlQueryType AnyAtomicTypeS = TF.PrimeProduct(
+            AnyAtomicType,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType String = TF.Type(XmlTypeCode.String, false);
         public static readonly XmlQueryType StringX = TF.Type(XmlTypeCode.String, true);
-        public static readonly XmlQueryType StringXS = TF.PrimeProduct(StringX, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType StringXS = TF.PrimeProduct(
+            StringX,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType Boolean = TF.Type(XmlTypeCode.Boolean, false);
         public static readonly XmlQueryType BooleanX = TF.Type(XmlTypeCode.Boolean, true);
         public static readonly XmlQueryType Int = TF.Type(XmlTypeCode.Int, false);
         public static readonly XmlQueryType IntX = TF.Type(XmlTypeCode.Int, true);
-        public static readonly XmlQueryType IntXS = TF.PrimeProduct(IntX, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType IntXS = TF.PrimeProduct(
+            IntX,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType IntegerX = TF.Type(XmlTypeCode.Integer, true);
         public static readonly XmlQueryType LongX = TF.Type(XmlTypeCode.Long, true);
         public static readonly XmlQueryType DecimalX = TF.Type(XmlTypeCode.Decimal, true);
@@ -232,12 +301,32 @@ namespace System.Xml.Xsl
         public static readonly XmlQueryType UntypedDocument = ItemType.UntypedDocument;
         public static readonly XmlQueryType UntypedElement = ItemType.UntypedElement;
         public static readonly XmlQueryType UntypedAttribute = ItemType.UntypedAttribute;
-        public static readonly XmlQueryType UntypedNode = TF.Choice(UntypedDocument, UntypedElement, UntypedAttribute, Namespace, Text, Comment, PI);
-        public static readonly XmlQueryType UntypedNodeS = TF.PrimeProduct(UntypedNode, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType UntypedNode = TF.Choice(
+            UntypedDocument,
+            UntypedElement,
+            UntypedAttribute,
+            Namespace,
+            Text,
+            Comment,
+            PI
+        );
+        public static readonly XmlQueryType UntypedNodeS = TF.PrimeProduct(
+            UntypedNode,
+            XmlQueryCardinality.ZeroOrMore
+        );
         public static readonly XmlQueryType NodeNotRtf = ItemType.NodeNotRtf;
-        public static readonly XmlQueryType NodeNotRtfQ = TF.PrimeProduct(NodeNotRtf, XmlQueryCardinality.ZeroOrOne);
-        public static readonly XmlQueryType NodeNotRtfS = TF.PrimeProduct(NodeNotRtf, XmlQueryCardinality.ZeroOrMore);
-        public static readonly XmlQueryType NodeSDod = TF.PrimeProduct(NodeNotRtf, XmlQueryCardinality.ZeroOrMore);
+        public static readonly XmlQueryType NodeNotRtfQ = TF.PrimeProduct(
+            NodeNotRtf,
+            XmlQueryCardinality.ZeroOrOne
+        );
+        public static readonly XmlQueryType NodeNotRtfS = TF.PrimeProduct(
+            NodeNotRtf,
+            XmlQueryCardinality.ZeroOrMore
+        );
+        public static readonly XmlQueryType NodeSDod = TF.PrimeProduct(
+            NodeNotRtf,
+            XmlQueryCardinality.ZeroOrMore
+        );
         #endregion
 
         //-----------------------------------------------
@@ -248,7 +337,10 @@ namespace System.Xml.Xsl
         /// Construct the union of two lists of prime XmlQueryTypes.  Types are added to "accumulator" as necessary to ensure
         /// it contains a superset of "types".
         /// </summary>
-        private static List<XmlQueryType> PrimeChoice(List<XmlQueryType> accumulator, IList<XmlQueryType> types)
+        private static List<XmlQueryType> PrimeChoice(
+            List<XmlQueryType> accumulator,
+            IList<XmlQueryType> types
+        )
         {
             foreach (XmlQueryType sourceItem in types)
             {
@@ -299,17 +391,18 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Map XPathNodeType to XmlTypeCode.
         /// </summary>
-        private static readonly XmlTypeCode[] s_nodeKindToTypeCode = {
-            /* XPathNodeType.Root */                    XmlTypeCode.Document,
-            /* XPathNodeType.Element */                 XmlTypeCode.Element,
-            /* XPathNodeType.Attribute */               XmlTypeCode.Attribute,
-            /* XPathNodeType.Namespace */               XmlTypeCode.Namespace,
-            /* XPathNodeType.Text */                    XmlTypeCode.Text,
-            /* XPathNodeType.SignificantWhitespace */   XmlTypeCode.Text,
-            /* XPathNodeType.Whitespace */              XmlTypeCode.Text,
-            /* XPathNodeType.ProcessingInstruction */   XmlTypeCode.ProcessingInstruction,
-            /* XPathNodeType.Comment */                 XmlTypeCode.Comment,
-            /* XPathNodeType.All */                     XmlTypeCode.Node,
+        private static readonly XmlTypeCode[] s_nodeKindToTypeCode =
+        {
+            /* XPathNodeType.Root */XmlTypeCode.Document,
+            /* XPathNodeType.Element */XmlTypeCode.Element,
+            /* XPathNodeType.Attribute */XmlTypeCode.Attribute,
+            /* XPathNodeType.Namespace */XmlTypeCode.Namespace,
+            /* XPathNodeType.Text */XmlTypeCode.Text,
+            /* XPathNodeType.SignificantWhitespace */XmlTypeCode.Text,
+            /* XPathNodeType.Whitespace */XmlTypeCode.Text,
+            /* XPathNodeType.ProcessingInstruction */XmlTypeCode.ProcessingInstruction,
+            /* XPathNodeType.Comment */XmlTypeCode.Comment,
+            /* XPathNodeType.All */XmlTypeCode.Node,
         };
         #endregion
 
@@ -348,8 +441,10 @@ namespace System.Xml.Xsl
             {
 #if DEBUG
                 XmlTypeCode[] arrEnum = Enum.GetValues<XmlTypeCode>();
-                Debug.Assert(arrEnum[arrEnum.Length - 1] == XmlTypeCode.DayTimeDuration,
-                             "DayTimeDuration is no longer the last item in XmlTypeCode.  This code expects it to be.");
+                Debug.Assert(
+                    arrEnum[arrEnum.Length - 1] == XmlTypeCode.DayTimeDuration,
+                    "DayTimeDuration is no longer the last item in XmlTypeCode.  This code expects it to be."
+                );
 #endif
 
                 int typeCount = (int)XmlTypeCode.DayTimeDuration + 1;
@@ -370,7 +465,14 @@ namespace System.Xml.Xsl
 
                         case XmlTypeCode.Item:
                         case XmlTypeCode.Node:
-                            s_builtInItemTypes[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, XmlSchemaComplexType.AnyType, false, false, false);
+                            s_builtInItemTypes[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                XmlSchemaComplexType.AnyType,
+                                false,
+                                false,
+                                false
+                            );
                             s_builtInItemTypesStrict[i] = s_builtInItemTypes[i];
                             break;
 
@@ -380,40 +482,118 @@ namespace System.Xml.Xsl
                         case XmlTypeCode.ProcessingInstruction:
                         case XmlTypeCode.Comment:
                         case XmlTypeCode.Text:
-                            s_builtInItemTypes[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, XmlSchemaComplexType.AnyType, false, false, true);
+                            s_builtInItemTypes[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                XmlSchemaComplexType.AnyType,
+                                false,
+                                false,
+                                true
+                            );
                             s_builtInItemTypesStrict[i] = s_builtInItemTypes[i];
                             break;
 
                         case XmlTypeCode.Attribute:
-                            s_builtInItemTypes[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, DatatypeImplementation.AnySimpleType, false, false, true);
+                            s_builtInItemTypes[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                DatatypeImplementation.AnySimpleType,
+                                false,
+                                false,
+                                true
+                            );
                             s_builtInItemTypesStrict[i] = s_builtInItemTypes[i];
                             break;
 
                         case XmlTypeCode.AnyAtomicType:
-                            s_builtInItemTypes[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, DatatypeImplementation.AnyAtomicType, false, false, true);
+                            s_builtInItemTypes[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                DatatypeImplementation.AnyAtomicType,
+                                false,
+                                false,
+                                true
+                            );
                             s_builtInItemTypesStrict[i] = s_builtInItemTypes[i];
                             break;
 
                         case XmlTypeCode.UntypedAtomic:
                             // xdt:untypedAtomic is sealed, and therefore always strict
-                            s_builtInItemTypes[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, DatatypeImplementation.UntypedAtomicType, false, true, true);
+                            s_builtInItemTypes[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                DatatypeImplementation.UntypedAtomicType,
+                                false,
+                                true,
+                                true
+                            );
                             s_builtInItemTypesStrict[i] = s_builtInItemTypes[i];
                             break;
 
                         default:
-                            XmlSchemaType builtInType = XmlSchemaType.GetBuiltInSimpleType(typeCode);
-                            s_builtInItemTypes[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, builtInType, false, false, true);
-                            s_builtInItemTypesStrict[i] = new ItemType(typeCode, XmlQualifiedNameTest.Wildcard, builtInType, false, true, true);
+                            XmlSchemaType builtInType = XmlSchemaType.GetBuiltInSimpleType(
+                                typeCode
+                            );
+                            s_builtInItemTypes[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                builtInType,
+                                false,
+                                false,
+                                true
+                            );
+                            s_builtInItemTypesStrict[i] = new ItemType(
+                                typeCode,
+                                XmlQualifiedNameTest.Wildcard,
+                                builtInType,
+                                false,
+                                true,
+                                true
+                            );
                             break;
                     }
                 }
 
-                UntypedDocument = new ItemType(XmlTypeCode.Document, XmlQualifiedNameTest.Wildcard, XmlSchemaComplexType.UntypedAnyType, false, false, true);
-                UntypedElement = new ItemType(XmlTypeCode.Element, XmlQualifiedNameTest.Wildcard, XmlSchemaComplexType.UntypedAnyType, false, false, true);
-                UntypedAttribute = new ItemType(XmlTypeCode.Attribute, XmlQualifiedNameTest.Wildcard, DatatypeImplementation.UntypedAtomicType, false, false, true);
-                NodeNotRtf = new ItemType(XmlTypeCode.Node, XmlQualifiedNameTest.Wildcard, XmlSchemaComplexType.AnyType, false, false, true);
+                UntypedDocument = new ItemType(
+                    XmlTypeCode.Document,
+                    XmlQualifiedNameTest.Wildcard,
+                    XmlSchemaComplexType.UntypedAnyType,
+                    false,
+                    false,
+                    true
+                );
+                UntypedElement = new ItemType(
+                    XmlTypeCode.Element,
+                    XmlQualifiedNameTest.Wildcard,
+                    XmlSchemaComplexType.UntypedAnyType,
+                    false,
+                    false,
+                    true
+                );
+                UntypedAttribute = new ItemType(
+                    XmlTypeCode.Attribute,
+                    XmlQualifiedNameTest.Wildcard,
+                    DatatypeImplementation.UntypedAtomicType,
+                    false,
+                    false,
+                    true
+                );
+                NodeNotRtf = new ItemType(
+                    XmlTypeCode.Node,
+                    XmlQualifiedNameTest.Wildcard,
+                    XmlSchemaComplexType.AnyType,
+                    false,
+                    false,
+                    true
+                );
 
-                s_specialBuiltInItemTypes = new XmlQueryType[4] { UntypedDocument, UntypedElement, UntypedAttribute, NodeNotRtf };
+                s_specialBuiltInItemTypes = new XmlQueryType[4]
+                {
+                    UntypedDocument,
+                    UntypedElement,
+                    UntypedAttribute,
+                    NodeNotRtf,
+                };
             }
 #pragma warning restore CA1810
 
@@ -434,7 +614,10 @@ namespace System.Xml.Xsl
             /// </summary>
             public static XmlQueryType Create(XmlSchemaSimpleType schemaType, bool isStrict)
             {
-                Debug.Assert(schemaType.Datatype!.Variety == XmlSchemaDatatypeVariety.Atomic, "List or Union Xsd types should have been handled by caller.");
+                Debug.Assert(
+                    schemaType.Datatype!.Variety == XmlSchemaDatatypeVariety.Atomic,
+                    "List or Union Xsd types should have been handled by caller."
+                );
                 XmlTypeCode code = schemaType.Datatype.TypeCode;
 
                 // If schemaType is a built-in type,
@@ -445,13 +628,25 @@ namespace System.Xml.Xsl
                 }
 
                 // Otherwise, create a new type
-                return new ItemType(code, XmlQualifiedNameTest.Wildcard, schemaType, false, isStrict, true);
+                return new ItemType(
+                    code,
+                    XmlQualifiedNameTest.Wildcard,
+                    schemaType,
+                    false,
+                    isStrict,
+                    true
+                );
             }
 
             /// <summary>
             /// Create Document, Element or Attribute with specified name test, content type and nillable.
             /// </summary>
-            public static XmlQueryType Create(XmlTypeCode code, XmlQualifiedNameTest nameTest, XmlSchemaType contentType, bool isNillable)
+            public static XmlQueryType Create(
+                XmlTypeCode code,
+                XmlQualifiedNameTest nameTest,
+                XmlSchemaType contentType,
+                bool isNillable
+            )
             {
                 // If this is a Document, Element, or Attribute,
                 switch (code)
@@ -499,7 +694,14 @@ namespace System.Xml.Xsl
             /// <summary>
             /// Private constructor.  Create methods should be used to create instances.
             /// </summary>
-            private ItemType(XmlTypeCode code, XmlQualifiedNameTest nameTest, XmlSchemaType schemaType, bool isNillable, bool isStrict, bool isNotRtf)
+            private ItemType(
+                XmlTypeCode code,
+                XmlQualifiedNameTest nameTest,
+                XmlSchemaType schemaType,
+                bool isNillable,
+                bool isStrict,
+                bool isNotRtf
+            )
             {
                 Debug.Assert(nameTest != null, "nameTest cannot be null");
                 Debug.Assert(schemaType != null, "schemaType cannot be null");
@@ -510,7 +712,10 @@ namespace System.Xml.Xsl
                 _isStrict = isStrict;
                 _isNotRtf = isNotRtf;
 
-                Debug.Assert(!IsAtomicValue || schemaType.Datatype!.Variety == XmlSchemaDatatypeVariety.Atomic);
+                Debug.Assert(
+                    !IsAtomicValue
+                        || schemaType.Datatype!.Variety == XmlSchemaDatatypeVariety.Atomic
+                );
 
                 _nodeKinds = code switch
                 {
@@ -564,7 +769,10 @@ namespace System.Xml.Xsl
                 sbyte code = reader.ReadSByte();
 
                 if (0 <= code)
-                    return Create((XmlTypeCode)code, /*isStrict:*/reader.ReadBoolean());
+                    return Create(
+                        (XmlTypeCode)code, /*isStrict:*/
+                        reader.ReadBoolean()
+                    );
                 else
                     return s_specialBuiltInItemTypes[~code];
             }
@@ -681,7 +889,6 @@ namespace System.Xml.Xsl
             }
         }
 
-
         /// <summary>
         /// Implementation of XmlQueryType that composes a choice of various prime types.
         /// </summary>
@@ -705,13 +912,21 @@ namespace System.Xml.Xsl
                 // If exactly one kind is set, then create singleton ItemType
                 if (BitOperations.IsPow2(kinds))
                 {
-                    return ItemType.Create(s_nodeKindToTypeCode[BitOperations.TrailingZeroCount(kinds) + 1], false);
+                    return ItemType.Create(
+                        s_nodeKindToTypeCode[BitOperations.TrailingZeroCount(kinds) + 1],
+                        false
+                    );
                 }
 
                 members = new List<XmlQueryType>();
                 while (kinds != 0)
                 {
-                    members.Add(ItemType.Create(s_nodeKindToTypeCode[BitOperations.TrailingZeroCount(kinds) + 1], false));
+                    members.Add(
+                        ItemType.Create(
+                            s_nodeKindToTypeCode[BitOperations.TrailingZeroCount(kinds) + 1],
+                            false
+                        )
+                    );
 
                     kinds &= kinds - 1;
                 }
@@ -738,7 +953,10 @@ namespace System.Xml.Xsl
             /// </summary>
             private ChoiceType(List<XmlQueryType> members)
             {
-                Debug.Assert(members != null && members.Count != 1, "ChoiceType must contain a list with 0 or >1 types.");
+                Debug.Assert(
+                    members != null && members.Count != 1,
+                    "ChoiceType must contain a list with 0 or >1 types."
+                );
 
                 _members = members;
 
@@ -746,7 +964,10 @@ namespace System.Xml.Xsl
                 for (int i = 0; i < members.Count; i++)
                 {
                     XmlQueryType t = members[i];
-                    Debug.Assert(t.Cardinality == XmlQueryCardinality.One, "ChoiceType member types must be prime types.");
+                    Debug.Assert(
+                        t.Cardinality == XmlQueryCardinality.One,
+                        "ChoiceType member types must be prime types."
+                    );
 
                     // Summarize the union of member types as a single type
                     if (_code == XmlTypeCode.None)
@@ -790,15 +1011,16 @@ namespace System.Xml.Xsl
                 }
             }
 
-            private static readonly XmlTypeCode[] s_nodeKindToTypeCode = {
-                /* None */          XmlTypeCode.None,
-                /* Document */      XmlTypeCode.Document,
-                /* Element */       XmlTypeCode.Element,
-                /* Attribute */     XmlTypeCode.Attribute,
-                /* Text */          XmlTypeCode.Text,
-                /* Comment */       XmlTypeCode.Comment,
-                /* PI */            XmlTypeCode.ProcessingInstruction,
-                /* Namespace */     XmlTypeCode.Namespace,
+            private static readonly XmlTypeCode[] s_nodeKindToTypeCode =
+            {
+                /* None */XmlTypeCode.None,
+                /* Document */XmlTypeCode.Document,
+                /* Element */XmlTypeCode.Element,
+                /* Attribute */XmlTypeCode.Attribute,
+                /* Text */XmlTypeCode.Text,
+                /* Comment */XmlTypeCode.Comment,
+                /* PI */XmlTypeCode.ProcessingInstruction,
+                /* Namespace */XmlTypeCode.Namespace,
             };
 
             //-----------------------------------------------
@@ -920,7 +1142,12 @@ namespace System.Xml.Xsl
             /// </summary>
             public override XmlQueryCardinality Cardinality
             {
-                get { return TypeCode == XmlTypeCode.None ? XmlQueryCardinality.None : XmlQueryCardinality.One; }
+                get
+                {
+                    return TypeCode == XmlTypeCode.None
+                        ? XmlQueryCardinality.None
+                        : XmlQueryCardinality.One;
+                }
             }
 
             /// <summary>
@@ -953,13 +1180,15 @@ namespace System.Xml.Xsl
             }
         }
 
-
         /// <summary>
         /// Implementation of XmlQueryType that modifies the cardinality of a composed type.
         /// </summary>
         private sealed class SequenceType : XmlQueryType
         {
-            public static readonly XmlQueryType Zero = new SequenceType(ChoiceType.None, XmlQueryCardinality.Zero);
+            public static readonly XmlQueryType Zero = new SequenceType(
+                ChoiceType.None,
+                XmlQueryCardinality.Zero
+            );
 
             private readonly XmlQueryType _prime;
             private readonly XmlQueryCardinality _card;
@@ -969,7 +1198,10 @@ namespace System.Xml.Xsl
             /// </summary>
             public static XmlQueryType Create(XmlQueryType prime, XmlQueryCardinality card)
             {
-                Debug.Assert(prime != null, "SequenceType can only modify the cardinality of a non-null XmlQueryType.");
+                Debug.Assert(
+                    prime != null,
+                    "SequenceType can only modify the cardinality of a non-null XmlQueryType."
+                );
                 Debug.Assert(prime.IsSingleton, "Prime type must have cardinality one.");
 
                 if (prime.TypeCode == XmlTypeCode.None)
@@ -1149,9 +1381,19 @@ namespace System.Xml.Xsl
         /// <param name="contentType">content type of the node</param>
         /// <param name="isNillable">Whether it's nillable.</param>
         /// <returns>the node type</returns>
-        public static XmlQueryType Type(XPathNodeType kind, XmlQualifiedNameTest nameTest, XmlSchemaType contentType, bool isNillable)
+        public static XmlQueryType Type(
+            XPathNodeType kind,
+            XmlQualifiedNameTest nameTest,
+            XmlSchemaType contentType,
+            bool isNillable
+        )
         {
-            return ItemType.Create(s_nodeKindToTypeCode[(int)kind], nameTest, contentType, isNillable);
+            return ItemType.Create(
+                s_nodeKindToTypeCode[(int)kind],
+                nameTest,
+                contentType,
+                isNillable
+            );
         }
 
         #region Serialization
@@ -1194,9 +1436,12 @@ namespace System.Xml.Xsl
         {
             switch (reader.ReadByte())
             {
-                case 0: return ItemType.Create(reader);
-                case 1: return ChoiceType.Create(reader);
-                case 2: return SequenceType.Create(reader);
+                case 0:
+                    return ItemType.Create(reader);
+                case 1:
+                    return ChoiceType.Create(reader);
+                case 2:
+                    return SequenceType.Create(reader);
                 default:
                     Debug.Fail("Unexpected XmlQueryType's subtype id");
                     return null;
@@ -1215,7 +1460,13 @@ namespace System.Xml.Xsl
         /// <param name="contentType">content type of the node</param>
         /// <param name="isNillable">nillable property</param>
         /// <returns>the item type</returns>
-        public XmlQueryType Type(XmlTypeCode code, XmlQualifiedNameTest nameTest, XmlSchemaType contentType, bool isNillable) {
+        public XmlQueryType Type(
+            XmlTypeCode code,
+            XmlQualifiedNameTest nameTest,
+            XmlSchemaType contentType,
+            bool isNillable
+        )
+        {
             return ItemType.Create(code, nameTest, contentType, isNillable);
         }
 
@@ -1224,9 +1475,13 @@ namespace System.Xml.Xsl
         /// </summary>
         /// <param name="source">source type</param>
         /// <returns>strict type if the source is atomic, the source otherwise</returns>
-        public XmlQueryType StrictType(XmlQueryType source) {
+        public XmlQueryType StrictType(XmlQueryType source)
+        {
             if (source.IsAtomicValue && source.Count == 1)
-                return SequenceType.Create(ItemType.Create((XmlSchemaSimpleType)source.SchemaType, true), source.Cardinality);
+                return SequenceType.Create(
+                    ItemType.Create((XmlSchemaSimpleType)source.SchemaType, true),
+                    source.Cardinality
+                );
 
             return source;
         }
@@ -1237,7 +1492,8 @@ namespace System.Xml.Xsl
         /// <param name="code">the type code of the item</param>
         /// <param name="card">cardinality</param>
         /// <returns>build-in type type</returns>
-        public XmlQueryType Type(XmlTypeCode code, XmlQueryCardinality card) {
+        public XmlQueryType Type(XmlTypeCode code, XmlQueryCardinality card)
+        {
             return SequenceType.Create(ItemType.Create(code, false), card);
         }
 
@@ -1250,8 +1506,18 @@ namespace System.Xml.Xsl
         /// <param name="isNillable">nillable property</param>
         /// <param name="card">cardinality</param>
         /// <returns>the item type</returns>
-        public XmlQueryType Type(XmlTypeCode code, XmlQualifiedNameTest nameTest, XmlSchemaType contentType, bool isNillable, XmlQueryCardinality card) {
-            return SequenceType.Create(ItemType.Create(code, nameTest, contentType, isNillable), card);
+        public XmlQueryType Type(
+            XmlTypeCode code,
+            XmlQualifiedNameTest nameTest,
+            XmlSchemaType contentType,
+            bool isNillable,
+            XmlQueryCardinality card
+        )
+        {
+            return SequenceType.Create(
+                ItemType.Create(code, nameTest, contentType, isNillable),
+                card
+            );
         }
 
         /// <summary>
@@ -1260,8 +1526,12 @@ namespace System.Xml.Xsl
         /// <param name="left">the left type</param>
         /// <param name="right">the right type</param>
         /// <returns>the intersection type</returns>
-        public XmlQueryType Intersect(XmlQueryType left, XmlQueryType right) {
-            return SequenceType.Create(ChoiceType.Create(PrimeIntersect(left, right)), left.Cardinality & right.Cardinality);
+        public XmlQueryType Intersect(XmlQueryType left, XmlQueryType right)
+        {
+            return SequenceType.Create(
+                ChoiceType.Create(PrimeIntersect(left, right)),
+                left.Cardinality & right.Cardinality
+            );
         }
 
         /// <summary>
@@ -1269,7 +1539,8 @@ namespace System.Xml.Xsl
         /// </summary>
         /// <param name="types">the list of types</param>
         /// <returns>the intersection type</returns>
-        public XmlQueryType Intersect(params XmlQueryType[] types) {
+        public XmlQueryType Intersect(params XmlQueryType[] types)
+        {
             if (types.Length == 0)
                 return None;
             else if (types.Length == 1)
@@ -1279,7 +1550,8 @@ namespace System.Xml.Xsl
             List<XmlQueryType> list = PrimeIntersect(types[0], types[1]);
             XmlQueryCardinality card = types[0].Cardinality & types[1].Cardinality;
 
-            for (int i = 2; i < types.Length; i++) {
+            for (int i = 2; i < types.Length; i++)
+            {
                 list = PrimeIntersect(list, types[i]);
                 card &= types[i].Cardinality;
             }
@@ -1290,14 +1562,21 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Construct the intersection of two lists of prime XmlQueryTypes.
         /// </summary>
-        private List<XmlQueryType> PrimeIntersect(IList<XmlQueryType> left, IList<XmlQueryType> right) {
+        private List<XmlQueryType> PrimeIntersect(
+            IList<XmlQueryType> left,
+            IList<XmlQueryType> right
+        )
+        {
             List<XmlQueryType> list = new List<XmlQueryType>();
 
-            foreach (XmlQueryType leftItem in left) {
-                foreach (XmlQueryType rightItem in right) {
+            foreach (XmlQueryType leftItem in left)
+            {
+                foreach (XmlQueryType rightItem in right)
+                {
                     XmlQueryType intersection = IntersectItemTypes(leftItem, rightItem);
                     // Do not add none1 to a list
-                    if ((object)intersection != (object)None) {
+                    if ((object)intersection != (object)None)
+                    {
                         list.Add(intersection);
                     }
                 }
@@ -1311,86 +1590,108 @@ namespace System.Xml.Xsl
         /// </summary>
         /// <param name="source">source type</param>
         /// <returns>type of the sequence of atomic values</returns>
-        public XmlQueryType DataOn(XmlQueryType source) {
+        public XmlQueryType DataOn(XmlQueryType source)
+        {
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem  in source) {
-                switch (sourceItem.TypeCode) {
-                case XmlTypeCode.Item:
-                case XmlTypeCode.Node:
-                    AddItemToChoice(list, AnyAtomicType);
-                    card = XmlQueryCardinality.ZeroOrMore;
-                    break;
-                case XmlTypeCode.Document:
-                case XmlTypeCode.Text:
-                    AddItemToChoice(list, UntypedAtomic);
-                    card |= XmlQueryCardinality.One;
-                    break;
-                case XmlTypeCode.Comment:
-                case XmlTypeCode.ProcessingInstruction:
-                    AddItemToChoice(list, String);
-                    card |= XmlQueryCardinality.One;
-                    break;
-                case XmlTypeCode.Element:
-                case XmlTypeCode.Attribute:
-                    XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
-                    if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType || sourceSchemaType == DatatypeImplementation.UntypedAtomicType) {
-                        AddItemToChoice(list, UntypedAtomic);
-                        card |= XmlQueryCardinality.One;
-                    }
-                    else if (sourceSchemaType == XmlSchemaComplexType.AnyType || sourceSchemaType == DatatypeImplementation.AnySimpleType) {
+            foreach (XmlQueryType sourceItem in source)
+            {
+                switch (sourceItem.TypeCode)
+                {
+                    case XmlTypeCode.Item:
+                    case XmlTypeCode.Node:
                         AddItemToChoice(list, AnyAtomicType);
                         card = XmlQueryCardinality.ZeroOrMore;
-                    }
-                    else {
-                        if (sourceSchemaType.Datatype == null) {
-                            // Complex content adds anyAtomicType* if mixed
-                            XmlSchemaComplexType complexType = (XmlSchemaComplexType)sourceItem.SchemaType;
-                            if (complexType.ContentType == XmlSchemaContentType.Mixed) {
-                                AddItemToChoice(list, AnyAtomicType);
-                                card = XmlQueryCardinality.ZeroOrMore;
+                        break;
+                    case XmlTypeCode.Document:
+                    case XmlTypeCode.Text:
+                        AddItemToChoice(list, UntypedAtomic);
+                        card |= XmlQueryCardinality.One;
+                        break;
+                    case XmlTypeCode.Comment:
+                    case XmlTypeCode.ProcessingInstruction:
+                        AddItemToChoice(list, String);
+                        card |= XmlQueryCardinality.One;
+                        break;
+                    case XmlTypeCode.Element:
+                    case XmlTypeCode.Attribute:
+                        XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
+                        if (
+                            sourceSchemaType == XmlSchemaComplexType.UntypedAnyType
+                            || sourceSchemaType == DatatypeImplementation.UntypedAtomicType
+                        )
+                        {
+                            AddItemToChoice(list, UntypedAtomic);
+                            card |= XmlQueryCardinality.One;
+                        }
+                        else if (
+                            sourceSchemaType == XmlSchemaComplexType.AnyType
+                            || sourceSchemaType == DatatypeImplementation.AnySimpleType
+                        )
+                        {
+                            AddItemToChoice(list, AnyAtomicType);
+                            card = XmlQueryCardinality.ZeroOrMore;
+                        }
+                        else
+                        {
+                            if (sourceSchemaType.Datatype == null)
+                            {
+                                // Complex content adds anyAtomicType* if mixed
+                                XmlSchemaComplexType complexType = (XmlSchemaComplexType)
+                                    sourceItem.SchemaType;
+                                if (complexType.ContentType == XmlSchemaContentType.Mixed)
+                                {
+                                    AddItemToChoice(list, AnyAtomicType);
+                                    card = XmlQueryCardinality.ZeroOrMore;
+                                }
+                                else
+                                {
+                                    // Error if mixed is false
+                                    return null;
+                                }
                             }
-                            else {
-                                // Error if mixed is false
-                                return null;
+                            else
+                            {
+                                // Simple content
+                                XmlSchemaType schemaType = sourceItem.SchemaType;
+
+                                // Go up the tree until it's a simple type
+                                while (schemaType is XmlSchemaComplexType)
+                                {
+                                    schemaType = schemaType.BaseXmlSchemaType;
+                                }
+
+                                // Calculate XmlQueryType from XmlSchemaSimpleType
+                                XmlQueryType atomicSeq = Type(
+                                    (XmlSchemaSimpleType)schemaType,
+                                    false
+                                );
+
+                                // Add prime to a choice
+                                // It doesn't have to be a single item!
+                                PrimeChoice(list, atomicSeq.Prime);
+
+                                // Add cardinality to a choice
+                                card |= atomicSeq.Cardinality;
+                            }
+                            // Add ? if nillable
+                            if (sourceItem.IsNillable)
+                            {
+                                card *= XmlQueryCardinality.ZeroOrOne;
                             }
                         }
-                        else {
-                            // Simple content
-                            XmlSchemaType schemaType = sourceItem.SchemaType;
-
-                            // Go up the tree until it's a simple type
-                            while (schemaType is XmlSchemaComplexType) {
-                                schemaType = schemaType.BaseXmlSchemaType;
-                            }
-
-                            // Calculate XmlQueryType from XmlSchemaSimpleType
-                            XmlQueryType atomicSeq = Type((XmlSchemaSimpleType)schemaType, false);
-
-                            // Add prime to a choice
-                            // It doesn't have to be a single item!
-                            PrimeChoice(list, atomicSeq.Prime);
-
-                            // Add cardinality to a choice
-                            card |= atomicSeq.Cardinality;
-                        }
-                        // Add ? if nillable
-                        if (sourceItem.IsNillable) {
-                            card *= XmlQueryCardinality.ZeroOrOne;
-                        }
-                    }
-                    break;
-                case XmlTypeCode.Namespace:
-                    card |= XmlQueryCardinality.Zero;
-                    break;
-                case XmlTypeCode.None:
-                    break;
-                default:
-                    Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
-                    AddItemToChoice(list, sourceItem);
-                    card |= XmlQueryCardinality.One;
-                    break;
+                        break;
+                    case XmlTypeCode.Namespace:
+                        card |= XmlQueryCardinality.Zero;
+                        break;
+                    case XmlTypeCode.None:
+                        break;
+                    default:
+                        Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
+                        AddItemToChoice(list, sourceItem);
+                        card |= XmlQueryCardinality.One;
+                        break;
                 }
             }
             return PrimeProduct(ChoiceType.Create(list), source.Cardinality * card);
@@ -1402,12 +1703,14 @@ namespace System.Xml.Xsl
         /// <param name="source">source type</param>
         /// <param name="filter">type filter</param>
         /// <returns>type of the filtered node sequence</returns>
-        public XmlQueryType FilterOf(XmlQueryType source, XmlQueryType filter) {
+        public XmlQueryType FilterOf(XmlQueryType source, XmlQueryType filter)
+        {
             Debug.Assert(filter.IsNode && filter.Count == 1 && filter.IsSingleton);
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem in source) {
+            foreach (XmlQueryType sourceItem in source)
+            {
                 card |= AddFilteredPrime(list, sourceItem, filter, true);
             }
             // Make sure that cardinality is at least Zero
@@ -1420,52 +1723,69 @@ namespace System.Xml.Xsl
         /// <param name="source">source type</param>
         /// <param name="filter">type filter</param>
         /// <returns>type of the children node sequence</returns>
-        public XmlQueryType ChildrenOf(XmlQueryType source, XmlQueryType filter) {
+        public XmlQueryType ChildrenOf(XmlQueryType source, XmlQueryType filter)
+        {
             Debug.Assert(filter.IsNode && filter.Count == 1 && filter.IsSingleton);
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem in source) {
-                switch (sourceItem.TypeCode) {
-                case XmlTypeCode.Node:
-                case XmlTypeCode.Document:
-                case XmlTypeCode.Element:
-                    XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
-                    XmlQueryCardinality itemCard = XmlQueryCardinality.None;
-                    // Only element and document can have children
-                    if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType) {
-                        // content of xdt:untypedAny is element(*, xdt:untypedAny)*
-                        itemCard = (AddFilteredPrime(list, UntypedElement, filter) * XmlQueryCardinality.ZeroOrMore);
-                        itemCard += AddFilteredPrime(list, Text, filter);
-                    }
-                    else if (sourceSchemaType.Datatype != null) {
-                        // Text is the only child node simple type can have
-                        itemCard = AddFilteredPrime(list, Text, filter, true) * XmlQueryCardinality.ZeroOrOne;
-                    }
-                    else {
-                        // Complex content
-                        XmlSchemaComplexType complexType = (XmlSchemaComplexType)sourceSchemaType;
-                        itemCard = AddChildParticle(list, complexType.ContentTypeParticle, filter);
-                        if (complexType.ContentType == XmlSchemaContentType.Mixed) {
+            foreach (XmlQueryType sourceItem in source)
+            {
+                switch (sourceItem.TypeCode)
+                {
+                    case XmlTypeCode.Node:
+                    case XmlTypeCode.Document:
+                    case XmlTypeCode.Element:
+                        XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
+                        XmlQueryCardinality itemCard = XmlQueryCardinality.None;
+                        // Only element and document can have children
+                        if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType)
+                        {
+                            // content of xdt:untypedAny is element(*, xdt:untypedAny)*
+                            itemCard = (
+                                AddFilteredPrime(list, UntypedElement, filter)
+                                * XmlQueryCardinality.ZeroOrMore
+                            );
                             itemCard += AddFilteredPrime(list, Text, filter);
                         }
-                    }
-                    itemCard += AddFilteredPrime(list, PI, filter);
-                    itemCard += AddFilteredPrime(list, Comment, filter);
-                    card |= itemCard;
-                    break;
+                        else if (sourceSchemaType.Datatype != null)
+                        {
+                            // Text is the only child node simple type can have
+                            itemCard =
+                                AddFilteredPrime(list, Text, filter, true)
+                                * XmlQueryCardinality.ZeroOrOne;
+                        }
+                        else
+                        {
+                            // Complex content
+                            XmlSchemaComplexType complexType =
+                                (XmlSchemaComplexType)sourceSchemaType;
+                            itemCard = AddChildParticle(
+                                list,
+                                complexType.ContentTypeParticle,
+                                filter
+                            );
+                            if (complexType.ContentType == XmlSchemaContentType.Mixed)
+                            {
+                                itemCard += AddFilteredPrime(list, Text, filter);
+                            }
+                        }
+                        itemCard += AddFilteredPrime(list, PI, filter);
+                        itemCard += AddFilteredPrime(list, Comment, filter);
+                        card |= itemCard;
+                        break;
 
-                case XmlTypeCode.Attribute:
-                case XmlTypeCode.ProcessingInstruction:
-                case XmlTypeCode.Comment:
-                case XmlTypeCode.Namespace:
-                case XmlTypeCode.Text:
-                    card |= XmlQueryCardinality.Zero;
-                    break;
+                    case XmlTypeCode.Attribute:
+                    case XmlTypeCode.ProcessingInstruction:
+                    case XmlTypeCode.Comment:
+                    case XmlTypeCode.Namespace:
+                    case XmlTypeCode.Text:
+                        card |= XmlQueryCardinality.Zero;
+                        break;
 
-                default:
-                    Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
-                    return null;
+                    default:
+                        Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
+                        return null;
                 }
             }
             // Make sure that cardinality is at least Zero
@@ -1478,41 +1798,54 @@ namespace System.Xml.Xsl
         /// <param name="source">source type</param>
         /// <param name="filter">type filter</param>
         /// <returns>type of the children node sequence</returns>
-        public XmlQueryType AttributesOf(XmlQueryType source, XmlQueryType filter) {
+        public XmlQueryType AttributesOf(XmlQueryType source, XmlQueryType filter)
+        {
             Debug.Assert(filter.IsNode && filter.Count == 1 && filter.IsSingleton);
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem in source) {
-                switch (sourceItem.TypeCode) {
-                case XmlTypeCode.Node:
-                case XmlTypeCode.Element:
-                    XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
-                    if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType) {
-                        // attributes of xdt:untypedAny are attribute(*, xdt:untypedAtomic)*
-                        card |= AddFilteredPrime(list, UntypedAttribute, filter) * XmlQueryCardinality.ZeroOrOne;
-                    }
-                    else {
-                        // Only complex type can have attributes
-                        XmlSchemaComplexType type = sourceSchemaType as XmlSchemaComplexType;
-                        if (type != null) {
-                            card |= AddAttributes(list, type.AttributeUses, type.AttributeWildcard, filter);
+            foreach (XmlQueryType sourceItem in source)
+            {
+                switch (sourceItem.TypeCode)
+                {
+                    case XmlTypeCode.Node:
+                    case XmlTypeCode.Element:
+                        XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
+                        if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType)
+                        {
+                            // attributes of xdt:untypedAny are attribute(*, xdt:untypedAtomic)*
+                            card |=
+                                AddFilteredPrime(list, UntypedAttribute, filter)
+                                * XmlQueryCardinality.ZeroOrOne;
                         }
-                    }
-                    break;
+                        else
+                        {
+                            // Only complex type can have attributes
+                            XmlSchemaComplexType type = sourceSchemaType as XmlSchemaComplexType;
+                            if (type != null)
+                            {
+                                card |= AddAttributes(
+                                    list,
+                                    type.AttributeUses,
+                                    type.AttributeWildcard,
+                                    filter
+                                );
+                            }
+                        }
+                        break;
 
-                case XmlTypeCode.Document:
-                case XmlTypeCode.Attribute:
-                case XmlTypeCode.ProcessingInstruction:
-                case XmlTypeCode.Comment:
-                case XmlTypeCode.Namespace:
-                case XmlTypeCode.Text:
-                    card |= XmlQueryCardinality.Zero;
-                    break;
+                    case XmlTypeCode.Document:
+                    case XmlTypeCode.Attribute:
+                    case XmlTypeCode.ProcessingInstruction:
+                    case XmlTypeCode.Comment:
+                    case XmlTypeCode.Namespace:
+                    case XmlTypeCode.Text:
+                        card |= XmlQueryCardinality.Zero;
+                        break;
 
-                default:
-                    Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
-                    return null;
+                    default:
+                        Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
+                        return null;
                 }
             }
             // Make sure that cardinality is at least Zero
@@ -1525,45 +1858,66 @@ namespace System.Xml.Xsl
         /// <param name="source">source type</param>
         /// <param name="filter">type filter</param>
         /// <returns>type of the parent node sequence</returns>
-        public XmlQueryType ParentOf(XmlQueryType source, XmlQueryType filter) {
+        public XmlQueryType ParentOf(XmlQueryType source, XmlQueryType filter)
+        {
             Debug.Assert(filter.IsNode && filter.Count == 1 && filter.IsSingleton);
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem  in source) {
-                switch (sourceItem.TypeCode) {
-                case XmlTypeCode.Node:
-                case XmlTypeCode.ProcessingInstruction:
-                case XmlTypeCode.Comment:
-                case XmlTypeCode.Text:
-                case XmlTypeCode.Element:
-                    if (schemaSet == null) {
-                        card |= AddFilteredPrime(list, UntypedDocument, filter) * XmlQueryCardinality.ZeroOrOne;
-                        card |= AddFilteredPrime(list, UntypedElement, filter) * XmlQueryCardinality.ZeroOrOne;
-                    }
-                    else {
-                        card |= AddFilteredPrime(list, Document, filter) * XmlQueryCardinality.ZeroOrOne;
-                        card |= AddFilteredPrime(list, Element, filter) * XmlQueryCardinality.ZeroOrOne;
-                    }
-                    break;
+            foreach (XmlQueryType sourceItem in source)
+            {
+                switch (sourceItem.TypeCode)
+                {
+                    case XmlTypeCode.Node:
+                    case XmlTypeCode.ProcessingInstruction:
+                    case XmlTypeCode.Comment:
+                    case XmlTypeCode.Text:
+                    case XmlTypeCode.Element:
+                        if (schemaSet == null)
+                        {
+                            card |=
+                                AddFilteredPrime(list, UntypedDocument, filter)
+                                * XmlQueryCardinality.ZeroOrOne;
+                            card |=
+                                AddFilteredPrime(list, UntypedElement, filter)
+                                * XmlQueryCardinality.ZeroOrOne;
+                        }
+                        else
+                        {
+                            card |=
+                                AddFilteredPrime(list, Document, filter)
+                                * XmlQueryCardinality.ZeroOrOne;
+                            card |=
+                                AddFilteredPrime(list, Element, filter)
+                                * XmlQueryCardinality.ZeroOrOne;
+                        }
+                        break;
 
-                case XmlTypeCode.Namespace:
-                case XmlTypeCode.Attribute:
-                    if (schemaSet == null) {
-                        card |= (AddFilteredPrime(list, UntypedElement, filter) * XmlQueryCardinality.ZeroOrOne);
-                    }
-                    else {
-                        card |= (AddFilteredPrime(list, Element, filter) * XmlQueryCardinality.ZeroOrOne);
-                    }
-                    break;
+                    case XmlTypeCode.Namespace:
+                    case XmlTypeCode.Attribute:
+                        if (schemaSet == null)
+                        {
+                            card |= (
+                                AddFilteredPrime(list, UntypedElement, filter)
+                                * XmlQueryCardinality.ZeroOrOne
+                            );
+                        }
+                        else
+                        {
+                            card |= (
+                                AddFilteredPrime(list, Element, filter)
+                                * XmlQueryCardinality.ZeroOrOne
+                            );
+                        }
+                        break;
 
-                case XmlTypeCode.Document:
-                    card |= XmlQueryCardinality.Zero;
-                    break;
+                    case XmlTypeCode.Document:
+                        card |= XmlQueryCardinality.Zero;
+                        break;
 
-                default:
-                    Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
-                    break;
+                    default:
+                        Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
+                        break;
                 }
             }
             // Make sure that cardinality is at least Zero
@@ -1576,41 +1930,55 @@ namespace System.Xml.Xsl
         /// <param name="source">source type</param>
         /// <param name="filter">type filter</param>
         /// <returns>type of the descendants node sequence</returns>
-        public XmlQueryType DescendantsOf(XmlQueryType source, XmlQueryType filter) {
+        public XmlQueryType DescendantsOf(XmlQueryType source, XmlQueryType filter)
+        {
             Debug.Assert(filter.IsNode && filter.Count == 1 && filter.IsSingleton);
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem  in source) {
-                switch (sourceItem.TypeCode) {
-                case XmlTypeCode.Node:
-                case XmlTypeCode.Document:
-                case XmlTypeCode.Element:
-                    XmlQueryCardinality itemCard = XmlQueryCardinality.None;
-                    if ((filter.NodeKinds & (XmlNodeKindFlags.Element | XmlNodeKindFlags.Text)) != 0) {
-                        Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes = new Dictionary<XmlQualifiedName, XmlQueryCardinality>();
-                        XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
-                        if (sourceSchemaType == null) {
-                            Debug.Assert(sourceItem.TypeCode == XmlTypeCode.Node);
-                            sourceSchemaType = XmlSchemaComplexType.AnyType;
+            foreach (XmlQueryType sourceItem in source)
+            {
+                switch (sourceItem.TypeCode)
+                {
+                    case XmlTypeCode.Node:
+                    case XmlTypeCode.Document:
+                    case XmlTypeCode.Element:
+                        XmlQueryCardinality itemCard = XmlQueryCardinality.None;
+                        if (
+                            (filter.NodeKinds & (XmlNodeKindFlags.Element | XmlNodeKindFlags.Text))
+                            != 0
+                        )
+                        {
+                            Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes =
+                                new Dictionary<XmlQualifiedName, XmlQueryCardinality>();
+                            XmlSchemaType sourceSchemaType = sourceItem.SchemaType;
+                            if (sourceSchemaType == null)
+                            {
+                                Debug.Assert(sourceItem.TypeCode == XmlTypeCode.Node);
+                                sourceSchemaType = XmlSchemaComplexType.AnyType;
+                            }
+                            itemCard = AddElementOrTextDescendants(
+                                list,
+                                allTypes,
+                                sourceSchemaType,
+                                filter
+                            );
                         }
-                        itemCard = AddElementOrTextDescendants(list, allTypes, sourceSchemaType, filter);
-                    }
-                    itemCard += AddFilteredPrime(list, PI, filter);
-                    itemCard += AddFilteredPrime(list, Comment, filter);
-                    card |= itemCard;
-                    break;
+                        itemCard += AddFilteredPrime(list, PI, filter);
+                        itemCard += AddFilteredPrime(list, Comment, filter);
+                        card |= itemCard;
+                        break;
 
-                case XmlTypeCode.Attribute:
-                case XmlTypeCode.ProcessingInstruction:
-                case XmlTypeCode.Comment:
-                case XmlTypeCode.Namespace:
-                case XmlTypeCode.Text:
-                    card |= XmlQueryCardinality.Zero;
-                    break;
+                    case XmlTypeCode.Attribute:
+                    case XmlTypeCode.ProcessingInstruction:
+                    case XmlTypeCode.Comment:
+                    case XmlTypeCode.Namespace:
+                    case XmlTypeCode.Text:
+                        card |= XmlQueryCardinality.Zero;
+                        break;
 
-                default:
-                    Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
+                    default:
+                        Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
                         break;
                 }
             }
@@ -1624,88 +1992,170 @@ namespace System.Xml.Xsl
         /// <param name="source">source type</param>
         /// <param name="filter">type filter</param>
         /// <returns>type of the ancestor node sequence</returns>
-        public XmlQueryType AncestorsOf(XmlQueryType source, XmlQueryType filter) {
+        public XmlQueryType AncestorsOf(XmlQueryType source, XmlQueryType filter)
+        {
             Debug.Assert(filter.IsNode && filter.Count == 1 && filter.IsSingleton);
             List<XmlQueryType> list = new List<XmlQueryType>();
             XmlQueryCardinality card = XmlQueryCardinality.None;
 
-            foreach (XmlQueryType sourceItem  in source) {
-                switch (sourceItem.TypeCode) {
-                case XmlTypeCode.Node:
-                case XmlTypeCode.ProcessingInstruction:
-                case XmlTypeCode.Comment:
-                case XmlTypeCode.Text:
-                case XmlTypeCode.Element:
-                case XmlTypeCode.Namespace:
-                case XmlTypeCode.Attribute:
-                    if (schemaSet == null) {
-                        card |= (AddFilteredPrime(list, UntypedDocument, filter) * XmlQueryCardinality.ZeroOrOne)
-                                + (AddFilteredPrime(list, UntypedElement, filter) * XmlQueryCardinality.ZeroOrMore);
-                    }
-                    else {
-                        card |= (AddFilteredPrime(list, Document, filter) * XmlQueryCardinality.ZeroOrOne)
-                                + (AddFilteredPrime(list, Element, filter) * XmlQueryCardinality.ZeroOrMore);
-                    }
-                    break;
+            foreach (XmlQueryType sourceItem in source)
+            {
+                switch (sourceItem.TypeCode)
+                {
+                    case XmlTypeCode.Node:
+                    case XmlTypeCode.ProcessingInstruction:
+                    case XmlTypeCode.Comment:
+                    case XmlTypeCode.Text:
+                    case XmlTypeCode.Element:
+                    case XmlTypeCode.Namespace:
+                    case XmlTypeCode.Attribute:
+                        if (schemaSet == null)
+                        {
+                            card |=
+                                (
+                                    AddFilteredPrime(list, UntypedDocument, filter)
+                                    * XmlQueryCardinality.ZeroOrOne
+                                )
+                                + (
+                                    AddFilteredPrime(list, UntypedElement, filter)
+                                    * XmlQueryCardinality.ZeroOrMore
+                                );
+                        }
+                        else
+                        {
+                            card |=
+                                (
+                                    AddFilteredPrime(list, Document, filter)
+                                    * XmlQueryCardinality.ZeroOrOne
+                                )
+                                + (
+                                    AddFilteredPrime(list, Element, filter)
+                                    * XmlQueryCardinality.ZeroOrMore
+                                );
+                        }
+                        break;
 
-                case XmlTypeCode.Document:
-                    card |= XmlQueryCardinality.Zero;
-                    break;
+                    case XmlTypeCode.Document:
+                        card |= XmlQueryCardinality.Zero;
+                        break;
 
-                default:
-                    Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
-                    break;
+                    default:
+                        Debug.Assert(sourceItem.IsAtomicValue, "missed case for a node");
+                        break;
                 }
             }
             // Make sure that cardinality is at least Zero
             return PrimeProduct(ChoiceType.Create(list), source.Cardinality * card);
         }
 
-        private XmlQueryCardinality AddAttributes(List<XmlQueryType> list, XmlSchemaObjectTable attributeUses, XmlSchemaAnyAttribute attributeWildcard, XmlQueryType filter) {
+        private XmlQueryCardinality AddAttributes(
+            List<XmlQueryType> list,
+            XmlSchemaObjectTable attributeUses,
+            XmlSchemaAnyAttribute attributeWildcard,
+            XmlQueryType filter
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.Zero;
-            if (attributeWildcard != null) {
-                XmlSchemaType attributeSchemaType = attributeWildcard.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip ? DatatypeImplementation.UntypedAtomicType : DatatypeImplementation.AnySimpleType;
+            if (attributeWildcard != null)
+            {
+                XmlSchemaType attributeSchemaType =
+                    attributeWildcard.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip
+                        ? DatatypeImplementation.UntypedAtomicType
+                        : DatatypeImplementation.AnySimpleType;
 
                 // wildcard will match more then one attribute
-                switch (attributeWildcard.NamespaceList.Type) {
-                case NamespaceList.ListType.Set:
-                    foreach (string ns in attributeWildcard.NamespaceList.Enumerate) {
-                        card += AddFilteredPrime(list, CreateAttributeType(ns, false, attributeSchemaType), filter);
-                    }
-                    break;
-                case NamespaceList.ListType.Other:
-                    card += AddFilteredPrime(list, CreateAttributeType(attributeWildcard.NamespaceList.Excluded, true, attributeSchemaType), filter);
-                    break;
-                case NamespaceList.ListType.Any:
-                default:
-                    card +=  AddFilteredPrime(list, attributeWildcard.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip ? UntypedAttribute : Attribute, filter);
-                    break;
+                switch (attributeWildcard.NamespaceList.Type)
+                {
+                    case NamespaceList.ListType.Set:
+                        foreach (string ns in attributeWildcard.NamespaceList.Enumerate)
+                        {
+                            card += AddFilteredPrime(
+                                list,
+                                CreateAttributeType(ns, false, attributeSchemaType),
+                                filter
+                            );
+                        }
+                        break;
+                    case NamespaceList.ListType.Other:
+                        card += AddFilteredPrime(
+                            list,
+                            CreateAttributeType(
+                                attributeWildcard.NamespaceList.Excluded,
+                                true,
+                                attributeSchemaType
+                            ),
+                            filter
+                        );
+                        break;
+                    case NamespaceList.ListType.Any:
+                    default:
+                        card += AddFilteredPrime(
+                            list,
+                            attributeWildcard.ProcessContentsCorrect
+                            == XmlSchemaContentProcessing.Skip
+                                ? UntypedAttribute
+                                : Attribute,
+                            filter
+                        );
+                        break;
                 }
                 // Always optional
                 card *= XmlQueryCardinality.ZeroOrOne;
             }
-            foreach (XmlSchemaAttribute attribute in attributeUses.Values) {
-                XmlQueryCardinality cardAttr = AddFilteredPrime(list, CreateAttributeType(attribute), filter);
-                if (cardAttr != XmlQueryCardinality.Zero) {
-                    Debug.Assert(cardAttr == XmlQueryCardinality.ZeroOrOne || cardAttr == XmlQueryCardinality.One);
-                    card += (attribute.Use == XmlSchemaUse.Optional ? XmlQueryCardinality.ZeroOrOne : cardAttr);
+            foreach (XmlSchemaAttribute attribute in attributeUses.Values)
+            {
+                XmlQueryCardinality cardAttr = AddFilteredPrime(
+                    list,
+                    CreateAttributeType(attribute),
+                    filter
+                );
+                if (cardAttr != XmlQueryCardinality.Zero)
+                {
+                    Debug.Assert(
+                        cardAttr == XmlQueryCardinality.ZeroOrOne
+                            || cardAttr == XmlQueryCardinality.One
+                    );
+                    card += (
+                        attribute.Use == XmlSchemaUse.Optional
+                            ? XmlQueryCardinality.ZeroOrOne
+                            : cardAttr
+                    );
                 }
             }
             return card;
         }
 
-        private XmlQueryType CreateAttributeType(XmlSchemaAttribute attribute) {
-            return ItemType.Create(XmlTypeCode.Attribute, XmlQualifiedNameTest.New(attribute.QualifiedName), attribute.AttributeSchemaType, false);
+        private XmlQueryType CreateAttributeType(XmlSchemaAttribute attribute)
+        {
+            return ItemType.Create(
+                XmlTypeCode.Attribute,
+                XmlQualifiedNameTest.New(attribute.QualifiedName),
+                attribute.AttributeSchemaType,
+                false
+            );
         }
 
-        private XmlQueryType CreateAttributeType(string ns, bool exclude, XmlSchemaType schemaType) {
-            return ItemType.Create(XmlTypeCode.Attribute, XmlQualifiedNameTest.New(ns, exclude), schemaType, false);
+        private XmlQueryType CreateAttributeType(string ns, bool exclude, XmlSchemaType schemaType)
+        {
+            return ItemType.Create(
+                XmlTypeCode.Attribute,
+                XmlQualifiedNameTest.New(ns, exclude),
+                schemaType,
+                false
+            );
         }
 
-        private XmlQueryCardinality AddDescendantParticle(List<XmlQueryType> list, Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes, XmlSchemaParticle particle, XmlQueryType filter) {
+        private XmlQueryCardinality AddDescendantParticle(
+            List<XmlQueryType> list,
+            Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes,
+            XmlSchemaParticle particle,
+            XmlQueryType filter
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.None;
             XmlSchemaElement element = particle as XmlSchemaElement;
-            if (element != null) {
+            if (element != null)
+            {
                 // Single element
                 XmlQueryType elementType = CreateElementType(element);
 
@@ -1715,22 +2165,30 @@ namespace System.Xml.Xsl
                 // Descend
                 card += AddElementOrTextDescendants(list, allTypes, elementType.SchemaType, filter);
             }
-            else {
+            else
+            {
                 XmlSchemaAny any = particle as XmlSchemaAny;
-                if (any != null) {
+                if (any != null)
+                {
                     // Descendants of any
                     card = AddFilteredPrime(list, Element, filter);
                 }
-                else {
+                else
+                {
                     XmlSchemaGroupBase group = particle as XmlSchemaGroupBase;
-                    if (group.Items.Count != 0) {
-                        if (particle is XmlSchemaChoice) {
-                            foreach (XmlSchemaParticle p in group.Items) {
+                    if (group.Items.Count != 0)
+                    {
+                        if (particle is XmlSchemaChoice)
+                        {
+                            foreach (XmlSchemaParticle p in group.Items)
+                            {
                                 card |= AddDescendantParticle(list, allTypes, p, filter);
                             }
                         }
-                        else { // Sequence and  All
-                            foreach (XmlSchemaParticle p in group.Items) {
+                        else
+                        { // Sequence and  All
+                            foreach (XmlSchemaParticle p in group.Items)
+                            {
                                 card += AddDescendantParticle(list, allTypes, p, filter);
                             }
                         }
@@ -1740,25 +2198,44 @@ namespace System.Xml.Xsl
             return card * CardinalityOfParticle(particle);
         }
 
-        private XmlQueryCardinality AddElementOrTextDescendants(List<XmlQueryType> list,
-            Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes, XmlSchemaType sourceSchemaType, XmlQueryType filter) {
+        private XmlQueryCardinality AddElementOrTextDescendants(
+            List<XmlQueryType> list,
+            Dictionary<XmlQualifiedName, XmlQueryCardinality> allTypes,
+            XmlSchemaType sourceSchemaType,
+            XmlQueryType filter
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.None;
-            if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType) {
-                card = AddFilteredPrime(list, UntypedElement, filter) * XmlQueryCardinality.ZeroOrMore;
+            if (sourceSchemaType == XmlSchemaComplexType.UntypedAnyType)
+            {
+                card =
+                    AddFilteredPrime(list, UntypedElement, filter) * XmlQueryCardinality.ZeroOrMore;
                 card += AddFilteredPrime(list, Text, filter);
             }
-            else if (sourceSchemaType.Datatype != null) {
+            else if (sourceSchemaType.Datatype != null)
+            {
                 // Text is the only child node simple content of complext type
                 card = AddFilteredPrime(list, Text, filter, true) * XmlQueryCardinality.ZeroOrOne;
             }
-            else {
+            else
+            {
                 // Complex content
                 XmlSchemaComplexType complexType = (XmlSchemaComplexType)sourceSchemaType;
-                if (complexType.QualifiedName.IsEmpty || !allTypes.TryGetValue(complexType.QualifiedName, out card)) {
+                if (
+                    complexType.QualifiedName.IsEmpty
+                    || !allTypes.TryGetValue(complexType.QualifiedName, out card)
+                )
+                {
                     allTypes[complexType.QualifiedName] = XmlQueryCardinality.ZeroOrMore; // take care of left recursion
-                    card = AddDescendantParticle(list, allTypes, complexType.ContentTypeParticle, filter);
-                    allTypes[complexType.QualifiedName] = card;  //set correct card
-                    if (complexType.ContentType == XmlSchemaContentType.Mixed) {
+                    card = AddDescendantParticle(
+                        list,
+                        allTypes,
+                        complexType.ContentTypeParticle,
+                        filter
+                    );
+                    allTypes[complexType.QualifiedName] = card; //set correct card
+                    if (complexType.ContentType == XmlSchemaContentType.Mixed)
+                    {
                         card += AddFilteredPrime(list, Text, filter);
                     }
                 }
@@ -1769,61 +2246,110 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Create type based on an XmlSchemaElement
         /// </summary>
-        private XmlQueryType CreateElementType(XmlSchemaElement element) {
-            return ItemType.Create(XmlTypeCode.Element, XmlQualifiedNameTest.New(element.QualifiedName), element.ElementSchemaType, element.IsNillable);
+        private XmlQueryType CreateElementType(XmlSchemaElement element)
+        {
+            return ItemType.Create(
+                XmlTypeCode.Element,
+                XmlQualifiedNameTest.New(element.QualifiedName),
+                element.ElementSchemaType,
+                element.IsNillable
+            );
         }
 
         /// <summary>
         /// Create type based on a wildcard
         /// </summary>
-        private XmlQueryType CreateElementType(string ns, bool exclude, XmlSchemaType schemaType) {
-            return ItemType.Create(XmlTypeCode.Element, XmlQualifiedNameTest.New(ns, exclude), schemaType, false);
+        private XmlQueryType CreateElementType(string ns, bool exclude, XmlSchemaType schemaType)
+        {
+            return ItemType.Create(
+                XmlTypeCode.Element,
+                XmlQualifiedNameTest.New(ns, exclude),
+                schemaType,
+                false
+            );
         }
 
         /// <summary>
         ///  Descend though the content model
         /// </summary>
-        private XmlQueryCardinality AddChildParticle(List<XmlQueryType> list, XmlSchemaParticle particle, XmlQueryType filter) {
+        private XmlQueryCardinality AddChildParticle(
+            List<XmlQueryType> list,
+            XmlSchemaParticle particle,
+            XmlQueryType filter
+        )
+        {
             XmlQueryCardinality card = XmlQueryCardinality.None;
             XmlSchemaElement element = particle as XmlSchemaElement;
-            if (element != null) {
+            if (element != null)
+            {
                 // Single element
                 card = AddFilteredPrime(list, CreateElementType(element), filter);
             }
-            else {
+            else
+            {
                 // XmlSchemaAny matches more then one element
                 XmlSchemaAny any = particle as XmlSchemaAny;
-                if (any != null) {
-                    XmlSchemaType elementSchemaType = any.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip ? XmlSchemaComplexType.UntypedAnyType : XmlSchemaComplexType.AnyType;
-                    switch (any.NamespaceList.Type) {
-                    case NamespaceList.ListType.Set:
-                        // Add a separate type for each namespace in the list
-                        foreach (string ns in any.NamespaceList.Enumerate) {
-                            card |= AddFilteredPrime(list, CreateElementType(ns, false, elementSchemaType), filter);
-                        }
-                        break;
-                    case NamespaceList.ListType.Other:
-                        // Add ##other
-                        card = AddFilteredPrime(list, CreateElementType(any.NamespaceList.Excluded, true, elementSchemaType), filter);
-                        break;
-                    case NamespaceList.ListType.Any:
-                    default:
-                        // Add ##any
-                        card = AddFilteredPrime(list, any.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip ? UntypedElement : Element, filter);
-                        break;
+                if (any != null)
+                {
+                    XmlSchemaType elementSchemaType =
+                        any.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip
+                            ? XmlSchemaComplexType.UntypedAnyType
+                            : XmlSchemaComplexType.AnyType;
+                    switch (any.NamespaceList.Type)
+                    {
+                        case NamespaceList.ListType.Set:
+                            // Add a separate type for each namespace in the list
+                            foreach (string ns in any.NamespaceList.Enumerate)
+                            {
+                                card |= AddFilteredPrime(
+                                    list,
+                                    CreateElementType(ns, false, elementSchemaType),
+                                    filter
+                                );
+                            }
+                            break;
+                        case NamespaceList.ListType.Other:
+                            // Add ##other
+                            card = AddFilteredPrime(
+                                list,
+                                CreateElementType(
+                                    any.NamespaceList.Excluded,
+                                    true,
+                                    elementSchemaType
+                                ),
+                                filter
+                            );
+                            break;
+                        case NamespaceList.ListType.Any:
+                        default:
+                            // Add ##any
+                            card = AddFilteredPrime(
+                                list,
+                                any.ProcessContentsCorrect == XmlSchemaContentProcessing.Skip
+                                    ? UntypedElement
+                                    : Element,
+                                filter
+                            );
+                            break;
                     }
                 }
-                else {
+                else
+                {
                     //  recurse into particle group
                     XmlSchemaGroupBase group = particle as XmlSchemaGroupBase;
-                    if (group.Items.Count != 0) {
-                        if (particle is XmlSchemaChoice) {
-                            foreach (XmlSchemaParticle p in group.Items) {
+                    if (group.Items.Count != 0)
+                    {
+                        if (particle is XmlSchemaChoice)
+                        {
+                            foreach (XmlSchemaParticle p in group.Items)
+                            {
                                 card |= AddChildParticle(list, p, filter);
                             }
                         }
-                        else { // Sequence and  All
-                            foreach (XmlSchemaParticle p in group.Items) {
+                        else
+                        { // Sequence and  All
+                            foreach (XmlSchemaParticle p in group.Items)
+                            {
                                 card += AddChildParticle(list, p, filter);
                             }
                         }
@@ -1836,88 +2362,139 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Apply filter an item type, add the result to a list, return cardinality
         /// </summary>
-        private XmlQueryCardinality AddFilteredPrime(List<XmlQueryType> list, XmlQueryType source, XmlQueryType filter) {
+        private XmlQueryCardinality AddFilteredPrime(
+            List<XmlQueryType> list,
+            XmlQueryType source,
+            XmlQueryType filter
+        )
+        {
             return AddFilteredPrime(list, source, filter, false);
-
         }
-        private XmlQueryCardinality AddFilteredPrime(List<XmlQueryType> list, XmlQueryType source, XmlQueryType filter, bool forseSingle) {
+
+        private XmlQueryCardinality AddFilteredPrime(
+            List<XmlQueryType> list,
+            XmlQueryType source,
+            XmlQueryType filter,
+            bool forseSingle
+        )
+        {
             Debug.Assert(source.IsNode && source.IsSingleton);
             Debug.Assert(filter.IsNode && filter.IsSingleton);
 
             // Intersect types
             XmlQueryType intersection = IntersectItemTypes(source, filter);
-            if ((object)intersection == (object)None) {
+            if ((object)intersection == (object)None)
+            {
                 return XmlQueryCardinality.Zero;
             }
             AddItemToChoice(list, intersection);
             // In the case of forseSingle - filtering all nodes behave as singletones
             XmlTypeCode typeCode = (forseSingle ? XmlTypeCode.Node : intersection.TypeCode);
-            switch (typeCode) {
-            case XmlTypeCode.Node:
-            case XmlTypeCode.Document:
-            case XmlTypeCode.Element:
-                // Filter can result in empty sequence if filter is not wider then source
-                if (intersection == source)
-                    return XmlQueryCardinality.One;
-                else
-                    return  XmlQueryCardinality.ZeroOrOne;
+            switch (typeCode)
+            {
+                case XmlTypeCode.Node:
+                case XmlTypeCode.Document:
+                case XmlTypeCode.Element:
+                    // Filter can result in empty sequence if filter is not wider then source
+                    if (intersection == source)
+                        return XmlQueryCardinality.One;
+                    else
+                        return XmlQueryCardinality.ZeroOrOne;
 
-            case XmlTypeCode.Attribute:
+                case XmlTypeCode.Attribute:
                     // wildcard attribute matches more then one node
-                if (!intersection.NameTest.IsSingleName)
+                    if (!intersection.NameTest.IsSingleName)
+                        return XmlQueryCardinality.ZeroOrMore;
+                    else if (intersection == source)
+                        return XmlQueryCardinality.One;
+                    else
+                        return XmlQueryCardinality.ZeroOrOne;
+                case XmlTypeCode.Comment:
+                case XmlTypeCode.Text:
+                case XmlTypeCode.ProcessingInstruction:
+                case XmlTypeCode.Namespace:
                     return XmlQueryCardinality.ZeroOrMore;
-                else if (intersection == source)
-                    return XmlQueryCardinality.One;
-                else
-                    return  XmlQueryCardinality.ZeroOrOne;
-            case XmlTypeCode.Comment:
-            case XmlTypeCode.Text:
-            case XmlTypeCode.ProcessingInstruction:
-            case XmlTypeCode.Namespace:
-                return XmlQueryCardinality.ZeroOrMore;
 
-            default:
-                Debug.Fail($"Unexpected type code {typeCode}");
-                return XmlQueryCardinality.None;
+                default:
+                    Debug.Fail($"Unexpected type code {typeCode}");
+                    return XmlQueryCardinality.None;
             }
         }
 
         /// <summary>
         /// Construct the intersection of two lists of prime XmlQueryTypes.
         /// </summary>
-        private XmlQueryType IntersectItemTypes(XmlQueryType left, XmlQueryType right) {
+        private XmlQueryType IntersectItemTypes(XmlQueryType left, XmlQueryType right)
+        {
             Debug.Assert(left.Count == 1 && left.IsSingleton, "left should be an item");
             Debug.Assert(right.Count == 1 && right.IsSingleton, "right should be an item");
-            if (left.TypeCode == right.TypeCode && (left.NodeKinds & (XmlNodeKindFlags.Document | XmlNodeKindFlags.Element | XmlNodeKindFlags.Attribute)) != 0) {
-                if (left.TypeCode == XmlTypeCode.Node) {
+            if (
+                left.TypeCode == right.TypeCode
+                && (
+                    left.NodeKinds
+                    & (
+                        XmlNodeKindFlags.Document
+                        | XmlNodeKindFlags.Element
+                        | XmlNodeKindFlags.Attribute
+                    )
+                ) != 0
+            )
+            {
+                if (left.TypeCode == XmlTypeCode.Node)
+                {
                     return left;
                 }
                 // Intersect name tests
                 XmlQualifiedNameTest nameTest = left.NameTest.Intersect(right.NameTest);
 
                 // Intersect types
-                XmlSchemaType type = XmlSchemaType.IsDerivedFrom(left.SchemaType, right.SchemaType, /* except:*/XmlSchemaDerivationMethod.Empty) ? left.SchemaType :
-                    XmlSchemaType.IsDerivedFrom(right.SchemaType, left.SchemaType, /* except:*/XmlSchemaDerivationMethod.Empty) ? right.SchemaType : null;
+                XmlSchemaType type =
+                    XmlSchemaType.IsDerivedFrom(
+                        left.SchemaType,
+                        right.SchemaType, /* except:*/
+                        XmlSchemaDerivationMethod.Empty
+                    )
+                        ? left.SchemaType
+                    : XmlSchemaType.IsDerivedFrom(
+                        right.SchemaType,
+                        left.SchemaType, /* except:*/
+                        XmlSchemaDerivationMethod.Empty
+                    )
+                        ? right.SchemaType
+                    : null;
                 bool isNillable = left.IsNillable && right.IsNillable;
 
-                if ((object)nameTest == (object)left.NameTest && type == left.SchemaType && isNillable == left.IsNillable) {
+                if (
+                    (object)nameTest == (object)left.NameTest
+                    && type == left.SchemaType
+                    && isNillable == left.IsNillable
+                )
+                {
                     // left is a subtype of right return left
                     return left;
                 }
-                else if ((object)nameTest == (object)right.NameTest && type == right.SchemaType && isNillable == right.IsNillable) {
+                else if (
+                    (object)nameTest == (object)right.NameTest
+                    && type == right.SchemaType
+                    && isNillable == right.IsNillable
+                )
+                {
                     // right is a subtype of left return right
                     return right;
                 }
-                else if (nameTest != null && type != null) {
+                else if (nameTest != null && type != null)
+                {
                     // create a new type
                     return ItemType.Create(left.TypeCode, nameTest, type, isNillable);
                 }
             }
-            else if (left.IsSubtypeOf(right)) {
+            else if (left.IsSubtypeOf(right))
+            {
                 // left is a subset of right, so left is in the intersection
                 return left;
             }
-            else if (right.IsSubtypeOf(left)) {
+            else if (right.IsSubtypeOf(left))
+            {
                 // right is a subset of left, so right is in the intersection
                 return right;
             }
@@ -1927,23 +2504,31 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Convert particle occurrence range into cardinality
         /// </summary>
-        private XmlQueryCardinality CardinalityOfParticle(XmlSchemaParticle particle) {
-            if (particle.MinOccurs == decimal.Zero) {
-                if (particle.MaxOccurs == decimal.Zero) {
+        private XmlQueryCardinality CardinalityOfParticle(XmlSchemaParticle particle)
+        {
+            if (particle.MinOccurs == decimal.Zero)
+            {
+                if (particle.MaxOccurs == decimal.Zero)
+                {
                     return XmlQueryCardinality.Zero;
                 }
-                else if (particle.MaxOccurs == decimal.One) {
+                else if (particle.MaxOccurs == decimal.One)
+                {
                     return XmlQueryCardinality.ZeroOrOne;
                 }
-                else {
+                else
+                {
                     return XmlQueryCardinality.ZeroOrMore;
                 }
             }
-            else {
-                if (particle.MaxOccurs == decimal.One) {
+            else
+            {
+                if (particle.MaxOccurs == decimal.One)
+                {
                     return XmlQueryCardinality.One;
                 }
-                else {
+                else
+                {
                     return XmlQueryCardinality.OneOrMore;
                 }
             }

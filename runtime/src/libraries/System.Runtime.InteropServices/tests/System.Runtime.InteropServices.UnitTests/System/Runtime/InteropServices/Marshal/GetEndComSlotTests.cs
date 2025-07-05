@@ -24,27 +24,44 @@ namespace System.Runtime.InteropServices.Tests
             AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.GetEndComSlot(null));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void GetEndComSlot_NotRuntimeType_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>("t", () => Marshal.GetEndComSlot(typeBuilder));
+            AssertExtensions.Throws<ArgumentException>(
+                "t",
+                () => Marshal.GetEndComSlot(typeBuilder)
+            );
         }
 
         public static IEnumerable<object[]> GetStartComSlot_InvalidGenericType_TestData()
         {
             yield return new object[] { typeof(int).MakeByRefType() };
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetStartComSlot_InvalidGenericType_TestData))]
         public void GetEndComSlot_InvalidGenericType_ThrowsArgumentNullException(Type type)
         {
             AssertExtensions.Throws<ArgumentNullException>(null, () => Marshal.GetEndComSlot(type));
         }
+
         public static IEnumerable<object[]> GetStartComSlot_NotComVisibleType_TestData()
         {
             yield return new object[] { typeof(GenericClass<>) };
@@ -62,7 +79,10 @@ namespace System.Runtime.InteropServices.Tests
 
             if (PlatformDetection.IsReflectionEmitSupported)
             {
-                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("Assembly"),
+                    AssemblyBuilderAccess.RunAndCollect
+                );
                 ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
                 TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
                 Type collectibleType = typeBuilder.CreateType();
@@ -70,7 +90,10 @@ namespace System.Runtime.InteropServices.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetStartComSlot_NotComVisibleType_TestData))]
         public void GetEndComSlot_NotComVisibleType_ThrowsArgumentException(Type type)
         {

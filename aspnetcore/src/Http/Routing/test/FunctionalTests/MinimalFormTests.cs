@@ -15,11 +15,14 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+
 namespace Microsoft.AspNetCore.Routing.FunctionalTests;
 
 public class MinimalFormTests
 {
-    private static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+    private static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions(
+        JsonSerializerDefaults.Web
+    );
 
     [Fact]
     public async Task MapPost_WithForm_ValidToken_Works()
@@ -32,8 +35,7 @@ public class MinimalFormTests
                     {
                         app.UseRouting();
                         app.UseAntiforgery();
-                        app.UseEndpoints(b =>
-                            b.MapPost("/todo", ([FromForm] Todo todo) => todo));
+                        app.UseEndpoints(b => b.MapPost("/todo", ([FromForm] Todo todo) => todo));
                     })
                     .UseTestServer();
             })
@@ -52,13 +54,19 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -83,17 +91,25 @@ public class MinimalFormTests
                         app.UseRouting();
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
-                            b.MapPost("/todo", async context =>
-                            {
-                                var form = await context.Request.ReadFormAsync();
-                                var todo = new Todo
-                                {
-                                    Name = form["name"],
-                                    IsCompleted = bool.Parse(form["isComplete"]),
-                                    DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture)
-                                };
-                                await context.Response.WriteAsJsonAsync(todo);
-                            }).WithMetadata(AntiforgeryMetadata.ValidationRequired));
+                            b.MapPost(
+                                    "/todo",
+                                    async context =>
+                                    {
+                                        var form = await context.Request.ReadFormAsync();
+                                        var todo = new Todo
+                                        {
+                                            Name = form["name"],
+                                            IsCompleted = bool.Parse(form["isComplete"]),
+                                            DueDate = DateTime.Parse(
+                                                form["dueDate"],
+                                                CultureInfo.InvariantCulture
+                                            ),
+                                        };
+                                        await context.Response.WriteAsJsonAsync(todo);
+                                    }
+                                )
+                                .WithMetadata(AntiforgeryMetadata.ValidationRequired)
+                        );
                     })
                     .UseTestServer();
             })
@@ -112,13 +128,19 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -142,8 +164,7 @@ public class MinimalFormTests
                     {
                         app.UseRouting();
                         app.UseAntiforgery();
-                        app.UseEndpoints(b =>
-                            b.MapPost("/todo", ([FromForm] Todo todo) => todo));
+                        app.UseEndpoints(b => b.MapPost("/todo", ([FromForm] Todo todo) => todo));
                     })
                     .UseTestServer();
             })
@@ -161,9 +182,12 @@ public class MinimalFormTests
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -181,8 +205,7 @@ public class MinimalFormTests
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        app.UseEndpoints(b =>
-                            b.MapPost("/todo", ([FromForm] Todo todo) => todo));
+                        app.UseEndpoints(b => b.MapPost("/todo", ([FromForm] Todo todo) => todo));
                     })
                     .UseTestServer();
             })
@@ -200,19 +223,25 @@ public class MinimalFormTests
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await client.SendAsync(request));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await client.SendAsync(request)
+        );
         Assert.Equal(
-            "Endpoint HTTP: POST /todo contains anti-forgery metadata, but a middleware was not found that supports anti-forgery." +
-            Environment.NewLine +
-            "Configure your application startup by adding app.UseAntiforgery() in the application startup code. If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAntiforgery() must go between them. " +
-            "Calls to app.UseAntiforgery() must be placed after calls to app.UseAuthentication() and app.UseAuthorization().",
-            exception.Message);
+            "Endpoint HTTP: POST /todo contains anti-forgery metadata, but a middleware was not found that supports anti-forgery."
+                + Environment.NewLine
+                + "Configure your application startup by adding app.UseAntiforgery() in the application startup code. If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAntiforgery() must go between them. "
+                + "Calls to app.UseAntiforgery() must be placed after calls to app.UseAuthentication() and app.UseAuthorization().",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -226,9 +255,10 @@ public class MinimalFormTests
                     .Configure(app =>
                     {
                         app.UseRouting();
-                        exception = Assert.Throws<InvalidOperationException>(() => app.UseAntiforgery());
-                        app.UseEndpoints(b =>
-                            b.MapPost("/todo", ([FromForm] Todo todo) => todo));
+                        exception = Assert.Throws<InvalidOperationException>(() =>
+                            app.UseAntiforgery()
+                        );
+                        app.UseEndpoints(b => b.MapPost("/todo", ([FromForm] Todo todo) => todo));
                     })
                     .UseTestServer();
             })
@@ -244,7 +274,8 @@ public class MinimalFormTests
         Assert.NotNull(exception);
         Assert.Equal(
             "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddAntiforgery' in the application startup code.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -258,8 +289,8 @@ public class MinimalFormTests
                     {
                         app.UseRouting();
                         app.UseEndpoints(b =>
-                            b.MapPost("/todo", ([FromForm] Todo todo) => todo)
-                            .DisableAntiforgery());
+                            b.MapPost("/todo", ([FromForm] Todo todo) => todo).DisableAntiforgery()
+                        );
                     })
                     .UseTestServer();
             })
@@ -277,9 +308,12 @@ public class MinimalFormTests
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -324,9 +358,12 @@ public class MinimalFormTests
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -345,52 +382,75 @@ public class MinimalFormTests
         {
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
-                {
-                    var form = await context.Request.ReadFormAsync();
-                    var todo = new Todo
-                    {
-                        Name = form["name"],
-                        IsCompleted = bool.Parse(form["isComplete"]),
-                        DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture)
-                    };
-                    await context.Response.WriteAsJsonAsync(todo);
-                }),
+                (IEndpointRouteBuilder builder) =>
+                    builder.MapPost(
+                        "/todo",
+                        async context =>
+                        {
+                            var form = await context.Request.ReadFormAsync();
+                            var todo = new Todo
+                            {
+                                Name = form["name"],
+                                IsCompleted = bool.Parse(form["isComplete"]),
+                                DueDate = DateTime.Parse(
+                                    form["dueDate"],
+                                    CultureInfo.InvariantCulture
+                                ),
+                            };
+                            await context.Response.WriteAsJsonAsync(todo);
+                        }
+                    ),
             };
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
-                {
-                    var form = context.Request.Form;
-                    var todo = new Todo
-                    {
-                        Name = form["name"],
-                        IsCompleted = bool.Parse(form["isComplete"]),
-                        DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture)
-                    };
-                    await context.Response.WriteAsJsonAsync(todo);
-                }),
+                (IEndpointRouteBuilder builder) =>
+                    builder.MapPost(
+                        "/todo",
+                        async context =>
+                        {
+                            var form = context.Request.Form;
+                            var todo = new Todo
+                            {
+                                Name = form["name"],
+                                IsCompleted = bool.Parse(form["isComplete"]),
+                                DueDate = DateTime.Parse(
+                                    form["dueDate"],
+                                    CultureInfo.InvariantCulture
+                                ),
+                            };
+                            await context.Response.WriteAsJsonAsync(todo);
+                        }
+                    ),
             };
             yield return new object[]
             {
-                (IEndpointRouteBuilder builder) => builder.MapPost("/todo", async context =>
-                {
-                    var form = context.Features.Get<IFormFeature>()?.ReadForm();
-                    var todo = new Todo
-                    {
-                        Name = form["name"],
-                        IsCompleted = bool.Parse(form["isComplete"]),
-                        DueDate = DateTime.Parse(form["dueDate"], CultureInfo.InvariantCulture)
-                    };
-                    await context.Response.WriteAsJsonAsync(todo);
-                }),
+                (IEndpointRouteBuilder builder) =>
+                    builder.MapPost(
+                        "/todo",
+                        async context =>
+                        {
+                            var form = context.Features.Get<IFormFeature>()?.ReadForm();
+                            var todo = new Todo
+                            {
+                                Name = form["name"],
+                                IsCompleted = bool.Parse(form["isComplete"]),
+                                DueDate = DateTime.Parse(
+                                    form["dueDate"],
+                                    CultureInfo.InvariantCulture
+                                ),
+                            };
+                            await context.Response.WriteAsJsonAsync(todo);
+                        }
+                    ),
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(RequestDelegateData))]
-    public async Task MapRequestDelegate_WithForm_RequiresValidation_InvalidToken_Fails(Func<IEndpointRouteBuilder, IEndpointConventionBuilder> addDelegate)
+    public async Task MapRequestDelegate_WithForm_RequiresValidation_InvalidToken_Fails(
+        Func<IEndpointRouteBuilder, IEndpointConventionBuilder> addDelegate
+    )
     {
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
@@ -401,8 +461,8 @@ public class MinimalFormTests
                         app.UseRouting();
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
-                            addDelegate(b).WithMetadata(AntiforgeryMetadata.ValidationRequired));
-
+                            addDelegate(b).WithMetadata(AntiforgeryMetadata.ValidationRequired)
+                        );
                     })
                     .UseTestServer();
             })
@@ -420,14 +480,22 @@ public class MinimalFormTests
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await client.SendAsync(request));
-        Assert.Equal("This form is being accessed with an invalid anti-forgery token. Validate the `IAntiforgeryValidationFeature` on the request before reading from the form.", exception.Message);
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await client.SendAsync(request)
+        );
+        Assert.Equal(
+            "This form is being accessed with an invalid anti-forgery token. Validate the `IAntiforgeryValidationFeature` on the request before reading from the form.",
+            exception.Message
+        );
     }
 
     [Theory]
@@ -441,20 +509,33 @@ public class MinimalFormTests
                 webHostBuilder
                     .Configure(app =>
                     {
-                        app.Use((context, next) =>
-                        {
-                            context.Features.Set<IHttpMaxRequestBodySizeFeature>(new FakeHttpMaxRequestBodySizeFeature(5_000_000));
-                            return next(context);
-                        });
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                                    new FakeHttpMaxRequestBodySizeFeature(5_000_000)
+                                );
+                                return next(context);
+                            }
+                        );
                         app.UseRouting();
-                        app.Use((context, next) =>
-                        {
-                            context.Request.Body = new SizeLimitedStream(context.Request.Body, context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize);
-                            return next(context);
-                        });
+                        app.Use(
+                            (context, next) =>
+                            {
+                                context.Request.Body = new SizeLimitedStream(
+                                    context.Request.Body,
+                                    context
+                                        .Features.Get<IHttpMaxRequestBodySizeFeature>()
+                                        ?.MaxRequestBodySize
+                                );
+                                return next(context);
+                            }
+                        );
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
-                            b.MapPost("/todo", ([FromForm] Todo todo) => todo).WithMetadata(new RequestSizeLimitMetadata(hasLimit ? 2 : null)));
+                            b.MapPost("/todo", ([FromForm] Todo todo) => todo)
+                                .WithMetadata(new RequestSizeLimitMetadata(hasLimit ? 2 : null))
+                        );
                     })
                     .UseTestServer();
             })
@@ -473,19 +554,27 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
         if (hasLimit)
         {
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await client.SendAsync(request));
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await client.SendAsync(request)
+            );
             Assert.Equal("The maximum number of bytes have been read.", exception.Message);
         }
         else
@@ -513,7 +602,8 @@ public class MinimalFormTests
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
                             b.MapPost("/todo", ([FromForm] Dictionary<string, string> todo) => todo)
-                                .WithFormMappingOptions(maxCollectionSize: 2));
+                                .WithFormMappingOptions(maxCollectionSize: 2)
+                        );
                     })
                     .UseTestServer();
             })
@@ -532,16 +622,25 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("[name]", "Test task"),
-            new KeyValuePair<string,string>("[name1]", "Test task"),
-            new KeyValuePair<string,string>("[isComplete]", "false"),
-            new KeyValuePair<string,string>("[isComplete1]", "false"),
-            new KeyValuePair<string,string>("[dueDate]", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
-            new KeyValuePair<string,string>("[dueDate1]", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("[name]", "Test task"),
+            new KeyValuePair<string, string>("[name1]", "Test task"),
+            new KeyValuePair<string, string>("[isComplete]", "false"),
+            new KeyValuePair<string, string>("[isComplete1]", "false"),
+            new KeyValuePair<string, string>(
+                "[dueDate]",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
+            new KeyValuePair<string, string>(
+                "[dueDate1]",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -562,7 +661,8 @@ public class MinimalFormTests
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
                         {
-                            var g = b.MapGroup("/todos").WithFormMappingOptions(maxCollectionSize: 2);
+                            var g = b.MapGroup("/todos")
+                                .WithFormMappingOptions(maxCollectionSize: 2);
                             g.MapPost("/1", ([FromForm] Dictionary<string, string> todo) => todo)
                                 .WithFormMappingOptions(maxCollectionSize: 7);
                         });
@@ -584,16 +684,25 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "/todos/1");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("[name]", "Test task"),
-            new KeyValuePair<string,string>("[name1]", "Test task"),
-            new KeyValuePair<string,string>("[isComplete]", "false"),
-            new KeyValuePair<string,string>("[isComplete1]", "false"),
-            new KeyValuePair<string,string>("[dueDate]", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
-            new KeyValuePair<string,string>("[dueDate1]", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("[name]", "Test task"),
+            new KeyValuePair<string, string>("[name1]", "Test task"),
+            new KeyValuePair<string, string>("[isComplete]", "false"),
+            new KeyValuePair<string, string>("[isComplete1]", "false"),
+            new KeyValuePair<string, string>(
+                "[dueDate]",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
+            new KeyValuePair<string, string>(
+                "[dueDate1]",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -636,16 +745,25 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "/todos/1");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("[name]", "Test task"),
-            new KeyValuePair<string,string>("[name1]", "Test task"),
-            new KeyValuePair<string,string>("[isComplete]", "false"),
-            new KeyValuePair<string,string>("[isComplete1]", "false"),
-            new KeyValuePair<string,string>("[dueDate]", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
-            new KeyValuePair<string,string>("[dueDate1]", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("[name]", "Test task"),
+            new KeyValuePair<string, string>("[name1]", "Test task"),
+            new KeyValuePair<string, string>("[isComplete]", "false"),
+            new KeyValuePair<string, string>("[isComplete1]", "false"),
+            new KeyValuePair<string, string>(
+                "[dueDate]",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
+            new KeyValuePair<string, string>(
+                "[dueDate1]",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -666,7 +784,8 @@ public class MinimalFormTests
                         app.UseAntiforgery();
                         app.UseEndpoints(b =>
                             b.MapPost("/todo", ([FromForm] Todo todo) => todo)
-                                .WithFormOptions(keyLengthLimit: 8));
+                                .WithFormOptions(keyLengthLimit: 8)
+                        );
                     })
                     .UseTestServer();
             })
@@ -685,13 +804,19 @@ public class MinimalFormTests
         var antiforgeryOptions = host.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
         var request = new HttpRequestMessage(HttpMethod.Post, "todo");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string,string>("__RequestVerificationToken", tokens.RequestToken),
-            new KeyValuePair<string,string>("name", "Test task"),
-            new KeyValuePair<string,string>("isComplete", "false"),
-            new KeyValuePair<string,string>("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
+            new KeyValuePair<string, string>("__RequestVerificationToken", tokens.RequestToken),
+            new KeyValuePair<string, string>("name", "Test task"),
+            new KeyValuePair<string, string>("isComplete", "false"),
+            new KeyValuePair<string, string>(
+                "dueDate",
+                DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)
+            ),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
 
@@ -714,7 +839,6 @@ public class MinimalFormTests
 
     class RequestSizeLimitMetadata(long? maxRequestBodySize) : IRequestSizeLimitMetadata
     {
-
         public long? MaxRequestBodySize => maxRequestBodySize;
     }
 
@@ -722,7 +846,8 @@ public class MinimalFormTests
     {
         public FakeHttpMaxRequestBodySizeFeature(
             long? maxRequestBodySize = null,
-            bool isReadOnly = false)
+            bool isReadOnly = false
+        )
         {
             MaxRequestBodySize = maxRequestBodySize;
             IsReadOnly = isReadOnly;

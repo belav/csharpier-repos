@@ -25,7 +25,9 @@ public class MessageTypeInfoResolverTests
     {
         var resolver = CreateResolver();
 
-        Assert.Null(resolver.GetTypeInfo(typeof(IMessage<HelloRequest>), new JsonSerializerOptions()));
+        Assert.Null(
+            resolver.GetTypeInfo(typeof(IMessage<HelloRequest>), new JsonSerializerOptions())
+        );
     }
 
     [Fact]
@@ -50,9 +52,15 @@ public class MessageTypeInfoResolverTests
         Assert.NotEmpty(typeInfo.Properties);
     }
 
-    private static MessageTypeInfoResolver CreateResolver(DescriptorRegistry? descriptorRegistry = null)
+    private static MessageTypeInfoResolver CreateResolver(
+        DescriptorRegistry? descriptorRegistry = null
+    )
     {
-        var context = new JsonContext(new GrpcJsonSettings(), TypeRegistry.Empty, descriptorRegistry ?? new DescriptorRegistry());
+        var context = new JsonContext(
+            new GrpcJsonSettings(),
+            TypeRegistry.Empty,
+            descriptorRegistry ?? new DescriptorRegistry()
+        );
         return new MessageTypeInfoResolver(context);
     }
 }

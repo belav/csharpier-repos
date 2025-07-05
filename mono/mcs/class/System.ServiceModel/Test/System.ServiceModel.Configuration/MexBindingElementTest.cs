@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,25 +35,31 @@ using System.ServiceModel.Configuration;
 
 namespace MonoTests.System.ServiceModel.Configuration
 {
-	[TestFixture]
-	public class MexBindingElementTest
-	{
-		class Poker<TStandardBinding> : MexBindingElement<TStandardBinding> where TStandardBinding : Binding
-		{
-			public Poker (string name)
-				: base (name) {
-			}
+    [TestFixture]
+    public class MexBindingElementTest
+    {
+        class Poker<TStandardBinding> : MexBindingElement<TStandardBinding>
+            where TStandardBinding : Binding
+        {
+            public Poker(string name)
+                : base(name) { }
 
-			public Type GetBindingElementType () {
-				return BindingElementType;
-			}
-		}
+            public Type GetBindingElementType()
+            {
+                return BindingElementType;
+            }
+        }
 
-		[Test]
-		public void BindingElementType () {
-			Poker<CustomBinding> poker = new Poker<CustomBinding> ("kuku");
-			Assert.AreEqual (typeof (CustomBinding), poker.GetBindingElementType (), "BindingElementType");
-		}
-	}
+        [Test]
+        public void BindingElementType()
+        {
+            Poker<CustomBinding> poker = new Poker<CustomBinding>("kuku");
+            Assert.AreEqual(
+                typeof(CustomBinding),
+                poker.GetBindingElementType(),
+                "BindingElementType"
+            );
+        }
+    }
 }
 #endif

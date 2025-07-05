@@ -15,7 +15,8 @@ public partial class AtMostOneFromBodyAttributeTest
     public async Task Handler_With_No_FromBody_Attributes_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
 webApp.MapPost(""/products/{productId}"", (string productId, Product product) => {});
@@ -33,7 +34,8 @@ public class Product
     public async Task Handler_With_One_FromBody_Attributes_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
@@ -52,7 +54,8 @@ public class Product
     public async Task Handler_With_Two_FromBody_Attributes_Fails()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
@@ -63,22 +66,23 @@ public class Product
 }
 ";
 
-        var expectedDiagnostic1 = new DiagnosticResult(DiagnosticDescriptors.AtMostOneFromBodyAttribute).WithLocation(0);
-        var expectedDiagnostic2 = new DiagnosticResult(DiagnosticDescriptors.AtMostOneFromBodyAttribute).WithLocation(1);
+        var expectedDiagnostic1 = new DiagnosticResult(
+            DiagnosticDescriptors.AtMostOneFromBodyAttribute
+        ).WithLocation(0);
+        var expectedDiagnostic2 = new DiagnosticResult(
+            DiagnosticDescriptors.AtMostOneFromBodyAttribute
+        ).WithLocation(1);
 
         // Act
-        await VerifyCS.VerifyAnalyzerAsync(
-            source,
-            expectedDiagnostic1,
-            expectedDiagnostic2
-            );
+        await VerifyCS.VerifyAnalyzerAsync(source, expectedDiagnostic1, expectedDiagnostic2);
     }
 
     [Fact]
     public async Task MethodGroup_Handler_With_Two_FromBody_Attributes_Fails()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
 var webApp = WebApplication.Create();
@@ -96,22 +100,23 @@ public class Product
 }
 ";
 
-        var expectedDiagnostic1 = new DiagnosticResult(DiagnosticDescriptors.AtMostOneFromBodyAttribute).WithLocation(0);
-        var expectedDiagnostic2 = new DiagnosticResult(DiagnosticDescriptors.AtMostOneFromBodyAttribute).WithLocation(1);
+        var expectedDiagnostic1 = new DiagnosticResult(
+            DiagnosticDescriptors.AtMostOneFromBodyAttribute
+        ).WithLocation(0);
+        var expectedDiagnostic2 = new DiagnosticResult(
+            DiagnosticDescriptors.AtMostOneFromBodyAttribute
+        ).WithLocation(1);
 
         // Act
-        await VerifyCS.VerifyAnalyzerAsync(
-            source,
-            expectedDiagnostic1,
-            expectedDiagnostic2
-            );
+        await VerifyCS.VerifyAnalyzerAsync(source, expectedDiagnostic1, expectedDiagnostic2);
     }
 
     [Fact]
     public async Task Handler_Handler_With_AsParameters_Argument_With_TwoFromBody_Attributes_Fails()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;
@@ -132,22 +137,23 @@ public class Product
 }
 ";
 
-        var expectedDiagnostic1 = new DiagnosticResult(DiagnosticDescriptors.AtMostOneFromBodyAttribute).WithLocation(0);
-        var expectedDiagnostic2 = new DiagnosticResult(DiagnosticDescriptors.AtMostOneFromBodyAttribute).WithLocation(1);
+        var expectedDiagnostic1 = new DiagnosticResult(
+            DiagnosticDescriptors.AtMostOneFromBodyAttribute
+        ).WithLocation(0);
+        var expectedDiagnostic2 = new DiagnosticResult(
+            DiagnosticDescriptors.AtMostOneFromBodyAttribute
+        ).WithLocation(1);
 
         // Act
-        await VerifyCS.VerifyAnalyzerAsync(
-            source,
-            expectedDiagnostic1,
-            expectedDiagnostic2
-            );
+        await VerifyCS.VerifyAnalyzerAsync(source, expectedDiagnostic1, expectedDiagnostic2);
     }
 
     [Fact]
     public async Task Handler_Handler_With_AsParameters_Argument_With_OneFromBody_Attributes_Works()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Builder;

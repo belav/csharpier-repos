@@ -10,17 +10,17 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Security;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the system assembly
 
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
 
 [assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
-	[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
 [assembly: AssemblyTitle("ResGen.exe")]
 [assembly: AssemblyDescription("ResGen.exe")]

@@ -35,10 +35,12 @@ public class StartupFullControl
                     {
                         // Write the application inline, this won't call any startup class in the assembly
 
-                        app.Use(next => context =>
-                        {
-                            return next(context);
-                        });
+                        app.Use(next =>
+                            context =>
+                            {
+                                return next(context);
+                            }
+                        );
                     });
             })
             .ConfigureServices(services =>

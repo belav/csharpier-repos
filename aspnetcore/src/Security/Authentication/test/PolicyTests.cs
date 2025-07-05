@@ -19,20 +19,30 @@ public class PolicyTests
     {
         using var server = await CreateServer(services =>
         {
-            services.AddLogging().AddAuthentication(o =>
-            {
-                o.AddScheme<TestHandler>("auth1", "auth1");
-                o.AddScheme<TestHandler>("auth2", "auth2");
-                o.AddScheme<TestHandler>("auth3", "auth3");
-            })
-            .AddPolicyScheme("policy1", "policy1", p =>
-            {
-                p.ForwardDefault = "auth1";
-            })
-            .AddPolicyScheme("policy2", "policy2", p =>
-            {
-                p.ForwardAuthenticate = "auth2";
-            });
+            services
+                .AddLogging()
+                .AddAuthentication(o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("auth2", "auth2");
+                    o.AddScheme<TestHandler>("auth3", "auth3");
+                })
+                .AddPolicyScheme(
+                    "policy1",
+                    "policy1",
+                    p =>
+                    {
+                        p.ForwardDefault = "auth1";
+                    }
+                )
+                .AddPolicyScheme(
+                    "policy2",
+                    "policy2",
+                    p =>
+                    {
+                        p.ForwardAuthenticate = "auth2";
+                    }
+                );
         });
 
         var transaction = await server.SendAsync("http://example.com/auth/policy1");
@@ -55,16 +65,21 @@ public class PolicyTests
     public async Task DefaultTargetSelectorWinsOverDefaultTarget()
     {
         var services = new ServiceCollection().ConfigureAuthTestServices();
-        services.AddAuthentication(o =>
-        {
-            o.AddScheme<TestHandler>("auth1", "auth1");
-            o.AddScheme<TestHandler2>("auth2", "auth2");
-        })
-        .AddPolicyScheme("forward", "forward", p =>
-        {
-            p.ForwardDefault = "auth2";
-            p.ForwardDefaultSelector = ctx => "auth1";
-        });
+        services
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
+            .AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth2";
+                    p.ForwardDefaultSelector = ctx => "auth1";
+                }
+            );
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -111,16 +126,21 @@ public class PolicyTests
     public async Task NullDefaultTargetSelectorFallsBacktoDefaultTarget()
     {
         var services = new ServiceCollection().ConfigureAuthTestServices();
-        services.AddAuthentication(o =>
-        {
-            o.AddScheme<TestHandler>("auth1", "auth1");
-            o.AddScheme<TestHandler2>("auth2", "auth2");
-        })
-        .AddPolicyScheme("forward", "forward", p =>
-        {
-            p.ForwardDefault = "auth1";
-            p.ForwardDefaultSelector = ctx => null;
-        });
+        services
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
+            .AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth1";
+                    p.ForwardDefaultSelector = ctx => null;
+                }
+            );
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -167,21 +187,26 @@ public class PolicyTests
     public async Task SpecificTargetAlwaysWinsOverDefaultTarget()
     {
         var services = new ServiceCollection().ConfigureAuthTestServices();
-        services.AddAuthentication(o =>
-        {
-            o.AddScheme<TestHandler>("auth1", "auth1");
-            o.AddScheme<TestHandler2>("auth2", "auth2");
-        })
-        .AddPolicyScheme("forward", "forward", p =>
-        {
-            p.ForwardDefault = "auth2";
-            p.ForwardDefaultSelector = ctx => "auth2";
-            p.ForwardAuthenticate = "auth1";
-            p.ForwardSignIn = "auth1";
-            p.ForwardSignOut = "auth1";
-            p.ForwardForbid = "auth1";
-            p.ForwardChallenge = "auth1";
-        });
+        services
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
+            .AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth2";
+                    p.ForwardDefaultSelector = ctx => "auth2";
+                    p.ForwardAuthenticate = "auth1";
+                    p.ForwardSignIn = "auth1";
+                    p.ForwardSignOut = "auth1";
+                    p.ForwardForbid = "auth1";
+                    p.ForwardChallenge = "auth1";
+                }
+            );
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -228,12 +253,13 @@ public class PolicyTests
     public async Task VirtualSchemeTargetsForwardWithDefaultTarget()
     {
         var services = new ServiceCollection().ConfigureAuthTestServices();
-        services.AddAuthentication(o =>
-        {
-            o.AddScheme<TestHandler>("auth1", "auth1");
-            o.AddScheme<TestHandler2>("auth2", "auth2");
-        })
-        .AddPolicyScheme("forward", "forward", p => p.ForwardDefault = "auth1");
+        services
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
+            .AddPolicyScheme("forward", "forward", p => p.ForwardDefault = "auth1");
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -280,17 +306,22 @@ public class PolicyTests
     public async Task VirtualSchemeTargetsOverrideDefaultTarget()
     {
         var services = new ServiceCollection().ConfigureAuthTestServices();
-        services.AddAuthentication(o =>
-        {
-            o.AddScheme<TestHandler>("auth1", "auth1");
-            o.AddScheme<TestHandler2>("auth2", "auth2");
-        })
-        .AddPolicyScheme("forward", "forward", p =>
-        {
-            p.ForwardDefault = "auth1";
-            p.ForwardChallenge = "auth2";
-            p.ForwardSignIn = "auth2";
-        });
+        services
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
+            .AddPolicyScheme(
+                "forward",
+                "forward",
+                p =>
+                {
+                    p.ForwardDefault = "auth1";
+                    p.ForwardChallenge = "auth2";
+                    p.ForwardSignIn = "auth2";
+                }
+            );
 
         var handler1 = new TestHandler();
         services.AddSingleton(handler1);
@@ -338,16 +369,21 @@ public class PolicyTests
     {
         using var server = await CreateServer(services =>
         {
-            services.AddAuthentication(o =>
-            {
-                o.AddScheme<TestHandler>("auth1", "auth1");
-                o.AddScheme<TestHandler>("auth2", "auth2");
-                o.AddScheme<TestHandler>("auth3", "auth3");
-            })
-            .AddPolicyScheme("dynamic", "dynamic", p =>
-            {
-                p.ForwardDefaultSelector = c => c.Request.QueryString.Value.Substring(1);
-            });
+            services
+                .AddAuthentication(o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("auth2", "auth2");
+                    o.AddScheme<TestHandler>("auth3", "auth3");
+                })
+                .AddPolicyScheme(
+                    "dynamic",
+                    "dynamic",
+                    p =>
+                    {
+                        p.ForwardDefaultSelector = c => c.Request.QueryString.Value.Substring(1);
+                    }
+                );
         });
 
         var transaction = await server.SendAsync("http://example.com/auth/dynamic?auth1");
@@ -372,9 +408,20 @@ public class PolicyTests
             AuthenticateCount++;
             var principal = new ClaimsPrincipal();
             var id = new ClaimsIdentity();
-            id.AddClaim(new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name));
+            id.AddClaim(
+                new Claim(
+                    ClaimTypes.NameIdentifier,
+                    Scheme.Name,
+                    ClaimValueTypes.String,
+                    Scheme.Name
+                )
+            );
             principal.AddIdentity(id);
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)));
+            return Task.FromResult(
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+                )
+            );
         }
 
         public Task ChallengeAsync(AuthenticationProperties properties)
@@ -422,9 +469,20 @@ public class PolicyTests
             AuthenticateCount++;
             var principal = new ClaimsPrincipal();
             var id = new ClaimsIdentity();
-            id.AddClaim(new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name));
+            id.AddClaim(
+                new Claim(
+                    ClaimTypes.NameIdentifier,
+                    Scheme.Name,
+                    ClaimValueTypes.String,
+                    Scheme.Name
+                )
+            );
             principal.AddIdentity(id);
-            return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)));
+            return Task.FromResult(
+                AuthenticateResult.Success(
+                    new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+                )
+            );
         }
 
         public Task ChallengeAsync(AuthenticationProperties properties)
@@ -458,7 +516,10 @@ public class PolicyTests
         }
     }
 
-    private static async Task<TestServer> CreateServer(Action<IServiceCollection> configure = null, string defaultScheme = null)
+    private static async Task<TestServer> CreateServer(
+        Action<IServiceCollection> configure = null,
+        string defaultScheme = null
+    )
     {
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
@@ -467,21 +528,31 @@ public class PolicyTests
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Use(async (context, next) =>
-                        {
-                            var req = context.Request;
-                            var res = context.Response;
-                            if (req.Path.StartsWithSegments(new PathString("/auth"), out var remainder))
+                        app.Use(
+                            async (context, next) =>
                             {
-                                var name = (remainder.Value.Length > 0) ? remainder.Value.Substring(1) : null;
-                                var result = await context.AuthenticateAsync(name);
-                                await res.DescribeAsync(result?.Ticket?.Principal);
+                                var req = context.Request;
+                                var res = context.Response;
+                                if (
+                                    req.Path.StartsWithSegments(
+                                        new PathString("/auth"),
+                                        out var remainder
+                                    )
+                                )
+                                {
+                                    var name =
+                                        (remainder.Value.Length > 0)
+                                            ? remainder.Value.Substring(1)
+                                            : null;
+                                    var result = await context.AuthenticateAsync(name);
+                                    await res.DescribeAsync(result?.Ticket?.Principal);
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
                             }
-                            else
-                            {
-                                await next(context);
-                            }
-                        });
+                        );
                     })
                     .UseTestServer();
             })

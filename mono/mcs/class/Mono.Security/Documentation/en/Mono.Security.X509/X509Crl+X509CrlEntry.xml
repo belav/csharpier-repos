@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName="Extensions">
-      <MemberSignature Language="C#" Value="public Mono.Security.X509.X509ExtensionCollection Extensions { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Security.X509.X509ExtensionCollection Extensions { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.X509.X509ExtensionCollection</ReturnType>

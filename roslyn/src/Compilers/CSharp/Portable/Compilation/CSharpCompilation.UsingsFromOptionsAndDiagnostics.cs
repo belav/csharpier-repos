@@ -16,12 +16,17 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private class UsingsFromOptionsAndDiagnostics
         {
-            public static readonly UsingsFromOptionsAndDiagnostics Empty = new UsingsFromOptionsAndDiagnostics() { UsingNamespacesOrTypes = ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty, Diagnostics = null };
+            public static readonly UsingsFromOptionsAndDiagnostics Empty =
+                new UsingsFromOptionsAndDiagnostics()
+                {
+                    UsingNamespacesOrTypes = ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty,
+                    Diagnostics = null,
+                };
 
             public ImmutableArray<NamespaceOrTypeAndUsingDirective> UsingNamespacesOrTypes { get; init; }
             public DiagnosticBag? Diagnostics { get; init; }
 
-            // completion state that tracks whether validation was done/not done/currently in process. 
+            // completion state that tracks whether validation was done/not done/currently in process.
             private SymbolCompletionState _state;
 
             public static UsingsFromOptionsAndDiagnostics FromOptions(CSharpCompilation compilation)
@@ -34,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
 
                 var diagnostics = new DiagnosticBag();
-                var usingsBinder = new InContainerBinder(compilation.GlobalNamespace, new BuckStopsHereBinder(compilation, associatedFileIdentifier: null));
+                var usingsBinder = new InContainerBinder(
+                    compilation.GlobalNamespace,
+                    new BuckStopsHereBinder(compilation, associatedFileIdentifier: null)
+                );
                 var boundUsings = ArrayBuilder<NamespaceOrTypeAndUsingDirective>.GetInstance();
                 var uniqueUsings = PooledHashSet<NamespaceOrTypeSymbol>.GetInstance();
 
@@ -50,17 +58,28 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     for (int j = 1; j < identifiers.Length; j++)
                     {
-                        qualifiedName = SyntaxFactory.QualifiedName(left: qualifiedName, right: SyntaxFactory.IdentifierName(identifiers[j]));
+                        qualifiedName = SyntaxFactory.QualifiedName(
+                            left: qualifiedName,
+                            right: SyntaxFactory.IdentifierName(identifiers[j])
+                        );
                     }
 
                     var directiveDiagnostics = BindingDiagnosticBag.GetInstance();
                     Debug.Assert(directiveDiagnostics.DiagnosticBag is object);
                     Debug.Assert(directiveDiagnostics.DependenciesBag is object);
 
-                    var imported = usingsBinder.BindNamespaceOrTypeSymbol(qualifiedName, directiveDiagnostics).NamespaceOrTypeSymbol;
+                    var imported = usingsBinder
+                        .BindNamespaceOrTypeSymbol(qualifiedName, directiveDiagnostics)
+                        .NamespaceOrTypeSymbol;
                     if (uniqueUsings.Add(imported))
                     {
-                        boundUsings.Add(new NamespaceOrTypeAndUsingDirective(imported, null, dependencies: directiveDiagnostics.DependenciesBag.ToImmutableArray()));
+                        boundUsings.Add(
+                            new NamespaceOrTypeAndUsingDirective(
+                                imported,
+                                null,
+                                dependencies: directiveDiagnostics.DependenciesBag.ToImmutableArray()
+                            )
+                        );
                     }
 
                     diagnostics.AddRange(directiveDiagnostics.DiagnosticBag);
@@ -80,10 +99,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return Empty;
                 }
 
-                return new UsingsFromOptionsAndDiagnostics() { UsingNamespacesOrTypes = boundUsings.ToImmutableAndFree(), Diagnostics = diagnostics };
+                return new UsingsFromOptionsAndDiagnostics()
+                {
+                    UsingNamespacesOrTypes = boundUsings.ToImmutableAndFree(),
+                    Diagnostics = diagnostics,
+                };
             }
 
-            internal void Complete(CSharpCompilation compilation, CancellationToken cancellationToken)
+            internal void Complete(
+                CSharpCompilation compilation,
+                CancellationToken cancellationToken
+            )
             {
                 while (true)
                 {
@@ -105,7 +131,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // some other thread has started validating imports (otherwise we would be in the case above) so
                             // we just wait for it to both finish and report the diagnostics.
                             Debug.Assert(_state.HasComplete(CompletionPart.StartValidatingImports));
-                            _state.SpinWaitComplete(CompletionPart.FinishValidatingImports, cancellationToken);
+                            _state.SpinWaitComplete(
+                                CompletionPart.FinishValidatingImports,
+                                cancellationToken
+                            );
                             break;
 
                         case CompletionPart.None:
@@ -113,7 +142,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         default:
                             // any other values are completion parts intended for other kinds of symbols
-                            _state.NotePartComplete(CompletionPart.All & ~CompletionPart.ImportsAll);
+                            _state.NotePartComplete(
+                                CompletionPart.All & ~CompletionPart.ImportsAll
+                            );
                             break;
                     }
 
@@ -148,7 +179,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         var typeSymbol = (TypeSymbol)target;
                         var location = NoLocation.Singleton;
-                        typeSymbol.CheckAllConstraints(compilation, conversions, location, diagnostics);
+                        typeSymbol.CheckAllConstraints(
+                            compilation,
+                            conversions,
+                            location,
+                            diagnostics
+                        );
                     }
 
                     semanticDiagnostics.AddRange(diagnostics.DiagnosticBag);

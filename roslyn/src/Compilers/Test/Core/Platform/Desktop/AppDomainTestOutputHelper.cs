@@ -23,8 +23,7 @@ public sealed class AppDomainTestOutputHelper : MarshalByRefObject, ITestOutputH
         TestOutputHelper = testOutputHelper;
     }
 
-    public void WriteLine(string message) =>
-        TestOutputHelper.WriteLine(message);
+    public void WriteLine(string message) => TestOutputHelper.WriteLine(message);
 
     public void WriteLine(string format, params object[] args) =>
         TestOutputHelper.WriteLine(format, args);

@@ -37,8 +37,12 @@ namespace Microsoft.Extensions.Logging.Test
         public void CaptureScopesDefaultsToTrue()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddLogging(builder => builder.AddConfiguration(new ConfigurationBuilder().Build()));
-            var options = serviceCollection.BuildServiceProvider().GetRequiredService<IOptions<LoggerFilterOptions>>();
+            serviceCollection.AddLogging(builder =>
+                builder.AddConfiguration(new ConfigurationBuilder().Build())
+            );
+            var options = serviceCollection
+                .BuildServiceProvider()
+                .GetRequiredService<IOptions<LoggerFilterOptions>>();
 
             Assert.True(options.Value.CaptureScopes);
         }
@@ -50,7 +54,9 @@ namespace Microsoft.Extensions.Logging.Test
         [Fact]
         public void TypeForwardIsCorrect()
         {
-            Type builderType = Type.GetType("Microsoft.Extensions.Logging.ILoggingBuilder, Microsoft.Extensions.Logging");
+            Type builderType = Type.GetType(
+                "Microsoft.Extensions.Logging.ILoggingBuilder, Microsoft.Extensions.Logging"
+            );
             Assert.Equal(typeof(ILoggingBuilder), builderType);
         }
     }

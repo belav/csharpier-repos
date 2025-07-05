@@ -3,22 +3,21 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Testing.Verifiers;
-using Xunit;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis.Shared.Utilities;
-
+using Microsoft.CodeAnalysis.Test.Utilities;
+using Microsoft.CodeAnalysis.Testing.Verifiers;
+using Microsoft.CodeAnalysis.Text;
+using Xunit;
 #if !CODE_STYLE
 using Roslyn.Utilities;
 #endif
@@ -39,7 +38,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 // reasonable TLS protocol version for outgoing connections.
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (ServicePointManager.SecurityProtocol == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls))
+                if (
+                    ServicePointManager.SecurityProtocol
+                    == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls)
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CA5364 // Do Not Use Deprecated Security Protocols
                 {
@@ -70,6 +72,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 set => _sharedState.CodeActionOptions = value;
             }
 #endif
+
             /// <inheritdoc cref="SharedVerifierState.EditorConfig"/>
             public string? EditorConfig
             {
@@ -81,11 +84,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
             public Action<ImmutableArray<CodeAction>>? CodeActionsVerifier { get; set; }
 
-            protected override async Task RunImplAsync(CancellationToken cancellationToken = default)
+            protected override async Task RunImplAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 if (DiagnosticSelector is object)
                 {
-                    Assert.True(CodeFixTestBehaviors.HasFlag(Testing.CodeFixTestBehaviors.FixOne), $"'{nameof(DiagnosticSelector)}' can only be used with '{nameof(Testing.CodeFixTestBehaviors)}.{nameof(Testing.CodeFixTestBehaviors.FixOne)}'");
+                    Assert.True(
+                        CodeFixTestBehaviors.HasFlag(Testing.CodeFixTestBehaviors.FixOne),
+                        $"'{nameof(DiagnosticSelector)}' can only be used with '{nameof(Testing.CodeFixTestBehaviors)}.{nameof(Testing.CodeFixTestBehaviors.FixOne)}'"
+                    );
                 }
 
                 _sharedState.Apply();
@@ -101,15 +109,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             protected override CompilationOptions CreateCompilationOptions()
             {
                 var compilationOptions = (CSharpCompilationOptions)base.CreateCompilationOptions();
-                return compilationOptions.WithSpecificDiagnosticOptions(compilationOptions.SpecificDiagnosticOptions.SetItems(CSharpVerifierHelper.NullableWarnings));
+                return compilationOptions.WithSpecificDiagnosticOptions(
+                    compilationOptions.SpecificDiagnosticOptions.SetItems(
+                        CSharpVerifierHelper.NullableWarnings
+                    )
+                );
             }
 
 #if !CODE_STYLE
-            protected override AnalyzerOptions GetAnalyzerOptions(Project project)
-                => new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), _sharedState.GetIdeAnalyzerOptions(project));
+            protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
+                new WorkspaceAnalyzerOptions(
+                    base.GetAnalyzerOptions(project),
+                    _sharedState.GetIdeAnalyzerOptions(project)
+                );
 
-            protected override CodeFixContext CreateCodeFixContext(Document document, TextSpan span, ImmutableArray<Diagnostic> diagnostics, Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix, CancellationToken cancellationToken)
-                => new(document, span, diagnostics, registerCodeFix, _sharedState.CodeActionOptions, cancellationToken);
+            protected override CodeFixContext CreateCodeFixContext(
+                Document document,
+                TextSpan span,
+                ImmutableArray<Diagnostic> diagnostics,
+                Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix,
+                CancellationToken cancellationToken
+            ) =>
+                new(
+                    document,
+                    span,
+                    diagnostics,
+                    registerCodeFix,
+                    _sharedState.CodeActionOptions,
+                    cancellationToken
+                );
 
             protected override FixAllContext CreateFixAllContext(
                 Document? document,
@@ -119,28 +147,37 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 string? codeActionEquivalenceKey,
                 IEnumerable<string> diagnosticIds,
                 FixAllContext.DiagnosticProvider fixAllDiagnosticProvider,
-                CancellationToken cancellationToken)
-                => new(new FixAllState(
-                    fixAllProvider: NoOpFixAllProvider.Instance,
-                    diagnosticSpan: null,
-                    document,
-                    project,
-                    codeFixProvider,
-                    scope,
-                    codeActionEquivalenceKey,
-                    diagnosticIds,
-                    fixAllDiagnosticProvider,
-                    _sharedState.CodeActionOptions),
-                  CodeAnalysisProgress.None, cancellationToken);
+                CancellationToken cancellationToken
+            ) =>
+                new(
+                    new FixAllState(
+                        fixAllProvider: NoOpFixAllProvider.Instance,
+                        diagnosticSpan: null,
+                        document,
+                        project,
+                        codeFixProvider,
+                        scope,
+                        codeActionEquivalenceKey,
+                        diagnosticIds,
+                        fixAllDiagnosticProvider,
+                        _sharedState.CodeActionOptions
+                    ),
+                    CodeAnalysisProgress.None,
+                    cancellationToken
+                );
 #endif
 
-            protected override Diagnostic? TrySelectDiagnosticToFix(ImmutableArray<Diagnostic> fixableDiagnostics)
+            protected override Diagnostic? TrySelectDiagnosticToFix(
+                ImmutableArray<Diagnostic> fixableDiagnostics
+            )
             {
                 return DiagnosticSelector?.Invoke(fixableDiagnostics)
                     ?? base.TrySelectDiagnosticToFix(fixableDiagnostics);
             }
 
-            protected override ImmutableArray<CodeAction> FilterCodeActions(ImmutableArray<CodeAction> actions)
+            protected override ImmutableArray<CodeAction> FilterCodeActions(
+                ImmutableArray<CodeAction> actions
+            )
             {
                 CodeActionsVerifier?.Invoke(actions);
                 return base.FilterCodeActions(actions);

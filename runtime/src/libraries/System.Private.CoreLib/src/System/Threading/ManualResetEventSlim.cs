@@ -36,6 +36,7 @@ namespace System.Threading
         private const int DEFAULT_SPIN_SP = 1;
 
         private volatile object? m_lock;
+
         // A lock used for waiting and pulsing. Lazily initialized via EnsureLockObjectCreated()
 
         private volatile ManualResetEvent? m_eventObj; // A true Win32 event used for waiting.
@@ -60,6 +61,7 @@ namespace System.Threading
         private const int NumWaitersState_BitMask = unchecked((int)0x0007FFFF); // 0000 0000 0000 0111 1111 1111 1111 1111
         private const int NumWaitersState_ShiftCount = 0;
         private const int NumWaitersState_MaxValue = (1 << 19) - 1; // 512K-1
+
         // ----------- //
 
         /// <summary>
@@ -96,7 +98,11 @@ namespace System.Threading
         public bool IsSet
         {
             get => 0 != ExtractStatePortion(m_combinedState, SignalledState_BitMask);
-            private set => UpdateStateAtomically(((value) ? 1 : 0) << SignalledState_ShiftCount, SignalledState_BitMask);
+            private set =>
+                UpdateStateAtomically(
+                    ((value) ? 1 : 0) << SignalledState_ShiftCount,
+                    SignalledState_BitMask
+                );
         }
 
         /// <summary>
@@ -104,13 +110,26 @@ namespace System.Threading
         /// </summary>
         public int SpinCount
         {
-            get => ExtractStatePortionAndShiftRight(m_combinedState, SpinCountState_BitMask, SpinCountState_ShiftCount);
+            get =>
+                ExtractStatePortionAndShiftRight(
+                    m_combinedState,
+                    SpinCountState_BitMask,
+                    SpinCountState_ShiftCount
+                );
             private set
             {
-                Debug.Assert(value >= 0, "SpinCount is a restricted-width integer. The value supplied is outside the legal range.");
-                Debug.Assert(value <= SpinCountState_MaxValue, "SpinCount is a restricted-width integer. The value supplied is outside the legal range.");
+                Debug.Assert(
+                    value >= 0,
+                    "SpinCount is a restricted-width integer. The value supplied is outside the legal range."
+                );
+                Debug.Assert(
+                    value <= SpinCountState_MaxValue,
+                    "SpinCount is a restricted-width integer. The value supplied is outside the legal range."
+                );
                 // Don't worry about thread safety because it's set one time from the constructor
-                m_combinedState = (m_combinedState & ~SpinCountState_BitMask) | (value << SpinCountState_ShiftCount);
+                m_combinedState =
+                    (m_combinedState & ~SpinCountState_BitMask)
+                    | (value << SpinCountState_ShiftCount);
             }
         }
 
@@ -119,15 +138,28 @@ namespace System.Threading
         /// </summary>
         private int Waiters
         {
-            get => ExtractStatePortionAndShiftRight(m_combinedState, NumWaitersState_BitMask, NumWaitersState_ShiftCount);
+            get =>
+                ExtractStatePortionAndShiftRight(
+                    m_combinedState,
+                    NumWaitersState_BitMask,
+                    NumWaitersState_ShiftCount
+                );
             set
             {
                 // setting to <0 would indicate an internal flaw, hence Assert is appropriate.
-                Debug.Assert(value >= 0, "NumWaiters should never be less than zero. This indicates an internal error.");
+                Debug.Assert(
+                    value >= 0,
+                    "NumWaiters should never be less than zero. This indicates an internal error."
+                );
 
                 // it is possible for the max number of waiters to be exceeded via user-code, hence we use a real exception here.
                 if (value >= NumWaitersState_MaxValue)
-                    throw new InvalidOperationException(SR.Format(SR.ManualResetEventSlim_ctor_TooManyWaiters, NumWaitersState_MaxValue));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.ManualResetEventSlim_ctor_TooManyWaiters,
+                            NumWaitersState_MaxValue
+                        )
+                    );
 
                 UpdateStateAtomically(value << NumWaitersState_ShiftCount, NumWaitersState_BitMask);
             }
@@ -143,9 +175,7 @@ namespace System.Threading
         /// class with an initial state of nonsignaled.
         /// </summary>
         public ManualResetEventSlim()
-            : this(false)
-        {
-        }
+            : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualResetEventSlim"/>
@@ -190,8 +220,14 @@ namespace System.Threading
             m_combinedState = initialState ? (1 << SignalledState_ShiftCount) : 0;
             // the spinCount argument has been validated by the ctors.
             // but we now sanity check our predefined constants.
-            Debug.Assert(DEFAULT_SPIN_SP >= 0, "Internal error - DEFAULT_SPIN_SP is outside the legal range.");
-            Debug.Assert(DEFAULT_SPIN_SP <= SpinCountState_MaxValue, "Internal error - DEFAULT_SPIN_SP is outside the legal range.");
+            Debug.Assert(
+                DEFAULT_SPIN_SP >= 0,
+                "Internal error - DEFAULT_SPIN_SP is outside the legal range."
+            );
+            Debug.Assert(
+                DEFAULT_SPIN_SP <= SpinCountState_MaxValue,
+                "Internal error - DEFAULT_SPIN_SP is outside the legal range."
+            );
 
             SpinCount = Environment.IsSingleProcessor ? DEFAULT_SPIN_SP : spinCount;
         }
@@ -236,8 +272,10 @@ namespace System.Threading
                 bool currentIsSet = IsSet;
                 if (currentIsSet != preInitializeIsSet)
                 {
-                    Debug.Assert(currentIsSet,
-                        "The only safe concurrent transition is from unset->set: detected set->unset.");
+                    Debug.Assert(
+                        currentIsSet,
+                        "The only safe concurrent transition is from unset->set: detected set->unset."
+                    );
 
                     // We saw it as unsignaled, but it has since become set.
                     lock (newEventObj)
@@ -392,7 +430,11 @@ namespace System.Threading
             long totalMilliseconds = (long)timeout.TotalMilliseconds;
 
             ArgumentOutOfRangeException.ThrowIfLessThan(totalMilliseconds, -1, nameof(timeout));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(totalMilliseconds, int.MaxValue, nameof(timeout));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                totalMilliseconds,
+                int.MaxValue,
+                nameof(timeout)
+            );
 
             return Wait((int)totalMilliseconds, CancellationToken.None);
         }
@@ -423,7 +465,11 @@ namespace System.Threading
             long totalMilliseconds = (long)timeout.TotalMilliseconds;
 
             ArgumentOutOfRangeException.ThrowIfLessThan(totalMilliseconds, -1, nameof(timeout));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(totalMilliseconds, int.MaxValue, nameof(timeout));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                totalMilliseconds,
+                int.MaxValue,
+                nameof(timeout)
+            );
 
             return Wait((int)totalMilliseconds, cancellationToken);
         }
@@ -481,7 +527,6 @@ namespace System.Threading
                     return false;
                 }
 
-
                 // We spin briefly before falling back to allocating and/or waiting on a true event.
                 uint startTime = 0;
                 bool bNeedTimeoutAdjustment = false;
@@ -533,7 +578,10 @@ namespace System.Threading
                             // update timeout (delays in wait commencement are due to spinning and/or spurious wakeups from other waits being canceled)
                             if (bNeedTimeoutAdjustment)
                             {
-                                realMillisecondsTimeout = TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout);
+                                realMillisecondsTimeout = TimeoutHelper.UpdateTimeOut(
+                                    startTime,
+                                    millisecondsTimeout
+                                );
                                 if (realMillisecondsTimeout <= 0)
                                     return false;
                             }
@@ -627,7 +675,10 @@ namespace System.Threading
         /// <summary>
         /// Private helper method to wake up waiters when a cancellationToken gets canceled.
         /// </summary>
-        private static readonly Action<object?> s_cancellationTokenCallback = new Action<object?>(CancellationTokenCallback);
+        private static readonly Action<object?> s_cancellationTokenCallback = new Action<object?>(
+            CancellationTokenCallback
+        );
+
         private static void CancellationTokenCallback(object? obj)
         {
             Debug.Assert(obj is ManualResetEventSlim, "Expected a ManualResetEventSlim");
@@ -652,7 +703,10 @@ namespace System.Threading
         {
             SpinWait sw = default;
 
-            Debug.Assert((newBits | updateBitsMask) == updateBitsMask, "newBits do not fall within the updateBitsMask.");
+            Debug.Assert(
+                (newBits | updateBitsMask) == updateBitsMask,
+                "newBits do not fall within the updateBitsMask."
+            );
 
             while (true)
             {
@@ -662,7 +716,9 @@ namespace System.Threading
                 //           then (2) map in the newBits. eg [11000111] newBits=00101000, newState=[11101111]
                 int newState = (oldState & ~updateBitsMask) | newBits;
 
-                if (Interlocked.CompareExchange(ref m_combinedState, newState, oldState) == oldState)
+                if (
+                    Interlocked.CompareExchange(ref m_combinedState, newState, oldState) == oldState
+                )
                 {
                     return;
                 }
@@ -681,7 +737,11 @@ namespace System.Threading
         /// <param name="mask"></param>
         /// <param name="rightBitShiftCount"></param>
         /// <returns></returns>
-        private static int ExtractStatePortionAndShiftRight(int state, int mask, int rightBitShiftCount)
+        private static int ExtractStatePortionAndShiftRight(
+            int state,
+            int mask,
+            int rightBitShiftCount
+        )
         {
             // convert to uint before shifting so that right-shift does not replicate the sign-bit,
             // then convert back to int.

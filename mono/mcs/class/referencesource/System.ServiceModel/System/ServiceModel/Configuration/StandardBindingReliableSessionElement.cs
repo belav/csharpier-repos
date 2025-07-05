@@ -13,18 +13,22 @@ namespace System.ServiceModel.Configuration
 
     public partial class StandardBindingReliableSessionElement : ServiceModelConfigurationElement
     {
-        public StandardBindingReliableSessionElement()
-        {
-        }
+        public StandardBindingReliableSessionElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.Ordered, DefaultValue = ReliableSessionDefaults.Ordered)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Ordered,
+            DefaultValue = ReliableSessionDefaults.Ordered
+        )]
         public bool Ordered
         {
             get { return (bool)base[ConfigurationStrings.Ordered]; }
             set { base[ConfigurationStrings.Ordered] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.InactivityTimeout, DefaultValue = ReliableSessionDefaults.InactivityTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.InactivityTimeout,
+            DefaultValue = ReliableSessionDefaults.InactivityTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanOneTick)]
         public TimeSpan InactivityTimeout
@@ -39,8 +43,14 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reliableSession");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Ordered, reliableSession.Ordered);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.InactivityTimeout, reliableSession.InactivityTimeout);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.Ordered,
+                reliableSession.Ordered
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.InactivityTimeout,
+                reliableSession.InactivityTimeout
+            );
         }
 
         public void ApplyConfiguration(System.ServiceModel.ReliableSession reliableSession)

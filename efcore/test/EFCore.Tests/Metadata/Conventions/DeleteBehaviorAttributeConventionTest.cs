@@ -19,12 +19,9 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post>()
-            .Property(e => e.BlogId);
+        modelBuilder.Entity<Post>().Property(e => e.BlogId);
 
-        var fk = modelBuilder.Entity<Blog>()
-            .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog).Metadata;
+        var fk = modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne(e => e.Blog).Metadata;
 
         Assert.Equal(DeleteBehavior.ClientSetNull, fk.DeleteBehavior);
     }
@@ -34,12 +31,13 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_Restrict>()
-            .Property(e => e.BlogId);
+        modelBuilder.Entity<Post_Restrict>().Property(e => e.BlogId);
 
-        var fk = modelBuilder.Entity<Blog_Restrict>()
+        var fk = modelBuilder
+            .Entity<Blog_Restrict>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_Restrict).Metadata;
+            .WithOne(e => e.Blog_Restrict)
+            .Metadata;
 
         Assert.Equal(DeleteBehavior.Restrict, fk.DeleteBehavior);
     }
@@ -49,14 +47,14 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_Compound>()
-            .Property(e => e.BlogId);
-        modelBuilder.Entity<Post_Compound>()
-            .Property(e => e.BlogId2);
+        modelBuilder.Entity<Post_Compound>().Property(e => e.BlogId);
+        modelBuilder.Entity<Post_Compound>().Property(e => e.BlogId2);
 
-        var fk = modelBuilder.Entity<Blog_Compound>()
+        var fk = modelBuilder
+            .Entity<Blog_Compound>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_Compound).Metadata;
+            .WithOne(e => e.Blog_Compound)
+            .Metadata;
 
         Assert.Equal(DeleteBehavior.Cascade, fk.DeleteBehavior);
     }
@@ -66,18 +64,20 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_Both>()
-            .Property(e => e.Blog_OneId);
-        modelBuilder.Entity<Post_Both>()
-            .Property(e => e.Blog_TwoId);
+        modelBuilder.Entity<Post_Both>().Property(e => e.Blog_OneId);
+        modelBuilder.Entity<Post_Both>().Property(e => e.Blog_TwoId);
 
-        var fk_One = modelBuilder.Entity<Blog_One>()
+        var fk_One = modelBuilder
+            .Entity<Blog_One>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_One).Metadata;
+            .WithOne(e => e.Blog_One)
+            .Metadata;
 
-        var fk_Two = modelBuilder.Entity<Blog_Two>()
+        var fk_Two = modelBuilder
+            .Entity<Blog_Two>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_Two).Metadata;
+            .WithOne(e => e.Blog_Two)
+            .Metadata;
 
         Assert.Equal(DeleteBehavior.Restrict, fk_One.DeleteBehavior);
         Assert.Equal(DeleteBehavior.Cascade, fk_Two.DeleteBehavior);
@@ -90,10 +90,16 @@ public class DeleteBehaviorAttributeConventionTest
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeNotOnNavigationProperty(
-                nameof(Post_On_FK_Property), nameof(Post_On_FK_Property.Blog_On_FK_PropertyId)),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Entity<Post_On_FK_Property>()
-                    .Property(e => e.Blog_On_FK_PropertyId)).Message
+                nameof(Post_On_FK_Property),
+                nameof(Post_On_FK_Property.Blog_On_FK_PropertyId)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder
+                        .Entity<Post_On_FK_Property>()
+                        .Property(e => e.Blog_On_FK_PropertyId)
+                )
+                .Message
         );
     }
 
@@ -104,10 +110,14 @@ public class DeleteBehaviorAttributeConventionTest
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeNotOnNavigationProperty(
-                nameof(Post_On_Property), nameof(Post_On_Property.Id)),
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Entity<Post_On_Property>()
-                    .Property(e => e.Blog_On_PropertyId)).Message
+                nameof(Post_On_Property),
+                nameof(Post_On_Property.Id)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    modelBuilder.Entity<Post_On_Property>().Property(e => e.Blog_On_PropertyId)
+                )
+                .Message
         );
     }
 
@@ -116,12 +126,13 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_On_Principal>()
-            .Property(e => e.Blog_On_PrincipalId);
+        modelBuilder.Entity<Post_On_Principal>().Property(e => e.Blog_On_PrincipalId);
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeOnPrincipalProperty(
-                nameof(Blog_On_Principal), nameof(Blog_On_Principal.Posts)),
+                nameof(Blog_On_Principal),
+                nameof(Blog_On_Principal.Posts)
+            ),
             Assert.Throws<InvalidOperationException>(modelBuilder.FinalizeModel).Message
         );
     }
@@ -131,18 +142,19 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_On_Principal_OneToOne>()
-            .Property(e => e.Blog_On_PrincipalId);
+        modelBuilder.Entity<Post_On_Principal_OneToOne>().Property(e => e.Blog_On_PrincipalId);
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeOnPrincipalProperty(
-                nameof(Blog_On_Principal_OneToOne), nameof(Blog_On_Principal_OneToOne.Post_On_Principal_OneToOne)),
+                nameof(Blog_On_Principal_OneToOne),
+                nameof(Blog_On_Principal_OneToOne.Post_On_Principal_OneToOne)
+            ),
             Assert.Throws<InvalidOperationException>(modelBuilder.FinalizeModel).Message
         );
     }
 
-    private static ModelBuilder CreateModelBuilder()
-        => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+    private static ModelBuilder CreateModelBuilder() =>
+        InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
     #region DeleteBehaviorAttribute not set
 

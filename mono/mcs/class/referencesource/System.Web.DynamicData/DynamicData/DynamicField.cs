@@ -1,21 +1,25 @@
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     using System;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
-    using System.Web.UI;
-    using System.Web.UI.WebControls;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.Web.Resources;
-    using System.Diagnostics;
-    
+    using System.Web.UI;
+    using System.Web.UI.WebControls;
+
     /// <summary>
     /// Field type that can display DynamicData UI
     /// </summary>
-    [Designer("System.Web.DynamicData.Design.DynamicFieldDesigner, " + AssemblyRef.SystemWebDynamicDataDesign)]
-    public class DynamicField : DataControlField, IAttributeAccessor, IFieldFormattingOptions {
-
+    [Designer(
+        "System.Web.DynamicData.Design.DynamicFieldDesigner, "
+            + AssemblyRef.SystemWebDynamicDataDesign
+    )]
+    public class DynamicField : DataControlField, IAttributeAccessor, IFieldFormattingOptions
+    {
         private bool _customConvertEmptyStringToNullSet;
         private bool _customApplyFormatInEditModeSet;
         private MetaColumn _column;
@@ -24,8 +28,10 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// same as base. uses column's display name if possible
         /// </summary>
-        public override string HeaderText {
-            get {
+        public override string HeaderText
+        {
+            get
+            {
                 object o = ViewState["HeaderText"];
                 if (o != null)
                     return (string)o;
@@ -37,16 +43,16 @@ namespace System.Web.DynamicData {
                 // If we couldn't get it, use the name if the data field
                 return DataField;
             }
-            set {
-                base.HeaderText = value;
-            }
+            set { base.HeaderText = value; }
         }
 
         /// <summary>
         /// same as base. uses column's SortExpression property, if possible.
         /// </summary>
-        public override string SortExpression {
-            get {
+        public override string SortExpression
+        {
+            get
+            {
                 object o = ViewState["SortExpression"];
                 if (o != null)
                     return (string)o;
@@ -57,62 +63,66 @@ namespace System.Web.DynamicData {
 
                 return String.Empty;
             }
-            set {
-                base.SortExpression = value;
-            }
+            set { base.SortExpression = value; }
         }
 
         /// <summary>
         /// Determines whether the control validates client input or not, defaults to inherit from parent.
         /// </summary>
         [
-        Category("Behavior"),
-        ResourceDescription("DynamicField_ValidateRequestMode"),
-        DefaultValue(ValidateRequestMode.Inherit)
+            Category("Behavior"),
+            ResourceDescription("DynamicField_ValidateRequestMode"),
+            DefaultValue(ValidateRequestMode.Inherit)
         ]
-        public new ValidateRequestMode ValidateRequestMode {
-            get {
-                return base.ValidateRequestMode;
-            }
-            set {
-                base.ValidateRequestMode = value;
-            }
+        public new ValidateRequestMode ValidateRequestMode
+        {
+            get { return base.ValidateRequestMode; }
+            set { base.ValidateRequestMode = value; }
         }
 
         [
-        SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "ReadOnly", Justification="Matches DataBoundControlMode value"),
-        DefaultValue(false),
-        Category("Behavior"),
-        ResourceDescription("DynamicField_ReadOnly"),
+            SuppressMessage(
+                "Microsoft.Naming",
+                "CA1716:IdentifiersShouldNotMatchKeywords",
+                MessageId = "ReadOnly",
+                Justification = "Matches DataBoundControlMode value"
+            ),
+            DefaultValue(false),
+            Category("Behavior"),
+            ResourceDescription("DynamicField_ReadOnly"),
         ]
         /// <summary>
         /// Forces this DynamicField to always load a ReadOnly template
         /// </summary>
-        public virtual bool ReadOnly {
-            get {
+        public virtual bool ReadOnly
+        {
+            get
+            {
                 object o = ViewState["ReadOnly"];
                 return (o == null ? false : (bool)o);
             }
-            set {
-                ViewState["ReadOnly"] = value;
-            }
+            set { ViewState["ReadOnly"] = value; }
         }
 
         /// <summary>
         /// The name of the column that this field handles
         /// </summary>
         [
-        Category("Data"),
-        DefaultValue(""),
-        ResourceDescription("DynamicControlFieldCommon_DataField")
+            Category("Data"),
+            DefaultValue(""),
+            ResourceDescription("DynamicControlFieldCommon_DataField")
         ]
-        public virtual string DataField {
-            get {
+        public virtual string DataField
+        {
+            get
+            {
                 object o = ViewState["DataField"];
                 return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                if (!String.Equals(value, ViewState["DataField"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["DataField"]))
+                {
                     ViewState["DataField"] = value;
                     OnFieldChanged();
                 }
@@ -122,17 +132,26 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// The MetaColumn that this fiedl is working with
         /// </summary>
-        protected MetaColumn Column {
-            get {
+        protected MetaColumn Column
+        {
+            get
+            {
                 // Don't do anything in Design mode. In some cases in the Designer (in the Edit field dialog),
                 // DesignMode actually returns true, so checking for a null Control provides an additional check.
                 if (DesignMode || Control == null)
                     return null;
 
-                if (_column == null) {
+                if (_column == null)
+                {
                     MetaTable table = Control.FindMetaTable();
-                    if (table == null) {
-                        throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DynamicDataResources.DynamicControl_ControlNeedsToExistInADataControlUsingDynamicDataSource));
+                    if (table == null)
+                    {
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                DynamicDataResources.DynamicControl_ControlNeedsToExistInADataControlUsingDynamicDataSource
+                            )
+                        );
                     }
                     _column = table.GetColumn(DataField);
                 }
@@ -144,17 +163,21 @@ namespace System.Web.DynamicData {
         /// An optional UIHint specified on the field
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue(""),
-        ResourceDescription("DynamicControlFieldCommon_UIHint")
+            Category("Behavior"),
+            DefaultValue(""),
+            ResourceDescription("DynamicControlFieldCommon_UIHint")
         ]
-        public virtual string UIHint {
-            get {
+        public virtual string UIHint
+        {
+            get
+            {
                 object o = ViewState["UIHint"];
                 return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                if (!String.Equals(value, ViewState["UIHint"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["UIHint"]))
+                {
                     ViewState["UIHint"] = value;
                     OnFieldChanged();
                 }
@@ -165,17 +188,21 @@ namespace System.Web.DynamicData {
         /// The validation group that the field template needs to be in
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue(""),
-        ResourceDescription("DynamicControlFieldCommon_ValidationGroup")
+            Category("Behavior"),
+            DefaultValue(""),
+            ResourceDescription("DynamicControlFieldCommon_ValidationGroup")
         ]
-        public virtual string ValidationGroup {
-            get {
+        public virtual string ValidationGroup
+        {
+            get
+            {
                 object o = ViewState["ValidationGroup"];
                 return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                if (!String.Equals(value, ViewState["ValidationGroup"])) {
+            set
+            {
+                if (!String.Equals(value, ViewState["ValidationGroup"]))
+                {
                     ViewState["ValidationGroup"] = value;
                     OnFieldChanged();
                 }
@@ -185,38 +212,49 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// See base class documentation
         /// </summary>
-        protected override DataControlField CreateField() {
+        protected override DataControlField CreateField()
+        {
             return new DynamicField();
         }
 
         /// <summary>
         /// See base class documentation
         /// </summary>
-        public override void InitializeCell(DataControlFieldCell cell, DataControlCellType cellType,
-            DataControlRowState rowState, int rowIndex) {
-
+        public override void InitializeCell(
+            DataControlFieldCell cell,
+            DataControlCellType cellType,
+            DataControlRowState rowState,
+            int rowIndex
+        )
+        {
             base.InitializeCell(cell, cellType, rowState, rowIndex);
 
-            if (cellType == DataControlCellType.DataCell) {
+            if (cellType == DataControlCellType.DataCell)
+            {
                 DynamicControl control = CreateDynamicControl();
                 control.DataField = DataField;
                 control.Mode = DetermineControlMode(rowState);
-                
+
                 // Copy various properties into the control
-                if (_customApplyFormatInEditModeSet) {
+                if (_customApplyFormatInEditModeSet)
+                {
                     control.ApplyFormatInEditMode = ApplyFormatInEditMode;
                 }
-                if (_customConvertEmptyStringToNullSet) {
+                if (_customConvertEmptyStringToNullSet)
+                {
                     control.ConvertEmptyStringToNull = ConvertEmptyStringToNull;
                 }
                 control.DataFormatString = DataFormatString;
-                if (ViewState["HtmlEncode"] == null) {
+                if (ViewState["HtmlEncode"] == null)
+                {
                     // There is no Column in Design Mode
-                    if (!DesignMode) {
+                    if (!DesignMode)
+                    {
                         control.HtmlEncode = Column.HtmlEncode;
                     }
                 }
-                else {
+                else
+                {
                     control.HtmlEncode = HtmlEncode;
                 }
                 control.NullDisplayText = NullDisplayText;
@@ -236,7 +274,8 @@ namespace System.Web.DynamicData {
         /// Provides a way for classes deriving from DynamicField to override how DynamicControl gets created.
         /// </summary>
         /// <returns></returns>
-        protected virtual DynamicControl CreateDynamicControl() {
+        protected virtual DynamicControl CreateDynamicControl()
+        {
             return new DynamicControl();
         }
 
@@ -244,23 +283,31 @@ namespace System.Web.DynamicData {
         /// Provides a hook to further modify a DynamicControl that was created by the InitializeCell method
         /// </summary>
         /// <param name="control"></param>
-        protected virtual void ConfigureDynamicControl(DynamicControl control) {
+        protected virtual void ConfigureDynamicControl(DynamicControl control)
+        {
             Debug.Assert(control != null);
         }
 
-        private DataBoundControlMode DetermineControlMode(DataControlRowState rowState) {
-            if (ReadOnly) {
+        private DataBoundControlMode DetermineControlMode(DataControlRowState rowState)
+        {
+            if (ReadOnly)
+            {
                 return DataBoundControlMode.ReadOnly;
             }
 
             bool edit = (rowState & DataControlRowState.Edit) != 0;
             bool insert = (rowState & DataControlRowState.Insert) != 0;
 
-            if (edit) {
+            if (edit)
+            {
                 return DataBoundControlMode.Edit;
-            } else if (insert) {
+            }
+            else if (insert)
+            {
                 return DataBoundControlMode.Insert;
-            } else {
+            }
+            else
+            {
                 return DataBoundControlMode.ReadOnly;
             }
         }
@@ -268,15 +315,21 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// See base class documentation
         /// </summary>
-        public override void ExtractValuesFromCell(IOrderedDictionary dictionary, DataControlFieldCell cell,
-            DataControlRowState rowState, bool includeReadOnly) {
+        public override void ExtractValuesFromCell(
+            IOrderedDictionary dictionary,
+            DataControlFieldCell cell,
+            DataControlRowState rowState,
+            bool includeReadOnly
+        )
+        {
             Misc.ExtractValuesFromBindableControls(dictionary, cell);
         }
 
         /// <summary>
         /// See base class documentation
         /// </summary>
-        protected override void CopyProperties(DataControlField newField) {
+        protected override void CopyProperties(DataControlField newField)
+        {
             base.CopyProperties(newField);
             DynamicField field = ((DynamicField)newField);
             field.DataField = DataField;
@@ -295,7 +348,8 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// See IAttributeAccessor
         /// </summary>
-        public string GetAttribute(string key) {
+        public string GetAttribute(string key)
+        {
             if (_attributes == null)
                 return String.Empty;
             return _attributes[key];
@@ -304,8 +358,10 @@ namespace System.Web.DynamicData {
         /// <summary>
         /// See IAttributeAccessor
         /// </summary>
-        public void SetAttribute(string key, string value) {
-            if (_attributes == null) {
+        public void SetAttribute(string key, string value)
+        {
+            if (_attributes == null)
+            {
                 _attributes = new Dictionary<string, string>();
             }
             _attributes[key] = value;
@@ -319,16 +375,19 @@ namespace System.Web.DynamicData {
         /// See IFieldFormattingOptions
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue(false),
-        ResourceDescription("DynamicControlFieldCommon_ConvertEmptyStringToNull")
+            Category("Behavior"),
+            DefaultValue(false),
+            ResourceDescription("DynamicControlFieldCommon_ConvertEmptyStringToNull")
         ]
-        public bool ConvertEmptyStringToNull {
-            get {
+        public bool ConvertEmptyStringToNull
+        {
+            get
+            {
                 object o = ViewState["ConvertEmptyStringToNull"];
                 return (o == null ? false : (bool)o);
             }
-            set {
+            set
+            {
                 _customConvertEmptyStringToNullSet = true;
                 ViewState["ConvertEmptyStringToNull"] = value;
             }
@@ -338,16 +397,19 @@ namespace System.Web.DynamicData {
         /// See IFieldFormattingOptions
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue(false),
-        ResourceDescription("DynamicControlFieldCommon_ApplyFormatInEditMode")
+            Category("Behavior"),
+            DefaultValue(false),
+            ResourceDescription("DynamicControlFieldCommon_ApplyFormatInEditMode")
         ]
-        public bool ApplyFormatInEditMode {
-            get {
+        public bool ApplyFormatInEditMode
+        {
+            get
+            {
                 object o = ViewState["ApplyFormatInEditMode"];
                 return (o == null ? false : (bool)o);
             }
-            set {
+            set
+            {
                 _customApplyFormatInEditModeSet = true;
                 ViewState["ApplyFormatInEditMode"] = value;
             }
@@ -357,54 +419,54 @@ namespace System.Web.DynamicData {
         /// See IFieldFormattingOptions
         /// </summary>
         [
-        Category("Data"),
-        DefaultValue(""),
-        ResourceDescription("DynamicControlFieldCommon_DataFormatString")
+            Category("Data"),
+            DefaultValue(""),
+            ResourceDescription("DynamicControlFieldCommon_DataFormatString")
         ]
-        public string DataFormatString {
-            get {
+        public string DataFormatString
+        {
+            get
+            {
                 object o = ViewState["DataFormatString"];
                 return (o == null ? String.Empty : (string)o);
             }
-            set {
-                ViewState["DataFormatString"] = value;
-            }
+            set { ViewState["DataFormatString"] = value; }
         }
 
         /// <summary>
         /// See IFieldFormattingOptions
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue(true),
-        ResourceDescription("DynamicControlFieldCommon_HtmlEncode")
+            Category("Behavior"),
+            DefaultValue(true),
+            ResourceDescription("DynamicControlFieldCommon_HtmlEncode")
         ]
-        public bool HtmlEncode {
-            get {
+        public bool HtmlEncode
+        {
+            get
+            {
                 object o = ViewState["HtmlEncode"];
                 return (o == null ? true : (bool)o);
             }
-            set {
-                ViewState["HtmlEncode"] = value;
-            }
+            set { ViewState["HtmlEncode"] = value; }
         }
 
         /// <summary>
         /// See IFieldFormattingOptions
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue(""),
-        ResourceDescription("DynamicControlFieldCommon_NullDisplayText")
+            Category("Behavior"),
+            DefaultValue(""),
+            ResourceDescription("DynamicControlFieldCommon_NullDisplayText")
         ]
-        public string NullDisplayText {
-            get {
+        public string NullDisplayText
+        {
+            get
+            {
                 object o = ViewState["NullDisplayText"];
                 return (o == null ? String.Empty : (string)o);
             }
-            set {
-                ViewState["NullDisplayText"] = value;
-            }
+            set { ViewState["NullDisplayText"] = value; }
         }
 
         #endregion

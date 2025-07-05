@@ -3,8 +3,8 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     abstract class DelegatingMessage : Message
     {
@@ -21,10 +21,7 @@ namespace System.ServiceModel.Channels
 
         public override bool IsEmpty
         {
-            get
-            {
-                return this.innerMessage.IsEmpty;
-            }
+            get { return this.innerMessage.IsEmpty; }
         }
 
         public override bool IsFault

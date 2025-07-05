@@ -24,5 +24,5 @@ public enum WarningBehavior
     /// <summary>
     ///     An exception is thrown.
     /// </summary>
-    Throw
+    Throw,
 }

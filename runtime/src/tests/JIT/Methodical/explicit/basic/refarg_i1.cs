@@ -12,16 +12,17 @@ namespace Test_refarg_i1_cs
         private byte _pad1 = 191;
         public byte mm = 11;
 
-        public AA(int reclevel) { if (reclevel < 100) _self = new AA(reclevel + 1); }
+        public AA(int reclevel)
+        {
+            if (reclevel < 100)
+                _self = new AA(reclevel + 1);
+        }
 
         ~AA()
         {
             try
             {
-                if (_pad1 != 191 ||
-                    mm != 11 ||
-                    _self._pad1 != 191 ||
-                    _self.mm != 11)
+                if (_pad1 != 191 || mm != 11 || _self._pad1 != 191 || _self.mm != 11)
                 {
                     App.exitCode = 1;
                     throw new Exception();
@@ -39,6 +40,7 @@ namespace Test_refarg_i1_cs
     {
         private static AA s_aa = new AA(0);
         public static int exitCode = 1;
+
         private static void Litter()
         {
             GC.Collect();

@@ -4,19 +4,22 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class Binder
     {
         // Diagnostics are generated in a separate pass when we emit.
-        internal ImmutableArray<Symbol> BindXmlNameAttribute(XmlNameAttributeSyntax syntax, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        internal ImmutableArray<Symbol> BindXmlNameAttribute(
+            XmlNameAttributeSyntax syntax,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             var identifier = syntax.Identifier;
 
@@ -28,7 +31,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             var name = identifier.Identifier.ValueText;
 
             var lookupResult = LookupResult.GetInstance();
-            this.LookupSymbolsWithFallback(lookupResult, name, arity: 0, useSiteInfo: ref useSiteInfo);
+            this.LookupSymbolsWithFallback(
+                lookupResult,
+                name,
+                arity: 0,
+                useSiteInfo: ref useSiteInfo
+            );
 
             if (lookupResult.Kind == LookupResultKind.Empty)
             {
@@ -42,7 +50,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             ArrayBuilder<Symbol> lookupSymbols = lookupResult.Symbols;
 
-            Debug.Assert(lookupSymbols[0].Kind == SymbolKind.TypeParameter || lookupSymbols[0].Kind == SymbolKind.Parameter);
+            Debug.Assert(
+                lookupSymbols[0].Kind == SymbolKind.TypeParameter
+                    || lookupSymbols[0].Kind == SymbolKind.Parameter
+            );
             Debug.Assert(lookupSymbols.All(sym => sym.Kind == lookupSymbols[0].Kind));
 
             // We can sort later when we disambiguate.

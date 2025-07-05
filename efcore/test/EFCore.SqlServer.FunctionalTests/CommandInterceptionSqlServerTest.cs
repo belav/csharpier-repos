@@ -9,9 +9,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class CommandInterceptionSqlServerTestBase : CommandInterceptionTestBase
 {
     protected CommandInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public override async Task<string> Intercept_query_passively(bool async, bool inject)
     {
@@ -19,7 +17,8 @@ public abstract class CommandInterceptionSqlServerTestBase : CommandInterception
             """
 SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
 """,
-            await base.Intercept_query_passively(async, inject));
+            await base.Intercept_query_passively(async, inject)
+        );
 
         return null;
     }
@@ -30,7 +29,8 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
             """
 SELECT [s].[Id], [s].[Type] FROM [Brane] AS [s]
 """,
-            await base.QueryMutationTest<TInterceptor>(async, inject));
+            await base.QueryMutationTest<TInterceptor>(async, inject)
+        );
 
         return null;
     }
@@ -41,7 +41,8 @@ SELECT [s].[Id], [s].[Type] FROM [Brane] AS [s]
             """
 SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
 """,
-            await base.Intercept_query_to_replace_execution(async, inject));
+            await base.Intercept_query_to_replace_execution(async, inject)
+        );
 
         return null;
     }
@@ -56,9 +57,11 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
         var (context, interceptor) = CreateContext<StatisticsCommandInterceptor>(inject);
         using (context)
         {
-            using (async
-                       ? await context.Database.BeginTransactionAsync()
-                       : context.Database.BeginTransaction())
+            using (
+                async
+                    ? await context.Database.BeginTransactionAsync()
+                    : context.Database.BeginTransaction()
+            )
             {
                 var connection = (SqlConnection)context.Database.GetDbConnection();
                 var message = "";
@@ -79,9 +82,7 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
 
                 results[0].Type = "Big Hole Bang";
 
-                _ = async
-                    ? await context.SaveChangesAsync()
-                    : context.SaveChanges();
+                _ = async ? await context.SaveChangesAsync() : context.SaveChanges();
 
                 AssertNormalOutcome(context, interceptor, async, CommandSource.SaveChanges);
                 Assert.True(interceptor.DataReaderClosingCalled);
@@ -107,14 +108,13 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
     protected class StatisticsCommandInterceptor : CommandInterceptorBase
     {
         public StatisticsCommandInterceptor()
-            : base(DbCommandMethod.ExecuteReader)
-        {
-        }
+            : base(DbCommandMethod.ExecuteReader) { }
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,
             CommandEventData eventData,
-            InterceptionResult<DbDataReader> result)
+            InterceptionResult<DbDataReader> result
+        )
         {
             command.CommandText = "SET STATISTICS IO ON;" + command.CommandText;
 
@@ -125,7 +125,8 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
             DbCommand command,
             CommandEventData eventData,
             InterceptionResult<DbDataReader> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             command.CommandText = "SET STATISTICS IO ON;" + command.CommandText;
 
@@ -135,7 +136,8 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
         public override InterceptionResult DataReaderClosing(
             DbCommand command,
             DataReaderClosingEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             eventData.DataReader.NextResult();
 
@@ -145,7 +147,8 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
         public override async ValueTask<InterceptionResult> DataReaderClosingAsync(
             DbCommand command,
             DataReaderClosingEventData eventData,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             await eventData.DataReader.NextResultAsync();
 
@@ -155,35 +158,36 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
 
     public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
     {
-        protected override string StoreName
-            => "CommandInterception";
+        protected override string StoreName => "CommandInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlServer(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlServer(),
+                injectedInterceptors
+            );
     }
 
     public class CommandInterceptionSqlServerTest
-        : CommandInterceptionSqlServerTestBase, IClassFixture<CommandInterceptionSqlServerTest.InterceptionSqlServerFixture>
+        : CommandInterceptionSqlServerTestBase,
+            IClassFixture<CommandInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public CommandInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
             {
-                new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
-                    .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+                new SqlServerDbContextOptionsBuilder(base.AddOptions(builder)).ExecutionStrategy(
+                    d => new SqlServerExecutionStrategy(d)
+                );
                 return builder;
             }
         }
@@ -194,19 +198,17 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
             IClassFixture<CommandInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
     {
         public CommandInterceptionWithDiagnosticsSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
             {
-                new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
-                    .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+                new SqlServerDbContextOptionsBuilder(base.AddOptions(builder)).ExecutionStrategy(
+                    d => new SqlServerExecutionStrategy(d)
+                );
                 return builder;
             }
         }

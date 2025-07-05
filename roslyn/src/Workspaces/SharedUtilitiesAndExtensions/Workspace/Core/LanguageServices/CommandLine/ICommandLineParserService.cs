@@ -10,6 +10,11 @@ namespace Microsoft.CodeAnalysis.Host
 {
     internal interface ICommandLineParserService : ILanguageService
     {
-        CommandLineArguments Parse(IEnumerable<string> arguments, string baseDirectory, bool isInteractive, string sdkDirectory);
+        CommandLineArguments Parse(
+            IEnumerable<string> arguments,
+            string baseDirectory,
+            bool isInteractive,
+            string sdkDirectory
+        );
     }
 }

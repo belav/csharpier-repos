@@ -26,165 +26,190 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.Text;
-using System.IO;
 using System.Data;
+using System.IO;
+using System.Text;
 using MonoTests.System.Data.Utils;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data
 {
-	[TestFixture] public class ConstraintExceptionTest
-	{
-		[Test] public void Generate()
-		{
-			DataTable dtParent= DataProvider.CreateParentDataTable(); 
-			DataTable dtChild = DataProvider.CreateChildDataTable(); 
+    [TestFixture]
+    public class ConstraintExceptionTest
+    {
+        [Test]
+        public void Generate()
+        {
+            DataTable dtParent = DataProvider.CreateParentDataTable();
+            DataTable dtChild = DataProvider.CreateChildDataTable();
 
-			DataSet ds = new DataSet();
-			ds.Tables.Add(dtChild);
-			ds.Tables.Add(dtParent);
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dtChild);
+            ds.Tables.Add(dtParent);
 
-			//------ check UniqueConstraint ---------
+            //------ check UniqueConstraint ---------
 
-			//create unique constraint
-			UniqueConstraint uc; 
+            //create unique constraint
+            UniqueConstraint uc;
 
-			//Column type = int
-			uc = new UniqueConstraint(dtParent.Columns[0]); 
-			dtParent.Constraints.Add(uc);
-			// UniqueConstraint Exception - Column type = int
-			try 
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-				Assert.Fail("CNE1: Rows.Add failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE2: Rows.Add wrong exception type. Got: " + exc);
-			}
+            //Column type = int
+            uc = new UniqueConstraint(dtParent.Columns[0]);
+            dtParent.Constraints.Add(uc);
+            // UniqueConstraint Exception - Column type = int
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+                Assert.Fail("CNE1: Rows.Add failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE2: Rows.Add wrong exception type. Got: " + exc);
+            }
 
-			//Column type = DateTime
-			dtParent.Constraints.Clear();
-			uc = new UniqueConstraint(dtParent.Columns["ParentDateTime"]); 
-			dtParent.Constraints.Add(uc);
-			// UniqueConstraint Exception - Column type = DateTime
-			try 
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-				Assert.Fail("CNE3: Rows.Add failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE4: Rows.Add wrong exception type. Got: " + exc);
-			}
+            //Column type = DateTime
+            dtParent.Constraints.Clear();
+            uc = new UniqueConstraint(dtParent.Columns["ParentDateTime"]);
+            dtParent.Constraints.Add(uc);
+            // UniqueConstraint Exception - Column type = DateTime
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+                Assert.Fail("CNE3: Rows.Add failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE4: Rows.Add wrong exception type. Got: " + exc);
+            }
 
-			//Column type = double
-			dtParent.Constraints.Clear();
-			uc = new UniqueConstraint(dtParent.Columns["ParentDouble"]); 
-			dtParent.Constraints.Add(uc);
-			// UniqueConstraint Exception - Column type = double
-			try 
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-				Assert.Fail("CNE5: Rows.Add failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE6: Rows.Add wrong exception type. Got: " + exc);
-			}
+            //Column type = double
+            dtParent.Constraints.Clear();
+            uc = new UniqueConstraint(dtParent.Columns["ParentDouble"]);
+            dtParent.Constraints.Add(uc);
+            // UniqueConstraint Exception - Column type = double
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+                Assert.Fail("CNE5: Rows.Add failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE6: Rows.Add wrong exception type. Got: " + exc);
+            }
 
-			//Column type = string
-			dtParent.Constraints.Clear();
-			uc = new UniqueConstraint(dtParent.Columns["String1"]); 
-			dtParent.Constraints.Add(uc);
-			// UniqueConstraint Exception - Column type = String
-			try 
-			{
-				//add exisiting value - will raise exception
-				dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
-				Assert.Fail("CNE7: Rows.Add failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE8: Rows.Add wrong exception type. Got: " + exc);
-			}
+            //Column type = string
+            dtParent.Constraints.Clear();
+            uc = new UniqueConstraint(dtParent.Columns["String1"]);
+            dtParent.Constraints.Add(uc);
+            // UniqueConstraint Exception - Column type = String
+            try
+            {
+                //add exisiting value - will raise exception
+                dtParent.Rows.Add(dtParent.Rows[0].ItemArray);
+                Assert.Fail("CNE7: Rows.Add failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE8: Rows.Add wrong exception type. Got: " + exc);
+            }
 
-			//Column type = string, ds.CaseSensitive = false;
-			ds.CaseSensitive = false;
+            //Column type = string, ds.CaseSensitive = false;
+            ds.CaseSensitive = false;
 
-			dtParent.Constraints.Clear();
-			uc = new UniqueConstraint(dtParent.Columns["String1"]); 
-			dtParent.Constraints.Add(uc);
-			DataRow dr = dtParent.NewRow();
-			dr.ItemArray = dtParent.Rows[0].ItemArray ;
-			dr["String1"] = dr["String1"].ToString().ToUpper();
+            dtParent.Constraints.Clear();
+            uc = new UniqueConstraint(dtParent.Columns["String1"]);
+            dtParent.Constraints.Add(uc);
+            DataRow dr = dtParent.NewRow();
+            dr.ItemArray = dtParent.Rows[0].ItemArray;
+            dr["String1"] = dr["String1"].ToString().ToUpper();
 
-			// UniqueConstraint Exception - Column type = String, CaseSensitive = false;
-			try 
-			{
-				dtParent.Rows.Add(dr);
-				Assert.Fail("CNE9: Rows.Add failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE10: Rows.Add wrong exception type. Got: " + exc);
-			}
+            // UniqueConstraint Exception - Column type = String, CaseSensitive = false;
+            try
+            {
+                dtParent.Rows.Add(dr);
+                Assert.Fail("CNE9: Rows.Add failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE10: Rows.Add wrong exception type. Got: " + exc);
+            }
 
-			//Column type = string, ds.CaseSensitive = true;
-			ds.CaseSensitive = true;
+            //Column type = string, ds.CaseSensitive = true;
+            ds.CaseSensitive = true;
 
-			dtParent.Constraints.Clear();
-			uc = new UniqueConstraint(dtParent.Columns["String1"]); 
-			dtParent.Constraints.Add(uc);
+            dtParent.Constraints.Clear();
+            uc = new UniqueConstraint(dtParent.Columns["String1"]);
+            dtParent.Constraints.Add(uc);
 
-			// No UniqueConstraint Exception - Column type = String, CaseSensitive = true;
-			dtParent.Rows.Add(dr);
+            // No UniqueConstraint Exception - Column type = String, CaseSensitive = true;
+            dtParent.Rows.Add(dr);
 
-			// Column type = string, ds.CaseSensitive = false;
-			// UniqueConstraint Exception - Column type = String, Enable CaseSensitive = true;
-			try 
-			{
-				ds.CaseSensitive = false;
-				Assert.Fail("CNE13: CaseSensitive failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE14: CaseSensitive wrong exception type. Got: " + exc);
-			}
+            // Column type = string, ds.CaseSensitive = false;
+            // UniqueConstraint Exception - Column type = String, Enable CaseSensitive = true;
+            try
+            {
+                ds.CaseSensitive = false;
+                Assert.Fail("CNE13: CaseSensitive failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE14: CaseSensitive wrong exception type. Got: " + exc);
+            }
 
-			dtChild.Constraints.Add(new UniqueConstraint(new DataColumn[] {dtChild.Columns[0],dtChild.Columns[1]}));
-			ds.EnforceConstraints = false;
-			dtChild.Rows.Add(dtChild.Rows[0].ItemArray);
+            dtChild.Constraints.Add(
+                new UniqueConstraint(new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] })
+            );
+            ds.EnforceConstraints = false;
+            dtChild.Rows.Add(dtChild.Rows[0].ItemArray);
 
-			// UniqueConstraint Exception - ds.EnforceConstraints 
-			try 
-			{
-				ds.EnforceConstraints = true;
-				Assert.Fail("CNE15: EnforceConstraints failed to raise ConstraintException.");
-			}
-			catch (ConstraintException) {}
-			catch (AssertionException) { throw; }
-			catch (Exception exc)
-			{
-				Assert.Fail("CNE16: EnforceConstraints wrong exception type. Got: " + exc);
-			}
-		}
-	}
+            // UniqueConstraint Exception - ds.EnforceConstraints
+            try
+            {
+                ds.EnforceConstraints = true;
+                Assert.Fail("CNE15: EnforceConstraints failed to raise ConstraintException.");
+            }
+            catch (ConstraintException) { }
+            catch (AssertionException)
+            {
+                throw;
+            }
+            catch (Exception exc)
+            {
+                Assert.Fail("CNE16: EnforceConstraints wrong exception type. Got: " + exc);
+            }
+        }
+    }
 }

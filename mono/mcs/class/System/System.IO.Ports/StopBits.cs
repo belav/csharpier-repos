@@ -7,14 +7,13 @@
 // (c) Copyright 2006 Novell, Inc. (http://www.novell.com)
 //
 
-namespace System.IO.Ports 
+namespace System.IO.Ports
 {
-	public enum StopBits 
-	{
-		None,
-		One,
-		Two,
-		OnePointFive
-	} 
+    public enum StopBits
+    {
+        None,
+        One,
+        Two,
+        OnePointFive,
+    }
 }
-

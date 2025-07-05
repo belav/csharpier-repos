@@ -8,17 +8,31 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
 internal sealed class ProcessHelpers
 {
-    public static void AddEnvironmentVariablesToProcess(ProcessStartInfo startInfo, IDictionary<string, string> environmentVariables, ILogger logger)
+    public static void AddEnvironmentVariablesToProcess(
+        ProcessStartInfo startInfo,
+        IDictionary<string, string> environmentVariables,
+        ILogger logger
+    )
     {
         var environment = startInfo.Environment;
 
         foreach (var environmentVariable in environmentVariables)
         {
-            SetEnvironmentVariable(environment, environmentVariable.Key, environmentVariable.Value, logger);
+            SetEnvironmentVariable(
+                environment,
+                environmentVariable.Key,
+                environmentVariable.Value,
+                logger
+            );
         }
     }
 
-    public static void SetEnvironmentVariable(IDictionary<string, string> environment, string name, string value, ILogger logger)
+    public static void SetEnvironmentVariable(
+        IDictionary<string, string> environment,
+        string name,
+        string value,
+        ILogger logger
+    )
     {
         if (value == null)
         {

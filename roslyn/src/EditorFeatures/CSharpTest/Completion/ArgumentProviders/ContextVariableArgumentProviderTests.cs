@@ -13,8 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class ContextVariableArgumentProviderTests : AbstractCSharpArgumentProviderTests
     {
-        internal override Type GetArgumentProviderType()
-            => typeof(ContextVariableArgumentProvider);
+        internal override Type GetArgumentProviderType() => typeof(ContextVariableArgumentProvider);
 
         [Theory]
         [InlineData("string")]
@@ -22,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
         [InlineData("int?")]
         public async Task TestLocalVariable(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -38,16 +38,22 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestOutVariable(
             [CombinatorialValues("string", "bool", "int?")] string type,
-            [CombinatorialValues("out", "ref", "in")] string modifier)
+            [CombinatorialValues("out", "ref", "in")] string modifier
+        )
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -69,7 +75,11 @@ class C
             };
 
             await VerifyDefaultValueAsync(markup, $"{generatedModifier}arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -78,7 +88,8 @@ class C
         [InlineData("int?")]
         public async Task TestParameter(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method({type} arg)
@@ -93,7 +104,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -104,7 +119,8 @@ class C
         [InlineData("int", "int?")]
         public async Task TestInstanceVariable(string fieldType, string parameterType)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 class C
 {{
@@ -122,7 +138,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "arg");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -131,7 +151,8 @@ class C
         [InlineData("I")]
         public async Task TestThisInstance(string parameterType)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 interface I {{ }}
 
@@ -151,7 +172,11 @@ class C : B, I
 ";
 
             await VerifyDefaultValueAsync(markup, "this");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: null, previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: null,
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -159,7 +184,8 @@ class C : B, I
         [InlineData("string")]
         public async Task TestThisInstanceNotProvided1(string parameterType)
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 interface I {{ }}
 
@@ -184,7 +210,8 @@ class C : B, I
         [Fact]
         public async Task TestThisInstanceNotProvided2()
         {
-            var markup = $@"
+            var markup =
+                $@"
 using System.Collections.Generic;
 
 class C
@@ -213,7 +240,8 @@ class C
         [InlineData("int", "object")]
         public async Task TestMismatchType(string parameterType, string valueType)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method({valueType} arg)

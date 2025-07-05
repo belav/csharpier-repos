@@ -7,14 +7,14 @@
 namespace System.Text
 {
     using System;
+    using System.Collections;
     using System.Diagnostics.Contracts;
     using System.Globalization;
-    using System.Runtime.InteropServices;
-    using System.Security;
-    using System.Collections;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Runtime.Versioning;
+    using System.Security;
     using System.Security.Permissions;
     using Microsoft.Win32.SafeHandles;
 
@@ -54,18 +54,21 @@ namespace System.Text
     {
         // Static & Const stuff
         internal const String CODE_PAGE_DATA_FILE_NAME = "codepages.nlp";
+
         [NonSerialized]
         protected int dataTableCodePage;
 
         // Variables to help us allocate/mark our memory section correctly
         [NonSerialized]
         protected bool bFlagDataTable = true;
+
         [NonSerialized]
         protected int iExtraBytes = 0;
 
         // Our private unicode to bytes best fit array and visa versa.
         [NonSerialized]
         protected char[] arrayUnicodeBestFit = null;
+
         [NonSerialized]
         protected char[] arrayBytesBestFit = null;
 
@@ -74,9 +77,7 @@ namespace System.Text
         protected bool m_bUseMlangTypeForSerialization = false;
 
         [System.Security.SecuritySafeCritical] // static constructors should be safe to call
-        static BaseCodePageEncoding()
-        {
-        }
+        static BaseCodePageEncoding() { }
 
         //
         // This is the header for the native data table that we load from CODE_PAGE_DATA_FILE_NAME.
@@ -86,66 +87,84 @@ namespace System.Text
         internal unsafe struct CodePageDataFileHeader
         {
             [FieldOffset(0)]
-            internal char TableName;            // WORD[16]
+            internal char TableName; // WORD[16]
+
             [FieldOffset(0x20)]
-            internal ushort Version;            // WORD[4]
+            internal ushort Version; // WORD[4]
+
             [FieldOffset(0x28)]
-            internal short CodePageCount;       // WORD
+            internal short CodePageCount; // WORD
+
             [FieldOffset(0x2A)]
-            internal short unused1;             // Add a unused WORD so that CodePages is aligned with DWORD boundary.
-                                                // Otherwise, 64-bit version will fail.
+            internal short unused1; // Add a unused WORD so that CodePages is aligned with DWORD boundary.
+
+            // Otherwise, 64-bit version will fail.
             [FieldOffset(0x2C)]
-            internal CodePageIndex CodePages;   // Start of code page index
+            internal CodePageIndex CodePages; // Start of code page index
         }
 
-        [StructLayout(LayoutKind.Explicit, Pack=2)]
+        [StructLayout(LayoutKind.Explicit, Pack = 2)]
         internal unsafe struct CodePageIndex
         {
             [FieldOffset(0)]
-            internal char CodePageName;     // WORD[16]
+            internal char CodePageName; // WORD[16]
+
             [FieldOffset(0x20)]
-            internal short CodePage;        // WORD
+            internal short CodePage; // WORD
+
             [FieldOffset(0x22)]
-            internal short ByteCount;       // WORD
+            internal short ByteCount; // WORD
+
             [FieldOffset(0x24)]
-            internal int Offset;            // DWORD
+            internal int Offset; // DWORD
         }
 
         [StructLayout(LayoutKind.Explicit)]
         internal unsafe struct CodePageHeader
         {
             [FieldOffset(0)]
-            internal char CodePageName;     // WORD[16]
+            internal char CodePageName; // WORD[16]
+
             [FieldOffset(0x20)]
-            internal ushort VersionMajor;   // WORD
+            internal ushort VersionMajor; // WORD
+
             [FieldOffset(0x22)]
-            internal ushort VersionMinor;   // WORD
+            internal ushort VersionMinor; // WORD
+
             [FieldOffset(0x24)]
-            internal ushort VersionRevision;// WORD
+            internal ushort VersionRevision; // WORD
+
             [FieldOffset(0x26)]
-            internal ushort VersionBuild;   // WORD
+            internal ushort VersionBuild; // WORD
+
             [FieldOffset(0x28)]
-            internal short CodePage;        // WORD
+            internal short CodePage; // WORD
+
             [FieldOffset(0x2a)]
-            internal short ByteCount;       // WORD     // 1 or 2 byte code page (SBCS or DBCS)
+            internal short ByteCount; // WORD     // 1 or 2 byte code page (SBCS or DBCS)
+
             [FieldOffset(0x2c)]
-            internal char UnicodeReplace;   // WORD     // default replacement unicode character
+            internal char UnicodeReplace; // WORD     // default replacement unicode character
+
             [FieldOffset(0x2e)]
-            internal ushort ByteReplace;    // WORD     // default replacement bytes
+            internal ushort ByteReplace; // WORD     // default replacement bytes
+
             [FieldOffset(0x30)]
-            internal short FirstDataWord;   // WORD[]
+            internal short FirstDataWord; // WORD[]
         }
 
         // Initialize our global stuff
         [SecurityCritical]
-        unsafe static CodePageDataFileHeader* m_pCodePageFileHeader = 
-            (CodePageDataFileHeader*)GlobalizationAssembly.GetGlobalizationResourceBytePtr(
-                typeof(CharUnicodeInfo).Assembly, CODE_PAGE_DATA_FILE_NAME);
+        static unsafe CodePageDataFileHeader* m_pCodePageFileHeader = (CodePageDataFileHeader*)
+            GlobalizationAssembly.GetGlobalizationResourceBytePtr(
+                typeof(CharUnicodeInfo).Assembly,
+                CODE_PAGE_DATA_FILE_NAME
+            );
 
         // Real variables
         [NonSerialized]
         [SecurityCritical]
-        unsafe protected CodePageHeader* pCodePage = null;
+        protected unsafe CodePageHeader* pCodePage = null;
 
         // Safe handle wrapper around section map view
         [System.Security.SecurityCritical] // auto-generated
@@ -157,14 +176,13 @@ namespace System.Text
         [NonSerialized]
         protected SafeFileMappingHandle safeFileMappingHandle = null;
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal BaseCodePageEncoding(int codepage) : this(codepage, codepage)
-        {
-        }
+        [System.Security.SecurityCritical] // auto-generated
+        internal BaseCodePageEncoding(int codepage)
+            : this(codepage, codepage) { }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal BaseCodePageEncoding(int codepage, int dataCodePage) :
-            base(codepage == 0? Microsoft.Win32.Win32Native.GetACP(): codepage)
+        [System.Security.SecurityCritical] // auto-generated
+        internal BaseCodePageEncoding(int codepage, int dataCodePage)
+            : base(codepage == 0 ? Microsoft.Win32.Win32Native.GetACP() : codepage)
         {
             // Remember number of code page that we'll be using the table for.
             dataTableCodePage = dataCodePage;
@@ -172,8 +190,9 @@ namespace System.Text
         }
 
         // Constructor called by serialization.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal BaseCodePageEncoding(SerializationInfo info, StreamingContext context) : base(0)
+        [System.Security.SecurityCritical] // auto-generated
+        internal BaseCodePageEncoding(SerializationInfo info, StreamingContext context)
+            : base(0)
         {
             // We cannot ever call this, we've proxied ourselved to CodePageEncoding
             throw new ArgumentNullException("this");
@@ -181,25 +200,33 @@ namespace System.Text
 
         // ISerializable implementation
 #if FEATURE_SERIALIZATION
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             // Make sure to get teh base stuff too This throws if info is null
             SerializeEncoding(info, context);
-            Contract.Assert(info!=null, "[BaseCodePageEncoding.GetObjectData] Expected null info to throw");
+            Contract.Assert(
+                info != null,
+                "[BaseCodePageEncoding.GetObjectData] Expected null info to throw"
+            );
 
             // Just need Everett maxCharSize (BaseCodePageEncoding) or m_maxByteSize (MLangBaseCodePageEncoding)
-            info.AddValue(m_bUseMlangTypeForSerialization ? "m_maxByteSize" : "maxCharSize",
-                          this.IsSingleByte ? 1 : 2);
+            info.AddValue(
+                m_bUseMlangTypeForSerialization ? "m_maxByteSize" : "maxCharSize",
+                this.IsSingleByte ? 1 : 2
+            );
 
             // Use this class or MLangBaseCodePageEncoding as our deserializer.
-            info.SetType(m_bUseMlangTypeForSerialization ? typeof(MLangCodePageEncoding) :
-                                                           typeof(CodePageEncoding));
+            info.SetType(
+                m_bUseMlangTypeForSerialization
+                    ? typeof(MLangCodePageEncoding)
+                    : typeof(CodePageEncoding)
+            );
         }
 #endif
 
         // We need to load tables for our code page
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private unsafe void LoadCodePageTables()
         {
             CodePageHeader* pCodePage = FindCodePage(dataTableCodePage);
@@ -209,7 +236,8 @@ namespace System.Text
             {
                 // Didn't have one
                 throw new NotSupportedException(
-                    Environment.GetResourceString("NotSupported_NoCodepageData", CodePage));
+                    Environment.GetResourceString("NotSupported_NoCodepageData", CodePage)
+                );
             }
 
             // Remember our code page
@@ -220,7 +248,7 @@ namespace System.Text
         }
 
         // Look up the code page pointer
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static unsafe CodePageHeader* FindCodePage(int codePage)
         {
             // We'll have to loop through all of the m_pCodePageIndex[] items to find our code page, this isn't
@@ -232,8 +260,9 @@ namespace System.Text
                 if (pCodePageIndex->CodePage == codePage)
                 {
                     // Found it!
-                    CodePageHeader* pCodePage =
-                        (CodePageHeader*)((byte*)m_pCodePageFileHeader + pCodePageIndex->Offset);
+                    CodePageHeader* pCodePage = (CodePageHeader*)(
+                        (byte*)m_pCodePageFileHeader + pCodePageIndex->Offset
+                    );
                     return pCodePage;
                 }
             }
@@ -243,7 +272,7 @@ namespace System.Text
         }
 
         // Get our code page byte count
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static unsafe int GetCodePageByteSize(int codePage)
         {
             // Get our code page info
@@ -253,8 +282,14 @@ namespace System.Text
             if (pCodePage == null)
                 return 0;
 
-            Contract.Assert(pCodePage->ByteCount == 1 || pCodePage->ByteCount == 2,
-                "[BaseCodePageEncoding] Code page (" + codePage + ") has invalid byte size (" + pCodePage->ByteCount + ") in table");
+            Contract.Assert(
+                pCodePage->ByteCount == 1 || pCodePage->ByteCount == 2,
+                "[BaseCodePageEncoding] Code page ("
+                    + codePage
+                    + ") has invalid byte size ("
+                    + pCodePage->ByteCount
+                    + ") in table"
+            );
             // Return what it says for byte count
             return pCodePage->ByteCount;
         }
@@ -264,7 +299,7 @@ namespace System.Text
         protected abstract unsafe void LoadManagedCodePage();
 
         // Allocate memory to load our code page
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         protected unsafe byte* GetSharedMemory(int iSize)
@@ -275,35 +310,48 @@ namespace System.Text
             IntPtr mappedFileHandle;
 
             // This gets shared memory for our map.  If its can't, it gives us clean memory.
-            Byte *pMemorySection = EncodingTable.nativeCreateOpenFileMapping(strName, iSize, out mappedFileHandle);
-            Contract.Assert(pMemorySection != null,
-                "[BaseCodePageEncoding.GetSharedMemory] Expected non-null memory section to be opened");
+            Byte* pMemorySection = EncodingTable.nativeCreateOpenFileMapping(
+                strName,
+                iSize,
+                out mappedFileHandle
+            );
+            Contract.Assert(
+                pMemorySection != null,
+                "[BaseCodePageEncoding.GetSharedMemory] Expected non-null memory section to be opened"
+            );
 
             // If that failed, we have to die.
             if (pMemorySection == null)
                 throw new OutOfMemoryException(
-                    Environment.GetResourceString("Arg_OutOfMemoryException"));
+                    Environment.GetResourceString("Arg_OutOfMemoryException")
+                );
 
-            // if we have null file handle. this means memory was allocated after 
+            // if we have null file handle. this means memory was allocated after
             // failing to open the mapped file.
-            
+
             if (mappedFileHandle != IntPtr.Zero)
             {
-                safeMemorySectionHandle = new SafeViewOfFileHandle((IntPtr) pMemorySection, true);
+                safeMemorySectionHandle = new SafeViewOfFileHandle((IntPtr)pMemorySection, true);
                 safeFileMappingHandle = new SafeFileMappingHandle(mappedFileHandle, true);
             }
 
             return pMemorySection;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        protected unsafe virtual String GetMemorySectionName()
+        [System.Security.SecurityCritical] // auto-generated
+        protected virtual unsafe String GetMemorySectionName()
         {
             int iUseCodePage = this.bFlagDataTable ? dataTableCodePage : CodePage;
 
-            String strName = String.Format(CultureInfo.InvariantCulture, "NLS_CodePage_{0}_{1}_{2}_{3}_{4}",
-                iUseCodePage, this.pCodePage->VersionMajor, this.pCodePage->VersionMinor,
-                this.pCodePage->VersionRevision, this.pCodePage->VersionBuild);
+            String strName = String.Format(
+                CultureInfo.InvariantCulture,
+                "NLS_CodePage_{0}_{1}_{2}_{3}_{4}",
+                iUseCodePage,
+                this.pCodePage->VersionMajor,
+                this.pCodePage->VersionMinor,
+                this.pCodePage->VersionRevision,
+                this.pCodePage->VersionBuild
+            );
 
             return strName;
         }
@@ -311,40 +359,49 @@ namespace System.Text
         [System.Security.SecurityCritical]
         protected abstract unsafe void ReadBestFitTable();
 
-        [System.Security.SecuritySafeCritical] // 
+        [System.Security.SecuritySafeCritical] //
         internal override char[] GetBestFitUnicodeToBytesData()
         {
             // Read in our best fit table if necessary
-            if (arrayUnicodeBestFit == null) ReadBestFitTable();
+            if (arrayUnicodeBestFit == null)
+                ReadBestFitTable();
 
-            Contract.Assert(arrayUnicodeBestFit != null,
-                "[BaseCodePageEncoding.GetBestFitUnicodeToBytesData]Expected non-null arrayUnicodeBestFit");
+            Contract.Assert(
+                arrayUnicodeBestFit != null,
+                "[BaseCodePageEncoding.GetBestFitUnicodeToBytesData]Expected non-null arrayUnicodeBestFit"
+            );
 
             // Normally we don't have any best fit data.
             return arrayUnicodeBestFit;
         }
 
-        [System.Security.SecuritySafeCritical] // 
+        [System.Security.SecuritySafeCritical] //
         internal override char[] GetBestFitBytesToUnicodeData()
         {
             // Read in our best fit table if necessary
-            if (arrayBytesBestFit == null) ReadBestFitTable();
+            if (arrayBytesBestFit == null)
+                ReadBestFitTable();
 
-            Contract.Assert(arrayBytesBestFit != null,
-                "[BaseCodePageEncoding.GetBestFitBytesToUnicodeData]Expected non-null arrayBytesBestFit");
+            Contract.Assert(
+                arrayBytesBestFit != null,
+                "[BaseCodePageEncoding.GetBestFitBytesToUnicodeData]Expected non-null arrayBytesBestFit"
+            );
 
             // Normally we don't have any best fit data.
             return arrayBytesBestFit;
         }
 
-        // During the AppDomain shutdown the Encoding class may already finalized and the memory section 
-        // is invalid. so we detect that by validating the memory section handle then re-initialize the memory 
+        // During the AppDomain shutdown the Encoding class may already finalized and the memory section
+        // is invalid. so we detect that by validating the memory section handle then re-initialize the memory
         // section by calling LoadManagedCodePage() method and eventually the mapped file handle and
         // the memory section pointer will get finalized one more time.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal unsafe void CheckMemorySection()
         {
-            if (safeMemorySectionHandle != null && safeMemorySectionHandle.DangerousGetHandle() == IntPtr.Zero)
+            if (
+                safeMemorySectionHandle != null
+                && safeMemorySectionHandle.DangerousGetHandle() == IntPtr.Zero
+            )
             {
                 LoadManagedCodePage();
             }

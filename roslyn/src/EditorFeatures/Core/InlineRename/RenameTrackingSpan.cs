@@ -17,6 +17,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         None,
         Reference,
         UnresolvedConflict,
-        Complexified
+        Complexified,
     }
 }

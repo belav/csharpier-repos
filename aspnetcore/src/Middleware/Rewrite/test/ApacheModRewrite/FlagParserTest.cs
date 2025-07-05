@@ -49,7 +49,10 @@ public class FlagParserTest
     [InlineData("[", "Flags should start and end with square brackets: [flags]")]
     [InlineData("[R, L]", "Unrecognized flag: ' L'")] // cannot have spaces after ,
     [InlineData("[RL]", "Unrecognized flag: 'RL'")]
-    public void FlagParser_AssertFormatErrorWhenFlagsArePoorlyConstructed(string input, string expected)
+    public void FlagParser_AssertFormatErrorWhenFlagsArePoorlyConstructed(
+        string input,
+        string expected
+    )
     {
         var ex = Assert.Throws<FormatException>(() => FlagParser.Parse(input));
         Assert.Equal(expected, ex.Message);
@@ -74,11 +77,13 @@ public class FlagParserTest
         Assert.Equal(expected, value);
     }
 
-    public bool DictionaryContentsEqual<TKey, TValue>(IDictionary<TKey, TValue> dictionary, IDictionary<TKey, TValue> other)
+    public bool DictionaryContentsEqual<TKey, TValue>(
+        IDictionary<TKey, TValue> dictionary,
+        IDictionary<TKey, TValue> other
+    )
     {
         return (other ?? new Dictionary<TKey, TValue>())
             .OrderBy(kvp => kvp.Key)
-            .SequenceEqual((dictionary ?? new Dictionary<TKey, TValue>())
-            .OrderBy(kvp => kvp.Key));
+            .SequenceEqual((dictionary ?? new Dictionary<TKey, TValue>()).OrderBy(kvp => kvp.Key));
     }
 }

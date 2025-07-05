@@ -28,14 +28,14 @@ namespace ComInterfaceGenerator.Tests
     partial class ManagedObjectExposedToCom : IGetAndSetInt
     {
         public int Data { get; set; }
+
         int IGetAndSetInt.GetInt() => Data;
+
         void IGetAndSetInt.SetInt(int n) => Data = n;
     }
 
     [GeneratedComClass]
-    partial class DerivedComObject : ManagedObjectExposedToCom
-    {
-    }
+    partial class DerivedComObject : ManagedObjectExposedToCom { }
 
     public unsafe class GeneratedComClassTests
     {

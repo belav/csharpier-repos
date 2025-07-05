@@ -22,70 +22,95 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
             int position,
             Host.LanguageServices languageServices,
             SymbolDescriptionOptions options,
-            CancellationToken cancellationToken) : AbstractSymbolDescriptionBuilder(semanticModel, position, languageServices, options, cancellationToken)
+            CancellationToken cancellationToken
+        )
+            : AbstractSymbolDescriptionBuilder(
+                semanticModel,
+                position,
+                languageServices,
+                options,
+                cancellationToken
+            )
         {
-            private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat = SymbolDisplayFormat.MinimallyQualifiedFormat
-                .AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
-                .AddMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName)
-                .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeDefaultValue)
-                .WithKindOptions(SymbolDisplayKindOptions.None);
+            private static readonly SymbolDisplayFormat s_minimallyQualifiedFormat =
+                SymbolDisplayFormat
+                    .MinimallyQualifiedFormat.AddLocalOptions(SymbolDisplayLocalOptions.IncludeRef)
+                    .AddMiscellaneousOptions(
+                        SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
+                    )
+                    .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeDefaultValue)
+                    .WithKindOptions(SymbolDisplayKindOptions.None);
 
-            private static readonly SymbolDisplayFormat s_minimallyQualifiedFormatWithConstants = s_minimallyQualifiedFormat
-                .AddLocalOptions(SymbolDisplayLocalOptions.IncludeConstantValue)
-                .AddMemberOptions(SymbolDisplayMemberOptions.IncludeConstantValue)
-                .AddParameterOptions(SymbolDisplayParameterOptions.IncludeDefaultValue);
+            private static readonly SymbolDisplayFormat s_minimallyQualifiedFormatWithConstants =
+                s_minimallyQualifiedFormat
+                    .AddLocalOptions(SymbolDisplayLocalOptions.IncludeConstantValue)
+                    .AddMemberOptions(SymbolDisplayMemberOptions.IncludeConstantValue)
+                    .AddParameterOptions(SymbolDisplayParameterOptions.IncludeDefaultValue);
 
-            private static readonly SymbolDisplayFormat s_minimallyQualifiedFormatWithConstantsAndModifiers = s_minimallyQualifiedFormatWithConstants
-                .AddMemberOptions(SymbolDisplayMemberOptions.IncludeModifiers);
+            private static readonly SymbolDisplayFormat s_minimallyQualifiedFormatWithConstantsAndModifiers =
+                s_minimallyQualifiedFormatWithConstants.AddMemberOptions(
+                    SymbolDisplayMemberOptions.IncludeModifiers
+                );
 
             protected override void AddDeprecatedPrefix()
             {
-                AddToGroup(SymbolDescriptionGroups.MainDescription,
+                AddToGroup(
+                    SymbolDescriptionGroups.MainDescription,
                     Punctuation("["),
                     PlainText(CSharpFeaturesResources.deprecated),
                     Punctuation("]"),
-                    Space());
+                    Space()
+                );
             }
 
             protected override void AddExtensionPrefix()
             {
-                AddToGroup(SymbolDescriptionGroups.MainDescription,
+                AddToGroup(
+                    SymbolDescriptionGroups.MainDescription,
                     Punctuation("("),
                     PlainText(CSharpFeaturesResources.extension),
                     Punctuation(")"),
-                    Space());
+                    Space()
+                );
             }
 
             protected override void AddAwaitablePrefix()
             {
-                AddToGroup(SymbolDescriptionGroups.MainDescription,
+                AddToGroup(
+                    SymbolDescriptionGroups.MainDescription,
                     Punctuation("("),
                     PlainText(CSharpFeaturesResources.awaitable),
                     Punctuation(")"),
-                    Space());
+                    Space()
+                );
             }
 
             protected override void AddAwaitableExtensionPrefix()
             {
-                AddToGroup(SymbolDescriptionGroups.MainDescription,
+                AddToGroup(
+                    SymbolDescriptionGroups.MainDescription,
                     Punctuation("("),
                     PlainText(CSharpFeaturesResources.awaitable_extension),
                     Punctuation(")"),
-                    Space());
+                    Space()
+                );
             }
 
             protected override void AddEnumUnderlyingTypeSeparator()
             {
-                AddToGroup(SymbolDescriptionGroups.MainDescription,
+                AddToGroup(
+                    SymbolDescriptionGroups.MainDescription,
                     Space(),
                     Punctuation(":"),
-                    Space());
+                    Space()
+                );
             }
 
-            protected override Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
-                ISymbol symbol)
+            protected override Task<
+                ImmutableArray<SymbolDisplayPart>
+            > GetInitializerSourcePartsAsync(ISymbol symbol)
             {
-                // Actually check for C# symbol types here.  
+                // Actually check for C# symbol types here.
                 if (symbol is IParameterSymbol parameter)
                 {
                     return GetInitializerSourcePartsAsync(parameter);
@@ -102,18 +127,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 return SpecializedTasks.EmptyImmutableArray<SymbolDisplayPart>();
             }
 
-            protected override ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(ISymbol symbol, SemanticModel semanticModel, int position, SymbolDisplayFormat format)
-                => CodeAnalysis.CSharp.SymbolDisplay.ToMinimalDisplayParts(symbol, semanticModel, position, format);
+            protected override ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
+                ISymbol symbol,
+                SemanticModel semanticModel,
+                int position,
+                SymbolDisplayFormat format
+            ) =>
+                CodeAnalysis.CSharp.SymbolDisplay.ToMinimalDisplayParts(
+                    symbol,
+                    semanticModel,
+                    position,
+                    format
+                );
 
-            protected override string? GetNavigationHint(ISymbol symbol)
-                => symbol == null ? null : CodeAnalysis.CSharp.SymbolDisplay.ToDisplayString(symbol, SymbolDisplayFormat.MinimallyQualifiedFormat);
+            protected override string? GetNavigationHint(ISymbol symbol) =>
+                symbol == null
+                    ? null
+                    : CodeAnalysis.CSharp.SymbolDisplay.ToDisplayString(
+                        symbol,
+                        SymbolDisplayFormat.MinimallyQualifiedFormat
+                    );
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
-                IFieldSymbol symbol)
+                IFieldSymbol symbol
+            )
             {
                 EqualsValueClauseSyntax? initializer = null;
 
-                var variableDeclarator = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(symbol).ConfigureAwait(false);
+                var variableDeclarator = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(
+                        symbol
+                    )
+                    .ConfigureAwait(false);
                 if (variableDeclarator != null)
                 {
                     initializer = variableDeclarator.Initializer;
@@ -121,7 +165,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
                 if (initializer == null)
                 {
-                    var enumMemberDeclaration = await GetFirstDeclarationAsync<EnumMemberDeclarationSyntax>(symbol).ConfigureAwait(false);
+                    var enumMemberDeclaration =
+                        await GetFirstDeclarationAsync<EnumMemberDeclarationSyntax>(symbol)
+                            .ConfigureAwait(false);
                     if (enumMemberDeclaration != null)
                     {
                         initializer = enumMemberDeclaration.EqualsValue;
@@ -137,34 +183,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
             }
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
-                ILocalSymbol symbol)
+                ILocalSymbol symbol
+            )
             {
-                var syntax = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(symbol).ConfigureAwait(false);
+                var syntax = await GetFirstDeclarationAsync<VariableDeclaratorSyntax>(symbol)
+                    .ConfigureAwait(false);
                 if (syntax != null)
                 {
-                    return await GetInitializerSourcePartsAsync(syntax.Initializer).ConfigureAwait(false);
+                    return await GetInitializerSourcePartsAsync(syntax.Initializer)
+                        .ConfigureAwait(false);
                 }
 
                 return ImmutableArray<SymbolDisplayPart>.Empty;
             }
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
-                IParameterSymbol symbol)
+                IParameterSymbol symbol
+            )
             {
-                var syntax = await GetFirstDeclarationAsync<ParameterSyntax>(symbol).ConfigureAwait(false);
+                var syntax = await GetFirstDeclarationAsync<ParameterSyntax>(symbol)
+                    .ConfigureAwait(false);
                 if (syntax != null)
                 {
-                    return await GetInitializerSourcePartsAsync(syntax.Default).ConfigureAwait(false);
+                    return await GetInitializerSourcePartsAsync(syntax.Default)
+                        .ConfigureAwait(false);
                 }
 
                 return ImmutableArray<SymbolDisplayPart>.Empty;
             }
 
-            private async Task<T?> GetFirstDeclarationAsync<T>(ISymbol symbol) where T : SyntaxNode
+            private async Task<T?> GetFirstDeclarationAsync<T>(ISymbol symbol)
+                where T : SyntaxNode
             {
                 foreach (var syntaxRef in symbol.DeclaringSyntaxReferences)
                 {
-                    var syntax = await syntaxRef.GetSyntaxAsync(CancellationToken).ConfigureAwait(false);
+                    var syntax = await syntaxRef
+                        .GetSyntaxAsync(CancellationToken)
+                        .ConfigureAwait(false);
                     if (syntax is T tSyntax)
                     {
                         return tSyntax;
@@ -175,16 +230,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
             }
 
             private async Task<ImmutableArray<SymbolDisplayPart>> GetInitializerSourcePartsAsync(
-                EqualsValueClauseSyntax? equalsValue)
+                EqualsValueClauseSyntax? equalsValue
+            )
             {
                 if (equalsValue != null && equalsValue.Value != null)
                 {
                     var semanticModel = GetSemanticModel(equalsValue.SyntaxTree);
                     if (semanticModel != null)
                     {
-                        return await Classifier.GetClassifiedSymbolDisplayPartsAsync(
-                            LanguageServices, semanticModel, equalsValue.Value.Span,
-                            Options.ClassificationOptions, cancellationToken: CancellationToken).ConfigureAwait(false);
+                        return await Classifier
+                            .GetClassifiedSymbolDisplayPartsAsync(
+                                LanguageServices,
+                                semanticModel,
+                                equalsValue.Value.Span,
+                                Options.ClassificationOptions,
+                                cancellationToken: CancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
 
@@ -193,21 +255,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
 
             protected override void AddCaptures(ISymbol symbol)
             {
-                if (symbol is IMethodSymbol method && method.ContainingSymbol.IsKind(SymbolKind.Method))
+                if (
+                    symbol is IMethodSymbol method
+                    && method.ContainingSymbol.IsKind(SymbolKind.Method)
+                )
                 {
                     var syntax = method.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
-                    if (syntax.IsKind(SyntaxKind.LocalFunctionStatement) || syntax is AnonymousFunctionExpressionSyntax)
+                    if (
+                        syntax.IsKind(SyntaxKind.LocalFunctionStatement)
+                        || syntax is AnonymousFunctionExpressionSyntax
+                    )
                     {
                         AddCaptures(syntax);
                     }
                 }
             }
 
-            protected override SymbolDisplayFormat MinimallyQualifiedFormat => s_minimallyQualifiedFormat;
+            protected override SymbolDisplayFormat MinimallyQualifiedFormat =>
+                s_minimallyQualifiedFormat;
 
-            protected override SymbolDisplayFormat MinimallyQualifiedFormatWithConstants => s_minimallyQualifiedFormatWithConstants;
+            protected override SymbolDisplayFormat MinimallyQualifiedFormatWithConstants =>
+                s_minimallyQualifiedFormatWithConstants;
 
-            protected override SymbolDisplayFormat MinimallyQualifiedFormatWithConstantsAndModifiers => s_minimallyQualifiedFormatWithConstantsAndModifiers;
+            protected override SymbolDisplayFormat MinimallyQualifiedFormatWithConstantsAndModifiers =>
+                s_minimallyQualifiedFormatWithConstantsAndModifiers;
         }
     }
 }

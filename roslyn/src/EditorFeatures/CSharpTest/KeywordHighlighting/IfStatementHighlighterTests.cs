@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class IfStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(IfStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(IfStatementHighlighter);
 
         [Fact]
         public async Task TestIfStatementWithIfAndSingleElse1()
@@ -38,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -170,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -198,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -226,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -254,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -280,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -306,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -332,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -359,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -386,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -413,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -440,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -467,7 +482,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -494,7 +510,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -521,7 +538,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -553,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -585,7 +604,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -617,7 +637,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -646,7 +667,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -675,7 +697,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -704,7 +727,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -733,7 +757,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

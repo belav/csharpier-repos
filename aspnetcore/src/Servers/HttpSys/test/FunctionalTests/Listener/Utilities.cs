@@ -34,7 +34,11 @@ internal static class Utilities
         return CreateDynamicHttpServer(path, out root, out baseAddress);
     }
 
-    internal static HttpSysListener CreateDynamicHttpServer(string basePath, out string root, out string baseAddress)
+    internal static HttpSysListener CreateDynamicHttpServer(
+        string basePath,
+        out string root,
+        out string baseAddress
+    )
     {
         lock (PortLock)
         {
@@ -56,9 +60,11 @@ internal static class Utilities
                 catch (HttpSysException ex)
                 {
                     listener.Dispose();
-                    if (ex.ErrorCode != ErrorCodes.ERROR_ALREADY_EXISTS
+                    if (
+                        ex.ErrorCode != ErrorCodes.ERROR_ALREADY_EXISTS
                         && ex.ErrorCode != ErrorCodes.ERROR_SHARING_VIOLATION
-                        && ex.ErrorCode != ErrorCodes.ERROR_ACCESS_DENIED)
+                        && ex.ErrorCode != ErrorCodes.ERROR_ACCESS_DENIED
+                    )
                     {
                         throw;
                     }
@@ -104,7 +110,10 @@ internal static class Utilities
     /// AcceptAsync extension with timeout. This extension should be used in all tests to prevent
     /// unexpected hangs when a request does not arrive.
     /// </summary>
-    internal static async Task<RequestContext> AcceptAsync(this HttpSysListener server, TimeSpan timeout)
+    internal static async Task<RequestContext> AcceptAsync(
+        this HttpSysListener server,
+        TimeSpan timeout
+    )
     {
         var factory = new TestRequestContextFactory(server);
         using var acceptContext = new AsyncAcceptContext(server, factory);
@@ -141,7 +150,10 @@ internal static class Utilities
     }
 
     // Fail if the given response task completes before the given accept task.
-    internal static async Task<RequestContext> Before<T>(this Task<RequestContext> acceptTask, Task<T> responseTask)
+    internal static async Task<RequestContext> Before<T>(
+        this Task<RequestContext> acceptTask,
+        Task<T> responseTask
+    )
     {
         var completedTask = await Task.WhenAny(acceptTask, responseTask);
 
@@ -152,7 +164,9 @@ internal static class Utilities
         else
         {
             var response = await responseTask;
-            throw new InvalidOperationException("The response completed prematurely: " + response.ToString());
+            throw new InvalidOperationException(
+                "The response completed prematurely: " + response.ToString()
+            );
         }
     }
 

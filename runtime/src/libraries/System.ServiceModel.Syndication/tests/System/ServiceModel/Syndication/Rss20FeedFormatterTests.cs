@@ -93,8 +93,14 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullFeedToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("feedToWrite", () => new Rss20FeedFormatter((SyndicationFeed)null));
-            AssertExtensions.Throws<ArgumentNullException>("feedToWrite", () => new Rss20FeedFormatter<SyndicationFeed>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "feedToWrite",
+                () => new Rss20FeedFormatter((SyndicationFeed)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "feedToWrite",
+                () => new Rss20FeedFormatter<SyndicationFeed>(null)
+            );
         }
 
         [Theory]
@@ -113,13 +119,19 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullFeedTypeToCreate_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("feedTypeToCreate", () => new Rss20FeedFormatter((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "feedTypeToCreate",
+                () => new Rss20FeedFormatter((Type)null)
+            );
         }
 
         [Fact]
         public void Ctor_InvalidFeedTypeToCreate_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("feedTypeToCreate", () => new Rss20FeedFormatter(typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedTypeToCreate",
+                () => new Rss20FeedFormatter(typeof(int))
+            );
         }
 
         [Fact]
@@ -138,10 +150,10 @@ namespace System.ServiceModel.Syndication.Tests
                 {
                     new SyndicationFeed(),
                     serializeExtensionsAsAtom,
-@"    <channel>
+                    @"    <channel>
         <title />
         <description />
-    </channel>"
+    </channel>",
                 };
             }
 
@@ -150,9 +162,18 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var person = new SyndicationPerson();
                 person.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name1"), null);
-                person.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"), "");
-                person.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"), prefix + "_value");
-                person.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name4", "xmlns"), "");
+                person.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"),
+                    ""
+                );
+                person.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"),
+                    prefix + "_value"
+                );
+                person.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name4", "xmlns"),
+                    ""
+                );
 
                 person.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -167,12 +188,24 @@ namespace System.ServiceModel.Syndication.Tests
 
             TextSyndicationContent CreateContent(string prefix)
             {
-                var content = new TextSyndicationContent(prefix + "_title", TextSyndicationContentKind.Html);
+                var content = new TextSyndicationContent(
+                    prefix + "_title",
+                    TextSyndicationContentKind.Html
+                );
 
                 content.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name1"), null);
-                content.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"), "");
-                content.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"), prefix + "_value");
-                content.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name4", "xmlns"), "");
+                content.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"),
+                    ""
+                );
+                content.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"),
+                    prefix + "_value"
+                );
+                content.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name4", "xmlns"),
+                    ""
+                );
 
                 return content;
             }
@@ -180,10 +213,22 @@ namespace System.ServiceModel.Syndication.Tests
             SyndicationCategory CreateCategory(string prefix)
             {
                 var category = new SyndicationCategory();
-                category.AttributeExtensions.Add(new XmlQualifiedName(prefix + "category_name1"), null);
-                category.AttributeExtensions.Add(new XmlQualifiedName(prefix + "category_name2", prefix + "category_namespace"), "");
-                category.AttributeExtensions.Add(new XmlQualifiedName(prefix + "category_name3", prefix + "category_namespace"), prefix + "category_value");
-                category.AttributeExtensions.Add(new XmlQualifiedName(prefix + "category_name4", "xmlns"), "");
+                category.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "category_name1"),
+                    null
+                );
+                category.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "category_name2", prefix + "category_namespace"),
+                    ""
+                );
+                category.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "category_name3", prefix + "category_namespace"),
+                    prefix + "category_value"
+                );
+                category.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "category_name4", "xmlns"),
+                    ""
+                );
 
                 category.ElementExtensions.Add(new ExtensionObject { Value = 10 });
 
@@ -200,8 +245,14 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var link = new SyndicationLink();
                 link.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name1"), null);
-                link.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"), "");
-                link.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"), prefix + "_value");
+                link.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name2", prefix + "_namespace"),
+                    ""
+                );
+                link.AttributeExtensions.Add(
+                    new XmlQualifiedName(prefix + "_name3", prefix + "_namespace"),
+                    prefix + "_value"
+                );
                 link.AttributeExtensions.Add(new XmlQualifiedName(prefix + "_name4", "xmlns"), "");
 
                 link.BaseUri = new Uri("http://" + prefix + "_url.com");
@@ -216,7 +267,7 @@ namespace System.ServiceModel.Syndication.Tests
 
                 link.Title = prefix + "_title";
 
-                link.Uri = new Uri("http://" + prefix +"_uri.com");
+                link.Uri = new Uri("http://" + prefix + "_uri.com");
 
                 return link;
             }
@@ -225,11 +276,20 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 Name = "name",
                 Label = "label",
-                Scheme = "scheme"
+                Scheme = "scheme",
             };
-            attributeSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("term"), "term_value");
-            attributeSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("label"), "label_value");
-            attributeSyndicationCategory.AttributeExtensions.Add(new XmlQualifiedName("scheme"), "scheme_value");
+            attributeSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("term"),
+                "term_value"
+            );
+            attributeSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("label"),
+                "label_value"
+            );
+            attributeSyndicationCategory.AttributeExtensions.Add(
+                new XmlQualifiedName("scheme"),
+                "scheme_value"
+            );
 
             var attributeSyndicationLink = new SyndicationLink
             {
@@ -237,19 +297,40 @@ namespace System.ServiceModel.Syndication.Tests
                 MediaType = "link_mediaType",
                 Title = "link_title",
                 Length = 10,
-                Uri = new Uri("http://link_uri.com")
+                Uri = new Uri("http://link_uri.com"),
             };
-            attributeSyndicationLink.AttributeExtensions.Add(new XmlQualifiedName("rel"), "rel_value");
-            attributeSyndicationLink.AttributeExtensions.Add(new XmlQualifiedName("type"), "type_value");
-            attributeSyndicationLink.AttributeExtensions.Add(new XmlQualifiedName("title"), "title_value");
+            attributeSyndicationLink.AttributeExtensions.Add(
+                new XmlQualifiedName("rel"),
+                "rel_value"
+            );
+            attributeSyndicationLink.AttributeExtensions.Add(
+                new XmlQualifiedName("type"),
+                "type_value"
+            );
+            attributeSyndicationLink.AttributeExtensions.Add(
+                new XmlQualifiedName("title"),
+                "title_value"
+            );
             attributeSyndicationLink.AttributeExtensions.Add(new XmlQualifiedName("length"), "100");
-            attributeSyndicationLink.AttributeExtensions.Add(new XmlQualifiedName("href"), "href_value");
+            attributeSyndicationLink.AttributeExtensions.Add(
+                new XmlQualifiedName("href"),
+                "href_value"
+            );
 
             var fullSyndicationItem = new SyndicationItem();
             fullSyndicationItem.AttributeExtensions.Add(new XmlQualifiedName("item_name1"), null);
-            fullSyndicationItem.AttributeExtensions.Add(new XmlQualifiedName("item_name2", "item_namespace"), "");
-            fullSyndicationItem.AttributeExtensions.Add(new XmlQualifiedName("item_name3", "item_namespace"), "item_value");
-            fullSyndicationItem.AttributeExtensions.Add(new XmlQualifiedName("item_name4", "xmlns"), "");
+            fullSyndicationItem.AttributeExtensions.Add(
+                new XmlQualifiedName("item_name2", "item_namespace"),
+                ""
+            );
+            fullSyndicationItem.AttributeExtensions.Add(
+                new XmlQualifiedName("item_name3", "item_namespace"),
+                "item_value"
+            );
+            fullSyndicationItem.AttributeExtensions.Add(
+                new XmlQualifiedName("item_name4", "xmlns"),
+                ""
+            );
 
             fullSyndicationItem.Authors.Add(new SyndicationPerson());
             fullSyndicationItem.Authors.Add(CreatePerson("author"));
@@ -286,9 +367,18 @@ namespace System.ServiceModel.Syndication.Tests
             var fullSyndicationFeed = new SyndicationFeed();
 
             fullSyndicationFeed.AttributeExtensions.Add(new XmlQualifiedName("feed_name1"), null);
-            fullSyndicationFeed.AttributeExtensions.Add(new XmlQualifiedName("feed_name2", "feed_namespace"), "");
-            fullSyndicationFeed.AttributeExtensions.Add(new XmlQualifiedName("feed_name3", "feed_namespace"), "feed_value");
-            fullSyndicationFeed.AttributeExtensions.Add(new XmlQualifiedName("feed_name4", "xmlns"), "");
+            fullSyndicationFeed.AttributeExtensions.Add(
+                new XmlQualifiedName("feed_name2", "feed_namespace"),
+                ""
+            );
+            fullSyndicationFeed.AttributeExtensions.Add(
+                new XmlQualifiedName("feed_name3", "feed_namespace"),
+                "feed_value"
+            );
+            fullSyndicationFeed.AttributeExtensions.Add(
+                new XmlQualifiedName("feed_name4", "xmlns"),
+                ""
+            );
 
             fullSyndicationFeed.Authors.Add(new SyndicationPerson());
             fullSyndicationFeed.Authors.Add(CreatePerson("feedauthor"));
@@ -314,7 +404,15 @@ namespace System.ServiceModel.Syndication.Tests
 
             fullSyndicationFeed.ImageUrl = new Uri("http://imageurl.com");
 
-            fullSyndicationFeed.Items = new SyndicationItem[] { new SyndicationItem() { Id = "id", LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1) }, fullSyndicationItem };
+            fullSyndicationFeed.Items = new SyndicationItem[]
+            {
+                new SyndicationItem()
+                {
+                    Id = "id",
+                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
+                },
+                fullSyndicationItem,
+            };
 
             fullSyndicationFeed.Language = "language";
 
@@ -332,7 +430,7 @@ namespace System.ServiceModel.Syndication.Tests
                 {
                     fullSyndicationFeed,
                     serializeExtensionsAsAtom,
-@"    <channel xml:base=""http://microsoft.com/"" feed_name1="""" d2p1:feed_name2="""" d2p1:feed_name3=""feed_value"" d2p2:feed_name4="""" xmlns:d2p2=""xmlns"" xmlns:d2p1=""feed_namespace"">
+                    @"    <channel xml:base=""http://microsoft.com/"" feed_name1="""" d2p1:feed_name2="""" d2p1:feed_name3=""feed_value"" d2p2:feed_name4="""" xmlns:d2p2=""xmlns"" xmlns:d2p1=""feed_namespace"">
         <title>feedtitle_title</title>
         <description>feeddescription_title</description>
         <language>language</language>
@@ -421,7 +519,7 @@ namespace System.ServiceModel.Syndication.Tests
                 <Value>10</Value>
             </Rss20FeedFormatterTests.ExtensionObject>
         </item>
-    </channel>"
+    </channel>",
                 };
             }
         }
@@ -430,27 +528,43 @@ namespace System.ServiceModel.Syndication.Tests
         public void Write_HasFeed_SerializesExpected()
         {
             const string Expected =
-@"    <channel>
+                @"    <channel>
         <title />
         <description />
     </channel>";
 
             var feed = new SyndicationFeed();
             var formatter = new Rss20FeedFormatter(feed);
-            string expectedFull = @"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">" + Environment.NewLine + Expected + Environment.NewLine + "</rss>";
-            string expectedSerializable = @"<feed xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">" + Environment.NewLine + Expected + Environment.NewLine + "</feed>";
+            string expectedFull =
+                @"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">"
+                + Environment.NewLine
+                + Expected
+                + Environment.NewLine
+                + "</rss>";
+            string expectedSerializable =
+                @"<feed xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">"
+                + Environment.NewLine
+                + Expected
+                + Environment.NewLine
+                + "</feed>";
 
             CompareHelper.AssertEqualWriteOutput(expectedFull, writer => formatter.WriteTo(writer));
             CompareHelper.AssertEqualWriteOutput(expectedFull, writer => feed.SaveAsRss20(writer));
-            CompareHelper.AssertEqualWriteOutput(expectedSerializable, writer =>
-            {
-                writer.WriteStartElement("feed");
-                ((IXmlSerializable)formatter).WriteXml(writer);
-                writer.WriteEndElement();
-            });
+            CompareHelper.AssertEqualWriteOutput(
+                expectedSerializable,
+                writer =>
+                {
+                    writer.WriteStartElement("feed");
+                    ((IXmlSerializable)formatter).WriteXml(writer);
+                    writer.WriteEndElement();
+                }
+            );
 
             var genericFormatter = new Rss20FeedFormatter<SyndicationFeed>(feed);
-            CompareHelper.AssertEqualWriteOutput(expectedFull, writer => genericFormatter.WriteTo(writer));
+            CompareHelper.AssertEqualWriteOutput(
+                expectedFull,
+                writer => genericFormatter.WriteTo(writer)
+            );
             CompareHelper.AssertEqualWriteOutput(expectedFull, writer => feed.SaveAsRss20(writer));
         }
 
@@ -476,7 +590,10 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteXml_NullWriter_ThrowsArgumentNullException()
         {
             IXmlSerializable formatter = new Rss20FeedFormatter();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => formatter.WriteXml(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => formatter.WriteXml(null)
+            );
         }
 
         [Fact]
@@ -502,13 +619,19 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteItem_Invoke_Success(Uri feedBaseUri)
         {
             var formatter = new Formatter();
-            var item = new SyndicationItem() { Id = "id", LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1) };
+            var item = new SyndicationItem()
+            {
+                Id = "id",
+                LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
+            };
             CompareHelper.AssertEqualWriteOutput(
-@"<item>
+                @"<item>
     <guid isPermaLink=""false"">id</guid>
     <description />
     <updated xmlns=""http://www.w3.org/2005/Atom"">0001-01-01T00:00:00Z</updated>
-</item>", writer => formatter.WriteItemEntryPoint(writer, item, feedBaseUri));
+</item>",
+                writer => formatter.WriteItemEntryPoint(writer, item, feedBaseUri)
+            );
         }
 
         [Fact]
@@ -518,7 +641,13 @@ namespace System.ServiceModel.Syndication.Tests
             using (var writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                Assert.Throws<NullReferenceException>(() => formatter.WriteItemEntryPoint(null, new SyndicationItem(), new Uri("http://microsoft.com")));
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemEntryPoint(
+                        null,
+                        new SyndicationItem(),
+                        new Uri("http://microsoft.com")
+                    )
+                );
             }
         }
 
@@ -529,7 +658,9 @@ namespace System.ServiceModel.Syndication.Tests
             using (var writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                Assert.Throws<NullReferenceException>(() => formatter.WriteItemEntryPoint(writer, null, new Uri("http://microsoft.com")));
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemEntryPoint(writer, null, new Uri("http://microsoft.com"))
+                );
             }
         }
 
@@ -540,11 +671,19 @@ namespace System.ServiceModel.Syndication.Tests
             var formatter = new Formatter();
             var items = new SyndicationItem[]
             {
-                new SyndicationItem() { Id = "id1", LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1) },
-                new SyndicationItem() { Id = "id2", LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1) }
+                new SyndicationItem()
+                {
+                    Id = "id1",
+                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
+                },
+                new SyndicationItem()
+                {
+                    Id = "id2",
+                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
+                },
             };
             CompareHelper.AssertEqualWriteOutput(
-@"<item>
+                @"<item>
     <guid isPermaLink=""false"">id1</guid>
     <description />
     <updated xmlns=""http://www.w3.org/2005/Atom"">0001-01-01T00:00:00Z</updated>
@@ -553,7 +692,9 @@ namespace System.ServiceModel.Syndication.Tests
     <guid isPermaLink=""false"">id2</guid>
     <description />
     <updated xmlns=""http://www.w3.org/2005/Atom"">0001-01-01T00:00:00Z</updated>
-</item>", writer => formatter.WriteItemsEntryPoint(writer, items, feedBaseUri));
+</item>",
+                writer => formatter.WriteItemsEntryPoint(writer, items, feedBaseUri)
+            );
         }
 
         [Fact]
@@ -575,8 +716,16 @@ namespace System.ServiceModel.Syndication.Tests
             using (var writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                formatter.WriteItemsEntryPoint(writer, new SyndicationItem[0], new Uri("http://microsoft.com"));
-                formatter.WriteItemsEntryPoint(null, new SyndicationItem[0], new Uri("http://microsoft.com"));
+                formatter.WriteItemsEntryPoint(
+                    writer,
+                    new SyndicationItem[0],
+                    new Uri("http://microsoft.com")
+                );
+                formatter.WriteItemsEntryPoint(
+                    null,
+                    new SyndicationItem[0],
+                    new Uri("http://microsoft.com")
+                );
             }
         }
 
@@ -588,7 +737,9 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var formatter = new Formatter();
                 var items = new SyndicationItem[] { new SyndicationItem() };
-                Assert.Throws<NullReferenceException>(() => formatter.WriteItemsEntryPoint(null, items, new Uri("http://microsoft.com")));
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemsEntryPoint(null, items, new Uri("http://microsoft.com"))
+                );
             }
         }
 
@@ -600,7 +751,9 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 var formatter = new Formatter();
                 var items = new SyndicationItem[] { null };
-                Assert.Throws<NullReferenceException>(() => formatter.WriteItemsEntryPoint(writer, items, new Uri("http://microsoft.com")));
+                Assert.Throws<NullReferenceException>(() =>
+                    formatter.WriteItemsEntryPoint(writer, items, new Uri("http://microsoft.com"))
+                );
             }
         }
 
@@ -635,10 +788,13 @@ namespace System.ServiceModel.Syndication.Tests
         [Theory]
         [InlineData(true, true)]
         [InlineData(false, false)]
-        public void Read_FullItem_ReturnsExpected(bool preserveAttributeExtensions, bool preserveElementExtensions)
+        public void Read_FullItem_ReturnsExpected(
+            bool preserveAttributeExtensions,
+            bool preserveElementExtensions
+        )
         {
             VerifyRead(
-@"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">
+                @"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">
     <channel xml:base=""http://microsoft.com/"" feed_name1="""" d2p1:feed_name2="""" d2p1:feed_name3=""feed_value"" d2p2:feed_name4="""" xmlns:d2p2=""xmlns"" xmlns:d2p1=""feed_namespace"">
         <title>feedtitle_title</title>
         <description>feeddescription_title</description>
@@ -729,372 +885,626 @@ namespace System.ServiceModel.Syndication.Tests
             </Rss20FeedFormatterTests.ExtensionObject>
         </item>
     </channel>
-</rss>", preserveAttributeExtensions, preserveElementExtensions, feed =>
-            {
-                if (preserveAttributeExtensions)
+</rss>",
+                preserveAttributeExtensions,
+                preserveElementExtensions,
+                feed =>
                 {
-                    Assert.Equal(4, feed.AttributeExtensions.Count);
-                    Assert.Equal(4, feed.AttributeExtensions.Count);
-                    Assert.Equal("", feed.AttributeExtensions[new XmlQualifiedName("feed_name1")]);
-                    Assert.Equal("", feed.AttributeExtensions[new XmlQualifiedName("feed_name2", "feed_namespace")]);
-                    Assert.Equal("feed_value", feed.AttributeExtensions[new XmlQualifiedName("feed_name3", "feed_namespace")]);
-                    Assert.Equal("", feed.AttributeExtensions[new XmlQualifiedName("feed_name4", "xmlns")]);
+                    if (preserveAttributeExtensions)
+                    {
+                        Assert.Equal(4, feed.AttributeExtensions.Count);
+                        Assert.Equal(4, feed.AttributeExtensions.Count);
+                        Assert.Equal(
+                            "",
+                            feed.AttributeExtensions[new XmlQualifiedName("feed_name1")]
+                        );
+                        Assert.Equal(
+                            "",
+                            feed.AttributeExtensions[
+                                new XmlQualifiedName("feed_name2", "feed_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "feed_value",
+                            feed.AttributeExtensions[
+                                new XmlQualifiedName("feed_name3", "feed_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "",
+                            feed.AttributeExtensions[new XmlQualifiedName("feed_name4", "xmlns")]
+                        );
+                    }
+                    else
+                    {
+                        Assert.Empty(feed.AttributeExtensions);
+                    }
+
+                    Assert.Equal(2, feed.Authors.Count);
+
+                    SyndicationPerson firstAuthor = feed.Authors[0];
+                    Assert.Empty(firstAuthor.AttributeExtensions);
+                    Assert.Empty(firstAuthor.ElementExtensions);
+                    Assert.Null(firstAuthor.Email);
+                    Assert.Null(firstAuthor.Name);
+                    Assert.Null(firstAuthor.Uri);
+
+                    SyndicationPerson secondAuthor = feed.Authors[1];
+                    Assert.Equal(4, secondAuthor.AttributeExtensions.Count);
+                    Assert.Equal(4, secondAuthor.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        secondAuthor.AttributeExtensions[new XmlQualifiedName("feedauthor_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondAuthor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor_name2", "feedauthor_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "feedauthor_value",
+                        secondAuthor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor_name3", "feedauthor_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondAuthor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, secondAuthor.ElementExtensions.Count());
+                    Assert.Equal("feedauthor_email", secondAuthor.Email);
+                    Assert.Equal("feedauthor_name", secondAuthor.Name);
+                    Assert.Equal("feedauthor_uri", secondAuthor.Uri);
+
+                    Assert.Equal(new Uri("http://microsoft.com"), feed.BaseUri);
+
+                    Assert.Equal(2, feed.Categories.Count);
+                    SyndicationCategory firstCategory = feed.Categories[0];
+                    Assert.Empty(firstCategory.AttributeExtensions);
+                    Assert.Empty(firstCategory.ElementExtensions);
+                    Assert.Null(firstCategory.Name);
+                    Assert.Null(firstCategory.Scheme);
+                    Assert.Null(firstCategory.Label);
+
+                    SyndicationCategory secondCategory = feed.Categories[1];
+                    if (preserveAttributeExtensions)
+                    {
+                        Assert.Equal(4, secondCategory.AttributeExtensions.Count);
+                        Assert.Equal(4, secondCategory.AttributeExtensions.Count);
+                        Assert.Equal(
+                            "",
+                            secondCategory.AttributeExtensions[
+                                new XmlQualifiedName("feedcategory_name1")
+                            ]
+                        );
+                        Assert.Equal(
+                            "",
+                            secondCategory.AttributeExtensions[
+                                new XmlQualifiedName("feedcategory_name2", "feedcategory_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "feedcategory_value",
+                            secondCategory.AttributeExtensions[
+                                new XmlQualifiedName("feedcategory_name3", "feedcategory_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "",
+                            secondCategory.AttributeExtensions[
+                                new XmlQualifiedName("feedcategory_name4", "xmlns")
+                            ]
+                        );
+                    }
+                    else
+                    {
+                        Assert.Empty(secondCategory.AttributeExtensions);
+                    }
+                    Assert.Empty(secondCategory.ElementExtensions);
+                    Assert.Equal("feedcategory_name", secondCategory.Name);
+                    Assert.Equal("feedcategory_scheme", secondCategory.Scheme);
+                    Assert.Null(secondCategory.Label);
+
+                    Assert.Equal(2, feed.Contributors.Count);
+                    SyndicationPerson firstContributor = feed.Contributors[0];
+                    Assert.Empty(firstContributor.AttributeExtensions);
+                    Assert.Empty(firstContributor.ElementExtensions);
+                    Assert.Null(firstContributor.Email);
+                    Assert.Null(firstContributor.Name);
+                    Assert.Null(firstContributor.Uri);
+
+                    SyndicationPerson secondContributor = feed.Contributors[1];
+                    Assert.Equal(4, secondContributor.AttributeExtensions.Count);
+                    Assert.Equal(4, secondContributor.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        secondContributor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor__name1")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondContributor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor__name2", "feedauthor__namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "feedauthor__value",
+                        secondContributor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor__name3", "feedauthor__namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondContributor.AttributeExtensions[
+                            new XmlQualifiedName("feedauthor__name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, secondContributor.ElementExtensions.Count());
+                    Assert.Equal("feedauthor__email", secondContributor.Email);
+                    Assert.Equal("feedauthor__name", secondContributor.Name);
+                    Assert.Equal("feedauthor__uri", secondContributor.Uri);
+
+                    Assert.Empty(feed.Copyright.AttributeExtensions);
+                    Assert.Equal("feedcopyright_title", feed.Copyright.Text);
+                    Assert.Equal("text", feed.Copyright.Type);
+
+                    Assert.Equal("generator", feed.Generator);
+
+                    if (preserveElementExtensions)
+                    {
+                        Assert.Equal(1, feed.ElementExtensions.Count());
+                    }
+                    else
+                    {
+                        Assert.Empty(feed.ElementExtensions);
+                    }
+
+                    Assert.Equal("id", feed.Id);
+
+                    Assert.Equal(new Uri("http://imageurl.com/"), feed.ImageUrl);
+
+                    SyndicationItem[] items = feed.Items.ToArray();
+                    Assert.Equal(2, items.Length);
+
+                    SyndicationItem item = items[1];
+
+                    if (preserveAttributeExtensions)
+                    {
+                        Assert.Equal(4, item.AttributeExtensions.Count);
+                        Assert.Equal(4, item.AttributeExtensions.Count);
+                        Assert.Equal(
+                            "",
+                            item.AttributeExtensions[new XmlQualifiedName("item_name1")]
+                        );
+                        Assert.Equal(
+                            "",
+                            item.AttributeExtensions[
+                                new XmlQualifiedName("item_name2", "item_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "item_value",
+                            item.AttributeExtensions[
+                                new XmlQualifiedName("item_name3", "item_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "",
+                            item.AttributeExtensions[new XmlQualifiedName("item_name4", "xmlns")]
+                        );
+                    }
+                    else
+                    {
+                        Assert.Empty(item.AttributeExtensions);
+                    }
+                    if (preserveElementExtensions)
+                    {
+                        Assert.Equal(1, item.ElementExtensions.Count());
+                    }
+                    else
+                    {
+                        Assert.Empty(item.ElementExtensions);
+                    }
+
+                    Assert.Equal(2, item.Authors.Count);
+
+                    SyndicationPerson itemFirstAuthor = item.Authors[0];
+                    Assert.Empty(itemFirstAuthor.AttributeExtensions);
+                    Assert.Empty(itemFirstAuthor.ElementExtensions);
+                    Assert.Null(itemFirstAuthor.Email);
+                    Assert.Null(itemFirstAuthor.Name);
+                    Assert.Null(itemFirstAuthor.Uri);
+
+                    SyndicationPerson itemSecondAuthor = item.Authors[1];
+
+                    Assert.Equal(4, itemSecondAuthor.AttributeExtensions.Count);
+                    Assert.Equal(4, itemSecondAuthor.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        itemSecondAuthor.AttributeExtensions[new XmlQualifiedName("author_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        itemSecondAuthor.AttributeExtensions[
+                            new XmlQualifiedName("author_name2", "author_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "author_value",
+                        itemSecondAuthor.AttributeExtensions[
+                            new XmlQualifiedName("author_name3", "author_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        itemSecondAuthor.AttributeExtensions[
+                            new XmlQualifiedName("author_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, itemSecondAuthor.ElementExtensions.Count());
+                    Assert.Equal("author_email", itemSecondAuthor.Email);
+                    Assert.Equal("author_name", itemSecondAuthor.Name);
+                    Assert.Equal("author_uri", itemSecondAuthor.Uri);
+
+                    Assert.Equal(new Uri("http://microsoft/relative"), item.BaseUri);
+
+                    Assert.Equal(4, item.Categories.Count);
+                    SyndicationCategory itemFirstCategory = item.Categories[0];
+                    Assert.Empty(itemFirstCategory.AttributeExtensions);
+                    Assert.Empty(itemFirstCategory.ElementExtensions);
+                    Assert.Null(itemFirstCategory.Name);
+                    Assert.Null(itemFirstCategory.Scheme);
+                    Assert.Null(itemFirstCategory.Label);
+
+                    SyndicationCategory itemSecondCategory = item.Categories[1];
+
+                    if (preserveAttributeExtensions)
+                    {
+                        Assert.Equal(4, itemSecondCategory.AttributeExtensions.Count);
+                        Assert.Equal(4, itemSecondCategory.AttributeExtensions.Count);
+                        Assert.Equal(
+                            "",
+                            itemSecondCategory.AttributeExtensions[
+                                new XmlQualifiedName("category_name1")
+                            ]
+                        );
+                        Assert.Equal(
+                            "",
+                            itemSecondCategory.AttributeExtensions[
+                                new XmlQualifiedName("category_name2", "category_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "category_value",
+                            itemSecondCategory.AttributeExtensions[
+                                new XmlQualifiedName("category_name3", "category_namespace")
+                            ]
+                        );
+                        Assert.Equal(
+                            "",
+                            itemSecondCategory.AttributeExtensions[
+                                new XmlQualifiedName("category_name4", "xmlns")
+                            ]
+                        );
+                    }
+                    else
+                    {
+                        Assert.Empty(itemSecondCategory.AttributeExtensions);
+                    }
+                    Assert.Empty(itemSecondCategory.ElementExtensions);
+                    Assert.Equal("category_name", itemSecondCategory.Name);
+                    Assert.Equal("category_scheme", itemSecondCategory.Scheme);
+                    Assert.Null(itemSecondCategory.Label);
+
+                    SyndicationCategory itemThirdCategory = item.Categories[2];
+                    if (preserveAttributeExtensions)
+                    {
+                        Assert.Equal(3, itemThirdCategory.AttributeExtensions.Count);
+                        Assert.Equal(
+                            "term_value",
+                            itemThirdCategory.AttributeExtensions[new XmlQualifiedName("term")]
+                        );
+                        Assert.Equal(
+                            "label_value",
+                            itemThirdCategory.AttributeExtensions[new XmlQualifiedName("label")]
+                        );
+                        Assert.Equal(
+                            "scheme_value",
+                            itemThirdCategory.AttributeExtensions[new XmlQualifiedName("scheme")]
+                        );
+                    }
+                    else
+                    {
+                        Assert.Empty(itemThirdCategory.AttributeExtensions);
+                    }
+                    Assert.Empty(itemThirdCategory.ElementExtensions);
+                    Assert.Equal("name", itemThirdCategory.Name);
+                    Assert.Equal("scheme", itemThirdCategory.Scheme);
+                    Assert.Null(itemThirdCategory.Label);
+
+                    SyndicationCategory itemFourthCategory = item.Categories[3];
+                    if (preserveAttributeExtensions)
+                    {
+                        Assert.Equal(3, itemFourthCategory.AttributeExtensions.Count);
+                        Assert.Equal(
+                            "term_value",
+                            itemFourthCategory.AttributeExtensions[new XmlQualifiedName("term")]
+                        );
+                        Assert.Equal(
+                            "label_value",
+                            itemFourthCategory.AttributeExtensions[new XmlQualifiedName("label")]
+                        );
+                        Assert.Equal(
+                            "scheme_value",
+                            itemFourthCategory.AttributeExtensions[new XmlQualifiedName("scheme")]
+                        );
+                    }
+                    else
+                    {
+                        Assert.Empty(itemFourthCategory.AttributeExtensions);
+                    }
+                    Assert.Empty(itemFourthCategory.ElementExtensions);
+                    Assert.Equal("name", itemFourthCategory.Name);
+                    Assert.Equal("scheme", itemFourthCategory.Scheme);
+                    Assert.Null(itemFourthCategory.Label);
+
+                    TextSyndicationContent content = Assert.IsType<TextSyndicationContent>(
+                        item.Content
+                    );
+
+                    Assert.Equal(4, content.AttributeExtensions.Count);
+                    Assert.Equal(4, content.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        content.AttributeExtensions[new XmlQualifiedName("content_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        content.AttributeExtensions[
+                            new XmlQualifiedName("content_name2", "content_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "content_value",
+                        content.AttributeExtensions[
+                            new XmlQualifiedName("content_name3", "content_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        content.AttributeExtensions[new XmlQualifiedName("content_name4", "xmlns")]
+                    );
+                    Assert.Equal("content_title", content.Text);
+                    Assert.Equal("html", content.Type);
+
+                    Assert.Equal(2, item.Contributors.Count);
+
+                    SyndicationPerson itemFirstContributor = item.Contributors[0];
+                    Assert.Empty(itemFirstContributor.AttributeExtensions);
+                    Assert.Empty(itemFirstContributor.ElementExtensions);
+                    Assert.Null(itemFirstContributor.Email);
+                    Assert.Null(itemFirstContributor.Name);
+                    Assert.Null(itemFirstContributor.Uri);
+
+                    SyndicationPerson itemSecondContributor = item.Contributors[1];
+                    Assert.Equal(4, itemSecondContributor.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        itemSecondContributor.AttributeExtensions[
+                            new XmlQualifiedName("contributor_name1")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        itemSecondContributor.AttributeExtensions[
+                            new XmlQualifiedName("contributor_name2", "contributor_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "contributor_value",
+                        itemSecondContributor.AttributeExtensions[
+                            new XmlQualifiedName("contributor_name3", "contributor_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        itemSecondContributor.AttributeExtensions[
+                            new XmlQualifiedName("contributor_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, itemSecondContributor.ElementExtensions.Count());
+                    Assert.Equal("contributor_email", itemSecondContributor.Email);
+                    Assert.Equal("contributor_name", itemSecondContributor.Name);
+                    Assert.Equal("contributor_uri", itemSecondContributor.Uri);
+
+                    Assert.Equal(4, item.Copyright.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        item.Copyright.AttributeExtensions[
+                            new XmlQualifiedName("copyright_name2", "copyright_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "copyright_value",
+                        item.Copyright.AttributeExtensions[
+                            new XmlQualifiedName("copyright_name3", "copyright_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        item.Copyright.AttributeExtensions[
+                            new XmlQualifiedName("copyright_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal("copyright_title", item.Copyright.Text);
+                    Assert.Equal("html", item.Copyright.Type);
+
+                    if (preserveElementExtensions)
+                    {
+                        Assert.Equal(1, item.ElementExtensions.Count());
+                    }
+                    else
+                    {
+                        Assert.Empty(item.ElementExtensions);
+                    }
+
+                    Assert.Equal("id", item.Id);
+
+                    Assert.Equal(DateTimeOffset.MinValue, item.LastUpdatedTime);
+
+                    Assert.Equal(3, item.Links.Count);
+
+                    SyndicationLink itemFirstLink = item.Links[0];
+                    Assert.Empty(itemFirstLink.AttributeExtensions);
+                    Assert.Empty(itemFirstLink.ElementExtensions);
+                    Assert.Equal(0, itemFirstLink.Length);
+                    Assert.Null(itemFirstLink.MediaType);
+                    Assert.Null(itemFirstLink.RelationshipType);
+                    Assert.Null(itemFirstLink.Title);
+                    Assert.Equal(string.Empty, itemFirstLink.Uri.OriginalString);
+
+                    SyndicationLink itemSecondLink = item.Links[1];
+                    Assert.Equal(4, itemSecondLink.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name1")]
+                    );
+                    Assert.Equal(
+                        "",
+                        itemSecondLink.AttributeExtensions[
+                            new XmlQualifiedName("link_name2", "link_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "link_value",
+                        itemSecondLink.AttributeExtensions[
+                            new XmlQualifiedName("link_name3", "link_namespace")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        itemSecondLink.AttributeExtensions[
+                            new XmlQualifiedName("link_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, itemSecondLink.ElementExtensions.Count());
+                    Assert.Equal(new Uri("http://link_url.com"), itemSecondLink.BaseUri);
+                    Assert.Equal(10, itemSecondLink.Length);
+                    Assert.Equal("link_mediaType", itemSecondLink.MediaType);
+                    Assert.Equal("link_relationshipType", itemSecondLink.RelationshipType);
+                    Assert.Equal("link_title", itemSecondLink.Title);
+                    Assert.Equal(new Uri("http://link_uri.com"), itemSecondLink.Uri);
+
+                    SyndicationLink itemThirdLink = item.Links[2];
+                    Assert.Empty(itemThirdLink.AttributeExtensions);
+                    Assert.Empty(itemThirdLink.ElementExtensions);
+                    Assert.Equal(100, itemThirdLink.Length);
+                    Assert.Equal("type_value", itemThirdLink.MediaType);
+                    Assert.Equal("rel_value", itemThirdLink.RelationshipType);
+                    Assert.Equal("title_value", itemThirdLink.Title);
+                    Assert.Equal("href_value", itemThirdLink.Uri.OriginalString);
+
+                    Assert.Equal(DateTimeOffset.MinValue, item.PublishDate);
+
+                    Assert.Null(item.SourceFeed);
+
+                    Assert.Empty(item.Summary.AttributeExtensions);
+                    Assert.Equal("summary_title", item.Summary.Text);
+                    Assert.Equal("text", item.Summary.Type);
+
+                    Assert.Empty(item.Title.AttributeExtensions);
+                    Assert.Equal("title_title", item.Title.Text);
+                    Assert.Equal("text", item.Title.Type);
+
+                    Assert.Equal("language", feed.Language);
+
+                    Assert.Equal(DateTimeOffset.MinValue.AddYears(1), feed.LastUpdatedTime);
+                    Assert.Equal(3, feed.Links.Count);
+
+                    SyndicationLink firstLink = feed.Links[0];
+                    Assert.Empty(firstLink.AttributeExtensions);
+                    Assert.Empty(firstLink.ElementExtensions);
+                    Assert.Equal(0, firstLink.Length);
+                    Assert.Null(firstLink.MediaType);
+                    Assert.Null(firstLink.RelationshipType);
+                    Assert.Null(firstLink.Title);
+                    Assert.Equal("", firstLink.Uri.OriginalString);
+
+                    SyndicationLink secondLink = feed.Links[1];
+                    Assert.Equal(4, secondLink.AttributeExtensions.Count);
+                    Assert.Equal(
+                        "",
+                        secondLink.AttributeExtensions[
+                            new XmlQualifiedName("syndicationlink_name1")
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondLink.AttributeExtensions[
+                            new XmlQualifiedName(
+                                "syndicationlink_name2",
+                                "syndicationlink_namespace"
+                            )
+                        ]
+                    );
+                    Assert.Equal(
+                        "syndicationlink_value",
+                        secondLink.AttributeExtensions[
+                            new XmlQualifiedName(
+                                "syndicationlink_name3",
+                                "syndicationlink_namespace"
+                            )
+                        ]
+                    );
+                    Assert.Equal(
+                        "",
+                        secondLink.AttributeExtensions[
+                            new XmlQualifiedName("syndicationlink_name4", "xmlns")
+                        ]
+                    );
+                    Assert.Equal(1, secondLink.ElementExtensions.Count());
+                    Assert.Equal(new Uri("http://syndicationlink_url.com/"), secondLink.BaseUri);
+                    Assert.Equal(10, secondLink.Length);
+                    Assert.Equal("syndicationlink_mediaType", secondLink.MediaType);
+                    Assert.Equal("syndicationlink_relationshipType", secondLink.RelationshipType);
+                    Assert.Equal("syndicationlink_title", secondLink.Title);
+                    Assert.Equal("http://syndicationlink_uri.com/", secondLink.Uri.OriginalString);
+
+                    SyndicationLink thirdLink = feed.Links[2];
+                    Assert.Empty(thirdLink.AttributeExtensions);
+                    Assert.Empty(thirdLink.ElementExtensions);
+                    Assert.Equal(100, thirdLink.Length);
+                    Assert.Equal("type_value", thirdLink.MediaType);
+                    Assert.Equal("rel_value", thirdLink.RelationshipType);
+                    Assert.Equal("title_value", thirdLink.Title);
+                    Assert.Equal("href_value", thirdLink.Uri.OriginalString);
+
+                    Assert.Empty(item.Title.AttributeExtensions);
+                    Assert.Equal("feedtitle_title", feed.Title.Text);
+                    Assert.Equal("text", feed.Title.Type);
                 }
-                else
-                {
-                    Assert.Empty(feed.AttributeExtensions);
-                }
-
-                Assert.Equal(2, feed.Authors.Count);
-
-                SyndicationPerson firstAuthor = feed.Authors[0];
-                Assert.Empty(firstAuthor.AttributeExtensions);
-                Assert.Empty(firstAuthor.ElementExtensions);
-                Assert.Null(firstAuthor.Email);
-                Assert.Null(firstAuthor.Name);
-                Assert.Null(firstAuthor.Uri);
-
-                SyndicationPerson secondAuthor = feed.Authors[1];
-                Assert.Equal(4, secondAuthor.AttributeExtensions.Count);
-                Assert.Equal(4, secondAuthor.AttributeExtensions.Count);
-                Assert.Equal("", secondAuthor.AttributeExtensions[new XmlQualifiedName("feedauthor_name1")]);
-                Assert.Equal("", secondAuthor.AttributeExtensions[new XmlQualifiedName("feedauthor_name2", "feedauthor_namespace")]);
-                Assert.Equal("feedauthor_value", secondAuthor.AttributeExtensions[new XmlQualifiedName("feedauthor_name3", "feedauthor_namespace")]);
-                Assert.Equal("", secondAuthor.AttributeExtensions[new XmlQualifiedName("feedauthor_name4", "xmlns")]);
-                Assert.Equal(1, secondAuthor.ElementExtensions.Count());
-                Assert.Equal("feedauthor_email", secondAuthor.Email);
-                Assert.Equal("feedauthor_name", secondAuthor.Name);
-                Assert.Equal("feedauthor_uri", secondAuthor.Uri);
-
-                Assert.Equal(new Uri("http://microsoft.com"), feed.BaseUri);
-
-                Assert.Equal(2, feed.Categories.Count);
-                SyndicationCategory firstCategory = feed.Categories[0];
-                Assert.Empty(firstCategory.AttributeExtensions);
-                Assert.Empty(firstCategory.ElementExtensions);
-                Assert.Null(firstCategory.Name);
-                Assert.Null(firstCategory.Scheme);
-                Assert.Null(firstCategory.Label);
-
-                SyndicationCategory secondCategory = feed.Categories[1];
-                if (preserveAttributeExtensions)
-                {
-                    Assert.Equal(4, secondCategory.AttributeExtensions.Count);
-                    Assert.Equal(4, secondCategory.AttributeExtensions.Count);
-                    Assert.Equal("", secondCategory.AttributeExtensions[new XmlQualifiedName("feedcategory_name1")]);
-                    Assert.Equal("", secondCategory.AttributeExtensions[new XmlQualifiedName("feedcategory_name2", "feedcategory_namespace")]);
-                    Assert.Equal("feedcategory_value", secondCategory.AttributeExtensions[new XmlQualifiedName("feedcategory_name3", "feedcategory_namespace")]);
-                    Assert.Equal("", secondCategory.AttributeExtensions[new XmlQualifiedName("feedcategory_name4", "xmlns")]);
-                }
-                else
-                {
-                    Assert.Empty(secondCategory.AttributeExtensions);
-                }
-                Assert.Empty(secondCategory.ElementExtensions);
-                Assert.Equal("feedcategory_name", secondCategory.Name);
-                Assert.Equal("feedcategory_scheme", secondCategory.Scheme);
-                Assert.Null(secondCategory.Label);
-
-                Assert.Equal(2, feed.Contributors.Count);
-                SyndicationPerson firstContributor = feed.Contributors[0];
-                Assert.Empty(firstContributor.AttributeExtensions);
-                Assert.Empty(firstContributor.ElementExtensions);
-                Assert.Null(firstContributor.Email);
-                Assert.Null(firstContributor.Name);
-                Assert.Null(firstContributor.Uri);
-
-                SyndicationPerson secondContributor = feed.Contributors[1];
-                Assert.Equal(4, secondContributor.AttributeExtensions.Count);
-                Assert.Equal(4, secondContributor.AttributeExtensions.Count);
-                Assert.Equal("", secondContributor.AttributeExtensions[new XmlQualifiedName("feedauthor__name1")]);
-                Assert.Equal("", secondContributor.AttributeExtensions[new XmlQualifiedName("feedauthor__name2", "feedauthor__namespace")]);
-                Assert.Equal("feedauthor__value", secondContributor.AttributeExtensions[new XmlQualifiedName("feedauthor__name3", "feedauthor__namespace")]);
-                Assert.Equal("", secondContributor.AttributeExtensions[new XmlQualifiedName("feedauthor__name4", "xmlns")]);
-                Assert.Equal(1, secondContributor.ElementExtensions.Count());
-                Assert.Equal("feedauthor__email", secondContributor.Email);
-                Assert.Equal("feedauthor__name", secondContributor.Name);
-                Assert.Equal("feedauthor__uri", secondContributor.Uri);
-
-                Assert.Empty(feed.Copyright.AttributeExtensions);
-                Assert.Equal("feedcopyright_title", feed.Copyright.Text);
-                Assert.Equal("text", feed.Copyright.Type);
-
-                Assert.Equal("generator", feed.Generator);
-
-                if (preserveElementExtensions)
-                {
-                    Assert.Equal(1, feed.ElementExtensions.Count());
-                }
-                else
-                {
-                    Assert.Empty(feed.ElementExtensions);
-                }
-
-                Assert.Equal("id", feed.Id);
-
-                Assert.Equal(new Uri("http://imageurl.com/"), feed.ImageUrl);
-
-                SyndicationItem[] items = feed.Items.ToArray();
-                Assert.Equal(2, items.Length);
-
-                SyndicationItem item = items[1];
-
-                if (preserveAttributeExtensions)
-                {
-                    Assert.Equal(4, item.AttributeExtensions.Count);
-                    Assert.Equal(4, item.AttributeExtensions.Count);
-                    Assert.Equal("", item.AttributeExtensions[new XmlQualifiedName("item_name1")]);
-                    Assert.Equal("", item.AttributeExtensions[new XmlQualifiedName("item_name2", "item_namespace")]);
-                    Assert.Equal("item_value", item.AttributeExtensions[new XmlQualifiedName("item_name3", "item_namespace")]);
-                    Assert.Equal("", item.AttributeExtensions[new XmlQualifiedName("item_name4", "xmlns")]);
-                }
-                else
-                {
-                    Assert.Empty(item.AttributeExtensions);
-                }
-                if (preserveElementExtensions)
-                {
-                    Assert.Equal(1, item.ElementExtensions.Count());
-                }
-                else
-                {
-                    Assert.Empty(item.ElementExtensions);
-                }
-
-                Assert.Equal(2, item.Authors.Count);
-
-                SyndicationPerson itemFirstAuthor = item.Authors[0];
-                Assert.Empty(itemFirstAuthor.AttributeExtensions);
-                Assert.Empty(itemFirstAuthor.ElementExtensions);
-                Assert.Null(itemFirstAuthor.Email);
-                Assert.Null(itemFirstAuthor.Name);
-                Assert.Null(itemFirstAuthor.Uri);
-
-                SyndicationPerson itemSecondAuthor = item.Authors[1];
-
-                Assert.Equal(4, itemSecondAuthor.AttributeExtensions.Count);
-                Assert.Equal(4, itemSecondAuthor.AttributeExtensions.Count);
-                Assert.Equal("", itemSecondAuthor.AttributeExtensions[new XmlQualifiedName("author_name1")]);
-                Assert.Equal("", itemSecondAuthor.AttributeExtensions[new XmlQualifiedName("author_name2", "author_namespace")]);
-                Assert.Equal("author_value", itemSecondAuthor.AttributeExtensions[new XmlQualifiedName("author_name3", "author_namespace")]);
-                Assert.Equal("", itemSecondAuthor.AttributeExtensions[new XmlQualifiedName("author_name4", "xmlns")]);
-                Assert.Equal(1, itemSecondAuthor.ElementExtensions.Count());
-                Assert.Equal("author_email", itemSecondAuthor.Email);
-                Assert.Equal("author_name", itemSecondAuthor.Name);
-                Assert.Equal("author_uri", itemSecondAuthor.Uri);
-
-                Assert.Equal(new Uri("http://microsoft/relative"), item.BaseUri);
-
-                Assert.Equal(4, item.Categories.Count);
-                SyndicationCategory itemFirstCategory = item.Categories[0];
-                Assert.Empty(itemFirstCategory.AttributeExtensions);
-                Assert.Empty(itemFirstCategory.ElementExtensions);
-                Assert.Null(itemFirstCategory.Name);
-                Assert.Null(itemFirstCategory.Scheme);
-                Assert.Null(itemFirstCategory.Label);
-
-                SyndicationCategory itemSecondCategory = item.Categories[1];
-
-                if (preserveAttributeExtensions)
-                {
-                    Assert.Equal(4, itemSecondCategory.AttributeExtensions.Count);
-                    Assert.Equal(4, itemSecondCategory.AttributeExtensions.Count);
-                    Assert.Equal("", itemSecondCategory.AttributeExtensions[new XmlQualifiedName("category_name1")]);
-                    Assert.Equal("", itemSecondCategory.AttributeExtensions[new XmlQualifiedName("category_name2", "category_namespace")]);
-                    Assert.Equal("category_value", itemSecondCategory.AttributeExtensions[new XmlQualifiedName("category_name3", "category_namespace")]);
-                    Assert.Equal("", itemSecondCategory.AttributeExtensions[new XmlQualifiedName("category_name4", "xmlns")]);
-                }
-                else
-                {
-                    Assert.Empty(itemSecondCategory.AttributeExtensions);
-                }
-                Assert.Empty(itemSecondCategory.ElementExtensions);
-                Assert.Equal("category_name", itemSecondCategory.Name);
-                Assert.Equal("category_scheme", itemSecondCategory.Scheme);
-                Assert.Null(itemSecondCategory.Label);
-
-                SyndicationCategory itemThirdCategory = item.Categories[2];
-                if (preserveAttributeExtensions)
-                {
-                    Assert.Equal(3, itemThirdCategory.AttributeExtensions.Count);
-                    Assert.Equal("term_value", itemThirdCategory.AttributeExtensions[new XmlQualifiedName("term")]);
-                    Assert.Equal("label_value", itemThirdCategory.AttributeExtensions[new XmlQualifiedName("label")]);
-                    Assert.Equal("scheme_value", itemThirdCategory.AttributeExtensions[new XmlQualifiedName("scheme")]);
-                }
-                else
-                {
-                    Assert.Empty(itemThirdCategory.AttributeExtensions);
-                }
-                Assert.Empty(itemThirdCategory.ElementExtensions);
-                Assert.Equal("name", itemThirdCategory.Name);
-                Assert.Equal("scheme", itemThirdCategory.Scheme);
-                Assert.Null(itemThirdCategory.Label);
-
-                SyndicationCategory itemFourthCategory = item.Categories[3];
-                if (preserveAttributeExtensions)
-                {
-                    Assert.Equal(3, itemFourthCategory.AttributeExtensions.Count);
-                    Assert.Equal("term_value", itemFourthCategory.AttributeExtensions[new XmlQualifiedName("term")]);
-                    Assert.Equal("label_value", itemFourthCategory.AttributeExtensions[new XmlQualifiedName("label")]);
-                    Assert.Equal("scheme_value", itemFourthCategory.AttributeExtensions[new XmlQualifiedName("scheme")]);
-                }
-                else
-                {
-                    Assert.Empty(itemFourthCategory.AttributeExtensions);
-                }
-                Assert.Empty(itemFourthCategory.ElementExtensions);
-                Assert.Equal("name", itemFourthCategory.Name);
-                Assert.Equal("scheme", itemFourthCategory.Scheme);
-                Assert.Null(itemFourthCategory.Label);
-
-                TextSyndicationContent content = Assert.IsType<TextSyndicationContent>(item.Content);
-
-                Assert.Equal(4, content.AttributeExtensions.Count);
-                Assert.Equal(4, content.AttributeExtensions.Count);
-                Assert.Equal("", content.AttributeExtensions[new XmlQualifiedName("content_name1")]);
-                Assert.Equal("", content.AttributeExtensions[new XmlQualifiedName("content_name2", "content_namespace")]);
-                Assert.Equal("content_value", content.AttributeExtensions[new XmlQualifiedName("content_name3", "content_namespace")]);
-                Assert.Equal("", content.AttributeExtensions[new XmlQualifiedName("content_name4", "xmlns")]);
-                Assert.Equal("content_title", content.Text);
-                Assert.Equal("html", content.Type);
-
-                Assert.Equal(2, item.Contributors.Count);
-
-                SyndicationPerson itemFirstContributor = item.Contributors[0];
-                Assert.Empty(itemFirstContributor.AttributeExtensions);
-                Assert.Empty(itemFirstContributor.ElementExtensions);
-                Assert.Null(itemFirstContributor.Email);
-                Assert.Null(itemFirstContributor.Name);
-                Assert.Null(itemFirstContributor.Uri);
-
-                SyndicationPerson itemSecondContributor = item.Contributors[1];
-                Assert.Equal(4, itemSecondContributor.AttributeExtensions.Count);
-                Assert.Equal("", itemSecondContributor.AttributeExtensions[new XmlQualifiedName("contributor_name1")]);
-                Assert.Equal("", itemSecondContributor.AttributeExtensions[new XmlQualifiedName("contributor_name2", "contributor_namespace")]);
-                Assert.Equal("contributor_value", itemSecondContributor.AttributeExtensions[new XmlQualifiedName("contributor_name3", "contributor_namespace")]);
-                Assert.Equal("", itemSecondContributor.AttributeExtensions[new XmlQualifiedName("contributor_name4", "xmlns")]);
-                Assert.Equal(1, itemSecondContributor.ElementExtensions.Count());
-                Assert.Equal("contributor_email", itemSecondContributor.Email);
-                Assert.Equal("contributor_name", itemSecondContributor.Name);
-                Assert.Equal("contributor_uri", itemSecondContributor.Uri);
-
-                Assert.Equal(4, item.Copyright.AttributeExtensions.Count);
-                Assert.Equal("", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name1")]);
-                Assert.Equal("", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name2", "copyright_namespace")]);
-                Assert.Equal("copyright_value", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name3", "copyright_namespace")]);
-                Assert.Equal("", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name4", "xmlns")]);
-                Assert.Equal("copyright_title", item.Copyright.Text);
-                Assert.Equal("html", item.Copyright.Type);
-
-                if (preserveElementExtensions)
-                {
-                    Assert.Equal(1, item.ElementExtensions.Count());
-                }
-                else
-                {
-                    Assert.Empty(item.ElementExtensions);
-                }
-
-                Assert.Equal("id", item.Id);
-
-                Assert.Equal(DateTimeOffset.MinValue, item.LastUpdatedTime);
-
-                Assert.Equal(3, item.Links.Count);
-
-                SyndicationLink itemFirstLink = item.Links[0];
-                Assert.Empty(itemFirstLink.AttributeExtensions);
-                Assert.Empty(itemFirstLink.ElementExtensions);
-                Assert.Equal(0, itemFirstLink.Length);
-                Assert.Null(itemFirstLink.MediaType);
-                Assert.Null(itemFirstLink.RelationshipType);
-                Assert.Null(itemFirstLink.Title);
-                Assert.Equal(string.Empty, itemFirstLink.Uri.OriginalString);
-
-                SyndicationLink itemSecondLink = item.Links[1];
-                Assert.Equal(4, itemSecondLink.AttributeExtensions.Count);
-                Assert.Equal("", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name1")]);
-                Assert.Equal("", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name2", "link_namespace")]);
-                Assert.Equal("link_value", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name3", "link_namespace")]);
-                Assert.Equal("", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name4", "xmlns")]);
-                Assert.Equal(1, itemSecondLink.ElementExtensions.Count());
-                Assert.Equal(new Uri("http://link_url.com"), itemSecondLink.BaseUri);
-                Assert.Equal(10, itemSecondLink.Length);
-                Assert.Equal("link_mediaType", itemSecondLink.MediaType);
-                Assert.Equal("link_relationshipType", itemSecondLink.RelationshipType);
-                Assert.Equal("link_title", itemSecondLink.Title);
-                Assert.Equal(new Uri("http://link_uri.com"), itemSecondLink.Uri);
-
-                SyndicationLink itemThirdLink = item.Links[2];
-                Assert.Empty(itemThirdLink.AttributeExtensions);
-                Assert.Empty(itemThirdLink.ElementExtensions);
-                Assert.Equal(100, itemThirdLink.Length);
-                Assert.Equal("type_value", itemThirdLink.MediaType);
-                Assert.Equal("rel_value", itemThirdLink.RelationshipType);
-                Assert.Equal("title_value", itemThirdLink.Title);
-                Assert.Equal("href_value", itemThirdLink.Uri.OriginalString);
-
-                Assert.Equal(DateTimeOffset.MinValue, item.PublishDate);
-
-                Assert.Null(item.SourceFeed);
-
-                Assert.Empty(item.Summary.AttributeExtensions);
-                Assert.Equal("summary_title", item.Summary.Text);
-                Assert.Equal("text", item.Summary.Type);
-
-                Assert.Empty(item.Title.AttributeExtensions);
-                Assert.Equal("title_title", item.Title.Text);
-                Assert.Equal("text", item.Title.Type);
-
-                Assert.Equal("language", feed.Language);
-
-                Assert.Equal(DateTimeOffset.MinValue.AddYears(1), feed.LastUpdatedTime);
-                Assert.Equal(3, feed.Links.Count);
-
-                SyndicationLink firstLink = feed.Links[0];
-                Assert.Empty(firstLink.AttributeExtensions);
-                Assert.Empty(firstLink.ElementExtensions);
-                Assert.Equal(0, firstLink.Length);
-                Assert.Null(firstLink.MediaType);
-                Assert.Null(firstLink.RelationshipType);
-                Assert.Null(firstLink.Title);
-                Assert.Equal("", firstLink.Uri.OriginalString);
-
-                SyndicationLink secondLink = feed.Links[1];
-                Assert.Equal(4, secondLink.AttributeExtensions.Count);
-                Assert.Equal("", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name1")]);
-                Assert.Equal("", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name2", "syndicationlink_namespace")]);
-                Assert.Equal("syndicationlink_value", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name3", "syndicationlink_namespace")]);
-                Assert.Equal("", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name4", "xmlns")]);
-                Assert.Equal(1, secondLink.ElementExtensions.Count());
-                Assert.Equal(new Uri("http://syndicationlink_url.com/"), secondLink.BaseUri);
-                Assert.Equal(10, secondLink.Length);
-                Assert.Equal("syndicationlink_mediaType", secondLink.MediaType);
-                Assert.Equal("syndicationlink_relationshipType", secondLink.RelationshipType);
-                Assert.Equal("syndicationlink_title", secondLink.Title);
-                Assert.Equal("http://syndicationlink_uri.com/", secondLink.Uri.OriginalString);
-
-                SyndicationLink thirdLink = feed.Links[2];
-                Assert.Empty(thirdLink.AttributeExtensions);
-                Assert.Empty(thirdLink.ElementExtensions);
-                Assert.Equal(100, thirdLink.Length);
-                Assert.Equal("type_value", thirdLink.MediaType);
-                Assert.Equal("rel_value", thirdLink.RelationshipType);
-                Assert.Equal("title_value", thirdLink.Title);
-                Assert.Equal("href_value", thirdLink.Uri.OriginalString);
-
-                Assert.Empty(item.Title.AttributeExtensions);
-                Assert.Equal("feedtitle_title", feed.Title.Text);
-                Assert.Equal("text", feed.Title.Type);
-            });
+            );
         }
 
         [Theory]
         [InlineData(true, true)]
         [InlineData(false, false)]
-        public void Read_TryParseTrue_ReturnsExpected(bool preserveAttributeExtensions, bool preserveElementExtensions)
+        public void Read_TryParseTrue_ReturnsExpected(
+            bool preserveAttributeExtensions,
+            bool preserveElementExtensions
+        )
         {
-            using (var stringReader = new StringReader(
-@"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">
+            using (
+                var stringReader = new StringReader(
+                    @"<rss xmlns:a10=""http://www.w3.org/2005/Atom"" version=""2.0"">
     <channel xml:base=""http://microsoft.com/"" feed_name1="""" d2p1:feed_name2="""" d2p1:feed_name3=""feed_value"" d2p2:feed_name4="""" xmlns:d2p2=""xmlns"" xmlns:d2p1=""feed_namespace"">
         <title>feedtitle_title</title>
         <description>feeddescription_title</description>
@@ -1185,13 +1595,15 @@ namespace System.ServiceModel.Syndication.Tests
             </Rss20FeedFormatterTests.ExtensionObject>
         </item>
     </channel>
-</rss>"))
+</rss>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new Rss20FeedFormatter<SyndicationFeedTryParseTrueSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
 
@@ -1311,7 +1723,9 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal("scheme", itemFourthCategory.Scheme);
                 Assert.Null(itemFourthCategory.Label);
 
-                TextSyndicationContent content = Assert.IsType<TextSyndicationContent>(item.Content);
+                TextSyndicationContent content = Assert.IsType<TextSyndicationContent>(
+                    item.Content
+                );
                 Assert.Empty(content.AttributeExtensions);
                 Assert.Equal("overridden", content.Text);
                 Assert.Equal("text", content.Type);
@@ -1333,10 +1747,28 @@ namespace System.ServiceModel.Syndication.Tests
                 Assert.Equal("contributor_uri", itemSecondContributor.Uri);
 
                 Assert.Equal(4, item.Copyright.AttributeExtensions.Count);
-                Assert.Equal("", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name1")]);
-                Assert.Equal("", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name2", "copyright_namespace")]);
-                Assert.Equal("copyright_value", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name3", "copyright_namespace")]);
-                Assert.Equal("", item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name4", "xmlns")]);
+                Assert.Equal(
+                    "",
+                    item.Copyright.AttributeExtensions[new XmlQualifiedName("copyright_name1")]
+                );
+                Assert.Equal(
+                    "",
+                    item.Copyright.AttributeExtensions[
+                        new XmlQualifiedName("copyright_name2", "copyright_namespace")
+                    ]
+                );
+                Assert.Equal(
+                    "copyright_value",
+                    item.Copyright.AttributeExtensions[
+                        new XmlQualifiedName("copyright_name3", "copyright_namespace")
+                    ]
+                );
+                Assert.Equal(
+                    "",
+                    item.Copyright.AttributeExtensions[
+                        new XmlQualifiedName("copyright_name4", "xmlns")
+                    ]
+                );
                 Assert.Equal("copyright_title", item.Copyright.Text);
                 Assert.Equal("html", item.Copyright.Type);
 
@@ -1359,10 +1791,26 @@ namespace System.ServiceModel.Syndication.Tests
 
                 SyndicationLink itemSecondLink = item.Links[1];
                 Assert.Equal(4, itemSecondLink.AttributeExtensions.Count);
-                Assert.Equal("", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name1")]);
-                Assert.Equal("", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name2", "link_namespace")]);
-                Assert.Equal("link_value", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name3", "link_namespace")]);
-                Assert.Equal("", itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name4", "xmlns")]);
+                Assert.Equal(
+                    "",
+                    itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name1")]
+                );
+                Assert.Equal(
+                    "",
+                    itemSecondLink.AttributeExtensions[
+                        new XmlQualifiedName("link_name2", "link_namespace")
+                    ]
+                );
+                Assert.Equal(
+                    "link_value",
+                    itemSecondLink.AttributeExtensions[
+                        new XmlQualifiedName("link_name3", "link_namespace")
+                    ]
+                );
+                Assert.Equal(
+                    "",
+                    itemSecondLink.AttributeExtensions[new XmlQualifiedName("link_name4", "xmlns")]
+                );
                 Assert.Empty(itemSecondLink.ElementExtensions);
                 Assert.Equal(new Uri("http://link_url.com"), itemSecondLink.BaseUri);
                 Assert.Equal(10, itemSecondLink.Length);
@@ -1408,10 +1856,28 @@ namespace System.ServiceModel.Syndication.Tests
 
                 SyndicationLink secondLink = feed.Links[1];
                 Assert.Equal(4, secondLink.AttributeExtensions.Count);
-                Assert.Equal("", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name1")]);
-                Assert.Equal("", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name2", "syndicationlink_namespace")]);
-                Assert.Equal("syndicationlink_value", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name3", "syndicationlink_namespace")]);
-                Assert.Equal("", secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name4", "xmlns")]);
+                Assert.Equal(
+                    "",
+                    secondLink.AttributeExtensions[new XmlQualifiedName("syndicationlink_name1")]
+                );
+                Assert.Equal(
+                    "",
+                    secondLink.AttributeExtensions[
+                        new XmlQualifiedName("syndicationlink_name2", "syndicationlink_namespace")
+                    ]
+                );
+                Assert.Equal(
+                    "syndicationlink_value",
+                    secondLink.AttributeExtensions[
+                        new XmlQualifiedName("syndicationlink_name3", "syndicationlink_namespace")
+                    ]
+                );
+                Assert.Equal(
+                    "",
+                    secondLink.AttributeExtensions[
+                        new XmlQualifiedName("syndicationlink_name4", "xmlns")
+                    ]
+                );
                 Assert.Empty(secondLink.ElementExtensions);
                 Assert.Equal(new Uri("http://syndicationlink_url.com/"), secondLink.BaseUri);
                 Assert.Equal(10, secondLink.Length);
@@ -1440,28 +1906,38 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(false)]
         public void Read_EmptyItem_ReturnsExpected(bool preserveElementExtensions)
         {
-            VerifyRead(@"<rss version=""2.0""><channel></channel></rss>", preserveElementExtensions, preserveElementExtensions, feed =>
-            {
-                Assert.Empty(feed.AttributeExtensions);
-                Assert.Empty(feed.Authors);
-                Assert.Null(feed.BaseUri);
-                Assert.Empty(feed.Categories);
-                Assert.Empty(feed.Contributors);
-                Assert.Null(feed.Copyright);
-                Assert.Null(feed.Description);
-                Assert.Empty(feed.ElementExtensions);
-                Assert.Null(feed.Generator);
-                Assert.Null(feed.Id);
-                Assert.Null(feed.ImageUrl);
-                Assert.Empty(feed.Items);
-                Assert.Null(feed.Language);
-                Assert.Equal(DateTimeOffset.MinValue, feed.LastUpdatedTime);
-                Assert.Empty(feed.Links);
-                Assert.Null(feed.Title);
-            });
+            VerifyRead(
+                @"<rss version=""2.0""><channel></channel></rss>",
+                preserveElementExtensions,
+                preserveElementExtensions,
+                feed =>
+                {
+                    Assert.Empty(feed.AttributeExtensions);
+                    Assert.Empty(feed.Authors);
+                    Assert.Null(feed.BaseUri);
+                    Assert.Empty(feed.Categories);
+                    Assert.Empty(feed.Contributors);
+                    Assert.Null(feed.Copyright);
+                    Assert.Null(feed.Description);
+                    Assert.Empty(feed.ElementExtensions);
+                    Assert.Null(feed.Generator);
+                    Assert.Null(feed.Id);
+                    Assert.Null(feed.ImageUrl);
+                    Assert.Empty(feed.Items);
+                    Assert.Null(feed.Language);
+                    Assert.Equal(DateTimeOffset.MinValue, feed.LastUpdatedTime);
+                    Assert.Empty(feed.Links);
+                    Assert.Null(feed.Title);
+                }
+            );
         }
 
-        private static void VerifyRead(string xmlString, bool preserveAttributeExtensions, bool preserveElementExtensions, Action<SyndicationFeed> verifyAction)
+        private static void VerifyRead(
+            string xmlString,
+            bool preserveAttributeExtensions,
+            bool preserveElementExtensions,
+            Action<SyndicationFeed> verifyAction
+        )
         {
             // ReadFrom.
             using (var stringReader = new StringReader(xmlString))
@@ -1470,7 +1946,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -1485,7 +1961,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -1498,7 +1974,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter(typeof(SyndicationFeedSubclass))
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -1513,7 +1989,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter(typeof(SyndicationFeedSubclass))
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -1526,7 +2002,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter<SyndicationFeed>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -1541,7 +2017,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter<SyndicationFeed>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -1554,7 +2030,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter<SyndicationFeedSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -1569,7 +2045,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20FeedFormatter<SyndicationFeedSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -1599,17 +2075,27 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new Rss20FeedFormatter();
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => formatter.ReadFrom(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => formatter.ReadFrom(null)
+            );
         }
 
         [Fact]
         public void ReadFrom_NullCreatedFeed_ThrowsArgumentNullException()
         {
-            using (var stringReader = new StringReader(@"<feed xmlns=""http://www.w3.org/2005/Atom""></feed>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<feed xmlns=""http://www.w3.org/2005/Atom""></feed>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new NullCreatedFeedFormatter();
-                AssertExtensions.Throws<ArgumentNullException>("feed", () => formatter.ReadFrom(reader));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "feed",
+                    () => formatter.ReadFrom(reader)
+                );
             }
         }
 
@@ -1685,21 +2171,32 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void ReadXml_NullCreatedFeed_ThrowsArgumentNullException()
         {
-            using (var stringReader = new StringReader(@"<entry xmlns=""http://www.w3.org/2005/Atom""></entry>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<entry xmlns=""http://www.w3.org/2005/Atom""></entry>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 reader.MoveToContent();
 
                 IXmlSerializable formatter = new NullCreatedFeedFormatter();
-                AssertExtensions.Throws<ArgumentNullException>("feed", () => formatter.ReadXml(reader));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "feed",
+                    () => formatter.ReadXml(reader)
+                );
             }
         }
 
         [Theory]
         [InlineData(@"<rss version=""2.0""></rss>")]
-        [InlineData(@"<app:feed xmlns:app=""http://www.w3.org/2005/Atom"" version=""2.0""></app:feed>")]
+        [InlineData(
+            @"<app:feed xmlns:app=""http://www.w3.org/2005/Atom"" version=""2.0""></app:feed>"
+        )]
         [InlineData(@"<rss xmlns=""different"" version=""2.0""></rss>")]
-        [InlineData(@"<different xmlns=""http://www.w3.org/2005/Atom"" version=""2.0""></different>")]
+        [InlineData(
+            @"<different xmlns=""http://www.w3.org/2005/Atom"" version=""2.0""></different>"
+        )]
         public void ReadXml_CantRead_ThrowsXmlException(string xmlString)
         {
             using (var stringReader = new StringReader(xmlString))
@@ -1729,7 +2226,11 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void ReadItem_ValidItem_ReturnsExpected()
         {
-            using (var stringReader = new StringReader(@"<entry><id xmlns=""http://www.w3.org/2005/Atom"">id</id></entry>"))
+            using (
+                var stringReader = new StringReader(
+                    @"<entry><id xmlns=""http://www.w3.org/2005/Atom"">id</id></entry>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 reader.MoveToContent();
@@ -1747,7 +2248,10 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadItem_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new Formatter();
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => formatter.ReadItemEntryPoint(null, new SyndicationFeed()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => formatter.ReadItemEntryPoint(null, new SyndicationFeed())
+            );
         }
 
         [Fact]
@@ -1757,20 +2261,26 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>("feed", () => formatter.ReadItemEntryPoint(reader, null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "feed",
+                    () => formatter.ReadItemEntryPoint(reader, null)
+                );
             }
         }
 
         [Fact]
         public void ReadItems_ValidItems_ReturnsExpected()
         {
-            using (var stringReader = new StringReader(
-@"<parent>
+            using (
+                var stringReader = new StringReader(
+                    @"<parent>
     <item><guid>id1</guid></item>
     <item><guid>id2</guid></item>
     <unknown></unknown>
     <item><guid>id3</guid></item>
-</parent>"))
+</parent>"
+                )
+            )
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 reader.MoveToContent();
@@ -1779,7 +2289,9 @@ namespace System.ServiceModel.Syndication.Tests
 
                 var formatter = new Formatter();
                 var feed = new SyndicationFeed();
-                SyndicationItem[] items = formatter.ReadItemsEntryPoint(reader, feed, out var areAllItemsRead).ToArray();
+                SyndicationItem[] items = formatter
+                    .ReadItemsEntryPoint(reader, feed, out var areAllItemsRead)
+                    .ToArray();
                 Assert.True(areAllItemsRead);
                 Assert.Empty(feed.Items);
 
@@ -1797,7 +2309,15 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadItems_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new Formatter();
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => formatter.ReadItemsEntryPoint(null, new SyndicationFeed(), out var areAllItemsReader));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () =>
+                    formatter.ReadItemsEntryPoint(
+                        null,
+                        new SyndicationFeed(),
+                        out var areAllItemsReader
+                    )
+            );
         }
 
         [Fact]
@@ -1807,16 +2327,24 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>("feed", () => formatter.ReadItemsEntryPoint(reader, null, out var areAllItemsReader));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "feed",
+                    () => formatter.ReadItemsEntryPoint(reader, null, out var areAllItemsReader)
+                );
             }
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void PreserveAttributeExtensions_Set_GetReturnsExpected(bool preserveAttributeExtensions)
+        public void PreserveAttributeExtensions_Set_GetReturnsExpected(
+            bool preserveAttributeExtensions
+        )
         {
-            var formatter = new Rss20FeedFormatter() { PreserveAttributeExtensions = preserveAttributeExtensions };
+            var formatter = new Rss20FeedFormatter()
+            {
+                PreserveAttributeExtensions = preserveAttributeExtensions,
+            };
             Assert.Equal(preserveAttributeExtensions, formatter.PreserveAttributeExtensions);
         }
 
@@ -1825,7 +2353,10 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData(false)]
         public void PreserveElementExtensions_Set_GetReturnsExpected(bool preserveElementExtensions)
         {
-            var formatter = new Rss20FeedFormatter { PreserveElementExtensions = preserveElementExtensions };
+            var formatter = new Rss20FeedFormatter
+            {
+                PreserveElementExtensions = preserveElementExtensions,
+            };
             Assert.Equal(preserveElementExtensions, formatter.PreserveElementExtensions);
         }
 
@@ -1833,7 +2364,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateFeedInstance_NonGeneric_Success()
         {
             var formatter = new Formatter();
-            SyndicationFeed feed = Assert.IsType<SyndicationFeed>(formatter.CreateFeedInstanceEntryPoint());
+            SyndicationFeed feed = Assert.IsType<SyndicationFeed>(
+                formatter.CreateFeedInstanceEntryPoint()
+            );
             Assert.Empty(feed.AttributeExtensions);
             Assert.Empty(feed.Authors);
             Assert.Null(feed.BaseUri);
@@ -1852,7 +2385,9 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Null(feed.Title);
 
             var typedFormatter = new Formatter(typeof(SyndicationFeedSubclass));
-            feed = Assert.IsType<SyndicationFeedSubclass>(typedFormatter.CreateFeedInstanceEntryPoint());
+            feed = Assert.IsType<SyndicationFeedSubclass>(
+                typedFormatter.CreateFeedInstanceEntryPoint()
+            );
             Assert.Empty(feed.AttributeExtensions);
             Assert.Empty(feed.Authors);
             Assert.Null(feed.BaseUri);
@@ -1875,7 +2410,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateItemInstance_Generic_Success()
         {
             var formatter = new GenericFormatter<SyndicationFeed>();
-            SyndicationFeed feed = Assert.IsType<SyndicationFeed>(formatter.CreateFeedInstanceEntryPoint());
+            SyndicationFeed feed = Assert.IsType<SyndicationFeed>(
+                formatter.CreateFeedInstanceEntryPoint()
+            );
             Assert.Empty(feed.AttributeExtensions);
             Assert.Empty(feed.Authors);
             Assert.Null(feed.BaseUri);
@@ -1894,7 +2431,9 @@ namespace System.ServiceModel.Syndication.Tests
             Assert.Null(feed.Title);
 
             var typedFormatter = new GenericFormatter<SyndicationFeedSubclass>();
-            feed = Assert.IsType<SyndicationFeedSubclass>(typedFormatter.CreateFeedInstanceEntryPoint());
+            feed = Assert.IsType<SyndicationFeedSubclass>(
+                typedFormatter.CreateFeedInstanceEntryPoint()
+            );
             Assert.Empty(feed.AttributeExtensions);
             Assert.Empty(feed.Authors);
             Assert.Null(feed.BaseUri);
@@ -1917,7 +2456,12 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class SyndicationFeedTryParseTrueSubclass : SyndicationFeed
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -1925,20 +2469,34 @@ namespace System.ServiceModel.Syndication.Tests
                 return true;
             }
 
-            protected override SyndicationCategory CreateCategory() => new SyndicationCategoryTryParseTrueSubclass();
+            protected override SyndicationCategory CreateCategory() =>
+                new SyndicationCategoryTryParseTrueSubclass();
 
-            protected override SyndicationItem CreateItem() => new SyndicationItemTryParseTrueSubclass();
+            protected override SyndicationItem CreateItem() =>
+                new SyndicationItemTryParseTrueSubclass();
 
-            protected override SyndicationLink CreateLink() => new SyndicationLinkTryParseTrueSubclass();
+            protected override SyndicationLink CreateLink() =>
+                new SyndicationLinkTryParseTrueSubclass();
 
-            protected override SyndicationPerson CreatePerson() => new SyndicationPersonTryParseTrueSubclass();
+            protected override SyndicationPerson CreatePerson() =>
+                new SyndicationPersonTryParseTrueSubclass();
         }
 
         public class SyndicationItemTryParseTrueSubclass : SyndicationItem
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
-            protected override bool TryParseContent(XmlReader reader, string contentType, string version, out SyndicationContent content)
+            protected override bool TryParseContent(
+                XmlReader reader,
+                string contentType,
+                string version,
+                out SyndicationContent content
+            )
             {
                 reader.Skip();
 
@@ -1952,16 +2510,24 @@ namespace System.ServiceModel.Syndication.Tests
                 return true;
             }
 
-            protected override SyndicationCategory CreateCategory() => new SyndicationCategoryTryParseTrueSubclass();
+            protected override SyndicationCategory CreateCategory() =>
+                new SyndicationCategoryTryParseTrueSubclass();
 
-            protected override SyndicationPerson CreatePerson() => new SyndicationPersonTryParseTrueSubclass();
+            protected override SyndicationPerson CreatePerson() =>
+                new SyndicationPersonTryParseTrueSubclass();
 
-            protected override SyndicationLink CreateLink() => new SyndicationLinkTryParseTrueSubclass();
+            protected override SyndicationLink CreateLink() =>
+                new SyndicationLinkTryParseTrueSubclass();
         }
 
         public class SyndicationCategoryTryParseTrueSubclass : SyndicationCategory
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -1972,7 +2538,12 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class SyndicationPersonTryParseTrueSubclass : SyndicationPerson
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -1983,7 +2554,12 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class SyndicationLinkTryParseTrueSubclass : SyndicationLink
         {
-            protected override bool TryParseAttribute(string name, string ns, string value, string version) => true;
+            protected override bool TryParseAttribute(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => true;
 
             protected override bool TryParseElement(XmlReader reader, string version)
             {
@@ -1999,37 +2575,58 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : Rss20FeedFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(SyndicationFeed feedToWrite) : base(feedToWrite) { }
+            public Formatter(SyndicationFeed feedToWrite)
+                : base(feedToWrite) { }
 
-            public Formatter(SyndicationFeed feedToWrite, bool serializeExtensionsAsAtom) : base(feedToWrite, serializeExtensionsAsAtom) { }
+            public Formatter(SyndicationFeed feedToWrite, bool serializeExtensionsAsAtom)
+                : base(feedToWrite, serializeExtensionsAsAtom) { }
 
-            public Formatter(Type feedTypeToCreate) : base(feedTypeToCreate) { }
+            public Formatter(Type feedTypeToCreate)
+                : base(feedTypeToCreate) { }
 
             public Type FeedTypeEntryPoint => FeedType;
 
             public SyndicationFeed CreateFeedInstanceEntryPoint() => CreateFeedInstance();
 
-            public void WriteItemEntryPoint(XmlWriter writer, SyndicationItem item, Uri feedBaseUri) => WriteItem(writer, item, feedBaseUri);
+            public void WriteItemEntryPoint(
+                XmlWriter writer,
+                SyndicationItem item,
+                Uri feedBaseUri
+            ) => WriteItem(writer, item, feedBaseUri);
 
-            public void WriteItemsEntryPoint(XmlWriter writer, IEnumerable<SyndicationItem> items, Uri feedBaseUri) => WriteItems(writer, items, feedBaseUri);
+            public void WriteItemsEntryPoint(
+                XmlWriter writer,
+                IEnumerable<SyndicationItem> items,
+                Uri feedBaseUri
+            ) => WriteItems(writer, items, feedBaseUri);
 
-            public SyndicationItem ReadItemEntryPoint(XmlReader reader, SyndicationFeed feed) => ReadItem(reader, feed);
+            public SyndicationItem ReadItemEntryPoint(XmlReader reader, SyndicationFeed feed) =>
+                ReadItem(reader, feed);
 
-            public IEnumerable<SyndicationItem> ReadItemsEntryPoint(XmlReader reader, SyndicationFeed feed, out bool areAllItemsRead)
+            public IEnumerable<SyndicationItem> ReadItemsEntryPoint(
+                XmlReader reader,
+                SyndicationFeed feed,
+                out bool areAllItemsRead
+            )
             {
                 return ReadItems(reader, feed, out areAllItemsRead);
             }
         }
 
-        public class GenericFormatter<T> : Rss20FeedFormatter<T> where T : SyndicationFeed, new()
+        public class GenericFormatter<T> : Rss20FeedFormatter<T>
+            where T : SyndicationFeed, new()
         {
-            public GenericFormatter() : base() { }
+            public GenericFormatter()
+                : base() { }
 
-            public GenericFormatter(T feedToWrite) : base(feedToWrite) { }
+            public GenericFormatter(T feedToWrite)
+                : base(feedToWrite) { }
 
-            public GenericFormatter(T feedToWrite, bool serializeExtensionsAsAtom) : base(feedToWrite, serializeExtensionsAsAtom) { }
+            public GenericFormatter(T feedToWrite, bool serializeExtensionsAsAtom)
+                : base(feedToWrite, serializeExtensionsAsAtom) { }
 
             public Type FeedTypeEntryPoint => FeedType;
 

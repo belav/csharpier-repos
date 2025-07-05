@@ -22,10 +22,10 @@ using SysAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext
 namespace System.ServiceModel.Security
 {
     /// <summary>
-    /// Custom ServiceAuthorizationManager implementation. This class substitues the WCF 
-    /// generated IAuthorizationPolicies with 
+    /// Custom ServiceAuthorizationManager implementation. This class substitues the WCF
+    /// generated IAuthorizationPolicies with
     /// <see cref="System.IdentityModel.Tokens.AuthorizationPolicy"/>. These
-    /// policies do not participate in the EvaluationContext and hence will render an 
+    /// policies do not participate in the EvaluationContext and hence will render an
     /// empty WCF AuthorizationConext. Once this AuthorizationManager is substitued to
     /// a ServiceHost, only <see cref="System.Security.Claims.ClaimsPrincipal"/>
     /// will be available for Authorization decisions.
@@ -35,9 +35,10 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Authorization policy for anonymous authentication.
         /// </summary>
-        protected static readonly ReadOnlyCollection<IAuthorizationPolicy> AnonymousAuthorizationPolicy
-            = new ReadOnlyCollection<IAuthorizationPolicy>(
-                new List<IAuthorizationPolicy>() { new AuthorizationPolicy(new ClaimsIdentity()) });
+        protected static readonly ReadOnlyCollection<IAuthorizationPolicy> AnonymousAuthorizationPolicy =
+            new ReadOnlyCollection<IAuthorizationPolicy>(
+                new List<IAuthorizationPolicy>() { new AuthorizationPolicy(new ClaimsIdentity()) }
+            );
 
         /// <summary>
         /// Override of the base class method. Substitues WCF IAuthorizationPolicy with
@@ -45,7 +46,9 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="operationContext">Current OperationContext that contains all the IAuthorizationPolicies.</param>
         /// <returns>Read-Only collection of <see cref="IAuthorizationPolicy"/> </returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies(OperationContext operationContext)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> GetAuthorizationPolicies(
+            OperationContext operationContext
+        )
         {
             //
             // Make sure we always return at least one claims identity, if there are no auth policies
@@ -56,7 +59,8 @@ namespace System.ServiceModel.Security
             // turn the PrincipalPermissionMode knob to Custom.
             //
 
-            ReadOnlyCollection<IAuthorizationPolicy> baseAuthorizationPolicies = base.GetAuthorizationPolicies(operationContext);
+            ReadOnlyCollection<IAuthorizationPolicy> baseAuthorizationPolicies =
+                base.GetAuthorizationPolicies(operationContext);
             if (baseAuthorizationPolicies == null)
             {
                 return AnonymousAuthorizationPolicy;
@@ -64,9 +68,11 @@ namespace System.ServiceModel.Security
             else
             {
                 ServiceCredentials sc = GetServiceCredentials();
-                AuthorizationPolicy transformedPolicy = TransformAuthorizationPolicies(baseAuthorizationPolicies,
-                                                                                        sc.IdentityConfiguration.SecurityTokenHandlers,
-                                                                                        true);
+                AuthorizationPolicy transformedPolicy = TransformAuthorizationPolicies(
+                    baseAuthorizationPolicies,
+                    sc.IdentityConfiguration.SecurityTokenHandlers,
+                    true
+                );
                 if (transformedPolicy == null || transformedPolicy.IdentityCollection.Count == 0)
                 {
                     return AnonymousAuthorizationPolicy;
@@ -78,10 +84,12 @@ namespace System.ServiceModel.Security
         internal static AuthorizationPolicy TransformAuthorizationPolicies(
             ReadOnlyCollection<IAuthorizationPolicy> baseAuthorizationPolicies,
             SecurityTokenHandlerCollection securityTokenHandlerCollection,
-            bool includeTransportTokens)
+            bool includeTransportTokens
+        )
         {
             List<ClaimsIdentity> identities = new List<ClaimsIdentity>();
-            List<IAuthorizationPolicy> uncheckedAuthorizationPolicies = new List<IAuthorizationPolicy>();
+            List<IAuthorizationPolicy> uncheckedAuthorizationPolicies =
+                new List<IAuthorizationPolicy>();
 
             //
             // STEP 1: Filter out the IAuthorizationPolicy that WCF generated. These
@@ -91,13 +99,15 @@ namespace System.ServiceModel.Security
             //
             foreach (IAuthorizationPolicy authPolicy in baseAuthorizationPolicies)
             {
-                if ((authPolicy is SctAuthorizationPolicy) ||
-                    (authPolicy is EndpointAuthorizationPolicy))
+                if (
+                    (authPolicy is SctAuthorizationPolicy)
+                    || (authPolicy is EndpointAuthorizationPolicy)
+                )
                 {
                     //
                     // We ignore the SctAuthorizationPolicy if any found as they were created
                     // as wrapper policies to hold the primary identity claim during a token renewal path.
-                    // WCF would otherwise fault thinking the token issuance and renewal identities are 
+                    // WCF would otherwise fault thinking the token issuance and renewal identities are
                     // different. This policy should be treated as a dummy policy and thereby should not be transformed.
                     //
                     // We ignore EndpointAuthorizationPolicy as well. This policy is used only to carry
@@ -110,7 +120,7 @@ namespace System.ServiceModel.Security
 
                 if (idfxAuthPolicy != null)
                 {
-                    // Identities obtained from the Tokens in the message layer would 
+                    // Identities obtained from the Tokens in the message layer would
                     identities.AddRange(idfxAuthPolicy.IdentityCollection);
                 }
                 else
@@ -122,16 +132,30 @@ namespace System.ServiceModel.Security
             //
             // STEP 2: Generate IDFx claims from the transport token
             //
-            if (includeTransportTokens && (OperationContext.Current != null) &&
-                (OperationContext.Current.IncomingMessageProperties != null) &&
-                (OperationContext.Current.IncomingMessageProperties.Security != null) &&
-                (OperationContext.Current.IncomingMessageProperties.Security.TransportToken != null))
+            if (
+                includeTransportTokens
+                && (OperationContext.Current != null)
+                && (OperationContext.Current.IncomingMessageProperties != null)
+                && (OperationContext.Current.IncomingMessageProperties.Security != null)
+                && (
+                    OperationContext.Current.IncomingMessageProperties.Security.TransportToken
+                    != null
+                )
+            )
             {
-                SecurityToken transportToken =
-                    OperationContext.Current.IncomingMessageProperties.Security.TransportToken.SecurityToken;
+                SecurityToken transportToken = OperationContext
+                    .Current
+                    .IncomingMessageProperties
+                    .Security
+                    .TransportToken
+                    .SecurityToken;
 
-                ReadOnlyCollection<IAuthorizationPolicy> policyCollection =
-                    OperationContext.Current.IncomingMessageProperties.Security.TransportToken.SecurityTokenPolicies;
+                ReadOnlyCollection<IAuthorizationPolicy> policyCollection = OperationContext
+                    .Current
+                    .IncomingMessageProperties
+                    .Security
+                    .TransportToken
+                    .SecurityTokenPolicies;
                 bool isWcfAuthPolicy = true;
 
                 foreach (IAuthorizationPolicy policy in policyCollection)
@@ -151,30 +175,40 @@ namespace System.ServiceModel.Security
 
                 if (isWcfAuthPolicy)
                 {
-                    ReadOnlyCollection<ClaimsIdentity> tranportTokenIdentities = GetTransportTokenIdentities(transportToken);
+                    ReadOnlyCollection<ClaimsIdentity> tranportTokenIdentities =
+                        GetTransportTokenIdentities(transportToken);
                     identities.AddRange(tranportTokenIdentities);
 
                     //
                     // NOTE: In the below code, we are trying to identify the IAuthorizationPolicy that WCF
-                    // created for the Transport token and eliminate it. This assumes that any client Security  
-                    // Token that came in the Security header would have been validated by the SecurityTokenHandler 
-                    // and hence would have created a IDFx AuthorizationPolicy. 
-                    // For example, if X.509 Certificate was used to authenticate the client at the transport layer 
+                    // created for the Transport token and eliminate it. This assumes that any client Security
+                    // Token that came in the Security header would have been validated by the SecurityTokenHandler
+                    // and hence would have created a IDFx AuthorizationPolicy.
+                    // For example, if X.509 Certificate was used to authenticate the client at the transport layer
                     // and then again at the Message security layer we depend on our TokenHandlers to have been in
                     // place to validate the X.509 Certificate at the message layer. This would clearly distinguish
-                    // which policy was created for the Transport token by WCF. 
+                    // which policy was created for the Transport token by WCF.
                     //
-                    EliminateTransportTokenPolicy(transportToken, tranportTokenIdentities, uncheckedAuthorizationPolicies);
+                    EliminateTransportTokenPolicy(
+                        transportToken,
+                        tranportTokenIdentities,
+                        uncheckedAuthorizationPolicies
+                    );
                 }
             }
 
             //
-            // STEP 3: Process any uncheckedAuthorizationPolicies here. Convert these to IDFx 
+            // STEP 3: Process any uncheckedAuthorizationPolicies here. Convert these to IDFx
             //         Claims.
             //
             if (uncheckedAuthorizationPolicies.Count > 0)
             {
-                identities.AddRange(ConvertToIDFxIdentities(uncheckedAuthorizationPolicies, securityTokenHandlerCollection));
+                identities.AddRange(
+                    ConvertToIDFxIdentities(
+                        uncheckedAuthorizationPolicies,
+                        securityTokenHandlerCollection
+                    )
+                );
             }
 
             //
@@ -201,7 +235,9 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="transportToken">Client SecurityToken provided at the Transport layer.</param>
         /// <returns>ClaimsIdentityCollection built from the Transport SecurityToken</returns>
-        static ReadOnlyCollection<ClaimsIdentity> GetTransportTokenIdentities(SecurityToken transportToken)
+        static ReadOnlyCollection<ClaimsIdentity> GetTransportTokenIdentities(
+            SecurityToken transportToken
+        )
         {
             if (transportToken == null)
             {
@@ -213,7 +249,7 @@ namespace System.ServiceModel.Security
             List<ClaimsIdentity> transportTokenIdentityCollection = new List<ClaimsIdentity>();
 
             //////////////////////////////////////////////////////////////////////////////////////////
-            // 
+            //
             // There are 5 well-known Client Authentication types at the transport layer. Each of these will
             // result either in a WindowsSecurityToken, X509SecurityToken or UserNameSecurityToken.
             // All other type of credentials (like OAuth token) result other token that will be passed trough regular validation process.
@@ -228,14 +264,19 @@ namespace System.ServiceModel.Security
             //          Certificate           ->        X509SecurityToken
             //
             //////////////////////////////////////////////////////////////////////////////////////////
-            
+
             WindowsSecurityToken windowsSecurityToken = transportToken as WindowsSecurityToken;
-            if ( windowsSecurityToken != null )
+            if (windowsSecurityToken != null)
             {
-                WindowsIdentity claimsIdentity = new WindowsIdentity( windowsSecurityToken.WindowsIdentity.Token,
-                    AuthenticationTypes.Windows );
-                AddAuthenticationMethod( claimsIdentity, AuthenticationMethods.Windows );
-                AddAuthenticationInstantClaim(claimsIdentity, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated));
+                WindowsIdentity claimsIdentity = new WindowsIdentity(
+                    windowsSecurityToken.WindowsIdentity.Token,
+                    AuthenticationTypes.Windows
+                );
+                AddAuthenticationMethod(claimsIdentity, AuthenticationMethods.Windows);
+                AddAuthenticationInstantClaim(
+                    claimsIdentity,
+                    XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated)
+                );
 
                 // Just reflect on the wrapped WindowsIdentity and build the WindowsClaimsIdentity class.
                 transportTokenIdentityCollection.Add(claimsIdentity);
@@ -244,7 +285,11 @@ namespace System.ServiceModel.Security
             {
                 // WCF does not call our SecurityTokenHandlers for the Transport token. So run the token through
                 // the SecurityTokenHandler and generate claims for this token.
-                transportTokenIdentityCollection.AddRange(serviceCreds.IdentityConfiguration.SecurityTokenHandlers.ValidateToken( transportToken ));
+                transportTokenIdentityCollection.AddRange(
+                    serviceCreds.IdentityConfiguration.SecurityTokenHandlers.ValidateToken(
+                        transportToken
+                    )
+                );
             }
 
             return transportTokenIdentityCollection.AsReadOnly();
@@ -261,7 +306,8 @@ namespace System.ServiceModel.Security
         static void EliminateTransportTokenPolicy(
             SecurityToken transportToken,
             IEnumerable<ClaimsIdentity> tranportTokenIdentities,
-            List<IAuthorizationPolicy> baseAuthorizationPolicies)
+            List<IAuthorizationPolicy> baseAuthorizationPolicies
+        )
         {
             if (transportToken == null)
             {
@@ -270,12 +316,16 @@ namespace System.ServiceModel.Security
 
             if (tranportTokenIdentities == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tranportTokenIdentities");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tranportTokenIdentities"
+                );
             }
 
             if (baseAuthorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("baseAuthorizationPolicy");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "baseAuthorizationPolicy"
+                );
             }
 
             if (baseAuthorizationPolicies.Count == 0)
@@ -283,7 +333,10 @@ namespace System.ServiceModel.Security
                 // This should never happen in our current configuration. IDFx token handlers do not validate
                 // client tokens present at the transport level. So we should atleast have one IAuthorizationPolicy
                 // that WCF generated for the transport token.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("baseAuthorizationPolicy", SR.GetString(SR.ID0020));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "baseAuthorizationPolicy",
+                    SR.GetString(SR.ID0020)
+                );
             }
 
             //
@@ -293,12 +346,18 @@ namespace System.ServiceModel.Security
             // by WCF will have two Claimsets, a X509ClaimSet and a WindowsClaimSet. We need to prune out this case
             // and ignore both these Claimsets as we have made a call to the token handler to authenticate this
             // token above. If we create a AuthorizationContext using all the IAuthorizationPolicies then all
-            // the claimsets are merged and it becomes hard to identify this case. 
+            // the claimsets are merged and it becomes hard to identify this case.
             //
             IAuthorizationPolicy policyToEliminate = null;
             foreach (IAuthorizationPolicy authPolicy in baseAuthorizationPolicies)
             {
-                if (DoesPolicyMatchTransportToken(transportToken, tranportTokenIdentities, authPolicy))
+                if (
+                    DoesPolicyMatchTransportToken(
+                        transportToken,
+                        tranportTokenIdentities,
+                        authPolicy
+                    )
+                )
                 {
                     policyToEliminate = authPolicy;
                     break;
@@ -307,7 +366,9 @@ namespace System.ServiceModel.Security
 
             if (policyToEliminate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4271, transportToken));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4271, transportToken)
+                );
             }
 
             baseAuthorizationPolicies.Remove(policyToEliminate);
@@ -325,7 +386,7 @@ namespace System.ServiceModel.Security
             SecurityToken transportToken,
             IEnumerable<ClaimsIdentity> tranportTokenIdentities,
             IAuthorizationPolicy authPolicy
-            )
+        )
         {
             if (transportToken == null)
             {
@@ -334,7 +395,9 @@ namespace System.ServiceModel.Security
 
             if (tranportTokenIdentities == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tranportTokenIdentities");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tranportTokenIdentities"
+                );
             }
 
             if (authPolicy == null)
@@ -343,7 +406,7 @@ namespace System.ServiceModel.Security
             }
 
             //////////////////////////////////////////////////////////////////////////////////////////
-            // 
+            //
             // There are 5 Client Authentication types at the transport layer. Each of these will
             // result either in a WindowsSecurityToken, X509SecurityToken or UserNameSecurityToken.
             //
@@ -359,33 +422,47 @@ namespace System.ServiceModel.Security
             //////////////////////////////////////////////////////////////////////////////////////////
             X509SecurityToken x509SecurityToken = transportToken as X509SecurityToken;
 
-            SysAuthorizationContext defaultAuthContext = SysAuthorizationContext.CreateDefaultAuthorizationContext(new List<IAuthorizationPolicy>() { authPolicy });
+            SysAuthorizationContext defaultAuthContext =
+                SysAuthorizationContext.CreateDefaultAuthorizationContext(
+                    new List<IAuthorizationPolicy>() { authPolicy }
+                );
 
             foreach (System.IdentityModel.Claims.ClaimSet claimset in defaultAuthContext.ClaimSets)
             {
                 if (x509SecurityToken != null)
                 {
                     // Check if the claimset contains a claim that matches the X.509 certificate thumbprint.
-                    if (claimset.ContainsClaim(new System.IdentityModel.Claims.Claim(
-                            System.IdentityModel.Claims.ClaimTypes.Thumbprint,
-                            x509SecurityToken.Certificate.GetCertHash(),
-                            System.IdentityModel.Claims.Rights.PossessProperty)))
+                    if (
+                        claimset.ContainsClaim(
+                            new System.IdentityModel.Claims.Claim(
+                                System.IdentityModel.Claims.ClaimTypes.Thumbprint,
+                                x509SecurityToken.Certificate.GetCertHash(),
+                                System.IdentityModel.Claims.Rights.PossessProperty
+                            )
+                        )
+                    )
                     {
                         return true;
                     }
                 }
                 else
                 {
-                    // For WindowsSecurityToken and UserNameSecurityToken check that IClaimsdentity.Name 
+                    // For WindowsSecurityToken and UserNameSecurityToken check that IClaimsdentity.Name
                     // matches the Name Claim in the ClaimSet.
-                    // In most cases, we will have only one Identity in the ClaimsIdentityCollection 
-                    // generated from transport token. 
+                    // In most cases, we will have only one Identity in the ClaimsIdentityCollection
+                    // generated from transport token.
                     foreach (ClaimsIdentity transportTokenIdentity in tranportTokenIdentities)
                     {
-                        if (claimset.ContainsClaim(new System.IdentityModel.Claims.Claim(
-                                System.IdentityModel.Claims.ClaimTypes.Name,
-                                transportTokenIdentity.Name,
-                                System.IdentityModel.Claims.Rights.PossessProperty), new ClaimStringValueComparer()))
+                        if (
+                            claimset.ContainsClaim(
+                                new System.IdentityModel.Claims.Claim(
+                                    System.IdentityModel.Claims.ClaimTypes.Name,
+                                    transportTokenIdentity.Name,
+                                    System.IdentityModel.Claims.Rights.PossessProperty
+                                ),
+                                new ClaimStringValueComparer()
+                            )
+                        )
                         {
                             return true;
                         }
@@ -402,34 +479,52 @@ namespace System.ServiceModel.Security
         /// <param name="authorizationPolicies">Set of AuthorizationPolicies to convert to IDFx.</param>
         /// <param name="securityTokenHandlerCollection">The SecurityTokenHandlerCollection to use.</param>
         /// <returns>ClaimsIdentityCollection</returns>
-        static ReadOnlyCollection<ClaimsIdentity> ConvertToIDFxIdentities(IList<IAuthorizationPolicy> authorizationPolicies,
-                                                                 SecurityTokenHandlerCollection securityTokenHandlerCollection)
+        static ReadOnlyCollection<ClaimsIdentity> ConvertToIDFxIdentities(
+            IList<IAuthorizationPolicy> authorizationPolicies,
+            SecurityTokenHandlerCollection securityTokenHandlerCollection
+        )
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationPolicies");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationPolicies"
+                );
             }
 
             if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityTokenHandlerCollection");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandlerCollection"
+                );
             }
 
             List<ClaimsIdentity> identities = new List<ClaimsIdentity>();
 
             SecurityTokenSpecification kerberosTokenSpecification = null;
             SysAuthorizationContext kerberosAuthContext = null;
-            if ((OperationContext.Current != null) &&
-                 (OperationContext.Current.IncomingMessageProperties != null) &&
-                 (OperationContext.Current.IncomingMessageProperties.Security != null))
+            if (
+                (OperationContext.Current != null)
+                && (OperationContext.Current.IncomingMessageProperties != null)
+                && (OperationContext.Current.IncomingMessageProperties.Security != null)
+            )
             {
-                SecurityMessageProperty securityMessageProperty = OperationContext.Current.IncomingMessageProperties.Security;
-                foreach (SecurityTokenSpecification tokenSpecification in new SecurityTokenSpecificationEnumerable(securityMessageProperty))
+                SecurityMessageProperty securityMessageProperty = OperationContext
+                    .Current
+                    .IncomingMessageProperties
+                    .Security;
+                foreach (
+                    SecurityTokenSpecification tokenSpecification in new SecurityTokenSpecificationEnumerable(
+                        securityMessageProperty
+                    )
+                )
                 {
                     if (tokenSpecification.SecurityToken is KerberosReceiverSecurityToken)
                     {
                         kerberosTokenSpecification = tokenSpecification;
-                        kerberosAuthContext = SysAuthorizationContext.CreateDefaultAuthorizationContext(kerberosTokenSpecification.SecurityTokenPolicies);
+                        kerberosAuthContext =
+                            SysAuthorizationContext.CreateDefaultAuthorizationContext(
+                                kerberosTokenSpecification.SecurityTokenPolicies
+                            );
                         break;
                     }
                 }
@@ -449,12 +544,17 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        SysAuthorizationContext authContext = SysAuthorizationContext.CreateDefaultAuthorizationContext(new List<IAuthorizationPolicy>() { policy });                        
+                        SysAuthorizationContext authContext =
+                            SysAuthorizationContext.CreateDefaultAuthorizationContext(
+                                new List<IAuthorizationPolicy>() { policy }
+                            );
                         // Kerberos creates only one ClaimSet. So any more ClaimSet would mean that this is not a Policy created from Kerberos.
                         if (authContext.ClaimSets.Count == 1)
                         {
                             bool allClaimsMatched = true;
-                            foreach (System.IdentityModel.Claims.Claim c in authContext.ClaimSets[0])
+                            foreach (
+                                System.IdentityModel.Claims.Claim c in authContext.ClaimSets[0]
+                            )
                             {
                                 if (!kerberosAuthContext.ClaimSets[0].ContainsClaim(c))
                                 {
@@ -468,10 +568,14 @@ namespace System.ServiceModel.Security
 
                     if (hasKerberosTokenPolicyMatched)
                     {
-                        SecurityTokenHandler tokenHandler = securityTokenHandlerCollection[kerberosTokenSpecification.SecurityToken];
+                        SecurityTokenHandler tokenHandler = securityTokenHandlerCollection[
+                            kerberosTokenSpecification.SecurityToken
+                        ];
                         if ((tokenHandler != null) && tokenHandler.CanValidateToken)
                         {
-                            identities.AddRange(tokenHandler.ValidateToken(kerberosTokenSpecification.SecurityToken));
+                            identities.AddRange(
+                                tokenHandler.ValidateToken(kerberosTokenSpecification.SecurityToken)
+                            );
                             authPolicyHandled = true;
                         }
                     }
@@ -479,15 +583,21 @@ namespace System.ServiceModel.Security
 
                 if (!authPolicyHandled)
                 {
-
-                    SysAuthorizationContext defaultAuthContext = SysAuthorizationContext.CreateDefaultAuthorizationContext(new List<IAuthorizationPolicy>() { policy });
+                    SysAuthorizationContext defaultAuthContext =
+                        SysAuthorizationContext.CreateDefaultAuthorizationContext(
+                            new List<IAuthorizationPolicy>() { policy }
+                        );
                     //
                     // Merge all ClaimSets to IClaimsIdentity.
                     //
 
-                    identities.Add(ConvertToIDFxIdentity(defaultAuthContext.ClaimSets, securityTokenHandlerCollection.Configuration));
+                    identities.Add(
+                        ConvertToIDFxIdentity(
+                            defaultAuthContext.ClaimSets,
+                            securityTokenHandlerCollection.Configuration
+                        )
+                    );
                 }
-
             }
 
             return identities.AsReadOnly();
@@ -499,7 +609,10 @@ namespace System.ServiceModel.Security
         /// <param name="claimSets">Collection of <see cref="ClaimSet"/> to convert to IDFx.</param>
         /// <param name="securityTokenHandlerConfiguration">The SecurityTokenHandlerConfiguration to use.</param>
         /// <returns>ClaimsIdentity</returns>
-        static ClaimsIdentity ConvertToIDFxIdentity(IList<ClaimSet> claimSets, SecurityTokenHandlerConfiguration securityTokenHandlerConfiguration)
+        static ClaimsIdentity ConvertToIDFxIdentity(
+            IList<ClaimSet> claimSets,
+            SecurityTokenHandlerConfiguration securityTokenHandlerConfiguration
+        )
         {
             if (claimSets == null)
             {
@@ -512,7 +625,7 @@ namespace System.ServiceModel.Security
                 WindowsClaimSet windowsClaimSet = claimSet as WindowsClaimSet;
                 if (windowsClaimSet != null)
                 {
-                    // 
+                    //
                     // The ClaimSet in the authorizationContext is simply a reflection of the NT Token.
                     // The WindowsClaimsIdentity will generate that information properly. So ignore the ClaimSets.
                     //
@@ -520,19 +633,32 @@ namespace System.ServiceModel.Security
                     // WCF does not propogate the WindowsIdentity.AuthenticationType properly.
                     // To avoid WindowsClaimsIdentity.AuthenticationType from throwing, specify
                     // this authenticationType value. Since we only have to handle SPNEGO specify Negotiate.
-                    // 
-                    claimsIdentity = MergeClaims(claimsIdentity, new WindowsIdentity(windowsClaimSet.WindowsIdentity.Token,
-                                                                                             AuthenticationTypes.Negotiate));
+                    //
+                    claimsIdentity = MergeClaims(
+                        claimsIdentity,
+                        new WindowsIdentity(
+                            windowsClaimSet.WindowsIdentity.Token,
+                            AuthenticationTypes.Negotiate
+                        )
+                    );
 
                     AddAuthenticationMethod(claimsIdentity, AuthenticationMethods.Windows);
-                    AddAuthenticationInstantClaim(claimsIdentity, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated));
+                    AddAuthenticationInstantClaim(
+                        claimsIdentity,
+                        XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated)
+                    );
                 }
                 else
                 {
-                    claimsIdentity = MergeClaims(claimsIdentity, ClaimsConversionHelper.CreateClaimsIdentityFromClaimSet(claimSet));
-                    AddAuthenticationInstantClaim(claimsIdentity, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated));
+                    claimsIdentity = MergeClaims(
+                        claimsIdentity,
+                        ClaimsConversionHelper.CreateClaimsIdentityFromClaimSet(claimSet)
+                    );
+                    AddAuthenticationInstantClaim(
+                        claimsIdentity,
+                        XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated)
+                    );
                 }
-
             }
 
             return claimsIdentity;
@@ -546,63 +672,88 @@ namespace System.ServiceModel.Security
         {
             ServiceCredentials serviceCredentials = null;
 
-            if (OperationContext.Current != null &&
-                OperationContext.Current.Host != null &&
-                OperationContext.Current.Host.Description != null &&
-                OperationContext.Current.Host.Description.Behaviors != null)
+            if (
+                OperationContext.Current != null
+                && OperationContext.Current.Host != null
+                && OperationContext.Current.Host.Description != null
+                && OperationContext.Current.Host.Description.Behaviors != null
+            )
             {
-                serviceCredentials = OperationContext.Current.Host.Description.Behaviors.Find<ServiceCredentials>();
+                serviceCredentials =
+                    OperationContext.Current.Host.Description.Behaviors.Find<ServiceCredentials>();
             }
 
             return serviceCredentials;
         }
 
         // Adds an Authentication Method claims to the given ClaimsIdentity if one is not already present.
-        static void AddAuthenticationMethod(ClaimsIdentity claimsIdentity, string authenticationMethod)
+        static void AddAuthenticationMethod(
+            ClaimsIdentity claimsIdentity,
+            string authenticationMethod
+        )
         {
             System.Security.Claims.Claim authenticationMethodClaim =
-                        claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == System.Security.Claims.ClaimTypes.AuthenticationMethod);
+                claimsIdentity.Claims.FirstOrDefault(claim =>
+                    claim.Type == System.Security.Claims.ClaimTypes.AuthenticationMethod
+                );
 
             if (authenticationMethodClaim == null)
             {
                 // AuthenticationMethod claims does not exist. Add one.
                 claimsIdentity.AddClaim(
                     new System.Security.Claims.Claim(
-                        System.Security.Claims.ClaimTypes.AuthenticationMethod, authenticationMethod));
+                        System.Security.Claims.ClaimTypes.AuthenticationMethod,
+                        authenticationMethod
+                    )
+                );
             }
         }
 
         // Adds an Authentication Method claims to the given ClaimsIdentity if one is not already present.
-        static void AddAuthenticationInstantClaim(ClaimsIdentity claimsIdentity, string authenticationInstant)
+        static void AddAuthenticationInstantClaim(
+            ClaimsIdentity claimsIdentity,
+            string authenticationInstant
+        )
         {
-            // the issuer for this claim should always be the default issuer. 
+            // the issuer for this claim should always be the default issuer.
             string issuerName = ClaimsIdentity.DefaultIssuer;
             System.Security.Claims.Claim authenticationInstantClaim =
-                    claimsIdentity.Claims.FirstOrDefault(claim => claim.Type == System.Security.Claims.ClaimTypes.AuthenticationInstant);
+                claimsIdentity.Claims.FirstOrDefault(claim =>
+                    claim.Type == System.Security.Claims.ClaimTypes.AuthenticationInstant
+                );
 
             if (authenticationInstantClaim == null)
             {
                 // AuthenticationInstance claims does not exist. Add one.
                 claimsIdentity.AddClaim(
                     new System.Security.Claims.Claim(
-                        System.Security.Claims.ClaimTypes.AuthenticationInstant, authenticationInstant, ClaimValueTypes.DateTime,
-                        issuerName));
+                        System.Security.Claims.ClaimTypes.AuthenticationInstant,
+                        authenticationInstant,
+                        ClaimValueTypes.DateTime,
+                        issuerName
+                    )
+                );
             }
         }
 
-        // When a token creates more than one Identity we have to merge these identities. 
-        // The below method takes two Identities and will return a single identity. If one of the 
-        // Identities is a WindowsIdentity then all claims from the other identity are 
+        // When a token creates more than one Identity we have to merge these identities.
+        // The below method takes two Identities and will return a single identity. If one of the
+        // Identities is a WindowsIdentity then all claims from the other identity are
         // merged into the WindowsIdentity. If neither are WindowsIdentity then it
         // selects 'identity1' and merges all the claims from 'identity2' into 'identity1'.
         //
         // It is not clear how we can handler duplicate name claim types and delegates.
-        // So, we are just cloning the claims from one identity and adding it to another. 
-        internal static ClaimsIdentity MergeClaims(ClaimsIdentity identity1, ClaimsIdentity identity2)
+        // So, we are just cloning the claims from one identity and adding it to another.
+        internal static ClaimsIdentity MergeClaims(
+            ClaimsIdentity identity1,
+            ClaimsIdentity identity2
+        )
         {
             if ((identity1 == null) && (identity2 == null))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4268));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4268)
+                );
             }
 
             if (identity1 == null)
@@ -656,7 +807,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                HttpRequestMessageProperty request = operationContext.IncomingMessageProperties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
+                HttpRequestMessageProperty request =
+                    operationContext.IncomingMessageProperties[HttpRequestMessageProperty.Name]
+                    as HttpRequestMessageProperty;
                 if (request != null)
                 {
                     action = request.Method;
@@ -673,12 +826,21 @@ namespace System.ServiceModel.Security
 
             //
             // CheckAccess is called prior to impersonation in WCF, so we need to pull
-            // the ClaimsPrincipal from the OperationContext.ServiceSecurityContext.AuthorizationContext.Properties[ "Principal" ].            
+            // the ClaimsPrincipal from the OperationContext.ServiceSecurityContext.AuthorizationContext.Properties[ "Principal" ].
             //
-            ClaimsPrincipal claimsPrincipal = operationContext.ServiceSecurityContext.AuthorizationContext.Properties[AuthorizationPolicy.ClaimsPrincipalKey] as ClaimsPrincipal;
-            
-            claimsPrincipal = credentials.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(resource.AbsoluteUri, claimsPrincipal);
-            operationContext.ServiceSecurityContext.AuthorizationContext.Properties[AuthorizationPolicy.ClaimsPrincipalKey] = claimsPrincipal;
+            ClaimsPrincipal claimsPrincipal =
+                operationContext.ServiceSecurityContext.AuthorizationContext.Properties[
+                    AuthorizationPolicy.ClaimsPrincipalKey
+                ] as ClaimsPrincipal;
+
+            claimsPrincipal =
+                credentials.IdentityConfiguration.ClaimsAuthenticationManager.Authenticate(
+                    resource.AbsoluteUri,
+                    claimsPrincipal
+                );
+            operationContext.ServiceSecurityContext.AuthorizationContext.Properties[
+                AuthorizationPolicy.ClaimsPrincipalKey
+            ] = claimsPrincipal;
 
             if ((claimsPrincipal == null) || (claimsPrincipal.Identities == null))
             {
@@ -691,12 +853,20 @@ namespace System.ServiceModel.Security
                     TraceEventType.Information,
                     TraceCode.Security,
                     SR.GetString(SR.TraceAuthorize),
-                    new System.IdentityModel.Diagnostics.AuthorizeTraceRecord(claimsPrincipal, resource.AbsoluteUri, action));
+                    new System.IdentityModel.Diagnostics.AuthorizeTraceRecord(
+                        claimsPrincipal,
+                        resource.AbsoluteUri,
+                        action
+                    )
+                );
             }
 
-            bool authorized = credentials.IdentityConfiguration.ClaimsAuthorizationManager.CheckAccess(
-                new System.Security.Claims.AuthorizationContext(
-                    claimsPrincipal, resource.AbsoluteUri, action
+            bool authorized =
+                credentials.IdentityConfiguration.ClaimsAuthorizationManager.CheckAccess(
+                    new System.Security.Claims.AuthorizationContext(
+                        claimsPrincipal,
+                        resource.AbsoluteUri,
+                        action
                     )
                 );
 
@@ -706,13 +876,15 @@ namespace System.ServiceModel.Security
                 {
                     System.IdentityModel.Diagnostics.TraceUtility.TraceString(
                         TraceEventType.Information,
-                        SR.GetString(SR.TraceOnAuthorizeRequestSucceed));
+                        SR.GetString(SR.TraceOnAuthorizeRequestSucceed)
+                    );
                 }
                 else
                 {
                     System.IdentityModel.Diagnostics.TraceUtility.TraceString(
                         TraceEventType.Information,
-                        SR.GetString(SR.TraceOnAuthorizeRequestFailed));
+                        SR.GetString(SR.TraceOnAuthorizeRequestFailed)
+                    );
                 }
             }
 
@@ -724,7 +896,10 @@ namespace System.ServiceModel.Security
     {
         #region IEqualityComparer<System.IdentityModel.Claims.Claim> Members
 
-        public bool Equals(System.IdentityModel.Claims.Claim claim1, System.IdentityModel.Claims.Claim claim2)
+        public bool Equals(
+            System.IdentityModel.Claims.Claim claim1,
+            System.IdentityModel.Claims.Claim claim2
+        )
         {
             if (ReferenceEquals(claim1, claim2))
             {
@@ -751,7 +926,8 @@ namespace System.ServiceModel.Security
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("claim");
             }
 
-            return claim.ClaimType.GetHashCode() ^ claim.Right.GetHashCode()
+            return claim.ClaimType.GetHashCode()
+                ^ claim.Right.GetHashCode()
                 ^ ((claim.Resource == null) ? 0 : claim.Resource.GetHashCode());
         }
 
@@ -766,7 +942,9 @@ namespace System.ServiceModel.Security
         {
             if (securityMessageProperty == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityMessageProperty");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityMessageProperty"
+                );
             }
 
             _securityMessageProperty = securityMessageProperty;
@@ -786,7 +964,9 @@ namespace System.ServiceModel.Security
 
             if (_securityMessageProperty.HasIncomingSupportingTokens)
             {
-                foreach (SecurityTokenSpecification tokenSpecification in _securityMessageProperty.IncomingSupportingTokens)
+                foreach (
+                    SecurityTokenSpecification tokenSpecification in _securityMessageProperty.IncomingSupportingTokens
+                )
                 {
                     if (tokenSpecification != null)
                     {
@@ -798,9 +978,9 @@ namespace System.ServiceModel.Security
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
-
     }
-
 }

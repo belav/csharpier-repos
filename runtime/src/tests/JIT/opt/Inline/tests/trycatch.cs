@@ -20,11 +20,11 @@ namespace JitInliningTest
                 {
                     _prop = value;
                 }
-                catch
-                { }
+                catch { }
             }
         }
     }
+
     public class PropTest5
     {
         [Fact]

@@ -6,6 +6,4 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 /// <summary>
 /// A marker interface for parameter policies that can be shared.
 /// </summary>
-internal interface ICachableParameterPolicy
-{
-}
+internal interface ICachableParameterPolicy { }

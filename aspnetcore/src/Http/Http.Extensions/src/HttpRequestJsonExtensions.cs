@@ -19,10 +19,12 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 public static class HttpRequestJsonExtensions
 {
-    private const string RequiresUnreferencedCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed. " +
-        "Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
-    private const string RequiresDynamicCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed and need runtime code generation. " +
-        "Use the overload that takes a JsonTypeInfo or JsonSerializerContext for native AOT applications.";
+    private const string RequiresUnreferencedCodeMessage =
+        "JSON serialization and deserialization might require types that cannot be statically analyzed. "
+        + "Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
+    private const string RequiresDynamicCodeMessage =
+        "JSON serialization and deserialization might require types that cannot be statically analyzed and need runtime code generation. "
+        + "Use the overload that takes a JsonTypeInfo or JsonSerializerContext for native AOT applications.";
 
     /// <summary>
     /// Read JSON from the request and deserialize to the specified type.
@@ -34,12 +36,16 @@ public static class HttpRequestJsonExtensions
     /// <returns>The task object representing the asynchronous operation.</returns>
     public static ValueTask<TValue?> ReadFromJsonAsync<TValue>(
         this HttpRequest request,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
 
         var options = ResolveSerializerOptions(request.HttpContext);
-        return request.ReadFromJsonAsync(jsonTypeInfo: (JsonTypeInfo<TValue>)options.GetTypeInfo(typeof(TValue)), cancellationToken);
+        return request.ReadFromJsonAsync(
+            jsonTypeInfo: (JsonTypeInfo<TValue>)options.GetTypeInfo(typeof(TValue)),
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -56,7 +62,8 @@ public static class HttpRequestJsonExtensions
     public static async ValueTask<TValue?> ReadFromJsonAsync<TValue>(
         this HttpRequest request,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
 
@@ -72,7 +79,11 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync<TValue>(inputStream, options, cancellationToken);
+            return await JsonSerializer.DeserializeAsync<TValue>(
+                inputStream,
+                options,
+                cancellationToken
+            );
         }
         finally
         {
@@ -96,7 +107,8 @@ public static class HttpRequestJsonExtensions
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
         this HttpRequest request,
         JsonTypeInfo<TValue> jsonTypeInfo,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
 
@@ -110,7 +122,11 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync(inputStream, jsonTypeInfo, cancellationToken);
+            return await JsonSerializer.DeserializeAsync(
+                inputStream,
+                jsonTypeInfo,
+                cancellationToken
+            );
         }
         finally
         {
@@ -134,7 +150,8 @@ public static class HttpRequestJsonExtensions
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
         this HttpRequest request,
         JsonTypeInfo jsonTypeInfo,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
 
@@ -148,7 +165,11 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync(inputStream, jsonTypeInfo, cancellationToken);
+            return await JsonSerializer.DeserializeAsync(
+                inputStream,
+                jsonTypeInfo,
+                cancellationToken
+            );
         }
         finally
         {
@@ -170,12 +191,16 @@ public static class HttpRequestJsonExtensions
     public static ValueTask<object?> ReadFromJsonAsync(
         this HttpRequest request,
         Type type,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
 
         var options = ResolveSerializerOptions(request.HttpContext);
-        return request.ReadFromJsonAsync(jsonTypeInfo: options.GetTypeInfo(type), cancellationToken);
+        return request.ReadFromJsonAsync(
+            jsonTypeInfo: options.GetTypeInfo(type),
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -193,7 +218,8 @@ public static class HttpRequestJsonExtensions
         this HttpRequest request,
         Type type,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
         ArgumentNullException.ThrowIfNull(type);
@@ -210,7 +236,12 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync(inputStream, type, options, cancellationToken);
+            return await JsonSerializer.DeserializeAsync(
+                inputStream,
+                type,
+                options,
+                cancellationToken
+            );
         }
         finally
         {
@@ -236,7 +267,8 @@ public static class HttpRequestJsonExtensions
         this HttpRequest request,
         Type type,
         JsonSerializerContext context,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(request);
         ArgumentNullException.ThrowIfNull(type);
@@ -252,7 +284,12 @@ public static class HttpRequestJsonExtensions
 
         try
         {
-            return await JsonSerializer.DeserializeAsync(inputStream, type, context, cancellationToken);
+            return await JsonSerializer.DeserializeAsync(
+                inputStream,
+                type,
+                context,
+                cancellationToken
+            );
         }
         finally
         {
@@ -303,23 +340,35 @@ public static class HttpRequestJsonExtensions
     private static JsonSerializerOptions ResolveSerializerOptions(HttpContext httpContext)
     {
         // Attempt to resolve options from DI then fallback to default options
-        return httpContext.RequestServices?.GetService<IOptions<JsonOptions>>()?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
+        return httpContext
+                .RequestServices?.GetService<IOptions<JsonOptions>>()
+                ?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
     }
 
     [DoesNotReturn]
     private static void ThrowContentTypeError(HttpRequest request)
     {
-        throw new InvalidOperationException($"Unable to read the request as JSON because the request content type '{request.ContentType}' is not a known JSON content type.");
+        throw new InvalidOperationException(
+            $"Unable to read the request as JSON because the request content type '{request.ContentType}' is not a known JSON content type."
+        );
     }
 
-    private static (Stream inputStream, bool usesTranscodingStream) GetInputStream(HttpContext httpContext, Encoding? encoding)
+    private static (Stream inputStream, bool usesTranscodingStream) GetInputStream(
+        HttpContext httpContext,
+        Encoding? encoding
+    )
     {
         if (encoding == null || encoding.CodePage == Encoding.UTF8.CodePage)
         {
             return (httpContext.Request.Body, false);
         }
 
-        var inputStream = Encoding.CreateTranscodingStream(httpContext.Request.Body, encoding, Encoding.UTF8, leaveOpen: true);
+        var inputStream = Encoding.CreateTranscodingStream(
+            httpContext.Request.Body,
+            encoding,
+            Encoding.UTF8,
+            leaveOpen: true
+        );
         return (inputStream, true);
     }
 
@@ -339,7 +388,10 @@ public static class HttpRequestJsonExtensions
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException($"Unable to read the request as JSON because the request content type charset '{charset}' is not a known encoding.", ex);
+            throw new InvalidOperationException(
+                $"Unable to read the request as JSON because the request content type charset '{charset}' is not a known encoding.",
+                ex
+            );
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Moq.Internals
     // to make this type accessible. Therefore we need to declare it as public.
     [EditorBrowsable(EditorBrowsableState.Never)]
     public abstract class InterfaceProxy
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private static MethodInfo equalsMethod = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
@@ -50,9 +49,18 @@ namespace Moq.Internals
             static MethodInfo toStringMethod = typeof(object).GetMethod("ToString", BindingFlags.Public | BindingFlags.Instance);
     */
     {
-        static MethodInfo equalsMethod = typeof(object).GetMethod("Equals", BindingFlags.Public | BindingFlags.Instance);
-        static MethodInfo getHashCodeMethod = typeof(object).GetMethod("GetHashCode", BindingFlags.Public | BindingFlags.Instance);
-        static MethodInfo toStringMethod = typeof(object).GetMethod("ToString", BindingFlags.Public | BindingFlags.Instance);
+        static MethodInfo equalsMethod = typeof(object).GetMethod(
+            "Equals",
+            BindingFlags.Public | BindingFlags.Instance
+        );
+        static MethodInfo getHashCodeMethod = typeof(object).GetMethod(
+            "GetHashCode",
+            BindingFlags.Public | BindingFlags.Instance
+        );
+        static MethodInfo toStringMethod = typeof(object).GetMethod(
+            "ToString",
+            BindingFlags.Public | BindingFlags.Instance
+        );
 
         /// <summary/>
         [DebuggerHidden]
@@ -109,7 +117,6 @@ namespace Moq.Internals
         }
 
         sealed class Invocation : Moq.Invocation
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     private static object[] noArguments = new object[0];
@@ -134,14 +141,10 @@ namespace Moq.Internals
             static object[] noArguments = new object[0];
 
             public Invocation(Type proxyType, MethodInfo method, params object[] arguments)
-                : base(proxyType, method, arguments)
-            {
-            }
+                : base(proxyType, method, arguments) { }
 
             public Invocation(Type proxyType, MethodInfo method)
-                : base(proxyType, method, noArguments)
-            {
-            }
+                : base(proxyType, method, noArguments) { }
 
             protected internal override object CallBase()
             {

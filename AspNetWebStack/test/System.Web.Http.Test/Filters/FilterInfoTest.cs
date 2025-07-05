@@ -22,10 +22,13 @@ namespace System.Web.Http.Filters
         [Fact]
         public void Constructor_IfInstanceParameterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                new FilterInfo(instance: null, scope: FilterScope.Controller);
-            }, "instance");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new FilterInfo(instance: null, scope: FilterScope.Controller);
+                },
+                "instance"
+            );
         }
     }
 }

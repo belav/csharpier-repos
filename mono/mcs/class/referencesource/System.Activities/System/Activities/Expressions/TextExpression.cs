@@ -14,7 +14,7 @@ namespace System.Activities.Expressions
 
     public static class TextExpression
     {
-        private static readonly AttachableMemberIdentifier namespacesProperty = 
+        private static readonly AttachableMemberIdentifier namespacesProperty =
             new AttachableMemberIdentifier(typeof(TextExpression), "Namespaces");
 
         private static readonly AttachableMemberIdentifier namespacesForImplementationProperty =
@@ -27,38 +27,38 @@ namespace System.Activities.Expressions
             new AttachableMemberIdentifier(typeof(TextExpression), "ReferencesForImplementation");
 
         // This should be kept consistent with VisualBasicSettings.defaultImportReferences
-        private static readonly ReadOnlyCollection<string> defaultNamespaces = new ReadOnlyCollection<string>(new string[]
-        {
-            "System",
-            "System.Collections",
-            "System.Collections.Generic",
-            "System.Activities",
-            "System.Activities.Expressions",
-            "System.Activities.Statements"
-        });
+        private static readonly ReadOnlyCollection<string> defaultNamespaces =
+            new ReadOnlyCollection<string>(
+                new string[]
+                {
+                    "System",
+                    "System.Collections",
+                    "System.Collections.Generic",
+                    "System.Activities",
+                    "System.Activities.Expressions",
+                    "System.Activities.Statements",
+                }
+            );
 
-        private static readonly ReadOnlyCollection<AssemblyReference> defaultReferences = new ReadOnlyCollection<AssemblyReference>(new AssemblyReference[]
-        {
-            new AssemblyName("mscorlib"),
-            new AssemblyName("System"),
-            new AssemblyName("System.Activities"),
-            new AssemblyName("System.Core")
-        });
+        private static readonly ReadOnlyCollection<AssemblyReference> defaultReferences =
+            new ReadOnlyCollection<AssemblyReference>(
+                new AssemblyReference[]
+                {
+                    new AssemblyName("mscorlib"),
+                    new AssemblyName("System"),
+                    new AssemblyName("System.Activities"),
+                    new AssemblyName("System.Core"),
+                }
+            );
 
         public static IList<string> DefaultNamespaces
         {
-            get
-            {
-                return TextExpression.defaultNamespaces;
-            }
+            get { return TextExpression.defaultNamespaces; }
         }
 
         public static IList<AssemblyReference> DefaultReferences
         {
-            get
-            {
-                return TextExpression.defaultReferences;
-            }
+            get { return TextExpression.defaultReferences; }
         }
 
         public static IList<string> GetNamespacesInScope(Activity activity)
@@ -66,7 +66,9 @@ namespace System.Activities.Expressions
             bool isImplementation;
             Activity root = GetRoot(activity, out isImplementation);
 
-            IList<string> result = isImplementation ? GetNamespacesForImplementation(root) : GetNamespaces(root);
+            IList<string> result = isImplementation
+                ? GetNamespacesForImplementation(root)
+                : GetNamespaces(root);
             if (result.Count == 0 && !isImplementation && GetReferences(root).Count == 0)
             {
                 // If this is a public child, but there are no public setings, this activity was
@@ -117,7 +119,8 @@ namespace System.Activities.Expressions
         // not when it is being consumed (target is Activity)
         public static bool ShouldSerializeNamespacesForImplementation(object target)
         {
-            return !(target is Activity) && ShouldSerializeCollection<string>(target, namespacesForImplementationProperty);
+            return !(target is Activity)
+                && ShouldSerializeCollection<string>(target, namespacesForImplementationProperty);
         }
 
         public static IList<AssemblyReference> GetReferencesInScope(Activity activity)
@@ -125,7 +128,9 @@ namespace System.Activities.Expressions
             bool isImplementation;
             Activity root = GetRoot(activity, out isImplementation);
 
-            IList<AssemblyReference> result = isImplementation ? GetReferencesForImplementation(root) : GetReferences(root);
+            IList<AssemblyReference> result = isImplementation
+                ? GetReferencesForImplementation(root)
+                : GetReferences(root);
             if (result.Count == 0 && !isImplementation && GetNamespaces(root).Count == 0)
             {
                 // If this is a public child, but there are no public setings, this activity was
@@ -162,12 +167,18 @@ namespace System.Activities.Expressions
             return GetCollection<AssemblyReference>(target, referencesForImplementationProperty);
         }
 
-        public static void SetReferencesForImplementation(object target, IList<AssemblyReference> references)
+        public static void SetReferencesForImplementation(
+            object target,
+            IList<AssemblyReference> references
+        )
         {
             SetCollection(target, referencesForImplementationProperty, references);
         }
 
-        public static void SetReferencesForImplementation(object target, params AssemblyReference[] references)
+        public static void SetReferencesForImplementation(
+            object target,
+            params AssemblyReference[] references
+        )
         {
             SetCollection(target, referencesForImplementationProperty, references);
         }
@@ -176,7 +187,11 @@ namespace System.Activities.Expressions
         // not when it is being consumed (target is Activity)
         public static bool ShouldSerializeReferencesForImplementation(object target)
         {
-            return !(target is Activity) && ShouldSerializeCollection<AssemblyReference>(target, referencesForImplementationProperty);
+            return !(target is Activity)
+                && ShouldSerializeCollection<AssemblyReference>(
+                    target,
+                    referencesForImplementationProperty
+                );
         }
 
         internal static bool LanguagesAreEqual(string left, string right)
@@ -216,7 +231,11 @@ namespace System.Activities.Expressions
             return result;
         }
 
-        private static void SetCollection<T>(object target, AttachableMemberIdentifier property, IList<T> collection)
+        private static void SetCollection<T>(
+            object target,
+            AttachableMemberIdentifier property,
+            IList<T> collection
+        )
         {
             if (collection == null)
             {
@@ -235,7 +254,10 @@ namespace System.Activities.Expressions
 
         // We need this explicit check because otherwise, an empty collection might get serialized
         // just because the getter was accessed
-        private static bool ShouldSerializeCollection<T>(object target, AttachableMemberIdentifier property)
+        private static bool ShouldSerializeCollection<T>(
+            object target,
+            AttachableMemberIdentifier property
+        )
         {
             IList<T> result;
             if (AttachablePropertyServices.TryGetProperty(target, property, out result))

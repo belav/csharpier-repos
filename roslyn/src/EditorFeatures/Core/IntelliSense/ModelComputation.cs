@@ -16,7 +16,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
-    internal class ModelComputation<TModel> where TModel : class
+    internal class ModelComputation<TModel>
+        where TModel : class
     {
         #region Fields that can be accessed from either thread
 
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         public ModelComputation(
             IThreadingContext threadingContext,
             IController<TModel> controller,
-            TaskScheduler computationTaskScheduler)
+            TaskScheduler computationTaskScheduler
+        )
         {
             ThreadingContext = threadingContext;
             _controller = controller;
@@ -121,19 +123,27 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
         }
 
         public void ChainTaskAndNotifyControllerWhenFinished(
-                Func<TModel, TModel> transformModel,
-                bool updateController = true)
+            Func<TModel, TModel> transformModel,
+            bool updateController = true
+        )
         {
-            ChainTaskAndNotifyControllerWhenFinished((m, c) => Task.FromResult(transformModel(m)), updateController);
+            ChainTaskAndNotifyControllerWhenFinished(
+                (m, c) => Task.FromResult(transformModel(m)),
+                updateController
+            );
         }
 
         public void ChainTaskAndNotifyControllerWhenFinished(
             Func<TModel, CancellationToken, Task<TModel>> transformModelAsync,
-            bool updateController = true)
+            bool updateController = true
+        )
         {
             ThreadingContext.ThrowIfNotOnUIThread();
 
-            Contract.ThrowIfTrue(_stopCancellationToken.IsCancellationRequested, "should not chain tasks after we've been cancelled");
+            Contract.ThrowIfTrue(
+                _stopCancellationToken.IsCancellationRequested,
+                "should not chain tasks after we've been cancelled"
+            );
 
             // Mark that an async operation has begun.  This way tests know to wait until the
             // async operation is done before verifying results.  We will consider this
@@ -143,7 +153,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             // Create the task that will actually run the transformation step.
             var nextTask = _lastTask.SafeContinueWithFromAsync(
                 t => transformModelAsync(t.Result, _stopCancellationToken),
-                _stopCancellationToken, TaskContinuationOptions.OnlyOnRanToCompletion, _taskScheduler);
+                _stopCancellationToken,
+                TaskContinuationOptions.OnlyOnRanToCompletion,
+                _taskScheduler
+            );
 
             // The next task is now the last task in the chain.
             _lastTask = nextTask;
@@ -152,25 +165,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             // complete, then issue the next notification to the controller.  When we try to
             // issue the notification, see if we're still at the end of the chain.  If we're not,
             // then we don't need to notify as a later task will do so.
-            _notifyControllerTask = Task.Factory.ContinueWhenAll(
-                new[] { _notifyControllerTask, nextTask },
-                async tasks =>
-                {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(alwaysYield: true, _stopCancellationToken);
-
-                    if (tasks.All(t => t.Status == TaskStatus.RanToCompletion))
+            _notifyControllerTask = Task
+                .Factory.ContinueWhenAll(
+                    new[] { _notifyControllerTask, nextTask },
+                    async tasks =>
                     {
-                        _stopCancellationToken.ThrowIfCancellationRequested();
+                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                            alwaysYield: true,
+                            _stopCancellationToken
+                        );
 
-                        // Check if we're still the last task.  If so then we should update the
-                        // controller. Otherwise there's a pending task that should run.  We
-                        // don't need to update the controller (and the presenters) until our
-                        // chain is finished.
-                        updateController &= nextTask == _lastTask;
-                        OnModelUpdated(nextTask.Result, updateController);
-                    }
-                },
-                _stopCancellationToken, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).Unwrap();
+                        if (tasks.All(t => t.Status == TaskStatus.RanToCompletion))
+                        {
+                            _stopCancellationToken.ThrowIfCancellationRequested();
+
+                            // Check if we're still the last task.  If so then we should update the
+                            // controller. Otherwise there's a pending task that should run.  We
+                            // don't need to update the controller (and the presenters) until our
+                            // chain is finished.
+                            updateController &= nextTask == _lastTask;
+                            OnModelUpdated(nextTask.Result, updateController);
+                        }
+                    },
+                    _stopCancellationToken,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .Unwrap();
 
             // When we've notified the controller of our result, we consider the async operation
             // to be completed.

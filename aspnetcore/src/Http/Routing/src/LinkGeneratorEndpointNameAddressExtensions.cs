@@ -36,7 +36,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         object? values,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -49,7 +50,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
             ambientValues: null,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -68,7 +70,11 @@ public static class LinkGeneratorEndpointNameAddressExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByName(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -76,7 +82,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         RouteValueDictionary? values = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -89,7 +96,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
             ambientValues: null,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -112,12 +120,19 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         object? values,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(endpointName);
 
-        return generator.GetPathByAddress<string>(endpointName, new RouteValueDictionary(values), pathBase, fragment, options);
+        return generator.GetPathByAddress<string>(
+            endpointName,
+            new RouteValueDictionary(values),
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -133,19 +148,30 @@ public static class LinkGeneratorEndpointNameAddressExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByName(
         this LinkGenerator generator,
         string endpointName,
         RouteValueDictionary? values = default,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(endpointName);
 
-        return generator.GetPathByAddress<string>(endpointName, values ?? new(), pathBase, fragment, options);
+        return generator.GetPathByAddress<string>(
+            endpointName,
+            values ?? new(),
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -189,7 +215,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         HostString? host = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -204,7 +231,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
             host,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -238,7 +266,11 @@ public static class LinkGeneratorEndpointNameAddressExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByName(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -248,7 +280,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         HostString? host = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -263,7 +296,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
             host,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -301,7 +335,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         HostString host,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(endpointName);
@@ -316,7 +351,15 @@ public static class LinkGeneratorEndpointNameAddressExtensions
             throw new ArgumentException("A host must be provided.", nameof(host));
         }
 
-        return generator.GetUriByAddress<string>(endpointName, new RouteValueDictionary(values), scheme, host, pathBase, fragment, options);
+        return generator.GetUriByAddress<string>(
+            endpointName,
+            new RouteValueDictionary(values),
+            scheme,
+            host,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -345,7 +388,11 @@ public static class LinkGeneratorEndpointNameAddressExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByName(
         this LinkGenerator generator,
         string endpointName,
@@ -354,7 +401,8 @@ public static class LinkGeneratorEndpointNameAddressExtensions
         HostString host,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(endpointName);
@@ -369,6 +417,14 @@ public static class LinkGeneratorEndpointNameAddressExtensions
             throw new ArgumentException("A host must be provided.", nameof(host));
         }
 
-        return generator.GetUriByAddress<string>(endpointName, values, scheme, host, pathBase, fragment, options);
+        return generator.GetUriByAddress<string>(
+            endpointName,
+            values,
+            scheme,
+            host,
+            pathBase,
+            fragment,
+            options
+        );
     }
 }

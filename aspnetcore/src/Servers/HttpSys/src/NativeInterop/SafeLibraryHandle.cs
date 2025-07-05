@@ -14,9 +14,7 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
 {
     // Called by P/Invoke when returning SafeHandles
     public SafeLibraryHandle()
-        : base(ownsHandle: true)
-    {
-    }
+        : base(ownsHandle: true) { }
 
     /// <summary>
     /// Returns a value stating whether the library exports a given proc.
@@ -30,7 +28,8 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     /// <summary>
     /// Gets a delegate pointing to a given export from this library.
     /// </summary>
-    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true) where TDelegate : class
+    public TDelegate? GetProcAddress<TDelegate>(string lpProcName, bool throwIfNotFound = true)
+        where TDelegate : class
     {
         IntPtr pfnProc = UnsafeNativeMethods.GetProcAddress(this, lpProcName);
         if (pfnProc == IntPtr.Zero)
@@ -55,7 +54,11 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
     {
         const uint LOAD_LIBRARY_SEARCH_SYSTEM32 = 0x00000800U; // from libloaderapi.h
 
-        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(filename, IntPtr.Zero, LOAD_LIBRARY_SEARCH_SYSTEM32);
+        SafeLibraryHandle handle = UnsafeNativeMethods.LoadLibraryEx(
+            filename,
+            IntPtr.Zero,
+            LOAD_LIBRARY_SEARCH_SYSTEM32
+        );
         if (handle == null || handle.IsInvalid)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -81,14 +84,16 @@ internal sealed unsafe partial class SafeLibraryHandle : SafeHandleZeroOrMinusOn
         [LibraryImport("kernel32.dll", SetLastError = true)]
         internal static partial IntPtr GetProcAddress(
             SafeLibraryHandle hModule,
-            [MarshalAs(UnmanagedType.LPStr)] string lpProcName);
+            [MarshalAs(UnmanagedType.LPStr)] string lpProcName
+        );
 
         // http://msdn.microsoft.com/en-us/library/windows/desktop/ms684179(v=vs.85).aspx
         [LibraryImport("kernel32.dll", EntryPoint = "LoadLibraryExW", SetLastError = true)]
         internal static partial SafeLibraryHandle LoadLibraryEx(
             [MarshalAs(UnmanagedType.LPWStr)] string lpFileName,
             IntPtr hFile,
-            uint dwFlags);
+            uint dwFlags
+        );
 
         internal static void ThrowExceptionForLastWin32Error()
         {

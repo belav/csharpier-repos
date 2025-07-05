@@ -36,9 +36,7 @@ public class TryParseModelBinderProviderTest
         Assert.IsType<TryParseModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 
     private class TestClassWithTryParse
     {

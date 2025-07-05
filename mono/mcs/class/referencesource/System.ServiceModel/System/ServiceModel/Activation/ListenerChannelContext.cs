@@ -6,8 +6,8 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Net.Sockets;
+    using System.Runtime.Serialization;
     using System.ServiceModel.Dispatcher;
 
     [DataContract]
@@ -29,15 +29,26 @@ namespace System.ServiceModel.Activation
             this.token = token;
         }
 
-        internal string AppKey { get { return appKey; } }
-        internal int ListenerChannelId { get { return listenerChannelId; } }
-        internal Guid Token { get { return token; } }
+        internal string AppKey
+        {
+            get { return appKey; }
+        }
+        internal int ListenerChannelId
+        {
+            get { return listenerChannelId; }
+        }
+        internal Guid Token
+        {
+            get { return token; }
+        }
 
         public static ListenerChannelContext Hydrate(byte[] blob)
         {
             using (MemoryStream memoryStream = new MemoryStream(blob))
             {
-                DataContractSerializer serializer = new DataContractSerializer(typeof(ListenerChannelContext));
+                DataContractSerializer serializer = new DataContractSerializer(
+                    typeof(ListenerChannelContext)
+                );
                 return (ListenerChannelContext)serializer.ReadObject(memoryStream);
             }
         }
@@ -46,7 +57,9 @@ namespace System.ServiceModel.Activation
         {
             using (MemoryStream memoryStream = new MemoryStream())
             {
-                DataContractSerializer serializer = new DataContractSerializer(typeof(ListenerChannelContext));
+                DataContractSerializer serializer = new DataContractSerializer(
+                    typeof(ListenerChannelContext)
+                );
                 serializer.WriteObject(memoryStream, this);
                 return memoryStream.ToArray();
             }

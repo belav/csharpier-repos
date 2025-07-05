@@ -14,7 +14,8 @@ public class RemoteWindowsDeploymentParameters : DeploymentParameters
         string remoteServerFileSharePath,
         string remoteServerName,
         string remoteServerAccountName,
-        string remoteServerAccountPassword)
+        string remoteServerAccountPassword
+    )
         : base(applicationPath, serverType, runtimeFlavor, runtimeArchitecture)
     {
         RemoteServerFileSharePath = remoteServerFileSharePath;

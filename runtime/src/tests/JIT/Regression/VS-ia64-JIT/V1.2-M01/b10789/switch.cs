@@ -7,7 +7,6 @@ using Xunit;
 
 public class foo
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -29,5 +28,4 @@ public class foo
 
         return 100;
     }
-
 }

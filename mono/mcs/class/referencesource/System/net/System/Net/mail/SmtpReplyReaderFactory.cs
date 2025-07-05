@@ -1,9 +1,9 @@
 namespace System.Net.Mail
 {
     using System;
+    using System.Collections;
     using System.IO;
     using System.Text;
-    using System.Collections;
 
     //Streams created are read only and return 0 once a full server reply has been read
     //To get the next server reply, call GetNextReplyReader
@@ -19,9 +19,8 @@ namespace System.Net.Mail
             ContinueLF,
             LastCR,
             LastLF,
-            Done
+            Done,
         }
-
 
         BufferedReadStream bufferedStream;
         byte[] byteBuffer;
@@ -37,35 +36,36 @@ namespace System.Net.Mail
 
         internal SmtpReplyReader CurrentReader
         {
-            get
-            {
-                return currentReader;
-            }
+            get { return currentReader; }
         }
 
         internal SmtpStatusCode StatusCode
         {
-            get
-            {
-                return statusCode;
-            }
+            get { return statusCode; }
         }
 
-        internal IAsyncResult BeginReadLines(SmtpReplyReader caller, AsyncCallback callback, object state)
+        internal IAsyncResult BeginReadLines(
+            SmtpReplyReader caller,
+            AsyncCallback callback,
+            object state
+        )
         {
-            ReadLinesAsyncResult result =  new ReadLinesAsyncResult(this, callback, state);
+            ReadLinesAsyncResult result = new ReadLinesAsyncResult(this, callback, state);
             result.Read(caller);
             return result;
         }
 
-        internal IAsyncResult BeginReadLine(SmtpReplyReader caller, AsyncCallback callback, object state)
+        internal IAsyncResult BeginReadLine(
+            SmtpReplyReader caller,
+            AsyncCallback callback,
+            object state
+        )
         {
-            ReadLinesAsyncResult result =  new ReadLinesAsyncResult(this, callback, state, true);
+            ReadLinesAsyncResult result = new ReadLinesAsyncResult(this, callback, state, true);
             result.Read(caller);
             return result;
         }
-        
-        
+
         internal void Close(SmtpReplyReader caller)
         {
             if (currentReader == caller)
@@ -77,7 +77,8 @@ namespace System.Net.Mail
                         byteBuffer = new byte[SmtpReplyReaderFactory.DefaultBufferSize];
                     }
 
-                    while (0 != Read(caller, byteBuffer, 0, byteBuffer.Length));
+                    while (0 != Read(caller, byteBuffer, 0, byteBuffer.Length))
+                        ;
                 }
 
                 currentReader = null;
@@ -92,7 +93,8 @@ namespace System.Net.Mail
         internal LineInfo EndReadLine(IAsyncResult result)
         {
             LineInfo[] info = ReadLinesAsyncResult.End(result);
-            if(info != null && info.Length >0){
+            if (info != null && info.Length > 0)
+            {
                 return info[0];
             }
             return new LineInfo();
@@ -115,7 +117,9 @@ namespace System.Net.Mail
             // if 0 bytes were read,there was a failure
             if (read == 0)
             {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.net_io_connectionclosed));
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.net_io_connectionclosed)
+                );
             }
 
             unsafe
@@ -138,7 +142,7 @@ namespace System.Net.Mail
                                     throw new FormatException(SR.GetString(SR.SmtpInvalidResponse));
                                 }
 
-                                statusCode = (SmtpStatusCode)(100*(b - '0'));
+                                statusCode = (SmtpStatusCode)(100 * (b - '0'));
 
                                 goto case ReadState.Status1;
                             }
@@ -155,7 +159,7 @@ namespace System.Net.Mail
                                     throw new FormatException(SR.GetString(SR.SmtpInvalidResponse));
                                 }
 
-                                statusCode += 10*(b - '0');
+                                statusCode += 10 * (b - '0');
 
                                 goto case ReadState.Status2;
                             }
@@ -184,15 +188,15 @@ namespace System.Net.Mail
                             if (ptr < end)
                             {
                                 byte b = *ptr++;
-                                if (b == ' ')       // last line
+                                if (b == ' ') // last line
                                 {
                                     goto case ReadState.LastCR;
                                 }
-                                else if (b == '-')  // more lines coming
+                                else if (b == '-') // more lines coming
                                 {
                                     goto case ReadState.ContinueCR;
                                 }
-                                else                // error
+                                else // error
                                 {
                                     throw new FormatException(SR.GetString(SR.SmtpInvalidResponse));
                                 }
@@ -266,7 +270,7 @@ namespace System.Net.Mail
                 }
             }
         }
-               
+
         internal int Read(SmtpReplyReader caller, byte[] buffer, int offset, int count)
         {
             // if we've already found the delimitter, then return 0 indicating
@@ -285,22 +289,21 @@ namespace System.Net.Mail
 
             return actual;
         }
-              
 
         internal LineInfo ReadLine(SmtpReplyReader caller)
         {
-           LineInfo[] info = ReadLines(caller,true);
-           if(info != null && info.Length >0){
-               return info[0];
-           }
-           return new LineInfo();
+            LineInfo[] info = ReadLines(caller, true);
+            if (info != null && info.Length > 0)
+            {
+                return info[0];
+            }
+            return new LineInfo();
         }
 
         internal LineInfo[] ReadLines(SmtpReplyReader caller)
         {
-            return ReadLines(caller,false);
+            return ReadLines(caller, false);
         }
-
 
         internal LineInfo[] ReadLines(SmtpReplyReader caller, bool oneLine)
         {
@@ -320,7 +323,7 @@ namespace System.Net.Mail
             ArrayList lines = new ArrayList();
             int statusRead = 0;
 
-            for(int start = 0, read = 0; ; )
+            for (int start = 0, read = 0; ; )
             {
                 if (start == read)
                 {
@@ -332,7 +335,7 @@ namespace System.Net.Mail
 
                 if (statusRead < 4)
                 {
-                    int left = Math.Min(4-statusRead, actual);
+                    int left = Math.Min(4 - statusRead, actual);
                     statusRead += left;
                     start += left;
                     actual -= left;
@@ -349,8 +352,9 @@ namespace System.Net.Mail
                 {
                     statusRead = 0;
                     lines.Add(new LineInfo(statusCode, builder.ToString(0, builder.Length - 2))); // return everything except CRLF
-                    
-                    if(oneLine){
+
+                    if (oneLine)
+                    {
                         bufferedStream.Push(byteBuffer, start, read - start);
                         return (LineInfo[])lines.ToArray(typeof(LineInfo));
                     }
@@ -375,19 +379,30 @@ namespace System.Net.Mail
             int statusRead;
             bool oneLine;
 
-            internal ReadLinesAsyncResult(SmtpReplyReaderFactory parent, AsyncCallback callback, object state) : base(null, state, callback)
+            internal ReadLinesAsyncResult(
+                SmtpReplyReaderFactory parent,
+                AsyncCallback callback,
+                object state
+            )
+                : base(null, state, callback)
             {
                 this.parent = parent;
             }
 
-            internal ReadLinesAsyncResult(SmtpReplyReaderFactory parent, AsyncCallback callback, object state, bool oneLine) : base(null, state, callback)
+            internal ReadLinesAsyncResult(
+                SmtpReplyReaderFactory parent,
+                AsyncCallback callback,
+                object state,
+                bool oneLine
+            )
+                : base(null, state, callback)
             {
                 this.oneLine = oneLine;
                 this.parent = parent;
             }
 
-            internal void Read(SmtpReplyReader caller){
-
+            internal void Read(SmtpReplyReader caller)
+            {
                 // if we've already found the delimitter, then return 0 indicating
                 // end of stream.
                 if (parent.currentReader != caller || parent.readState == ReadState.Done)
@@ -420,13 +435,19 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = parent.bufferedStream.BeginRead(parent.byteBuffer, 0, parent.byteBuffer.Length, readCallback, this);
+                    IAsyncResult result = parent.bufferedStream.BeginRead(
+                        parent.byteBuffer,
+                        0,
+                        parent.byteBuffer.Length,
+                        readCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return;
                     }
                     read = parent.bufferedStream.EndRead(result);
-                } while(ProcessRead());
+                } while (ProcessRead());
             }
 
             static void ReadCallback(IAsyncResult result)
@@ -444,10 +465,12 @@ namespace System.Net.Mail
                         }
                     }
                     catch (Exception e)
-                    {   exception = e;
+                    {
+                        exception = e;
                     }
 
-                    if(exception != null){
+                    if (exception != null)
+                    {
                         thisPtr.InvokeCallback(exception);
                     }
                 }
@@ -457,16 +480,18 @@ namespace System.Net.Mail
             {
                 if (read == 0)
                 {
-                    throw new IOException(SR.GetString(SR.net_io_readfailure, SR.net_io_connectionclosed));
+                    throw new IOException(
+                        SR.GetString(SR.net_io_readfailure, SR.net_io_connectionclosed)
+                    );
                 }
 
-                for(int start = 0; start != read; )
+                for (int start = 0; start != read; )
                 {
                     int actual = parent.ProcessRead(parent.byteBuffer, start, read - start, true);
 
                     if (statusRead < 4)
                     {
-                        int left = Math.Min(4-statusRead, actual);
+                        int left = Math.Min(4 - statusRead, actual);
                         statusRead += left;
                         start += left;
                         actual -= left;
@@ -481,11 +506,14 @@ namespace System.Net.Mail
 
                     if (parent.readState == ReadState.Status0)
                     {
-                        lines.Add(new LineInfo(parent.statusCode, builder.ToString(0, builder.Length - 2))); // return everything except CRLF
+                        lines.Add(
+                            new LineInfo(parent.statusCode, builder.ToString(0, builder.Length - 2))
+                        ); // return everything except CRLF
                         builder = new StringBuilder();
                         statusRead = 0;
 
-                        if (oneLine) {
+                        if (oneLine)
+                        {
                             parent.bufferedStream.Push(parent.byteBuffer, start, read - start);
                             InvokeCallback();
                             return false;
@@ -493,7 +521,9 @@ namespace System.Net.Mail
                     }
                     else if (parent.readState == ReadState.Done)
                     {
-                        lines.Add(new LineInfo(parent.statusCode, builder.ToString(0, builder.Length - 2))); // return everything except CRLF
+                        lines.Add(
+                            new LineInfo(parent.statusCode, builder.ToString(0, builder.Length - 2))
+                        ); // return everything except CRLF
                         parent.bufferedStream.Push(parent.byteBuffer, start, read - start);
                         InvokeCallback();
                         return false;
@@ -501,7 +531,6 @@ namespace System.Net.Mail
                 }
                 return true;
             }
-
         }
     }
 }

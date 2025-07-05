@@ -4,18 +4,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.Security; // for CookieProtection Enum
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Security; // for CookieProtection Enum
+    using System.Xml;
 
     /*         <!-- Configuration for roleManager:
                 enabled="[true|false]"                            Feature is enabled?
@@ -89,83 +90,105 @@ namespace System.Web.Configuration {
 
         </roleManager>
  */
-    public sealed class RoleManagerSection : ConfigurationSection {
+    public sealed class RoleManagerSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propUseCookies =
-            new ConfigurationProperty("cacheRolesInCookie",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propCookieName =
-            new ConfigurationProperty("cookieName",
-                                        typeof(string),
-                                        ".ASPXROLES",
-                                        StdValidatorsAndConverters.WhiteSpaceTrimStringConverter,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propUseCookies = new ConfigurationProperty(
+            "cacheRolesInCookie",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propCookieName = new ConfigurationProperty(
+            "cookieName",
+            typeof(string),
+            ".ASPXROLES",
+            StdValidatorsAndConverters.WhiteSpaceTrimStringConverter,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propCookieTimeout =
-            new ConfigurationProperty("cookieTimeout",
-                                        typeof(TimeSpan),
-                                        TimeSpan.FromMinutes(30.0),
-                                        StdValidatorsAndConverters.TimeSpanMinutesOrInfiniteConverter,
-                                        StdValidatorsAndConverters.PositiveTimeSpanValidator,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propCookiePath =
-            new ConfigurationProperty("cookiePath",
-                                        typeof(string),
-                                        "/",
-                                        StdValidatorsAndConverters.WhiteSpaceTrimStringConverter,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieTimeout",
+                typeof(TimeSpan),
+                TimeSpan.FromMinutes(30.0),
+                StdValidatorsAndConverters.TimeSpanMinutesOrInfiniteConverter,
+                StdValidatorsAndConverters.PositiveTimeSpanValidator,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propCookiePath = new ConfigurationProperty(
+            "cookiePath",
+            typeof(string),
+            "/",
+            StdValidatorsAndConverters.WhiteSpaceTrimStringConverter,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propCookieRequireSSL =
-            new ConfigurationProperty("cookieRequireSSL",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieRequireSSL",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propCookieSlidingExpiration =
-            new ConfigurationProperty("cookieSlidingExpiration",
-                                        typeof(bool),
-                                        true,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieSlidingExpiration",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propCookieProtection =
-            new ConfigurationProperty("cookieProtection",
-                                        typeof(CookieProtection),
-                                        CookieProtection.All,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "cookieProtection",
+                typeof(CookieProtection),
+                CookieProtection.All,
+                ConfigurationPropertyOptions.None
+            );
         private static readonly ConfigurationProperty _propDefaultProvider =
-            new ConfigurationProperty("defaultProvider",
-                                        typeof(string),
-                                        "AspNetSqlRoleProvider",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty("providers",
-                                        typeof(ProviderSettingsCollection),
-                                        null,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "defaultProvider",
+                typeof(string),
+                "AspNetSqlRoleProvider",
+                null,
+                StdValidatorsAndConverters.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            "providers",
+            typeof(ProviderSettingsCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propCreatePersistentCookie =
-            new ConfigurationProperty("createPersistentCookie",
-                                        typeof(bool),
-                                        false,
-                                        ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propDomain =
-            new ConfigurationProperty("domain",
-                                        typeof(string),
-                                        null,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "createPersistentCookie",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
+        private static readonly ConfigurationProperty _propDomain = new ConfigurationProperty(
+            "domain",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
         private static readonly ConfigurationProperty _propMaxCachedResults =
-            new ConfigurationProperty("maxCachedResults",
-                                        typeof(int),
-                                        25,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "maxCachedResults",
+                typeof(int),
+                25,
+                ConfigurationPropertyOptions.None
+            );
 
-        private enum InheritedType {
+        private enum InheritedType
+        {
             inNeither = 0,
             inParent = 1,
             inSelf = 2,
@@ -173,7 +196,8 @@ namespace System.Web.Configuration {
             inBothDiff = 4,
         }
 
-        static RoleManagerSection() {
+        static RoleManagerSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propEnabled);
@@ -191,148 +215,112 @@ namespace System.Web.Configuration {
             _properties.Add(_propMaxCachedResults);
         }
 
-        public RoleManagerSection() {
-        }
+        public RoleManagerSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = false)]
-        public bool Enabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool Enabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
         [ConfigurationProperty("createPersistentCookie", DefaultValue = false)]
-        public bool CreatePersistentCookie {
-            get {
-                return (bool)base[_propCreatePersistentCookie];
-            }
-            set {
-                base[_propCreatePersistentCookie] = value;
-            }
+        public bool CreatePersistentCookie
+        {
+            get { return (bool)base[_propCreatePersistentCookie]; }
+            set { base[_propCreatePersistentCookie] = value; }
         }
 
         [ConfigurationProperty("cacheRolesInCookie", DefaultValue = false)]
-        public bool CacheRolesInCookie {
-            get {
-                return (bool)base[_propUseCookies];
-            }
-            set {
-                base[_propUseCookies] = value;
-            }
+        public bool CacheRolesInCookie
+        {
+            get { return (bool)base[_propUseCookies]; }
+            set { base[_propUseCookies] = value; }
         }
 
         [ConfigurationProperty("cookieName", DefaultValue = ".ASPXROLES")]
         [TypeConverter(typeof(WhiteSpaceTrimStringConverter))]
         [StringValidator(MinLength = 1)]
-        public string CookieName {
-            get {
-                return (string)base[_propCookieName];
-            }
-            set {
-                base[_propCookieName] = value;
-            }
+        public string CookieName
+        {
+            get { return (string)base[_propCookieName]; }
+            set { base[_propCookieName] = value; }
         }
 
         [ConfigurationProperty("cookieTimeout", DefaultValue = "00:30:00")]
         [TypeConverter(typeof(TimeSpanMinutesOrInfiniteConverter))]
-        [TimeSpanValidator(MinValueString="00:00:00", MaxValueString=TimeSpanValidatorAttribute.TimeSpanMaxValue)]
-        public TimeSpan CookieTimeout {
-            get {
-                return (TimeSpan)base[_propCookieTimeout];
-            }
-            set {
-                base[_propCookieTimeout] = value;
-            }
+        [TimeSpanValidator(
+            MinValueString = "00:00:00",
+            MaxValueString = TimeSpanValidatorAttribute.TimeSpanMaxValue
+        )]
+        public TimeSpan CookieTimeout
+        {
+            get { return (TimeSpan)base[_propCookieTimeout]; }
+            set { base[_propCookieTimeout] = value; }
         }
 
         [ConfigurationProperty("cookiePath", DefaultValue = "/")]
         [TypeConverter(typeof(WhiteSpaceTrimStringConverter))]
         [StringValidator(MinLength = 1)]
-        public string CookiePath {
-            get {
-                return (string)base[_propCookiePath];
-            }
-            set {
-                base[_propCookiePath] = value;
-            }
+        public string CookiePath
+        {
+            get { return (string)base[_propCookiePath]; }
+            set { base[_propCookiePath] = value; }
         }
 
         [ConfigurationProperty("cookieRequireSSL", DefaultValue = false)]
-        public bool CookieRequireSSL {
-            get {
-                return (bool)base[_propCookieRequireSSL];
-            }
-            set {
-                base[_propCookieRequireSSL] = value;
-            }
+        public bool CookieRequireSSL
+        {
+            get { return (bool)base[_propCookieRequireSSL]; }
+            set { base[_propCookieRequireSSL] = value; }
         }
 
         [ConfigurationProperty("cookieSlidingExpiration", DefaultValue = true)]
-        public bool CookieSlidingExpiration {
-            get {
-                return (bool)base[_propCookieSlidingExpiration];
-            }
-            set {
-                base[_propCookieSlidingExpiration] = value;
-            }
+        public bool CookieSlidingExpiration
+        {
+            get { return (bool)base[_propCookieSlidingExpiration]; }
+            set { base[_propCookieSlidingExpiration] = value; }
         }
 
         [ConfigurationProperty("cookieProtection", DefaultValue = CookieProtection.All)]
-        public CookieProtection CookieProtection {
-            get {
-                return (CookieProtection)base[_propCookieProtection];
-            }
-            set {
-                base[_propCookieProtection] = value;
-            }
+        public CookieProtection CookieProtection
+        {
+            get { return (CookieProtection)base[_propCookieProtection]; }
+            set { base[_propCookieProtection] = value; }
         }
 
         [ConfigurationProperty("defaultProvider", DefaultValue = "AspNetSqlRoleProvider")]
         [TypeConverter(typeof(WhiteSpaceTrimStringConverter))]
         [StringValidator(MinLength = 1)]
-        public string DefaultProvider {
-            get {
-                return (string)base[_propDefaultProvider];
-            }
-            set                     {
-                        base[_propDefaultProvider] = value;
-                    }
-                }
+        public string DefaultProvider
+        {
+            get { return (string)base[_propDefaultProvider]; }
+            set { base[_propDefaultProvider] = value; }
+        }
 
-                [ConfigurationProperty("providers")]
-                public ProviderSettingsCollection Providers                 {
-                    get                     {
-                        return (ProviderSettingsCollection)base[_propProviders];
-            }
+        [ConfigurationProperty("providers")]
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base[_propProviders]; }
         }
 
         [ConfigurationProperty("domain")]
-        public string Domain {
-            get {
-                return (string)base[_propDomain];
-            }
-            set {
-                base[_propDomain] = value;
-            }
+        public string Domain
+        {
+            get { return (string)base[_propDomain]; }
+            set { base[_propDomain] = value; }
         }
 
         [ConfigurationProperty("maxCachedResults", DefaultValue = 25)]
-        public int MaxCachedResults {
-            get {
-                return (int)base[_propMaxCachedResults];
-            }
-            set {
-                base[_propMaxCachedResults] = value;
-            }
+        public int MaxCachedResults
+        {
+            get { return (int)base[_propMaxCachedResults]; }
+            set { base[_propMaxCachedResults] = value; }
         }
     } // class RoleManagerSection
 }

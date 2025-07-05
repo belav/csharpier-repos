@@ -36,7 +36,10 @@ namespace System.Runtime.Serialization.Tests
             Assert.Equal(innerException, exception.InnerException);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void Ctor_SerializationInfo_StreamingContext()
         {
             using (var memoryStream = new MemoryStream())

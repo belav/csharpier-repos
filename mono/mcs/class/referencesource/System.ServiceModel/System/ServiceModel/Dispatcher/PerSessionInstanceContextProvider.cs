@@ -10,13 +10,13 @@ namespace System.ServiceModel.Dispatcher
 
     class PerSessionInstanceContextProvider : InstanceContextProviderBase
     {
-
         internal PerSessionInstanceContextProvider(DispatchRuntime dispatchRuntime)
-            : base(dispatchRuntime)
-        {
-        }
+            : base(dispatchRuntime) { }
 
-        public override InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
+        public override InstanceContext GetExistingInstanceContext(
+            Message message,
+            IContextChannel channel
+        )
         {
             // Here is the flow for a Sessionful channel
             //  1. First request comes in on new channel.
@@ -27,11 +27,18 @@ namespace System.ServiceModel.Dispatcher
             //  6. Bind channel to the InstanceContext.
             //  7. For all further requests on the same channel, we will return ServiceChannel.InstanceContext which will be non null.
             ServiceChannel serviceChannel = this.GetServiceChannelFromProxy(channel);
-            Fx.Assert((serviceChannel != null), "System.ServiceModel.Dispatcher.PerSessionInstanceContextProvider.GetExistingInstanceContext(), serviceChannel != null");
+            Fx.Assert(
+                (serviceChannel != null),
+                "System.ServiceModel.Dispatcher.PerSessionInstanceContextProvider.GetExistingInstanceContext(), serviceChannel != null"
+            );
             return (serviceChannel != null) ? serviceChannel.InstanceContext : null;
         }
 
-        public override void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
+        public override void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        )
         {
             ServiceChannel serviceChannel = GetServiceChannelFromProxy(channel);
             if (serviceChannel != null && serviceChannel.HasSession)
@@ -40,14 +47,16 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-
         public override bool IsIdle(InstanceContext instanceContext)
         {
             //By default return true
             return true;
         }
 
-        public override void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
+        public override void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
         {
             //no-op
         }

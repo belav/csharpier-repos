@@ -28,7 +28,10 @@ namespace Microsoft.VisualStudio.LanguageServices
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VSWpfThemeService()
         {
-            _themeDictionary.Source = new Uri("/Microsoft.VisualStudio.LanguageServices;component/VSThemeDictionary.xaml", UriKind.Relative);
+            _themeDictionary.Source = new Uri(
+                "/Microsoft.VisualStudio.LanguageServices;component/VSThemeDictionary.xaml",
+                UriKind.Relative
+            );
         }
 
         public void ApplyThemeToElement(FrameworkElement frameworkElement)

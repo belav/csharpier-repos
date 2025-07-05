@@ -23,26 +23,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Editing
     {
         private Workspace _emptyWorkspace;
 
-        private Workspace EmptyWorkspace
-            => _emptyWorkspace ??= new AdhocWorkspace();
+        private Workspace EmptyWorkspace => _emptyWorkspace ??= new AdhocWorkspace();
 
-        private void VerifySyntax<TSyntax>(SyntaxNode node, string expectedText) where TSyntax : SyntaxNode
+        private void VerifySyntax<TSyntax>(SyntaxNode node, string expectedText)
+            where TSyntax : SyntaxNode
         {
             Assert.IsAssignableFrom<TSyntax>(node);
 
             var options = CSharpSyntaxFormattingOptions.Default;
-            var formatted = Formatter.Format(node, EmptyWorkspace.Services.SolutionServices, options, CancellationToken.None);
+            var formatted = Formatter.Format(
+                node,
+                EmptyWorkspace.Services.SolutionServices,
+                options,
+                CancellationToken.None
+            );
             var actualText = formatted.ToFullString();
             Assert.Equal(expectedText, actualText);
         }
 
-        private SyntaxEditor GetEditor(SyntaxNode root)
-            => new SyntaxEditor(root, EmptyWorkspace.Services.SolutionServices);
+        private SyntaxEditor GetEditor(SyntaxNode root) =>
+            new SyntaxEditor(root, EmptyWorkspace.Services.SolutionServices);
 
         [Fact]
         public void TestReplaceNode()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -53,7 +59,14 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.ReplaceNode(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
+            editor.ReplaceNode(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
             var newRoot = editor.GetChangedRoot();
 
             VerifySyntax<CompilationUnitSyntax>(
@@ -62,13 +75,15 @@ public class C
 public class C
 {
     public string Y;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestRemoveNode()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -87,13 +102,15 @@ public class C
                 @"
 public class C
 {
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInsertAfter()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -104,7 +121,14 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.InsertAfter(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
+            editor.InsertAfter(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
             var newRoot = editor.GetChangedRoot();
 
             VerifySyntax<CompilationUnitSyntax>(
@@ -114,13 +138,15 @@ public class C
 {
     public int X;
     public string Y;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestInsertBefore()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -131,7 +157,14 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.InsertBefore(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
+            editor.InsertBefore(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
             var newRoot = editor.GetChangedRoot();
 
             VerifySyntax<CompilationUnitSyntax>(
@@ -141,13 +174,15 @@ public class C
 {
     public string Y;
     public int X;
-}");
+}"
+            );
         }
 
         [Fact]
         public void TestTrackNode()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -168,7 +203,8 @@ public class C
         [Fact]
         public void TestMultipleEdits()
         {
-            var code = @"
+            var code =
+                @"
 public class C
 {
     public int X;
@@ -179,8 +215,22 @@ public class C
 
             var editor = GetEditor(cu);
             var fieldX = editor.Generator.GetMembers(cls)[0];
-            editor.InsertAfter(fieldX, editor.Generator.FieldDeclaration("Y", editor.Generator.TypeExpression(SpecialType.System_String), Accessibility.Public));
-            editor.InsertBefore(fieldX, editor.Generator.FieldDeclaration("Z", editor.Generator.TypeExpression(SpecialType.System_Object), Accessibility.Public));
+            editor.InsertAfter(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Y",
+                    editor.Generator.TypeExpression(SpecialType.System_String),
+                    Accessibility.Public
+                )
+            );
+            editor.InsertBefore(
+                fieldX,
+                editor.Generator.FieldDeclaration(
+                    "Z",
+                    editor.Generator.TypeExpression(SpecialType.System_Object),
+                    Accessibility.Public
+                )
+            );
             editor.RemoveNode(fieldX);
             var newRoot = editor.GetChangedRoot();
 
@@ -191,7 +241,8 @@ public class C
 {
     public object Z;
     public string Y;
-}");
+}"
+            );
         }
 
         [Fact]
@@ -229,13 +280,20 @@ public class C
             var param = methodX.ParameterList.Parameters[0];
 
             var syntaxGenerator = editor.Generator;
-            var args = new[] { syntaxGenerator.AttributeArgument(syntaxGenerator.MemberAccessExpression(syntaxGenerator.DottedName("Sample"), "Attribute")) };
+            var args = new[]
+            {
+                syntaxGenerator.AttributeArgument(
+                    syntaxGenerator.MemberAccessExpression(
+                        syntaxGenerator.DottedName("Sample"),
+                        "Attribute"
+                    )
+                ),
+            };
             var attribute = syntaxGenerator.Attribute("Example", args);
             editor.AddAttribute(param, attribute);
             var newRoot = editor.GetChangedRoot();
 
-            VerifySyntax<CompilationUnitSyntax>(
-                newRoot, fixedCode);
+            VerifySyntax<CompilationUnitSyntax>(newRoot, fixedCode);
         }
 
         [Fact]
@@ -273,13 +331,20 @@ public class C
             var typeParam = methodX.TypeParameterList.Parameters[0];
 
             var syntaxGenerator = editor.Generator;
-            var args = new[] { syntaxGenerator.AttributeArgument(syntaxGenerator.MemberAccessExpression(syntaxGenerator.DottedName("Sample"), "Attribute")) };
+            var args = new[]
+            {
+                syntaxGenerator.AttributeArgument(
+                    syntaxGenerator.MemberAccessExpression(
+                        syntaxGenerator.DottedName("Sample"),
+                        "Attribute"
+                    )
+                ),
+            };
             var attribute = syntaxGenerator.Attribute("Example", args);
             editor.AddAttribute(typeParam, attribute);
             var newRoot = editor.GetChangedRoot();
 
-            VerifySyntax<CompilationUnitSyntax>(
-                newRoot, fixedCode);
+            VerifySyntax<CompilationUnitSyntax>(newRoot, fixedCode);
         }
 
         [Fact]
@@ -316,13 +381,20 @@ public class C
             var methodX = editor.Generator.GetMembers(cls)[0];
 
             var syntaxGenerator = editor.Generator;
-            var args = new[] { syntaxGenerator.AttributeArgument(syntaxGenerator.MemberAccessExpression(syntaxGenerator.DottedName("Sample"), "Attribute")) };
+            var args = new[]
+            {
+                syntaxGenerator.AttributeArgument(
+                    syntaxGenerator.MemberAccessExpression(
+                        syntaxGenerator.DottedName("Sample"),
+                        "Attribute"
+                    )
+                ),
+            };
             var attribute = syntaxGenerator.Attribute("Example", args);
             editor.AddReturnAttribute(methodX, attribute);
             var newRoot = editor.GetChangedRoot();
 
-            VerifySyntax<CompilationUnitSyntax>(
-                newRoot, fixedCode);
+            VerifySyntax<CompilationUnitSyntax>(newRoot, fixedCode);
         }
     }
 }
