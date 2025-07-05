@@ -1,4 +1,7 @@
-<Type Name="Taskbar+SizingBarRight" FullName="System.Windows.Forms.VisualStyles.Taskbar+SizingBarRight">
+<Type
+  Name="Taskbar+SizingBarRight"
+  FullName="System.Windows.Forms.VisualStyles.Taskbar+SizingBarRight"
+>
   <TypeSignature Language="C#" Value="public static class Taskbar.SizingBarRight" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -14,7 +17,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

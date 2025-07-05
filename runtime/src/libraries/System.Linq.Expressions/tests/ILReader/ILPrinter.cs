@@ -12,7 +12,10 @@ namespace System.Linq.Expressions.Tests
 {
     static class ILPrinter
     {
-        private static CachedTypeFactory s_typeFactory = new CachedTypeFactory(typeof(IStrongBox), typeof(StrongBox<>));
+        private static CachedTypeFactory s_typeFactory = new CachedTypeFactory(
+            typeof(IStrongBox),
+            typeof(StrongBox<>)
+        );
 
         private static ITypeFactory GetTypeFactory(Expression expression)
         {
@@ -20,7 +23,10 @@ namespace System.Linq.Expressions.Tests
             return s_typeFactory;
         }
 
-        public static string GetIL(this LambdaExpression expression, bool appendInnerLambdas = false)
+        public static string GetIL(
+            this LambdaExpression expression,
+            bool appendInnerLambdas = false
+        )
         {
             Delegate d = expression.Compile();
 
@@ -81,7 +87,9 @@ namespace System.Linq.Expressions.Tests
 
                 for (var i = 0; i < locals.Length; i++)
                 {
-                    sw.WriteLine($"    [{i}] {locals[i].ToIL()}{(i != locals.Length - 1 ? "," : "")}");
+                    sw.WriteLine(
+                        $"    [{i}] {locals[i].ToIL()}{(i != locals.Length - 1 ? "," : "")}"
+                    );
                 }
 
                 sw.WriteLine("  )");
@@ -99,7 +107,8 @@ namespace System.Linq.Expressions.Tests
 
     class CachedTypeFactory : DefaultTypeFactory
     {
-        private static readonly PropertyInfo s_RuntimeTypeHandle_Value = typeof(RuntimeTypeHandle).GetProperty("Value");
+        private static readonly PropertyInfo s_RuntimeTypeHandle_Value =
+            typeof(RuntimeTypeHandle).GetProperty("Value");
 
         private readonly Dictionary<IntPtr, Type> _cache = new Dictionary<IntPtr, Type>();
 

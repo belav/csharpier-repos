@@ -10,7 +10,8 @@ namespace System.IdentityModel.Metadata
     /// A collection of <see cref="LocalizedEntry"/> objects.
     /// </summary>
     /// <typeparam name="T">The <see cref="LocalizedEntry"/> type.</typeparam>
-    public class LocalizedEntryCollection<T> : KeyedCollection<CultureInfo, T> where T : LocalizedEntry
+    public class LocalizedEntryCollection<T> : KeyedCollection<CultureInfo, T>
+        where T : LocalizedEntry
     {
         /// <summary>
         /// Gets the key for the <paramref name="item"/>.

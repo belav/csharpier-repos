@@ -6,12 +6,13 @@
 
 namespace System.Net.Configuration
 {
-    using System.Configuration;
     using System.Collections;
-    using System.Threading;    
+    using System.Configuration;
+    using System.Threading;
+
     public sealed class ConnectionManagementSection : ConfigurationSection
     {
-        public ConnectionManagementSection() 
+        public ConnectionManagementSection()
         {
             this.properties.Add(this.connectionManagement);
         }
@@ -29,9 +30,12 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty connectionManagement =
-            new ConfigurationProperty(null, typeof(ConnectionManagementElementCollection), null,
-                    ConfigurationPropertyOptions.IsDefaultCollection);
+        readonly ConfigurationProperty connectionManagement = new ConfigurationProperty(
+            null,
+            typeof(ConnectionManagementElementCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
     }
 
     internal sealed class ConnectionManagementSectionInternal
@@ -41,23 +45,26 @@ namespace System.Net.Configuration
             if (section.ConnectionManagement.Count > 0)
             {
                 this.connectionManagement = new Hashtable(section.ConnectionManagement.Count);
-                foreach(ConnectionManagementElement connectionManagementElement in section.ConnectionManagement)
+                foreach (
+                    ConnectionManagementElement connectionManagementElement in section.ConnectionManagement
+                )
                 {
-                    this.connectionManagement[connectionManagementElement.Address] = connectionManagementElement.MaxConnection;
+                    this.connectionManagement[connectionManagementElement.Address] =
+                        connectionManagementElement.MaxConnection;
                 }
             }
         }
 
         internal Hashtable ConnectionManagement
         {
-            get 
+            get
             {
                 Hashtable retval = this.connectionManagement;
                 if (retval == null)
                 {
                     retval = new Hashtable();
                 }
-                return retval; 
+                return retval;
             }
         }
 
@@ -74,14 +81,17 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal ConnectionManagementSectionInternal GetSection()
+        internal static ConnectionManagementSectionInternal GetSection()
         {
             lock (ConnectionManagementSectionInternal.ClassSyncObject)
             {
-                ConnectionManagementSection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.ConnectionManagementSectionPath) as ConnectionManagementSection; 
+                ConnectionManagementSection section =
+                    PrivilegedConfigurationManager.GetSection(
+                        ConfigurationStrings.ConnectionManagementSectionPath
+                    ) as ConnectionManagementSection;
                 if (section == null)
                     return null;
-                
+
                 return new ConnectionManagementSectionInternal(section);
             }
         }

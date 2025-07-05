@@ -11,5 +11,5 @@ internal enum RequestProcessingStatus
     AppStarted,
     HeadersCommitted,
     HeadersFlushed,
-    ResponseCompleted
+    ResponseCompleted,
 }

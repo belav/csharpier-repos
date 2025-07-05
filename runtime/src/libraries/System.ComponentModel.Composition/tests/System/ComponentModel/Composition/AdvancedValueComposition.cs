@@ -78,7 +78,7 @@ namespace System.ComponentModel.Composition
             batch.AddPart(c);
             container.Compose(batch);
 
-            foreach (Lazy<Func<int,int,int>, IDictionary<string, object>> export in c.opInfo)
+            foreach (Lazy<Func<int, int, int>, IDictionary<string, object>> export in c.opInfo)
             {
                 if ((string)export.Metadata["Var1"] == "add")
                 {
@@ -128,9 +128,20 @@ namespace System.ComponentModel.Composition
 
             IDictionary<string, object> multMetadata = new Dictionary<string, object>();
             multMetadata["Var1"] = "mult";
-            multMetadata[CompositionConstants.ExportTypeIdentityMetadataName] = AttributedModelServices.GetTypeIdentity(typeof(Func<int, int, int>));
-            var basicValue = ExportFactory.Create("Add", multMetadata, (() => (Func<int, int, int>)delegate (int a, int b)
-            { return a * b; }));
+            multMetadata[CompositionConstants.ExportTypeIdentityMetadataName] =
+                AttributedModelServices.GetTypeIdentity(typeof(Func<int, int, int>));
+            var basicValue = ExportFactory.Create(
+                "Add",
+                multMetadata,
+                (
+                    () =>
+                        (Func<int, int, int>)
+                            delegate(int a, int b)
+                            {
+                                return a * b;
+                            }
+                )
+            );
 
             CompositionBatch batch = new CompositionBatch();
             batch.AddExport(basicValue);
@@ -166,7 +177,10 @@ namespace System.ComponentModel.Composition
         public void CollectionMetadataPropertyTest()
         {
             var container = ContainerFactory.CreateWithDefaultAttributedCatalog();
-            var export = container.GetExport<ComponentWithCollectionProperty, ITrans_CollectionOfStrings>();
+            var export = container.GetExport<
+                ComponentWithCollectionProperty,
+                ITrans_CollectionOfStrings
+            >();
 
             Assert.NotNull(export.Metadata);
             Assert.NotNull(export.Metadata.Values);
@@ -260,11 +274,15 @@ namespace System.ComponentModel.Composition
             var d = new DerivedExportImporter();
             batch.AddPart(d);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport, RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -277,11 +295,15 @@ namespace System.ComponentModel.Composition
             var d = new DerivedExportsImporter();
             batch.AddPart(d);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport, RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
     }
 }

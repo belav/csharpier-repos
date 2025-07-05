@@ -24,18 +24,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override DiagnosticInfo ErrorInfo
         {
-            get
-            {
-                return new CSDiagnosticInfo(ErrorCode.ERR_BogusType, string.Empty);
-            }
+            get { return new CSDiagnosticInfo(ErrorCode.ERR_BogusType, string.Empty); }
         }
 
         internal override bool MangleName
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override bool IsFileLocal => false;

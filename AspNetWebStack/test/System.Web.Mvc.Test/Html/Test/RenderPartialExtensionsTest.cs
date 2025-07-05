@@ -91,16 +91,16 @@ namespace System.Web.Mvc.Html.Test
             public ViewEngineCollection RenderPartialInternal_ViewEngineCollection;
 
             SpyHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-                : base(viewContext, viewDataContainer)
-            {
-            }
+                : base(viewContext, viewDataContainer) { }
 
             public static SpyHtmlHelper Create()
             {
                 ViewDataDictionary viewData = new ViewDataDictionary();
 
                 Mock<ViewContext> mockViewContext = new Mock<ViewContext>();
-                mockViewContext.Setup(c => c.HttpContext.Response.Output).Throws(new Exception("Response.Output should never be called."));
+                mockViewContext
+                    .Setup(c => c.HttpContext.Response.Output)
+                    .Throws(new Exception("Response.Output should never be called."));
                 mockViewContext.Setup(c => c.ViewData).Returns(viewData);
                 mockViewContext.Setup(c => c.Writer).Returns(new StringWriter());
 
@@ -110,8 +110,13 @@ namespace System.Web.Mvc.Html.Test
                 return new SpyHtmlHelper(mockViewContext.Object, container.Object);
             }
 
-            internal override void RenderPartialInternal(string partialViewName, ViewDataDictionary viewData, object model,
-                                                         TextWriter writer, ViewEngineCollection viewEngineCollection)
+            internal override void RenderPartialInternal(
+                string partialViewName,
+                ViewDataDictionary viewData,
+                object model,
+                TextWriter writer,
+                ViewEngineCollection viewEngineCollection
+            )
             {
                 RenderPartialInternal_PartialViewName = partialViewName;
                 RenderPartialInternal_ViewData = viewData;

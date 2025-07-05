@@ -15,7 +15,6 @@ public static class ReasonPhrases
         { 100, "Continue" },
         { 101, "Switching Protocols" },
         { 102, "Processing" },
-
         { 200, "OK" },
         { 201, "Created" },
         { 202, "Accepted" },
@@ -26,7 +25,6 @@ public static class ReasonPhrases
         { 207, "Multi-Status" },
         { 208, "Already Reported" },
         { 226, "IM Used" },
-
         { 300, "Multiple Choices" },
         { 301, "Moved Permanently" },
         { 302, "Found" },
@@ -36,7 +34,6 @@ public static class ReasonPhrases
         { 306, "Switch Proxy" },
         { 307, "Temporary Redirect" },
         { 308, "Permanent Redirect" },
-
         { 400, "Bad Request" },
         { 401, "Unauthorized" },
         { 402, "Payment Required" },
@@ -67,7 +64,6 @@ public static class ReasonPhrases
         { 431, "Request Header Fields Too Large" },
         { 451, "Unavailable For Legal Reasons" },
         { 499, "Client Closed Request" },
-
         { 500, "Internal Server Error" },
         { 501, "Not Implemented" },
         { 502, "Bad Gateway" },

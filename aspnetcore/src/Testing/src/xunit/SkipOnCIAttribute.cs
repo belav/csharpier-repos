@@ -20,23 +20,21 @@ public class SkipOnCIAttribute : Attribute, ITestCondition
 
     public bool IsMet
     {
-        get
-        {
-            return !OnCI();
-        }
+        get { return !OnCI(); }
     }
 
     public string SkipReason
     {
-        get
-        {
-            return "This test is skipped on CI";
-        }
+        get { return "This test is skipped on CI"; }
     }
 
     public static bool OnCI() => OnHelix() || OnAzdo();
+
     public static bool OnHelix() => HelixHelper.OnHelix();
+
     public static string GetTargetHelixQueue() => HelixHelper.GetTargetHelixQueue();
+
     public static bool OnAzdo() => !string.IsNullOrEmpty(GetIfOnAzdo());
+
     public static string GetIfOnAzdo() => Environment.GetEnvironmentVariable("AGENT_OS");
 }

@@ -35,7 +35,8 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         EndpointDataSource endpointDataSource,
         IHostEnvironment environment,
         ParameterPolicyFactory parameterPolicyFactory,
-        IServiceProviderIsService? serviceProviderIsService)
+        IServiceProviderIsService? serviceProviderIsService
+    )
     {
         _endpointDataSource = endpointDataSource;
         _environment = environment;
@@ -49,46 +50,66 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         static bool ShouldDisableInferredBody(string method)
         {
             // GET, DELETE, HEAD, CONNECT, TRACE, and OPTIONS normally do not contain bodies
-            return method.Equals(HttpMethods.Get, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Delete, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Head, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Options, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Trace, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
+            return method.Equals(HttpMethods.Get, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Delete, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Head, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Options, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Trace, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
         }
 
         foreach (var endpoint in _endpointDataSource.Endpoints)
         {
-            if (endpoint is RouteEndpoint routeEndpoint &&
-                routeEndpoint.Metadata.GetMetadata<MethodInfo>() is { } methodInfo &&
-                routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>() is { } httpMethodMetadata &&
-                routeEndpoint.Metadata.GetMetadata<IExcludeFromDescriptionMetadata>() is null or { ExcludeFromDescription: false })
+            if (
+                endpoint is RouteEndpoint routeEndpoint
+                && routeEndpoint.Metadata.GetMetadata<MethodInfo>() is { } methodInfo
+                && routeEndpoint.Metadata.GetMetadata<IHttpMethodMetadata>()
+                    is { } httpMethodMetadata
+                && routeEndpoint.Metadata.GetMetadata<IExcludeFromDescriptionMetadata>()
+                    is null
+                        or { ExcludeFromDescription: false }
+            )
             {
                 // We need to detect if any of the methods allow inferred body
-                var disableInferredBody = httpMethodMetadata.HttpMethods.Any(ShouldDisableInferredBody);
+                var disableInferredBody = httpMethodMetadata.HttpMethods.Any(
+                    ShouldDisableInferredBody
+                );
 
                 // REVIEW: Should we add an ApiDescription for endpoints without IHttpMethodMetadata? Swagger doesn't handle
                 // a null HttpMethod even though it's nullable on ApiDescription, so we'd need to define "default" HTTP methods.
                 // In practice, the Delegate will be called for any HTTP method if there is no IHttpMethodMetadata.
                 foreach (var httpMethod in httpMethodMetadata.HttpMethods)
                 {
-                    context.Results.Add(CreateApiDescription(routeEndpoint, httpMethod, methodInfo, disableInferredBody));
+                    context.Results.Add(
+                        CreateApiDescription(
+                            routeEndpoint,
+                            httpMethod,
+                            methodInfo,
+                            disableInferredBody
+                        )
+                    );
                 }
             }
         }
     }
 
-    public void OnProvidersExecuted(ApiDescriptionProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ApiDescriptionProviderContext context) { }
 
-    private ApiDescription CreateApiDescription(RouteEndpoint routeEndpoint, string httpMethod, MethodInfo methodInfo, bool disableInferredBody)
+    private ApiDescription CreateApiDescription(
+        RouteEndpoint routeEndpoint,
+        string httpMethod,
+        MethodInfo methodInfo,
+        bool disableInferredBody
+    )
     {
         // Swashbuckle uses the "controller" name to group endpoints together.
         // For now, put all methods defined the same declaring type together.
         string controllerName;
 
-        if (methodInfo.DeclaringType is not null && !TypeHelper.IsCompilerGeneratedType(methodInfo.DeclaringType))
+        if (
+            methodInfo.DeclaringType is not null
+            && !TypeHelper.IsCompilerGeneratedType(methodInfo.DeclaringType)
+        )
         {
             controllerName = methodInfo.DeclaringType.Name;
         }
@@ -102,31 +123,39 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         var apiDescription = new ApiDescription
         {
             HttpMethod = httpMethod,
-            GroupName = routeEndpoint.Metadata.GetMetadata<IEndpointGroupNameMetadata>()?.EndpointGroupName,
+            GroupName = routeEndpoint
+                .Metadata.GetMetadata<IEndpointGroupNameMetadata>()
+                ?.EndpointGroupName,
             RelativePath = routeEndpoint.RoutePattern.RawText?.TrimStart('/'),
             ActionDescriptor = new ActionDescriptor
             {
                 DisplayName = routeEndpoint.DisplayName,
-                RouteValues =
-                {
-                    ["controller"] = controllerName,
-                },
+                RouteValues = { ["controller"] = controllerName },
             },
         };
 
         var hasBodyOrFormFileParameter = false;
 
-        foreach (var parameter in PropertyAsParameterInfo.Flatten(methodInfo.GetParameters(), ParameterBindingMethodCache))
+        foreach (
+            var parameter in PropertyAsParameterInfo.Flatten(
+                methodInfo.GetParameters(),
+                ParameterBindingMethodCache
+            )
+        )
         {
-            var parameterDescription = CreateApiParameterDescription(parameter, routeEndpoint.RoutePattern, disableInferredBody);
+            var parameterDescription = CreateApiParameterDescription(
+                parameter,
+                routeEndpoint.RoutePattern,
+                disableInferredBody
+            );
 
             if (parameterDescription is { })
             {
                 apiDescription.ParameterDescriptions.Add(parameterDescription);
 
                 hasBodyOrFormFileParameter |=
-                    parameterDescription.Source == BindingSource.Body ||
-                    parameterDescription.Source == BindingSource.FormFile;
+                    parameterDescription.Source == BindingSource.Body
+                    || parameterDescription.Source == BindingSource.FormFile;
             }
         }
 
@@ -143,7 +172,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
                 var isOptional = acceptsMetadata.IsOptional;
                 var parameterDescription = new ApiParameterDescription
                 {
-                    Name = acceptsRequestType is not null ? acceptsRequestType.Name : typeof(void).Name,
+                    Name = acceptsRequestType is not null
+                        ? acceptsRequestType.Name
+                        : typeof(void).Name,
                     ModelMetadata = CreateModelMetadata(acceptsRequestType ?? typeof(void)),
                     Source = BindingSource.Body,
                     Type = acceptsRequestType ?? typeof(void),
@@ -156,22 +187,34 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
 
             foreach (var contentType in acceptsMetadata.ContentTypes)
             {
-                supportedRequestFormats.Add(new ApiRequestFormat
-                {
-                    MediaType = contentType
-                });
+                supportedRequestFormats.Add(new ApiRequestFormat { MediaType = contentType });
             }
         }
 
-        AddSupportedResponseTypes(apiDescription.SupportedResponseTypes, methodInfo.ReturnType, routeEndpoint.Metadata);
-        AddActionDescriptorEndpointMetadata(apiDescription.ActionDescriptor, routeEndpoint.Metadata);
+        AddSupportedResponseTypes(
+            apiDescription.SupportedResponseTypes,
+            methodInfo.ReturnType,
+            routeEndpoint.Metadata
+        );
+        AddActionDescriptorEndpointMetadata(
+            apiDescription.ActionDescriptor,
+            routeEndpoint.Metadata
+        );
 
         return apiDescription;
     }
 
-    private ApiParameterDescription? CreateApiParameterDescription(ParameterInfo parameter, RoutePattern pattern, bool disableInferredBody)
+    private ApiParameterDescription? CreateApiParameterDescription(
+        ParameterInfo parameter,
+        RoutePattern pattern,
+        bool disableInferredBody
+    )
     {
-        var (source, name, allowEmpty, paramType) = GetBindingSourceAndName(parameter, pattern, disableInferredBody);
+        var (source, name, allowEmpty, paramType) = GetBindingSourceAndName(
+            parameter,
+            pattern,
+            disableInferredBody
+        );
 
         // Services are ignored because they are not request parameters.
         if (source == BindingSource.Services)
@@ -184,7 +227,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         var nullability = nullabilityContext.Create(parameter);
         var isOptional = parameter is PropertyAsParameterInfo argument
             ? argument.IsOptional || allowEmpty
-            : parameter.HasDefaultValue || nullability.ReadState != NullabilityState.NotNull || allowEmpty;
+            : parameter.HasDefaultValue
+                || nullability.ReadState != NullabilityState.NotNull
+                || allowEmpty;
         var parameterDescriptor = CreateParameterDescriptor(parameter, pattern);
         var routeInfo = CreateParameterRouteInfo(pattern, parameter, isOptional);
 
@@ -197,11 +242,14 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
             Type = parameter.ParameterType,
             IsRequired = !isOptional,
             ParameterDescriptor = parameterDescriptor,
-            RouteInfo = routeInfo
+            RouteInfo = routeInfo,
         };
     }
 
-    private static ParameterDescriptor CreateParameterDescriptor(ParameterInfo parameter, RoutePattern pattern)
+    private static ParameterDescriptor CreateParameterDescriptor(
+        ParameterInfo parameter,
+        RoutePattern pattern
+    )
     {
         var parameterName = parameter.Name ?? string.Empty;
         var name = pattern.GetParameter(parameterName)?.Name ?? parameterName;
@@ -213,11 +261,17 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         };
     }
 
-    private ApiParameterRouteInfo? CreateParameterRouteInfo(RoutePattern pattern, ParameterInfo parameter, bool isOptional)
+    private ApiParameterRouteInfo? CreateParameterRouteInfo(
+        RoutePattern pattern,
+        ParameterInfo parameter,
+        bool isOptional
+    )
     {
         if (parameter.Name is null)
         {
-            throw new InvalidOperationException($"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name.");
+            throw new InvalidOperationException(
+                $"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name."
+            );
         }
 
         // Only produce a `RouteInfo` property for parameters that are defined in the route template
@@ -228,11 +282,16 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
 
         var constraints = new List<IRouteConstraint>();
 
-        if (pattern.ParameterPolicies.TryGetValue(parameter.Name, out var parameterPolicyReferences))
+        if (
+            pattern.ParameterPolicies.TryGetValue(parameter.Name, out var parameterPolicyReferences)
+        )
         {
             foreach (var parameterPolicyReference in parameterPolicyReferences)
             {
-                var policy = _parameterPolicyFactory.Create(parameterPart, parameterPolicyReference);
+                var policy = _parameterPolicyFactory.Create(
+                    parameterPart,
+                    parameterPolicyReference
+                );
                 if (policy is IRouteConstraint generatedConstraint)
                 {
                     constraints.Add(generatedConstraint);
@@ -244,13 +303,17 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         {
             Constraints = constraints.AsReadOnly(),
             DefaultValue = parameter.DefaultValue,
-            IsOptional = isOptional
+            IsOptional = isOptional,
         };
     }
 
     // TODO: Share more of this logic with RequestDelegateFactory.CreateArgument(...) using RequestDelegateFactoryUtilities
     // which is shared source.
-    private (BindingSource, string, bool, Type) GetBindingSourceAndName(ParameterInfo parameter, RoutePattern pattern, bool disableInferredBody)
+    private (BindingSource, string, bool, Type) GetBindingSourceAndName(
+        ParameterInfo parameter,
+        RoutePattern pattern,
+        bool disableInferredBody
+    )
     {
         var attributes = parameter.GetCustomAttributes();
 
@@ -258,36 +321,74 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         {
             var parameterName = parameter.Name ?? string.Empty;
             var name = pattern.GetParameter(parameterName)?.Name ?? parameterName;
-            return (BindingSource.Path, routeAttribute.Name ?? name, false, parameter.ParameterType);
+            return (
+                BindingSource.Path,
+                routeAttribute.Name ?? name,
+                false,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromQueryMetadata>().FirstOrDefault() is { } queryAttribute)
         {
-            return (BindingSource.Query, queryAttribute.Name ?? parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Query,
+                queryAttribute.Name ?? parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromHeaderMetadata>().FirstOrDefault() is { } headerAttribute)
         {
-            return (BindingSource.Header, headerAttribute.Name ?? parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Header,
+                headerAttribute.Name ?? parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromBodyMetadata>().FirstOrDefault() is { } fromBodyAttribute)
         {
-            return (BindingSource.Body, parameter.Name ?? string.Empty, fromBodyAttribute.AllowEmpty, parameter.ParameterType);
+            return (
+                BindingSource.Body,
+                parameter.Name ?? string.Empty,
+                fromBodyAttribute.AllowEmpty,
+                parameter.ParameterType
+            );
         }
         else if (attributes.OfType<IFromFormMetadata>().FirstOrDefault() is { } fromFormAttribute)
         {
-            return (BindingSource.FormFile, fromFormAttribute.Name ?? parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.FormFile,
+                fromFormAttribute.Name ?? parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
-        else if (parameter.CustomAttributes.Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType) || typeof(FromKeyedServicesAttribute) == a.AttributeType) ||
-                 parameter.ParameterType == typeof(HttpContext) ||
-                 parameter.ParameterType == typeof(HttpRequest) ||
-                 parameter.ParameterType == typeof(HttpResponse) ||
-                 parameter.ParameterType == typeof(ClaimsPrincipal) ||
-                 parameter.ParameterType == typeof(CancellationToken) ||
-                 ParameterBindingMethodCache.HasBindAsyncMethod(parameter) ||
-                 _serviceProviderIsService?.IsService(parameter.ParameterType) == true)
+        else if (
+            parameter.CustomAttributes.Any(a =>
+                typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
+                || typeof(FromKeyedServicesAttribute) == a.AttributeType
+            )
+            || parameter.ParameterType == typeof(HttpContext)
+            || parameter.ParameterType == typeof(HttpRequest)
+            || parameter.ParameterType == typeof(HttpResponse)
+            || parameter.ParameterType == typeof(ClaimsPrincipal)
+            || parameter.ParameterType == typeof(CancellationToken)
+            || ParameterBindingMethodCache.HasBindAsyncMethod(parameter)
+            || _serviceProviderIsService?.IsService(parameter.ParameterType) == true
+        )
         {
-            return (BindingSource.Services, parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Services,
+                parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
-        else if (parameter.ParameterType == typeof(string) || ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType))
+        else if (
+            parameter.ParameterType == typeof(string)
+            || ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType)
+        )
         {
             // complex types will display as strings since they use custom parsing via TryParse on a string
             var displayType = EndpointModelMetadata.GetDisplayType(parameter.ParameterType);
@@ -302,27 +403,55 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
                 return (BindingSource.Query, parameter.Name ?? string.Empty, false, displayType);
             }
         }
-        else if (parameter.ParameterType == typeof(IFormFile) || parameter.ParameterType == typeof(IFormFileCollection))
+        else if (
+            parameter.ParameterType == typeof(IFormFile)
+            || parameter.ParameterType == typeof(IFormFileCollection)
+        )
         {
-            return (BindingSource.FormFile, parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.FormFile,
+                parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
-        else if (disableInferredBody && (
-                 parameter.ParameterType == typeof(string[]) ||
-                 parameter.ParameterType == typeof(StringValues) ||
-                 (parameter.ParameterType.IsArray && ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType.GetElementType()!)) ))
+        else if (
+            disableInferredBody
+            && (
+                parameter.ParameterType == typeof(string[])
+                || parameter.ParameterType == typeof(StringValues)
+                || (
+                    parameter.ParameterType.IsArray
+                    && ParameterBindingMethodCache.HasTryParseMethod(
+                        parameter.ParameterType.GetElementType()!
+                    )
+                )
+            )
+        )
         {
-            return (BindingSource.Query, parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Query,
+                parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
         else
         {
-            return (BindingSource.Body, parameter.Name ?? string.Empty, false, parameter.ParameterType);
+            return (
+                BindingSource.Body,
+                parameter.Name ?? string.Empty,
+                false,
+                parameter.ParameterType
+            );
         }
     }
 
     private static void AddSupportedResponseTypes(
         IList<ApiResponseType> supportedResponseTypes,
         Type returnType,
-        EndpointMetadataCollection endpointMetadata)
+        EndpointMetadataCollection endpointMetadata
+    )
     {
         var responseType = returnType;
 
@@ -339,19 +468,30 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
 
         // We support attributes (which implement the IApiResponseMetadataProvider) interface
         // and types added via the extension methods (which implement IProducesResponseTypeMetadata).
-        var responseProviderMetadata = endpointMetadata.GetOrderedMetadata<IApiResponseMetadataProvider>();
-        var producesResponseMetadata = endpointMetadata.GetOrderedMetadata<IProducesResponseTypeMetadata>();
+        var responseProviderMetadata =
+            endpointMetadata.GetOrderedMetadata<IApiResponseMetadataProvider>();
+        var producesResponseMetadata =
+            endpointMetadata.GetOrderedMetadata<IProducesResponseTypeMetadata>();
         var errorMetadata = endpointMetadata.GetMetadata<ProducesErrorResponseTypeAttribute>();
         var defaultErrorType = errorMetadata?.Type ?? typeof(void);
         var contentTypes = new MediaTypeCollection();
 
         var responseProviderMetadataTypes = ApiResponseTypeProvider.ReadResponseMetadata(
-            responseProviderMetadata, responseType, defaultErrorType, contentTypes);
-        var producesResponseMetadataTypes = ApiResponseTypeProvider.ReadResponseMetadata(producesResponseMetadata, responseType);
+            responseProviderMetadata,
+            responseType,
+            defaultErrorType,
+            contentTypes
+        );
+        var producesResponseMetadataTypes = ApiResponseTypeProvider.ReadResponseMetadata(
+            producesResponseMetadata,
+            responseType
+        );
 
         // We favor types added via the extension methods (which implements IProducesResponseTypeMetadata)
         // over those that are added via attributes.
-        var responseMetadataTypes = producesResponseMetadataTypes.Values.Concat(responseProviderMetadataTypes.Values);
+        var responseMetadataTypes = producesResponseMetadataTypes.Values.Concat(
+            responseProviderMetadataTypes.Values
+        );
 
         if (responseMetadataTypes.Any())
         {
@@ -372,12 +512,20 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
                 }
                 // Only set the default response type if it hasn't already been set via a
                 // ProducesResponseTypeAttribute.
-                else if (apiResponseType.ApiResponseFormats.Count == 0 && CreateDefaultApiResponseFormat(apiResponseType.Type) is { } defaultResponseFormat)
+                else if (
+                    apiResponseType.ApiResponseFormats.Count == 0
+                    && CreateDefaultApiResponseFormat(apiResponseType.Type)
+                        is { } defaultResponseFormat
+                )
                 {
                     apiResponseType.ApiResponseFormats.Add(defaultResponseFormat);
                 }
 
-                if (!supportedResponseTypes.Any(existingResponseType => existingResponseType.StatusCode == apiResponseType.StatusCode))
+                if (
+                    !supportedResponseTypes.Any(existingResponseType =>
+                        existingResponseType.StatusCode == apiResponseType.StatusCode
+                    )
+                )
                 {
                     supportedResponseTypes.Add(apiResponseType);
                 }
@@ -438,20 +586,21 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
     private static EndpointModelMetadata CreateModelMetadata(Type type) =>
         new(ModelMetadataIdentity.ForType(type));
 
-    private static void AddResponseContentTypes(IList<ApiResponseFormat> apiResponseFormats, IReadOnlyList<string> contentTypes)
+    private static void AddResponseContentTypes(
+        IList<ApiResponseFormat> apiResponseFormats,
+        IReadOnlyList<string> contentTypes
+    )
     {
         foreach (var contentType in contentTypes)
         {
-            apiResponseFormats.Add(new ApiResponseFormat
-            {
-                MediaType = contentType,
-            });
+            apiResponseFormats.Add(new ApiResponseFormat { MediaType = contentType });
         }
     }
 
     private static void AddActionDescriptorEndpointMetadata(
         ActionDescriptor actionDescriptor,
-        EndpointMetadataCollection endpointMetadata)
+        EndpointMetadataCollection endpointMetadata
+    )
     {
         if (endpointMetadata.Count > 0)
         {

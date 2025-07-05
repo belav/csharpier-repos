@@ -27,7 +27,9 @@ public class EnumTypeModelBinderTest
     [Theory]
     [InlineData(typeof(IntEnum))]
     [InlineData(typeof(FlagsEnum))]
-    public async Task BindModel_AddsErrorToModelState_ForEmptyValue_AndNonNullableEnumTypes(Type modelType)
+    public async Task BindModel_AddsErrorToModelState_ForEmptyValue_AndNonNullableEnumTypes(
+        Type modelType
+    )
     {
         // Arrange
         var message = "The value '' is invalid.";
@@ -53,7 +55,8 @@ public class EnumTypeModelBinderTest
         var modelType = typeof(IntEnum);
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: new object[] { enumValue });
+            valueProviderValue: new object[] { enumValue }
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -77,7 +80,8 @@ public class EnumTypeModelBinderTest
         var expected = enumConverter.ConvertFrom(flagsEnumValue).ToString();
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: new object[] { flagsEnumValue });
+            valueProviderValue: new object[] { flagsEnumValue }
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -101,7 +105,8 @@ public class EnumTypeModelBinderTest
         var expected = enumConverter.ConvertFrom(flagsEnumValue).ToString();
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: new object[] { flagsEnumValue });
+            valueProviderValue: new object[] { flagsEnumValue }
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -130,13 +135,17 @@ public class EnumTypeModelBinderTest
     // or'd together.
     [InlineData(typeof(FlagsEnum?), "32,015")]
     [InlineData(typeof(FlagsEnum?), "32,128")]
-    public async Task BindModel_AddsErrorToModelState_ForInvalidEnumValues(Type modelType, string suppliedValue)
+    public async Task BindModel_AddsErrorToModelState_ForInvalidEnumValues(
+        Type modelType,
+        string suppliedValue
+    )
     {
         // Arrange
         var message = $"The value '{suppliedValue}' is invalid.";
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: new object[] { suppliedValue });
+            valueProviderValue: new object[] { suppliedValue }
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -153,9 +162,7 @@ public class EnumTypeModelBinderTest
     [InlineData("8, 1")]
     [InlineData("Value2, Value8")]
     [InlineData("value8,value4,value2,value1")]
-    public async Task BindModel_BindsTo_NonNullableFlagsEnumType_List(
-        string flagsEnumValue
-    )
+    public async Task BindModel_BindsTo_NonNullableFlagsEnumType_List(string flagsEnumValue)
     {
         // Arrange
         var modelType = typeof(FlagsEnum);
@@ -163,7 +170,8 @@ public class EnumTypeModelBinderTest
         var expected = enumConverter.ConvertFrom(flagsEnumValue).ToString();
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: flagsEnumValue.Split(","));
+            valueProviderValue: flagsEnumValue.Split(",")
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -178,9 +186,7 @@ public class EnumTypeModelBinderTest
     [InlineData("8, 1")]
     [InlineData("Value2, Value8")]
     [InlineData("value8,value4,value2,value1")]
-    public async Task BindModel_BindsTo_NullableFlagsEnumType_List(
-        string flagsEnumValue
-    )
+    public async Task BindModel_BindsTo_NullableFlagsEnumType_List(string flagsEnumValue)
     {
         // Arrange
         var modelType = typeof(FlagsEnum?);
@@ -188,7 +194,8 @@ public class EnumTypeModelBinderTest
         var expected = enumConverter.ConvertFrom(flagsEnumValue).ToString();
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: flagsEnumValue.Split(","));
+            valueProviderValue: flagsEnumValue.Split(",")
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -219,7 +226,8 @@ public class EnumTypeModelBinderTest
         var message = $"The value '{suppliedValue}' is invalid.";
         var (bindingContext, binder) = GetBinderAndContext(
             modelType,
-            valueProviderValue: suppliedValue.Split(","));
+            valueProviderValue: suppliedValue.Split(",")
+        );
 
         // Act
         await binder.BindModelAsync(bindingContext);
@@ -234,7 +242,8 @@ public class EnumTypeModelBinderTest
 
     private static (DefaultModelBindingContext, IModelBinder) GetBinderAndContext(
         Type modelType,
-        object valueProviderValue)
+        object valueProviderValue
+    )
     {
         var binderProviderContext = new TestModelBinderProviderContext(modelType);
         var modelName = "theModelName";
@@ -243,10 +252,7 @@ public class EnumTypeModelBinderTest
             ModelMetadata = binderProviderContext.Metadata,
             ModelName = modelName,
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider()
-                {
-                    { modelName, valueProviderValue }
-                }
+            ValueProvider = new SimpleValueProvider() { { modelName, valueProviderValue } },
         };
 
         var binderProvider = new EnumTypeModelBinderProvider(new MvcOptions());
@@ -279,6 +285,6 @@ public class EnumTypeModelBinderTest
         Value0 = 0,
         Value1 = 1,
         Value2 = 2,
-        MaxValue = int.MaxValue
+        MaxValue = int.MaxValue,
     }
 }

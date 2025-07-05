@@ -32,19 +32,29 @@ namespace Microsoft.CodeAnalysis.GoToBase
         IStreamingFindUsagesPresenter streamingPresenter,
         IUIThreadOperationExecutor uiThreadOperationExecutor,
         IAsynchronousOperationListenerProvider listenerProvider,
-        IGlobalOptionService globalOptions) : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>(threadingContext,
-               streamingPresenter,
-               uiThreadOperationExecutor,
-               listenerProvider.GetListener(FeatureAttribute.GoToBase),
-               globalOptions)
+        IGlobalOptionService globalOptions
+    )
+        : AbstractGoToCommandHandler<IGoToBaseService, GoToBaseCommandArgs>(
+            threadingContext,
+            streamingPresenter,
+            uiThreadOperationExecutor,
+            listenerProvider.GetListener(FeatureAttribute.GoToBase),
+            globalOptions
+        )
     {
         public override string DisplayName => EditorFeaturesResources.Go_To_Base;
 
         protected override string ScopeDescription => EditorFeaturesResources.Locating_bases;
         protected override FunctionId FunctionId => FunctionId.CommandHandler_GoToBase;
 
-        protected override Task FindActionAsync(IFindUsagesContext context, Document document, int caretPosition, CancellationToken cancellationToken)
-            => document.GetRequiredLanguageService<IGoToBaseService>()
-                       .FindBasesAsync(context, document, caretPosition, cancellationToken);
+        protected override Task FindActionAsync(
+            IFindUsagesContext context,
+            Document document,
+            int caretPosition,
+            CancellationToken cancellationToken
+        ) =>
+            document
+                .GetRequiredLanguageService<IGoToBaseService>()
+                .FindBasesAsync(context, document, caretPosition, cancellationToken);
     }
 }

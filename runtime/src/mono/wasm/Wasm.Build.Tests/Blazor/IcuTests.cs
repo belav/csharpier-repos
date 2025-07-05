@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 #nullable enable
 
@@ -17,7 +17,7 @@ namespace Wasm.Build.Tests.Blazor;
 public class IcuTests : BlazorWasmTestBase
 {
     public IcuTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext) {}
+        : base(output, buildContext) { }
 
     [Theory]
     [InlineData("Debug", false)]
@@ -40,11 +40,17 @@ public class IcuTests : BlazorWasmTestBase
                 id,
                 config,
                 WarnAsError: false,
-                GlobalizationMode: invariant == true ? GlobalizationMode.Invariant : GlobalizationMode.Hybrid,
-                ExpectedFileType: invariant == true ? NativeFilesType.Relinked : NativeFilesType.FromRuntimePack
-            ));
+                GlobalizationMode: invariant == true
+                    ? GlobalizationMode.Invariant
+                    : GlobalizationMode.Hybrid,
+                ExpectedFileType: invariant == true
+                    ? NativeFilesType.Relinked
+                    : NativeFilesType.FromRuntimePack
+            )
+        );
 
-        string warning = "$(HybridGlobalization) has no effect when $(InvariantGlobalization) is set to true.";
+        string warning =
+            "$(HybridGlobalization) has no effect when $(InvariantGlobalization) is set to true.";
         if (invariant == true)
         {
             Assert.Contains(warning, res.Output);
@@ -70,7 +76,8 @@ public class IcuTests : BlazorWasmTestBase
         string projectFile = CreateBlazorWasmTemplateProject(id);
         string extraProperties = "<HybridGlobalization>true</HybridGlobalization>";
         if (fullIcu != null)
-            extraProperties += $"<BlazorWebAssemblyLoadAllGlobalizationData>{fullIcu}</BlazorWebAssemblyLoadAllGlobalizationData>";
+            extraProperties +=
+                $"<BlazorWebAssemblyLoadAllGlobalizationData>{fullIcu}</BlazorWebAssemblyLoadAllGlobalizationData>";
         AddItemsPropertiesToProject(projectFile, extraProperties: extraProperties);
 
         (CommandResult res, string logPath) = BlazorBuild(
@@ -79,12 +86,14 @@ public class IcuTests : BlazorWasmTestBase
                 config,
                 WarnAsError: false,
                 GlobalizationMode: GlobalizationMode.Hybrid
-            ));
+            )
+        );
 
-        string warning = "$(BlazorWebAssemblyLoadAllGlobalizationData) has no effect when $(HybridGlobalization) is set to true.";
+        string warning =
+            "$(BlazorWebAssemblyLoadAllGlobalizationData) has no effect when $(HybridGlobalization) is set to true.";
         if (fullIcu == true)
         {
-             Assert.Contains(warning, res.Output);
+            Assert.Contains(warning, res.Output);
         }
         else
         {
@@ -105,7 +114,8 @@ public class IcuTests : BlazorWasmTestBase
     {
         string id = $"blz_hybrid_{config}_{GetRandomId()}";
         string projectFile = CreateBlazorWasmTemplateProject(id);
-        string extraProperties = "<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>";
+        string extraProperties =
+            "<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>";
         if (invariant != null)
             extraProperties += $"<InvariantGlobalization>{invariant}</InvariantGlobalization>";
         AddItemsPropertiesToProject(projectFile, extraProperties: extraProperties);
@@ -115,18 +125,24 @@ public class IcuTests : BlazorWasmTestBase
                 id,
                 config,
                 WarnAsError: false,
-                GlobalizationMode: invariant == true ? GlobalizationMode.Invariant : GlobalizationMode.FullIcu,
-                ExpectedFileType: invariant == true ? NativeFilesType.Relinked : NativeFilesType.FromRuntimePack
-            ));
+                GlobalizationMode: invariant == true
+                    ? GlobalizationMode.Invariant
+                    : GlobalizationMode.FullIcu,
+                ExpectedFileType: invariant == true
+                    ? NativeFilesType.Relinked
+                    : NativeFilesType.FromRuntimePack
+            )
+        );
 
-        string warning = "$(BlazorWebAssemblyLoadAllGlobalizationData) has no effect when $(InvariantGlobalization) is set to true.";
+        string warning =
+            "$(BlazorWebAssemblyLoadAllGlobalizationData) has no effect when $(InvariantGlobalization) is set to true.";
         if (invariant == true)
         {
-             Assert.Contains(warning, res.Output);
+            Assert.Contains(warning, res.Output);
         }
         else
         {
-             Assert.DoesNotContain(warning, res.Output);
+            Assert.DoesNotContain(warning, res.Output);
         }
 
         await BlazorRunForBuildWithDotnetRun(new BlazorRunOptions() { Config = config });

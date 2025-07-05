@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ScrollBar" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ScrollBar">
+<Type
+  Name="VisualStyleElement+ScrollBar"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ScrollBar"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ScrollBar" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

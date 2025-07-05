@@ -33,7 +33,10 @@ namespace Microsoft.CodeAnalysis.Remote
         /// operations (only syncing text changes) we don't cancel this when we enter the paused state.  We simply don't
         /// start queuing more requests into this until we become unpaused.
         /// </summary>
-        private readonly AsyncBatchingWorkQueue<(Document? oldDocument, Document? newDocument)> _textChangeQueue;
+        private readonly AsyncBatchingWorkQueue<(
+            Document? oldDocument,
+            Document? newDocument
+        )> _textChangeQueue;
 
         /// <summary>
         /// Queue for kicking off the work to synchronize the primary workspace's solution.
@@ -46,19 +49,22 @@ namespace Microsoft.CodeAnalysis.Remote
         public SolutionChecksumUpdater(
             Workspace workspace,
             IAsynchronousOperationListenerProvider listenerProvider,
-            CancellationToken shutdownToken)
+            CancellationToken shutdownToken
+        )
         {
             var listener = listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater);
 
-            _globalOperationService = workspace.Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>().FirstOrDefault()?.Value;
+            _globalOperationService = workspace
+                .Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                .FirstOrDefault()
+                ?.Value;
 
             _workspace = workspace;
 
-            _textChangeQueue = new AsyncBatchingWorkQueue<(Document? oldDocument, Document? newDocument)>(
-                DelayTimeSpan.NearImmediate,
-                SynchronizeTextChangesAsync,
-                listener,
-                shutdownToken);
+            _textChangeQueue = new AsyncBatchingWorkQueue<(
+                Document? oldDocument,
+                Document? newDocument
+            )>(DelayTimeSpan.NearImmediate, SynchronizeTextChangesAsync, listener, shutdownToken);
 
             // Use an equality comparer here as we will commonly get lots of change notifications that will all be
             // associated with the same cancellation token controlling that batch of work.  No need to enqueue the same
@@ -67,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 DelayTimeSpan.NearImmediate,
                 SynchronizePrimaryWorkspaceAsync,
                 listener,
-                shutdownToken);
+                shutdownToken
+            );
 
             // start listening workspace change event
             _workspace.WorkspaceChanged += OnWorkspaceChanged;
@@ -96,11 +103,9 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        private void OnGlobalOperationStarted(object? sender, EventArgs e)
-            => PauseWork();
+        private void OnGlobalOperationStarted(object? sender, EventArgs e) => PauseWork();
 
-        private void OnGlobalOperationStopped(object? sender, EventArgs e)
-            => ResumeWork();
+        private void OnGlobalOperationStopped(object? sender, EventArgs e) => ResumeWork();
 
         private void PauseWork()
         {
@@ -134,32 +139,55 @@ namespace Microsoft.CodeAnalysis.Remote
 
             if (e.Kind == WorkspaceChangeKind.DocumentChanged)
             {
-                _textChangeQueue.AddWork((e.OldSolution.GetDocument(e.DocumentId), e.NewSolution.GetDocument(e.DocumentId)));
+                _textChangeQueue.AddWork(
+                    (
+                        e.OldSolution.GetDocument(e.DocumentId),
+                        e.NewSolution.GetDocument(e.DocumentId)
+                    )
+                );
             }
 
             _synchronizeWorkspaceQueue.AddWork();
         }
 
-        private async ValueTask SynchronizePrimaryWorkspaceAsync(CancellationToken cancellationToken)
+        private async ValueTask SynchronizePrimaryWorkspaceAsync(
+            CancellationToken cancellationToken
+        )
         {
             var solution = _workspace.CurrentSolution;
-            var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(_workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
                 return;
 
-            using (Logger.LogBlock(FunctionId.SolutionChecksumUpdater_SynchronizePrimaryWorkspace, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SolutionChecksumUpdater_SynchronizePrimaryWorkspace,
+                    cancellationToken
+                )
+            )
             {
                 var workspaceVersion = solution.WorkspaceVersion;
-                await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                    solution,
-                    (service, solution, cancellationToken) => service.SynchronizePrimaryWorkspaceAsync(solution, workspaceVersion, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                await client
+                    .TryInvokeAsync<IRemoteAssetSynchronizationService>(
+                        solution,
+                        (service, solution, cancellationToken) =>
+                            service.SynchronizePrimaryWorkspaceAsync(
+                                solution,
+                                workspaceVersion,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
         private async ValueTask SynchronizeTextChangesAsync(
             ImmutableSegmentedList<(Document? oldDocument, Document? newDocument)> values,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             foreach (var (oldDocument, newDocument) in values)
             {
@@ -167,12 +195,17 @@ namespace Microsoft.CodeAnalysis.Remote
                     continue;
 
                 cancellationToken.ThrowIfCancellationRequested();
-                await SynchronizeTextChangesAsync(oldDocument, newDocument, cancellationToken).ConfigureAwait(false);
+                await SynchronizeTextChangesAsync(oldDocument, newDocument, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             return;
 
-            async ValueTask SynchronizeTextChangesAsync(Document oldDocument, Document newDocument, CancellationToken cancellationToken)
+            async ValueTask SynchronizeTextChangesAsync(
+                Document oldDocument,
+                Document newDocument,
+                CancellationToken cancellationToken
+            )
             {
                 // this pushes text changes to the remote side if it can.
                 // this is purely perf optimization. whether this pushing text change
@@ -190,8 +223,10 @@ namespace Microsoft.CodeAnalysis.Remote
                 // VS side. this optimization saves times we need to do full text
                 // synchronization for typing scenario.
 
-                if ((oldDocument.TryGetText(out var oldText) == false) ||
-                    (newDocument.TryGetText(out var newText) == false))
+                if (
+                    (oldDocument.TryGetText(out var oldText) == false)
+                    || (newDocument.TryGetText(out var newText) == false)
+                )
                 {
                     // we only support case where text already exist
                     return;
@@ -213,15 +248,28 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
 
                 // only cancelled when remote host gets shutdown
-                var client = await RemoteHostClient.TryGetClientAsync(_workspace, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(_workspace, cancellationToken)
+                    .ConfigureAwait(false);
                 if (client == null)
                     return;
 
-                var state = await oldDocument.State.GetStateChecksumsAsync(cancellationToken).ConfigureAwait(false);
+                var state = await oldDocument
+                    .State.GetStateChecksumsAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                await client.TryInvokeAsync<IRemoteAssetSynchronizationService>(
-                    (service, cancellationToken) => service.SynchronizeTextAsync(oldDocument.Id, state.Text, textChanges, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                await client
+                    .TryInvokeAsync<IRemoteAssetSynchronizationService>(
+                        (service, cancellationToken) =>
+                            service.SynchronizeTextAsync(
+                                oldDocument.Id,
+                                state.Text,
+                                textChanges,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }

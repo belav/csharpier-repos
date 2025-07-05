@@ -14,19 +14,24 @@ namespace System.Configuration
 
         public ConfigurationValidatorAttribute(Type validator)
         {
-            if (validator == null) throw new ArgumentNullException(nameof(validator));
+            if (validator == null)
+                throw new ArgumentNullException(nameof(validator));
 
             if (!typeof(ConfigurationValidatorBase).IsAssignableFrom(validator))
             {
-                throw new ArgumentException(SR.Format(SR.Validator_Attribute_param_not_validator,
-                    "ConfigurationValidatorBase"));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Validator_Attribute_param_not_validator,
+                        "ConfigurationValidatorBase"
+                    )
+                );
             }
 
             ValidatorType = validator;
         }
 
-        public virtual ConfigurationValidatorBase ValidatorInstance
-            => (ConfigurationValidatorBase)TypeUtil.CreateInstance(ValidatorType);
+        public virtual ConfigurationValidatorBase ValidatorInstance =>
+            (ConfigurationValidatorBase)TypeUtil.CreateInstance(ValidatorType);
 
         public Type ValidatorType { get; }
 
@@ -51,8 +56,10 @@ namespace System.Configuration
             }
             else
             {
-                Debug.Assert(_declaringType == declaringType,
-                    "Subsequent calls cannot change the declaring type of the attribute.");
+                Debug.Assert(
+                    _declaringType == declaringType,
+                    "Subsequent calls cannot change the declaring type of the attribute."
+                );
             }
         }
     }

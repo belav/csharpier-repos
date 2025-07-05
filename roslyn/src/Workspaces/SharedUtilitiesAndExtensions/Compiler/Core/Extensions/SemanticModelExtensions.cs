@@ -10,7 +10,6 @@ using System.Linq;
 using System.Threading;
 using Microsoft.CodeAnalysis.LanguageService;
 using Roslyn.Utilities;
-
 #if !CODE_STYLE
 using Humanizer;
 #endif
@@ -29,45 +28,82 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <param name="token">The token to get semantic information from. This must be part of the
         /// syntax tree associated with the binding.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        public static SymbolInfo GetSymbolInfo(this SemanticModel semanticModel, SyntaxToken token, CancellationToken cancellationToken)
-            => semanticModel.GetSymbolInfo(token.Parent!, cancellationToken);
+        public static SymbolInfo GetSymbolInfo(
+            this SemanticModel semanticModel,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        ) => semanticModel.GetSymbolInfo(token.Parent!, cancellationToken);
 
-        public static DataFlowAnalysis AnalyzeRequiredDataFlow(this SemanticModel semanticModel, SyntaxNode statementOrExpression)
-            => semanticModel.AnalyzeDataFlow(statementOrExpression) ?? throw new InvalidOperationException();
+        public static DataFlowAnalysis AnalyzeRequiredDataFlow(
+            this SemanticModel semanticModel,
+            SyntaxNode statementOrExpression
+        ) =>
+            semanticModel.AnalyzeDataFlow(statementOrExpression)
+            ?? throw new InvalidOperationException();
 
-        public static DataFlowAnalysis AnalyzeRequiredDataFlow(this SemanticModel semanticModel, SyntaxNode firstStatement, SyntaxNode lastStatement)
-            => semanticModel.AnalyzeDataFlow(firstStatement, lastStatement) ?? throw new InvalidOperationException();
+        public static DataFlowAnalysis AnalyzeRequiredDataFlow(
+            this SemanticModel semanticModel,
+            SyntaxNode firstStatement,
+            SyntaxNode lastStatement
+        ) =>
+            semanticModel.AnalyzeDataFlow(firstStatement, lastStatement)
+            ?? throw new InvalidOperationException();
 
-        public static ControlFlowAnalysis AnalyzeRequiredControlFlow(this SemanticModel semanticModel, SyntaxNode statement)
-            => semanticModel.AnalyzeControlFlow(statement) ?? throw new InvalidOperationException();
+        public static ControlFlowAnalysis AnalyzeRequiredControlFlow(
+            this SemanticModel semanticModel,
+            SyntaxNode statement
+        ) => semanticModel.AnalyzeControlFlow(statement) ?? throw new InvalidOperationException();
 
-        public static ControlFlowAnalysis AnalyzeRequiredControlFlow(this SemanticModel semanticModel, SyntaxNode firstStatement, SyntaxNode lastStatement)
-            => semanticModel.AnalyzeControlFlow(firstStatement, lastStatement) ?? throw new InvalidOperationException();
+        public static ControlFlowAnalysis AnalyzeRequiredControlFlow(
+            this SemanticModel semanticModel,
+            SyntaxNode firstStatement,
+            SyntaxNode lastStatement
+        ) =>
+            semanticModel.AnalyzeControlFlow(firstStatement, lastStatement)
+            ?? throw new InvalidOperationException();
 
-        public static ISymbol GetRequiredDeclaredSymbol(this SemanticModel semanticModel, SyntaxNode declaration, CancellationToken cancellationToken)
+        public static ISymbol GetRequiredDeclaredSymbol(
+            this SemanticModel semanticModel,
+            SyntaxNode declaration,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetDeclaredSymbol(declaration, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static IOperation GetRequiredOperation(this SemanticModel semanticModel, SyntaxNode node, CancellationToken cancellationToken)
+        public static IOperation GetRequiredOperation(
+            this SemanticModel semanticModel,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetOperation(node, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static ISymbol GetRequiredEnclosingSymbol(this SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public static ISymbol GetRequiredEnclosingSymbol(
+            this SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.GetEnclosingSymbol(position, cancellationToken)
                 ?? throw new InvalidOperationException();
         }
 
-        public static TSymbol? GetEnclosingSymbol<TSymbol>(this SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public static TSymbol? GetEnclosingSymbol<TSymbol>(
+            this SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
             where TSymbol : class, ISymbol
         {
-            for (var symbol = semanticModel.GetEnclosingSymbol(position, cancellationToken);
-                 symbol != null;
-                 symbol = symbol.ContainingSymbol)
+            for (
+                var symbol = semanticModel.GetEnclosingSymbol(position, cancellationToken);
+                symbol != null;
+                symbol = symbol.ContainingSymbol
+            )
             {
                 if (symbol is TSymbol tSymbol)
                 {
@@ -78,24 +114,39 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return null;
         }
 
-        public static ISymbol GetEnclosingNamedTypeOrAssembly(this SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public static ISymbol GetEnclosingNamedTypeOrAssembly(
+            this SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            return semanticModel.GetEnclosingSymbol<INamedTypeSymbol>(position, cancellationToken) ??
-                (ISymbol)semanticModel.Compilation.Assembly;
+            return semanticModel.GetEnclosingSymbol<INamedTypeSymbol>(position, cancellationToken)
+                ?? (ISymbol)semanticModel.Compilation.Assembly;
         }
 
-        public static INamedTypeSymbol? GetEnclosingNamedType(this SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.GetEnclosingSymbol<INamedTypeSymbol>(position, cancellationToken);
+        public static INamedTypeSymbol? GetEnclosingNamedType(
+            this SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) => semanticModel.GetEnclosingSymbol<INamedTypeSymbol>(position, cancellationToken);
 
-        public static INamespaceSymbol? GetEnclosingNamespace(this SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.GetEnclosingSymbol<INamespaceSymbol>(position, cancellationToken);
+        public static INamespaceSymbol? GetEnclosingNamespace(
+            this SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) => semanticModel.GetEnclosingSymbol<INamespaceSymbol>(position, cancellationToken);
 
         public static IEnumerable<ISymbol> GetExistingSymbols(
-                    this SemanticModel semanticModel, SyntaxNode? container, CancellationToken cancellationToken, Func<SyntaxNode, bool>? descendInto = null)
+            this SemanticModel semanticModel,
+            SyntaxNode? container,
+            CancellationToken cancellationToken,
+            Func<SyntaxNode, bool>? descendInto = null
+        )
         {
             // Ignore an anonymous type property or tuple field.  It's ok if they have a name that
             // matches the name of the local we're introducing.
-            return semanticModel.GetAllDeclaredSymbols(container, cancellationToken, descendInto)
+            return semanticModel
+                .GetAllDeclaredSymbols(container, cancellationToken, descendInto)
                 .Where(s => !s.IsAnonymousTypeProperty() && !s.IsTupleField());
         }
 
@@ -113,7 +164,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static HashSet<ISymbol> GetAllDeclaredSymbols(
-           this SemanticModel semanticModel, SyntaxNode? container, CancellationToken cancellationToken, Func<SyntaxNode, bool>? filter = null)
+            this SemanticModel semanticModel,
+            SyntaxNode? container,
+            CancellationToken cancellationToken,
+            Func<SyntaxNode, bool>? filter = null
+        )
         {
             var symbols = new HashSet<ISymbol>();
             if (container != null)
@@ -125,8 +180,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         private static void GetAllDeclaredSymbols(
-            SemanticModel semanticModel, SyntaxNode node,
-            HashSet<ISymbol> symbols, CancellationToken cancellationToken, Func<SyntaxNode, bool>? descendInto = null)
+            SemanticModel semanticModel,
+            SyntaxNode node,
+            HashSet<ISymbol> symbols,
+            CancellationToken cancellationToken,
+            Func<SyntaxNode, bool>? descendInto = null
+        )
         {
             var symbol = semanticModel.GetDeclaredSymbol(node, cancellationToken);
 
@@ -142,21 +201,41 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     var childNode = child.AsNode()!;
                     if (ShouldDescendInto(childNode, descendInto))
                     {
-                        GetAllDeclaredSymbols(semanticModel, childNode, symbols, cancellationToken, descendInto);
+                        GetAllDeclaredSymbols(
+                            semanticModel,
+                            childNode,
+                            symbols,
+                            cancellationToken,
+                            descendInto
+                        );
                     }
                 }
             }
 
-            static bool ShouldDescendInto(SyntaxNode node, Func<SyntaxNode, bool>? filter)
-                => filter != null ? filter(node) : true;
+            static bool ShouldDescendInto(SyntaxNode node, Func<SyntaxNode, bool>? filter) =>
+                filter != null ? filter(node) : true;
         }
-        public static string GenerateNameFromType(this SemanticModel semanticModel, ITypeSymbol type, ISyntaxFacts syntaxFacts, bool capitalize)
+
+        public static string GenerateNameFromType(
+            this SemanticModel semanticModel,
+            ITypeSymbol type,
+            ISyntaxFacts syntaxFacts,
+            bool capitalize
+        )
         {
             var pluralize = semanticModel.ShouldPluralize(type);
             var typeArguments = type.GetAllTypeArguments();
 
             // We may be able to use the type's arguments to generate a name if we're working with an enumerable type.
-            if (pluralize && TryGeneratePluralizedNameFromTypeArgument(syntaxFacts, typeArguments, capitalize, out var typeArgumentParameterName))
+            if (
+                pluralize
+                && TryGeneratePluralizedNameFromTypeArgument(
+                    syntaxFacts,
+                    typeArguments,
+                    capitalize,
+                    out var typeArgumentParameterName
+                )
+            )
             {
                 return typeArgumentParameterName;
             }
@@ -169,11 +248,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             // Otherwise assume no pluralization, e.g. using 'immutableArray', 'list', etc. instead of their
             // plural forms
-            if (type.IsSpecialType() ||
-                type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T ||
-                type.TypeKind == TypeKind.Pointer)
+            if (
+                type.IsSpecialType()
+                || type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
+                || type.TypeKind == TypeKind.Pointer
+            )
             {
-                return capitalize ? DefaultBuiltInParameterName.ToUpper() : DefaultBuiltInParameterName;
+                return capitalize
+                    ? DefaultBuiltInParameterName.ToUpper()
+                    : DefaultBuiltInParameterName;
             }
             else
             {
@@ -191,14 +274,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return false;
 
             var enumerableType = semanticModel.Compilation.IEnumerableOfTType();
-            return type.AllInterfaces.Any(static (i, enumerableType) => i.OriginalDefinition.Equals(enumerableType), enumerableType);
+            return type.AllInterfaces.Any(
+                static (i, enumerableType) => i.OriginalDefinition.Equals(enumerableType),
+                enumerableType
+            );
         }
 
         private static bool TryGeneratePluralizedNameFromTypeArgument(
             ISyntaxFacts syntaxFacts,
             ImmutableArray<ITypeSymbol> typeArguments,
             bool capitalize,
-            [NotNullWhen(true)] out string? parameterName)
+            [NotNullWhen(true)] out string? parameterName
+        )
         {
             // We only consider generating a name if there's one type argument.
             // This logic can potentially be expanded upon in the future.
@@ -209,7 +296,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 if (syntaxFacts.IsValidIdentifier(typeArgument))
                 {
                     typeArgument = Pluralize(typeArgument);
-                    parameterName = capitalize ? typeArgument.ToPascalCase() : typeArgument.ToCamelCase();
+                    parameterName = capitalize
+                        ? typeArgument.ToPascalCase()
+                        : typeArgument.ToCamelCase();
                     return true;
                 }
             }
@@ -234,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ITypeSymbol GetType(
             this SemanticModel semanticModel,
             SyntaxNode expression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var typeInfo = semanticModel.GetTypeInfo(expression, cancellationToken);
 

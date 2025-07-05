@@ -15,6 +15,7 @@ internal static partial class Interop
             int InfoClass,
             int BufferSize,
             out int pSizeRequired,
-            IntPtr Buffer);
+            IntPtr Buffer
+        );
     }
 }

@@ -1,28 +1,30 @@
 //------------------------------------------------------------------------------
 // <copyright file="BufferedWebEventProvider.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Management {
+namespace System.Web.Management
+{
     using System;
-    using System.Web;
-    using System.Diagnostics;
-    using System.Web.Util;
-    using System.Web.Configuration;
-    using System.Configuration.Provider;
     using System.Collections;
     using System.Collections.Specialized;
     using System.Configuration;
+    using System.Configuration.Provider;
+    using System.Diagnostics;
     using System.Security;
-    using Debug=System.Web.Util.Debug;
     using System.Security.Permissions;
+    using System.Web;
+    using System.Web.Configuration;
+    using System.Web.Util;
+    using Debug = System.Web.Util.Debug;
 
     // Interface for buffered event provider
-    public abstract class BufferedWebEventProvider : WebEventProvider {
-        bool    _buffer = true;
-        string  _bufferMode;
-        WebEventBuffer  _webEventBuffer;
+    public abstract class BufferedWebEventProvider : WebEventProvider
+    {
+        bool _buffer = true;
+        string _bufferMode;
+        WebEventBuffer _webEventBuffer;
 
         public override void Initialize(string name, NameValueCollection config)
         {
@@ -32,60 +34,87 @@ namespace System.Web.Management {
 
             ProviderUtil.GetAndRemoveBooleanAttribute(config, "buffer", name, ref _buffer);
 
-            if (_buffer) {
-                ProviderUtil.GetAndRemoveRequiredNonEmptyStringAttribute(config, "bufferMode", name, ref _bufferMode);
-                _webEventBuffer = new WebEventBuffer(this, _bufferMode, new WebEventBufferFlushCallback(this.ProcessEventFlush));
+            if (_buffer)
+            {
+                ProviderUtil.GetAndRemoveRequiredNonEmptyStringAttribute(
+                    config,
+                    "bufferMode",
+                    name,
+                    ref _bufferMode
+                );
+                _webEventBuffer = new WebEventBuffer(
+                    this,
+                    _bufferMode,
+                    new WebEventBufferFlushCallback(this.ProcessEventFlush)
+                );
             }
-            else {
-                ProviderUtil.GetAndRemoveStringAttribute(config, "bufferMode", name, ref _bufferMode);
+            else
+            {
+                ProviderUtil.GetAndRemoveStringAttribute(
+                    config,
+                    "bufferMode",
+                    name,
+                    ref _bufferMode
+                );
             }
 
             base.Initialize(name, config);
-            
-            ProviderUtil.CheckUnrecognizedAttributes(config, name);            
+
+            ProviderUtil.CheckUnrecognizedAttributes(config, name);
         }
 
-        public bool UseBuffering {
+        public bool UseBuffering
+        {
             get { return _buffer; }
         }
 
-        public string BufferMode {
+        public string BufferMode
+        {
             get { return _bufferMode; }
         }
-        
-        public override void ProcessEvent(WebBaseEvent eventRaised) 
-        { 
-            if (_buffer) {
-                // register the event with the buffer instead of writing it out 
-                Debug.Trace("BufferedWebEventProvider", "Saving event to buffer: event=" + eventRaised.GetType().Name);
+
+        public override void ProcessEvent(WebBaseEvent eventRaised)
+        {
+            if (_buffer)
+            {
+                // register the event with the buffer instead of writing it out
+                Debug.Trace(
+                    "BufferedWebEventProvider",
+                    "Saving event to buffer: event=" + eventRaised.GetType().Name
+                );
                 _webEventBuffer.AddEvent(eventRaised);
             }
-            else {
+            else
+            {
                 WebEventBufferFlushInfo flushInfo = new WebEventBufferFlushInfo(
-                                new WebBaseEventCollection(eventRaised),
-                                EventNotificationType.Unbuffered,
-                                0,
-                                DateTime.MinValue,
-                                0,
-                                0);
+                    new WebBaseEventCollection(eventRaised),
+                    EventNotificationType.Unbuffered,
+                    0,
+                    DateTime.MinValue,
+                    0,
+                    0
+                );
 
                 ProcessEventFlush(flushInfo);
             }
-        } 
+        }
 
         public abstract void ProcessEventFlush(WebEventBufferFlushInfo flushInfo);
 
-        public override void Flush() {
-            if (_buffer) {
+        public override void Flush()
+        {
+            if (_buffer)
+            {
                 _webEventBuffer.Flush(Int32.MaxValue, FlushCallReason.StaticFlush);
             }
         }
 
-        public override void Shutdown() {
-            if (_webEventBuffer != null) {
+        public override void Shutdown()
+        {
+            if (_webEventBuffer != null)
+            {
                 _webEventBuffer.Shutdown();
             }
         }
     }
-
 }

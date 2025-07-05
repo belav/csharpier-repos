@@ -10,14 +10,18 @@ namespace System.ServiceModel.PeerResolvers
     using System.ServiceModel.Channels;
     using System.Threading;
 
-
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    [ServiceBehavior(UseSynchronizationContext = false, InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ServiceBehavior(
+        UseSynchronizationContext = false,
+        InstanceContextMode = InstanceContextMode.Single,
+        ConcurrencyMode = ConcurrencyMode.Multiple
+    )]
     public class CustomPeerResolverService : IPeerResolverContract
     {
         internal enum RegistrationState
         {
-            OK, Deleted
+            OK,
+            Deleted,
         }
 
         internal class RegistrationEntry
@@ -29,8 +33,13 @@ namespace System.ServiceModel.PeerResolvers
             PeerNodeAddress address;
             RegistrationState state;
 
-
-            public RegistrationEntry(Guid clientId, Guid registrationId, string meshId, DateTime expires, PeerNodeAddress address)
+            public RegistrationEntry(
+                Guid clientId,
+                Guid registrationId,
+                string meshId,
+                DateTime expires,
+                PeerNodeAddress address
+            )
             {
                 this.ClientId = clientId;
                 this.RegistrationId = registrationId;
@@ -75,7 +84,6 @@ namespace System.ServiceModel.PeerResolvers
                 get { return state; }
                 set { state = value; }
             }
-
         }
 
         internal class LiteLock
@@ -97,7 +105,11 @@ namespace System.ServiceModel.PeerResolvers
                 Acquire(out liteLock, locker, false);
             }
 
-            public static void Acquire(out LiteLock liteLock, ReaderWriterLock locker, bool forWrite)
+            public static void Acquire(
+                out LiteLock liteLock,
+                ReaderWriterLock locker,
+                bool forWrite
+            )
             {
                 LiteLock theLock = new LiteLock(locker, forWrite);
                 try { }
@@ -132,6 +144,7 @@ namespace System.ServiceModel.PeerResolvers
                     liteLock.locker.ReleaseReaderLock();
                 }
             }
+
             public void UpgradeToWriterLock()
             {
                 Fx.Assert(!forWrite, "Invalid call to Upgrade!!");
@@ -143,6 +156,7 @@ namespace System.ServiceModel.PeerResolvers
                     upgraded = true;
                 }
             }
+
             public void DowngradeFromWriterLock()
             {
                 Fx.Assert(!forWrite, "Invalid call to Downgrade!!");
@@ -215,22 +229,29 @@ namespace System.ServiceModel.PeerResolvers
 
         public TimeSpan CleanupInterval
         {
-            get
-            {
-                return cleanupInterval;
-            }
+            get { return cleanupInterval; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 lock (ThisLock)
@@ -243,22 +264,29 @@ namespace System.ServiceModel.PeerResolvers
 
         public TimeSpan RefreshInterval
         {
-            get
-            {
-                return refreshInterval;
-            }
+            get { return refreshInterval; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 lock (ThisLock)
@@ -271,10 +299,7 @@ namespace System.ServiceModel.PeerResolvers
 
         public bool ControlShape
         {
-            get
-            {
-                return this.controlShape;
-            }
+            get { return this.controlShape; }
             set
             {
                 lock (ThisLock)
@@ -285,7 +310,11 @@ namespace System.ServiceModel.PeerResolvers
             }
         }
 
-        MeshEntry GetMeshEntry(string meshId) { return GetMeshEntry(meshId, true); }
+        MeshEntry GetMeshEntry(string meshId)
+        {
+            return GetMeshEntry(meshId, true);
+        }
+
         MeshEntry GetMeshEntry(string meshId, bool createIfNotExists)
         {
             MeshEntry meshEntry = null;
@@ -311,11 +340,18 @@ namespace System.ServiceModel.PeerResolvers
             {
                 LiteLock.Release(ll);
             }
-            Fx.Assert(meshEntry != null || !createIfNotExists, "GetMeshEntry failed to get an entry!");
+            Fx.Assert(
+                meshEntry != null || !createIfNotExists,
+                "GetMeshEntry failed to get an entry!"
+            );
             return meshEntry;
         }
 
-        public virtual RegisterResponseInfo Register(Guid clientId, string meshId, PeerNodeAddress address)
+        public virtual RegisterResponseInfo Register(
+            Guid clientId,
+            string meshId,
+            PeerNodeAddress address
+        )
         {
             Guid registrationId = Guid.NewGuid();
             DateTime expiry = DateTime.UtcNow + RefreshInterval;
@@ -328,7 +364,9 @@ namespace System.ServiceModel.PeerResolvers
                 entry = new RegistrationEntry(clientId, registrationId, meshId, expiry, address);
                 meshEntry = GetMeshEntry(meshId);
                 if (meshEntry.Service2EntryTable.ContainsKey(address.ServicePath))
-                    PeerExceptionHelper.ThrowInvalidOperation_DuplicatePeerRegistration(address.ServicePath);
+                    PeerExceptionHelper.ThrowInvalidOperation_DuplicatePeerRegistration(
+                        address.ServicePath
+                    );
                 LiteLock ll = null;
 
                 try
@@ -356,14 +394,20 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (registerInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("registerInfo", SR.GetString(SR.PeerNullRegistrationInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "registerInfo",
+                    SR.GetString(SR.PeerNullRegistrationInfo)
+                );
             }
 
             ThrowIfClosed("Register");
 
             if (!registerInfo.HasBody() || String.IsNullOrEmpty(registerInfo.MeshId))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("registerInfo", SR.GetString(SR.PeerInvalidMessageBody, registerInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "registerInfo",
+                    SR.GetString(SR.PeerInvalidMessageBody, registerInfo)
+                );
             }
             return Register(registerInfo.ClientId, registerInfo.MeshId, registerInfo.NodeAddress);
         }
@@ -372,14 +416,24 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (updateInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("updateInfo", SR.GetString(SR.PeerNullRegistrationInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "updateInfo",
+                    SR.GetString(SR.PeerNullRegistrationInfo)
+                );
             }
 
             ThrowIfClosed("Update");
 
-            if (!updateInfo.HasBody() || String.IsNullOrEmpty(updateInfo.MeshId) || updateInfo.NodeAddress == null)
+            if (
+                !updateInfo.HasBody()
+                || String.IsNullOrEmpty(updateInfo.MeshId)
+                || updateInfo.NodeAddress == null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("updateInfo", SR.GetString(SR.PeerInvalidMessageBody, updateInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "updateInfo",
+                    SR.GetString(SR.PeerInvalidMessageBody, updateInfo)
+                );
             }
 
             Guid registrationId = updateInfo.RegistrationId;
@@ -404,7 +458,11 @@ namespace System.ServiceModel.PeerResolvers
                         {
                             // upgrade to writer lock
                             ll.UpgradeToWriterLock();
-                            return Register(updateInfo.ClientId, updateInfo.MeshId, updateInfo.NodeAddress);
+                            return Register(
+                                updateInfo.ClientId,
+                                updateInfo.MeshId,
+                                updateInfo.NodeAddress
+                            );
                         }
                         finally
                         {
@@ -429,14 +487,20 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (resolveInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("resolveInfo", SR.GetString(SR.PeerNullResolveInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "resolveInfo",
+                    SR.GetString(SR.PeerNullResolveInfo)
+                );
             }
 
             ThrowIfClosed("Resolve");
 
             if (!resolveInfo.HasBody())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("resolveInfo", SR.GetString(SR.PeerInvalidMessageBody, resolveInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "resolveInfo",
+                    SR.GetString(SR.PeerInvalidMessageBody, resolveInfo)
+                );
             }
 
             int currentCount = 0;
@@ -469,7 +533,10 @@ namespace System.ServiceModel.PeerResolvers
                         {
                             index = random.Next(entries.Count);
                             entry = entries[index];
-                            Fx.Assert(entry.State == RegistrationState.OK, "A deleted registration is still around!");
+                            Fx.Assert(
+                                entry.State == RegistrationState.OK,
+                                "A deleted registration is still around!"
+                            );
                             address = entry.Address;
                             if (!results.Contains(address))
                                 results.Add(address);
@@ -490,14 +557,24 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (unregisterInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("unregisterinfo", SR.GetString(SR.PeerNullRegistrationInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "unregisterinfo",
+                    SR.GetString(SR.PeerNullRegistrationInfo)
+                );
             }
 
             ThrowIfClosed("Unregister");
 
-            if (!unregisterInfo.HasBody() || String.IsNullOrEmpty(unregisterInfo.MeshId) || unregisterInfo.RegistrationId == Guid.Empty)
+            if (
+                !unregisterInfo.HasBody()
+                || String.IsNullOrEmpty(unregisterInfo.MeshId)
+                || unregisterInfo.RegistrationId == Guid.Empty
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("unregisterInfo", SR.GetString(SR.PeerInvalidMessageBody, unregisterInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "unregisterInfo",
+                    SR.GetString(SR.PeerInvalidMessageBody, unregisterInfo)
+                );
             }
 
             RegistrationEntry registration = null;
@@ -508,8 +585,16 @@ namespace System.ServiceModel.PeerResolvers
             try
             {
                 LiteLock.Acquire(out ll, meshEntry.Gate, true);
-                if (!meshEntry.EntryTable.TryGetValue(unregisterInfo.RegistrationId, out registration))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("unregisterInfo", SR.GetString(SR.PeerInvalidMessageBody, unregisterInfo));
+                if (
+                    !meshEntry.EntryTable.TryGetValue(
+                        unregisterInfo.RegistrationId,
+                        out registration
+                    )
+                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "unregisterInfo",
+                        SR.GetString(SR.PeerInvalidMessageBody, unregisterInfo)
+                    );
                 meshEntry.EntryTable.Remove(unregisterInfo.RegistrationId);
                 meshEntry.EntryList.Remove(registration);
                 meshEntry.Service2EntryTable.Remove(registration.Address.ServicePath);
@@ -525,14 +610,24 @@ namespace System.ServiceModel.PeerResolvers
         {
             if (refreshInfo == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("refreshInfo", SR.GetString(SR.PeerNullRefreshInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "refreshInfo",
+                    SR.GetString(SR.PeerNullRefreshInfo)
+                );
             }
 
             ThrowIfClosed("Refresh");
 
-            if (!refreshInfo.HasBody() || String.IsNullOrEmpty(refreshInfo.MeshId) || refreshInfo.RegistrationId == Guid.Empty)
+            if (
+                !refreshInfo.HasBody()
+                || String.IsNullOrEmpty(refreshInfo.MeshId)
+                || refreshInfo.RegistrationId == Guid.Empty
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("refreshInfo", SR.GetString(SR.PeerInvalidMessageBody, refreshInfo));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "refreshInfo",
+                    SR.GetString(SR.PeerInvalidMessageBody, refreshInfo)
+                );
             }
             RefreshResult result = RefreshResult.RegistrationNotFound;
             RegistrationEntry entry = null;
@@ -574,9 +669,15 @@ namespace System.ServiceModel.PeerResolvers
         {
             ThrowIfOpened("Open");
             if (this.refreshInterval <= TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("RefreshInterval", SR.GetString(SR.RefreshIntervalMustBeGreaterThanZero, this.refreshInterval));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "RefreshInterval",
+                    SR.GetString(SR.RefreshIntervalMustBeGreaterThanZero, this.refreshInterval)
+                );
             if (this.CleanupInterval <= TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("CleanupInterval", SR.GetString(SR.CleanupIntervalMustBeGreaterThanZero, this.cleanupInterval));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "CleanupInterval",
+                    SR.GetString(SR.CleanupIntervalMustBeGreaterThanZero, this.cleanupInterval)
+                );
 
             //check that we are good to open
             timer = new IOThreadTimer(new Action<object>(CleanupActivity), null, false);
@@ -647,7 +748,10 @@ namespace System.ServiceModel.PeerResolvers
                 LiteLock.Acquire(out ll, meshEntry.Gate, true);
                 foreach (KeyValuePair<Guid, RegistrationEntry> item in meshEntry.EntryTable)
                 {
-                    if ((item.Value.Expires <= DateTime.UtcNow) || (item.Value.State == RegistrationState.Deleted))
+                    if (
+                        (item.Value.Expires <= DateTime.UtcNow)
+                        || (item.Value.State == RegistrationState.Deleted)
+                    )
                     {
                         remove.Add(item.Key);
                         meshEntry.EntryList.Remove(item.Value);
@@ -667,22 +771,19 @@ namespace System.ServiceModel.PeerResolvers
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
+
         void ThrowIfOpened(string operation)
         {
             if (opened)
                 PeerExceptionHelper.ThrowInvalidOperation_NotValidWhenOpen(operation);
         }
+
         void ThrowIfClosed(string operation)
         {
             if (!opened)
                 PeerExceptionHelper.ThrowInvalidOperation_NotValidWhenClosed(operation);
-
         }
     }
 }
-

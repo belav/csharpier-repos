@@ -10,40 +10,31 @@ WARNING:  DO NOT MODIFY this file unless you are knowledgeable about MSBuild and
 
 ***********************************************************************************************
 -->
-
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
+  <PropertyGroup>
+    <NoConfig>true</NoConfig>
+    <MyType>Empty</MyType>
+  </PropertyGroup>
+  <!-- Turns on VB runtime embedding if not already set and Microsoft.VisualBasic.dll does not exist in the target framework -->
+  <Target Name="GetVBRuntime" BeforeTargets="CoreCompile" Condition="'$(VBRuntime)' == ''">
+    <ItemGroup>
+      <!-- Turn TargetFrameworkDirectory (which is a property with one or more directories) into an item -->
+      <_VBRuntimeSearchDirectories Include="$(TargetFrameworkDirectory)" />
+    </ItemGroup>
     <PropertyGroup>
-        <NoConfig>true</NoConfig>
-        <MyType>Empty</MyType>
+      <_VBRuntimeFound
+        Condition="Exists('%(_VBRuntimeSearchDirectories.Identity)Microsoft.VisualBasic.dll')"
+        >true</_VBRuntimeFound
+      >
     </PropertyGroup>
-
-    <!-- Turns on VB runtime embedding if not already set and Microsoft.VisualBasic.dll does not exist in the target framework -->
-    <Target
-        Name="GetVBRuntime"
-        BeforeTargets="CoreCompile"
-        Condition="'$(VBRuntime)' == ''">
-
-        <ItemGroup>
-            <!-- Turn TargetFrameworkDirectory (which is a property with one or more directories) into an item -->
-            <_VBRuntimeSearchDirectories Include="$(TargetFrameworkDirectory)" />
-        </ItemGroup>
-
-        <PropertyGroup>
-            <_VBRuntimeFound Condition="Exists('%(_VBRuntimeSearchDirectories.Identity)Microsoft.VisualBasic.dll')">true</_VBRuntimeFound>
-        </PropertyGroup>
-
-        <PropertyGroup Condition="$(_VBRuntimeFound) != 'true'">
-            <VBRuntime>Embed</VBRuntime>
-        </PropertyGroup>
-    </Target>
-
-    <PropertyGroup>
-        <PortableEnableXamlTargets>true</PortableEnableXamlTargets>
+    <PropertyGroup Condition="$(_VBRuntimeFound) != 'true'">
+      <VBRuntime>Embed</VBRuntime>
     </PropertyGroup>
-
-    <Import Project="Microsoft.Portable.Common.targets" />
-    <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-    <Import Project="..\Microsoft.Portable.Core.targets" />
-
+  </Target>
+  <PropertyGroup>
+    <PortableEnableXamlTargets>true</PortableEnableXamlTargets>
+  </PropertyGroup>
+  <Import Project="Microsoft.Portable.Common.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Import Project="..\Microsoft.Portable.Core.targets" />
 </Project>

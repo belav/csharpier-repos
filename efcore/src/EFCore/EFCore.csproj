@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Entity Framework Core is a modern object-database mapper for .NET. It supports LINQ queries, change tracking, updates, and schema migrations. EF Core works with SQL Server, Azure SQL Database, SQLite, Azure Cosmos DB, MySQL, PostgreSQL, and other databases through a provider plugin API.
 
@@ -14,7 +13,6 @@ Microsoft.EntityFrameworkCore.DbSet
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -37,28 +35,33 @@ Microsoft.EntityFrameworkCore.DbSet
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="$(MicrosoftExtensionsCachingMemoryVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="$(MicrosoftExtensionsLoggingVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Caching.Memory"
+      Version="$(MicrosoftExtensionsCachingMemoryVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging"
+      Version="$(MicrosoftExtensionsLoggingVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\EFCore.Abstractions\EFCore.Abstractions.csproj" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" PrivateAssets="contentfiles;build" />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      PrivateAssets="contentfiles;build"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="buildTransitive\**\*">
       <Pack>True</Pack>
       <PackagePath>buildTransitive</PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\CoreStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -86,11 +89,9 @@ Microsoft.EntityFrameworkCore.DbSet
       <Generator>TextTemplatingFileGenerator</Generator>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\CoreStrings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -124,5 +125,4 @@ Microsoft.EntityFrameworkCore.DbSet
       <AutoGen>True</AutoGen>
     </Compile>
   </ItemGroup>
-
 </Project>

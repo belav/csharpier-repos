@@ -4,24 +4,34 @@
 using System;
 using Xunit;
 
-interface Ix<T> where T : class
+interface Ix<T>
+    where T : class
 {
     T F();
 }
 
 class Base : Ix<string>
 {
-    public virtual string F() { return "B"; }
+    public virtual string F()
+    {
+        return "B";
+    }
 }
 
 class Derived : Base
 {
-    public override string F() { return "D"; }
+    public override string F()
+    {
+        return "D";
+    }
 }
 
 class Bx
 {
-    public Ix<string> Get() { return new Derived(); }
+    public Ix<string> Get()
+    {
+        return new Derived();
+    }
 }
 
 public class Z
@@ -39,11 +49,10 @@ public class Z
         // object, but since the return type of Get is a (shared)
         // interface type, we need the exact context for F to do so
         // safely.
-        // 
+        //
         // Unfortunately we lose track of that context, because when
         // we import the call to F, it is not an inline candidate.
         string s = new Bx().Get().F();
-        return (int) s[0] + 32;
+        return (int)s[0] + 32;
     }
 }
-

@@ -4,7 +4,11 @@
 
 namespace System.Runtime.Serialization
 {
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Property,
+        Inherited = false,
+        AllowMultiple = false
+    )]
     public sealed class DataMemberAttribute : Attribute
     {
         string name;
@@ -13,14 +17,16 @@ namespace System.Runtime.Serialization
         bool isRequired;
         bool emitDefaultValue = Globals.DefaultEmitDefaultValue;
 
-        public DataMemberAttribute()
-        {
-        }
+        public DataMemberAttribute() { }
 
         public string Name
         {
             get { return name; }
-            set { name = value; isNameSetExplicitly = true; }
+            set
+            {
+                name = value;
+                isNameSetExplicitly = true;
+            }
         }
 
         public bool IsNameSetExplicitly
@@ -34,7 +40,9 @@ namespace System.Runtime.Serialization
             set
             {
                 if (value < 0)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.OrderCannotBeNegative)));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidDataContractException(SR.GetString(SR.OrderCannotBeNegative))
+                    );
                 order = value;
             }
         }

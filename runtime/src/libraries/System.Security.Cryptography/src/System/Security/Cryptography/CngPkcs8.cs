@@ -23,25 +23,22 @@ namespace System.Security.Cryptography
         private static Pkcs8Response ImportPkcs8(ReadOnlySpan<byte> keyBlob)
         {
             CngKey key = CngKey.Import(keyBlob, CngKeyBlobFormat.Pkcs8PrivateBlob);
-            key.ExportPolicy = CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
+            key.ExportPolicy =
+                CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
 
-            return new Pkcs8Response
-            {
-                Key = key,
-            };
+            return new Pkcs8Response { Key = key };
         }
 
         private static Pkcs8Response ImportPkcs8(
             ReadOnlySpan<byte> keyBlob,
-            ReadOnlySpan<char> password)
+            ReadOnlySpan<char> password
+        )
         {
             CngKey key = CngKey.ImportEncryptedPkcs8(keyBlob, password);
-            key.ExportPolicy = CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
+            key.ExportPolicy =
+                CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport;
 
-            return new Pkcs8Response
-            {
-                Key = key,
-            };
+            return new Pkcs8Response { Key = key };
         }
     }
 }

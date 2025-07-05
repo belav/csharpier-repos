@@ -58,7 +58,13 @@ namespace Roslyn.Utilities
 
             if (position < array.Length)
             {
-                Array.Copy(array, position, newArray, position + items.Length, array.Length - position);
+                Array.Copy(
+                    array,
+                    position,
+                    newArray,
+                    position + items.Length,
+                    array.Length - position
+                );
             }
 
             items.CopyTo(newArray, position);
@@ -90,7 +96,13 @@ namespace Roslyn.Utilities
 
             if (position < newArray.Length)
             {
-                Array.Copy(array, position + length, newArray, position, newArray.Length - position);
+                Array.Copy(
+                    array,
+                    position + length,
+                    newArray,
+                    position,
+                    newArray.Length - position
+                );
             }
 
             return newArray;

@@ -135,10 +135,17 @@ namespace System.Web.Mvc.ExpressionUtil.Test
         // helper to create a delegate to a private method on the compiler
         private static Compiler<TIn, TOut> GetCompilerMethod<TIn, TOut>(string methodName)
         {
-            Type openCompilerType = typeof(CachedExpressionCompiler).GetNestedType("Compiler`2", BindingFlags.NonPublic);
+            Type openCompilerType = typeof(CachedExpressionCompiler).GetNestedType(
+                "Compiler`2",
+                BindingFlags.NonPublic
+            );
             Type closedCompilerType = openCompilerType.MakeGenericType(typeof(TIn), typeof(TOut));
-            MethodInfo targetMethod = closedCompilerType.GetMethod(methodName, BindingFlags.Static | BindingFlags.NonPublic);
-            return (Compiler<TIn, TOut>)Delegate.CreateDelegate(typeof(Compiler<TIn, TOut>), targetMethod);
+            MethodInfo targetMethod = closedCompilerType.GetMethod(
+                methodName,
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
+            return (Compiler<TIn, TOut>)
+                Delegate.CreateDelegate(typeof(Compiler<TIn, TOut>), targetMethod);
         }
     }
 }

@@ -5,19 +5,20 @@
 namespace System.ServiceModel.Configuration
 {
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Configuration;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
 
     public sealed partial class ServiceSecurityAuditElement : BehaviorExtensionElement
     {
-        public ServiceSecurityAuditElement()
-        {
-        }
+        public ServiceSecurityAuditElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.AuditLogLocation, DefaultValue = ServiceSecurityAuditBehavior.defaultAuditLogLocation)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AuditLogLocation,
+            DefaultValue = ServiceSecurityAuditBehavior.defaultAuditLogLocation
+        )]
         [ServiceModelEnumValidator(typeof(AuditLogLocationHelper))]
         public AuditLogLocation AuditLogLocation
         {
@@ -25,14 +26,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.AuditLogLocation] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SuppressAuditFailure, DefaultValue = ServiceSecurityAuditBehavior.defaultSuppressAuditFailure)]
-        public bool SuppressAuditFailure 
+        [ConfigurationProperty(
+            ConfigurationStrings.SuppressAuditFailure,
+            DefaultValue = ServiceSecurityAuditBehavior.defaultSuppressAuditFailure
+        )]
+        public bool SuppressAuditFailure
         {
             get { return (bool)base[ConfigurationStrings.SuppressAuditFailure]; }
             set { base[ConfigurationStrings.SuppressAuditFailure] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ServiceAuthorizationAuditLevel, DefaultValue = ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ServiceAuthorizationAuditLevel,
+            DefaultValue = ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel
+        )]
         [ServiceModelEnumValidator(typeof(AuditLevelHelper))]
         public AuditLevel ServiceAuthorizationAuditLevel
         {
@@ -40,14 +47,17 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ServiceAuthorizationAuditLevel] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MessageAuthenticationAuditLevel, DefaultValue = ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MessageAuthenticationAuditLevel,
+            DefaultValue = ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel
+        )]
         [ServiceModelEnumValidator(typeof(AuditLevelHelper))]
         public AuditLevel MessageAuthenticationAuditLevel
         {
             get { return (AuditLevel)base[ConfigurationStrings.MessageAuthenticationAuditLevel]; }
             set { base[ConfigurationStrings.MessageAuthenticationAuditLevel] = value; }
         }
-        
+
         public override void CopyFrom(ServiceModelExtensionElement from)
         {
             base.CopyFrom(from);
@@ -75,6 +85,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

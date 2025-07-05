@@ -11,14 +11,19 @@ public class Program
     public static int s_58;
     public static uint s_66;
     public static byte[] s_126 = new byte[] { 0 };
+
     [Fact]
     public static int TestEntryPoint()
     {
         CollectibleALC alc = new CollectibleALC();
-        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(System.Reflection.Assembly.GetExecutingAssembly().Location);
-        System.Reflection.MethodInfo mi = asm.GetType(typeof(Program).FullName).GetMethod(nameof(MainInner));
+        System.Reflection.Assembly asm = alc.LoadFromAssemblyPath(
+            System.Reflection.Assembly.GetExecutingAssembly().Location
+        );
+        System.Reflection.MethodInfo mi = asm.GetType(typeof(Program).FullName)
+            .GetMethod(nameof(MainInner));
         System.Type runtimeTy = asm.GetType(typeof(Runtime).FullName);
-        int count = (int)mi.Invoke(null, new object[] { System.Activator.CreateInstance(runtimeTy) });
+        int count = (int)
+            mi.Invoke(null, new object[] { System.Activator.CreateInstance(runtimeTy) });
 
         if (count != 2)
             return 0;
@@ -62,12 +67,12 @@ public interface IRuntime
 public class Runtime : IRuntime
 {
     public int Count { get; set; }
+
     public void WriteLine<T>(string site, T value) => Count++;
 }
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC() : base(true)
-    {
-    }
+    public CollectibleALC()
+        : base(true) { }
 }

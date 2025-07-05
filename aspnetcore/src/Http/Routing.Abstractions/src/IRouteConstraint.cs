@@ -37,10 +37,9 @@ internal interface IRouteConstraint : IParameterPolicy
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection);
+        RouteDirection routeDirection
+    );
 #else
-    bool Match(
-        string routeKey,
-        RouteValueDictionary values);
+    bool Match(string routeKey, RouteValueDictionary values);
 #endif
 }

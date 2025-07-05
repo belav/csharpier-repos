@@ -20,15 +20,25 @@ namespace System.Net.Http.Formatting
     /// </summary>
     public abstract class MediaTypeFormatter
     {
-        private protected static readonly Encoding Utf8Encoding =
-            new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private protected static readonly Encoding Utf8Encoding = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
         private const int DefaultMinHttpCollectionKeys = 1;
         private const int DefaultMaxHttpCollectionKeys = 1000; // same default as ASPNET
-        private const string IWellKnownComparerTypeName = "System.IWellKnownStringEqualityComparer, mscorlib, Version=4.0.0.0, PublicKeyToken=b77a5c561934e089";
+        private const string IWellKnownComparerTypeName =
+            "System.IWellKnownStringEqualityComparer, mscorlib, Version=4.0.0.0, PublicKeyToken=b77a5c561934e089";
 
-        private static readonly ConcurrentDictionary<Type, Type> _delegatingEnumerableCache = new ConcurrentDictionary<Type, Type>();
-        private static ConcurrentDictionary<Type, ConstructorInfo> _delegatingEnumerableConstructorCache = new ConcurrentDictionary<Type, ConstructorInfo>();
-        private static Lazy<int> _defaultMaxHttpCollectionKeys = new Lazy<int>(InitializeDefaultCollectionKeySize, true); // Max number of keys is 1000
+        private static readonly ConcurrentDictionary<Type, Type> _delegatingEnumerableCache =
+            new ConcurrentDictionary<Type, Type>();
+        private static ConcurrentDictionary<
+            Type,
+            ConstructorInfo
+        > _delegatingEnumerableConstructorCache = new ConcurrentDictionary<Type, ConstructorInfo>();
+        private static Lazy<int> _defaultMaxHttpCollectionKeys = new Lazy<int>(
+            InitializeDefaultCollectionKeySize,
+            true
+        ); // Max number of keys is 1000
         private static int _maxHttpCollectionKeys = -1;
 
         private readonly List<MediaTypeHeaderValue> _supportedMediaTypes;
@@ -87,7 +97,11 @@ namespace System.Net.Http.Formatting
             {
                 if (value < DefaultMinHttpCollectionKeys)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("value", value, DefaultMinHttpCollectionKeys);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "value",
+                        value,
+                        DefaultMinHttpCollectionKeys
+                    );
                 }
 
                 _maxHttpCollectionKeys = value;
@@ -134,14 +148,8 @@ namespace System.Net.Http.Formatting
         /// </summary>
         public virtual IRequiredMemberSelector RequiredMemberSelector
         {
-            get
-            {
-                return _requiredMemberSelector;
-            }
-            set
-            {
-                _requiredMemberSelector = value;
-            }
+            get { return _requiredMemberSelector; }
+            set { _requiredMemberSelector = value; }
         }
 
         internal virtual bool CanWriteAnyTypes
@@ -166,9 +174,17 @@ namespace System.Net.Http.Formatting
         /// <returns>A <see cref="Task"/> whose result will be an object of the given type.</returns>
         /// <exception cref="NotSupportedException">Derived types need to support reading.</exception>
         /// <seealso cref="CanReadType(Type)"/>
-        public virtual Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        public virtual Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
-            throw Error.NotSupported(Properties.Resources.MediaTypeFormatterCannotRead, GetType().Name);
+            throw Error.NotSupported(
+                Properties.Resources.MediaTypeFormatterCannotRead,
+                GetType().Name
+            );
         }
 
         /// <summary>
@@ -189,8 +205,13 @@ namespace System.Net.Http.Formatting
         /// <returns>A <see cref="Task"/> whose result will be an object of the given type.</returns>
         /// <exception cref="NotSupportedException">Derived types need to support reading.</exception>
         /// <seealso cref="CanReadType(Type)"/>
-        public virtual Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        public virtual Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -219,12 +240,25 @@ namespace System.Net.Http.Formatting
         /// <returns>A <see cref="Task"/> that will perform the write.</returns>
         /// <exception cref="NotSupportedException">Derived types need to support writing.</exception>
         /// <seealso cref="CanWriteType(Type)"/>
-        public virtual Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
+        public virtual Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext
+        )
         {
             // HttpContent.SerializeToStreamAsync doesn't take in a CancellationToken. So, there is no easy way to get the CancellationToken
             // to the formatter while writing response. We are cheating here by passing fake cancellation tokens. We should fix this
             // when we fix HttpContent.
-            return WriteToStreamAsync(type, value, writeStream, content, transportContext, CancellationToken.None);
+            return WriteToStreamAsync(
+                type,
+                value,
+                writeStream,
+                content,
+                transportContext,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -247,10 +281,19 @@ namespace System.Net.Http.Formatting
         /// <returns>A <see cref="Task"/> that will perform the write.</returns>
         /// <exception cref="NotSupportedException">Derived types need to support writing.</exception>
         /// <seealso cref="CanWriteType(Type)"/>
-        public virtual Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken cancellationToken)
+        public virtual Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken cancellationToken
+        )
         {
-            throw Error.NotSupported(Properties.Resources.MediaTypeFormatterCannotWrite, GetType().Name);
+            throw Error.NotSupported(
+                Properties.Resources.MediaTypeFormatterCannotWrite,
+                GetType().Name
+            );
         }
 
         private static bool TryGetDelegatingType(Type interfaceType, ref Type type)
@@ -281,7 +324,10 @@ namespace System.Net.Http.Formatting
         /// <returns>Returns <c>true</c> if the type was wrapped; <c>false</c>, otherwise</returns>
         internal static bool TryGetDelegatingTypeForIEnumerableGenericOrSame(ref Type type)
         {
-            return TryGetDelegatingType(FormattingUtilities.EnumerableInterfaceGenericType, ref type);
+            return TryGetDelegatingType(
+                FormattingUtilities.EnumerableInterfaceGenericType,
+                ref type
+            );
         }
 
         /// <summary>
@@ -291,7 +337,10 @@ namespace System.Net.Http.Formatting
         /// <returns>Returns <c>true</c> if the type was wrapped; <c>false</c>, otherwise</returns>
         internal static bool TryGetDelegatingTypeForIQueryableGenericOrSame(ref Type type)
         {
-            return TryGetDelegatingType(FormattingUtilities.QueryableInterfaceGenericType, ref type);
+            return TryGetDelegatingType(
+                FormattingUtilities.QueryableInterfaceGenericType,
+                ref type
+            );
         }
 
         internal static ConstructorInfo GetTypeRemappingConstructor(Type type)
@@ -320,7 +369,12 @@ namespace System.Net.Http.Formatting
                     for (int i = 0; i < _supportedEncodings.Count; i++)
                     {
                         Encoding supportedEncoding = _supportedEncodings[i];
-                        if (charset.Equals(supportedEncoding.WebName, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            charset.Equals(
+                                supportedEncoding.WebName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             encoding = supportedEncoding;
                             break;
@@ -342,7 +396,10 @@ namespace System.Net.Http.Formatting
             if (encoding == null)
             {
                 // No supported encoding was found so there is no way for us to start reading or writing.
-                throw Error.InvalidOperation(Properties.Resources.MediaTypeFormatterNoEncoding, GetType().Name);
+                throw Error.InvalidOperation(
+                    Properties.Resources.MediaTypeFormatterNoEncoding,
+                    GetType().Name
+                );
             }
 
             return encoding;
@@ -364,7 +421,11 @@ namespace System.Net.Http.Formatting
         /// <param name="type">The type of the object being serialized. See <see cref="ObjectContent"/>.</param>
         /// <param name="headers">The content headers that should be configured.</param>
         /// <param name="mediaType">The authoritative media type. Can be <c>null</c>.</param>
-        public virtual void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+        public virtual void SetDefaultContentHeaders(
+            Type type,
+            HttpContentHeaders headers,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (type == null)
             {
@@ -421,7 +482,11 @@ namespace System.Net.Http.Formatting
         /// <param name="request">The request.</param>
         /// <param name="mediaType">The media type chosen for the serialization. Can be <c>null</c>.</param>
         /// <returns>An instance that can format a response to the given <paramref name="request"/>.</returns>
-        public virtual MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request, MediaTypeHeaderValue mediaType)
+        public virtual MediaTypeFormatter GetPerRequestFormatterInstance(
+            Type type,
+            HttpRequestMessage request,
+            MediaTypeHeaderValue mediaType
+        )
         {
             if (type == null)
             {
@@ -466,12 +531,26 @@ namespace System.Net.Http.Formatting
                     // The current method is called by methods that already checked the type for is not null, is generic and is or implements IEnumerable<T>
                     // This retrieves the T type of the IEnumerable<T> interface.
                     Type elementType = genericType.GetGenericArguments()[0];
-                    Type delegatingType = FormattingUtilities.DelegatingEnumerableGenericType.MakeGenericType(elementType);
-                    ConstructorInfo delegatingConstructor = delegatingType.GetConstructor(new Type[] { FormattingUtilities.EnumerableInterfaceGenericType.MakeGenericType(elementType) });
-                    _delegatingEnumerableConstructorCache.TryAdd(delegatingType, delegatingConstructor);
+                    Type delegatingType =
+                        FormattingUtilities.DelegatingEnumerableGenericType.MakeGenericType(
+                            elementType
+                        );
+                    ConstructorInfo delegatingConstructor = delegatingType.GetConstructor(
+                        new Type[]
+                        {
+                            FormattingUtilities.EnumerableInterfaceGenericType.MakeGenericType(
+                                elementType
+                            ),
+                        }
+                    );
+                    _delegatingEnumerableConstructorCache.TryAdd(
+                        delegatingType,
+                        delegatingConstructor
+                    );
 
                     return delegatingType;
-                });
+                }
+            );
         }
 
         /// <summary>
@@ -509,9 +588,7 @@ namespace System.Net.Http.Formatting
             private static readonly Type _mediaTypeHeaderValueType = typeof(MediaTypeHeaderValue);
 
             internal MediaTypeHeaderValueCollection(IList<MediaTypeHeaderValue> list)
-                : base(list)
-            {
-            }
+                : base(list) { }
 
             /// <summary>
             /// Inserts the <paramref name="item"/> into the collection at the specified <paramref name="index"/>.
@@ -545,7 +622,12 @@ namespace System.Net.Http.Formatting
                 ParsedMediaTypeHeaderValue parsedMediaType = new ParsedMediaTypeHeaderValue(item);
                 if (parsedMediaType.IsAllMediaRange || parsedMediaType.IsSubtypeMediaRange)
                 {
-                    throw Error.Argument("item", Properties.Resources.CannotUseMediaRangeForSupportedMediaType, _mediaTypeHeaderValueType.Name, item.MediaType);
+                    throw Error.Argument(
+                        "item",
+                        Properties.Resources.CannotUseMediaRangeForSupportedMediaType,
+                        _mediaTypeHeaderValueType.Name,
+                        item.MediaType
+                    );
                 }
             }
         }

@@ -11,9 +11,8 @@ public sealed class SuggestDirective : CliDirective
     private CliAction? _action;
 
     /// <inheritdoc />
-    public SuggestDirective() : base("suggest")
-    {
-    }
+    public SuggestDirective()
+        : base("suggest") { }
 
     /// <inheritdoc />
     public override CliAction? Action
@@ -21,5 +20,4 @@ public sealed class SuggestDirective : CliDirective
         get => _action ??= new CompletionAction(this);
         set => _action = value ?? throw new ArgumentNullException(nameof(value));
     }
-
 }

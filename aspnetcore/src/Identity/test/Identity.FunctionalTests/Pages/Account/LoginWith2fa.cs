@@ -14,7 +14,11 @@ public class LoginWith2fa : DefaultUIPage
     private readonly IHtmlFormElement _twoFactorForm;
     private readonly IHtmlAnchorElement _loginWithRecoveryCodeLink;
 
-    public LoginWith2fa(HttpClient client, IHtmlDocument loginWithTwoFactor, DefaultUIContext context)
+    public LoginWith2fa(
+        HttpClient client,
+        IHtmlDocument loginWithTwoFactor,
+        DefaultUIContext context
+    )
         : base(client, loginWithTwoFactor, context)
     {
         _twoFactorForm = HtmlAssert.HasForm(loginWithTwoFactor);
@@ -25,10 +29,10 @@ public class LoginWith2fa : DefaultUIPage
     {
         var code = EnableAuthenticator.ComputeCode(twoFactorKey);
 
-        var response = await Client.SendAsync(_twoFactorForm, new Dictionary<string, string>
-        {
-            ["Input_TwoFactorCode"] = code
-        });
+        var response = await Client.SendAsync(
+            _twoFactorForm,
+            new Dictionary<string, string> { ["Input_TwoFactorCode"] = code }
+        );
 
         var goToIndex = ResponseAssert.IsRedirect(response);
         Assert.Equal(Index.Path, goToIndex.ToString());
@@ -41,7 +45,9 @@ public class LoginWith2fa : DefaultUIPage
     internal async Task<LoginWithRecoveryCode> ClickRecoveryCodeLinkAsync()
     {
         var goToLoginWithRecoveryCode = await Client.GetAsync(_loginWithRecoveryCodeLink.Href);
-        var loginWithRecoveryCode = await ResponseAssert.IsHtmlDocumentAsync(goToLoginWithRecoveryCode);
+        var loginWithRecoveryCode = await ResponseAssert.IsHtmlDocumentAsync(
+            goToLoginWithRecoveryCode
+        );
 
         return new LoginWithRecoveryCode(Client, loginWithRecoveryCode, Context);
     }

@@ -12,8 +12,14 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentNullException>("sourceDirectoryName", () => isf.MoveDirectory(null, "bar"));
-                AssertExtensions.Throws<ArgumentNullException>("destinationDirectoryName", () => isf.MoveDirectory("foo", null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "sourceDirectoryName",
+                    () => isf.MoveDirectory(null, "bar")
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "destinationDirectoryName",
+                    () => isf.MoveDirectory("foo", null)
+                );
             }
         }
 
@@ -22,8 +28,14 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentException>("sourceDirectoryName", () => isf.MoveDirectory(string.Empty, "bar"));
-                AssertExtensions.Throws<ArgumentException>("destinationDirectoryName", () => isf.MoveDirectory("foo", string.Empty));
+                AssertExtensions.Throws<ArgumentException>(
+                    "sourceDirectoryName",
+                    () => isf.MoveDirectory(string.Empty, "bar")
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "destinationDirectoryName",
+                    () => isf.MoveDirectory("foo", string.Empty)
+                );
             }
         }
 
@@ -31,9 +43,7 @@ namespace System.IO.IsolatedStorage
         public void MoveDirectory_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.MoveDirectory("foo", "bar"));
         }
@@ -73,7 +83,12 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                Assert.Throws<DirectoryNotFoundException>(() => isf.MoveDirectory("MoveDirectory_DoesNotExist", "MoveDirectory_DoesNotExist_Copy"));
+                Assert.Throws<DirectoryNotFoundException>(() =>
+                    isf.MoveDirectory(
+                        "MoveDirectory_DoesNotExist",
+                        "MoveDirectory_DoesNotExist_Copy"
+                    )
+                );
             }
         }
 
@@ -102,14 +117,20 @@ namespace System.IO.IsolatedStorage
                 isf.MoveDirectory("foo", "bar");
                 Assert.True(isf.DirectoryExists("bar"), "bar exists");
                 Assert.False(isf.DirectoryExists("foo"), "foo doesn't exist");
-                Assert.Equal("MoveDirectory_MovesDirectory", isf.ReadAllText(Path.Combine("bar", "foofile")));
+                Assert.Equal(
+                    "MoveDirectory_MovesDirectory",
+                    isf.ReadAllText(Path.Combine("bar", "foofile"))
+                );
 
                 // Move into nested
                 isf.CreateDirectory("foo");
                 string nestedDirectory = Path.Combine("foo", "foobar");
                 isf.MoveDirectory("bar", nestedDirectory);
                 Assert.True(isf.DirectoryExists(nestedDirectory), "nested directory exists");
-                Assert.Equal("MoveDirectory_MovesDirectory", isf.ReadAllText(Path.Combine(nestedDirectory, "foofile")));
+                Assert.Equal(
+                    "MoveDirectory_MovesDirectory",
+                    isf.ReadAllText(Path.Combine(nestedDirectory, "foofile"))
+                );
             }
         }
     }

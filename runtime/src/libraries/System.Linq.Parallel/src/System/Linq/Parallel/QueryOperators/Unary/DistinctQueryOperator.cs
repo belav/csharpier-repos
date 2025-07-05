@@ -20,7 +20,8 @@ namespace System.Linq.Parallel
     /// a single data source as input.
     /// </summary>
     /// <typeparam name="TInputOutput"></typeparam>
-    internal sealed class DistinctQueryOperator<TInputOutput> : UnaryQueryOperator<TInputOutput, TInputOutput>
+    internal sealed class DistinctQueryOperator<TInputOutput>
+        : UnaryQueryOperator<TInputOutput, TInputOutput>
     {
         private readonly IEqualityComparer<TInputOutput>? _comparer; // An (optional) equality comparer.
 
@@ -28,7 +29,10 @@ namespace System.Linq.Parallel
         // Constructs a new distinction operator.
         //
 
-        internal DistinctQueryOperator(IEnumerable<TInputOutput> source, IEqualityComparer<TInputOutput>? comparer)
+        internal DistinctQueryOperator(
+            IEnumerable<TInputOutput> source,
+            IEqualityComparer<TInputOutput>? comparer
+        )
             : base(source)
         {
             Debug.Assert(source != null, "child data source cannot be null");
@@ -41,7 +45,10 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TInputOutput> Open(QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TInputOutput> Open(
+            QuerySettings settings,
+            bool preferStriping
+        )
         {
             // We just open our child operator.  Do not propagate the preferStriping value, but
             // instead explicitly set it to false. Regardless of whether the parent prefers striping or range
@@ -51,22 +58,44 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInputOutput, TKey> inputStream, IPartitionedStreamRecipient<TInputOutput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TInputOutput, TKey> inputStream,
+            IPartitionedStreamRecipient<TInputOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // Hash-repartition the source stream
             if (OutputOrdered)
             {
                 WrapPartitionedStreamHelper<TKey>(
-                    ExchangeUtilities.HashRepartitionOrdered<TInputOutput, NoKeyMemoizationRequired, TKey>(
-                        inputStream, null, null, _comparer, settings.CancellationState.MergedCancellationToken),
-                    recipient, settings.CancellationState.MergedCancellationToken);
+                    ExchangeUtilities.HashRepartitionOrdered<
+                        TInputOutput,
+                        NoKeyMemoizationRequired,
+                        TKey
+                    >(
+                        inputStream,
+                        null,
+                        null,
+                        _comparer,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
+                    recipient,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
             else
             {
                 WrapPartitionedStreamHelper<int>(
                     ExchangeUtilities.HashRepartition<TInputOutput, NoKeyMemoizationRequired, TKey>(
-                        inputStream, null, null, _comparer, settings.CancellationState.MergedCancellationToken),
-                    recipient, settings.CancellationState.MergedCancellationToken);
+                        inputStream,
+                        null,
+                        null,
+                        _comparer,
+                        settings.CancellationState.MergedCancellationToken
+                    ),
+                    recipient,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
         }
 
@@ -77,23 +106,37 @@ namespace System.Linq.Parallel
 
         private void WrapPartitionedStreamHelper<TKey>(
             PartitionedStream<Pair<TInputOutput, NoKeyMemoizationRequired>, TKey> hashStream,
-            IPartitionedStreamRecipient<TInputOutput> recipient, CancellationToken cancellationToken)
+            IPartitionedStreamRecipient<TInputOutput> recipient,
+            CancellationToken cancellationToken
+        )
         {
             int partitionCount = hashStream.PartitionCount;
-            PartitionedStream<TInputOutput, TKey> outputStream =
-                new PartitionedStream<TInputOutput, TKey>(partitionCount, hashStream.KeyComparer, OrdinalIndexState.Shuffled);
+            PartitionedStream<TInputOutput, TKey> outputStream = new PartitionedStream<
+                TInputOutput,
+                TKey
+            >(partitionCount, hashStream.KeyComparer, OrdinalIndexState.Shuffled);
 
             for (int i = 0; i < partitionCount; i++)
             {
                 if (OutputOrdered)
                 {
-                    outputStream[i] =
-                        new OrderedDistinctQueryOperatorEnumerator<TKey>(hashStream[i], _comparer, hashStream.KeyComparer, cancellationToken);
+                    outputStream[i] = new OrderedDistinctQueryOperatorEnumerator<TKey>(
+                        hashStream[i],
+                        _comparer,
+                        hashStream.KeyComparer,
+                        cancellationToken
+                    );
                 }
                 else
                 {
-                    outputStream[i] = (QueryOperatorEnumerator<TInputOutput, TKey>)(object)
-                                                                                   new DistinctQueryOperatorEnumerator<TKey>(hashStream[i], _comparer, cancellationToken);
+                    outputStream[i] =
+                        (QueryOperatorEnumerator<TInputOutput, TKey>)
+                            (object)
+                                new DistinctQueryOperatorEnumerator<TKey>(
+                                    hashStream[i],
+                                    _comparer,
+                                    cancellationToken
+                                );
                 }
             }
 
@@ -116,9 +159,13 @@ namespace System.Linq.Parallel
         // then doesn't return elements it has already seen before.
         //
 
-        private sealed class DistinctQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TInputOutput, int>
+        private sealed class DistinctQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TInputOutput, int>
         {
-            private readonly QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TKey> _source; // The data source.
+            private readonly QueryOperatorEnumerator<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TKey
+            > _source; // The data source.
             private readonly HashSet<TInputOutput> _hashLookup; // The hash lookup, used to produce the distinct set.
             private readonly CancellationToken _cancellationToken;
             private Shared<int>? _outputLoopCount; // Allocated in MoveNext to avoid false sharing.
@@ -128,8 +175,10 @@ namespace System.Linq.Parallel
             //
 
             internal DistinctQueryOperatorEnumerator(
-                QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TKey> source, IEqualityComparer<TInputOutput>? comparer,
-                CancellationToken cancellationToken)
+                QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TKey> source,
+                IEqualityComparer<TInputOutput>? comparer,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 _source = source;
@@ -141,14 +190,20 @@ namespace System.Linq.Parallel
             // Walks the single data source, skipping elements it has already seen.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
+                ref int currentKey
+            )
             {
                 Debug.Assert(_source != null);
                 Debug.Assert(_hashLookup != null);
 
                 // Iterate over this set's elements until we find a unique element.
                 TKey keyUnused = default!;
-                Pair<TInputOutput, NoKeyMemoizationRequired> current = default(Pair<TInputOutput, NoKeyMemoizationRequired>);
+                Pair<TInputOutput, NoKeyMemoizationRequired> current = default(Pair<
+                    TInputOutput,
+                    NoKeyMemoizationRequired
+                >);
 
                 _outputLoopCount ??= new Shared<int>(0);
 
@@ -184,13 +239,20 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TInputOutput> AsSequentialQuery(CancellationToken token)
         {
-            IEnumerable<TInputOutput> wrappedChild = CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token);
+            IEnumerable<TInputOutput> wrappedChild = CancellableEnumerable.Wrap(
+                Child.AsSequentialQuery(token),
+                token
+            );
             return wrappedChild.Distinct(_comparer);
         }
 
-        private sealed class OrderedDistinctQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TInputOutput, TKey>
+        private sealed class OrderedDistinctQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TInputOutput, TKey>
         {
-            private readonly QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TKey> _source; // The data source.
+            private readonly QueryOperatorEnumerator<
+                Pair<TInputOutput, NoKeyMemoizationRequired>,
+                TKey
+            > _source; // The data source.
             private readonly Dictionary<Wrapper<TInputOutput>, TKey> _hashLookup; // The hash lookup, used to produce the distinct set.
             private readonly IComparer<TKey> _keyComparer; // Comparer to decide the key order.
             private IEnumerator<KeyValuePair<Wrapper<TInputOutput>, TKey>>? _hashLookupEnumerator; // Enumerates over _hashLookup.
@@ -202,15 +264,18 @@ namespace System.Linq.Parallel
 
             internal OrderedDistinctQueryOperatorEnumerator(
                 QueryOperatorEnumerator<Pair<TInputOutput, NoKeyMemoizationRequired>, TKey> source,
-                IEqualityComparer<TInputOutput>? comparer, IComparer<TKey> keyComparer,
-                CancellationToken cancellationToken)
+                IEqualityComparer<TInputOutput>? comparer,
+                IComparer<TKey> keyComparer,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(source != null);
                 _source = source;
                 _keyComparer = keyComparer;
 
                 _hashLookup = new Dictionary<Wrapper<TInputOutput>, TKey>(
-                    new WrapperEqualityComparer<TInputOutput>(comparer));
+                    new WrapperEqualityComparer<TInputOutput>(comparer)
+                );
 
                 _cancellationToken = cancellationToken;
             }
@@ -219,14 +284,20 @@ namespace System.Linq.Parallel
             // Walks the single data source, skipping elements it has already seen.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement, [AllowNull] ref TKey currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TInputOutput currentElement,
+                [AllowNull] ref TKey currentKey
+            )
             {
                 Debug.Assert(_source != null);
                 Debug.Assert(_hashLookup != null);
 
                 if (_hashLookupEnumerator == null)
                 {
-                    Pair<TInputOutput, NoKeyMemoizationRequired> elem = default(Pair<TInputOutput, NoKeyMemoizationRequired>);
+                    Pair<TInputOutput, NoKeyMemoizationRequired> elem = default(Pair<
+                        TInputOutput,
+                        NoKeyMemoizationRequired
+                    >);
                     TKey orderKey = default!;
 
                     int i = 0;
@@ -242,7 +313,10 @@ namespace System.Linq.Parallel
 
                         // If this is the first occurrence of this element, or the order key is lower than all keys we saw previously,
                         // update the order key for this element.
-                        if (!_hashLookup.TryGetValue(wrappedElem, out oldEntry!) || _keyComparer.Compare(orderKey, oldEntry) < 0)
+                        if (
+                            !_hashLookup.TryGetValue(wrappedElem, out oldEntry!)
+                            || _keyComparer.Compare(orderKey, oldEntry) < 0
+                        )
                         {
                             // For each "elem" value, we store the smallest key, and the element value that had that key.
                             // Note that even though two element values are "equal" according to the EqualityComparer,
@@ -256,7 +330,8 @@ namespace System.Linq.Parallel
 
                 if (_hashLookupEnumerator.MoveNext())
                 {
-                    KeyValuePair<Wrapper<TInputOutput>, TKey> currentPair = _hashLookupEnumerator.Current;
+                    KeyValuePair<Wrapper<TInputOutput>, TKey> currentPair =
+                        _hashLookupEnumerator.Current;
                     currentElement = currentPair.Key.Value;
                     currentKey = currentPair.Value;
                     return true;

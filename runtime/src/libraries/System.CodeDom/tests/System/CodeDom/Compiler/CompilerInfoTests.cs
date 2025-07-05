@@ -50,14 +50,20 @@ namespace System.CodeDom.Compiler.Tests
             Assert.Equal(4, parameters.WarningLevel);
             Assert.Null(parameters.Win32Resource);
 
-            Assert.NotSame(compilerInfo.CreateDefaultCompilerParameters(), compilerInfo.CreateDefaultCompilerParameters());
+            Assert.NotSame(
+                compilerInfo.CreateDefaultCompilerParameters(),
+                compilerInfo.CreateDefaultCompilerParameters()
+            );
         }
 
         [Fact]
         public void CreateProvider_NullProviderOptions_ThrowsArgumentNullException()
         {
             CompilerInfo compilerInfo = CodeDomProvider.GetCompilerInfo("cs");
-            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () => compilerInfo.CreateProvider(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "providerOptions",
+                () => compilerInfo.CreateProvider(null)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
@@ -65,7 +71,12 @@ namespace System.CodeDom.Compiler.Tests
             CompilerInfo compilerInfo = CodeDomProvider.GetCompilerInfo("cs");
             yield return new object[] { compilerInfo, compilerInfo, true };
             yield return new object[] { compilerInfo, CodeDomProvider.GetCompilerInfo("cs"), true };
-            yield return new object[] { compilerInfo, CodeDomProvider.GetCompilerInfo("vb"), false };
+            yield return new object[]
+            {
+                compilerInfo,
+                CodeDomProvider.GetCompilerInfo("vb"),
+                false,
+            };
 
             // .NET Core fixes a typo in .NET Framework and validates that the casted object
             // instead of validating the object typed parameter.
@@ -78,7 +89,11 @@ namespace System.CodeDom.Compiler.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Invoke_ReturnsExpected(CompilerInfo compilerInfo, object other, bool expected)
+        public void Equals_Invoke_ReturnsExpected(
+            CompilerInfo compilerInfo,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, compilerInfo.Equals(other));
             if (other is CompilerInfo)

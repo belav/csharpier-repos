@@ -33,15 +33,10 @@ public class ConfigureCompatibilityOptionsTest
         // Arrange
         var configure = Create(
             CompatibilityVersion.Version_3_0,
-            new Dictionary<string, object>
-            {
-                    { nameof(TestOptions.TestProperty), true },
-            });
+            new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true } }
+        );
 
-        var options = new TestOptions()
-        {
-            TestProperty = false,
-        };
+        var options = new TestOptions() { TestProperty = false };
 
         // Act
         configure.PostConfigure(Options.DefaultName, options);
@@ -56,10 +51,8 @@ public class ConfigureCompatibilityOptionsTest
         // Arrange
         var configure = Create(
             CompatibilityVersion.Version_3_0,
-            new Dictionary<string, object>
-            {
-                    { nameof(TestOptions.TestProperty), true },
-            });
+            new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true } }
+        );
 
         var options = new TestOptions();
 
@@ -72,9 +65,12 @@ public class ConfigureCompatibilityOptionsTest
 
     private static ConfigureCompatibilityOptions<TestOptions> Create(
         CompatibilityVersion version,
-        IReadOnlyDictionary<string, object> defaultValues)
+        IReadOnlyDictionary<string, object> defaultValues
+    )
     {
-        var compatibilityOptions = Options.Create(new MvcCompatibilityOptions() { CompatibilityVersion = version });
+        var compatibilityOptions = Options.Create(
+            new MvcCompatibilityOptions() { CompatibilityVersion = version }
+        );
         return new TestConfigure(NullLoggerFactory.Instance, compatibilityOptions, defaultValues);
     }
 
@@ -109,7 +105,8 @@ public class ConfigureCompatibilityOptionsTest
         public TestConfigure(
             ILoggerFactory loggerFactory,
             IOptions<MvcCompatibilityOptions> compatibilityOptions,
-            IReadOnlyDictionary<string, object> defaultValues)
+            IReadOnlyDictionary<string, object> defaultValues
+        )
             : base(loggerFactory, compatibilityOptions)
         {
             DefaultValues = defaultValues;

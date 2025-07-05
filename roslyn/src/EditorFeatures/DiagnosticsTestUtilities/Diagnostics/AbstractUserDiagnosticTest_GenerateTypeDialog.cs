@@ -27,12 +27,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public abstract partial class AbstractUserDiagnosticTest
     {
         // TODO: IInlineRenameService requires WPF (https://github.com/dotnet/roslyn/issues/46153)
-        private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeaturesWpf
-            .AddExcludedPartTypes(typeof(IDiagnosticUpdateSourceRegistrationService))
+        private static readonly TestComposition s_composition = EditorTestCompositions
+            .EditorFeaturesWpf.AddExcludedPartTypes(
+                typeof(IDiagnosticUpdateSourceRegistrationService)
+            )
             .AddParts(
                 typeof(MockDiagnosticUpdateSourceRegistrationService),
                 typeof(TestGenerateTypeOptionsService),
-                typeof(TestProjectManagementService));
+                typeof(TestProjectManagementService)
+            );
 
         internal async Task TestWithMockedGenerateTypeDialog(
             string initial,
@@ -57,18 +60,28 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             GenerateTypeDialogOptions assertGenerateTypeDialogOptions = null,
             IList<TypeKindOptions> assertTypeKindPresent = null,
             IList<TypeKindOptions> assertTypeKindAbsent = null,
-            bool isCancelled = false)
+            bool isCancelled = false
+        )
         {
-            using var workspace = TestWorkspace.IsWorkspaceElement(initial)
-                ? TestWorkspace.Create(initial, composition: s_composition)
+            using var workspace =
+                TestWorkspace.IsWorkspaceElement(initial)
+                    ? TestWorkspace.Create(initial, composition: s_composition)
                 : languageName == LanguageNames.CSharp
-                  ? TestWorkspace.CreateCSharp(initial, composition: s_composition)
-                  : TestWorkspace.CreateVisualBasic(initial, composition: s_composition);
+                    ? TestWorkspace.CreateCSharp(initial, composition: s_composition)
+                : TestWorkspace.CreateVisualBasic(initial, composition: s_composition);
 
             var testOptions = new TestParameters();
-            var (diagnostics, actions, _) = await GetDiagnosticAndFixesAsync(workspace, testOptions);
+            var (diagnostics, actions, _) = await GetDiagnosticAndFixesAsync(
+                workspace,
+                testOptions
+            );
 
-            var testState = new GenerateTypeTestState(workspace, projectToBeModified: projectName, typeName, existingFilename);
+            var testState = new GenerateTypeTestState(
+                workspace,
+                projectToBeModified: projectName,
+                typeName,
+                existingFilename
+            );
 
             // Initialize the viewModel values
             testState.TestGenerateTypeOptionsService.SetGenerateTypeOptions(
@@ -82,12 +95,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 fullFilePath: fullFilePath,
                 existingDocument: testState.ExistingDocument,
                 areFoldersValidIdentifiers: areFoldersValidIdentifiers,
-                isCancelled: isCancelled);
+                isCancelled: isCancelled
+            );
 
             testState.TestProjectManagementService.SetDefaultNamespace(
-                defaultNamespace: defaultNamespace);
+                defaultNamespace: defaultNamespace
+            );
 
-            var generateTypeDiagFixes = diagnostics.SingleOrDefault(df => GenerateTypeTestState.FixIds.Contains(df.Id));
+            var generateTypeDiagFixes = diagnostics.SingleOrDefault(df =>
+                GenerateTypeTestState.FixIds.Contains(df.Id)
+            );
 
             if (isMissing)
             {
@@ -104,18 +121,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
 
             Assert.Equal(action.Title, FeaturesResources.Generate_new_type);
             var operations = await action.GetOperationsAsync(
-                workspace.CurrentSolution, CodeAnalysisProgress.None, CancellationToken.None);
+                workspace.CurrentSolution,
+                CodeAnalysisProgress.None,
+                CancellationToken.None
+            );
             Tuple<Solution, Solution> oldSolutionAndNewSolution = null;
 
             if (!isNewFile)
             {
                 oldSolutionAndNewSolution = await TestOperationsAsync(
-                    testState.Workspace, expected, operations,
+                    testState.Workspace,
+                    expected,
+                    operations,
                     conflictSpans: ImmutableArray<TextSpan>.Empty,
                     renameSpans: ImmutableArray<TextSpan>.Empty,
                     warningSpans: ImmutableArray<TextSpan>.Empty,
                     navigationSpans: ImmutableArray<TextSpan>.Empty,
-                    expectedChangedDocumentId: testState.ExistingDocument.Id);
+                    expectedChangedDocumentId: testState.ExistingDocument.Id
+                );
             }
             else
             {
@@ -126,25 +149,33 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                     projectName != null,
                     testState.ProjectToBeModified.Id,
                     newFileFolderContainers,
-                    newFileName);
+                    newFileName
+                );
             }
 
             if (checkIfUsingsIncluded)
             {
                 Assert.NotNull(expectedTextWithUsings);
-                await TestOperationsAsync(testState.Workspace, expectedTextWithUsings, operations,
+                await TestOperationsAsync(
+                    testState.Workspace,
+                    expectedTextWithUsings,
+                    operations,
                     conflictSpans: ImmutableArray<TextSpan>.Empty,
                     renameSpans: ImmutableArray<TextSpan>.Empty,
                     warningSpans: ImmutableArray<TextSpan>.Empty,
                     navigationSpans: ImmutableArray<TextSpan>.Empty,
-                    expectedChangedDocumentId: testState.InvocationDocument.Id);
+                    expectedChangedDocumentId: testState.InvocationDocument.Id
+                );
             }
 
             if (checkIfUsingsNotIncluded)
             {
                 var oldSolution = oldSolutionAndNewSolution.Item1;
                 var newSolution = oldSolutionAndNewSolution.Item2;
-                var changedDocumentIds = SolutionUtilities.GetChangedDocuments(oldSolution, newSolution);
+                var changedDocumentIds = SolutionUtilities.GetChangedDocuments(
+                    oldSolution,
+                    newSolution
+                );
 
                 Assert.False(changedDocumentIds.Contains(testState.InvocationDocument.Id));
             }
@@ -152,12 +183,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             // Added into a different project than the triggering project
             if (projectName != null)
             {
-                var appliedChanges = await ApplyOperationsAndGetSolutionAsync(testState.Workspace, operations);
+                var appliedChanges = await ApplyOperationsAndGetSolutionAsync(
+                    testState.Workspace,
+                    operations
+                );
                 var newSolution = appliedChanges.Item2;
                 var triggeredProject = newSolution.GetProject(testState.TriggeredProject.Id);
 
                 // Make sure the Project reference is present
-                Assert.True(triggeredProject.ProjectReferences.Any(pr => pr.ProjectId == testState.ProjectToBeModified.Id));
+                Assert.True(
+                    triggeredProject.ProjectReferences.Any(pr =>
+                        pr.ProjectId == testState.ProjectToBeModified.Id
+                    )
+                );
             }
 
             // Assert Option Calculation
@@ -166,22 +204,39 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 Assert.True(assertClassName == testState.TestGenerateTypeOptionsService.ClassName);
             }
 
-            if (assertGenerateTypeDialogOptions != null || assertTypeKindPresent != null || assertTypeKindAbsent != null)
+            if (
+                assertGenerateTypeDialogOptions != null
+                || assertTypeKindPresent != null
+                || assertTypeKindAbsent != null
+            )
             {
-                var generateTypeDialogOptions = testState.TestGenerateTypeOptionsService.GenerateTypeDialogOptions;
+                var generateTypeDialogOptions = testState
+                    .TestGenerateTypeOptionsService
+                    .GenerateTypeDialogOptions;
 
                 if (assertGenerateTypeDialogOptions != null)
                 {
-                    Assert.True(assertGenerateTypeDialogOptions.IsPublicOnlyAccessibility == generateTypeDialogOptions.IsPublicOnlyAccessibility);
-                    Assert.True(assertGenerateTypeDialogOptions.TypeKindOptions == generateTypeDialogOptions.TypeKindOptions);
-                    Assert.True(assertGenerateTypeDialogOptions.IsAttribute == generateTypeDialogOptions.IsAttribute);
+                    Assert.True(
+                        assertGenerateTypeDialogOptions.IsPublicOnlyAccessibility
+                            == generateTypeDialogOptions.IsPublicOnlyAccessibility
+                    );
+                    Assert.True(
+                        assertGenerateTypeDialogOptions.TypeKindOptions
+                            == generateTypeDialogOptions.TypeKindOptions
+                    );
+                    Assert.True(
+                        assertGenerateTypeDialogOptions.IsAttribute
+                            == generateTypeDialogOptions.IsAttribute
+                    );
                 }
 
                 if (assertTypeKindPresent != null)
                 {
                     foreach (var typeKindPresentEach in assertTypeKindPresent)
                     {
-                        Assert.True((typeKindPresentEach & generateTypeDialogOptions.TypeKindOptions) != 0);
+                        Assert.True(
+                            (typeKindPresentEach & generateTypeDialogOptions.TypeKindOptions) != 0
+                        );
                     }
                 }
 
@@ -189,7 +244,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
                 {
                     foreach (var typeKindPresentEach in assertTypeKindAbsent)
                     {
-                        Assert.True((typeKindPresentEach & generateTypeDialogOptions.TypeKindOptions) == 0);
+                        Assert.True(
+                            (typeKindPresentEach & generateTypeDialogOptions.TypeKindOptions) == 0
+                        );
                     }
                 }
             }

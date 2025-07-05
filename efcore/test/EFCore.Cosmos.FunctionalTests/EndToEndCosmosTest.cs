@@ -401,7 +401,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = Guid.NewGuid(),
             Name = "Theon",
-            PartitionKey = 42
+            PartitionKey = 42,
         };
 
         using (var context = new CustomerContextGuid(options))
@@ -452,7 +452,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = DateTime.MinValue,
             Name = "Theon/\\#\\\\?",
-            PartitionKey = 42
+            PartitionKey = 42,
         };
 
         using (var context = new CustomerContextDateTime(options))
@@ -461,7 +461,10 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
             var entry = await context.AddAsync(customer);
 
-            Assert.Equal("CustomerDateTime|0001-01-01T00:00:00.0000000|Theon^2F^5C^23^5C^5C^3F", entry.CurrentValues["__id"]);
+            Assert.Equal(
+                "CustomerDateTime|0001-01-01T00:00:00.0000000|Theon^2F^5C^23^5C^5C^3F",
+                entry.CurrentValues["__id"]
+            );
 
             await context.SaveChangesAsync();
         }
@@ -534,47 +537,39 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
     private class CustomerContext : DbContext
     {
         public CustomerContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>();
     }
 
     private class CustomerContextGuid : DbContext
     {
         public CustomerContextGuid(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<CustomerGuid>(
-                cb =>
-                {
-                    cb.Property(c => c.Id).ToJsonProperty("id");
-                    cb.Property(c => c.PartitionKey).HasConversion<string>().ToJsonProperty("pk");
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CustomerGuid>(cb =>
+            {
+                cb.Property(c => c.Id).ToJsonProperty("id");
+                cb.Property(c => c.PartitionKey).HasConversion<string>().ToJsonProperty("pk");
+                cb.HasPartitionKey(c => c.PartitionKey);
+            });
     }
 
     private class CustomerContextDateTime : DbContext
     {
         public CustomerContextDateTime(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<CustomerDateTime>(
-                cb =>
-                {
-                    cb.Property(c => c.Id);
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.HasKey(c => new { c.Id, c.Name });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CustomerDateTime>(cb =>
+            {
+                cb.Property(c => c.Id);
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.HasKey(c => new { c.Id, c.Name });
+            });
     }
 
     [ConditionalFact]
@@ -627,6 +622,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             Assert.Empty(await context.Set<Customer>().ToListAsync());
         }
     }
+
     [ConditionalFact]
     public async Task Entities_with_null_PK_can_be_added_with_normal_use_of_DbContext_methods_and_have_id_shadow_value_and_PK_created()
     {
@@ -649,8 +645,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
     }
 
     [ConditionalFact]
-    public async Task
-        Entities_can_be_tracked_with_normal_use_of_DbContext_methods_and_have_correct_resultant_state_and_id_shadow_value()
+    public async Task Entities_can_be_tracked_with_normal_use_of_DbContext_methods_and_have_correct_resultant_state_and_id_shadow_value()
     {
         await using var testDatabase = CosmosTestStore.Create("IdentifierShadowValuePresenceTest");
         using var context = new IdentifierShadowValuePresenceTestContext(testDatabase);
@@ -687,17 +682,15 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             _name = testStore.Name;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseCosmos(
-                    _connectionUri,
-                    _authToken,
-                    _name,
-                    b => b.ApplyConfiguration());
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseCosmos(
+                _connectionUri,
+                _authToken,
+                _name,
+                b => b.ApplyConfiguration()
+            );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
         public DbSet<GItem> GItems { get; set; }
 
@@ -724,7 +717,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 c.Collection.Clear();
                 c.Collection.Add(3);
             },
-            new List<short> { 3 });
+            new List<short> { 3 }
+        );
 
         await Can_add_update_delete_with_collection<IList<byte?>>(
             new List<byte?>(),
@@ -734,47 +728,40 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 c.Collection.Add(3);
                 c.Collection.Add(null);
             },
-            new List<byte?> { 3, null });
+            new List<byte?> { 3, null }
+        );
 
         await Can_add_update_delete_with_collection<IReadOnlyList<string>>(
             new[] { "1", null },
             c =>
             {
-                c.Collection = new List<string>
-                {
-                    "3",
-                    "2",
-                    "1"
-                };
+                c.Collection = new List<string> { "3", "2", "1" };
             },
-            new List<string>
-            {
-                "3",
-                "2",
-                "1"
-            });
+            new List<string> { "3", "2", "1" }
+        );
 
         // See #25343
         await Can_add_update_delete_with_collection(
-            new List<EntityType>
-            {
-                EntityType.Base,
-                EntityType.Derived,
-                EntityType.Derived
-            },
+            new List<EntityType> { EntityType.Base, EntityType.Derived, EntityType.Derived },
             c =>
             {
                 c.Collection.Clear();
                 c.Collection.Add(EntityType.Base);
             },
             new List<EntityType> { EntityType.Base },
-            modelBuilder => modelBuilder.Entity<CustomerWithCollection<List<EntityType>>>(
-                c =>
+            modelBuilder =>
+                modelBuilder.Entity<CustomerWithCollection<List<EntityType>>>(c =>
                     c.Property(s => s.Collection)
                         .HasConversion(
-                            m => m.Select(v => (int)v).ToList(), p => p.Select(v => (EntityType)v).ToList(),
+                            m => m.Select(v => (int)v).ToList(),
+                            p => p.Select(v => (EntityType)v).ToList(),
                             new ListComparer<EntityType, List<EntityType>>(
-                                ValueComparer.CreateDefault(typeof(EntityType), false), readOnly: false))));
+                                ValueComparer.CreateDefault(typeof(EntityType), false),
+                                readOnly: false
+                            )
+                        )
+                )
+        );
 
         await Can_add_update_delete_with_collection(
             new[] { 1f, 2 },
@@ -782,7 +769,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             {
                 c.Collection[0] = 3f;
             },
-            new[] { 3f, 2 });
+            new[] { 3f, 2 }
+        );
 
         await Can_add_update_delete_with_collection(
             new decimal?[] { 1, null },
@@ -790,7 +778,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             {
                 c.Collection[0] = 3;
             },
-            new decimal?[] { 3, null });
+            new decimal?[] { 3, null }
+        );
 
         await Can_add_update_delete_with_collection(
             new Dictionary<string, int> { { "1", 1 } },
@@ -798,7 +787,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             {
                 c.Collection["2"] = 3;
             },
-            new Dictionary<string, int> { { "1", 1 }, { "2", 3 } });
+            new Dictionary<string, int> { { "1", 1 }, { "2", 3 } }
+        );
 
         await Can_add_update_delete_with_collection<IDictionary<string, long?>>(
             new SortedDictionary<string, long?> { { "2", 2 }, { "1", 1 } },
@@ -807,29 +797,34 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 c.Collection.Clear();
                 c.Collection["2"] = null;
             },
-            new SortedDictionary<string, long?> { { "2", null } });
+            new SortedDictionary<string, long?> { { "2", null } }
+        );
 
         await Can_add_update_delete_with_collection<IReadOnlyDictionary<string, short?>>(
-            ImmutableDictionary<string, short?>.Empty
-                .Add("2", 2).Add("1", 1),
+            ImmutableDictionary<string, short?>.Empty.Add("2", 2).Add("1", 1),
             c =>
             {
                 c.Collection = ImmutableDictionary<string, short?>.Empty.Add("1", 1).Add("2", null);
             },
-            new Dictionary<string, short?> { { "1", 1 }, { "2", null } });
+            new Dictionary<string, short?> { { "1", 1 }, { "2", null } }
+        );
     }
 
     [ConditionalFact]
     public async Task Can_add_update_delete_with_nested_collections()
     {
         await Can_add_update_delete_with_collection(
-            new List<List<short>> { new() { 1, 2 } },
+            new List<List<short>>
+            {
+                new() { 1, 2 },
+            },
             c =>
             {
                 c.Collection.Clear();
                 c.Collection.Add(new List<short> { 3 });
             },
-            new List<List<short>> { new() { 3 } });
+            new List<List<short>> { new() { 3 } }
+        );
         await Can_add_update_delete_with_collection<IList<byte?[]>>(
             new List<byte?[]>(),
             c =>
@@ -837,22 +832,36 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 c.Collection.Add(new byte?[] { 3, null });
                 c.Collection.Add(null);
             },
-            new List<byte?[]> { new byte?[] { 3, null }, null });
+            new List<byte?[]> { new byte?[] { 3, null }, null }
+        );
         await Can_add_update_delete_with_collection<IReadOnlyList<Dictionary<string, string>>>(
             new Dictionary<string, string>[] { new() { { "1", null } } },
             c =>
             {
                 var dictionary = c.Collection[0]["3"] = "2";
             },
-            new List<Dictionary<string, string>> { new() { { "1", null }, { "3", "2" } } });
+            new List<Dictionary<string, string>>
+            {
+                new() { { "1", null }, { "3", "2" } },
+            }
+        );
 
         await Can_add_update_delete_with_collection(
-            new List<float>[] { new() { 1f }, new() { 2 } },
+            new List<float>[]
+            {
+                new() { 1f },
+                new() { 2 },
+            },
             c =>
             {
                 c.Collection[1][0] = 3f;
             },
-            new List<float>[] { new() { 1f }, new() { 3f } });
+            new List<float>[]
+            {
+                new() { 1f },
+                new() { 3f },
+            }
+        );
 
         await Can_add_update_delete_with_collection(
             new[] { new decimal?[] { 1, null } },
@@ -860,45 +869,77 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             {
                 c.Collection[0][1] = 3;
             },
-            new[] { new decimal?[] { 1, 3 } });
+            new[] { new decimal?[] { 1, 3 } }
+        );
 
         await Can_add_update_delete_with_collection(
-            new Dictionary<string, List<int>> { { "1", new List<int> { 1 } } },
+            new Dictionary<string, List<int>>
+            {
+                {
+                    "1",
+                    new List<int> { 1 }
+                },
+            },
             c =>
             {
                 c.Collection["2"] = new List<int> { 3 };
             },
-            new Dictionary<string, List<int>> { { "1", new List<int> { 1 } }, { "2", new List<int> { 3 } } });
+            new Dictionary<string, List<int>>
+            {
+                {
+                    "1",
+                    new List<int> { 1 }
+                },
+                {
+                    "2",
+                    new List<int> { 3 }
+                },
+            }
+        );
 
         await Can_add_update_delete_with_collection<IDictionary<string, long?[]>>(
-            new SortedDictionary<string, long?[]> { { "2", new long?[] { 2 } }, { "1", new long?[] { 1 } } },
+            new SortedDictionary<string, long?[]>
+            {
+                { "2", new long?[] { 2 } },
+                { "1", new long?[] { 1 } },
+            },
             c =>
             {
                 c.Collection.Clear();
                 c.Collection["2"] = null;
             },
-            new SortedDictionary<string, long?[]> { { "2", null } });
+            new SortedDictionary<string, long?[]> { { "2", null } }
+        );
 
-        await Can_add_update_delete_with_collection<IReadOnlyDictionary<string, Dictionary<string, short?>>>(
-            ImmutableDictionary<string, Dictionary<string, short?>>.Empty
-                .Add("2", new Dictionary<string, short?> { { "value", 2 } })
+        await Can_add_update_delete_with_collection<
+            IReadOnlyDictionary<string, Dictionary<string, short?>>
+        >(
+            ImmutableDictionary<string, Dictionary<string, short?>>
+                .Empty.Add("2", new Dictionary<string, short?> { { "value", 2 } })
                 .Add("1", new Dictionary<string, short?> { { "value", 1 } }),
             c =>
             {
-                c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>.Empty
-                    .Add("1", new Dictionary<string, short?> { { "value", 1 } }).Add("2", null);
+                c.Collection = ImmutableDictionary<string, Dictionary<string, short?>>
+                    .Empty.Add("1", new Dictionary<string, short?> { { "value", 1 } })
+                    .Add("2", null);
             },
             new Dictionary<string, Dictionary<string, short?>>
             {
-                { "1", new Dictionary<string, short?> { { "value", 1 } } }, { "2", null }
-            });
+                {
+                    "1",
+                    new Dictionary<string, short?> { { "value", 1 } }
+                },
+                { "2", null },
+            }
+        );
     }
 
     private async Task Can_add_update_delete_with_collection<TCollection>(
         TCollection initialValue,
         Action<CustomerWithCollection<TCollection>> modify,
         TCollection modifiedValue,
-        Action<ModelBuilder> onModelBuilder = null)
+        Action<ModelBuilder> onModelBuilder = null
+    )
         where TCollection : class
     {
         var options = Fixture.CreateOptions();
@@ -907,7 +948,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            Collection = initialValue
+            Collection = initialValue,
         };
 
         using (var context = new CollectionCustomerContext<TCollection>(options, onModelBuilder))
@@ -966,14 +1007,17 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<CustomerWithCollection<TCollection>> Customers { get; set; }
 
-        public CollectionCustomerContext(DbContextOptions dbContextOptions, Action<ModelBuilder> onModelBuilder = null)
+        public CollectionCustomerContext(
+            DbContextOptions dbContextOptions,
+            Action<ModelBuilder> onModelBuilder = null
+        )
             : base(dbContextOptions)
         {
             _onModelBuilder = onModelBuilder;
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => _onModelBuilder?.Invoke(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            _onModelBuilder?.Invoke(modelBuilder);
     }
 
     [ConditionalFact]
@@ -987,7 +1031,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             id = "42",
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         await using (var context = new PartitionKeyContextWithResourceId(options))
@@ -995,8 +1039,10 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             await context.Database.EnsureCreatedAsync();
 
             Assert.Null(
-                context.Model.FindEntityType(typeof(CustomerWithResourceId))
-                    .FindProperty(StoreKeyConvention.DefaultIdPropertyName));
+                context
+                    .Model.FindEntityType(typeof(CustomerWithResourceId))
+                    .FindProperty(StoreKeyConvention.DefaultIdPropertyName)
+            );
 
             await context.AddAsync(customer);
             await context.AddAsync(
@@ -1004,15 +1050,17 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     id = "42",
                     Name = "Theon Twin",
-                    PartitionKey = pk2
-                });
+                    PartitionKey = pk2,
+                }
+            );
 
             await context.SaveChangesAsync();
         }
 
         await using (var context = new PartitionKeyContextWithResourceId(options))
         {
-            var customerFromStore = await context.Set<CustomerWithResourceId>()
+            var customerFromStore = await context
+                .Set<CustomerWithResourceId>()
                 .FindAsync(pk1, "42");
 
             Assert.Equal("42", customerFromStore.id);
@@ -1027,7 +1075,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
         await using (var context = new PartitionKeyContextWithResourceId(options))
         {
-            var customerFromStore = await context.Set<CustomerWithResourceId>()
+            var customerFromStore = await context
+                .Set<CustomerWithResourceId>()
                 .WithPartitionKey(partitionKey: pk1.ToString())
                 .FirstAsync();
 
@@ -1048,7 +1097,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             id = "42",
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         using (var context = new PartitionKeyContextWithResourceId(options))
@@ -1061,16 +1110,16 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     id = "42",
                     Name = "Theon Twin",
-                    PartitionKey = pk2
-                });
+                    PartitionKey = pk2,
+                }
+            );
 
             context.SaveChanges();
         }
 
         using (var context = new PartitionKeyContextWithResourceId(options))
         {
-            var customerFromStore = context.Set<CustomerWithResourceId>()
-                .Find(pk1, "42");
+            var customerFromStore = context.Set<CustomerWithResourceId>().Find(pk1, "42");
 
             Assert.Equal("42", customerFromStore.id);
             Assert.Equal("Theon", customerFromStore.Name);
@@ -1084,7 +1133,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
         using (var context = new PartitionKeyContextWithResourceId(options))
         {
-            var customerFromStore = context.Set<CustomerWithResourceId>()
+            var customerFromStore = context
+                .Set<CustomerWithResourceId>()
                 .WithPartitionKey(partitionKey: pk1.ToString())
                 .First();
 
@@ -1104,7 +1154,12 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
             Assert.Equal(
                 CosmosStrings.InvalidResourceId,
-                Assert.Throws<InvalidOperationException>(() => context.Set<CustomerWithResourceId>().Find(1, "")).Message);
+                Assert
+                    .Throws<InvalidOperationException>(() =>
+                        context.Set<CustomerWithResourceId>().Find(1, "")
+                    )
+                    .Message
+            );
         }
     }
 
@@ -1119,7 +1174,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         await using (var context = new PartitionKeyContextCustomValueGenerator(options))
@@ -1132,16 +1187,16 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     Id = 42,
                     Name = "Theon Twin",
-                    PartitionKey = pk2
-                });
+                    PartitionKey = pk2,
+                }
+            );
 
             await context.SaveChangesAsync();
         }
 
         await using (var context = new PartitionKeyContextCustomValueGenerator(options))
         {
-            var customerFromStore = await context.Set<Customer>()
-                .FindAsync(pk1, 42);
+            var customerFromStore = await context.Set<Customer>().FindAsync(pk1, 42);
 
             Assert.Equal(42, customerFromStore.Id);
             Assert.Equal("Theon", customerFromStore.Name);
@@ -1154,7 +1209,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
         await using (var context = new PartitionKeyContextCustomValueGenerator(options))
         {
-            var customerFromStore = await context.Set<Customer>()
+            var customerFromStore = await context
+                .Set<Customer>()
                 .WithPartitionKey(partitionKey: pk1.ToString())
                 .FirstAsync();
 
@@ -1175,7 +1231,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         using (var context = new PartitionKeyContextCustomValueGenerator(options))
@@ -1188,16 +1244,16 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     Id = 42,
                     Name = "Theon Twin",
-                    PartitionKey = pk2
-                });
+                    PartitionKey = pk2,
+                }
+            );
 
             context.SaveChanges();
         }
 
         using (var context = new PartitionKeyContextCustomValueGenerator(options))
         {
-            var customerFromStore = context.Set<Customer>()
-                .Find(pk1, 42);
+            var customerFromStore = context.Set<Customer>().Find(pk1, 42);
 
             Assert.Equal(42, customerFromStore.Id);
             Assert.Equal("Theon", customerFromStore.Name);
@@ -1211,7 +1267,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
         using (var context = new PartitionKeyContextCustomValueGenerator(options))
         {
-            var customerFromStore = context.Set<Customer>()
+            var customerFromStore = context
+                .Set<Customer>()
                 .WithPartitionKey(partitionKey: pk1.ToString())
                 .First();
 
@@ -1231,7 +1288,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         using (var context = new PartitionKeyContextNoValueGenerator(options))
@@ -1247,8 +1304,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
 
         using (var context = new PartitionKeyContextNoValueGenerator(options))
         {
-            var customerFromStore = context.Set<Customer>()
-                .Find(pk1, 42);
+            var customerFromStore = context.Set<Customer>().Find(pk1, 42);
 
             Assert.Equal(42, customerFromStore.Id);
             Assert.Equal("Theon", customerFromStore.Name);
@@ -1262,7 +1318,8 @@ SELECT c
 FROM root c
 WHERE ((c["Discriminator"] = "Customer") AND (c["Id"] = @__p_1))
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
 
             customerFromStore.Name = "Theon Greyjoy";
 
@@ -1271,7 +1328,8 @@ OFFSET 0 LIMIT 1
 
         using (var context = new PartitionKeyContextNoValueGenerator(options))
         {
-            var customerFromStore = context.Set<Customer>()
+            var customerFromStore = context
+                .Set<Customer>()
                 .WithPartitionKey(partitionKey: pk1.ToString())
                 .First();
 
@@ -1290,7 +1348,7 @@ OFFSET 0 LIMIT 1
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = 1
+            PartitionKey = 1,
         };
 
         await using (var context = new PartitionKeyContextNonPrimaryKey(options))
@@ -1395,139 +1453,118 @@ SELECT c
 FROM root c
 WHERE ((c["Discriminator"] = "CustomerWithResourceId") AND (c["id"] = @__p_0))
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
     }
 
     private class PartitionKeyContext : DbContext
     {
         public PartitionKeyContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>(
-                cb =>
-                {
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
-                    cb.HasKey(c => new { c.Id, c.PartitionKey });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>(cb =>
+            {
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.HasKey(c => new { c.Id, c.PartitionKey });
+            });
     }
 
     private class PartitionKeyContextEntityWithNoPartitionKey : DbContext
     {
         public PartitionKeyContextEntityWithNoPartitionKey(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<CustomerNoPartitionKey>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CustomerNoPartitionKey>();
     }
 
     private class PartitionKeyContextCustomValueGenerator : DbContext
     {
         public PartitionKeyContextCustomValueGenerator(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>(
-                cb =>
-                {
-                    cb.Property(StoreKeyConvention.DefaultIdPropertyName)
-                        .HasValueGeneratorFactory(typeof(CustomPartitionKeyIdValueGeneratorFactory));
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>(cb =>
+            {
+                cb.Property(StoreKeyConvention.DefaultIdPropertyName)
+                    .HasValueGeneratorFactory(typeof(CustomPartitionKeyIdValueGeneratorFactory));
 
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
 
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.HasKey(c => new { c.PartitionKey, c.Id });
-                });
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.HasKey(c => new { c.PartitionKey, c.Id });
+            });
     }
 
     private class PartitionKeyContextNoValueGenerator : DbContext
     {
         public PartitionKeyContextNoValueGenerator(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>(
-                cb =>
-                {
-                    cb.Property(StoreKeyConvention.DefaultIdPropertyName).HasValueGenerator((Type)null);
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>(cb =>
+            {
+                cb.Property(StoreKeyConvention.DefaultIdPropertyName).HasValueGenerator((Type)null);
 
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
 
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.HasKey(c => new { c.PartitionKey, c.Id });
-                });
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.HasKey(c => new { c.PartitionKey, c.Id });
+            });
     }
 
     private class PartitionKeyContextNonPrimaryKey : DbContext
     {
         public PartitionKeyContextNonPrimaryKey(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>();
     }
 
     private class PartitionKeyContextPrimaryKey : DbContext
     {
         public PartitionKeyContextPrimaryKey(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<CustomerGuid>(
-                cb =>
-                {
-                    cb.Property(c => c.Id).ToJsonProperty("id");
-                    cb.HasPartitionKey(c => c.Id);
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CustomerGuid>(cb =>
+            {
+                cb.Property(c => c.Id).ToJsonProperty("id");
+                cb.HasPartitionKey(c => c.Id);
+            });
     }
 
     private class PartitionKeyContextWithPrimaryKeyResourceId : DbContext
     {
         public PartitionKeyContextWithPrimaryKeyResourceId(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<CustomerWithResourceId>(
-                cb =>
-                {
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
-                    cb.Property(c => c.id).HasConversion<string>();
-                    cb.HasKey(c => new { c.id });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CustomerWithResourceId>(cb =>
+            {
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.Property(c => c.id).HasConversion<string>();
+                cb.HasKey(c => new { c.id });
+            });
     }
 
     private class PartitionKeyContextWithResourceId : DbContext
     {
         public PartitionKeyContextWithResourceId(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<CustomerWithResourceId>(
-                cb =>
-                {
-                    cb.HasPartitionKey(c => c.PartitionKey);
-                    cb.Property(c => c.PartitionKey).HasConversion<string>();
-                    cb.HasKey(c => new { c.PartitionKey, c.id });
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<CustomerWithResourceId>(cb =>
+            {
+                cb.HasPartitionKey(c => c.PartitionKey);
+                cb.Property(c => c.PartitionKey).HasConversion<string>();
+                cb.HasKey(c => new { c.PartitionKey, c.id });
+            });
     }
 
     [ConditionalFact]
@@ -1576,12 +1613,10 @@ OFFSET 0 LIMIT 1
     private class NoDiscriminatorCustomerContext : CustomerContext
     {
         public NoDiscriminatorCustomerContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>().HasNoDiscriminator();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>().HasNoDiscriminator();
     }
 
     [ConditionalFact]
@@ -1640,9 +1675,7 @@ OFFSET 0 LIMIT 1
     private class ExtraCustomerContext : CustomerContext
     {
         public ExtraCustomerContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1684,12 +1717,10 @@ OFFSET 0 LIMIT 1
     private class UnmappedCustomerContext : CustomerContext
     {
         public UnmappedCustomerContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Customer>().Property(c => c.Name).ToJsonProperty("");
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Customer>().Property(c => c.Name).ToJsonProperty("");
     }
 
     [ConditionalFact]
@@ -1705,7 +1736,10 @@ OFFSET 0 LIMIT 1
 
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync())).InnerException!.Message);
+                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
+                    .InnerException!
+                    .Message
+            );
         }
 
         using (var context = new CustomerContext(options))
@@ -1714,7 +1748,10 @@ OFFSET 0 LIMIT 1
 
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync())).InnerException!.Message);
+                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
+                    .InnerException!
+                    .Message
+            );
         }
 
         using (var context = new CustomerContext(options))
@@ -1723,14 +1760,22 @@ OFFSET 0 LIMIT 1
 
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync())).InnerException!.Message);
+                (await Assert.ThrowsAsync<DbUpdateException>(() => context.SaveChangesAsync()))
+                    .InnerException!
+                    .Message
+            );
         }
 
         using (var context = new CustomerContext(options))
         {
             Assert.StartsWith(
                 "Response status code does not indicate success: NotFound (404); Substatus: 0",
-                (await Assert.ThrowsAsync<CosmosException>(() => context.Set<Customer>().SingleAsync())).Message);
+                (
+                    await Assert.ThrowsAsync<CosmosException>(() =>
+                        context.Set<Customer>().SingleAsync()
+                    )
+                ).Message
+            );
         }
     }
 
@@ -1740,15 +1785,14 @@ OFFSET 0 LIMIT 1
         var options = Fixture.CreateOptions();
 
         using var context = new ConflictingIncompatibleIdContext(options);
-        await Assert.ThrowsAnyAsync<Exception>(
-            async () =>
-            {
-                await context.Database.EnsureCreatedAsync();
+        await Assert.ThrowsAnyAsync<Exception>(async () =>
+        {
+            await context.Database.EnsureCreatedAsync();
 
-                await context.AddAsync(new ConflictingIncompatibleId { id = 42 });
+            await context.AddAsync(new ConflictingIncompatibleId { id = 42 });
 
-                await context.SaveChangesAsync();
-            });
+            await context.SaveChangesAsync();
+        });
     }
 
     private class ConflictingIncompatibleId
@@ -1761,12 +1805,10 @@ OFFSET 0 LIMIT 1
     public class ConflictingIncompatibleIdContext : DbContext
     {
         public ConflictingIncompatibleIdContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<ConflictingIncompatibleId>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<ConflictingIncompatibleId>();
     }
 
     [ConditionalFact]
@@ -1832,12 +1874,10 @@ OFFSET 0 LIMIT 1
     public class ConflictingIdContext : DbContext
     {
         public ConflictingIdContext(DbContextOptions dbContextOptions)
-            : base(dbContextOptions)
-        {
-        }
+            : base(dbContextOptions) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<ConflictingId>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<ConflictingId>();
     }
 
     [ConditionalTheory]
@@ -1845,7 +1885,10 @@ OFFSET 0 LIMIT 1
     [InlineData(false)]
     public async Task Can_have_non_string_property_named_Discriminator(bool useDiscriminator)
     {
-        using var context = new NonStringDiscriminatorContext(Fixture.CreateOptions(), useDiscriminator);
+        using var context = new NonStringDiscriminatorContext(
+            Fixture.CreateOptions(),
+            useDiscriminator
+        );
         context.Database.EnsureCreated();
 
         var entry = await context.AddAsync(new NonStringDiscriminator { Id = 1 });
@@ -1855,20 +1898,24 @@ OFFSET 0 LIMIT 1
         Assert.NotNull(document);
         Assert.Equal("0", document["Discriminator"]);
 
-        var baseEntity = await context.Set<NonStringDiscriminator>().OrderBy(e => e.Id).FirstOrDefaultAsync();
+        var baseEntity = await context
+            .Set<NonStringDiscriminator>()
+            .OrderBy(e => e.Id)
+            .FirstOrDefaultAsync();
         Assert.NotNull(baseEntity);
 
         if (useDiscriminator)
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 WHERE (c["Discriminator"] = 0)
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
         else
         {
@@ -1879,92 +1926,117 @@ SELECT c
 FROM root c
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
 
         Fixture.ListLoggerFactory.Clear();
-        Assert.Equal(baseEntity, await context.Set<NonStringDiscriminator>()
-                .Where(e => e.Discriminator == EntityType.Base).OrderBy(e => e.Id).FirstOrDefaultAsync());
+        Assert.Equal(
+            baseEntity,
+            await context
+                .Set<NonStringDiscriminator>()
+                .Where(e => e.Discriminator == EntityType.Base)
+                .OrderBy(e => e.Id)
+                .FirstOrDefaultAsync()
+        );
 
         if (useDiscriminator)
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 WHERE ((c["Discriminator"] = 0) AND (c["Discriminator"] = 0))
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
         else
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 WHERE (c["Discriminator"] = 0)
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
 
         Fixture.ListLoggerFactory.Clear();
-        Assert.Equal(baseEntity, await context.Set<NonStringDiscriminator>()
-                .Where(e => e.GetType() == typeof(NonStringDiscriminator)).OrderBy(e => e.Id).FirstOrDefaultAsync());
+        Assert.Equal(
+            baseEntity,
+            await context
+                .Set<NonStringDiscriminator>()
+                .Where(e => e.GetType() == typeof(NonStringDiscriminator))
+                .OrderBy(e => e.Id)
+                .FirstOrDefaultAsync()
+        );
 
         if (useDiscriminator)
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 WHERE (c["Discriminator"] = 0)
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
         else
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
 
         Fixture.ListLoggerFactory.Clear();
-        Assert.Equal(baseEntity, await context.Set<NonStringDiscriminator>()
-                .Where(e => e is NonStringDiscriminator).OrderBy(e => e.Id).FirstOrDefaultAsync());
+        Assert.Equal(
+            baseEntity,
+            await context
+                .Set<NonStringDiscriminator>()
+                .Where(e => e is NonStringDiscriminator)
+                .OrderBy(e => e.Id)
+                .FirstOrDefaultAsync()
+        );
 
         if (useDiscriminator)
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 WHERE (c["Discriminator"] = 0)
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
         else
         {
             AssertSql(
-            context,
-            """
+                context,
+                """
 SELECT c
 FROM root c
 ORDER BY c["Id"]
 OFFSET 0 LIMIT 1
-""");
+"""
+            );
         }
     }
 
@@ -1977,12 +2049,15 @@ OFFSET 0 LIMIT 1
     private enum EntityType
     {
         Base,
-        Derived
+        Derived,
     }
 
     public class NonStringDiscriminatorContext : DbContext
     {
-        public NonStringDiscriminatorContext(DbContextOptions dbContextOptions, bool useDiscriminator)
+        public NonStringDiscriminatorContext(
+            DbContextOptions dbContextOptions,
+            bool useDiscriminator
+        )
             : base(dbContextOptions)
         {
             UseDiscriminator = useDiscriminator;
@@ -1995,7 +2070,8 @@ OFFSET 0 LIMIT 1
             modelBuilder.Entity<NonStringDiscriminator>();
             if (UseDiscriminator)
             {
-                modelBuilder.Entity<NonStringDiscriminator>()
+                modelBuilder
+                    .Entity<NonStringDiscriminator>()
                     .HasDiscriminator(m => m.Discriminator)
                     .HasValue(EntityType.Base);
             }
@@ -2008,14 +2084,14 @@ OFFSET 0 LIMIT 1
         logger.AssertBaseline(expected);
     }
 
-    protected TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)Fixture.ListLoggerFactory;
+    protected TestSqlLoggerFactory TestSqlLoggerFactory =>
+        (TestSqlLoggerFactory)Fixture.ListLoggerFactory;
 
-    protected void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    protected void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected void AssertContainsSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
+    protected void AssertContainsSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
 
     protected ListLoggerFactory LoggerFactory { get; }
 
@@ -2026,8 +2102,7 @@ OFFSET 0 LIMIT 1
             TestStore = CosmosTestStore.Create(DatabaseName);
         }
 
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
         public virtual CosmosTestStore TestStore { get; }
 
@@ -2038,16 +2113,14 @@ OFFSET 0 LIMIT 1
             return CreateOptions(TestStore);
         }
 
-        protected override bool ShouldLogCategory(string logCategory)
-            => logCategory == DbLoggerCategory.Database.Command.Name;
+        protected override bool ShouldLogCategory(string logCategory) =>
+            logCategory == DbLoggerCategory.Database.Command.Name;
 
-        protected override object GetAdditionalModelCacheKey(DbContext context)
-            => (context as NonStringDiscriminatorContext)?.UseDiscriminator;
+        protected override object GetAdditionalModelCacheKey(DbContext context) =>
+            (context as NonStringDiscriminatorContext)?.UseDiscriminator;
 
-        public Task InitializeAsync()
-            => Task.CompletedTask;
+        public Task InitializeAsync() => Task.CompletedTask;
 
-        public Task DisposeAsync()
-            => TestStore.DisposeAsync();
+        public Task DisposeAsync() => TestStore.DisposeAsync();
     }
 }

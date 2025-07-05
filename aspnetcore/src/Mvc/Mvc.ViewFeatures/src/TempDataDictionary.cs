@@ -137,9 +137,13 @@ public class TempDataDictionary : ITempDataDictionary
         }
 
         var providerDictionary = _provider.LoadTempData(_context);
-        _data = (providerDictionary != null)
-            ? new Dictionary<string, object?>(providerDictionary, StringComparer.OrdinalIgnoreCase)
-            : new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+        _data =
+            (providerDictionary != null)
+                ? new Dictionary<string, object?>(
+                    providerDictionary,
+                    StringComparer.OrdinalIgnoreCase
+                )
+                : new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
         _initialKeys = new HashSet<string>(_data.Keys, StringComparer.OrdinalIgnoreCase);
         _retainedKeys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         _loaded = true;
@@ -239,7 +243,10 @@ public class TempDataDictionary : ITempDataDictionary
         return _data.TryGetValue(key, out value);
     }
 
-    void ICollection<KeyValuePair<string, object?>>.CopyTo(KeyValuePair<string, object?>[] array, int index)
+    void ICollection<KeyValuePair<string, object?>>.CopyTo(
+        KeyValuePair<string, object?>[] array,
+        int index
+    )
     {
         Load();
         ((ICollection<KeyValuePair<string, object?>>)_data).CopyTo(array, index);
@@ -252,13 +259,17 @@ public class TempDataDictionary : ITempDataDictionary
         ((ICollection<KeyValuePair<string, object?>>)_data).Add(keyValuePair);
     }
 
-    bool ICollection<KeyValuePair<string, object?>>.Contains(KeyValuePair<string, object?> keyValuePair)
+    bool ICollection<KeyValuePair<string, object?>>.Contains(
+        KeyValuePair<string, object?> keyValuePair
+    )
     {
         Load();
         return ((ICollection<KeyValuePair<string, object?>>)_data).Contains(keyValuePair);
     }
 
-    bool ICollection<KeyValuePair<string, object?>>.Remove(KeyValuePair<string, object?> keyValuePair)
+    bool ICollection<KeyValuePair<string, object?>>.Remove(
+        KeyValuePair<string, object?> keyValuePair
+    )
     {
         Load();
         _initialKeys.Remove(keyValuePair.Key);

@@ -15,7 +15,7 @@ namespace Microsoft.Internal
     {
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static void NotNull<T>(T value, string parameterName) 
+        public static void NotNull<T>(T value, string parameterName)
             where T : class
         {
             if (value == null)
@@ -33,7 +33,14 @@ namespace Microsoft.Internal
 
             if (value.Length == 0)
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.ArgumentException_EmptyString, parameterName), parameterName);
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.ArgumentException_EmptyString,
+                        parameterName
+                    ),
+                    parameterName
+                );
             }
             Contract.EndContractBlock();
         }
@@ -50,7 +57,10 @@ namespace Microsoft.Internal
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static void NullOrNotNullElements<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> values, string parameterName)
+        public static void NullOrNotNullElements<TKey, TValue>(
+            IEnumerable<KeyValuePair<TKey, TValue>> values,
+            string parameterName
+        )
             where TKey : class
             where TValue : class
         {
@@ -79,11 +89,20 @@ namespace Microsoft.Internal
         }
 
         [ContractArgumentValidator]
-        private static void NotNullElements<TKey, TValue>(IEnumerable<KeyValuePair<TKey, TValue>> values, string parameterName)
+        private static void NotNullElements<TKey, TValue>(
+            IEnumerable<KeyValuePair<TKey, TValue>> values,
+            string parameterName
+        )
             where TKey : class
             where TValue : class
         {
-            if (values != null && !Contract.ForAll(values, (keyValue) => keyValue.Key != null && keyValue.Value != null))
+            if (
+                values != null
+                && !Contract.ForAll(
+                    values,
+                    (keyValue) => keyValue.Key != null && keyValue.Value != null
+                )
+            )
             {
                 throw ExceptionBuilder.CreateContainsNullElement(parameterName);
             }
@@ -92,12 +111,28 @@ namespace Microsoft.Internal
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        public static void IsInMembertypeSet(MemberTypes value, string parameterName, MemberTypes enumFlagSet)
+        public static void IsInMembertypeSet(
+            MemberTypes value,
+            string parameterName,
+            MemberTypes enumFlagSet
+        )
         {
-            if ((value & enumFlagSet) != value || // Ensure the member is in the set
-                (value & (value - 1)) != 0) // Ensure that there is only one flag in the value (i.e. value is a power of 2).
+            if (
+                (value & enumFlagSet) != value
+                || // Ensure the member is in the set
+                (value & (value - 1)) != 0
+            ) // Ensure that there is only one flag in the value (i.e. value is a power of 2).
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.ArgumentOutOfRange_InvalidEnumInSet, parameterName, value, enumFlagSet.ToString()), parameterName);
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.ArgumentOutOfRange_InvalidEnumInSet,
+                        parameterName,
+                        value,
+                        enumFlagSet.ToString()
+                    ),
+                    parameterName
+                );
             }
             Contract.EndContractBlock();
         }

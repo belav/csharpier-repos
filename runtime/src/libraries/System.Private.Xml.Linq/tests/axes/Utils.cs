@@ -11,7 +11,11 @@ namespace System.Xml.Linq.Tests
 {
     public static class Utils
     {
-        public static bool EqualsAll<T1, T2>(this IEnumerable<T1> source, IEnumerable<T2> target, Func<T1, T2, bool> comparer)
+        public static bool EqualsAll<T1, T2>(
+            this IEnumerable<T1> source,
+            IEnumerable<T2> target,
+            Func<T1, T2, bool> comparer
+        )
         {
             using (IEnumerator<T1> e1 = source.GetEnumerator())
             using (IEnumerator<T2> e2 = target.GetEnumerator())

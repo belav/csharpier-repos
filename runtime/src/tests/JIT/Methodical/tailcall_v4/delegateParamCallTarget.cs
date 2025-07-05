@@ -20,35 +20,35 @@ using Xunit;
 
 namespace Test_delegateParamCallTarget_cs
 {
-public delegate int DoIt(int a, int b, int c, DoIt d);
+    public delegate int DoIt(int a, int b, int c, DoIt d);
 
-public class Repro
-{
-    private int DoItWrong(int a, int b, int c, DoIt d)
+    public class Repro
     {
-        Console.WriteLine("Failed");
-        return -1;
-    }
+        private int DoItWrong(int a, int b, int c, DoIt d)
+        {
+            Console.WriteLine("Failed");
+            return -1;
+        }
 
-    private int DoItRight(int a, int b, int c, DoIt d)
-    {
-        Console.WriteLine("Pass");
-        return 100;
-    }
+        private int DoItRight(int a, int b, int c, DoIt d)
+        {
+            Console.WriteLine("Pass");
+            return 100;
+        }
 
-    private int Accomplice(int a, int b, int c, DoIt d)
-    {
-        Console.WriteLine("Accomplice");
-        DoIt d2 = this.DoItWrong;
-        return d(a, b, c, d2);
-    }
+        private int Accomplice(int a, int b, int c, DoIt d)
+        {
+            Console.WriteLine("Accomplice");
+            DoIt d2 = this.DoItWrong;
+            return d(a, b, c, d2);
+        }
 
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        Repro r = new Repro();
-        DoIt d = r.DoItRight;
-        return r.Accomplice(1, 2, 3, d);
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            Repro r = new Repro();
+            DoIt d = r.DoItRight;
+            return r.Accomplice(1, 2, 3, d);
+        }
     }
-}
 }

@@ -185,9 +185,11 @@ public class InlineRouteParameterParserTests
         // Assert
         Assert.Equal("param", templatePart.Name);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(d+)", constraint.Constraint),
-            constraint => Assert.Equal(@"test(w+)", constraint.Constraint));
+            constraint => Assert.Equal(@"test(w+)", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -199,11 +201,13 @@ public class InlineRouteParameterParserTests
         // Assert
         Assert.Equal("param", templatePart.Name);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Empty(constraint.Constraint),
             constraint => Assert.Equal(@"test(d+)", constraint.Constraint),
             constraint => Assert.Empty(constraint.Constraint),
-            constraint => Assert.Equal(@"test(w+)", constraint.Constraint));
+            constraint => Assert.Equal(@"test(w+)", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -215,9 +219,11 @@ public class InlineRouteParameterParserTests
         // Assert
         Assert.Equal("param", templatePart.Name);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(\d+)", constraint.Constraint),
-            constraint => Assert.Equal(@"test(\w:+)", constraint.Constraint));
+            constraint => Assert.Equal(@"test(\w:+)", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -231,9 +237,11 @@ public class InlineRouteParameterParserTests
 
         Assert.Equal("qwer", templatePart.DefaultValue);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(\d+)", constraint.Constraint),
-            constraint => Assert.Equal(@"test(\w+)", constraint.Constraint));
+            constraint => Assert.Equal(@"test(\w+)", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -247,10 +255,12 @@ public class InlineRouteParameterParserTests
 
         Assert.Equal("=qwer", templatePart.DefaultValue);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(\d+)", constraint.Constraint),
             constraint => Assert.Empty(constraint.Constraint),
-            constraint => Assert.Equal(@"test(\w+)", constraint.Constraint));
+            constraint => Assert.Equal(@"test(\w+)", constraint.Constraint)
+        );
     }
 
     [Theory]
@@ -284,7 +294,8 @@ public class InlineRouteParameterParserTests
         Assert.Equal("hello", param1.DefaultValue);
         Assert.False(param1.IsOptional);
 
-        Assert.Collection(param1.InlineConstraints,
+        Assert.Collection(
+            param1.InlineConstraints,
             constraint => Assert.Equal("int", constraint.Constraint),
             constraint => Assert.Equal("test(3)", constraint.Constraint)
         );
@@ -443,9 +454,11 @@ public class InlineRouteParameterParserTests
 
         Assert.Equal("12", templatePart.DefaultValue);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Empty(constraint.Constraint),
-            constraint => Assert.Equal("test", constraint.Constraint));
+            constraint => Assert.Equal("test", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -457,9 +470,11 @@ public class InlineRouteParameterParserTests
         // Assert
         Assert.Equal(":param", templatePart.Name);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal("test", constraint.Constraint),
-            constraint => Assert.Empty(constraint.Constraint));
+            constraint => Assert.Empty(constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -719,25 +734,31 @@ public class InlineRouteParameterParserTests
         // Assert
         Assert.Equal("param", templatePart.Name);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(#", constraint.Constraint),
-            constraint => Assert.Equal(@"test1", constraint.Constraint));
+            constraint => Assert.Equal(@"test1", constraint.Constraint)
+        );
     }
 
     [Fact]
     public void ParseRouteParameter_ConstraintWithOpenParenAndColonWithDefaultValue_ParsedCorrectly()
     {
         // Arrange & Act
-        var templatePart = ParseParameter(@"param:test(abc:somevalue):name(test1:differentname=default-value");
+        var templatePart = ParseParameter(
+            @"param:test(abc:somevalue):name(test1:differentname=default-value"
+        );
 
         // Assert
         Assert.Equal("param", templatePart.Name);
         Assert.Equal("default-value", templatePart.DefaultValue);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(abc:somevalue)", constraint.Constraint),
             constraint => Assert.Equal(@"name(test1", constraint.Constraint),
-            constraint => Assert.Equal(@"differentname", constraint.Constraint));
+            constraint => Assert.Equal(@"differentname", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -855,9 +876,11 @@ public class InlineRouteParameterParserTests
         Assert.Null(templatePart.DefaultValue);
         Assert.False(templatePart.IsOptional);
 
-        Assert.Collection(templatePart.InlineConstraints,
+        Assert.Collection(
+            templatePart.InlineConstraints,
             constraint => Assert.Equal(@"test(#)", constraint.Constraint),
-            constraint => Assert.Equal(@"$)", constraint.Constraint));
+            constraint => Assert.Equal(@"$)", constraint.Constraint)
+        );
     }
 
     [Fact]
@@ -929,8 +952,9 @@ public class InlineRouteParameterParserTests
     [InlineData("#!@#$%Q@#@%", "#!@#$%Q@#@%")]
     [InlineData(",,,", ",,,")]
     public void ParseRouteParameter_ParameterWithoutInlineConstraint_ReturnsTemplatePartWithEmptyInlineValues(
-                                                                                    string parameter,
-                                                                                    string expectedParameterName)
+        string parameter,
+        string expectedParameterName
+    )
     {
         // Arrange & Act
         var templatePart = ParseParameter(parameter);
@@ -958,9 +982,8 @@ public class InlineRouteParameterParserTests
     {
         var services = new ServiceCollection().AddOptions();
         services.Configure<RouteOptions>(options =>
-                            options
-                            .ConstraintMap
-                            .Add("test", typeof(TestRouteConstraint)));
+            options.ConstraintMap.Add("test", typeof(TestRouteConstraint))
+        );
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RouteOptions>>();
         return new DefaultInlineConstraintResolver(accessor, serviceProvider);
@@ -974,11 +997,14 @@ public class InlineRouteParameterParserTests
         }
 
         public string Pattern { get; private set; }
-        public bool Match(HttpContext httpContext,
-                          IRouter route,
-                          string routeKey,
-                          RouteValueDictionary values,
-                          RouteDirection routeDirection)
+
+        public bool Match(
+            HttpContext httpContext,
+            IRouter route,
+            string routeKey,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        )
         {
             throw new NotImplementedException();
         }

@@ -37,9 +37,21 @@ namespace System.Web.Mvc.Routing.Constraints
 
         /// <inheritdoc />
 #if ASPNETWEBAPI
-        public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
+        public bool Match(
+            HttpRequestMessage request,
+            IHttpRoute route,
+            string parameterName,
+            IDictionary<string, object> values,
+            HttpRouteDirection routeDirection
+        )
 #else
-        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        public bool Match(
+            HttpContextBase httpContext,
+            Route route,
+            string parameterName,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        )
 #endif
         {
             if (parameterName == null)
@@ -63,7 +75,14 @@ namespace System.Web.Mvc.Routing.Constraints
                 }
 
                 string valueString = Convert.ToString(value, CultureInfo.InvariantCulture);
-                if (Int64.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out longValue))
+                if (
+                    Int64.TryParse(
+                        valueString,
+                        NumberStyles.Integer,
+                        CultureInfo.InvariantCulture,
+                        out longValue
+                    )
+                )
                 {
                     return longValue <= Max;
                 }

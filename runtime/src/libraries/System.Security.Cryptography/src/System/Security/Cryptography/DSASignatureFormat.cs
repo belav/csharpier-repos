@@ -38,12 +38,13 @@ namespace System.Security.Cryptography
     internal static class DSASignatureFormatHelpers
     {
         internal static bool IsKnownValue(this DSASignatureFormat signatureFormat) =>
-            signatureFormat >= DSASignatureFormat.IeeeP1363FixedFieldConcatenation &&
-            signatureFormat <= DSASignatureFormat.Rfc3279DerSequence;
+            signatureFormat >= DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+            && signatureFormat <= DSASignatureFormat.Rfc3279DerSequence;
 
         internal static Exception CreateUnknownValueException(DSASignatureFormat signatureFormat) =>
             new ArgumentOutOfRangeException(
                 nameof(signatureFormat),
-                SR.Format(SR.Cryptography_UnknownSignatureFormat, signatureFormat));
+                SR.Format(SR.Cryptography_UnknownSignatureFormat, signatureFormat)
+            );
     }
 }

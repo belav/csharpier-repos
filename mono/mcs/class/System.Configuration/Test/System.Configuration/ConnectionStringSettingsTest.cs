@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,100 +27,101 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Configuration;
 using NUnit.Framework;
 
 namespace MonoTests.System.Configuration
 {
-	[TestFixture]
-	public class ConnectionStringSettingsTest
-	{
-		[Test]
-		public void Defaults ()
-		{
-			ConnectionStringSettings s;
+    [TestFixture]
+    public class ConnectionStringSettingsTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            ConnectionStringSettings s;
 
-			s = new ConnectionStringSettings ();
+            s = new ConnectionStringSettings();
 
-			Assert.AreEqual (null, s.Name, "A1");
-			Assert.AreEqual ("", s.ProviderName, "A2");
-			Assert.AreEqual ("", s.ConnectionString, "A3");
+            Assert.AreEqual(null, s.Name, "A1");
+            Assert.AreEqual("", s.ProviderName, "A2");
+            Assert.AreEqual("", s.ConnectionString, "A3");
 
-			s = new ConnectionStringSettings ("name", "connectionString");
-			Assert.AreEqual ("name", s.Name, "A4");
-			Assert.AreEqual ("", s.ProviderName, "A5");
-			Assert.AreEqual ("connectionString", s.ConnectionString, "A6");
+            s = new ConnectionStringSettings("name", "connectionString");
+            Assert.AreEqual("name", s.Name, "A4");
+            Assert.AreEqual("", s.ProviderName, "A5");
+            Assert.AreEqual("connectionString", s.ConnectionString, "A6");
 
-			s = new ConnectionStringSettings ("name", "connectionString", "provider");
-			Assert.AreEqual ("name", s.Name, "A7");
-			Assert.AreEqual ("provider", s.ProviderName, "A8");
-			Assert.AreEqual ("connectionString", s.ConnectionString, "A9");
-		}
+            s = new ConnectionStringSettings("name", "connectionString", "provider");
+            Assert.AreEqual("name", s.Name, "A7");
+            Assert.AreEqual("provider", s.ProviderName, "A8");
+            Assert.AreEqual("connectionString", s.ConnectionString, "A9");
+        }
 
-		[Test]
-		public void NameNull ()
-		{
-			ConnectionStringSettings s;
+        [Test]
+        public void NameNull()
+        {
+            ConnectionStringSettings s;
 
-			s = new ConnectionStringSettings ("name", "connectionString", "provider");
-			Assert.AreEqual ("name", s.Name, "A1");
-			s.Name = null;
-			Assert.IsNull (s.Name, "A2");
-		}
+            s = new ConnectionStringSettings("name", "connectionString", "provider");
+            Assert.AreEqual("name", s.Name, "A1");
+            s.Name = null;
+            Assert.IsNull(s.Name, "A2");
+        }
 
-		[Test]
-		[ExpectedException (typeof(ConfigurationErrorsException))]
-		[Category ("NotWorking")]
-		public void Validators_Name1 ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings ();
-			s.Name = "";
-		}
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        [Category("NotWorking")]
+        public void Validators_Name1()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings();
+            s.Name = "";
+        }
 
-		[Test]
-		public void Validators_Name2 ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings ();
- 			s.Name = null;
-		}
+        [Test]
+        public void Validators_Name2()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings();
+            s.Name = null;
+        }
 
-		[Test]
-		public void Validators_ProviderName1 ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings ();
-			s.ProviderName = "";
-		}
+        [Test]
+        public void Validators_ProviderName1()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings();
+            s.ProviderName = "";
+        }
 
-		[Test]
-		public void Validators_ProviderName2 ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings ();
-			s.ProviderName = null;
-		}
+        [Test]
+        public void Validators_ProviderName2()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings();
+            s.ProviderName = null;
+        }
 
-		[Test]
-		public void Validators_ConnectionString1 ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings ();
-			s.ConnectionString = "";
-		}
+        [Test]
+        public void Validators_ConnectionString1()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings();
+            s.ConnectionString = "";
+        }
 
-		[Test]
-		public void Validators_ConnectionString2 ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings ();
-			s.ConnectionString = null;
-		}
+        [Test]
+        public void Validators_ConnectionString2()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings();
+            s.ConnectionString = null;
+        }
 
-		[Test]
-		public void ToStringTest ()
-		{
-			ConnectionStringSettings s = new ConnectionStringSettings (
-				"name", "connectionString", "provider");
-			Assert.AreEqual ("connectionString", s.ToString(), "A1");
-		}
-	}
+        [Test]
+        public void ToStringTest()
+        {
+            ConnectionStringSettings s = new ConnectionStringSettings(
+                "name",
+                "connectionString",
+                "provider"
+            );
+            Assert.AreEqual("connectionString", s.ToString(), "A1");
+        }
+    }
 }
-

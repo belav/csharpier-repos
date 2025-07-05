@@ -16,8 +16,9 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambdaExpression
 {
     using VerifyCS = CSharpCodeFixVerifier<
-       CSharpRemoveUnnecessaryLambdaExpressionDiagnosticAnalyzer,
-       CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider>;
+        CSharpRemoveUnnecessaryLambdaExpressionDiagnosticAnalyzer,
+        CSharpRemoveUnnecessaryLambdaExpressionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryLambdaExpression)]
     public class RemoveUnnecessaryLambdaExpressionTests
@@ -26,25 +27,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
             string testCode,
             string fixedCode,
             LanguageVersion version = LanguageVersion.CSharp12,
-            OutputKind? outputKind = null)
+            OutputKind? outputKind = null
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
                 LanguageVersion = version,
-                TestState =
-                {
-                    OutputKind = outputKind,
-                }
+                TestState = { OutputKind = outputKind },
             }.RunAsync();
         }
 
         private static Task TestMissingInRegularAndScriptAsync(
             string testCode,
             LanguageVersion version = LanguageVersion.CSharp12,
-            OutputKind? outputKind = null)
-            => TestInRegularAndScriptAsync(testCode, testCode, version, outputKind);
+            OutputKind? outputKind = null
+        ) => TestInRegularAndScriptAsync(testCode, testCode, version, outputKind);
 
         [Fact]
         public async Task TestMissingInCSharp10()
@@ -63,7 +62,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     string Quux(int i) => default;
                 }
-                """, LanguageVersion.CSharp10);
+                """,
+                LanguageVersion.CSharp10
+            );
         }
 
         [Fact]
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -122,7 +124,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp12,
-                Options = { { CSharpCodeStyleOptions.PreferMethodGroupConversion, new CodeStyleOption2<bool>(false, NotificationOption2.None) } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferMethodGroupConversion,
+                        new CodeStyleOption2<bool>(false, NotificationOption2.None)
+                    },
+                },
             }.RunAsync();
         }
 
@@ -143,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     static string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -163,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     static string Quux(int i, int j = 0) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -183,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     static string Quux(int i, params int[] j) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -203,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<object, string> f) { }
                     static string Quux(params object[] j) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -237,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<object[], string> f) { }
                     string Quux(params object[] o) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -257,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     static string Quux(ref int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -279,7 +293,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(X x) { }
                     static string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -302,7 +317,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     static string Quux(ref int i) => default;
                 }
                 """,
-
                 """
                 using System;
 
@@ -318,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(X x) { }
                     static string Quux(ref int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -338,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     static string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -372,7 +388,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -406,7 +423,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -440,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<string> f) { }
                     string Quux() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -474,7 +493,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<object, string> f) { }
                     string Quux(object o) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -508,7 +528,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<string, object> f) { }
                     string Quux(object o) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -528,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<string, string> f) { }
                     object Quux(object o) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -548,7 +570,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<object, object> f) { }
                     string Quux(string o) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -568,7 +591,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<object, string> f) { }
                     object Quux(string o) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -602,7 +626,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, bool, string> f) { }
                     string Quux(int i, bool b) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -622,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, int, string> f) { }
                     string Quux(int i, int b) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -642,7 +668,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, int, string> f) { }
                     string Quux(int i, int b) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -662,7 +689,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, bool, string> f) { }
                     string Quux(int i, bool b) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -698,7 +726,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, bool, string> f) { }
                     string Quux(int i, bool b) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -734,7 +763,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, bool, string> f) { }
                     string Quux(int i, bool b) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
@@ -763,7 +793,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         {|CS0121:Bar|}(x => Goo(x));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542562")]
@@ -878,7 +909,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         Console.WriteLine("Goo(object x, T y)");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/627092")]
@@ -954,7 +986,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         Console.WriteLine("Goo(object x, T y)");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544625")]
@@ -1011,7 +1044,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         Func<string> a = () => new C().ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545994")]
@@ -1041,7 +1075,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         Action a = Console.WriteLine;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1077,7 +1112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     Task<string> Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1113,7 +1149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     Task<string> Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1149,7 +1186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     Task<string> Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1170,7 +1208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1206,7 +1245,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     Task<string> Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1242,7 +1282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     Task<string> Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1278,7 +1319,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     Task<string> Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1299,7 +1341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task<string>> f) { }
                     string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1335,7 +1378,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     Task Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1371,7 +1415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     Task Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1407,7 +1452,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     Task Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1428,7 +1474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     Task Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1464,7 +1511,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     Task Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1500,7 +1548,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     Task Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1521,7 +1570,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, Task> f) { }
                     void Quux(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1553,7 +1603,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                     void Quux<T>() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1572,7 +1623,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                     void Quux<T>(T t) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1614,7 +1666,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1648,7 +1701,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                     void Bar(Func<int, string> f) { }
                     string Quux(int i) => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63465")]
@@ -1670,7 +1724,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                     private static void M2(Action<string> a) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63465")]
@@ -1710,13 +1765,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                     private static void M2(Action<string> a) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/63464")]
         public async Task TestNotWithConditionalAttribute()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System;
                 using System.Diagnostics;
 
@@ -1732,13 +1789,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                     private static void M2(Action<string> a) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69094")]
         public async Task TestNotWithAssignmentOfInvokedExpression1()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1758,14 +1817,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """, outputKind: OutputKind.ConsoleApplication);
+
+                """,
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69094")]
         public async Task TestWithoutAssignmentOfInvokedExpression1()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1784,8 +1846,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """, """
+
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1804,15 +1867,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
+
                 """,
-                outputKind: OutputKind.ConsoleApplication);
+                outputKind: OutputKind.ConsoleApplication
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69094")]
         public async Task TestNotWithAssignmentOfInvokedExpression2()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1838,14 +1903,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """);
+
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69094")]
         public async Task TestWithoutAssignmentOfInvokedExpression2()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1870,8 +1937,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """, """
+
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1896,14 +1964,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """);
+
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/69094")]
         public async Task TestWithoutAssignmentOfInvokedExpression3()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1935,8 +2005,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """, """
+
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -1948,7 +2019,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
                         Helper helper = new(valueSet.SetResult);
                         helper.Set(true);
                         helper.Set(false);
-                
+
                         var v = () =>
                         {
                             // this is a different local.  it should not impact the outer simplification
@@ -1968,8 +2039,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryLambda
 
                    internal void Set(bool value) => action(value);
                 }
-                
-                """);
+
+                """
+            );
         }
     }
 }

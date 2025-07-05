@@ -41,7 +41,7 @@ namespace System.Workflow.Activities.Rules.Design
             InternalField = 12,
             ProtectedField = 13,
             Keyword = 14,
-            ExtensionMethod = 15
+            ExtensionMethod = 15,
         }
 
         public IntellisenseTextBox()
@@ -63,9 +63,7 @@ namespace System.Workflow.Activities.Rules.Design
             this.listBoxAutoComplete.Visible = false;
             this.KeyPress += new KeyPressEventHandler(IntellisenseTextBox_KeyPress);
             this.HandleCreated += new EventHandler(IntellisenseTextBox_HandleCreated);
-
         }
-
 
         #endregion
 
@@ -76,8 +74,12 @@ namespace System.Workflow.Activities.Rules.Design
             if (this.TopLevelControl != null)
             {
                 this.TopLevelControl.Controls.Add(this.listBoxAutoComplete);
-                this.listBoxAutoComplete.DoubleClick += new EventHandler(listBoxAutoComplete_DoubleClick);
-                this.listBoxAutoComplete.SelectedIndexChanged += new EventHandler(listBoxAutoComplete_SelectedIndexChanged);
+                this.listBoxAutoComplete.DoubleClick += new EventHandler(
+                    listBoxAutoComplete_DoubleClick
+                );
+                this.listBoxAutoComplete.SelectedIndexChanged += new EventHandler(
+                    listBoxAutoComplete_SelectedIndexChanged
+                );
                 this.listBoxAutoComplete.Enter += new EventHandler(listBoxAutoComplete_Enter);
             }
         }
@@ -87,7 +89,9 @@ namespace System.Workflow.Activities.Rules.Design
             string currentValue = this.Text;
             int selectionStart = this.SelectionStart;
             int selectionLength = this.SelectionLength;
-            StringBuilder projectedValue = new StringBuilder(currentValue.Substring(0, selectionStart));
+            StringBuilder projectedValue = new StringBuilder(
+                currentValue.Substring(0, selectionStart)
+            );
             projectedValue.Append(currentValue.Substring(selectionStart + selectionLength));
 
             char c = e.KeyChar;
@@ -102,7 +106,9 @@ namespace System.Workflow.Activities.Rules.Design
                 else
                 {
                     projectedValue.Insert(selectionStart, '.');
-                    UpdateIntellisenceDropDown(projectedValue.ToString().Substring(0, selectionStart + 1));
+                    UpdateIntellisenceDropDown(
+                        projectedValue.ToString().Substring(0, selectionStart + 1)
+                    );
                     ShowIntellisenceDropDown(selectionStart);
                     IntellisenseTextBox_KeyDown(sender, new KeyEventArgs(Keys.Down)); // fake down arrow to select first item
                 }
@@ -118,15 +124,26 @@ namespace System.Workflow.Activities.Rules.Design
                 else
                 {
                     projectedValue.Insert(selectionStart, '(');
-                    ShowToolTip(selectionStart, projectedValue.ToString().Substring(0, selectionStart + 1));
+                    ShowToolTip(
+                        selectionStart,
+                        projectedValue.ToString().Substring(0, selectionStart + 1)
+                    );
                 }
             }
-            else if (!this.listBoxAutoComplete.Visible
+            else if (
+                !this.listBoxAutoComplete.Visible
                 && CurrentPrefix.Length == 0
-                && (c == '_' || char.IsLetter(c) || char.GetUnicodeCategory(c) == UnicodeCategory.LetterNumber))
+                && (
+                    c == '_'
+                    || char.IsLetter(c)
+                    || char.GetUnicodeCategory(c) == UnicodeCategory.LetterNumber
+                )
+            )
             {
                 projectedValue.Insert(selectionStart, c);
-                UpdateIntellisenceDropDown(projectedValue.ToString().Substring(0, selectionStart + 1));
+                UpdateIntellisenceDropDown(
+                    projectedValue.ToString().Substring(0, selectionStart + 1)
+                );
                 ShowIntellisenceDropDown(selectionStart);
                 if (this.listBoxAutoComplete.Visible)
                     IntellisenseTextBox_KeyDown(sender, new KeyEventArgs(Keys.Down)); // fake down arrow to select first item
@@ -145,18 +162,32 @@ namespace System.Workflow.Activities.Rules.Design
             int selectionStart = this.SelectionStart;
             int selectionLength = this.SelectionLength;
 
-            StringBuilder removedString = new StringBuilder(currentValue.Substring(selectionStart, selectionLength));
+            StringBuilder removedString = new StringBuilder(
+                currentValue.Substring(selectionStart, selectionLength)
+            );
 
-            StringBuilder projectedValue = new StringBuilder(currentValue.Substring(0, selectionStart));
+            StringBuilder projectedValue = new StringBuilder(
+                currentValue.Substring(0, selectionStart)
+            );
             projectedValue.Append(currentValue.Substring(selectionStart + selectionLength));
 
-            System.Diagnostics.Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "KeyCode:{0}, KeyData:{1}, KeyValue:{2}", e.KeyCode, e.KeyData, e.KeyValue));
+            System.Diagnostics.Trace.WriteLine(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "KeyCode:{0}, KeyData:{1}, KeyValue:{2}",
+                    e.KeyCode,
+                    e.KeyData,
+                    e.KeyValue
+                )
+            );
             this.toolTip.Hide(this);
             if (e.KeyData == (Keys.Control | Keys.Space))
             {
                 if (!this.listBoxAutoComplete.Visible)
                 {
-                    UpdateIntellisenceDropDown(this.Text.Substring(0, selectionStart - CurrentPrefix.Length));
+                    UpdateIntellisenceDropDown(
+                        this.Text.Substring(0, selectionStart - CurrentPrefix.Length)
+                    );
                     ShowIntellisenceDropDown(selectionStart);
                     UpdateAutoCompleteSelection(CurrentPrefix);
                     e.SuppressKeyPress = true;
@@ -179,18 +210,26 @@ namespace System.Workflow.Activities.Rules.Design
                     if (removedString.ToString().IndexOfAny(". ()[]\t\n".ToCharArray()) >= 0)
                         HideIntellisenceDropDown();
                     else if (this.listBoxAutoComplete.Visible)
-                        UpdateAutoCompleteSelection(CurrentPrefix.Substring(0, CurrentPrefix.Length - 1));
+                        UpdateAutoCompleteSelection(
+                            CurrentPrefix.Substring(0, CurrentPrefix.Length - 1)
+                        );
                 }
-
             }
             else if (e.KeyCode == Keys.Up)
             {
                 if (this.listBoxAutoComplete.Visible)
                 {
-                    if (this.listBoxAutoComplete.SelectedIndices.Count > 0 && this.listBoxAutoComplete.SelectedIndices[0] > 0)
+                    if (
+                        this.listBoxAutoComplete.SelectedIndices.Count > 0
+                        && this.listBoxAutoComplete.SelectedIndices[0] > 0
+                    )
                     {
-                        this.listBoxAutoComplete.Items[this.listBoxAutoComplete.SelectedIndices[0] - 1].Selected = true;
-                        this.listBoxAutoComplete.Items[this.listBoxAutoComplete.SelectedIndices[0]].Focused = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0] - 1]
+                            .Selected = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0]]
+                            .Focused = true;
                     }
 
                     e.Handled = true;
@@ -208,22 +247,38 @@ namespace System.Workflow.Activities.Rules.Design
                             this.listBoxAutoComplete.Items[0].Focused = true;
                         }
                     }
-                    else if (this.listBoxAutoComplete.SelectedIndices[0] < this.listBoxAutoComplete.Items.Count - 1)
+                    else if (
+                        this.listBoxAutoComplete.SelectedIndices[0]
+                        < this.listBoxAutoComplete.Items.Count - 1
+                    )
                     {
-                        this.listBoxAutoComplete.Items[this.listBoxAutoComplete.SelectedIndices[0] + 1].Selected = true;
-                        this.listBoxAutoComplete.Items[this.listBoxAutoComplete.SelectedIndices[0]].Focused = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0] + 1]
+                            .Selected = true;
+                        this.listBoxAutoComplete
+                            .Items[this.listBoxAutoComplete.SelectedIndices[0]]
+                            .Focused = true;
                     }
                     e.Handled = true;
                 }
             }
-            else if (e.KeyCode == Keys.ShiftKey
+            else if (
+                e.KeyCode == Keys.ShiftKey
                 || e.KeyCode == Keys.ControlKey
-                || e.KeyCode == Keys.OemPeriod)
+                || e.KeyCode == Keys.OemPeriod
+            )
             {
                 //DO nothing
             }
-            else if ((e.KeyValue < 48 || (e.KeyValue >= 58 && e.KeyValue <= 64) || (e.KeyValue >= 91 && e.KeyValue <= 96) || e.KeyValue > 122) &&
-                e.KeyData != (Keys.Shift | Keys.OemMinus))
+            else if (
+                (
+                    e.KeyValue < 48
+                    || (e.KeyValue >= 58 && e.KeyValue <= 64)
+                    || (e.KeyValue >= 91 && e.KeyValue <= 96)
+                    || e.KeyValue > 122
+                )
+                && e.KeyData != (Keys.Shift | Keys.OemMinus)
+            )
             {
                 if (this.listBoxAutoComplete.Visible)
                 {
@@ -243,7 +298,6 @@ namespace System.Workflow.Activities.Rules.Design
             // remmember caret position before leaving
             this.oldSelectionStart = this.SelectionStart;
             this.toolTip.Hide(this);
-
 
             // make sure to close intellisense dropdown
             if ((this.listBoxAutoComplete.Focused == false) && (this.Focused == false))
@@ -407,7 +461,10 @@ namespace System.Workflow.Activities.Rules.Design
             if (this.listBoxAutoComplete.Items.Count > 0)
             {
                 this.listBoxAutoComplete.Columns[0].Width = -2; // this will set the column size to the longest value
-                this.listBoxAutoComplete.Size = new Size(this.listBoxAutoComplete.Items[0].Bounds.Width + 30, 72);
+                this.listBoxAutoComplete.Size = new Size(
+                    this.listBoxAutoComplete.Items[0].Bounds.Width + 30,
+                    72
+                );
             }
         }
 
@@ -421,7 +478,7 @@ namespace System.Workflow.Activities.Rules.Design
         {
             if (this.listBoxAutoComplete.Items.Count > 0)
             {
-                // Find the position of the caret          
+                // Find the position of the caret
                 Point clientPoint = this.GetPositionFromCharIndex(charIndex - 1);
                 clientPoint.Y += (int)Math.Ceiling(this.Font.GetHeight()) + 2;
                 clientPoint.X -= 6;
@@ -436,18 +493,33 @@ namespace System.Workflow.Activities.Rules.Design
                 locationInDialog.Offset(-parentScreenLocation.X, -parentScreenLocation.Y);
 
                 //Fix location and size to avoid clipping
-                Size topLevelControlSize = (TopLevelControl is Form) ? ((Form)TopLevelControl).ClientSize : TopLevelControl.Size;
-                Rectangle listboxRectangle = new Rectangle(locationInDialog, this.listBoxAutoComplete.Size);
+                Size topLevelControlSize =
+                    (TopLevelControl is Form)
+                        ? ((Form)TopLevelControl).ClientSize
+                        : TopLevelControl.Size;
+                Rectangle listboxRectangle = new Rectangle(
+                    locationInDialog,
+                    this.listBoxAutoComplete.Size
+                );
 
                 if (listboxRectangle.Right > topLevelControlSize.Width)
                 {
                     if (this.listBoxAutoComplete.Size.Width > topLevelControlSize.Width)
-                        this.listBoxAutoComplete.Size = new Size(topLevelControlSize.Width, this.listBoxAutoComplete.Height);
+                        this.listBoxAutoComplete.Size = new Size(
+                            topLevelControlSize.Width,
+                            this.listBoxAutoComplete.Height
+                        );
 
-                    locationInDialog = new Point(topLevelControlSize.Width - this.listBoxAutoComplete.Size.Width, locationInDialog.Y);
+                    locationInDialog = new Point(
+                        topLevelControlSize.Width - this.listBoxAutoComplete.Size.Width,
+                        locationInDialog.Y
+                    );
                 }
                 if (listboxRectangle.Bottom > topLevelControlSize.Height)
-                    this.listBoxAutoComplete.Size = new Size(this.listBoxAutoComplete.Width, topLevelControlSize.Height - listboxRectangle.Top);
+                    this.listBoxAutoComplete.Size = new Size(
+                        this.listBoxAutoComplete.Width,
+                        topLevelControlSize.Height - listboxRectangle.Top
+                    );
 
                 // set position and show
                 this.listBoxAutoComplete.Location = locationInDialog;
@@ -470,7 +542,10 @@ namespace System.Workflow.Activities.Rules.Design
         {
             bool wordMatched = false;
 
-            if (string.IsNullOrEmpty(currentValue.Trim()) && this.listBoxAutoComplete.Items.Count > 0)
+            if (
+                string.IsNullOrEmpty(currentValue.Trim())
+                && this.listBoxAutoComplete.Items.Count > 0
+            )
             {
                 wordMatched = true;
                 this.listBoxAutoComplete.Items[0].Selected = true;
@@ -480,7 +555,11 @@ namespace System.Workflow.Activities.Rules.Design
             {
                 for (int i = 0; i < this.listBoxAutoComplete.Items.Count; i++)
                 {
-                    if (this.listBoxAutoComplete.Items[i].Text.StartsWith(currentValue, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        this
+                            .listBoxAutoComplete.Items[i]
+                            .Text.StartsWith(currentValue, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         wordMatched = true;
                         this.listBoxAutoComplete.Items[i].Selected = true;
@@ -534,12 +613,13 @@ namespace System.Workflow.Activities.Rules.Design
                             // Must be constructor... if not, the best thing to do is let it throw "invalid cast".
                             ConstructorInfo ctorInfo = (ConstructorInfo)memberInfo;
 
-                            toolTipText.Append(RuleDecompiler.DecompileType(ctorInfo.DeclaringType));
+                            toolTipText.Append(
+                                RuleDecompiler.DecompileType(ctorInfo.DeclaringType)
+                            );
                             toolTipText.Append("(");
 
                             parameters = ctorInfo.GetParameters();
                         }
-
 
                         if (parameters != null && parameters.Length > 0)
                         {
@@ -550,7 +630,11 @@ namespace System.Workflow.Activities.Rules.Design
                             for (int i = 1; i < parameters.Length; ++i)
                             {
                                 toolTipText.Append(", ");
-                                AppendParameterInfo(toolTipText, parameters[i], i == lastParamIndex);
+                                AppendParameterInfo(
+                                    toolTipText,
+                                    parameters[i],
+                                    i == lastParamIndex
+                                );
                             }
                         }
 
@@ -561,7 +645,11 @@ namespace System.Workflow.Activities.Rules.Design
             }
         }
 
-        private static void AppendParameterInfo(StringBuilder toolTipText, ParameterInfo parameterInfo, bool isLastParameter)
+        private static void AppendParameterInfo(
+            StringBuilder toolTipText,
+            ParameterInfo parameterInfo,
+            bool isLastParameter
+        )
         {
             Type paramType = parameterInfo.ParameterType;
             if (paramType != null)
@@ -577,7 +665,10 @@ namespace System.Workflow.Activities.Rules.Design
                 }
                 else if (isLastParameter && paramType.IsArray)
                 {
-                    object[] attrs = parameterInfo.GetCustomAttributes(typeof(ParamArrayAttribute), false);
+                    object[] attrs = parameterInfo.GetCustomAttributes(
+                        typeof(ParamArrayAttribute),
+                        false
+                    );
                     if (attrs != null && attrs.Length > 0)
                         toolTipText.Append("params ");
                 }
@@ -642,26 +733,14 @@ namespace System.Workflow.Activities.Rules.Design
 
         public ICollection AutoCompleteValues
         {
-            get
-            {
-                return autoCompleteValues;
-            }
-            set
-            {
-                autoCompleteValues = value;
-            }
+            get { return autoCompleteValues; }
+            set { autoCompleteValues = value; }
         }
 
         public string Prefix
         {
-            get
-            {
-                return prefix;
-            }
-            set
-            {
-                prefix = value;
-            }
+            get { return prefix; }
+            set { prefix = value; }
         }
     }
 

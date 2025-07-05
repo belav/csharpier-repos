@@ -41,7 +41,9 @@ namespace System.IO.Pipes.Tests
         [Fact]
         public void SetAccessControl_NullPipeStream()
         {
-            Assert.Throws<NullReferenceException>(() => PipesAclExtensions.SetAccessControl(null, new PipeSecurity()));
+            Assert.Throws<NullReferenceException>(() =>
+                PipesAclExtensions.SetAccessControl(null, new PipeSecurity())
+            );
         }
 
         [Fact]
@@ -50,11 +52,15 @@ namespace System.IO.Pipes.Tests
             using (var pair = CreateServerClientPair())
             {
                 var stream = pair.readablePipe;
-                Assert.Throws<ArgumentNullException>(() => PipesAclExtensions.SetAccessControl(stream, null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    PipesAclExtensions.SetAccessControl(stream, null)
+                );
                 Assert.Throws<ArgumentNullException>(() => stream.SetAccessControl(null));
 
                 stream = pair.writeablePipe;
-                Assert.Throws<ArgumentNullException>(() => PipesAclExtensions.SetAccessControl(stream, null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    PipesAclExtensions.SetAccessControl(stream, null)
+                );
                 Assert.Throws<ArgumentNullException>(() => stream.SetAccessControl(null));
             }
         }
@@ -65,10 +71,14 @@ namespace System.IO.Pipes.Tests
             using (var pair = CreateServerClientPair())
             {
                 pair.readablePipe.Dispose();
-                Assert.Throws<ObjectDisposedException>(() => pair.readablePipe.SetAccessControl(new PipeSecurity()));
+                Assert.Throws<ObjectDisposedException>(() =>
+                    pair.readablePipe.SetAccessControl(new PipeSecurity())
+                );
 
                 pair.writeablePipe.Dispose();
-                Assert.Throws<ObjectDisposedException>(() => pair.writeablePipe.SetAccessControl(new PipeSecurity()));
+                Assert.Throws<ObjectDisposedException>(() =>
+                    pair.writeablePipe.SetAccessControl(new PipeSecurity())
+                );
             }
         }
 
@@ -92,15 +102,19 @@ namespace System.IO.Pipes.Tests
             // This is a valid mask that should not throw
             new PipeAccessRule(si, PipeAccessRights.Synchronize, AccessControlType.Allow);
 
-            Assert.Throws<ArgumentException>("accessMask", () =>
-            {
-                new PipeAccessRule(si, PipeAccessRights.Synchronize, AccessControlType.Deny);
-            });
+            Assert.Throws<ArgumentException>(
+                "accessMask",
+                () =>
+                {
+                    new PipeAccessRule(si, PipeAccessRights.Synchronize, AccessControlType.Deny);
+                }
+            );
         }
 
         protected static string GetUniquePipeName() =>
-            PlatformDetection.IsInAppContainer ? @"LOCAL\" + Path.GetRandomFileName() :
-            Path.GetRandomFileName();
+            PlatformDetection.IsInAppContainer
+                ? @"LOCAL\" + Path.GetRandomFileName()
+                : Path.GetRandomFileName();
 
         protected abstract ServerClientPair CreateServerClientPair();
 

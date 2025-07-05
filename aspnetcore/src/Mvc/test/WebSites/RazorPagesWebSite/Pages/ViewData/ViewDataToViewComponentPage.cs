@@ -18,9 +18,6 @@ public class ViewDataToViewComponentPage : PageModel
     public IActionResult OnGet()
     {
         Message = "Message set in handler";
-        return new ViewComponentResult
-        {
-            ViewComponentType = typeof(ViewDataViewComponent),
-        };
+        return new ViewComponentResult { ViewComponentType = typeof(ViewDataViewComponent) };
     }
 }

@@ -32,7 +32,10 @@ namespace System.Xml.Xsl.XsltOld
                 switch (frame.State)
                 {
                     case Initialized:
-                        if (!frame.Node!.HasAttributes || frame.Node.MoveToFirstAttribute() == false)
+                        if (
+                            !frame.Node!.HasAttributes
+                            || frame.Node.MoveToFirstAttribute() == false
+                        )
                         {
                             frame.Finished();
                             break;
@@ -94,13 +97,19 @@ namespace System.Xml.Xsl.XsltOld
                         }
                 }
                 break;
-            }// while (processor.CanContinue)
+            } // while (processor.CanContinue)
         }
 
         private static bool SendBeginEvent(Processor processor, XPathNavigator node)
         {
             Debug.Assert(node.NodeType == XPathNodeType.Attribute);
-            return processor.BeginEvent(XPathNodeType.Attribute, node.Prefix, node.LocalName, node.NamespaceURI, false);
+            return processor.BeginEvent(
+                XPathNodeType.Attribute,
+                node.Prefix,
+                node.LocalName,
+                node.NamespaceURI,
+                false
+            );
         }
 
         private static bool SendTextEvent(Processor processor, XPathNavigator node)

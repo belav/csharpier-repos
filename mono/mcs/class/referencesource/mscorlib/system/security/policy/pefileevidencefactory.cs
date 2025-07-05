@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 using System;
 using System.Collections;
@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Security.Policy;
 using System.Security.Permissions;
+using System.Security.Policy;
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Policy
@@ -38,7 +38,7 @@ namespace System.Security.Policy
         Site,
         StrongName,
         Url,
-        Zone
+        Zone,
     }
 
     /// <summary>
@@ -62,9 +62,7 @@ namespace System.Security.Policy
         [SecurityCritical]
         private PEFileEvidenceFactory(SafePEFileHandle peFile)
         {
-            Contract.Assert(peFile != null &&
-                            !peFile.IsClosed &&
-                            !peFile.IsInvalid);
+            Contract.Assert(peFile != null && !peFile.IsClosed && !peFile.IsInvalid);
             m_peFile = peFile;
         }
 
@@ -89,13 +87,14 @@ namespace System.Security.Policy
 
         /// <summary>
         ///     Generate an evidence collection the PE file.  This is called from the the VM in
-        ///     SecurityDescriptor::GetEvidenceForPEFile. 
+        ///     SecurityDescriptor::GetEvidenceForPEFile.
         /// </summary>
         [SecurityCritical]
-        private static Evidence CreateSecurityIdentity(SafePEFileHandle peFile,
-                                                       Evidence hostProvidedEvidence)
+        private static Evidence CreateSecurityIdentity(
+            SafePEFileHandle peFile,
+            Evidence hostProvidedEvidence
+        )
         {
-
             PEFileEvidenceFactory evidenceFactory = new PEFileEvidenceFactory(peFile);
             Evidence evidence = new Evidence(evidenceFactory);
 
@@ -112,8 +111,10 @@ namespace System.Security.Policy
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void FireEvidenceGeneratedEvent(SafePEFileHandle peFile,
-                                                              EvidenceTypeGenerated type);
+        private static extern void FireEvidenceGeneratedEvent(
+            SafePEFileHandle peFile,
+            EvidenceTypeGenerated type
+        );
 
         /// <summary>
         ///     Fire an ETW event indicating that a piece of evidence has been generated.  Evidence that is
@@ -129,8 +130,10 @@ namespace System.Security.Policy
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetAssemblySuppliedEvidence(SafePEFileHandle peFile,
-                                                               ObjectHandleOnStack retSerializedEvidence);
+        private static extern void GetAssemblySuppliedEvidence(
+            SafePEFileHandle peFile,
+            ObjectHandleOnStack retSerializedEvidence
+        );
 
         /// <summary>
         ///     Get any evidence that was serialized into the PE File
@@ -141,7 +144,10 @@ namespace System.Security.Policy
             if (m_assemblyProvidedEvidence == null)
             {
                 byte[] serializedEvidence = null;
-                GetAssemblySuppliedEvidence(m_peFile, JitHelpers.GetObjectHandleOnStack(ref serializedEvidence));
+                GetAssemblySuppliedEvidence(
+                    m_peFile,
+                    JitHelpers.GetObjectHandleOnStack(ref serializedEvidence)
+                );
 
                 m_assemblyProvidedEvidence = new List<EvidenceBase>();
                 if (serializedEvidence != null)
@@ -160,7 +166,9 @@ namespace System.Security.Policy
                             deserializedEvidence = (Evidence)formatter.Deserialize(ms);
                         }
                     }
-                    catch { /* Ignore any errors deserializing */ }
+                    catch
+                    { /* Ignore any errors deserializing */
+                    }
 
                     CodeAccessPermission.RevertAssert();
 
@@ -196,15 +204,19 @@ namespace System.Security.Policy
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetLocationEvidence(SafePEFileHandle peFile,
-                                                       [Out] out SecurityZone zone,
-                                                       StringHandleOnStack retUrl);
+        private static extern void GetLocationEvidence(
+            SafePEFileHandle peFile,
+            [Out] out SecurityZone zone,
+            StringHandleOnStack retUrl
+        );
 
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SecurityCritical]
         [SuppressUnmanagedCodeSecurity]
-        private static extern void GetPublisherCertificate(SafePEFileHandle peFile,
-                                                           ObjectHandleOnStack retCertificate);
+        private static extern void GetPublisherCertificate(
+            SafePEFileHandle peFile,
+            ObjectHandleOnStack retCertificate
+        );
 
         /// <summary>
         ///     Called to generate different types of evidence on demand
@@ -241,7 +253,11 @@ namespace System.Security.Policy
             {
                 SecurityZone securityZone = SecurityZone.NoZone;
                 string url = null;
-                GetLocationEvidence(m_peFile, out securityZone, JitHelpers.GetStringHandleOnStack(ref url));
+                GetLocationEvidence(
+                    m_peFile,
+                    out securityZone,
+                    JitHelpers.GetStringHandleOnStack(ref url)
+                );
 
                 if (securityZone != SecurityZone.NoZone)
                 {

@@ -21,6 +21,6 @@ namespace Microsoft.AspNet.Facebook
         /// <summary>
         /// Unknown status of a permission.
         /// </summary>
-        Unknown
+        Unknown,
     }
 }

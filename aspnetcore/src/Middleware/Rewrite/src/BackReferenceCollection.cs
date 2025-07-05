@@ -35,7 +35,10 @@ internal sealed class BackReferenceCollection
             }
             else
             {
-                throw new ArgumentOutOfRangeException(null, $"Cannot access back reference at index {index}. Only {_backReferences.Count} back references were captured.");
+                throw new ArgumentOutOfRangeException(
+                    null,
+                    $"Cannot access back reference at index {index}. Only {_backReferences.Count} back references were captured."
+                );
             }
         }
     }

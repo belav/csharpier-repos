@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,65 +26,64 @@
 using System;
 using System.Security;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    public sealed class WebBrowserPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
+        public WebBrowserPermission()
+        {
+            throw new NotImplementedException();
+        }
 
-	public sealed class WebBrowserPermission : CodeAccessPermission, IUnrestrictedPermission
-	{
-		public WebBrowserPermission ()
-		{
-			throw new NotImplementedException ();
-		}
+        public WebBrowserPermission(PermissionState state)
+        {
+            throw new NotImplementedException();
+        }
 
-		public WebBrowserPermission (PermissionState state)
-		{
-			throw new NotImplementedException ();
-		}
+        public WebBrowserPermission(WebBrowserPermissionLevel webBrowserPermissionLevel)
+        {
+            throw new NotImplementedException();
+        }
 
-		public WebBrowserPermission (WebBrowserPermissionLevel webBrowserPermissionLevel)
-		{
-			throw new NotImplementedException ();
-		}
+        public WebBrowserPermissionLevel Level
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public WebBrowserPermissionLevel Level {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public override IPermission Copy()
+        {
+            throw new NotImplementedException();
+        }
 
-		public override IPermission Copy ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override void FromXml(SecurityElement securityElement)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void FromXml (SecurityElement securityElement)
-		{
-			throw new NotImplementedException ();
-		}
+        public override IPermission Intersect(IPermission target)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override IPermission Intersect (IPermission target)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool IsSubsetOf(IPermission target)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool IsSubsetOf (IPermission target)
-		{
-			throw new NotImplementedException ();
-		}
+        public bool IsUnrestricted()
+        {
+            throw new NotImplementedException();
+        }
 
-		public bool IsUnrestricted ()
-		{
-			throw new NotImplementedException ();
-		}
+        public override SecurityElement ToXml()
+        {
+            throw new NotImplementedException();
+        }
 
-		public override SecurityElement ToXml ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override IPermission Union (IPermission target)
-		{
-			throw new NotImplementedException ();
-		}
-
-	}
-
+        public override IPermission Union(IPermission target)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

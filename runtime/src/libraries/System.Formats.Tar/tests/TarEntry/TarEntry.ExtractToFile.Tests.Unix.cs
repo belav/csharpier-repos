@@ -14,9 +14,23 @@ namespace System.Formats.Tar.Tests
     {
         public static IEnumerable<object[]> GetFormatsAndSpecialFiles()
         {
-            foreach (TarEntryFormat format in new[] { TarEntryFormat.Ustar, TarEntryFormat.Pax, TarEntryFormat.Gnu }) // V7 does not support special files
+            foreach (
+                TarEntryFormat format in new[]
+                {
+                    TarEntryFormat.Ustar,
+                    TarEntryFormat.Pax,
+                    TarEntryFormat.Gnu,
+                }
+            ) // V7 does not support special files
             {
-                foreach (TarEntryType entryType in new[] { TarEntryType.BlockDevice, TarEntryType.CharacterDevice, TarEntryType.Fifo })
+                foreach (
+                    TarEntryType entryType in new[]
+                    {
+                        TarEntryType.BlockDevice,
+                        TarEntryType.CharacterDevice,
+                        TarEntryType.Fifo,
+                    }
+                )
                 {
                     yield return new object[] { format, entryType };
                 }
@@ -29,7 +43,8 @@ namespace System.Formats.Tar.Tests
         {
             using TempDirectory root = new TempDirectory();
 
-            (string entryName, string destination, PosixTarEntry entry) = Prepare_Extract_SpecialFiles(root, format, entryType);
+            (string entryName, string destination, PosixTarEntry entry) =
+                Prepare_Extract_SpecialFiles(root, format, entryType);
 
             entry.ExtractToFile(destination, overwrite: true);
 
@@ -42,19 +57,25 @@ namespace System.Formats.Tar.Tests
         {
             using TempDirectory root = new TempDirectory();
 
-            (string entryName, string destination, PosixTarEntry entry) = Prepare_Extract_SpecialFiles(root, format, entryType);
+            (string entryName, string destination, PosixTarEntry entry) =
+                Prepare_Extract_SpecialFiles(root, format, entryType);
 
             await entry.ExtractToFileAsync(destination, overwrite: true);
 
             Verify_Extract_SpecialFiles(destination, entry, entryType);
         }
 
-        private (string, string, PosixTarEntry) Prepare_Extract_SpecialFiles(TempDirectory root, TarEntryFormat format, TarEntryType entryType)
+        private (string, string, PosixTarEntry) Prepare_Extract_SpecialFiles(
+            TempDirectory root,
+            TarEntryFormat format,
+            TarEntryType entryType
+        )
         {
             string entryName = entryType.ToString();
             string destination = Path.Join(root.Path, entryName);
 
-            PosixTarEntry entry = InvokeTarEntryCreationConstructor(format, entryType, entryName) as PosixTarEntry;
+            PosixTarEntry entry =
+                InvokeTarEntryCreationConstructor(format, entryType, entryName) as PosixTarEntry;
             Assert.NotNull(entry);
 
             if (entryType is TarEntryType.BlockDevice)
@@ -72,7 +93,11 @@ namespace System.Formats.Tar.Tests
             return (entryName, destination, entry);
         }
 
-        private void Verify_Extract_SpecialFiles(string destination, PosixTarEntry entry, TarEntryType entryType)
+        private void Verify_Extract_SpecialFiles(
+            string destination,
+            PosixTarEntry entry,
+            TarEntryType entryType
+        )
         {
             Assert.True(File.Exists(destination));
 

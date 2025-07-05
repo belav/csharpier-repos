@@ -12,43 +12,219 @@ namespace System.Security.AccessControl.Tests
     {
         public static IEnumerable<object[]> SystemAcl_Constructor3_TestData()
         {
-            yield return new object[] { false, false, "64:2:1:BA:false:0#128:2:0:BG:false:0#80:2:2:BO:false:0", "64:2:1:BA:false:0#80:2:2:BO:false:0", true };
-            yield return new object[] { false, false, "73:2:1:BA:false:0#64:2:1:BG:false:0#80:2:2:BO:false:0", "64:2:1:BG:false:0#80:2:2:BO:false:0", true };
-            yield return new object[] { true, false, "73:2:1:BA:false:0#64:2:1:BG:false:0#80:2:2:BO:false:0", "73:2:1:BA:false:0#64:2:1:BG:false:0#80:2:2:BO:false:0", true };
-            yield return new object[] { false, false, "199:2:1:BA:false:0", "192:2:1:BA:false:0", true };
-            yield return new object[] { true, false, "199:2:1:BA:false:0", "199:2:1:BA:false:0", true };
-            yield return new object[] { false, false, "128:2:0:BG:false:0#72:2:1:BA:false:0#64:2:1:BO:false:0", "64:2:1:BO:false:0", true };
-            yield return new object[] { true, false, "64:2:1:BA:false:0#80:2:2:BO:false:0#136:2:1:BG:false:0", "64:2:1:BA:false:0#80:2:2:BO:false:0", true };
-            yield return new object[] { true, false, "196:2:1:BA:false:0", "192:2:1:BA:false:0", true };
-            yield return new object[] { true, false, "15:2:1:BA:false:0#64:2:1:BG:false:0", "64:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "192:0:1:BA:false:0#64:2:1:BG:false:0", "64:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "192:1:1:BA:false:0#64:2:1:BG:false:0", "64:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "192:3:1:BA:false:0#64:2:1:BG:false:0", "64:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "192:2:1:BA:false:0#80:2:2:BG:false:0", "192:2:1:BA:false:0#80:2:2:BG:false:0", true };
-            yield return new object[] { false, false, "80:2:2:BG:false:0#192:2:1:BA:false:0", "80:2:2:BG:false:0#192:2:1:BA:false:0", false };
-            yield return new object[] { false, false, "80:2:2:BG:false:0#208:2:1:BA:false:0", "80:2:2:BG:false:0#208:2:1:BA:false:0", true };
-            yield return new object[] { false, false, "192:0:1:BA:false:0#192:0:2:BA:false:0#64:2:1:BG:false:0#64:0:3:BG:false:0", "64:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "64:2:1:BG:false:0#192:2:1:BA:false:0#208:2:2:BA:false:0", "192:2:1:BA:false:0#64:2:1:BG:false:0#208:2:2:BA:false:0", true };
-            yield return new object[] { false, false, "64:1:1:BG:false:0#64:2:2:BA:false:0#192:2:1:BG:false:0", "64:2:2:BA:false:0#192:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "128:2:1:BG:false:0#64:2:1:BA:false:0#64:2:2:BO:false:0", "64:2:1:BA:false:0#128:2:1:BG:false:0#64:2:2:BO:false:0", true };
-            yield return new object[] { false, false, "128:2:1:BG:false:0#64:2:1:BA:false:0#64:2:2:BA:false:0", "64:2:3:BA:false:0#128:2:1:BG:false:0", true };
-            yield return new object[] { false, false, "128:2:1:BG:false:0#64:2:1:BA:false:0#64:2:1:BA:false:0", "64:2:1:BA:false:0#128:2:1:BG:false:0", true };
-            yield return new object[] { true, false, "128:2:1:BG:false:0#65:2:1:BA:false:0#129:2:1:BA:false:0", "193:2:1:BA:false:0#128:2:1:BG:false:0", true };
-            yield return new object[] { true, false, "192:2:1:BO:false:0#66:2:1:BA:false:0#70:2:1:BA:false:0", "66:2:1:BA:false:0#192:2:1:BO:false:0", true };
-            yield return new object[] { true, false, "64:2:1:BO:false:0#130:2:1:BA:false:0#135:2:1:BA:false:0", "135:2:1:BA:false:0#130:2:1:BA:false:0#64:2:1:BO:false:0", true };
+            yield return new object[]
+            {
+                false,
+                false,
+                "64:2:1:BA:false:0#128:2:0:BG:false:0#80:2:2:BO:false:0",
+                "64:2:1:BA:false:0#80:2:2:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "73:2:1:BA:false:0#64:2:1:BG:false:0#80:2:2:BO:false:0",
+                "64:2:1:BG:false:0#80:2:2:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "73:2:1:BA:false:0#64:2:1:BG:false:0#80:2:2:BO:false:0",
+                "73:2:1:BA:false:0#64:2:1:BG:false:0#80:2:2:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "199:2:1:BA:false:0",
+                "192:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "199:2:1:BA:false:0",
+                "199:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "128:2:0:BG:false:0#72:2:1:BA:false:0#64:2:1:BO:false:0",
+                "64:2:1:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "64:2:1:BA:false:0#80:2:2:BO:false:0#136:2:1:BG:false:0",
+                "64:2:1:BA:false:0#80:2:2:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "196:2:1:BA:false:0",
+                "192:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "15:2:1:BA:false:0#64:2:1:BG:false:0",
+                "64:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "192:0:1:BA:false:0#64:2:1:BG:false:0",
+                "64:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "192:1:1:BA:false:0#64:2:1:BG:false:0",
+                "64:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "192:3:1:BA:false:0#64:2:1:BG:false:0",
+                "64:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "192:2:1:BA:false:0#80:2:2:BG:false:0",
+                "192:2:1:BA:false:0#80:2:2:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "80:2:2:BG:false:0#192:2:1:BA:false:0",
+                "80:2:2:BG:false:0#192:2:1:BA:false:0",
+                false,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "80:2:2:BG:false:0#208:2:1:BA:false:0",
+                "80:2:2:BG:false:0#208:2:1:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "192:0:1:BA:false:0#192:0:2:BA:false:0#64:2:1:BG:false:0#64:0:3:BG:false:0",
+                "64:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "64:2:1:BG:false:0#192:2:1:BA:false:0#208:2:2:BA:false:0",
+                "192:2:1:BA:false:0#64:2:1:BG:false:0#208:2:2:BA:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "64:1:1:BG:false:0#64:2:2:BA:false:0#192:2:1:BG:false:0",
+                "64:2:2:BA:false:0#192:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "128:2:1:BG:false:0#64:2:1:BA:false:0#64:2:2:BO:false:0",
+                "64:2:1:BA:false:0#128:2:1:BG:false:0#64:2:2:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "128:2:1:BG:false:0#64:2:1:BA:false:0#64:2:2:BA:false:0",
+                "64:2:3:BA:false:0#128:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                false,
+                false,
+                "128:2:1:BG:false:0#64:2:1:BA:false:0#64:2:1:BA:false:0",
+                "64:2:1:BA:false:0#128:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "128:2:1:BG:false:0#65:2:1:BA:false:0#129:2:1:BA:false:0",
+                "193:2:1:BA:false:0#128:2:1:BG:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "192:2:1:BO:false:0#66:2:1:BA:false:0#70:2:1:BA:false:0",
+                "66:2:1:BA:false:0#192:2:1:BO:false:0",
+                true,
+            };
+            yield return new object[]
+            {
+                true,
+                false,
+                "64:2:1:BO:false:0#130:2:1:BA:false:0#135:2:1:BA:false:0",
+                "135:2:1:BA:false:0#130:2:1:BA:false:0#64:2:1:BO:false:0",
+                true,
+            };
         }
 
-        private static bool TestConstructor(SystemAcl systemAcl, bool isContainer, bool isDS, bool wasCanonicalInitially, RawAcl rawAcl)
+        private static bool TestConstructor(
+            SystemAcl systemAcl,
+            bool isContainer,
+            bool isDS,
+            bool wasCanonicalInitially,
+            RawAcl rawAcl
+        )
         {
             bool result = true;
             byte[] sAclBinaryForm = null;
             byte[] rAclBinaryForm = null;
-            if (systemAcl.IsContainer == isContainer &&
-                systemAcl.IsDS == isDS &&
-                systemAcl.Revision == rawAcl.Revision &&
-                systemAcl.Count == rawAcl.Count &&
-                systemAcl.BinaryLength == rawAcl.BinaryLength &&
-                systemAcl.IsCanonical == wasCanonicalInitially)
+            if (
+                systemAcl.IsContainer == isContainer
+                && systemAcl.IsDS == isDS
+                && systemAcl.Revision == rawAcl.Revision
+                && systemAcl.Count == rawAcl.Count
+                && systemAcl.BinaryLength == rawAcl.BinaryLength
+                && systemAcl.IsCanonical == wasCanonicalInitially
+            )
             {
                 sAclBinaryForm = new byte[systemAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
@@ -65,11 +241,9 @@ namespace System.Security.AccessControl.Tests
                         break;
                     }
                 }
-
             }
             else
             {
-
                 result = false;
             }
             return result;
@@ -77,7 +251,13 @@ namespace System.Security.AccessControl.Tests
 
         [Theory]
         [MemberData(nameof(SystemAcl_Constructor3_TestData))]
-        public static void BasicValidationTestCases(bool isContainer, bool isDS, string initialRawAclStr, string verifierRawAclStr, bool wasCanonicalInitially)
+        public static void BasicValidationTestCases(
+            bool isContainer,
+            bool isDS,
+            string initialRawAclStr,
+            string verifierRawAclStr,
+            bool wasCanonicalInitially
+        )
         {
             RawAcl rawAcl = null;
             SystemAcl systemAcl = null;
@@ -87,13 +267,14 @@ namespace System.Security.AccessControl.Tests
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
             rawAcl = Utils.CreateRawAclFromString(verifierRawAclStr);
 
-            Assert.True(TestConstructor(systemAcl, isContainer, isDS, wasCanonicalInitially, rawAcl));
+            Assert.True(
+                TestConstructor(systemAcl, isContainer, isDS, wasCanonicalInitially, rawAcl)
+            );
         }
 
         [Fact]
         public static void AdditionalTestCases()
         {
-
             bool isContainer = false;
             bool isDS = false;
 
@@ -121,12 +302,14 @@ namespace System.Security.AccessControl.Tests
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.AuditFlags,
-                    AceQualifier.SystemAudit,
-                    0,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
-                    false,
-                    null);
+            gAce = new CommonAce(
+                AceFlags.AuditFlags,
+                AceQualifier.SystemAudit,
+                0,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
@@ -136,16 +319,18 @@ namespace System.Security.AccessControl.Tests
             rawAcl.RemoveAce(0);
             Assert.True(TestConstructor(sAcl, isContainer, isDS, true, rawAcl));
 
-
             //case 2, an inherit-only SystemAudit ACE on an object ACL is meaningless, will be removed
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.InheritanceFlags | AceFlags.AuditFlags,
-                    AceQualifier.SystemAudit,
-                    1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
-                    false, null);
+            gAce = new CommonAce(
+                AceFlags.InheritanceFlags | AceFlags.AuditFlags,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
@@ -160,12 +345,14 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //200 has inheritOnly, SuccessfulAccess and FailedAccess
-            gAce = new CommonAce((AceFlags)200,
-                    AceQualifier.SystemAudit,
-                    1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
-                    false,
-                    null);
+            gAce = new CommonAce(
+                (AceFlags)200,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -178,12 +365,14 @@ namespace System.Security.AccessControl.Tests
             revision = 255;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.None,
-        AceQualifier.SystemAudit,
-        1,
-        new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
-        false,
-        null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -214,10 +403,12 @@ namespace System.Security.AccessControl.Tests
             aceFlag = AceFlags.AuditFlags;
             accessMask = 1;
             compoundAceType = CompoundAceType.Impersonation;
-            gAce = new CompoundAce(aceFlag,
+            gAce = new CompoundAce(
+                aceFlag,
                 accessMask,
                 compoundAceType,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)));
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid))
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
@@ -232,17 +423,21 @@ namespace System.Security.AccessControl.Tests
             aceFlag = AceFlags.InheritanceFlags | AceFlags.AuditFlags;
             aceQualifier = AceQualifier.SystemAudit;
             accessMask = 1;
-            objectAceFlag = ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
+            objectAceFlag =
+                ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
             objectAceType = new Guid("11111111-1111-1111-1111-111111111111");
             inheritedObjectAceType = new Guid("22222222-2222-2222-2222-222222222222");
-            gAce = new ObjectAce(aceFlag,
+            gAce = new ObjectAce(
+                aceFlag,
                 aceQualifier,
                 accessMask,
                 new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
-                objectAceFlag, objectAceType,
+                objectAceFlag,
+                objectAceType,
                 inheritedObjectAceType,
                 false,
-                null);
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = true;
@@ -261,62 +456,84 @@ namespace System.Security.AccessControl.Tests
             //case 9, Aces from case 1 to 7
             revision = 127;
             capacity = 5;
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)).ToString();
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+            ).ToString();
             rawAcl = new RawAcl(revision, capacity);
             //an SystemAudit ACE with a zero access mask
             //is meaningless, will be removed
-            gAce = new CommonAce(AceFlags.AuditFlags,
-                    AceQualifier.SystemAudit,
-                    0,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 1.ToString()),
-                    false,
-                    null);
+            gAce = new CommonAce(
+                AceFlags.AuditFlags,
+                AceQualifier.SystemAudit,
+                0,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 1.ToString()
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
             //an inherit-only SystemAudit ACE without ContainerInherit or ObjectInherit flags on a container object
             //is meaningless, will be removed
             //200 has inheritOnly, SuccessfulAccess and FailedAccess
-            gAce = new CommonAce((AceFlags)200,
-                    AceQualifier.SystemAudit,
-                    1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 2.ToString()),
-                    false,
-                    null);
+            gAce = new CommonAce(
+                (AceFlags)200,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 2.ToString()
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
             //a SystemAudit ACE without Success or Failure Flags
             //is meaningless, will be removed
-            gAce = new CommonAce(AceFlags.None,
-        AceQualifier.SystemAudit,
-        1,
-        new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 3.ToString()),
-        false,
-        null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 3.ToString()
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
             //a ObjectAce
             aceFlag = AceFlags.InheritanceFlags | AceFlags.AuditFlags;
             aceQualifier = AceQualifier.SystemAudit;
             accessMask = 1;
-            objectAceFlag = ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
+            objectAceFlag =
+                ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
             objectAceType = new Guid("11111111-1111-1111-1111-111111111111");
             inheritedObjectAceType = new Guid("22222222-2222-2222-2222-222222222222");
-            gAce = new ObjectAce(aceFlag,
+            gAce = new ObjectAce(
+                aceFlag,
                 aceQualifier,
                 accessMask,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 4.ToString()),
-                objectAceFlag, objectAceType,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 4.ToString()
+                ),
+                objectAceFlag,
+                objectAceType,
                 inheritedObjectAceType,
                 false,
-                null);
+                null
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
             // a CustomAce
-            gAce = new CustomAce(AceType.MaxDefinedAceType + 1,
-                AceFlags.AuditFlags,
-                null);
+            gAce = new CustomAce(AceType.MaxDefinedAceType + 1, AceFlags.AuditFlags, null);
             rawAcl.InsertAce(rawAcl.Count, gAce);
             //a CompoundAce
-            gAce = new CompoundAce(AceFlags.AuditFlags,
+            gAce = new CompoundAce(
+                AceFlags.AuditFlags,
                 1,
                 CompoundAceType.Impersonation,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 5.ToString()));
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid(sid) + 5.ToString()
+                )
+            );
             rawAcl.InsertAce(rawAcl.Count, gAce);
 
             isContainer = true;
@@ -328,7 +545,6 @@ namespace System.Security.AccessControl.Tests
             rawAcl.RemoveAce(0);
             //Mark changed design to make ACL with any CustomAce, CompoundAce uncanonical
             Assert.True(TestConstructor(sAcl, isContainer, isDS, false, rawAcl));
-
         }
 
         [Fact]

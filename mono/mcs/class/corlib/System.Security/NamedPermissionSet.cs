@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,117 +32,117 @@
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
-namespace System.Security {
+namespace System.Security
+{
+    [ComVisible(true)]
+    [Serializable]
+    public sealed class NamedPermissionSet : PermissionSet
+    {
+        private string name;
+        private string description;
 
-	[ComVisible (true)]
-	[Serializable]
-	public sealed class NamedPermissionSet : PermissionSet {
+        // for PolicyLevel (to avoid validation duplication)
+        internal NamedPermissionSet()
+            : base() { }
 
-		private string name;
-		private string description;
+        public NamedPermissionSet(string name, PermissionSet permSet)
+            : base(permSet)
+        {
+            Name = name;
+        }
 
-		// for PolicyLevel (to avoid validation duplication)
-		internal NamedPermissionSet ()
-			: base ()
-		{
-		}
+        public NamedPermissionSet(string name, PermissionState state)
+            : base(state)
+        {
+            Name = name;
+        }
 
-		public NamedPermissionSet (string name, PermissionSet permSet) 
-			: base (permSet) 
-		{
-			Name = name;
-		}
+        public NamedPermissionSet(NamedPermissionSet permSet)
+            : base(permSet)
+        {
+            name = permSet.name; // name can be null here
+            description = permSet.description;
+        }
 
-		public NamedPermissionSet (string name, PermissionState state) 
-			: base (state) 
-		{
-			Name = name;
-		}
+        public NamedPermissionSet(string name)
+            : this(name, PermissionState.Unrestricted) { }
 
-		public NamedPermissionSet (NamedPermissionSet permSet) 
-			: base (permSet)
-		{
-			name = permSet.name; // name can be null here
-			description = permSet.description;
-		}
+        // properties
 
-		public NamedPermissionSet (string name) 
-			: this (name, PermissionState.Unrestricted)
-		{
-		}
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
 
-		// properties
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                if ((value == null) || (value == String.Empty))
+                {
+                    throw new ArgumentException(Locale.GetText("invalid name"));
+                }
+                name = value;
+            }
+        }
 
-		public string Description {
-			get { return description; }
-			set { description = value; }
-		}
+        // methods
 
-		public string Name {
-			get { return name; }
-			set { 
-				if ((value == null) || (value == String.Empty)) {
-					throw new ArgumentException (Locale.GetText ("invalid name"));
-				}
-				name = value; 
-			}
-		}
+        public override PermissionSet Copy()
+        {
+            return new NamedPermissionSet(this);
+        }
 
-		// methods
+        public NamedPermissionSet Copy(string name)
+        {
+            NamedPermissionSet nps = new NamedPermissionSet(this);
+            nps.Name = name; // get the new name
+            return nps;
+        }
 
-		public override PermissionSet Copy () 
-		{
-			return new NamedPermissionSet (this);
-		}
+        public override void FromXml(SecurityElement et)
+        {
+            base.FromXml(et);
+            // strangely it can import a null Name (bypassing property setter)
+            name = et.Attribute("Name");
+            description = et.Attribute("Description");
+            if (description == null)
+                description = String.Empty;
+        }
 
-		public NamedPermissionSet Copy (string name) 
-		{
-			NamedPermissionSet nps = new NamedPermissionSet (this);
-			nps.Name = name;		// get the new name
-			return nps;
-		}
+        public override SecurityElement ToXml()
+        {
+            SecurityElement se = base.ToXml();
+            if (name != null)
+                se.AddAttribute("Name", name);
+            if (description != null)
+                se.AddAttribute("Description", description);
+            return se;
+        }
 
-		public override void FromXml (SecurityElement et) 
-		{
-			base.FromXml (et);
-			// strangely it can import a null Name (bypassing property setter)
-			name = et.Attribute ("Name");
-			description = et.Attribute ("Description");
-			if (description == null)
-				description = String.Empty;
-		}
+        [ComVisible(false)]
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            NamedPermissionSet nps = (obj as NamedPermissionSet);
+            if (nps == null)
+                return false;
+            // description isn't part of the comparaison
+            return ((name == nps.Name) && base.Equals(obj));
+        }
 
-		public override SecurityElement ToXml () 
-		{
-			SecurityElement se = base.ToXml ();
-			if (name != null)
-				se.AddAttribute ("Name", name);
-			if (description != null)
-				se.AddAttribute ("Description", description);
-			return se;
-		}
-
-		[ComVisible (false)]
-		public override bool Equals (object obj)
-		{
-			if (obj == null)
-				return false;
-			NamedPermissionSet nps = (obj as NamedPermissionSet);
-			if (nps == null)
-				return false;
-			// description isn't part of the comparaison
-			return ((name == nps.Name) && base.Equals (obj));
-		}
-
-		[ComVisible (false)]
-		public override int GetHashCode ()
-		{
-			int hc = base.GetHashCode ();
-			// name is part of the hash code (except when null)
-			if (name != null)
-				hc ^= name.GetHashCode ();
-			// description is never part of the hash code
-			return hc;
-		}
-	}
+        [ComVisible(false)]
+        public override int GetHashCode()
+        {
+            int hc = base.GetHashCode();
+            // name is part of the hash code (except when null)
+            if (name != null)
+                hc ^= name.GetHashCode();
+            // description is never part of the hash code
+            return hc;
+        }
+    }
 }

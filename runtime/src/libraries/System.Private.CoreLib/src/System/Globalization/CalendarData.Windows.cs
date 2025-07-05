@@ -49,16 +49,26 @@ namespace System.Globalization
             if (result && bUseUserOverrides)
             {
                 NormalizeCalendarId(ref calendarId, ref localeName);
-                result &= CallGetCalendarInfoEx(localeName, calendarId, CAL_ITWODIGITYEARMAX, out this.iTwoDigitYearMax);
+                result &= CallGetCalendarInfoEx(
+                    localeName,
+                    calendarId,
+                    CAL_ITWODIGITYEARMAX,
+                    out this.iTwoDigitYearMax
+                );
 
                 // They want user overrides, see if the user calendar matches the input calendar
-                CalendarId userCalendar = (CalendarId)CultureData.GetLocaleInfoExInt(localeName, LOCALE_ICALENDARTYPE);
+                CalendarId userCalendar = (CalendarId)
+                    CultureData.GetLocaleInfoExInt(localeName, LOCALE_ICALENDARTYPE);
 
                 // If the calendars were the same, see if the locales were the same
                 if (userCalendar == calendarId)
                 {
-                    string? shortDateOverride = CultureData.ReescapeWin32String(CultureData.GetLocaleInfoEx(localeName, LOCALE_SSHORTDATE));
-                    string? longDateOverride = CultureData.ReescapeWin32String(CultureData.GetLocaleInfoEx(localeName, LOCALE_SLONGDATE));
+                    string? shortDateOverride = CultureData.ReescapeWin32String(
+                        CultureData.GetLocaleInfoEx(localeName, LOCALE_SSHORTDATE)
+                    );
+                    string? longDateOverride = CultureData.ReescapeWin32String(
+                        CultureData.GetLocaleInfoEx(localeName, LOCALE_SLONGDATE)
+                    );
                     InsertOrSwapOverride(shortDateOverride, ref this.saShortDates);
                     InsertOrSwapOverride(longDateOverride, ref this.saLongDates);
                 }
@@ -100,19 +110,47 @@ namespace System.Globalization
             NormalizeCalendarId(ref calendarId, ref localeName);
 
             // Numbers
-            ret &= CallGetCalendarInfoEx(localeName, calendarId, CAL_ITWODIGITYEARMAX | useOverrides, out this.iTwoDigitYearMax);
+            ret &= CallGetCalendarInfoEx(
+                localeName,
+                calendarId,
+                CAL_ITWODIGITYEARMAX | useOverrides,
+                out this.iTwoDigitYearMax
+            );
 
             // Strings
-            ret &= CallGetCalendarInfoEx(localeName, calendarId, CAL_SCALNAME, out this.sNativeName);
+            ret &= CallGetCalendarInfoEx(
+                localeName,
+                calendarId,
+                CAL_SCALNAME,
+                out this.sNativeName
+            );
             ret &= CallGetCalendarInfoEx(localeName, calendarId, CAL_SMONTHDAY, out this.sMonthDay);
 
             // String Arrays
             // Formats
-            ret &= CallEnumCalendarInfo(localeName, calendarId, CAL_SSHORTDATE, LOCALE_SSHORTDATE | useOverrides, out this.saShortDates!);
-            ret &= CallEnumCalendarInfo(localeName, calendarId, CAL_SLONGDATE, LOCALE_SLONGDATE | useOverrides, out this.saLongDates!);
+            ret &= CallEnumCalendarInfo(
+                localeName,
+                calendarId,
+                CAL_SSHORTDATE,
+                LOCALE_SSHORTDATE | useOverrides,
+                out this.saShortDates!
+            );
+            ret &= CallEnumCalendarInfo(
+                localeName,
+                calendarId,
+                CAL_SLONGDATE,
+                LOCALE_SLONGDATE | useOverrides,
+                out this.saLongDates!
+            );
 
             // Get the YearMonth pattern.
-            ret &= CallEnumCalendarInfo(localeName, calendarId, CAL_SYEARMONTH, LOCALE_SYEARMONTH, out this.saYearMonths!);
+            ret &= CallEnumCalendarInfo(
+                localeName,
+                calendarId,
+                CAL_SYEARMONTH,
+                LOCALE_SYEARMONTH,
+                out this.saYearMonths!
+            );
 
             // Day & Month Names
             // These are all single calType entries, 1 per day, so we have to make 7 or 13 calls to collect all the names
@@ -120,30 +158,66 @@ namespace System.Globalization
             // Day
             // Note that we're off-by-one since managed starts on sunday and windows starts on monday
             ret &= GetCalendarDayInfo(localeName, calendarId, CAL_SDAYNAME7, out this.saDayNames);
-            ret &= GetCalendarDayInfo(localeName, calendarId, CAL_SABBREVDAYNAME7, out this.saAbbrevDayNames);
+            ret &= GetCalendarDayInfo(
+                localeName,
+                calendarId,
+                CAL_SABBREVDAYNAME7,
+                out this.saAbbrevDayNames
+            );
 
             // Month names
-            ret &= GetCalendarMonthInfo(localeName, calendarId, CAL_SMONTHNAME1, out this.saMonthNames);
-            ret &= GetCalendarMonthInfo(localeName, calendarId, CAL_SABBREVMONTHNAME1, out this.saAbbrevMonthNames);
+            ret &= GetCalendarMonthInfo(
+                localeName,
+                calendarId,
+                CAL_SMONTHNAME1,
+                out this.saMonthNames
+            );
+            ret &= GetCalendarMonthInfo(
+                localeName,
+                calendarId,
+                CAL_SABBREVMONTHNAME1,
+                out this.saAbbrevMonthNames
+            );
 
             //
             // The following LCTYPE are not supported in some platforms.  If the call fails,
             // don't return a failure.
             //
-            GetCalendarDayInfo(localeName, calendarId, CAL_SSHORTESTDAYNAME7, out this.saSuperShortDayNames);
+            GetCalendarDayInfo(
+                localeName,
+                calendarId,
+                CAL_SSHORTESTDAYNAME7,
+                out this.saSuperShortDayNames
+            );
 
             // Gregorian may have genitive month names
             if (calendarId == CalendarId.GREGORIAN)
             {
-                GetCalendarMonthInfo(localeName, calendarId, CAL_SMONTHNAME1 | CAL_RETURN_GENITIVE_NAMES, out this.saMonthGenitiveNames);
-                GetCalendarMonthInfo(localeName, calendarId, CAL_SABBREVMONTHNAME1 | CAL_RETURN_GENITIVE_NAMES, out this.saAbbrevMonthGenitiveNames);
+                GetCalendarMonthInfo(
+                    localeName,
+                    calendarId,
+                    CAL_SMONTHNAME1 | CAL_RETURN_GENITIVE_NAMES,
+                    out this.saMonthGenitiveNames
+                );
+                GetCalendarMonthInfo(
+                    localeName,
+                    calendarId,
+                    CAL_SABBREVMONTHNAME1 | CAL_RETURN_GENITIVE_NAMES,
+                    out this.saAbbrevMonthGenitiveNames
+                );
             }
 
             // Calendar Parts Names
             // This doesn't get always get localized names for gregorian (not available in windows < 7)
             // so: eg: coreclr on win < 7 won't get these
             CallEnumCalendarInfo(localeName, calendarId, CAL_SERASTRING, 0, out this.saEraNames!);
-            CallEnumCalendarInfo(localeName, calendarId, CAL_SABBREVERASTRING, 0, out this.saAbbrevEraNames!);
+            CallEnumCalendarInfo(
+                localeName,
+                calendarId,
+                CAL_SABBREVERASTRING,
+                0,
+                out this.saAbbrevEraNames!
+            );
 
             //
             // Calendar Era Info
@@ -167,17 +241,17 @@ namespace System.Globalization
             //
             switch (calendarId)
             {
-                case CalendarId.JAPANESELUNISOLAR:    // Data looks like Japanese
+                case CalendarId.JAPANESELUNISOLAR: // Data looks like Japanese
                     calendarId = CalendarId.JAPAN;
                     break;
-                case CalendarId.JULIAN:               // Data looks like gregorian US
-                case CalendarId.CHINESELUNISOLAR:     // Algorithmic, so actual data is irrelevant
-                case CalendarId.SAKA:                 // reserved to match Office but not implemented in our code, so data is irrelevant
-                case CalendarId.LUNAR_ETO_CHN:        // reserved to match Office but not implemented in our code, so data is irrelevant
-                case CalendarId.LUNAR_ETO_KOR:        // reserved to match Office but not implemented in our code, so data is irrelevant
-                case CalendarId.LUNAR_ETO_ROKUYOU:    // reserved to match Office but not implemented in our code, so data is irrelevant
-                case CalendarId.KOREANLUNISOLAR:      // Algorithmic, so actual data is irrelevant
-                case CalendarId.TAIWANLUNISOLAR:      // Algorithmic, so actual data is irrelevant
+                case CalendarId.JULIAN: // Data looks like gregorian US
+                case CalendarId.CHINESELUNISOLAR: // Algorithmic, so actual data is irrelevant
+                case CalendarId.SAKA: // reserved to match Office but not implemented in our code, so data is irrelevant
+                case CalendarId.LUNAR_ETO_CHN: // reserved to match Office but not implemented in our code, so data is irrelevant
+                case CalendarId.LUNAR_ETO_KOR: // reserved to match Office but not implemented in our code, so data is irrelevant
+                case CalendarId.LUNAR_ETO_ROKUYOU: // reserved to match Office but not implemented in our code, so data is irrelevant
+                case CalendarId.KOREANLUNISOLAR: // Algorithmic, so actual data is irrelevant
+                case CalendarId.TAIWANLUNISOLAR: // Algorithmic, so actual data is irrelevant
                     calendarId = CalendarId.GREGORIAN_US;
                     break;
             }
@@ -217,7 +291,9 @@ namespace System.Globalization
                         localeName = "fa-IR";
 
                         // See if that works
-                        if (!CallGetCalendarInfoEx(localeName, calendar, CAL_SCALNAME, out string _))
+                        if (
+                            !CallGetCalendarInfoEx(localeName, calendar, CAL_SCALNAME, out string _)
+                        )
                         {
                             // Failed again, just use en-US with the gregorian calendar
                             localeName = "en-US";
@@ -237,7 +313,13 @@ namespace System.Globalization
             }
         }
 
-        private static unsafe bool CallEnumCalendarInfo(string localeName, CalendarId calendar, uint calType, uint lcType, out string[]? data)
+        private static unsafe bool CallEnumCalendarInfo(
+            string localeName,
+            CalendarId calendar,
+            uint calType,
+            uint lcType,
+            out string[]? data
+        )
         {
             EnumData context = default;
             context.userOverride = null;
@@ -246,7 +328,8 @@ namespace System.Globalization
             if ((lcType != 0) && ((lcType & CAL_NOUSEROVERRIDE) == 0))
             {
                 // They want user overrides, see if the user calendar matches the input calendar
-                CalendarId userCalendar = (CalendarId)CultureData.GetLocaleInfoExInt(localeName, LOCALE_ICALENDARTYPE);
+                CalendarId userCalendar = (CalendarId)
+                    CultureData.GetLocaleInfoExInt(localeName, LOCALE_ICALENDARTYPE);
 
                 // If the calendars were the same, see if the locales were the same
                 if (userCalendar == calendar)
@@ -267,7 +350,14 @@ namespace System.Globalization
             }
 
             // Now call the enumeration API. Work is done by our callback function
-            Interop.Kernel32.EnumCalendarInfoExEx(&EnumCalendarInfoCallback, localeName, (uint)calendar, null, calType, &context);
+            Interop.Kernel32.EnumCalendarInfoExEx(
+                &EnumCalendarInfoCallback,
+                localeName,
+                (uint)calendar,
+                null,
+                calType,
+                &context
+            );
 
             // Now we have a list of data, fail if we didn't find anything.
             Debug.Assert(context.strings != null);
@@ -303,7 +393,12 @@ namespace System.Globalization
         //      OUT pOutputStrings      The output string[] value.
         //
         ////////////////////////////////////////////////////////////////////////
-        private static bool GetCalendarDayInfo(string localeName, CalendarId calendar, uint calType, out string[] outputStrings)
+        private static bool GetCalendarDayInfo(
+            string localeName,
+            CalendarId calendar,
+            uint calType,
+            out string[] outputStrings
+        )
         {
             bool result = true;
 
@@ -336,7 +431,12 @@ namespace System.Globalization
         //      OUT pOutputStrings      The output string[] value.
         //
         ////////////////////////////////////////////////////////////////////////
-        private static bool GetCalendarMonthInfo(string localeName, CalendarId calendar, uint calType, out string[] outputStrings)
+        private static bool GetCalendarMonthInfo(
+            string localeName,
+            CalendarId calendar,
+            uint calType,
+            out string[] outputStrings
+        )
         {
             //
             // We'll need a new array of 13 items
@@ -355,7 +455,11 @@ namespace System.Globalization
             return true;
         }
 
-        internal static int GetCalendarsCore(string localeName, bool useUserOverride, CalendarId[] calendars)
+        internal static int GetCalendarsCore(
+            string localeName,
+            bool useUserOverride,
+            CalendarId[] calendars
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 
@@ -397,7 +501,11 @@ namespace System.Globalization
             return count;
         }
 
-        private static int NlsGetCalendars(string localeName, bool useUserOverride, CalendarId[] calendars)
+        private static int NlsGetCalendars(
+            string localeName,
+            bool useUserOverride,
+            CalendarId[] calendars
+        )
         {
             NlsEnumCalendarsData data = default;
             data.userOverride = 0;
@@ -419,7 +527,14 @@ namespace System.Globalization
 
             unsafe
             {
-                Interop.Kernel32.EnumCalendarInfoExEx(&EnumCalendarsCallback, localeName, ENUM_ALL_CALENDARS, null, CAL_ICALINTVALUE, &data);
+                Interop.Kernel32.EnumCalendarInfoExEx(
+                    &EnumCalendarsCallback,
+                    localeName,
+                    ENUM_ALL_CALENDARS,
+                    null,
+                    CAL_ICALINTVALUE,
+                    &data
+                );
             }
 
             // Copy to the output array
@@ -433,10 +548,15 @@ namespace System.Globalization
         // Get native two digit year max
         internal static int GetTwoDigitYearMax(CalendarId calendarId)
         {
-            return GlobalizationMode.Invariant ? Invariant.iTwoDigitYearMax :
-                    CallGetCalendarInfoEx(null, calendarId, CAL_ITWODIGITYEARMAX, out int twoDigitYearMax) ?
-                        twoDigitYearMax :
-                        -1;
+            return GlobalizationMode.Invariant ? Invariant.iTwoDigitYearMax
+                : CallGetCalendarInfoEx(
+                    null,
+                    calendarId,
+                    CAL_ITWODIGITYEARMAX,
+                    out int twoDigitYearMax
+                )
+                    ? twoDigitYearMax
+                : -1;
         }
     }
 }

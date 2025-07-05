@@ -41,7 +41,8 @@ namespace XDocumentTests.SDMSample
             Assert.Equal(
                 new XNode[] { comment, new XText(str + other), comment2, comment3 },
                 element.Nodes(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(new[] { attribute.Name }, element.Attributes().Select(x => x.Name));
             Assert.Equal(new[] { attribute.Value }, element.Attributes().Select(x => x.Value));
@@ -52,7 +53,11 @@ namespace XDocumentTests.SDMSample
             // Now test params overload.
             element.Add(comment, attribute, str, other);
 
-            Assert.Equal(new XNode[] { comment, new XText(str + other) }, element.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { comment, new XText(str + other) },
+                element.Nodes(),
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(new[] { attribute.Name }, element.Attributes().Select(x => x.Name));
             Assert.Equal(new[] { attribute.Value }, element.Attributes().Select(x => x.Value));
@@ -71,7 +76,10 @@ namespace XDocumentTests.SDMSample
             // Not allowed to add attributes in the general case.
             // The only general case of a container is a document.
             XDocument document = new XDocument();
-            AssertExtensions.Throws<ArgumentException>(null, () => document.Add(new XAttribute("foo", "bar")));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => document.Add(new XAttribute("foo", "bar"))
+            );
 
             // Can add to elements, but no duplicates allowed.
             XElement e = new XElement("element");
@@ -113,7 +121,11 @@ namespace XDocumentTests.SDMSample
             element.AddFirst(comment);
             element.AddFirst(str);
 
-            Assert.Equal(new XNode[] { new XText(str), comment, text }, element.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { new XText(str), comment, text },
+                element.Nodes(),
+                XNode.EqualityComparer
+            );
 
             element.RemoveAll();
             Assert.Empty(element.Nodes());
@@ -122,7 +134,11 @@ namespace XDocumentTests.SDMSample
             element.AddFirst(text);
             element.AddFirst(comment, str);
 
-            Assert.Equal(new XNode[] { comment, new XText(str), text }, element.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { comment, new XText(str), text },
+                element.Nodes(),
+                XNode.EqualityComparer
+            );
 
             // Can't use to add attributes.
             XAttribute a = new XAttribute("foo", "bar");
@@ -140,7 +156,8 @@ namespace XDocumentTests.SDMSample
                 new XAttribute("att1", "a1"),
                 new XComment("my comment"),
                 new XElement("bar", new XText("abcd"), new XElement("inner")),
-                100);
+                100
+            );
 
             // Content should include just the elements, no attributes
             // or contents of nested elements.
@@ -157,7 +174,8 @@ namespace XDocumentTests.SDMSample
             Assert.Equal(
                 (XNode)obj2,
                 new XElement("bar", new XText("abcd"), new XElement("inner")),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
             Assert.Equal((XNode)obj3, new XText("100"), XNode.EqualityComparer);
             Assert.False(b);
         }
@@ -174,16 +192,25 @@ namespace XDocumentTests.SDMSample
             XElement level1 = new XElement("Level1", level2, comment);
             XElement level0 = new XElement("Level1", level1);
 
-            Assert.Equal(new XElement[] { level2, level3 }, level1.Descendants(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level2, level3 },
+                level1.Descendants(),
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(
                 new XNode[] { level1, level2, level3, comment },
                 level0.DescendantNodes(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Empty(level0.Descendants(null));
 
-            Assert.Equal(new XElement[] { level1 }, level0.Descendants("Level1"), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level1 },
+                level0.Descendants("Level1"),
+                XNode.EqualityComparer
+            );
         }
 
         /// <summary>
@@ -194,9 +221,18 @@ namespace XDocumentTests.SDMSample
         {
             XElement level1_1 = new XElement("level1");
 
-            XElement level1_2 = new XElement("level1", new XElement("level1"), new XElement("level2"));
+            XElement level1_2 = new XElement(
+                "level1",
+                new XElement("level1"),
+                new XElement("level2")
+            );
 
-            XElement element = new XElement("level0", new XComment("my comment"), level1_1, level1_2);
+            XElement element = new XElement(
+                "level0",
+                new XComment("my comment"),
+                level1_1,
+                level1_2
+            );
 
             XElement empty = new XElement("empty");
 
@@ -211,11 +247,19 @@ namespace XDocumentTests.SDMSample
             Assert.Equal(level1_1, element.Element("level1"));
 
             // Check element sequence -- should not include nested elements.
-            Assert.Equal(new XElement[] { level1_1, level1_2 }, element.Elements(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level1_1, level1_2 },
+                element.Elements(),
+                XNode.EqualityComparer
+            );
 
             // Check element sequence by name.
             Assert.Empty(element.Elements(null));
-            Assert.Equal(new XElement[] { level1_1, level1_2 }, element.Elements("level1"), XNode.EqualityComparer);
+            Assert.Equal(
+                new XElement[] { level1_1, level1_2 },
+                element.Elements("level1"),
+                XNode.EqualityComparer
+            );
         }
 
         /// <summary>
@@ -228,7 +272,8 @@ namespace XDocumentTests.SDMSample
                 "foo",
                 new XAttribute("att", "bar"),
                 "abc",
-                new XElement("nested", new XText("abcd")));
+                new XElement("nested", new XText("abcd"))
+            );
 
             // Replace with a node, attribute, string, some other value, and an IEnumerable.
             // ReplaceNodes does not remove attributes.
@@ -240,12 +285,25 @@ namespace XDocumentTests.SDMSample
 
             TimeSpan other1 = new TimeSpan(1, 2, 3);
 
-            element.ReplaceNodes(comment, attribute, str, other1, new XComment[] { comment2, comment3 });
+            element.ReplaceNodes(
+                comment,
+                attribute,
+                str,
+                other1,
+                new XComment[] { comment2, comment3 }
+            );
 
             Assert.Equal(
-                new XNode[] { comment, new XText(str + XmlConvert.ToString(other1)), comment2, comment3 },
+                new XNode[]
+                {
+                    comment,
+                    new XText(str + XmlConvert.ToString(other1)),
+                    comment2,
+                    comment3,
+                },
                 element.Nodes(),
-                XNode.EqualityComparer);
+                XNode.EqualityComparer
+            );
 
             Assert.Equal(2, element.Attributes().Count());
 
@@ -356,11 +414,19 @@ namespace XDocumentTests.SDMSample
             e1.Add(eb);
             e1.Add("efgh");
 
-            Assert.Equal(new XNode[] { new XText("abcd"), eb, new XText("efgh") }, e1.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { new XText("abcd"), eb, new XText("efgh") },
+                e1.Nodes(),
+                XNode.EqualityComparer
+            );
 
             eb.Remove();
 
-            Assert.Equal(new XNode[] { new XText("abcd"), new XText("efgh") }, e1.Nodes(), XNode.EqualityComparer);
+            Assert.Equal(
+                new XNode[] { new XText("abcd"), new XText("efgh") },
+                e1.Nodes(),
+                XNode.EqualityComparer
+            );
         }
     }
 }

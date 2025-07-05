@@ -6,6 +6,5 @@
     <MergedWrapperProjectReference Include="TypeGeneratorTest7??/Generated*.ilproj" />
     <MergedWrapperProjectReference Include="TestFramework/TestFramework.csproj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

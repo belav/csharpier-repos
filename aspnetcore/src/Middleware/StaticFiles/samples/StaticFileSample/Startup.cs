@@ -15,10 +15,7 @@ public class Startup
     {
         app.UseResponseCompression();
 
-        app.UseFileServer(new FileServerOptions
-        {
-            EnableDirectoryBrowsing = true
-        });
+        app.UseFileServer(new FileServerOptions { EnableDirectoryBrowsing = true });
     }
 
     public static Task Main(string[] args)
@@ -27,17 +24,18 @@ public class Startup
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .ConfigureLogging(factory =>
-                {
-                    factory.AddFilter("Console", level => level >= LogLevel.Debug);
-                    factory.AddConsole();
-                })
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseKestrel()
-                // .UseHttpSys()
-                .UseIISIntegration()
-                .UseStartup<Startup>();
-            }).Build();
+                    .ConfigureLogging(factory =>
+                    {
+                        factory.AddFilter("Console", level => level >= LogLevel.Debug);
+                        factory.AddConsole();
+                    })
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseKestrel()
+                    // .UseHttpSys()
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
+            .Build();
 
         return host.RunAsync();
     }

@@ -5,15 +5,16 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Text;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 using System.Xml.Xsl.Qil;
 
-namespace System.Xml.Xsl.Xslt {
-    using ContextInfo     = XsltInput.ContextInfo;
+namespace System.Xml.Xsl.Xslt
+{
+    using ContextInfo = XsltInput.ContextInfo;
     using XPathQilFactory = System.Xml.Xsl.XPath.XPathQilFactory;
 
     // Set of classes that represent XSLT AST
@@ -25,7 +26,8 @@ namespace System.Xml.Xsl.Xslt {
     // Plus couple subclasses of XslNode that represent different xslt instructions
     // including artifitial: Sort, ExNamespaceDecl, UseAttributeSets
 
-    internal enum XslNodeType {
+    internal enum XslNodeType
+    {
         Unknown = 0,
         ApplyImports,
         ApplyTemplates,
@@ -60,96 +62,133 @@ namespace System.Xml.Xsl.Xslt {
         WithParam,
     }
 
-    internal class NsDecl {
+    internal class NsDecl
+    {
         public readonly NsDecl Prev;
-        public readonly string Prefix;  // Empty string denotes the default namespace, null - extension or excluded namespace
-        public readonly string NsUri;   // null means "#all" -- all namespace defined above this one are excluded.
+        public readonly string Prefix; // Empty string denotes the default namespace, null - extension or excluded namespace
+        public readonly string NsUri; // null means "#all" -- all namespace defined above this one are excluded.
 
-        public NsDecl(NsDecl prev, string prefix, string nsUri) {
+        public NsDecl(NsDecl prev, string prefix, string nsUri)
+        {
             Debug.Assert(nsUri != null || Prefix == null);
-            this.Prev   = prev;
+            this.Prev = prev;
             this.Prefix = prefix;
-            this.NsUri  = nsUri;
+            this.NsUri = nsUri;
         }
     }
 
-    internal class XslNode {
+    internal class XslNode
+    {
         public readonly XslNodeType NodeType;
-        public ISourceLineInfo      SourceLine;
-        public NsDecl               Namespaces;
-        public readonly QilName     Name;   // name or mode
-        public readonly object      Arg;    // select or test or terminate or stylesheet;-)
-        public readonly XslVersion  XslVersion;
-        public XslFlags             Flags;
-        private List<XslNode>       content;
+        public ISourceLineInfo SourceLine;
+        public NsDecl Namespaces;
+        public readonly QilName Name; // name or mode
+        public readonly object Arg; // select or test or terminate or stylesheet;-)
+        public readonly XslVersion XslVersion;
+        public XslFlags Flags;
+        private List<XslNode> content;
 
-        public XslNode(XslNodeType nodeType, QilName name, object arg, XslVersion xslVer) {
-            this.NodeType   = nodeType;
-            this.Name       = name;
-            this.Arg        = arg;
+        public XslNode(XslNodeType nodeType, QilName name, object arg, XslVersion xslVer)
+        {
+            this.NodeType = nodeType;
+            this.Name = name;
+            this.Arg = arg;
             this.XslVersion = xslVer;
         }
 
-        public XslNode(XslNodeType nodeType) {
-            this.NodeType   = nodeType;
+        public XslNode(XslNodeType nodeType)
+        {
+            this.NodeType = nodeType;
             this.XslVersion = XslVersion.Current;
         }
 
-        public string   Select              { get { return (string)Arg; } }
-        public bool     ForwardsCompatible  { get { return XslVersion == XslVersion.ForwardsCompatible; } }
+        public string Select
+        {
+            get { return (string)Arg; }
+        }
+        public bool ForwardsCompatible
+        {
+            get { return XslVersion == XslVersion.ForwardsCompatible; }
+        }
 
         // -------------------------------- Content Management --------------------------------
 
         private static readonly IList<XslNode> EmptyList = new List<XslNode>().AsReadOnly();
 
-        public IList<XslNode> Content {
+        public IList<XslNode> Content
+        {
             get { return content ?? EmptyList; }
         }
 
-        public void SetContent(List<XslNode> content) {
+        public void SetContent(List<XslNode> content)
+        {
             this.content = content;
         }
 
-        public void AddContent(XslNode node) {
+        public void AddContent(XslNode node)
+        {
             Debug.Assert(node != null);
-            if (content == null) {
+            if (content == null)
+            {
                 content = new List<XslNode>();
             }
             content.Add(node);
         }
 
-        public void InsertContent(IEnumerable<XslNode> collection) {
-            if (content == null) {
+        public void InsertContent(IEnumerable<XslNode> collection)
+        {
+            if (content == null)
+            {
                 content = new List<XslNode>(collection);
-            } else {
+            }
+            else
+            {
                 content.InsertRange(0, collection);
             }
         }
 
-        internal string TraceName {
-            get {
-            #if DEBUG
+        internal string TraceName
+        {
+            get
+            {
+#if DEBUG
                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
                 string nodeTypeName;
-                switch (NodeType) {
-                case XslNodeType.AttributeSet : nodeTypeName = "attribute-set"; break;
-                case XslNodeType.Template     : nodeTypeName = "template";      break;
-                case XslNodeType.Param        : nodeTypeName = "param";         break;
-                case XslNodeType.Variable     : nodeTypeName = "variable";      break;
-                case XslNodeType.WithParam    : nodeTypeName = "with-param";    break;
-                default                       : nodeTypeName = NodeType.ToString(); break;
+                switch (NodeType)
+                {
+                    case XslNodeType.AttributeSet:
+                        nodeTypeName = "attribute-set";
+                        break;
+                    case XslNodeType.Template:
+                        nodeTypeName = "template";
+                        break;
+                    case XslNodeType.Param:
+                        nodeTypeName = "param";
+                        break;
+                    case XslNodeType.Variable:
+                        nodeTypeName = "variable";
+                        break;
+                    case XslNodeType.WithParam:
+                        nodeTypeName = "with-param";
+                        break;
+                    default:
+                        nodeTypeName = NodeType.ToString();
+                        break;
                 }
                 sb.Append(nodeTypeName);
-                if (Name != null) {
+                if (Name != null)
+                {
                     sb.Append(' ');
                     sb.Append(Name.QualifiedName);
                 }
                 ISourceLineInfo lineInfo = SourceLine;
-                if (lineInfo == null && NodeType == XslNodeType.AttributeSet) {
+                if (lineInfo == null && NodeType == XslNodeType.AttributeSet)
+                {
                     lineInfo = Content[0].SourceLine;
                     Debug.Assert(lineInfo != null);
                 }
-                if (lineInfo != null) {
+                if (lineInfo != null)
+                {
                     string fileName = SourceLineInfo.GetFileName(lineInfo.Uri);
                     int idx = fileName.LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1;
                     sb.Append(" (");
@@ -159,32 +198,39 @@ namespace System.Xml.Xsl.Xslt {
                     sb.Append(')');
                 }
                 return sb.ToString();
-            #else
+#else
                 return null;
-            #endif
+#endif
             }
         }
     }
 
-    internal abstract class ProtoTemplate : XslNode {
-        public QilFunction  Function;                   // Compiled body
+    internal abstract class ProtoTemplate : XslNode
+    {
+        public QilFunction Function; // Compiled body
 
-        public ProtoTemplate(XslNodeType nt, QilName name, XslVersion xslVer) : base(nt, name, null, xslVer) {}
+        public ProtoTemplate(XslNodeType nt, QilName name, XslVersion xslVer)
+            : base(nt, name, null, xslVer) { }
+
         public abstract string GetDebugName();
     }
 
-    internal enum CycleCheck {
-        NotStarted  = 0,
-        Processing  = 1,
-        Completed   = 2,
+    internal enum CycleCheck
+    {
+        NotStarted = 0,
+        Processing = 1,
+        Completed = 2,
     }
 
-    internal class AttributeSet : ProtoTemplate {
-        public CycleCheck               CycleCheck;     // Used to detect circular references
+    internal class AttributeSet : ProtoTemplate
+    {
+        public CycleCheck CycleCheck; // Used to detect circular references
 
-        public AttributeSet(QilName name, XslVersion xslVer) : base(XslNodeType.AttributeSet, name, xslVer) {}
+        public AttributeSet(QilName name, XslVersion xslVer)
+            : base(XslNodeType.AttributeSet, name, xslVer) { }
 
-        public override string GetDebugName() {
+        public override string GetDebugName()
+        {
             StringBuilder dbgName = new StringBuilder();
             dbgName.Append("<xsl:attribute-set name=\"");
             dbgName.Append(Name.QualifiedName);
@@ -192,50 +238,64 @@ namespace System.Xml.Xsl.Xslt {
             return dbgName.ToString();
         }
 
-        public new void AddContent(XslNode node) {
+        public new void AddContent(XslNode node)
+        {
             Debug.Assert(node != null && node.NodeType == XslNodeType.List);
             base.AddContent(node);
         }
 
-        public void MergeContent(AttributeSet other) {
+        public void MergeContent(AttributeSet other)
+        {
             InsertContent(other.Content);
         }
     }
 
-    internal class Template : ProtoTemplate {
-        public readonly string  Match;
+    internal class Template : ProtoTemplate
+    {
+        public readonly string Match;
         public readonly QilName Mode;
-        public readonly double  Priority;
-        public int              ImportPrecedence;
-        public int              OrderNumber;
+        public readonly double Priority;
+        public int ImportPrecedence;
+        public int OrderNumber;
 
-        public Template(QilName name, string match, QilName mode, double priority, XslVersion xslVer)
+        public Template(
+            QilName name,
+            string match,
+            QilName mode,
+            double priority,
+            XslVersion xslVer
+        )
             : base(XslNodeType.Template, name, xslVer)
         {
-            this.Match      = match;
-            this.Mode       = mode;
-            this.Priority   = priority;
+            this.Match = match;
+            this.Mode = mode;
+            this.Priority = priority;
         }
 
-        public override string GetDebugName() {
+        public override string GetDebugName()
+        {
             StringBuilder dbgName = new StringBuilder();
             dbgName.Append("<xsl:template");
-            if (Match != null) {
+            if (Match != null)
+            {
                 dbgName.Append(" match=\"");
                 dbgName.Append(Match);
                 dbgName.Append('"');
             }
-            if (Name != null) {
+            if (Name != null)
+            {
                 dbgName.Append(" name=\"");
                 dbgName.Append(Name.QualifiedName);
                 dbgName.Append('"');
             }
-            if (!double.IsNaN(Priority)) {
+            if (!double.IsNaN(Priority))
+            {
                 dbgName.Append(" priority=\"");
                 dbgName.Append(Priority.ToString(CultureInfo.InvariantCulture));
                 dbgName.Append('"');
             }
-            if (Mode.LocalName.Length != 0) {
+            if (Mode.LocalName.Length != 0)
+            {
                 dbgName.Append(" mode=\"");
                 dbgName.Append(Mode.QualifiedName);
                 dbgName.Append('"');
@@ -245,62 +305,78 @@ namespace System.Xml.Xsl.Xslt {
         }
     }
 
-    internal class VarPar : XslNode {
+    internal class VarPar : XslNode
+    {
         public XslFlags DefValueFlags;
-        public QilNode  Value;          // Contains value for WithParams and global VarPars
+        public QilNode Value; // Contains value for WithParams and global VarPars
 
-        public VarPar(XslNodeType nt, QilName name, string select, XslVersion xslVer) : base(nt, name, select, xslVer) {}
+        public VarPar(XslNodeType nt, QilName name, string select, XslVersion xslVer)
+            : base(nt, name, select, xslVer) { }
     }
 
-    internal class Sort : XslNode {
-        public readonly string  Lang;
-        public readonly string  DataType;
-        public readonly string  Order;
-        public readonly string  CaseOrder;
+    internal class Sort : XslNode
+    {
+        public readonly string Lang;
+        public readonly string DataType;
+        public readonly string Order;
+        public readonly string CaseOrder;
 
-        public Sort(string select, string lang, string dataType, string order, string caseOrder, XslVersion xslVer)
+        public Sort(
+            string select,
+            string lang,
+            string dataType,
+            string order,
+            string caseOrder,
+            XslVersion xslVer
+        )
             : base(XslNodeType.Sort, null, select, xslVer)
         {
-            this.Lang       = lang;
-            this.DataType   = dataType;
-            this.Order      = order;
-            this.CaseOrder  = caseOrder;
+            this.Lang = lang;
+            this.DataType = dataType;
+            this.Order = order;
+            this.CaseOrder = caseOrder;
         }
     }
 
-    internal class Keys : KeyedCollection<QilName, List<Key>> {
-        protected override QilName GetKeyForItem(List<Key> list) {
+    internal class Keys : KeyedCollection<QilName, List<Key>>
+    {
+        protected override QilName GetKeyForItem(List<Key> list)
+        {
             Debug.Assert(list != null && list.Count > 0);
             return list[0].Name;
         }
     }
 
-    internal class Key : XslNode {
-        public readonly string  Match;
-        public readonly string  Use;
-        public QilFunction      Function;
+    internal class Key : XslNode
+    {
+        public readonly string Match;
+        public readonly string Use;
+        public QilFunction Function;
 
         public Key(QilName name, string match, string use, XslVersion xslVer)
             : base(XslNodeType.Key, name, null, xslVer)
         {
             // match and use can be null in case of incorrect stylesheet
             Debug.Assert(name != null);
-            this.Match  = match;
-            this.Use    = use;
+            this.Match = match;
+            this.Use = use;
         }
 
-        public string GetDebugName() {
+        public string GetDebugName()
+        {
             StringBuilder dbgName = new StringBuilder();
             dbgName.Append("<xsl:key name=\"");
             dbgName.Append(Name.QualifiedName);
             dbgName.Append('"');
 
-            if (Match != null) {
+            if (Match != null)
+            {
                 dbgName.Append(" match=\"");
                 dbgName.Append(Match);
                 dbgName.Append('"');
             }
-            if (Use != null) {
+            if (Use != null)
+            {
                 dbgName.Append(" use=\"");
                 dbgName.Append(Use);
                 dbgName.Append('"');
@@ -310,53 +386,67 @@ namespace System.Xml.Xsl.Xslt {
         }
     }
 
-    internal enum NumberLevel {
+    internal enum NumberLevel
+    {
         Single,
         Multiple,
         Any,
     }
 
-    internal class Number : XslNode {
+    internal class Number : XslNode
+    {
         public readonly NumberLevel Level;
-        public readonly string      Count;
-        public readonly string      From;
-        public readonly string      Value;
-        public readonly string      Format;
-        public readonly string      Lang;
-        public readonly string      LetterValue;
-        public readonly string      GroupingSeparator;
-        public readonly string      GroupingSize;
+        public readonly string Count;
+        public readonly string From;
+        public readonly string Value;
+        public readonly string Format;
+        public readonly string Lang;
+        public readonly string LetterValue;
+        public readonly string GroupingSeparator;
+        public readonly string GroupingSize;
 
-        public Number(NumberLevel level, string count, string from, string value,
-            string format, string lang, string letterValue, string groupingSeparator, string groupingSize,
-            XslVersion xslVer) : base(XslNodeType.Number, null, null, xslVer)
+        public Number(
+            NumberLevel level,
+            string count,
+            string from,
+            string value,
+            string format,
+            string lang,
+            string letterValue,
+            string groupingSeparator,
+            string groupingSize,
+            XslVersion xslVer
+        )
+            : base(XslNodeType.Number, null, null, xslVer)
         {
-            this.Level  = level;
-            this.Count  = count;
-            this.From   = from;
-            this.Value  = value;
+            this.Level = level;
+            this.Count = count;
+            this.From = from;
+            this.Value = value;
             this.Format = format;
-            this.Lang   = lang;
-            this.LetterValue       = letterValue;
+            this.Lang = lang;
+            this.LetterValue = letterValue;
             this.GroupingSeparator = groupingSeparator;
-            this.GroupingSize      = groupingSize;
+            this.GroupingSize = groupingSize;
         }
     }
 
-    internal class NodeCtor : XslNode {
-        public readonly string  NameAvt;
-        public readonly string  NsAvt;
+    internal class NodeCtor : XslNode
+    {
+        public readonly string NameAvt;
+        public readonly string NsAvt;
 
         public NodeCtor(XslNodeType nt, string nameAvt, string nsAvt, XslVersion xslVer)
             : base(nt, null, null, xslVer)
         {
             this.NameAvt = nameAvt;
-            this.NsAvt   = nsAvt;
+            this.NsAvt = nsAvt;
         }
     }
 
-    internal class Text : XslNode {
-        public readonly SerializationHints  Hints;
+    internal class Text : XslNode
+    {
+        public readonly SerializationHints Hints;
 
         public Text(string data, SerializationHints hints, XslVersion xslVer)
             : base(XslNodeType.Text, null, data, xslVer)
@@ -365,157 +455,250 @@ namespace System.Xml.Xsl.Xslt {
         }
     }
 
-    internal class XslNodeEx : XslNode {
+    internal class XslNodeEx : XslNode
+    {
         public readonly ISourceLineInfo ElemNameLi;
         public readonly ISourceLineInfo EndTagLi;
 
-        public XslNodeEx(XslNodeType t, QilName name, object arg, ContextInfo ctxInfo, XslVersion xslVer)
+        public XslNodeEx(
+            XslNodeType t,
+            QilName name,
+            object arg,
+            ContextInfo ctxInfo,
+            XslVersion xslVer
+        )
             : base(t, name, arg, xslVer)
         {
             ElemNameLi = ctxInfo.elemNameLi;
             EndTagLi = ctxInfo.endTagLi;
         }
 
-        public XslNodeEx(XslNodeType t, QilName name, object arg, XslVersion xslVer) : base(t, name, arg, xslVer) {
-        }
+        public XslNodeEx(XslNodeType t, QilName name, object arg, XslVersion xslVer)
+            : base(t, name, arg, xslVer) { }
     }
 
-    internal static class AstFactory {
-        public static XslNode XslNode(XslNodeType nodeType, QilName name, string arg, XslVersion xslVer) {
+    internal static class AstFactory
+    {
+        public static XslNode XslNode(
+            XslNodeType nodeType,
+            QilName name,
+            string arg,
+            XslVersion xslVer
+        )
+        {
             return new XslNode(nodeType, name, arg, xslVer);
         }
 
-        public static XslNode ApplyImports(QilName mode, Stylesheet sheet, XslVersion xslVer) {
+        public static XslNode ApplyImports(QilName mode, Stylesheet sheet, XslVersion xslVer)
+        {
             return new XslNode(XslNodeType.ApplyImports, mode, sheet, xslVer);
         }
 
-        public static XslNodeEx ApplyTemplates(QilName mode, string select, ContextInfo ctxInfo, XslVersion xslVer) {
+        public static XslNodeEx ApplyTemplates(
+            QilName mode,
+            string select,
+            ContextInfo ctxInfo,
+            XslVersion xslVer
+        )
+        {
             return new XslNodeEx(XslNodeType.ApplyTemplates, mode, select, ctxInfo, xslVer);
         }
 
         // Special node for start apply-templates
-        public static XslNodeEx ApplyTemplates(QilName mode) {
-            return new XslNodeEx(XslNodeType.ApplyTemplates, mode, /*select:*/null, XslVersion.Current);
+        public static XslNodeEx ApplyTemplates(QilName mode)
+        {
+            return new XslNodeEx(
+                XslNodeType.ApplyTemplates,
+                mode, /*select:*/
+                null,
+                XslVersion.Current
+            );
         }
 
-        public static NodeCtor Attribute(string nameAvt, string nsAvt, XslVersion xslVer) {
+        public static NodeCtor Attribute(string nameAvt, string nsAvt, XslVersion xslVer)
+        {
             return new NodeCtor(XslNodeType.Attribute, nameAvt, nsAvt, xslVer);
         }
 
-        public static AttributeSet AttributeSet(QilName name) {
+        public static AttributeSet AttributeSet(QilName name)
+        {
             return new AttributeSet(name, XslVersion.Current);
         }
 
-        public static XslNodeEx CallTemplate(QilName name, ContextInfo ctxInfo) {
+        public static XslNodeEx CallTemplate(QilName name, ContextInfo ctxInfo)
+        {
             return new XslNodeEx(XslNodeType.CallTemplate, name, null, ctxInfo, XslVersion.Current);
         }
 
-        public static XslNode Choose() {
+        public static XslNode Choose()
+        {
             return new XslNode(XslNodeType.Choose);
         }
 
-        public static XslNode Comment() {
+        public static XslNode Comment()
+        {
             return new XslNode(XslNodeType.Comment);
         }
 
-        public static XslNode Copy() {
+        public static XslNode Copy()
+        {
             return new XslNode(XslNodeType.Copy);
         }
 
-        public static XslNode CopyOf(string select, XslVersion xslVer) {
+        public static XslNode CopyOf(string select, XslVersion xslVer)
+        {
             return new XslNode(XslNodeType.CopyOf, null, select, xslVer);
         }
 
-        public static NodeCtor Element(string nameAvt, string nsAvt, XslVersion xslVer) {
+        public static NodeCtor Element(string nameAvt, string nsAvt, XslVersion xslVer)
+        {
             return new NodeCtor(XslNodeType.Element, nameAvt, nsAvt, xslVer);
         }
 
-        public static XslNode Error(string message) {
+        public static XslNode Error(string message)
+        {
             return new XslNode(XslNodeType.Error, null, message, XslVersion.Current);
         }
 
-        public static XslNodeEx ForEach(string select, ContextInfo ctxInfo, XslVersion xslVer) {
+        public static XslNodeEx ForEach(string select, ContextInfo ctxInfo, XslVersion xslVer)
+        {
             return new XslNodeEx(XslNodeType.ForEach, null, select, ctxInfo, xslVer);
         }
 
-        public static XslNode If(string test, XslVersion xslVer) {
+        public static XslNode If(string test, XslVersion xslVer)
+        {
             return new XslNode(XslNodeType.If, null, test, xslVer);
         }
 
-        public static Key Key(QilName name, string match, string use, XslVersion xslVer) {
+        public static Key Key(QilName name, string match, string use, XslVersion xslVer)
+        {
             return new Key(name, match, use, xslVer);
         }
 
-        public static XslNode List() {
+        public static XslNode List()
+        {
             return new XslNode(XslNodeType.List);
         }
 
-        public static XslNode LiteralAttribute(QilName name, string value, XslVersion xslVer) {
+        public static XslNode LiteralAttribute(QilName name, string value, XslVersion xslVer)
+        {
             return new XslNode(XslNodeType.LiteralAttribute, name, value, xslVer);
         }
 
-        public static XslNode LiteralElement(QilName name) {
+        public static XslNode LiteralElement(QilName name)
+        {
             return new XslNode(XslNodeType.LiteralElement, name, null, XslVersion.Current);
         }
 
-        public static XslNode Message(bool term) {
+        public static XslNode Message(bool term)
+        {
             return new XslNode(XslNodeType.Message, null, term, XslVersion.Current);
         }
 
-        public static XslNode Nop() {
+        public static XslNode Nop()
+        {
             return new XslNode(XslNodeType.Nop);
         }
 
-        public static Number Number(NumberLevel level, string count, string from, string value,
-            string format, string lang, string letterValue, string groupingSeparator, string groupingSize,
-            XslVersion xslVer)
+        public static Number Number(
+            NumberLevel level,
+            string count,
+            string from,
+            string value,
+            string format,
+            string lang,
+            string letterValue,
+            string groupingSeparator,
+            string groupingSize,
+            XslVersion xslVer
+        )
         {
-            return new Number(level, count, from, value, format, lang, letterValue, groupingSeparator, groupingSize, xslVer);
+            return new Number(
+                level,
+                count,
+                from,
+                value,
+                format,
+                lang,
+                letterValue,
+                groupingSeparator,
+                groupingSize,
+                xslVer
+            );
         }
 
-        public static XslNode Otherwise() {
+        public static XslNode Otherwise()
+        {
             return new XslNode(XslNodeType.Otherwise);
         }
 
-        public static XslNode PI(string name, XslVersion xslVer) {
+        public static XslNode PI(string name, XslVersion xslVer)
+        {
             return new XslNode(XslNodeType.PI, null, name, xslVer);
         }
 
-        public static Sort Sort(string select, string lang, string dataType, string order, string caseOrder, XslVersion xslVer) {
+        public static Sort Sort(
+            string select,
+            string lang,
+            string dataType,
+            string order,
+            string caseOrder,
+            XslVersion xslVer
+        )
+        {
             return new Sort(select, lang, dataType, order, caseOrder, xslVer);
         }
 
-        public static Template Template(QilName name, string match, QilName mode, double priority, XslVersion xslVer) {
+        public static Template Template(
+            QilName name,
+            string match,
+            QilName mode,
+            double priority,
+            XslVersion xslVer
+        )
+        {
             return new Template(name, match, mode, priority, xslVer);
         }
 
-        public static XslNode Text(string data) {
+        public static XslNode Text(string data)
+        {
             return new Text(data, SerializationHints.None, XslVersion.Current);
         }
 
-        public static XslNode Text(string data, SerializationHints hints) {
+        public static XslNode Text(string data, SerializationHints hints)
+        {
             return new Text(data, hints, XslVersion.Current);
         }
 
-        public static XslNode UseAttributeSet(QilName name) {
+        public static XslNode UseAttributeSet(QilName name)
+        {
             return new XslNode(XslNodeType.UseAttributeSet, name, null, XslVersion.Current);
         }
 
-        public static VarPar VarPar(XslNodeType nt, QilName name, string select, XslVersion xslVer) {
+        public static VarPar VarPar(XslNodeType nt, QilName name, string select, XslVersion xslVer)
+        {
             return new VarPar(nt, name, select, xslVer);
         }
 
-        public static VarPar WithParam(QilName name) {
-            return VarPar(XslNodeType.WithParam, name, /*select*/null, XslVersion.Current);
+        public static VarPar WithParam(QilName name)
+        {
+            return VarPar(
+                XslNodeType.WithParam,
+                name, /*select*/
+                null,
+                XslVersion.Current
+            );
         }
 
         private static QilFactory f = new QilFactory();
 
-        public static QilName QName(string local, string uri, string prefix) {
+        public static QilName QName(string local, string uri, string prefix)
+        {
             return f.LiteralQName(local, uri, prefix);
         }
 
-        public static QilName QName(string local) {
+        public static QilName QName(string local)
+        {
             return f.LiteralQName(local);
         }
     }

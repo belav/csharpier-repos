@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private XmlReader _xmlReader;
         private readonly Reader _textReader = new();
 
-        private static readonly ObjectPool<XmlFragmentParser> s_pool = SharedPools.Default<XmlFragmentParser>();
+        private static readonly ObjectPool<XmlFragmentParser> s_pool =
+            SharedPools.Default<XmlFragmentParser>();
 
         /// <summary>
         /// Parse the given XML fragment. The given callback is executed until either the end of the fragment
@@ -36,7 +37,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// It is important that the <paramref name="callback"/> action advances the <see cref="XmlReader"/>,
         /// otherwise parsing will never complete.
         /// </remarks>
-        public static void ParseFragment<TArg>(string xmlFragment, Action<XmlReader, TArg> callback, TArg arg)
+        public static void ParseFragment<TArg>(
+            string xmlFragment,
+            Action<XmlReader, TArg> callback,
+            TArg arg
+        )
         {
             var instance = s_pool.Allocate();
             try
@@ -144,7 +149,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             {
                 _text = text;
 
-                // The first read shall read the <root>, 
+                // The first read shall read the <root>,
                 // the subsequents reads shall start with <current> element
                 if (_position > 0)
                 {
@@ -171,13 +176,31 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 _position += EncodeAndAdvance(s_rootStart, _position, buffer, ref index, ref count);
 
                 // <current>
-                _position += EncodeAndAdvance(s_currentStart, _position - s_rootStart.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    s_currentStart,
+                    _position - s_rootStart.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // text
-                _position += EncodeAndAdvance(_text, _position - s_rootStart.Length - s_currentStart.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    _text,
+                    _position - s_rootStart.Length - s_currentStart.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // </current>
-                _position += EncodeAndAdvance(s_currentEnd, _position - s_rootStart.Length - s_currentStart.Length - _text.Length, buffer, ref index, ref count);
+                _position += EncodeAndAdvance(
+                    s_currentEnd,
+                    _position - s_rootStart.Length - s_currentStart.Length - _text.Length,
+                    buffer,
+                    ref index,
+                    ref count
+                );
 
                 // Pretend that the stream is infinite, i.e. never return 0 characters read.
                 if (initialCount == count)
@@ -189,7 +212,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return initialCount - count;
             }
 
-            private static int EncodeAndAdvance(string src, int srcIndex, char[] dest, ref int destIndex, ref int destCount)
+            private static int EncodeAndAdvance(
+                string src,
+                int srcIndex,
+                char[] dest,
+                ref int destIndex,
+                ref int destCount
+            )
             {
                 if (destCount == 0 || srcIndex < 0 || srcIndex >= src.Length)
                 {

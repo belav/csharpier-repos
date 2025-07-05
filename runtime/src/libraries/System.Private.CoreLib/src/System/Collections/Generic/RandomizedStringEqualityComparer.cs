@@ -11,12 +11,16 @@ namespace System.Collections.Generic
     /// *does not* need to stay in sync with <see cref="string.GetHashCode"/>, which for stability
     /// is required to use an app-global seed.
     /// </summary>
-    internal abstract class RandomizedStringEqualityComparer : EqualityComparer<string?>, IInternalStringEqualityComparer
+    internal abstract class RandomizedStringEqualityComparer
+        : EqualityComparer<string?>,
+            IInternalStringEqualityComparer
     {
         private readonly MarvinSeed _seed;
         private readonly IEqualityComparer<string?> _underlyingComparer;
 
-        private unsafe RandomizedStringEqualityComparer(IEqualityComparer<string?> underlyingComparer)
+        private unsafe RandomizedStringEqualityComparer(
+            IEqualityComparer<string?> underlyingComparer
+        )
         {
             _underlyingComparer = underlyingComparer;
 
@@ -26,7 +30,10 @@ namespace System.Collections.Generic
             }
         }
 
-        internal static RandomizedStringEqualityComparer Create(IEqualityComparer<string?> underlyingComparer, bool ignoreCase)
+        internal static RandomizedStringEqualityComparer Create(
+            IEqualityComparer<string?> underlyingComparer,
+            bool ignoreCase
+        )
         {
             if (!ignoreCase)
             {
@@ -49,9 +56,7 @@ namespace System.Collections.Generic
         private sealed class OrdinalComparer : RandomizedStringEqualityComparer
         {
             internal OrdinalComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer)
-            {
-            }
+                : base(wrappedComparer) { }
 
             public override bool Equals(string? x, string? y) => string.Equals(x, y);
 
@@ -67,18 +72,19 @@ namespace System.Collections.Generic
                 return Marvin.ComputeHash32(
                     ref Unsafe.As<char, byte>(ref obj.GetRawStringData()),
                     (uint)obj.Length * 2,
-                    _seed.p0, _seed.p1);
+                    _seed.p0,
+                    _seed.p1
+                );
             }
         }
 
         private sealed class OrdinalIgnoreCaseComparer : RandomizedStringEqualityComparer
         {
             internal OrdinalIgnoreCaseComparer(IEqualityComparer<string?> wrappedComparer)
-                : base(wrappedComparer)
-            {
-            }
+                : base(wrappedComparer) { }
 
-            public override bool Equals(string? x, string? y) => string.EqualsOrdinalIgnoreCase(x, y);
+            public override bool Equals(string? x, string? y) =>
+                string.EqualsOrdinalIgnoreCase(x, y);
 
             public override int GetHashCode(string? obj)
             {
@@ -92,7 +98,9 @@ namespace System.Collections.Generic
                 return Marvin.ComputeHash32OrdinalIgnoreCase(
                     ref obj.GetRawStringData(),
                     obj.Length,
-                    _seed.p0, _seed.p1);
+                    _seed.p0,
+                    _seed.p1
+                );
             }
         }
     }

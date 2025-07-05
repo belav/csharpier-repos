@@ -24,7 +24,10 @@ public class ListAdapterTest
 
         // Assert
         Assert.False(addStatus);
-        Assert.Equal($"The type '{targetObject.GetType().FullName}' which is an array is not supported for json patch operations as it has a fixed size.", message);
+        Assert.Equal(
+            $"The type '{targetObject.GetType().FullName}' which is an array is not supported for json patch operations as it has a fixed size.",
+            message
+        );
     }
 
     [Fact]
@@ -42,7 +45,10 @@ public class ListAdapterTest
 
         // Assert
         Assert.False(addStatus);
-        Assert.Equal($"The type '{targetObject.GetType().FullName}' which is a non generic list is not supported for json patch operations. Only generic list types are supported.", message);
+        Assert.Equal(
+            $"The type '{targetObject.GetType().FullName}' which is a non generic list is not supported for json patch operations. Only generic list types are supported.",
+            message
+        );
     }
 
     [Fact]
@@ -55,7 +61,13 @@ public class ListAdapterTest
         var position = targetObject.Count.ToString(CultureInfo.InvariantCulture);
 
         // Act
-        var addStatus = listAdapter.TryAdd(targetObject, position, resolver, "Rob", out var message);
+        var addStatus = listAdapter.TryAdd(
+            targetObject,
+            position,
+            resolver,
+            "Rob",
+            out var message
+        );
 
         // Assert
         Assert.Null(message);
@@ -80,7 +92,10 @@ public class ListAdapterTest
 
         // Assert
         Assert.False(addStatus);
-        Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
+        Assert.Equal(
+            $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+            message
+        );
     }
 
     [Theory]
@@ -106,16 +121,16 @@ public class ListAdapterTest
         get
         {
             return new TheoryData<List<int>, List<int>>()
+            {
                 {
-                    {
-                        new List<int>() {  },
-                        new List<int>() { 20 }
-                    },
-                    {
-                        new List<int>() { 5, 10 },
-                        new List<int>() { 5, 10, 20 }
-                    }
-                };
+                    new List<int>() { },
+                    new List<int>() { 20 }
+                },
+                {
+                    new List<int>() { 5, 10 },
+                    new List<int>() { 5, 10, 20 }
+                },
+            };
         }
     }
 
@@ -146,7 +161,13 @@ public class ListAdapterTest
         var targetObject = new List<string>() { "James", "Mike" };
 
         // Act
-        var addStatus = listAdapter.TryAdd(targetObject, "-", resolver, value: null, errorMessage: out var message);
+        var addStatus = listAdapter.TryAdd(
+            targetObject,
+            "-",
+            resolver,
+            value: null,
+            errorMessage: out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -196,45 +217,56 @@ public class ListAdapterTest
         get
         {
             return new TheoryData<IList, object, string, IList>()
+            {
                 {
-                    {
-                        new List<string>() { },
-                        "a",
-                        "-",
-                        new List<string>() { "a" }
-                    },
-                    {
-                        new List<string>() { "a", "b" },
-                        "c",
-                        "-",
-                        new List<string>() { "a", "b", "c" }
-                    },
-                    {
-                        new List<string>() { "a", "b" },
-                        "c",
-                        "0",
-                        new List<string>() { "c", "a", "b" }
-                    },
-                    {
-                        new List<string>() { "a", "b" },
-                        "c",
-                        "1",
-                        new List<string>() { "a", "c", "b" }
-                    }
-                };
+                    new List<string>() { },
+                    "a",
+                    "-",
+                    new List<string>() { "a" }
+                },
+                {
+                    new List<string>() { "a", "b" },
+                    "c",
+                    "-",
+                    new List<string>() { "a", "b", "c" }
+                },
+                {
+                    new List<string>() { "a", "b" },
+                    "c",
+                    "0",
+                    new List<string>() { "c", "a", "b" }
+                },
+                {
+                    new List<string>() { "a", "b" },
+                    "c",
+                    "1",
+                    new List<string>() { "a", "c", "b" }
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(AddingDifferentComplexTypeWorksData))]
-    public void Add_DifferentComplexTypeWorks(IList targetObject, object value, string position, IList expected)
+    public void Add_DifferentComplexTypeWorks(
+        IList targetObject,
+        object value,
+        string position,
+        IList expected
+    )
     {
         // Arrange
         var resolver = new DefaultContractResolver();
         var listAdapter = new ListAdapter();
 
         // Act
-        var addStatus = listAdapter.TryAdd(targetObject, position, resolver, value, out var message);
+        var addStatus = listAdapter.TryAdd(
+            targetObject,
+            position,
+            resolver,
+            value,
+            out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -251,45 +283,56 @@ public class ListAdapterTest
             var sDto2 = new SimpleObject();
             var sDto3 = new SimpleObject();
             return new TheoryData<IList, object, string, IList>()
+            {
                 {
-                    {
-                        new List<SimpleObject>() { },
-                        sDto1,
-                        "-",
-                        new List<SimpleObject>() { sDto1 }
-                    },
-                    {
-                        new List<SimpleObject>() { sDto1, sDto2 },
-                        sDto3,
-                        "-",
-                        new List<SimpleObject>() { sDto1, sDto2, sDto3 }
-                    },
-                    {
-                        new List<SimpleObject>() { sDto1, sDto2 },
-                        sDto3,
-                        "0",
-                        new List<SimpleObject>() { sDto3, sDto1, sDto2 }
-                    },
-                    {
-                        new List<SimpleObject>() {  sDto1, sDto2 },
-                        sDto3,
-                        "1",
-                        new List<SimpleObject>() { sDto1, sDto3, sDto2 }
-                    }
-                };
+                    new List<SimpleObject>() { },
+                    sDto1,
+                    "-",
+                    new List<SimpleObject>() { sDto1 }
+                },
+                {
+                    new List<SimpleObject>() { sDto1, sDto2 },
+                    sDto3,
+                    "-",
+                    new List<SimpleObject>() { sDto1, sDto2, sDto3 }
+                },
+                {
+                    new List<SimpleObject>() { sDto1, sDto2 },
+                    sDto3,
+                    "0",
+                    new List<SimpleObject>() { sDto3, sDto1, sDto2 }
+                },
+                {
+                    new List<SimpleObject>() { sDto1, sDto2 },
+                    sDto3,
+                    "1",
+                    new List<SimpleObject>() { sDto1, sDto3, sDto2 }
+                },
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(AddingKeepsObjectReferenceData))]
-    public void Add_KeepsObjectReference(IList targetObject, object value, string position, IList expected)
+    public void Add_KeepsObjectReference(
+        IList targetObject,
+        object value,
+        string position,
+        IList expected
+    )
     {
         // Arrange
         var resolver = new DefaultContractResolver();
         var listAdapter = new ListAdapter();
 
         // Act
-        var addStatus = listAdapter.TryAdd(targetObject, position, resolver, value, out var message);
+        var addStatus = listAdapter.TryAdd(
+            targetObject,
+            position,
+            resolver,
+            value,
+            out var message
+        );
 
         // Assert
         Assert.True(addStatus);
@@ -310,11 +353,20 @@ public class ListAdapterTest
         var listAdapter = new ListAdapter();
 
         // Act
-        var getStatus = listAdapter.TryGet(targetObject, position, resolver, out var value, out var message);
+        var getStatus = listAdapter.TryGet(
+            targetObject,
+            position,
+            resolver,
+            out var value,
+            out var message
+        );
 
         // Assert
         Assert.False(getStatus);
-        Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
+        Assert.Equal(
+            $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+            message
+        );
     }
 
     [Theory]
@@ -329,7 +381,13 @@ public class ListAdapterTest
         var listAdapter = new ListAdapter();
 
         // Act
-        var getStatus = listAdapter.TryGet(targetObject, position, resolver, out var value, out var message);
+        var getStatus = listAdapter.TryGet(
+            targetObject,
+            position,
+            resolver,
+            out var value,
+            out var message
+        );
 
         // Assert
         Assert.True(getStatus);
@@ -353,7 +411,10 @@ public class ListAdapterTest
 
         // Assert
         Assert.False(removeStatus);
-        Assert.Equal($"The index value provided by path segment '{position}' is out of bounds of the array size.", message);
+        Assert.Equal(
+            $"The index value provided by path segment '{position}' is out of bounds of the array size.",
+            message
+        );
     }
 
     [Theory]
@@ -384,7 +445,13 @@ public class ListAdapterTest
         var listAdapter = new ListAdapter();
 
         // Act
-        var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver, "James", out var message);
+        var replaceStatus = listAdapter.TryReplace(
+            targetObject,
+            "-",
+            resolver,
+            "James",
+            out var message
+        );
 
         // Assert
         Assert.False(replaceStatus);
@@ -400,7 +467,13 @@ public class ListAdapterTest
         var listAdapter = new ListAdapter();
 
         // Act
-        var replaceStatus = listAdapter.TryReplace(targetObject, "-", resolver, "30", out var message);
+        var replaceStatus = listAdapter.TryReplace(
+            targetObject,
+            "-",
+            resolver,
+            "30",
+            out var message
+        );
 
         // Assert
         Assert.True(replaceStatus);
@@ -413,16 +486,16 @@ public class ListAdapterTest
         get
         {
             return new TheoryData<string, List<int>>()
+            {
                 {
-                    {
-                        "0",
-                        new List<int>() { 30, 20 }
-                    },
-                    {
-                        "1",
-                        new List<int>() { 10, 30 }
-                    }
-                };
+                    "0",
+                    new List<int>() { 30, 20 }
+                },
+                {
+                    "1",
+                    new List<int>() { 10, 30 }
+                },
+            };
         }
     }
 
@@ -436,7 +509,13 @@ public class ListAdapterTest
         var listAdapter = new ListAdapter();
 
         // Act
-        var replaceStatus = listAdapter.TryReplace(targetObject, position, resolver, "30", out var message);
+        var replaceStatus = listAdapter.TryReplace(
+            targetObject,
+            position,
+            resolver,
+            "30",
+            out var message
+        );
 
         // Assert
         Assert.True(replaceStatus);
@@ -467,10 +546,17 @@ public class ListAdapterTest
         var resolver = new DefaultContractResolver();
         var targetObject = new List<int>() { 10, 20 };
         var listAdapter = new ListAdapter();
-        var expectedErrorMessage = "The current value '20' at position '1' is not equal to the test value '10'.";
+        var expectedErrorMessage =
+            "The current value '20' at position '1' is not equal to the test value '10'.";
 
         // Act
-        var testStatus = listAdapter.TryTest(targetObject, "1", resolver, "10", out var errorMessage);
+        var testStatus = listAdapter.TryTest(
+            targetObject,
+            "1",
+            resolver,
+            "10",
+            out var errorMessage
+        );
 
         //Assert
         Assert.False(testStatus);
@@ -484,10 +570,17 @@ public class ListAdapterTest
         var resolver = new DefaultContractResolver();
         var targetObject = new List<int>() { 10, 20 };
         var listAdapter = new ListAdapter();
-        var expectedErrorMessage = "The index value provided by path segment '2' is out of bounds of the array size.";
+        var expectedErrorMessage =
+            "The index value provided by path segment '2' is out of bounds of the array size.";
 
         // Act
-        var testStatus = listAdapter.TryTest(targetObject, "2", resolver, "10", out var errorMessage);
+        var testStatus = listAdapter.TryTest(
+            targetObject,
+            "2",
+            resolver,
+            "10",
+            out var errorMessage
+        );
 
         //Assert
         Assert.False(testStatus);

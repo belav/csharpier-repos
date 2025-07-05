@@ -44,13 +44,18 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs9LocalKeyId keyKeyId = Assert.IsType<Pkcs9LocalKeyId>(keyBagAttrs[0].Values[0]);
             Assert.Equal("1.3.6.1.4.1.311.17.1", keyBagAttrs[1].Oid.Value);
             Assert.Equal(1, keyBagAttrs[1].Values.Count);
-            Pkcs9AttributeObject cspNameAttr = Assert.IsType<Pkcs9AttributeObject>(keyBagAttrs[1].Values[0]);
+            Pkcs9AttributeObject cspNameAttr = Assert.IsType<Pkcs9AttributeObject>(
+                keyBagAttrs[1].Values[0]
+            );
 
-            byte[] cspNameBytes = Encoding.BigEndianUnicode.GetBytes("Microsoft Strong Cryptographic Provider");
+            byte[] cspNameBytes = Encoding.BigEndianUnicode.GetBytes(
+                "Microsoft Strong Cryptographic Provider"
+            );
 
             Assert.Equal(
                 $"1E{cspNameBytes.Length:X2}{cspNameBytes.ByteArrayToHex()}",
-                cspNameAttr.RawData.ByteArrayToHex());
+                cspNameAttr.RawData.ByteArrayToHex()
+            );
 
             List<Pkcs12SafeBag> safe1Bags = new List<Pkcs12SafeBag>(authSafe[1].GetBags());
 
@@ -59,7 +64,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12CertBag certBag = (Pkcs12CertBag)safe1Bags[0];
 
             Assert.True(certBag.IsX509Certificate, "certBag.IsX509Certificate");
-            Assert.InRange(certBag.EncodedCertificate.Length, loader.CerData.Length + 2, int.MaxValue);
+            Assert.InRange(
+                certBag.EncodedCertificate.Length,
+                loader.CerData.Length + 2,
+                int.MaxValue
+            );
 
             CryptographicAttributeObjectCollection certBagAttrs = certBag.Attributes;
             Assert.Same(certBagAttrs, certBag.Attributes);
@@ -89,7 +98,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 rsa.ImportEncryptedPkcs8PrivateKey(
                     loader.Password,
                     shroudedKeyBag.EncryptedPkcs8PrivateKey.Span,
-                    out bytesRead);
+                    out bytesRead
+                );
 
                 byte[] dec = rsa.Decrypt(encrypted, RSAEncryptionPadding.OaepSHA1);
                 Assert.Equal(data, dec);
@@ -117,8 +127,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Assert.Equal(Pkcs12ConfidentialityMode.Password, authSafe[0].ConfidentialityMode);
             Assert.Equal(Pkcs12ConfidentialityMode.None, authSafe[1].ConfidentialityMode);
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => authSafe[0].Decrypt(loader.Password.AsSpan(1)));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                authSafe[0].Decrypt(loader.Password.AsSpan(1))
+            );
 
             Assert.Equal(Pkcs12ConfidentialityMode.Password, authSafe[0].ConfidentialityMode);
             authSafe[0].Decrypt(loader.Password);
@@ -129,7 +140,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12CertBag certBag = Assert.IsType<Pkcs12CertBag>(safe0Bags[0]);
 
             Assert.True(certBag.IsX509Certificate, "certBag.IsX509Certificate");
-            Assert.InRange(certBag.EncodedCertificate.Length, loader.CerData.Length + 2, int.MaxValue);
+            Assert.InRange(
+                certBag.EncodedCertificate.Length,
+                loader.CerData.Length + 2,
+                int.MaxValue
+            );
 
             List<Pkcs12SafeBag> safe1Bags = new List<Pkcs12SafeBag>(authSafe[1].GetBags());
             Assert.Equal(1, safe0Bags.Count);
@@ -154,7 +169,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 rsa.ImportEncryptedPkcs8PrivateKey(
                     loader.Password,
                     shroudedKeyBag.EncryptedPkcs8PrivateKey.Span,
-                    out bytesRead);
+                    out bytesRead
+                );
 
                 byte[] dec = rsa.Decrypt(encrypted, RSAEncryptionPadding.OaepSHA1);
                 Assert.Equal(data, dec);

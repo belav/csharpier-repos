@@ -23,15 +23,16 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -50,7 +51,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'channel': {
                 'title': 'James Newton-King',
                 'link': 'http://james.newtonking.com',
@@ -80,9 +82,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             JObject rss = JObject.Parse(json);
 
-            var postTitles =
-                from p in rss["channel"]["item"]
-                select (string)p["title"];
+            var postTitles = from p in rss["channel"]["item"] select (string)p["title"];
 
             foreach (var item in postTitles)
             {
@@ -93,8 +93,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
 
             var categories =
                 from c in rss["channel"]["item"].Children()["category"].Values<string>()
-                group c by c
-                into g
+                group c by c into g
                 orderby g.Count() descending
                 select new { Category = g.Key, Count = g.Count() };
 

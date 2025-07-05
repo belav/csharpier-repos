@@ -1,10 +1,12 @@
 <Type Name="LdapSortControl" FullName="Novell.Directory.Ldap.Controls.LdapSortControl">
-  <TypeSignature Language="C#" Value="public class LdapSortControl : Novell.Directory.Ldap.LdapControl, System.ICloneable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapSortControl : Novell.Directory.Ldap.LdapControl, System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +53,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapSortControl(Novell.Directory.Ldap.Controls.LdapSortKey key, bool critical)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapSortControl(Novell.Directory.Ldap.Controls.LdapSortKey key, bool critical)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="key" Type="Novell.Directory.Ldap.Controls.LdapSortKey" />
@@ -65,7 +70,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapSortControl(Novell.Directory.Ldap.Controls.LdapSortKey[] keys, bool critical)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapSortControl(Novell.Directory.Ldap.Controls.LdapSortKey[] keys, bool critical)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="keys" Type="Novell.Directory.Ldap.Controls.LdapSortKey[]" />

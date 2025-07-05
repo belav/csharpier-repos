@@ -36,8 +36,14 @@ namespace System.Web.WebPages.Validation.Test
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.Add(field: null), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.Add(field: String.Empty), "field");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.Add(field: null),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.Add(field: String.Empty),
+                "field"
+            );
         }
 
         [Fact]
@@ -59,7 +65,11 @@ namespace System.Web.WebPages.Validation.Test
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
             // Act and Assert
-            Assert.ThrowsArgumentNull(() => validationHelper.Add("foo", Validator.Required(), null, Validator.Range(0, 10)), "validators");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    validationHelper.Add("foo", Validator.Required(), null, Validator.Range(0, 10)),
+                "validators"
+            );
         }
 
         [Fact]
@@ -102,7 +112,9 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             string message = "Foo is required.";
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "some value" }));
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(new { foo = "some value" })
+            );
 
             // Act
             validationHelper.RequireField("foo", message);
@@ -178,8 +190,14 @@ namespace System.Web.WebPages.Validation.Test
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.For(field: null), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.For(field: String.Empty), "field");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.For(field: null),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.For(field: String.Empty),
+                "field"
+            );
         }
 
         [Fact]
@@ -190,10 +208,22 @@ namespace System.Web.WebPages.Validation.Test
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.RequireField(field: null), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.RequireField(field: String.Empty), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.RequireField(field: null, errorMessage: "baz"), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.RequireField(field: String.Empty, errorMessage: null), "field");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.RequireField(field: null),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.RequireField(field: String.Empty),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.RequireField(field: null, errorMessage: "baz"),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.RequireField(field: String.Empty, errorMessage: null),
+                "field"
+            );
         }
 
         [Fact]
@@ -205,8 +235,14 @@ namespace System.Web.WebPages.Validation.Test
 
             // Act and Assert
             Assert.ThrowsArgumentNull(() => validationHelper.RequireFields(fields: null), "fields");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.RequireFields(fields: new[] { "foo", null }), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.RequireFields(fields: new[] { "foo", "" }), "field");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.RequireFields(fields: new[] { "foo", null }),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.RequireFields(fields: new[] { "foo", "" }),
+                "field"
+            );
         }
 
         [Fact]
@@ -217,8 +253,14 @@ namespace System.Web.WebPages.Validation.Test
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
             // Act and Assert
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.Add(field: null), "field");
-            Assert.ThrowsArgumentNullOrEmptyString(() => validationHelper.Add(field: String.Empty), "field");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.Add(field: null),
+                "field"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => validationHelper.Add(field: String.Empty),
+                "field"
+            );
         }
 
         [Fact]
@@ -229,8 +271,18 @@ namespace System.Web.WebPages.Validation.Test
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
             // Act and Assert
-            Assert.ThrowsArgumentNull(() => validationHelper.Add(field: "foo", validators: null), "validators");
-            Assert.ThrowsArgumentNull(() => validationHelper.Add(field: "foo", validators: new[] { Validator.DateTime(), null }), "validators");
+            Assert.ThrowsArgumentNull(
+                () => validationHelper.Add(field: "foo", validators: null),
+                "validators"
+            );
+            Assert.ThrowsArgumentNull(
+                () =>
+                    validationHelper.Add(
+                        field: "foo",
+                        validators: new[] { Validator.DateTime(), null }
+                    ),
+                "validators"
+            );
         }
 
         [Fact]
@@ -261,7 +313,10 @@ namespace System.Web.WebPages.Validation.Test
             var validationHtml = validationHelper.For("foo");
 
             // Assert
-            Assert.Equal(@"data-val-required=""Foo is required."" data-val=""true""", validationHtml.ToString());
+            Assert.Equal(
+                @"data-val-required=""Foo is required."" data-val=""true""",
+                validationHtml.ToString()
+            );
         }
 
         [Fact]
@@ -284,7 +339,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var modelStateDictionary = new ModelStateDictionary();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(), modelStateDictionary);
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(),
+                modelStateDictionary
+            );
 
             // Act
             validationHelper.RequireFields(new[] { "foo", "bar" });
@@ -304,7 +362,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var modelStateDictionary = new ModelStateDictionary();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(), modelStateDictionary);
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(),
+                modelStateDictionary
+            );
 
             // Act
             validationHelper.RequireFields("foo", "bar");
@@ -324,7 +385,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var modelStateDictionary = new ModelStateDictionary();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(), modelStateDictionary);
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(),
+                modelStateDictionary
+            );
 
             // Act
             validationHelper.RequireFields("foo", "bar");
@@ -357,7 +421,10 @@ namespace System.Web.WebPages.Validation.Test
         {
             // Arrange
             var modelStateDictionary = new ModelStateDictionary();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(), modelStateDictionary);
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(),
+                modelStateDictionary
+            );
 
             // Act
             modelStateDictionary.AddError("foo", "Foo error");
@@ -373,7 +440,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             string error = "Unable to connect to remote servers.";
             var modelStateDictionary = new ModelStateDictionary();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(), modelStateDictionary);
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(),
+                modelStateDictionary
+            );
 
             // Act
             validationHelper.AddFormError(error);
@@ -389,7 +459,10 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var modelStateDictionary = new ModelStateDictionary();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(), modelStateDictionary);
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(),
+                modelStateDictionary
+            );
 
             // Act
             validationHelper.RequireField("foo", "Foo is required.");
@@ -414,17 +487,20 @@ namespace System.Web.WebPages.Validation.Test
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             string message = "Foo is not an odd number.";
             var oddValidator = new Mock<IValidator>();
-            oddValidator.Setup(c => c.Validate(It.IsAny<ValidationContext>())).Returns<ValidationContext>(v =>
-            {
-                var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                var value = Int32.Parse(context.Request.Form["foo"]);
-
-                if (value % 2 != 0)
+            oddValidator
+                .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
+                .Returns<ValidationContext>(v =>
                 {
-                    return ValidationResult.Success;
-                }
-                return new ValidationResult(message);
-            }).Verifiable();
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    var value = Int32.Parse(context.Request.Form["foo"]);
+
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
+                .Verifiable();
             ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "6" }));
 
             // Act
@@ -444,21 +520,26 @@ namespace System.Web.WebPages.Validation.Test
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             string message = "Foo is not an odd number.";
             var oddValidator = new Mock<IValidator>();
-            oddValidator.Setup(c => c.Validate(It.IsAny<ValidationContext>())).Returns<ValidationContext>(v =>
-            {
-                var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                if (context.Request.Form["foo"].IsEmpty())
+            oddValidator
+                .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
+                .Returns<ValidationContext>(v =>
                 {
-                    return ValidationResult.Success;
-                }
-                int value = context.Request.Form["foo"].AsInt();
-                if (value % 2 != 0)
-                {
-                    return ValidationResult.Success;
-                }
-                return new ValidationResult(message);
-            }).Verifiable();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "", bar = "" }));
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    if (context.Request.Form["foo"].IsEmpty())
+                    {
+                        return ValidationResult.Success;
+                    }
+                    int value = context.Request.Form["foo"].AsInt();
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
+                .Verifiable();
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(new { foo = "", bar = "" })
+            );
 
             // Act
             validationHelper.Add(new[] { "foo", "bar" }, oddValidator.Object);
@@ -477,21 +558,26 @@ namespace System.Web.WebPages.Validation.Test
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             string message = "Foo is not an odd number.";
             var oddValidator = new Mock<IValidator>();
-            oddValidator.Setup(c => c.Validate(It.IsAny<ValidationContext>())).Returns<ValidationContext>(v =>
-            {
-                var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                if (context.Request.Form["foo"].IsEmpty())
+            oddValidator
+                .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
+                .Returns<ValidationContext>(v =>
                 {
-                    return ValidationResult.Success;
-                }
-                int value = context.Request.Form["foo"].AsInt();
-                if (value % 2 != 0)
-                {
-                    return ValidationResult.Success;
-                }
-                return new ValidationResult(message);
-            }).Verifiable();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "4", bar = "" }));
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    if (context.Request.Form["foo"].IsEmpty())
+                    {
+                        return ValidationResult.Success;
+                    }
+                    int value = context.Request.Form["foo"].AsInt();
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
+                .Verifiable();
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(new { foo = "4", bar = "" })
+            );
 
             // Act
             validationHelper.Add("foo", oddValidator.Object);
@@ -511,21 +597,26 @@ namespace System.Web.WebPages.Validation.Test
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             string message = "Foo is not an odd number.";
             var oddValidator = new Mock<IValidator>();
-            oddValidator.Setup(c => c.Validate(It.IsAny<ValidationContext>())).Returns<ValidationContext>(v =>
-            {
-                var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                if (context.Request.Form["foo"].IsEmpty())
+            oddValidator
+                .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
+                .Returns<ValidationContext>(v =>
                 {
-                    return ValidationResult.Success;
-                }
-                int value = context.Request.Form["foo"].AsInt();
-                if (value % 2 != 0)
-                {
-                    return ValidationResult.Success;
-                }
-                return new ValidationResult(message);
-            }).Verifiable();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "5", bar = "2" }));
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    if (context.Request.Form["foo"].IsEmpty())
+                    {
+                        return ValidationResult.Success;
+                    }
+                    int value = context.Request.Form["foo"].AsInt();
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
+                .Verifiable();
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(new { foo = "5", bar = "2" })
+            );
 
             // Act
             validationHelper.Add(new[] { "foo", "bar" }, oddValidator.Object);
@@ -543,21 +634,26 @@ namespace System.Web.WebPages.Validation.Test
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             string message = "Foo is not an odd number.";
             var oddValidator = new Mock<IValidator>();
-            oddValidator.Setup(c => c.Validate(It.IsAny<ValidationContext>())).Returns<ValidationContext>(v =>
-            {
-                var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                int value;
-                if (!Int32.TryParse(context.Request.Form["foo"], out value))
+            oddValidator
+                .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
+                .Returns<ValidationContext>(v =>
                 {
-                    return ValidationResult.Success;
-                }
-                if (value % 2 != 0)
-                {
-                    return ValidationResult.Success;
-                }
-                return new ValidationResult(message);
-            }).Verifiable();
-            ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "3", bar = "" }));
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    int value;
+                    if (!Int32.TryParse(context.Request.Form["foo"], out value))
+                    {
+                        return ValidationResult.Success;
+                    }
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
+                .Verifiable();
+            ValidationHelper validationHelper = GetValidationHelper(
+                GetContext(new { foo = "3", bar = "" })
+            );
 
             // Act
             validationHelper.Add(new[] { "foo", "bar" }, oddValidator.Object);
@@ -588,10 +684,15 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = new Mock<IValidator>();
-            var clientRules = new ModelClientValidationRule { ValidationType = "foo", ErrorMessage = "Foo error." };
+            var clientRules = new ModelClientValidationRule
+            {
+                ValidationType = "foo",
+                ErrorMessage = "Foo error.",
+            };
             clientRules.ValidationParameters["qux"] = "some data";
             validator.Setup(c => c.ClientValidationRule).Returns(clientRules).Verifiable();
-            var expected = @"data-val-required=""This field is required."" data-val-foo=""Foo error."" data-val-foo-qux=""some data"" data-val=""true""";
+            var expected =
+                @"data-val-required=""This field is required."" data-val-foo=""Foo error."" data-val-foo-qux=""some data"" data-val=""true""";
 
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
 
@@ -610,10 +711,15 @@ namespace System.Web.WebPages.Validation.Test
             // Arrange
             RequestFieldValidatorBase.IgnoreUseUnvalidatedValues = true;
             var validator = new Mock<IValidator>();
-            var clientRules = new ModelClientValidationRule { ValidationType = "biz", ErrorMessage = "<Biz error.>" };
+            var clientRules = new ModelClientValidationRule
+            {
+                ValidationType = "biz",
+                ErrorMessage = "<Biz error.>",
+            };
             clientRules.ValidationParameters["qux"] = "<some ' data>";
             validator.Setup(c => c.ClientValidationRule).Returns(clientRules).Verifiable();
-            var expected = @"data-val-required=""This field is required."" data-val-biz=""&lt;Biz error.&gt;"" data-val-biz-qux=""&lt;some &#39; data&gt;"" data-val=""true""";
+            var expected =
+                @"data-val-required=""This field is required."" data-val-biz=""&lt;Biz error.&gt;"" data-val-biz-qux=""&lt;some &#39; data&gt;"" data-val=""true""";
 
             // Act
             ValidationHelper validationHelper = GetValidationHelper(GetContext());
@@ -635,12 +741,16 @@ namespace System.Web.WebPages.Validation.Test
             var clientRule = new ModelClientValidationRule { ValidationType = null };
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation type names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation type names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
 
             clientRule.ValidationType = String.Empty;
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation type names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation type names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
         }
 
         [Fact]
@@ -652,8 +762,13 @@ namespace System.Web.WebPages.Validation.Test
             var clientRule2 = new ModelClientValidationRule { ValidationType = "foo" };
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule1, clientRule2 }),
-                                                              "Validation type names in unobtrusive client validation rules must be unique. The following validation type was seen more than once: foo");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ValidationHelper.GenerateHtmlFromClientValidationRules(
+                        new[] { clientRule1, clientRule2 }
+                    ),
+                "Validation type names in unobtrusive client validation rules must be unique. The following validation type was seen more than once: foo"
+            );
         }
 
         [Fact]
@@ -664,16 +779,22 @@ namespace System.Web.WebPages.Validation.Test
             var clientRule = new ModelClientValidationRule { ValidationType = "Foo" };
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"Foo\", client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"Foo\", client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
 
             clientRule.ValidationType = "bAr";
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"bAr\", client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"bAr\", client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
 
             clientRule.ValidationType = "bar123";
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"bar123\", client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"bar123\", client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
         }
 
         [Fact]
@@ -685,14 +806,18 @@ namespace System.Web.WebPages.Validation.Test
             clientRule.ValidationParameters["min^"] = "some-val";
 
             // Act and Assert
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: min^, client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: min^, client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
 
             clientRule.ValidationParameters.Clear();
             clientRule.ValidationParameters["Min"] = "some-val";
 
-            Assert.Throws<InvalidOperationException>(() => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
-                                                              "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: Min, client rule type: System.Web.Mvc.ModelClientValidationRule");
+            Assert.Throws<InvalidOperationException>(
+                () => ValidationHelper.GenerateHtmlFromClientValidationRules(new[] { clientRule }),
+                "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: Min, client rule type: System.Web.Mvc.ModelClientValidationRule"
+            );
         }
 
         [Fact]
@@ -704,7 +829,10 @@ namespace System.Web.WebPages.Validation.Test
         [Fact]
         public void DefaultInvalidCssClassIsSameAsHtmlHelper()
         {
-            Assert.Equal(HtmlHelper.DefaultValidationInputErrorCssClass, ValidationHelper.InvalidCssClass);
+            Assert.Equal(
+                HtmlHelper.DefaultValidationInputErrorCssClass,
+                ValidationHelper.InvalidCssClass
+            );
         }
 
         [Fact]
@@ -807,7 +935,10 @@ namespace System.Web.WebPages.Validation.Test
             return context.Object;
         }
 
-        private static ValidationHelper GetValidationHelper(HttpContextBase httpContext = null, ModelStateDictionary modelStateDictionary = null)
+        private static ValidationHelper GetValidationHelper(
+            HttpContextBase httpContext = null,
+            ModelStateDictionary modelStateDictionary = null
+        )
         {
             httpContext = httpContext ?? GetContext();
             modelStateDictionary = modelStateDictionary ?? new ModelStateDictionary();

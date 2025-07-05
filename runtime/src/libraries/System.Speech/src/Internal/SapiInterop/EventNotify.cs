@@ -25,13 +25,18 @@ namespace System.Speech.Internal.SapiInterop
 
         private WeakReference _eventNotifyReference;
     }
+
     /// Dispatches events from ISpEventSource to DispatchEventDelegate on a thread
     /// compatible with the application model of the thread that created this object.
     internal class EventNotify
     {
         #region Constructors
 
-        internal EventNotify(ISpEventSource sapiEventSource, IAsyncDispatch dispatcher, bool additionalSapiFeatures)
+        internal EventNotify(
+            ISpEventSource sapiEventSource,
+            IAsyncDispatch dispatcher,
+            bool additionalSapiFeatures
+        )
         {
             // Remember event source
             _sapiEventSourceReference = new WeakReference(sapiEventSource);
@@ -57,7 +62,8 @@ namespace System.Speech.Internal.SapiInterop
                 // If Dispose() is called from a finalizer this may not be the case so check for null.
                 if (_sapiEventSourceReference != null)
                 {
-                    ISpEventSource sapiEventSource = (ISpEventSource)_sapiEventSourceReference.Target;
+                    ISpEventSource sapiEventSource = (ISpEventSource)
+                        _sapiEventSourceReference.Target;
                     if (sapiEventSource != null)
                     {
                         // Stop listening to events from sapiEventSource.
@@ -76,12 +82,22 @@ namespace System.Speech.Internal.SapiInterop
                 // Call dispatchEventDelegate for each SAPI event currently queued.
                 if (_sapiEventSourceReference != null)
                 {
-                    ISpEventSource sapiEventSource = (ISpEventSource)_sapiEventSourceReference.Target;
+                    ISpEventSource sapiEventSource = (ISpEventSource)
+                        _sapiEventSourceReference.Target;
                     if (sapiEventSource != null)
                     {
                         List<SpeechEvent> speechEvents = new();
                         SpeechEvent speechEvent;
-                        while (null != (speechEvent = SpeechEvent.TryCreateSpeechEvent(sapiEventSource, _additionalSapiFeatures, _audioFormat)))
+                        while (
+                            null
+                            != (
+                                speechEvent = SpeechEvent.TryCreateSpeechEvent(
+                                    sapiEventSource,
+                                    _additionalSapiFeatures,
+                                    _audioFormat
+                                )
+                            )
+                        )
                         {
                             speechEvents.Add(speechEvent);
                         }
@@ -97,10 +113,7 @@ namespace System.Speech.Internal.SapiInterop
 
         internal SpeechAudioFormatInfo AudioFormat
         {
-            set
-            {
-                _audioFormat = value;
-            }
+            set { _audioFormat = value; }
         }
 
         #endregion Methods

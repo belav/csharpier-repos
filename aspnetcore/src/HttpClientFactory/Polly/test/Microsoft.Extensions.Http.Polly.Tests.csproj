@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(DefaultNetCoreTargetFramework);net472</TargetFrameworks>
-    <DefineConstants Condition="'$(TargetFramework)' == 'net472'">$(DefineConstants);USE_OBSOLETED</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net472'"
+      >$(DefineConstants);USE_OBSOLETED</DefineConstants
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <Reference Include="Microsoft.Extensions.DependencyInjection" />
@@ -15,9 +15,10 @@
     <Reference Include="Microsoft.Extensions.Options" />
     <Reference Include="Microsoft.Extensions.Primitives" />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="$(SharedSourceRoot)test\Shared.Tests\SingleThreadedSynchronizationContext.cs" Link="Shared\SingleThreadedSynchronizationContext.cs"/>
+    <Compile
+      Include="$(SharedSourceRoot)test\Shared.Tests\SingleThreadedSynchronizationContext.cs"
+      Link="Shared\SingleThreadedSynchronizationContext.cs"
+    />
   </ItemGroup>
-
 </Project>

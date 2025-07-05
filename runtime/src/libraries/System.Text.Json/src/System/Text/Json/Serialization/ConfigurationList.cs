@@ -23,14 +23,12 @@ namespace System.Text.Json.Serialization
 
         public abstract bool IsReadOnly { get; }
         protected abstract void OnCollectionModifying();
+
         protected virtual void ValidateAddedValue(TItem item) { }
 
         public TItem this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
             set
             {
                 if (value is null)

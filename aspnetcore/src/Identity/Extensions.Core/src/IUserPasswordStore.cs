@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store containing users' password hashes.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserPasswordStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserPasswordStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets the password hash for the specified <paramref name="user"/>.
@@ -19,7 +20,11 @@ public interface IUserPasswordStore<TUser> : IUserStore<TUser> where TUser : cla
     /// <param name="passwordHash">The password hash to set.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task SetPasswordHashAsync(TUser user, string? passwordHash, CancellationToken cancellationToken);
+    Task SetPasswordHashAsync(
+        TUser user,
+        string? passwordHash,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Gets the password hash for the specified <paramref name="user"/>.

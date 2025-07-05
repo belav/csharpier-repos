@@ -46,7 +46,8 @@ namespace System.Reflection.TypeLoading
                 return true;
             }
 
-            public override bool Equals([NotNullWhen(true)] object? obj) => obj is Key other && Equals(other);
+            public override bool Equals([NotNullWhen(true)] object? obj) =>
+                obj is Key other && Equals(other);
 
             public override int GetHashCode()
             {
@@ -54,9 +55,10 @@ namespace System.Reflection.TypeLoading
                 for (int i = 0; i < GenericTypeArguments.Length; i++)
                 {
                     RoType argType = GenericTypeArguments[i];
-                    hashCode ^= argType is RoModifiedType ?
-                        argType.UnderlyingSystemType.GetHashCode() :
-                        argType.GetHashCode();
+                    hashCode ^=
+                        argType is RoModifiedType
+                            ? argType.UnderlyingSystemType.GetHashCode()
+                            : argType.GetHashCode();
                 }
                 return hashCode;
             }

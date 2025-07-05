@@ -27,7 +27,8 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             INavigateToSearchResult searchResult,
             HighlightedText title,
             HighlightedText description,
-            ImageId primaryIcon)
+            ImageId primaryIcon
+        )
             : base(title, description, primaryIcon: primaryIcon)
         {
             _provider = provider;
@@ -35,11 +36,18 @@ internal sealed partial class RoslynSearchItemsSourceProvider
 
             var filePath = _searchResult.NavigableItem.Document.FilePath;
             if (filePath != null)
-                this.FileLocation = new HighlightedText(filePath, Array.Empty<VisualStudio.Text.Span>());
+                this.FileLocation = new HighlightedText(
+                    filePath,
+                    Array.Empty<VisualStudio.Text.Span>()
+                );
         }
 
-        public override void Invoke(CancellationToken cancellationToken)
-            => NavigateToHelpers.NavigateTo(
-                _searchResult, _provider._threadingContext, _provider._threadOperationExecutor, _provider._asyncListener);
+        public override void Invoke(CancellationToken cancellationToken) =>
+            NavigateToHelpers.NavigateTo(
+                _searchResult,
+                _provider._threadingContext,
+                _provider._threadOperationExecutor,
+                _provider._asyncListener
+            );
     }
 }

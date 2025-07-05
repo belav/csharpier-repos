@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class CheckedStatementHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(CheckedStatementHighlighter);
+        internal override Type GetHighlighterType() => typeof(CheckedStatementHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
@@ -43,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

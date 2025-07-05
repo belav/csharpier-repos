@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.Host
     /// <summary>
     /// Represents a <see cref="ITemporaryStorageWithName"/> which is used to hold data for <see cref="SourceText"/>.
     /// </summary>
-    internal interface ITemporaryTextStorageWithName : ITemporaryTextStorageInternal, ITemporaryStorageWithName
+    internal interface ITemporaryTextStorageWithName
+        : ITemporaryTextStorageInternal,
+            ITemporaryStorageWithName
     {
         /// <summary>
         /// Gets the value for the <see cref="SourceText.ChecksumAlgorithm"/> property for the <see cref="SourceText"/>

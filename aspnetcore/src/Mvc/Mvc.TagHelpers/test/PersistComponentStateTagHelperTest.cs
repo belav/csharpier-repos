@@ -27,17 +27,15 @@ public class PersistComponentStateTagHelperTest
 {
     private static readonly IDataProtectionProvider _ephemeralProvider =
         new EphemeralDataProtectionProvider();
-    private static readonly IDataProtector _protector =
-        _ephemeralProvider.CreateProtector("Microsoft.AspNetCore.Components.Server.State");
+    private static readonly IDataProtector _protector = _ephemeralProvider.CreateProtector(
+        "Microsoft.AspNetCore.Components.Server.State"
+    );
 
     [Fact]
     public async Task ExecuteAsync_DoesNotPersistDataWhenNoPrerenderHappened()
     {
         // Arrange
-        var tagHelper = new PersistComponentStateTagHelper
-        {
-            ViewContext = GetViewContext()
-        };
+        var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
@@ -58,7 +56,7 @@ public class PersistComponentStateTagHelperTest
         var tagHelper = new PersistComponentStateTagHelper
         {
             ViewContext = GetViewContext(),
-            PersistenceMode = PersistenceMode.WebAssembly
+            PersistenceMode = PersistenceMode.WebAssembly,
         };
 
         var context = GetTagHelperContext();
@@ -80,19 +78,23 @@ public class PersistComponentStateTagHelperTest
         var tagHelper = new PersistComponentStateTagHelper
         {
             ViewContext = GetViewContext(),
-            PersistenceMode = PersistenceMode.WebAssembly
+            PersistenceMode = PersistenceMode.WebAssembly,
         };
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager =
+            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(() =>
-        {
-            manager.State.PersistAsJson("state", "state value");
-            return Task.CompletedTask;
-        }, RenderMode.InteractiveWebAssembly);
+        manager.State.RegisterOnPersisting(
+            () =>
+            {
+                manager.State.PersistAsJson("state", "state value");
+                return Task.CompletedTask;
+            },
+            RenderMode.InteractiveWebAssembly
+        );
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
@@ -106,23 +108,27 @@ public class PersistComponentStateTagHelperTest
     public async Task ExecuteAsync_RendersWebAssemblyStateImplicitlyWhenAWebAssemblyComponentWasPrerendered()
     {
         // Arrange
-        var tagHelper = new PersistComponentStateTagHelper
-        {
-            ViewContext = GetViewContext()
-        };
+        var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
-        EndpointHtmlRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext.HttpContext, RenderMode.InteractiveWebAssembly);
+        EndpointHtmlRenderer.UpdateSaveStateRenderMode(
+            tagHelper.ViewContext.HttpContext,
+            RenderMode.InteractiveWebAssembly
+        );
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager =
+            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(() =>
-        {
-            manager.State.PersistAsJson("state", "state value");
-            return Task.CompletedTask;
-        }, RenderMode.InteractiveWebAssembly);
+        manager.State.RegisterOnPersisting(
+            () =>
+            {
+                manager.State.PersistAsJson("state", "state value");
+                return Task.CompletedTask;
+            },
+            RenderMode.InteractiveWebAssembly
+        );
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
@@ -139,19 +145,23 @@ public class PersistComponentStateTagHelperTest
         var tagHelper = new PersistComponentStateTagHelper
         {
             ViewContext = GetViewContext(),
-            PersistenceMode = PersistenceMode.Server
+            PersistenceMode = PersistenceMode.Server,
         };
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager =
+            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(() =>
-        {
-            manager.State.PersistAsJson("state", "state value");
-            return Task.CompletedTask;
-        }, RenderMode.InteractiveServer);
+        manager.State.RegisterOnPersisting(
+            () =>
+            {
+                manager.State.PersistAsJson("state", "state value");
+                return Task.CompletedTask;
+            },
+            RenderMode.InteractiveServer
+        );
 
         await tagHelper.ProcessAsync(context, output);
 
@@ -170,7 +180,7 @@ public class PersistComponentStateTagHelperTest
         var tagHelper = new PersistComponentStateTagHelper
         {
             ViewContext = GetViewContext(),
-            PersistenceMode = PersistenceMode.Server
+            PersistenceMode = PersistenceMode.Server,
         };
 
         var context = GetTagHelperContext();
@@ -188,23 +198,27 @@ public class PersistComponentStateTagHelperTest
     public async Task ExecuteAsync_RendersServerStateImplicitlyWhenAServerComponentWasPrerendered()
     {
         // Arrange
-        var tagHelper = new PersistComponentStateTagHelper
-        {
-            ViewContext = GetViewContext()
-        };
+        var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
-        EndpointHtmlRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext.HttpContext, Components.Web.RenderMode.InteractiveServer);
+        EndpointHtmlRenderer.UpdateSaveStateRenderMode(
+            tagHelper.ViewContext.HttpContext,
+            Components.Web.RenderMode.InteractiveServer
+        );
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
-        var manager = tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
+        var manager =
+            tagHelper.ViewContext.HttpContext.RequestServices.GetRequiredService<ComponentStatePersistenceManager>();
 
         // Act
-        manager.State.RegisterOnPersisting(() =>
-        {
-            manager.State.PersistAsJson("state", "state value");
-            return Task.CompletedTask;
-        }, RenderMode.InteractiveServer);
+        manager.State.RegisterOnPersisting(
+            () =>
+            {
+                manager.State.PersistAsJson("state", "state value");
+                return Task.CompletedTask;
+            },
+            RenderMode.InteractiveServer
+        );
 
         await tagHelper.ProcessAsync(context, output);
 
@@ -220,19 +234,24 @@ public class PersistComponentStateTagHelperTest
     public async Task ExecuteAsync_ThrowsIfItCantInferThePersistMode()
     {
         // Arrange
-        var tagHelper = new PersistComponentStateTagHelper
-        {
-            ViewContext = GetViewContext()
-        };
+        var tagHelper = new PersistComponentStateTagHelper { ViewContext = GetViewContext() };
 
-        EndpointHtmlRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext.HttpContext, Components.Web.RenderMode.InteractiveServer);
-        EndpointHtmlRenderer.UpdateSaveStateRenderMode(tagHelper.ViewContext.HttpContext, Components.Web.RenderMode.InteractiveWebAssembly);
+        EndpointHtmlRenderer.UpdateSaveStateRenderMode(
+            tagHelper.ViewContext.HttpContext,
+            Components.Web.RenderMode.InteractiveServer
+        );
+        EndpointHtmlRenderer.UpdateSaveStateRenderMode(
+            tagHelper.ViewContext.HttpContext,
+            Components.Web.RenderMode.InteractiveWebAssembly
+        );
 
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
 
         // Act & Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => tagHelper.ProcessAsync(context, output));
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output)
+        );
     }
 
     private static TagHelperContext GetTagHelperContext()
@@ -241,7 +260,8 @@ public class PersistComponentStateTagHelperTest
             "persist-component-state",
             new TagHelperAttributeList(),
             new Dictionary<object, object>(),
-            Guid.NewGuid().ToString("N"));
+            Guid.NewGuid().ToString("N")
+        );
     }
 
     private static TagHelperOutput GetTagHelperOutput()
@@ -249,7 +269,8 @@ public class PersistComponentStateTagHelperTest
         return new TagHelperOutput(
             "persist-component-state",
             new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
     }
 
     private ViewContext GetViewContext()
@@ -257,8 +278,11 @@ public class PersistComponentStateTagHelperTest
         var httpContext = new DefaultHttpContext
         {
             RequestServices = new ServiceCollection()
-                .AddScoped(_ => Mock.Of<IDataProtectionProvider>(
-                    x => x.CreateProtector(It.IsAny<string>()) == _protector))
+                .AddScoped(_ =>
+                    Mock.Of<IDataProtectionProvider>(x =>
+                        x.CreateProtector(It.IsAny<string>()) == _protector
+                    )
+                )
                 .AddLogging()
                 .AddScoped<ComponentStatePersistenceManager>()
                 .AddScoped<IComponentPrerenderer, EndpointHtmlRenderer>()

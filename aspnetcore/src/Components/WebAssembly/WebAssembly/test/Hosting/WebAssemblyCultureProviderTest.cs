@@ -32,15 +32,22 @@ public class WebAssemblyCultureProviderTest
         try
         {
             // WebAssembly is initialized with en-US
-            var cultureProvider = new WebAssemblyCultureProvider(new CultureInfo("en-US"), new CultureInfo("en-US"));
+            var cultureProvider = new WebAssemblyCultureProvider(
+                new CultureInfo("en-US"),
+                new CultureInfo("en-US")
+            );
 
             // Culture is changed to fr-FR as part of the app
             using var cultureReplacer = new CultureReplacer("fr-FR");
 
-            var ex = Assert.Throws<InvalidOperationException>(() => cultureProvider.ThrowIfCultureChangeIsUnsupported());
-            Assert.Equal("Blazor detected a change in the application's culture that is not supported with the current project configuration. " +
-                "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file.",
-                ex.Message);
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                cultureProvider.ThrowIfCultureChangeIsUnsupported()
+            );
+            Assert.Equal(
+                "Blazor detected a change in the application's culture that is not supported with the current project configuration. "
+                    + "To change culture dynamically during startup, set <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData> in the application's project file.",
+                ex.Message
+            );
         }
         finally
         {

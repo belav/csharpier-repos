@@ -3,8 +3,9 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.Handlers {
+
+namespace System.Web.Handlers
+{
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -26,90 +27,141 @@ namespace System.Web.Handlers {
     using System.Web.Util;
     using Debug = System.Diagnostics.Debug;
 
-    public class ScriptResourceHandler : IHttpHandler {
-
+    public class ScriptResourceHandler : IHttpHandler
+    {
         private const string _scriptResourceUrl = "~/ScriptResource.axd";
-        private static readonly IDictionary _assemblyInfoCache = Hashtable.Synchronized(new Hashtable());
+        private static readonly IDictionary _assemblyInfoCache = Hashtable.Synchronized(
+            new Hashtable()
+        );
         private static readonly IDictionary _cultureCache = Hashtable.Synchronized(new Hashtable());
         private static readonly Object _getMethodLock = new Object();
-        private static IScriptResourceHandler _scriptResourceHandler = new RuntimeScriptResourceHandler();
+        private static IScriptResourceHandler _scriptResourceHandler =
+            new RuntimeScriptResourceHandler();
         private static string _scriptResourceAbsolutePath;
+
         // _bypassVirtualPathResolution set by unit tests to avoid resolving ~/ paths from unit tests.
         private static bool _bypassVirtualPathResolution = false;
         private static int _maximumResourceUrlLength = 2048;
 
-        private static string ScriptResourceAbsolutePath {
-            get {
-                if (_scriptResourceAbsolutePath == null) {
+        private static string ScriptResourceAbsolutePath
+        {
+            get
+            {
+                if (_scriptResourceAbsolutePath == null)
+                {
                     _scriptResourceAbsolutePath = VirtualPathUtility.ToAbsolute(_scriptResourceUrl);
                 }
                 return _scriptResourceAbsolutePath;
             }
         }
 
-        private static Exception Create404(Exception innerException) {
-            return new HttpException(404, AtlasWeb.ScriptResourceHandler_InvalidRequest, innerException);
+        private static Exception Create404(Exception innerException)
+        {
+            return new HttpException(
+                404,
+                AtlasWeb.ScriptResourceHandler_InvalidRequest,
+                innerException
+            );
         }
 
         internal static CultureInfo DetermineNearestAvailableCulture(
             Assembly assembly,
             string scriptResourceName,
-            CultureInfo culture) {
+            CultureInfo culture
+        )
+        {
+            if (String.IsNullOrEmpty(scriptResourceName))
+                return CultureInfo.InvariantCulture;
 
-            if (String.IsNullOrEmpty(scriptResourceName)) return CultureInfo.InvariantCulture;
-
-            Tuple<Assembly, string, CultureInfo> cacheKey = Tuple.Create(assembly, scriptResourceName, culture);
+            Tuple<Assembly, string, CultureInfo> cacheKey = Tuple.Create(
+                assembly,
+                scriptResourceName,
+                culture
+            );
             CultureInfo cachedCulture = (CultureInfo)_cultureCache[cacheKey];
-            if (cachedCulture == null) {
+            if (cachedCulture == null)
+            {
+                string releaseResourceName = scriptResourceName.EndsWith(
+                    ".debug.js",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                    ? scriptResourceName.Substring(0, scriptResourceName.Length - 9) + ".js"
+                    : null;
 
-                string releaseResourceName =
-                    scriptResourceName.EndsWith(".debug.js", StringComparison.OrdinalIgnoreCase) ?
-                    scriptResourceName.Substring(0, scriptResourceName.Length - 9) + ".js" :
-                    null;
+                ScriptResourceInfo resourceInfo = ScriptResourceInfo.GetInstance(
+                    assembly,
+                    scriptResourceName
+                );
+                ScriptResourceInfo releaseResourceInfo =
+                    (releaseResourceName != null)
+                        ? ScriptResourceInfo.GetInstance(assembly, releaseResourceName)
+                        : null;
 
-                ScriptResourceInfo resourceInfo = ScriptResourceInfo.GetInstance(assembly, scriptResourceName);
-                ScriptResourceInfo releaseResourceInfo = (releaseResourceName != null) ?
-                    ScriptResourceInfo.GetInstance(assembly, releaseResourceName) : null;
-
-                if (!String.IsNullOrEmpty(resourceInfo.ScriptResourceName) ||
-                    ((releaseResourceInfo != null) && !String.IsNullOrEmpty(releaseResourceInfo.ScriptResourceName))) {
-
-                    ResourceManager resourceManager =
-                        ScriptResourceAttribute.GetResourceManager(resourceInfo.ScriptResourceName, assembly);
-                    ResourceManager releaseResourceManager = (releaseResourceInfo != null) ?
-                        ScriptResourceAttribute.GetResourceManager(releaseResourceInfo.ScriptResourceName, assembly) : null;
+                if (
+                    !String.IsNullOrEmpty(resourceInfo.ScriptResourceName)
+                    || (
+                        (releaseResourceInfo != null)
+                        && !String.IsNullOrEmpty(releaseResourceInfo.ScriptResourceName)
+                    )
+                )
+                {
+                    ResourceManager resourceManager = ScriptResourceAttribute.GetResourceManager(
+                        resourceInfo.ScriptResourceName,
+                        assembly
+                    );
+                    ResourceManager releaseResourceManager =
+                        (releaseResourceInfo != null)
+                            ? ScriptResourceAttribute.GetResourceManager(
+                                releaseResourceInfo.ScriptResourceName,
+                                assembly
+                            )
+                            : null;
 
                     ResourceSet localizedSet = null;
                     ResourceSet releaseSet = null;
-                    if (resourceManager != null) {
+                    if (resourceManager != null)
+                    {
                         resourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
                         // Look for the explicitly localized version of the resources that is nearest the culture.
                         localizedSet = resourceManager.GetResourceSet(culture, true, false);
                     }
-                    if (releaseResourceManager != null) {
-                        releaseResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
+                    if (releaseResourceManager != null)
+                    {
+                        releaseResourceManager.GetResourceSet(
+                            CultureInfo.InvariantCulture,
+                            true,
+                            true
+                        );
                         // Look for the explicitly localized version of the resources that is nearest the culture.
                         releaseSet = releaseResourceManager.GetResourceSet(culture, true, false);
                     }
-                    if ((resourceManager != null) || (releaseResourceManager != null)) {
-                        while ((localizedSet == null) && (releaseSet == null)) {
+                    if ((resourceManager != null) || (releaseResourceManager != null))
+                    {
+                        while ((localizedSet == null) && (releaseSet == null))
+                        {
                             culture = culture.Parent;
-                            if (culture.Equals(CultureInfo.InvariantCulture)) break;
+                            if (culture.Equals(CultureInfo.InvariantCulture))
+                                break;
                             localizedSet = resourceManager.GetResourceSet(culture, true, false);
-                            releaseSet = (releaseResourceManager != null) ?
-                                releaseResourceManager.GetResourceSet(culture, true, false) : null;
+                            releaseSet =
+                                (releaseResourceManager != null)
+                                    ? releaseResourceManager.GetResourceSet(culture, true, false)
+                                    : null;
                         }
                     }
-                    else {
+                    else
+                    {
                         culture = CultureInfo.InvariantCulture;
                     }
                 }
-                else {
+                else
+                {
                     culture = CultureInfo.InvariantCulture;
                 }
                 // Neutral assembly culture falls back on invariant
                 CultureInfo neutralCulture = GetAssemblyNeutralCulture(assembly);
-                if ((neutralCulture != null) && neutralCulture.Equals(culture)) {
+                if ((neutralCulture != null) && neutralCulture.Equals(culture))
+                {
                     culture = CultureInfo.InvariantCulture;
                 }
                 cachedCulture = culture;
@@ -118,51 +170,63 @@ namespace System.Web.Handlers {
             return cachedCulture;
         }
 
-        private static void EnsureScriptResourceRequest(string path) {
-            if (!IsScriptResourceRequest(path)) {
+        private static void EnsureScriptResourceRequest(string path)
+        {
+            if (!IsScriptResourceRequest(path))
+            {
                 Throw404();
             }
         }
 
-        private static Assembly GetAssembly(string assemblyName) {
+        private static Assembly GetAssembly(string assemblyName)
+        {
             Debug.Assert(!String.IsNullOrEmpty(assemblyName));
             string[] parts = assemblyName.Split(',');
 
-            if ((parts.Length != 1) && (parts.Length != 4)) {
+            if ((parts.Length != 1) && (parts.Length != 4))
+            {
                 Throw404();
             }
 
             AssemblyName realName = new AssemblyName();
             realName.Name = parts[0];
-            if (parts.Length == 4) {
+            if (parts.Length == 4)
+            {
                 realName.Version = new Version(parts[1]);
                 string cultureString = parts[2];
-                realName.CultureInfo = (cultureString.Length > 0) ?
-                    new CultureInfo(cultureString) :
-                    CultureInfo.InvariantCulture;
+                realName.CultureInfo =
+                    (cultureString.Length > 0)
+                        ? new CultureInfo(cultureString)
+                        : CultureInfo.InvariantCulture;
                 realName.SetPublicKeyToken(HexParser.Parse(parts[3]));
             }
             Assembly assembly = null;
-            try {
+            try
+            {
                 assembly = Assembly.Load(realName);
             }
-            catch (FileNotFoundException fnf) {
+            catch (FileNotFoundException fnf)
+            {
                 Throw404(fnf);
             }
-            catch (FileLoadException fl) {
+            catch (FileLoadException fl)
+            {
                 Throw404(fl);
             }
-            catch (BadImageFormatException badImage) {
+            catch (BadImageFormatException badImage)
+            {
                 Throw404(badImage);
             }
 
             return assembly;
         }
 
-        private static Tuple<AssemblyName, String> GetAssemblyInfo(Assembly assembly) {
+        private static Tuple<AssemblyName, String> GetAssemblyInfo(Assembly assembly)
+        {
             Tuple<AssemblyName, String> assemblyInfo =
                 (Tuple<AssemblyName, String>)_assemblyInfoCache[assembly];
-            if (assemblyInfo == null) {
+            if (assemblyInfo == null)
+            {
                 assemblyInfo = GetAssemblyInfoInternal(assembly);
                 _assemblyInfoCache[assembly] = assemblyInfo;
             }
@@ -170,31 +234,44 @@ namespace System.Web.Handlers {
             return assemblyInfo;
         }
 
-        private static Tuple<AssemblyName, String> GetAssemblyInfoInternal(Assembly assembly) {
+        private static Tuple<AssemblyName, String> GetAssemblyInfoInternal(Assembly assembly)
+        {
             AssemblyName assemblyName = new AssemblyName(assembly.FullName);
-            string hash = Convert.ToBase64String(assembly.ManifestModule.ModuleVersionId.ToByteArray());
+            string hash = Convert.ToBase64String(
+                assembly.ManifestModule.ModuleVersionId.ToByteArray()
+            );
             return new Tuple<AssemblyName, String>(assemblyName, hash);
         }
 
-        private static CultureInfo GetAssemblyNeutralCulture(Assembly assembly) {
+        private static CultureInfo GetAssemblyNeutralCulture(Assembly assembly)
+        {
             CultureInfo neutralCulture = (CultureInfo)_cultureCache[assembly];
-            if (neutralCulture == null) {
-                object[] nrlas = assembly.GetCustomAttributes(typeof(NeutralResourcesLanguageAttribute), false);
-                if ((nrlas != null) && (nrlas.Length != 0)) {
+            if (neutralCulture == null)
+            {
+                object[] nrlas = assembly.GetCustomAttributes(
+                    typeof(NeutralResourcesLanguageAttribute),
+                    false
+                );
+                if ((nrlas != null) && (nrlas.Length != 0))
+                {
                     neutralCulture = CultureInfo.GetCultureInfo(
-                        ((NeutralResourcesLanguageAttribute)nrlas[0]).CultureName);
+                        ((NeutralResourcesLanguageAttribute)nrlas[0]).CultureName
+                    );
                     _cultureCache[assembly] = neutralCulture;
                 }
             }
             return neutralCulture;
         }
 
-        internal static string GetEmptyPageUrl(string title) {
+        internal static string GetEmptyPageUrl(string title)
+        {
             return GetScriptResourceHandler().GetEmptyPageUrl(title);
         }
 
-        private static IScriptResourceHandler GetScriptResourceHandler() {
-            if (_scriptResourceHandler == null) {
+        private static IScriptResourceHandler GetScriptResourceHandler()
+        {
+            if (_scriptResourceHandler == null)
+            {
                 _scriptResourceHandler = new RuntimeScriptResourceHandler();
             }
             return _scriptResourceHandler;
@@ -204,48 +281,61 @@ namespace System.Web.Handlers {
             Assembly assembly,
             string resourceName,
             CultureInfo culture,
-            bool zip) {
-
+            bool zip
+        )
+        {
             return GetScriptResourceHandler()
                 .GetScriptResourceUrl(assembly, resourceName, culture, zip);
         }
 
         internal static string GetScriptResourceUrl(
             List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>> assemblyResourceLists,
-            bool zip) {
-
+            bool zip
+        )
+        {
             return GetScriptResourceHandler().GetScriptResourceUrl(assemblyResourceLists, zip);
         }
 
-        protected virtual bool IsReusable {
-            get {
-                return true;
-            }
+        protected virtual bool IsReusable
+        {
+            get { return true; }
         }
 
         internal delegate string VirtualFileReader(string virtualPath, out Encoding encoding);
 
-        private static bool IsCompressionEnabled(HttpContext context) {
-            return ScriptingScriptResourceHandlerSection.ApplicationSettings.EnableCompression &&
-                ((context == null) ||
-                !context.Request.Browser.IsBrowser("IE") ||
-                (context.Request.Browser.MajorVersion > 6));
+        private static bool IsCompressionEnabled(HttpContext context)
+        {
+            return ScriptingScriptResourceHandlerSection.ApplicationSettings.EnableCompression
+                && (
+                    (context == null)
+                    || !context.Request.Browser.IsBrowser("IE")
+                    || (context.Request.Browser.MajorVersion > 6)
+                );
         }
 
-        internal static bool IsScriptResourceRequest(string path) {
-            return !String.IsNullOrEmpty(path) &&
-                String.Equals(path, ScriptResourceAbsolutePath, StringComparison.OrdinalIgnoreCase);
+        internal static bool IsScriptResourceRequest(string path)
+        {
+            return !String.IsNullOrEmpty(path)
+                && String.Equals(
+                    path,
+                    ScriptResourceAbsolutePath,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
-        private static void OutputEmptyPage(HttpResponseBase response, string title) {
+        private static void OutputEmptyPage(HttpResponseBase response, string title)
+        {
             PrepareResponseCache(response);
-            response.Write(@"<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
-<html xmlns=""http://www.w3.org/1999/xhtml""><head><script type=""text/javascript"">parent.Sys.Application._onIFrameLoad();</script><title>" +
-                           HttpUtility.HtmlEncode(title) +
-                           @"</title></head><body></body></html>");
+            response.Write(
+                @"<!DOCTYPE html PUBLIC ""-//W3C//DTD XHTML 1.0 Transitional//EN"" ""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"">
+<html xmlns=""http://www.w3.org/1999/xhtml""><head><script type=""text/javascript"">parent.Sys.Application._onIFrameLoad();</script><title>"
+                    + HttpUtility.HtmlEncode(title)
+                    + @"</title></head><body></body></html>"
+            );
         }
 
-        private static void PrepareResponseCache(HttpResponseBase response) {
+        private static void PrepareResponseCache(HttpResponseBase response)
+        {
             HttpCachePolicyBase cachePolicy = response.Cache;
             DateTime now = DateTime.Now;
             cachePolicy.SetCacheability(HttpCacheability.Public);
@@ -256,7 +346,8 @@ namespace System.Web.Handlers {
             cachePolicy.SetLastModified(now);
         }
 
-        private static void PrepareResponseNoCache(HttpResponseBase response) {
+        private static void PrepareResponseNoCache(HttpResponseBase response)
+        {
             HttpCachePolicyBase cachePolicy = response.Cache;
             DateTime now = DateTime.Now;
             cachePolicy.SetCacheability(HttpCacheability.Public);
@@ -267,55 +358,85 @@ namespace System.Web.Handlers {
         }
 
         [SecuritySafeCritical]
-        protected virtual void ProcessRequest(HttpContext context) {
+        protected virtual void ProcessRequest(HttpContext context)
+        {
             ProcessRequest(new HttpContextWrapper(context));
         }
 
-        internal static void ProcessRequest(HttpContextBase context, VirtualFileReader fileReader = null, Action<string, Exception> logAction = null, bool validatePath = true) {
+        internal static void ProcessRequest(
+            HttpContextBase context,
+            VirtualFileReader fileReader = null,
+            Action<string, Exception> logAction = null,
+            bool validatePath = true
+        )
+        {
             string decryptedString = null;
             bool resourceIdentifierPresent = false;
-            try {
+            try
+            {
                 HttpResponseBase response = context.Response;
                 response.Clear();
 
-                if (validatePath) {
+                if (validatePath)
+                {
                     // Checking that the handler is not being called from a different path.
                     EnsureScriptResourceRequest(context.Request.Path);
                 }
 
                 string encryptedData = context.Request.QueryString["d"];
-                if (String.IsNullOrEmpty(encryptedData)) {
+                if (String.IsNullOrEmpty(encryptedData))
+                {
                     Throw404();
                 }
 
                 resourceIdentifierPresent = true;
-                try {
-                    decryptedString = Page.DecryptString(encryptedData, Purpose.ScriptResourceHandler_ScriptResourceUrl);
+                try
+                {
+                    decryptedString = Page.DecryptString(
+                        encryptedData,
+                        Purpose.ScriptResourceHandler_ScriptResourceUrl
+                    );
                 }
-                catch (CryptographicException ex) {
+                catch (CryptographicException ex)
+                {
                     Throw404(ex);
                 }
 
-                fileReader = fileReader ?? new VirtualFileReader(delegate(string virtualPath, out Encoding encoding) {
-                    VirtualPathProvider vpp = HostingEnvironment.VirtualPathProvider;
-                    if (!vpp.FileExists(virtualPath)) {
-                        Throw404();
-                    }
-                    VirtualFile file = vpp.GetFile(virtualPath);
-                    if (!AppSettings.ScriptResourceAllowNonJsFiles && !file.Name.EndsWith(".js", StringComparison.OrdinalIgnoreCase)) {
-                        // MSRC 10405: Disallow all extensions other than *.js
-                        Throw404();
-                    }
-                    using (Stream stream = file.Open()) {
-                        using (StreamReader reader = new StreamReader(stream, true)) {
-                            encoding = reader.CurrentEncoding;
-                            return reader.ReadToEnd();
+                fileReader =
+                    fileReader
+                    ?? new VirtualFileReader(
+                        delegate(string virtualPath, out Encoding encoding)
+                        {
+                            VirtualPathProvider vpp = HostingEnvironment.VirtualPathProvider;
+                            if (!vpp.FileExists(virtualPath))
+                            {
+                                Throw404();
+                            }
+                            VirtualFile file = vpp.GetFile(virtualPath);
+                            if (
+                                !AppSettings.ScriptResourceAllowNonJsFiles
+                                && !file.Name.EndsWith(".js", StringComparison.OrdinalIgnoreCase)
+                            )
+                            {
+                                // MSRC 10405: Disallow all extensions other than *.js
+                                Throw404();
+                            }
+                            using (Stream stream = file.Open())
+                            {
+                                using (StreamReader reader = new StreamReader(stream, true))
+                                {
+                                    encoding = reader.CurrentEncoding;
+                                    return reader.ReadToEnd();
+                                }
+                            }
                         }
-                    }
-                });
+                    );
                 ProcessRequestInternal(response, decryptedString, fileReader);
-            } catch(Exception e) {
-                if (resourceIdentifierPresent) {
+            }
+            catch (Exception e)
+            {
+                if (resourceIdentifierPresent)
+                {
                     logAction = logAction ?? AssemblyResourceLoader.LogWebResourceFailure;
                     logAction(decryptedString, e);
                 }
@@ -329,15 +450,18 @@ namespace System.Web.Handlers {
         private static void ProcessRequestInternal(
             HttpResponseBase response,
             string decryptedString,
-            VirtualFileReader fileReader) {
-
-            if (String.IsNullOrEmpty(decryptedString)) {
+            VirtualFileReader fileReader
+        )
+        {
+            if (String.IsNullOrEmpty(decryptedString))
+            {
                 Throw404();
             }
             bool zip;
             bool singleAssemblyReference;
             // See GetScriptResourceUrl comment below for first character meanings.
-            switch (decryptedString[0]) {
+            switch (decryptedString[0])
+            {
                 case 'Z':
                 case 'z':
                     singleAssemblyReference = true;
@@ -367,21 +491,26 @@ namespace System.Web.Handlers {
             }
 
             decryptedString = decryptedString.Substring(1);
-            if (String.IsNullOrEmpty(decryptedString)) {
+            if (String.IsNullOrEmpty(decryptedString))
+            {
                 Throw404();
             }
             string[] decryptedData = decryptedString.Split('|');
 
-            if (singleAssemblyReference) {
+            if (singleAssemblyReference)
+            {
                 // expected: <assembly>|<resource>|<culture>[|#|<hash>]
-                if (decryptedData.Length != 3 && decryptedData.Length != 5) {
+                if (decryptedData.Length != 3 && decryptedData.Length != 5)
+                {
                     // The decrypted data must have 3 parts plus an optional 2 part hash code separated by pipes.
                     Throw404();
                 }
             }
-            else {
+            else
+            {
                 // expected: <assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>,...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>,...|#|<hash>
-                if (decryptedData.Length % 2 != 0) {
+                if (decryptedData.Length % 2 != 0)
+                {
                     // The decrypted data must have an even number of parts separated by pipes.
                     Throw404();
                 }
@@ -391,7 +520,8 @@ namespace System.Web.Handlers {
 
             string firstContentType = null;
 
-            if (singleAssemblyReference) {
+            if (singleAssemblyReference)
+            {
                 // single assembly reference, format is
                 // <assembly>|<resource>|<culture>
                 string assemblyName = decryptedData[0];
@@ -399,62 +529,75 @@ namespace System.Web.Handlers {
                 string cultureName = decryptedData[2];
 
                 Assembly assembly = GetAssembly(assemblyName);
-                if (assembly == null) {
+                if (assembly == null)
+                {
                     Throw404();
                 }
 
-                script.Append(ScriptResourceAttribute.GetScriptFromWebResourceInternal(
-                    assembly,
-                    resourceName,
-                    String.IsNullOrEmpty(cultureName) ? CultureInfo.InvariantCulture : new CultureInfo(cultureName),
-                    zip,
-                    out firstContentType
-                ));
+                script.Append(
+                    ScriptResourceAttribute.GetScriptFromWebResourceInternal(
+                        assembly,
+                        resourceName,
+                        String.IsNullOrEmpty(cultureName)
+                            ? CultureInfo.InvariantCulture
+                            : new CultureInfo(cultureName),
+                        zip,
+                        out firstContentType
+                    )
+                );
             }
-            else {
+            else
+            {
                 // composite script reference, format is:
                 // <assembly1>|<resource1a>,<culture1a>,<resource1b>,<culture1b>,...|<assembly2>|<resource2a>,<culture2a>,<resource2b>,<culture2b>,...
                 // Assembly is empty for path based scripts, and their resource/culture list is <path1>,<path2>,...
-                
+
                 // If an assembly starts with "#", the segment is ignored (expected that this includes a hash to ensure
                 // url uniqueness when resources are changed). Also, for forward compatibility '#' segments may contain
-                // other data. 
+                // other data.
 
                 bool needsNewline = false;
 
-                for (int i = 0; i < decryptedData.Length; i += 2) {
+                for (int i = 0; i < decryptedData.Length; i += 2)
+                {
                     string assemblyName = decryptedData[i];
                     bool hasAssembly = !String.IsNullOrEmpty(assemblyName);
-                    if (hasAssembly && assemblyName[0] == '#') {
+                    if (hasAssembly && assemblyName[0] == '#')
+                    {
                         // hash segments are ignored, it contains a hash code for url uniqueness
                         continue;
                     }
                     Debug.Assert(!String.IsNullOrEmpty(decryptedData[i + 1]));
                     string[] resourcesAndCultures = decryptedData[i + 1].Split(',');
 
-                    if (resourcesAndCultures.Length == 0) {
+                    if (resourcesAndCultures.Length == 0)
+                    {
                         Throw404();
                     }
 
                     Assembly assembly = hasAssembly ? GetAssembly(assemblyName) : null;
 
-                    if (assembly == null) {
+                    if (assembly == null)
+                    {
                         // The scripts are path-based
-                        if (firstContentType == null) {
+                        if (firstContentType == null)
+                        {
                             firstContentType = "text/javascript";
                         }
-                        for (int j = 0; j < resourcesAndCultures.Length; j++) {
+                        for (int j = 0; j < resourcesAndCultures.Length; j++)
+                        {
                             Encoding encoding;
                             // DevDiv Bugs 197242
                             // path will either be absolute, as in "/app/foo/bar.js" or app relative, as in "~/foo/bar.js"
                             // ToAbsolute() ensures it is in the form /app/foo/bar.js
                             // This conversion was not done when the url was created to conserve url length.
-                            string path = _bypassVirtualPathResolution ?
-                                resourcesAndCultures[j] :
-                                VirtualPathUtility.ToAbsolute(resourcesAndCultures[j]);
+                            string path = _bypassVirtualPathResolution
+                                ? resourcesAndCultures[j]
+                                : VirtualPathUtility.ToAbsolute(resourcesAndCultures[j]);
                             string fileContents = fileReader(path, out encoding);
 
-                            if (needsNewline) {
+                            if (needsNewline)
+                            {
                                 // Output an additional newline between resources but not for the last one
                                 script.Append('\n');
                             }
@@ -463,37 +606,51 @@ namespace System.Web.Handlers {
                             script.Append(fileContents);
                         }
                     }
-                    else {
-                        Debug.Assert(resourcesAndCultures.Length % 2 == 0, "The list of resource names and cultures must have an even number of parts separated by commas.");
+                    else
+                    {
+                        Debug.Assert(
+                            resourcesAndCultures.Length % 2 == 0,
+                            "The list of resource names and cultures must have an even number of parts separated by commas."
+                        );
 
-                        for (int j = 0; j < resourcesAndCultures.Length; j += 2) {
-                            try {
+                        for (int j = 0; j < resourcesAndCultures.Length; j += 2)
+                        {
+                            try
+                            {
                                 string contentType;
                                 string resourceName = resourcesAndCultures[j];
                                 string cultureName = resourcesAndCultures[j + 1];
 
-                                if (needsNewline) {
+                                if (needsNewline)
+                                {
                                     // Output an additional newline between resources but not for the last one
                                     script.Append('\n');
                                 }
                                 needsNewline = true;
 
-                                script.Append(ScriptResourceAttribute.GetScriptFromWebResourceInternal(
-                                    assembly,
-                                    resourceName,
-                                    String.IsNullOrEmpty(cultureName) ? CultureInfo.InvariantCulture : new CultureInfo(cultureName),
-                                    zip,
-                                    out contentType
-                                ));
+                                script.Append(
+                                    ScriptResourceAttribute.GetScriptFromWebResourceInternal(
+                                        assembly,
+                                        resourceName,
+                                        String.IsNullOrEmpty(cultureName)
+                                            ? CultureInfo.InvariantCulture
+                                            : new CultureInfo(cultureName),
+                                        zip,
+                                        out contentType
+                                    )
+                                );
 
-                                if (firstContentType == null) {
+                                if (firstContentType == null)
+                                {
                                     firstContentType = contentType;
                                 }
                             }
-                            catch (MissingManifestResourceException ex) {
+                            catch (MissingManifestResourceException ex)
+                            {
                                 throw Create404(ex);
                             }
-                            catch (HttpException ex) {
+                            catch (HttpException ex)
+                            {
                                 throw Create404(ex);
                             }
                         }
@@ -501,22 +658,28 @@ namespace System.Web.Handlers {
                 }
             }
 
-            if (ScriptingScriptResourceHandlerSection.ApplicationSettings.EnableCaching) {
+            if (ScriptingScriptResourceHandlerSection.ApplicationSettings.EnableCaching)
+            {
                 PrepareResponseCache(response);
             }
-            else {
+            else
+            {
                 PrepareResponseNoCache(response);
             }
 
             response.ContentType = firstContentType;
 
-            if (zip) {
-                using (MemoryStream zipped = new MemoryStream()) {
-                    using (Stream outputStream = new GZipStream(zipped, CompressionMode.Compress)) {
+            if (zip)
+            {
+                using (MemoryStream zipped = new MemoryStream())
+                {
+                    using (Stream outputStream = new GZipStream(zipped, CompressionMode.Compress))
+                    {
                         // The choice of an encoding matters little here.
                         // Input streams being of potentially different encodings, UTF-8 is the better
                         // choice as it's the natural encoding for JavaScript.
-                        using (StreamWriter writer = new StreamWriter(outputStream, Encoding.UTF8)) {
+                        using (StreamWriter writer = new StreamWriter(outputStream, Encoding.UTF8))
+                        {
                             writer.Write(script.ToString());
                         }
                     }
@@ -525,83 +688,118 @@ namespace System.Web.Handlers {
                     response.OutputStream.Write(zippedBytes, 0, zippedBytes.Length);
                 }
             }
-            else {
+            else
+            {
                 // Bug DevDiv #175061, we don't want to force any encoding here and let the default
                 // encoding apply no matter what the incoming scripts might have been encoded with.
                 response.Write(script.ToString());
             }
         }
 
-        internal static void SetScriptResourceHandler(IScriptResourceHandler scriptResourceHandler) {
+        internal static void SetScriptResourceHandler(IScriptResourceHandler scriptResourceHandler)
+        {
             _scriptResourceHandler = scriptResourceHandler;
         }
 
-        private static void Throw404() {
+        private static void Throw404()
+        {
             throw Create404(null);
         }
 
-        private static void Throw404(Exception innerException) {
+        private static void Throw404(Exception innerException)
+        {
             throw Create404(innerException);
         }
 
         #region IHttpHandler implementation
-        void IHttpHandler.ProcessRequest(HttpContext context) {
+        void IHttpHandler.ProcessRequest(HttpContext context)
+        {
             ProcessRequest(context);
         }
 
-        bool IHttpHandler.IsReusable {
-            get {
-                return IsReusable;
-            }
+        bool IHttpHandler.IsReusable
+        {
+            get { return IsReusable; }
         }
         #endregion
 
-        private class RuntimeScriptResourceHandler : IScriptResourceHandler {
-
+        private class RuntimeScriptResourceHandler : IScriptResourceHandler
+        {
             // Keys in the URL cache will be IList objects, so use our custom list comparer.
-            private static readonly IDictionary _urlCache = Hashtable.Synchronized(new Hashtable(ListEqualityComparer.Instance));
-            private static readonly IDictionary _cultureCache = Hashtable.Synchronized(new Hashtable());
+            private static readonly IDictionary _urlCache = Hashtable.Synchronized(
+                new Hashtable(ListEqualityComparer.Instance)
+            );
+            private static readonly IDictionary _cultureCache = Hashtable.Synchronized(
+                new Hashtable()
+            );
             private static string _absoluteScriptResourceUrl;
 
             string IScriptResourceHandler.GetScriptResourceUrl(
-                Assembly assembly, string resourceName, CultureInfo culture, bool zip) {
-
+                Assembly assembly,
+                string resourceName,
+                CultureInfo culture,
+                bool zip
+            )
+            {
                 return ((IScriptResourceHandler)this).GetScriptResourceUrl(
-                    new List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>>() {
+                    new List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>>()
+                    {
                         new Tuple<Assembly, List<Tuple<string, CultureInfo>>>(
                             assembly,
-                            new List<Tuple<string,CultureInfo>>() {
-                                new Tuple<string, CultureInfo>(resourceName, culture)
+                            new List<Tuple<string, CultureInfo>>()
+                            {
+                                new Tuple<string, CultureInfo>(resourceName, culture),
                             }
-                        )
-                    }, zip);
+                        ),
+                    },
+                    zip
+                );
             }
 
             string IScriptResourceHandler.GetScriptResourceUrl(
                 List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>> assemblyResourceLists,
-                bool zip) {
-
-                if (!IsCompressionEnabled(HttpContext.Current)) {
+                bool zip
+            )
+            {
+                if (!IsCompressionEnabled(HttpContext.Current))
+                {
                     zip = false;
                 }
 
                 bool allAssemblyResources = true;
-                foreach (Tuple<Assembly, List<Tuple<string, CultureInfo>>> assemblyData in assemblyResourceLists) {
-                    if (assemblyData.Item1 == null) {
+                foreach (
+                    Tuple<
+                        Assembly,
+                        List<Tuple<string, CultureInfo>>
+                    > assemblyData in assemblyResourceLists
+                )
+                {
+                    if (assemblyData.Item1 == null)
+                    {
                         allAssemblyResources = false;
                         break;
                     }
                 }
-                
+
                 // If all the scripts are assembly resources, we can cache the generated ScriptResource URL, since
                 // the appdomain will reset if any of the assemblies are changed.  We cannot cache the URL if any
                 // scripts are path-based, since the cache entry will not be removed if a path-based script is changed.
-                if (allAssemblyResources) {
+                if (allAssemblyResources)
+                {
                     List<object> cacheKeys = new List<object>();
-                    
-                    foreach (Tuple<Assembly, List<Tuple<string, CultureInfo>>> assemblyData in assemblyResourceLists) {
+
+                    foreach (
+                        Tuple<
+                            Assembly,
+                            List<Tuple<string, CultureInfo>>
+                        > assemblyData in assemblyResourceLists
+                    )
+                    {
                         cacheKeys.Add(assemblyData.Item1);
-                        foreach (Tuple<string, CultureInfo> resourceAndCulture in assemblyData.Item2) {
+                        foreach (
+                            Tuple<string, CultureInfo> resourceAndCulture in assemblyData.Item2
+                        )
+                        {
                             cacheKeys.Add(resourceAndCulture.Item1);
                             cacheKeys.Add(resourceAndCulture.Item2);
                         }
@@ -611,14 +809,16 @@ namespace System.Web.Handlers {
 
                     string url = (string)_urlCache[cacheKeys];
 
-                    if (url == null) {
+                    if (url == null)
+                    {
                         url = GetScriptResourceUrlImpl(assemblyResourceLists, zip);
                         _urlCache[cacheKeys] = url;
                     }
 
                     return url;
                 }
-                else {
+                else
+                {
                     return GetScriptResourceUrlImpl(assemblyResourceLists, zip);
                 }
             }
@@ -626,8 +826,9 @@ namespace System.Web.Handlers {
             [SecuritySafeCritical]
             private static string GetScriptResourceUrlImpl(
                 List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>> assemblyResourceLists,
-                bool zip) {
-
+                bool zip
+            )
+            {
                 EnsureAbsoluteScriptResourceUrl();
 
                 // If there's only a single assembly resource, format is
@@ -640,10 +841,12 @@ namespace System.Web.Handlers {
                 // single resource be encrypted with SP1 and decrypted with RTM).
 
                 bool singleAssemblyResource = false;
-                if (assemblyResourceLists.Count == 1) {
+                if (assemblyResourceLists.Count == 1)
+                {
                     // only one assembly to pull from...
                     var reference = assemblyResourceLists[0];
-                    if ((reference.Item1 != null) && (reference.Item2.Count == 1)) {
+                    if ((reference.Item1 != null) && (reference.Item2.Count == 1))
+                    {
                         // resource is assembly not path, and there's only one resource within it to load
                         singleAssemblyResource = true;
                     }
@@ -654,16 +857,18 @@ namespace System.Web.Handlers {
                 // Zip: compress or not (true or false)
                 // First    Format  Zip?
                 // =====================
-                // Z        S       T   
-                // U        S       F   
-                // Q        C       T   
-                // R        C       F   
+                // Z        S       T
+                // U        S       F
+                // Q        C       T
+                // R        C       F
 
                 string indicator;
-                if (singleAssemblyResource) {
+                if (singleAssemblyResource)
+                {
                     indicator = (zip ? "Z" : "U");
                 }
-                else {
+                else
+                {
                     indicator = (zip ? "Q" : "R");
                 }
 
@@ -672,35 +877,48 @@ namespace System.Web.Handlers {
                 HashCodeCombiner hashCombiner = new HashCodeCombiner();
 
                 bool firstAssembly = true;
-                foreach (Tuple<Assembly, List<Tuple<string, CultureInfo>>> assemblyData in assemblyResourceLists) {
-
-                    if (!firstAssembly) {
+                foreach (
+                    Tuple<
+                        Assembly,
+                        List<Tuple<string, CultureInfo>>
+                    > assemblyData in assemblyResourceLists
+                )
+                {
+                    if (!firstAssembly)
+                    {
                         url.Append('|');
                     }
-                    else {
+                    else
+                    {
                         firstAssembly = false;
                     }
-                    if (assemblyData.Item1 != null) {
-                        Tuple<AssemblyName, String> assemblyInfo = GetAssemblyInfo(assemblyData.Item1);
+                    if (assemblyData.Item1 != null)
+                    {
+                        Tuple<AssemblyName, String> assemblyInfo = GetAssemblyInfo(
+                            assemblyData.Item1
+                        );
 
                         AssemblyName assemblyName = (AssemblyName)assemblyInfo.Item1;
                         string assemblyHash = (String)assemblyInfo.Item2;
                         hashCombiner.AddObject(assemblyHash);
 
-                        if (assemblyData.Item1.GlobalAssemblyCache) {
+                        if (assemblyData.Item1.GlobalAssemblyCache)
+                        {
                             // If the assembly is in the GAC, we need to store a full name to load the assembly later
                             // Pack the necessary values into a more compact format than FullName
                             url.Append(assemblyName.Name);
                             url.Append(',');
                             url.Append(assemblyName.Version);
                             url.Append(',');
-                            if (assemblyName.CultureInfo != null) {
+                            if (assemblyName.CultureInfo != null)
+                            {
                                 url.Append(assemblyName.CultureInfo);
                             }
                             url.Append(',');
                             url.Append(HexParser.ToString(assemblyName.GetPublicKeyToken()));
                         }
-                        else {
+                        else
+                        {
                             // Otherwise, we can just use a partial name
                             url.Append(assemblyName.Name);
                         }
@@ -708,13 +926,15 @@ namespace System.Web.Handlers {
                     url.Append('|');
 
                     bool firstResource = true;
-                    foreach (Tuple<string, CultureInfo> resourceAndCulture in assemblyData.Item2) {
-
-                        if (!firstResource) {
+                    foreach (Tuple<string, CultureInfo> resourceAndCulture in assemblyData.Item2)
+                    {
+                        if (!firstResource)
+                        {
                             url.Append(',');
                         }
 
-                        if (assemblyData.Item1 != null) {
+                        if (assemblyData.Item1 != null)
+                        {
                             url.Append(resourceAndCulture.Item1);
                             Tuple<Assembly, string, CultureInfo> cacheKey = Tuple.Create(
                                 assemblyData.Item1,
@@ -722,33 +942,52 @@ namespace System.Web.Handlers {
                                 resourceAndCulture.Item2
                             );
                             string cultureName = (string)_cultureCache[cacheKey];
-                            if (cultureName == null) {
+                            if (cultureName == null)
+                            {
                                 // Check if the resources exist
-                                ScriptResourceInfo resourceInfo =
-                                    ScriptResourceInfo.GetInstance(assemblyData.Item1, resourceAndCulture.Item1);
-                                if (resourceInfo == ScriptResourceInfo.Empty) {
+                                ScriptResourceInfo resourceInfo = ScriptResourceInfo.GetInstance(
+                                    assemblyData.Item1,
+                                    resourceAndCulture.Item1
+                                );
+                                if (resourceInfo == ScriptResourceInfo.Empty)
+                                {
                                     ThrowUnknownResource(resourceAndCulture.Item1);
                                 }
-                                Stream scriptStream = assemblyData.Item1.GetManifestResourceStream(resourceInfo.ScriptName);
-                                if (scriptStream == null) {
+                                Stream scriptStream = assemblyData.Item1.GetManifestResourceStream(
+                                    resourceInfo.ScriptName
+                                );
+                                if (scriptStream == null)
+                                {
                                     ThrowUnknownResource(resourceAndCulture.Item1);
                                 }
                                 cultureName = DetermineNearestAvailableCulture(
-                                    assemblyData.Item1, resourceAndCulture.Item1, resourceAndCulture.Item2).Name;
+                                    assemblyData.Item1,
+                                    resourceAndCulture.Item1,
+                                    resourceAndCulture.Item2
+                                ).Name;
                                 _cultureCache[cacheKey] = cultureName;
                             }
                             url.Append(singleAssemblyResource ? "|" : ",");
                             url.Append(cultureName);
                         }
-                        else {
-                            Debug.Assert(!singleAssemblyResource, "This should never happen since this is a path reference.");
+                        else
+                        {
+                            Debug.Assert(
+                                !singleAssemblyResource,
+                                "This should never happen since this is a path reference."
+                            );
 
-                            if (!_bypassVirtualPathResolution) {
+                            if (!_bypassVirtualPathResolution)
+                            {
                                 VirtualPathProvider vpp = HostingEnvironment.VirtualPathProvider;
-                                if (!vpp.FileExists(resourceAndCulture.Item1)) {
+                                if (!vpp.FileExists(resourceAndCulture.Item1))
+                                {
                                     ThrowUnknownResource(resourceAndCulture.Item1);
                                 }
-                                string hash = vpp.GetFileHash(resourceAndCulture.Item1, new string[] { resourceAndCulture.Item1 });
+                                string hash = vpp.GetFileHash(
+                                    resourceAndCulture.Item1,
+                                    new string[] { resourceAndCulture.Item1 }
+                                );
                                 hashCombiner.AddObject(hash);
                             }
                             url.Append(resourceAndCulture.Item1);
@@ -770,44 +1009,73 @@ namespace System.Web.Handlers {
                 // However, we continue to use the 't' parameter for single assembly references for compatibility.
 
                 string resourceUrl;
-                if (singleAssemblyResource) {
-                    resourceUrl = _absoluteScriptResourceUrl +
-                            Page.EncryptString(url.ToString(), Purpose.ScriptResourceHandler_ScriptResourceUrl) +
-                            "&t=" + hashCombiner.CombinedHashString;
+                if (singleAssemblyResource)
+                {
+                    resourceUrl =
+                        _absoluteScriptResourceUrl
+                        + Page.EncryptString(
+                            url.ToString(),
+                            Purpose.ScriptResourceHandler_ScriptResourceUrl
+                        )
+                        + "&t="
+                        + hashCombiner.CombinedHashString;
                 }
-                else {
+                else
+                {
                     // note that CombinedHashString is hex, it will never include a '|' that would confuse the handler.
                     url.Append("|#|");
                     url.Append(hashCombiner.CombinedHashString);
-                    resourceUrl = _absoluteScriptResourceUrl +
-                            Page.EncryptString(url.ToString(), Purpose.ScriptResourceHandler_ScriptResourceUrl);
+                    resourceUrl =
+                        _absoluteScriptResourceUrl
+                        + Page.EncryptString(
+                            url.ToString(),
+                            Purpose.ScriptResourceHandler_ScriptResourceUrl
+                        );
                 }
 
-                if (resourceUrl.Length > _maximumResourceUrlLength) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, AtlasWeb.ScriptResourceHandler_ResourceUrlTooLong, _maximumResourceUrlLength));
+                if (resourceUrl.Length > _maximumResourceUrlLength)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            AtlasWeb.ScriptResourceHandler_ResourceUrlTooLong,
+                            _maximumResourceUrlLength
+                        )
+                    );
                 }
                 return resourceUrl;
             }
 
-            private static void EnsureAbsoluteScriptResourceUrl() {
-                if (_absoluteScriptResourceUrl == null) {
-                    _absoluteScriptResourceUrl = _bypassVirtualPathResolution ?
-                        _scriptResourceUrl + "?d=" :
-                        VirtualPathUtility.ToAbsolute(_scriptResourceUrl) + "?d=";
+            private static void EnsureAbsoluteScriptResourceUrl()
+            {
+                if (_absoluteScriptResourceUrl == null)
+                {
+                    _absoluteScriptResourceUrl = _bypassVirtualPathResolution
+                        ? _scriptResourceUrl + "?d="
+                        : VirtualPathUtility.ToAbsolute(_scriptResourceUrl) + "?d=";
                 }
             }
 
-            string IScriptResourceHandler.GetEmptyPageUrl(string title) {
+            string IScriptResourceHandler.GetEmptyPageUrl(string title)
+            {
                 EnsureAbsoluteScriptResourceUrl();
-                return _absoluteScriptResourceUrl +
-                        Page.EncryptString('T' + title, Purpose.ScriptResourceHandler_ScriptResourceUrl);
+                return _absoluteScriptResourceUrl
+                    + Page.EncryptString(
+                        'T' + title,
+                        Purpose.ScriptResourceHandler_ScriptResourceUrl
+                    );
             }
 
-            private static void ThrowUnknownResource(string resourceName) {
-                throw new HttpException(String.Format(CultureInfo.CurrentCulture,
-                    AtlasWeb.ScriptResourceHandler_UnknownResource, resourceName));
+            private static void ThrowUnknownResource(string resourceName)
+            {
+                throw new HttpException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        AtlasWeb.ScriptResourceHandler_UnknownResource,
+                        resourceName
+                    )
+                );
             }
-
         }
     }
 }

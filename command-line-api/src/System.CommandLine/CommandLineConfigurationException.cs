@@ -9,7 +9,6 @@ namespace System.CommandLine;
 public class CliConfigurationException : Exception
 {
     /// <inheritdoc />
-    public CliConfigurationException(string message) : base(message)
-    {
-    }
+    public CliConfigurationException(string message)
+        : base(message) { }
 }

@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,223 +26,232 @@
 //
 // (C) 2005-2010 Novell, Inc.
 
-
 //
 // TODO: getting the .x and .y in LoadData doesn't work with mozilla
 //
 
-using System.Globalization;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Globalization;
 using System.Security.Permissions;
 using System.Web.Util;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEvent("ServerClick")]
-	[SupportsEventValidation]
-	public class HtmlInputImage : HtmlInputControl, IPostBackDataHandler, IPostBackEventHandler 
-	{
-		static readonly object ServerClickEvent = new object ();
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEvent("ServerClick")]
+    [SupportsEventValidation]
+    public class HtmlInputImage : HtmlInputControl, IPostBackDataHandler, IPostBackEventHandler
+    {
+        static readonly object ServerClickEvent = new object();
 
-		int clicked_x;
-		int clicked_y;
+        int clicked_x;
+        int clicked_y;
 
-		public HtmlInputImage () : base ("image")
-		{
-		}
+        public HtmlInputImage()
+            : base("image") { }
 
-		[DefaultValue(true)]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public virtual bool CausesValidation {
-			get {
-				return ViewState.GetBool ("CausesValidation", true);
-			}
-			set {
-				ViewState ["CausesValidation"] = value;
-			}
-		}
+        [DefaultValue(true)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public virtual bool CausesValidation
+        {
+            get { return ViewState.GetBool("CausesValidation", true); }
+            set { ViewState["CausesValidation"] = value; }
+        }
 
-		[DefaultValue("")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Appearance")]
-		public string Align {
-			get { return GetAtt ("align"); }
-			set { SetAtt ("align", value); }
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public string Align
+        {
+            get { return GetAtt("align"); }
+            set { SetAtt("align", value); }
+        }
 
-		[DefaultValue("")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[Localizable (true)]
-		[WebSysDescription("")]
-		[WebCategory("Appearance")]
-		public string Alt {
-			get { return GetAtt ("alt"); }
-			set { SetAtt ("alt", value); }
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Localizable(true)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public string Alt
+        {
+            get { return GetAtt("alt"); }
+            set { SetAtt("alt", value); }
+        }
 
-		[DefaultValue("")]
-		[WebSysDescription("")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[WebCategory("Appearance")]
-		[UrlProperty]
-		public string Src {
-			get { return GetAtt ("src"); }
-			set { SetAtt ("src", value); }
-		}
+        [DefaultValue("")]
+        [WebSysDescription("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebCategory("Appearance")]
+        [UrlProperty]
+        public string Src
+        {
+            get { return GetAtt("src"); }
+            set { SetAtt("src", value); }
+        }
 
-		[DefaultValue("-1")]
-		[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Appearance")]
-		public int Border {
-			get {
-				string border = Attributes ["border"];
-				if (border == null)
-					return -1;
-				return Int32.Parse (border, Helpers.InvariantCulture);
-			}
-			set {
-				if (value == -1) {
-					Attributes.Remove ("border");
-					return;
-				}
-				Attributes ["border"] = value.ToString (Helpers.InvariantCulture);
-			}
-		}
+        [DefaultValue("-1")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public int Border
+        {
+            get
+            {
+                string border = Attributes["border"];
+                if (border == null)
+                    return -1;
+                return Int32.Parse(border, Helpers.InvariantCulture);
+            }
+            set
+            {
+                if (value == -1)
+                {
+                    Attributes.Remove("border");
+                    return;
+                }
+                Attributes["border"] = value.ToString(Helpers.InvariantCulture);
+            }
+        }
 
-		bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
-		{
-			string x = postCollection [UniqueID + ".x"];
-			string y = postCollection [UniqueID + ".y"];
+        bool LoadPostDataInternal(string postDataKey, NameValueCollection postCollection)
+        {
+            string x = postCollection[UniqueID + ".x"];
+            string y = postCollection[UniqueID + ".y"];
 
-			if (x != null && x.Length != 0 &&
-					y != null && y.Length != 0) {
-				clicked_x = Int32.Parse (x, Helpers.InvariantCulture);
-				clicked_y = Int32.Parse (y, Helpers.InvariantCulture);
-				Page.RegisterRequiresRaiseEvent (this);
-				return true;
-			}
+            if (x != null && x.Length != 0 && y != null && y.Length != 0)
+            {
+                clicked_x = Int32.Parse(x, Helpers.InvariantCulture);
+                clicked_y = Int32.Parse(y, Helpers.InvariantCulture);
+                Page.RegisterRequiresRaiseEvent(this);
+                return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		
-		void RaisePostBackEventInternal (string eventArgument)
-		{
-			if (CausesValidation)
-				Page.Validate (ValidationGroup);
+        void RaisePostBackEventInternal(string eventArgument)
+        {
+            if (CausesValidation)
+                Page.Validate(ValidationGroup);
 
-			OnServerClick (new ImageClickEventArgs (clicked_x, clicked_y));
-		}
+            OnServerClick(new ImageClickEventArgs(clicked_x, clicked_y));
+        }
 
-		void RaisePostDataChangedEventInternal ()
-		{
-			/* no events to raise */
-		}
+        void RaisePostDataChangedEventInternal()
+        {
+            /* no events to raise */
+        }
 
-		[DefaultValue ("")]
-		public virtual string ValidationGroup
-		{
-			get {
-				return ViewState.GetString ("ValidationGroup", "");
-			}
-			set {
-				ViewState ["ValidationGroup"] = value;
-			}
-		}
+        [DefaultValue("")]
+        public virtual string ValidationGroup
+        {
+            get { return ViewState.GetString("ValidationGroup", ""); }
+            set { ViewState["ValidationGroup"] = value; }
+        }
 
-		protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
-		{
-			return LoadPostDataInternal (postDataKey, postCollection);
-		}
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
+            return LoadPostDataInternal(postDataKey, postCollection);
+        }
 
-		protected virtual void RaisePostBackEvent (string eventArgument)
-		{
-			RaisePostBackEventInternal (eventArgument);
-		}
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
+            RaisePostBackEventInternal(eventArgument);
+        }
 
-		protected virtual void RaisePostDataChangedEvent ()
-		{
-			ValidateEvent (UniqueID, String.Empty);
-			RaisePostDataChangedEventInternal ();
-		}
+        protected virtual void RaisePostDataChangedEvent()
+        {
+            ValidateEvent(UniqueID, String.Empty);
+            RaisePostDataChangedEventInternal();
+        }
 
-		bool IPostBackDataHandler.LoadPostData (string postDataKey, NameValueCollection postCollection)
-		{
-			return LoadPostData (postDataKey, postCollection);
-		}
-		
-		void IPostBackDataHandler.RaisePostDataChangedEvent ()
-		{
-			RaisePostDataChangedEvent();
-		}
-				
-		void IPostBackEventHandler.RaisePostBackEvent (string eventArgument)
-		{
-			RaisePostBackEvent (eventArgument);
-		}
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
+            return LoadPostData(postDataKey, postCollection);
+        }
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
+            RaisePostDataChangedEvent();
+        }
 
-			Page page = Page;
-			if (page != null && !Disabled) {
-				page.RegisterRequiresPostBack (this);
-				page.RegisterEnabledControl (this);
-			}
-		}
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
+            RaisePostBackEvent(eventArgument);
+        }
 
-		protected virtual void OnServerClick (ImageClickEventArgs e)
-		{
-			ImageClickEventHandler handler = Events [ServerClickEvent] as ImageClickEventHandler;
-			if (handler != null)
-				handler (this, e);
-		}
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
 
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			Page page = Page;
-			if (page != null)
-				page.ClientScript.RegisterForEventValidation (UniqueID);
-			
-			if (CausesValidation && page != null && page.AreValidatorsUplevel (ValidationGroup)) {
-				ClientScriptManager csm = page.ClientScript;
-				Attributes ["onclick"] += csm.GetClientValidationEvent (ValidationGroup);
-			}
+            Page page = Page;
+            if (page != null && !Disabled)
+            {
+                page.RegisterRequiresPostBack(this);
+                page.RegisterEnabledControl(this);
+            }
+        }
 
-			PreProcessRelativeReference (writer,"src");
-			base.RenderAttributes (writer);
-		}
+        protected virtual void OnServerClick(ImageClickEventArgs e)
+        {
+            ImageClickEventHandler handler = Events[ServerClickEvent] as ImageClickEventHandler;
+            if (handler != null)
+                handler(this, e);
+        }
 
-		void SetAtt (string name, string value)
-		{
-			if ((value == null) || (value.Length == 0))
-				Attributes.Remove (name);
-			else
-				Attributes [name] = value;
-		}
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            Page page = Page;
+            if (page != null)
+                page.ClientScript.RegisterForEventValidation(UniqueID);
 
-		string GetAtt (string name)
-		{
-			string res = Attributes [name];
-			if (res == null)
-				return String.Empty;
-			return res;
-		}
+            if (CausesValidation && page != null && page.AreValidatorsUplevel(ValidationGroup))
+            {
+                ClientScriptManager csm = page.ClientScript;
+                Attributes["onclick"] += csm.GetClientValidationEvent(ValidationGroup);
+            }
 
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		public event ImageClickEventHandler ServerClick {
-			add { Events.AddHandler (ServerClickEvent, value); }
-			remove { Events.AddHandler (ServerClickEvent, value); }
-		}
-	}
+            PreProcessRelativeReference(writer, "src");
+            base.RenderAttributes(writer);
+        }
+
+        void SetAtt(string name, string value)
+        {
+            if ((value == null) || (value.Length == 0))
+                Attributes.Remove(name);
+            else
+                Attributes[name] = value;
+        }
+
+        string GetAtt(string name)
+        {
+            string res = Attributes[name];
+            if (res == null)
+                return String.Empty;
+            return res;
+        }
+
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event ImageClickEventHandler ServerClick
+        {
+            add { Events.AddHandler(ServerClickEvent, value); }
+            remove { Events.AddHandler(ServerClickEvent, value); }
+        }
+    }
 }

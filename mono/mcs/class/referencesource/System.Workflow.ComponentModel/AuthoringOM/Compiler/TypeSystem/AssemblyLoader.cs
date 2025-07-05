@@ -2,9 +2,9 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
     using System.ComponentModel.Design;
     using System.IO;
+    using System.Reflection;
 
     internal class AssemblyLoader
     {
@@ -23,15 +23,22 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (asmName != null)
                 {
                     // Try loading the assembly using type resolution service first.
-                    ITypeResolutionService trs = (ITypeResolutionService)typeProvider.GetService(typeof(ITypeResolutionService));
+                    ITypeResolutionService trs = (ITypeResolutionService)
+                        typeProvider.GetService(typeof(ITypeResolutionService));
                     if (trs != null)
                     {
                         try
                         {
                             this.assembly = trs.GetAssembly(asmName);
-                            // 
+                            //
 
-                            if (this.assembly == null && asmName.GetPublicKeyToken() != null && (asmName.GetPublicKeyToken().GetLength(0) == 0) && asmName.GetPublicKey() != null && (asmName.GetPublicKey().GetLength(0) == 0))
+                            if (
+                                this.assembly == null
+                                && asmName.GetPublicKeyToken() != null
+                                && (asmName.GetPublicKeyToken().GetLength(0) == 0)
+                                && asmName.GetPublicKey() != null
+                                && (asmName.GetPublicKey().GetLength(0) == 0)
+                            )
                             {
                                 AssemblyName partialName = (AssemblyName)asmName.Clone();
                                 partialName.SetPublicKey(null);
@@ -50,7 +57,11 @@ namespace System.Workflow.ComponentModel.Compiler
                     {
                         try
                         {
-                            if (MultiTargetingInfo.MultiTargetingUtilities.IsFrameworkReferenceAssembly(filePath))
+                            if (
+                                MultiTargetingInfo.MultiTargetingUtilities.IsFrameworkReferenceAssembly(
+                                    filePath
+                                )
+                            )
                             {
                                 this.assembly = Assembly.Load(asmName.FullName);
                             }
@@ -87,7 +98,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal Type GetType(string typeName)
         {
-            // 
+            //
             if (this.assembly != null)
             {
                 Type type = null;
@@ -99,7 +110,14 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     // we eat these exeptions in our type system
                 }
-                if ((type != null) && (type.IsPublic || type.IsNestedPublic || (this.isLocalAssembly && type.Attributes != TypeAttributes.NestedPrivate)))
+                if (
+                    (type != null)
+                    && (
+                        type.IsPublic
+                        || type.IsNestedPublic
+                        || (this.isLocalAssembly && type.Attributes != TypeAttributes.NestedPrivate)
+                    )
+                )
                     return type;
             }
             return null;
@@ -110,11 +128,14 @@ namespace System.Workflow.ComponentModel.Compiler
             List<Type> filteredTypes = new List<Type>();
             if (this.assembly != null)
             {
-                // 
+                //
                 foreach (Type type in this.assembly.GetTypes())
                 {
-                    // 
-                    if (type.IsPublic || (this.isLocalAssembly && type.Attributes != TypeAttributes.NestedPrivate))
+                    //
+                    if (
+                        type.IsPublic
+                        || (this.isLocalAssembly && type.Attributes != TypeAttributes.NestedPrivate)
+                    )
                         filteredTypes.Add(type);
                 }
             }
@@ -135,10 +156,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         internal Assembly Assembly
         {
-            get
-            {
-                return this.assembly;
-            }
+            get { return this.assembly; }
         }
     }
 }

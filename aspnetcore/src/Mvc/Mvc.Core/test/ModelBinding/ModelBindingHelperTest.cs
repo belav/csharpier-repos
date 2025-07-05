@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -36,7 +36,8 @@ public class ModelBindingHelperTest
             metadataProvider,
             GetModelBinderFactory(binder),
             Mock.Of<IValueProvider>(),
-            new Mock<IObjectModelValidator>(MockBehavior.Strict).Object);
+            new Mock<IObjectModelValidator>(MockBehavior.Strict).Object
+        );
 
         // Assert
         Assert.False(result);
@@ -49,20 +50,18 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel();
 
-        var values = new Dictionary<string, object>
-            {
-                { "", null }
-            };
+        var values = new Dictionary<string, object> { { "", null } };
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -77,12 +76,16 @@ public class ModelBindingHelperTest
             metadataProvider,
             GetModelBinderFactory(binderProviders),
             valueProvider,
-            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()));
+            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions())
+        );
 
         // Assert
         Assert.False(result);
         var error = Assert.Single(modelState["MyProperty"].Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("MyProperty"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("MyProperty"),
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -91,21 +94,22 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel { MyProperty = "Old-Value" };
 
         var values = new Dictionary<string, object>
-            {
-                { "", null },
-                { "MyProperty", "MyPropertyValue" }
-            };
+        {
+            { "", null },
+            { "MyProperty", "MyPropertyValue" },
+        };
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -117,7 +121,8 @@ public class ModelBindingHelperTest
             metadataProvider,
             GetModelBinderFactory(binderProviders),
             valueProvider,
-            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()));
+            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions())
+        );
 
         // Assert
         Assert.True(result);
@@ -142,7 +147,8 @@ public class ModelBindingHelperTest
             GetModelBinderFactory(binder),
             Mock.Of<IValueProvider>(),
             new Mock<IObjectModelValidator>(MockBehavior.Strict).Object,
-            propertyFilter);
+            propertyFilter
+        );
 
         // Assert
         Assert.False(result);
@@ -157,32 +163,33 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel
         {
             MyProperty = "Old-Value",
             IncludedProperty = "Old-IncludedPropertyValue",
-            ExcludedProperty = "Old-ExcludedPropertyValue"
+            ExcludedProperty = "Old-ExcludedPropertyValue",
         };
 
         var values = new Dictionary<string, object>
-            {
-                { "", null },
-                { "MyProperty", "MyPropertyValue" },
-                { "IncludedProperty", "IncludedPropertyValue" },
-                { "ExcludedProperty", "ExcludedPropertyValue" }
-            };
+        {
+            { "", null },
+            { "MyProperty", "MyPropertyValue" },
+            { "IncludedProperty", "IncludedPropertyValue" },
+            { "ExcludedProperty", "ExcludedPropertyValue" },
+        };
 
         Func<ModelMetadata, bool> propertyFilter = (m) =>
-            string.Equals(m.PropertyName, "IncludedProperty", StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(m.PropertyName, "MyProperty", StringComparison.OrdinalIgnoreCase);
+            string.Equals(m.PropertyName, "IncludedProperty", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(m.PropertyName, "MyProperty", StringComparison.OrdinalIgnoreCase);
 
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -196,7 +203,8 @@ public class ModelBindingHelperTest
             GetModelBinderFactory(binderProviders),
             valueProvider,
             new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()),
-            propertyFilter);
+            propertyFilter
+        );
 
         // Assert
         Assert.True(result);
@@ -222,7 +230,8 @@ public class ModelBindingHelperTest
             GetModelBinderFactory(binder),
             Mock.Of<IValueProvider>(),
             new Mock<IObjectModelValidator>(MockBehavior.Strict).Object,
-            m => m.IncludedProperty);
+            m => m.IncludedProperty
+        );
 
         // Assert
         Assert.False(result);
@@ -237,28 +246,29 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel
         {
             MyProperty = "Old-Value",
             IncludedProperty = "Old-IncludedPropertyValue",
-            ExcludedProperty = "Old-ExcludedPropertyValue"
+            ExcludedProperty = "Old-ExcludedPropertyValue",
         };
 
         var values = new Dictionary<string, object>
-            {
-                { "", null },
-                { "MyProperty", "MyPropertyValue" },
-                { "IncludedProperty", "IncludedPropertyValue" },
-                { "ExcludedProperty", "ExcludedPropertyValue" }
-            };
+        {
+            { "", null },
+            { "MyProperty", "MyPropertyValue" },
+            { "IncludedProperty", "IncludedPropertyValue" },
+            { "ExcludedProperty", "ExcludedPropertyValue" },
+        };
 
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -273,7 +283,8 @@ public class ModelBindingHelperTest
             valueProvider,
             new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()),
             m => m.IncludedProperty,
-            m => m.MyProperty);
+            m => m.MyProperty
+        );
 
         // Assert
         Assert.True(result);
@@ -288,28 +299,29 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel
         {
             MyProperty = "Old-Value",
             IncludedProperty = "Old-IncludedPropertyValue",
-            ExcludedProperty = "Old-ExcludedPropertyValue"
+            ExcludedProperty = "Old-ExcludedPropertyValue",
         };
 
         var values = new Dictionary<string, object>
-            {
-                { "", null },
-                { "MyProperty", "MyPropertyValue" },
-                { "IncludedProperty", "IncludedPropertyValue" },
-                { "ExcludedProperty", "ExcludedPropertyValue" }
-            };
+        {
+            { "", null },
+            { "MyProperty", "MyPropertyValue" },
+            { "IncludedProperty", "IncludedPropertyValue" },
+            { "ExcludedProperty", "ExcludedPropertyValue" },
+        };
 
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -322,7 +334,8 @@ public class ModelBindingHelperTest
             metadataProvider,
             GetModelBinderFactory(binderProviders),
             valueProvider,
-            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()));
+            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions())
+        );
 
         // Assert
         // Includes everything.
@@ -353,14 +366,18 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-                    ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
-        Assert.Equal(string.Format(
+        Assert.Equal(
+            string.Format(
                 CultureInfo.CurrentCulture,
-                "The passed expression of expression node type '{0}' is invalid." +
-                " Only simple member access expressions for model properties are supported.",
-                expression.Body.NodeType),
-            ex.Message);
+                "The passed expression of expression node type '{0}' is invalid."
+                    + " Only simple member access expressions for model properties are supported.",
+                expression.Body.NodeType
+            ),
+            ex.Message
+        );
     }
 
     public static IEnumerable<object[]> InvalidExpressionDataSet
@@ -390,16 +407,20 @@ public class ModelBindingHelperTest
 
     [Theory]
     [MemberData(nameof(InvalidExpressionDataSet))]
-    public void GetPropertyName_ExpressionsOtherThanMemberAccess_Throws(Expression<Func<User, object>> expression)
+    public void GetPropertyName_ExpressionsOtherThanMemberAccess_Throws(
+        Expression<Func<User, object>> expression
+    )
     {
         // Arrange Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
-            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid." +
-            " Only simple member access expressions for model properties are supported.",
-            ex.Message);
+            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
+                + " Only simple member access expressions for model properties are supported.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -413,12 +434,14 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
-            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid." +
-            " Only simple member access expressions for model properties are supported.",
-            ex.Message);
+            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
+                + " Only simple member access expressions for model properties are supported.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -429,12 +452,14 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
-            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid." +
-            " Only simple member access expressions for model properties are supported.",
-            ex.Message);
+            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
+                + " Only simple member access expressions for model properties are supported.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -445,12 +470,14 @@ public class ModelBindingHelperTest
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(() =>
-            ModelBindingHelper.GetPropertyName(expression.Body));
+            ModelBindingHelper.GetPropertyName(expression.Body)
+        );
 
         Assert.Equal(
-            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid." +
-            " Only simple member access expressions for model properties are supported.",
-            ex.Message);
+            $"The passed expression of expression node type '{expression.Body.NodeType}' is invalid."
+                + " Only simple member access expressions for model properties are supported.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -472,7 +499,8 @@ public class ModelBindingHelperTest
             modelBinderFactory: GetModelBinderFactory(binder),
             valueProvider: Mock.Of<IValueProvider>(),
             objectModelValidator: new Mock<IObjectModelValidator>(MockBehavior.Strict).Object,
-            propertyFilter: propertyFilter);
+            propertyFilter: propertyFilter
+        );
 
         // Assert
         Assert.False(result);
@@ -487,32 +515,33 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel
         {
             MyProperty = "Old-Value",
             IncludedProperty = "Old-IncludedPropertyValue",
-            ExcludedProperty = "Old-ExcludedPropertyValue"
+            ExcludedProperty = "Old-ExcludedPropertyValue",
         };
 
         var values = new Dictionary<string, object>
-            {
-                { "", null },
-                { "MyProperty", "MyPropertyValue" },
-                { "IncludedProperty", "IncludedPropertyValue" },
-                { "ExcludedProperty", "ExcludedPropertyValue" }
-            };
+        {
+            { "", null },
+            { "MyProperty", "MyPropertyValue" },
+            { "IncludedProperty", "IncludedPropertyValue" },
+            { "ExcludedProperty", "ExcludedPropertyValue" },
+        };
 
         Func<ModelMetadata, bool> propertyFilter = (m) =>
-            string.Equals(m.PropertyName, "IncludedProperty", StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(m.PropertyName, "MyProperty", StringComparison.OrdinalIgnoreCase);
+            string.Equals(m.PropertyName, "IncludedProperty", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(m.PropertyName, "MyProperty", StringComparison.OrdinalIgnoreCase);
 
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -527,7 +556,8 @@ public class ModelBindingHelperTest
             GetModelBinderFactory(binderProviders),
             valueProvider,
             new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()),
-            propertyFilter);
+            propertyFilter
+        );
 
         // Assert
         Assert.True(result);
@@ -554,7 +584,8 @@ public class ModelBindingHelperTest
             metadataProvider: metadataProvider,
             modelBinderFactory: GetModelBinderFactory(binder.Object),
             valueProvider: Mock.Of<IValueProvider>(),
-            objectModelValidator: new Mock<IObjectModelValidator>(MockBehavior.Strict).Object);
+            objectModelValidator: new Mock<IObjectModelValidator>(MockBehavior.Strict).Object
+        );
 
         // Assert
         Assert.False(result);
@@ -567,21 +598,22 @@ public class ModelBindingHelperTest
         // Arrange
         var binderProviders = new IModelBinderProvider[]
         {
-                new SimpleTypeModelBinderProvider(),
-                new ComplexObjectModelBinderProvider(),
+            new SimpleTypeModelBinderProvider(),
+            new ComplexObjectModelBinderProvider(),
         };
 
         var validator = new DataAnnotationsModelValidatorProvider(
             new ValidationAttributeAdapterProvider(),
             Options.Create(new MvcDataAnnotationsLocalizationOptions()),
-            stringLocalizerFactory: null);
+            stringLocalizerFactory: null
+        );
         var model = new MyModel { MyProperty = "Old-Value" };
 
         var values = new Dictionary<string, object>
-            {
-                { "", null },
-                { "MyProperty", "MyPropertyValue" }
-            };
+        {
+            { "", null },
+            { "MyProperty", "MyPropertyValue" },
+        };
         var valueProvider = new TestValueProvider(values);
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -594,7 +626,8 @@ public class ModelBindingHelperTest
             metadataProvider,
             GetModelBinderFactory(binderProviders),
             valueProvider,
-            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions()));
+            new DefaultObjectValidator(metadataProvider, new[] { validator }, new MvcOptions())
+        );
 
         // Assert
         Assert.True(result);
@@ -613,22 +646,26 @@ public class ModelBindingHelperTest
 
         var modelName = model.GetType().FullName;
         var userName = typeof(User).FullName;
-        var expectedMessage = $"The model's runtime type '{modelName}' is not assignable to the type '{userName}'.";
+        var expectedMessage =
+            $"The model's runtime type '{modelName}' is not assignable to the type '{userName}'.";
 
         // Act & Assert
         var exception = await ExceptionAssert.ThrowsArgumentAsync(
-            () => ModelBindingHelper.TryUpdateModelAsync(
-                model,
-                typeof(User),
-                "",
-                GetActionContext(),
-                metadataProvider,
-                GetModelBinderFactory(binder.Object),
-                Mock.Of<IValueProvider>(),
-                new Mock<IObjectModelValidator>(MockBehavior.Strict).Object,
-                propertyFilter),
+            () =>
+                ModelBindingHelper.TryUpdateModelAsync(
+                    model,
+                    typeof(User),
+                    "",
+                    GetActionContext(),
+                    metadataProvider,
+                    GetModelBinderFactory(binder.Object),
+                    Mock.Of<IValueProvider>(),
+                    new Mock<IObjectModelValidator>(MockBehavior.Strict).Object,
+                    propertyFilter
+                ),
             "modelType",
-            expectedMessage);
+            expectedMessage
+        );
     }
 
     [Theory]
@@ -793,10 +830,7 @@ public class ModelBindingHelperTest
 
         public bool IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public User Save()
@@ -842,14 +876,22 @@ public class ModelBindingHelperTest
     [Fact]
     public void ConvertTo_ReturnsNullForReferenceTypes_WhenValueIsNull()
     {
-        var convertedValue = ModelBindingHelper.ConvertTo(value: null, type: typeof(string), culture: null);
+        var convertedValue = ModelBindingHelper.ConvertTo(
+            value: null,
+            type: typeof(string),
+            culture: null
+        );
         Assert.Null(convertedValue);
     }
 
     [Fact]
     public void ConvertTo_ReturnsDefaultForValueTypes_WhenValueIsNull()
     {
-        var convertedValue = ModelBindingHelper.ConvertTo(value: null, type: typeof(int), culture: null);
+        var convertedValue = ModelBindingHelper.ConvertTo(
+            value: null,
+            type: typeof(int),
+            culture: null
+        );
         Assert.Equal(0, convertedValue);
     }
 
@@ -925,7 +967,11 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(new string[] { null }, typeof(int), culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            new string[] { null },
+            typeof(int),
+            culture: null
+        );
 
         // Assert
         Assert.Null(outValue);
@@ -962,7 +1008,11 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(value: null, type: typeof(int[]), culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            value: null,
+            type: typeof(int[]),
+            culture: null
+        );
 
         // Assert
         Assert.Null(outValue);
@@ -974,7 +1024,11 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(new object[] { 1 }, typeof(IntEnum), culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            new object[] { 1 },
+            typeof(IntEnum),
+            culture: null
+        );
 
         // Assert
         Assert.Equal(IntEnum.Value1, outValue);
@@ -1002,12 +1056,17 @@ public class ModelBindingHelperTest
     public void ConvertToReturnsValueIfArrayElementIsAnyIntegerTypeAndDestinationTypeIsEnum(
         object input,
         Type enumType,
-        object expected)
+        object expected
+    )
     {
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(new object[] { input }, enumType, culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            new object[] { input },
+            enumType,
+            culture: null
+        );
 
         // Assert
         Assert.Equal(expected, outValue);
@@ -1019,7 +1078,11 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(new object[] { "1" }, typeof(IntEnum), culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            new object[] { "1" },
+            typeof(IntEnum),
+            culture: null
+        );
 
         // Assert
         Assert.Equal(IntEnum.Value1, outValue);
@@ -1031,7 +1094,11 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(new object[] { "Value1" }, typeof(IntEnum), culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            new object[] { "Value1" },
+            typeof(IntEnum),
+            culture: null
+        );
 
         // Assert
         Assert.Equal(IntEnum.Value1, outValue);
@@ -1115,7 +1182,11 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var outValue = ModelBindingHelper.ConvertTo(new object[] { "some string" }, typeof(string), culture: null);
+        var outValue = ModelBindingHelper.ConvertTo(
+            new object[] { "some string" },
+            typeof(string),
+            culture: null
+        );
 
         // Assert
         Assert.Equal("some string", outValue);
@@ -1140,9 +1211,19 @@ public class ModelBindingHelperTest
     }
 
     [Theory]
-    [InlineData(new object[] { new object[] { 1, 2 }, new[] { FlagsEnum.Value1, FlagsEnum.Value2 } })]
-    [InlineData(new object[] { new[] { "Value1", "Value2" }, new[] { FlagsEnum.Value1, FlagsEnum.Value2 } })]
-    [InlineData(new object[] { new object[] { 5, 2 }, new[] { FlagsEnum.Value1 | FlagsEnum.Value4, FlagsEnum.Value2 } })]
+    [InlineData(
+        new object[] { new object[] { 1, 2 }, new[] { FlagsEnum.Value1, FlagsEnum.Value2 } }
+    )]
+    [InlineData(
+        new object[] { new[] { "Value1", "Value2" }, new[] { FlagsEnum.Value1, FlagsEnum.Value2 } }
+    )]
+    [InlineData(
+        new object[]
+        {
+            new object[] { 5, 2 },
+            new[] { FlagsEnum.Value1 | FlagsEnum.Value4, FlagsEnum.Value2 },
+        }
+    )]
     public void ConvertTo_ConvertsFlagsEnumArrays(object value, FlagsEnum[] expected)
     {
         // Arrange
@@ -1179,8 +1260,13 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act & Assert
-        var ex = Assert.Throws<FormatException>(
-            () => ModelBindingHelper.ConvertTo("this-is-not-a-valid-value", destinationType, culture: null));
+        var ex = Assert.Throws<FormatException>(() =>
+            ModelBindingHelper.ConvertTo(
+                "this-is-not-a-valid-value",
+                destinationType,
+                culture: null
+            )
+        );
     }
 
     [Fact]
@@ -1189,12 +1275,17 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act
-        var cultureResult = ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("fr-FR"));
+        var cultureResult = ModelBindingHelper.ConvertTo(
+            "12,5",
+            typeof(decimal),
+            new CultureInfo("fr-FR")
+        );
 
         // Assert
         Assert.Equal(12.5M, cultureResult);
-        Assert.Throws<FormatException>(
-            () => ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("en-GB")));
+        Assert.Throws<FormatException>(() =>
+            ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("en-GB"))
+        );
     }
 
     [Theory]
@@ -1204,7 +1295,10 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act & Assert
-        Assert.Equal(expectedValue, ModelBindingHelper.ConvertTo(initialValue, typeof(T), culture: null));
+        Assert.Equal(
+            expectedValue,
+            ModelBindingHelper.ConvertTo(initialValue, typeof(T), culture: null)
+        );
     }
 
     public static IEnumerable<object[]> IntrinsicConversionData
@@ -1226,8 +1320,8 @@ public class ModelBindingHelperTest
             yield return new object[] { "00:00:20", TimeSpan.FromSeconds(20) };
             yield return new object[]
             {
-                    "c6687d3a-51f9-4159-8771-a66d2b7d7038",
-                    Guid.Parse("c6687d3a-51f9-4159-8771-a66d2b7d7038", CultureInfo.InvariantCulture)
+                "c6687d3a-51f9-4159-8771-a66d2b7d7038",
+                Guid.Parse("c6687d3a-51f9-4159-8771-a66d2b7d7038", CultureInfo.InvariantCulture),
             };
         }
     }
@@ -1242,12 +1336,18 @@ public class ModelBindingHelperTest
     public void ConvertTo_Throws_IfValueIsNotConvertible(Type destinationType)
     {
         // Arrange
-        var expectedMessage = $"The parameter conversion from type '{typeof(MyClassWithoutConverter)}' to type " +
-            $"'{destinationType}' failed because no type converter can convert between these types.";
+        var expectedMessage =
+            $"The parameter conversion from type '{typeof(MyClassWithoutConverter)}' to type "
+            + $"'{destinationType}' failed because no type converter can convert between these types.";
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.ConvertTo(new MyClassWithoutConverter(), destinationType, culture: null));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.ConvertTo(
+                new MyClassWithoutConverter(),
+                destinationType,
+                culture: null
+            )
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -1258,12 +1358,14 @@ public class ModelBindingHelperTest
         // Arrange
         var value = "Hello world";
         var destinationType = typeof(MyClassWithoutConverter);
-        var expectedMessage = $"The parameter conversion from type '{value.GetType()}' to type " +
-            $"'{typeof(MyClassWithoutConverter)}' failed because no type converter can convert between these types.";
+        var expectedMessage =
+            $"The parameter conversion from type '{value.GetType()}' to type "
+            + $"'{typeof(MyClassWithoutConverter)}' failed because no type converter can convert between these types.";
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.ConvertTo(value, destinationType, culture: null));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.ConvertTo(value, destinationType, culture: null)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -1291,9 +1393,9 @@ public class ModelBindingHelperTest
         // Arrange
         var value = new MyClassWithoutConverter[]
         {
-                new MySubClassWithoutConverter(),
-                new MySubClassWithoutConverter(),
-                new MySubClassWithoutConverter(),
+            new MySubClassWithoutConverter(),
+            new MySubClassWithoutConverter(),
+            new MySubClassWithoutConverter(),
         };
 
         // Act
@@ -1303,15 +1405,31 @@ public class ModelBindingHelperTest
         Assert.IsType(destinationType, result);
         Assert.Collection(
             result as IEnumerable<MyClassWithoutConverter>,
-            element => { Assert.Same(value[0], element); },
-            element => { Assert.Same(value[1], element); },
-            element => { Assert.Same(value[2], element); });
+            element =>
+            {
+                Assert.Same(value[0], element);
+            },
+            element =>
+            {
+                Assert.Same(value[1], element);
+            },
+            element =>
+            {
+                Assert.Same(value[2], element);
+            }
+        );
     }
 
     [Theory]
     [InlineData(new object[] { 2, FlagsEnum.Value2 })]
     [InlineData(new object[] { 5, FlagsEnum.Value1 | FlagsEnum.Value4 })]
-    [InlineData(new object[] { 15, FlagsEnum.Value1 | FlagsEnum.Value2 | FlagsEnum.Value4 | FlagsEnum.Value8 })]
+    [InlineData(
+        new object[]
+        {
+            15,
+            FlagsEnum.Value1 | FlagsEnum.Value2 | FlagsEnum.Value4 | FlagsEnum.Value8,
+        }
+    )]
     [InlineData(new object[] { 16, (FlagsEnum)16 })]
     [InlineData(new object[] { 0, (FlagsEnum)0 })]
     [InlineData(new object[] { null, (FlagsEnum)0 })]
@@ -1424,7 +1542,9 @@ public class ModelBindingHelperTest
     }
 
     [Theory]
-    [InlineData(nameof(ModelWithReadOnlyAndSpecialCaseProperties.EnumerablePropertyWithArrayValueAndSetter))]
+    [InlineData(
+        nameof(ModelWithReadOnlyAndSpecialCaseProperties.EnumerablePropertyWithArrayValueAndSetter)
+    )]
     [InlineData(nameof(ModelWithReadOnlyAndSpecialCaseProperties.EnumerablePropertyWithListValue))]
     [InlineData(nameof(ModelWithReadOnlyAndSpecialCaseProperties.ListPropertyWithValue))]
     public void CanGetCompatibleCollection_ReturnsTrue_IfCollection(string propertyName)
@@ -1461,7 +1581,10 @@ public class ModelBindingHelperTest
     {
         // Arrange
         var bindingContext = GetBindingContextForProperty(
-            nameof(ModelWithReadOnlyAndSpecialCaseProperties.EnumerablePropertyWithArrayValueAndSetter));
+            nameof(
+                ModelWithReadOnlyAndSpecialCaseProperties.EnumerablePropertyWithArrayValueAndSetter
+            )
+        );
 
         // Act
         var result = ModelBindingHelper.GetCompatibleCollection<int>(bindingContext);
@@ -1499,8 +1622,8 @@ public class ModelBindingHelperTest
         {
             HttpContext = new DefaultHttpContext()
             {
-                RequestServices = services.BuildServiceProvider()
-            }
+                RequestServices = services.BuildServiceProvider(),
+            },
         };
     }
 
@@ -1509,7 +1632,8 @@ public class ModelBindingHelperTest
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelMetadata = metadataProvider.GetMetadataForProperty(
             typeof(ModelWithReadOnlyAndSpecialCaseProperties),
-            propertyName);
+            propertyName
+        );
         var bindingContext = GetBindingContext(modelMetadata);
 
         var container = new ModelWithReadOnlyAndSpecialCaseProperties();
@@ -1528,10 +1652,7 @@ public class ModelBindingHelperTest
 
     private static DefaultModelBindingContext GetBindingContext(ModelMetadata metadata)
     {
-        var bindingContext = new DefaultModelBindingContext
-        {
-            ModelMetadata = metadata,
-        };
+        var bindingContext = new DefaultModelBindingContext { ModelMetadata = metadata };
 
         return bindingContext;
     }
@@ -1547,7 +1668,8 @@ public class ModelBindingHelperTest
         public IEnumerable<int> EnumerablePropertyWithArrayValue { get; } = new int[4];
 
         // Special case: Value cannot be used but property can be set.
-        public IEnumerable<int> EnumerablePropertyWithArrayValueAndSetter { get; set; } = new int[4];
+        public IEnumerable<int> EnumerablePropertyWithArrayValueAndSetter { get; set; } =
+            new int[4];
 
         public IEnumerable<int> EnumerablePropertyWithListValue { get; } = new List<int> { 23 };
 
@@ -1560,48 +1682,40 @@ public class ModelBindingHelperTest
         public int ScalarPropertyWithValue { get; } = 23;
     }
 
-    private class MyClassWithoutConverter
-    {
-    }
+    private class MyClassWithoutConverter { }
 
-    private class MySubClassWithoutConverter : MyClassWithoutConverter
-    {
-    }
+    private class MySubClassWithoutConverter : MyClassWithoutConverter { }
 
-    private abstract class AbstractIntList : List<int>
-    {
-    }
+    private abstract class AbstractIntList : List<int> { }
 
-    private class IntList : List<int>
-    {
-    }
+    private class IntList : List<int> { }
 
     private enum IntEnum
     {
         Value0 = 0,
         Value1 = 1,
-        MaxValue = int.MaxValue
+        MaxValue = int.MaxValue,
     }
 
     private enum LongEnum : long
     {
         Value0 = 0L,
         Value1 = 1L,
-        MaxValue = long.MaxValue
+        MaxValue = long.MaxValue,
     }
 
     private enum UnsignedIntEnum : uint
     {
         Value0 = 0U,
         Value1 = 1U,
-        MaxValue = uint.MaxValue
+        MaxValue = uint.MaxValue,
     }
 
     private enum ByteEnum : byte
     {
         Value0 = 0,
         Value1 = 1,
-        MaxValue = byte.MaxValue
+        MaxValue = byte.MaxValue,
     }
 
     [Flags]
@@ -1610,6 +1724,6 @@ public class ModelBindingHelperTest
         Value1 = 1,
         Value2 = 2,
         Value4 = 4,
-        Value8 = 8
+        Value8 = 8,
     }
 }

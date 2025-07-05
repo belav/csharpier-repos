@@ -21,7 +21,9 @@ namespace Microsoft.WebPages.Test.Helpers
         {
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>();
             contextMock.Setup(context => context.Request.Url).Returns(new Uri(data.RequestUrl));
-            contextMock.Setup(context => context.Response.Redirect(It.IsAny<string>())).Callback((string url) => data.RedirectUrl = url);
+            contextMock
+                .Setup(context => context.Response.Redirect(It.IsAny<string>()))
+                .Callback((string url) => data.RedirectUrl = url);
             return contextMock.Object;
         }
 

@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal static class IconHelper
     {
-        private static string GetIconName(string groupName, string itemName)
-            => string.Format("Microsoft.VisualStudio.{0}.{1}", groupName, itemName);
+        private static string GetIconName(string groupName, string itemName) =>
+            string.Format("Microsoft.VisualStudio.{0}.{1}", groupName, itemName);
 
         public static string GetIconName(string groupName, Accessibility symbolAccessibility)
         {
@@ -63,7 +63,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 { StandardGlyphGroup.GlyphGroupProperty, "Property" },
                 { StandardGlyphGroup.GlyphGroupField, "Field" },
                 { StandardGlyphGroup.GlyphGroupOperator, "Operator" },
-                { StandardGlyphGroup.GlyphReference, "Reference" }
+                { StandardGlyphGroup.GlyphReference, "Reference" },
             };
 
             var supportedGlyphItems = new Dictionary<StandardGlyphItem, string>
@@ -72,7 +72,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 { StandardGlyphItem.GlyphItemProtected, "Protected" },
                 { StandardGlyphItem.GlyphItemInternal, "Internal" },
                 { StandardGlyphItem.GlyphItemPublic, "Public" },
-                { StandardGlyphItem.GlyphItemFriend, "Friend" }
+                { StandardGlyphItem.GlyphItemFriend, "Friend" },
             };
 
             foreach (var groupKvp in supportedGlyphGroups)
@@ -82,7 +82,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var iconName = GetIconName(groupKvp.Value, itemKvp.Value);
                     var localGroup = groupKvp.Key;
                     var localItem = itemKvp.Key;
-                    iconService.AddIcon(iconName, iconName, () => glyphService.GetGlyph(localGroup, localItem));
+                    iconService.AddIcon(
+                        iconName,
+                        iconName,
+                        () => glyphService.GetGlyph(localGroup, localItem)
+                    );
                 }
             }
         }

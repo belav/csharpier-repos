@@ -21,10 +21,10 @@ public class LocalRedirectResult : ActionResult
     /// provided.
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
-    public LocalRedirectResult([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl)
-         : this(localUrl, permanent: false)
-    {
-    }
+    public LocalRedirectResult(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
+    )
+        : this(localUrl, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -32,10 +32,11 @@ public class LocalRedirectResult : ActionResult
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
-    public LocalRedirectResult([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl, bool permanent)
-        : this(localUrl, permanent, preserveMethod: false)
-    {
-    }
+    public LocalRedirectResult(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl,
+        bool permanent
+    )
+        : this(localUrl, permanent, preserveMethod: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -44,7 +45,11 @@ public class LocalRedirectResult : ActionResult
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request's method.</param>
-    public LocalRedirectResult([StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl, bool permanent, bool preserveMethod)
+    public LocalRedirectResult(
+        [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl,
+        bool permanent,
+        bool preserveMethod
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -72,7 +77,6 @@ public class LocalRedirectResult : ActionResult
     public string Url
     {
         get => _localUrl;
-
         [MemberNotNull(nameof(_localUrl))]
         set
         {
@@ -95,7 +99,9 @@ public class LocalRedirectResult : ActionResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<LocalRedirectResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<LocalRedirectResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

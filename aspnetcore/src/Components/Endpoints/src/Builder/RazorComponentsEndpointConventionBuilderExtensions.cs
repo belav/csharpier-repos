@@ -21,7 +21,8 @@ public static class RazorComponentsEndpointConventionBuilderExtensions
     /// </remarks>
     public static RazorComponentsEndpointConventionBuilder AddAdditionalAssemblies(
         this RazorComponentsEndpointConventionBuilder builder,
-        params Assembly[] assemblies)
+        params Assembly[] assemblies
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(assemblies);

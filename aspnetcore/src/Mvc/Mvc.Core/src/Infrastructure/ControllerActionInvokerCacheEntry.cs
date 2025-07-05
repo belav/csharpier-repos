@@ -16,7 +16,8 @@ internal sealed class ControllerActionInvokerCacheEntry
         ControllerBinderDelegate? controllerBinderDelegate,
         ObjectMethodExecutor objectMethodExecutor,
         ActionMethodExecutor actionMethodExecutor,
-        ActionMethodExecutor innerActionMethodExecutor)
+        ActionMethodExecutor innerActionMethodExecutor
+    )
     {
         ControllerFactory = controllerFactory;
         ControllerReleaser = controllerReleaser;

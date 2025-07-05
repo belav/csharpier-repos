@@ -14,7 +14,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
 
     public event UnhandledExceptionEventHandler? UnhandledException;
 
-    public RendererSynchronizationContext() : this(new object(), Task.CompletedTask) { }
+    public RendererSynchronizationContext()
+        : this(new object(), Task.CompletedTask) { }
 
     private RendererSynchronizationContext(object @lock, Task taskQueue)
     {
@@ -57,7 +58,13 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
         Execute((completion, action, this));
         return t;
 
-        static void Execute((AsyncTaskMethodBuilder Completion, Action Action, RendererSynchronizationContext Context) state)
+        static void Execute(
+            (
+                AsyncTaskMethodBuilder Completion,
+                Action Action,
+                RendererSynchronizationContext Context
+            ) state
+        )
         {
             var original = Current;
             SetSynchronizationContext(state.Context);
@@ -96,7 +103,13 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
         Execute((completion, function, this));
         return t;
 
-        static void Execute((AsyncTaskMethodBuilder<TResult> Completion, Func<TResult> Func, RendererSynchronizationContext Context) state)
+        static void Execute(
+            (
+                AsyncTaskMethodBuilder<TResult> Completion,
+                Func<TResult> Func,
+                RendererSynchronizationContext Context
+            ) state
+        )
         {
             var original = Current;
             SetSynchronizationContext(state.Context);
@@ -120,18 +133,21 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
         var completion = AsyncTaskMethodBuilder.Create();
         var t = completion.Task; // lazy initialize before passing around the struct
 
-        SendIfQuiescedOrElsePost(static async state =>
-        {
-            try
+        SendIfQuiescedOrElsePost(
+            static async state =>
             {
-                await state.asyncAction().ConfigureAwait(false);
-                state.completion.SetResult();
-            }
-            catch (Exception exception)
-            {
-                state.completion.SetException(exception);
-            }
-        }, (completion, asyncAction));
+                try
+                {
+                    await state.asyncAction().ConfigureAwait(false);
+                    state.completion.SetResult();
+                }
+                catch (Exception exception)
+                {
+                    state.completion.SetException(exception);
+                }
+            },
+            (completion, asyncAction)
+        );
 
         return t;
     }
@@ -141,17 +157,20 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
         var completion = AsyncTaskMethodBuilder<TResult>.Create();
         var t = completion.Task; // lazy initialize before passing around the struct
 
-        SendIfQuiescedOrElsePost(static async state =>
-        {
-            try
+        SendIfQuiescedOrElsePost(
+            static async state =>
             {
-                state.completion.SetResult(await state.asyncFunction().ConfigureAwait(false));
-            }
-            catch (Exception exception)
-            {
-                state.completion.SetException(exception);
-            }
-        }, (completion, asyncFunction));
+                try
+                {
+                    state.completion.SetResult(await state.asyncFunction().ConfigureAwait(false));
+                }
+                catch (Exception exception)
+                {
+                    state.completion.SetException(exception);
+                }
+            },
+            (completion, asyncFunction)
+        );
 
         return t;
     }
@@ -179,7 +198,10 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
 
         // We have to block. That's the contract of Send - we don't expect this to be used
         // in many scenarios in Components.
-        antecedent.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing).GetAwaiter().GetResult();
+        antecedent
+            .ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing)
+            .GetAwaiter()
+            .GetResult();
 
         InvokeWithThisAsCurrentSyncCtxThenSetResult(completion, d.Invoke, state); // Allocates, but using this method should be rare
     }
@@ -190,7 +212,9 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
     /// </summary>
     private async Task PostAsync<TState>(Task antecedent, Action<TState> callback, TState state)
     {
-        await antecedent.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing | ConfigureAwaitOptions.ForceYielding);
+        await antecedent.ConfigureAwait(
+            ConfigureAwaitOptions.SuppressThrowing | ConfigureAwaitOptions.ForceYielding
+        );
         try
         {
             SetSynchronizationContext(this); // this will be undone automatically by the thread pool, so we don't need to here
@@ -234,7 +258,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
     private void InvokeWithThisAsCurrentSyncCtxThenSetResult<TState>(
         AsyncTaskMethodBuilder completion,
         Action<TState> callback,
-        TState state)
+        TState state
+    )
     {
         var original = Current;
         try

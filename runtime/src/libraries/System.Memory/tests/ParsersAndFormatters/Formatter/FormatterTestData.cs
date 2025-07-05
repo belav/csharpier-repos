@@ -5,7 +5,12 @@ namespace System.Buffers.Text.Tests
 {
     public sealed class FormatterTestData<T>
     {
-        public FormatterTestData(T value, SupportedFormat format, byte precision, string expectedOutput)
+        public FormatterTestData(
+            T value,
+            SupportedFormat format,
+            byte precision,
+            string expectedOutput
+        )
         {
             Value = value;
             Format = format;
@@ -23,7 +28,12 @@ namespace System.Buffers.Text.Tests
 
         public ParserTestData<T> ToParserTestData()
         {
-            return new ParserTestData<T>(ExpectedOutput, Value, FormatSymbol, expectedSuccess: true);
+            return new ParserTestData<T>(
+                ExpectedOutput,
+                Value,
+                FormatSymbol,
+                expectedSuccess: true
+            );
         }
 
         public sealed override string ToString()
@@ -32,11 +42,15 @@ namespace System.Buffers.Text.Tests
             // Take good care of this method: it affects Xunit output and makes a lot of difference in how annoying test investigations are.
             //
 
-            string formatString = (FormatSymbol == default) ?
-                "default" :
-                FormatSymbol + ((Precision == StandardFormat.NoPrecision) ?
-                    string.Empty :
-                    Precision.ToString());
+            string formatString =
+                (FormatSymbol == default)
+                    ? "default"
+                    : FormatSymbol
+                        + (
+                            (Precision == StandardFormat.NoPrecision)
+                                ? string.Empty
+                                : Precision.ToString()
+                        );
 
             string bufferLengthString;
             if (PassedInBufferLength == ExpectedOutput.Length)
@@ -49,7 +63,8 @@ namespace System.Buffers.Text.Tests
             }
             else
             {
-                bufferLengthString = $", Buffer Length = {PassedInBufferLength} bytes (longer than needed)";
+                bufferLengthString =
+                    $", Buffer Length = {PassedInBufferLength} bytes (longer than needed)";
             }
 
             return $"[Format{typeof(T).Name} {Value.DisplayString()},{formatString} to '{ExpectedOutput}'{bufferLengthString})]";

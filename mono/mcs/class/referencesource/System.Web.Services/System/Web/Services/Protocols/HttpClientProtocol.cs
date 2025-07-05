@@ -1,24 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="HttpClientProtocol.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
     using System.IO;
-    using System.Reflection;
-    using System.Xml.Serialization;
     using System.Net;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading;
-    using System.ComponentModel;
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
     using System.Web.Services.Diagnostics;
+    using System.Xml.Serialization;
 
-    internal class HttpClientMethod {
+    internal class HttpClientMethod
+    {
         internal Type readerType;
         internal object readerInitializer;
         internal Type writerType;
@@ -26,18 +28,28 @@ namespace System.Web.Services.Protocols {
         internal LogicalMethodInfo methodInfo;
     }
 
-    internal class HttpClientType {
+    internal class HttpClientType
+    {
         Hashtable methods = new Hashtable();
 
-        internal HttpClientType(Type type) {
-            LogicalMethodInfo[] methodInfos = LogicalMethodInfo.Create(type.GetMethods(), LogicalMethodTypes.Sync);
+        internal HttpClientType(Type type)
+        {
+            LogicalMethodInfo[] methodInfos = LogicalMethodInfo.Create(
+                type.GetMethods(),
+                LogicalMethodTypes.Sync
+            );
 
             Hashtable formatterTypes = new Hashtable();
-            for (int i = 0; i < methodInfos.Length; i++) {
+            for (int i = 0; i < methodInfos.Length; i++)
+            {
                 LogicalMethodInfo methodInfo = methodInfos[i];
-                try {
-                    object[] attributes = methodInfo.GetCustomAttributes(typeof(HttpMethodAttribute));
-                    if (attributes.Length == 0) continue;
+                try
+                {
+                    object[] attributes = methodInfo.GetCustomAttributes(
+                        typeof(HttpMethodAttribute)
+                    );
+                    if (attributes.Length == 0)
+                        continue;
                     HttpMethodAttribute attribute = (HttpMethodAttribute)attributes[0];
                     HttpClientMethod method = new HttpClientMethod();
                     method.readerType = attribute.ReturnFormatter;
@@ -47,43 +59,68 @@ namespace System.Web.Services.Protocols {
                     AddFormatter(formatterTypes, method.writerType, method);
                     methods.Add(methodInfo.Name, method);
                 }
-                catch (Exception e) {
-                    if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+                catch (Exception e)
+                {
+                    if (
+                        e is ThreadAbortException
+                        || e is StackOverflowException
+                        || e is OutOfMemoryException
+                    )
+                    {
                         throw;
                     }
-                    throw new InvalidOperationException(Res.GetString(Res.WebReflectionError, methodInfo.DeclaringType.FullName, methodInfo.Name), e);
+                    throw new InvalidOperationException(
+                        Res.GetString(
+                            Res.WebReflectionError,
+                            methodInfo.DeclaringType.FullName,
+                            methodInfo.Name
+                        ),
+                        e
+                    );
                 }
             }
 
-            foreach (Type t in formatterTypes.Keys) {
+            foreach (Type t in formatterTypes.Keys)
+            {
                 ArrayList list = (ArrayList)formatterTypes[t];
                 LogicalMethodInfo[] m = new LogicalMethodInfo[list.Count];
                 for (int j = 0; j < list.Count; j++)
                     m[j] = ((HttpClientMethod)list[j]).methodInfo;
                 object[] initializers = MimeFormatter.GetInitializers(t, m);
                 bool isWriter = typeof(MimeParameterWriter).IsAssignableFrom(t);
-                for (int j = 0; j < list.Count; j++) {
-                    if (isWriter) {
+                for (int j = 0; j < list.Count; j++)
+                {
+                    if (isWriter)
+                    {
                         ((HttpClientMethod)list[j]).writerInitializer = initializers[j];
                     }
-                    else {
+                    else
+                    {
                         ((HttpClientMethod)list[j]).readerInitializer = initializers[j];
                     }
                 }
             }
         }
 
-        static void AddFormatter(Hashtable formatterTypes, Type formatterType, HttpClientMethod method) {
-            if (formatterType == null) return;
+        static void AddFormatter(
+            Hashtable formatterTypes,
+            Type formatterType,
+            HttpClientMethod method
+        )
+        {
+            if (formatterType == null)
+                return;
             ArrayList list = (ArrayList)formatterTypes[formatterType];
-            if (list == null) {
+            if (list == null)
+            {
                 list = new ArrayList();
                 formatterTypes.Add(formatterType, list);
             }
             list.Add(method);
         }
 
-        internal HttpClientMethod GetMethod(string name) {
+        internal HttpClientMethod GetMethod(string name)
+        {
             return (HttpClientMethod)methods[name];
         }
     }
@@ -96,7 +133,8 @@ namespace System.Web.Services.Protocols {
     ///    </para>
     /// </devdoc>
     [ComVisible(true)]
-    public abstract class HttpSimpleClientProtocol : HttpWebClientProtocol {
+    public abstract class HttpSimpleClientProtocol : HttpWebClientProtocol
+    {
         HttpClientType clientType;
 
         /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.HttpSimpleClientProtocol"]/*' />
@@ -106,13 +144,17 @@ namespace System.Web.Services.Protocols {
         ///    </para>
         /// </devdoc>
         protected HttpSimpleClientProtocol()
-            : base() {
+            : base()
+        {
             Type type = this.GetType();
             clientType = (HttpClientType)GetFromCache(type);
-            if (clientType == null) {
-                lock (InternalSyncObject) {
+            if (clientType == null)
+            {
+                lock (InternalSyncObject)
+                {
                     clientType = (HttpClientType)GetFromCache(type);
-                    if (clientType == null) {
+                    if (clientType == null)
+                    {
                         clientType = new HttpClientType(type);
                         AddToCache(type, clientType);
                     }
@@ -126,54 +168,62 @@ namespace System.Web.Services.Protocols {
         ///       Invokes a method of a HTTP web service.
         ///    </para>
         /// </devdoc>
-        protected object Invoke(string methodName, string requestUrl, object[] parameters) {
+        protected object Invoke(string methodName, string requestUrl, object[] parameters)
+        {
             WebResponse response = null;
             HttpClientMethod method = GetClientMethod(methodName);
-            MimeParameterWriter paramWriter = GetParameterWriter(method);                
+            MimeParameterWriter paramWriter = GetParameterWriter(method);
             Uri requestUri = new Uri(requestUrl);
-            if (paramWriter != null) {
+            if (paramWriter != null)
+            {
                 paramWriter.RequestEncoding = RequestEncoding;
                 requestUrl = paramWriter.GetRequestUrl(requestUri.AbsoluteUri, parameters);
                 requestUri = new Uri(requestUrl, true);
             }
             WebRequest request = null;
-            try {
+            try
+            {
                 request = GetWebRequest(requestUri);
                 NotifyClientCallOut(request);
                 PendingSyncRequest = request;
-                if (paramWriter != null) {
-                    paramWriter.InitializeRequest(request, parameters);      
-                    // 
+                if (paramWriter != null)
+                {
+                    paramWriter.InitializeRequest(request, parameters);
+                    //
 
-
-                    if (paramWriter.UsesWriteRequest) {                        
+                    if (paramWriter.UsesWriteRequest)
+                    {
                         if (parameters.Length == 0)
                             request.ContentLength = 0;
-                        else {
+                        else
+                        {
                             Stream requestStream = null;
-                            try {
+                            try
+                            {
                                 requestStream = request.GetRequestStream();
                                 paramWriter.WriteRequest(requestStream, parameters);
                             }
-                            finally {
-                                if (requestStream != null) requestStream.Close();
-                            }                            
+                            finally
+                            {
+                                if (requestStream != null)
+                                    requestStream.Close();
+                            }
                         }
                     }
                 }
-                response = GetWebResponse(request);            
+                response = GetWebResponse(request);
                 Stream responseStream = null;
                 if (response.ContentLength != 0)
                     responseStream = response.GetResponseStream();
 
                 return ReadResponse(method, response, responseStream);
             }
-            finally {
+            finally
+            {
                 if (request == PendingSyncRequest)
                     PendingSyncRequest = null;
             }
         }
-
 
         /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.BeginInvoke"]/*' />
         /// <devdoc>
@@ -181,46 +231,72 @@ namespace System.Web.Services.Protocols {
         ///       Starts an asynchronous invocation of a method of a HTTP web service.
         ///    </para>
         /// </devdoc>
-        protected IAsyncResult BeginInvoke(string methodName, string requestUrl, object[] parameters, AsyncCallback callback, object asyncState) {
+        protected IAsyncResult BeginInvoke(
+            string methodName,
+            string requestUrl,
+            object[] parameters,
+            AsyncCallback callback,
+            object asyncState
+        )
+        {
             HttpClientMethod method = GetClientMethod(methodName);
             MimeParameterWriter paramWriter = GetParameterWriter(method);
-            Uri requestUri = new Uri(requestUrl);            
-            if (paramWriter != null) {
+            Uri requestUri = new Uri(requestUrl);
+            if (paramWriter != null)
+            {
                 paramWriter.RequestEncoding = RequestEncoding;
                 requestUrl = paramWriter.GetRequestUrl(requestUri.AbsoluteUri, parameters);
                 requestUri = new Uri(requestUrl, true);
             }
-            InvokeAsyncState invokeState = new InvokeAsyncState(method, paramWriter, parameters);            
-            WebClientAsyncResult asyncResult = new WebClientAsyncResult(this, invokeState, null, callback, asyncState);
+            InvokeAsyncState invokeState = new InvokeAsyncState(method, paramWriter, parameters);
+            WebClientAsyncResult asyncResult = new WebClientAsyncResult(
+                this,
+                invokeState,
+                null,
+                callback,
+                asyncState
+            );
             return BeginSend(requestUri, asyncResult, paramWriter.UsesWriteRequest);
         }
-
 
         /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.InitializeAsyncRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        internal override void InitializeAsyncRequest(WebRequest request, object internalAsyncState) {
+        internal override void InitializeAsyncRequest(WebRequest request, object internalAsyncState)
+        {
             InvokeAsyncState invokeState = (InvokeAsyncState)internalAsyncState;
-            if (invokeState.ParamWriter.UsesWriteRequest && invokeState.Parameters.Length == 0) 
+            if (invokeState.ParamWriter.UsesWriteRequest && invokeState.Parameters.Length == 0)
                 request.ContentLength = 0;
         }
 
-        internal override void AsyncBufferedSerialize(WebRequest request, Stream requestStream, object internalAsyncState) {
+        internal override void AsyncBufferedSerialize(
+            WebRequest request,
+            Stream requestStream,
+            object internalAsyncState
+        )
+        {
             InvokeAsyncState invokeState = (InvokeAsyncState)internalAsyncState;
-            if (invokeState.ParamWriter != null) {
+            if (invokeState.ParamWriter != null)
+            {
                 invokeState.ParamWriter.InitializeRequest(request, invokeState.Parameters);
                 if (invokeState.ParamWriter.UsesWriteRequest && invokeState.Parameters.Length > 0)
-                    invokeState.ParamWriter.WriteRequest(requestStream, invokeState.Parameters);                        
+                    invokeState.ParamWriter.WriteRequest(requestStream, invokeState.Parameters);
             }
         }
 
-        class InvokeAsyncState {            
+        class InvokeAsyncState
+        {
             internal object[] Parameters;
             internal MimeParameterWriter ParamWriter;
-            internal HttpClientMethod Method;            
+            internal HttpClientMethod Method;
 
-            internal InvokeAsyncState(HttpClientMethod method, MimeParameterWriter paramWriter, object[] parameters) {
+            internal InvokeAsyncState(
+                HttpClientMethod method,
+                MimeParameterWriter paramWriter,
+                object[] parameters
+            )
+            {
                 this.Method = method;
                 this.ParamWriter = paramWriter;
                 this.Parameters = parameters;
@@ -233,42 +309,64 @@ namespace System.Web.Services.Protocols {
         ///       Ends an asynchronous invocation of a method of a HTTP web service.
         ///    </para>
         /// </devdoc>
-        protected object EndInvoke(IAsyncResult asyncResult) {            
+        protected object EndInvoke(IAsyncResult asyncResult)
+        {
             object o = null;
             Stream responseStream = null;
             WebResponse response = EndSend(asyncResult, ref o, ref responseStream);
-            InvokeAsyncState invokeState = (InvokeAsyncState) o;
+            InvokeAsyncState invokeState = (InvokeAsyncState)o;
             return ReadResponse(invokeState.Method, response, responseStream);
         }
 
-        private void InvokeAsyncCallback(IAsyncResult result) {
+        private void InvokeAsyncCallback(IAsyncResult result)
+        {
             object parameter = null;
             Exception exception = null;
             WebClientAsyncResult asyncResult = (WebClientAsyncResult)result;
-            if (asyncResult.Request != null) {
-                try {
+            if (asyncResult.Request != null)
+            {
+                try
+                {
                     object o = null;
                     Stream responseStream = null;
                     WebResponse response = EndSend(asyncResult, ref o, ref responseStream);
-                    InvokeAsyncState invokeState = (InvokeAsyncState) o;
+                    InvokeAsyncState invokeState = (InvokeAsyncState)o;
                     parameter = ReadResponse(invokeState.Method, response, responseStream);
-                } 
-                catch (Exception e) {
-                    if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException)
+                }
+                catch (Exception e)
+                {
+                    if (
+                        e is ThreadAbortException
+                        || e is StackOverflowException
+                        || e is OutOfMemoryException
+                    )
                         throw;
                     exception = e;
-                    if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, this, "InvokeAsyncCallback", e);
+                    if (Tracing.On)
+                        Tracing.ExceptionCatch(
+                            TraceEventType.Error,
+                            this,
+                            "InvokeAsyncCallback",
+                            e
+                        );
                 }
             }
             AsyncOperation asyncOp = (AsyncOperation)result.AsyncState;
             UserToken token = (UserToken)asyncOp.UserSuppliedState;
             OperationCompleted(token.UserState, new object[] { parameter }, exception, false);
         }
+
         /// <include file='doc\HttpClientProtocol.uex' path='docs/doc[@for="HttpSimpleClientProtocol.InvokeAsync"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected void InvokeAsync(string methodName, string requestUrl, object[] parameters, SendOrPostCallback callback) {
+        protected void InvokeAsync(
+            string methodName,
+            string requestUrl,
+            object[] parameters,
+            SendOrPostCallback callback
+        )
+        {
             InvokeAsync(methodName, requestUrl, parameters, callback, null);
         }
 
@@ -276,70 +374,128 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected void InvokeAsync(string methodName, string requestUrl, object[] parameters, SendOrPostCallback callback, object userState) {
+        protected void InvokeAsync(
+            string methodName,
+            string requestUrl,
+            object[] parameters,
+            SendOrPostCallback callback,
+            object userState
+        )
+        {
             if (userState == null)
                 userState = NullToken;
-            AsyncOperation asyncOp = AsyncOperationManager.CreateOperation(new UserToken(callback, userState));
-            WebClientAsyncResult asyncResult = new WebClientAsyncResult(this, null, null, new AsyncCallback(InvokeAsyncCallback), asyncOp);
-            try {
+            AsyncOperation asyncOp = AsyncOperationManager.CreateOperation(
+                new UserToken(callback, userState)
+            );
+            WebClientAsyncResult asyncResult = new WebClientAsyncResult(
+                this,
+                null,
+                null,
+                new AsyncCallback(InvokeAsyncCallback),
+                asyncOp
+            );
+            try
+            {
                 AsyncInvokes.Add(userState, asyncResult);
             }
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException)
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
                     throw;
-                if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, this, "InvokeAsync", e);
-                Exception exception = new ArgumentException(Res.GetString(Res.AsyncDuplicateUserState), e);
-                InvokeCompletedEventArgs eventArgs = new InvokeCompletedEventArgs(new object[] { null }, exception, false, userState);
+                if (Tracing.On)
+                    Tracing.ExceptionCatch(TraceEventType.Error, this, "InvokeAsync", e);
+                Exception exception = new ArgumentException(
+                    Res.GetString(Res.AsyncDuplicateUserState),
+                    e
+                );
+                InvokeCompletedEventArgs eventArgs = new InvokeCompletedEventArgs(
+                    new object[] { null },
+                    exception,
+                    false,
+                    userState
+                );
                 asyncOp.PostOperationCompleted(callback, eventArgs);
                 return;
             }
-            try {
+            try
+            {
                 HttpClientMethod method = GetClientMethod(methodName);
                 MimeParameterWriter paramWriter = GetParameterWriter(method);
-                Uri requestUri = new Uri(requestUrl);            
-                if (paramWriter != null) {
+                Uri requestUri = new Uri(requestUrl);
+                if (paramWriter != null)
+                {
                     paramWriter.RequestEncoding = RequestEncoding;
                     requestUrl = paramWriter.GetRequestUrl(requestUri.AbsoluteUri, parameters);
                     requestUri = new Uri(requestUrl, true);
                 }
-                asyncResult.InternalAsyncState = new InvokeAsyncState(method, paramWriter, parameters);
+                asyncResult.InternalAsyncState = new InvokeAsyncState(
+                    method,
+                    paramWriter,
+                    parameters
+                );
                 BeginSend(requestUri, asyncResult, paramWriter.UsesWriteRequest);
-            } 
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException)
+            }
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
                     throw;
-                if (Tracing.On) Tracing.ExceptionCatch(TraceEventType.Error, this, "InvokeAsync", e);
+                if (Tracing.On)
+                    Tracing.ExceptionCatch(TraceEventType.Error, this, "InvokeAsync", e);
                 OperationCompleted(userState, new object[] { null }, e, false);
             }
         }
 
-        MimeParameterWriter GetParameterWriter(HttpClientMethod method) {
+        MimeParameterWriter GetParameterWriter(HttpClientMethod method)
+        {
             if (method.writerType == null)
                 return null;
-            return (MimeParameterWriter)MimeFormatter.CreateInstance(method.writerType, method.writerInitializer);                
+            return (MimeParameterWriter)
+                MimeFormatter.CreateInstance(method.writerType, method.writerInitializer);
         }
 
-        HttpClientMethod GetClientMethod(string methodName) {
+        HttpClientMethod GetClientMethod(string methodName)
+        {
             HttpClientMethod method = clientType.GetMethod(methodName);
-            if (method == null) throw new ArgumentException(Res.GetString(Res.WebInvalidMethodName, methodName), "methodName");
+            if (method == null)
+                throw new ArgumentException(
+                    Res.GetString(Res.WebInvalidMethodName, methodName),
+                    "methodName"
+                );
             return method;
         }
 
-        object ReadResponse(HttpClientMethod method, WebResponse response, Stream responseStream) {
+        object ReadResponse(HttpClientMethod method, WebResponse response, Stream responseStream)
+        {
             HttpWebResponse httpResponse = response as HttpWebResponse;
             if (httpResponse != null && (int)httpResponse.StatusCode >= 300)
-                throw new WebException(RequestResponseUtils.CreateResponseExceptionString(httpResponse, responseStream), null, 
-                    WebExceptionStatus.ProtocolError, httpResponse);
+                throw new WebException(
+                    RequestResponseUtils.CreateResponseExceptionString(
+                        httpResponse,
+                        responseStream
+                    ),
+                    null,
+                    WebExceptionStatus.ProtocolError,
+                    httpResponse
+                );
 
             if (method.readerType == null)
                 return null;
 
-            // 
+            //
 
-
-            if (responseStream != null) {
-                MimeReturnReader reader = (MimeReturnReader)MimeFormatter.CreateInstance(method.readerType, method.readerInitializer);
-                return reader.Read(response, responseStream);                
+            if (responseStream != null)
+            {
+                MimeReturnReader reader = (MimeReturnReader)
+                    MimeFormatter.CreateInstance(method.readerType, method.readerInitializer);
+                return reader.Read(response, responseStream);
             }
             else
                 return null;

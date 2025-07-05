@@ -46,7 +46,10 @@ namespace System.Linq.Tests
         [Fact]
         public void ElementAtThrows()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => GetEmptyPartition<int>().ElementAt(0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => GetEmptyPartition<int>().ElementAt(0)
+            );
         }
 
         [Fact]
@@ -107,7 +110,9 @@ namespace System.Linq.Tests
         public void IListImplementationIsValid()
         {
             IList<int> list = Assert.IsAssignableFrom<IList<int>>(Enumerable.Empty<int>());
-            IReadOnlyList<int> roList = Assert.IsAssignableFrom<IReadOnlyList<int>>(Enumerable.Empty<int>());
+            IReadOnlyList<int> roList = Assert.IsAssignableFrom<IReadOnlyList<int>>(
+                Enumerable.Empty<int>()
+            );
 
             Assert.Throws<NotSupportedException>(() => list.Add(42));
             Assert.Throws<NotSupportedException>(() => list.Insert(0, 42));

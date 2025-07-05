@@ -22,7 +22,8 @@ public class CustomSchemaTest : IClassFixture<ScratchDatabaseFixture>
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
             .AddDbContext<CustomVersionDbContext>(o =>
                 o.UseSqlite(fixture.Connection)
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+            )
             .AddIdentity<IdentityUser, IdentityRole>(o =>
             {
                 // Versions >= 3 are custom
@@ -31,7 +32,9 @@ public class CustomSchemaTest : IClassFixture<ScratchDatabaseFixture>
             .AddEntityFrameworkStores<CustomVersionDbContext>();
 
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
-        using var scope = _builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        using var scope = _builder
+            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CustomVersionDbContext>();
         db.Database.EnsureCreated();
     }
@@ -39,7 +42,9 @@ public class CustomSchemaTest : IClassFixture<ScratchDatabaseFixture>
     [Fact]
     public void CanAddCustomColumn()
     {
-        using var scope = _builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        using var scope = _builder
+            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<CustomVersionDbContext>();
         VersionTwoSchemaTest.VerifyVersion2Schema(db);
         using var sqlConn = (SqliteConnection)db.Database.GetDbConnection();

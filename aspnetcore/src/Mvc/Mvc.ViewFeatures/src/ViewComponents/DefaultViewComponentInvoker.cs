@@ -34,7 +34,8 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
         IViewComponentFactory viewComponentFactory,
         ViewComponentInvokerCache viewComponentInvokerCache,
         DiagnosticListener diagnosticListener,
-        ILogger logger)
+        ILogger logger
+    )
     {
         ArgumentNullException.ThrowIfNull(viewComponentFactory);
         ArgumentNullException.ThrowIfNull(viewComponentInvokerCache);
@@ -88,7 +89,11 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
         await result.ExecuteAsync(context);
     }
 
-    private async Task<IViewComponentResult> InvokeAsyncCore(ObjectMethodExecutor executor, object component, ViewComponentContext context)
+    private async Task<IViewComponentResult> InvokeAsyncCore(
+        ObjectMethodExecutor executor,
+        object component,
+        ViewComponentContext context
+    )
     {
         using (Log.ViewComponentScope(_logger, context))
         {
@@ -138,14 +143,23 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             }
 
             var viewComponentResult = CoerceToViewComponentResult(resultAsObject);
-            Log.ViewComponentExecuted(_logger, context, stopwatch.GetElapsedTime(), viewComponentResult);
+            Log.ViewComponentExecuted(
+                _logger,
+                context,
+                stopwatch.GetElapsedTime(),
+                viewComponentResult
+            );
             _diagnosticListener.AfterViewComponent(context, viewComponentResult, component);
 
             return viewComponentResult;
         }
     }
 
-    private IViewComponentResult InvokeSyncCore(ObjectMethodExecutor executor, object component, ViewComponentContext context)
+    private IViewComponentResult InvokeSyncCore(
+        ObjectMethodExecutor executor,
+        object component,
+        ViewComponentContext context
+    )
     {
         using (Log.ViewComponentScope(_logger, context))
         {
@@ -160,7 +174,12 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             result = executor.Execute(component, arguments);
 
             var viewComponentResult = CoerceToViewComponentResult(result);
-            Log.ViewComponentExecuted(_logger, context, stopwatch.GetElapsedTime(), viewComponentResult);
+            Log.ViewComponentExecuted(
+                _logger,
+                context,
+                stopwatch.GetElapsedTime(),
+                viewComponentResult
+            );
             _diagnosticListener.AfterViewComponent(context, viewComponentResult, component);
 
             return viewComponentResult;
@@ -189,15 +208,19 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             return new HtmlContentViewComponentResult(htmlContent);
         }
 
-        throw new InvalidOperationException(Resources.FormatViewComponent_InvalidReturnValue(
-            typeof(string).Name,
-            typeof(IHtmlContent).Name,
-            typeof(IViewComponentResult).Name));
+        throw new InvalidOperationException(
+            Resources.FormatViewComponent_InvalidReturnValue(
+                typeof(string).Name,
+                typeof(IHtmlContent).Name,
+                typeof(IViewComponentResult).Name
+            )
+        );
     }
 
     private static object?[]? PrepareArguments(
         IDictionary<string, object?> parameters,
-        ObjectMethodExecutor objectMethodExecutor)
+        ObjectMethodExecutor objectMethodExecutor
+    )
     {
         var declaredParameterInfos = objectMethodExecutor.MethodParameters;
         var count = declaredParameterInfos.Length;
@@ -224,11 +247,32 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Executing view component {ViewComponentName} with arguments ({Arguments}).", EventName = "ViewComponentExecuting", SkipEnabledCheck = true)]
-        private static partial void ViewComponentExecuting(ILogger logger, string viewComponentName, string[] arguments);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Executing view component {ViewComponentName} with arguments ({Arguments}).",
+            EventName = "ViewComponentExecuting",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ViewComponentExecuting(
+            ILogger logger,
+            string viewComponentName,
+            string[] arguments
+        );
 
-        [LoggerMessage(2, LogLevel.Debug, "Executed view component {ViewComponentName} in {ElapsedMilliseconds}ms and returned {ViewComponentResult}", EventName = "ViewComponentExecuted", SkipEnabledCheck = true)]
-        private static partial void ViewComponentExecuted(ILogger logger, string viewComponentName, double elapsedMilliseconds, string? viewComponentResult);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Executed view component {ViewComponentName} in {ElapsedMilliseconds}ms and returned {ViewComponentResult}",
+            EventName = "ViewComponentExecuted",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ViewComponentExecuted(
+            ILogger logger,
+            string viewComponentName,
+            double elapsedMilliseconds,
+            string? viewComponentResult
+        );
 
         public static IDisposable? ViewComponentScope(ILogger logger, ViewComponentContext context)
         {
@@ -239,12 +283,17 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
         public static void ViewComponentExecuting(
             ILogger logger,
             ViewComponentContext context,
-            object[] arguments)
+            object[] arguments
+        )
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
                 var formattedArguments = GetFormattedArguments(arguments);
-                ViewComponentExecuting(logger, context.ViewComponentDescriptor.DisplayName, formattedArguments);
+                ViewComponentExecuting(
+                    logger,
+                    context.ViewComponentDescriptor.DisplayName,
+                    formattedArguments
+                );
             }
         }
 
@@ -252,7 +301,8 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             ILogger logger,
             ViewComponentContext context,
             TimeSpan timespan,
-            object result)
+            object result
+        )
         {
             // Don't log if logging wasn't enabled at start of request as time will be wildly wrong.
             if (logger.IsEnabled(LogLevel.Debug))
@@ -261,7 +311,8 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
                     logger,
                     context.ViewComponentDescriptor.DisplayName,
                     timespan.TotalMilliseconds,
-                    Convert.ToString(result, CultureInfo.InvariantCulture));
+                    Convert.ToString(result, CultureInfo.InvariantCulture)
+                );
             }
         }
 
@@ -275,7 +326,10 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
             var formattedArguments = new string[arguments.Length];
             for (var i = 0; i < formattedArguments.Length; i++)
             {
-                formattedArguments[i] = Convert.ToString(arguments[i], CultureInfo.InvariantCulture);
+                formattedArguments[i] = Convert.ToString(
+                    arguments[i],
+                    CultureInfo.InvariantCulture
+                );
             }
 
             return formattedArguments;
@@ -296,7 +350,10 @@ internal sealed partial class DefaultViewComponentInvoker : IViewComponentInvoke
                 {
                     if (index == 0)
                     {
-                        return new KeyValuePair<string, object>("ViewComponentName", _descriptor.DisplayName);
+                        return new KeyValuePair<string, object>(
+                            "ViewComponentName",
+                            _descriptor.DisplayName
+                        );
                     }
                     else if (index == 1)
                     {

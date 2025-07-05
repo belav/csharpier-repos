@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Test_test1
 {
     public int func(int type)
     {
-        try
-        {
-        }
+        try { }
         finally
         {
             switch (type)
@@ -23,9 +22,7 @@ public class Test_test1
                 case 818:
                 case -115:
                 case 576:
-                    try
-                    {
-                    }
+                    try { }
                     finally
                     {
                         switch (type)

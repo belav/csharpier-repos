@@ -8,7 +8,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 {
     public class WinHttpResponseHeaderReaderTest
     {
-        private static readonly KeyValuePair<string, string>[] s_emptyHeaders = Array.Empty<KeyValuePair<string, string>>();
+        private static readonly KeyValuePair<string, string>[] s_emptyHeaders = Array.Empty<
+            KeyValuePair<string, string>
+        >();
 
         [Fact]
         public void ReadHeader_WithStatusLine_CanSkipStatusLineAndReadHeader()
@@ -58,7 +60,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         [Theory]
         [MemberData(nameof(HeaderData))]
-        public void ReadHeader_VariousInputs_MatchesExpectedBehavior(string raw, KeyValuePair<string, string>[] expectedHeaders)
+        public void ReadHeader_VariousInputs_MatchesExpectedBehavior(
+            string raw,
+            KeyValuePair<string, string>[] expectedHeaders
+        )
         {
             char[] array = raw.ToCharArray();
             var reader = new WinHttpResponseHeaderReader(array, 0, array.Length);
@@ -89,89 +94,77 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             new object[] { "\r\n", s_emptyHeaders },
             new object[] { "\r\n\r\n", s_emptyHeaders },
             new object[] { "\r\n\r\n\r\n", s_emptyHeaders },
-
             new object[] { "Content-Length: 50", new[] { CreateHeader("Content-Length", "50") } },
-
-            new object[] { "X-Custom-Header: Foo", new[] { CreateHeader("X-Custom-Header", "Foo") } },
-
             new object[]
             {
-                "Content-Length: 50\r\n" +
-                "Content-Encoding: gzip\r\n" +
-                "X-Powered-By: .NET",
+                "X-Custom-Header: Foo",
+                new[] { CreateHeader("X-Custom-Header", "Foo") },
+            },
+            new object[]
+            {
+                "Content-Length: 50\r\n" + "Content-Encoding: gzip\r\n" + "X-Powered-By: .NET",
                 new[]
                 {
                     CreateHeader("Content-Length", "50"),
                     CreateHeader("Content-Encoding", "gzip"),
-                    CreateHeader("X-Powered-By", ".NET")
-                }
+                    CreateHeader("X-Powered-By", ".NET"),
+                },
             },
-
             // No colon in a line, should be skipped
             new object[]
             {
-                "Content-Length: 50\r\n" +
-                "no colon, should be skipped\r\n" +
-                "X-Powered-By: .NET",
+                "Content-Length: 50\r\n" + "no colon, should be skipped\r\n" + "X-Powered-By: .NET",
                 new[]
                 {
                     CreateHeader("Content-Length", "50"),
-                    CreateHeader("X-Powered-By", ".NET")
-                }
+                    CreateHeader("X-Powered-By", ".NET"),
+                },
             },
-
             // Empty lines (middle line) should be skipped
             new object[]
             {
-                "Content-Length: 50\r\n" +
-                "\r\n" +
-                "X-Powered-By: .NET",
+                "Content-Length: 50\r\n" + "\r\n" + "X-Powered-By: .NET",
                 new[]
                 {
                     CreateHeader("Content-Length", "50"),
-                    CreateHeader("X-Powered-By", ".NET")
-                }
+                    CreateHeader("X-Powered-By", ".NET"),
+                },
             },
-
             new object[]
             {
-                "Content-Length: 50\r\n" +
-                "" +
-                "X-Powered-By: .NET",
+                "Content-Length: 50\r\n" + "" + "X-Powered-By: .NET",
                 new[]
                 {
                     CreateHeader("Content-Length", "50"),
-                    CreateHeader("X-Powered-By", ".NET")
-                }
+                    CreateHeader("X-Powered-By", ".NET"),
+                },
             },
-
             // Empty lines (last line) should be skipped
             new object[]
             {
-                "Content-Length: 50\r\n" +
-                "Content-Encoding: deflate\r\n" +
-                "X-Powered-By: .NET\r\n",
+                "Content-Length: 50\r\n"
+                    + "Content-Encoding: deflate\r\n"
+                    + "X-Powered-By: .NET\r\n",
                 new[]
                 {
                     CreateHeader("Content-Length", "50"),
                     CreateHeader("Content-Encoding", "deflate"),
-                    CreateHeader("X-Powered-By", ".NET")
-                }
+                    CreateHeader("X-Powered-By", ".NET"),
+                },
             },
-
             // Values should be trimmed
             new object[]
             {
-                "Content-Length:   50    \r\n" +
-                "Content-Encoding:    brotli    \r\n" +
-                "X-Powered-By:    .NET    ",
+                "Content-Length:   50    \r\n"
+                    + "Content-Encoding:    brotli    \r\n"
+                    + "X-Powered-By:    .NET    ",
                 new[]
                 {
                     CreateHeader("Content-Length", "50"),
                     CreateHeader("Content-Encoding", "brotli"),
-                    CreateHeader("X-Powered-By", ".NET")
-                }
-            }
+                    CreateHeader("X-Powered-By", ".NET"),
+                },
+            },
         };
 
         private static KeyValuePair<string, string> CreateHeader(string name, string value)

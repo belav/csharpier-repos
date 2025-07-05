@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ExplorerBar" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ExplorerBar">
+<Type
+  Name="VisualStyleElement+ExplorerBar"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ExplorerBar"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ExplorerBar" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

@@ -21,10 +21,16 @@ public unsafe class UnmanagedCallersOnlyBasicTest
         public static extern int CallManagedProc(IntPtr callbackProc, int n);
 
         [DllImport(nameof(UnmanagedCallersOnlyDll))]
-        public static extern int CallManagedProc_Stdcall(delegate* unmanaged[Stdcall]<int, int> callbackProc, int n);
+        public static extern int CallManagedProc_Stdcall(
+            delegate* unmanaged[Stdcall]<int, int> callbackProc,
+            int n
+        );
 
         [DllImport(nameof(UnmanagedCallersOnlyDll))]
-        public static extern int CallManagedProc_Cdecl(delegate* unmanaged[Cdecl]<int, int> callbackProc, int n);
+        public static extern int CallManagedProc_Cdecl(
+            delegate* unmanaged[Cdecl]<int, int> callbackProc,
+            int n
+        );
 
         [DllImport(nameof(UnmanagedCallersOnlyDll))]
         public static extern int CallManagedProcMultipleTimes(int m, IntPtr callbackProc, int n);
@@ -51,10 +57,16 @@ public unsafe class UnmanagedCallersOnlyBasicTest
 
         int n = 12345;
         int expected = DoubleImpl(n);
-        Assert.Equal(expected, UnmanagedCallersOnlyDll.CallManagedProc((IntPtr)(delegate* unmanaged<int, int>)&ManagedDoubleCallback, n));
+        Assert.Equal(
+            expected,
+            UnmanagedCallersOnlyDll.CallManagedProc(
+                (IntPtr)(delegate* unmanaged<int, int>)&ManagedDoubleCallback,
+                n
+            )
+        );
     }
 
-   [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
     public static int ManagedDoubleCallback_Stdcall(int n)
     {
         return DoubleImpl(n);
@@ -67,7 +79,10 @@ public unsafe class UnmanagedCallersOnlyBasicTest
 
         int n = 12345;
         int expected = DoubleImpl(n);
-        int actual = UnmanagedCallersOnlyDll.CallManagedProc_Stdcall(&ManagedDoubleCallback_Stdcall, n);
+        int actual = UnmanagedCallersOnlyDll.CallManagedProc_Stdcall(
+            &ManagedDoubleCallback_Stdcall,
+            n
+        );
 
         Assert.Equal(expected, actual);
     }
@@ -97,7 +112,13 @@ public unsafe class UnmanagedCallersOnlyBasicTest
 
         int n = 12345;
         int expected = DoubleImpl(n);
-        Assert.Equal(expected, UnmanagedCallersOnlyDll.CallManagedProcOnNewThread((IntPtr)(delegate* unmanaged<int, int>)&ManagedDoubleCallback, n));
+        Assert.Equal(
+            expected,
+            UnmanagedCallersOnlyDll.CallManagedProcOnNewThread(
+                (IntPtr)(delegate* unmanaged<int, int>)&ManagedDoubleCallback,
+                n
+            )
+        );
     }
 
     [UnmanagedCallersOnly]
@@ -112,7 +133,9 @@ public unsafe class UnmanagedCallersOnlyBasicTest
     {
         Console.WriteLine($"Running {nameof(TestUnmanagedCallersOnlyValid_PrepareMethod)}...");
         // Prepare the managed callback.
-        var preparedCallback = typeof(UnmanagedCallersOnlyBasicTest).GetMethod(nameof(ManagedCallback_Prepared));
+        var preparedCallback = typeof(UnmanagedCallersOnlyBasicTest).GetMethod(
+            nameof(ManagedCallback_Prepared)
+        );
         RuntimeHelpers.PrepareMethod(preparedCallback.MethodHandle);
 
         UnmanagedCallersOnlyOnNewNativeThread(12345);
@@ -122,7 +145,10 @@ public unsafe class UnmanagedCallersOnlyBasicTest
             // Call enough to attempt to trigger Tiered Compilation from a new thread.
             for (int i = 0; i < 100; ++i)
             {
-                UnmanagedCallersOnlyDll.CallManagedProcOnNewThread((IntPtr)(delegate* unmanaged<int, int>)&ManagedCallback_Prepared, n);
+                UnmanagedCallersOnlyDll.CallManagedProcOnNewThread(
+                    (IntPtr)(delegate* unmanaged<int, int>)&ManagedCallback_Prepared,
+                    n
+                );
             }
         }
     }
@@ -148,6 +174,13 @@ public unsafe class UnmanagedCallersOnlyBasicTest
         {
             expected += DoubleImpl(n);
         }
-        Assert.Equal(expected, UnmanagedCallersOnlyDll.CallManagedProcMultipleTimes(callCount, (IntPtr)(delegate* unmanaged<int, int>)&ManagedDoubleInNativeCallback, n));
+        Assert.Equal(
+            expected,
+            UnmanagedCallersOnlyDll.CallManagedProcMultipleTimes(
+                callCount,
+                (IntPtr)(delegate* unmanaged<int, int>)&ManagedDoubleInNativeCallback,
+                n
+            )
+        );
     }
 }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public unsafe class Runtime_58259
 {
     [Fact]
@@ -25,4 +26,3 @@ public unsafe class Runtime_58259
         }
     }
 }
-

@@ -27,7 +27,10 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
     /// </summary>
     /// <param name="services">Services to use when instantiating compression providers.</param>
     /// <param name="options">The options for this instance.</param>
-    public ResponseCompressionProvider(IServiceProvider services, IOptions<ResponseCompressionOptions> options)
+    public ResponseCompressionProvider(
+        IServiceProvider services,
+        IOptions<ResponseCompressionOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(options);
@@ -40,8 +43,8 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             // Use the factory so it can resolve IOptions<GzipCompressionProviderOptions> from DI.
             _providers = new ICompressionProvider[]
             {
-                    new CompressionProviderFactory(typeof(BrotliCompressionProvider)),
-                    new CompressionProviderFactory(typeof(GzipCompressionProvider)),
+                new CompressionProviderFactory(typeof(BrotliCompressionProvider)),
+                new CompressionProviderFactory(typeof(GzipCompressionProvider)),
             };
         }
         for (var i = 0; i < _providers.Length; i++)
@@ -85,7 +88,10 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             return null;
         }
 
-        if (!StringWithQualityHeaderValue.TryParseList(accept, out var encodings) || encodings.Count == 0)
+        if (
+            !StringWithQualityHeaderValue.TryParseList(accept, out var encodings)
+            || encodings.Count == 0
+        )
         {
             _logger.NoAcceptEncoding();
             return null;
@@ -107,9 +113,17 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             {
                 var provider = _providers[i];
 
-                if (StringSegment.Equals(provider.EncodingName, encodingName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    StringSegment.Equals(
+                        provider.EncodingName,
+                        encodingName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
-                    candidates.Add(new ProviderCandidate(provider.EncodingName, quality, i, provider));
+                    candidates.Add(
+                        new ProviderCandidate(provider.EncodingName, quality, i, provider)
+                    );
                 }
             }
 
@@ -121,7 +135,9 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
                     var provider = _providers[i];
 
                     // Any provider is a candidate.
-                    candidates.Add(new ProviderCandidate(provider.EncodingName, quality, i, provider));
+                    candidates.Add(
+                        new ProviderCandidate(provider.EncodingName, quality, i, provider)
+                    );
                 }
 
                 break;
@@ -131,7 +147,14 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             {
                 // We add 'identity' to the list of "candidates" with a very low priority and no provider.
                 // This will allow it to be ordered based on its quality (and priority) later in the method.
-                candidates.Add(new ProviderCandidate("identity", quality, priority: int.MaxValue, provider: null));
+                candidates.Add(
+                    new ProviderCandidate(
+                        "identity",
+                        quality,
+                        priority: int.MaxValue,
+                        provider: null
+                    )
+                );
             }
         }
 
@@ -145,7 +168,8 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             selectedProvider = candidates
                 .OrderByDescending(x => x.Quality)
                 .ThenBy(x => x.Priority)
-                .First().Provider;
+                .First()
+                .Provider;
         }
 
         if (selectedProvider == null)
@@ -162,12 +186,17 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
     /// <inheritdoc />
     public virtual bool ShouldCompressResponse(HttpContext context)
     {
-        var httpsMode = context.Features.Get<IHttpsCompressionFeature>()?.Mode ?? HttpsCompressionMode.Default;
+        var httpsMode =
+            context.Features.Get<IHttpsCompressionFeature>()?.Mode ?? HttpsCompressionMode.Default;
 
         // Check if the app has opted into or out of compression over HTTPS
-        if (context.Request.IsHttps
-            && (httpsMode == HttpsCompressionMode.DoNotCompress
-                || !(_enableForHttps || httpsMode == HttpsCompressionMode.Compress)))
+        if (
+            context.Request.IsHttps
+            && (
+                httpsMode == HttpsCompressionMode.DoNotCompress
+                || !(_enableForHttps || httpsMode == HttpsCompressionMode.Compress)
+            )
+        )
         {
             _logger.NoCompressionForHttps();
             return false;
@@ -201,13 +230,14 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
             mimeType = mimeType.Trim();
         }
 
-        var shouldCompress = ShouldCompressExact(mimeType) //check exact match type/subtype
+        var shouldCompress =
+            ShouldCompressExact(mimeType) //check exact match type/subtype
             ?? ShouldCompressPartial(mimeType) //check partial match type/*
             ?? _mimeTypes.Contains("*/*"); //check wildcard */*
 
         if (shouldCompress)
         {
-            _logger.ShouldCompressResponse();  // Trace, there will be more logs
+            _logger.ShouldCompressResponse(); // Trace, there will be more logs
             return true;
         }
 
@@ -259,7 +289,12 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
 
     private readonly struct ProviderCandidate : IEquatable<ProviderCandidate>
     {
-        public ProviderCandidate(string encodingName, double quality, int priority, ICompressionProvider? provider)
+        public ProviderCandidate(
+            string encodingName,
+            double quality,
+            int priority,
+            ICompressionProvider? provider
+        )
         {
             EncodingName = encodingName;
             Quality = quality;
@@ -277,7 +312,11 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
 
         public bool Equals(ProviderCandidate other)
         {
-            return string.Equals(EncodingName, other.EncodingName, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                EncodingName,
+                other.EncodingName,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         public override bool Equals(object? obj)

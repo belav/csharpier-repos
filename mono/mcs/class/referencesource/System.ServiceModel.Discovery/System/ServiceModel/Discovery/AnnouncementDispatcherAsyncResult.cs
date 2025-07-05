@@ -12,12 +12,18 @@ namespace System.ServiceModel.Discovery
     {
         readonly AnnouncementSendsAsyncResult[] innerResults;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int completions;
 
         AsyncCallback onAnnouncementSendsCompletedCallback;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int completesCounter;
 
         bool cancelled;
@@ -32,7 +38,7 @@ namespace System.ServiceModel.Discovery
             bool online,
             AsyncCallback callback,
             object state
-            )
+        )
             : base(callback, state)
         {
             if (metadatas.Count == 0)
@@ -44,7 +50,9 @@ namespace System.ServiceModel.Discovery
             this.cancelled = false;
             this.thisLock = new object();
             this.innerResults = new AnnouncementSendsAsyncResult[endpoints.Count];
-            this.onAnnouncementSendsCompletedCallback = Fx.ThunkCallback(new AsyncCallback(OnAnnouncementSendsCompleted));
+            this.onAnnouncementSendsCompletedCallback = Fx.ThunkCallback(
+                new AsyncCallback(OnAnnouncementSendsCompleted)
+            );
             Collection<UniqueId> messageIds = AllocateMessageIds(metadatas.Count);
 
             try
@@ -54,16 +62,16 @@ namespace System.ServiceModel.Discovery
                 {
                     AnnouncementClient announcementClient = new AnnouncementClient(endpoints[i]);
                     announcementClient.MessageSequenceGenerator = discoveryMessageSequenceGenerator;
-                    this.innerResults[i] = 
-                        new AnnouncementSendsAsyncResult(
-                        announcementClient, 
-                        metadatas, 
-                        messageIds, 
-                        online, 
-                        endpoints[i].MaxAnnouncementDelay, 
-                        random, 
-                        this.onAnnouncementSendsCompletedCallback, 
-                        this);
+                    this.innerResults[i] = new AnnouncementSendsAsyncResult(
+                        announcementClient,
+                        metadatas,
+                        messageIds,
+                        online,
+                        endpoints[i].MaxAnnouncementDelay,
+                        random,
+                        this.onAnnouncementSendsCompletedCallback,
+                        this
+                    );
                 }
                 success = true;
             }
@@ -93,12 +101,13 @@ namespace System.ServiceModel.Discovery
                     if (this.innerResults[i].CompletedSynchronously)
                     {
                         AnnouncementSendsAsyncResult.End(this.innerResults[i]);
-                        complete = (Interlocked.Increment(ref this.completions) == innerResults.Length);
+                        complete = (
+                            Interlocked.Increment(ref this.completions) == innerResults.Length
+                        );
                     }
                     else
                     {
                         synchronousCompletion = false;
-
                     }
                 }
             }

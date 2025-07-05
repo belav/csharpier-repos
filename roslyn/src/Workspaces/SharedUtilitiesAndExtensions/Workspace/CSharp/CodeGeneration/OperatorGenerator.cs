@@ -23,10 +23,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CSharpCodeGenerationContextInfo info,
             IList<bool>? availableIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var methodDeclaration = GenerateOperatorDeclaration(method, GetDestination(destination), info, cancellationToken);
-            var members = Insert(destination.Members, methodDeclaration, info, availableIndices, after: LastOperator);
+            var methodDeclaration = GenerateOperatorDeclaration(
+                method,
+                GetDestination(destination),
+                info,
+                cancellationToken
+            );
+            var members = Insert(
+                destination.Members,
+                methodDeclaration,
+                info,
+                availableIndices,
+                after: LastOperator
+            );
 
             return AddMembersTo(destination, members, cancellationToken);
         }
@@ -35,33 +47,55 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<OperatorDeclarationSyntax>(method, info);
+            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<OperatorDeclarationSyntax>(
+                method,
+                info
+            );
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
             }
 
-            var declaration = GenerateOperatorDeclarationWorker(method, destination, info, cancellationToken);
+            var declaration = GenerateOperatorDeclarationWorker(
+                method,
+                destination,
+                info,
+                cancellationToken
+            );
             declaration = UseExpressionBodyIfDesired(info, declaration, cancellationToken);
 
-            return AddAnnotationsTo(method,
-                ConditionallyAddDocumentationCommentTo(declaration, method, info, cancellationToken));
+            return AddAnnotationsTo(
+                method,
+                ConditionallyAddDocumentationCommentTo(declaration, method, info, cancellationToken)
+            );
         }
 
         private static OperatorDeclarationSyntax UseExpressionBodyIfDesired(
-            CSharpCodeGenerationContextInfo info, OperatorDeclarationSyntax declaration, CancellationToken cancellationToken)
+            CSharpCodeGenerationContextInfo info,
+            OperatorDeclarationSyntax declaration,
+            CancellationToken cancellationToken
+        )
         {
             if (declaration.ExpressionBody == null)
             {
-                if (declaration.Body?.TryConvertToArrowExpressionBody(
-                    declaration.Kind(), info.LanguageVersion, info.Options.PreferExpressionBodiedOperators.Value, cancellationToken,
-                    out var expressionBody, out var semicolonToken) == true)
+                if (
+                    declaration.Body?.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        info.LanguageVersion,
+                        info.Options.PreferExpressionBodiedOperators.Value,
+                        cancellationToken,
+                        out var expressionBody,
+                        out var semicolonToken
+                    ) == true
+                )
                 {
-                    return declaration.WithBody(null)
-                                      .WithExpressionBody(expressionBody)
-                                      .WithSemicolonToken(semicolonToken);
+                    return declaration
+                        .WithBody(null)
+                        .WithExpressionBody(expressionBody)
+                        .WithSemicolonToken(semicolonToken);
                 }
             }
 
@@ -72,14 +106,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var hasNoBody = !info.Context.GenerateMethodBodies || method.IsExtern || method.IsAbstract;
+            var hasNoBody =
+                !info.Context.GenerateMethodBodies || method.IsExtern || method.IsAbstract;
 
             var operatorSyntaxKind = SyntaxFacts.GetOperatorKind(method.MetadataName);
             if (operatorSyntaxKind == SyntaxKind.None)
             {
-                throw new ArgumentException(string.Format(WorkspaceExtensionsResources.Cannot_generate_code_for_unsupported_operator_0, method.Name), nameof(method));
+                throw new ArgumentException(
+                    string.Format(
+                        WorkspaceExtensionsResources.Cannot_generate_code_for_unsupported_operator_0,
+                        method.Name
+                    ),
+                    nameof(method)
+                );
             }
 
             var operatorToken = SyntaxFactory.Token(operatorSyntaxKind);
@@ -88,28 +130,46 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 : default;
 
             var operatorDecl = SyntaxFactory.OperatorDeclaration(
-                attributeLists: AttributeGenerator.GenerateAttributeLists(method.GetAttributes(), info),
+                attributeLists: AttributeGenerator.GenerateAttributeLists(
+                    method.GetAttributes(),
+                    info
+                ),
                 modifiers: GenerateModifiers(method, destination, hasNoBody),
                 returnType: method.ReturnType.GenerateTypeSyntax(),
-                explicitInterfaceSpecifier: GenerateExplicitInterfaceSpecifier(method.ExplicitInterfaceImplementations),
+                explicitInterfaceSpecifier: GenerateExplicitInterfaceSpecifier(
+                    method.ExplicitInterfaceImplementations
+                ),
                 operatorKeyword: SyntaxFactory.Token(SyntaxKind.OperatorKeyword),
                 checkedKeyword: checkedToken,
                 operatorToken: operatorToken,
-                parameterList: ParameterGenerator.GenerateParameterList(method.Parameters, isExplicit: false, info: info),
+                parameterList: ParameterGenerator.GenerateParameterList(
+                    method.Parameters,
+                    isExplicit: false,
+                    info: info
+                ),
                 body: hasNoBody ? null : StatementGenerator.GenerateBlock(method),
                 expressionBody: null,
-                semicolonToken: hasNoBody ? SyntaxFactory.Token(SyntaxKind.SemicolonToken) : new SyntaxToken());
+                semicolonToken: hasNoBody
+                    ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                    : new SyntaxToken()
+            );
 
             operatorDecl = UseExpressionBodyIfDesired(info, operatorDecl, cancellationToken);
             return operatorDecl;
         }
 
-        private static SyntaxTokenList GenerateModifiers(IMethodSymbol method, CodeGenerationDestination destination, bool hasNoBody)
+        private static SyntaxTokenList GenerateModifiers(
+            IMethodSymbol method,
+            CodeGenerationDestination destination,
+            bool hasNoBody
+        )
         {
             using var tokens = TemporaryArray<SyntaxToken>.Empty;
 
-            if (method.ExplicitInterfaceImplementations.Length == 0 &&
-                !(destination is CodeGenerationDestination.InterfaceType && hasNoBody))
+            if (
+                method.ExplicitInterfaceImplementations.Length == 0
+                && !(destination is CodeGenerationDestination.InterfaceType && hasNoBody)
+            )
             {
                 tokens.Add(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
             }

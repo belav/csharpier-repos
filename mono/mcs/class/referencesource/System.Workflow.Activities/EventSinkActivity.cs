@@ -1,58 +1,139 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Reflection;
     using System.Collections;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Drawing;
-    using System.Drawing.Design;
-    using System.Workflow.Runtime;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.Runtime.Hosting;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime;
+    using System.Workflow.Runtime.Hosting;
 
     [SRDescription(SR.HandleExternalEventActivityDescription)]
     [DefaultEvent("Invoked")]
     [Designer(typeof(HandleExternalEventActivityDesigner), typeof(IDesigner))]
     [ActivityValidator(typeof(HandleExternalEventActivityValidator))]
     [SRCategory(SR.Base)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public class HandleExternalEventActivity : Activity, IEventActivity, IPropertyValueProvider, IActivityEventListener<QueueEventArgs>, IDynamicPropertyTypeProvider
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public class HandleExternalEventActivity
+        : Activity,
+            IEventActivity,
+            IPropertyValueProvider,
+            IActivityEventListener<QueueEventArgs>,
+            IDynamicPropertyTypeProvider
     {
         //instance properties
-        public static readonly DependencyProperty CorrelationTokenProperty = DependencyProperty.Register("CorrelationToken", typeof(CorrelationToken), typeof(HandleExternalEventActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata));
-        public static readonly DependencyProperty RolesProperty = DependencyProperty.Register("Roles", typeof(WorkflowRoleCollection), typeof(HandleExternalEventActivity));
-        public static readonly DependencyProperty ParameterBindingsProperty = DependencyProperty.Register("ParameterBindings", typeof(WorkflowParameterBindingCollection), typeof(HandleExternalEventActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content) }));
-        private static DependencyProperty ActivitySubscribedProperty = DependencyProperty.Register("ActivitySubscribed", typeof(bool), typeof(HandleExternalEventActivity), new PropertyMetadata(false));
-        private static DependencyProperty QueueNameProperty = DependencyProperty.Register("QueueName", typeof(IComparable), typeof(HandleExternalEventActivity));
+        public static readonly DependencyProperty CorrelationTokenProperty =
+            DependencyProperty.Register(
+                "CorrelationToken",
+                typeof(CorrelationToken),
+                typeof(HandleExternalEventActivity),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata)
+            );
+        public static readonly DependencyProperty RolesProperty = DependencyProperty.Register(
+            "Roles",
+            typeof(WorkflowRoleCollection),
+            typeof(HandleExternalEventActivity)
+        );
+        public static readonly DependencyProperty ParameterBindingsProperty =
+            DependencyProperty.Register(
+                "ParameterBindings",
+                typeof(WorkflowParameterBindingCollection),
+                typeof(HandleExternalEventActivity),
+                new PropertyMetadata(
+                    DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                    }
+                )
+            );
+        private static DependencyProperty ActivitySubscribedProperty = DependencyProperty.Register(
+            "ActivitySubscribed",
+            typeof(bool),
+            typeof(HandleExternalEventActivity),
+            new PropertyMetadata(false)
+        );
+        private static DependencyProperty QueueNameProperty = DependencyProperty.Register(
+            "QueueName",
+            typeof(IComparable),
+            typeof(HandleExternalEventActivity)
+        );
 
         //metadata properties
-        public static readonly DependencyProperty InterfaceTypeProperty = DependencyProperty.Register("InterfaceType", typeof(System.Type), typeof(HandleExternalEventActivity), new PropertyMetadata(null, DependencyPropertyOptions.Metadata, new Attribute[] { new ValidationOptionAttribute(ValidationOption.Required) }));
-        public static readonly DependencyProperty EventNameProperty = DependencyProperty.Register("EventName", typeof(string), typeof(HandleExternalEventActivity), new PropertyMetadata("", DependencyPropertyOptions.Metadata, new Attribute[] { new ValidationOptionAttribute(ValidationOption.Required) }));
+        public static readonly DependencyProperty InterfaceTypeProperty =
+            DependencyProperty.Register(
+                "InterfaceType",
+                typeof(System.Type),
+                typeof(HandleExternalEventActivity),
+                new PropertyMetadata(
+                    null,
+                    DependencyPropertyOptions.Metadata,
+                    new Attribute[] { new ValidationOptionAttribute(ValidationOption.Required) }
+                )
+            );
+        public static readonly DependencyProperty EventNameProperty = DependencyProperty.Register(
+            "EventName",
+            typeof(string),
+            typeof(HandleExternalEventActivity),
+            new PropertyMetadata(
+                "",
+                DependencyPropertyOptions.Metadata,
+                new Attribute[] { new ValidationOptionAttribute(ValidationOption.Required) }
+            )
+        );
 
         //event
-        public static readonly DependencyProperty InvokedEvent = DependencyProperty.Register("Invoked", typeof(EventHandler<ExternalDataEventArgs>), typeof(HandleExternalEventActivity));
+        public static readonly DependencyProperty InvokedEvent = DependencyProperty.Register(
+            "Invoked",
+            typeof(EventHandler<ExternalDataEventArgs>),
+            typeof(HandleExternalEventActivity)
+        );
 
-        internal static readonly ArrayList ReservedParameterNames = new ArrayList(new string[] { "Name", "Enabled", "Description", "EventName", "InterfaceType", "Invoked", "Roles" });
+        internal static readonly ArrayList ReservedParameterNames = new ArrayList(
+            new string[]
+            {
+                "Name",
+                "Enabled",
+                "Description",
+                "EventName",
+                "InterfaceType",
+                "Invoked",
+                "Roles",
+            }
+        );
 
         #region Constructors
 
         public HandleExternalEventActivity()
         {
-            base.SetReadOnlyPropertyValue(ParameterBindingsProperty, new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         public HandleExternalEventActivity(string name)
             : base(name)
         {
-            base.SetReadOnlyPropertyValue(ParameterBindingsProperty, new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         #endregion
@@ -65,15 +146,8 @@ namespace System.Workflow.Activities
         [DefaultValue("")]
         public virtual string EventName
         {
-            get
-            {
-                return base.GetValue(EventNameProperty) as string;
-            }
-
-            set
-            {
-                base.SetValue(EventNameProperty, value);
-            }
+            get { return base.GetValue(EventNameProperty) as string; }
+            set { base.SetValue(EventNameProperty, value); }
         }
 
         [SRCategory(SR.Activity)]
@@ -84,15 +158,8 @@ namespace System.Workflow.Activities
         [DefaultValue(null)]
         public virtual Type InterfaceType
         {
-            get
-            {
-                return base.GetValue(InterfaceTypeProperty) as Type;
-            }
-
-            set
-            {
-                base.SetValue(InterfaceTypeProperty, value);
-            }
+            get { return base.GetValue(InterfaceTypeProperty) as Type; }
+            set { base.SetValue(InterfaceTypeProperty, value); }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
@@ -101,7 +168,8 @@ namespace System.Workflow.Activities
         {
             get
             {
-                return base.GetValue(ParameterBindingsProperty) as WorkflowParameterBindingCollection;
+                return base.GetValue(ParameterBindingsProperty)
+                    as WorkflowParameterBindingCollection;
             }
         }
 
@@ -111,14 +179,8 @@ namespace System.Workflow.Activities
         [DefaultValue(null)]
         public WorkflowRoleCollection Roles
         {
-            get
-            {
-                return base.GetValue(RolesProperty) as WorkflowRoleCollection;
-            }
-            set
-            {
-                base.SetValue(RolesProperty, value);
-            }
+            get { return base.GetValue(RolesProperty) as WorkflowRoleCollection; }
+            set { base.SetValue(RolesProperty, value); }
         }
 
         [SRCategory(SR.Activity)]
@@ -129,14 +191,8 @@ namespace System.Workflow.Activities
         [DefaultValue(null)]
         public virtual CorrelationToken CorrelationToken
         {
-            get
-            {
-                return base.GetValue(CorrelationTokenProperty) as CorrelationToken;
-            }
-            set
-            {
-                base.SetValue(CorrelationTokenProperty, value);
-            }
+            get { return base.GetValue(CorrelationTokenProperty) as CorrelationToken; }
+            set { base.SetValue(CorrelationTokenProperty, value); }
         }
 
         [SRCategory(SR.Handlers)]
@@ -144,26 +200,14 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler<ExternalDataEventArgs> Invoked
         {
-            add
-            {
-                base.AddHandler(InvokedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(InvokedEvent, value);
-            }
+            add { base.AddHandler(InvokedEvent, value); }
+            remove { base.RemoveHandler(InvokedEvent, value); }
         }
 
         private bool ActivitySubscribed
         {
-            get
-            {
-                return (bool)base.GetValue(ActivitySubscribedProperty);
-            }
-            set
-            {
-                base.SetValue(ActivitySubscribedProperty, value);
-            }
+            get { return (bool)base.GetValue(ActivitySubscribedProperty); }
+            set { base.SetValue(ActivitySubscribedProperty, value); }
         }
 
         ICollection IPropertyValueProvider.GetPropertyValues(ITypeDescriptorContext context)
@@ -174,7 +218,11 @@ namespace System.Workflow.Activities
 
             if (context.PropertyDescriptor.Name == "EventName")
             {
-                foreach (EventInfo eventInfo in this.InterfaceType.GetEvents(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public))
+                foreach (
+                    EventInfo eventInfo in this.InterfaceType.GetEvents(
+                        BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
+                    )
+                )
                     names.Add(eventInfo.Name);
             }
             return names;
@@ -186,7 +234,9 @@ namespace System.Workflow.Activities
 
             Type type = this.InterfaceType;
             if (type == null)
-                throw new InvalidOperationException(SR.GetString(SR.InterfaceTypeMissing, this.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.InterfaceTypeMissing, this.Name)
+                );
 
             string eventName = this.EventName;
             if (eventName == null)
@@ -200,7 +250,9 @@ namespace System.Workflow.Activities
             }
             else
             {
-                throw new InvalidOperationException(SR.GetString(SR.MethodInfoMissing, this.EventName, this.InterfaceType.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.MethodInfoMissing, this.EventName, this.InterfaceType.Name)
+                );
             }
 
             base.InitializeProperties();
@@ -213,7 +265,10 @@ namespace System.Workflow.Activities
 
             //When activity is dropped inside multi instance container(replicator)
             //We delay CorrelationService initialization to template initialization time.
-            if ((!this.IsDynamicActivity && !IsNestedUnderMultiInstanceContainer) || IsInitializingUnderMultiInstanceContainer)
+            if (
+                (!this.IsDynamicActivity && !IsNestedUnderMultiInstanceContainer)
+                || IsInitializingUnderMultiInstanceContainer
+            )
             {
                 Type type = this.InterfaceType;
                 string eventName = this.EventName;
@@ -222,7 +277,13 @@ namespace System.Workflow.Activities
                     queueName = new EventQueueName(type, eventName);
                 this.SetValue(QueueNameProperty, queueName);
 
-                CorrelationService.Initialize(provider, this, type, eventName, this.WorkflowInstanceId);
+                CorrelationService.Initialize(
+                    provider,
+                    this,
+                    type,
+                    eventName,
+                    this.WorkflowInstanceId
+                );
             }
         }
 
@@ -236,12 +297,14 @@ namespace System.Workflow.Activities
 
                 while (parent != null)
                 {
-                    //Need to look at attribute/interface 
+                    //Need to look at attribute/interface
                     if (parent is ReplicatorActivity)
                         break;
 
                     //If we cross execution context then return false.
-                    if (!parent.GetActivityByName(templateChild.QualifiedName).Equals(templateChild))
+                    if (
+                        !parent.GetActivityByName(templateChild.QualifiedName).Equals(templateChild)
+                    )
                         return false;
 
                     templateChild = parent;
@@ -249,7 +312,9 @@ namespace System.Workflow.Activities
                 }
 
                 if (parent != null)
-                    return !parent.GetActivityByName(templateChild.QualifiedName).Equals(templateChild);
+                    return !parent
+                        .GetActivityByName(templateChild.QualifiedName)
+                        .Equals(templateChild);
 
                 return false;
             }
@@ -263,7 +328,7 @@ namespace System.Workflow.Activities
 
                 while (parent != null)
                 {
-                    //Need to look at attribute/interface 
+                    //Need to look at attribute/interface
                     if (parent is ReplicatorActivity)
                         return true;
 
@@ -274,19 +339,25 @@ namespace System.Workflow.Activities
             }
         }
 
-        protected virtual void OnInvoked(EventArgs e)
-        {
-        }
+        protected virtual void OnInvoked(EventArgs e) { }
 
         #region Execute/Cancel
 
-        protected sealed override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected sealed override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
             object[] args = null;
-            ActivityExecutionStatus status = InboundActivityHelper.ExecuteForActivity(this, executionContext, this.InterfaceType, this.EventName, out args);
+            ActivityExecutionStatus status = InboundActivityHelper.ExecuteForActivity(
+                this,
+                executionContext,
+                this.InterfaceType,
+                this.EventName,
+                out args
+            );
             if (status == ActivityExecutionStatus.Closed)
             {
                 RaiseEvent(args);
@@ -299,13 +370,23 @@ namespace System.Workflow.Activities
             // hence subscribe for message arrival
             if (!this.ActivitySubscribed)
             {
-                this.ActivitySubscribed = CorrelationService.Subscribe(executionContext, this, this.InterfaceType, this.EventName, this, this.WorkflowInstanceId);
+                this.ActivitySubscribed = CorrelationService.Subscribe(
+                    executionContext,
+                    this,
+                    this.InterfaceType,
+                    this.EventName,
+                    this,
+                    this.WorkflowInstanceId
+                );
             }
 
             return ActivityExecutionStatus.Executing;
         }
 
-        protected sealed override ActivityExecutionStatus HandleFault(ActivityExecutionContext executionContext, Exception exception)
+        protected sealed override ActivityExecutionStatus HandleFault(
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -320,7 +401,9 @@ namespace System.Workflow.Activities
             return newStatus;
         }
 
-        protected sealed override ActivityExecutionStatus Cancel(ActivityExecutionContext executionContext)
+        protected sealed override ActivityExecutionStatus Cancel(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -339,7 +422,13 @@ namespace System.Workflow.Activities
         {
             if (this.ActivitySubscribed)
             {
-                CorrelationService.Unsubscribe(context, this, this.InterfaceType, this.EventName, this);
+                CorrelationService.Unsubscribe(
+                    context,
+                    this,
+                    this.InterfaceType,
+                    this.EventName,
+                    this
+                );
                 this.ActivitySubscribed = false;
             }
         }
@@ -350,10 +439,17 @@ namespace System.Workflow.Activities
             HandleExternalEventActivity activity = context.Activity as HandleExternalEventActivity;
 
             // if activity is not scheduled for execution do not dequeue the message
-            if (activity.ExecutionStatus != ActivityExecutionStatus.Executing) return;
+            if (activity.ExecutionStatus != ActivityExecutionStatus.Executing)
+                return;
 
             object[] args = null;
-            ActivityExecutionStatus status = InboundActivityHelper.ExecuteForActivity(this, context, this.InterfaceType, this.EventName, out args);
+            ActivityExecutionStatus status = InboundActivityHelper.ExecuteForActivity(
+                this,
+                context,
+                this.InterfaceType,
+                this.EventName,
+                out args
+            );
             if (status == ActivityExecutionStatus.Closed)
             {
                 RaiseEvent(args);
@@ -375,29 +471,47 @@ namespace System.Workflow.Activities
                 OnInvoked(EventArgs.Empty);
                 this.RaiseGenericEvent(InvokedEvent, this, EventArgs.Empty);
             }
-
         }
         #endregion
 
         #region IEventActivity members
-        void IEventActivity.Subscribe(ActivityExecutionContext parentContext, IActivityEventListener<QueueEventArgs> parentEventHandler)
+        void IEventActivity.Subscribe(
+            ActivityExecutionContext parentContext,
+            IActivityEventListener<QueueEventArgs> parentEventHandler
+        )
         {
             if (parentContext == null)
                 throw new ArgumentNullException("parentContext");
             if (parentEventHandler == null)
                 throw new ArgumentNullException("parentEventHandler");
 
-            CorrelationService.Subscribe(parentContext, this, InterfaceType, EventName, parentEventHandler, this.WorkflowInstanceId);
+            CorrelationService.Subscribe(
+                parentContext,
+                this,
+                InterfaceType,
+                EventName,
+                parentEventHandler,
+                this.WorkflowInstanceId
+            );
         }
 
-        void IEventActivity.Unsubscribe(ActivityExecutionContext parentContext, IActivityEventListener<QueueEventArgs> parentEventHandler)
+        void IEventActivity.Unsubscribe(
+            ActivityExecutionContext parentContext,
+            IActivityEventListener<QueueEventArgs> parentEventHandler
+        )
         {
             if (parentContext == null)
                 throw new ArgumentNullException("parentContext");
             if (parentEventHandler == null)
                 throw new ArgumentNullException("parentEventHandler");
 
-            CorrelationService.Unsubscribe(parentContext, this, InterfaceType, EventName, parentEventHandler);
+            CorrelationService.Unsubscribe(
+                parentContext,
+                this,
+                InterfaceType,
+                EventName,
+                parentEventHandler
+            );
         }
 
         IComparable IEventActivity.QueueName
@@ -416,7 +530,10 @@ namespace System.Workflow.Activities
 
         #region IDynamicPropertyTypeProvider
 
-        Type IDynamicPropertyTypeProvider.GetPropertyType(IServiceProvider serviceProvider, string propertyName)
+        Type IDynamicPropertyTypeProvider.GetPropertyType(
+            IServiceProvider serviceProvider,
+            string propertyName
+        )
         {
             if (propertyName == null)
                 throw new ArgumentNullException("propertyName");
@@ -425,7 +542,8 @@ namespace System.Workflow.Activities
             this.GetParameterPropertyDescriptors(parameters);
             if (parameters.ContainsKey(propertyName))
             {
-                ParameterInfoBasedPropertyDescriptor descriptor = parameters[propertyName] as ParameterInfoBasedPropertyDescriptor;
+                ParameterInfoBasedPropertyDescriptor descriptor =
+                    parameters[propertyName] as ParameterInfoBasedPropertyDescriptor;
                 if (descriptor != null)
                     return descriptor.ParameterType;
             }
@@ -433,7 +551,10 @@ namespace System.Workflow.Activities
             return null;
         }
 
-        AccessTypes IDynamicPropertyTypeProvider.GetAccessType(IServiceProvider serviceProvider, string propertyName)
+        AccessTypes IDynamicPropertyTypeProvider.GetAccessType(
+            IServiceProvider serviceProvider,
+            string propertyName
+        )
         {
             if (propertyName == null)
                 throw new ArgumentNullException("propertyName");
@@ -446,9 +567,12 @@ namespace System.Workflow.Activities
             if (((IComponent)this).Site == null)
                 return;
 
-            ITypeProvider typeProvider = (ITypeProvider)((IComponent)this).Site.GetService(typeof(ITypeProvider));
+            ITypeProvider typeProvider = (ITypeProvider)
+                ((IComponent)this).Site.GetService(typeof(ITypeProvider));
             if (typeProvider == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                );
 
             Type type = this.InterfaceType;
             if (type == null)
@@ -474,7 +598,12 @@ namespace System.Workflow.Activities
 
                     foreach (ParameterInfo param in paramInfo)
                     {
-                        PropertyDescriptor prop = new ParameterInfoBasedPropertyDescriptor(typeof(HandleExternalEventActivity), param, true, DesignOnlyAttribute.Yes);
+                        PropertyDescriptor prop = new ParameterInfoBasedPropertyDescriptor(
+                            typeof(HandleExternalEventActivity),
+                            param,
+                            true,
+                            DesignOnlyAttribute.Yes
+                        );
                         properties[prop.Name] = prop;
                     }
                 }
@@ -483,14 +612,22 @@ namespace System.Workflow.Activities
         #endregion
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class HandleExternalEventActivityValidator : ActivityValidator
     {
         public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
         {
             HandleExternalEventActivity eventSink = obj as HandleExternalEventActivity;
             if (eventSink == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(HandleExternalEventActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(HandleExternalEventActivity).FullName
+                    ),
+                    "obj"
+                );
 
             ValidationErrorCollection validationErrors = base.Validate(manager, obj);
             validationErrors.AddRange(CorrelationSetsValidator.Validate(manager, obj));
@@ -502,6 +639,7 @@ namespace System.Workflow.Activities
     internal class ExternalDataExchangeInterfaceTypeFilterProvider : ITypeFilterProvider
     {
         private IServiceProvider serviceProvider;
+
         public ExternalDataExchangeInterfaceTypeFilterProvider(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -511,11 +649,19 @@ namespace System.Workflow.Activities
         {
             if (type.IsInterface)
             {
-                object[] dsAttribs = type.GetCustomAttributes(typeof(ExternalDataExchangeAttribute), false);
+                object[] dsAttribs = type.GetCustomAttributes(
+                    typeof(ExternalDataExchangeAttribute),
+                    false
+                );
                 if (dsAttribs.Length != 0)
                     return true;
                 else if (throwOnError)
-                    throw new Exception(SR.GetString(SR.Error_InterfaceTypeNeedsExternalDataExchangeAttribute, "InterfaceType"));
+                    throw new Exception(
+                        SR.GetString(
+                            SR.Error_InterfaceTypeNeedsExternalDataExchangeAttribute,
+                            "InterfaceType"
+                        )
+                    );
             }
             /*  else
               {
@@ -529,17 +675,16 @@ namespace System.Workflow.Activities
               }*/
 
             if (throwOnError)
-                throw new Exception(SR.GetString(SR.Error_InterfaceTypeNotInterface, "InterfaceType"));
+                throw new Exception(
+                    SR.GetString(SR.Error_InterfaceTypeNotInterface, "InterfaceType")
+                );
 
             return false;
         }
 
         public string FilterDescription
         {
-            get
-            {
-                return SR.GetString(SR.ShowingExternalDataExchangeService);
-            }
+            get { return SR.GetString(SR.ShowingExternalDataExchangeService); }
         }
     }
 }

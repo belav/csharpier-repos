@@ -33,8 +33,9 @@ namespace System.Web.UI.WebControls
 
                 column.AllowDBNull = property.Column.IsNullable;
 
-                EntityDataSourcePropertyColumn propertyColumn  = property.Column as EntityDataSourcePropertyColumn;
-                if (null!= propertyColumn && propertyColumn.IsKey)
+                EntityDataSourcePropertyColumn propertyColumn =
+                    property.Column as EntityDataSourcePropertyColumn;
+                if (null != propertyColumn && propertyColumn.IsKey)
                 {
                     keys.Add(column);
                 }
@@ -50,9 +51,7 @@ namespace System.Web.UI.WebControls
         }
 
         internal EntityDataSourceViewSchema(IEnumerable results)
-            : this(results, null)
-        {
-        }
+            : this(results, null) { }
 
         /// <summary>
         /// Creates a view schema with a set of typed results and an optional set of keyName properties on those results
@@ -70,13 +69,17 @@ namespace System.Web.UI.WebControls
         /// Creates a set of DataTable columns from a collection of property descriptors and an optional
         /// set of key names from metadata
         /// </summary>
-        private void CreateColumnsFromPropDescs(PropertyDescriptorCollection properties, string[] keyNames)
+        private void CreateColumnsFromPropDescs(
+            PropertyDescriptorCollection properties,
+            string[] keyNames
+        )
         {
             List<DataColumn> keys = new List<DataColumn>();
             foreach (PropertyDescriptor property in properties)
             {
                 System.ComponentModel.BrowsableAttribute attr =
-                    (System.ComponentModel.BrowsableAttribute)property.Attributes[typeof(System.ComponentModel.BrowsableAttribute)];
+                    (System.ComponentModel.BrowsableAttribute)
+                        property.Attributes[typeof(System.ComponentModel.BrowsableAttribute)];
                 if (attr.Browsable)
                 {
                     DataColumn column = ConstructColumn(property);
@@ -100,15 +103,21 @@ namespace System.Web.UI.WebControls
             column.ColumnName = property.Name;
             Type propertyType = property.PropertyType;
 
-            if (propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (
+                propertyType.IsGenericType
+                && propertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
             {
                 Type[] typeArguments = propertyType.GetGenericArguments();
-                Debug.Assert(typeArguments.Length == 1, "should only have one type argument from Nullable<> condition.");
+                Debug.Assert(
+                    typeArguments.Length == 1,
+                    "should only have one type argument from Nullable<> condition."
+                );
 
                 column.DataType = typeArguments[0];
                 column.AllowDBNull = true;
             }
-            else 
+            else
             {
                 column.DataType = propertyType;
                 column.AllowDBNull = !propertyType.IsValueType;
@@ -126,15 +135,22 @@ namespace System.Web.UI.WebControls
         {
             PropertyInfo indexer = null;
 
-            if (typeof(IList).IsAssignableFrom(type) ||
-                typeof(ITypedList).IsAssignableFrom(type) ||
-                typeof(IListSource).IsAssignableFrom(type))
+            if (
+                typeof(IList).IsAssignableFrom(type)
+                || typeof(ITypedList).IsAssignableFrom(type)
+                || typeof(IListSource).IsAssignableFrom(type)
+            )
             {
-                System.Reflection.PropertyInfo[] props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+                System.Reflection.PropertyInfo[] props = type.GetProperties(
+                    BindingFlags.Public | BindingFlags.Instance
+                );
 
                 for (int idx = 0; idx < props.Length; idx++)
                 {
-                    if (props[idx].GetIndexParameters().Length > 0 && props[idx].PropertyType != typeof(object))
+                    if (
+                        props[idx].GetIndexParameters().Length > 0
+                        && props[idx].PropertyType != typeof(object)
+                    )
                     {
                         indexer = props[idx];
                         //Prefer the standard indexer, if there is one
@@ -174,9 +190,5 @@ namespace System.Web.UI.WebControls
 
             return itemType;
         }
-
     }
-
-
-
 }

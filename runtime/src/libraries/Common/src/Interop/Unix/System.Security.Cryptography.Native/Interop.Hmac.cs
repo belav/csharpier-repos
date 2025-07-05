@@ -20,7 +20,11 @@ internal static partial class Interop
         internal static partial int HmacReset(SafeHmacCtxHandle ctx);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_HmacUpdate")]
-        internal static partial int HmacUpdate(SafeHmacCtxHandle ctx, ReadOnlySpan<byte> data, int len);
+        internal static partial int HmacUpdate(
+            SafeHmacCtxHandle ctx,
+            ReadOnlySpan<byte> data,
+            int len
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_HmacFinal")]
         internal static partial int HmacFinal(SafeHmacCtxHandle ctx, ref byte data, ref int len);
@@ -29,9 +33,22 @@ internal static partial class Interop
         internal static partial int HmacCurrent(SafeHmacCtxHandle ctx, ref byte data, ref int len);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_HmacOneShot")]
-        private static unsafe partial int HmacOneShot(IntPtr type, byte* key, int keySize, byte* source, int sourceSize, byte* md, int* mdSize);
+        private static unsafe partial int HmacOneShot(
+            IntPtr type,
+            byte* key,
+            int keySize,
+            byte* source,
+            int sourceSize,
+            byte* md,
+            int* mdSize
+        );
 
-        internal static unsafe int HmacOneShot(IntPtr type, ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination)
+        internal static unsafe int HmacOneShot(
+            IntPtr type,
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        )
         {
             int size = destination.Length;
             const int Success = 1;
@@ -40,7 +57,15 @@ internal static partial class Interop
             fixed (byte* pSource = source)
             fixed (byte* pDestination = destination)
             {
-                int result = HmacOneShot(type, pKey, key.Length, pSource, source.Length, pDestination, &size);
+                int result = HmacOneShot(
+                    type,
+                    pKey,
+                    key.Length,
+                    pSource,
+                    source.Length,
+                    pDestination,
+                    &size
+                );
 
                 if (result != Success)
                 {

@@ -44,7 +44,8 @@ public class ValidationProblemDetailsTest
             {
                 Assert.Equal("key3", item.Key);
                 Assert.Equal(new[] { "error2", "error3" }, item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -54,9 +55,11 @@ public class ValidationProblemDetailsTest
         var modelStateDictionary = new ModelStateDictionary();
         var provider = new EmptyModelMetadataProvider();
         var metadata = provider.GetMetadataForProperty(typeof(string), nameof(string.Length));
-        modelStateDictionary.AddModelError("unsafeError",
+        modelStateDictionary.AddModelError(
+            "unsafeError",
             new Exception("This message should not be returned to clients"),
-            metadata);
+            metadata
+        );
 
         // Act
         var problemDescription = new ValidationProblemDetails(modelStateDictionary);
@@ -69,7 +72,8 @@ public class ValidationProblemDetailsTest
             {
                 Assert.Equal("unsafeError", item.Key);
                 Assert.Equal(new[] { "The input was not valid." }, item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -79,7 +83,7 @@ public class ValidationProblemDetailsTest
         var errors = new Dictionary<string, string[]>
         {
             ["key1"] = new[] { "error1", "error2" },
-            ["key2"] = new[] { "error3", },
+            ["key2"] = new[] { "error3" },
         };
 
         // Act
@@ -98,6 +102,7 @@ public class ValidationProblemDetailsTest
             {
                 Assert.Equal("key2", item.Key);
                 Assert.Equal(new[] { "error3" }, item.Value);
-            });
+            }
+        );
     }
 }

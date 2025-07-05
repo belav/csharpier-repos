@@ -21,7 +21,15 @@ namespace System.DirectoryServices.AccountManagement
         private string _cachedBindableObjectFilter;
         private readonly object _objectListLock = new object();
 
-        public ADAMStoreCtx(DirectoryEntry ctxBase, bool ownCtxBase, string username, string password, string serverName, ContextOptions options) : base(ctxBase, ownCtxBase, username, password, options)
+        public ADAMStoreCtx(
+            DirectoryEntry ctxBase,
+            bool ownCtxBase,
+            string username,
+            string password,
+            string serverName,
+            ContextOptions options
+        )
+            : base(ctxBase, ownCtxBase, username, password, options)
         {
             this.userSuppliedServerName = serverName;
         }
@@ -42,16 +50,16 @@ namespace System.DirectoryServices.AccountManagement
             {
                 string attributeName = s_presenceStateTable[i, 0] as string;
                 string defaultState = s_presenceStateTable[i, 1] as string;
-                NonPresentAttrDefaultStateMapping.Add(attributeName, (defaultState == "FALSE") ? false : true);
+                NonPresentAttrDefaultStateMapping.Add(
+                    attributeName,
+                    (defaultState == "FALSE") ? false : true
+                );
             }
         }
 
         protected override int MappingTableIndex
         {
-            get
-            {
-                return mappingIndex;
-            }
+            get { return mappingIndex; }
         }
 
         protected internal override void InitializeNewDirectoryOptions(DirectoryEntry newDeChild)
@@ -76,15 +84,26 @@ namespace System.DirectoryServices.AccountManagement
             {
                 // Since we loaded the properties, we should have it.  Perhaps we don't have access
                 // to it.  In that case, we don't want to blindly overwrite whatever other bits might be there.
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADAMStoreCtx", "SetAuthPrincipalEnableStatus: can't read userAccountControl");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "ADAMStoreCtx",
+                    "SetAuthPrincipalEnableStatus: can't read userAccountControl"
+                );
 
                 throw new PrincipalOperationException(
-                            SR.ADStoreCtxUnableToReadExistingAccountControlFlagsToEnable);
+                    SR.ADStoreCtxUnableToReadExistingAccountControlFlagsToEnable
+                );
             }
 
             if ((enable && acctDisabled) || (!enable && !acctDisabled))
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADAMStoreCtx", "SetAuthPrincipalEnableStatus: Enabling (old enabled ={0} new enabled= {1})", !acctDisabled, enable);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "ADAMStoreCtx",
+                    "SetAuthPrincipalEnableStatus: Enabling (old enabled ={0} new enabled= {1})",
+                    !acctDisabled,
+                    enable
+                );
 
                 WriteAttribute<bool>(ap, "msDS-UserAccountDisabled", !enable);
             }
@@ -110,13 +129,23 @@ namespace System.DirectoryServices.AccountManagement
             // Find the partition in which the supplied ctxBase belongs by comparing it with the list of partitions hosted by this
             // LDS (ADAM) instance.
             //
-            using (DirectoryEntry rootDse = new DirectoryEntry("LDAP://" + this.userSuppliedServerName + "/rootDse", "", "", AuthenticationTypes.Anonymous))
+            using (
+                DirectoryEntry rootDse = new DirectoryEntry(
+                    "LDAP://" + this.userSuppliedServerName + "/rootDse",
+                    "",
+                    "",
+                    AuthenticationTypes.Anonymous
+                )
+            )
             {
                 string ctxBaseDN = (string)this.ctxBase.Properties["distinguishedName"][0];
                 int maxMatchLength = -1;
                 foreach (string partitionDN in rootDse.Properties["namingContexts"])
                 {
-                    if ((partitionDN.Length > maxMatchLength) && ctxBaseDN.EndsWith(partitionDN, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        (partitionDN.Length > maxMatchLength)
+                        && ctxBaseDN.EndsWith(partitionDN, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         maxMatchLength = partitionDN.Length;
                         this.contextBasePartitionDN = partitionDN;
@@ -128,30 +157,47 @@ namespace System.DirectoryServices.AccountManagement
             // User supplied name
             //
             UnsafeNativeMethods.Pathname pathCracker = new UnsafeNativeMethods.Pathname();
-            UnsafeNativeMethods.IADsPathname pathName = (UnsafeNativeMethods.IADsPathname)pathCracker;
+            UnsafeNativeMethods.IADsPathname pathName =
+                (UnsafeNativeMethods.IADsPathname)pathCracker;
 
-            pathName.Set(this.ctxBase.Path, 1 /* ADS_SETTYPE_FULL */);
+            pathName.Set(
+                this.ctxBase.Path,
+                1 /* ADS_SETTYPE_FULL */
+            );
 
             try
             {
-                this.userSuppliedServerName = pathName.Retrieve(9 /*ADS_FORMAT_SERVER */);
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "LoadComputerInfo: using user-supplied name {0}", this.userSuppliedServerName);
+                this.userSuppliedServerName = pathName.Retrieve(
+                    9 /*ADS_FORMAT_SERVER */
+                );
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ADStoreCtx",
+                    "LoadComputerInfo: using user-supplied name {0}",
+                    this.userSuppliedServerName
+                );
             }
             catch (COMException e)
             {
-                if (((uint)e.ErrorCode) == ((uint)0x80005000))  // E_ADS_BAD_PATHNAME
+                if (((uint)e.ErrorCode) == ((uint)0x80005000)) // E_ADS_BAD_PATHNAME
                 {
                     // Serverless path
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "LoadComputerInfo: using empty string as user-supplied name");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "LoadComputerInfo: using empty string as user-supplied name"
+                    );
                     this.userSuppliedServerName = "";
                 }
                 else
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                            "ADStoreCtx",
-                                            "LoadComputerInfo: caught COMException {0} {1} looking for user-supplied name",
-                                            e.ErrorCode,
-                                            e.Message);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Error,
+                        "ADStoreCtx",
+                        "LoadComputerInfo: caught COMException {0} {1} looking for user-supplied name",
+                        e.ErrorCode,
+                        e.Message
+                    );
 
                     throw;
                 }
@@ -183,23 +229,42 @@ namespace System.DirectoryServices.AccountManagement
         {
             DirectoryEntry de = (DirectoryEntry)p.UnderlyingObject;
 
-            if (((this.contextOptions & ContextOptions.Signing) != 0) &&
-                 ((this.contextOptions & ContextOptions.Sealing) != 0))
+            if (
+                ((this.contextOptions & ContextOptions.Signing) != 0)
+                && ((this.contextOptions & ContextOptions.Sealing) != 0)
+            )
             {
                 try
                 {
-                    de.Invoke("SetOption", new object[]{UnsafeNativeMethods.ADS_OPTION_ENUM.ADS_OPTION_PASSWORD_METHOD,
-                                                                          UnsafeNativeMethods.ADS_PASSWORD_ENCODING_ENUM.ADS_PASSWORD_ENCODE_CLEAR});
+                    de.Invoke(
+                        "SetOption",
+                        new object[]
+                        {
+                            UnsafeNativeMethods.ADS_OPTION_ENUM.ADS_OPTION_PASSWORD_METHOD,
+                            UnsafeNativeMethods
+                                .ADS_PASSWORD_ENCODING_ENUM
+                                .ADS_PASSWORD_ENCODE_CLEAR,
+                        }
+                    );
 
                     de.Options.PasswordPort = p.Context.ServerInformation.portLDAP;
                 }
                 catch (System.Reflection.TargetInvocationException e)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Error, "ADAMStoreCtx", "SetupPasswordModification: caught TargetInvocationException with message " + e.Message);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Error,
+                        "ADAMStoreCtx",
+                        "SetupPasswordModification: caught TargetInvocationException with message "
+                            + e.Message
+                    );
 
                     if (e.InnerException is System.Runtime.InteropServices.COMException)
                     {
-                        throw (ExceptionHelper.GetExceptionFromCOMException((System.Runtime.InteropServices.COMException)e.InnerException));
+                        throw (
+                            ExceptionHelper.GetExceptionFromCOMException(
+                                (System.Runtime.InteropServices.COMException)e.InnerException
+                            )
+                        );
                     }
 
                     // Unknown exception.  We don't want to suppress it.
@@ -213,7 +278,7 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(p.fakePrincipal == false);
 
             Debug.Assert(p != null);
-            Debug.Assert(newPassword != null);  // but it could be an empty string
+            Debug.Assert(newPassword != null); // but it could be an empty string
 
             DirectoryEntry de = (DirectoryEntry)p.UnderlyingObject;
             Debug.Assert(de != null);
@@ -229,7 +294,11 @@ namespace System.DirectoryServices.AccountManagement
         /// <param name="p">Principal to modify</param>
         /// <param name="oldPassword">Current password</param>
         /// <param name="newPassword">New password</param>
-        internal override void ChangePassword(AuthenticablePrincipal p, string oldPassword, string newPassword)
+        internal override void ChangePassword(
+            AuthenticablePrincipal p,
+            string oldPassword,
+            string newPassword
+        )
         {
             Debug.Assert(p.fakePrincipal == false);
 
@@ -237,8 +306,8 @@ namespace System.DirectoryServices.AccountManagement
             Debug.Assert(p.unpersisted == false);
 
             Debug.Assert(p != null);
-            Debug.Assert(newPassword != null);  // but it could be an empty string
-            Debug.Assert(oldPassword != null);  // but it could be an empty string
+            Debug.Assert(newPassword != null); // but it could be an empty string
+            Debug.Assert(oldPassword != null); // but it could be an empty string
 
             DirectoryEntry de = (DirectoryEntry)p.UnderlyingObject;
             Debug.Assert(de != null);
@@ -260,26 +329,54 @@ namespace System.DirectoryServices.AccountManagement
         private List<string> PopulatAuxObjectList(string auxClassName)
         {
             string SchemaNamingContext;
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADAMStoreCtx", "PopulatAuxObjectList Building object list");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADAMStoreCtx",
+                "PopulatAuxObjectList Building object list"
+            );
 
             try
             {
-                using (DirectoryEntry deRoot = new DirectoryEntry("LDAP://" + userSuppliedServerName + "/rootDSE", credentials?.UserName, credentials?.Password, authTypes))
+                using (
+                    DirectoryEntry deRoot = new DirectoryEntry(
+                        "LDAP://" + userSuppliedServerName + "/rootDSE",
+                        credentials?.UserName,
+                        credentials?.Password,
+                        authTypes
+                    )
+                )
                 {
                     if (deRoot.Properties["schemaNamingContext"].Count == 0)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Error, "ADAMStoreCtx", "PopulatAuxObjectList Unable to read schemaNamingContrext from " + userSuppliedServerName);
-                        throw new PrincipalOperationException(SR.ADAMStoreUnableToPopulateSchemaList);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Error,
+                            "ADAMStoreCtx",
+                            "PopulatAuxObjectList Unable to read schemaNamingContrext from "
+                                + userSuppliedServerName
+                        );
+                        throw new PrincipalOperationException(
+                            SR.ADAMStoreUnableToPopulateSchemaList
+                        );
                     }
 
                     SchemaNamingContext = (string)deRoot.Properties["schemaNamingContext"].Value;
                 }
 
-                using (DirectoryEntry deSCN = new DirectoryEntry("LDAP://" + userSuppliedServerName + "/" + SchemaNamingContext, credentials?.UserName, credentials?.Password, authTypes))
+                using (
+                    DirectoryEntry deSCN = new DirectoryEntry(
+                        "LDAP://" + userSuppliedServerName + "/" + SchemaNamingContext,
+                        credentials?.UserName,
+                        credentials?.Password,
+                        authTypes
+                    )
+                )
                 {
                     using (DirectorySearcher dirSearcher = new DirectorySearcher(deSCN))
                     {
-                        dirSearcher.Filter = "(&(objectClass=classSchema)(systemAuxiliaryClass=" + auxClassName + "))";
+                        dirSearcher.Filter =
+                            "(&(objectClass=classSchema)(systemAuxiliaryClass="
+                            + auxClassName
+                            + "))";
                         dirSearcher.PropertiesToLoad.Add("ldapDisplayName");
 
                         List<string> objectClasses = new List<string>();
@@ -289,17 +386,33 @@ namespace System.DirectoryServices.AccountManagement
                             {
                                 if (null == res.Properties["ldapDisplayName"])
                                 {
-                                    GlobalDebug.WriteLineIf(GlobalDebug.Error, "ADAMStoreCtx", "PopulatAuxObjectList Unable to read ldapDisplayName from " + SchemaNamingContext);
-                                    throw new PrincipalOperationException(SR.ADAMStoreUnableToPopulateSchemaList);
+                                    GlobalDebug.WriteLineIf(
+                                        GlobalDebug.Error,
+                                        "ADAMStoreCtx",
+                                        "PopulatAuxObjectList Unable to read ldapDisplayName from "
+                                            + SchemaNamingContext
+                                    );
+                                    throw new PrincipalOperationException(
+                                        SR.ADAMStoreUnableToPopulateSchemaList
+                                    );
                                 }
 
                                 objectClasses.Add(res.Properties["ldapDisplayName"][0].ToString());
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADAMStoreCtx", "PopulatAuxObjectList Adding " + res.Properties["ldapDisplayName"][0].ToString());
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "ADAMStoreCtx",
+                                    "PopulatAuxObjectList Adding "
+                                        + res.Properties["ldapDisplayName"][0].ToString()
+                                );
                             }
                         }
 
                         objectClasses.Add(auxClassName);
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADAMStoreCtx", "PopulatAuxObjectList Adding " + auxClassName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADAMStoreCtx",
+                            "PopulatAuxObjectList Adding " + auxClassName
+                        );
 
                         return objectClasses;
                     }
@@ -307,14 +420,21 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error, "ADAMStoreCtx", "PopulatAuxObjectList COM Exception");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "ADAMStoreCtx",
+                    "PopulatAuxObjectList COM Exception"
+                );
                 throw ExceptionHelper.GetExceptionFromCOMException(e);
             }
         }
 
         protected override string GetObjectClassPortion(Type principalType)
         {
-            if (principalType == typeof(AuthenticablePrincipal) || principalType == typeof(Principal))
+            if (
+                principalType == typeof(AuthenticablePrincipal)
+                || principalType == typeof(Principal)
+            )
             {
                 lock (_objectListLock)
                 {
@@ -377,9 +497,9 @@ namespace System.DirectoryServices.AccountManagement
         // non-existence of the attribute.
         private static readonly object[,] s_presenceStateTable =
         {
-                {"ms-DS-UserPasswordNotRequired", "FALSE" },
-                {"msDS-UserDontExpirePassword", "FALSE" },
-                {"ms-DS-UserEncryptedTextPasswordAllowed", "FALSE" }
+            { "ms-DS-UserPasswordNotRequired", "FALSE" },
+            { "msDS-UserDontExpirePassword", "FALSE" },
+            { "ms-DS-UserEncryptedTextPasswordAllowed", "FALSE" },
         };
 
         // We only list properties we map in this table.  At run-time, if we detect they set a
@@ -390,51 +510,200 @@ namespace System.DirectoryServices.AccountManagement
         private static readonly object[,] s_propertyMappingTableRaw =
         {
             // PropertyName                          AD property             Converter(LDAP->PAPI)                                    Converter(PAPI->LDAP)
-            {PropertyNames.PrincipalDescription,     "description",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalDisplayName,     "displayName",          new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalDistinguishedName,  "distinguishedName",    new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalSid,  "objectSid",            new FromLdapConverterDelegate(SidFromLdapConverter),  null},
-            {PropertyNames.PrincipalSamAccountName,  "name",       null, null},
-            {PropertyNames.PrincipalUserPrincipalName,  "userPrincipalName",    new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalGuid,  "objectGuid",           new FromLdapConverterDelegate(GuidFromLdapConverter),   null},
-            {PropertyNames.PrincipalStructuralObjectClass,  "objectClass",           new FromLdapConverterDelegate(ObjectClassFromLdapConverter),   null},
-            {PropertyNames.PrincipalName,  "name",           new FromLdapConverterDelegate(StringFromLdapConverter), new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.PrincipalExtensionCache,  null,  null, new ToLdapConverterDelegate(ExtensionCacheToLdapConverter)},
-
-            {PropertyNames.AuthenticablePrincipalEnabled,      "msDS-UserAccountDisabled", new FromLdapConverterDelegate(AcctDisabledFromLdapConverter),  new ToLdapConverterDelegate(AcctDisabledToLdapConverter)},
-            {PropertyNames.AuthenticablePrincipalCertificates, "userCertificate",    new FromLdapConverterDelegate(CertFromLdapConverter), new ToLdapConverterDelegate(CertToLdap)},
-
-            {PropertyNames.GroupIsSecurityGroup,   "groupType", new FromLdapConverterDelegate(GroupTypeFromLdapConverter), new ToLdapConverterDelegate(GroupTypeToLdapConverter)},
-            {PropertyNames.GroupGroupScope, "groupType", new FromLdapConverterDelegate(GroupTypeFromLdapConverter), new ToLdapConverterDelegate(GroupTypeToLdapConverter)},
-
-            {PropertyNames.UserGivenName,             "givenName",        new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserMiddleName,            "middleName",       new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserSurname,               "sn",               new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserEmailAddress,          "mail",             new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserVoiceTelephoneNumber,  "telephoneNumber",  new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-            {PropertyNames.UserEmployeeID,            "employeeID",       new FromLdapConverterDelegate(StringFromLdapConverter),  new ToLdapConverterDelegate(StringToLdapConverter)},
-
-            {PropertyNames.ComputerServicePrincipalNames, "servicePrincipalName", new FromLdapConverterDelegate(MultiStringFromLdapConverter), new ToLdapConverterDelegate(MultiStringToLdapConverter)},
-
-            {PropertyNames.AcctInfoAcctLockoutTime,       "lockoutTime",        new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter), null},
-            {PropertyNames.AcctInfoLastLogon,             "lastLogon",          new FromLdapConverterDelegate(LastLogonFromLdapConverter),       null},
-            {PropertyNames.AcctInfoLastLogon,             "lastLogonTimestamp", new FromLdapConverterDelegate(LastLogonFromLdapConverter),       null},
-            {PropertyNames.AcctInfoPermittedWorkstations, "userWorkstations",   null,     null},
-            {PropertyNames.AcctInfoPermittedLogonTimes,   "logonHours",         null,          null},
-            {PropertyNames.AcctInfoExpirationDate,        "accountExpires",     new FromLdapConverterDelegate(AcctExpirFromLdapConverter),       new ToLdapConverterDelegate(AcctExpirToLdapConverter)},
-            {PropertyNames.AcctInfoSmartcardRequired,     "userAccountControl", null,             null},
-            {PropertyNames.AcctInfoDelegationPermitted,   "userAccountControl", null,             null},
-            {PropertyNames.AcctInfoBadLogonCount,         "badPwdCount",        new FromLdapConverterDelegate(IntFromLdapConverter),             null},
-            {PropertyNames.AcctInfoHomeDirectory,         "homeDirectory",   null,     null},
-            {PropertyNames.AcctInfoHomeDrive,             "homeDrive",   null,     null},
-            {PropertyNames.AcctInfoScriptPath,            "scriptPath",   null,     null},
-
-            {PropertyNames.PwdInfoLastPasswordSet,        "pwdLastSet",           new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),     null},
-            {PropertyNames.PwdInfoLastBadPasswordAttempt, "badPasswordTime",      new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),     null},
-            {PropertyNames.PwdInfoPasswordNotRequired,    "ms-DS-UserPasswordNotRequired",   new FromLdapConverterDelegate(BoolFromLdapConverter),                 new ToLdapConverterDelegate(BoolToLdapConverter)},
-            {PropertyNames.PwdInfoPasswordNeverExpires,   "msDS-UserDontExpirePassword",   new FromLdapConverterDelegate(BoolFromLdapConverter),                 new ToLdapConverterDelegate(BoolToLdapConverter)},
-            {PropertyNames.PwdInfoCannotChangePassword,   "ntSecurityDescriptor", null,     new ToLdapConverterDelegate(CannotChangePwdToLdapConverter)},
-            {PropertyNames.PwdInfoAllowReversiblePasswordEncryption,     "ms-DS-UserEncryptedTextPasswordAllowed",    new FromLdapConverterDelegate(BoolFromLdapConverter), new ToLdapConverterDelegate(BoolToLdapConverter)}
+            {
+                PropertyNames.PrincipalDescription,
+                "description",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalDisplayName,
+                "displayName",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalDistinguishedName,
+                "distinguishedName",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalSid,
+                "objectSid",
+                new FromLdapConverterDelegate(SidFromLdapConverter),
+                null,
+            },
+            { PropertyNames.PrincipalSamAccountName, "name", null, null },
+            {
+                PropertyNames.PrincipalUserPrincipalName,
+                "userPrincipalName",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalGuid,
+                "objectGuid",
+                new FromLdapConverterDelegate(GuidFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalStructuralObjectClass,
+                "objectClass",
+                new FromLdapConverterDelegate(ObjectClassFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalName,
+                "name",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.PrincipalExtensionCache,
+                null,
+                null,
+                new ToLdapConverterDelegate(ExtensionCacheToLdapConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalEnabled,
+                "msDS-UserAccountDisabled",
+                new FromLdapConverterDelegate(AcctDisabledFromLdapConverter),
+                new ToLdapConverterDelegate(AcctDisabledToLdapConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalCertificates,
+                "userCertificate",
+                new FromLdapConverterDelegate(CertFromLdapConverter),
+                new ToLdapConverterDelegate(CertToLdap),
+            },
+            {
+                PropertyNames.GroupIsSecurityGroup,
+                "groupType",
+                new FromLdapConverterDelegate(GroupTypeFromLdapConverter),
+                new ToLdapConverterDelegate(GroupTypeToLdapConverter),
+            },
+            {
+                PropertyNames.GroupGroupScope,
+                "groupType",
+                new FromLdapConverterDelegate(GroupTypeFromLdapConverter),
+                new ToLdapConverterDelegate(GroupTypeToLdapConverter),
+            },
+            {
+                PropertyNames.UserGivenName,
+                "givenName",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserMiddleName,
+                "middleName",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserSurname,
+                "sn",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserEmailAddress,
+                "mail",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserVoiceTelephoneNumber,
+                "telephoneNumber",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.UserEmployeeID,
+                "employeeID",
+                new FromLdapConverterDelegate(StringFromLdapConverter),
+                new ToLdapConverterDelegate(StringToLdapConverter),
+            },
+            {
+                PropertyNames.ComputerServicePrincipalNames,
+                "servicePrincipalName",
+                new FromLdapConverterDelegate(MultiStringFromLdapConverter),
+                new ToLdapConverterDelegate(MultiStringToLdapConverter),
+            },
+            {
+                PropertyNames.AcctInfoAcctLockoutTime,
+                "lockoutTime",
+                new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoLastLogon,
+                "lastLogon",
+                new FromLdapConverterDelegate(LastLogonFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoLastLogon,
+                "lastLogonTimestamp",
+                new FromLdapConverterDelegate(LastLogonFromLdapConverter),
+                null,
+            },
+            { PropertyNames.AcctInfoPermittedWorkstations, "userWorkstations", null, null },
+            { PropertyNames.AcctInfoPermittedLogonTimes, "logonHours", null, null },
+            {
+                PropertyNames.AcctInfoExpirationDate,
+                "accountExpires",
+                new FromLdapConverterDelegate(AcctExpirFromLdapConverter),
+                new ToLdapConverterDelegate(AcctExpirToLdapConverter),
+            },
+            { PropertyNames.AcctInfoSmartcardRequired, "userAccountControl", null, null },
+            { PropertyNames.AcctInfoDelegationPermitted, "userAccountControl", null, null },
+            {
+                PropertyNames.AcctInfoBadLogonCount,
+                "badPwdCount",
+                new FromLdapConverterDelegate(IntFromLdapConverter),
+                null,
+            },
+            { PropertyNames.AcctInfoHomeDirectory, "homeDirectory", null, null },
+            { PropertyNames.AcctInfoHomeDrive, "homeDrive", null, null },
+            { PropertyNames.AcctInfoScriptPath, "scriptPath", null, null },
+            {
+                PropertyNames.PwdInfoLastPasswordSet,
+                "pwdLastSet",
+                new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PwdInfoLastBadPasswordAttempt,
+                "badPasswordTime",
+                new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
+                null,
+            },
+            {
+                PropertyNames.PwdInfoPasswordNotRequired,
+                "ms-DS-UserPasswordNotRequired",
+                new FromLdapConverterDelegate(BoolFromLdapConverter),
+                new ToLdapConverterDelegate(BoolToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoPasswordNeverExpires,
+                "msDS-UserDontExpirePassword",
+                new FromLdapConverterDelegate(BoolFromLdapConverter),
+                new ToLdapConverterDelegate(BoolToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoCannotChangePassword,
+                "ntSecurityDescriptor",
+                null,
+                new ToLdapConverterDelegate(CannotChangePwdToLdapConverter),
+            },
+            {
+                PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
+                "ms-DS-UserEncryptedTextPasswordAllowed",
+                new FromLdapConverterDelegate(BoolFromLdapConverter),
+                new ToLdapConverterDelegate(BoolToLdapConverter),
+            },
         };
 
         //
@@ -446,44 +715,163 @@ namespace System.DirectoryServices.AccountManagement
         private static readonly object[,] s_filterPropertiesTableRaw =
         {
             // QbeType                                          AD property             Converter
-            {typeof(DescriptionFilter),                         "description",          new FilterConverterDelegate(StringConverter)},
-            {typeof(DisplayNameFilter),                         "displayName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(IdentityClaimFilter),                       "",                     new FilterConverterDelegate(IdentityClaimConverter)},
-            {typeof(DistinguishedNameFilter),                         "distinguishedName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(GuidFilter),                         "objectGuid",          new FilterConverterDelegate(GuidConverter)},
-            {typeof(UserPrincipalNameFilter),                         "userPrincipalName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(StructuralObjectClassFilter),                         "objectClass",          new FilterConverterDelegate(StringConverter)},
-            {typeof(NameFilter),                         "name",          new FilterConverterDelegate(StringConverter)},
-
-            {typeof(CertificateFilter),                         "",                     new FilterConverterDelegate(CertificateConverter)},
-            {typeof(AuthPrincEnabledFilter),                    "msDS-UserAccountDisabled",   new FilterConverterDelegate(AcctDisabledConverter)}, /*##*/
-            {typeof(PermittedWorkstationFilter),                "userWorkstations",     new FilterConverterDelegate(StringConverter)},
-            {typeof(PermittedLogonTimesFilter),                 "logonHours",           new FilterConverterDelegate(BinaryConverter)},
-            {typeof(ExpirationDateFilter),                      "accountExpires",       new FilterConverterDelegate(ExpirationDateConverter)},
-            {typeof(SmartcardLogonRequiredFilter),              "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)}, /*##*/
-            {typeof(DelegationPermittedFilter),                 "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)}, /*##*/
-            {typeof(HomeDirectoryFilter),                       "homeDirectory",        new FilterConverterDelegate(StringConverter)},
-            {typeof(HomeDriveFilter),                           "homeDrive",            new FilterConverterDelegate(StringConverter)},
-            {typeof(ScriptPathFilter),                          "scriptPath",           new FilterConverterDelegate(StringConverter)},
-            {typeof(PasswordNotRequiredFilter),                 "ms-DS-UserPasswordNotRequired",   new FilterConverterDelegate(DefaultValueBoolConverter)}, /*##*/
-            {typeof(PasswordNeverExpiresFilter),                "msDS-UserDontExpirePassword",   new FilterConverterDelegate(DefaultValueBoolConverter)}, /*##*/
-            {typeof(CannotChangePasswordFilter),                "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)}, /*##*/
-            {typeof(AllowReversiblePasswordEncryptionFilter),   "ms-DS-UserEncryptedTextPasswordAllowed",   new FilterConverterDelegate(DefaultValueBoolConverter)}, /*##*/
-            {typeof(GivenNameFilter),                           "givenName",            new FilterConverterDelegate(StringConverter)},
-            {typeof(MiddleNameFilter),                          "middleName",           new FilterConverterDelegate(StringConverter)},
-            {typeof(SurnameFilter),                             "sn",                   new FilterConverterDelegate(StringConverter)},
-            {typeof(EmailAddressFilter),                        "mail",                 new FilterConverterDelegate(StringConverter)},
-            {typeof(VoiceTelephoneNumberFilter),                "telephoneNumber",      new FilterConverterDelegate(StringConverter)},
-            {typeof(EmployeeIDFilter),                          "employeeID",           new FilterConverterDelegate(StringConverter)},
-            {typeof(GroupIsSecurityGroupFilter),                        "groupType",            new FilterConverterDelegate(GroupTypeConverter)},
-            {typeof(GroupScopeFilter),                          "groupType",            new FilterConverterDelegate(GroupTypeConverter)},
-            {typeof(ServicePrincipalNameFilter),                "servicePrincipalName", new FilterConverterDelegate(StringConverter)},
-            {typeof(ExtensionCacheFilter),                null, new FilterConverterDelegate(ExtensionCacheConverter)},
-            {typeof(BadPasswordAttemptFilter),                "badPasswordTime", new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter)},
-            {typeof(ExpiredAccountFilter),                "accountExpires", new FilterConverterDelegate(MatchingDateTimeConverter)},
-            {typeof(LastLogonTimeFilter),                "lastLogonTimestamp", new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter)},
-            {typeof(LockoutTimeFilter),                "lockoutTime", new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter)},
-            {typeof(PasswordSetTimeFilter),                "pwdLastSet", new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter)}
+            {
+                typeof(DescriptionFilter),
+                "description",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(DisplayNameFilter),
+                "displayName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(IdentityClaimFilter),
+                "",
+                new FilterConverterDelegate(IdentityClaimConverter),
+            },
+            {
+                typeof(DistinguishedNameFilter),
+                "distinguishedName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(GuidFilter), "objectGuid", new FilterConverterDelegate(GuidConverter) },
+            {
+                typeof(UserPrincipalNameFilter),
+                "userPrincipalName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(StructuralObjectClassFilter),
+                "objectClass",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(NameFilter), "name", new FilterConverterDelegate(StringConverter) },
+            { typeof(CertificateFilter), "", new FilterConverterDelegate(CertificateConverter) },
+            {
+                typeof(AuthPrincEnabledFilter),
+                "msDS-UserAccountDisabled",
+                new FilterConverterDelegate(AcctDisabledConverter),
+            }, /*##*/
+            {
+                typeof(PermittedWorkstationFilter),
+                "userWorkstations",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(PermittedLogonTimesFilter),
+                "logonHours",
+                new FilterConverterDelegate(BinaryConverter),
+            },
+            {
+                typeof(ExpirationDateFilter),
+                "accountExpires",
+                new FilterConverterDelegate(ExpirationDateConverter),
+            },
+            {
+                typeof(SmartcardLogonRequiredFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            }, /*##*/
+            {
+                typeof(DelegationPermittedFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            }, /*##*/
+            {
+                typeof(HomeDirectoryFilter),
+                "homeDirectory",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(HomeDriveFilter), "homeDrive", new FilterConverterDelegate(StringConverter) },
+            {
+                typeof(ScriptPathFilter),
+                "scriptPath",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(PasswordNotRequiredFilter),
+                "ms-DS-UserPasswordNotRequired",
+                new FilterConverterDelegate(DefaultValueBoolConverter),
+            }, /*##*/
+            {
+                typeof(PasswordNeverExpiresFilter),
+                "msDS-UserDontExpirePassword",
+                new FilterConverterDelegate(DefaultValueBoolConverter),
+            }, /*##*/
+            {
+                typeof(CannotChangePasswordFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            }, /*##*/
+            {
+                typeof(AllowReversiblePasswordEncryptionFilter),
+                "ms-DS-UserEncryptedTextPasswordAllowed",
+                new FilterConverterDelegate(DefaultValueBoolConverter),
+            }, /*##*/
+            { typeof(GivenNameFilter), "givenName", new FilterConverterDelegate(StringConverter) },
+            {
+                typeof(MiddleNameFilter),
+                "middleName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(SurnameFilter), "sn", new FilterConverterDelegate(StringConverter) },
+            { typeof(EmailAddressFilter), "mail", new FilterConverterDelegate(StringConverter) },
+            {
+                typeof(VoiceTelephoneNumberFilter),
+                "telephoneNumber",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(EmployeeIDFilter),
+                "employeeID",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(GroupIsSecurityGroupFilter),
+                "groupType",
+                new FilterConverterDelegate(GroupTypeConverter),
+            },
+            {
+                typeof(GroupScopeFilter),
+                "groupType",
+                new FilterConverterDelegate(GroupTypeConverter),
+            },
+            {
+                typeof(ServicePrincipalNameFilter),
+                "servicePrincipalName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(ExtensionCacheFilter),
+                null,
+                new FilterConverterDelegate(ExtensionCacheConverter),
+            },
+            {
+                typeof(BadPasswordAttemptFilter),
+                "badPasswordTime",
+                new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter),
+            },
+            {
+                typeof(ExpiredAccountFilter),
+                "accountExpires",
+                new FilterConverterDelegate(MatchingDateTimeConverter),
+            },
+            {
+                typeof(LastLogonTimeFilter),
+                "lastLogonTimestamp",
+                new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter),
+            },
+            {
+                typeof(LockoutTimeFilter),
+                "lockoutTime",
+                new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter),
+            },
+            {
+                typeof(PasswordSetTimeFilter),
+                "pwdLastSet",
+                new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter),
+            },
         };
     }
 }

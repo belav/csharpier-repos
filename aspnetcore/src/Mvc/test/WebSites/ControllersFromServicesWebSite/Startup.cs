@@ -19,12 +19,19 @@ public class Startup
             .AddApplicationPart(typeof(TimeScheduleController).GetTypeInfo().Assembly)
             .ConfigureApplicationPartManager(manager =>
             {
-                manager.ApplicationParts.Add(new TypesPart(
-                  typeof(AnotherController),
-                  typeof(ComponentFromServicesViewComponent),
-                  typeof(InServicesTagHelper)));
+                manager.ApplicationParts.Add(
+                    new TypesPart(
+                        typeof(AnotherController),
+                        typeof(ComponentFromServicesViewComponent),
+                        typeof(InServicesTagHelper)
+                    )
+                );
 
-                foreach (var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(Assembly.GetExecutingAssembly()))
+                foreach (
+                    var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
+                        Assembly.GetExecutingAssembly()
+                    )
+                )
                 {
                     manager.ApplicationParts.Add(part);
                 }
@@ -61,8 +68,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
@@ -74,4 +80,3 @@ public class Startup
             .UseKestrel()
             .UseIISIntegration();
 }
-

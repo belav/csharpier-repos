@@ -18,28 +18,37 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateEqualsAndGetHashCodeDialog()
-            : base(nameof(BasicGenerateEqualsAndGetHashCodeDialog))
-        {
-        }
+            : base(nameof(BasicGenerateEqualsAndGetHashCodeDialog)) { }
 
         [IdeFact]
         public async Task VerifyCodeRefactoringOfferedAndCanceled()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 Class C
     Dim i as Integer
     Dim j as String
     Dim k as Boolean
 
 $$
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Generate Equals(object)...", applyFix: true, blockUntilComplete: false, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate Equals(object)...",
+                applyFix: true,
+                blockUntilComplete: false,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickCancelAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
-            var expectedText = @"
+            var actualText = await TestServices.Editor.GetTextAsync(
+                HangMitigatingCancellationToken
+            );
+            var expectedText =
+                @"
 Class C
     Dim i as Integer
     Dim j as String
@@ -53,7 +62,8 @@ End Class";
         [IdeFact]
         public async Task VerifyCodeRefactoringOfferedAndAccepted()
         {
-            await SetUpEditorAsync(@"
+            await SetUpEditorAsync(
+                @"
 Imports TestProj
 
 Class C
@@ -62,14 +72,24 @@ Class C
     Dim k as Boolean
 
 $$
-End Class", HangMitigatingCancellationToken);
+End Class",
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Generate Equals(object)...", applyFix: true, blockUntilComplete: false, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate Equals(object)...",
+                applyFix: true,
+                blockUntilComplete: false,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.PickMembersDialog.VerifyOpenAsync(HangMitigatingCancellationToken);
             await TestServices.PickMembersDialog.ClickOKAsync(HangMitigatingCancellationToken);
-            var actualText = await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken);
-            var expectedText = @"
+            var actualText = await TestServices.Editor.GetTextAsync(
+                HangMitigatingCancellationToken
+            );
+            var expectedText =
+                @"
 Imports TestProj
 
 Class C

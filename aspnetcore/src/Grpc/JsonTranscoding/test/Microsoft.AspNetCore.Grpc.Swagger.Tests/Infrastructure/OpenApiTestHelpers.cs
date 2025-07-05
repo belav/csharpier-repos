@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Grpc.Swagger.Tests.Infrastructure;
 
 internal static class OpenApiTestHelpers
 {
-    public static OpenApiDocument GetOpenApiDocument<TService>(ITestOutputHelper testOutputHelper) where TService : class
+    public static OpenApiDocument GetOpenApiDocument<TService>(ITestOutputHelper testOutputHelper)
+        where TService : class
     {
         var services = new ServiceCollection();
         services.AddGrpcSwagger();
@@ -21,7 +22,10 @@ internal static class OpenApiTestHelpers
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
-            var filePath = Path.Combine(System.AppContext.BaseDirectory, "Microsoft.AspNetCore.Grpc.Swagger.Tests.xml");
+            var filePath = Path.Combine(
+                System.AppContext.BaseDirectory,
+                "Microsoft.AspNetCore.Grpc.Swagger.Tests.xml"
+            );
             c.IncludeXmlComments(filePath);
             c.IncludeGrpcXmlComments(filePath, includeControllerXmlComments: true);
         });

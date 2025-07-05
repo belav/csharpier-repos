@@ -23,7 +23,8 @@ public class EntityTrackingEventArgs : EntityEntryEventArgs
     public EntityTrackingEventArgs(
         InternalEntityEntry internalEntityEntry,
         EntityState state,
-        bool fromQuery)
+        bool fromQuery
+    )
         : base(internalEntityEntry)
     {
         State = state;

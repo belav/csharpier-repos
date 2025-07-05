@@ -25,11 +25,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
-using Xunit;
 using System.ComponentModel;
 using System.IO;
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -136,7 +134,9 @@ namespace System.Data.Tests
         [Fact]
         public void DataView()
         {
-            DataView dv1, dv2, dv3;
+            DataView dv1,
+                dv2,
+                dv3;
             dv1 = new DataView();
             // AssertEquals ("test#01",null,dv1.Table);
             Assert.True(dv1.AllowNew);
@@ -284,7 +284,6 @@ namespace System.Data.Tests
             // PrintTableOrView (dataView);
         }
 
-
         [Fact]
         public void SortTestWeirdColumnName()
         {
@@ -301,7 +300,6 @@ namespace System.Data.Tests
             dv.Sort = "[id]] DESC";
             dv.Sort = "[[id] ASC";
         }
-
 
         [Fact]
         public void SortTests()
@@ -432,10 +430,12 @@ namespace System.Data.Tests
         }
 
         private bool _dvInitialized;
+
         private void OnDataViewInitialized(object src, EventArgs args)
         {
             _dvInitialized = true;
         }
+
         [Fact]
         public void BeginInit2()
         {
@@ -471,11 +471,14 @@ namespace System.Data.Tests
         [Fact]
         public void Find_1()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                /* since the sort key is not specified. Must raise a ArgumentException */
-                int sIndex = _dataView.Find("abc");
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    /* since the sort key is not specified. Must raise a ArgumentException */
+                    int sIndex = _dataView.Find("abc");
+                }
+            );
         }
 
         [Fact]
@@ -506,12 +509,15 @@ namespace System.Data.Tests
         [Fact]
         public void Find_3()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                _dataView.Sort = "itemID, itemName";
-                /* expecting order key count mismatch */
-                _dataView.Find("itemValue");
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    _dataView.Sort = "itemID, itemName";
+                    /* expecting order key count mismatch */
+                    _dataView.Find("itemValue");
+                }
+            );
         }
 
         [Fact]
@@ -564,7 +570,10 @@ namespace System.Data.Tests
             _listChangedArgs = null;
             _dataTable.Columns.Remove(dc5);
             // PrintTableOrView(dataView, "PropertyDescriptorDeleted");
-            Assert.Equal(ListChangedType.PropertyDescriptorDeleted, _listChangedArgs.ListChangedType);
+            Assert.Equal(
+                ListChangedType.PropertyDescriptorDeleted,
+                _listChangedArgs.ListChangedType
+            );
         }
 
         [Fact]
@@ -580,40 +589,45 @@ namespace System.Data.Tests
         [Fact]
         public void FindRowsWithoutSort()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable dt = new DataTable("table");
-                dt.Columns.Add("col1");
-                dt.Columns.Add("col2");
-                dt.Columns.Add("col3");
-                dt.Rows.Add(new object[] { 1, 2, 3 });
-                dt.Rows.Add(new object[] { 4, 5, 6 });
-                dt.Rows.Add(new object[] { 4, 7, 8 });
-                dt.Rows.Add(new object[] { 5, 7, 8 });
-                dt.Rows.Add(new object[] { 4, 8, 9 });
-                DataView dv = new DataView(dt);
-                dv.Find(1);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTable dt = new DataTable("table");
+                    dt.Columns.Add("col1");
+                    dt.Columns.Add("col2");
+                    dt.Columns.Add("col3");
+                    dt.Rows.Add(new object[] { 1, 2, 3 });
+                    dt.Rows.Add(new object[] { 4, 5, 6 });
+                    dt.Rows.Add(new object[] { 4, 7, 8 });
+                    dt.Rows.Add(new object[] { 5, 7, 8 });
+                    dt.Rows.Add(new object[] { 4, 8, 9 });
+                    DataView dv = new DataView(dt);
+                    dv.Find(1);
+                }
+            );
         }
 
         [Fact]
         public void FindRowsInconsistentKeyLength()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable dt = new DataTable("table");
-                dt.Columns.Add("col1");
-                dt.Columns.Add("col2");
-                dt.Columns.Add("col3");
-                dt.Rows.Add(new object[] { 1, 2, 3 });
-                dt.Rows.Add(new object[] { 4, 5, 6 });
-                dt.Rows.Add(new object[] { 4, 7, 8 });
-                dt.Rows.Add(new object[] { 5, 7, 8 });
-                dt.Rows.Add(new object[] { 4, 8, 9 });
-                DataView dv = new DataView(dt, null, "col1",
-                    DataViewRowState.CurrentRows);
-                dv.FindRows(new object[] { 1, 2, 3 });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataTable dt = new DataTable("table");
+                    dt.Columns.Add("col1");
+                    dt.Columns.Add("col2");
+                    dt.Columns.Add("col3");
+                    dt.Rows.Add(new object[] { 1, 2, 3 });
+                    dt.Rows.Add(new object[] { 4, 5, 6 });
+                    dt.Rows.Add(new object[] { 4, 7, 8 });
+                    dt.Rows.Add(new object[] { 5, 7, 8 });
+                    dt.Rows.Add(new object[] { 4, 8, 9 });
+                    DataView dv = new DataView(dt, null, "col1", DataViewRowState.CurrentRows);
+                    dv.FindRows(new object[] { 1, 2, 3 });
+                }
+            );
         }
 
         [Fact]
@@ -709,7 +723,8 @@ namespace System.Data.Tests
         [Fact]
         public void CancelEditAndEvents()
         {
-            string reference = " =====ItemAdded:3 ------4 =====ItemAdded:3 =====ItemAdded:4 ------5 =====ItemAdded:4 =====ItemAdded:5 ------6 =====ItemDeleted:5 ------5 =====ItemAdded:5";
+            string reference =
+                " =====ItemAdded:3 ------4 =====ItemAdded:3 =====ItemAdded:4 ------5 =====ItemAdded:4 =====ItemAdded:5 ------6 =====ItemDeleted:5 ------5 =====ItemAdded:5";
 
             _eventWriter = new StringWriter();
 
@@ -742,7 +757,8 @@ namespace System.Data.Tests
         [Fact]
         public void ColumnChangeName()
         {
-            string result = @"setting table...
+            string result =
+                @"setting table...
 ---- OnListChanged PropertyDescriptorChanged,0,0
 ---- OnListChanged Reset,-1,-1
 table was set.
@@ -751,12 +767,14 @@ table was set.
 
             _eventWriter = new StringWriter();
 
-            ComplexEventSequence1View dv =
-                new ComplexEventSequence1View(_dataTable, _eventWriter);
+            ComplexEventSequence1View dv = new ComplexEventSequence1View(_dataTable, _eventWriter);
 
             _dc2.ColumnName = "new_column_name";
 
-            Assert.Equal(result.Replace("\r\n", "\n"), _eventWriter.ToString().Replace("\r\n", "\n"));
+            Assert.Equal(
+                result.Replace("\r\n", "\n"),
+                _eventWriter.ToString().Replace("\r\n", "\n")
+            );
             GC.KeepAlive(dv);
         }
 
@@ -768,7 +786,8 @@ table was set.
         [Fact]
         public void DefaultColumnNameAddListChangedTest()
         {
-            string result = @"setting table...
+            string result =
+                @"setting table...
 ---- OnListChanged PropertyDescriptorChanged,0,0
 ---- OnListChanged Reset,-1,-1
 table was set.
@@ -787,8 +806,7 @@ table was set.
 ";
             _eventWriter = new StringWriter();
             DataTable dt = new DataTable("table");
-            ComplexEventSequence1View dv =
-                new ComplexEventSequence1View(dt, _eventWriter);
+            ComplexEventSequence1View dv = new ComplexEventSequence1View(dt, _eventWriter);
             dt.Columns.Add();
             _eventWriter.WriteLine(" default named column added.");
             dt.Columns.Add("non-defaultNamedColumn");
@@ -802,7 +820,10 @@ table was set.
             dt.Columns.Add("");
             _eventWriter.WriteLine(" add a column with an empty name.");
 
-            Assert.Equal(result.Replace("\r\n", "\n"), _eventWriter.ToString().Replace("\r\n", "\n"));
+            Assert.Equal(
+                result.Replace("\r\n", "\n"),
+                _eventWriter.ToString().Replace("\r\n", "\n")
+            );
             GC.KeepAlive(dv);
         }
 
@@ -810,8 +831,8 @@ table was set.
         {
             private TextWriter _w;
 
-            public ComplexEventSequence1View(DataTable dt,
-                TextWriter w) : base()
+            public ComplexEventSequence1View(DataTable dt, TextWriter w)
+                : base()
             {
                 _w = w;
                 w.WriteLine("setting table...");
@@ -822,7 +843,14 @@ table was set.
             protected override void OnListChanged(ListChangedEventArgs e)
             {
                 if (_w != null)
-                    _w.WriteLine("---- OnListChanged " + e.ListChangedType + "," + e.NewIndex + "," + e.OldIndex);
+                    _w.WriteLine(
+                        "---- OnListChanged "
+                            + e.ListChangedType
+                            + ","
+                            + e.NewIndex
+                            + ","
+                            + e.OldIndex
+                    );
                 base.OnListChanged(e);
             }
 

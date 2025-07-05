@@ -16,6 +16,7 @@ namespace SharedTypes.ComInterfaces
         void MethodOut(out StatefulFinallyType param);
         void MethodRef(ref StatefulFinallyType param);
         StatefulFinallyType Return();
+
         [PreserveSig]
         StatefulFinallyType ReturnPreserveSig();
     }
@@ -27,23 +28,26 @@ namespace SharedTypes.ComInterfaces
         {
             _ = param.i;
         }
+
         public void MethodIn(in StatefulFinallyType param)
         {
             _ = param.i;
         }
+
         public void MethodOut(out StatefulFinallyType param)
         {
             param = new StatefulFinallyType() { i = 42 };
         }
+
         public void MethodRef(ref StatefulFinallyType param)
         {
             _ = param.i;
             param = new StatefulFinallyType() { i = 99 };
         }
-        public StatefulFinallyType Return()
-            => new StatefulFinallyType() { i = 8 };
-        public StatefulFinallyType ReturnPreserveSig()
-            => new StatefulFinallyType() { i = 3 };
+
+        public StatefulFinallyType Return() => new StatefulFinallyType() { i = 8 };
+
+        public StatefulFinallyType ReturnPreserveSig() => new StatefulFinallyType() { i = 3 };
     }
 
     [NativeMarshalling(typeof(StatefulFinallyTypeMarshaller))]
@@ -57,12 +61,36 @@ namespace SharedTypes.ComInterfaces
         public int i;
     }
 
-    [CustomMarshaller(typeof(StatefulFinallyType), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanaged))]
-    [CustomMarshaller(typeof(StatefulFinallyType), MarshalMode.UnmanagedToManagedOut, typeof(ManagedToUnmanaged))]
-    [CustomMarshaller(typeof(StatefulFinallyType), MarshalMode.ManagedToUnmanagedOut, typeof(UnmanagedToManaged))]
-    [CustomMarshaller(typeof(StatefulFinallyType), MarshalMode.UnmanagedToManagedIn, typeof(UnmanagedToManaged))]
-    [CustomMarshaller(typeof(StatefulFinallyType), MarshalMode.UnmanagedToManagedRef, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatefulFinallyType), MarshalMode.ManagedToUnmanagedRef, typeof(Bidirectional))]
+    [CustomMarshaller(
+        typeof(StatefulFinallyType),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulFinallyType),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(ManagedToUnmanaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulFinallyType),
+        MarshalMode.ManagedToUnmanagedOut,
+        typeof(UnmanagedToManaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulFinallyType),
+        MarshalMode.UnmanagedToManagedIn,
+        typeof(UnmanagedToManaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulFinallyType),
+        MarshalMode.UnmanagedToManagedRef,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatefulFinallyType),
+        MarshalMode.ManagedToUnmanagedRef,
+        typeof(Bidirectional)
+    )]
     internal struct StatefulFinallyTypeMarshaller
     {
         internal struct Bidirectional
@@ -122,6 +150,7 @@ namespace SharedTypes.ComInterfaces
             {
                 unmanaged_i = unmanaged.i;
             }
+
             public StatefulFinallyType ToManagedFinally()
             {
                 return new StatefulFinallyType() { i = unmanaged_i };

@@ -16,25 +16,35 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static partial class ITextViewExtensions
     {
-        private class PerSubjectBufferProperty<TProperty, TTextView> where TTextView : ITextView
+        private class PerSubjectBufferProperty<TProperty, TTextView>
+            where TTextView : ITextView
         {
             private readonly TTextView _textView;
-            private readonly Dictionary<ITextBuffer, Dictionary<object, TProperty>> _subjectBufferMap = new();
+            private readonly Dictionary<
+                ITextBuffer,
+                Dictionary<object, TProperty>
+            > _subjectBufferMap = new();
 
-            // Some other VS components (e.g. Razor) will temporarily disconnect out ITextBuffer from the ITextView.  When listening to 
+            // Some other VS components (e.g. Razor) will temporarily disconnect out ITextBuffer from the ITextView.  When listening to
             // BufferGraph.GraphBuffersChanged, we should allow buffers we previously knew about to be re-attached.
-            private readonly ConditionalWeakTable<ITextBuffer, Dictionary<object, TProperty>> _buffersRemovedFromTextViewBufferGraph = new();
+            private readonly ConditionalWeakTable<
+                ITextBuffer,
+                Dictionary<object, TProperty>
+            > _buffersRemovedFromTextViewBufferGraph = new();
 
             public static bool GetOrCreateValue(
                 TTextView textView,
                 ITextBuffer subjectBuffer,
                 object key,
                 Func<TTextView, ITextBuffer, TProperty> valueCreator,
-                out TProperty value)
+                out TProperty value
+            )
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() => new PerSubjectBufferProperty<TProperty, TTextView>(textView));
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new PerSubjectBufferProperty<TProperty, TTextView>(textView)
+                );
                 if (!properties.TryGetValue(subjectBuffer, key, out var priorValue))
                 {
                     // Need to create it.
@@ -52,11 +62,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 TTextView textView,
                 ITextBuffer subjectBuffer,
                 object key,
-                [MaybeNullWhen(false)] out TProperty value)
+                [MaybeNullWhen(false)] out TProperty value
+            )
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() => new PerSubjectBufferProperty<TProperty, TTextView>(textView));
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new PerSubjectBufferProperty<TProperty, TTextView>(textView)
+                );
                 return properties.TryGetValue(subjectBuffer, key, out value);
             }
 
@@ -64,17 +77,29 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 TTextView textView,
                 ITextBuffer subjectBuffer,
                 object key,
-                TProperty value)
+                TProperty value
+            )
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() => new PerSubjectBufferProperty<TProperty, TTextView>(textView));
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new PerSubjectBufferProperty<TProperty, TTextView>(textView)
+                );
                 properties.Add(subjectBuffer, key, value);
             }
 
-            public static void RemoveValue(TTextView textView, ITextBuffer subjectBuffer, object key)
+            public static void RemoveValue(
+                TTextView textView,
+                ITextBuffer subjectBuffer,
+                object key
+            )
             {
-                if (textView.Properties.TryGetProperty(typeof(PerSubjectBufferProperty<TProperty, TTextView>), out PerSubjectBufferProperty<TProperty, TTextView> properties))
+                if (
+                    textView.Properties.TryGetProperty(
+                        typeof(PerSubjectBufferProperty<TProperty, TTextView>),
+                        out PerSubjectBufferProperty<TProperty, TTextView> properties
+                    )
+                )
                 {
                     properties.Remove(subjectBuffer, key);
                 }
@@ -94,10 +119,15 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 _textView.BufferGraph.GraphBuffersChanged -= OnTextViewBufferGraphChanged;
 
                 _subjectBufferMap.Clear();
-                _textView.Properties.RemoveProperty(typeof(PerSubjectBufferProperty<TProperty, TTextView>));
+                _textView.Properties.RemoveProperty(
+                    typeof(PerSubjectBufferProperty<TProperty, TTextView>)
+                );
             }
 
-            private void OnTextViewBufferGraphChanged(object? sender, GraphBuffersChangedEventArgs e)
+            private void OnTextViewBufferGraphChanged(
+                object? sender,
+                GraphBuffersChangedEventArgs e
+            )
             {
                 foreach (var buffer in e.RemovedBuffers)
                 {
@@ -118,14 +148,20 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 }
             }
 
-            public bool TryGetValue(ITextBuffer subjectBuffer, object key, [MaybeNullWhen(false)] out TProperty value)
+            public bool TryGetValue(
+                ITextBuffer subjectBuffer,
+                object key,
+                [MaybeNullWhen(false)] out TProperty value
+            )
             {
                 if (_subjectBufferMap.TryGetValue(subjectBuffer, out var bufferMap))
                 {
                     return bufferMap.TryGetValue(key, out value);
                 }
 
-                if (_buffersRemovedFromTextViewBufferGraph.TryGetValue(subjectBuffer, out bufferMap))
+                if (
+                    _buffersRemovedFromTextViewBufferGraph.TryGetValue(subjectBuffer, out bufferMap)
+                )
                 {
                     return bufferMap.TryGetValue(key, out value);
                 }
@@ -136,7 +172,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             public void Add(ITextBuffer subjectBuffer, object key, TProperty value)
             {
-                var bufferMap = _subjectBufferMap.GetOrAdd(subjectBuffer, _ => new Dictionary<object, TProperty>());
+                var bufferMap = _subjectBufferMap.GetOrAdd(
+                    subjectBuffer,
+                    _ => new Dictionary<object, TProperty>()
+                );
                 bufferMap[key] = value;
             }
 
@@ -151,7 +190,9 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                     }
                 }
 
-                if (_buffersRemovedFromTextViewBufferGraph.TryGetValue(subjectBuffer, out bufferMap))
+                if (
+                    _buffersRemovedFromTextViewBufferGraph.TryGetValue(subjectBuffer, out bufferMap)
+                )
                 {
                     bufferMap.Remove(key);
                     if (!bufferMap.Any())

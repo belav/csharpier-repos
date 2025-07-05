@@ -13,21 +13,24 @@ namespace System.CommandLine.Rendering.Tests
         {
             var input = "The quick brown\tfox\t jumps over    the lazy dog.";
 
-            input.SplitForWrapping()
-                 .Should()
-                 .BeEquivalentTo(
-                     new[] {
-                         "The ",
-                         "quick ",
-                         "brown\t",
-                         "fox\t ",
-                         "jumps ",
-                         "over    ",
-                         "the ",
-                         "lazy ",
-                         "dog.",
-                     },
-                     options => options.WithStrictOrdering());
+            input
+                .SplitForWrapping()
+                .Should()
+                .BeEquivalentTo(
+                    new[]
+                    {
+                        "The ",
+                        "quick ",
+                        "brown\t",
+                        "fox\t ",
+                        "jumps ",
+                        "over    ",
+                        "the ",
+                        "lazy ",
+                        "dog.",
+                    },
+                    options => options.WithStrictOrdering()
+                );
         }
 
         [Fact]
@@ -35,16 +38,13 @@ namespace System.CommandLine.Rendering.Tests
         {
             var input = "words and then space     ";
 
-            input.SplitForWrapping()
-                 .Should()
-                 .BeEquivalentTo(
-                     new[] {
-                         "words ",
-                         "and ",
-                         "then ",
-                         "space     ",
-                     },
-                     options => options.WithStrictOrdering());
+            input
+                .SplitForWrapping()
+                .Should()
+                .BeEquivalentTo(
+                    new[] { "words ", "and ", "then ", "space     " },
+                    options => options.WithStrictOrdering()
+                );
         }
 
         [Fact]
@@ -52,17 +52,13 @@ namespace System.CommandLine.Rendering.Tests
         {
             var input = "    space and then words";
 
-            input.SplitForWrapping()
-                 .Should()
-                 .BeEquivalentTo(
-                     new[] {
-                         "    ",
-                         "space ",
-                         "and ",
-                         "then ",
-                         "words",
-                     },
-                     options => options.WithStrictOrdering());
+            input
+                .SplitForWrapping()
+                .Should()
+                .BeEquivalentTo(
+                    new[] { "    ", "space ", "and ", "then ", "words" },
+                    options => options.WithStrictOrdering()
+                );
         }
 
         [Theory]
@@ -72,19 +68,13 @@ namespace System.CommandLine.Rendering.Tests
         {
             var input = $"{newline}{newline}one two{newline}three{newline}";
 
-            input.SplitForWrapping()
-                 .Should()
-                 .BeEquivalentTo(
-                     new[] {
-                         newline,
-                         newline,
-                         "one ",
-                         "two",
-                         newline,
-                         "three",
-                         newline,
-                     },
-                     options => options.WithStrictOrdering());
+            input
+                .SplitForWrapping()
+                .Should()
+                .BeEquivalentTo(
+                    new[] { newline, newline, "one ", "two", newline, "three", newline },
+                    options => options.WithStrictOrdering()
+                );
         }
     }
 }

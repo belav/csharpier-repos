@@ -15,7 +15,13 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal static partial class SendUtils
 {
-    public static async Task SendMessages(Uri sendUrl, IDuplexPipe application, HttpClient httpClient, ILogger logger, CancellationToken cancellationToken = default)
+    public static async Task SendMessages(
+        Uri sendUrl,
+        IDuplexPipe application,
+        HttpClient httpClient,
+        ILogger logger,
+        CancellationToken cancellationToken = default
+    )
     {
         Log.SendStarted(logger);
 
@@ -23,7 +29,9 @@ internal static partial class SendUtils
         {
             while (true)
             {
-                var result = await application.Input.ReadAsync(cancellationToken).ConfigureAwait(false);
+                var result = await application
+                    .Input.ReadAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var buffer = result.Buffer;
 
                 try
@@ -47,7 +55,15 @@ internal static partial class SendUtils
                         // rather than buffer the entire response. This gives a small perf boost.
                         // Note that it is important to dispose of the response when doing this to
                         // avoid leaving the connection open.
-                        using (var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false))
+                        using (
+                            var response = await httpClient
+                                .SendAsync(
+                                    request,
+                                    HttpCompletionOption.ResponseHeadersRead,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false)
+                        )
                         {
                             response.EnsureSuccessStatusCode();
                         }
@@ -121,16 +137,36 @@ internal static partial class SendUtils
         [LoggerMessage(101, LogLevel.Debug, "Send loop stopped.", EventName = "SendStopped")]
         public static partial void SendStopped(ILogger logger);
 
-        [LoggerMessage(103, LogLevel.Debug, "Sending {Count} bytes to the server using url: {Url}.", EventName = "SendingMessages")]
+        [LoggerMessage(
+            103,
+            LogLevel.Debug,
+            "Sending {Count} bytes to the server using url: {Url}.",
+            EventName = "SendingMessages"
+        )]
         public static partial void SendingMessages(ILogger logger, long count, Uri url);
 
-        [LoggerMessage(104, LogLevel.Debug, "Message(s) sent successfully.", EventName = "SentSuccessfully")]
+        [LoggerMessage(
+            104,
+            LogLevel.Debug,
+            "Message(s) sent successfully.",
+            EventName = "SentSuccessfully"
+        )]
         public static partial void SentSuccessfully(ILogger logger);
 
-        [LoggerMessage(105, LogLevel.Debug, "No messages in batch to send.", EventName = "NoMessages")]
+        [LoggerMessage(
+            105,
+            LogLevel.Debug,
+            "No messages in batch to send.",
+            EventName = "NoMessages"
+        )]
         public static partial void NoMessages(ILogger logger);
 
-        [LoggerMessage(106, LogLevel.Error, "Error while sending to '{Url}'.", EventName = "ErrorSending")]
+        [LoggerMessage(
+            106,
+            LogLevel.Error,
+            "Error while sending to '{Url}'.",
+            EventName = "ErrorSending"
+        )]
         public static partial void ErrorSending(ILogger logger, Uri url, Exception exception);
     }
 }

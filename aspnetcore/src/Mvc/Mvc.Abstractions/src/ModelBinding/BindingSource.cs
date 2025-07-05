@@ -20,7 +20,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Body",
         Resources.BindingSource_Body,
         isGreedy: true,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for a custom model binder (unknown data source).
@@ -29,7 +30,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Custom",
         Resources.BindingSource_Custom,
         isGreedy: true,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for the request form-data.
@@ -38,7 +40,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Form",
         Resources.BindingSource_Form,
         isGreedy: false,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for the request headers.
@@ -47,7 +50,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Header",
         Resources.BindingSource_Header,
         isGreedy: true,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for model binding. Includes form-data, query-string
@@ -57,7 +61,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "ModelBinding",
         Resources.BindingSource_ModelBinding,
         isGreedy: false,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for the request url path.
@@ -66,7 +71,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Path",
         Resources.BindingSource_Path,
         isGreedy: false,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for the request query-string.
@@ -75,7 +81,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Query",
         Resources.BindingSource_Query,
         isGreedy: false,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for request services.
@@ -84,7 +91,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Services",
         Resources.BindingSource_Services,
         isGreedy: true,
-        isFromRequest: false);
+        isFromRequest: false
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for special parameter types that are not user input.
@@ -93,7 +101,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "Special",
         Resources.BindingSource_Special,
         isGreedy: true,
-        isFromRequest: false);
+        isFromRequest: false
+    );
 
     /// <summary>
     /// A <see cref="BindingSource"/> for <see cref="IFormFile"/>, <see cref="IFormCollection"/>, and <see cref="IFormFileCollection"/>.
@@ -102,7 +111,8 @@ public class BindingSource : IEquatable<BindingSource?>
         "FormFile",
         Resources.BindingSource_FormFile,
         isGreedy: true,
-        isFromRequest: true);
+        isFromRequest: true
+    );
 
     /// <summary>
     /// Creates a new <see cref="BindingSource"/>.
@@ -185,7 +195,8 @@ public class BindingSource : IEquatable<BindingSource?>
         {
             var message = Resources.FormatBindingSource_CannotBeComposite(
                 bindingSource.DisplayName,
-                nameof(CanAcceptDataFrom));
+                nameof(CanAcceptDataFrom)
+            );
             throw new ArgumentException(message, nameof(bindingSource));
         }
 

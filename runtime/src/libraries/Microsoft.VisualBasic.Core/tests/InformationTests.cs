@@ -64,8 +64,19 @@ namespace Microsoft.VisualBasic.Tests
         public void LBound()
         {
             Assert.Equal(0, Information.LBound(new int[1]));
-            Assert.Equal(5, Information.LBound(Array.CreateInstance("abc".GetType(), new int[] { 1 }, new int[] { 5 })));
-            Assert.Equal(6, Information.LBound(Array.CreateInstance("abc".GetType(), new int[] { 1, 1 }, new int[] { 5, 6 }), 2));
+            Assert.Equal(
+                5,
+                Information.LBound(
+                    Array.CreateInstance("abc".GetType(), new int[] { 1 }, new int[] { 5 })
+                )
+            );
+            Assert.Equal(
+                6,
+                Information.LBound(
+                    Array.CreateInstance("abc".GetType(), new int[] { 1, 1 }, new int[] { 5, 6 }),
+                    2
+                )
+            );
         }
 
         [Fact]
@@ -81,8 +92,19 @@ namespace Microsoft.VisualBasic.Tests
         {
             Assert.Equal(-1, Information.UBound(new int[0]));
             Assert.Equal(0, Information.UBound(new int[1]));
-            Assert.Equal(5, Information.UBound(Array.CreateInstance("abc".GetType(), new int[] { 1 }, new int[] { 5 })));
-            Assert.Equal(6, Information.UBound(Array.CreateInstance("abc".GetType(), new int[] { 1, 1 }, new int[] { 5, 6 }), 2));
+            Assert.Equal(
+                5,
+                Information.UBound(
+                    Array.CreateInstance("abc".GetType(), new int[] { 1 }, new int[] { 5 })
+                )
+            );
+            Assert.Equal(
+                6,
+                Information.UBound(
+                    Array.CreateInstance("abc".GetType(), new int[] { 1, 1 }, new int[] { 5, 6 }),
+                    2
+                )
+            );
         }
 
         [Fact]
@@ -159,7 +181,9 @@ namespace Microsoft.VisualBasic.Tests
         [Fact]
         public void IsNumeric_Invalid()
         {
-            Assert.Throws<NullReferenceException>(() => Information.IsNumeric(new char[] { '1', '2', '3' })); // Bug compatible
+            Assert.Throws<NullReferenceException>(() =>
+                Information.IsNumeric(new char[] { '1', '2', '3' })
+            ); // Bug compatible
         }
 
         [Theory]

@@ -3,12 +3,12 @@
 
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Moq;
 
 namespace Microsoft.AspNetCore.Mvc.RazorPages;
@@ -21,22 +21,27 @@ public class PageTest
         // Arrange
         var httpContext = new DefaultHttpContext();
         var modelState = new ModelStateDictionary();
-        var actionContext = new ActionContext(httpContext, new RouteData(), new PageActionDescriptor(), modelState);
+        var actionContext = new ActionContext(
+            httpContext,
+            new RouteData(),
+            new PageActionDescriptor(),
+            modelState
+        );
         var modelMetadataProvider = new EmptyModelMetadataProvider();
         var viewData = new ViewDataDictionary(modelMetadataProvider, modelState);
         var tempData = Mock.Of<ITempDataDictionary>();
 
-        var pageContext = new PageContext(actionContext)
-        {
-            ViewData = viewData,
-        };
-        var viewContext = new ViewContext(pageContext, NullView.Instance, viewData, tempData, TextWriter.Null, new HtmlHelperOptions());
+        var pageContext = new PageContext(actionContext) { ViewData = viewData };
+        var viewContext = new ViewContext(
+            pageContext,
+            NullView.Instance,
+            viewData,
+            tempData,
+            TextWriter.Null,
+            new HtmlHelperOptions()
+        );
 
-        var page = new TestPage
-        {
-            PageContext = pageContext,
-            ViewContext = viewContext,
-        };
+        var page = new TestPage { PageContext = pageContext, ViewContext = viewContext };
 
         // Act & Assert
         Assert.Same(pageContext, page.PageContext);
@@ -125,8 +130,7 @@ public class PageTest
         var page = new TestPage();
 
         // Act & Assert
-        ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.Redirect(url: url), "url");
+        ExceptionAssert.ThrowsArgumentNullOrEmpty(() => page.Redirect(url: url), "url");
     }
 
     [Theory]
@@ -139,7 +143,9 @@ public class PageTest
 
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.RedirectPreserveMethod(url: url), "url");
+            () => page.RedirectPreserveMethod(url: url),
+            "url"
+        );
     }
 
     [Fact]
@@ -220,7 +226,9 @@ public class PageTest
 
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.LocalRedirect(localUrl: url), "localUrl");
+            () => page.LocalRedirect(localUrl: url),
+            "localUrl"
+        );
     }
 
     [Theory]
@@ -233,7 +241,9 @@ public class PageTest
 
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.LocalRedirectPreserveMethod(localUrl: url), "localUrl");
+            () => page.LocalRedirectPreserveMethod(localUrl: url),
+            "localUrl"
+        );
     }
 
     [Theory]
@@ -246,7 +256,9 @@ public class PageTest
 
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.LocalRedirectPermanentPreserveMethod(localUrl: url), "localUrl");
+            () => page.LocalRedirectPermanentPreserveMethod(localUrl: url),
+            "localUrl"
+        );
     }
 
     [Theory]
@@ -258,8 +270,7 @@ public class PageTest
         var page = new TestPage();
 
         // Act & Assert
-        ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.RedirectPermanent(url: url), "url");
+        ExceptionAssert.ThrowsArgumentNullOrEmpty(() => page.RedirectPermanent(url: url), "url");
     }
 
     [Theory]
@@ -272,7 +283,9 @@ public class PageTest
 
         // Act & Assert
         ExceptionAssert.ThrowsArgumentNullOrEmpty(
-            () => page.RedirectPermanentPreserveMethod(url: url), "url");
+            () => page.RedirectPermanentPreserveMethod(url: url),
+            "url"
+        );
     }
 
     [Fact]
@@ -330,7 +343,9 @@ public class PageTest
         var page = new TestPage();
 
         // Act
-        var resultPermanent = page.RedirectToActionPermanentPreserveMethod(actionName: "SampleAction");
+        var resultPermanent = page.RedirectToActionPermanentPreserveMethod(
+            actionName: "SampleAction"
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -343,7 +358,9 @@ public class PageTest
     [InlineData("")]
     [InlineData(null)]
     [InlineData("SampleController")]
-    public void RedirectToAction_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+    public void RedirectToAction_WithParameterActionAndControllerName_SetsEqualNames(
+        string controllerName
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -363,13 +380,18 @@ public class PageTest
     [InlineData("")]
     [InlineData(null)]
     [InlineData("SampleController")]
-    public void RedirectToActionPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+    public void RedirectToActionPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
+        string controllerName
+    )
     {
         // Arrange
         var page = new TestPage();
 
         // Act
-        var resultTemporary = page.RedirectToActionPreserveMethod(actionName: "SampleAction", controllerName: controllerName);
+        var resultTemporary = page.RedirectToActionPreserveMethod(
+            actionName: "SampleAction",
+            controllerName: controllerName
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -383,7 +405,9 @@ public class PageTest
     [InlineData("")]
     [InlineData(null)]
     [InlineData("SampleController")]
-    public void RedirectToActionPermanent_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+    public void RedirectToActionPermanent_WithParameterActionAndControllerName_SetsEqualNames(
+        string controllerName
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -403,13 +427,18 @@ public class PageTest
     [InlineData("")]
     [InlineData(null)]
     [InlineData("SampleController")]
-    public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(string controllerName)
+    public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerName_SetsEqualNames(
+        string controllerName
+    )
     {
         // Arrange
         var page = new TestPage();
 
         // Act
-        var resultPermanent = page.RedirectToActionPermanentPreserveMethod(actionName: "SampleAction", controllerName: controllerName);
+        var resultPermanent = page.RedirectToActionPermanentPreserveMethod(
+            actionName: "SampleAction",
+            controllerName: controllerName
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -423,13 +452,18 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToAction_WithParameterActionControllerRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
 
         // Act
-        var resultTemporary = page.RedirectToAction("SampleAction", "SampleController", routeValues);
+        var resultTemporary = page.RedirectToAction(
+            "SampleAction",
+            "SampleController",
+            routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -444,7 +478,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -453,7 +488,8 @@ public class PageTest
         var resultTemporary = page.RedirectToActionPreserveMethod(
             actionName: "SampleAction",
             controllerName: "SampleController",
-            routeValues: routeValues);
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -468,7 +504,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPermanent_WithParameterActionControllerRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -477,7 +514,8 @@ public class PageTest
         var resultPermanent = page.RedirectToActionPermanent(
             "SampleAction",
             "SampleController",
-            routeValues);
+            routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -492,7 +530,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPermanentPreserveMethod_WithParameterActionControllerRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -501,7 +540,8 @@ public class PageTest
         var resultPermanent = page.RedirectToActionPermanentPreserveMethod(
             actionName: "SampleAction",
             controllerName: "SampleController",
-            routeValues: routeValues);
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -516,7 +556,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToAction_WithParameterActionAndRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -536,13 +577,17 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
 
         // Act
-        var resultTemporary = page.RedirectToActionPreserveMethod(actionName: null, routeValues: routeValues);
+        var resultTemporary = page.RedirectToActionPreserveMethod(
+            actionName: null,
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultTemporary);
@@ -556,7 +601,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToAction_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -581,7 +627,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -606,7 +653,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPermanent_WithParameterActionAndRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -626,13 +674,17 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
 
         // Act
-        var resultPermanent = page.RedirectToActionPermanentPreserveMethod(actionName: null, routeValues: routeValues);
+        var resultPermanent = page.RedirectToActionPermanentPreserveMethod(
+            actionName: null,
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(resultPermanent);
@@ -646,7 +698,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPermanent_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -655,7 +708,12 @@ public class PageTest
         var expectedFragment = "test";
 
         // Act
-        var result = page.RedirectToActionPermanent("Action", "Home", routeValues, fragment: "test");
+        var result = page.RedirectToActionPermanent(
+            "Action",
+            "Home",
+            routeValues,
+            fragment: "test"
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(result);
@@ -671,7 +729,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToActionPermanentPreserveMethod_WithParameterActionAndControllerAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -684,7 +743,8 @@ public class PageTest
             actionName: "Action",
             controllerName: "Home",
             routeValues: routeValues,
-            fragment: "test");
+            fragment: "test"
+        );
 
         // Assert
         Assert.IsType<RedirectToActionResult>(result);
@@ -700,7 +760,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoute_WithParameterRouteValues_SetsResultEqualRouteValues(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -719,7 +780,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValues(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -738,7 +800,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoute_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -761,7 +824,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -769,7 +833,11 @@ public class PageTest
         var expectedFragment = "test";
 
         // Act
-        var result = page.RedirectToRoutePreserveMethod(routeName: "TestRoute", routeValues: routeValues, fragment: "test");
+        var result = page.RedirectToRoutePreserveMethod(
+            routeName: "TestRoute",
+            routeValues: routeValues,
+            fragment: "test"
+        );
 
         // Assert
         Assert.IsType<RedirectToRouteResult>(result);
@@ -784,7 +852,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePermanent_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -803,7 +872,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteValues_SetsResultEqualRouteValuesAndPermanent(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -822,7 +892,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -845,7 +916,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValuesAndFragment_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expectedRouteValues)
+        IEnumerable<KeyValuePair<string, object>> expectedRouteValues
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -853,7 +925,11 @@ public class PageTest
         var expectedFragment = "test";
 
         // Act
-        var result = page.RedirectToRoutePermanentPreserveMethod(routeName: "TestRoute", routeValues: routeValues, fragment: "test");
+        var result = page.RedirectToRoutePermanentPreserveMethod(
+            routeName: "TestRoute",
+            routeValues: routeValues,
+            fragment: "test"
+        );
 
         // Assert
         Assert.IsType<RedirectToRouteResult>(result);
@@ -936,7 +1012,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoute_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -957,14 +1034,18 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultSameRouteNameAndRouteValues(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
         var routeName = "CustomRouteName";
 
         // Act
-        var resultTemporary = page.RedirectToRoutePreserveMethod(routeName: routeName, routeValues: routeValues);
+        var resultTemporary = page.RedirectToRoutePreserveMethod(
+            routeName: routeName,
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToRouteResult>(resultTemporary);
@@ -978,7 +1059,8 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePermanent_WithParameterRouteNameAndRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
@@ -999,14 +1081,18 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToRoutePermanentPreserveMethod_WithParameterRouteNameAndRouteValues_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var page = new TestPage();
         var routeName = "CustomRouteName";
 
         // Act
-        var resultPermanent = page.RedirectToRoutePermanentPreserveMethod(routeName: routeName, routeValues: routeValues);
+        var resultPermanent = page.RedirectToRoutePermanentPreserveMethod(
+            routeName: routeName,
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToRouteResult>(resultPermanent);
@@ -1064,7 +1150,8 @@ public class PageTest
             {
                 Assert.Equal("key", item.Key);
                 Assert.Equal("value", item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1104,7 +1191,8 @@ public class PageTest
             {
                 Assert.Equal("key", item.Key);
                 Assert.Equal("value", item.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1149,7 +1237,8 @@ public class PageTest
             {
                 Assert.Equal("key", item.Key);
                 Assert.Equal("value", item.Value);
-            });
+            }
+        );
         Assert.Equal(fragment, result.Fragment);
     }
 
@@ -1207,7 +1296,8 @@ public class PageTest
             {
                 Assert.Equal("key", item.Key);
                 Assert.Equal("value", item.Value);
-            });
+            }
+        );
         Assert.True(result.Permanent);
     }
 
@@ -1233,7 +1323,8 @@ public class PageTest
             {
                 Assert.Equal("key", item.Key);
                 Assert.Equal("value", item.Value);
-            });
+            }
+        );
         Assert.True(result.Permanent);
     }
 
@@ -1280,7 +1371,8 @@ public class PageTest
             {
                 Assert.Equal("key", item.Key);
                 Assert.Equal("value", item.Value);
-            });
+            }
+        );
         Assert.Equal(fragment, result.Fragment);
         Assert.True(result.Permanent);
     }
@@ -1306,14 +1398,18 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToPagePreserveMethod_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var pageModel = new TestPage();
         var pageName = "CustomRouteName";
 
         // Act
-        var resultPermanent = pageModel.RedirectToPagePreserveMethod(pageName, routeValues: routeValues);
+        var resultPermanent = pageModel.RedirectToPagePreserveMethod(
+            pageName,
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToPageResult>(resultPermanent);
@@ -1327,14 +1423,18 @@ public class PageTest
     [MemberData(nameof(RedirectTestData))]
     public void RedirectToPagePermanentPreserveMethod_SetsResultProperties(
         object routeValues,
-        IEnumerable<KeyValuePair<string, object>> expected)
+        IEnumerable<KeyValuePair<string, object>> expected
+    )
     {
         // Arrange
         var pageModel = new TestPage();
         var routeName = "CustomRouteName";
 
         // Act
-        var resultPermanent = pageModel.RedirectToPagePermanentPreserveMethod(routeName, routeValues: routeValues);
+        var resultPermanent = pageModel.RedirectToPagePermanentPreserveMethod(
+            routeName,
+            routeValues: routeValues
+        );
 
         // Assert
         Assert.IsType<RedirectToPageResult>(resultPermanent);
@@ -1421,10 +1521,7 @@ public class PageTest
 
         var page = new TestPage()
         {
-            PageContext = new PageContext
-            {
-                HttpContext = mockHttpContext.Object
-            }
+            PageContext = new PageContext { HttpContext = mockHttpContext.Object },
         };
 
         var fileStream = Stream.Null;
@@ -1447,10 +1544,7 @@ public class PageTest
 
         var page = new TestPage()
         {
-            PageContext = new PageContext
-            {
-                HttpContext = mockHttpContext.Object
-            }
+            PageContext = new PageContext { HttpContext = mockHttpContext.Object },
         };
 
         var fileStream = Stream.Null;
@@ -1623,7 +1717,8 @@ public class PageTest
         var contentType = "text/xml; charset=us-ascii; p1=p1-value";
 
         // Act
-        var contentResult = (ContentResult)contentPage.Content_WithEncodingInCharset_AndEncodingParameter();
+        var contentResult = (ContentResult)
+            contentPage.Content_WithEncodingInCharset_AndEncodingParameter();
 
         // Assert
         MediaTypeAssert.Equal(contentType, contentResult.ContentType);
@@ -1699,10 +1794,7 @@ public class PageTest
         var viewData = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary());
         var pageModel = new TestPage
         {
-            ViewContext = new ViewContext
-            {
-                ViewData = viewData
-            },
+            ViewContext = new ViewContext { ViewData = viewData },
             MetadataProvider = modelMetadataProvider,
         };
         viewData.Model = pageModel;
@@ -1724,10 +1816,7 @@ public class PageTest
         var viewData = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary());
         var pageModel = new TestPage
         {
-            ViewContext = new ViewContext
-            {
-                ViewData = viewData
-            },
+            ViewContext = new ViewContext { ViewData = viewData },
             MetadataProvider = modelMetadataProvider,
         };
         viewData.Model = pageModel;
@@ -1746,14 +1835,11 @@ public class PageTest
     public void ViewComponent_WithName()
     {
         // Arrange
-        var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
-        var page = new TestPage
-        {
-            ViewContext = new ViewContext
-            {
-                ViewData = viewData,
-            },
-        };
+        var viewData = new ViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            new ModelStateDictionary()
+        );
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData } };
 
         // Act
         var result = page.ViewComponent("TagCloud");
@@ -1768,14 +1854,11 @@ public class PageTest
     public void ViewComponent_WithType()
     {
         // Arrange
-        var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
-        var page = new TestPage
-        {
-            ViewContext = new ViewContext
-            {
-                ViewData = viewData,
-            },
-        };
+        var viewData = new ViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            new ModelStateDictionary()
+        );
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData } };
 
         // Act
         var result = page.ViewComponent(typeof(Guid));
@@ -1790,14 +1873,11 @@ public class PageTest
     public void ViewComponent_WithArguments()
     {
         // Arrange
-        var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
-        var page = new TestPage
-        {
-            ViewContext = new ViewContext
-            {
-                ViewData = viewData,
-            },
-        };
+        var viewData = new ViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            new ModelStateDictionary()
+        );
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData } };
 
         var arguments = new { Arg1 = "Hi", Arg2 = "There" };
 
@@ -1817,7 +1897,8 @@ public class PageTest
     {
         // Arrange
         var valueProviderFactory = new Mock<IValueProviderFactory>();
-        valueProviderFactory.Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>()))
+        valueProviderFactory
+            .Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>()))
             .Throws(new ValueProviderException("some error"));
 
         var pageModel = new TestPage
@@ -1825,7 +1906,7 @@ public class PageTest
             PageContext = new PageContext
             {
                 ValueProviderFactories = new[] { valueProviderFactory.Object },
-            }
+            },
         };
 
         var model = new object();
@@ -1845,28 +1926,24 @@ public class PageTest
     {
         get
         {
-            yield return new object[]
-            {
-                    null,
-                    null,
-            };
+            yield return new object[] { null, null };
 
             yield return new object[]
             {
-                    new Dictionary<string, object> { { "hello", "world" } },
-                    new RouteValueDictionary() { { "hello", "world" } },
+                new Dictionary<string, object> { { "hello", "world" } },
+                new RouteValueDictionary() { { "hello", "world" } },
             };
 
             var expected2 = new Dictionary<string, object>
-                {
-                    { "test", "case" },
-                    { "sample", "route" },
-                };
+            {
+                { "test", "case" },
+                { "sample", "route" },
+            };
 
             yield return new object[]
             {
-                    new RouteValueDictionary(expected2),
-                    new RouteValueDictionary(expected2),
+                new RouteValueDictionary(expected2),
+                new RouteValueDictionary(expected2),
             };
         }
     }

@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Drawing.Design;
@@ -16,46 +16,46 @@ namespace System.Web.UI.WebControls {
     /// <devdoc>
     /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.LinkButton'/> control.</para>
     /// </devdoc>
-    public class LinkButtonControlBuilder : ControlBuilder {
-
-
+    public class LinkButtonControlBuilder : ControlBuilder
+    {
         /// <internalonly/>
         /// <devdoc>
         ///    <para>Specifies whether white space literals are allowed.</para>
         /// </devdoc>
-        public override bool AllowWhitespaceLiterals() {
+        public override bool AllowWhitespaceLiterals()
+        {
             return false;
         }
     }
-
-
 
     /// <devdoc>
     ///    <para>Constructs a link button and defines its properties.</para>
     /// </devdoc>
     [
-    ControlBuilderAttribute(typeof(LinkButtonControlBuilder)),
-    DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign),
-    DefaultEvent("Click"),
-    DefaultProperty("Text"),
-    ToolboxData("<{0}:LinkButton runat=\"server\">LinkButton</{0}:LinkButton>"),
-    Designer("System.Web.UI.Design.WebControls.LinkButtonDesigner, " + AssemblyRef.SystemDesign),
-    ParseChildren(false),
-    SupportsEventValidation
+        ControlBuilderAttribute(typeof(LinkButtonControlBuilder)),
+        DataBindingHandler(
+            "System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign
+        ),
+        DefaultEvent("Click"),
+        DefaultProperty("Text"),
+        ToolboxData("<{0}:LinkButton runat=\"server\">LinkButton</{0}:LinkButton>"),
+        Designer(
+            "System.Web.UI.Design.WebControls.LinkButtonDesigner, " + AssemblyRef.SystemDesign
+        ),
+        ParseChildren(false),
+        SupportsEventValidation
     ]
-    public class LinkButton : WebControl, IButtonControl, IPostBackEventHandler {
-
+    public class LinkButton : WebControl, IButtonControl, IPostBackEventHandler
+    {
         private bool _textSetByAddParsedSubObject = false;
         private static readonly object EventClick = new object();
         private static readonly object EventCommand = new object();
 
-
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.LinkButton'/> class.</para>
         /// </devdoc>
-        public LinkButton() : base(HtmlTextWriterTag.A) {
-        }
-
+        public LinkButton()
+            : base(HtmlTextWriterTag.A) { }
 
         /// <devdoc>
         ///    <para>Specifies the command name that is propagated in the
@@ -63,22 +63,20 @@ namespace System.Web.UI.WebControls {
         ///    property.</para>
         /// </devdoc>
         [
-        DefaultValue(""),
-        Themeable(false),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.WebControl_CommandName)
+            DefaultValue(""),
+            Themeable(false),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.WebControl_CommandName)
         ]
-        public string CommandName {
-            get {
+        public string CommandName
+        {
+            get
+            {
                 string s = (string)ViewState["CommandName"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["CommandName"] = value;
-            }
+            set { ViewState["CommandName"] = value; }
         }
-
-
 
         /// <devdoc>
         ///    <para>Specifies the command argument that is propagated in the
@@ -86,22 +84,21 @@ namespace System.Web.UI.WebControls {
         ///    property.</para>
         /// </devdoc>
         [
-        Bindable(true),
-        DefaultValue(""),
-        Themeable(false),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.WebControl_CommandArgument)
+            Bindable(true),
+            DefaultValue(""),
+            Themeable(false),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.WebControl_CommandArgument)
         ]
-        public string CommandArgument {
-            get {
+        public string CommandArgument
+        {
+            get
+            {
                 string s = (string)ViewState["CommandArgument"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["CommandArgument"] = value;
-            }
+            set { ViewState["CommandArgument"] = value; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets whether pressing the button causes page validation to fire. This defaults to True so that when
@@ -110,167 +107,159 @@ namespace System.Web.UI.WebControls {
         ///          that has validators.</para>
         /// </devdoc>
         [
-        DefaultValue(true),
-        Themeable(false),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.Button_CausesValidation)
+            DefaultValue(true),
+            Themeable(false),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.Button_CausesValidation)
         ]
-        public virtual bool CausesValidation {
-            get {
+        public virtual bool CausesValidation
+        {
+            get
+            {
                 object b = ViewState["CausesValidation"];
-                return((b == null) ? true : (bool)b);
+                return ((b == null) ? true : (bool)b);
             }
-            set {
-                ViewState["CausesValidation"] = value;
-            }
+            set { ViewState["CausesValidation"] = value; }
         }
 
         /// <devdoc>
         ///    The script that is executed on a client-side click.
         /// </devdoc>
         [
-        DefaultValue(""),
-        Themeable(false),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.Button_OnClientClick)
+            DefaultValue(""),
+            Themeable(false),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.Button_OnClientClick)
         ]
-        public virtual string OnClientClick {
-            get {
+        public virtual string OnClientClick
+        {
+            get
+            {
                 string s = (string)ViewState["OnClientClick"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
                 return s;
             }
-            set {
-                ViewState["OnClientClick"] = value;
-            }
+            set { ViewState["OnClientClick"] = value; }
         }
 
-        public override bool SupportsDisabledAttribute {
-            get {
-                return RenderingCompatibility < VersionUtil.Framework40;
-            }
+        public override bool SupportsDisabledAttribute
+        {
+            get { return RenderingCompatibility < VersionUtil.Framework40; }
         }
 
-        internal override bool RequiresLegacyRendering {
-            get {
-                return true;
-            }
+        internal override bool RequiresLegacyRendering
+        {
+            get { return true; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets the text display for the link button.</para>
         /// </devdoc>
         [
-        Localizable(true),
-        Bindable(true),
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        WebSysDescription(SR.LinkButton_Text),
-        PersistenceMode(PersistenceMode.InnerDefaultProperty)
+            Localizable(true),
+            Bindable(true),
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            WebSysDescription(SR.LinkButton_Text),
+            PersistenceMode(PersistenceMode.InnerDefaultProperty)
         ]
-        public virtual string Text {
-            get {
+        public virtual string Text
+        {
+            get
+            {
                 object o = ViewState["Text"];
-                return((o == null) ? String.Empty : (string)o);
+                return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                if (HasControls()) {
+            set
+            {
+                if (HasControls())
+                {
                     Controls.Clear();
                 }
                 ViewState["Text"] = value;
             }
         }
 
-
         [
-        DefaultValue(""),
-        Editor("System.Web.UI.Design.UrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
-        Themeable(false),
-        UrlProperty("*.aspx"),
-        WebCategory("Behavior"),
-        WebSysDescription(SR.Button_PostBackUrl)
+            DefaultValue(""),
+            Editor(
+                "System.Web.UI.Design.UrlEditor, " + AssemblyRef.SystemDesign,
+                typeof(UITypeEditor)
+            ),
+            Themeable(false),
+            UrlProperty("*.aspx"),
+            WebCategory("Behavior"),
+            WebSysDescription(SR.Button_PostBackUrl)
         ]
-        public virtual string PostBackUrl {
-            get {
+        public virtual string PostBackUrl
+        {
+            get
+            {
                 string s = (string)ViewState["PostBackUrl"];
-                return s == null? String.Empty : s;
+                return s == null ? String.Empty : s;
             }
-            set {
-                ViewState["PostBackUrl"] = value;
-            }
+            set { ViewState["PostBackUrl"] = value; }
         }
 
         [
-        WebCategory("Behavior"),
-        Themeable(false),
-        DefaultValue(""),
-        WebSysDescription(SR.PostBackControl_ValidationGroup)
+            WebCategory("Behavior"),
+            Themeable(false),
+            DefaultValue(""),
+            WebSysDescription(SR.PostBackControl_ValidationGroup)
         ]
-        public virtual string ValidationGroup {
-            get {
+        public virtual string ValidationGroup
+        {
+            get
+            {
                 string s = (string)ViewState["ValidationGroup"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["ValidationGroup"] = value;
-            }
+            set { ViewState["ValidationGroup"] = value; }
         }
-
 
         /// <devdoc>
         ///    <para>Occurs when the link button is clicked.</para>
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.LinkButton_OnClick)
-        ]
-        public event EventHandler Click {
-            add {
-                Events.AddHandler(EventClick, value);
-            }
-            remove {
-                Events.RemoveHandler(EventClick, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.LinkButton_OnClick)]
+        public event EventHandler Click
+        {
+            add { Events.AddHandler(EventClick, value); }
+            remove { Events.RemoveHandler(EventClick, value); }
         }
-
-
 
         /// <devdoc>
         /// <para>Occurs when any item is clicked within the <see cref='System.Web.UI.WebControls.LinkButton'/> control tree.</para>
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.Button_OnCommand)
-        ]
-        public event CommandEventHandler Command {
-            add {
-                Events.AddHandler(EventCommand, value);
-            }
-            remove {
-                Events.RemoveHandler(EventCommand, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.Button_OnCommand)]
+        public event CommandEventHandler Command
+        {
+            add { Events.AddHandler(EventCommand, value); }
+            remove { Events.RemoveHandler(EventCommand, value); }
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         ///    Render the attributes on the begin tag.
         /// </devdoc>
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
             // Make sure we are in a form tag with runat=server.
-            if (Page != null) {
+            if (Page != null)
+            {
                 Page.VerifyRenderingInServerForm(this);
             }
 
             // Need to merge the onclick attribute with the OnClientClick
             string onClick = Util.EnsureEndWithSemiColon(OnClientClick);
 
-            if (HasAttributes) {
+            if (HasAttributes)
+            {
                 string userOnClick = Attributes["onclick"];
-                if (userOnClick != null) {
+                if (userOnClick != null)
+                {
                     // We don't use Util.MergeScript because OnClientClick or
                     // onclick attribute are set by page developer directly.  We
                     // should preserve the value without adding javascript prefix.
@@ -279,12 +268,14 @@ namespace System.Web.UI.WebControls {
                 }
             }
 
-            if (onClick.Length > 0) {
+            if (onClick.Length > 0)
+            {
                 writer.AddAttribute(HtmlTextWriterAttribute.Onclick, onClick);
             }
 
             bool effectiveEnabled = IsEnabled;
-            if (Enabled && !effectiveEnabled && SupportsDisabledAttribute) {
+            if (Enabled && !effectiveEnabled && SupportsDisabledAttribute)
+            {
                 // We need to do the cascade effect on the server, because the browser
                 // only renders as disabled, but doesn't disable the functionality.
                 writer.AddAttribute(HtmlTextWriterAttribute.Disabled, "disabled");
@@ -292,18 +283,24 @@ namespace System.Web.UI.WebControls {
 
             base.AddAttributesToRender(writer);
 
-            if (effectiveEnabled && Page != null) {
-                // 
+            if (effectiveEnabled && Page != null)
+            {
+                //
 
                 PostBackOptions options = GetPostBackOptions();
                 string postBackEventReference = null;
-                if (options != null) {
-                    postBackEventReference = Page.ClientScript.GetPostBackEventReference(options, true);
+                if (options != null)
+                {
+                    postBackEventReference = Page.ClientScript.GetPostBackEventReference(
+                        options,
+                        true
+                    );
                 }
 
                 // If the postBackEventReference is empty, use a javascript no-op instead, since
                 // <a href="" /> is a link to the root of the current directory.
-                if (String.IsNullOrEmpty(postBackEventReference)) {
+                if (String.IsNullOrEmpty(postBackEventReference))
+                {
                     postBackEventReference = "javascript:void(0)";
                 }
 
@@ -311,27 +308,34 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void AddParsedSubObject(object obj) {
-            if (HasControls()) {
+        protected override void AddParsedSubObject(object obj)
+        {
+            if (HasControls())
+            {
                 base.AddParsedSubObject(obj);
             }
-            else {
-                if (obj is LiteralControl) {
-                    if (_textSetByAddParsedSubObject) {
+            else
+            {
+                if (obj is LiteralControl)
+                {
+                    if (_textSetByAddParsedSubObject)
+                    {
                         Text += ((LiteralControl)obj).Text;
                     }
-                    else {
+                    else
+                    {
                         Text = ((LiteralControl)obj).Text;
                     }
                     _textSetByAddParsedSubObject = true;
                 }
-                else {
+                else
+                {
                     string currentText = Text;
-                    if (currentText.Length != 0) {
+                    if (currentText.Length != 0)
+                    {
                         Text = String.Empty;
                         base.AddParsedSubObject(new LiteralControl(currentText));
                     }
@@ -341,11 +345,13 @@ namespace System.Web.UI.WebControls {
         }
 
         // Returns the client post back options.
-        protected virtual PostBackOptions GetPostBackOptions() {
+        protected virtual PostBackOptions GetPostBackOptions()
+        {
             PostBackOptions options = new PostBackOptions(this, String.Empty);
             options.RequiresJavaScriptProtocol = true;
 
-            if (!String.IsNullOrEmpty(PostBackUrl)) {
+            if (!String.IsNullOrEmpty(PostBackUrl))
+            {
                 // VSWhidbey 424614: Since the url is embedded as javascript in attribute,
                 // we should match the same encoding as done on HyperLink.NavigateUrl value.
                 options.ActionUrl = HttpUtility.UrlPathEncode(ResolveClientUrl(PostBackUrl));
@@ -355,13 +361,22 @@ namespace System.Web.UI.WebControls {
                 // decoded once before the code is run.  This doesn't happen to
                 // onclick or other event attributes.  So here we do an extra
                 // encoding to compensate the weird behavior on IE.
-                if (!DesignMode && Page != null &&
-                    String.Equals(Page.Request.Browser.Browser, "IE", StringComparison.OrdinalIgnoreCase)) {
+                if (
+                    !DesignMode
+                    && Page != null
+                    && String.Equals(
+                        Page.Request.Browser.Browser,
+                        "IE",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+                {
                     options.ActionUrl = Util.QuoteJScriptString(options.ActionUrl, true);
                 }
             }
 
-            if (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0) {
+            if (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0)
+            {
                 options.PerformValidation = true;
                 options.ValidationGroup = ValidationGroup;
             }
@@ -369,98 +384,107 @@ namespace System.Web.UI.WebControls {
             return options;
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         ///    Load previously saved state.
         ///    Overridden to synchronize Text property with LiteralContent.
         /// </devdoc>
-        protected override void LoadViewState(object savedState) {
-            if (savedState != null) {
+        protected override void LoadViewState(object savedState)
+        {
+            if (savedState != null)
+            {
                 base.LoadViewState(savedState);
                 string s = (string)ViewState["Text"];
                 // Dev10 703061 If Text is set, we want to clear out any child controls, but not dirty viewstate
-                if (s != null && HasControls()) {
+                if (s != null && HasControls())
+                {
                     Controls.Clear();
                 }
             }
         }
 
-
         /// <devdoc>
         /// <para>Raises the <see langword='Click '/> event.</para>
         /// </devdoc>
-        protected virtual void OnClick(EventArgs e) {
+        protected virtual void OnClick(EventArgs e)
+        {
             EventHandler onClickHandler = (EventHandler)Events[EventClick];
-            if (onClickHandler != null) onClickHandler(this,e);
+            if (onClickHandler != null)
+                onClickHandler(this, e);
         }
-
 
         /// <devdoc>
         /// <para>Raises the <see langword='Command'/> event.</para>
         /// </devdoc>
-        protected virtual void OnCommand(CommandEventArgs e) {
+        protected virtual void OnCommand(CommandEventArgs e)
+        {
             CommandEventHandler onCommandHandler = (CommandEventHandler)Events[EventCommand];
             if (onCommandHandler != null)
-                onCommandHandler(this,e);
+                onCommandHandler(this, e);
 
             // Command events are bubbled up the control heirarchy
             RaiseBubbleEvent(this, e);
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// <para>Raises a <see langword='Click '/>event upon postback
         /// to the server, and a <see langword='Command'/> event if the <see cref='System.Web.UI.WebControls.LinkButton.CommandName'/>
         /// is defined.</para>
         /// </devdoc>
-        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// <para>Raises a <see langword='Click '/>event upon postback
         /// to the server, and a <see langword='Command'/> event if the <see cref='System.Web.UI.WebControls.LinkButton.CommandName'/>
         /// is defined.</para>
         /// </devdoc>
-        protected virtual void RaisePostBackEvent(string eventArgument) {
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
             ValidateEvent(this.UniqueID, eventArgument);
-            if (CausesValidation) {
+            if (CausesValidation)
+            {
                 Page.Validate(ValidationGroup);
             }
             OnClick(EventArgs.Empty);
             OnCommand(new CommandEventArgs(CommandName, CommandArgument));
         }
 
-
         /// <internalonly/>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
-            if (Page != null && Enabled) {
+            if (Page != null && Enabled)
+            {
                 Page.RegisterPostBackScript();
 
-                if ((CausesValidation && Page.GetValidators(ValidationGroup).Count > 0) ||
-                     !String.IsNullOrEmpty(PostBackUrl)) {
-                    Page.RegisterWebFormsScript();  // VSWhidbey 489577
+                if (
+                    (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0)
+                    || !String.IsNullOrEmpty(PostBackUrl)
+                )
+                {
+                    Page.RegisterWebFormsScript(); // VSWhidbey 489577
                 }
             }
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void RenderContents(HtmlTextWriter writer) {
-            if (HasRenderingData()) {
+        protected internal override void RenderContents(HtmlTextWriter writer)
+        {
+            if (HasRenderingData())
+            {
                 base.RenderContents(writer);
             }
-            else {
+            else
+            {
                 writer.Write(Text);
             }
         }
     }
 }
-

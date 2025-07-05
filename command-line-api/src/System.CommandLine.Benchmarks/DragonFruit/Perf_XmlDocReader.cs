@@ -31,7 +31,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
                 {
                     typeof(object).GetTypeInfo().Assembly.Location,
                     typeof(Enumerable).GetTypeInfo().Assembly.Location,
-                    typeof(ParseResult).GetTypeInfo().Assembly.Location
+                    typeof(ParseResult).GetTypeInfo().Assembly.Location,
                 }
             );
 
@@ -45,8 +45,7 @@ namespace System.CommandLine.Benchmarks.DragonFruit
                 .GetDeclaredMethod("Main");
 
             _xmlDocsStreamReader = new StreamReader(
-                new MemoryStream(File.ReadAllBytes(_testAssemblyXmlDocsFilePath)
-                )
+                new MemoryStream(File.ReadAllBytes(_testAssemblyXmlDocsFilePath))
             );
         }
 

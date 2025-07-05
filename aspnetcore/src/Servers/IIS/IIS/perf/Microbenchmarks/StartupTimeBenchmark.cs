@@ -5,8 +5,8 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
-using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.IIS.Microbenchmarks;
@@ -23,18 +23,26 @@ public class StartupTimeBenchmark
         // Deployers do not work in distributed environments
         // see https://github.com/dotnet/aspnetcore/issues/10268 and https://github.com/dotnet/extensions/issues/1697
 #pragma warning disable 0618
-        var deploymentParameters = new DeploymentParameters(Path.Combine(TestPathUtilities.GetSolutionRootDirectory("IISIntegration"), "IIS/test/testassets/InProcessWebSite"),
+        var deploymentParameters = new DeploymentParameters(
+            Path.Combine(
+                TestPathUtilities.GetSolutionRootDirectory("IISIntegration"),
+                "IIS/test/testassets/InProcessWebSite"
+            ),
             ServerType.IISExpress,
             RuntimeFlavor.CoreClr,
-            RuntimeArchitecture.x64)
+            RuntimeArchitecture.x64
+        )
         {
 #pragma warning restore 0618
             ServerConfigTemplateContent = File.ReadAllText("IIS.config"),
             SiteName = "HttpTestSite",
             TargetFramework = "netcoreapp2.1",
-            ApplicationType = ApplicationType.Portable
+            ApplicationType = ApplicationType.Portable,
         };
-        _deployer = ApplicationDeployerFactory.Create(deploymentParameters, NullLoggerFactory.Instance);
+        _deployer = ApplicationDeployerFactory.Create(
+            deploymentParameters,
+            NullLoggerFactory.Instance
+        );
         _client = _deployer.DeployAsync().Result.HttpClient;
     }
 

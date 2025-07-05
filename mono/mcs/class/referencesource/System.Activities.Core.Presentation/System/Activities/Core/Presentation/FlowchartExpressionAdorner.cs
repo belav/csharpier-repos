@@ -28,11 +28,15 @@ namespace System.Activities.Core.Presentation
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            Transform transform = isTextRightToLeft ? new MatrixTransform(-1, 0, 0, 1, 0, 0) : Transform.Identity;
+            Transform transform = isTextRightToLeft
+                ? new MatrixTransform(-1, 0, 0, 1, 0, 0)
+                : Transform.Identity;
             Border tooltip = new Border
             {
                 Background = new SolidColorBrush(Colors.White),
-                BorderBrush = new SolidColorBrush(WorkflowDesignerColors.WorkflowViewElementBorderColor),
+                BorderBrush = new SolidColorBrush(
+                    WorkflowDesignerColors.WorkflowViewElementBorderColor
+                ),
                 BorderThickness = new Thickness(1),
                 CornerRadius = new CornerRadius(4),
                 Margin = new Thickness(10),
@@ -46,22 +50,23 @@ namespace System.Activities.Core.Presentation
                 {
                     Color = Colors.Black,
                     BlurRadius = 4,
-                    Opacity = 0.5
+                    Opacity = 0.5,
                 },
-                RenderTransform = transform
+                RenderTransform = transform,
             };
             tooltip.Measure(new Size(Double.PositiveInfinity, Double.PositiveInfinity));
 
-            VisualBrush brush = new VisualBrush()
-            {
-                Visual = tooltip
-            };
+            VisualBrush brush = new VisualBrush() { Visual = tooltip };
 
             Rect adornedElementRect = new Rect(this.AdornedElement.DesiredSize);
-            Rect tooltipRect = new Rect(adornedElementRect.TopLeft + new Vector(adornedElementRect.Width, -tooltip.DesiredSize.Height), tooltip.DesiredSize);
+            Rect tooltipRect = new Rect(
+                adornedElementRect.TopLeft
+                    + new Vector(adornedElementRect.Width, -tooltip.DesiredSize.Height),
+                tooltip.DesiredSize
+            );
             Pen renderPen = new Pen();
             drawingContext.DrawRectangle(brush, renderPen, tooltipRect);
-        }        
+        }
 
         public static string GetExpressionString(UIElement adornedElement)
         {
@@ -74,11 +79,15 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                Fx.Assert(adornedElement is FlowSwitchDesigner, "this.AdornedElement is either FlowDecisionDesigner or FlowSwitchDesigner");
+                Fx.Assert(
+                    adornedElement is FlowSwitchDesigner,
+                    "this.AdornedElement is either FlowDecisionDesigner or FlowSwitchDesigner"
+                );
                 expressionPropertyName = "Expression";
                 modelItem = ((FlowSwitchDesigner)adornedElement).ModelItem;
             }
-            Activity expressionActivity = modelItem.Properties[expressionPropertyName].ComputedValue as Activity;
+            Activity expressionActivity =
+                modelItem.Properties[expressionPropertyName].ComputedValue as Activity;
             return ExpressionHelper.GetExpressionString(expressionActivity, modelItem);
         }
 

@@ -7,7 +7,8 @@
       <last-name>Austen</last-name>
     </author>
     <price>24.95</price>"
-  </book>
+  </book
+  >
   <book genre="novel" publicationdate="1985" bk:ISBN="0771008139">
     <title>The Handmaid's Tale</title>
     <author>

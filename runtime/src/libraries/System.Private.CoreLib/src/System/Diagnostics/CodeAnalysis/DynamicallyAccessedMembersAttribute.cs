@@ -26,10 +26,17 @@ namespace System.Diagnostics.CodeAnalysis
     /// will use it there).
     /// </remarks>
     [AttributeUsage(
-        AttributeTargets.Field | AttributeTargets.ReturnValue | AttributeTargets.GenericParameter |
-        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Method |
-        AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
-        Inherited = false)]
+        AttributeTargets.Field
+            | AttributeTargets.ReturnValue
+            | AttributeTargets.GenericParameter
+            | AttributeTargets.Parameter
+            | AttributeTargets.Property
+            | AttributeTargets.Method
+            | AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct,
+        Inherited = false
+    )]
 #if SYSTEM_PRIVATE_CORELIB
     public
 #else

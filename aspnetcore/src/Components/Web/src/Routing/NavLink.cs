@@ -50,7 +50,8 @@ public class NavLink : ComponentBase, IDisposable
     [Parameter]
     public NavLinkMatch Match { get; set; }
 
-    [Inject] private NavigationManager NavigationManager { get; set; } = default!;
+    [Inject]
+    private NavigationManager NavigationManager { get; set; } = default!;
 
     /// <inheritdoc />
     protected override void OnInitialized()
@@ -118,8 +119,10 @@ public class NavLink : ComponentBase, IDisposable
             return true;
         }
 
-        if (Match == NavLinkMatch.Prefix
-            && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute))
+        if (
+            Match == NavLinkMatch.Prefix
+            && IsStrictlyPrefixWithSeparator(currentUriAbsolute, _hrefAbsolute)
+        )
         {
             return true;
         }
@@ -146,8 +149,10 @@ public class NavLink : ComponentBase, IDisposable
             // which in turn is because it's common for servers to return the same page
             // for http://host/vdir as they do for host://host/vdir/ as it's no
             // good to display a blank page in that case.
-            if (_hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
-                && _hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.OrdinalIgnoreCase))
+            if (
+                _hrefAbsolute[_hrefAbsolute.Length - 1] == '/'
+                && _hrefAbsolute.StartsWith(currentUriAbsolute, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return true;
             }
@@ -172,8 +177,8 @@ public class NavLink : ComponentBase, IDisposable
         builder.CloseElement();
     }
 
-    private static string? CombineWithSpace(string? str1, string str2)
-        => str1 == null ? str2 : $"{str1} {str2}";
+    private static string? CombineWithSpace(string? str1, string str2) =>
+        str1 == null ? str2 : $"{str1} {str2}";
 
     private static bool IsStrictlyPrefixWithSeparator(string value, string prefix)
     {
@@ -199,14 +204,10 @@ public class NavLink : ComponentBase, IDisposable
 
     private static bool IsUnreservedCharacter(char c)
     {
-        // Checks whether it is an unreserved character according to 
+        // Checks whether it is an unreserved character according to
         // https://datatracker.ietf.org/doc/html/rfc3986#section-2.3
         // Those are characters that are allowed in a URI but do not have a reserved
         // purpose (e.g. they do not separate the components of the URI)
-        return char.IsLetterOrDigit(c) ||
-                c == '-' ||
-                c == '.' ||
-                c == '_' ||
-                c == '~';
+        return char.IsLetterOrDigit(c) || c == '-' || c == '.' || c == '_' || c == '~';
     }
 }

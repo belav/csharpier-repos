@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             VisualStudioWorkspaceImpl workspace,
             IAsynchronousOperationListenerProvider listenerProvider,
             Option2<bool> featureEnabledOption,
-            ImmutableArray<PerLanguageOption2<bool>> perLanguageOptions)
+            ImmutableArray<PerLanguageOption2<bool>> perLanguageOptions
+        )
             : base(threadingContext)
         {
             _globalOptions = globalOptions;
@@ -67,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
                 DelayTimeSpan.Medium,
                 ProcessOptionChangesAsync,
                 listenerProvider.GetListener(FeatureAttribute.Workspace),
-                this.DisposalToken);
+                this.DisposalToken
+            );
             _globalOptions.AddOptionChangedHandler(this, OnOptionChanged);
         }
 
@@ -79,8 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             _optionChangedWorkQueue.AddWork();
         }
 
-        private void OnOptionChanged(object sender, OptionChangedEventArgs e)
-            => _optionChangedWorkQueue.AddWork();
+        private void OnOptionChanged(object sender, OptionChangedEventArgs e) =>
+            _optionChangedWorkQueue.AddWork();
 
         private async ValueTask ProcessOptionChangesAsync(CancellationToken arg)
         {
@@ -93,7 +95,12 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
                 return;
 
             // If feature isn't enabled for any registered language, do nothing.
-            var languageEnabled = _registeredLanguages.Any(lang => _perLanguageOptions.Any(static (option, arg) => arg.self._globalOptions.GetOption(option, arg.lang), (self: this, lang)));
+            var languageEnabled = _registeredLanguages.Any(lang =>
+                _perLanguageOptions.Any(
+                    static (option, arg) => arg.self._globalOptions.GetOption(option, arg.lang),
+                    (self: this, lang)
+                )
+            );
             if (!languageEnabled)
                 return;
 
@@ -104,7 +111,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
 
             // Don't both kicking off delay-started services prior to the actual workspace being fully loaded.  We don't
             // want them using CPU/memory in the BG while we're loading things for the user.
-            var statusService = this.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+            var statusService =
+                this.Workspace.Services.GetRequiredService<IWorkspaceStatusService>();
             await statusService.WaitUntilFullyLoadedAsync(this.DisposalToken).ConfigureAwait(false);
 
             await this.EnableServiceAsync(this.DisposalToken).ConfigureAwait(false);

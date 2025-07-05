@@ -4,9 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-namespace System.Net {
-
+namespace System.Net
+{
     //using System;
     //using System.Net;
     using System.Runtime.InteropServices;
@@ -22,22 +21,19 @@ namespace System.Net {
     /// <devdoc>
     ///    <para>Provides the base authentication interface for Web client authentication.</para>
     /// </devdoc>
-    public interface ICredentials {
+    public interface ICredentials
+    {
         /// <devdoc>
         ///    <para>
         ///       Returns a NetworkCredential object that
         ///       is associated with the supplied host, realm, and authentication type.
         ///    </para>
         /// </devdoc>
-
         //
         // CONVENTION:
         // returns null if no information is available
         // for the specified host&realm
         //
         NetworkCredential GetCredential(Uri uri, String authType);
-
     } // interface ICredentials
-
-
 } // namespace System.Net

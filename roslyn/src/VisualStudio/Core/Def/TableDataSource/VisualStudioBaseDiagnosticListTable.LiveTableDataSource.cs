@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         /// See <see cref="VisualStudioDiagnosticListTableWorkspaceEventListener.VisualStudioDiagnosticListTable.BuildTableDataSource"/>
         /// for error list diagnostic source for "Build only" setting.
         /// </summary>
-        protected class LiveTableDataSource : AbstractRoslynTableDataSource<DiagnosticTableItem, DiagnosticsUpdatedArgs>
+        protected class LiveTableDataSource
+            : AbstractRoslynTableDataSource<DiagnosticTableItem, DiagnosticsUpdatedArgs>
         {
             private readonly string _identifier;
             private readonly IDiagnosticService _diagnosticService;
@@ -63,7 +64,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IThreadingContext threadingContext,
                 IDiagnosticService diagnosticService,
                 string identifier,
-                ExternalErrorDiagnosticUpdateSource? buildUpdateSource = null)
+                ExternalErrorDiagnosticUpdateSource? buildUpdateSource = null
+            )
                 : base(workspace, threadingContext)
             {
                 _workspace = workspace;
@@ -79,12 +81,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             }
 
             public IGlobalOptionService GlobalOptions { get; }
-            public override string DisplayName => ServicesVSResources.CSharp_VB_Diagnostics_Table_Data_Source;
-            public override string SourceTypeIdentifier => StandardTableDataSources.ErrorTableDataSource;
+            public override string DisplayName =>
+                ServicesVSResources.CSharp_VB_Diagnostics_Table_Data_Source;
+            public override string SourceTypeIdentifier =>
+                StandardTableDataSources.ErrorTableDataSource;
             public override string Identifier => _identifier;
+
             public override object GetItemKey(DiagnosticsUpdatedArgs data) => data.Id;
 
-            private void ConnectToBuildUpdateSource(ExternalErrorDiagnosticUpdateSource? buildUpdateSource)
+            private void ConnectToBuildUpdateSource(
+                ExternalErrorDiagnosticUpdateSource? buildUpdateSource
+            )
             {
                 if (buildUpdateSource == null)
                 {
@@ -93,8 +100,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 }
 
                 OnBuildProgressChanged(buildUpdateSource.IsInProgress);
-                buildUpdateSource.BuildProgressChanged +=
-                    (_, progress) => OnBuildProgressChanged(running: progress != ExternalErrorDiagnosticUpdateSource.BuildProgress.Done);
+                buildUpdateSource.BuildProgressChanged += (_, progress) =>
+                    OnBuildProgressChanged(
+                        running: progress != ExternalErrorDiagnosticUpdateSource.BuildProgress.Done
+                    );
             }
 
             private void OnBuildProgressChanged(bool running)
@@ -105,22 +114,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 // i.e. shown as "Error List" without the trailing "...", if both the following are true:
                 //  1. User invoked build is not running inside Visual Studio AND
                 //  2. Solution crawler is not running in background to compute intellisense diagnostics.
-                ChangeStableStateIfRequired(newIsStable: !_isBuildRunning && !IsSolutionCrawlerRunning);
+                ChangeStableStateIfRequired(
+                    newIsStable: !_isBuildRunning && !IsSolutionCrawlerRunning
+                );
             }
 
             public override AbstractTableEntriesSnapshot<DiagnosticTableItem> CreateSnapshot(
                 AbstractTableEntriesSource<DiagnosticTableItem> source,
                 int version,
                 ImmutableArray<DiagnosticTableItem> items,
-                ImmutableArray<ITrackingPoint> trackingPoints)
+                ImmutableArray<ITrackingPoint> trackingPoints
+            )
             {
                 var diagnosticSource = (DiagnosticTableEntriesSource)source;
-                var snapshot = new TableEntriesSnapshot(ThreadingContext, diagnosticSource, version, items, trackingPoints);
+                var snapshot = new TableEntriesSnapshot(
+                    ThreadingContext,
+                    diagnosticSource,
+                    version,
+                    items,
+                    trackingPoints
+                );
 
                 if (diagnosticSource.SupportSpanTracking && !trackingPoints.IsDefaultOrEmpty)
                 {
                     // track the open document so that we can throw away tracking points on document close properly
-                    _tracker.TrackOpenDocument(diagnosticSource.TrackingDocumentId, diagnosticSource.Key, snapshot);
+                    _tracker.TrackOpenDocument(
+                        diagnosticSource.TrackingDocumentId,
+                        diagnosticSource.Key,
+                        snapshot
+                    );
                 }
 
                 return snapshot;
@@ -175,16 +197,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return new AggregatedKey(documents, liveArgsId.Analyzer, liveArgsId.Kind);
             }
 
-            private void PopulateInitialData(Workspace workspace, IDiagnosticService diagnosticService)
+            private void PopulateInitialData(
+                Workspace workspace,
+                IDiagnosticService diagnosticService
+            )
             {
                 var diagnosticMode = GlobalOptions.GetDiagnosticMode();
 
                 // If we're not in Solution-Crawler mode, then don't add any diagnostics to the table.  Instead, the LSP
                 // client will be handling everything.
-                var diagnostics = diagnosticMode != DiagnosticMode.SolutionCrawlerPush
-                    ? ImmutableArray<DiagnosticBucket>.Empty
-                    : diagnosticService.GetDiagnosticBuckets(
-                        workspace, projectId: null, documentId: null, cancellationToken: CancellationToken.None);
+                var diagnostics =
+                    diagnosticMode != DiagnosticMode.SolutionCrawlerPush
+                        ? ImmutableArray<DiagnosticBucket>.Empty
+                        : diagnosticService.GetDiagnosticBuckets(
+                            workspace,
+                            projectId: null,
+                            documentId: null,
+                            cancellationToken: CancellationToken.None
+                        );
 
                 foreach (var bucket in diagnostics)
                 {
@@ -192,16 +222,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     // we create a dummy notification for this.  It doesn't matter that it is 'DiagnosticsRemoved' as
                     // this doesn't actually change any data.  All that will happen now is that VS will call back into
                     // us for these IDs and we'll fetch the diagnostics at that point.
-                    OnDataAddedOrChanged(DiagnosticsUpdatedArgs.DiagnosticsRemoved(
-                        bucket.Id, bucket.Workspace, solution: null, bucket.ProjectId, bucket.DocumentId));
+                    OnDataAddedOrChanged(
+                        DiagnosticsUpdatedArgs.DiagnosticsRemoved(
+                            bucket.Id,
+                            bucket.Workspace,
+                            solution: null,
+                            bucket.ProjectId,
+                            bucket.DocumentId
+                        )
+                    );
                 }
             }
 
-            private void OnDiagnosticsUpdated(object sender, ImmutableArray<DiagnosticsUpdatedArgs> argsCollection)
+            private void OnDiagnosticsUpdated(
+                object sender,
+                ImmutableArray<DiagnosticsUpdatedArgs> argsCollection
+            )
             {
                 foreach (var e in argsCollection)
                 {
-                    using (Logger.LogBlock(FunctionId.LiveTableDataSource_OnDiagnosticsUpdated, static e => GetDiagnosticUpdatedMessage(e), e, CancellationToken.None))
+                    using (
+                        Logger.LogBlock(
+                            FunctionId.LiveTableDataSource_OnDiagnosticsUpdated,
+                            static e => GetDiagnosticUpdatedMessage(e),
+                            e,
+                            CancellationToken.None
+                        )
+                    )
                     {
                         if (_workspace != e.Workspace)
                         {
@@ -232,13 +279,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 }
             }
 
-            public override AbstractTableEntriesSource<DiagnosticTableItem> CreateTableEntriesSource(object data)
+            public override AbstractTableEntriesSource<DiagnosticTableItem> CreateTableEntriesSource(
+                object data
+            )
             {
                 var item = (UpdatedEventArgs)data;
-                return new TableEntriesSource(this, item.Workspace, GlobalOptions, item.ProjectId, item.DocumentId, item.Id);
+                return new TableEntriesSource(
+                    this,
+                    item.Workspace,
+                    GlobalOptions,
+                    item.ProjectId,
+                    item.DocumentId,
+                    item.Id
+                );
             }
 
-            private void ConnectToDiagnosticService(Workspace workspace, IDiagnosticService diagnosticService)
+            private void ConnectToDiagnosticService(
+                Workspace workspace,
+                IDiagnosticService diagnosticService
+            )
             {
                 if (diagnosticService == null)
                 {
@@ -261,7 +320,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 }
 
                 // If this diagnostic is for LSP only, then we won't show it here
-                if (diagnostic.Properties.ContainsKey(nameof(DocumentPropertiesService.DiagnosticsLspClientName)))
+                if (
+                    diagnostic.Properties.ContainsKey(
+                        nameof(DocumentPropertiesService.DiagnosticsLspClientName)
+                    )
+                )
                 {
                     return false;
                 }
@@ -278,20 +341,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 }
             }
 
-            public override IEqualityComparer<DiagnosticTableItem> GroupingComparer
-                => DiagnosticTableItem.GroupingComparer.Instance;
+            public override IEqualityComparer<DiagnosticTableItem> GroupingComparer =>
+                DiagnosticTableItem.GroupingComparer.Instance;
 
-            public override IEnumerable<DiagnosticTableItem> Order(IEnumerable<DiagnosticTableItem> groupedItems)
+            public override IEnumerable<DiagnosticTableItem> Order(
+                IEnumerable<DiagnosticTableItem> groupedItems
+            )
             {
                 // Deterministically order the items.
                 //
                 // TODO: unclear why we are comparing OriginalFileSpan and not the final normalized span.  This may
                 // indicate a bug. If it is correct behavior, this should be documented as to why this is the right span
                 // to be considering.
-                return groupedItems.OrderBy(d => d.Data.DataLocation.UnmappedFileSpan.StartLinePosition)
-                                   .ThenBy(d => d.Data.Id)
-                                   .ThenBy(d => d.Data.Message)
-                                   .ThenBy(d => d.Data.DataLocation.UnmappedFileSpan.EndLinePosition);
+                return groupedItems
+                    .OrderBy(d => d.Data.DataLocation.UnmappedFileSpan.StartLinePosition)
+                    .ThenBy(d => d.Data.Id)
+                    .ThenBy(d => d.Data.Message)
+                    .ThenBy(d => d.Data.DataLocation.UnmappedFileSpan.EndLinePosition);
             }
 
             private class TableEntriesSource : DiagnosticTableEntriesSource
@@ -304,7 +370,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 private readonly object _id;
                 private readonly string _buildTool;
 
-                public TableEntriesSource(LiveTableDataSource source, Workspace workspace, IGlobalOptionService globalOptions, ProjectId? projectId, DocumentId? documentId, object id)
+                public TableEntriesSource(
+                    LiveTableDataSource source,
+                    Workspace workspace,
+                    IGlobalOptionService globalOptions,
+                    ProjectId? projectId,
+                    DocumentId? documentId,
+                    object id
+                )
                 {
                     _source = source;
                     _workspace = workspace;
@@ -328,20 +401,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         return ImmutableArray<DiagnosticTableItem>.Empty;
 
                     var provider = _source._diagnosticService;
-                    var items = provider.GetDiagnosticsAsync(_workspace, _projectId, _documentId, _id, includeSuppressedDiagnostics: true, CancellationToken.None)
+                    var items = provider
+                        .GetDiagnosticsAsync(
+                            _workspace,
+                            _projectId,
+                            _documentId,
+                            _id,
+                            includeSuppressedDiagnostics: true,
+                            CancellationToken.None
+                        )
                         .AsTask()
                         .WaitAndGetResult_CanCallOnBackground(CancellationToken.None)
-                                        .Where(ShouldInclude)
-                                        .Select(data => DiagnosticTableItem.Create(_workspace, data));
+                        .Where(ShouldInclude)
+                        .Select(data => DiagnosticTableItem.Create(_workspace, data));
 
                     return items.ToImmutableArray();
                 }
 
-                public override ImmutableArray<ITrackingPoint> GetTrackingPoints(ImmutableArray<DiagnosticTableItem> items)
-                    => _workspace.CreateTrackingPoints(_documentId, items);
+                public override ImmutableArray<ITrackingPoint> GetTrackingPoints(
+                    ImmutableArray<DiagnosticTableItem> items
+                ) => _workspace.CreateTrackingPoints(_documentId, items);
             }
 
-            private class TableEntriesSnapshot : AbstractTableEntriesSnapshot<DiagnosticTableItem>, IWpfTableEntriesSnapshot
+            private class TableEntriesSnapshot
+                : AbstractTableEntriesSnapshot<DiagnosticTableItem>,
+                    IWpfTableEntriesSnapshot
             {
                 private readonly DiagnosticTableEntriesSource _source;
 
@@ -350,13 +434,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     DiagnosticTableEntriesSource source,
                     int version,
                     ImmutableArray<DiagnosticTableItem> items,
-                    ImmutableArray<ITrackingPoint> trackingPoints)
+                    ImmutableArray<ITrackingPoint> trackingPoints
+                )
                     : base(threadingContext, version, items, trackingPoints)
                 {
                     _source = source;
                 }
 
-                public override bool TryGetValue(int index, string columnName, [NotNullWhen(returnValue: true)] out object? content)
+                public override bool TryGetValue(
+                    int index,
+                    string columnName,
+                    [NotNullWhen(returnValue: true)] out object? content
+                )
                 {
                     // REVIEW: this method is too-chatty to make async, but otherwise, how one can implement it async?
                     //         also, what is cancellation mechanism?
@@ -380,7 +469,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             content = data.Id;
                             return content != null;
                         case StandardTableKeyNames.ErrorCodeToolTip:
-                            content = (data.GetValidHelpLinkUri() != null) ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id) : null;
+                            content =
+                                (data.GetValidHelpLinkUri() != null)
+                                    ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id)
+                                    : null;
                             return content != null;
                         case StandardTableKeyNames.HelpKeyword:
                             content = data.GetHelpKeyword();
@@ -424,7 +516,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             content = guids;
                             return guids.Length > 0;
                         case StandardTableKeyNames.SuppressionState:
-                            content = data.IsSuppressed ? SuppressionState.Suppressed : SuppressionState.Active;
+                            content = data.IsSuppressed
+                                ? SuppressionState.Suppressed
+                                : SuppressionState.Active;
                             return true;
                         case DoNotPropogateToGuestProperty:
                             content = true;
@@ -437,7 +531,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 private string GetBuildTool(string buildTool)
                 {
-                    // for build tool, regardless where error is coming from ("build" or "live"), 
+                    // for build tool, regardless where error is coming from ("build" or "live"),
                     // we show "compiler" to users.
                     if (buildTool == PredefinedBuildTools.Live)
                     {
@@ -459,7 +553,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 private static ErrorRank GetErrorRank(DiagnosticData item)
                 {
-                    if (!item.Properties.TryGetValue(WellKnownDiagnosticPropertyNames.Origin, out var value))
+                    if (
+                        !item.Properties.TryGetValue(
+                            WellKnownDiagnosticPropertyNames.Origin,
+                            out var value
+                        )
+                    )
                     {
                         return ErrorRank.Other;
                     }
@@ -501,40 +600,67 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     }
                 }
 
-                public override bool TryNavigateTo(int index, NavigationOptions options, CancellationToken cancellationToken)
-                    => TryNavigateToItem(index, options, cancellationToken);
+                public override bool TryNavigateTo(
+                    int index,
+                    NavigationOptions options,
+                    CancellationToken cancellationToken
+                ) => TryNavigateToItem(index, options, cancellationToken);
 
                 #region IWpfTableEntriesSnapshot
 
-                public bool CanCreateDetailsContent(int index)
-                    => CanCreateDetailsContent(index, GetItem);
+                public bool CanCreateDetailsContent(int index) =>
+                    CanCreateDetailsContent(index, GetItem);
 
-                public bool TryCreateDetailsContent(int index, [NotNullWhen(returnValue: true)] out FrameworkElement? expandedContent)
-                    => TryCreateDetailsContent(index, GetItem, out expandedContent);
+                public bool TryCreateDetailsContent(
+                    int index,
+                    [NotNullWhen(returnValue: true)] out FrameworkElement? expandedContent
+                ) => TryCreateDetailsContent(index, GetItem, out expandedContent);
 
-                public bool TryCreateDetailsStringContent(int index, [NotNullWhen(returnValue: true)] out string? content)
-                    => TryCreateDetailsStringContent(index, GetItem, out content);
+                public bool TryCreateDetailsStringContent(
+                    int index,
+                    [NotNullWhen(returnValue: true)] out string? content
+                ) => TryCreateDetailsStringContent(index, GetItem, out content);
 
-                // unused ones                    
-                public bool TryCreateColumnContent(int index, string columnName, bool singleColumnView, [NotNullWhen(returnValue: true)] out FrameworkElement? content)
+                // unused ones
+                public bool TryCreateColumnContent(
+                    int index,
+                    string columnName,
+                    bool singleColumnView,
+                    [NotNullWhen(returnValue: true)] out FrameworkElement? content
+                )
                 {
                     content = null;
                     return false;
                 }
 
-                public bool TryCreateImageContent(int index, string columnName, bool singleColumnView, out ImageMoniker content)
+                public bool TryCreateImageContent(
+                    int index,
+                    string columnName,
+                    bool singleColumnView,
+                    out ImageMoniker content
+                )
                 {
                     content = default;
                     return false;
                 }
 
-                public bool TryCreateStringContent(int index, string columnName, bool truncatedText, bool singleColumnView, [NotNullWhen(returnValue: true)] out string? content)
+                public bool TryCreateStringContent(
+                    int index,
+                    string columnName,
+                    bool truncatedText,
+                    bool singleColumnView,
+                    [NotNullWhen(returnValue: true)] out string? content
+                )
                 {
                     content = null;
                     return false;
                 }
 
-                public bool TryCreateToolTip(int index, string columnName, [NotNullWhen(returnValue: true)] out object? toolTip)
+                public bool TryCreateToolTip(
+                    int index,
+                    string columnName,
+                    [NotNullWhen(returnValue: true)] out object? toolTip
+                )
                 {
                     toolTip = null;
                     return false;

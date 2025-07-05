@@ -5,143 +5,165 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Xsl.XsltOld {
-    using Res = System.Xml.Utils.Res;
+namespace System.Xml.Xsl.XsltOld
+{
     using System;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Xml;
-    using System.Xml.XPath;
-    using System.Xml.Xsl.Runtime;
-    using MS.Internal.Xml.XPath;
-    using System.Xml.Xsl.XsltOld.Debugger;
-    using System.Text;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.IO;
-    using System.CodeDom;
-    using System.CodeDom.Compiler;
     using System.Reflection;
-    using System.Security;
-    using System.Security.Policy;
-    using System.Security.Permissions;
-    using Keywords = System.Xml.Xsl.Xslt.KeywordsTable;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.XPath;
+    using System.Xml.Xsl.Runtime;
+    using System.Xml.Xsl.XsltOld.Debugger;
+    using MS.Internal.Xml.XPath;
+    using Keywords = System.Xml.Xsl.Xslt.KeywordsTable;
+    using Res = System.Xml.Utils.Res;
 
-    internal class Sort {
-        internal int          select;
-        internal string       lang;
-        internal XmlDataType  dataType;
+    internal class Sort
+    {
+        internal int select;
+        internal string lang;
+        internal XmlDataType dataType;
         internal XmlSortOrder order;
         internal XmlCaseOrder caseOrder;
 
-        public Sort(int sortkey, String xmllang, XmlDataType datatype, XmlSortOrder xmlorder, XmlCaseOrder xmlcaseorder) {
-            select    = sortkey;
-            lang      = xmllang;
-            dataType  = datatype;
-            order     = xmlorder;
+        public Sort(
+            int sortkey,
+            String xmllang,
+            XmlDataType datatype,
+            XmlSortOrder xmlorder,
+            XmlCaseOrder xmlcaseorder
+        )
+        {
+            select = sortkey;
+            lang = xmllang;
+            dataType = datatype;
+            order = xmlorder;
             caseOrder = xmlcaseorder;
         }
     }
 
-    internal enum ScriptingLanguage {
+    internal enum ScriptingLanguage
+    {
         JScript,
 #if !FEATURE_PAL // visualbasic
         VisualBasic,
 #endif // !FEATURE_PAL
-        CSharp
+        CSharp,
     }
 
-    internal class Compiler {
-        internal const int    InvalidQueryKey   = -1;
+    internal class Compiler
+    {
+        internal const int InvalidQueryKey = -1;
 
-        internal const double RootPriority   = 0.5;
+        internal const double RootPriority = 0.5;
 
         // cached StringBuilder for AVT parseing
         internal StringBuilder AvtStringBuilder = new StringBuilder();
 
-        private int                 stylesheetid; // Root stylesheet has id=0. We are using this in CompileImports to compile BuiltIns
-        private InputScope          rootScope;
+        private int stylesheetid; // Root stylesheet has id=0. We are using this in CompileImports to compile BuiltIns
+        private InputScope rootScope;
 
         //
         // Object members
-        private XmlResolver         xmlResolver;
+        private XmlResolver xmlResolver;
 
         //
         // Template being currently compiled
-        private TemplateBaseAction  currentTemplate;
-        private XmlQualifiedName    currentMode;
-        private Hashtable           globalNamespaceAliasTable;
+        private TemplateBaseAction currentTemplate;
+        private XmlQualifiedName currentMode;
+        private Hashtable globalNamespaceAliasTable;
 
         //
         // Current import stack
-        private Stack               stylesheets;
+        private Stack stylesheets;
 
-        private HybridDictionary    documentURIs = new HybridDictionary();
+        private HybridDictionary documentURIs = new HybridDictionary();
 
         // import/include documents, who is here has its URI in this.documentURIs
-        private NavigatorInput      input;
+        private NavigatorInput input;
 
         // Atom table & InputScopeManager - cached top of the this.input stack
-        private Keywords            atoms;
-        private InputScopeManager   scopeManager;
+        private Keywords atoms;
+        private InputScopeManager scopeManager;
 
         //
         // Compiled stylesheet state
-        internal Stylesheet         stylesheet;
-        internal Stylesheet         rootStylesheet;
-        private RootAction          rootAction;
-        private List<TheQuery>      queryStore;
-        private QueryBuilder        queryBuilder = new QueryBuilder();
-        private int                 rtfCount = 0;
+        internal Stylesheet stylesheet;
+        internal Stylesheet rootStylesheet;
+        private RootAction rootAction;
+        private List<TheQuery> queryStore;
+        private QueryBuilder queryBuilder = new QueryBuilder();
+        private int rtfCount = 0;
 
         // Used to load Built In templates
-        public  bool                AllowBuiltInMode;
-        public  static XmlQualifiedName BuiltInMode = new XmlQualifiedName("*", string.Empty);
+        public bool AllowBuiltInMode;
+        public static XmlQualifiedName BuiltInMode = new XmlQualifiedName("*", string.Empty);
 
-        internal Keywords Atoms {
-            get {
+        internal Keywords Atoms
+        {
+            get
+            {
                 Debug.Assert(this.atoms != null);
                 return this.atoms;
             }
         }
 
-        internal int Stylesheetid {
-            get{ return this.stylesheetid; }
+        internal int Stylesheetid
+        {
+            get { return this.stylesheetid; }
             set { this.stylesheetid = value; }
         }
 
-        internal NavigatorInput Document {
+        internal NavigatorInput Document
+        {
             get { return this.input; }
         }
 
-        internal NavigatorInput Input {
+        internal NavigatorInput Input
+        {
             get { return this.input; }
         }
 
-        internal bool Advance() {
+        internal bool Advance()
+        {
             Debug.Assert(Document != null);
             return Document.Advance();
         }
 
-        internal bool Recurse() {
+        internal bool Recurse()
+        {
             Debug.Assert(Document != null);
             return Document.Recurse();
         }
 
-        internal bool ToParent() {
+        internal bool ToParent()
+        {
             Debug.Assert(Document != null);
             return Document.ToParent();
         }
 
-        internal Stylesheet CompiledStylesheet {
+        internal Stylesheet CompiledStylesheet
+        {
             get { return this.stylesheet; }
         }
 
-        internal RootAction RootAction {
+        internal RootAction RootAction
+        {
             get { return this.rootAction; }
-            set {
+            set
+            {
                 Debug.Assert(this.rootAction == null);
                 this.rootAction = value;
                 Debug.Assert(this.currentTemplate == null);
@@ -149,13 +171,18 @@ namespace System.Xml.Xsl.XsltOld {
             }
         }
 
-        internal List<TheQuery> QueryStore {
+        internal List<TheQuery> QueryStore
+        {
             get { return this.queryStore; }
         }
 
-        public virtual IXsltDebugger Debugger { get { return null; } }
+        public virtual IXsltDebugger Debugger
+        {
+            get { return null; }
+        }
 
-        internal string GetUnicRtfId() {
+        internal string GetUnicRtfId()
+        {
             this.rtfCount++;
             return this.rtfCount.ToString(CultureInfo.InvariantCulture);
         }
@@ -163,34 +190,44 @@ namespace System.Xml.Xsl.XsltOld {
         //
         // The World of Compile
         //
-        internal void Compile(NavigatorInput input, XmlResolver xmlResolver, Evidence evidence) {
+        internal void Compile(NavigatorInput input, XmlResolver xmlResolver, Evidence evidence)
+        {
 #if !MONO_FEATURE_CAS
             evidence = null;
 #endif
             Debug.Assert(input != null);
             Debug.Assert(xmlResolver != null);
-//            Debug.Assert(evidence    != null); -- default evidence is null now
+            //            Debug.Assert(evidence    != null); -- default evidence is null now
             Debug.Assert(this.input == null && this.atoms == null);
             this.xmlResolver = xmlResolver;
 
             PushInputDocument(input);
-            this.rootScope  = this.scopeManager.PushScope();
+            this.rootScope = this.scopeManager.PushScope();
             this.queryStore = new List<TheQuery>();
 
-            try {
+            try
+            {
                 this.rootStylesheet = new Stylesheet();
                 PushStylesheet(this.rootStylesheet);
 
                 Debug.Assert(this.input != null && this.atoms != null);
 
-                try {
+                try
+                {
                     this.CreateRootAction();
                 }
-                catch (XsltCompileException) {
+                catch (XsltCompileException)
+                {
                     throw;
                 }
-                catch (Exception e) {
-                    throw new XsltCompileException(e, this.Input.BaseURI, this.Input.LineNumber, this.Input.LinePosition);
+                catch (Exception e)
+                {
+                    throw new XsltCompileException(
+                        e,
+                        this.Input.BaseURI,
+                        this.Input.LineNumber,
+                        this.Input.LinePosition
+                    );
                 }
 
                 this.stylesheet.ProcessTemplates();
@@ -199,16 +236,19 @@ namespace System.Xml.Xsl.XsltOld {
 #if !DISABLE_XSLT_SCRIPT
                 CompileScript(evidence);
 #endif
-                if (evidence != null) {
+                if (evidence != null)
+                {
                     this.rootAction.permissions = SecurityManager.GetStandardSandbox(evidence);
                 }
 
-                if (this.globalNamespaceAliasTable != null) {
+                if (this.globalNamespaceAliasTable != null)
+                {
                     this.stylesheet.ReplaceNamespaceAlias(this);
                     this.rootAction.ReplaceNamespaceAlias(this);
                 }
             }
-            finally {
+            finally
+            {
                 PopInputDocument();
             }
 
@@ -222,77 +262,103 @@ namespace System.Xml.Xsl.XsltOld {
         // Input scope compiler's support
         //
 
-        internal bool ForwardCompatibility {
-            get { return this.scopeManager.CurrentScope.ForwardCompatibility;  }
+        internal bool ForwardCompatibility
+        {
+            get { return this.scopeManager.CurrentScope.ForwardCompatibility; }
             set { this.scopeManager.CurrentScope.ForwardCompatibility = value; }
         }
 
-        internal bool CanHaveApplyImports {
-            get { return this.scopeManager.CurrentScope.CanHaveApplyImports;  }
+        internal bool CanHaveApplyImports
+        {
+            get { return this.scopeManager.CurrentScope.CanHaveApplyImports; }
             set { this.scopeManager.CurrentScope.CanHaveApplyImports = value; }
         }
 
-        internal void InsertExtensionNamespace(string value) {
+        internal void InsertExtensionNamespace(string value)
+        {
             string[] nsList = ResolvePrefixes(value);
-            if (nsList != null) {
+            if (nsList != null)
+            {
                 scopeManager.InsertExtensionNamespaces(nsList);
             }
         }
 
-        internal void InsertExcludedNamespace(string value) {
+        internal void InsertExcludedNamespace(string value)
+        {
             string[] nsList = ResolvePrefixes(value);
-            if (nsList != null) {
+            if (nsList != null)
+            {
                 scopeManager.InsertExcludedNamespaces(nsList);
             }
         }
 
-        internal void InsertExtensionNamespace() {
-            InsertExtensionNamespace(Input.Navigator.GetAttribute(Input.Atoms.ExtensionElementPrefixes, Input.Atoms.UriXsl));
+        internal void InsertExtensionNamespace()
+        {
+            InsertExtensionNamespace(
+                Input.Navigator.GetAttribute(
+                    Input.Atoms.ExtensionElementPrefixes,
+                    Input.Atoms.UriXsl
+                )
+            );
         }
 
-        internal void InsertExcludedNamespace() {
-            InsertExcludedNamespace(Input.Navigator.GetAttribute(Input.Atoms.ExcludeResultPrefixes, Input.Atoms.UriXsl));
+        internal void InsertExcludedNamespace()
+        {
+            InsertExcludedNamespace(
+                Input.Navigator.GetAttribute(Input.Atoms.ExcludeResultPrefixes, Input.Atoms.UriXsl)
+            );
         }
 
-        internal bool IsExtensionNamespace(String nspace) {
+        internal bool IsExtensionNamespace(String nspace)
+        {
             return this.scopeManager.IsExtensionNamespace(nspace);
         }
 
-        internal bool IsExcludedNamespace(String nspace) {
+        internal bool IsExcludedNamespace(String nspace)
+        {
             return this.scopeManager.IsExcludedNamespace(nspace);
         }
 
-        internal void PushLiteralScope() {
+        internal void PushLiteralScope()
+        {
             PushNamespaceScope();
             string value = Input.Navigator.GetAttribute(Atoms.Version, Atoms.UriXsl);
-            if (value.Length != 0) {
+            if (value.Length != 0)
+            {
                 ForwardCompatibility = (value != "1.0");
             }
         }
 
-        internal void PushNamespaceScope() {
+        internal void PushNamespaceScope()
+        {
             this.scopeManager.PushScope();
-            NavigatorInput input  = Input;
+            NavigatorInput input = Input;
 
-            if (input.MoveToFirstNamespace()) {
-                do {
+            if (input.MoveToFirstNamespace())
+            {
+                do
+                {
                     this.scopeManager.PushNamespace(input.LocalName, input.Value);
-                }
-                while(input.MoveToNextNamespace());
+                } while (input.MoveToNextNamespace());
                 input.ToParent();
             }
         }
 
-        protected InputScopeManager  ScopeManager {
+        protected InputScopeManager ScopeManager
+        {
             get { return this.scopeManager; }
         }
 
-        internal virtual void PopScope() {
-            this.currentTemplate.ReleaseVariableSlots(this.scopeManager.CurrentScope.GetVeriablesCount());
+        internal virtual void PopScope()
+        {
+            this.currentTemplate.ReleaseVariableSlots(
+                this.scopeManager.CurrentScope.GetVeriablesCount()
+            );
             this.scopeManager.PopScope();
         }
 
-        internal InputScopeManager CloneScopeManager() {
+        internal InputScopeManager CloneScopeManager()
+        {
             return this.scopeManager.Clone();
         }
 
@@ -300,43 +366,58 @@ namespace System.Xml.Xsl.XsltOld {
         // Variable support
         //
 
-        internal int InsertVariable(VariableAction variable) {
+        internal int InsertVariable(VariableAction variable)
+        {
             InputScope varScope;
-            if (variable.IsGlobal) {
+            if (variable.IsGlobal)
+            {
                 Debug.Assert(this.rootAction != null);
                 varScope = this.rootScope;
             }
-            else {
+            else
+            {
                 Debug.Assert(this.currentTemplate != null);
-                Debug.Assert(variable.VarType == VariableType.LocalVariable || variable.VarType == VariableType.LocalParameter || variable.VarType == VariableType.WithParameter);
+                Debug.Assert(
+                    variable.VarType == VariableType.LocalVariable
+                        || variable.VarType == VariableType.LocalParameter
+                        || variable.VarType == VariableType.WithParameter
+                );
                 varScope = this.scopeManager.VariableScope;
             }
 
             VariableAction oldVar = varScope.ResolveVariable(variable.Name);
-            if (oldVar != null) {
+            if (oldVar != null)
+            {
                 // Other variable with this name is visible in this scope
-                if (oldVar.IsGlobal) {
-                    if (variable.IsGlobal) {
+                if (oldVar.IsGlobal)
+                {
+                    if (variable.IsGlobal)
+                    {
                         // Global Vars replace each other base on import presidens odred
-                        if (variable.Stylesheetid == oldVar.Stylesheetid) {
+                        if (variable.Stylesheetid == oldVar.Stylesheetid)
+                        {
                             // Both vars are in the same stylesheet
                             throw XsltException.Create(Res.Xslt_DupVarName, variable.NameStr);
                         }
-                        else if (variable.Stylesheetid < oldVar.Stylesheetid) {
+                        else if (variable.Stylesheetid < oldVar.Stylesheetid)
+                        {
                             // newly defined var is more importent
                             varScope.InsertVariable(variable);
                             return oldVar.VarKey;
                         }
-                        else {
+                        else
+                        {
                             // we egnore new variable
                             return InvalidQueryKey; // We didn't add this var, so doesn't matter what VarKey we return;
                         }
                     }
-                    else {
+                    else
+                    {
                         // local variable can shadow global
                     }
                 }
-                else {
+                else
+                {
                     // Local variable never can be "shadowed"
                     throw XsltException.Create(Res.Xslt_DupVarName, variable.NameStr);
                 }
@@ -346,47 +427,60 @@ namespace System.Xml.Xsl.XsltOld {
             return this.currentTemplate.AllocateVariableSlot();
         }
 
-        internal void AddNamespaceAlias(String StylesheetURI, NamespaceInfo AliasInfo){
-            if (this.globalNamespaceAliasTable == null) {
+        internal void AddNamespaceAlias(String StylesheetURI, NamespaceInfo AliasInfo)
+        {
+            if (this.globalNamespaceAliasTable == null)
+            {
                 this.globalNamespaceAliasTable = new Hashtable();
             }
-            NamespaceInfo duplicate = this.globalNamespaceAliasTable[StylesheetURI] as NamespaceInfo;
-            if (duplicate == null || AliasInfo.stylesheetId <= duplicate.stylesheetId) {
+            NamespaceInfo duplicate =
+                this.globalNamespaceAliasTable[StylesheetURI] as NamespaceInfo;
+            if (duplicate == null || AliasInfo.stylesheetId <= duplicate.stylesheetId)
+            {
                 this.globalNamespaceAliasTable[StylesheetURI] = AliasInfo;
             }
         }
 
-        internal bool IsNamespaceAlias(String StylesheetURI){
-            if (this.globalNamespaceAliasTable == null) {
+        internal bool IsNamespaceAlias(String StylesheetURI)
+        {
+            if (this.globalNamespaceAliasTable == null)
+            {
                 return false;
             }
             return this.globalNamespaceAliasTable.Contains(StylesheetURI);
         }
 
-        internal NamespaceInfo FindNamespaceAlias(String StylesheetURI) {
-            if (this.globalNamespaceAliasTable != null) {
-               return (NamespaceInfo)this.globalNamespaceAliasTable[StylesheetURI];
+        internal NamespaceInfo FindNamespaceAlias(String StylesheetURI)
+        {
+            if (this.globalNamespaceAliasTable != null)
+            {
+                return (NamespaceInfo)this.globalNamespaceAliasTable[StylesheetURI];
             }
             return null;
         }
 
-        internal String ResolveXmlNamespace(String prefix) {
+        internal String ResolveXmlNamespace(String prefix)
+        {
             return this.scopeManager.ResolveXmlNamespace(prefix);
         }
 
-        internal String ResolveXPathNamespace(String prefix) {
+        internal String ResolveXPathNamespace(String prefix)
+        {
             return this.scopeManager.ResolveXPathNamespace(prefix);
         }
 
-        internal String DefaultNamespace {
-            get{ return this.scopeManager.DefaultNamespace; }
+        internal String DefaultNamespace
+        {
+            get { return this.scopeManager.DefaultNamespace; }
         }
 
-        internal void InsertKey(XmlQualifiedName name, int MatchKey, int UseKey) {
+        internal void InsertKey(XmlQualifiedName name, int MatchKey, int UseKey)
+        {
             this.rootAction.InsertKey(name, MatchKey, UseKey);
         }
 
-        internal void AddDecimalFormat(XmlQualifiedName name, DecimalFormat formatinfo) {
+        internal void AddDecimalFormat(XmlQualifiedName name, DecimalFormat formatinfo)
+        {
             this.rootAction.AddDecimalFormat(name, formatinfo);
         }
 
@@ -396,21 +490,29 @@ namespace System.Xml.Xsl.XsltOld {
 
         // This function is for processing optional attributes only.  In case of error
         // the value is ignored iff forwards-compatible mode is on.
-        private string[] ResolvePrefixes(string tokens) {
-            if (tokens == null || tokens.Length == 0) {
+        private string[] ResolvePrefixes(string tokens)
+        {
+            if (tokens == null || tokens.Length == 0)
+            {
                 return null;
             }
             string[] nsList = XmlConvert.SplitString(tokens);
 
-            try {
-                for (int idx = 0; idx < nsList.Length; idx++) {
+            try
+            {
+                for (int idx = 0; idx < nsList.Length; idx++)
+                {
                     string prefix = nsList[idx];
-                    nsList[idx] = scopeManager.ResolveXmlNamespace(prefix == "#default" ? string.Empty : prefix);
+                    nsList[idx] = scopeManager.ResolveXmlNamespace(
+                        prefix == "#default" ? string.Empty : prefix
+                    );
                 }
             }
-            catch (XsltException) {
+            catch (XsltException)
+            {
                 // The only exception here might be Res.Xslt_InvalidPrefix
-                if (!ForwardCompatibility) {
+                if (!ForwardCompatibility)
+                {
                     // Rethrow the exception if we're not in forwards-compatible mode
                     throw;
                 }
@@ -420,58 +522,72 @@ namespace System.Xml.Xsl.XsltOld {
             return nsList;
         }
 
-        internal bool GetYesNo(string value) {
+        internal bool GetYesNo(string value)
+        {
             Debug.Assert(value != null);
             Debug.Assert((object)value == (object)Input.Value); // this is always true. Why we passing value to this function.
-            if (value == "yes") {
+            if (value == "yes")
+            {
                 return true;
             }
-            if (value == "no") {
+            if (value == "no")
+            {
                 return false;
             }
             throw XsltException.Create(Res.Xslt_InvalidAttrValue, Input.LocalName, value);
         }
 
-        internal string GetSingleAttribute(string attributeAtom) {
-            NavigatorInput input   = Input;
-            string         element = input.LocalName;
-            string         value   = null;
+        internal string GetSingleAttribute(string attributeAtom)
+        {
+            NavigatorInput input = Input;
+            string element = input.LocalName;
+            string value = null;
 
-            if (input.MoveToFirstAttribute()) {
-                do {
+            if (input.MoveToFirstAttribute())
+            {
+                do
+                {
                     string nspace = input.NamespaceURI;
-                    string name   = input.LocalName;
+                    string name = input.LocalName;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
-                    if (Ref.Equal(name, attributeAtom)) {
+                    if (Ref.Equal(name, attributeAtom))
+                    {
                         value = input.Value;
                     }
-                    else {
-                        if (! this.ForwardCompatibility) {
+                    else
+                    {
+                        if (!this.ForwardCompatibility)
+                        {
                             throw XsltException.Create(Res.Xslt_InvalidAttribute, name, element);
                         }
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
-            if (value == null) {
+            if (value == null)
+            {
                 throw XsltException.Create(Res.Xslt_MissingAttribute, attributeAtom);
             }
             return value;
         }
 
-        internal XmlQualifiedName CreateXPathQName(string qname) {
-            string prefix, local;
+        internal XmlQualifiedName CreateXPathQName(string qname)
+        {
+            string prefix,
+                local;
             PrefixQName.ParseQualifiedName(qname, out prefix, out local);
 
             return new XmlQualifiedName(local, this.scopeManager.ResolveXPathNamespace(prefix));
         }
 
-        internal XmlQualifiedName CreateXmlQName(string qname) {
-            string prefix, local;
+        internal XmlQualifiedName CreateXmlQName(string qname)
+        {
+            string prefix,
+                local;
             PrefixQName.ParseQualifiedName(qname, out prefix, out local);
 
             return new XmlQualifiedName(local, this.scopeManager.ResolveXmlNamespace(prefix));
@@ -481,90 +597,120 @@ namespace System.Xml.Xsl.XsltOld {
         // Input documents management
         //
 
-        internal static XPathDocument LoadDocument(XmlTextReaderImpl reader) {
+        internal static XPathDocument LoadDocument(XmlTextReaderImpl reader)
+        {
             reader.EntityHandling = EntityHandling.ExpandEntities;
             reader.XmlValidatingReaderCompatibilityMode = true;
-            try {
+            try
+            {
                 return new XPathDocument(reader, XmlSpace.Preserve);
             }
-            finally {
+            finally
+            {
                 reader.Close();
             }
         }
 
-        private void AddDocumentURI(string href) {
-            Debug.Assert(!this.documentURIs.Contains(href), "Circular references must be checked while processing xsl:include and xsl:import");
+        private void AddDocumentURI(string href)
+        {
+            Debug.Assert(
+                !this.documentURIs.Contains(href),
+                "Circular references must be checked while processing xsl:include and xsl:import"
+            );
             this.documentURIs.Add(href, null);
         }
 
-        private void RemoveDocumentURI(string href) {
-            Debug.Assert(this.documentURIs.Contains(href), "Attempt to remove href that was not added");
+        private void RemoveDocumentURI(string href)
+        {
+            Debug.Assert(
+                this.documentURIs.Contains(href),
+                "Attempt to remove href that was not added"
+            );
             this.documentURIs.Remove(href);
         }
 
-        internal bool IsCircularReference(string href) {
+        internal bool IsCircularReference(string href)
+        {
             return this.documentURIs.Contains(href);
         }
 
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal Uri ResolveUri(string relativeUri) {
+        internal Uri ResolveUri(string relativeUri)
+        {
             Debug.Assert(this.xmlResolver != null);
             string baseUri = this.Input.BaseURI;
-            Uri uri = this.xmlResolver.ResolveUri((baseUri.Length != 0) ? this.xmlResolver.ResolveUri(null, baseUri) : null, relativeUri);
-            if (uri == null) {
+            Uri uri = this.xmlResolver.ResolveUri(
+                (baseUri.Length != 0) ? this.xmlResolver.ResolveUri(null, baseUri) : null,
+                relativeUri
+            );
+            if (uri == null)
+            {
                 throw XsltException.Create(Res.Xslt_CantResolve, relativeUri);
             }
             return uri;
         }
 
-        internal NavigatorInput ResolveDocument(Uri absoluteUri) {
+        internal NavigatorInput ResolveDocument(Uri absoluteUri)
+        {
             Debug.Assert(this.xmlResolver != null);
             object input = this.xmlResolver.GetEntity(absoluteUri, null, null);
             string resolved = absoluteUri.ToString();
 
-            if (input is Stream) {
-                XmlTextReaderImpl tr  = new XmlTextReaderImpl(resolved, (Stream) input); {
+            if (input is Stream)
+            {
+                XmlTextReaderImpl tr = new XmlTextReaderImpl(resolved, (Stream)input);
+                {
                     tr.XmlResolver = this.xmlResolver;
                 }
                 // reader is closed by Compiler.LoadDocument()
-                return new NavigatorInput(Compiler.LoadDocument(tr).CreateNavigator(), resolved, rootScope);
+                return new NavigatorInput(
+                    Compiler.LoadDocument(tr).CreateNavigator(),
+                    resolved,
+                    rootScope
+                );
             }
-            else if (input is XPathNavigator) {
-                return new NavigatorInput((XPathNavigator) input, resolved, rootScope);
+            else if (input is XPathNavigator)
+            {
+                return new NavigatorInput((XPathNavigator)input, resolved, rootScope);
             }
-            else {
+            else
+            {
                 throw XsltException.Create(Res.Xslt_CantResolve, resolved);
             }
         }
 
-        internal void PushInputDocument(NavigatorInput newInput) {
+        internal void PushInputDocument(NavigatorInput newInput)
+        {
             Debug.Assert(newInput != null);
             string inputUri = newInput.Href;
 
             AddDocumentURI(inputUri);
 
-            newInput.Next     = this.input;
-            this.input        = newInput;
-            this.atoms        = this.input.Atoms;
+            newInput.Next = this.input;
+            this.input = newInput;
+            this.atoms = this.input.Atoms;
             this.scopeManager = this.input.InputScopeManager;
         }
 
-        internal void PopInputDocument() {
+        internal void PopInputDocument()
+        {
             Debug.Assert(this.input != null);
             Debug.Assert(this.input.Atoms == this.atoms);
 
             NavigatorInput lastInput = this.input;
 
-            this.input     = lastInput.Next;
+            this.input = lastInput.Next;
             lastInput.Next = null;
 
-            if (this.input != null) {
-                this.atoms        = this.input.Atoms;
+            if (this.input != null)
+            {
+                this.atoms = this.input.Atoms;
                 this.scopeManager = this.input.InputScopeManager;
             }
-            else {
-                this.atoms        = null;
+            else
+            {
+                this.atoms = null;
                 this.scopeManager = null;
             }
 
@@ -576,8 +722,10 @@ namespace System.Xml.Xsl.XsltOld {
         // Stylesheet management
         //
 
-        internal void PushStylesheet(Stylesheet stylesheet) {
-            if (this.stylesheets == null) {
+        internal void PushStylesheet(Stylesheet stylesheet)
+        {
+            if (this.stylesheets == null)
+            {
                 this.stylesheets = new Stack();
             }
             Debug.Assert(this.stylesheets != null);
@@ -586,10 +734,11 @@ namespace System.Xml.Xsl.XsltOld {
             this.stylesheet = stylesheet;
         }
 
-        internal Stylesheet PopStylesheet() {
+        internal Stylesheet PopStylesheet()
+        {
             Debug.Assert(this.stylesheet == this.stylesheets.Peek());
-            Stylesheet stylesheet = (Stylesheet) this.stylesheets.Pop();
-            this.stylesheet = (Stylesheet) this.stylesheets.Peek();
+            Stylesheet stylesheet = (Stylesheet)this.stylesheets.Pop();
+            this.stylesheet = (Stylesheet)this.stylesheets.Peek();
             return stylesheet;
         }
 
@@ -597,7 +746,8 @@ namespace System.Xml.Xsl.XsltOld {
         // Attribute-Set management
         //
 
-        internal void AddAttributeSet(AttributeSetAction attributeSet) {
+        internal void AddAttributeSet(AttributeSetAction attributeSet)
+        {
             Debug.Assert(this.stylesheet == this.stylesheets.Peek());
             this.stylesheet.AddAttributeSet(attributeSet);
         }
@@ -606,74 +756,112 @@ namespace System.Xml.Xsl.XsltOld {
         // Template management
         //
 
-        internal void AddTemplate(TemplateAction template) {
+        internal void AddTemplate(TemplateAction template)
+        {
             Debug.Assert(this.stylesheet == this.stylesheets.Peek());
             this.stylesheet.AddTemplate(template);
         }
 
-        internal void BeginTemplate(TemplateAction template) {
+        internal void BeginTemplate(TemplateAction template)
+        {
             Debug.Assert(this.currentTemplate != null);
             this.currentTemplate = template;
-            this.currentMode     = template.Mode;
+            this.currentMode = template.Mode;
             this.CanHaveApplyImports = template.MatchKey != Compiler.InvalidQueryKey;
         }
 
-        internal void EndTemplate() {
+        internal void EndTemplate()
+        {
             Debug.Assert(this.currentTemplate != null);
             this.currentTemplate = this.rootAction;
         }
 
-        internal XmlQualifiedName CurrentMode {
+        internal XmlQualifiedName CurrentMode
+        {
             get { return this.currentMode; }
         }
 
         //
         // Query management
         //
-        internal int AddQuery(string xpathQuery) {
-            return AddQuery(xpathQuery, /*allowVars:*/true, /*allowKey*/true, false);
+        internal int AddQuery(string xpathQuery)
+        {
+            return AddQuery(
+                xpathQuery, /*allowVars:*/
+                true, /*allowKey*/
+                true,
+                false
+            );
         }
 
-        internal int AddQuery(string xpathQuery, bool allowVar, bool allowKey, bool isPattern) {
+        internal int AddQuery(string xpathQuery, bool allowVar, bool allowKey, bool isPattern)
+        {
             Debug.Assert(this.queryStore != null);
 
             CompiledXpathExpr expr;
-            try {
+            try
+            {
                 expr = new CompiledXpathExpr(
-                    (isPattern
-                        ? this.queryBuilder.BuildPatternQuery(xpathQuery, allowVar, allowKey)
-                        : this.queryBuilder.Build(            xpathQuery, allowVar, allowKey)
+                    (
+                        isPattern
+                            ? this.queryBuilder.BuildPatternQuery(xpathQuery, allowVar, allowKey)
+                            : this.queryBuilder.Build(xpathQuery, allowVar, allowKey)
                     ),
                     xpathQuery,
                     false
                 );
-            } catch (XPathException e) {
-                if (! ForwardCompatibility) {
-                    throw XsltException.Create(Res.Xslt_InvalidXPath,  new string[] { xpathQuery }, e);
+            }
+            catch (XPathException e)
+            {
+                if (!ForwardCompatibility)
+                {
+                    throw XsltException.Create(
+                        Res.Xslt_InvalidXPath,
+                        new string[] { xpathQuery },
+                        e
+                    );
                 }
-                expr = new ErrorXPathExpression(xpathQuery, this.Input.BaseURI, this.Input.LineNumber, this.Input.LinePosition);
+                expr = new ErrorXPathExpression(
+                    xpathQuery,
+                    this.Input.BaseURI,
+                    this.Input.LineNumber,
+                    this.Input.LinePosition
+                );
             }
             this.queryStore.Add(new TheQuery(expr, this.scopeManager));
             return this.queryStore.Count - 1;
         }
 
-        internal int AddStringQuery(string xpathQuery) {
-            string modifiedQuery = XmlCharType.Instance.IsOnlyWhitespace(xpathQuery) ? xpathQuery : "string(" + xpathQuery + ")";
+        internal int AddStringQuery(string xpathQuery)
+        {
+            string modifiedQuery = XmlCharType.Instance.IsOnlyWhitespace(xpathQuery)
+                ? xpathQuery
+                : "string(" + xpathQuery + ")";
             return AddQuery(modifiedQuery);
         }
 
-        internal int AddBooleanQuery(string xpathQuery) {
-            string modifiedQuery = XmlCharType.Instance.IsOnlyWhitespace(xpathQuery) ? xpathQuery : "boolean(" + xpathQuery + ")";
+        internal int AddBooleanQuery(string xpathQuery)
+        {
+            string modifiedQuery = XmlCharType.Instance.IsOnlyWhitespace(xpathQuery)
+                ? xpathQuery
+                : "boolean(" + xpathQuery + ")";
             return AddQuery(modifiedQuery);
         }
 
         //
         // Script support
         //
-        Hashtable[] _typeDeclsByLang = new Hashtable[] { new Hashtable(), new Hashtable(), new Hashtable() };
-        ArrayList   scriptFiles = new ArrayList();
+        Hashtable[] _typeDeclsByLang = new Hashtable[]
+        {
+            new Hashtable(),
+            new Hashtable(),
+            new Hashtable(),
+        };
+        ArrayList scriptFiles = new ArrayList();
+
         // Namespaces we always import when compiling
-        private static string[] _defaultNamespaces = new string[] {
+        private static string[] _defaultNamespaces = new string[]
+        {
             "System",
             "System.Collections",
             "System.Text",
@@ -684,68 +872,116 @@ namespace System.Xml.Xsl.XsltOld {
         };
 
         private static int scriptClassCounter = 0;
-        private static string GenerateUniqueClassName() {
+
+        private static string GenerateUniqueClassName()
+        {
             return "ScriptClass_" + System.Threading.Interlocked.Increment(ref scriptClassCounter);
         }
 
 #if !DISABLE_XSLT_SCRIPT
-        internal void AddScript(string source, ScriptingLanguage lang, string ns, string fileName, int lineNumber) {
+        internal void AddScript(
+            string source,
+            ScriptingLanguage lang,
+            string ns,
+            string fileName,
+            int lineNumber
+        )
+        {
             ValidateExtensionNamespace(ns);
 
-            for (ScriptingLanguage langTmp = ScriptingLanguage.JScript; langTmp <= ScriptingLanguage.CSharp; langTmp ++) {
+            for (
+                ScriptingLanguage langTmp = ScriptingLanguage.JScript;
+                langTmp <= ScriptingLanguage.CSharp;
+                langTmp++
+            )
+            {
                 Hashtable typeDecls = _typeDeclsByLang[(int)langTmp];
-                if (lang == langTmp) {
+                if (lang == langTmp)
+                {
                     CodeTypeDeclaration scriptClass = (CodeTypeDeclaration)typeDecls[ns];
-                    if (scriptClass == null) {
+                    if (scriptClass == null)
+                    {
                         scriptClass = new CodeTypeDeclaration(GenerateUniqueClassName());
                         scriptClass.TypeAttributes = TypeAttributes.Public;
                         typeDecls.Add(ns, scriptClass);
                     }
                     CodeSnippetTypeMember scriptSnippet = new CodeSnippetTypeMember(source);
-                    if (lineNumber > 0) {
+                    if (lineNumber > 0)
+                    {
                         scriptSnippet.LinePragma = new CodeLinePragma(fileName, lineNumber);
                         scriptFiles.Add(fileName);
                     }
                     scriptClass.Members.Add(scriptSnippet);
                 }
-                else if (typeDecls.Contains(ns)) {
+                else if (typeDecls.Contains(ns))
+                {
                     throw XsltException.Create(Res.Xslt_ScriptMixedLanguages, ns);
                 }
             }
         }
 #endif
 
-        private static void ValidateExtensionNamespace(string nsUri) {
-            if (nsUri.Length == 0 || nsUri == XmlReservedNs.NsXslt) {
+        private static void ValidateExtensionNamespace(string nsUri)
+        {
+            if (nsUri.Length == 0 || nsUri == XmlReservedNs.NsXslt)
+            {
                 throw XsltException.Create(Res.Xslt_InvalidExtensionNamespace);
             }
             XmlConvert.ToUri(nsUri);
         }
 
 #if !DISABLE_XSLT_SCRIPT
-        private void FixCompilerError(CompilerError e) {
-            foreach(string scriptFile in this.scriptFiles) {
-                if (e.FileName == scriptFile) {
+        private void FixCompilerError(CompilerError e)
+        {
+            foreach (string scriptFile in this.scriptFiles)
+            {
+                if (e.FileName == scriptFile)
+                {
                     return; // Yes! this error is in our code sippet.
                 }
             }
             e.FileName = string.Empty;
         }
 
-        CodeDomProvider ChooseCodeDomProvider(ScriptingLanguage lang) {
+        CodeDomProvider ChooseCodeDomProvider(ScriptingLanguage lang)
+        {
             return (
-                lang == ScriptingLanguage.JScript     ? (CodeDomProvider) Activator.CreateInstance(Type.GetType("Microsoft.JScript.JScriptCodeProvider, " + AssemblyRef.MicrosoftJScript), BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, null, null, null) :
+                lang == ScriptingLanguage.JScript
+                    ? (CodeDomProvider)
+                        Activator.CreateInstance(
+                            Type.GetType(
+                                "Microsoft.JScript.JScriptCodeProvider, "
+                                    + AssemblyRef.MicrosoftJScript
+                            ),
+                            BindingFlags.Instance
+                                | BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.CreateInstance,
+                            null,
+                            null,
+                            null
+                        )
+                :
 #if !FEATURE_PAL // visualbasic
-                lang == ScriptingLanguage.VisualBasic ? (CodeDomProvider) new Microsoft.VisualBasic.VBCodeProvider() :
+                lang == ScriptingLanguage.VisualBasic
+                    ? (CodeDomProvider)new Microsoft.VisualBasic.VBCodeProvider()
+                :
 #endif
-                /*CSharp | default */                   (CodeDomProvider) new Microsoft.CSharp.CSharpCodeProvider()
+                /*CSharp | default */(CodeDomProvider)new Microsoft.CSharp.CSharpCodeProvider()
             );
         }
 
-        private void CompileScript(Evidence evidence) {
-            for (ScriptingLanguage lang = ScriptingLanguage.JScript; lang <= ScriptingLanguage.CSharp; lang ++) {
+        private void CompileScript(Evidence evidence)
+        {
+            for (
+                ScriptingLanguage lang = ScriptingLanguage.JScript;
+                lang <= ScriptingLanguage.CSharp;
+                lang++
+            )
+            {
                 int idx = (int)lang;
-                if (_typeDeclsByLang[idx].Count > 0) {
+                if (_typeDeclsByLang[idx].Count > 0)
+                {
                     CompileAssembly(lang, _typeDeclsByLang[idx], lang.ToString(), evidence);
                 }
             }
@@ -756,30 +992,40 @@ namespace System.Xml.Xsl.XsltOld {
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        private void CompileAssembly(ScriptingLanguage lang, Hashtable typeDecls, string nsName, Evidence evidence) {
+        private void CompileAssembly(
+            ScriptingLanguage lang,
+            Hashtable typeDecls,
+            string nsName,
+            Evidence evidence
+        )
+        {
             nsName = "Microsoft.Xslt.CompiledScripts." + nsName;
             CodeNamespace msXslt = new CodeNamespace(nsName);
 
             // Add all the default namespaces
-            foreach(string ns in _defaultNamespaces) {
+            foreach (string ns in _defaultNamespaces)
+            {
                 msXslt.Imports.Add(new CodeNamespaceImport(ns));
             }
 
 #if !FEATURE_PAL // visualbasic
-            if (lang == ScriptingLanguage.VisualBasic) {
+            if (lang == ScriptingLanguage.VisualBasic)
+            {
                 msXslt.Imports.Add(new CodeNamespaceImport("Microsoft.VisualBasic"));
             }
 #endif //!FEATURE_PAL
 
-            foreach(CodeTypeDeclaration scriptClass in typeDecls.Values) {
+            foreach (CodeTypeDeclaration scriptClass in typeDecls.Values)
+            {
                 msXslt.Types.Add(scriptClass);
             }
 
-            CodeCompileUnit unit = new CodeCompileUnit(); {
+            CodeCompileUnit unit = new CodeCompileUnit();
+            {
                 unit.Namespaces.Add(msXslt);
                 // This settings have sense for Visual Basic only.
                 // We can consider in future to allow user set them in <xsl:script option="???"> attribute.
-                unit.UserData["AllowLateBound"]             = true;  // Allow variables to be undeclared
+                unit.UserData["AllowLateBound"] = true; // Allow variables to be undeclared
                 unit.UserData["RequireVariableDeclaration"] = false; // Allow variables to be declared untyped
             }
 
@@ -789,60 +1035,93 @@ namespace System.Xml.Xsl.XsltOld {
                     new CodeTypeReference(typeof(System.Security.SecurityRulesAttribute)),
                     new CodeAttributeArgument(
                         new CodeFieldReferenceExpression(
-                            new CodeTypeReferenceExpression(typeof(System.Security.SecurityRuleSet)), "Level1"))));
+                            new CodeTypeReferenceExpression(
+                                typeof(System.Security.SecurityRuleSet)
+                            ),
+                            "Level1"
+                        )
+                    )
+                )
+            );
 
-            CompilerParameters compilParams = new CompilerParameters(); {
-                try {
+            CompilerParameters compilParams = new CompilerParameters();
+            {
+                try
+                {
                     new SecurityPermission(SecurityPermissionFlag.ControlEvidence).Assert();
-                    try {
+                    try
+                    {
                         compilParams.GenerateInMemory = true;
 #pragma warning disable 618
                         compilParams.Evidence = evidence;
 #pragma warning restore 618
-                        compilParams.ReferencedAssemblies.Add(typeof(XPathNavigator).Module.FullyQualifiedName);
+                        compilParams.ReferencedAssemblies.Add(
+                            typeof(XPathNavigator).Module.FullyQualifiedName
+                        );
                         compilParams.ReferencedAssemblies.Add("System.dll");
 #if !FEATURE_PAL // visualbasic
-                        if (lang == ScriptingLanguage.VisualBasic) {
+                        if (lang == ScriptingLanguage.VisualBasic)
+                        {
                             compilParams.ReferencedAssemblies.Add("microsoft.visualbasic.dll");
                         }
 #endif // !FEATURE_PAL
                     }
-                    finally {
+                    finally
+                    {
                         CodeAccessPermission.RevertAssert();
                     }
-                } catch { throw; }
+                }
+                catch
+                {
+                    throw;
+                }
             }
 
-            CompilerResults results = ChooseCodeDomProvider(lang).CompileAssemblyFromDom(compilParams, unit);
-            if (results.Errors.HasErrors) {
+            CompilerResults results = ChooseCodeDomProvider(lang)
+                .CompileAssemblyFromDom(compilParams, unit);
+            if (results.Errors.HasErrors)
+            {
                 StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture);
-                foreach (CompilerError e in results.Errors) {
+                foreach (CompilerError e in results.Errors)
+                {
                     FixCompilerError(e);
                     stringWriter.WriteLine(e.ToString());
                 }
                 throw XsltException.Create(Res.Xslt_ScriptCompileErrors, stringWriter.ToString());
             }
             Assembly assembly = results.CompiledAssembly;
-            foreach(DictionaryEntry entry in typeDecls) {
+            foreach (DictionaryEntry entry in typeDecls)
+            {
                 string ns = (string)entry.Key;
                 CodeTypeDeclaration scriptClass = (CodeTypeDeclaration)entry.Value;
-                this.stylesheet.ScriptObjectTypes.Add(ns, assembly.GetType(nsName + "." + scriptClass.Name));
+                this.stylesheet.ScriptObjectTypes.Add(
+                    ns,
+                    assembly.GetType(nsName + "." + scriptClass.Name)
+                );
             }
         }
 #endif
 
-        public string GetNsAlias(ref string prefix) {
+        public string GetNsAlias(ref string prefix)
+        {
             Debug.Assert(
-                Ref.Equal(this.input.LocalName, this.input.Atoms.StylesheetPrefix) ||
-                Ref.Equal(this.input.LocalName, this.input.Atoms.ResultPrefix)
+                Ref.Equal(this.input.LocalName, this.input.Atoms.StylesheetPrefix)
+                    || Ref.Equal(this.input.LocalName, this.input.Atoms.ResultPrefix)
             );
-            if (prefix == "#default") {
+            if (prefix == "#default")
+            {
                 prefix = string.Empty;
                 return this.DefaultNamespace;
             }
-            else {
-                if (! PrefixQName.ValidatePrefix(prefix)) {
-                    throw XsltException.Create(Res.Xslt_InvalidAttrValue, this.input.LocalName, prefix);
+            else
+            {
+                if (!PrefixQName.ValidatePrefix(prefix))
+                {
+                    throw XsltException.Create(
+                        Res.Xslt_InvalidAttrValue,
+                        this.input.LocalName,
+                        prefix
+                    );
                 }
                 return this.ResolveXPathNamespace(prefix);
             }
@@ -851,26 +1130,34 @@ namespace System.Xml.Xsl.XsltOld {
         // AVT's compilation.
         // CompileAvt() returns ArrayList of TextEvent & AvtEvent
 
-        private static void getTextLex(string avt, ref int start, StringBuilder lex) {
+        private static void getTextLex(string avt, ref int start, StringBuilder lex)
+        {
             Debug.Assert(avt.Length != start, "Empty string not supposed here");
-            Debug.Assert(lex.Length == 0    , "Builder shoud to be reset here");
+            Debug.Assert(lex.Length == 0, "Builder shoud to be reset here");
             int avtLength = avt.Length;
             int i;
-            for (i = start; i < avtLength; i ++) {
+            for (i = start; i < avtLength; i++)
+            {
                 char ch = avt[i];
-                if (ch == '{') {
-                    if (i + 1 < avtLength && avt[i + 1] == '{') { // "{{"
-                        i ++;
+                if (ch == '{')
+                {
+                    if (i + 1 < avtLength && avt[i + 1] == '{')
+                    { // "{{"
+                        i++;
                     }
-                    else {
+                    else
+                    {
                         break;
                     }
                 }
-                else if (ch == '}') {
-                    if (i + 1 < avtLength && avt[i + 1] == '}') { // "}}"
-                        i ++;
+                else if (ch == '}')
+                {
+                    if (i + 1 < avtLength && avt[i + 1] == '}')
+                    { // "}}"
+                        i++;
                     }
-                    else {
+                    else
+                    {
                         throw XsltException.Create(Res.Xslt_SingleRightAvt, avt);
                     }
                 }
@@ -879,68 +1166,86 @@ namespace System.Xml.Xsl.XsltOld {
             start = i;
         }
 
-        private static void getXPathLex(string avt, ref int start, StringBuilder lex) {
+        private static void getXPathLex(string avt, ref int start, StringBuilder lex)
+        {
             // AVT parser states
-            const int InExp       = 0;      // Inside AVT expression
-            const int InLiteralA  = 1;      // Inside literal in expression, apostrophe delimited
-            const int InLiteralQ  = 2;      // Inside literal in expression, quote delimited
+            const int InExp = 0; // Inside AVT expression
+            const int InLiteralA = 1; // Inside literal in expression, apostrophe delimited
+            const int InLiteralQ = 2; // Inside literal in expression, quote delimited
             Debug.Assert(avt.Length != start, "Empty string not supposed here");
-            Debug.Assert(lex.Length == 0    , "Builder shoud to be reset here");
-            Debug.Assert(avt[start] == '{'  , "We calling getXPathLex() only after we realy meet {");
+            Debug.Assert(lex.Length == 0, "Builder shoud to be reset here");
+            Debug.Assert(avt[start] == '{', "We calling getXPathLex() only after we realy meet {");
             int avtLength = avt.Length;
-            int state  = InExp;
-            for (int i = start + 1; i < avtLength; i ++) {
+            int state = InExp;
+            for (int i = start + 1; i < avtLength; i++)
+            {
                 char ch = avt[i];
-                switch(state) {
-                case InExp :
-                    switch (ch) {
-                    case '{' :
-                        throw XsltException.Create(Res.Xslt_NestedAvt, avt);
-                    case '}' :
-                        i ++; // include '}'
-                        if (i == start + 2) { // empty XPathExpresion
-                            throw XsltException.Create(Res.Xslt_EmptyAvtExpr, avt);
+                switch (state)
+                {
+                    case InExp:
+                        switch (ch)
+                        {
+                            case '{':
+                                throw XsltException.Create(Res.Xslt_NestedAvt, avt);
+                            case '}':
+                                i++; // include '}'
+                                if (i == start + 2)
+                                { // empty XPathExpresion
+                                    throw XsltException.Create(Res.Xslt_EmptyAvtExpr, avt);
+                                }
+                                lex.Append(avt, start + 1, i - start - 2); // avt without {}
+                                start = i;
+                                return;
+                            case '\'':
+                                state = InLiteralA;
+                                break;
+                            case '"':
+                                state = InLiteralQ;
+                                break;
                         }
-                        lex.Append(avt, start + 1, i - start - 2); // avt without {}
-                        start = i;
-                        return;
-                    case '\'' :
-                        state = InLiteralA;
                         break;
-                    case '"' :
-                        state = InLiteralQ;
+                    case InLiteralA:
+                        if (ch == '\'')
+                        {
+                            state = InExp;
+                        }
                         break;
-                    }
-                    break;
-                case InLiteralA :
-                    if (ch == '\'') {
-                        state = InExp;
-                    }
-                    break;
-                case InLiteralQ :
-                    if (ch == '"') {
-                        state = InExp;
-                    }
-                    break;
+                    case InLiteralQ:
+                        if (ch == '"')
+                        {
+                            state = InExp;
+                        }
+                        break;
                 }
             }
 
             // if we meet end of string before } we have an error
-            throw XsltException.Create(state == InExp ? Res.Xslt_OpenBracesAvt : Res.Xslt_OpenLiteralAvt, avt);
+            throw XsltException.Create(
+                state == InExp ? Res.Xslt_OpenBracesAvt : Res.Xslt_OpenLiteralAvt,
+                avt
+            );
         }
 
-        private static bool GetNextAvtLex(string avt, ref int start, StringBuilder lex, out bool isAvt) {
+        private static bool GetNextAvtLex(
+            string avt,
+            ref int start,
+            StringBuilder lex,
+            out bool isAvt
+        )
+        {
             Debug.Assert(start <= avt.Length);
 #if DEBUG
             int saveStart = start;
 #endif
             isAvt = false;
-            if (start == avt.Length) {
+            if (start == avt.Length)
+            {
                 return false;
             }
             lex.Length = 0;
             getTextLex(avt, ref start, lex);
-            if (lex.Length == 0) {
+            if (lex.Length == 0)
+            {
                 isAvt = true;
                 getXPathLex(avt, ref start, lex);
             }
@@ -950,30 +1255,38 @@ namespace System.Xml.Xsl.XsltOld {
             return true;
         }
 
-        internal ArrayList CompileAvt(string avtText, out bool constant) {
+        internal ArrayList CompileAvt(string avtText, out bool constant)
+        {
             Debug.Assert(avtText != null);
             ArrayList list = new ArrayList();
 
             constant = true;
-            /* Parse input.Value as AVT */ {
-                int  pos = 0;
+            /* Parse input.Value as AVT */{
+                int pos = 0;
                 bool isAvt;
-                while (GetNextAvtLex(avtText, ref pos, this.AvtStringBuilder, out isAvt)) {
+                while (GetNextAvtLex(avtText, ref pos, this.AvtStringBuilder, out isAvt))
+                {
                     string lex = this.AvtStringBuilder.ToString();
-                    if (isAvt) {
+                    if (isAvt)
+                    {
                         list.Add(new AvtEvent(this.AddStringQuery(lex)));
                         constant = false;
                     }
-                    else {
+                    else
+                    {
                         list.Add(new TextEvent(lex));
                     }
                 }
             }
-            Debug.Assert(!constant || list.Count <= 1, "We can't have more then 1 text event if now {avt} found");
+            Debug.Assert(
+                !constant || list.Count <= 1,
+                "We can't have more then 1 text event if now {avt} found"
+            );
             return list;
         }
 
-        internal ArrayList CompileAvt(string avtText) {
+        internal ArrayList CompileAvt(string avtText)
+        {
             bool constant;
             return CompileAvt(avtText, out constant);
         }
@@ -981,155 +1294,182 @@ namespace System.Xml.Xsl.XsltOld {
         // Compiler is a class factory for some actions:
         // CompilerDbg override all this methods:
 
-        public virtual ApplyImportsAction CreateApplyImportsAction() {
+        public virtual ApplyImportsAction CreateApplyImportsAction()
+        {
             ApplyImportsAction action = new ApplyImportsAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual ApplyTemplatesAction CreateApplyTemplatesAction() {
+        public virtual ApplyTemplatesAction CreateApplyTemplatesAction()
+        {
             ApplyTemplatesAction action = new ApplyTemplatesAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual AttributeAction CreateAttributeAction() {
+        public virtual AttributeAction CreateAttributeAction()
+        {
             AttributeAction action = new AttributeAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual AttributeSetAction CreateAttributeSetAction() {
+        public virtual AttributeSetAction CreateAttributeSetAction()
+        {
             AttributeSetAction action = new AttributeSetAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual CallTemplateAction CreateCallTemplateAction() {
+        public virtual CallTemplateAction CreateCallTemplateAction()
+        {
             CallTemplateAction action = new CallTemplateAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual ChooseAction CreateChooseAction() {//!!! don't need to be here
+        public virtual ChooseAction CreateChooseAction()
+        { //!!! don't need to be here
             ChooseAction action = new ChooseAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual CommentAction CreateCommentAction() {
+        public virtual CommentAction CreateCommentAction()
+        {
             CommentAction action = new CommentAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual CopyAction CreateCopyAction() {
+        public virtual CopyAction CreateCopyAction()
+        {
             CopyAction action = new CopyAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual CopyOfAction CreateCopyOfAction() {
+        public virtual CopyOfAction CreateCopyOfAction()
+        {
             CopyOfAction action = new CopyOfAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual ElementAction CreateElementAction() {
+        public virtual ElementAction CreateElementAction()
+        {
             ElementAction action = new ElementAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual ForEachAction CreateForEachAction() {
+        public virtual ForEachAction CreateForEachAction()
+        {
             ForEachAction action = new ForEachAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual IfAction CreateIfAction(IfAction.ConditionType type) {
+        public virtual IfAction CreateIfAction(IfAction.ConditionType type)
+        {
             IfAction action = new IfAction(type);
             action.Compile(this);
             return action;
         }
 
-        public virtual MessageAction CreateMessageAction() {
+        public virtual MessageAction CreateMessageAction()
+        {
             MessageAction action = new MessageAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual NewInstructionAction CreateNewInstructionAction() {
+        public virtual NewInstructionAction CreateNewInstructionAction()
+        {
             NewInstructionAction action = new NewInstructionAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual NumberAction CreateNumberAction() {
+        public virtual NumberAction CreateNumberAction()
+        {
             NumberAction action = new NumberAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual ProcessingInstructionAction CreateProcessingInstructionAction() {
+        public virtual ProcessingInstructionAction CreateProcessingInstructionAction()
+        {
             ProcessingInstructionAction action = new ProcessingInstructionAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual void CreateRootAction() {
+        public virtual void CreateRootAction()
+        {
             this.RootAction = new RootAction();
             this.RootAction.Compile(this);
         }
 
-        public virtual SortAction CreateSortAction() {
+        public virtual SortAction CreateSortAction()
+        {
             SortAction action = new SortAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual TemplateAction CreateTemplateAction() {
+        public virtual TemplateAction CreateTemplateAction()
+        {
             TemplateAction action = new TemplateAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual TemplateAction CreateSingleTemplateAction() {
+        public virtual TemplateAction CreateSingleTemplateAction()
+        {
             TemplateAction action = new TemplateAction();
             action.CompileSingle(this);
             return action;
         }
 
-        public virtual TextAction CreateTextAction() {
+        public virtual TextAction CreateTextAction()
+        {
             TextAction action = new TextAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual UseAttributeSetsAction CreateUseAttributeSetsAction() {
+        public virtual UseAttributeSetsAction CreateUseAttributeSetsAction()
+        {
             UseAttributeSetsAction action = new UseAttributeSetsAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual ValueOfAction CreateValueOfAction() {
+        public virtual ValueOfAction CreateValueOfAction()
+        {
             ValueOfAction action = new ValueOfAction();
             action.Compile(this);
             return action;
         }
 
-        public virtual VariableAction CreateVariableAction(VariableType type) {
+        public virtual VariableAction CreateVariableAction(VariableType type)
+        {
             VariableAction action = new VariableAction(type);
             action.Compile(this);
-            if (action.VarKey != InvalidQueryKey) {
+            if (action.VarKey != InvalidQueryKey)
+            {
                 return action;
             }
-            else {
+            else
+            {
                 return null;
             }
         }
 
-        public virtual WithParamAction CreateWithParamAction() {
+        public virtual WithParamAction CreateWithParamAction()
+        {
             WithParamAction action = new WithParamAction();
             action.Compile(this);
             return action;
@@ -1138,15 +1478,18 @@ namespace System.Xml.Xsl.XsltOld {
         // Compiler is a class factory for some events:
         // CompilerDbg override all this methods:
 
-        public virtual BeginEvent CreateBeginEvent() {
+        public virtual BeginEvent CreateBeginEvent()
+        {
             return new BeginEvent(this);
         }
 
-        public virtual TextEvent CreateTextEvent() {
+        public virtual TextEvent CreateTextEvent()
+        {
             return new TextEvent(this);
         }
 
-        public XsltException UnexpectedKeyword() {
+        public XsltException UnexpectedKeyword()
+        {
             XPathNavigator nav = this.Input.Navigator.Clone();
             string thisName = nav.Name;
             nav.MoveToParent();
@@ -1154,20 +1497,40 @@ namespace System.Xml.Xsl.XsltOld {
             return XsltException.Create(Res.Xslt_UnexpectedKeyword, thisName, parentName);
         }
 
-        internal class ErrorXPathExpression : CompiledXpathExpr {
+        internal class ErrorXPathExpression : CompiledXpathExpr
+        {
             private string baseUri;
-            private int lineNumber, linePosition;
-            public ErrorXPathExpression(string expression, string baseUri, int lineNumber, int linePosition)
-                :  base(null, expression, false)
+            private int lineNumber,
+                linePosition;
+
+            public ErrorXPathExpression(
+                string expression,
+                string baseUri,
+                int lineNumber,
+                int linePosition
+            )
+                : base(null, expression, false)
             {
-                this.baseUri      = baseUri;
-                this.lineNumber   = lineNumber;
+                this.baseUri = baseUri;
+                this.lineNumber = lineNumber;
                 this.linePosition = linePosition;
             }
 
-            public override XPathExpression Clone() { return this; }
-            public override void CheckErrors() {
-                throw new XsltException(Res.Xslt_InvalidXPath, new string[] { Expression }, baseUri, linePosition, lineNumber, null);
+            public override XPathExpression Clone()
+            {
+                return this;
+            }
+
+            public override void CheckErrors()
+            {
+                throw new XsltException(
+                    Res.Xslt_InvalidXPath,
+                    new string[] { Expression },
+                    baseUri,
+                    linePosition,
+                    lineNumber,
+                    null
+                );
             }
         }
     }

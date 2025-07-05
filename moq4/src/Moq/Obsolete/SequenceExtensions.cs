@@ -4,7 +4,6 @@
 using System;
 using System.ComponentModel;
 using System.Linq.Expressions;
-
 using Moq.Language;
 
 namespace Moq
@@ -18,7 +17,8 @@ namespace Moq
         [Obsolete("Please use instance method Mock<T>.SetupSequence instead.")]
         public static ISetupSequentialResult<TResult> SetupSequence<TMock, TResult>(
             this Mock<TMock> mock,
-            Expression<Func<TMock, TResult>> expression)
+            Expression<Func<TMock, TResult>> expression
+        )
             where TMock : class
         {
             return mock.SetupSequence(expression);
@@ -29,7 +29,10 @@ namespace Moq
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Please use instance method Mock<T>.SetupSequence instead.")]
-        public static ISetupSequentialAction SetupSequence<TMock>(this Mock<TMock> mock, Expression<Action<TMock>> expression)
+        public static ISetupSequentialAction SetupSequence<TMock>(
+            this Mock<TMock> mock,
+            Expression<Action<TMock>> expression
+        )
             where TMock : class
         {
             return mock.SetupSequence(expression);

@@ -29,7 +29,12 @@ public class HttpUtilitiesTest
     [InlineData("PO / HTTP/1.1", false, null, (int)HttpMethod.Custom)]
     [InlineData("PO ST / HTTP/1.1", false, null, (int)HttpMethod.Custom)]
     [InlineData("short ", false, null, (int)HttpMethod.Custom)]
-    public void GetsKnownMethod(string input, bool expectedResult, string expectedKnownString, int intExpectedMethod)
+    public void GetsKnownMethod(
+        string input,
+        bool expectedResult,
+        string expectedKnownString,
+        int intExpectedMethod
+    )
     {
         var expectedMethod = (HttpMethod)intExpectedMethod;
         // Arrange
@@ -59,7 +64,12 @@ public class HttpUtilitiesTest
     [InlineData("http/1.0\r", false, null, (int)HttpVersion.Unknown)]
     [InlineData("http/1.1\r", false, null, (int)HttpVersion.Unknown)]
     [InlineData("short ", false, null, (int)HttpVersion.Unknown)]
-    public void GetsKnownVersion(string input, bool expectedResult, string expectedKnownString, int intVersion)
+    public void GetsKnownVersion(
+        string input,
+        bool expectedResult,
+        string expectedKnownString,
+        int intVersion
+    )
     {
         var version = (HttpVersion)intVersion;
         // Arrange
@@ -85,11 +95,15 @@ public class HttpUtilitiesTest
     [InlineData("HTTP/1.1\r", "HTTP/1.1")]
     public void KnownVersionsAreInterned(string input, string expected)
     {
-        TestKnownStringsInterning(input, expected, span =>
-        {
-            HttpUtilities.GetKnownVersion(span, out var version, out var _);
-            return HttpUtilities.VersionToString(version);
-        });
+        TestKnownStringsInterning(
+            input,
+            expected,
+            span =>
+            {
+                HttpUtilities.GetKnownVersion(span, out var version, out var _);
+                return HttpUtilities.VersionToString(version);
+            }
+        );
     }
 
     [Theory]
@@ -97,11 +111,15 @@ public class HttpUtilitiesTest
     [InlineData("http://host/", "http://")]
     public void KnownSchemesAreInterned(string input, string expected)
     {
-        TestKnownStringsInterning(input, expected, span =>
-        {
-            HttpUtilities.GetKnownHttpScheme(span, out var scheme);
-            return HttpUtilities.SchemeToString(scheme);
-        });
+        TestKnownStringsInterning(
+            input,
+            expected,
+            span =>
+            {
+                HttpUtilities.GetKnownHttpScheme(span, out var scheme);
+                return HttpUtilities.SchemeToString(scheme);
+            }
+        );
     }
 
     [Theory]
@@ -116,14 +134,22 @@ public class HttpUtilitiesTest
     [InlineData("TRACE / HTTP/1.1", "TRACE")]
     public void KnownMethodsAreInterned(string input, string expected)
     {
-        TestKnownStringsInterning(input, expected, span =>
-        {
-            HttpUtilities.GetKnownMethod(span, out var method, out var length);
-            return HttpUtilities.MethodToString(method);
-        });
+        TestKnownStringsInterning(
+            input,
+            expected,
+            span =>
+            {
+                HttpUtilities.GetKnownMethod(span, out var method, out var length);
+                return HttpUtilities.MethodToString(method);
+            }
+        );
     }
 
-    private void TestKnownStringsInterning(string input, string expected, Func<byte[], string> action)
+    private void TestKnownStringsInterning(
+        string input,
+        string expected,
+        Func<byte[], string> action
+    )
     {
         // Act
         var knownString1 = action(Encoding.ASCII.GetBytes(input));
@@ -138,33 +164,34 @@ public class HttpUtilitiesTest
     {
         get
         {
-            return new TheoryData<string> {
-                    "z",
-                    "1",
-                    "y:1",
-                    "1:1",
-                    "[ABCdef]",
-                    "[abcDEF]:0",
-                    "[abcdef:127.2355.1246.114]:0",
-                    "[::1]:80",
-                    "127.0.0.1:80",
-                    "900.900.900.900:9523547852",
-                    "foo",
-                    "foo:234",
-                    "foo.bar.baz",
-                    "foo.BAR.baz:46245",
-                    "foo.ba-ar.baz:46245",
-                    "-foo:1234",
-                    "xn--asdfaf:134",
-                    "-",
-                    "_",
-                    "~",
-                    "!",
-                    "$",
-                    "'",
-                    "(",
-                    ")",
-                };
+            return new TheoryData<string>
+            {
+                "z",
+                "1",
+                "y:1",
+                "1:1",
+                "[ABCdef]",
+                "[abcDEF]:0",
+                "[abcdef:127.2355.1246.114]:0",
+                "[::1]:80",
+                "127.0.0.1:80",
+                "900.900.900.900:9523547852",
+                "foo",
+                "foo:234",
+                "foo.bar.baz",
+                "foo.BAR.baz:46245",
+                "foo.ba-ar.baz:46245",
+                "-foo:1234",
+                "xn--asdfaf:134",
+                "-",
+                "_",
+                "~",
+                "!",
+                "$",
+                "'",
+                "(",
+                ")",
+            };
         }
     }
 
@@ -180,24 +207,25 @@ public class HttpUtilitiesTest
         get
         {
             // see https://tools.ietf.org/html/rfc7230#section-5.4
-            var data = new TheoryData<string> {
-                    "[]", // Too short
-                    "[::]", // Too short
-                    "[ghijkl]", // Non-hex
-                    "[afd:adf:123", // Incomplete
-                    "[afd:adf]123", // Missing :
-                    "[afd:adf]:", // Missing port digits
-                    "[afd adf]", // Space
-                    "[ad-314]", // dash
-                    ":1234", // Missing host
-                    "a:b:c", // Missing []
-                    "::1", // Missing []
-                    "::", // Missing everything
-                    "abcd:1abcd", // Letters in port
-                    "abcd:1.2", // Dot in port
-                    "1.2.3.4:", // Missing port digits
-                    "1.2 .4", // Space
-                };
+            var data = new TheoryData<string>
+            {
+                "[]", // Too short
+                "[::]", // Too short
+                "[ghijkl]", // Non-hex
+                "[afd:adf:123", // Incomplete
+                "[afd:adf]123", // Missing :
+                "[afd:adf]:", // Missing port digits
+                "[afd adf]", // Space
+                "[ad-314]", // dash
+                ":1234", // Missing host
+                "a:b:c", // Missing []
+                "::1", // Missing []
+                "::", // Missing everything
+                "abcd:1abcd", // Letters in port
+                "abcd:1.2", // Dot in port
+                "1.2.3.4:", // Missing port digits
+                "1.2 .4", // Space
+            };
 
             // These aren't allowed anywhere in the host header
             var invalid = "\"#%*+,/;<=>?@[]\\^`{}|";
@@ -233,11 +261,12 @@ public class HttpUtilitiesTest
     {
         get
         {
-            return new TheoryData<Func<string, Encoding>> {
-                    KestrelServerOptions.DefaultHeaderEncodingSelector,
-                    str => null,
-                    str => Encoding.Latin1
-                };
+            return new TheoryData<Func<string, Encoding>>
+            {
+                KestrelServerOptions.DefaultHeaderEncodingSelector,
+                str => null,
+                str => Encoding.Latin1,
+            };
         }
     }
 
@@ -247,7 +276,13 @@ public class HttpUtilitiesTest
     {
         byte[] encodedBytes = { 0x01, 0x0A, 0x0D };
         Assert.Throws<InvalidOperationException>(() =>
-            HttpUtilities.GetRequestHeaderString(encodedBytes.AsSpan(), HeaderNames.Accept, selector, checkForNewlineChars: true));
+            HttpUtilities.GetRequestHeaderString(
+                encodedBytes.AsSpan(),
+                HeaderNames.Accept,
+                selector,
+                checkForNewlineChars: true
+            )
+        );
     }
 
     [Theory]
@@ -255,6 +290,11 @@ public class HttpUtilitiesTest
     private void ExceptionNotThrownForCRLF(Func<string, Encoding> selector)
     {
         byte[] encodedBytes = { 0x01, 0x0A, 0x0D };
-        HttpUtilities.GetRequestHeaderString(encodedBytes.AsSpan(), HeaderNames.Accept, selector, checkForNewlineChars: false);
+        HttpUtilities.GetRequestHeaderString(
+            encodedBytes.AsSpan(),
+            HeaderNames.Accept,
+            selector,
+            checkForNewlineChars: false
+        );
     }
 }

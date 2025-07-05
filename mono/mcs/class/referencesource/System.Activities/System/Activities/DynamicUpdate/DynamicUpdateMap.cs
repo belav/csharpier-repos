@@ -21,20 +21,15 @@ namespace System.Activities.DynamicUpdate
         static DynamicUpdateMap noChanges = new DynamicUpdateMap();
         static DynamicUpdateMap dummyMap = new DynamicUpdateMap();
 
-        internal EntryCollection entries;        
+        internal EntryCollection entries;
         IList<ArgumentInfo> newArguments;
-        IList<ArgumentInfo> oldArguments;        
-        
-        internal DynamicUpdateMap()
-        {
-        }
+        IList<ArgumentInfo> oldArguments;
+
+        internal DynamicUpdateMap() { }
 
         public static DynamicUpdateMap NoChanges
         {
-            get
-            {
-                return noChanges;
-            }
+            get { return noChanges; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "entries")]
@@ -76,10 +71,7 @@ namespace System.Activities.DynamicUpdate
                 }
                 return this.newArguments;
             }
-            set
-            {
-                this.newArguments = value;
-            }
+            set { this.newArguments = value; }
         }
 
         internal IList<ArgumentInfo> OldArguments
@@ -92,39 +84,21 @@ namespace System.Activities.DynamicUpdate
                 }
                 return this.oldArguments;
             }
-            set
-            {
-                this.oldArguments = value;
-            }
+            set { this.oldArguments = value; }
         }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool ArgumentsAreUnknown
-        {
-            get;
-            set;
-        }
+        internal bool ArgumentsAreUnknown { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        internal bool IsImplementationAsRoot
-        {
-            get;
-            set;
-        }
+        internal bool IsImplementationAsRoot { get; set; }
 
         [DataMember(EmitDefaultValue = false)]
-        internal int NewDefinitionMemberCount
-        {
-            get;
-            set;
-        }
+        internal int NewDefinitionMemberCount { get; set; }
 
         internal int OldDefinitionMemberCount
         {
-            get
-            {
-                return this.Entries.Count;
-            }
+            get { return this.Entries.Count; }
         }
 
         [DataMember(EmitDefaultValue = false)]
@@ -134,10 +108,7 @@ namespace System.Activities.DynamicUpdate
         // DynamicUpdateMap.NoChanges, or a serialized equivalent.
         internal bool IsNoChanges
         {
-            get
-            {
-                return this.NewDefinitionMemberCount == 0;
-            }
+            get { return this.NewDefinitionMemberCount == 0; }
         }
 
         // use the internal method AddEntry() instead
@@ -154,22 +125,32 @@ namespace System.Activities.DynamicUpdate
             }
         }
 
-        public static IDictionary<object, DynamicUpdateMapItem> CalculateMapItems(Activity workflowDefinitionToBeUpdated)
+        public static IDictionary<object, DynamicUpdateMapItem> CalculateMapItems(
+            Activity workflowDefinitionToBeUpdated
+        )
         {
             return CalculateMapItems(workflowDefinitionToBeUpdated, null);
         }
 
-        public static IDictionary<object, DynamicUpdateMapItem> CalculateMapItems(Activity workflowDefinitionToBeUpdated, LocationReferenceEnvironment environment)
+        public static IDictionary<object, DynamicUpdateMapItem> CalculateMapItems(
+            Activity workflowDefinitionToBeUpdated,
+            LocationReferenceEnvironment environment
+        )
         {
             return InternalCalculateMapItems(workflowDefinitionToBeUpdated, environment, false);
         }
 
-        public static IDictionary<object, DynamicUpdateMapItem> CalculateImplementationMapItems(Activity activityDefinitionToBeUpdated)
+        public static IDictionary<object, DynamicUpdateMapItem> CalculateImplementationMapItems(
+            Activity activityDefinitionToBeUpdated
+        )
         {
             return CalculateImplementationMapItems(activityDefinitionToBeUpdated, null);
         }
 
-        public static IDictionary<object, DynamicUpdateMapItem> CalculateImplementationMapItems(Activity activityDefinitionToBeUpdated, LocationReferenceEnvironment environment)
+        public static IDictionary<object, DynamicUpdateMapItem> CalculateImplementationMapItems(
+            Activity activityDefinitionToBeUpdated,
+            LocationReferenceEnvironment environment
+        )
         {
             return InternalCalculateMapItems(activityDefinitionToBeUpdated, environment, true);
         }
@@ -199,52 +180,91 @@ namespace System.Activities.DynamicUpdate
             return result;
         }
 
-        static IDictionary<object, DynamicUpdateMapItem> InternalCalculateMapItems(Activity workflowDefinitionToBeUpdated, LocationReferenceEnvironment environment, bool forImplementation)
+        static IDictionary<object, DynamicUpdateMapItem> InternalCalculateMapItems(
+            Activity workflowDefinitionToBeUpdated,
+            LocationReferenceEnvironment environment,
+            bool forImplementation
+        )
         {
             if (workflowDefinitionToBeUpdated == null)
             {
                 throw FxTrace.Exception.ArgumentNull("workflowDefinitionToBeUpdated");
             }
 
-            DynamicUpdateMapBuilder.Preparer preparer = new DynamicUpdateMapBuilder.Preparer(workflowDefinitionToBeUpdated, environment, forImplementation);
+            DynamicUpdateMapBuilder.Preparer preparer = new DynamicUpdateMapBuilder.Preparer(
+                workflowDefinitionToBeUpdated,
+                environment,
+                forImplementation
+            );
             return preparer.Prepare();
-        }        
+        }
 
-        public DynamicUpdateMapQuery Query(Activity updatedWorkflowDefinition, Activity originalWorkflowDefinition)
-        {            
+        public DynamicUpdateMapQuery Query(
+            Activity updatedWorkflowDefinition,
+            Activity originalWorkflowDefinition
+        )
+        {
             if (this.IsNoChanges)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.NoChangesMapQueryNotSupported));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.NoChangesMapQueryNotSupported)
+                );
             }
 
             if (this.IsForImplementation)
             {
-                ValidateDefinitionMatchesImplementationMap(updatedWorkflowDefinition, this.NewDefinitionMemberCount, "updatedWorkflowDefinition");
-                ValidateDefinitionMatchesImplementationMap(originalWorkflowDefinition, this.OldDefinitionMemberCount, "originalWorkflowDefinition");
+                ValidateDefinitionMatchesImplementationMap(
+                    updatedWorkflowDefinition,
+                    this.NewDefinitionMemberCount,
+                    "updatedWorkflowDefinition"
+                );
+                ValidateDefinitionMatchesImplementationMap(
+                    originalWorkflowDefinition,
+                    this.OldDefinitionMemberCount,
+                    "originalWorkflowDefinition"
+                );
             }
             else
             {
-                ValidateDefinitionMatchesMap(updatedWorkflowDefinition, this.NewDefinitionMemberCount, "updatedWorkflowDefinition");
-                ValidateDefinitionMatchesMap(originalWorkflowDefinition, this.OldDefinitionMemberCount, "originalWorkflowDefinition");
-            }            
+                ValidateDefinitionMatchesMap(
+                    updatedWorkflowDefinition,
+                    this.NewDefinitionMemberCount,
+                    "updatedWorkflowDefinition"
+                );
+                ValidateDefinitionMatchesMap(
+                    originalWorkflowDefinition,
+                    this.OldDefinitionMemberCount,
+                    "originalWorkflowDefinition"
+                );
+            }
 
-            return new DynamicUpdateMapQuery(this, updatedWorkflowDefinition, originalWorkflowDefinition);
+            return new DynamicUpdateMapQuery(
+                this,
+                updatedWorkflowDefinition,
+                originalWorkflowDefinition
+            );
         }
 
         internal static bool CanUseImplementationMapAsRoot(Activity workflowDefinition)
         {
-            Fx.Assert(workflowDefinition.IsMetadataCached, "This should only be called for cached definition");
+            Fx.Assert(
+                workflowDefinition.IsMetadataCached,
+                "This should only be called for cached definition"
+            );
 
             // We can only use the implementation map as a root map if the worklflow has no public children
-            return
-                workflowDefinition.Children.Count == 0 &&
-                workflowDefinition.ImportedChildren.Count == 0 &&
-                workflowDefinition.Delegates.Count == 0 &&
-                workflowDefinition.ImportedDelegates.Count == 0 &&
-                workflowDefinition.RuntimeVariables.Count == 0;
+            return workflowDefinition.Children.Count == 0
+                && workflowDefinition.ImportedChildren.Count == 0
+                && workflowDefinition.Delegates.Count == 0
+                && workflowDefinition.ImportedDelegates.Count == 0
+                && workflowDefinition.RuntimeVariables.Count == 0;
         }
 
-        internal static DynamicUpdateMap Merge(DynamicUpdateMap first, DynamicUpdateMap second, MergeErrorContext errorContext)
+        internal static DynamicUpdateMap Merge(
+            DynamicUpdateMap first,
+            DynamicUpdateMap second,
+            MergeErrorContext errorContext
+        )
         {
             if (first == null || second == null)
             {
@@ -265,7 +285,9 @@ namespace System.Activities.DynamicUpdate
                 NewDefinitionMemberCount = second.NewDefinitionMemberCount,
                 ArgumentsAreUnknown = first.ArgumentsAreUnknown && second.ArgumentsAreUnknown,
                 oldArguments = first.ArgumentsAreUnknown ? second.oldArguments : first.oldArguments,
-                newArguments = second.ArgumentsAreUnknown ? first.newArguments : second.newArguments
+                newArguments = second.ArgumentsAreUnknown
+                    ? first.newArguments
+                    : second.newArguments,
             };
 
             foreach (DynamicUpdateMapEntry firstEntry in first.Entries)
@@ -283,12 +305,14 @@ namespace System.Activities.DynamicUpdate
                 else
                 {
                     DynamicUpdateMapEntry secondEntry = second.entries[firstEntry.NewActivityId];
-                    result.AddEntry(DynamicUpdateMapEntry.Merge(firstEntry, secondEntry, parent, errorContext));
+                    result.AddEntry(
+                        DynamicUpdateMapEntry.Merge(firstEntry, secondEntry, parent, errorContext)
+                    );
                 }
             }
 
             return result;
-        }        
+        }
 
         internal void AddEntry(DynamicUpdateMapEntry entry)
         {
@@ -303,25 +327,32 @@ namespace System.Activities.DynamicUpdate
 
             if (!ActivityComparer.ListEquals(this.NewArguments, this.OldArguments))
             {
-                throw FxTrace.Exception.AsError(new InstanceUpdateException(SR.InvalidImplementationAsWorkflowRootForRuntimeStateBecauseArgumentsChanged));
+                throw FxTrace.Exception.AsError(
+                    new InstanceUpdateException(
+                        SR.InvalidImplementationAsWorkflowRootForRuntimeStateBecauseArgumentsChanged
+                    )
+                );
             }
 
             DynamicUpdateMap result = new DynamicUpdateMap
             {
                 IsImplementationAsRoot = true,
-                NewDefinitionMemberCount = 1
+                NewDefinitionMemberCount = 1,
             };
-            result.AddEntry(new DynamicUpdateMapEntry(1, 1)
-            {
-                ImplementationUpdateMap = this,
-            });
+            result.AddEntry(new DynamicUpdateMapEntry(1, 1) { ImplementationUpdateMap = this });
             return result;
         }
 
         internal void ThrowIfInvalid(Activity updatedDefinition)
         {
-            Fx.Assert(updatedDefinition.IsMetadataCached, "Caller should have ensured cached definition");
-            Fx.Assert(updatedDefinition.Parent == null && !this.IsForImplementation, "This should only be called on a workflow definition");
+            Fx.Assert(
+                updatedDefinition.IsMetadataCached,
+                "Caller should have ensured cached definition"
+            );
+            Fx.Assert(
+                updatedDefinition.Parent == null && !this.IsForImplementation,
+                "This should only be called on a workflow definition"
+            );
 
             this.ThrowIfInvalid(updatedDefinition.MemberOf);
         }
@@ -342,8 +373,17 @@ namespace System.Activities.DynamicUpdate
 
             if (this.NewDefinitionMemberCount != updatedIdSpace.MemberCount)
             {
-                throw FxTrace.Exception.AsError(new InstanceUpdateException(SR.InvalidUpdateMap(
-                    SR.WrongMemberCount(updatedIdSpace.Owner, updatedIdSpace.MemberCount, this.NewDefinitionMemberCount))));
+                throw FxTrace.Exception.AsError(
+                    new InstanceUpdateException(
+                        SR.InvalidUpdateMap(
+                            SR.WrongMemberCount(
+                                updatedIdSpace.Owner,
+                                updatedIdSpace.MemberCount,
+                                this.NewDefinitionMemberCount
+                            )
+                        )
+                    )
+                );
             }
 
             foreach (DynamicUpdateMapEntry entry in this.Entries)
@@ -353,19 +393,29 @@ namespace System.Activities.DynamicUpdate
                     Activity implementationOwner = updatedIdSpace[entry.NewActivityId];
                     if (implementationOwner == null)
                     {
-                        string expectedId = entry.NewActivityId.ToString(CultureInfo.InvariantCulture);
+                        string expectedId = entry.NewActivityId.ToString(
+                            CultureInfo.InvariantCulture
+                        );
                         if (updatedIdSpace.Owner != null)
                         {
                             expectedId = updatedIdSpace.Owner.Id + "." + expectedId;
                         }
-                        throw FxTrace.Exception.AsError(new InstanceUpdateException(SR.InvalidUpdateMap(
-                            SR.ActivityNotFound(expectedId))));
+                        throw FxTrace.Exception.AsError(
+                            new InstanceUpdateException(
+                                SR.InvalidUpdateMap(SR.ActivityNotFound(expectedId))
+                            )
+                        );
                     }
 
                     if (implementationOwner.ParentOf == null)
                     {
-                        throw FxTrace.Exception.AsError(new InstanceUpdateException(SR.InvalidUpdateMap(
-                            SR.ActivityHasNoImplementation(implementationOwner))));
+                        throw FxTrace.Exception.AsError(
+                            new InstanceUpdateException(
+                                SR.InvalidUpdateMap(
+                                    SR.ActivityHasNoImplementation(implementationOwner)
+                                )
+                            )
+                        );
                     }
 
                     entry.ImplementationUpdateMap.ThrowIfInvalid(implementationOwner.ParentOf);
@@ -375,7 +425,10 @@ namespace System.Activities.DynamicUpdate
 
         internal bool TryGetUpdateEntryByNewId(int newId, out DynamicUpdateMapEntry entry)
         {
-            Fx.Assert(!this.IsNoChanges, "This method is never supposed to be called on the NoChanges map.");
+            Fx.Assert(
+                !this.IsNoChanges,
+                "This method is never supposed to be called on the NoChanges map."
+            );
 
             entry = null;
 
@@ -415,7 +468,10 @@ namespace System.Activities.DynamicUpdate
             IdSpace currentIdSpace = rootIdSpace;
             DynamicUpdateMap currentMap = this;
 
-            Fx.Assert(!this.IsForImplementation, "This method is never supposed to be called on an implementation map.");
+            Fx.Assert(
+                !this.IsForImplementation,
+                "This method is never supposed to be called on an implementation map."
+            );
 
             for (int i = 0; i < oldIdSegments.Length; i++)
             {
@@ -430,8 +486,11 @@ namespace System.Activities.DynamicUpdate
                     // UpdateMap should contain entries for all old activities in the IdSpace
                     int[] subIdSegments = new int[i + 1];
                     Array.Copy(oldIdSegments, subIdSegments, subIdSegments.Length);
-                    throw FxTrace.Exception.AsError(new InstanceUpdateException(SR.InvalidUpdateMap(
-                        SR.MapEntryNotFound(new QualifiedId(subIdSegments)))));
+                    throw FxTrace.Exception.AsError(
+                        new InstanceUpdateException(
+                            SR.InvalidUpdateMap(SR.MapEntryNotFound(new QualifiedId(subIdSegments)))
+                        )
+                    );
                 }
 
                 if (entry.IsIdChange)
@@ -452,9 +511,15 @@ namespace System.Activities.DynamicUpdate
                     if (currentActivity == null)
                     {
                         // New Activity pointed to by UpdateMap should exist
-                        string activityId = currentIdSpace.Owner.Id + "." + entry.NewActivityId.ToString(CultureInfo.InvariantCulture);
-                        throw FxTrace.Exception.AsError(new InstanceUpdateException(SR.InvalidUpdateMap(
-                            SR.ActivityNotFound(activityId))));
+                        string activityId =
+                            currentIdSpace.Owner.Id
+                            + "."
+                            + entry.NewActivityId.ToString(CultureInfo.InvariantCulture);
+                        throw FxTrace.Exception.AsError(
+                            new InstanceUpdateException(
+                                SR.InvalidUpdateMap(SR.ActivityNotFound(activityId))
+                            )
+                        );
                     }
                     currentIdSpace = currentActivity.ParentOf;
                 }
@@ -481,24 +546,50 @@ namespace System.Activities.DynamicUpdate
             return result;
         }
 
-        static void ThrowIfMapsIncompatible(DynamicUpdateMap first, DynamicUpdateMap second, MergeErrorContext errorContext)
+        static void ThrowIfMapsIncompatible(
+            DynamicUpdateMap first,
+            DynamicUpdateMap second,
+            MergeErrorContext errorContext
+        )
         {
-            Fx.Assert(!first.IsNoChanges && !second.IsNoChanges, "This method is never supposed to be called on the NoChanges map.");
+            Fx.Assert(
+                !first.IsNoChanges && !second.IsNoChanges,
+                "This method is never supposed to be called on the NoChanges map."
+            );
 
             if (first.IsForImplementation != second.IsForImplementation)
             {
-                errorContext.Throw(SR.InvalidMergeMapForImplementation(first.IsForImplementation, second.IsForImplementation));
+                errorContext.Throw(
+                    SR.InvalidMergeMapForImplementation(
+                        first.IsForImplementation,
+                        second.IsForImplementation
+                    )
+                );
             }
             if (first.NewDefinitionMemberCount != second.OldDefinitionMemberCount)
             {
-                errorContext.Throw(SR.InvalidMergeMapMemberCount(first.NewDefinitionMemberCount, second.OldDefinitionMemberCount));
+                errorContext.Throw(
+                    SR.InvalidMergeMapMemberCount(
+                        first.NewDefinitionMemberCount,
+                        second.OldDefinitionMemberCount
+                    )
+                );
             }
-            if (!first.ArgumentsAreUnknown && !second.ArgumentsAreUnknown && first.IsForImplementation && 
-                !ActivityComparer.ListEquals(first.newArguments, second.oldArguments))
+            if (
+                !first.ArgumentsAreUnknown
+                && !second.ArgumentsAreUnknown
+                && first.IsForImplementation
+                && !ActivityComparer.ListEquals(first.newArguments, second.oldArguments)
+            )
             {
                 if (first.NewArguments.Count != second.OldArguments.Count)
                 {
-                    errorContext.Throw(SR.InvalidMergeMapArgumentCount(first.NewArguments.Count, second.OldArguments.Count));
+                    errorContext.Throw(
+                        SR.InvalidMergeMapArgumentCount(
+                            first.NewArguments.Count,
+                            second.OldArguments.Count
+                        )
+                    );
                 }
                 else
                 {
@@ -507,7 +598,11 @@ namespace System.Activities.DynamicUpdate
             }
         }
 
-        static void ValidateDefinitionMatchesMap(Activity activity, int memberCount, string parameterName)
+        static void ValidateDefinitionMatchesMap(
+            Activity activity,
+            int memberCount,
+            string parameterName
+        )
         {
             if (activity == null)
             {
@@ -523,12 +618,24 @@ namespace System.Activities.DynamicUpdate
             }
             if (activity.MemberOf.MemberCount != memberCount)
             {
-                throw FxTrace.Exception.Argument(parameterName, SR.InvalidUpdateMap(
-                    SR.WrongMemberCount(activity.MemberOf.Owner, activity.MemberOf.MemberCount, memberCount)));
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidUpdateMap(
+                        SR.WrongMemberCount(
+                            activity.MemberOf.Owner,
+                            activity.MemberOf.MemberCount,
+                            memberCount
+                        )
+                    )
+                );
             }
         }
 
-        static void ValidateDefinitionMatchesImplementationMap(Activity activity, int memberCount, string parameterName)
+        static void ValidateDefinitionMatchesImplementationMap(
+            Activity activity,
+            int memberCount,
+            string parameterName
+        )
         {
             if (activity == null)
             {
@@ -544,17 +651,30 @@ namespace System.Activities.DynamicUpdate
             }
             if (activity.ParentOf == null)
             {
-                throw FxTrace.Exception.Argument(parameterName, SR.InvalidUpdateMap(
-                    SR.ActivityHasNoImplementation(activity)));
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidUpdateMap(SR.ActivityHasNoImplementation(activity))
+                );
             }
             if (activity.ParentOf.MemberCount != memberCount)
             {
-                throw FxTrace.Exception.Argument(parameterName, SR.InvalidUpdateMap(
-                    SR.WrongMemberCount(activity.ParentOf.Owner, activity.ParentOf.MemberCount, memberCount)));
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidUpdateMap(
+                        SR.WrongMemberCount(
+                            activity.ParentOf.Owner,
+                            activity.ParentOf.MemberCount,
+                            memberCount
+                        )
+                    )
+                );
             }
             if (!CanUseImplementationMapAsRoot(activity))
             {
-                throw FxTrace.Exception.Argument(parameterName, SR.InvalidImplementationAsWorkflowRoot);
+                throw FxTrace.Exception.Argument(
+                    parameterName,
+                    SR.InvalidImplementationAsWorkflowRoot
+                );
             }
         }
 
@@ -623,9 +743,7 @@ namespace System.Activities.DynamicUpdate
         [CollectionDataContract]
         internal class EntryCollection : KeyedCollection<int, DynamicUpdateMapEntry>
         {
-            public EntryCollection()
-            {
-            }
+            public EntryCollection() { }
 
             protected override int GetKeyForItem(DynamicUpdateMapEntry item)
             {

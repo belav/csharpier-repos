@@ -5,8 +5,8 @@ using System;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Caching.Memory.Infrastructure;
+using Microsoft.Extensions.Internal;
 using Xunit;
 
 namespace Microsoft.Extensions.Caching.Memory
@@ -25,16 +25,16 @@ namespace Microsoft.Extensions.Caching.Memory
         [InlineData(false)]
         public void GetCurrentStatistics_GetCache_UpdatesStatistics(bool sizeLimitIsSet)
         {
-            var cache = sizeLimitIsSet ? 
-                new MemoryCache(new MemoryCacheOptions { TrackStatistics = true, SizeLimit = 10 }) :
-                new MemoryCache(new MemoryCacheOptions { TrackStatistics = true });
+            var cache = sizeLimitIsSet
+                ? new MemoryCache(new MemoryCacheOptions { TrackStatistics = true, SizeLimit = 10 })
+                : new MemoryCache(new MemoryCacheOptions { TrackStatistics = true });
 
             cache.Set("key", "value", new MemoryCacheEntryOptions { Size = 2 });
             for (int i = 0; i < 100; i++)
             {
                 Assert.Equal("value", cache.Get("key"));
-                Assert.Null(cache.Get("missingKey1"));            
-                Assert.Null(cache.Get("missingKey2"));            
+                Assert.Null(cache.Get("missingKey1"));
+                Assert.Null(cache.Get("missingKey2"));
             }
 
             MemoryCacheStatistics? stats = cache.GetCurrentStatistics();
@@ -51,9 +51,9 @@ namespace Microsoft.Extensions.Caching.Memory
         [InlineData(false)]
         public void GetCurrentStatistics_UpdateExistingCache_UpdatesStatistics(bool sizeLimitIsSet)
         {
-            var cache = sizeLimitIsSet ? 
-                new MemoryCache(new MemoryCacheOptions { TrackStatistics = true, SizeLimit = 10 }) :
-                new MemoryCache(new MemoryCacheOptions { TrackStatistics = true });
+            var cache = sizeLimitIsSet
+                ? new MemoryCache(new MemoryCacheOptions { TrackStatistics = true, SizeLimit = 10 })
+                : new MemoryCache(new MemoryCacheOptions { TrackStatistics = true });
 
             cache.Set("key", "value", new MemoryCacheEntryOptions { Size = 2 });
             Assert.Equal("value", cache.Get("key"));
@@ -73,13 +73,21 @@ namespace Microsoft.Extensions.Caching.Memory
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void GetCurrentStatistics_UpdateAfterExistingItemExpired_CurrentEstimatedSizeResets(bool sizeLimitIsSet)
+        public void GetCurrentStatistics_UpdateAfterExistingItemExpired_CurrentEstimatedSizeResets(
+            bool sizeLimitIsSet
+        )
         {
             const string Key = "myKey";
 
-            var cache = new MemoryCache(sizeLimitIsSet ?
-                new MemoryCacheOptions { TrackStatistics = true, Clock = new SystemClock(), SizeLimit = 10 } :
-                new MemoryCacheOptions { TrackStatistics = true, Clock = new SystemClock() }
+            var cache = new MemoryCache(
+                sizeLimitIsSet
+                    ? new MemoryCacheOptions
+                    {
+                        TrackStatistics = true,
+                        Clock = new SystemClock(),
+                        SizeLimit = 10,
+                    }
+                    : new MemoryCacheOptions { TrackStatistics = true, Clock = new SystemClock() }
             );
 
             ICacheEntry entry;
@@ -91,8 +99,8 @@ namespace Microsoft.Extensions.Caching.Memory
                 MemoryCacheStatistics? stats = cache.GetCurrentStatistics();
 
                 Assert.NotNull(stats);
-                Assert.Equal(1,  cache.Count);
-                Assert.Equal(1,  stats.CurrentEntryCount);
+                Assert.Equal(1, cache.Count);
+                Assert.Equal(1, stats.CurrentEntryCount);
                 VerifyCurrentEstimatedSize(5, sizeLimitIsSet, stats);
 
                 expirationToken.HasChanged = true;
@@ -100,8 +108,8 @@ namespace Microsoft.Extensions.Caching.Memory
                 stats = cache.GetCurrentStatistics();
 
                 Assert.NotNull(stats);
-                Assert.Equal(0,  cache.Count);
-                Assert.Equal(0,  stats.CurrentEntryCount);
+                Assert.Equal(0, cache.Count);
+                Assert.Equal(0, stats.CurrentEntryCount);
                 VerifyCurrentEstimatedSize(0, sizeLimitIsSet, stats);
             }
         }
@@ -117,20 +125,28 @@ namespace Microsoft.Extensions.Caching.Memory
         private class FakeMemoryCache : IMemoryCache
         {
             public ICacheEntry CreateEntry(object key) => throw new NotImplementedException();
+
             public void Dispose() => throw new NotImplementedException();
+
             public void Remove(object key) => throw new NotImplementedException();
-            public bool TryGetValue(object key, out object? value) => throw new NotImplementedException();
+
+            public bool TryGetValue(object key, out object? value) =>
+                throw new NotImplementedException();
         }
 
-        private void VerifyCurrentEstimatedSize(long expected, bool sizeLimitIsSet, MemoryCacheStatistics stats)
+        private void VerifyCurrentEstimatedSize(
+            long expected,
+            bool sizeLimitIsSet,
+            MemoryCacheStatistics stats
+        )
         {
             if (sizeLimitIsSet)
             {
-                Assert.Equal(expected, stats.CurrentEstimatedSize );
+                Assert.Equal(expected, stats.CurrentEstimatedSize);
             }
             else
             {
-                Assert.Null(stats.CurrentEstimatedSize );
+                Assert.Null(stats.CurrentEstimatedSize);
             }
         }
     }

@@ -8,7 +8,7 @@ namespace System.Numerics
     // This file contains the definitions for all of the JIT intrinsic methods and properties that are recognized by the current x64 JIT compiler.
     // The implementation defined here is used in any circumstance where the JIT fails to recognize these members as intrinsic.
     // The JIT recognizes these methods and properties by name and signature: if either is changed, the JIT will no longer recognize the member.
-    // Some methods declared here are not strictly intrinsic, but delegate to an intrinsic method. For example, only one overload of CopyTo() 
+    // Some methods declared here are not strictly intrinsic, but delegate to an intrinsic method. For example, only one overload of CopyTo()
 
     public partial struct Vector2
     {
@@ -16,6 +16,7 @@ namespace System.Numerics
         /// The X component of the vector.
         /// </summary>
         public Single X;
+
         /// <summary>
         /// The Y component of the vector.
         /// </summary>
@@ -27,7 +28,8 @@ namespace System.Numerics
         /// </summary>
         /// <param name="value">The element to fill the vector with.</param>
         [JitIntrinsic]
-        public Vector2(Single value) : this(value, value) { }
+        public Vector2(Single value)
+            : this(value, value) { }
 
         /// <summary>
         /// Constructs a vector with the given individual elements.
@@ -70,11 +72,15 @@ namespace System.Numerics
             }
             if (index < 0 || index >= array.Length)
             {
-                throw new ArgumentOutOfRangeException(SR.GetString("Arg_ArgumentOutOfRangeException", index));
+                throw new ArgumentOutOfRangeException(
+                    SR.GetString("Arg_ArgumentOutOfRangeException", index)
+                );
             }
             if ((array.Length - index) < 2)
             {
-                throw new ArgumentException(SR.GetString("Arg_ElementsInSourceIsGreaterThanDestination", index));
+                throw new ArgumentException(
+                    SR.GetString("Arg_ElementsInSourceIsGreaterThanDestination", index)
+                );
             }
             array[index] = X;
             array[index + 1] = Y;
@@ -103,8 +109,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector2 value1, Vector2 value2)
         {
-            return value1.X * value2.X +
-                   value1.Y * value2.Y;
+            return value1.X * value2.X + value1.Y * value2.Y;
         }
 
         /// <summary>
@@ -119,7 +124,8 @@ namespace System.Numerics
         {
             return new Vector2(
                 (value1.X < value2.X) ? value1.X : value2.X,
-                (value1.Y < value2.Y) ? value1.Y : value2.Y);
+                (value1.Y < value2.Y) ? value1.Y : value2.Y
+            );
         }
 
         /// <summary>
@@ -134,14 +140,15 @@ namespace System.Numerics
         {
             return new Vector2(
                 (value1.X > value2.X) ? value1.X : value2.X,
-                (value1.Y > value2.Y) ? value1.Y : value2.Y);
+                (value1.Y > value2.Y) ? value1.Y : value2.Y
+            );
         }
 
         /// <summary>
         /// Returns a vector whose elements are the absolute values of each of the source vector's elements.
         /// </summary>
         /// <param name="value">The source vector.</param>
-        /// <returns>The absolute value vector.</returns>        
+        /// <returns>The absolute value vector.</returns>
         [JitIntrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Abs(Vector2 value)
@@ -252,9 +259,7 @@ namespace System.Numerics
         public static Vector2 operator /(Vector2 value1, float value2)
         {
             float invDiv = 1.0f / value2;
-            return new Vector2(
-                value1.X * invDiv,
-                value1.Y * invDiv);
+            return new Vector2(value1.X * invDiv, value1.Y * invDiv);
         }
 
         /// <summary>

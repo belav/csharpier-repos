@@ -9,7 +9,6 @@ using Xunit;
 
 public class MultiplyLongOpsTest
 {
-
     [Theory]
     [InlineData(72, 6, 68L, 500L)]
     [InlineData(32, 5, 40L, 200L)]

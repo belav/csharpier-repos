@@ -19,7 +19,9 @@ namespace System.Xml.XmlNodeReaderTests
         [Fact]
         public void NodeReaderSkipWithSimpleXml()
         {
-            XmlNodeReader nodeReader = NodeReaderTestHelper.CreateNodeReader("<root atri='val'><child /></root>");
+            XmlNodeReader nodeReader = NodeReaderTestHelper.CreateNodeReader(
+                "<root atri='val'><child /></root>"
+            );
             Assert.True(nodeReader.Read());
             nodeReader.Skip();
             Assert.True(nodeReader.EOF);
@@ -42,18 +44,21 @@ namespace System.Xml.XmlNodeReaderTests
             nodeReader.Read();
             var namespaceResolver = nodeReader as IXmlNamespaceResolver;
             Assert.Null(namespaceResolver.LookupNamespace("prefix"));
-            Assert.Collection(namespaceResolver.GetNamespacesInScope(XmlNamespaceScope.All)
-                , kv => Assert.Equal("xml", kv.Key));
+            Assert.Collection(
+                namespaceResolver.GetNamespacesInScope(XmlNamespaceScope.All),
+                kv => Assert.Equal("xml", kv.Key)
+            );
             Assert.Empty(namespaceResolver.GetNamespacesInScope(XmlNamespaceScope.Local));
         }
 
         [Fact]
         public void NodeReaderLookupNamespaceWithValidXml()
         {
-            string xml = "<book xmlns:bk='urn:samples'> " +
-                   "<title>Pride And Prejudice</title>" +
-                   "<bk:genre>novel</bk:genre>" +
-                   "</book>";
+            string xml =
+                "<book xmlns:bk='urn:samples'> "
+                + "<title>Pride And Prejudice</title>"
+                + "<bk:genre>novel</bk:genre>"
+                + "</book>";
             XmlNodeReader nodeReader = NodeReaderTestHelper.CreateNodeReader(xml);
             Assert.Equal(string.Empty, nodeReader.LocalName);
             Assert.Equal(string.Empty, nodeReader.Name);
@@ -79,7 +84,9 @@ namespace System.Xml.XmlNodeReaderTests
             namespaceResolver = nodeReader as IXmlNamespaceResolver;
             Assert.Equal("bk", namespaceResolver.LookupPrefix("urn:samples"));
             Assert.Equal("urn:samples", namespaceResolver.LookupNamespace("bk"));
-            IDictionary<string, string> namespaces = namespaceResolver.GetNamespacesInScope(XmlNamespaceScope.All);
+            IDictionary<string, string> namespaces = namespaceResolver.GetNamespacesInScope(
+                XmlNamespaceScope.All
+            );
             Assert.True(namespaces.ContainsKey("bk") && namespaces["bk"].Equals("urn:samples"));
             Assert.True(namespaces.ContainsKey("xml"));
         }

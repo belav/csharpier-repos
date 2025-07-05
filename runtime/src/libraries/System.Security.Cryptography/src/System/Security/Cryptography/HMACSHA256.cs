@@ -28,9 +28,7 @@ namespace System.Security.Cryptography
         public const int HashSizeInBytes = HashSizeInBits / 8;
 
         public HMACSHA256()
-            : this(RandomNumberGenerator.GetBytes(BlockSize))
-        {
-        }
+            : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         public HMACSHA256(byte[] key)
         {
@@ -48,10 +46,7 @@ namespace System.Security.Cryptography
 
         public override byte[] Key
         {
-            get
-            {
-                return base.Key;
-            }
+            get { return base.Key; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -66,8 +61,7 @@ namespace System.Security.Cryptography
         protected override void HashCore(ReadOnlySpan<byte> source) =>
             _hMacCommon.AppendHashData(source);
 
-        protected override byte[] HashFinal() =>
-            _hMacCommon.FinalizeHashAndReset();
+        protected override byte[] HashFinal() => _hMacCommon.FinalizeHashAndReset();
 
         protected override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
             _hMacCommon.TryFinalizeHashAndReset(destination, out bytesWritten);
@@ -118,7 +112,11 @@ namespace System.Security.Cryptography
         /// The buffer in <paramref name="destination"/> is too small to hold the calculated hash
         /// size. The SHA256 algorithm always produces a 256-bit HMAC, or 32 bytes.
         /// </exception>
-        public static int HashData(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination)
+        public static int HashData(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        )
         {
             if (!TryHashData(key, source, destination, out int bytesWritten))
             {
@@ -141,7 +139,12 @@ namespace System.Security.Cryptography
         /// <see langword="false"/> if <paramref name="destination"/> is too small to hold the
         /// calculated hash, <see langword="true"/> otherwise.
         /// </returns>
-        public static bool TryHashData(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length < HashSizeInBytes)
             {
@@ -149,7 +152,12 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(HashAlgorithmNames.SHA256, key, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.MacData(
+                HashAlgorithmNames.SHA256,
+                key,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;
@@ -207,7 +215,12 @@ namespace System.Security.Cryptography
             if (!source.CanRead)
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
-            return LiteHashProvider.HmacStream(HashAlgorithmNames.SHA256, HashSizeInBytes, key, source);
+            return LiteHashProvider.HmacStream(
+                HashAlgorithmNames.SHA256,
+                HashSizeInBytes,
+                key,
+                source
+            );
         }
 
         /// <summary>
@@ -245,14 +258,23 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentException">
         ///   <paramref name="source" /> does not support reading.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(ReadOnlyMemory<byte> key, Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            ReadOnlyMemory<byte> key,
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
             if (!source.CanRead)
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
-            return LiteHashProvider.HmacStreamAsync(HashAlgorithmNames.SHA256, key.Span, source, cancellationToken);
+            return LiteHashProvider.HmacStreamAsync(
+                HashAlgorithmNames.SHA256,
+                key.Span,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -271,7 +293,11 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentException">
         ///   <paramref name="source" /> does not support reading.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(byte[] key, Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            byte[] key,
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(key);
 
@@ -306,7 +332,8 @@ namespace System.Security.Cryptography
             ReadOnlyMemory<byte> key,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -321,7 +348,8 @@ namespace System.Security.Cryptography
                 key.Span,
                 source,
                 destination,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         protected override void Dispose(bool disposing)

@@ -28,31 +28,43 @@ public class KestrelServerOptionsTests
         var options = new KestrelServerOptions();
         options.ListenLocalhost(5000);
 
-        Assert.Equal(ListenOptions.DefaultHttpProtocols, options.CodeBackedListenOptions[0].Protocols);
+        Assert.Equal(
+            ListenOptions.DefaultHttpProtocols,
+            options.CodeBackedListenOptions[0].Protocols
+        );
 
         options.ConfigureEndpointDefaults(opt =>
         {
             opt.Protocols = HttpProtocols.Http1;
         });
 
-        options.Listen(new IPEndPoint(IPAddress.Loopback, 5000), opt =>
-        {
-            // ConfigureEndpointDefaults runs before this callback
-            Assert.Equal(HttpProtocols.Http1, opt.Protocols);
-        });
+        options.Listen(
+            new IPEndPoint(IPAddress.Loopback, 5000),
+            opt =>
+            {
+                // ConfigureEndpointDefaults runs before this callback
+                Assert.Equal(HttpProtocols.Http1, opt.Protocols);
+            }
+        );
         Assert.Equal(HttpProtocols.Http1, options.CodeBackedListenOptions[1].Protocols);
 
-        options.ListenLocalhost(5000, opt =>
-        {
-            Assert.Equal(HttpProtocols.Http1, opt.Protocols);
-            opt.Protocols = HttpProtocols.Http2; // Can be overriden
-        });
+        options.ListenLocalhost(
+            5000,
+            opt =>
+            {
+                Assert.Equal(HttpProtocols.Http1, opt.Protocols);
+                opt.Protocols = HttpProtocols.Http2; // Can be overriden
+            }
+        );
         Assert.Equal(HttpProtocols.Http2, options.CodeBackedListenOptions[2].Protocols);
 
-        options.ListenAnyIP(5000, opt =>
-        {
-            opt.Protocols = HttpProtocols.Http2;
-        });
+        options.ListenAnyIP(
+            5000,
+            opt =>
+            {
+                opt.Protocols = HttpProtocols.Http2;
+            }
+        );
         Assert.Equal(HttpProtocols.Http2, options.CodeBackedListenOptions[3].Protocols);
     }
 
@@ -68,7 +80,7 @@ public class KestrelServerOptionsTests
     {
         var options = new KestrelServerOptions
         {
-            ApplicationServices = new ServiceCollection().BuildServiceProvider()
+            ApplicationServices = new ServiceCollection().BuildServiceProvider(),
         };
 
         Assert.Throws<InvalidOperationException>(() => options.Configure());
@@ -99,7 +111,9 @@ public class KestrelServerOptionsTests
     {
         var options = new KestrelServerOptions();
 
-        var ex = Assert.Throws<ArgumentNullException>(() => options.RequestHeaderEncodingSelector = null);
+        var ex = Assert.Throws<ArgumentNullException>(() =>
+            options.RequestHeaderEncodingSelector = null
+        );
         Assert.Equal("value", ex.ParamName);
     }
 }

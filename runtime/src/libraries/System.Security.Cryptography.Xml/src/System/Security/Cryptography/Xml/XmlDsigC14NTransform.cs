@@ -8,7 +8,12 @@ namespace System.Security.Cryptography.Xml
 {
     public class XmlDsigC14NTransform : Transform
     {
-        private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlDocument), typeof(XmlNodeList) };
+        private readonly Type[] _inputTypes =
+        {
+            typeof(Stream),
+            typeof(XmlDocument),
+            typeof(XmlNodeList),
+        };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private CanonicalXml? _cXml;
         private readonly bool _includeComments;
@@ -21,7 +26,11 @@ namespace System.Security.Cryptography.Xml
         public XmlDsigC14NTransform(bool includeComments)
         {
             _includeComments = includeComments;
-            Algorithm = (includeComments ? SignedXml.XmlDsigC14NWithCommentsTransformUrl : SignedXml.XmlDsigC14NTransformUrl);
+            Algorithm = (
+                includeComments
+                    ? SignedXml.XmlDsigC14NWithCommentsTransformUrl
+                    : SignedXml.XmlDsigC14NTransformUrl
+            );
         }
 
         public override Type[] InputTypes
@@ -47,7 +56,9 @@ namespace System.Security.Cryptography.Xml
 
         public override void LoadInput(object obj)
         {
-            XmlResolver resolver = ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver();
+            XmlResolver resolver = ResolverSet
+                ? _xmlResolver
+                : XmlResolverHelper.GetThrowingResolver();
             if (obj is Stream)
             {
                 _cXml = new CanonicalXml((Stream)obj, _includeComments, resolver, BaseURI!);
@@ -76,7 +87,10 @@ namespace System.Security.Cryptography.Xml
         public override object GetOutput(Type type)
         {
             if (type != typeof(Stream) && !type.IsSubclassOf(typeof(Stream)))
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
             return new MemoryStream(_cXml!.GetBytes());
         }
 

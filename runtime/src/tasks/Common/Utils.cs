@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Reflection.PortableExecutable;
 using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Build.Framework;
@@ -20,13 +20,13 @@ internal static class Utils
     {
         SHA256,
         SHA384,
-        SHA512
+        SHA512,
     };
 
     public enum HashEncodingType
     {
         Base64,
-        Base64Safe
+        Base64Safe,
     };
 
     public static string WebcilInWasmExtension = ".wasm";
@@ -35,44 +35,53 @@ internal static class Utils
 
     public static string GetEmbeddedResource(string file)
     {
-        using Stream stream = typeof(Utils).Assembly
-            .GetManifestResourceStream($"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}")!;
+        using Stream stream = typeof(Utils).Assembly.GetManifestResourceStream(
+            $"{typeof(Utils).Assembly.GetName().Name}.Templates.{file}"
+        )!;
         using var reader = new StreamReader(stream);
         return reader.ReadToEnd();
     }
 
-    public static bool IsNewerThan(string inFile, string outFile)
-        => !File.Exists(inFile) || !File.Exists(outFile) ||
-                (File.GetLastWriteTimeUtc(inFile) > File.GetLastWriteTimeUtc(outFile));
+    public static bool IsNewerThan(string inFile, string outFile) =>
+        !File.Exists(inFile)
+        || !File.Exists(outFile)
+        || (File.GetLastWriteTimeUtc(inFile) > File.GetLastWriteTimeUtc(outFile));
 
     public static (int exitCode, string output) RunShellCommand(
-                                        TaskLoggingHelper logger,
-                                        string command,
-                                        IDictionary<string, string> envVars,
-                                        string workingDir,
-                                        bool silent=false,
-                                        bool logStdErrAsMessage=false,
-                                        MessageImportance debugMessageImportance=MessageImportance.Low,
-                                        string? label=null)
+        TaskLoggingHelper logger,
+        string command,
+        IDictionary<string, string> envVars,
+        string workingDir,
+        bool silent = false,
+        bool logStdErrAsMessage = false,
+        MessageImportance debugMessageImportance = MessageImportance.Low,
+        string? label = null
+    )
     {
         string scriptFileName = CreateTemporaryBatchFile(command);
         (string shell, string args) = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-                                                    ? ("cmd", $"/c \"{scriptFileName}\"")
-                                                    : ("/bin/sh", $"\"{scriptFileName}\"");
+            ? ("cmd", $"/c \"{scriptFileName}\"")
+            : ("/bin/sh", $"\"{scriptFileName}\"");
 
         string msgPrefix = label == null ? string.Empty : $"[{label}] ";
-        logger.LogMessage(debugMessageImportance, $"{msgPrefix}Running {command} via script {scriptFileName}:", msgPrefix);
+        logger.LogMessage(
+            debugMessageImportance,
+            $"{msgPrefix}Running {command} via script {scriptFileName}:",
+            msgPrefix
+        );
         logger.LogMessage(debugMessageImportance, File.ReadAllText(scriptFileName), msgPrefix);
 
-        return TryRunProcess(logger,
-                             shell,
-                             args,
-                             envVars,
-                             workingDir,
-                             silent: silent,
-                             logStdErrAsMessage: logStdErrAsMessage,
-                             label: label,
-                             debugMessageImportance: debugMessageImportance);
+        return TryRunProcess(
+            logger,
+            shell,
+            args,
+            envVars,
+            workingDir,
+            silent: silent,
+            logStdErrAsMessage: logStdErrAsMessage,
+            label: label,
+            debugMessageImportance: debugMessageImportance
+        );
 
         static string CreateTemporaryBatchFile(string command)
         {
@@ -108,16 +117,18 @@ internal static class Utils
         string? workingDir = null,
         bool ignoreErrors = false,
         bool silent = true,
-        MessageImportance debugMessageImportance=MessageImportance.High)
+        MessageImportance debugMessageImportance = MessageImportance.High
+    )
     {
         (int exitCode, string output) = TryRunProcess(
-                                            logger,
-                                            path,
-                                            args,
-                                            envVars,
-                                            workingDir,
-                                            silent: silent,
-                                            debugMessageImportance: debugMessageImportance);
+            logger,
+            path,
+            args,
+            envVars,
+            workingDir,
+            silent: silent,
+            debugMessageImportance: debugMessageImportance
+        );
 
         if (exitCode != 0 && !ignoreErrors)
             throw new Exception("Error: Process returned non-zero exit code: " + output);
@@ -133,9 +144,10 @@ internal static class Utils
         string? workingDir = null,
         bool silent = true,
         bool logStdErrAsMessage = false,
-        MessageImportance debugMessageImportance=MessageImportance.High,
-        string? label=null,
-        Action<Stream>? inputProvider = null)
+        MessageImportance debugMessageImportance = MessageImportance.High,
+        string? label = null,
+        Action<Stream>? inputProvider = null
+    )
     {
         string msgPrefix = label == null ? string.Empty : $"[{label}] ";
         logger.LogMessage(debugMessageImportance, $"{msgPrefix}Running: {path} {args}");
@@ -154,23 +166,36 @@ internal static class Utils
         if (workingDir != null)
             processStartInfo.WorkingDirectory = workingDir;
 
-        logger.LogMessage(debugMessageImportance, $"{msgPrefix}Using working directory: {workingDir ?? Environment.CurrentDirectory}", msgPrefix);
+        logger.LogMessage(
+            debugMessageImportance,
+            $"{msgPrefix}Using working directory: {workingDir ?? Environment.CurrentDirectory}",
+            msgPrefix
+        );
 
         if (envVars != null)
         {
             if (envVars.Count > 0)
-                logger.LogMessage(MessageImportance.Low, $"{msgPrefix}Setting environment variables for execution:", msgPrefix);
+                logger.LogMessage(
+                    MessageImportance.Low,
+                    $"{msgPrefix}Setting environment variables for execution:",
+                    msgPrefix
+                );
 
             foreach (KeyValuePair<string, string> envVar in envVars)
             {
                 processStartInfo.EnvironmentVariables[envVar.Key] = envVar.Value;
-                logger.LogMessage(MessageImportance.Low, $"{msgPrefix}\t{envVar.Key} = {envVar.Value}");
+                logger.LogMessage(
+                    MessageImportance.Low,
+                    $"{msgPrefix}\t{envVar.Key} = {envVar.Value}"
+                );
             }
         }
 
         Process? process = Process.Start(processStartInfo);
         if (process == null)
-            throw new ArgumentException($"{msgPrefix}Process.Start({path} {args}) returned null process");
+            throw new ArgumentException(
+                $"{msgPrefix}Process.Start({path} {args}) returned null process"
+            );
 
         process.ErrorDataReceived += (sender, e) =>
         {
@@ -216,9 +241,10 @@ internal static class Utils
         if (!File.Exists(src))
             throw new ArgumentException($"Cannot find {src} file to copy", nameof(src));
 
-        bool areDifferent = !File.Exists(dst) ||
-                                (useHash && ComputeHash(src) != ComputeHash(dst)) ||
-                                (File.ReadAllText(src) != File.ReadAllText(dst));
+        bool areDifferent =
+            !File.Exists(dst)
+            || (useHash && ComputeHash(src) != ComputeHash(dst))
+            || (File.ReadAllText(src) != File.ReadAllText(dst));
 
         if (areDifferent)
             File.Copy(src, dst, true);
@@ -233,7 +259,14 @@ internal static class Utils
 
         int outputLength = ((4 * data.Length / 3) + 3) & ~3;
         char[] base64Safe = new char[outputLength];
-        int base64SafeLength = Convert.ToBase64CharArray(data, 0, data.Length, base64Safe, 0, Base64FormattingOptions.None);
+        int base64SafeLength = Convert.ToBase64CharArray(
+            data,
+            0,
+            data.Length,
+            base64Safe,
+            0,
+            Base64FormattingOptions.None
+        );
 
         //RFC3548, URL and Filename Safe Alphabet.
         for (int i = 0; i < base64SafeLength; i++)
@@ -291,7 +324,11 @@ internal static class Utils
         return ComputeHashEx(filepath);
     }
 
-    public static string ComputeHashEx(string filepath, HashAlgorithmType algorithm = HashAlgorithmType.SHA512, HashEncodingType encoding = HashEncodingType.Base64)
+    public static string ComputeHashEx(
+        string filepath,
+        HashAlgorithmType algorithm = HashAlgorithmType.SHA512,
+        HashEncodingType encoding = HashEncodingType.Base64
+    )
     {
         using var stream = File.OpenRead(filepath);
         return EncodeHash(ComputeHashFromStream(stream, algorithm), encoding);
@@ -324,7 +361,11 @@ internal static class Utils
     }
 
 #if NETCOREAPP
-    public static void DirectoryCopy(string sourceDir, string destDir, Func<string, bool>? predicate=null)
+    public static void DirectoryCopy(
+        string sourceDir,
+        string destDir,
+        Func<string, bool>? predicate = null
+    )
     {
         if (!Directory.Exists(destDir))
             Directory.CreateDirectory(destDir);

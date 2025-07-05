@@ -4,87 +4,90 @@ using Gtk;
 
 namespace Cairo.Snippets
 {
-	public class CairoSnippetsGtk
-	{
-		int width = 400;
-		int height = 200;
+    public class CairoSnippetsGtk
+    {
+        int width = 400;
+        int height = 200;
 
-		DrawingArea da = new DrawingArea ();
+        DrawingArea da = new DrawingArea();
 
-		Snippets snips = new Snippets ();
-		string selected = "";
+        Snippets snips = new Snippets();
+        string selected = "";
 
-		public static void Main(string[] args)
-		{
-			Application.Init ();
-			new CairoSnippetsGtk ();
-			Application.Run ();
-		}
+        public static void Main(string[] args)
+        {
+            Application.Init();
+            new CairoSnippetsGtk();
+            Application.Run();
+        }
 
-		public CairoSnippetsGtk ()
-		{
-			Window w = new Window ("Cairo snippets");
-			w.SetDefaultSize (width, height);
-			w.DeleteEvent += delegate { Application.Quit (); };
+        public CairoSnippetsGtk()
+        {
+            Window w = new Window("Cairo snippets");
+            w.SetDefaultSize(width, height);
+            w.DeleteEvent += delegate
+            {
+                Application.Quit();
+            };
 
-			HPaned hpane = new HPaned ();
-			ScrolledWindow sw = new ScrolledWindow ();
-			TreeView tv = new TreeView ();
-			tv.HeadersVisible = false;
-			tv.AppendColumn ("snippets", new CellRendererText (), "text", 0);
-			tv.Model = GetModel ();
-			tv.Selection.Changed += OnSelectionChanged;
-			sw.Add (tv);
-			hpane.Add1 (sw);
-			da = new DrawingArea ();
-			da.ExposeEvent += OnExposed;
-			hpane.Add2 (da);
-			hpane.Position = width / 2;
-			w.Add (hpane);
-			
-			w.ShowAll ();
-		}
+            HPaned hpane = new HPaned();
+            ScrolledWindow sw = new ScrolledWindow();
+            TreeView tv = new TreeView();
+            tv.HeadersVisible = false;
+            tv.AppendColumn("snippets", new CellRendererText(), "text", 0);
+            tv.Model = GetModel();
+            tv.Selection.Changed += OnSelectionChanged;
+            sw.Add(tv);
+            hpane.Add1(sw);
+            da = new DrawingArea();
+            da.ExposeEvent += OnExposed;
+            hpane.Add2(da);
+            hpane.Position = width / 2;
+            w.Add(hpane);
 
-		ListStore GetModel ()
-		{
-			ListStore store = new ListStore (typeof (string));
-			foreach (string s in Snippets.snippets)
-				store.AppendValues (s);
-			return store;
-		}
+            w.ShowAll();
+        }
 
-		void OnExposed (object sender, ExposeEventArgs e)
-		{
-			Context cr = Gdk.CairoHelper.Create (da.GdkWindow);
+        ListStore GetModel()
+        {
+            ListStore store = new ListStore(typeof(string));
+            foreach (string s in Snippets.snippets)
+                store.AppendValues(s);
+            return store;
+        }
 
-			int w, h;
-			da.GdkWindow.GetSize (out w, out h);
+        void OnExposed(object sender, ExposeEventArgs e)
+        {
+            Context cr = Gdk.CairoHelper.Create(da.GdkWindow);
 
-			// set window bg
-			cr.ColorRgb = new Color (1, 1, 1 );
-			cr.Rectangle (0, 0, w, h);
-			cr.Fill ();
-			// reset it
-			cr.ColorRgb = new Color (0, 0, 0);
+            int w,
+                h;
+            da.GdkWindow.GetSize(out w, out h);
 
-			Snippets.InvokeSnippet (snips, selected, cr, w, h);
+            // set window bg
+            cr.ColorRgb = new Color(1, 1, 1);
+            cr.Rectangle(0, 0, w, h);
+            cr.Fill();
+            // reset it
+            cr.ColorRgb = new Color(0, 0, 0);
 
-			e.RetVal = true;
-		}
+            Snippets.InvokeSnippet(snips, selected, cr, w, h);
 
-		void OnSelectionChanged (object sender, EventArgs e)
-		{
-			TreeIter iter;
-			TreeModel model;
-			TreeSelection selection = sender as TreeSelection;
+            e.RetVal = true;
+        }
 
-			if (selection.GetSelected (out model, out iter))
-			{
-				selected = (string) model.GetValue (iter, 0);
-			}
+        void OnSelectionChanged(object sender, EventArgs e)
+        {
+            TreeIter iter;
+            TreeModel model;
+            TreeSelection selection = sender as TreeSelection;
 
-			da.QueueDraw ();
-		}
-	}
+            if (selection.GetSelected(out model, out iter))
+            {
+                selected = (string)model.GetValue(iter, 0);
+            }
+
+            da.QueueDraw();
+        }
+    }
 }
-

@@ -17,7 +17,9 @@ public class SqliteMemberTranslatorProvider : RelationalMemberTranslatorProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqliteMemberTranslatorProvider(RelationalMemberTranslatorProviderDependencies dependencies)
+    public SqliteMemberTranslatorProvider(
+        RelationalMemberTranslatorProviderDependencies dependencies
+    )
         : base(dependencies)
     {
         var sqlExpressionFactory = (SqliteSqlExpressionFactory)dependencies.SqlExpressionFactory;
@@ -27,7 +29,8 @@ public class SqliteMemberTranslatorProvider : RelationalMemberTranslatorProvider
             {
                 new SqliteDateTimeMemberTranslator(sqlExpressionFactory),
                 new SqliteStringLengthTranslator(sqlExpressionFactory),
-                new SqliteDateOnlyMemberTranslator(sqlExpressionFactory)
-            });
+                new SqliteDateOnlyMemberTranslator(sqlExpressionFactory),
+            }
+        );
     }
 }

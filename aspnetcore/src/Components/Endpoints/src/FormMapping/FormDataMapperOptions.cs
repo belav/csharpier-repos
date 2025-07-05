@@ -16,9 +16,8 @@ internal sealed class FormDataMapperOptions
 
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
-    public FormDataMapperOptions() : this(NullLoggerFactory.Instance)
-    {        
-    }
+    public FormDataMapperOptions()
+        : this(NullLoggerFactory.Instance) { }
 
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]

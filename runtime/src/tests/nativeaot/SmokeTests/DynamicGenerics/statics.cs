@@ -3,13 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
-using System.Text;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Text;
 using CoreFXTestLibrary;
 using TypeOfRepo;
-
 
 public class StaticsTests
 {
@@ -17,22 +16,38 @@ public class StaticsTests
     public struct MyCustomType
     {
         string _field;
-        public MyCustomType(String s) { _field = s; }
-        public override string ToString() { return _field; }
+
+        public MyCustomType(String s)
+        {
+            _field = s;
+        }
+
+        public override string ToString()
+        {
+            return _field;
+        }
     }
 #else
     public class MyCustomType
     {
         string _field;
-        public MyCustomType(String s) { _field = s; }
-        public override string ToString() { return _field; }
+
+        public MyCustomType(String s)
+        {
+            _field = s;
+        }
+
+        public override string ToString()
+        {
+            return _field;
+        }
     }
 #endif
 
     public class GenericTypeWithNonGcStaticField<T>
     {
         protected static int _myField;
-        
+
         public GenericTypeWithNonGcStaticField(int i)
         {
             _myField = i;
@@ -42,8 +57,8 @@ public class StaticsTests
         {
             return _myField.ToString();
         }
-    } 
- 
+    }
+
     public class GenericTypeWithMultipleNonGcStaticFields<T>
     {
         static int _myInt1;
@@ -67,7 +82,8 @@ public class StaticsTests
     {
         protected static int _mySpecializedField;
 
-        public DerivedGenericTypeWithNonGcStaticField(int myField, int mySpecializedField) : base(myField)
+        public DerivedGenericTypeWithNonGcStaticField(int myField, int mySpecializedField)
+            : base(myField)
         {
             _myField = myField;
             _mySpecializedField = mySpecializedField;
@@ -83,7 +99,8 @@ public class StaticsTests
     {
         static int _mySuperDerivedField;
 
-        public SuperDerivedGeneric(int myField, int mySpecializedField, int superDerivedField) : base(myField, mySpecializedField)
+        public SuperDerivedGeneric(int myField, int mySpecializedField, int superDerivedField)
+            : base(myField, mySpecializedField)
         {
             _mySuperDerivedField = superDerivedField;
         }
@@ -157,10 +174,7 @@ public class StaticsTests
 
         public T Field
         {
-            get
-            {
-                return _myField;
-            }
+            get { return _myField; }
         }
 
         public override string ToString()
@@ -204,11 +218,21 @@ public class StaticsTests
     {
         // Test that different instantiations of the same type get their own static data
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithStaticFieldOfTypeT.MakeGenericType(typeof(MyCustomType));
-            Type sillyStringInstType = TypeOf.ST_GenericTypeWithStaticFieldOfTypeT.MakeGenericType(typeof(SillyString));
+            Type stringInstType = TypeOf.ST_GenericTypeWithStaticFieldOfTypeT.MakeGenericType(
+                typeof(MyCustomType)
+            );
+            Type sillyStringInstType = TypeOf.ST_GenericTypeWithStaticFieldOfTypeT.MakeGenericType(
+                typeof(SillyString)
+            );
 
-            var sillyStringInst = Activator.CreateInstance(sillyStringInstType, new object[] { new SillyString() });
-            var stringInst = Activator.CreateInstance(stringInstType, new object[] { new MyCustomType("Not a silly string") });
+            var sillyStringInst = Activator.CreateInstance(
+                sillyStringInstType,
+                new object[] { new SillyString() }
+            );
+            var stringInst = Activator.CreateInstance(
+                stringInstType,
+                new object[] { new MyCustomType("Not a silly string") }
+            );
 
             string result = sillyStringInst.ToString() + " " + stringInst.ToString();
 
@@ -217,41 +241,69 @@ public class StaticsTests
 
         // Test that different instantiations of the same type get their own static data
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(TypeOf.CommonType1);
-            Type objectInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(TypeOf.CommonType2);
-            Type boolInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(typeof(StaticsTests));
+            Type stringInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(
+                TypeOf.CommonType1
+            );
+            Type objectInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(
+                TypeOf.CommonType2
+            );
+            Type boolInstType = TypeOf.ST_GenericTypeWithNonGcStaticField.MakeGenericType(
+                typeof(StaticsTests)
+            );
 
             var objectInst = Activator.CreateInstance(objectInstType, new object[] { 123 });
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { 666 });
             var boolInst = Activator.CreateInstance(boolInstType, new object[] { 999 });
 
-            string result = objectInst.ToString() + " " + stringInst.ToString() + " " + boolInst.ToString();
+            string result =
+                objectInst.ToString() + " " + stringInst.ToString() + " " + boolInst.ToString();
 
             Assert.AreEqual("123 666 999", result);
         }
 
         // Validate that multiple static non-GC fields on the generic type work correctly over several instantiations
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(TypeOf.CommonType1);
-            Type objectInstType = TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(TypeOf.CommonType2);
-            Type boolInstType = TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(typeof(StaticsTests));
+            Type stringInstType =
+                TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(
+                    TypeOf.CommonType1
+                );
+            Type objectInstType =
+                TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(
+                    TypeOf.CommonType2
+                );
+            Type boolInstType = TypeOf.ST_GenericTypeWithMultipleNonGcStaticFields.MakeGenericType(
+                typeof(StaticsTests)
+            );
 
-            var objectInst = Activator.CreateInstance(objectInstType, new object[] { 123, true, 321 });
-            var stringInst = Activator.CreateInstance(stringInstType, new object[] { 666, false, 777 });
+            var objectInst = Activator.CreateInstance(
+                objectInstType,
+                new object[] { 123, true, 321 }
+            );
+            var stringInst = Activator.CreateInstance(
+                stringInstType,
+                new object[] { 666, false, 777 }
+            );
             var boolInst = Activator.CreateInstance(boolInstType, new object[] { 999, true, 111 });
 
-            string result = objectInst.ToString() + " " + stringInst.ToString() + " " + boolInst.ToString();
+            string result =
+                objectInst.ToString() + " " + stringInst.ToString() + " " + boolInst.ToString();
 
             Assert.AreEqual("123 True 321 666 False 777 999 True 111", result);
         }
 
-        // Validate statics on several layers of a generic type hierarchy 
+        // Validate statics on several layers of a generic type hierarchy
         {
             Type stringInstType = TypeOf.ST_SuperDerivedGeneric.MakeGenericType(TypeOf.CommonType1);
             Type objectInstType = TypeOf.ST_SuperDerivedGeneric.MakeGenericType(TypeOf.CommonType2);
 
-            var objectInst = Activator.CreateInstance(objectInstType, new object[] { 123, 321, 456 });
-            var stringInst = Activator.CreateInstance(stringInstType, new object[] { 666, 999, 111 });
+            var objectInst = Activator.CreateInstance(
+                objectInstType,
+                new object[] { 123, 321, 456 }
+            );
+            var stringInst = Activator.CreateInstance(
+                stringInstType,
+                new object[] { 666, 999, 111 }
+            );
 
             string result = objectInst.ToString() + " " + stringInst.ToString();
 
@@ -259,8 +311,12 @@ public class StaticsTests
         }
 
         {
-            Type objectInstType = TypeOf.ST_GenericTypeWithStaticTimeSpanField.MakeGenericType(TypeOf.CommonType2);
-            Type stringInstType = TypeOf.ST_GenericTypeWithStaticTimeSpanField.MakeGenericType(TypeOf.CommonType1);
+            Type objectInstType = TypeOf.ST_GenericTypeWithStaticTimeSpanField.MakeGenericType(
+                TypeOf.CommonType2
+            );
+            Type stringInstType = TypeOf.ST_GenericTypeWithStaticTimeSpanField.MakeGenericType(
+                TypeOf.CommonType1
+            );
 
             var objectInst = Activator.CreateInstance(objectInstType, new object[] { 123.0 });
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { 456.0 });
@@ -272,30 +328,39 @@ public class StaticsTests
 
         // GC statics tests
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(TypeOf.CommonType1);
-            Type objectInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(TypeOf.CommonType2);
+            Type stringInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(
+                TypeOf.CommonType1
+            );
+            Type objectInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(
+                TypeOf.CommonType2
+            );
 
             var objectInst = Activator.CreateInstance(objectInstType, new object[] { "Hello" });
             var stringInst0 = Activator.CreateInstance(stringInstType, new object[] { "And" });
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { "Bye" });
 
-            string result = objectInst.ToString() + " " + stringInst0.ToString() + " " + stringInst.ToString();
+            string result =
+                objectInst.ToString() + " " + stringInst0.ToString() + " " + stringInst.ToString();
 
             Assert.AreEqual("Hello Bye Bye", result);
         }
 
         // Statics keep things alive
         {
-            Type stringInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(TypeOf.CommonType1);
-            
+            Type stringInstType = TypeOf.ST_GenericTypeWithGcStaticField.MakeGenericType(
+                TypeOf.CommonType1
+            );
+
             var stringInst = Activator.CreateInstance(stringInstType, new object[] { "Bye" });
-            var setMyStringMethodInfo = stringInstType.GetTypeInfo().GetDeclaredMethod("SetMyString");
+            var setMyStringMethodInfo = stringInstType
+                .GetTypeInfo()
+                .GetDeclaredMethod("SetMyString");
             Console.WriteLine("Setting GC static");
 
             {
                 string newString = "New Value Of The String!";
                 string my = newString.Replace("!", "");
-                setMyStringMethodInfo.Invoke(stringInst, new object[] {my});
+                setMyStringMethodInfo.Invoke(stringInst, new object[] { my });
             }
 
             Console.WriteLine("Calling GC.Collect");
@@ -307,8 +372,12 @@ public class StaticsTests
         }
 
         {
-            Type stringInstType = TypeOf.ST_ClassWithStaticConstructor.MakeGenericType(TypeOf.CommonType1);
-            Type objectInstType = TypeOf.ST_ClassWithStaticConstructor.MakeGenericType(TypeOf.CommonType2);
+            Type stringInstType = TypeOf.ST_ClassWithStaticConstructor.MakeGenericType(
+                TypeOf.CommonType1
+            );
+            Type objectInstType = TypeOf.ST_ClassWithStaticConstructor.MakeGenericType(
+                TypeOf.CommonType2
+            );
 
             var objectInst = Activator.CreateInstance(objectInstType);
             var stringInst = Activator.CreateInstance(stringInstType);
@@ -318,9 +387,15 @@ public class StaticsTests
         }
 
         {
-            Type stringInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(TypeOf.CommonType1);
-            Type objectInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(TypeOf.CommonType2);
-            Type sbInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(typeof(StringBuilder));
+            Type stringInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(
+                TypeOf.CommonType1
+            );
+            Type objectInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(
+                TypeOf.CommonType2
+            );
+            Type sbInstType = TypeOf.ST_AnotherClassWithStaticConstructor.MakeGenericType(
+                typeof(StringBuilder)
+            );
 
             var objectInst = Activator.CreateInstance(objectInstType);
             var stringInst = Activator.CreateInstance(stringInstType);
@@ -328,8 +403,10 @@ public class StaticsTests
 
             // Make sure the class constructor is only run once - the two results should be the same (the static int
             // should only get incremented once per instantiation).
-            string result1 = objectInst.ToString() + " " + stringInst.ToString() + " " + sbInst.ToString();
-            string result2 = objectInst.ToString() + " " + stringInst.ToString() + " " + sbInst.ToString();
+            string result1 =
+                objectInst.ToString() + " " + stringInst.ToString() + " " + sbInst.ToString();
+            string result2 =
+                objectInst.ToString() + " " + stringInst.ToString() + " " + sbInst.ToString();
             Assert.AreEqual(result1, result2);
             Assert.AreEqual("CommonType2 1 CommonType1 1 System.Text.StringBuilder 1", result1);
         }

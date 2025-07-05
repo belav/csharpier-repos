@@ -1,5 +1,4 @@
-﻿
-#if !HAVE_TRACE_WRITER
+﻿#if !HAVE_TRACE_WRITER
 using Newtonsoft.Json.Serialization;
 
 namespace Newtonsoft.Json
@@ -32,7 +31,7 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Output all debugging and tracing messages.
         /// </summary>
-        Verbose = 4
+        Verbose = 4,
     }
 }
 

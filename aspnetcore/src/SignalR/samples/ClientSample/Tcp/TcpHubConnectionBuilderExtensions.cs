@@ -35,7 +35,10 @@ public static class TcpHubConnectionBuilderExtensions
         return builder.WithEndPoint(endPoint);
     }
 
-    public static IHubConnectionBuilder WithEndPoint(this IHubConnectionBuilder builder, EndPoint endPoint)
+    public static IHubConnectionBuilder WithEndPoint(
+        this IHubConnectionBuilder builder,
+        EndPoint endPoint
+    )
     {
         builder.Services.AddSingleton<IConnectionFactory, TcpConnectionFactory>();
         builder.Services.AddSingleton(endPoint);
@@ -45,7 +48,10 @@ public static class TcpHubConnectionBuilderExtensions
 
     private class TcpConnectionFactory : IConnectionFactory
     {
-        public ValueTask<ConnectionContext> ConnectAsync(EndPoint endPoint, CancellationToken cancellationToken = default)
+        public ValueTask<ConnectionContext> ConnectAsync(
+            EndPoint endPoint,
+            CancellationToken cancellationToken = default
+        )
         {
             return new TcpConnection(endPoint).StartAsync();
         }

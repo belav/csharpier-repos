@@ -21,20 +21,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 {
     [ExportStatelessXamlLspService(typeof(FormatDocumentOnTypeHandler)), Shared]
     [Method(Methods.TextDocumentOnTypeFormattingName)]
-    internal class FormatDocumentOnTypeHandler : ILspServiceRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]>
+    internal class FormatDocumentOnTypeHandler
+        : ILspServiceRequestHandler<DocumentOnTypeFormattingParams, TextEdit[]>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FormatDocumentOnTypeHandler()
-        {
-        }
+        public FormatDocumentOnTypeHandler() { }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(DocumentOnTypeFormattingParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(
+            DocumentOnTypeFormattingParams request
+        ) => request.TextDocument;
 
-        public async Task<TextEdit[]> HandleRequestAsync(DocumentOnTypeFormattingParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<TextEdit[]> HandleRequestAsync(
+            DocumentOnTypeFormattingParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var edits = new ArrayBuilder<TextEdit>();
             if (string.IsNullOrEmpty(request.Character))
@@ -46,13 +51,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             var formattingService = document?.Project.Services.GetService<IXamlFormattingService>();
             if (document != null && formattingService != null)
             {
-                var position = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(request.Position), cancellationToken).ConfigureAwait(false);
-                var options = new XamlFormattingOptions { InsertSpaces = request.Options.InsertSpaces, TabSize = request.Options.TabSize, OtherOptions = request.Options.OtherOptions };
-                var textChanges = await formattingService.GetFormattingChangesAsync(document, options, request.Character[0], position, cancellationToken).ConfigureAwait(false);
+                var position = await document
+                    .GetPositionFromLinePositionAsync(
+                        ProtocolConversions.PositionToLinePosition(request.Position),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                var options = new XamlFormattingOptions
+                {
+                    InsertSpaces = request.Options.InsertSpaces,
+                    TabSize = request.Options.TabSize,
+                    OtherOptions = request.Options.OtherOptions,
+                };
+                var textChanges = await formattingService
+                    .GetFormattingChangesAsync(
+                        document,
+                        options,
+                        request.Character[0],
+                        position,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (textChanges != null)
                 {
-                    var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-                    edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text)));
+                    var text = await document
+                        .GetValueTextAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    edits.AddRange(
+                        textChanges.Select(change =>
+                            ProtocolConversions.TextChangeToTextEdit(change, text)
+                        )
+                    );
                 }
             }
 

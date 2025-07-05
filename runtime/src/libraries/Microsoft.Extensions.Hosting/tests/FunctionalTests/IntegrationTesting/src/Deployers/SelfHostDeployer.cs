@@ -17,14 +17,16 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
     /// </summary>
     public class SelfHostDeployer : ApplicationDeployer
     {
-        private const string ApplicationStartedMessage = "Application started. Press Ctrl+C to shut down.";
+        private const string ApplicationStartedMessage =
+            "Application started. Press Ctrl+C to shut down.";
 
         public Process HostProcess { get; private set; }
 
-        public SelfHostDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-            : base(deploymentParameters, loggerFactory)
-        {
-        }
+        public SelfHostDeployer(
+            DeploymentParameters deploymentParameters,
+            ILoggerFactory loggerFactory
+        )
+            : base(deploymentParameters, loggerFactory) { }
 
         public override async Task<DeploymentResult> DeployAsync()
         {
@@ -33,15 +35,19 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 // Start timer
                 StartTimer();
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
-                        && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
+                    && DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86
+                )
                 {
                     // Publish is required to rebuild for the right bitness
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
                 }
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
-                        && DeploymentParameters.ApplicationType == ApplicationType.Standalone)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                    && DeploymentParameters.ApplicationType == ApplicationType.Standalone
+                )
                 {
                     // Publish is required to get the correct files in the output directory
                     DeploymentParameters.PublishApplicationBeforeDeployment = true;
@@ -60,8 +66,11 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 return new DeploymentResult(
                     LoggerFactory,
                     DeploymentParameters,
-                    contentRoot: DeploymentParameters.PublishApplicationBeforeDeployment ? DeploymentParameters.PublishedApplicationRootPath : DeploymentParameters.ApplicationPath,
-                    hostShutdownToken: hostExitToken);
+                    contentRoot: DeploymentParameters.PublishApplicationBeforeDeployment
+                        ? DeploymentParameters.PublishedApplicationRootPath
+                        : DeploymentParameters.ApplicationPath,
+                    hostShutdownToken: hostExitToken
+                );
             }
         }
 
@@ -72,8 +81,10 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 var executableName = string.Empty;
                 var executableArgs = string.Empty;
                 var workingDirectory = string.Empty;
-                var executableExtension = DeploymentParameters.ApplicationType == ApplicationType.Portable ? ".dll"
-                    : (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : "");
+                var executableExtension =
+                    DeploymentParameters.ApplicationType == ApplicationType.Portable
+                        ? ".dll"
+                        : (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".exe" : "");
 
                 if (DeploymentParameters.PublishApplicationBeforeDeployment)
                 {
@@ -84,16 +95,33 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     // Core+Standalone always publishes. This must be Clr+Standalone or Core+Portable.
                     // Run from the pre-built bin/{config}/{tfm} directory.
                     Version version = Environment.Version;
-                    var targetFramework = DeploymentParameters.TargetFramework
-                        ?? (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr ? "net462" : $"net{version.Major}.{version.Minor}");
-                    workingDirectory = Path.Combine(DeploymentParameters.ApplicationPath, "bin", DeploymentParameters.Configuration, targetFramework);
+                    var targetFramework =
+                        DeploymentParameters.TargetFramework
+                        ?? (
+                            DeploymentParameters.RuntimeFlavor == RuntimeFlavor.Clr
+                                ? "net462"
+                                : $"net{version.Major}.{version.Minor}"
+                        );
+                    workingDirectory = Path.Combine(
+                        DeploymentParameters.ApplicationPath,
+                        "bin",
+                        DeploymentParameters.Configuration,
+                        targetFramework
+                    );
                     // CurrentDirectory will point to bin/{config}/{tfm}, but the config and static files aren't copied, point to the app base instead.
-                    DeploymentParameters.EnvironmentVariables["DOTNET_CONTENTROOT"] = DeploymentParameters.ApplicationPath;
+                    DeploymentParameters.EnvironmentVariables["DOTNET_CONTENTROOT"] =
+                        DeploymentParameters.ApplicationPath;
                 }
 
-                var executable = Path.Combine(workingDirectory, DeploymentParameters.ApplicationName + executableExtension);
+                var executable = Path.Combine(
+                    workingDirectory,
+                    DeploymentParameters.ApplicationName + executableExtension
+                );
 
-                if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr && DeploymentParameters.ApplicationType == ApplicationType.Portable)
+                if (
+                    DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                    && DeploymentParameters.ApplicationType == ApplicationType.Portable
+                )
                 {
                     executableName = GetDotNetExeForArchitecture();
                     executableArgs = executable;
@@ -115,10 +143,13 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     RedirectStandardOutput = true,
                     // Trying a work around for https://github.com/aspnet/Hosting/issues/140.
                     RedirectStandardInput = true,
-                    WorkingDirectory = workingDirectory
+                    WorkingDirectory = workingDirectory,
                 };
 
-                AddEnvironmentVariablesToProcess(startInfo, DeploymentParameters.EnvironmentVariables);
+                AddEnvironmentVariablesToProcess(
+                    startInfo,
+                    DeploymentParameters.EnvironmentVariables
+                );
 
                 var started = new TaskCompletionSource<object>();
 
@@ -137,7 +168,11 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     Logger.LogInformation("host process ID {pid} shut down", HostProcess.Id);
 
                     // If TrySetResult was called above, this will just silently fail to set the new state, which is what we want
-                    started.TrySetException(new Exception($"Command exited unexpectedly with exit code: {HostProcess.ExitCode}"));
+                    started.TrySetException(
+                        new Exception(
+                            $"Command exited unexpectedly with exit code: {HostProcess.ExitCode}"
+                        )
+                    );
 
                     TriggerHostShutdown(hostExitTokenSource);
                 };
@@ -148,16 +183,28 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError("Error occurred while starting the process. Exception: {exception}", ex.ToString());
+                    Logger.LogError(
+                        "Error occurred while starting the process. Exception: {exception}",
+                        ex.ToString()
+                    );
                 }
 
                 if (HostProcess.HasExited)
                 {
-                    Logger.LogError("Host process {processName} {pid} exited with code {exitCode} or failed to start.", startInfo.FileName, HostProcess.Id, HostProcess.ExitCode);
+                    Logger.LogError(
+                        "Host process {processName} {pid} exited with code {exitCode} or failed to start.",
+                        startInfo.FileName,
+                        HostProcess.Id,
+                        HostProcess.ExitCode
+                    );
                     throw new Exception("Failed to start host");
                 }
 
-                Logger.LogInformation("Started {fileName}. Process Id : {processId}", startInfo.FileName, HostProcess.Id);
+                Logger.LogInformation(
+                    "Started {fileName}. Process Id : {processId}",
+                    startInfo.FileName,
+                    HostProcess.Id
+                );
 
                 // Host may not write startup messages, in which case assume it started
                 if (DeploymentParameters.StatusMessagesEnabled)

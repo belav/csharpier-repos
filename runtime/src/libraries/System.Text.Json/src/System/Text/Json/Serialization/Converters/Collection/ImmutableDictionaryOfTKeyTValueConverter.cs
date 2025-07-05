@@ -12,7 +12,12 @@ namespace System.Text.Json.Serialization.Converters
         where TDictionary : IReadOnlyDictionary<TKey, TValue>
         where TKey : notnull
     {
-        protected sealed override void Add(TKey key, in TValue value, JsonSerializerOptions options, ref ReadStack state)
+        protected sealed override void Add(
+            TKey key,
+            in TValue value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             ((Dictionary<TKey, TValue>)state.Current.ReturnValue!)[key] = value;
         }
@@ -20,17 +25,29 @@ namespace System.Text.Json.Serialization.Converters
         internal sealed override bool CanHaveMetadata => false;
 
         internal override bool SupportsCreateObjectDelegate => false;
-        protected sealed override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state)
+
+        protected sealed override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             state.Current.ReturnValue = new Dictionary<TKey, TValue>();
         }
 
-        protected sealed override void ConvertCollection(ref ReadStack state, JsonSerializerOptions options)
+        protected sealed override void ConvertCollection(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
-            Func<IEnumerable<KeyValuePair<TKey, TValue>>, TDictionary>? creator =
-                (Func<IEnumerable<KeyValuePair<TKey, TValue>>, TDictionary>?)state.Current.JsonTypeInfo.CreateObjectWithArgs;
+            Func<IEnumerable<KeyValuePair<TKey, TValue>>, TDictionary>? creator = (Func<
+                IEnumerable<KeyValuePair<TKey, TValue>>,
+                TDictionary
+            >?)
+                state.Current.JsonTypeInfo.CreateObjectWithArgs;
             Debug.Assert(creator != null);
-            state.Current.ReturnValue = creator((Dictionary<TKey, TValue>)state.Current.ReturnValue!);
+            state.Current.ReturnValue = creator(
+                (Dictionary<TKey, TValue>)state.Current.ReturnValue!
+            );
         }
     }
 }

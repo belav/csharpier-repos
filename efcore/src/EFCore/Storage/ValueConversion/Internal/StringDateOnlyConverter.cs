@@ -31,10 +31,9 @@ public class StringDateOnlyConverter<TModel, TProvider> : ValueConverter<TModel,
     public StringDateOnlyConverter(
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-        ConverterMappingHints? mappingHints = null)
-        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-    {
-    }
+        ConverterMappingHints? mappingHints = null
+    )
+        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -42,8 +41,8 @@ public class StringDateOnlyConverter<TModel, TProvider> : ValueConverter<TModel,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static new Expression<Func<DateOnly, string>> ToString()
-        => v => v.ToString(@"yyyy\-MM\-dd");
+    protected static new Expression<Func<DateOnly, string>> ToString() =>
+        v => v.ToString(@"yyyy\-MM\-dd");
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,6 +50,6 @@ public class StringDateOnlyConverter<TModel, TProvider> : ValueConverter<TModel,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected static Expression<Func<string, DateOnly>> ToDateOnly()
-        => v => DateOnly.Parse(v, CultureInfo.InvariantCulture, DateTimeStyles.None);
+    protected static Expression<Func<string, DateOnly>> ToDateOnly() =>
+        v => DateOnly.Parse(v, CultureInfo.InvariantCulture, DateTimeStyles.None);
 }

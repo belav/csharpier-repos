@@ -18,7 +18,12 @@ public class OutputFormatterWriteContext : OutputFormatterCanWriteContext
     /// <param name="writerFactory">The delegate used to create a <see cref="TextWriter"/> for writing the response.</param>
     /// <param name="objectType">The <see cref="Type"/> of the object to write to the response.</param>
     /// <param name="object">The object to write to the response.</param>
-    public OutputFormatterWriteContext(HttpContext httpContext, Func<Stream, Encoding, TextWriter> writerFactory, Type? objectType, object? @object)
+    public OutputFormatterWriteContext(
+        HttpContext httpContext,
+        Func<Stream, Encoding, TextWriter> writerFactory,
+        Type? objectType,
+        object? @object
+    )
         : base(httpContext)
     {
         ArgumentNullException.ThrowIfNull(writerFactory);

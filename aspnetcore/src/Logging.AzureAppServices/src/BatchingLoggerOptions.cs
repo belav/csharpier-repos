@@ -24,7 +24,10 @@ public class BatchingLoggerOptions
         {
             if (value <= TimeSpan.Zero)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(FlushPeriod)} must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(FlushPeriod)} must be positive."
+                );
             }
             _flushPeriod = value;
         }
@@ -42,7 +45,10 @@ public class BatchingLoggerOptions
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(BackgroundQueueSize)} must be non-negative.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(BackgroundQueueSize)} must be non-negative."
+                );
             }
             _backgroundQueueSize = value;
         }
@@ -59,7 +65,10 @@ public class BatchingLoggerOptions
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(BatchSize)} must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(BatchSize)} must be positive."
+                );
             }
             _batchSize = value;
         }

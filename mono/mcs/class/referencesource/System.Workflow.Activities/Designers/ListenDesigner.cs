@@ -1,33 +1,33 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     #region Class ListenToolboxItem
     [Serializable]
     internal sealed class ListenToolboxItem : ActivityToolboxItem
     {
         public ListenToolboxItem(Type type)
-            : base(type)
-        {
-        }
+            : base(type) { }
+
         private ListenToolboxItem(SerializationInfo info, StreamingContext context)
         {
             Deserialize(info, context);
         }
+
         protected override IComponent[] CreateComponentsCore(IDesignerHost designerHost)
         {
             CompositeActivity listenActivity = new ListenActivity();
@@ -43,7 +43,10 @@ namespace System.Workflow.Activities
     internal sealed class ListenDesigner : ParallelActivityDesigner
     {
         #region Properties and Methods
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {
@@ -65,7 +68,8 @@ namespace System.Workflow.Activities
             if (!Expanded || ContainedDesigners.Count == 0 || this != ActiveView.AssociatedDesigner)
                 return;
 
-            CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+            CompositeDesignerTheme compositeDesignerTheme =
+                e.DesignerTheme as CompositeDesignerTheme;
             Debug.Assert(compositeDesignerTheme != null);
             if (compositeDesignerTheme == null)
                 return;
@@ -75,15 +79,22 @@ namespace System.Workflow.Activities
             Rectangle imageRectangle = ImageRectangle;
 
             Rectangle roundRectangle = Rectangle.Empty;
-            roundRectangle.Width = compositeDesignerTheme.ConnectorSize.Height - 2 * e.AmbientTheme.Margin.Height - 1;
+            roundRectangle.Width =
+                compositeDesignerTheme.ConnectorSize.Height - 2 * e.AmbientTheme.Margin.Height - 1;
             roundRectangle.Height = roundRectangle.Width;
             roundRectangle.X = bounds.Left + bounds.Width / 2 - roundRectangle.Width / 2;
-            roundRectangle.Y = bounds.Top + TitleHeight + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - roundRectangle.Height) / 2;
+            roundRectangle.Y =
+                bounds.Top
+                + TitleHeight
+                + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - roundRectangle.Height) / 2;
 
             e.Graphics.FillEllipse(compositeDesignerTheme.ForegroundBrush, roundRectangle);
             e.Graphics.DrawEllipse(compositeDesignerTheme.ForegroundPen, roundRectangle);
 
-            roundRectangle.Y = bounds.Bottom - compositeDesignerTheme.ConnectorSize.Height * 3 / 2 + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - roundRectangle.Height) / 2;
+            roundRectangle.Y =
+                bounds.Bottom
+                - compositeDesignerTheme.ConnectorSize.Height * 3 / 2
+                + (compositeDesignerTheme.ConnectorSize.Height * 3 / 2 - roundRectangle.Height) / 2;
             e.Graphics.FillEllipse(compositeDesignerTheme.ForegroundBrush, roundRectangle);
             e.Graphics.DrawEllipse(compositeDesignerTheme.ForegroundPen, roundRectangle);
         }

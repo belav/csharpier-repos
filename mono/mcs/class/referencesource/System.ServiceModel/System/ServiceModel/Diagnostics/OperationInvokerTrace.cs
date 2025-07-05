@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
     using System.Reflection;
+    using System.ServiceModel.Channels;
 
 #if USE_REFEMIT
     public static class OperationInvokerTrace
@@ -33,11 +33,17 @@ namespace System.ServiceModel.Diagnostics
             get
             {
                 if (traceInstructionMethod == null)
-                    traceInstructionMethod = typeof(OperationInvokerTrace).GetMethod("TraceInstruction", BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                    traceInstructionMethod = typeof(OperationInvokerTrace).GetMethod(
+                        "TraceInstruction",
+                        BindingFlags.Static
+                            | BindingFlags.Instance
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Public
+                    );
                 return traceInstructionMethod;
             }
         }
-            
+
 #if USE_REFEMIT
         public static void TraceInstruction(string instruction)
 #else
@@ -52,10 +58,11 @@ namespace System.ServiceModel.Diagnostics
             get
             {
                 if (codeGenSource == null)
-                    codeGenSource = new TraceSource("System.ServiceModel.OperationInvoker.CodeGeneration");
+                    codeGenSource = new TraceSource(
+                        "System.ServiceModel.OperationInvoker.CodeGeneration"
+                    );
                 return codeGenSource;
             }
         }
     }
 }
-

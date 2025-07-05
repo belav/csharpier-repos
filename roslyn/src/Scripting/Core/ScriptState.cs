@@ -5,12 +5,12 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.Scripting
@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// Caught exception originating from the script top-level code.
         /// </summary>
         /// <remarks>
-        /// Exceptions are only caught and stored here if the API returning the <see cref="ScriptState"/> is instructed to do so. 
+        /// Exceptions are only caught and stored here if the API returning the <see cref="ScriptState"/> is instructed to do so.
         /// By default they are propagated to the caller of the API.
         /// </remarks>
         public Exception Exception { get; }
@@ -39,7 +39,11 @@ namespace Microsoft.CodeAnalysis.Scripting
         private ImmutableArray<ScriptVariable> _lazyVariables;
         private IReadOnlyDictionary<string, int> _lazyVariableMap;
 
-        internal ScriptState(ScriptExecutionState executionState, Script script, Exception exceptionOpt)
+        internal ScriptState(
+            ScriptExecutionState executionState,
+            Script script,
+            Exception exceptionOpt
+        )
         {
             Debug.Assert(executionState != null);
             Debug.Assert(script != null);
@@ -64,7 +68,10 @@ namespace Microsoft.CodeAnalysis.Scripting
             {
                 if (_lazyVariables == null)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyVariables, CreateVariables());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyVariables,
+                        CreateVariables()
+                    );
                 }
 
                 return _lazyVariables;
@@ -72,8 +79,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         }
 
         /// <summary>
-        /// Returns a script variable of the specified name. 
-        /// </summary> 
+        /// Returns a script variable of the specified name.
+        /// </summary>
         /// <remarks>
         /// If multiple script variables are defined in the script (in distinct submissions) returns the last one.
         /// Name lookup is case sensitive in C# scripts and case insensitive in VB scripts.
@@ -106,7 +113,11 @@ namespace Microsoft.CodeAnalysis.Scripting
                 foreach (var field in state.GetType().GetTypeInfo().DeclaredFields)
                 {
                     // TODO: synthesized fields of submissions shouldn't be public
-                    if (field.IsPublic && field.Name.Length > 0 && (char.IsLetterOrDigit(field.Name[0]) || field.Name[0] == '_'))
+                    if (
+                        field.IsPublic
+                        && field.Name.Length > 0
+                        && (char.IsLetterOrDigit(field.Name[0]) || field.Name[0] == '_')
+                    )
                     {
                         result.Add(new ScriptVariable(state, field));
                     }
@@ -139,8 +150,11 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <param name="options">Options.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="ScriptState"/> that represents the state after running <paramref name="code"/>, including all declared variables and return value.</returns>
-        public Task<ScriptState<object>> ContinueWithAsync(string code, ScriptOptions options, CancellationToken cancellationToken)
-            => ContinueWithAsync<object>(code, options, null, cancellationToken);
+        public Task<ScriptState<object>> ContinueWithAsync(
+            string code,
+            ScriptOptions options,
+            CancellationToken cancellationToken
+        ) => ContinueWithAsync<object>(code, options, null, cancellationToken);
 
         /// <summary>
         /// Continues script execution from the state represented by this instance by running the specified code snippet.
@@ -153,8 +167,15 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="ScriptState"/> that represents the state after running <paramref name="code"/>, including all declared variables, return value and caught exception (if applicable).</returns>
-        public Task<ScriptState<object>> ContinueWithAsync(string code, ScriptOptions options = null, Func<Exception, bool> catchException = null, CancellationToken cancellationToken = default(CancellationToken))
-            => Script.ContinueWith<object>(code, options).RunFromAsync(this, catchException, cancellationToken);
+        public Task<ScriptState<object>> ContinueWithAsync(
+            string code,
+            ScriptOptions options = null,
+            Func<Exception, bool> catchException = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) =>
+            Script
+                .ContinueWith<object>(code, options)
+                .RunFromAsync(this, catchException, cancellationToken);
 
         /// <summary>
         /// Continues script execution from the state represented by this instance by running the specified code snippet.
@@ -163,8 +184,11 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// <param name="options">Options.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="ScriptState"/> that represents the state after running <paramref name="code"/>, including all declared variables and return value.</returns>
-        public Task<ScriptState<TResult>> ContinueWithAsync<TResult>(string code, ScriptOptions options, CancellationToken cancellationToken)
-            => ContinueWithAsync<TResult>(code, options, null, cancellationToken);
+        public Task<ScriptState<TResult>> ContinueWithAsync<TResult>(
+            string code,
+            ScriptOptions options,
+            CancellationToken cancellationToken
+        ) => ContinueWithAsync<TResult>(code, options, null, cancellationToken);
 
         /// <summary>
         /// Continues script execution from the state represented by this instance by running the specified code snippet.
@@ -177,8 +201,15 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>A <see cref="ScriptState"/> that represents the state after running <paramref name="code"/>, including all declared variables, return value and caught exception (if applicable).</returns>
-        public Task<ScriptState<TResult>> ContinueWithAsync<TResult>(string code, ScriptOptions options = null, Func<Exception, bool> catchException = null, CancellationToken cancellationToken = default(CancellationToken))
-            => Script.ContinueWith<TResult>(code, options).RunFromAsync(this, catchException, cancellationToken);
+        public Task<ScriptState<TResult>> ContinueWithAsync<TResult>(
+            string code,
+            ScriptOptions options = null,
+            Func<Exception, bool> catchException = null,
+            CancellationToken cancellationToken = default(CancellationToken)
+        ) =>
+            Script
+                .ContinueWith<TResult>(code, options)
+                .RunFromAsync(this, catchException, cancellationToken);
 
         // How do we resolve overloads? We should use the language semantics.
         // https://github.com/dotnet/roslyn/issues/3720
@@ -218,7 +249,10 @@ namespace Microsoft.CodeAnalysis.Scripting
 
         private MethodInfo FindMethod(Type type, string name, int argCount)
         {
-            return type.GetMethod(name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            return type.GetMethod(
+                name,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
         }
 
         /// <summary>
@@ -226,7 +260,10 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// </summary>
         public TDelegate CreateDelegate<TDelegate>(string name)
         {
-            var delegateInvokeMethod = typeof(TDelegate).GetMethod("Invoke", BindingFlags.Instance | BindingFlags.Public);
+            var delegateInvokeMethod = typeof(TDelegate).GetMethod(
+                "Invoke",
+                BindingFlags.Instance | BindingFlags.Public
+            );
 
             for (int i = _executionState.Count - 1; i >= 0; i--)
             {
@@ -245,11 +282,19 @@ namespace Microsoft.CodeAnalysis.Scripting
             return default(TDelegate);
         }
 
-        private MethodInfo FindMatchingMethod(Type instanceType, string name, MethodInfo delegateInvokeMethod)
+        private MethodInfo FindMatchingMethod(
+            Type instanceType,
+            string name,
+            MethodInfo delegateInvokeMethod
+        )
         {
             var dprms = delegateInvokeMethod.GetParameters();
 
-            foreach (var mi in instanceType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+            foreach (
+                var mi in instanceType.GetMethods(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                )
+            )
             {
                 if (mi.Name == name)
                 {
@@ -270,9 +315,15 @@ namespace Microsoft.CodeAnalysis.Scripting
     public sealed class ScriptState<T> : ScriptState
     {
         public new T ReturnValue { get; }
+
         internal override object GetReturnValue() => ReturnValue;
 
-        internal ScriptState(ScriptExecutionState executionState, Script script, T value, Exception exceptionOpt)
+        internal ScriptState(
+            ScriptExecutionState executionState,
+            Script script,
+            T value,
+            Exception exceptionOpt
+        )
             : base(executionState, script, exceptionOpt)
         {
             ReturnValue = value;

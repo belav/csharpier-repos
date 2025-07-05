@@ -1,6 +1,5 @@
 <Project>
   <Import Project="$([MSBuild]::GetPathOfFileAbove(Directory.Build.props, $(MSBuildThisFileDirectory)..))" />
-
   <PropertyGroup>
     <TestDir>$(InstallerProjectRoot)tests\</TestDir>
     <TestAssetsDir>$(TestDir)Assets\</TestAssetsDir>
@@ -19,5 +18,4 @@
     <UseVSTestRunner>true</UseVSTestRunner>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
 </Project>

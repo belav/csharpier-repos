@@ -4,13 +4,13 @@
 // The test was deleting the hardware intrinsic leaving unconsumed GT_OBJ on top of the stack
 // that was leading to an assert failure.
 
+using System;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using System;
 using Xunit;
 
 public class Runtime_39403
-{ 
+{
     [Fact]
     public static void TestEntryPoint()
     {
@@ -24,4 +24,3 @@ public class Runtime_39403
         }
     }
 }
-

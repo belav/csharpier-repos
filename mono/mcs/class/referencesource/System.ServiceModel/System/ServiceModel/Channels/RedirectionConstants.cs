@@ -35,7 +35,6 @@ namespace System.ServiceModel.Channels
             public const string Resource = "Resource";
             public const string UseIntermediary = "UseIntermediary";
             public const string XmlName = "type";
-
         }
     }
 }

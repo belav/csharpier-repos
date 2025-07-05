@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new IndexOutOfRangeException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INDEXOUTOFRANGE, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INDEXOUTOFRANGE,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "out of range";
             var exception = new IndexOutOfRangeException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INDEXOUTOFRANGE, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INDEXOUTOFRANGE,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "out of range";
             var innerException = new Exception("Inner exception");
             var exception = new IndexOutOfRangeException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INDEXOUTOFRANGE, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INDEXOUTOFRANGE,
+                innerException: innerException,
+                message: message
+            );
         }
     }
 }
