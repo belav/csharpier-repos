@@ -50,7 +50,7 @@ namespace Algorithms
 
             Parallel.For(
                 0,
-                (int)(((ymax - ymin) / step) +  .5),
+                (int)(((ymax - ymin) / step) + .5),
                 (yp) =>
                 {
                     if (Abort)
