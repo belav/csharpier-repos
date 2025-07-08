@@ -7,15 +7,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Matchers;
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal static class MatcherFactory
@@ -38,7 +35,10 @@ namespace Moq
     */
     static class MatcherFactory
     {
-        public static Pair<IMatcher[], Expression[]> CreateMatchers(IReadOnlyList<Expression> arguments, ParameterInfo[] parameters)
+        public static Pair<IMatcher[], Expression[]> CreateMatchers(
+            IReadOnlyList<Expression> arguments,
+            ParameterInfo[] parameters
+        )
         {
             Debug.Assert(arguments != null);
             Debug.Assert(parameters != null);
@@ -49,16 +49,25 @@ namespace Moq
             var argumentMatchers = new IMatcher[n];
             for (int i = 0; i < n; ++i)
             {
-                (argumentMatchers[i], evaluatedArguments[i]) = MatcherFactory.CreateMatcher(arguments[i], parameters[i]);
+                (argumentMatchers[i], evaluatedArguments[i]) = MatcherFactory.CreateMatcher(
+                    arguments[i],
+                    parameters[i]
+                );
             }
             return new Pair<IMatcher[], Expression[]>(argumentMatchers, evaluatedArguments);
         }
 
-        public static Pair<IMatcher, Expression> CreateMatcher(Expression argument, ParameterInfo parameter)
+        public static Pair<IMatcher, Expression> CreateMatcher(
+            Expression argument,
+            ParameterInfo parameter
+        )
         {
             if (parameter.ParameterType.IsByRef)
             {
-                if ((parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out)) == ParameterAttributes.Out)
+                if (
+                    (parameter.Attributes & (ParameterAttributes.In | ParameterAttributes.Out))
+                    == ParameterAttributes.Out
+                )
                 {
                     // `out` parameter
                     return new Pair<IMatcher, Expression>(AnyMatcher.Instance, argument);
@@ -76,10 +85,14 @@ namespace Moq
                             var memberDeclaringType = member.DeclaringType;
                             if (memberDeclaringType.IsGenericType)
                             {
-                                var memberDeclaringTypeDefinition = memberDeclaringType.GetGenericTypeDefinition();
+                                var memberDeclaringTypeDefinition =
+                                    memberDeclaringType.GetGenericTypeDefinition();
                                 if (memberDeclaringTypeDefinition == typeof(It.Ref<>))
                                 {
-                                    return new Pair<IMatcher, Expression>(AnyMatcher.Instance, argument);
+                                    return new Pair<IMatcher, Expression>(
+                                        AnyMatcher.Instance,
+                                        argument
+                                    );
                                 }
                             }
                         }
@@ -87,13 +100,19 @@ namespace Moq
 
                     if (argument.PartialEval() is ConstantExpression constant)
                     {
-                        return new Pair<IMatcher, Expression>(new RefMatcher(constant.Value), constant);
+                        return new Pair<IMatcher, Expression>(
+                            new RefMatcher(constant.Value),
+                            constant
+                        );
                     }
 
                     throw new NotSupportedException(Resources.RefExpressionMustBeConstantValue);
                 }
             }
-            else if (parameter.IsDefined(typeof(ParamArrayAttribute), true) && argument.NodeType == ExpressionType.NewArrayInit)
+            else if (
+                parameter.IsDefined(typeof(ParamArrayAttribute), true)
+                && argument.NodeType == ExpressionType.NewArrayInit
+            )
             {
                 var newArrayExpression = (NewArrayExpression)argument;
 
@@ -106,10 +125,15 @@ namespace Moq
 
                 for (int i = 0; i < n; ++i)
                 {
-                    (matchers[i], initializers[i]) = MatcherFactory.CreateMatcher(newArrayExpression.Expressions[i]);
+                    (matchers[i], initializers[i]) = MatcherFactory.CreateMatcher(
+                        newArrayExpression.Expressions[i]
+                    );
                     initializers[i] = initializers[i].ConvertIfNeeded(elementType);
                 }
-                return new Pair<IMatcher, Expression>(new ParamArrayMatcher(matchers), Expression.NewArrayInit(elementType, initializers));
+                return new Pair<IMatcher, Expression>(
+                    new ParamArrayMatcher(matchers),
+                    Expression.NewArrayInit(elementType, initializers)
+                );
             }
             else if (argument.NodeType == ExpressionType.Convert)
             {
@@ -138,7 +162,9 @@ namespace Moq
                                     Resources.ArgumentMatcherWillNeverMatch,
                                     convertExpression.Operand.ToStringFixed(),
                                     convertExpression.Operand.Type.GetFormattedName(),
-                                    parameter.ParameterType.GetFormattedName()));
+                                    parameter.ParameterType.GetFormattedName()
+                                )
+                            );
                         }
                     }
                 }
@@ -149,13 +175,13 @@ namespace Moq
 
         public static Pair<IMatcher, Expression> CreateMatcher(Expression expression)
         {
-            // Type inference on the call might 
-            // do automatic conversion to the desired 
-            // method argument type, and a Convert expression type 
+            // Type inference on the call might
+            // do automatic conversion to the desired
+            // method argument type, and a Convert expression type
             // might be the topmost instead.
             // i.e.: It.IsInRange(0, 100, Range.Inclusive)
-            // the values are ints, but if the method to call 
-            // expects, say, a double, a Convert node will be on 
+            // the values are ints, but if the method to call
+            // expects, say, a double, a Convert node will be on
             // the expression.
             //
             // Another case is VB.NET explicitly upcasting generic type parameters to the type they're constrained to,
@@ -191,7 +217,10 @@ namespace Moq
                 var method = call.Method;
                 if (!method.IsGetAccessor())
                 {
-                    return new Pair<IMatcher, Expression>(new LazyEvalMatcher(originalExpression), originalExpression);
+                    return new Pair<IMatcher, Expression>(
+                        new LazyEvalMatcher(originalExpression),
+                        originalExpression
+                    );
                 }
             }
             else if (expression is MemberExpression || expression is IndexExpression)
@@ -206,16 +235,27 @@ namespace Moq
             var reduced = originalExpression.PartialEval();
             if (reduced.NodeType == ExpressionType.Constant)
             {
-                return new Pair<IMatcher, Expression>(new ConstantMatcher(((ConstantExpression)reduced).Value), reduced);
+                return new Pair<IMatcher, Expression>(
+                    new ConstantMatcher(((ConstantExpression)reduced).Value),
+                    reduced
+                );
             }
 
             if (reduced.NodeType == ExpressionType.Quote)
             {
-                return new Pair<IMatcher, Expression>(new ExpressionMatcher(((UnaryExpression)expression).Operand), reduced);
+                return new Pair<IMatcher, Expression>(
+                    new ExpressionMatcher(((UnaryExpression)expression).Operand),
+                    reduced
+                );
             }
 
             throw new NotSupportedException(
-                string.Format(CultureInfo.CurrentCulture, Resources.UnsupportedExpression, originalExpression));
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.UnsupportedExpression,
+                    originalExpression
+                )
+            );
         }
     }
 }

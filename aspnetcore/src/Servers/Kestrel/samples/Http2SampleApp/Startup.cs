@@ -11,9 +11,7 @@ namespace Http2SampleApp;
 
 public class Startup
 {
-    public void ConfigureServices(IServiceCollection services)
-    {
-    }
+    public void ConfigureServices(IServiceCollection services) { }
 
     public void Configure(IApplicationBuilder app)
     {

@@ -80,7 +80,10 @@ public class LinkGenerationDecisionTreeTest
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(values: null, ambientValues: new { controller = "Store", action = "Buy" });
+        var context = CreateContext(
+            values: null,
+            ambientValues: new { controller = "Store", action = "Buy" }
+        );
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues);
@@ -104,7 +107,8 @@ public class LinkGenerationDecisionTreeTest
 
         var context = CreateContext(
             values: new { action = "Buy" },
-            ambientValues: new { controller = "Store", action = "Cart" });
+            ambientValues: new { controller = "Store", action = "Cart" }
+        );
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues);
@@ -128,7 +132,8 @@ public class LinkGenerationDecisionTreeTest
 
         var context = CreateContext(
             values: new { controller = "Store" },
-            ambientValues: new { controller = "Store", action = "Buy" });
+            ambientValues: new { controller = "Store", action = "Buy" }
+        );
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues);
@@ -172,7 +177,8 @@ public class LinkGenerationDecisionTreeTest
 
         var context = CreateContext(
             values: new { controller = "Store" },
-            ambientValues: new { controller = "Store", action = "Cart" });
+            ambientValues: new { controller = "Store", action = "Cart" }
+        );
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues);
@@ -197,7 +203,8 @@ public class LinkGenerationDecisionTreeTest
 
         var context = CreateContext(
             values: new { controller = "Store" },
-            ambientValues: new { controller = "Store", action = "Buy" });
+            ambientValues: new { controller = "Store", action = "Buy" }
+        );
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues);
@@ -223,10 +230,13 @@ public class LinkGenerationDecisionTreeTest
 
         var context = CreateContext(
             values: new { controller = "Store" },
-            ambientValues: new { controller = "Store", action = "Buy" });
+            ambientValues: new { controller = "Store", action = "Buy" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Equal(entries, matches);
@@ -247,10 +257,19 @@ public class LinkGenerationDecisionTreeTest
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Store", action = "Buy", slug = "1234" });
+        var context = CreateContext(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                slug = "1234",
+            }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Equal(entries, matches);
@@ -277,7 +296,9 @@ public class LinkGenerationDecisionTreeTest
         var context = CreateContext(new { controller = "Store", action = "Buy" });
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Equal(entries, matches);
@@ -303,7 +324,9 @@ public class LinkGenerationDecisionTreeTest
         var context = CreateContext(new { controller = "Store", action = "Buy" });
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Equal(entries, matches);
@@ -329,7 +352,9 @@ public class LinkGenerationDecisionTreeTest
         var context = CreateContext(new { controller = "Store", action = "Buy" });
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Equal(entries, matches);
@@ -341,26 +366,53 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Store", action = "Buy", area = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { controller = "Store", action = "Buy", area = "Admin" });
+        var entry2 = CreateMatch(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = "Admin",
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Store", action = "Buy", area = "Admin" });
+        var context = CreateContext(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = "Admin",
+            }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            }
+        );
     }
 
     [Fact]
@@ -369,26 +421,52 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Store", action = "Buy", area = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { controller = "Store", action = "Buy", area = "Admin" });
+        var entry2 = CreateMatch(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = "Admin",
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Store", }, new { action = "Buy", area = "Admin", });
+        var context = CreateContext(
+            new { controller = "Store" },
+            new { action = "Buy", area = "Admin" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); },
-            m => { Assert.Same(entry1, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            },
+            m =>
+            {
+                Assert.Same(entry1, m);
+            }
+        );
     }
 
     [Fact]
@@ -397,26 +475,57 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Store", action = "Buy", area = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { controller = "Store", action = "Buy", area = "Admin" });
+        var entry2 = CreateMatch(
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = "Admin",
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { }, new { controller = "Store", action = "Buy", area = "Admin", });
+        var context = CreateContext(
+            new { },
+            new
+            {
+                controller = "Store",
+                action = "Buy",
+                area = "Admin",
+            }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); },
-            m => { Assert.Same(entry1, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            },
+            m =>
+            {
+                Assert.Same(entry1, m);
+            }
+        );
     }
 
     [Fact]
@@ -425,7 +534,7 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null, });
+        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null });
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
@@ -438,12 +547,18 @@ public class LinkGenerationDecisionTreeTest
         var context = CreateContext(new { page = "/Store/Buy", area = "Admin" });
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            }
+        );
     }
 
     [Fact]
@@ -452,7 +567,7 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null, });
+        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null });
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
@@ -462,16 +577,25 @@ public class LinkGenerationDecisionTreeTest
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { page = "/Store/Buy", }, new { area = "Admin", });
+        var context = CreateContext(new { page = "/Store/Buy" }, new { area = "Admin" });
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); },
-            m => { Assert.Same(entry1, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            },
+            m =>
+            {
+                Assert.Same(entry1, m);
+            }
+        );
     }
 
     [Fact]
@@ -480,7 +604,7 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null, });
+        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null });
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
@@ -490,16 +614,25 @@ public class LinkGenerationDecisionTreeTest
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { }, new { page = "/Store/Buy", area = "Admin", });
+        var context = CreateContext(new { }, new { page = "/Store/Buy", area = "Admin" });
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); },
-            m => { Assert.Same(entry1, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            },
+            m =>
+            {
+                Assert.Same(entry1, m);
+            }
+        );
     }
 
     [Fact]
@@ -508,25 +641,50 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = (string)null, page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = (string)null, controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = (string)null,
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Home", action = "Index", }, new { page = "/Store/Buy", });
+        var context = CreateContext(
+            new { controller = "Home", action = "Index" },
+            new { page = "/Store/Buy" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry1, m); });
+            m =>
+            {
+                Assert.Same(entry1, m);
+            }
+        );
     }
 
     [Fact]
@@ -535,25 +693,50 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = "Admin", page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = "Admin",
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = "Admin", controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = "Admin",
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Home", action = "Index", }, new { page = "/Store/Buy", area = "Admin", });
+        var context = CreateContext(
+            new { controller = "Home", action = "Index" },
+            new { page = "/Store/Buy", area = "Admin" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry1, m); });
+            m =>
+            {
+                Assert.Same(entry1, m);
+            }
+        );
     }
 
     [Fact]
@@ -562,20 +745,46 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = (string)null, page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = (string)null, controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = (string)null,
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Home", action = "Index", page = "16", }, new { page = "/Store/Buy", });
+        var context = CreateContext(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                page = "16",
+            },
+            new { page = "/Store/Buy" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Empty(matches);
@@ -587,20 +796,46 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = (string)null, page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = (string)null, controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = (string)null,
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { controller = "Home", action = "Index", page = "/Store/Buy", }, new { page = "/Store/Buy", });
+        var context = CreateContext(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                page = "/Store/Buy",
+            },
+            new { page = "/Store/Buy" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Empty(matches);
@@ -612,25 +847,50 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = (string)null, page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = (string)null, controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = (string)null,
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { page = "/Store/Buy", }, new { controller = "Home", action = "Index", });
+        var context = CreateContext(
+            new { page = "/Store/Buy" },
+            new { controller = "Home", action = "Index" }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            }
+        );
     }
 
     [Fact]
@@ -639,25 +899,55 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = "Admin", page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = "Admin",
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = "Admin", controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = "Admin",
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { page = "/Store/Buy", }, new { controller = "Home", action = "Index", area = "Admin", });
+        var context = CreateContext(
+            new { page = "/Store/Buy" },
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = "Admin",
+            }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Collection(
             matches,
-            m => { Assert.Same(entry2, m); });
+            m =>
+            {
+                Assert.Same(entry2, m);
+            }
+        );
     }
 
     [Fact]
@@ -666,20 +956,46 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = (string)null, page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = (string)null, controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = (string)null,
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { page = "/Store/Buy", action = "buy", }, new { controller = "Home", action = "Index", page = "16", });
+        var context = CreateContext(
+            new { page = "/Store/Buy", action = "buy" },
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                page = "16",
+            }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Empty(matches);
@@ -691,20 +1007,46 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { controller = "Home", action = "Index", area = (string)null, page = (string)null, });
+        var entry1 = CreateMatch(
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                area = (string)null,
+                page = (string)null,
+            }
+        );
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
-        var entry2 = CreateMatch(new { page = "/Store/Buy", area = (string)null, controller = (string)null, action = (string)null, });
+        var entry2 = CreateMatch(
+            new
+            {
+                page = "/Store/Buy",
+                area = (string)null,
+                controller = (string)null,
+                action = (string)null,
+            }
+        );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
         entries.Add(entry2);
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { page = "/Store/Buy", action = "Index", }, new { controller = "Home", action = "Index", page = "16", });
+        var context = CreateContext(
+            new { page = "/Store/Buy", action = "Index" },
+            new
+            {
+                controller = "Home",
+                action = "Index",
+                page = "16",
+            }
+        );
 
         // Act
-        var matches = tree.GetMatches(context.Values, context.AmbientValues).Select(m => m.Match).ToList();
+        var matches = tree.GetMatches(context.Values, context.AmbientValues)
+            .Select(m => m.Match)
+            .ToList();
 
         // Assert
         Assert.Empty(matches);
@@ -715,21 +1057,57 @@ public class LinkGenerationDecisionTreeTest
     {
         // Arrange
         var entries = new List<OutboundMatch>();
-        entries.Add(CreateMatch(new { action = "Buy", controller = "Store", version = "V1" }, "Store/Buy/V1"));
-        entries.Add(CreateMatch(new { action = "Buy", controller = "Store", area = "Admin" }, "Admin/Store/Buy"));
+        entries.Add(
+            CreateMatch(
+                new
+                {
+                    action = "Buy",
+                    controller = "Store",
+                    version = "V1",
+                },
+                "Store/Buy/V1"
+            )
+        );
+        entries.Add(
+            CreateMatch(
+                new
+                {
+                    action = "Buy",
+                    controller = "Store",
+                    area = "Admin",
+                },
+                "Admin/Store/Buy"
+            )
+        );
         entries.Add(CreateMatch(new { action = "Buy", controller = "Products" }, "Products/Buy"));
-        entries.Add(CreateMatch(new { action = "Buy", controller = "Store", version = "V2" }, "Store/Buy/V2"));
+        entries.Add(
+            CreateMatch(
+                new
+                {
+                    action = "Buy",
+                    controller = "Store",
+                    version = "V2",
+                },
+                "Store/Buy/V2"
+            )
+        );
         entries.Add(CreateMatch(new { action = "Cart", controller = "Store" }, "Store/Cart"));
         entries.Add(CreateMatch(new { action = "Index", controller = "Home" }, "Home/Index/{id?}"));
         var tree = new LinkGenerationDecisionTree(entries);
         var newLine = Environment.NewLine;
         var expected =
-            " => action: Buy => controller: Store => version: V1 (Matches: Store/Buy/V1)" + newLine +
-            " => action: Buy => controller: Store => version: V2 (Matches: Store/Buy/V2)" + newLine +
-            " => action: Buy => controller: Store => area: Admin (Matches: Admin/Store/Buy)" + newLine +
-            " => action: Buy => controller: Products (Matches: Products/Buy)" + newLine +
-            " => action: Cart => controller: Store (Matches: Store/Cart)" + newLine +
-            " => action: Index => controller: Home (Matches: Home/Index/{id?})" + newLine;
+            " => action: Buy => controller: Store => version: V1 (Matches: Store/Buy/V1)"
+            + newLine
+            + " => action: Buy => controller: Store => version: V2 (Matches: Store/Buy/V2)"
+            + newLine
+            + " => action: Buy => controller: Store => area: Admin (Matches: Admin/Store/Buy)"
+            + newLine
+            + " => action: Buy => controller: Products (Matches: Products/Buy)"
+            + newLine
+            + " => action: Cart => controller: Store (Matches: Store/Cart)"
+            + newLine
+            + " => action: Index => controller: Home (Matches: Home/Index/{id?})"
+            + newLine;
 
         // Act
         var flattenedTree = tree.DebuggerDisplayString;
@@ -757,7 +1135,8 @@ public class LinkGenerationDecisionTreeTest
         var context = new VirtualPathContext(
             new DefaultHttpContext(),
             new RouteValueDictionary(ambientValues),
-            new RouteValueDictionary(values));
+            new RouteValueDictionary(values)
+        );
 
         return context;
     }

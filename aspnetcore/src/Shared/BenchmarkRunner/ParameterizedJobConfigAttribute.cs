@@ -8,7 +8,6 @@ namespace BenchmarkDotNet.Attributes;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly)]
 internal sealed class ParameterizedJobConfigAttribute : AspNetCoreBenchmarkAttribute
 {
-    public ParameterizedJobConfigAttribute(Type configType) : base(configType)
-    {
-    }
+    public ParameterizedJobConfigAttribute(Type configType)
+        : base(configType) { }
 }

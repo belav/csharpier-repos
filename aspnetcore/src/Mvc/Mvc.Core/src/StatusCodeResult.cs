@@ -45,7 +45,12 @@ public partial class StatusCodeResult : ActionResult, IClientErrorActionResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing StatusCodeResult, setting HTTP status code {StatusCode}", EventName = "HttpStatusCodeResultExecuting")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing StatusCodeResult, setting HTTP status code {StatusCode}",
+            EventName = "HttpStatusCodeResultExecuting"
+        )]
         public static partial void HttpStatusCodeResultExecuting(ILogger logger, int statusCode);
     }
 }

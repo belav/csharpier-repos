@@ -29,20 +29,19 @@ internal abstract class CommandBase
         var quiet = command.Option("-q|--quiet", Resources.QuietDescription);
         var verbose = command.VerboseOption();
 
-        command.OnExecute(
-            () =>
-            {
-                IsQuiet = quiet.HasValue();
-                IsVerbose = verbose.HasValue() || CliContext.IsGlobalVerbose();
-                ReporterExtensions.PrefixOutput = prefixOutput.HasValue();
+        command.OnExecute(() =>
+        {
+            IsQuiet = quiet.HasValue();
+            IsVerbose = verbose.HasValue() || CliContext.IsGlobalVerbose();
+            ReporterExtensions.PrefixOutput = prefixOutput.HasValue();
 
-                // Update the reporter now that we know the option values.
-                Reporter = new ConsoleReporter(_console, IsVerbose, IsQuiet);
+            // Update the reporter now that we know the option values.
+            Reporter = new ConsoleReporter(_console, IsVerbose, IsQuiet);
 
-                Validate();
+            Validate();
 
-                return Execute();
-            });
+            return Execute();
+        });
     }
 
     protected virtual void Validate()

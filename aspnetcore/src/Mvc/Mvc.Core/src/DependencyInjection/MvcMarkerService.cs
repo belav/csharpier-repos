@@ -7,6 +7,4 @@ namespace Microsoft.Extensions.DependencyInjection;
 /// A marker class used to determine if all the MVC services were added
 /// to the <see cref="IServiceCollection"/> before MVC is configured.
 /// </summary>
-internal sealed class MvcMarkerService
-{
-}
+internal sealed class MvcMarkerService { }

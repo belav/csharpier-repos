@@ -58,7 +58,9 @@ public class ClaimActionTests
     [Fact]
     public void CanMapArraySubValueUserDataToClaims()
     {
-        var userData = JsonDocument.Parse("{ \"role\": { \"subkey\": [ \"role1\", null, \"role2\" ] } }");
+        var userData = JsonDocument.Parse(
+            "{ \"role\": { \"subkey\": [ \"role1\", null, \"role2\" ] } }"
+        );
 
         var identity = new ClaimsIdentity();
 

@@ -20,10 +20,7 @@ public class Program
                 logging.ClearProviders();
                 logging.AddJsonConsole(options =>
                 {
-                    options.JsonWriterOptions = new JsonWriterOptions()
-                    {
-                        Indented = true
-                    };
+                    options.JsonWriterOptions = new JsonWriterOptions() { Indented = true };
                 });
             })
             .ConfigureWebHostDefaults(webBuilder =>

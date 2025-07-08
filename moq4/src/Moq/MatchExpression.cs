@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class MatchExpression : Expression

@@ -30,7 +30,11 @@ public class Executable
         return null;
     }
 
-    public async Task<int> ExecAsync(string args, CancellationToken cancellationToken, ILogger logger)
+    public async Task<int> ExecAsync(
+        string args,
+        CancellationToken cancellationToken,
+        ILogger logger
+    )
     {
         var process = new Process()
         {
@@ -40,17 +44,19 @@ public class Executable
                 Arguments = args,
                 UseShellExecute = false,
                 RedirectStandardError = true,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             },
-            EnableRaisingEvents = true
+            EnableRaisingEvents = true,
         };
         var tcs = new TaskCompletionSource<int>();
 
         using (cancellationToken.Register(() => Cancel(process, tcs)))
         {
             process.Exited += (_, __) => tcs.TrySetResult(process.ExitCode);
-            process.OutputDataReceived += (_, a) => LogIfNotNull(logger.LogInformation, "stdout: {0}", a.Data);
-            process.ErrorDataReceived += (_, a) => LogIfNotNull(logger.LogError, "stderr: {0}", a.Data);
+            process.OutputDataReceived += (_, a) =>
+                LogIfNotNull(logger.LogInformation, "stdout: {0}", a.Data);
+            process.ErrorDataReceived += (_, a) =>
+                LogIfNotNull(logger.LogError, "stderr: {0}", a.Data);
 
             process.Start();
 

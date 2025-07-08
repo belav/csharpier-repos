@@ -17,9 +17,7 @@ public class TemplatePart
     /// <summary>
     /// Constructs a new <see cref="TemplatePart"/> instance.
     /// </summary>
-    public TemplatePart()
-    {
-    }
+    public TemplatePart() { }
 
     /// <summary>
     /// Constructs a new <see cref="TemplatePart"/> instance given a <paramref name="other"/>.
@@ -41,7 +39,9 @@ public class TemplatePart
             IsCatchAll = parameter.IsCatchAll;
             IsOptional = parameter.IsOptional;
             DefaultValue = parameter.Default;
-            InlineConstraints = parameter.ParameterPolicies?.Select(p => new InlineConstraint(p)) ?? Enumerable.Empty<InlineConstraint>();
+            InlineConstraints =
+                parameter.ParameterPolicies?.Select(p => new InlineConstraint(p))
+                ?? Enumerable.Empty<InlineConstraint>();
         }
         else if (other.IsSeparator && other is RoutePatternSeparatorPart separator)
         {
@@ -62,11 +62,7 @@ public class TemplatePart
     /// <returns>A <see cref="TemplatePart"/> instance.</returns>
     public static TemplatePart CreateLiteral(string text)
     {
-        return new TemplatePart()
-        {
-            IsLiteral = true,
-            Text = text,
-        };
+        return new TemplatePart() { IsLiteral = true, Text = text };
     }
 
     /// <summary>
@@ -83,7 +79,8 @@ public class TemplatePart
         bool isCatchAll,
         bool isOptional,
         object? defaultValue,
-        IEnumerable<InlineConstraint>? inlineConstraints)
+        IEnumerable<InlineConstraint>? inlineConstraints
+    )
     {
         ArgumentNullException.ThrowIfNull(name);
 
@@ -102,45 +99,58 @@ public class TemplatePart
     /// <see langword="true"/> if the route part is is a catch-all part (e.g. /*).
     /// </summary>
     public bool IsCatchAll { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part is represents a literal value.
     /// </summary>
     [MemberNotNullWhen(true, nameof(Text))]
     public bool IsLiteral { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part represents a parameterized value.
     /// </summary>
     public bool IsParameter { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part represents an optional part.
     /// </summary>
     public bool IsOptional { get; private set; }
+
     /// <summary>
     /// <see langword="true"/> if the route part represents an optional seperator.
     /// </summary>
     public bool IsOptionalSeperator { get; set; }
+
     /// <summary>
     /// The name of the route parameter. Can be null.
     /// </summary>
     public string? Name { get; private set; }
+
     /// <summary>
     /// The textual representation of the route parameter. Can be null. Used to represent route seperators and literal parts.
     /// </summary>
     public string? Text { get; private set; }
+
     /// <summary>
     /// The default value for route parameters. Can be null.
     /// </summary>
     public object? DefaultValue { get; private set; }
+
     /// <summary>
     /// The constraints associates with a route parameter.
     /// </summary>
-    public IEnumerable<InlineConstraint> InlineConstraints { get; private set; } = Enumerable.Empty<InlineConstraint>();
+    public IEnumerable<InlineConstraint> InlineConstraints { get; private set; } =
+        Enumerable.Empty<InlineConstraint>();
 
     internal string? DebuggerToString()
     {
         if (IsParameter)
         {
-            return "{" + (IsCatchAll ? "*" : string.Empty) + Name + (IsOptional ? "?" : string.Empty) + "}";
+            return "{"
+                + (IsCatchAll ? "*" : string.Empty)
+                + Name
+                + (IsOptional ? "?" : string.Empty)
+                + "}";
         }
         else
         {
@@ -164,13 +174,14 @@ public class TemplatePart
         }
         else
         {
-            var kind = IsCatchAll ?
-                RoutePatternParameterKind.CatchAll :
-                IsOptional ?
-                    RoutePatternParameterKind.Optional :
-                    RoutePatternParameterKind.Standard;
+            var kind =
+                IsCatchAll ? RoutePatternParameterKind.CatchAll
+                : IsOptional ? RoutePatternParameterKind.Optional
+                : RoutePatternParameterKind.Standard;
 
-            var constraints = InlineConstraints.Select(c => new RoutePatternParameterPolicyReference(c.Constraint));
+            var constraints = InlineConstraints.Select(
+                c => new RoutePatternParameterPolicyReference(c.Constraint)
+            );
             return RoutePatternFactory.ParameterPart(Name!, DefaultValue, kind, constraints);
         }
     }

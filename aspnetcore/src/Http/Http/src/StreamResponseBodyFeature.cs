@@ -55,7 +55,10 @@ public class StreamResponseBodyFeature : IHttpResponseBodyFeature
         {
             if (_pipeWriter == null)
             {
-                _pipeWriter = PipeWriter.Create(Stream, new StreamPipeWriterOptions(leaveOpen: true));
+                _pipeWriter = PipeWriter.Create(
+                    Stream,
+                    new StreamPipeWriterOptions(leaveOpen: true)
+                );
                 if (_completed)
                 {
                     _pipeWriter.Complete();
@@ -83,7 +86,12 @@ public class StreamResponseBodyFeature : IHttpResponseBodyFeature
     /// <param name="count">The number of bytes to send, or null to send the remainder of the file.</param>
     /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to abort the transmission.</param>
     /// <returns></returns>
-    public virtual async Task SendFileAsync(string path, long offset, long? count, CancellationToken cancellationToken)
+    public virtual async Task SendFileAsync(
+        string path,
+        long offset,
+        long? count,
+        CancellationToken cancellationToken
+    )
     {
         if (!_started)
         {

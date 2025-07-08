@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Base context for authentication events which deal with a ClaimsPrincipal.
 /// </summary>
-public abstract class PrincipalContext<TOptions> : PropertiesContext<TOptions> where TOptions : AuthenticationSchemeOptions
+public abstract class PrincipalContext<TOptions> : PropertiesContext<TOptions>
+    where TOptions : AuthenticationSchemeOptions
 {
     /// <summary>
     /// Constructor.
@@ -18,7 +19,12 @@ public abstract class PrincipalContext<TOptions> : PropertiesContext<TOptions> w
     /// <param name="scheme">The authentication scheme.</param>
     /// <param name="options">The authentication options associated with the scheme.</param>
     /// <param name="properties">The authentication properties.</param>
-    protected PrincipalContext(HttpContext context, AuthenticationScheme scheme, TOptions options, AuthenticationProperties? properties)
+    protected PrincipalContext(
+        HttpContext context,
+        AuthenticationScheme scheme,
+        TOptions options,
+        AuthenticationProperties? properties
+    )
         : base(context, scheme, options, properties) { }
 
     /// <summary>

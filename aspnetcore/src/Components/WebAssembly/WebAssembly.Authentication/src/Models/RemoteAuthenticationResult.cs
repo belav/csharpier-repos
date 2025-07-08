@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// Represents the result of an authentication operation.
 /// </summary>
 /// <typeparam name="TRemoteAuthenticationState">The type of the preserved state during the authentication operation.</typeparam>
-public class RemoteAuthenticationResult<TRemoteAuthenticationState> where TRemoteAuthenticationState : RemoteAuthenticationState
+public class RemoteAuthenticationResult<TRemoteAuthenticationState>
+    where TRemoteAuthenticationState : RemoteAuthenticationState
 {
     /// <summary>
     /// Gets or sets the status of the authentication operation. The status can be one of <see cref="RemoteAuthenticationStatus"/>.

@@ -14,7 +14,13 @@ internal class EndsWithStringRouteConstraint : IRouteConstraint
         _endsWith = endsWith;
     }
 
-    public bool Match(HttpContext httpContext, IRouter route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+    public bool Match(
+        HttpContext httpContext,
+        IRouter route,
+        string routeKey,
+        RouteValueDictionary values,
+        RouteDirection routeDirection
+    )
     {
         var value = values[routeKey];
         if (value == null)

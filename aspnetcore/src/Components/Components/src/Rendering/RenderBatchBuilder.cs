@@ -19,14 +19,16 @@ internal sealed class RenderBatchBuilder : IDisposable
     private int _parameterViewValidityStamp;
 
     // Primary result data
-    public ArrayBuilder<RenderTreeDiff> UpdatedComponentDiffs { get; } = new ArrayBuilder<RenderTreeDiff>();
+    public ArrayBuilder<RenderTreeDiff> UpdatedComponentDiffs { get; } =
+        new ArrayBuilder<RenderTreeDiff>();
     public ArrayBuilder<int> DisposedComponentIds { get; } = new ArrayBuilder<int>();
     public ArrayBuilder<ulong> DisposedEventHandlerIds { get; } = new ArrayBuilder<ulong>();
     public ArrayBuilder<NamedEventChange>? NamedEventChanges;
 
     // Buffers referenced by UpdatedComponentDiffs
     public ArrayBuilder<RenderTreeEdit> EditsBuffer { get; } = new ArrayBuilder<RenderTreeEdit>(64);
-    public ArrayBuilder<RenderTreeFrame> ReferenceFramesBuffer { get; } = new ArrayBuilder<RenderTreeFrame>(64);
+    public ArrayBuilder<RenderTreeFrame> ReferenceFramesBuffer { get; } =
+        new ArrayBuilder<RenderTreeFrame>(64);
 
     // State of render pipeline
     public Queue<RenderQueueEntry> ComponentRenderQueue { get; } = new Queue<RenderQueueEntry>();
@@ -37,8 +39,13 @@ internal sealed class RenderBatchBuilder : IDisposable
 
     public int ParameterViewValidityStamp => _parameterViewValidityStamp;
 
-    internal StackObjectPool<Dictionary<object, KeyedItemInfo>> KeyedItemInfoDictionaryPool { get; }
-        = new StackObjectPool<Dictionary<object, KeyedItemInfo>>(maxPreservedItems: 10, () => new Dictionary<object, KeyedItemInfo>());
+    internal StackObjectPool<
+        Dictionary<object, KeyedItemInfo>
+    > KeyedItemInfoDictionaryPool { get; } =
+        new StackObjectPool<Dictionary<object, KeyedItemInfo>>(
+            maxPreservedItems: 10,
+            () => new Dictionary<object, KeyedItemInfo>()
+        );
 
     public void ClearStateForCurrentBatch()
     {
@@ -58,13 +65,14 @@ internal sealed class RenderBatchBuilder : IDisposable
         NamedEventChanges?.Clear();
     }
 
-    public RenderBatch ToBatch()
-        => new RenderBatch(
+    public RenderBatch ToBatch() =>
+        new RenderBatch(
             UpdatedComponentDiffs.ToRange(),
             ReferenceFramesBuffer.ToRange(),
             DisposedComponentIds.ToRange(),
             DisposedEventHandlerIds.ToRange(),
-            NamedEventChanges?.ToRange());
+            NamedEventChanges?.ToRange()
+        );
 
     public void InvalidateParameterViews()
     {
@@ -85,13 +93,29 @@ internal sealed class RenderBatchBuilder : IDisposable
     public void AddNamedEvent(int componentId, int frameIndex, ref RenderTreeFrame frame)
     {
         NamedEventChanges ??= new();
-        NamedEventChanges.Append(new NamedEventChange(NamedEventChangeType.Added, componentId, frameIndex, frame.NamedEventType, frame.NamedEventAssignedName));
+        NamedEventChanges.Append(
+            new NamedEventChange(
+                NamedEventChangeType.Added,
+                componentId,
+                frameIndex,
+                frame.NamedEventType,
+                frame.NamedEventAssignedName
+            )
+        );
     }
 
     public void RemoveNamedEvent(int componentId, int frameIndex, ref RenderTreeFrame frame)
     {
         NamedEventChanges ??= new();
-        NamedEventChanges.Append(new NamedEventChange(NamedEventChangeType.Removed, componentId, frameIndex, frame.NamedEventType, frame.NamedEventAssignedName));
+        NamedEventChanges.Append(
+            new NamedEventChange(
+                NamedEventChangeType.Removed,
+                componentId,
+                frameIndex,
+                frame.NamedEventType,
+                frame.NamedEventAssignedName
+            )
+        );
     }
 
     public void Dispose()

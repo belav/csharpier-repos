@@ -14,5 +14,5 @@ internal enum Http2FrameType : byte
     PING = 0x6,
     GOAWAY = 0x7,
     WINDOW_UPDATE = 0x8,
-    CONTINUATION = 0x9
+    CONTINUATION = 0x9,
 }

@@ -15,7 +15,8 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         ActionContext actionContext,
         HandlerMethodDescriptor handlerMethodDescriptor,
         IReadOnlyDictionary<string, object?> arguments,
-        object instance)
+        object instance
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(actionContext != null);
@@ -26,11 +27,23 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         // Inlinable fast-path check if Diagnositcs is enabled
         if (diagnosticListener.IsEnabled())
         {
-            BeforeHandlerMethodImpl(diagnosticListener, actionContext, handlerMethodDescriptor, arguments, instance);
+            BeforeHandlerMethodImpl(
+                diagnosticListener,
+                actionContext,
+                handlerMethodDescriptor,
+                arguments,
+                instance
+            );
         }
     }
 
-    private static void BeforeHandlerMethodImpl(DiagnosticListener diagnosticListener, ActionContext actionContext, HandlerMethodDescriptor handlerMethodDescriptor, IReadOnlyDictionary<string, object?> arguments, object instance)
+    private static void BeforeHandlerMethodImpl(
+        DiagnosticListener diagnosticListener,
+        ActionContext actionContext,
+        HandlerMethodDescriptor handlerMethodDescriptor,
+        IReadOnlyDictionary<string, object?> arguments,
+        object instance
+    )
     {
         if (diagnosticListener.IsEnabled(Diagnostics.BeforeHandlerMethodEventData.EventName))
         {
@@ -41,7 +54,8 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     arguments,
                     handlerMethodDescriptor,
                     instance
-                ));
+                )
+            );
         }
     }
 
@@ -51,7 +65,8 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         HandlerMethodDescriptor handlerMethodDescriptor,
         IReadOnlyDictionary<string, object?> arguments,
         object instance,
-        IActionResult? result)
+        IActionResult? result
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(actionContext != null);
@@ -62,11 +77,25 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         // Inlinable fast-path check if Diagnositcs is enabled
         if (diagnosticListener.IsEnabled())
         {
-            AfterHandlerMethodImpl(diagnosticListener, actionContext, handlerMethodDescriptor, arguments, instance, result);
+            AfterHandlerMethodImpl(
+                diagnosticListener,
+                actionContext,
+                handlerMethodDescriptor,
+                arguments,
+                instance,
+                result
+            );
         }
     }
 
-    private static void AfterHandlerMethodImpl(DiagnosticListener diagnosticListener, ActionContext actionContext, HandlerMethodDescriptor handlerMethodDescriptor, IReadOnlyDictionary<string, object?> arguments, object instance, IActionResult? result)
+    private static void AfterHandlerMethodImpl(
+        DiagnosticListener diagnosticListener,
+        ActionContext actionContext,
+        HandlerMethodDescriptor handlerMethodDescriptor,
+        IReadOnlyDictionary<string, object?> arguments,
+        object instance,
+        IActionResult? result
+    )
     {
         if (diagnosticListener.IsEnabled(Diagnostics.AfterHandlerMethodEventData.EventName))
         {
@@ -78,14 +107,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerMethodDescriptor,
                     instance,
                     result
-                ));
+                )
+            );
         }
     }
 
     public static void BeforeOnPageHandlerExecution(
         this DiagnosticListener diagnosticListener,
         PageHandlerExecutingContext handlerExecutionContext,
-        IAsyncPageFilter filter)
+        IAsyncPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerExecutionContext != null);
@@ -98,9 +129,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void BeforeOnPageHandlerExecutionImpl(DiagnosticListener diagnosticListener, PageHandlerExecutingContext handlerExecutionContext, IAsyncPageFilter filter)
+    private static void BeforeOnPageHandlerExecutionImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerExecutingContext handlerExecutionContext,
+        IAsyncPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.BeforePageFilterOnPageHandlerExecutionEventData.EventName,
@@ -108,14 +147,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerExecutionContext.ActionDescriptor,
                     handlerExecutionContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void AfterOnPageHandlerExecution(
         this DiagnosticListener diagnosticListener,
         PageHandlerExecutedContext handlerExecutedContext,
-        IAsyncPageFilter filter)
+        IAsyncPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerExecutedContext != null);
@@ -128,9 +169,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void AfterOnPageHandlerExecutionImpl(DiagnosticListener diagnosticListener, PageHandlerExecutedContext handlerExecutedContext, IAsyncPageFilter filter)
+    private static void AfterOnPageHandlerExecutionImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerExecutedContext handlerExecutedContext,
+        IAsyncPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.AfterPageFilterOnPageHandlerExecutionEventData.EventName,
@@ -138,14 +187,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerExecutedContext.ActionDescriptor,
                     handlerExecutedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void BeforeOnPageHandlerExecuting(
         this DiagnosticListener diagnosticListener,
         PageHandlerExecutingContext handlerExecutingContext,
-        IPageFilter filter)
+        IPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerExecutingContext != null);
@@ -158,9 +209,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void BeforeOnPageHandlerExecutingImpl(DiagnosticListener diagnosticListener, PageHandlerExecutingContext handlerExecutingContext, IPageFilter filter)
+    private static void BeforeOnPageHandlerExecutingImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerExecutingContext handlerExecutingContext,
+        IPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.BeforePageFilterOnPageHandlerExecutingEventData.EventName,
@@ -168,14 +227,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerExecutingContext.ActionDescriptor,
                     handlerExecutingContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void AfterOnPageHandlerExecuting(
         this DiagnosticListener diagnosticListener,
         PageHandlerExecutingContext handlerExecutingContext,
-        IPageFilter filter)
+        IPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerExecutingContext != null);
@@ -188,9 +249,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void AfterOnPageHandlerExecutingImpl(DiagnosticListener diagnosticListener, PageHandlerExecutingContext handlerExecutingContext, IPageFilter filter)
+    private static void AfterOnPageHandlerExecutingImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerExecutingContext handlerExecutingContext,
+        IPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.AfterPageFilterOnPageHandlerExecutingEventData.EventName,
@@ -198,14 +267,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerExecutingContext.ActionDescriptor,
                     handlerExecutingContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void BeforeOnPageHandlerExecuted(
         this DiagnosticListener diagnosticListener,
         PageHandlerExecutedContext handlerExecutedContext,
-        IPageFilter filter)
+        IPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerExecutedContext != null);
@@ -218,9 +289,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void BeforeOnPageHandlerExecutedImpl(DiagnosticListener diagnosticListener, PageHandlerExecutedContext handlerExecutedContext, IPageFilter filter)
+    private static void BeforeOnPageHandlerExecutedImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerExecutedContext handlerExecutedContext,
+        IPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.BeforePageFilterOnPageHandlerExecutedEventData.EventName,
@@ -228,14 +307,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerExecutedContext.ActionDescriptor,
                     handlerExecutedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void AfterOnPageHandlerExecuted(
         this DiagnosticListener diagnosticListener,
         PageHandlerExecutedContext handlerExecutedContext,
-        IPageFilter filter)
+        IPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerExecutedContext != null);
@@ -248,9 +329,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void AfterOnPageHandlerExecutedImpl(DiagnosticListener diagnosticListener, PageHandlerExecutedContext handlerExecutedContext, IPageFilter filter)
+    private static void AfterOnPageHandlerExecutedImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerExecutedContext handlerExecutedContext,
+        IPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.AfterPageFilterOnPageHandlerExecutedEventData.EventName,
@@ -258,14 +347,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerExecutedContext.ActionDescriptor,
                     handlerExecutedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void BeforeOnPageHandlerSelection(
         this DiagnosticListener diagnosticListener,
         PageHandlerSelectedContext handlerSelectedContext,
-        IAsyncPageFilter filter)
+        IAsyncPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerSelectedContext != null);
@@ -278,9 +369,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void BeforeOnPageHandlerSelectionImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IAsyncPageFilter filter)
+    private static void BeforeOnPageHandlerSelectionImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IAsyncPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.BeforePageFilterOnPageHandlerSelectionEventData.EventName,
@@ -288,14 +387,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerSelectedContext.ActionDescriptor,
                     handlerSelectedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void AfterOnPageHandlerSelection(
         this DiagnosticListener diagnosticListener,
         PageHandlerSelectedContext handlerSelectedContext,
-        IAsyncPageFilter filter)
+        IAsyncPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerSelectedContext != null);
@@ -308,9 +409,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void AfterOnPageHandlerSelectionImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IAsyncPageFilter filter)
+    private static void AfterOnPageHandlerSelectionImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IAsyncPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.AfterPageFilterOnPageHandlerSelectionEventData.EventName,
@@ -318,14 +427,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerSelectedContext.ActionDescriptor,
                     handlerSelectedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void BeforeOnPageHandlerSelected(
         this DiagnosticListener diagnosticListener,
         PageHandlerSelectedContext handlerSelectedContext,
-        IPageFilter filter)
+        IPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerSelectedContext != null);
@@ -338,9 +449,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void BeforeOnPageHandlerSelectedImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IPageFilter filter)
+    private static void BeforeOnPageHandlerSelectedImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.BeforePageFilterOnPageHandlerSelectedEventData.EventName,
@@ -348,14 +467,16 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerSelectedContext.ActionDescriptor,
                     handlerSelectedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 
     public static void AfterOnPageHandlerSelected(
         this DiagnosticListener diagnosticListener,
         PageHandlerSelectedContext handlerSelectedContext,
-        IPageFilter filter)
+        IPageFilter filter
+    )
     {
         Debug.Assert(diagnosticListener != null);
         Debug.Assert(handlerSelectedContext != null);
@@ -368,9 +489,17 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
         }
     }
 
-    private static void AfterOnPageHandlerSelectedImpl(DiagnosticListener diagnosticListener, PageHandlerSelectedContext handlerSelectedContext, IPageFilter filter)
+    private static void AfterOnPageHandlerSelectedImpl(
+        DiagnosticListener diagnosticListener,
+        PageHandlerSelectedContext handlerSelectedContext,
+        IPageFilter filter
+    )
     {
-        if (diagnosticListener.IsEnabled(Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName))
+        if (
+            diagnosticListener.IsEnabled(
+                Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName
+            )
+        )
         {
             diagnosticListener.Write(
                 Diagnostics.AfterPageFilterOnPageHandlerSelectedEventData.EventName,
@@ -378,7 +507,8 @@ internal static class MvcRazorPagesDiagnosticListenerExtensions
                     handlerSelectedContext.ActionDescriptor,
                     handlerSelectedContext,
                     filter
-                ));
+                )
+            );
         }
     }
 }

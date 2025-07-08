@@ -43,7 +43,10 @@ public class JsonKeyClaimAction : ClaimAction
                 AddClaim(v.ToString()!, identity, issuer);
             }
         }
-        else if (value.ValueKind == JsonValueKind.Object || value.ValueKind == JsonValueKind.Undefined)
+        else if (
+            value.ValueKind == JsonValueKind.Object
+            || value.ValueKind == JsonValueKind.Undefined
+        )
         {
             // Skip, because they were previously skipped
         }

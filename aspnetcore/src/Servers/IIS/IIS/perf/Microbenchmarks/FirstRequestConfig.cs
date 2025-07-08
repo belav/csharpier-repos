@@ -27,12 +27,13 @@ internal sealed class FirstRequestConfig : ManualConfig
 
         AddValidator(JitOptimizationsValidator.FailOnError);
 
-        AddJob(Job.Default
-            .WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
-            .WithGcMode(new GcMode { Server = true })
-            .WithIterationCount(10)
-            .WithInvocationCount(1)
-            .WithUnrollFactor(1)
-            .WithStrategy(RunStrategy.ColdStart));
+        AddJob(
+            Job.Default.WithToolchain(CsProjCoreToolchain.From(NetCoreAppSettings.NetCoreApp21))
+                .WithGcMode(new GcMode { Server = true })
+                .WithIterationCount(10)
+                .WithInvocationCount(1)
+                .WithUnrollFactor(1)
+                .WithStrategy(RunStrategy.ColdStart)
+        );
     }
 }

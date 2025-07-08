@@ -24,26 +24,19 @@ public class RemoteAttributeTest
         get
         {
             return new TheoryData<string>
-                {
-                    string.Empty,
-                    "Action",
-                    "In a controller",
-                    "  slightly\t odd\t whitespace\t\r\n",
-                };
+            {
+                string.Empty,
+                "Action",
+                "In a controller",
+                "  slightly\t odd\t whitespace\t\r\n",
+            };
         }
     }
 
     // Null or empty property names are invalid. (Those containing just whitespace are legal.)
     public static TheoryData<string> NullOrEmptyNames
     {
-        get
-        {
-            return new TheoryData<string>
-                {
-                    null,
-                    string.Empty,
-                };
-        }
+        get { return new TheoryData<string> { null, string.Empty }; }
     }
 
     [Fact]
@@ -92,9 +85,11 @@ public class RemoteAttributeTest
         // Assert
         Assert.Equal(2, attribute.RouteData.Count);
         Assert.Contains("controller", attribute.RouteData.Keys);
-        var resultName = Assert.Single(
+        var resultName = Assert
+            .Single(
                 attribute.RouteData,
-                keyValuePair => string.Equals(keyValuePair.Key, "action", StringComparison.Ordinal))
+                keyValuePair => string.Equals(keyValuePair.Key, "action", StringComparison.Ordinal)
+            )
             .Value;
         Assert.Equal(action, resultName);
         Assert.Null(attribute.RouteName);
@@ -110,9 +105,12 @@ public class RemoteAttributeTest
         // Assert
         Assert.Equal(2, attribute.RouteData.Count);
         Assert.Contains("action", attribute.RouteData.Keys);
-        var resultName = Assert.Single(
+        var resultName = Assert
+            .Single(
                 attribute.RouteData,
-                keyValuePair => string.Equals(keyValuePair.Key, "controller", StringComparison.Ordinal))
+                keyValuePair =>
+                    string.Equals(keyValuePair.Key, "controller", StringComparison.Ordinal)
+            )
             .Value;
         Assert.Equal(controller, resultName);
         Assert.Null(attribute.RouteName);
@@ -130,9 +128,11 @@ public class RemoteAttributeTest
         Assert.Equal(3, attribute.RouteData.Count);
         Assert.Contains("action", attribute.RouteData.Keys);
         Assert.Contains("controller", attribute.RouteData.Keys);
-        var resultName = Assert.Single(
+        var resultName = Assert
+            .Single(
                 attribute.RouteData,
-                keyValuePair => string.Equals(keyValuePair.Key, "area", StringComparison.Ordinal))
+                keyValuePair => string.Equals(keyValuePair.Key, "area", StringComparison.Ordinal)
+            )
             .Value;
         Assert.Equal(areaName, resultName);
         Assert.Null(attribute.RouteName);
@@ -146,7 +146,9 @@ public class RemoteAttributeTest
         var context = GetValidationContextWithArea(currentArea: null);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => testableAttribute.InvokeGetUrl(context));
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => testableAttribute.InvokeGetUrl(context)
+        );
         Assert.Equal("No URL for remote validation could be found.", exception.Message);
     }
 
@@ -344,11 +346,32 @@ public class RemoteAttributeTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-additionalfields", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("original", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal("original", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-additionalfields", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal("original", kvp.Value);
+            }
+        );
     }
 
     private static ClientModelValidationContext GetValidationContext(string url)
@@ -357,8 +380,7 @@ public class RemoteAttributeTest
         return GetValidationContext(urlHelper);
     }
 
-    private static ClientModelValidationContext GetValidationContext(
-        IUrlHelper urlHelper)
+    private static ClientModelValidationContext GetValidationContext(IUrlHelper urlHelper)
     {
         var serviceCollection = GetServiceCollection();
         var factory = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
@@ -367,20 +389,20 @@ public class RemoteAttributeTest
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var actionContext = GetActionContext(serviceProvider, routeData: null);
 
-        factory
-            .Setup(f => f.GetUrlHelper(actionContext))
-            .Returns(urlHelper);
+        factory.Setup(f => f.GetUrlHelper(actionContext)).Returns(urlHelper);
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var metadata = metadataProvider.GetMetadataForProperty(
             containerType: typeof(string),
-            propertyName: nameof(string.Length));
+            propertyName: nameof(string.Length)
+        );
 
         return new ClientModelValidationContext(
             actionContext,
             metadata,
             metadataProvider,
-            new AttributeDictionary());
+            new AttributeDictionary()
+        );
     }
 
     private static ClientModelValidationContext GetValidationContextWithArea(string currentArea)
@@ -390,15 +412,8 @@ public class RemoteAttributeTest
         var routeCollection = GetRouteCollectionWithArea(serviceProvider);
         var routeData = new RouteData
         {
-            Routers =
-                {
-                    routeCollection,
-                },
-            Values =
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                },
+            Routers = { routeCollection },
+            Values = { { "action", "Index" }, { "controller", "Home" } },
         };
         if (!string.IsNullOrEmpty(currentArea))
         {
@@ -409,9 +424,7 @@ public class RemoteAttributeTest
 
         var urlHelper = new UrlHelper(actionContext);
         var factory = new Mock<IUrlHelperFactory>(MockBehavior.Strict);
-        factory
-            .Setup(f => f.GetUrlHelper(actionContext))
-            .Returns(urlHelper);
+        factory.Setup(f => f.GetUrlHelper(actionContext)).Returns(urlHelper);
 
         // Make an IUrlHelperFactory available through the ActionContext.
         serviceCollection.AddSingleton<IUrlHelperFactory>(factory.Object);
@@ -421,13 +434,15 @@ public class RemoteAttributeTest
         var metadataProvider = new EmptyModelMetadataProvider();
         var metadata = metadataProvider.GetMetadataForProperty(
             containerType: typeof(string),
-            propertyName: nameof(string.Length));
+            propertyName: nameof(string.Length)
+        );
 
         return new ClientModelValidationContext(
-             actionContext,
-             metadata,
-             metadataProvider,
-             new AttributeDictionary());
+            actionContext,
+            metadata,
+            metadataProvider,
+            new AttributeDictionary()
+        );
     }
 
     private static IRouter GetRouteCollectionWithArea(IServiceProvider serviceProvider)
@@ -438,7 +453,11 @@ public class RemoteAttributeTest
         // area value. Skip usual "area:exists" constraint because that isn't relevant for link generation and it
         // complicates the setup significantly.
         builder.MapRoute("areaRoute", "{area}/{controller}/{action}");
-        builder.MapRoute("default", "{controller}/{action}", new { controller = "Home", action = "Index" });
+        builder.MapRoute(
+            "default",
+            "{controller}/{action}",
+            new { controller = "Home", action = "Index" }
+        );
 
         return builder.Build();
     }
@@ -446,9 +465,7 @@ public class RemoteAttributeTest
     private static RouteBuilder GetRouteBuilder(IServiceProvider serviceProvider)
     {
         var app = new Mock<IApplicationBuilder>(MockBehavior.Strict);
-        app
-            .SetupGet(a => a.ApplicationServices)
-            .Returns(serviceProvider);
+        app.SetupGet(a => a.ApplicationServices).Returns(serviceProvider);
 
         var builder = new RouteBuilder(app.Object);
 
@@ -461,21 +478,18 @@ public class RemoteAttributeTest
         return builder;
     }
 
-    private static ActionContext GetActionContext(IServiceProvider serviceProvider, RouteData routeData)
+    private static ActionContext GetActionContext(
+        IServiceProvider serviceProvider,
+        RouteData routeData
+    )
     {
         // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
         // through the HttpContext.
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = serviceProvider,
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
 
         if (routeData == null)
         {
-            routeData = new RouteData
-            {
-                Routers = { Mock.Of<IRouter>(), },
-            };
+            routeData = new RouteData { Routers = { Mock.Of<IRouter>() } };
         }
 
         return new ActionContext(httpContext, routeData, new ActionDescriptor());
@@ -484,14 +498,17 @@ public class RemoteAttributeTest
     private static ServiceCollection GetServiceCollection()
     {
         var serviceCollection = new ServiceCollection();
-        serviceCollection
-            .AddSingleton<ILoggerFactory>(new NullLoggerFactory());
+        serviceCollection.AddSingleton<ILoggerFactory>(new NullLoggerFactory());
 
         serviceCollection.AddOptions();
         serviceCollection.AddRouting();
 
         serviceCollection.AddSingleton<IInlineConstraintResolver>(
-            provider => new DefaultInlineConstraintResolver(provider.GetRequiredService<IOptions<RouteOptions>>(), provider));
+            provider => new DefaultInlineConstraintResolver(
+                provider.GetRequiredService<IOptions<RouteOptions>>(),
+                provider
+            )
+        );
 
         return serviceCollection;
     }
@@ -547,34 +564,22 @@ public class RemoteAttributeTest
     private class TestableRemoteAttribute : RemoteAttribute
     {
         public TestableRemoteAttribute(string routeName)
-            : base(routeName)
-        {
-        }
+            : base(routeName) { }
 
         public TestableRemoteAttribute(string action, string controller)
-            : base(action, controller)
-        {
-        }
+            : base(action, controller) { }
 
         public TestableRemoteAttribute(string action, string controller, string areaName)
-            : base(action, controller, areaName)
-        {
-        }
+            : base(action, controller, areaName) { }
 
         public new string RouteName
         {
-            get
-            {
-                return base.RouteName;
-            }
+            get { return base.RouteName; }
         }
 
         public new RouteValueDictionary RouteData
         {
-            get
-            {
-                return base.RouteData;
-            }
+            get { return base.RouteData; }
         }
 
         public string InvokeGetUrl(ClientModelValidationContext context)

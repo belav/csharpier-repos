@@ -5,5 +5,12 @@ namespace Microsoft.AspNetCore.Http.Timeouts;
 
 internal interface ICancellationTokenLinker
 {
-    (CancellationTokenSource linkedCts, CancellationTokenSource timeoutCts) GetLinkedCancellationTokenSource(HttpContext httpContext, CancellationToken originalToken, TimeSpan timeSpan);
+    (
+        CancellationTokenSource linkedCts,
+        CancellationTokenSource timeoutCts
+    ) GetLinkedCancellationTokenSource(
+        HttpContext httpContext,
+        CancellationToken originalToken,
+        TimeSpan timeSpan
+    );
 }

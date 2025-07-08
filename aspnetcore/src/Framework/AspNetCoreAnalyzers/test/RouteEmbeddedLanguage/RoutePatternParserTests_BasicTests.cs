@@ -11,18 +11,23 @@ public partial class RoutePatternParserTests
     [Fact]
     public void TestEmpty()
     {
-        Test(@"""""", @"<Tree>
+        Test(
+            @"""""",
+            @"<Tree>
   <CompilationUnit>
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestSingleLiteral()
     {
-        Test(@"""hello""", @"<Tree>
+        Test(
+            @"""hello""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -32,13 +37,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestSingleLiteralWithQuestionMark()
     {
-        Test(@"""hel?lo""", @"<Tree>
+        Test(
+            @"""hel?lo""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -51,13 +59,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The literal section 'hel?lo' is invalid. Literal sections cannot contain the '?' character."" Span=""[9..15)"" Text=""hel?lo"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestSlashSeperatedLiterals()
     {
-        Test(@"""hello/world""", @"<Tree>
+        Test(
+            @"""hello/world""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -75,13 +86,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestDuplicateParameterNames()
     {
-        Test(@"""{a}/{a}""", @"<Tree>
+        Test(
+            @"""{a}/{a}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -112,13 +126,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestSlashSeperatedSegments()
     {
-        Test(@"""{a}/{b}""", @"<Tree>
+        Test(
+            @"""{a}/{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -147,13 +164,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchAllParameterFollowedBySlash()
     {
-        Test(@"""{*a}/""", @"<Tree>
+        Test(
+            @"""{*a}/""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -175,13 +195,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchAllParameterNotLast()
     {
-        Test(@"""{*a}/{b}""", @"<Tree>
+        Test(
+            @"""{*a}/{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -216,13 +239,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchAllAndOptional()
     {
-        Test(@"""{*a?}""", @"<Tree>
+        Test(
+            @"""{*a?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -247,13 +273,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a"" IsCatchAll=""true"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchAllParameterComplexSegment()
     {
-        Test(@"""a{*a}""", @"<Tree>
+        Test(
+            @"""a{*a}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -278,13 +307,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestPeriodSeperatedLiterals()
     {
-        Test(@"""hello.world""", @"<Tree>
+        Test(
+            @"""hello.world""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -294,13 +326,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestSimpleParameter()
     {
-        Test(@"""{id}""", @"<Tree>
+        Test(
+            @"""{id}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -316,13 +351,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithPolicy()
     {
-        Test(@"""{id:foo}""", @"<Tree>
+        Test(
+            @"""{id:foo}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -346,13 +384,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithDefault()
     {
-        Test(@"""{id=Home}""", @"<Tree>
+        Test(
+            @"""{id=Home}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -372,13 +413,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" DefaultValue=""Home"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithDefaultContainingPolicyChars()
     {
-        Test(@"""{id=Home=Controller:int()}""", @"<Tree>
+        Test(
+            @"""{id=Home=Controller:int()}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -398,13 +442,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" DefaultValue=""Home=Controller:int()"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithPolicyArgument()
     {
-        Test(@"""{id:foo(wee)}""", @"<Tree>
+        Test(
+            @"""{id:foo(wee)}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -433,13 +480,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo(wee)</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithPolicyArgumentEmpty()
     {
-        Test(@"""{id:foo()}""", @"<Tree>
+        Test(
+            @"""{id:foo()}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -468,13 +518,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo()</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterOptional()
     {
-        Test(@"""{id?}""", @"<Tree>
+        Test(
+            @"""{id?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -493,13 +546,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterDefaultValue()
     {
-        Test(@"""{id=Home}""", @"<Tree>
+        Test(
+            @"""{id=Home}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -519,13 +575,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" DefaultValue=""Home"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterDefaultValueAndOptional()
     {
-        Test(@"""{id=Home?}""", @"<Tree>
+        Test(
+            @"""{id=Home?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -551,13 +610,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" DefaultValue=""Home"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterQuestionMarkBeforeEscapedClose()
     {
-        Test(@"""{id?}}}""", @"<Tree>
+        Test(
+            @"""{id?}}}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -576,13 +638,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id?}}"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestUnbalancedBracesInComplexSegment()
     {
-        Test(@"""a{foob{bar}c""", @"<Tree>
+        Test(
+            @"""a{foob{bar}c""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -607,13 +672,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""foob{bar"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestComplexSegment()
     {
-        Test(@"""a{foo}b{bar}c""", @"<Tree>
+        Test(
+            @"""a{foo}b{bar}c""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -646,13 +714,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""bar"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""foo"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestConsecutiveParameters()
     {
-        Test(@"""{a}{b}""", @"<Tree>
+        Test(
+            @"""{a}{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -679,13 +750,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""a"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestUnescapedOpenBrace()
     {
-        Test(@"""{a{b}""", @"<Tree>
+        Test(
+            @"""{a{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -704,13 +778,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a{b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestInvalidCharsAndUnescapedOpenBrace()
     {
-        Test(@"""{a/{b}""", @"<Tree>
+        Test(
+            @"""{a/{b}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -729,13 +806,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""a/{b"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithPolicyAndOptional()
     {
-        Test(@"""{id:foo?}""", @"<Tree>
+        Test(
+            @"""{id:foo?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -762,13 +842,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithMultiplePolicies()
     {
-        Test(@"""{id:foo:bar}""", @"<Tree>
+        Test(
+            @"""{id:foo:bar}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -799,13 +882,16 @@ public partial class RoutePatternParserTests
       <Policy>:bar</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestPolicyWithEscapedFragmentParameterIncomplete()
     {
-        Test(@"""{id:foo(hi""", @"<Tree>
+        Test(
+            @"""{id:foo(hi""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -832,13 +918,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo(hi</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestPolicyWithEscapedFragmentIncomplete()
     {
-        Test(@"""{id:foo(hi}""", @"<Tree>
+        Test(
+            @"""{id:foo(hi}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -862,13 +951,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo(hi</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestPolicyWithMultipleFragments()
     {
-        Test(@"""{id:foo(hi)bar}""", @"<Tree>
+        Test(
+            @"""{id:foo(hi)bar}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -900,13 +992,16 @@ public partial class RoutePatternParserTests
       <Policy>:foo(hi)bar</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchAllParameter()
     {
-        Test(@"""{*id}""", @"<Tree>
+        Test(
+            @"""{*id}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -925,13 +1020,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchAllUnescapedParameter()
     {
-        Test(@"""{**id}""", @"<Tree>
+        Test(
+            @"""{**id}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -950,13 +1048,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""false"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestEmptyParameter()
     {
-        Test(@"""{}""", @"<Tree>
+        Test(
+            @"""{}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -973,13 +1074,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The route parameter name '' is invalid. Route parameter names must be non-empty and cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, and can occur only at the start of the parameter."" Span=""[10..11)"" Text=""}"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestOptionalOnlyParameter()
     {
-        Test(@"""{?}""", @"<Tree>
+        Test(
+            @"""{?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -999,13 +1103,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The route parameter name '' is invalid. Route parameter names must be non-empty and cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, and can occur only at the start of the parameter."" Span=""[10..11)"" Text=""?"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchallEscapeOnlyParameter()
     {
-        Test(@"""{*}""", @"<Tree>
+        Test(
+            @"""{*}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1025,13 +1132,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The route parameter name '' is invalid. Route parameter names must be non-empty and cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, and can occur only at the start of the parameter."" Span=""[11..12)"" Text=""}"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchallOnlyParameter()
     {
-        Test(@"""{**}""", @"<Tree>
+        Test(
+            @"""{**}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1051,13 +1161,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The route parameter name '' is invalid. Route parameter names must be non-empty and cannot contain these characters: '{', '}', '/'. The '?' character marks a parameter as optional, and can occur only at the end of the parameter. The '*' character marks a parameter as catch-all, and can occur only at the start of the parameter."" Span=""[12..13)"" Text=""}"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestCatchallPolicyParameter()
     {
-        Test(@"""{**:int}""", @"<Tree>
+        Test(
+            @"""{**:int}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1076,13 +1189,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name="":int"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""false"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithEscapedPolicyArgument()
     {
-        Test(@"""{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}""", @"<Tree>
+        Test(
+            @"""{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1111,13 +1227,16 @@ public partial class RoutePatternParserTests
       <Policy>:regex(^\d{{3}}-\d{{2}}-\d{{4}}$)</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithEscapedPolicyArgumentIncomplete()
     {
-        Test(@"""{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}""", @"<Tree>
+        Test(
+            @"""{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1141,13 +1260,16 @@ public partial class RoutePatternParserTests
       <Policy>:regex(^\d{{3}}-\d{{2}}-\d{{4</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithOpenBraceInEscapedPolicyArgument()
     {
-        Test(@"""{ssn:regex(^\\d{3}})}""", @"<Tree>
+        Test(
+            @"""{ssn:regex(^\\d{3}})}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1179,13 +1301,16 @@ public partial class RoutePatternParserTests
       <Policy>:regex(^\d{3}})</Policy>
     </Parameter>
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterWithInvalidName()
     {
-        Test(@"""{3}}-\\d{{2}}-\\d{{4}""", @"<Tree>
+        Test(
+            @"""{3}}-\\d{{2}}-\\d{{4}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1204,13 +1329,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""3}}-\d{{2}}-\d{{4"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestInvalidCloseBrace()
     {
-        Test(@"""-\\d{{2}}-\\d{{4}""", @"<Tree>
+        Test(
+            @"""-\\d{{2}}-\\d{{4}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -1223,13 +1351,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""There is an incomplete parameter in the route template. Check that each '{' character has a matching '}' character."" Span=""[9..26)"" Text=""-\\d{{2}}-\\d{{4}"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestEscapedBraces()
     {
-        Test(@"""{{2}}""", @"<Tree>
+        Test(
+            @"""{{2}}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -1239,13 +1370,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestInvalidCloseBrace2()
     {
-        Test(@"""{2}}""", @"<Tree>
+        Test(
+            @"""{2}}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1265,13 +1399,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""2}}"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestOptionalParameterPrecededByParameter()
     {
-        Test(@"""{p1}{p2?}""", @"<Tree>
+        Test(
+            @"""{p1}{p2?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1301,13 +1438,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestOptionalParameterPrecededByLiteral()
     {
-        Test(@"""{p1}-{p2?}""", @"<Tree>
+        Test(
+            @"""{p1}-{p2?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1340,13 +1480,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterColonStart()
     {
-        Test(@"""{:hi}""", @"<Tree>
+        Test(
+            @"""{:hi}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1362,13 +1505,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name="":hi"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestParameterCatchAllColonStart()
     {
-        Test(@"""{**:hi}""", @"<Tree>
+        Test(
+            @"""{**:hi}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -1387,13 +1533,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name="":hi"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""false"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestTilde()
     {
-        Test(@"""~""", @"<Tree>
+        Test(
+            @"""~""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -1406,13 +1555,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The route template cannot start with a '~' character unless followed by a '/'."" Span=""[9..10)"" Text=""~"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestTwoTildes()
     {
-        Test(@"""~~""", @"<Tree>
+        Test(
+            @"""~~""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -1425,13 +1577,16 @@ public partial class RoutePatternParserTests
     <Diagnostic Message=""The route template cannot start with a '~' character unless followed by a '/'."" Span=""[9..11)"" Text=""~~"" />
   </Diagnostics>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestTildeSlash()
     {
-        Test(@"""~/""", @"<Tree>
+        Test(
+            @"""~/""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -1444,13 +1599,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void TestTildeParameter()
     {
-        Test(@"""~{id}""", @"<Tree>
+        Test(
+            @"""~{id}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -1472,6 +1630,7 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""id"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 }

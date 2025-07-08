@@ -25,7 +25,8 @@ internal class ComponentApplicationBuilder
     {
         return new RazorComponentApplication(
             Pages.ToPageCollection(),
-            Components.ToComponentCollection());
+            Components.ToComponentCollection()
+        );
     }
 
     /// <summary>

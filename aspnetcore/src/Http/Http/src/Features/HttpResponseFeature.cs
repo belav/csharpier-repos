@@ -34,12 +34,8 @@ public class HttpResponseFeature : IHttpResponseFeature
     public virtual bool HasStarted => false;
 
     /// <inheritdoc />
-    public virtual void OnStarting(Func<object, Task> callback, object state)
-    {
-    }
+    public virtual void OnStarting(Func<object, Task> callback, object state) { }
 
     /// <inheritdoc />
-    public virtual void OnCompleted(Func<object, Task> callback, object state)
-    {
-    }
+    public virtual void OnCompleted(Func<object, Task> callback, object state) { }
 }

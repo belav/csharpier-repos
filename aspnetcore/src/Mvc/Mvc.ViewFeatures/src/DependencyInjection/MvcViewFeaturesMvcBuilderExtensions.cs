@@ -24,7 +24,8 @@ public static class MvcViewFeaturesMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddViewOptions(
         this IMvcBuilder builder,
-        Action<MvcViewOptions> setupAction)
+        Action<MvcViewOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);
@@ -50,7 +51,12 @@ public static class MvcViewFeaturesMvcBuilderExtensions
             builder.Services.TryAddTransient(viewComponent, viewComponent);
         }
 
-        builder.Services.Replace(ServiceDescriptor.Singleton<IViewComponentActivator, ServiceBasedViewComponentActivator>());
+        builder.Services.Replace(
+            ServiceDescriptor.Singleton<
+                IViewComponentActivator,
+                ServiceBasedViewComponentActivator
+            >()
+        );
 
         return builder;
     }
@@ -68,7 +74,10 @@ public static class MvcViewFeaturesMvcBuilderExtensions
         // Ensure the TempData basics are registered.
         MvcViewFeaturesMvcCoreBuilderExtensions.AddViewServices(builder.Services);
 
-        var descriptor = ServiceDescriptor.Singleton(typeof(ITempDataProvider), typeof(SessionStateTempDataProvider));
+        var descriptor = ServiceDescriptor.Singleton(
+            typeof(ITempDataProvider),
+            typeof(SessionStateTempDataProvider)
+        );
         builder.Services.Replace(descriptor);
 
         return builder;
@@ -87,7 +96,10 @@ public static class MvcViewFeaturesMvcBuilderExtensions
         // Ensure the TempData basics are registered.
         MvcViewFeaturesMvcCoreBuilderExtensions.AddViewServices(builder.Services);
 
-        var descriptor = ServiceDescriptor.Singleton(typeof(ITempDataProvider), typeof(CookieTempDataProvider));
+        var descriptor = ServiceDescriptor.Singleton(
+            typeof(ITempDataProvider),
+            typeof(CookieTempDataProvider)
+        );
         builder.Services.Replace(descriptor);
 
         return builder;
@@ -105,7 +117,8 @@ public static class MvcViewFeaturesMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddCookieTempDataProvider(
         this IMvcBuilder builder,
-        Action<CookieTempDataProviderOptions> setupAction)
+        Action<CookieTempDataProviderOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);

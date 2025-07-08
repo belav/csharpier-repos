@@ -16,10 +16,9 @@ public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     public SvgTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -34,7 +33,9 @@ public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
         var svgElement = appElement.FindElement(By.Id("svg-with-callback"));
         Assert.NotNull(svgElement);
 
-        var svgCircleElement = svgElement.FindElement(By.XPath("//*[local-name()='circle' and namespace-uri()='http://www.w3.org/2000/svg']"));
+        var svgCircleElement = svgElement.FindElement(
+            By.XPath("//*[local-name()='circle' and namespace-uri()='http://www.w3.org/2000/svg']")
+        );
         Assert.NotNull(svgCircleElement);
         Assert.Equal("10", svgCircleElement.GetAttribute("r"));
 
@@ -50,7 +51,9 @@ public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
         var svgElement = appElement.FindElement(By.Id("svg-with-callback"));
         Assert.NotNull(svgElement);
 
-        var svgCircleElement = svgElement.FindElement(By.XPath("//*[local-name()='circle' and namespace-uri()='http://www.w3.org/2000/svg']"));
+        var svgCircleElement = svgElement.FindElement(
+            By.XPath("//*[local-name()='circle' and namespace-uri()='http://www.w3.org/2000/svg']")
+        );
         Assert.NotNull(svgCircleElement);
         Assert.Equal("stroke: red;", svgCircleElement.GetAttribute("style"));
 
@@ -66,7 +69,9 @@ public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
         var svgElement = appElement.FindElement(By.Id("svg-with-child-component"));
         Assert.NotNull(svgElement);
 
-        var svgCircleElement = svgElement.FindElement(By.XPath("//*[local-name()='circle' and namespace-uri()='http://www.w3.org/2000/svg']"));
+        var svgCircleElement = svgElement.FindElement(
+            By.XPath("//*[local-name()='circle' and namespace-uri()='http://www.w3.org/2000/svg']")
+        );
         Assert.NotNull(svgCircleElement);
     }
 
@@ -78,12 +83,14 @@ public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
         var svgElement = appElement.FindElement(By.Id("svg-with-foreign-object"));
         Assert.NotNull(svgElement);
 
-        Func<IEnumerable<IWebElement>> strongElement =
-            () => svgElement.FindElements(By.TagName("strong"));
+        Func<IEnumerable<IWebElement>> strongElement = () =>
+            svgElement.FindElements(By.TagName("strong"));
 
-        Browser.Collection<IWebElement>(strongElement,
+        Browser.Collection<IWebElement>(
+            strongElement,
             e => Assert.Equal("thestringfoo", e.Text),
-            e => Assert.Equal("thestringbar", e.Text));
+            e => Assert.Equal("thestringbar", e.Text)
+        );
     }
 
     [Fact]
@@ -149,6 +156,5 @@ public class SvgTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
         Assert.NotNull(svgCircleElement);
 
         Assert.Equal("rgb(0, 128, 0)", svgCircleElement.GetCssValue("fill"));
-
     }
 }

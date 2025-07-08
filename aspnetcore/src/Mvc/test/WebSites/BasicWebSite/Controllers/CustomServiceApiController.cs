@@ -16,7 +16,9 @@ public class CustomServicesApiController : Controller
     }
 
     [HttpGet("GetNotOk")]
-    public ActionResult<string> GetNotOk([FromKeyedServices("not_ok_service")] ICustomService service)
+    public ActionResult<string> GetNotOk(
+        [FromKeyedServices("not_ok_service")] ICustomService service
+    )
     {
         return service.Process();
     }
@@ -24,7 +26,8 @@ public class CustomServicesApiController : Controller
     [HttpGet("GetBoth")]
     public ActionResult<string> GetBoth(
         [FromKeyedServices("ok_service")] ICustomService s1,
-        [FromKeyedServices("not_ok_service")] ICustomService s2)
+        [FromKeyedServices("not_ok_service")] ICustomService s2
+    )
     {
         return $"{s1.Process()},{s2.Process()}";
     }
@@ -38,7 +41,9 @@ public class CustomServicesApiController : Controller
 # nullable enable
 
     [HttpGet("GetOptionalNotRegistered")]
-    public ActionResult<string> GetOptionalNotRegistered([FromKeyedServices("no_existing_key")] ICustomService? service)
+    public ActionResult<string> GetOptionalNotRegistered(
+        [FromKeyedServices("no_existing_key")] ICustomService? service
+    )
     {
         if (service != null)
         {
@@ -48,7 +53,9 @@ public class CustomServicesApiController : Controller
     }
 
     [HttpGet("GetRequiredNotRegistered")]
-    public ActionResult<string> GetRequiredNotRegistered([FromKeyedServices("no_existing_key")] ICustomService service)
+    public ActionResult<string> GetRequiredNotRegistered(
+        [FromKeyedServices("no_existing_key")] ICustomService service
+    )
     {
         return service.Process();
     }

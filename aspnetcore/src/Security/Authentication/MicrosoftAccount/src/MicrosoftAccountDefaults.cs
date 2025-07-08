@@ -24,12 +24,14 @@ public static class MicrosoftAccountDefaults
     /// <remarks>
     /// For more details about this endpoint, see <see href="https://learn.microsoft.com/en-us/graph/auth-v2-user"/>.
     /// </remarks>
-    public static readonly string AuthorizationEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
+    public static readonly string AuthorizationEndpoint =
+        "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
 
     /// <summary>
     /// The OAuth endpoint used to exchange access tokens.
     /// </summary>
-    public static readonly string TokenEndpoint = "https://login.microsoftonline.com/common/oauth2/v2.0/token";
+    public static readonly string TokenEndpoint =
+        "https://login.microsoftonline.com/common/oauth2/v2.0/token";
 
     /// <summary>
     /// The Microsoft Graph API endpoint that is used to gather additional user information.

@@ -283,11 +283,7 @@ public class BindConverterTest
     public void FormatValue_TypeConverter()
     {
         // Arrange
-        var value = new Person()
-        {
-            Name = "Glenn",
-            Age = 47,
-        };
+        var value = new Person() { Name = "Glenn", Age = 47 };
 
         var expected = JsonSerializer.Serialize(value);
 
@@ -306,7 +302,11 @@ public class BindConverterTest
         var incomingValue = expected.ToString();
 
         // Act
-        var successfullyConverted = BindConverter.TryConvertTo<Guid>(incomingValue, CultureInfo.CurrentCulture, out var actual);
+        var successfullyConverted = BindConverter.TryConvertTo<Guid>(
+            incomingValue,
+            CultureInfo.CurrentCulture,
+            out var actual
+        );
 
         // Assert
         Assert.Equal(expected, actual);
@@ -320,7 +320,11 @@ public class BindConverterTest
     public void TryConvertTo_Guid_Invalid(string incomingValue)
     {
         // Act
-        var successfullyConverted = BindConverter.TryConvertTo<Guid>(incomingValue, CultureInfo.CurrentCulture, out var actual);
+        var successfullyConverted = BindConverter.TryConvertTo<Guid>(
+            incomingValue,
+            CultureInfo.CurrentCulture,
+            out var actual
+        );
 
         // Assert
         Assert.False(successfullyConverted);
@@ -335,7 +339,11 @@ public class BindConverterTest
         var incomingValue = expected.ToString();
 
         // Act
-        var successfullyConverted = BindConverter.TryConvertTo<Guid?>(incomingValue, CultureInfo.CurrentCulture, out var actual);
+        var successfullyConverted = BindConverter.TryConvertTo<Guid?>(
+            incomingValue,
+            CultureInfo.CurrentCulture,
+            out var actual
+        );
 
         // Assert
         Assert.True(successfullyConverted);
@@ -348,7 +356,11 @@ public class BindConverterTest
     public void TryConvertTo_NullableGuid_ValidEmptyOrNull(string incomingValue)
     {
         // Act
-        var successfullyConverted = BindConverter.TryConvertTo<Guid?>(incomingValue, CultureInfo.CurrentCulture, out var actual);
+        var successfullyConverted = BindConverter.TryConvertTo<Guid?>(
+            incomingValue,
+            CultureInfo.CurrentCulture,
+            out var actual
+        );
 
         // Assert
         Assert.True(successfullyConverted);
@@ -362,7 +374,11 @@ public class BindConverterTest
         var value = "invalidguid";
 
         // Act
-        var successfullyConverted = BindConverter.TryConvertTo<Guid?>(value, CultureInfo.CurrentCulture, out var actual);
+        var successfullyConverted = BindConverter.TryConvertTo<Guid?>(
+            value,
+            CultureInfo.CurrentCulture,
+            out var actual
+        );
 
         // Assert
         Assert.False(successfullyConverted);
@@ -397,7 +413,11 @@ public class BindConverterTest
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string text)
             {
@@ -417,7 +437,12 @@ public class BindConverterTest
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {

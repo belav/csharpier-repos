@@ -28,10 +28,11 @@ internal sealed class DefaultPageModelFactoryProvider : IPageModelFactoryProvide
 
         var modelActivator = _modelActivator.CreateActivator(descriptor);
         var propertyActivator = PropertyActivator<PageContext>.GetPropertiesToActivate(
-                descriptor.ModelTypeInfo.AsType(),
-                typeof(PageContextAttribute),
-                _createActivateInfo,
-                includeNonPublic: false);
+            descriptor.ModelTypeInfo.AsType(),
+            typeof(PageContextAttribute),
+            _createActivateInfo,
+            includeNonPublic: false
+        );
 
         return pageContext =>
         {
@@ -57,7 +58,9 @@ internal sealed class DefaultPageModelFactoryProvider : IPageModelFactoryProvide
         return _modelActivator.CreateReleaser(descriptor);
     }
 
-    public Func<PageContext, object, ValueTask>? CreateAsyncModelDisposer(CompiledPageActionDescriptor descriptor)
+    public Func<PageContext, object, ValueTask>? CreateAsyncModelDisposer(
+        CompiledPageActionDescriptor descriptor
+    )
     {
         ArgumentNullException.ThrowIfNull(descriptor);
 

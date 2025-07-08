@@ -11,8 +11,10 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public class RequestLocalizationOptions
 {
-    private RequestCulture _defaultRequestCulture =
-        new RequestCulture(CultureInfo.CurrentCulture, CultureInfo.CurrentUICulture);
+    private RequestCulture _defaultRequestCulture = new RequestCulture(
+        CultureInfo.CurrentCulture,
+        CultureInfo.CurrentUICulture
+    );
 
     /// <summary>
     /// Creates a new <see cref="RequestLocalizationOptions"/> with default values.
@@ -23,7 +25,7 @@ public class RequestLocalizationOptions
         {
             new QueryStringRequestCultureProvider { Options = this },
             new CookieRequestCultureProvider { Options = this },
-            new AcceptLanguageHeaderRequestCultureProvider { Options = this }
+            new AcceptLanguageHeaderRequestCultureProvider { Options = this },
         };
     }
 
@@ -39,10 +41,7 @@ public class RequestLocalizationOptions
     /// </summary>
     public RequestCulture DefaultRequestCulture
     {
-        get
-        {
-            return _defaultRequestCulture;
-        }
+        get { return _defaultRequestCulture; }
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -94,14 +93,16 @@ public class RequestLocalizationOptions
     /// the current request culture to an entry in this list.
     /// Defaults to <see cref="CultureInfo.CurrentCulture"/>.
     /// </summary>
-    public IList<CultureInfo>? SupportedCultures { get; set; } = new List<CultureInfo> { CultureInfo.CurrentCulture };
+    public IList<CultureInfo>? SupportedCultures { get; set; } =
+        new List<CultureInfo> { CultureInfo.CurrentCulture };
 
     /// <summary>
     /// The UI cultures supported by the application. The <see cref="RequestLocalizationMiddleware"/> will only set
     /// the current request culture to an entry in this list.
     /// Defaults to <see cref="CultureInfo.CurrentUICulture"/>.
     /// </summary>
-    public IList<CultureInfo>? SupportedUICultures { get; set; } = new List<CultureInfo> { CultureInfo.CurrentUICulture };
+    public IList<CultureInfo>? SupportedUICultures { get; set; } =
+        new List<CultureInfo> { CultureInfo.CurrentUICulture };
 
     /// <summary>
     /// An ordered list of providers used to determine a request's culture information. The first provider that
@@ -126,7 +127,9 @@ public class RequestLocalizationOptions
 
         foreach (var culture in cultures)
         {
-            supportedCultures.Add(new CultureInfo(culture, useUserOverride: CultureInfoUseUserOverride));
+            supportedCultures.Add(
+                new CultureInfo(culture, useUserOverride: CultureInfoUseUserOverride)
+            );
         }
 
         SupportedCultures = supportedCultures;
@@ -144,7 +147,9 @@ public class RequestLocalizationOptions
         var supportedUICultures = new List<CultureInfo>(uiCultures.Length);
         foreach (var culture in uiCultures)
         {
-            supportedUICultures.Add(new CultureInfo(culture, useUserOverride: CultureInfoUseUserOverride));
+            supportedUICultures.Add(
+                new CultureInfo(culture, useUserOverride: CultureInfoUseUserOverride)
+            );
         }
 
         SupportedUICultures = supportedUICultures;
@@ -160,7 +165,9 @@ public class RequestLocalizationOptions
     /// <returns>The <see cref="RequestLocalizationOptions"/>.</returns>
     public RequestLocalizationOptions SetDefaultCulture(string defaultCulture)
     {
-        DefaultRequestCulture = new RequestCulture(new CultureInfo(defaultCulture, useUserOverride: CultureInfoUseUserOverride));
+        DefaultRequestCulture = new RequestCulture(
+            new CultureInfo(defaultCulture, useUserOverride: CultureInfoUseUserOverride)
+        );
 
         return this;
     }

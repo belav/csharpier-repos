@@ -14,28 +14,19 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 public class HttpSysException : Win32Exception
 {
     internal HttpSysException()
-        : base(Marshal.GetLastWin32Error())
-    {
-    }
+        : base(Marshal.GetLastWin32Error()) { }
 
     internal HttpSysException(int errorCode)
-        : base(errorCode)
-    {
-    }
+        : base(errorCode) { }
 
     internal HttpSysException(int errorCode, string message)
-        : base(errorCode, message)
-    {
-    }
+        : base(errorCode, message) { }
 
     // the base class returns the HResult with this property
     // we need the Win32 Error Code, hence the override.
     /// <inheritdoc />
     public override int ErrorCode
     {
-        get
-        {
-            return NativeErrorCode;
-        }
+        get { return NativeErrorCode; }
     }
 }

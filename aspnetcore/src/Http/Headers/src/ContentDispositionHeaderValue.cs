@@ -37,11 +37,12 @@ public class ContentDispositionHeaderValue
 
     // attr-char definition from RFC5987
     // Same as token except ( "*" / "'" / "%" )
-    private static readonly SearchValues<char> AttrChar =
-        SearchValues.Create("!#$&+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~");
+    private static readonly SearchValues<char> AttrChar = SearchValues.Create(
+        "!#$&+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~"
+    );
 
-    private static readonly HttpHeaderParser<ContentDispositionHeaderValue> Parser
-        = new GenericHeaderParser<ContentDispositionHeaderValue>(false, GetDispositionTypeLength);
+    private static readonly HttpHeaderParser<ContentDispositionHeaderValue> Parser =
+        new GenericHeaderParser<ContentDispositionHeaderValue>(false, GetDispositionTypeLength);
 
     // Use list instead of dictionary since we may have multiple parameters with the same name.
     private ObjectCollection<NameValueHeaderValue>? _parameters;
@@ -183,7 +184,9 @@ public class ContentDispositionHeaderValue
             }
             else if (sizeParameter != null)
             {
-                sizeParameter.Value = value.GetValueOrDefault().ToString(CultureInfo.InvariantCulture);
+                sizeParameter.Value = value
+                    .GetValueOrDefault()
+                    .ToString(CultureInfo.InvariantCulture);
             }
             else
             {
@@ -237,15 +240,16 @@ public class ContentDispositionHeaderValue
             return false;
         }
 
-        return _dispositionType.Equals(other._dispositionType, StringComparison.OrdinalIgnoreCase) &&
-            HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
+        return _dispositionType.Equals(other._dispositionType, StringComparison.OrdinalIgnoreCase)
+            && HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
     }
 
     /// <inheritdoc />
     public override int GetHashCode()
     {
         // The dispositionType string is case-insensitive.
-        return StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(_dispositionType) ^ NameValueHeaderValue.GetHashCode(_parameters);
+        return StringSegmentComparer.OrdinalIgnoreCase.GetHashCode(_dispositionType)
+            ^ NameValueHeaderValue.GetHashCode(_parameters);
     }
 
     /// <summary>
@@ -265,13 +269,20 @@ public class ContentDispositionHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="ContentDispositionHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out ContentDispositionHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out ContentDispositionHeaderValue? parsedValue
+    )
     {
         var index = 0;
         return Parser.TryParseValue(input, ref index, out parsedValue!);
     }
 
-    private static int GetDispositionTypeLength(StringSegment input, int startIndex, out ContentDispositionHeaderValue? parsedValue)
+    private static int GetDispositionTypeLength(
+        StringSegment input,
+        int startIndex,
+        out ContentDispositionHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -283,7 +294,11 @@ public class ContentDispositionHeaderValue
         }
 
         // Caller must remove leading whitespaces. If not, we'll return 0.
-        var dispositionTypeLength = GetDispositionTypeExpressionLength(input, startIndex, out var dispositionType);
+        var dispositionTypeLength = GetDispositionTypeExpressionLength(
+            input,
+            startIndex,
+            out var dispositionType
+        );
 
         if (dispositionTypeLength == 0)
         {
@@ -299,8 +314,12 @@ public class ContentDispositionHeaderValue
         if ((current < input.Length) && (input[current] == ';'))
         {
             current++; // skip delimiter.
-            int parameterLength = NameValueHeaderValue.GetNameValueListLength(input, current, ';',
-                contentDispositionHeader.Parameters);
+            int parameterLength = NameValueHeaderValue.GetNameValueListLength(
+                input,
+                current,
+                ';',
+                contentDispositionHeader.Parameters
+            );
 
             parsedValue = contentDispositionHeader;
             return current + parameterLength - startIndex;
@@ -311,7 +330,11 @@ public class ContentDispositionHeaderValue
         return current - startIndex;
     }
 
-    private static int GetDispositionTypeExpressionLength(StringSegment input, int startIndex, out StringSegment dispositionType)
+    private static int GetDispositionTypeExpressionLength(
+        StringSegment input,
+        int startIndex,
+        out StringSegment dispositionType
+    )
     {
         Contract.Requires((input.Length > 0) && (startIndex < input.Length));
 
@@ -331,7 +354,10 @@ public class ContentDispositionHeaderValue
         return typeLength;
     }
 
-    private static void CheckDispositionTypeFormat(StringSegment dispositionType, string parameterName)
+    private static void CheckDispositionTypeFormat(
+        StringSegment dispositionType,
+        string parameterName
+    )
     {
         if (StringSegment.IsNullOrEmpty(dispositionType))
         {
@@ -339,11 +365,20 @@ public class ContentDispositionHeaderValue
         }
 
         // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are allowed.
-        var dispositionTypeLength = GetDispositionTypeExpressionLength(dispositionType, 0, out var tempDispositionType);
+        var dispositionTypeLength = GetDispositionTypeExpressionLength(
+            dispositionType,
+            0,
+            out var tempDispositionType
+        );
         if ((dispositionTypeLength == 0) || (tempDispositionType.Length != dispositionType.Length))
         {
-            throw new FormatException(string.Format(CultureInfo.InvariantCulture,
-                "Invalid disposition type '{0}'.", dispositionType));
+            throw new FormatException(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Invalid disposition type '{0}'.",
+                    dispositionType
+                )
+            );
         }
     }
 
@@ -526,7 +561,8 @@ public class ContentDispositionHeaderValue
     {
         Contract.Assert(value != null);
 
-        return value.Length > 1 && value.StartsWith("\"", StringComparison.Ordinal)
+        return value.Length > 1
+            && value.StartsWith("\"", StringComparison.Ordinal)
             && value.EndsWith("\"", StringComparison.Ordinal);
     }
 
@@ -543,13 +579,15 @@ public class ContentDispositionHeaderValue
     [SkipLocalsInit]
     private string EncodeMimeWithQuotes(StringSegment input)
     {
-        var requiredLength = MimePrefix.Length +
-            Base64.GetMaxEncodedToUtf8Length(Encoding.UTF8.GetByteCount(input.AsSpan())) +
-            MimeSuffix.Length;
+        var requiredLength =
+            MimePrefix.Length
+            + Base64.GetMaxEncodedToUtf8Length(Encoding.UTF8.GetByteCount(input.AsSpan()))
+            + MimeSuffix.Length;
         byte[]? bufferFromPool = null;
-        Span<byte> buffer = requiredLength <= MaxStackAllocSizeBytes
-            ? stackalloc byte[MaxStackAllocSizeBytes]
-            : bufferFromPool = ArrayPool<byte>.Shared.Rent(requiredLength);
+        Span<byte> buffer =
+            requiredLength <= MaxStackAllocSizeBytes
+                ? stackalloc byte[MaxStackAllocSizeBytes]
+                : bufferFromPool = ArrayPool<byte>.Shared.Rent(requiredLength);
         buffer = buffer[..requiredLength];
 
         MimePrefix.CopyTo(buffer);
@@ -560,7 +598,9 @@ public class ContentDispositionHeaderValue
 
         MimeSuffix.CopyTo(bufferContent.Slice(base64ContentLength));
 
-        var result = Encoding.UTF8.GetString(buffer.Slice(0, MimePrefix.Length + base64ContentLength + MimeSuffix.Length));
+        var result = Encoding.UTF8.GetString(
+            buffer.Slice(0, MimePrefix.Length + base64ContentLength + MimeSuffix.Length)
+        );
 
         if (bufferFromPool is not null)
         {
@@ -585,8 +625,12 @@ public class ContentDispositionHeaderValue
 
         var parts = processedInput.Split(QuestionMark).ToArray();
         // "=, encodingName, encodingType, encodedData, ="
-        if (parts.Length != 5 || parts[0] != "\"=" || parts[4] != "=\""
-            || !parts[2].Equals("b", StringComparison.OrdinalIgnoreCase))
+        if (
+            parts.Length != 5
+            || parts[0] != "\"="
+            || parts[4] != "=\""
+            || !parts[2].Equals("b", StringComparison.OrdinalIgnoreCase)
+        )
         {
             // Not encoded.
             // This does not support multi-line encoding.
@@ -621,9 +665,10 @@ public class ContentDispositionHeaderValue
 
         var maxInputBytes = Encoding.UTF8.GetMaxByteCount(input.Length);
         byte[]? bufferFromPool = null;
-        Span<byte> inputBytes = maxInputBytes <= MaxStackAllocSizeBytes
-            ? stackalloc byte[MaxStackAllocSizeBytes]
-            : bufferFromPool = ArrayPool<byte>.Shared.Rent(maxInputBytes);
+        Span<byte> inputBytes =
+            maxInputBytes <= MaxStackAllocSizeBytes
+                ? stackalloc byte[MaxStackAllocSizeBytes]
+                : bufferFromPool = ArrayPool<byte>.Shared.Rent(maxInputBytes);
 
         var bytesWritten = Encoding.UTF8.GetBytes(input, inputBytes);
         inputBytes = inputBytes[..bytesWritten];
@@ -651,7 +696,11 @@ public class ContentDispositionHeaderValue
             {
                 // Non-ASCII, let's rely on Rune to decode it.
 
-                Rune.DecodeFromUtf8(inputBytes.Slice(totalBytesConsumed), out Rune r, out int bytesConsumedForRune);
+                Rune.DecodeFromUtf8(
+                    inputBytes.Slice(totalBytesConsumed),
+                    out Rune r,
+                    out int bytesConsumedForRune
+                );
                 Contract.Assert(!r.IsAscii, "We shouldn't have gotten here if the Rune is ASCII.");
 
                 for (int i = 0; i < bytesConsumedForRune; i++)
@@ -671,9 +720,25 @@ public class ContentDispositionHeaderValue
         return builder.ToString();
     }
 
-    private static readonly char[] HexUpperChars = {
-                                   '0', '1', '2', '3', '4', '5', '6', '7',
-                                   '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+    private static readonly char[] HexUpperChars =
+    {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+    };
 
     private static void HexEscape(StringBuilder builder, char c)
     {
@@ -760,16 +825,24 @@ public class ContentDispositionHeaderValue
 
     private static bool IsEscapedAscii(char digit, char next)
     {
-        if (!(((digit >= '0') && (digit <= '9'))
-            || ((digit >= 'A') && (digit <= 'F'))
-            || ((digit >= 'a') && (digit <= 'f'))))
+        if (
+            !(
+                ((digit >= '0') && (digit <= '9'))
+                || ((digit >= 'A') && (digit <= 'F'))
+                || ((digit >= 'a') && (digit <= 'f'))
+            )
+        )
         {
             return false;
         }
 
-        if (!(((next >= '0') && (next <= '9'))
-            || ((next >= 'A') && (next <= 'F'))
-            || ((next >= 'a') && (next <= 'f'))))
+        if (
+            !(
+                ((next >= '0') && (next <= '9'))
+                || ((next >= 'A') && (next <= 'F'))
+                || ((next >= 'a') && (next <= 'f'))
+            )
+        )
         {
             return false;
         }
@@ -783,8 +856,7 @@ public class ContentDispositionHeaderValue
         {
             throw new ArgumentOutOfRangeException(nameof(index));
         }
-        if ((pattern[index] == '%')
-            && (pattern.Length - index >= 3))
+        if ((pattern[index] == '%') && (pattern.Length - index >= 3))
         {
             var ret = UnEscapeAscii(pattern[index + 1], pattern[index + 2]);
             index += 3;
@@ -795,32 +867,40 @@ public class ContentDispositionHeaderValue
 
     internal static byte UnEscapeAscii(char digit, char next)
     {
-        if (!(((digit >= '0') && (digit <= '9'))
-            || ((digit >= 'A') && (digit <= 'F'))
-            || ((digit >= 'a') && (digit <= 'f'))))
+        if (
+            !(
+                ((digit >= '0') && (digit <= '9'))
+                || ((digit >= 'A') && (digit <= 'F'))
+                || ((digit >= 'a') && (digit <= 'f'))
+            )
+        )
         {
             throw new ArgumentOutOfRangeException(nameof(digit));
         }
 
-        var res = (digit <= '9')
-            ? ((int)digit - (int)'0')
-            : (((digit <= 'F')
-            ? ((int)digit - (int)'A')
-            : ((int)digit - (int)'a'))
-               + 10);
+        var res =
+            (digit <= '9')
+                ? ((int)digit - (int)'0')
+                : (((digit <= 'F') ? ((int)digit - (int)'A') : ((int)digit - (int)'a')) + 10);
 
-        if (!(((next >= '0') && (next <= '9'))
-            || ((next >= 'A') && (next <= 'F'))
-            || ((next >= 'a') && (next <= 'f'))))
+        if (
+            !(
+                ((next >= '0') && (next <= '9'))
+                || ((next >= 'A') && (next <= 'F'))
+                || ((next >= 'a') && (next <= 'f'))
+            )
+        )
         {
             throw new ArgumentOutOfRangeException(nameof(next));
         }
 
-        return (byte)((res << 4) + ((next <= '9')
-                ? ((int)next - (int)'0')
-                : (((next <= 'F')
-                    ? ((int)next - (int)'A')
-                    : ((int)next - (int)'a'))
-                   + 10)));
+        return (byte)(
+            (res << 4)
+            + (
+                (next <= '9')
+                    ? ((int)next - (int)'0')
+                    : (((next <= 'F') ? ((int)next - (int)'A') : ((int)next - (int)'a')) + 10)
+            )
+        );
     }
 }

@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// This attribute helps defend against cross-site request forgery. It won't prevent other forgery or tampering
 /// attacks.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class ValidateAntiForgeryTokenAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
     /// <summary>

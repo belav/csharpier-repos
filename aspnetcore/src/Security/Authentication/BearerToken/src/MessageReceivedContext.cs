@@ -17,7 +17,8 @@ public class MessageReceivedContext : ResultContext<BearerTokenOptions>
     public MessageReceivedContext(
         HttpContext context,
         AuthenticationScheme scheme,
-        BearerTokenOptions options)
+        BearerTokenOptions options
+    )
         : base(context, scheme, options) { }
 
     /// <summary>

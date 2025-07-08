@@ -21,10 +21,25 @@ public class TextOutputFormatterTests
 
             yield return new object[] { "utf-8", new string[] { "utf-8", "utf-16" }, "utf-8" };
             yield return new object[] { "utf-16", new string[] { "utf-8", "utf-16" }, "utf-16" };
-            yield return new object[] { "utf-16; q=0.5", new string[] { "utf-8", "utf-16" }, "utf-16" };
+            yield return new object[]
+            {
+                "utf-16; q=0.5",
+                new string[] { "utf-8", "utf-16" },
+                "utf-16",
+            };
 
-            yield return new object[] { "utf-8; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
-            yield return new object[] { "utf-8; q=0.0, utf-16; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
+            yield return new object[]
+            {
+                "utf-8; q=0.0",
+                new string[] { "utf-8", "utf-16" },
+                "utf-8",
+            };
+            yield return new object[]
+            {
+                "utf-8; q=0.0, utf-16; q=0.0",
+                new string[] { "utf-8", "utf-16" },
+                "utf-8",
+            };
 
             yield return new object[] { "*; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
         }
@@ -35,7 +50,8 @@ public class TextOutputFormatterTests
     public void SelectResponseCharacterEncoding_SelectsEncoding(
         string acceptCharsetHeaders,
         string[] supportedEncodings,
-        string expectedEncoding)
+        string expectedEncoding
+    )
     {
         // Arrange
         var httpContext = new Mock<HttpContext>();
@@ -54,7 +70,8 @@ public class TextOutputFormatterTests
             httpContext.Object,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            "someValue")
+            "someValue"
+        )
         {
             ContentType = new StringSegment(httpRequest.Headers.Accept),
         };
@@ -68,10 +85,14 @@ public class TextOutputFormatterTests
 
     [Theory]
     [InlineData("application/json; charset=utf-16", "application/json; charset=utf-32")]
-    [InlineData("application/json; charset=utf-16; format=indent", "application/json; charset=utf-32; format=indent")]
+    [InlineData(
+        "application/json; charset=utf-16; format=indent",
+        "application/json; charset=utf-32; format=indent"
+    )]
     public void WriteResponse_OverridesCharset_IfDifferentFromContentTypeCharset(
         string contentType,
-        string expectedContentType)
+        string expectedContentType
+    )
     {
         // Arrange
         var formatter = new OverrideEncodingFormatter(Encoding.UTF32);
@@ -80,7 +101,8 @@ public class TextOutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null)
+            @object: null
+        )
         {
             ContentType = new StringSegment(contentType),
         };
@@ -102,7 +124,8 @@ public class TextOutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null)
+            @object: null
+        )
         {
             ContentType = new StringSegment("application/json"),
         };
@@ -133,7 +156,8 @@ public class TextOutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null)
+            @object: null
+        )
         {
             ContentType = new StringSegment("application/json; charset=utf-7"),
         };
@@ -145,7 +169,10 @@ public class TextOutputFormatterTests
         formatter.WriteAsync(formatterContext);
 
         // Assert
-        Assert.Equal(new StringSegment("application/json; charset=utf-8"), formatterContext.ContentType);
+        Assert.Equal(
+            new StringSegment("application/json; charset=utf-8"),
+            formatterContext.ContentType
+        );
     }
 
     [Fact]
@@ -159,7 +186,8 @@ public class TextOutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null)
+            @object: null
+        )
         {
             ContentType = new StringSegment(contentType),
         };
@@ -190,7 +218,8 @@ public class TextOutputFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null)
+            @object: null
+        )
         {
             ContentType = testContentType,
         };
@@ -203,7 +232,10 @@ public class TextOutputFormatterTests
         Assert.Equal(testContentType, context.ContentType);
 
         // If we had set an encoding, it would be part of the content type header
-        Assert.Equal(MediaTypeHeaderValue.Parse(testContentType.Value), context.HttpContext.Response.GetTypedHeaders().ContentType);
+        Assert.Equal(
+            MediaTypeHeaderValue.Parse(testContentType.Value),
+            context.HttpContext.Response.GetTypedHeaders().ContentType
+        );
     }
 
     [Fact]
@@ -216,10 +248,14 @@ public class TextOutputFormatterTests
         formatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/json"));
 
         var context = new OutputFormatterWriteContext(
-            new DefaultHttpContext() { RequestServices = new ServiceCollection().BuildServiceProvider() },
+            new DefaultHttpContext()
+            {
+                RequestServices = new ServiceCollection().BuildServiceProvider(),
+            },
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null)
+            @object: null
+        )
         {
             ContentType = testContentType,
         };
@@ -245,7 +281,8 @@ public class TextOutputFormatterTests
             context,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,
-            @object: null);
+            @object: null
+        );
 
         // Act
         var result = TextOutputFormatter.GetAcceptCharsetHeaderValues(writerContext);
@@ -261,7 +298,10 @@ public class TextOutputFormatterTests
             SupportedMediaTypes.Add("application/acceptCharset");
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             return Task.FromResult(true);
         }
@@ -281,7 +321,10 @@ public class TextOutputFormatterTests
             return _encoding;
         }
 
-        public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+        public override Task WriteResponseBodyAsync(
+            OutputFormatterWriteContext context,
+            Encoding selectedEncoding
+        )
         {
             return Task.FromResult(true);
         }

@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
 internal sealed class WebAssemblyScrollToLocationHash : IScrollToLocationHash
 {
-    public static readonly WebAssemblyScrollToLocationHash Instance = new WebAssemblyScrollToLocationHash();
+    public static readonly WebAssemblyScrollToLocationHash Instance =
+        new WebAssemblyScrollToLocationHash();
 
     public Task RefreshScrollPositionForHash(string locationAbsolute)
     {

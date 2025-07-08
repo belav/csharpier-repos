@@ -20,34 +20,94 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
             {
                 Id = 0,
                 Name = "Test Item",
-                IsComplete = false
+                IsComplete = false,
             };
             var expectedTodoBody = "Test Item";
             var expectedServiceBody = "Produced from service!";
-            var implicitRequiredServiceSource = $"""app.MapPost("/", ({typeof(TestService)} svc) => svc.TestServiceMethod());""";
-            var implicitRequiredJsonBodySource = $"""app.MapPost("/", (Todo todo) => todo.Name ?? string.Empty);""";
-            var implicitRequiredJsonBodyViaAsParametersSource = $"""app.MapPost("/", ([AsParameters] ParametersListWithImplicitFromBody args) => args.Todo.Name ?? string.Empty);""";
+            var implicitRequiredServiceSource =
+                $"""app.MapPost("/", ({typeof(TestService)} svc) => svc.TestServiceMethod());""";
+            var implicitRequiredJsonBodySource =
+                $"""app.MapPost("/", (Todo todo) => todo.Name ?? string.Empty);""";
+            var implicitRequiredJsonBodyViaAsParametersSource =
+                $"""app.MapPost("/", ([AsParameters] ParametersListWithImplicitFromBody args) => args.Todo.Name ?? string.Empty);""";
 
             return new[]
             {
-                new object[] { implicitRequiredServiceSource, false, null, true, 200, expectedServiceBody },
-                new object[] { implicitRequiredServiceSource, false, null, false, 400, string.Empty },
-                new object[] { implicitRequiredJsonBodySource, true, todo, false, 200, expectedTodoBody },
-                new object[] { implicitRequiredJsonBodySource, true, null, false, 400, string.Empty },
-                new object[] { implicitRequiredJsonBodyViaAsParametersSource, true, todo, false, 200, expectedTodoBody },
-                new object[] { implicitRequiredJsonBodyViaAsParametersSource, true, null, false, 400, string.Empty },
+                new object[]
+                {
+                    implicitRequiredServiceSource,
+                    false,
+                    null,
+                    true,
+                    200,
+                    expectedServiceBody,
+                },
+                new object[]
+                {
+                    implicitRequiredServiceSource,
+                    false,
+                    null,
+                    false,
+                    400,
+                    string.Empty,
+                },
+                new object[]
+                {
+                    implicitRequiredJsonBodySource,
+                    true,
+                    todo,
+                    false,
+                    200,
+                    expectedTodoBody,
+                },
+                new object[]
+                {
+                    implicitRequiredJsonBodySource,
+                    true,
+                    null,
+                    false,
+                    400,
+                    string.Empty,
+                },
+                new object[]
+                {
+                    implicitRequiredJsonBodyViaAsParametersSource,
+                    true,
+                    todo,
+                    false,
+                    200,
+                    expectedTodoBody,
+                },
+                new object[]
+                {
+                    implicitRequiredJsonBodyViaAsParametersSource,
+                    true,
+                    null,
+                    false,
+                    400,
+                    string.Empty,
+                },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(MapAction_JsonBodyOrService_SimpleReturn_Data))]
-    public async Task MapAction_JsonBodyOrService_SimpleReturn(string source, bool hasBody, Todo requestData, bool hasService, int expectedStatusCode, string expectedBody)
+    public async Task MapAction_JsonBodyOrService_SimpleReturn(
+        string source,
+        bool hasBody,
+        Todo requestData,
+        bool hasService,
+        int expectedStatusCode,
+        string expectedBody
+    )
     {
         var (_, compilation) = await RunGeneratorAsync(source);
-        var serviceProvider = CreateServiceProvider(hasService ?
-            (serviceCollection) => serviceCollection.AddSingleton(new TestService())
-            : null);
+        var serviceProvider = CreateServiceProvider(
+            hasService
+                ? (serviceCollection) => serviceCollection.AddSingleton(new TestService())
+                : null
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);
@@ -72,10 +132,12 @@ app.MapPost("/", (Todo todo, TestService svc) => $"{svc.TestServiceMethod()}, {t
         {
             Id = 1,
             Name = "Test",
-            IsComplete = false
+            IsComplete = false,
         };
         var (_, compilation) = await RunGeneratorAsync(source);
-        var serviceProvider = CreateServiceProvider((serviceCollection) => serviceCollection.AddSingleton(new TestService()));
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) => serviceCollection.AddSingleton(new TestService())
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContextWithBody(requestData, serviceProvider);
@@ -93,23 +155,88 @@ app.MapPost("/", (Todo todo, TestService svc) => $"{svc.TestServiceMethod()}, {t
             return new List<object[]>
             {
                 new object[] { @"(Todo todo) => $""Todo: {todo.Name}"";", false, true, null },
-                new object[] { @"(Todo todo) => $""Todo: {todo.Name}"";", true, false, "Todo: Default Todo"},
-                new object[] { @"(Todo? todo = null) => $""Todo: {todo?.Name}"";", false, false, "Todo: "},
-                new object[] { @"(Todo? todo = null) => $""Todo: {todo?.Name}"";", true, false, "Todo: Default Todo"},
-                new object[] { @"(Todo? todo) => $""Todo: {todo?.Name}"";", false, false, "Todo: " },
-                new object[] { @"(Todo? todo) => $""Todo: {todo?.Name}"";", true, false, "Todo: Default Todo" },
-                new object[] { @"(TodoStruct todo) => $""Todo: {todo.Name}"";", true, false, "Todo: Default Todo"},
-                new object[] { @"(TodoStruct? todo = null) => $""Todo: {todo?.Name}"";", false, false, "Todo: "},
-                new object[] { @"(TodoStruct? todo = null) => $""Todo: {todo?.Name}"";", true, false, "Todo: Default Todo"},
-                new object[] { @"(TodoStruct? todo) => $""Todo: {todo?.Name}"";", false, false, "Todo: " },
-                new object[] { @"(TodoStruct? todo) => $""Todo: {todo?.Name}"";", true, false, "Todo: Default Todo" },
+                new object[]
+                {
+                    @"(Todo todo) => $""Todo: {todo.Name}"";",
+                    true,
+                    false,
+                    "Todo: Default Todo",
+                },
+                new object[]
+                {
+                    @"(Todo? todo = null) => $""Todo: {todo?.Name}"";",
+                    false,
+                    false,
+                    "Todo: ",
+                },
+                new object[]
+                {
+                    @"(Todo? todo = null) => $""Todo: {todo?.Name}"";",
+                    true,
+                    false,
+                    "Todo: Default Todo",
+                },
+                new object[]
+                {
+                    @"(Todo? todo) => $""Todo: {todo?.Name}"";",
+                    false,
+                    false,
+                    "Todo: ",
+                },
+                new object[]
+                {
+                    @"(Todo? todo) => $""Todo: {todo?.Name}"";",
+                    true,
+                    false,
+                    "Todo: Default Todo",
+                },
+                new object[]
+                {
+                    @"(TodoStruct todo) => $""Todo: {todo.Name}"";",
+                    true,
+                    false,
+                    "Todo: Default Todo",
+                },
+                new object[]
+                {
+                    @"(TodoStruct? todo = null) => $""Todo: {todo?.Name}"";",
+                    false,
+                    false,
+                    "Todo: ",
+                },
+                new object[]
+                {
+                    @"(TodoStruct? todo = null) => $""Todo: {todo?.Name}"";",
+                    true,
+                    false,
+                    "Todo: Default Todo",
+                },
+                new object[]
+                {
+                    @"(TodoStruct? todo) => $""Todo: {todo?.Name}"";",
+                    false,
+                    false,
+                    "Todo: ",
+                },
+                new object[]
+                {
+                    @"(TodoStruct? todo) => $""Todo: {todo?.Name}"";",
+                    true,
+                    false,
+                    "Todo: Default Todo",
+                },
             };
         }
     }
 
     [Theory]
     [MemberData(nameof(BodyParamOptionalityData))]
-    public async Task RequestDelegateHandlesBodyParamOptionality(string innerSource, bool hasBody, bool isInvalid, string expectedBody)
+    public async Task RequestDelegateHandlesBodyParamOptionality(
+        string innerSource,
+        bool hasBody,
+        bool isInvalid,
+        string expectedBody
+    )
     {
         var source = $"""
 string handler{innerSource};
@@ -120,7 +247,9 @@ app.MapPost("/", handler);
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var todo = new Todo() { Name = "Default Todo" };
-        var httpContext = hasBody ? CreateHttpContextWithBody(todo) : CreateHttpContextWithBody(null);
+        var httpContext = hasBody
+            ? CreateHttpContextWithBody(todo)
+            : CreateHttpContextWithBody(null);
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -131,7 +260,10 @@ app.MapPost("/", handler);
             var log = Assert.Single(logs);
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(5, "ImplicitBodyNotProvided"), log.EventId);
-            Assert.Equal(@"Implicit body inferred for parameter ""todo"" but no body was provided. Did you mean to use a Service instead?", log.Message);
+            Assert.Equal(
+                @"Implicit body inferred for parameter ""todo"" but no body was provided. Did you mean to use a Service instead?",
+                log.Message
+            );
         }
         else
         {
@@ -181,7 +313,9 @@ void TestAction([AsParameters] ParametersListWithImplicitFromBody args)
 
     [Theory]
     [MemberData(nameof(ImplicitFromBodyActions))]
-    public async Task RequestDelegateRejectsEmptyBodyGivenImplicitFromBodyParameter(string innerSource)
+    public async Task RequestDelegateRejectsEmptyBodyGivenImplicitFromBodyParameter(
+        string innerSource
+    )
     {
         var source = $"""
 {innerSource}
@@ -190,18 +324,27 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(false)
+        );
 
-        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
         Assert.StartsWith("Implicit body inferred for parameter", ex.Message);
-        Assert.EndsWith("but no body was provided. Did you mean to use a Service instead?", ex.Message);
+        Assert.EndsWith(
+            "but no body was provided. Did you mean to use a Service instead?",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -211,11 +354,15 @@ app.MapPost("/", TestAction);
 app.MapPost("/", (TestService svc) => svc.TestServiceMethod());
 """;
         var (_, compilation) = await RunGeneratorAsync(source);
-        var serviceProvider = CreateServiceProvider((serviceCollection) =>
-        {
-            serviceCollection.ConfigureHttpJsonOptions(o => o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default);
-            serviceCollection.AddSingleton(new TestService());
-        });
+        var serviceProvider = CreateServiceProvider(
+            (serviceCollection) =>
+            {
+                serviceCollection.ConfigureHttpJsonOptions(o =>
+                    o.SerializerOptions.TypeInfoResolver = SharedTestJsonContext.Default
+                );
+                serviceCollection.AddSingleton(new TestService());
+            }
+        );
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext(serviceProvider);

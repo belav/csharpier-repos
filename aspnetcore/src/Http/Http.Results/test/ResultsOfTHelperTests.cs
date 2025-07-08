@@ -15,51 +15,75 @@ public class ResultsOfTHelperTests
     [RemoteExecutionSupported]
     [InlineData(true)]
     [InlineData(false)]
-    public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_PublicMethod_Called(bool isDynamicCodeSupported)
+    public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_PublicMethod_Called(
+        bool isDynamicCodeSupported
+    )
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", isDynamicCodeSupported.ToString());
+        options.RuntimeConfigurationOptions.Add(
+            "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+            isDynamicCodeSupported.ToString()
+        );
 
-        using var remoteHandle = RemoteExecutor.Invoke(static () =>
-        {
-            var metadata = GetMetadata<PublicMethodEndpointMetadataProvider>();
+        using var remoteHandle = RemoteExecutor.Invoke(
+            static () =>
+            {
+                var metadata = GetMetadata<PublicMethodEndpointMetadataProvider>();
 
-            Assert.Single(metadata);
-        }, options);
+                Assert.Single(metadata);
+            },
+            options
+        );
     }
 
     [ConditionalTheory]
     [RemoteExecutionSupported]
     [InlineData(true)]
     [InlineData(false)]
-    public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_ExplicitMethod_Called(bool isDynamicCodeSupported)
+    public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_ExplicitMethod_Called(
+        bool isDynamicCodeSupported
+    )
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", isDynamicCodeSupported.ToString());
+        options.RuntimeConfigurationOptions.Add(
+            "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+            isDynamicCodeSupported.ToString()
+        );
 
-        using var remoteHandle = RemoteExecutor.Invoke(static () =>
-        {
-            var metadata = GetMetadata<ExplicitMethodEndpointMetadataProvider>();
+        using var remoteHandle = RemoteExecutor.Invoke(
+            static () =>
+            {
+                var metadata = GetMetadata<ExplicitMethodEndpointMetadataProvider>();
 
-            Assert.Single(metadata);
-        }, options);
+                Assert.Single(metadata);
+            },
+            options
+        );
     }
 
     [ConditionalTheory]
     [RemoteExecutionSupported]
     [InlineData(true)]
     [InlineData(false)]
-    public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_ExplicitAndPublicMethod_ExplicitCalled(bool isDynamicCodeSupported)
+    public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_ExplicitAndPublicMethod_ExplicitCalled(
+        bool isDynamicCodeSupported
+    )
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", isDynamicCodeSupported.ToString());
+        options.RuntimeConfigurationOptions.Add(
+            "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+            isDynamicCodeSupported.ToString()
+        );
 
-        using var remoteHandle = RemoteExecutor.Invoke(static () =>
-        {
-            var metadata = GetMetadata<ExplicitAndPublicMethodEndpointMetadataProvider>();
+        using var remoteHandle = RemoteExecutor.Invoke(
+            static () =>
+            {
+                var metadata = GetMetadata<ExplicitAndPublicMethodEndpointMetadataProvider>();
 
-            Assert.Single(metadata);
-        }, options);
+                Assert.Single(metadata);
+            },
+            options
+        );
     }
 
     [ConditionalFact]
@@ -67,23 +91,35 @@ public class ResultsOfTHelperTests
     public void PopulateMetadataIfTargetIsIEndpointMetadataProvider_DefaultInterfaceMethod_NoDynamicCode_Throws()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add("System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported", false.ToString());
+        options.RuntimeConfigurationOptions.Add(
+            "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+            false.ToString()
+        );
 
-        using var remoteHandle = RemoteExecutor.Invoke(static () =>
-        {
-            // Improve with https://github.com/dotnet/aspnetcore/issues/46267
-            Assert.Throws<InvalidOperationException>(() => GetMetadata<DefaultInterfaceMethodEndpointMetadataProvider>());
-        }, options);
+        using var remoteHandle = RemoteExecutor.Invoke(
+            static () =>
+            {
+                // Improve with https://github.com/dotnet/aspnetcore/issues/46267
+                Assert.Throws<InvalidOperationException>(
+                    () => GetMetadata<DefaultInterfaceMethodEndpointMetadataProvider>()
+                );
+            },
+            options
+        );
     }
 
     private static IList<object> GetMetadata<T>()
     {
-        var methodInfo = typeof(ResultsOfTHelperTests).GetMethod(nameof(GetMetadata), BindingFlags.NonPublic | BindingFlags.Static);
+        var methodInfo = typeof(ResultsOfTHelperTests).GetMethod(
+            nameof(GetMetadata),
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
         var endpointBuilder = new TestEndpointBuilder();
 
         ResultsOfTHelper.PopulateMetadataIfTargetIsIEndpointMetadataProvider<T>(
             methodInfo,
-            endpointBuilder);
+            endpointBuilder
+        );
 
         return endpointBuilder.Metadata;
     }
@@ -106,7 +142,10 @@ public class ResultsOfTHelperTests
 
     private class ExplicitMethodEndpointMetadataProvider : IEndpointMetadataProvider
     {
-        static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+        static void IEndpointMetadataProvider.PopulateMetadata(
+            MethodInfo method,
+            EndpointBuilder builder
+        )
         {
             builder.Metadata.Add("Called");
         }
@@ -119,7 +158,10 @@ public class ResultsOfTHelperTests
             throw new Exception("Shouldn't reach here.");
         }
 
-        static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+        static void IEndpointMetadataProvider.PopulateMetadata(
+            MethodInfo method,
+            EndpointBuilder builder
+        )
         {
             builder.Metadata.Add("Called");
         }
@@ -127,13 +169,14 @@ public class ResultsOfTHelperTests
 
     private interface IMyEndpointMetadataProvider : IEndpointMetadataProvider
     {
-        static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+        static void IEndpointMetadataProvider.PopulateMetadata(
+            MethodInfo method,
+            EndpointBuilder builder
+        )
         {
             builder.Metadata.Add("Called");
         }
     }
 
-    private class DefaultInterfaceMethodEndpointMetadataProvider : IMyEndpointMetadataProvider
-    {
-    }
+    private class DefaultInterfaceMethodEndpointMetadataProvider : IMyEndpointMetadataProvider { }
 }

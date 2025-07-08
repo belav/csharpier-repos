@@ -9,21 +9,25 @@ namespace Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
 internal static class EmbeddedSyntaxHelpers
 {
-    public static TextSpan GetSpan<TSyntaxKind>(EmbeddedSyntaxToken<TSyntaxKind> token1, EmbeddedSyntaxToken<TSyntaxKind> token2) where TSyntaxKind : struct
+    public static TextSpan GetSpan<TSyntaxKind>(
+        EmbeddedSyntaxToken<TSyntaxKind> token1,
+        EmbeddedSyntaxToken<TSyntaxKind> token2
+    )
+        where TSyntaxKind : struct
     {
         if (token2.VirtualChars.IsEmpty)
         {
             return GetSpan(token1.VirtualChars[0], token1.VirtualChars.Last());
         }
-        
+
         return GetSpan(token1.VirtualChars[0], token2.VirtualChars.Last());
     }
 
-    public static TextSpan GetSpan(VirtualCharSequence virtualChars)
-        => GetSpan(virtualChars[0], virtualChars.Last());
+    public static TextSpan GetSpan(VirtualCharSequence virtualChars) =>
+        GetSpan(virtualChars[0], virtualChars.Last());
 
-    public static TextSpan GetSpan(VirtualChar firstChar, VirtualChar lastChar)
-        => TextSpan.FromBounds(firstChar.Span.Start, lastChar.Span.End);
+    public static TextSpan GetSpan(VirtualChar firstChar, VirtualChar lastChar) =>
+        TextSpan.FromBounds(firstChar.Span.Start, lastChar.Span.End);
 
     public static RoutePatternNode? GetChildNode(this RoutePatternNode node, RoutePatternKind kind)
     {

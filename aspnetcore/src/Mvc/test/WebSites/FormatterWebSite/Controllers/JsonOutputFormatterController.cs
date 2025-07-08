@@ -24,14 +24,24 @@ public class JsonOutputFormatterController : ControllerBase
 
     [HttpGet]
     public ActionResult<SimpleModel> SimpleModelResult() =>
-        new SimpleModel { Id = 10, Name = "Test", StreetName = "Some street" };
+        new SimpleModel
+        {
+            Id = 10,
+            Name = "Test",
+            StreetName = "Some street",
+        };
 
     [HttpGet]
     public ActionResult<IEnumerable<SimpleModel>> CollectionModelResult() =>
         new[]
         {
-                new SimpleModel { Id = 10, Name = "TestName" },
-                new SimpleModel { Id = 11, Name = "TestName1", StreetName = "Some street" },
+            new SimpleModel { Id = 10, Name = "TestName" },
+            new SimpleModel
+            {
+                Id = 11,
+                Name = "TestName1",
+                StreetName = "Some street",
+            },
         };
 
     [HttpGet]
@@ -52,12 +62,13 @@ public class JsonOutputFormatterController : ControllerBase
         };
 
     [HttpGet]
-    public ActionResult<SimpleModel> PolymorphicResult() => new DerivedModel
-    {
-        Id = 10,
-        Name = "test",
-        Address = "Some address",
-    };
+    public ActionResult<SimpleModel> PolymorphicResult() =>
+        new DerivedModel
+        {
+            Id = 10,
+            Name = "test",
+            Address = "Some address",
+        };
 
     [HttpGet]
     public ActionResult<ProblemDetails> ProblemDetailsResult() => NotFound();

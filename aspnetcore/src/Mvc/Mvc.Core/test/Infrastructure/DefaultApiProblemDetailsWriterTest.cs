@@ -14,7 +14,6 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 public class DefaultApiProblemDetailsWriterTest
 {
-
     [Fact]
     public async Task WriteAsync_Works()
     {
@@ -34,7 +33,7 @@ public class DefaultApiProblemDetailsWriterTest
         var problemDetailsContext = new ProblemDetailsContext()
         {
             HttpContext = context,
-            ProblemDetails = expectedProblem
+            ProblemDetails = expectedProblem,
         };
 
         //Act
@@ -42,7 +41,10 @@ public class DefaultApiProblemDetailsWriterTest
 
         //Assert
         stream.Position = 0;
-        var problemDetails = await JsonSerializer.DeserializeAsync<ProblemDetails>(stream, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        var problemDetails = await JsonSerializer.DeserializeAsync<ProblemDetails>(
+            stream,
+            new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        );
         Assert.NotNull(problemDetails);
         Assert.Equal(expectedProblem.Status, problemDetails.Status);
         Assert.Equal(expectedProblem.Type, problemDetails.Type);
@@ -51,7 +53,7 @@ public class DefaultApiProblemDetailsWriterTest
         Assert.Equal(expectedProblem.Instance, problemDetails.Instance);
     }
 
-        [Fact]
+    [Fact]
     public async Task WriteAsync_Works_WhenReplacingProblemDetailsUsingSetter()
     {
         // Arrange
@@ -71,7 +73,7 @@ public class DefaultApiProblemDetailsWriterTest
         var problemDetailsContext = new ProblemDetailsContext()
         {
             HttpContext = context,
-            ProblemDetails = originalProblemDetails
+            ProblemDetails = originalProblemDetails,
         };
 
         problemDetailsContext.ProblemDetails = expectedProblem;
@@ -81,7 +83,10 @@ public class DefaultApiProblemDetailsWriterTest
 
         //Assert
         stream.Position = 0;
-        var problemDetails = await JsonSerializer.DeserializeAsync<ProblemDetails>(stream, new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        var problemDetails = await JsonSerializer.DeserializeAsync<ProblemDetails>(
+            stream,
+            new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        );
         Assert.NotNull(problemDetails);
         Assert.Equal(expectedProblem.Status, problemDetails.Status);
         Assert.Equal(expectedProblem.Type, problemDetails.Type);
@@ -104,7 +109,7 @@ public class DefaultApiProblemDetailsWriterTest
         var problemDetailsContext = new ProblemDetailsContext()
         {
             HttpContext = context,
-            ProblemDetails = expectedProblem
+            ProblemDetails = expectedProblem,
         };
 
         //Act
@@ -139,7 +144,10 @@ public class DefaultApiProblemDetailsWriterTest
         // Arrange
         var writer = GetWriter();
         var stream = new MemoryStream();
-        var context = CreateContext(stream, metadata: new EndpointMetadataCollection(new ControllerAttribute()));
+        var context = CreateContext(
+            stream,
+            metadata: new EndpointMetadataCollection(new ControllerAttribute())
+        );
 
         //Act
         var result = writer.CanWrite(new() { HttpContext = context });
@@ -154,7 +162,10 @@ public class DefaultApiProblemDetailsWriterTest
         // Arrange
         var writer = GetWriter();
         var stream = new MemoryStream();
-        var context = CreateContext(stream, metadata: new EndpointMetadataCollection(new ControllerAttribute()));
+        var context = CreateContext(
+            stream,
+            metadata: new EndpointMetadataCollection(new ControllerAttribute())
+        );
 
         //Act
         await writer.WriteAsync(new() { HttpContext = context });
@@ -168,7 +179,9 @@ public class DefaultApiProblemDetailsWriterTest
     public async Task WriteAsync_Skip_WhenSuppressMapClientErrors()
     {
         // Arrange
-        var writer = GetWriter(options: new ApiBehaviorOptions() { SuppressMapClientErrors = true });
+        var writer = GetWriter(
+            options: new ApiBehaviorOptions() { SuppressMapClientErrors = true }
+        );
         var stream = new MemoryStream();
         var context = CreateContext(stream);
 
@@ -185,7 +198,9 @@ public class DefaultApiProblemDetailsWriterTest
     {
         // Arrange
         var formatter = new Mock<IOutputFormatter>();
-        formatter.Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>())).Returns(false);
+        formatter
+            .Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>()))
+            .Returns(false);
         var writer = GetWriter(formatter: formatter.Object);
         var stream = new MemoryStream();
         var context = CreateContext(stream);
@@ -198,14 +213,21 @@ public class DefaultApiProblemDetailsWriterTest
         Assert.Equal(0, stream.Length);
     }
 
-    private static HttpContext CreateContext(Stream body, int statusCode = StatusCodes.Status400BadRequest, EndpointMetadataCollection metadata = null)
+    private static HttpContext CreateContext(
+        Stream body,
+        int statusCode = StatusCodes.Status400BadRequest,
+        EndpointMetadataCollection metadata = null
+    )
     {
-        metadata ??= new EndpointMetadataCollection(new ApiControllerAttribute(), new ControllerAttribute());
+        metadata ??= new EndpointMetadataCollection(
+            new ApiControllerAttribute(),
+            new ControllerAttribute()
+        );
 
         var context = new DefaultHttpContext()
         {
             Response = { Body = body, StatusCode = statusCode },
-            RequestServices = CreateServices()
+            RequestServices = CreateServices(),
         };
         context.SetEndpoint(new Endpoint(null, metadata, string.Empty));
 
@@ -221,7 +243,10 @@ public class DefaultApiProblemDetailsWriterTest
         return services.BuildServiceProvider();
     }
 
-    private static DefaultApiProblemDetailsWriter GetWriter(ApiBehaviorOptions options = null, IOutputFormatter formatter = null)
+    private static DefaultApiProblemDetailsWriter GetWriter(
+        ApiBehaviorOptions options = null,
+        IOutputFormatter formatter = null
+    )
     {
         options ??= new ApiBehaviorOptions();
         formatter ??= new TestFormatter();
@@ -233,7 +258,8 @@ public class DefaultApiProblemDetailsWriterTest
             new DefaultOutputFormatterSelector(mvcOptions, NullLoggerFactory.Instance),
             new TestHttpResponseStreamWriterFactory(),
             new DefaultProblemDetailsFactory(Options.Create(options), null),
-            Options.Create(options));
+            Options.Create(options)
+        );
     }
 
     private class TestFormatter : IOutputFormatter
@@ -245,5 +271,4 @@ public class DefaultApiProblemDetailsWriterTest
             return context.HttpContext.Response.WriteAsJsonAsync(context.Object);
         }
     }
-
 }
