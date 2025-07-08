@@ -11,9 +11,11 @@ namespace Microsoft.Extensions.Hosting.Internal
     /// <summary>
     /// Allows consumers to perform cleanup during a graceful shutdown.
     /// </summary>
-    [DebuggerDisplay("ApplicationStarted = {ApplicationStarted.IsCancellationRequested}, " +
-        "ApplicationStopping = {ApplicationStopping.IsCancellationRequested}, " +
-        "ApplicationStopped = {ApplicationStopped.IsCancellationRequested}")]
+    [DebuggerDisplay(
+        "ApplicationStarted = {ApplicationStarted.IsCancellationRequested}, "
+            + "ApplicationStopping = {ApplicationStopping.IsCancellationRequested}, "
+            + "ApplicationStopped = {ApplicationStopped.IsCancellationRequested}"
+    )]
 #pragma warning disable CS0618 // Type or member is obsolete
     public class ApplicationLifetime : IApplicationLifetime, IHostApplicationLifetime
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -67,9 +69,11 @@ namespace Microsoft.Extensions.Hosting.Internal
                 }
                 catch (Exception ex)
                 {
-                    _logger.ApplicationError(LoggerEventIds.ApplicationStoppingException,
-                                             "An error occurred stopping the application",
-                                             ex);
+                    _logger.ApplicationError(
+                        LoggerEventIds.ApplicationStoppingException,
+                        "An error occurred stopping the application",
+                        ex
+                    );
                 }
             }
         }
@@ -85,9 +89,11 @@ namespace Microsoft.Extensions.Hosting.Internal
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStartupException,
-                                         "An error occurred starting the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStartupException,
+                    "An error occurred starting the application",
+                    ex
+                );
             }
         }
 
@@ -102,9 +108,11 @@ namespace Microsoft.Extensions.Hosting.Internal
             }
             catch (Exception ex)
             {
-                _logger.ApplicationError(LoggerEventIds.ApplicationStoppedException,
-                                         "An error occurred stopping the application",
-                                         ex);
+                _logger.ApplicationError(
+                    LoggerEventIds.ApplicationStoppedException,
+                    "An error occurred stopping the application",
+                    ex
+                );
             }
         }
     }

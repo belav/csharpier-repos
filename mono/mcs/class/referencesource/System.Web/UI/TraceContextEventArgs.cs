@@ -4,31 +4,27 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System.Collections;
 
     /// <devdoc>
     /// </devdoc>
-    public sealed class TraceContextEventArgs : EventArgs {
+    public sealed class TraceContextEventArgs : EventArgs
+    {
         private ICollection _records;
 
-
-        public TraceContextEventArgs(ICollection records) {
+        public TraceContextEventArgs(ICollection records)
+        {
             _records = records;
         }
-
 
         /// <devdoc>
         /// Gets the trace records for this event
         /// </devdoc>
-        public ICollection TraceRecords {
-            get {
-                return _records;
-            }
+        public ICollection TraceRecords
+        {
+            get { return _records; }
         }
     }
-
 }
-
-
-

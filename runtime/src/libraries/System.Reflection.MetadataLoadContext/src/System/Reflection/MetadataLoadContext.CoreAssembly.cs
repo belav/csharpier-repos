@@ -9,7 +9,12 @@ namespace System.Reflection
 {
     public sealed partial class MetadataLoadContext
     {
-        private static readonly string[] s_CoreNames = { "mscorlib", "System.Runtime", "netstandard" };
+        private static readonly string[] s_CoreNames =
+        {
+            "mscorlib",
+            "System.Runtime",
+            "netstandard",
+        };
 
         // Cache loaded coreAssembly and core types.
         internal RoAssembly? TryGetCoreAssembly(string? coreAssemblyName, out Exception? e)
@@ -21,7 +26,9 @@ namespace System.Reflection
             }
             else
             {
-                RoAssemblyName roAssemblyName = new AssemblyName(coreAssemblyName).ToRoAssemblyName();
+                RoAssemblyName roAssemblyName = new AssemblyName(
+                    coreAssemblyName
+                ).ToRoAssemblyName();
                 _coreAssembly = TryResolveAssembly(roAssemblyName, out e);
             }
 
@@ -78,6 +85,7 @@ namespace System.Reflection
         /// the corresponding elements will be null.
         /// </summary>
         internal CoreTypes GetAllFoundCoreTypes() => _coreTypes;
+
         private readonly CoreTypes _coreTypes;
 
         //
@@ -85,6 +93,7 @@ namespace System.Reflection
         // one reason, we have to instance it per MetadataLoadContext.
         //
         internal Binder GetDefaultBinder() => _lazyDefaultBinder ??= new DefaultBinder(this);
+
         private volatile Binder? _lazyDefaultBinder;
     }
 }

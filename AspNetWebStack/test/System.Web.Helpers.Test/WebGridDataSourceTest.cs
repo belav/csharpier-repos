@@ -16,7 +16,13 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             var rows = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: GetValues(), elementType: typeof(Person), canPage: false, canSort: false);
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: GetValues(),
+                elementType: typeof(Person),
+                canPage: false,
+                canSort: false
+            );
 
             // Act and Assert
             Assert.Equal(rows.Count(), dataSource.TotalRowCount);
@@ -27,13 +33,25 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             var values = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: GetValues(), elementType: typeof(Person), canPage: false, canSort: true);
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: GetValues(),
+                elementType: typeof(Person),
+                canPage: false,
+                canSort: true
+            );
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = null }, 0);
 
             // Assert
-            Assert.True(Enumerable.SequenceEqual<object>(values.ToList(), rows.Select(r => r.Value).ToList(), new PersonComparer()));
+            Assert.True(
+                Enumerable.SequenceEqual<object>(
+                    values.ToList(),
+                    rows.Select(r => r.Value).ToList(),
+                    new PersonComparer()
+                )
+            );
         }
 
         [Fact]
@@ -41,13 +59,25 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             var values = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: GetValues(), elementType: typeof(Person), canPage: false, canSort: true);
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: GetValues(),
+                elementType: typeof(Person),
+                canPage: false,
+                canSort: true
+            );
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = String.Empty }, 0);
 
             // Assert
-            Assert.True(Enumerable.SequenceEqual<object>(values.ToList(), rows.Select(r => r.Value).ToList(), new PersonComparer()));
+            Assert.True(
+                Enumerable.SequenceEqual<object>(
+                    values.ToList(),
+                    rows.Select(r => r.Value).ToList(),
+                    new PersonComparer()
+                )
+            );
         }
 
         [Fact]
@@ -55,13 +85,25 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             var values = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: GetValues(), elementType: typeof(Person), canPage: false, canSort: true);
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: GetValues(),
+                elementType: typeof(Person),
+                canPage: false,
+                canSort: true
+            );
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = "Does-not-exist" }, 0);
 
             // Assert
-            Assert.True(Enumerable.SequenceEqual<object>(values.ToList(), rows.Select(r => r.Value).ToList(), new PersonComparer()));
+            Assert.True(
+                Enumerable.SequenceEqual<object>(
+                    values.ToList(),
+                    rows.Select(r => r.Value).ToList(),
+                    new PersonComparer()
+                )
+            );
         }
 
         [Fact]
@@ -70,13 +112,28 @@ namespace System.Web.Helpers.Test
             // Arrange
             var values = GetValues();
             var defaultSort = new SortInfo { SortColumn = "cannot-be-inferred" };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: GetValues(), elementType: typeof(Person), canSort: true, canPage: false) { DefaultSort = defaultSort };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: GetValues(),
+                elementType: typeof(Person),
+                canSort: true,
+                canPage: false
+            )
+            {
+                DefaultSort = defaultSort,
+            };
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = "Does-not-exist" }, 0);
 
             // Assert
-            Assert.True(Enumerable.SequenceEqual<object>(values.ToList(), rows.Select(r => r.Value).ToList(), new PersonComparer()));
+            Assert.True(
+                Enumerable.SequenceEqual<object>(
+                    values.ToList(),
+                    rows.Select(r => r.Value).ToList(),
+                    new PersonComparer()
+                )
+            );
         }
 
         [Fact]
@@ -85,24 +142,57 @@ namespace System.Web.Helpers.Test
             // Arrange
             var values = GetValues();
             var defaultSort = new SortInfo { SortColumn = "FirstName" };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: GetValues(), elementType: typeof(Person), canSort: true, canPage: false) { DefaultSort = defaultSort };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: GetValues(),
+                elementType: typeof(Person),
+                canSort: true,
+                canPage: false
+            )
+            {
+                DefaultSort = defaultSort,
+            };
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = "Does-not-exist" }, 0);
 
             // Assert
-            Assert.True(Enumerable.SequenceEqual<object>(values.OrderBy(p => p.FirstName).ToList(), rows.Select(r => r.Value).ToList(), new PersonComparer()));
+            Assert.True(
+                Enumerable.SequenceEqual<object>(
+                    values.OrderBy(p => p.FirstName).ToList(),
+                    rows.Select(r => r.Value).ToList(),
+                    new PersonComparer()
+                )
+            );
         }
 
         [Fact]
         public void WebGridDataSourceSortsUsingSpecifiedSort()
         {
             // Arrange
-            var defaultSort = new SortInfo { SortColumn = "FirstName", SortDirection = SortDirection.Ascending };
-            IEnumerable<dynamic> values = new[] { new Person { LastName = "Z" }, new Person { LastName = "X" }, new Person { LastName = "Y" } };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(Person), canSort: true, canPage: false) { DefaultSort = defaultSort };
+            var defaultSort = new SortInfo
+            {
+                SortColumn = "FirstName",
+                SortDirection = SortDirection.Ascending,
+            };
+            IEnumerable<dynamic> values = new[]
+            {
+                new Person { LastName = "Z" },
+                new Person { LastName = "X" },
+                new Person { LastName = "Y" },
+            };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(Person),
+                canSort: true,
+                canPage: false
+            )
+            {
+                DefaultSort = defaultSort,
+            };
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = "LastName" }, 0);
 
             // Assert
@@ -115,11 +205,25 @@ namespace System.Web.Helpers.Test
         public void WebGridDataSourceSortsDynamicType()
         {
             // Arrange
-            IEnumerable<dynamic> values = new[] { new TestDynamicType("col", "val1"), new TestDynamicType("col", "val2"), new TestDynamicType("col", "val3") };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(TestDynamicType), canSort: true, canPage: false);
+            IEnumerable<dynamic> values = new[]
+            {
+                new TestDynamicType("col", "val1"),
+                new TestDynamicType("col", "val2"),
+                new TestDynamicType("col", "val3"),
+            };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(TestDynamicType),
+                canSort: true,
+                canPage: false
+            );
 
-            // Act 
-            var rows = dataSource.GetRows(new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending }, 0);
+            // Act
+            var rows = dataSource.GetRows(
+                new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending },
+                0
+            );
 
             // Assert
             Assert.Equal(rows.ElementAt(0).Value.col, "val3");
@@ -136,10 +240,19 @@ namespace System.Web.Helpers.Test
             var element3 = new { Foo = new { Bar = "val3" } };
             IEnumerable<dynamic> values = new[] { element1, element2, element3 };
 
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: element1.GetType(), canSort: true, canPage: false);
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: element1.GetType(),
+                canSort: true,
+                canPage: false
+            );
 
-            // Act 
-            var rows = dataSource.GetRows(new SortInfo { SortColumn = "Foo.Bar", SortDirection = SortDirection.Descending }, 0);
+            // Act
+            var rows = dataSource.GetRows(
+                new SortInfo { SortColumn = "Foo.Bar", SortDirection = SortDirection.Descending },
+                0
+            );
 
             // Assert
             Assert.Equal(rows.ElementAt(0).Value.Foo.Bar, "val3");
@@ -158,10 +271,19 @@ namespace System.Web.Helpers.Test
             var value3 = new DynamicDictionary();
             value3["col"] = "val3";
             IEnumerable<dynamic> values = new[] { value1, value2, value3 };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(TestDynamicType), canSort: true, canPage: false);
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(TestDynamicType),
+                canSort: true,
+                canPage: false
+            );
 
-            // Act 
-            var rows = dataSource.GetRows(new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending }, 0);
+            // Act
+            var rows = dataSource.GetRows(
+                new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending },
+                0
+            );
 
             // Assert
             Assert.Equal(rows.ElementAt(0).Value.col, "val3");
@@ -173,11 +295,25 @@ namespace System.Web.Helpers.Test
         public void WebGridDataSourceReturnsOriginalDataSourceIfValuesCannotBeSorted()
         {
             // Arrange
-            IEnumerable<dynamic> values = new object[] { new TestDynamicType("col", "val1"), new TestDynamicType("col", "val2"), new TestDynamicType("col", DBNull.Value) };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(TestDynamicType), canSort: true, canPage: false);
+            IEnumerable<dynamic> values = new object[]
+            {
+                new TestDynamicType("col", "val1"),
+                new TestDynamicType("col", "val2"),
+                new TestDynamicType("col", DBNull.Value),
+            };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(TestDynamicType),
+                canSort: true,
+                canPage: false
+            );
 
-            // Act 
-            var rows = dataSource.GetRows(new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending }, 0);
+            // Act
+            var rows = dataSource.GetRows(
+                new SortInfo { SortColumn = "col", SortDirection = SortDirection.Descending },
+                0
+            );
 
             // Assert
             Assert.Equal(rows.ElementAt(0).Value.col, "val1");
@@ -190,9 +326,18 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<dynamic> values = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(Person), canSort: false, canPage: true) { RowsPerPage = 2 };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(Person),
+                canSort: false,
+                canPage: true
+            )
+            {
+                RowsPerPage = 2,
+            };
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo(), 0);
 
             // Assert
@@ -206,10 +351,22 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<dynamic> values = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(Person), canSort: true, canPage: true) { RowsPerPage = 2 };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(Person),
+                canSort: true,
+                canPage: true
+            )
+            {
+                RowsPerPage = 2,
+            };
 
-            // Act 
-            var rows = dataSource.GetRows(new SortInfo { SortColumn = "LastName", SortDirection = SortDirection.Descending }, 0);
+            // Act
+            var rows = dataSource.GetRows(
+                new SortInfo { SortColumn = "LastName", SortDirection = SortDirection.Descending },
+                0
+            );
 
             // Assert
             Assert.Equal(2, rows.Count);
@@ -222,9 +379,18 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<dynamic> values = GetValues();
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(Person), canSort: true, canPage: true) { RowsPerPage = 3 };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(Person),
+                canSort: true,
+                canPage: true
+            )
+            {
+                RowsPerPage = 3,
+            };
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo(), 1);
 
             // Assert
@@ -238,9 +404,18 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             IEnumerable<dynamic> values = new object[] { String.Empty, null, DBNull.Value, null };
-            var dataSource = new WebGridDataSource(new WebGrid(GetContext()), values: values, elementType: typeof(object), canSort: true, canPage: true) { RowsPerPage = 2 };
+            var dataSource = new WebGridDataSource(
+                new WebGrid(GetContext()),
+                values: values,
+                elementType: typeof(object),
+                canSort: true,
+                canPage: true
+            )
+            {
+                RowsPerPage = 2,
+            };
 
-            // Act 
+            // Act
             var rows = dataSource.GetRows(new SortInfo(), 0);
 
             // Assert
@@ -267,8 +442,18 @@ namespace System.Web.Helpers.Test
             {
                 dynamic xDynamic = x;
                 dynamic yDynamic = y;
-                return (String.Equals(xDynamic.FirstName, yDynamic.FirstName, StringComparison.OrdinalIgnoreCase)
-                        && String.Equals(xDynamic.LastName, yDynamic.LastName, StringComparison.OrdinalIgnoreCase));
+                return (
+                    String.Equals(
+                        xDynamic.FirstName,
+                        yDynamic.FirstName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    && String.Equals(
+                        xDynamic.LastName,
+                        yDynamic.LastName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                );
             }
 
             public int GetHashCode(dynamic obj)

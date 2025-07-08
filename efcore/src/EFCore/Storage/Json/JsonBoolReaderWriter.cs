@@ -15,15 +15,15 @@ public sealed class JsonBoolReaderWriter : JsonValueReaderWriter<bool>
     /// </summary>
     public static JsonBoolReaderWriter Instance { get; } = new();
 
-    private JsonBoolReaderWriter()
-    {
-    }
+    private JsonBoolReaderWriter() { }
 
     /// <inheritdoc />
-    public override bool FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetBoolean();
+    public override bool FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetBoolean();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, bool value)
-        => writer.WriteBooleanValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, bool value) =>
+        writer.WriteBooleanValue(value);
 }

@@ -1,6 +1,9 @@
 <Type Name="SignalHandler" FullName="Mono.Unix.Native.SignalHandler">
   <TypeSignature Language="C#" Value="public delegate void SignalHandler(int signal);" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed SignalHandler extends System.MulticastDelegate" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed SignalHandler extends System.MulticastDelegate"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -25,7 +28,8 @@ When this delegate is invoked from signal context (that is, the operating system
       <para>In particular, from managed code the only safe thing to do is modify a variable.  Calling any function, even POSIX reentrant functions, will not be safe (as Mono's P/Invoke marshaller isn't reentrant).
 </para>
       <para>See also: http://www-106.ibm.com/developerworks/linux/library/l-reent.html.</para>
-      <para>The POSIX 1003.1-2003 list of reentrant functions is:
+      <para
+        >The POSIX 1003.1-2003 list of reentrant functions is:
 <see cref="M:Mono.Unix.Native.Syscall._Exit" />, 
 <see cref="M:Mono.Unix.Native.Syscall._exit" />, 
 <see cref="M:Mono.Unix.Native.Syscall.abort" />, 
@@ -143,7 +147,8 @@ When this delegate is invoked from signal context (that is, the operating system
 <see cref="M:Mono.Unix.Native.Syscall.wait" />, 
 <see cref="M:Mono.Unix.Native.Syscall.waitpid" />, 
 <see cref="M:Mono.Unix.Native.Syscall.write" />.
-</para>
+</para
+      >
     </remarks>
     <altmember cref="M:Mono.Unix.Native.Stdlib.signal" />
   </Docs>

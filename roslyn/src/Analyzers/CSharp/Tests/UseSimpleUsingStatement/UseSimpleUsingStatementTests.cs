@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseSimpleUsingStatementDiagnosticAnalyzer,
-        UseSimpleUsingStatementCodeFixProvider>;
+        UseSimpleUsingStatementCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseSimpleUsingStatement)]
     public class UseSimpleUsingStatementTests
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         [Fact]
         public async Task TestAboveCSharp8()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -51,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         using var a = {|CS0103:b|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,15 +78,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     """,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferSimpleUsingStatement, CodeStyleOption2.FalseWithSilentEnforcement }
-                }
+                    {
+                        CSharpCodeStyleOptions.PreferSimpleUsingStatement,
+                        CodeStyleOption2.FalseWithSilentEnforcement
+                    },
+                },
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestMultiDeclaration()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -94,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -104,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         using {|CS0819:var a = {|CS0103:b|}, c = {|CS0103:d|}|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
@@ -122,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             using var a = {|CS0103:b|};
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
@@ -144,7 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_2
+                LanguageVersion = LanguageVersion.CSharp7_2,
             }.RunAsync();
         }
 
@@ -165,7 +175,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
@@ -187,7 +197,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             Console.WriteLine();
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
@@ -195,7 +205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
         public async Task TestAsyncUsing()
         {
             // not actually legal code.
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -208,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -219,13 +231,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         {|CS0103:async|} {|CS1002:using|} var a = {|CS0103:b|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsMakeLocalFunctionStatic)]
         public async Task TestAwaitUsing()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -238,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.Threading.Tasks;
 
@@ -249,13 +264,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         {|CS4033:await|} using var a = {|CS0103:b|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithBlockBodyWithContents()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -268,7 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -279,13 +297,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithNonBlockBody()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -296,7 +316,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             Console.WriteLine(a);
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -307,13 +328,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMultiUsing()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -327,7 +350,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -339,13 +363,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -361,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -373,13 +400,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -397,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -411,13 +441,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -435,7 +467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -451,13 +484,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll4()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -468,7 +503,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         [|using|] (var c = {|CS0103:d|}) { }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -479,13 +515,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         using var c = {|CS0103:d|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithFollowingReturn()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -498,7 +536,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return;
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -509,13 +548,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithFollowingBreak()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -534,7 +575,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -551,7 +593,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -576,7 +619,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
@@ -599,7 +642,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
@@ -624,7 +667,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             label:;
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
@@ -648,14 +691,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class Program
@@ -670,7 +714,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class Program
@@ -683,7 +728,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         using Stream stream1 = File.OpenRead("test");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
@@ -707,14 +753,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class Program
@@ -730,7 +777,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class Program
@@ -744,7 +792,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Stream stream2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
@@ -768,14 +817,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class Program
@@ -791,7 +841,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class Program
@@ -805,7 +856,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         {|CS0103:Goo|}(out var stream2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
@@ -827,14 +879,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                                 {|CS0103:Goo|}(out var stream);
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision4()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class Program
@@ -848,7 +901,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             {|CS0103:Goo|}(out var stream2);
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class Program
@@ -862,7 +916,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         {|CS0103:Goo|}(out var stream2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
@@ -886,14 +941,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             }
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35879")]
         public async Task TestNoCollision5()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class Program
@@ -909,7 +965,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class Program
@@ -923,13 +980,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         using Stream stream2 = File.OpenRead("test");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37678")]
         public async Task TestCopyTrivia()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -940,7 +999,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -949,13 +1009,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37678")]
         public async Task TestMultiCopyTrivia()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -967,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -977,13 +1040,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll_WithTrivia()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1001,7 +1066,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1015,13 +1081,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // comment2
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveTrivia()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1043,7 +1111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1063,13 +1132,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_AfterRestore()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1092,7 +1163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1113,13 +1185,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_BeforeRestore()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1142,7 +1216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1163,13 +1238,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_AfterDisable()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1192,7 +1269,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1213,13 +1291,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveAndCommentTrivia_BeforeDisable()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1242,7 +1322,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1263,13 +1344,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38737")]
         public async Task TestCopyCompilerDirectiveTrivia_PreserveCodeBeforeAndAfterDirective()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1293,7 +1376,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1315,13 +1399,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     [Obsolete]
                     static void LegacyMethod() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38842")]
         public async Task TestNextLineIndentation1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1339,7 +1425,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1355,13 +1442,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             3);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38842")]
         public async Task TestNextLineIndentation2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
                 using System.IO;
 
@@ -1377,7 +1466,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.IO;
 
@@ -1391,13 +1481,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             );
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48586")]
         public async Task TestKeepSurroundingComments()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1410,7 +1502,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         } // ...all comments remain
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1423,13 +1516,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // ...all comments remain
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48586")]
         public async Task TestKeepSurroundingComments2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1444,7 +1539,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // ...remain
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1459,13 +1555,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                                                       // ...remain
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48586")]
         public async Task TestKeepSurroundingComments3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1484,7 +1582,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // ...transformation
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1503,13 +1602,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                                                       // ...transformation
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLine()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1521,7 +1622,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1532,13 +1634,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLine2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1550,7 +1654,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1561,13 +1666,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketAndCommentOnSameLine()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1579,7 +1686,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1590,13 +1698,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         Console.WriteLine(a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLineWithNoStatements()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1607,7 +1717,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1617,13 +1728,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         using var a = {|CS0103:b|};
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52970")]
         public async Task TestWithBlockBodyWithOpeningBracketOnSameLineAndCommentInBlock()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
 
                 class C
@@ -1635,7 +1748,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System;
 
                 class C
@@ -1646,13 +1760,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         // intentionally empty
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58911")]
         public async Task TestUsingWithoutSpace()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
                 using System.Collections.Generic;
 
@@ -1675,7 +1791,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     public Action Prop { get; set; }
                     public static IDisposable Get() => throw new NotImplementedException();
                 }
-                """, """
+                """,
+                """
                 using System;
                 using System.Collections.Generic;
 
@@ -1696,13 +1813,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                     public Action Prop { get; set; }
                     public static IDisposable Get() => throw new NotImplementedException();
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithConstantReturn1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class C
@@ -1716,7 +1835,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return true;
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class C
@@ -1728,7 +1848,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42194")]
@@ -1750,14 +1871,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             return a > b;
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithLocalFunctions1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class C
@@ -1772,7 +1894,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         void Inner2() { }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class C
@@ -1785,7 +1908,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         void Inner2() { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42194")]
@@ -1810,14 +1934,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                             return a > b;
                         }
                     }
-                    """
+                    """,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42194")]
         public async Task TestWithLocalFunctionsAndConstantReturn()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.IO;
 
                 class C
@@ -1834,7 +1959,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return true;
                     }
                 }
-                """, """
+                """,
+                """
                 using System.IO;
 
                 class C
@@ -1849,13 +1975,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58861")]
         public async Task TestOpenBraceTrivia1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Security.Cryptography;
 
                 class C
@@ -1870,7 +1998,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Security.Cryptography;
 
                 class C
@@ -1883,13 +2012,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return md5.ComputeHash(source);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58861")]
         public async Task TestOpenBraceTrivia2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System.Security.Cryptography;
 
                 class C
@@ -1904,7 +2035,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Security.Cryptography;
 
                 class C
@@ -1918,7 +2050,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
                         return md5.ComputeHash(source);
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

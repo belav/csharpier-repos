@@ -75,73 +75,79 @@ namespace RabbitMQ.Client
 
         ///<summary>Returns the source of the shutdown event: either
         ///the application, the library, or the remote peer.</summary>
-        public ShutdownInitiator Initiator { get { return m_initiator; } }
+        public ShutdownInitiator Initiator
+        {
+            get { return m_initiator; }
+        }
 
         ///<summary>One of the standardised AMQP reason codes. See
         ///RabbitMQ.Client.Framing.*.Constants.</summary>
-        public ushort ReplyCode { get { return m_replyCode; } }
+        public ushort ReplyCode
+        {
+            get { return m_replyCode; }
+        }
 
         ///<summary>Informative human-readable reason text.</summary>
-        public string ReplyText { get { return m_replyText; } }
+        public string ReplyText
+        {
+            get { return m_replyText; }
+        }
 
         ///<summary>AMQP content-class ID, or 0 if none.</summary>
-        public ushort ClassId { get { return m_classId; } }
+        public ushort ClassId
+        {
+            get { return m_classId; }
+        }
 
         ///<summary>AMQP method ID within a content-class, or 0 if none.</summary>
-        public ushort MethodId { get { return m_methodId; } }
+        public ushort MethodId
+        {
+            get { return m_methodId; }
+        }
 
         ///<summary>Object causing the shutdown, or null if none.</summary>
-        public object Cause { get { return m_cause; } }
+        public object Cause
+        {
+            get { return m_cause; }
+        }
 
         ///<summary>Construct a ShutdownEventArgs with the given
         ///parameters, 0 for ClassId and MethodId, and a null
         ///Cause.</summary>
-        public ShutdownEventArgs(ShutdownInitiator initiator,
-                                 ushort replyCode,
-                                 string replyText)
-            : this(initiator,
-                replyCode,
-                replyText,
-                null)
-        { }
+        public ShutdownEventArgs(ShutdownInitiator initiator, ushort replyCode, string replyText)
+            : this(initiator, replyCode, replyText, null) { }
 
         ///<summary>Construct a ShutdownEventArgs with the given
         ///parameters and 0 for ClassId and MethodId.</summary>
-        public ShutdownEventArgs(ShutdownInitiator initiator,
-                                 ushort replyCode,
-                                 string replyText,
-                 object cause)
-            : this(initiator,
-                replyCode,
-                replyText,
-                0,
-                0,
-                cause)
-        { }
+        public ShutdownEventArgs(
+            ShutdownInitiator initiator,
+            ushort replyCode,
+            string replyText,
+            object cause
+        )
+            : this(initiator, replyCode, replyText, 0, 0, cause) { }
 
         ///<summary>Construct a ShutdownEventArgs with the given
         ///parameters and a null cause.</summary>
-        public ShutdownEventArgs(ShutdownInitiator initiator,
-                                 ushort replyCode,
-                                 string replyText,
-                                 ushort classId,
-                                 ushort methodId)
-            : this(initiator,
-                    replyCode,
-                    replyText,
-                    classId,
-                    methodId,
-                    null)
-        { }
+        public ShutdownEventArgs(
+            ShutdownInitiator initiator,
+            ushort replyCode,
+            string replyText,
+            ushort classId,
+            ushort methodId
+        )
+            : this(initiator, replyCode, replyText, classId, methodId, null) { }
 
         ///<summary>Construct a ShutdownEventArgs with the given
         ///parameters.</summary>
-        public ShutdownEventArgs(ShutdownInitiator initiator,
-                                 ushort replyCode,
-                                 string replyText,
-                                 ushort classId,
-                                 ushort methodId,
-                                 object cause)
+        public ShutdownEventArgs(
+            ShutdownInitiator initiator,
+            ushort replyCode,
+            string replyText,
+            ushort classId,
+            ushort methodId,
+            object cause
+        )
         {
             m_initiator = initiator;
             m_replyCode = replyCode;
@@ -154,12 +160,19 @@ namespace RabbitMQ.Client
         ///<summary>Override ToString to be useful for debugging.</summary>
         public override string ToString()
         {
-            return "AMQP close-reason, initiated by " + m_initiator +
-                ", code=" + m_replyCode +
-                ", text=\"" + m_replyText + "\"" +
-                ", classId=" + m_classId +
-                ", methodId=" + m_methodId +
-                ", cause=" + m_cause;
+            return "AMQP close-reason, initiated by "
+                + m_initiator
+                + ", code="
+                + m_replyCode
+                + ", text=\""
+                + m_replyText
+                + "\""
+                + ", classId="
+                + m_classId
+                + ", methodId="
+                + m_methodId
+                + ", cause="
+                + m_cause;
         }
     }
 }

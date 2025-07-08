@@ -26,63 +26,46 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal UsingElement(Schema parentElement)
-        :   base(parentElement)
-        {
-        }
+            : base(parentElement) { }
 
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public virtual string Alias
         {
-            get
-            {
-                return _alias;
-            }
-            private set
-            {
-                _alias = value;
-            }
+            get { return _alias; }
+            private set { _alias = value; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public virtual string NamespaceName
         {
-            get
-            {
-                return _namespaceName;
-            }
-            private set
-            {
-                _namespaceName = value;
-            }
+            get { return _namespaceName; }
+            private set { _namespaceName = value; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public override string FQName
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         #endregion
 
         #region Protected Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected override bool ProhibitAttribute(string namespaceUri, string localName)
         {
@@ -96,9 +79,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 return false;
             }
             return false;
-
         }
-        
+
         protected override bool HandleAttribute(XmlReader reader)
         {
             if (base.HandleAttribute(reader))
@@ -124,19 +106,23 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #region Private Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleNamespaceAttribute(XmlReader reader)
         {
             Debug.Assert(String.IsNullOrEmpty(NamespaceName), "Alias must be set only once");
-            ReturnValue<string> returnValue = HandleDottedNameAttribute(reader,NamespaceName, null);
-            if ( returnValue.Succeeded )
+            ReturnValue<string> returnValue = HandleDottedNameAttribute(
+                reader,
+                NamespaceName,
+                null
+            );
+            if (returnValue.Succeeded)
                 NamespaceName = returnValue.Value;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleAliasAttribute(XmlReader reader)

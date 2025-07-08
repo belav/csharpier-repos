@@ -1,10 +1,12 @@
 <Type Name="LdapResponse" FullName="Novell.Directory.Ldap.LdapResponse">
-  <TypeSignature Language="C#" Value="public class LdapResponse : Novell.Directory.Ldap.LdapMessage" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapResponse : Novell.Directory.Ldap.LdapMessage"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -47,7 +49,10 @@
   <Interfaces />
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapResponse(Novell.Directory.Ldap.InterThreadException ex, Novell.Directory.Ldap.Utilclass.ReferralInfo activeReferral)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapResponse(Novell.Directory.Ldap.InterThreadException ex, Novell.Directory.Ldap.Utilclass.ReferralInfo activeReferral)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="ex" Type="Novell.Directory.Ldap.InterThreadException" />
@@ -73,7 +78,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapResponse(int type, int resultCode, string matchedDN, string serverMessage, string[] referrals, Novell.Directory.Ldap.LdapControl[] controls)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapResponse(int type, int resultCode, string matchedDN, string serverMessage, string[] referrals, Novell.Directory.Ldap.LdapControl[] controls)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="type" Type="System.Int32" />

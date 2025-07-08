@@ -4,12 +4,18 @@
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent);$(NetFrameworkCurrent)</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\Security\Cryptography\ByteUtils.cs"
-             Link="CommonTest\System\Security\Cryptography\ByteUtils.cs" />
-    <Compile Include="$(CommonTestPath)System\Security\Cryptography\PlatformSupport.cs"
-             Link="CommonTest\System\Security\Cryptography\PlatformSupport.cs" />
-    <Compile Include="$(CommonTestPath)System\Security\Cryptography\SignatureSupport.cs"
-             Link="CommonTest\System\Security\Cryptography\SignatureSupport.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Security\Cryptography\ByteUtils.cs"
+      Link="CommonTest\System\Security\Cryptography\ByteUtils.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Security\Cryptography\PlatformSupport.cs"
+      Link="CommonTest\System\Security\Cryptography\PlatformSupport.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Security\Cryptography\SignatureSupport.cs"
+      Link="CommonTest\System\Security\Cryptography\SignatureSupport.cs"
+    />
     <Compile Include="Certificates.cs" />
     <Compile Include="CertLoader.cs" />
     <Compile Include="CertLoader.Settings.cs" />
@@ -41,7 +47,10 @@
     <Compile Include="EnvelopedCms\DecryptTestsRsaPaddingModeTests.cs" />
     <Compile Include="EnvelopedCms\DecryptTestsUsingExplicitPrivateKey.cs" />
     <Compile Include="EnvelopedCms\KeyTransRecipientInfoRsaOaepCertTests.cs" />
-    <Compile Include="EnvelopedCms\DecryptTests.KeyPersistence.cs" Condition="'$(TargetPlatformIdentifier)' == 'windows'" />
+    <Compile
+      Include="EnvelopedCms\DecryptTests.KeyPersistence.cs"
+      Condition="'$(TargetPlatformIdentifier)' == 'windows'"
+    />
     <Compile Include="EnvelopedCms\KeyTransRecipientInfoRsaPaddingModeTests.cs" />
     <Compile Include="EnvelopedCms\SubjectIdentifierTests.cs" />
     <Compile Include="Pkcs12\CertBagTests.cs" />

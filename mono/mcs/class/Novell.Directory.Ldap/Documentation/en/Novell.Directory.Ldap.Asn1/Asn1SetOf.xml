@@ -1,10 +1,12 @@
 <Type Name="Asn1SetOf" FullName="Novell.Directory.Ldap.Asn1.Asn1SetOf">
-  <TypeSignature Language="C#" Value="public class Asn1SetOf : Novell.Directory.Ldap.Asn1.Asn1Structured, System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class Asn1SetOf : Novell.Directory.Ldap.Asn1.Asn1Structured, System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -77,7 +79,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1SetOf(Novell.Directory.Ldap.Asn1.Asn1Set set_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1SetOf(Novell.Directory.Ldap.Asn1.Asn1Set set_Renamed)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="set_Renamed" Type="Novell.Directory.Ldap.Asn1.Asn1Set" />
@@ -101,7 +106,10 @@
       </Docs>
     </Member>
     <Member MemberName="ID">
-      <MemberSignature Language="C#" Value="public static readonly Novell.Directory.Ldap.Asn1.Asn1Identifier ID" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly Novell.Directory.Ldap.Asn1.Asn1Identifier ID"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Identifier</ReturnType>

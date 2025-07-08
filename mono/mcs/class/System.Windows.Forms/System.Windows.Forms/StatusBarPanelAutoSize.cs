@@ -22,12 +22,12 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-namespace System.Windows.Forms {
-
-	public enum StatusBarPanelAutoSize {
-		None = 1,
-		Spring,
-		Contents
-	}
+namespace System.Windows.Forms
+{
+    public enum StatusBarPanelAutoSize
+    {
+        None = 1,
+        Spring,
+        Contents,
+    }
 }
-

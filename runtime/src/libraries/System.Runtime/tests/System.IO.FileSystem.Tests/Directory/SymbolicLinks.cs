@@ -27,8 +27,10 @@ namespace System.IO.Tests
         protected override FileSystemInfo CreateSymbolicLink(string path, string pathToTarget) =>
             Directory.CreateSymbolicLink(path, pathToTarget);
 
-        protected override FileSystemInfo ResolveLinkTarget(string linkPath, bool returnFinalTarget) =>
-            Directory.ResolveLinkTarget(linkPath, returnFinalTarget);
+        protected override FileSystemInfo ResolveLinkTarget(
+            string linkPath,
+            bool returnFinalTarget
+        ) => Directory.ResolveLinkTarget(linkPath, returnFinalTarget);
 
         protected override void AssertIsCorrectTypeAndDirectoryAttribute(FileSystemInfo linkInfo)
         {
@@ -86,8 +88,12 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CreateSymbolicLink_PathToTarget_RelativeToLinkPath()
         {
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false)).Dispose();
-            RemoteExecutor.Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true)).Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(false))
+                .Dispose();
+            RemoteExecutor
+                .Invoke(() => CreateSymbolicLink_PathToTarget_RelativeToLinkPath_Internal(true))
+                .Dispose();
         }
     }
 }

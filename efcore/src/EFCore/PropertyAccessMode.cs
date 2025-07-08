@@ -68,5 +68,5 @@ public enum PropertyAccessMode
     ///     All accesses to the property go through the property, unless there is no property or it is missing a setter/getter, in which
     ///     case access goes directly to the field.
     /// </summary>
-    PreferProperty
+    PreferProperty,
 }

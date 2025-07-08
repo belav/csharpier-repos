@@ -3,43 +3,34 @@
 //------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Principal;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
-using System.Security.Principal;
-using System.Runtime.Serialization;
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class EventDeliveryFailedException : SystemException
     {
-        public EventDeliveryFailedException()
-        {
-
-        }
+        public EventDeliveryFailedException() { }
 
         public EventDeliveryFailedException(String message)
-            : base(message)
-        {
-
-        }
+            : base(message) { }
 
         public EventDeliveryFailedException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-
-        }
+            : base(message, innerException) { }
 
         private EventDeliveryFailedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 
     [Serializable]
@@ -47,12 +38,18 @@ namespace System.Workflow.Activities
     {
         Type proxiedType;
         string eventName;
+
         [NonSerialized]
         Type eventHandlerType;
+
         [NonSerialized]
         IDeliverMessage enqueueWrapper;
 
-        internal WorkflowMessageEventHandler(Type proxiedType, EventInfo eventInfo, IDeliverMessage enqueueWrapper)
+        internal WorkflowMessageEventHandler(
+            Type proxiedType,
+            EventInfo eventInfo,
+            IDeliverMessage enqueueWrapper
+        )
         {
             this.proxiedType = proxiedType;
             this.eventName = eventInfo.Name;
@@ -62,10 +59,7 @@ namespace System.Workflow.Activities
 
         internal IDeliverMessage EnqueueWrapper
         {
-            get
-            {
-                return this.enqueueWrapper;
-            }
+            get { return this.enqueueWrapper; }
             set
             {
                 if (value == null)
@@ -85,15 +79,23 @@ namespace System.Workflow.Activities
                 bool isValidParameter = false;
                 if (parameters.Length == 2)
                 {
-                    if (parameters[1].ParameterType.IsSubclassOf(typeof(ExternalDataEventArgs))
-                        || parameters[1].ParameterType == (typeof(ExternalDataEventArgs)))
+                    if (
+                        parameters[1].ParameterType.IsSubclassOf(typeof(ExternalDataEventArgs))
+                        || parameters[1].ParameterType == (typeof(ExternalDataEventArgs))
+                    )
                         isValidParameter = true;
                 }
 
                 if (isValidParameter)
                 {
-                    MethodInfo mHandler = typeof(WorkflowMessageEventHandler).GetMethod("EventHandler");
-                    return (Delegate)Activator.CreateInstance(eventHandlerType, new object[] { this, mHandler.MethodHandle.GetFunctionPointer() });
+                    MethodInfo mHandler = typeof(WorkflowMessageEventHandler).GetMethod(
+                        "EventHandler"
+                    );
+                    return (Delegate)
+                        Activator.CreateInstance(
+                            eventHandlerType,
+                            new object[] { this, mHandler.MethodHandle.GetFunctionPointer() }
+                        );
                 }
 
                 return null;
@@ -111,7 +113,12 @@ namespace System.Workflow.Activities
             {
                 object workItem;
                 IPendingWork workHandler;
-                object[] args = this.enqueueWrapper.PrepareEventArgsArray(sender, eventArgs, out workItem, out workHandler);
+                object[] args = this.enqueueWrapper.PrepareEventArgsArray(
+                    sender,
+                    eventArgs,
+                    out workItem,
+                    out workHandler
+                );
                 EventQueueName key = GetKey(args);
 
                 String securityIdentifier = null;
@@ -120,7 +127,9 @@ namespace System.Workflow.Activities
                     IIdentity identity = System.Threading.Thread.CurrentPrincipal.Identity;
                     WindowsIdentity windowsIdentity = identity as WindowsIdentity;
                     if (windowsIdentity != null && windowsIdentity.User != null)
-                        securityIdentifier = windowsIdentity.User.Translate(typeof(NTAccount)).ToString();
+                        securityIdentifier = windowsIdentity
+                            .User.Translate(typeof(NTAccount))
+                            .ToString();
                     else if (identity != null)
                         securityIdentifier = identity.Name;
 
@@ -131,9 +140,20 @@ namespace System.Workflow.Activities
                     securityIdentifier = eventArgs.Identity;
                 }
 
-                MethodMessage message = new MethodMessage(this.proxiedType, this.eventName, args, securityIdentifier);
+                MethodMessage message = new MethodMessage(
+                    this.proxiedType,
+                    this.eventName,
+                    args,
+                    securityIdentifier
+                );
 
-                WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Information, 0, "Firing event {0} for instance {1}", this.eventName, eventArgs.InstanceId);
+                WorkflowActivityTrace.Activity.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Firing event {0} for instance {1}",
+                    this.eventName,
+                    eventArgs.InstanceId
+                );
 
                 this.enqueueWrapper.DeliverMessage(eventArgs, key, message, workItem, workHandler);
             }
@@ -145,16 +165,34 @@ namespace System.Workflow.Activities
                 }
                 else
                 {
-                    throw new EventDeliveryFailedException(SR.GetString(SR.Error_EventDeliveryFailedException, this.proxiedType, this.eventName, eventArgs.InstanceId), e);
+                    throw new EventDeliveryFailedException(
+                        SR.GetString(
+                            SR.Error_EventDeliveryFailedException,
+                            this.proxiedType,
+                            this.eventName,
+                            eventArgs.InstanceId
+                        ),
+                        e
+                    );
                 }
             }
         }
 
         private EventQueueName GetKey(object[] eventArgs)
         {
-            bool provideInitializerTokens = CorrelationResolver.IsInitializingMember(this.proxiedType, this.eventName, eventArgs);
+            bool provideInitializerTokens = CorrelationResolver.IsInitializingMember(
+                this.proxiedType,
+                this.eventName,
+                eventArgs
+            );
 
-            ICollection<CorrelationProperty> predicates = CorrelationResolver.ResolveCorrelationValues(this.proxiedType, this.eventName, eventArgs, provideInitializerTokens);
+            ICollection<CorrelationProperty> predicates =
+                CorrelationResolver.ResolveCorrelationValues(
+                    this.proxiedType,
+                    this.eventName,
+                    eventArgs,
+                    provideInitializerTokens
+                );
             return new EventQueueName(this.proxiedType, this.eventName, predicates);
         }
     }

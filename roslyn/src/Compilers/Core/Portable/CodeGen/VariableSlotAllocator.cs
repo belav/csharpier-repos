@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             LocalVariableAttributes pdbAttributes,
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
-            ImmutableArray<string> tupleElementNames);
+            ImmutableArray<string> tupleElementNames
+        );
 
         public abstract string? PreviousStateMachineTypeName { get; }
 
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             SynthesizedLocalKind synthesizedKind,
             LocalDebugId currentId,
             DiagnosticBag diagnostics,
-            out int slotIndex);
+            out int slotIndex
+        );
 
         /// <summary>
         /// Number of slots reserved for hoisted local variables.
@@ -48,9 +50,13 @@ namespace Microsoft.CodeAnalysis.CodeGen
         public abstract int PreviousHoistedLocalSlotCount { get; }
 
         /// <summary>
-        /// Returns true and an index of a slot that stores an awaiter of a specified type in the previous generation, if any. 
+        /// Returns true and an index of a slot that stores an awaiter of a specified type in the previous generation, if any.
         /// </summary>
-        public abstract bool TryGetPreviousAwaiterSlotIndex(Cci.ITypeReference currentType, DiagnosticBag diagnostics, out int slotIndex);
+        public abstract bool TryGetPreviousAwaiterSlotIndex(
+            Cci.ITypeReference currentType,
+            DiagnosticBag diagnostics,
+            out int slotIndex
+        );
 
         /// <summary>
         /// Number of slots reserved for awaiters.
@@ -79,7 +85,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// The <paramref name="lambdaOrLambdaBodySyntax"/> is either a lambda syntax (<paramref name="isLambdaBody"/> is false),
         /// or lambda body syntax (<paramref name="isLambdaBody"/> is true).
         /// </summary>
-        public abstract bool TryGetPreviousLambda(SyntaxNode lambdaOrLambdaBodySyntax, bool isLambdaBody, out DebugId lambdaId);
+        public abstract bool TryGetPreviousLambda(
+            SyntaxNode lambdaOrLambdaBodySyntax,
+            bool isLambdaBody,
+            out DebugId lambdaId
+        );
 
         /// <summary>
         /// State number to be used for next state of the state machine,
@@ -96,6 +106,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <returns>
         /// True if there is a corresponding node in the previous code version that matches the given <paramref name="syntax"/>.
         /// </returns>
-        public abstract bool TryGetPreviousStateMachineState(SyntaxNode syntax, AwaitDebugId awaitId, out StateMachineState state);
+        public abstract bool TryGetPreviousStateMachineState(
+            SyntaxNode syntax,
+            AwaitDebugId awaitId,
+            out StateMachineState state
+        );
     }
 }

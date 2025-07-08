@@ -28,19 +28,26 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Timeout_SetNegative_ThrowsArgumentException()
         {
             var connection = new SubDirectoryConnection();
-            AssertExtensions.Throws<ArgumentException>("value", () => connection.Timeout = TimeSpan.FromTicks(-1));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => connection.Timeout = TimeSpan.FromTicks(-1)
+            );
         }
 
         [Fact]
         public void Credential_Set_Success()
         {
-            var connection = new SubDirectoryConnection { Credential = new NetworkCredential("username", "password") };
+            var connection = new SubDirectoryConnection
+            {
+                Credential = new NetworkCredential("username", "password"),
+            };
             connection.Credential = null;
         }
 
         public class SubDirectoryConnection : DirectoryConnection
         {
-            public override DirectoryResponse SendRequest(DirectoryRequest request) => throw new NotImplementedException();
+            public override DirectoryResponse SendRequest(DirectoryRequest request) =>
+                throw new NotImplementedException();
         }
     }
 }

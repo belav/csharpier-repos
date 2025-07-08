@@ -15,15 +15,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Public;
 
-using DocumentDiagnosticReport = SumType<RelatedFullDocumentDiagnosticReport, RelatedUnchangedDocumentDiagnosticReport>;
-
 // A document diagnostic partial report is defined as having the first literal send = DocumentDiagnosticReport (aka changed / unchanged) followed
 // by n DocumentDiagnosticPartialResult literals.
 // See https://github.com/microsoft/vscode-languageserver-node/blob/main/protocol/src/common/proposed.diagnostics.md#textDocument_diagnostic
-using DocumentDiagnosticPartialReport = SumType<RelatedFullDocumentDiagnosticReport, RelatedUnchangedDocumentDiagnosticReport, DocumentDiagnosticReportPartialResult>;
+using DocumentDiagnosticPartialReport = SumType<
+    RelatedFullDocumentDiagnosticReport,
+    RelatedUnchangedDocumentDiagnosticReport,
+    DocumentDiagnosticReportPartialResult
+>;
+using DocumentDiagnosticReport = SumType<
+    RelatedFullDocumentDiagnosticReport,
+    RelatedUnchangedDocumentDiagnosticReport
+>;
 
 [Method(Methods.TextDocumentDiagnosticName)]
-internal sealed partial class PublicDocumentPullDiagnosticsHandler : AbstractDocumentPullDiagnosticHandler<DocumentDiagnosticParams, DocumentDiagnosticPartialReport, DocumentDiagnosticReport?>
+internal sealed partial class PublicDocumentPullDiagnosticsHandler
+    : AbstractDocumentPullDiagnosticHandler<
+        DocumentDiagnosticParams,
+        DocumentDiagnosticPartialReport,
+        DocumentDiagnosticReport?
+    >
 {
     private readonly string _nonLocalDiagnosticsSourceRegistrationId;
     private readonly IClientLanguageServerManager _clientLanguageServerManager;
@@ -32,7 +43,8 @@ internal sealed partial class PublicDocumentPullDiagnosticsHandler : AbstractDoc
         IClientLanguageServerManager clientLanguageServerManager,
         IDiagnosticAnalyzerService analyzerService,
         IDiagnosticsRefresher diagnosticsRefresher,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
         : base(analyzerService, diagnosticsRefresher, globalOptions)
     {
         _nonLocalDiagnosticsSourceRegistrationId = Guid.NewGuid().ToString();
@@ -42,37 +54,47 @@ internal sealed partial class PublicDocumentPullDiagnosticsHandler : AbstractDoc
     /// <summary>
     /// Public API doesn't support categories (yet).
     /// </summary>
-    protected override string? GetDiagnosticCategory(DocumentDiagnosticParams diagnosticsParams)
-        => null;
+    protected override string? GetDiagnosticCategory(DocumentDiagnosticParams diagnosticsParams) =>
+        null;
 
-    public override TextDocumentIdentifier GetTextDocumentIdentifier(DocumentDiagnosticParams diagnosticsParams) => diagnosticsParams.TextDocument;
+    public override TextDocumentIdentifier GetTextDocumentIdentifier(
+        DocumentDiagnosticParams diagnosticsParams
+    ) => diagnosticsParams.TextDocument;
 
-    protected override string? GetDiagnosticSourceIdentifier(DocumentDiagnosticParams diagnosticsParams) => diagnosticsParams.Identifier;
+    protected override string? GetDiagnosticSourceIdentifier(
+        DocumentDiagnosticParams diagnosticsParams
+    ) => diagnosticsParams.Identifier;
 
-    protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData, bool isLiveSource)
-        => ConvertTags(diagnosticData, isLiveSource, potentialDuplicate: false);
+    protected override DiagnosticTag[] ConvertTags(
+        DiagnosticData diagnosticData,
+        bool isLiveSource
+    ) => ConvertTags(diagnosticData, isLiveSource, potentialDuplicate: false);
 
-    protected override DocumentDiagnosticPartialReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[] diagnostics, string resultId)
-        => new(new RelatedFullDocumentDiagnosticReport
-        {
-            ResultId = resultId,
-            Items = diagnostics,
-        });
+    protected override DocumentDiagnosticPartialReport CreateReport(
+        TextDocumentIdentifier identifier,
+        VisualStudio.LanguageServer.Protocol.Diagnostic[] diagnostics,
+        string resultId
+    ) => new(new RelatedFullDocumentDiagnosticReport { ResultId = resultId, Items = diagnostics });
 
-    protected override DocumentDiagnosticPartialReport CreateRemovedReport(TextDocumentIdentifier identifier)
-        => new(new RelatedFullDocumentDiagnosticReport
-        {
-            ResultId = null,
-            Items = Array.Empty<VisualStudio.LanguageServer.Protocol.Diagnostic>(),
-        });
+    protected override DocumentDiagnosticPartialReport CreateRemovedReport(
+        TextDocumentIdentifier identifier
+    ) =>
+        new(
+            new RelatedFullDocumentDiagnosticReport
+            {
+                ResultId = null,
+                Items = Array.Empty<VisualStudio.LanguageServer.Protocol.Diagnostic>(),
+            }
+        );
 
-    protected override DocumentDiagnosticPartialReport CreateUnchangedReport(TextDocumentIdentifier identifier, string resultId)
-        => new(new RelatedUnchangedDocumentDiagnosticReport
-        {
-            ResultId = resultId
-        });
+    protected override DocumentDiagnosticPartialReport CreateUnchangedReport(
+        TextDocumentIdentifier identifier,
+        string resultId
+    ) => new(new RelatedUnchangedDocumentDiagnosticReport { ResultId = resultId });
 
-    protected override DocumentDiagnosticReport? CreateReturn(BufferedProgress<DocumentDiagnosticPartialReport> progress)
+    protected override DocumentDiagnosticReport? CreateReturn(
+        BufferedProgress<DocumentDiagnosticPartialReport> progress
+    )
     {
         // We only ever report one result for document diagnostics, which is the first DocumentDiagnosticReport.
         var progressValues = progress.GetValues();
@@ -89,19 +111,41 @@ internal sealed partial class PublicDocumentPullDiagnosticsHandler : AbstractDoc
         return null;
     }
 
-    protected override ValueTask<ImmutableArray<IDiagnosticSource>> GetOrderedDiagnosticSourcesAsync(DocumentDiagnosticParams diagnosticParams, RequestContext context, CancellationToken cancellationToken)
+    protected override ValueTask<
+        ImmutableArray<IDiagnosticSource>
+    > GetOrderedDiagnosticSourcesAsync(
+        DocumentDiagnosticParams diagnosticParams,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
-        var nonLocalDocumentDiagnostics = diagnosticParams.Identifier == DocumentNonLocalDiagnosticIdentifier.ToString();
+        var nonLocalDocumentDiagnostics =
+            diagnosticParams.Identifier == DocumentNonLocalDiagnosticIdentifier.ToString();
 
         // Task list items are not reported through the public LSP diagnostic API.
-        return ValueTaskFactory.FromResult(DocumentPullDiagnosticHandler.GetDiagnosticSources(DiagnosticKind.All, nonLocalDocumentDiagnostics, taskList: false, context, GlobalOptions));
+        return ValueTaskFactory.FromResult(
+            DocumentPullDiagnosticHandler.GetDiagnosticSources(
+                DiagnosticKind.All,
+                nonLocalDocumentDiagnostics,
+                taskList: false,
+                context,
+                GlobalOptions
+            )
+        );
     }
 
-    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(DocumentDiagnosticParams diagnosticsParams)
+    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+        DocumentDiagnosticParams diagnosticsParams
+    )
     {
         if (diagnosticsParams.PreviousResultId != null && diagnosticsParams.TextDocument != null)
         {
-            return ImmutableArray.Create(new PreviousPullResult(diagnosticsParams.PreviousResultId, diagnosticsParams.TextDocument));
+            return ImmutableArray.Create(
+                new PreviousPullResult(
+                    diagnosticsParams.PreviousResultId,
+                    diagnosticsParams.TextDocument
+                )
+            );
         }
 
         return null;

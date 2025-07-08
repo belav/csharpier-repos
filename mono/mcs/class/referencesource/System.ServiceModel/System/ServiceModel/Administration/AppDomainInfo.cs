@@ -11,7 +11,7 @@ namespace System.ServiceModel.Administration
     sealed class AppDomainInfo
     {
         static object syncRoot = new object();
-        
+
         // Double-checked locking pattern requires volatile for read/write synchronization
         static volatile AppDomainInfo singleton;
         Guid instanceId;
@@ -34,63 +34,41 @@ namespace System.ServiceModel.Administration
             this.machineName = Environment.MachineName;
             this.processId = process.Id;
             this.id = appDomain.Id;
-
         }
 
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
         }
 
         public Guid InstanceId
         {
-            get
-            {
-                return this.instanceId;
-            }
+            get { return this.instanceId; }
         }
 
         public string MachineName
         {
-            get
-            {
-                return this.machineName;
-            }
+            get { return this.machineName; }
         }
 
         public string Name
         {
-            get
-            {
-                return this.friendlyName;
-            }
+            get { return this.friendlyName; }
         }
 
         public bool IsDefaultAppDomain
         {
-            get
-            {
-                return this.isDefaultAppDomain;
-            }
+            get { return this.isDefaultAppDomain; }
         }
 
         public int ProcessId
         {
-            get
-            {
-                return this.processId;
-            }
+            get { return this.processId; }
         }
 
         public string ProcessName
         {
-            get
-            {
-                return this.processName;
-            }
+            get { return this.processName; }
         }
 
         internal static AppDomainInfo Current

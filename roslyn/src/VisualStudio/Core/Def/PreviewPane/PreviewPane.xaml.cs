@@ -28,8 +28,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
     {
         private const double DefaultWidth = 400;
 
-        private static readonly string s_dummyThreeLineTitle = "A" + Environment.NewLine + "A" + Environment.NewLine + "A";
-        private static readonly Size s_infiniteSize = new(double.PositiveInfinity, double.PositiveInfinity);
+        private static readonly string s_dummyThreeLineTitle =
+            "A" + Environment.NewLine + "A" + Environment.NewLine + "A";
+        private static readonly Size s_infiniteSize = new(
+            double.PositiveInfinity,
+            double.PositiveInfinity
+        );
 
         private readonly string _id;
         private readonly bool _logIdVerbatimInTelemetry;
@@ -52,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             IReadOnlyList<object> previewContent,
             bool logIdVerbatimInTelemetry,
             IVsUIShell uiShell,
-            Guid optionPageGuid = default)
+            Guid optionPageGuid = default
+        )
         {
             InitializeComponent();
 
@@ -63,7 +68,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             _uiShell = uiShell;
 
             // Initialize header portion.
-            if ((severityIcon != null) && !string.IsNullOrWhiteSpace(id) && !string.IsNullOrWhiteSpace(title))
+            if (
+                (severityIcon != null)
+                && !string.IsNullOrWhiteSpace(id)
+                && !string.IsNullOrWhiteSpace(title)
+            )
             {
                 HeaderStackPanel.Visibility = Visibility.Visible;
 
@@ -100,7 +109,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             // Initialize preview (i.e. diff view) portion.
             InitializePreviewElement(previewContent);
 
-            _registerPriorityCommandTarget = Package.GetGlobalService(typeof(SVsRegisterPriorityCommandTarget)) as IVsRegisterPriorityCommandTarget;
+            _registerPriorityCommandTarget =
+                Package.GetGlobalService(typeof(SVsRegisterPriorityCommandTarget))
+                as IVsRegisterPriorityCommandTarget;
             Debug.Assert(_registerPriorityCommandTarget != null);
 
             if (_registerPriorityCommandTarget != null)
@@ -109,7 +120,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                     _registerPriorityCommandTarget.RegisterPriorityCommandTarget(
                         dwReserved: 0,
                         pCmdTrgt: this,
-                        out _commandTargetCookie));
+                        out _commandTargetCookie
+                    )
+                );
             }
         }
 
@@ -120,7 +133,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
         }
 
         public static readonly DependencyProperty ParentElementProperty =
-            DependencyProperty.Register("ParentElement", typeof(FrameworkElement), typeof(PreviewPane), new PropertyMetadata(null));
+            DependencyProperty.Register(
+                "ParentElement",
+                typeof(FrameworkElement),
+                typeof(PreviewPane),
+                new PropertyMetadata(null)
+            );
 
         private void PreviewPane_Loaded(object sender, RoutedEventArgs e)
         {
@@ -292,13 +310,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             }
             else
             {
-                PreviewDockPanel.Measure(availableSize: new Size(
-                    double.IsNaN(previewElement.Width) ? DefaultWidth : previewElement.Width,
-                    double.PositiveInfinity));
+                PreviewDockPanel.Measure(
+                    availableSize: new Size(
+                        double.IsNaN(previewElement.Width) ? DefaultWidth : previewElement.Width,
+                        double.PositiveInfinity
+                    )
+                );
                 headerStackPanelWidth = PreviewDockPanel.DesiredSize.Width;
                 if (IsNormal(headerStackPanelWidth))
                 {
-                    TitleTextBlock.Measure(availableSize: new Size(headerStackPanelWidth, double.PositiveInfinity));
+                    TitleTextBlock.Measure(
+                        availableSize: new Size(headerStackPanelWidth, double.PositiveInfinity)
+                    );
                     titleTextBlockHeight = TitleTextBlock.DesiredSize.Height;
                 }
             }
@@ -312,7 +335,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             // TextBlock is larger than that required to render three lines worth,
             // then trim the contents of the TextBlock with an ellipsis at the end and
             // display the expander button that will allow users to view the full text.
-            if (HasDescription || (IsNormal(titleTextBlockHeight) && (titleTextBlockHeight > _heightForThreeLineTitle)))
+            if (
+                HasDescription
+                || (
+                    IsNormal(titleTextBlockHeight)
+                    && (titleTextBlockHeight > _heightForThreeLineTitle)
+                )
+            )
             {
                 TitleTextBlock.MaxHeight = _heightForThreeLineTitle;
                 TitleTextBlock.TextTrimming = TextTrimming.CharacterEllipsis;
@@ -326,47 +355,72 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             }
         }
 
-        private static bool IsNormal(double size)
-            => size > 0 && !double.IsNaN(size) && !double.IsInfinity(size);
+        private static bool IsNormal(double size) =>
+            size > 0 && !double.IsNaN(size) && !double.IsInfinity(size);
 
         private bool HasDescription
         {
-            get
-            {
-                return DescriptionParagraph.Inlines.Count > 0;
-            }
+            get { return DescriptionParagraph.Inlines.Count > 0; }
         }
 
         private readonly Guid _optionPageGuid;
+
         void IDisposable.Dispose()
         {
             // VS editor will call Dispose at which point we should Close() the embedded IWpfDifferenceViewer.
             _differenceViewerPreview?.Dispose();
             _differenceViewerPreview = null;
 
-            if (_registerPriorityCommandTarget != null && _commandTargetCookie != VSConstants.VSCOOKIE_NIL)
+            if (
+                _registerPriorityCommandTarget != null
+                && _commandTargetCookie != VSConstants.VSCOOKIE_NIL
+            )
             {
-                _registerPriorityCommandTarget.UnregisterPriorityCommandTarget(_commandTargetCookie);
+                _registerPriorityCommandTarget.UnregisterPriorityCommandTarget(
+                    _commandTargetCookie
+                );
             }
         }
 
-        int IOleCommandTarget.QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
+        int IOleCommandTarget.QueryStatus(
+            ref Guid pguidCmdGroup,
+            uint cCmds,
+            OLECMD[] prgCmds,
+            IntPtr pCmdText
+        )
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             if (_differenceViewerPreview != null)
             {
-                return _differenceViewerPreview.QueryStatus(ref pguidCmdGroup, cCmds, prgCmds, pCmdText);
+                return _differenceViewerPreview.QueryStatus(
+                    ref pguidCmdGroup,
+                    cCmds,
+                    prgCmds,
+                    pCmdText
+                );
             }
 
             return VSConstants.S_OK;
         }
 
-        int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
+        int IOleCommandTarget.Exec(
+            ref Guid pguidCmdGroup,
+            uint nCmdID,
+            uint nCmdexecopt,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             ThreadHelper.ThrowIfNotOnUIThread();
             if (_differenceViewerPreview != null)
             {
-                return _differenceViewerPreview.Exec(ref pguidCmdGroup, nCmdID, nCmdexecopt, pvaIn, pvaOut);
+                return _differenceViewerPreview.Exec(
+                    ref pguidCmdGroup,
+                    nCmdID,
+                    nCmdexecopt,
+                    pvaIn,
+                    pvaOut
+                );
             }
 
             return (int)VisualStudio.OLE.Interop.Constants.OLECMDERR_E_UNKNOWNGROUP;
@@ -387,7 +441,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                 return;
             }
 
-            DiagnosticLogger.LogHyperlink(hyperlink.Name ?? "Preview", _id, HasDescription, _logIdVerbatimInTelemetry, e.Uri.AbsoluteUri);
+            DiagnosticLogger.LogHyperlink(
+                hyperlink.Name ?? "Preview",
+                _id,
+                HasDescription,
+                _logIdVerbatimInTelemetry,
+                e.Uri.AbsoluteUri
+            );
         }
 
         private void ExpanderToggleButton_CheckedChanged(object sender, RoutedEventArgs e)
@@ -425,11 +485,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
         {
             if (_optionPageGuid != default)
             {
-                ErrorHandler.ThrowOnFailure(_uiShell.PostExecCommand(
-                    VSConstants.GUID_VSStandardCommandSet97,
-                    (uint)VSConstants.VSStd97CmdID.ToolsOptions,
-                    (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT,
-                    _optionPageGuid.ToString()));
+                ErrorHandler.ThrowOnFailure(
+                    _uiShell.PostExecCommand(
+                        VSConstants.GUID_VSStandardCommandSet97,
+                        (uint)VSConstants.VSStd97CmdID.ToolsOptions,
+                        (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT,
+                        _optionPageGuid.ToString()
+                    )
+                );
             }
         }
     }

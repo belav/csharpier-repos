@@ -1,9 +1,9 @@
 //
 // System.Drawing.Design.ToolboxItemCreator
-// 
+//
 // Authors:
 //	Sebastien Pouliot  <sebastien@ximian.com>
-// 
+//
 // Copyright (C) 2007 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,27 +26,24 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Windows.Forms;
 
-namespace System.Drawing.Design {
+namespace System.Drawing.Design
+{
+    public sealed class ToolboxItemCreator
+    {
+        internal ToolboxItemCreator() { }
 
-	public sealed class ToolboxItemCreator {
+        [MonoTODO]
+        public ToolboxItem Create(IDataObject data)
+        {
+            throw new NotImplementedException();
+        }
 
-		internal ToolboxItemCreator ()
-		{
-		}
-
-		[MonoTODO]
-		public ToolboxItem Create (IDataObject data)
-		{
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO]
-		public string Format {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public string Format
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }
-

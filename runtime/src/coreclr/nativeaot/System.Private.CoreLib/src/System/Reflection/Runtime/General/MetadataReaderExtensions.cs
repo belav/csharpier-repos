@@ -1,14 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 using Internal.Metadata.NativeFormat;
-
 using AssemblyFlags = Internal.Metadata.NativeFormat.AssemblyFlags;
 using Debug = System.Diagnostics.Debug;
 
@@ -63,7 +60,10 @@ namespace System.Reflection.Runtime.General
         }
 
         // Useful for namespace Name string which can be a null handle.
-        public static string GetStringOrNull(this ConstantStringValueHandle handle, MetadataReader reader)
+        public static string GetStringOrNull(
+            this ConstantStringValueHandle handle,
+            MetadataReader reader
+        )
         {
             if (reader.IsNull(handle))
                 return null;
@@ -73,21 +73,27 @@ namespace System.Reflection.Runtime.General
         public static bool IsTypeDefRefOrSpecHandle(this Handle handle, MetadataReader reader)
         {
             HandleType handleType = handle.HandleType;
-            return handleType == HandleType.TypeDefinition ||
-                handleType == HandleType.TypeReference ||
-                handleType == HandleType.TypeSpecification;
+            return handleType == HandleType.TypeDefinition
+                || handleType == HandleType.TypeReference
+                || handleType == HandleType.TypeSpecification;
         }
 
-        public static bool IsTypeDefRefSpecOrModifiedTypeHandle(this Handle handle, MetadataReader reader)
+        public static bool IsTypeDefRefSpecOrModifiedTypeHandle(
+            this Handle handle,
+            MetadataReader reader
+        )
         {
             HandleType handleType = handle.HandleType;
-            return handleType == HandleType.TypeDefinition ||
-                handleType == HandleType.TypeReference ||
-                handleType == HandleType.TypeSpecification ||
-                handleType == HandleType.ModifiedType;
+            return handleType == HandleType.TypeDefinition
+                || handleType == HandleType.TypeReference
+                || handleType == HandleType.TypeSpecification
+                || handleType == HandleType.ModifiedType;
         }
 
-        public static RuntimeAssemblyName ToRuntimeAssemblyName(this ScopeDefinitionHandle scopeDefinitionHandle, MetadataReader reader)
+        public static RuntimeAssemblyName ToRuntimeAssemblyName(
+            this ScopeDefinitionHandle scopeDefinitionHandle,
+            MetadataReader reader
+        )
         {
             ScopeDefinition scopeDefinition = scopeDefinitionHandle.GetScopeDefinition(reader);
             return CreateRuntimeAssemblyNameFromMetadata(
@@ -100,10 +106,13 @@ namespace System.Reflection.Runtime.General
                 scopeDefinition.Culture,
                 scopeDefinition.PublicKey,
                 scopeDefinition.Flags
-                );
+            );
         }
 
-        public static RuntimeAssemblyName ToRuntimeAssemblyName(this ScopeReferenceHandle scopeReferenceHandle, MetadataReader reader)
+        public static RuntimeAssemblyName ToRuntimeAssemblyName(
+            this ScopeReferenceHandle scopeReferenceHandle,
+            MetadataReader reader
+        )
         {
             ScopeReference scopeReference = scopeReferenceHandle.GetScopeReference(reader);
             return CreateRuntimeAssemblyNameFromMetadata(
@@ -116,7 +125,7 @@ namespace System.Reflection.Runtime.General
                 scopeReference.Culture,
                 scopeReference.PublicKeyOrToken,
                 scopeReference.Flags
-                );
+            );
         }
 
         private static RuntimeAssemblyName CreateRuntimeAssemblyNameFromMetadata(
@@ -128,12 +137,22 @@ namespace System.Reflection.Runtime.General
             ushort revisionNumber,
             ConstantStringValueHandle culture,
             ByteCollection publicKeyOrToken,
-            global::Internal.Metadata.NativeFormat.AssemblyFlags assemblyFlags)
+            global::Internal.Metadata.NativeFormat.AssemblyFlags assemblyFlags
+        )
         {
             AssemblyNameFlags assemblyNameFlags = AssemblyNameFlags.None;
-            if (0 != (assemblyFlags & global::Internal.Metadata.NativeFormat.AssemblyFlags.PublicKey))
+            if (
+                0
+                != (assemblyFlags & global::Internal.Metadata.NativeFormat.AssemblyFlags.PublicKey)
+            )
                 assemblyNameFlags |= AssemblyNameFlags.PublicKey;
-            if (0 != (assemblyFlags & global::Internal.Metadata.NativeFormat.AssemblyFlags.Retargetable))
+            if (
+                0
+                != (
+                    assemblyFlags
+                    & global::Internal.Metadata.NativeFormat.AssemblyFlags.Retargetable
+                )
+            )
                 assemblyNameFlags |= AssemblyNameFlags.Retargetable;
             int contentType = ((int)assemblyFlags) & 0x00000E00;
             assemblyNameFlags |= (AssemblyNameFlags)contentType;
@@ -148,7 +167,7 @@ namespace System.Reflection.Runtime.General
                 culture.GetStringOrNull(reader),
                 assemblyNameFlags,
                 keyOrTokenArrayBuilder.ToArray()
-                );
+            );
         }
     }
 }

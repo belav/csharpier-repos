@@ -39,14 +39,30 @@ namespace HostApiInvokerApp
             //     2. using a fake SDK Self-Registered location
             // Note that this has to be set here and not in the calling test process because
             // %ProgramFiles% gets reset on process creation.
-            string testMultilevelLookupProgramFiles = Environment.GetEnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES");
-            string testMultilevelLookupSelfRegistered = Environment.GetEnvironmentVariable("TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED");
+            string testMultilevelLookupProgramFiles = Environment.GetEnvironmentVariable(
+                "TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES"
+            );
+            string testMultilevelLookupSelfRegistered = Environment.GetEnvironmentVariable(
+                "TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED"
+            );
 
-            if (testMultilevelLookupProgramFiles != null && testMultilevelLookupSelfRegistered != null)
+            if (
+                testMultilevelLookupProgramFiles != null
+                && testMultilevelLookupSelfRegistered != null
+            )
             {
-                Environment.SetEnvironmentVariable("_DOTNET_TEST_GLOBALLY_REGISTERED_PATH", testMultilevelLookupSelfRegistered);
-                Environment.SetEnvironmentVariable("ProgramFiles", testMultilevelLookupProgramFiles);
-                Environment.SetEnvironmentVariable("ProgramFiles(x86)", testMultilevelLookupProgramFiles);
+                Environment.SetEnvironmentVariable(
+                    "_DOTNET_TEST_GLOBALLY_REGISTERED_PATH",
+                    testMultilevelLookupSelfRegistered
+                );
+                Environment.SetEnvironmentVariable(
+                    "ProgramFiles",
+                    testMultilevelLookupProgramFiles
+                );
+                Environment.SetEnvironmentVariable(
+                    "ProgramFiles(x86)",
+                    testMultilevelLookupProgramFiles
+                );
                 Environment.SetEnvironmentVariable("DOTNET_MULTILEVEL_LOOKUP", "1");
             }
             else

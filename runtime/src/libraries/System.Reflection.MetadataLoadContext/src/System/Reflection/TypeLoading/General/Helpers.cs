@@ -13,7 +13,9 @@ namespace System.Reflection.TypeLoading
     internal static class Helpers
     {
 #if NET8_0_OR_GREATER
-        private static readonly SearchValues<char> s_charsToEscape = SearchValues.Create("\\[]+*&,");
+        private static readonly SearchValues<char> s_charsToEscape = SearchValues.Create(
+            "\\[]+*&,"
+        );
 #else
         private static ReadOnlySpan<char> s_charsToEscape => "\\[]+*&,".AsSpan();
 #endif
@@ -30,7 +32,13 @@ namespace System.Reflection.TypeLoading
             // We want to return the exact type of T[] even if "original" is a type of T2[] (due to array variance.)
             // The arrays produced by this helper are usually passed directly to app code.
             T[] copy = new T[original.Length];
-            Array.Copy(sourceArray: original, sourceIndex: 0, destinationArray: copy, destinationIndex: 0, length: original.Length);
+            Array.Copy(
+                sourceArray: original,
+                sourceIndex: 0,
+                destinationArray: copy,
+                destinationIndex: 0,
+                length: original.Length
+            );
             return copy;
         }
 
@@ -162,10 +170,10 @@ namespace System.Reflection.TypeLoading
         public static Version? AdjustForUnspecifiedVersionComponents(this Version v)
         {
             int mask =
-                ((v.Revision == ushort.MaxValue) ? 0b0001 : 0) |
-                ((v.Build == ushort.MaxValue) ? 0b0010 : 0) |
-                ((v.Minor == ushort.MaxValue) ? 0b0100 : 0) |
-                ((v.Major == ushort.MaxValue) ? 0b1000 : 0);
+                ((v.Revision == ushort.MaxValue) ? 0b0001 : 0)
+                | ((v.Build == ushort.MaxValue) ? 0b0010 : 0)
+                | ((v.Minor == ushort.MaxValue) ? 0b0100 : 0)
+                | ((v.Major == ushort.MaxValue) ? 0b1000 : 0);
 
             return mask switch
             {
@@ -187,7 +195,9 @@ namespace System.Reflection.TypeLoading
             return an.GetPublicKeyToken();
         }
 
-        public static AssemblyNameFlags ConvertAssemblyFlagsToAssemblyNameFlags(AssemblyFlags assemblyFlags)
+        public static AssemblyNameFlags ConvertAssemblyFlagsToAssemblyNameFlags(
+            AssemblyFlags assemblyFlags
+        )
         {
             AssemblyNameFlags assemblyNameFlags = AssemblyNameFlags.None;
 
@@ -229,7 +239,10 @@ namespace System.Reflection.TypeLoading
         //
         public static string AppendTypeName(this string ns, string name)
         {
-            Debug.Assert(ns != null, "For top level types, the namespace must be string.Empty, not null");
+            Debug.Assert(
+                ns != null,
+                "For top level types, the namespace must be string.Empty, not null"
+            );
             Debug.Assert(name != null);
 
             return ns.Length == 0 ? name : ns + "." + name;
@@ -238,7 +251,10 @@ namespace System.Reflection.TypeLoading
         //
         // Common helper for ConstructorInfo.ToString() and MethodInfo.ToString()
         //
-        public static string ToString(this IRoMethodBase roMethodBase, MethodSig<string> methodSigStrings)
+        public static string ToString(
+            this IRoMethodBase roMethodBase,
+            MethodSig<string> methodSigStrings
+        )
         {
             TypeContext typeContext = roMethodBase.TypeContext;
 
@@ -272,7 +288,8 @@ namespace System.Reflection.TypeLoading
             return sb.ToString();
         }
 
-        public static bool HasSameMetadataDefinitionAsCore<M>(this M thisMember, MemberInfo other) where M : MemberInfo
+        public static bool HasSameMetadataDefinitionAsCore<M>(this M thisMember, MemberInfo other)
+            where M : MemberInfo
         {
             if (other is null)
                 throw new ArgumentNullException(nameof(other));
@@ -290,13 +307,23 @@ namespace System.Reflection.TypeLoading
             return true;
         }
 
-        public static RoType? LoadTypeFromAssemblyQualifiedName(string name, RoAssembly defaultAssembly, bool ignoreCase, bool throwOnError)
+        public static RoType? LoadTypeFromAssemblyQualifiedName(
+            string name,
+            RoAssembly defaultAssembly,
+            bool ignoreCase,
+            bool throwOnError
+        )
         {
             if (!name.TypeNameContainsTypeParserMetacharacters())
             {
                 // Fast-path: the type contains none of the parser metacharacters nor the escape character. Just treat as plain old type name.
                 name.SplitTypeName(out string ns, out string simpleName);
-                RoType? type = defaultAssembly.GetTypeCore(ns, simpleName, ignoreCase: ignoreCase, out Exception? e);
+                RoType? type = defaultAssembly.GetTypeCore(
+                    ns,
+                    simpleName,
+                    ignoreCase: ignoreCase,
+                    out Exception? e
+                );
                 if (type != null)
                     return type;
                 if (throwOnError)
@@ -305,28 +332,42 @@ namespace System.Reflection.TypeLoading
 
             MetadataLoadContext loader = defaultAssembly.Loader;
 
-            Func<AssemblyName, Assembly> assemblyResolver =
-                loader.LoadFromAssemblyName;
+            Func<AssemblyName, Assembly> assemblyResolver = loader.LoadFromAssemblyName;
 
-            Func<Assembly?, string, bool, Type?> typeResolver =
-                delegate (Assembly? assembly, string fullName, bool ignoreCase2)
-                {
-                    assembly ??= defaultAssembly;
+            Func<Assembly?, string, bool, Type?> typeResolver = delegate(
+                Assembly? assembly,
+                string fullName,
+                bool ignoreCase2
+            )
+            {
+                assembly ??= defaultAssembly;
 
-                    Debug.Assert(assembly is RoAssembly);
-                    RoAssembly roAssembly = (RoAssembly)assembly;
+                Debug.Assert(assembly is RoAssembly);
+                RoAssembly roAssembly = (RoAssembly)assembly;
 
-                    fullName = fullName.UnescapeTypeNameIdentifier();
-                    fullName.SplitTypeName(out string ns, out string simpleName);
-                    Type? type = roAssembly.GetTypeCore(ns, simpleName, ignoreCase: ignoreCase2, out Exception? e);
-                    if (type != null)
-                        return type;
-                    if (throwOnError)
-                        throw e!;
-                    return null;
-                };
+                fullName = fullName.UnescapeTypeNameIdentifier();
+                fullName.SplitTypeName(out string ns, out string simpleName);
+                Type? type = roAssembly.GetTypeCore(
+                    ns,
+                    simpleName,
+                    ignoreCase: ignoreCase2,
+                    out Exception? e
+                );
+                if (type != null)
+                    return type;
+                if (throwOnError)
+                    throw e!;
+                return null;
+            };
 
-            return (RoType?)Type.GetType(name, assemblyResolver: assemblyResolver, typeResolver: typeResolver, throwOnError: throwOnError, ignoreCase: ignoreCase);
+            return (RoType?)
+                Type.GetType(
+                    name,
+                    assemblyResolver: assemblyResolver,
+                    typeResolver: typeResolver,
+                    throwOnError: throwOnError,
+                    ignoreCase: ignoreCase
+                );
         }
 
         public static RoType SkipTypeWrappers(this RoType type)
@@ -362,7 +403,13 @@ namespace System.Reflection.TypeLoading
             // as the original is wide open to tampering by anyone.
             byte[]? pkt = assemblyName.GetPublicKeyToken().CloneArray();
 
-            return new RoAssemblyName(assemblyName.Name, assemblyName.Version, assemblyName.CultureName, pkt, assemblyName.Flags);
+            return new RoAssemblyName(
+                assemblyName.Name,
+                assemblyName.Version,
+                assemblyName.CultureName,
+                pkt,
+                assemblyName.Flags
+            );
         }
 
         public static byte[] ToUtf8(this string s) => Encoding.UTF8.GetBytes(s);
@@ -388,8 +435,10 @@ namespace System.Reflection.TypeLoading
         //
         //    public sealed override string ToString() => Loader.GetDisposedString() ?? <your real ToString() code>;"
         //
-        public static string? GetDisposedString(this MetadataLoadContext loader) => loader.IsDisposed ? SR.MetadataLoadContextDisposed : null;
+        public static string? GetDisposedString(this MetadataLoadContext loader) =>
+            loader.IsDisposed ? SR.MetadataLoadContextDisposed : null;
 
-        public static TypeContext ToTypeContext(this RoType[] instantiation) => new TypeContext(instantiation, null);
+        public static TypeContext ToTypeContext(this RoType[] instantiation) =>
+            new TypeContext(instantiation, null);
     }
 }

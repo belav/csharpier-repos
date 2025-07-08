@@ -22,31 +22,49 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.InvokeDelegateWithConditionalAccess), Shared]
-    internal partial class InvokeDelegateWithConditionalAccessCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.InvokeDelegateWithConditionalAccess
+        ),
+        Shared
+    ]
+    internal partial class InvokeDelegateWithConditionalAccessCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public InvokeDelegateWithConditionalAccessCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public InvokeDelegateWithConditionalAccessCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId);
 
         // Filter out the diagnostics we created for the faded out code.  We don't want
         // to try to fix those as well as the normal diagnostics we created.
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !diagnostic.Properties.ContainsKey(WellKnownDiagnosticTags.Unnecessary);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !diagnostic.Properties.ContainsKey(WellKnownDiagnosticTags.Unnecessary);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Simplify_delegate_invocation, nameof(CSharpAnalyzersResources.Simplify_delegate_invocation));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Simplify_delegate_invocation,
+                nameof(CSharpAnalyzersResources.Simplify_delegate_invocation)
+            );
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -58,7 +76,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         }
 
         private static void AddEdits(
-            SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             if (diagnostic.Properties[Constants.Kind] == Constants.VariableAndIfStatementForm)
             {
@@ -66,7 +87,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             }
             else
             {
-                Debug.Assert(diagnostic.Properties[Constants.Kind] == Constants.SingleIfStatementForm);
+                Debug.Assert(
+                    diagnostic.Properties[Constants.Kind] == Constants.SingleIfStatementForm
+                );
                 HandleSingleIfStatementForm(editor, diagnostic, cancellationToken);
             }
         }
@@ -74,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         private static void HandleSingleIfStatementForm(
             SyntaxEditor editor,
             Diagnostic diagnostic,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 
@@ -84,26 +108,39 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var ifStatement = (IfStatementSyntax)root.FindNode(ifStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
-            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(expressionStatementLocation.SourceSpan);
+            var expressionStatement = (ExpressionStatementSyntax)
+                root.FindNode(expressionStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
             var invocationExpression = (InvocationExpressionSyntax)expressionStatement.Expression;
             cancellationToken.ThrowIfCancellationRequested();
 
-            var (invokedExpression, invokeName) =
-                invocationExpression.Expression is MemberAccessExpressionSyntax { Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) } } memberAccessExpression
-                    ? (memberAccessExpression.Expression, memberAccessExpression.Name)
-                    : (invocationExpression.Expression, SyntaxFactory.IdentifierName(nameof(Action.Invoke)));
+            var (invokedExpression, invokeName) = invocationExpression.Expression
+                is MemberAccessExpressionSyntax
+                {
+                    Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) }
+                } memberAccessExpression
+                ? (memberAccessExpression.Expression, memberAccessExpression.Name)
+                : (
+                    invocationExpression.Expression,
+                    SyntaxFactory.IdentifierName(nameof(Action.Invoke))
+                );
 
             StatementSyntax newStatement = expressionStatement.WithExpression(
                 SyntaxFactory.ConditionalAccessExpression(
                     invokedExpression,
                     SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.MemberBindingExpression(invokeName), invocationExpression.ArgumentList)));
+                        SyntaxFactory.MemberBindingExpression(invokeName),
+                        invocationExpression.ArgumentList
+                    )
+                )
+            );
             newStatement = newStatement.WithPrependedLeadingTrivia(ifStatement.GetLeadingTrivia());
 
-            if (ifStatement.Parent.IsKind(SyntaxKind.ElseClause) &&
-                ifStatement.Statement is BlockSyntax block)
+            if (
+                ifStatement.Parent.IsKind(SyntaxKind.ElseClause)
+                && ifStatement.Statement is BlockSyntax block
+            )
             {
                 newStatement = block.WithStatements(SyntaxFactory.SingletonList(newStatement));
             }
@@ -117,7 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         }
 
         private static void HandleVariableAndIfStatementForm(
-            SyntaxEditor editor, Diagnostic diagnostic, CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 
@@ -125,46 +165,68 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var ifStatementLocation = diagnostic.AdditionalLocations[1];
             var expressionStatementLocation = diagnostic.AdditionalLocations[2];
 
-            var localDeclarationStatement = (LocalDeclarationStatementSyntax)root.FindNode(localDeclarationLocation.SourceSpan);
+            var localDeclarationStatement = (LocalDeclarationStatementSyntax)
+                root.FindNode(localDeclarationLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
             var ifStatement = (IfStatementSyntax)root.FindNode(ifStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
-            var expressionStatement = (ExpressionStatementSyntax)root.FindNode(expressionStatementLocation.SourceSpan);
+            var expressionStatement = (ExpressionStatementSyntax)
+                root.FindNode(expressionStatementLocation.SourceSpan);
             cancellationToken.ThrowIfCancellationRequested();
 
             var invocationExpression = (InvocationExpressionSyntax)expressionStatement.Expression;
             var parentBlock = (BlockSyntax)localDeclarationStatement.GetRequiredParent();
 
-            var invokeName =
-                invocationExpression.Expression is MemberAccessExpressionSyntax { Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) } } memberAccessExpression
-                    ? memberAccessExpression.Name
-                    : SyntaxFactory.IdentifierName(nameof(Action.Invoke));
+            var invokeName = invocationExpression.Expression
+                is MemberAccessExpressionSyntax
+                {
+                    Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) }
+                } memberAccessExpression
+                ? memberAccessExpression.Name
+                : SyntaxFactory.IdentifierName(nameof(Action.Invoke));
 
             var newStatement = expressionStatement.WithExpression(
                 SyntaxFactory.ConditionalAccessExpression(
-                    localDeclarationStatement.Declaration.Variables[0].Initializer!.Value.Parenthesize(),
+                    localDeclarationStatement
+                        .Declaration.Variables[0]
+                        .Initializer!.Value.Parenthesize(),
                     SyntaxFactory.InvocationExpression(
-                        SyntaxFactory.MemberBindingExpression(invokeName), invocationExpression.ArgumentList)));
+                        SyntaxFactory.MemberBindingExpression(invokeName),
+                        invocationExpression.ArgumentList
+                    )
+                )
+            );
 
             newStatement = newStatement.WithAdditionalAnnotations(Formatter.Annotation);
             newStatement = AppendTriviaWithoutEndOfLines(newStatement, ifStatement);
 
             editor.ReplaceNode(ifStatement, newStatement);
-            editor.RemoveNode(localDeclarationStatement, SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker);
+            editor.RemoveNode(
+                localDeclarationStatement,
+                SyntaxRemoveOptions.KeepLeadingTrivia | SyntaxRemoveOptions.AddElasticMarker
+            );
             cancellationToken.ThrowIfCancellationRequested();
         }
 
-        private static T AppendTriviaWithoutEndOfLines<T>(T newStatement, IfStatementSyntax ifStatement) where T : SyntaxNode
+        private static T AppendTriviaWithoutEndOfLines<T>(
+            T newStatement,
+            IfStatementSyntax ifStatement
+        )
+            where T : SyntaxNode
         {
             // We're combining trivia from the delegate invocation and the end of the if statement
             // but we don't want two EndOfLines so we ignore the one on the invocation (if it exists)
             var expressionTrivia = newStatement.GetTrailingTrivia();
-            var expressionTriviaWithoutEndOfLine = expressionTrivia.Where(t => !t.IsKind(SyntaxKind.EndOfLineTrivia));
+            var expressionTriviaWithoutEndOfLine = expressionTrivia.Where(t =>
+                !t.IsKind(SyntaxKind.EndOfLineTrivia)
+            );
             var ifStatementTrivia = ifStatement.GetTrailingTrivia();
 
-            return newStatement.WithTrailingTrivia(expressionTriviaWithoutEndOfLine.Concat(ifStatementTrivia));
+            return newStatement.WithTrailingTrivia(
+                expressionTriviaWithoutEndOfLine.Concat(ifStatementTrivia)
+            );
         }
     }
 }

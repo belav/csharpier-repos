@@ -98,45 +98,55 @@ Revision History:
 
 --*/
 
-namespace System.Net {
+namespace System.Net
+{
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.Net.Cache;
-    using System.Net.Sockets;
     using System.Net.NetworkInformation;
+    using System.Net.Sockets;
     using System.Net.WebSockets;
-    using System.Security;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Threading;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Permissions;
-    using System.ComponentModel;
     using System.Text;
-    using System.Globalization;
+    using System.Threading;
     using Microsoft.Win32.SafeHandles;
-    using System.Runtime.ConstrainedExecution;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.Generic;
 
 #if DEBUG
     //
     // This is a helper class for debugging GC-ed handles that we define.
     // As a general rule normal code path should always destroy handles explicitly
     //
-    internal abstract class DebugSafeHandle: SafeHandleZeroOrMinusOneIsInvalid {
+    internal abstract class DebugSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
         string m_Trace;
 
-        protected DebugSafeHandle(bool ownsHandle): base(ownsHandle) {
+        protected DebugSafeHandle(bool ownsHandle)
+            : base(ownsHandle)
+        {
             Trace();
         }
 
-        protected DebugSafeHandle(IntPtr invalidValue, bool ownsHandle): base(ownsHandle) {
+        protected DebugSafeHandle(IntPtr invalidValue, bool ownsHandle)
+            : base(ownsHandle)
+        {
             SetHandle(invalidValue);
             Trace();
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Unrestricted=true)]
-        private void Trace() {
-            m_Trace = "WARNING! GC-ed  >>" + this.GetType().FullName + "<< (should be excplicitly closed) \r\n";
+        [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
+        private void Trace()
+        {
+            m_Trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().FullName
+                + "<< (should be excplicitly closed) \r\n";
 #if TRAVE
             (new FileIOPermission(PermissionState.Unrestricted)).Assert();
             string stacktrace = Environment.StackTrace;
@@ -146,7 +156,8 @@ namespace System.Net {
         }
 
         [ReliabilityContract(Consistency.MayCorruptAppDomain, Cer.None)]
-        ~DebugSafeHandle() {
+        ~DebugSafeHandle()
+        {
             GlobalLog.SetThreadSource(ThreadKinds.Finalization);
             GlobalLog.Print(m_Trace);
         }
@@ -156,16 +167,23 @@ namespace System.Net {
     // This is a helper class for debugging GC-ed handles that we define.
     // As a general rule normal code path should always destroy handles explicitly
     //
-    internal abstract class DebugCriticalHandleMinusOneIsInvalid : CriticalHandleMinusOneIsInvalid {
+    internal abstract class DebugCriticalHandleMinusOneIsInvalid : CriticalHandleMinusOneIsInvalid
+    {
         string m_Trace;
 
-        protected DebugCriticalHandleMinusOneIsInvalid(): base() {
+        protected DebugCriticalHandleMinusOneIsInvalid()
+            : base()
+        {
             Trace();
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Unrestricted=true)]
-        private void Trace() {
-            m_Trace = "WARNING! GC-ed  >>" + this.GetType().FullName + "<< (should be excplicitly closed) \r\n";
+        [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
+        private void Trace()
+        {
+            m_Trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().FullName
+                + "<< (should be excplicitly closed) \r\n";
             GlobalLog.Print("Creating SafeHandle, type = " + this.GetType().FullName);
 #if TRAVE
             (new FileIOPermission(PermissionState.Unrestricted)).Assert();
@@ -175,7 +193,8 @@ namespace System.Net {
 #endif //TRAVE
         }
 
-        ~DebugCriticalHandleMinusOneIsInvalid() {
+        ~DebugCriticalHandleMinusOneIsInvalid()
+        {
             GlobalLog.SetThreadSource(ThreadKinds.Finalization);
             GlobalLog.Print(m_Trace);
         }
@@ -185,16 +204,23 @@ namespace System.Net {
     // This is a helper class for debugging GC-ed handles that we define.
     // As a general rule normal code path should always destroy handles explicitly
     //
-    internal abstract class DebugSafeHandleMinusOneIsInvalid : SafeHandleMinusOneIsInvalid {
+    internal abstract class DebugSafeHandleMinusOneIsInvalid : SafeHandleMinusOneIsInvalid
+    {
         string m_Trace;
 
-        protected DebugSafeHandleMinusOneIsInvalid(bool ownsHandle): base(ownsHandle) {
+        protected DebugSafeHandleMinusOneIsInvalid(bool ownsHandle)
+            : base(ownsHandle)
+        {
             Trace();
         }
 
-        [EnvironmentPermission(SecurityAction.Assert, Unrestricted=true)]
-        private void Trace() {
-            m_Trace = "WARNING! GC-ed  >>" + this.GetType().FullName + "<< (should be excplicitly closed) \r\n";
+        [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
+        private void Trace()
+        {
+            m_Trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().FullName
+                + "<< (should be excplicitly closed) \r\n";
             GlobalLog.Print("Creating SafeHandle, type = " + this.GetType().FullName);
 #if TRAVE
             (new FileIOPermission(PermissionState.Unrestricted)).Assert();
@@ -204,7 +230,8 @@ namespace System.Net {
 #endif //TRAVE
         }
 
-        ~DebugSafeHandleMinusOneIsInvalid() {
+        ~DebugSafeHandleMinusOneIsInvalid()
+        {
             GlobalLog.SetThreadSource(ThreadKinds.Finalization);
             GlobalLog.Print(m_Trace);
         }
@@ -214,17 +241,29 @@ namespace System.Net {
     // This is a helper class for debugging GC-ed handles that we define.
     // As a general rule normal code path should always destroy handles explicitly
     //
-    internal abstract class DebugCriticalHandleZeroOrMinusOneIsInvalid : CriticalHandleZeroOrMinusOneIsInvalid {
+    internal abstract class DebugCriticalHandleZeroOrMinusOneIsInvalid
+        : CriticalHandleZeroOrMinusOneIsInvalid
+    {
         string m_Trace;
 
-        protected DebugCriticalHandleZeroOrMinusOneIsInvalid(): base() {
+        protected DebugCriticalHandleZeroOrMinusOneIsInvalid()
+            : base()
+        {
             Trace();
         }
 
-        [SuppressMessage("Microsoft.Security","CA2106:SecureAsserts", Justification="DEBUG use only: Require access to Environment.StackTrace regardless of app permissions")]
-        [EnvironmentPermission(SecurityAction.Assert, Unrestricted=true)]
-        private void Trace() {
-            m_Trace = "WARNING! GC-ed  >>" + this.GetType().FullName + "<< (should be excplicitly closed) \r\n";
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Justification = "DEBUG use only: Require access to Environment.StackTrace regardless of app permissions"
+        )]
+        [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
+        private void Trace()
+        {
+            m_Trace =
+                "WARNING! GC-ed  >>"
+                + this.GetType().FullName
+                + "<< (should be excplicitly closed) \r\n";
             GlobalLog.Print("Creating SafeHandle, type = " + this.GetType().FullName);
 #if TRAVE
             (new FileIOPermission(PermissionState.Unrestricted)).Assert();
@@ -234,13 +273,13 @@ namespace System.Net {
 #endif //TRAVE
         }
 
-        ~DebugCriticalHandleZeroOrMinusOneIsInvalid() {
+        ~DebugCriticalHandleZeroOrMinusOneIsInvalid()
+        {
             GlobalLog.SetThreadSource(ThreadKinds.Finalization);
             GlobalLog.Print(m_Trace);
         }
     }
 #endif // DEBUG
-
 
 #if !FEATURE_PAL
 
@@ -252,25 +291,38 @@ namespace System.Net {
     ///////////////////////////////////////////////////////////////
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeFreeAddrInfo : DebugSafeHandle {
+    internal sealed class SafeFreeAddrInfo : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeFreeAddrInfo : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeFreeAddrInfo : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
         private const string WS2_32 = "ws2_32.dll";
 
-        private SafeFreeAddrInfo(): base(true) {}
+        private SafeFreeAddrInfo()
+            : base(true) { }
 
-        internal static int GetAddrInfo(string nodename, string servicename, ref AddressInfo hints, out SafeFreeAddrInfo outAddrInfo) {
-            return UnsafeNclNativeMethods.SafeNetHandlesXPOrLater.GetAddrInfoW(nodename, servicename, ref hints, out outAddrInfo);
+        internal static int GetAddrInfo(
+            string nodename,
+            string servicename,
+            ref AddressInfo hints,
+            out SafeFreeAddrInfo outAddrInfo
+        )
+        {
+            return UnsafeNclNativeMethods.SafeNetHandlesXPOrLater.GetAddrInfoW(
+                nodename,
+                servicename,
+                ref hints,
+                out outAddrInfo
+            );
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             UnsafeNclNativeMethods.SafeNetHandlesXPOrLater.freeaddrinfo(handle);
             return true;
         }
     }
-
 #endif // !FEATURE_PAL
 
     ///////////////////////////////////////////////////////////////
@@ -281,22 +333,28 @@ namespace System.Net {
     ///////////////////////////////////////////////////////////////
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeCloseHandle : DebugCriticalHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeCloseHandle : DebugCriticalHandleZeroOrMinusOneIsInvalid
+    {
 #else
-    internal sealed class SafeCloseHandle : CriticalHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeCloseHandle : CriticalHandleZeroOrMinusOneIsInvalid
+    {
 #endif
         private int _disposed;
 
-        private SafeCloseHandle() : base() {
-        }
+        private SafeCloseHandle()
+            : base() { }
 
-        internal IntPtr DangerousGetHandle() {
+        internal IntPtr DangerousGetHandle()
+        {
             return handle;
         }
 
-        protected override bool ReleaseHandle() {
-            if (!IsInvalid) {
-                if (Interlocked.Increment(ref _disposed) == 1) {
+        protected override bool ReleaseHandle()
+        {
+            if (!IsInvalid)
+            {
+                if (Interlocked.Increment(ref _disposed) == 1)
+                {
                     return UnsafeNclNativeMethods.SafeNetHandles.CloseHandle(handle);
                 }
             }
@@ -307,42 +365,53 @@ namespace System.Net {
         // This method will bypass refCount check done by VM
         // Means it will force handle release if has a valid value
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal void Abort() {
+        internal void Abort()
+        {
             ReleaseHandle();
             SetHandleAsInvalid();
         }
 
 #endif // !FEATURE_PAL
-
     }
 
 #if !MONO
     //
     // This class is a wrapper for Http.sys V2 request queue handle.
     //
-    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses",
-        Justification = "Suppress due to tools issues with unit test infrastructure")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1812:AvoidUninstantiatedInternalClasses",
+        Justification = "Suppress due to tools issues with unit test infrastructure"
+    )]
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class HttpRequestQueueV2Handle : DebugCriticalHandleZeroOrMinusOneIsInvalid {
+    internal sealed class HttpRequestQueueV2Handle : DebugCriticalHandleZeroOrMinusOneIsInvalid
+    {
 #else
-    internal sealed class HttpRequestQueueV2Handle : CriticalHandleZeroOrMinusOneIsInvalid {
+    internal sealed class HttpRequestQueueV2Handle : CriticalHandleZeroOrMinusOneIsInvalid
+    {
 #endif
 
         private int disposed;
 
-        private HttpRequestQueueV2Handle() : base() {
-        }
+        private HttpRequestQueueV2Handle()
+            : base() { }
 
-        internal IntPtr DangerousGetHandle() {
+        internal IntPtr DangerousGetHandle()
+        {
             return handle;
         }
 
-        protected override bool ReleaseHandle() {
-            if (!IsInvalid) {
-                if (Interlocked.Increment(ref disposed) == 1) {
-                    return (UnsafeNclNativeMethods.SafeNetHandles.HttpCloseRequestQueue(handle) ==
-                        UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS);
+        protected override bool ReleaseHandle()
+        {
+            if (!IsInvalid)
+            {
+                if (Interlocked.Increment(ref disposed) == 1)
+                {
+                    return (
+                        UnsafeNclNativeMethods.SafeNetHandles.HttpCloseRequestQueue(handle)
+                        == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                    );
                 }
             }
             return true;
@@ -355,43 +424,53 @@ namespace System.Net {
     //
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class HttpServerSessionHandle : DebugCriticalHandleZeroOrMinusOneIsInvalid {
+    internal sealed class HttpServerSessionHandle : DebugCriticalHandleZeroOrMinusOneIsInvalid
+    {
 #else
-    internal sealed class HttpServerSessionHandle : CriticalHandleZeroOrMinusOneIsInvalid {
+    internal sealed class HttpServerSessionHandle : CriticalHandleZeroOrMinusOneIsInvalid
+    {
 #endif
 
         private int disposed;
         private ulong serverSessionId;
 
-        internal HttpServerSessionHandle(ulong id) : base() {
+        internal HttpServerSessionHandle(ulong id)
+            : base()
+        {
             serverSessionId = id;
-            
+
             //
-            // This class uses no real handle so we need to set a dummy handle. Otherwise, IsInvalid always remains             
+            // This class uses no real handle so we need to set a dummy handle. Otherwise, IsInvalid always remains
             // true.
             //
             SetHandle(new IntPtr(1));
         }
 
-        internal ulong DangerousGetServerSessionId() {
+        internal ulong DangerousGetServerSessionId()
+        {
             return serverSessionId;
         }
 
-        protected override bool ReleaseHandle() {
-            if (!IsInvalid) {
-                if (Interlocked.Increment(ref disposed) == 1) {
-
+        protected override bool ReleaseHandle()
+        {
+            if (!IsInvalid)
+            {
+                if (Interlocked.Increment(ref disposed) == 1)
+                {
                     //
                     // Closing server session also closes all open url groups under that server session.
                     //
-                    return (UnsafeNclNativeMethods.HttpApi.HttpCloseServerSession(serverSessionId) ==
-                        UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS);
+                    return (
+                        UnsafeNclNativeMethods.HttpApi.HttpCloseServerSession(serverSessionId)
+                        == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                    );
                 }
             }
             return true;
         }
     }
 #endif
+
     //
     // SafeHandle to wrap handles created by IcmpCreateFile or Icmp6CreateFile
     // from either icmp.dll or iphlpapi.dll. These handles must be closed by
@@ -403,13 +482,14 @@ namespace System.Net {
     // time so it is always available at critical finalizer time.
     //
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeCloseIcmpHandle : SafeHandleZeroOrMinusOneIsInvalid {
-
-        private SafeCloseIcmpHandle() : base(true) {
-        }
+    internal sealed class SafeCloseIcmpHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeCloseIcmpHandle()
+            : base(true) { }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        override protected bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             return UnsafeNetInfoNativeMethods.IcmpCloseHandle(handle);
         }
     }
@@ -420,15 +500,18 @@ namespace System.Net {
     //
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeInternetHandle : DebugSafeHandle {
+    internal sealed class SafeInternetHandle : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeInternetHandle : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeInternetHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
-        public SafeInternetHandle() : base(true) {
-        }
+        public SafeInternetHandle()
+            : base(true) { }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             return UnsafeNclNativeMethods.WinHttp.WinHttpCloseHandle(handle);
         }
     }
@@ -438,20 +521,23 @@ namespace System.Net {
     //
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeSspiAuthDataHandle : DebugSafeHandle {
+    internal sealed class SafeSspiAuthDataHandle : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeSspiAuthDataHandle : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeSspiAuthDataHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
-        public SafeSspiAuthDataHandle() : base(true) {
-        }
+        public SafeSspiAuthDataHandle()
+            : base(true) { }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        protected override bool ReleaseHandle() {
-            return UnsafeNclNativeMethods.SspiHelper.SspiFreeAuthIdentity(handle) == SecurityStatus.OK;
+        protected override bool ReleaseHandle()
+        {
+            return UnsafeNclNativeMethods.SspiHelper.SspiFreeAuthIdentity(handle)
+                == SecurityStatus.OK;
         }
     }
 #endif
-    
 #if !FEATURE_PAL
 
     ///////////////////////////////////////////////////////////////
@@ -459,42 +545,61 @@ namespace System.Net {
     //  A set of Safe Handles that depend on native FreeContextBuffer finalizer
     //
     ///////////////////////////////////////////////////////////////
-//-------------------------------------------------------
-    internal enum SecurDll {
-        SECURITY    = 0,
-        SECUR32     = 1, // Windows 9x only
-        SCHANNEL    = 2, // Windows 9x only
+    //-------------------------------------------------------
+    internal enum SecurDll
+    {
+        SECURITY = 0,
+        SECUR32 = 1, // Windows 9x only
+        SCHANNEL = 2, // Windows 9x only
     }
-//=======================================================
+
+    //=======================================================
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal abstract class SafeFreeContextBuffer : DebugSafeHandle {
+    internal abstract class SafeFreeContextBuffer : DebugSafeHandle
+    {
 #else
-    internal abstract class SafeFreeContextBuffer : SafeHandleZeroOrMinusOneIsInvalid {
+    internal abstract class SafeFreeContextBuffer : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
-        protected SafeFreeContextBuffer(): base(true) {}
+        protected SafeFreeContextBuffer()
+            : base(true) { }
 
         // This must be ONLY called from this file and in the context of a CER
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe void Set(IntPtr value) {
+        internal unsafe void Set(IntPtr value)
+        {
             this.handle = value;
         }
 
         //
         //
-        internal static int EnumeratePackages(SecurDll Dll, out int pkgnum, out SafeFreeContextBuffer pkgArray) {
-
+        internal static int EnumeratePackages(
+            SecurDll Dll,
+            out int pkgnum,
+            out SafeFreeContextBuffer pkgArray
+        )
+        {
             int res = -1;
-            switch (Dll) {
-            case SecurDll.SECURITY:
-                SafeFreeContextBuffer_SECURITY pkgArray_SECURITY = null;
-                res = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.EnumerateSecurityPackagesW(out pkgnum, out pkgArray_SECURITY);
-                pkgArray = pkgArray_SECURITY;
-                break;
+            switch (Dll)
+            {
+                case SecurDll.SECURITY:
+                    SafeFreeContextBuffer_SECURITY pkgArray_SECURITY = null;
+                    res = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.EnumerateSecurityPackagesW(
+                        out pkgnum,
+                        out pkgArray_SECURITY
+                    );
+                    pkgArray = pkgArray_SECURITY;
+                    break;
 
-            default: throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                default:
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                        "Dll"
+                    );
             }
-            if (res != 0 && pkgArray != null) {
+            if (res != 0 && pkgArray != null)
+            {
                 pkgArray.SetHandleAsInvalid();
             }
             return res;
@@ -502,10 +607,17 @@ namespace System.Net {
 
         //
         //
-        internal static SafeFreeContextBuffer CreateEmptyHandle(SecurDll dll) {
-            switch (dll) {
-            case SecurDll.SECURITY: return new SafeFreeContextBuffer_SECURITY();
-            default: throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "dll");
+        internal static SafeFreeContextBuffer CreateEmptyHandle(SecurDll dll)
+        {
+            switch (dll)
+            {
+                case SecurDll.SECURITY:
+                    return new SafeFreeContextBuffer_SECURITY();
+                default:
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                        "dll"
+                    );
             }
         }
 
@@ -516,23 +628,35 @@ namespace System.Net {
         // This method switches between three non-interruptible helper methods.  (This method can't be both non-interruptible and
         // reference imports from all three DLLs - doing so would cause all three DLLs to try to be bound to.)
         //
-        public unsafe static int QueryContextAttributes(SecurDll dll, SafeDeleteContext phContext, ContextAttribute contextAttribute, byte* buffer, SafeHandle refHandle)
+        public unsafe static int QueryContextAttributes(
+            SecurDll dll,
+            SafeDeleteContext phContext,
+            ContextAttribute contextAttribute,
+            byte* buffer,
+            SafeHandle refHandle
+        )
         {
             switch (dll)
             {
                 case SecurDll.SECURITY:
-                    return QueryContextAttributes_SECURITY(phContext, contextAttribute, buffer, refHandle);
+                    return QueryContextAttributes_SECURITY(
+                        phContext,
+                        contextAttribute,
+                        buffer,
+                        refHandle
+                    );
 
                 default:
                     return -1;
             }
         }
 
-        private unsafe static int QueryContextAttributes_SECURITY(
+        private static unsafe int QueryContextAttributes_SECURITY(
             SafeDeleteContext phContext,
             ContextAttribute contextAttribute,
             byte* buffer,
-            SafeHandle refHandle)
+            SafeHandle refHandle
+        )
         {
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
@@ -540,10 +664,12 @@ namespace System.Net {
             // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing to jit
             // one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 phContext.DangerousAddRef(ref b);
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 if (b)
                 {
                     phContext.DangerousRelease();
@@ -552,24 +678,32 @@ namespace System.Net {
                 if (!(e is ObjectDisposedException))
                     throw;
             }
-            finally {
-
+            finally
+            {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
+                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.QueryContextAttributesW(
+                        ref phContext._handle,
+                        contextAttribute,
+                        buffer
+                    );
                     phContext.DangerousRelease();
                 }
 
-                if (status == 0 && refHandle != null) {
-                    if (refHandle is SafeFreeContextBuffer) {
+                if (status == 0 && refHandle != null)
+                {
+                    if (refHandle is SafeFreeContextBuffer)
+                    {
                         ((SafeFreeContextBuffer)refHandle).Set(*(IntPtr*)buffer);
                     }
-                    else {
+                    else
+                    {
                         ((SafeFreeCertContext)refHandle).Set(*(IntPtr*)buffer);
                     }
                 }
 
-                if (status != 0 && refHandle != null) {
+                if (status != 0 && refHandle != null)
+                {
                     refHandle.SetHandleAsInvalid();
                 }
             }
@@ -577,8 +711,12 @@ namespace System.Net {
             return status;
         }
 
-        public static int SetContextAttributes(SecurDll dll, SafeDeleteContext phContext, 
-            ContextAttribute contextAttribute, byte[] buffer)
+        public static int SetContextAttributes(
+            SecurDll dll,
+            SafeDeleteContext phContext,
+            ContextAttribute contextAttribute,
+            byte[] buffer
+        )
         {
             switch (dll)
             {
@@ -593,18 +731,21 @@ namespace System.Net {
         private static int SetContextAttributes_SECURITY(
             SafeDeleteContext phContext,
             ContextAttribute contextAttribute,
-            byte[] buffer)
+            byte[] buffer
+        )
         {
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
 
-            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing 
+            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing
             // to jit one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 phContext.DangerousAddRef(ref b);
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 if (b)
                 {
                     phContext.DangerousRelease();
@@ -613,12 +754,16 @@ namespace System.Net {
                 if (!(e is ObjectDisposedException))
                     throw;
             }
-            finally {
-
+            finally
+            {
                 if (b)
                 {
                     status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.SetContextAttributesW(
-                        ref phContext._handle, contextAttribute, buffer, buffer.Length);
+                        ref phContext._handle,
+                        contextAttribute,
+                        buffer,
+                        buffer.Length
+                    );
                     phContext.DangerousRelease();
                 }
             }
@@ -629,17 +774,17 @@ namespace System.Net {
 
     //=======================================================
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeFreeContextBuffer_SECURITY : SafeFreeContextBuffer {
+    internal sealed class SafeFreeContextBuffer_SECURITY : SafeFreeContextBuffer
+    {
+        internal SafeFreeContextBuffer_SECURITY()
+            : base() { }
 
-        internal SafeFreeContextBuffer_SECURITY(): base() {}
-
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNclNativeMethods.SafeNetHandles_SECURITY.FreeContextBuffer(handle) == 0;
         }
-
     }
-//=======================================================
+    //=======================================================
 
 #endif // !FEATURE_PAL
 
@@ -651,9 +796,11 @@ namespace System.Net {
     ///////////////////////////////////////////////////////////////
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeLocalFree : DebugSafeHandle {
+    internal sealed class SafeLocalFree : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeLocalFree : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeLocalFree : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
         private const int LMEM_FIXED = 0;
         private const int NULL = 0;
@@ -661,20 +808,27 @@ namespace System.Net {
         // This returned handle cannot be modified by the application.
         public static SafeLocalFree Zero = new SafeLocalFree(false);
 
-        private SafeLocalFree() : base(true) {}
+        private SafeLocalFree()
+            : base(true) { }
 
-        private SafeLocalFree(bool ownsHandle) : base(ownsHandle) {}
+        private SafeLocalFree(bool ownsHandle)
+            : base(ownsHandle) { }
 
-        public static SafeLocalFree LocalAlloc(int cb) {
-            SafeLocalFree result = UnsafeNclNativeMethods.SafeNetHandles.LocalAlloc(LMEM_FIXED, (UIntPtr) cb);
-            if (result.IsInvalid) {
+        public static SafeLocalFree LocalAlloc(int cb)
+        {
+            SafeLocalFree result = UnsafeNclNativeMethods.SafeNetHandles.LocalAlloc(
+                LMEM_FIXED,
+                (UIntPtr)cb
+            );
+            if (result.IsInvalid)
+            {
                 result.SetHandleAsInvalid();
                 throw new OutOfMemoryException();
             }
             return result;
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNclNativeMethods.SafeNetHandles.LocalFree(handle) == IntPtr.Zero;
         }
@@ -688,15 +842,19 @@ namespace System.Net {
     ///////////////////////////////////////////////////////////////
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeGlobalFree : DebugSafeHandle {
+    internal sealed class SafeGlobalFree : DebugSafeHandle
+    {
 #else
     internal sealed class SafeGlobalFree : SafeHandleZeroOrMinusOneIsInvalid
     {
 #endif
-        private SafeGlobalFree() : base(true) { }
-        private SafeGlobalFree(bool ownsHandle) : base(ownsHandle) { }
+        private SafeGlobalFree()
+            : base(true) { }
 
-        override protected bool ReleaseHandle()
+        private SafeGlobalFree(bool ownsHandle)
+            : base(ownsHandle) { }
+
+        protected override bool ReleaseHandle()
         {
             return UnsafeNclNativeMethods.SafeNetHandles.GlobalFree(handle) == IntPtr.Zero;
         }
@@ -704,47 +862,62 @@ namespace System.Net {
 
     [ComVisible(false)]
 #if DEBUG
-    internal sealed class SafeOverlappedFree : DebugSafeHandle {
+    internal sealed class SafeOverlappedFree : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeOverlappedFree : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeOverlappedFree : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
         private const int LPTR = 0x0040;
 
         internal static readonly SafeOverlappedFree Zero = new SafeOverlappedFree(false);
 
-        private SafeCloseSocket             _socketHandle;
+        private SafeCloseSocket _socketHandle;
 
-        private SafeOverlappedFree() : base(true) {}
-        private SafeOverlappedFree(bool ownsHandle) : base(ownsHandle) {}
+        private SafeOverlappedFree()
+            : base(true) { }
 
-        public static SafeOverlappedFree Alloc() {
-            SafeOverlappedFree result = UnsafeNclNativeMethods.SafeNetHandlesSafeOverlappedFree.LocalAlloc(LPTR, (UIntPtr) Win32.OverlappedSize);
-            if (result.IsInvalid) {
+        private SafeOverlappedFree(bool ownsHandle)
+            : base(ownsHandle) { }
+
+        public static SafeOverlappedFree Alloc()
+        {
+            SafeOverlappedFree result =
+                UnsafeNclNativeMethods.SafeNetHandlesSafeOverlappedFree.LocalAlloc(
+                    LPTR,
+                    (UIntPtr)Win32.OverlappedSize
+                );
+            if (result.IsInvalid)
+            {
                 result.SetHandleAsInvalid();
                 throw new OutOfMemoryException();
             }
             return result;
         }
 
-        public static SafeOverlappedFree Alloc(SafeCloseSocket socketHandle) {
+        public static SafeOverlappedFree Alloc(SafeCloseSocket socketHandle)
+        {
             SafeOverlappedFree result = Alloc();
             result._socketHandle = socketHandle;
             return result;
         }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public void Close (bool resetOwner)
+        public void Close(bool resetOwner)
         {
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {} finally {
-                if (resetOwner) {
+            try { }
+            finally
+            {
+                if (resetOwner)
+                {
                     _socketHandle = null;
                 }
                 Close();
             }
         }
 
-        unsafe override protected bool ReleaseHandle()
+        protected override unsafe bool ReleaseHandle()
         {
             SafeCloseSocket socketHandle = _socketHandle;
             if (socketHandle != null && !socketHandle.IsInvalid)
@@ -764,24 +937,31 @@ namespace System.Net {
 #if !FEATURE_PAL
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeLoadLibrary : DebugSafeHandle {
+    internal sealed class SafeLoadLibrary : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeLoadLibrary : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeLoadLibrary : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
         private const string KERNEL32 = "kernel32.dll";
 
         public static readonly SafeLoadLibrary Zero = new SafeLoadLibrary(false);
 
-        private SafeLoadLibrary() : base(true) {
-        }
+        private SafeLoadLibrary()
+            : base(true) { }
 
-        private SafeLoadLibrary(bool ownsHandle) : base(ownsHandle) {
-        }
+        private SafeLoadLibrary(bool ownsHandle)
+            : base(ownsHandle) { }
 
-        public unsafe static SafeLoadLibrary LoadLibraryEx(string library) {
-
-            SafeLoadLibrary result = UnsafeNclNativeMethods.SafeNetHandles.LoadLibraryExW(library, null, 0);
-            if (result.IsInvalid) {
+        public static unsafe SafeLoadLibrary LoadLibraryEx(string library)
+        {
+            SafeLoadLibrary result = UnsafeNclNativeMethods.SafeNetHandles.LoadLibraryExW(
+                library,
+                null,
+                0
+            );
+            if (result.IsInvalid)
+            {
                 result.SetHandleAsInvalid();
             }
             return result;
@@ -793,10 +973,10 @@ namespace System.Net {
             return (ret != IntPtr.Zero);
         }
 
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             return UnsafeNclNativeMethods.SafeNetHandles.FreeLibrary(handle);
         }
-
     }
 
     ///////////////////////////////////////////////////////////////
@@ -805,10 +985,11 @@ namespace System.Net {
     //
     ///////////////////////////////////////////////////////////////
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeFreeCertChain : SafeHandleZeroOrMinusOneIsInvalid {
-
+    internal sealed class SafeFreeCertChain : SafeHandleZeroOrMinusOneIsInvalid
+    {
         // This ctor will create a handle that we >>don't<< own
-        internal SafeFreeCertChain(IntPtr handle) : base(false)
+        internal SafeFreeCertChain(IntPtr handle)
+            : base(false)
         {
             SetHandle(handle);
         }
@@ -839,7 +1020,8 @@ namespace System.Net {
     [SuppressUnmanagedCodeSecurity]
     internal sealed class SafeFreeCertChainList : SafeHandleZeroOrMinusOneIsInvalid
     {
-        internal SafeFreeCertChainList() : base(true) { }
+        internal SafeFreeCertChainList()
+            : base(true) { }
 
         public override string ToString()
         {
@@ -848,24 +1030,12 @@ namespace System.Net {
 
         protected override bool ReleaseHandle()
         {
-            // 
-
-
-
-
-
-
-
-
-
-
-
+            //
 
             UnsafeNclNativeMethods.SafeNetHandles.CertFreeCertificateChainList(handle);
             return true;
         }
     }
-
 
     ///////////////////////////////////////////////////////////////
     //
@@ -884,7 +1054,7 @@ namespace System.Net {
         // Initial criteria to filter list of certificates.  This is is the algorithm used by WinInet.
         //
         // 1. No Key Usage extension is present or is present and contains the Digital Signature bit.
-        // 2. No Extended Key Usage extension is present or is present and contains the Client Auth OID.      
+        // 2. No Extended Key Usage extension is present or is present and contains the Client Auth OID.
         private const int criteriaCount = 2;
         private List<IntPtr> unmanagedMemoryList;
 
@@ -912,7 +1082,7 @@ namespace System.Net {
         {
             IntPtr criteriaArray;
             IntPtr paraArray;
-            UnsafeNclNativeMethods.NativePKI.CERT_SELECT_CRITERIA criteria = 
+            UnsafeNclNativeMethods.NativePKI.CERT_SELECT_CRITERIA criteria =
                 new UnsafeNclNativeMethods.NativePKI.CERT_SELECT_CRITERIA();
 
             // Keep track of unmanaged memory blocks that need to be freed
@@ -921,11 +1091,11 @@ namespace System.Net {
             // Array of criteria
             criteriaArray = AllocBuffer(criteriaCount * Marshal.SizeOf(criteria));
             SetHandle(criteriaArray);
-            
+
             // 1. Enhanced Key Usage criteria
             criteria.dwType = CERT_SELECT_BY_ENHKEY_USAGE;
             criteria.cPara = 1;
-            
+
             IntPtr oidString = AllocString(szOID_PKIX_KP_CLIENT_AUTH);
             paraArray = AllocBuffer(Marshal.SizeOf(oidString));
             Marshal.WriteIntPtr(paraArray, oidString);
@@ -934,19 +1104,18 @@ namespace System.Net {
             // criteria contains only blittable fields so DestroyStructure doesn't have to be called.
             Marshal.StructureToPtr(criteria, criteriaArray, false);
 
-
             // 2. Key Usage criteria
             criteria = new UnsafeNclNativeMethods.NativePKI.CERT_SELECT_CRITERIA();
             criteria.dwType = CERT_SELECT_BY_KEY_USAGE;
             criteria.cPara = 1;
 
-            UnsafeNclNativeMethods.NativePKI.CERT_EXTENSION certExtension = 
+            UnsafeNclNativeMethods.NativePKI.CERT_EXTENSION certExtension =
                 new UnsafeNclNativeMethods.NativePKI.CERT_EXTENSION();
-            
+
             certExtension.pszObjId = IntPtr.Zero;
             certExtension.fCritical = 0; // FALSE
             certExtension.Value.cbData = 1;
-            
+
             IntPtr keyUsageCriteria = AllocBuffer(Marshal.SizeOf(CERT_DIGITAL_SIGNATURE_KEY_USAGE));
             Marshal.WriteByte(keyUsageCriteria, CERT_DIGITAL_SIGNATURE_KEY_USAGE);
             certExtension.Value.pbData = keyUsageCriteria;
@@ -954,11 +1123,11 @@ namespace System.Net {
             IntPtr pCertExtension = AllocBuffer(Marshal.SizeOf(certExtension));
             // certExtension only blittable fields so DestroyStructure doesn't have to be called.
             Marshal.StructureToPtr(certExtension, pCertExtension, false);
-                        
+
             paraArray = AllocBuffer(Marshal.SizeOf(pCertExtension));
             Marshal.WriteIntPtr(paraArray, pCertExtension);
             criteria.ppPara = paraArray;
-            
+
             // criteria contains only blittable fields so DestroyStructure doesn't have to be called.
             Marshal.StructureToPtr(criteria, criteriaArray + Marshal.SizeOf(criteria), false);
         }
@@ -985,7 +1154,6 @@ namespace System.Net {
         }
     }
 
-
     ///////////////////////////////////////////////////////////////
     //
     // Implementation of handles required CertFreeCertificateContext
@@ -993,47 +1161,57 @@ namespace System.Net {
     ///////////////////////////////////////////////////////////////
     [SuppressUnmanagedCodeSecurity]
 #if DEBUG
-    internal sealed class SafeFreeCertContext : DebugSafeHandle {
+    internal sealed class SafeFreeCertContext : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeFreeCertContext : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeFreeCertContext : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
         private const string CRYPT32 = "crypt32.dll";
         private const string ADVAPI32 = "advapi32.dll";
 
-        internal SafeFreeCertContext() : base(true) {}
+        internal SafeFreeCertContext()
+            : base(true) { }
 
         // This must be ONLY called from this file within a CER.
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe void Set(IntPtr value) {
+        internal unsafe void Set(IntPtr value)
+        {
             this.handle = value;
         }
 
         const uint CRYPT_ACQUIRE_SILENT_FLAG = 0x00000040;
 
-        override protected bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             UnsafeNclNativeMethods.SafeNetHandles.CertFreeCertificateContext(handle);
             return true;
         }
     }
 
-    [StructLayout(LayoutKind.Sequential, Pack=1)]
-    internal struct SSPIHandle {
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    internal struct SSPIHandle
+    {
         private IntPtr HandleHi;
         private IntPtr HandleLo;
 
-        public bool IsZero {
-            get {return HandleHi == IntPtr.Zero && HandleLo == IntPtr.Zero;}
-
+        public bool IsZero
+        {
+            get { return HandleHi == IntPtr.Zero && HandleLo == IntPtr.Zero; }
         }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal void SetToInvalid() {
+        internal void SetToInvalid()
+        {
             HandleHi = IntPtr.Zero;
             HandleLo = IntPtr.Zero;
         }
 
-        public override string ToString() {
-            {   return HandleHi.ToString("x") + ":" + HandleLo.ToString("x");}
+        public override string ToString()
+        {
+            {
+                return HandleHi.ToString("x") + ":" + HandleLo.ToString("x");
+            }
         }
     }
 
@@ -1045,26 +1223,31 @@ namespace System.Net {
     ///////////////////////////////////////////////////////////////
     //------------------------------------------------------------
 #if DEBUG
-    internal abstract class SafeFreeCredentials : DebugSafeHandle {
+    internal abstract class SafeFreeCredentials : DebugSafeHandle
+    {
 #else
-    internal abstract class SafeFreeCredentials : SafeHandle {
+    internal abstract class SafeFreeCredentials : SafeHandle
+    {
 #endif
 
-        internal SSPIHandle _handle;    //should be always used as by ref in PINvokes parameters
+        internal SSPIHandle _handle; //should be always used as by ref in PINvokes parameters
 
-        protected SafeFreeCredentials(): base(IntPtr.Zero, true) {
+        protected SafeFreeCredentials()
+            : base(IntPtr.Zero, true)
+        {
             _handle = new SSPIHandle();
         }
 
 #if TRAVE
-        public override string ToString() {
-            return "0x"+_handle.ToString();
+        public override string ToString()
+        {
+            return "0x" + _handle.ToString();
         }
 #endif
 
         public override bool IsInvalid
         {
-            get {return IsClosed || _handle.IsZero;}
+            get { return IsClosed || _handle.IsZero; }
         }
 
 #if DEBUG
@@ -1075,123 +1258,150 @@ namespace System.Net {
         }
 #endif
 
-        public unsafe static int AcquireCredentialsHandle( SecurDll dll,
-                                                    string package,
-                                                    CredentialUse intent,
-                                                    ref AuthIdentity authdata,
-                                                    out SafeFreeCredentials outCredential
-                                                    )
+        public unsafe static int AcquireCredentialsHandle(
+            SecurDll dll,
+            string package,
+            CredentialUse intent,
+            ref AuthIdentity authdata,
+            out SafeFreeCredentials outCredential
+        )
         {
-
-            GlobalLog.Print("SafeFreeCredentials::AcquireCredentialsHandle#1("
-                            + dll + ","
-                            + package + ", "
-                            + intent + ", "
-                            + authdata + ")"
-                            );
+            GlobalLog.Print(
+                "SafeFreeCredentials::AcquireCredentialsHandle#1("
+                    + dll
+                    + ","
+                    + package
+                    + ", "
+                    + intent
+                    + ", "
+                    + authdata
+                    + ")"
+            );
 
             int errorCode = -1;
             long timeStamp;
 
-            switch (dll) {
-            case SecurDll.SECURITY:
-                        outCredential = new SafeFreeCredential_SECURITY();
+            switch (dll)
+            {
+                case SecurDll.SECURITY:
+                    outCredential = new SafeFreeCredential_SECURITY();
 
-                        RuntimeHelpers.PrepareConstrainedRegions();
-                        try {} finally {
+                    RuntimeHelpers.PrepareConstrainedRegions();
+                    try { }
+                    finally
+                    {
+                        errorCode =
+                            UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
+                                null,
+                                package,
+                                (int)intent,
+                                null,
+                                ref authdata,
+                                null,
+                                null,
+                                ref outCredential._handle,
+                                out timeStamp
+                            );
+                    }
+                    break;
 
-                            errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
-                                                                   null,
-                                                                   package,
-                                                                   (int)intent,
-                                                                   null,
-                                                                   ref authdata,
-                                                                   null,
-                                                                   null,
-                                                                   ref outCredential._handle,
-                                                                   out timeStamp
-                                                                   );
-                        }
-                        break;
-
-            default:  throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                default:
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                        "Dll"
+                    );
             }
 #if TRAVE
-            GlobalLog.Print("Unmanaged::AcquireCredentialsHandle() returns 0x"
-                            + String.Format("{0:x}", errorCode)
-                            + ", handle = " + outCredential.ToString()
-                            );
+            GlobalLog.Print(
+                "Unmanaged::AcquireCredentialsHandle() returns 0x"
+                    + String.Format("{0:x}", errorCode)
+                    + ", handle = "
+                    + outCredential.ToString()
+            );
 #endif
 
-            if (errorCode != 0) {
+            if (errorCode != 0)
+            {
                 outCredential.SetHandleAsInvalid();
             }
             return errorCode;
-
         }
 
-        public unsafe static int AcquireDefaultCredential( SecurDll dll,
-                                                    string package,
-                                                    CredentialUse intent,
-                                                    out SafeFreeCredentials outCredential
-                                                    )
+        public static unsafe int AcquireDefaultCredential(
+            SecurDll dll,
+            string package,
+            CredentialUse intent,
+            out SafeFreeCredentials outCredential
+        )
         {
-
-            GlobalLog.Print("SafeFreeCredentials::AcquireDefaultCredential("
-                            + dll + ","
-                            + package + ", "
-                            + intent + ")"
-                            );
+            GlobalLog.Print(
+                "SafeFreeCredentials::AcquireDefaultCredential("
+                    + dll
+                    + ","
+                    + package
+                    + ", "
+                    + intent
+                    + ")"
+            );
 
             int errorCode = -1;
             long timeStamp;
 
-            switch (dll) {
-            case SecurDll.SECURITY:
-                        outCredential = new SafeFreeCredential_SECURITY();
+            switch (dll)
+            {
+                case SecurDll.SECURITY:
+                    outCredential = new SafeFreeCredential_SECURITY();
 
-                        RuntimeHelpers.PrepareConstrainedRegions();
-                        try {} finally {
+                    RuntimeHelpers.PrepareConstrainedRegions();
+                    try { }
+                    finally
+                    {
+                        errorCode =
+                            UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
+                                null,
+                                package,
+                                (int)intent,
+                                null,
+                                IntPtr.Zero,
+                                null,
+                                null,
+                                ref outCredential._handle,
+                                out timeStamp
+                            );
+                    }
+                    break;
 
-                            errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
-                                                               null,
-                                                               package,
-                                                               (int)intent,
-                                                               null,
-                                                               IntPtr.Zero,
-                                                               null,
-                                                               null,
-                                                               ref outCredential._handle,
-                                                               out timeStamp
-                                                               );
-                        }
-                        break;
-
-            default:  throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                default:
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                        "Dll"
+                    );
             }
 
 #if TRAVE
-            GlobalLog.Print("Unmanaged::AcquireCredentialsHandle() returns 0x"
-                            + errorCode.ToString("x")
-                            + ", handle = " + outCredential.ToString()
-                            );
+            GlobalLog.Print(
+                "Unmanaged::AcquireCredentialsHandle() returns 0x"
+                    + errorCode.ToString("x")
+                    + ", handle = "
+                    + outCredential.ToString()
+            );
 #endif
 
-            if (errorCode != 0) {
+            if (errorCode != 0)
+            {
                 outCredential.SetHandleAsInvalid();
             }
             return errorCode;
-
         }
-        
+
         // This overload is only called on Win7+ where SspiEncodeStringsAsAuthIdentity() was used to
         // create the authData blob.
         public unsafe static int AcquireCredentialsHandle(
-                                                    string package,
-                                                    CredentialUse intent,
-                                                    ref SafeSspiAuthDataHandle authdata,
-                                                    out SafeFreeCredentials outCredential
-                                                    )
+            string package,
+            CredentialUse intent,
+            ref SafeSspiAuthDataHandle authdata,
+            out SafeFreeCredentials outCredential
+        )
         {
             int errorCode = -1;
             long timeStamp;
@@ -1200,19 +1410,20 @@ namespace System.Net {
 
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
-            finally 
+            finally
             {
-                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
-                                                       null,
-                                                       package,
-                                                       (int)intent,
-                                                       null,
-                                                       authdata,
-                                                       null,
-                                                       null,
-                                                       ref outCredential._handle,
-                                                       out timeStamp
-                                                       );
+                errorCode =
+                    UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
+                        null,
+                        package,
+                        (int)intent,
+                        null,
+                        authdata,
+                        null,
+                        null,
+                        ref outCredential._handle,
+                        out timeStamp
+                    );
             }
 
             if (errorCode != 0)
@@ -1222,24 +1433,28 @@ namespace System.Net {
             return errorCode;
         }
 
-        public unsafe static int AcquireCredentialsHandle( SecurDll dll,
-                                                    string package,
-                                                    CredentialUse intent,
-                                                    ref SecureCredential authdata,
-                                                    out SafeFreeCredentials outCredential
-                                                    )
+        public static unsafe int AcquireCredentialsHandle(
+            SecurDll dll,
+            string package,
+            CredentialUse intent,
+            ref SecureCredential authdata,
+            out SafeFreeCredentials outCredential
+        )
         {
-
-            GlobalLog.Print("SafeFreeCredentials::AcquireCredentialsHandle#2("
-                            + dll + ","
-                            + package + ", "
-                            + intent + ", "
-                            + authdata + ")"
-                            );
+            GlobalLog.Print(
+                "SafeFreeCredentials::AcquireCredentialsHandle#2("
+                    + dll
+                    + ","
+                    + package
+                    + ", "
+                    + intent
+                    + ", "
+                    + authdata
+                    + ")"
+            );
 
             int errorCode = -1;
             long timeStamp;
-
 
             // If there is a certificate, wrap it into an array.
             // Not threadsafe.
@@ -1247,32 +1462,40 @@ namespace System.Net {
             try
             {
                 IntPtr certArrayPtr = new IntPtr(&copiedPtr);
-                if (copiedPtr != IntPtr.Zero) {
+                if (copiedPtr != IntPtr.Zero)
+                {
                     authdata.certContextArray = certArrayPtr;
                 }
 
-                switch (dll) {
-                case SecurDll.SECURITY:
-                            outCredential = new SafeFreeCredential_SECURITY();
+                switch (dll)
+                {
+                    case SecurDll.SECURITY:
+                        outCredential = new SafeFreeCredential_SECURITY();
 
-                            RuntimeHelpers.PrepareConstrainedRegions();
-                            try {} finally {
+                        RuntimeHelpers.PrepareConstrainedRegions();
+                        try { }
+                        finally
+                        {
+                            errorCode =
+                                UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
+                                    null,
+                                    package,
+                                    (int)intent,
+                                    null,
+                                    ref authdata,
+                                    null,
+                                    null,
+                                    ref outCredential._handle,
+                                    out timeStamp
+                                );
+                        }
+                        break;
 
-                                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcquireCredentialsHandleW(
-                                                                   null,
-                                                                   package,
-                                                                   (int)intent,
-                                                                   null,
-                                                                   ref authdata,
-                                                                   null,
-                                                                   null,
-                                                                   ref outCredential._handle,
-                                                                   out timeStamp
-                                                                   );
-                            }
-                            break;
-
-                default:  throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                    default:
+                        throw new ArgumentException(
+                            SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                            "Dll"
+                        );
                 }
             }
             finally
@@ -1281,27 +1504,30 @@ namespace System.Net {
             }
 
 #if TRAVE
-            GlobalLog.Print("Unmanaged::AcquireCredentialsHandle() returns 0x"
-                            + errorCode.ToString("x")
-                            + ", handle = " + outCredential.ToString()
-                            );
+            GlobalLog.Print(
+                "Unmanaged::AcquireCredentialsHandle() returns 0x"
+                    + errorCode.ToString("x")
+                    + ", handle = "
+                    + outCredential.ToString()
+            );
 #endif
 
-            if (errorCode != 0) {
+            if (errorCode != 0)
+            {
                 outCredential.SetHandleAsInvalid();
             }
             return errorCode;
-
         }
-
     }
     //
     // This is a class holding a Credential handle reference, used for static handles cache
     //
 #if DEBUG
-    internal sealed class SafeCredentialReference: DebugCriticalHandleMinusOneIsInvalid {
+    internal sealed class SafeCredentialReference : DebugCriticalHandleMinusOneIsInvalid
+    {
 #else
-    internal sealed class SafeCredentialReference: CriticalHandleMinusOneIsInvalid {
+    internal sealed class SafeCredentialReference : CriticalHandleMinusOneIsInvalid
+    {
 #endif
 
         //
@@ -1319,7 +1545,9 @@ namespace System.Net {
 
             return result;
         }
-        private SafeCredentialReference(SafeFreeCredentials target): base()
+
+        private SafeCredentialReference(SafeFreeCredentials target)
+            : base()
         {
             // Bumps up the refcount on Target to signify that target handle is statically cached so
             // its dispose should be postponed
@@ -1342,12 +1570,12 @@ namespace System.Net {
                 if (b)
                 {
                     _Target = target;
-                    SetHandle(new IntPtr(0));   // make this handle valid
+                    SetHandle(new IntPtr(0)); // make this handle valid
                 }
             }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             SafeFreeCredentials target = _Target;
             if (target != null)
@@ -1357,19 +1585,20 @@ namespace System.Net {
         }
     }
 
-//======================================================================
+    //======================================================================
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeFreeCredential_SECURITY: SafeFreeCredentials {
+    internal sealed class SafeFreeCredential_SECURITY : SafeFreeCredentials
+    {
+        public SafeFreeCredential_SECURITY()
+            : base() { }
 
-        public SafeFreeCredential_SECURITY() : base() {}
-
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
-            return UnsafeNclNativeMethods.SafeNetHandles_SECURITY.FreeCredentialsHandle(ref _handle) == 0;
+            return UnsafeNclNativeMethods.SafeNetHandles_SECURITY.FreeCredentialsHandle(ref _handle)
+                == 0;
         }
-
     }
-//======================================================================
+    //======================================================================
 
     ///////////////////////////////////////////////////////////////
     //
@@ -1378,32 +1607,36 @@ namespace System.Net {
     //
     ///////////////////////////////////////////////////////////////
 #if DEBUG
-    internal abstract class SafeDeleteContext : DebugSafeHandle {
+    internal abstract class SafeDeleteContext : DebugSafeHandle
+    {
 #else
-    internal abstract class SafeDeleteContext : SafeHandle {
+    internal abstract class SafeDeleteContext : SafeHandle
+    {
 #endif
-        private const           string dummyStr = " ";
-        private static readonly byte[] dummyBytes = new byte[] {0};
+        private const string dummyStr = " ";
+        private static readonly byte[] dummyBytes = new byte[] { 0 };
 
         //
         // ATN: _handle is internal since it is used on PInvokes by other wrapper methods.
         //      However all such wrappers MUST manually and reliably adjust refCounter of SafeDeleteContext handle.
         //
-        internal SSPIHandle             _handle;
+        internal SSPIHandle _handle;
 
         protected SafeFreeCredentials _EffectiveCredential;
 
-        protected SafeDeleteContext(): base(IntPtr.Zero, true) {
+        protected SafeDeleteContext()
+            : base(IntPtr.Zero, true)
+        {
             _handle = new SSPIHandle();
         }
 
-        public override bool IsInvalid {
-            get {
-                return IsClosed || _handle.IsZero;
-            }
+        public override bool IsInvalid
+        {
+            get { return IsClosed || _handle.IsZero; }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return _handle.ToString();
         }
 
@@ -1417,18 +1650,18 @@ namespace System.Net {
 
         //-------------------------------------------------------------------
         internal unsafe static int InitializeSecurityContext(
-                                                    SecurDll                dll,
-                                                    ref SafeFreeCredentials inCredentials,
-                                                    ref SafeDeleteContext   refContext,
-                                                    string                  targetName,
-                                                    ContextFlags            inFlags,
-                                                    Endianness              endianness,
-                                                    SecurityBuffer          inSecBuffer,
-                                                    SecurityBuffer[]        inSecBuffers,
-                                                    SecurityBuffer          outSecBuffer,
-                                                    ref ContextFlags        outFlags)
+            SecurDll dll,
+            ref SafeFreeCredentials inCredentials,
+            ref SafeDeleteContext refContext,
+            string targetName,
+            ContextFlags inFlags,
+            Endianness endianness,
+            SecurityBuffer inSecBuffer,
+            SecurityBuffer[] inSecBuffers,
+            SecurityBuffer outSecBuffer,
+            ref ContextFlags outFlags
+        )
         {
-
 #if TRAVE
             GlobalLog.Enter("SafeDeleteContext::InitializeSecurityContext");
             GlobalLog.Print("    DLL              = " + dll);
@@ -1436,26 +1669,32 @@ namespace System.Net {
             GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
             GlobalLog.Print("    targetName       = " + targetName);
             GlobalLog.Print("    inFlags          = " + inFlags);
-//            GlobalLog.Print("    reservedI        = 0x0");
-//            GlobalLog.Print("    endianness       = " + endianness);
+            //            GlobalLog.Print("    reservedI        = 0x0");
+            //            GlobalLog.Print("    endianness       = " + endianness);
 
-            if (inSecBuffers==null)
+            if (inSecBuffers == null)
             {
                 GlobalLog.Print("    inSecBuffers     = (null)");
             }
             else
             {
                 GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-//                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+                //                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
             }
-//            GlobalLog.Print("    reservedII       = 0x0");
-//            GlobalLog.Print("    newContext       = {ref} inContext");
-//            GlobalLog.Print("    outSecBuffer     = " + SecurityBuffer.ToString(outSecBuffer));
-//            GlobalLog.Print("    outFlags         = {ref} " + outFlags);
-//            GlobalLog.Print("    timestamp        = null");
+            //            GlobalLog.Print("    reservedII       = 0x0");
+            //            GlobalLog.Print("    newContext       = {ref} inContext");
+            //            GlobalLog.Print("    outSecBuffer     = " + SecurityBuffer.ToString(outSecBuffer));
+            //            GlobalLog.Print("    outFlags         = {ref} " + outFlags);
+            //            GlobalLog.Print("    timestamp        = null");
 #endif
-            GlobalLog.Assert(outSecBuffer != null, "SafeDeleteContext::InitializeSecurityContext()|outSecBuffer != null");
-            GlobalLog.Assert(inSecBuffer == null || inSecBuffers == null, "SafeDeleteContext::InitializeSecurityContext()|inSecBuffer == null || inSecBuffers == null");
+            GlobalLog.Assert(
+                outSecBuffer != null,
+                "SafeDeleteContext::InitializeSecurityContext()|outSecBuffer != null"
+            );
+            GlobalLog.Assert(
+                inSecBuffer == null || inSecBuffers == null,
+                "SafeDeleteContext::InitializeSecurityContext()|inSecBuffer == null || inSecBuffers == null"
+            );
 
             if (inCredentials == null)
             {
@@ -1463,11 +1702,11 @@ namespace System.Net {
             }
 
             SecurityBufferDescriptor inSecurityBufferDescriptor = null;
-            if (inSecBuffer!=null)
+            if (inSecBuffer != null)
             {
                 inSecurityBufferDescriptor = new SecurityBufferDescriptor(1);
             }
-            else if (inSecBuffers!=null)
+            else if (inSecBuffers != null)
             {
                 inSecurityBufferDescriptor = new SecurityBufferDescriptor(inSecBuffers.Length);
             }
@@ -1490,10 +1729,12 @@ namespace System.Net {
             try
             {
                 pinnedOutBytes = GCHandle.Alloc(outSecBuffer.token, GCHandleType.Pinned);
-                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[inSecurityBufferDescriptor==null ? 1: inSecurityBufferDescriptor.Count];
+                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[
+                    inSecurityBufferDescriptor == null ? 1 : inSecurityBufferDescriptor.Count
+                ];
                 fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
                 {
-                    if (inSecurityBufferDescriptor!=null)
+                    if (inSecurityBufferDescriptor != null)
                     {
                         // Fix Descriptor pointer that points to unmanaged SecurityBuffers
                         inSecurityBufferDescriptor.UnmanagedPointer = inUnmanagedBufferPtr;
@@ -1501,30 +1742,47 @@ namespace System.Net {
                         SecurityBuffer securityBuffer;
                         for (int index = 0; index < inSecurityBufferDescriptor.Count; ++index)
                         {
-                            securityBuffer = inSecBuffer!=null ? inSecBuffer : inSecBuffers[index];
-                            if (securityBuffer!=null)
+                            securityBuffer =
+                                inSecBuffer != null ? inSecBuffer : inSecBuffers[index];
+                            if (securityBuffer != null)
                             {
                                 // Copy the SecurityBuffer content into unmanaged place holder
                                 inUnmanagedBuffer[index].count = securityBuffer.size;
-                                inUnmanagedBuffer[index].type  = securityBuffer.type;
+                                inUnmanagedBuffer[index].type = securityBuffer.type;
 
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken.DangerousGetHandle();
+                                    inUnmanagedBuffer[index].token =
+                                        securityBuffer.unmanagedToken.DangerousGetHandle();
                                 }
-                                else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
+                                else if (
+                                    securityBuffer.token == null
+                                    || securityBuffer.token.Length == 0
+                                )
                                 {
                                     inUnmanagedBuffer[index].token = IntPtr.Zero;
                                 }
                                 else
                                 {
-                                    pinnedInBytes[index] = GCHandle.Alloc(securityBuffer.token, GCHandleType.Pinned);
-                                    inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(securityBuffer.token, securityBuffer.offset);
+                                    pinnedInBytes[index] = GCHandle.Alloc(
+                                        securityBuffer.token,
+                                        GCHandleType.Pinned
+                                    );
+                                    inUnmanagedBuffer[index].token =
+                                        Marshal.UnsafeAddrOfPinnedArrayElement(
+                                            securityBuffer.token,
+                                            securityBuffer.offset
+                                        );
                                 }
-    #if TRAVE
-                                GlobalLog.Print("SecBuffer: cbBuffer:" + securityBuffer.size +  " BufferType:" + securityBuffer.type);
-    #endif
+#if TRAVE
+                                GlobalLog.Print(
+                                    "SecBuffer: cbBuffer:"
+                                        + securityBuffer.size
+                                        + " BufferType:"
+                                        + securityBuffer.type
+                                );
+#endif
                             }
                         }
                     }
@@ -1535,54 +1793,72 @@ namespace System.Net {
                         // Fix Descriptor pointer that points to unmanaged SecurityBuffers
                         outSecurityBufferDescriptor.UnmanagedPointer = outUnmanagedBufferPtr;
                         outUnmanagedBuffer[0].count = outSecBuffer.size;
-                        outUnmanagedBuffer[0].type  = outSecBuffer.type;
+                        outUnmanagedBuffer[0].type = outSecBuffer.type;
                         if (outSecBuffer.token == null || outSecBuffer.token.Length == 0)
                             outUnmanagedBuffer[0].token = IntPtr.Zero;
                         else
-                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(outSecBuffer.token, outSecBuffer.offset);
-    #if TRAVE
-    //                    outSecBuffer.DebugDump();
-    #endif
+                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                outSecBuffer.token,
+                                outSecBuffer.offset
+                            );
+#if TRAVE
+                        //                    outSecBuffer.DebugDump();
+#endif
                         if (isSspiAllocated)
                             outFreeContextBuffer = SafeFreeContextBuffer.CreateEmptyHandle(dll);
 
                         switch (dll)
                         {
-                        case SecurDll.SECURITY:
-                                    if (refContext == null || refContext.IsInvalid)
-                                        refContext = new SafeDeleteContext_SECURITY();
+                            case SecurDll.SECURITY:
+                                if (refContext == null || refContext.IsInvalid)
+                                    refContext = new SafeDeleteContext_SECURITY();
 
-                                    if (targetName == null || targetName.Length == 0)
-                                        targetName = dummyStr;
+                                if (targetName == null || targetName.Length == 0)
+                                    targetName = dummyStr;
 
-                                    fixed (char* namePtr = targetName)
-                                    {
-                                        errorCode = MustRunInitializeSecurityContext_SECURITY(
-                                                        ref inCredentials,
-                                                        contextHandle.IsZero? null: &contextHandle,
-                                                        (byte*)(((object)targetName == (object) dummyStr)? null: namePtr),
-                                                        inFlags,
-                                                        endianness,
-                                                        inSecurityBufferDescriptor,
-                                                        refContext,
-                                                        outSecurityBufferDescriptor,
-                                                        ref outFlags,
-                                                        outFreeContextBuffer
-                                                        );
-                                    }
-                                    break;
+                                fixed (char* namePtr = targetName)
+                                {
+                                    errorCode = MustRunInitializeSecurityContext_SECURITY(
+                                        ref inCredentials,
+                                        contextHandle.IsZero ? null : &contextHandle,
+                                        (byte*)(
+                                            ((object)targetName == (object)dummyStr)
+                                                ? null
+                                                : namePtr
+                                        ),
+                                        inFlags,
+                                        endianness,
+                                        inSecurityBufferDescriptor,
+                                        refContext,
+                                        outSecurityBufferDescriptor,
+                                        ref outFlags,
+                                        outFreeContextBuffer
+                                    );
+                                }
+                                break;
 
-                        default:  throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                            default:
+                                throw new ArgumentException(
+                                    SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                                    "Dll"
+                                );
                         }
 
-                        GlobalLog.Print("SafeDeleteContext:InitializeSecurityContext  Marshalling OUT buffer");
+                        GlobalLog.Print(
+                            "SafeDeleteContext:InitializeSecurityContext  Marshalling OUT buffer"
+                        );
                         // Get unmanaged buffer with index 0 as the only one passed into PInvoke
                         outSecBuffer.size = outUnmanagedBuffer[0].count;
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
                             outSecBuffer.token = new byte[outSecBuffer.size];
-                            Marshal.Copy(outUnmanagedBuffer[0].token, outSecBuffer.token, 0, outSecBuffer.size);
+                            Marshal.Copy(
+                                outUnmanagedBuffer[0].token,
+                                outSecBuffer.token,
+                                0,
+                                outSecBuffer.size
+                            );
                         }
                         else
                         {
@@ -1591,10 +1867,11 @@ namespace System.Net {
                     }
                 }
             }
-            finally {
-                if (pinnedInBytes!=null)
+            finally
+            {
+                if (pinnedInBytes != null)
                 {
-                    for (int index=0; index<pinnedInBytes.Length; index++)
+                    for (int index = 0; index < pinnedInBytes.Length; index++)
                     {
                         if (pinnedInBytes[index].IsAllocated)
                             pinnedInBytes[index].Free();
@@ -1607,7 +1884,13 @@ namespace System.Net {
                     outFreeContextBuffer.Close();
             }
 
-            GlobalLog.Leave("SafeDeleteContext::InitializeSecurityContext() unmanaged InitializeSecurityContext()", "errorCode:0x" + errorCode.ToString("x8") + " refContext:" + ValidationHelper.ToString(refContext));
+            GlobalLog.Leave(
+                "SafeDeleteContext::InitializeSecurityContext() unmanaged InitializeSecurityContext()",
+                "errorCode:0x"
+                    + errorCode.ToString("x8")
+                    + " refContext:"
+                    + ValidationHelper.ToString(refContext)
+            );
 
             return errorCode;
         }
@@ -1619,18 +1902,19 @@ namespace System.Net {
         // Since it has a CER, this method can't have any references to imports from DLLs that may not exist on the system.
         //
         private static unsafe int MustRunInitializeSecurityContext_SECURITY(
-                                                  ref SafeFreeCredentials inCredentials,
-                                                  void*            inContextPtr,
-                                                  byte*            targetName,
-                                                  ContextFlags     inFlags,
-                                                  Endianness       endianness,
-                                                  SecurityBufferDescriptor inputBuffer,
-                                                  SafeDeleteContext outContext,
-                                                  SecurityBufferDescriptor outputBuffer,
-                                                  ref ContextFlags attributes,
-                                                  SafeFreeContextBuffer handleTemplate)
+            ref SafeFreeCredentials inCredentials,
+            void* inContextPtr,
+            byte* targetName,
+            ContextFlags inFlags,
+            Endianness endianness,
+            SecurityBufferDescriptor inputBuffer,
+            SafeDeleteContext outContext,
+            SecurityBufferDescriptor outputBuffer,
+            ref ContextFlags attributes,
+            SafeFreeContextBuffer handleTemplate
+        )
         {
-            int errorCode = (int) SecurityStatus.InvalidHandle;
+            int errorCode = (int)SecurityStatus.InvalidHandle;
             bool b1 = false;
             bool b2 = false;
 
@@ -1641,7 +1925,7 @@ namespace System.Net {
                 inCredentials.DangerousAddRef(ref b1);
                 outContext.DangerousAddRef(ref b2);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (b1)
                 {
@@ -1669,26 +1953,31 @@ namespace System.Net {
                 }
                 else if (b1 && b2)
                 {
-                    errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.InitializeSecurityContextW(
-                                ref credentialHandle,
-                                inContextPtr,
-                                targetName,
-                                inFlags,
-                                0,
-                                endianness,
-                                inputBuffer,
-                                0,
-                                ref outContext._handle,
-                                outputBuffer,
-                                ref attributes,
-                                out timeStamp);
+                    errorCode =
+                        UnsafeNclNativeMethods.SafeNetHandles_SECURITY.InitializeSecurityContextW(
+                            ref credentialHandle,
+                            inContextPtr,
+                            targetName,
+                            inFlags,
+                            0,
+                            endianness,
+                            inputBuffer,
+                            0,
+                            ref outContext._handle,
+                            outputBuffer,
+                            ref attributes,
+                            out timeStamp
+                        );
 
                     //
                     // When a credential handle is first associated with the context we keep credential
                     // ref count bumped up to ensure ordered finalization.
                     // If the credential handle has been changed we de-ref the old one and associate the
                     //  context with the new cred handle but only if the call was successful.
-                    if (outContext._EffectiveCredential != inCredentials && (errorCode & 0x80000000) == 0)
+                    if (
+                        outContext._EffectiveCredential != inCredentials
+                        && (errorCode & 0x80000000) == 0
+                    )
                     {
                         // Disassociate the previous credential handle
                         if (outContext._EffectiveCredential != null)
@@ -1705,12 +1994,13 @@ namespace System.Net {
                     // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
                     if (handleTemplate != null)
                     {
-                        handleTemplate.Set(((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
+                        handleTemplate.Set(
+                            ((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token
+                        ); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
                         if (handleTemplate.IsInvalid)
                             handleTemplate.SetHandleAsInvalid();
                     }
                 }
-
 
                 if (inContextPtr == null && (errorCode & 0x80000000) != 0)
                 {
@@ -1724,16 +2014,17 @@ namespace System.Net {
 
         //-------------------------------------------------------------------
         internal unsafe static int AcceptSecurityContext(
-            SecurDll                dll,
+            SecurDll dll,
             ref SafeFreeCredentials inCredentials,
-            ref SafeDeleteContext   refContext,
-            ContextFlags            inFlags,
-            Endianness              endianness,
-            SecurityBuffer          inSecBuffer,
-            SecurityBuffer[]        inSecBuffers,
-            SecurityBuffer          outSecBuffer,
-            ref ContextFlags        outFlags) {
-
+            ref SafeDeleteContext refContext,
+            ContextFlags inFlags,
+            Endianness endianness,
+            SecurityBuffer inSecBuffer,
+            SecurityBuffer[] inSecBuffers,
+            SecurityBuffer outSecBuffer,
+            ref ContextFlags outFlags
+        )
+        {
 #if TRAVE
             GlobalLog.Enter("SafeDeleteContext::AcceptSecurityContex");
             GlobalLog.Print("    DLL              = " + dll);
@@ -1741,25 +2032,31 @@ namespace System.Net {
             GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
 
             GlobalLog.Print("    inFlags          = " + inFlags);
-//            GlobalLog.Print("    endianness       = " + endianness);
-//            GlobalLog.Print("    inSecBuffer      = " + SecurityBuffer.ToString(inSecBuffer));
-//
-            if (inSecBuffers==null)
+            //            GlobalLog.Print("    endianness       = " + endianness);
+            //            GlobalLog.Print("    inSecBuffer      = " + SecurityBuffer.ToString(inSecBuffer));
+            //
+            if (inSecBuffers == null)
             {
                 GlobalLog.Print("    inSecBuffers     = (null)");
             }
             else
             {
                 GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-//                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+                //                for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
             }
-//            GlobalLog.Print("    newContext       = {ref} inContext");
-//            GlobalLog.Print("    outSecBuffer     = " + SecurityBuffer.ToString(outSecBuffer));
-//            GlobalLog.Print("    outFlags         = {ref} " + outFlags);
-//            GlobalLog.Print("    timestamp        = null");
+            //            GlobalLog.Print("    newContext       = {ref} inContext");
+            //            GlobalLog.Print("    outSecBuffer     = " + SecurityBuffer.ToString(outSecBuffer));
+            //            GlobalLog.Print("    outFlags         = {ref} " + outFlags);
+            //            GlobalLog.Print("    timestamp        = null");
 #endif
-            GlobalLog.Assert(outSecBuffer != null, "SafeDeleteContext::AcceptSecurityContext()|outSecBuffer != null");
-            GlobalLog.Assert(inSecBuffer == null || inSecBuffers == null, "SafeDeleteContext::AcceptSecurityContext()|inSecBuffer == null || inSecBuffers == null");
+            GlobalLog.Assert(
+                outSecBuffer != null,
+                "SafeDeleteContext::AcceptSecurityContext()|outSecBuffer != null"
+            );
+            GlobalLog.Assert(
+                inSecBuffer == null || inSecBuffers == null,
+                "SafeDeleteContext::AcceptSecurityContext()|inSecBuffer == null || inSecBuffers == null"
+            );
 
             if (inCredentials == null)
             {
@@ -1767,11 +2064,11 @@ namespace System.Net {
             }
 
             SecurityBufferDescriptor inSecurityBufferDescriptor = null;
-            if (inSecBuffer!=null)
+            if (inSecBuffer != null)
             {
                 inSecurityBufferDescriptor = new SecurityBufferDescriptor(1);
             }
-            else if (inSecBuffers!=null)
+            else if (inSecBuffers != null)
             {
                 inSecurityBufferDescriptor = new SecurityBufferDescriptor(inSecBuffers.Length);
             }
@@ -1794,10 +2091,12 @@ namespace System.Net {
             try
             {
                 pinnedOutBytes = GCHandle.Alloc(outSecBuffer.token, GCHandleType.Pinned);
-                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[inSecurityBufferDescriptor==null ? 1:inSecurityBufferDescriptor.Count];
+                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[
+                    inSecurityBufferDescriptor == null ? 1 : inSecurityBufferDescriptor.Count
+                ];
                 fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
                 {
-                    if (inSecurityBufferDescriptor!=null)
+                    if (inSecurityBufferDescriptor != null)
                     {
                         // Fix Descriptor pointer that points to unmanaged SecurityBuffers
                         inSecurityBufferDescriptor.UnmanagedPointer = inUnmanagedBufferPtr;
@@ -1805,30 +2104,47 @@ namespace System.Net {
                         SecurityBuffer securityBuffer;
                         for (int index = 0; index < inSecurityBufferDescriptor.Count; ++index)
                         {
-                            securityBuffer = inSecBuffer!=null ? inSecBuffer : inSecBuffers[index];
-                            if (securityBuffer!=null)
+                            securityBuffer =
+                                inSecBuffer != null ? inSecBuffer : inSecBuffers[index];
+                            if (securityBuffer != null)
                             {
                                 // Copy the SecurityBuffer content into unmanaged place holder
                                 inUnmanagedBuffer[index].count = securityBuffer.size;
-                                inUnmanagedBuffer[index].type  = securityBuffer.type;
+                                inUnmanagedBuffer[index].type = securityBuffer.type;
 
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken.DangerousGetHandle();
+                                    inUnmanagedBuffer[index].token =
+                                        securityBuffer.unmanagedToken.DangerousGetHandle();
                                 }
-                                else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
+                                else if (
+                                    securityBuffer.token == null
+                                    || securityBuffer.token.Length == 0
+                                )
                                 {
                                     inUnmanagedBuffer[index].token = IntPtr.Zero;
                                 }
                                 else
                                 {
-                                    pinnedInBytes[index] = GCHandle.Alloc(securityBuffer.token, GCHandleType.Pinned);
-                                    inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(securityBuffer.token, securityBuffer.offset);
+                                    pinnedInBytes[index] = GCHandle.Alloc(
+                                        securityBuffer.token,
+                                        GCHandleType.Pinned
+                                    );
+                                    inUnmanagedBuffer[index].token =
+                                        Marshal.UnsafeAddrOfPinnedArrayElement(
+                                            securityBuffer.token,
+                                            securityBuffer.offset
+                                        );
                                 }
-    #if TRAVE
-                                GlobalLog.Print("SecBuffer: cbBuffer:" + securityBuffer.size +  " BufferType:" + securityBuffer.type);
-    #endif
+#if TRAVE
+                                GlobalLog.Print(
+                                    "SecBuffer: cbBuffer:"
+                                        + securityBuffer.size
+                                        + " BufferType:"
+                                        + securityBuffer.type
+                                );
+#endif
                             }
                         }
                     }
@@ -1839,47 +2155,61 @@ namespace System.Net {
                         outSecurityBufferDescriptor.UnmanagedPointer = outUnmanagedBufferPtr;
                         // Copy the SecurityBuffer content into unmanaged place holder
                         outUnmanagedBuffer[0].count = outSecBuffer.size;
-                        outUnmanagedBuffer[0].type  = outSecBuffer.type;
+                        outUnmanagedBuffer[0].type = outSecBuffer.type;
 
                         if (outSecBuffer.token == null || outSecBuffer.token.Length == 0)
-                            outUnmanagedBuffer[0].token  = IntPtr.Zero;
+                            outUnmanagedBuffer[0].token = IntPtr.Zero;
                         else
-                            outUnmanagedBuffer[0].token  = Marshal.UnsafeAddrOfPinnedArrayElement(outSecBuffer.token, outSecBuffer.offset);
+                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                outSecBuffer.token,
+                                outSecBuffer.offset
+                            );
 
                         if (isSspiAllocated)
                             outFreeContextBuffer = SafeFreeContextBuffer.CreateEmptyHandle(dll);
 
                         switch (dll)
                         {
-                        case SecurDll.SECURITY:
-                                    if (refContext == null || refContext.IsInvalid)
-                                        refContext = new SafeDeleteContext_SECURITY();
+                            case SecurDll.SECURITY:
+                                if (refContext == null || refContext.IsInvalid)
+                                    refContext = new SafeDeleteContext_SECURITY();
 
-                                    errorCode = MustRunAcceptSecurityContext_SECURITY(
-                                                    ref inCredentials,
-                                                    contextHandle.IsZero? null: &contextHandle,
-                                                    inSecurityBufferDescriptor,
-                                                    inFlags,
-                                                    endianness,
-                                                    refContext,
-                                                    outSecurityBufferDescriptor,
-                                                    ref outFlags,
-                                                    outFreeContextBuffer
-                                                    );
+                                errorCode = MustRunAcceptSecurityContext_SECURITY(
+                                    ref inCredentials,
+                                    contextHandle.IsZero ? null : &contextHandle,
+                                    inSecurityBufferDescriptor,
+                                    inFlags,
+                                    endianness,
+                                    refContext,
+                                    outSecurityBufferDescriptor,
+                                    ref outFlags,
+                                    outFreeContextBuffer
+                                );
 
-                                    break;
+                                break;
 
-                        default:  throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                            default:
+                                throw new ArgumentException(
+                                    SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                                    "Dll"
+                                );
                         }
 
-                        GlobalLog.Print("SafeDeleteContext:AcceptSecurityContext  Marshalling OUT buffer");
+                        GlobalLog.Print(
+                            "SafeDeleteContext:AcceptSecurityContext  Marshalling OUT buffer"
+                        );
                         // Get unmanaged buffer with index 0 as the only one passed into PInvoke
                         outSecBuffer.size = outUnmanagedBuffer[0].count;
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
                             outSecBuffer.token = new byte[outSecBuffer.size];
-                            Marshal.Copy(outUnmanagedBuffer[0].token, outSecBuffer.token, 0, outSecBuffer.size);
+                            Marshal.Copy(
+                                outUnmanagedBuffer[0].token,
+                                outSecBuffer.token,
+                                0,
+                                outSecBuffer.size
+                            );
                         }
                         else
                         {
@@ -1888,10 +2218,11 @@ namespace System.Net {
                     }
                 }
             }
-            finally {
-                if (pinnedInBytes!=null)
+            finally
+            {
+                if (pinnedInBytes != null)
                 {
-                    for (int index=0; index<pinnedInBytes.Length; index++)
+                    for (int index = 0; index < pinnedInBytes.Length; index++)
                     {
                         if (pinnedInBytes[index].IsAllocated)
                             pinnedInBytes[index].Free();
@@ -1905,7 +2236,13 @@ namespace System.Net {
                     outFreeContextBuffer.Close();
             }
 
-            GlobalLog.Leave("SafeDeleteContext::AcceptSecurityContex() unmanaged AcceptSecurityContex()", "errorCode:0x" + errorCode.ToString("x8") + " refContext:" + ValidationHelper.ToString(refContext));
+            GlobalLog.Leave(
+                "SafeDeleteContext::AcceptSecurityContex() unmanaged AcceptSecurityContex()",
+                "errorCode:0x"
+                    + errorCode.ToString("x8")
+                    + " refContext:"
+                    + ValidationHelper.ToString(refContext)
+            );
 
             return errorCode;
         }
@@ -1917,17 +2254,18 @@ namespace System.Net {
         // Since it has a CER, this method can't have any references to imports from DLLs that may not exist on the system.
         //
         private static unsafe int MustRunAcceptSecurityContext_SECURITY(
-                                                  ref SafeFreeCredentials     inCredentials,
-                                                  void*            inContextPtr,
-                                                  SecurityBufferDescriptor inputBuffer,
-                                                  ContextFlags     inFlags,
-                                                  Endianness       endianness,
-                                                  SafeDeleteContext outContext,
-                                                  SecurityBufferDescriptor outputBuffer,
-                                                  ref ContextFlags outFlags,
-                                                  SafeFreeContextBuffer handleTemplate)
+            ref SafeFreeCredentials inCredentials,
+            void* inContextPtr,
+            SecurityBufferDescriptor inputBuffer,
+            ContextFlags inFlags,
+            Endianness endianness,
+            SafeDeleteContext outContext,
+            SecurityBufferDescriptor outputBuffer,
+            ref ContextFlags outFlags,
+            SafeFreeContextBuffer handleTemplate
+        )
         {
-            int errorCode = (int) SecurityStatus.InvalidHandle;
+            int errorCode = (int)SecurityStatus.InvalidHandle;
             bool b1 = false;
             bool b2 = false;
 
@@ -1938,7 +2276,7 @@ namespace System.Net {
                 inCredentials.DangerousAddRef(ref b1);
                 outContext.DangerousAddRef(ref b2);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 if (b1)
                 {
@@ -1953,7 +2291,8 @@ namespace System.Net {
                 if (!(e is ObjectDisposedException))
                     throw;
             }
-            finally {
+            finally
+            {
                 SSPIHandle credentialHandle = inCredentials._handle;
                 long timeStamp;
 
@@ -1964,23 +2303,28 @@ namespace System.Net {
                 }
                 else if (b1 && b2)
                 {
-                    errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcceptSecurityContext(
-                                ref credentialHandle,
-                                inContextPtr,
-                                inputBuffer,
-                                inFlags,
-                                endianness,
-                                ref outContext._handle,
-                                outputBuffer,
-                                ref outFlags,
-                                out timeStamp);
+                    errorCode =
+                        UnsafeNclNativeMethods.SafeNetHandles_SECURITY.AcceptSecurityContext(
+                            ref credentialHandle,
+                            inContextPtr,
+                            inputBuffer,
+                            inFlags,
+                            endianness,
+                            ref outContext._handle,
+                            outputBuffer,
+                            ref outFlags,
+                            out timeStamp
+                        );
 
                     //
                     // When a credential handle is first associated with the context we keep credential
                     // ref count bumped up to ensure ordered finalization.
                     // If the credential handle has been changed we de-ref the old one and associate the
                     //  context with the new cred handle but only if the call was successful.
-                    if (outContext._EffectiveCredential != inCredentials && (errorCode & 0x80000000) == 0)
+                    if (
+                        outContext._EffectiveCredential != inCredentials
+                        && (errorCode & 0x80000000) == 0
+                    )
                     {
                         // Disassociate the previous credential handle
                         if (outContext._EffectiveCredential != null)
@@ -1997,7 +2341,9 @@ namespace System.Net {
                     // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
                     if (handleTemplate != null)
                     {
-                        handleTemplate.Set(((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
+                        handleTemplate.Set(
+                            ((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token
+                        ); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
                         if (handleTemplate.IsInvalid)
                         {
                             handleTemplate.SetHandleAsInvalid();
@@ -2019,130 +2365,34 @@ namespace System.Net {
         //
         //
         internal unsafe static int CompleteAuthToken(
-            SecurDll                dll,
-            ref SafeDeleteContext   refContext,
-            SecurityBuffer[]        inSecBuffers) {
-
+            SecurDll dll,
+            ref SafeDeleteContext refContext,
+            SecurityBuffer[] inSecBuffers
+        )
+        {
             GlobalLog.Enter("SafeDeleteContext::CompleteAuthToken");
             GlobalLog.Print("    DLL              = " + dll);
             GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
 #if TRAVE
             GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-//            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+            //            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
 #endif
-            GlobalLog.Assert(inSecBuffers != null, "SafeDeleteContext::CompleteAuthToken()|inSecBuffers == null");
-            SecurityBufferDescriptor inSecurityBufferDescriptor = new SecurityBufferDescriptor(inSecBuffers.Length);
+            GlobalLog.Assert(
+                inSecBuffers != null,
+                "SafeDeleteContext::CompleteAuthToken()|inSecBuffers == null"
+            );
+            SecurityBufferDescriptor inSecurityBufferDescriptor = new SecurityBufferDescriptor(
+                inSecBuffers.Length
+            );
 
             int errorCode = (int)SecurityStatus.InvalidHandle;
 
             // these are pinned user byte arrays passed along with SecurityBuffers
             GCHandle[] pinnedInBytes = null;
 
-            SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[inSecurityBufferDescriptor.Count];
-            fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer) {
-                // Fix Descriptor pointer that points to unmanaged SecurityBuffers
-                inSecurityBufferDescriptor.UnmanagedPointer = inUnmanagedBufferPtr;
-                pinnedInBytes = new GCHandle[inSecurityBufferDescriptor.Count];
-                SecurityBuffer securityBuffer;
-                for (int index = 0; index < inSecurityBufferDescriptor.Count; ++index) {
-                    securityBuffer = inSecBuffers[index];
-                    if (securityBuffer!=null) {
-                        inUnmanagedBuffer[index].count = securityBuffer.size;
-                        inUnmanagedBuffer[index].type  = securityBuffer.type;
-
-                        // use the unmanaged token if it's not null; otherwise use the managed buffer
-                        if (securityBuffer.unmanagedToken != null)
-                        {
-                            inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken.DangerousGetHandle();
-                        }
-                        else if (securityBuffer.token==null || securityBuffer.token.Length==0) {
-                            inUnmanagedBuffer[index].token = IntPtr.Zero;
-                        }
-                        else {
-                            pinnedInBytes[index] = GCHandle.Alloc(securityBuffer.token, GCHandleType.Pinned);
-                            inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(securityBuffer.token, securityBuffer.offset);
-                        }
-#if TRAVE
-                        GlobalLog.Print("SecBuffer: cbBuffer:" + securityBuffer.size +  " BufferType:" + securityBuffer.type);
-//                        securityBuffer.DebugDump();
-#endif
-                    }
-                }
-
-                SSPIHandle contextHandle = new SSPIHandle();
-                if (refContext != null) {
-                    contextHandle = refContext._handle;
-                }
-                try {
-                    if (dll==SecurDll.SECURITY) {
-                        if (refContext == null || refContext.IsInvalid) {
-                            refContext = new SafeDeleteContext_SECURITY();
-                        }
-
-                        bool b = false;
-                        RuntimeHelpers.PrepareConstrainedRegions();
-                        try {
-                            refContext.DangerousAddRef(ref b);
-                        }
-                        catch(Exception e) {
-                            if (b)
-                            {
-                                refContext.DangerousRelease();
-                                b = false;
-                            }
-                            if (!(e is ObjectDisposedException))
-                                throw;
-                        }
-                        finally {
-                            if (b)
-                            {
-                                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.CompleteAuthToken(contextHandle.IsZero? null: &contextHandle, inSecurityBufferDescriptor);
-                                refContext.DangerousRelease();
-                            }
-                        }
-
-                    }
-                    else {
-                        throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
-                    }
-                }
-                finally {
-                    if (pinnedInBytes!=null) {
-                        for (int index=0; index<pinnedInBytes.Length; index++) {
-                            if (pinnedInBytes[index].IsAllocated) {
-                                pinnedInBytes[index].Free();
-                            }
-                        }
-                    }
-                }
-            }
-
-            GlobalLog.Leave("SafeDeleteContext::CompleteAuthToken() unmanaged CompleteAuthToken()", "errorCode:0x" + errorCode.ToString("x8") + " refContext:" + ValidationHelper.ToString(refContext));
-
-            return errorCode;
-        }
-
-        internal unsafe static int ApplyControlToken(
-            SecurDll dll,
-            ref SafeDeleteContext refContext,
-            SecurityBuffer[] inSecBuffers)
-        {
-            GlobalLog.Enter("SafeDeleteContext::ApplyControlToken");
-            GlobalLog.Print("    DLL              = " + dll);
-            GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
-#if TRAVE
-            GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
-//            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
-#endif
-            GlobalLog.Assert(inSecBuffers != null, "SafeDeleteContext::ApplyControlToken()|inSecBuffers == null");
-            SecurityBufferDescriptor inSecurityBufferDescriptor = new SecurityBufferDescriptor(inSecBuffers.Length);
-
-            int errorCode = (int)SecurityStatus.InvalidHandle;
-
-            // these are pinned user byte arrays passed along with SecurityBuffers
-            GCHandle[] pinnedInBytes = null;
-
-            SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[inSecurityBufferDescriptor.Count];
+            SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[
+                inSecurityBufferDescriptor.Count
+            ];
             fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
             {
                 // Fix Descriptor pointer that points to unmanaged SecurityBuffers
@@ -2160,7 +2410,8 @@ namespace System.Net {
                         // use the unmanaged token if it's not null; otherwise use the managed buffer
                         if (securityBuffer.unmanagedToken != null)
                         {
-                            inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken.DangerousGetHandle();
+                            inUnmanagedBuffer[index].token =
+                                securityBuffer.unmanagedToken.DangerousGetHandle();
                         }
                         else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
                         {
@@ -2168,12 +2419,23 @@ namespace System.Net {
                         }
                         else
                         {
-                            pinnedInBytes[index] = GCHandle.Alloc(securityBuffer.token, GCHandleType.Pinned);
-                            inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(securityBuffer.token, securityBuffer.offset);
+                            pinnedInBytes[index] = GCHandle.Alloc(
+                                securityBuffer.token,
+                                GCHandleType.Pinned
+                            );
+                            inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                securityBuffer.token,
+                                securityBuffer.offset
+                            );
                         }
 #if TRAVE
-                        GlobalLog.Print("SecBuffer: cbBuffer:" + securityBuffer.size +  " BufferType:" + securityBuffer.type);
-//                        securityBuffer.DebugDump();
+                        GlobalLog.Print(
+                            "SecBuffer: cbBuffer:"
+                                + securityBuffer.size
+                                + " BufferType:"
+                                + securityBuffer.type
+                        );
+                        //                        securityBuffer.DebugDump();
 #endif
                     }
                 }
@@ -2212,15 +2474,21 @@ namespace System.Net {
                         {
                             if (b)
                             {
-                                errorCode = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.ApplyControlToken(contextHandle.IsZero ? null : &contextHandle, inSecurityBufferDescriptor);
+                                errorCode =
+                                    UnsafeNclNativeMethods.SafeNetHandles_SECURITY.CompleteAuthToken(
+                                        contextHandle.IsZero ? null : &contextHandle,
+                                        inSecurityBufferDescriptor
+                                    );
                                 refContext.DangerousRelease();
                             }
                         }
-
                     }
                     else
                     {
-                        throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "Dll");
+                        throw new ArgumentException(
+                            SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                            "Dll"
+                        );
                     }
                 }
                 finally
@@ -2238,28 +2506,188 @@ namespace System.Net {
                 }
             }
 
-            GlobalLog.Leave("SafeDeleteContext::ApplyControlToken() unmanaged ApplyControlToken()", "errorCode:0x" + errorCode.ToString("x8") + " refContext:" + ValidationHelper.ToString(refContext));
+            GlobalLog.Leave(
+                "SafeDeleteContext::CompleteAuthToken() unmanaged CompleteAuthToken()",
+                "errorCode:0x"
+                    + errorCode.ToString("x8")
+                    + " refContext:"
+                    + ValidationHelper.ToString(refContext)
+            );
+
+            return errorCode;
+        }
+
+        internal static unsafe int ApplyControlToken(
+            SecurDll dll,
+            ref SafeDeleteContext refContext,
+            SecurityBuffer[] inSecBuffers
+        )
+        {
+            GlobalLog.Enter("SafeDeleteContext::ApplyControlToken");
+            GlobalLog.Print("    DLL              = " + dll);
+            GlobalLog.Print("    refContext       = " + ValidationHelper.ToString(refContext));
+#if TRAVE
+            GlobalLog.Print("    inSecBuffers[]   = length:" + inSecBuffers.Length);
+            //            for (int index=0; index<inSecBuffers.Length; index++) { GlobalLog.Print("    inSecBuffers[" + index + "]   = " + SecurityBuffer.ToString(inSecBuffers[index])); }
+#endif
+            GlobalLog.Assert(
+                inSecBuffers != null,
+                "SafeDeleteContext::ApplyControlToken()|inSecBuffers == null"
+            );
+            SecurityBufferDescriptor inSecurityBufferDescriptor = new SecurityBufferDescriptor(
+                inSecBuffers.Length
+            );
+
+            int errorCode = (int)SecurityStatus.InvalidHandle;
+
+            // these are pinned user byte arrays passed along with SecurityBuffers
+            GCHandle[] pinnedInBytes = null;
+
+            SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[
+                inSecurityBufferDescriptor.Count
+            ];
+            fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
+            {
+                // Fix Descriptor pointer that points to unmanaged SecurityBuffers
+                inSecurityBufferDescriptor.UnmanagedPointer = inUnmanagedBufferPtr;
+                pinnedInBytes = new GCHandle[inSecurityBufferDescriptor.Count];
+                SecurityBuffer securityBuffer;
+                for (int index = 0; index < inSecurityBufferDescriptor.Count; ++index)
+                {
+                    securityBuffer = inSecBuffers[index];
+                    if (securityBuffer != null)
+                    {
+                        inUnmanagedBuffer[index].count = securityBuffer.size;
+                        inUnmanagedBuffer[index].type = securityBuffer.type;
+
+                        // use the unmanaged token if it's not null; otherwise use the managed buffer
+                        if (securityBuffer.unmanagedToken != null)
+                        {
+                            inUnmanagedBuffer[index].token =
+                                securityBuffer.unmanagedToken.DangerousGetHandle();
+                        }
+                        else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
+                        {
+                            inUnmanagedBuffer[index].token = IntPtr.Zero;
+                        }
+                        else
+                        {
+                            pinnedInBytes[index] = GCHandle.Alloc(
+                                securityBuffer.token,
+                                GCHandleType.Pinned
+                            );
+                            inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                securityBuffer.token,
+                                securityBuffer.offset
+                            );
+                        }
+#if TRAVE
+                        GlobalLog.Print(
+                            "SecBuffer: cbBuffer:"
+                                + securityBuffer.size
+                                + " BufferType:"
+                                + securityBuffer.type
+                        );
+                        //                        securityBuffer.DebugDump();
+#endif
+                    }
+                }
+
+                SSPIHandle contextHandle = new SSPIHandle();
+                if (refContext != null)
+                {
+                    contextHandle = refContext._handle;
+                }
+                try
+                {
+                    if (dll == SecurDll.SECURITY)
+                    {
+                        if (refContext == null || refContext.IsInvalid)
+                        {
+                            refContext = new SafeDeleteContext_SECURITY();
+                        }
+
+                        bool b = false;
+                        RuntimeHelpers.PrepareConstrainedRegions();
+                        try
+                        {
+                            refContext.DangerousAddRef(ref b);
+                        }
+                        catch (Exception e)
+                        {
+                            if (b)
+                            {
+                                refContext.DangerousRelease();
+                                b = false;
+                            }
+                            if (!(e is ObjectDisposedException))
+                                throw;
+                        }
+                        finally
+                        {
+                            if (b)
+                            {
+                                errorCode =
+                                    UnsafeNclNativeMethods.SafeNetHandles_SECURITY.ApplyControlToken(
+                                        contextHandle.IsZero ? null : &contextHandle,
+                                        inSecurityBufferDescriptor
+                                    );
+                                refContext.DangerousRelease();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new ArgumentException(
+                            SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                            "Dll"
+                        );
+                    }
+                }
+                finally
+                {
+                    if (pinnedInBytes != null)
+                    {
+                        for (int index = 0; index < pinnedInBytes.Length; index++)
+                        {
+                            if (pinnedInBytes[index].IsAllocated)
+                            {
+                                pinnedInBytes[index].Free();
+                            }
+                        }
+                    }
+                }
+            }
+
+            GlobalLog.Leave(
+                "SafeDeleteContext::ApplyControlToken() unmanaged ApplyControlToken()",
+                "errorCode:0x"
+                    + errorCode.ToString("x8")
+                    + " refContext:"
+                    + ValidationHelper.ToString(refContext)
+            );
 
             return errorCode;
         }
     }
 
-//======================================================================
+    //======================================================================
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeDeleteContext_SECURITY: SafeDeleteContext {
+    internal sealed class SafeDeleteContext_SECURITY : SafeDeleteContext
+    {
+        internal SafeDeleteContext_SECURITY()
+            : base() { }
 
-        internal SafeDeleteContext_SECURITY() : base() {}
-
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             if (this._EffectiveCredential != null)
                 this._EffectiveCredential.DangerousRelease();
 
-            return UnsafeNclNativeMethods.SafeNetHandles_SECURITY.DeleteSecurityContext(ref _handle) == 0;
+            return UnsafeNclNativeMethods.SafeNetHandles_SECURITY.DeleteSecurityContext(ref _handle)
+                == 0;
         }
-
     }
-//======================================================================
+    //======================================================================
 
 #endif // !FEATURE_PAL
 
@@ -2268,15 +2696,11 @@ namespace System.Net {
     {
         internal static readonly SafeNativeOverlapped Zero = new SafeNativeOverlapped();
 
-        internal SafeNativeOverlapped() 
-            : this(IntPtr.Zero) 
-        { 
-        }
+        internal SafeNativeOverlapped()
+            : this(IntPtr.Zero) { }
 
         internal unsafe SafeNativeOverlapped(NativeOverlapped* handle)
-            : this((IntPtr)handle) 
-        {
-        }
+            : this((IntPtr)handle) { }
 
         internal SafeNativeOverlapped(IntPtr handle)
             : base(IntPtr.Zero, true)
@@ -2344,7 +2768,8 @@ namespace System.Net {
     internal class SafeCloseSocket : SafeHandleMinusOneIsInvalid
 #endif
     {
-        protected SafeCloseSocket() : base(true) { }
+        protected SafeCloseSocket()
+            : base(true) { }
 
         private InnerSafeCloseSocket m_InnerSocket;
         private volatile bool m_Released;
@@ -2352,11 +2777,10 @@ namespace System.Net {
         private InnerSafeCloseSocket m_InnerSocketCopy;
 #endif
 
-        public override bool IsInvalid {
+        public override bool IsInvalid
+        {
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get {
-                return IsClosed || base.IsInvalid;
-            }
+            get { return IsClosed || base.IsInvalid; }
         }
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -2378,7 +2802,8 @@ namespace System.Net {
 
         protected static void CreateSocket(InnerSafeCloseSocket socket, SafeCloseSocket target)
         {
-            if (socket!=null && socket.IsInvalid) {
+            if (socket != null && socket.IsInvalid)
+            {
                 target.SetHandleAsInvalid();
                 return;
             }
@@ -2411,29 +2836,40 @@ namespace System.Net {
             }
         }
 
-        internal unsafe static SafeCloseSocket CreateWSASocket(byte* pinnedBuffer)
+        internal static unsafe SafeCloseSocket CreateWSASocket(byte* pinnedBuffer)
         {
             return CreateSocket(InnerSafeCloseSocket.CreateWSASocket(pinnedBuffer));
         }
 
-        internal static SafeCloseSocket CreateWSASocket(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
+        internal static SafeCloseSocket CreateWSASocket(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
-            return CreateSocket(InnerSafeCloseSocket.CreateWSASocket(addressFamily, socketType, protocolType));
+            return CreateSocket(
+                InnerSafeCloseSocket.CreateWSASocket(addressFamily, socketType, protocolType)
+            );
         }
 
         internal static SafeCloseSocket Accept(
-                                            SafeCloseSocket socketHandle,
-                                            byte[] socketAddress,
-                                            ref int socketAddressSize
-                                            )
+            SafeCloseSocket socketHandle,
+            byte[] socketAddress,
+            ref int socketAddressSize
+        )
         {
-            return CreateSocket(InnerSafeCloseSocket.Accept(socketHandle, socketAddress, ref socketAddressSize));
+            return CreateSocket(
+                InnerSafeCloseSocket.Accept(socketHandle, socketAddress, ref socketAddressSize)
+            );
         }
 
         protected override bool ReleaseHandle()
         {
             m_Released = true;
-            InnerSafeCloseSocket innerSocket = m_InnerSocket == null ? null : Interlocked.Exchange<InnerSafeCloseSocket>(ref m_InnerSocket, null);
+            InnerSafeCloseSocket innerSocket =
+                m_InnerSocket == null
+                    ? null
+                    : Interlocked.Exchange<InnerSafeCloseSocket>(ref m_InnerSocket, null);
             if (innerSocket != null)
             {
                 innerSocket.DangerousRelease();
@@ -2452,7 +2888,10 @@ namespace System.Net {
                 try
                 {
 #endif
-                InnerSafeCloseSocket innerSocket = m_InnerSocket == null ? null : Interlocked.Exchange<InnerSafeCloseSocket>(ref m_InnerSocket, null);
+                InnerSafeCloseSocket innerSocket =
+                    m_InnerSocket == null
+                        ? null
+                        : Interlocked.Exchange<InnerSafeCloseSocket>(ref m_InnerSocket, null);
                 Close();
                 if (innerSocket != null)
                 {
@@ -2469,8 +2908,12 @@ namespace System.Net {
                 }
                 catch (Exception exception)
                 {
-                    if (!NclUtilities.IsFatal(exception)){
-                        GlobalLog.Assert("SafeCloseSocket::CloseAsIs(handle:" + handle.ToString("x") + ")", exception.Message);
+                    if (!NclUtilities.IsFatal(exception))
+                    {
+                        GlobalLog.Assert(
+                            "SafeCloseSocket::CloseAsIs(handle:" + handle.ToString("x") + ")",
+                            exception.Message
+                        );
                     }
                     throw;
                 }
@@ -2480,16 +2923,16 @@ namespace System.Net {
 
         internal class InnerSafeCloseSocket : SafeHandleMinusOneIsInvalid
         {
-            protected InnerSafeCloseSocket() : base(true) { }
+            protected InnerSafeCloseSocket()
+                : base(true) { }
 
-            private static readonly byte [] tempBuffer = new byte[1];
+            private static readonly byte[] tempBuffer = new byte[1];
             private bool m_Blockable;
 
-            public override bool IsInvalid {
+            public override bool IsInvalid
+            {
                 [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-                get {
-                    return IsClosed || base.IsInvalid;
-                }
+                get { return IsClosed || base.IsInvalid; }
             }
 
             // This method is implicitly reliable and called from a CER.
@@ -2501,7 +2944,9 @@ namespace System.Net {
                 try
                 {
 #endif
-                GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ")");
+                GlobalLog.Print(
+                    "SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ")"
+                );
 
                 SocketError errorCode;
 
@@ -2510,15 +2955,25 @@ namespace System.Net {
                 // case we need to do some recovery.
                 if (m_Blockable)
                 {
-                    GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") Following 'blockable' branch.");
+                    GlobalLog.Print(
+                        "SafeCloseSocket::ReleaseHandle(handle:"
+                            + handle.ToString("x")
+                            + ") Following 'blockable' branch."
+                    );
 
                     errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
 #if DEBUG
-                    m_CloseSocketHandle = handle;
-                    m_CloseSocketResult = errorCode;
+                        m_CloseSocketHandle = handle;
+                        m_CloseSocketResult = errorCode;
 #endif
-                    if (errorCode == SocketError.SocketError) errorCode = (SocketError) Marshal.GetLastWin32Error();
-                    GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") closesocket()#1:" + errorCode.ToString());
+                    if (errorCode == SocketError.SocketError)
+                        errorCode = (SocketError)Marshal.GetLastWin32Error();
+                    GlobalLog.Print(
+                        "SafeCloseSocket::ReleaseHandle(handle:"
+                            + handle.ToString("x")
+                            + ") closesocket()#1:"
+                            + errorCode.ToString()
+                    );
 
                     // If it's not WSAEWOULDBLOCK, there's no more recourse - we either succeeded or failed.
                     if (errorCode != SocketError.WouldBlock)
@@ -2532,9 +2987,16 @@ namespace System.Net {
                     errorCode = UnsafeNclNativeMethods.SafeNetHandles.ioctlsocket(
                         handle,
                         IoctlSocketConstants.FIONBIO,
-                        ref nonBlockCmd);
-                    if (errorCode == SocketError.SocketError) errorCode = (SocketError) Marshal.GetLastWin32Error();
-                    GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") ioctlsocket()#1:" + errorCode.ToString());
+                        ref nonBlockCmd
+                    );
+                    if (errorCode == SocketError.SocketError)
+                        errorCode = (SocketError)Marshal.GetLastWin32Error();
+                    GlobalLog.Print(
+                        "SafeCloseSocket::ReleaseHandle(handle:"
+                            + handle.ToString("x")
+                            + ") ioctlsocket()#1:"
+                            + errorCode.ToString()
+                    );
 
                     // This can fail if there's a pending WSAEventSelect.  Try canceling it.
                     if (errorCode == SocketError.InvalidArgument)
@@ -2542,15 +3004,35 @@ namespace System.Net {
                         errorCode = UnsafeNclNativeMethods.SafeNetHandles.WSAEventSelect(
                             handle,
                             IntPtr.Zero,
-                            AsyncEventBits.FdNone);
-                        GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") WSAEventSelect():" + (errorCode == SocketError.SocketError ? (SocketError)Marshal.GetLastWin32Error() : errorCode).ToString());
+                            AsyncEventBits.FdNone
+                        );
+                        GlobalLog.Print(
+                            "SafeCloseSocket::ReleaseHandle(handle:"
+                                + handle.ToString("x")
+                                + ") WSAEventSelect():"
+                                + (
+                                    errorCode == SocketError.SocketError
+                                        ? (SocketError)Marshal.GetLastWin32Error()
+                                        : errorCode
+                                ).ToString()
+                        );
 
                         // Now retry the ioctl.
                         errorCode = UnsafeNclNativeMethods.SafeNetHandles.ioctlsocket(
                             handle,
                             IoctlSocketConstants.FIONBIO,
-                            ref nonBlockCmd);
-                        GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") ioctlsocket#2():" + (errorCode == SocketError.SocketError ? (SocketError)Marshal.GetLastWin32Error() : errorCode).ToString());
+                            ref nonBlockCmd
+                        );
+                        GlobalLog.Print(
+                            "SafeCloseSocket::ReleaseHandle(handle:"
+                                + handle.ToString("x")
+                                + ") ioctlsocket#2():"
+                                + (
+                                    errorCode == SocketError.SocketError
+                                        ? (SocketError)Marshal.GetLastWin32Error()
+                                        : errorCode
+                                ).ToString()
+                        );
                     }
 
                     // If that succeeded, try again.
@@ -2558,11 +3040,17 @@ namespace System.Net {
                     {
                         errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
 #if DEBUG
-                        m_CloseSocketHandle = handle;
-                        m_CloseSocketResult = errorCode;
+                            m_CloseSocketHandle = handle;
+                            m_CloseSocketResult = errorCode;
 #endif
-                        if (errorCode == SocketError.SocketError) errorCode = (SocketError) Marshal.GetLastWin32Error();
-                        GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") closesocket#2():" + errorCode.ToString());
+                        if (errorCode == SocketError.SocketError)
+                            errorCode = (SocketError)Marshal.GetLastWin32Error();
+                        GlobalLog.Print(
+                            "SafeCloseSocket::ReleaseHandle(handle:"
+                                + handle.ToString("x")
+                                + ") closesocket#2():"
+                                + errorCode.ToString()
+                        );
 
                         // If it's not WSAEWOULDBLOCK, there's no more recourse - we either succeeded or failed.
                         if (errorCode != SocketError.WouldBlock)
@@ -2584,14 +3072,25 @@ namespace System.Net {
                     SocketOptionLevel.Socket,
                     SocketOptionName.Linger,
                     ref lingerStruct,
-                    4);
+                    4
+                );
 #if DEBUG
-                m_CloseSocketLinger = errorCode;
+                    m_CloseSocketLinger = errorCode;
 #endif
-                if (errorCode == SocketError.SocketError) errorCode = (SocketError) Marshal.GetLastWin32Error();
-                GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") setsockopt():" + errorCode.ToString());
+                if (errorCode == SocketError.SocketError)
+                    errorCode = (SocketError)Marshal.GetLastWin32Error();
+                GlobalLog.Print(
+                    "SafeCloseSocket::ReleaseHandle(handle:"
+                        + handle.ToString("x")
+                        + ") setsockopt():"
+                        + errorCode.ToString()
+                );
 
-                if (errorCode != SocketError.Success && errorCode != SocketError.InvalidArgument && errorCode != SocketError.ProtocolOption)
+                if (
+                    errorCode != SocketError.Success
+                    && errorCode != SocketError.InvalidArgument
+                    && errorCode != SocketError.ProtocolOption
+                )
                 {
                     // Too dangerous to try closesocket() - it might block!
                     return ret = false;
@@ -2599,35 +3098,52 @@ namespace System.Net {
 
                 errorCode = UnsafeNclNativeMethods.SafeNetHandles.closesocket(handle);
 #if DEBUG
-                m_CloseSocketHandle = handle;
-                m_CloseSocketResult = errorCode;
+                    m_CloseSocketHandle = handle;
+                    m_CloseSocketResult = errorCode;
 #endif
-                GlobalLog.Print("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ") closesocket#3():" + (errorCode == SocketError.SocketError ? (SocketError)Marshal.GetLastWin32Error() : errorCode).ToString());
+                GlobalLog.Print(
+                    "SafeCloseSocket::ReleaseHandle(handle:"
+                        + handle.ToString("x")
+                        + ") closesocket#3():"
+                        + (
+                            errorCode == SocketError.SocketError
+                                ? (SocketError)Marshal.GetLastWin32Error()
+                                : errorCode
+                        ).ToString()
+                );
 
                 return ret = errorCode == SocketError.Success;
 #if DEBUG
                 }
                 catch (Exception exception)
                 {
-                    if (!NclUtilities.IsFatal(exception)){
-                        GlobalLog.Assert("SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ")", exception.Message);
+                    if (!NclUtilities.IsFatal(exception))
+                    {
+                        GlobalLog.Assert(
+                            "SafeCloseSocket::ReleaseHandle(handle:" + handle.ToString("x") + ")",
+                            exception.Message
+                        );
                     }
-                    ret = true;  // Avoid a second assert.
+                    ret = true; // Avoid a second assert.
                     throw;
                 }
                 finally
                 {
                     m_CloseSocketThread = Thread.CurrentThread.ManagedThreadId;
                     m_CloseSocketTick = Environment.TickCount;
-                    GlobalLog.Assert(ret, "SafeCloseSocket::ReleaseHandle(handle:{0:x})|ReleaseHandle failed.", handle);
+                    GlobalLog.Assert(
+                        ret,
+                        "SafeCloseSocket::ReleaseHandle(handle:{0:x})|ReleaseHandle failed.",
+                        handle
+                    );
                 }
 #endif
             }
 
 #if DEBUG
             private IntPtr m_CloseSocketHandle;
-            private SocketError m_CloseSocketResult = unchecked((SocketError) 0xdeadbeef);
-            private SocketError m_CloseSocketLinger = unchecked((SocketError) 0xdeadbeef);
+            private SocketError m_CloseSocketResult = unchecked((SocketError)0xdeadbeef);
+            private SocketError m_CloseSocketLinger = unchecked((SocketError)0xdeadbeef);
             private int m_CloseSocketThread;
             private int m_CloseSocketTick;
 #endif
@@ -2641,29 +3157,58 @@ namespace System.Net {
                 DangerousRelease();
             }
 
-            internal unsafe static InnerSafeCloseSocket CreateWSASocket(byte* pinnedBuffer)
+            internal static unsafe InnerSafeCloseSocket CreateWSASocket(byte* pinnedBuffer)
             {
                 //-1 is the value for FROM_PROTOCOL_INFO
-                InnerSafeCloseSocket result = UnsafeNclNativeMethods.OSSOCK.WSASocket((AddressFamily) (-1),(SocketType) (-1),(ProtocolType) (-1), pinnedBuffer, 0, SocketConstructorFlags.WSA_FLAG_OVERLAPPED);
-                if (result.IsInvalid) {
+                InnerSafeCloseSocket result = UnsafeNclNativeMethods.OSSOCK.WSASocket(
+                    (AddressFamily)(-1),
+                    (SocketType)(-1),
+                    (ProtocolType)(-1),
+                    pinnedBuffer,
+                    0,
+                    SocketConstructorFlags.WSA_FLAG_OVERLAPPED
+                );
+                if (result.IsInvalid)
+                {
                     result.SetHandleAsInvalid();
                 }
                 return result;
             }
 
-            internal static InnerSafeCloseSocket CreateWSASocket(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
+            internal static InnerSafeCloseSocket CreateWSASocket(
+                AddressFamily addressFamily,
+                SocketType socketType,
+                ProtocolType protocolType
+            )
             {
-                InnerSafeCloseSocket result = UnsafeNclNativeMethods.OSSOCK.WSASocket(addressFamily, socketType, protocolType, IntPtr.Zero, 0, SocketConstructorFlags.WSA_FLAG_OVERLAPPED);
-                if (result.IsInvalid) {
+                InnerSafeCloseSocket result = UnsafeNclNativeMethods.OSSOCK.WSASocket(
+                    addressFamily,
+                    socketType,
+                    protocolType,
+                    IntPtr.Zero,
+                    0,
+                    SocketConstructorFlags.WSA_FLAG_OVERLAPPED
+                );
+                if (result.IsInvalid)
+                {
                     result.SetHandleAsInvalid();
                 }
                 return result;
             }
 
-            internal static InnerSafeCloseSocket Accept(SafeCloseSocket socketHandle, byte[] socketAddress, ref int socketAddressSize)
+            internal static InnerSafeCloseSocket Accept(
+                SafeCloseSocket socketHandle,
+                byte[] socketAddress,
+                ref int socketAddressSize
+            )
             {
-                InnerSafeCloseSocket result = UnsafeNclNativeMethods.SafeNetHandles.accept(socketHandle.DangerousGetHandle(), socketAddress, ref socketAddressSize);
-                if (result.IsInvalid) {
+                InnerSafeCloseSocket result = UnsafeNclNativeMethods.SafeNetHandles.accept(
+                    socketHandle.DangerousGetHandle(),
+                    socketAddress,
+                    ref socketAddressSize
+                );
+                if (result.IsInvalid)
+                {
                     result.SetHandleAsInvalid();
                 }
                 return result;
@@ -2671,23 +3216,36 @@ namespace System.Net {
         }
     }
 
-
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeCloseSocketAndEvent: SafeCloseSocket {
-        internal SafeCloseSocketAndEvent() : base() {}
+    internal sealed class SafeCloseSocketAndEvent : SafeCloseSocket
+    {
+        internal SafeCloseSocketAndEvent()
+            : base() { }
+
         private AutoResetEvent waitHandle;
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             bool result = base.ReleaseHandle();
             DeleteEvent();
             return result;
-         }
+        }
 
-        internal static SafeCloseSocketAndEvent CreateWSASocketWithEvent(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType, bool autoReset, bool signaled){
+        internal static SafeCloseSocketAndEvent CreateWSASocketWithEvent(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType,
+            bool autoReset,
+            bool signaled
+        )
+        {
             SafeCloseSocketAndEvent result = new SafeCloseSocketAndEvent();
-            CreateSocket(InnerSafeCloseSocket.CreateWSASocket(addressFamily, socketType, protocolType), result);
-            if (result.IsInvalid) {
+            CreateSocket(
+                InnerSafeCloseSocket.CreateWSASocket(addressFamily, socketType, protocolType),
+                result
+            );
+            if (result.IsInvalid)
+            {
                 throw new SocketException();
             }
 
@@ -2696,7 +3254,8 @@ namespace System.Net {
             return result;
         }
 
-        internal static void CompleteInitialization(SafeCloseSocketAndEvent socketAndEventHandle){
+        internal static void CompleteInitialization(SafeCloseSocketAndEvent socketAndEventHandle)
+        {
             SafeWaitHandle handle = socketAndEventHandle.waitHandle.SafeWaitHandle;
             bool b = false;
             RuntimeHelpers.PrepareConstrainedRegions();
@@ -2722,19 +3281,21 @@ namespace System.Net {
             }
         }
 
-
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        private void DeleteEvent(){
-            try{
-                if(waitHandle != null){
+        private void DeleteEvent()
+        {
+            try
+            {
+                if (waitHandle != null)
+                {
                     waitHandle.SafeWaitHandle.DangerousRelease();
                 }
             }
-            catch{
-            }
+            catch { }
         }
 
-        internal WaitHandle GetEventHandle(){
+        internal WaitHandle GetEventHandle()
+        {
             return waitHandle;
         }
     }
@@ -2755,7 +3316,10 @@ namespace System.Net {
         {
             SafeLocalFreeChannelBinding result;
 
-            result = UnsafeNclNativeMethods.SafeNetHandles.LocalAllocChannelBinding(LMEM_FIXED, (UIntPtr)cb);
+            result = UnsafeNclNativeMethods.SafeNetHandles.LocalAllocChannelBinding(
+                LMEM_FIXED,
+                (UIntPtr)cb
+            );
             if (result.IsInvalid)
             {
                 result.SetHandleAsInvalid();
@@ -2766,7 +3330,7 @@ namespace System.Net {
             return result;
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNclNativeMethods.SafeNetHandles.LocalFree(handle) == IntPtr.Zero;
         }
@@ -2793,31 +3357,55 @@ namespace System.Net {
         {
             switch (dll)
             {
-                case SecurDll.SECURITY: return new SafeFreeContextBufferChannelBinding_SECURITY();
-                default: throw new ArgumentException(SR.GetString(SR.net_invalid_enum, "SecurDll"), "dll");
+                case SecurDll.SECURITY:
+                    return new SafeFreeContextBufferChannelBinding_SECURITY();
+                default:
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_invalid_enum, "SecurDll"),
+                        "dll"
+                    );
             }
         }
 
-        public unsafe static int QueryContextChannelBinding(SecurDll dll, SafeDeleteContext phContext, ContextAttribute contextAttribute, Bindings* buffer, SafeFreeContextBufferChannelBinding refHandle)
+        public static unsafe int QueryContextChannelBinding(
+            SecurDll dll,
+            SafeDeleteContext phContext,
+            ContextAttribute contextAttribute,
+            Bindings* buffer,
+            SafeFreeContextBufferChannelBinding refHandle
+        )
         {
             switch (dll)
             {
                 case SecurDll.SECURITY:
-                    return QueryContextChannelBinding_SECURITY(phContext, contextAttribute, buffer, refHandle);
+                    return QueryContextChannelBinding_SECURITY(
+                        phContext,
+                        contextAttribute,
+                        buffer,
+                        refHandle
+                    );
 
                 default:
                     return -1;
             }
         }
 
-        private unsafe static int QueryContextChannelBinding_SECURITY(SafeDeleteContext phContext, ContextAttribute contextAttribute, Bindings* buffer, SafeFreeContextBufferChannelBinding refHandle)
+        private static unsafe int QueryContextChannelBinding_SECURITY(
+            SafeDeleteContext phContext,
+            ContextAttribute contextAttribute,
+            Bindings* buffer,
+            SafeFreeContextBufferChannelBinding refHandle
+        )
         {
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
 
             // SCHANNEL only supports SECPKG_ATTR_ENDPOINT_BINDINGS and SECPKG_ATTR_UNIQUE_BINDINGS which
             // map to our enum ChannelBindingKind.Endpoint and ChannelBindingKind.Unique.
-            if (contextAttribute != ContextAttribute.EndpointBindings && contextAttribute != ContextAttribute.UniqueBindings)
+            if (
+                contextAttribute != ContextAttribute.EndpointBindings
+                && contextAttribute != ContextAttribute.UniqueBindings
+            )
             {
                 return status;
             }
@@ -2825,10 +3413,12 @@ namespace System.Net {
             // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing to jit
             // one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 phContext.DangerousAddRef(ref b);
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 if (b)
                 {
                     phContext.DangerousRelease();
@@ -2837,20 +3427,26 @@ namespace System.Net {
                 if (!(e is ObjectDisposedException))
                     throw;
             }
-            finally {
-
+            finally
+            {
                 if (b)
                 {
-                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
+                    status = UnsafeNclNativeMethods.SafeNetHandles_SECURITY.QueryContextAttributesW(
+                        ref phContext._handle,
+                        contextAttribute,
+                        buffer
+                    );
                     phContext.DangerousRelease();
                 }
 
-                if (status == 0 && refHandle != null) {
+                if (status == 0 && refHandle != null)
+                {
                     refHandle.Set((*buffer).pBindings);
                     refHandle.size = (*buffer).BindingsLength;
                 }
 
-                if (status != 0 && refHandle != null) {
+                if (status != 0 && refHandle != null)
+                {
                     refHandle.SetHandleAsInvalid();
                 }
             }
@@ -2860,13 +3456,13 @@ namespace System.Net {
     }
 
     [SuppressUnmanagedCodeSecurity]
-    internal sealed class SafeFreeContextBufferChannelBinding_SECURITY : SafeFreeContextBufferChannelBinding
+    internal sealed class SafeFreeContextBufferChannelBinding_SECURITY
+        : SafeFreeContextBufferChannelBinding
     {
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             return UnsafeNclNativeMethods.SafeNetHandles_SECURITY.FreeContextBuffer(handle) == 0;
         }
-
     }
 #endif
 
@@ -2878,13 +3474,17 @@ namespace System.Net {
     //
     ///////////////////////////////////////////////////////////////
 #if DEBUG
-    internal sealed class SafeUnlockUrlCacheEntryFile : DebugSafeHandle {
+    internal sealed class SafeUnlockUrlCacheEntryFile : DebugSafeHandle
+    {
 #else
-    internal sealed class SafeUnlockUrlCacheEntryFile : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeUnlockUrlCacheEntryFile : SafeHandleZeroOrMinusOneIsInvalid
+    {
 #endif
-        private string      m_KeyString;
+        private string m_KeyString;
 
-        private SafeUnlockUrlCacheEntryFile(string keyString): base(true) {
+        private SafeUnlockUrlCacheEntryFile(string keyString)
+            : base(true)
+        {
             m_KeyString = keyString;
         }
 
@@ -2898,7 +3498,8 @@ namespace System.Net {
 
         override unsafe protected bool ReleaseHandle()
         {
-            fixed (char *ptrStr = m_KeyString) {
+            fixed (char* ptrStr = m_KeyString)
+            {
                 UnsafeNclNativeMethods.SafeNetHandles.UnlockUrlCacheEntryFileW(ptrStr, 0);
             }
             SetHandle(IntPtr.Zero);
@@ -2906,34 +3507,56 @@ namespace System.Net {
             return true;
         }
 
-        internal unsafe static _WinInetCache.Status GetAndLockFile(string key, byte* entryPtr, ref int entryBufSize, out SafeUnlockUrlCacheEntryFile handle) {
-
-            if (ValidationHelper.IsBlankString(key)) {
+        internal static unsafe _WinInetCache.Status GetAndLockFile(
+            string key,
+            byte* entryPtr,
+            ref int entryBufSize,
+            out SafeUnlockUrlCacheEntryFile handle
+        )
+        {
+            if (ValidationHelper.IsBlankString(key))
+            {
                 throw new ArgumentNullException("key");
             }
 
             handle = new SafeUnlockUrlCacheEntryFile(key);
-            fixed (char* keyPtr = key) {
+            fixed (char* keyPtr = key)
+            {
                 return MustRunGetAndLockFile(keyPtr, entryPtr, ref entryBufSize, handle);
             }
-
         }
+
         //
         // Whis will check the result from PInvoke and make a valid safeHandle on success
         //
-        unsafe private static _WinInetCache.Status MustRunGetAndLockFile(char* key, byte* entryPtr, ref int entryBufSize, SafeUnlockUrlCacheEntryFile handle) {
+        unsafe private static _WinInetCache.Status MustRunGetAndLockFile(
+            char* key,
+            byte* entryPtr,
+            ref int entryBufSize,
+            SafeUnlockUrlCacheEntryFile handle
+        )
+        {
             _WinInetCache.Status error = _WinInetCache.Status.Success;
 
             // Run the body of this method as a non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {} finally {
-
-                if (!UnsafeNclNativeMethods.SafeNetHandles.RetrieveUrlCacheEntryFileW(key, entryPtr, ref entryBufSize, 0))
+            try { }
+            finally
+            {
+                if (
+                    !UnsafeNclNativeMethods.SafeNetHandles.RetrieveUrlCacheEntryFileW(
+                        key,
+                        entryPtr,
+                        ref entryBufSize,
+                        0
+                    )
+                )
                 {
                     error = (_WinInetCache.Status)Marshal.GetLastWin32Error();
                     handle.SetHandleAsInvalid();
                 }
-                else {
+                else
+                {
                     // Hack: that will return 1 in place of a handle
                     // The real handle here is a "key" string
                     handle.SetHandle((IntPtr)1);
@@ -2942,28 +3565,50 @@ namespace System.Net {
 
             return error;
         }
-
     }
-
 
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal sealed unsafe class SafeRegistryHandle :
 #if DEBUG
-    DebugSafeHandle
+        DebugSafeHandle
 #else
-    SafeHandleZeroOrMinusOneIsInvalid
+        SafeHandleZeroOrMinusOneIsInvalid
 #endif
     {
-        private SafeRegistryHandle() : base(true) { }
+        private SafeRegistryHandle()
+            : base(true) { }
 
-        internal static uint RegOpenKeyEx(IntPtr key, string subKey, uint ulOptions, uint samDesired, out SafeRegistryHandle resultSubKey)
+        internal static uint RegOpenKeyEx(
+            IntPtr key,
+            string subKey,
+            uint ulOptions,
+            uint samDesired,
+            out SafeRegistryHandle resultSubKey
+        )
         {
-            return UnsafeNclNativeMethods.RegistryHelper.RegOpenKeyEx(key, subKey, ulOptions, samDesired, out resultSubKey);
+            return UnsafeNclNativeMethods.RegistryHelper.RegOpenKeyEx(
+                key,
+                subKey,
+                ulOptions,
+                samDesired,
+                out resultSubKey
+            );
         }
 
-        internal uint RegOpenKeyEx(string subKey, uint ulOptions, uint samDesired, out SafeRegistryHandle resultSubKey)
+        internal uint RegOpenKeyEx(
+            string subKey,
+            uint ulOptions,
+            uint samDesired,
+            out SafeRegistryHandle resultSubKey
+        )
         {
-            return UnsafeNclNativeMethods.RegistryHelper.RegOpenKeyEx(this, subKey, ulOptions, samDesired, out resultSubKey);
+            return UnsafeNclNativeMethods.RegistryHelper.RegOpenKeyEx(
+                this,
+                subKey,
+                ulOptions,
+                samDesired,
+                out resultSubKey
+            );
         }
 
         internal uint RegCloseKey()
@@ -2983,9 +3628,20 @@ namespace System.Net {
 
             while (true)
             {
-                errorCode = UnsafeNclNativeMethods.RegistryHelper.RegQueryValueEx(this, name, IntPtr.Zero, out type, blob, ref size);
-                if (errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_MORE_DATA &&
-                    (blob != null || errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS))
+                errorCode = UnsafeNclNativeMethods.RegistryHelper.RegQueryValueEx(
+                    this,
+                    name,
+                    IntPtr.Zero,
+                    out type,
+                    blob,
+                    ref size
+                );
+                if (
+                    errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_MORE_DATA
+                    && (
+                        blob != null || errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                    )
+                )
                 {
                     break;
                 }
@@ -3005,7 +3661,7 @@ namespace System.Net {
                     {
                         byte[] oldBlob = blob;
                         blob = new byte[size];
-                        Buffer.BlockCopy(oldBlob, 0, blob, 0, (int) size);
+                        Buffer.BlockCopy(oldBlob, 0, blob, 0, (int)size);
                     }
                     data = blob;
                     return UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS;
@@ -3015,20 +3671,33 @@ namespace System.Net {
             }
         }
 
-        internal uint RegNotifyChangeKeyValue(bool watchSubTree, uint notifyFilter, SafeWaitHandle regEvent, bool async)
+        internal uint RegNotifyChangeKeyValue(
+            bool watchSubTree,
+            uint notifyFilter,
+            SafeWaitHandle regEvent,
+            bool async
+        )
         {
-            return UnsafeNclNativeMethods.RegistryHelper.RegNotifyChangeKeyValue(this, watchSubTree, notifyFilter, regEvent, async);
+            return UnsafeNclNativeMethods.RegistryHelper.RegNotifyChangeKeyValue(
+                this,
+                watchSubTree,
+                notifyFilter,
+                regEvent,
+                async
+            );
         }
 
         internal static uint RegOpenCurrentUser(uint samDesired, out SafeRegistryHandle resultKey)
         {
-            return UnsafeNclNativeMethods.RegistryHelper.RegOpenCurrentUser(samDesired, out resultKey);
+            return UnsafeNclNativeMethods.RegistryHelper.RegOpenCurrentUser(
+                samDesired,
+                out resultKey
+            );
         }
 
-
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
-            if(!IsInvalid)
+            if (!IsInvalid)
                 resClose = UnsafeNclNativeMethods.RegistryHelper.RegCloseKey(handle);
             SetHandleAsInvalid();
             return true;
@@ -3043,9 +3712,7 @@ namespace System.Net {
     internal sealed class SafeWebSocketHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         internal SafeWebSocketHandle()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

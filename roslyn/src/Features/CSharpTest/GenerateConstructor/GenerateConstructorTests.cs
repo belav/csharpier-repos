@@ -22,14 +22,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
     public class GenerateConstructorTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public GenerateConstructorTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new GenerateConstructorCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new GenerateConstructorCodeFixProvider());
 
-        private readonly NamingStylesTestOptionSets options = new NamingStylesTestOptionSets(LanguageNames.CSharp);
+        private readonly NamingStylesTestOptionSets options = new NamingStylesTestOptionSets(
+            LanguageNames.CSharp
+        );
 
         [Fact]
         public async Task TestWithSimpleArgument()
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                         new C(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44537")]
@@ -90,7 +92,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                         new C(1);
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -118,7 +122,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                         new C(1);
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -147,14 +153,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructor
                     }
                 }
                 """,
-options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement));
+                options: Option(
+                    CSharpCodeStyleOptions.PreferExpressionBodiedConstructors,
+                    CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910589")]
         public async Task TestWithNoArgs()
         {
-            var input =
-                """
+            var input = """
                 class C
                 {
                     public C(int v)
@@ -170,8 +179,8 @@ options: Option(CSharpCodeStyleOptions.PreferExpressionBodiedConstructors, CShar
 
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
-input,
-"""
+                input,
+                """
 class C
 {
     public C()
@@ -187,7 +196,8 @@ class C
         new C();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910589")]
@@ -218,14 +228,14 @@ class C
                         new C(goo: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910589")]
         public async Task TestWithExistingField1()
         {
-            const string input =
-                """
+            const string input = """
                 class C
                 {
                     void M()
@@ -241,26 +251,27 @@ class C
                 """;
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
-         input,
-         """
-         class C
-         {
-             void M()
-             {
-                 new D(goo: 1);
-             }
-         }
+                input,
+                """
+                class C
+                {
+                    void M()
+                    {
+                        new D(goo: 1);
+                    }
+                }
 
-         class D
-         {
-             private int goo;
+                class D
+                {
+                    private int goo;
 
-             public D(int goo)
-             {
-                 this.goo = goo;
-             }
-         }
-         """);
+                    public D(int goo)
+                    {
+                        this.goo = goo;
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
@@ -300,7 +311,8 @@ class C
                         this.v1 = v1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44537")]
@@ -341,7 +353,9 @@ class C
 
                     public int V { get; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -379,7 +393,9 @@ class C
                     {
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -425,7 +441,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -473,7 +490,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -512,7 +530,8 @@ class C
                         X = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -552,7 +571,12 @@ class C
                     }
                 }
                 """,
-                options: Option(CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Error));
+                options: Option(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -600,7 +624,8 @@ class C
                         this.x = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -646,7 +671,8 @@ class C
                         X = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -693,7 +719,12 @@ class C
                     }
                 }
                 """,
-                options: Option(CodeStyleOptions2.QualifyFieldAccess, true, NotificationOption2.Error));
+                options: Option(
+                    CodeStyleOptions2.QualifyFieldAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -741,7 +772,8 @@ class C
                         this.x1 = x1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -790,7 +822,8 @@ class C
                         this.x = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -829,7 +862,8 @@ class C
 
                     public int X { get; private set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -869,7 +903,12 @@ class C
                     public int X { get; private set; }
                 }
                 """,
-                options: Option(CodeStyleOptions2.QualifyPropertyAccess, true, NotificationOption2.Error));
+                options: Option(
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -917,7 +956,8 @@ class C
                         this.x = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -963,7 +1003,8 @@ class C
                         X = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -1010,7 +1051,12 @@ class C
                     }
                 }
                 """,
-                options: Option(CodeStyleOptions2.QualifyPropertyAccess, true, NotificationOption2.Error));
+                options: Option(
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -1056,7 +1102,8 @@ class C
                         X = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -1103,7 +1150,12 @@ class C
                     }
                 }
                 """,
-                options: Option(CodeStyleOptions2.QualifyPropertyAccess, true, NotificationOption2.Error));
+                options: Option(
+                    CodeStyleOptions2.QualifyPropertyAccess,
+                    true,
+                    NotificationOption2.Error
+                )
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539444")]
@@ -1151,7 +1203,8 @@ class C
                         this.x = x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1187,14 +1240,14 @@ class C
                         i = 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestWithBaseDelegatingConstructor1()
         {
-            const string input =
-                """
+            const string input = """
                 class C
                 {
                     void M()
@@ -1217,30 +1270,31 @@ class C
 
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
-         input,
-         """
-         class C
-         {
-             void M()
-             {
-                 new D(1);
-             }
-         }
+                input,
+                """
+                class C
+                {
+                    void M()
+                    {
+                        new D(1);
+                    }
+                }
 
-         class B
-         {
-             protected B(int x)
-             {
-             }
-         }
+                class B
+                {
+                    protected B(int x)
+                    {
+                    }
+                }
 
-         class D : B
-         {
-             public D(int x) : base(x)
-             {
-             }
-         }
-         """);
+                class D : B
+                {
+                    public D(int x) : base(x)
+                    {
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
@@ -1292,7 +1346,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44537")]
@@ -1344,7 +1399,9 @@ class C
 
                     public int V { get; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -1393,7 +1450,9 @@ class C
                     {
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -1426,7 +1485,8 @@ class C
                         S s = new S(System.DateTime.Now);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1457,7 +1517,8 @@ class C
                         new @C(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539489")]
@@ -1488,7 +1549,8 @@ class C
                         new @int(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1530,7 +1592,8 @@ class C
                         this.field = field;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539548")]
@@ -1561,7 +1624,8 @@ class C
                         new C(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(5864, "DevDiv_Projects/Roslyn")]
@@ -1576,7 +1640,8 @@ class C
                         Struct s = new [|Struct|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539787")]
@@ -1615,7 +1680,8 @@ class C
                         C c = new C("a");
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1671,7 +1737,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44537")]
@@ -1728,7 +1795,9 @@ class C
 
                     public bool V { get; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -1782,7 +1851,9 @@ class C
                     {
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -1838,7 +1909,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1902,7 +1974,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1958,7 +2031,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1987,7 +2061,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44537")]
@@ -2016,7 +2091,9 @@ class C
 
                     public int V { get; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -2042,7 +2119,9 @@ class C
                     {
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910589")]
@@ -2068,7 +2147,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2104,7 +2184,8 @@ class C
                         this.i = i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2141,7 +2222,8 @@ class C
                         this.i = i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539969")]
@@ -2163,7 +2245,8 @@ class C
                         C.D d = new C.[|D|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539972")]
@@ -2203,7 +2286,8 @@ class C
                         this.t2 = t2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539972")]
@@ -2243,7 +2327,9 @@ class C
                     public object T1 { get; }
                     public object T2 { get; }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/539972")]
@@ -2278,7 +2364,9 @@ class C
                     {
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541020")]
@@ -2328,7 +2416,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541121")]
@@ -2363,7 +2452,8 @@ class C
                         C c = new C(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2384,7 +2474,8 @@ class C
                 {
                 }
                 #line default
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2432,7 +2523,8 @@ class C
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2470,7 +2562,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2508,7 +2601,9 @@ class C
                 class D
                 {
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2543,7 +2638,9 @@ class C
                 class D
                 {
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2585,7 +2682,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2627,7 +2725,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2679,7 +2778,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2729,7 +2829,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2785,7 +2886,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2853,7 +2955,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2874,7 +2977,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530003")]
@@ -2893,7 +2997,8 @@ class C
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/889349")]
@@ -2934,7 +3039,8 @@ class C
                         this.wde = wde;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528257")]
@@ -2978,7 +3084,8 @@ class C
                         var s = new Goo.Bar(5);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(1241, @"https://github.com/dotnet/roslyn/issues/1241")]
@@ -3015,7 +3122,8 @@ class C
                             new C(0) });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/5274")]
@@ -3073,7 +3181,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3120,7 +3229,8 @@ class C
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/9575")]
@@ -3139,7 +3249,8 @@ class C
                         return [|M|](i, b);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3172,7 +3283,8 @@ class C
                         new C((1, "hello"), true);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3203,7 +3315,8 @@ class C
                         new C((a: 1, b: "hello"));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3234,7 +3347,8 @@ class C
                         new C((a: 1, "hello"));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3273,7 +3387,8 @@ class C
                         this.existing = existing;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3312,7 +3427,8 @@ class C
                         this.existing = existing;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3351,7 +3467,8 @@ class C
                         this.existing = existing;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3400,7 +3517,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3449,7 +3567,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3498,7 +3617,8 @@ class C
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11563")]
@@ -3545,7 +3665,8 @@ class C
                         this.s = s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/11563")]
@@ -3587,7 +3708,8 @@ class C
                         this._ = _;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12147")]
@@ -3616,7 +3738,8 @@ class C
                         new C(out var a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12147")]
@@ -3645,7 +3768,8 @@ class C
                         new C(b: out var a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12147")]
@@ -3674,7 +3798,8 @@ class C
                         new C(out int a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12147")]
@@ -3703,7 +3828,8 @@ class C
                         new C(b: out int a);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12182")]
@@ -3733,7 +3859,10 @@ class C
                     }
                 }
                 """,
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12182")]
@@ -3763,7 +3892,10 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
                     }
                 }
                 """,
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12182")]
@@ -3793,7 +3925,10 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
                     }
                 }
                 """,
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/12182")]
@@ -3823,7 +3958,10 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
                     }
                 }
                 """,
-parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(
+                    CodeAnalysis.CSharp.LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13749")]
@@ -3858,7 +3996,8 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
                         var c = new C ( prop ) ;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21692")]
@@ -3889,7 +4028,8 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21692")]
@@ -3918,7 +4058,8 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
 
                     public C(int x, int y, int z) : this(x, y) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21692")]
@@ -3949,7 +4090,8 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
 
                     public C(int x, int y, int z) : this(x, y) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21692")]
@@ -3982,7 +4124,8 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21692")]
@@ -4016,7 +4159,8 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
 
                     public C(int x, int y, int z, int e) : this(x, y, z) { }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/22293")]
@@ -4025,7 +4169,7 @@ parseOptions: TestOptions.Regular.WithLanguageVersion(CodeAnalysis.CSharp.Langua
         public async Task TestMethodGroupWithMissingSystemActionAndFunc(string returnType)
         {
             await TestInRegularAndScriptAsync(
-    $@"
+                $@"
 <Workspace>
     <Project Language=""C#"" CommonReferencesMinCorlib=""true"">
         <Document><![CDATA[
@@ -4048,7 +4192,7 @@ internal class Class
         </Document>
     </Project>
 </Workspace>",
-    $@"
+                $@"
 class C
 {{
     void M()
@@ -4070,7 +4214,8 @@ internal class Class
         this.method = method;
     }}
 }}
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14077")]
@@ -4103,7 +4248,8 @@ internal class Class
                         new Program(s);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14077")]
@@ -4136,7 +4282,8 @@ internal class Class
                         new Program(S);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14077")]
@@ -4169,7 +4316,9 @@ internal class Class
                         new Program(s);
                     }
                 }
-                """, options: options.FieldNamesAreCamelCaseWithUnderscorePrefix);
+                """,
+                options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14077")]
@@ -4204,7 +4353,9 @@ internal class Class
                         new Program(s);
                     }
                 }
-                """, options: options.FieldNamesAreCamelCaseWithUnderscorePrefix);
+                """,
+                options: options.FieldNamesAreCamelCaseWithUnderscorePrefix
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14077")]
@@ -4237,7 +4388,12 @@ internal class Class
                         new Program(s);
                     }
                 }
-                """, options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefix));
+                """,
+                options: options.MergeStyles(
+                    options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                    options.ParameterNamesAreCamelCaseWithPUnderscorePrefix
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/14077")]
@@ -4275,7 +4431,12 @@ internal class Class
                 class D
                 {
                 }
-                """, options: options.MergeStyles(options.FieldNamesAreCamelCaseWithUnderscorePrefix, options.ParameterNamesAreCamelCaseWithPUnderscorePrefix));
+                """,
+                options: options.MergeStyles(
+                    options.FieldNamesAreCamelCaseWithUnderscorePrefix,
+                    options.ParameterNamesAreCamelCaseWithPUnderscorePrefix
+                )
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/33673")]
@@ -4285,10 +4446,13 @@ internal class Class
         [InlineData("m_S", "s")]
         [InlineData("s_s", "s")]
         [InlineData("t_s", "s")]
-        public async Task GenerateConstructor_ArgumentHasCommonPrefix(string argumentName, string fieldName)
+        public async Task GenerateConstructor_ArgumentHasCommonPrefix(
+            string argumentName,
+            string fieldName
+        )
         {
             await TestInRegularAndScriptAsync(
-$@"
+                $@"
 class Program
 {{
     static void Main(string[] args)
@@ -4297,7 +4461,7 @@ class Program
         new Prog[||]ram({argumentName});
     }}
 }}",
-$@"
+                $@"
 class Program
 {{
     private string {fieldName};
@@ -4312,7 +4476,8 @@ class Program
         string {argumentName} = "";
         new Program({argumentName});
     }}
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -4349,7 +4514,8 @@ class Program
                         new C(s);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4390,7 +4556,8 @@ class Program
                         new C(s);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45808")]
@@ -4421,7 +4588,8 @@ class Program
                         new C(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45808")]
@@ -4452,7 +4620,9 @@ class Program
                         new C(x);
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45808")]
@@ -4483,38 +4653,41 @@ class Program
                         new C(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45808")]
         public async Task TestWithUnsafeInUnsafeClass_Property()
         {
             await TestInRegularAndScriptAsync(
-    """
-    unsafe class C
-    {
-        void M(int* x)
-        {
-            new [|C|](x);
-        }
-    }
-    """,
-    """
-    unsafe class C
-    {
-        public C(int* x)
-        {
-            X = x;
-        }
+                """
+                unsafe class C
+                {
+                    void M(int* x)
+                    {
+                        new [|C|](x);
+                    }
+                }
+                """,
+                """
+                unsafe class C
+                {
+                    public C(int* x)
+                    {
+                        X = x;
+                    }
 
-        public int* X { get; }
+                    public int* X { get; }
 
-        void M(int* x)
-        {
-            new C(x);
-        }
-    }
-    """, index: 1);
+                    void M(int* x)
+                    {
+                        new C(x);
+                    }
+                }
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45808")]
@@ -4543,213 +4716,221 @@ class Program
 
                     public unsafe A(int* a, int b, int c) : this(a, b) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/45808")]
         public async Task TestUnsafeDelegateConstructorInUnsafeClass()
         {
             await TestInRegularAndScriptAsync(
- """
- unsafe class A
- {
-     public A(int* a) { }
+                """
+                unsafe class A
+                {
+                    public A(int* a) { }
 
-     public A(int* a, int b, int c) : [|this(a, b)|] { }
- }
- """,
- """
- unsafe class A
- {
-     private int b;
+                    public A(int* a, int b, int c) : [|this(a, b)|] { }
+                }
+                """,
+                """
+                unsafe class A
+                {
+                    private int b;
 
-     public A(int* a) { }
+                    public A(int* a) { }
 
-     public A(int* a, int b) : this(a)
-     {
-         this.b = b;
-     }
+                    public A(int* a, int b) : this(a)
+                    {
+                        this.b = b;
+                    }
 
-     public A(int* a, int b, int c) : this(a, b) { }
- }
- """);
+                    public A(int* a, int b, int c) : this(a, b) { }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44708")]
         public async Task TestGenerateNameFromTypeArgument()
         {
             await TestInRegularAndScriptAsync(
- """
- using System.Collections.Generic;
+                """
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     C M() => new [||]C(new List<Frog>());
- }
- """,
- """
- using System.Collections.Generic;
+                class C
+                {
+                    C M() => new [||]C(new List<Frog>());
+                }
+                """,
+                """
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     private List<Frog> frogs;
+                class C
+                {
+                    private List<Frog> frogs;
 
-     public C(List<Frog> frogs)
-     {
-         this.frogs = frogs;
-     }
+                    public C(List<Frog> frogs)
+                    {
+                        this.frogs = frogs;
+                    }
 
-     C M() => new C(new List<Frog>());
- }
- """);
+                    C M() => new C(new List<Frog>());
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44708")]
         public async Task TestDoNotGenerateNameFromTypeArgumentIfNotEnumerable()
         {
             await TestInRegularAndScriptAsync(
- """
- class Frog<T> { }
+                """
+                class Frog<T> { }
 
- class C
- {
-     C M()
-     {
-         return new [||]C(new Frog<int>());
-     }
- }
- """,
- """
- class Frog<T> { }
+                class C
+                {
+                    C M()
+                    {
+                        return new [||]C(new Frog<int>());
+                    }
+                }
+                """,
+                """
+                class Frog<T> { }
 
- class C
- {
-     private Frog<int> frog;
+                class C
+                {
+                    private Frog<int> frog;
 
-     public C(Frog<int> frog)
-     {
-         this.frog = frog;
-     }
+                    public C(Frog<int> frog)
+                    {
+                        this.frog = frog;
+                    }
 
-     C M()
-     {
-         return new C(new Frog<int>());
-     }
- }
- """);
+                    C M()
+                    {
+                        return new C(new Frog<int>());
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44708")]
         public async Task TestGenerateNameFromTypeArgumentForErrorType()
         {
             await TestInRegularAndScriptAsync(
- """
- using System.Collections.Generic;
+                """
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     C M() => new [||]C(new List<>());
- }
- """,
- """
- using System.Collections.Generic;
+                class C
+                {
+                    C M() => new [||]C(new List<>());
+                }
+                """,
+                """
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     private List<T> ts;
+                class C
+                {
+                    private List<T> ts;
 
-     public C(List<T> ts)
-     {
-         this.ts = ts;
-     }
+                    public C(List<T> ts)
+                    {
+                        this.ts = ts;
+                    }
 
-     C M() => new C(new List<>());
- }
- """);
+                    C M() => new C(new List<>());
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44708")]
         public async Task TestGenerateNameFromTypeArgumentForTupleType()
         {
             await TestInRegularAndScriptAsync(
- """
- using System.Collections.Generic;
+                """
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     C M() => new [||]C(new List<(int, string)>());
- }
- """,
- """
- using System.Collections.Generic;
+                class C
+                {
+                    C M() => new [||]C(new List<(int, string)>());
+                }
+                """,
+                """
+                using System.Collections.Generic;
 
- class Frog { }
+                class Frog { }
 
- class C
- {
-     private List<(int, string)> list;
+                class C
+                {
+                    private List<(int, string)> list;
 
-     public C(List<(int, string)> list)
-     {
-         this.list = list;
-     }
+                    public C(List<(int, string)> list)
+                    {
+                        this.list = list;
+                    }
 
-     C M() => new C(new List<(int, string)>());
- }
- """);
+                    C M() => new C(new List<(int, string)>());
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44708")]
         public async Task TestGenerateNameFromTypeArgumentInNamespace()
         {
             await TestInRegularAndScriptAsync(
- """
- using System.Collections.Generic;
+                """
+                using System.Collections.Generic;
 
- namespace N {
-     class Frog { }
+                namespace N {
+                    class Frog { }
 
-     class C
-     {
-         C M() => new [||]C(new List<Frog>());
-     }
- }
- """,
- """
- using System.Collections.Generic;
+                    class C
+                    {
+                        C M() => new [||]C(new List<Frog>());
+                    }
+                }
+                """,
+                """
+                using System.Collections.Generic;
 
- namespace N {
-     class Frog { }
+                namespace N {
+                    class Frog { }
 
-     class C
-     {
-         private List<Frog> frogs;
+                    class C
+                    {
+                        private List<Frog> frogs;
 
-         public C(List<Frog> frogs)
-         {
-             this.frogs = frogs;
-         }
+                        public C(List<Frog> frogs)
+                        {
+                            this.frogs = frogs;
+                        }
 
-         C M() => new C(new List<Frog>());
-     }
- }
- """);
+                        C M() => new C(new List<Frog>());
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47928")]
         public async Task TestGenerateConstructorFromImplicitObjectCreation()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 namespace N
                 {
                     public class B
@@ -4764,7 +4945,8 @@ class Program
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 namespace N
                 {
                     public class B
@@ -4785,13 +4967,15 @@ class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47928")]
         public async Task TestGenerateConstructorFromImplicitObjectCreation_Properties()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 namespace N
                 {
                     public class B
@@ -4806,7 +4990,8 @@ class Program
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 namespace N
                 {
                     public class B
@@ -4827,13 +5012,16 @@ class Program
                         public int V { get; }
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47928")]
         public async Task TestGenerateConstructorFromImplicitObjectCreation_NoField()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 namespace N
                 {
                     public class B
@@ -4848,7 +5036,8 @@ class Program
                     {
                     }
                 }
-                """, """
+                """,
+                """
                 namespace N
                 {
                     public class B
@@ -4866,7 +5055,9 @@ class Program
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -4915,14 +5106,14 @@ class Program
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestGenerateConstructorFromImplicitObjectCreation_DelegatingFromParameter()
         {
-            const string input =
-                """
+            const string input = """
                 class C
                 {
                     void M(D d)
@@ -4945,30 +5136,31 @@ class Program
 
             await TestActionCountAsync(input, 1);
             await TestInRegularAndScriptAsync(
-         input,
-         """
-         class C
-         {
-             void M(D d)
-             {
-                 M(new(1));
-             }
-         }
+                input,
+                """
+                class C
+                {
+                    void M(D d)
+                    {
+                        M(new(1));
+                    }
+                }
 
-         class B
-         {
-             protected B(int x)
-             {
-             }
-         }
+                class B
+                {
+                    protected B(int x)
+                    {
+                    }
+                }
 
-         class D : B
-         {
-             public D(int x) : base(x)
-             {
-             }
-         }
-         """);
+                class D : B
+                {
+                    public D(int x) : base(x)
+                    {
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
@@ -5017,7 +5209,8 @@ class Program
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -5063,7 +5256,8 @@ class Program
                         this.v = v;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50765")]
@@ -5071,7 +5265,8 @@ class Program
         {
             // CSharpProjectWithExtraType is added as a project reference to CSharpProjectGeneratingInto
             // but not at the place we're actually invoking the fix.
-            await TestAsync("""
+            await TestAsync(
+                """
                 <Workspace>
                     <Project Language="C#" Name="CSharpProjectWithExtraType" CommonReferences="true">
                         <Document>
@@ -5116,7 +5311,9 @@ class Program
                         this.v2 = v2;
                     }
                 }
-                """, parseOptions: TestOptions.Regular);
+                """,
+                parseOptions: TestOptions.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38822")]
@@ -5142,7 +5339,8 @@ class Program
                         };
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

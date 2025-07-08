@@ -33,7 +33,7 @@ namespace System.IdentityModel
         /// </summary>
         /// <param name="tokenType"></param>
         public UnsupportedTokenTypeBadRequestException(string tokenType)
-            : base( SR.GetString( SR.ID2014, tokenType ) )
+            : base(SR.GetString(SR.ID2014, tokenType))
         {
             _tokenType = tokenType;
         }
@@ -44,17 +44,18 @@ namespace System.IdentityModel
         /// <param name="message"></param>
         /// <param name="exception"></param>
         public UnsupportedTokenTypeBadRequestException(string message, Exception exception)
-            : base(message, exception)
-        {
-        }
+            : base(message, exception) { }
 
         /// <summary>
-        /// Reconstructs the object after deserialization. 
+        /// Reconstructs the object after deserialization.
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
-        protected UnsupportedTokenTypeBadRequestException(SerializationInfo info, StreamingContext context)
-            : base( info, context )
+        protected UnsupportedTokenTypeBadRequestException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context)
         {
             if (info == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("info");
@@ -66,7 +67,10 @@ namespace System.IdentityModel
         /// </summary>
         /// <param name="info"></param>
         /// <param name="context"></param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -75,20 +79,14 @@ namespace System.IdentityModel
 
             base.GetObjectData(info, context);
         }
-        
+
         /// <summary>
         /// Gets and sets the token type which is not supported.
         /// </summary>
         public string TokenType
         {
-            get 
-            { 
-                return _tokenType; 
-            }
-            set 
-            { 
-                _tokenType = value; 
-            }
+            get { return _tokenType; }
+            set { _tokenType = value; }
         }
     }
 }

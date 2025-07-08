@@ -29,11 +29,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertTupleToStruct)]
     public class ConvertTupleToStructTests
     {
-        private static OptionsCollection PreferImplicitTypeWithInfo()
-            => new(LanguageNames.CSharp)
+        private static OptionsCollection PreferImplicitTypeWithInfo() =>
+            new(LanguageNames.CSharp)
             {
                 { CSharpCodeStyleOptions.VarElsewhere, true, NotificationOption2.Suggestion },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true, NotificationOption2.Suggestion },
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    true,
+                    NotificationOption2.Suggestion
+                },
                 { CSharpCodeStyleOptions.VarForBuiltInTypes, true, NotificationOption2.Suggestion },
             };
 
@@ -45,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
             LanguageVersion languageVersion = LanguageVersion.CSharp9,
             OptionsCollection? options = null,
             TestHost testHost = TestHost.InProcess,
-            string[]? actions = null)
+            string[]? actions = null
+        )
         {
             if (index != 0)
                 Assert.NotNull(equivalenceKey);
@@ -168,7 +173,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                     }
                 }
                 """;
-            await TestAsync(text, expected, languageVersion: LanguageVersion.CSharp12, options: PreferImplicitTypeWithInfo(), testHost: host);
+            await TestAsync(
+                text,
+                expected,
+                languageVersion: LanguageVersion.CSharp12,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -209,7 +220,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                     }
                 }
                 """;
-            await TestAsync(text, expected, languageVersion: LanguageVersion.CSharp12, options: PreferImplicitTypeWithInfo(), testHost: host);
+            await TestAsync(
+                text,
+                expected,
+                languageVersion: LanguageVersion.CSharp12,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -246,7 +263,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                     }
                 }
                 """;
-            await TestAsync(text, expected, languageVersion: LanguageVersion.CSharp12, options: PreferImplicitTypeWithInfo(), testHost: host);
+            await TestAsync(
+                text,
+                expected,
+                languageVersion: LanguageVersion.CSharp12,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/45451"), CombinatorialData]
@@ -383,9 +406,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
             var symbolSpecification = new SymbolSpecification(
                 Guid.NewGuid(),
                 "Name2",
-                ImmutableArray.Create(new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)),
+                ImmutableArray.Create(
+                    new SymbolSpecification.SymbolKindOrTypeKind(SymbolKind.Parameter)
+                ),
                 accessibilityList: default,
-                modifiers: default);
+                modifiers: default
+            );
 
             var namingStyle = new NamingStyle(
                 Guid.NewGuid(),
@@ -393,19 +419,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 name: "Name2",
                 prefix: "p_",
                 suffix: "_",
-                wordSeparator: "");
+                wordSeparator: ""
+            );
 
             var namingRule = new SerializableNamingRule()
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
                 ImmutableArray.Create(namingStyle),
-                ImmutableArray.Create(namingRule));
+                ImmutableArray.Create(namingRule)
+            );
 
             var options = PreferImplicitTypeWithInfo();
             options.Add(NamingStyleOptions.NamingPreferences, info);
@@ -2113,10 +2141,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 }
                 """;
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions:
-                [
-                    FeaturesResources.updating_usages_in_containing_member
-                ]);
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: [FeaturesResources.updating_usages_in_containing_member]
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2188,10 +2219,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 }
                 """;
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions:
-                [
-                    FeaturesResources.updating_usages_in_containing_member
-                ]);
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions: [FeaturesResources.updating_usages_in_containing_member]
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2349,62 +2383,140 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(5,22): error CS7036: There is no argument given that corresponds to the required parameter 'a' of 'NewStruct.NewStruct(int, int)'
-                        DiagnosticResult.CompilerError("CS7036").WithSpan(5, 22, 5, 31).WithArguments("a", "NewStruct.NewStruct(int, int)"),
+                        DiagnosticResult
+                            .CompilerError("CS7036")
+                            .WithSpan(5, 22, 5, 31)
+                            .WithArguments("a", "NewStruct.NewStruct(int, int)"),
                         // /0/Test0.cs(12,16): error CS0102: The type 'NewStruct' already contains a definition for 'a'
-                        DiagnosticResult.CompilerError("CS0102").WithSpan(12, 16, 12, 17).WithArguments("NewStruct", "a"),
+                        DiagnosticResult
+                            .CompilerError("CS0102")
+                            .WithSpan(12, 16, 12, 17)
+                            .WithArguments("NewStruct", "a"),
                         // /0/Test0.cs(14,12): error CS0171: Field 'NewStruct.a' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
-                        DiagnosticResult.CompilerError("CS0171").WithSpan(14, 12, 14, 21).WithArguments("NewStruct.a", "11.0"),
+                        DiagnosticResult
+                            .CompilerError("CS0171")
+                            .WithSpan(14, 12, 14, 21)
+                            .WithArguments("NewStruct.a", "11.0"),
                         // /0/Test0.cs(14,12): error CS0171: Field 'NewStruct.a' must be fully assigned before control is returned to the caller. Consider updating to language version '11.0' to auto-default the field.
-                        DiagnosticResult.CompilerError("CS0171").WithSpan(14, 12, 14, 21).WithArguments("NewStruct.a", "11.0"),
+                        DiagnosticResult
+                            .CompilerError("CS0171")
+                            .WithSpan(14, 12, 14, 21)
+                            .WithArguments("NewStruct.a", "11.0"),
                         // /0/Test0.cs(14,33): error CS0100: The parameter name 'a' is a duplicate
-                        DiagnosticResult.CompilerError("CS0100").WithSpan(14, 33, 14, 34).WithArguments("a"),
+                        DiagnosticResult
+                            .CompilerError("CS0100")
+                            .WithSpan(14, 33, 14, 34)
+                            .WithArguments("a"),
                         // /0/Test0.cs(16,14): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(16, 14, 16, 15).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(16, 14, 16, 15)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(16,18): error CS0229: Ambiguity between 'int a' and 'int a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(16, 18, 16, 19).WithArguments("int a", "int a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(16, 18, 16, 19)
+                            .WithArguments("int a", "int a"),
                         // /0/Test0.cs(17,14): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(17, 14, 17, 15).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(17, 14, 17, 15)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(17,18): error CS0229: Ambiguity between 'int a' and 'int a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(17, 18, 17, 19).WithArguments("int a", "int a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(17, 18, 17, 19)
+                            .WithArguments("int a", "int a"),
                         // /0/Test0.cs(23,21): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(23, 21, 23, 22).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(23, 21, 23, 22)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(23,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(23, 32, 23, 33).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(23, 32, 23, 33)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(24,21): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(24, 21, 24, 22).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(24, 21, 24, 22)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(24,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(24, 32, 24, 33).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(24, 32, 24, 33)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(30,50): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(30, 50, 30, 51).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(30, 50, 30, 51)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(31,50): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(31, 50, 31, 51).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(31, 50, 31, 51)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(35,17): error CS0177: The out parameter 'a' must be assigned to before control leaves the current method
-                        DiagnosticResult.CompilerError("CS0177").WithSpan(35, 17, 35, 28).WithArguments("a"),
+                        DiagnosticResult
+                            .CompilerError("CS0177")
+                            .WithSpan(35, 17, 35, 28)
+                            .WithArguments("a"),
                         // /0/Test0.cs(35,17): error CS0177: The out parameter 'a' must be assigned to before control leaves the current method
-                        DiagnosticResult.CompilerError("CS0177").WithSpan(35, 17, 35, 28).WithArguments("a"),
+                        DiagnosticResult
+                            .CompilerError("CS0177")
+                            .WithSpan(35, 17, 35, 28)
+                            .WithArguments("a"),
                         // /0/Test0.cs(35,48): error CS0100: The parameter name 'a' is a duplicate
-                        DiagnosticResult.CompilerError("CS0100").WithSpan(35, 48, 35, 49).WithArguments("a"),
+                        DiagnosticResult
+                            .CompilerError("CS0100")
+                            .WithSpan(35, 48, 35, 49)
+                            .WithArguments("a"),
                         // /0/Test0.cs(37,9): error CS0229: Ambiguity between 'out int a' and 'out int a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(37, 9, 37, 10).WithArguments("out int a", "out int a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(37, 9, 37, 10)
+                            .WithArguments("out int a", "out int a"),
                         // /0/Test0.cs(37,18): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(37, 18, 37, 19).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(37, 18, 37, 19)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(38,9): error CS0229: Ambiguity between 'out int a' and 'out int a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(38, 9, 38, 10).WithArguments("out int a", "out int a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(38, 9, 38, 10)
+                            .WithArguments("out int a", "out int a"),
                         // /0/Test0.cs(38,18): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(38, 18, 38, 19).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(38, 18, 38, 19)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(41,49): error CS8127: Tuple element names must be unique.
                         DiagnosticResult.CompilerError("CS8127").WithSpan(41, 49, 41, 50),
                         // /0/Test0.cs(43,23): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(43, 23, 43, 24).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(43, 23, 43, 24)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(43,32): error CS0229: Ambiguity between 'NewStruct.a' and 'NewStruct.a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(43, 32, 43, 33).WithArguments("NewStruct.a", "NewStruct.a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(43, 32, 43, 33)
+                            .WithArguments("NewStruct.a", "NewStruct.a"),
                         // /0/Test0.cs(46,59): error CS8127: Tuple element names must be unique.
                         DiagnosticResult.CompilerError("CS8127").WithSpan(46, 59, 46, 60),
                         // /0/Test0.cs(48,36): error CS0229: Ambiguity between '(int a, int a).a' and '(int a, int a).a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(48, 36, 48, 37).WithArguments("(int a, int a).a", "(int a, int a).a"),
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(48, 36, 48, 37)
+                            .WithArguments("(int a, int a).a", "(int a, int a).a"),
                         // /0/Test0.cs(48,45): error CS0229: Ambiguity between '(int a, int a).a' and '(int a, int a).a'
-                        DiagnosticResult.CompilerError("CS0229").WithSpan(48, 45, 48, 46).WithArguments("(int a, int a).a", "(int a, int a).a"),
-                    }
+                        DiagnosticResult
+                            .CompilerError("CS0229")
+                            .WithSpan(48, 45, 48, 46)
+                            .WithArguments("(int a, int a).a", "(int a, int a).a"),
+                    },
                 },
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
@@ -2799,11 +2911,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 }
                 """;
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions:
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions:
                 [
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
-                ]);
+                ]
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2879,11 +2997,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 }
                 """;
 
-            await TestAsync(text, expected, options: PreferImplicitTypeWithInfo(), testHost: host, actions:
+            await TestAsync(
+                text,
+                expected,
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions:
                 [
                     FeaturesResources.updating_usages_in_containing_member,
                     FeaturesResources.updating_usages_in_containing_type,
-                ]);
+                ]
+            );
         }
 
         #endregion
@@ -2983,12 +3107,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 """;
 
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host, actions:
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions:
                 [
                     FeaturesResources.updating_usages_in_containing_member,
-                    FeaturesResources.updating_usages_in_containing_type
-                ]);
+                    FeaturesResources.updating_usages_in_containing_type,
+                ]
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3081,12 +3211,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 """;
 
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host, actions:
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host,
+                actions:
                 [
                     FeaturesResources.updating_usages_in_containing_member,
-                    FeaturesResources.updating_usages_in_containing_type
-                ]);
+                    FeaturesResources.updating_usages_in_containing_type,
+                ]
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3184,8 +3320,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 }
                 """;
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host);
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3291,8 +3432,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 }
                 """;
             await TestAsync(
-                text, expected, index: 1, equivalenceKey: Scope.ContainingType.ToString(),
-                options: PreferImplicitTypeWithInfo(), testHost: host);
+                text,
+                expected,
+                index: 1,
+                equivalenceKey: Scope.ContainingType.ToString(),
+                options: PreferImplicitTypeWithInfo(),
+                testHost: host
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3423,22 +3569,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources =
-                    {
-                        text1,
-                        text2,
-                    }
-                },
-                FixedState =
-                {
-                    Sources =
-                    {
-                        expected1,
-                        expected2,
-                    }
-                },
+                TestState = { Sources = { text1, text2 } },
+                FixedState = { Sources = { expected1, expected2 } },
                 CodeActionIndex = 1,
                 CodeActionEquivalenceKey = Scope.ContainingType.ToString(),
                 TestHost = host,
@@ -3587,14 +3719,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 CodeActionIndex = 2,
                 CodeActionEquivalenceKey = Scope.ContainingProject.ToString(),
                 TestHost = host,
-                TestState =
-                {
-                    Sources = { text1, text2, },
-                },
-                FixedState =
-                {
-                    Sources = { expected1, expected2 },
-                },
+                TestState = { Sources = { text1, text2 } },
+                FixedState = { Sources = { expected1, expected2 } },
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();
         }
@@ -3725,7 +3851,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                         {
                             Sources = { text2 },
                             AdditionalProjectReferences = { "TestProject" },
-                        }
+                        },
                     },
                 },
                 FixedState =
@@ -3737,7 +3863,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                         {
                             Sources = { expected2 },
                             AdditionalProjectReferences = { "TestProject" },
-                        }
+                        },
                     },
                 },
                 Options = { PreferImplicitTypeWithInfo() },
@@ -3860,18 +3986,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertTupleToStruct
                 TestState =
                 {
                     Sources = { text1 },
-                    AdditionalProjects =
-                    {
-                        ["DependencyProject"] = { Sources = { text2 } }
-                    },
+                    AdditionalProjects = { ["DependencyProject"] = { Sources = { text2 } } },
                 },
                 FixedState =
                 {
                     Sources = { expected1 },
-                    AdditionalProjects =
-                    {
-                        ["DependencyProject"] = { Sources = { expected2 } }
-                    },
+                    AdditionalProjects = { ["DependencyProject"] = { Sources = { expected2 } } },
                 },
                 Options = { PreferImplicitTypeWithInfo() },
             }.RunAsync();

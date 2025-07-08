@@ -36,9 +36,13 @@ namespace Microsoft.CodeAnalysis.Text
             var contentsHash = !checksum.IsDefault ? Hash.CombineValues(checksum) : 0;
             var encodingHash = obj.Encoding != null ? obj.Encoding.GetHashCode() : 0;
 
-            return Hash.Combine(obj.Length,
-                Hash.Combine(contentsHash,
-                Hash.Combine(encodingHash, ((int)obj.ChecksumAlgorithm).GetHashCode())));
+            return Hash.Combine(
+                obj.Length,
+                Hash.Combine(
+                    contentsHash,
+                    Hash.Combine(encodingHash, ((int)obj.ChecksumAlgorithm).GetHashCode())
+                )
+            );
         }
     }
 }

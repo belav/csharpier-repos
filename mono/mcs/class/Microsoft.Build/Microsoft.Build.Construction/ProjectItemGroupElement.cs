@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,62 +34,84 @@ using Microsoft.Build.Internal;
 
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("#Items={Count} Condition={Condition} Label={Label}")]
-        public class ProjectItemGroupElement : ProjectElementContainer
+    [System.Diagnostics.DebuggerDisplayAttribute(
+        "#Items={Count} Condition={Condition} Label={Label}"
+    )]
+    public class ProjectItemGroupElement : ProjectElementContainer
+    {
+        public ProjectItemElement AddItem(string itemType, string include)
         {
-                public ProjectItemElement AddItem (string itemType, string include)
-                {
-                        return AddItem (itemType, include, null);
-                }
-
-                public ProjectItemElement AddItem (string itemType, string include,
-                                                   IEnumerable<KeyValuePair<string, string>> metadata)
-                {
-                        var item = ContainingProject.CreateItemElement (itemType, include);
-                        if (metadata != null)
-                                foreach (var data in metadata)
-                                        item.AddMetadata (data.Key, data.Value);
-                        var lastChild = LastChild;
-                        foreach (var existingItem in Items) {
-                                var compare = string.Compare (item.ItemType, existingItem.ItemType,
-                                        StringComparison.OrdinalIgnoreCase);
-                                
-                                if (compare == 0) {
-                                        if (string.Compare (item.Include, existingItem.Include,
-                                                StringComparison.OrdinalIgnoreCase) >= 0)
-                                                continue;
-                                        lastChild = existingItem.PreviousSibling;
-                                        break;
-                                }
-                                
-                                if (compare < 0) {
-                                        lastChild = existingItem.PreviousSibling;
-                                        break;
-                                }
-                        }
-                        InsertAfterChild (item, lastChild);
-                        return item;
-                }
-
-                internal ProjectItemGroupElement (ProjectRootElement containingProject)
-                {
-                        ContainingProject = containingProject;
-                }
-
-                public ICollection<ProjectItemElement> Items {
-                        get { return new CollectionFromEnumerable<ProjectItemElement> (
-                                new FilteredEnumerable<ProjectItemElement> (Children)); }
-                }
-
-                internal override string XmlName {
-                        get { return "ItemGroup"; }
-                }
-
-                internal override ProjectElement LoadChildElement (XmlReader reader)
-                {
-                        var item = ContainingProject.CreateItemElement (reader.LocalName);
-                        AppendChild (item);
-                        return item;
-                }
+            return AddItem(itemType, include, null);
         }
+
+        public ProjectItemElement AddItem(
+            string itemType,
+            string include,
+            IEnumerable<KeyValuePair<string, string>> metadata
+        )
+        {
+            var item = ContainingProject.CreateItemElement(itemType, include);
+            if (metadata != null)
+                foreach (var data in metadata)
+                    item.AddMetadata(data.Key, data.Value);
+            var lastChild = LastChild;
+            foreach (var existingItem in Items)
+            {
+                var compare = string.Compare(
+                    item.ItemType,
+                    existingItem.ItemType,
+                    StringComparison.OrdinalIgnoreCase
+                );
+
+                if (compare == 0)
+                {
+                    if (
+                        string.Compare(
+                            item.Include,
+                            existingItem.Include,
+                            StringComparison.OrdinalIgnoreCase
+                        ) >= 0
+                    )
+                        continue;
+                    lastChild = existingItem.PreviousSibling;
+                    break;
+                }
+
+                if (compare < 0)
+                {
+                    lastChild = existingItem.PreviousSibling;
+                    break;
+                }
+            }
+            InsertAfterChild(item, lastChild);
+            return item;
+        }
+
+        internal ProjectItemGroupElement(ProjectRootElement containingProject)
+        {
+            ContainingProject = containingProject;
+        }
+
+        public ICollection<ProjectItemElement> Items
+        {
+            get
+            {
+                return new CollectionFromEnumerable<ProjectItemElement>(
+                    new FilteredEnumerable<ProjectItemElement>(Children)
+                );
+            }
+        }
+
+        internal override string XmlName
+        {
+            get { return "ItemGroup"; }
+        }
+
+        internal override ProjectElement LoadChildElement(XmlReader reader)
+        {
+            var item = ContainingProject.CreateItemElement(reader.LocalName);
+            AppendChild(item);
+            return item;
+        }
+    }
 }

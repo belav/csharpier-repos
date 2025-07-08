@@ -5,36 +5,44 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Xml.Schema;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.IO;
 using System.Security;
-using System.Security.Policy;
 using System.Security.Permissions;
+using System.Security.Policy;
 using System.Text;
 using System.Xml;
+using System.Xml.Schema;
 using MS.Internal.Xml.Cache;
 using MS.Internal.Xml.XPath;
 
-namespace System.Xml.XPath {
+namespace System.Xml.XPath
+{
     // Provides a navigation interface API using XPath data model.
     [DebuggerDisplay("{debuggerDisplayProxy}")]
 #if CONTRACTS_FULL
     [ContractClass(typeof(XPathNavigatorContract))]
 #endif
-    public abstract class XPathNavigator : XPathItem, ICloneable, IXPathNavigable, IXmlNamespaceResolver {
-        internal static readonly XPathNavigatorKeyComparer comparer = new XPathNavigatorKeyComparer();
+    public abstract class XPathNavigator
+        : XPathItem,
+            ICloneable,
+            IXPathNavigable,
+            IXmlNamespaceResolver
+    {
+        internal static readonly XPathNavigatorKeyComparer comparer =
+            new XPathNavigatorKeyComparer();
 
         //-----------------------------------------------
         // Object
         //-----------------------------------------------
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return Value;
         }
 
@@ -42,18 +50,24 @@ namespace System.Xml.XPath {
         // XPathItem
         //-----------------------------------------------
 
-        public override sealed bool IsNode {
+        public override sealed bool IsNode
+        {
             get { return true; }
         }
 
-        public override XmlSchemaType XmlType {
-            get {
+        public override XmlSchemaType XmlType
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
-                        XmlSchemaType memberType = schemaInfo.MemberType; 
-                        if (memberType != null) {
-                            return memberType; 
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
+                        XmlSchemaType memberType = schemaInfo.MemberType;
+                        if (memberType != null)
+                        {
+                            return memberType;
                         }
                         return schemaInfo.SchemaType;
                     }
@@ -62,94 +76,130 @@ namespace System.Xml.XPath {
             }
         }
 
-        public virtual void SetValue(string value) {
+        public virtual void SetValue(string value)
+        {
             throw new NotSupportedException();
         }
 
-        public override object TypedValue {
-            get {
+        public override object TypedValue
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ChangeType(Value, datatype.ValueType, this);
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ChangeType(
+                                    Value,
+                                    datatype.ValueType,
+                                    this
+                                );
                             }
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ChangeType(datatype.ParseValue(Value, NameTable, this), datatype.ValueType, this);
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ChangeType(
+                                    datatype.ParseValue(Value, NameTable, this),
+                                    datatype.ValueType,
+                                    this
+                                );
                             }
                         }
                     }
                 }
-                return Value; 
+                return Value;
             }
         }
 
-        public virtual void SetTypedValue(object typedValue) {
-            if (typedValue == null) {
+        public virtual void SetTypedValue(object typedValue)
+        {
+            if (typedValue == null)
+            {
                 throw new ArgumentNullException("typedValue");
             }
-            switch (NodeType) {
+            switch (NodeType)
+            {
                 case XPathNodeType.Element:
                 case XPathNodeType.Attribute:
                     break;
                 default:
                     throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
-            string value = null; 
+            string value = null;
             IXmlSchemaInfo schemaInfo = SchemaInfo;
-            if (schemaInfo != null) {
+            if (schemaInfo != null)
+            {
                 XmlSchemaType schemaType = schemaInfo.SchemaType;
-                if (schemaType != null) {
+                if (schemaType != null)
+                {
                     value = schemaType.ValueConverter.ToString(typedValue, this);
                     XmlSchemaDatatype datatype = schemaType.Datatype;
-                    if (datatype != null) {
+                    if (datatype != null)
+                    {
                         datatype.ParseValue(value, NameTable, this);
                     }
                 }
             }
-            if (value == null) {
+            if (value == null)
+            {
                 value = XmlUntypedConverter.Untyped.ToString(typedValue, this);
             }
             SetValue(value);
         }
 
-        public override Type ValueType {
-            get {
+        public override Type ValueType
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
+                            if (datatype != null)
+                            {
                                 return datatype.ValueType;
                             }
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
+                            if (datatype != null)
+                            {
                                 return datatype.ValueType;
                             }
                         }
@@ -159,27 +209,38 @@ namespace System.Xml.XPath {
             }
         }
 
-        public override bool ValueAsBoolean {
-            get {
+        public override bool ValueAsBoolean
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             return schemaType.ValueConverter.ToBoolean(Value);
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ToBoolean(datatype.ParseValue(Value, NameTable, this));
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ToBoolean(
+                                    datatype.ParseValue(Value, NameTable, this)
+                                );
                             }
                         }
                     }
@@ -188,27 +249,38 @@ namespace System.Xml.XPath {
             }
         }
 
-        public override DateTime ValueAsDateTime {
-            get {
+        public override DateTime ValueAsDateTime
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             return schemaType.ValueConverter.ToDateTime(Value);
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ToDateTime(datatype.ParseValue(Value, NameTable, this));
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ToDateTime(
+                                    datatype.ParseValue(Value, NameTable, this)
+                                );
                             }
                         }
                     }
@@ -217,27 +289,38 @@ namespace System.Xml.XPath {
             }
         }
 
-        public override double ValueAsDouble {
-            get {
+        public override double ValueAsDouble
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             return schemaType.ValueConverter.ToDouble(Value);
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ToDouble(datatype.ParseValue(Value, NameTable, this));
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ToDouble(
+                                    datatype.ParseValue(Value, NameTable, this)
+                                );
                             }
                         }
                     }
@@ -246,27 +329,38 @@ namespace System.Xml.XPath {
             }
         }
 
-        public override int ValueAsInt {
-            get {
+        public override int ValueAsInt
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             return schemaType.ValueConverter.ToInt32(Value);
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ToInt32(datatype.ParseValue(Value, NameTable, this));
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ToInt32(
+                                    datatype.ParseValue(Value, NameTable, this)
+                                );
                             }
                         }
                     }
@@ -275,27 +369,38 @@ namespace System.Xml.XPath {
             }
         }
 
-        public override long ValueAsLong {
-            get {
+        public override long ValueAsLong
+        {
+            get
+            {
                 IXmlSchemaInfo schemaInfo = SchemaInfo;
                 XmlSchemaType schemaType;
                 XmlSchemaDatatype datatype;
-                if (schemaInfo != null) {
-                    if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+                if (schemaInfo != null)
+                {
+                    if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                    {
                         schemaType = schemaInfo.MemberType;
-                        if (schemaType == null) {
+                        if (schemaType == null)
+                        {
                             schemaType = schemaInfo.SchemaType;
                         }
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             return schemaType.ValueConverter.ToInt64(Value);
                         }
                     }
-                    else {
+                    else
+                    {
                         schemaType = schemaInfo.SchemaType;
-                        if (schemaType != null) {
+                        if (schemaType != null)
+                        {
                             datatype = schemaType.Datatype;
-                            if (datatype != null) {
-                                return schemaType.ValueConverter.ToInt64(datatype.ParseValue(Value, NameTable, this));
+                            if (datatype != null)
+                            {
+                                return schemaType.ValueConverter.ToInt64(
+                                    datatype.ParseValue(Value, NameTable, this)
+                                );
                             }
                         }
                     }
@@ -304,29 +409,42 @@ namespace System.Xml.XPath {
             }
         }
 
-        public override object ValueAs(Type returnType, IXmlNamespaceResolver nsResolver) {
-            if (nsResolver == null) {
+        public override object ValueAs(Type returnType, IXmlNamespaceResolver nsResolver)
+        {
+            if (nsResolver == null)
+            {
                 nsResolver = this;
             }
             IXmlSchemaInfo schemaInfo = SchemaInfo;
             XmlSchemaType schemaType;
             XmlSchemaDatatype datatype;
-            if (schemaInfo != null) {
-                if (schemaInfo.Validity == XmlSchemaValidity.Valid) {
+            if (schemaInfo != null)
+            {
+                if (schemaInfo.Validity == XmlSchemaValidity.Valid)
+                {
                     schemaType = schemaInfo.MemberType;
-                    if (schemaType == null) {
+                    if (schemaType == null)
+                    {
                         schemaType = schemaInfo.SchemaType;
                     }
-                    if (schemaType != null) {
+                    if (schemaType != null)
+                    {
                         return schemaType.ValueConverter.ChangeType(Value, returnType, nsResolver);
                     }
                 }
-                else {
+                else
+                {
                     schemaType = schemaInfo.SchemaType;
-                    if (schemaType != null) {
+                    if (schemaType != null)
+                    {
                         datatype = schemaType.Datatype;
-                        if (datatype != null) {
-                            return schemaType.ValueConverter.ChangeType(datatype.ParseValue(Value, NameTable, nsResolver), returnType, nsResolver);
+                        if (datatype != null)
+                        {
+                            return schemaType.ValueConverter.ChangeType(
+                                datatype.ParseValue(Value, NameTable, nsResolver),
+                                returnType,
+                                nsResolver
+                            );
                         }
                     }
                 }
@@ -338,7 +456,8 @@ namespace System.Xml.XPath {
         // ICloneable
         //-----------------------------------------------
 
-        object ICloneable.Clone() {
+        object ICloneable.Clone()
+        {
             return Clone();
         }
 
@@ -346,7 +465,8 @@ namespace System.Xml.XPath {
         // IXPathNavigable
         //-----------------------------------------------
 
-        public virtual XPathNavigator CreateNavigator() {
+        public virtual XPathNavigator CreateNavigator()
+        {
             return Clone();
         }
 
@@ -356,18 +476,21 @@ namespace System.Xml.XPath {
 
         public abstract XmlNameTable NameTable { get; }
 
-        public virtual string LookupNamespace(string prefix) {
+        public virtual string LookupNamespace(string prefix)
+        {
             if (prefix == null)
                 return null;
 
-            if (NodeType != XPathNodeType.Element) {
+            if (NodeType != XPathNodeType.Element)
+            {
                 XPathNavigator navSave = Clone();
 
                 // If current item is not an element, then try parent
                 if (navSave.MoveToParent())
                     return navSave.LookupNamespace(prefix);
             }
-            else if (MoveToNamespace(prefix)) {
+            else if (MoveToNamespace(prefix))
+            {
                 string namespaceURI = Value;
                 MoveToParent();
                 return namespaceURI;
@@ -384,25 +507,29 @@ namespace System.Xml.XPath {
             return null;
         }
 
-        public virtual string LookupPrefix(string namespaceURI) {
+        public virtual string LookupPrefix(string namespaceURI)
+        {
             if (namespaceURI == null)
                 return null;
 
             XPathNavigator navClone = Clone();
 
-            if (NodeType != XPathNodeType.Element) {
+            if (NodeType != XPathNodeType.Element)
+            {
                 // If current item is not an element, then try parent
                 if (navClone.MoveToParent())
                     return navClone.LookupPrefix(namespaceURI);
             }
-            else {
-                if (navClone.MoveToFirstNamespace(XPathNamespaceScope.All)) {
+            else
+            {
+                if (navClone.MoveToFirstNamespace(XPathNamespaceScope.All))
+                {
                     // Loop until a matching namespace is found
-                    do {
+                    do
+                    {
                         if (namespaceURI == navClone.Value)
                             return navClone.LocalName;
-                    }
-                    while (navClone.MoveToNextNamespace(XPathNamespaceScope.All));
+                    } while (navClone.MoveToNextNamespace(XPathNamespaceScope.All));
                 }
             }
 
@@ -417,12 +544,18 @@ namespace System.Xml.XPath {
             return null;
         }
 
-// This pragma disables a warning that the return type is not CLS-compliant, but generics are part of CLS in Whidbey. 
+        // This pragma disables a warning that the return type is not CLS-compliant, but generics are part of CLS in Whidbey.
 #pragma warning disable 3002
-        public virtual IDictionary<string,string> GetNamespacesInScope(XmlNamespaceScope scope) {
+        public virtual IDictionary<string, string> GetNamespacesInScope(XmlNamespaceScope scope)
+        {
 #pragma warning restore 3002
             XPathNodeType nt = NodeType;
-            if ((nt != XPathNodeType.Element && scope != XmlNamespaceScope.Local) || nt == XPathNodeType.Attribute || nt == XPathNodeType.Namespace) {
+            if (
+                (nt != XPathNodeType.Element && scope != XmlNamespaceScope.Local)
+                || nt == XPathNodeType.Attribute
+                || nt == XPathNodeType.Namespace
+            )
+            {
                 XPathNavigator navSave = Clone();
 
                 // If current item is not an element, then try parent
@@ -430,23 +563,24 @@ namespace System.Xml.XPath {
                     return navSave.GetNamespacesInScope(scope);
             }
 
-            Dictionary<string,string> dict = new Dictionary<string,string>();
+            Dictionary<string, string> dict = new Dictionary<string, string>();
 
             // "xml" prefix always in scope
             if (scope == XmlNamespaceScope.All)
                 dict["xml"] = XmlReservedNs.NsXml;
 
             // Now add all in-scope namespaces
-            if (MoveToFirstNamespace((XPathNamespaceScope) scope)) {
-                do {
+            if (MoveToFirstNamespace((XPathNamespaceScope)scope))
+            {
+                do
+                {
                     string prefix = LocalName;
                     string ns = Value;
 
                     // Exclude xmlns="" declarations unless scope = Local
                     if (prefix.Length != 0 || ns.Length != 0 || scope == XmlNamespaceScope.Local)
                         dict[prefix] = ns;
-                }
-                while (MoveToNextNamespace((XPathNamespaceScope) scope));
+                } while (MoveToNextNamespace((XPathNamespaceScope)scope));
 
                 MoveToParent();
             }
@@ -459,9 +593,10 @@ namespace System.Xml.XPath {
         //-----------------------------------------------
 
         // Returns an object of type IKeyComparer. Using this the navigators can be hashed
-        // on the basis of actual position it represents rather than the clr reference of 
+        // on the basis of actual position it represents rather than the clr reference of
         // the navigator object.
-        public static IEqualityComparer NavigatorComparer {
+        public static IEqualityComparer NavigatorComparer
+        {
             get { return comparer; }
         }
 
@@ -481,42 +616,50 @@ namespace System.Xml.XPath {
 
         public abstract bool IsEmptyElement { get; }
 
-        public virtual string XmlLang {
-            get {
+        public virtual string XmlLang
+        {
+            get
+            {
                 XPathNavigator navClone = Clone();
-                do {
+                do
+                {
                     if (navClone.MoveToAttribute("lang", XmlReservedNs.NsXml))
                         return navClone.Value;
-                }
-                while (navClone.MoveToParent());
+                } while (navClone.MoveToParent());
 
                 return string.Empty;
             }
         }
 
-        public virtual XmlReader ReadSubtree() {
-            switch (NodeType) {
+        public virtual XmlReader ReadSubtree()
+        {
+            switch (NodeType)
+            {
                 case XPathNodeType.Root:
                 case XPathNodeType.Element:
                     break;
                 default:
                     throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
-            return CreateReader(); 
+            return CreateReader();
         }
 
-        public virtual void WriteSubtree(XmlWriter writer) {
+        public virtual void WriteSubtree(XmlWriter writer)
+        {
             if (null == writer)
                 throw new ArgumentNullException("writer");
             writer.WriteNode(this, true);
         }
 
-        public virtual object UnderlyingObject {
+        public virtual object UnderlyingObject
+        {
             get { return null; }
         }
 
-        public virtual bool HasAttributes {
-            get {
+        public virtual bool HasAttributes
+        {
+            get
+            {
                 if (!MoveToFirstAttribute())
                     return false;
 
@@ -525,7 +668,8 @@ namespace System.Xml.XPath {
             }
         }
 
-        public virtual string GetAttribute(string localName, string namespaceURI) {
+        public virtual string GetAttribute(string localName, string namespaceURI)
+        {
             string value;
 
             if (!MoveToAttribute(localName, namespaceURI))
@@ -537,13 +681,15 @@ namespace System.Xml.XPath {
             return value;
         }
 
-        public virtual bool MoveToAttribute(string localName, string namespaceURI) {
-            if (MoveToFirstAttribute()) {
-                do {
+        public virtual bool MoveToAttribute(string localName, string namespaceURI)
+        {
+            if (MoveToFirstAttribute())
+            {
+                do
+                {
                     if (localName == LocalName && namespaceURI == NamespaceURI)
                         return true;
-                }
-                while (MoveToNextAttribute());
+                } while (MoveToNextAttribute());
 
                 MoveToParent();
             }
@@ -555,10 +701,12 @@ namespace System.Xml.XPath {
 
         public abstract bool MoveToNextAttribute();
 
-        public virtual string GetNamespace(string name) {
+        public virtual string GetNamespace(string name)
+        {
             string value;
 
-            if (!MoveToNamespace(name)) {
+            if (!MoveToNamespace(name))
+            {
                 if (name == "xml")
                     return XmlReservedNs.NsXml;
                 if (name == "xmlns")
@@ -572,14 +720,15 @@ namespace System.Xml.XPath {
             return value;
         }
 
-        public virtual bool MoveToNamespace(string name) {
-            if (MoveToFirstNamespace(XPathNamespaceScope.All)) {
-
-                do {
+        public virtual bool MoveToNamespace(string name)
+        {
+            if (MoveToFirstNamespace(XPathNamespaceScope.All))
+            {
+                do
+                {
                     if (name == LocalName)
                         return true;
-                }
-                while (MoveToNextNamespace(XPathNamespaceScope.All));
+                } while (MoveToNextNamespace(XPathNamespaceScope.All));
 
                 MoveToParent();
             }
@@ -591,16 +740,24 @@ namespace System.Xml.XPath {
 
         public abstract bool MoveToNextNamespace(XPathNamespaceScope namespaceScope);
 
-        public bool MoveToFirstNamespace() { return MoveToFirstNamespace(XPathNamespaceScope.All); }
+        public bool MoveToFirstNamespace()
+        {
+            return MoveToFirstNamespace(XPathNamespaceScope.All);
+        }
 
-        public bool MoveToNextNamespace() { return MoveToNextNamespace(XPathNamespaceScope.All); }
+        public bool MoveToNextNamespace()
+        {
+            return MoveToNextNamespace(XPathNamespaceScope.All);
+        }
 
         public abstract bool MoveToNext();
 
         public abstract bool MoveToPrevious();
 
-        public virtual bool MoveToFirst() {
-            switch (NodeType) {
+        public virtual bool MoveToFirst()
+        {
+            switch (NodeType)
+            {
                 case XPathNodeType.Attribute:
                 case XPathNodeType.Namespace:
                     // MoveToFirst should only succeed for content-typed nodes
@@ -617,7 +774,8 @@ namespace System.Xml.XPath {
 
         public abstract bool MoveToParent();
 
-        public virtual void MoveToRoot() {
+        public virtual void MoveToRoot()
+        {
             while (MoveToParent())
                 ;
         }
@@ -626,27 +784,35 @@ namespace System.Xml.XPath {
 
         public abstract bool MoveToId(string id);
 
-        public virtual bool MoveToChild(string localName, string namespaceURI) {
-            if (MoveToFirstChild()) {
-                do {
-                    if (NodeType == XPathNodeType.Element && localName == LocalName && namespaceURI == NamespaceURI)
+        public virtual bool MoveToChild(string localName, string namespaceURI)
+        {
+            if (MoveToFirstChild())
+            {
+                do
+                {
+                    if (
+                        NodeType == XPathNodeType.Element
+                        && localName == LocalName
+                        && namespaceURI == NamespaceURI
+                    )
                         return true;
-                }
-                while (MoveToNext());
+                } while (MoveToNext());
                 MoveToParent();
             }
 
             return false;
         }
 
-        public virtual bool MoveToChild(XPathNodeType type) {
-            if (MoveToFirstChild()) {
+        public virtual bool MoveToChild(XPathNodeType type)
+        {
+            if (MoveToFirstChild())
+            {
                 int mask = GetContentKindMask(type);
-                do {
-                    if (((1 << (int) NodeType) & mask) != 0)
+                do
+                {
+                    if (((1 << (int)NodeType) & mask) != 0)
                         return true;
-                }
-                while (MoveToNext());
+                } while (MoveToNext());
 
                 MoveToParent();
             }
@@ -654,42 +820,56 @@ namespace System.Xml.XPath {
             return false;
         }
 
-        public virtual bool MoveToFollowing(string localName, string namespaceURI) {
+        public virtual bool MoveToFollowing(string localName, string namespaceURI)
+        {
             return MoveToFollowing(localName, namespaceURI, null);
         }
 
-        public virtual bool MoveToFollowing(string localName, string namespaceURI, XPathNavigator end) {
+        public virtual bool MoveToFollowing(
+            string localName,
+            string namespaceURI,
+            XPathNavigator end
+        )
+        {
             XPathNavigator navSave = Clone();
 
-            if (end != null) {
-                switch (end.NodeType) {
+            if (end != null)
+            {
+                switch (end.NodeType)
+                {
                     case XPathNodeType.Attribute:
                     case XPathNodeType.Namespace:
-                        // Scan until we come to the next content-typed node 
+                        // Scan until we come to the next content-typed node
                         // after the attribute or namespace node
                         end = end.Clone();
                         end.MoveToNonDescendant();
                         break;
                 }
             }
-            switch (NodeType) {
+            switch (NodeType)
+            {
                 case XPathNodeType.Attribute:
                 case XPathNodeType.Namespace:
-                    if (!MoveToParent()) {
+                    if (!MoveToParent())
+                    {
                         // Restore previous position and return false
                         // MoveTo(navSave);
                         return false;
                     }
                     break;
             }
-            do {
-                if (!MoveToFirstChild()) {
+            do
+            {
+                if (!MoveToFirstChild())
+                {
                     // Look for next sibling
-                    while (true) {
+                    while (true)
+                    {
                         if (MoveToNext())
                             break;
 
-                        if (!MoveToParent()) {
+                        if (!MoveToParent())
+                        {
                             // Restore previous position and return false
                             MoveTo(navSave);
                             return false;
@@ -698,56 +878,68 @@ namespace System.Xml.XPath {
                 }
 
                 // Have we reached the end of the scan?
-                if (end != null && IsSamePosition(end)) {
+                if (end != null && IsSamePosition(end))
+                {
                     // Restore previous position and return false
                     MoveTo(navSave);
                     return false;
                 }
-            }
-            while (NodeType != XPathNodeType.Element 
-                   || localName != LocalName 
-                   || namespaceURI != NamespaceURI);
+            } while (
+                NodeType != XPathNodeType.Element
+                || localName != LocalName
+                || namespaceURI != NamespaceURI
+            );
 
             return true;
         }
 
-        public virtual bool MoveToFollowing(XPathNodeType type) {
+        public virtual bool MoveToFollowing(XPathNodeType type)
+        {
             return MoveToFollowing(type, null);
         }
 
-        public virtual bool MoveToFollowing(XPathNodeType type, XPathNavigator end) {
+        public virtual bool MoveToFollowing(XPathNodeType type, XPathNavigator end)
+        {
             XPathNavigator navSave = Clone();
             int mask = GetContentKindMask(type);
 
-            if (end != null) {
-                switch (end.NodeType) {
+            if (end != null)
+            {
+                switch (end.NodeType)
+                {
                     case XPathNodeType.Attribute:
                     case XPathNodeType.Namespace:
-                        // Scan until we come to the next content-typed node 
+                        // Scan until we come to the next content-typed node
                         // after the attribute or namespace node
                         end = end.Clone();
                         end.MoveToNonDescendant();
                         break;
                 }
             }
-            switch (NodeType) {
+            switch (NodeType)
+            {
                 case XPathNodeType.Attribute:
                 case XPathNodeType.Namespace:
-                    if (!MoveToParent()) {
+                    if (!MoveToParent())
+                    {
                         // Restore previous position and return false
                         // MoveTo(navSave);
                         return false;
                     }
                     break;
             }
-            do {
-                if (!MoveToFirstChild()) {
+            do
+            {
+                if (!MoveToFirstChild())
+                {
                     // Look for next sibling
-                    while (true) {
+                    while (true)
+                    {
                         if (MoveToNext())
                             break;
 
-                        if (!MoveToParent()) {
+                        if (!MoveToParent())
+                        {
                             // Restore previous position and return false
                             MoveTo(navSave);
                             return false;
@@ -756,34 +948,42 @@ namespace System.Xml.XPath {
                 }
 
                 // Have we reached the end of the scan?
-                if (end != null && IsSamePosition(end)) {
+                if (end != null && IsSamePosition(end))
+                {
                     // Restore previous position and return false
                     MoveTo(navSave);
                     return false;
                 }
-            }
-            while (((1 << (int) NodeType) & mask) == 0);
+            } while (((1 << (int)NodeType) & mask) == 0);
 
             return true;
         }
 
-        public virtual bool MoveToNext(string localName, string namespaceURI) {
+        public virtual bool MoveToNext(string localName, string namespaceURI)
+        {
             XPathNavigator navClone = Clone();
 
-            while (MoveToNext()) {
-                if (NodeType == XPathNodeType.Element && localName == LocalName && namespaceURI == NamespaceURI)
+            while (MoveToNext())
+            {
+                if (
+                    NodeType == XPathNodeType.Element
+                    && localName == LocalName
+                    && namespaceURI == NamespaceURI
+                )
                     return true;
             }
             MoveTo(navClone);
             return false;
         }
 
-        public virtual bool MoveToNext(XPathNodeType type) {
+        public virtual bool MoveToNext(XPathNodeType type)
+        {
             XPathNavigator navClone = Clone();
             int mask = GetContentKindMask(type);
 
-            while (MoveToNext()) {
-                if (((1 << (int) NodeType) & mask) != 0)
+            while (MoveToNext())
+            {
+                if (((1 << (int)NodeType) & mask) != 0)
                     return true;
             }
 
@@ -791,9 +991,12 @@ namespace System.Xml.XPath {
             return false;
         }
 
-        public virtual bool HasChildren {
-            get {
-                if (MoveToFirstChild()) {
+        public virtual bool HasChildren
+        {
+            get
+            {
+                if (MoveToFirstChild())
+                {
                     MoveToParent();
                     return true;
                 }
@@ -803,58 +1006,73 @@ namespace System.Xml.XPath {
 
         public abstract bool IsSamePosition(XPathNavigator other);
 
-        public virtual bool IsDescendant(XPathNavigator nav) {
-            if (nav != null){
+        public virtual bool IsDescendant(XPathNavigator nav)
+        {
+            if (nav != null)
+            {
                 nav = nav.Clone();
-                while ( nav.MoveToParent() )
+                while (nav.MoveToParent())
                     if (nav.IsSamePosition(this))
                         return true;
             }
             return false;
         }
 
-        public virtual XmlNodeOrder ComparePosition( XPathNavigator nav ) {
-            if (nav == null) {
+        public virtual XmlNodeOrder ComparePosition(XPathNavigator nav)
+        {
+            if (nav == null)
+            {
                 return XmlNodeOrder.Unknown;
             }
 
-            if( IsSamePosition( nav ) )
+            if (IsSamePosition(nav))
                 return XmlNodeOrder.Same;
 
             XPathNavigator n1 = this.Clone();
             XPathNavigator n2 = nav.Clone();
 
-            int depth1 = GetDepth( n1.Clone() );
-            int depth2 = GetDepth( n2.Clone() );
+            int depth1 = GetDepth(n1.Clone());
+            int depth2 = GetDepth(n2.Clone());
 
-            if( depth1 > depth2 ) {
-                while( depth1 > depth2 ) {
+            if (depth1 > depth2)
+            {
+                while (depth1 > depth2)
+                {
                     n1.MoveToParent();
                     depth1--;
                 }
-                if( n1.IsSamePosition(n2) )
+                if (n1.IsSamePosition(n2))
                     return XmlNodeOrder.After;
             }
 
-            if( depth2 > depth1 ) {
-                while( depth2 > depth1 ) {
+            if (depth2 > depth1)
+            {
+                while (depth2 > depth1)
+                {
                     n2.MoveToParent();
-                    depth2 --;
+                    depth2--;
                 }
-                if( n1.IsSamePosition(n2) )
+                if (n1.IsSamePosition(n2))
                     return XmlNodeOrder.Before;
             }
 
             XPathNavigator parent1 = n1.Clone();
             XPathNavigator parent2 = n2.Clone();
 
-            while( true ) {
-                if( !parent1.MoveToParent() || !parent2.MoveToParent() )
+            while (true)
+            {
+                if (!parent1.MoveToParent() || !parent2.MoveToParent())
                     return XmlNodeOrder.Unknown;
 
-                if( parent1.IsSamePosition( parent2 ) ) {
-                    if (n1.GetType().ToString() != "Microsoft.VisualStudio.Modeling.StoreNavigator") {
-                        Debug.Assert( CompareSiblings(n1.Clone(), n2.Clone()) != CompareSiblings(n2.Clone(), n1.Clone()), "IsSamePosition() on custom navigator returns incosistent results" );
+                if (parent1.IsSamePosition(parent2))
+                {
+                    if (n1.GetType().ToString() != "Microsoft.VisualStudio.Modeling.StoreNavigator")
+                    {
+                        Debug.Assert(
+                            CompareSiblings(n1.Clone(), n2.Clone())
+                                != CompareSiblings(n2.Clone(), n1.Clone()),
+                            "IsSamePosition() on custom navigator returns incosistent results"
+                        );
                     }
                     return CompareSiblings(n1, n2);
                 }
@@ -864,286 +1082,390 @@ namespace System.Xml.XPath {
             }
         }
 
-        public virtual IXmlSchemaInfo SchemaInfo {
+        public virtual IXmlSchemaInfo SchemaInfo
+        {
             get { return this as IXmlSchemaInfo; }
         }
 
-        public virtual bool CheckValidity(XmlSchemaSet schemas, ValidationEventHandler validationEventHandler) {
+        public virtual bool CheckValidity(
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEventHandler
+        )
+        {
             IXmlSchemaInfo schemaInfo;
             XmlSchemaType schemaType = null;
             XmlSchemaElement schemaElement = null;
             XmlSchemaAttribute schemaAttribute = null;
 
-            switch (NodeType) {
+            switch (NodeType)
+            {
                 case XPathNodeType.Root:
-                    if (schemas == null) {
-                        throw new InvalidOperationException(Res.GetString(Res.XPathDocument_MissingSchemas));
+                    if (schemas == null)
+                    {
+                        throw new InvalidOperationException(
+                            Res.GetString(Res.XPathDocument_MissingSchemas)
+                        );
                     }
                     schemaType = null;
                     break;
                 case XPathNodeType.Element:
-                    if (schemas == null) {
-                        throw new InvalidOperationException(Res.GetString(Res.XPathDocument_MissingSchemas)); 
+                    if (schemas == null)
+                    {
+                        throw new InvalidOperationException(
+                            Res.GetString(Res.XPathDocument_MissingSchemas)
+                        );
                     }
                     schemaInfo = SchemaInfo;
-                    if (schemaInfo != null) {
+                    if (schemaInfo != null)
+                    {
                         schemaType = schemaInfo.SchemaType;
                         schemaElement = schemaInfo.SchemaElement;
                     }
-                    if (schemaType == null
-                        && schemaElement == null) {
-                        throw new InvalidOperationException(Res.GetString(Res.XPathDocument_NotEnoughSchemaInfo, null));
+                    if (schemaType == null && schemaElement == null)
+                    {
+                        throw new InvalidOperationException(
+                            Res.GetString(Res.XPathDocument_NotEnoughSchemaInfo, null)
+                        );
                     }
                     break;
                 case XPathNodeType.Attribute:
-                    if (schemas == null) {
-                        throw new InvalidOperationException(Res.GetString(Res.XPathDocument_MissingSchemas)); 
+                    if (schemas == null)
+                    {
+                        throw new InvalidOperationException(
+                            Res.GetString(Res.XPathDocument_MissingSchemas)
+                        );
                     }
                     schemaInfo = SchemaInfo;
-                    if (schemaInfo != null) {
+                    if (schemaInfo != null)
+                    {
                         schemaType = schemaInfo.SchemaType;
                         schemaAttribute = schemaInfo.SchemaAttribute;
                     }
-                    if (schemaType == null
-                        && schemaAttribute == null) {
-                        throw new InvalidOperationException(Res.GetString(Res.XPathDocument_NotEnoughSchemaInfo, null));
+                    if (schemaType == null && schemaAttribute == null)
+                    {
+                        throw new InvalidOperationException(
+                            Res.GetString(Res.XPathDocument_NotEnoughSchemaInfo, null)
+                        );
                     }
                     break;
                 default:
-                    throw new InvalidOperationException(Res.GetString(Res.XPathDocument_ValidateInvalidNodeType, null));
-
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.XPathDocument_ValidateInvalidNodeType, null)
+                    );
             }
-           
-            Debug.Assert( schemaType != null  || this.NodeType == XPathNodeType.Root, "schemaType != null  || this.NodeType == XPathNodeType.Root" );
+
+            Debug.Assert(
+                schemaType != null || this.NodeType == XPathNodeType.Root,
+                "schemaType != null  || this.NodeType == XPathNodeType.Root"
+            );
 
             XmlReader reader = CreateReader();
 
-            CheckValidityHelper validityTracker = new CheckValidityHelper( validationEventHandler, reader as XPathNavigatorReader );
-            validationEventHandler = new ValidationEventHandler( validityTracker.ValidationCallback );
-            XmlReader validatingReader = GetValidatingReader( reader, schemas, validationEventHandler, schemaType, schemaElement, schemaAttribute );
+            CheckValidityHelper validityTracker = new CheckValidityHelper(
+                validationEventHandler,
+                reader as XPathNavigatorReader
+            );
+            validationEventHandler = new ValidationEventHandler(validityTracker.ValidationCallback);
+            XmlReader validatingReader = GetValidatingReader(
+                reader,
+                schemas,
+                validationEventHandler,
+                schemaType,
+                schemaElement,
+                schemaAttribute
+            );
 
-            while( validatingReader.Read() )
+            while (validatingReader.Read())
                 ;
 
             return validityTracker.IsValid;
         }
 
-        private XmlReader GetValidatingReader( XmlReader reader, XmlSchemaSet schemas, ValidationEventHandler validationEvent, XmlSchemaType schemaType, XmlSchemaElement schemaElement, XmlSchemaAttribute schemaAttribute ) {
-            if (schemaAttribute != null) {
+        private XmlReader GetValidatingReader(
+            XmlReader reader,
+            XmlSchemaSet schemas,
+            ValidationEventHandler validationEvent,
+            XmlSchemaType schemaType,
+            XmlSchemaElement schemaElement,
+            XmlSchemaAttribute schemaAttribute
+        )
+        {
+            if (schemaAttribute != null)
+            {
                 return schemaAttribute.Validate(reader, null, schemas, validationEvent);
             }
-            else if (schemaElement != null) {
+            else if (schemaElement != null)
+            {
                 return schemaElement.Validate(reader, null, schemas, validationEvent);
             }
-            else if (schemaType != null) {
+            else if (schemaType != null)
+            {
                 return schemaType.Validate(reader, null, schemas, validationEvent);
             }
-            Debug.Assert( schemas != null, "schemas != null" );
+            Debug.Assert(schemas != null, "schemas != null");
             XmlReaderSettings readerSettings = new XmlReaderSettings();
             readerSettings.ConformanceLevel = ConformanceLevel.Auto;
             readerSettings.ValidationType = ValidationType.Schema;
             readerSettings.Schemas = schemas;
             readerSettings.ValidationEventHandler += validationEvent;
-            return XmlReader.Create( reader, readerSettings );
+            return XmlReader.Create(reader, readerSettings);
         }
 
-        class CheckValidityHelper {
+        class CheckValidityHelper
+        {
             bool isValid;
             ValidationEventHandler nextEventHandler;
             XPathNavigatorReader reader;
-            
-            internal CheckValidityHelper( ValidationEventHandler nextEventHandler, XPathNavigatorReader reader ) {
+
+            internal CheckValidityHelper(
+                ValidationEventHandler nextEventHandler,
+                XPathNavigatorReader reader
+            )
+            {
                 this.isValid = true;
                 this.nextEventHandler = nextEventHandler;
                 this.reader = reader;
             }
 
-            internal void ValidationCallback( object sender, ValidationEventArgs args ) {
-                Debug.Assert( args != null );
-                if ( args.Severity == XmlSeverityType.Error )
+            internal void ValidationCallback(object sender, ValidationEventArgs args)
+            {
+                Debug.Assert(args != null);
+                if (args.Severity == XmlSeverityType.Error)
                     this.isValid = false;
-                XmlSchemaValidationException exception = args.Exception as XmlSchemaValidationException;
+                XmlSchemaValidationException exception =
+                    args.Exception as XmlSchemaValidationException;
                 if (exception != null && reader != null)
                     exception.SetSourceObject(reader.UnderlyingObject);
 
-                if (this.nextEventHandler != null) {
-                    this.nextEventHandler( sender, args );
+                if (this.nextEventHandler != null)
+                {
+                    this.nextEventHandler(sender, args);
                 }
-                else if (exception != null && args.Severity == XmlSeverityType.Error) {
+                else if (exception != null && args.Severity == XmlSeverityType.Error)
+                {
                     throw exception;
                 }
             }
 
-            internal bool IsValid {
+            internal bool IsValid
+            {
                 get { return this.isValid; }
             }
         }
 
-        public virtual XPathExpression Compile(string xpath) {
+        public virtual XPathExpression Compile(string xpath)
+        {
             return XPathExpression.Compile(xpath);
         }
 
-        public virtual XPathNavigator SelectSingleNode(string xpath) {
+        public virtual XPathNavigator SelectSingleNode(string xpath)
+        {
             return SelectSingleNode(XPathExpression.Compile(xpath));
         }
 
-        public virtual XPathNavigator SelectSingleNode(string xpath, IXmlNamespaceResolver resolver) {
+        public virtual XPathNavigator SelectSingleNode(string xpath, IXmlNamespaceResolver resolver)
+        {
             return SelectSingleNode(XPathExpression.Compile(xpath, resolver));
         }
 
-        public virtual XPathNavigator SelectSingleNode(XPathExpression expression) {
-            // 
+        public virtual XPathNavigator SelectSingleNode(XPathExpression expression)
+        {
+            //
             XPathNodeIterator iter = this.Select(expression);
-            if (iter.MoveNext()) {
+            if (iter.MoveNext())
+            {
                 return iter.Current;
             }
             return null;
         }
 
-        public virtual XPathNodeIterator Select(string xpath) {
+        public virtual XPathNodeIterator Select(string xpath)
+        {
             Contract.Ensures(Contract.Result<XPathNodeIterator>() != null);
 
             return this.Select(XPathExpression.Compile(xpath));
         }
 
-        public virtual XPathNodeIterator Select(string xpath, IXmlNamespaceResolver resolver) {
+        public virtual XPathNodeIterator Select(string xpath, IXmlNamespaceResolver resolver)
+        {
             Contract.Ensures(Contract.Result<XPathNodeIterator>() != null);
 
             return this.Select(XPathExpression.Compile(xpath, resolver));
         }
 
-        public virtual XPathNodeIterator Select(XPathExpression expr) {
+        public virtual XPathNodeIterator Select(XPathExpression expr)
+        {
             Contract.Ensures(Contract.Result<XPathNodeIterator>() != null);
 
             XPathNodeIterator result = Evaluate(expr) as XPathNodeIterator;
-            if (result == null) {
+            if (result == null)
+            {
                 throw XPathException.Create(Res.Xp_NodeSetExpected);
             }
             return result;
         }
 
-        public virtual object Evaluate(string xpath) {
+        public virtual object Evaluate(string xpath)
+        {
             return Evaluate(XPathExpression.Compile(xpath), null);
         }
 
-        public virtual object Evaluate(string xpath, IXmlNamespaceResolver resolver) {
+        public virtual object Evaluate(string xpath, IXmlNamespaceResolver resolver)
+        {
             return this.Evaluate(XPathExpression.Compile(xpath, resolver));
         }
 
-        public virtual object Evaluate(XPathExpression expr) {
+        public virtual object Evaluate(XPathExpression expr)
+        {
             return Evaluate(expr, null);
         }
 
-        public virtual object Evaluate(XPathExpression expr, XPathNodeIterator context) {
+        public virtual object Evaluate(XPathExpression expr, XPathNodeIterator context)
+        {
             CompiledXpathExpr cexpr = expr as CompiledXpathExpr;
-            if (cexpr == null) {
+            if (cexpr == null)
+            {
                 throw XPathException.Create(Res.Xp_BadQueryObject);
             }
             Query query = Query.Clone(cexpr.QueryTree);
             query.Reset();
 
-            if (context == null) {
-                context = new XPathSingletonIterator(this.Clone(), /*moved:*/true);
+            if (context == null)
+            {
+                context = new XPathSingletonIterator(
+                    this.Clone(), /*moved:*/
+                    true
+                );
             }
 
             object result = query.Evaluate(context);
 
-            if (result is XPathNodeIterator) {
+            if (result is XPathNodeIterator)
+            {
                 return new XPathSelectionIterator(context.Current, query);
             }
 
             return result;
         }
 
-        public virtual bool Matches( XPathExpression expr ) {
+        public virtual bool Matches(XPathExpression expr)
+        {
             CompiledXpathExpr cexpr = expr as CompiledXpathExpr;
-            if( cexpr == null )
+            if (cexpr == null)
                 throw XPathException.Create(Res.Xp_BadQueryObject);
 
             // We should clone query because some Query.MatchNode() alter expression state and this may brake
             // SelectionIterators that are runing using this Query
             // Excample of MatchNode() that alret the state is FilterQuery.MatchNode()
-            Query query = Query.Clone(cexpr.QueryTree);  
+            Query query = Query.Clone(cexpr.QueryTree);
 
-            try {
+            try
+            {
                 return query.MatchNode(this) != null;
             }
-            catch(XPathException) {
+            catch (XPathException)
+            {
                 throw XPathException.Create(Res.Xp_InvalidPattern, cexpr.Expression);
             }
         }
 
-        public virtual bool Matches(string xpath) {
+        public virtual bool Matches(string xpath)
+        {
             return Matches(CompileMatchPattern(xpath));
         }
 
-        public virtual XPathNodeIterator SelectChildren( XPathNodeType type ) {
-            return new XPathChildIterator( this.Clone(), type );
+        public virtual XPathNodeIterator SelectChildren(XPathNodeType type)
+        {
+            return new XPathChildIterator(this.Clone(), type);
         }
 
-        public virtual XPathNodeIterator SelectChildren( string name, string namespaceURI ) {
-            return new XPathChildIterator( this.Clone(), name, namespaceURI );
+        public virtual XPathNodeIterator SelectChildren(string name, string namespaceURI)
+        {
+            return new XPathChildIterator(this.Clone(), name, namespaceURI);
         }
 
-        public virtual XPathNodeIterator SelectAncestors( XPathNodeType type, bool matchSelf ) {
-            return new XPathAncestorIterator( this.Clone(), type, matchSelf );
+        public virtual XPathNodeIterator SelectAncestors(XPathNodeType type, bool matchSelf)
+        {
+            return new XPathAncestorIterator(this.Clone(), type, matchSelf);
         }
 
-        public virtual XPathNodeIterator SelectAncestors( string name, string namespaceURI, bool matchSelf ) {
-            return new XPathAncestorIterator( this.Clone(), name, namespaceURI, matchSelf );
+        public virtual XPathNodeIterator SelectAncestors(
+            string name,
+            string namespaceURI,
+            bool matchSelf
+        )
+        {
+            return new XPathAncestorIterator(this.Clone(), name, namespaceURI, matchSelf);
         }
 
-        public virtual XPathNodeIterator SelectDescendants( XPathNodeType type, bool matchSelf ) {
-            return new XPathDescendantIterator( this.Clone(), type, matchSelf );
+        public virtual XPathNodeIterator SelectDescendants(XPathNodeType type, bool matchSelf)
+        {
+            return new XPathDescendantIterator(this.Clone(), type, matchSelf);
         }
 
-        public virtual XPathNodeIterator SelectDescendants( string name, string namespaceURI, bool matchSelf ) {
-            return new XPathDescendantIterator( this.Clone(), name, namespaceURI, matchSelf );
+        public virtual XPathNodeIterator SelectDescendants(
+            string name,
+            string namespaceURI,
+            bool matchSelf
+        )
+        {
+            return new XPathDescendantIterator(this.Clone(), name, namespaceURI, matchSelf);
         }
 
-        public virtual bool CanEdit {
-            get {
-                return false;
-            }
+        public virtual bool CanEdit
+        {
+            get { return false; }
         }
 
-        public virtual XmlWriter PrependChild() {
+        public virtual XmlWriter PrependChild()
+        {
             throw new NotSupportedException();
         }
 
-        public virtual XmlWriter AppendChild() {
+        public virtual XmlWriter AppendChild()
+        {
             throw new NotSupportedException();
         }
 
-        public virtual XmlWriter InsertAfter() {
+        public virtual XmlWriter InsertAfter()
+        {
             throw new NotSupportedException();
         }
 
-        public virtual XmlWriter InsertBefore() {
+        public virtual XmlWriter InsertBefore()
+        {
             throw new NotSupportedException();
         }
 
-        public virtual XmlWriter CreateAttributes() {
+        public virtual XmlWriter CreateAttributes()
+        {
             throw new NotSupportedException();
         }
 
-        public virtual XmlWriter ReplaceRange(XPathNavigator lastSiblingToReplace) {
+        public virtual XmlWriter ReplaceRange(XPathNavigator lastSiblingToReplace)
+        {
             throw new NotSupportedException();
         }
 
-        public virtual void ReplaceSelf(string newNode) {
+        public virtual void ReplaceSelf(string newNode)
+        {
             XmlReader reader = CreateContextReader(newNode, false);
             ReplaceSelf(reader);
         }
 
-        public virtual void ReplaceSelf(XmlReader newNode) {
-            if (newNode == null) {
+        public virtual void ReplaceSelf(XmlReader newNode)
+        {
+            if (newNode == null)
+            {
                 throw new ArgumentNullException("newNode");
             }
             XPathNodeType type = NodeType;
-            if (type == XPathNodeType.Root
+            if (
+                type == XPathNodeType.Root
                 || type == XPathNodeType.Attribute
-                || type == XPathNodeType.Namespace) {
+                || type == XPathNodeType.Namespace
+            )
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
             XmlWriter writer = ReplaceRange(this);
@@ -1151,8 +1473,10 @@ namespace System.Xml.XPath {
             writer.Close();
         }
 
-        public virtual void ReplaceSelf(XPathNavigator newNode) {
-            if (newNode == null) {
+        public virtual void ReplaceSelf(XPathNavigator newNode)
+        {
+            if (newNode == null)
+            {
                 throw new ArgumentNullException("newNode");
             }
             XmlReader reader = newNode.CreateReader();
@@ -1160,17 +1484,21 @@ namespace System.Xml.XPath {
         }
 
         // Returns the markup representing the current node and all of its children.
-        public virtual string OuterXml {
-            get {
+        public virtual string OuterXml
+        {
+            get
+            {
                 StringWriter stringWriter;
                 XmlWriterSettings writerSettings;
                 XmlWriter xmlWriter;
 
                 // Attributes and namespaces are not allowed at the top-level by the well-formed writer
-                if (NodeType == XPathNodeType.Attribute) {
+                if (NodeType == XPathNodeType.Attribute)
+                {
                     return string.Concat(Name, "=\"", Value, "\"");
                 }
-                else if (NodeType == XPathNodeType.Namespace) {
+                else if (NodeType == XPathNodeType.Namespace)
+                {
                     if (LocalName.Length == 0)
                         return string.Concat("xmlns=\"", Value, "\"");
                     else
@@ -1185,25 +1513,27 @@ namespace System.Xml.XPath {
                 writerSettings.ConformanceLevel = ConformanceLevel.Auto;
 
                 xmlWriter = XmlWriter.Create(stringWriter, writerSettings);
-                try {
+                try
+                {
                     xmlWriter.WriteNode(this, true);
                 }
-                finally {
+                finally
+                {
                     xmlWriter.Close();
                 }
 
                 return stringWriter.ToString();
             }
-
-            set {
-                ReplaceSelf(value);
-            }
+            set { ReplaceSelf(value); }
         }
 
         // Returns the markup representing just the children of the current node.
-        public virtual string InnerXml {
-            get {
-                switch (NodeType) {
+        public virtual string InnerXml
+        {
+            get
+            {
+                switch (NodeType)
+                {
                     case XPathNodeType.Root:
                     case XPathNodeType.Element:
                         StringWriter stringWriter;
@@ -1218,18 +1548,21 @@ namespace System.Xml.XPath {
                         writerSettings.ConformanceLevel = ConformanceLevel.Auto;
                         xmlWriter = XmlWriter.Create(stringWriter, writerSettings);
 
-                        try {
-                            if (MoveToFirstChild()) {
-                                do {
+                        try
+                        {
+                            if (MoveToFirstChild())
+                            {
+                                do
+                                {
                                     xmlWriter.WriteNode(this, true);
-                                }
-                                while (MoveToNext());
+                                } while (MoveToNext());
 
                                 // Restore position
                                 MoveToParent();
                             }
                         }
-                        finally {
+                        finally
+                        {
                             xmlWriter.Close();
                         }
                         return stringWriter.ToString();
@@ -1240,20 +1573,24 @@ namespace System.Xml.XPath {
                         return string.Empty;
                 }
             }
-
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
 
-                switch (NodeType) {
+                switch (NodeType)
+                {
                     case XPathNodeType.Root:
                     case XPathNodeType.Element:
                         XPathNavigator edit = CreateNavigator();
-                        while (edit.MoveToFirstChild()) {
+                        while (edit.MoveToFirstChild())
+                        {
                             edit.DeleteSelf();
                         }
-                        if (value.Length != 0) {
+                        if (value.Length != 0)
+                        {
                             edit.AppendChild(value);
                         }
                         break;
@@ -1266,13 +1603,16 @@ namespace System.Xml.XPath {
             }
         }
 
-        public virtual void AppendChild(string newChild) {
+        public virtual void AppendChild(string newChild)
+        {
             XmlReader reader = CreateContextReader(newChild, true);
             AppendChild(reader);
         }
 
-        public virtual void AppendChild(XmlReader newChild) {
-            if (newChild == null) {
+        public virtual void AppendChild(XmlReader newChild)
+        {
+            if (newChild == null)
+            {
                 throw new ArgumentNullException("newChild");
             }
             XmlWriter writer = AppendChild();
@@ -1280,24 +1620,30 @@ namespace System.Xml.XPath {
             writer.Close();
         }
 
-        public virtual void AppendChild(XPathNavigator newChild) {
-            if (newChild == null) {
+        public virtual void AppendChild(XPathNavigator newChild)
+        {
+            if (newChild == null)
+            {
                 throw new ArgumentNullException("newChild");
             }
-            if (!IsValidChildType(newChild.NodeType)) {
+            if (!IsValidChildType(newChild.NodeType))
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
             XmlReader reader = newChild.CreateReader();
             AppendChild(reader);
         }
 
-        public virtual void PrependChild(string newChild) {
+        public virtual void PrependChild(string newChild)
+        {
             XmlReader reader = CreateContextReader(newChild, true);
             PrependChild(reader);
         }
 
-        public virtual void PrependChild(XmlReader newChild) {
-            if (newChild == null) {
+        public virtual void PrependChild(XmlReader newChild)
+        {
+            if (newChild == null)
+            {
                 throw new ArgumentNullException("newChild");
             }
             XmlWriter writer = PrependChild();
@@ -1305,24 +1651,30 @@ namespace System.Xml.XPath {
             writer.Close();
         }
 
-        public virtual void PrependChild(XPathNavigator newChild) {
-            if (newChild == null) {
+        public virtual void PrependChild(XPathNavigator newChild)
+        {
+            if (newChild == null)
+            {
                 throw new ArgumentNullException("newChild");
             }
-            if (!IsValidChildType(newChild.NodeType)) {
+            if (!IsValidChildType(newChild.NodeType))
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
             XmlReader reader = newChild.CreateReader();
             PrependChild(reader);
         }
 
-        public virtual void InsertBefore(string newSibling) {
+        public virtual void InsertBefore(string newSibling)
+        {
             XmlReader reader = CreateContextReader(newSibling, false);
             InsertBefore(reader);
         }
 
-        public virtual void InsertBefore(XmlReader newSibling) {
-            if (newSibling == null) {
+        public virtual void InsertBefore(XmlReader newSibling)
+        {
+            if (newSibling == null)
+            {
                 throw new ArgumentNullException("newSibling");
             }
             XmlWriter writer = InsertBefore();
@@ -1330,24 +1682,30 @@ namespace System.Xml.XPath {
             writer.Close();
         }
 
-        public virtual void InsertBefore(XPathNavigator newSibling) {
-            if (newSibling == null) {
+        public virtual void InsertBefore(XPathNavigator newSibling)
+        {
+            if (newSibling == null)
+            {
                 throw new ArgumentNullException("newSibling");
             }
-            if (!IsValidSiblingType(newSibling.NodeType)) {
+            if (!IsValidSiblingType(newSibling.NodeType))
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
             XmlReader reader = newSibling.CreateReader();
             InsertBefore(reader);
         }
 
-        public virtual void InsertAfter(string newSibling) {
+        public virtual void InsertAfter(string newSibling)
+        {
             XmlReader reader = CreateContextReader(newSibling, false);
             InsertAfter(reader);
         }
 
-        public virtual void InsertAfter(XmlReader newSibling) {
-            if (newSibling == null) {
+        public virtual void InsertAfter(XmlReader newSibling)
+        {
+            if (newSibling == null)
+            {
                 throw new ArgumentNullException("newSibling");
             }
             XmlWriter writer = InsertAfter();
@@ -1355,69 +1713,109 @@ namespace System.Xml.XPath {
             writer.Close();
         }
 
-        public virtual void InsertAfter(XPathNavigator newSibling) {
-            if (newSibling == null) {
+        public virtual void InsertAfter(XPathNavigator newSibling)
+        {
+            if (newSibling == null)
+            {
                 throw new ArgumentNullException("newSibling");
             }
-            if (!IsValidSiblingType(newSibling.NodeType)) {
+            if (!IsValidSiblingType(newSibling.NodeType))
+            {
                 throw new InvalidOperationException(Res.GetString(Res.Xpn_BadPosition));
             }
             XmlReader reader = newSibling.CreateReader();
             InsertAfter(reader);
         }
 
-        public virtual void DeleteRange(XPathNavigator lastSiblingToDelete) {
+        public virtual void DeleteRange(XPathNavigator lastSiblingToDelete)
+        {
             throw new NotSupportedException();
         }
 
-        public virtual void DeleteSelf() {
+        public virtual void DeleteSelf()
+        {
             DeleteRange(this);
         }
 
-        public virtual void PrependChildElement(string prefix, string localName, string namespaceURI, string value) {
+        public virtual void PrependChildElement(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            string value
+        )
+        {
             XmlWriter writer = PrependChild();
             writer.WriteStartElement(prefix, localName, namespaceURI);
-            if (value != null) {
+            if (value != null)
+            {
                 writer.WriteString(value);
             }
             writer.WriteEndElement();
             writer.Close();
         }
 
-        public virtual void AppendChildElement(string prefix, string localName, string namespaceURI, string value) {
+        public virtual void AppendChildElement(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            string value
+        )
+        {
             XmlWriter writer = AppendChild();
             writer.WriteStartElement(prefix, localName, namespaceURI);
-            if (value != null) {
+            if (value != null)
+            {
                 writer.WriteString(value);
             }
             writer.WriteEndElement();
             writer.Close();
         }
 
-        public virtual void InsertElementBefore(string prefix, string localName, string namespaceURI, string value) {
+        public virtual void InsertElementBefore(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            string value
+        )
+        {
             XmlWriter writer = InsertBefore();
             writer.WriteStartElement(prefix, localName, namespaceURI);
-            if (value != null) {
+            if (value != null)
+            {
                 writer.WriteString(value);
             }
             writer.WriteEndElement();
             writer.Close();
         }
 
-        public virtual void InsertElementAfter(string prefix, string localName, string namespaceURI, string value) {
+        public virtual void InsertElementAfter(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            string value
+        )
+        {
             XmlWriter writer = InsertAfter();
             writer.WriteStartElement(prefix, localName, namespaceURI);
-            if (value != null) {
+            if (value != null)
+            {
                 writer.WriteString(value);
             }
             writer.WriteEndElement();
             writer.Close();
         }
 
-        public virtual void CreateAttribute(string prefix, string localName, string namespaceURI, string value) {
+        public virtual void CreateAttribute(
+            string prefix,
+            string localName,
+            string namespaceURI,
+            string value
+        )
+        {
             XmlWriter writer = CreateAttributes();
             writer.WriteStartAttribute(prefix, localName, namespaceURI);
-            if (value != null) {
+            if (value != null)
+            {
                 writer.WriteString(value);
             }
             writer.WriteEndAttribute();
@@ -1428,12 +1826,18 @@ namespace System.Xml.XPath {
         // Internal
         //-----------------------------------------------
 
-        internal bool MoveToPrevious(string localName, string namespaceURI) {
+        internal bool MoveToPrevious(string localName, string namespaceURI)
+        {
             XPathNavigator navClone = Clone();
 
             localName = (localName != null) ? NameTable.Get(localName) : null;
-            while (MoveToPrevious()) {
-                if (NodeType == XPathNodeType.Element && (object) localName == (object) LocalName && namespaceURI == NamespaceURI)
+            while (MoveToPrevious())
+            {
+                if (
+                    NodeType == XPathNodeType.Element
+                    && (object)localName == (object)LocalName
+                    && namespaceURI == NamespaceURI
+                )
                     return true;
             }
 
@@ -1441,12 +1845,14 @@ namespace System.Xml.XPath {
             return false;
         }
 
-        internal bool MoveToPrevious(XPathNodeType type) {
+        internal bool MoveToPrevious(XPathNodeType type)
+        {
             XPathNavigator navClone = Clone();
             int mask = GetContentKindMask(type);
 
-            while (MoveToPrevious()) {
-                if (((1 << (int) NodeType) & mask) != 0)
+            while (MoveToPrevious())
+            {
+                if (((1 << (int)NodeType) & mask) != 0)
                     return true;
             }
 
@@ -1454,7 +1860,8 @@ namespace System.Xml.XPath {
             return false;
         }
 
-        internal bool MoveToNonDescendant() {
+        internal bool MoveToNonDescendant()
+        {
             // If current node is document, there is no next non-descendant
             if (NodeType == XPathNodeType.Root)
                 return false;
@@ -1469,7 +1876,8 @@ namespace System.Xml.XPath {
             if (!MoveToParent())
                 return false;
 
-            switch (navSave.NodeType) {
+            switch (navSave.NodeType)
+            {
                 case XPathNodeType.Attribute:
                 case XPathNodeType.Namespace:
                     // Next node in document order is first content-child of parent
@@ -1478,8 +1886,10 @@ namespace System.Xml.XPath {
                     break;
             }
 
-            while (!MoveToNext()) {
-                if (!MoveToParent()) {
+            while (!MoveToNext())
+            {
+                if (!MoveToParent())
+                {
                     // Restore original position and return false
                     MoveTo(navSave);
                     return false;
@@ -1494,25 +1904,31 @@ namespace System.Xml.XPath {
         /// Order is reversed for attributes and child nodes to avoid O(N**2) running time.
         /// This property is useful for debugging, and also used in UniqueId implementation.
         /// </summary>
-        internal uint IndexInParent {
-            get {
+        internal uint IndexInParent
+        {
+            get
+            {
                 XPathNavigator nav = this.Clone();
                 uint idx = 0;
 
-                switch (NodeType) {
+                switch (NodeType)
+                {
                     case XPathNodeType.Attribute:
-                        while (nav.MoveToNextAttribute()) {
-                            idx ++;
+                        while (nav.MoveToNextAttribute())
+                        {
+                            idx++;
                         }
                         break;
                     case XPathNodeType.Namespace:
-                        while (nav.MoveToNextNamespace()) {
-                            idx ++;
+                        while (nav.MoveToNextNamespace())
+                        {
+                            idx++;
                         }
                         break;
                     default:
-                        while (nav.MoveToNext()) {
-                            idx ++;
+                        while (nav.MoveToNext())
+                        {
+                            idx++;
                         }
                         break;
                 }
@@ -1520,24 +1936,54 @@ namespace System.Xml.XPath {
             }
         }
 
-        internal static readonly char[] NodeTypeLetter = new char[] {
-            'R',    // Root
-            'E',    // Element
-            'A',    // Attribute
-            'N',    // Namespace
-            'T',    // Text
-            'S',    // SignificantWhitespace
-            'W',    // Whitespace
-            'P',    // ProcessingInstruction
-            'C',    // Comment
-            'X',    // All
+        internal static readonly char[] NodeTypeLetter = new char[]
+        {
+            'R', // Root
+            'E', // Element
+            'A', // Attribute
+            'N', // Namespace
+            'T', // Text
+            'S', // SignificantWhitespace
+            'W', // Whitespace
+            'P', // ProcessingInstruction
+            'C', // Comment
+            'X', // All
         };
 
-        internal static readonly char[] UniqueIdTbl = new char[] {
-            'A',  'B',  'C',  'D',  'E',  'F',  'G',  'H',  'I',  'J',
-            'K',  'L',  'M',  'N',  'O',  'P',  'Q',  'R',  'S',  'T',
-            'U',  'V',  'W',  'X',  'Y',  'Z',  '1',  '2',  '3',  '4',
-            '5',  '6'
+        internal static readonly char[] UniqueIdTbl = new char[]
+        {
+            'A',
+            'B',
+            'C',
+            'D',
+            'E',
+            'F',
+            'G',
+            'H',
+            'I',
+            'J',
+            'K',
+            'L',
+            'M',
+            'N',
+            'O',
+            'P',
+            'Q',
+            'R',
+            'S',
+            'T',
+            'U',
+            'V',
+            'W',
+            'X',
+            'Y',
+            'Z',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
         };
 
         // Requirements for id:
@@ -1547,24 +1993,32 @@ namespace System.Xml.XPath {
         //  4. ids are unique
         //
         //  id = node type letter + reverse path to root in terms of encoded IndexInParent integers from node to root seperated by 0's if needed
-        internal virtual string UniqueId {
-            get {
-                XPathNavigator  nav = this.Clone();
+        internal virtual string UniqueId
+        {
+            get
+            {
+                XPathNavigator nav = this.Clone();
                 StringBuilder sb = new StringBuilder();
 
                 // Ensure distinguishing attributes, namespaces and child nodes
                 sb.Append(NodeTypeLetter[(int)NodeType]);
 
-                while (true) {
+                while (true)
+                {
                     uint idx = nav.IndexInParent;
-                    if (!nav.MoveToParent()) {
+                    if (!nav.MoveToParent())
+                    {
                         break;
                     }
-                    if (idx <= 0x1f) {
+                    if (idx <= 0x1f)
+                    {
                         sb.Append(UniqueIdTbl[idx]);
-                    } else {
+                    }
+                    else
+                    {
                         sb.Append('0');
-                        do {
+                        do
+                        {
                             sb.Append(UniqueIdTbl[idx & 0x1f]);
                             idx >>= 5;
                         } while (idx != 0);
@@ -1575,21 +2029,24 @@ namespace System.Xml.XPath {
             }
         }
 
-        private static XPathExpression CompileMatchPattern(string xpath) {
+        private static XPathExpression CompileMatchPattern(string xpath)
+        {
             bool hasPrefix;
             Query query = new QueryBuilder().BuildPatternQuery(xpath, out hasPrefix);
             return new CompiledXpathExpr(query, xpath, hasPrefix);
         }
 
-        private static int GetDepth(XPathNavigator nav) {
+        private static int GetDepth(XPathNavigator nav)
+        {
             int depth = 0;
-            while (nav.MoveToParent()) {
+            while (nav.MoveToParent())
+            {
                 depth++;
             }
             return depth;
         }
 
-        // XPath based comparison for namespaces, attributes and other 
+        // XPath based comparison for namespaces, attributes and other
         // items with the same parent element.
         //
         //                 n2
@@ -1598,49 +2055,62 @@ namespace System.Xml.XPath {
         // namespace(0)    ?(0)            before(-1)      before(-2)
         // attribute(1)    after(1)        ?(0)            before(-1)
         // other    (2)    after(2)        after(1)        ?(0)
-        private XmlNodeOrder CompareSiblings(XPathNavigator n1, XPathNavigator n2) {
+        private XmlNodeOrder CompareSiblings(XPathNavigator n1, XPathNavigator n2)
+        {
             int cmp = 0;
 
 #if DEBUG
             Debug.Assert(!n1.IsSamePosition(n2));
-            XPathNavigator p1 = n1.Clone(), p2 = n2.Clone();
+            XPathNavigator p1 = n1.Clone(),
+                p2 = n2.Clone();
             Debug.Assert(p1.MoveToParent() && p2.MoveToParent() && p1.IsSamePosition(p2));
 #endif
-            switch (n1.NodeType) {
-                case XPathNodeType.Namespace: 
+            switch (n1.NodeType)
+            {
+                case XPathNodeType.Namespace:
                     break;
-                case XPathNodeType.Attribute: 
-                    cmp += 1; 
+                case XPathNodeType.Attribute:
+                    cmp += 1;
                     break;
                 default:
-                    cmp += 2; 
+                    cmp += 2;
                     break;
             }
-            switch (n2.NodeType) {
-                case XPathNodeType.Namespace: 
-                    if (cmp == 0) {
-                        while (n1.MoveToNextNamespace()) {
-                            if (n1.IsSamePosition(n2)) {
+            switch (n2.NodeType)
+            {
+                case XPathNodeType.Namespace:
+                    if (cmp == 0)
+                    {
+                        while (n1.MoveToNextNamespace())
+                        {
+                            if (n1.IsSamePosition(n2))
+                            {
                                 return XmlNodeOrder.Before;
                             }
                         }
                     }
-                    break; 
-                case XPathNodeType.Attribute: 
-                    cmp -= 1; 
-                    if (cmp == 0) {
-                        while (n1.MoveToNextAttribute()) {
-                            if (n1.IsSamePosition(n2)) {
+                    break;
+                case XPathNodeType.Attribute:
+                    cmp -= 1;
+                    if (cmp == 0)
+                    {
+                        while (n1.MoveToNextAttribute())
+                        {
+                            if (n1.IsSamePosition(n2))
+                            {
                                 return XmlNodeOrder.Before;
                             }
                         }
                     }
                     break;
                 default:
-                    cmp -= 2; 
-                    if (cmp == 0) {
-                        while (n1.MoveToNext()) {
-                            if (n1.IsSamePosition(n2)) {
+                    cmp -= 2;
+                    if (cmp == 0)
+                    {
+                        while (n1.MoveToNext())
+                        {
+                            if (n1.IsSamePosition(n2))
+                            {
                                 return XmlNodeOrder.Before;
                             }
                         }
@@ -1650,57 +2120,73 @@ namespace System.Xml.XPath {
             return cmp < 0 ? XmlNodeOrder.Before : XmlNodeOrder.After;
         }
 
-        internal static XmlNamespaceManager GetNamespaces( IXmlNamespaceResolver resolver ) {
+        internal static XmlNamespaceManager GetNamespaces(IXmlNamespaceResolver resolver)
+        {
             XmlNamespaceManager mngr = new XmlNamespaceManager(new NameTable());
-            IDictionary<string,string> dictionary = resolver.GetNamespacesInScope( XmlNamespaceScope.All );
-            foreach ( KeyValuePair<string,string> pair in dictionary ) {
+            IDictionary<string, string> dictionary = resolver.GetNamespacesInScope(
+                XmlNamespaceScope.All
+            );
+            foreach (KeyValuePair<string, string> pair in dictionary)
+            {
                 //"xmlns " is always in the namespace manager so adding it would throw an exception
-                if( pair.Key != "xmlns" )
-                    mngr.AddNamespace( pair.Key, pair.Value );
+                if (pair.Key != "xmlns")
+                    mngr.AddNamespace(pair.Key, pair.Value);
             }
             return mngr;
         }
 
         // Get mask that will allow XPathNodeType content matching to be performed using only a shift and an and operation
         internal const int AllMask = 0x7FFFFFFF;
-        internal const int NoAttrNmspMask = AllMask & ~(1 << (int) XPathNodeType.Attribute) & ~(1 << (int) XPathNodeType.Namespace);
-        internal const int TextMask = (1 << (int) XPathNodeType.Text) | (1 << (int) XPathNodeType.SignificantWhitespace) | (1 << (int) XPathNodeType.Whitespace);
-        internal static readonly int[] ContentKindMasks = {
-            (1 << (int) XPathNodeType.Root),                        // Root
-            (1 << (int) XPathNodeType.Element),                     // Element
-            0,                                                      // Attribute (not content)
-            0,                                                      // Namespace (not content)
-            TextMask,                                               // Text
-            (1 << (int) XPathNodeType.SignificantWhitespace),       // SignificantWhitespace
-            (1 << (int) XPathNodeType.Whitespace),                  // Whitespace
-            (1 << (int) XPathNodeType.ProcessingInstruction),       // ProcessingInstruction
-            (1 << (int) XPathNodeType.Comment),                     // Comment
-            NoAttrNmspMask,                                         // All
+        internal const int NoAttrNmspMask =
+            AllMask & ~(1 << (int)XPathNodeType.Attribute) & ~(1 << (int)XPathNodeType.Namespace);
+        internal const int TextMask =
+            (1 << (int)XPathNodeType.Text)
+            | (1 << (int)XPathNodeType.SignificantWhitespace)
+            | (1 << (int)XPathNodeType.Whitespace);
+        internal static readonly int[] ContentKindMasks =
+        {
+            (1 << (int)XPathNodeType.Root), // Root
+            (1 << (int)XPathNodeType.Element), // Element
+            0, // Attribute (not content)
+            0, // Namespace (not content)
+            TextMask, // Text
+            (1 << (int)XPathNodeType.SignificantWhitespace), // SignificantWhitespace
+            (1 << (int)XPathNodeType.Whitespace), // Whitespace
+            (1 << (int)XPathNodeType.ProcessingInstruction), // ProcessingInstruction
+            (1 << (int)XPathNodeType.Comment), // Comment
+            NoAttrNmspMask, // All
         };
 
-        internal static int GetContentKindMask(XPathNodeType type) {
-            return ContentKindMasks[(int) type];
+        internal static int GetContentKindMask(XPathNodeType type)
+        {
+            return ContentKindMasks[(int)type];
         }
 
-        internal static int GetKindMask(XPathNodeType type) {
+        internal static int GetKindMask(XPathNodeType type)
+        {
             if (type == XPathNodeType.All)
                 return AllMask;
             else if (type == XPathNodeType.Text)
                 return TextMask;
 
-            return (1 << (int) type);
+            return (1 << (int)type);
         }
 
-        internal static bool IsText(XPathNodeType type) {
+        internal static bool IsText(XPathNodeType type)
+        {
             //return ((1 << (int) type) & TextMask) != 0;
-            return (uint)(type - XPathNodeType.Text) <= (XPathNodeType.Whitespace - XPathNodeType.Text);
+            return (uint)(type - XPathNodeType.Text)
+                <= (XPathNodeType.Whitespace - XPathNodeType.Text);
         }
 
         // Lax check for potential child item.
-        private bool IsValidChildType(XPathNodeType type) {
-            switch (NodeType) {
+        private bool IsValidChildType(XPathNodeType type)
+        {
+            switch (NodeType)
+            {
                 case XPathNodeType.Root:
-                    switch (type) {
+                    switch (type)
+                    {
                         case XPathNodeType.Element:
                         case XPathNodeType.SignificantWhitespace:
                         case XPathNodeType.Whitespace:
@@ -1710,7 +2196,8 @@ namespace System.Xml.XPath {
                     }
                     break;
                 case XPathNodeType.Element:
-                    switch (type) {
+                    switch (type)
+                    {
                         case XPathNodeType.Element:
                         case XPathNodeType.Text:
                         case XPathNodeType.SignificantWhitespace:
@@ -1724,16 +2211,19 @@ namespace System.Xml.XPath {
             return false;
         }
 
-        // Lax check for potential sibling item. 
-        private bool IsValidSiblingType(XPathNodeType type) {
-            switch (NodeType) {
+        // Lax check for potential sibling item.
+        private bool IsValidSiblingType(XPathNodeType type)
+        {
+            switch (NodeType)
+            {
                 case XPathNodeType.Element:
                 case XPathNodeType.Text:
                 case XPathNodeType.SignificantWhitespace:
                 case XPathNodeType.Whitespace:
                 case XPathNodeType.ProcessingInstruction:
                 case XPathNodeType.Comment:
-                    switch (type) {
+                    switch (type)
+                    {
                         case XPathNodeType.Element:
                         case XPathNodeType.Text:
                         case XPathNodeType.SignificantWhitespace:
@@ -1747,82 +2237,116 @@ namespace System.Xml.XPath {
             return false;
         }
 
-        private XmlReader CreateReader() {
+        private XmlReader CreateReader()
+        {
             return XPathNavigatorReader.Create(this);
         }
 
-        private XmlReader CreateContextReader(string xml, bool fromCurrentNode) {
-            if (xml == null) {
+        private XmlReader CreateContextReader(string xml, bool fromCurrentNode)
+        {
+            if (xml == null)
+            {
                 throw new ArgumentNullException("xml");
             }
 
             // We have to set the namespace context for the reader.
             XPathNavigator editor = CreateNavigator();
             // scope starts from parent.
-            XmlNamespaceManager mgr = new XmlNamespaceManager( NameTable );
-            if (!fromCurrentNode) {
+            XmlNamespaceManager mgr = new XmlNamespaceManager(NameTable);
+            if (!fromCurrentNode)
+            {
                 editor.MoveToParent(); // should always succeed.
             }
-            if (editor.MoveToFirstNamespace(XPathNamespaceScope.All)) {
-                do {
+            if (editor.MoveToFirstNamespace(XPathNamespaceScope.All))
+            {
+                do
+                {
                     mgr.AddNamespace(editor.LocalName, editor.Value);
-                } 
-                while (editor.MoveToNextNamespace(XPathNamespaceScope.All));
+                } while (editor.MoveToNextNamespace(XPathNamespaceScope.All));
             }
-            // 
+            //
             XmlParserContext context = new XmlParserContext(NameTable, mgr, null, XmlSpace.Default);
             XmlTextReader reader = new XmlTextReader(xml, XmlNodeType.Element, context);
-            // 
+            //
             reader.WhitespaceHandling = WhitespaceHandling.Significant;
             return reader;
         }
 
-        internal void BuildSubtree(XmlReader reader, XmlWriter writer) {
+        internal void BuildSubtree(XmlReader reader, XmlWriter writer)
+        {
             // important (perf) string literal...
             string xmlnsUri = XmlReservedNs.NsXmlNs; // http://www.w3.org/2000/xmlns/
             ReadState readState = reader.ReadState;
 
-            if (readState != ReadState.Initial
-                && readState != ReadState.Interactive) {
+            if (readState != ReadState.Initial && readState != ReadState.Interactive)
+            {
                 throw new ArgumentException(Res.GetString(Res.Xml_InvalidOperation), "reader");
             }
             int level = 0;
-            if ( readState == ReadState.Initial ) {
-                if( !reader.Read() )
+            if (readState == ReadState.Initial)
+            {
+                if (!reader.Read())
                     return;
                 level++; // if start in initial, read everything (not just first)
             }
-            do {
-                switch (reader.NodeType) {
+            do
+            {
+                switch (reader.NodeType)
+                {
                     case XmlNodeType.Element:
-                        writer.WriteStartElement( reader.Prefix,  reader.LocalName, reader.NamespaceURI );
+                        writer.WriteStartElement(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        );
                         bool isEmptyElement = reader.IsEmptyElement;
 
-                        while (reader.MoveToNextAttribute()) {                                
-                            if ((object) reader.NamespaceURI == (object) xmlnsUri) {
-                                if (reader.Prefix.Length == 0) {
+                        while (reader.MoveToNextAttribute())
+                        {
+                            if ((object)reader.NamespaceURI == (object)xmlnsUri)
+                            {
+                                if (reader.Prefix.Length == 0)
+                                {
                                     // Default namespace declaration "xmlns"
                                     Debug.Assert(reader.LocalName == "xmlns");
-                                    writer.WriteAttributeString( "", "xmlns", xmlnsUri, reader.Value );
+                                    writer.WriteAttributeString(
+                                        "",
+                                        "xmlns",
+                                        xmlnsUri,
+                                        reader.Value
+                                    );
                                 }
-                                else {
+                                else
+                                {
                                     Debug.Assert(reader.Prefix == "xmlns");
-                                    writer.WriteAttributeString( "xmlns", reader.LocalName, xmlnsUri, reader.Value );
+                                    writer.WriteAttributeString(
+                                        "xmlns",
+                                        reader.LocalName,
+                                        xmlnsUri,
+                                        reader.Value
+                                    );
                                 }
                             }
-                            else {
-                                writer.WriteStartAttribute(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+                            else
+                            {
+                                writer.WriteStartAttribute(
+                                    reader.Prefix,
+                                    reader.LocalName,
+                                    reader.NamespaceURI
+                                );
                                 writer.WriteString(reader.Value);
                                 writer.WriteEndAttribute();
                             }
                         }
 
                         reader.MoveToElement();
-                        if (isEmptyElement) {
+                        if (isEmptyElement)
+                        {
                             // there might still be a value, if there is a default value specified in the schema
                             writer.WriteEndElement();
                         }
-                        else {
+                        else
+                        {
                             level++;
                         }
                         break;
@@ -1833,76 +2357,103 @@ namespace System.Xml.XPath {
                         break;
                     case XmlNodeType.Text:
                     case XmlNodeType.CDATA:
-                        writer.WriteString( reader.Value );
+                        writer.WriteString(reader.Value);
                         break;
                     case XmlNodeType.SignificantWhitespace:
                     case XmlNodeType.Whitespace:
-                        // 
-                        writer.WriteString( reader.Value );
+                        //
+                        writer.WriteString(reader.Value);
                         break;
                     case XmlNodeType.Comment:
-                        writer.WriteComment( reader.Value );
+                        writer.WriteComment(reader.Value);
                         break;
                     case XmlNodeType.ProcessingInstruction:
-                        writer.WriteProcessingInstruction( reader.LocalName , reader.Value);
+                        writer.WriteProcessingInstruction(reader.LocalName, reader.Value);
                         break;
                     case XmlNodeType.EntityReference:
-                        reader.ResolveEntity(); // 
+                        reader.ResolveEntity(); //
                         break;
                     case XmlNodeType.EndEntity:
                     case XmlNodeType.None:
                     case XmlNodeType.DocumentType:
                     case XmlNodeType.XmlDeclaration:
-                        break;                    
+                        break;
                     case XmlNodeType.Attribute:
-                        if ((object) reader.NamespaceURI == (object) xmlnsUri) {
-                            if (reader.Prefix.Length == 0) {
+                        if ((object)reader.NamespaceURI == (object)xmlnsUri)
+                        {
+                            if (reader.Prefix.Length == 0)
+                            {
                                 // Default namespace declaration "xmlns"
                                 Debug.Assert(reader.LocalName == "xmlns");
-                                writer.WriteAttributeString( "", "xmlns", xmlnsUri, reader.Value );
+                                writer.WriteAttributeString("", "xmlns", xmlnsUri, reader.Value);
                             }
-                            else {
+                            else
+                            {
                                 Debug.Assert(reader.Prefix == "xmlns");
-                                writer.WriteAttributeString( "xmlns", reader.LocalName, xmlnsUri, reader.Value );
+                                writer.WriteAttributeString(
+                                    "xmlns",
+                                    reader.LocalName,
+                                    xmlnsUri,
+                                    reader.Value
+                                );
                             }
                         }
-                        else {
-                            writer.WriteStartAttribute(reader.Prefix, reader.LocalName, reader.NamespaceURI);
+                        else
+                        {
+                            writer.WriteStartAttribute(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.NamespaceURI
+                            );
                             writer.WriteString(reader.Value);
                             writer.WriteEndAttribute();
                         }
                         break;
                 }
-            } 
-            while( reader.Read() && ( level > 0 ) );
+            } while (reader.Read() && (level > 0));
         }
 
-        private object debuggerDisplayProxy { get { return new DebuggerDisplayProxy(this); } }
+        private object debuggerDisplayProxy
+        {
+            get { return new DebuggerDisplayProxy(this); }
+        }
 
         [DebuggerDisplay("{ToString()}")]
-        internal struct DebuggerDisplayProxy {
+        internal struct DebuggerDisplayProxy
+        {
             XPathNavigator nav;
-            public DebuggerDisplayProxy(XPathNavigator nav) {
+
+            public DebuggerDisplayProxy(XPathNavigator nav)
+            {
                 this.nav = nav;
             }
-            public override string ToString() {
+
+            public override string ToString()
+            {
                 string result = nav.NodeType.ToString();
-                switch (nav.NodeType) {
-                case XPathNodeType.Element              :
-                    result += ", Name=\"" + nav.Name + '"';
-                    break;
-                case XPathNodeType.Attribute:
-                case XPathNodeType.Namespace            :
-                case XPathNodeType.ProcessingInstruction:
-                    result += ", Name=\"" + nav.Name + '"';
-                    result += ", Value=\"" + XmlConvert.EscapeValueForDebuggerDisplay(nav.Value) + '"';
-                    break;
-                case XPathNodeType.Text                 :
-                case XPathNodeType.Whitespace           :
-                case XPathNodeType.SignificantWhitespace:
-                case XPathNodeType.Comment              :
-                    result += ", Value=\"" + XmlConvert.EscapeValueForDebuggerDisplay(nav.Value) + '"';
-                    break;
+                switch (nav.NodeType)
+                {
+                    case XPathNodeType.Element:
+                        result += ", Name=\"" + nav.Name + '"';
+                        break;
+                    case XPathNodeType.Attribute:
+                    case XPathNodeType.Namespace:
+                    case XPathNodeType.ProcessingInstruction:
+                        result += ", Name=\"" + nav.Name + '"';
+                        result +=
+                            ", Value=\""
+                            + XmlConvert.EscapeValueForDebuggerDisplay(nav.Value)
+                            + '"';
+                        break;
+                    case XPathNodeType.Text:
+                    case XPathNodeType.Whitespace:
+                    case XPathNodeType.SignificantWhitespace:
+                    case XPathNodeType.Comment:
+                        result +=
+                            ", Value=\""
+                            + XmlConvert.EscapeValueForDebuggerDisplay(nav.Value)
+                            + '"';
+                        break;
                 }
                 return result;
             }
@@ -1919,8 +2470,10 @@ namespace System.Xml.XPath {
             return default(XPathNavigator);
         }
 
-        public override XmlNameTable NameTable { 
-            get {
+        public override XmlNameTable NameTable
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<XmlNameTable>() != null);
                 return default(XmlNameTable);
             }

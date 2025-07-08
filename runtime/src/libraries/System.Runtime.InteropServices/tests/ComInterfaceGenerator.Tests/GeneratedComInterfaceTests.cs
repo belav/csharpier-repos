@@ -17,7 +17,6 @@ internal unsafe partial class NativeExportsNE
     public static partial void* NewNativeObject();
 }
 
-
 public partial class GeneratedComInterfaceTests
 {
     [Fact]

@@ -44,7 +44,10 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new ListWrapperConverter());
             options.Converters.Add(new DictionaryWrapperConverter());
 
-            DerivedTypesWrapper customWrapper = JsonSerializer.Deserialize<DerivedTypesWrapper>(json, options);
+            DerivedTypesWrapper customWrapper = JsonSerializer.Deserialize<DerivedTypesWrapper>(
+                json,
+                options
+            );
             Assert.Null(customWrapper.ListWrapper);
             expected = 4;
             foreach (int value in customWrapper.List)
@@ -71,21 +74,28 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""DictionaryWrapper"": {""1"": 1}}";
 
-            UnsupportedDerivedTypesWrapper_Dictionary wrapper = new UnsupportedDerivedTypesWrapper_Dictionary
-            {
-                DictionaryWrapper = new UnsupportedDictionaryWrapper()
-            };
+            UnsupportedDerivedTypesWrapper_Dictionary wrapper =
+                new UnsupportedDerivedTypesWrapper_Dictionary
+                {
+                    DictionaryWrapper = new UnsupportedDictionaryWrapper(),
+                };
             wrapper.DictionaryWrapper[new int[,] { }] = 1;
 
             // Without converter, we throw.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_Dictionary>(json));
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_Dictionary>(json)
+            );
             Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize(wrapper));
 
             // With converter, we expect no values in the wrapper per converter's implementation.
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new UnsupportedDictionaryWrapperConverter());
 
-            UnsupportedDerivedTypesWrapper_Dictionary customWrapper = JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_Dictionary>(json, options);
+            UnsupportedDerivedTypesWrapper_Dictionary customWrapper =
+                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_Dictionary>(
+                    json,
+                    options
+                );
             Assert.Null(customWrapper.DictionaryWrapper);
 
             // Clear metadata for serialize.
@@ -99,27 +109,42 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = @"{""IEnumerableWrapper"": [""1"", ""2"", ""3""]}";
 
-            UnsupportedDerivedTypesWrapper_IEnumerable wrapper = new UnsupportedDerivedTypesWrapper_IEnumerable
-            {
-                IEnumerableWrapper = new StringIEnumerableWrapper(new List<string> { "1", "2", "3" }),
-            };
+            UnsupportedDerivedTypesWrapper_IEnumerable wrapper =
+                new UnsupportedDerivedTypesWrapper_IEnumerable
+                {
+                    IEnumerableWrapper = new StringIEnumerableWrapper(
+                        new List<string> { "1", "2", "3" }
+                    ),
+                };
 
             // Without converter, we throw on deserialize.
-            Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_IEnumerable>(json));
+            Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_IEnumerable>(json)
+            );
             // Without converter, we serialize as is.
-            Assert.Equal(@"{""IEnumerableWrapper"":[""1"",""2"",""3""]}", JsonSerializer.Serialize(wrapper));
+            Assert.Equal(
+                @"{""IEnumerableWrapper"":[""1"",""2"",""3""]}",
+                JsonSerializer.Serialize(wrapper)
+            );
 
             // With converter, we expect no values in the wrapper per converter's implementation.
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.Converters.Add(new UnsupportedIEnumerableWrapperConverter());
 
-            UnsupportedDerivedTypesWrapper_IEnumerable customWrapper = JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_IEnumerable>(json, options);
+            UnsupportedDerivedTypesWrapper_IEnumerable customWrapper =
+                JsonSerializer.Deserialize<UnsupportedDerivedTypesWrapper_IEnumerable>(
+                    json,
+                    options
+                );
             Assert.Null(customWrapper.IEnumerableWrapper);
 
             // Clear metadata for serialize.
             options = new JsonSerializerOptions();
             options.Converters.Add(new UnsupportedIEnumerableWrapperConverter());
-            Assert.Equal(@"{""IEnumerableWrapper"":[]}", JsonSerializer.Serialize(wrapper, options));
+            Assert.Equal(
+                @"{""IEnumerableWrapper"":[]}",
+                JsonSerializer.Serialize(wrapper, options)
+            );
         }
     }
 
@@ -149,7 +174,11 @@ namespace System.Text.Json.Serialization.Tests
 
     public class ListWrapperConverter : JsonConverter<ListWrapper>
     {
-        public override ListWrapper Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ListWrapper Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -166,7 +195,12 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
-        public override void Write(Utf8JsonWriter writer, ListWrapper value, JsonSerializerOptions options)
+
+        public override void Write(
+            Utf8JsonWriter writer,
+            ListWrapper value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartArray();
             writer.WriteEndArray();
@@ -175,7 +209,11 @@ namespace System.Text.Json.Serialization.Tests
 
     public class UnsupportedIEnumerableWrapperConverter : JsonConverter<StringIEnumerableWrapper>
     {
-        public override StringIEnumerableWrapper Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override StringIEnumerableWrapper Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartArray)
             {
@@ -192,7 +230,12 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
-        public override void Write(Utf8JsonWriter writer, StringIEnumerableWrapper value, JsonSerializerOptions options)
+
+        public override void Write(
+            Utf8JsonWriter writer,
+            StringIEnumerableWrapper value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartArray();
             writer.WriteEndArray();
@@ -201,7 +244,11 @@ namespace System.Text.Json.Serialization.Tests
 
     public class DictionaryWrapperConverter : JsonConverter<DictionaryWrapper>
     {
-        public override DictionaryWrapper Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DictionaryWrapper Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -218,7 +265,12 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
-        public override void Write(Utf8JsonWriter writer, DictionaryWrapper value, JsonSerializerOptions options)
+
+        public override void Write(
+            Utf8JsonWriter writer,
+            DictionaryWrapper value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
@@ -227,7 +279,11 @@ namespace System.Text.Json.Serialization.Tests
 
     public class UnsupportedDictionaryWrapperConverter : JsonConverter<UnsupportedDictionaryWrapper>
     {
-        public override UnsupportedDictionaryWrapper Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override UnsupportedDictionaryWrapper Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -244,7 +300,12 @@ namespace System.Text.Json.Serialization.Tests
 
             throw new JsonException();
         }
-        public override void Write(Utf8JsonWriter writer, UnsupportedDictionaryWrapper value, JsonSerializerOptions options)
+
+        public override void Write(
+            Utf8JsonWriter writer,
+            UnsupportedDictionaryWrapper value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             writer.WriteEndObject();

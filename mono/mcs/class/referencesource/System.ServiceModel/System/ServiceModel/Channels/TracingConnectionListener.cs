@@ -6,32 +6,34 @@ namespace System.ServiceModel.Channels
 {
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
-
+    using System.Threading;
 
     class TracingConnectionListener : IConnectionListener
     {
         ServiceModelActivity activity;
         IConnectionListener listener;
 
-        internal TracingConnectionListener(IConnectionListener listener, string traceStartInfo) :
-            this(listener, traceStartInfo, true)
-        {
-        }
+        internal TracingConnectionListener(IConnectionListener listener, string traceStartInfo)
+            : this(listener, traceStartInfo, true) { }
 
         internal TracingConnectionListener(IConnectionListener listener, Uri uri)
-            : this(listener, uri.ToString())
-        {
-        }
+            : this(listener, uri.ToString()) { }
 
         internal TracingConnectionListener(IConnectionListener listener)
         {
             this.listener = listener;
-            this.activity = ServiceModelActivity.CreateActivity(DiagnosticTraceBase.ActivityId, false);
+            this.activity = ServiceModelActivity.CreateActivity(
+                DiagnosticTraceBase.ActivityId,
+                false
+            );
         }
 
-        internal TracingConnectionListener(IConnectionListener listener, string traceStartInfo, bool newActivity)
+        internal TracingConnectionListener(
+            IConnectionListener listener,
+            string traceStartInfo,
+            bool newActivity
+        )
         {
             this.listener = listener;
             if (newActivity)
@@ -43,12 +45,19 @@ namespace System.ServiceModel.Channels
                     {
                         FxTrace.Trace.TraceTransfer(this.activity.Id);
                     }
-                    ServiceModelActivity.Start(this.activity, SR.GetString(SR.ActivityListenAt, traceStartInfo), ActivityType.ListenAt);
+                    ServiceModelActivity.Start(
+                        this.activity,
+                        SR.GetString(SR.ActivityListenAt, traceStartInfo),
+                        ActivityType.ListenAt
+                    );
                 }
             }
             else
             {
-                this.activity = ServiceModelActivity.CreateActivity(DiagnosticTraceBase.ActivityId, false);
+                this.activity = ServiceModelActivity.CreateActivity(
+                    DiagnosticTraceBase.ActivityId,
+                    false
+                );
                 if (this.activity != null)
                 {
                     this.activity.Name = traceStartInfo;
@@ -86,7 +95,11 @@ namespace System.ServiceModel.Channels
                 }
                 using (ServiceModelActivity.BoundOperation(activity))
                 {
-                    ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityReceiveBytes, this.activity.Name), ActivityType.ReceiveBytes);
+                    ServiceModelActivity.Start(
+                        activity,
+                        SR.GetString(SR.ActivityReceiveBytes, this.activity.Name),
+                        ActivityType.ReceiveBytes
+                    );
                     IConnection innerConnection = this.listener.EndAccept(result);
                     if (innerConnection == null)
                     {

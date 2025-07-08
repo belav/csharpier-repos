@@ -242,8 +242,8 @@ public class DefaultAntiforgeryTokenStoreTest
         var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<AntiforgeryValidationException>(
-            () => tokenStore.GetRequestTokensAsync(httpContext.Object)
+        var ex = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
+            tokenStore.GetRequestTokensAsync(httpContext.Object)
         );
         Assert.Same(ioException, ex.InnerException);
     }
@@ -271,8 +271,8 @@ public class DefaultAntiforgeryTokenStoreTest
         var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<AntiforgeryValidationException>(
-            () => tokenStore.GetRequestTokensAsync(httpContext.Object)
+        var ex = await Assert.ThrowsAsync<AntiforgeryValidationException>(() =>
+            tokenStore.GetRequestTokensAsync(httpContext.Object)
         );
         Assert.Same(exception, ex.InnerException);
     }

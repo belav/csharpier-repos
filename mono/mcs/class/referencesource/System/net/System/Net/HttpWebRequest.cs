@@ -4,24 +4,25 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Diagnostics.Tracing;
     using System.Globalization;
     using System.IO;
     using System.Net.Cache;
     using System.Net.Configuration;
+    using System.Net.Security;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Net.Security;
-    using System.Reflection;
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Diagnostics.Tracing;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
 
     /// <devdoc>
     /// <para>
@@ -33,20 +34,18 @@ namespace System.Net {
     ///    object, where the programmer can query for headers or continue reading, usw.
     ///  </para>
     /// </devdoc>
-
-
     [Flags]
-    public enum DecompressionMethods{
+    public enum DecompressionMethods
+    {
         None = 0,
         GZip = 1,
-        Deflate = 2
+        Deflate = 2,
     }
-
 
     [Serializable]
     [FriendAccessAllowed]
-    public class HttpWebRequest : WebRequest, ISerializable {
-
+    public class HttpWebRequest : WebRequest, ISerializable
+    {
         //these could have race conditions
         bool m_Saw100Continue;
         bool m_KeepAlive = true;
@@ -55,10 +54,12 @@ namespace System.Net {
         bool m_PreAuthenticate;
         DecompressionMethods m_AutomaticDecompression;
 
-        private static class AbortState {
-            public const int Public     = 1;
+        private static class AbortState
+        {
+            public const int Public = 1;
             public const int Internal = 2;
         }
+
         // interlocked
         private int m_Aborted;
 
@@ -85,31 +86,30 @@ namespace System.Net {
 
         //these should be safe.
         [Flags]
-        private enum Booleans : uint {
-            AllowAutoRedirect                       = 0x00000001,
-            AllowWriteStreamBuffering               = 0x00000002,
-            ExpectContinue                          = 0x00000004,
+        private enum Booleans : uint
+        {
+            AllowAutoRedirect = 0x00000001,
+            AllowWriteStreamBuffering = 0x00000002,
+            ExpectContinue = 0x00000004,
 
-            ProxySet                                = 0x00000010,
+            ProxySet = 0x00000010,
 
-            UnsafeAuthenticatedConnectionSharing    = 0x00000040,
-            IsVersionHttp10                         = 0x00000080,
-            SendChunked                             = 0x00000100,
-            EnableDecompression                     = 0x00000200,
-            IsTunnelRequest                         = 0x00000400,
-            IsWebSocketRequest                      = 0x00000800,
-            Default = AllowAutoRedirect | AllowWriteStreamBuffering | ExpectContinue
+            UnsafeAuthenticatedConnectionSharing = 0x00000040,
+            IsVersionHttp10 = 0x00000080,
+            SendChunked = 0x00000100,
+            EnableDecompression = 0x00000200,
+            IsTunnelRequest = 0x00000400,
+            IsWebSocketRequest = 0x00000800,
+            Default = AllowAutoRedirect | AllowWriteStreamBuffering | ExpectContinue,
         }
-
 
         internal const HttpStatusCode MaxOkStatus = (HttpStatusCode)299;
         private const HttpStatusCode MaxRedirectionStatus = (HttpStatusCode)399;
         private const int RequestLineConstantSize = 12;
         private const string ContinueHeader = "100-continue";
         internal const string ChunkedHeader = "chunked";
-        internal const string GZipHeader    = "gzip";
+        internal const string GZipHeader = "gzip";
         internal const string DeflateHeader = "deflate";
-
 
         // default delay on the Stream.Read and Stream.Write operations
         internal const int DefaultReadWriteTimeout = 5 * 60 * 1000; // 5 minutes
@@ -121,164 +121,184 @@ namespace System.Net {
         // which are the
         // unchanging pieces of the
         // request line.
-        private static readonly byte[]  HttpBytes = new byte[]{(byte)'H', (byte)'T', (byte)'T', (byte)'P', (byte)'/'};
+        private static readonly byte[] HttpBytes = new byte[]
+        {
+            (byte)'H',
+            (byte)'T',
+            (byte)'T',
+            (byte)'P',
+            (byte)'/',
+        };
 
         // Statics used in the 100 Continue timeout mechanism.
-        private static readonly WaitCallback s_EndWriteHeaders_Part2Callback = new WaitCallback(EndWriteHeaders_Part2Wrapper);
-        private static readonly TimerThread.Callback s_ContinueTimeoutCallback = new TimerThread.Callback(ContinueTimeoutCallback);
-        private static readonly TimerThread.Queue s_ContinueTimerQueue = TimerThread.GetOrCreateQueue(DefaultContinueTimeout);
-        private static readonly TimerThread.Callback s_TimeoutCallback = new TimerThread.Callback(TimeoutCallback);
+        private static readonly WaitCallback s_EndWriteHeaders_Part2Callback = new WaitCallback(
+            EndWriteHeaders_Part2Wrapper
+        );
+        private static readonly TimerThread.Callback s_ContinueTimeoutCallback =
+            new TimerThread.Callback(ContinueTimeoutCallback);
+        private static readonly TimerThread.Queue s_ContinueTimerQueue =
+            TimerThread.GetOrCreateQueue(DefaultContinueTimeout);
+        private static readonly TimerThread.Callback s_TimeoutCallback = new TimerThread.Callback(
+            TimeoutCallback
+        );
         private static readonly WaitCallback s_AbortWrapper = new WaitCallback(AbortWrapper);
 
         private static int s_UniqueGroupId;
 
-        private Booleans                _Booleans = Booleans.Default;
+        private Booleans _Booleans = Booleans.Default;
 
         // Used in the 100 Continue timeout mechanism.
-        private TimerThread.Timer       m_ContinueTimer;
-        private InterlockedGate         m_ContinueGate;
+        private TimerThread.Timer m_ContinueTimer;
+        private InterlockedGate m_ContinueGate;
 
         private int m_ContinueTimeout;
         private TimerThread.Queue m_ContinueTimerQueue;
 
         // Holds a WriteStream result to be processed by GetResponse.
-        private object                  m_PendingReturnResult;
+        private object m_PendingReturnResult;
 
         // Read and Write async results - corspond to BeginGetResponse(read), and BeginGetRequestStream(write)
-        private LazyAsyncResult         _WriteAResult;
-        private LazyAsyncResult         _ReadAResult;
+        private LazyAsyncResult _WriteAResult;
+        private LazyAsyncResult _ReadAResult;
 
         // Used by our Connection to block the Request on getting a Connection
-        private LazyAsyncResult         _ConnectionAResult;
+        private LazyAsyncResult _ConnectionAResult;
+
         // Used by our Connection to block on being able to Read from our Connection
-        private LazyAsyncResult         _ConnectionReaderAResult;
+        private LazyAsyncResult _ConnectionReaderAResult;
 
         // Once set, the Request either works Async or Sync internally
-        private TriState                _RequestIsAsync;
+        private TriState _RequestIsAsync;
 
         // Delegate that can be called on Continue Response
-        private HttpContinueDelegate    _ContinueDelegate;
+        private HttpContinueDelegate _ContinueDelegate;
 
         // Link back to the server point used for this request.
-        internal ServicePoint           _ServicePoint;
+        internal ServicePoint _ServicePoint;
 
         // this is generated by SetResponse
-        internal HttpWebResponse        _HttpResponse;
+        internal HttpWebResponse _HttpResponse;
 
 #if TRAVE
         internal HttpWebResponse _OldResponse;
 #endif
 
         // set by Connection code upon completion (can be either CoreResponseData or an Exception)
-        private object                  _CoreResponse;
-        private int                     _NestedWriteSideCheck; //To keep track nested responses for Sync case
+        private object _CoreResponse;
+        private int _NestedWriteSideCheck; //To keep track nested responses for Sync case
 
         // request values
-        private KnownHttpVerb           _Verb;
+        private KnownHttpVerb _Verb;
+
         // the actual verb set by caller or default
-        private KnownHttpVerb           _OriginVerb;
+        private KnownHttpVerb _OriginVerb;
 
         // stores the user provided Host header as Uri. If the user specified a default port explicitly we'll loose
         // that information when converting the host string to a Uri. _HostHasPort will store that information.
-        private bool                    _HostHasPort;
-        private Uri                     _HostUri;
+        private bool _HostHasPort;
+        private Uri _HostUri;
 
         // our HTTP header response, request, parsing and storage objects
-        private WebHeaderCollection     _HttpRequestHeaders;
+        private WebHeaderCollection _HttpRequestHeaders;
 
         // send buffer for output request with headers.
-        private byte[]                 _WriteBuffer;
-        private int                    _WriteBufferLength;       // The logical size of _WriteBuffer (<= WriteBuffer.Length)
+        private byte[] _WriteBuffer;
+        private int _WriteBufferLength; // The logical size of _WriteBuffer (<= WriteBuffer.Length)
 
         private const int CachedWriteBufferSize = 512;
+
         // Because we do this asychronously, we pin buffers, so we want a cache of good buffers to pin.  Here is the cache.
-        private static PinnableBufferCache _WriteBufferCache = new PinnableBufferCache("System.Net.HttpWebRequest", CachedWriteBufferSize);
-        private bool                    _WriteBufferFromPinnableCache;  // We have to explictly free if it we got our buffer from the pinnable cache
+        private static PinnableBufferCache _WriteBufferCache = new PinnableBufferCache(
+            "System.Net.HttpWebRequest",
+            CachedWriteBufferSize
+        );
+        private bool _WriteBufferFromPinnableCache; // We have to explictly free if it we got our buffer from the pinnable cache
 
         // Property to set whether writes can be handled
-        private HttpWriteMode           _HttpWriteMode;
+        private HttpWriteMode _HttpWriteMode;
 
         // the host, port, and path
-        private Uri                     _Uri;
+        private Uri _Uri;
+
         // the origin Uri host, port and path that never changes
-        private Uri                     _OriginUri;
+        private Uri _OriginUri;
 
         // for which response ContentType we will look for and parse the CharacterSet
-        private string                  _MediaType;
+        private string _MediaType;
 
         // content length
-        private long                    _ContentLength;
+        private long _ContentLength;
 
         // proxy that we are using...
-        private IWebProxy               _Proxy;
-        private ProxyChain              _ProxyChain;
+        private IWebProxy _Proxy;
+        private ProxyChain _ProxyChain;
 
-        private string                  _ConnectionGroupName;
-        private bool                    m_InternalConnectionGroup;
+        private string _ConnectionGroupName;
+        private bool m_InternalConnectionGroup;
 
-        private AuthenticationState     _ProxyAuthenticationState;
-        private AuthenticationState     _ServerAuthenticationState;
+        private AuthenticationState _ProxyAuthenticationState;
+        private AuthenticationState _ServerAuthenticationState;
 
-        private ICredentials            _AuthInfo;
-        private HttpAbortDelegate       _AbortDelegate;
+        private ICredentials _AuthInfo;
+        private HttpAbortDelegate _AbortDelegate;
 
         //
         // used to prevent Write Buffering,
         //  used otherwise for reposting POST, and PUTs in redirects
         //
-        private ConnectStream           _SubmitWriteStream;
-        private ConnectStream           _OldSubmitWriteStream;
-        private int                     _MaximumAllowedRedirections;
-        private int                     _AutoRedirects;
-        private bool                    _RedirectedToDifferentHost;
+        private ConnectStream _SubmitWriteStream;
+        private ConnectStream _OldSubmitWriteStream;
+        private int _MaximumAllowedRedirections;
+        private int _AutoRedirects;
+        private bool _RedirectedToDifferentHost;
 
         //
         // generic version of _AutoRedirects above
         // used to count the number of requests made off this WebRequest
         //
-        private int                     _RerequestCount;
+        private int _RerequestCount;
 
         //
         // Timeout in milliseconds, if a synchronous request takes longer
         // than timeout, a WebException is thrown
         //
-        private int                     _Timeout;
+        private int _Timeout;
 
         //
         // Used to track relative time out across the use of the request
         //
-        private TimerThread.Timer       _Timer;
+        private TimerThread.Timer _Timer;
 
         //
         // Timer factory, tied to the _Timeout time.
         //
-        private TimerThread.Queue       _TimerQueue;
+        private TimerThread.Queue _TimerQueue;
 
-        private int                     _RequestContinueCount;
+        private int _RequestContinueCount;
 
         //
         // Timeout for Read & Write on the Stream that we return through
         //  GetResponse().GetResponseStream() && GetRequestStream()
         //
-        private int                     _ReadWriteTimeout;
+        private int _ReadWriteTimeout;
 
-        private CookieContainer         _CookieContainer;
+        private CookieContainer _CookieContainer;
 
-        private int                     _MaximumResponseHeadersLength;
+        private int _MaximumResponseHeadersLength;
 
         private UnlockConnectionDelegate _UnlockDelegate;
 
         // Used to store information whether server responses with status code != 2xx should throw exceptions or not.
-        private bool                    _returnResponseOnFailureStatusCode;
+        private bool _returnResponseOnFailureStatusCode;
 
         // This delegate is used when content needs to be resent and buffering is not used (!AllowWriteStreamBuffering).
-        private Action<Stream>          _resendRequestContent;
+        private Action<Stream> _resendRequestContent;
 
         // When NTLM authentication is used, the content length (_ContentLength) is set to 0 for the first auth. leg:
         // Since we know that there will be 2 legs, we don't bother sending the content with the first leg, so we set
         // content length to 0. This field is used to store the original content length. The original (actual)
         // content length is re-set with the second auth. leg.
-        private long                    _originalContentLength;
+        private long _originalContentLength;
 
 #if !FEATURE_PAL
         //
@@ -293,9 +313,8 @@ namespace System.Net {
 
 #if HTTP_HEADER_EXTENSIONS_SUPPORTED
         // extension list for our namespace, used as counter, to pull a unque number out
-        private int                     _NextExtension = 10;
+        private int _NextExtension = 10;
 #endif // HTTP_HEADER_EXTENSIONS_SUPPORTED
-
 
         //
         // Properties
@@ -306,33 +325,30 @@ namespace System.Net {
 
         internal TimerThread.Timer RequestTimer
         {
-            get
-            {
-                return _Timer;
-            }
+            get { return _Timer; }
         }
 
-        internal bool Aborted {
-            get {
-                return m_Aborted != 0;
-            }
+        internal bool Aborted
+        {
+            get { return m_Aborted != 0; }
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Enables or disables automatically following redirection responses.
         ///    </para>
         /// </devdoc>
-        public virtual bool AllowAutoRedirect {
-            get {
-                return (_Booleans&Booleans.AllowAutoRedirect)!=0;
-            }
-            set {
-                if (value) {
+        public virtual bool AllowAutoRedirect
+        {
+            get { return (_Booleans & Booleans.AllowAutoRedirect) != 0; }
+            set
+            {
+                if (value)
+                {
                     _Booleans |= Booleans.AllowAutoRedirect;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.AllowAutoRedirect;
                 }
             }
@@ -343,41 +359,46 @@ namespace System.Net {
         ///       Enables or disables buffering the data stream sent to the server.
         ///    </para>
         /// </devdoc>
-        public virtual bool AllowWriteStreamBuffering {
-            get {
-                return (_Booleans&Booleans.AllowWriteStreamBuffering)!=0;
-            }
-            set {
-                if (value) {
+        public virtual bool AllowWriteStreamBuffering
+        {
+            get { return (_Booleans & Booleans.AllowWriteStreamBuffering) != 0; }
+            set
+            {
+                if (value)
+                {
                     _Booleans |= Booleans.AllowWriteStreamBuffering;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.AllowWriteStreamBuffering;
                 }
             }
         }
 
         // For portability only
-        public virtual bool AllowReadStreamBuffering {
-            get {
-                return false;
-            }
-            set {
-                if (value) {
+        public virtual bool AllowReadStreamBuffering
+        {
+            get { return false; }
+            set
+            {
+                if (value)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.NotSupported));
                 }
             }
         }
 
-        private bool ExpectContinue {
-            get {
-                return (_Booleans&Booleans.ExpectContinue)!=0;
-            }
-            set {
-                if (value) {
+        private bool ExpectContinue
+        {
+            get { return (_Booleans & Booleans.ExpectContinue) != 0; }
+            set
+            {
+                if (value)
+                {
                     _Booleans |= Booleans.ExpectContinue;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.ExpectContinue;
                 }
             }
@@ -389,39 +410,31 @@ namespace System.Net {
         ///       server.
         ///    </para>
         /// </devdoc>
-        public virtual bool HaveResponse {
-            get {
-                return _ReadAResult != null && _ReadAResult.InternalPeekCompleted;
-            }
+        public virtual bool HaveResponse
+        {
+            get { return _ReadAResult != null && _ReadAResult.InternalPeekCompleted; }
         }
 
         // this overrides the public KeepAlive setting.
         // we use this override for NTLM only
-        internal bool NtlmKeepAlive {
-            get {
-                return m_NtlmKeepAlive;
-            }
-            set {
-                m_NtlmKeepAlive = value;
-            }
+        internal bool NtlmKeepAlive
+        {
+            get { return m_NtlmKeepAlive; }
+            set { m_NtlmKeepAlive = value; }
         }
 
         // Sync code path only.
         // True if ProcessWriteCallDone Should read for an additional response.
         // False if the 100Continue code will do the read in WriteHeaders.
-        internal bool NeedsToReadForResponse {
-            get {
-                return m_NeedsToReadForResponse;
-            }
-            set {
-                m_NeedsToReadForResponse = value;
-            }
+        internal bool NeedsToReadForResponse
+        {
+            get { return m_NeedsToReadForResponse; }
+            set { m_NeedsToReadForResponse = value; }
         }
 
-        internal bool BodyStarted {
-            get {
-                return m_BodyStarted;
-            }
+        internal bool BodyStarted
+        {
+            get { return m_BodyStarted; }
         }
 
         /*
@@ -446,28 +459,21 @@ namespace System.Net {
         ///       Gets or sets the value of the Keep-Alive header.
         ///    </para>
         /// </devdoc>
-        public bool KeepAlive {
-            get {
-                return m_KeepAlive;
-            }
-            set {
-                m_KeepAlive = value;
-            }
+        public bool KeepAlive
+        {
+            get { return m_KeepAlive; }
+            set { m_KeepAlive = value; }
         }
 
         //
         // LockConnection - set to true when the
         //  request needs exclusive access to the Connection
         //
-        internal bool LockConnection {
-            get {
-                return m_LockConnection;
-            }
-            set {
-                m_LockConnection = value;
-            }
+        internal bool LockConnection
+        {
+            get { return m_LockConnection; }
+            set { m_LockConnection = value; }
         }
-
 
         /*
             Accessor:   Pipelined
@@ -489,13 +495,10 @@ namespace System.Net {
         ///       Gets or sets the value of Pipelined property.
         ///    </para>
         /// </devdoc>
-        public bool Pipelined {
-            get {
-                return m_Pipelined;
-            }
-            set {
-                m_Pipelined = value;
-            }
+        public bool Pipelined
+        {
+            get { return m_Pipelined; }
+            set { m_Pipelined = value; }
         }
 
         /// <devdoc>
@@ -503,33 +506,31 @@ namespace System.Net {
         ///       Enables or disables pre-authentication.
         ///    </para>
         /// </devdoc>
-        public override bool PreAuthenticate {
-            get {
-                return m_PreAuthenticate;
-            }
-            set {
-                m_PreAuthenticate = value;
-            }
+        public override bool PreAuthenticate
+        {
+            get { return m_PreAuthenticate; }
+            set { m_PreAuthenticate = value; }
         }
 
-        private bool ProxySet {
-            get {
-                return (_Booleans&Booleans.ProxySet)!=0;
-            }
-            set {
-                if (value) {
+        private bool ProxySet
+        {
+            get { return (_Booleans & Booleans.ProxySet) != 0; }
+            set
+            {
+                if (value)
+                {
                     _Booleans |= Booleans.ProxySet;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.ProxySet;
                 }
             }
         }
 
-        private bool RequestSubmitted {
-            get {
-                return m_RequestSubmitted;
-            }
+        private bool RequestSubmitted
+        {
+            get { return m_RequestSubmitted; }
         }
 
         // Call under lock.
@@ -537,10 +538,14 @@ namespace System.Net {
         {
             bool ret = RequestSubmitted;
             m_RequestSubmitted = true;
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitted() returning:" + ret.ToString());
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SetRequestSubmitted() returning:"
+                    + ret.ToString()
+            );
             return ret;
         }
-
 
         //
         // if the 100 Continue comes in around 350ms there might be race conditions
@@ -550,52 +555,55 @@ namespace System.Net {
         // on wether we did actually see the 100 continue. In that case, even if there's a
         // timeout, we won't set it to false.
         //
-        internal bool Saw100Continue {
-            get {
-                return m_Saw100Continue;
-            }
-            set {
-                m_Saw100Continue = value;
-            }
+        internal bool Saw100Continue
+        {
+            get { return m_Saw100Continue; }
+            set { m_Saw100Continue = value; }
         }
 
         /// <devdoc>
         ///    <para>Allows hi-speed NTLM connection sharing with keep-alive</para>
         /// </devdoc>
-        public bool UnsafeAuthenticatedConnectionSharing {
-            get {
-                return (_Booleans&Booleans.UnsafeAuthenticatedConnectionSharing)!=0;
-            }
-            set {
+        public bool UnsafeAuthenticatedConnectionSharing
+        {
+            get { return (_Booleans & Booleans.UnsafeAuthenticatedConnectionSharing) != 0; }
+            set
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-                if (value) {
+                if (value)
+                {
                     _Booleans |= Booleans.UnsafeAuthenticatedConnectionSharing;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.UnsafeAuthenticatedConnectionSharing;
                 }
             }
         }
+
         //
         // When authenticating TO THE proxy we create a shared connection
         //
-        internal  bool UnsafeOrProxyAuthenticatedConnectionSharing {
-            get {
+        internal bool UnsafeOrProxyAuthenticatedConnectionSharing
+        {
+            get
+            {
                 return m_IsCurrentAuthenticationStateProxy || UnsafeAuthenticatedConnectionSharing;
             }
         }
 
-
         // HTTP version of the request
-        private bool IsVersionHttp10 {
-            get {
-                return (_Booleans&Booleans.IsVersionHttp10)!=0;
-            }
-            set {
-                if (value) {
+        private bool IsVersionHttp10
+        {
+            get { return (_Booleans & Booleans.IsVersionHttp10) != 0; }
+            set
+            {
+                if (value)
+                {
                     _Booleans |= Booleans.IsVersionHttp10;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.IsVersionHttp10;
                 }
             }
@@ -611,29 +619,33 @@ namespace System.Net {
         ///       Enable and disable sending chunked data to the server.
         ///    </para>
         /// </devdoc>
-        public bool SendChunked {
-            get {
-                return (_Booleans&Booleans.SendChunked)!=0;
-            }
-            set {
-                if (RequestSubmitted) {
+        public bool SendChunked
+        {
+            get { return (_Booleans & Booleans.SendChunked) != 0; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_writestarted));
                 }
-                if (value) {
+                if (value)
+                {
                     _Booleans |= Booleans.SendChunked;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.SendChunked;
                 }
             }
         }
 
-        public DecompressionMethods AutomaticDecompression {
-            get {
-                return m_AutomaticDecompression;
-            }
-            set {
-                if (RequestSubmitted) {
+        public DecompressionMethods AutomaticDecompression
+        {
+            get { return m_AutomaticDecompression; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_writestarted));
                 }
                 m_AutomaticDecompression = value;
@@ -643,22 +655,20 @@ namespace System.Net {
         // This property holds our actual behaviour.
         // In some cases we might have to disable chunking even if the user has requested it.
         // In this case SendChunked returns true, but HttpWriteMode is != HttpWriteMode.Chunked
-        internal HttpWriteMode HttpWriteMode {
-            get {
-                return _HttpWriteMode;
-            }
-            set {
-                _HttpWriteMode = value;
-            }
+        internal HttpWriteMode HttpWriteMode
+        {
+            get { return _HttpWriteMode; }
+            set { _HttpWriteMode = value; }
         }
 
-
-        internal string AuthHeader(HttpResponseHeader header) {
-            if (_HttpResponse==null) {
+        internal string AuthHeader(HttpResponseHeader header)
+        {
+            if (_HttpResponse == null)
+            {
                 return null;
             }
 #if FEATURE_PAL // ROTORTODO: Remove this after re-enabling methods and op-overloads
-                //            currently if'd out in HttpWebRequest.cs
+            //            currently if'd out in HttpWebRequest.cs
             return _HttpResponse.Headers[(int)header];
 #else
             return _HttpResponse.Headers[header];
@@ -668,28 +678,38 @@ namespace System.Net {
         // This is a shortcut that would set the default policy for HTTP/HTTPS.
         // The default policy is overridden by any prefix-registered policy.
         // Will demand permission for set{}
-        public static new RequestCachePolicy DefaultCachePolicy {
-            get {
+        public static new RequestCachePolicy DefaultCachePolicy
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                RequestCachePolicy policy = RequestCacheManager.GetBinding(Uri.UriSchemeHttp).Policy;
-                if (policy == null)
-                    return WebRequest.DefaultCachePolicy;
-                return policy;
+                    RequestCachePolicy policy = RequestCacheManager
+                        .GetBinding(Uri.UriSchemeHttp)
+                        .Policy;
+                    if (policy == null)
+                        return WebRequest.DefaultCachePolicy;
+                    return policy;
 #if DEBUG
                 }
 #endif
             }
-            set {
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                // This is a replacement of RequestCachePermission demand since we are not including the latest in the product.
-                ExceptionHelper.WebPermissionUnrestricted.Demand();
+                    // This is a replacement of RequestCachePermission demand since we are not including the latest in the product.
+                    ExceptionHelper.WebPermissionUnrestricted.Demand();
 
-                RequestCacheBinding binding = RequestCacheManager.GetBinding(Uri.UriSchemeHttp);
-                RequestCacheManager.SetBinding(Uri.UriSchemeHttp, new RequestCacheBinding(binding.Cache, binding.Validator, value));
+                    RequestCacheBinding binding = RequestCacheManager.GetBinding(Uri.UriSchemeHttp);
+                    RequestCacheManager.SetBinding(
+                        Uri.UriSchemeHttp,
+                        new RequestCacheBinding(binding.Cache, binding.Validator, value)
+                    );
 #if DEBUG
                 }
 #endif
@@ -704,38 +724,48 @@ namespace System.Net {
         ///       This value can be set in the config file, the default can be overridden using the MaximumResponseHeadersLength property.
         ///    </remarks>
         /// </devdoc>
-        public static int DefaultMaximumResponseHeadersLength {
-            get {
+        public static int DefaultMaximumResponseHeadersLength
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                return SettingsSectionInternal.Section.MaximumResponseHeadersLength;
+                    return SettingsSectionInternal.Section.MaximumResponseHeadersLength;
 #if DEBUG
                 }
 #endif
             }
-            set {
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                ExceptionHelper.WebPermissionUnrestricted.Demand();
-                if (value<0 && value!=-1) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_toosmall));
-                }
-                SettingsSectionInternal.Section.MaximumResponseHeadersLength = value;
+                    ExceptionHelper.WebPermissionUnrestricted.Demand();
+                    if (value < 0 && value != -1)
+                    {
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.net_toosmall)
+                        );
+                    }
+                    SettingsSectionInternal.Section.MaximumResponseHeadersLength = value;
 #if DEBUG
                 }
 #endif
             }
         }
 
-        public static int DefaultMaximumErrorResponseLength {
-            get {
-                return SettingsSectionInternal.Section.MaximumErrorResponseLength;
-            }
-            set {
+        public static int DefaultMaximumErrorResponseLength
+        {
+            get { return SettingsSectionInternal.Section.MaximumErrorResponseLength; }
+            set
+            {
                 ExceptionHelper.WebPermissionUnrestricted.Demand();
-                if (value<0 && value!=-1) {
+                if (value < 0 && value != -1)
+                {
                     throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_toosmall));
                 }
                 SettingsSectionInternal.Section.MaximumErrorResponseLength = value;
@@ -752,15 +782,17 @@ namespace System.Net {
         ///       no such limit will be imposed on the response headers, a value of 0 means that all requests will fail.
         ///    </remarks>
         /// </devdoc>
-        public int MaximumResponseHeadersLength {
-            get {
-                return _MaximumResponseHeadersLength;
-            }
-            set {
-                if (RequestSubmitted) {
+        public int MaximumResponseHeadersLength
+        {
+            get { return _MaximumResponseHeadersLength; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
                 }
-                if (value<0 && value!=-1) {
+                if (value < 0 && value != -1)
+                {
                     throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_toosmall));
                 }
                 _MaximumResponseHeadersLength = value;
@@ -771,49 +803,48 @@ namespace System.Net {
         // AbortDelegate - set by ConnectionGroup when
         //  the request is blocked waiting for a Connection
         //
-        internal HttpAbortDelegate AbortDelegate {
-            set {
-                _AbortDelegate = value;
-            }
+        internal HttpAbortDelegate AbortDelegate
+        {
+            set { _AbortDelegate = value; }
         }
 
         // This is invoked by the Connection whenever we get access to Write to the Connection
-        internal LazyAsyncResult ConnectionAsyncResult {
-            get {
-                return _ConnectionAResult;
-            }
+        internal LazyAsyncResult ConnectionAsyncResult
+        {
+            get { return _ConnectionAResult; }
         }
 
         // This is invoked by the Connection whenever we get to Read from the Connection
-        internal LazyAsyncResult ConnectionReaderAsyncResult {
-            get {
-                return _ConnectionReaderAResult;
-            }
+        internal LazyAsyncResult ConnectionReaderAsyncResult
+        {
+            get { return _ConnectionReaderAResult; }
         }
 
         // True, if the EndGetRequestStream or GetRequestStream call returned
         // codereview: Used ONLY by Sync code
-        internal bool UserRetrievedWriteStream {
-            get {
-                return _WriteAResult != null && _WriteAResult.InternalPeekCompleted;
-            }
+        internal bool UserRetrievedWriteStream
+        {
+            get { return _WriteAResult != null && _WriteAResult.InternalPeekCompleted; }
         }
 
         // Are we currently submitting the request in Begin/End/GetRequestStream?
-        private bool IsOutstandingGetRequestStream {
-            get {
-                return _WriteAResult != null && !_WriteAResult.InternalPeekCompleted;
-            }
+        private bool IsOutstandingGetRequestStream
+        {
+            get { return _WriteAResult != null && !_WriteAResult.InternalPeekCompleted; }
         }
 
         // True if we're being used in an async manner
-        internal bool Async {
-            get {
+        internal bool Async
+        {
+            get
+            {
                 // So Long as we've not been set to false, we operate as an async request
-                return _RequestIsAsync!=TriState.False;
+                return _RequestIsAsync != TriState.False;
             }
-            set {
-                if (_RequestIsAsync == TriState.Unspecified) {
+            set
+            {
+                if (_RequestIsAsync == TriState.Unspecified)
+                {
                     _RequestIsAsync = value ? TriState.True : TriState.False;
                 }
             }
@@ -825,69 +856,78 @@ namespace System.Net {
         //  in this case UnlockConnectionDelegate must be called when the Request
         //  has finished authentication.
         //
-        internal UnlockConnectionDelegate UnlockConnectionDelegate {
-            get {
-                return _UnlockDelegate;
-            }
-            set {
-                _UnlockDelegate = value;
+        internal UnlockConnectionDelegate UnlockConnectionDelegate
+        {
+            get { return _UnlockDelegate; }
+            set { _UnlockDelegate = value; }
+        }
+
+        private bool UsesProxy
+        {
+            get { return ServicePoint.InternalProxyServicePoint; }
+        }
+
+        internal HttpStatusCode ResponseStatusCode
+        {
+            get { return _HttpResponse.StatusCode; }
+        }
+
+        internal bool UsesProxySemantics
+        {
+            get
+            {
+                return ServicePoint.InternalProxyServicePoint
+                    && (
+                        ((object)_Uri.Scheme != (object)Uri.UriSchemeHttps && !IsWebSocketRequest)
+                        || (IsTunnelRequest)
+                    );
             }
         }
 
-        private bool UsesProxy {
-            get {
-                return ServicePoint.InternalProxyServicePoint;
-            }
+        internal Uri ChallengedUri
+        {
+            get { return CurrentAuthenticationState.ChallengedUri; }
         }
 
-        internal HttpStatusCode ResponseStatusCode {
-            get {
-                return _HttpResponse.StatusCode;
-            }
-        }
-
-        internal bool UsesProxySemantics {
-            get {
-                return ServicePoint.InternalProxyServicePoint &&
-                    (((object)_Uri.Scheme != (object)Uri.UriSchemeHttps && !IsWebSocketRequest) || (IsTunnelRequest));
-            }
-        }
-
-        internal Uri ChallengedUri {
-            get {
-                return CurrentAuthenticationState.ChallengedUri;
-            }
-        }
-
-        internal AuthenticationState ProxyAuthenticationState {
-            get {
-                if (_ProxyAuthenticationState==null) {
+        internal AuthenticationState ProxyAuthenticationState
+        {
+            get
+            {
+                if (_ProxyAuthenticationState == null)
+                {
                     _ProxyAuthenticationState = new AuthenticationState(true);
                 }
                 return _ProxyAuthenticationState;
             }
         }
 
-        internal AuthenticationState ServerAuthenticationState {
-            get {
-                if (_ServerAuthenticationState==null) {
+        internal AuthenticationState ServerAuthenticationState
+        {
+            get
+            {
+                if (_ServerAuthenticationState == null)
+                {
                     _ServerAuthenticationState = new AuthenticationState(false);
                 }
                 return _ServerAuthenticationState;
             }
-            set {
-                _ServerAuthenticationState = value;
-            }
+            set { _ServerAuthenticationState = value; }
         }
 
         // the AuthenticationState we're using for authentication (proxy/server)
         // used to match entries in the Hashtable in NtlmClient & NegotiateClient
-        internal AuthenticationState CurrentAuthenticationState {
-            get {
-                return m_IsCurrentAuthenticationStateProxy ? _ProxyAuthenticationState : _ServerAuthenticationState;
+        internal AuthenticationState CurrentAuthenticationState
+        {
+            get
+            {
+                return m_IsCurrentAuthenticationStateProxy
+                    ? _ProxyAuthenticationState
+                    : _ServerAuthenticationState;
             }
-            set {
-                m_IsCurrentAuthenticationStateProxy = (object)_ProxyAuthenticationState==(object)value;
+            set
+            {
+                m_IsCurrentAuthenticationStateProxy =
+                    (object)_ProxyAuthenticationState == (object)value;
             }
         }
 
@@ -898,40 +938,40 @@ namespace System.Net {
         //  group, to prevent us from using the same Connection as
         //  non-Client Authenticated requests.
         //
-        public X509CertificateCollection ClientCertificates {
-            get {
-                if (_ClientCertificates==null) {
+        public X509CertificateCollection ClientCertificates
+        {
+            get
+            {
+                if (_ClientCertificates == null)
+                {
                     _ClientCertificates = new X509CertificateCollection();
                 }
                 return _ClientCertificates;
             }
-            set {
-                if (value==null) {
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
                 _ClientCertificates = value;
             }
         }
-
 #endif // !FEATURE_PAL
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual CookieContainer CookieContainer {
-            get {
-                return _CookieContainer;
-            }
-            set {
-                _CookieContainer = value;
-            }
+        public virtual CookieContainer CookieContainer
+        {
+            get { return _CookieContainer; }
+            set { _CookieContainer = value; }
         }
 
         // For portability only
-        public virtual bool SupportsCookieContainer {
-            get {
-                return true;
-            }
+        public virtual bool SupportsCookieContainer
+        {
+            get { return true; }
         }
 
         /// <devdoc>
@@ -944,10 +984,9 @@ namespace System.Net {
         ///       or such will not be indicated.
         ///    </para>
         /// </devdoc>
-        public override Uri RequestUri {                                   // read-only
-            get {
-                return _OriginUri;
-            }
+        public override Uri RequestUri
+        { // read-only
+            get { return _OriginUri; }
         }
 
         /*
@@ -971,18 +1010,27 @@ namespace System.Net {
         ///       Gets or sets the Content-Length header of the request.
         ///    </para>
         /// </devdoc>
-        public override long ContentLength {
-            get {
-                return _ContentLength;
-            }
-            set {
-                if (RequestSubmitted) {
+        public override long ContentLength
+        {
+            get { return _ContentLength; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_writestarted));
                 }
-                if (value < 0) {
+                if (value < 0)
+                {
                     throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_clsmall));
                 }
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ContentLength_set() was:" + _ContentLength + " now:" + value);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::ContentLength_set() was:"
+                        + _ContentLength
+                        + " now:"
+                        + value
+                );
                 _ContentLength = value;
                 _originalContentLength = value;
             }
@@ -991,13 +1039,17 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>Timeout is set to 100 seconds by default</para>
         /// </devdoc>
-        public override int Timeout {
-            get {
-                return _Timeout;
-            }
-            set {
-                if (value<0 && value!=System.Threading.Timeout.Infinite) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_ge_zero));
+        public override int Timeout
+        {
+            get { return _Timeout; }
+            set
+            {
+                if (value < 0 && value != System.Threading.Timeout.Infinite)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.net_io_timeout_use_ge_zero)
+                    );
                 }
                 if (_Timeout != value)
                 {
@@ -1027,39 +1079,52 @@ namespace System.Net {
         ///         Default is 5 mins.
         ///    </para>
         /// </devdoc>
-        public int ReadWriteTimeout {
-            get {
-                return _ReadWriteTimeout;
-            }
-            set {
-                if (RequestSubmitted) {
+        public int ReadWriteTimeout
+        {
+            get { return _ReadWriteTimeout; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
                 }
-                if (value<=0 && value!=System.Threading.Timeout.Infinite) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+                if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.net_io_timeout_use_gt_zero)
+                    );
                 }
                 _ReadWriteTimeout = value;
             }
         }
 
-        public int ContinueTimeout {
-            get {
-                return m_ContinueTimeout;
-            }
-            set {
-                if (RequestSubmitted) {
+        public int ContinueTimeout
+        {
+            get { return m_ContinueTimeout; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
                 }
-                if ((value < 0) && (value != System.Threading.Timeout.Infinite)) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_ge_zero));
+                if ((value < 0) && (value != System.Threading.Timeout.Infinite))
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.net_io_timeout_use_ge_zero)
+                    );
                 }
-                if (m_ContinueTimeout != value) {
+                if (m_ContinueTimeout != value)
+                {
                     m_ContinueTimeout = value;
 
-                    if (value == DefaultContinueTimeout) {
+                    if (value == DefaultContinueTimeout)
+                    {
                         m_ContinueTimerQueue = s_ContinueTimerQueue;
                     }
-                    else {
+                    else
+                    {
                         // Only create the timer queue if we actually need it (see ContinueTimerQueue property)
                         m_ContinueTimerQueue = null;
                     }
@@ -1067,43 +1132,57 @@ namespace System.Net {
             }
         }
 
-        private TimerThread.Queue ContinueTimerQueue {
-            get {
-                if (m_ContinueTimerQueue == null) {
-                    m_ContinueTimerQueue = TimerThread.GetOrCreateQueue(m_ContinueTimeout == 0 ? 1 : m_ContinueTimeout);
+        private TimerThread.Queue ContinueTimerQueue
+        {
+            get
+            {
+                if (m_ContinueTimerQueue == null)
+                {
+                    m_ContinueTimerQueue = TimerThread.GetOrCreateQueue(
+                        m_ContinueTimeout == 0 ? 1 : m_ContinueTimeout
+                    );
                 }
                 return m_ContinueTimerQueue;
             }
         }
 
-        internal long SwitchToContentLength() {
+        internal long SwitchToContentLength()
+        {
             //prevents clearing of transferencoding if we can't resubmit.
-            if(HaveResponse)
+            if (HaveResponse)
             {
                 return -1;
             }
 
-
             //we should only switch to content length if the server is unknown of less than IIS6.0
             //we only do this if it was orginially chunked.  If it was bufferonly, we should allow the switch
-            if( HttpWriteMode == HttpWriteMode.Chunked){
+            if (HttpWriteMode == HttpWriteMode.Chunked)
+            {
                 ConnectStream stream = _OldSubmitWriteStream;
-                if(stream == null){
+                if (stream == null)
+                {
                     stream = _SubmitWriteStream;
                 }
-                if(stream.Connection != null && stream.Connection.IISVersion >= 6){
+                if (stream.Connection != null && stream.Connection.IISVersion >= 6)
+                {
                     return -1;
                 }
             }
 
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SwitchToContentLength() Switching to HttpWriteMode.ContentLength from:" + HttpWriteMode.ToString());
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SwitchToContentLength() Switching to HttpWriteMode.ContentLength from:"
+                    + HttpWriteMode.ToString()
+            );
 
             long returnValue = -1;
             long oldContentLength = _ContentLength;
 
-            if (HttpWriteMode != HttpWriteMode.None){
-
-                if(HttpWriteMode == HttpWriteMode.Buffer){
+            if (HttpWriteMode != HttpWriteMode.None)
+            {
+                if (HttpWriteMode == HttpWriteMode.Buffer)
+                {
                     _ContentLength = _SubmitWriteStream.BufferedData.Length;
                     m_OriginallyBuffered = true;
                     HttpWriteMode = HttpWriteMode.ContentLength;
@@ -1112,18 +1191,20 @@ namespace System.Net {
 
                 //1st ntlm leg w/ preauthenticated connection
                 // we don't have data yet
-                if (NtlmKeepAlive && _OldSubmitWriteStream == null) {
+                if (NtlmKeepAlive && _OldSubmitWriteStream == null)
+                {
                     _ContentLength = 0;
                     _SubmitWriteStream.SuppressWrite = true;
 
                     //if this was previously a bufferonly request, we won't set the contentlength
                     //back after header serialization
-                    if(_SubmitWriteStream.BufferOnly != true)
+                    if (_SubmitWriteStream.BufferOnly != true)
                     {
                         returnValue = oldContentLength;
                     }
 
-                    if(HttpWriteMode == HttpWriteMode.Chunked){
+                    if (HttpWriteMode == HttpWriteMode.Chunked)
+                    {
                         HttpWriteMode = HttpWriteMode.ContentLength;
                         _SubmitWriteStream.SwitchToContentLength();
                         //restore request settings after headers are serialized
@@ -1133,21 +1214,27 @@ namespace System.Net {
                 }
 
                 //this is a resubmit w/ data already available
-                if(_OldSubmitWriteStream != null){
+                if (_OldSubmitWriteStream != null)
+                {
                     //first ntlm leg after noauth
-                    if(NtlmKeepAlive){
+                    if (NtlmKeepAlive)
+                    {
                         _ContentLength = 0;
                     }
                     //2nd leg of ntlm, or resubmit for chunked on <IIS6.0
-                    else if(_ContentLength == 0 || HttpWriteMode == HttpWriteMode.Chunked){
-                        if (_resendRequestContent == null) {
+                    else if (_ContentLength == 0 || HttpWriteMode == HttpWriteMode.Chunked)
+                    {
+                        if (_resendRequestContent == null)
+                        {
                             // Only update the length if we even have a content. We get here for methods that could
                             // potentially have a request body but didn't set one (e.g. POST, DELETE).
-                            if (_OldSubmitWriteStream.BufferedData != null) {
+                            if (_OldSubmitWriteStream.BufferedData != null)
+                            {
                                 _ContentLength = _OldSubmitWriteStream.BufferedData.Length;
                             }
                         }
-                        else {
+                        else
+                        {
                             if (HttpWriteMode == HttpWriteMode.Chunked)
                             {
                                 // If we do chunked uploads using a delegate (i.e. no buffering), set content length to
@@ -1168,7 +1255,11 @@ namespace System.Net {
                     // is used, then only switch to content length if this is the 1st NTLM auth leg (i.e. set
                     // 'Content-Length: 0' header). On the 2nd NTLM auth leg the delegate should upload the content
                     // using chunked upload.
-                    if ((HttpWriteMode == HttpWriteMode.Chunked) && ((_resendRequestContent == null) || NtlmKeepAlive)) {
+                    if (
+                        (HttpWriteMode == HttpWriteMode.Chunked)
+                        && ((_resendRequestContent == null) || NtlmKeepAlive)
+                    )
+                    {
                         HttpWriteMode = HttpWriteMode.ContentLength;
                         _SubmitWriteStream.SwitchToContentLength();
                         _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.TransferEncoding);
@@ -1182,16 +1273,27 @@ namespace System.Net {
                     }
                 }
             }
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SwitchToContentLength() ContentLength was:" + oldContentLength + " now:" + _ContentLength.ToString() + " returning:" + returnValue);
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SwitchToContentLength() ContentLength was:"
+                    + oldContentLength
+                    + " now:"
+                    + _ContentLength.ToString()
+                    + " returning:"
+                    + returnValue
+            );
             return returnValue;
         }
 
-
-        void PostSwitchToContentLength(long value){
-            if(value > -1){
+        void PostSwitchToContentLength(long value)
+        {
+            if (value > -1)
+            {
                 _ContentLength = value;
             }
-            if(value == -2){
+            if (value == -2)
+            {
                 _ContentLength = -1;
                 HttpWriteMode = HttpWriteMode.Chunked;
             }
@@ -1203,25 +1305,41 @@ namespace System.Net {
         ///     held open usually do to NTLM operations.
         ///     </para>
         /// </devdoc>
-        private void ClearAuthenticatedConnectionResources() {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearAuthenticatedConnectionResources()");
+        private void ClearAuthenticatedConnectionResources()
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::ClearAuthenticatedConnectionResources()"
+            );
 
-            if (ProxyAuthenticationState.UniqueGroupId != null || ServerAuthenticationState.UniqueGroupId != null)
+            if (
+                ProxyAuthenticationState.UniqueGroupId != null
+                || ServerAuthenticationState.UniqueGroupId != null
+            )
             {
-                GlobalLog.Assert(!UnsafeAuthenticatedConnectionSharing, "Created a unique connection AND UnsafeConnectionNtlmAuthentication is true.");
+                GlobalLog.Assert(
+                    !UnsafeAuthenticatedConnectionSharing,
+                    "Created a unique connection AND UnsafeConnectionNtlmAuthentication is true."
+                );
                 // A unique connection was create so we must tear it down or it gets leaked
                 ServicePoint.ReleaseConnectionGroup(GetConnectionGroupLine());
             }
 
             UnlockConnectionDelegate unlockConnectionDelegate = this.UnlockConnectionDelegate;
-            try {
-                if (unlockConnectionDelegate != null) {
+            try
+            {
+                if (unlockConnectionDelegate != null)
+                {
                     unlockConnectionDelegate();
                 }
                 this.UnlockConnectionDelegate = null;
             }
-            catch (Exception exception) {
-                if (NclUtilities.IsFatal(exception)) throw;
+            catch (Exception exception)
+            {
+                if (NclUtilities.IsFatal(exception))
+                    throw;
             }
 
             ProxyAuthenticationState.ClearSession(this);
@@ -1232,77 +1350,137 @@ namespace System.Net {
         // Is set to true under the _connection_ lock to indicate that header are written
         // Is set to false when we start submitting
         //
-        internal bool HeadersCompleted {
-            get {
-                return m_HeadersCompleted;
-            }
-            set {
-                m_HeadersCompleted = value;
-            }
+        internal bool HeadersCompleted
+        {
+            get { return m_HeadersCompleted; }
+            set { m_HeadersCompleted = value; }
         }
 
         // This method checks the consistency of the protocol usage.
         // It also might adjust the upload behaviour to comply with what the server supports.
-        private void CheckProtocol(bool onRequestStream) {
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckProtocol(" + onRequestStream + ") HttpWriteMode:" + HttpWriteMode + " SendChunked:" + SendChunked + " ContentLength:" + ContentLength);
-            if (!CanGetRequestStream) {
-                if (onRequestStream) {
+        private void CheckProtocol(bool onRequestStream)
+        {
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CheckProtocol("
+                    + onRequestStream
+                    + ") HttpWriteMode:"
+                    + HttpWriteMode
+                    + " SendChunked:"
+                    + SendChunked
+                    + " ContentLength:"
+                    + ContentLength
+            );
+            if (!CanGetRequestStream)
+            {
+                if (onRequestStream)
+                {
                     // prevent someone from getting a request stream, if the protocol verb/method doesn't support it
                     throw new ProtocolViolationException(SR.GetString(SR.net_nouploadonget));
                 }
-                else {
+                else
+                {
                     // prevent someone from setting ContentLength/Chunked, and then doing a Get
-                    if ((HttpWriteMode!=HttpWriteMode.Unknown && HttpWriteMode!=HttpWriteMode.None) || (ContentLength > 0) || SendChunked) {
-                        throw new ProtocolViolationException(SR.GetString(SR.net_nocontentlengthonget));
+                    if (
+                        (
+                            HttpWriteMode != HttpWriteMode.Unknown
+                            && HttpWriteMode != HttpWriteMode.None
+                        )
+                        || (ContentLength > 0)
+                        || SendChunked
+                    )
+                    {
+                        throw new ProtocolViolationException(
+                            SR.GetString(SR.net_nocontentlengthonget)
+                        );
                     }
                     // GET & HEAD requests will end up here
                     HttpWriteMode = HttpWriteMode.None;
                 }
             }
-            else {
-                if (HttpWriteMode==HttpWriteMode.Unknown) {
-                    if (SendChunked) {
+            else
+            {
+                if (HttpWriteMode == HttpWriteMode.Unknown)
+                {
+                    if (SendChunked)
+                    {
                         // prevent someone from sending chunked to a HTTP/1.0 server
-                        if (ServicePoint.HttpBehaviour==HttpBehaviour.HTTP11 || ServicePoint.HttpBehaviour==HttpBehaviour.Unknown) {
+                        if (
+                            ServicePoint.HttpBehaviour == HttpBehaviour.HTTP11
+                            || ServicePoint.HttpBehaviour == HttpBehaviour.Unknown
+                        )
+                        {
                             HttpWriteMode = HttpWriteMode.Chunked;
                         }
-                        else {
-                            if (AllowWriteStreamBuffering) {
+                        else
+                        {
+                            if (AllowWriteStreamBuffering)
+                            {
                                 // change this request to buffer instead of using chunking
                                 HttpWriteMode = HttpWriteMode.Buffer;
                             }
-                            else {
-                                throw new ProtocolViolationException(SR.GetString(SR.net_nochunkuploadonhttp10));
+                            else
+                            {
+                                throw new ProtocolViolationException(
+                                    SR.GetString(SR.net_nochunkuploadonhttp10)
+                                );
                             }
                         }
                     }
-                    else {
+                    else
+                    {
                         // we need to do some fixups if we don't have a HttpWriteMode
                         // unknown verbs (like TRACE) will also end up here. since we don't know if we need to send
                         // a content we'll assume we won't and upload will work only if ContentLength or Chunked
                         // were set. note that this means that we won't ever buffer for unknown verbs unless
                         // you call [Begin]GetRequestStream before [Begin]GetResponse.
-                        HttpWriteMode = ContentLength>=0 ? HttpWriteMode.ContentLength : onRequestStream ? HttpWriteMode.Buffer : HttpWriteMode.None;
+                        HttpWriteMode =
+                            ContentLength >= 0 ? HttpWriteMode.ContentLength
+                            : onRequestStream ? HttpWriteMode.Buffer
+                            : HttpWriteMode.None;
                     }
                 }
             }
-            if (HttpWriteMode!=HttpWriteMode.Chunked) {
-                if ((onRequestStream || _OriginVerb.Equals(KnownHttpVerb.Post) || _OriginVerb.Equals(KnownHttpVerb.Put)) && ContentLength == -1 && !AllowWriteStreamBuffering && KeepAlive) {
+            if (HttpWriteMode != HttpWriteMode.Chunked)
+            {
+                if (
+                    (
+                        onRequestStream
+                        || _OriginVerb.Equals(KnownHttpVerb.Post)
+                        || _OriginVerb.Equals(KnownHttpVerb.Put)
+                    )
+                    && ContentLength == -1
+                    && !AllowWriteStreamBuffering
+                    && KeepAlive
+                )
+                {
                     // Missing Entity Body Delimiter:
                     // prevent someone from trying to send data without setting
                     // a ContentLength or InternalSendChunked when buffering is disabled and on a KeepAlive connection
                     throw new ProtocolViolationException(SR.GetString(SR.net_contentlengthmissing));
                 }
-                if (!ValidationHelper.IsBlankString(TransferEncoding)) {
+                if (!ValidationHelper.IsBlankString(TransferEncoding))
+                {
                     // Transfer Encoding Without Chunked
                     // prevent someone from setting a Transfer Encoding without having InternalSendChunked==true
                     throw new InvalidOperationException(SR.GetString(SR.net_needchunked));
                 }
             }
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckProtocol(" + onRequestStream + ") no error, returning null. HttpWriteMode:" + HttpWriteMode + " SendChunked:" + SendChunked + " ContentLength:" + ContentLength);
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CheckProtocol("
+                    + onRequestStream
+                    + ") no error, returning null. HttpWriteMode:"
+                    + HttpWriteMode
+                    + " SendChunked:"
+                    + SendChunked
+                    + " ContentLength:"
+                    + ContentLength
+            );
             return;
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -1316,23 +1494,42 @@ namespace System.Net {
         ///    operations still blocking.
         ///   </para>
         /// </devdoc>
-        [HostProtection(ExternalThreading=true)]
-        public override IAsyncResult BeginGetRequestStream(AsyncCallback callback, object state) {
+        [HostProtection(ExternalThreading = true)]
+        public override IAsyncResult BeginGetRequestStream(AsyncCallback callback, object state)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
                 bool success = false;
-                try {
-                    GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetRequestStream");
-                    if (Logging.On) Logging.Enter(Logging.Web, this, "BeginGetRequestStream", "");
+                try
+                {
+                    GlobalLog.Enter(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::BeginGetRequestStream"
+                    );
+                    if (Logging.On)
+                        Logging.Enter(Logging.Web, this, "BeginGetRequestStream", "");
                     CheckProtocol(true);
 
-    #if !FEATURE_PAL
-                    ContextAwareResult asyncResult = new ContextAwareResult(IdentityRequired, true, this, state, callback);
-    #else // !FEATURE_PAL
-                ContextAwareResult asyncResult = new ContextAwareResult(false, true, this, state, callback);
-    #endif // !FEATURE_PAL
-
+#if !FEATURE_PAL
+                    ContextAwareResult asyncResult = new ContextAwareResult(
+                        IdentityRequired,
+                        true,
+                        this,
+                        state,
+                        callback
+                    );
+#else // !FEATURE_PAL
+                ContextAwareResult asyncResult = new ContextAwareResult(
+                    false,
+                    true,
+                    this,
+                    state,
+                    callback
+                );
+#endif // !FEATURE_PAL
 
                     lock (asyncResult.StartPostingAsyncOp())
                     {
@@ -1359,7 +1556,9 @@ namespace System.Net {
                             // prevent new requests when low on resources
                             if (!RequestSubmitted && NclUtilities.IsThreadPoolLow())
                             {
-                                Exception exception = new InvalidOperationException(SR.GetString(SR.net_needmorethreads));
+                                Exception exception = new InvalidOperationException(
+                                    SR.GetString(SR.net_needmorethreads)
+                                );
                                 Abort(exception, AbortState.Public);
                                 throw exception;
                             }
@@ -1368,14 +1567,18 @@ namespace System.Net {
                             {
                                 if (_WriteAResult != null)
                                 {
-                                    throw new InvalidOperationException(SR.GetString(SR.net_repcall));
+                                    throw new InvalidOperationException(
+                                        SR.GetString(SR.net_repcall)
+                                    );
                                 }
 
                                 // See if we're already submitted a request (e.g. via GetResponse).
                                 if (SetRequestSubmitted())
                                 {
                                     // Not completed write stream, this is an application error.
-                                    throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
+                                    throw new InvalidOperationException(
+                                        SR.GetString(SR.net_reqsubmitted)
+                                    );
                                 }
 
                                 // If there's already been a _ReadAResult completed, it better have been with an exception, like an abort.
@@ -1385,8 +1588,16 @@ namespace System.Net {
                                 // called or any other valid _ReadAResult created yet.
                                 if (_ReadAResult != null)
                                 {
-                                    GlobalLog.Assert(_ReadAResult.InternalPeekCompleted, "HttpWebRequest#{0}::BeginGetRequestStream()|Incomplete _ReadAResult present on request.", ValidationHelper.HashString(this));
-                                    GlobalLog.Assert(_ReadAResult.Result is Exception, "HttpWebRequest#{0}::BeginGetRequestStream()|_ReadAResult with successful completion already present on request.", ValidationHelper.HashString(this));
+                                    GlobalLog.Assert(
+                                        _ReadAResult.InternalPeekCompleted,
+                                        "HttpWebRequest#{0}::BeginGetRequestStream()|Incomplete _ReadAResult present on request.",
+                                        ValidationHelper.HashString(this)
+                                    );
+                                    GlobalLog.Assert(
+                                        _ReadAResult.Result is Exception,
+                                        "HttpWebRequest#{0}::BeginGetRequestStream()|_ReadAResult with successful completion already present on request.",
+                                        ValidationHelper.HashString(this)
+                                    );
                                     throw (Exception)_ReadAResult.Result;
                                 }
 
@@ -1397,7 +1608,12 @@ namespace System.Net {
 
                             // OK, we haven't submitted the request yet, so do so now
                             // save off verb from origin Verb
-                            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetRequestStream() resetting CurrentMethod to " + _OriginVerb);
+                            GlobalLog.Print(
+                                "HttpWebRequest#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::BeginGetRequestStream() resetting CurrentMethod to "
+                                    + _OriginVerb
+                            );
                             CurrentMethod = _OriginVerb;
                             BeginSubmitRequest();
                         }
@@ -1405,15 +1621,22 @@ namespace System.Net {
                         asyncResult.FinishPostingAsyncOp();
                     }
 
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetRequestStream", ValidationHelper.HashString(asyncResult));
-                    if (Logging.On) Logging.Exit(Logging.Web, this, "BeginGetRequestStream", asyncResult);
+                    GlobalLog.Leave(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::BeginGetRequestStream",
+                        ValidationHelper.HashString(asyncResult)
+                    );
+                    if (Logging.On)
+                        Logging.Exit(Logging.Web, this, "BeginGetRequestStream", asyncResult);
                     success = true;
                     return asyncResult;
                 }
-                finally {
+                finally
+                {
                     if (FrameworkEventSource.Log.IsEnabled())
                     {
-                        LogBeginGetRequestStream(success, synchronous : false);
+                        LogBeginGetRequestStream(success, synchronous: false);
                     }
                 }
 #if DEBUG
@@ -1421,7 +1644,8 @@ namespace System.Net {
 #endif
         }
 
-        public override Stream EndGetRequestStream(IAsyncResult asyncResult) {
+        public override Stream EndGetRequestStream(IAsyncResult asyncResult)
+        {
             TransportContext ignored;
             return EndGetRequestStream(asyncResult, out ignored);
         }
@@ -1432,57 +1656,89 @@ namespace System.Net {
         public Stream EndGetRequestStream(IAsyncResult asyncResult, out TransportContext context)
         {
             bool success = false;
-            try {
+            try
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User))
+                {
 #endif
-                    GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndGetRequestStream", ValidationHelper.HashString(asyncResult));
-                    if (Logging.On) Logging.Enter(Logging.Web, this, "EndGetRequestStream", "");
+                    GlobalLog.Enter(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::EndGetRequestStream",
+                        ValidationHelper.HashString(asyncResult)
+                    );
+                    if (Logging.On)
+                        Logging.Enter(Logging.Web, this, "EndGetRequestStream", "");
 
                     context = null;
 
                     //
                     // parameter validation
                     //
-                    if (asyncResult == null) {
+                    if (asyncResult == null)
+                    {
                         throw new ArgumentNullException("asyncResult");
                     }
                     LazyAsyncResult castedAsyncResult = asyncResult as LazyAsyncResult;
-                    if (castedAsyncResult == null || castedAsyncResult.AsyncObject != this) {
-                        throw new ArgumentException(SR.GetString(SR.net_io_invalidasyncresult), "asyncResult");
+                    if (castedAsyncResult == null || castedAsyncResult.AsyncObject != this)
+                    {
+                        throw new ArgumentException(
+                            SR.GetString(SR.net_io_invalidasyncresult),
+                            "asyncResult"
+                        );
                     }
-                    if (castedAsyncResult.EndCalled) {
-                        throw new InvalidOperationException(SR.GetString(SR.net_io_invalidendcall, "EndGetRequestStream"));
+                    if (castedAsyncResult.EndCalled)
+                    {
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.net_io_invalidendcall, "EndGetRequestStream")
+                        );
                     }
 
-                    ConnectStream connectStream = castedAsyncResult.InternalWaitForCompletion() as ConnectStream;
+                    ConnectStream connectStream =
+                        castedAsyncResult.InternalWaitForCompletion() as ConnectStream;
                     castedAsyncResult.EndCalled = true;
 
                     if (connectStream == null)
                     {
-                        if (Logging.On) Logging.Exception(Logging.Web, this, "EndGetRequestStream", castedAsyncResult.Result as Exception);
+                        if (Logging.On)
+                            Logging.Exception(
+                                Logging.Web,
+                                this,
+                                "EndGetRequestStream",
+                                castedAsyncResult.Result as Exception
+                            );
                         throw (Exception)castedAsyncResult.Result;
                     }
 
                     context = new ConnectStreamContext(connectStream);
 
                     // Otherwise it worked, so return the HttpWebResponse.
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndGetRequestStream", ValidationHelper.HashString(connectStream));
-                    if (Logging.On) Logging.Exit(Logging.Web, this, "EndGetRequestStream", connectStream);
+                    GlobalLog.Leave(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::EndGetRequestStream",
+                        ValidationHelper.HashString(connectStream)
+                    );
+                    if (Logging.On)
+                        Logging.Exit(Logging.Web, this, "EndGetRequestStream", connectStream);
                     success = true;
                     return connectStream;
 #if DEBUG
                 }
 #endif
             }
-            finally {
-                if (FrameworkEventSource.Log.IsEnabled()) {
-                    LogEndGetRequestStream(success, synchronous : false);
+            finally
+            {
+                if (FrameworkEventSource.Log.IsEnabled())
+                {
+                    LogEndGetRequestStream(success, synchronous: false);
                 }
             }
         }
 
-        public override Stream GetRequestStream() {
+        public override Stream GetRequestStream()
+        {
             TransportContext ignored;
             return GetRequestStream(out ignored);
         }
@@ -1496,19 +1752,26 @@ namespace System.Net {
         ///    exception to be thrown.
         ///</para>
         /// </devdoc>
-        public Stream GetRequestStream(out TransportContext context) {
+        public Stream GetRequestStream(out TransportContext context)
+        {
             bool success = false;
-            try {
+            try
+            {
                 // this needs to be in the begining in order to correctly log begin request in case of ProtocolViolationException
-                if (FrameworkEventSource.Log.IsEnabled()) {
-                    LogBeginGetRequestStream(success : true, synchronous : true);
+                if (FrameworkEventSource.Log.IsEnabled())
+                {
+                    LogBeginGetRequestStream(success: true, synchronous: true);
                 }
 
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync))
+                {
 #endif
-                    GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetRequestStream");
-                    if (Logging.On) Logging.Enter(Logging.Web, this, "GetRequestStream", "");
+                    GlobalLog.Enter(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetRequestStream"
+                    );
+                    if (Logging.On)
+                        Logging.Enter(Logging.Web, this, "GetRequestStream", "");
 
                     context = null;
 
@@ -1528,7 +1791,9 @@ namespace System.Net {
                             if (SetRequestSubmitted())
                             {
                                 // Not completed write stream, this is an application error.
-                                throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
+                                throw new InvalidOperationException(
+                                    SR.GetString(SR.net_reqsubmitted)
+                                );
                             }
 
                             // If there's already been a _ReadAResult completed, it better have been with an exception, like an abort.
@@ -1538,8 +1803,16 @@ namespace System.Net {
                             // called or any other valid _ReadAResult created yet.
                             if (_ReadAResult != null)
                             {
-                                GlobalLog.Assert(_ReadAResult.InternalPeekCompleted, "HttpWebRequest#{0}::GetRequestStream()|Incomplete _ReadAResult present on request.", ValidationHelper.HashString(this));
-                                GlobalLog.Assert(_ReadAResult.Result is Exception, "HttpWebRequest#{0}::GetRequestStream()|_ReadAResult with successful completion already present on request.", ValidationHelper.HashString(this));
+                                GlobalLog.Assert(
+                                    _ReadAResult.InternalPeekCompleted,
+                                    "HttpWebRequest#{0}::GetRequestStream()|Incomplete _ReadAResult present on request.",
+                                    ValidationHelper.HashString(this)
+                                );
+                                GlobalLog.Assert(
+                                    _ReadAResult.Result is Exception,
+                                    "HttpWebRequest#{0}::GetRequestStream()|_ReadAResult with successful completion already present on request.",
+                                    ValidationHelper.HashString(this)
+                                );
                                 throw (Exception)_ReadAResult.Result;
                             }
 
@@ -1551,12 +1824,18 @@ namespace System.Net {
 
                         // OK, we haven't submitted the request yet, so do so now
                         // save off verb from origin Verb
-                        GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "GetRequestStream() resetting CurrentMethod to " + _OriginVerb);
+                        GlobalLog.Print(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "GetRequestStream() resetting CurrentMethod to "
+                                + _OriginVerb
+                        );
                         CurrentMethod = _OriginVerb;
 
                         // Submit the Request, causes us to queue ourselves to a Connection and may block
                         // It has happened that Sync path uses this loop the Retry memeber for handling resubmissions.
-                        while (m_Retry && !_WriteAResult.InternalPeekCompleted) {
+                        while (m_Retry && !_WriteAResult.InternalPeekCompleted)
+                        {
                             _OldSubmitWriteStream = null;
                             _SubmitWriteStream = null;
                             BeginSubmitRequest();
@@ -1565,36 +1844,51 @@ namespace System.Net {
                         while (Aborted && !_WriteAResult.InternalPeekCompleted)
                         {
                             // spin untill the _CoreResponse is set
-                            if (!(_CoreResponse is Exception)) 
+                            if (!(_CoreResponse is Exception))
                                 Thread.SpinWait(1);
-                            else 
+                            else
                                 CheckWriteSideResponseProcessing();
                         }
                     }
 
-                    ConnectStream connectStream = _WriteAResult.InternalWaitForCompletion() as ConnectStream;
+                    ConnectStream connectStream =
+                        _WriteAResult.InternalWaitForCompletion() as ConnectStream;
                     _WriteAResult.EndCalled = true;
                     success = true;
 
                     if (connectStream == null)
                     {
-                        if (Logging.On) Logging.Exception(Logging.Web, this, "EndGetRequestStream", _WriteAResult.Result as Exception);
+                        if (Logging.On)
+                            Logging.Exception(
+                                Logging.Web,
+                                this,
+                                "EndGetRequestStream",
+                                _WriteAResult.Result as Exception
+                            );
                         throw (Exception)_WriteAResult.Result;
                     }
 
                     context = new ConnectStreamContext(connectStream);
 
-                    if (Logging.On) Logging.Exit(Logging.Web, this, "GetRequestStream", connectStream);
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetRequestStream", ValidationHelper.HashString(connectStream));
+                    if (Logging.On)
+                        Logging.Exit(Logging.Web, this, "GetRequestStream", connectStream);
+                    GlobalLog.Leave(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::GetRequestStream",
+                        ValidationHelper.HashString(connectStream)
+                    );
 
                     return connectStream;
 #if DEBUG
                 }
 #endif
             }
-            finally {
-                if (FrameworkEventSource.Log.IsEnabled()) {
-                    LogEndGetRequestStream(success, synchronous : true);
+            finally
+            {
+                if (FrameworkEventSource.Log.IsEnabled())
+                {
+                    LogEndGetRequestStream(success, synchronous: true);
                 }
             }
         }
@@ -1604,10 +1898,19 @@ namespace System.Net {
         // we're not sending data with a GET or HEAD, these are dissallowed by the HTTP spec.
         // Returns: true if we allow sending data for this request, false otherwise
         //
-        private bool CanGetRequestStream {
-            get {
+        private bool CanGetRequestStream
+        {
+            get
+            {
                 bool result = !CurrentMethod.ContentBodyNotAllowed;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CanGetRequestStream(" + _OriginVerb + "): " + result);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CanGetRequestStream("
+                        + _OriginVerb
+                        + "): "
+                        + result
+                );
                 return result;
             }
         }
@@ -1618,10 +1921,19 @@ namespace System.Net {
         // this is dissallowed per the HTTP spec for a HEAD request.
         // Returns: true if we allow sending data for this request, false otherwise
         //
-        internal bool CanGetResponseStream {
-            get {
+        internal bool CanGetResponseStream
+        {
+            get
+            {
                 bool result = !CurrentMethod.ExpectNoContentResponse;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CanGetResponseStream(" + CurrentMethod + "): " + result);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CanGetResponseStream("
+                        + CurrentMethod
+                        + "): "
+                        + result
+                );
                 return result;
             }
         }
@@ -1632,10 +1944,19 @@ namespace System.Net {
         // Assumes Method is already set.
         // Returns: true, if we must send some kind of content
         //
-        internal bool RequireBody {
-            get {
+        internal bool RequireBody
+        {
+            get
+            {
                 bool result = CurrentMethod.RequireContentBody;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::RequireBody(" + CurrentMethod + "): " + result);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::RequireBody("
+                        + CurrentMethod
+                        + "): "
+                        + result
+                );
                 return result;
             }
         }
@@ -1692,21 +2013,34 @@ namespace System.Net {
         }
         */
 
-        internal bool HasEntityBody {
-            get {
-                return HttpWriteMode==HttpWriteMode.Chunked || HttpWriteMode==HttpWriteMode.Buffer || (HttpWriteMode==HttpWriteMode.ContentLength && ContentLength>0);
+        internal bool HasEntityBody
+        {
+            get
+            {
+                return HttpWriteMode == HttpWriteMode.Chunked
+                    || HttpWriteMode == HttpWriteMode.Buffer
+                    || (HttpWriteMode == HttpWriteMode.ContentLength && ContentLength > 0);
             }
         }
-
 
         // This is a notify from the connection ReadCallback about
         // - error response received and
         // - the KeepAlive status agreed by both sides
-        internal void ErrorStatusCodeNotify(Connection connection, bool isKeepAlive, bool fatal) {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ErrorStatusCodeNotify");
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ErrorStatusCodeNotify() Connection has reported Error Response Status" + (fatal ? " (fatal)" : ""));
+        internal void ErrorStatusCodeNotify(Connection connection, bool isKeepAlive, bool fatal)
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ErrorStatusCodeNotify"
+            );
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::ErrorStatusCodeNotify() Connection has reported Error Response Status"
+                    + (fatal ? " (fatal)" : "")
+            );
             ConnectStream submitStream = _SubmitWriteStream;
-            if (submitStream != null && submitStream.Connection == connection) {
+            if (submitStream != null && submitStream.Connection == connection)
+            {
                 if (!fatal)
                 {
                     submitStream.ErrorResponseNotify(isKeepAlive);
@@ -1719,8 +2053,13 @@ namespace System.Net {
                     }
                 }
             }
-            else {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ErrorStatusCodeNotify() IGNORE connection is not used");
+            else
+            {
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::ErrorStatusCodeNotify() IGNORE connection is not used"
+                );
             }
         }
 
@@ -1747,8 +2086,15 @@ namespace System.Net {
         //
         private HttpProcessingResult DoSubmitRequestProcessing(ref Exception exception)
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::DoSubmitRequestProcessing");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ErrorStatusCodeNotify");
+            GlobalLog.Enter(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::DoSubmitRequestProcessing"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ErrorStatusCodeNotify"
+            );
             HttpProcessingResult result = HttpProcessingResult.Continue;
 
             m_Retry = false;
@@ -1761,9 +2107,11 @@ namespace System.Net {
                 // it do to authentication, redirection or something
                 // else, then handle clearing out state and draining out old response.
                 //
-                if (_HttpResponse != null) {
+                if (_HttpResponse != null)
+                {
                     // give apps the chance to examine the headers of the new response
-                    if (_CookieContainer != null) {
+                    if (_CookieContainer != null)
+                    {
                         CookieModule.OnReceivedHeaders(this);
                     }
 
@@ -1778,7 +2126,10 @@ namespace System.Net {
                 {
                     resubmit = true;
                 }
-                else if (CheckResubmitForCache(ref exception) || CheckResubmit(ref exception, ref disableUpload))
+                else if (
+                    CheckResubmitForCache(ref exception)
+                    || CheckResubmit(ref exception, ref disableUpload)
+                )
                 {
                     resubmit = true;
                     checkNextProxy = false;
@@ -1795,7 +2146,11 @@ namespace System.Net {
                     _AutoRedirects--;
                     OpenWriteSideResponseWindow();
                     ConnectionReturnResult connectionResult = new ConnectionReturnResult(1);
-                    ConnectionReturnResult.Add(ref connectionResult, this, _HttpResponse.CoreResponseData);
+                    ConnectionReturnResult.Add(
+                        ref connectionResult,
+                        this,
+                        _HttpResponse.CoreResponseData
+                    );
                     m_PendingReturnResult = connectionResult;
                     _HttpResponse = null;
                     // We're not expecting a response from the server after the user finishes uploading.
@@ -1804,13 +2159,17 @@ namespace System.Net {
                 }
 
                 // See if we're doing proxy failover.  If so, see if there's another one.
-                // 
+                //
 
                 ServicePoint servicePoint = null;
                 if (checkNextProxy)
                 {
                     WebException webException = exception as WebException;
-                    if (webException != null && webException.InternalStatus == WebExceptionInternalStatus.ServicePointFatal)
+                    if (
+                        webException != null
+                        && webException.InternalStatus
+                            == WebExceptionInternalStatus.ServicePointFatal
+                    )
                     {
                         ProxyChain chain = _ProxyChain;
                         if (chain != null)
@@ -1823,7 +2182,11 @@ namespace System.Net {
 
                 if (resubmit)
                 {
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::DoSubmitRequestProcessing() resubmiting this request.");
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::DoSubmitRequestProcessing() resubmiting this request."
+                    );
 
                     // Here is a little hack for sync looping through BeginSubmitRequest.
                     // We want to unlock cache protocol only if this is NOT a retry.
@@ -1837,8 +2200,13 @@ namespace System.Net {
                     // requires this path in order to work at all.  But Kerberos for example can give a 401 here.
                     // Set a flag saying that if we get a 401, start over without credentials.
                     WebException e = exception as WebException;
-                    if(e != null){
-                        if (e.Status == WebExceptionStatus.PipelineFailure || e.Status == WebExceptionStatus.KeepAliveFailure) {
+                    if (e != null)
+                    {
+                        if (
+                            e.Status == WebExceptionStatus.PipelineFailure
+                            || e.Status == WebExceptionStatus.KeepAliveFailure
+                        )
+                        {
                             m_Extra401Retry = true;
                         }
                     }
@@ -1852,10 +2220,12 @@ namespace System.Net {
                         _ServicePoint = servicePoint;
                     }
 
-                    if (Async) {
+                    if (Async)
+                    {
                         SubmitRequest(servicePoint);
                     }
-                    else {
+                    else
+                    {
                         // under sync conditions, we let GetResponse() loop calling BeginSubmitRequest() until we're done
                         m_Retry = true;
                     }
@@ -1870,24 +2240,33 @@ namespace System.Net {
                 }
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::DoSubmitRequestProcessing", result.ToString());
+            GlobalLog.Leave(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::DoSubmitRequestProcessing",
+                result.ToString()
+            );
             return result;
         }
-
-
 
         /// <devdoc>
         ///    <para>Used to query for the Response of an HTTP Request using Async</para>
         /// </devdoc>
-        [HostProtection(ExternalThreading=true)]
-        public override IAsyncResult BeginGetResponse(AsyncCallback callback, object state) {
+        [HostProtection(ExternalThreading = true)]
+        public override IAsyncResult BeginGetResponse(AsyncCallback callback, object state)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
                 bool success = false;
-                try {
-                    GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetResponse");
-                    if (Logging.On) Logging.Enter(Logging.Web, this, "BeginGetResponse", "");
+                try
+                {
+                    GlobalLog.Enter(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetResponse"
+                    );
+                    if (Logging.On)
+                        Logging.Enter(Logging.Web, this, "BeginGetResponse", "");
 
                     // No need to recheck the request parameters if we already did it in BeginGetRequestStream().
                     // This prevents problems when redirects change verbs.
@@ -1896,7 +2275,8 @@ namespace System.Net {
                         CheckProtocol(false);
                     }
 
-                    ConnectStream stream = _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream;
+                    ConnectStream stream =
+                        _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream;
 
                     // Close the request stream if the user forgot to do so. Throw an exception if user has not written all of
                     // the promised data.
@@ -1904,7 +2284,9 @@ namespace System.Net {
                     {
                         if (stream.BytesLeftToWrite > 0)
                         {
-                            throw new ProtocolViolationException(SR.GetString(SR.net_entire_body_not_written));
+                            throw new ProtocolViolationException(
+                                SR.GetString(SR.net_entire_body_not_written)
+                            );
                         }
                         else
                         {
@@ -1913,19 +2295,35 @@ namespace System.Net {
                     }
                     else if (stream == null && HasEntityBody)
                     {
-                        throw new ProtocolViolationException(SR.GetString(SR.net_must_provide_request_body));
+                        throw new ProtocolViolationException(
+                            SR.GetString(SR.net_must_provide_request_body)
+                        );
                     }
 
-    #if !FEATURE_PAL
-                    ContextAwareResult asyncResult = new ContextAwareResult(IdentityRequired, true, this, state, callback);
-    #else // FEATURE_PAL
-                        ContextAwareResult asyncResult = new ContextAwareResult(false, true, this, state, callback);
-    #endif
+#if !FEATURE_PAL
+                    ContextAwareResult asyncResult = new ContextAwareResult(
+                        IdentityRequired,
+                        true,
+                        this,
+                        state,
+                        callback
+                    );
+#else // FEATURE_PAL
+                ContextAwareResult asyncResult = new ContextAwareResult(
+                    false,
+                    true,
+                    this,
+                    state,
+                    callback
+                );
+#endif
 
                     if (!RequestSubmitted && NclUtilities.IsThreadPoolLow())
                     {
                         // prevent new requests when low on resources
-                        Exception exception = new InvalidOperationException(SR.GetString(SR.net_needmorethreads));
+                        Exception exception = new InvalidOperationException(
+                            SR.GetString(SR.net_needmorethreads)
+                        );
                         Abort(exception, AbortState.Public);
                         throw exception;
                     }
@@ -1947,7 +2345,9 @@ namespace System.Net {
                             {
                                 if (_ReadAResult != null)
                                 {
-                                    throw new InvalidOperationException(SR.GetString(SR.net_repcall));
+                                    throw new InvalidOperationException(
+                                        SR.GetString(SR.net_repcall)
+                                    );
                                 }
 
                                 _ReadAResult = asyncResult;
@@ -1961,8 +2361,20 @@ namespace System.Net {
 
                         if (gotResponse)
                         {
-                            if (Logging.On) Logging.Exit(Logging.Web, this, "BeginGetResponse", _ReadAResult.Result);
-                            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetResponse", "Already Completed, response = " + ValidationHelper.HashString(_ReadAResult.Result));
+                            if (Logging.On)
+                                Logging.Exit(
+                                    Logging.Web,
+                                    this,
+                                    "BeginGetResponse",
+                                    _ReadAResult.Result
+                                );
+                            GlobalLog.Leave(
+                                "HttpWebRequest#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::BeginGetResponse",
+                                "Already Completed, response = "
+                                    + ValidationHelper.HashString(_ReadAResult.Result)
+                            );
                             Exception e = _ReadAResult.Result as Exception;
                             if (e != null)
                             {
@@ -1986,14 +2398,21 @@ namespace System.Net {
                             if (!requestSubmitted)
                             {
                                 // Save Off verb, and use it to make the request
-                                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + ": resetting CurrentMethod to " + _OriginVerb);
+                                GlobalLog.Print(
+                                    "HttpWebRequest#"
+                                        + ValidationHelper.HashString(this)
+                                        + ": resetting CurrentMethod to "
+                                        + _OriginVerb
+                                );
                                 CurrentMethod = _OriginVerb;
                             }
 
                             // If we're here it's because we don't have the response yet. We may have
                             //  already submitted the request, but if not do so now.
-                            if (_RerequestCount > 0 || !requestSubmitted) {
-                                while (m_Retry) {
+                            if (_RerequestCount > 0 || !requestSubmitted)
+                            {
+                                while (m_Retry)
+                                {
                                     // Keep looping in case there are redirects, auth re-requests, etc
                                     BeginSubmitRequest();
                                 }
@@ -2002,14 +2421,22 @@ namespace System.Net {
                         asyncResult.FinishPostingAsyncOp();
                     }
 
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginGetResponse", ValidationHelper.HashString(asyncResult));
-                    if (Logging.On) Logging.Exit(Logging.Web, this, "BeginGetResponse", asyncResult);
+                    GlobalLog.Leave(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::BeginGetResponse",
+                        ValidationHelper.HashString(asyncResult)
+                    );
+                    if (Logging.On)
+                        Logging.Exit(Logging.Web, this, "BeginGetResponse", asyncResult);
                     success = true;
                     return asyncResult;
                 }
-                finally {
-                    if (FrameworkEventSource.Log.IsEnabled()) {
-                        LogBeginGetResponse(success, synchronous : false);
+                finally
+                {
+                    if (FrameworkEventSource.Log.IsEnabled())
+                    {
+                        LogBeginGetResponse(success, synchronous: false);
                     }
                 }
 #if DEBUG
@@ -2020,44 +2447,76 @@ namespace System.Net {
         /// <devdoc>
         ///  <para>Retreives the Response Result from an HTTP Result after an Async operation has completed</para>
         /// </devdoc>
-        public override WebResponse EndGetResponse(IAsyncResult asyncResult) {
+        public override WebResponse EndGetResponse(IAsyncResult asyncResult)
+        {
             bool success = false;
             int statusCode = -1;
-            
-            try {
+
+            try
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User))
+                {
 #endif
-                    GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndGetResponse", ValidationHelper.HashString(asyncResult));
-                    if (Logging.On) Logging.Enter(Logging.Web, this, "EndGetResponse", "");
+                    GlobalLog.Enter(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndGetResponse",
+                        ValidationHelper.HashString(asyncResult)
+                    );
+                    if (Logging.On)
+                        Logging.Enter(Logging.Web, this, "EndGetResponse", "");
 
                     //
                     // parameter validation
                     //
-                    if (asyncResult == null) {
+                    if (asyncResult == null)
+                    {
                         throw new ArgumentNullException("asyncResult");
                     }
 
                     LazyAsyncResult castedAsyncResult = asyncResult as LazyAsyncResult;
-                    if (castedAsyncResult == null || castedAsyncResult.AsyncObject != this) {
-                        throw new ArgumentException(SR.GetString(SR.net_io_invalidasyncresult), "asyncResult");
+                    if (castedAsyncResult == null || castedAsyncResult.AsyncObject != this)
+                    {
+                        throw new ArgumentException(
+                            SR.GetString(SR.net_io_invalidasyncresult),
+                            "asyncResult"
+                        );
                     }
-                    if (castedAsyncResult.EndCalled) {
-                        throw new InvalidOperationException(SR.GetString(SR.net_io_invalidendcall, "EndGetResponse"));
+                    if (castedAsyncResult.EndCalled)
+                    {
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.net_io_invalidendcall, "EndGetResponse")
+                        );
                     }
-                    HttpWebResponse httpWebResponse = castedAsyncResult.InternalWaitForCompletion() as HttpWebResponse;
+                    HttpWebResponse httpWebResponse =
+                        castedAsyncResult.InternalWaitForCompletion() as HttpWebResponse;
                     castedAsyncResult.EndCalled = true;
-            
+
                     if (httpWebResponse == null)
                     {
-                        if (Logging.On) Logging.Exception(Logging.Web, this, "EndGetResponse", castedAsyncResult.Result as Exception);
-                        NetworkingPerfCounters.Instance.Increment(NetworkingPerfCounterName.HttpWebRequestFailed);
-                        throw (Exception) castedAsyncResult.Result;
+                        if (Logging.On)
+                            Logging.Exception(
+                                Logging.Web,
+                                this,
+                                "EndGetResponse",
+                                castedAsyncResult.Result as Exception
+                            );
+                        NetworkingPerfCounters.Instance.Increment(
+                            NetworkingPerfCounterName.HttpWebRequestFailed
+                        );
+                        throw (Exception)castedAsyncResult.Result;
                     }
-                    GlobalLog.Assert(httpWebResponse.ResponseStream != null, "HttpWebRequest#{0}::EndGetResponse()|httpWebResponse.ResponseStream == null", ValidationHelper.HashString(this));
+                    GlobalLog.Assert(
+                        httpWebResponse.ResponseStream != null,
+                        "HttpWebRequest#{0}::EndGetResponse()|httpWebResponse.ResponseStream == null",
+                        ValidationHelper.HashString(this)
+                    );
                     // Otherwise it worked, so return the HttpWebResponse.
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndGetResponse", ValidationHelper.HashString(httpWebResponse));
-                    if(Logging.On)Logging.Exit(Logging.Web, this, "EndGetResponse", httpWebResponse);
+                    GlobalLog.Leave(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndGetResponse",
+                        ValidationHelper.HashString(httpWebResponse)
+                    );
+                    if (Logging.On)
+                        Logging.Exit(Logging.Web, this, "EndGetResponse", httpWebResponse);
                     InitLifetimeTracking(httpWebResponse);
 
                     statusCode = GetStatusCode(httpWebResponse);
@@ -2067,14 +2526,17 @@ namespace System.Net {
                 }
 #endif
             }
-            catch (WebException we) {
+            catch (WebException we)
+            {
                 HttpWebResponse httpWebResponse = we.Response as HttpWebResponse;
                 statusCode = GetStatusCode(httpWebResponse);
                 throw;
             }
-            finally {
-                if (FrameworkEventSource.Log.IsEnabled()) {
-                    LogEndGetResponse(success, synchronous : false, statusCode : statusCode);
+            finally
+            {
+                if (FrameworkEventSource.Log.IsEnabled())
+                {
+                    LogEndGetResponse(success, synchronous: false, statusCode: statusCode);
                 }
             }
         }
@@ -2087,13 +2549,14 @@ namespace System.Net {
 #if DEBUG
                 if (!Async)
                 {
-                    using (GlobalLog.SetThreadKind(ThreadKinds.Sync)) {
+                    using (GlobalLog.SetThreadKind(ThreadKinds.Sync))
+                    {
                         EndSubmitRequest();
                     }
                 }
                 else
 #endif
-                EndSubmitRequest();
+                    EndSubmitRequest();
             }
             else if (returnResult != null && returnResult != DBNull.Value)
             {
@@ -2115,19 +2578,26 @@ namespace System.Net {
         ///    etc.
         ///    </para>
         /// </devdoc>
-        public override WebResponse GetResponse() {
+        public override WebResponse GetResponse()
+        {
             bool success = false;
             int statusCode = -1;
-            try {
+            try
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync))
+                {
 #endif
-                    if (FrameworkEventSource.Log.IsEnabled()) {
-                        LogBeginGetResponse(success : true, synchronous : true);
+                    if (FrameworkEventSource.Log.IsEnabled())
+                    {
+                        LogBeginGetResponse(success: true, synchronous: true);
                     }
 
-                    GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetResponse");
-                    if (Logging.On) Logging.Enter(Logging.Web, this, "GetResponse", "");
+                    GlobalLog.Enter(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetResponse"
+                    );
+                    if (Logging.On)
+                        Logging.Enter(Logging.Web, this, "GetResponse", "");
 
                     // No need to recheck the request parameters if we already did it in GetRequestStream().
                     // This prevents problems when redirects change verbs.
@@ -2140,7 +2610,8 @@ namespace System.Net {
                     // simultaneously on another thread and expect it to block until it can run.  Doing that can cause the request to
                     // hang.
 
-                    ConnectStream stream = _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream;
+                    ConnectStream stream =
+                        _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream;
 
                     // Close the request stream if the user forgot to do so. Throw an exception if user has not written all of
                     // the promised data.
@@ -2148,7 +2619,9 @@ namespace System.Net {
                     {
                         if (stream.BytesLeftToWrite > 0)
                         {
-                            throw new ProtocolViolationException(SR.GetString(SR.net_entire_body_not_written));
+                            throw new ProtocolViolationException(
+                                SR.GetString(SR.net_entire_body_not_written)
+                            );
                         }
                         else
                         {
@@ -2157,7 +2630,9 @@ namespace System.Net {
                     }
                     else if (stream == null && HasEntityBody)
                     {
-                        throw new ProtocolViolationException(SR.GetString(SR.net_must_provide_request_body));
+                        throw new ProtocolViolationException(
+                            SR.GetString(SR.net_must_provide_request_body)
+                        );
                     }
 
                     // return response, if the response is already set
@@ -2186,9 +2661,21 @@ namespace System.Net {
                             if (Async)
                             {
 #if !FEATURE_PAL
-                                ContextAwareResult readResult = new ContextAwareResult(IdentityRequired, true, this, null, null);
+                                ContextAwareResult readResult = new ContextAwareResult(
+                                    IdentityRequired,
+                                    true,
+                                    this,
+                                    null,
+                                    null
+                                );
 #else
-                                ContextAwareResult readResult = new ContextAwareResult(false, true, this, null, null);
+                            ContextAwareResult readResult = new ContextAwareResult(
+                                false,
+                                true,
+                                this,
+                                null,
+                                null
+                            );
 #endif
                                 readResult.StartPostingAsyncOp(false);
                                 readResult.FinishPostingAsyncOp();
@@ -2208,25 +2695,32 @@ namespace System.Net {
                     {
                         //The previous call may have been async.  If we are now doing a sync call, we should
                         //use the timeout
-                        if (_Timer == null) {
+                        if (_Timer == null)
+                        {
                             _Timer = TimerQueue.CreateTimer(s_TimeoutCallback, this);
                         }
 
-
                         // Save Off verb, and use it to make the request
-                        if (!requestSubmitted) {
-                            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + ": resetting CurrentMethod to " + _OriginVerb);
+                        if (!requestSubmitted)
+                        {
+                            GlobalLog.Print(
+                                "HttpWebRequest#"
+                                    + ValidationHelper.HashString(this)
+                                    + ": resetting CurrentMethod to "
+                                    + _OriginVerb
+                            );
                             CurrentMethod = _OriginVerb;
                         }
 
                         // If we're here it's because we don't have the response yet. We may have
                         //  already submitted the request, but if not do so now.
-                        while (m_Retry) {
+                        while (m_Retry)
+                        {
                             // Keep looping in case there are redirects, auth re-requests, etc
                             BeginSubmitRequest();
                         }
 
-                        while (!Async && Aborted && !_ReadAResult.InternalPeekCompleted) 
+                        while (!Async && Aborted && !_ReadAResult.InternalPeekCompleted)
                         {
                             // spin untill the _CoreResponse is set
                             if (!(_CoreResponse is Exception))
@@ -2235,20 +2729,37 @@ namespace System.Net {
                                 CheckWriteSideResponseProcessing();
                         }
 
-                        httpWebResponse = _ReadAResult.InternalWaitForCompletion() as HttpWebResponse;
+                        httpWebResponse =
+                            _ReadAResult.InternalWaitForCompletion() as HttpWebResponse;
                         _ReadAResult.EndCalled = true;
                     }
 
                     if (httpWebResponse == null)
                     {
-                        if (Logging.On) Logging.Exception(Logging.Web, this, "GetResponse", _ReadAResult.Result as Exception);
-                        NetworkingPerfCounters.Instance.Increment(NetworkingPerfCounterName.HttpWebRequestFailed);
-                        throw (Exception) _ReadAResult.Result;
+                        if (Logging.On)
+                            Logging.Exception(
+                                Logging.Web,
+                                this,
+                                "GetResponse",
+                                _ReadAResult.Result as Exception
+                            );
+                        NetworkingPerfCounters.Instance.Increment(
+                            NetworkingPerfCounterName.HttpWebRequestFailed
+                        );
+                        throw (Exception)_ReadAResult.Result;
                     }
 
-                    GlobalLog.Assert(httpWebResponse.ResponseStream != null, "HttpWebRequest#{0}::GetResponse()|httpWebResponse.ResponseStream == null", ValidationHelper.HashString(this));
-                    if(Logging.On)Logging.Exit(Logging.Web, this, "GetResponse", httpWebResponse);
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetResponse", ValidationHelper.HashString(httpWebResponse));
+                    GlobalLog.Assert(
+                        httpWebResponse.ResponseStream != null,
+                        "HttpWebRequest#{0}::GetResponse()|httpWebResponse.ResponseStream == null",
+                        ValidationHelper.HashString(this)
+                    );
+                    if (Logging.On)
+                        Logging.Exit(Logging.Web, this, "GetResponse", httpWebResponse);
+                    GlobalLog.Leave(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetResponse",
+                        ValidationHelper.HashString(httpWebResponse)
+                    );
 
                     if (!gotResponse)
                     {
@@ -2262,14 +2773,17 @@ namespace System.Net {
                 }
 #endif
             }
-            catch (WebException we) {
+            catch (WebException we)
+            {
                 HttpWebResponse httpWebResponse = we.Response as HttpWebResponse;
                 statusCode = GetStatusCode(httpWebResponse);
                 throw;
             }
-            finally {
-                if (FrameworkEventSource.Log.IsEnabled()) {
-                    LogEndGetResponse(success, synchronous : true, statusCode : statusCode);
+            finally
+            {
+                if (FrameworkEventSource.Log.IsEnabled())
+                {
+                    LogEndGetResponse(success, synchronous: true, statusCode: statusCode);
                 }
             }
         }
@@ -2278,20 +2792,39 @@ namespace System.Net {
         {
             // when this method gets called, httpWebResponse.ResponseStream is the final stream returned
             // to the caller of [End]GetResponse().
-            IRequestLifetimeTracker tracker = httpWebResponse.ResponseStream as IRequestLifetimeTracker;
-            Debug.Assert(tracker != null, "All streams returned by HttpWebRequest must implement IRequestLifetimeTracker");
+            IRequestLifetimeTracker tracker =
+                httpWebResponse.ResponseStream as IRequestLifetimeTracker;
+            Debug.Assert(
+                tracker != null,
+                "All streams returned by HttpWebRequest must implement IRequestLifetimeTracker"
+            );
             tracker.TrackRequestLifetime(m_StartTimestamp);
         }
 
         internal void WriteCallDone(ConnectStream stream, ConnectionReturnResult returnResult)
         {
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteCallDone()");
+            GlobalLog.Print(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteCallDone()"
+            );
 
             // Make sure this is the user stream.
-            if (!object.ReferenceEquals(stream, _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream))
+            if (
+                !object.ReferenceEquals(
+                    stream,
+                    _OldSubmitWriteStream != null ? _OldSubmitWriteStream : _SubmitWriteStream
+                )
+            )
             {
-                GlobalLog.Assert(object.ReferenceEquals(stream, _SubmitWriteStream), "HttpWebRequest#{0}::CallDone|Called from invalid stream.", ValidationHelper.HashString(this));
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteCallDone() - called for resubmit stream");
+                GlobalLog.Assert(
+                    object.ReferenceEquals(stream, _SubmitWriteStream),
+                    "HttpWebRequest#{0}::CallDone|Called from invalid stream.",
+                    ValidationHelper.HashString(this)
+                );
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::WriteCallDone() - called for resubmit stream"
+                );
                 stream.ProcessWriteCallDone(returnResult);
                 return;
             }
@@ -2299,7 +2832,11 @@ namespace System.Net {
             // If we're still writing headers in GetRequestStream, don't delay, or GetRequestStream will hang.
             if (!UserRetrievedWriteStream)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteCallDone() - called during headers");
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::WriteCallDone() - called during headers"
+                );
                 stream.ProcessWriteCallDone(returnResult);
                 return;
             }
@@ -2311,8 +2848,12 @@ namespace System.Net {
                 return;
             }
 
-            object pendResult = returnResult == null ? (object) Missing.Value : returnResult;
-            object oldResult = Interlocked.CompareExchange(ref m_PendingReturnResult, pendResult, null);
+            object pendResult = returnResult == null ? (object)Missing.Value : returnResult;
+            object oldResult = Interlocked.CompareExchange(
+                ref m_PendingReturnResult,
+                pendResult,
+                null
+            );
             if (oldResult == DBNull.Value)
             {
                 stream.ProcessWriteCallDone(returnResult);
@@ -2320,20 +2861,35 @@ namespace System.Net {
 #if TRAVE
             else if (oldResult == null)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteCallDone() - deferring processing");
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::WriteCallDone() - deferring processing"
+                );
             }
             else
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteCallDone() - ignoring duplicate call.  typeof(oldResult):" + oldResult.GetType().ToString());
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::WriteCallDone() - ignoring duplicate call.  typeof(oldResult):"
+                        + oldResult.GetType().ToString()
+                );
             }
 #endif
         }
 
         internal void NeedEndSubmitRequest()
         {
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::NeedEndSubmitRequest()");
+            GlobalLog.Print(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::NeedEndSubmitRequest()"
+            );
 
-            object oldResult = Interlocked.CompareExchange(ref m_PendingReturnResult, NclConstants.Sentinel, null);
+            object oldResult = Interlocked.CompareExchange(
+                ref m_PendingReturnResult,
+                NclConstants.Sentinel,
+                null
+            );
             if (oldResult == DBNull.Value)
             {
                 EndSubmitRequest();
@@ -2341,12 +2897,21 @@ namespace System.Net {
 #if TRAVE
             else if (oldResult == null)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::NeedEndSubmitRequest() - deferring processing");
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::NeedEndSubmitRequest() - deferring processing"
+                );
             }
 #endif
             else
             {
-                GlobalLog.Assert(oldResult == null, "HttpWebRequest#{0}::NeedEndSubmitRequest()|Duplicate call.  typeof(oldResult):", ValidationHelper.HashString(this), oldResult != null ? oldResult.GetType().ToString() : "null");
+                GlobalLog.Assert(
+                    oldResult == null,
+                    "HttpWebRequest#{0}::NeedEndSubmitRequest()|Duplicate call.  typeof(oldResult):",
+                    ValidationHelper.HashString(this),
+                    oldResult != null ? oldResult.GetType().ToString() : "null"
+                );
             }
         }
 
@@ -2369,32 +2934,31 @@ namespace System.Net {
         ///       Gets the Uri that actually responded to the request.
         ///    </para>
         /// </devdoc>
-        public Uri Address {
-            get {
-                return _Uri;
-            }
+        public Uri Address
+        {
+            get { return _Uri; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets/Sets Deletegate used to signal us on Continue callback</para>
         /// </devdoc>
-        public HttpContinueDelegate ContinueDelegate {
-            get {
-                return _ContinueDelegate;
-            }
-            set {
-                _ContinueDelegate = value;
-            }
+        public HttpContinueDelegate ContinueDelegate
+        {
+            get { return _ContinueDelegate; }
+            set { _ContinueDelegate = value; }
         }
 
         internal void CallContinueDelegateCallback(object state)
         {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CallContinueDelegateCallback");
-            CoreResponseData response = (CoreResponseData) state;
-            ContinueDelegate((int) response.m_StatusCode, response.m_ResponseHeaders);
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CallContinueDelegateCallback"
+            );
+            CoreResponseData response = (CoreResponseData)state;
+            ContinueDelegate((int)response.m_StatusCode, response.m_ResponseHeaders);
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -2402,34 +2966,44 @@ namespace System.Net {
         ///         one isn't already created and assigned to this HttpWebRequest.
         ///    </para>
         /// </devdoc>
-        public ServicePoint ServicePoint {
-            get {
+        public ServicePoint ServicePoint
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                return FindServicePoint(false);
+                    return FindServicePoint(false);
 #if DEBUG
                 }
 #endif
             }
         }
 
-        public string Host {
-            get {
-                if (UseCustomHost) {
+        public string Host
+        {
+            get
+            {
+                if (UseCustomHost)
+                {
                     return GetHostAndPortString(_HostUri.Host, _HostUri.Port, _HostHasPort);
                 }
-                else {
+                else
+                {
                     // if the user didn't set the Host property, return the value of the Host header
                     // we'll use when sending the request.
                     return GetHostAndPortString(_Uri.Host, _Uri.Port, !_Uri.IsDefaultPort);
                 }
             }
-            set {
-                if (RequestSubmitted) {
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_writestarted));
                 }
-                if (value == null) {
+                if (value == null)
+                {
                     throw new ArgumentNullException();
                 }
 
@@ -2444,38 +3018,43 @@ namespace System.Net {
                 _HostUri = hostUri;
 
                 // Determine if the user provided string contains a port
-                if (!_HostUri.IsDefaultPort) {
+                if (!_HostUri.IsDefaultPort)
+                {
                     _HostHasPort = true;
                 }
-                else if (value.IndexOf(':') == -1) {
+                else if (value.IndexOf(':') == -1)
+                {
                     _HostHasPort = false;
                 }
-                else {
+                else
+                {
                     int endOfIPv6Address = value.IndexOf(']');
-                    if (endOfIPv6Address == -1) {
+                    if (endOfIPv6Address == -1)
+                    {
                         _HostHasPort = true;
                     }
-                    else {
+                    else
+                    {
                         _HostHasPort = value.LastIndexOf(':') > endOfIPv6Address;
                     }
                 }
             }
         }
 
-        internal bool UseCustomHost {
-            get {
-                return _HostUri != null && !_RedirectedToDifferentHost;
-            }
+        internal bool UseCustomHost
+        {
+            get { return _HostUri != null && !_RedirectedToDifferentHost; }
         }
 
         /// <devdoc>
         /// </devdoc>
-        public int MaximumAutomaticRedirections {
-            get {
-                return _MaximumAllowedRedirections;
-            }
-            set {
-                if (value <= 0) {
+        public int MaximumAutomaticRedirections
+        {
+            get { return _MaximumAllowedRedirections; }
+            set
+            {
+                if (value <= 0)
+                {
                     throw new ArgumentException(SR.GetString(SR.net_toosmall), "value");
                 }
                 _MaximumAllowedRedirections = value;
@@ -2488,29 +3067,28 @@ namespace System.Net {
         ///       This method represents the initial origin Verb, this is unchanged/uneffected by redirects
         ///    </para>
         /// </devdoc>
-        public override string Method {
-            get {
-                return _OriginVerb.Name;
-            }
-            set {
-                if (ValidationHelper.IsBlankString(value)) {
+        public override string Method
+        {
+            get { return _OriginVerb.Name; }
+            set
+            {
+                if (ValidationHelper.IsBlankString(value))
+                {
                     throw new ArgumentException(SR.GetString(SR.net_badmethod), "value");
                 }
 
-                if (ValidationHelper.IsInvalidHttpString(value)) {
+                if (ValidationHelper.IsInvalidHttpString(value))
+                {
                     throw new ArgumentException(SR.GetString(SR.net_badmethod), "value");
                 }
                 _OriginVerb = KnownHttpVerb.Parse(value);
             }
         }
 
-        internal KnownHttpVerb CurrentMethod {
-            get {
-                return _Verb != null ? _Verb : _OriginVerb;
-            }
-            set{
-                _Verb = value;
-            }
+        internal KnownHttpVerb CurrentMethod
+        {
+            get { return _Verb != null ? _Verb : _OriginVerb; }
+            set { _Verb = value; }
         }
 
         /// <devdoc>
@@ -2518,13 +3096,10 @@ namespace System.Net {
         ///       Provides authentication information for the request.
         ///    </para>
         /// </devdoc>
-        public override ICredentials Credentials {
-            get {
-                return _AuthInfo;
-            }
-            set {
-                _AuthInfo = value;
-            }
+        public override ICredentials Credentials
+        {
+            get { return _AuthInfo; }
+            set { _AuthInfo = value; }
         }
 
         /// <devdoc>
@@ -2532,12 +3107,13 @@ namespace System.Net {
         ///       Allows us to use generic default credentials.
         ///    </para>
         /// </devdoc>
-        public override bool UseDefaultCredentials {
-            get {
-                return (Credentials is SystemNetworkCredential) ? true : false;
-            }
-            set {
-                if (RequestSubmitted) {
+        public override bool UseDefaultCredentials
+        {
+            get { return (Credentials is SystemNetworkCredential) ? true : false; }
+            set
+            {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_writestarted));
                 }
                 _AuthInfo = value ? CredentialCache.DefaultCredentials : null;
@@ -2549,15 +3125,17 @@ namespace System.Net {
         ///       True if we're tunneling SSL through a proxy
         ///    </para>
         /// </devdoc>
-        internal bool IsTunnelRequest {
-            get {
-                return (_Booleans&Booleans.IsTunnelRequest)!=0;
-            }
-            set {
-                if (value) {
+        internal bool IsTunnelRequest
+        {
+            get { return (_Booleans & Booleans.IsTunnelRequest) != 0; }
+            set
+            {
+                if (value)
+                {
                     _Booleans |= Booleans.IsTunnelRequest;
                 }
-                else {
+                else
+                {
                     _Booleans &= ~Booleans.IsTunnelRequest;
                 }
             }
@@ -2565,10 +3143,7 @@ namespace System.Net {
 
         internal bool IsWebSocketRequest
         {
-            get
-            {
-                return (_Booleans & Booleans.IsWebSocketRequest) != 0;
-            }
+            get { return (_Booleans & Booleans.IsWebSocketRequest) != 0; }
             private set
             {
                 if (value)
@@ -2589,11 +3164,11 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string ConnectionGroupName {
-            get {
-                return _ConnectionGroupName;
-            }
-            set {
+        public override string ConnectionGroupName
+        {
+            get { return _ConnectionGroupName; }
+            set
+            {
                 // In WebSocket scenarios, we need to remove the ConnectionGroup
                 // from ServicePoint once the communication is done. So here we
                 // don't allow users to update ConnectionGroupName.
@@ -2613,31 +3188,29 @@ namespace System.Net {
             }
             */
 
-            set
-            {
-                m_InternalConnectionGroup = value;
-            }
+            set { m_InternalConnectionGroup = value; }
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       A collection of HTTP headers stored as name value pairs.
         ///    </para>
         /// </devdoc>
-        public override WebHeaderCollection Headers {
-            get {
-                return _HttpRequestHeaders;
-            }
-            set {
-
+        public override WebHeaderCollection Headers
+        {
+            get { return _HttpRequestHeaders; }
+            set
+            {
                 // we can't change headers after they've already been sent
-                if ( RequestSubmitted ) {
+                if (RequestSubmitted)
+                {
                     throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
                 }
 
                 WebHeaderCollection webHeaders = value;
-                WebHeaderCollection newWebHeaders = new WebHeaderCollection(WebHeaderCollectionType.HttpWebRequest);
+                WebHeaderCollection newWebHeaders = new WebHeaderCollection(
+                    WebHeaderCollectionType.HttpWebRequest
+                );
 
                 // Copy And Validate -
                 // Handle the case where their object tries to change
@@ -2645,8 +3218,9 @@ namespace System.Net {
                 //  we need to clone their headers.
                 //
 
-                foreach (String headerName in webHeaders.AllKeys ) {
-                    newWebHeaders.Add(headerName,webHeaders[headerName]);
+                foreach (String headerName in webHeaders.AllKeys)
+                {
+                    newWebHeaders.Add(headerName, webHeaders[headerName]);
                 }
 
                 _HttpRequestHeaders = newWebHeaders;
@@ -2658,38 +3232,44 @@ namespace System.Net {
         ///       Gets or sets the proxy information for a request.
         ///    </para>
         /// </devdoc>
-        public override IWebProxy Proxy {
-            get {
+        public override IWebProxy Proxy
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                ExceptionHelper.WebPermissionUnrestricted.Demand();
-                return _Proxy;
+                    ExceptionHelper.WebPermissionUnrestricted.Demand();
+                    return _Proxy;
 #if DEBUG
                 }
 #endif
             }
-            set {
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                ExceptionHelper.WebPermissionUnrestricted.Demand();
-                // we can't change the proxy, while the request is already fired
-                if ( RequestSubmitted ) {
-                    throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
-                }
-                InternalProxy = value;
+                    ExceptionHelper.WebPermissionUnrestricted.Demand();
+                    // we can't change the proxy, while the request is already fired
+                    if (RequestSubmitted)
+                    {
+                        throw new InvalidOperationException(SR.GetString(SR.net_reqsubmitted));
+                    }
+                    InternalProxy = value;
 #if DEBUG
                 }
 #endif
             }
         }
 
-        internal IWebProxy InternalProxy {
-            get {
-                return _Proxy;
-            }
-            set {
+        internal IWebProxy InternalProxy
+        {
+            get { return _Proxy; }
+            set
+            {
                 ProxySet = true;
                 _Proxy = value;
                 if (_ProxyChain != null)
@@ -2704,7 +3284,6 @@ namespace System.Net {
             }
         }
 
-
         // HTTP Version
         /// <devdoc>
         ///    <para>
@@ -2712,18 +3291,21 @@ namespace System.Net {
         ///       the HTTP protocol version used in this request.
         ///    </para>
         /// </devdoc>
-        public Version ProtocolVersion {
-            get {
-                return IsVersionHttp10 ? HttpVersion.Version10 : HttpVersion.Version11;
-            }
-            set {
-                if (value.Equals(HttpVersion.Version11)) {
+        public Version ProtocolVersion
+        {
+            get { return IsVersionHttp10 ? HttpVersion.Version10 : HttpVersion.Version11; }
+            set
+            {
+                if (value.Equals(HttpVersion.Version11))
+                {
                     IsVersionHttp10 = false;
                 }
-                else if (value.Equals(HttpVersion.Version10)) {
+                else if (value.Equals(HttpVersion.Version10))
+                {
                     IsVersionHttp10 = true;
                 }
-                else {
+                else
+                {
                     throw new ArgumentException(SR.GetString(SR.net_wrongversion), "value");
                 }
             }
@@ -2734,25 +3316,19 @@ namespace System.Net {
         ///       Gets and sets the value of the Content-Type header. Null clears it out.
         ///    </para>
         /// </devdoc>
-        public override String ContentType {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.ContentType];
-            }
-            set {
-                SetSpecialHeaders(HttpKnownHeaderNames.ContentType, value);
-            }
+        public override String ContentType
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.ContentType]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.ContentType, value); }
         }
 
         /// <devdoc>
         ///    <para>Sets the media type header</para>
         /// </devdoc>
-        public string MediaType {
-            get {
-                return _MediaType;
-            }
-            set {
-                _MediaType = value;
-            }
+        public string MediaType
+        {
+            get { return _MediaType; }
+            set { _MediaType = value; }
         }
 
         /// <devdoc>
@@ -2760,46 +3336,54 @@ namespace System.Net {
         ///       Gets or sets the value of the Transfer-Encoding header. Setting null clears it out.
         ///    </para>
         /// </devdoc>
-        public string TransferEncoding {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.TransferEncoding];
-            }
-            set {
+        public string TransferEncoding
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.TransferEncoding]; }
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                bool fChunked;
-                //
-                // on blank string, remove current header
-                //
-                if (ValidationHelper.IsBlankString(value)) {
+                    bool fChunked;
                     //
-                    // if the value is blank, then remove the header
+                    // on blank string, remove current header
                     //
-                    _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.TransferEncoding);
-                    return;
-                }
+                    if (ValidationHelper.IsBlankString(value))
+                    {
+                        //
+                        // if the value is blank, then remove the header
+                        //
+                        _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.TransferEncoding);
+                        return;
+                    }
 
-                //
-                // if not check if the user is trying to set chunked:
-                //
-                string newValue = value.ToLower(CultureInfo.InvariantCulture);
-                fChunked = (newValue.IndexOf(ChunkedHeader) != -1);
+                    //
+                    // if not check if the user is trying to set chunked:
+                    //
+                    string newValue = value.ToLower(CultureInfo.InvariantCulture);
+                    fChunked = (newValue.IndexOf(ChunkedHeader) != -1);
 
-                //
-                // prevent them from adding chunked, or from adding an Encoding without
-                //  turing on chunked, the reason is due to the HTTP Spec which prevents
-                //  additional encoding types from being used without chunked
-                //
-                if (fChunked) {
-                    throw new ArgumentException(SR.GetString(SR.net_nochunked), "value");
-                }
-                else if (!SendChunked) {
-                    throw new InvalidOperationException(SR.GetString(SR.net_needchunked));
-                }
-                else {
-                    _HttpRequestHeaders.CheckUpdate(HttpKnownHeaderNames.TransferEncoding, value);
-                }
+                    //
+                    // prevent them from adding chunked, or from adding an Encoding without
+                    //  turing on chunked, the reason is due to the HTTP Spec which prevents
+                    //  additional encoding types from being used without chunked
+                    //
+                    if (fChunked)
+                    {
+                        throw new ArgumentException(SR.GetString(SR.net_nochunked), "value");
+                    }
+                    else if (!SendChunked)
+                    {
+                        throw new InvalidOperationException(SR.GetString(SR.net_needchunked));
+                    }
+                    else
+                    {
+                        _HttpRequestHeaders.CheckUpdate(
+                            HttpKnownHeaderNames.TransferEncoding,
+                            value
+                        );
+                    }
 #if DEBUG
                 }
 #endif
@@ -2811,41 +3395,44 @@ namespace System.Net {
         ///       Gets and sets the value of the Connection header. Setting null clears the header out.
         ///    </para>
         /// </devdoc>
-        public string Connection {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.Connection];
-            }
-            set {
+        public string Connection
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.Connection]; }
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                bool fKeepAlive;
-                bool fClose;
+                    bool fKeepAlive;
+                    bool fClose;
 
-                //
-                // on blank string, remove current header
-                //
-                if (ValidationHelper.IsBlankString(value)) {
-                    _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Connection);
-                    return;
-                }
+                    //
+                    // on blank string, remove current header
+                    //
+                    if (ValidationHelper.IsBlankString(value))
+                    {
+                        _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Connection);
+                        return;
+                    }
 
-                string newValue = value.ToLower(CultureInfo.InvariantCulture);
+                    string newValue = value.ToLower(CultureInfo.InvariantCulture);
 
-                fKeepAlive = (newValue.IndexOf("keep-alive") != -1) ;
-                fClose =  (newValue.IndexOf("close") != -1) ;
+                    fKeepAlive = (newValue.IndexOf("keep-alive") != -1);
+                    fClose = (newValue.IndexOf("close") != -1);
 
-                //
-                // Prevent keep-alive and close from being added
-                //
+                    //
+                    // Prevent keep-alive and close from being added
+                    //
 
-                if (fKeepAlive ||
-                    fClose) {
-                    throw new ArgumentException(SR.GetString(SR.net_connarg), "value");
-                }
-                else {
-                    _HttpRequestHeaders.CheckUpdate(HttpKnownHeaderNames.Connection, value);
-                }
+                    if (fKeepAlive || fClose)
+                    {
+                        throw new ArgumentException(SR.GetString(SR.net_connarg), "value");
+                    }
+                    else
+                    {
+                        _HttpRequestHeaders.CheckUpdate(HttpKnownHeaderNames.Connection, value);
+                    }
 #if DEBUG
                 }
 #endif
@@ -2857,13 +3444,10 @@ namespace System.Net {
         ///       Gets or sets the value of the Accept header.
         ///    </para>
         /// </devdoc>
-        public string Accept {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.Accept];
-            }
-            set {
-                SetSpecialHeaders(HttpKnownHeaderNames.Accept, value);
-            }
+        public string Accept
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.Accept]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.Accept, value); }
         }
 
         /// <devdoc>
@@ -2871,13 +3455,10 @@ namespace System.Net {
         ///       Gets or sets the value of the Referer header.
         ///    </para>
         /// </devdoc>
-        public string Referer {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.Referer];
-            }
-            set {
-                SetSpecialHeaders(HttpKnownHeaderNames.Referer, value);
-            }
+        public string Referer
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.Referer]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.Referer, value); }
         }
 
         /// <devdoc>
@@ -2885,15 +3466,11 @@ namespace System.Net {
         ///       Gets or sets the value of the User-Agent header.
         ///    </para>
         /// </devdoc>
-        public string UserAgent {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.UserAgent];
-            }
-            set {
-                SetSpecialHeaders(HttpKnownHeaderNames.UserAgent, value);
-            }
+        public string UserAgent
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.UserAgent]; }
+            set { SetSpecialHeaders(HttpKnownHeaderNames.UserAgent, value); }
         }
-
 
         /*
             Accessor:   Expect
@@ -2912,69 +3489,78 @@ namespace System.Net {
         ///       Gets or sets the value of the Expect header.
         ///    </para>
         /// </devdoc>
-        public string Expect {
-            get {
-                return _HttpRequestHeaders[HttpKnownHeaderNames.Expect];
-            }
-            set {
+        public string Expect
+        {
+            get { return _HttpRequestHeaders[HttpKnownHeaderNames.Expect]; }
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                // only remove everything other than 100-cont
-                bool fContinue100;
+                    // only remove everything other than 100-cont
+                    bool fContinue100;
 
-                //
-                // on blank string, remove current header
-                //
+                    //
+                    // on blank string, remove current header
+                    //
 
-                if (ValidationHelper.IsBlankString(value)) {
-                    _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Expect);
-                    return;
-                }
+                    if (ValidationHelper.IsBlankString(value))
+                    {
+                        _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Expect);
+                        return;
+                    }
 
-                //
-                // Prevent 100-continues from being added
-                //
+                    //
+                    // Prevent 100-continues from being added
+                    //
 
-                string newValue = value.ToLower(CultureInfo.InvariantCulture);
+                    string newValue = value.ToLower(CultureInfo.InvariantCulture);
 
-                fContinue100 = (newValue.IndexOf(ContinueHeader) != -1) ;
+                    fContinue100 = (newValue.IndexOf(ContinueHeader) != -1);
 
-                if (fContinue100) {
-                    throw new ArgumentException(SR.GetString(SR.net_no100), "value");
-                }
-                else {
-                    _HttpRequestHeaders.CheckUpdate(HttpKnownHeaderNames.Expect, value);
-                }
+                    if (fContinue100)
+                    {
+                        throw new ArgumentException(SR.GetString(SR.net_no100), "value");
+                    }
+                    else
+                    {
+                        _HttpRequestHeaders.CheckUpdate(HttpKnownHeaderNames.Expect, value);
+                    }
 #if DEBUG
                 }
 #endif
             }
         }
 
-        private DateTime GetDateHeaderHelper(string headerName) {
+        private DateTime GetDateHeaderHelper(string headerName)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
-            string headerValue = _HttpRequestHeaders[headerName];
+                string headerValue = _HttpRequestHeaders[headerName];
 
-            if (headerValue == null) {
-                return DateTime.MinValue; // MinValue means header is not present
-            }
-            return HttpProtocolUtils.string2date(headerValue);
+                if (headerValue == null)
+                {
+                    return DateTime.MinValue; // MinValue means header is not present
+                }
+                return HttpProtocolUtils.string2date(headerValue);
 #if DEBUG
             }
 #endif
         }
 
-        private void SetDateHeaderHelper(string headerName, DateTime dateTime) {
+        private void SetDateHeaderHelper(string headerName, DateTime dateTime)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
-            if (dateTime == DateTime.MinValue)
-                SetSpecialHeaders(headerName, null); // remove header
-            else
-                SetSpecialHeaders(headerName, HttpProtocolUtils.date2string(dateTime));
+                if (dateTime == DateTime.MinValue)
+                    SetSpecialHeaders(headerName, null); // remove header
+                else
+                    SetSpecialHeaders(headerName, HttpProtocolUtils.date2string(dateTime));
 #if DEBUG
             }
 #endif
@@ -2985,13 +3571,10 @@ namespace System.Net {
         ///       Gets or sets the value of the If-Modified-Since header.
         ///    </para>
         /// </devdoc>
-        public DateTime IfModifiedSince {
-            get {
-                return GetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince);
-            }
-            set {
-                SetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince, value);
-            }
+        public DateTime IfModifiedSince
+        {
+            get { return GetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince); }
+            set { SetDateHeaderHelper(HttpKnownHeaderNames.IfModifiedSince, value); }
         }
 
         /// <devdoc>
@@ -2999,28 +3582,23 @@ namespace System.Net {
         ///       Gets or sets the value of the Date header.
         ///    </para>
         /// </devdoc>
-        public DateTime Date {
-            get {
-                return GetDateHeaderHelper(HttpKnownHeaderNames.Date);
-            }
-            set {
-                SetDateHeaderHelper(HttpKnownHeaderNames.Date, value);
-            }
+        public DateTime Date
+        {
+            get { return GetDateHeaderHelper(HttpKnownHeaderNames.Date); }
+            set { SetDateHeaderHelper(HttpKnownHeaderNames.Date, value); }
         }
 
-        internal byte[] WriteBuffer {
-            get {
-                return _WriteBuffer;
-            }
+        internal byte[] WriteBuffer
+        {
+            get { return _WriteBuffer; }
         }
 
-        internal int WriteBufferLength {
-            get {
-                return _WriteBufferLength;
-            }
+        internal int WriteBufferLength
+        {
+            get { return _WriteBufferLength; }
         }
 
-        // Return the buffer to the pinnable cache if it came from there.   
+        // Return the buffer to the pinnable cache if it came from there.
         internal void FreeWriteBuffer()
         {
             if (_WriteBufferFromPinnableCache)
@@ -3035,9 +3613,9 @@ namespace System.Net {
         // Get the buffer from the pinnable cache if the necessary space is small enough
         private void SetWriteBuffer(int bufferSize)
         {
-            if(bufferSize <= CachedWriteBufferSize)
+            if (bufferSize <= CachedWriteBufferSize)
             {
-                if (!_WriteBufferFromPinnableCache) 
+                if (!_WriteBufferFromPinnableCache)
                 {
                     _WriteBuffer = _WriteBufferCache.AllocateBuffer();
                     _WriteBufferFromPinnableCache = true;
@@ -3074,10 +3652,12 @@ namespace System.Net {
 
         */
 
-        private void SetSpecialHeaders(string HeaderName, string value) {
+        private void SetSpecialHeaders(string HeaderName, string value)
+        {
             value = WebHeaderCollection.CheckBadChars(value, true);
             _HttpRequestHeaders.RemoveInternal(HeaderName);
-            if (value.Length != 0) {
+            if (value.Length != 0)
+            {
                 _HttpRequestHeaders.AddInternal(HeaderName, value);
             }
         }
@@ -3095,9 +3675,14 @@ namespace System.Net {
         public override void Abort()
         {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User /* | ThreadKinds.Async would be nice */)) {
+            using (
+                GlobalLog.SetThreadKind(
+                    ThreadKinds.User /* | ThreadKinds.Async would be nice */
+                )
+            )
+            {
 #endif
-            Abort(null, AbortState.Public);
+                Abort(null, AbortState.Public);
 #if DEBUG
             }
 #endif
@@ -3105,14 +3690,30 @@ namespace System.Net {
 
         private void Abort(Exception exception, int abortState)
         {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::Abort()");
-            if (Logging.On) Logging.Enter(Logging.Web, this, "Abort", (exception == null? "" :  exception.Message));
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::Abort()"
+            );
+            if (Logging.On)
+                Logging.Enter(
+                    Logging.Web,
+                    this,
+                    "Abort",
+                    (exception == null ? "" : exception.Message)
+                );
 
-            if(Interlocked.CompareExchange(ref m_Aborted, abortState, 0) == 0) // public abort will never drain streams
+            if (Interlocked.CompareExchange(ref m_Aborted, abortState, 0) == 0) // public abort will never drain streams
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::Abort() - " + exception);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::Abort() - "
+                        + exception
+                );
 
-                NetworkingPerfCounters.Instance.Increment(NetworkingPerfCounterName.HttpWebRequestAborted);
+                NetworkingPerfCounters.Instance.Increment(
+                    NetworkingPerfCounterName.HttpWebRequestAborted
+                );
 
                 m_OnceFailed = true;
                 CancelTimer();
@@ -3120,11 +3721,25 @@ namespace System.Net {
                 WebException webException = exception as WebException;
                 if (exception == null)
                 {
-                    webException = new WebException(NetRes.GetWebStatusString("net_requestaborted", WebExceptionStatus.RequestCanceled), WebExceptionStatus.RequestCanceled);
+                    webException = new WebException(
+                        NetRes.GetWebStatusString(
+                            "net_requestaborted",
+                            WebExceptionStatus.RequestCanceled
+                        ),
+                        WebExceptionStatus.RequestCanceled
+                    );
                 }
                 else if (webException == null)
                 {
-                    webException = new WebException(NetRes.GetWebStatusString("net_requestaborted", WebExceptionStatus.RequestCanceled), exception, WebExceptionStatus.RequestCanceled, _HttpResponse);
+                    webException = new WebException(
+                        NetRes.GetWebStatusString(
+                            "net_requestaborted",
+                            WebExceptionStatus.RequestCanceled
+                        ),
+                        exception,
+                        WebExceptionStatus.RequestCanceled,
+                        _HttpResponse
+                    );
                 }
 
                 try
@@ -3139,7 +3754,8 @@ namespace System.Net {
                         Thread.MemoryBarrier();
                         HttpAbortDelegate abortDelegate = _AbortDelegate;
 #if DEBUG
-                        m_AbortDelegateUsed = abortDelegate == null ? (object)DBNull.Value : abortDelegate;
+                        m_AbortDelegateUsed =
+                            abortDelegate == null ? (object)DBNull.Value : abortDelegate;
 #endif
                         if (abortDelegate == null || abortDelegate(this, webException))
                         {
@@ -3194,19 +3810,24 @@ namespace System.Net {
                     catch (Exception stressException)
                     {
                         t_LastStressException = stressException;
-                    if (!NclUtilities.IsFatal(stressException)){
-                        GlobalLog.Assert(setResponseCalled, "HttpWebRequest#{0}::Abort|{1}", ValidationHelper.HashString(this), stressException.Message);
+                        if (!NclUtilities.IsFatal(stressException))
+                        {
+                            GlobalLog.Assert(
+                                setResponseCalled,
+                                "HttpWebRequest#{0}::Abort|{1}",
+                                ValidationHelper.HashString(this),
+                                stressException.Message
+                            );
                         }
                         throw;
                     }
 #endif
                 }
-                catch (InternalException)
-                {
-                }
+                catch (InternalException) { }
             }
 
-            if(Logging.On)Logging.Exit(Logging.Web, this, "Abort", "");
+            if (Logging.On)
+                Logging.Exit(Logging.Web, this, "Abort", "");
         }
 
         // Cancel any pending timer.
@@ -3221,7 +3842,11 @@ namespace System.Net {
 
         // TimeoutCallback - Called by the TimerThread to abort a request.  This just posts ThreadPool work item - Abort() does too
         // much to be done on the timer thread (timer thread should never block or call user code).
-        private static void TimeoutCallback(TimerThread.Timer timer, int timeNoticed, object context)
+        private static void TimeoutCallback(
+            TimerThread.Timer timer,
+            int timeNoticed,
+            object context
+        )
         {
             ThreadPool.UnsafeQueueUserWorkItem(s_AbortWrapper, context);
         }
@@ -3230,9 +3855,16 @@ namespace System.Net {
         {
 #if DEBUG
             GlobalLog.SetThreadSource(ThreadKinds.Worker);
-            using (GlobalLog.SetThreadKind(ThreadKinds.System)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.System))
+            {
 #endif
-            ((HttpWebRequest) context).Abort(new WebException(NetRes.GetWebStatusString(WebExceptionStatus.Timeout), WebExceptionStatus.Timeout), AbortState.Public);
+                ((HttpWebRequest)context).Abort(
+                    new WebException(
+                        NetRes.GetWebStatusString(WebExceptionStatus.Timeout),
+                        WebExceptionStatus.Timeout
+                    ),
+                    AbortState.Public
+                );
 #if DEBUG
             }
 #endif
@@ -3250,29 +3882,43 @@ namespace System.Net {
             Returns: ServicePoint
 
         */
-        private ServicePoint FindServicePoint(bool forceFind) {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::FindServicePoint");
+        private ServicePoint FindServicePoint(bool forceFind)
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::FindServicePoint"
+            );
 
             ServicePoint servicePoint = _ServicePoint;
-            if ( servicePoint == null || forceFind ) {
-                lock(this) {
+            if (servicePoint == null || forceFind)
+            {
+                lock (this)
+                {
                     //
                     // we will call FindServicePoint - iff
                     //  - there is no service point ||
                     //  - we are forced to find one, usually due to changes of the proxy or redirection
                     //
 
-                    if ( _ServicePoint == null || forceFind ) {
-
-                        if (!ProxySet) {
+                    if (_ServicePoint == null || forceFind)
+                    {
+                        if (!ProxySet)
+                        {
                             _Proxy = WebRequest.InternalDefaultWebProxy;
                         }
                         if (_ProxyChain != null)
                         {
                             _ProxyChain.Dispose();
                         }
-                        _ServicePoint = ServicePointManager.FindServicePoint(_Uri, _Proxy, out _ProxyChain, ref _AbortDelegate, ref m_Aborted);
-                        if (Logging.On) Logging.Associate(Logging.Web, this, _ServicePoint);
+                        _ServicePoint = ServicePointManager.FindServicePoint(
+                            _Uri,
+                            _Proxy,
+                            out _ProxyChain,
+                            ref _AbortDelegate,
+                            ref m_Aborted
+                        );
+                        if (Logging.On)
+                            Logging.Associate(Logging.Web, this, _ServicePoint);
                     }
                 }
                 servicePoint = _ServicePoint;
@@ -3289,25 +3935,52 @@ namespace System.Net {
         */
         private void InvokeGetRequestStreamCallback()
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::InvokeGetRequestStreamCallback");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::InvokeGetRequestStreamCallback");
+            GlobalLog.Enter(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::InvokeGetRequestStreamCallback"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::InvokeGetRequestStreamCallback"
+            );
 
             LazyAsyncResult asyncResult = _WriteAResult;
-            GlobalLog.Assert(asyncResult == null || this == (HttpWebRequest)asyncResult.AsyncObject, "HttpWebRequest#{0}::InvokeGetRequestStreamCallback()|this != asyncResult.AsyncObject", ValidationHelper.HashString(this));
+            GlobalLog.Assert(
+                asyncResult == null || this == (HttpWebRequest)asyncResult.AsyncObject,
+                "HttpWebRequest#{0}::InvokeGetRequestStreamCallback()|this != asyncResult.AsyncObject",
+                ValidationHelper.HashString(this)
+            );
 
-            if (asyncResult != null) {
-                try {
+            if (asyncResult != null)
+            {
+                try
+                {
                     asyncResult.InvokeCallback(_SubmitWriteStream);
                 }
-                catch (Exception exception) {
-                    if (NclUtilities.IsFatal(exception)) throw;
+                catch (Exception exception)
+                {
+                    if (NclUtilities.IsFatal(exception))
+                        throw;
 
                     Abort(exception, AbortState.Public);
-                    GlobalLog.LeaveException("HttpWebRequest#" + ValidationHelper.HashString(this) + "::InvokeGetRequestStreamCallback", exception);
+                    GlobalLog.LeaveException(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::InvokeGetRequestStreamCallback",
+                        exception
+                    );
                     throw;
                 }
             }
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::InvokeGetRequestStreamCallback", "success");
+            GlobalLog.Leave(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::InvokeGetRequestStreamCallback",
+                "success"
+            );
         }
 
         /*
@@ -3326,23 +3999,34 @@ namespace System.Net {
             Returns: Nothing.
 
         */
-        internal void SetRequestSubmitDone(ConnectStream submitStream) {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone", ValidationHelper.HashString(submitStream));
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone");
+        internal void SetRequestSubmitDone(ConnectStream submitStream)
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone",
+                ValidationHelper.HashString(submitStream)
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone"
+            );
 
-            if (!Async) {
+            if (!Async)
+            {
                 ConnectionAsyncResult.InvokeCallback();
             }
 
-            if (AllowWriteStreamBuffering) {
+            if (AllowWriteStreamBuffering)
+            {
                 submitStream.EnableWriteBuffering();
             }
 
-            if (submitStream.CanTimeout) {
+            if (submitStream.CanTimeout)
+            {
                 submitStream.ReadTimeout = ReadWriteTimeout;
                 submitStream.WriteTimeout = ReadWriteTimeout;
             }
-            if(Logging.On)Logging.Associate(Logging.Web, this, submitStream);
+            if (Logging.On)
+                Logging.Associate(Logging.Web, this, submitStream);
 
             // The CBT won't actually be valid until we write to the stream for the first time, but we can create
             // the TransportContext now.  We don't query it until later, when we know it's available.
@@ -3357,7 +4041,10 @@ namespace System.Net {
             if (RtcState != null && RtcState.inputData != null && !RtcState.IsAborted)
             {
                 RtcState.outputData = new byte[sizeof(RtcState.ControlChannelTriggerStatus)];
-                RtcState.result = _SubmitWriteStream.SetRtcOption(RtcState.inputData, RtcState.outputData);
+                RtcState.result = _SubmitWriteStream.SetRtcOption(
+                    RtcState.inputData,
+                    RtcState.outputData
+                );
                 if (!RtcState.IsEnabled())
                 {
                     // Abort request if we weren't able to enable RTC.
@@ -3373,29 +4060,54 @@ namespace System.Net {
             //
             if (Async && _CoreResponse != null && (object)_CoreResponse != (object)DBNull.Value)
             {
-                GlobalLog.Assert(_CoreResponse is Exception, "SetRequestSubmitDone()|Found offensive response right after getting connection ({0}).", _CoreResponse);
+                GlobalLog.Assert(
+                    _CoreResponse is Exception,
+                    "SetRequestSubmitDone()|Found offensive response right after getting connection ({0}).",
+                    _CoreResponse
+                );
                 submitStream.CallDone();
-                GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone() - already have a core response", _CoreResponse.GetType().FullName);
+                GlobalLog.Leave(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::SetRequestSubmitDone() - already have a core response",
+                    _CoreResponse.GetType().FullName
+                );
                 return;
             }
 
             EndSubmitRequest();
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestSubmitDone"
+            );
         }
 
-
-        internal void WriteHeadersCallback(WebExceptionStatus errorStatus, ConnectStream stream, bool async)
+        internal void WriteHeadersCallback(
+            WebExceptionStatus errorStatus,
+            ConnectStream stream,
+            bool async
+        )
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteHeadersCallback", ValidationHelper.HashString(stream));
-            if(errorStatus == WebExceptionStatus.Success)
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteHeadersCallback",
+                ValidationHelper.HashString(stream)
+            );
+            if (errorStatus == WebExceptionStatus.Success)
             {
                 bool completed = EndWriteHeaders(async);
-                if (!completed) {
+                if (!completed)
+                {
                     errorStatus = WebExceptionStatus.Pending;
                 }
-                else {
-                    GlobalLog.Print("ConnectStream#" + ValidationHelper.HashString(stream) + "::WriteHeaders completed:true BytesLeftToWrite:" + stream.BytesLeftToWrite.ToString());
-                    if (stream.BytesLeftToWrite == 0) {
+                else
+                {
+                    GlobalLog.Print(
+                        "ConnectStream#"
+                            + ValidationHelper.HashString(stream)
+                            + "::WriteHeaders completed:true BytesLeftToWrite:"
+                            + stream.BytesLeftToWrite.ToString()
+                    );
+                    if (stream.BytesLeftToWrite == 0)
+                    {
                         //
                         // didn't go pending, no data to write. we're done.
                         //
@@ -3404,7 +4116,10 @@ namespace System.Net {
                 }
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteHeadersCallback", errorStatus.ToString());
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::WriteHeadersCallback",
+                errorStatus.ToString()
+            );
         }
 
         /*
@@ -3420,51 +4135,78 @@ namespace System.Net {
 
         internal void SetRequestContinue(CoreResponseData continueResponse)
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue");
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue"
+            );
 
             _RequestContinueCount++;
 
             if (HttpWriteMode == HttpWriteMode.None)
             {
-                GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue - not a POST type request, return");
+                GlobalLog.Leave(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::SetRequestContinue - not a POST type request, return"
+                );
                 return;
             }
 
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue() _RequestContinueCount:" + _RequestContinueCount);
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SetRequestContinue() _RequestContinueCount:"
+                    + _RequestContinueCount
+            );
 
             if (m_ContinueGate.Complete())
             {
                 // Invoke the 100 continue delegate if the user supplied one and we received a 100 Continue.
                 if (continueResponse != null && ContinueDelegate != null)
                 {
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue() calling ContinueDelegate()");
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::SetRequestContinue() calling ContinueDelegate()"
+                    );
                     ExecutionContext x = Async ? GetWritingContext().ContextCopy : null;
                     if (x == null)
                     {
-                        ContinueDelegate((int)continueResponse.m_StatusCode, continueResponse.m_ResponseHeaders);
+                        ContinueDelegate(
+                            (int)continueResponse.m_StatusCode,
+                            continueResponse.m_ResponseHeaders
+                        );
                     }
                     else
                     {
-                        ExecutionContext.Run(x, new ContextCallback(CallContinueDelegateCallback), continueResponse);
+                        ExecutionContext.Run(
+                            x,
+                            new ContextCallback(CallContinueDelegateCallback),
+                            continueResponse
+                        );
                     }
                 }
 
                 EndWriteHeaders_Part2();
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetRequestContinue"
+            );
         }
 
         //
         // Used to keep us looping and parsing until we get a 100 continue.
         // Since we can get more than one 100 continue during redirects or auth, we need to keep it on a counter.
         //
-        internal int RequestContinueCount {
-            get {
-                return _RequestContinueCount;
-            }
+        internal int RequestContinueCount
+        {
+            get { return _RequestContinueCount; }
         }
+
         //
         // This will open the write side response window, so any response processing
         // coming before the window is closed will be delayed.
@@ -3475,11 +4217,16 @@ namespace System.Net {
             //
             // Multithreading: This method is called from the connection and under the connection lock
             // It should not be subject to a race condition. Note that request.Abort() also ends up with the connection lock.
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::OpenWriteSideResponseWindow()");
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::OpenWriteSideResponseWindow()"
+            );
 
             _CoreResponse = DBNull.Value;
             _NestedWriteSideCheck = 0;
         }
+
         //
         // If the response is already received this method starts its processing.
         // Otheriwse the window for write side response processing is closed
@@ -3496,11 +4243,22 @@ namespace System.Net {
             // - CoreResponseData - We've received a response
             // - null - Uploading completed without receiving a response
             // - Exception - We're done/broken
-            object responseData = Async? Interlocked.CompareExchange(ref _CoreResponse, null, DBNull.Value): _CoreResponse;
+            object responseData = Async
+                ? Interlocked.CompareExchange(ref _CoreResponse, null, DBNull.Value)
+                : _CoreResponse;
 
             if (responseData == DBNull.Value)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckWriteSideResponseProcessing() - responseData = DBNull means no response yet, " +  (Async?"async: closing write side window": "sync: leaving write side window opened"));
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CheckWriteSideResponseProcessing() - responseData = DBNull means no response yet, "
+                        + (
+                            Async
+                                ? "async: closing write side window"
+                                : "sync: leaving write side window opened"
+                        )
+                );
                 return;
             }
 
@@ -3512,20 +4270,33 @@ namespace System.Net {
 
             if (!Async && ++_NestedWriteSideCheck != 1)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckWriteSideResponseProcessing() - Repeated SYNC check _NestedWriteSideCheck = " + _NestedWriteSideCheck + ", response =" + responseData.GetType().FullName);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CheckWriteSideResponseProcessing() - Repeated SYNC check _NestedWriteSideCheck = "
+                        + _NestedWriteSideCheck
+                        + ", response ="
+                        + responseData.GetType().FullName
+                );
                 return;
             }
 
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckWriteSideResponseProcessing() - Response is ready, process here: " + responseData.GetType().FullName);
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CheckWriteSideResponseProcessing() - Response is ready, process here: "
+                    + responseData.GetType().FullName
+            );
 
             FinishContinueWait();
             // The response has been already set and the processing was deferred until now
-            Exception exception  = responseData as Exception;
+            Exception exception = responseData as Exception;
             if (exception != null)
                 SetResponse(exception);
             else
                 SetResponse(responseData as CoreResponseData);
         }
+
         //
         //
         // Some kind of response is ready and this method will ether process it or defer until the write side response check.
@@ -3533,20 +4304,29 @@ namespace System.Net {
         // Note, when an exception comes here then the request is already taken off the list and the connection is BEING closed.
         internal void SetAndOrProcessResponse(object responseOrException)
         {
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Entered with responseOrException: " + responseOrException);
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SetAndOrProcessResponse() - Entered with responseOrException: "
+                    + responseOrException
+            );
 
             if (responseOrException == null)
                 throw new InternalException(); //Consider making an Assert later. If the condtion is met then this request may hang.
 
-            CoreResponseData newResponse  = responseOrException as CoreResponseData;
-            WebException    newException = responseOrException as WebException;
+            CoreResponseData newResponse = responseOrException as CoreResponseData;
+            WebException newException = responseOrException as WebException;
 
             // Definitions of _CoreResponse:
             // - DBNull.Value - Writing headers/body is in progress, but we haven't yet received a response.
             // - CoreResponseData - We've received a response
             // - null - Uploading completed without receiving a response
             // - Exception - We're done/broken
-            object responseData = Interlocked.CompareExchange(ref _CoreResponse,  responseOrException, DBNull.Value);
+            object responseData = Interlocked.CompareExchange(
+                ref _CoreResponse,
+                responseOrException,
+                DBNull.Value
+            );
 
             //
             // (1) This method cannot be called with two exceptions in a row or with two responses in a row.
@@ -3558,19 +4338,23 @@ namespace System.Net {
             {
                 if (responseData.GetType() == typeof(CoreResponseData))
                 {
-                     if (newResponse != null)
-                         throw new InternalException();// make an assert later
+                    if (newResponse != null)
+                        throw new InternalException(); // make an assert later
 
-                     if (newException != null && newException.InternalStatus != WebExceptionInternalStatus.ServicePointFatal &&
-                        newException.InternalStatus != WebExceptionInternalStatus.RequestFatal)
-                         return;
-                     // Else the exception will override the response
+                    if (
+                        newException != null
+                        && newException.InternalStatus
+                            != WebExceptionInternalStatus.ServicePointFatal
+                        && newException.InternalStatus != WebExceptionInternalStatus.RequestFatal
+                    )
+                        return;
+                    // Else the exception will override the response
                 }
                 else if (responseData.GetType() != typeof(DBNull))
                 {
                     // Here responseData == Exception so newResponse must not be an exception
-                    if (newResponse  == null)
-                        throw new InternalException();// make an assert later that will be ignored in retail
+                    if (newResponse == null)
+                        throw new InternalException(); // make an assert later that will be ignored in retail
 
                     //We have an exception and now getting a response
                     // Release that response stream to unblock the connection
@@ -3593,7 +4377,11 @@ namespace System.Net {
             //
             if (responseData == DBNull.Value)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Write Thread will procees the response.");
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::SetAndOrProcessResponse() - Write Thread will procees the response."
+                );
                 //
                 // Note for a sync request a write side window is always open
                 //
@@ -3603,10 +4391,14 @@ namespace System.Net {
                     LazyAsyncResult chkReaderAsyncResult = ConnectionReaderAsyncResult;
 
                     chkConnectionAsyncResult.InvokeCallback(responseOrException); // ref "responseOrException": could be anything except for AsyncTriState or stream
-                    chkReaderAsyncResult.InvokeCallback(responseOrException);     // ref "responseOrException": could be anything except for null
+                    chkReaderAsyncResult.InvokeCallback(responseOrException); // ref "responseOrException": could be anything except for null
                 }
                 // Async response/error after writing headers but before the body, attempt to process it and respond.
-                else if (!AllowWriteStreamBuffering && IsOutstandingGetRequestStream && FinishContinueWait())
+                else if (
+                    !AllowWriteStreamBuffering
+                    && IsOutstandingGetRequestStream
+                    && FinishContinueWait()
+                )
                 {
                     if (newResponse != null)
                     {
@@ -3627,28 +4419,51 @@ namespace System.Net {
                 if (e != null)
                 {
                     // This may happen if we failed while trying to process a response.
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Fatal Exception -> Override old response = " + responseData);
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::SetAndOrProcessResponse() - Fatal Exception -> Override old response = "
+                            + responseData
+                    );
                     SetResponse(e);
                 }
                 else
                 {
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Error!!! Unexpected (1) Response already set response = " + responseData);
-                    throw new InternalException();// make an assert later
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::SetAndOrProcessResponse() - Error!!! Unexpected (1) Response already set response = "
+                            + responseData
+                    );
+                    throw new InternalException(); // make an assert later
                 }
                 return;
             }
 
             // The write side response window has been closed by calling CheckWriteSideResponseProcessing() without
             // receiving a response.  Immediately process any responses received.
-            responseData = Interlocked.CompareExchange(ref _CoreResponse,  responseOrException, null);
+            responseData = Interlocked.CompareExchange(
+                ref _CoreResponse,
+                responseOrException,
+                null
+            );
             if (responseData != null)
             {
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Warning!!! Unexpected (2) SetResponse, already set response = " + responseData);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::SetAndOrProcessResponse() - Warning!!! Unexpected (2) SetResponse, already set response = "
+                        + responseData
+                );
 
                 // This is a ---- with Abort, if we got an exception then re-enter SetResponse, otherwise return
                 if (newResponse != null)
                 {
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Ignoring current response while SetResponse() is processing an exception");
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::SetAndOrProcessResponse() - Ignoring current response while SetResponse() is processing an exception"
+                    );
 
                     // We have an exception and now getting a response
                     // Release that response stream to unblock the connection
@@ -3664,12 +4479,15 @@ namespace System.Net {
 
                     return;
                 }
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetAndOrProcessResponse() - Forcing new exception to re-enter SetResponse() that is being processed with CoreResponseData");
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::SetAndOrProcessResponse() - Forcing new exception to re-enter SetResponse() that is being processed with CoreResponseData"
+                );
             }
 
             if (!Async)
                 throw new InternalException(); //Consider making an Assert later. If the condition is met it _might_ process a sync request on non submitting thread.
-
 
             FinishContinueWait();
             // For this request the write side response window was already closed so we have to procees the response
@@ -3685,11 +4503,21 @@ namespace System.Net {
         // On return the response can be re-created.
         // Under some cases this method may initate retrying of the current request.
         //
-        private void SetResponse(CoreResponseData coreResponseData) {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse");
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse - coreResponseData=" + ValidationHelper.HashString(coreResponseData));
+        private void SetResponse(CoreResponseData coreResponseData)
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse"
+            );
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SetResponse - coreResponseData="
+                    + ValidationHelper.HashString(coreResponseData)
+            );
 
-            try {
+            try
+            {
                 // Consider removing this block as all these should be already signalled
                 if (!Async)
                 {
@@ -3697,7 +4525,7 @@ namespace System.Net {
                     LazyAsyncResult chkReaderAsyncResult = ConnectionReaderAsyncResult;
 
                     chkConnectionAsyncResult.InvokeCallback(coreResponseData); // ref "coreResponseData": could be anything except for AsyncTriState or stream
-                    chkReaderAsyncResult.InvokeCallback(coreResponseData);     // ref "coreResponseData": could be anything except for null
+                    chkReaderAsyncResult.InvokeCallback(coreResponseData); // ref "coreResponseData": could be anything except for null
                 }
 
                 if (coreResponseData != null)
@@ -3707,24 +4535,43 @@ namespace System.Net {
                         coreResponseData.m_ConnectStream.WriteTimeout = ReadWriteTimeout;
                         coreResponseData.m_ConnectStream.ReadTimeout = ReadWriteTimeout;
                     }
-                    _HttpResponse = new HttpWebResponse(GetRemoteResourceUri(), CurrentMethod,
-                        coreResponseData, _MediaType, UsesProxySemantics, AutomaticDecompression,
-                        IsWebSocketRequest, ConnectionGroupName);
+                    _HttpResponse = new HttpWebResponse(
+                        GetRemoteResourceUri(),
+                        CurrentMethod,
+                        coreResponseData,
+                        _MediaType,
+                        UsesProxySemantics,
+                        AutomaticDecompression,
+                        IsWebSocketRequest,
+                        ConnectionGroupName
+                    );
 
-                    if(Logging.On)Logging.Associate(Logging.Web, this, coreResponseData.m_ConnectStream);
-                    if(Logging.On)Logging.Associate(Logging.Web, this, _HttpResponse);
+                    if (Logging.On)
+                        Logging.Associate(Logging.Web, this, coreResponseData.m_ConnectStream);
+                    if (Logging.On)
+                        Logging.Associate(Logging.Web, this, _HttpResponse);
                     ProcessResponse();
                 }
                 else
                 {
-                    GlobalLog.Assert("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse()", "coreResponseData == null");
+                    GlobalLog.Assert(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse()",
+                        "coreResponseData == null"
+                    );
                     Abort(null, AbortState.Public);
-                    GlobalLog.LeaveException("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse", new InternalException());
+                    GlobalLog.LeaveException(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse",
+                        new InternalException()
+                    );
                 }
             }
-            catch (Exception exception) {
+            catch (Exception exception)
+            {
                 Abort(exception, AbortState.Internal);
-                GlobalLog.LeaveException("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse", exception);
+                GlobalLog.LeaveException(
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse",
+                    exception
+                );
             }
             return;
         }
@@ -3741,9 +4588,16 @@ namespace System.Net {
 
 
         --*/
-        private void ProcessResponse() {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ProcessResponse", "From Cache = " + _HttpResponse.IsFromCache);
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ProcessResponse");
+        private void ProcessResponse()
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ProcessResponse",
+                "From Cache = " + _HttpResponse.IsFromCache
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ProcessResponse"
+            );
 
             HttpProcessingResult httpResult = HttpProcessingResult.Continue;
             Exception exception = null;
@@ -3755,7 +4609,7 @@ namespace System.Net {
             {
                 CancelTimer();
 
-                object result = exception != null ? (object) exception : (object) _HttpResponse;
+                object result = exception != null ? (object)exception : (object)_HttpResponse;
 
                 if (_ReadAResult == null)
                 {
@@ -3763,7 +4617,7 @@ namespace System.Net {
                     {
                         if (_ReadAResult == null)
                         {
-                            _ReadAResult = new LazyAsyncResult(null, null, null);  //never throws
+                            _ReadAResult = new LazyAsyncResult(null, null, null); //never throws
                         }
                     }
                 }
@@ -3788,179 +4642,243 @@ namespace System.Net {
                 finally
                 {
                     // If request was already aborted the response will not be set on asyncResult, hence abort it now
-                    if (exception == null && _ReadAResult.Result != (object) _HttpResponse)
+                    if (exception == null && _ReadAResult.Result != (object)_HttpResponse)
                     {
                         WebException webException = _ReadAResult.Result as WebException;
                         if (webException != null && webException.Response != null)
                         {
-                            GlobalLog.Assert(object.ReferenceEquals(webException.Response, _HttpResponse), "HttpWebRequset#{0}::ProcessResponse|Different HttpWebResponse in exception versus _HttpResponse.", ValidationHelper.HashString(this));
-                            _HttpResponse.Abort();  // never throws
+                            GlobalLog.Assert(
+                                object.ReferenceEquals(webException.Response, _HttpResponse),
+                                "HttpWebRequset#{0}::ProcessResponse|Different HttpWebResponse in exception versus _HttpResponse.",
+                                ValidationHelper.HashString(this)
+                            );
+                            _HttpResponse.Abort(); // never throws
                         }
                     }
                 }
             }
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ProcessResponse");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ProcessResponse"
+            );
         }
 
         //
         // Process an exception and optionally set request for retrying
         //
-        private void SetResponse(Exception E) {
+        private void SetResponse(Exception E)
+        {
 #if DEBUG
             bool callbackInvoked = false;
             try
             {
 #endif
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse", E.ToString() + "/*** SETRESPONSE IN ERROR ***");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse");
+                GlobalLog.Enter(
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse",
+                    E.ToString() + "/*** SETRESPONSE IN ERROR ***"
+                );
+                GlobalLog.ThreadContract(
+                    ThreadKinds.Unknown,
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse"
+                );
 
-            HttpProcessingResult httpResult = HttpProcessingResult.Continue;
+                HttpProcessingResult httpResult = HttpProcessingResult.Continue;
 
-            //
-            // Preserve the very first web exception occured if it was fatal
-            //
-            WebException webException = HaveResponse ? _ReadAResult.Result as WebException : null;
-            WebException newWebException = E as WebException;
-            if (webException != null && (webException.InternalStatus == WebExceptionInternalStatus.RequestFatal ||
-                webException.InternalStatus == WebExceptionInternalStatus.ServicePointFatal) &&
-                (newWebException == null || newWebException.InternalStatus != WebExceptionInternalStatus.RequestFatal))
-            {
-                E = webException;
-            }
-            else
-            {
-                webException = newWebException;
-            }
-
-            if (E != null)
-            {
-                if (Logging.On) Logging.Exception(Logging.Web, this, "", webException);
-            }
-
-            try {
-                if ( webException != null &&
-                     (webException.InternalStatus == WebExceptionInternalStatus.Isolated ||
-                     webException.InternalStatus == WebExceptionInternalStatus.ServicePointFatal ||
-                     (webException.InternalStatus == WebExceptionInternalStatus.Recoverable && !m_OnceFailed)))
+                //
+                // Preserve the very first web exception occured if it was fatal
+                //
+                WebException webException = HaveResponse
+                    ? _ReadAResult.Result as WebException
+                    : null;
+                WebException newWebException = E as WebException;
+                if (
+                    webException != null
+                    && (
+                        webException.InternalStatus == WebExceptionInternalStatus.RequestFatal
+                        || webException.InternalStatus
+                            == WebExceptionInternalStatus.ServicePointFatal
+                    )
+                    && (
+                        newWebException == null
+                        || newWebException.InternalStatus != WebExceptionInternalStatus.RequestFatal
+                    )
+                )
                 {
-
-                    if (webException.InternalStatus == WebExceptionInternalStatus.Recoverable)
-                        m_OnceFailed = true;
-
-                    Pipelined = false;
-
-                    if (_SubmitWriteStream != null && _OldSubmitWriteStream == null && _SubmitWriteStream.BufferOnly) {
-                        _OldSubmitWriteStream = _SubmitWriteStream;
-                    }
-
-                    httpResult = DoSubmitRequestProcessing(ref E);
+                    E = webException;
                 }
-            }
-            catch (Exception unexpectedException)
-            {
-                if (NclUtilities.IsFatal(unexpectedException)) throw;
-
-                // This is highly unexpected but if happens would result into Aborted exception with caught one as an inner exception
-                httpResult = HttpProcessingResult.Continue;
-                E = new WebException(NetRes.GetWebStatusString("net_requestaborted", WebExceptionStatus.RequestCanceled), unexpectedException, WebExceptionStatus.RequestCanceled, _HttpResponse);
-            }
-            finally
-            {
-                if (httpResult == HttpProcessingResult.Continue)
+                else
                 {
-                    CancelTimer();
+                    webException = newWebException;
+                }
 
-                    if (!(E is WebException) && !(E is SecurityException))
+                if (E != null)
+                {
+                    if (Logging.On)
+                        Logging.Exception(Logging.Web, this, "", webException);
+                }
+
+                try
+                {
+                    if (
+                        webException != null
+                        && (
+                            webException.InternalStatus == WebExceptionInternalStatus.Isolated
+                            || webException.InternalStatus
+                                == WebExceptionInternalStatus.ServicePointFatal
+                            || (
+                                webException.InternalStatus
+                                    == WebExceptionInternalStatus.Recoverable
+                                && !m_OnceFailed
+                            )
+                        )
+                    )
                     {
-                        if (_HttpResponse==null) {
-                            E = new WebException(E.Message, E);
-                        }
-                        else {
-                            E = new WebException(
-                                SR.GetString(
-                                    SR.net_servererror,
-                                    NetRes.GetWebStatusCodeString(
-                                        ResponseStatusCode,
-                                        _HttpResponse.StatusDescription)),
-                                E,
-                                WebExceptionStatus.ProtocolError,
-                                _HttpResponse );
-                        }
-                    }
+                        if (webException.InternalStatus == WebExceptionInternalStatus.Recoverable)
+                            m_OnceFailed = true;
 
-                    LazyAsyncResult writeAResult;
-                    LazyAsyncResult readAResult = null;
+                        Pipelined = false;
 
-                    // Async Abort may happen at any time including when the request is being cleared
-                    // and resubmitted hence using checked response.
-                    HttpWebResponse chkResponse = _HttpResponse;
-
-                    lock (this)
-                    {
-                        writeAResult = _WriteAResult;
-
-                        if (_ReadAResult == null)
+                        if (
+                            _SubmitWriteStream != null
+                            && _OldSubmitWriteStream == null
+                            && _SubmitWriteStream.BufferOnly
+                        )
                         {
-                            _ReadAResult = new LazyAsyncResult(null, null, null, E); //never throws
+                            _OldSubmitWriteStream = _SubmitWriteStream;
                         }
-                        else
-                        {
-                            readAResult = _ReadAResult;
-                        }
-                    }
 
-                    try
+                        httpResult = DoSubmitRequestProcessing(ref E);
+                    }
+                }
+                catch (Exception unexpectedException)
+                {
+                    if (NclUtilities.IsFatal(unexpectedException))
+                        throw;
+
+                    // This is highly unexpected but if happens would result into Aborted exception with caught one as an inner exception
+                    httpResult = HttpProcessingResult.Continue;
+                    E = new WebException(
+                        NetRes.GetWebStatusString(
+                            "net_requestaborted",
+                            WebExceptionStatus.RequestCanceled
+                        ),
+                        unexpectedException,
+                        WebExceptionStatus.RequestCanceled,
+                        _HttpResponse
+                    );
+                }
+                finally
+                {
+                    if (httpResult == HttpProcessingResult.Continue)
                     {
-                        FinishRequest(chkResponse, E); //never throws
+                        CancelTimer();
+
+                        if (!(E is WebException) && !(E is SecurityException))
+                        {
+                            if (_HttpResponse == null)
+                            {
+                                E = new WebException(E.Message, E);
+                            }
+                            else
+                            {
+                                E = new WebException(
+                                    SR.GetString(
+                                        SR.net_servererror,
+                                        NetRes.GetWebStatusCodeString(
+                                            ResponseStatusCode,
+                                            _HttpResponse.StatusDescription
+                                        )
+                                    ),
+                                    E,
+                                    WebExceptionStatus.ProtocolError,
+                                    _HttpResponse
+                                );
+                            }
+                        }
+
+                        LazyAsyncResult writeAResult;
+                        LazyAsyncResult readAResult = null;
+
+                        // Async Abort may happen at any time including when the request is being cleared
+                        // and resubmitted hence using checked response.
+                        HttpWebResponse chkResponse = _HttpResponse;
+
+                        lock (this)
+                        {
+                            writeAResult = _WriteAResult;
+
+                            if (_ReadAResult == null)
+                            {
+                                _ReadAResult = new LazyAsyncResult(null, null, null, E); //never throws
+                            }
+                            else
+                            {
+                                readAResult = _ReadAResult;
+                            }
+                        }
 
                         try
                         {
-                            if (writeAResult != null) {
-                                writeAResult.InvokeCallback(E);
+                            FinishRequest(chkResponse, E); //never throws
+
+                            try
+                            {
+                                if (writeAResult != null)
+                                {
+                                    writeAResult.InvokeCallback(E);
+                                }
+                            }
+                            finally
+                            {
+                                if (readAResult != null)
+                                {
+#if DEBUG
+                                    callbackInvoked = true;
+#endif
+                                    readAResult.InvokeCallback(E);
+                                }
                             }
                         }
                         finally
                         {
-                            if (readAResult != null) {
-#if DEBUG
-                                callbackInvoked = true;
-#endif
-                                readAResult.InvokeCallback(E);
+                            chkResponse = _ReadAResult.Result as HttpWebResponse;
+
+                            // If the response was already set that exception closes it.
+                            if (chkResponse != null)
+                            {
+                                chkResponse.Abort(); //never throws
+                            }
+
+                            if (CacheProtocol != null)
+                            {
+                                CacheProtocol.Abort(); //never throws
                             }
                         }
                     }
-                    finally
-                    {
-                        chkResponse = _ReadAResult.Result as HttpWebResponse;
-
-                        // If the response was already set that exception closes it.
-                        if (chkResponse != null)
-                        {
-                            chkResponse.Abort();    //never throws
-                        }
-
-                        if (CacheProtocol != null)
-                        {
-                            CacheProtocol.Abort();  //never throws
-                        }
-                    }
-                }
 #if DEBUG
-                else
-                {
-                    callbackInvoked = true;
-                }
+                    else
+                    {
+                        callbackInvoked = true;
+                    }
 #endif
-            }
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse", httpResult.ToString());
+                }
+                GlobalLog.Leave(
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SetResponse",
+                    httpResult.ToString()
+                );
 #if DEBUG
             }
             catch (Exception exception)
             {
                 t_LastStressException = exception;
 
-                if (!NclUtilities.IsFatal(exception)){
-                    GlobalLog.Assert(callbackInvoked, "HttpWebRequest#{0}::SetResponse|{1}", ValidationHelper.HashString(this), exception.Message);
+                if (!NclUtilities.IsFatal(exception))
+                {
+                    GlobalLog.Assert(
+                        callbackInvoked,
+                        "HttpWebRequest#{0}::SetResponse|{1}",
+                        ValidationHelper.HashString(this),
+                        exception.Message
+                    );
                 }
                 throw;
             }
@@ -3980,14 +4898,17 @@ namespace System.Net {
                 // Skip token capturing if no credentials are used or they don't include a default one.
                 // Also do capture the token if ICredential is not of CredentialCache type so we don't know what the exact credential response will be.
                 CredentialCache cache;
-                return Credentials != null &&
-                       (Credentials is SystemNetworkCredential ||
-                        (!(Credentials is NetworkCredential) &&
-                         ((cache = Credentials as CredentialCache) == null ||
-                          cache.IsDefaultInCache
-                         )
+                return Credentials != null
+                    && (
+                        Credentials is SystemNetworkCredential
+                        || (
+                            !(Credentials is NetworkCredential)
+                            && (
+                                (cache = Credentials as CredentialCache) == null
+                                || cache.IsDefaultInCache
+                            )
                         )
-                       );
+                    );
             }
         }
 
@@ -3996,18 +4917,32 @@ namespace System.Net {
         {
             if (!Async)
             {
-                GlobalLog.ThreadContract(ThreadKinds.User | ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectingContext");
+                GlobalLog.ThreadContract(
+                    ThreadKinds.User | ThreadKinds.Sync,
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectingContext"
+                );
                 return null;
             }
 
             // _WriteARequest == null is the case where the user specifies POST but doesn't call GetRequestStream().
             ContextAwareResult context =
-                (HttpWriteMode == HttpWriteMode.None || _OldSubmitWriteStream != null || _WriteAResult == null || _WriteAResult.IsCompleted == true ?
-                _ReadAResult : _WriteAResult) as ContextAwareResult;
+                (
+                    HttpWriteMode == HttpWriteMode.None
+                    || _OldSubmitWriteStream != null
+                    || _WriteAResult == null
+                    || _WriteAResult.IsCompleted == true
+                        ? _ReadAResult
+                        : _WriteAResult
+                ) as ContextAwareResult;
 
             if (context == null)
             {
-                GlobalLog.Assert("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectingContext", "Called while asynchronous connecting phase not in progress.");
+                GlobalLog.Assert(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::GetConnectingContext",
+                    "Called while asynchronous connecting phase not in progress."
+                );
                 throw new InternalException();
             }
 
@@ -4019,20 +4954,32 @@ namespace System.Net {
         {
             if (!Async)
             {
-                GlobalLog.ThreadContract(ThreadKinds.User | ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetWritingContext");
+                GlobalLog.ThreadContract(
+                    ThreadKinds.User | ThreadKinds.Sync,
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetWritingContext"
+                );
                 return null;
             }
 
             ContextAwareResult context = _WriteAResult as ContextAwareResult;
-            if (context == null || context.InternalPeekCompleted || HttpWriteMode == HttpWriteMode.None
-                || HttpWriteMode == HttpWriteMode.Buffer || m_PendingReturnResult == DBNull.Value || m_OriginallyBuffered)
+            if (
+                context == null
+                || context.InternalPeekCompleted
+                || HttpWriteMode == HttpWriteMode.None
+                || HttpWriteMode == HttpWriteMode.Buffer
+                || m_PendingReturnResult == DBNull.Value
+                || m_OriginallyBuffered
+            )
             {
                 context = _ReadAResult as ContextAwareResult;
             }
 
             if (context == null)
             {
-                GlobalLog.Assert("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetWritingContext", "Called while asynchronous writing phase not in progress.");
+                GlobalLog.Assert(
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetWritingContext",
+                    "Called while asynchronous writing phase not in progress."
+                );
                 throw new InternalException();
             }
 
@@ -4044,7 +4991,10 @@ namespace System.Net {
         {
             if (!Async)
             {
-                GlobalLog.ThreadContract(ThreadKinds.User | ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetReadingContext");
+                GlobalLog.ThreadContract(
+                    ThreadKinds.User | ThreadKinds.Sync,
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetReadingContext"
+                );
                 return null;
             }
 
@@ -4054,14 +5004,17 @@ namespace System.Net {
                 context = _WriteAResult as ContextAwareResult;
                 if (context == null)
                 {
-                    GlobalLog.Assert("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetReadingContext|Called while asynchronous reading phase not in progress.");
+                    GlobalLog.Assert(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::GetReadingContext|Called while asynchronous reading phase not in progress."
+                    );
                     throw new InternalException();
                 }
             }
 
             return context;
         }
-
 
         /*++
 
@@ -4088,20 +5041,46 @@ namespace System.Net {
 
         private void BeginSubmitRequest()
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest");
-            GlobalLog.ThreadContract(ThreadKinds.User, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest");
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest() Method:" + Method + " Address:" + Address);
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.User,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest"
+            );
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::BeginSubmitRequest() Method:"
+                    + Method
+                    + " Address:"
+                    + Address
+            );
 
             SubmitRequest(FindServicePoint(false));
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::BeginSubmitRequest"
+            );
         }
 
         private void SubmitRequest(ServicePoint servicePoint)
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest");
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest() HaveResponse:" + HaveResponse + " Saw100Continue:" + Saw100Continue);
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest"
+            );
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SubmitRequest() HaveResponse:"
+                    + HaveResponse
+                    + " Saw100Continue:"
+                    + Saw100Continue
+            );
 
             if (!Async)
             {
@@ -4110,23 +5089,40 @@ namespace System.Net {
                 OpenWriteSideResponseWindow();
             }
 
-            if (_Timer == null && !Async){
+            if (_Timer == null && !Async)
+            {
                 _Timer = TimerQueue.CreateTimer(s_TimeoutCallback, this);
             }
 
-            try {
-
+            try
+            {
                 if (_SubmitWriteStream != null && _SubmitWriteStream.IsPostStream)
                 {
                     // _OldSubmitWriteStream is the stream that holds real user data
                     // In no case it can be overwritten.
                     // For multiple resubmits the ContentLength was set already, so no need call it again.
                     // on first resubmission the real user data hasn't been saved, so _OldSubmitWriteStream is null
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest() (resubmit) firstResubmission:" + (_OldSubmitWriteStream == null) + " NtlmKeepAlive:" + NtlmKeepAlive);
-                    if (_OldSubmitWriteStream == null && !_SubmitWriteStream.ErrorInStream && AllowWriteStreamBuffering)
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::SubmitRequest() (resubmit) firstResubmission:"
+                            + (_OldSubmitWriteStream == null)
+                            + " NtlmKeepAlive:"
+                            + NtlmKeepAlive
+                    );
+                    if (
+                        _OldSubmitWriteStream == null
+                        && !_SubmitWriteStream.ErrorInStream
+                        && AllowWriteStreamBuffering
+                    )
                     {
                         // save the real user data.
-                        GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest() (resubmit) save the real user data _OldSubmitWriteStream#" + ValidationHelper.HashString(_OldSubmitWriteStream));
+                        GlobalLog.Print(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::SubmitRequest() (resubmit) save the real user data _OldSubmitWriteStream#"
+                                + ValidationHelper.HashString(_OldSubmitWriteStream)
+                        );
                         _OldSubmitWriteStream = _SubmitWriteStream;
                     }
                     // make sure we reformat the headers before resubmitting
@@ -4137,20 +5133,27 @@ namespace System.Net {
 
                 // If pre-authentication is requested call the AuthenticationManager
                 // and add authorization header if there is response
-                if (PreAuthenticate) {
+                if (PreAuthenticate)
+                {
                     if (UsesProxySemantics && _Proxy != null && _Proxy.Credentials != null)
                         ProxyAuthenticationState.PreAuthIfNeeded(this, _Proxy.Credentials);
                     if (Credentials != null)
                         ServerAuthenticationState.PreAuthIfNeeded(this, Credentials);
                 }
 
-                if (WriteBufferLength == 0) {
+                if (WriteBufferLength == 0)
+                {
                     UpdateHeaders();
                 }
 
-                if (CheckCacheRetrieveBeforeSubmit()) {
+                if (CheckCacheRetrieveBeforeSubmit())
+                {
                     // We are done and internal Response processing is kicked in
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest CACHED RESPONSE");
+                    GlobalLog.Leave(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::SubmitRequest CACHED RESPONSE"
+                    );
                     return;
                 }
 
@@ -4158,13 +5161,15 @@ namespace System.Net {
                 // _AbortDelegate is set on submission process.
                 servicePoint.SubmitRequest(this, GetConnectionGroupLine());
             }
-            finally {
+            finally
+            {
                 if (!Async)
                     CheckWriteSideResponseProcessing();
             }
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::SubmitRequest"
+            );
         }
-
 
         //
         // This method may be invoked as part of the request submission but
@@ -4172,10 +5177,17 @@ namespace System.Net {
         // Return:
         // - True       = response is ready
         // - False      = Proceed with the request submission
-        private bool CheckCacheRetrieveBeforeSubmit() {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckCacheRetrieveBeforeSubmit");
+        private bool CheckCacheRetrieveBeforeSubmit()
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CheckCacheRetrieveBeforeSubmit"
+            );
 
-            if (CacheProtocol == null) {
+            if (CacheProtocol == null)
+            {
                 return false;
             }
 
@@ -4183,36 +5195,54 @@ namespace System.Net {
             {
                 Uri cacheUri = GetRemoteResourceUri();
                 if (cacheUri.Fragment.Length != 0)
-                    cacheUri = new Uri(cacheUri.GetParts(UriComponents.AbsoluteUri & ~UriComponents.Fragment, UriFormat.SafeUnescaped));
+                    cacheUri = new Uri(
+                        cacheUri.GetParts(
+                            UriComponents.AbsoluteUri & ~UriComponents.Fragment,
+                            UriFormat.SafeUnescaped
+                        )
+                    );
 
                 CacheProtocol.GetRetrieveStatus(cacheUri, this);
 
-                if (CacheProtocol.ProtocolStatus == CacheValidationStatus.Fail) {
+                if (CacheProtocol.ProtocolStatus == CacheValidationStatus.Fail)
+                {
                     throw CacheProtocol.ProtocolException;
                 }
 
-                if (CacheProtocol.ProtocolStatus != CacheValidationStatus.ReturnCachedResponse) {
+                if (CacheProtocol.ProtocolStatus != CacheValidationStatus.ReturnCachedResponse)
+                {
                     return false;
                 }
 
-                if (HttpWriteMode!=HttpWriteMode.None) {
+                if (HttpWriteMode != HttpWriteMode.None)
+                {
                     throw new NotSupportedException(SR.GetString(SR.net_cache_not_supported_body));
                 }
 
                 // If we take it from cache, we have to kick in response processing
                 // The _CacheStream is good to return as the response stream.
-                HttpRequestCacheValidator ctx = (HttpRequestCacheValidator) CacheProtocol.Validator;
+                HttpRequestCacheValidator ctx = (HttpRequestCacheValidator)CacheProtocol.Validator;
                 CoreResponseData responseData = new CoreResponseData();
-                responseData.m_IsVersionHttp11  = ctx.CacheHttpVersion.Equals(HttpVersion.Version11);
-                responseData.m_StatusCode       = ctx.CacheStatusCode;
-                responseData.m_StatusDescription= ctx.CacheStatusDescription;
-                responseData.m_ResponseHeaders  = ctx.CacheHeaders;
-                responseData.m_ContentLength    = CacheProtocol.ResponseStreamLength;
-                responseData.m_ConnectStream    = CacheProtocol.ResponseStream;
-                _HttpResponse = new HttpWebResponse(GetRemoteResourceUri(), CurrentMethod, responseData,
-                    _MediaType, UsesProxySemantics, AutomaticDecompression, IsWebSocketRequest, ConnectionGroupName);
+                responseData.m_IsVersionHttp11 = ctx.CacheHttpVersion.Equals(HttpVersion.Version11);
+                responseData.m_StatusCode = ctx.CacheStatusCode;
+                responseData.m_StatusDescription = ctx.CacheStatusDescription;
+                responseData.m_ResponseHeaders = ctx.CacheHeaders;
+                responseData.m_ContentLength = CacheProtocol.ResponseStreamLength;
+                responseData.m_ConnectStream = CacheProtocol.ResponseStream;
+                _HttpResponse = new HttpWebResponse(
+                    GetRemoteResourceUri(),
+                    CurrentMethod,
+                    responseData,
+                    _MediaType,
+                    UsesProxySemantics,
+                    AutomaticDecompression,
+                    IsWebSocketRequest,
+                    ConnectionGroupName
+                );
                 _HttpResponse.InternalSetFromCache = true;
-                _HttpResponse.InternalSetIsCacheFresh = (ctx.CacheFreshnessStatus != CacheFreshnessStatus.Stale);
+                _HttpResponse.InternalSetIsCacheFresh = (
+                    ctx.CacheFreshnessStatus != CacheFreshnessStatus.Stale
+                );
                 ProcessResponse();
                 return true;
             }
@@ -4229,14 +5259,22 @@ namespace System.Net {
         //
         // ATTN: If the method returns false, the response is invalid and should be retried
         //
-        private bool CheckCacheRetrieveOnResponse() {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckCacheRetrieveOnResponse");
+        private bool CheckCacheRetrieveOnResponse()
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CheckCacheRetrieveOnResponse"
+            );
 
-            if (CacheProtocol == null) {
+            if (CacheProtocol == null)
+            {
                 return true;
             }
 
-            if (CacheProtocol.ProtocolStatus == CacheValidationStatus.Fail) {
+            if (CacheProtocol.ProtocolStatus == CacheValidationStatus.Fail)
+            {
                 throw CacheProtocol.ProtocolException;
             }
 
@@ -4250,34 +5288,47 @@ namespace System.Net {
                 return false;
             }
 
-            if (CacheProtocol.ProtocolStatus != CacheValidationStatus.ReturnCachedResponse &&
-                CacheProtocol.ProtocolStatus != CacheValidationStatus.CombineCachedAndServerResponse)
+            if (
+                CacheProtocol.ProtocolStatus != CacheValidationStatus.ReturnCachedResponse
+                && CacheProtocol.ProtocolStatus
+                    != CacheValidationStatus.CombineCachedAndServerResponse
+            )
             {
                 // Take current response
                 return true;
             }
 
-            if (HttpWriteMode!=HttpWriteMode.None) {
+            if (HttpWriteMode != HttpWriteMode.None)
+            {
                 // This should never happen in real life
                 throw new NotSupportedException(SR.GetString(SR.net_cache_not_supported_body));
             }
 
             CoreResponseData responseData = new CoreResponseData();
-            HttpRequestCacheValidator ctx = (HttpRequestCacheValidator) CacheProtocol.Validator;
+            HttpRequestCacheValidator ctx = (HttpRequestCacheValidator)CacheProtocol.Validator;
             // If we take it from cache, we have to replace the live response if any
-            responseData.m_IsVersionHttp11  = ctx.CacheHttpVersion.Equals(HttpVersion.Version11);
-            responseData.m_StatusCode       = ctx.CacheStatusCode;
-            responseData.m_StatusDescription= ctx.CacheStatusDescription;
+            responseData.m_IsVersionHttp11 = ctx.CacheHttpVersion.Equals(HttpVersion.Version11);
+            responseData.m_StatusCode = ctx.CacheStatusCode;
+            responseData.m_StatusDescription = ctx.CacheStatusDescription;
 
-            responseData.m_ResponseHeaders  = CacheProtocol.ProtocolStatus == CacheValidationStatus.CombineCachedAndServerResponse
-                                                ? new WebHeaderCollection(ctx.CacheHeaders)
-                                                : ctx.CacheHeaders;
+            responseData.m_ResponseHeaders =
+                CacheProtocol.ProtocolStatus == CacheValidationStatus.CombineCachedAndServerResponse
+                    ? new WebHeaderCollection(ctx.CacheHeaders)
+                    : ctx.CacheHeaders;
 
-            responseData.m_ContentLength    = CacheProtocol.ResponseStreamLength;
-            responseData.m_ConnectStream    = CacheProtocol.ResponseStream;
+            responseData.m_ContentLength = CacheProtocol.ResponseStreamLength;
+            responseData.m_ConnectStream = CacheProtocol.ResponseStream;
 
-            _HttpResponse = new HttpWebResponse(GetRemoteResourceUri(), CurrentMethod, responseData,
-                _MediaType, UsesProxySemantics, AutomaticDecompression, IsWebSocketRequest, ConnectionGroupName);
+            _HttpResponse = new HttpWebResponse(
+                GetRemoteResourceUri(),
+                CurrentMethod,
+                responseData,
+                _MediaType,
+                UsesProxySemantics,
+                AutomaticDecompression,
+                IsWebSocketRequest,
+                ConnectionGroupName
+            );
 
             if (CacheProtocol.ProtocolStatus == CacheValidationStatus.ReturnCachedResponse)
             {
@@ -4288,11 +5339,11 @@ namespace System.Net {
                 // Note the response itself may still be needed for cache update call.
                 if (oldResponseStream != null)
                 {
-                    try {
+                    try
+                    {
                         oldResponseStream.Close();
                     }
-                    catch {
-                    }
+                    catch { }
                 }
             }
             return true;
@@ -4307,14 +5358,24 @@ namespace System.Net {
         // - Proceed    = Take the cached response, ask for cache Context update
         // - NoCache    = Take the live response, ask for cache update
         //
-        private void CheckCacheUpdateOnResponse() {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckCacheUpdateOnResponse");
+        private void CheckCacheUpdateOnResponse()
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::CheckCacheUpdateOnResponse"
+            );
 
-            if (CacheProtocol == null) {
+            if (CacheProtocol == null)
+            {
                 return;
             }
 
-            if (CacheProtocol.GetUpdateStatus(_HttpResponse, _HttpResponse.ResponseStream) == CacheValidationStatus.UpdateResponseInformation)
+            if (
+                CacheProtocol.GetUpdateStatus(_HttpResponse, _HttpResponse.ResponseStream)
+                == CacheValidationStatus.UpdateResponseInformation
+            )
             {
                 _HttpResponse.ResponseStream = CacheProtocol.ResponseStream;
             }
@@ -4331,34 +5392,50 @@ namespace System.Net {
         --*/
         private void EndSubmitRequest()
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest");
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest"
+            );
 
-            try {
-
+            try
+            {
                 //
                 // check to see if we need to buffer the headers and send them at
                 // a later time, when we know content length
                 //
-                if (HttpWriteMode==HttpWriteMode.Buffer) {
+                if (HttpWriteMode == HttpWriteMode.Buffer)
+                {
                     InvokeGetRequestStreamCallback();
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest", "InvokeGetRequestStreamCallback(HttpWriteMode==HttpWriteMode.Buffer)");
+                    GlobalLog.Leave(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::EndSubmitRequest",
+                        "InvokeGetRequestStreamCallback(HttpWriteMode==HttpWriteMode.Buffer)"
+                    );
                     return;
                 }
 
                 // gather header bytes and write them to the stream
-                if (WriteBufferLength==0)
+                if (WriteBufferLength == 0)
                 {
                     long result = SwitchToContentLength();
                     SerializeHeaders();
                     PostSwitchToContentLength(result);
                 }
 
-                GlobalLog.Assert(WriteBufferLength != 0 && WriteBuffer[0] < 0x80 && WriteBuffer[0] != 0x0, "HttpWebRequest#{0}::EndSubmitRequest()|Invalid WriteBuffer generated.", ValidationHelper.HashString(this));
+                GlobalLog.Assert(
+                    WriteBufferLength != 0 && WriteBuffer[0] < 0x80 && WriteBuffer[0] != 0x0,
+                    "HttpWebRequest#{0}::EndSubmitRequest()|Invalid WriteBuffer generated.",
+                    ValidationHelper.HashString(this)
+                );
 
                 _SubmitWriteStream.WriteHeaders(Async);
             }
-            catch {
+            catch
+            {
                 // We depend on this to unblock possible response processing in case of unexpected failure
                 ConnectStream chkStream = _SubmitWriteStream;
                 if (chkStream != null)
@@ -4366,14 +5443,16 @@ namespace System.Net {
 
                 throw;
             }
-            finally {
+            finally
+            {
                 if (!Async)
                     CheckWriteSideResponseProcessing();
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndSubmitRequest"
+            );
         }
-
 
         /*++
 
@@ -4389,12 +5468,31 @@ namespace System.Net {
         --*/
         internal bool EndWriteHeaders(bool async)
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders async:" + async.ToString());
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders");
+            GlobalLog.Enter(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::EndWriteHeaders async:"
+                    + async.ToString()
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders"
+            );
 
-            try {
-
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders() ContentLength:" + ContentLength + " HttpWriteMode:" + HttpWriteMode + " _ServicePoint.Understands100Continue:" + _ServicePoint.Understands100Continue + " ExpectContinue:" + ExpectContinue);
+            try
+            {
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::EndWriteHeaders() ContentLength:"
+                        + ContentLength
+                        + " HttpWriteMode:"
+                        + HttpWriteMode
+                        + " _ServicePoint.Understands100Continue:"
+                        + _ServicePoint.Understands100Continue
+                        + " ExpectContinue:"
+                        + ExpectContinue
+                );
                 if (ShouldWaitFor100Continue())
                 {
                     return !async; // Already handled in WriteHeaders/Callback
@@ -4407,7 +5505,8 @@ namespace System.Net {
                     EndWriteHeaders_Part2();
                 }
             }
-            catch {
+            catch
+            {
                 // We depend on this to unblock possible response processing in case of unexpected failure
                 ConnectStream chkStream = _SubmitWriteStream;
                 if (chkStream != null)
@@ -4416,33 +5515,63 @@ namespace System.Net {
                 throw;
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders", true);
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders",
+                true
+            );
             return true;
         }
 
         internal bool ShouldWaitFor100Continue()
         {
-            return ((ContentLength>0 || HttpWriteMode==HttpWriteMode.Chunked)
-                && ExpectContinue && _ServicePoint.Understands100Continue);
+            return (
+                (ContentLength > 0 || HttpWriteMode == HttpWriteMode.Chunked)
+                && ExpectContinue
+                && _ServicePoint.Understands100Continue
+            );
         }
 
         // This can never call into user code or block, because it's called by the TimerThread.
-        private static void ContinueTimeoutCallback(TimerThread.Timer timer, int timeNoticed, object context)
+        private static void ContinueTimeoutCallback(
+            TimerThread.Timer timer,
+            int timeNoticed,
+            object context
+        )
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(context) + "::ContinueTimeoutCallback");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, ThreadKinds.SafeSources | ThreadKinds.Timer, "HttpWebRequest#" + ValidationHelper.HashString(context) + "::ContinueTimeoutCallback");
+            GlobalLog.Enter(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(context)
+                    + "::ContinueTimeoutCallback"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                ThreadKinds.SafeSources | ThreadKinds.Timer,
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(context)
+                    + "::ContinueTimeoutCallback"
+            );
 
-            HttpWebRequest thisHttpWebRequest = (HttpWebRequest) context;
+            HttpWebRequest thisHttpWebRequest = (HttpWebRequest)context;
 
             if (thisHttpWebRequest.HttpWriteMode == HttpWriteMode.None)
             {
-                GlobalLog.Assert("HttpWebRequest#" + ValidationHelper.HashString(thisHttpWebRequest) + "::CompleteContinueGate()", "Not a POST type request, must not come here.");
+                GlobalLog.Assert(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(thisHttpWebRequest)
+                        + "::CompleteContinueGate()",
+                    "Not a POST type request, must not come here."
+                );
                 return;
             }
 
             // Complete the 100 Continue gate.  If this completes it then it is safe to re/upload the data.
             // Otherwise we already received a continue/response.
-            if (!(thisHttpWebRequest.FinishContinueWait() && thisHttpWebRequest.CompleteContinueGate()))
+            if (
+                !(
+                    thisHttpWebRequest.FinishContinueWait()
+                    && thisHttpWebRequest.CompleteContinueGate()
+                )
+            )
             {
                 return;
             }
@@ -4451,7 +5580,11 @@ namespace System.Net {
             // We have to put it on a threadpool thread since it may call user code.  This is not
             // a critical path for perf.
             ThreadPool.UnsafeQueueUserWorkItem(s_EndWriteHeaders_Part2Callback, thisHttpWebRequest);
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(thisHttpWebRequest) + "::ContinueTimeoutCallback");
+            GlobalLog.Leave(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(thisHttpWebRequest)
+                    + "::ContinueTimeoutCallback"
+            );
         }
 
         // This has to be an instance method because otherwise:
@@ -4475,7 +5608,10 @@ namespace System.Net {
                     if (ShouldWaitFor100Continue())
                     {
                         Debug.Assert(m_ContinueTimer == null, "Continue timer is already set");
-                        m_ContinueTimer = ContinueTimerQueue.CreateTimer(s_ContinueTimeoutCallback, this);
+                        m_ContinueTimer = ContinueTimerQueue.CreateTimer(
+                            s_ContinueTimeoutCallback,
+                            this
+                        );
                     }
                 }
                 finally
@@ -4520,11 +5656,20 @@ namespace System.Net {
         {
 #if DEBUG
             GlobalLog.SetThreadSource(ThreadKinds.Worker);
-            using (GlobalLog.SetThreadKind(ThreadKinds.System)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.System))
+            {
 #endif
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(state) + "::EndWriteHeaders_Part2Wrapper");
-            ((HttpWebRequest)state).EndWriteHeaders_Part2();
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(state) + "::EndWriteHeaders_Part2Wrapper");
+                GlobalLog.Enter(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(state)
+                        + "::EndWriteHeaders_Part2Wrapper"
+                );
+                ((HttpWebRequest)state).EndWriteHeaders_Part2();
+                GlobalLog.Leave(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(state)
+                        + "::EndWriteHeaders_Part2Wrapper"
+                );
 #if DEBUG
             }
 #endif
@@ -4532,26 +5677,61 @@ namespace System.Net {
 
         internal void EndWriteHeaders_Part2()
         {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2");
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2"
+            );
 
-            try {
+            try
+            {
                 ConnectStream submitWriteStream = _SubmitWriteStream;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2() ConnectStream#" + ValidationHelper.HashString(submitWriteStream) + " HttpWriteMode:" + HttpWriteMode + " HaveResponse:" + HaveResponse);
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::EndWriteHeaders_Part2() ConnectStream#"
+                        + ValidationHelper.HashString(submitWriteStream)
+                        + " HttpWriteMode:"
+                        + HttpWriteMode
+                        + " HaveResponse:"
+                        + HaveResponse
+                );
                 if (HttpWriteMode != HttpWriteMode.None)
                 {
                     m_BodyStarted = true;
 
-                    GlobalLog.Assert(submitWriteStream != null, "HttpWebRequest#{0}::EndWriteHeaders_Part2()|submitWriteStream == null", ValidationHelper.HashString(this));
+                    GlobalLog.Assert(
+                        submitWriteStream != null,
+                        "HttpWebRequest#{0}::EndWriteHeaders_Part2()|submitWriteStream == null",
+                        ValidationHelper.HashString(this)
+                    );
                     //
                     // We always need to buffer because some servers send
                     // 100 Continue even when they mean to redirect,
                     // so we waste the cycles with buffering
                     //
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2() AllowWriteStreamBuffering:" + AllowWriteStreamBuffering);
-                    if (AllowWriteStreamBuffering || (_resendRequestContent != null)) {
-                        GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2() BufferOnly:" + submitWriteStream.BufferOnly + " _OldSubmitWriteStream#" + ValidationHelper.HashString(_OldSubmitWriteStream) + " submitWriteStream#" + ValidationHelper.HashString(submitWriteStream));
-                        if (submitWriteStream.BufferOnly) {
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::EndWriteHeaders_Part2() AllowWriteStreamBuffering:"
+                            + AllowWriteStreamBuffering
+                    );
+                    if (AllowWriteStreamBuffering || (_resendRequestContent != null))
+                    {
+                        GlobalLog.Print(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::EndWriteHeaders_Part2() BufferOnly:"
+                                + submitWriteStream.BufferOnly
+                                + " _OldSubmitWriteStream#"
+                                + ValidationHelper.HashString(_OldSubmitWriteStream)
+                                + " submitWriteStream#"
+                                + ValidationHelper.HashString(submitWriteStream)
+                        );
+                        if (submitWriteStream.BufferOnly)
+                        {
                             //
                             // if the ConnectStream was buffering the headers then
                             // there will not be an OldSubmitWriteStream. set it
@@ -4559,56 +5739,84 @@ namespace System.Net {
                             //
                             _OldSubmitWriteStream = submitWriteStream;
                         }
-                        if (_OldSubmitWriteStream != null || (UserRetrievedWriteStream && _resendRequestContent != null))
+                        if (
+                            _OldSubmitWriteStream != null
+                            || (UserRetrievedWriteStream && _resendRequestContent != null)
+                        )
                         {
-                            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2() _OldSubmitWriteStream#" + ValidationHelper.HashString(_OldSubmitWriteStream) + " NtlmKeepAlive:" + NtlmKeepAlive);
+                            GlobalLog.Print(
+                                "HttpWebRequest#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::EndWriteHeaders_Part2() _OldSubmitWriteStream#"
+                                    + ValidationHelper.HashString(_OldSubmitWriteStream)
+                                    + " NtlmKeepAlive:"
+                                    + NtlmKeepAlive
+                            );
                             // workaround for NTLM: we're submitting this as ContentLength 0
                             // We need a second check for a buffering-only POST case.
-                            // 
-    #if DEBUG
-                            using (GlobalLog.SetThreadKind(ThreadKinds.Sync)) {
-    #endif
-                            if (_resendRequestContent == null) {
-                                submitWriteStream.ResubmitWrite(_OldSubmitWriteStream, (NtlmKeepAlive && ContentLength == 0));
-                            }
-                            else {
-                                if (NtlmKeepAlive && ((ContentLength == 0) || (HttpWriteMode == HttpWriteMode.Chunked))) {
-                                    // We just sent the 1st NTLM auth leg with a Content-Length value of 0. Don't
-                                    // upload content. Just close the request stream (see CloseInternal() call below).
-                                    if (ContentLength == 0) {
-                                        submitWriteStream.BytesLeftToWrite = 0;
+                            //
+#if DEBUG
+                            using (GlobalLog.SetThreadKind(ThreadKinds.Sync))
+                            {
+#endif
+                                if (_resendRequestContent == null)
+                                {
+                                    submitWriteStream.ResubmitWrite(
+                                        _OldSubmitWriteStream,
+                                        (NtlmKeepAlive && ContentLength == 0)
+                                    );
+                                }
+                                else
+                                {
+                                    if (
+                                        NtlmKeepAlive
+                                        && (
+                                            (ContentLength == 0)
+                                            || (HttpWriteMode == HttpWriteMode.Chunked)
+                                        )
+                                    )
+                                    {
+                                        // We just sent the 1st NTLM auth leg with a Content-Length value of 0. Don't
+                                        // upload content. Just close the request stream (see CloseInternal() call below).
+                                        if (ContentLength == 0)
+                                        {
+                                            submitWriteStream.BytesLeftToWrite = 0;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // We don't have NTLM authentication or we sent headers for the 2nd NTLM auth leg.
+                                        // Either way, we want to upload the request content now. If we know the length
+                                        // of the content, update the request stream with this information.
+                                        if (HttpWriteMode != HttpWriteMode.Chunked)
+                                        {
+                                            submitWriteStream.BytesLeftToWrite =
+                                                _originalContentLength;
+                                        }
+                                        try
+                                        {
+                                            _resendRequestContent(submitWriteStream);
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            // If the delegate throws, then catch the exception and abort the request. The
+                                            // WebException thrown by Abort() contains the original exception as inner
+                                            // exception (useful for debugging).
+                                            Abort(e, AbortState.Public);
+                                        }
                                     }
                                 }
-                                else {
-                                    // We don't have NTLM authentication or we sent headers for the 2nd NTLM auth leg.
-                                    // Either way, we want to upload the request content now. If we know the length
-                                    // of the content, update the request stream with this information.
-                                    if (HttpWriteMode != HttpWriteMode.Chunked)
-                                    {
-                                        submitWriteStream.BytesLeftToWrite = _originalContentLength;
-                                    }
-                                    try
-                                    {
-                                        _resendRequestContent(submitWriteStream);
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        // If the delegate throws, then catch the exception and abort the request. The
-                                        // WebException thrown by Abort() contains the original exception as inner
-                                        // exception (useful for debugging).
-                                        Abort(e, AbortState.Public);
-                                    }
-                                }
+#if DEBUG
                             }
-    #if DEBUG
-                            }
-    #endif
+#endif
                             submitWriteStream.CloseInternal(true);
                         }
                     }
                 }
-                else { // if (HttpWriteMode == HttpWriteMode.None) {
-                    if (submitWriteStream != null) {
+                else
+                { // if (HttpWriteMode == HttpWriteMode.None) {
+                    if (submitWriteStream != null)
+                    {
                         // close stream so the headers get sent
                         submitWriteStream.CloseInternal(true);
                         // disable write stream
@@ -4620,7 +5828,8 @@ namespace System.Net {
                 // callback processing - notify our caller that we're done
                 InvokeGetRequestStreamCallback();
             }
-            catch {
+            catch
+            {
                 // We depend on this to unblock possible response processing in case of unexpected failure
                 ConnectStream chkStream = _SubmitWriteStream;
                 if (chkStream != null)
@@ -4632,7 +5841,9 @@ namespace System.Net {
                 throw;
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::EndWriteHeaders_Part2"
+            );
         }
 
         /*++
@@ -4652,7 +5863,8 @@ namespace System.Net {
             int - number of bytes written out
 
         --*/
-        private int GenerateConnectRequestLine(int headersSize) {
+        private int GenerateConnectRequestLine(int headersSize)
+        {
             int offset = 0;
 
             HostHeaderString host = new HostHeaderString(GetSafeHostAndPort(true, true));
@@ -4661,12 +5873,16 @@ namespace System.Net {
             // Handle Connect Case, i.e. "CONNECT hostname.domain.edu:999"
             //
 
-            int writeBufferLength = CurrentMethod.Name.Length +
-                                    host.ByteCount +
-                                    RequestLineConstantSize +
-                                    headersSize;
+            int writeBufferLength =
+                CurrentMethod.Name.Length + host.ByteCount + RequestLineConstantSize + headersSize;
             SetWriteBuffer(writeBufferLength);
-            offset = Encoding.ASCII.GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
+            offset = Encoding.ASCII.GetBytes(
+                CurrentMethod.Name,
+                0,
+                CurrentMethod.Name.Length,
+                WriteBuffer,
+                0
+            );
             WriteBuffer[offset++] = (byte)' ';
             host.Copy(WriteBuffer, offset);
             offset += host.ByteCount;
@@ -4674,30 +5890,50 @@ namespace System.Net {
             return offset;
         }
 
-        private string GetSafeHostAndPort(bool addDefaultPort, bool forcePunycode)  {
-            if (IsTunnelRequest) {
+        private string GetSafeHostAndPort(bool addDefaultPort, bool forcePunycode)
+        {
+            if (IsTunnelRequest)
+            {
                 return GetSafeHostAndPort(_OriginUri, addDefaultPort, forcePunycode);
-            } else {
+            }
+            else
+            {
                 return GetSafeHostAndPort(_Uri, addDefaultPort, forcePunycode);
             }
         }
 
-        private static string GetSafeHostAndPort(Uri sourceUri, bool addDefaultPort, bool forcePunycode) {
+        private static string GetSafeHostAndPort(
+            Uri sourceUri,
+            bool addDefaultPort,
+            bool forcePunycode
+        )
+        {
             String hostToUse;
 
-            if (sourceUri.HostNameType == UriHostNameType.IPv6) {
+            if (sourceUri.HostNameType == UriHostNameType.IPv6)
+            {
                 // if IPv6 literal then remove any scope ID & add brackets
                 hostToUse = "[" + TrimScopeID(sourceUri.DnsSafeHost) + "]";
-            } else {
+            }
+            else
+            {
                 hostToUse = forcePunycode ? sourceUri.IdnHost : sourceUri.DnsSafeHost;
             }
-            return GetHostAndPortString(hostToUse, sourceUri.Port, addDefaultPort || !sourceUri.IsDefaultPort);
+            return GetHostAndPortString(
+                hostToUse,
+                sourceUri.Port,
+                addDefaultPort || !sourceUri.IsDefaultPort
+            );
         }
 
-        private static string GetHostAndPortString(string hostName, int port, bool addPort) {
-            if (addPort) {
+        private static string GetHostAndPortString(string hostName, int port, bool addPort)
+        {
+            if (addPort)
+            {
                 return hostName + ":" + port;
-            } else {
+            }
+            else
+            {
                 return hostName;
             }
         }
@@ -4714,10 +5950,11 @@ namespace System.Net {
             return Uri.TryCreate(sb.ToString(), UriKind.Absolute, out hostUri);
         }
 
-        private static string TrimScopeID(string s) {
+        private static string TrimScopeID(string s)
+        {
             int i = s.LastIndexOf('%');
             if (i > 0)
-                return s.Substring(0,i);
+                return s.Substring(0, i);
             return s;
         }
 
@@ -4738,7 +5975,8 @@ namespace System.Net {
             int - number of bytes written out
 
         --*/
-        private int GenerateProxyRequestLine(int headersSize) {
+        private int GenerateProxyRequestLine(int headersSize)
+        {
             //
             // Handle Proxy Case, i.e. "GET http://hostname-outside-of-proxy.somedomain.edu:999"
             // consider handling other schemes
@@ -4746,25 +5984,39 @@ namespace System.Net {
             // Note that we will take the scheme off the URI, hence may issue other but http request
             // through the proxy on redirect. While this is not allowed by RFC,
             // this it used to work in IE and we have already tested permissions for that destination Uri.
-            if ((object)_Uri.Scheme == (object)Uri.UriSchemeFtp) {
+            if ((object)_Uri.Scheme == (object)Uri.UriSchemeFtp)
+            {
                 // FTP
                 return GenerateFtpProxyRequestLine(headersSize);
             }
             // HTTP
             int offset = 0;
-            string scheme = _Uri.GetComponents(UriComponents.Scheme | UriComponents.KeepDelimiter, UriFormat.UriEscaped);
+            string scheme = _Uri.GetComponents(
+                UriComponents.Scheme | UriComponents.KeepDelimiter,
+                UriFormat.UriEscaped
+            );
             HostHeaderString host = new HostHeaderString(GetSafeHostAndPort(false, true));
-            string path = _Uri.GetComponents(UriComponents.Path | UriComponents.Query, UriFormat.UriEscaped);
+            string path = _Uri.GetComponents(
+                UriComponents.Path | UriComponents.Query,
+                UriFormat.UriEscaped
+            );
 
-            int writeBufferLength = CurrentMethod.Name.Length +
-                                    scheme.Length +
-                                    host.ByteCount +
-                                    path.Length +
-                                    RequestLineConstantSize +
-                                    headersSize;
+            int writeBufferLength =
+                CurrentMethod.Name.Length
+                + scheme.Length
+                + host.ByteCount
+                + path.Length
+                + RequestLineConstantSize
+                + headersSize;
             SetWriteBuffer(writeBufferLength);
 
-            offset = Encoding.ASCII.GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
+            offset = Encoding.ASCII.GetBytes(
+                CurrentMethod.Name,
+                0,
+                CurrentMethod.Name.Length,
+                WriteBuffer,
+                0
+            );
             WriteBuffer[offset++] = (byte)' ';
             offset += Encoding.ASCII.GetBytes(scheme, 0, scheme.Length, WriteBuffer, offset);
             host.Copy(WriteBuffer, offset);
@@ -4774,46 +6026,59 @@ namespace System.Net {
             return offset;
         }
 
-        private int GenerateFtpProxyRequestLine(int headersSize) {
+        private int GenerateFtpProxyRequestLine(int headersSize)
+        {
             // Special handling for FTP via HTTP proxy
             int offset = 0;
-            string scheme = _Uri.GetComponents(UriComponents.Scheme | UriComponents.KeepDelimiter, UriFormat.UriEscaped);
-            string userInfo = _Uri.GetComponents(UriComponents.UserInfo | UriComponents.KeepDelimiter, UriFormat.UriEscaped);
+            string scheme = _Uri.GetComponents(
+                UriComponents.Scheme | UriComponents.KeepDelimiter,
+                UriFormat.UriEscaped
+            );
+            string userInfo = _Uri.GetComponents(
+                UriComponents.UserInfo | UriComponents.KeepDelimiter,
+                UriFormat.UriEscaped
+            );
             HostHeaderString host = new HostHeaderString(GetSafeHostAndPort(false, true));
-            string path = _Uri.GetComponents(UriComponents.Path | UriComponents.Query, UriFormat.UriEscaped);
+            string path = _Uri.GetComponents(
+                UriComponents.Path | UriComponents.Query,
+                UriFormat.UriEscaped
+            );
 
-            if (userInfo == "") {
+            if (userInfo == "")
+            {
                 // No userinfo so see if we can add from Credentials
                 string username = null;
                 string password = null;
                 NetworkCredential networkCreds = Credentials.GetCredential(_Uri, "basic");
-                if (networkCreds != null
-                    && (object)networkCreds
-                       != (object)FtpWebRequest.DefaultNetworkCredential)
+                if (
+                    networkCreds != null
+                    && (object)networkCreds != (object)FtpWebRequest.DefaultNetworkCredential
+                )
                 {
                     username = networkCreds.InternalGetDomainUserName();
                     password = networkCreds.InternalGetPassword();
                     password = (password == null) ? string.Empty : password;
                 }
-                if (username != null) {
+                if (username != null)
+                {
                     // For FTP proxy we don't escape the username and password strings
                     // Since some servers don't seem to support it
                     // Only escape the absolute minimum that is required for
                     // a valid Uri which is (: \ / ? # %)
-                    username = username.Replace(":",  "%3A");
-                    password = password.Replace(":",  "%3A");
+                    username = username.Replace(":", "%3A");
+                    password = password.Replace(":", "%3A");
                     username = username.Replace("\\", "%5C");
                     password = password.Replace("\\", "%5C");
-                    username = username.Replace("/",  "%2F");
-                    password = password.Replace("/",  "%2F");
-                    username = username.Replace("?",  "%3F");
-                    password = password.Replace("?",  "%3F");
-                    username = username.Replace("#",  "%23");
-                    password = password.Replace("#",  "%23");
-                    username = username.Replace("%",  "%25");
-                    password = password.Replace("%",  "%25");
-                    username = username.Replace("@",  "%40");
-                    password = password.Replace("@",  "%40");
+                    username = username.Replace("/", "%2F");
+                    password = password.Replace("/", "%2F");
+                    username = username.Replace("?", "%3F");
+                    password = password.Replace("?", "%3F");
+                    username = username.Replace("#", "%23");
+                    password = password.Replace("#", "%23");
+                    username = username.Replace("%", "%25");
+                    password = password.Replace("%", "%25");
+                    username = username.Replace("@", "%40");
+                    password = password.Replace("@", "%40");
 
                     // build complete userinfo
                     userInfo = username + ":" + password + "@";
@@ -4821,16 +6086,23 @@ namespace System.Net {
             }
 
             // construct request line from components
-            int writeBufferLength = CurrentMethod.Name.Length +
-                                    scheme.Length +
-                                    userInfo.Length +
-                                    host.ByteCount +
-                                    path.Length +
-                                    RequestLineConstantSize +
-                                    headersSize;
+            int writeBufferLength =
+                CurrentMethod.Name.Length
+                + scheme.Length
+                + userInfo.Length
+                + host.ByteCount
+                + path.Length
+                + RequestLineConstantSize
+                + headersSize;
             SetWriteBuffer(writeBufferLength);
 
-            offset = Encoding.ASCII.GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
+            offset = Encoding.ASCII.GetBytes(
+                CurrentMethod.Name,
+                0,
+                CurrentMethod.Name.Length,
+                WriteBuffer,
+                0
+            );
             WriteBuffer[offset++] = (byte)' ';
             offset += Encoding.ASCII.GetBytes(scheme, 0, scheme.Length, WriteBuffer, offset);
             offset += Encoding.ASCII.GetBytes(userInfo, 0, userInfo.Length, WriteBuffer, offset);
@@ -4857,29 +6129,45 @@ namespace System.Net {
             int - number of bytes written
 
         --*/
-        private int GenerateRequestLine(int headersSize) {
+        private int GenerateRequestLine(int headersSize)
+        {
             int offset = 0;
             string pathAndQuery = _Uri.PathAndQuery;
 
             int writeBufferLength =
-                CurrentMethod.Name.Length +
-                pathAndQuery.Length +
-                RequestLineConstantSize +
-                headersSize;
+                CurrentMethod.Name.Length
+                + pathAndQuery.Length
+                + RequestLineConstantSize
+                + headersSize;
 
             SetWriteBuffer(writeBufferLength);
-            offset = Encoding.ASCII.GetBytes(CurrentMethod.Name, 0, CurrentMethod.Name.Length, WriteBuffer, 0);
+            offset = Encoding.ASCII.GetBytes(
+                CurrentMethod.Name,
+                0,
+                CurrentMethod.Name.Length,
+                WriteBuffer,
+                0
+            );
             WriteBuffer[offset++] = (byte)' ';
-            offset += Encoding.ASCII.GetBytes(pathAndQuery, 0, pathAndQuery.Length, WriteBuffer, offset);
+            offset += Encoding.ASCII.GetBytes(
+                pathAndQuery,
+                0,
+                pathAndQuery.Length,
+                WriteBuffer,
+                offset
+            );
             WriteBuffer[offset++] = (byte)' ';
             return offset;
         }
 
-        internal Uri GetRemoteResourceUri() {
-            if (UseCustomHost) {
+        internal Uri GetRemoteResourceUri()
+        {
+            if (UseCustomHost)
+            {
                 return _HostUri;
             }
-            else {
+            else
+            {
                 return _Uri;
             }
         }
@@ -4900,9 +6188,15 @@ namespace System.Net {
             none.
 
         --*/
-        internal void UpdateHeaders() {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders");
+        internal void UpdateHeaders()
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders"
+            );
 
 #if TRAVE
             _HttpRequestHeaders.Set("Cur-Hash-ID", ValidationHelper.HashString(this));
@@ -4926,10 +6220,16 @@ namespace System.Net {
             // case, because tunneling SSL/TLS through proxies is the most common use case.
             //
             // WININET is always emitting the default port for CONNECT requests.
-            if (UseCustomHost) {
-                hostString = GetSafeHostAndPort(_HostUri, _HostHasPort || isTunnelRequestForHttp, false);
+            if (UseCustomHost)
+            {
+                hostString = GetSafeHostAndPort(
+                    _HostUri,
+                    _HostHasPort || isTunnelRequestForHttp,
+                    false
+                );
             }
-            else {
+            else
+            {
                 hostString = GetSafeHostAndPort(isTunnelRequestForHttp, false);
             }
 
@@ -4937,13 +6237,16 @@ namespace System.Net {
             // Do unusual encoding so that host header value gets serialized to wire properly
             HostHeaderString hhs = new HostHeaderString(hostString);
             string host = WebHeaderCollection.HeaderEncoding.GetString(hhs.Bytes, 0, hhs.ByteCount);
-            _HttpRequestHeaders.ChangeInternal( HttpKnownHeaderNames.Host, host);
+            _HttpRequestHeaders.ChangeInternal(HttpKnownHeaderNames.Host, host);
             // about to create the headers we're going to send. Check if any
             // modules want to inspect or modify them
-            if (_CookieContainer != null) {
+            if (_CookieContainer != null)
+            {
                 CookieModule.OnSendingHeaders(this);
             }
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders");
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders"
+            );
         }
 
         //
@@ -4952,8 +6255,12 @@ namespace System.Net {
         //
         // See ClearRequestForResubmit() for the matching cleanup code path.
         //
-        internal void SerializeHeaders() {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders");
+        internal void SerializeHeaders()
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::UpdateHeaders"
+            );
 
             //
             // If we have content-length, use it, if we don't check for chunked
@@ -4962,39 +6269,94 @@ namespace System.Net {
             //  not chunking either. In this case we buffer the data, but to the time of that
             //  method call the content length is already known.
             //
-            GlobalLog.Assert(HttpWriteMode!=HttpWriteMode.Unknown, "HttpWebRequest#{0}::SerializeHeaders()|HttpWriteMode:{1}", ValidationHelper.HashString(this), HttpWriteMode);
-            if (HttpWriteMode!=HttpWriteMode.None) {
-                if (HttpWriteMode==HttpWriteMode.Chunked) {
-                    GlobalLog.Assert(!CurrentMethod.ContentBodyNotAllowed, "HttpWebRequest#{0}::SerializeHeaders()|!ContentBodyNotAllowed CurrentMethod:{1} HttpWriteMode:{2} ContentLength:{3}", ValidationHelper.HashString(this), CurrentMethod, HttpWriteMode, ContentLength);
-                    _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.TransferEncoding, ChunkedHeader);
+            GlobalLog.Assert(
+                HttpWriteMode != HttpWriteMode.Unknown,
+                "HttpWebRequest#{0}::SerializeHeaders()|HttpWriteMode:{1}",
+                ValidationHelper.HashString(this),
+                HttpWriteMode
+            );
+            if (HttpWriteMode != HttpWriteMode.None)
+            {
+                if (HttpWriteMode == HttpWriteMode.Chunked)
+                {
+                    GlobalLog.Assert(
+                        !CurrentMethod.ContentBodyNotAllowed,
+                        "HttpWebRequest#{0}::SerializeHeaders()|!ContentBodyNotAllowed CurrentMethod:{1} HttpWriteMode:{2} ContentLength:{3}",
+                        ValidationHelper.HashString(this),
+                        CurrentMethod,
+                        HttpWriteMode,
+                        ContentLength
+                    );
+                    _HttpRequestHeaders.AddInternal(
+                        HttpKnownHeaderNames.TransferEncoding,
+                        ChunkedHeader
+                    );
                 }
-                else if (ContentLength>=0) {
-                    GlobalLog.Assert(HttpWriteMode == HttpWriteMode.ContentLength, "HttpWebRequest#{0}::SerializeHeaders()|HttpWriteMode:{1}", ValidationHelper.HashString(this), HttpWriteMode);
-                    GlobalLog.Assert(!CurrentMethod.ContentBodyNotAllowed, "HttpWebRequest#{0}::SerializeHeaders()|!ContentBodyNotAllowed CurrentMethod:{1} HttpWriteMode:{2} ContentLength:{3}", ValidationHelper.HashString(this), CurrentMethod, HttpWriteMode, ContentLength);
-                    _HttpRequestHeaders.ChangeInternal(HttpKnownHeaderNames.ContentLength, _ContentLength.ToString(NumberFormatInfo.InvariantInfo));
+                else if (ContentLength >= 0)
+                {
+                    GlobalLog.Assert(
+                        HttpWriteMode == HttpWriteMode.ContentLength,
+                        "HttpWebRequest#{0}::SerializeHeaders()|HttpWriteMode:{1}",
+                        ValidationHelper.HashString(this),
+                        HttpWriteMode
+                    );
+                    GlobalLog.Assert(
+                        !CurrentMethod.ContentBodyNotAllowed,
+                        "HttpWebRequest#{0}::SerializeHeaders()|!ContentBodyNotAllowed CurrentMethod:{1} HttpWriteMode:{2} ContentLength:{3}",
+                        ValidationHelper.HashString(this),
+                        CurrentMethod,
+                        HttpWriteMode,
+                        ContentLength
+                    );
+                    _HttpRequestHeaders.ChangeInternal(
+                        HttpKnownHeaderNames.ContentLength,
+                        _ContentLength.ToString(NumberFormatInfo.InvariantInfo)
+                    );
                 }
-                ExpectContinue = ExpectContinue && !IsVersionHttp10 && ServicePoint.Expect100Continue;
-                if ((ContentLength>0 || HttpWriteMode==HttpWriteMode.Chunked) && ExpectContinue) {
+                ExpectContinue =
+                    ExpectContinue && !IsVersionHttp10 && ServicePoint.Expect100Continue;
+                if ((ContentLength > 0 || HttpWriteMode == HttpWriteMode.Chunked) && ExpectContinue)
+                {
                     _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.Expect, ContinueHeader);
                 }
             }
 
             // Accept-Encoding is not a restricted header, so it should not be cleaned up by ClearRequestForResubmit(),
             // nor overriden here.  Only add gzip or deflate if they are requested and not already present.
-            string acceptEncodingValues = _HttpRequestHeaders.Get(HttpKnownHeaderNames.AcceptEncoding) ?? String.Empty;
-            if((AutomaticDecompression & DecompressionMethods.GZip) != 0
-                && acceptEncodingValues.IndexOf(GZipHeader, StringComparison.OrdinalIgnoreCase) < 0) {
-
-                if((AutomaticDecompression & DecompressionMethods.Deflate) != 0
-                    && acceptEncodingValues.IndexOf(DeflateHeader, StringComparison.OrdinalIgnoreCase) < 0) {
-                    _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.AcceptEncoding, GZipHeader + ", " + DeflateHeader);
+            string acceptEncodingValues =
+                _HttpRequestHeaders.Get(HttpKnownHeaderNames.AcceptEncoding) ?? String.Empty;
+            if (
+                (AutomaticDecompression & DecompressionMethods.GZip) != 0
+                && acceptEncodingValues.IndexOf(GZipHeader, StringComparison.OrdinalIgnoreCase) < 0
+            )
+            {
+                if (
+                    (AutomaticDecompression & DecompressionMethods.Deflate) != 0
+                    && acceptEncodingValues.IndexOf(
+                        DeflateHeader,
+                        StringComparison.OrdinalIgnoreCase
+                    ) < 0
+                )
+                {
+                    _HttpRequestHeaders.AddInternal(
+                        HttpKnownHeaderNames.AcceptEncoding,
+                        GZipHeader + ", " + DeflateHeader
+                    );
                 }
-                else{
-                    _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.AcceptEncoding, GZipHeader);
+                else
+                {
+                    _HttpRequestHeaders.AddInternal(
+                        HttpKnownHeaderNames.AcceptEncoding,
+                        GZipHeader
+                    );
                 }
             }
-            else if ((AutomaticDecompression & DecompressionMethods.Deflate) != 0
-                && acceptEncodingValues.IndexOf(DeflateHeader, StringComparison.OrdinalIgnoreCase) < 0) {
+            else if (
+                (AutomaticDecompression & DecompressionMethods.Deflate) != 0
+                && acceptEncodingValues.IndexOf(DeflateHeader, StringComparison.OrdinalIgnoreCase)
+                    < 0
+            )
+            {
                 _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.AcceptEncoding, DeflateHeader);
             }
 
@@ -5008,14 +6370,20 @@ namespace System.Net {
             //For HAWAII we need to redefine what it means to use a
             //proxy service point properly
             string connectionString = HttpKnownHeaderNames.Connection;
-            if (UsesProxySemantics || IsTunnelRequest ) {
+            if (UsesProxySemantics || IsTunnelRequest)
+            {
                 _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Connection);
                 connectionString = HttpKnownHeaderNames.ProxyConnection;
-                if (!ValidationHelper.IsBlankString(Connection)) {
-                    _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.ProxyConnection, _HttpRequestHeaders[HttpKnownHeaderNames.Connection]);
+                if (!ValidationHelper.IsBlankString(Connection))
+                {
+                    _HttpRequestHeaders.AddInternal(
+                        HttpKnownHeaderNames.ProxyConnection,
+                        _HttpRequestHeaders[HttpKnownHeaderNames.Connection]
+                    );
                 }
             }
-            else {
+            else
+            {
                 _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.ProxyConnection);
             }
 
@@ -5023,23 +6391,45 @@ namespace System.Net {
             {
                 // "upgrade" is not a protected token in Connection header.
                 // Add this token if this is a websocket request and it's not already present.
-                string connectionValues = _HttpRequestHeaders.Get(HttpKnownHeaderNames.Connection) ?? String.Empty;
-                if (connectionValues.IndexOf(HttpKnownHeaderNames.Upgrade, StringComparison.OrdinalIgnoreCase) < 0)
+                string connectionValues =
+                    _HttpRequestHeaders.Get(HttpKnownHeaderNames.Connection) ?? String.Empty;
+                if (
+                    connectionValues.IndexOf(
+                        HttpKnownHeaderNames.Upgrade,
+                        StringComparison.OrdinalIgnoreCase
+                    ) < 0
+                )
                 {
-                    _HttpRequestHeaders.AddInternal(HttpKnownHeaderNames.Connection, HttpKnownHeaderNames.Upgrade);
+                    _HttpRequestHeaders.AddInternal(
+                        HttpKnownHeaderNames.Connection,
+                        HttpKnownHeaderNames.Upgrade
+                    );
                 }
             }
 
-            if (KeepAlive || NtlmKeepAlive) {
-                GlobalLog.Assert(_ServicePoint != null, "HttpWebRequest#{0}::SerializeHeaders()|_ServicePoint == null", ValidationHelper.HashString(this));
-                if (IsVersionHttp10 || ServicePoint.HttpBehaviour<=HttpBehaviour.HTTP10) {
-                    _HttpRequestHeaders.AddInternal(( (UsesProxySemantics  || IsTunnelRequest)? HttpKnownHeaderNames.ProxyConnection : HttpKnownHeaderNames.Connection), "Keep-Alive");
+            if (KeepAlive || NtlmKeepAlive)
+            {
+                GlobalLog.Assert(
+                    _ServicePoint != null,
+                    "HttpWebRequest#{0}::SerializeHeaders()|_ServicePoint == null",
+                    ValidationHelper.HashString(this)
+                );
+                if (IsVersionHttp10 || ServicePoint.HttpBehaviour <= HttpBehaviour.HTTP10)
+                {
+                    _HttpRequestHeaders.AddInternal(
+                        (
+                            (UsesProxySemantics || IsTunnelRequest)
+                                ? HttpKnownHeaderNames.ProxyConnection
+                                : HttpKnownHeaderNames.Connection
+                        ),
+                        "Keep-Alive"
+                    );
                 }
             }
-            else if (!IsVersionHttp10) {
+            else if (!IsVersionHttp10)
+            {
                 _HttpRequestHeaders.AddInternal(connectionString, "Close");
             }
-
 
             //
             // Now create our headers by calling ToString, and then
@@ -5048,18 +6438,23 @@ namespace System.Net {
 
             int offset;
             string requestHeadersString = _HttpRequestHeaders.ToString();
-            int requestHeadersSize = WebHeaderCollection.HeaderEncoding.GetByteCount(requestHeadersString);
+            int requestHeadersSize = WebHeaderCollection.HeaderEncoding.GetByteCount(
+                requestHeadersString
+            );
 
             // NOTE: Perhaps we should cache this on this-object in the future?
-            if (CurrentMethod.ConnectRequest) {
+            if (CurrentMethod.ConnectRequest)
+            {
                 // for connect verbs we need to specially handle it.
                 offset = GenerateConnectRequestLine(requestHeadersSize);
             }
-            else if (UsesProxySemantics) {
+            else if (UsesProxySemantics)
+            {
                 // depending on whether, we have a proxy, generate a proxy or normal request
                 offset = GenerateProxyRequestLine(requestHeadersSize);
             }
-            else {
+            else
+            {
                 // default case for normal HTTP requests
                 offset = GenerateRequestLine(requestHeadersSize);
             }
@@ -5072,20 +6467,38 @@ namespace System.Net {
             WriteBuffer[offset++] = IsVersionHttp10 ? (byte)'0' : (byte)'1';
             WriteBuffer[offset++] = (byte)'\r';
             WriteBuffer[offset++] = (byte)'\n';
-            if (Logging.On) Logging.PrintInfo(Logging.Web, this, "Request: "+Encoding.ASCII.GetString(WriteBuffer, 0, offset));
+            if (Logging.On)
+                Logging.PrintInfo(
+                    Logging.Web,
+                    this,
+                    "Request: " + Encoding.ASCII.GetString(WriteBuffer, 0, offset)
+                );
             //
             // Serialze the headers out to the byte Buffer,
             //   by converting them to bytes from UNICODE
             //
-            WebHeaderCollection.HeaderEncoding.GetBytes(requestHeadersString, 0, requestHeadersString.Length, WriteBuffer, offset);
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::SerializeHeaders(), bytesCount = " + offset.ToString());
+            WebHeaderCollection.HeaderEncoding.GetBytes(
+                requestHeadersString,
+                0,
+                requestHeadersString.Length,
+                WriteBuffer,
+                offset
+            );
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::SerializeHeaders(), bytesCount = "
+                    + offset.ToString()
+            );
         }
 
-
         //introduced for supporting design-time loading of System.Windows.dll
-        [Obsolete("This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.", true)]
+        [Obsolete(
+            "This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.",
+            true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public HttpWebRequest(){}
+        public HttpWebRequest() { }
 
         //
         // PERF:
@@ -5099,58 +6512,75 @@ namespace System.Net {
         ///       Basic Constructor for HTTP Protocol Class, Initializes to basic header state.
         ///    </para>
         /// </devdoc>
-        [SuppressMessage("Microsoft.Usage","CA2214:DoNotCallOverridableMethodsInConstructors", Justification="CheckConnectPermission gets called with FALSE and thus skips the call to the virtual GetReadingContext method.")]
-        internal HttpWebRequest(Uri uri, ServicePoint servicePoint) {
-            if(Logging.On)Logging.Enter(Logging.Web, this, "HttpWebRequest", uri);
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "CheckConnectPermission gets called with FALSE and thus skips the call to the virtual GetReadingContext method."
+        )]
+        internal HttpWebRequest(Uri uri, ServicePoint servicePoint)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Web, this, "HttpWebRequest", uri);
 
             CheckConnectPermission(uri, false);
 
             m_StartTimestamp = NetworkingPerfCounters.GetTimestamp();
-            NetworkingPerfCounters.Instance.Increment(NetworkingPerfCounterName.HttpWebRequestCreated);
+            NetworkingPerfCounters.Instance.Increment(
+                NetworkingPerfCounterName.HttpWebRequestCreated
+            );
 
             // OOPS, This ctor can also be called with FTP scheme but then it should only allowed if going through the proxy
             // Something to think about...
             //if ((object)uri.Scheme != (object)Uri.UriSchemeHttp && (object)uri.Scheme != (object)Uri.UriSchemeHttps)
-                //throw new ArgumentOutOfRangeException("uri");
+            //throw new ArgumentOutOfRangeException("uri");
 
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::.ctor(" + uri.ToString() + ")");
+            GlobalLog.Print(
+                "HttpWebRequest#"
+                    + ValidationHelper.HashString(this)
+                    + "::.ctor("
+                    + uri.ToString()
+                    + ")"
+            );
             //
             // internal constructor, HttpWebRequest cannot be created directly
             // but only through WebRequest.Create() method
             // set defaults
             //
-            _HttpRequestHeaders         = new WebHeaderCollection(WebHeaderCollectionType.HttpWebRequest);
-            _Proxy                      = WebRequest.InternalDefaultWebProxy;
-            _HttpWriteMode              = HttpWriteMode.Unknown;
+            _HttpRequestHeaders = new WebHeaderCollection(WebHeaderCollectionType.HttpWebRequest);
+            _Proxy = WebRequest.InternalDefaultWebProxy;
+            _HttpWriteMode = HttpWriteMode.Unknown;
             _MaximumAllowedRedirections = 50;
-            _Timeout                    = WebRequest.DefaultTimeout;
-            _TimerQueue                 = WebRequest.DefaultTimerQueue;
-            _ReadWriteTimeout           = DefaultReadWriteTimeout;
+            _Timeout = WebRequest.DefaultTimeout;
+            _TimerQueue = WebRequest.DefaultTimerQueue;
+            _ReadWriteTimeout = DefaultReadWriteTimeout;
             _MaximumResponseHeadersLength = DefaultMaximumResponseHeadersLength;
-            _ContentLength              = -1;
-            _originalContentLength      = -1;
-            _OriginVerb                 = KnownHttpVerb.Get;
-            _OriginUri                  = uri;
-            _Uri                        = _OriginUri;
-            _ServicePoint               = servicePoint;
-            _RequestIsAsync             = TriState.Unspecified;
-            m_ContinueTimeout          = DefaultContinueTimeout;
-            m_ContinueTimerQueue        = s_ContinueTimerQueue;
+            _ContentLength = -1;
+            _originalContentLength = -1;
+            _OriginVerb = KnownHttpVerb.Get;
+            _OriginUri = uri;
+            _Uri = _OriginUri;
+            _ServicePoint = servicePoint;
+            _RequestIsAsync = TriState.Unspecified;
+            m_ContinueTimeout = DefaultContinueTimeout;
+            m_ContinueTimerQueue = s_ContinueTimerQueue;
 
             SetupCacheProtocol(_OriginUri);
 
 #if HTTP_HEADER_EXTENSIONS_SUPPORTED
-            _NextExtension      = 10;
+            _NextExtension = 10;
 #endif // HTTP_HEADER_EXTENSIONS_SUPPORTED
 
-            if(Logging.On)Logging.Exit(Logging.Web, this, "HttpWebRequest", null);
+            if (Logging.On)
+                Logging.Exit(Logging.Web, this, "HttpWebRequest", null);
         }
 
-        internal HttpWebRequest(Uri proxyUri, Uri requestUri, HttpWebRequest orginalRequest) : this(proxyUri, null) {
-
-            GlobalLog.Enter("HttpWebRequest::HttpWebRequest",
-                            "proxyUri="+proxyUri+", requestUri="+requestUri
-                            );
+        internal HttpWebRequest(Uri proxyUri, Uri requestUri, HttpWebRequest orginalRequest)
+            : this(proxyUri, null)
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest::HttpWebRequest",
+                "proxyUri=" + proxyUri + ", requestUri=" + requestUri
+            );
 
             _OriginVerb = KnownHttpVerb.Parse("CONNECT");
 
@@ -5169,7 +6599,8 @@ namespace System.Net {
 
             IsTunnelRequest = true;
 
-            _ConnectionGroupName = ServicePointManager.SpecialConnectGroupName + "(" + UniqueGroupId + ")";
+            _ConnectionGroupName =
+                ServicePointManager.SpecialConnectGroupName + "(" + UniqueGroupId + ")";
             m_InternalConnectionGroup = true;
 
             //
@@ -5195,11 +6626,21 @@ namespace System.Net {
         // to true, and the number of redirections was exceeded the last 3xx response is returned to the caller.
         // This ctor overload also takes a delegate ('resendRequestContent') that is used to resend the content, as
         // opposed to buffering the content (AllowWriteStreamBuffering).
-        internal HttpWebRequest(Uri uri, bool returnResponseOnFailureStatusCode, string connectionGroupName,
-            Action<Stream> resendRequestContent)
-            : this(uri, null) {
-
-            if (Logging.On) Logging.Enter(Logging.Web, this, "HttpWebRequest", "uri: '" + uri + "', connectionGroupName: '" + connectionGroupName + "'");
+        internal HttpWebRequest(
+            Uri uri,
+            bool returnResponseOnFailureStatusCode,
+            string connectionGroupName,
+            Action<Stream> resendRequestContent
+        )
+            : this(uri, null)
+        {
+            if (Logging.On)
+                Logging.Enter(
+                    Logging.Web,
+                    this,
+                    "HttpWebRequest",
+                    "uri: '" + uri + "', connectionGroupName: '" + connectionGroupName + "'"
+                );
 
             _returnResponseOnFailureStatusCode = returnResponseOnFailureStatusCode;
             _resendRequestContent = resendRequestContent;
@@ -5211,12 +6652,18 @@ namespace System.Net {
             m_InternalConnectionGroup = true;
             _ConnectionGroupName = connectionGroupName;
 
-            if(Logging.On)Logging.Exit(Logging.Web, this, "HttpWebRequest", null);
+            if (Logging.On)
+                Logging.Exit(Logging.Web, this, "HttpWebRequest", null);
         }
 
         // This ctor is used to create a HttpWebRequest to initiate a WebSocket connection. The returned
         // HttpWebResponse will be specified as a WebSocket connection response as well.
-        internal HttpWebRequest(Uri uri, ServicePoint servicePoint, bool isWebSocketRequest, string connectionGroupName)
+        internal HttpWebRequest(
+            Uri uri,
+            ServicePoint servicePoint,
+            bool isWebSocketRequest,
+            string connectionGroupName
+        )
             : this(uri, servicePoint)
         {
             IsWebSocketRequest = isWebSocketRequest;
@@ -5226,54 +6673,73 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>ISerializable constructor</para>
         /// </devdoc>
-        [Obsolete("Serialization is obsoleted for this type.  http://go.microsoft.com/fwlink/?linkid=14202")]
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter =true)]
-        /*private*/ protected HttpWebRequest(SerializationInfo serializationInfo, StreamingContext streamingContext):base(serializationInfo, streamingContext) {
+        [Obsolete(
+            "Serialization is obsoleted for this type.  http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        /*private*/protected HttpWebRequest(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
-#endif
-            ExceptionHelper.WebPermissionUnrestricted.Demand();
-            if(Logging.On)Logging.Enter(Logging.Web, this, "HttpWebRequest", serializationInfo);
-
-            _HttpRequestHeaders         = (WebHeaderCollection)serializationInfo.GetValue("_HttpRequestHeaders", typeof(WebHeaderCollection));
-            _Proxy                      = (IWebProxy)serializationInfo.GetValue("_Proxy", typeof(IWebProxy));
-            KeepAlive                   = serializationInfo.GetBoolean("_KeepAlive");
-            Pipelined                   = serializationInfo.GetBoolean("_Pipelined");
-            AllowAutoRedirect           = serializationInfo.GetBoolean("_AllowAutoRedirect");
-            if (!serializationInfo.GetBoolean("_AllowWriteStreamBuffering"))
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
             {
-                _Booleans &= ~Booleans.AllowWriteStreamBuffering;
-            }
-            HttpWriteMode               = (HttpWriteMode)serializationInfo.GetInt32("_HttpWriteMode");
-            _MaximumAllowedRedirections = serializationInfo.GetInt32("_MaximumAllowedRedirections");
-            _AutoRedirects              = serializationInfo.GetInt32("_AutoRedirects");
-            _Timeout                    = serializationInfo.GetInt32("_Timeout");
-            m_ContinueTimeout           = DefaultContinueTimeout; // This ctor is deprecated. Just set the default value.
-            m_ContinueTimerQueue        = s_ContinueTimerQueue;
-            try {
-                _ReadWriteTimeout       = serializationInfo.GetInt32("_ReadWriteTimeout");
-            }
-            catch {
-                _ReadWriteTimeout       = DefaultReadWriteTimeout;
-            }
-            try {
-                _MaximumResponseHeadersLength = serializationInfo.GetInt32("_MaximumResponseHeadersLength");
-            }
-            catch {
-                _MaximumResponseHeadersLength = DefaultMaximumResponseHeadersLength;
-            }
-            _ContentLength              = serializationInfo.GetInt64("_ContentLength");
-            _MediaType                  = serializationInfo.GetString("_MediaType");
-            _OriginVerb                 = KnownHttpVerb.Parse(serializationInfo.GetString("_OriginVerb"));
-            _ConnectionGroupName        = serializationInfo.GetString("_ConnectionGroupName");
-            ProtocolVersion             = (Version)serializationInfo.GetValue("_Version", typeof(Version));
-            _OriginUri                  = (Uri)serializationInfo.GetValue("_OriginUri", typeof(Uri));
+#endif
+                ExceptionHelper.WebPermissionUnrestricted.Demand();
+                if (Logging.On)
+                    Logging.Enter(Logging.Web, this, "HttpWebRequest", serializationInfo);
+
+                _HttpRequestHeaders = (WebHeaderCollection)
+                    serializationInfo.GetValue("_HttpRequestHeaders", typeof(WebHeaderCollection));
+                _Proxy = (IWebProxy)serializationInfo.GetValue("_Proxy", typeof(IWebProxy));
+                KeepAlive = serializationInfo.GetBoolean("_KeepAlive");
+                Pipelined = serializationInfo.GetBoolean("_Pipelined");
+                AllowAutoRedirect = serializationInfo.GetBoolean("_AllowAutoRedirect");
+                if (!serializationInfo.GetBoolean("_AllowWriteStreamBuffering"))
+                {
+                    _Booleans &= ~Booleans.AllowWriteStreamBuffering;
+                }
+                HttpWriteMode = (HttpWriteMode)serializationInfo.GetInt32("_HttpWriteMode");
+                _MaximumAllowedRedirections = serializationInfo.GetInt32(
+                    "_MaximumAllowedRedirections"
+                );
+                _AutoRedirects = serializationInfo.GetInt32("_AutoRedirects");
+                _Timeout = serializationInfo.GetInt32("_Timeout");
+                m_ContinueTimeout = DefaultContinueTimeout; // This ctor is deprecated. Just set the default value.
+                m_ContinueTimerQueue = s_ContinueTimerQueue;
+                try
+                {
+                    _ReadWriteTimeout = serializationInfo.GetInt32("_ReadWriteTimeout");
+                }
+                catch
+                {
+                    _ReadWriteTimeout = DefaultReadWriteTimeout;
+                }
+                try
+                {
+                    _MaximumResponseHeadersLength = serializationInfo.GetInt32(
+                        "_MaximumResponseHeadersLength"
+                    );
+                }
+                catch
+                {
+                    _MaximumResponseHeadersLength = DefaultMaximumResponseHeadersLength;
+                }
+                _ContentLength = serializationInfo.GetInt64("_ContentLength");
+                _MediaType = serializationInfo.GetString("_MediaType");
+                _OriginVerb = KnownHttpVerb.Parse(serializationInfo.GetString("_OriginVerb"));
+                _ConnectionGroupName = serializationInfo.GetString("_ConnectionGroupName");
+                ProtocolVersion = (Version)serializationInfo.GetValue("_Version", typeof(Version));
+                _OriginUri = (Uri)serializationInfo.GetValue("_OriginUri", typeof(Uri));
 #if HTTP_HEADER_EXTENSIONS_SUPPORTED
-            _NextExtension              = serializationInfo.GetInt32("_NextExtension");
+            _NextExtension = serializationInfo.GetInt32("_NextExtension");
 #endif // HTTP_HEADER_EXTENSIONS_SUPPORTED
 
-            SetupCacheProtocol(_OriginUri);
-            if(Logging.On)Logging.Exit(Logging.Web, this, "HttpWebRequest", null);
+                SetupCacheProtocol(_OriginUri);
+                if (Logging.On)
+                    Logging.Exit(Logging.Web, this, "HttpWebRequest", null);
 #if DEBUG
             }
 #endif
@@ -5282,14 +6748,26 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>ISerializable method</para>
         /// </devdoc>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.dll is still using pre-v4 security model and needs this demand")]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter, SerializationFormatter=true)]
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.dll is still using pre-v4 security model and needs this demand"
+        )]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            GetObjectData(serializationInfo, streamingContext);
+                GetObjectData(serializationInfo, streamingContext);
 #if DEBUG
             }
 #endif
@@ -5298,43 +6776,57 @@ namespace System.Net {
         //
         // FxCop: Need this in addition to the above in order to allow derived classes to access the base implementation.
         //
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter =true)]
-        protected override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            //
-            // for now disregard streamingContext.
-            // just Add all the members we need to deserialize to construct
-            // the object at deserialization time
-            //
-            // the following runtime types already support serialization:
-            // Boolean, Char, SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double, DateTime
-            // for the others we need to provide our own serialization
-            //
-            serializationInfo.AddValue("_HttpRequestHeaders", _HttpRequestHeaders, typeof(WebHeaderCollection));
-            serializationInfo.AddValue("_Proxy", _Proxy, typeof(IWebProxy));
-            serializationInfo.AddValue("_KeepAlive", KeepAlive);
-            serializationInfo.AddValue("_Pipelined", Pipelined);
-            serializationInfo.AddValue("_AllowAutoRedirect", AllowAutoRedirect);
-            serializationInfo.AddValue("_AllowWriteStreamBuffering", AllowWriteStreamBuffering);
-            serializationInfo.AddValue("_HttpWriteMode", HttpWriteMode);
-            serializationInfo.AddValue("_MaximumAllowedRedirections", _MaximumAllowedRedirections);
-            serializationInfo.AddValue("_AutoRedirects", _AutoRedirects);
-            serializationInfo.AddValue("_Timeout", _Timeout);
-            serializationInfo.AddValue("_ReadWriteTimeout", _ReadWriteTimeout);
-            serializationInfo.AddValue("_MaximumResponseHeadersLength", _MaximumResponseHeadersLength);
-            serializationInfo.AddValue("_ContentLength", ContentLength);
-            serializationInfo.AddValue("_MediaType", _MediaType);
-            serializationInfo.AddValue("_OriginVerb", _OriginVerb);
-            serializationInfo.AddValue("_ConnectionGroupName", _ConnectionGroupName);
-            serializationInfo.AddValue("_Version", ProtocolVersion, typeof(Version));
-            serializationInfo.AddValue("_OriginUri", _OriginUri, typeof(Uri));
+                //
+                // for now disregard streamingContext.
+                // just Add all the members we need to deserialize to construct
+                // the object at deserialization time
+                //
+                // the following runtime types already support serialization:
+                // Boolean, Char, SByte, Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Single, Double, DateTime
+                // for the others we need to provide our own serialization
+                //
+                serializationInfo.AddValue(
+                    "_HttpRequestHeaders",
+                    _HttpRequestHeaders,
+                    typeof(WebHeaderCollection)
+                );
+                serializationInfo.AddValue("_Proxy", _Proxy, typeof(IWebProxy));
+                serializationInfo.AddValue("_KeepAlive", KeepAlive);
+                serializationInfo.AddValue("_Pipelined", Pipelined);
+                serializationInfo.AddValue("_AllowAutoRedirect", AllowAutoRedirect);
+                serializationInfo.AddValue("_AllowWriteStreamBuffering", AllowWriteStreamBuffering);
+                serializationInfo.AddValue("_HttpWriteMode", HttpWriteMode);
+                serializationInfo.AddValue(
+                    "_MaximumAllowedRedirections",
+                    _MaximumAllowedRedirections
+                );
+                serializationInfo.AddValue("_AutoRedirects", _AutoRedirects);
+                serializationInfo.AddValue("_Timeout", _Timeout);
+                serializationInfo.AddValue("_ReadWriteTimeout", _ReadWriteTimeout);
+                serializationInfo.AddValue(
+                    "_MaximumResponseHeadersLength",
+                    _MaximumResponseHeadersLength
+                );
+                serializationInfo.AddValue("_ContentLength", ContentLength);
+                serializationInfo.AddValue("_MediaType", _MediaType);
+                serializationInfo.AddValue("_OriginVerb", _OriginVerb);
+                serializationInfo.AddValue("_ConnectionGroupName", _ConnectionGroupName);
+                serializationInfo.AddValue("_Version", ProtocolVersion, typeof(Version));
+                serializationInfo.AddValue("_OriginUri", _OriginUri, typeof(Uri));
 #if HTTP_HEADER_EXTENSIONS_SUPPORTED
             serializationInfo.AddValue("_NextExtension", _NextExtension);
 #endif // HTTP_HEADER_EXTENSIONS_SUPPORTED
-            base.GetObjectData(serializationInfo, streamingContext);
+                base.GetObjectData(serializationInfo, streamingContext);
 #if DEBUG
             }
 #endif
@@ -5343,7 +6835,12 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>Used by ServicePoint code to find the right connection Group</para>
         /// </devdoc>
-        internal static StringBuilder GenerateConnectionGroup(string connectionGroupName, bool unsafeConnectionGroup, bool isInternalGroup) {
+        internal static StringBuilder GenerateConnectionGroup(
+            string connectionGroupName,
+            bool unsafeConnectionGroup,
+            bool isInternalGroup
+        )
+        {
             StringBuilder connectionLine = new StringBuilder(connectionGroupName);
 
             connectionLine.Append(unsafeConnectionGroup ? "U>" : "S>");
@@ -5356,16 +6853,22 @@ namespace System.Net {
             return connectionLine;
         }
 
-
         /// <devdoc>
         ///    <para>Generates a string that
         ///     allows a Connection to remain unique for a given NTLM auth
         ///     user, this is needed to prevent multiple users from
         ///     using the same sockets after they are authenticated.</para>
         /// </devdoc>
-        internal string GetConnectionGroupLine() {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectionGroupLine");
-            StringBuilder connectionLine = GenerateConnectionGroup(_ConnectionGroupName, UnsafeAuthenticatedConnectionSharing, m_InternalConnectionGroup);
+        internal string GetConnectionGroupLine()
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectionGroupLine"
+            );
+            StringBuilder connectionLine = GenerateConnectionGroup(
+                _ConnectionGroupName,
+                UnsafeAuthenticatedConnectionSharing,
+                m_InternalConnectionGroup
+            );
 
             // consider revisting this looking into how this would work,
             // if we were doing auth through both proxy and server,
@@ -5377,14 +6880,19 @@ namespace System.Net {
             //  which won't work.
             //
 
-            if ((_Uri.Scheme == Uri.UriSchemeHttps) || IsTunnelRequest) {
-                if (UsesProxy) {
+            if ((_Uri.Scheme == Uri.UriSchemeHttps) || IsTunnelRequest)
+            {
+                if (UsesProxy)
+                {
                     connectionLine.Append(GetSafeHostAndPort(true, false));
                     connectionLine.Append("$");
                 }
 #if !FEATURE_PAL
-                if (_ClientCertificates!=null && ClientCertificates.Count>0) {
-                    connectionLine.Append(ClientCertificates.GetHashCode().ToString(NumberFormatInfo.InvariantInfo));
+                if (_ClientCertificates != null && ClientCertificates.Count > 0)
+                {
+                    connectionLine.Append(
+                        ClientCertificates.GetHashCode().ToString(NumberFormatInfo.InvariantInfo)
+                    );
                 }
 #endif //!FEATURE_PAL
 
@@ -5395,20 +6903,29 @@ namespace System.Net {
                     connectionLine.Append(GetDelegateId(ServerCertificateValidationCallback));
                 }
             }
-            if (ProxyAuthenticationState.UniqueGroupId != null) {
+            if (ProxyAuthenticationState.UniqueGroupId != null)
+            {
                 connectionLine.Append(ProxyAuthenticationState.UniqueGroupId);
             }
-            else if (ServerAuthenticationState.UniqueGroupId != null) {
+            else if (ServerAuthenticationState.UniqueGroupId != null)
+            {
                 connectionLine.Append(ServerAuthenticationState.UniqueGroupId);
             }
 
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectionGroupLine", connectionLine.ToString());
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::GetConnectionGroupLine",
+                connectionLine.ToString()
+            );
             return connectionLine.ToString();
         }
 
         // Generate an id string for the callback for grouping requests.
-        [SuppressMessage("Microsoft.Security", "CA2106:SecureAsserts", Scope = "method",
-            Justification = "No user code can be executed durring this assert.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2106:SecureAsserts",
+            Scope = "method",
+            Justification = "No user code can be executed durring this assert."
+        )]
         private static string GetDelegateId(RemoteCertificateValidationCallback callback)
         {
             Debug.Assert(callback != null);
@@ -5428,7 +6945,9 @@ namespace System.Net {
                 }
                 else
                 {
-                    objectId = baseObject.GetType().Name + "#"
+                    objectId =
+                        baseObject.GetType().Name
+                        + "#"
                         + baseObject.GetHashCode().ToString(NumberFormatInfo.InvariantInfo);
                 }
 
@@ -5440,11 +6959,7 @@ namespace System.Net {
             }
         }
 
-        internal ServerCertValidationCallback ServerCertValidationCallback
-        {
-            get;
-            private set;
-        }
+        internal ServerCertValidationCallback ServerCertValidationCallback { get; private set; }
 
         // This was copied from ServicePointManager to make it more granular.
         public RemoteCertificateValidationCallback ServerCertificateValidationCallback
@@ -5480,18 +6995,27 @@ namespace System.Net {
         ///     false - if the request is complete
         ///     </para>
         /// </devdoc>
-        private bool CheckResubmitForAuth() {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth");
-
+        private bool CheckResubmitForAuth()
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth"
+            );
 
             bool result = false;
             bool authenticated = false;
             bool skip = false;
-            if (UsesProxySemantics && _Proxy != null && _Proxy.Credentials!=null) {
+            if (UsesProxySemantics && _Proxy != null && _Proxy.Credentials != null)
+            {
                 try
                 {
-                    result |= ProxyAuthenticationState.AttemptAuthenticate(this, _Proxy.Credentials);
+                    result |= ProxyAuthenticationState.AttemptAuthenticate(
+                        this,
+                        _Proxy.Credentials
+                    );
                 }
                 catch (Win32Exception)
                 {
@@ -5502,7 +7026,12 @@ namespace System.Net {
                     skip = true;
                 }
                 authenticated = true;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth() ProxyAuthenticationState.AttemptAuthenticate() returns result:" + result.ToString());
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CheckResubmitForAuth() ProxyAuthenticationState.AttemptAuthenticate() returns result:"
+                        + result.ToString()
+                );
             }
             if (Credentials != null && !skip)
             {
@@ -5519,9 +7048,17 @@ namespace System.Net {
                     result = false;
                 }
                 authenticated = true;
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth() ServerAuthenticationState.AttemptAuthenticate() returns result:" + result.ToString());
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CheckResubmitForAuth() ServerAuthenticationState.AttemptAuthenticate() returns result:"
+                        + result.ToString()
+                );
             }
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth", result);
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForAuth",
+                result
+            );
 
             if (!result && authenticated && m_Extra401Retry)
             {
@@ -5538,22 +7075,39 @@ namespace System.Net {
         ///     here it is imperitive that this is not recalled when we already are receiving a cached
         ///     response</para>
         /// </devdoc>
-        private bool CheckResubmitForCache(ref Exception e) {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForCache");
+        private bool CheckResubmitForCache(ref Exception e)
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmitForCache"
+            );
 
             // Here, we can go into retrying the request
-            if (!CheckCacheRetrieveOnResponse()) {
-
+            if (!CheckCacheRetrieveOnResponse())
+            {
                 // NB: We don't have a flag that would control a generic retries
                 // So far we used _AllowAutoRedirect when doing Auth resubmits so the cache intiated retries are put into same bucket
-                if (AllowAutoRedirect) {
+                if (AllowAutoRedirect)
+                {
                     // Resubmit the request
-                    if(Logging.On)Logging.PrintWarning(Logging.Web, this, "", SR.GetString(SR.net_log_cache_validation_failed_resubmit));
+                    if (Logging.On)
+                        Logging.PrintWarning(
+                            Logging.Web,
+                            this,
+                            "",
+                            SR.GetString(SR.net_log_cache_validation_failed_resubmit)
+                        );
                     return true;
                 }
 
                 //fail terribly
-                if(Logging.On)Logging.PrintError(Logging.Web, this, "", SR.GetString(SR.net_log_cache_refused_server_response));
+                if (Logging.On)
+                    Logging.PrintError(
+                        Logging.Web,
+                        this,
+                        "",
+                        SR.GetString(SR.net_log_cache_refused_server_response)
+                    );
                 e = new InvalidOperationException(SR.GetString(SR.net_cache_not_accept_response));
                 return false;
             }
@@ -5570,7 +7124,11 @@ namespace System.Net {
 
         // This helper method creates a new exception object with the provided information if this instance
         // of HWR should not return responses with status code other than 2xx (and 3xx if AllowAutoRedirect == false).
-        private void SetExceptionIfRequired(string message, Exception innerException, ref Exception e)
+        private void SetExceptionIfRequired(
+            string message,
+            Exception innerException,
+            ref Exception e
+        )
         {
             if (_returnResponseOnFailureStatusCode)
             {
@@ -5585,7 +7143,12 @@ namespace System.Net {
             }
             else
             {
-                e = new WebException(message, innerException, WebExceptionStatus.ProtocolError, _HttpResponse);
+                e = new WebException(
+                    message,
+                    innerException,
+                    WebExceptionStatus.ProtocolError,
+                    _HttpResponse
+                );
             }
         }
 
@@ -5597,29 +7160,52 @@ namespace System.Net {
         ///     true  - if we should reattempt submitting the request
         ///     false - if the request is complete
         /// </devdoc>
-        private bool CheckResubmit(ref Exception e, ref bool disableUpload) {
-            GlobalLog.Enter("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit");
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit");
+        private bool CheckResubmit(ref Exception e, ref bool disableUpload)
+        {
+            GlobalLog.Enter(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit"
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit"
+            );
 
             bool authResubmit = false;
 
-            if (ResponseStatusCode==HttpStatusCode.Unauthorized                 || // 401
-                ResponseStatusCode==HttpStatusCode.ProxyAuthenticationRequired)    // 407
+            if (
+                ResponseStatusCode == HttpStatusCode.Unauthorized
+                || // 401
+                ResponseStatusCode == HttpStatusCode.ProxyAuthenticationRequired
+            ) // 407
             {
-                try {
+                try
+                {
                     //
                     // Check for Authentication
                     //
                     if (!(authResubmit = CheckResubmitForAuth()))
                     {
-                        SetExceptionIfRequired(SR.GetString(SR.net_servererror,
-                            NetRes.GetWebStatusCodeString(ResponseStatusCode, _HttpResponse.StatusDescription)),
-                            ref e);
-                        GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                        SetExceptionIfRequired(
+                            SR.GetString(
+                                SR.net_servererror,
+                                NetRes.GetWebStatusCodeString(
+                                    ResponseStatusCode,
+                                    _HttpResponse.StatusDescription
+                                )
+                            ),
+                            ref e
+                        );
+                        GlobalLog.Leave(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::CheckResubmit",
+                            "false"
+                        );
                         return false;
                     }
                 }
-                catch (System.ComponentModel.Win32Exception w32Exception) {
+                catch (System.ComponentModel.Win32Exception w32Exception)
+                {
                     //
                     // This is a workaround to avoid breaking change since V1
                     // Basically SSPI may refuse client credential so we abort the request.
@@ -5627,28 +7213,46 @@ namespace System.Net {
                     // Note that 401 or 407 reported here is from the previous response.
                     //
                     throw new WebException(
-                                            SR.GetString(SR.net_servererror,
-                                                NetRes.GetWebStatusCodeString(ResponseStatusCode, _HttpResponse.StatusDescription)),
-                                            w32Exception,
-                                            WebExceptionStatus.ProtocolError,
-                                            _HttpResponse);
-
+                        SR.GetString(
+                            SR.net_servererror,
+                            NetRes.GetWebStatusCodeString(
+                                ResponseStatusCode,
+                                _HttpResponse.StatusDescription
+                            )
+                        ),
+                        w32Exception,
+                        WebExceptionStatus.ProtocolError,
+                        _HttpResponse
+                    );
                 }
             }
-            else {
-                if (ServerAuthenticationState != null && ServerAuthenticationState.Authorization != null)
+            else
+            {
+                if (
+                    ServerAuthenticationState != null
+                    && ServerAuthenticationState.Authorization != null
+                )
                 {
                     HttpWebResponse response = _HttpResponse;
                     if (response != null)
                     {
-                        response.InternalSetIsMutuallyAuthenticated = ServerAuthenticationState.Authorization.MutuallyAuthenticated;
+                        response.InternalSetIsMutuallyAuthenticated = ServerAuthenticationState
+                            .Authorization
+                            .MutuallyAuthenticated;
 #if !FEATURE_PAL
-                        if (AuthenticationLevel == AuthenticationLevel.MutualAuthRequired && !response.IsMutuallyAuthenticated)
+                        if (
+                            AuthenticationLevel == AuthenticationLevel.MutualAuthRequired
+                            && !response.IsMutuallyAuthenticated
+                        )
                         {
-                            throw new WebException(SR.GetString(SR.net_webstatus_RequestCanceled),
-                                                   new ProtocolViolationException(SR.GetString(SR.net_mutualauthfailed)),
-                                                   WebExceptionStatus.RequestCanceled,
-                                                   response);
+                            throw new WebException(
+                                SR.GetString(SR.net_webstatus_RequestCanceled),
+                                new ProtocolViolationException(
+                                    SR.GetString(SR.net_mutualauthfailed)
+                                ),
+                                WebExceptionStatus.RequestCanceled,
+                                response
+                            );
                         }
 #endif
                     }
@@ -5656,15 +7260,17 @@ namespace System.Net {
 
                 // This is a workaround for resubmitting a failed chunked POST through a proxy that does not support chunked POST.
                 // If we have already resubmitted this way then HttpWriteMode will have changed to ContentLength.
-                if (ResponseStatusCode == HttpStatusCode.BadRequest && this.SendChunked
-                    && HttpWriteMode != HttpWriteMode.ContentLength && this.ServicePoint.InternalProxyServicePoint
-                    && AllowWriteStreamBuffering) // We cannot switch to content-length without buffering first.
+                if (
+                    ResponseStatusCode == HttpStatusCode.BadRequest
+                    && this.SendChunked
+                    && HttpWriteMode != HttpWriteMode.ContentLength
+                    && this.ServicePoint.InternalProxyServicePoint
+                    && AllowWriteStreamBuffering
+                ) // We cannot switch to content-length without buffering first.
                 {
                     ClearAuthenticatedConnectionResources();
                     return true;
                 }
-
-
                 //
                 // Check for Redirection
                 //
@@ -5678,42 +7284,81 @@ namespace System.Net {
                 //  303 - All methods are redirected to GET
                 //  307 - All methods are redirected to the same method.
                 //
-                else if (AllowAutoRedirect && (
-                    ResponseStatusCode==HttpStatusCode.Ambiguous          || // 300
-                    ResponseStatusCode==HttpStatusCode.Moved              || // 301
-                    ResponseStatusCode==HttpStatusCode.Redirect           || // 302
-                    ResponseStatusCode==HttpStatusCode.RedirectMethod     || // 303
-                    ResponseStatusCode==HttpStatusCode.RedirectKeepVerb ))   // 307
+                else if (
+                    AllowAutoRedirect
+                    && (
+                        ResponseStatusCode == HttpStatusCode.Ambiguous
+                        || // 300
+                        ResponseStatusCode == HttpStatusCode.Moved
+                        || // 301
+                        ResponseStatusCode == HttpStatusCode.Redirect
+                        || // 302
+                        ResponseStatusCode == HttpStatusCode.RedirectMethod
+                        || // 303
+                        ResponseStatusCode == HttpStatusCode.RedirectKeepVerb
+                    )
+                ) // 307
                 {
-
                     _AutoRedirects++;
 
-                    if (_AutoRedirects>_MaximumAllowedRedirections)
+                    if (_AutoRedirects > _MaximumAllowedRedirections)
                     {
-
                         SetExceptionIfRequired(SR.GetString(SR.net_tooManyRedirections), ref e);
-                        GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                        GlobalLog.Leave(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::CheckResubmit",
+                            "false"
+                        );
                         return false;
                     }
 
                     string location = _HttpResponse.Headers.Location;
-                    if (location==null)
+                    if (location == null)
                     {
                         // Consider: add more detailed message as to why we failed, i.e. no Location header
-                        SetExceptionIfRequired(SR.GetString(SR.net_servererror,
-                            NetRes.GetWebStatusCodeString(ResponseStatusCode, _HttpResponse.StatusDescription)),
-                            ref e);
-                        GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                        SetExceptionIfRequired(
+                            SR.GetString(
+                                SR.net_servererror,
+                                NetRes.GetWebStatusCodeString(
+                                    ResponseStatusCode,
+                                    _HttpResponse.StatusDescription
+                                )
+                            ),
+                            ref e
+                        );
+                        GlobalLog.Leave(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::CheckResubmit",
+                            "false"
+                        );
                         return false;
                     }
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit() Location:" + location);
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::CheckResubmit() Location:"
+                            + location
+                    );
                     Uri newUri;
-                    try {
+                    try
+                    {
                         newUri = new Uri(_Uri, location);
                     }
-                    catch (UriFormatException exception) {
-                        SetExceptionIfRequired(SR.GetString(SR.net_resubmitprotofailed), exception, ref e);
-                        GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                    catch (UriFormatException exception)
+                    {
+                        SetExceptionIfRequired(
+                            SR.GetString(SR.net_resubmitprotofailed),
+                            exception,
+                            ref e
+                        );
+                        GlobalLog.Leave(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::CheckResubmit",
+                            "false"
+                        );
                         return false;
                     }
 
@@ -5736,26 +7381,48 @@ namespace System.Net {
                     if (newUri.Scheme != Uri.UriSchemeHttp && newUri.Scheme != Uri.UriSchemeHttps)
                     {
                         SetExceptionIfRequired(SR.GetString(SR.net_resubmitprotofailed), ref e);
-                        GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                        GlobalLog.Leave(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::CheckResubmit",
+                            "false"
+                        );
                         return false;
                     }
 
-                    if (!HasRedirectPermission(newUri, ref e)) {
+                    if (!HasRedirectPermission(newUri, ref e))
+                    {
                         return false;
                     }
 
                     Uri oldUri = _Uri;
                     _Uri = newUri;
-                    _RedirectedToDifferentHost = Uri.Compare(_OriginUri, _Uri, UriComponents.HostAndPort,
-                        UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase) != 0;
-                    if (UseCustomHost) {
+                    _RedirectedToDifferentHost =
+                        Uri.Compare(
+                            _OriginUri,
+                            _Uri,
+                            UriComponents.HostAndPort,
+                            UriFormat.Unescaped,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0;
+                    if (UseCustomHost)
+                    {
                         // if the scheme/path changed, update _HostUri to reflect the new scheme/path
-                        string hostString = GetHostAndPortString(_HostUri.Host, _HostUri.Port, true);
+                        string hostString = GetHostAndPortString(
+                            _HostUri.Host,
+                            _HostUri.Port,
+                            true
+                        );
                         Uri hostUri;
                         bool hostUriSuccess = TryGetHostUri(hostString, out hostUri);
-                        Debug.Assert(hostUriSuccess, "Can't rebuild HostUri from redirected URI: {0}", _Uri.ToString());
+                        Debug.Assert(
+                            hostUriSuccess,
+                            "Can't rebuild HostUri from redirected URI: {0}",
+                            _Uri.ToString()
+                        );
 
-                        if (!HasRedirectPermission(hostUri, ref e)) {
+                        if (!HasRedirectPermission(hostUri, ref e))
+                        {
                             // Reset _Uri to be consistent with scenarios where Host is not set: If the redirect
                             // for a request Uri fails because of permissions, the public property 'Address' will
                             // point to the last working Uri. If we don't reset _Uri here, 'Address' will point
@@ -5767,15 +7434,30 @@ namespace System.Net {
                         _HostUri = hostUri;
                     }
 
-                    if (ResponseStatusCode>MaxOkStatus) {
-                        if(Logging.On)Logging.PrintWarning(Logging.Web, this, "", SR.GetString(SR.net_log_server_response_error_code, ((int)ResponseStatusCode).ToString(NumberFormatInfo.InvariantInfo)));
+                    if (ResponseStatusCode > MaxOkStatus)
+                    {
+                        if (Logging.On)
+                            Logging.PrintWarning(
+                                Logging.Web,
+                                this,
+                                "",
+                                SR.GetString(
+                                    SR.net_log_server_response_error_code,
+                                    ((int)ResponseStatusCode).ToString(
+                                        NumberFormatInfo.InvariantInfo
+                                    )
+                                )
+                            );
                     }
 
-                    if (HttpWriteMode != HttpWriteMode.None) {
-                        switch (ResponseStatusCode) {
+                    if (HttpWriteMode != HttpWriteMode.None)
+                    {
+                        switch (ResponseStatusCode)
+                        {
                             case HttpStatusCode.Moved:
                             case HttpStatusCode.Redirect:
-                                if (CurrentMethod.Equals(KnownHttpVerb.Post)) {
+                                if (CurrentMethod.Equals(KnownHttpVerb.Post))
+                                {
                                     disableUpload = true;
                                 }
                                 break;
@@ -5787,15 +7469,32 @@ namespace System.Net {
                         }
 
                         // set new Method
-                        if (disableUpload) {
-                            if (!AllowWriteStreamBuffering && IsOutstandingGetRequestStream) {
+                        if (disableUpload)
+                        {
+                            if (!AllowWriteStreamBuffering && IsOutstandingGetRequestStream)
+                            {
                                 // We haven't uploaded the data yet.  Let the user upload the data first, then reprocess
                                 // the redirect in Begin/GetResponse. See DoSubmitRequestProcessing for details.
                                 return false;
                             }
-                            else {
-                                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit() disabling upload HttpWriteMode:" + HttpWriteMode + " SubmitWriteStream#" + ValidationHelper.HashString(_SubmitWriteStream));
-                                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit() changing Verb from " + CurrentMethod + " to " + KnownHttpVerb.Get);
+                            else
+                            {
+                                GlobalLog.Print(
+                                    "HttpWebRequest#"
+                                        + ValidationHelper.HashString(this)
+                                        + "::CheckResubmit() disabling upload HttpWriteMode:"
+                                        + HttpWriteMode
+                                        + " SubmitWriteStream#"
+                                        + ValidationHelper.HashString(_SubmitWriteStream)
+                                );
+                                GlobalLog.Print(
+                                    "HttpWebRequest#"
+                                        + ValidationHelper.HashString(this)
+                                        + "::CheckResubmit() changing Verb from "
+                                        + CurrentMethod
+                                        + " to "
+                                        + KnownHttpVerb.Get
+                                );
                                 CurrentMethod = KnownHttpVerb.Get;
                                 ExpectContinue = false;
                                 HttpWriteMode = HttpWriteMode.None;
@@ -5820,11 +7519,13 @@ namespace System.Net {
 #if !FEATURE_PAL
                     // Is current credential object a CredentialCache type?
                     ICredentials authTemp = Credentials as CredentialCache;
-                    if (authTemp == null) {
+                    if (authTemp == null)
+                    {
                         // not CredentialCache - is it a SystemNetworkCredential type?
                         authTemp = Credentials as SystemNetworkCredential;
                     }
-                    if (authTemp == null) {
+                    if (authTemp == null)
+                    {
                         // object is not either type that is safe for redirection - remove it
                         Credentials = null;
                     }
@@ -5840,81 +7541,163 @@ namespace System.Net {
                     ServerAuthenticationState.ClearAuthReq(this);
 
                     //strip referer if coming from an https site
-                    if(_OriginUri.Scheme == Uri.UriSchemeHttps) {
+                    if (_OriginUri.Scheme == Uri.UriSchemeHttps)
+                    {
                         _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Referer);
                     }
 
                     // resubmit
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit() CurrentMethod=" + CurrentMethod);
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::CheckResubmit() CurrentMethod="
+                            + CurrentMethod
+                    );
                 }
-                else if (ResponseStatusCode > MaxRedirectionStatus)          // > 399 = fatal
+                else if (ResponseStatusCode > MaxRedirectionStatus) // > 399 = fatal
                 {
-                    SetExceptionIfRequired(SR.GetString(SR.net_servererror,
-                        NetRes.GetWebStatusCodeString(ResponseStatusCode, _HttpResponse.StatusDescription)),
-                        ref e);
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                    SetExceptionIfRequired(
+                        SR.GetString(
+                            SR.net_servererror,
+                            NetRes.GetWebStatusCodeString(
+                                ResponseStatusCode,
+                                _HttpResponse.StatusDescription
+                            )
+                        ),
+                        ref e
+                    );
+                    GlobalLog.Leave(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit",
+                        "false"
+                    );
                     return false;
                 }
                 else if (AllowAutoRedirect && ResponseStatusCode > MaxOkStatus) //some of 3XX and AllowAutoRedirect==true will result into an exceptional respone
                 {
-                    SetExceptionIfRequired(SR.GetString(SR.net_servererror,
-                        NetRes.GetWebStatusCodeString(ResponseStatusCode, _HttpResponse.StatusDescription)),
-                        ref e);
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                    SetExceptionIfRequired(
+                        SR.GetString(
+                            SR.net_servererror,
+                            NetRes.GetWebStatusCodeString(
+                                ResponseStatusCode,
+                                _HttpResponse.StatusDescription
+                            )
+                        ),
+                        ref e
+                    );
+                    GlobalLog.Leave(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit",
+                        "false"
+                    );
                     return false;
                 }
                 else // SUCCESS Status is <= 299 or (<=399 && AllowAutoRedirect==false) will result into a normal (non exceptional) response
                 {
-                    GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                    GlobalLog.Leave(
+                        "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit",
+                        "false"
+                    );
                     return false;
                 }
             }
 
-            GlobalLog.Assert(HttpWriteMode != HttpWriteMode.Unknown, "HttpWebRequest#{0}::CheckResubmit()|HttpWriteMode:{1}", ValidationHelper.HashString(this), HttpWriteMode);
-            if (HttpWriteMode != HttpWriteMode.None && !AllowWriteStreamBuffering && _resendRequestContent == null
-                && UserRetrievedWriteStream && (HttpWriteMode != HttpWriteMode.ContentLength || ContentLength != 0))
+            GlobalLog.Assert(
+                HttpWriteMode != HttpWriteMode.Unknown,
+                "HttpWebRequest#{0}::CheckResubmit()|HttpWriteMode:{1}",
+                ValidationHelper.HashString(this),
+                HttpWriteMode
+            );
+            if (
+                HttpWriteMode != HttpWriteMode.None
+                && !AllowWriteStreamBuffering
+                && _resendRequestContent == null
+                && UserRetrievedWriteStream
+                && (HttpWriteMode != HttpWriteMode.ContentLength || ContentLength != 0)
+            )
             {
-                e = new WebException(SR.GetString(SR.net_need_writebuffering), null, WebExceptionStatus.ProtocolError, _HttpResponse);
-                GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "false");
+                e = new WebException(
+                    SR.GetString(SR.net_need_writebuffering),
+                    null,
+                    WebExceptionStatus.ProtocolError,
+                    _HttpResponse
+                );
+                GlobalLog.Leave(
+                    "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit",
+                    "false"
+                );
                 return false;
             }
 
-            if (!authResubmit){
+            if (!authResubmit)
+            {
                 ClearAuthenticatedConnectionResources();
             }
 
-            if(Logging.On)Logging.PrintWarning(Logging.Web, this, "", SR.GetString(SR.net_log_resubmitting_request));
-            GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit", "true");
+            if (Logging.On)
+                Logging.PrintWarning(
+                    Logging.Web,
+                    this,
+                    "",
+                    SR.GetString(SR.net_log_resubmitting_request)
+                );
+            GlobalLog.Leave(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckResubmit",
+                "true"
+            );
             return true;
         }
 
         private bool HasRedirectPermission(Uri uri, ref Exception resultException)
         {
-            try {
+            try
+            {
                 CheckConnectPermission(uri, Async);
             }
-            catch (SecurityException e) {
-                resultException = new SecurityException(SR.GetString(SR.net_redirect_perm),
-                    new WebException(SR.GetString(SR.net_resubmitcanceled), e,
-                        WebExceptionStatus.ProtocolError, _HttpResponse));
+            catch (SecurityException e)
+            {
+                resultException = new SecurityException(
+                    SR.GetString(SR.net_redirect_perm),
+                    new WebException(
+                        SR.GetString(SR.net_resubmitcanceled),
+                        e,
+                        WebExceptionStatus.ProtocolError,
+                        _HttpResponse
+                    )
+                );
 
-                GlobalLog.Leave("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckRedirectPermission", "false");
+                GlobalLog.Leave(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::CheckRedirectPermission",
+                    "false"
+                );
                 return false;
             }
 
             return true;
         }
 
-        [SuppressMessage("Microsoft.Security","CA2103:ReviewImperativeSecurity", Justification="Implementation requires permission based on uri")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2103:ReviewImperativeSecurity",
+            Justification = "Implementation requires permission based on uri"
+        )]
         private void CheckConnectPermission(Uri uri, bool needExecutionContext)
         {
-            ExecutionContext context = needExecutionContext ? GetReadingContext().ContextCopy : null;
+            ExecutionContext context = needExecutionContext
+                ? GetReadingContext().ContextCopy
+                : null;
             CodeAccessPermission permission = (new WebPermission(NetworkAccess.Connect, uri));
-            if (context == null) {
+            if (context == null)
+            {
                 permission.Demand();
             }
-            else {
-                ExecutionContext.Run(context, NclUtilities.ContextRelativeDemandCallback, permission);
+            else
+            {
+                ExecutionContext.Run(
+                    context,
+                    NclUtilities.ContextRelativeDemandCallback,
+                    permission
+                );
             }
         }
 
@@ -5936,8 +7719,12 @@ namespace System.Net {
             None.
 
         --*/
-        private void ClearRequestForResubmit(bool ntlmFollowupRequest) {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearRequestForResubmit");
+        private void ClearRequestForResubmit(bool ntlmFollowupRequest)
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearRequestForResubmit"
+            );
 
             // Clear restricted strongly typed headers. See SerializeHeaders().
             // We are not clearing Accept-Encoding because it is not a restricted header.
@@ -5948,24 +7735,33 @@ namespace System.Net {
             _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.TransferEncoding);
             _HttpRequestHeaders.RemoveInternal(HttpKnownHeaderNames.Expect);
 
-            if (_HttpResponse != null && _HttpResponse.ResponseStream != null) {
+            if (_HttpResponse != null && _HttpResponse.ResponseStream != null)
+            {
                 //
                 // We just drain the response data, and throw them away since we're redirecting or authenticating.
                 //
-                GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearRequestForResubmit() draining ResponseStream");
-                if (!_HttpResponse.KeepAlive) {
+                GlobalLog.Print(
+                    "HttpWebRequest#"
+                        + ValidationHelper.HashString(this)
+                        + "::ClearRequestForResubmit() draining ResponseStream"
+                );
+                if (!_HttpResponse.KeepAlive)
+                {
                     ConnectStream liveStream = _HttpResponse.ResponseStream as ConnectStream;
-                    if (liveStream != null ) {
+                    if (liveStream != null)
+                    {
                         // The response stream may be closed at any time by the server.
                         // At this point we don't want to drain such a ConnectStream.
                         liveStream.ErrorResponseNotify(false);
                     }
                 }
                 ICloseEx icloseEx = _HttpResponse.ResponseStream as ICloseEx;
-                if (icloseEx != null) {
+                if (icloseEx != null)
+                {
                     icloseEx.CloseEx(CloseExState.Silent);
                 }
-                else {
+                else
+                {
                     _HttpResponse.ResponseStream.Close();
                 }
             }
@@ -5989,14 +7785,18 @@ namespace System.Net {
             if (!Aborted && Async)
                 _CoreResponse = null;
 
-            if (_SubmitWriteStream != null) {
+            if (_SubmitWriteStream != null)
+            {
                 //
                 // We're uploading and need to resubmit for Authentication or Redirect.
                 // if the response wants to keep alive the connection we shouldn't be closing
                 // it (this would also brake connection-oriented authentication schemes such as NTLM).
                 // so we need to flush all the data to the wire.
                 // if the server is closing the connection, instead, we can just close our side as well.
-                if ((priorResponse != null && priorResponse.KeepAlive) || _SubmitWriteStream.IgnoreSocketErrors)
+                if (
+                    (priorResponse != null && priorResponse.KeepAlive)
+                    || _SubmitWriteStream.IgnoreSocketErrors
+                )
                 {
                     //
                     // the server wants to keep the connection alive.
@@ -6006,42 +7806,69 @@ namespace System.Net {
                     // if the user has set ContentLength to a big number, then we might be able
                     // to just decide to close the connection, but we need to be careful to NTLM.
                     //
-                    GlobalLog.Assert(HttpWriteMode != HttpWriteMode.Unknown, "HttpWebRequest#{0}::ClearRequestForResubmit()|HttpWriteMode:{1}", ValidationHelper.HashString(this), HttpWriteMode);
+                    GlobalLog.Assert(
+                        HttpWriteMode != HttpWriteMode.Unknown,
+                        "HttpWebRequest#{0}::ClearRequestForResubmit()|HttpWriteMode:{1}",
+                        ValidationHelper.HashString(this),
+                        HttpWriteMode
+                    );
                     if (HasEntityBody)
                     {
                         //
                         // we're uploading
                         //
-                        GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearRequestForResubmit() _WriteAResult:" + ValidationHelper.ToString(_WriteAResult));
+                        GlobalLog.Print(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::ClearRequestForResubmit() _WriteAResult:"
+                                + ValidationHelper.ToString(_WriteAResult)
+                        );
 
                         //
                         // the user didn't get the stream yet, give it to him
                         //
-                        GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearRequestForResubmit() calling SetRequestContinue()");
+                        GlobalLog.Print(
+                            "HttpWebRequest#"
+                                + ValidationHelper.HashString(this)
+                                + "::ClearRequestForResubmit() calling SetRequestContinue()"
+                        );
 
-                        if (AllowWriteStreamBuffering) {
+                        if (AllowWriteStreamBuffering)
+                        {
                             SetRequestContinue();
                         }
 
                         // The second NTLM request is required to use the same connection, don't close it
-                        if (ntlmFollowupRequest) {
+                        if (ntlmFollowupRequest)
+                        {
                             // We only want CallDone to do a sync read now if 100Continue won't later
                             NeedsToReadForResponse = !ShouldWaitFor100Continue();
                             _SubmitWriteStream.CallDone();
                         }
-                        else if (!AllowWriteStreamBuffering) {
+                        else if (!AllowWriteStreamBuffering)
+                        {
                             // We only want CloseInternal to do a sync read now if 100Continue won't later
                             NeedsToReadForResponse = !ShouldWaitFor100Continue();
                             _SubmitWriteStream.CloseInternal(true);
                         }
-                        else if (!Async && UserRetrievedWriteStream) {
+                        else if (!Async && UserRetrievedWriteStream)
+                        {
                             _SubmitWriteStream.CallDone();
                         }
                     }
                 }
 
-                if ((Async || UserRetrievedWriteStream) && _OldSubmitWriteStream != null && _OldSubmitWriteStream != _SubmitWriteStream) {
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::ClearRequestForResubmit() closing RequestStream");
+                if (
+                    (Async || UserRetrievedWriteStream)
+                    && _OldSubmitWriteStream != null
+                    && _OldSubmitWriteStream != _SubmitWriteStream
+                )
+                {
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::ClearRequestForResubmit() closing RequestStream"
+                    );
                     _SubmitWriteStream.CloseInternal(true);
                 }
             }
@@ -6057,20 +7884,30 @@ namespace System.Net {
         //
         private void FinishRequest(HttpWebResponse response, Exception errorException)
         {
-
-            GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::FinishRequest()");
+            GlobalLog.Print(
+                "HttpWebRequest#" + ValidationHelper.HashString(this) + "::FinishRequest()"
+            );
 
             if (!_ReadAResult.InternalPeekCompleted && m_Aborted != AbortState.Public) // otherwise it's too late
             {
                 if (response != null && errorException != null)
                 {
                     // if this is a protocol exception copy off stream, don't just close it
-                    GlobalLog.Print("HttpWebRequest#" + ValidationHelper.HashString(this) + "::CheckFinalStatus() - status" + (int)ResponseStatusCode);
+                    GlobalLog.Print(
+                        "HttpWebRequest#"
+                            + ValidationHelper.HashString(this)
+                            + "::CheckFinalStatus() - status"
+                            + (int)ResponseStatusCode
+                    );
                     response.ResponseStream = MakeMemoryStream(response.ResponseStream); // Never throws
                 }
             }
 
-            if (errorException != null && _SubmitWriteStream != null && !_SubmitWriteStream.IsClosed)
+            if (
+                errorException != null
+                && _SubmitWriteStream != null
+                && !_SubmitWriteStream.IsClosed
+            )
             {
                 _SubmitWriteStream.ErrorResponseNotify(_SubmitWriteStream.Connection.KeepAlive);
             }
@@ -6079,12 +7916,16 @@ namespace System.Net {
             // turn off expectation of 100 continue (we'll keep sending an
             // "Expect: 100-continue" header to a 1.1 server though)
             //
-            if ( errorException == null && _HttpResponse != null &&
-                 ( _HttpWriteMode == HttpWriteMode.Chunked || _ContentLength > 0 ) &&
-                 ExpectContinue && !Saw100Continue  &&
-                 _ServicePoint.Understands100Continue &&
-                 !IsTunnelRequest &&
-                 ResponseStatusCode <= MaxOkStatus)
+            if (
+                errorException == null
+                && _HttpResponse != null
+                && (_HttpWriteMode == HttpWriteMode.Chunked || _ContentLength > 0)
+                && ExpectContinue
+                && !Saw100Continue
+                && _ServicePoint.Understands100Continue
+                && !IsTunnelRequest
+                && ResponseStatusCode <= MaxOkStatus
+            )
             {
                 _ServicePoint.Understands100Continue = false;
             }
@@ -6093,50 +7934,63 @@ namespace System.Net {
         //
         // Never throws
         //
-        private Stream MakeMemoryStream(Stream stream) {
-           // GlobalLog.ThreadContract(ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::MakeMemoryStream");
+        private Stream MakeMemoryStream(Stream stream)
+        {
+            // GlobalLog.ThreadContract(ThreadKinds.Sync, "HttpWebRequest#" + ValidationHelper.HashString(this) + "::MakeMemoryStream");
 
             if (stream == null || stream is SyncMemoryStream)
                 return stream;
 
-            SyncMemoryStream memoryStream = new SyncMemoryStream(0);      // buffered Stream to save off data
-            try {
+            SyncMemoryStream memoryStream = new SyncMemoryStream(0); // buffered Stream to save off data
+            try
+            {
                 //
                 // Now drain the Stream
                 //
-                if (stream.CanRead) {
-                    byte [] buffer = new byte[1024];
+                if (stream.CanRead)
+                {
+                    byte[] buffer = new byte[1024];
                     int bytesTransferred = 0;
 
-                    // 
+                    //
 
-
-
-                    int maxBytesToBuffer = (HttpWebRequest.DefaultMaximumErrorResponseLength == -1)?buffer.Length:HttpWebRequest.DefaultMaximumErrorResponseLength*1024;
-                    while ((bytesTransferred = stream.Read(buffer, 0, Math.Min(buffer.Length, maxBytesToBuffer))) > 0)
+                    int maxBytesToBuffer =
+                        (HttpWebRequest.DefaultMaximumErrorResponseLength == -1)
+                            ? buffer.Length
+                            : HttpWebRequest.DefaultMaximumErrorResponseLength * 1024;
+                    while (
+                        (
+                            bytesTransferred = stream.Read(
+                                buffer,
+                                0,
+                                Math.Min(buffer.Length, maxBytesToBuffer)
+                            )
+                        ) > 0
+                    )
                     {
                         memoryStream.Write(buffer, 0, bytesTransferred);
-                        if(HttpWebRequest.DefaultMaximumErrorResponseLength != -1)
+                        if (HttpWebRequest.DefaultMaximumErrorResponseLength != -1)
                             maxBytesToBuffer -= bytesTransferred;
                     }
                 }
                 memoryStream.Position = 0;
             }
-            catch {
-            }
+            catch { }
             finally
             {
-                try {
+                try
+                {
                     ICloseEx icloseEx = stream as ICloseEx;
-                    if (icloseEx != null) {
+                    if (icloseEx != null)
+                    {
                         icloseEx.CloseEx(CloseExState.Silent);
                     }
-                    else {
+                    else
+                    {
                         stream.Close();
                     }
                 }
-                catch {
-                }
+                catch { }
             }
             return memoryStream;
         }
@@ -6146,7 +8000,8 @@ namespace System.Net {
         ///       Adds a range header to the request for a specified range.
         ///    </para>
         /// </devdoc>
-        public void AddRange(int from, int to) {
+        public void AddRange(int from, int to)
+        {
             AddRange("bytes", (long)from, (long)to);
         }
 
@@ -6155,7 +8010,8 @@ namespace System.Net {
         ///       Adds a range header to the request for a specified range.
         ///    </para>
         /// </devdoc>
-        public void AddRange(long from, long to) {
+        public void AddRange(long from, long to)
+        {
             AddRange("bytes", from, to);
         }
 
@@ -6168,7 +8024,8 @@ namespace System.Net {
         ///       To add the range from the some offset to the end pass positive value
         ///    </para>
         /// </devdoc>
-        public void AddRange(int range) {
+        public void AddRange(int range)
+        {
             AddRange("bytes", (long)range);
         }
 
@@ -6181,54 +8038,79 @@ namespace System.Net {
         ///       To add the range from the some offset to the end pass positive value
         ///    </para>
         /// </devdoc>
-        public void AddRange(long range) {
+        public void AddRange(long range)
+        {
             AddRange("bytes", range);
         }
 
-        public void AddRange(string rangeSpecifier, int from, int to) {
+        public void AddRange(string rangeSpecifier, int from, int to)
+        {
             AddRange(rangeSpecifier, (long)from, (long)to);
         }
 
-        public void AddRange(string rangeSpecifier, long from, long to) {
-
+        public void AddRange(string rangeSpecifier, long from, long to)
+        {
             //
             // Do some range checking before assembling the header
             //
 
-            if (rangeSpecifier == null) {
+            if (rangeSpecifier == null)
+            {
                 throw new ArgumentNullException("rangeSpecifier");
             }
-            if ((from < 0) || (to < 0)) {
-                throw new ArgumentOutOfRangeException("from, to", SR.GetString(SR.net_rangetoosmall));
+            if ((from < 0) || (to < 0))
+            {
+                throw new ArgumentOutOfRangeException(
+                    "from, to",
+                    SR.GetString(SR.net_rangetoosmall)
+                );
             }
-            if (from > to) {
+            if (from > to)
+            {
                 throw new ArgumentOutOfRangeException("from", SR.GetString(SR.net_fromto));
             }
-            if (!WebHeaderCollection.IsValidToken(rangeSpecifier)) {
+            if (!WebHeaderCollection.IsValidToken(rangeSpecifier))
+            {
                 throw new ArgumentException(SR.GetString(SR.net_nottoken), "rangeSpecifier");
             }
-            if (!AddRange(rangeSpecifier, from.ToString(NumberFormatInfo.InvariantInfo), to.ToString(NumberFormatInfo.InvariantInfo))) {
+            if (
+                !AddRange(
+                    rangeSpecifier,
+                    from.ToString(NumberFormatInfo.InvariantInfo),
+                    to.ToString(NumberFormatInfo.InvariantInfo)
+                )
+            )
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_rangetype));
             }
         }
 
-        public void AddRange(string rangeSpecifier, int range) {
+        public void AddRange(string rangeSpecifier, int range)
+        {
             AddRange(rangeSpecifier, (long)range);
         }
 
-        public void AddRange(string rangeSpecifier, long range) {
-            if (rangeSpecifier == null) {
+        public void AddRange(string rangeSpecifier, long range)
+        {
+            if (rangeSpecifier == null)
+            {
                 throw new ArgumentNullException("rangeSpecifier");
             }
-            if (!WebHeaderCollection.IsValidToken(rangeSpecifier)) {
+            if (!WebHeaderCollection.IsValidToken(rangeSpecifier))
+            {
                 throw new ArgumentException(SR.GetString(SR.net_nottoken), "rangeSpecifier");
             }
-            if (!AddRange(rangeSpecifier, range.ToString(NumberFormatInfo.InvariantInfo), (range >= 0) ? "" : null)) {
+            if (
+                !AddRange(
+                    rangeSpecifier,
+                    range.ToString(NumberFormatInfo.InvariantInfo),
+                    (range >= 0) ? "" : null
+                )
+            )
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_rangetype));
             }
         }
-
-
 
         //
         // bool AddRange(rangeSpecifier, from, to)
@@ -6238,43 +8120,60 @@ namespace System.Net {
         //  e.g. a byte-range request, or a row-range request. Range types
         //  cannot be mixed
         //
-        private bool AddRange(string rangeSpecifier, string from, string to) {
-
+        private bool AddRange(string rangeSpecifier, string from, string to)
+        {
             string curRange = _HttpRequestHeaders[HttpKnownHeaderNames.Range];
 
-            if ((curRange == null) || (curRange.Length == 0)) {
+            if ((curRange == null) || (curRange.Length == 0))
+            {
                 curRange = rangeSpecifier + "=";
             }
-            else {
-                if (String.Compare(curRange.Substring(0, curRange.IndexOf('=')), rangeSpecifier, StringComparison.OrdinalIgnoreCase) != 0) {
+            else
+            {
+                if (
+                    String.Compare(
+                        curRange.Substring(0, curRange.IndexOf('=')),
+                        rangeSpecifier,
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                )
+                {
                     return false;
                 }
                 curRange = string.Empty;
             }
             curRange += from.ToString();
-            if (to != null) {
+            if (to != null)
+            {
                 curRange += "-" + to;
             }
             _HttpRequestHeaders.SetAddVerified(HttpKnownHeaderNames.Range, curRange);
             return true;
         }
 
-        private static string UniqueGroupId {
-            get {
-                return (Interlocked.Increment(ref s_UniqueGroupId)).ToString(NumberFormatInfo.InvariantInfo);
+        private static string UniqueGroupId
+        {
+            get
+            {
+                return (Interlocked.Increment(ref s_UniqueGroupId)).ToString(
+                    NumberFormatInfo.InvariantInfo
+                );
             }
         }
 
         private static int GetStatusCode(HttpWebResponse httpWebResponse)
         {
             int result = -1;
-                        
+
             // we are calculating statusCode only when FrameworkEventSource logging is enabled.
-            if (FrameworkEventSource.Log.IsEnabled() && httpWebResponse != null) {
-                try {
+            if (FrameworkEventSource.Log.IsEnabled() && httpWebResponse != null)
+            {
+                try
+                {
                     result = (int)httpWebResponse.StatusCode;
                 }
-                catch (ObjectDisposedException) {
+                catch (ObjectDisposedException)
+                {
                     // ObjectDisposedException is expected here in the following sequence: httpWebRequest.GetResponse().Dispose() -> httpWebRequest.GetResponse()
                     // on the second call to GetResponse() we cannot determine the statusCode.
                 }
@@ -6290,7 +8189,8 @@ namespace System.Net {
         ///     returns an extension object that can be used to
         ///      add extension headers</para>
         /// </devdoc>
-        public HttpExtension CreateExtension(string uri, string header) {
+        public HttpExtension CreateExtension(string uri, string header)
+        {
             int id = _NextExtension;
             HttpExtension extension = new HttpExtension(id, uri, header);
 
@@ -6299,19 +8199,20 @@ namespace System.Net {
             return extension;
         }
 
-
-
         /// <devdoc>
         ///    <para>Assembles and creates a new extension header, by adding it the extension object </para>
         /// </devdoc>
-        public void AddExtension(HttpExtension extension, string header, string value) {
+        public void AddExtension(HttpExtension extension, string header, string value)
+        {
             StringBuilder sb = new StringBuilder(100);
 
-            if (extension == null) {
+            if (extension == null)
+            {
                 throw new ArgumentNullException("extension");
             }
 
-            if (! extension.HasAddedExtensionHeader) {
+            if (!extension.HasAddedExtensionHeader)
+            {
                 StringBuilder sb2 = new StringBuilder(100);
 
                 extension.HasAddedExtensionHeader = true;
@@ -6331,7 +8232,6 @@ namespace System.Net {
             _HttpRequestHeaders.Add(sb.ToString(), value);
         }
 #endif // HTTP_HEADER_EXTENSIONS_SUPPORTED
-
     }
 
     [FriendAccessAllowed]
@@ -6349,17 +8249,21 @@ namespace System.Net {
             PolicyError,
             SystemError,
             TransportDisconnected,
-            ServiceUnavailable
+            ServiceUnavailable,
         };
 
         // Socket configuration data we need to pass to IOControl after creating the socket.
         internal byte[] inputData;
+
         // IOControl results
         internal byte[] outputData;
+
         // Set this event after we have succesfully created and configured the socket.
         internal ManualResetEvent connectComplete;
+
         // Set this event after we have succesfully sent the headers and request body.
         internal ManualResetEvent flushComplete;
+
         // Any error codes that need to be reported to NotificationChannel
         internal int result;
 
@@ -6387,19 +8291,24 @@ namespace System.Net {
 
         internal bool IsEnabled()
         {
-            Debug.Assert((outputData != null) && (outputData.Length == sizeof(ControlChannelTriggerStatus)),
-                "outputData not initialized.");
+            Debug.Assert(
+                (outputData != null) && (outputData.Length == sizeof(ControlChannelTriggerStatus)),
+                "outputData not initialized."
+            );
 
-            ControlChannelTriggerStatus status = (ControlChannelTriggerStatus)BitConverter.ToInt32(outputData, 0);
+            ControlChannelTriggerStatus status = (ControlChannelTriggerStatus)
+                BitConverter.ToInt32(outputData, 0);
 
             // We consider RTC setup successful if all of the following are true:
             // - IOCTL calls succeeded
             // - IOCTL(SIO_QUERY_TRANSPORT_SETTING) call returned either
             //   CONTROL_CHANNEL_TRIGGER_STATUS_SOFTWARE_SLOT_ALLOCATED or
             //   CONTROL_CHANNEL_TRIGGER_STATUS_HARDWARE_SLOT_ALLOCATED
-            return (result == 0) &&
-                ((status == ControlChannelTriggerStatus.SoftwareSlotAllocated) ||
-                (status == ControlChannelTriggerStatus.HardwareSlotAllocated));
+            return (result == 0)
+                && (
+                    (status == ControlChannelTriggerStatus.SoftwareSlotAllocated)
+                    || (status == ControlChannelTriggerStatus.HardwareSlotAllocated)
+                );
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 namespace System.Data.Services.Client
@@ -14,13 +14,13 @@ namespace System.Data.Services.Client
     #region Namespaces.
 
     using System;
-    using System.Text;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
-    
+    using System.Reflection;
+    using System.Text;
+
     #endregion Namespaces.
 
     internal class PathBox
@@ -33,9 +33,13 @@ namespace System.Data.Services.Client
 
         private readonly List<StringBuilder> expandPaths = new List<StringBuilder>();
 
-        private readonly Stack<ParameterExpression> parameterExpressions = new Stack<ParameterExpression>();
+        private readonly Stack<ParameterExpression> parameterExpressions =
+            new Stack<ParameterExpression>();
 
-        private readonly Dictionary<ParameterExpression, string> basePaths = new Dictionary<ParameterExpression, string>(ReferenceEqualityComparer<ParameterExpression>.Instance);
+        private readonly Dictionary<ParameterExpression, string> basePaths = new Dictionary<
+            ParameterExpression,
+            string
+        >(ReferenceEqualityComparer<ParameterExpression>.Instance);
 
         #endregion Private fields.
 
@@ -48,7 +52,10 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return projectionPaths.Where(s => s.Length > 0).Select(s => s.ToString()).Distinct();
+                return projectionPaths
+                    .Where(s => s.Length > 0)
+                    .Select(s => s.ToString())
+                    .Distinct();
             }
         }
 
@@ -84,7 +91,10 @@ namespace System.Data.Services.Client
 
         internal void StartNewPath()
         {
-            Debug.Assert(this.ParamExpressionInScope != null, "this.ParamExpressionInScope != null -- should not be starting new path with no lambda parameter in scope.");
+            Debug.Assert(
+                this.ParamExpressionInScope != null,
+                "this.ParamExpressionInScope != null -- should not be starting new path with no lambda parameter in scope."
+            );
 
             StringBuilder sb = new StringBuilder(basePaths[this.ParamExpressionInScope]);
             RemoveEntireEntityMarkerIfPresent(sb);
@@ -103,7 +113,8 @@ namespace System.Data.Services.Client
             if (ClientType.CheckElementTypeIsEntity(t))
             {
                 sb = expandPaths.Last();
-                Debug.Assert(sb != null);                if (sb.Length > 0)
+                Debug.Assert(sb != null);
+                if (sb.Length > 0)
                 {
                     sb.Append(UriHelper.FORWARDSLASH);
                 }
@@ -112,7 +123,10 @@ namespace System.Data.Services.Client
             }
 
             sb = projectionPaths.Last();
-            Debug.Assert(sb != null, "sb != null -- we are always building paths in the context of a parameter");
+            Debug.Assert(
+                sb != null,
+                "sb != null -- we are always building paths in the context of a parameter"
+            );
 
             RemoveEntireEntityMarkerIfPresent(sb);
 

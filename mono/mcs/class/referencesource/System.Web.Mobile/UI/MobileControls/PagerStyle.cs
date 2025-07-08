@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PageStyle.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,11 +10,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -25,15 +25,32 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class PagerStyle : Style
     {
         /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle.NextPageTextKey"]/*' />
-        public static readonly Object
-            NextPageTextKey = RegisterStyle("NextPageText", typeof(String), String.Empty, false),
-            PreviousPageTextKey = RegisterStyle("PreviousPageText", typeof(String), String.Empty, false),
+        public static readonly Object NextPageTextKey = RegisterStyle(
+                "NextPageText",
+                typeof(String),
+                String.Empty,
+                false
+            ),
+            PreviousPageTextKey = RegisterStyle(
+                "PreviousPageText",
+                typeof(String),
+                String.Empty,
+                false
+            ),
             PageLabelKey = RegisterStyle("PageLabel", typeof(String), String.Empty, false);
 
         /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle.NextPageText"]/*' />
@@ -46,14 +63,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String NextPageText
         {
-            get
-            {
-                return (String)this[NextPageTextKey];
-            }
-            set
-            {
-                this[NextPageTextKey] = value;
-            }
+            get { return (String)this[NextPageTextKey]; }
+            set { this[NextPageTextKey] = value; }
         }
 
         /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle.PreviousPageText"]/*' />
@@ -66,14 +77,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String PreviousPageText
         {
-            get
-            {
-                return (String)this[PreviousPageTextKey];
-            }
-            set
-            {
-                this[PreviousPageTextKey] = value;
-            }
+            get { return (String)this[PreviousPageTextKey]; }
+            set { this[PreviousPageTextKey] = value; }
         }
 
         /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle.PageLabel"]/*' />
@@ -86,14 +91,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String PageLabel
         {
-            get
-            {
-                return (String)this[PageLabelKey];
-            }
-            set
-            {
-                this[PageLabelKey] = value;
-            }
+            get { return (String)this[PageLabelKey]; }
+            set { this[PageLabelKey] = value; }
         }
 
         /// <include file='doc\PagerStyle.uex' path='docs/doc[@for="PagerStyle.GetNextPageText"]/*' />

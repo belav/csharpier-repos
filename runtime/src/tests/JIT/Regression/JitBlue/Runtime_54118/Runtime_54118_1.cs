@@ -27,7 +27,7 @@ public class Runtime_54118
     [Fact]
     public static int TestEntryPoint()
     {
-        byte[] vr7 = new byte[]{0};
+        byte[] vr7 = new byte[] { 0 };
         bool vr11 = default(bool);
         bool ok = false;
         int k = Bound();

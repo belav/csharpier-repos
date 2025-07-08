@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.Notification
     {
         Information,
         Warning,
-        Error
+        Error,
     }
 }

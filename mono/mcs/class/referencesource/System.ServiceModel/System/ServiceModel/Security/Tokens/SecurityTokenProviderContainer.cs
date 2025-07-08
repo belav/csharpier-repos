@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.Security.Cryptography.X509Certificates;
-    using System.Runtime.CompilerServices;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
+    using System.Runtime.CompilerServices;
+    using System.Security.Cryptography.X509Certificates;
 
     class SecurityTokenProviderContainer
     {

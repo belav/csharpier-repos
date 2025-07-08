@@ -13,7 +13,7 @@ namespace System.Web.Mvc.Test
         {
             { "foo", "fooValue1" },
             { "foo", "fooValue2" },
-            { "bar.baz", "someOtherValue" }
+            { "bar.baz", "someOtherValue" },
         };
 
         [Fact]
@@ -21,14 +21,22 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new NameValueCollectionValueProvider(null, CultureInfo.InvariantCulture); }, "collection");
+                delegate
+                {
+                    new NameValueCollectionValueProvider(null, CultureInfo.InvariantCulture);
+                },
+                "collection"
+            );
         }
 
         [Fact]
         public void ContainsPrefix()
         {
             // Arrange
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, null);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                null
+            );
 
             // Act
             bool result = valueProvider.ContainsPrefix("bar");
@@ -41,7 +49,10 @@ namespace System.Web.Mvc.Test
         public void ContainsPrefix_DoesNotContainEmptyPrefixIfBackingStoreIsEmpty()
         {
             // Arrange
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(new NameValueCollection(), null);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                new NameValueCollection(),
+                null
+            );
 
             // Act
             bool result = valueProvider.ContainsPrefix("");
@@ -54,11 +65,19 @@ namespace System.Web.Mvc.Test
         public void ContainsPrefix_ThrowsIfPrefixIsNull()
         {
             // Arrange
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, null);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                null
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { valueProvider.ContainsPrefix(null); }, "prefix");
+                delegate
+                {
+                    valueProvider.ContainsPrefix(null);
+                },
+                "prefix"
+            );
         }
 
         [Fact]
@@ -66,7 +85,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, culture);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("foo");
@@ -85,11 +107,15 @@ namespace System.Web.Mvc.Test
             NameValueCollection unvalidatedCollection = new NameValueCollection()
             {
                 { "foo", "fooValue3" },
-                { "foo", "fooValue4" }
+                { "foo", "fooValue4" },
             };
 
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, unvalidatedCollection, culture);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                unvalidatedCollection,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("foo", skipValidation: true);
@@ -106,7 +132,11 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, null, culture);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                null,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("foo", skipValidation: true);
@@ -123,11 +153,24 @@ namespace System.Web.Mvc.Test
         [InlineData("fooArray[0][bar1][bar3]", "barValue1", "fooArray[0].bar1.bar3", "barValue1")]
         [InlineData("fooArray[0][bar2]", "barValue2", "fooArray[0].bar2", "barValue2")]
         [InlineData(
-            "fooArray[1][bar1][0][nested]", "nestedArrayValue", "fooArray[1].bar1[0].nested", "nestedArrayValue")]
-        [InlineData("fooArray[2].bar1", "noSquareBracesValue", "fooArray[2].bar1", "noSquareBracesValue")]
+            "fooArray[1][bar1][0][nested]",
+            "nestedArrayValue",
+            "fooArray[1].bar1[0].nested",
+            "nestedArrayValue"
+        )]
+        [InlineData(
+            "fooArray[2].bar1",
+            "noSquareBracesValue",
+            "fooArray[2].bar1",
+            "noSquareBracesValue"
+        )]
         [InlineData("foo.bar", "fooBarValue", "foo.bar", "fooBarValue")]
         public void GetValue_NonValidating_WithArraysInCollection(
-                            string name, string value, string index, string expectedAttemptedValue)
+            string name,
+            string value,
+            string index,
+            string expectedAttemptedValue
+        )
         {
             // Arrange
             string[] expectedRawValue = new[] { expectedAttemptedValue };
@@ -135,12 +178,16 @@ namespace System.Web.Mvc.Test
             unvalidatedCollection.Add(name, value);
 
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            NameValueCollectionValueProvider valueProvider = 
-                    new NameValueCollectionValueProvider(_backingStore, unvalidatedCollection, culture, true);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                unvalidatedCollection,
+                culture,
+                true
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue(index, skipValidation: true);
-            
+
             // Asserts
             Assert.NotNull(vpResult);
             Assert.Equal(culture, vpResult.Culture);
@@ -155,28 +202,32 @@ namespace System.Web.Mvc.Test
             NameValueCollection unvalidatedCollection = new NameValueCollection()
             {
                 { "foo", "fooValue3" },
-                { "fooArray[0][bar1", "barValue1" }
+                { "fooArray[0][bar1", "barValue1" },
             };
 
-            NameValueCollectionValueProvider valueProvider =
-                new NameValueCollectionValueProvider(
-                                    _backingStore,
-                                    unvalidatedCollection,
-                                    culture: null,
-                                    jQueryToMvcRequestNormalizationRequired: true);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                unvalidatedCollection,
+                culture: null,
+                jQueryToMvcRequestNormalizationRequired: true
+            );
 
             // Act & Assert
             Assert.ThrowsArgument(
                 () => valueProvider.GetValue("foo", skipValidation: true),
                 "key",
-                "The key is invalid JQuery syntax because it is missing a closing bracket.");
+                "The key is invalid JQuery syntax because it is missing a closing bracket."
+            );
         }
 
         [Fact]
         public void GetValue_ReturnsNullIfKeyNotFound()
         {
             // Arrange
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, null);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                null
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("bar");
@@ -189,11 +240,19 @@ namespace System.Web.Mvc.Test
         public void GetValue_ThrowsIfKeyIsNull()
         {
             // Arrange
-            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(_backingStore, null);
+            NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(
+                _backingStore,
+                null
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { valueProvider.GetValue(null); }, "key");
+                delegate
+                {
+                    valueProvider.GetValue(null);
+                },
+                "key"
+            );
         }
     }
 }

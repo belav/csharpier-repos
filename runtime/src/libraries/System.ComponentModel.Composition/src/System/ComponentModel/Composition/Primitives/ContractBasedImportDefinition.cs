@@ -21,7 +21,8 @@ namespace System.ComponentModel.Composition.Primitives
     {
         // Unlike contract name, both metadata and required metadata has a sensible default; set it to an empty
         // enumerable, so that derived definitions only need to override ContractName by default.
-        private readonly IEnumerable<KeyValuePair<string, Type>> _requiredMetadata = Enumerable.Empty<KeyValuePair<string, Type>>();
+        private readonly IEnumerable<KeyValuePair<string, Type>> _requiredMetadata =
+            Enumerable.Empty<KeyValuePair<string, Type>>();
         private Expression<Func<ExportDefinition, bool>>? _constraint;
         private readonly CreationPolicy _requiredCreationPolicy = CreationPolicy.Any;
         private readonly string? _requiredTypeIdentity;
@@ -39,9 +40,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///         and <see cref="RequiredCreationPolicy"/> properties.
         ///     </note>
         /// </remarks>
-        protected ContractBasedImportDefinition()
-        {
-        }
+        protected ContractBasedImportDefinition() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContractBasedImportDefinition"/> class
@@ -98,11 +97,25 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="cardinality"/> is not one of the <see cref="ImportCardinality"/>
         ///     values.
         /// </exception>
-        public ContractBasedImportDefinition(string contractName, string? requiredTypeIdentity, IEnumerable<KeyValuePair<string, Type>>? requiredMetadata,
-            ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite, CreationPolicy requiredCreationPolicy)
-            : this(contractName, requiredTypeIdentity, requiredMetadata, cardinality, isRecomposable, isPrerequisite, requiredCreationPolicy, MetadataServices.EmptyMetadata)
-        {
-        }
+        public ContractBasedImportDefinition(
+            string contractName,
+            string? requiredTypeIdentity,
+            IEnumerable<KeyValuePair<string, Type>>? requiredMetadata,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            bool isPrerequisite,
+            CreationPolicy requiredCreationPolicy
+        )
+            : this(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                requiredCreationPolicy,
+                MetadataServices.EmptyMetadata
+            ) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContractBasedImportDefinition"/> class
@@ -160,8 +173,16 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="cardinality"/> is not one of the <see cref="ImportCardinality"/>
         ///     values.
         /// </exception>
-        public ContractBasedImportDefinition(string contractName, string? requiredTypeIdentity, IEnumerable<KeyValuePair<string, Type>>? requiredMetadata,
-            ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite, CreationPolicy requiredCreationPolicy, IDictionary<string, object?> metadata)
+        public ContractBasedImportDefinition(
+            string contractName,
+            string? requiredTypeIdentity,
+            IEnumerable<KeyValuePair<string, Type>>? requiredMetadata,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            bool isPrerequisite,
+            CreationPolicy requiredCreationPolicy,
+            IDictionary<string, object?> metadata
+        )
             : base(contractName, cardinality, isRecomposable, isPrerequisite, metadata)
         {
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
@@ -226,7 +247,8 @@ namespace System.ComponentModel.Composition.Primitives
                     if ((metadataItem.Key == null) || (metadataItem.Value == null))
                     {
                         throw new InvalidOperationException(
-                            SR.Format(SR.Argument_NullElement, "requiredMetadata"));
+                            SR.Format(SR.Argument_NullElement, "requiredMetadata")
+                        );
                     }
                 }
                 _isRequiredMetadataValidated = true;
@@ -270,7 +292,12 @@ namespace System.ComponentModel.Composition.Primitives
         ///     </para>
         /// </remarks>
         public override Expression<Func<ExportDefinition, bool>> Constraint =>
-            _constraint ??= ConstraintServices.CreateConstraint(ContractName, RequiredTypeIdentity, RequiredMetadata, RequiredCreationPolicy);
+            _constraint ??= ConstraintServices.CreateConstraint(
+                ContractName,
+                RequiredTypeIdentity,
+                RequiredMetadata,
+                RequiredCreationPolicy
+            );
 
         /// <summary>
         ///     Executes an optimized version of the constraint given by the <see cref="Constraint"/> property
@@ -308,7 +335,9 @@ namespace System.ComponentModel.Composition.Primitives
         {
             if (!string.IsNullOrEmpty(RequiredTypeIdentity))
             {
-                string? exportTypeIdentity = definition.Metadata.GetValue<string>(CompositionConstants.ExportTypeIdentityMetadataName);
+                string? exportTypeIdentity = definition.Metadata.GetValue<string>(
+                    CompositionConstants.ExportTypeIdentityMetadataName
+                );
 
                 if (!StringComparers.ContractName.Equals(RequiredTypeIdentity, exportTypeIdentity))
                 {
@@ -352,9 +381,10 @@ namespace System.ComponentModel.Composition.Primitives
                 return true;
             }
 
-            CreationPolicy exportPolicy = definition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
-            return exportPolicy == CreationPolicy.Any ||
-                   exportPolicy == RequiredCreationPolicy;
+            CreationPolicy exportPolicy = definition.Metadata.GetValue<CreationPolicy>(
+                CompositionConstants.PartCreationPolicyMetadataName
+            );
+            return exportPolicy == CreationPolicy.Any || exportPolicy == RequiredCreationPolicy;
         }
 
         public override string ToString()
@@ -373,7 +403,11 @@ namespace System.ComponentModel.Composition.Primitives
                 sb.Append("\n\tRequiredMetadata");
                 foreach (KeyValuePair<string, Type> metadataItem in _requiredMetadata)
                 {
-                    sb.Append("\n\t\t").Append(metadataItem.Key).Append("\t(").Append(metadataItem.Value).Append(')');
+                    sb.Append("\n\t\t")
+                        .Append(metadataItem.Key)
+                        .Append("\t(")
+                        .Append(metadataItem.Value)
+                        .Append(')');
                 }
             }
             return sb.ToString();

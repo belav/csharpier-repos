@@ -11,6 +11,6 @@ namespace System.Net.Cache
         CacheIfAvailable = 3,
         Revalidate = 4,
         Reload = 5,
-        NoCacheNoStore = 6
+        NoCacheNoStore = 6,
     }
 }

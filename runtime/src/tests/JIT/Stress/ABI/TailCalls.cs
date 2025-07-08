@@ -11,16 +11,19 @@ namespace ABIStress
     internal partial class Program
     {
         private static List<Callee> s_tailCallees;
+
         private static bool DoTailCall(int callerIndex)
         {
             // We pregenerate tail callee parameter lists because we want to be able to select
             // a callee with less arg stack space than this caller.
             if (s_tailCallees == null)
             {
-                s_tailCallees =
-                    Enumerable.Range(0, Config.NumCallees)
-                              .Select(i => CreateCallee(Config.TailCalleePrefix + i, s_tailCalleeCandidateArgTypes))
-                              .ToList();
+                s_tailCallees = Enumerable
+                    .Range(0, Config.NumCallees)
+                    .Select(i =>
+                        CreateCallee(Config.TailCalleePrefix + i, s_tailCalleeCandidateArgTypes)
+                    )
+                    .ToList();
             }
 
             string callerName = Config.TailCallerPrefix + callerIndex;
@@ -31,7 +34,9 @@ namespace ABIStress
             {
                 callerParams = RandomParameters(s_tailCalleeCandidateArgTypes, rand);
                 int argStackSizeApprox = s_abi.ApproximateArgStackAreaSize(callerParams);
-                callable = s_tailCallees.Where(t => t.ArgStackSizeApprox < argStackSizeApprox).ToList();
+                callable = s_tailCallees
+                    .Where(t => t.ArgStackSizeApprox < argStackSizeApprox)
+                    .ToList();
             } while (callable.Count <= 0);
 
             int calleeIndex = rand.Next(callable.Count);
@@ -39,7 +44,11 @@ namespace ABIStress
             callee.Emit();
 
             DynamicMethod caller = new DynamicMethod(
-                callerName, typeof(int), callerParams.Select(t => t.Type).ToArray(), typeof(Program).Module);
+                callerName,
+                typeof(int),
+                callerParams.Select(t => t.Type).ToArray(),
+                typeof(Program).Module
+            );
 
             ILGenerator g = caller.GetILGenerator();
 
@@ -48,7 +57,11 @@ namespace ABIStress
 
             if (Config.Verbose)
             {
-                EmitDumpValues("Caller's incoming args", g, callerParams.Select((p, i) => new ArgValue(p, i)));
+                EmitDumpValues(
+                    "Caller's incoming args",
+                    g,
+                    callerParams.Select((p, i) => new ArgValue(p, i))
+                );
                 EmitDumpValues("Caller's args to tailcall", g, args);
             }
 
@@ -59,12 +72,22 @@ namespace ABIStress
             g.EmitCall(OpCodes.Call, callee.Method, null);
             g.Emit(OpCodes.Ret);
 
-            (object callerResult, object calleeResult) = InvokeCallerCallee(caller, callerParams, callee.Method, args, rand);
+            (object callerResult, object calleeResult) = InvokeCallerCallee(
+                caller,
+                callerParams,
+                callee.Method,
+                args,
+                rand
+            );
 
             if (callerResult.Equals(calleeResult))
                 return true;
 
-            Console.WriteLine("Mismatch in tailcall: expected {0}, got {1}", calleeResult, callerResult);
+            Console.WriteLine(
+                "Mismatch in tailcall: expected {0}, got {1}",
+                calleeResult,
+                callerResult
+            );
             WriteSignature(caller);
             WriteSignature(callee.Method);
             return false;

@@ -19,9 +19,16 @@ namespace System.Reflection.Internal
 
         // Use AcquireBuffer(int) and ReleaseBuffer(byte[])
         // instead of the pool directly to implement the size check.
-        private static readonly ObjectPool<byte[]> s_pool = new ObjectPool<byte[]>(() => new byte[PooledBufferSize]);
+        private static readonly ObjectPool<byte[]> s_pool = new ObjectPool<byte[]>(() =>
+            new byte[PooledBufferSize]
+        );
 
-        public static string DecodeUtf8(byte* bytes, int byteCount, byte[] prefix, MetadataStringDecoder utf8Decoder)
+        public static string DecodeUtf8(
+            byte* bytes,
+            int byteCount,
+            byte[] prefix,
+            MetadataStringDecoder utf8Decoder
+        )
         {
             Debug.Assert(utf8Decoder != null);
 
@@ -38,7 +45,12 @@ namespace System.Reflection.Internal
             return utf8Decoder.GetString(bytes, byteCount);
         }
 
-        private static string DecodeUtf8Prefixed(byte* bytes, int byteCount, byte[] prefix, MetadataStringDecoder utf8Decoder)
+        private static string DecodeUtf8Prefixed(
+            byte* bytes,
+            int byteCount,
+            byte[] prefix,
+            MetadataStringDecoder utf8Decoder
+        )
         {
             Debug.Assert(utf8Decoder != null);
 

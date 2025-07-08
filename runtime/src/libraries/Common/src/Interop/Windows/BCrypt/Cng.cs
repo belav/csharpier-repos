@@ -20,30 +20,30 @@ namespace Internal.NativeCrypto
         /// </summary>
         internal static class AlgorithmName
         {
-            public const string DSA = "DSA";                    // BCRYPT_DSA_ALGORITHM
-            public const string ECDH = "ECDH";                  // BCRYPT_ECDH_ALGORITHM
-            public const string ECDHP256 = "ECDH_P256";         // BCRYPT_ECDH_P256_ALGORITHM
-            public const string ECDHP384 = "ECDH_P384";         // BCRYPT_ECDH_P384_ALGORITHM
-            public const string ECDHP521 = "ECDH_P521";         // BCRYPT_ECDH_P521_ALGORITHM
-            public const string ECDsa = "ECDSA";                // BCRYPT_ECDSA_ALGORITHM
-            public const string ECDsaP256 = "ECDSA_P256";       // BCRYPT_ECDSA_P256_ALGORITHM
-            public const string ECDsaP384 = "ECDSA_P384";       // BCRYPT_ECDSA_P384_ALGORITHM
-            public const string ECDsaP521 = "ECDSA_P521";       // BCRYPT_ECDSA_P521_ALGORITHM
-            public const string RSA = "RSA";                    // BCRYPT_RSA_ALGORITHM
-            public const string MD5 = "MD5";                    // BCRYPT_MD5_ALGORITHM
-            public const string Sha1 = "SHA1";                  // BCRYPT_SHA1_ALGORITHM
-            public const string Sha256 = "SHA256";              // BCRYPT_SHA256_ALGORITHM
-            public const string Sha384 = "SHA384";              // BCRYPT_SHA384_ALGORITHM
-            public const string Sha512 = "SHA512";              // BCRYPT_SHA512_ALGORITHM
-            public const string Pbkdf2 = "PBKDF2";              // BCRYPT_PBKDF2_ALGORITHM
+            public const string DSA = "DSA"; // BCRYPT_DSA_ALGORITHM
+            public const string ECDH = "ECDH"; // BCRYPT_ECDH_ALGORITHM
+            public const string ECDHP256 = "ECDH_P256"; // BCRYPT_ECDH_P256_ALGORITHM
+            public const string ECDHP384 = "ECDH_P384"; // BCRYPT_ECDH_P384_ALGORITHM
+            public const string ECDHP521 = "ECDH_P521"; // BCRYPT_ECDH_P521_ALGORITHM
+            public const string ECDsa = "ECDSA"; // BCRYPT_ECDSA_ALGORITHM
+            public const string ECDsaP256 = "ECDSA_P256"; // BCRYPT_ECDSA_P256_ALGORITHM
+            public const string ECDsaP384 = "ECDSA_P384"; // BCRYPT_ECDSA_P384_ALGORITHM
+            public const string ECDsaP521 = "ECDSA_P521"; // BCRYPT_ECDSA_P521_ALGORITHM
+            public const string RSA = "RSA"; // BCRYPT_RSA_ALGORITHM
+            public const string MD5 = "MD5"; // BCRYPT_MD5_ALGORITHM
+            public const string Sha1 = "SHA1"; // BCRYPT_SHA1_ALGORITHM
+            public const string Sha256 = "SHA256"; // BCRYPT_SHA256_ALGORITHM
+            public const string Sha384 = "SHA384"; // BCRYPT_SHA384_ALGORITHM
+            public const string Sha512 = "SHA512"; // BCRYPT_SHA512_ALGORITHM
+            public const string Pbkdf2 = "PBKDF2"; // BCRYPT_PBKDF2_ALGORITHM
         }
 
         internal static class KeyDerivationFunction
         {
-            public const string Hash = "HASH";                  // BCRYPT_KDF_HASH
-            public const string Hmac = "HMAC";                  // BCRYPT_KDF_HMAC
-            public const string Tls = "TLS_PRF";                // BCRYPT_KDF_TLS_PRF
-            public const string Raw = "TRUNCATE";               // BCRYPT_KDF_RAW_SECRET
+            public const string Hash = "HASH"; // BCRYPT_KDF_HASH
+            public const string Hmac = "HMAC"; // BCRYPT_KDF_HMAC
+            public const string Tls = "TLS_PRF"; // BCRYPT_KDF_TLS_PRF
+            public const string Raw = "TRUNCATE"; // BCRYPT_KDF_RAW_SECRET
         }
     }
 
@@ -74,10 +74,16 @@ namespace Internal.NativeCrypto
         public static SafeAlgorithmHandle BCryptOpenAlgorithmProvider(
             string pszAlgId,
             string? pszImplementation = null,
-            OpenAlgorithmProviderFlags dwFlags = 0)
+            OpenAlgorithmProviderFlags dwFlags = 0
+        )
         {
             SafeAlgorithmHandle hAlgorithm;
-            NTSTATUS ntStatus = Interop.BCryptOpenAlgorithmProvider(out hAlgorithm, pszAlgId, pszImplementation, (int)dwFlags);
+            NTSTATUS ntStatus = Interop.BCryptOpenAlgorithmProvider(
+                out hAlgorithm,
+                pszAlgId,
+                pszImplementation,
+                (int)dwFlags
+            );
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
                 throw CreateCryptographicException(ntStatus);
             return hAlgorithm;
@@ -85,7 +91,12 @@ namespace Internal.NativeCrypto
 
         public static void SetFeedbackSize(this SafeAlgorithmHandle hAlg, int dwFeedbackSize)
         {
-            NTSTATUS ntStatus = Interop.BCryptSetIntProperty(hAlg, BCryptPropertyStrings.BCRYPT_MESSAGE_BLOCK_LENGTH, ref dwFeedbackSize, 0);
+            NTSTATUS ntStatus = Interop.BCryptSetIntProperty(
+                hAlg,
+                BCryptPropertyStrings.BCRYPT_MESSAGE_BLOCK_LENGTH,
+                ref dwFeedbackSize,
+                0
+            );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -95,7 +106,13 @@ namespace Internal.NativeCrypto
 
         public static void SetCipherMode(this SafeAlgorithmHandle hAlg, string cipherMode)
         {
-            NTSTATUS ntStatus = Interop.BCryptSetProperty(hAlg, BCryptPropertyStrings.BCRYPT_CHAINING_MODE, cipherMode, (cipherMode.Length + 1) * 2, 0);
+            NTSTATUS ntStatus = Interop.BCryptSetProperty(
+                hAlg,
+                BCryptPropertyStrings.BCRYPT_CHAINING_MODE,
+                cipherMode,
+                (cipherMode.Length + 1) * 2,
+                0
+            );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -103,9 +120,17 @@ namespace Internal.NativeCrypto
             }
         }
 
-        public static void SetEffectiveKeyLength(this SafeAlgorithmHandle hAlg, int effectiveKeyLength)
+        public static void SetEffectiveKeyLength(
+            this SafeAlgorithmHandle hAlg,
+            int effectiveKeyLength
+        )
         {
-            NTSTATUS ntStatus = Interop.BCryptSetIntProperty(hAlg, BCryptPropertyStrings.BCRYPT_EFFECTIVE_KEY_LENGTH, ref effectiveKeyLength, 0);
+            NTSTATUS ntStatus = Interop.BCryptSetIntProperty(
+                hAlg,
+                BCryptPropertyStrings.BCRYPT_EFFECTIVE_KEY_LENGTH,
+                ref effectiveKeyLength,
+                0
+            );
 
             if (ntStatus != NTSTATUS.STATUS_SUCCESS)
             {
@@ -120,23 +145,54 @@ namespace Internal.NativeCrypto
         }
     }
 
-
     internal static partial class Cng
     {
         internal static partial class Interop
         {
             [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-            public static partial NTSTATUS BCryptOpenAlgorithmProvider(out SafeAlgorithmHandle phAlgorithm, string pszAlgId, string? pszImplementation, int dwFlags);
+            public static partial NTSTATUS BCryptOpenAlgorithmProvider(
+                out SafeAlgorithmHandle phAlgorithm,
+                string pszAlgId,
+                string? pszImplementation,
+                int dwFlags
+            );
 
             [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-            public static partial NTSTATUS BCryptSetProperty(SafeAlgorithmHandle hObject, string pszProperty, string pbInput, int cbInput, int dwFlags);
+            public static partial NTSTATUS BCryptSetProperty(
+                SafeAlgorithmHandle hObject,
+                string pszProperty,
+                string pbInput,
+                int cbInput,
+                int dwFlags
+            );
 
-            [LibraryImport(Libraries.BCrypt, EntryPoint = "BCryptSetProperty", StringMarshalling = StringMarshalling.Utf16)]
-            private static partial NTSTATUS BCryptSetIntPropertyPrivate(SafeBCryptHandle hObject, string pszProperty, ref int pdwInput, int cbInput, int dwFlags);
+            [LibraryImport(
+                Libraries.BCrypt,
+                EntryPoint = "BCryptSetProperty",
+                StringMarshalling = StringMarshalling.Utf16
+            )]
+            private static partial NTSTATUS BCryptSetIntPropertyPrivate(
+                SafeBCryptHandle hObject,
+                string pszProperty,
+                ref int pdwInput,
+                int cbInput,
+                int dwFlags
+            );
 
-            public static unsafe NTSTATUS BCryptSetIntProperty(SafeBCryptHandle hObject, string pszProperty, ref int pdwInput, int dwFlags)
+            public static unsafe NTSTATUS BCryptSetIntProperty(
+                SafeBCryptHandle hObject,
+                string pszProperty,
+                ref int pdwInput,
+                int dwFlags
+            )
             {
-                return BCryptSetIntPropertyPrivate(hObject, pszProperty, ref pdwInput, sizeof(int), dwFlags);
+                return BCryptSetIntPropertyPrivate(
+                    hObject,
+                    pszProperty,
+                    ref pdwInput,
+                    sizeof(int),
+                    dwFlags
+                );
             }
         }
     }

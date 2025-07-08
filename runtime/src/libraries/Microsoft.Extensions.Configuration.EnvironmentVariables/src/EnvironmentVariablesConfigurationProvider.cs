@@ -42,8 +42,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
         /// <summary>
         /// Loads the environment variables.
         /// </summary>
-        public override void Load() =>
-            Load(Environment.GetEnvironmentVariables());
+        public override void Load() => Load(Environment.GetEnvironmentVariables());
 
         /// <summary>
         /// Generates a string representing this provider name and relevant details.
@@ -73,19 +72,50 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
 
                     if (key.StartsWith(MySqlServerPrefix, StringComparison.OrdinalIgnoreCase))
                     {
-                        HandleMatchedConnectionStringPrefix(data, MySqlServerPrefix, "MySql.Data.MySqlClient", key, value);
+                        HandleMatchedConnectionStringPrefix(
+                            data,
+                            MySqlServerPrefix,
+                            "MySql.Data.MySqlClient",
+                            key,
+                            value
+                        );
                     }
-                    else if (key.StartsWith(SqlAzureServerPrefix, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        key.StartsWith(SqlAzureServerPrefix, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        HandleMatchedConnectionStringPrefix(data, SqlAzureServerPrefix, "System.Data.SqlClient", key, value);
+                        HandleMatchedConnectionStringPrefix(
+                            data,
+                            SqlAzureServerPrefix,
+                            "System.Data.SqlClient",
+                            key,
+                            value
+                        );
                     }
                     else if (key.StartsWith(SqlServerPrefix, StringComparison.OrdinalIgnoreCase))
                     {
-                        HandleMatchedConnectionStringPrefix(data, SqlServerPrefix, "System.Data.SqlClient", key, value);
+                        HandleMatchedConnectionStringPrefix(
+                            data,
+                            SqlServerPrefix,
+                            "System.Data.SqlClient",
+                            key,
+                            value
+                        );
                     }
-                    else if (key.StartsWith(CustomConnectionStringPrefix, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        key.StartsWith(
+                            CustomConnectionStringPrefix,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        HandleMatchedConnectionStringPrefix(data, CustomConnectionStringPrefix, null, key, value);
+                        HandleMatchedConnectionStringPrefix(
+                            data,
+                            CustomConnectionStringPrefix,
+                            null,
+                            key,
+                            value
+                        );
                     }
                     else
                     {
@@ -101,19 +131,39 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
             Data = data;
         }
 
-        private void HandleMatchedConnectionStringPrefix(Dictionary<string, string?> data, string connectionStringPrefix, string? provider, string fullKey, string? value)
+        private void HandleMatchedConnectionStringPrefix(
+            Dictionary<string, string?> data,
+            string connectionStringPrefix,
+            string? provider,
+            string fullKey,
+            string? value
+        )
         {
-            string normalizedKeyWithoutConnectionStringPrefix = Normalize(fullKey.Substring(connectionStringPrefix.Length));
+            string normalizedKeyWithoutConnectionStringPrefix = Normalize(
+                fullKey.Substring(connectionStringPrefix.Length)
+            );
 
             // Add the key-value pair for connection string, and optionally provider name
-            AddIfNormalizedKeyMatchesPrefix(data, $"ConnectionStrings:{normalizedKeyWithoutConnectionStringPrefix}", value);
+            AddIfNormalizedKeyMatchesPrefix(
+                data,
+                $"ConnectionStrings:{normalizedKeyWithoutConnectionStringPrefix}",
+                value
+            );
             if (provider != null)
             {
-                AddIfNormalizedKeyMatchesPrefix(data, $"ConnectionStrings:{normalizedKeyWithoutConnectionStringPrefix}_ProviderName", provider);
+                AddIfNormalizedKeyMatchesPrefix(
+                    data,
+                    $"ConnectionStrings:{normalizedKeyWithoutConnectionStringPrefix}_ProviderName",
+                    provider
+                );
             }
         }
 
-        private void AddIfNormalizedKeyMatchesPrefix(Dictionary<string, string?> data, string normalizedKey, string? value)
+        private void AddIfNormalizedKeyMatchesPrefix(
+            Dictionary<string, string?> data,
+            string normalizedKey,
+            string? value
+        )
         {
             if (normalizedKey.StartsWith(_normalizedPrefix, StringComparison.OrdinalIgnoreCase))
             {
@@ -121,6 +171,7 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables
             }
         }
 
-        private static string Normalize(string key) => key.Replace("__", ConfigurationPath.KeyDelimiter);
+        private static string Normalize(string key) =>
+            key.Replace("__", ConfigurationPath.KeyDelimiter);
     }
 }

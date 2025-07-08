@@ -1,10 +1,15 @@
-<Type Name="LdapUnsolicitedNotificationListener" FullName="Novell.Directory.Ldap.LdapUnsolicitedNotificationListener">
-  <TypeSignature Language="C#" Value="public abstract interface LdapUnsolicitedNotificationListener" />
+<Type
+  Name="LdapUnsolicitedNotificationListener"
+  FullName="Novell.Directory.Ldap.LdapUnsolicitedNotificationListener"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public abstract interface LdapUnsolicitedNotificationListener"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -43,7 +48,10 @@
   </AssemblyInfo>
   <Members>
     <Member MemberName="messageReceived">
-      <MemberSignature Language="C#" Value="public virtual abstract void messageReceived(Novell.Directory.Ldap.LdapExtendedResponse msg)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract void messageReceived(Novell.Directory.Ldap.LdapExtendedResponse msg)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

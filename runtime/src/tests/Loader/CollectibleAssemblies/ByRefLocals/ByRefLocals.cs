@@ -15,7 +15,9 @@ public class Program
     class TestALC : AssemblyLoadContext
     {
         AssemblyLoadContext m_parentALC;
-        public TestALC(AssemblyLoadContext parentALC) : base("test", isCollectible: true)
+
+        public TestALC(AssemblyLoadContext parentALC)
+            : base("test", isCollectible: true)
         {
             m_parentALC = parentALC;
         }
@@ -29,7 +31,10 @@ public class Program
     [Fact]
     public static int TestEntryPoint()
     {
-        var holdResult = HoldAssembliesAliveThroughByRefFields(out GCHandle gch1, out GCHandle gch2);
+        var holdResult = HoldAssembliesAliveThroughByRefFields(
+            out GCHandle gch1,
+            out GCHandle gch2
+        );
         if (holdResult != 100)
             return holdResult;
 
@@ -92,7 +97,12 @@ public class Program
     {
         var currentALC = AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly());
         var alc = new TestALC(currentALC);
-        var a = alc.LoadFromAssemblyPath(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "ByRefLocalsUnloaded.dll"));
+        var a = alc.LoadFromAssemblyPath(
+            Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "ByRefLocalsUnloaded.dll"
+            )
+        );
         gchToAssembly = GCHandle.Alloc(a, GCHandleType.WeakTrackResurrection);
 
         var spanAccessor = (IReturnSpan)Activator.CreateInstance(a.GetType("SpanAccessor"));
@@ -105,21 +115,38 @@ public class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static ReadOnlySpan<byte> CreateAssemblyDynamically(out GCHandle gchToAssembly)
     {
-        AssemblyBuilder ab =
-            AssemblyBuilder.DefineDynamicAssembly(
+        AssemblyBuilder ab = AssemblyBuilder.DefineDynamicAssembly(
             new AssemblyName("tempAssembly"),
-            AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilderAccess.RunAndCollect
+        );
         ModuleBuilder modb = ab.DefineDynamicModule("tempAssembly.dll");
 
-        var byRefAccessField = modb.DefineInitializedData("RawBytes", new byte[] {1,2,3,4,5}, FieldAttributes.Public | FieldAttributes.Static);
+        var byRefAccessField = modb.DefineInitializedData(
+            "RawBytes",
+            new byte[] { 1, 2, 3, 4, 5 },
+            FieldAttributes.Public | FieldAttributes.Static
+        );
         modb.CreateGlobalFunctions();
 
-        TypeBuilder tb = modb.DefineType("GetSpanType", TypeAttributes.Class, typeof(object), new Type[]{typeof(IReturnSpan)});
-        var mb = tb.DefineMethod("GetSpan", MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual, typeof(ReadOnlySpan<byte>), new Type[]{});
+        TypeBuilder tb = modb.DefineType(
+            "GetSpanType",
+            TypeAttributes.Class,
+            typeof(object),
+            new Type[] { typeof(IReturnSpan) }
+        );
+        var mb = tb.DefineMethod(
+            "GetSpan",
+            MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual,
+            typeof(ReadOnlySpan<byte>),
+            new Type[] { }
+        );
         ILGenerator myMethodIL = mb.GetILGenerator();
         myMethodIL.Emit(OpCodes.Ldsflda, byRefAccessField);
         myMethodIL.Emit(OpCodes.Ldc_I4_4);
-        myMethodIL.Emit(OpCodes.Newobj, typeof(ReadOnlySpan<byte>).GetConstructor(new Type[]{typeof(void*), typeof(int)}));
+        myMethodIL.Emit(
+            OpCodes.Newobj,
+            typeof(ReadOnlySpan<byte>).GetConstructor(new Type[] { typeof(void*), typeof(int) })
+        );
         myMethodIL.Emit(OpCodes.Ret);
 
         var getSpanType = tb.CreateType();
@@ -130,5 +157,4 @@ public class Program
 
         return spanAccessor.GetSpan();
     }
-
 }

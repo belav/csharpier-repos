@@ -15,29 +15,26 @@ namespace System.Security.Cryptography.X509Certificates
         private IStorePal? _storePal;
 
         public X509Store()
-            : this("MY", StoreLocation.CurrentUser)
-        {
-        }
+            : this("MY", StoreLocation.CurrentUser) { }
 
         public X509Store(string storeName)
-            : this(storeName, StoreLocation.CurrentUser)
-        {
-        }
+            : this(storeName, StoreLocation.CurrentUser) { }
 
         public X509Store(StoreName storeName)
-            : this(storeName, StoreLocation.CurrentUser)
-        {
-        }
+            : this(storeName, StoreLocation.CurrentUser) { }
 
         public X509Store(StoreLocation storeLocation)
-            : this("MY", storeLocation)
-        {
-        }
+            : this("MY", storeLocation) { }
 
         public X509Store(StoreName storeName, StoreLocation storeLocation)
         {
-            if (storeLocation != StoreLocation.CurrentUser && storeLocation != StoreLocation.LocalMachine)
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, nameof(storeLocation)));
+            if (
+                storeLocation != StoreLocation.CurrentUser
+                && storeLocation != StoreLocation.LocalMachine
+            )
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, nameof(storeLocation))
+                );
 
             Name = storeName switch
             {
@@ -49,7 +46,9 @@ namespace System.Security.Cryptography.X509Certificates
                 StoreName.Root => RootStoreName,
                 StoreName.TrustedPeople => "TrustedPeople",
                 StoreName.TrustedPublisher => "TrustedPublisher",
-                _ => throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, nameof(storeName))),
+                _ => throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, nameof(storeName))
+                ),
             };
             Location = storeLocation;
         }
@@ -62,19 +61,27 @@ namespace System.Security.Cryptography.X509Certificates
 
         public X509Store(string storeName, StoreLocation storeLocation)
         {
-            if (storeLocation != StoreLocation.CurrentUser && storeLocation != StoreLocation.LocalMachine)
-                throw new ArgumentException(SR.Format(SR.Arg_EnumIllegalVal, nameof(storeLocation)));
+            if (
+                storeLocation != StoreLocation.CurrentUser
+                && storeLocation != StoreLocation.LocalMachine
+            )
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_EnumIllegalVal, nameof(storeLocation))
+                );
 
             Location = storeLocation;
             Name = storeName;
         }
 
-        public X509Store(string storeName, System.Security.Cryptography.X509Certificates.StoreLocation storeLocation, System.Security.Cryptography.X509Certificates.OpenFlags flags)
+        public X509Store(
+            string storeName,
+            System.Security.Cryptography.X509Certificates.StoreLocation storeLocation,
+            System.Security.Cryptography.X509Certificates.OpenFlags flags
+        )
             : this(storeName, storeLocation)
         {
             Open(flags);
         }
-
 
         public X509Store(IntPtr storeHandle)
         {
@@ -100,7 +107,6 @@ namespace System.Security.Cryptography.X509Certificates
         public StoreLocation Location { get; private set; }
 
         public string? Name { get; private set; }
-
 
         public void Open(OpenFlags flags)
         {

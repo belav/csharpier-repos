@@ -20,7 +20,9 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_LongProvider_Throws()
         {
-            Assert.Throws<ArgumentException>(() => new OleDbConnection("provider=" + new string('c', 256)));
+            Assert.Throws<ArgumentException>(() =>
+                new OleDbConnection("provider=" + new string('c', 256))
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
@@ -32,21 +34,25 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_MissingUdlFile_Throws()
         {
-            Assert.Throws<ArgumentException>(() => new OleDbConnection(@"file name = missing-file.udl"));
+            Assert.Throws<ArgumentException>(() =>
+                new OleDbConnection(@"file name = missing-file.udl")
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_AsynchronousNotSupported_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                new OleDbConnection(ConnectionString + ";asynchronous processing=true"));
+                new OleDbConnection(ConnectionString + ";asynchronous processing=true")
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_InvalidConnectTimeout_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                new OleDbConnection(ConnectionString + ";connect timeout=-2"));
+                new OleDbConnection(ConnectionString + ";connect timeout=-2")
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
@@ -80,7 +86,8 @@ namespace System.Data.OleDb.Tests
         public void StateChange_ChangeState_TriggersEvent()
         {
             int timesCalled = 0;
-            Action<object, StateChangeEventArgs> OnStateChange = (sender, args) => {
+            Action<object, StateChangeEventArgs> OnStateChange = (sender, args) =>
+            {
                 timesCalled++;
             };
             connection.StateChange += new StateChangeEventHandler(OnStateChange);
@@ -93,7 +100,9 @@ namespace System.Data.OleDb.Tests
         public void BeginTransaction_InvalidIsolationLevel_Throws()
         {
             transaction.Dispose();
-            Assert.Throws<ArgumentOutOfRangeException>(() => connection.BeginTransaction((IsolationLevel)0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                connection.BeginTransaction((IsolationLevel)0)
+            );
         }
 
         [ConditionalFact(Helpers.IsAceDriverAvailable)]
@@ -110,7 +119,8 @@ namespace System.Data.OleDb.Tests
         public void GetDefaults_AnyGivenState_DoesNotThrow()
         {
             const int DefaultTimeout = 15;
-            Action VerifyDefaults = () => {
+            Action VerifyDefaults = () =>
+            {
                 Assert.Equal(DefaultTimeout, connection.ConnectionTimeout);
                 Assert.Contains(connection.DataSource, TestDirectory);
                 Assert.Empty(connection.Database);
@@ -152,7 +162,10 @@ namespace System.Data.OleDb.Tests
 
         [ConditionalTheory(Helpers.IsDriverAvailable)]
         [InlineData(nameof(DbMetaDataCollectionNames.MetaDataCollections), "CollectionName")]
-        [InlineData(nameof(DbMetaDataCollectionNames.DataSourceInformation), "CompositeIdentifierSeparatorPattern")]
+        [InlineData(
+            nameof(DbMetaDataCollectionNames.DataSourceInformation),
+            "CompositeIdentifierSeparatorPattern"
+        )]
         [InlineData(nameof(DbMetaDataCollectionNames.DataTypes), "TypeName")]
         public void GetSchema(string tableName, string columnName)
         {
@@ -173,7 +186,8 @@ namespace System.Data.OleDb.Tests
             const string MissingColumn = "MissingColumn";
             AssertExtensions.Throws<ArgumentException>(
                 () => schema.Rows[0].Field<IEnumerable<char>>(MissingColumn),
-                $"Column '{MissingColumn}' does not belong to table {tableName}.");
+                $"Column '{MissingColumn}' does not belong to table {tableName}."
+            );
         }
 
         [OuterLoop]
@@ -186,7 +200,9 @@ namespace System.Data.OleDb.Tests
             command.CommandText = @"CREATE TABLE t2.csv (CustomerName NVARCHAR(40));";
             command.ExecuteNonQuery();
             DataTable listedTables = connection.GetOleDbSchemaTable(
-                OleDbSchemaGuid.Tables, new object[] {null, null, null, "Table"});
+                OleDbSchemaGuid.Tables,
+                new object[] { null, null, null, "Table" }
+            );
 
             Assert.NotNull(listedTables);
             Assert.Equal(2, listedTables.Rows.Count);
@@ -207,10 +223,10 @@ namespace System.Data.OleDb.Tests
             Assert.Throws<ArgumentException>(() => connection.ChangeDatabase(string.Empty));
             AssertExtensions.Throws<InvalidOperationException>(
                 () => connection.ChangeDatabase("ReadOnlyShouldThrow"),
-                "The 'current catalog' property was read-only, or the consumer attempted to set values of properties " +
-                "in the Initialization property group after the data source object was initialized. " +
-                "Consumers can set the value of a read-only property to its current value. " +
-                "This status is also returned if a settable column property could not be set for the particular column."
+                "The 'current catalog' property was read-only, or the consumer attempted to set values of properties "
+                    + "in the Initialization property group after the data source object was initialized. "
+                    + "Consumers can set the value of a read-only property to its current value. "
+                    + "This status is also returned if a settable column property could not be set for the particular column."
             );
         }
 
@@ -218,7 +234,10 @@ namespace System.Data.OleDb.Tests
         [MemberData(nameof(ManufacturedOleDbSchemaGuids))]
         public void GetOleDbSchemaTable_NoRestrictions_Success(Guid oleDbSchemaGuid)
         {
-            DataTable oleDbSchemaTable = connection.GetOleDbSchemaTable(oleDbSchemaGuid, restrictions: null);
+            DataTable oleDbSchemaTable = connection.GetOleDbSchemaTable(
+                oleDbSchemaGuid,
+                restrictions: null
+            );
             Assert.NotNull(oleDbSchemaTable);
             Assert.NotNull(oleDbSchemaTable.Rows);
             foreach (DataRow dataRow in oleDbSchemaTable.Rows)
@@ -232,7 +251,9 @@ namespace System.Data.OleDb.Tests
         public void GetOleDbSchemaTable_SomeRestrictions_Throws(Guid oleDbSchemaGuid)
         {
             object[] restrictions = new object[] { null };
-            Assert.Throws<ArgumentException>(() => connection.GetOleDbSchemaTable(oleDbSchemaGuid, restrictions));
+            Assert.Throws<ArgumentException>(() =>
+                connection.GetOleDbSchemaTable(oleDbSchemaGuid, restrictions)
+            );
         }
 
         public static IEnumerable<object[]> ManufacturedOleDbSchemaGuids
@@ -266,26 +287,34 @@ namespace System.Data.OleDb.Tests
         public void Ctor_InvalidUdlFile_Throws(int start, int length)
         {
             string udlFile = GetTestFilePath() + ".udl";
-            Span<string> lines = new string[] {
+            Span<string> lines = new string[]
+            {
                 "[oledb]",
                 "; Everything after this line is an OLE DB initstring",
-                ConnectionString }.AsSpan();
+                ConnectionString,
+            }.AsSpan();
             File.WriteAllLines(udlFile, lines.Slice(start, length).ToArray());
 
             AssertExtensions.Throws<ArgumentException>(
                 () => new OleDbConnection(@"file name = " + udlFile),
-                "Invalid UDL file.");
+                "Invalid UDL file."
+            );
         }
 
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void Ctor_ValidUdlFile_Success()
         {
             string udlFile = GetTestFilePath() + ".udl";
-            File.WriteAllLines(udlFile, new string[] {
-                "[oledb]",
-                "; Everything after this line is an OLE DB initstring",
-                ConnectionString
-            }, System.Text.Encoding.Unicode);
+            File.WriteAllLines(
+                udlFile,
+                new string[]
+                {
+                    "[oledb]",
+                    "; Everything after this line is an OLE DB initstring",
+                    ConnectionString,
+                },
+                System.Text.Encoding.Unicode
+            );
             connection.Dispose();
             connection = new OleDbConnection(@"file name = " + udlFile);
             Assert.NotNull(connection);
@@ -297,7 +326,8 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void OleDbConnectionStringBuilder_Success()
         {
-            var connectionStringBuilder = (OleDbConnectionStringBuilder)OleDbFactory.Instance.CreateConnectionStringBuilder();
+            var connectionStringBuilder = (OleDbConnectionStringBuilder)
+                OleDbFactory.Instance.CreateConnectionStringBuilder();
             Assert.Empty(connectionStringBuilder.Provider);
             Assert.True(connectionStringBuilder.ContainsKey("Provider"));
             Assert.Empty((string)connectionStringBuilder["Provider"]);
@@ -317,7 +347,7 @@ namespace System.Data.OleDb.Tests
             connectionStringBuilder = new OleDbConnectionStringBuilder(@"file name = " + udlFile);
             Assert.Equal(udlFile, connectionStringBuilder.FileName);
 
-            connectionStringBuilder  = new OleDbConnectionStringBuilder();
+            connectionStringBuilder = new OleDbConnectionStringBuilder();
             connectionStringBuilder.Provider = "myProvider";
             connectionStringBuilder.DataSource = "myServer";
             connectionStringBuilder.FileName = "myAccessFile.mdb";
@@ -325,10 +355,19 @@ namespace System.Data.OleDb.Tests
             connectionStringBuilder.OleDbServices = 0;
 
             Assert.Equal(connectionStringBuilder.Provider, connectionStringBuilder["Provider"]);
-            Assert.Equal(connectionStringBuilder.DataSource, connectionStringBuilder["Data Source"]);
+            Assert.Equal(
+                connectionStringBuilder.DataSource,
+                connectionStringBuilder["Data Source"]
+            );
             Assert.Equal(connectionStringBuilder.FileName, connectionStringBuilder["File Name"]);
-            Assert.Equal(connectionStringBuilder.OleDbServices, connectionStringBuilder["OLE DB Services"]);
-            Assert.Equal(connectionStringBuilder.PersistSecurityInfo, connectionStringBuilder["Persist Security Info"]);
+            Assert.Equal(
+                connectionStringBuilder.OleDbServices,
+                connectionStringBuilder["OLE DB Services"]
+            );
+            Assert.Equal(
+                connectionStringBuilder.PersistSecurityInfo,
+                connectionStringBuilder["Persist Security Info"]
+            );
 
             connectionStringBuilder["CustomKey"] = "CustomValue";
             string connectionString = connectionStringBuilder.ToString();
@@ -336,8 +375,14 @@ namespace System.Data.OleDb.Tests
             Assert.Contains(@"Provider=" + connectionStringBuilder.Provider, connectionString);
             Assert.Contains(@"Data Source=" + connectionStringBuilder.DataSource, connectionString);
             Assert.Contains(@"File Name=" + connectionStringBuilder.FileName, connectionString);
-            Assert.Contains(@"OLE DB Services=" + connectionStringBuilder.OleDbServices, connectionString);
-            Assert.Contains(@"Persist Security Info=" + connectionStringBuilder.PersistSecurityInfo, connectionString);
+            Assert.Contains(
+                @"OLE DB Services=" + connectionStringBuilder.OleDbServices,
+                connectionString
+            );
+            Assert.Contains(
+                @"Persist Security Info=" + connectionStringBuilder.PersistSecurityInfo,
+                connectionString
+            );
             Assert.Contains(@"CustomKey=" + connectionStringBuilder["CustomKey"], connectionString);
 
             connectionStringBuilder["OLE DB Services"] = 3;
@@ -411,7 +456,7 @@ namespace System.Data.OleDb.Tests
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder
             {
                 Provider = provider,
-                DataSource = "myDB.mdb"
+                DataSource = "myDB.mdb",
             };
             string connStr = builder.ConnectionString;
             Assert.Equal($"Provider={provider};Data Source=myDB.mdb", connStr);

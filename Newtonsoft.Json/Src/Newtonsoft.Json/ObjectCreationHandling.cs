@@ -43,6 +43,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Always create new objects.
         /// </summary>
-        Replace = 2
+        Replace = 2,
     }
 }

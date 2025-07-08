@@ -12,9 +12,9 @@ namespace System.ServiceModel.Dispatcher
     using System.Xml.XPath;
 
     /// <summary>
-    /// A navigator is a cursor over the nodes in a DOM, where each node is assigned a unique position. 
-    /// A node is a (navigator, position) pair. 
-    /// </summary>    
+    /// A navigator is a cursor over the nodes in a DOM, where each node is assigned a unique position.
+    /// A node is a (navigator, position) pair.
+    /// </summary>
     internal struct QueryNode
     {
         SeekableXPathNavigator node;
@@ -40,12 +40,10 @@ namespace System.ServiceModel.Dispatcher
             this.nodePosition = nodePosition;
         }
 #endif
+
         internal string LocalName
         {
-            get
-            {
-                return this.node.GetLocalName(this.nodePosition);
-            }
+            get { return this.node.GetLocalName(this.nodePosition); }
         }
 
         /// <summary>
@@ -53,33 +51,27 @@ namespace System.ServiceModel.Dispatcher
         /// </summary>
         internal string Name
         {
-            get
-            {
-                return this.node.GetName(this.nodePosition);
-            }
+            get { return this.node.GetName(this.nodePosition); }
         }
+
         /// <summary>
         /// Return the node's namespace
         /// </summary>
         internal string Namespace
         {
-            get
-            {
-                return this.node.GetNamespace(this.nodePosition);
-            }
+            get { return this.node.GetNamespace(this.nodePosition); }
         }
+
         /// <summary>
         /// Return this query node's underlying Node
         /// </summary>
         internal SeekableXPathNavigator Node
         {
-            get
-            {
-                return this.node;
-            }
+            get { return this.node; }
         }
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal long Position
         {
@@ -89,40 +81,35 @@ namespace System.ServiceModel.Dispatcher
                 return this.nodePosition;
             }
         }
+
 #if NO
         /// <summary>
         /// This node's type
         /// </summary>
         internal QueryNodeType Type
         {
-            get
-            {
-                return QueryDataModel.GetNodeType(this.node.GetNodeType(this.nodePosition));
-            }
+            get { return QueryDataModel.GetNodeType(this.node.GetNodeType(this.nodePosition)); }
         }
 #endif
+
         /// <summary>
         /// This node's string value
         /// </summary>
         internal string Value
         {
-            get
-            {
-                return this.node.GetValue(this.nodePosition);
-            }
+            get { return this.node.GetValue(this.nodePosition); }
         }
+
 #if NO
         /// <summary>
         /// Raw xpath node type
         /// </summary>
         internal XPathNodeType XPathNodeType
         {
-            get
-            {
-                return this.node.GetNodeType(this.nodePosition);
-            }
-        }        
+            get { return this.node.GetNodeType(this.nodePosition); }
+        }
 #endif
+
         /// <summary>
         /// Move this node's navigator to its position
         /// </summary>
@@ -145,34 +132,38 @@ namespace System.ServiceModel.Dispatcher
 #if NO
     internal class NodeSequenceItemObjectComparer : IComparer
     {
-        internal NodeSequenceItemObjectComparer()
-        {
-        }
+        internal NodeSequenceItemObjectComparer() { }
 
         public int Compare(object obj1, object obj2)
         {
             NodeSequenceItem item1 = (NodeSequenceItem)obj1;
             NodeSequenceItem item2 = (NodeSequenceItem)obj2;
-            
-            XmlNodeOrder order = item1.Node.Node.ComparePosition(item1.Node.Position, item2.Node.Position);
+
+            XmlNodeOrder order = item1.Node.Node.ComparePosition(
+                item1.Node.Position,
+                item2.Node.Position
+            );
             int ret;
-            switch(order)
+            switch (order)
             {
                 case XmlNodeOrder.Before:
                     ret = -1;
                     break;
-                    
+
                 case XmlNodeOrder.Same:
                     ret = 0;
                     break;
-                    
+
                 case XmlNodeOrder.After:
                     ret = 1;
                     break;
-                    
+
                 case XmlNodeOrder.Unknown:
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XPathException(SR.GetString(SR.QueryNotSortable)), TraceEventType.Critical);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XPathException(SR.GetString(SR.QueryNotSortable)),
+                        TraceEventType.Critical
+                    );
             }
 
             return ret;
@@ -182,36 +173,40 @@ namespace System.ServiceModel.Dispatcher
     // Used to sort in document order
     internal class NodeSequenceItemComparer : IComparer<NodeSequenceItem>
     {
-        internal NodeSequenceItemComparer()
-        {
-        }
-         
+        internal NodeSequenceItemComparer() { }
+
         public int Compare(NodeSequenceItem item1, NodeSequenceItem item2)
         {
-            XmlNodeOrder order = item1.Node.Node.ComparePosition(item1.Node.Position, item2.Node.Position);
+            XmlNodeOrder order = item1.Node.Node.ComparePosition(
+                item1.Node.Position,
+                item2.Node.Position
+            );
             int ret;
-            switch(order)
+            switch (order)
             {
                 case XmlNodeOrder.Before:
                     ret = -1;
                     break;
-                    
+
                 case XmlNodeOrder.Same:
                     ret = 0;
                     break;
-                    
+
                 case XmlNodeOrder.After:
                     ret = 1;
                     break;
-                    
+
                 case XmlNodeOrder.Unknown:
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XPathException(SR.GetString(SR.QueryNotSortable)), TraceEventType.Critical);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XPathException(SR.GetString(SR.QueryNotSortable)),
+                        TraceEventType.Critical
+                    );
             }
 
             return ret;
         }
-        
+
         public bool Equals(NodeSequenceItem item1, NodeSequenceItem item2)
         {
             return Compare(item1, item2) == 0;
@@ -223,12 +218,11 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 #endif
+
     // Used to sort in document order
     internal class QueryNodeComparer : IComparer<QueryNode>
     {
-        public QueryNodeComparer()
-        {
-        }
+        public QueryNodeComparer() { }
 
         public int Compare(QueryNode item1, QueryNode item2)
         {
@@ -250,7 +244,9 @@ namespace System.ServiceModel.Dispatcher
 
                 case XmlNodeOrder.Unknown:
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new XPathException(SR.GetString(SR.QueryNotSortable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new XPathException(SR.GetString(SR.QueryNotSortable))
+                    );
             }
 
             return ret;
@@ -276,22 +272,13 @@ namespace System.ServiceModel.Dispatcher
 
         internal NodeSequenceItemFlags Flags
         {
-            get
-            {
-                return this.flags;
-            }
-            set
-            {
-                this.flags = value;
-            }
+            get { return this.flags; }
+            set { this.flags = value; }
         }
 
         internal bool Last
         {
-            get
-            {
-                return (0 != (NodeSequenceItemFlags.NodesetLast & this.flags));
-            }
+            get { return (0 != (NodeSequenceItemFlags.NodesetLast & this.flags)); }
             set
             {
                 if (value)
@@ -307,66 +294,39 @@ namespace System.ServiceModel.Dispatcher
 
         internal string LocalName
         {
-            get
-            {
-                return this.node.LocalName;
-            }
+            get { return this.node.LocalName; }
         }
 
         internal string Name
         {
-            get
-            {
-                return this.node.Name;
-            }
+            get { return this.node.Name; }
         }
 
         internal string Namespace
         {
-            get
-            {
-                return this.node.Namespace;
-            }
+            get { return this.node.Namespace; }
         }
 
         internal QueryNode Node
         {
-            get
-            {
-                return this.node;
-            }
+            get { return this.node; }
 #if NO
-            set
-            {
-                this.node = value;
-            }
+            set { this.node = value; }
 #endif
         }
 
         internal int Position
         {
-            get
-            {
-                return this.position;
-            }
+            get { return this.position; }
 #if NO
-            set
-            {
-                this.position = value;
-            }
+            set { this.position = value; }
 #endif
         }
 
         internal int Size
         {
-            get
-            {
-                return this.size;
-            }
-            set
-            {
-                this.size = value;
-            }
+            get { return this.size; }
+            set { this.size = value; }
         }
 
         internal bool Compare(double dblVal, RelationOperator op)
@@ -481,14 +441,10 @@ namespace System.ServiceModel.Dispatcher
         static readonly QueryNodeComparer staticQueryNodeComparerInstance = new QueryNodeComparer();
 
         internal NodeSequence()
-            : this(8, null)
-        {
-        }
+            : this(8, null) { }
 
         internal NodeSequence(int capacity)
-            : this(capacity, null)
-        {
-        }
+            : this(capacity, null) { }
 
         internal NodeSequence(int capacity, ProcessingContext ownerContext)
         {
@@ -503,26 +459,30 @@ namespace System.ServiceModel.Dispatcher
         internal NodeSequence(int capacity, ProcessingContext ownerContext, XPathNodeIterator iter)
             : this(capacity, ownerContext)
         {
-            while(iter.MoveNext())
+            while (iter.MoveNext())
             {
                 SeekableXPathNavigator nav = iter.Current as SeekableXPathNavigator;
-                if(nav != null)
+                if (nav != null)
                 {
                     Add(nav);
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryMustBeSeekable)), TraceEventType.Critical);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryProcessingException(
+                            QueryProcessingError.Unexpected,
+                            SR.GetString(SR.QueryMustBeSeekable)
+                        ),
+                        TraceEventType.Critical
+                    );
                 }
             }
         }
 #endif
+
         internal int Count
         {
-            get
-            {
-                return this.count;
-            }
+            get { return this.count; }
 #if NO
             set
             {
@@ -534,26 +494,17 @@ namespace System.ServiceModel.Dispatcher
 
         internal NodeSequenceItem this[int index]
         {
-            get
-            {
-                return this.items[index];
-            }
+            get { return this.items[index]; }
         }
 
         internal NodeSequenceItem[] Items
         {
-            get
-            {
-                return this.items;
-            }
+            get { return this.items; }
         }
 
         internal bool IsNotEmpty
         {
-            get
-            {
-                return (this.count > 0);
-            }
+            get { return (this.count > 0); }
         }
 
         internal string LocalName
@@ -597,36 +548,22 @@ namespace System.ServiceModel.Dispatcher
 
         internal NodeSequence Next
         {
-            get
-            {
-                return this.next;
-            }
-            set
-            {
-                this.next = value;
-            }
+            get { return this.next; }
+            set { this.next = value; }
         }
 
         internal ProcessingContext OwnerContext
         {
-            get
-            {
-                return this.ownerContext;
-            }
-            set
-            {
-                this.ownerContext = value;
-            }
+            get { return this.ownerContext; }
+            set { this.ownerContext = value; }
         }
 #if NO
         internal int NodesetStartAt
         {
-            get
-            {
-                return -this.sizePosition;
-            }
+            get { return -this.sizePosition; }
         }
 #endif
+
         internal void Add(XPathNodeIterator iter)
         {
             while (iter.MoveNext())
@@ -638,7 +575,12 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryMustBeSeekable)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.Unexpected,
+                            SR.GetString(SR.QueryMustBeSeekable)
+                        )
+                    );
                 }
             }
         }
@@ -700,7 +642,8 @@ namespace System.ServiceModel.Dispatcher
 
             this.items[this.count++] = item;
         }
-#if NO 
+
+#if NO
         internal void Add(NodeSequence seq)
         {
             int newCount = this.count + seq.count;
@@ -714,6 +657,7 @@ namespace System.ServiceModel.Dispatcher
             this.count += seq.count;
         }
 #endif
+
         internal bool CanReuse(ProcessingContext context)
         {
             return (this.count == 1 && this.ownerContext == context && this.refCount == 1);
@@ -780,6 +724,7 @@ namespace System.ServiceModel.Dispatcher
             }
             return false;
         }
+
 #if NO
         void EnsureCapacity()
         {
@@ -798,6 +743,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 #endif
+
         internal bool Equals(string val)
         {
             Fx.Assert(null != val, "");
@@ -869,29 +815,30 @@ namespace System.ServiceModel.Dispatcher
         // Assumes list is flat and sorted
         internal void RemoveDuplicates()
         {
-            if(this.count < 2)
+            if (this.count < 2)
             {
                 return;
             }
-            
+
             int last = 0;
-            for(int next = 1; next < this.count; ++next)
+            for (int next = 1; next < this.count; ++next)
             {
-                if(Comparer.Compare(this.items[last], this.items[next]) != 0)
+                if (Comparer.Compare(this.items[last], this.items[next]) != 0)
                 {
                     ++last;
-                    if(last != next)
+                    if (last != next)
                     {
                         this.items[last] = this.items[next];
                     }
                 }
             }
-            
+
             this.count = last + 1;
 
             RenumberItems();
         }
 #endif
+
         void RenumberItems()
         {
             if (this.count > 0)
@@ -903,6 +850,7 @@ namespace System.ServiceModel.Dispatcher
                 this.items[this.count - 1].Flags |= NodeSequenceItemFlags.NodesetLast;
             }
         }
+
 #if NO
         internal void SortNodes()
         {
@@ -915,6 +863,7 @@ namespace System.ServiceModel.Dispatcher
             RenumberItems();
         }
 #endif
+
         internal void StartNodeset()
         {
             this.position = 0;
@@ -960,7 +909,10 @@ namespace System.ServiceModel.Dispatcher
         {
             NodeSequence seq = context.CreateSequence();
 
-            SortedBuffer<QueryNode, QueryNodeComparer> buff = new SortedBuffer<QueryNode, QueryNodeComparer>(staticQueryNodeComparerInstance);
+            SortedBuffer<QueryNode, QueryNodeComparer> buff = new SortedBuffer<
+                QueryNode,
+                QueryNodeComparer
+            >(staticQueryNodeComparerInstance);
             for (int i = 0; i < this.count; ++i)
                 buff.Add(this.items[i].Node);
 
@@ -1043,10 +995,7 @@ namespace System.ServiceModel.Dispatcher
 
         public override int Count
         {
-            get
-            {
-                return this.data.seq.Count;
-            }
+            get { return this.data.seq.Count; }
         }
 
         public override XPathNavigator Current
@@ -1056,26 +1005,33 @@ namespace System.ServiceModel.Dispatcher
                 if (this.index == 0)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryProcessingException(QueryProcessingError.Unexpected, SR.GetString(SR.QueryContextNotSupportedInSequences)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryProcessingException(
+                            QueryProcessingError.Unexpected,
+                            SR.GetString(SR.QueryContextNotSupportedInSequences)
+                        )
+                    );
                 }
 
                 if (this.index > this.data.seq.Count)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.QueryAfterNodes)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.QueryAfterNodes))
+                    );
                 }
                 //
                 // From MSDN - the public contract of .Current
-                // You can use the properties of the XPathNavigator to return information on the current node. 
-                // However, the XPathNavigator cannot be used to move away from the selected node set. 
-                // Doing so could invalidate the state of the navigator. Alternatively, you can clone the XPathNavigator. 
-                // The cloned XPathNavigator can then be moved away from the selected node set. This is an application level decision. 
+                // You can use the properties of the XPathNavigator to return information on the current node.
+                // However, the XPathNavigator cannot be used to move away from the selected node set.
+                // Doing so could invalidate the state of the navigator. Alternatively, you can clone the XPathNavigator.
+                // The cloned XPathNavigator can then be moved away from the selected node set. This is an application level decision.
                 // Providing this functionality may effect the performance of the XPath query.
-                //                
+                //
                 // Return the navigator as is - where it is positioned. If the user moved the navigator, then the user is
                 // hosed. We will make no guarantees - and are not required to. Doing so would force cloning, which is expensive.
                 //
-                // NOTE: .Current can get called repeatedly, so its activity should be relative CHEAP. 
+                // NOTE: .Current can get called repeatedly, so its activity should be relative CHEAP.
                 // No cloning, copying etc. All that work should be done in MoveNext()
                 return this.nav;
             }
@@ -1083,10 +1039,7 @@ namespace System.ServiceModel.Dispatcher
 
         public override int CurrentPosition
         {
-            get
-            {
-                return this.index;
-            }
+            get { return this.index; }
         }
 
         internal void Clear()
@@ -1110,15 +1063,18 @@ namespace System.ServiceModel.Dispatcher
             if (null == this.data.seq)
             {
                 // User is trying to use an iterator that is  out of scope.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.QueryIteratorOutOfScope)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.QueryIteratorOutOfScope))
+                );
             }
 
             if (this.index < this.data.seq.Count)
             {
                 if (null == this.nav)
                 {
-                    // We haven't aquired the navigator we will use for this iterator yet. 
-                    this.nav = (SeekableXPathNavigator)this.data.seq[this.index].GetNavigator().Clone();
+                    // We haven't aquired the navigator we will use for this iterator yet.
+                    this.nav = (SeekableXPathNavigator)
+                        this.data.seq[this.index].GetNavigator().Clone();
                 }
                 else
                 {
@@ -1157,13 +1113,17 @@ namespace System.ServiceModel.Dispatcher
                 if (this.iter.CurrentPosition == 0)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.QueryBeforeNodes)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.QueryBeforeNodes))
+                    );
                 }
 
                 if (this.iter.CurrentPosition > this.iter.Count)
                 {
 #pragma warning suppress 56503 // Microsoft, postponing the public change
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.QueryAfterNodes)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.QueryAfterNodes))
+                    );
                 }
 
                 return this.iter.Current;
@@ -1230,10 +1190,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Index
         {
-            get
-            {
-                return this.index;
-            }
+            get { return this.index; }
         }
 
         internal bool NextItem()
@@ -1273,25 +1230,17 @@ namespace System.ServiceModel.Dispatcher
         }
 
         internal NodeSequenceBuilder(ProcessingContext context)
-            : this(context, null)
-        {
-        }
+            : this(context, null) { }
+
 #if NO
         internal NodeSequenceBuilder(NodeSequence sequence)
-            : this(sequence.OwnerContext, sequence)
-        {
-        }
+            : this(sequence.OwnerContext, sequence) { }
 #endif
+
         internal NodeSequence Sequence
         {
-            get
-            {
-                return (null != this.sequence) ? this.sequence : NodeSequence.Empty;
-            }
-            set
-            {
-                this.sequence = value;
-            }
+            get { return (null != this.sequence) ? this.sequence : NodeSequence.Empty; }
+            set { this.sequence = value; }
         }
 
         internal void Add(ref NodeSequenceItem item)

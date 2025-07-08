@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Enum:  UltimateResourceFallbackLocation
-** 
+**
 ** <OWNER>kimhamil</OWNER>
 **
 ** <EMAIL>Author: Brian Grunkemeyer (BrianGru)</EMAIL>
@@ -20,13 +20,13 @@
 
 using System;
 
-namespace System.Resources {
-
-[Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+namespace System.Resources
+{
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum UltimateResourceFallbackLocation
     {
         MainAssembly,
-        Satellite
+        Satellite,
     }
 }

@@ -11,9 +11,25 @@ namespace System.Security.Cryptography
         CurrentUser = 0,
         LocalMachine = 1,
     }
+
     public static partial class ProtectedData
     {
-        public static byte[] Protect(byte[] userData, byte[]? optionalEntropy, System.Security.Cryptography.DataProtectionScope scope) { throw null; }
-        public static byte[] Unprotect(byte[] encryptedData, byte[]? optionalEntropy, System.Security.Cryptography.DataProtectionScope scope) { throw null; }
+        public static byte[] Protect(
+            byte[] userData,
+            byte[]? optionalEntropy,
+            System.Security.Cryptography.DataProtectionScope scope
+        )
+        {
+            throw null;
+        }
+
+        public static byte[] Unprotect(
+            byte[] encryptedData,
+            byte[]? optionalEntropy,
+            System.Security.Cryptography.DataProtectionScope scope
+        )
+        {
+            throw null;
+        }
     }
 }

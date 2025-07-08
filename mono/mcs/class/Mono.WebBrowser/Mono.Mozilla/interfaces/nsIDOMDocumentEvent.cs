@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,32 +26,37 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("46b91d66-28e2-11d4-ab1e-0010830123b4")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMDocumentEvent
+    {
+        #region nsIDOMDocumentEvent
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int createEvent(
+            /*DOMString*/HandleRef eventType,
+            [MarshalAs(UnmanagedType.Interface)] out nsIDOMEvent ret
+        );
 
-	[Guid ("46b91d66-28e2-11d4-ab1e-0010830123b4")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMDocumentEvent {
+        #endregion
+    }
 
-#region nsIDOMDocumentEvent
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int createEvent (
-				   /*DOMString*/ HandleRef eventType,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMEvent ret);
-
-#endregion
-	}
-
-
-	internal class nsDOMDocumentEvent {
-		public static nsIDOMDocumentEvent GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMDocumentEvent obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMDocumentEvent).GUID, obj);
-			return o as nsIDOMDocumentEvent;
-		}
-	}
+    internal class nsDOMDocumentEvent
+    {
+        public static nsIDOMDocumentEvent GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMDocumentEvent obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMDocumentEvent).GUID, obj);
+            return o as nsIDOMDocumentEvent;
+        }
+    }
 }

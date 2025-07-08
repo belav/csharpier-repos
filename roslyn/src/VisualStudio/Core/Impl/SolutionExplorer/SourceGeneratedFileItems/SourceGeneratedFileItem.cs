@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             DocumentId documentId,
             string hintName,
             string languageName,
-            Workspace workspace)
+            Workspace workspace
+        )
             : base(name: hintName)
         {
             _threadingContext = threadingContext;
@@ -38,12 +39,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public string HintName { get; }
         public Workspace Workspace { get; }
 
-        public override ImageMoniker IconMoniker
-            => _languageName switch
+        public override ImageMoniker IconMoniker =>
+            _languageName switch
             {
                 LanguageNames.CSharp => KnownMonikers.CSFileNode,
                 LanguageNames.VisualBasic => KnownMonikers.VBFileNode,
-                _ => KnownMonikers.Document
+                _ => KnownMonikers.Document,
             };
 
         public override object GetBrowseObject()
@@ -51,8 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             return new BrowseObject(this);
         }
 
-        public override IInvocationController InvocationController
-            => new InvocationControllerImpl(_threadingContext);
+        public override IInvocationController InvocationController =>
+            new InvocationControllerImpl(_threadingContext);
 
         private sealed class InvocationControllerImpl : IInvocationController
         {
@@ -70,13 +71,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     var didNavigate = false;
                     foreach (var item in items.OfType<SourceGeneratedFileItem>())
                     {
-                        var documentNavigationService = item.Workspace.Services.GetService<IDocumentNavigationService>();
+                        var documentNavigationService =
+                            item.Workspace.Services.GetService<IDocumentNavigationService>();
                         if (documentNavigationService != null)
                         {
                             // TODO: we're navigating back to the top of the file, do we have a way to just bring it to the focus and that's it?
                             // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
-                            didNavigate |= await documentNavigationService.TryNavigateToPositionAsync(
-                                item._threadingContext, item.Workspace, item.DocumentId, position: 0, CancellationToken.None).ConfigureAwait(false);
+                            didNavigate |= await documentNavigationService
+                                .TryNavigateToPositionAsync(
+                                    item._threadingContext,
+                                    item.Workspace,
+                                    item.DocumentId,
+                                    position: 0,
+                                    CancellationToken.None
+                                )
+                                .ConfigureAwait(false);
                         }
                     }
 

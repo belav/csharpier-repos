@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyName>Microsoft.EntityFrameworkCore.Sqlite</AssemblyName>
     <PackageId>Microsoft.EntityFrameworkCore.Sqlite.Core</PackageId>
@@ -11,7 +10,6 @@
     <PackageTags>$(PackageTags);SQLite</PackageTags>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Data.Common" />
     <Using Include="System.Diagnostics" />
@@ -38,21 +36,28 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\EFCore.Relational\EFCore.Relational.csproj" PrivateAssets="contentfiles;build" />
+    <ProjectReference
+      Include="..\EFCore.Relational\EFCore.Relational.csproj"
+      PrivateAssets="contentfiles;build"
+    />
     <ProjectReference Include="..\Microsoft.Data.Sqlite.Core\Microsoft.Data.Sqlite.Core.csproj" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" ReferenceOutputAssembly="False" OutputItemType="Analyzer" />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      ReferenceOutputAssembly="False"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="$(MicrosoftExtensionsDependencyModelVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyModel"
+      Version="$(MicrosoftExtensionsDependencyModelVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\SqliteStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -60,11 +65,9 @@
       <CustomToolNamespace>Microsoft.EntityFrameworkCore.Sqlite.Internal</CustomToolNamespace>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\SqliteStrings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -72,5 +75,4 @@
       <DependentUpon>SqliteStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

@@ -21,7 +21,8 @@ public abstract record AssertBundleOptionsBase(
     bool ExpectFingerprintOnDotnetJs = false,
     bool ExpectSymbolsFile = true,
     bool AssertIcuAssets = true,
-    bool AssertSymbolsFile = true)
+    bool AssertSymbolsFile = true
+)
 {
     public bool DotnetWasmFromRuntimePack => ExpectedFileType == NativeFilesType.FromRuntimePack;
     public bool AOT => ExpectedFileType == NativeFilesType.AOT;

@@ -13,8 +13,8 @@ namespace System.CommandLine
     /// Represents the main action that the application performs.
     /// </summary>
     /// <remarks>
-    /// Use the RootCommand object without any subcommands for applications that perform one action. Add subcommands 
-    /// to the root for applications that require actions identified by specific strings. For example, `dir` does not 
+    /// Use the RootCommand object without any subcommands for applications that perform one action. Add subcommands
+    /// to the root for applications that require actions identified by specific strings. For example, `dir` does not
     /// use any subcommands. See <see cref="CliCommand"/> for applications with multiple actions.
     /// </remarks>
     public class CliRootCommand : CliCommand
@@ -25,16 +25,14 @@ namespace System.CommandLine
         private static string? _executableVersion;
 
         /// <param name="description">The description of the command, shown in help.</param>
-        public CliRootCommand(string description = "") : base(ExecutableName, description)
+        public CliRootCommand(string description = "")
+            : base(ExecutableName, description)
         {
             Options.Add(new HelpOption());
-            Options.Add(new VersionOption()); 
-            Directives = new ChildSymbolList<CliDirective>(this)
-            {
-                new SuggestDirective()
-            };
+            Options.Add(new VersionOption());
+            Directives = new ChildSymbolList<CliDirective>(this) { new SuggestDirective() };
         }
-     
+
         /// <summary>
         /// Represents all of the directives that are valid under the root command.
         /// </summary>
@@ -45,27 +43,29 @@ namespace System.CommandLine
         /// </summary>
         public void Add(CliDirective directive) => Directives.Add(directive);
 
-        internal static Assembly GetAssembly()
-            => _assembly ??= (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly());
+        internal static Assembly GetAssembly() =>
+            _assembly ??= (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly());
 
         /// <summary>
         /// The name of the currently running executable.
         /// </summary>
-        public static string ExecutableName
-            => _executableName ??= Path.GetFileNameWithoutExtension(ExecutablePath).Replace(" ", "");
+        public static string ExecutableName =>
+            _executableName ??= Path.GetFileNameWithoutExtension(ExecutablePath).Replace(" ", "");
 
         /// <summary>
         /// The path to the currently running executable.
         /// </summary>
-        public static string ExecutablePath => _executablePath ??= Environment.GetCommandLineArgs()[0];
-        
+        public static string ExecutablePath =>
+            _executablePath ??= Environment.GetCommandLineArgs()[0];
+
         internal static string ExecutableVersion => _executableVersion ??= GetExecutableVersion();
 
         private static string GetExecutableVersion()
         {
             var assembly = GetAssembly();
 
-            var assemblyVersionAttribute = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+            var assemblyVersionAttribute =
+                assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
             if (assemblyVersionAttribute is null)
             {

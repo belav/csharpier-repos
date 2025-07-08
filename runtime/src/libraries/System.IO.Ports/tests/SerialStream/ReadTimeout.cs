@@ -6,8 +6,8 @@ using System.IO.PortsTests;
 using System.Threading;
 using System.Threading.Tasks;
 using Legacy.Support;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.IO.Ports.Tests
 {
@@ -39,7 +39,11 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_DefaultValue()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream stream = com.BaseStream;
@@ -74,7 +78,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Default_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying default ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying default ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyDefaultTimeout(Read_byte_int_int);
         }
 
@@ -88,7 +94,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Infinite_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying infinite ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying infinite ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
 
             VerifyLongTimeout(Read_byte_int_int, -1);
         }
@@ -103,7 +111,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Int32MaxValue_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying Int32.MaxValue ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying Int32.MaxValue ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
 
             VerifyLongTimeout(Read_byte_int_int, int.MaxValue - 1);
         }
@@ -115,15 +125,17 @@ namespace System.IO.Ports.Tests
             VerifyLongTimeout(ReadByte, int.MaxValue - 1);
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_750_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying 750 ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying 750 ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyTimeout(Read_byte_int_int, 750);
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_750_ReadByte()
         {
@@ -131,11 +143,15 @@ namespace System.IO.Ports.Tests
             VerifyTimeout(ReadByte, 750);
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SuccessiveReadTimeoutNoData_Read_byte_int_int()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream stream = com.BaseStream;
@@ -143,26 +159,33 @@ namespace System.IO.Ports.Tests
 
                 Debug.WriteLine(
                     "Verifying ReadTimeout={0} with successive call to Read(byte[], int, int) and no data",
-                    stream.ReadTimeout);
+                    stream.ReadTimeout
+                );
 
                 try
                 {
-                    stream.Read(new byte[DEFAULT_READ_BYTE_ARRAY_SIZE], 0, DEFAULT_READ_BYTE_ARRAY_SIZE);
-                    Assert.Fail("Err_1707ahbap!!!: Read did not throw TimeouException when it timed out");
+                    stream.Read(
+                        new byte[DEFAULT_READ_BYTE_ARRAY_SIZE],
+                        0,
+                        DEFAULT_READ_BYTE_ARRAY_SIZE
+                    );
+                    Assert.Fail(
+                        "Err_1707ahbap!!!: Read did not throw TimeouException when it timed out"
+                    );
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 VerifyTimeout(Read_byte_int_int, stream);
             }
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasNullModem))]
         public void SuccessiveReadTimeoutSomeData_Read_byte_int_int()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
             {
                 var t = new Task(WriteToCom1);
 
@@ -172,7 +195,8 @@ namespace System.IO.Ports.Tests
 
                 Debug.WriteLine(
                     "Verifying ReadTimeout={0} with successive call to Read(byte[], int, int) and some data being received in the first call",
-                    stream.ReadTimeout);
+                    stream.ReadTimeout
+                );
 
                 // Call WriteToCom1 asynchronously this will write to com1 some time before the following call
                 // to a read method times out
@@ -180,11 +204,13 @@ namespace System.IO.Ports.Tests
 
                 try
                 {
-                    stream.Read(new byte[DEFAULT_READ_BYTE_ARRAY_SIZE], 0, DEFAULT_READ_BYTE_ARRAY_SIZE);
+                    stream.Read(
+                        new byte[DEFAULT_READ_BYTE_ARRAY_SIZE],
+                        0,
+                        DEFAULT_READ_BYTE_ARRAY_SIZE
+                    );
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 TCSupport.WaitForTaskCompletion(t);
 
@@ -195,17 +221,24 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void SuccessiveReadTimeoutNoData_ReadByte()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream stream = com.BaseStream;
                 stream.ReadTimeout = 850;
 
-                Debug.WriteLine("Verifying ReadTimeout={0} with successive call to ReadByte() and no data", stream.ReadTimeout);
+                Debug.WriteLine(
+                    "Verifying ReadTimeout={0} with successive call to ReadByte() and no data",
+                    stream.ReadTimeout
+                );
 
                 Assert.Throws<TimeoutException>(() => stream.ReadByte());
 
@@ -216,7 +249,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void SuccessiveReadTimeoutSomeData_ReadByte()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
             {
                 var t = new Task(WriteToCom1);
 
@@ -226,7 +261,8 @@ namespace System.IO.Ports.Tests
 
                 Debug.WriteLine(
                     "Verifying ReadTimeout={0} with successive call to ReadByte() and some data being received in the first call",
-                    stream.ReadTimeout);
+                    stream.ReadTimeout
+                );
 
                 // Call WriteToCom1 asynchronously this will write to com1 some time before the following call
                 // to a read method times out
@@ -236,9 +272,7 @@ namespace System.IO.Ports.Tests
                 {
                     stream.ReadByte();
                 }
-                catch (TimeoutException)
-                {
-                }
+                catch (TimeoutException) { }
 
                 TCSupport.WaitForTaskCompletion(t);
 
@@ -249,17 +283,18 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_0_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying 0 ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying 0 ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
 
             Verify0Timeout(Read_byte_int_int);
         }
 
-        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)]  // Timing-sensitive
+        [Trait(XunitConstants.Category, XunitConstants.IgnoreForCI)] // Timing-sensitive
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_0_ReadByte()
         {
@@ -270,14 +305,19 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void ReadTimeout_0_1ByteAvailable_Read_byte_int_int()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var rcvBytes = new byte[128];
                 int bytesRead;
 
                 Debug.WriteLine(
-                    "Verifying 0 ReadTimeout with Read(byte[] buffer, int offset, int count) and one byte available");
+                    "Verifying 0 ReadTimeout with Read(byte[] buffer, int offset, int count) and one byte available"
+                );
 
                 com1.Open();
                 com2.Open();
@@ -288,19 +328,30 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, 1);
 
-                Assert.True(1 == (bytesRead = com1.Read(rcvBytes, 0, rcvBytes.Length)),
-                    string.Format("Err_31597ahpba, Expected to Read to return 1 actual={0}", bytesRead));
+                Assert.True(
+                    1 == (bytesRead = com1.Read(rcvBytes, 0, rcvBytes.Length)),
+                    string.Format(
+                        "Err_31597ahpba, Expected to Read to return 1 actual={0}",
+                        bytesRead
+                    )
+                );
 
-                Assert.True(50 == rcvBytes[0],
-                    string.Format("Err_778946ahba, Expected to read 50 actual={0}", rcvBytes[0]));
+                Assert.True(
+                    50 == rcvBytes[0],
+                    string.Format("Err_778946ahba, Expected to read 50 actual={0}", rcvBytes[0])
+                );
             }
         }
 
         [ConditionalFact(nameof(HasNullModem))]
         public void ReadTimeout_0_1ByteAvailable_ReadByte()
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 int byteRead;
 
@@ -315,14 +366,21 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, 1);
 
-                Assert.True(50 == (byteRead = com1.ReadByte()),
-                    string.Format("Err_05949aypa, Expected to Read to return 50 actual={0}", byteRead));
+                Assert.True(
+                    50 == (byteRead = com1.ReadByte()),
+                    string.Format(
+                        "Err_05949aypa, Expected to Read to return 50 actual={0}",
+                        byteRead
+                    )
+                );
             }
         }
 
         private void WriteToCom1()
         {
-            using (var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                var com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName)
+            )
             {
                 var xmitBuffer = new byte[1];
                 int sleepPeriod = SUCCESSIVE_READTIMEOUT_SOMEDATA / 2;
@@ -371,25 +429,39 @@ namespace System.IO.Ports.Tests
 
                 com1.BaseStream.ReadTimeout = readTimeout;
 
-                Assert.True(readTimeout == com1.BaseStream.ReadTimeout,
-                    string.Format("Err_7071ahpsb!!! Expected ReadTimeout to be {0} actual {1}", readTimeout,
-                        com1.BaseStream.ReadTimeout));
+                Assert.True(
+                    readTimeout == com1.BaseStream.ReadTimeout,
+                    string.Format(
+                        "Err_7071ahpsb!!! Expected ReadTimeout to be {0} actual {1}",
+                        readTimeout,
+                        com1.BaseStream.ReadTimeout
+                    )
+                );
 
                 VerifyLongTimeout(readMethod, com1, com2);
             }
         }
 
-        private void VerifyLongTimeout(ReadMethodDelegate readMethod, SerialPort com1, SerialPort com2)
+        private void VerifyLongTimeout(
+            ReadMethodDelegate readMethod,
+            SerialPort com1,
+            SerialPort com2
+        )
         {
             var readThread = new ReadDelegateThread(com1.BaseStream, readMethod);
             var t = new Task(readThread.CallRead);
 
-
             t.Start();
             Thread.Sleep(DEFAULT_WAIT_LONG_TIMEOUT);
 
-            Assert.False(t.IsCompleted,
-                string.Format("Err_17071ahpa!!! {0} terminated with a long timeout of {1}ms", readMethod.Method.Name, com1.BaseStream.ReadTimeout));
+            Assert.False(
+                t.IsCompleted,
+                string.Format(
+                    "Err_17071ahpa!!! {0} terminated with a long timeout of {1}ms",
+                    readMethod.Method.Name,
+                    com1.BaseStream.ReadTimeout
+                )
+            );
 
             com2.Write(new byte[8], 0, 8);
 
@@ -398,7 +470,9 @@ namespace System.IO.Ports.Tests
 
         private void VerifyTimeout(ReadMethodDelegate readMethod, int readTimeout)
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
             {
                 com1.Open();
                 com1.BaseStream.WriteTimeout = 1;
@@ -406,9 +480,14 @@ namespace System.IO.Ports.Tests
 
                 com1.BaseStream.ReadTimeout = readTimeout;
 
-                Assert.True(readTimeout == com1.BaseStream.ReadTimeout,
-                    string.Format("Err_236897ahpbm!!! Expected ReadTimeout to be {0} actual {1}", readTimeout,
-                        com1.BaseStream.ReadTimeout));
+                Assert.True(
+                    readTimeout == com1.BaseStream.ReadTimeout,
+                    string.Format(
+                        "Err_236897ahpbm!!! Expected ReadTimeout to be {0} actual {1}",
+                        readTimeout,
+                        com1.BaseStream.ReadTimeout
+                    )
+                );
 
                 VerifyTimeout(readMethod, com1.BaseStream);
             }
@@ -420,7 +499,6 @@ namespace System.IO.Ports.Tests
             int expectedTime = stream.ReadTimeout;
             int actualTime;
             double percentageDifference;
-
 
             // Warmup the read method. When called for the first time the read method seems to take much longer then subsequent calls
             timer.Start();
@@ -434,9 +512,15 @@ namespace System.IO.Ports.Tests
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
-            Assert.True(percentageDifference <= MAX_ACCEPTABLE_WARMUP_PERCENTAGE_DIFFERENCE,
-                string.Format("Err_88558amuph!!!: The read method timedout in {0} expected {1} percentage difference: {2} when called for the first time",
-                    actualTime, expectedTime, percentageDifference));
+            Assert.True(
+                percentageDifference <= MAX_ACCEPTABLE_WARMUP_PERCENTAGE_DIFFERENCE,
+                string.Format(
+                    "Err_88558amuph!!!: The read method timedout in {0} expected {1} percentage difference: {2} when called for the first time",
+                    actualTime,
+                    expectedTime,
+                    percentageDifference
+                )
+            );
 
             actualTime = 0;
             timer.Reset();
@@ -447,7 +531,10 @@ namespace System.IO.Ports.Tests
             for (var i = 0; i < NUM_TRYS; i++)
             {
                 timer.Start();
-                try { readMethod(stream); }
+                try
+                {
+                    readMethod(stream);
+                }
                 catch (TimeoutException) { }
                 timer.Stop();
 
@@ -460,14 +547,22 @@ namespace System.IO.Ports.Tests
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
             // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
-            Assert.True(percentageDifference <= MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE,
-                string.Format("Err_56485ahpbz!!!: The read method timedout in {0} expected {1} percentage difference: {2}", actualTime, expectedTime, percentageDifference));
+            Assert.True(
+                percentageDifference <= MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE,
+                string.Format(
+                    "Err_56485ahpbz!!!: The read method timedout in {0} expected {1} percentage difference: {2}",
+                    actualTime,
+                    expectedTime,
+                    percentageDifference
+                )
+            );
         }
 
         private void Verify0Timeout(ReadMethodDelegate readMethod)
         {
-            using (var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-
+            using (
+                var com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName)
+            )
             {
                 com1.Open();
                 com1.BaseStream.WriteTimeout = 1;
@@ -475,9 +570,14 @@ namespace System.IO.Ports.Tests
 
                 com1.BaseStream.ReadTimeout = 0;
 
-                Assert.True(0 == com1.BaseStream.ReadTimeout,
-                    string.Format("Err_72072ahps!!! Expected ReadTimeout to be {0} actual {1}", 0,
-                        com1.BaseStream.ReadTimeout));
+                Assert.True(
+                    0 == com1.BaseStream.ReadTimeout,
+                    string.Format(
+                        "Err_72072ahps!!! Expected ReadTimeout to be {0} actual {1}",
+                        0,
+                        com1.BaseStream.ReadTimeout
+                    )
+                );
 
                 Verify0Timeout(readMethod, com1.BaseStream);
             }
@@ -499,9 +599,14 @@ namespace System.IO.Ports.Tests
             actualTime = (int)timer.ElapsedMilliseconds;
 
             // Verify that the time the method took to timeout is less then the maximum acceptable time
-            Assert.True(actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
-                string.Format("Err_277a0ahpsb!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1} when called for the first time",
-                    actualTime, MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT));
+            Assert.True(
+                actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
+                string.Format(
+                    "Err_277a0ahpsb!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1} when called for the first time",
+                    actualTime,
+                    MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
+                )
+            );
 
             actualTime = 0;
             timer.Reset();
@@ -512,7 +617,10 @@ namespace System.IO.Ports.Tests
             for (var i = 0; i < NUM_TRYS; i++)
             {
                 timer.Start();
-                try { readMethod(stream); }
+                try
+                {
+                    readMethod(stream);
+                }
                 catch (TimeoutException) { }
                 timer.Stop();
 
@@ -524,9 +632,14 @@ namespace System.IO.Ports.Tests
             actualTime /= NUM_TRYS;
 
             // Verify that the time the method took to timeout is less then the maximum acceptable time
-            Assert.True(actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
-                string.Format("Err_112389ahbp!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1}",
-                    actualTime, MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT));
+            Assert.True(
+                actualTime <= MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT,
+                string.Format(
+                    "Err_112389ahbp!!!: With a timeout of 0 the read method timedout in {0} expected something less then {1}",
+                    actualTime,
+                    MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
+                )
+            );
         }
 
         private void VerifyException(int readTimeout, Type expectedException)
@@ -534,9 +647,17 @@ namespace System.IO.Ports.Tests
             VerifyException(readTimeout, expectedException, expectedException);
         }
 
-        private void VerifyException(int readTimeout, Type expectedExceptionAfterOpen, Type expectedExceptionAfterClose)
+        private void VerifyException(
+            int readTimeout,
+            Type expectedExceptionAfterOpen,
+            Type expectedExceptionAfterClose
+        )
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream stream = com.BaseStream;

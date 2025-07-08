@@ -22,8 +22,18 @@ namespace System.ServiceModel.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(MachineSettingsSection.enableLoggingKnownPiiKey, typeof(System.Boolean), false, null, null, System.Configuration.ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            MachineSettingsSection.enableLoggingKnownPiiKey,
+                            typeof(System.Boolean),
+                            false,
+                            null,
+                            null,
+                            System.Configuration.ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
@@ -40,8 +50,14 @@ namespace System.ServiceModel.Configuration
                     {
                         if (!hasInitialized)
                         {
-                            MachineSettingsSection machineSettingsSection = (MachineSettingsSection)ConfigurationManager.GetSection("system.serviceModel/machineSettings");
-                            enableLoggingKnownPii = (bool)machineSettingsSection[MachineSettingsSection.enableLoggingKnownPiiKey];
+                            MachineSettingsSection machineSettingsSection = (MachineSettingsSection)
+                                ConfigurationManager.GetSection(
+                                    "system.serviceModel/machineSettings"
+                                );
+                            enableLoggingKnownPii = (bool)
+                                machineSettingsSection[
+                                    MachineSettingsSection.enableLoggingKnownPiiKey
+                                ];
                             hasInitialized = true;
                         }
                     }
@@ -53,6 +69,3 @@ namespace System.ServiceModel.Configuration
     }
 }
 #endif
-
-
-

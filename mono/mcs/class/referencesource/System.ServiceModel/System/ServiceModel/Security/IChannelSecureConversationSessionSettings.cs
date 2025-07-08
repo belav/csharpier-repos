@@ -6,22 +6,10 @@ namespace System.ServiceModel.Security
 {
     interface IChannelSecureConversationSessionSettings
     {
-        TimeSpan KeyRenewalInterval
-        {
-            get;
-            set;
-        }
+        TimeSpan KeyRenewalInterval { get; set; }
 
-        TimeSpan KeyRolloverInterval
-        {
-            get;
-            set;
-        }
+        TimeSpan KeyRolloverInterval { get; set; }
 
-        bool TolerateTransportFailures
-        {
-            get;
-            set;
-        }
+        bool TolerateTransportFailures { get; set; }
     }
 }

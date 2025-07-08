@@ -48,12 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             public UserViewModel()
             {
-                Offices = new List<string>
-                {
-                    "Auckland",
-                    "Wellington",
-                    "Christchurch"
-                };
+                Offices = new List<string> { "Auckland", "Wellington", "Christchurch" };
             }
         }
         #endregion
@@ -62,7 +57,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'Name': 'James',
               'Offices': [
                 'Auckland',
@@ -84,10 +80,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // Wellington
             // Christchurch
 
-            UserViewModel model2 = JsonConvert.DeserializeObject<UserViewModel>(json, new JsonSerializerSettings
-            {
-                ObjectCreationHandling = ObjectCreationHandling.Replace
-            });
+            UserViewModel model2 = JsonConvert.DeserializeObject<UserViewModel>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
+                }
+            );
 
             foreach (string office in model2.Offices)
             {

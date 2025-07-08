@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,61 +27,60 @@
 //
 using System;
 using System.Collections.Generic;
-using System.Xml;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Xml;
 
 namespace System.ServiceModel.Security
 {
-	public class BinarySecretKeyIdentifierClause : BinaryKeyIdentifierClause
-	{
-		public BinarySecretKeyIdentifierClause (byte [] key)
-			: this (key, true)
-		{
-		}
+    public class BinarySecretKeyIdentifierClause : BinaryKeyIdentifierClause
+    {
+        public BinarySecretKeyIdentifierClause(byte[] key)
+            : this(key, true) { }
 
-		[MonoTODO ("ClauseType")]
-		public BinarySecretKeyIdentifierClause (byte [] key, bool cloneBuffer)
-			: base ("", key, cloneBuffer)
-		{
-		}
+        [MonoTODO("ClauseType")]
+        public BinarySecretKeyIdentifierClause(byte[] key, bool cloneBuffer)
+            : base("", key, cloneBuffer) { }
 
-		[MonoTODO ("ClauseType")]
-		public BinarySecretKeyIdentifierClause (byte [] key, bool cloneBuffer, byte [] derivationNonce, int derivationLength)
-			: base ("", key, cloneBuffer, derivationNonce, derivationLength)
-		{
-		}
+        [MonoTODO("ClauseType")]
+        public BinarySecretKeyIdentifierClause(
+            byte[] key,
+            bool cloneBuffer,
+            byte[] derivationNonce,
+            int derivationLength
+        )
+            : base("", key, cloneBuffer, derivationNonce, derivationLength) { }
 
-		public override bool CanCreateKey {
-			get { return true; }
-		}
+        public override bool CanCreateKey
+        {
+            get { return true; }
+        }
 
-		public byte [] GetKeyBytes ()
-		{
-			return GetBuffer ();
-		}
+        public byte[] GetKeyBytes()
+        {
+            return GetBuffer();
+        }
 
-		public override SecurityKey CreateKey ()
-		{
-			return new InMemorySymmetricSecurityKey (GetRawBuffer (), true);
-		}
+        public override SecurityKey CreateKey()
+        {
+            return new InMemorySymmetricSecurityKey(GetRawBuffer(), true);
+        }
 
-		public override bool Matches (SecurityKeyIdentifierClause clause)
-		{
-			if (clause == null)
-				throw new ArgumentNullException ("clause");
-			BinarySecretKeyIdentifierClause other =
-				clause as BinarySecretKeyIdentifierClause;
-			if (other == null)
-				return false;
-			byte [] b1 = GetRawBuffer ();
-			byte [] b2 = other.GetRawBuffer ();
-			if (b1.Length != b2.Length)
-				return false;
-			for (int i = 0; i < b1.Length; i++)
-				if (b1 [i] != b2 [i])
-					return false;
-			return true;
-		}
-	}
+        public override bool Matches(SecurityKeyIdentifierClause clause)
+        {
+            if (clause == null)
+                throw new ArgumentNullException("clause");
+            BinarySecretKeyIdentifierClause other = clause as BinarySecretKeyIdentifierClause;
+            if (other == null)
+                return false;
+            byte[] b1 = GetRawBuffer();
+            byte[] b2 = other.GetRawBuffer();
+            if (b1.Length != b2.Length)
+                return false;
+            for (int i = 0; i < b1.Length; i++)
+                if (b1[i] != b2[i])
+                    return false;
+            return true;
+        }
+    }
 }

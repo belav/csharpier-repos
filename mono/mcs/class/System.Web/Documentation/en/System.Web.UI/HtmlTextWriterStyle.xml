@@ -3,8 +3,7 @@
   <TypeSignature Language="C#" Maintainer="auto" Value="public enum HtmlTextWriterStyle" />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
-    <AssemblyPublicKey>
-    </AssemblyPublicKey>
+    <AssemblyPublicKey></AssemblyPublicKey>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
@@ -16,11 +15,14 @@
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
       <para>
-        <see cref="T:System.Web.UI.HtmlTextWriter" /> and <see cref="T:System.Web.UI.Html32TextWriter" /> objects use these enumeration values to register HTML strings to the proper HTML style.</para>
+        <see cref="T:System.Web.UI.HtmlTextWriter" /> and <see cref="T:System.Web.UI.Html32TextWriter" /> objects use these enumeration values to register HTML strings to the proper HTML style.</para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies the HTML styles available to an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object output stream.</para>
+      <para
+        >Specifies the HTML styles available to an <see cref="T:System.Web.UI.HtmlTextWriter" /> or <see cref="T:System.Web.UI.Html32TextWriter" /> object output stream.</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -30,8 +32,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -50,8 +51,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -70,8 +70,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -90,8 +89,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -110,8 +108,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -130,8 +127,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -150,8 +146,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -234,8 +229,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -254,8 +248,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -274,8 +267,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -310,8 +302,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -330,8 +321,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -638,8 +628,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>
@@ -738,8 +727,7 @@
       <ReturnValue>
         <ReturnType>System.Web.UI.HtmlTextWriterStyle</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <remarks>To be added</remarks>
         <summary>

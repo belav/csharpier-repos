@@ -78,12 +78,18 @@ namespace System.ServiceModel.Activation
                 try
                 {
                     PropertyInfo rolesEnabledPropertyInfo = roleType.GetProperty("Enabled");
-                    Fx.Assert(rolesEnabledPropertyInfo != null, "rolesEnabledPropertyInfo must not be null!");
+                    Fx.Assert(
+                        rolesEnabledPropertyInfo != null,
+                        "rolesEnabledPropertyInfo must not be null!"
+                    );
 
                     if (((bool)rolesEnabledPropertyInfo.GetValue(null, null)) == true)
                     {
                         PropertyInfo rolesProviderPropertyInfo = roleType.GetProperty("Provider");
-                        Fx.Assert(rolesProviderPropertyInfo != null, "rolesProviderPropertyInfo must not be null!");
+                        Fx.Assert(
+                            rolesProviderPropertyInfo != null,
+                            "rolesProviderPropertyInfo must not be null!"
+                        );
                         result = rolesProviderPropertyInfo.GetValue(null, null) as RoleProvider;
                     }
                 }
@@ -93,7 +99,9 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            exception.InnerException
+                        );
                     }
                     throw;
                 }
@@ -120,15 +128,27 @@ namespace System.ServiceModel.Activation
                 {
                     // Running on extended sku
                     PropertyInfo roleProvidersPropertyInfo = roleType.GetProperty("Providers");
-                    Fx.Assert(roleProvidersPropertyInfo != null, "roleProvidersPropertyInfo must not be null!");
+                    Fx.Assert(
+                        roleProvidersPropertyInfo != null,
+                        "roleProvidersPropertyInfo must not be null!"
+                    );
 
                     // This could throw if RoleManager is not enabled.
                     object roleProviderCollection = roleProvidersPropertyInfo.GetValue(null, null);
-                    Fx.Assert(roleProviderCollection != null, "roleProviderCollection must not be null!");
+                    Fx.Assert(
+                        roleProviderCollection != null,
+                        "roleProviderCollection must not be null!"
+                    );
 
-                    PropertyInfo itemPropertyInfo = roleProviderCollection.GetType().GetProperty("Item", new Type[] { typeof(string) });
+                    PropertyInfo itemPropertyInfo = roleProviderCollection
+                        .GetType()
+                        .GetProperty("Item", new Type[] { typeof(string) });
                     Fx.Assert(itemPropertyInfo != null, "itemPropertyInfo must not be null!");
-                    return (RoleProvider)itemPropertyInfo.GetValue(roleProviderCollection, new object[] { roleProviderName });
+                    return (RoleProvider)
+                        itemPropertyInfo.GetValue(
+                            roleProviderCollection,
+                            new object[] { roleProviderName }
+                        );
                 }
                 catch (TargetInvocationException exception)
                 {
@@ -136,7 +156,9 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            exception.InnerException
+                        );
                     }
                     throw;
                 }
@@ -154,8 +176,13 @@ namespace System.ServiceModel.Activation
             {
                 try
                 {
-                    PropertyInfo membershipProviderPropertyInfo = membershipType.GetProperty("Provider");
-                    Fx.Assert(membershipProviderPropertyInfo != null, "membershipProviderPropertyInfo must not be null!");
+                    PropertyInfo membershipProviderPropertyInfo = membershipType.GetProperty(
+                        "Provider"
+                    );
+                    Fx.Assert(
+                        membershipProviderPropertyInfo != null,
+                        "membershipProviderPropertyInfo must not be null!"
+                    );
                     return (MembershipProvider)membershipProviderPropertyInfo.GetValue(null, null);
                 }
                 catch (TargetInvocationException exception)
@@ -164,7 +191,9 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            exception.InnerException
+                        );
                     }
                     throw;
                 }
@@ -182,15 +211,32 @@ namespace System.ServiceModel.Activation
             {
                 try
                 {
-                    PropertyInfo membershipProvidersPropertyInfo = membershipType.GetProperty("Providers");
-                    Fx.Assert(membershipProvidersPropertyInfo != null, "membershipProvidersPropertyInfo must not be null!");
+                    PropertyInfo membershipProvidersPropertyInfo = membershipType.GetProperty(
+                        "Providers"
+                    );
+                    Fx.Assert(
+                        membershipProvidersPropertyInfo != null,
+                        "membershipProvidersPropertyInfo must not be null!"
+                    );
 
-                    object membershipProviderCollection = membershipProvidersPropertyInfo.GetValue(null, null);
-                    Fx.Assert(membershipProviderCollection != null, "membershipProviderCollection must not be null!");
+                    object membershipProviderCollection = membershipProvidersPropertyInfo.GetValue(
+                        null,
+                        null
+                    );
+                    Fx.Assert(
+                        membershipProviderCollection != null,
+                        "membershipProviderCollection must not be null!"
+                    );
 
-                    PropertyInfo itemPropertyInfo = membershipProviderCollection.GetType().GetProperty("Item", new Type[] { typeof(string) });
+                    PropertyInfo itemPropertyInfo = membershipProviderCollection
+                        .GetType()
+                        .GetProperty("Item", new Type[] { typeof(string) });
                     Fx.Assert(itemPropertyInfo != null, "itemPropertyInfo must not be null!");
-                    return (MembershipProvider)itemPropertyInfo.GetValue(membershipProviderCollection, new object[] { membershipProviderName });
+                    return (MembershipProvider)
+                        itemPropertyInfo.GetValue(
+                            membershipProviderCollection,
+                            new object[] { membershipProviderName }
+                        );
                 }
                 catch (TargetInvocationException exception)
                 {
@@ -198,7 +244,9 @@ namespace System.ServiceModel.Activation
                     // we need to (best effort) maintain the exception contract by rethrow inner exception.
                     if (exception.InnerException != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            exception.InnerException
+                        );
                     }
                     throw;
                 }
@@ -212,24 +260,41 @@ namespace System.ServiceModel.Activation
         internal static bool IsWebConfigAboveApplication(object configHostingContext)
         {
             Type webContextType = TypeOfWebContext;
-            if (configHostingContext == null
+            if (
+                configHostingContext == null
                 || webContextType == null
-                || configHostingContext.GetType() != webContextType)
+                || configHostingContext.GetType() != webContextType
+            )
             {
                 // if we don't recognize the context we can't enforce the special web.config logic
                 return false;
             }
 
             const int webApplicationLevelAboveApplication = 10; // public value of the enum
-            Fx.Assert(GetSystemWebType("System.Web.Configuration.WebApplicationLevel") != null, "Type 'System.Web.Configuration.WebApplicationLevel' MUST exist in System.Web.dll.");
-            Fx.Assert(GetSystemWebType("System.Web.Configuration.WebApplicationLevel").GetProperty("AboveApplication") == null ||
-                (int)GetSystemWebType("System.Web.Configuration.WebApplicationLevel").GetProperty("AboveApplication").GetValue(null, null) == webApplicationLevelAboveApplication, 
-                "unexpected property value");
+            Fx.Assert(
+                GetSystemWebType("System.Web.Configuration.WebApplicationLevel") != null,
+                "Type 'System.Web.Configuration.WebApplicationLevel' MUST exist in System.Web.dll."
+            );
+            Fx.Assert(
+                GetSystemWebType("System.Web.Configuration.WebApplicationLevel")
+                    .GetProperty("AboveApplication") == null
+                    || (int)
+                        GetSystemWebType("System.Web.Configuration.WebApplicationLevel")
+                            .GetProperty("AboveApplication")
+                            .GetValue(null, null) == webApplicationLevelAboveApplication,
+                "unexpected property value"
+            );
             try
             {
-                PropertyInfo applicationLevelPropertyInfo = webContextType.GetProperty("ApplicationLevel");
-                Fx.Assert(applicationLevelPropertyInfo != null, "applicationLevelPropertyInfo must not be null!");
-                return (int)applicationLevelPropertyInfo.GetValue(configHostingContext, null) == webApplicationLevelAboveApplication;
+                PropertyInfo applicationLevelPropertyInfo = webContextType.GetProperty(
+                    "ApplicationLevel"
+                );
+                Fx.Assert(
+                    applicationLevelPropertyInfo != null,
+                    "applicationLevelPropertyInfo must not be null!"
+                );
+                return (int)applicationLevelPropertyInfo.GetValue(configHostingContext, null)
+                    == webApplicationLevelAboveApplication;
             }
             catch (TargetInvocationException exception)
             {
@@ -237,7 +302,9 @@ namespace System.ServiceModel.Activation
                 // we need to (best effort) maintain the exception contract by rethrow inner exception.
                 if (exception.InnerException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        exception.InnerException
+                    );
                 }
                 throw;
             }

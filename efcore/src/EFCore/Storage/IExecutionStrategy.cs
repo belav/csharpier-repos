@@ -51,7 +51,8 @@ public interface IExecutionStrategy
     TResult Execute<TState, TResult>(
         TState state,
         Func<DbContext, TState, TResult> operation,
-        Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded);
+        Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
+    );
 
     /// <summary>
     ///     Executes the specified asynchronous operation and returns the result.
@@ -84,5 +85,6 @@ public interface IExecutionStrategy
         TState state,
         Func<DbContext, TState, CancellationToken, Task<TResult>> operation,
         Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

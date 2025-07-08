@@ -27,9 +27,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             int iCurrentChar,
             VsTextSpan[] ptsBlockSpan,
             out string pbstrDescription,
-            out int pfBlockAvailable)
+            out int pfBlockAvailable
+        )
         {
-            var snapshot = this.EditorAdaptersFactoryService.GetDataBuffer(pTextLines).CurrentSnapshot;
+            var snapshot = this
+                .EditorAdaptersFactoryService.GetDataBuffer(pTextLines)
+                .CurrentSnapshot;
             var position = snapshot?.TryGetPosition(iCurrentLine, iCurrentChar);
             if (position == null)
             {
@@ -40,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             (string description, TextSpan span)? foundBlock = null;
 
-            var uiThreadOperationExecutor = this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
+            var uiThreadOperationExecutor =
+                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
             uiThreadOperationExecutor.Execute(
                 ServicesVSResources.Current_block,
                 ServicesVSResources.Determining_current_block,
@@ -48,8 +52,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
                 showProgress: false,
                 action: context =>
                 {
-                    foundBlock = VsLanguageBlock.GetCurrentBlock(snapshot, position.Value, context.UserCancellationToken);
-                });
+                    foundBlock = VsLanguageBlock.GetCurrentBlock(
+                        snapshot,
+                        position.Value,
+                        context.UserCancellationToken
+                    );
+                }
+            );
 
             pfBlockAvailable = foundBlock != null ? 1 : 0;
             pbstrDescription = foundBlock?.description;
@@ -68,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         public static (string description, TextSpan span)? GetCurrentBlock(
             ITextSnapshot snapshot,
             int position,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null || !document.SupportsSyntaxTree)
@@ -78,17 +88,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
             var syntaxRoot = document.GetSyntaxRootSynchronously(cancellationToken);
-            var node = syntaxFactsService.GetContainingMemberDeclaration(syntaxRoot, position, useFullSpan: false);
+            var node = syntaxFactsService.GetContainingMemberDeclaration(
+                syntaxRoot,
+                position,
+                useFullSpan: false
+            );
             if (node == null)
             {
                 return null;
             }
 
-            var description = syntaxFactsService.GetDisplayName(node,
-                DisplayNameOptions.IncludeMemberKeyword |
-                DisplayNameOptions.IncludeParameters |
-                DisplayNameOptions.IncludeType |
-                DisplayNameOptions.IncludeTypeParameters);
+            var description = syntaxFactsService.GetDisplayName(
+                node,
+                DisplayNameOptions.IncludeMemberKeyword
+                    | DisplayNameOptions.IncludeParameters
+                    | DisplayNameOptions.IncludeType
+                    | DisplayNameOptions.IncludeTypeParameters
+            );
 
             return (description, node.Span);
         }

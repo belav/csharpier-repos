@@ -2,18 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using ILCompiler.DependencyAnalysis.ARM;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {
     public partial class ReadyToRunGenericHelperNode
     {
-        protected Register GetContextRegister(ref /* readonly */ ARMEmitter encoder)
+        protected Register GetContextRegister(
+            ref /* readonly */
+            ARMEmitter encoder
+        )
         {
             if (_id == ReadyToRunHelperId.DelegateCtor)
                 return encoder.TargetRegister.Arg2;
@@ -21,7 +21,14 @@ namespace ILCompiler.DependencyAnalysis
                 return encoder.TargetRegister.Arg0;
         }
 
-        protected void EmitDictionaryLookup(NodeFactory factory, ref ARMEmitter encoder, Register context, Register result, GenericLookupResult lookup, bool relocsOnly)
+        protected void EmitDictionaryLookup(
+            NodeFactory factory,
+            ref ARMEmitter encoder,
+            Register context,
+            Register result,
+            GenericLookupResult lookup,
+            bool relocsOnly
+        )
         {
             // INVARIANT: must not trash context register
 
@@ -30,7 +37,11 @@ namespace ILCompiler.DependencyAnalysis
             if (!relocsOnly)
             {
                 // The concrete slot won't be known until we're emitting data - don't ask for it in relocsOnly.
-                if (!factory.GenericDictionaryLayout(_dictionaryOwner).TryGetSlotForEntry(lookup, out dictionarySlot))
+                if (
+                    !factory
+                        .GenericDictionaryLayout(_dictionaryOwner)
+                        .TryGetSlotForEntry(lookup, out dictionarySlot)
+                )
                 {
                     encoder.EmitMOV(result, 0);
                     return;
@@ -41,7 +52,11 @@ namespace ILCompiler.DependencyAnalysis
             encoder.EmitLDR(result, context, dictionarySlot * factory.Target.PointerSize);
         }
 
-        protected sealed override void EmitCode(NodeFactory factory, ref ARMEmitter encoder, bool relocsOnly)
+        protected sealed override void EmitCode(
+            NodeFactory factory,
+            ref ARMEmitter encoder,
+            bool relocsOnly
+        )
         {
             // First load the generic context into the context register.
             EmitLoadGenericContext(factory, ref encoder, relocsOnly);
@@ -54,7 +69,14 @@ namespace ILCompiler.DependencyAnalysis
                     {
                         Debug.Assert(contextRegister == encoder.TargetRegister.Arg0);
 
-                        EmitDictionaryLookup(factory, ref encoder, encoder.TargetRegister.Arg0, encoder.TargetRegister.Result, _lookupSignature, relocsOnly);
+                        EmitDictionaryLookup(
+                            factory,
+                            ref encoder,
+                            encoder.TargetRegister.Arg0,
+                            encoder.TargetRegister.Result,
+                            _lookupSignature,
+                            relocsOnly
+                        );
 
                         if (!TriggersLazyStaticConstructor(factory))
                         {
@@ -63,14 +85,27 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
-                            int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(factory.Target);
-                            encoder.EmitLDR(encoder.TargetRegister.Arg1, encoder.TargetRegister.Arg0, (short)-cctorContextSize);
+                            int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(
+                                factory.Target
+                            );
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Arg0,
+                                (short)-cctorContextSize
+                            );
                             encoder.EmitCMP(encoder.TargetRegister.Arg1, 0);
                             encoder.EmitRETIfEqual();
 
-                            encoder.EmitMOV(encoder.TargetRegister.Arg1, encoder.TargetRegister.Result);
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Result
+                            );
                             encoder.EmitSUB(encoder.TargetRegister.Arg0, (byte)cctorContextSize);
-                            encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnNonGCStaticBase));
+                            encoder.EmitJMP(
+                                factory.HelperEntrypoint(
+                                    HelperEntrypoint.EnsureClassConstructorRunAndReturnNonGCStaticBase
+                                )
+                            );
                         }
                     }
                     break;
@@ -80,8 +115,18 @@ namespace ILCompiler.DependencyAnalysis
                         Debug.Assert(contextRegister == encoder.TargetRegister.Arg0);
 
                         encoder.EmitMOV(encoder.TargetRegister.Arg1, encoder.TargetRegister.Arg0);
-                        EmitDictionaryLookup(factory, ref encoder, encoder.TargetRegister.Arg0, encoder.TargetRegister.Result, _lookupSignature, relocsOnly);
-                        encoder.EmitLDR(encoder.TargetRegister.Result, encoder.TargetRegister.Result);
+                        EmitDictionaryLookup(
+                            factory,
+                            ref encoder,
+                            encoder.TargetRegister.Arg0,
+                            encoder.TargetRegister.Result,
+                            _lookupSignature,
+                            relocsOnly
+                        );
+                        encoder.EmitLDR(
+                            encoder.TargetRegister.Result,
+                            encoder.TargetRegister.Result
+                        );
 
                         MetadataType target = (MetadataType)_target;
                         if (!TriggersLazyStaticConstructor(factory))
@@ -91,18 +136,42 @@ namespace ILCompiler.DependencyAnalysis
                         else
                         {
                             // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
-                            GenericLookupResult nonGcRegionLookup = factory.GenericLookup.TypeNonGCStaticBase(target);
-                            EmitDictionaryLookup(factory, ref encoder, encoder.TargetRegister.Arg1, encoder.TargetRegister.Arg2, nonGcRegionLookup, relocsOnly);
+                            GenericLookupResult nonGcRegionLookup =
+                                factory.GenericLookup.TypeNonGCStaticBase(target);
+                            EmitDictionaryLookup(
+                                factory,
+                                ref encoder,
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Arg2,
+                                nonGcRegionLookup,
+                                relocsOnly
+                            );
 
-                            int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(factory.Target);
-                            encoder.EmitLDR(encoder.TargetRegister.Arg3, encoder.TargetRegister.Arg2, ((short)(factory.Target.PointerSize - cctorContextSize)));
+                            int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(
+                                factory.Target
+                            );
+                            encoder.EmitLDR(
+                                encoder.TargetRegister.Arg3,
+                                encoder.TargetRegister.Arg2,
+                                ((short)(factory.Target.PointerSize - cctorContextSize))
+                            );
                             encoder.EmitCMP(encoder.TargetRegister.Arg3, 1);
                             encoder.EmitRETIfEqual();
 
-                            encoder.EmitMOV(encoder.TargetRegister.Arg1, encoder.TargetRegister.Result);
-                            encoder.EmitMOV(encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg2);
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg1,
+                                encoder.TargetRegister.Result
+                            );
+                            encoder.EmitMOV(
+                                encoder.TargetRegister.Arg0,
+                                encoder.TargetRegister.Arg2
+                            );
                             encoder.EmitSUB(encoder.TargetRegister.Arg0, cctorContextSize);
-                            encoder.EmitJMP(factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnGCStaticBase));
+                            encoder.EmitJMP(
+                                factory.HelperEntrypoint(
+                                    HelperEntrypoint.EnsureClassConstructorRunAndReturnGCStaticBase
+                                )
+                            );
                         }
                     }
                     break;
@@ -114,23 +183,44 @@ namespace ILCompiler.DependencyAnalysis
                         MetadataType target = (MetadataType)_target;
 
                         // Look up the index cell
-                        EmitDictionaryLookup(factory, ref encoder, encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg1, _lookupSignature, relocsOnly);
+                        EmitDictionaryLookup(
+                            factory,
+                            ref encoder,
+                            encoder.TargetRegister.Arg0,
+                            encoder.TargetRegister.Arg1,
+                            _lookupSignature,
+                            relocsOnly
+                        );
 
                         ISymbolNode helperEntrypoint;
                         if (TriggersLazyStaticConstructor(factory))
                         {
                             // There is a lazy class constructor. We need the non-GC static base because that's where the
                             // class constructor context lives.
-                            GenericLookupResult nonGcRegionLookup = factory.GenericLookup.TypeNonGCStaticBase(target);
-                            EmitDictionaryLookup(factory, ref encoder, encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg2, nonGcRegionLookup, relocsOnly);
-                            int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(factory.Target);
+                            GenericLookupResult nonGcRegionLookup =
+                                factory.GenericLookup.TypeNonGCStaticBase(target);
+                            EmitDictionaryLookup(
+                                factory,
+                                ref encoder,
+                                encoder.TargetRegister.Arg0,
+                                encoder.TargetRegister.Arg2,
+                                nonGcRegionLookup,
+                                relocsOnly
+                            );
+                            int cctorContextSize = NonGCStaticsNode.GetClassConstructorContextSize(
+                                factory.Target
+                            );
                             encoder.EmitSUB(encoder.TargetRegister.Arg2, cctorContextSize);
 
-                            helperEntrypoint = factory.HelperEntrypoint(HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase);
+                            helperEntrypoint = factory.HelperEntrypoint(
+                                HelperEntrypoint.EnsureClassConstructorRunAndReturnThreadStaticBase
+                            );
                         }
                         else
                         {
-                            helperEntrypoint = factory.HelperEntrypoint(HelperEntrypoint.GetThreadStaticBaseForType);
+                            helperEntrypoint = factory.HelperEntrypoint(
+                                HelperEntrypoint.GetThreadStaticBaseForType
+                            );
                         }
 
                         // First arg: address of the TypeManager slot that provides the helper with
@@ -139,7 +229,11 @@ namespace ILCompiler.DependencyAnalysis
                         encoder.EmitLDR(encoder.TargetRegister.Arg0, encoder.TargetRegister.Arg1);
 
                         // Second arg: index of the type in the ThreadStatic section of the modules
-                        encoder.EmitLDR(encoder.TargetRegister.Arg1, encoder.TargetRegister.Arg1, factory.Target.PointerSize);
+                        encoder.EmitLDR(
+                            encoder.TargetRegister.Arg1,
+                            encoder.TargetRegister.Arg1,
+                            factory.Target.PointerSize
+                        );
 
                         encoder.EmitJMP(helperEntrypoint);
                     }
@@ -156,7 +250,14 @@ namespace ILCompiler.DependencyAnalysis
 
                         var target = (DelegateCreationInfo)_target;
 
-                        EmitDictionaryLookup(factory, ref encoder, encoder.TargetRegister.Arg2, encoder.TargetRegister.Arg2, _lookupSignature, relocsOnly);
+                        EmitDictionaryLookup(
+                            factory,
+                            ref encoder,
+                            encoder.TargetRegister.Arg2,
+                            encoder.TargetRegister.Arg2,
+                            _lookupSignature,
+                            relocsOnly
+                        );
 
                         if (target.Thunk != null)
                         {
@@ -184,7 +285,14 @@ namespace ILCompiler.DependencyAnalysis
                 case ReadyToRunHelperId.TypeHandleForCasting:
                 case ReadyToRunHelperId.ConstrainedDirectCall:
                     {
-                        EmitDictionaryLookup(factory, ref encoder, contextRegister, encoder.TargetRegister.Result, _lookupSignature, relocsOnly);
+                        EmitDictionaryLookup(
+                            factory,
+                            ref encoder,
+                            contextRegister,
+                            encoder.TargetRegister.Result,
+                            _lookupSignature,
+                            relocsOnly
+                        );
                         encoder.EmitRET();
                     }
                     break;
@@ -193,7 +301,11 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected virtual void EmitLoadGenericContext(NodeFactory factory, ref ARMEmitter encoder, bool relocsOnly)
+        protected virtual void EmitLoadGenericContext(
+            NodeFactory factory,
+            ref ARMEmitter encoder,
+            bool relocsOnly
+        )
         {
             // Assume generic context is already loaded in the context register.
         }
@@ -201,7 +313,11 @@ namespace ILCompiler.DependencyAnalysis
 
     public partial class ReadyToRunGenericLookupFromTypeNode
     {
-        protected override void EmitLoadGenericContext(NodeFactory factory, ref ARMEmitter encoder, bool relocsOnly)
+        protected override void EmitLoadGenericContext(
+            NodeFactory factory,
+            ref ARMEmitter encoder,
+            bool relocsOnly
+        )
         {
             // We start with context register pointing to the MethodTable
             Register contextRegister = GetContextRegister(ref encoder);
@@ -211,7 +327,10 @@ namespace ILCompiler.DependencyAnalysis
             if (!relocsOnly)
             {
                 // The concrete slot won't be known until we're emitting data - don't ask for it in relocsOnly.
-                vtableSlot = VirtualMethodSlotHelper.GetGenericDictionarySlot(factory, (TypeDesc)_dictionaryOwner);
+                vtableSlot = VirtualMethodSlotHelper.GetGenericDictionarySlot(
+                    factory,
+                    (TypeDesc)_dictionaryOwner
+                );
             }
 
             int pointerSize = factory.Target.PointerSize;

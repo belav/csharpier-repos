@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
@@ -19,10 +20,9 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.Extensions.Logging;
 using Microsoft.Metadata.Tools;
+using Roslyn.Test.Utilities;
 using Roslyn.Utilities;
 using Xunit;
-using Roslyn.Test.Utilities;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
@@ -33,50 +33,67 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             MemoryStream? pdbStream,
             string assemblyFileName,
             IRebuildArtifactResolver rebuildArtifactResolver,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             using var peReader = new PEReader(peStream);
             var embeddedPdbReader = peReader.GetEmbeddedPdbMetadataReader();
-            var portablePdbReader = pdbStream is not null ? MetadataReaderProvider.FromPortablePdbStream(pdbStream).GetMetadataReader() : null;
+            var portablePdbReader = pdbStream is not null
+                ? MetadataReaderProvider.FromPortablePdbStream(pdbStream).GetMetadataReader()
+                : null;
             Assert.True(embeddedPdbReader == null ^ portablePdbReader == null);
 
-            var pdbReader = embeddedPdbReader ?? portablePdbReader ?? throw ExceptionUtilities.Unreachable();
+            var pdbReader =
+                embeddedPdbReader ?? portablePdbReader ?? throw ExceptionUtilities.Unreachable();
             var factory = LoggerFactory.Create(configure => { });
             var logger = factory.CreateLogger("RoundTripVerification");
             var optionsReader = new CompilationOptionsReader(logger, pdbReader, peReader);
-            var compilationFactory = CompilationFactory.Create(
-                assemblyFileName,
-                optionsReader);
+            var compilationFactory = CompilationFactory.Create(assemblyFileName, optionsReader);
             using var rebuildPeStream = new MemoryStream();
             using var rebuildPdbStream = optionsReader.HasEmbeddedPdb ? null : new MemoryStream();
             var emitResult = compilationFactory.Emit(
                 rebuildPeStream,
                 rebuildPdbStream,
                 rebuildArtifactResolver,
-                cancellationToken);
+                cancellationToken
+            );
 
             Assert.True(emitResult.Success);
             Assert.Equal(peStream.ToArray(), rebuildPeStream.ToArray());
             Assert.Equal(pdbStream?.ToArray(), rebuildPdbStream?.ToArray());
         }
 
-        private record EmitInfo(ImmutableArray<byte> PEBytes, PEReader PEReader, ImmutableArray<byte> PdbBytes, MetadataReader PdbReader) : IDisposable
+        private record EmitInfo(
+            ImmutableArray<byte> PEBytes,
+            PEReader PEReader,
+            ImmutableArray<byte> PdbBytes,
+            MetadataReader PdbReader
+        ) : IDisposable
         {
             public void Dispose() => PEReader.Dispose();
         }
 
-        public static unsafe void VerifyRoundTrip<TCompilation>(TCompilation original, EmitOptions? emitOptions = null)
+        public static unsafe void VerifyRoundTrip<TCompilation>(
+            TCompilation original,
+            EmitOptions? emitOptions = null
+        )
             where TCompilation : Compilation
         {
             Assert.True(original.SyntaxTrees.All(x => !string.IsNullOrEmpty(x.FilePath)));
             Assert.True(original.Options.Deterministic);
 
             original.VerifyDiagnostics();
-            emitOptions ??= new EmitOptions(debugInformationFormat: DebugInformationFormat.Embedded);
+            emitOptions ??= new EmitOptions(
+                debugInformationFormat: DebugInformationFormat.Embedded
+            );
             using var originalEmit = emitOriginal();
             var factory = LoggerFactory.Create(configure => { });
             var logger = factory.CreateLogger("RoundTripVerification");
-            var optionsReader = new CompilationOptionsReader(logger, originalEmit.PdbReader, originalEmit.PEReader);
+            var optionsReader = new CompilationOptionsReader(
+                logger,
+                originalEmit.PdbReader,
+                originalEmit.PEReader
+            );
             var assemblyFileName = original.AssemblyName!;
             if (typeof(TCompilation) == typeof(CSharpCompilation))
             {
@@ -91,8 +108,11 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
             var compilationFactory = CompilationFactory.Create(assemblyFileName, optionsReader);
             var rebuild = compilationFactory.CreateCompilation(
-                original.SyntaxTrees.SelectAsArray(x => compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText())),
-                original.References.ToImmutableArray());
+                original.SyntaxTrees.SelectAsArray(x =>
+                    compilationFactory.CreateSyntaxTree(x.FilePath, x.GetText())
+                ),
+                original.References.ToImmutableArray()
+            );
 
             Assert.IsType<TCompilation>(rebuild);
             VerifyCompilationOptions(original.Options, rebuild.Options);
@@ -104,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 rebuildPdbStream,
                 rebuild,
                 embeddedTexts: ImmutableArray<EmbeddedText>.Empty,
-                CancellationToken.None);
+                CancellationToken.None
+            );
             Assert.Empty(result.Diagnostics);
             Assert.True(result.Success);
 
@@ -115,16 +136,30 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             MetadataReader rebuildPdbReader;
             if (rebuildPdbStream is null)
             {
-                rebuildPdbReader = rebuildReader.GetEmbeddedPdbMetadataReader() ?? throw new InvalidOperationException();
-                rebuildPdbBytes = new ReadOnlySpan<byte>(rebuildPdbReader.MetadataPointer, rebuildPdbReader.MetadataLength).ToArray().ToImmutableArray();
+                rebuildPdbReader =
+                    rebuildReader.GetEmbeddedPdbMetadataReader()
+                    ?? throw new InvalidOperationException();
+                rebuildPdbBytes = new ReadOnlySpan<byte>(
+                    rebuildPdbReader.MetadataPointer,
+                    rebuildPdbReader.MetadataLength
+                )
+                    .ToArray()
+                    .ToImmutableArray();
             }
             else
             {
                 rebuildPdbBytes = rebuildPdbStream.ToImmutable();
-                rebuildPdbReader = MetadataReaderProvider.FromPortablePdbImage(rebuildPdbBytes).GetMetadataReader();
+                rebuildPdbReader = MetadataReaderProvider
+                    .FromPortablePdbImage(rebuildPdbBytes)
+                    .GetMetadataReader();
             }
 
-            var rebuildEmit = new EmitInfo(rebuildBytes, rebuildReader, rebuildPdbBytes, rebuildPdbReader);
+            var rebuildEmit = new EmitInfo(
+                rebuildBytes,
+                rebuildReader,
+                rebuildPdbBytes,
+                rebuildPdbReader
+            );
 
             // https://github.com/dotnet/roslyn/issues/52327
             // This should be replaced with a CompilationDiff-based helper in MS.CA.RB which writes diffs
@@ -136,34 +171,50 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 switch (emitOptions.DebugInformationFormat)
                 {
                     case DebugInformationFormat.Embedded:
-                        {
-                            var originalBytes = original.EmitToArray(emitOptions);
-                            var originalReader = new PEReader(originalBytes);
-                            var originalPdbReader = originalReader.GetEmbeddedPdbMetadataReader();
-                            Assert.NotNull(originalPdbReader);
+                    {
+                        var originalBytes = original.EmitToArray(emitOptions);
+                        var originalReader = new PEReader(originalBytes);
+                        var originalPdbReader = originalReader.GetEmbeddedPdbMetadataReader();
+                        Assert.NotNull(originalPdbReader);
 
-                            var pdbSpan = new ReadOnlySpan<byte>(originalPdbReader!.MetadataPointer, originalPdbReader.MetadataLength);
-                            return new EmitInfo(originalBytes, originalReader, pdbSpan.ToArray().ToImmutableArray(), originalPdbReader);
-                        }
+                        var pdbSpan = new ReadOnlySpan<byte>(
+                            originalPdbReader!.MetadataPointer,
+                            originalPdbReader.MetadataLength
+                        );
+                        return new EmitInfo(
+                            originalBytes,
+                            originalReader,
+                            pdbSpan.ToArray().ToImmutableArray(),
+                            originalPdbReader
+                        );
+                    }
                     case DebugInformationFormat.PortablePdb:
-                        {
-                            using var pdbStream = new MemoryStream();
-                            var originalBytes = original.EmitToArray(emitOptions, pdbStream: pdbStream);
-                            var originalReader = new PEReader(originalBytes);
+                    {
+                        using var pdbStream = new MemoryStream();
+                        var originalBytes = original.EmitToArray(emitOptions, pdbStream: pdbStream);
+                        var originalReader = new PEReader(originalBytes);
 
-                            var pdbBytes = pdbStream.ToImmutable();
-                            var originalPdbReader = MetadataReaderProvider.FromPortablePdbImage(pdbBytes).GetMetadataReader();
-                            return new EmitInfo(originalBytes, originalReader, pdbBytes, originalPdbReader);
-                        }
+                        var pdbBytes = pdbStream.ToImmutable();
+                        var originalPdbReader = MetadataReaderProvider
+                            .FromPortablePdbImage(pdbBytes)
+                            .GetMetadataReader();
+                        return new EmitInfo(
+                            originalBytes,
+                            originalReader,
+                            pdbBytes,
+                            originalPdbReader
+                        );
+                    }
                     default:
-                        throw new ArgumentException("Unsupported DebugInformationFormat: " + emitOptions.DebugInformationFormat);
+                        throw new ArgumentException(
+                            "Unsupported DebugInformationFormat: "
+                                + emitOptions.DebugInformationFormat
+                        );
                 }
             }
         }
 
-        private static void AssertImagesEqual(
-            EmitInfo originalEmit,
-            EmitInfo rebuildEmit)
+        private static void AssertImagesEqual(EmitInfo originalEmit, EmitInfo rebuildEmit)
         {
             if (!originalEmit.PEBytes.SequenceEqual(rebuildEmit.PEBytes))
             {
@@ -175,13 +226,16 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 
                 // https://github.com/dotnet/roslyn/issues/52327
                 // this is not all that useful without manual copy/pasting. Can we diff this during the test and show the differences?
-                Assert.True(false, $@"
+                Assert.True(
+                    false,
+                    $@"
 Expected:
 {originalMdv}
 
 Actual:
 {rebuildMdv}
-");
+"
+                );
             }
 
             if (!originalEmit.PdbBytes.SequenceEqual(rebuildEmit.PdbBytes))
@@ -189,13 +243,16 @@ Actual:
                 var originalMdv = getMdv(originalEmit.PdbReader);
                 var rebuildMdv = getMdv(rebuildEmit.PdbReader);
 
-                Assert.True(false, $@"
+                Assert.True(
+                    false,
+                    $@"
 Expected:
 {originalMdv}
 
 Actual:
 {rebuildMdv}
-");
+"
+                );
             }
 
             static string getMdv(MetadataReader metadataReader)
@@ -213,10 +270,17 @@ Actual:
 
 #pragma warning disable 612 // 'CompilationOptions.Features' is obsolete
 
-        public static void VerifyCompilationOptions(CompilationOptions originalOptions, CompilationOptions rebuildOptions)
+        public static void VerifyCompilationOptions(
+            CompilationOptions originalOptions,
+            CompilationOptions rebuildOptions
+        )
         {
             var type = originalOptions.GetType();
-            foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (
+                var propertyInfo in type.GetProperties(
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )
+            )
             {
                 switch (propertyInfo.Name)
                 {
@@ -238,7 +302,10 @@ Actual:
                         {
                             var originalValue = propertyInfo.GetValue(originalOptions)!;
                             var rebuildValue = propertyInfo.GetValue(rebuildOptions)!;
-                            VerifyParseOptions((ParseOptions)originalValue, (ParseOptions)rebuildValue);
+                            VerifyParseOptions(
+                                (ParseOptions)originalValue,
+                                (ParseOptions)rebuildValue
+                            );
                         }
                         break;
                     default:
@@ -253,10 +320,17 @@ Actual:
         }
 #pragma warning restore 612
 
-        private static void VerifyParseOptions(ParseOptions originalOptions, ParseOptions rebuildOptions)
+        private static void VerifyParseOptions(
+            ParseOptions originalOptions,
+            ParseOptions rebuildOptions
+        )
         {
             var type = originalOptions.GetType();
-            foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (
+                var propertyInfo in type.GetProperties(
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                )
+            )
             {
                 // Several options are expected to be different and they are special cased here.
                 if (propertyInfo.Name == nameof(VisualBasicParseOptions.SpecifiedLanguageVersion))

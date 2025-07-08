@@ -10,17 +10,24 @@
 using System;
 using System.IO;
 
-namespace Xamarin {
-
-	public static class CommonDigest {
-		
+namespace Xamarin
+{
+    public static class CommonDigest
+    {
 #if !MONOTOUCH && !XAMMAC
-		// we do not add anything in MonoTouch, just replacing, so this is not needed
-		// however we can avoid a dependency on Mono.Security for Crimson.CommonCrypto.dll by including the base classes
-		static public void GenerateBaseClass (string namespaceName, string typeName, string baseTypeName, int hashSize,
-			string visibilityStart = "", string visibilityEnd = "")
-		{
-			string template = @"// Generated file to bind CommonCrypto/CommonDigest - DO NOT EDIT
+        // we do not add anything in MonoTouch, just replacing, so this is not needed
+        // however we can avoid a dependency on Mono.Security for Crimson.CommonCrypto.dll by including the base classes
+        static public void GenerateBaseClass(
+            string namespaceName,
+            string typeName,
+            string baseTypeName,
+            int hashSize,
+            string visibilityStart = "",
+            string visibilityEnd = ""
+        )
+        {
+            string template =
+                @"// Generated file to bind CommonCrypto/CommonDigest - DO NOT EDIT
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@xamarin.com>
@@ -55,17 +62,31 @@ namespace %NAMESPACE% {
 		}
 	}
 }";
-			
-			File.WriteAllText (baseTypeName + ".g.cs", template.Replace ("%NAMESPACE%", namespaceName).
-				Replace ("%TYPE%", typeName).Replace ("%BASE%", baseTypeName).
-				Replace ("%VISIBILITY_START%", visibilityStart).Replace ("%VISIBILITY_END%", visibilityEnd).
-				Replace ("%HASHSIZE%", hashSize.ToString ()));
-		}
+
+            File.WriteAllText(
+                baseTypeName + ".g.cs",
+                template
+                    .Replace("%NAMESPACE%", namespaceName)
+                    .Replace("%TYPE%", typeName)
+                    .Replace("%BASE%", baseTypeName)
+                    .Replace("%VISIBILITY_START%", visibilityStart)
+                    .Replace("%VISIBILITY_END%", visibilityEnd)
+                    .Replace("%HASHSIZE%", hashSize.ToString())
+            );
+        }
 #endif
-		static public void Generate (string namespaceName, string typeName, string baseTypeName, int contextSize,
-			string visibilityStart = "", string visibilityEnd = "")
-		{
-			string template = @"// Generated file to bind CommonCrypto/CommonDigest - DO NOT EDIT
+
+        static public void Generate(
+            string namespaceName,
+            string typeName,
+            string baseTypeName,
+            int contextSize,
+            string visibilityStart = "",
+            string visibilityEnd = ""
+        )
+        {
+            string template =
+                @"// Generated file to bind CommonCrypto/CommonDigest - DO NOT EDIT
 //
 // Authors:
 //	Sebastien Pouliot  <sebastien@xamarin.com>
@@ -157,11 +178,17 @@ namespace %NAMESPACE% {
 		}
 	}
 }";
-			
-			File.WriteAllText (typeName + ".g.cs", template.Replace ("%NAMESPACE%", namespaceName).
-				Replace ("%TYPE%", typeName).Replace ("%BASE%", baseTypeName).
-				Replace ("%VISIBILITY_START%", visibilityStart).Replace ("%VISIBILITY_END%", visibilityEnd).
-				Replace ("%CTX_SIZE%", contextSize.ToString ()));
-		}
-	}
+
+            File.WriteAllText(
+                typeName + ".g.cs",
+                template
+                    .Replace("%NAMESPACE%", namespaceName)
+                    .Replace("%TYPE%", typeName)
+                    .Replace("%BASE%", baseTypeName)
+                    .Replace("%VISIBILITY_START%", visibilityStart)
+                    .Replace("%VISIBILITY_END%", visibilityEnd)
+                    .Replace("%CTX_SIZE%", contextSize.ToString())
+            );
+        }
+    }
 }

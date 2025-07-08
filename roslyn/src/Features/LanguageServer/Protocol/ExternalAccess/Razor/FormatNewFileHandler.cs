@@ -36,7 +36,11 @@ internal sealed class FormatNewFileHandler : ILspServiceRequestHandler<FormatNew
 
     public bool RequiresLSPSolution => true;
 
-    public async Task<string?> HandleRequestAsync(FormatNewFileParams request, RequestContext context, CancellationToken cancellationToken)
+    public async Task<string?> HandleRequestAsync(
+        FormatNewFileParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var project = context.Solution?.GetProject(request.Project);
 
@@ -51,11 +55,8 @@ internal sealed class FormatNewFileHandler : ILspServiceRequestHandler<FormatNew
         var fileLoader = new SourceTextLoader(source, filePath);
         var documentId = DocumentId.CreateNewId(project.Id);
         var solution = project.Solution.AddDocument(
-            DocumentInfo.Create(
-                documentId,
-                name: filePath,
-                loader: fileLoader,
-                filePath: filePath));
+            DocumentInfo.Create(documentId, name: filePath, loader: fileLoader, filePath: filePath)
+        );
 
         var document = solution.GetRequiredDocument(documentId);
 
@@ -64,22 +65,37 @@ internal sealed class FormatNewFileHandler : ILspServiceRequestHandler<FormatNew
         if (formattingService is not null)
         {
             var hintDocument = project.Documents.FirstOrDefault();
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
-            document = await formattingService.FormatNewDocumentAsync(document, hintDocument, cleanupOptions, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(_globalOptions, cancellationToken)
+                .ConfigureAwait(false);
+            document = await formattingService
+                .FormatNewDocumentAsync(document, hintDocument, cleanupOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // Unlike normal new file formatting, Razor also wants to remove unnecessary usings
-        var syntaxFormattingOptions = await document.GetSyntaxFormattingOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
+        var syntaxFormattingOptions = await document
+            .GetSyntaxFormattingOptionsAsync(_globalOptions, cancellationToken)
+            .ConfigureAwait(false);
         var removeImportsService = document.GetLanguageService<IRemoveUnnecessaryImportsService>();
         if (removeImportsService is not null)
         {
-            document = await removeImportsService.RemoveUnnecessaryImportsAsync(document, syntaxFormattingOptions, cancellationToken).ConfigureAwait(false);
+            document = await removeImportsService
+                .RemoveUnnecessaryImportsAsync(document, syntaxFormattingOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         // Now format the document so indentation etc. is correct
-        var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+        var tree = await document
+            .GetRequiredSyntaxTreeAsync(cancellationToken)
+            .ConfigureAwait(false);
         var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-        root = Formatter.Format(root, solution.Services, syntaxFormattingOptions, cancellationToken);
+        root = Formatter.Format(
+            root,
+            solution.Services,
+            syntaxFormattingOptions,
+            cancellationToken
+        );
 
         return root.ToFullString();
     }

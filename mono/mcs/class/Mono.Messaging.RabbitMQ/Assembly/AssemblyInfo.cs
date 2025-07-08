@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,32 +29,32 @@
 //
 
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Resources;
-using System.Security;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the System.Messaging assembly
 
-[assembly: AssemblyTitle ("Mono.Messaging.RabbitMQ.dll")]
-[assembly: AssemblyDescription ("Mono.Messaging.RabbitMQ.dll")]
-[assembly: AssemblyDefaultAlias ("Mono.Messaging.RabbitMQ.dll")]
+[assembly: AssemblyTitle("Mono.Messaging.RabbitMQ.dll")]
+[assembly: AssemblyDescription("Mono.Messaging.RabbitMQ.dll")]
+[assembly: AssemblyDefaultAlias("Mono.Messaging.RabbitMQ.dll")]
 
-[assembly: AssemblyCompany (Consts.MonoCompany)]
-[assembly: AssemblyProduct (Consts.MonoProduct)]
-[assembly: AssemblyCopyright (Consts.MonoCopyright)]
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
-[assembly: AssemblyInformationalVersion (Consts.FxFileVersion)]
+[assembly: AssemblyCompany(Consts.MonoCompany)]
+[assembly: AssemblyProduct(Consts.MonoProduct)]
+[assembly: AssemblyCopyright(Consts.MonoCopyright)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
+[assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: ComVisible (false)]
+[assembly: ComVisible(false)]
 
-[assembly: CLSCompliant (false)]
-[assembly: AssemblyDelaySign (true)]
+[assembly: CLSCompliant(false)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
-[assembly: CompilationRelaxations (CompilationRelaxations.NoStringInterning)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
+[assembly: CompilationRelaxations(CompilationRelaxations.NoStringInterning)]

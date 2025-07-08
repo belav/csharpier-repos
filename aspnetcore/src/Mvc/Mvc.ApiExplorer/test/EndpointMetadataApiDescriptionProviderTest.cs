@@ -203,7 +203,8 @@ public class EndpointMetadataApiDescriptionProviderTest
         var apiDescription = GetApiDescription(
             [ProducesResponseType(typeof(TimeSpan), StatusCodes.Status201Created)]
             [Produces("application/custom")]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         var responseType = Assert.Single(apiDescription.SupportedResponseTypes);
@@ -222,7 +223,8 @@ public class EndpointMetadataApiDescriptionProviderTest
         var apiDescription = GetApiDescription(
             [ProducesResponseType(typeof(TimeSpan), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => new InferredJsonClass()
+            () =>
+                new InferredJsonClass()
         );
 
         Assert.Equal(2, apiDescription.SupportedResponseTypes.Count);
@@ -252,7 +254,8 @@ public class EndpointMetadataApiDescriptionProviderTest
         var apiDescription = GetApiDescription(
             [ProducesResponseType(typeof(InferredJsonClass), StatusCodes.Status201Created)]
             [ProducesResponseType(StatusCodes.Status400BadRequest)]
-            () => Results.Ok(new InferredJsonClass())
+            () =>
+                Results.Ok(new InferredJsonClass())
         );
 
         Assert.Equal(2, apiDescription.SupportedResponseTypes.Count);

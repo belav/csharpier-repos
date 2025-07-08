@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             /// <summary>
             /// All descendant nodes for syntax node actions.
             /// </summary>
-            public readonly ArrayBuilder<SyntaxNode> DescendantNodesToAnalyze = ArrayBuilder<SyntaxNode>.GetInstance();
+            public readonly ArrayBuilder<SyntaxNode> DescendantNodesToAnalyze =
+                ArrayBuilder<SyntaxNode>.GetInstance();
 
             /// <summary>
             /// Flag indicating if this is a partial analysis.
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 SyntaxNode declaringReferenceSyntax,
                 SyntaxNode topmostNodeForAnalysis,
                 ImmutableArray<DeclarationInfo> declarationsInNodeBuilder,
-                bool isPartialAnalysis)
+                bool isPartialAnalysis
+            )
             {
                 DeclaringReferenceSyntax = declaringReferenceSyntax;
                 TopmostNodeForAnalysis = topmostNodeForAnalysis;

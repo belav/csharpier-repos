@@ -15,12 +15,21 @@ namespace System.Security.Cryptography
 {
     internal sealed class BasicSymmetricCipherLiteNCrypt : ILiteSymmetricCipher
     {
-        private static readonly CngProperty s_ECBMode =
-            new CngProperty(KeyPropertyName.ChainingMode, Encoding.Unicode.GetBytes(Cng.BCRYPT_CHAIN_MODE_ECB + "\0"), CngPropertyOptions.None);
-        private static readonly CngProperty s_CBCMode =
-            new CngProperty(KeyPropertyName.ChainingMode, Encoding.Unicode.GetBytes(Cng.BCRYPT_CHAIN_MODE_CBC + "\0"), CngPropertyOptions.None);
-        private static readonly CngProperty s_CFBMode =
-            new CngProperty(KeyPropertyName.ChainingMode, Encoding.Unicode.GetBytes(Cng.BCRYPT_CHAIN_MODE_CFB + "\0"), CngPropertyOptions.None);
+        private static readonly CngProperty s_ECBMode = new CngProperty(
+            KeyPropertyName.ChainingMode,
+            Encoding.Unicode.GetBytes(Cng.BCRYPT_CHAIN_MODE_ECB + "\0"),
+            CngPropertyOptions.None
+        );
+        private static readonly CngProperty s_CBCMode = new CngProperty(
+            KeyPropertyName.ChainingMode,
+            Encoding.Unicode.GetBytes(Cng.BCRYPT_CHAIN_MODE_CBC + "\0"),
+            CngPropertyOptions.None
+        );
+        private static readonly CngProperty s_CFBMode = new CngProperty(
+            KeyPropertyName.ChainingMode,
+            Encoding.Unicode.GetBytes(Cng.BCRYPT_CHAIN_MODE_CFB + "\0"),
+            CngPropertyOptions.None
+        );
 
         private readonly bool _encrypting;
         private CngKey _key;
@@ -34,7 +43,8 @@ namespace System.Security.Cryptography
             int blockSizeInBytes,
             ReadOnlySpan<byte> iv,
             bool encrypting,
-            int paddingSizeInBytes)
+            int paddingSizeInBytes
+        )
         {
             BlockSizeInBytes = blockSizeInBytes;
             PaddingSizeInBytes = paddingSizeInBytes;
@@ -99,9 +109,27 @@ namespace System.Security.Cryptography
                 {
                     unsafe
                     {
-                        ErrorCode errorCode = _encrypting ?
-                            Interop.NCrypt.NCryptEncrypt(keyHandle, input, input.Length, null, output, output.Length, out bytesWritten, AsymmetricPaddingMode.None) :
-                            Interop.NCrypt.NCryptDecrypt(keyHandle, input, input.Length, null, output, output.Length, out bytesWritten, AsymmetricPaddingMode.None);
+                        ErrorCode errorCode = _encrypting
+                            ? Interop.NCrypt.NCryptEncrypt(
+                                keyHandle,
+                                input,
+                                input.Length,
+                                null,
+                                output,
+                                output.Length,
+                                out bytesWritten,
+                                AsymmetricPaddingMode.None
+                            )
+                            : Interop.NCrypt.NCryptDecrypt(
+                                keyHandle,
+                                input,
+                                input.Length,
+                                null,
+                                output,
+                                output.Length,
+                                out bytesWritten,
+                                AsymmetricPaddingMode.None
+                            );
 
                         if (errorCode != ErrorCode.ERROR_SUCCESS)
                         {
@@ -128,7 +156,8 @@ namespace System.Security.Cryptography
                             KeyPropertyName.InitializationVector,
                             pIv,
                             iv.Length,
-                            CngPropertyOptions.None);
+                            CngPropertyOptions.None
+                        );
 
                         if (errorCode != ErrorCode.ERROR_SUCCESS)
                         {
@@ -159,6 +188,5 @@ namespace System.Security.Cryptography
             _key?.Dispose();
             _key = null!;
         }
-
     }
 }

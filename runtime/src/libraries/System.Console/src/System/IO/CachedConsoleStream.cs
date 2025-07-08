@@ -14,7 +14,8 @@ namespace System.IO
         private readonly Encoding _encoding;
         private readonly Decoder _decoder;
 
-        public CachedConsoleStream(Encoding encoding) : base(FileAccess.Write)
+        public CachedConsoleStream(Encoding encoding)
+            : base(FileAccess.Write)
         {
             _encoding = encoding;
             _decoder = _encoding.GetDecoder();
@@ -26,7 +27,10 @@ namespace System.IO
         {
             int maxCharCount = _encoding.GetMaxCharCount(buffer.Length);
             char[]? pooledBuffer = null;
-            Span<char> charSpan = maxCharCount <= 512 ? stackalloc char[512] : (pooledBuffer = ArrayPool<char>.Shared.Rent(maxCharCount));
+            Span<char> charSpan =
+                maxCharCount <= 512
+                    ? stackalloc char[512]
+                    : (pooledBuffer = ArrayPool<char>.Shared.Rent(maxCharCount));
             try
             {
                 int count = _decoder.GetChars(buffer, charSpan, false);
@@ -46,7 +50,11 @@ namespace System.IO
 
         protected abstract void Print(ReadOnlySpan<char> line);
 
-        private static void WriteOrCache(CachedConsoleStream stream, StringBuilder cache, Span<char> charBuffer)
+        private static void WriteOrCache(
+            CachedConsoleStream stream,
+            StringBuilder cache,
+            Span<char> charBuffer
+        )
         {
             int lastNewLine = charBuffer.LastIndexOf('\n');
             if (lastNewLine != -1)

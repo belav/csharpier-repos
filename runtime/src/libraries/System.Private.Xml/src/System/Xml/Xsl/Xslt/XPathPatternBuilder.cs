@@ -49,9 +49,12 @@ namespace System.Xml.Xsl.Xslt
         [Conditional("DEBUG")]
         public static void AssertFilter(QilLoop filter)
         {
-            Debug.Assert(filter.NodeType == QilNodeType.Filter, "XPathPatternBuilder expected to generate list of Filters on top level");
+            Debug.Assert(
+                filter.NodeType == QilNodeType.Filter,
+                "XPathPatternBuilder expected to generate list of Filters on top level"
+            );
             Debug.Assert(filter.Variable.XmlType!.IsSubtypeOf(T.NodeNotRtf));
-            Debug.Assert(filter.Variable.Binding!.NodeType == QilNodeType.Unknown);  // fixupNode
+            Debug.Assert(filter.Variable.Binding!.NodeType == QilNodeType.Unknown); // fixupNode
             Debug.Assert(filter.Body.XmlType!.IsSubtypeOf(T.Boolean));
         }
 
@@ -81,7 +84,10 @@ namespace System.Xml.Xsl.Xslt
             Debug.Assert(left != null);
             Debug.Assert(right != null);
             // It is important to not create nested lists here
-            Debug.Assert(right.NodeType == QilNodeType.Filter, "LocationPathPattern must be compiled into a filter");
+            Debug.Assert(
+                right.NodeType == QilNodeType.Filter,
+                "LocationPathPattern must be compiled into a filter"
+            );
             if (left.NodeType == QilNodeType.Sequence)
             {
                 ((QilList)left).Add(right);
@@ -89,57 +95,97 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                Debug.Assert(left.NodeType == QilNodeType.Filter, "LocationPathPattern must be compiled into a filter");
+                Debug.Assert(
+                    left.NodeType == QilNodeType.Filter,
+                    "LocationPathPattern must be compiled into a filter"
+                );
                 return _f.Sequence(left, right);
             }
         }
 
-        private static QilLoop BuildAxisFilter(QilPatternFactory f, QilIterator itr, XPathAxis xpathAxis, XPathNodeType nodeType, string? name, string? nsUri)
+        private static QilLoop BuildAxisFilter(
+            QilPatternFactory f,
+            QilIterator itr,
+            XPathAxis xpathAxis,
+            XPathNodeType nodeType,
+            string? name,
+            string? nsUri
+        )
         {
             QilNode nameTest = (
-                name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri)) : // ns:bar || bar
-                nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri)) : // ns:*
-                name != null ? f.Eq(f.LocalNameOf(itr), f.String(name)) : // *:foo
-                                                                          /*name  == nsUri == null*/       f.True()                                       // *
+                name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
+                : // ns:bar || bar
+                nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                : // ns:*
+                name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                : // *:foo
+                /*name  == nsUri == null*/f.True() // *
             );
 
-            XmlNodeKindFlags intersection = XPathBuilder.AxisTypeMask(itr.XmlType!.NodeKinds, nodeType, xpathAxis);
+            XmlNodeKindFlags intersection = XPathBuilder.AxisTypeMask(
+                itr.XmlType!.NodeKinds,
+                nodeType,
+                xpathAxis
+            );
 
             QilNode typeTest = (
-                intersection == 0 ? f.False() :  // input & required doesn't intersect
-                intersection == itr.XmlType.NodeKinds ? f.True() :  // input is subset of required
-                                                                    /*else*/                                f.IsType(itr, T.NodeChoice(intersection))
+                intersection == 0 ? f.False()
+                : // input & required doesn't intersect
+                intersection == itr.XmlType.NodeKinds ? f.True()
+                : // input is subset of required
+                /*else*/f.IsType(itr, T.NodeChoice(intersection))
             );
 
             QilLoop filter = f.BaseFactory.Filter(itr, f.And(typeTest, nameTest));
-            filter.XmlType = T.PrimeProduct(T.NodeChoice(intersection), filter.XmlType!.Cardinality);
+            filter.XmlType = T.PrimeProduct(
+                T.NodeChoice(intersection),
+                filter.XmlType!.Cardinality
+            );
 
             return filter;
         }
 
-        public QilNode Axis(XPathAxis xpathAxis, XPathNodeType nodeType, string? prefix, string? name)
+        public QilNode Axis(
+            XPathAxis xpathAxis,
+            XPathNodeType nodeType,
+            string? prefix,
+            string? name
+        )
         {
             Debug.Assert(
-                xpathAxis == XPathAxis.Child ||
-                xpathAxis == XPathAxis.Attribute ||
-                xpathAxis == XPathAxis.DescendantOrSelf ||
-                xpathAxis == XPathAxis.Root
+                xpathAxis == XPathAxis.Child
+                    || xpathAxis == XPathAxis.Attribute
+                    || xpathAxis == XPathAxis.DescendantOrSelf
+                    || xpathAxis == XPathAxis.Root
             );
             QilLoop result;
             double priority;
             switch (xpathAxis)
             {
                 case XPathAxis.DescendantOrSelf:
-                    Debug.Assert(nodeType == XPathNodeType.All && prefix == null && name == null, " // is the only d-o-s axes that we can have in pattern");
+                    Debug.Assert(
+                        nodeType == XPathNodeType.All && prefix == null && name == null,
+                        " // is the only d-o-s axes that we can have in pattern"
+                    );
                     return _f.Nop(_fixupNode); // We using Nop as a flag that DescendantOrSelf exis was used between steps.
                 case XPathAxis.Root:
                     QilIterator i;
-                    result = _f.BaseFactory.Filter(i = _f.For(_fixupNode), _f.IsType(i, T.Document));
+                    result = _f.BaseFactory.Filter(
+                        i = _f.For(_fixupNode),
+                        _f.IsType(i, T.Document)
+                    );
                     priority = 0.5;
                     break;
                 default:
                     string? nsUri = prefix == null ? null : _environment.ResolvePrefix(prefix);
-                    result = BuildAxisFilter(_f, _f.For(_fixupNode), xpathAxis, nodeType, name, nsUri);
+                    result = BuildAxisFilter(
+                        _f,
+                        _f.For(_fixupNode),
+                        xpathAxis,
+                        nodeType,
+                        name,
+                        nsUri
+                    );
                     switch (nodeType)
                     {
                         case XPathNodeType.Element:
@@ -193,10 +239,13 @@ namespace System.Xml.Xsl.Xslt
             {
                 QilUnary nop = (QilUnary)left;
                 Debug.Assert(nop.Child == _fixupNode);
-                nop.Child = right;  // We use Nop as a flag that DescendantOrSelf axis was used between steps.
+                nop.Child = right; // We use Nop as a flag that DescendantOrSelf axis was used between steps.
                 return nop;
             }
-            Debug.Assert(GetLastParent(left) == left, "Left is always single axis and never the step");
+            Debug.Assert(
+                GetLastParent(left) == left,
+                "Left is always single axis and never the step"
+            );
             Debug.Assert(left.NodeType == QilNodeType.Filter);
             CleanAnnotation(left);
             QilLoop parentFilter = (QilLoop)left;
@@ -214,14 +263,21 @@ namespace System.Xml.Xsl.Xslt
             QilLoop? lastParent = GetLastParent(right);
             Debug.Assert(lastParent != null);
 
-            FixupFilterBinding(parentFilter, ancestor ? _f.Ancestor(lastParent.Variable) : _f.Parent(lastParent.Variable));
+            FixupFilterBinding(
+                parentFilter,
+                ancestor ? _f.Ancestor(lastParent.Variable) : _f.Parent(lastParent.Variable)
+            );
             lastParent.Body = _f.And(lastParent.Body, _f.Not(_f.IsEmpty(parentFilter)));
             SetPriority(right, 0.5);
             SetLastParent(right, parentFilter);
             return right;
         }
 
-        QilNode IXPathBuilder<QilNode>.Predicate(QilNode node, QilNode condition, bool isReverseStep)
+        QilNode IXPathBuilder<QilNode>.Predicate(
+            QilNode node,
+            QilNode condition,
+            bool isReverseStep
+        )
         {
             Debug.Fail("Should not call to this function.");
             return null;
@@ -237,7 +293,9 @@ namespace System.Xml.Xsl.Xslt
             List<QilNode> convertedPredicates = new List<QilNode>(predicates.Count);
             foreach (var predicate in predicates)
             {
-                convertedPredicates.Add(XPathBuilder.PredicateToBoolean(predicate, _f, _predicateEnvironment));
+                convertedPredicates.Add(
+                    XPathBuilder.PredicateToBoolean(predicate, _f, _predicateEnvironment)
+                );
             }
 
             QilLoop nodeFilter = (QilLoop)nodeset;
@@ -245,13 +303,20 @@ namespace System.Xml.Xsl.Xslt
 
             //If no last() and position() in predicates, use nodeFilter.Variable to fixup current
             //because all the predicates only based on the input variable, no matter what other predicates are.
-            if (_predicateEnvironment.numFixupLast == 0 && _predicateEnvironment.numFixupPosition == 0)
+            if (
+                _predicateEnvironment.numFixupLast == 0
+                && _predicateEnvironment.numFixupPosition == 0
+            )
             {
                 foreach (var predicate in convertedPredicates)
                 {
                     nodeFilter.Body = _f.And(nodeFilter.Body, predicate);
                 }
-                nodeFilter.Body = _predicateEnvironment.fixupVisitor.Fixup(nodeFilter.Body, current, null);
+                nodeFilter.Body = _predicateEnvironment.fixupVisitor.Fixup(
+                    nodeFilter.Body,
+                    current,
+                    null
+                );
             }
             //If any preidcate contains last() or position() node, then the current node is based on previous predicates,
             //for instance, a[...][2] is match second node after filter 'a[...]' instead of second 'a'.
@@ -269,9 +334,16 @@ namespace System.Xml.Xsl.Xslt
                 QilNode matchingSet = siblingFilter;
                 foreach (var predicate in convertedPredicates)
                 {
-                    matchingSet = XPathBuilder.BuildOnePredicate(matchingSet, predicate, /*isReverseStep*/false,
-                                                                    _f, _predicateEnvironment.fixupVisitor,
-                                                                    ref _predicateEnvironment.numFixupCurrent, ref _predicateEnvironment.numFixupPosition, ref _predicateEnvironment.numFixupLast);
+                    matchingSet = XPathBuilder.BuildOnePredicate(
+                        matchingSet,
+                        predicate, /*isReverseStep*/
+                        false,
+                        _f,
+                        _predicateEnvironment.fixupVisitor,
+                        ref _predicateEnvironment.numFixupCurrent,
+                        ref _predicateEnvironment.numFixupPosition,
+                        ref _predicateEnvironment.numFixupLast
+                    );
                 }
 
                 //check if the matching nodes contains the current node
@@ -304,26 +376,40 @@ namespace System.Xml.Xsl.Xslt
             {
                 Debug.Assert(name == "key", "Unexpected function");
                 Debug.Assert(
-                    args.Count == 2 &&
-                    args[0].NodeType == QilNodeType.LiteralString && args[1].NodeType == QilNodeType.LiteralString,
+                    args.Count == 2
+                        && args[0].NodeType == QilNodeType.LiteralString
+                        && args[1].NodeType == QilNodeType.LiteralString,
                     "Function key() must have two literal string arguments"
                 );
-                matches = _environment.ResolveFunction(prefix, name, args, new XsltFunctionFocus(i));
+                matches = _environment.ResolveFunction(
+                    prefix,
+                    name,
+                    args,
+                    new XsltFunctionFocus(i)
+                );
             }
 
             QilIterator j;
-            QilLoop result = _f.BaseFactory.Filter(i, _f.Not(_f.IsEmpty(_f.Filter(j = _f.For(matches), _f.Is(j, i)))));
+            QilLoop result = _f.BaseFactory.Filter(
+                i,
+                _f.Not(_f.IsEmpty(_f.Filter(j = _f.For(matches), _f.Is(j, i))))
+            );
             SetPriority(result, 0.5);
             SetLastParent(result, result);
             return result;
         }
 
-        public QilNode String(string value) { return _f.String(value); }     // As argument of id() or key() function
+        public QilNode String(string value)
+        {
+            return _f.String(value);
+        } // As argument of id() or key() function
+
         public QilNode Number(double value)
         {
             //Internal Error: Literal number is not allowed in XSLT pattern outside of predicate.
             throw new XmlException(SR.Xml_InternalError);
         }
+
         public QilNode Variable(string prefix, string name)
         {
             //Internal Error: Variable is not allowed in XSLT pattern outside of predicate.
@@ -373,8 +459,14 @@ namespace System.Xml.Xsl.Xslt
         public IXPathBuilder<QilNode> GetPredicateBuilder(QilNode ctx)
         {
             QilLoop context = (QilLoop)ctx;
-            Debug.Assert(context != null, "Predicate always has step so it can't have context == null");
-            Debug.Assert(context.Variable.NodeType == QilNodeType.For, "It shouldn't be Let, becaus predicates in PatternBuilder don't produce cached tuples.");
+            Debug.Assert(
+                context != null,
+                "Predicate always has step so it can't have context == null"
+            );
+            Debug.Assert(
+                context.Variable.NodeType == QilNodeType.For,
+                "It shouldn't be Let, becaus predicates in PatternBuilder don't produce cached tuples."
+            );
             return _predicateBuilder;
         }
 
@@ -383,10 +475,14 @@ namespace System.Xml.Xsl.Xslt
             private readonly IXPathEnvironment _baseEnvironment;
             private readonly XPathQilFactory _f;
             public readonly XPathBuilder.FixupVisitor fixupVisitor;
-            private readonly QilNode _fixupCurrent, _fixupPosition, _fixupLast;
+            private readonly QilNode _fixupCurrent,
+                _fixupPosition,
+                _fixupLast;
 
             // Number of unresolved fixup nodes
-            public int numFixupCurrent, numFixupPosition, numFixupLast;
+            public int numFixupCurrent,
+                numFixupPosition,
+                numFixupLast;
 
             public XPathPredicateEnvironment(IXPathEnvironment baseEnvironment)
             {
@@ -395,30 +491,59 @@ namespace System.Xml.Xsl.Xslt
                 _fixupCurrent = _f.Unknown(T.NodeNotRtf);
                 _fixupPosition = _f.Unknown(T.DoubleX);
                 _fixupLast = _f.Unknown(T.DoubleX);
-                this.fixupVisitor = new XPathBuilder.FixupVisitor(_f, _fixupCurrent, _fixupPosition, _fixupLast);
+                this.fixupVisitor = new XPathBuilder.FixupVisitor(
+                    _f,
+                    _fixupCurrent,
+                    _fixupPosition,
+                    _fixupLast
+                );
             }
 
             /*  ----------------------------------------------------------------------------
                 IXPathEnvironment interface
             */
-            public XPathQilFactory Factory { get { return _f; } }
+            public XPathQilFactory Factory
+            {
+                get { return _f; }
+            }
 
             public QilNode ResolveVariable(string prefix, string name)
             {
                 return _baseEnvironment.ResolveVariable(prefix, name);
             }
-            public QilNode ResolveFunction(string prefix, string name, IList<QilNode> args, IFocus env)
+
+            public QilNode ResolveFunction(
+                string prefix,
+                string name,
+                IList<QilNode> args,
+                IFocus env
+            )
             {
                 return _baseEnvironment.ResolveFunction(prefix, name, args, env);
             }
+
             public string ResolvePrefix(string prefix)
             {
                 return _baseEnvironment.ResolvePrefix(prefix);
             }
 
-            public QilNode GetCurrent() { numFixupCurrent++; return _fixupCurrent; }
-            public QilNode GetPosition() { numFixupPosition++; return _fixupPosition; }
-            public QilNode GetLast() { numFixupLast++; return _fixupLast; }
+            public QilNode GetCurrent()
+            {
+                numFixupCurrent++;
+                return _fixupCurrent;
+            }
+
+            public QilNode GetPosition()
+            {
+                numFixupPosition++;
+                return _fixupPosition;
+            }
+
+            public QilNode GetLast()
+            {
+                numFixupLast++;
+                return _fixupLast;
+            }
         }
 
         private sealed class XsltFunctionFocus : IFocus

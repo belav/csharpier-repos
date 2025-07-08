@@ -1,13 +1,13 @@
 using System;
-using System.Data;
-using System.Configuration;
 using System.Collections;
+using System.Configuration;
+using System.Data;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 namespace UpdatePanelUserControl
 {
@@ -50,7 +50,8 @@ namespace UpdatePanelUserControl
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
-            this.EmployeesGridView.SelectedIndexChanged += this.EmployeesGridView_SelectedIndexChanged;
+            this.EmployeesGridView.SelectedIndexChanged +=
+                this.EmployeesGridView_SelectedIndexChanged;
             this.EmployeesGridView.PageIndexChanged += this.EmployeesGridView_PageIndexChanged;
             this.EmployeesGridView.DataBound += this.EmployeesGridView_DataBound;
             this.EmployeesGridView.Sorted += this.EmployeesGridView_Sorted;
@@ -94,7 +95,7 @@ namespace UpdatePanelUserControl
         protected void EmployeesGridView_DataBound(object sender, EventArgs e)
         {
             int selectedEmployeeID =
-              ViewState["SelectedEmployeeID"] == null ? -1 : (int)ViewState["SelectedEmployeeID"];
+                ViewState["SelectedEmployeeID"] == null ? -1 : (int)ViewState["SelectedEmployeeID"];
 
             for (int i = 0; i < EmployeesGridView.Rows.Count; i++)
                 if ((int)EmployeesGridView.DataKeys[i].Value == selectedEmployeeID)

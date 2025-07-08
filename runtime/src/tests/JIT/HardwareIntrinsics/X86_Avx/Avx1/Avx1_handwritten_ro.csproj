@@ -10,7 +10,6 @@
   <ItemGroup>
     <Compile Include="HandwrittenProgram.cs" />
     <Compile Include="..\..\X86\Shared\SimpleUnOpTest_DataTable.cs" />
-
     <Compile Include="Blend.cs" />
     <Compile Include="CompareScalar.cs" />
     <Compile Include="Compare.cs" />

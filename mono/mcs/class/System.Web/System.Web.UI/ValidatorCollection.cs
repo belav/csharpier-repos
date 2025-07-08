@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,62 +31,70 @@
 using System.Collections;
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class ValidatorCollection : ICollection, IEnumerable
+    {
+        ArrayList _validators;
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class ValidatorCollection : ICollection, IEnumerable
-	{
-		ArrayList _validators;
+        public ValidatorCollection()
+        {
+            _validators = new ArrayList();
+        }
 
-		public ValidatorCollection ()
-		{
-			_validators = new ArrayList ();
-		}
+        public int Count
+        {
+            get { return _validators.Count; }
+        }
 
-		public int Count {
-			get { return _validators.Count; }
-		}
+        public bool IsReadOnly
+        {
+            get { return _validators.IsReadOnly; }
+        }
 
-		public bool IsReadOnly {
-			get { return _validators.IsReadOnly; }
-		}
+        public bool IsSynchronized
+        {
+            get { return _validators.IsSynchronized; }
+        }
 
-		public bool IsSynchronized {
-			get { return _validators.IsSynchronized; }
-		}
+        public IValidator this[int index]
+        {
+            get { return (IValidator)_validators[index]; }
+        }
 
-		public IValidator this [int index] {
-			get { return (IValidator) _validators [index]; }
-		}
+        public object SyncRoot
+        {
+            get { return this; }
+        }
 
-		public object SyncRoot {
-			get { return this; }
-		}
+        public void Add(IValidator validator)
+        {
+            _validators.Add(validator);
+        }
 
-		public void Add (IValidator validator)
-		{
-			_validators.Add (validator);
-		}
+        public bool Contains(IValidator validator)
+        {
+            return _validators.Contains(validator);
+        }
 
-		public bool Contains (IValidator validator)
-		{
-			return _validators.Contains (validator);
-		}
+        public void CopyTo(Array array, int index)
+        {
+            _validators.CopyTo(array, index);
+        }
 
-		public void CopyTo (Array array, int index)
-		{
-			_validators.CopyTo (array, index);
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return _validators.GetEnumerator();
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return _validators.GetEnumerator ();
-		}
-
-		public void Remove (IValidator validator)
-		{
-			_validators.Remove (validator);
-		}
-	}
+        public void Remove(IValidator validator)
+        {
+            _validators.Remove(validator);
+        }
+    }
 }

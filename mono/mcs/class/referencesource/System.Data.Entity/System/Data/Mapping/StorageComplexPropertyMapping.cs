@@ -10,16 +10,17 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Data.Metadata.Edm;
+using System.Text;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Mapping metadata for Complex properties.
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following
-    /// --Mapping 
+    /// --Mapping
     ///   --EntityContainerMapping ( CNorthwind-->SNorthwind )
     ///     --EntitySetMapping
     ///       --EntityTypeMapping
@@ -41,7 +42,7 @@ namespace System.Data.Mapping {
     ///               --ScalarProperyMap ( CMemberMetadata-->SMemberMetadata )
     ///               --DiscriminatorProperyMap ( constant value-->SMemberMetadata )
     ///           --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
-    ///     --AssociationSetMapping 
+    ///     --AssociationSetMapping
     ///       --AssociationTypeMapping
     ///         --MappingFragment
     ///           --EndPropertyMap
@@ -49,18 +50,20 @@ namespace System.Data.Mapping {
     ///             --ScalarProperyMap ( CMemberMetadata-->SMemberMetadata )
     ///           --EndPropertyMap
     ///             --ScalarPropertyMap ( CMemberMetadata-->SMemberMetadata )
-    /// This class represents the metadata for all the complex property map elements in the 
-    /// above example. ComplexPropertyMaps contain ComplexTypeMaps which define mapping based 
+    /// This class represents the metadata for all the complex property map elements in the
+    /// above example. ComplexPropertyMaps contain ComplexTypeMaps which define mapping based
     /// on the type of the ComplexProperty in case of inheritance.
     /// </example>
-    internal class StorageComplexPropertyMapping : StoragePropertyMapping {
+    internal class StorageComplexPropertyMapping : StoragePropertyMapping
+    {
         #region Constructors
         /// <summary>
         /// Construct a new Complex Property mapping object
         /// </summary>
         /// <param name="cdmMember">The MemberMetadata object that represents this Complex member</param>
         internal StorageComplexPropertyMapping(EdmProperty cdmMember)
-            : base(cdmMember) {
+            : base(cdmMember)
+        {
             this.m_typeMappings = new List<StorageComplexTypeMapping>();
         }
         #endregion
@@ -87,10 +90,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal ReadOnlyCollection<StorageComplexTypeMapping> TypeMappings
         {
-            get
-            {
-                return this.m_typeMappings.AsReadOnly();
-            }
+            get { return this.m_typeMappings.AsReadOnly(); }
         }
         #endregion
 
@@ -109,12 +109,14 @@ namespace System.Data.Mapping {
         /// Will be removed shortly.
         /// </summary>
         /// <param name="index"></param>
-        internal override void Print(int index) {
+        internal override void Print(int index)
+        {
             StorageEntityContainerMapping.GetPrettyPrintString(ref index);
             StringBuilder sb = new StringBuilder();
             sb.Append("ComplexPropertyMapping");
             sb.Append("   ");
-            if (this.EdmProperty != null) {
+            if (this.EdmProperty != null)
+            {
                 sb.Append("Name:");
                 sb.Append(this.EdmProperty.Name);
                 sb.Append("   ");
@@ -124,7 +126,6 @@ namespace System.Data.Mapping {
             {
                 typeMapping.Print(index + 5);
             }
-
         }
         #endregion
     }

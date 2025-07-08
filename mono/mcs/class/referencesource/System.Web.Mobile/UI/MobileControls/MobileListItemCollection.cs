@@ -1,20 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="MobileListItemCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile List Item collection class.
      *
@@ -22,9 +21,17 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class MobileListItemCollection : ArrayListCollectionBase, IStateManager
     {
         private bool _marked = false;
@@ -33,35 +40,22 @@ namespace System.Web.UI.MobileControls
         private int _baseIndex = 0;
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.MobileListItemCollection"]/*' />
-        public MobileListItemCollection()
-        {
-        }
+        public MobileListItemCollection() { }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.MobileListItemCollection1"]/*' />
-        public MobileListItemCollection(ArrayList items) : base(items)
-        {
-        }
+        public MobileListItemCollection(ArrayList items)
+            : base(items) { }
 
         internal int BaseIndex
         {
-            get
-            {
-                return _baseIndex;
-            }
-
-            set
-            {
-                _baseIndex = value;
-            }
+            get { return _baseIndex; }
+            set { _baseIndex = value; }
         }
 
-        internal bool SaveSelection {
-            get {
-                return _saveSelection;
-            }
-            set {
-                _saveSelection = value;
-            }
+        internal bool SaveSelection
+        {
+            get { return _saveSelection; }
+            set { _saveSelection = value; }
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.GetAll"]/*' />
@@ -69,9 +63,9 @@ namespace System.Web.UI.MobileControls
         {
             int n = Count;
             MobileListItem[] result = new MobileListItem[n];
-            if (n > 0) 
+            if (n > 0)
             {
-                Items.CopyTo (0, result, 0, n);
+                Items.CopyTo(0, result, 0, n);
             }
             return result;
         }
@@ -79,7 +73,7 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.SetAll"]/*' />
         public void SetAll(MobileListItem[] value)
         {
-            Items = new ArrayList (value);
+            Items = new ArrayList(value);
             if (_marked)
             {
                 _saveAll = true;
@@ -100,17 +94,14 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.this"]/*' />
         public MobileListItem this[int index]
         {
-            get
-            {
-                return (MobileListItem)Items[index];
-            }
+            get { return (MobileListItem)Items[index]; }
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Add"]/*' />
         public void Add(MobileListItem item)
         {
             item.SetIndex(Items.Count + BaseIndex);
-            Items.Add (item);
+            Items.Add(item);
             if (_marked)
             {
                 item.Dirty = true;
@@ -120,13 +111,13 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Add1"]/*' />
         public virtual void Add(String item)
         {
-            Add (new MobileListItem (item));
+            Add(new MobileListItem(item));
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Clear"]/*' />
         public void Clear()
         {
-            Items.Clear ();
+            Items.Clear();
             if (_marked)
             {
                 _saveAll = true;
@@ -136,9 +127,8 @@ namespace System.Web.UI.MobileControls
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Contains"]/*' />
         public bool Contains(MobileListItem item)
         {
-            return Items.Contains (item);
+            return Items.Contains(item);
         }
-
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.IndexOf"]/*' />
         public int IndexOf(MobileListItem item)
@@ -147,15 +137,15 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Insert"]/*' />
-        public virtual void Insert(int index, String item) 
+        public virtual void Insert(int index, String item)
         {
-            Insert (index, new MobileListItem (item));
+            Insert(index, new MobileListItem(item));
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Insert1"]/*' />
-        public void Insert(int index, MobileListItem item) 
+        public void Insert(int index, MobileListItem item)
         {
-            Items.Insert (index, item);
+            Items.Insert(index, item);
             for (int i = index; i < Items.Count; i++)
             {
                 ((MobileListItem)Items[i]).SetIndex(i + BaseIndex);
@@ -167,9 +157,9 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.RemoveAt"]/*' />
-        public void RemoveAt(int index) 
+        public void RemoveAt(int index)
         {
-            Items.RemoveAt (index);
+            Items.RemoveAt(index);
             for (int i = index; i < Items.Count; i++)
             {
                 ((MobileListItem)Items[i]).SetIndex(i + BaseIndex);
@@ -179,22 +169,22 @@ namespace System.Web.UI.MobileControls
                 _saveAll = true;
             }
         }
-    
+
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Remove"]/*' />
-        public virtual void Remove(String item) 
+        public virtual void Remove(String item)
         {
-            int index = IndexOf (new MobileListItem(item));
-            if (index >= 0) 
+            int index = IndexOf(new MobileListItem(item));
+            if (index >= 0)
             {
-                RemoveAt (index);
+                RemoveAt(index);
             }
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.Remove1"]/*' />
-        public void Remove(MobileListItem item) 
+        public void Remove(MobileListItem item)
         {
             int index = IndexOf(item);
-            if (index >= 0) 
+            if (index >= 0)
             {
                 RemoveAt(index);
             }
@@ -208,15 +198,12 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         protected bool IsTrackingViewState
         {
-            get
-            {
-                return _marked;
-            }
+            get { return _marked; }
         }
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.IStateManager.TrackViewState"]/*' />
         /// <internalonly/>
-        protected void TrackViewState() 
+        protected void TrackViewState()
         {
             _marked = true;
             foreach (IStateManager item in Items)
@@ -227,11 +214,11 @@ namespace System.Web.UI.MobileControls
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.IStateManager.LoadViewState"]/*' />
         /// <internalonly/>
-        protected void LoadViewState(Object state) 
+        protected void LoadViewState(Object state)
         {
             if (state != null)
             {
-                Object[] changes = (Object[]) state;
+                Object[] changes = (Object[])state;
                 int length = changes.Length;
 
                 if (length == 5)
@@ -240,30 +227,31 @@ namespace System.Web.UI.MobileControls
                     if (count < Count)
                     {
                         throw new Exception(
-                            SR.GetString(SR.MobileListItemCollection_ViewStateManagementError));
+                            SR.GetString(SR.MobileListItemCollection_ViewStateManagementError)
+                        );
                     }
-                    EnsureCount ((int)changes[0]);
+                    EnsureCount((int)changes[0]);
                     int[] changeIndices = (int[])changes[1];
                     Object[] itemChanges = (Object[])changes[2];
                     for (int i = 0; i < changeIndices.Length; i++)
                     {
-                        ((IStateManager)Items[changeIndices[i]]).LoadViewState (itemChanges[i]);
+                        ((IStateManager)Items[changeIndices[i]]).LoadViewState(itemChanges[i]);
                     }
                 }
                 else if (length == 3)
                 {
                     if (changes[0] == null)
                     {
-                        Clear ();
+                        Clear();
                     }
                     else
                     {
                         Object[] itemChanges = (Object[])changes[0];
-                        EnsureCount (itemChanges.Length);
+                        EnsureCount(itemChanges.Length);
                         int i = 0;
                         foreach (IStateManager item in Items)
                         {
-                            item.LoadViewState (itemChanges[i++]);
+                            item.LoadViewState(itemChanges[i++]);
                         }
                     }
                 }
@@ -292,7 +280,7 @@ namespace System.Web.UI.MobileControls
 
         /// <include file='doc\MobileListItemCollection.uex' path='docs/doc[@for="MobileListItemCollection.IStateManager.SaveViewState"]/*' />
         /// <internalonly/>
-        protected Object SaveViewState() 
+        protected Object SaveViewState()
         {
             Object[] changes;
             int changedCount = 0;
@@ -334,7 +322,7 @@ namespace System.Web.UI.MobileControls
                     foreach (MobileListItem item in Items)
                     {
                         item.Dirty = true;
-                        itemChanges[i++] = ((IStateManager)item).SaveViewState ();
+                        itemChanges[i++] = ((IStateManager)item).SaveViewState();
                     }
                 }
                 else
@@ -364,7 +352,7 @@ namespace System.Web.UI.MobileControls
                     if (item.Dirty)
                     {
                         changeIndices[changedCount] = i;
-                        itemChanges[changedCount] = ((IStateManager)item).SaveViewState ();
+                        itemChanges[changedCount] = ((IStateManager)item).SaveViewState();
                         changedCount++;
                     }
                     i++;
@@ -397,7 +385,7 @@ namespace System.Web.UI.MobileControls
             int diff = Count - count;
             if (diff > 0)
             {
-                Items.RemoveRange (count, diff);
+                Items.RemoveRange(count, diff);
                 if (_marked)
                 {
                     _saveAll = true;
@@ -407,36 +395,37 @@ namespace System.Web.UI.MobileControls
             {
                 for (int i = Count; i < count; i++)
                 {
-                    MobileListItem item = new MobileListItem ();
+                    MobileListItem item = new MobileListItem();
                     item.SetIndex(i + BaseIndex);
-                    Add (item);
+                    Add(item);
                 }
             }
         }
 
         #region Implementation of IStateManager
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
         #endregion
-    } 
+    }
 }
-

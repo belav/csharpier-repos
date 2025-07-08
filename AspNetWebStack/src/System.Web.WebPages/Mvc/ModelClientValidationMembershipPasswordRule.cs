@@ -5,7 +5,12 @@ namespace System.Web.Mvc
 {
     internal class ModelClientValidationMembershipPasswordRule : ModelClientValidationRule
     {
-        public ModelClientValidationMembershipPasswordRule(string errorMessage, int minRequiredPasswordLength, int minRequiredNonAlphanumericCharacters, string passwordStrengthRegularExpression)
+        public ModelClientValidationMembershipPasswordRule(
+            string errorMessage,
+            int minRequiredPasswordLength,
+            int minRequiredNonAlphanumericCharacters,
+            string passwordStrengthRegularExpression
+        )
         {
             ErrorMessage = errorMessage;
             ValidationType = "password";

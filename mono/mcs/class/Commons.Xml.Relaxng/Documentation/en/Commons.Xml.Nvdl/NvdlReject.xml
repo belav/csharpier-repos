@@ -1,5 +1,8 @@
 <Type Name="NvdlReject" FullName="Commons.Xml.Nvdl.NvdlReject">
-  <TypeSignature Language="C#" Value="public class NvdlReject : Commons.Xml.Nvdl.NvdlNoResultAction" />
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlReject : Commons.Xml.Nvdl.NvdlNoResultAction"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>

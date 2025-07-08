@@ -53,12 +53,11 @@ public class WebAssemblyPrerenderedTest : ServerTestBase<AspNetSiteServerFixture
     private void WaitUntilLoaded()
     {
         var jsExecutor = (IJavaScriptExecutor)Browser;
-        Browser.True(
-            () =>
-                jsExecutor.ExecuteScript(
-                    "return window['__aspnetcore__testing__blazor_wasm__started__'];"
-                )
-                    is not null
+        Browser.True(() =>
+            jsExecutor.ExecuteScript(
+                "return window['__aspnetcore__testing__blazor_wasm__started__'];"
+            )
+                is not null
         );
     }
 

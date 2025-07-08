@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         public async Task FixAllInDocument1()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M()
     {
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         return e != null ? 1 : 0;
     }
 }",
-@"class C
+                @"class C
 {
     int M()
     {
@@ -65,14 +65,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
         return o is string e ? 1 : 0;
     }
-}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp8));
+}",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument1_CSharp9()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int M()
     {
@@ -98,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         return e != null ? 1 : 0;
     }
 }",
-@"class C
+                @"class C
 {
     int M()
     {
@@ -118,14 +122,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
 
         return o is string e ? 1 : 0;
     }
-}", parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+}",
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp9
+                )
+            );
         }
 
         [Fact]
         public async Task FixAllInDocument2()
         {
             await TestInRegularAndScriptAsync(
-@"class Symbol
+                @"class Symbol
 {
     public ContainingSymbol { get; }
 
@@ -148,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class Symbol
+                @"class Symbol
 {
     public ContainingSymbol { get; }
 
@@ -169,14 +177,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         var use = symbol;
     }
 }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26679")]
         public async Task FixAllInDocument3()
         {
             await TestInRegularAndScriptAsync(
-@"class Test
+                @"class Test
 {
     void M()
     {
@@ -207,7 +216,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class Test
+                @"class Test
 {
     void M()
     {
@@ -234,14 +243,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
             return false;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26680")]
         public async Task FixAllInDocument4()
         {
             await TestInRegularAndScriptAsync(
-@"class Test
+                @"class Test
 {
     void M()
     {
@@ -254,7 +264,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         }
     }
 }",
-@"class Test
+                @"class Test
 {
     void M()
     {
@@ -262,7 +272,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternMatching
         {
         }
     }
-}");
+}"
+            );
         }
     }
 }

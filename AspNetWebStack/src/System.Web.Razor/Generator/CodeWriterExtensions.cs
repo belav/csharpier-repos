@@ -8,7 +8,10 @@ namespace System.Web.Razor.Generator
 {
     internal static class CodeWriterExtensions
     {
-        public static void WriteLocationTaggedString(this CodeWriter writer, LocationTagged<string> value)
+        public static void WriteLocationTaggedString(
+            this CodeWriter writer,
+            LocationTagged<string> value
+        )
         {
             writer.WriteStartMethodInvoke("Tuple.Create");
             writer.WriteStringLiteral(value.Value);

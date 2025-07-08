@@ -11,11 +11,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal interface IVSTypeScriptDiagnosticService
     {
-        Task<ImmutableArray<VSTypeScriptDiagnosticData>> GetPushDiagnosticsAsync(Workspace workspace, ProjectId projectId, DocumentId documentId, object id, bool includeSuppressedDiagnostics, CancellationToken cancellationToken);
+        Task<ImmutableArray<VSTypeScriptDiagnosticData>> GetPushDiagnosticsAsync(
+            Workspace workspace,
+            ProjectId projectId,
+            DocumentId documentId,
+            object id,
+            bool includeSuppressedDiagnostics,
+            CancellationToken cancellationToken
+        );
 
         [Obsolete]
-        IDisposable RegisterDiagnosticsUpdatedEventHandler(Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action);
+        IDisposable RegisterDiagnosticsUpdatedEventHandler(
+            Action<VSTypeScriptDiagnosticsUpdatedArgsWrapper> action
+        );
 
-        IDisposable RegisterDiagnosticsUpdatedEventHandler(Action<ImmutableArray<VSTypeScriptDiagnosticsUpdatedArgsWrapper>> action);
+        IDisposable RegisterDiagnosticsUpdatedEventHandler(
+            Action<ImmutableArray<VSTypeScriptDiagnosticsUpdatedArgsWrapper>> action
+        );
     }
 }

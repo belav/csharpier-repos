@@ -21,20 +21,16 @@ namespace System.IdentityModel
         /// Constructor for async results that do not need a callback.
         /// </summary>
         /// <param name="state">A user-defined object that qualifies or contains information about an asynchronous operation.</param>
-        public TypedAsyncResult( object state )
-            : base( state )
-        {
-        }
+        public TypedAsyncResult(object state)
+            : base(state) { }
 
         /// <summary>
         /// Constructor for async results that need a callback and a state.
         /// </summary>
         /// <param name="callback">The method to be called when the async operation completes.</param>
         /// <param name="state">A user-defined object that qualifies or contains information about an asynchronous operation.</param>
-        public TypedAsyncResult( AsyncCallback callback, object state )
-            : base( callback, state )
-        {
-        }
+        public TypedAsyncResult(AsyncCallback callback, object state)
+            : base(callback, state) { }
 
         /// <summary>
         /// Call this version of complete when your asynchronous operation is complete.  This will save the
@@ -42,11 +38,11 @@ namespace System.IdentityModel
         /// </summary>
         /// <param name="result">The result to be wrapped.</param>
         /// <param name="completedSynchronously">True if the asynchronous operation completed synchronously.</param>
-        public void Complete( T result, bool completedSynchronously )
+        public void Complete(T result, bool completedSynchronously)
         {
             _result = result;
 
-            Complete( completedSynchronously );
+            Complete(completedSynchronously);
         }
 
         /// <summary>
@@ -56,11 +52,11 @@ namespace System.IdentityModel
         /// <param name="result">The result to be wrapped.</param>
         /// <param name="completedSynchronously">True if the asynchronous operation completed synchronously.</param>
         /// <param name="exception">The exception during the processing of the asynchronous operation.</param>
-        public void Complete( T result, bool completedSynchronously, Exception exception )
+        public void Complete(T result, bool completedSynchronously, Exception exception)
         {
             _result = result;
 
-            Complete( completedSynchronously, exception);
+            Complete(completedSynchronously, exception);
         }
 
         /// <summary>
@@ -69,19 +65,22 @@ namespace System.IdentityModel
         /// </summary>
         /// <param name="result">The <see cref="IAsyncResult"/> representing the status of an asynchronous operation.</param>
         /// <returns>The typed result of the asynchronous operation.</returns>
-        public new static T End( IAsyncResult result )
+        public new static T End(IAsyncResult result)
         {
-            if ( result == null )
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "result" );
+            if (result == null)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("result");
 
             TypedAsyncResult<T> completedResult = result as TypedAsyncResult<T>;
 
-            if ( completedResult == null )
+            if (completedResult == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument( "result", SR.GetString( SR.ID2004, typeof( TypedAsyncResult<T>), result.GetType() ) );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "result",
+                    SR.GetString(SR.ID2004, typeof(TypedAsyncResult<T>), result.GetType())
+                );
             }
 
-            AsyncResult.End( completedResult );
+            AsyncResult.End(completedResult);
 
             return completedResult.Result;
         }
@@ -91,10 +90,7 @@ namespace System.IdentityModel
         /// </summary>
         public T Result
         {
-            get 
-            { 
-                return _result; 
-            }
+            get { return _result; }
         }
     }
 }

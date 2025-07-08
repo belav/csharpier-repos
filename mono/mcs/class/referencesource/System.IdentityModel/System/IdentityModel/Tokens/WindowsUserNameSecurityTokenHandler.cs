@@ -3,16 +3,16 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IdentityModel.Configuration;
 using System.IdentityModel.Tokens;
+using System.Runtime;
 using System.Runtime.InteropServices;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Xml;
-using System.Security.Claims;
-using System.IdentityModel.Configuration;
-using System.Collections.Generic;
-using System.Runtime;
 
 namespace System.IdentityModel.Tokens
 {
@@ -24,9 +24,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes an instance of <see cref="WindowsUserNameSecurityTokenHandler"/>
         /// </summary>
-        public WindowsUserNameSecurityTokenHandler()
-        {
-        }
+        public WindowsUserNameSecurityTokenHandler() { }
 
         /// <summary>
         /// Returns true to indicate that the token handler can Validate
@@ -34,10 +32,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanValidateToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -60,7 +55,10 @@ namespace System.IdentityModel.Tokens
             UserNameSecurityToken usernameToken = token as UserNameSecurityToken;
             if (usernameToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(UserNameSecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
+                );
             }
 
             if (this.Configuration == null)
@@ -79,7 +77,10 @@ namespace System.IdentityModel.Tokens
                     if (strings.Length != 2 || string.IsNullOrEmpty(strings[0]))
                     {
                         // Only support one slash and domain cannot be empty (consistent with windowslogon).
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID4062));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "token",
+                            SR.GetString(SR.ID4062)
+                        );
                     }
 
                     // This is the downlevel case - domain\userName
@@ -92,27 +93,60 @@ namespace System.IdentityModel.Tokens
                 SafeCloseHandle tokenHandle = null;
                 try
                 {
-                    if (!NativeMethods.LogonUser(userName, domain, password, LOGON32_LOGON_NETWORK_CLEARTEXT, LOGON32_PROVIDER_DEFAULT, out tokenHandle))
+                    if (
+                        !NativeMethods.LogonUser(
+                            userName,
+                            domain,
+                            password,
+                            LOGON32_LOGON_NETWORK_CLEARTEXT,
+                            LOGON32_PROVIDER_DEFAULT,
+                            out tokenHandle
+                        )
+                    )
                     {
                         int error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID4063, userName), new Win32Exception(error)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenValidationException(
+                                SR.GetString(SR.ID4063, userName),
+                                new Win32Exception(error)
+                            )
+                        );
                     }
 
-                    WindowsIdentity windowsIdentity = new WindowsIdentity(tokenHandle.DangerousGetHandle(), AuthenticationTypes.Password, WindowsAccountType.Normal, true);
+                    WindowsIdentity windowsIdentity = new WindowsIdentity(
+                        tokenHandle.DangerousGetHandle(),
+                        AuthenticationTypes.Password,
+                        WindowsAccountType.Normal,
+                        true
+                    );
 
                     // PARTIAL TRUST: will fail when adding claims, AddClaim is SecurityCritical.
-                    windowsIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationInstant, XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated), ClaimValueTypes.DateTime));
-                    windowsIdentity.AddClaim(new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.Password));
+                    windowsIdentity.AddClaim(
+                        new Claim(
+                            ClaimTypes.AuthenticationInstant,
+                            XmlConvert.ToString(DateTime.UtcNow, DateTimeFormats.Generated),
+                            ClaimValueTypes.DateTime
+                        )
+                    );
+                    windowsIdentity.AddClaim(
+                        new Claim(ClaimTypes.AuthenticationMethod, AuthenticationMethods.Password)
+                    );
 
                     if (this.Configuration.SaveBootstrapContext)
                     {
                         if (RetainPassword)
                         {
-                            windowsIdentity.BootstrapContext = new BootstrapContext(usernameToken, this);
+                            windowsIdentity.BootstrapContext = new BootstrapContext(
+                                usernameToken,
+                                this
+                            );
                         }
                         else
                         {
-                            windowsIdentity.BootstrapContext = new BootstrapContext(new UserNameSecurityToken(usernameToken.UserName, null), this);
+                            windowsIdentity.BootstrapContext = new BootstrapContext(
+                                new UserNameSecurityToken(usernameToken.UserName, null),
+                                this
+                            );
                         }
                     }
 

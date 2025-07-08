@@ -7,7 +7,6 @@ using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-
 using Internal.Runtime;
 using Internal.Runtime.Augments;
 
@@ -18,14 +17,11 @@ namespace System
     {
         private IntPtr _value;
 
-        internal unsafe RuntimeTypeHandle(MethodTable* pEEType)
-            => _value = (IntPtr)pEEType;
+        internal unsafe RuntimeTypeHandle(MethodTable* pEEType) => _value = (IntPtr)pEEType;
 
-        internal RuntimeTypeHandle(EETypePtr pEEType)
-            => _value = pEEType.RawValue;
+        internal RuntimeTypeHandle(EETypePtr pEEType) => _value = pEEType.RawValue;
 
-        private RuntimeTypeHandle(IntPtr value)
-            => _value = value;
+        private RuntimeTypeHandle(IntPtr value) => _value = value;
 
         public override bool Equals(object? obj)
         {
@@ -93,7 +89,11 @@ namespace System
             return type.Module.ModuleHandle;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -114,10 +114,7 @@ namespace System
 
         internal bool IsNull
         {
-            get
-            {
-                return _value == new IntPtr(0);
-            }
+            get { return _value == new IntPtr(0); }
         }
     }
 }

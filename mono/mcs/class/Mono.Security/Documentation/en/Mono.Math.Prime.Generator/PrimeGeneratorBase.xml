@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    > for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -31,7 +36,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Confidence">
-      <MemberSignature Language="C#" Value="public virtual Mono.Math.Prime.ConfidenceFactor Confidence { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Mono.Math.Prime.ConfidenceFactor Confidence { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.ConfidenceFactor</ReturnType>
@@ -48,7 +56,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GenerateNewPrime">
-      <MemberSignature Language="C#" Value="public abstract Mono.Math.BigInteger GenerateNewPrime (int bits);" />
+      <MemberSignature
+        Language="C#"
+        Value="public abstract Mono.Math.BigInteger GenerateNewPrime (int bits);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -68,7 +79,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PostTrialDivisionTests">
-      <MemberSignature Language="C#" Value="protected bool PostTrialDivisionTests (Mono.Math.BigInteger bi);" />
+      <MemberSignature
+        Language="C#"
+        Value="protected bool PostTrialDivisionTests (Mono.Math.BigInteger bi);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -88,7 +102,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PrimalityTest">
-      <MemberSignature Language="C#" Value="public virtual Mono.Math.Prime.PrimalityTest PrimalityTest { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Mono.Math.Prime.PrimalityTest PrimalityTest { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.Prime.PrimalityTest</ReturnType>

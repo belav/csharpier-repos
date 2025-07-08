@@ -15,15 +15,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDelegateWithConditionalAccess
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsInvokeDelegateWithConditionalAccess)]
-    public partial class InvokeDelegateWithConditionalAccessTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class InvokeDelegateWithConditionalAccessTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public InvokeDelegateWithConditionalAccessTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new InvokeDelegateWithConditionalAccessAnalyzer(), new InvokeDelegateWithConditionalAccessCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new InvokeDelegateWithConditionalAccessAnalyzer(),
+                new InvokeDelegateWithConditionalAccessCodeFixProvider()
+            );
 
         [Fact]
         public async Task Test1()
@@ -54,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -86,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -118,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13226")]
@@ -139,7 +146,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+                """,
+                new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+                )
+            );
         }
 
         [Fact]
@@ -171,7 +182,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -201,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -235,7 +248,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         (b ? a : null)?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -259,7 +273,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -280,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
@@ -317,11 +333,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
-        /// If we have a variable declaration and if it is read/written outside the delegate 
+        /// If we have a variable declaration and if it is read/written outside the delegate
         /// invocation pattern, the fix is not offered on the declaration.
         /// </remarks>
         [Fact]
@@ -344,11 +361,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v = null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
-        /// If we have a variable declaration and if it is read/written outside the delegate 
+        /// If we have a variable declaration and if it is read/written outside the delegate
         /// invocation pattern, the fix is not offered on the declaration but is offered on
         /// the invocation pattern itself.
         /// </remarks>
@@ -386,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v = null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -421,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         this.E?.Invoke(this, EventArgs.Empty);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -456,7 +476,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         this.E?.Invoke(this, EventArgs.Empty);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -500,7 +521,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -539,7 +561,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         else this.E?.Invoke(this, EventArgs.Empty);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -571,7 +594,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke(); // Comment2
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -602,7 +626,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke(); // Comment2
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51563")]
@@ -633,7 +658,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         System.Console.WriteLine();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51563")]
@@ -661,7 +687,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         System.Console.WriteLine();
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
@@ -696,7 +723,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
@@ -731,7 +759,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -749,7 +778,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -767,7 +797,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         [||]v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -784,7 +815,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         [||]a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -805,7 +837,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -826,11 +859,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
-        /// if local declaration is not immediately preceding the invocation pattern, 
+        /// if local declaration is not immediately preceding the invocation pattern,
         /// the fix is not offered on the declaration.
         /// </remarks>
         [Fact]
@@ -852,11 +886,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         /// <remarks>
-        /// if local declaration is not immediately preceding the invocation pattern, 
+        /// if local declaration is not immediately preceding the invocation pattern,
         /// the fix is not offered on the declaration but is offered on the invocation pattern itself.
         /// </remarks>
         [Fact]
@@ -891,7 +926,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -912,7 +948,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13226")]
@@ -945,7 +982,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13226")]
@@ -978,7 +1016,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13226")]
@@ -1011,7 +1050,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13226")]
@@ -1044,7 +1084,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         v?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31827")]
@@ -1077,7 +1118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
 
                     event EventHandler Event;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31827")]
@@ -1109,7 +1151,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         a?.Invoke();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/50976")]
@@ -1127,7 +1170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.InvokeDeleg
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

@@ -25,7 +25,8 @@ public class UpdatingIdentityResolutionInterceptor : IIdentityResolutionIntercep
     /// </param>
     public UpdatingIdentityResolutionInterceptor(
         bool preserveModifiedValues = false,
-        bool updateOriginalValues = false)
+        bool updateOriginalValues = false
+    )
     {
         _preserveModifiedValues = preserveModifiedValues;
         _updateOriginalValues = updateOriginalValues;
@@ -42,22 +43,30 @@ public class UpdatingIdentityResolutionInterceptor : IIdentityResolutionIntercep
     public virtual void UpdateTrackedInstance(
         IdentityResolutionInterceptionData interceptionData,
         EntityEntry existingEntry,
-        object newEntity)
+        object newEntity
+    )
     {
         var tempEntry = interceptionData.Context.Entry(newEntity);
 
         if (existingEntry.State == EntityState.Added)
         {
-            foreach (var propertyEntry in tempEntry.Properties.Where(
-                         e => e.Metadata.GetBeforeSaveBehavior() != PropertySaveBehavior.Throw))
+            foreach (
+                var propertyEntry in tempEntry.Properties.Where(e =>
+                    e.Metadata.GetBeforeSaveBehavior() != PropertySaveBehavior.Throw
+                )
+            )
             {
-                existingEntry.Property(propertyEntry.Metadata.Name).CurrentValue = propertyEntry.CurrentValue;
+                existingEntry.Property(propertyEntry.Metadata.Name).CurrentValue =
+                    propertyEntry.CurrentValue;
             }
         }
         else
         {
-            foreach (var propertyEntry in tempEntry.Properties.Where(
-                         e => e.Metadata.GetAfterSaveBehavior() != PropertySaveBehavior.Throw))
+            foreach (
+                var propertyEntry in tempEntry.Properties.Where(e =>
+                    e.Metadata.GetAfterSaveBehavior() != PropertySaveBehavior.Throw
+                )
+            )
             {
                 var existingPropertyEntry = existingEntry.Property(propertyEntry.Metadata.Name);
 

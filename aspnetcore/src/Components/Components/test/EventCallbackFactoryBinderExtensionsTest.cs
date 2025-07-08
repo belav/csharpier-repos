@@ -636,8 +636,8 @@ public class EventCallbackFactoryBinderExtensionsTest
         var component = new EventCountingComponent();
         Action<ClassWithoutTypeConverter> setter = (_) => value = _;
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => EventCallback.Factory.CreateBinder(component, setter, value)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            EventCallback.Factory.CreateBinder(component, setter, value)
         );
 
         Assert.Equal(

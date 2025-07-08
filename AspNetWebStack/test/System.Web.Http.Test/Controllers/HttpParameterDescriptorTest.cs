@@ -14,7 +14,8 @@ namespace System.Web.Http
         [Fact]
         public void Default_Constructor()
         {
-            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>().Object;
+            HttpParameterDescriptor parameterDescriptor =
+                new Mock<HttpParameterDescriptor>().Object;
 
             Assert.Null(parameterDescriptor.ParameterName);
             Assert.Null(parameterDescriptor.ParameterType);
@@ -31,34 +32,45 @@ namespace System.Web.Http
         public void Configuration_Property()
         {
             HttpConfiguration config = new HttpConfiguration();
-            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor> { CallBase = true }.Object;
+            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
+            {
+                CallBase = true,
+            }.Object;
 
             Assert.Reflection.Property<HttpParameterDescriptor, HttpConfiguration>(
-                 instance: parameterDescriptor,
-                 propertyGetter: pd => pd.Configuration,
-                 expectedDefaultValue: null,
-                 allowNull: false,
-                 roundTripTestValue: config);
+                instance: parameterDescriptor,
+                propertyGetter: pd => pd.Configuration,
+                expectedDefaultValue: null,
+                allowNull: false,
+                roundTripTestValue: config
+            );
         }
 
         [Fact]
         public void ActionDescriptor_Property()
         {
-            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor> { CallBase = true }.Object;
+            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
+            {
+                CallBase = true,
+            }.Object;
             HttpActionDescriptor actionDescriptor = new Mock<HttpActionDescriptor>().Object;
 
             Assert.Reflection.Property<HttpParameterDescriptor, HttpActionDescriptor>(
-                 instance: parameterDescriptor,
-                 propertyGetter: pd => pd.ActionDescriptor,
-                 expectedDefaultValue: null,
-                 allowNull: false,
-                 roundTripTestValue: actionDescriptor);
+                instance: parameterDescriptor,
+                propertyGetter: pd => pd.ActionDescriptor,
+                expectedDefaultValue: null,
+                allowNull: false,
+                roundTripTestValue: actionDescriptor
+            );
         }
 
         [Fact]
         public void GetCustomAttributes_Returns_EmptyAttributes()
         {
-            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor> { CallBase = true }.Object;
+            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
+            {
+                CallBase = true,
+            }.Object;
             IEnumerable<object> attributes = parameterDescriptor.GetCustomAttributes<object>();
 
             Assert.Empty(attributes);
@@ -67,8 +79,12 @@ namespace System.Web.Http
         [Fact]
         public void GetCustomAttributes_AttributeType_Returns_EmptyAttributes()
         {
-            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor> { CallBase = true }.Object;
-            IEnumerable<FromBodyAttribute> attributes = parameterDescriptor.GetCustomAttributes<FromBodyAttribute>();
+            HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
+            {
+                CallBase = true,
+            }.Object;
+            IEnumerable<FromBodyAttribute> attributes =
+                parameterDescriptor.GetCustomAttributes<FromBodyAttribute>();
 
             Assert.Empty(attributes);
         }

@@ -27,6 +27,6 @@ namespace System.Diagnostics
         /// <devdoc>
         ///     Show the window maximized.
         /// </devdoc>
-        Maximized
+        Maximized,
     }
 }

@@ -1,6 +1,7 @@
 namespace AutoMapper;
-using Features;
+
 using System.Runtime.CompilerServices;
+using Features;
 
 /// <summary>
 /// Main configuration object holding all mapping configuration for a source and destination type
@@ -10,11 +11,20 @@ using System.Runtime.CompilerServices;
 public class TypeMap
 {
     static readonly LambdaExpression EmptyLambda = Lambda(ExpressionBuilder.Empty);
-    static readonly MethodInfo CreateProxyMethod = typeof(ObjectFactory).GetStaticMethod(nameof(ObjectFactory.CreateInterfaceProxy));
+    static readonly MethodInfo CreateProxyMethod = typeof(ObjectFactory).GetStaticMethod(
+        nameof(ObjectFactory.CreateInterfaceProxy)
+    );
     TypeMapDetails _details;
     List<PropertyMap> _propertyMaps;
     bool _sealed;
-    public TypeMap(Type sourceType, Type destinationType, ProfileMap profile, TypeMapConfiguration typeMapConfiguration, List<MemberInfo> sourceMembers = null)
+
+    public TypeMap(
+        Type sourceType,
+        Type destinationType,
+        ProfileMap profile,
+        TypeMapConfiguration typeMapConfiguration,
+        List<MemberInfo> sourceMembers = null
+    )
     {
         Types = new(sourceType, destinationType);
         Profile = profile;
@@ -29,39 +39,78 @@ public class TypeMap
         foreach (var destinationProperty in DestinationTypeDetails.WriteAccessors)
         {
             var destinationName = destinationProperty.Name;
-            var memberConfig = typeMapConfiguration?.GetDestinationMemberConfiguration(destinationProperty);
+            var memberConfig = typeMapConfiguration?.GetDestinationMemberConfiguration(
+                destinationProperty
+            );
             if (memberConfig?.Ignored is true || profile.GlobalIgnores.Contains(destinationName))
             {
                 continue;
             }
             sourceMembers.Clear();
             var propertyType = destinationProperty.GetMemberType();
-            if (profile.MapDestinationPropertyToSource(SourceTypeDetails, destinationType, propertyType, destinationName, sourceMembers, isReverseMap))
+            if (
+                profile.MapDestinationPropertyToSource(
+                    SourceTypeDetails,
+                    destinationType,
+                    propertyType,
+                    destinationName,
+                    sourceMembers,
+                    isReverseMap
+                )
+            )
             {
                 AddPropertyMap(destinationProperty, propertyType, sourceMembers);
             }
         }
     }
-    public string CheckRecord() => ConstructorMap?.Ctor is ConstructorInfo ctor && ctor.IsFamily && ctor.Has<CompilerGeneratedAttribute>() ?
-        " When mapping to records, consider using only public constructors. See https://docs.automapper.org/en/latest/Construction.html." : null;
+
+    public string CheckRecord() =>
+        ConstructorMap?.Ctor is ConstructorInfo ctor
+        && ctor.IsFamily
+        && ctor.Has<CompilerGeneratedAttribute>()
+            ? " When mapping to records, consider using only public constructors. See https://docs.automapper.org/en/latest/Construction.html."
+            : null;
+
     public Features<IRuntimeFeature> Features => Details.Features;
     private TypeMapDetails Details => _details ??= new();
+
     public void CheckProjection()
     {
         if (Projection)
         {
-            throw new AutoMapperConfigurationException("CreateProjection works with ProjectTo, not with Map.", MissingMapException(Types));
+            throw new AutoMapperConfigurationException(
+                "CreateProjection works with ProjectTo, not with Map.",
+                MissingMapException(Types)
+            );
         }
     }
-    public static Exception MissingMapException(TypePair types) => MissingMapException(types.SourceType, types.DestinationType);
-    public static Exception MissingMapException(Type sourceType, Type destinationType)
-        => new InvalidOperationException($"Missing map from {sourceType} to {destinationType}. Create using CreateMap<{sourceType.Name}, {destinationType.Name}>.");
+
+    public static Exception MissingMapException(TypePair types) =>
+        MissingMapException(types.SourceType, types.DestinationType);
+
+    public static Exception MissingMapException(Type sourceType, Type destinationType) =>
+        new InvalidOperationException(
+            $"Missing map from {sourceType} to {destinationType}. Create using CreateMap<{sourceType.Name}, {destinationType.Name}>."
+        );
+
     public bool Projection { get; set; }
     public LambdaExpression MapExpression { get; private set; }
+
     public Expression Invoke(Expression source, Expression destination) =>
-        Expression.Invoke(MapExpression, ToType(source, SourceType), ToType(destination, DestinationType), ContextParameter);
-    internal bool CanConstructorMap() => Profile.ConstructorMappingEnabled && !DestinationType.IsAbstract &&
-        !CustomConstruction && !HasTypeConverter && DestinationConstructors.Length > 0;
+        Expression.Invoke(
+            MapExpression,
+            ToType(source, SourceType),
+            ToType(destination, DestinationType),
+            ContextParameter
+        );
+
+    internal bool CanConstructorMap() =>
+        Profile.ConstructorMappingEnabled
+        && !DestinationType.IsAbstract
+        && !CustomConstruction
+        && !HasTypeConverter
+        && DestinationConstructors.Length > 0;
+
     public TypePair Types;
     public ConstructorMap ConstructorMap { get; set; }
     public TypeDetails SourceTypeDetails { get; private set; }
@@ -70,9 +119,18 @@ public class TypeMap
     public Type DestinationType => Types.DestinationType;
     public ProfileMap Profile { get; }
     public LambdaExpression CustomMapExpression => TypeConverter?.ProjectToExpression;
-    public LambdaExpression CustomCtorFunction { get => _details?.CustomCtorFunction; set => Details.CustomCtorFunction = value; }
-    public LambdaExpression CustomCtorExpression => CustomCtorFunction?.Parameters.Count == 1 ? CustomCtorFunction : null;
-    public bool IncludeAllDerivedTypes { get => (_details?.IncludeAllDerivedTypes).GetValueOrDefault(); set => Details.IncludeAllDerivedTypes = value; }
+    public LambdaExpression CustomCtorFunction
+    {
+        get => _details?.CustomCtorFunction;
+        set => Details.CustomCtorFunction = value;
+    }
+    public LambdaExpression CustomCtorExpression =>
+        CustomCtorFunction?.Parameters.Count == 1 ? CustomCtorFunction : null;
+    public bool IncludeAllDerivedTypes
+    {
+        get => (_details?.IncludeAllDerivedTypes).GetValueOrDefault();
+        set => Details.IncludeAllDerivedTypes = value;
+    }
     public MemberList ConfiguredMemberList
     {
         get => (_details?.ConfiguredMemberList).GetValueOrDefault();
@@ -85,14 +143,31 @@ public class TypeMap
             Details.ConfiguredMemberList = value;
         }
     }
-    public IReadOnlyCollection<TypePair> IncludedDerivedTypes => (_details?.IncludedDerivedTypes).NullCheck();
-    public IReadOnlyCollection<TypePair> IncludedBaseTypes => (_details?.IncludedBaseTypes).NullCheck();
-    public IReadOnlyCollection<LambdaExpression> BeforeMapActions => (_details?.BeforeMapActions).NullCheck();
-    public IReadOnlyCollection<LambdaExpression> AfterMapActions => (_details?.AfterMapActions).NullCheck();
-    public IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers => (_details?.ValueTransformerConfigs).NullCheck();
-    public bool PreserveReferences { get => (_details?.PreserveReferences).GetValueOrDefault(); set => Details.PreserveReferences = value; }
-    public int MaxDepth { get => (_details?.MaxDepth).GetValueOrDefault(); set => Details.MaxDepth = value; }
-    public bool DisableConstructorValidation { get => (_details?.DisableConstructorValidation).GetValueOrDefault(); set => Details.DisableConstructorValidation = value; }
+    public IReadOnlyCollection<TypePair> IncludedDerivedTypes =>
+        (_details?.IncludedDerivedTypes).NullCheck();
+    public IReadOnlyCollection<TypePair> IncludedBaseTypes =>
+        (_details?.IncludedBaseTypes).NullCheck();
+    public IReadOnlyCollection<LambdaExpression> BeforeMapActions =>
+        (_details?.BeforeMapActions).NullCheck();
+    public IReadOnlyCollection<LambdaExpression> AfterMapActions =>
+        (_details?.AfterMapActions).NullCheck();
+    public IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers =>
+        (_details?.ValueTransformerConfigs).NullCheck();
+    public bool PreserveReferences
+    {
+        get => (_details?.PreserveReferences).GetValueOrDefault();
+        set => Details.PreserveReferences = value;
+    }
+    public int MaxDepth
+    {
+        get => (_details?.MaxDepth).GetValueOrDefault();
+        set => Details.MaxDepth = value;
+    }
+    public bool DisableConstructorValidation
+    {
+        get => (_details?.DisableConstructorValidation).GetValueOrDefault();
+        set => Details.DisableConstructorValidation = value;
+    }
     public IReadOnlyCollection<PropertyMap> PropertyMaps => _propertyMaps.NullCheck();
     public IReadOnlyCollection<PathMap> PathMaps => (_details?.PathMaps).NullCheck();
     public IEnumerable<MemberMap> MemberMaps
@@ -113,7 +188,9 @@ public class TypeMap
         || ConstructorMapping
         || DestinationType.IsAbstract
         || DestinationType.IsValueType
-        || TypeDetails.GetConstructors(DestinationType, Profile).Any(c => c.AllParametersOptional());
+        || TypeDetails
+            .GetConstructors(DestinationType, Profile)
+            .Any(c => c.AllParametersOptional());
     public MemberInfo[] DestinationSetters => DestinationTypeDetails.WriteAccessors;
     public ConstructorParameters[] DestinationConstructors => DestinationTypeDetails.Constructors;
     public bool ConstructorMapping => ConstructorMap is { CanResolve: true };
@@ -121,54 +198,93 @@ public class TypeMap
     public bool HasTypeConverter => TypeConverter != null;
     public Execution.TypeConverter TypeConverter { get; set; }
     public bool ShouldCheckForValid => ConfiguredMemberList != MemberList.None && !HasTypeConverter;
-    public LambdaExpression[] IncludedMembers { get => _details?.IncludedMembers ?? Array.Empty<LambdaExpression>(); set => Details.IncludedMembers = value; }
-    public string[] IncludedMembersNames { get => _details?.IncludedMembersNames ?? Array.Empty<string>(); set => Details.IncludedMembersNames = value; }
-    public IReadOnlyCollection<IncludedMember> IncludedMembersTypeMaps => (_details?.IncludedMembersTypeMaps).NullCheck();
-    public Type MakeGenericType(Type type) => type.IsGenericTypeDefinition ?
-        type.MakeGenericType(SourceType.GenericTypeArguments.Concat(DestinationType.GenericTypeArguments).Take(type.GenericParametersCount()).ToArray()) :
-        type;
+    public LambdaExpression[] IncludedMembers
+    {
+        get => _details?.IncludedMembers ?? Array.Empty<LambdaExpression>();
+        set => Details.IncludedMembers = value;
+    }
+    public string[] IncludedMembersNames
+    {
+        get => _details?.IncludedMembersNames ?? Array.Empty<string>();
+        set => Details.IncludedMembersNames = value;
+    }
+    public IReadOnlyCollection<IncludedMember> IncludedMembersTypeMaps =>
+        (_details?.IncludedMembersTypeMaps).NullCheck();
+
+    public Type MakeGenericType(Type type) =>
+        type.IsGenericTypeDefinition
+            ? type.MakeGenericType(
+                SourceType
+                    .GenericTypeArguments.Concat(DestinationType.GenericTypeArguments)
+                    .Take(type.GenericParametersCount())
+                    .ToArray()
+            )
+            : type;
+
     public bool HasIncludedMembers => IncludedMembers.Length > 0 || IncludedMembersNames.Length > 0;
-    public IEnumerable<LambdaExpression> GetAllIncludedMembers() => IncludedMembersNames.Length == 0 || SourceType.ContainsGenericParameters ?
-        IncludedMembers : IncludedMembers.Concat(IncludedMembersNames.Select(name => MemberAccessLambda(SourceType, name, this)));
-    public bool ConstructorParameterMatches(string destinationPropertyName) => ConstructorMapping && ConstructorMap[destinationPropertyName] != null;
-    private void AddPropertyMap(MemberInfo destProperty, Type destinationPropertyType, List<MemberInfo> sourceMembers)
+
+    public IEnumerable<LambdaExpression> GetAllIncludedMembers() =>
+        IncludedMembersNames.Length == 0 || SourceType.ContainsGenericParameters
+            ? IncludedMembers
+            : IncludedMembers.Concat(
+                IncludedMembersNames.Select(name => MemberAccessLambda(SourceType, name, this))
+            );
+
+    public bool ConstructorParameterMatches(string destinationPropertyName) =>
+        ConstructorMapping && ConstructorMap[destinationPropertyName] != null;
+
+    private void AddPropertyMap(
+        MemberInfo destProperty,
+        Type destinationPropertyType,
+        List<MemberInfo> sourceMembers
+    )
     {
         var propertyMap = new PropertyMap(destProperty, destinationPropertyType, this);
         propertyMap.MapByConvention(sourceMembers.ToArray());
         AddPropertyMap(propertyMap);
     }
+
     private void AddPropertyMap(PropertyMap propertyMap)
     {
         _propertyMaps ??= new();
         _propertyMaps.Add(propertyMap);
     }
+
     public string[] GetUnmappedPropertyNames()
     {
         IEnumerable<string> properties;
         if (ConfiguredMemberList == MemberList.Destination)
         {
-            properties = Profile.CreateTypeDetails(DestinationType).WriteAccessors
-                .Select(p => p.Name)
+            properties = Profile
+                .CreateTypeDetails(DestinationType)
+                .WriteAccessors.Select(p => p.Name)
                 .Where(p => !ConstructorParameterMatches(p))
                 .Except(MappedMembers().Select(m => m.DestinationName))
                 .Except(PathMaps.Select(p => p.MemberPath.First.Name));
         }
         else
         {
-            var ignoredSourceMembers = _details?.SourceMemberConfigs?
-                .Where(smc => smc.IsIgnored())
+            var ignoredSourceMembers = _details
+                ?.SourceMemberConfigs?.Where(smc => smc.IsIgnored())
                 .Select(pm => pm.SourceMember.Name);
-            properties = Profile.CreateTypeDetails(SourceType).ReadAccessors
-                .Select(p => p.Name)
+            properties = Profile
+                .CreateTypeDetails(SourceType)
+                .ReadAccessors.Select(p => p.Name)
                 .Except(MappedMembers().Select(m => m.GetSourceMemberName()))
                 .Except(IncludedMembersNames)
                 .Except(IncludedMembers.Select(m => m.GetMember()?.Name))
                 .Except(ignoredSourceMembers ?? Array.Empty<string>());
         }
-        return properties.Where(memberName => !Profile.GlobalIgnores.Any(memberName.StartsWith)).ToArray();
+        return properties
+            .Where(memberName => !Profile.GlobalIgnores.Any(memberName.StartsWith))
+            .ToArray();
         IEnumerable<MemberMap> MappedMembers() => MemberMaps.Where(pm => pm.IsMapped);
     }
-    public PropertyMap FindOrCreatePropertyMapFor(MemberInfo destinationProperty, Type destinationPropertyType)
+
+    public PropertyMap FindOrCreatePropertyMapFor(
+        MemberInfo destinationProperty,
+        Type destinationPropertyType
+    )
     {
         var propertyMap = GetPropertyMap(destinationProperty.Name);
         if (propertyMap == null)
@@ -178,13 +294,17 @@ public class TypeMap
         }
         return propertyMap;
     }
+
     private void CheckDifferent(TypePair types)
     {
         if (types == Types)
         {
-            throw new InvalidOperationException($"You cannot include a type map into itself.{Environment.NewLine}Source type: {types.SourceType.FullName}{Environment.NewLine}Destination type: {types.DestinationType.FullName}");
+            throw new InvalidOperationException(
+                $"You cannot include a type map into itself.{Environment.NewLine}Source type: {types.SourceType.FullName}{Environment.NewLine}Destination type: {types.DestinationType.FullName}"
+            );
         }
     }
+
     internal void IgnorePaths(MemberInfo destinationMember)
     {
         foreach (var pathMap in PathMaps)
@@ -195,7 +315,9 @@ public class TypeMap
             }
         }
     }
+
     public bool HasDerivedTypesToInclude => IncludedDerivedTypes.Count > 0;
+
     public void Seal(IGlobalConfiguration configuration)
     {
         if (_sealed)
@@ -208,11 +330,15 @@ public class TypeMap
         SourceTypeDetails = null;
         DestinationTypeDetails = null;
     }
+
     public List<PropertyMap> OrderedPropertyMaps()
     {
         if (HasMappingOrder())
         {
-            _propertyMaps.Sort((left, right) => Comparer<int?>.Default.Compare(left.MappingOrder, right.MappingOrder));
+            _propertyMaps.Sort(
+                (left, right) =>
+                    Comparer<int?>.Default.Compare(left.MappingOrder, right.MappingOrder)
+            );
         }
         return _propertyMaps;
         bool HasMappingOrder()
@@ -231,22 +357,35 @@ public class TypeMap
             return false;
         }
     }
+
     public void IncludeDerivedTypes(TypePair derivedTypes)
     {
         CheckDifferent(derivedTypes);
         Details.IncludeDerivedTypes(derivedTypes);
     }
+
     public void IncludeBaseTypes(TypePair baseTypes)
     {
         CheckDifferent(baseTypes);
         Details.IncludeBaseTypes(baseTypes);
     }
-    public void AddBeforeMapAction(LambdaExpression beforeMap) => Details.AddBeforeMapAction(beforeMap);
+
+    public void AddBeforeMapAction(LambdaExpression beforeMap) =>
+        Details.AddBeforeMapAction(beforeMap);
+
     public void AddAfterMapAction(LambdaExpression afterMap) => Details.AddAfterMapAction(afterMap);
-    public void AddValueTransformation(ValueTransformerConfiguration config) => Details.AddValueTransformation(config);
-    public void ConstructUsingServiceLocator() => CustomCtorFunction = Lambda(ServiceLocator(DestinationType));
+
+    public void AddValueTransformation(ValueTransformerConfiguration config) =>
+        Details.AddValueTransformation(config);
+
+    public void ConstructUsingServiceLocator() =>
+        CustomCtorFunction = Lambda(ServiceLocator(DestinationType));
+
     internal LambdaExpression CreateMapperLambda(IGlobalConfiguration configuration) =>
-        Types.ContainsGenericParameters ? null : new TypeMapPlanBuilder(configuration, this).CreateMapperLambda();
+        Types.ContainsGenericParameters
+            ? null
+            : new TypeMapPlanBuilder(configuration, this).CreateMapperLambda();
+
     private PropertyMap GetPropertyMap(string name)
     {
         if (_propertyMaps == null)
@@ -262,8 +401,13 @@ public class TypeMap
         }
         return null;
     }
-    private PropertyMap GetPropertyMap(PropertyMap propertyMap) => GetPropertyMap(propertyMap.DestinationName);
-    public void AsProxy() => CustomCtorFunction = Lambda(Call(CreateProxyMethod, Constant(DestinationType)));
+
+    private PropertyMap GetPropertyMap(PropertyMap propertyMap) =>
+        GetPropertyMap(propertyMap.DestinationName);
+
+    public void AsProxy() =>
+        CustomCtorFunction = Lambda(Call(CreateProxyMethod, Constant(DestinationType)));
+
     internal void CopyInheritedMapsTo(TypeMap typeMap)
     {
         if (_details?.InheritedTypeMaps == null)
@@ -272,12 +416,24 @@ public class TypeMap
         }
         _details.CopyInheritedMapsTo(typeMap);
     }
-    public void CloseGenerics(TypeMapConfiguration openMapConfig, TypePair closedTypes) => TypeConverter?.CloseGenerics(openMapConfig, closedTypes);
+
+    public void CloseGenerics(TypeMapConfiguration openMapConfig, TypePair closedTypes) =>
+        TypeConverter?.CloseGenerics(openMapConfig, closedTypes);
+
     public bool AddMemberMap(IncludedMember includedMember) => Details.AddMemberMap(includedMember);
-    public PathMap FindOrCreatePathMapFor(LambdaExpression destinationExpression, MemberPath path, TypeMap typeMap) =>
-        Details.FindOrCreatePathMapFor(destinationExpression, path, typeMap);
-    public void AddInheritedMap(TypeMap inheritedTypeMap) => Details.AddInheritedMap(inheritedTypeMap);
-    public SourceMemberConfig FindOrCreateSourceMemberConfigFor(MemberInfo sourceMember) => Details.FindOrCreateSourceMemberConfigFor(sourceMember);
+
+    public PathMap FindOrCreatePathMapFor(
+        LambdaExpression destinationExpression,
+        MemberPath path,
+        TypeMap typeMap
+    ) => Details.FindOrCreatePathMapFor(destinationExpression, path, typeMap);
+
+    public void AddInheritedMap(TypeMap inheritedTypeMap) =>
+        Details.AddInheritedMap(inheritedTypeMap);
+
+    public SourceMemberConfig FindOrCreateSourceMemberConfigFor(MemberInfo sourceMember) =>
+        Details.FindOrCreateSourceMemberConfigFor(sourceMember);
+
     class TypeMapDetails
     {
         Features<IRuntimeFeature> _features;
@@ -299,6 +455,7 @@ public class TypeMap
         public List<SourceMemberConfig> SourceMemberConfigs { get; private set; }
         public List<ValueTransformerConfiguration> ValueTransformerConfigs { get; private set; }
         public Features<IRuntimeFeature> Features => _features ??= new();
+
         public void Seal(IGlobalConfiguration configuration, TypeMap thisMap)
         {
             if (InheritedTypeMaps != null)
@@ -331,27 +488,38 @@ public class TypeMap
             }
             _features?.Seal(configuration);
         }
+
         public void IncludeDerivedTypes(TypePair derivedTypes)
         {
             IncludedDerivedTypes ??= new();
             IncludedDerivedTypes.TryAdd(derivedTypes);
         }
+
         public void AddBeforeMapAction(LambdaExpression beforeMap)
         {
             BeforeMapActions ??= new();
             BeforeMapActions.TryAdd(beforeMap);
         }
+
         public void AddAfterMapAction(LambdaExpression afterMap)
         {
             AfterMapActions ??= new();
             AfterMapActions.TryAdd(afterMap);
         }
-        public void AddValueTransformation(ValueTransformerConfiguration valueTransformerConfiguration)
+
+        public void AddValueTransformation(
+            ValueTransformerConfiguration valueTransformerConfiguration
+        )
         {
             ValueTransformerConfigs ??= new();
             ValueTransformerConfigs.Add(valueTransformerConfiguration);
         }
-        public PathMap FindOrCreatePathMapFor(LambdaExpression destinationExpression, MemberPath path, TypeMap typeMap)
+
+        public PathMap FindOrCreatePathMapFor(
+            LambdaExpression destinationExpression,
+            MemberPath path,
+            TypeMap typeMap
+        )
         {
             PathMaps ??= new();
             var pathMap = GetPathMap(path);
@@ -362,6 +530,7 @@ public class TypeMap
             }
             return pathMap;
         }
+
         private PathMap GetPathMap(MemberPath memberPath)
         {
             if (PathMaps == null)
@@ -377,22 +546,27 @@ public class TypeMap
             }
             return null;
         }
+
         private void AddPathMap(PathMap pathMap) => PathMaps.Add(pathMap);
+
         public void IncludeBaseTypes(TypePair baseTypes)
         {
             IncludedBaseTypes ??= new();
             IncludedBaseTypes.TryAdd(baseTypes);
         }
+
         internal void CopyInheritedMapsTo(TypeMap typeMap)
         {
             typeMap.Details.InheritedTypeMaps ??= new();
             typeMap._details.InheritedTypeMaps.TryAdd(InheritedTypeMaps);
         }
+
         public bool AddMemberMap(IncludedMember includedMember)
         {
             IncludedMembersTypeMaps ??= new();
             return IncludedMembersTypeMaps.TryAdd(includedMember);
         }
+
         public SourceMemberConfig FindOrCreateSourceMemberConfigFor(MemberInfo sourceMember)
         {
             SourceMemberConfigs ??= new();
@@ -404,6 +578,7 @@ public class TypeMap
             }
             return config;
         }
+
         private SourceMemberConfig GetSourceMemberConfig(MemberInfo sourceMember)
         {
             foreach (var sourceConfig in SourceMemberConfigs)
@@ -415,21 +590,27 @@ public class TypeMap
             }
             return null;
         }
+
         public void AddInheritedMap(TypeMap inheritedTypeMap)
         {
             InheritedTypeMaps ??= new();
             InheritedTypeMaps.TryAdd(inheritedTypeMap);
         }
+
         private void ApplyIncludedMemberTypeMap(IncludedMember includedMember, TypeMap thisMap)
         {
             var typeMap = includedMember.TypeMap;
-            var includedMemberMaps = typeMap.PropertyMaps.
-                Where(m => m.CanResolveValue && thisMap.GetPropertyMap(m) == null)
+            var includedMemberMaps = typeMap
+                .PropertyMaps.Where(m => m.CanResolveValue && thisMap.GetPropertyMap(m) == null)
                 .Select(p => new PropertyMap(p, thisMap, includedMember))
                 .ToArray();
             var notOverridenPathMaps = NotOverridenPathMaps(typeMap);
             var appliedConstructorMap = thisMap.ConstructorMap?.ApplyIncludedMember(includedMember);
-            if (includedMemberMaps.Length == 0 && notOverridenPathMaps.Length == 0 && appliedConstructorMap is not true)
+            if (
+                includedMemberMaps.Length == 0
+                && notOverridenPathMaps.Length == 0
+                && appliedConstructorMap is not true
+            )
             {
                 return;
             }
@@ -444,13 +625,17 @@ public class TypeMap
             var details = typeMap._details;
             if (details != null)
             {
-                ApplyInheritedMapActions(details.BeforeMapActions?.Select(includedMember.Chain), details.AfterMapActions?.Select(includedMember.Chain));
+                ApplyInheritedMapActions(
+                    details.BeforeMapActions?.Select(includedMember.Chain),
+                    details.AfterMapActions?.Select(includedMember.Chain)
+                );
             }
             foreach (var notOverridenPathMap in notOverridenPathMaps)
             {
                 AddPathMap(new(notOverridenPathMap, thisMap, includedMember));
             }
         }
+
         private void ApplyInheritedTypeMap(TypeMap inheritedTypeMap, TypeMap thisMap)
         {
             if (inheritedTypeMap._propertyMaps != null)
@@ -462,7 +647,10 @@ public class TypeMap
             {
                 return;
             }
-            ApplyInheritedMapActions(inheritedDetails.BeforeMapActions, inheritedDetails.AfterMapActions);
+            ApplyInheritedMapActions(
+                inheritedDetails.BeforeMapActions,
+                inheritedDetails.AfterMapActions
+            );
             if (inheritedDetails.SourceMemberConfigs != null)
             {
                 ApplyInheritedSourceMembers(inheritedTypeMap._details);
@@ -509,7 +697,11 @@ public class TypeMap
                 }
             }
         }
-        void ApplyInheritedMapActions(IEnumerable<LambdaExpression> beforeMap, IEnumerable<LambdaExpression> afterMap)
+
+        void ApplyInheritedMapActions(
+            IEnumerable<LambdaExpression> beforeMap,
+            IEnumerable<LambdaExpression> afterMap
+        )
         {
             if (beforeMap != null)
             {
@@ -522,6 +714,7 @@ public class TypeMap
                 AfterMapActions.TryAdd(afterMap);
             }
         }
+
         private PathMap[] NotOverridenPathMaps(TypeMap inheritedTypeMap)
         {
             if (inheritedTypeMap.PathMaps.Count == 0)
@@ -529,7 +722,9 @@ public class TypeMap
                 return Array.Empty<PathMap>();
             }
             PathMaps ??= new();
-            return inheritedTypeMap.PathMaps.Where(baseConfig => GetPathMap(baseConfig.MemberPath) == null).ToArray();
+            return inheritedTypeMap
+                .PathMaps.Where(baseConfig => GetPathMap(baseConfig.MemberPath) == null)
+                .ToArray();
         }
     }
 }

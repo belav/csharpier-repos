@@ -10,10 +10,16 @@ namespace System.ServiceModel.Description
     using System.Workflow.Runtime.Configuration;
     using System.Workflow.Runtime.Hosting;
 
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public class WorkflowRuntimeBehavior : IServiceBehavior, IWmiInstanceProvider
     {
-        internal static readonly TimeSpan DefaultCachedInstanceExpiration = TimeSpan.Parse(DefaultCachedInstanceExpirationString, CultureInfo.InvariantCulture);
+        internal static readonly TimeSpan DefaultCachedInstanceExpiration = TimeSpan.Parse(
+            DefaultCachedInstanceExpirationString,
+            CultureInfo.InvariantCulture
+        );
+
         //default of 10 minutes chosen to be in-parity with SM inactivity timeout for session.
         internal const string DefaultCachedInstanceExpirationString = "00:10:00";
         internal const string defaultName = "WorkflowRuntime";
@@ -25,12 +31,17 @@ namespace System.ServiceModel.Description
         bool validateOnCreate;
         WorkflowRuntime workflowRuntime = null;
 
-        public WorkflowRuntimeBehavior() : this(null, DefaultCachedInstanceExpiration, DefaultValidateOnCreate)
+        public WorkflowRuntimeBehavior()
+            : this(null, DefaultCachedInstanceExpiration, DefaultValidateOnCreate)
         {
             // empty
         }
 
-        internal WorkflowRuntimeBehavior(WorkflowRuntime workflowRuntime, TimeSpan cachedInstanceExpiration, bool validateOnCreate)
+        internal WorkflowRuntimeBehavior(
+            WorkflowRuntime workflowRuntime,
+            TimeSpan cachedInstanceExpiration,
+            bool validateOnCreate
+        )
         {
             this.workflowRuntime = workflowRuntime;
             this.cachedInstanceExpiration = cachedInstanceExpiration;
@@ -39,15 +50,14 @@ namespace System.ServiceModel.Description
 
         public TimeSpan CachedInstanceExpiration
         {
-            get
-            {
-                return this.cachedInstanceExpiration;
-            }
+            get { return this.cachedInstanceExpiration; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.cachedInstanceExpiration = value;
             }
@@ -59,7 +69,9 @@ namespace System.ServiceModel.Description
             {
                 if (this.workflowRuntime == null)
                 {
-                    this.workflowRuntime = new WorkflowRuntime(WorkflowRuntimeBehavior.DefaultWorkflowRuntimeSection);
+                    this.workflowRuntime = new WorkflowRuntime(
+                        WorkflowRuntimeBehavior.DefaultWorkflowRuntimeSection
+                    );
                 }
                 return this.workflowRuntime;
             }
@@ -86,12 +98,17 @@ namespace System.ServiceModel.Description
             }
         }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, System.Collections.ObjectModel.Collection<ServiceEndpoint> endpoints, System.ServiceModel.Channels.BindingParameterCollection bindingParameters)
-        {
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            System.Collections.ObjectModel.Collection<ServiceEndpoint> endpoints,
+            System.ServiceModel.Channels.BindingParameterCollection bindingParameters
+        ) { }
 
-        }
-
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        public void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (serviceHostBase == null)
             {
@@ -99,19 +116,26 @@ namespace System.ServiceModel.Description
             }
             if (serviceHostBase.Extensions == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceHostBase.Extensions");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceHostBase.Extensions"
+                );
             }
 
-            WorkflowInstanceLifetimeManagerExtension cachedInstanceExpirationExtension = new WorkflowInstanceLifetimeManagerExtension(
-                this.WorkflowRuntime,
-                this.CachedInstanceExpiration,
-                this.WorkflowRuntime.GetService<WorkflowPersistenceService>() != null);
+            WorkflowInstanceLifetimeManagerExtension cachedInstanceExpirationExtension =
+                new WorkflowInstanceLifetimeManagerExtension(
+                    this.WorkflowRuntime,
+                    this.CachedInstanceExpiration,
+                    this.WorkflowRuntime.GetService<WorkflowPersistenceService>() != null
+                );
             serviceHostBase.Extensions.Add(cachedInstanceExpirationExtension);
         }
 
         void IWmiInstanceProvider.FillInstance(IWmiInstance wmiInstance)
         {
-            wmiInstance.SetProperty("CachedInstanceExpiration", this.CachedInstanceExpiration.ToString());
+            wmiInstance.SetProperty(
+                "CachedInstanceExpiration",
+                this.CachedInstanceExpiration.ToString()
+            );
         }
 
         string IWmiInstanceProvider.GetInstanceType()
@@ -128,20 +152,28 @@ namespace System.ServiceModel.Description
         {
             if (workflowRuntime.IsStarted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.WorkflowRuntimeStartedBeforeHostOpen)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.WorkflowRuntimeStartedBeforeHostOpen)
+                    )
+                );
             }
 
-            WorkflowSchedulerService workflowSchedulerService = workflowRuntime.GetService<WorkflowSchedulerService>();
+            WorkflowSchedulerService workflowSchedulerService =
+                workflowRuntime.GetService<WorkflowSchedulerService>();
 
             if (!(workflowSchedulerService is SynchronizationContextWorkflowSchedulerService))
             {
                 if (workflowSchedulerService != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.WrongSchedulerServiceRegistered)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.WrongSchedulerServiceRegistered)
+                        )
+                    );
                 }
                 workflowRuntime.AddService(new SynchronizationContextWorkflowSchedulerService());
             }
         }
-
     }
 }

@@ -389,8 +389,8 @@ public class HttpResponseStreamWriterTest
         var cancellationToken = new CancellationToken(true);
 
         // Act
-        await Assert.ThrowsAsync<TaskCanceledException>(
-            async () => await writer.WriteAsync(memory, cancellationToken)
+        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+            await writer.WriteAsync(memory, cancellationToken)
         );
 
         // Assert
@@ -452,8 +452,8 @@ public class HttpResponseStreamWriterTest
         // Act
         using (writer)
         {
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await writer.WriteLineAsync(memory, cancellationToken)
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await writer.WriteLineAsync(memory, cancellationToken)
             );
         }
 

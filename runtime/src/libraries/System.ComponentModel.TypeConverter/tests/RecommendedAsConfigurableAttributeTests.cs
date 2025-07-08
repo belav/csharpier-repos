@@ -23,7 +23,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Default_Get_ReturnsExpected()
         {
-            RecommendedAsConfigurableAttribute attribute = RecommendedAsConfigurableAttribute.Default;
+            RecommendedAsConfigurableAttribute attribute =
+                RecommendedAsConfigurableAttribute.Default;
             Assert.Same(attribute, RecommendedAsConfigurableAttribute.Default);
             Assert.Same(attribute, RecommendedAsConfigurableAttribute.No);
             Assert.False(attribute.RecommendedAsConfigurable);
@@ -53,10 +54,30 @@ namespace System.ComponentModel.Tests
             var attribute = new RecommendedAsConfigurableAttribute(true);
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new RecommendedAsConfigurableAttribute(true), true };
-            yield return new object[] { attribute, new RecommendedAsConfigurableAttribute(false), false };
-            yield return new object[] { new RecommendedAsConfigurableAttribute(false), new RecommendedAsConfigurableAttribute(false), true };
-            yield return new object[] { new RecommendedAsConfigurableAttribute(false), new RecommendedAsConfigurableAttribute(true), false };
+            yield return new object[]
+            {
+                attribute,
+                new RecommendedAsConfigurableAttribute(true),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new RecommendedAsConfigurableAttribute(false),
+                false,
+            };
+            yield return new object[]
+            {
+                new RecommendedAsConfigurableAttribute(false),
+                new RecommendedAsConfigurableAttribute(false),
+                true,
+            };
+            yield return new object[]
+            {
+                new RecommendedAsConfigurableAttribute(false),
+                new RecommendedAsConfigurableAttribute(true),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -64,7 +85,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(RecommendedAsConfigurableAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            RecommendedAsConfigurableAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is RecommendedAsConfigurableAttribute)

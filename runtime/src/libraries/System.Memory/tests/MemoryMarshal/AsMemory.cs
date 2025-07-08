@@ -16,7 +16,10 @@ namespace System.MemoryTests
             yield return new object[] { new ReadOnlyMemory<int>(new int[0]) };
             yield return new object[] { new ReadOnlyMemory<int>(new int[10]) };
             yield return new object[] { new ReadOnlyMemory<int>(new int[10], 1, 3) };
-            yield return new object[] { (ReadOnlyMemory<int>)new CustomMemoryForTest<int>(new int[10]).Memory };
+            yield return new object[]
+            {
+                (ReadOnlyMemory<int>)new CustomMemoryForTest<int>(new int[10]).Memory,
+            };
         }
 
         public static IEnumerable<object[]> ReadOnlyMemoryObjectInstances()
@@ -25,24 +28,32 @@ namespace System.MemoryTests
             yield return new object[] { new ReadOnlyMemory<object>(new object[0]) };
             yield return new object[] { new ReadOnlyMemory<object>(new object[10]) };
             yield return new object[] { new ReadOnlyMemory<object>(new object[10], 1, 3) };
-            yield return new object[] { (ReadOnlyMemory<object>)new CustomMemoryForTest<object>(new object[10]).Memory };
+            yield return new object[]
+            {
+                (ReadOnlyMemory<object>)new CustomMemoryForTest<object>(new object[10]).Memory,
+            };
         }
 
         public static IEnumerable<object[]> ReadOnlyMemoryCharInstances()
         {
             yield return new object[] { ReadOnlyMemory<char>.Empty };
             yield return new object[] { new ReadOnlyMemory<char>(new char[10], 1, 3) };
-            yield return new object[] { (ReadOnlyMemory<char>)new CustomMemoryForTest<char>(new char[10]).Memory };
+            yield return new object[]
+            {
+                (ReadOnlyMemory<char>)new CustomMemoryForTest<char>(new char[10]).Memory,
+            };
             yield return new object[] { "12345".AsMemory() };
         }
 
         [Theory]
         [MemberData(nameof(ReadOnlyMemoryInt32Instances))]
-        public static void AsMemory_Roundtrips_Int(ReadOnlyMemory<int> readOnlyMemory) => AsMemory_Roundtrips_Core(readOnlyMemory, true);
+        public static void AsMemory_Roundtrips_Int(ReadOnlyMemory<int> readOnlyMemory) =>
+            AsMemory_Roundtrips_Core(readOnlyMemory, true);
 
         [Theory]
         [MemberData(nameof(ReadOnlyMemoryObjectInstances))]
-        public static void AsMemory_Roundtrips_Object(ReadOnlyMemory<object> readOnlyMemory) => AsMemory_Roundtrips_Core(readOnlyMemory, false);
+        public static void AsMemory_Roundtrips_Object(ReadOnlyMemory<object> readOnlyMemory) =>
+            AsMemory_Roundtrips_Core(readOnlyMemory, false);
 
         [Theory]
         [MemberData(nameof(ReadOnlyMemoryCharInstances))]
@@ -54,8 +65,21 @@ namespace System.MemoryTests
             ReadOnlyMemory<char> readOnlyClone = memory;
 
             // TryGetString
-            bool gotString1 = MemoryMarshal.TryGetString(readOnlyMemory, out string text1, out int start1, out int length1);
-            Assert.Equal(gotString1, MemoryMarshal.TryGetString(readOnlyClone, out string text2, out int start2, out int length2));
+            bool gotString1 = MemoryMarshal.TryGetString(
+                readOnlyMemory,
+                out string text1,
+                out int start1,
+                out int length1
+            );
+            Assert.Equal(
+                gotString1,
+                MemoryMarshal.TryGetString(
+                    readOnlyClone,
+                    out string text2,
+                    out int start2,
+                    out int length2
+                )
+            );
             Assert.Same(text1, text2);
             Assert.Equal(start1, start2);
             Assert.Equal(length1, length2);
@@ -65,7 +89,10 @@ namespace System.MemoryTests
             }
         }
 
-        private static unsafe void AsMemory_Roundtrips_Core<T>(ReadOnlyMemory<T> readOnlyMemory, bool canBePinned)
+        private static unsafe void AsMemory_Roundtrips_Core<T>(
+            ReadOnlyMemory<T> readOnlyMemory,
+            bool canBePinned
+        )
         {
             Memory<T> memory = MemoryMarshal.AsMemory(readOnlyMemory);
             ReadOnlyMemory<T> readOnlyClone = memory;
@@ -80,8 +107,10 @@ namespace System.MemoryTests
             Assert.True(readOnlyMemory.Span == memory.Span);
 
             // TryGetArray
-            Assert.True(MemoryMarshal.TryGetArray(readOnlyMemory, out ArraySegment<T> array1)
-                            == MemoryMarshal.TryGetArray(memory, out ArraySegment<T> array2));
+            Assert.True(
+                MemoryMarshal.TryGetArray(readOnlyMemory, out ArraySegment<T> array1)
+                    == MemoryMarshal.TryGetArray(memory, out ArraySegment<T> array2)
+            );
             Assert.Same(array1.Array, array2.Array);
             Assert.Equal(array1.Offset, array2.Offset);
             Assert.Equal(array1.Count, array2.Count);
@@ -93,8 +122,14 @@ namespace System.MemoryTests
                 using (MemoryHandle readOnlyCloneHandle = readOnlyMemory.Pin())
                 using (MemoryHandle memoryHandle = readOnlyMemory.Pin())
                 {
-                    Assert.Equal((IntPtr)readOnlyMemoryHandle.Pointer, (IntPtr)readOnlyCloneHandle.Pointer);
-                    Assert.Equal((IntPtr)readOnlyMemoryHandle.Pointer, (IntPtr)memoryHandle.Pointer);
+                    Assert.Equal(
+                        (IntPtr)readOnlyMemoryHandle.Pointer,
+                        (IntPtr)readOnlyCloneHandle.Pointer
+                    );
+                    Assert.Equal(
+                        (IntPtr)readOnlyMemoryHandle.Pointer,
+                        (IntPtr)memoryHandle.Pointer
+                    );
                 }
             }
         }

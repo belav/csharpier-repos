@@ -10,8 +10,8 @@ namespace System.Workflow.Activities
     using System.Collections.Generic;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel;
     using System.Reflection;
+    using System.ServiceModel;
 
     internal sealed class ContractMethodInfo : MethodInfo
     {
@@ -34,23 +34,26 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(operationInfo.Name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("operationInfo",
-                    SR2.GetString(SR2.Error_OperationNameNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "operationInfo",
+                    SR2.GetString(SR2.Error_OperationNameNotSpecified)
+                );
             }
 
             this.declaringType = declaringType;
             this.name = operationInfo.Name;
-            this.methodAttributes = MethodAttributes.Public |
-                MethodAttributes.Abstract |
-                MethodAttributes.Virtual;
+            this.methodAttributes =
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual;
 
             SortedList<int, ContractMethodParameterInfo> localParameters =
                 new SortedList<int, ContractMethodParameterInfo>();
 
             foreach (OperationParameterInfo operationParameterInfo in operationInfo.Parameters)
             {
-                ContractMethodParameterInfo parameterInfo =
-                    new ContractMethodParameterInfo(this, operationParameterInfo);
+                ContractMethodParameterInfo parameterInfo = new ContractMethodParameterInfo(
+                    this,
+                    operationParameterInfo
+                );
                 if (parameterInfo.Position == -1)
                 {
                     this.returnParam = parameterInfo;
@@ -79,7 +82,7 @@ namespace System.Workflow.Activities
             OperationContractAttribute operationContract = new OperationContractAttribute();
             if (operationInfo.HasProtectionLevel && operationInfo.ProtectionLevel != null)
             {
-                operationContract.ProtectionLevel = (ProtectionLevel) operationInfo.ProtectionLevel;
+                operationContract.ProtectionLevel = (ProtectionLevel)operationInfo.ProtectionLevel;
             }
             operationContract.IsOneWay = operationInfo.IsOneWay;
 
@@ -90,18 +93,12 @@ namespace System.Workflow.Activities
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return this.methodAttributes;
-            }
+            get { return this.methodAttributes; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
         public override RuntimeMethodHandle MethodHandle
         {
@@ -109,32 +106,24 @@ namespace System.Workflow.Activities
             {
 #pragma warning suppress 56503
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported)));
+                    new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+                );
             }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return this.declaringType;
-            }
+            get { return this.declaringType; }
         }
 
         public override ParameterInfo ReturnParameter
         {
-            get
-            {
-                return this.returnParam;
-            }
+            get { return this.returnParam; }
         }
 
         public override Type ReturnType
@@ -151,16 +140,14 @@ namespace System.Workflow.Activities
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes
         {
-            get
-            {
-                return this.ReturnType;
-            }
+            get { return this.ReturnType; }
         }
 
         public override MethodInfo GetBaseDefinition()
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException());
+                new NotImplementedException()
+            );
         }
 
         public override object[] GetCustomAttributes(bool inherit)
@@ -187,14 +174,17 @@ namespace System.Workflow.Activities
             return this.parameters;
         }
 
-        public override object Invoke(object obj,
+        public override object Invoke(
+            object obj,
             BindingFlags invokeAttr,
             Binder binder,
             object[] parameters,
-            CultureInfo culture)
+            CultureInfo culture
+        )
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported)));
+                new NotImplementedException(SR2.GetString(SR2.Error_RuntimeNotSupported))
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)

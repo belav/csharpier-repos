@@ -29,64 +29,55 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void APrerequisiteDependsOnBPrerequisite_ShouldThrowComposition()
         {
-            AssertCycle(Dependency.Prerequisite,
-                        Dependency.Prerequisite);
+            AssertCycle(Dependency.Prerequisite, Dependency.Prerequisite);
         }
 
         [Fact]
         public void APrerequisiteDependsOnBPost_ShouldThrowComposition()
         {
-            AssertCycle(Dependency.Prerequisite,
-                        Dependency.Post);
+            AssertCycle(Dependency.Prerequisite, Dependency.Post);
         }
 
         [Fact]
         public void APrerequisiteDependsOnBNone_ShouldNotThrow()
         {
-            AssertNotCycle(Dependency.Prerequisite,
-                           Dependency.None);
+            AssertNotCycle(Dependency.Prerequisite, Dependency.None);
         }
 
         [Fact]
         public void APostDependsOnBPrerequisite_ShouldThrowComposition()
         {
-            AssertCycle(Dependency.Post,
-                        Dependency.Prerequisite);
+            AssertCycle(Dependency.Post, Dependency.Prerequisite);
         }
 
         [Fact]
         public void APostDependsOnBPost_ShouldNotThrow()
         {
-            AssertNotCycle(Dependency.Post,
-                           Dependency.Post);
+            AssertNotCycle(Dependency.Post, Dependency.Post);
         }
 
         [Fact]
         public void APostDependsOnBNone_ShouldNotThrow()
         {
-            AssertNotCycle(Dependency.Post,
-                           Dependency.None);
+            AssertNotCycle(Dependency.Post, Dependency.None);
         }
 
         [Fact]
         public void BPrerequisiteDependsOnANone_ShouldNotThrow()
         {
-            AssertNotCycle(Dependency.None,
-                           Dependency.Prerequisite);
+            AssertNotCycle(Dependency.None, Dependency.Prerequisite);
         }
 
         [Fact]
         public void BPostDependsOnANone_ShouldNotThrow()
         {
-            AssertNotCycle(Dependency.None,
-                           Dependency.Post);
+            AssertNotCycle(Dependency.None, Dependency.Post);
         }
 
         [Fact]
         public void ANoneWithBNone_ShouldNotThrow()
         {
-            AssertNotCycle(Dependency.None,
-                           Dependency.None);
+            AssertNotCycle(Dependency.None, Dependency.None);
         }
 
         private static void AssertCycle(Dependency partADependency, Dependency partBDependency)
@@ -115,14 +106,21 @@ namespace System.ComponentModel.Composition
             Assert.Equal("B", exportB.Value);
         }
 
-        private static Lazy<object, object> GetExport(string contractName, Dependency partADependency, Dependency partBDependency)
+        private static Lazy<object, object> GetExport(
+            string contractName,
+            Dependency partADependency,
+            Dependency partBDependency
+        )
         {
             var container = GetContainer(partADependency, partBDependency);
 
             return container.GetExports(typeof(object), null, contractName).Single();
         }
 
-        private static CompositionContainer GetContainer(Dependency partADependency, Dependency partBDependency)
+        private static CompositionContainer GetContainer(
+            Dependency partADependency,
+            Dependency partBDependency
+        )
         {
             var partA = CreatePartA(partADependency);
             var partB = CreatePartB(partBDependency);
@@ -142,14 +140,23 @@ namespace System.ComponentModel.Composition
             return CreatePart(dependency, "B", "A");
         }
 
-        private static ComposablePart CreatePart(Dependency dependency, string exportContractName, string importContractName)
+        private static ComposablePart CreatePart(
+            Dependency dependency,
+            string exportContractName,
+            string importContractName
+        )
         {
             ConcreteComposablePart part = new ConcreteComposablePart();
             part.AddExport(exportContractName, exportContractName);
 
             if (dependency != Dependency.None)
             {
-                part.AddImport(importContractName, ImportCardinality.ExactlyOne, false, dependency == Dependency.Prerequisite);
+                part.AddImport(
+                    importContractName,
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    dependency == Dependency.Prerequisite
+                );
             }
 
             return part;

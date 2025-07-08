@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //+----------------------------------------------------------------------------
 //
@@ -17,22 +17,22 @@
 namespace System.Runtime.Remoting.Lifetime
 {
     using System;
-    using System.Security;
-    using System.Security.Permissions;
     using System.Collections;
-    using System.Threading;
+    using System.Globalization;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Proxies;
-    using System.Globalization;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Threading;
 
     internal class Lease : MarshalByRefObject, ILease
     {
         internal int id = 0;
-        
+
         // Lease Time
         internal DateTime leaseTime;
         internal TimeSpan initialLeaseTime;
-        
+
         // Renewal Policies
         internal TimeSpan renewOnCallTime;
         internal TimeSpan sponsorshipTimeout;
@@ -48,19 +48,29 @@ namespace System.Runtime.Remoting.Lifetime
         // State
         internal LeaseState state;
 
-        internal static volatile int nextId = 0;        
+        internal static volatile int nextId = 0;
 
-
-        internal Lease(TimeSpan initialLeaseTime,
-                       TimeSpan renewOnCallTime,                       
-                       TimeSpan sponsorshipTimeout,
-                       MarshalByRefObject managedObject
-                      )
+        internal Lease(
+            TimeSpan initialLeaseTime,
+            TimeSpan renewOnCallTime,
+            TimeSpan sponsorshipTimeout,
+            MarshalByRefObject managedObject
+        )
         {
             id = nextId++;
-            BCLDebug.Trace("REMOTE", "Lease Constructor ",managedObject," initialLeaseTime "+initialLeaseTime+" renewOnCall "+renewOnCallTime+" sponsorshipTimeout ",sponsorshipTimeout);
+            BCLDebug.Trace(
+                "REMOTE",
+                "Lease Constructor ",
+                managedObject,
+                " initialLeaseTime "
+                    + initialLeaseTime
+                    + " renewOnCall "
+                    + renewOnCallTime
+                    + " sponsorshipTimeout ",
+                sponsorshipTimeout
+            );
 
-            // Set Policy            
+            // Set Policy
             this.renewOnCallTime = renewOnCallTime;
             this.sponsorshipTimeout = sponsorshipTimeout;
             this.initialLeaseTime = initialLeaseTime;
@@ -84,10 +94,10 @@ namespace System.Runtime.Remoting.Lifetime
 
         // Override MarshalByRefObject InitializeLifetimeService
         // Don't want a lease on a lease therefore returns null
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public override Object InitializeLifetimeService()
         {
-            BCLDebug.Trace("REMOTE", "Lease ",id," InitializeLifetimeService, lease Marshalled");
+            BCLDebug.Trace("REMOTE", "Lease ", id, " InitializeLifetimeService, lease Marshalled");
             return null;
         }
 
@@ -95,47 +105,75 @@ namespace System.Runtime.Remoting.Lifetime
 
         public TimeSpan RenewOnCallTime
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return renewOnCallTime; }
-            [System.Security.SecurityCritical]  // auto-generated
-            [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+            [System.Security.SecurityCritical] // auto-generated
+            [SecurityPermissionAttribute(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.RemotingConfiguration
+            )]
             set
             {
                 if (state == LeaseState.Initial)
                 {
                     renewOnCallTime = value;
-                    BCLDebug.Trace("REMOTE", "Lease Set RenewOnCallProperty ",managedObject," "+renewOnCallTime);
+                    BCLDebug.Trace(
+                        "REMOTE",
+                        "Lease Set RenewOnCallProperty ",
+                        managedObject,
+                        " " + renewOnCallTime
+                    );
                 }
                 else
-                    throw new RemotingException(Environment.GetResourceString("Remoting_Lifetime_InitialStateRenewOnCall", ((Enum)state).ToString()));                    
+                    throw new RemotingException(
+                        Environment.GetResourceString(
+                            "Remoting_Lifetime_InitialStateRenewOnCall",
+                            ((Enum)state).ToString()
+                        )
+                    );
             }
         }
 
         public TimeSpan SponsorshipTimeout
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return sponsorshipTimeout; }
-            [System.Security.SecurityCritical]  // auto-generated
-            [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+            [System.Security.SecurityCritical] // auto-generated
+            [SecurityPermissionAttribute(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.RemotingConfiguration
+            )]
             set
             {
                 if (state == LeaseState.Initial)
                 {
                     sponsorshipTimeout = value;
-                    BCLDebug.Trace("REMOTE", "Lease Set SponsorshipTimeout Property ",managedObject," "+sponsorshipTimeout);                    
+                    BCLDebug.Trace(
+                        "REMOTE",
+                        "Lease Set SponsorshipTimeout Property ",
+                        managedObject,
+                        " " + sponsorshipTimeout
+                    );
                 }
                 else
-                    throw new RemotingException(Environment.GetResourceString("Remoting_Lifetime_InitialStateSponsorshipTimeout", ((Enum)state).ToString()));                                        
+                    throw new RemotingException(
+                        Environment.GetResourceString(
+                            "Remoting_Lifetime_InitialStateSponsorshipTimeout",
+                            ((Enum)state).ToString()
+                        )
+                    );
             }
         }
 
         public TimeSpan InitialLeaseTime
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return initialLeaseTime; }
-
-            [System.Security.SecurityCritical]  // auto-generated
-            [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+            [System.Security.SecurityCritical] // auto-generated
+            [SecurityPermissionAttribute(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.RemotingConfiguration
+            )]
             set
             {
                 if (state == LeaseState.Initial)
@@ -143,74 +181,108 @@ namespace System.Runtime.Remoting.Lifetime
                     initialLeaseTime = value;
                     if (TimeSpan.Zero.CompareTo(value) >= 0)
                         state = LeaseState.Null;
-                    BCLDebug.Trace("REMOTE", "Lease Set InitialLeaseTime Property ",managedObject,"  "+InitialLeaseTime+", current state "+((Enum)state).ToString());                                                            
+                    BCLDebug.Trace(
+                        "REMOTE",
+                        "Lease Set InitialLeaseTime Property ",
+                        managedObject,
+                        "  " + InitialLeaseTime + ", current state " + ((Enum)state).ToString()
+                    );
                 }
                 else
-                    throw new RemotingException(Environment.GetResourceString("Remoting_Lifetime_InitialStateInitialLeaseTime", ((Enum)state).ToString()));                                                            
+                    throw new RemotingException(
+                        Environment.GetResourceString(
+                            "Remoting_Lifetime_InitialStateInitialLeaseTime",
+                            ((Enum)state).ToString()
+                        )
+                    );
             }
         }
 
         public TimeSpan CurrentLeaseTime
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return leaseTime.Subtract(DateTime.UtcNow); }
         }
 
         public LeaseState CurrentState
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return state;}
-        }        
+            [System.Security.SecurityCritical] // auto-generated
+            get { return state; }
+        }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
         public void Register(ISponsor obj)
         {
             Register(obj, TimeSpan.Zero);
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
         public void Register(ISponsor obj, TimeSpan renewalTime)
         {
-            lock(this)
+            lock (this)
             {
-                BCLDebug.Trace("REMOTE", "Lease "+id+" Register Sponsor  renewalTime ",renewalTime," state ",((Enum)state).ToString());
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "Lease " + id + " Register Sponsor  renewalTime ",
+                    renewalTime,
+                    " state ",
+                    ((Enum)state).ToString()
+                );
                 if (state == LeaseState.Expired || sponsorshipTimeout == TimeSpan.Zero)
                     return;
 
                 Object sponsorId = GetSponsorId(obj);
-                lock(sponsorTable)
+                lock (sponsorTable)
                 {
                     if (renewalTime > TimeSpan.Zero)
                         AddTime(renewalTime);
                     if (!sponsorTable.ContainsKey(sponsorId))
                     {
                         // Place in tables
-                        sponsorTable[sponsorId] = new SponsorStateInfo(renewalTime, SponsorState.Initial);
+                        sponsorTable[sponsorId] = new SponsorStateInfo(
+                            renewalTime,
+                            SponsorState.Initial
+                        );
                     }
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
         public void Unregister(ISponsor sponsor)
         {
-            lock(this)
+            lock (this)
             {
-                BCLDebug.Trace("REMOTE", "Lease",id," Unregister  state ",((Enum)state).ToString());
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "Lease",
+                    id,
+                    " Unregister  state ",
+                    ((Enum)state).ToString()
+                );
                 if (state == LeaseState.Expired)
                     return;
 
                 Object sponsorId = GetSponsorId(sponsor);
-                lock(sponsorTable)
+                lock (sponsorTable)
                 {
                     if (sponsorId != null)
                     {
-                        leaseManager.DeleteSponsor(sponsorId);                
-                        SponsorStateInfo sponsorStateInfo = (SponsorStateInfo)sponsorTable[sponsorId];
+                        leaseManager.DeleteSponsor(sponsorId);
+                        SponsorStateInfo sponsorStateInfo = (SponsorStateInfo)
+                            sponsorTable[sponsorId];
                         sponsorTable.Remove(sponsorId);
                     }
                 }
@@ -219,7 +291,7 @@ namespace System.Runtime.Remoting.Lifetime
 
         // Get the local representative of the sponsor to prevent a remote access when placing
         // in a hash table.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private Object GetSponsorId(ISponsor obj)
         {
             Object sponsorId = null;
@@ -234,7 +306,7 @@ namespace System.Runtime.Remoting.Lifetime
         }
 
         // Convert from the local representative of the sponsor to either the MarshalByRefObject or local object
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private ISponsor GetSponsorFromId(Object sponsorId)
         {
             Object sponsor = null;
@@ -245,9 +317,12 @@ namespace System.Runtime.Remoting.Lifetime
                 sponsor = sponsorId;
             return (ISponsor)sponsor;
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.RemotingConfiguration)]
+
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.RemotingConfiguration
+        )]
         public TimeSpan Renew(TimeSpan renewalTime)
         {
             return RenewInternal(renewalTime);
@@ -256,9 +331,17 @@ namespace System.Runtime.Remoting.Lifetime
         // We will call this internally within the server domain
         internal TimeSpan RenewInternal(TimeSpan renewalTime)
         {
-            lock(this)
+            lock (this)
             {
-                BCLDebug.Trace("REMOTE","Lease ",id," Renew ",renewalTime," state ",((Enum)state).ToString());
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "Lease ",
+                    id,
+                    " Renew ",
+                    renewalTime,
+                    " state ",
+                    ((Enum)state).ToString()
+                );
                 if (state == LeaseState.Expired)
                     return TimeSpan.Zero;
                 AddTime(renewalTime);
@@ -269,27 +352,35 @@ namespace System.Runtime.Remoting.Lifetime
         // Used for a lease which has been created, but will not be used
         internal void Remove()
         {
-            BCLDebug.Trace("REMOTE","Lease ",id," Remove state ",((Enum)state).ToString());
+            BCLDebug.Trace("REMOTE", "Lease ", id, " Remove state ", ((Enum)state).ToString());
             if (state == LeaseState.Expired)
                 return;
-            state = LeaseState.Expired;            
+            state = LeaseState.Expired;
             leaseManager.DeleteLease(this);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void Cancel()
         {
-            lock(this)
-            {                        
-                BCLDebug.Trace("REMOTE","Lease ",id," Cancel Managed Object ",managedObject," state ",((Enum)state).ToString());
+            lock (this)
+            {
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "Lease ",
+                    id,
+                    " Cancel Managed Object ",
+                    managedObject,
+                    " state ",
+                    ((Enum)state).ToString()
+                );
 
                 if (state == LeaseState.Expired)
                     return;
 
                 Remove();
-                // Disconnect the object ... 
+                // Disconnect the object ...
                 // We use the internal version of Disconnect passing "false"
-                // for the bResetURI flag. This allows the object to keep its 
+                // for the bResetURI flag. This allows the object to keep its
                 // old URI in case its lease gets reactivated later.
                 RemotingServices.Disconnect(managedObject, false);
 
@@ -298,38 +389,42 @@ namespace System.Runtime.Remoting.Lifetime
             }
         }
 
-
-
 #if _DEBUG
         ~Lease()
         {
-            BCLDebug.Trace("REMOTE","Lease ",id," Finalize");
+            BCLDebug.Trace("REMOTE", "Lease ", id, " Finalize");
         }
 #endif
 
         internal void RenewOnCall()
         {
-            lock(this)
+            lock (this)
             {
                 //BCLDebug.Trace("REMOTE","Lease ",id," RenewOnCall state ",((Enum)state).ToString());
                 if (state == LeaseState.Initial || state == LeaseState.Expired)
-                    return;            
+                    return;
                 AddTime(renewOnCallTime);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void LeaseExpired(DateTime now)
         {
-            lock(this)
+            lock (this)
             {
-                BCLDebug.Trace("REMOTE","Lease ",id," LeaseExpired state ",((Enum)state).ToString());
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "Lease ",
+                    id,
+                    " LeaseExpired state ",
+                    ((Enum)state).ToString()
+                );
                 if (state == LeaseState.Expired)
                     return;
 
                 // There is a small window between the time the leaseManager
-                // thread examines all the leases and tests for expiry and 
-                // when an indivisual lease is locked for expiry. The object 
+                // thread examines all the leases and tests for expiry and
+                // when an indivisual lease is locked for expiry. The object
                 // could get marshal-ed in this time which would reset its lease
                 // Therefore we check again to see if we should indeed proceed
                 // with the expire code (using the same value of 'now' as used
@@ -340,38 +435,46 @@ namespace System.Runtime.Remoting.Lifetime
         }
 
         internal delegate TimeSpan AsyncRenewal(ILease lease);
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal void SponsorCall(ISponsor sponsor)
         {
-            BCLDebug.Trace("REMOTE","Lease ",id," SponsorCall state ",((Enum)state).ToString());
+            BCLDebug.Trace("REMOTE", "Lease ", id, " SponsorCall state ", ((Enum)state).ToString());
             bool exceptionOccurred = false;
             if (state == LeaseState.Expired)
                 return;
 
-            lock(sponsorTable)
+            lock (sponsorTable)
             {
                 try
                 {
-                    Object sponsorId = GetSponsorId(sponsor);            
+                    Object sponsorId = GetSponsorId(sponsor);
                     sponsorCallThread = Thread.CurrentThread.GetHashCode();
                     AsyncRenewal ar = new AsyncRenewal(sponsor.Renewal);
-                    SponsorStateInfo sponsorStateInfo = (SponsorStateInfo)sponsorTable[sponsorId];            
+                    SponsorStateInfo sponsorStateInfo = (SponsorStateInfo)sponsorTable[sponsorId];
                     sponsorStateInfo.sponsorState = SponsorState.Waiting;
 
                     // The first parameter should be the lease we are trying to renew.
-                    IAsyncResult iar = ar.BeginInvoke(this, new AsyncCallback(this.SponsorCallback), null);
-                    if ((sponsorStateInfo.sponsorState == SponsorState.Waiting) && (state != LeaseState.Expired))
+                    IAsyncResult iar = ar.BeginInvoke(
+                        this,
+                        new AsyncCallback(this.SponsorCallback),
+                        null
+                    );
+                    if (
+                        (sponsorStateInfo.sponsorState == SponsorState.Waiting)
+                        && (state != LeaseState.Expired)
+                    )
                     {
                         //   Even if we get here, the operation could still complete before
                         //   we call the the line below. This seems to be a ----.
-                        
+
                         // Sponsor could have completed before statement is reached, so only execute
                         // if the sponsor state is still waiting
                         leaseManager.RegisterSponsorCall(this, sponsorId, sponsorshipTimeout);
                     }
                     sponsorCallThread = 0;
-                }catch(Exception)
+                }
+                catch (Exception)
                 {
                     // Sponsor not avaiable
                     exceptionOccurred = true;
@@ -382,23 +485,29 @@ namespace System.Runtime.Remoting.Lifetime
 
             if (exceptionOccurred)
             {
-                BCLDebug.Trace("REMOTE","Lease ",id," SponsorCall Sponsor Exception ");
+                BCLDebug.Trace("REMOTE", "Lease ", id, " SponsorCall Sponsor Exception ");
                 Unregister(sponsor);
                 ProcessNextSponsor();
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SponsorTimeout(Object sponsorId)
         {
             lock (this)
             {
                 if (!sponsorTable.ContainsKey(sponsorId))
                     return;
-                lock(sponsorTable)
+                lock (sponsorTable)
                 {
                     SponsorStateInfo sponsorStateInfo = (SponsorStateInfo)sponsorTable[sponsorId];
-                    BCLDebug.Trace("REMOTE","Lease ",id," SponsorTimeout  sponsorState ",((Enum)sponsorStateInfo.sponsorState).ToString());
+                    BCLDebug.Trace(
+                        "REMOTE",
+                        "Lease ",
+                        id,
+                        " SponsorTimeout  sponsorState ",
+                        ((Enum)sponsorStateInfo.sponsorState).ToString()
+                    );
                     if (sponsorStateInfo.sponsorState == SponsorState.Waiting)
                     {
                         Unregister(GetSponsorFromId(sponsorId));
@@ -408,27 +517,29 @@ namespace System.Runtime.Remoting.Lifetime
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void ProcessNextSponsor()
         {
-            BCLDebug.Trace("REMOTE","Lease ",id," ProcessNextSponsor");
+            BCLDebug.Trace("REMOTE", "Lease ", id, " ProcessNextSponsor");
 
             Object largestSponsor = null;
             TimeSpan largestRenewalTime = TimeSpan.Zero;
-            
-            
-            lock(sponsorTable)
+
+            lock (sponsorTable)
             {
                 IDictionaryEnumerator e = sponsorTable.GetEnumerator();
                 // Find sponsor with largest previous renewal value
-                while(e.MoveNext())
+                while (e.MoveNext())
                 {
                     Object sponsorId = e.Key;
                     SponsorStateInfo sponsorStateInfo = (SponsorStateInfo)e.Value;
-                    if ((sponsorStateInfo.sponsorState == SponsorState.Initial) && (largestRenewalTime == TimeSpan.Zero))
+                    if (
+                        (sponsorStateInfo.sponsorState == SponsorState.Initial)
+                        && (largestRenewalTime == TimeSpan.Zero)
+                    )
                     {
                         largestRenewalTime = sponsorStateInfo.renewalTime;
-                        largestSponsor = sponsorId;                        
+                        largestSponsor = sponsorId;
                     }
                     else if (sponsorStateInfo.renewalTime > largestRenewalTime)
                     {
@@ -443,25 +554,32 @@ namespace System.Runtime.Remoting.Lifetime
             else
             {
                 // No more sponsors to try, Cancel
-                BCLDebug.Trace("REMOTE","Lease ",id," ProcessNextSponsor no more sponsors");                
+                BCLDebug.Trace("REMOTE", "Lease ", id, " ProcessNextSponsor no more sponsors");
                 Cancel();
             }
         }
 
-
-        // This gets called when we explicitly transfer the call back from the 
+        // This gets called when we explicitly transfer the call back from the
         // called function to a threadpool thread.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SponsorCallback(Object obj)
         {
             SponsorCallback((IAsyncResult)obj);
         }
 
         // On another thread
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SponsorCallback(IAsyncResult iar)
         {
-            BCLDebug.Trace("REMOTE","Lease ",id," SponsorCallback IAsyncResult ",iar," state ",((Enum)state).ToString());
+            BCLDebug.Trace(
+                "REMOTE",
+                "Lease ",
+                id,
+                " SponsorCallback IAsyncResult ",
+                iar,
+                " state ",
+                ((Enum)state).ToString()
+            );
             if (state == LeaseState.Expired)
             {
                 return;
@@ -486,27 +604,28 @@ namespace System.Runtime.Remoting.Lifetime
             if (iar.IsCompleted)
             {
                 // Sponsor came back with renewal
-                BCLDebug.Trace("REMOTE","Lease ",id," SponsorCallback sponsor completed");
+                BCLDebug.Trace("REMOTE", "Lease ", id, " SponsorCallback sponsor completed");
                 bool exceptionOccurred = false;
                 TimeSpan renewalTime = TimeSpan.Zero;
                 try
                 {
                     renewalTime = (TimeSpan)ar.EndInvoke(iar);
-                }catch(Exception)
+                }
+                catch (Exception)
                 {
                     // Sponsor not avaiable
                     exceptionOccurred = true;
                 }
                 if (exceptionOccurred)
                 {
-                    BCLDebug.Trace("REMOTE","Lease ",id," SponsorCallback Sponsor Exception ");
+                    BCLDebug.Trace("REMOTE", "Lease ", id, " SponsorCallback Sponsor Exception ");
                     Unregister(sponsor);
                     ProcessNextSponsor();
                 }
                 else
                 {
                     Object sponsorId = GetSponsorId(sponsor);
-                    lock(sponsorTable)
+                    lock (sponsorTable)
                     {
                         if (sponsorTable.ContainsKey(sponsorId))
                         {
@@ -527,7 +646,12 @@ namespace System.Runtime.Remoting.Lifetime
                     }
                     else if (sponsorStateInfo.renewalTime == TimeSpan.Zero)
                     {
-                        BCLDebug.Trace("REMOTE","Lease ",id," SponsorCallback sponsor did not renew ");                                            
+                        BCLDebug.Trace(
+                            "REMOTE",
+                            "Lease ",
+                            id,
+                            " SponsorCallback sponsor did not renew "
+                        );
                         Unregister(sponsor);
                         ProcessNextSponsor();
                     }
@@ -539,13 +663,16 @@ namespace System.Runtime.Remoting.Lifetime
             {
                 // Sponsor timed out
                 // Note time outs should be handled by the LeaseManager
-                BCLDebug.Trace("REMOTE","Lease ",id," SponsorCallback sponsor did not complete, timed out");
-                Unregister(sponsor);                    
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "Lease ",
+                    id,
+                    " SponsorCallback sponsor did not complete, timed out"
+                );
+                Unregister(sponsor);
                 ProcessNextSponsor();
             }
         }
-
-        
 
         private void AddTime(TimeSpan renewalSpan)
         {
@@ -561,17 +688,15 @@ namespace System.Runtime.Remoting.Lifetime
                 leaseTime = renewTime;
                 state = LeaseState.Active;
             }
-            //BCLDebug.Trace("REMOTE","Lease ",id," AddTime renewalSpan ",renewalSpan," current Time ",now," old leaseTime ",oldLeaseTime," new leaseTime ",leaseTime," state ",((Enum)state).ToString());            
+            //BCLDebug.Trace("REMOTE","Lease ",id," AddTime renewalSpan ",renewalSpan," current Time ",now," old leaseTime ",oldLeaseTime," new leaseTime ",leaseTime," state ",((Enum)state).ToString());
         }
-
-
 
         [Serializable]
         internal enum SponsorState
         {
             Initial = 0,
             Waiting = 1,
-            Completed = 2
+            Completed = 2,
         }
 
         internal sealed class SponsorStateInfo
@@ -597,9 +722,9 @@ namespace System.Runtime.Remoting.Lifetime
             this.lease = lease;
             this.nextSink = nextSink;
         }
-        
+
         //IMessageSink methods
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public IMessage SyncProcessMessage(IMessage msg)
         {
             //BCLDebug.Trace("REMOTE","Lease ",id," SyncProcessMessage");
@@ -607,22 +732,22 @@ namespace System.Runtime.Remoting.Lifetime
             return nextSink.SyncProcessMessage(msg);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
             //BCLDebug.Trace("REMOTE","Lease ",id," AsyncProcessMessage");
             lease.RenewOnCall();
-            return nextSink.AsyncProcessMessage(msg, replySink);        
+            return nextSink.AsyncProcessMessage(msg, replySink);
         }
 
         public IMessageSink NextSink
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
-                //BCLDebug.Trace("REMOTE","Lease ",id," NextSink");        
+                //BCLDebug.Trace("REMOTE","Lease ",id," NextSink");
                 return nextSink;
             }
         }
     }
-} 
+}

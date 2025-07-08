@@ -24,10 +24,10 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 return new TheoryDataSet<MediaTypeFormatter>
                 {
-                    new XmlMediaTypeFormatter(), 
+                    new XmlMediaTypeFormatter(),
                     new JsonMediaTypeFormatter(),
                     new FormUrlEncodedMediaTypeFormatter(),
-                    new Mock<BufferedMediaTypeFormatter>().Object
+                    new Mock<BufferedMediaTypeFormatter>().Object,
                 };
             }
         }
@@ -40,7 +40,11 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
 
             // Act
-            MediaTypeFormatter tracingFormatter = MediaTypeFormatterTracer.CreateTracer(formatter, new TestTraceWriter(), request);
+            MediaTypeFormatter tracingFormatter = MediaTypeFormatterTracer.CreateTracer(
+                formatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Assert
             IFormatterTracer tracer = Assert.IsAssignableFrom<IFormatterTracer>(tracingFormatter);
@@ -49,14 +53,22 @@ namespace System.Web.Http.Tracing.Tracers
 
         [Theory]
         [PropertyData("AllKnownFormatters")]
-        public void Inner_Property_On_All_MediaTypeFormatterTracers_Returns_Object_Of_Type_MediaTypeFormatter(MediaTypeFormatter formatter)
+        public void Inner_Property_On_All_MediaTypeFormatterTracers_Returns_Object_Of_Type_MediaTypeFormatter(
+            MediaTypeFormatter formatter
+        )
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            MediaTypeFormatter formatterTracer = MediaTypeFormatterTracer.CreateTracer(formatter, new TestTraceWriter(), request);
+            MediaTypeFormatter formatterTracer = MediaTypeFormatterTracer.CreateTracer(
+                formatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act
-            MediaTypeFormatter innerFormatter = (formatterTracer as IDecorator<MediaTypeFormatter>).Inner;
+            MediaTypeFormatter innerFormatter = (
+                formatterTracer as IDecorator<MediaTypeFormatter>
+            ).Inner;
 
             // Assert
             Assert.Same(formatter, innerFormatter);
@@ -64,11 +76,17 @@ namespace System.Web.Http.Tracing.Tracers
 
         [Theory]
         [PropertyData("AllKnownFormatters")]
-        public void Decorator_GetInner_On_All_MediaTypeFormatterTracers_Returns_Object_Of_Type_MediaTypeFormatter(MediaTypeFormatter formatter)
+        public void Decorator_GetInner_On_All_MediaTypeFormatterTracers_Returns_Object_Of_Type_MediaTypeFormatter(
+            MediaTypeFormatter formatter
+        )
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            MediaTypeFormatter formatterTracer = MediaTypeFormatterTracer.CreateTracer(formatter, new TestTraceWriter(), request);
+            MediaTypeFormatter formatterTracer = MediaTypeFormatterTracer.CreateTracer(
+                formatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act
             MediaTypeFormatter innerFormatter = Decorator.GetInner(formatterTracer);
@@ -89,18 +107,34 @@ namespace System.Web.Http.Tracing.Tracers
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
             request.Content = new StringContent("42", Encoding.Default, contentType);
-            MediaTypeFormatterTracer tracer = new MediaTypeFormatterTracer(formatter, traceWriter, request);
+            MediaTypeFormatterTracer tracer = new MediaTypeFormatterTracer(
+                formatter,
+                traceWriter,
+                request
+            );
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "ReadFromStreamAsync" },
-                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.End, Operation = "ReadFromStreamAsync" }
+                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "ReadFromStreamAsync",
+                },
+                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "ReadFromStreamAsync",
+                },
             };
 
             // Act
             object valueReturned = await request.Content.ReadAsAsync<object>(new[] { tracer });
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Equal(value, valueReturned);
         }
 
@@ -112,19 +146,35 @@ namespace System.Web.Http.Tracing.Tracers
             CustomMediaTypeFormatter formatter = new CustomMediaTypeFormatter(value);
             TestTraceWriter traceWriter = new TestTraceWriter();
             HttpRequestMessage request = new HttpRequestMessage();
-            MediaTypeFormatterTracer tracer = new MediaTypeFormatterTracer(formatter, traceWriter, request);
+            MediaTypeFormatterTracer tracer = new MediaTypeFormatterTracer(
+                formatter,
+                traceWriter,
+                request
+            );
             request.Content = new ObjectContent<object>(value, tracer);
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "WriteToStreamAsync" },
-                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info) { Kind = TraceKind.End, Operation = "WriteToStreamAsync" }
+                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "WriteToStreamAsync",
+                },
+                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "WriteToStreamAsync",
+                },
             };
 
             // Act
             await request.Content.CopyToAsync(new MemoryStream());
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
@@ -138,14 +188,23 @@ namespace System.Web.Http.Tracing.Tracers
             string operationName = "FormatterLoggerTracer_LogErrorException";
             var loggerMock = new Mock<IFormatterLogger>();
             loggerMock.Setup(o => o.LogError(It.IsAny<string>(), It.IsAny<Exception>()));
-            IFormatterLogger tracer = new FormatterLoggerTraceWrapper(loggerMock.Object, traceWriter, request, operatorName, operationName);
+            IFormatterLogger tracer = new FormatterLoggerTraceWrapper(
+                loggerMock.Object,
+                traceWriter,
+                request,
+                operatorName,
+                operationName
+            );
             Exception exception = new Exception("message");
             string errorPath = "errorPath";
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Error) 
+                new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Error)
                 {
-                    Kind = TraceKind.Trace, Operation = operationName, Exception = exception, Operator = operatorName
+                    Kind = TraceKind.Trace,
+                    Operation = operationName,
+                    Exception = exception,
+                    Operator = operatorName,
                 },
             };
 
@@ -153,7 +212,11 @@ namespace System.Web.Http.Tracing.Tracers
             tracer.LogError(errorPath, exception);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
@@ -167,14 +230,23 @@ namespace System.Web.Http.Tracing.Tracers
             string operationName = "FormatterLoggerTracer_LogErrorMessage";
             var loggerMock = new Mock<IFormatterLogger>();
             loggerMock.Setup(o => o.LogError(It.IsAny<string>(), It.IsAny<string>()));
-            IFormatterLogger tracer = new FormatterLoggerTraceWrapper(loggerMock.Object, traceWriter, request, operatorName, operationName);
+            IFormatterLogger tracer = new FormatterLoggerTraceWrapper(
+                loggerMock.Object,
+                traceWriter,
+                request,
+                operatorName,
+                operationName
+            );
             string errorMessage = "errorMessage";
             string errorPath = "errorPath";
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
                 new TraceRecord(request, TraceCategories.FormattingCategory, TraceLevel.Error)
                 {
-                    Kind = TraceKind.Trace, Operation = operationName, Message = errorMessage, Operator = operatorName 
+                    Kind = TraceKind.Trace,
+                    Operation = operationName,
+                    Message = errorMessage,
+                    Operator = operatorName,
                 },
             };
 
@@ -182,7 +254,11 @@ namespace System.Web.Http.Tracing.Tracers
             tracer.LogError(errorPath, errorMessage);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         private class CustomMediaTypeFormatter : MediaTypeFormatter
@@ -205,14 +281,25 @@ namespace System.Web.Http.Tracing.Tracers
                 return true;
             }
 
-            public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-                IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+            public override Task<object> ReadFromStreamAsync(
+                Type type,
+                Stream readStream,
+                HttpContent content,
+                IFormatterLogger formatterLogger,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult(_result);
             }
 
-            public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-                TransportContext transportContext, CancellationToken cancellationToken)
+            public override Task WriteToStreamAsync(
+                Type type,
+                object value,
+                Stream writeStream,
+                HttpContent content,
+                TransportContext transportContext,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult(_result);
             }

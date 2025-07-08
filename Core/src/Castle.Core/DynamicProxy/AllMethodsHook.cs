@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,43 +14,39 @@
 
 namespace Castle.DynamicProxy
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Reflection;
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
 
 #if FEATURE_SERIALIZATION
-	[Serializable]
+    [Serializable]
 #endif
-	public class AllMethodsHook : IProxyGenerationHook
-	{
-		protected static readonly ICollection<Type> SkippedTypes = new[]
-		{
-			typeof(object),
-			typeof(MarshalByRefObject),
-			typeof(ContextBoundObject)
-		};
+    public class AllMethodsHook : IProxyGenerationHook
+    {
+        protected static readonly ICollection<Type> SkippedTypes = new[]
+        {
+            typeof(object),
+            typeof(MarshalByRefObject),
+            typeof(ContextBoundObject),
+        };
 
-		public virtual bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
-		{
-			return SkippedTypes.Contains(methodInfo.DeclaringType) == false;
-		}
+        public virtual bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
+        {
+            return SkippedTypes.Contains(methodInfo.DeclaringType) == false;
+        }
 
-		public virtual void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
-		{
-		}
+        public virtual void NonProxyableMemberNotification(Type type, MemberInfo memberInfo) { }
 
-		public virtual void MethodsInspected()
-		{
-		}
+        public virtual void MethodsInspected() { }
 
-		public override bool Equals(object obj)
-		{
-			return obj != null && obj.GetType() == GetType();
-		}
+        public override bool Equals(object obj)
+        {
+            return obj != null && obj.GetType() == GetType();
+        }
 
-		public override int GetHashCode()
-		{
-			return GetType().GetHashCode();
-		}
-	}
+        public override int GetHashCode()
+        {
+            return GetType().GetHashCode();
+        }
+    }
 }

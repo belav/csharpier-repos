@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     public abstract class DiagnosticSuppressor : DiagnosticAnalyzer
     {
         // Disallow suppressors from reporting diagnostics or registering analysis actions.
-        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray<DiagnosticDescriptor>.Empty;
+        public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray<DiagnosticDescriptor>.Empty;
 
 #pragma warning disable RS1026
         public sealed override void Initialize(AnalysisContext context)

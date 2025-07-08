@@ -10,7 +10,9 @@ namespace System.ComponentModel.DataAnnotations
     ///     Exception used for validation using <see cref="ValidationAttribute" />.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class ValidationException : Exception
     {
         private ValidationResult? _validationResult;
@@ -21,8 +23,11 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="validationResult">The value describing the validation error</param>
         /// <param name="validatingAttribute">The attribute that triggered this exception</param>
         /// <param name="value">The value that caused the validating attribute to trigger the exception</param>
-        public ValidationException(ValidationResult validationResult, ValidationAttribute? validatingAttribute,
-            object? value)
+        public ValidationException(
+            ValidationResult validationResult,
+            ValidationAttribute? validatingAttribute,
+            object? value
+        )
             : this(validationResult.ErrorMessage, validatingAttribute, value)
         {
             _validationResult = validationResult;
@@ -34,7 +39,11 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="errorMessage">The localized error message</param>
         /// <param name="validatingAttribute">The attribute that triggered this exception</param>
         /// <param name="value">The value that caused the validating attribute to trigger the exception</param>
-        public ValidationException(string? errorMessage, ValidationAttribute? validatingAttribute, object? value)
+        public ValidationException(
+            string? errorMessage,
+            ValidationAttribute? validatingAttribute,
+            object? value
+        )
             : base(errorMessage)
         {
             Value = value;
@@ -45,9 +54,7 @@ namespace System.ComponentModel.DataAnnotations
         ///     Default constructor.
         /// </summary>
         /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
-        public ValidationException()
-        {
-        }
+        public ValidationException() { }
 
         /// <summary>
         ///     Constructor that accepts only a localized message
@@ -55,9 +62,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
         /// <param name="message">The localized message</param>
         public ValidationException(string? message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         ///     Constructor that accepts a localized message and an inner exception
@@ -66,21 +71,21 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="message">The localized error message</param>
         /// <param name="innerException">inner exception</param>
         public ValidationException(string? message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         /// <summary>
         ///     Constructor that takes a SerializationInfo.
         /// </summary>
         /// <param name="info">The SerializationInfo.</param>
         /// <param name="context">The StreamingContext.</param>
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected ValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         /// <summary>
         ///     Gets the <see>ValidationAttribute</see> instance that triggered this exception.

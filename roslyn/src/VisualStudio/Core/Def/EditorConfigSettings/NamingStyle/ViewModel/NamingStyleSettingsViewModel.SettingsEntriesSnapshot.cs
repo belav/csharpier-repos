@@ -12,9 +12,17 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         internal class SettingsEntriesSnapshot : SettingsEntriesSnapshotBase<NamingStyleSetting>
         {
-            public SettingsEntriesSnapshot(ImmutableArray<NamingStyleSetting> data, int currentVersionNumber) : base(data, currentVersionNumber) { }
+            public SettingsEntriesSnapshot(
+                ImmutableArray<NamingStyleSetting> data,
+                int currentVersionNumber
+            )
+                : base(data, currentVersionNumber) { }
 
-            protected override bool TryGetValue(NamingStyleSetting result, string keyName, out object? content)
+            protected override bool TryGetValue(
+                NamingStyleSetting result,
+                string keyName,
+                out object? content
+            )
             {
                 content = keyName switch
                 {

@@ -60,7 +60,8 @@ namespace System.Data.OleDb
         // un-enlisted during Deactivate.
         private bool _unEnlistDuringDeactivate;
 
-        internal OleDbConnectionInternal(OleDbConnectionString constr, OleDbConnection? connection) : base()
+        internal OleDbConnectionInternal(OleDbConnectionString constr, OleDbConnection? connection)
+            : base()
         {
             Debug.Assert((null != constr) && !constr.IsEmpty, "empty connectionstring");
             ConnectionString = constr;
@@ -89,7 +90,10 @@ namespace System.Data.OleDb
 
                     // From the DataSource object, will call IDBInitialize.Initialize & IDBCreateSession.CreateSession
                     // We always need both called so we use a single call for a single DangerousAddRef/DangerousRelease pair.
-                    OleDbHResult hr = _datasrcwrp.InitializeAndCreateSession(constr, ref _sessionwrp);
+                    OleDbHResult hr = _datasrcwrp.InitializeAndCreateSession(
+                        constr,
+                        ref _sessionwrp
+                    );
 
                     // process the HResult here instead of from the SafeHandle because the possibility
                     // of an InfoMessageEvent.
@@ -124,18 +128,12 @@ namespace System.Data.OleDb
 
         internal OleDbConnection? Connection
         {
-            get
-            {
-                return (OleDbConnection?)Owner;
-            }
+            get { return (OleDbConnection?)Owner; }
         }
 
         internal bool HasSession
         {
-            get
-            {
-                return (null != _sessionwrp);
-            }
+            get { return (null != _sessionwrp); }
         }
 
         internal OleDbTransaction? LocalTransaction
@@ -170,7 +168,10 @@ namespace System.Data.OleDb
             // consider making a method, not a property
             get
             {
-                object value = GetDataSourceValue(OleDbPropertySetGuid.DataSourceInfo, ODB.DBPROP_DBMSVER)!;
+                object value = GetDataSourceValue(
+                    OleDbPropertySetGuid.DataSourceInfo,
+                    ODB.DBPROP_DBMSVER
+                )!;
                 return Convert.ToString(value, CultureInfo.InvariantCulture)!;
             }
         }
@@ -227,7 +228,10 @@ namespace System.Data.OleDb
             object? icommandText = null;
             OleDbHResult hr = _sessionwrp.CreateCommand(ref icommandText);
 
-            Debug.Assert((0 <= hr) || (null == icommandText), "CreateICommandText: error with ICommandText");
+            Debug.Assert(
+                (0 <= hr) || (null == icommandText),
+                "CreateICommandText: error with ICommandText"
+            );
             if (hr < 0)
             {
                 if (OleDbHResult.E_NOINTERFACE != hr)
@@ -263,7 +267,9 @@ namespace System.Data.OleDb
                 Debug.Assert(null != _datasrcwrp, "ITransactionLocal: null datasource");
                 Debug.Assert(null != _sessionwrp, "ITransactionLocal: null session");
                 unknown = _sessionwrp.ComWrapper();
-                UnsafeNativeMethods.ITransactionLocal? value = (unknown as UnsafeNativeMethods.ITransactionLocal);
+                UnsafeNativeMethods.ITransactionLocal? value = (
+                    unknown as UnsafeNativeMethods.ITransactionLocal
+                );
                 if (null == value)
                 {
                     throw ODB.TransactionsNotSupported(Provider, null);
@@ -332,7 +338,12 @@ namespace System.Data.OleDb
                 {
                     throw ODB.TransactionsNotSupported(Provider, null);
                 }
-                transactionJoin.Value.JoinTransaction(oleTxTransaction, (int)IsolationLevel.Unspecified, 0, IntPtr.Zero);
+                transactionJoin.Value.JoinTransaction(
+                    oleTxTransaction,
+                    (int)IsolationLevel.Unspecified,
+                    0,
+                    IntPtr.Zero
+                );
                 _unEnlistDuringDeactivate = (null != transaction);
             }
             EnlistedTransaction = transaction;
@@ -356,7 +367,9 @@ namespace System.Data.OleDb
             {
                 using (PropertyIDSet propidset = new PropertyIDSet(propertySet, propertyID))
                 {
-                    using (DBPropSet propset = new DBPropSet(idbProperties.Value, propidset, out hr))
+                    using (
+                        DBPropSet propset = new DBPropSet(idbProperties.Value, propidset, out hr)
+                    )
                     {
                         if (hr < 0)
                         {
@@ -405,14 +418,26 @@ namespace System.Data.OleDb
                 OleDbHResult hr;
                 int literalCount = 0;
                 IntPtr literalInfo = IntPtr.Zero;
-                using (DualCoTaskMem handle = new DualCoTaskMem(dbInfo, null, out literalCount, out literalInfo, out hr))
+                using (
+                    DualCoTaskMem handle = new DualCoTaskMem(
+                        dbInfo,
+                        null,
+                        out literalCount,
+                        out literalInfo,
+                        out hr
+                    )
+                )
                 {
                     // All literals were either invalid or unsupported. The provider allocates memory for *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE. The consumer frees this memory when it no longer needs the information.
                     if (OleDbHResult.DB_E_ERRORSOCCURRED != hr)
                     {
                         byte* offset = (byte*)literalInfo;
                         tagDBLITERALINFO tag = new tagDBLITERALINFO();
-                        for (int i = 0; i < literalCount; ++i, offset += ODB.SizeOf_tagDBLITERALINFO)
+                        for (
+                            int i = 0;
+                            i < literalCount;
+                            ++i, offset += ODB.SizeOf_tagDBLITERALINFO
+                        )
                         {
                             Marshal.PtrToStructure((nint)offset, tag);
 
@@ -533,14 +558,28 @@ namespace System.Data.OleDb
                 int literalCount = 0;
                 OleDbHResult hr;
 
-                using (DualCoTaskMem handle = new DualCoTaskMem(dbInfo, new int[1] { literal }, out literalCount, out literalInfo, out hr))
+                using (
+                    DualCoTaskMem handle = new DualCoTaskMem(
+                        dbInfo,
+                        new int[1] { literal },
+                        out literalCount,
+                        out literalInfo,
+                        out hr
+                    )
+                )
                 {
                     // All literals were either invalid or unsupported. The provider allocates memory for *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE. The consumer frees this memory when it no longer needs the information.
                     if (OleDbHResult.DB_E_ERRORSOCCURRED != hr)
                     {
-                        if ((1 == literalCount) && Marshal.ReadInt32(literalInfo, ODB.OffsetOf_tagDBLITERALINFO_it) == literal)
+                        if (
+                            (1 == literalCount)
+                            && Marshal.ReadInt32(literalInfo, ODB.OffsetOf_tagDBLITERALINFO_it)
+                                == literal
+                        )
                         {
-                            literalValue = Marshal.PtrToStringUni(Marshal.ReadIntPtr(literalInfo, 0));
+                            literalValue = Marshal.PtrToStringUni(
+                                Marshal.ReadIntPtr(literalInfo, 0)
+                            );
                         }
                         if (hr < 0)
                         { // ignore infomsg
@@ -577,7 +616,15 @@ namespace System.Data.OleDb
                 IntPtr schemaGuids = IntPtr.Zero;
                 IntPtr schemaRestrictions = IntPtr.Zero;
 
-                using (DualCoTaskMem safehandle = new DualCoTaskMem(dbSchemaRowset, out schemaCount, out schemaGuids, out schemaRestrictions, out hr))
+                using (
+                    DualCoTaskMem safehandle = new DualCoTaskMem(
+                        dbSchemaRowset,
+                        out schemaCount,
+                        out schemaGuids,
+                        out schemaRestrictions,
+                        out hr
+                    )
+                )
                 {
                     dbSchemaRowset = null;
                     if (hr < 0)
@@ -588,17 +635,25 @@ namespace System.Data.OleDb
                     supportedSchemas = new SchemaSupport[schemaCount];
                     if (IntPtr.Zero != schemaGuids)
                     {
-                        for (int i = 0, offset = 0; i < supportedSchemas.Length; ++i, offset += ODB.SizeOf_Guid)
+                        for (
+                            int i = 0, offset = 0;
+                            i < supportedSchemas.Length;
+                            ++i, offset += ODB.SizeOf_Guid
+                        )
                         {
                             IntPtr ptr = ADP.IntPtrOffset(schemaGuids, i * ODB.SizeOf_Guid);
-                            supportedSchemas[i]._schemaRowset = (Guid)Marshal.PtrToStructure(ptr, typeof(Guid))!;
+                            supportedSchemas[i]._schemaRowset = (Guid)
+                                Marshal.PtrToStructure(ptr, typeof(Guid))!;
                         }
                     }
                     if (IntPtr.Zero != schemaRestrictions)
                     {
                         for (int i = 0; i < supportedSchemas.Length; ++i)
                         {
-                            supportedSchemas[i]._restrictions = Marshal.ReadInt32(schemaRestrictions, i * 4);
+                            supportedSchemas[i]._restrictions = Marshal.ReadInt32(
+                                schemaRestrictions,
+                                i * 4
+                            );
                         }
                     }
                 }
@@ -624,7 +679,16 @@ namespace System.Data.OleDb
 
                 UnsafeNativeMethods.IRowset? rowset = null;
                 OleDbHResult hr;
-                hr = dbSchemaRowset.GetRowset(IntPtr.Zero, ref schema, restrictions.Length, restrictions, ref ODB.IID_IRowset, 0, IntPtr.Zero, out rowset);
+                hr = dbSchemaRowset.GetRowset(
+                    IntPtr.Zero,
+                    ref schema,
+                    restrictions.Length,
+                    restrictions,
+                    ref ODB.IID_IRowset,
+                    0,
+                    IntPtr.Zero,
+                    out rowset
+                );
 
                 if (hr < 0)
                 { // ignore infomsg
@@ -633,9 +697,20 @@ namespace System.Data.OleDb
 
                 if (null != rowset)
                 {
-                    using (OleDbDataReader dataReader = new OleDbDataReader(Connection, null, 0, CommandBehavior.Default))
+                    using (
+                        OleDbDataReader dataReader = new OleDbDataReader(
+                            Connection,
+                            null,
+                            0,
+                            CommandBehavior.Default
+                        )
+                    )
                     {
-                        dataReader.InitializeIRowset(rowset, ChapterHandle.DB_NULL_HCHAPTER, IntPtr.Zero);
+                        dataReader.InitializeIRowset(
+                            rowset,
+                            ChapterHandle.DB_NULL_HCHAPTER,
+                            IntPtr.Zero
+                        );
                         dataReader.BuildMetaInfo();
                         dataReader.HasRowsRead();
 
@@ -656,7 +731,10 @@ namespace System.Data.OleDb
 
             if (null != ReferenceCollection)
             {
-                reader = ReferenceCollection.FindItem<OleDbDataReader>(OleDbReferenceCollection.DataReaderTag, (dataReader) => cmd == dataReader.Command);
+                reader = ReferenceCollection.FindItem<OleDbDataReader>(
+                    OleDbReferenceCollection.DataReaderTag,
+                    (dataReader) => cmd == dataReader.Command
+                );
             }
 
             return (reader != null);
@@ -667,7 +745,9 @@ namespace System.Data.OleDb
             OleDbConnection? connection = Connection; // get value from weakref only once
             Exception? e = OleDbConnection.ProcessResults(hr, connection);
             if (null != e)
-            { throw e; }
+            {
+                throw e;
+            }
         }
 
         internal bool SupportSchemaRowset(Guid schema)
@@ -689,7 +769,14 @@ namespace System.Data.OleDb
         private static object CreateInstanceDataLinks()
         {
             Type datalink = Type.GetTypeFromCLSID(ODB.CLSID_DataLinks, true)!;
-            return Activator.CreateInstance(datalink, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance, null, null, CultureInfo.InvariantCulture, null)!;
+            return Activator.CreateInstance(
+                datalink,
+                System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance,
+                null,
+                null,
+                CultureInfo.InvariantCulture,
+                null
+            )!;
         }
 
         // @devnote: should be multithread safe access to OleDbConnection.idataInitialize,
@@ -747,7 +834,9 @@ namespace System.Data.OleDb
             ADP.CheckVersionMDAC(false);
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         private static void SetMTAApartmentState()
         {
             // we are defaulting to a multithread apartment state
@@ -825,7 +914,12 @@ namespace System.Data.OleDb
             {
                 using (IDBPropertiesWrapper idbProperties = IDBProperties())
                 {
-                    using (PropertyInfoSet infoset = new PropertyInfoSet(idbProperties.Value, propidset))
+                    using (
+                        PropertyInfoSet infoset = new PropertyInfoSet(
+                            idbProperties.Value,
+                            propidset
+                        )
+                    )
                     {
                         properties = infoset.GetValues();
                     }

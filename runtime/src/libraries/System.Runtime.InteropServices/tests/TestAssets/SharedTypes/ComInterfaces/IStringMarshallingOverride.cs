@@ -7,7 +7,9 @@ using System.Runtime.InteropServices.Marshalling;
 
 namespace SharedTypes.ComInterfaces
 {
-    [GeneratedComInterface(StringMarshalling = System.Runtime.InteropServices.StringMarshalling.Utf8)]
+    [GeneratedComInterface(
+        StringMarshalling = System.Runtime.InteropServices.StringMarshalling.Utf8
+    )]
     [Guid(IID)]
     internal partial interface IStringMarshallingOverride
     {

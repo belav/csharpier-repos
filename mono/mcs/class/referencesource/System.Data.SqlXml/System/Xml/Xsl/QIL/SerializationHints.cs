@@ -6,9 +6,11 @@
 //------------------------------------------------------------------------------
 using System;
 
-namespace System.Xml.Xsl.Qil {
-    internal enum SerializationHints {
-        None        = 0,
+namespace System.Xml.Xsl.Qil
+{
+    internal enum SerializationHints
+    {
+        None = 0,
         CData,
         DisableOutputEscaping,
     }

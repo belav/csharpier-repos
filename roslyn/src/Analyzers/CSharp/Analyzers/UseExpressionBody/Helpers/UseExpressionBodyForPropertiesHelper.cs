@@ -15,43 +15,62 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 {
-    internal class UseExpressionBodyForPropertiesHelper :
-        UseExpressionBodyHelper<PropertyDeclarationSyntax>
+    internal class UseExpressionBodyForPropertiesHelper
+        : UseExpressionBodyHelper<PropertyDeclarationSyntax>
     {
         public static readonly UseExpressionBodyForPropertiesHelper Instance = new();
 
         private UseExpressionBodyForPropertiesHelper()
-            : base(IDEDiagnosticIds.UseExpressionBodyForPropertiesDiagnosticId,
-                   EnforceOnBuildValues.UseExpressionBodyForProperties,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_expression_body_for_property), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_block_body_for_property), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
-                   ImmutableArray.Create(SyntaxKind.PropertyDeclaration))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseExpressionBodyForPropertiesDiagnosticId,
+                EnforceOnBuildValues.UseExpressionBodyForProperties,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_expression_body_for_property),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_block_body_for_property),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                ImmutableArray.Create(SyntaxKind.PropertyDeclaration)
+            ) { }
 
-        public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(CSharpCodeGenerationOptions options)
-            => options.PreferExpressionBodiedProperties;
+        public override CodeStyleOption2<ExpressionBodyPreference> GetExpressionBodyPreference(
+            CSharpCodeGenerationOptions options
+        ) => options.PreferExpressionBodiedProperties;
 
-        protected override BlockSyntax GetBody(PropertyDeclarationSyntax declaration)
-            => GetBodyFromSingleGetAccessor(declaration.AccessorList);
+        protected override BlockSyntax GetBody(PropertyDeclarationSyntax declaration) =>
+            GetBodyFromSingleGetAccessor(declaration.AccessorList);
 
-        protected override ArrowExpressionClauseSyntax GetExpressionBody(PropertyDeclarationSyntax declaration)
-            => declaration.ExpressionBody;
+        protected override ArrowExpressionClauseSyntax GetExpressionBody(
+            PropertyDeclarationSyntax declaration
+        ) => declaration.ExpressionBody;
 
-        protected override SyntaxToken GetSemicolonToken(PropertyDeclarationSyntax declaration)
-            => declaration.SemicolonToken;
+        protected override SyntaxToken GetSemicolonToken(PropertyDeclarationSyntax declaration) =>
+            declaration.SemicolonToken;
 
-        protected override PropertyDeclarationSyntax WithSemicolonToken(PropertyDeclarationSyntax declaration, SyntaxToken token)
-            => declaration.WithSemicolonToken(token);
+        protected override PropertyDeclarationSyntax WithSemicolonToken(
+            PropertyDeclarationSyntax declaration,
+            SyntaxToken token
+        ) => declaration.WithSemicolonToken(token);
 
-        protected override PropertyDeclarationSyntax WithExpressionBody(PropertyDeclarationSyntax declaration, ArrowExpressionClauseSyntax expressionBody)
-            => declaration.WithExpressionBody(expressionBody);
+        protected override PropertyDeclarationSyntax WithExpressionBody(
+            PropertyDeclarationSyntax declaration,
+            ArrowExpressionClauseSyntax expressionBody
+        ) => declaration.WithExpressionBody(expressionBody);
 
-        protected override PropertyDeclarationSyntax WithAccessorList(PropertyDeclarationSyntax declaration, AccessorListSyntax accessorListSyntax)
-            => declaration.WithAccessorList(accessorListSyntax);
+        protected override PropertyDeclarationSyntax WithAccessorList(
+            PropertyDeclarationSyntax declaration,
+            AccessorListSyntax accessorListSyntax
+        ) => declaration.WithAccessorList(accessorListSyntax);
 
-        protected override PropertyDeclarationSyntax WithBody(PropertyDeclarationSyntax declaration, BlockSyntax body)
+        protected override PropertyDeclarationSyntax WithBody(
+            PropertyDeclarationSyntax declaration,
+            BlockSyntax body
+        )
         {
             if (body == null)
             {
@@ -61,19 +80,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             throw new InvalidOperationException();
         }
 
-        protected override PropertyDeclarationSyntax WithGenerateBody(SemanticModel semanticModel, PropertyDeclarationSyntax declaration)
-            => WithAccessorList(semanticModel, declaration);
+        protected override PropertyDeclarationSyntax WithGenerateBody(
+            SemanticModel semanticModel,
+            PropertyDeclarationSyntax declaration
+        ) => WithAccessorList(semanticModel, declaration);
 
-        protected override bool CreateReturnStatementForExpression(SemanticModel semanticModel, PropertyDeclarationSyntax declaration) => true;
+        protected override bool CreateReturnStatementForExpression(
+            SemanticModel semanticModel,
+            PropertyDeclarationSyntax declaration
+        ) => true;
 
         protected override bool TryConvertToExpressionBody(
             PropertyDeclarationSyntax declaration,
             ExpressionBodyPreference conversionPreference,
             CancellationToken cancellationToken,
             out ArrowExpressionClauseSyntax arrowExpression,
-            out SyntaxToken semicolonToken)
+            out SyntaxToken semicolonToken
+        )
         {
-            return TryConvertToExpressionBodyForBaseProperty(declaration, conversionPreference, cancellationToken, out arrowExpression, out semicolonToken);
+            return TryConvertToExpressionBodyForBaseProperty(
+                declaration,
+                conversionPreference,
+                cancellationToken,
+                out arrowExpression,
+                out semicolonToken
+            );
         }
 
         protected override Location GetDiagnosticLocation(PropertyDeclarationSyntax declaration)

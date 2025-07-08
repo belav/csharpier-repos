@@ -1,1 +1,1 @@
-[assembly:System.Reflection.AssemblyCulture("es-ES")]
+[assembly: System.Reflection.AssemblyCulture("es-ES")]

@@ -19,7 +19,8 @@ public static class TieredVtableMethodTests
     [Fact]
     public static int TestEntryPoint()
     {
-        const int Pass = 100, Fail = 101;
+        const int Pass = 100,
+            Fail = 101;
 
         var baseObj = new Base();
         var derivedObj = new Derived();
@@ -34,7 +35,8 @@ public static class TieredVtableMethodTests
             () => CallGenericVirtualMethodWithReferenceType(derivedObj),
             () => CallVirtualMethodForDevirtualization(derivedForDevirtualizationObj),
             () => CallInterfaceVirtualMethodPolymorhpic(baseObj),
-            () => CallInterfaceVirtualMethodPolymorhpic(derivedObj));
+            () => CallInterfaceVirtualMethodPolymorhpic(derivedObj)
+        );
 
         for (int i = 0; i < 4; ++i)
         {
@@ -44,7 +46,10 @@ public static class TieredVtableMethodTests
             CallGenericVirtualMethodWithValueType(derivedObj, CallCountPerIteration);
             CallGenericVirtualMethodWithReferenceType(baseObj, CallCountPerIteration);
             CallGenericVirtualMethodWithReferenceType(derivedObj, CallCountPerIteration);
-            CallVirtualMethodForDevirtualization(derivedForDevirtualizationObj, CallCountPerIteration);
+            CallVirtualMethodForDevirtualization(
+                derivedForDevirtualizationObj,
+                CallCountPerIteration
+            );
             CallInterfaceVirtualMethodMonomorphicOnBase(baseObj, CallCountPerIteration);
             CallInterfaceVirtualMethodMonomorphicOnDerived(derivedObj, CallCountPerIteration);
             CallInterfaceVirtualMethodPolymorhpic(baseObj, CallCountPerIteration);
@@ -83,7 +88,8 @@ public static class TieredVtableMethodTests
             () => CallVirtualMethod(collectibleDerivedObj),
             () => CallGenericVirtualMethodWithValueType(collectibleDerivedObj),
             () => CallGenericVirtualMethodWithReferenceType(collectibleDerivedObj),
-            () => CallInterfaceVirtualMethodPolymorhpic(collectibleDerivedObj));
+            () => CallInterfaceVirtualMethodPolymorhpic(collectibleDerivedObj)
+        );
 
         CallVirtualMethod(collectibleDerivedObj, CallCountPerIteration);
         CallGenericVirtualMethodWithValueType(collectibleDerivedObj, CallCountPerIteration);
@@ -126,18 +132,14 @@ public static class TieredVtableMethodTests
     private class Derived : Base
     {
         // Prevent this type from sharing the vtable chunk from the base
-        public virtual void VirtualMethod2()
-        {
-        }
+        public virtual void VirtualMethod2() { }
     }
 
     // Derived type that is sealed for testing devirtualization of calls to inherited virtual methods
     private sealed class DerivedForDevirtualization : Derived
     {
         // Prevent this type from sharing the vtable chunk from the base
-        public override void VirtualMethod()
-        {
-        }
+        public override void VirtualMethod() { }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -173,7 +175,10 @@ public static class TieredVtableMethodTests
 
     /// The virtual call in this method may be devirtualized because <see cref="DerivedForDevirtualization"/> is sealed
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void CallVirtualMethodForDevirtualization(DerivedForDevirtualization obj, int count = 1)
+    private static void CallVirtualMethodForDevirtualization(
+        DerivedForDevirtualization obj,
+        int count = 1
+    )
     {
         for (int i = 0; i < count; ++i)
         {
@@ -223,24 +228,24 @@ public static class TieredVtableMethodTests
     {
         ulong collectibleIndex = s_collectibleIndex++;
 
-        var ab =
-            AssemblyBuilder.DefineDynamicAssembly(
-                new AssemblyName($"CollectibleDerivedAssembly{collectibleIndex}"),
-                AssemblyBuilderAccess.RunAndCollect);
+        var ab = AssemblyBuilder.DefineDynamicAssembly(
+            new AssemblyName($"CollectibleDerivedAssembly{collectibleIndex}"),
+            AssemblyBuilderAccess.RunAndCollect
+        );
         var mob = ab.DefineDynamicModule($"CollectibleDerivedModule{collectibleIndex}");
-        var tb =
-            mob.DefineType(
-                $"CollectibleDerived{collectibleIndex}",
-                TypeAttributes.Class | TypeAttributes.Public,
-                typeof(Base));
+        var tb = mob.DefineType(
+            $"CollectibleDerived{collectibleIndex}",
+            TypeAttributes.Class | TypeAttributes.Public,
+            typeof(Base)
+        );
 
         /// Add a virtual method to prevent this type from sharing the vtable chunk from the base, similarly to what is done in
         /// <see cref="Derived"/>
         {
-            var mb =
-                tb.DefineMethod(
-                    "VirtualMethod2",
-                    MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot);
+            var mb = tb.DefineMethod(
+                "VirtualMethod2",
+                MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.NewSlot
+            );
             var ilg = mb.GetILGenerator();
             ilg.Emit(OpCodes.Ret);
         }

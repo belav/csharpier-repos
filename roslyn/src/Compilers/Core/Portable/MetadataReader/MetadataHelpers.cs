@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis
                 AssemblyQualifiedTypeName[] typeArguments,
                 int pointerCount,
                 int[] arrayRanks,
-                string assemblyName)
+                string assemblyName
+            )
             {
                 this.TopLevelType = topLevelType;
                 this.NestedTypes = nestedTypes;
@@ -72,7 +73,7 @@ namespace Microsoft.CodeAnalysis
         /// Decodes a serialized type name in its canonical form. The canonical name is its full type name, followed
         /// optionally by the assembly where it is defined, its version, culture and public key token.  If the assembly
         /// name is omitted, the type name is in the current assembly otherwise it is in the referenced assembly. The
-        /// full type name is the fully qualified metadata type name. 
+        /// full type name is the fully qualified metadata type name.
         /// </summary>
         private struct SerializedTypeDecoder
         {
@@ -104,18 +105,12 @@ namespace Microsoft.CodeAnalysis
 
             private bool EndOfInput
             {
-                get
-                {
-                    return _offset >= _input.Length;
-                }
+                get { return _offset >= _input.Length; }
             }
 
             private char Current
             {
-                get
-                {
-                    return _input[_offset];
-                }
+                get { return _input[_offset]; }
             }
 
             /// <summary>
@@ -123,7 +118,10 @@ namespace Microsoft.CodeAnalysis
             /// delimiters '+', ',', '[', ']'. '+' separates nested classes. '[' and ']'
             /// enclosed generic type arguments.  ',' separates types.
             /// </summary>
-            internal AssemblyQualifiedTypeName DecodeTypeName(bool isTypeArgument = false, bool isTypeArgumentWithAssemblyName = false)
+            internal AssemblyQualifiedTypeName DecodeTypeName(
+                bool isTypeArgument = false,
+                bool isTypeArgumentWithAssemblyName = false
+            )
             {
                 Debug.Assert(!isTypeArgumentWithAssemblyName || isTypeArgument);
 
@@ -152,7 +150,9 @@ namespace Microsoft.CodeAnalysis
                         Debug.Assert(decodedString != null);
 
                         // Type name is generic if the decoded name of the top level type OR any of the outer types of a nested type had the '`' character.
-                        isGenericTypeName = isGenericTypeName || decodedString.IndexOf(GenericTypeNameManglingChar) >= 0;
+                        isGenericTypeName =
+                            isGenericTypeName
+                            || decodedString.IndexOf(GenericTypeNameManglingChar) >= 0;
                         typeNameBuilder.Append(decodedString);
 
                         switch (c)
@@ -182,7 +182,12 @@ namespace Microsoft.CodeAnalysis
                                 else
                                 {
                                     // Type followed by nested type. Handle nested class separator and collect the nested types.
-                                    HandleDecodedTypeName(typeNameBuilder.ToString(), decodingTopLevelType, ref topLevelType, ref nestedTypesBuilder);
+                                    HandleDecodedTypeName(
+                                        typeNameBuilder.ToString(),
+                                        decodingTopLevelType,
+                                        ref topLevelType,
+                                        ref nestedTypesBuilder
+                                    );
                                     typeNameBuilder.Clear();
                                     decodingTopLevelType = false;
                                 }
@@ -243,7 +248,9 @@ namespace Microsoft.CodeAnalysis
                                         Advance();
                                     }
 
-                                    assemblyName = DecodeAssemblyName(isTypeArgumentWithAssemblyName);
+                                    assemblyName = DecodeAssemblyName(
+                                        isTypeArgumentWithAssemblyName
+                                    );
                                 }
                                 goto ExitDecodeTypeName;
 
@@ -258,8 +265,13 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-ExitDecodeTypeName:
-                HandleDecodedTypeName(typeNameBuilder.ToString(), decodingTopLevelType, ref topLevelType, ref nestedTypesBuilder);
+                ExitDecodeTypeName:
+                HandleDecodedTypeName(
+                    typeNameBuilder.ToString(),
+                    decodingTopLevelType,
+                    ref topLevelType,
+                    ref nestedTypesBuilder
+                );
                 pooledStrBuilder.Free();
 
                 return new AssemblyQualifiedTypeName(
@@ -268,10 +280,16 @@ ExitDecodeTypeName:
                     typeArguments,
                     pointerCount,
                     arrayRanksBuilder?.ToArrayAndFree(),
-                    assemblyName);
+                    assemblyName
+                );
             }
 
-            private static void HandleDecodedTypeName(string decodedTypeName, bool decodingTopLevelType, ref string topLevelType, ref ArrayBuilder<string> nestedTypesBuilder)
+            private static void HandleDecodedTypeName(
+                string decodedTypeName,
+                bool decodingTopLevelType,
+                ref string topLevelType,
+                ref ArrayBuilder<string> nestedTypesBuilder
+            )
             {
                 if (decodedTypeName.Length != 0)
                 {
@@ -362,7 +380,10 @@ ExitDecodeTypeName:
                     Advance();
                 }
 
-                AssemblyQualifiedTypeName result = DecodeTypeName(isTypeArgument: true, isTypeArgumentWithAssemblyName: isTypeArgumentWithAssemblyName);
+                AssemblyQualifiedTypeName result = DecodeTypeName(
+                    isTypeArgument: true,
+                    isTypeArgumentWithAssemblyName: isTypeArgumentWithAssemblyName
+                );
 
                 if (isTypeArgumentWithAssemblyName)
                 {
@@ -404,7 +425,10 @@ ExitDecodeTypeName:
             /// <summary>
             /// Rank equal 0 is used to denote an SzArray, rank equal 1 denotes multi-dimensional array of rank 1.
             /// </summary>
-            private void DecodeArrayShape(StringBuilder typeNameBuilder, ref ArrayBuilder<int> arrayRanksBuilder)
+            private void DecodeArrayShape(
+                StringBuilder typeNameBuilder,
+                ref ArrayBuilder<int> arrayRanksBuilder
+            )
             {
                 Debug.Assert(Current == '[');
 
@@ -428,7 +452,9 @@ ExitDecodeTypeName:
                                 arrayRanksBuilder = ArrayBuilder<int>.GetInstance();
                             }
 
-                            arrayRanksBuilder.Add(rank == 1 && !isMultiDimensionalIfRankOne ? 0 : rank);
+                            arrayRanksBuilder.Add(
+                                rank == 1 && !isMultiDimensionalIfRankOne ? 0 : rank
+                            );
                             Advance();
                             return;
 
@@ -462,19 +488,40 @@ ExitDecodeTypeName:
             }
         }
 
-        private static readonly string[] s_aritySuffixesOneToNine = { "`1", "`2", "`3", "`4", "`5", "`6", "`7", "`8", "`9" };
+        private static readonly string[] s_aritySuffixesOneToNine =
+        {
+            "`1",
+            "`2",
+            "`3",
+            "`4",
+            "`5",
+            "`6",
+            "`7",
+            "`8",
+            "`9",
+        };
 
         internal static string GetAritySuffix(int arity)
         {
             Debug.Assert(arity > 0);
-            return (arity <= 9) ? s_aritySuffixesOneToNine[arity - 1] : string.Concat(GenericTypeNameManglingString, arity.ToString(CultureInfo.InvariantCulture));
+            return (arity <= 9)
+                ? s_aritySuffixesOneToNine[arity - 1]
+                : string.Concat(
+                    GenericTypeNameManglingString,
+                    arity.ToString(CultureInfo.InvariantCulture)
+                );
         }
 
 #nullable enable
-        internal static string ComposeAritySuffixedMetadataName(string name, int arity, string? associatedFileIdentifier)
+        internal static string ComposeAritySuffixedMetadataName(
+            string name,
+            int arity,
+            string? associatedFileIdentifier
+        )
         {
             return associatedFileIdentifier + (arity == 0 ? name : name + GetAritySuffix(arity));
         }
+
 #nullable disable
 
         internal static int InferTypeArityFromMetadataName(string emittedTypeName)
@@ -483,13 +530,20 @@ ExitDecodeTypeName:
             return InferTypeArityFromMetadataName(emittedTypeName.AsSpan(), out suffixStartsAt);
         }
 
-        private static short InferTypeArityFromMetadataName(ReadOnlySpan<char> emittedTypeName, out int suffixStartsAt)
+        private static short InferTypeArityFromMetadataName(
+            ReadOnlySpan<char> emittedTypeName,
+            out int suffixStartsAt
+        )
         {
             Debug.Assert(emittedTypeName != null, "NULL actual name unexpected!!!");
             int emittedTypeNameLength = emittedTypeName.Length;
 
             int indexOfManglingChar;
-            for (indexOfManglingChar = emittedTypeNameLength; indexOfManglingChar >= 1; indexOfManglingChar--)
+            for (
+                indexOfManglingChar = emittedTypeNameLength;
+                indexOfManglingChar >= 1;
+                indexOfManglingChar--
+            )
             {
                 if (emittedTypeName[indexOfManglingChar - 1] == GenericTypeNameManglingChar)
                 {
@@ -497,9 +551,11 @@ ExitDecodeTypeName:
                 }
             }
 
-            if (indexOfManglingChar < 2 ||
-               (emittedTypeNameLength - indexOfManglingChar) == 0 ||
-               emittedTypeNameLength - indexOfManglingChar > MaxStringLengthForParamSize)
+            if (
+                indexOfManglingChar < 2
+                || (emittedTypeNameLength - indexOfManglingChar) == 0
+                || emittedTypeNameLength - indexOfManglingChar > MaxStringLengthForParamSize
+            )
             {
                 suffixStartsAt = -1;
                 return 0;
@@ -518,7 +574,7 @@ ExitDecodeTypeName:
             static short? tryScanArity(ReadOnlySpan<char> aritySpan)
             {
                 // Arity must have at least one character and must not have leading zeroes.
-                // Also, in order to fit into short.MaxValue (32767), it must be at most 5 characters long. 
+                // Also, in order to fit into short.MaxValue (32767), it must be at most 5 characters long.
                 if (aritySpan is { Length: >= 1 and <= 5 } and not ['0', ..])
                 {
                     int intArity = 0;
@@ -541,17 +597,30 @@ ExitDecodeTypeName:
             }
         }
 
-        internal static string InferTypeArityAndUnmangleMetadataName(string emittedTypeName, out short arity)
+        internal static string InferTypeArityAndUnmangleMetadataName(
+            string emittedTypeName,
+            out short arity
+        )
         {
             var emittedTypeNameMemory = emittedTypeName.AsMemory();
-            var resultMemory = InferTypeArityAndUnmangleMetadataName(emittedTypeNameMemory, out arity);
+            var resultMemory = InferTypeArityAndUnmangleMetadataName(
+                emittedTypeNameMemory,
+                out arity
+            );
             var resultString = resultMemory.ToString();
 
-            Debug.Assert(!resultMemory.Equals(emittedTypeNameMemory) || ReferenceEquals(resultString, emittedTypeName), "If the name was not mangled, we should get the original string instance back.");
+            Debug.Assert(
+                !resultMemory.Equals(emittedTypeNameMemory)
+                    || ReferenceEquals(resultString, emittedTypeName),
+                "If the name was not mangled, we should get the original string instance back."
+            );
             return resultString;
         }
 
-        internal static ReadOnlyMemory<char> InferTypeArityAndUnmangleMetadataName(ReadOnlyMemory<char> emittedTypeName, out short arity)
+        internal static ReadOnlyMemory<char> InferTypeArityAndUnmangleMetadataName(
+            ReadOnlyMemory<char> emittedTypeName,
+            out short arity
+        )
         {
             int suffixStartsAt;
             arity = InferTypeArityFromMetadataName(emittedTypeName.Span, out suffixStartsAt);
@@ -571,7 +640,10 @@ ExitDecodeTypeName:
             Debug.Assert(arity > 0);
 
             int suffixStartsAt;
-            if (arity == InferTypeArityFromMetadataName(emittedTypeName.AsSpan(), out suffixStartsAt))
+            if (
+                arity
+                == InferTypeArityFromMetadataName(emittedTypeName.AsSpan(), out suffixStartsAt)
+            )
             {
                 Debug.Assert(suffixStartsAt > 0 && suffixStartsAt < emittedTypeName.Length - 1);
                 return emittedTypeName[..suffixStartsAt];
@@ -583,17 +655,33 @@ ExitDecodeTypeName:
         /// <summary>
         /// An ImmutableArray representing the single string "System"
         /// </summary>
-        private static readonly ImmutableArray<string> s_splitQualifiedNameSystem = ImmutableArray.Create(SystemString);
-        private static readonly ImmutableArray<ReadOnlyMemory<char>> s_splitQualifiedNameSystemMemory = ImmutableArray.Create(SystemString.AsMemory());
+        private static readonly ImmutableArray<string> s_splitQualifiedNameSystem =
+            ImmutableArray.Create(SystemString);
+        private static readonly ImmutableArray<
+            ReadOnlyMemory<char>
+        > s_splitQualifiedNameSystemMemory = ImmutableArray.Create(SystemString.AsMemory());
 
-        internal static ImmutableArray<string> SplitQualifiedName(string name)
-            => SplitQualifiedNameWorker(name.AsMemory(), s_splitQualifiedNameSystem, static memory => memory.ToString());
+        internal static ImmutableArray<string> SplitQualifiedName(string name) =>
+            SplitQualifiedNameWorker(
+                name.AsMemory(),
+                s_splitQualifiedNameSystem,
+                static memory => memory.ToString()
+            );
 
-        internal static ImmutableArray<ReadOnlyMemory<char>> SplitQualifiedName(ReadOnlyMemory<char> name)
-            => SplitQualifiedNameWorker(name, s_splitQualifiedNameSystemMemory, static memory => memory);
+        internal static ImmutableArray<ReadOnlyMemory<char>> SplitQualifiedName(
+            ReadOnlyMemory<char> name
+        ) =>
+            SplitQualifiedNameWorker(
+                name,
+                s_splitQualifiedNameSystemMemory,
+                static memory => memory
+            );
 
         internal static ImmutableArray<T> SplitQualifiedNameWorker<T>(
-            ReadOnlyMemory<char> nameMemory, ImmutableArray<T> splitSystemString, Func<ReadOnlyMemory<char>, T> convert)
+            ReadOnlyMemory<char> nameMemory,
+            ImmutableArray<T> splitSystemString,
+            Func<ReadOnlyMemory<char>, T> convert
+        )
         {
             Debug.Assert(!nameMemory.Equals(default(ReadOnlyMemory<char>)));
 
@@ -617,7 +705,9 @@ ExitDecodeTypeName:
 
             if (dots == 0)
             {
-                return nameMemory.Span.SequenceEqual(SystemString.AsSpan()) ? splitSystemString : ImmutableArray.Create(convert(nameMemory));
+                return nameMemory.Span.SequenceEqual(SystemString.AsSpan())
+                    ? splitSystemString
+                    : ImmutableArray.Create(convert(nameMemory));
             }
 
             var result = ArrayBuilder<T>.GetInstance(dots + 1);
@@ -628,7 +718,11 @@ ExitDecodeTypeName:
                 if (nameSpan[i] == DotDelimiter)
                 {
                     int len = i - start;
-                    if (len == 6 && start == 0 && nameSpan.StartsWith(SystemString.AsSpan(), StringComparison.Ordinal))
+                    if (
+                        len == 6
+                        && start == 0
+                        && nameSpan.StartsWith(SystemString.AsSpan(), StringComparison.Ordinal)
+                    )
                     {
                         result.Add(convert(SystemString.AsMemory()));
                     }
@@ -647,18 +741,20 @@ ExitDecodeTypeName:
             return result.ToImmutableAndFree();
         }
 
-        internal static string SplitQualifiedName(
-            string pstrName,
-            out string qualifier)
+        internal static string SplitQualifiedName(string pstrName, out string qualifier)
         {
-            ReadOnlyMemory<char> nameMemory = SplitQualifiedName(pstrName, out ReadOnlyMemory<char> qualifierMemory);
+            ReadOnlyMemory<char> nameMemory = SplitQualifiedName(
+                pstrName,
+                out ReadOnlyMemory<char> qualifierMemory
+            );
             qualifier = qualifierMemory.ToString();
             return nameMemory.ToString();
         }
 
         internal static ReadOnlyMemory<char> SplitQualifiedName(
             string pstrName,
-            out ReadOnlyMemory<char> qualifier)
+            out ReadOnlyMemory<char> qualifier
+        )
         {
             Debug.Assert(pstrName != null);
 
@@ -708,9 +804,7 @@ ExitDecodeTypeName:
             return pstrName.AsMemory()[(delimiter + 1)..];
         }
 
-        internal static string BuildQualifiedName(
-            string qualifier,
-            string name)
+        internal static string BuildQualifiedName(string qualifier, string name)
         {
             Debug.Assert(name != null);
 
@@ -732,14 +826,14 @@ ExitDecodeTypeName:
         /// Length of the fully-qualified name of this namespace.
         /// </param>
         /// <param name="typesByNS">
-        /// The sequence of groups of TypeDef row ids for types contained within the namespace, 
-        /// recursively including those from nested namespaces. The row ids must be grouped by the 
-        /// fully-qualified namespace name in case-sensitive manner. 
-        /// Key of each IGrouping is a fully-qualified namespace name, which starts with the name of 
+        /// The sequence of groups of TypeDef row ids for types contained within the namespace,
+        /// recursively including those from nested namespaces. The row ids must be grouped by the
+        /// fully-qualified namespace name in case-sensitive manner.
+        /// Key of each IGrouping is a fully-qualified namespace name, which starts with the name of
         /// this namespace. There could be multiple groups for each fully-qualified namespace name.
-        /// 
+        ///
         /// The groups must be sorted by the keys in a manner consistent with comparer passed in as
-        /// nameComparer. Therefore, all types immediately contained within THIS namespace, if any, 
+        /// nameComparer. Therefore, all types immediately contained within THIS namespace, if any,
         /// must be in several IGrouping at the very beginning of the sequence.
         /// </param>
         /// <param name="nameComparer">
@@ -755,7 +849,7 @@ ExitDecodeTypeName:
         /// For each pair:
         ///   Key - contains simple name of a child namespace.
         ///   Value - contains a sequence similar to the one passed to this function, but
-        ///           calculated for the child namespace. 
+        ///           calculated for the child namespace.
         /// </param>
         /// <remarks></remarks>
         public static void GetInfoForImmediateNamespaceMembers(
@@ -764,7 +858,10 @@ ExitDecodeTypeName:
             IEnumerable<IGrouping<string, TypeDefinitionHandle>> typesByNS,
             StringComparer nameComparer,
             out IEnumerable<IGrouping<string, TypeDefinitionHandle>> types,
-            out IEnumerable<KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>> namespaces)
+            out IEnumerable<
+                KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
+            > namespaces
+        )
         {
             Debug.Assert(typesByNS != null);
             Debug.Assert(namespaceNameLength >= 0);
@@ -777,8 +874,11 @@ ExitDecodeTypeName:
             // For each pair:
             //   Key - contains simple name of a child namespace.
             //   Value – contains a sequence similar to the one passed to this function, but
-            //           calculated for the child namespace. 
-            var nestedNamespaces = new List<KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>>();
+            //           calculated for the child namespace.
+            var nestedNamespaces =
+                new List<
+                    KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>
+                >();
             bool possiblyHavePairsWithDuplicateKey = false;
 
             var enumerator = typesByNS.GetEnumerator();
@@ -797,7 +897,7 @@ ExitDecodeTypeName:
                     List<IGrouping<string, TypeDefinitionHandle>> typesInLastChildNamespace = null;
 
                     // if there are any types in this namespace,
-                    // they will be in the first several groups if their key length 
+                    // they will be in the first several groups if their key length
                     // is equal to namespaceNameLength.
                     while (pair.Key.Length == namespaceNameLength)
                     {
@@ -821,7 +921,10 @@ ExitDecodeTypeName:
                     {
                         pair = enumerator.Current;
 
-                        string childNamespaceName = ExtractSimpleNameOfChildNamespace(namespaceNameLength, pair.Key);
+                        string childNamespaceName = ExtractSimpleNameOfChildNamespace(
+                            namespaceNameLength,
+                            pair.Key
+                        );
 
                         int cmp = nameComparer.Compare(lastChildNamespaceName, childNamespaceName);
                         if (cmp == 0)
@@ -834,7 +937,7 @@ ExitDecodeTypeName:
                             // This is a new child namespace
                             if (cmp > 0)
                             {
-                                // The sort order is violated for child namespace names. Obfuscation is the likely reason for this. 
+                                // The sort order is violated for child namespace names. Obfuscation is the likely reason for this.
                                 Debug.Assert((object)lastChildNamespaceName != null);
                                 possiblyHavePairsWithDuplicateKey = true;
                             }
@@ -844,30 +947,36 @@ ExitDecodeTypeName:
                             {
                                 Debug.Assert(typesInLastChildNamespace.Count != 0);
                                 nestedNamespaces.Add(
-                                    new KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>(
-                                        lastChildNamespaceName, typesInLastChildNamespace));
+                                    new KeyValuePair<
+                                        string,
+                                        IEnumerable<IGrouping<string, TypeDefinitionHandle>>
+                                    >(lastChildNamespaceName, typesInLastChildNamespace)
+                                );
                             }
 
-                            typesInLastChildNamespace = new List<IGrouping<string, TypeDefinitionHandle>>();
+                            typesInLastChildNamespace =
+                                new List<IGrouping<string, TypeDefinitionHandle>>();
                             lastChildNamespaceName = childNamespaceName;
                             Debug.Assert((object)lastChildNamespaceName != null);
 
                             typesInLastChildNamespace.Add(pair);
                         }
-                    }
-                    while (enumerator.MoveNext());
+                    } while (enumerator.MoveNext());
 
                     // Preserve information about last child namespace.
                     if (typesInLastChildNamespace != null)
                     {
                         Debug.Assert(typesInLastChildNamespace.Count != 0);
                         nestedNamespaces.Add(
-                            new KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>(
-                                lastChildNamespaceName, typesInLastChildNamespace));
+                            new KeyValuePair<
+                                string,
+                                IEnumerable<IGrouping<string, TypeDefinitionHandle>>
+                            >(lastChildNamespaceName, typesInLastChildNamespace)
+                        );
                     }
 
-DoneWithSequence:
-/*empty statement*/
+                    DoneWithSequence:
+                    /*empty statement*/
                     ;
                 }
             } // using
@@ -894,8 +1003,14 @@ DoneWithSequence:
                         {
                             Debug.Assert(keyIndex < i);
                             var primaryPair = nestedNamespaces[keyIndex];
-                            nestedNamespaces[keyIndex] = KeyValuePairUtil.Create(primaryPair.Key, primaryPair.Value.Concat(pair.Value));
-                            nestedNamespaces[i] = default(KeyValuePair<string, IEnumerable<IGrouping<string, TypeDefinitionHandle>>>);
+                            nestedNamespaces[keyIndex] = KeyValuePairUtil.Create(
+                                primaryPair.Key,
+                                primaryPair.Value.Concat(pair.Value)
+                            );
+                            nestedNamespaces[i] = default(KeyValuePair<
+                                string,
+                                IEnumerable<IGrouping<string, TypeDefinitionHandle>>
+                            >);
                         }
                     }
 
@@ -920,12 +1035,13 @@ DoneWithSequence:
         /// Fully qualified namespace name.
         /// </param>
         /// <returns>
-        /// Simple name of a top level child namespace, the left-most name following parent namespace name 
+        /// Simple name of a top level child namespace, the left-most name following parent namespace name
         /// in the fully qualified name.
         /// </returns>
         private static string ExtractSimpleNameOfChildNamespace(
             int parentNamespaceNameLength,
-            string fullName)
+            string fullName
+        )
         {
             int index = fullName.IndexOf('.', parentNamespaceNameLength);
 
@@ -935,7 +1051,10 @@ DoneWithSequence:
             }
             else
             {
-                return fullName.Substring(parentNamespaceNameLength, index - parentNamespaceNameLength);
+                return fullName.Substring(
+                    parentNamespaceNameLength,
+                    index - parentNamespaceNameLength
+                );
             }
         }
 
@@ -944,7 +1063,9 @@ DoneWithSequence:
         /// </summary>
         internal static bool IsValidMetadataIdentifier(string str)
         {
-            return !string.IsNullOrEmpty(str) && str.IsValidUnicodeString() && str.IndexOf('\0') == -1;
+            return !string.IsNullOrEmpty(str)
+                && str.IsValidUnicodeString()
+                && str.IndexOf('\0') == -1;
         }
 
         /// <summary>
@@ -960,25 +1081,43 @@ DoneWithSequence:
             return GetAssemblyOrModuleNameErrorArgumentResourceName(name) == null;
         }
 
-        internal static void CheckAssemblyOrModuleName(string name, CommonMessageProvider messageProvider, int code, DiagnosticBag diagnostics)
+        internal static void CheckAssemblyOrModuleName(
+            string name,
+            CommonMessageProvider messageProvider,
+            int code,
+            DiagnosticBag diagnostics
+        )
         {
             string errorArgumentResourceId = GetAssemblyOrModuleNameErrorArgumentResourceName(name);
             if (errorArgumentResourceId != null)
             {
                 diagnostics.Add(
-                    messageProvider.CreateDiagnostic(code, Location.None,
-                        new CodeAnalysisResourcesLocalizableErrorArgument(errorArgumentResourceId)));
+                    messageProvider.CreateDiagnostic(
+                        code,
+                        Location.None,
+                        new CodeAnalysisResourcesLocalizableErrorArgument(errorArgumentResourceId)
+                    )
+                );
             }
         }
 
-        internal static void CheckAssemblyOrModuleName(string name, CommonMessageProvider messageProvider, int code, ArrayBuilder<Diagnostic> builder)
+        internal static void CheckAssemblyOrModuleName(
+            string name,
+            CommonMessageProvider messageProvider,
+            int code,
+            ArrayBuilder<Diagnostic> builder
+        )
         {
             string errorArgumentResourceId = GetAssemblyOrModuleNameErrorArgumentResourceName(name);
             if (errorArgumentResourceId != null)
             {
                 builder.Add(
-                    messageProvider.CreateDiagnostic(code, Location.None,
-                        new CodeAnalysisResourcesLocalizableErrorArgument(errorArgumentResourceId)));
+                    messageProvider.CreateDiagnostic(
+                        code,
+                        Location.None,
+                        new CodeAnalysisResourcesLocalizableErrorArgument(errorArgumentResourceId)
+                    )
+                );
             }
         }
 
@@ -989,14 +1128,14 @@ DoneWithSequence:
                 return nameof(CodeAnalysisResources.NameCannotBeNull);
             }
 
-            // Dev11 VB can produce assembly with no name (vbc /out:".dll" /target:library). 
+            // Dev11 VB can produce assembly with no name (vbc /out:".dll" /target:library).
             // We disallow it. PEVerify reports an error: Assembly has no name.
             if (name.Length == 0)
             {
                 return nameof(CodeAnalysisResources.NameCannotBeEmpty);
             }
 
-            // Dev11 VB can produce assembly that starts with whitespace (vbc /out:" a.dll" /target:library). 
+            // Dev11 VB can produce assembly that starts with whitespace (vbc /out:" a.dll" /target:library).
             // We disallow it. PEVerify reports an error: Assembly name contains leading spaces.
             if (char.IsWhiteSpace(name[0]))
             {
@@ -1014,11 +1153,11 @@ DoneWithSequence:
         /// <summary>
         /// Checks that the specified name is a valid metadata String and a file name.
         /// The specification isn't entirely consistent and complete but it mentions:
-        /// 
+        ///
         /// 22.19.2: "Name shall index a non-empty string in the String heap. It shall be in the format {filename}.{extension} (e.g., 'goo.dll', but not 'c:\utils\goo.dll')."
         /// 22.30.2: "The format of Name is {file name}.{file extension} with no path or drive letter; on POSIX-compliant systems Name contains no colon, no forward-slash, no backslash."
         ///          As Microsoft specific constraint.
-        /// 
+        ///
         /// A reasonable restriction seems to be a valid UTF-8 non-empty string that doesn't contain '\0', '\', '/', ':' characters.
         /// </summary>
         internal static bool IsValidMetadataFileName(string name)
@@ -1033,16 +1172,21 @@ DoneWithSequence:
         /// <param name="typeName">The type name part of the split name.</param>
         /// <param name="fullyQualified">The fully qualified name to compare with.</param>
         /// <returns>true if the combination of <paramref name="namespaceName"/> and <paramref name="typeName"/> equals the fully-qualified name given by <paramref name="fullyQualified"/></returns>
-        internal static bool SplitNameEqualsFullyQualifiedName(string namespaceName, string typeName, string fullyQualified)
+        internal static bool SplitNameEqualsFullyQualifiedName(
+            string namespaceName,
+            string typeName,
+            string fullyQualified
+        )
         {
             // Look for "[namespaceName].[typeName]" exactly
-            return fullyQualified.Length == namespaceName.Length + typeName.Length + 1 &&
-                   fullyQualified[namespaceName.Length] == MetadataHelpers.DotDelimiter &&
-                   fullyQualified.StartsWith(namespaceName, StringComparison.Ordinal) &&
-                   fullyQualified.EndsWith(typeName, StringComparison.Ordinal);
+            return fullyQualified.Length == namespaceName.Length + typeName.Length + 1
+                && fullyQualified[namespaceName.Length] == MetadataHelpers.DotDelimiter
+                && fullyQualified.StartsWith(namespaceName, StringComparison.Ordinal)
+                && fullyQualified.EndsWith(typeName, StringComparison.Ordinal);
         }
 
-        internal static bool IsValidPublicKey(ImmutableArray<byte> bytes) => CryptoBlobParser.IsValidPublicKey(bytes);
+        internal static bool IsValidPublicKey(ImmutableArray<byte> bytes) =>
+            CryptoBlobParser.IsValidPublicKey(bytes);
 
         /// <summary>
         /// Given an input string changes it to be acceptable as a part of a type name.

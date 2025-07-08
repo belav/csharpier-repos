@@ -11,7 +11,12 @@ namespace System.Security.Cryptography.Dsa.Tests
         [Fact]
         public static void TestImportV1Key()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_DSA1024Key, CngKeyBlobFormat.GenericPrivateBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_DSA1024Key,
+                    CngKeyBlobFormat.GenericPrivateBlob
+                )
+            )
             {
                 VerifyImportedKey(key);
                 Assert.Equal(1024, key.KeySize);
@@ -21,7 +26,12 @@ namespace System.Security.Cryptography.Dsa.Tests
         [ConditionalFact(nameof(SupportsFips186_3))]
         public static void TestImportV2Key()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_DSA2048Key, CngKeyBlobFormat.GenericPrivateBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_DSA2048Key,
+                    CngKeyBlobFormat.GenericPrivateBlob
+                )
+            )
             {
                 VerifyImportedKey(key);
                 Assert.Equal(2048, key.KeySize);
@@ -52,7 +62,12 @@ namespace System.Security.Cryptography.Dsa.Tests
         [Fact]
         public static void TestImportExportRoundTrip()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_DSA1024PublicKey, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_DSA1024PublicKey,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 byte[] reExported = key.Export(CngKeyBlobFormat.GenericPublicBlob);
                 Assert.Equal<byte>(TestData.Key_DSA1024PublicKey, reExported);
@@ -71,10 +86,7 @@ namespace System.Security.Cryptography.Dsa.Tests
 
         internal static bool SupportsFips186_3
         {
-            get
-            {
-                return DSAFactory.SupportsFips186_3;
-            }
+            get { return DSAFactory.SupportsFips186_3; }
         }
     }
 }

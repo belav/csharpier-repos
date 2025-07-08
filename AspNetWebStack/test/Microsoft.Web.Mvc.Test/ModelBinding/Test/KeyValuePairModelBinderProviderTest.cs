@@ -16,13 +16,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(KeyValuePair<int, string>)
+                ),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider
                 {
                     { "foo.key", 42 },
-                    { "foo.value", "someValue" }
-                }
+                    { "foo.value", "someValue" },
+                },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -40,13 +43,16 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(List<int>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(List<int>)
+                ),
                 ModelName = "foo",
                 ValueProvider = new SimpleValueProvider
                 {
                     { "foo.key", 42 },
-                    { "foo.value", "someValue" }
-                }
+                    { "foo.value", "someValue" },
+                },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -64,12 +70,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(KeyValuePair<int, string>)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo.value", "someValue" }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo.value", "someValue" } },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -87,12 +93,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(KeyValuePair<int, string>)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(KeyValuePair<int, string>)
+                ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider
-                {
-                    { "foo.key", 42 }
-                }
+                ValueProvider = new SimpleValueProvider { { "foo.key", 42 } },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();

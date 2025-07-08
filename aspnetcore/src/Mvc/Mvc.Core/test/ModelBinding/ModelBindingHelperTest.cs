@@ -365,8 +365,8 @@ public class ModelBindingHelperTest
         Expression<Func<User, object>> expression = m => m.Address.Street;
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.GetPropertyName(expression.Body)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.GetPropertyName(expression.Body)
         );
 
         Assert.Equal(
@@ -412,8 +412,8 @@ public class ModelBindingHelperTest
     )
     {
         // Arrange Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.GetPropertyName(expression.Body)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.GetPropertyName(expression.Body)
         );
 
         Assert.Equal(
@@ -433,8 +433,8 @@ public class ModelBindingHelperTest
         Expression<Func<User, object>> expression = m => someUser.Address;
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.GetPropertyName(expression.Body)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.GetPropertyName(expression.Body)
         );
 
         Assert.Equal(
@@ -451,8 +451,8 @@ public class ModelBindingHelperTest
         Expression<Func<List<User>, object>> expression = m => m[0];
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.GetPropertyName(expression.Body)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.GetPropertyName(expression.Body)
         );
 
         Assert.Equal(
@@ -469,8 +469,8 @@ public class ModelBindingHelperTest
         Expression<Func<User, object>> expression = m => m._userId;
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.GetPropertyName(expression.Body)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.GetPropertyName(expression.Body)
         );
 
         Assert.Equal(
@@ -1260,13 +1260,12 @@ public class ModelBindingHelperTest
         // Arrange
 
         // Act & Assert
-        var ex = Assert.Throws<FormatException>(
-            () =>
-                ModelBindingHelper.ConvertTo(
-                    "this-is-not-a-valid-value",
-                    destinationType,
-                    culture: null
-                )
+        var ex = Assert.Throws<FormatException>(() =>
+            ModelBindingHelper.ConvertTo(
+                "this-is-not-a-valid-value",
+                destinationType,
+                culture: null
+            )
         );
     }
 
@@ -1284,8 +1283,8 @@ public class ModelBindingHelperTest
 
         // Assert
         Assert.Equal(12.5M, cultureResult);
-        Assert.Throws<FormatException>(
-            () => ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("en-GB"))
+        Assert.Throws<FormatException>(() =>
+            ModelBindingHelper.ConvertTo("12,5", typeof(decimal), new CultureInfo("en-GB"))
         );
     }
 
@@ -1342,13 +1341,12 @@ public class ModelBindingHelperTest
             + $"'{destinationType}' failed because no type converter can convert between these types.";
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                ModelBindingHelper.ConvertTo(
-                    new MyClassWithoutConverter(),
-                    destinationType,
-                    culture: null
-                )
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.ConvertTo(
+                new MyClassWithoutConverter(),
+                destinationType,
+                culture: null
+            )
         );
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -1365,8 +1363,8 @@ public class ModelBindingHelperTest
             + $"'{typeof(MyClassWithoutConverter)}' failed because no type converter can convert between these types.";
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => ModelBindingHelper.ConvertTo(value, destinationType, culture: null)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            ModelBindingHelper.ConvertTo(value, destinationType, culture: null)
         );
         Assert.Equal(expectedMessage, ex.Message);
     }

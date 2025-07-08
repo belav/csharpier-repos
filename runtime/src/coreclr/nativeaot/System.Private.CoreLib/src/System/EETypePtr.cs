@@ -14,9 +14,7 @@ using System.Diagnostics;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime.CompilerServices;
-
 using CorElementType = System.Reflection.CorElementType;
 using EETypeElementType = Internal.Runtime.EETypeElementType;
 using MethodTable = Internal.Runtime.MethodTable;
@@ -77,125 +75,86 @@ namespace System
         // Caution: You cannot safely compare RawValue's as RH does NOT unify EETypes. Use the == or Equals() methods exposed by EETypePtr itself.
         internal IntPtr RawValue
         {
-            get
-            {
-                return (IntPtr)_value;
-            }
+            get { return (IntPtr)_value; }
         }
 
         internal bool IsNull
         {
-            get
-            {
-                return _value == null;
-            }
+            get { return _value == null; }
         }
 
         internal bool IsArray
         {
-            get
-            {
-                return _value->IsArray;
-            }
+            get { return _value->IsArray; }
         }
 
         internal bool IsSzArray
         {
-            get
-            {
-                return _value->IsSzArray;
-            }
+            get { return _value->IsSzArray; }
         }
 
         internal bool IsPointer
         {
-            get
-            {
-                return _value->IsPointer;
-            }
+            get { return _value->IsPointer; }
         }
 
         internal bool IsFunctionPointer
         {
-            get
-            {
-                return _value->IsFunctionPointer;
-            }
+            get { return _value->IsFunctionPointer; }
         }
 
         internal bool IsByRef
         {
-            get
-            {
-                return _value->IsByRef;
-            }
+            get { return _value->IsByRef; }
         }
 
         internal bool IsValueType
         {
-            get
-            {
-                return _value->IsValueType;
-            }
+            get { return _value->IsValueType; }
         }
 
         internal bool IsString
         {
-            get
-            {
-                return _value->IsString;
-            }
+            get { return _value->IsString; }
         }
 
         // Warning! UNLIKE the similarly named Reflection api, this method also returns "true" for Enums.
         internal bool IsPrimitive
         {
-            get
-            {
-                return _value->IsPrimitive;
-            }
+            get { return _value->IsPrimitive; }
         }
 
         internal bool IsEnum
         {
-            get
-            {
-                return _value->IsEnum;
-            }
+            get { return _value->IsEnum; }
         }
 
         // Gets a value indicating whether this is a generic type definition (an uninstantiated generic type).
         internal bool IsGenericTypeDefinition
         {
-            get
-            {
-                return _value->IsGenericTypeDefinition;
-            }
+            get { return _value->IsGenericTypeDefinition; }
         }
 
         // Gets a value indicating whether this is an instantiated generic type.
         internal bool IsGeneric
         {
-            get
-            {
-                return _value->IsGeneric;
-            }
+            get { return _value->IsGeneric; }
         }
 
         internal GenericArgumentCollection Instantiation
         {
             get
             {
-                return new GenericArgumentCollection(_value->GenericArity, _value->GenericArguments);
+                return new GenericArgumentCollection(
+                    _value->GenericArity,
+                    _value->GenericArguments
+                );
             }
         }
 
         internal EETypePtr GenericDefinition
         {
-            get
-            {
-                return new EETypePtr(_value->GenericDefinition);
-            }
+            get { return new EETypePtr(_value->GenericDefinition); }
         }
 
         /// <summary>
@@ -204,10 +163,7 @@ namespace System
         /// </summary>
         internal bool IsCanonical
         {
-            get
-            {
-                return _value->IsCanonical;
-            }
+            get { return _value->IsCanonical; }
         }
 
         /// <summary>
@@ -215,90 +171,57 @@ namespace System
         /// </summary>
         internal bool IsDefType
         {
-            get
-            {
-                return _value->IsDefType;
-            }
+            get { return _value->IsDefType; }
         }
 
         internal bool IsDynamicType
         {
-            get
-            {
-                return _value->IsDynamicType;
-            }
+            get { return _value->IsDynamicType; }
         }
 
         internal bool IsInterface
         {
-            get
-            {
-                return _value->IsInterface;
-            }
+            get { return _value->IsInterface; }
         }
 
         internal bool IsByRefLike
         {
-            get
-            {
-                return _value->IsByRefLike;
-            }
+            get { return _value->IsByRefLike; }
         }
 
         internal bool IsNullable
         {
-            get
-            {
-                return _value->IsNullable;
-            }
+            get { return _value->IsNullable; }
         }
 
         internal bool HasCctor
         {
-            get
-            {
-                return _value->HasCctor;
-            }
+            get { return _value->HasCctor; }
         }
 
         internal bool IsTrackedReferenceWithFinalizer
         {
-            get
-            {
-                return _value->IsTrackedReferenceWithFinalizer;
-            }
+            get { return _value->IsTrackedReferenceWithFinalizer; }
         }
 
         internal EETypePtr NullableType
         {
-            get
-            {
-                return new EETypePtr(_value->NullableType);
-            }
+            get { return new EETypePtr(_value->NullableType); }
         }
 
         internal EETypePtr ArrayElementType
         {
-            get
-            {
-                return new EETypePtr(_value->RelatedParameterType);
-            }
+            get { return new EETypePtr(_value->RelatedParameterType); }
         }
 
         internal int ArrayRank
         {
-            get
-            {
-                return _value->ArrayRank;
-            }
+            get { return _value->ArrayRank; }
         }
 
         internal InterfaceCollection Interfaces
         {
-            get
-            {
-                return new InterfaceCollection(_value);
-            }
+            get { return new InterfaceCollection(_value); }
         }
 
         internal EETypePtr BaseType
@@ -318,27 +241,18 @@ namespace System
 
         internal IntPtr DispatchMap
         {
-            get
-            {
-                return (IntPtr)_value->DispatchMap;
-            }
+            get { return (IntPtr)_value->DispatchMap; }
         }
 
         // Instance contains pointers to managed objects.
         internal bool ContainsGCPointers
         {
-            get
-            {
-                return _value->ContainsGCPointers;
-            }
+            get { return _value->ContainsGCPointers; }
         }
 
         internal uint ValueTypeSize
         {
-            get
-            {
-                return _value->ValueTypeSize;
-            }
+            get { return _value->ValueTypeSize; }
         }
 
         internal CorElementType CorElementType
@@ -348,42 +262,44 @@ namespace System
                 ReadOnlySpan<byte> map =
                 [
                     default,
-                    (byte)CorElementType.ELEMENT_TYPE_VOID,      // EETypeElementType.Void
-                    (byte)CorElementType.ELEMENT_TYPE_BOOLEAN,   // EETypeElementType.Boolean
-                    (byte)CorElementType.ELEMENT_TYPE_CHAR,      // EETypeElementType.Char
-                    (byte)CorElementType.ELEMENT_TYPE_I1,        // EETypeElementType.SByte
-                    (byte)CorElementType.ELEMENT_TYPE_U1,        // EETypeElementType.Byte
-                    (byte)CorElementType.ELEMENT_TYPE_I2,        // EETypeElementType.Int16
-                    (byte)CorElementType.ELEMENT_TYPE_U2,        // EETypeElementType.UInt16
-                    (byte)CorElementType.ELEMENT_TYPE_I4,        // EETypeElementType.Int32
-                    (byte)CorElementType.ELEMENT_TYPE_U4,        // EETypeElementType.UInt32
-                    (byte)CorElementType.ELEMENT_TYPE_I8,        // EETypeElementType.Int64
-                    (byte)CorElementType.ELEMENT_TYPE_U8,        // EETypeElementType.UInt64
-                    (byte)CorElementType.ELEMENT_TYPE_I,         // EETypeElementType.IntPtr
-                    (byte)CorElementType.ELEMENT_TYPE_U,         // EETypeElementType.UIntPtr
-                    (byte)CorElementType.ELEMENT_TYPE_R4,        // EETypeElementType.Single
-                    (byte)CorElementType.ELEMENT_TYPE_R8,        // EETypeElementType.Double
-
+                    (byte)CorElementType.ELEMENT_TYPE_VOID, // EETypeElementType.Void
+                    (byte)CorElementType.ELEMENT_TYPE_BOOLEAN, // EETypeElementType.Boolean
+                    (byte)CorElementType.ELEMENT_TYPE_CHAR, // EETypeElementType.Char
+                    (byte)CorElementType.ELEMENT_TYPE_I1, // EETypeElementType.SByte
+                    (byte)CorElementType.ELEMENT_TYPE_U1, // EETypeElementType.Byte
+                    (byte)CorElementType.ELEMENT_TYPE_I2, // EETypeElementType.Int16
+                    (byte)CorElementType.ELEMENT_TYPE_U2, // EETypeElementType.UInt16
+                    (byte)CorElementType.ELEMENT_TYPE_I4, // EETypeElementType.Int32
+                    (byte)CorElementType.ELEMENT_TYPE_U4, // EETypeElementType.UInt32
+                    (byte)CorElementType.ELEMENT_TYPE_I8, // EETypeElementType.Int64
+                    (byte)CorElementType.ELEMENT_TYPE_U8, // EETypeElementType.UInt64
+                    (byte)CorElementType.ELEMENT_TYPE_I, // EETypeElementType.IntPtr
+                    (byte)CorElementType.ELEMENT_TYPE_U, // EETypeElementType.UIntPtr
+                    (byte)CorElementType.ELEMENT_TYPE_R4, // EETypeElementType.Single
+                    (byte)CorElementType.ELEMENT_TYPE_R8, // EETypeElementType.Double
                     (byte)CorElementType.ELEMENT_TYPE_VALUETYPE, // EETypeElementType.ValueType
                     (byte)CorElementType.ELEMENT_TYPE_VALUETYPE,
                     (byte)CorElementType.ELEMENT_TYPE_VALUETYPE, // EETypeElementType.Nullable
                     (byte)CorElementType.ELEMENT_TYPE_VALUETYPE,
-                    (byte)CorElementType.ELEMENT_TYPE_CLASS,     // EETypeElementType.Class
-                    (byte)CorElementType.ELEMENT_TYPE_CLASS,     // EETypeElementType.Interface
-                    (byte)CorElementType.ELEMENT_TYPE_CLASS,     // EETypeElementType.SystemArray
-                    (byte)CorElementType.ELEMENT_TYPE_ARRAY,     // EETypeElementType.Array
-                    (byte)CorElementType.ELEMENT_TYPE_SZARRAY,   // EETypeElementType.SzArray
-                    (byte)CorElementType.ELEMENT_TYPE_BYREF,     // EETypeElementType.ByRef
-                    (byte)CorElementType.ELEMENT_TYPE_PTR,       // EETypeElementType.Pointer
-                    (byte)CorElementType.ELEMENT_TYPE_FNPTR,     // EETypeElementType.FunctionPointer
+                    (byte)CorElementType.ELEMENT_TYPE_CLASS, // EETypeElementType.Class
+                    (byte)CorElementType.ELEMENT_TYPE_CLASS, // EETypeElementType.Interface
+                    (byte)CorElementType.ELEMENT_TYPE_CLASS, // EETypeElementType.SystemArray
+                    (byte)CorElementType.ELEMENT_TYPE_ARRAY, // EETypeElementType.Array
+                    (byte)CorElementType.ELEMENT_TYPE_SZARRAY, // EETypeElementType.SzArray
+                    (byte)CorElementType.ELEMENT_TYPE_BYREF, // EETypeElementType.ByRef
+                    (byte)CorElementType.ELEMENT_TYPE_PTR, // EETypeElementType.Pointer
+                    (byte)CorElementType.ELEMENT_TYPE_FNPTR, // EETypeElementType.FunctionPointer
                     default, // Pad the map to 32 elements to enable range check elimination
                     default,
                     default,
-                    default
+                    default,
                 ];
 
                 // Verify last element of the map
-                Debug.Assert((byte)CorElementType.ELEMENT_TYPE_FNPTR == map[(int)EETypeElementType.FunctionPointer]);
+                Debug.Assert(
+                    (byte)CorElementType.ELEMENT_TYPE_FNPTR
+                        == map[(int)EETypeElementType.FunctionPointer]
+                );
 
                 return (CorElementType)map[(int)ElementType];
             }
@@ -391,18 +307,12 @@ namespace System
 
         internal EETypeElementType ElementType
         {
-            get
-            {
-                return _value->ElementType;
-            }
+            get { return _value->ElementType; }
         }
 
         internal RuntimeImports.RhCorElementTypeInfo CorElementTypeInfo
         {
-            get
-            {
-                return RuntimeImports.GetRhCorElementTypeInfo(CorElementType);
-            }
+            get { return RuntimeImports.GetRhCorElementTypeInfo(CorElementType); }
         }
 
         [Intrinsic]
@@ -424,10 +334,7 @@ namespace System
 
             public int Count
             {
-                get
-                {
-                    return _value->NumInterfaces;
-                }
+                get { return _value->NumInterfaces; }
             }
 
             public EETypePtr this[int index]
@@ -454,10 +361,7 @@ namespace System
 
             public int Length
             {
-                get
-                {
-                    return (int)_argumentCount;
-                }
+                get { return (int)_argumentCount; }
             }
 
             public EETypePtr this[int index]

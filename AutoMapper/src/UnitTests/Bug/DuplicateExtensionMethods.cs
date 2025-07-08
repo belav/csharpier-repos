@@ -7,7 +7,10 @@ public class DuplicateExtensionMethods : AutoMapperSpecBase
         public int Amount { get; set; }
     }
 
-    public enum AccountKind { None }
+    public enum AccountKind
+    {
+        None,
+    }
 
     class Source
     {
@@ -19,6 +22,7 @@ public class DuplicateExtensionMethods : AutoMapperSpecBase
         public decimal UnUsedAmount { get; set; }
         public List<Outlay> Outlay { get; set; }
     }
+
     class Destination
     {
         public int UserId { get; set; }
@@ -29,10 +33,12 @@ public class DuplicateExtensionMethods : AutoMapperSpecBase
         public decimal UnUsedAmount { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }

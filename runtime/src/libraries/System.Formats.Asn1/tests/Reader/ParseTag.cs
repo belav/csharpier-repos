@@ -45,7 +45,8 @@ namespace System.Formats.Asn1.Tests.Reader
             TagClass tagClass,
             bool isConstructed,
             int tagValue,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputBytes = inputHex.HexToByteArray();
 
@@ -101,7 +102,9 @@ namespace System.Formats.Asn1.Tests.Reader
                     out tag,
                     out int contentOffset,
                     out int contentLength,
-                    out int bytesConsumed));
+                    out int bytesConsumed
+                )
+            );
 
             Assert.Equal(0, contentOffset);
             Assert.Equal(0, contentLength);
@@ -148,7 +151,8 @@ namespace System.Formats.Asn1.Tests.Reader
             TagClass tagClass,
             bool isConstructed,
             int tagValue,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputBytes = inputHex.HexToByteArray();
             Array.Resize(ref inputBytes, inputBytes.Length + 3);

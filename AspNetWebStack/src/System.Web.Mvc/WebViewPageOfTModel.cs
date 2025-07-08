@@ -18,7 +18,11 @@ namespace System.Web.Mvc
             get { return ViewData.Model; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This is the mechanism by which the ViewPage gets its ViewDataDictionary object.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This is the mechanism by which the ViewPage gets its ViewDataDictionary object."
+        )]
         public new ViewDataDictionary<TModel> ViewData
         {
             get

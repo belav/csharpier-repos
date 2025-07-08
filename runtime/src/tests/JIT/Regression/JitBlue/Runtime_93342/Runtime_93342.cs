@@ -11,13 +11,13 @@ public class Runtime_93342
     private int foo;
     private int bar;
     private int baz;
-    
+
     [Fact]
     public static void TestEntryPoint()
     {
         new Runtime_93342().Run();
     }
-    
+
     [MethodImpl(MethodImplOptions.AggressiveOptimization)]
     private void Run()
     {

@@ -18,8 +18,7 @@ internal record MapCodeParams(
 );
 
 [DataContract]
-internal record MapCodeMapping
-(
+internal record MapCodeMapping(
     // Gets or sets identifier for the document the contents are supposed to be mapped into.
     [property: DataMember(Name = "textDocument")] TextDocumentIdentifier? TextDocument,
     // Gets or sets strings of code/text to map into TextDocument.
